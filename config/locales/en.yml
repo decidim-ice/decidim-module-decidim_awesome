@@ -1,0 +1,15 @@
+---
+en:
+  decidim:
+    admin:
+      menu:
+        decidim_awesome: Decidim awesome
+    decidim_awesome:
+      admin:
+        config:
+          show:
+            title: Decidim tweaks
+            update: Update configuration
+          update:
+            error: Error updating configuration! %{error}
+            success: Configuration updated successfully!
