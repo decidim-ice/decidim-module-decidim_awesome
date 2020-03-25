@@ -1,1 +1,1 @@
-// = link ../javascripts/decidim/decidim_awesome/admin.js
+// = link decidim/decidim_awesome/admin.js
