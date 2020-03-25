@@ -15,6 +15,7 @@ module Decidim
         # Add admin engine routes here
         get :config, to: "config#show"
         post :config, to: "config#update"
+        post :editor_images, to: "editor_images#create"
         root to: "config#show"
       end
 

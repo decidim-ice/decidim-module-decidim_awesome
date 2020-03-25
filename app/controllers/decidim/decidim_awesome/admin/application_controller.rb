@@ -12,6 +12,9 @@ module Decidim
         # def permission_class_chain
         #   [::Decidim::DecidimAwesome::Admin::Permissions] + super
         # end
+        before_action do
+          enforce_permission_to :update, :organization, organization: current_organization
+        end
       end
     end
   end

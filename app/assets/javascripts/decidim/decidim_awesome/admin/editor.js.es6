@@ -1,4 +1,5 @@
 // = require quill.min
+// = require image-upload.min
 // = require image-drop.min
 // = require image-resize.min
 // = require_self
@@ -8,7 +9,6 @@
 
   // Redefines Quill editor with images
   if(exports.DecidimAwesome.allow_images_in_full_editor) {
-  	console.log("Awesome config",exports.DecidimAwesome);
 
 	  const quillFormats = ["bold", "italic", "link", "underline", "header", "list", "video", "image"];
 
@@ -36,13 +36,29 @@
 	    }
 
 	    const $input = $(container).siblings('input[type="hidden"]');
+	    const token = $( 'meta[name="csrf-token"]' ).attr( 'content' );
 	    const quill = new Quill(container, {
 	      modules: {
 	        toolbar: quillToolbar,
 	        imageResize: {
 	          modules: ["Resize", "DisplaySize"]
 	        },
-	        imageDrop: true
+	        imageDrop: true,
+	        imageUpload: {
+						url: exports.DecidimAwesome.editor_uploader_path, // server url. If the url is empty then the base64 returns
+						method: 'POST', // change query method, default 'POST'
+						name: 'image', // custom form name
+						withCredentials: false, // withCredentials
+						headers: { 'X-CSRF-Token': token }, // add custom headers, example { token: 'your-token'}
+						// personalize successful callback and call next function to insert new url to the editor
+						callbackOK: (serverResponse, next) => {
+							next(serverResponse.url);
+						},
+						// personalize failed callback
+						callbackKO: serverError => {
+							alert(serverError.message);
+						}
+					}
 	      },
 	      formats: quillFormats,
 	      theme: "snow"

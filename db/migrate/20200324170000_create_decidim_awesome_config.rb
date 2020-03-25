@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateAwesomeConfig < ActiveRecord::Migration[5.2]
+class CreateDecidimAwesomeConfig < ActiveRecord::Migration[5.2]
   def change
     create_table :decidim_awesome_config do |t|
       t.jsonb :var

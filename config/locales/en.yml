@@ -13,3 +13,7 @@ en:
           update:
             error: Error updating configuration! %{error}
             success: Configuration updated successfully!
+        editor_images:
+          create:
+            error: Error uploading image!
+            success: Image uploaded successfully!
