@@ -7,6 +7,7 @@ module Decidim
       #
       class ConfigForm < Decidim::Form
         attribute :allow_images_in_full_editor, Boolean
+        attribute :allow_images_in_small_editor, Boolean
       end
     end
   end

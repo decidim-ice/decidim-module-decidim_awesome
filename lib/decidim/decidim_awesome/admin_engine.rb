@@ -20,7 +20,7 @@ module Decidim
       end
 
       initializer "decidim_admin_awesome.assets" do |app|
-        app.config.assets.precompile += %w(decidim_admin_decidim_awesome_manifest.js)
+        app.config.assets.precompile += %w(decidim_admin_decidim_awesome_manifest.js decidim_admin_decidim_awesome_manifest.css)
       end
 
       initializer "decidim_admin_awesome.middleware" do |app|

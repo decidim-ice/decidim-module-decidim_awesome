@@ -8,7 +8,7 @@
   exports.DecidimAwesome = exports.DecidimAwesome || {};
 
   // Redefines Quill editor with images
-  if(exports.DecidimAwesome.allow_images_in_full_editor) {
+  if(exports.DecidimAwesome.allow_images_in_full_editor  || exports.DecidimAwesome.allow_images_in_small_editor) {
 
 	  const quillFormats = ["bold", "italic", "link", "underline", "header", "list", "video", "image"];
 
@@ -26,12 +26,12 @@
 	      quillToolbar = [
 	        [{ header: [1, 2, 3, 4, 5, 6, false] }],
 	        ...quillToolbar,
-	        ["video", "image"]
+	        exports.DecidimAwesome.allow_images_in_full_editor ? ["video", "image"] : ["video"]
 	      ];
 	    } else if (toolbar === "basic") {
 	      quillToolbar = [
 	        ...quillToolbar,
-	        ["video"]
+	        exports.DecidimAwesome.allow_images_in_small_editor ? ["video", "image"] : ["video"]
 	      ];
 	    }
 
@@ -52,11 +52,17 @@
 						headers: { 'X-CSRF-Token': token }, // add custom headers, example { token: 'your-token'}
 						// personalize successful callback and call next function to insert new url to the editor
 						callbackOK: (serverResponse, next) => {
+							$(quill.getModule("toolbar").container).last().removeClass('editor-loading')
 							next(serverResponse.url);
 						},
 						// personalize failed callback
 						callbackKO: serverError => {
+							$(quill.getModule("toolbar").container).last().removeClass('editor-loading')
 							alert(serverError.message);
+						},
+						checkBeforeSend: (file, next) => {
+							$(quill.getModule("toolbar").container).last().addClass('editor-loading')
+							next(file); // go back to component and send to the server
 						}
 					}
 	      },
