@@ -1,6 +1,5 @@
 // = require quill.min
 // = require image-upload.min
-// = require image-drop.min
 // = require image-resize.min
 // = require_self
 
@@ -43,7 +42,6 @@
 	        imageResize: {
 	          modules: ["Resize", "DisplaySize"]
 	        },
-	        imageDrop: true,
 	        imageUpload: {
 						url: exports.DecidimAwesome.editor_uploader_path, // server url. If the url is empty then the base64 returns
 						method: 'POST', // change query method, default 'POST'
