@@ -1,5 +1,9 @@
 # Decidim::DecidimAwesome
 
+![Build Status](https://github.com/Platoniq/decidim-module-decidim_awesome/workflows/Build/badge.svg)
+[![Maintainability](https://api.codeclimate.com/v1/badges/2dada53525dd5a944089/maintainability)](https://codeclimate.com/github/Platoniq/decidim-module-decidim_awesome/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/2dada53525dd5a944089/test_coverage)](https://codeclimate.com/github/Platoniq/decidim-module-decidim_awesome/test_coverage)
+
 Some usability and UX tweaks for Decidim.
 
 **This in alpha status, not ready to use unless you are an adventurous**
