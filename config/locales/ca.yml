@@ -1,0 +1,37 @@
+---
+en:
+  activemodel:
+    attributes:
+      config:
+        allow_images_in_full_editor: Permet imatge a l'editor HTML complet
+        allow_images_in_small_editor: Permet imatge a l'editor HTML reduït
+  decidim:
+    admin:
+      menu:
+        decidim_awesome: Decidim awesome
+    decidim_awesome:
+      admin:
+        editor_images:
+          create:
+            error: Error pujant la imatge!
+            success: Imatge desada correctament!
+        editors:
+          form:
+            help:
+              allow_images_in_full_editor: Això afegirà una icona per permetre posar imatges als editors WYSIWYG amb la barra d'eines completa.
+              allow_images_in_small_editor: Això afegirà una icona per permetre posar imatges als editors WYSIWYG amb la barra d'eines reduïda.
+              drag_and_drop_supported: Qua s'afegeixi una imatge, arrastrar i deixar anar està suportat. Les imatges es pujaran al servidor i s'introduiran com a recursos externs (no es fa servir la codificació en base64 en línia).
+          show:
+            title: Canvis als editors
+            update: Actualitza la configuració
+          update:
+            error: Error al actualitzar la configuració! %{error}
+            success: Configuració actualitzada correctament!
+        menu:
+          editors: Editor hacks
+      credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
+  layouts:
+    decidim:
+      admin:
+        decidim_awesome:
+          title: Decidim Tweaks

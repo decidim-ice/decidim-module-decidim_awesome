@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "decidim/decidim_awesome/version"
+
 module Decidim
   # add a global helper with awesome configuration
   module DecidimAwesome
