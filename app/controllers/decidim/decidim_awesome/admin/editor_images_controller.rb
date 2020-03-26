@@ -3,6 +3,7 @@
 module Decidim
   module DecidimAwesome
     module Admin
+      # This controller handles image uploads for the hacked Quill editor
       class EditorImagesController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
 

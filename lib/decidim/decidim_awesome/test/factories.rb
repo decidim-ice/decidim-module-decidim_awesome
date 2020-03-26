@@ -8,4 +8,11 @@ FactoryBot.define do
     value { Decidim::DecidimAwesome.config.to_a.sample(1).to_h }
     organization { create :organization }
   end
+
+  factory :editor_image, class: "Decidim::DecidimAwesome::EditorImage" do
+    image { Faker::Hacker.noun }
+    path { Faker::Internet.url(host: "", scheme: "") }
+    author { create :user }
+    organization { create :organization }
+  end
 end

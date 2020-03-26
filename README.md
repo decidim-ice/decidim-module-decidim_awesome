@@ -8,8 +8,15 @@ Some usability and UX tweaks for Decidim.
 
 DecidimAwesome is a module that hacks Decidim in order to provide more features or improve some aspects of it.
 
-It generates and admin module that allows to choose what hacks to apply
+It generates and admin module that allows to choose what hacks to apply.
 
+### Tweaks:
+
+#### 1. Image suport for the Quill editor
+
+Modifies the WYSIWYG editor in Decidim by adding the possibility to insert images. When uploading images, Drag & Drop is supported. Images will be uploaded to the server and inserted as external resources (it doesn't use base64 inline encoding).
+
+#### 2. To be continued...
 
 
 ## Installation

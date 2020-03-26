@@ -13,10 +13,10 @@ module Decidim
 
       routes do
         # Add admin engine routes here
-        get :config, to: "config#show"
-        post :config, to: "config#update"
+        get :editors, to: "editors#show"
+        post :editors, to: "editors#update"
         post :editor_images, to: "editor_images#create"
-        root to: "config#show"
+        root to: "editors#show"
       end
 
       initializer "decidim_admin_awesome.assets" do |app|
@@ -36,10 +36,10 @@ module Decidim
       initializer "decidim_awesome.admin_menu" do
         Decidim.menu :admin_menu do |menu|
           menu.item I18n.t("menu.decidim_awesome", scope: "decidim.admin", default: "Decidim Awesome"),
-                    decidim_admin_decidim_awesome.config_path,
+                    decidim_admin_decidim_awesome.editors_path,
                     icon_name: "fire",
                     position: 7.5,
-                    active: is_active_link?(decidim_admin_decidim_awesome.config_path, :inclusive)
+                    active: is_active_link?(decidim_admin_decidim_awesome.editors_path, :inclusive)
         end
       end
 

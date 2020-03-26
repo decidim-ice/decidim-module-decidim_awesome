@@ -3,8 +3,10 @@
 module Decidim
   module DecidimAwesome
     module Admin
-      class ConfigController < DecidimAwesome::Admin::ApplicationController
+      # Global configuration controller for editors
+      class EditorsController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
+        layout "decidim/admin/decidim_awesome"
 
         def show
           # enforce_permission_to :show, :config
@@ -18,12 +20,12 @@ module Decidim
 
           UpdateConfig.call(@form) do
             on(:ok) do
-              flash[:notice] = I18n.t("config.update.success", scope: "decidim.decidim_awesome.admin")
-              redirect_to decidim_admin_decidim_awesome.config_path
+              flash[:notice] = I18n.t("editors.update.success", scope: "decidim.decidim_awesome.admin")
+              redirect_to decidim_admin_decidim_awesome.editors_path
             end
 
             on(:invalid) do |message|
-              flash.now[:alert] = I18n.t("config.update.error", error: message, scope: "decidim.decidim_awesome.admin")
+              flash.now[:alert] = I18n.t("editors.update.error", error: message, scope: "decidim.decidim_awesome.admin")
               render :show
             end
           end

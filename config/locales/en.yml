@@ -1,19 +1,41 @@
 ---
 en:
+  activemodel:
+    attributes:
+      config:
+        allow_images_in_full_editor: Allow images in the full HTML editor
+        allow_images_in_small_editor: Allow images in the minimal HTML editor
   decidim:
     admin:
       menu:
         decidim_awesome: Decidim awesome
     decidim_awesome:
       admin:
-        config:
-          show:
-            title: Decidim tweaks
-            update: Update configuration
-          update:
-            error: Error updating configuration! %{error}
-            success: Configuration updated successfully!
         editor_images:
           create:
             error: Error uploading image!
             success: Image uploaded successfully!
+        editors:
+          form:
+            help:
+              allow_images_in_full_editor: This will add a image uploader icon in
+                all the editors WYSIWYG with the full toolbar enabled.
+              allow_images_in_small_editor: This will add a image uploader icon in
+                all the editors WYSIWYG with minimal options in the toolbar enabled.
+              drag_and_drop_supported: When uploading images, Drag & Drop is supported.
+                Images will be uploaded to the server and inserted as external resources
+                (it doesn't use base64 inline encoding).
+          show:
+            title: Tweaks for the editors
+            update: Update configuration
+          update:
+            error: Error updating configuration! %{error}
+            success: Configuration updated successfully!
+        menu:
+          editors: Editor hacks
+      credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
+  layouts:
+    decidim:
+      admin:
+        decidim_awesome:
+          title: Decidim Tweaks
