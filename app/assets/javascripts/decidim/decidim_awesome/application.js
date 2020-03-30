@@ -1,1 +1,1 @@
-// nothing yet
+// = require decidim/decidim_awesome/proposals/editor

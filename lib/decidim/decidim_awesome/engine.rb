@@ -10,7 +10,7 @@ module Decidim
       isolate_namespace Decidim::DecidimAwesome
 
       initializer "decidim_decidim_awesome.assets" do |app|
-        app.config.assets.precompile += %w(decidim_decidim_awesome_manifest.js)
+        app.config.assets.precompile += %w(decidim_decidim_awesome_manifest.js decidim_decidim_awesome_manifest.css)
       end
 
       initializer "decidim_awesome.middleware" do |app|
