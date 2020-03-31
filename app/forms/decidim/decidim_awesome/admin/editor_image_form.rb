@@ -11,6 +11,7 @@ module Decidim
         attribute :path, String
 
         validates :author_id, presence: true
+        validates :image, presence: true
       end
     end
   end
