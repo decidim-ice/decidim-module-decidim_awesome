@@ -8,6 +8,8 @@ module Decidim
       class ConfigForm < Decidim::Form
         attribute :allow_images_in_full_editor, Boolean
         attribute :allow_images_in_small_editor, Boolean
+        attribute :allow_images_in_proposals, Boolean
+        attribute :use_markdown_in_proposals, Boolean
       end
     end
   end
