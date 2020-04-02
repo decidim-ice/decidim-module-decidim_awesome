@@ -1,1 +1,1 @@
-// = require decidim/decidim_awesome/proposals/editor
+// = require decidim/decidim_awesome/proposals/proposals_editor

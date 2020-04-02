@@ -5,6 +5,8 @@
 $(() => {
   window.DecidimAwesome = window.DecidimAwesome || {};
 
+  const token = $( 'meta[name="csrf-token"]' ).attr( 'content' );
+
   // Redefines Quill editor with images
   if(window.DecidimAwesome.use_markdown_in_proposals) {
     const inscrybmde = new InscrybMDE({
@@ -13,7 +15,9 @@ $(() => {
     console.log('init', inscrybmde)
   } else if(window.DecidimAwesome.allow_images_in_proposals) {
      $('textarea').inlineattachment({
-        uploadUrl: 'upload_attachment.php'
+        uploadUrl: window.DecidimAwesome.editor_uploader_path,
+        uploadFieldName: "image",
+        extraHeaders: { 'X-CSRF-Token': token }
     });
   }
 
