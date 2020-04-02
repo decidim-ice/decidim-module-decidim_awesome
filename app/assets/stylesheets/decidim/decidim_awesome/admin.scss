@@ -1,8 +1,9 @@
+//= require github.min
 //= require inscrybmde.min
 //= require_self
 
+@import "./proposals/proposals_editor";
 @import "./admin/editor";
-
 
 .platoniq-credits {
   position: absolute;
