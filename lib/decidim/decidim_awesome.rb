@@ -8,5 +8,6 @@ require "decidim/decidim_awesome/admin_engine"
 
 module Decidim
   module DecidimAwesome
+    autoload :MarkdownRenderer, "decidim/decidim_awesome/content_renderers/markdown_renderer"
   end
 end

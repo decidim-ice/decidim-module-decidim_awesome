@@ -12,10 +12,6 @@ en:
       menu:
         decidim_awesome: Decidim awesome
     decidim_awesome:
-      editor_images:
-        create:
-          error: Error uploading image!
-          success: Image uploaded successfully!
       admin:
         editors:
           admin_space: Admin backend mods
@@ -45,12 +41,16 @@ en:
         menu:
           editors: Editor hacks
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
+      editor_images:
+        create:
+          error: Error uploading image!
+          success: Image uploaded successfully!
   layouts:
     decidim:
-      decidim_awesome:
-        awesome_config:
-          js:
-            drag_and_drop_image: "Add images by dragging & dropping or pasting them."
       admin:
         decidim_awesome:
           title: Decidim Tweaks
+      decidim_awesome:
+        awesome_config:
+          js:
+            drag_and_drop_image: Add images by dragging & dropping or pasting them.

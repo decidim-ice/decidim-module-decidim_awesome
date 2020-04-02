@@ -15,7 +15,7 @@ module Decidim
       private
 
       def detect_current_config(env)
-        AwesomeConfig.where(organization: env["decidim.current_organization"]).all.map { |v| [v.var.to_sym, v.value] }.to_h
+        AwesomeConfig.config_for env["decidim.current_organization"]
       end
     end
   end

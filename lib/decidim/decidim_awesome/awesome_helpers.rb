@@ -8,11 +8,9 @@ module Decidim
     module AwesomeHelpers
       # The current awesome config for the organization.
       #
-      # Returns an Organization.
+      # Returns the normalized config for an Organization.
       def awesome_config
-        @awesome_config ||= DecidimAwesome.config.map do |key, val|
-          [key, request.env["decidim_awesome.current_config"][key].presence || val]
-        end.to_h
+        request.env["decidim_awesome.current_config"]
       end
 
       def awesome_config_tag

@@ -26,6 +26,14 @@ module Decidim
           mount Decidim::DecidimAwesome::Engine, at: "/decidim_awesome", as: "decidim_decidim_awesome"
         end
       end
+
+      # Prepare a zone to create overrides
+      # https://edgeguides.rubyonrails.org/engines.html#overriding-models-and-controllers
+      config.to_prepare do
+        Dir.glob("#{Engine.root}/app/overrides/**/*_override.rb").each do |override|
+          require_dependency override
+        end
+      end
     end
   end
 end
