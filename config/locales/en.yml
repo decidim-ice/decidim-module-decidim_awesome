@@ -4,8 +4,8 @@ en:
     attributes:
       config:
         allow_images_in_full_editor: Allow images in the full HTML editor
-        allow_images_in_small_editor: Allow images in the minimal HTML editor
         allow_images_in_proposals: Allow images in the proposals editor
+        allow_images_in_small_editor: Allow images in the minimal HTML editor
         use_markdown_in_proposals: Use a Markdown editor in proposals instead of Quill
   decidim:
     admin:
@@ -18,20 +18,24 @@ en:
             error: Error uploading image!
             success: Image uploaded successfully!
         editors:
-          admin_space: "Admin backend mods"
-          proposals_space: "Proposals mods"
+          admin_space: Admin backend mods
           form:
             help:
-              proposals_space: Mods in this section applies to the admin backend and user space
               allow_images_in_full_editor: This will add a image uploader icon in
                 all the editors WYSIWYG with the full toolbar enabled.
+              allow_images_in_proposals: This will allow to upload imagesin the proposals
+                editor, available to any user.
               allow_images_in_small_editor: This will add a image uploader icon in
                 all the editors WYSIWYG with minimal options in the toolbar enabled.
               drag_and_drop_supported: When uploading images, Drag & Drop is supported.
                 Images will be uploaded to the server and inserted as external resources
                 (it doesn't use base64 inline encoding).
-              allow_images_in_proposals: This will allow to upload imagesin the proposals editor, available to any user.
-              use_markdown_in_proposals: This will substitute the Quill WYSIWYG editor in proposals, and use a Markdown editor and frontend processor (text in database wil be saved as markdown text)
+              proposals_space: Mods in this section applies to the admin backend and
+                user space
+              use_markdown_in_proposals: This will substitute the Quill WYSIWYG editor
+                in proposals, and use a Markdown editor and frontend processor (text
+                in database wil be saved as markdown text)
+          proposals_space: Proposals mods
           show:
             title: Tweaks for the editors
             update: Update configuration

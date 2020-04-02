@@ -9,12 +9,22 @@ module Decidim
     class Engine < ::Rails::Engine
       isolate_namespace Decidim::DecidimAwesome
 
+      routes do
+        post :editor_images, to: "editor_images#create"
+      end
+
       initializer "decidim_decidim_awesome.assets" do |app|
         app.config.assets.precompile += %w(decidim_decidim_awesome_manifest.js decidim_decidim_awesome_manifest.css)
       end
 
       initializer "decidim_awesome.middleware" do |app|
         app.config.middleware.insert_after Decidim::CurrentOrganization, Decidim::DecidimAwesome::CurrentConfig
+      end
+
+      initializer "decidim_decidim_awesome.mount_routes" do
+        Decidim::Core::Engine.routes do
+          mount Decidim::DecidimAwesome::Engine, at: "/decidim_awesome", as: "decidim_decidim_awesome"
+        end
       end
     end
   end

@@ -15,7 +15,6 @@ module Decidim
         # Add admin engine routes here
         get :editors, to: "editors#show"
         post :editors, to: "editors#update"
-        post :editor_images, to: "editor_images#create"
         root to: "editors#show"
       end
 
