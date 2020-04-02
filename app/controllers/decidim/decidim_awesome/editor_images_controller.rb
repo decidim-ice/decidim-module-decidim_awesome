@@ -16,11 +16,13 @@ module Decidim
 
         CreateEditorImage.call(@form) do
           on(:ok) do |image|
-            render json: { url: image.url, message: I18n.t("decidim_awesome.admin.editor_images.create.success", scope: "decidim") }
+            url = image.url
+            url = "#{request.base_url}#{url}" unless url.start_with?("http")
+            render json: { url: url, message: I18n.t("decidim_awesome.editor_images.create.success", scope: "decidim") }
           end
 
           on(:invalid) do |_message|
-            render json: { message: I18n.t("decidim_awesome.admin.editor_images.create.error", scope: "decidim") }, status: :unprocessable_entity
+            render json: { message: I18n.t("decidim_awesome.editor_images.create.error", scope: "decidim") }, status: :unprocessable_entity
           end
         end
       end
