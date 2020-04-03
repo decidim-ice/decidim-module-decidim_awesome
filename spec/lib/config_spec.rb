@@ -12,14 +12,15 @@ module Decidim::DecidimAwesome
     let(:config) do
       Decidim::DecidimAwesome.config
     end
+    let(:request) { double(url: "/processes/some-slug/f/12") }
 
     it "has a basic config" do
       expect(subject.config).to eq(config)
     end
 
     it "converts url to context" do
-      subject.context_from_url("/processes/some-slug/f/12")
-      expect(subject.context).to eq({processes: "some-slug", f: "12"})
+      subject.context_from_request(request)
+      expect(subject.context).to eq(participatory_space_manifest: "participatory_processes", participatory_space_slug: "some-slug", component_id: "12")
     end
 
     context "when some config is personalized" do

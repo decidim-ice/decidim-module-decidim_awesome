@@ -11,7 +11,7 @@ module Decidim
         return @awesome_config_instance if @awesome_config_instance
 
         @awesome_config_instance = Config.new request.env["decidim.current_organization"]
-        @awesome_config_instance.context_from_url request.url
+        @awesome_config_instance.context_from_request request
         @awesome_config_instance
       end
 

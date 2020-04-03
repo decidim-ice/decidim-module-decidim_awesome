@@ -10,6 +10,7 @@ module Decidim
     include ActiveSupport::Configurable
 
     autoload :Config, "decidim/decidim_awesome/config"
+    autoload :ContextAnalyzer, "decidim/decidim_awesome/context_analyzer"
     autoload :MarkdownRenderer, "decidim/decidim_awesome/content_renderers/markdown_renderer"
 
     config_accessor :allow_images_in_full_editor do
