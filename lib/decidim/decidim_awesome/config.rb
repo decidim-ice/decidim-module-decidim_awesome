@@ -21,7 +21,15 @@ module Decidim
         @context = context
       end
 
-      def context_from_url(url); end
+
+      # TODO: convert context to manifest, slug and id
+      def context_from_url(url)
+        path = URI.parse(url).path
+        segments = path.sub(/^\//, "").split("/")
+        segments << "" if segments.length % 2 > 0
+        @config = nil
+        @context = segments.each_slice(2).map {|k,v| [k.to_sym, v]}.to_h
+      end
 
       def config
         @config ||= calculate_config

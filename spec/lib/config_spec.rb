@@ -17,6 +17,11 @@ module Decidim::DecidimAwesome
       expect(subject.config).to eq(config)
     end
 
+    it "converts url to context" do
+      subject.context_from_url("/processes/some-slug/f/12")
+      expect(subject.context).to eq({processes: "some-slug", f: "12"})
+    end
+
     context "when some config is personalized" do
       let(:custom_config) do
         config.merge(allow_images_in_full_editor: true)
