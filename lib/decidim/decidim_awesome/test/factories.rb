@@ -9,6 +9,11 @@ FactoryBot.define do
     organization { create :organization }
   end
 
+  factory :config_constraint, class: "Decidim::DecidimAwesome::ConfigConstraint" do
+    settings { { Faker::Hacker.noun => Faker::Hacker.noun } }
+    awesome_config { create :awesome_config }
+  end
+
   factory :editor_image, class: "Decidim::DecidimAwesome::EditorImage" do
     image { Faker::Hacker.noun }
     path { Faker::Internet.url(host: "", scheme: "") }

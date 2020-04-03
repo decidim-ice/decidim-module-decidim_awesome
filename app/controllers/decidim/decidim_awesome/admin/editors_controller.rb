@@ -9,13 +9,10 @@ module Decidim
         layout "decidim/admin/decidim_awesome"
 
         def show
-          # enforce_permission_to :show, :config
-          @form = form(ConfigForm).from_params(awesome_config)
+          @form = form(ConfigForm).from_params(unfiltered_awesome_config)
         end
 
         def update
-          # enforce_permission_to :update, :config
-
           @form = form(ConfigForm).from_params(params)
 
           UpdateConfig.call(@form) do
