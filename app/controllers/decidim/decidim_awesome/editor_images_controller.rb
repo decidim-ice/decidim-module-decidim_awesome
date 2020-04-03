@@ -17,7 +17,7 @@ module Decidim
         CreateEditorImage.call(@form) do
           on(:ok) do |image|
             url = image.url
-            url = "#{request.base_url}#{url}" unless url.start_with?("http")
+            url = "#{request.base_url}#{url}" unless url&.start_with?("http")
             render json: { url: url, message: I18n.t("decidim_awesome.editor_images.create.success", scope: "decidim") }
           end
 
