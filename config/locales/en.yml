@@ -17,28 +17,28 @@ en:
       admin:
         constraints:
           create:
-            error: Error creating condition
-            success: Condition created successfully
+            error: Error creating condition case
+            success: Condition case created successfully
           destroy:
-            error: Error removing condition
-            success: Condition removed successfully
+            error: Error removing condition case
+            success: Condition case removed successfully
           errors:
             not_unique: Same condition already exists
           new:
             cancel: Cancel
-            constraint: New condition
+            constraint: New condition case
             save: Save
           show:
             cancel: Cancel
-            constraint: Edit condition
+            constraint: Edit condition case
             save: Save
           update:
-            error: Error updating condition
-            success: Condition updated successfully
+            error: Error updating condition case
+            success: Condition case updated successfully
         editors:
           admin_space: Admin backend mods
           constraints:
-            add_condition: Add condition
+            add_condition: Add case
             always: Always
             delete: Delete
             edit: Edit
