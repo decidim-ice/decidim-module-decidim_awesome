@@ -1,12 +1,7 @@
 # frozen_string_literal: true
 
-require "decidim/decidim_awesome/content_renderers/markdown_renderer"
-require "decidim/decidim_awesome/awesome_helpers"
-
 # Tune Proposal presenter to use markdown if configured
 Decidim::Proposals::ProposalPresenter.class_eval do
-  include Decidim::DecidimAwesome::AwesomeHelpers
-
   def body(links: false, extras: true, strip_tags: false)
     text = proposal.body
     text = strip_tags(text) if strip_tags
@@ -28,7 +23,7 @@ Decidim::Proposals::ProposalPresenter.class_eval do
     return false unless proposal.respond_to? :organization
 
     config = Decidim::DecidimAwesome::Config.new(proposal.organization)
-
-    config.enabled_for? :use_markdown_in_proposals, resource: proposal
+    config.context_from_component proposal
+    config.enabled_for? :use_markdown_in_proposals
   end
 end

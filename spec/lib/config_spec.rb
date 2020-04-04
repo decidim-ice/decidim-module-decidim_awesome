@@ -23,6 +23,24 @@ module Decidim::DecidimAwesome
       expect(subject.context).to eq(participatory_space_manifest: "participatory_processes", participatory_space_slug: "some-slug", component_id: "12")
     end
 
+    it "converts component to context" do
+      subject.context_from_component(component)
+      expect(subject.context).to eq(
+        participatory_space_manifest: participatory_process.manifest.name.to_s,
+        participatory_space_slug: participatory_process.slug,
+        component_id: component.id.to_s,
+        component_manifest: component.manifest.name.to_s
+      )
+    end
+
+    it "converts participatory_space to context" do
+      subject.context_from_participatory_space(participatory_process)
+      expect(subject.context).to eq(
+        participatory_space_manifest: participatory_process.manifest.name.to_s,
+        participatory_space_slug: participatory_process.slug
+      )
+    end
+
     context "when some config is personalized" do
       let(:custom_config) do
         config.merge(allow_images_in_full_editor: true)

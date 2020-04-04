@@ -25,7 +25,19 @@ module Decidim
       # convert context to manifest, slug and id
       def context_from_request(request)
         @config = nil
-        @context = ContextAnalyzer.context_for_request request
+        @context = Decidim::DecidimAwesome::ContextAnalyzers::RequestAnalyzer.context_for request
+      end
+
+      # convert component to manifest, slug and id
+      def context_from_component(component)
+        @config = nil
+        @context = Decidim::DecidimAwesome::ContextAnalyzers::ComponentAnalyzer.context_for component
+      end
+
+      # convert participatory space to manifest, slug and id
+      def context_from_participatory_space(space)
+        @config = nil
+        @context = Decidim::DecidimAwesome::ContextAnalyzers::ParticipatorySpaceAnalyzer.context_for space
       end
 
       def config
@@ -40,14 +52,14 @@ module Decidim
       end
 
       def setting_for(setting)
-        @vars.find_by(var: setting)
+        @vars.find_or_initialize_by(
+          organization: @organization,
+          var: setting
+        )
       end
 
       # Checks if some config option es enabled in a certain context
-      def enabled_for?(setting, *_context)
-        # if context[:resource]
-        # end
-
+      def enabled_for?(setting)
         config[setting]
       end
 
