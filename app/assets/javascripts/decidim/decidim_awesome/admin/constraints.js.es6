@@ -13,13 +13,23 @@ $(() => {
     $callout.removeClass('alert success');
     $modal.find('.modal-content').html('');
     $modal.addClass('loading').foundation('open');
+    $modal.data("url", url);
+    $modal.find('.modal-content').load(url, () => {
+      $modal.removeClass('loading');
+    });
+  });
+
+  // Custom event listener to reload the modal if needed
+  document.body.addEventListener("constraint:change", (e) => {
+    const url = $modal.data("url") + `&${e.detail.key}=${e.detail.value}`
+    $modal.addClass('loading');
     $modal.find('.modal-content').load(url, () => {
       $modal.removeClass('loading');
     });
   });
 
   // Rails AJAX events
-  document.body.addEventListener('ajax:error', function(responseText) {
+  document.body.addEventListener('ajax:error', (responseText) => {
     const $container = $(`.constraints-editor[data-key="${responseText.detail[0].key}"]`)
     const $callout = $container.find(".callout");
     $callout.show();
@@ -27,7 +37,7 @@ $(() => {
     $callout.addClass('alert');
   });
 
-  document.body.addEventListener('ajax:success', function(responseText) {
+  document.body.addEventListener('ajax:success', (responseText) => {
     const $container = $(`.constraints-editor[data-key="${responseText.detail[0].key}"]`)
     const $callout = $container.find(".callout");
     $callout.show();
@@ -37,7 +47,7 @@ $(() => {
     $container.replaceWith(responseText.detail[0].html);
   });
 
-  document.body.addEventListener('ajax:complete', function(xhr, event) {
+  document.body.addEventListener('ajax:complete', (xhr, event) => {
     $modal.foundation('close');
   })
 });

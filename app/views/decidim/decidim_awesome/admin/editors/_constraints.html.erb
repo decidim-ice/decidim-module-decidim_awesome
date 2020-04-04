@@ -15,7 +15,7 @@
     <% constraints&.each do |constraint| %>
         <li>
             <% constraint.settings.each do |k, val| %>
-              <span class="label <%= k %>"><%= translate_constraint_value k, val %></span>
+              <span class="label <%= k %>"><%= translate_constraint_value constraint, k %></span>
             <% end %>
           <a href="<%= constraint_path(id: constraint.id, key: key) %>" class="edit-condition"><%= t ".edit" %></a>
           <%= link_to t(".delete"), constraint_path(id: constraint.id), remote: true, method: :delete %>

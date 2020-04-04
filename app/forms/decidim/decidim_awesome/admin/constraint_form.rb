@@ -8,6 +8,7 @@ module Decidim
       class ConstraintForm < Decidim::Form
         attribute :id, Integer
         attribute :participatory_space_manifest, String
+        attribute :participatory_space_slug, String
       end
     end
   end

@@ -19,10 +19,11 @@ module Decidim
         # Returns nothing.
         def call
           return broadcast(:invalid) if form.invalid?
+          return broadcast(:invalid) if attributes.blank?
 
           begin
             constraint = ConfigConstraint.find(form.id)
-            constraint.settings = form.attributes
+            constraint.settings = attributes
             constraint.save!
             broadcast(:ok)
           rescue ActiveRecord::RecordNotUnique
@@ -33,6 +34,10 @@ module Decidim
         end
 
         attr_reader :form
+
+        def attributes
+          form.attributes.filter { |_i, v| v.present? }
+        end
       end
     end
   end

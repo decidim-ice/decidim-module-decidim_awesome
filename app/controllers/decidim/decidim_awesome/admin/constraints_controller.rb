@@ -10,14 +10,14 @@ module Decidim
 
         layout false
 
-        helper_method :participatory_space_manifests, :translate_constraint_value
+        helper_method :participatory_space_manifests, :participatory_spaces_list, :translate_constraint_value
 
         def new
-          @form = form(ConstraintForm).instance(setting: current_setting)
+          @form = form(ConstraintForm).from_params(filtered_params, setting: current_setting)
         end
 
         def show
-          @form = form(ConstraintForm).from_params(constraint.settings)
+          @form = form(ConstraintForm).from_params(constraint.settings.merge(filtered_params))
         end
 
         def create
@@ -104,6 +104,14 @@ module Decidim
         end
 
         private
+
+        def filtered_params
+          ops = {}
+          [:participatory_space_manifest, :component_manifest].each do |key|
+            ops[key] = params[key] if params[key]
+          end
+          ops
+        end
 
         def constraint
           @constraint ||= ConfigConstraint.find(params[:id])

@@ -51,10 +51,10 @@ module Decidim
         end.to_h
       end
 
-      def setting_for(setting)
+      def setting_for(var)
         @vars.find_or_initialize_by(
           organization: @organization,
-          var: setting
+          var: var
         )
       end
 

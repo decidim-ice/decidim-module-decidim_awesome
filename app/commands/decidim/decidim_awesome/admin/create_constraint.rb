@@ -19,11 +19,12 @@ module Decidim
         # Returns nothing.
         def call
           return broadcast(:invalid) if form.invalid?
+          return broadcast(:invalid) if attributes.blank?
 
           begin
             @constraint = ConfigConstraint.create!(
               awesome_config: form.context.setting,
-              settings: form.attributes
+              settings: attributes
             )
             broadcast(:ok, @constraint)
           rescue ActiveRecord::RecordNotUnique
@@ -33,7 +34,13 @@ module Decidim
           end
         end
 
+        private
+
         attr_reader :form, :constraint
+
+        def attributes
+          form.attributes.filter { |_i, v| v.present? }
+        end
       end
     end
   end
