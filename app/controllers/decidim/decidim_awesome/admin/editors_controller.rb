@@ -6,16 +6,17 @@ module Decidim
       # Global configuration controller for editors
       class EditorsController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
+        include ConfigConstraintsHelpers
+
         layout "decidim/admin/decidim_awesome"
 
+        helper_method :constraints_for, :translate_constraint_value
+
         def show
-          # enforce_permission_to :show, :config
-          @form = form(ConfigForm).from_params(awesome_config)
+          @form = form(ConfigForm).from_params(unfiltered_awesome_config)
         end
 
         def update
-          # enforce_permission_to :update, :config
-
           @form = form(ConfigForm).from_params(params)
 
           UpdateConfig.call(@form) do
@@ -29,6 +30,12 @@ module Decidim
               render :show
             end
           end
+        end
+
+        private
+
+        def constraints_for(key)
+          awesome_config_instance.setting_for(key)&.constraints
         end
       end
     end

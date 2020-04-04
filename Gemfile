@@ -9,7 +9,7 @@ DECIDIM_VERSION = "0.20"
 gem "decidim", DECIDIM_VERSION
 gem "decidim-decidim_awesome", path: "."
 
-gem "bootsnap", "~> 1.3"
+gem "bootsnap", "~> 1.4"
 gem "puma", "~> 3.12.2"
 gem "uglifier", "~> 4.1"
 

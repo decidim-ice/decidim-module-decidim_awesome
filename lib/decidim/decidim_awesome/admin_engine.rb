@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "decidim/decidim_awesome/middleware/current_config"
-
 module Decidim
   module DecidimAwesome
     # This is the engine that runs on the public interface of `DecidimAwesome`.
@@ -13,6 +11,7 @@ module Decidim
 
       routes do
         # Add admin engine routes here
+        resources :constraints
         get :editors, to: "editors#show"
         post :editors, to: "editors#update"
         root to: "editors#show"
@@ -20,10 +19,6 @@ module Decidim
 
       initializer "decidim_admin_awesome.assets" do |app|
         app.config.assets.precompile += %w(decidim_admin_decidim_awesome_manifest.js decidim_admin_decidim_awesome_manifest.css)
-      end
-
-      initializer "decidim_admin_awesome.middleware" do |app|
-        app.config.middleware.insert_after Decidim::CurrentOrganization, Decidim::DecidimAwesome::CurrentConfig
       end
 
       initializer "decidim_decidim_awesome.admin_mount_routes" do

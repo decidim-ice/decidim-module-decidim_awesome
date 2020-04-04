@@ -12,6 +12,8 @@ $(() => {
   const $textarea = $("#proposal_body");
   const t = window.DecidimAwesome.texts["drag_and_drop_image"];
 
+  if(!$textarea.length) return;
+
   // Redefines textarea editor with markdown editor
   if(window.DecidimAwesome.use_markdown_in_proposals) {
     const inscrybmde = new InscrybMDE({

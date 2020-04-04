@@ -24,7 +24,6 @@ module Decidim::DecidimAwesome
 
       before do
         request.env["decidim.current_organization"] = user.organization
-        request.env["decidim_awesome.current_config"] = config
         sign_in user, scope: :user
       end
 

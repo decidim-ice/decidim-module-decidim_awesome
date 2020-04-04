@@ -17,10 +17,6 @@ module Decidim
         app.config.assets.precompile += %w(decidim_decidim_awesome_manifest.js decidim_decidim_awesome_manifest.css)
       end
 
-      initializer "decidim_awesome.middleware" do |app|
-        app.config.middleware.insert_after Decidim::CurrentOrganization, Decidim::DecidimAwesome::CurrentConfig
-      end
-
       initializer "decidim_decidim_awesome.mount_routes" do
         Decidim::Core::Engine.routes do
           mount Decidim::DecidimAwesome::Engine, at: "/decidim_awesome", as: "decidim_decidim_awesome"

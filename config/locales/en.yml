@@ -7,14 +7,42 @@ en:
         allow_images_in_proposals: Allow images in the proposals editor
         allow_images_in_small_editor: Allow images in the minimal HTML editor
         use_markdown_in_proposals: Use a Markdown editor in proposals instead of Quill
+      constraint:
+        participatory_space_manifest: Participatory space type
   decidim:
     admin:
       menu:
         decidim_awesome: Decidim awesome
     decidim_awesome:
       admin:
+        constraints:
+          create:
+            error: Error creating condition case
+            success: Condition case created successfully
+          destroy:
+            error: Error removing condition case
+            success: Condition case removed successfully
+          errors:
+            not_unique: Same condition already exists
+          new:
+            cancel: Cancel
+            constraint: New condition case
+            save: Save
+          show:
+            cancel: Cancel
+            constraint: Edit condition case
+            save: Save
+          update:
+            error: Error updating condition case
+            success: Condition case updated successfully
         editors:
           admin_space: Admin backend mods
+          constraints:
+            add_condition: Add case
+            always: Always
+            delete: Delete
+            edit: Edit
+            title: 'Applicable only in these cases:'
           form:
             help:
               allow_images_in_full_editor: This will add a image uploader icon in

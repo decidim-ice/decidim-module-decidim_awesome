@@ -1,0 +1,27 @@
+<div class="constraints-editor" data-key="<%= key %>">
+  <div class="callout" style="display:none" data-closable>
+    <p></p>
+    <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <h5><%= t ".title" %></h5>
+  <% if constraints.blank? %>
+    <span class="label warning"><%= t ".always" %></span>
+  <% end %>
+
+  <ul class="constraints-list">
+    <% constraints&.each do |constraint| %>
+        <li>
+            <% constraint.settings.each do |k, val| %>
+              <span class="label <%= k %>"><%= translate_constraint_value k, val %></span>
+            <% end %>
+          <a href="<%= constraint_path(id: constraint.id, key: key) %>" class="edit-condition"><%= t ".edit" %></a>
+          <%= link_to t(".delete"), constraint_path(id: constraint.id), remote: true, method: :delete %>
+        </li>
+      <% end %>
+  </ul>
+  <a href="<%= new_constraint_path(key: key) %>" class="add-condition"><%= t ".add_condition" %></a>
+
+</div>
