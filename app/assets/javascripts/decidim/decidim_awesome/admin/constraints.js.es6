@@ -1,23 +1,22 @@
 // = require_self
 
 $(() => {
-	const $modal = $('#constraintsModal');
-	if(!$modal.length) return;
+  const $modal = $('#constraintsModal');
+  if(!$modal.length) return;
 
-	$(".decidim_awesome-form").on("click", ".constraints-editor .add-condition,.constraints-editor .edit-condition", (e) => {
-		e.preventDefault();
+  $(".decidim_awesome-form").on("click", ".constraints-editor .add-condition,.constraints-editor .edit-condition", (e) => {
+    e.preventDefault();
     const $this = $(e.target)
-    const key = $this.closest(".constraints-editor").data("key");
-    const id = $this.data("target") || "new";
-		const $callout = $this.closest(".constraints-editor").find(".callout");
+    const url = $this.attr("href");
+    const $callout = $this.closest(".constraints-editor").find(".callout");
     $callout.hide();
     $callout.removeClass('alert success');
-		$modal.find('.modal-content').html('');
+    $modal.find('.modal-content').html('');
     $modal.addClass('loading').foundation('open');
-    $modal.find('.modal-content').load(`/admin/decidim_awesome/constraints/${id}?key=${key}`, () => {
+    $modal.find('.modal-content').load(url, () => {
       $modal.removeClass('loading');
     });
-	});
+  });
 
   // Rails AJAX events
   document.body.addEventListener('ajax:error', function(responseText) {

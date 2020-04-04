@@ -17,11 +17,11 @@
             <% constraint.settings.each do |k, val| %>
               <span class="label <%= k %>"><%= translate_constraint_value k, val %></span>
             <% end %>
-          <a href="#" class="edit-condition" data-target="<%= constraint.id %>"><%= t ".edit" %></a>
+          <a href="<%= constraint_path(id: constraint.id, key: key) %>" class="edit-condition"><%= t ".edit" %></a>
           <%= link_to t(".delete"), constraint_path(id: constraint.id), remote: true, method: :delete %>
         </li>
       <% end %>
   </ul>
-  <a href="#" class="add-condition"><%= t ".add_condition" %></a>
+  <a href="<%= new_constraint_path(key: key) %>" class="add-condition"><%= t ".add_condition" %></a>
 
 </div>
