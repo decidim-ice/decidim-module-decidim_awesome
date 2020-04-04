@@ -10,7 +10,8 @@ module Decidim
         @context = {
           participatory_space_manifest: nil,
           participatory_slug: nil,
-          component_id: nil
+          component_id: nil,
+          component_manifest: nil
         }
       end
 
@@ -36,6 +37,10 @@ module Decidim
         Decidim::DecidimAwesome.config.map do |key, val|
           [key, valid[key].presence || val]
         end.to_h
+      end
+
+      def setting_for(setting)
+        @vars.find_by(var: setting)
       end
 
       # Checks if some config option es enabled in a certain context

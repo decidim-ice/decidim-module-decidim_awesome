@@ -2,6 +2,9 @@
 //= require inscrybmde.min
 //= require_self
 
+@import "decidim/variables";
+@import "decidim/utils/settings";
+@import "decidim/utils/mixins";
 @import "./proposals/proposals_editor";
 @import "./admin/editor";
 
@@ -11,4 +14,18 @@
   right: 0;
   margin: 1em;
   font-size: 0.8em;
+}
+
+
+.decidim_awesome.modal {
+  .spinner {
+    @include spinner(25px, #aaa, var(--secondary), 800ms);
+    vertical-align: middle;
+    display: none;
+  }
+  &.loading {
+    .spinner {
+      display: inline-block;
+    }
+  }
 }

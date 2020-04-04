@@ -11,6 +11,7 @@ module Decidim
 
       routes do
         # Add admin engine routes here
+        resources :constraints
         get :editors, to: "editors#show"
         post :editors, to: "editors#update"
         root to: "editors#show"
