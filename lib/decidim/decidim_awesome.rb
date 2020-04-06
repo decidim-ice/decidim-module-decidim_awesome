@@ -12,6 +12,7 @@ module Decidim
     include ActiveSupport::Configurable
 
     autoload :Config, "decidim/decidim_awesome/config"
+    autoload :SystemChecker, "decidim/decidim_awesome/system_checker"
     autoload :ContentRenderes, "decidim/decidim_awesome/content_renderers"
     autoload :ContextAnalyzers, "decidim/decidim_awesome/context_analyzers"
 

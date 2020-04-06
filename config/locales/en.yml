@@ -18,6 +18,13 @@ en:
         decidim_awesome: Decidim awesome
     decidim_awesome:
       admin:
+        checks:
+          index:
+            admin: From Admin module
+            core: From Core module
+            decidim_version: Decidim version %{version}
+            proposals: From Proposals module
+            title: System compatibility checks
         constraints:
           create:
             error: Error creating condition case
@@ -70,6 +77,7 @@ en:
             error: Error updating configuration! %{error}
             success: Configuration updated successfully!
         menu:
+          checks: System compatibility
           editors: Editor hacks
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
       editor_images:

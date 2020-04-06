@@ -14,6 +14,7 @@ module Decidim
         resources :constraints
         get :editors, to: "editors#show"
         post :editors, to: "editors#update"
+        get :checks, to: "checks#index"
         root to: "editors#show"
       end
 

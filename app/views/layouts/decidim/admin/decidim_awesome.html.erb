@@ -8,6 +8,9 @@
       <li <% if is_active_link?(decidim_admin_decidim_awesome.editors_path) %> class="is-active" <% end %>>
         <%= aria_selected_link_to I18n.t("menu.editors", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.editors_path %>
       </li>
+      <li <% if is_active_link?(decidim_admin_decidim_awesome.checks_path) %> class="is-active" <% end %>>
+        <%= aria_selected_link_to I18n.t("menu.checks", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.checks_path %>
+      </li>
     </ul>
   </div>
 <% end %>
