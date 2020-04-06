@@ -10,6 +10,7 @@ en:
       constraint:
         participatory_space_manifest: Apply to participatory spaces of type
         participatory_space_slug: Only in
+        component_manifest: Only in components of type
   decidim:
     admin:
       menu:

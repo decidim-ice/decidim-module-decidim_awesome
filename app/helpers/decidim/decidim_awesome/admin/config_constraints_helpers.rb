@@ -24,6 +24,12 @@ module Decidim
           end.to_h
         end
 
+        def component_manifests
+          Decidim.component_manifests.pluck(:name).map do |name|
+            [name.to_sym, I18n.t("decidim.components.#{name}.name")]
+          end.to_h
+        end
+
         def translate_constraint_value(constraint, key)
           value = constraint.settings[key]
           case key.to_sym
@@ -32,6 +38,8 @@ module Decidim
           when :participatory_space_slug
             manifest = constraint.settings["participatory_space_manifest"]
             participatory_spaces_list(manifest)[value] || value
+          when :component_manifest
+            component_manifests[value.to_sym] || value
           else
             value
           end

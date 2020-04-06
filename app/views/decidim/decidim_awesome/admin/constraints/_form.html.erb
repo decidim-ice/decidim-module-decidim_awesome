@@ -2,6 +2,7 @@
 
   <%= form.select :participatory_space_manifest, participatory_space_manifests.invert, include_blank: true %>
   <%= form.select :participatory_space_slug, participatory_spaces_list(@form.participatory_space_manifest).invert, include_blank: true %>
+  <%= form.select :component_manifest, component_manifests.invert, include_blank: true %>
 
 </div>
 

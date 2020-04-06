@@ -6,11 +6,11 @@ module Decidim
       # Constraints configuration controller for config keys
       class ConstraintsController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
-        include ConfigConstraintsHelpers
+        helper ConfigConstraintsHelpers
 
         layout false
 
-        helper_method :participatory_space_manifests, :participatory_spaces_list, :translate_constraint_value
+        # helper_method :participatory_space_manifests, :participatory_spaces_list, :translate_constraint_value
 
         def new
           @form = form(ConstraintForm).from_params(filtered_params, setting: current_setting)
