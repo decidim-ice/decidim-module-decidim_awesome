@@ -4,9 +4,12 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/2dada53525dd5a944089/maintainability)](https://codeclimate.com/github/Platoniq/decidim-module-decidim_awesome/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/2dada53525dd5a944089/test_coverage)](https://codeclimate.com/github/Platoniq/decidim-module-decidim_awesome/test_coverage)
 
-Some usability and UX tweaks for Decidim.
+Usability and UX tweaks for Decidim.
 
-**This in alpha status, not ready to use unless you are an adventurous**
+This plugin allows the administrators to expand the possibilities of Decidim beyond some existing limitations. 
+All tweaks are provided in a optional fashion with granular permissions that let the administrator to choose exactly where to apply those mods. Some tweaks can be applied to any assembly, other in an specific participatory process or even in type of component only.
+
+**This in beta status, we do not accept any responsibility for breaking anything. Feedback is appreciated though.**
 
 ## Usage
 
@@ -20,7 +23,23 @@ It generates and admin module that allows to choose what hacks to apply.
 
 Modifies the WYSIWYG editor in Decidim by adding the possibility to insert images. When uploading images, Drag & Drop is supported. Images will be uploaded to the server and inserted as external resources (it doesn't use base64 inline encoding).
 
-#### 2. To be continued...
+#### 2. Markdown editor for proposals
+
+Allows to use markdown when creating proposals instead of a bare textarea.
+
+#### 3. To be continued...
+
+Some things in the roadmap: 
+
+1. Improve the conversation in comments by allowing images
+1. Direct export of surveys in PDF
+1. Allow to create surveys where the responding user is known
+1. Propose something! or even better send a PR!
+
+
+### Screenshots:
+
+![Admin tweaks for editors](examples/admin-editors.png)
 
 
 ## Installation
