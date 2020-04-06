@@ -10,6 +10,10 @@ module Decidim
         attribute :participatory_space_manifest, String
         attribute :participatory_space_slug, String
         attribute :component_manifest, String
+        attribute :component_id, Integer
+
+        validates :component_manifest, absence: true, if: ->(form) { form.component_id.present? }
+        validates :component_id, absence: true, if: ->(form) { form.component_manifest.present? }
       end
     end
   end

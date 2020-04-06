@@ -3,6 +3,7 @@
   <%= form.select :participatory_space_manifest, participatory_space_manifests.invert, include_blank: true %>
   <%= form.select :participatory_space_slug, participatory_spaces_list(@form.participatory_space_manifest).invert, include_blank: true %>
   <%= form.select :component_manifest, component_manifests.invert, include_blank: true %>
+  <%= form.select :component_id, components_list(@form.participatory_space_manifest, @form.participatory_space_slug).invert, include_blank: true %>
 
 </div>
 
@@ -12,6 +13,8 @@
 (function() {
   var div = document.getElementById('constraint-form-<%= params[:id] %>');
   var space_manifest = div.getElementsByTagName("select")[0];
+  var component_manifest = div.getElementsByTagName("select")[2];
+  var component_id = div.getElementsByTagName("select")[3];
 
   space_manifest.addEventListener('change', function(e) {
   	var event = new CustomEvent("constraint:change", {
@@ -22,6 +25,16 @@
 	  });
 	  // Dispatch detail as event so main processor will reload accordingly
   	document.body.dispatchEvent(event);
+  });
+
+  component_manifest.addEventListener('change', function(e) {
+  	if(e.target.value)
+	  	component_id.value = "";
+  });
+
+  component_id.addEventListener('change', function(e) {
+  	if(e.target.value)
+	  	component_manifest.value = "";
   });
 })();
 

@@ -22,13 +22,16 @@
 
     .label {
       &.participatory_space_manifest {
-        background-color: #b35a19;
+        background-color: #f7b230;
       }
       &.participatory_space_slug {
         background-color: #19b380;
       }
       &.component_manifest {
         background-color: #b31919;
+      }
+      &.component_id {
+        background-color: #ee449c;
       }
     }
 

@@ -11,6 +11,7 @@ en:
         participatory_space_manifest: Apply to participatory spaces of type
         participatory_space_slug: Only in
         component_manifest: Only in components of type
+        component_id: or specifically in
   decidim:
     admin:
       menu:
@@ -49,7 +50,7 @@ en:
             help:
               allow_images_in_full_editor: This will add a image uploader icon in
                 all the editors WYSIWYG with the full toolbar enabled.
-              allow_images_in_proposals: This will allow to upload imagesin the proposals
+              allow_images_in_proposals: This will allow to upload images in the proposals
                 editor, available to any user.
               allow_images_in_small_editor: This will add a image uploader icon in
                 all the editors WYSIWYG with minimal options in the toolbar enabled.
@@ -60,7 +61,7 @@ en:
                 user space
               use_markdown_in_proposals: This will substitute the Quill WYSIWYG editor
                 in proposals, and use a Markdown editor and frontend processor (text
-                in database wil be saved as markdown text)
+                in database will be saved as markdown text)
           proposals_space: Proposals mods
           show:
             title: Tweaks for the editors

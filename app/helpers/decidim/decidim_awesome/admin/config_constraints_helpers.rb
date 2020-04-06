@@ -6,18 +6,6 @@ module Decidim
       module ConfigConstraintsHelpers
         include Decidim::TranslatableAttributes
 
-        def participatory_spaces_list(manifest)
-          return {} if manifest.blank?
-
-          space = Decidim.find_participatory_space_manifest(manifest)
-          return {} unless space
-
-          klass = space.model_class_name.constantize
-          klass.where(organization: current_organization).map do |item|
-            [item.slug, translated_attribute(item.title)]
-          end.to_h
-        end
-
         def participatory_space_manifests
           Decidim.participatory_space_manifests.pluck(:name).map do |name|
             [name.to_sym, I18n.t("decidim.admin.menu.#{name}")]
@@ -27,6 +15,25 @@ module Decidim
         def component_manifests
           Decidim.component_manifests.pluck(:name).map do |name|
             [name.to_sym, I18n.t("decidim.components.#{name}.name")]
+          end.to_h
+        end
+
+        def participatory_spaces_list(manifest)
+          space = participatory_space_for_manifest(manifest)
+          return {} if space.blank?
+
+          space.where(organization: current_organization).map do |item|
+            [item.slug, translated_attribute(item.title)]
+          end.to_h
+        end
+
+        def components_list(manifest, slug)
+          space = participatory_space_for_manifest(manifest)
+          return {} if space.blank?
+
+          components = Component.where(participatory_space: space.find_by(slug: slug))
+          components.map do |item|
+            [item.id, "#{item.id}: #{translated_attribute(item.name)}"]
           end.to_h
         end
 
@@ -40,9 +47,25 @@ module Decidim
             participatory_spaces_list(manifest)[value] || value
           when :component_manifest
             component_manifests[value.to_sym] || value
+          when :component_id
+            component = Component.find_by(id: value)
+            return "#{component.id}: #{translated_attribute(component.name)}" if component
+
+            value
           else
             value
           end
+        end
+
+        private
+
+        def participatory_space_for_manifest(manifest)
+          return nil if manifest.blank?
+
+          space = Decidim.find_participatory_space_manifest(manifest)
+          return nil unless space
+
+          space.model_class_name.constantize
         end
       end
     end
