@@ -107,7 +107,7 @@ module Decidim
 
         def filtered_params
           ops = {}
-          [:participatory_space_manifest, :component_manifest].each do |key|
+          [:participatory_space_manifest, :participatory_space_slug].each do |key|
             ops[key] = params[key] if params[key]
           end
           ops

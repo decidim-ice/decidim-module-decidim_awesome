@@ -21,7 +21,8 @@ $(() => {
 
   // Custom event listener to reload the modal if needed
   document.body.addEventListener("constraint:change", (e) => {
-    const url = $modal.data("url") + `&${e.detail.key}=${e.detail.value}`
+    const vars = e.detail.map((setting) => `${setting.key}=${setting.value}`);
+    const url = $modal.data("url") + vars.join("&")
     $modal.addClass('loading');
     $modal.find('.modal-content').load(url, () => {
       $modal.removeClass('loading');
