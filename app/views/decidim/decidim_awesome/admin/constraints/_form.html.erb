@@ -7,7 +7,6 @@
 
 </div>
 
-
 <script type="text/javascript">
 
 (function() {
@@ -17,24 +16,24 @@
   var component_id = div.getElementsByTagName("select")[3];
 
   space_manifest.addEventListener('change', function(e) {
-  	var event = new CustomEvent("constraint:change", {
-  		detail: {
-	  		key: "participatory_space_manifest",
-	  		value: e.target.value
-	  	}
-	  });
-	  // Dispatch detail as event so main processor will reload accordingly
-  	document.body.dispatchEvent(event);
+    var event = new CustomEvent("constraint:change", {
+      detail: {
+        key: "participatory_space_manifest",
+        value: e.target.value
+      }
+    });
+    // Dispatch detail as event so main processor will reload accordingly
+    document.body.dispatchEvent(event);
   });
 
   component_manifest.addEventListener('change', function(e) {
-  	if(e.target.value)
-	  	component_id.value = "";
+    if(e.target.value)
+      component_id.value = "";
   });
 
   component_id.addEventListener('change', function(e) {
-  	if(e.target.value)
-	  	component_manifest.value = "";
+    if(e.target.value)
+      component_manifest.value = "";
   });
 })();
 
