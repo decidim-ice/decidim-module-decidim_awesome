@@ -10,7 +10,7 @@ module Decidim
         # @return [String] the content ready to display (contains HTML)
         def render(options = { filter_html: true, autolink: true, no_intra_emphasis: true, fenced_code_blocks: true, disable_indented_code_blocks: true, tables: true })
           md = Redcarpet::Markdown.new(Redcarpet::Render::HTML, options).render(content)
-          "<div class=\"awesome-markdown--proposals\">#{md}</div>"
+          "<div class=\"awesome-markdown-editor\">#{md}</div>"
         end
       end
     end

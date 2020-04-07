@@ -22,6 +22,9 @@ module Decidim
 
           begin
             form.attributes.each do |key, val|
+              # ignore nil attributes (must specifically be set to false if necessary)
+              next if val.nil?
+
               setting = AwesomeConfig.find_or_initialize_by(var: key, organization: form.current_organization)
               setting.value = val
               setting.save!

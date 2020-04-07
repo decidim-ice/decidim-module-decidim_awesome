@@ -1,0 +1,15 @@
+<%= decidim_form_for(@form, method: :patch, url: decidim_admin_decidim_awesome.config_path(params[:var])) do |f| %>
+  <div class="card">
+    <div class="card-divider">
+      <h2 class="card-title"><%= t(".title", setting: params[:var]) %></h2>
+    </div>
+    <div class="card-section">
+      <%= render partial: "form_#{params[:var]}", locals: { form: f } %>
+    </div>
+  </div>
+  <div class="button--double form-general-submit">
+    <%= f.submit t(".update") %>
+  </div>
+<% end %>
+
+<%= render partial: "modal" %>

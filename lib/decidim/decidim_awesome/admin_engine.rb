@@ -12,10 +12,9 @@ module Decidim
       routes do
         # Add admin engine routes here
         resources :constraints
-        get :editors, to: "editors#show"
-        post :editors, to: "editors#update"
+        resources :config, param: :var, only: [:show, :update]
         get :checks, to: "checks#index"
-        root to: "editors#show"
+        root to: "config#show", var: :editors
       end
 
       initializer "decidim_admin_awesome.assets" do |app|
@@ -31,10 +30,10 @@ module Decidim
       initializer "decidim_awesome.admin_menu" do
         Decidim.menu :admin_menu do |menu|
           menu.item I18n.t("menu.decidim_awesome", scope: "decidim.admin", default: "Decidim Awesome"),
-                    decidim_admin_decidim_awesome.editors_path,
+                    decidim_admin_decidim_awesome.config_path(:editors),
                     icon_name: "fire",
                     position: 7.5,
-                    active: is_active_link?(decidim_admin_decidim_awesome.editors_path, :inclusive)
+                    active: is_active_link?(decidim_admin_decidim_awesome.config_path(:editors), :inclusive)
         end
       end
 

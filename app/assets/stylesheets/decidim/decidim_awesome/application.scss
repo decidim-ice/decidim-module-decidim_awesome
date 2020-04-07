@@ -2,5 +2,6 @@
 //= require inscrybmde.min
 //= require_self
 
-@import "./proposals/proposals_editor";
-@import "./proposals/proposals_view";
+@import "./editors/quill_editor";
+@import "./editors/markdown_editor";
+@import "./editors/markdown_view";

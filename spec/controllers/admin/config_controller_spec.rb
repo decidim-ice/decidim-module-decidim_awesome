@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim::DecidimAwesome
   module Admin
-    describe EditorsController, type: :controller do
+    describe ConfigController, type: :controller do
       routes { Decidim::DecidimAwesome::AdminEngine.routes }
 
       let(:user) { create(:user, :confirmed, :admin, organization: organization) }
@@ -17,8 +17,7 @@ module Decidim::DecidimAwesome
       end
       let(:params) do
         {
-          allow_images_in_full_editor: true,
-          allow_images_in_small_editor: true
+          var: :editors
         }
       end
 
@@ -29,12 +28,20 @@ module Decidim::DecidimAwesome
 
       describe "GET #show" do
         it "returns http success" do
-          get :show
+          get :show, params: params
           expect(response).to have_http_status(:success)
         end
       end
 
       describe "PATCH #update" do
+        let(:params) do
+          {
+            var: :editors,
+            allow_images_in_full_editor: true,
+            allow_images_in_small_editor: true
+          }
+        end
+
         it "redirects as success success" do
           get :update, params: params
           expect(response).to have_http_status(:redirect)

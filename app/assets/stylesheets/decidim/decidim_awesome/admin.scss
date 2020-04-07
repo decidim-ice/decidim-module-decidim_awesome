@@ -5,8 +5,9 @@
 @import "decidim/variables";
 @import "decidim/utils/settings";
 @import "decidim/utils/mixins";
-@import "./proposals/proposals_editor";
-@import "./admin/editor";
+@import "./admin/constraints";
+@import "./editors/quill_editor";
+@import "./editors/markdown_editor";
 
 .platoniq-credits {
   position: absolute;

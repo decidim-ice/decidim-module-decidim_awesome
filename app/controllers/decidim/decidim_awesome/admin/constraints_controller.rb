@@ -28,7 +28,7 @@ module Decidim
                 id: constraint.id,
                 key: current_setting.var,
                 message: I18n.t("decidim_awesome.admin.constraints.create.success", scope: "decidim"),
-                html: render_to_string(partial: "decidim/decidim_awesome/admin/editors/constraints",
+                html: render_to_string(partial: "decidim/decidim_awesome/admin/config/constraints",
                                        locals: {
                                          key: current_setting.var,
                                          constraints: current_setting.constraints
@@ -56,7 +56,7 @@ module Decidim
                 id: params[:id],
                 key: constraint.awesome_config.var,
                 message: I18n.t("decidim_awesome.admin.constraints.update.success", scope: "decidim"),
-                html: render_to_string(partial: "decidim/decidim_awesome/admin/editors/constraints",
+                html: render_to_string(partial: "decidim/decidim_awesome/admin/config/constraints",
                                        locals: {
                                          key: constraint.awesome_config.var,
                                          constraints: constraint.awesome_config.constraints
@@ -83,7 +83,7 @@ module Decidim
                 id: params[:id],
                 key: constraint.awesome_config.var,
                 message: I18n.t("decidim_awesome.admin.constraints.destroy.success", scope: "decidim"),
-                html: render_to_string(partial: "decidim/decidim_awesome/admin/editors/constraints",
+                html: render_to_string(partial: "decidim/decidim_awesome/admin/config/constraints",
                                        locals: {
                                          key: constraint.awesome_config.var,
                                          constraints: constraint.awesome_config.constraints

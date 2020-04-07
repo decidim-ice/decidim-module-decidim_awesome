@@ -24,6 +24,6 @@ Decidim::Proposals::ProposalPresenter.class_eval do
 
     config = Decidim::DecidimAwesome::Config.new(proposal.organization)
     config.context_from_component proposal
-    config.enabled_for? :use_markdown_in_proposals
+    config.enabled_for? :use_markdown_editor
   end
 end

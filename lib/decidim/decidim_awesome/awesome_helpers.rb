@@ -23,6 +23,10 @@ module Decidim
         @unfiltered_awesome_config ||= awesome_config_instance.unfiltered_config
       end
 
+      def organization_awesome_config
+        @organization_awesome_config ||= awesome_config_instance.organization_config
+      end
+
       def awesome_config_tag
         content_tag :script, render(partial: "layouts/decidim/decidim_awesome/awesome_config.js")
       end

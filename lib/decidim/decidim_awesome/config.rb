@@ -40,10 +40,20 @@ module Decidim
         @context = Decidim::DecidimAwesome::ContextAnalyzers::ParticipatorySpaceAnalyzer.context_for space
       end
 
+      # config processed in context
       def config
         @config ||= calculate_config
       end
 
+      # config processed for the organization config, without context
+      def organization_config
+        @organization_config ||= unfiltered_config.map do |key, value|
+          value = Decidim::DecidimAwesome.config[key] unless enabled_for_organization? key
+          [key, value]
+        end.to_h
+      end
+
+      # config normalized according default values, without context, without organization config
       def unfiltered_config
         valid = @vars.map { |v| [v.var.to_sym, v.value] }.to_h
         Decidim::DecidimAwesome.config.map do |key, val|
@@ -67,11 +77,21 @@ module Decidim
 
       def calculate_config
         # filter vars compliant with current context
-        valid = @vars.filter { |item| valid_in_context?(item.constraints) }
+        valid = @vars.filter { |item| enabled_for_organization?(item.var) && valid_in_context?(item.constraints) }
                      .map { |v| [v.var.to_sym, v.value] }.to_h
-        @config = Decidim::DecidimAwesome.config.map do |key, val|
+        Decidim::DecidimAwesome.config.map do |key, val|
           [key, valid[key].presence || val]
         end.to_h
+      end
+
+      def enabled_for_organization?(key)
+        case key.to_sym
+        when :allow_images_in_proposals
+          if @organization.respond_to? :rich_text_editor_in_public_views
+            return false if @organization.rich_text_editor_in_public_views
+          end
+        end
+        true
       end
 
       def valid_in_context?(constraints)

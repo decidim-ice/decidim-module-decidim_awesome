@@ -28,7 +28,11 @@ module Decidim
       false
     end
 
-    config_accessor :use_markdown_in_proposals do
+    config_accessor :use_markdown_editor do
+      false
+    end
+
+    config_accessor :allow_images_in_markdown_editor do
       false
     end
   end

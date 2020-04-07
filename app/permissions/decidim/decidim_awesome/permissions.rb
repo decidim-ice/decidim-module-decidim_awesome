@@ -21,6 +21,7 @@ module Decidim
         if user.admin
           return allow! if config[:allow_images_in_small_editor]
           return allow! if config[:allow_images_in_full_editor]
+          return allow! if config[:allow_images_in_markdown_editor]
         end
       end
     end

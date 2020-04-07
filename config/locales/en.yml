@@ -4,9 +4,10 @@ en:
     attributes:
       config:
         allow_images_in_full_editor: Allow images in the full HTML editor
+        allow_images_in_markdown_editor: Allow images in the markdown editor
         allow_images_in_proposals: Allow images in the proposals editor
         allow_images_in_small_editor: Allow images in the minimal HTML editor
-        use_markdown_in_proposals: Use a Markdown editor in proposals instead of Quill
+        use_markdown_editor: Use a Markdown editor instead of the HTML editor
       constraint:
         component_id: or specifically in
         component_manifest: Only in components of type
@@ -25,6 +26,39 @@ en:
             decidim_version: Decidim version %{version}
             proposals: From Proposals module
             title: System compatibility checks
+        config:
+          constraints:
+            add_condition: Add case
+            always: Always
+            delete: Delete
+            edit: Edit
+            title: 'Applicable only in these cases:'
+          experimental: Experimental options
+          form:
+            help:
+              allow_images_in_full_editor: This will add an image uploader icon in
+                all the editors WYSIWYG with the full toolbar enabled.
+              allow_images_in_markdown_editor: This will allow markdown editor to
+                upload images by copy & paste or drag & drop.
+              allow_images_in_proposals: This will allow to upload images in the proposals
+                editor, available to any user
+              allow_images_in_small_editor: This will add an image uploader icon in
+                all the editors WYSIWYG with minimal options in the toolbar enabled.
+              drag_and_drop_supported: When uploading images, Drag & Drop is supported.
+                Images will be uploaded to the server and inserted as external resources
+                (it doesn't use base64 inline encoding).
+              use_markdown_editor: This will substitute the Quill WYSIWYG editor,
+                use a Markdown editor in the admin side and a frontend processor to
+                render the text (text in database will be saved as markdown text)
+          rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants"
+            is enabled, this option won''t apply. Use the editors hacks instead to
+            enable images in proposals.'
+          show:
+            title: Tweaks for %{setting}
+            update: Update configuration
+          update:
+            error: Error updating configuration! %{error}
+            success: Configuration updated successfully!
         constraints:
           create:
             error: Error creating condition case
@@ -45,40 +79,10 @@ en:
           update:
             error: Error updating condition case
             success: Condition case updated successfully
-        editors:
-          admin_space: Admin backend mods
-          constraints:
-            add_condition: Add case
-            always: Always
-            delete: Delete
-            edit: Edit
-            title: 'Applicable only in these cases:'
-          form:
-            help:
-              allow_images_in_full_editor: This will add a image uploader icon in
-                all the editors WYSIWYG with the full toolbar enabled.
-              allow_images_in_proposals: This will allow to upload images in the proposals
-                editor, available to any user.
-              allow_images_in_small_editor: This will add a image uploader icon in
-                all the editors WYSIWYG with minimal options in the toolbar enabled.
-              drag_and_drop_supported: When uploading images, Drag & Drop is supported.
-                Images will be uploaded to the server and inserted as external resources
-                (it doesn't use base64 inline encoding).
-              proposals_space: Mods in this section applies to the admin backend and
-                user space
-              use_markdown_in_proposals: This will substitute the Quill WYSIWYG editor
-                in proposals, and use a Markdown editor and frontend processor (text
-                in database will be saved as markdown text)
-          proposals_space: Proposals mods
-          show:
-            title: Tweaks for the editors
-            update: Update configuration
-          update:
-            error: Error updating configuration! %{error}
-            success: Configuration updated successfully!
         menu:
           checks: System compatibility
           editors: Editor hacks
+          proposals: Proposals hacks
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
       editor_images:
         create:
