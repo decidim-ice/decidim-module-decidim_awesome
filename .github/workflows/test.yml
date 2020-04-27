@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  test:
+  test-report:
     runs-on: ubuntu-latest
 
     services:
@@ -32,6 +32,7 @@ jobs:
       - name: Install Ruby deps
         run: |
           gem install bundler
+          gem install appraisal
           bundle exec appraisal install
 
       - name: Setup Database

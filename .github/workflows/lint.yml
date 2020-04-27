@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  test:
+  lint-report:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.0.0
