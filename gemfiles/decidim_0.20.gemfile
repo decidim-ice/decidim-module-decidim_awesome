@@ -9,6 +9,8 @@ gem "decidim-decidim_awesome", path: "../"
 gem "bootsnap", "~> 1.4"
 gem "puma", "~> 3.12.2"
 gem "uglifier", "~> 4.1"
+gem "decidim-admin", "0.20"
+gem "decidim-core", "0.20"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
@@ -25,7 +27,7 @@ group :development do
 end
 
 group :test do
-  gem "codecov", require: false
   gem "appraisal"
+  gem "codecov", require: false
   gem "simplecov", "~> 0.10", "< 0.18"
 end

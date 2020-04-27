@@ -31,7 +31,7 @@ jobs:
 
       - name: Install Ruby deps
         run: |
-          gem install bundler
+          gem install bundler:2.1.4
           bundle install --path vendor/bundle --jobs 4 --retry 3
 
       - name: Lint and Rubocop
