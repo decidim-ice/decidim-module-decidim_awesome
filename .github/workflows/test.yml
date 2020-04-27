@@ -54,7 +54,6 @@ jobs:
           DATABASE_USERNAME: postgres
           DATABASE_PASSWORD: postgres
 
-  test-reporter:
       - name: Publish code coverage
         run: |
           export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
