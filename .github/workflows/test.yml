@@ -29,20 +29,10 @@ jobs:
       - name: Install dependent libraries
         run: sudo apt-get install libpq-dev
 
-      - name: Recover Ruby dependency cache
-        uses: actions/cache@v1
-        with:
-          path: ./vendor/bundle
-          key: ${{ runner.OS }}-rubydeps-${{ hashFiles('Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-rubydeps-${{ env.cache-name }}-
-            ${{ runner.OS }}-rubydeps-
-            ${{ runner.OS }}-
-
       - name: Install Ruby deps
         run: |
           gem install bundler:2.1.4
-          bundle install --path vendor/bundle --jobs 4 --retry 3
+          bundle install  --jobs 4 --retry 3
 
       - name: Install Appraisal
         run: |
