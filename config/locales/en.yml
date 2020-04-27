@@ -21,10 +21,10 @@ en:
       admin:
         checks:
           index:
-            admin: From Admin module
-            core: From Core module
+            decidim-admin: From Admin module
+            decidim-core: From Core module
+            decidim-proposals: From Proposals module
             decidim_version: Decidim version %{version}
-            proposals: From Proposals module
             title: System compatibility checks
         config:
           constraints:

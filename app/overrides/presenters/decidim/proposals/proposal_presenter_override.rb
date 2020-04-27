@@ -19,6 +19,8 @@ Decidim::Proposals::ProposalPresenter.class_eval do
     text
   end
 
+  private
+
   def use_markdown?(proposal)
     return false unless proposal.respond_to? :organization
 

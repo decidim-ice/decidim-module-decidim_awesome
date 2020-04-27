@@ -4,13 +4,13 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 # DECIDIM_VERSION =  { git: "https://github.com/decidim/decidim" }
-DECIDIM_VERSION = "0.20"
+DECIDIM_VERSION = "0.21"
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-decidim_awesome", path: "."
 
 gem "bootsnap", "~> 1.4"
-gem "puma", "~> 3.12.2"
+gem "puma", ">= 4.3"
 gem "uglifier", "~> 4.1"
 
 group :development, :test do
@@ -29,9 +29,6 @@ group :development do
 end
 
 group :test do
+  gem "appraisal"
   gem "codecov", require: false
-  # Workaround for cc-test-reporter with SimpleCov 0.18.
-  # Stop upgrading SimpleCov until the following issue will be resolved.
-  # https://github.com/codeclimate/test-reporter/issues/418
-  gem "simplecov", "~> 0.10", "< 0.18"
 end

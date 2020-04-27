@@ -8,21 +8,27 @@ module Decidim::DecidimAwesome
   describe SystemChecker do
     subject { described_class }
 
+    it "has overrides" do
+      expect(subject.overrides.to_h.length).to eq(3)
+    end
+
     it "has 1 modified files in admin" do
-      expect(subject.overrides.admin.files.length).to eq(1)
+      expect(subject.overrides["decidim-admin"].files.length).to eq(1)
     end
 
     it "has 2 modified files in core" do
-      expect(subject.overrides.core.files.length).to eq(2)
+      expect(subject.overrides["decidim-core"].files.length).to eq(2)
     end
 
     it "has 1 modified files in proposals" do
-      expect(subject.overrides.proposals.files.length).to eq(1)
+      expect(subject.overrides["decidim-proposals"].files.length).to eq(1)
     end
 
-    it "each file matches the expected checksum" do
-      subject.each_file do |file, signature|
-        expect(md5(file)).to eq(signature)
+    context "when file" do
+      described_class.each_file do |file, signatures|
+        it "#{file} matches checksum" do
+          expect([signatures].flatten).to include(md5(file))
+        end
       end
     end
 
