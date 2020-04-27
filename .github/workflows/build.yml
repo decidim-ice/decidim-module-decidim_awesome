@@ -1,4 +1,4 @@
-name: Build
+name: "[CI] Test"
 
 on:
   push:
@@ -28,15 +28,20 @@ jobs:
       - name: Install dependent libraries
         run: sudo apt-get install libpq-dev
 
-      - name: Bundle install
+      - name: Recover Ruby dependency cache
+        uses: actions/cache@v1
+        with:
+          path: ./vendor/bundle
+          key: ${{ runner.OS }}-rubydeps-${{ hashFiles('Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-rubydeps-${{ env.cache-name }}-
+            ${{ runner.OS }}-rubydeps-
+            ${{ runner.OS }}-
+
+      - name: Install Ruby deps
         run: |
           gem install bundler
-          bundle install --jobs 4 --retry 3
-
-      - name: Lint and Rubocop
-        run: |
-          bundle exec rubocop
-          bundle exec erblint app/views/**/*.erb
+          bundle install --path vendor/bundle --jobs 4 --retry 3
 
       - name: Setup Database
         run: bundle exec rake test_app
