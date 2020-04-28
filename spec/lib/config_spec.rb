@@ -54,7 +54,7 @@ module Decidim::DecidimAwesome
     context "when url does not match anything" do
       let(:request) { double(url: "/newsletters") }
 
-     it "returns empty context" do
+      it "returns empty context" do
         subject.context_from_request(request)
         expect(subject.context).to be_empty
       end

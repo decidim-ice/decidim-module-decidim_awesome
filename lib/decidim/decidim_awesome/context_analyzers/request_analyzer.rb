@@ -66,9 +66,9 @@ module Decidim
 
         def system_manifest?(path)
           patterns = [
-            /^\/admin\/newsletters/,
-            /^\/admin\/organization/,
-            /^\/admin\/static_pages/
+            %r{^/admin/newsletters},
+            %r{^/admin/organization},
+            %r{^/admin/static_pages}
           ]
           path.match(Regexp.union(patterns))
         end

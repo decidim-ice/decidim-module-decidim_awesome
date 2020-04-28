@@ -7,7 +7,7 @@ module Decidim
         include Decidim::TranslatableAttributes
 
         def participatory_space_manifests
-          manifests = {system: I18n.t("decidim.decidim_awesome.admin.config.system")}
+          manifests = { system: I18n.t("decidim.decidim_awesome.admin.config.system") }
           Decidim.participatory_space_manifests.pluck(:name).each do |name|
             manifests[name.to_sym] = I18n.t("decidim.admin.menu.#{name}")
           end
@@ -16,6 +16,7 @@ module Decidim
 
         def component_manifests(space = nil)
           return {} if space == "system"
+
           Decidim.component_manifests.pluck(:name).map do |name|
             [name.to_sym, I18n.t("decidim.components.#{name}.name")]
           end.to_h
