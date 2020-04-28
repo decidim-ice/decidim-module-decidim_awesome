@@ -27,6 +27,7 @@ en:
             decidim_version: Decidim version %{version}
             title: System compatibility checks
         config:
+          system: Everywhere except participatory spaces
           constraints:
             add_condition: Add case
             always: Always

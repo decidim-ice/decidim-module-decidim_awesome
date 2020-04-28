@@ -12,7 +12,7 @@ module Decidim
         attribute :component_manifest, String
         attribute :component_id, Integer
 
-        validates :component_manifest, absence: true, if: ->(form) { form.component_id.present? }
+        validates :component_manifest, absence: true, if: ->(form) { form.component_id.present? || form.participatory_space_manifest == "system" }
         validates :component_id, absence: true, if: ->(form) { form.component_manifest.present? }
       end
     end

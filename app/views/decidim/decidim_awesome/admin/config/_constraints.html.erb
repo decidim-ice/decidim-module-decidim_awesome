@@ -14,7 +14,7 @@
   <ul class="constraints-list">
     <% constraints&.each do |constraint| %>
         <li>
-            <% constraint.settings.each do |k, val| %>
+            <% constraint.settings.reverse_each do |k, val| %>
               <span class="label <%= k %>"><%= translate_constraint_value constraint, k %></span>
             <% end %>
           <a href="<%= constraint_path(id: constraint.id, key: key) %>" class="edit-condition"><%= t ".edit" %></a>

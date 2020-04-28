@@ -64,7 +64,21 @@ module Decidim
           @context[:component_manifest] = c.manifest_name if c
         end
 
+        def system_manifest?(path)
+          patterns = [
+            /^\/admin\/newsletters/,
+            /^\/admin\/organization/,
+            /^\/admin\/static_pages/
+          ]
+          path.match(Regexp.union(patterns))
+        end
+
         def context_from_path(path)
+          if system_manifest?(path)
+            @context[:participatory_space_manifest] = "system"
+            return
+          end
+
           segments = path.sub(%r{^/}, "").split("/")
           return if segments.blank?
 

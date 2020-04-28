@@ -25,49 +25,65 @@
 	      ["link", "clean"]
 	    ];
 
+      let addImage = false;
+
 	    if (toolbar === "full") {
 	      quillToolbar = [
 	        [{ header: [1, 2, 3, 4, 5, 6, false] }],
-	        ...quillToolbar,
-	        exports.DecidimAwesome.allow_images_in_full_editor ? ["video", "image"] : ["video"]
+	        ...quillToolbar
 	      ];
+	        if(exports.DecidimAwesome.allow_images_in_full_editor) {
+	        	quillToolbar.push(["video", "image"]);
+	    			addImage = true;
+	        } else {
+	        	quillToolbar.push(["video"]);
+	        }
 	    } else if (toolbar === "basic") {
-	      quillToolbar = [
-	        ...quillToolbar,
-	        exports.DecidimAwesome.allow_images_in_small_editor ? ["video", "image"] : ["video"]
-	      ];
+	        if(exports.DecidimAwesome.allow_images_in_small_editor) {
+	        	quillToolbar.push(["video", "image"]);
+	    			addImage = true;
+	        } else {
+	        	quillToolbar.push(["video"]);
+	        }
+	    } else if(exports.DecidimAwesome.allow_images_in_small_editor) {
+	    	quillToolbar.push(["image"]);
+	    	addImage = true;
+	    }
+
+	    let modules = {
+        toolbar: quillToolbar
+      };
+	    if(addImage) {
+	    	modules.imageResize = {
+          modules: ["Resize", "DisplaySize"]
+        }
+        modules.imageUpload = {
+					url: exports.DecidimAwesome.editor_uploader_path, // server url. If the url is empty then the base64 returns
+					method: 'POST', // change query method, default 'POST'
+					name: 'image', // custom form name
+					withCredentials: false, // withCredentials
+					headers: { 'X-CSRF-Token': token }, // add custom headers, example { token: 'your-token'}
+					// personalize successful callback and call next function to insert new url to the editor
+					callbackOK: (serverResponse, next) => {
+						$(quill.getModule("toolbar").container).last().removeClass('editor-loading')
+						next(serverResponse.url);
+					},
+					// personalize failed callback
+					callbackKO: serverError => {
+						$(quill.getModule("toolbar").container).last().removeClass('editor-loading')
+						alert(serverError.message);
+					},
+					checkBeforeSend: (file, next) => {
+						$(quill.getModule("toolbar").container).last().addClass('editor-loading')
+						next(file); // go back to component and send to the server
+					}
+				}
 	    }
 
 	    const $input = $(container).siblings('input[type="hidden"]');
 	    const token = $( 'meta[name="csrf-token"]' ).attr( 'content' );
 	    const quill = new Quill(container, {
-	      modules: {
-	        toolbar: quillToolbar,
-	        imageResize: {
-	          modules: ["Resize", "DisplaySize"]
-	        },
-	        imageUpload: {
-						url: exports.DecidimAwesome.editor_uploader_path, // server url. If the url is empty then the base64 returns
-						method: 'POST', // change query method, default 'POST'
-						name: 'image', // custom form name
-						withCredentials: false, // withCredentials
-						headers: { 'X-CSRF-Token': token }, // add custom headers, example { token: 'your-token'}
-						// personalize successful callback and call next function to insert new url to the editor
-						callbackOK: (serverResponse, next) => {
-							$(quill.getModule("toolbar").container).last().removeClass('editor-loading')
-							next(serverResponse.url);
-						},
-						// personalize failed callback
-						callbackKO: serverError => {
-							$(quill.getModule("toolbar").container).last().removeClass('editor-loading')
-							alert(serverError.message);
-						},
-						checkBeforeSend: (file, next) => {
-							$(quill.getModule("toolbar").container).last().addClass('editor-loading')
-							next(file); // go back to component and send to the server
-						}
-					}
-	      },
+	      modules: modules,
 	      formats: quillFormats,
 	      theme: "snow"
 	    });
