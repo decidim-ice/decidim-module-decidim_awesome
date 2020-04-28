@@ -53,6 +53,9 @@
 	    let modules = {
         toolbar: quillToolbar
       };
+	    const $input = $(container).siblings('input[type="hidden"]');
+	    const token = $( 'meta[name="csrf-token"]' ).attr( 'content' );
+
 	    if(addImage) {
 	    	modules.imageResize = {
           modules: ["Resize", "DisplaySize"]
@@ -80,8 +83,6 @@
 				}
 	    }
 
-	    const $input = $(container).siblings('input[type="hidden"]');
-	    const token = $( 'meta[name="csrf-token"]' ).attr( 'content' );
 	    const quill = new Quill(container, {
 	      modules: modules,
 	      formats: quillFormats,

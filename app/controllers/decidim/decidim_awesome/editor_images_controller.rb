@@ -7,11 +7,12 @@ module Decidim
       include FormFactory
       include NeedsAwesomeConfig
 
-      before_action do
-        enforce_permission_to :create, :editor_image, awesome_config: awesome_config
-      end
+      # overwrite original rescue_from to ensure we print messages from ajax methods (update)
+      rescue_from Decidim::ActionForbidden, with: :ajax_user_has_no_permission
 
       def create
+        enforce_permission_to :create, :editor_image, awesome_config: awesome_config
+
         @form = form(EditorImageForm).from_params(form_values)
 
         CreateEditorImage.call(@form) do
@@ -28,6 +29,14 @@ module Decidim
       end
 
       private
+
+      # Rescue ajax calls and print the update.js view which prints the info on the message ajax form
+      # Only if the request is AJAX, otherwise behave as Decidim standards
+      def ajax_user_has_no_permission
+        return user_has_no_permission unless request.xhr?
+
+        render json: { message: I18n.t("actions.unauthorized", scope: "decidim.core") }, status: :unprocessable_entity
+      end
 
       def form_values
         {
