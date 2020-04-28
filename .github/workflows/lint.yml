@@ -4,6 +4,9 @@ on:
   push:
   pull_request:
 
+env:
+  RUBY_VERSION: 2.6.5
+
 jobs:
   lint-report:
     runs-on: ubuntu-latest
@@ -12,12 +15,9 @@ jobs:
         with:
           fetch-depth: 1
 
-      - uses: actions/setup-ruby@v1
+      - uses: ruby/setup-ruby@master
         with:
-          ruby-version: 2.6.x
-
-      - name: Install dependent libraries
-        run: sudo apt-get install libpq-dev
+          ruby-version: ${{ env.RUBY_VERSION }}
 
       - name: Recover Ruby dependency cache
         uses: actions/cache@v1

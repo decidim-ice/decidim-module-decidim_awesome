@@ -4,6 +4,9 @@ on:
   push:
   pull_request:
 
+env:
+  RUBY_VERSION: 2.6.5
+
 jobs:
   test-report:
     runs-on: ubuntu-latest
@@ -11,23 +14,27 @@ jobs:
     services:
       postgres:
         image: postgres:11
-        ports:
-          - 5432:5432
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
         env:
-          DATABASE_USERNAME: postgres
-          DATABASE_PASSWORD: postgres
-          POSTGRES_HOST_AUTH_METHOD: trust
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+          POSTGRES_PASSWORD: postgres
+    env:
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_HOST: localhost
 
     steps:
-      - uses: actions/checkout@v1
-
-      - uses: actions/setup-ruby@v1
+      - uses: actions/checkout@v2.0.0
         with:
-          ruby-version: 2.6.x
+          fetch-depth: 1
 
-      - name: Install dependent libraries
-        run: sudo apt-get install libpq-dev
+      - uses: ruby/setup-ruby@master
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
 
       - name: Install Ruby deps
         run: |
@@ -39,11 +46,7 @@ jobs:
           bundle exec appraisal install
 
       - name: Setup Database
-        run: bundle exec appraisal rake test_app
-        env:
-          RAILS_ENV: test
-          DATABASE_USERNAME: postgres
-          DATABASE_PASSWORD: postgres
+        run: bundle exec rake test_app
 
       - name: Setup Code Climate test-reporter
         run: |
@@ -53,10 +56,6 @@ jobs:
 
       - name: Run RSpec
         run: SIMPLECOV=1 CODECOV=1 bundle exec appraisal rake
-        env:
-          RAILS_ENV: test
-          DATABASE_USERNAME: postgres
-          DATABASE_PASSWORD: postgres
 
       - name: Publish code coverage
         run: |
