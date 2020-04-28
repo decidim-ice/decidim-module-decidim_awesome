@@ -125,6 +125,16 @@ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rake test_
 DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rspec
 ```
 
+However, this project also make use of the gem [Appraisals](https://github.com/thoughtbot/appraisal) in order to test againts several versions of Decidim. The idea is to suport same supported versions of Decidim.
+
+You can run run all tests againts all Decidim versions by using:
+```bash
+bundle exec appraisal install
+DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rake test_app
+DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal rspec
+```
+
+
 Note that the database user has to have rights to create and drop a database in
 order to create the dummy test app database.
 

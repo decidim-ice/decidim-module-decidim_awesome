@@ -1,5 +1,5 @@
 PATH
-  remote: .
+  remote: ..
   specs:
     decidim-decidim_awesome (0.2)
       decidim-admin (>= 0.20.0)
@@ -762,6 +762,8 @@ DEPENDENCIES
   byebug (~> 11.0)
   codecov
   decidim (= 0.21)
+  decidim-admin (= 0.21)
+  decidim-core (= 0.21)
   decidim-decidim_awesome!
   decidim-dev (= 0.21)
   faker (~> 1.9)
