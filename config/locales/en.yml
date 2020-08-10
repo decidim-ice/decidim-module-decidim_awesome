@@ -89,6 +89,14 @@ en:
         create:
           error: Error uploading image!
           success: Image uploaded successfully!
+    components:
+      decidim_awesome:
+        name: Decidim awesome
+        settings:
+          global:
+            announcement: Announcement
+          step:
+            announcement: Announcement
   layouts:
     decidim:
       admin:
