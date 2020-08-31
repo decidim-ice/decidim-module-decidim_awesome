@@ -4,12 +4,15 @@ on:
   push:
   pull_request:
 
-env:
-  RUBY_VERSION: 2.6.5
-
 jobs:
   test-report:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu]
+        ruby: [2.6, 2.7]
+    runs-on: ${{ matrix.os }}-latest
+    continue-on-error: ${{ endsWith(matrix.ruby, 'head') || matrix.ruby == 'debug' }}
 
     services:
       postgres:
@@ -28,13 +31,13 @@ jobs:
       DATABASE_HOST: localhost
 
     steps:
-      - uses: actions/checkout@v2.0.0
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 1
 
       - uses: ruby/setup-ruby@master
         with:
-          ruby-version: ${{ env.RUBY_VERSION }}
+          ruby-version: ${{ matrix.ruby }}
 
       - name: Install Ruby deps
         run: |
