@@ -11,6 +11,8 @@ module Decidim
 
       routes do
         post :editor_images, to: "editor_images#create"
+        
+        root to: "map#show"
       end
 
       initializer "decidim_decidim_awesome.assets" do |app|
@@ -21,6 +23,10 @@ module Decidim
         Decidim::Core::Engine.routes do
           mount Decidim::DecidimAwesome::Engine, at: "/decidim_awesome", as: "decidim_decidim_awesome"
         end
+      end
+
+      initializer "decidim.decidim_awesome.add_cells_view_paths" do
+        Cell::ViewModel.view_paths << File.expand_path("#{Decidim::DecidimAwesome::Engine.root}/app/views") # for partials
       end
 
       # Prepare a zone to create overrides

@@ -3,15 +3,10 @@
 require_dependency "decidim/components/namer"
 
 Decidim.register_component(:decidim_awesome) do |component|
-  component.engine = Decidim::DecidimAwesome::ComponentEngine
-  component.admin_engine = Decidim::DecidimAwesome::ComponentAdminEngine
+  component.engine = Decidim::DecidimAwesome::Engine
+  component.admin_engine = Decidim::DecidimAwesome::AdminEngine
   # component.icon = "decidim/decidim_awesome/icon.svg"
   component.permissions_class_name = "Decidim::DecidimAwesome::Permissions"
-
-  component.on(:before_destroy) do |instance|
-    # Code executed before removing the component
-    raise StandardEerror, "Can't remove this component" if Decidim::DecidimAwesome::Task.where(component: instance).any?
-  end
 
   # These actions permissions can be configured in the admin panel
   # component.actions = %w()

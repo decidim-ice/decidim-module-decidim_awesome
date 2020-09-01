@@ -6,8 +6,6 @@ require "decidim/decidim_awesome/engine"
 require "decidim/decidim_awesome/admin_engine"
 require "decidim/decidim_awesome/content_renderers"
 require "decidim/decidim_awesome/context_analyzers"
-require "decidim/decidim_awesome/component_engine"
-require "decidim/decidim_awesome/component_admin_engine"
 require "decidim/decidim_awesome/component"
 
 module Decidim

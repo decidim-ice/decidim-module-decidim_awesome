@@ -3,9 +3,8 @@
 module Decidim
   module DecidimAwesome
     class MapController < DecidimAwesome::ApplicationController
-
       def show
-        render 
+        render
       end
     end
   end
