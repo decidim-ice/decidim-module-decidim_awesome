@@ -1,1 +1,57 @@
-<div id="map" class="map"></div>
+<div id="awesome-map" class="awesome-map" data-participatory_space="<%= current_component.participatory_space.slug %>" ></div>
+
+<template id="marker-proposal-popup">
+  <div class="map-info__content">
+    <h3>${title}</h3>
+    <div id="bodyContent">
+      <p>{{html body}}</p>
+      <div class="map__date-adress">
+        <div class="address card__extra">
+          <div class="address__icon">{{html icon}}</div>
+          <div class="address__details">
+            <span>${address}</span><br>
+          </div>
+        </div>
+      </div>
+      <div class="map-info__button">
+        <a href="${link}" class="button button--sc">
+          <%= t(".view_proposal") %>
+        </a>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+<template id="marker-meeting-popup">
+  <div class="map-info__content">
+    <h3>${title}</h3>
+    <div id="bodyContent">
+      <p>{{html description}}</p>
+      <div class="map__date-adress">
+        <div class="card__datetime">
+          <div class="card__datetime__date">
+            ${startTimeDay} <span class="card__datetime__month">${startTimeMonth} ${startTimeYear}</span>
+          </div>
+          <div class="card__datetime__time">${starTime}</div>
+        </div>
+        <div class="address card__extra">
+          <div class="address__icon">{{html icon}}</div>
+          <div class="address__details">
+            <strong>{{html location}}</strong><br>
+            <span>${address}</span><br>
+            <span>{{html locationHints}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="map-info__button">
+        <a href="${link}" class="button button--sc">
+          <%= t("decidim.meetings.meetings_map.view_meeting") %>
+        </a>
+      </div>
+    </div>
+  </div>
+</template>
+
+<%= stylesheet_link_tag "decidim/map" %>
+<%= javascript_include_tag "decidim/map" %>
