@@ -11,7 +11,7 @@ module Decidim
 
       routes do
         post :editor_images, to: "editor_images#create"
-        
+
         root to: "map#show"
       end
 
