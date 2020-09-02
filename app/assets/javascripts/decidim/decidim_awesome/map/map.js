@@ -27,10 +27,10 @@ L.DivIcon.SVGIcon.DecidimIcon = L.DivIcon.SVGIcon.extend({
 });
 
 const popupMeetingTemplateId = "marker-meeting-popup";
-$meetingTmpl = $.template($(`#${popupMeetingTemplateId}`));
+$meetingTmpl = $.template(popupMeetingTemplateId, $(`#${popupMeetingTemplateId}`).html());
 
 const popupProposalTemplateId = "marker-proposal-popup";
-$proposalTmpl = $.template($(`#${popupProposalTemplateId}`));
+$proposalTmpl = $.template(popupProposalTemplateId, $(`#${popupProposalTemplateId}`).html());
 
 let markerClusters = L.markerClusterGroup();
 
@@ -48,10 +48,11 @@ function printQuery(data, map) {
           var marker = L.marker([edge.node.coordinates.latitude, edge.node.coordinates.longitude], {
             icon: new L.DivIcon.SVGIcon.DecidimIcon()
           });
-          var node = document.createElement("div");
+          let node = document.createElement("div");
+          edge.node.link = '/processes/' + participatory_process.slug + '/f/' + element.id + '/meetings/' + edge.node.id;
 
-          $.tmpl(popupMeetingTemplateId, edge.node).appendTo(node);
-      
+          $.tmpl($(`#${popupMeetingTemplateId}`), edge.node).appendTo(node);
+
           marker.bindPopup(node, {
             maxwidth: 640,
             minWidth: 500,
@@ -70,7 +71,8 @@ function printQuery(data, map) {
             icon: new L.DivIcon.SVGIcon.DecidimIcon()
           });
           var node = document.createElement("div");
-          $.tmpl(popupProposalTemplateId, edge.node).appendTo(node);
+          edge.node.link = '/processes/' + participatory_process.slug + '/f/' + element.id + '/proposals/' + edge.node.id;
+          $.tmpl($(`#${popupProposalTemplateId}`), edge.node).appendTo(node);
       
           marker.bindPopup(node, {
             maxwidth: 640,
@@ -94,7 +96,7 @@ $(() => {
   const $map = $(`#${mapId}`);
   const participatory_space = $map.data('participatory_space');
 
-  var graphql_query = 'query ($participatory_space: String!)\
+  var graphql_query = 'query ($participatory_space: String!, $lang: String!)\
     {\
       participatoryProcess(slug: $participatory_space) {\
         id\
@@ -108,26 +110,18 @@ $(() => {
                 node {\
                   id\
                   title {\
-                    translations {\
-                      text\
-                    }\
+                    translation (locale: $lang)\
                   }\
                   description {\
-                    translations {\
-                      text\
-                    }\
+                    translation (locale: $lang)\
                   }\
                   startTime\
                   location {\
-                    translations {\
-                      text\
-                    }\
+                    translation (locale: $lang)\
                   }\
                   address\
                   locationHints {\
-                    translations {\
-                      text\
-                    }\
+                    translation (locale: $lang)\
                   }\
                   coordinates {\
                     latitude\
@@ -171,7 +165,8 @@ $(() => {
     data: JSON.stringify({
       query: graphql_query,
       variables: {
-        "participatory_space": participatory_space
+        "participatory_space": participatory_space,
+        "lang": document.querySelector('html').getAttribute('lang') 
       }
     })
   }).done(function(data) {

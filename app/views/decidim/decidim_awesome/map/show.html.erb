@@ -25,9 +25,9 @@
 
 <template id="marker-meeting-popup">
   <div class="map-info__content">
-    <h3>${title}</h3>
+    <h3>${title.translation}</h3>
     <div id="bodyContent">
-      <p>{{html description}}</p>
+      <p>{{html description.translation}}</p>
       <div class="map__date-adress">
         <div class="card__datetime">
           <div class="card__datetime__date">
@@ -38,9 +38,9 @@
         <div class="address card__extra">
           <div class="address__icon">{{html icon}}</div>
           <div class="address__details">
-            <strong>{{html location}}</strong><br>
+            <strong>{{html location.translation}}</strong><br>
             <span>${address}</span><br>
-            <span>{{html locationHints}}</span>
+            <span>{{html locationHints.translation}}</span>
           </div>
         </div>
       </div>
