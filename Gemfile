@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require "byebug"
+
 source "https://rubygems.org"
 
 ruby RUBY_VERSION
