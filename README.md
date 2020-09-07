@@ -134,7 +134,6 @@ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rake test_
 DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal rspec
 ```
 
-
 Note that the database user has to have rights to create and drop a database in
 order to create the dummy test app database.
 
@@ -155,6 +154,24 @@ SIMPLECOV=1 bundle exec rspec
 
 This will generate a folder named `coverage` in the project root which contains
 the code coverage report.
+
+### Appraisals commands
+
+Appraisal uses custom gems for testing in the folder `gemfiles`, in order to update the Gemfile we normaly use:
+
+```
+bundle update
+```
+
+To update the Appraisal definitions do the following:
+
+```
+cd gemfiles
+BUNDLE_GEMFILE=./decidim_0.XX.gemfile bundle update
+```
+
+Where 0.XX is the supported version that needs to be updated.
+
 
 ## License
 
