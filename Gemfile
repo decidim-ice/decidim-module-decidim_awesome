@@ -7,7 +7,7 @@ ruby RUBY_VERSION
 # Inside the development app, the relative require has to be one level up, as
 # the Gemfile is copied to the development_app folder (almost) as is.
 base_path = "."
-base_path = ".." if File.basename(__dir__) == "development_app"
+base_path = ".." if ["development_app", "decidim_dummy_app"].include? File.basename(__dir__)
 # We need absolutes routes to be able to use this Gemfile in Appraisal
 require "#{File.realpath base_path}/lib/decidim/decidim_awesome/version"
 
