@@ -2,9 +2,9 @@
 
 require_dependency "decidim/components/namer"
 
-Decidim.register_component(:decidim_awesome) do |component|
-  component.engine = Decidim::DecidimAwesome::Engine
-  component.admin_engine = Decidim::DecidimAwesome::AdminEngine
+Decidim.register_component(:decidim_awesome_map) do |component|
+  component.engine = Decidim::DecidimAwesome::MapComponent::Engine
+  # component.admin_engine = Decidim::DecidimAwesome::AdminMapEngine
   # component.icon = "decidim/decidim_awesome/icon.svg"
   component.permissions_class_name = "Decidim::DecidimAwesome::Permissions"
 
@@ -21,16 +21,6 @@ Decidim.register_component(:decidim_awesome) do |component|
     # Add your settings per step
     settings.attribute :announcement, type: :text, translated: true, editor: true
   end
-
-  # component.register_resource(:assignee) do |resource|
-  #   # Register a optional resource that can be references from other resources.
-  #   resource.model_class_name = "Decidim::DecidimAwesome::Assignee"
-  #   # TODO!:
-  #   # resource.template = "decidim/decidim_awesome/decidim_awesome/linked_tasks"
-  #   resource.card = "decidim/decidim_awesome/assignee"
-  #   # resource.actions = %w(join)
-  #   # resource.searchable = true
-  # end
 
   # component.register_stat :some_stat do |context, start_at, end_at|
   #   # Register some stat number to the application

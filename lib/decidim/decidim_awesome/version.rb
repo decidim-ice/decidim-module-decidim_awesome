@@ -5,6 +5,6 @@ module Decidim
   module DecidimAwesome
     VERSION = "0.2"
     MIN_DECIDIM_VERSION = "0.20.0"
-    DECIDIM_VERSION = ">= #{MIN_DECIDIM_VERSION}"
+    DECIDIM_VERSION = "0.21"
   end
 end

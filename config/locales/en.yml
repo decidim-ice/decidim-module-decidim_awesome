@@ -89,13 +89,14 @@ en:
         create:
           error: Error uploading image!
           success: Image uploaded successfully!
-      map:
-        show:
-          view_proposal: View proposal
-          view_meeting: View meeting
+      map_component:
+        map:
+          show:
+            view_proposal: View proposal
+            view_meeting: View meeting
     components:
-      decidim_awesome:
-        name: Decidim awesome
+      decidim_awesome_map:
+        name: Awesome Map
         settings:
           global:
             announcement: Announcement
