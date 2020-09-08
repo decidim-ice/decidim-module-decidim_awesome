@@ -51,5 +51,22 @@ Decidim.register_component(:awesome_map) do |component|
     ) do
       Decidim::Component.create!(params)
     end
+
+    # Tweak proposals in Assemblies to geolocate them
+    next unless participatory_space.manifest.name == :assemblies
+
+    participatory_space.components.each do |comp|
+      next unless comp.manifest.name == :proposals
+
+      comp.attributes["settings"]["global"]["geocoding_enabled"] = true
+      comp.save!
+
+      Decidim::Proposals::Proposal.where(component: comp).each do |proposal|
+        proposal.address = "#{Faker::Address.street_address} #{Faker::Address.zip} #{Faker::Address.city}"
+        proposal.latitude = Faker::Address.latitude
+        proposal.longitude = Faker::Address.longitude
+        proposal.save!
+      end
+    end
   end
 end
