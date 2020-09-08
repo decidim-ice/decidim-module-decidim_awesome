@@ -1,5 +1,11 @@
+// = require decidim/map
 
-.awesome-map {
+// Override padding in this component
+.wrapper {
+  padding: 0;
+}
+
+#map {
   height: 700px;
   width: 100%;
   display: flex;

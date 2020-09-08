@@ -3,21 +3,17 @@
 module Decidim
   module DecidimAwesome
     module MapComponent
-      class MapController < DecidimAwesome::ApplicationController
-        helper_method :current_component, :current_participatory_space
-
-        def show
-          render
-        end
+      class MapController < DecidimAwesome::MapComponent::ApplicationController
+        helper Decidim::DecidimAwesome::MapHelper
+        helper_method :map_components
 
         private
 
-        def current_component
-          @current_component ||= Decidim::Component.find(params[:component_id])
-        end
-
-        def current_participatory_space
-          @current_component.participatory_space
+        # TODO: filter geolocated only here
+        def map_components
+          current_participatory_space.components.filter do |component|
+            [:proposals, :meetings].include? component.manifest.name
+          end
         end
       end
     end

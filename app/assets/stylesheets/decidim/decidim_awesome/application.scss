@@ -1,9 +1,7 @@
 //= require github.min
 //= require inscrybmde.min
-//= require leaflet
 //= require_self
 
 @import "./editors/quill_editor";
 @import "./editors/markdown_editor";
 @import "./editors/markdown_view";
-@import "./map/map";
