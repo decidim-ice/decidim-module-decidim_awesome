@@ -18,7 +18,7 @@ en:
       menu:
         decidim_awesome: Decidim awesome
     components:
-      decidim_awesome_map:
+      awesome_map:
         name: Awesome Map
         settings:
           global:

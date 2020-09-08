@@ -4,10 +4,10 @@ require "decidim/decidim_awesome/railtie" if defined? Rails
 require "decidim/decidim_awesome/admin"
 require "decidim/decidim_awesome/engine"
 require "decidim/decidim_awesome/admin_engine"
-require "decidim/decidim_awesome/map_component/engine"
 require "decidim/decidim_awesome/content_renderers"
 require "decidim/decidim_awesome/context_analyzers"
-require "decidim/decidim_awesome/component"
+require "decidim/decidim_awesome/map_component/engine"
+require "decidim/decidim_awesome/map_component/component"
 
 module Decidim
   module DecidimAwesome
