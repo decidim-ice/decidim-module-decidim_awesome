@@ -5,11 +5,14 @@
 // = require_self
 
 ((exports) => {
-  const { fetchProposals, ProposalIcon, fetchMeetings, MeetingIcon } = exports.AwesomeMap;
+  const { fetchProposals, ProposalIcon, fetchMeetings, MeetingIcon, categories } = exports.AwesomeMap;
 
   const components = $("#map").data("components");
   const popupMeetingTemplateId = "marker-meeting-popup";
   const popupProposalTemplateId = "marker-proposal-popup";
+
+  let categoriesColors = [];
+  exports.AwesomeMap.categories = categoriesColors;
 
   const cluster = L.markerClusterGroup();
   
@@ -51,9 +54,8 @@
     components.forEach((component) => {
       
       if(component.type == "proposals") {
-        fetchProposals(component.id, '', (element, marker) => {
+        fetchProposals(component, '', (element, marker) => {
           const node = document.createElement("div");
-          element.link = component.url + '/proposals/' + element.id;
           $.tmpl($(`#${popupProposalTemplateId}`), element).appendTo(node);
 
           drawMarker(marker, node, layers.proposals);
@@ -61,9 +63,8 @@
       }
       
       if(component.type == "meetings") {
-        fetchMeetings(component.id, '', (element, marker) => {
+        fetchMeetings(component, '', (element, marker) => {
           const node = document.createElement("div");
-          element.link = component.url + '/meetings/' + element.id;
           $.tmpl($(`#${popupMeetingTemplateId}`), element).appendTo(node);
 
           drawMarker(marker, node, layers.meetings);

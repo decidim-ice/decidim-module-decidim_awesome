@@ -1,7 +1,7 @@
 // = require decidim/decidim_awesome/awesome_map/api_fetcher
 
 ((exports) => {
-  const query = `query ($id: ID!, $after: String!) {
+  const query = `query ($id: ID!, $lang: String!, $after: String!) {
     component(id: $id) {
         id
         __typename
@@ -11,9 +11,8 @@
               hasNextPage
               endCursor
             }
-
             edges {
-              node {
+              node {  
                 id
                 title
                 body
@@ -21,6 +20,12 @@
                 coordinates {
                   latitude
                   longitude
+                }
+                category {
+                  id
+                  name {
+                    translation(locale: $lang)
+                  }
                 }
               }
             }
@@ -32,10 +37,10 @@
   const ProposalIcon = L.DivIcon.SVGIcon.DecidimIcon;
 
   const createMarker = (element, callback) => {
-    // let fillColor = // TODO get color from categories;
+    let fillColor = exports.AwesomeMap.categories[element.category.id.name];
     const marker = L.marker([element.coordinates.latitude, element.coordinates.longitude], {
       icon: new ProposalIcon({
-        // fillColor: fillColor
+        fillColor: fillColor
       })
     });
 
@@ -44,8 +49,9 @@
 
   const fetchProposals = (component, after, callback) => {
     const variables = {
-      "id": component,
-      "after": after
+      "id": component.id,
+      "after": after,
+      "lang": document.querySelector('html').getAttribute('lang')
     };
     const api = new ApiFetcher(query, variables);
     api.fetchAll((result) => {
@@ -54,6 +60,11 @@
       }
       result.component.proposals.edges.forEach((element) => {
         if(element.node.coordinates) {
+          element.node.link = component.url + '/proposals/' + element.node.id;
+          if (exports.AwesomeMap.categories[element.node.category.id.name] !== undefined) {
+            var o = Math.round, r = Math.random, s = 255;
+            exports.AwesomeMap.categories[element.node.category.id.name] = 'rgb(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ')';
+          }
           createMarker(element.node, callback);
         }
       })
