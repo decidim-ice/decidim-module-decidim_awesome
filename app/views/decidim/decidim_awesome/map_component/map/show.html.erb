@@ -52,5 +52,10 @@
   </template>
 
   <%= stylesheet_link_tag "decidim/decidim_awesome/awesome_map/map" %>
+  <style type="text/css">
+    #map {
+      height: <%= current_component.settings.map_height %>px;
+    }
+  </style>
   <%= javascript_include_tag "decidim/decidim_awesome/awesome_map/map" %>
 <% end %>

@@ -15,6 +15,7 @@ Decidim.register_component(:awesome_map) do |component|
     # Add your global settings
     # Available types: :integer, :boolean
     settings.attribute :announcement, type: :text, translated: true, editor: true
+    settings.attribute :map_height, type: :integer, default: 700
   end
 
   component.settings(:step) do |settings|

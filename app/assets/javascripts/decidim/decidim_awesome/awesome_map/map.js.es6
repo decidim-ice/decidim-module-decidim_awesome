@@ -54,9 +54,11 @@
     });
   };
 
+
+  // currentMap might not be implemented yet so let's delay a bit
   // TODO: improve this
   setTimeout(() => {
-    loadElements(window.Decidim.currentMap);
+    loadElements(exports.Decidim.currentMap);
   },1000);
   
 })(window);

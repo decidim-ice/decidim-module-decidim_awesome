@@ -23,6 +23,7 @@ en:
         settings:
           global:
             announcement: Announcement
+            map_height: Map height (px)
           step:
             announcement: Announcement
     decidim_awesome:
