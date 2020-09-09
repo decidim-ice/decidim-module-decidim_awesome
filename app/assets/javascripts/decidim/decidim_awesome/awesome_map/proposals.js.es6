@@ -1,12 +1,17 @@
 // = require decidim/decidim_awesome/awesome_map/api_fetcher
 
 ((exports) => {
-  const query = `query ($id: ID!) {
+  const query = `query ($id: ID!, $after: String!) {
     component(id: $id) {
         id
         __typename
         ... on Proposals {
-          proposals {
+          proposals(first:10, after: $after){
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
+
             edges {
               node {
                 id
@@ -32,12 +37,16 @@
     callback(element, marker);
   };
 
-  const fetchProposals = (component, callback) => {    
+  const fetchProposals = (component, after, callback) => {
     const variables = {
-      "id": component
+      "id": component,
+      "after": after
     };
     const api = new ApiFetcher(query, variables);
     api.fetchAll((result) => {
+      if (result.component.proposals.pageInfo.hasNextPage) {
+        fetchProposals(component, result.component.proposals.pageInfo.endCursor, callback);
+      }
       result.component.proposals.edges.forEach((element) => {
         if(element.node.coordinates) {
           createMarker(element.node, callback);

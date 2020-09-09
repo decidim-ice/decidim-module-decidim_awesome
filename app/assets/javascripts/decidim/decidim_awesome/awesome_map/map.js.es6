@@ -30,7 +30,7 @@
     components.forEach((component) => {
       
       if(component.type == "proposals") {
-        fetchProposals(component.id, (element, marker) => {
+        fetchProposals(component.id, '', (element, marker) => {
           const node = document.createElement("div");
           element.link = component.url + '/proposals/' + element.id;
           $.tmpl($(`#${popupProposalTemplateId}`), element).appendTo(node);
@@ -40,7 +40,7 @@
       }
       
       if(component.type == "meetings") {
-        fetchMeetings(component.id, (element, marker) => {
+        fetchMeetings(component.id, '', (element, marker) => {
           const node = document.createElement("div");
           element.link = component.url + '/meetings/' + element.id;
           $.tmpl($(`#${popupMeetingTemplateId}`), element).appendTo(node);
