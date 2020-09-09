@@ -9,10 +9,16 @@ module Decidim
 
         private
 
-        # TODO: filter geolocated only here
         def map_components
           current_participatory_space.components.filter do |component|
-            [:proposals, :meetings].include? component.manifest.name
+            case component.manifest.name
+            when :meetings
+              true
+            when :proposals
+              component.settings.geocoding_enabled
+            else
+              false
+            end
           end
         end
       end

@@ -52,7 +52,6 @@
     const api = new ApiFetcher(query, variables);
     api.fetchAll((result) => {
       result.component.meetings.edges.forEach((element) => {
-        console.log("get node", element)
         if(element.node.coordinates) {
           createMarker(element.node, callback);
         }

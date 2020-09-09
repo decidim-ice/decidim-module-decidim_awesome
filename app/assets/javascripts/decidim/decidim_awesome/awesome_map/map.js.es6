@@ -13,7 +13,6 @@
   let markerClusters = L.markerClusterGroup();
 
   const drawMarker = (marker, node, map) => {
-    console.log("draw", marker, node)
     marker.bindPopup(node, {
       maxwidth: 640,
       minWidth: 500,
@@ -32,7 +31,6 @@
       
       if(component.type == "proposals") {
         fetchProposals(component.id, (element, marker) => {
-          console.log("new proposal", marker);
           const node = document.createElement("div");
           element.link = component.url + '/proposals/' + element.id;
           $.tmpl($(`#${popupProposalTemplateId}`), element).appendTo(node);
@@ -43,7 +41,6 @@
       
       if(component.type == "meetings") {
         fetchMeetings(component.id, (element, marker) => {
-          console.log("new meeting", marker);
           const node = document.createElement("div");
           element.link = component.url + '/meetings/' + element.id;
           $.tmpl($(`#${popupMeetingTemplateId}`), element).appendTo(node);
@@ -55,10 +52,18 @@
   };
 
 
-  // currentMap might not be implemented yet so let's delay a bit
+  // currentMap might not be loaded yet so let's delay a bit
   // TODO: improve this
-  setTimeout(() => {
-    loadElements(exports.Decidim.currentMap);
-  },1000);
-  
+  const waitMap = () => {
+    if(exports.Decidim && exports.Decidim.currentMap) {
+      loadElements(exports.Decidim.currentMap);
+    } else {
+      setTimeout(() => {
+        waitMap();
+      }, 100);
+    }
+  };
+
+  waitMap();
+
 })(window);
