@@ -1,5 +1,9 @@
 // = require decidim/map
 
+// Increase z-index for components menu otherwise map hides menu extensions
+.dropdown-pane {
+  z-index: 1000;
+}
 // Override padding in this component
 .wrapper {
   padding: 0;
