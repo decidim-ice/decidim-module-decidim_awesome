@@ -24,12 +24,12 @@
       }
     }`;
 
-  const Icon = L.DivIcon.SVGIcon.DecidimIcon;
+  const ProposalIcon = L.DivIcon.SVGIcon.DecidimIcon;
 
   const createMarker = (element, callback) => {
     // let fillColor = // TODO get color from categories;
     const marker = L.marker([element.coordinates.latitude, element.coordinates.longitude], {
-      icon: new Icon({
+      icon: new ProposalIcon({
         // fillColor: fillColor
       })
     });

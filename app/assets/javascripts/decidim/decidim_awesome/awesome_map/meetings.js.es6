@@ -35,7 +35,7 @@
       }
     }`;
 
-  const Icon = L.DivIcon.SVGIcon.extend({
+  const MeetingIcon = L.DivIcon.SVGIcon.extend({
     options: {
       fillColor: "#ef604d",
       opacity: 0
@@ -66,7 +66,7 @@
   const createMarker = (element, callback) => {
     // let fillColor = // TODO get color from categories;
     const marker = L.marker([element.coordinates.latitude, element.coordinates.longitude], {
-      icon: new Icon({
+      icon: new MeetingIcon({
         // fillColor: fillColor
       })
     });
