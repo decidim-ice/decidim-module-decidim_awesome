@@ -16,6 +16,10 @@ module Decidim
     autoload :ContentRenderes, "decidim/decidim_awesome/content_renderers"
     autoload :ContextAnalyzers, "decidim/decidim_awesome/context_analyzers"
 
+    # Default values for configuration options:
+    #   true  => always true but admins can still restrict its scope
+    #   false => default false, admins can turn it true
+    #   :disabled => false and non available, hidden from admins
     config_accessor :allow_images_in_full_editor do
       false
     end
@@ -33,6 +37,10 @@ module Decidim
     end
 
     config_accessor :allow_images_in_markdown_editor do
+      false
+    end
+
+    config_accessor :auto_save_forms do
       false
     end
   end

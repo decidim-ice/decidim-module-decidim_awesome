@@ -93,6 +93,20 @@ module Decidim::DecidimAwesome
       end
     end
 
+    context "when some config is disabled" do
+      before do
+        subject.defaults = Decidim::DecidimAwesome.config.merge(allow_images_in_full_editor: :disabled)
+        # de-memoize
+        subject.instance_variable_set :@config, nil
+      end
+
+      let!(:awesome_config) { create :awesome_config, organization: organization, var: :allow_images_in_full_editor, value: true }
+
+      it "always defaults to false" do
+        expect(subject.config[:allow_images_in_full_editor]).to eq(false)
+      end
+    end
+
     context "when there are constraints" do
       let!(:awesome_config) { create :awesome_config, organization: organization, var: :allow_images_in_full_editor, value: true }
       let!(:constraint1) { create :config_constraint, awesome_config: awesome_config, settings: settings1 }
