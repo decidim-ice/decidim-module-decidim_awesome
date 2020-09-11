@@ -156,6 +156,13 @@ SIMPLECOV=1 bundle exec rspec
 This will generate a folder named `coverage` in the project root which contains
 the code coverage report.
 
+### Localization
+
+If you would like to see this module in your own language, you can help with its
+translation at Crowdin:
+
+https://crowdin.com/translate/decidim-awesome
+
 ## License
 
 This engine is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
