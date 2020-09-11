@@ -1,0 +1,31 @@
+{
+  "name": "decidim-module-decidim_awesome",
+  "version": "0.3.0",
+  "description": "Mods and tweaks for Decidim",
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Platoniq/decidim-module-decidim_awesome.git"
+  },
+  "keywords": [
+    "decidim"
+  ],
+  "author": "ivan@platoniq.net",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/Platoniq/decidim-module-decidim_awesome/issues"
+  },
+  "homepage": "https://github.com/Platoniq/decidim-module-decidim_awesome#readme",
+  "devDependencies": {
+    "eslint": "^7.8.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0"
+  }
+}

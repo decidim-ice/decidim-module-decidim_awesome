@@ -11,6 +11,7 @@ module Decidim
         attribute :allow_images_in_proposals, Boolean
         attribute :use_markdown_editor, Boolean
         attribute :allow_images_in_markdown_editor, Boolean
+        attribute :auto_save_forms, Boolean
       end
     end
   end
