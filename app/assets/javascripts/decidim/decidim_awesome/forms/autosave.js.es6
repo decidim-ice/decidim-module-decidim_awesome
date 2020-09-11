@@ -14,12 +14,14 @@ $(() => {
   }
 
   const storeId = `awesome_autosave:${questionnaireId}`;
+  const storeCheckboxesId = `awesome_autosave:checkboxes:${questionnaireId}`;
   const $form = $('form.answer-questionnaire');
 
   if (!$form.length) {
     if(window.DecidimAwesome.questionnaire_answered) {
       // console.log("Questionnaire already answered, remove any data saved");
       window.localStorage.removeItem(storeId);
+      window.localStorage.removeItem(storeCheckboxesId);
     }
     // console.log("No forms here");
     return;
@@ -28,7 +30,11 @@ $(() => {
   const store = new FormStorage(`#${$form.attr('id')}`, {
     name: storeId,
     ignores: [
-      '[type="hidden"]',
+      // '[type="hidden"]',
+      '[name="utf8"]',
+      '[name="authenticity_token"]',
+      '[disabled]',
+      '[type="checkbox"]' // there are problems with matrix questions
     ],
   });
 
@@ -50,9 +56,26 @@ $(() => {
 
   // restore if available
   store.apply();
+  // restore checkboxes
+  try {
+    let checkboxes = JSON.parse(window.localStorage.getItem(storeCheckboxesId));
+    for(let id in checkboxes) {
+      $("#" + id).prop("checked", checkboxes[id]);
+    }
+  } catch(e){
+    console.log("No checkboxes found");
+  }
+  // fire change items
+  $form.find('input, textarea, select').change();
 
   const save = () => {
     store.save();
+    // save checkbox manually
+    let checkboxes = {};
+    $form.find('input[type="checkbox"]').each((index, el) => {
+      checkboxes[el.id] = el.checked;
+    });
+    window.localStorage.setItem(storeCheckboxesId, JSON.stringify(checkboxes));
     showMsg(window.DecidimAwesome.texts.autosaved_success);
   };
 
