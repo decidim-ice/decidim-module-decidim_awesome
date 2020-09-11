@@ -38,11 +38,17 @@ Saving the form removes the stored data.
 
 ![Auto save in forms](examples/auto-save.png)
 
-#### 3. Markdown editor for proposals
+#### 3. Images in proposals
+
+Event if you haven't activated the WYSIWYG editor (Quill) in public views (ie: proposals use a simple textarea). You can allow users to upload images in them by dragg & drop over the text area.
+
+![Proposal images](examples/proposal-images.png)
+
+#### 4. Markdown editor for proposals
 
 Allows to use markdown when creating proposals instead of a bare textarea.
 
-#### 4. Admin scope configuration
+#### 5. Admin scope configuration
 
 All tweaks can be configured and scoped to a specific participatory space, a type of participatory space, a type of component or a specific component.
 
@@ -51,7 +57,7 @@ Many scopes can be defined for every tweak.
 ![Admin tweaks for editors](examples/admin-editors.png)
 
 
-#### 5. To be continued...
+#### 6. To be continued...
 
 Some things in the road-map: 
 
