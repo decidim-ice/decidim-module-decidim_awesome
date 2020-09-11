@@ -17,8 +17,12 @@ $(() => {
   const $form = $('form.answer-questionnaire');
 
   if (!$form.length) {
-    // console.log("No form, remove any data saved");
-    window.localStorage.removeItem(storeId);
+    if(window.DecidimAwesome.questionnaire_answered) {
+      // console.log("Questionnaire already answered, remove any data saved");
+      window.localStorage.removeItem(storeId);
+    }
+    // console.log("No forms here");
+    return;
   }
 
   const store = new FormStorage(`#${$form.attr('id')}`, {
