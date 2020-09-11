@@ -9,8 +9,12 @@ module Decidim
         # returns only non :disabled vars in config
         def filter_enabled(vars)
           vars.filter do |var|
-            DecidimAwesome.config[var] != :disabled
+            config_enabled? var
           end
+        end
+
+        def config_enabled?(var)
+          DecidimAwesome.config[var] != :disabled
         end
 
         def participatory_space_manifests

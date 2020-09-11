@@ -74,15 +74,17 @@ In order to personalize default values, create an initializer such as:
 # Change some variables defaults
 Decidim::DecidimAwesome.configure do |config|
   # Enabled by default to all scopes, admins can still limit it's scope
-  allow_images_in_full_editor = true
+  config.allow_images_in_full_editor = true
 
   # Disabled by default to all scopes, admins can enable it and limit it's scope
-  allow_images_in_small_editor = false
+  config.allow_images_in_small_editor = false
 
   # De-activated, admins don't even see it as an option
-  use_markdown_editor = :disabled
+  config.use_markdown_editor = :disabled
 end
 ```
+
+For a complete list of options take a look at the [module defaults](lib/decidim/decidim_awesome.rb).
 
 ## Developing
 

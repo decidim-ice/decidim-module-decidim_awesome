@@ -1,11 +1,12 @@
 <div class="row column decidim_awesome-form">
   <h2 class="card-title"><%= t("experimental", scope: "decidim.decidim_awesome.admin.config") %></h2>
 
-  <p class="text-info"><%= t("rich_text_editor_in_public_views", scope: "decidim.decidim_awesome.admin.config") if current_organization.rich_text_editor_in_public_views %></p>
+  <% if config_enabled? :allow_images_in_proposals %>
+    <p class="text-info"><%= t("rich_text_editor_in_public_views", scope: "decidim.decidim_awesome.admin.config") if current_organization.rich_text_editor_in_public_views %></p>
 
-  <%= form.check_box :allow_images_in_proposals %>
-  <p class="help-text"><%= t("help.allow_images_in_proposals", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+    <%= form.check_box :allow_images_in_proposals %>
+    <p class="help-text"><%= t("help.allow_images_in_proposals", scope: "decidim.decidim_awesome.admin.config.form") %></p>
 
-  <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :allow_images_in_proposals, constraints: constraints_for(:allow_images_in_proposals) }) %>
-
+    <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :allow_images_in_proposals, constraints: constraints_for(:allow_images_in_proposals) }) %>
+  <% end %>
 </div>
