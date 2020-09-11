@@ -38,8 +38,8 @@ $(() => {
     ],
   });
 
-  const showMsg = (msg, error = false) => {
-    const time = error ? 5000 : 700;
+  const showMsg = (msg, error = false, default_time = 700) => {
+    const time = error ? 5000 : default_time;
     const $div = $(`<div class="awesome_autosave-notice${error ? ' error' : ''}">${msg}</div>`)
       .appendTo($form);
     setTimeout(() => {
@@ -52,6 +52,10 @@ $(() => {
   if (!window.localStorage) {
     showMsg(window.DecidimAwesome.texts.autosaved_error, true);
     return;
+  }
+
+  if(window.localStorage.getItem(storeId)) {
+    showMsg(window.DecidimAwesome.texts.autosaved_retrieved, false, 5000);
   }
 
   // restore if available
