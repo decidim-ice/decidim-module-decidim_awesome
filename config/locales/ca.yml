@@ -3,43 +3,45 @@ ca:
     attributes:
       config:
         allow_images_in_full_editor: Permet imatge a l'editor HTML complet
-        allow_images_in_markdown_editor: Allow images in the markdown editor
-        allow_images_in_proposals: Allow images in the proposals editor
+        allow_images_in_markdown_editor: Permet imatges a l'editor markdown
+        allow_images_in_proposals: Permet imatges a l'editor de propostes
         allow_images_in_small_editor: Permet imatge a l'editor HTML reduït
-        use_markdown_editor: Use a Markdown editor instead of the HTML editor
+        auto_save_forms: Auto save forms in local storage
+        use_markdown_editor: Fes servir l'editor Markdown en comptes de l'editor HTML
       constraint:
-        component_id: or specifically in
-        component_manifest: Only in components of type
-        participatory_space_manifest: Apply to participatory spaces of type
-        participatory_space_slug: Only in
+        component_id: o específicament a
+        component_manifest: Només en components de tipus
+        participatory_space_manifest: Aplica-ho a espais participatius de tipus
+        participatory_space_slug: Només a
   decidim:
     admin:
       menu:
-        decidim_awesome: Decidim awesome
+        decidim_awesome: Decidim Awesome
     decidim_awesome:
       admin:
         checks:
           index:
-            decidim-admin: From Admin module
-            decidim-core: From Core module
-            decidim-proposals: From Proposals module
-            decidim_version: Decidim version %{version}
-            title: System compatibility checks
+            decidim-admin: Del mòdul Admin
+            decidim-core: Del mòdul Core
+            decidim-proposals: Del mòdul Proposals
+            decidim_version: Versió de Decidim %{version}
+            title: Anàlisi de compatibilitat amb el sistema
         config:
           constraints:
-            add_condition: Add case
-            always: Always
-            delete: Delete
-            edit: Edit
-            title: 'Applicable only in these cases:'
-          experimental: Experimental options
+            add_condition: Afegeix una restricció
+            always: Sempre
+            delete: Esborra
+            edit: Edita
+            title: 'S''aplica només en aquests casos:'
+          experimental: Opcions experimentals
           form:
             help:
-              allow_images_in_full_editor: This will add an image uploader icon in all the editors WYSIWYG with the full toolbar enabled.
-              allow_images_in_markdown_editor: This will allow markdown editor to upload images by copy & paste or drag & drop.
-              allow_images_in_proposals: This will allow to upload images in the proposals editor, available to any user
-              allow_images_in_small_editor: This will add an image uploader icon in all the editors WYSIWYG with minimal options in the toolbar enabled.
-              drag_and_drop_supported: When uploading images, Drag & Drop is supported. Images will be uploaded to the server and inserted as external resources (it doesn't use base64 inline encoding).
+              allow_images_in_full_editor: Això afegirà un botó per pujar imatges a l'editor HTML complet.
+              allow_images_in_markdown_editor: Això permetrà a l'editor markdown pujar imatges "arrastrant i deixant anar".
+              allow_images_in_proposals: Això permetrà pujar imatges a l'editor de propostes, disponible per qualsevol usuari.
+              allow_images_in_small_editor: Això afegirà un botó per pujar imatges a l'editor HTML mínim.
+              auto_save_forms: This will use LocalStorage to automatically save data introduced by users in surveys and other forms while they are filling it. Data will be restored in a future visit with the same browser in case the form is not submitted. If the form is submitted, data will be removed. If users remove their LocalStorage data, data won't be restored either.
+              drag_and_drop_supported: Quan es pugin imatges, es pot fer a través del mètode de "arrastrar i deixar anar". Les imatges seran pujades al servidor i insertades com recursos externs (no es fa servir codificació en línia base64).
               use_markdown_editor: This will substitute the Quill WYSIWYG editor, use a Markdown editor in the admin side and a frontend processor to render the text (text in database will be saved as markdown text)
           rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants" is enabled, this option won''t apply. Use the editors hacks instead to enable images in proposals.'
           show:
@@ -73,6 +75,7 @@ ca:
           checks: System compatibility
           editors: Editor hacks
           proposals: Proposals hacks
+          surveys: Surveys & forms
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
       editor_images:
         create:
@@ -86,4 +89,6 @@ ca:
       decidim_awesome:
         awesome_config:
           js:
+            autosaved_error: LocalStorage is not supported in your browser, form cannot be saved automatically.
+            autosaved_success: Data saved in local storage
             drag_and_drop_image: Add images by dragging & dropping or pasting them.
