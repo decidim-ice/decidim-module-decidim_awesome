@@ -1,0 +1,16 @@
+.awesome_autosave-notice {
+  background-color: rgba(var(--success-rgb), 0.8);
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 2em;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  border: 1px solid var(--success);
+  font-weight: 600;
+  color: white;
+  z-index: 1000;
+  &.error {
+    background-color: rgba(var(--alert-rgb), 0.8);
+  }
+}
