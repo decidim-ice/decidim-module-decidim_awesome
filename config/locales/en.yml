@@ -105,6 +105,7 @@ en:
       decidim_awesome:
         awesome_config:
           js:
-            drag_and_drop_image: Add images by dragging & dropping or pasting them.
+            autosaved_error: LocalStorage is not supported in your browser, form cannot
+              be saved automatically.
             autosaved_success: Data saved in local storage
-            autosaved_error: LocalStorage is not supported in your browser, form cannot be saved automatically. 
+            drag_and_drop_image: Add images by dragging & dropping or pasting them.
