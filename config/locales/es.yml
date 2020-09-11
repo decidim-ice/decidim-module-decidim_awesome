@@ -90,5 +90,6 @@ es:
         awesome_config:
           js:
             autosaved_error: LocalStorage is not supported in your browser, form cannot be saved automatically.
+            autosaved_retrieved: Data for this form has been recovered from a previous session
             autosaved_success: Data saved in local storage
             drag_and_drop_image: Add images by dragging & dropping or pasting them.
