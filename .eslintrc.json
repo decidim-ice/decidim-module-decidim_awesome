@@ -13,7 +13,10 @@
     "globals": {
         "$": false,
         "jQuery": false,
-        "FormStorage": false
+        "FormStorage": false,
+        "Quill": false,
+        "InscrybMDE": false,
+        "inlineAttachment": false
     },
     "rules": {
     }

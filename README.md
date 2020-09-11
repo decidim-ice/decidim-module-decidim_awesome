@@ -26,11 +26,32 @@ Modifies the WYSIWYG editor in Decidim by adding the possibility to insert image
 
 This feature allows you use images in newsletters as well.
 
-#### 2. Markdown editor for proposals
+![Images in Quill Editor](examples/quill-images.png)
+
+#### 2. Auto-save for surveys and forms
+
+With this feature admins can activate (globally or scoped) an auto-save feature for any form in Decidim.
+
+It works purely in the client side by using LocalStorage capabilities of the browser. Data is store every time any field changes and retrieved automatically if the same user with the same browser returns to it in the future.
+
+Saving the form removes the stored data.
+
+![Auto save in forms](examples/auto-save.png)
+
+#### 3. Markdown editor for proposals
 
 Allows to use markdown when creating proposals instead of a bare textarea.
 
-#### 3. To be continued...
+#### 4. Admin scope configuration
+
+All tweaks can be configured and scoped to a specific participatory space, a type of participatory space, a type of component or a specific component.
+
+Many scopes can be defined for every tweak.
+
+![Admin tweaks for editors](examples/admin-editors.png)
+
+
+#### 5. To be continued...
 
 Some things in the road-map: 
 
@@ -38,11 +59,6 @@ Some things in the road-map:
 1. Direct export of surveys in PDF
 1. Allow to create surveys where the responding user is known
 1. Propose something! or even better send a PR!
-
-
-### Screenshots:
-
-![Admin tweaks for editors](examples/admin-editors.png)
 
 
 ## Installation
