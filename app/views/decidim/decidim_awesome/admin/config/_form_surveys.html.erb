@@ -1,0 +1,9 @@
+<div class="row column decidim_awesome-form">
+  <% if config_enabled? :auto_save_forms %>
+
+    <%= form.check_box :auto_save_forms %>
+    <p class="help-text"><%= t("help.auto_save_forms", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+
+    <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :auto_save_forms, constraints: constraints_for(:auto_save_forms) }) %>
+  <% end %>
+</div>

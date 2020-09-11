@@ -16,6 +16,11 @@ module Decidim
       end
 
       attr_reader :context
+      attr_writer :defaults
+
+      def defaults
+        @defaults || Decidim::DecidimAwesome.config
+      end
 
       def context=(context)
         @config = nil
@@ -48,7 +53,7 @@ module Decidim
       # config processed for the organization config, without context
       def organization_config
         @organization_config ||= unfiltered_config.map do |key, value|
-          value = Decidim::DecidimAwesome.config[key] unless enabled_for_organization? key
+          value = defaults[key] unless enabled_for_organization? key
           [key, value]
         end.to_h
       end
@@ -56,8 +61,12 @@ module Decidim
       # config normalized according default values, without context, without organization config
       def unfiltered_config
         valid = @vars.map { |v| [v.var.to_sym, v.value] }.to_h
-        Decidim::DecidimAwesome.config.map do |key, val|
-          [key, valid[key].presence || val]
+        defaults.map do |key, val|
+          if val == :disabled
+            [key, false]
+          else
+            [key, valid[key].presence || val]
+          end
         end.to_h
       end
 
@@ -79,8 +88,12 @@ module Decidim
         # filter vars compliant with current context
         valid = @vars.filter { |item| enabled_for_organization?(item.var) && valid_in_context?(item.constraints) }
                      .map { |v| [v.var.to_sym, v.value] }.to_h
-        Decidim::DecidimAwesome.config.map do |key, val|
-          [key, valid[key].presence || val]
+        defaults.map do |key, val|
+          if val == :disabled
+            [key, false]
+          else
+            [key, valid[key].presence || val]
+          end
         end.to_h
       end
 

@@ -7,6 +7,7 @@ en:
         allow_images_in_markdown_editor: Allow images in the markdown editor
         allow_images_in_proposals: Allow images in the proposals editor
         allow_images_in_small_editor: Allow images in the minimal HTML editor
+        auto_save_forms: Auto save forms in local storage
         use_markdown_editor: Use a Markdown editor instead of the HTML editor
       constraint:
         component_id: or specifically in
@@ -44,6 +45,12 @@ en:
                 editor, available to any user
               allow_images_in_small_editor: This will add an image uploader icon in
                 all the editors WYSIWYG with minimal options in the toolbar enabled.
+              auto_save_forms: This will use LocalStorage to automatically save data
+                introduced by users in surveys and other forms while they are filling
+                it. Data will be restored in a future visit with the same browser
+                in case the form is not submitted. If the form is submitted, data
+                will be removed. If users remove their LocalStorage data, data won't
+                be restored either.
               drag_and_drop_supported: When uploading images, Drag & Drop is supported.
                 Images will be uploaded to the server and inserted as external resources
                 (it doesn't use base64 inline encoding).
@@ -84,6 +91,7 @@ en:
           checks: System compatibility
           editors: Editor hacks
           proposals: Proposals hacks
+          surveys: Surveys & forms
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
       editor_images:
         create:
@@ -97,4 +105,7 @@ en:
       decidim_awesome:
         awesome_config:
           js:
+            autosaved_error: LocalStorage is not supported in your browser, form cannot
+              be saved automatically.
+            autosaved_success: Data saved in local storage
             drag_and_drop_image: Add images by dragging & dropping or pasting them.
