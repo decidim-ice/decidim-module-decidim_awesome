@@ -7,10 +7,11 @@ module Decidim
       class ConfigController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
         include ConfigConstraintsHelpers
+        helper ConfigConstraintsHelpers
 
         layout "decidim/admin/decidim_awesome"
 
-        helper_method :constraints_for, :translate_constraint_value
+        helper_method :constraints_for
 
         def show
           @form = form(ConfigForm).from_params(organization_awesome_config)

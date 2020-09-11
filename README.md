@@ -16,12 +16,15 @@ All tweaks are provided in a optional fashion with granular permissions that let
 DecidimAwesome is a module that hacks Decidim in order to provide more features or improve some aspects of it.
 
 It generates and admin module that allows to choose what hacks to apply.
+Each hack can be scoped to one or more specific participatory spaces or components.
 
 ### Tweaks:
 
-#### 1. Image suport for the Quill editor
+#### 1. Image support for the Quill editor
 
 Modifies the WYSIWYG editor in Decidim by adding the possibility to insert images. When uploading images, Drag & Drop is supported. Images will be uploaded to the server and inserted as external resources (it doesn't use base64 inline encoding).
+
+This feature allows you use images in newsletters as well.
 
 #### 2. Markdown editor for proposals
 
@@ -29,7 +32,7 @@ Allows to use markdown when creating proposals instead of a bare textarea.
 
 #### 3. To be continued...
 
-Some things in the roadmap: 
+Some things in the road-map: 
 
 1. Improve the conversation in comments by allowing images
 1. Direct export of surveys in PDF
@@ -58,7 +61,30 @@ bundle exec rails decidim_decidim_awesome:install:migrations
 bundle exec rails db:migrate
 ```
 
-### Developing
+## Configuration
+
+Each tweak can be enabled or disabled by default. It also can be deactivated so 
+admins do not even see it.
+
+In order to personalize default values, create an initializer such as:
+
+```ruby
+# config/initializers/awesome_defaults.rb
+
+# Change some variables defaults
+Decidim::DecidimAwesome.configure do |config|
+  # Enabled by default to all scopes, admins can still limit it's scope
+  allow_images_in_full_editor = true
+
+  # Disabled by default to all scopes, admins can enable it and limit it's scope
+  allow_images_in_small_editor = false
+
+  # De-activated, admins don't even see it as an option
+  use_markdown_editor = :disabled
+end
+```
+
+## Developing
 
 To start contributing to this project, first:
 
@@ -93,7 +119,7 @@ can add the environment variables to the root directory of the project in a file
 named `.rbenv-vars`. If these are defined for the environment, you can omit
 defining these in the commands shown above.
 
-#### Code Styling
+### Code Styling
 
 Please follow the code styling defined by the different linters that ensure we
 are all talking with the same language collaborating on the same project. This

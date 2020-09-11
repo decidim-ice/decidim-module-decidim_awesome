@@ -6,6 +6,13 @@ module Decidim
       module ConfigConstraintsHelpers
         include Decidim::TranslatableAttributes
 
+        # returns only non :disabled vars in config
+        def filter_enabled(vars)
+          vars.filter do |var|
+            DecidimAwesome.config[var] != :disabled
+          end
+        end
+
         def participatory_space_manifests
           manifests = { system: I18n.t("decidim.decidim_awesome.admin.config.system") }
           Decidim.participatory_space_manifests.pluck(:name).each do |name|
