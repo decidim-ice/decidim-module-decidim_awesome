@@ -91,12 +91,12 @@
         let layer = layers[cat.id];
 
         item.marker.setIcon(newIcon);
-        if(layer) {
-          console.log("TODO: change label color")
-        } else {
+        // add CSS var
+        document.documentElement.style.setProperty(`--awesome_map-category_${cat.id}`, cat.color);
+        if(!layer) {
           // add control layer
           layer = {
-            label: cat.name,
+            label: `<i style="background-color:var(--awesome_map-category_${cat.id})"></i> ${cat.name}`,
             group: L.featureGroup.subGroup(cluster)
           };
           control.addOverlay(layer.group, layer.label);

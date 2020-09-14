@@ -11,15 +11,42 @@
 
 .leaflet-control-layers-list {
   hr {
+    margin: 0.5em 0;
+  }
+  
+  b {
+    margin: 1em 0;
+    display: block;
+  }
+  
+  label {
+    line-height: 1;
+    font-size: 0.8rem;
     margin: 0 0 0.5em 0;
+
+    i {
+      display: inline-block;
+      width: 0.8rem;
+      height: 0.8rem;
+      background-color: var(--primary);
+    }
+  }
+
+  input {
+    margin: 0;
   }
 }
+
 #map {
   height: 700px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .leaflet-marker-icon.svg-icon svg path {
+    filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
+  }
 }
 
 .map-legend {
