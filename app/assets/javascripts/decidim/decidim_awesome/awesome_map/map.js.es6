@@ -18,15 +18,15 @@
   // TODO: i18n!!
   const layers = { 
     meetings: {
-      label: "Meetings",
+      label: window.DecidimAwesome.texts.meetings,
       group: L.featureGroup.subGroup(cluster)
     },
     proposals: {
-      label: "Proposals",
+      label: window.DecidimAwesome.texts.proposals,
       group: L.featureGroup.subGroup(cluster)
     },
     amendments: {
-      label: "Amendments<hr><b>Categories</b>",
+      label: `${window.DecidimAwesome.texts.amendments}<hr><b>${window.DecidimAwesome.texts.categories}</b>`,
       group: L.featureGroup.subGroup(cluster)
     }
   };

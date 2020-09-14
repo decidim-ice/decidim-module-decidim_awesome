@@ -1,7 +1,8 @@
 class Category {
   constructor(category, color = null) {
-    this.id = category.id
-    this.name = category.name.translation;
+    this.id = category.id;
+    this.lang = document.querySelector('html').getAttribute('lang');
+    this.name = this.findTranslation(category.name.translations);
     this._color = color || "#ef604d";
   }
 
@@ -11,6 +12,18 @@ class Category {
 
   set color(c) {
     this._color = c;
+  }
+
+  findTranslation(translations) {
+    let text;
+    translations.forEach((t) => {
+      if(t.text) {
+        if(!text || t.locale == this.lang) {
+          text = t.text
+        }
+      }
+    });
+    return text;
   }
 }
 

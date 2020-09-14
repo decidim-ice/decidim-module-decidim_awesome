@@ -127,3 +127,7 @@ en:
               session
             autosaved_success: Data saved in local storage
             drag_and_drop_image: Add images by dragging & dropping or pasting them.
+            proposals: Proposals
+            amendments: Amendments
+            categories: Categories
+            meetings: Meetings

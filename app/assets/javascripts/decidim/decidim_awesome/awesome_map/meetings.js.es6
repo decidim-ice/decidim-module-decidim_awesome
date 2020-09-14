@@ -37,7 +37,10 @@
                 category {
                   id
                   name {
-                    translation(locale: $lang)
+                    translations {
+                      text
+                      locale
+                    }
                   }
                 }
               }
@@ -90,7 +93,7 @@
     
     const variables = {
       "id": component.id,
-      "lang": document.querySelector('html').getAttribute('lang') ,
+      "lang": document.querySelector('html').getAttribute('lang'),
       "after": after
     };
     const api = new ApiFetcher(query, variables);

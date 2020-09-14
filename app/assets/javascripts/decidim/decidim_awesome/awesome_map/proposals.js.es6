@@ -3,7 +3,7 @@
 
 ((exports) => {
   const { Categories } = exports.AwesomeMap;
-  const query = `query ($id: ID!, $lang: String!, $after: String!) {
+  const query = `query ($id: ID!, $after: String!) {
     component(id: $id) {
         id
         __typename
@@ -31,7 +31,10 @@
                 category {
                   id
                   name {
-                    translation(locale: $lang)
+                    translations {
+                      text
+                      locale
+                    }
                   }
                 }
               }
@@ -56,8 +59,7 @@
   const fetchProposals = (component, after, callback) => {
     const variables = {
       "id": component.id,
-      "after": after,
-      "lang": document.querySelector('html').getAttribute('lang')
+      "after": after
     };
     const api = new ApiFetcher(query, variables);
     api.fetchAll((result) => {
