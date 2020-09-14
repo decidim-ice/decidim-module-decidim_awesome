@@ -19,10 +19,11 @@ class CategoryList {
     this._list = {}
     this._defaultColor = null;
     this._onRebuild = () => {}
+    this._rebuildID = null;
   }
 
   get list() {
-    return this._list;
+    return Object.entries(this._list);
   }
 
   set defaultColor(color) {
@@ -45,12 +46,20 @@ class CategoryList {
     return this._list[category.id];    
   }
 
+  // Rebuild defers execution to the next cycle in case another
+  // call tries to rebuild colors. The later call will be executed
   rebuildColors() {
-    const list = Object.entries(this._list);
-    list.forEach(([, cat], index) => {
-      cat.color = this.rainbow(list.length, index);
+    if(this._rebuildID) {
+      clearTimeout(this._rebuildID);
+    }
+    this._rebuildID = setTimeout(() => {
+      let list = this.list;
+      list.forEach(([, cat], index) => {
+        cat.color = this.rainbow(list.length, index);
+      });
+      
+      this._onRebuild();
     });
-    this._onRebuild();
   }
 
   rainbow(numOfSteps, step) {

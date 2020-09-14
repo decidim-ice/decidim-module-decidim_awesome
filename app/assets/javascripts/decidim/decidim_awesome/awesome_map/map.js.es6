@@ -14,6 +14,7 @@
 
   const cluster = L.markerClusterGroup();
   
+  // TODO: i18n!!
   const layers = { 
     meetings: {
       label: "Meetings",
@@ -85,7 +86,24 @@
     // rebuild markers when new categories to ensure vibrant colors
     Categories.onRebuild = () => {
       allMarkers.forEach((item) => {
-        item.marker._icon.firstChild.firstChild.style.fill = Categories.get(item.element.category).color
+        let cat = Categories.get(item.element.category);
+        let newIcon = new item.marker.options.icon.constructor({fillColor: cat.color});
+        let layer = layers[cat.id];
+
+        item.marker.setIcon(newIcon);
+        if(layer) {
+          console.log("TODO: change label color")
+        } else {
+          // add control layer
+          layer = {
+            label: cat.name,
+            group: L.featureGroup.subGroup(cluster)
+          };
+          control.addOverlay(layer.group, layer.label);
+          layer.group.addTo(map);
+          layers[cat.id] = layer;
+        }
+        item.marker.addTo(layer.group);
       });
     };
 
