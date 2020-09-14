@@ -75,6 +75,9 @@
 
   const createMarker = (element, callback) => {
     let fillColor = exports.AwesomeMap.categories[element.category.name.translation];
+    if (fillColor === null || fillColor === undefined)
+      fillColor = getComputedStyle(document.documentElement).getPropertyValue('--primary');
+
     const marker = L.marker([element.coordinates.latitude, element.coordinates.longitude], {
       icon: new MeetingIcon({
         fillColor: fillColor

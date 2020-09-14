@@ -38,6 +38,9 @@
 
   const createMarker = (element, callback) => {
     let fillColor = exports.AwesomeMap.categories[element.category.id.name];
+    if (fillColor === null || fillColor === undefined)
+      fillColor = getComputedStyle(document.documentElement).getPropertyValue('--primary');
+
     const marker = L.marker([element.coordinates.latitude, element.coordinates.longitude], {
       icon: new ProposalIcon({
         fillColor: fillColor
