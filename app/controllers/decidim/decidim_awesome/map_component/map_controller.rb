@@ -7,6 +7,10 @@ module Decidim
         helper Decidim::DecidimAwesome::MapHelper
         helper_method :map_components
 
+        def show
+          render :error if Decidim.geocoder.blank?
+        end
+
         private
 
         def map_components

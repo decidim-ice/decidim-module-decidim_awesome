@@ -111,6 +111,8 @@ en:
           show:
             view_meeting: View meeting
             view_proposal: View proposal
+          error: 
+            unavailable: The map is unavailable. Please configure geocoding to enable this component.
   layouts:
     decidim:
       admin:

@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 class ApiFetcher {
 
   constructor(query, variables) {

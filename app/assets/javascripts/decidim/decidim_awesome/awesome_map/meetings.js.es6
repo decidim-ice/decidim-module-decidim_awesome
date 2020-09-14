@@ -1,6 +1,8 @@
 // = require decidim/decidim_awesome/awesome_map/api_fetcher
+// = require decidim/decidim_awesome/awesome_map/categories
 
 ((exports) => {
+  const { Categories } = exports.AwesomeMap;
   const query = `query ($id: ID!, $lang: String!, $after: String!) {
     component(id: $id) {
         id
@@ -74,13 +76,9 @@
   });
 
   const createMarker = (element, callback) => {
-    let fillColor = exports.AwesomeMap.categories[element.category.name.translation];
-    if (fillColor === null || fillColor === undefined)
-      fillColor = getComputedStyle(document.documentElement).getPropertyValue('--primary');
-
     const marker = L.marker([element.coordinates.latitude, element.coordinates.longitude], {
       icon: new MeetingIcon({
-        fillColor: fillColor
+        fillColor: Categories.get(element.category).color
       })
     });
 
@@ -97,15 +95,11 @@
     const api = new ApiFetcher(query, variables);
     api.fetchAll((result) => {
       if (result.component.meetings.pageInfo.hasNextPage) {
-        fetchProposals(component, result.component.meetings.pageInfo.endCursor, callback);
+        fetchMeetings(component, result.component.meetings.pageInfo.endCursor, callback);
       }
       result.component.meetings.edges.forEach((element) => {
         if(element.node.coordinates) {
           element.node.link = component.url + '/meetings/' + element.node.id;
-          if (exports.AwesomeMap.categories[element.node.category.name.translation] === undefined) {
-            var o = Math.round, r = Math.random, s = 255;
-            exports.AwesomeMap.categories[element.node.category.name.translation] = 'rgb(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ')';
-          }
           createMarker(element.node, callback);
         }
       })
