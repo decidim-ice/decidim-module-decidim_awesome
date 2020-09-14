@@ -3,7 +3,7 @@
 
 ((exports) => {
   const { Categories } = exports.AwesomeMap;
-  const query = `query ($id: ID!, $lang: String!, $after: String!) {
+  const query = `query ($id: ID!, $after: String!) {
     component(id: $id) {
         id
         __typename
@@ -17,18 +17,30 @@
               node {
                 id
                 title {
-                  translation (locale: $lang)
+                  translations {
+                    text
+                    locale
+                  }
                 }
                 description {
-                  translation (locale: $lang)
+                  translations {
+                    text
+                    locale
+                  }
                 }
                 startTime
                 location {
-                  translation (locale: $lang)
+                  translations {
+                    text
+                    locale
+                  }
                 }
                 address
                 locationHints {
-                  translation (locale: $lang)
+                  translations {
+                    text
+                    locale
+                  }
                 }
                 coordinates {
                   latitude
@@ -86,6 +98,10 @@
       })
     });
 
+    element.title.translation = ApiFetcher.findTranslation(element.title.translations);
+    element.description.translation = ApiFetcher.findTranslation(element.description.translations);
+    element.location.translation = ApiFetcher.findTranslation(element.location.translations);
+    element.locationHints.translation = ApiFetcher.findTranslation(element.locationHints.translations);
     callback(element, marker);
   };
 
@@ -93,7 +109,6 @@
     
     const variables = {
       "id": component.id,
-      "lang": document.querySelector('html').getAttribute('lang'),
       "after": after
     };
     const api = new ApiFetcher(query, variables);
