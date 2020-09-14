@@ -32,6 +32,12 @@
                   latitude
                   longitude
                 }
+                category {
+                  id
+                  name {
+                    translation(locale: $lang)
+                  }
+                }
               }
             }
           }
@@ -68,10 +74,13 @@
   });
 
   const createMarker = (element, callback) => {
-    // let fillColor = // TODO get color from categories;
+    let fillColor = exports.AwesomeMap.categories[element.category.name.translation];
+    if (fillColor === null || fillColor === undefined)
+      fillColor = getComputedStyle(document.documentElement).getPropertyValue('--primary');
+
     const marker = L.marker([element.coordinates.latitude, element.coordinates.longitude], {
       icon: new MeetingIcon({
-        // fillColor: fillColor
+        fillColor: fillColor
       })
     });
 
@@ -81,7 +90,7 @@
   const fetchMeetings = (component, after, callback) => {
     
     const variables = {
-      "id": component,
+      "id": component.id,
       "lang": document.querySelector('html').getAttribute('lang') ,
       "after": after
     };
@@ -92,6 +101,11 @@
       }
       result.component.meetings.edges.forEach((element) => {
         if(element.node.coordinates) {
+          element.node.link = component.url + '/meetings/' + element.node.id;
+          if (exports.AwesomeMap.categories[element.node.category.name.translation] === undefined) {
+            var o = Math.round, r = Math.random, s = 255;
+            exports.AwesomeMap.categories[element.node.category.name.translation] = 'rgb(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ')';
+          }
           createMarker(element.node, callback);
         }
       })
