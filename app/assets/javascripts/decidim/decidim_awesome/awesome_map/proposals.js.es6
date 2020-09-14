@@ -23,6 +23,11 @@
                   latitude
                   longitude
                 }
+                amendments {
+                  emendation {
+                    id
+                  }
+                }
                 category {
                   id
                   name {

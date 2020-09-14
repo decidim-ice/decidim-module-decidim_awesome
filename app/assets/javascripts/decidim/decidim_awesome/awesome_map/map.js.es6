@@ -13,7 +13,8 @@
   const popupProposalTemplateId = "marker-proposal-popup";
 
   const cluster = L.markerClusterGroup();
-  
+  const amendments = [];
+
   // TODO: i18n!!
   const layers = { 
     meetings: {
@@ -21,7 +22,11 @@
       group: L.featureGroup.subGroup(cluster)
     },
     proposals: {
-      label: "Proposals<hr><b>Categories</b>",
+      label: "Proposals",
+      group: L.featureGroup.subGroup(cluster)
+    },
+    amendments: {
+      label: "Amendments<hr><b>Categories</b>",
       group: L.featureGroup.subGroup(cluster)
     }
   };
@@ -55,6 +60,13 @@
       component: component,
       element: element
     });
+
+    // Check if it has amendments, add it to a list
+    if(element.amendments && element.amendments.length) {
+      element.amendments.forEach((amendment) => {
+        amendments.push(amendment.emendation.id);
+      });
+    }
   };
 
   const loadElements = (map) => {
@@ -62,11 +74,13 @@
     const control = L.control.layers(null, null, {position: 'topleft', collapsed: false});
     control.addOverlay(layers.meetings.group, layers.meetings.label);
     control.addOverlay(layers.proposals.group, layers.proposals.label);
+    control.addOverlay(layers.amendments.group, layers.amendments.label);
     control.addTo(map);
 
     cluster.addTo(map);
     layers.meetings.group.addTo(map);
     layers.proposals.group.addTo(map);
+    layers.amendments.group.addTo(map);
 
     // Load markers
     components.forEach((component) => {  
@@ -94,7 +108,7 @@
         // add CSS var
         document.documentElement.style.setProperty(`--awesome_map-category_${cat.id}`, cat.color);
         if(!layer) {
-          // add control layer
+          // add control layer for this category
           layer = {
             label: `<i style="background-color:var(--awesome_map-category_${cat.id})"></i> ${cat.name}`,
             group: L.featureGroup.subGroup(cluster)
@@ -103,7 +117,12 @@
           layer.group.addTo(map);
           layers[cat.id] = layer;
         }
+        // add marker to its category
         item.marker.addTo(layer.group);
+        // add marker to amendments layers if it's an amendment
+        if(amendments.find((a) => a == item.element.id)) {
+          item.marker.addTo(layers.amendments.group);
+        }
       });
     };
 
