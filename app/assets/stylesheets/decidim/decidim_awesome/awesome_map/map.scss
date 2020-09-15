@@ -1,4 +1,5 @@
 // = require decidim/map
+@import "leaflet";
 
 // Increase z-index for components menu otherwise map hides menu extensions
 .dropdown-pane{
