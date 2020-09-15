@@ -6,7 +6,7 @@
 // = require_self
 
 ((exports) => {
-  const { fetchProposals, fetchMeetings, Categories } = exports.AwesomeMap;
+  const { fetchProposals, fetchMeetings, getCategory } = exports.AwesomeMap;
 
   const components = $("#map").data("components");
   const popupMeetingTemplateId = "marker-meeting-popup";
@@ -17,7 +17,11 @@
 
   const layers = {};
 
-  const control = L.control.layers(null, null, {position: 'topleft', collapsed: false});
+  const control = L.control.layers(null, null, {
+    position: 'topleft', 
+    collapsed: false, 
+    hideSingleBase: true
+  });
   const allMarkers = [];
 
   const drawMarker = (element, marker, component) => {
@@ -32,7 +36,6 @@
       keepInView: true,
       className: "map-info"
     }).openPopup();
-
     
     allMarkers.push({
       marker: marker,
@@ -47,6 +50,15 @@
       });
     }
 
+    // Add to category layer
+    let l = layers[getCategory(element.category).id];
+    if(l) {
+      marker.addTo(l.group);
+      if(!l.added) {
+        control.addOverlay(l.group, l.label);
+        l.added = true;
+      }
+    }
     return marker;
   };
 
@@ -58,28 +70,40 @@
     // Load markers
     components.forEach((component) => {  
       if(component.type == "proposals") {
+        // add control layer for proposals
         layers.proposals = {
           label: window.DecidimAwesome.texts.proposals,
-          group: L.featureGroup.subGroup(cluster) 
+          group: L.featureGroup.subGroup(cluster)
         };
         control.addOverlay(layers.proposals.group, layers.proposals.label);
         layers.proposals.group.addTo(map);
 
+        // add control layer for amendments if any
+        if(component.amendments) {
+          layers.amendments = {
+            label: window.DecidimAwesome.texts.amendments,
+            group: L.featureGroup.subGroup(cluster)
+          }
+          control.addOverlay(layers.amendments.group, layers.amendments.label);
+          layers.amendments.group.addTo(map);
+        }
+
         fetchProposals(component, '', (element, marker) => {
           drawMarker(element, marker, component).addTo(layers.proposals.group);
-          // add amendments layer if there are some
-          if(!layers.amendments && element.amendments.length) {
-            layers.amendments = {
-              label: window.DecidimAwesome.texts.amendments,
-              group: L.featureGroup.subGroup(cluster)
+        }, () => {
+          // finall call
+          allMarkers.forEach((item) => {
+            // add marker to amendments layers if it's an amendment
+            if(amendments.find((a) => a == item.element.id)) {
+              item.marker.removeFrom(layers.proposals.group);
+              item.marker.addTo(layers.amendments.group);
             }
-            control.addOverlay(layers.amendments.group, layers.amendments.label);
-            layers.amendments.group.addTo(map);
-          }
+          });
         });
       }
       
       if(component.type == "meetings") {
+        // add control layer for meetings
         layers.meetings = {
           label: window.DecidimAwesome.texts.meetings,
           group: L.featureGroup.subGroup(cluster)
@@ -93,47 +117,26 @@
       }
     });
 
-    // place markers on categories subgroups and assign the new calculated color
-    Categories.onRebuild = () => {
-      let initiated = false,
-          lastLayer = layers[Object.keys(layers)[Object.keys(layers).length - 1]];
 
-      allMarkers.forEach((item) => {
-        if(!item.element.category) return;
-        let cat = Categories.get(item.element.category);
-        let newIcon = new item.marker.options.icon.constructor({fillColor: cat.color});
-        let layer = layers[cat.id];
-
-        item.marker.setIcon(newIcon);
-        // add CSS var
-        document.documentElement.style.setProperty(`--awesome_map-category_${cat.id}`, cat.color);
-        if(!layer) {
-          // Add Categories "title"
-          if(lastLayer && !initiated) {
-            lastLayer.label = `${lastLayer.label}<hr><b>${window.DecidimAwesome.texts.categories}</b>`;
-            control.removeLayer(lastLayer.group);
-            control.addOverlay(lastLayer.group, lastLayer.label);
-            initiated = true;
-          }
-          // add control layer for this category
-          layer = {
-            label: `<i style="background-color:var(--awesome_map-category_${cat.id})"></i> ${cat.name}`,
-            group: L.featureGroup.subGroup(cluster)
-          };
-          control.addOverlay(layer.group, layer.label);
-          layer.group.addTo(map);
-          layers[cat.id] = layer;
-        }
-        // add marker to its category
-        item.marker.addTo(layer.group);
-        // add marker to amendments layers if it's an amendment
-        if(amendments.find((a) => a == item.element.id)) {
-          item.marker.removeFrom(layers.proposals.group);
-          item.marker.addTo(layers.amendments.group);
-        }
+    // add categories control layers
+    if(window.AwesomeMap.categories.length) {
+      let lastLayer = layers[Object.keys(layers)[Object.keys(layers).length - 1]];
+      // Add Categories "title"
+      if(lastLayer) {
+        lastLayer.label = `${lastLayer.label}<hr><b>${window.DecidimAwesome.texts.categories}</b>`;
+        control.removeLayer(lastLayer.group);
+        control.addOverlay(lastLayer.group, lastLayer.label);
+      }
+      window.AwesomeMap.categories.forEach((category) => {
+        // add control layer for this category
+        layers[category.id] = {
+          label: `<i class="awesome_map-category_${category.id}"></i> ${category.name}`,
+          group: L.featureGroup.subGroup(cluster)
+        };
+        // control.addOverlay(layers[category.id].group, layers[category.id].label);
+        layers[category.id].group.addTo(map);
       });
-    };
-
+    }
   };
 
   // currentMap might not be loaded yet so let's delay a bit

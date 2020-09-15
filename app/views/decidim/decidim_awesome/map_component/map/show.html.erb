@@ -56,6 +56,16 @@
     #map {
       height: <%= current_component.settings.map_height %>px;
     }
+    <% current_categories.each do |category| %>
+      .awesome_map-category_<%= category[:id] %> {
+        background-color: <%= category[:color] %> !important;
+        margin-left: <%= category[:parent] ? "1" : "0" %>em;
+      }
+    <% end %>
   </style>
+  <script>
+    window.AwesomeMap = window.AwesomeMap || {};
+    window.AwesomeMap.categories = <%= current_categories.to_json.html_safe %>;
+  </script>
   <%= javascript_include_tag "decidim/decidim_awesome/awesome_map/map" %>
 <% end %>

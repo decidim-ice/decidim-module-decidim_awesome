@@ -2,7 +2,7 @@
 // = require decidim/decidim_awesome/awesome_map/categories
 
 ((exports) => {
-  const { Categories } = exports.AwesomeMap;
+  const { getCategory } = exports.AwesomeMap;
   const query = `query ($id: ID!, $after: String!) {
     component(id: $id) {
         id
@@ -48,12 +48,6 @@
                 }
                 category {
                   id
-                  name {
-                    translations {
-                      text
-                      locale
-                    }
-                  }
                 }
               }
             }
@@ -94,7 +88,7 @@
   const createMarker = (element, callback) => {
     const marker = L.marker([element.coordinates.latitude, element.coordinates.longitude], {
       icon: new MeetingIcon({
-        fillColor: Categories.get(element.category).color
+        fillColor: getCategory(element.category).color
       })
     });
 
@@ -105,7 +99,7 @@
     callback(element, marker);
   };
 
-  const fetchMeetings = (component, after, callback) => {
+  const fetchMeetings = (component, after, callback, finalCall = () => {}) => {
     
     const variables = {
       "id": component.id,
@@ -113,15 +107,18 @@
     };
     const api = new ApiFetcher(query, variables);
     api.fetchAll((result) => {
-      if (result.component.meetings.pageInfo.hasNextPage) {
-        fetchMeetings(component, result.component.meetings.pageInfo.endCursor, callback);
-      }
       result.component.meetings.edges.forEach((element) => {
         if(element.node.coordinates) {
           element.node.link = component.url + '/meetings/' + element.node.id;
           createMarker(element.node, callback);
         }
-      })
+      });
+
+      if (result.component.meetings.pageInfo.hasNextPage) {
+        fetchMeetings(component, result.component.meetings.pageInfo.endCursor, callback);
+      } else {
+        finalCall();
+      }
     });
   };
 

@@ -2,7 +2,7 @@
 // = require decidim/decidim_awesome/awesome_map/categories
 
 ((exports) => {
-  const { Categories } = exports.AwesomeMap;
+  const { getCategory } = exports.AwesomeMap;
   const query = `query ($id: ID!, $after: String!) {
     component(id: $id) {
         id
@@ -30,12 +30,6 @@
                 }
                 category {
                   id
-                  name {
-                    translations {
-                      text
-                      locale
-                    }
-                  }
                 }
               }
             }
@@ -46,32 +40,34 @@
 
   const ProposalIcon = L.DivIcon.SVGIcon.DecidimIcon;
 
-  const createMarker = (element, callback) => {
+  const createMarker = (element, callback, i) => {
     const marker = L.marker([element.coordinates.latitude, element.coordinates.longitude], {
       icon: new ProposalIcon({
-        fillColor: Categories.get(element.category).color
+        fillColor: getCategory(element.category).color
       })
     });
 
-    callback(element, marker);
+    callback(element, marker, i);
   };
 
-  const fetchProposals = (component, after, callback) => {
+  const fetchProposals = (component, after, callback, finalCall = () => {}) => {
     const variables = {
       "id": component.id,
       "after": after
     };
     const api = new ApiFetcher(query, variables);
     api.fetchAll((result) => {
-      if (result.component.proposals.pageInfo.hasNextPage) {
-        fetchProposals(component, result.component.proposals.pageInfo.endCursor, callback);
-      }
-      result.component.proposals.edges.forEach((element) => {
+      result.component.proposals.edges.forEach((element, i) => {
         if(element.node.coordinates) {
           element.node.link = component.url + '/proposals/' + element.node.id;
-          createMarker(element.node, callback);
+          createMarker(element.node, callback, i);
         }
-      })
+      });
+      if (result.component.proposals.pageInfo.hasNextPage) {
+        fetchProposals(component, result.component.proposals.pageInfo.endCursor, callback);
+      } else {
+        finalCall();
+      }
     });
   };
 
