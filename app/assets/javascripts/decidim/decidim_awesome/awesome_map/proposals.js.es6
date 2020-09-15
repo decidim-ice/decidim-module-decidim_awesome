@@ -58,6 +58,8 @@
     const api = new ApiFetcher(query, variables);
     api.fetchAll((result) => {
       result.component.proposals.edges.forEach((element, i) => {
+        if(!element.node) return;
+        
         if(element.node.coordinates) {
           element.node.link = component.url + '/proposals/' + element.node.id;
           createMarker(element.node, callback, i);
