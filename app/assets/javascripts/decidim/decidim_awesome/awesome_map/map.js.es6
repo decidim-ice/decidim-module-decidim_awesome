@@ -15,34 +15,14 @@
   const cluster = L.markerClusterGroup();
   const amendments = [];
 
-  // TODO: i18n!!
-  const layers = { 
-    meetings: {
-      label: window.DecidimAwesome.texts.meetings,
-      group: L.featureGroup.subGroup(cluster)
-    },
-    proposals: {
-      label: window.DecidimAwesome.texts.proposals,
-      group: L.featureGroup.subGroup(cluster)
-    },
-    amendments: {
-      label: `${window.DecidimAwesome.texts.amendments}<hr><b>${window.DecidimAwesome.texts.categories}</b>`,
-      group: L.featureGroup.subGroup(cluster)
-    }
-  };
+  const layers = {};
 
+  const control = L.control.layers(null, null, {position: 'topleft', collapsed: false});
   const allMarkers = [];
 
   const drawMarker = (element, marker, component) => {
-    let layer, tmpl, node = document.createElement("div");
-
-    if(component.type === "proposals") {
-      tmpl = popupProposalTemplateId;
-      layer = layers.proposals;
-    } else {
-      tmpl = popupMeetingTemplateId;
-      layer = layers.meetings;
-    }
+    let tmpl = component.type === "proposals" ? popupProposalTemplateId : popupMeetingTemplateId,
+        node = document.createElement("div");
 
     $.tmpl($(`#${tmpl}`), element).appendTo(node);
     
@@ -53,7 +33,6 @@
       className: "map-info"
     }).openPopup();
 
-    marker.addTo(layer.group);
     
     allMarkers.push({
       marker: marker,
@@ -67,39 +46,60 @@
         amendments.push(amendment.emendation.id);
       });
     }
+
+    return marker;
   };
 
   const loadElements = (map) => {
     // legends
-    const control = L.control.layers(null, null, {position: 'topleft', collapsed: false});
-    control.addOverlay(layers.meetings.group, layers.meetings.label);
-    control.addOverlay(layers.proposals.group, layers.proposals.label);
-    control.addOverlay(layers.amendments.group, layers.amendments.label);
     control.addTo(map);
-
     cluster.addTo(map);
-    layers.meetings.group.addTo(map);
-    layers.proposals.group.addTo(map);
-    layers.amendments.group.addTo(map);
 
     // Load markers
     components.forEach((component) => {  
       if(component.type == "proposals") {
+        layers.proposals = {
+          label: window.DecidimAwesome.texts.proposals,
+          group: L.featureGroup.subGroup(cluster) 
+        };
+        control.addOverlay(layers.proposals.group, layers.proposals.label);
+        layers.proposals.group.addTo(map);
+
         fetchProposals(component, '', (element, marker) => {
-          drawMarker(element, marker, component);
+          drawMarker(element, marker, component).addTo(layers.proposals.group);
+          // add amendments layer if there are some
+          if(!layers.amendments && element.amendments.length) {
+            layers.amendments = {
+              label: window.DecidimAwesome.texts.amendments,
+              group: L.featureGroup.subGroup(cluster)
+            }
+            control.addOverlay(layers.amendments.group, layers.amendments.label);
+            layers.amendments.group.addTo(map);
+          }
         });
       }
       
       if(component.type == "meetings") {
+        layers.meetings = {
+          label: window.DecidimAwesome.texts.meetings,
+          group: L.featureGroup.subGroup(cluster)
+        };
+        control.addOverlay(layers.meetings.group, layers.meetings.label);
+        layers.meetings.group.addTo(map);
+      
         fetchMeetings(component, '', (element, marker) => {
-          drawMarker(element, marker, component);
+          drawMarker(element, marker, component).addTo(layers.meetings.group);
         });
       }
     });
 
-    // rebuild markers when new categories to ensure vibrant colors
+    // place markers on categories subgroups and assign the new calculated color
     Categories.onRebuild = () => {
+      let initiated = false,
+          lastLayer = layers[Object.keys(layers)[Object.keys(layers).length - 1]];
+
       allMarkers.forEach((item) => {
+        if(!item.element.category) return;
         let cat = Categories.get(item.element.category);
         let newIcon = new item.marker.options.icon.constructor({fillColor: cat.color});
         let layer = layers[cat.id];
@@ -108,6 +108,13 @@
         // add CSS var
         document.documentElement.style.setProperty(`--awesome_map-category_${cat.id}`, cat.color);
         if(!layer) {
+          // Add Categories "title"
+          if(lastLayer && !initiated) {
+            lastLayer.label = `${lastLayer.label}<hr><b>${window.DecidimAwesome.texts.categories}</b>`;
+            control.removeLayer(lastLayer.group);
+            control.addOverlay(lastLayer.group, lastLayer.label);
+            initiated = true;
+          }
           // add control layer for this category
           layer = {
             label: `<i style="background-color:var(--awesome_map-category_${cat.id})"></i> ${cat.name}`,
@@ -121,13 +128,13 @@
         item.marker.addTo(layer.group);
         // add marker to amendments layers if it's an amendment
         if(amendments.find((a) => a == item.element.id)) {
+          item.marker.removeFrom(layers.proposals.group);
           item.marker.addTo(layers.amendments.group);
         }
       });
     };
 
   };
-
 
   // currentMap might not be loaded yet so let's delay a bit
   // TODO: improve this
