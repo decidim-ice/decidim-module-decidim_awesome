@@ -56,8 +56,16 @@ Many scopes can be defined for every tweak.
 
 ![Admin tweaks for editors](examples/admin-editors.png)
 
+#### 6. Awesome map component
 
-#### 6. To be continued...
+This is a component you can add in any participatory space. It retrieves all the geolocated content in that participatory space (meetings or proposals) and displays it in a big map.
+
+It also provides a simple search by category, each category is assignated to a different color.
+
+![Awesome map](examples/awesome-map.png)
+
+
+#### To be continued...
 
 Some things in the road-map: 
 

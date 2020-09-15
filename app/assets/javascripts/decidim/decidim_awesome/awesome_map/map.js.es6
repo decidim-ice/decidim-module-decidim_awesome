@@ -99,7 +99,7 @@
               item.marker.addTo(layers.amendments.group);
             }
           });
-          map.fitBounds(cluster.getBounds(), { padding: [100, 100] });
+          map.fitBounds(cluster.getBounds(), { padding: [50, 50] });
         });
       }
       
@@ -115,7 +115,7 @@
         fetchMeetings(component, '', (element, marker) => {
             drawMarker(element, marker, component).addTo(layers.meetings.group);
           }, () => {
-            map.fitBounds(cluster.getBounds(), { padding: [100, 100] });
+            map.fitBounds(cluster.getBounds(), { padding: [50, 50] });
           });
       }
     });

@@ -8,7 +8,7 @@
         id
         __typename
         ... on Meetings {
-          meetings(first: 10, after: $after) {
+          meetings(first: 50, after: $after) {
             pageInfo {
               hasNextPage
               endCursor

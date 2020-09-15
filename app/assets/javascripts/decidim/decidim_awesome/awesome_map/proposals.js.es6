@@ -8,7 +8,7 @@
         id
         __typename
         ... on Proposals {
-          proposals(first:10, after: $after){
+          proposals(first: 50, after: $after){
             pageInfo {
               hasNextPage
               endCursor
