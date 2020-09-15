@@ -40,14 +40,14 @@
 
   const ProposalIcon = L.DivIcon.SVGIcon.DecidimIcon;
 
-  const createMarker = (element, callback, i) => {
+  const createMarker = (element, callback) => {
     const marker = L.marker([element.coordinates.latitude, element.coordinates.longitude], {
       icon: new ProposalIcon({
         fillColor: getCategory(element.category).color
       })
     });
 
-    callback(element, marker, i);
+    callback(element, marker);
   };
 
   const fetchProposals = (component, after, callback, finalCall = () => {}) => {
@@ -57,16 +57,16 @@
     };
     const api = new ApiFetcher(query, variables);
     api.fetchAll((result) => {
-      result.component.proposals.edges.forEach((element, i) => {
+      result.component.proposals.edges.forEach((element) => {
         if(!element.node) return;
         
         if(element.node.coordinates) {
           element.node.link = component.url + '/proposals/' + element.node.id;
-          createMarker(element.node, callback, i);
+          createMarker(element.node, callback);
         }
       });
       if (result.component.proposals.pageInfo.hasNextPage) {
-        fetchProposals(component, result.component.proposals.pageInfo.endCursor, callback);
+        fetchProposals(component, result.component.proposals.pageInfo.endCursor, callback, finalCall);
       } else {
         finalCall();
       }

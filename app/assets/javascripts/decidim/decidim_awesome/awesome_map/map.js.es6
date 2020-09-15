@@ -92,7 +92,6 @@
             drawMarker(element, marker, component).addTo(layers.proposals.group);
           }, () => {
             // finall call
-            console.log("end proposals", cluster, allMarkers);
             map.fitBounds(cluster.getBounds(), { padding: [50, 50] });
             allMarkers.forEach((item) => {
               // add marker to amendments layers if it's an amendment
@@ -116,7 +115,6 @@
         fetchMeetings(component, '', (element, marker) => {
             drawMarker(element, marker, component).addTo(layers.meetings.group);
           }, () => {
-            console.log("end meetings", cluster, allMarkers);
             map.fitBounds(cluster.getBounds(), { padding: [50, 50] });
           });
       }

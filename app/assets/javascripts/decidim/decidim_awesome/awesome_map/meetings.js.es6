@@ -117,7 +117,7 @@
       });
 
       if (result.component.meetings.pageInfo.hasNextPage) {
-        fetchMeetings(component, result.component.meetings.pageInfo.endCursor, callback);
+        fetchMeetings(component, result.component.meetings.pageInfo.endCursor, callback, finalCall);
       } else {
         finalCall();
       }
