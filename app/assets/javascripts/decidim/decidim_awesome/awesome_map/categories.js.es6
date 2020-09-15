@@ -4,7 +4,6 @@
     let defaultCat = {
       color: getComputedStyle(document.documentElement).getPropertyValue('--primary')
     };
-    console.log("get", category)
     if(category) {
       let id = parseInt(category.id, 10);
       let cat = exports.AwesomeMap.categories.find((c) => c.id == id);

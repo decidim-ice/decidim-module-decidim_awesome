@@ -108,11 +108,12 @@ en:
           success: Image uploaded successfully!
       map_component:
         map:
+          error:
+            unavailable: The map is unavailable. Please configure geocoding to enable
+              this component.
           show:
             view_meeting: View meeting
             view_proposal: View proposal
-          error: 
-            unavailable: The map is unavailable. Please configure geocoding to enable this component.
   layouts:
     decidim:
       admin:
@@ -121,13 +122,13 @@ en:
       decidim_awesome:
         awesome_config:
           js:
+            amendments: Amendments
             autosaved_error: LocalStorage is not supported in your browser, form cannot
               be saved automatically.
             autosaved_retrieved: Data for this form has been recovered from a previous
               session
             autosaved_success: Data saved in local storage
-            drag_and_drop_image: Add images by dragging & dropping or pasting them.
-            proposals: Proposals
-            amendments: Amendments
             categories: Categories
+            drag_and_drop_image: Add images by dragging & dropping or pasting them.
             meetings: Meetings
+            proposals: Proposals

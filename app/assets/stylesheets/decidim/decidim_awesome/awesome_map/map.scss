@@ -1,57 +1,65 @@
 // = require decidim/map
 
 // Increase z-index for components menu otherwise map hides menu extensions
-.dropdown-pane {
+.dropdown-pane{
   z-index: 1000;
 }
 // Override padding in this component
-.wrapper {
+.wrapper{
   padding: 0;
-}
 
-.leaflet-control-layers-list {
-  hr {
-    margin: 0.5em 0;
+  .callout.announcement{
+    margin-top: 2rem;
   }
-  
-  b {
-    margin: 1em 0;
-    display: block;
-  }
-  
-  label {
-    line-height: 1;
-    font-size: 0.8rem;
-    margin: 0 0 0.5em 0;
 
-    i {
-      display: inline-block;
-      width: 0.8rem;
-      height: 0.8rem;
-      background-color: var(--primary);
+  .google-map{
+    margin-bottom: 0;
+  }
+
+  .leaflet-control-layers-list{
+    hr{
+      margin: .5em 0;
+    }
+
+    b{
+      margin: 1em 0;
+      display: block;
+    }
+
+    label{
+      line-height: 1;
+      font-size: .8rem;
+      margin: 0 0 .5em;
+
+      i{
+        display: inline-block;
+        width: .8rem;
+        height: .8rem;
+        background-color: var(--primary);
+      }
+    }
+
+    input{
+      margin: 0;
     }
   }
 
-  input {
-    margin: 0;
+  #map{
+    height: 700px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .leaflet-marker-icon.svg-icon svg path{
+      filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, .7));
+    }
   }
-}
 
-#map {
-  height: 700px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .leaflet-marker-icon.svg-icon svg path {
-    filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
+  .map-legend{
+    background: rgba(255, 255, 255, .8);
+    padding: 1em;
+    border: 2px solid #bbb;
+    border-radius: 4px;
   }
-}
-
-.map-legend {
-  background: rgba(255, 255, 255, 0.8);
-  padding: 1em;
-  border: 2px solid #bbb;
-  border-radius: 4px;
 }

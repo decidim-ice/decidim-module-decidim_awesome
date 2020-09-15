@@ -1,14 +1,16 @@
 // editor tweaks
 //
-.CodeMirror {
+.CodeMirror{
   color: #333;
   font-weight: normal;
   line-height: 1.45;
-  code {
+
+  code{
     border: none;
   }
-  .CodeMirror-code {
-    span {
+
+  .CodeMirror-code{
+    span{
       color: #333 !important;
     }
   }

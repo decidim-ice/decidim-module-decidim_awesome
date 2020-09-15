@@ -19,7 +19,7 @@
 
   const control = L.control.layers(null, null, {
     position: 'topleft', 
-    collapsed: false, 
+    // collapsed: false, 
     hideSingleBase: true
   });
   const allMarkers = [];
@@ -89,8 +89,8 @@
         }
 
         fetchProposals(component, '', (element, marker) => {
-          drawMarker(element, marker, component).addTo(layers.proposals.group);
-        }, () => {
+            drawMarker(element, marker, component).addTo(layers.proposals.group);
+          }, () => {
           // finall call
           allMarkers.forEach((item) => {
             // add marker to amendments layers if it's an amendment
