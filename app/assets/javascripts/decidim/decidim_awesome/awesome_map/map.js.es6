@@ -91,16 +91,17 @@
         fetchProposals(component, '', (element, marker) => {
             drawMarker(element, marker, component).addTo(layers.proposals.group);
           }, () => {
-          // finall call
-          allMarkers.forEach((item) => {
-            // add marker to amendments layers if it's an amendment
-            if(amendments.find((a) => a == item.element.id)) {
-              item.marker.removeFrom(layers.proposals.group);
-              item.marker.addTo(layers.amendments.group);
-            }
+            // finall call
+            console.log("end proposals", cluster, allMarkers);
+            map.fitBounds(cluster.getBounds(), { padding: [50, 50] });
+            allMarkers.forEach((item) => {
+              // add marker to amendments layers if it's an amendment
+              if(amendments.find((a) => a == item.element.id)) {
+                item.marker.removeFrom(layers.proposals.group);
+                item.marker.addTo(layers.amendments.group);
+              }
+            });
           });
-          map.fitBounds(cluster.getBounds(), { padding: [50, 50] });
-        });
       }
       
       if(component.type == "meetings") {
@@ -115,6 +116,7 @@
         fetchMeetings(component, '', (element, marker) => {
             drawMarker(element, marker, component).addTo(layers.meetings.group);
           }, () => {
+            console.log("end meetings", cluster, allMarkers);
             map.fitBounds(cluster.getBounds(), { padding: [50, 50] });
           });
       }
@@ -136,7 +138,6 @@
           label: `<i class="awesome_map-category_${category.id}"></i> ${category.name}`,
           group: L.featureGroup.subGroup(cluster)
         };
-        // control.addOverlay(layers[category.id].group, layers[category.id].label);
         layers[category.id].group.addTo(map);
       });
     }
