@@ -14,7 +14,7 @@ module Decidim
         private
 
         def map_components
-          @map_components ||= current_participatory_space.components.filter do |component|
+          @map_components ||= current_participatory_space.components.published.filter do |component|
             case component.manifest.name
             when :meetings
               true
