@@ -40,6 +40,7 @@ module Decidim
           body = -> { "<div>html body</div>".html_safe }
           expect(helper.dynamic_map_for(components, &body)).to include("<div>html body</div>")
           expect(helper.dynamic_map_for(components, &body)).to include("data-components=")
+          expect(helper.dynamic_map_for(components, &body)).to include("data-collapse=")
         end
       end
 

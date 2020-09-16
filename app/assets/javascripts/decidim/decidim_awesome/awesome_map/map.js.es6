@@ -8,6 +8,7 @@
 ((exports) => {
   const { fetchProposals, fetchMeetings, getCategory } = exports.AwesomeMap;
 
+  const collapsedMenu = $("#map").data("collapsed");
   const components = $("#map").data("components");
   const popupMeetingTemplateId = "marker-meeting-popup";
   const popupProposalTemplateId = "marker-proposal-popup";
@@ -20,7 +21,7 @@
   const control = L.control.layers(null, null, {
     position: 'topleft', 
     sortLayers: false,
-    collapsed: false, 
+    collapsed: collapsedMenu, 
     // hideSingleBase: true
   });
   const allMarkers = [];

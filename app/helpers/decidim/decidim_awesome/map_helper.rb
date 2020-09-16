@@ -17,6 +17,7 @@ module Decidim
                                    amendments: component.manifest.name == :proposals ? Decidim::Proposals::Proposal.where(component: component).only_emendations.count : 0
                                  }
                                end.to_json,
+          "data-collapsed" => current_component.settings.collapse,
           "data-markers-data" => [].to_json
         }
 
