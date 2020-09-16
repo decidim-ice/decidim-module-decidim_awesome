@@ -19,8 +19,9 @@
 
   const control = L.control.layers(null, null, {
     position: 'topleft', 
-    // collapsed: false, 
-    hideSingleBase: true
+    sortLayers: false,
+    collapsed: false, 
+    // hideSingleBase: true
   });
   const allMarkers = [];
 
@@ -54,11 +55,10 @@
     let l = layers[getCategory(element.category).id];
     if(l) {
       marker.addTo(l.group);
-      if(!l.added) {
-        control.addOverlay(l.group, l.label);
-        l.added = true;
-      }
+      // show category if hidden
+      $(`.awesome_map-category_${element.category.id}`).closest("label").show();
     }
+
     return marker;
   };
 
@@ -130,6 +130,7 @@
         control.removeLayer(lastLayer.group);
         control.addOverlay(lastLayer.group, lastLayer.label);
       }
+
       window.AwesomeMap.categories.forEach((category) => {
         // add control layer for this category
         layers[category.id] = {
@@ -137,8 +138,54 @@
           group: L.featureGroup.subGroup(cluster)
         };
         layers[category.id].group.addTo(map);
+        control.addOverlay(layers[category.id].group, layers[category.id].label);
+        // hide layer by default, it will be activated if there's any marker in it
+        setTimeout(() => {
+          $(`.awesome_map-category_${category.id}`).closest("label").hide();
+        });
       });
+
+      // watch events for subcategories syncronitzation
+      const getCatFromClass = (name) => {
+        let id = name.match(/awesome_map-category_(\d+)/) 
+        if(!id) return;
+        const cat = getCategory(id[1]);
+        if(!cat || !cat.name) return;
+
+        return cat;        
+      };
+
+      const indeterminateInput = (id) => {
+        $('[class^="awesome_map-category_"]').parent().prev().prop("indeterminate", false);
+        if(id) {
+          let $input = $(`.awesome_map-category_${id}`).parent().prev();
+          if(!$input.prop("checked")) {
+            $input.prop("indeterminate", true);
+          }
+        }
+      };
+
+      map.on('overlayadd', (e) => {
+        const cat = getCatFromClass(e.name);
+        if(!cat) return;
+        // if it's a children, put the parent to indeterminate
+        indeterminateInput(cat.parent);
+      });
+
+      // on remove a parent category, remove all children
+      map.on('overlayremove', (e) => {
+        const cat = getCatFromClass(e.name);
+        if(!cat) return;
+        cat.children().forEach((c) => {
+          let $el = $(`.awesome_map-category_${c.id}`);
+          if($el.parent().prev().prop("checked")) {
+            $el.click();
+          }
+        });
+      });
+
     }
+
   };
 
   // currentMap might not be loaded yet so let's delay a bit
