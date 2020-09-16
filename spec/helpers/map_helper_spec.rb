@@ -6,6 +6,9 @@ module Decidim
   module DecidimAwesome
     describe MapHelper, type: :helper do
       let(:current_participatory_space) { create(:participatory_process) }
+      let(:current_component) do
+        create(:component, participatory_space: current_participatory_space, manifest_name: "awesome_map")
+      end
       let(:components) do
         [
           create(:component, participatory_space: current_participatory_space, manifest_name: "meetings"),
@@ -30,6 +33,7 @@ module Decidim
 
       before do
         allow(view).to receive(:current_participatory_space).and_return(current_participatory_space)
+        allow(view).to receive(:current_component).and_return(current_component)
         allow(view).to receive(:translated_attribute) do |string|
           string["en"]
         end
@@ -40,7 +44,7 @@ module Decidim
           body = -> { "<div>html body</div>".html_safe }
           expect(helper.dynamic_map_for(components, &body)).to include("<div>html body</div>")
           expect(helper.dynamic_map_for(components, &body)).to include("data-components=")
-          expect(helper.dynamic_map_for(components, &body)).to include("data-collapse=")
+          expect(helper.dynamic_map_for(components, &body)).to include('data-collapsed="false"')
         end
       end
 
