@@ -52,11 +52,13 @@
     }
 
     // Add to category layer
-    let l = layers[getCategory(element.category).id];
-    if(l) {
-      marker.addTo(l.group);
+    let cat = getCategory(element.category);
+    if(layers[cat.id]) {
+      marker.addTo(layers[cat.id].group);
       // show category if hidden
-      $(`.awesome_map-category_${element.category.id}`).closest("label").show();
+      $(`.awesome_map-category_${cat.id}`).closest("label").show();
+      // show parent if apply
+      $(`.awesome_map-category_${cat.parent}`).closest("label").show();
     }
 
     return marker;
