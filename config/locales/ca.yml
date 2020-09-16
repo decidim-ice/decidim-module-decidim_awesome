@@ -23,6 +23,7 @@ ca:
         settings:
           global:
             announcement: Anunci
+            collapse: Start with collapsed menu
             map_height: Alçada del mapa (px)
           step:
             announcement: Anunci
