@@ -1,0 +1,95 @@
+es:
+  activemodel:
+    attributes:
+      config:
+        allow_images_in_full_editor: Allow images in the full HTML editor
+        allow_images_in_markdown_editor: Allow images in the markdown editor
+        allow_images_in_proposals: Allow images in the proposals editor
+        allow_images_in_small_editor: Allow images in the minimal HTML editor
+        auto_save_forms: Auto save forms in local storage
+        use_markdown_editor: Use a Markdown editor instead of the HTML editor
+      constraint:
+        component_id: or specifically in
+        component_manifest: Only in components of type
+        participatory_space_manifest: Apply to participatory spaces of type
+        participatory_space_slug: Only in
+  decidim:
+    admin:
+      menu:
+        decidim_awesome: Decidim awesome
+    decidim_awesome:
+      admin:
+        checks:
+          index:
+            decidim-admin: From Admin module
+            decidim-core: From Core module
+            decidim-proposals: From Proposals module
+            decidim_version: Decidim version %{version}
+            title: System compatibility checks
+        config:
+          constraints:
+            add_condition: Add case
+            always: Always
+            delete: Delete
+            edit: Edit
+            title: 'Applicable only in these cases:'
+          experimental: Experimental options
+          form:
+            help:
+              allow_images_in_full_editor: This will add an image uploader icon in all the editors WYSIWYG with the full toolbar enabled.
+              allow_images_in_markdown_editor: This will allow markdown editor to upload images by copy & paste or drag & drop.
+              allow_images_in_proposals: This will allow to upload images in the proposals editor, available to any user
+              allow_images_in_small_editor: This will add an image uploader icon in all the editors WYSIWYG with minimal options in the toolbar enabled.
+              auto_save_forms: This will use LocalStorage to automatically save data introduced by users in surveys and other forms while they are filling it. Data will be restored in a future visit with the same browser in case the form is not submitted. If the form is submitted, data will be removed. If users remove their LocalStorage data, data won't be restored either.
+              drag_and_drop_supported: When uploading images, Drag & Drop is supported. Images will be uploaded to the server and inserted as external resources (it doesn't use base64 inline encoding).
+              use_markdown_editor: This will substitute the Quill WYSIWYG editor, use a Markdown editor in the admin side and a frontend processor to render the text (text in database will be saved as markdown text)
+          rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants" is enabled, this option won''t apply. Use the editors hacks instead to enable images in proposals.'
+          show:
+            title: Tweaks for %{setting}
+            update: Update configuration
+          system: Everywhere except participatory spaces
+          update:
+            error: Error updating configuration! %{error}
+            success: Configuration updated successfully!
+        constraints:
+          create:
+            error: Error creating condition case
+            success: Condition case created successfully
+          destroy:
+            error: Error removing condition case
+            success: Condition case removed successfully
+          errors:
+            not_unique: Same condition already exists
+          new:
+            cancel: Cancel
+            constraint: New condition case
+            save: Save
+          show:
+            cancel: Cancel
+            constraint: Edit condition case
+            save: Save
+          update:
+            error: Error updating condition case
+            success: Condition case updated successfully
+        menu:
+          checks: System compatibility
+          editors: Editor hacks
+          proposals: Proposals hacks
+          surveys: Surveys & forms
+      credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
+      editor_images:
+        create:
+          error: Error uploading image!
+          success: Image uploaded successfully!
+  layouts:
+    decidim:
+      admin:
+        decidim_awesome:
+          title: Decidim Tweaks
+      decidim_awesome:
+        awesome_config:
+          js:
+            autosaved_error: LocalStorage is not supported in your browser, form cannot be saved automatically.
+            autosaved_retrieved: Data for this form has been recovered from a previous session
+            autosaved_success: Data saved in local storage
+            drag_and_drop_image: Add images by dragging & dropping or pasting them.
