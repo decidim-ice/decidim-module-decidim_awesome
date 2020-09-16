@@ -19,7 +19,7 @@ ca:
         decidim_awesome: Decidim Awesome
     components:
       awesome_map:
-        name: Awesome Map
+        name: Mapa global
         settings:
           global:
             announcement: Anunci
