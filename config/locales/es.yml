@@ -2,7 +2,7 @@ es:
   activemodel:
     attributes:
       config:
-        allow_images_in_full_editor: Allow images in the full HTML editor
+        allow_images_in_full_editor: Permitir imágenes en el editor HTML completo
         allow_images_in_markdown_editor: Allow images in the markdown editor
         allow_images_in_proposals: Allow images in the proposals editor
         allow_images_in_small_editor: Allow images in the minimal HTML editor
