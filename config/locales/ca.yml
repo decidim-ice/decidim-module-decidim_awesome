@@ -23,6 +23,7 @@ ca:
         settings:
           global:
             announcement: Anunci
+            collapse: Inicia amb el menú col·lapsat
             map_height: Alçada del mapa (px)
           step:
             announcement: Anunci
