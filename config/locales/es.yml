@@ -3,20 +3,20 @@ es:
     attributes:
       config:
         allow_images_in_full_editor: Permitir imágenes en el editor HTML completo
-        allow_images_in_markdown_editor: Allow images in the markdown editor
-        allow_images_in_proposals: Allow images in the proposals editor
-        allow_images_in_small_editor: Allow images in the minimal HTML editor
-        auto_save_forms: Auto save forms in local storage
-        use_markdown_editor: Use a Markdown editor instead of the HTML editor
+        allow_images_in_markdown_editor: Permitir imágenes en el editor Markdown
+        allow_images_in_proposals: Permitir imágenes en el editor de propuestas
+        allow_images_in_small_editor: Permitir imágenes en el editor HTML reducido
+        auto_save_forms: Guardar automáticamente los formularios en el almacenamiento local
+        use_markdown_editor: Utilizar el editor Markdown en lugar del editor HTML
       constraint:
-        component_id: or specifically in
-        component_manifest: Only in components of type
-        participatory_space_manifest: Apply to participatory spaces of type
-        participatory_space_slug: Only in
+        component_id: o específicamente en
+        component_manifest: Solo en componentes de tipo
+        participatory_space_manifest: Aplicar en los espacios participativos de tipo
+        participatory_space_slug: Solo en
   decidim:
     admin:
       menu:
-        decidim_awesome: Decidim awesome
+        decidim_awesome: Decidim Awesome
     components:
       awesome_map:
         name: Awesome Map
@@ -31,19 +31,19 @@ es:
       admin:
         checks:
           index:
-            decidim-admin: From Admin module
-            decidim-core: From Core module
-            decidim-proposals: From Proposals module
-            decidim_version: Decidim version %{version}
-            title: System compatibility checks
+            decidim-admin: Del módulo Admin
+            decidim-core: Del módulo Core
+            decidim-proposals: Del módulo Propuestas
+            decidim_version: Versión de Decidim %{version}
+            title: Análisis de compatibilidad del sistema
         config:
           constraints:
-            add_condition: Add case
-            always: Always
-            delete: Delete
-            edit: Edit
-            title: 'Applicable only in these cases:'
-          experimental: Experimental options
+            add_condition: Añadir restricción
+            always: Siempre
+            delete: Eliminar
+            edit: Editar
+            title: 'Se aplica solo en estos casos:'
+          experimental: Opciones experimentales
           form:
             help:
               allow_images_in_full_editor: This will add an image uploader icon in all the editors WYSIWYG with the full toolbar enabled.
