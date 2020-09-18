@@ -1,5 +1,4 @@
----
-en:
+fr:
   activemodel:
     attributes:
       config:
@@ -41,35 +40,20 @@ en:
           constraints:
             add_condition: Add case
             always: Always
-            delete: Delete
-            edit: Edit
+            delete: Supprimer
+            edit: Modifier
             title: 'Applicable only in these cases:'
           experimental: Experimental options
           form:
             help:
-              allow_images_in_full_editor: This will add an image uploader icon in
-                all the editors WYSIWYG with the full toolbar enabled.
-              allow_images_in_markdown_editor: This will allow markdown editor to
-                upload images by copy & paste or drag & drop.
-              allow_images_in_proposals: This will allow to upload images in the proposals
-                editor, available to any user
-              allow_images_in_small_editor: This will add an image uploader icon in
-                all the editors WYSIWYG with minimal options in the toolbar enabled.
-              auto_save_forms: This will use LocalStorage to automatically save data
-                introduced by users in surveys and other forms while they are filling
-                it. Data will be restored in a future visit with the same browser
-                in case the form is not submitted. If the form is submitted, data
-                will be removed. If users remove their LocalStorage data, data won't
-                be restored either.
-              drag_and_drop_supported: When uploading images, Drag & Drop is supported.
-                Images will be uploaded to the server and inserted as external resources
-                (it doesn't use base64 inline encoding).
-              use_markdown_editor: This will substitute the Quill WYSIWYG editor,
-                use a Markdown editor in the admin side and a frontend processor to
-                render the text (text in database will be saved as markdown text)
-          rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants"
-            is enabled, this option won''t apply. Use the editors hacks instead to
-            enable images in proposals.'
+              allow_images_in_full_editor: This will add an image uploader icon in all the editors WYSIWYG with the full toolbar enabled.
+              allow_images_in_markdown_editor: This will allow markdown editor to upload images by copy & paste or drag & drop.
+              allow_images_in_proposals: This will allow to upload images in the proposals editor, available to any user
+              allow_images_in_small_editor: This will add an image uploader icon in all the editors WYSIWYG with minimal options in the toolbar enabled.
+              auto_save_forms: This will use LocalStorage to automatically save data introduced by users in surveys and other forms while they are filling it. Data will be restored in a future visit with the same browser in case the form is not submitted. If the form is submitted, data will be removed. If users remove their LocalStorage data, data won't be restored either.
+              drag_and_drop_supported: When uploading images, Drag & Drop is supported. Images will be uploaded to the server and inserted as external resources (it doesn't use base64 inline encoding).
+              use_markdown_editor: This will substitute the Quill WYSIWYG editor, use a Markdown editor in the admin side and a frontend processor to render the text (text in database will be saved as markdown text)
+          rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants" is enabled, this option won''t apply. Use the editors hacks instead to enable images in proposals.'
           show:
             title: Tweaks for %{setting}
             update: Update configuration
@@ -110,8 +94,7 @@ en:
       map_component:
         map:
           error:
-            unavailable: The map is unavailable. Please configure geocoding to enable
-              this component.
+            unavailable: The map is unavailable. Please configure geocoding to enable this component.
           show:
             view_meeting: View meeting
             view_proposal: View proposal
@@ -124,10 +107,8 @@ en:
         awesome_config:
           js:
             amendments: Amendments
-            autosaved_error: LocalStorage is not supported in your browser, form cannot
-              be saved automatically.
-            autosaved_retrieved: Data for this form has been recovered from a previous
-              session
+            autosaved_error: LocalStorage is not supported in your browser, form cannot be saved automatically.
+            autosaved_retrieved: Data for this form has been recovered from a previous session
             autosaved_success: Data saved in local storage
             categories: Categories
             drag_and_drop_image: Add images by dragging & dropping or pasting them.

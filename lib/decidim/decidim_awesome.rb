@@ -6,6 +6,8 @@ require "decidim/decidim_awesome/engine"
 require "decidim/decidim_awesome/admin_engine"
 require "decidim/decidim_awesome/content_renderers"
 require "decidim/decidim_awesome/context_analyzers"
+require "decidim/decidim_awesome/map_component/engine"
+require "decidim/decidim_awesome/map_component/component"
 
 module Decidim
   module DecidimAwesome
@@ -45,3 +47,17 @@ module Decidim
     end
   end
 end
+
+# Engines to handle logic unrelated to participatory spaces or components
+
+Decidim.register_global_engine(
+  :decidim_decidim_awesome, # this is the name of the global method to access engine routes
+  ::Decidim::DecidimAwesome::Engine,
+  at: "/decidim_awesome"
+)
+
+# Decidim.register_global_engine(
+#   :decidim_admin_action_awesome,
+#   ::Decidim::DecidimAwesome::AdminEngine,
+#   at: "/admin/action_awesome"
+# )

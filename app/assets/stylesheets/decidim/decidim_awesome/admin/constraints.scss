@@ -1,34 +1,37 @@
-.constraints-editor {
+.constraints-editor{
   background: #f6f6f6;
   padding: 1rem;
-  margin: -0.5rem 0 2rem 0;
+  margin: -.5rem 0 2rem;
   border-radius: 5px;
 
-  .constraints-list {
-    padding:0;
+  .constraints-list{
+    padding: 0;
     // margin:0 0 1em 0 ;
-    li {
-      margin:0 1em 0 0;
-      padding:0;
+    li{
+      margin: 0 1em 0 0;
+      padding: 0;
     }
 
-    .label {
-      &.participatory_space_manifest {
+    .label{
+      &.participatory_space_manifest{
         background-color: #f7b230;
       }
-      &.participatory_space_slug {
+
+      &.participatory_space_slug{
         background-color: #19b380;
       }
-      &.component_manifest {
+
+      &.component_manifest{
         background-color: #b31919;
       }
-      &.component_id {
+
+      &.component_id{
         background-color: #ee449c;
       }
     }
 
-    a {
-      margin-left:1rem;
+    a{
+      margin-left: 1rem;
     }
   }
 }

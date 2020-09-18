@@ -1,0 +1,74 @@
+<%= render partial: "decidim/shared/component_announcement" %>
+
+<%= dynamic_map_for map_components do %>
+
+  <template id="marker-proposal-popup">
+    <div class="map-info__content">
+      <h3>${title}</h3>
+      <div id="bodyContent">
+        <p>{{html body}}</p>
+        <div class="map__date-adress">
+          <div class="address card__extra">
+            <div class="address__icon">{{html icon}}</div>
+            <div class="address__details">
+              <span>${address}</span><br>
+            </div>
+          </div>
+        </div>
+        <div class="map-info__button">
+          <a href="${link}" class="button button--sc">
+            <%= t(".view_proposal") %>
+          </a>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template id="marker-meeting-popup">
+    <div class="map-info__content">
+      <h3>${title.translation}</h3>
+      <div id="bodyContent">
+        <p>{{html description.translation}}</p>
+        <div class="map__date-adress">
+          <div class="card__datetime">
+            <div class="card__datetime__date">
+              ${startTimeDay} <span class="card__datetime__month">${startTimeMonth} ${startTimeYear}</span>
+            </div>
+            <div class="card__datetime__time">${starTime}</div>
+          </div>
+          <div class="address card__extra">
+            <div class="address__icon">{{html icon}}</div>
+            <div class="address__details">
+              <strong>{{html location.translation}}</strong><br>
+              <span>${address}</span><br>
+              <span>{{html locationHints.translation}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="map-info__button">
+          <a href="${link}" class="button button--sc">
+            <%= t("decidim.meetings.meetings_map.view_meeting") %>
+          </a>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <%= stylesheet_link_tag "decidim/decidim_awesome/awesome_map/map" %>
+  <style type="text/css">
+    #map {
+      height: <%= current_component.settings.map_height %>px;
+    }
+    <% current_categories.each do |category| %>
+      .awesome_map-category_<%= category[:id] %> {
+        background-color: <%= category[:color] %> !important;
+        margin-left: <%= category[:parent] ? "1" : "0" %>em;
+      }
+    <% end %>
+  </style>
+  <script>
+    window.AwesomeMap = window.AwesomeMap || {};
+    window.AwesomeMap.categories = <%= current_categories.to_json.html_safe %>;
+  </script>
+  <%= javascript_include_tag "decidim/decidim_awesome/awesome_map/map" %>
+<% end %>

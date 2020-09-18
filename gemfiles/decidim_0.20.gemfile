@@ -2,6 +2,8 @@
 
 source "https://rubygems.org"
 
+ruby "2.6.6"
+
 gem "decidim", "0.20"
 gem "decidim-decidim_awesome", path: "../"
 gem "bootsnap", "~> 1.4"

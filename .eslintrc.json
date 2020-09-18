@@ -13,6 +13,8 @@
     "globals": {
         "$": false,
         "jQuery": false,
+        "L": false,
+        "ApiFetcher": false,
         "FormStorage": false,
         "Quill": false,
         "InscrybMDE": false,
