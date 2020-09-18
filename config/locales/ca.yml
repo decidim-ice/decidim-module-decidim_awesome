@@ -17,6 +17,16 @@ ca:
     admin:
       menu:
         decidim_awesome: Decidim Awesome
+    components:
+      awesome_map:
+        name: Mapa global
+        settings:
+          global:
+            announcement: Anunci
+            collapse: Inicia amb el menú col·lapsat
+            map_height: Alçada del mapa (px)
+          step:
+            announcement: Anunci
     decidim_awesome:
       admin:
         checks:
@@ -81,6 +91,13 @@ ca:
         create:
           error: Error en pujar la imatge!
           success: La imatge s'ha pujat correctament!
+      map_component:
+        map:
+          error:
+            unavailable: El mapa no està disponible. SI us plau, configureu la geolocalització en aquesta instal·lació per activar aquest component.
+          show:
+            view_meeting: Veure trobada
+            view_proposal: Veure proposta
   layouts:
     decidim:
       admin:
@@ -89,7 +106,11 @@ ca:
       decidim_awesome:
         awesome_config:
           js:
+            amendments: Esmenes
             autosaved_error: L'emmagatzematge local no està disponible al teu navegador, el formulari no es podrà desar automàticament.
             autosaved_retrieved: Les dades d'aquest formulari s'han recuperat d'una sessió anterior
             autosaved_success: Dades desades a l'emmagatzematge local
+            categories: Categories
             drag_and_drop_image: Afegeix imatges "arrastrant i deixant anar" o bé enganxant-les.
+            meetings: Trobades
+            proposals: Propostes
