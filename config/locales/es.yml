@@ -19,14 +19,14 @@ es:
         decidim_awesome: Decidim Awesome
     components:
       awesome_map:
-        name: Awesome Map
+        name: Mapa Global
         settings:
           global:
-            announcement: Announcement
-            collapse: Start with collapsed menu
-            map_height: Map height (px)
+            announcement: Anuncio
+            collapse: Iniciar con el menú contraído
+            map_height: Altura del mapa (px)
           step:
-            announcement: Announcement
+            announcement: Anuncio
     decidim_awesome:
       admin:
         checks:
@@ -94,10 +94,10 @@ es:
       map_component:
         map:
           error:
-            unavailable: The map is unavailable. Please configure geocoding to enable this component.
+            unavailable: El mapa no está disponible. Por favor, configure la geocodificación para habilitar este componente.
           show:
-            view_meeting: View meeting
-            view_proposal: View proposal
+            view_meeting: Ver encuentro
+            view_proposal: Ver propuesta
   layouts:
     decidim:
       admin:
@@ -106,11 +106,11 @@ es:
       decidim_awesome:
         awesome_config:
           js:
-            amendments: Amendments
+            amendments: Enmiendas
             autosaved_error: LocalStorage is not supported in your browser, form cannot be saved automatically.
             autosaved_retrieved: Data for this form has been recovered from a previous session
             autosaved_success: Data saved in local storage
-            categories: Categories
+            categories: Categorías
             drag_and_drop_image: Add images by dragging & dropping or pasting them.
-            meetings: Meetings
-            proposals: Proposals
+            meetings: Encuentros
+            proposals: Propuestas
