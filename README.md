@@ -215,13 +215,13 @@ the code coverage report.
 
 ### Appraisals commands
 
-Appraisal uses custom gems for testing in the folder `gemfiles`, in order to update the Gemfile we normaly use:
+Appraisal uses custom gems for testing in the folder `gemfiles`, these gemfiles are generated from the file `Appraisals`. To update definitions do:
 
 ```
-bundle update
+bundle exec appraisal install
 ```
 
-To update the Appraisal definitions do the following:
+To update the Appraisal definitions maually do the following:
 
 ```
 cd gemfiles
