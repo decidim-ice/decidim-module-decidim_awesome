@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
-
-class ApiFetcher {
+class ApiFetcher { // eslint-disable-line no-unused-vars
 
   constructor(query, variables) {
     this.query = query;

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Decidim
-  # This holds the decidim-meetings version.
+  # This holds the decidim-decidim_awesome version.
   module DecidimAwesome
     VERSION = "0.3"
     MIN_DECIDIM_VERSION = "0.20.0"
