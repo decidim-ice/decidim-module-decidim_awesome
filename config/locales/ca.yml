@@ -105,12 +105,11 @@ ca:
           title: Modificacions a Decidim
       decidim_awesome:
         awesome_config:
-          js:
-            amendments: Esmenes
-            autosaved_error: L'emmagatzematge local no està disponible al teu navegador, el formulari no es podrà desar automàticament.
-            autosaved_retrieved: Les dades d'aquest formulari s'han recuperat d'una sessió anterior
-            autosaved_success: Dades desades a l'emmagatzematge local
-            categories: Categories
-            drag_and_drop_image: Afegeix imatges "arrastrant i deixant anar" o bé enganxant-les.
-            meetings: Trobades
-            proposals: Propostes
+          amendments: Esmenes
+          autosaved_error: L'emmagatzematge local no està disponible al teu navegador, el formulari no es podrà desar automàticament.
+          autosaved_retrieved: Les dades d'aquest formulari s'han recuperat d'una sessió anterior
+          autosaved_success: Dades desades a l'emmagatzematge local
+          categories: Categories
+          drag_and_drop_image: Afegeix imatges "arrastrant i deixant anar" o bé enganxant-les.
+          meetings: Trobades
+          proposals: Propostes

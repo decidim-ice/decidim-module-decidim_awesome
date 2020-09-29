@@ -2,6 +2,7 @@
 
 require "rails"
 require "decidim/core"
+require "decidim/decidim_awesome/awesome_helpers"
 
 module Decidim
   module DecidimAwesome
@@ -11,6 +12,10 @@ module Decidim
 
       routes do
         post :editor_images, to: "editor_images#create"
+      end
+
+      initializer "decidim_awesome.view_helpers" do
+        ActionView::Base.send :include, AwesomeHelpers
       end
 
       initializer "decidim_decidim_awesome.assets" do |app|

@@ -27,10 +27,6 @@ module Decidim
         @organization_awesome_config ||= awesome_config_instance.organization_config
       end
 
-      def awesome_config_tag
-        content_tag :script, render(partial: "layouts/decidim/decidim_awesome/awesome_config.js")
-      end
-
       def awesome_version
         ::Decidim::DecidimAwesome::VERSION
       end

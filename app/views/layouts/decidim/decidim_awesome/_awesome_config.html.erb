@@ -1,3 +1,4 @@
+<script>
 window.DecidimAwesome = <%= awesome_config.to_json.html_safe %>;
 window.DecidimAwesome.editor_uploader_path = "<%= decidim_decidim_awesome.editor_images_path %>";
 window.DecidimAwesome.texts = {
@@ -16,3 +17,4 @@ window.DecidimAwesome.texts = {
   window.DecidimAwesome.questionnaire_answered = <%= visitor_already_answered? %>;
   <% end %>
 <% end %>
+</script>

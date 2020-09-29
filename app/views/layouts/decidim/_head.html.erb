@@ -26,6 +26,6 @@
 <%= render partial: "layouts/decidim/head_extra" %>
 <%== current_organization.header_snippets if Decidim.enable_html_header_snippets %>
 
-<%= awesome_config_tag %>
+<%= render partial: "layouts/decidim/decidim_awesome/awesome_config" %>
 <%= stylesheet_link_tag    "decidim/decidim_awesome/application", media: "all" %>
 <%= javascript_include_tag "decidim/decidim_awesome/application" %>
