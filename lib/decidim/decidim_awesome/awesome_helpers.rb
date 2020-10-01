@@ -27,12 +27,21 @@ module Decidim
         @organization_awesome_config ||= awesome_config_instance.organization_config
       end
 
-      def awesome_config_tag
-        content_tag :script, render(partial: "layouts/decidim/decidim_awesome/awesome_config.js")
-      end
-
       def awesome_version
         ::Decidim::DecidimAwesome::VERSION
+      end
+
+      def tenant_stylesheets
+        return @tenant_stylesheets if @tenant_stylesheets
+
+        prefix = Rails.root.join("app", "assets", "themes", current_organization.host)
+        return @tenant_stylesheets = current_organization.host.to_s if File.exist?("#{prefix}.css") || File.exist?("#{prefix}.scss") || File.exist?("#{prefix}.scss.erb")
+      end
+
+      def version_prefix
+        return "v0.21" if Decidim.version.start_with? "0.21"
+
+        "v0.22"
       end
     end
   end

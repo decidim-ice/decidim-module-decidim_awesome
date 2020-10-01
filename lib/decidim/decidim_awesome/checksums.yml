@@ -1,12 +1,15 @@
 decidim-admin:
   /app/views/layouts/decidim/admin/_header.html.erb:
-    decidim-0.20: 6f0c010b1dcf912be1b3e0ff9f156026
+    decidim-0.21: 6f0c010b1dcf912be1b3e0ff9f156026
+    decidim-0.22: 6af51ec6b8a760b0ee6e00a7834f5f9a
 decidim-core:
   /app/views/layouts/decidim/_head.html.erb:
-    decidim-0.20: b261c55492d047ba730eed8b39be0304
+    decidim-0.21: b261c55492d047ba730eed8b39be0304
+    decidim-0.22: bf16a58cd9e6d3f73e6875ff3d0b1e48
   /app/assets/javascripts/decidim/editor.js.es6:
-    decidim-0.20: 797d0ec1c9e79453cf6718f82d2fdd27
+    decidim-0.21: 797d0ec1c9e79453cf6718f82d2fdd27
+    decidim-0.22: 797d0ec1c9e79453cf6718f82d2fdd27
 decidim-proposals:
   /app/presenters/decidim/proposals/proposal_presenter.rb:
-    decidim-0.20: af098810b12cee97fddc2ee8fd405a54
     decidim-0.21: d7a6e1e55613de8949ace284307a7674
+    decidim-0.22: 7d60c8310d7fa4e38d9a27080c22b12c
