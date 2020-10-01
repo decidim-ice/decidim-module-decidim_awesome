@@ -35,7 +35,7 @@ module Decidim
         return @tenant_stylesheets if @tenant_stylesheets
 
         prefix = Rails.root.join("app", "assets", "themes", current_organization.host)
-        return @tenant_stylesheets = current_organization.host.to_s if File.exist?("#{prefix}.css") || File.exist?("#{prefix}.scss")
+        return @tenant_stylesheets = current_organization.host.to_s if File.exist?("#{prefix}.css") || File.exist?("#{prefix}.scss") || File.exist?("#{prefix}.scss.erb")
       end
 
       def version_prefix
