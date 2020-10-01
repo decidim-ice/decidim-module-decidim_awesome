@@ -64,6 +64,22 @@ It also provides a simple search by category, each category is assignated to a d
 
 ![Awesome map](examples/awesome-map.png)
 
+#### 7. Allow Decidim to use custom CSS themes for every tenant
+
+When customizind CSS for a Decidim installation, each change affects all the organizations (tenant).
+
+This feature allows to customize each organization css without affecting the others in the same Decidim installation.
+
+##### To create a theme
+
+1. Get your hostname for the organization, theme search will be based on this (ie: `myorganization.com`)
+2. Create in you Decidim application this folder: `app/assets/themes/`
+3. Create a file in that folder with the same name as the host and suffixed `.css` or `.scss`: `app/assets/themes/myorganization.com.scss`
+4. Modify that file as you want, you can use any SASS function available (such as `@import`)
+5. Restart your server, enjoy!
+
+See an example here: 
+https://github.com/Platoniq/decidim-demo/tree/master/app/assets/themes
 
 #### To be continued...
 
