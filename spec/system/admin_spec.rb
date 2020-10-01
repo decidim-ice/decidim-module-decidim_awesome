@@ -29,7 +29,7 @@ describe "Visit the admin page", type: :system do
     end
 
     it "renders the page" do
-      expect(page).to have_content("System compatibility checks")
+      expect(page).to have_content(/System compatibility checks/i)
       expect(page).not_to have_xpath("//span[@class='text-alert']")
       expect(page).to have_xpath("//span[@class='text-success']")
     end
@@ -41,7 +41,7 @@ describe "Visit the admin page", type: :system do
     end
 
     it "renders the page" do
-      expect(page).to have_content("Tweaks for editors")
+      expect(page).to have_content(/Tweaks for editors/i)
     end
   end
 
@@ -51,7 +51,7 @@ describe "Visit the admin page", type: :system do
     end
 
     it "renders the page" do
-      expect(page).to have_content("Tweaks for surveys")
+      expect(page).to have_content(/Tweaks for surveys/i)
     end
   end
 
@@ -62,7 +62,7 @@ describe "Visit the admin page", type: :system do
 
     context "and rich text editor for participants is enabled" do
       it "renders the page" do
-        expect(page).to have_content("Tweaks for proposals")
+        expect(page).to have_content(/Tweaks for proposals/i)
         expect(page).to have_content("\"Rich text editor for participants\" is enabled")
       end
     end
@@ -71,7 +71,7 @@ describe "Visit the admin page", type: :system do
       let(:rte_enabled) { false }
 
       it "renders the page" do
-        expect(page).to have_content("Tweaks for proposals")
+        expect(page).to have_content(/Tweaks for proposals/i)
         expect(page).not_to have_content("\"Rich text editor for participants\" is enabled")
       end
     end
