@@ -2,21 +2,21 @@ cs:
   activemodel:
     attributes:
       config:
-        allow_images_in_full_editor: Allow images in the full HTML editor
-        allow_images_in_markdown_editor: Allow images in the markdown editor
-        allow_images_in_proposals: Allow images in the proposals editor
-        allow_images_in_small_editor: Allow images in the minimal HTML editor
-        auto_save_forms: Auto save forms in local storage
-        use_markdown_editor: Use a Markdown editor instead of the HTML editor
+        allow_images_in_full_editor: Povolit obrázky v kompletním HTML editoru
+        allow_images_in_markdown_editor: Povolit obrázky v editoru markdown
+        allow_images_in_proposals: Povolit obrázky v editoru návrhů
+        allow_images_in_small_editor: Povolit obrázky v minimálním HTML editoru
+        auto_save_forms: Automaticky ukládat formuláře v místním úložišti
+        use_markdown_editor: Použít Markdown editor namísto HTML editoru
       constraint:
-        component_id: or specifically in
-        component_manifest: Only in components of type
-        participatory_space_manifest: Apply to participatory spaces of type
-        participatory_space_slug: Only in
+        component_id: nebo konkrétně v
+        component_manifest: Pouze v komponentách typu
+        participatory_space_manifest: Použít na participační prostory typu
+        participatory_space_slug: Pouze v
   decidim:
     admin:
       menu:
-        decidim_awesome: Decidim awesome
+        decidim_awesome: Úžasné Decidim
     components:
       awesome_map:
         name: Awesome Map
@@ -31,28 +31,28 @@ cs:
       admin:
         checks:
           index:
-            decidim-admin: From Admin module
-            decidim-core: From Core module
-            decidim-proposals: From Proposals module
-            decidim_version: Decidim version %{version}
-            title: System compatibility checks
+            decidim-admin: Z modulu Admin
+            decidim-core: Z hlavního Core modulu
+            decidim-proposals: Z modulu Návrhy
+            decidim_version: Decidim verze %{version}
+            title: Kontroly kompatibility systému
         config:
           constraints:
-            add_condition: Add case
-            always: Always
-            delete: Delete
-            edit: Edit
-            title: 'Applicable only in these cases:'
-          experimental: Experimental options
+            add_condition: Přidat případ
+            always: Vždy
+            delete: Smazat
+            edit: Upravit
+            title: 'Platí pouze v těchto případech:'
+          experimental: Experimentální možnosti
           form:
             help:
-              allow_images_in_full_editor: This will add an image uploader icon in all the editors WYSIWYG with the full toolbar enabled.
-              allow_images_in_markdown_editor: This will allow markdown editor to upload images by copy & paste or drag & drop.
-              allow_images_in_proposals: This will allow to upload images in the proposals editor, available to any user
-              allow_images_in_small_editor: This will add an image uploader icon in all the editors WYSIWYG with minimal options in the toolbar enabled.
-              auto_save_forms: This will use LocalStorage to automatically save data introduced by users in surveys and other forms while they are filling it. Data will be restored in a future visit with the same browser in case the form is not submitted. If the form is submitted, data will be removed. If users remove their LocalStorage data, data won't be restored either.
-              drag_and_drop_supported: When uploading images, Drag & Drop is supported. Images will be uploaded to the server and inserted as external resources (it doesn't use base64 inline encoding).
-              use_markdown_editor: This will substitute the Quill WYSIWYG editor, use a Markdown editor in the admin side and a frontend processor to render the text (text in database will be saved as markdown text)
+              allow_images_in_full_editor: Tímto se přidá ikona pro nahrávání obrázků ve všech editorech WYSIWYG s povoleným plným nástrojovým řádkem.
+              allow_images_in_markdown_editor: To umožní editoru markdown nahrávat obrázky pomocí kopírování a vkládání nebo přetažení.
+              allow_images_in_proposals: Toto umožní nahrávat obrázky do editoru návrhů, které jsou k dispozici každému uživateli
+              allow_images_in_small_editor: Tímto se přidá ikona pro nahrávání obrázků ve všech editorech WYSIWYG s minimálními možnostmi v panelu nástrojů.
+              auto_save_forms: Toto bude používat místní úložiště pro automatické ukládání dat zavedených uživateli do průzkumů a jiných formulářů během vyplňování. Data budou obnovena v budoucí návštěvě stejného prohlížeče v případě, že formulář nebude odeslán. Pokud je formulář odeslán, data budou odstraněna. Pokud uživatelé odstraní svá data z místního úložiště, data nebudou obnovena.
+              drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
+              use_markdown_editor: Toto nahradí WYSIWYG editor, použije Markdown editor v administraci a webový procesor pro vykreslení textu (text v databázi bude uložen jako text markdown)
           rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants" is enabled, this option won''t apply. Use the editors hacks instead to enable images in proposals.'
           show:
             title: Tweaks for %{setting}
