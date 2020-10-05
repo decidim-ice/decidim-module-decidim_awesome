@@ -19,14 +19,14 @@ cs:
         decidim_awesome: Úžasné Decidim
     components:
       awesome_map:
-        name: Awesome Map
+        name: Úžasná mapa
         settings:
           global:
-            announcement: Announcement
-            collapse: Start with collapsed menu
-            map_height: Map height (px)
+            announcement: Oznámení
+            collapse: Začít se sbaleným menu
+            map_height: Výška mapy (px)
           step:
-            announcement: Announcement
+            announcement: Oznámení
     decidim_awesome:
       admin:
         checks:
@@ -53,63 +53,63 @@ cs:
               auto_save_forms: Toto bude používat místní úložiště pro automatické ukládání dat zavedených uživateli do průzkumů a jiných formulářů během vyplňování. Data budou obnovena v budoucí návštěvě stejného prohlížeče v případě, že formulář nebude odeslán. Pokud je formulář odeslán, data budou odstraněna. Pokud uživatelé odstraní svá data z místního úložiště, data nebudou obnovena.
               drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
               use_markdown_editor: Toto nahradí WYSIWYG editor, použije Markdown editor v administraci a webový procesor pro vykreslení textu (text v databázi bude uložen jako text markdown)
-          rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants" is enabled, this option won''t apply. Use the editors hacks instead to enable images in proposals.'
+          rich_text_editor_in_public_views: 'POZNÁMKA: "Kompletní textový editor pro účastníky" je povolen, tato možnost nebude využita. Pro povolení obrázků v Návrzích používejte místo toho hacky editoru.'
           show:
-            title: Tweaks for %{setting}
-            update: Update configuration
-          system: Everywhere except participatory spaces
+            title: Vylepšení pro %{setting}
+            update: Aktualizace konfigurace
+          system: Všude kromě participačních prostor
           update:
-            error: Error updating configuration! %{error}
-            success: Configuration updated successfully!
+            error: Chyba při aktualizaci konfigurace! %{error}
+            success: Konfigurace byla úspěšně aktualizována!
         constraints:
           create:
-            error: Error creating condition case
-            success: Condition case created successfully
+            error: Chyba při vytváření případu stavu
+            success: Případ stavu byl úspěšně vytvořen
           destroy:
-            error: Error removing condition case
-            success: Condition case removed successfully
+            error: Chyba při odstraňování případu stavu
+            success: Případ stavu byl úspěšně odstraněn
           errors:
-            not_unique: Same condition already exists
+            not_unique: Stejná podmínka již existuje
           new:
-            cancel: Cancel
-            constraint: New condition case
-            save: Save
+            cancel: Zrušit
+            constraint: Nový případ podmínky
+            save: Uložit
           show:
-            cancel: Cancel
-            constraint: Edit condition case
-            save: Save
+            cancel: Zrušit
+            constraint: Upravit stav případu
+            save: Uložit
           update:
-            error: Error updating condition case
-            success: Condition case updated successfully
+            error: Chyba při aktualizaci případu podmínky
+            success: Případ stavu byl úspěšně aktualizován
         menu:
-          checks: System compatibility
-          editors: Editor hacks
-          proposals: Proposals hacks
-          surveys: Surveys & forms
-      credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
+          checks: Systémová kompatibilita
+          editors: Hack editoru
+          proposals: Návrhy hacků
+          surveys: Průzkumy a formuláře
+      credits: Vylepšení Decidim %{version} · Vyrobeno s ♥ od Platoniq
       editor_images:
         create:
-          error: Error uploading image!
-          success: Image uploaded successfully!
+          error: Chyba při nahrávání obrázku!
+          success: Obrázek byl úspěšně nahrán!
       map_component:
         map:
           error:
-            unavailable: The map is unavailable. Please configure geocoding to enable this component.
+            unavailable: Mapa není dostupná. Pro povolení této komponenty nakonfigurujte geocoding.
           show:
-            view_meeting: View meeting
-            view_proposal: View proposal
+            view_meeting: Zobrazit schůzku
+            view_proposal: Zobrazit návrh
   layouts:
     decidim:
       admin:
         decidim_awesome:
-          title: Decidim Tweaks
+          title: Vylepšení Decidim
       decidim_awesome:
         awesome_config:
-          amendments: Amendments
-          autosaved_error: LocalStorage is not supported in your browser, form cannot be saved automatically.
-          autosaved_retrieved: Data for this form has been recovered from a previous session
-          autosaved_success: Data saved in local storage
-          categories: Categories
-          drag_and_drop_image: Add images by dragging & dropping or pasting them.
-          meetings: Meetings
-          proposals: Proposals
+          amendments: Pozměňovací návrhy
+          autosaved_error: Místní úložiště není ve vašem prohlížeči podporováno, formulář nelze uložit automaticky.
+          autosaved_retrieved: Údaje pro tento formulář byly obnoveny z předchozí relace
+          autosaved_success: Data uložena v místním úložišti
+          categories: Kategorie
+          drag_and_drop_image: Přidejte obrázky přetažením nebo vložením.
+          meetings: Schůzky
+          proposals: Návrhy
