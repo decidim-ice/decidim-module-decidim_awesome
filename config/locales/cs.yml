@@ -1,0 +1,115 @@
+cs:
+  activemodel:
+    attributes:
+      config:
+        allow_images_in_full_editor: Povolit obrázky v kompletním HTML editoru
+        allow_images_in_markdown_editor: Povolit obrázky v editoru markdown
+        allow_images_in_proposals: Povolit obrázky v editoru návrhů
+        allow_images_in_small_editor: Povolit obrázky v minimálním HTML editoru
+        auto_save_forms: Automaticky ukládat formuláře v místním úložišti
+        use_markdown_editor: Použít Markdown editor namísto HTML editoru
+      constraint:
+        component_id: nebo konkrétně v
+        component_manifest: Pouze v komponentách typu
+        participatory_space_manifest: Použít na participační prostory typu
+        participatory_space_slug: Pouze v
+  decidim:
+    admin:
+      menu:
+        decidim_awesome: Úžasné Decidim
+    components:
+      awesome_map:
+        name: Úžasná mapa
+        settings:
+          global:
+            announcement: Oznámení
+            collapse: Začít se sbaleným menu
+            map_height: Výška mapy (px)
+          step:
+            announcement: Oznámení
+    decidim_awesome:
+      admin:
+        checks:
+          index:
+            decidim-admin: Z modulu Admin
+            decidim-core: Z hlavního Core modulu
+            decidim-proposals: Z modulu Návrhy
+            decidim_version: Decidim verze %{version}
+            title: Kontroly kompatibility systému
+        config:
+          constraints:
+            add_condition: Přidat případ
+            always: Vždy
+            delete: Smazat
+            edit: Upravit
+            title: 'Platí pouze v těchto případech:'
+          experimental: Experimentální možnosti
+          form:
+            help:
+              allow_images_in_full_editor: Tímto se přidá ikona pro nahrávání obrázků ve všech editorech WYSIWYG s povoleným plným nástrojovým řádkem.
+              allow_images_in_markdown_editor: To umožní editoru markdown nahrávat obrázky pomocí kopírování a vkládání nebo přetažení.
+              allow_images_in_proposals: Toto umožní nahrávat obrázky do editoru návrhů, které jsou k dispozici každému uživateli
+              allow_images_in_small_editor: Tímto se přidá ikona pro nahrávání obrázků ve všech editorech WYSIWYG s minimálními možnostmi v panelu nástrojů.
+              auto_save_forms: Toto bude používat místní úložiště pro automatické ukládání dat zavedených uživateli do průzkumů a jiných formulářů během vyplňování. Data budou obnovena v budoucí návštěvě stejného prohlížeče v případě, že formulář nebude odeslán. Pokud je formulář odeslán, data budou odstraněna. Pokud uživatelé odstraní svá data z místního úložiště, data nebudou obnovena.
+              drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
+              use_markdown_editor: Toto nahradí WYSIWYG editor, použije Markdown editor v administraci a webový procesor pro vykreslení textu (text v databázi bude uložen jako text markdown)
+          rich_text_editor_in_public_views: 'POZNÁMKA: "Kompletní textový editor pro účastníky" je povolen, tato možnost nebude využita. Pro povolení obrázků v Návrzích používejte místo toho hacky editoru.'
+          show:
+            title: Vylepšení pro %{setting}
+            update: Aktualizace konfigurace
+          system: Všude kromě participačních prostor
+          update:
+            error: Chyba při aktualizaci konfigurace! %{error}
+            success: Konfigurace byla úspěšně aktualizována!
+        constraints:
+          create:
+            error: Chyba při vytváření případu stavu
+            success: Případ stavu byl úspěšně vytvořen
+          destroy:
+            error: Chyba při odstraňování případu stavu
+            success: Případ stavu byl úspěšně odstraněn
+          errors:
+            not_unique: Stejná podmínka již existuje
+          new:
+            cancel: Zrušit
+            constraint: Nový případ podmínky
+            save: Uložit
+          show:
+            cancel: Zrušit
+            constraint: Upravit stav případu
+            save: Uložit
+          update:
+            error: Chyba při aktualizaci případu podmínky
+            success: Případ stavu byl úspěšně aktualizován
+        menu:
+          checks: Systémová kompatibilita
+          editors: Hack editoru
+          proposals: Návrhy hacků
+          surveys: Průzkumy a formuláře
+      credits: Vylepšení Decidim %{version} · Vyrobeno s ♥ od Platoniq
+      editor_images:
+        create:
+          error: Chyba při nahrávání obrázku!
+          success: Obrázek byl úspěšně nahrán!
+      map_component:
+        map:
+          error:
+            unavailable: Mapa není dostupná. Pro povolení této komponenty nakonfigurujte geocoding.
+          show:
+            view_meeting: Zobrazit schůzku
+            view_proposal: Zobrazit návrh
+  layouts:
+    decidim:
+      admin:
+        decidim_awesome:
+          title: Vylepšení Decidim
+      decidim_awesome:
+        awesome_config:
+          amendments: Pozměňovací návrhy
+          autosaved_error: Místní úložiště není ve vašem prohlížeči podporováno, formulář nelze uložit automaticky.
+          autosaved_retrieved: Údaje pro tento formulář byly obnoveny z předchozí relace
+          autosaved_success: Data uložena v místním úložišti
+          categories: Kategorie
+          drag_and_drop_image: Přidejte obrázky přetažením nebo vložením.
+          meetings: Schůzky
+          proposals: Návrhy
