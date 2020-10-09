@@ -1,23 +1,27 @@
-.awesome-markdown-editor {
-  code {
+.awesome-markdown-editor{
+  code{
     line-height: 1;
     background: #f0f0f0;
   }
 
-  pre {
+  pre{
     font-family: Consolas, "Liberation Mono", Courier, monospace;
-    font-size: 0.9em;
+    font-size: .9em;
     border: 1px solid #e8e8e8;
     background: #f0f0f0;
-    p,code {
-      line-height: 0.8;
+
+    p,
+    code{
+      line-height: .8;
     }
-    code {
+
+    code{
       display: block;
       padding: 1em 0 1em 1em;
       margin: 0;
       border: none;
     }
+
     margin: 1em 0;
   }
 }

@@ -11,7 +11,18 @@ All tweaks are provided in a optional fashion with granular permissions that let
 
 **This in beta status, we do not accept any responsibility for breaking anything. Feedback is appreciated though.**
 
+## Why this plugin?
+
+At Platoniq, we like to explore and combine open tools for enriching democracy in many levels. And also for organizations or companies, not only governments.
+Currently we are working very closely with the team behind [Decidim](https://decidim.org) because we believe that it is a great software.
+
+However in Platoniq we have this slogan: "Democracy is fun if you take it seriously" (feel free to ask for T-shirts 😉). 
+And, let's face it, sometimes we feel that Decidim lacks a bit of the "fun" part so we created this.
+Because Decidim is awesome and so is this!
+
 ## Usage
+
+Read the [CHANGELOG](CHANGELOG.md) for Decidim compatibility.
 
 DecidimAwesome is a module that hacks Decidim in order to provide more features or improve some aspects of it.
 
@@ -40,7 +51,7 @@ Saving the form removes the stored data.
 
 #### 3. Images in proposals
 
-Event if you haven't activated the WYSIWYG editor (Quill) in public views (ie: proposals use a simple textarea). You can allow users to upload images in them by dragg & drop over the text area.
+Event if you haven't activated the WYSIWYG editor (Quill) in public views (eg: proposals use a simple textarea if rich text editor has not been activated for users). You can allow users to upload images in them by drag & drop over the text area.
 
 ![Proposal images](examples/proposal-images.png)
 
@@ -56,8 +67,34 @@ Many scopes can be defined for every tweak.
 
 ![Admin tweaks for editors](examples/admin-editors.png)
 
+#### 6. Awesome map component
 
-#### 6. To be continued...
+This is a component you can add in any participatory space. It retrieves all the geolocated content in that participatory space (meetings or proposals) and displays it in a big map.
+
+It also provides a simple search by category, each category is assignated to a different color.
+
+![Awesome map](examples/awesome-map.png)
+
+#### 7. Allow Decidim to use custom CSS themes for every tenant
+
+When customizind CSS for a Decidim installation, each change affects all the organizations (tenant).
+
+This feature allows to customize each organization css without affecting the others in the same Decidim installation.
+
+##### To create a theme
+
+1. Get your hostname for the organization, theme search will be based on this (e.g: `myorganization.com`)
+2. Create in you Decidim application this folder: `app/assets/themes/`
+3. Create a file in that folder with the same name as the host and suffixed `.css` or `.scss` (e.g: `app/assets/themes/myorganization.com.scss`)
+4. Modify that file as you like, you can use any SASS function available (such as `@import`)
+5. Restart your server, enjoy!
+
+See an example here: 
+https://github.com/Platoniq/decidim-demo/tree/master/app/assets/themes
+
+NOTE: Files presents in the `app/assets/themes` folder are added automatically into the precompile list of Rails by this plugin.
+
+#### To be continued...
 
 Some things in the road-map: 
 
@@ -65,7 +102,6 @@ Some things in the road-map:
 1. Direct export of surveys in PDF
 1. Allow to create surveys where the responding user is known
 1. Propose something! or even better send a PR!
-
 
 ## Installation
 
@@ -107,6 +143,19 @@ end
 ```
 
 For a complete list of options take a look at the [module defaults](lib/decidim/decidim_awesome.rb).
+
+## Missing something?
+
+We add new features and maintain them, however we do it according our needs as this is mostly voluntary work.
+So if you feel that you can contribute feel free to create a pull request with your idea. We are open to incorporate anything reasonable.
+
+We do ask some things:
+- Each feature has to come with and activation option, same as the already existing (unless is something that do not modify predefined Decidim behavior)
+- Try to avoid views or assets overrides. Many times it is just enough to add additional css or scripts that alter existing objects.
+
+You can also ask for new feature by creating and issue and, if you are ready to provide funds for its development just contact us!
+
+Thanks!
 
 ## Developing
 
@@ -184,7 +233,6 @@ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rake test_
 DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal rspec
 ```
 
-
 Note that the database user has to have rights to create and drop a database in
 order to create the dummy test app database.
 
@@ -205,6 +253,23 @@ SIMPLECOV=1 bundle exec rspec
 
 This will generate a folder named `coverage` in the project root which contains
 the code coverage report.
+
+### Appraisals commands
+
+Appraisal uses custom gems for testing in the folder `gemfiles`, these gemfiles are generated from the file `Appraisals`. To update definitions do:
+
+```
+bundle exec appraisal install
+```
+
+To update the Appraisal definitions maually do the following:
+
+```
+cd gemfiles
+BUNDLE_GEMFILE=./decidim_0.XX.gemfile bundle update
+```
+
+Where 0.XX is the supported version that needs to be updated.
 
 ### Localization
 

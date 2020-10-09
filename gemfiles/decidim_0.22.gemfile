@@ -2,17 +2,19 @@
 
 source "https://rubygems.org"
 
-gem "decidim", "0.20"
+ruby "2.6.6"
+
+gem "decidim", "0.22"
 gem "decidim-decidim_awesome", path: "../"
 gem "bootsnap", "~> 1.4"
-gem "puma", "~> 3.12.2"
+gem "puma", ">= 4.3"
 gem "uglifier", "~> 4.1"
-gem "decidim-admin", "0.20"
-gem "decidim-core", "0.20"
+gem "decidim-admin", "0.22"
+gem "decidim-core", "0.22"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
-  gem "decidim-dev", "0.20"
+  gem "decidim-dev", "0.22"
 end
 
 group :development do
@@ -27,5 +29,4 @@ end
 group :test do
   gem "appraisal"
   gem "codecov", require: false
-  gem "simplecov", "~> 0.10", "< 0.18"
 end

@@ -21,4 +21,10 @@ FactoryBot.define do
     author { create :user }
     organization { create :organization }
   end
+
+  factory :map_component, parent: :component do
+    name { Decidim::Components::Namer.new(participatory_space.organization.available_locales, :proposals).i18n_name }
+    manifest_name { :awesome_map }
+    participatory_space { create(:participatory_process, :with_steps, organization: organization) }
+  end
 end

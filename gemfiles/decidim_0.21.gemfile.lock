@@ -1,9 +1,9 @@
 PATH
   remote: ..
   specs:
-    decidim-decidim_awesome (0.2)
-      decidim-admin (>= 0.20.0)
-      decidim-core (>= 0.20.0)
+    decidim-decidim_awesome (0.4)
+      decidim-admin (>= 0.21.0)
+      decidim-core (>= 0.21.0)
       redcarpet (~> 3.4)
 
 GEM
@@ -75,7 +75,7 @@ GEM
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
     batch-loader (1.5.0)
-    bcrypt (3.1.15)
+    bcrypt (3.1.16)
     better_html (1.0.15)
       actionview (>= 4.0)
       activesupport (>= 4.0)
@@ -115,7 +115,7 @@ GEM
       cells (>= 4.1.6, < 5.0.0)
     charlock_holmes (0.7.7)
     childprocess (3.0.0)
-    codecov (0.2.9)
+    codecov (0.2.11)
       json
       simplecov
     coercible (1.0.0)
@@ -484,7 +484,7 @@ GEM
     mini_magick (4.10.1)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    minitest (5.14.1)
+    minitest (5.14.2)
     mixlib-cli (1.7.0)
     mixlib-config (2.2.18)
       tomlrb
@@ -494,7 +494,7 @@ GEM
     multipart-post (2.1.1)
     mustache (1.1.1)
     netrc (0.11.0)
-    nio4r (2.5.2)
+    nio4r (2.5.3)
     nobspw (0.6.2)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
@@ -544,8 +544,8 @@ GEM
     premailer-rails (1.11.1)
       actionmailer (>= 3)
       premailer (~> 1.7, >= 1.7.9)
-    public_suffix (4.0.5)
-    puma (4.3.5)
+    public_suffix (4.0.6)
+    puma (4.3.6)
       nio4r (~> 2.0)
     rack (2.2.3)
     rack-attack (6.3.1)
@@ -602,7 +602,7 @@ GEM
       virtus (~> 1.0.5)
       wisper (>= 1.6.1)
     redcarpet (3.5.0)
-    redis (4.2.1)
+    redis (4.2.2)
     regexp_parser (1.7.1)
     request_store (1.5.0)
       rack (>= 1.4)
@@ -772,6 +772,9 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0)
   uglifier (~> 4.1)
   web-console (~> 3.5)
+
+RUBY VERSION
+   ruby 2.6.6p146
 
 BUNDLED WITH
    2.1.4

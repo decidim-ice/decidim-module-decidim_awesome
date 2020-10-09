@@ -48,7 +48,7 @@ $(() => {
     $container.replaceWith(responseText.detail[0].html);
   });
 
-  document.body.addEventListener('ajax:complete', (xhr, event) => {
+  document.body.addEventListener('ajax:complete', () => {
     $modal.foundation('close');
   })
 });

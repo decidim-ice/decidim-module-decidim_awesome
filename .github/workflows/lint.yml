@@ -5,7 +5,7 @@ on:
   pull_request:
 
 env:
-  RUBY_VERSION: 2.6.5
+  RUBY_VERSION: 2.6.6
 
 jobs:
   lint-report:
@@ -15,24 +15,10 @@ jobs:
         with:
           fetch-depth: 1
 
-      - uses: ruby/setup-ruby@master
+      - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
-
-      - name: Recover Ruby dependency cache
-        uses: actions/cache@v1
-        with:
-          path: ./vendor/bundle
-          key: ${{ runner.OS }}-rubydeps-${{ hashFiles('Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-rubydeps-${{ env.cache-name }}-
-            ${{ runner.OS }}-rubydeps-
-            ${{ runner.OS }}-
-
-      - name: Install Ruby deps
-        run: |
-          gem install bundler:2.1.4
-          bundle install --path vendor/bundle --jobs 4 --retry 3
+          bundler-cache: true
 
       - name: Lint and Rubocop
         run: |

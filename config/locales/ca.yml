@@ -2,11 +2,11 @@ ca:
   activemodel:
     attributes:
       config:
-        allow_images_in_full_editor: Permet imatges a l'editor HTML complet
-        allow_images_in_markdown_editor: Permet imatges a l'editor Markdown
+        allow_images_in_full_editor: Permet imatge a l'editor HTML complet
+        allow_images_in_markdown_editor: Permet imatges a l'editor markdown
         allow_images_in_proposals: Permet imatges a l'editor de propostes
         allow_images_in_small_editor: Permet imatge a l'editor HTML reduït
-        auto_save_forms: Desa automàticament els formularis a l'emmagatzematge local
+        auto_save_forms: Desa automàticament els formularis a l'emmagatzematge local del navegador
         use_markdown_editor: Fes servir l'editor Markdown en comptes de l'editor HTML
       constraint:
         component_id: o específicament a
@@ -50,8 +50,8 @@ ca:
               allow_images_in_markdown_editor: Això permetrà a l'editor markdown pujar imatges "arrastrant i deixant anar".
               allow_images_in_proposals: Això permetrà pujar imatges a l'editor de propostes, disponible per qualsevol usuari
               allow_images_in_small_editor: Això afegirà un botó per pujar imatges a l'editor HTML mínim.
-              auto_save_forms: Això farà servir l'emmagatzematge local del navegador per desar automàticament les dades introduïdes pels usuaris a les enquestes i altres formularis mentre les omplen. Les dades es restauraran en una futura visita amb el mateix navegador en cas que no s'enviï el formulari. Si s’envia el formulari, s’eliminaran les dades locals. Si els usuaris eliminen les seves dades del navegador, tampoc es restauraran.
-              drag_and_drop_supported: Quan es pugin imatges, es pot fer a través del mètode de "arrossegar i deixar anar". Les imatges seran pujades al servidor i inserides com recursos externs (no es fa servir codificació en línia base64).
+              auto_save_forms: Això farà servir l'emmagatzematge local del navegador per desar automàticament les dades introduïdes pels usuaris a les enquestes i altres formularis mentre les omplen. Les dades es restauraran en una futura visita amb el mateix navegador en cas que no s’enviï el formulari. Si s’envia el formulari, s’eliminaran les dades locals. Si els usuaris eliminen les seves dades del navegador, tampoc es restauraran.
+              drag_and_drop_supported: Quan es pugin imatges, es pot fer a través del mètode de "arrastrar i deixar anar". Les imatges seran pujades al servidor i inserides com recursos externs (no es fa servir codificació en línia base64).
               use_markdown_editor: Això substituirà l'editor HTML (Quill), en el seu lloc s'utilitzarà un editor Markdown tant a l'admin com a la pàgina pública per processar el text (a la base de dades el text es desarà com a markdown)
           rich_text_editor_in_public_views: 'NOTA: "Editor de text enriquit per participants" està habilitat a la configuració general, aquesta opció no aplicarà. Feu servir les modificacions d''editor general per afegir imatges a les propostes.'
           show:
