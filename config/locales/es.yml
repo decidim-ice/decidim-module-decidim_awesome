@@ -46,7 +46,7 @@ es:
           experimental: Opciones experimentales
           form:
             help:
-              allow_images_in_full_editor: This will add an image uploader icon in all the editors WYSIWYG with the full toolbar enabled.
+              allow_images_in_full_editor: Esto añadirá un botón para subir imágenes en el editor HTML completo.
               allow_images_in_markdown_editor: This will allow markdown editor to upload images by copy & paste or drag & drop.
               allow_images_in_proposals: This will allow to upload images in the proposals editor, available to any user
               allow_images_in_small_editor: This will add an image uploader icon in all the editors WYSIWYG with minimal options in the toolbar enabled.
