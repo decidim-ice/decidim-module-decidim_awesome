@@ -106,10 +106,10 @@ es:
       decidim_awesome:
         awesome_config:
           amendments: Enmiendas
-          autosaved_error: LocalStorage is not supported in your browser, form cannot be saved automatically.
-          autosaved_retrieved: Data for this form has been recovered from a previous session
-          autosaved_success: Data saved in local storage
+          autosaved_error: El almacenamiento local no es compatible con tu navegador, el formulario no se podrá guardar automáticamente.
+          autosaved_retrieved: Los datos de este formulario se han recuperado de una sesión anterior
+          autosaved_success: Datos guardados en el almacenamiento local
           categories: Categorías
-          drag_and_drop_image: Add images by dragging & dropping or pasting them.
+          drag_and_drop_image: Puedes añadir imágenes arrastrando y soltándolas o también pegándolas.
           meetings: Encuentros
           proposals: Propuestas
