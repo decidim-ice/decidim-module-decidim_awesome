@@ -4,14 +4,27 @@ module Decidim
   module DecidimAwesome
     module IframeComponent
       class IframeController < DecidimAwesome::IframeComponent::ApplicationController
-        helper_method :iframe
+        helper_method :iframe, :remove_margins?, :viewport_width?
 
         def show; end
 
         private
 
         def iframe
-          current_component.settings.iframe.html_safe
+          @iframe ||= sanitize(current_component.settings.iframe).html_safe
+        end
+
+        def sanitize(html)
+          sanitizer = Rails::Html::SafeListSanitizer.new
+          sanitizer.sanitize(html, tags: %w(iframe), attributes: %w(src width height frameborder title allow allowpaymentrequest name referrerpolicy sandbox srcdoc allowfullscreen))
+        end
+
+        def remove_margins?
+          current_component.settings.no_margins
+        end
+
+        def viewport_width?
+          current_component.settings.viewport_width
         end
       end
     end

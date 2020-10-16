@@ -1,10 +1,8 @@
-// Override padding in this component
 .wrapper{
-  padding: 0;
-
-  .awesome_iframe {
+  .awesome_iframe{
     margin: 0 auto;
-    iframe {
+
+    iframe{
       display: block;
       margin: auto;
     }

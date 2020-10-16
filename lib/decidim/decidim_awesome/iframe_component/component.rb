@@ -16,10 +16,8 @@ Decidim.register_component(:awesome_iframe) do |component|
     # Available types: :integer, :boolean
     # settings.attribute :announcement, type: :text, translated: true, editor: true
     settings.attribute :iframe, type: :text
-    # settings.attribute :override_units, type: :boolean, default: false
-    # settings.attribute :units, type: :array, default: %w(percentage pixels)
-    # settings.attribute :height, type: :integer, default: 100
-    # settings.attribute :width, type: :integer, default: 100
+    settings.attribute :viewport_width, type: :boolean, default: false
+    settings.attribute :no_margins, type: :boolean, default: false
   end
 
   component.settings(:step) do |settings|
