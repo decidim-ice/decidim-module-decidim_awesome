@@ -19,6 +19,13 @@ en:
       menu:
         decidim_awesome: Decidim awesome
     components:
+      awesome_iframe:
+        name: Fullscreen Iframe
+        settings:
+          global:
+            iframe: Iframe code
+          step:
+            iframe: Iframe code
       awesome_map:
         name: Awesome Map
         settings:
