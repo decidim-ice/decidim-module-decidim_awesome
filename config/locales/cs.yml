@@ -19,15 +19,15 @@ cs:
         decidim_awesome: Úžasné Decidim
     components:
       awesome_iframe:
-        name: Fullscreen Iframe
+        name: Celá obrazovka Iframe
         settings:
           global:
-            iframe: Iframe code
-            iframe_help: 'Put your code as html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Content will be sanitized from other HTML tags. Ensure to use 100% as width to fill the screen.'
-            no_margins: No margins between the iframe and the rest of the page
-            viewport_width: Limit maximum width to the application viewport
+            iframe: Kód Iframe
+            iframe_help: 'Zadejte kód jako html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Obsah bude sanitován z jiných HTML tagů. Pro vyplnění obrazovky použijte 100% šířku.'
+            no_margins: Mezi iframe a zbytkem stránky nejsou žádné okraje
+            viewport_width: Omezit maximální šířku na zobrazení aplikace
           step:
-            iframe: Iframe code
+            iframe: Kód Iframe
       awesome_map:
         name: Úžasná mapa
         settings:
