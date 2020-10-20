@@ -2,7 +2,7 @@
 
 [![Build](https://github.com/Platoniq/decidim-module-decidim_awesome/workflows/Build/badge.svg)](https://github.com/Platoniq/decidim-module-decidim_awesome/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/2dada53525dd5a944089/maintainability)](https://codeclimate.com/github/Platoniq/decidim-module-decidim_awesome/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/2dada53525dd5a944089/test_coverage)](https://codeclimate.com/github/Platoniq/decidim-module-decidim_awesome/test_coverage)
+[![Test Coverage](https://codecov.io/gh/Platoniq/decidim-module-decidim_awesome/branch/master/graph/badge.svg?token=TFBMCLLZJG)](undefined)
 
 Usability and UX tweaks for Decidim.
 
@@ -93,6 +93,13 @@ See an example here:
 https://github.com/Platoniq/decidim-demo/tree/master/app/assets/themes
 
 NOTE: Files presents in the `app/assets/themes` folder are added automatically into the precompile list of Rails by this plugin.
+
+#### 8. Fullscreen Iframe component
+
+Another simple component that can be used to embed and Iframe with any external content in it that fills all the viewport.
+
+![Fullscreen iframe](examples/fullscreen-iframe.png)
+
 
 #### To be continued...
 

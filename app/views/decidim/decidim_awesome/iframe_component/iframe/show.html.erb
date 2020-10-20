@@ -1,0 +1,9 @@
+<%= stylesheet_link_tag "decidim/decidim_awesome/awesome_iframe/iframe" %>
+
+<style rel="stylesheet" type="text/css">
+<%= ".wrapper { padding: 0; }" if remove_margins? %>
+</style>
+
+<div class="awesome-iframe<%= " row" if viewport_width? %>">
+  <%= iframe %>
+</div>
