@@ -18,6 +18,16 @@ es:
       menu:
         decidim_awesome: Decidim Awesome
     components:
+      awesome_iframe:
+        name: Fullscreen Iframe
+        settings:
+          global:
+            iframe: Iframe code
+            iframe_help: 'Put your code as html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Content will be sanitized from other HTML tags. Ensure to use 100% as width to fill the screen.'
+            no_margins: No margins between the iframe and the rest of the page
+            viewport_width: Limit maximum width to the application viewport
+          step:
+            iframe: Iframe code
       awesome_map:
         name: Mapa Global
         settings:
