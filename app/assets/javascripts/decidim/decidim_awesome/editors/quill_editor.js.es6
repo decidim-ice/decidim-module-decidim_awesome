@@ -110,7 +110,8 @@
         }
       });
 
-      quill.root.innerHTML = $input.val() || "";
+      // https://github.com/decidim/decidim/pull/6422
+      container.innerHTML = $input.val() || "";
       
       if(addImage) {
         const t = window.DecidimAwesome.texts["drag_and_drop_image"];
