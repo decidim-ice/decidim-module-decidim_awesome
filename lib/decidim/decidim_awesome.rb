@@ -7,6 +7,8 @@ require "decidim/decidim_awesome/content_renderers"
 require "decidim/decidim_awesome/context_analyzers"
 require "decidim/decidim_awesome/map_component/engine"
 require "decidim/decidim_awesome/map_component/component"
+require "decidim/decidim_awesome/iframe_component/engine"
+require "decidim/decidim_awesome/iframe_component/component"
 
 module Decidim
   module DecidimAwesome

@@ -27,4 +27,10 @@ FactoryBot.define do
     manifest_name { :awesome_map }
     participatory_space { create(:participatory_process, :with_steps, organization: organization) }
   end
+
+  factory :iframe_component, parent: :component do
+    name { Decidim::Components::Namer.new(participatory_space.organization.available_locales, :proposals).i18n_name }
+    manifest_name { :awesome_iframe }
+    participatory_space { create(:participatory_process, :with_steps, organization: organization) }
+  end
 end
