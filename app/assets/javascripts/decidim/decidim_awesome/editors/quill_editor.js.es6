@@ -54,6 +54,8 @@
         toolbar: quillToolbar
       };
       const $input = $(container).siblings('input[type="hidden"]');
+      // https://github.com/decidim/decidim/pull/6422
+      container.innerHTML = $input.val() || "";
       const token = $( 'meta[name="csrf-token"]' ).attr( 'content' );
 
       if(addImage) {
@@ -109,10 +111,7 @@
           $input.val(quill.root.innerHTML);
         }
       });
-
-      // https://github.com/decidim/decidim/pull/6422
-      container.innerHTML = $input.val() || "";
-      
+     
       if(addImage) {
         const t = window.DecidimAwesome.texts["drag_and_drop_image"];
         $(container).after(`<p class="help-text" style="margin-top:-1.5rem;">${t}</p>`);
