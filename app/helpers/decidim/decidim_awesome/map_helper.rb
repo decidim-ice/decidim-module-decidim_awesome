@@ -13,6 +13,7 @@ module Decidim
                                  {
                                    id: component.id,
                                    type: component.manifest.name,
+                                   name: translated_attribute(component.name),
                                    url: Decidim::EngineRouter.main_proxy(component).root_path,
                                    amendments: component.manifest.name == :proposals ? Decidim::Proposals::Proposal.where(component: component).only_emendations.count : 0
                                  }

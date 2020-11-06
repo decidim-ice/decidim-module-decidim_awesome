@@ -75,7 +75,7 @@
       if(component.type == "proposals") {
         // add control layer for proposals
         layers.proposals = {
-          label: window.DecidimAwesome.texts.proposals,
+          label: component.name || window.DecidimAwesome.texts.proposals,
           group: L.featureGroup.subGroup(cluster)
         };
         control.addOverlay(layers.proposals.group, layers.proposals.label);
@@ -109,7 +109,7 @@
       if(component.type == "meetings") {
         // add control layer for meetings
         layers.meetings = {
-          label: window.DecidimAwesome.texts.meetings,
+          label: component.name || window.DecidimAwesome.texts.meetings,
           group: L.featureGroup.subGroup(cluster)
         };
         control.addOverlay(layers.meetings.group, layers.meetings.label);
