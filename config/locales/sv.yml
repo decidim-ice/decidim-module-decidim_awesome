@@ -1,4 +1,4 @@
-fr:
+sv:
   activemodel:
     attributes:
       config:
@@ -50,8 +50,8 @@ fr:
           constraints:
             add_condition: Add case
             always: Always
-            delete: Supprimer
-            edit: Modifier
+            delete: Delete
+            edit: Edit
             title: 'Applicable only in these cases:'
           experimental: Experimental options
           form:
