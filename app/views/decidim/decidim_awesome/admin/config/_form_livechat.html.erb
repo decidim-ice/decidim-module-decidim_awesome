@@ -5,9 +5,8 @@
 
     <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :intergram_for_admins, constraints: constraints_for(:intergram_for_admins) }) %>
 
-    
     <%= fields_for "config[intergram_for_admins_settings]", form.object.intergram_for_admins_settings do |f| %>
-      <%= f.text_field :chat_id  %>
+      <%= f.text_field :chat_id %>
     <% end %>
 
   <% end %>
