@@ -51,15 +51,22 @@
         amendments.push(amendment.emendation.id);
       });
     }
-
     // Add to category layer
     let cat = getCategory(element.category);
     if(layers[cat.id]) {
       marker.addTo(layers[cat.id].group);
       // show category if hidden
-      $(`.awesome_map-category_${cat.id}`).closest("label").show();
+      const $label = $(`.awesome_map-category_${cat.id}`).closest("label");
+      const $parent = $(`.awesome_map-category_${cat.parent}`).closest("label");
+      $label.show();
+      // update number of items
+      $label.attr("title", parseInt($label.attr("title") || 0) + 1);
       // show parent if apply
-      $(`.awesome_map-category_${cat.parent}`).closest("label").show();
+      $parent.show();
+      $parent.attr("title", parseInt($parent.attr("title") || 0) + 1);
+      // update component stats
+      const $component = $(`#awesome_map-component-${component.id}`);
+      $component.attr("title", parseInt($component.attr("title") || 0) + 1);
     }
 
     return marker;
@@ -75,7 +82,7 @@
       if(component.type == "proposals") {
         // add control layer for proposals
         layers.proposals = {
-          label: window.DecidimAwesome.texts.proposals,
+          label: `<span id="awesome_map-component-${component.id}" title="0">${component.name || window.DecidimAwesome.texts.proposals}</span>`,
           group: L.featureGroup.subGroup(cluster)
         };
         control.addOverlay(layers.proposals.group, layers.proposals.label);
@@ -84,7 +91,7 @@
         // add control layer for amendments if any
         if(component.amendments) {
           layers.amendments = {
-            label: window.DecidimAwesome.texts.amendments,
+            label: `<span id="awesome_map-component-${component.d}" title="0">${window.DecidimAwesome.texts.amendment}/span>`,
             group: L.featureGroup.subGroup(cluster)
           }
           control.addOverlay(layers.amendments.group, layers.amendments.label);
@@ -109,7 +116,7 @@
       if(component.type == "meetings") {
         // add control layer for meetings
         layers.meetings = {
-          label: window.DecidimAwesome.texts.meetings,
+          label: `<span id="awesome_map-component-${component.id}" title="0">${component.name || window.DecidimAwesome.texts.meetings}/span>`,
           group: L.featureGroup.subGroup(cluster)
         };
         control.addOverlay(layers.meetings.group, layers.meetings.label);
