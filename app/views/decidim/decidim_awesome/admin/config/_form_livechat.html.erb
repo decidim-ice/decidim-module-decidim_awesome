@@ -1,0 +1,14 @@
+<div class="row column decidim_awesome-form">
+  <% if config_enabled? :intergram_for_admins %>
+    <%= form.check_box :intergram_for_admins %>
+    <p class="help-text"><%= t("help.intergram_for_admins", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+
+    <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :intergram_for_admins, constraints: constraints_for(:intergram_for_admins) }) %>
+
+    
+    <%= fields_for "config[intergram_for_admins_settings]", form.object.intergram_for_admins_settings do |f| %>
+      <%= f.text_field :chat_id  %>
+    <% end %>
+
+  <% end %>
+</div>

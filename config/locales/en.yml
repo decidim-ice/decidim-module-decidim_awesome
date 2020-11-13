@@ -9,6 +9,9 @@ en:
         allow_images_in_small_editor: Allow images in the minimal HTML editor
         auto_save_forms: Auto save forms in local storage
         use_markdown_editor: Use a Markdown editor instead of the HTML editor
+        intergram_for_admins: Enable Intergram Chat in the admin backend
+        intergram_for_admins_settings:
+          chat_id: Chat ID
       constraint:
         component_id: or specifically in
         component_manifest: Only in components of type
@@ -80,6 +83,8 @@ en:
               use_markdown_editor: This will substitute the Quill WYSIWYG editor,
                 use a Markdown editor in the admin side and a frontend processor to
                 render the text (text in database will be saved as markdown text)
+              intergram_for_admins: TODO
+              intergram_for_public: TODO
           rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants"
             is enabled, this option won''t apply. Use the editors hacks instead to
             enable images in proposals.'
@@ -115,6 +120,7 @@ en:
           editors: Editor hacks
           proposals: Proposals hacks
           surveys: Surveys & forms
+          livechat: Live Chat
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
       editor_images:
         create:

@@ -26,7 +26,8 @@ module Decidim
               next if val.nil?
 
               setting = AwesomeConfig.find_or_initialize_by(var: key, organization: form.current_organization)
-              setting.value = val
+
+              setting.value = val.respond_to?(:attributes) ? val.attributes : val
               setting.save!
             end
 

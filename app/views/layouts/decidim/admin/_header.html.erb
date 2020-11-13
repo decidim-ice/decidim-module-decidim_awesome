@@ -1,1 +1,6 @@
 <%= render partial: "#{version_prefix}/layouts/decidim/admin/header" %>
+
+<% if awesome_config[:intergram_for_admins] %>
+<script> window.intergramId = "<%= organization_awesome_config[:intergram_for_admins_settings]["chat_id"] %>" </script>
+<script id="intergram" type="text/javascript" src="https://www.intergram.xyz/js/widget.js"></script>
+<% end %>

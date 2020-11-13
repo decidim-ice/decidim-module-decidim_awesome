@@ -46,6 +46,21 @@ module Decidim
     config_accessor :auto_save_forms do
       false
     end
+
+    # Live chat widget linked to Telegram account or group
+    config_accessor :intergram_for_admins do
+      false
+    end
+
+    config_accessor :intergram_for_public do
+      false
+    end
+
+    config_accessor :intergram_for_admins_settings do
+      {
+        chat_id: nil
+      }
+    end
   end
 end
 
