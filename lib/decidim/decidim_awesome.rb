@@ -67,14 +67,28 @@ module Decidim
 
     config_accessor :intergram_for_admins_settings do
       {
-        chat_id: nil
+        chat_id: nil,
+        color: "#E91E63",
+        use_floating_button: false,
+        title_closed: nil,
+        title_open: nil,
+        intro_message: nil,
+        auto_response: nil,
+        auto_no_response: nil
       }
     end
 
     config_accessor :intergram_for_public_settings do
       {
         chat_id: nil,
-        require_login: false
+        require_login: true,
+        color: "#E91E63",
+        use_floating_button: false,
+        title_closed: nil,
+        title_open: nil,
+        intro_message: nil,
+        auto_response: nil,
+        auto_no_response: nil
       }
     end
   end

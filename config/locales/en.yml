@@ -8,9 +8,19 @@ en:
         allow_images_in_proposals: Allow images in the proposals editor
         allow_images_in_small_editor: Allow images in the minimal HTML editor
         auto_save_forms: Auto save forms in local storage
+        intergram_auto_no_response: A message that is sent one minute after the user
+          sends its first message and no response was received
+        intergram_auto_response: A message that is sent immediately after the user
+          sends its first message
         intergram_chat_id: Chat ID
         intergram_for_admins: Enable Intergram Chat in the admin backend
+        intergram_intro_message: First message when the user opens the chat for the
+          first time
         intergram_require_login: Only for logged users
+        intergram_title_closed: Closed chat title
+        intergram_title_open: Opened chat title
+        intergram_use_floating_button: If checked, the closed chat is always a button
+          instead of a text
         use_markdown_editor: Use a Markdown editor instead of the HTML editor
       constraint:
         component_id: or specifically in
@@ -124,6 +134,15 @@ en:
           livechat: Live Chat
           proposals: Proposals hacks
           surveys: Surveys & forms
+      config:
+        intergram:
+          auto_no_response: It seems that no one is available to answer right now.
+            Please tell us how we can contact you, and we will get back to you as
+            soon as we can.
+          auto_response: Looking for the first available admin (It might take a minute)
+          intro_message: Hello! How can we help you?
+          title_closed: Click to chat!
+          title_open: Let's chat!
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
       editor_images:
         create:
