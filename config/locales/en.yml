@@ -13,6 +13,7 @@ en:
         intergram_auto_response: A message that is sent immediately after the user
           sends its first message
         intergram_chat_id: Chat ID
+        intergram_color: Color of the widget
         intergram_for_admins: Enable Intergram Chat in the admin backend
         intergram_intro_message: First message when the user opens the chat for the
           first time

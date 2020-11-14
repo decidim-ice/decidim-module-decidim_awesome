@@ -21,7 +21,7 @@ module Decidim
 
       def show_public_intergram?
         return unless awesome_config[:intergram_for_public]
-        return unless awesome_config[:intergram_for_public_settings]["require_login"]
+        return true unless awesome_config[:intergram_for_public_settings][:require_login]
 
         user_signed_in?
       end

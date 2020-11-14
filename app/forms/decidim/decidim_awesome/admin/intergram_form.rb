@@ -8,6 +8,7 @@ module Decidim
       class IntergramForm < Decidim::Form
         attribute :chat_id, String
         attribute :require_login, Boolean
+        attribute :color, String
         attribute :use_floating_button, Boolean
         attribute :title_open, String
         attribute :title_closed, String

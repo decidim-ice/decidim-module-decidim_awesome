@@ -10,6 +10,7 @@
       <p class="help-text"><%= t("help.intergram_config", scope: "decidim.decidim_awesome.admin.config.form").html_safe %></p>
       <%= f.check_box :require_login, label: t("intergram_require_login", scope: "activemodel.attributes.config") %>
       <%= f.check_box :use_floating_button, label: t("intergram_use_floating_button", scope: "activemodel.attributes.config") %>
+      <%= f.color_field :color, label: t("intergram_color", scope: "activemodel.attributes.config") %>
 
       <%= f.text_field :title_open, label: t("intergram_title_open", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.title_open") %>
       <%= f.text_field :title_closed, label: t("intergram_title_closed", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.title_closed") %>
@@ -31,6 +32,7 @@
       <p class="help-text"><%= t("help.intergram_config", scope: "decidim.decidim_awesome.admin.config.form").html_safe %></p>
 
       <%= f.check_box :use_floating_button, label: t("intergram_use_floating_button", scope: "activemodel.attributes.config") %>
+      <%= f.color_field :color, label: t("intergram_color", scope: "activemodel.attributes.config") %>
 
       <%= f.text_field :title_open, label: t("intergram_title_open", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.title_open") %>
       <%= f.text_field :title_closed, label: t("intergram_title_closed", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.title_closed") %>
