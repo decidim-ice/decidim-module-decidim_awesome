@@ -7,6 +7,7 @@ module Decidim
       #
       class IntergramForm < Decidim::Form
         attribute :chat_id, String
+        attribute :require_login, Boolean
       end
     end
   end

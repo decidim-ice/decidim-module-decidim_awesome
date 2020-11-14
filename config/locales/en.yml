@@ -8,9 +8,9 @@ en:
         allow_images_in_proposals: Allow images in the proposals editor
         allow_images_in_small_editor: Allow images in the minimal HTML editor
         auto_save_forms: Auto save forms in local storage
+        intergram_chat_id: Chat ID
         intergram_for_admins: Enable Intergram Chat in the admin backend
-        intergram_for_admins_settings:
-          chat_id: Chat ID
+        intergram_require_login: Only for logged users
         use_markdown_editor: Use a Markdown editor instead of the HTML editor
       constraint:
         component_id: or specifically in
@@ -80,8 +80,11 @@ en:
               drag_and_drop_supported: When uploading images, Drag & Drop is supported.
                 Images will be uploaded to the server and inserted as external resources
                 (it doesn't use base64 inline encoding).
-              intergram_for_admins: TODO
-              intergram_for_public: TODO
+              intergram_about: Intergram uses Telegram messenger to handle a live
+                support chat widget embedded in the bottom of the page.
+              intergram_config: Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram
+                bot</a> to your group or start a chat with it directly. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+
+                info</a>
               use_markdown_editor: This will substitute the Quill WYSIWYG editor,
                 use a Markdown editor in the admin side and a frontend processor to
                 render the text (text in database will be saved as markdown text)
