@@ -7,14 +7,16 @@ module Decidim
         include Decidim::TranslatableAttributes
 
         # returns only non :disabled vars in config
-        def filter_enabled(vars)
+        def enabled_configs(vars)
           vars.filter do |var|
             config_enabled? var
           end
         end
 
         def config_enabled?(var)
-          DecidimAwesome.config[var] != :disabled
+          return DecidimAwesome.config.send(var) != :disabled unless var.is_a? Array
+
+          var.detect { |v| DecidimAwesome.config.send(v) != :disabled }
         end
 
         def participatory_space_manifests

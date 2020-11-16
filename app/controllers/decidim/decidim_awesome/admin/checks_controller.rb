@@ -8,6 +8,7 @@ module Decidim
       # System compatibility analyzer
       class ChecksController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
+        helper ConfigConstraintsHelpers
 
         layout "decidim/admin/decidim_awesome"
 
