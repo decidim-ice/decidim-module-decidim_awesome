@@ -28,7 +28,7 @@ module Decidim
         end
 
         def decidim_version_valid?
-          ::Gem::Version.new(DecidimAwesome::MIN_DECIDIM_VERSION) <= ::Gem::Version.new(decidim_version)
+          Gem::Dependency.new("", DecidimAwesome::COMPAT_DECIDIM_VERSION).match?("", decidim_version)
         end
       end
     end

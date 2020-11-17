@@ -115,7 +115,7 @@ Some things in the road-map:
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-decidim_awesome", git: "https://github.com/Platoniq/decidim-module-decidim_awesome"
+gem "decidim-decidim_awesome", "0.5"
 ```
 
 And then execute:
@@ -125,6 +125,13 @@ bundle
 bundle exec rails decidim_decidim_awesome:install:migrations
 bundle exec rails db:migrate
 ```
+
+Depending on your Decidim version, choose the corresponding Awesome version to ensure compatibility:
+
+| Awesome version | Compatible Decidim versions |
+|---|---|---|---|---|
+| 0.5 | 0.21.x, 0.22.x |
+
 
 ## Configuration
 
