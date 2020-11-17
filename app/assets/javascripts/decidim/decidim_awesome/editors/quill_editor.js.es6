@@ -54,7 +54,6 @@
         toolbar: quillToolbar
       };
       const $input = $(container).siblings('input[type="hidden"]');
-      // https://github.com/decidim/decidim/pull/6422
       container.innerHTML = $input.val() || "";
       const token = $( 'meta[name="csrf-token"]' ).attr( 'content' );
 

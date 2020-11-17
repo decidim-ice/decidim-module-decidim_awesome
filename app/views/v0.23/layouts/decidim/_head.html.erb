@@ -20,10 +20,6 @@
 <%= favicon %>
 <%= stylesheet_link_tag    "application", media: "all" %>
 <%= invisible_captcha_styles %>
-
-<%= stylesheet_link_tag    "decidim/decidim_awesome/application", media: "all" %>
-<%= stylesheet_link_tag(tenant_stylesheets, media: "all") if tenant_stylesheets %>
-
 <%= organization_colors %>
 <%= javascript_include_tag "decidim/confirm" %>
 <%= javascript_include_tag "application" %>
@@ -31,6 +27,8 @@
 
 <%= render partial: "layouts/decidim/head_extra" %>
 <%== current_organization.header_snippets if Decidim.enable_html_header_snippets %>
+<%= snippets.display(:head) %>
+<%= content_for :header_snippets %>
 
 <%= render partial: "layouts/decidim/decidim_awesome/awesome_config" %>
 <%= javascript_include_tag "decidim/decidim_awesome/application" %>
