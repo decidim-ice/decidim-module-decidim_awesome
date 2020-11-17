@@ -1,1 +1,5 @@
 <%= render partial: "#{version_prefix}/layouts/decidim/admin/header" %>
+
+<% if awesome_config[:intergram_for_admins] %>
+  <%= render partial: "layouts/decidim/decidim_awesome/intergram_widget", locals: { settings: organization_awesome_config[:intergram_for_admins_settings] } %>
+<% end %>

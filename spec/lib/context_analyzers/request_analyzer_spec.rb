@@ -16,6 +16,7 @@ module Decidim::DecidimAwesome
       end
 
       paths = {
+        "/" => {},
         "/processes" => { participatory_space_manifest: "participatory_processes" },
         "https://www.decidim.barcelona/processes/" => { participatory_space_manifest: "participatory_processes" },
         "https://www.decidim.barcelona/processes/PressupostosParticipatius" => {
@@ -36,6 +37,18 @@ module Decidim::DecidimAwesome
           participatory_space_manifest: "assemblies",
           participatory_space_slug: "some-assembly",
           component_id: "12"
+        }
+      }
+
+      admin_paths = {
+        "/admin" => {},
+        "/admin/participatory_processes" => { participatory_space_manifest: "participatory_processes" },
+        "/admin/participatory_process_groups" => { participatory_space_manifest: "participatory_processes" },
+        "/admin/assemblies" => { participatory_space_manifest: "assemblies" },
+        "/admin/assemblies_types" => { participatory_space_manifest: "assemblies" },
+        "/admin/assemblies/some-assembly" => {
+          participatory_space_manifest: "assemblies",
+          participatory_space_slug: "some-assembly"
         },
         "http://localhost:3000/admin/participatory_processes/some-process/components/12/manage/" => {
           participatory_space_manifest: "participatory_processes",
@@ -49,7 +62,18 @@ module Decidim::DecidimAwesome
           let(:url) { path }
           let(:context) { ctx }
 
-          it "returns detected context" do
+          it "detects context in public #{path}" do
+            expect(subject).to eq(context)
+          end
+        end
+      end
+
+      admin_paths.each do |path, ctx|
+        context "when #{path}" do
+          let(:url) { path }
+          let(:context) { ctx }
+
+          it "detects context in admin #{path}" do
             expect(subject).to eq(context)
           end
         end

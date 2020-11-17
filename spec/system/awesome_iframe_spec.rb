@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Show awesome iframe", :slow, type: :system do
+describe "Show awesome iframe", type: :system do
   include_context "with a component"
   let(:manifest_name) { "awesome_iframe" }
 
