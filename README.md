@@ -121,7 +121,7 @@ Some things in the road-map:
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-decidim_awesome", "0.5"
+gem "decidim-decidim_awesome", "0.6"
 ```
 
 And then execute:
@@ -135,8 +135,9 @@ bundle exec rails db:migrate
 Depending on your Decidim version, choose the corresponding Awesome version to ensure compatibility:
 
 | Awesome version | Compatible Decidim versions |
-|---|---|---|---|---|
+|---|---|
 | 0.5 | 0.21.x, 0.22.x |
+| 0.6 | 0.22.x, 0.23.x |
 
 
 ## Configuration
@@ -246,7 +247,7 @@ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rspec
 
 However, this project also make use of the gem [Appraisals](https://github.com/thoughtbot/appraisal) in order to test againts several versions of Decidim. The idea is to suport same supported versions of Decidim.
 
-You can run run all tests againts all Decidim versions by using:
+You can run run all tests against all Decidim versions by using:
 ```bash
 bundle exec appraisal install
 DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rake test_app
@@ -282,7 +283,7 @@ Appraisal uses custom gems for testing in the folder `gemfiles`, these gemfiles 
 bundle exec appraisal install
 ```
 
-To update the Appraisal definitions maually do the following:
+To update the Appraisal definitions manually do the following:
 
 ```
 cd gemfiles
