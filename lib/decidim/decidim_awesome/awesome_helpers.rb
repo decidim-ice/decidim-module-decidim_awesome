@@ -19,6 +19,13 @@ module Decidim
         @awesome_config ||= awesome_config_instance.config
       end
 
+      def show_public_intergram?
+        return unless awesome_config[:intergram_for_public]
+        return true unless awesome_config[:intergram_for_public_settings][:require_login]
+
+        user_signed_in?
+      end
+
       def unfiltered_awesome_config
         @unfiltered_awesome_config ||= awesome_config_instance.unfiltered_config
       end

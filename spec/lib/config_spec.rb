@@ -91,6 +91,24 @@ module Decidim::DecidimAwesome
       it "matches personalized config" do
         expect(subject.config).to eq(custom_config)
       end
+
+      context "and some value is a hash" do
+        let(:settings) do
+          {
+            "chat_id" => "-1234",
+            :color => "red",
+            use_floating_button: true
+          }
+        end
+        let!(:awesome_config) { create :awesome_config, organization: organization, var: :intergram_for_public_settings, value: settings }
+
+        it "returns the config normalized" do
+          expect(subject.config[:intergram_for_public_settings][:chat_id]).to eq("-1234")
+          expect(subject.config[:intergram_for_public_settings][:color]).to eq("red")
+          expect(subject.config[:intergram_for_public_settings][:require_login]).to eq(true)
+          expect(subject.config[:intergram_for_public_settings][:use_floating_button]).to eq(true)
+        end
+      end
     end
 
     context "when some config is disabled" do

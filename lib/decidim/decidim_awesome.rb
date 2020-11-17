@@ -19,6 +19,8 @@ module Decidim
     autoload :ContentRenderes, "decidim/decidim_awesome/content_renderers"
     autoload :ContextAnalyzers, "decidim/decidim_awesome/context_analyzers"
 
+    # Boolean configuration options
+    #
     # Default values for configuration options:
     #   true  => always true but admins can still restrict its scope
     #   false => default false, admins can turn it true
@@ -43,8 +45,52 @@ module Decidim
       false
     end
 
+    # used to save forms in localstorage
     config_accessor :auto_save_forms do
       false
+    end
+
+    # Live chat widget linked to Telegram account or group
+    config_accessor :intergram_for_admins do
+      false
+    end
+
+    config_accessor :intergram_for_public do
+      false
+    end
+
+    # these settings do not follow the :disabled convention but
+    # depends on the previous intergram configurations
+    config_accessor :intergram_url do
+      "https://www.intergram.xyz/js/widget.js"
+    end
+
+    # no need to override these settings, there admin-configurable
+    config_accessor :intergram_for_admins_settings do
+      {
+        chat_id: nil,
+        color: nil,
+        use_floating_button: false,
+        title_closed: nil,
+        title_open: nil,
+        intro_message: nil,
+        auto_response: nil,
+        auto_no_response: nil
+      }
+    end
+
+    config_accessor :intergram_for_public_settings do
+      {
+        chat_id: nil,
+        require_login: true,
+        color: nil,
+        use_floating_button: false,
+        title_closed: nil,
+        title_open: nil,
+        intro_message: nil,
+        auto_response: nil,
+        auto_no_response: nil
+      }
     end
   end
 end

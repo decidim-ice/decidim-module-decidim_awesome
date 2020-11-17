@@ -61,13 +61,10 @@ module Decidim
       # config normalized according default values, without context, without organization config
       def unfiltered_config
         valid = @vars.map { |v| [v.var.to_sym, v.value] }.to_h
-        defaults.map do |key, val|
-          if val == :disabled
-            [key, false]
-          else
-            [key, valid[key].presence || val]
-          end
-        end.to_h
+
+        map_defaults do |key|
+          valid[key].presence
+        end
       end
 
       def setting_for(var)
@@ -84,19 +81,28 @@ module Decidim
 
       private
 
+      def map_defaults
+        defaults.map do |key, val|
+          value = false
+          unless val == :disabled
+            value = yield(key) || val
+            value = val.merge(value.transform_keys(&:to_sym)) if val.is_a? Hash
+          end
+          [key, value]
+        end.to_h
+      end
+
       def calculate_config
         # filter vars compliant with current context
         valid = @vars.filter { |item| enabled_for_organization?(item.var) && valid_in_context?(item.constraints) }
                      .map { |v| [v.var.to_sym, v.value] }.to_h
-        defaults.map do |key, val|
-          if val == :disabled
-            [key, false]
-          else
-            [key, valid[key].presence || val]
-          end
-        end.to_h
+
+        map_defaults do |key|
+          valid[key].presence
+        end
       end
 
+      # extra checks that may be relevant for the key
       def enabled_for_organization?(key)
         case key.to_sym
         when :allow_images_in_proposals

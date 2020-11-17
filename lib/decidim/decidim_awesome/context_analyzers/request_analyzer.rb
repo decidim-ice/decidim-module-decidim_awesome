@@ -26,19 +26,22 @@ module Decidim
         private
 
         # In the frontend there's no a 100% correspondence between url and manifest name
-        def participatory_space_manifests
-          Decidim.participatory_space_manifests.map do |space|
-            case space.name
-            when :participatory_processes
-              ["processes", space.name.to_s]
-            else
-              [space.name.to_s, space.name.to_s]
-            end
+        def participatory_spaces
+          spaces = Decidim.participatory_space_manifests.map do |space|
+            [space.name.to_s, space.name.to_s]
           end.to_h
+          spaces.merge(
+            "processes" => "participatory_processes",
+            "participatory_process_groups" => "participatory_processes",
+            "assemblies_types" => "assemblies"
+          )
         end
 
         def process_admin_segments(segments)
-          @context[:participatory_space_manifest] = segments[0] if segments[1].present?
+          spaces = participatory_spaces
+          return unless spaces[segments[0]]
+
+          @context[:participatory_space_manifest] = spaces[segments[0]]
           @context[:participatory_space_slug] = segments[1] if segments[1].present?
 
           return unless segments[2].presence == "components" && segments[3].present?
@@ -50,7 +53,7 @@ module Decidim
         end
 
         def process_front_segments(segments)
-          spaces = participatory_space_manifests
+          spaces = participatory_spaces
           return unless spaces[segments[0]]
 
           @context[:participatory_space_manifest] = spaces[segments[0]]
