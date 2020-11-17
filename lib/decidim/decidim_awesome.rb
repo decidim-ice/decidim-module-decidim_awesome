@@ -65,6 +65,7 @@ module Decidim
       "https://www.intergram.xyz/js/widget.js"
     end
 
+    # no need to override these settings, there admin-configurable
     config_accessor :intergram_for_admins_settings do
       {
         chat_id: nil,

@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Show awesome map", :slow, type: :system do
+describe "Show awesome map", type: :system do
   include_context "with a component"
   let(:manifest_name) { "awesome_map" }
 

@@ -2,7 +2,7 @@
   window.intergramId = "<%= j (settings[:chat_id]).html_safe %>";
 
   window.intergramOnOpen = {};
-  window.intergramOnOpen.visitorName='<%= current_user&.nickname %>';
+  window.intergramOnOpen.visitorName = "<%= j current_user&.nickname %>";
   window.intergramCustomizations = {
     titleClosed: "<%= j (settings[:title_closed].presence || t("decidim.decidim_awesome.config.intergram.title_closed")).html_safe %>",
     titleOpen: "<%= j (settings[:title_open].presence || t("decidim.decidim_awesome.config.intergram.title_open")).html_safe %>",
