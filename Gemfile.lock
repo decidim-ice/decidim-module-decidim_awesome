@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    decidim-decidim_awesome (0.5)
+    decidim-decidim_awesome (0.5.1)
       decidim-admin (>= 0.21.0, < 0.23)
       decidim-core (>= 0.21.0, < 0.23)
       redcarpet (~> 3.4)
