@@ -7,16 +7,16 @@ cs:
         allow_images_in_proposals: Povolit obrázky v editoru návrhů
         allow_images_in_small_editor: Povolit obrázky v minimálním HTML editoru
         auto_save_forms: Automaticky ukládat formuláře v místním úložišti
-        intergram_auto_no_response: A message that is sent one minute after the user sends its first message and no response was received
-        intergram_auto_response: A message that is sent immediately after the user sends its first message
-        intergram_chat_id: Chat ID
-        intergram_color: Color of the widget
-        intergram_for_admins: Enable Intergram Chat in the admin backend
-        intergram_intro_message: First message when the user opens the chat for the first time
-        intergram_require_login: Only for logged users
-        intergram_title_closed: Closed chat title
-        intergram_title_open: Opened chat title
-        intergram_use_floating_button: If checked, the closed chat is always a button instead of a text
+        intergram_auto_no_response: Zpráva, která je odeslána jednu minutu poté, co uživatel odešle svou první zprávu a nebyla obdržena odpověď
+        intergram_auto_response: Zpráva, která je odeslána okamžitě poté, co uživatel odešle svou první zprávu
+        intergram_chat_id: ID Chatu
+        intergram_color: Barva widgetu
+        intergram_for_admins: Povolit Intergram chat v administraci
+        intergram_intro_message: První zpráva při prvním otevření chatu
+        intergram_require_login: Pouze pro přihlášené uživatele
+        intergram_title_closed: Titulek uzavřeného chatu
+        intergram_title_open: Titulek otevřeného chatu
+        intergram_use_floating_button: Je-li zaškrtnuto, uzavřený chat je vždy tlačítko místo textu
         use_markdown_editor: Použít Markdown editor namísto HTML editoru
       constraint:
         component_id: nebo konkrétně v
