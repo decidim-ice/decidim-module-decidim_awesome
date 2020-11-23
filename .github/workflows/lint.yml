@@ -22,5 +22,5 @@ jobs:
 
       - name: Lint and Rubocop
         run: |
-          bundle exec rubocop -A
+          bundle exec rubocop -P
         # bundle exec erblint app/views/**/*.erb
