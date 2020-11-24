@@ -1,3 +1,4 @@
+// = require decidim/map
 // = require leaflet.featuregroup.subgroup
 // = require decidim/decidim_awesome/awesome_map/categories
 // = require decidim/decidim_awesome/awesome_map/proposals
@@ -7,8 +8,8 @@
 ((exports) => {
   const { fetchProposals, fetchMeetings, getCategory } = exports.AwesomeMap;
 
-  const collapsedMenu = $("#awesome-map").data("collapsed");
-  const components = $("#awesome-map").data("components");
+  const collapsedMenu = $("#map").data("collapsed");
+  const components = $("#map").data("components");
   const popupMeetingTemplateId = "marker-meeting-popup";
   const popupProposalTemplateId = "marker-proposal-popup";
 
@@ -197,8 +198,18 @@
 
   };
 
-  $("#map").on("ready.decidim", (ev, map) => {
-    loadElements(map);
-  });
+  // currentMap might not be loaded yet so let's delay a bit
+  // TODO: improve this
+  const waitMap = () => {
+    if(exports.Decidim && exports.Decidim.currentMap) {
+      loadElements(exports.Decidim.currentMap);
+    } else {
+      setTimeout(() => {
+        waitMap();
+      }, 100);
+    }
+  };
+
+  waitMap();
 
 })(window);
