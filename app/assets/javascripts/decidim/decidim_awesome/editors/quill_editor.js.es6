@@ -10,7 +10,7 @@
   exports.DecidimAwesome = exports.DecidimAwesome || {};
 
   // Redefines Quill editor with images
-  if(exports.DecidimAwesome.allow_images_in_full_editor  || exports.DecidimAwesome.allow_images_in_small_editor) {
+  if(exports.DecidimAwesome.allow_images_in_full_editor  || exports.DecidimAwesome.allow_images_in_small_editor || exports.DecidimAwesome.use_markdown_editor) {
 
     const quillFormats = ["bold", "italic", "link", "underline", "header", "list", "video", "image"];
 
