@@ -136,9 +136,8 @@ Depending on your Decidim version, choose the corresponding Awesome version to e
 
 | Awesome version | Compatible Decidim versions |
 |---|---|
-| 0.5 | 0.21.x, 0.22.x |
+| 0.5.1 | 0.21.x, 0.22.x |
 | 0.6 | 0.22.x, 0.23.x |
-
 
 ## Configuration
 
