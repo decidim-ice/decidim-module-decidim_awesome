@@ -13,7 +13,7 @@ jobs:
       matrix:
         os: [ubuntu]
         ruby: [2.6, 2.7]
-        decidim: [decidim-0.21, decidim-0.22]
+        decidim: [decidim-0.22, decidim-0.23]
     runs-on: ${{ matrix.os }}-latest
     continue-on-error: ${{ endsWith(matrix.ruby, 'head') || matrix.ruby == 'debug' }}
 

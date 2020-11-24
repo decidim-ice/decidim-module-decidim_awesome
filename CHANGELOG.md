@@ -1,7 +1,18 @@
 CHANGELOG
 =========
 
-v0.4 (in development)
+v0.6 (in development)
+----
+
+Compatibility: 
+  - Decidim v0.23
+  - Decidim v0.22
+
+Features:
+  - Full screen iframe component
+  - live support chat linked with Telegram
+
+v0.4, 0.5
 ----
 
 Compatibility: 
@@ -9,7 +20,7 @@ Compatibility:
   - Decidim v0.21
 
 Features:
-  - Class in body with the name of the host (this allows to personalize css in tenants)
+  - Decidim CSS themes for tenants
 
 v0.3
 ----
