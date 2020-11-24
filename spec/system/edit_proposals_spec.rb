@@ -12,7 +12,7 @@ describe "Show proposals editor", type: :system do
   end
 
   let!(:proposal) { create(:proposal, users: [user], component: component) }
-  let(:proposal_title) { translated(proposal.title) }
+  let(:proposal_title) { proposal.title.is_a?(Hash) ? translated(proposal.title) : proposal.title }
 
   let!(:user) { create :user, :confirmed, organization: organization }
   let(:rte_enabled) { false }

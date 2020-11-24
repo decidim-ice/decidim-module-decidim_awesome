@@ -3,9 +3,15 @@
 # Tune Proposal presenter to use markdown if configured
 Decidim::Proposals::ProposalPresenter.class_eval do
   def body(links: false, extras: true, strip_tags: false)
-    text = translated_attribute(proposal.body)
+    if respond_to? :translated_attribute
+      text = translated_attribute(proposal.body)
 
-    text = strip_tags(sanitize_text(text)) if strip_tags
+      text = strip_tags(sanitize_text(text)) if strip_tags
+    else
+      # TODO: remove when 0.22 is diched
+      text = proposal.body
+      text = strip_tags(text) if strip_tags
+    end
 
     renderer = Decidim::ContentRenderers::HashtagRenderer.new(text)
     text = renderer.render(links: links, extras: extras).html_safe

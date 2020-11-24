@@ -55,18 +55,5 @@ jobs:
       - name: Setup Database
         run: bundle exec appraisal ${{ matrix.decidim }} rake test_app
 
-      # - name: Setup Code Climate test-reporter
-      #   run: |
-      #     curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-      #     chmod +x ./cc-test-reporter
-      #     ./cc-test-reporter before-build
-
       - name: Run RSpec
         run: SIMPLECOV=1 CODECOV=1 bundle exec appraisal ${{ matrix.decidim }} rake
-
-      # - name: Publish code coverage
-      #   run: |
-      #     export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
-      #     ./cc-test-reporter after-build -r "$CC_TEST_REPORTER_ID"
-      #   env:
-      #     CC_TEST_REPORTER_ID: 094100f11a0b69b24e4deab7adc5532006239e0803a8b1964b3000766bca5de1

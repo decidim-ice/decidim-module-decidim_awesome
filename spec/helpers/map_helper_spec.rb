@@ -5,7 +5,7 @@ require "spec_helper"
 module Decidim
   module DecidimAwesome
     describe MapHelper, type: :helper do
-      let(:snippets) { Decidim::Snippets.new }
+      let(:snippets) { defined?(Decidim::Snippets) ? Decidim::Snippets.new : nil }
       let(:current_participatory_space) { create(:participatory_process) }
       let(:current_component) do
         create(:component, participatory_space: current_participatory_space, manifest_name: "awesome_map")
