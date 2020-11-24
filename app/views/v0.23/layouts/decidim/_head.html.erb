@@ -20,6 +20,10 @@
 <%= favicon %>
 <%= stylesheet_link_tag    "application", media: "all" %>
 <%= invisible_captcha_styles %>
+
+<%= stylesheet_link_tag    "decidim/decidim_awesome/application", media: "all" %>
+<%= stylesheet_link_tag(tenant_stylesheets, media: "all") if tenant_stylesheets %>
+
 <%= organization_colors %>
 <%= javascript_include_tag "decidim/confirm" %>
 <%= javascript_include_tag "application" %>

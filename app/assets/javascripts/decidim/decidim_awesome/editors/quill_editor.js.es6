@@ -1,4 +1,3 @@
-// = require quill.min
 // = require image-upload.min
 // = require image-resize.min
 // = require inscrybmde.min.js
