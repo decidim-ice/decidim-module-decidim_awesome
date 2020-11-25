@@ -57,12 +57,6 @@ module Decidim::DecidimAwesome
           end
 
           context "and is lower than supported" do
-            let(:version) { "0.20" }
-
-            it_behaves_like "invalid decidim version"
-          end
-
-          describe "supports 0.21.1" do
             let(:version) { "0.21.1" }
 
             it_behaves_like "invalid decidim version"
@@ -74,10 +68,22 @@ module Decidim::DecidimAwesome
             it_behaves_like "valid decidim version"
           end
 
-          context "and is higher than supported" do
+          context "supports 0.23.1" do
             let(:version) { "0.23.1" }
 
             it_behaves_like "valid decidim version"
+          end
+
+          context "supports 0.23.2" do
+            let(:version) { "0.23.2" }
+
+            it_behaves_like "valid decidim version"
+          end
+
+          context "and is higher than supported" do
+            let(:version) { "0.24" }
+
+            it_behaves_like "invalid decidim version"
           end
         end
       end
