@@ -19,11 +19,27 @@ module Decidim::DecidimAwesome
         it "is a valid Decidim version" do
           expect(controller.helpers.decidim_version_valid?).to eq(true)
         end
+
+        it "has a list of overrides" do
+          expect(controller.helpers.overrides.count > 0).to eq(true)
+        end
+
+        it "all overrides are valid" do
+          controller.helpers.overrides.each do |_group, props|
+            props.files.each do |file, _md5|
+              expect(controller.helpers.valid?(props.spec, file)).not_to eq(nil)
+            end
+          end
+        end
       end
 
       shared_examples "invalid decidim version" do
         it "is not a valid Decidim version" do
           expect(controller.helpers.decidim_version_valid?).to eq(false)
+        end
+
+        it "has a list of overrides" do
+          expect(controller.helpers.overrides.count > 0).to eq(true)
         end
       end
 

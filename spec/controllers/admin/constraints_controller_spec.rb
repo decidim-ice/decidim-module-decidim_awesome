@@ -5,6 +5,7 @@ require "spec_helper"
 module Decidim::DecidimAwesome
   module Admin
     describe ConstraintsController, type: :controller do
+      include Decidim::TranslationsHelper
       routes { Decidim::DecidimAwesome::AdminEngine.routes }
 
       let(:user) { create(:user, :confirmed, :admin, organization: organization) }
@@ -20,6 +21,16 @@ module Decidim::DecidimAwesome
           participatory_space_manifest: "assemblies"
         }
       end
+      let(:spaces) do
+        [
+          [process.slug, translated_attribute(process.title)]
+        ].to_h
+      end
+      let(:components) do
+        [
+          [component.id, "#{component.id}: #{translated_attribute(component.name)}"]
+        ].to_h
+      end
 
       before do
         request.env["decidim.current_organization"] = user.organization
@@ -30,6 +41,40 @@ module Decidim::DecidimAwesome
         it "returns http success" do
           get :new, params: params
           expect(response).to have_http_status(:success)
+        end
+
+        it "has helper with participatory space manifests" do
+          expect(controller.helpers.participatory_space_manifests).to include(:participatory_processes)
+          expect(controller.helpers.participatory_space_manifests).to include(:assemblies)
+        end
+
+        it "has helper with component manifests" do
+          expect(controller.helpers.component_manifests).to include(:proposals)
+          expect(controller.helpers.component_manifests).to include(:meetings)
+          expect(controller.helpers.component_manifests).to include(:awesome_map)
+          expect(controller.helpers.component_manifests).to include(:awesome_iframe)
+        end
+
+        context "when participatory process exists" do
+          let!(:process) { create :participatory_process, organization: organization }
+          let!(:component) { create :component, participatory_space: process }
+
+          it "has helper with existing participatory spaces" do
+            expect(controller.helpers.participatory_spaces_list(:participatory_processes)).to eq(spaces)
+          end
+
+          it "has helper with existing components" do
+            expect(controller.helpers.components_list(:participatory_processes, process.slug)).to eq(components)
+          end
+        end
+
+        context "when process is in another organization" do
+          let!(:process) { create :participatory_process }
+
+          it "has empty helpers" do
+            expect(controller.helpers.participatory_spaces_list(:participatory_processes)).to eq({})
+            expect(controller.helpers.components_list(:participatory_processes, process.slug)).to eq({})
+          end
         end
       end
 
