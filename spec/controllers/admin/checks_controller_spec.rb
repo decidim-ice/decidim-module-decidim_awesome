@@ -68,13 +68,13 @@ module Decidim::DecidimAwesome
             it_behaves_like "valid decidim version"
           end
 
-          context "supports 0.23.1" do
+          describe "supports 0.23.1" do
             let(:version) { "0.23.1" }
 
             it_behaves_like "valid decidim version"
           end
 
-          context "supports 0.23.2" do
+          describe "supports 0.23.2" do
             let(:version) { "0.23.2" }
 
             it_behaves_like "valid decidim version"
