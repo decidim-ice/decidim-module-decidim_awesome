@@ -8,8 +8,11 @@ describe "Visit the admin page", type: :system do
   let!(:admin) { create(:user, :admin, :confirmed, organization: organization) }
   let(:rte_enabled) { true }
   let(:disabled_features) { [] }
+  let(:version_original) { Decidim.version }
+  let(:version) { version_original }
 
   before do
+    allow(Decidim).to receive(:version).and_return(version)
     disabled_features.each do |feature|
       allow(Decidim::DecidimAwesome.config).to receive(feature).and_return(:disabled)
     end
@@ -37,6 +40,14 @@ describe "Visit the admin page", type: :system do
       expect(page).to have_content(/System compatibility checks/i)
       expect(page).not_to have_xpath("//span[@class='text-alert']")
       expect(page).to have_xpath("//span[@class='text-success']")
+    end
+
+    context "and header is overriden" do
+      let(:version) { "0.11" }
+
+      it "detects missing css" do
+        expect(page).to have_xpath("//span[@class='text-alert']", count: 5)
+      end
     end
   end
 
