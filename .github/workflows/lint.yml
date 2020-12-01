@@ -5,7 +5,7 @@ on:
   pull_request:
 
 env:
-  RUBY_VERSION: 2.6.6
+  RUBY_VERSION: 2.7.1
 
 jobs:
   lint-report:
@@ -22,5 +22,5 @@ jobs:
 
       - name: Lint and Rubocop
         run: |
-          bundle exec rubocop
-          bundle exec erblint app/views/**/*.erb
+          bundle exec rubocop -P
+        # bundle exec erblint app/views/**/*.erb

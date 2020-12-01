@@ -8,10 +8,17 @@ module Decidim
         helper_method :map_components
 
         def show
-          render :error if Decidim.geocoder.blank?
+          render :error unless maps_enabled?
         end
 
         private
+
+        def maps_enabled?
+          return Decidim::Map.configured? if defined?(Decidim::Map)
+
+          # TODO: remove when 0.22 support is diched
+          Decidim.geocoder.present?
+        end
 
         def map_components
           @map_components ||= current_participatory_space.components.published.filter do |component|

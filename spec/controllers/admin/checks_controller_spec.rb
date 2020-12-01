@@ -19,11 +19,27 @@ module Decidim::DecidimAwesome
         it "is a valid Decidim version" do
           expect(controller.helpers.decidim_version_valid?).to eq(true)
         end
+
+        it "has a list of overrides" do
+          expect(controller.helpers.overrides.count > 0).to eq(true)
+        end
+
+        it "all overrides are valid" do
+          controller.helpers.overrides.each do |_group, props|
+            props.files.each do |file, _md5|
+              expect(controller.helpers.valid?(props.spec, file)).not_to eq(nil)
+            end
+          end
+        end
       end
 
       shared_examples "invalid decidim version" do
         it "is not a valid Decidim version" do
           expect(controller.helpers.decidim_version_valid?).to eq(false)
+        end
+
+        it "has a list of overrides" do
+          expect(controller.helpers.overrides.count > 0).to eq(true)
         end
       end
 
@@ -41,27 +57,33 @@ module Decidim::DecidimAwesome
           end
 
           context "and is lower than supported" do
-            let(:version) { "0.20" }
-
-            it_behaves_like "invalid decidim version"
-          end
-
-          context "and is higher than supported" do
-            let(:version) { "0.23" }
-
-            it_behaves_like "invalid decidim version"
-          end
-
-          describe "supports 0.21.1" do
             let(:version) { "0.21.1" }
 
-            it_behaves_like "valid decidim version"
+            it_behaves_like "invalid decidim version"
           end
 
           describe "supports 0.22.1" do
             let(:version) { "0.22.1" }
 
             it_behaves_like "valid decidim version"
+          end
+
+          describe "supports 0.23.1" do
+            let(:version) { "0.23.1" }
+
+            it_behaves_like "valid decidim version"
+          end
+
+          describe "supports 0.23.2" do
+            let(:version) { "0.23.2" }
+
+            it_behaves_like "valid decidim version"
+          end
+
+          context "and is higher than supported" do
+            let(:version) { "0.24" }
+
+            it_behaves_like "invalid decidim version"
           end
         end
       end

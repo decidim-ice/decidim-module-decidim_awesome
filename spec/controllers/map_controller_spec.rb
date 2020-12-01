@@ -27,6 +27,8 @@ module Decidim::DecidimAwesome
 
         context "when no geocoder is available" do
           before do
+            allow(Decidim).to receive(:maps).and_return(nil)
+            # TODO: remove when 0.22 is diched
             allow(Decidim).to receive(:geocoder).and_return(nil)
           end
 

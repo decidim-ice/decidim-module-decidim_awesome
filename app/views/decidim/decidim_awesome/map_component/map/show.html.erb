@@ -1,6 +1,6 @@
 <%= render partial: "decidim/shared/component_announcement" %>
 
-<%= dynamic_map_for map_components do %>
+<%= awesome_map_for map_components do %>
 
   <template id="marker-proposal-popup">
     <div class="map-info__content">
@@ -70,5 +70,9 @@
     window.AwesomeMap = window.AwesomeMap || {};
     window.AwesomeMap.categories = <%= current_categories.to_json.html_safe %>;
   </script>
-  <%= javascript_include_tag "decidim/decidim_awesome/awesome_map/map" %>
+  <% if version_prefix == "v0.23" %>
+    <%= javascript_include_tag "decidim/decidim_awesome/awesome_map/map" %>
+  <% else %>
+    <%= javascript_include_tag "decidim/decidim_awesome/awesome_map/legacy_map" %>
+  <% end %>
 <% end %>

@@ -59,10 +59,17 @@ en:
       admin:
         checks:
           index:
+            admin_head_tags: Awesome tags included in the admin application header
             decidim-admin: From Admin module
             decidim-core: From Core module
             decidim-proposals: From Proposals module
             decidim_version: Decidim version %{version}
+            errors:
+              CSS: Head does not contain the required <link> stylesheet entries. To
+                solve it, you can manually add it to your custom _head.html.erb
+              JavaScript: Head does not contain the required <script> Javascript entries.
+                To solve it, you can manually add it to your custom admin/_header.html.erb
+            head_tags: Awesome tags included in the application header
             title: System compatibility checks
         config:
           constraints:

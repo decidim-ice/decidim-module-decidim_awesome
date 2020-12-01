@@ -3,7 +3,33 @@
 module Decidim
   module DecidimAwesome
     module MapHelper
-      def dynamic_map_for(components)
+      include Decidim::MapHelper
+
+      def awesome_map_for(components, &block)
+        return legacy_map_for(components, &block) unless defined?(Decidim::Map)
+
+        map = dynamic_map_for({}, {}, &block)
+        return unless map
+
+        map_html_options = {
+          "class" => "awesome-map",
+          "id" => "awesome-map",
+          "data-components" => components.map do |component|
+                                 {
+                                   id: component.id,
+                                   type: component.manifest.name,
+                                   name: translated_attribute(component.name),
+                                   url: Decidim::EngineRouter.main_proxy(component).root_path,
+                                   amendments: component.manifest.name == :proposals ? Decidim::Proposals::Proposal.where(component: component).only_emendations.count : 0
+                                 }
+                               end.to_json,
+          "data-collapsed" => current_component.settings.collapse
+        }
+        content_tag(:div, map, map_html_options)
+      end
+
+      # TODO: remove when 0.22 support is diched
+      def legacy_map_for(components)
         return if Decidim.geocoder.blank?
 
         map_html_options = {

@@ -6,9 +6,9 @@
     <p>
       <%= t ".decidim_version", version: decidim_version %>
       <% if decidim_version_valid? %>
-        <span class="text-success"><%= icon("check", class: "icon", aria_label: "ok", role: "img") %></span>
+        <%= check :ok %>
       <% else %>
-        <span class="text-alert"><%= icon("x", class: "icon", aria_label: "ko", role: "img") %></span>
+        <%= check :ko %>
       <% end %>
       </p>
     <ul class="vertical menu">
@@ -19,17 +19,59 @@
           <% props.files.each do |file, md5| %>
           <li>
             <%= file %>
-              <% if valid?(props.spec, file) %>
-                <span class="text-success"><%= icon("check", class: "icon", aria_label: "ok", role: "img") %></span>
-              <% else %>
-                <span class="text-alert"><%= icon("x", class: "icon", aria_label: "ko", role: "img") %></span>
-              <% end %>
+            <% if valid?(props.spec, file) %>
+              <%= check :ok %>
+            <% else %>
+              <%= check :ko %>
+            <% end %>
           </li>
           <% end %>
         </ul>
         <br>
       </li>
       <% end %>
+    </ul>
+    <ul class="vertical menu heads">
+      <li>
+        <strong><%= t ".head_tags" %></strong>
+        <ul class="vertical menu">
+        <% {
+          CSS: "//link[@rel='stylesheet'][contains(@href,'decidim_awesome')]",
+          JavaScript: "//script[contains(@src,'decidim_awesome')]"
+          }.each do |part, xpath| %>
+          <li>
+            <%= part %>
+            <% if head.xpath(xpath).count > 0 %>
+              <%= check :ok %>
+            <% else %>
+              <%= check :ko %>
+              <p class="help-text"><%= t ".errors.#{part}" %>:</p>
+              <code class="help-text code-block"><%= head_addons(part) %></code>
+            <% end %>
+          </li>
+          <% end %>
+        </ul>
+      </li>
+      <li>
+        <strong><%= t ".admin_head_tags" %></strong>
+        <ul class="vertical menu">
+        <% {
+          CSS: "//link[@rel='stylesheet'][contains(@href,'decidim_awesome/admin')]",
+          JavaScript: "//script[contains(@src,'decidim_awesome/admin')]"
+          }.each do |part, xpath| %>
+          <li>
+            <%= part %>
+            <% if admin_head.xpath(xpath).count > 0 %>
+              <%= check :ok %>
+            <% else %>
+              <%= check :ko %>
+              <p class="help-text"><%= t ".errors.#{part}" %>:</p>
+              <code class="help-text code-block"><%= admin_addons(part) %></code>
+            <% end %>
+          </li>
+          <% end %>
+        </ul>
+      </li>
     </ul>
   </div>
 </div>

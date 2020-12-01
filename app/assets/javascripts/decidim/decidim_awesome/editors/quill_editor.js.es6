@@ -1,4 +1,3 @@
-// = require quill.min
 // = require image-upload.min
 // = require image-resize.min
 // = require inscrybmde.min.js
@@ -11,7 +10,7 @@
   exports.DecidimAwesome = exports.DecidimAwesome || {};
 
   // Redefines Quill editor with images
-  if(exports.DecidimAwesome.allow_images_in_full_editor  || exports.DecidimAwesome.allow_images_in_small_editor) {
+  if(exports.DecidimAwesome.allow_images_in_full_editor  || exports.DecidimAwesome.allow_images_in_small_editor || exports.DecidimAwesome.use_markdown_editor) {
 
     const quillFormats = ["bold", "italic", "link", "underline", "header", "list", "video", "image"];
 
@@ -54,7 +53,6 @@
         toolbar: quillToolbar
       };
       const $input = $(container).siblings('input[type="hidden"]');
-      // https://github.com/decidim/decidim/pull/6422
       container.innerHTML = $input.val() || "";
       const token = $( 'meta[name="csrf-token"]' ).attr( 'content' );
 

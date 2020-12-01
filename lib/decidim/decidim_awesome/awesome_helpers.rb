@@ -46,9 +46,7 @@ module Decidim
       end
 
       def version_prefix
-        return "v0.21" if Decidim.version.start_with? "0.21"
-
-        "v0.22"
+        "v#{Decidim.version[0..3]}"
       end
     end
   end
