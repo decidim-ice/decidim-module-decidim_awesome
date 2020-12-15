@@ -1,3 +1,4 @@
+// = require jsrender.min
 // = require leaflet.featuregroup.subgroup
 // = require decidim/decidim_awesome/awesome_map/categories
 // = require decidim/decidim_awesome/awesome_map/proposals
@@ -29,7 +30,8 @@
     let tmpl = component.type === "proposals" ? popupProposalTemplateId : popupMeetingTemplateId,
         node = document.createElement("div");
 
-    $.tmpl($(`#${tmpl}`), element).appendTo(node);
+    // console.log(tmpl, element, node,$.templates(`#${tmpl}`).render(element));
+    $($.templates(`#${tmpl}`).render(element)).appendTo(node);
     
     marker.bindPopup(node, {
       maxwidth: 640,

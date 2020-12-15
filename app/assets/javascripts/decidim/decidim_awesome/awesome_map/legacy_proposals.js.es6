@@ -16,18 +16,8 @@
             edges {
               node {  
                 id
-                title {
-                  translations {
-                    text
-                    locale
-                  }
-                }
-                body {
-                  translations {
-                    text
-                    locale
-                  }
-                }
+                title
+                body
                 address
                 coordinates {
                   latitude
@@ -57,9 +47,7 @@
       })
     });
 
-    element.title.translation = ApiFetcher.findTranslation(element.title.translations);
-    element.body.translation = ApiFetcher.findTranslation(element.body.translations).replace(/\n/g, "<br>");
-
+    element.body = element.body.replace(/\n/g, "<br>");
     callback(element, marker);
   };
 
@@ -70,7 +58,6 @@
     };
     const api = new ApiFetcher(query, variables);
     api.fetchAll((result) => {
-      console.log(result)
       if(result) {
         result.component.proposals.edges.forEach((element) => {
           if(!element.node) return;

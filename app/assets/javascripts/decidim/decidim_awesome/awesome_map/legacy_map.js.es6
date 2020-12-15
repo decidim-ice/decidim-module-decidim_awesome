@@ -1,7 +1,7 @@
 // = require decidim/map
 // = require leaflet.featuregroup.subgroup
 // = require decidim/decidim_awesome/awesome_map/categories
-// = require decidim/decidim_awesome/awesome_map/proposals
+// = require decidim/decidim_awesome/awesome_map/legacy_proposals
 // = require decidim/decidim_awesome/awesome_map/meetings
 // = require_self
 
@@ -11,7 +11,7 @@
   const collapsedMenu = $("#map").data("collapsed");
   const components = $("#map").data("components");
   const popupMeetingTemplateId = "marker-meeting-popup";
-  const popupProposalTemplateId = "marker-proposal-popup";
+  const popupProposalTemplateId = "legacy-marker-proposal-popup";
 
   const cluster = L.markerClusterGroup();
   const amendments = [];
