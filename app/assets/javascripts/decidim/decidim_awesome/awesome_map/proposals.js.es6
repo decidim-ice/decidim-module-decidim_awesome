@@ -16,6 +16,7 @@
             edges {
               node {  
                 id
+                state
                 title {
                   translations {
                     text
@@ -70,7 +71,6 @@
     };
     const api = new ApiFetcher(query, variables);
     api.fetchAll((result) => {
-      console.log(result)
       if(result) {
         result.component.proposals.edges.forEach((element) => {
           if(!element.node) return;

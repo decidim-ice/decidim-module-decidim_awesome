@@ -1,3 +1,4 @@
+// = require jsrender.min
 // = require decidim/map
 // = require leaflet.featuregroup.subgroup
 // = require decidim/decidim_awesome/awesome_map/categories
@@ -9,6 +10,13 @@
   const { fetchProposals, fetchMeetings, getCategory } = exports.AwesomeMap;
 
   const collapsedMenu = $("#map").data("collapsed");
+  const show = {
+    withdrawn: $("#awesome-map").data("show-withdrawn"),
+    accepted: $("#awesome-map").data("show-accepted"),
+    evaluating: $("#awesome-map").data("show-evaluating"),
+    notAnswered: $("#awesome-map").data("show-not-answered"),
+    rejected: $("#awesome-map").data("show-rejected")
+  };
   const components = $("#map").data("components");
   const popupMeetingTemplateId = "marker-meeting-popup";
   const popupProposalTemplateId = "legacy-marker-proposal-popup";
@@ -30,7 +38,7 @@
     let tmpl = component.type === "proposals" ? popupProposalTemplateId : popupMeetingTemplateId,
         node = document.createElement("div");
 
-    $.tmpl($(`#${tmpl}`), element).appendTo(node);
+    $($.templates(`#${tmpl}`).render(element)).appendTo(node);
     
     marker.bindPopup(node, {
       maxwidth: 640,
@@ -99,7 +107,9 @@
         }
 
         fetchProposals(component, '', (element, marker) => {
-            drawMarker(element, marker, component).addTo(layers.proposals.group);
+            if(show[element.state || 'notAnswered']) {
+              drawMarker(element, marker, component).addTo(layers.proposals.group)   
+            }
           }, () => {
             // finall call
             map.fitBounds(cluster.getBounds(), { padding: [50, 50] });

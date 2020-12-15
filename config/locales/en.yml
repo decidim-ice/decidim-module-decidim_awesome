@@ -55,6 +55,11 @@ en:
             map_height: Map height (px)
           step:
             announcement: Announcement
+            show_accepted: Show accepted proposals
+            show_evaluating: Show evaluating proposals
+            show_not_answered: Show not answered proposals
+            show_rejected: Show rejected proposals
+            show_withdrawn: Show withdrawn proposals
     decidim_awesome:
       admin:
         checks:

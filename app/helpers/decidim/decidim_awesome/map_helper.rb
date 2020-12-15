@@ -23,7 +23,12 @@ module Decidim
                                    amendments: component.manifest.name == :proposals ? Decidim::Proposals::Proposal.where(component: component).only_emendations.count : 0
                                  }
                                end.to_json,
-          "data-collapsed" => current_component.settings.collapse
+          "data-collapsed" => current_component.settings.collapse,
+          "data-show-not-answered" => current_component.current_settings.show_not_answered,
+          "data-show-accepted" => current_component.current_settings.show_accepted,
+          "data-show-withdrawn" => current_component.current_settings.show_withdrawn,
+          "data-show-evaluating" => current_component.current_settings.show_evaluating
+          # "data-show-rejected" => current_component.current_settings.show_rejected
         }
         content_tag(:div, map, map_html_options)
       end
@@ -45,6 +50,11 @@ module Decidim
                                  }
                                end.to_json,
           "data-collapsed" => current_component.settings.collapse,
+          "data-show-not-answered" => current_component.current_settings.show_not_answered,
+          "data-show-accepted" => current_component.current_settings.show_accepted,
+          "data-show-withdrawn" => current_component.current_settings.show_withdrawn,
+          "data-show-evaluating" => current_component.current_settings.show_evaluating,
+          # "data-show-rejected" => current_component.current_settings.show_rejected,
           "data-markers-data" => [].to_json
         }
 

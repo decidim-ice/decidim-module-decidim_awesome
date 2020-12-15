@@ -16,6 +16,7 @@
             edges {
               node {  
                 id
+                state
                 title
                 body
                 address
