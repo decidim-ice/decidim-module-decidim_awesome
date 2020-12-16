@@ -11,11 +11,11 @@
 
   const collapsedMenu = $("#map").data("collapsed");
   const show = {
-    withdrawn: $("#awesome-map").data("show-withdrawn"),
-    accepted: $("#awesome-map").data("show-accepted"),
-    evaluating: $("#awesome-map").data("show-evaluating"),
-    notAnswered: $("#awesome-map").data("show-not-answered"),
-    rejected: $("#awesome-map").data("show-rejected")
+    withdrawn: $("#map").data("show-withdrawn"),
+    accepted: $("#map").data("show-accepted"),
+    evaluating: $("#map").data("show-evaluating"),
+    notAnswered: $("#map").data("show-not-answered"),
+    rejected: $("#map").data("show-rejected")
   };
   const components = $("#map").data("components");
   const popupMeetingTemplateId = "marker-meeting-popup";
