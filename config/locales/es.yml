@@ -47,11 +47,11 @@ es:
             map_height: Altura del mapa (px)
           step:
             announcement: Anuncio
-            show_accepted: Show accepted proposals
-            show_evaluating: Show evaluating proposals
-            show_not_answered: Show not answered proposals
-            show_rejected: Show rejected proposals
-            show_withdrawn: Show withdrawn proposals
+            show_accepted: Muestra las propuestas aceptadas
+            show_evaluating: Muestra las propuestas en evaluación
+            show_not_answered: Muestra las propuestas pendientes de contestart
+            show_rejected: Muestra las propuestas rechazadas
+            show_withdrawn: Muestra las propuestas retiradas
     decidim_awesome:
       admin:
         checks:
