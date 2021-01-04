@@ -47,11 +47,11 @@ ca:
             map_height: Alçada del mapa (px)
           step:
             announcement: Anunci
-            show_accepted: Show accepted proposals
-            show_evaluating: Show evaluating proposals
-            show_not_answered: Show not answered proposals
-            show_rejected: Show rejected proposals
-            show_withdrawn: Show withdrawn proposals
+            show_accepted: Mostra les propostes acceptades
+            show_evaluating: Mostra les propostes en avaluació
+            show_not_answered: Mostra les propostes pendents de contestar
+            show_rejected: Mostra les propostes rebutjades
+            show_withdrawn: Mostra les propostes retirades
     decidim_awesome:
       admin:
         checks:
