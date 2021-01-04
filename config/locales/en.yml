@@ -109,8 +109,8 @@ en:
                 bot</a> to your group or start a chat with it directly. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+
                 info</a>
               use_markdown_editor: This will substitute the Quill WYSIWYG editor,
-                use a Markdown editor instead. Text will be rendered as HTML in the public pages
-                (text in database will be saved as markdown text)
+                use a Markdown editor instead. Text will be rendered as HTML in the
+                public pages (text in database will be saved as markdown text)
           rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants"
             is enabled, this option won''t apply. Use the editors hacks instead to
             enable images in proposals.'
