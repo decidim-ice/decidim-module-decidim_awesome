@@ -7,6 +7,16 @@ ca:
         allow_images_in_proposals: Permet imatges a l'editor de propostes
         allow_images_in_small_editor: Permet imatge a l'editor HTML reduït
         auto_save_forms: Desa automàticament els formularis a l'emmagatzematge local
+        intergram_auto_no_response: A message that is sent one minute after the user sends its first message and no response was received
+        intergram_auto_response: A message that is sent immediately after the user sends its first message
+        intergram_chat_id: Chat ID
+        intergram_color: Color of the widget
+        intergram_for_admins: Enable Intergram Chat in the admin backend
+        intergram_intro_message: First message when the user opens the chat for the first time
+        intergram_require_login: Only for logged users
+        intergram_title_closed: Closed chat title
+        intergram_title_open: Opened chat title
+        intergram_use_floating_button: If checked, the closed chat is always a button instead of a text
         use_markdown_editor: Fes servir l'editor Markdown en comptes de l'editor HTML
       constraint:
         component_id: o específicament a
@@ -37,14 +47,24 @@ ca:
             map_height: Alçada del mapa (px)
           step:
             announcement: Anunci
+            show_accepted: Show accepted proposals
+            show_evaluating: Show evaluating proposals
+            show_not_answered: Show not answered proposals
+            show_rejected: Show rejected proposals
+            show_withdrawn: Show withdrawn proposals
     decidim_awesome:
       admin:
         checks:
           index:
+            admin_head_tags: Awesome tags included in the admin application header
             decidim-admin: Del mòdul Admin
             decidim-core: Del mòdul Core
             decidim-proposals: Del mòdul Proposals
             decidim_version: Versió de Decidim %{version}
+            errors:
+              CSS: Head does not contain the required <link> stylesheet entries. To solve it, you can manually add it to your custom _head.html.erb
+              JavaScript: Head does not contain the required <script> Javascript entries. To solve it, you can manually add it to your custom admin/_header.html.erb
+            head_tags: Awesome tags included in the application header
             title: Anàlisi de compatibilitat amb el sistema
         config:
           constraints:
@@ -62,6 +82,8 @@ ca:
               allow_images_in_small_editor: Això afegirà un botó per pujar imatges a l'editor HTML mínim.
               auto_save_forms: Això farà servir l'emmagatzematge local del navegador per desar automàticament les dades introduïdes pels usuaris a les enquestes i altres formularis mentre les omplen. Les dades es restauraran en una futura visita amb el mateix navegador en cas que no s'enviï el formulari. Si s’envia el formulari, s’eliminaran les dades locals. Si els usuaris eliminen les seves dades del navegador, tampoc es restauraran.
               drag_and_drop_supported: Quan es pugin imatges, es pot fer a través del mètode de "arrossegar i deixar anar". Les imatges seran pujades al servidor i inserides com recursos externs (no es fa servir codificació en línia base64).
+              intergram_about: Intergram uses Telegram messenger to handle a live support chat widget embedded in the bottom of the page.
+              intergram_config: 'Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> to your group or start a chat with it directly. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               use_markdown_editor: Això substituirà l'editor HTML (Quill), en el seu lloc s'utilitzarà un editor Markdown tant a l'admin com a la pàgina pública per processar el text (a la base de dades el text es desarà com a markdown)
           rich_text_editor_in_public_views: 'NOTA: "Editor de text enriquit per participants" està habilitat a la configuració general, aquesta opció no aplicarà. Feu servir les modificacions d''editor general per afegir imatges a les propostes.'
           show:
@@ -94,8 +116,16 @@ ca:
         menu:
           checks: Compatibilitat de sistema
           editors: Modificacions als editors
+          livechat: Live Chat
           proposals: Modificacions a propostes
           surveys: Formularis i enquestes
+      config:
+        intergram:
+          auto_no_response: It seems that no one is available to answer right now. Please tell us how we can contact you, and we will get back to you as soon as we can.
+          auto_response: Looking for the first available admin (It might take a minute)
+          intro_message: Hello! How can we help you?
+          title_closed: Click to chat!
+          title_open: Let's chat!
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
       editor_images:
         create:
