@@ -84,7 +84,7 @@ cs:
               drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
               intergram_about: Intergram používá Telegram messenger pro zpracování widgetu live podpory v dolní části stránky.
               intergram_config: 'Pozvěte <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bota</a> do vaší skupiny nebo začněte chatovat přímo. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
-              use_markdown_editor: Toto nahradí WYSIWYG editor, použije Markdown editor v administraci a webový procesor pro vykreslení textu (text v databázi bude uložen jako text markdown)
+              use_markdown_editor: This will substitute the Quill WYSIWYG editor, use a Markdown editor instead. Text will be rendered as HTML in the public pages (text in database will be saved as markdown text)
           rich_text_editor_in_public_views: 'POZNÁMKA: "Kompletní textový editor pro účastníky" je povolen, tato možnost nebude využita. Pro povolení obrázků v Návrzích používejte místo toho hacky editoru.'
           show:
             title: Vylepšení pro %{setting}
