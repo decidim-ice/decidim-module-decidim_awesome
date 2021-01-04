@@ -1,7 +1,18 @@
 CHANGELOG
 =========
 
-v0.6 (in development)
+v0.6.1
+------
+
+Compatibility: 
+  - Decidim v0.23
+  - Decidim v0.22
+
+Features:
+  - Improve awesome map categories visualitzation
+  - Fix image uploader
+
+v0.6
 ----
 
 Compatibility: 

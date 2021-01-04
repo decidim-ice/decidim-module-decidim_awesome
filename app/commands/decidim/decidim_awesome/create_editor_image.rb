@@ -22,9 +22,10 @@ module Decidim
         image = EditorImage.new(
           path: form.path,
           decidim_author_id: form.current_user.id,
-          organization: form.organization
+          organization: form.organization,
+          image: form.image
         )
-        image.image = form.image
+
         image.save!
         broadcast(:ok, image)
       end
