@@ -47,6 +47,11 @@ ca:
             map_height: Alçada del mapa (px)
           step:
             announcement: Anunci
+            show_accepted: Mostra les propostes acceptades
+            show_evaluating: Mostra les propostes en avaluació
+            show_not_answered: Mostra les propostes pendents de contestar
+            show_rejected: Mostra les propostes rebutjades
+            show_withdrawn: Mostra les propostes retirades
     decidim_awesome:
       admin:
         checks:
@@ -79,7 +84,7 @@ ca:
               drag_and_drop_supported: Quan es pugin imatges, es pot fer a través del mètode de "arrossegar i deixar anar". Les imatges seran pujades al servidor i inserides com recursos externs (no es fa servir codificació en línia base64).
               intergram_about: Intergram uses Telegram messenger to handle a live support chat widget embedded in the bottom of the page.
               intergram_config: 'Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> to your group or start a chat with it directly. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
-              use_markdown_editor: Això substituirà l'editor HTML (Quill), en el seu lloc s'utilitzarà un editor Markdown tant a l'admin com a la pàgina pública per processar el text (a la base de dades el text es desarà com a markdown)
+              use_markdown_editor: This will substitute the Quill WYSIWYG editor, use a Markdown editor instead. Text will be rendered as HTML in the public pages (text in database will be saved as markdown text)
           rich_text_editor_in_public_views: 'NOTA: "Editor de text enriquit per participants" està habilitat a la configuració general, aquesta opció no aplicarà. Feu servir les modificacions d''editor general per afegir imatges a les propostes.'
           show:
             title: Modificacions per %{setting}
