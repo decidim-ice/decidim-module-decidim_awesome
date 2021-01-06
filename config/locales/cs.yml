@@ -47,6 +47,11 @@ cs:
             map_height: Výška mapy (px)
           step:
             announcement: Oznámení
+            show_accepted: Zobrazit přijaté návrhy
+            show_evaluating: Zobrazit hodnocení návrhů
+            show_not_answered: Zobrazit nezodpovězené návrhy
+            show_rejected: Zobrazit odmítnuté návrhy
+            show_withdrawn: Zobrazit stažené návrhy
     decidim_awesome:
       admin:
         checks:
@@ -79,7 +84,7 @@ cs:
               drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
               intergram_about: Intergram používá Telegram messenger pro zpracování widgetu live podpory v dolní části stránky.
               intergram_config: 'Pozvěte <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bota</a> do vaší skupiny nebo začněte chatovat přímo. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
-              use_markdown_editor: Toto nahradí WYSIWYG editor, použije Markdown editor v administraci a webový procesor pro vykreslení textu (text v databázi bude uložen jako text markdown)
+              use_markdown_editor: Toto nahradí WYSIWYG editor, místo toho použijte Markdown editor. Text bude vykreslen jako HTML na veřejných stránkách (text v databázi bude uložen jako text markdown)
           rich_text_editor_in_public_views: 'POZNÁMKA: "Kompletní textový editor pro účastníky" je povolen, tato možnost nebude využita. Pro povolení obrázků v Návrzích používejte místo toho hacky editoru.'
           show:
             title: Vylepšení pro %{setting}
