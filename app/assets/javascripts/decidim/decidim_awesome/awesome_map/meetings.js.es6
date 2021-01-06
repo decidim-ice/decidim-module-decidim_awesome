@@ -93,7 +93,7 @@
     });
 
     element.title.translation = ApiFetcher.findTranslation(element.title.translations);
-    element.description.translation = ApiFetcher.findTranslation(element.description.translations);
+    element.description.translation = ApiFetcher.findTranslation(element.description.translations).replace(/\n/g, "<br>");;
     element.location.translation = ApiFetcher.findTranslation(element.location.translations);
     element.locationHints.translation = ApiFetcher.findTranslation(element.locationHints.translations);
     callback(element, marker);
@@ -107,19 +107,21 @@
     };
     const api = new ApiFetcher(query, variables);
     api.fetchAll((result) => {
-      result.component.meetings.edges.forEach((element) => {
-        if(!element.node) return;
-        
-        if(element.node.coordinates) {
-          element.node.link = component.url + '/meetings/' + element.node.id;
-          createMarker(element.node, callback);
-        }
-      });
+      if(result) {
+        result.component.meetings.edges.forEach((element) => {
+          if(!element.node) return;
+          
+          if(element.node.coordinates) {
+            element.node.link = component.url + '/meetings/' + element.node.id;
+            createMarker(element.node, callback);
+          }
+        });
 
-      if (result.component.meetings.pageInfo.hasNextPage) {
-        fetchMeetings(component, result.component.meetings.pageInfo.endCursor, callback, finalCall);
-      } else {
-        finalCall();
+        if (result.component.meetings.pageInfo.hasNextPage) {
+          fetchMeetings(component, result.component.meetings.pageInfo.endCursor, callback, finalCall);
+        } else {
+          finalCall();
+        }
       }
     });
   };

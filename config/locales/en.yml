@@ -55,6 +55,11 @@ en:
             map_height: Map height (px)
           step:
             announcement: Announcement
+            show_accepted: Show accepted proposals
+            show_evaluating: Show evaluating proposals
+            show_not_answered: Show not answered proposals
+            show_rejected: Show rejected proposals
+            show_withdrawn: Show withdrawn proposals
     decidim_awesome:
       admin:
         checks:
@@ -104,8 +109,8 @@ en:
                 bot</a> to your group or start a chat with it directly. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+
                 info</a>
               use_markdown_editor: This will substitute the Quill WYSIWYG editor,
-                use a Markdown editor in the admin side and a frontend processor to
-                render the text (text in database will be saved as markdown text)
+                use a Markdown editor instead. Text will be rendered as HTML in the
+                public pages (text in database will be saved as markdown text)
           rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants"
             is enabled, this option won''t apply. Use the editors hacks instead to
             enable images in proposals.'

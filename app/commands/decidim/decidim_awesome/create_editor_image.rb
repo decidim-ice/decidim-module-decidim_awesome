@@ -19,12 +19,14 @@ module Decidim
       def call
         return broadcast(:invalid) if form.invalid?
 
-        image = EditorImage.create!(
-          image: form.image,
+        image = EditorImage.new(
           path: form.path,
           decidim_author_id: form.current_user.id,
-          organization: form.current_organization
+          organization: form.organization,
+          image: form.image
         )
+
+        image.save!
         broadcast(:ok, image)
       end
 
