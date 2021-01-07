@@ -56,15 +56,15 @@ ca:
       admin:
         checks:
           index:
-            admin_head_tags: Awesome tags included in the admin application header
+            admin_head_tags: Etiquetes Awesome incloses a la capçalera de l'aplicació d'administració
             decidim-admin: Del mòdul Admin
             decidim-core: Del mòdul Core
             decidim-proposals: Del mòdul Proposals
             decidim_version: Versió de Decidim %{version}
             errors:
-              CSS: Head does not contain the required <link> stylesheet entries. To solve it, you can manually add it to your custom _head.html.erb
-              JavaScript: Head does not contain the required <script> Javascript entries. To solve it, you can manually add it to your custom admin/_header.html.erb
-            head_tags: Awesome tags included in the application header
+              CSS: La capçalera no conté les entrades necessàries <link> al full d'estil. Per resoldre-ho, es poden afegir manualment al fitxer personalitzat _head.html.erb
+              JavaScript: La capçalera no conté les entrades necessàries <script> de Javascript. Per resoldre-ho, es poden afegir manualment al fitxer personalitzat admin/_header.html.erb
+            head_tags: Etiquetes Awesome incloses a la capçalera de l'aplicació
             title: Anàlisi de compatibilitat amb el sistema
         config:
           constraints:
