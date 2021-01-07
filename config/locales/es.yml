@@ -7,16 +7,16 @@ es:
         allow_images_in_proposals: Permitir imágenes en el editor de propuestas
         allow_images_in_small_editor: Permitir imágenes en el editor HTML reducido
         auto_save_forms: Guardar automáticamente los formularios en el almacenamiento local
-        intergram_auto_no_response: A message that is sent one minute after the user sends its first message and no response was received
-        intergram_auto_response: A message that is sent immediately after the user sends its first message
-        intergram_chat_id: Chat ID
-        intergram_color: Color of the widget
-        intergram_for_admins: Enable Intergram Chat in the admin backend
-        intergram_intro_message: First message when the user opens the chat for the first time
-        intergram_require_login: Only for logged users
-        intergram_title_closed: Closed chat title
-        intergram_title_open: Opened chat title
-        intergram_use_floating_button: If checked, the closed chat is always a button instead of a text
+        intergram_auto_no_response: Un mensaje que se envía un minuto después de que la usuaria haya enviado su primer mensaje y no se haya recibido respuesta
+        intergram_auto_response: Un mensaje que se envía inmediatamente después de que la usuaria envíe su primer mensaje
+        intergram_chat_id: ID de chat
+        intergram_color: Color del widget
+        intergram_for_admins: Activar el chat de Intergram en el backend de administración
+        intergram_intro_message: Primer mensaje cuando la usuaria abre el chat por primera vez
+        intergram_require_login: Solo para usuarias registradas
+        intergram_title_closed: Título del chat cerrado
+        intergram_title_open: Título del chat abierto
+        intergram_use_floating_button: Si está marcado, el chat cerrado siempre es un botón en lugar de un texto
         use_markdown_editor: Utilizar el editor Markdown en lugar del editor HTML
       constraint:
         component_id: o específicamente en
@@ -29,15 +29,15 @@ es:
         decidim_awesome: Decidim Awesome
     components:
       awesome_iframe:
-        name: Fullscreen Iframe
+        name: Iframe en pantalla completa
         settings:
           global:
-            iframe: Iframe code
-            iframe_help: 'Put your code as html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Content will be sanitized from other HTML tags. Ensure to use 100% as width to fill the screen.'
-            no_margins: No margins between the iframe and the rest of the page
-            viewport_width: Limit maximum width to the application viewport
+            iframe: Código iframe
+            iframe_help: 'Pon tu código como html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. El contenido se limpiará de otras etiquetas HTML. Asegúrate de usar 100% como ancho de pantalla.'
+            no_margins: Sin márgenes entre el iframe y el resto de la página
+            viewport_width: Limitar el ancho máximo a la vista de la aplicación
           step:
-            iframe: Iframe code
+            iframe: Código iframe
       awesome_map:
         name: Mapa Global
         settings:
@@ -77,60 +77,60 @@ es:
           form:
             help:
               allow_images_in_full_editor: Esto añadirá un botón para subir imágenes en el editor HTML completo.
-              allow_images_in_markdown_editor: This will allow markdown editor to upload images by copy & paste or drag & drop.
-              allow_images_in_proposals: This will allow to upload images in the proposals editor, available to any user
-              allow_images_in_small_editor: This will add an image uploader icon in all the editors WYSIWYG with minimal options in the toolbar enabled.
-              auto_save_forms: This will use LocalStorage to automatically save data introduced by users in surveys and other forms while they are filling it. Data will be restored in a future visit with the same browser in case the form is not submitted. If the form is submitted, data will be removed. If users remove their LocalStorage data, data won't be restored either.
-              drag_and_drop_supported: When uploading images, Drag & Drop is supported. Images will be uploaded to the server and inserted as external resources (it doesn't use base64 inline encoding).
-              intergram_about: Intergram uses Telegram messenger to handle a live support chat widget embedded in the bottom of the page.
-              intergram_config: 'Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> to your group or start a chat with it directly. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
+              allow_images_in_markdown_editor: Esto permitirá al editor markdown subir imágenes con "copiar & pegar" o con "arrastrar & soltar".
+              allow_images_in_proposals: Esto permitirá subir imágenes en el editor de propuestas, disponibles para cualquier usuaria
+              allow_images_in_small_editor: Esto añadirá un botón para subir imágenes en el editor HTML mínimo.
+              auto_save_forms: Esto usará el almacenamiento local del navegador para guardar automáticamente los datos introducidos por las usuarias en las encuestas y otros formularios mientras los rellenen. Si no se ha mandado el formulario, los datos se restaurarán en la siguiente visita con el mismo navegador. Los datos se eliminarán una vez se envíe el formulario. Si las usuarias eliminan sus datos del navegador, estos tampoco se restaurarán.
+              drag_and_drop_supported: Cuando se suban imágenes, se puede hacer a través del método "arrastrar & soltar". Las imágenes se subirán en el servidor y se insertarán como recursos externos (no se utiliza codificación en línea base64).
+              intergram_about: Intergram utiliza el Telegram Messenger para gestionar un widget de chat de soporte incrustado en la parte inferior de la página.
+              intergram_config: 'Invita a la <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> a tu grupo o inicia un chat con ella directamente. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               use_markdown_editor: Esto sustituirá al editor HTML (Quill), utilice un editor de Markdown en su lugar. El texto se mostrará como HTML en las páginas públicas (en la base de datos, el texto se almacenará como markdown)
-          rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants" is enabled, this option won''t apply. Use the editors hacks instead to enable images in proposals.'
+          rich_text_editor_in_public_views: 'NOTA: "Editor de texto enriquecido para participantes" está habilitado, esta opción no se aplicará. Utiliza las modificaciones del editor general para añadir imágenes a las propuestas.'
           show:
-            title: Tweaks for %{setting}
-            update: Update configuration
-          system: Everywhere except participatory spaces
+            title: Ajustes para %{setting}
+            update: Actualizar la configuración
+          system: En todas partes excepto en espacios participativos
           update:
-            error: Error updating configuration! %{error}
-            success: Configuration updated successfully!
+            error: '¡Error actualizando la configuración! %{error}'
+            success: '¡Configuración actualizada correctamente!'
         constraints:
           create:
-            error: Error creating condition case
-            success: Condition case created successfully
+            error: Error creando una nueva restricción
+            success: Restricción creada correctamente
           destroy:
-            error: Error removing condition case
-            success: Condition case removed successfully
+            error: Error eliminando la restricción
+            success: Restricción eliminada correctamente
           errors:
-            not_unique: Same condition already exists
+            not_unique: Esta restricción ya existe
           new:
-            cancel: Cancel
-            constraint: New condition case
-            save: Save
+            cancel: Cancelar
+            constraint: Nueva restricción
+            save: Guardar
           show:
-            cancel: Cancel
-            constraint: Edit condition case
-            save: Save
+            cancel: Cancelar
+            constraint: Editar la restricción
+            save: Guardar
           update:
-            error: Error updating condition case
-            success: Condition case updated successfully
+            error: Error actualizando la restricción
+            success: Restricción actualizada correctamente
         menu:
-          checks: System compatibility
-          editors: Editor hacks
-          livechat: Live Chat
-          proposals: Proposals hacks
-          surveys: Surveys & forms
+          checks: Compatibilidad del sistema
+          editors: Modificaciones a los editores
+          livechat: Chat en vivo
+          proposals: Modificaciones a las propuestas
+          surveys: Encuestas y formularios
       config:
         intergram:
-          auto_no_response: It seems that no one is available to answer right now. Please tell us how we can contact you, and we will get back to you as soon as we can.
-          auto_response: Looking for the first available admin (It might take a minute)
-          intro_message: Hello! How can we help you?
-          title_closed: Click to chat!
-          title_open: Let's chat!
+          auto_no_response: Parece que no hay nadie disponible para responder en este momento. Por favor, indícanos cómo te podemos contactar y nos comunicaremos contigo lo antes posible.
+          auto_response: Buscando la primera administradora disponible (puede tardar un minuto)
+          intro_message: Hola, ¿en qué puedo ayudarte?
+          title_closed: '¡Haz clic para chatear!'
+          title_open: '¡Hablemos!'
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
       editor_images:
         create:
-          error: Error uploading image!
-          success: Image uploaded successfully!
+          error: '¡Error cargando imagen!'
+          success: '¡La imagen se ha cargado correctamente!'
       map_component:
         map:
           error:
@@ -142,7 +142,7 @@ es:
     decidim:
       admin:
         decidim_awesome:
-          title: Decidim Tweaks
+          title: Modificaciones a Decidim
       decidim_awesome:
         awesome_config:
           amendments: Enmiendas
