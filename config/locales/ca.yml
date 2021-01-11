@@ -32,11 +32,13 @@ ca:
         name: Iframe en pantalla completa
         settings:
           global:
+            announcement: Anunci
             iframe: Codi Iframe
             iframe_help: 'Posa el teu codi com html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. El contingut serà netejat de qualsevol altre tag HTML. Assegureu-vos de fer servir 100% per l''amplada per tal d''omplir la pantalla.'
             no_margins: Sense marges entre el iframe i la resta de la pàgina
             viewport_width: Limita l'amplada a màxima com a la resta de l'aplicació
           step:
+            announcement: Anunci
             iframe: Codi del Iframe
       awesome_map:
         name: Mapa global
