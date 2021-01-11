@@ -7,6 +7,16 @@ cs:
         allow_images_in_proposals: Povolit obrázky v editoru návrhů
         allow_images_in_small_editor: Povolit obrázky v minimálním HTML editoru
         auto_save_forms: Automaticky ukládat formuláře v místním úložišti
+        intergram_auto_no_response: Zpráva, která je odeslána jednu minutu poté, co uživatel odešle svou první zprávu a nebyla obdržena odpověď
+        intergram_auto_response: Zpráva, která je odeslána okamžitě poté, co uživatel odešle svou první zprávu
+        intergram_chat_id: ID Chatu
+        intergram_color: Barva widgetu
+        intergram_for_admins: Povolit Intergram chat v administraci
+        intergram_intro_message: První zpráva při prvním otevření chatu
+        intergram_require_login: Pouze pro přihlášené uživatele
+        intergram_title_closed: Titulek uzavřeného chatu
+        intergram_title_open: Titulek otevřeného chatu
+        intergram_use_floating_button: Je-li zaškrtnuto, uzavřený chat je vždy tlačítko místo textu
         use_markdown_editor: Použít Markdown editor namísto HTML editoru
       constraint:
         component_id: nebo konkrétně v
@@ -22,11 +32,13 @@ cs:
         name: Celá obrazovka Iframe
         settings:
           global:
+            announcement: Oznámení
             iframe: Kód Iframe
             iframe_help: 'Zadejte kód jako html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Obsah bude sanitován z jiných HTML tagů. Pro vyplnění obrazovky použijte 100% šířku.'
             no_margins: Mezi iframe a zbytkem stránky nejsou žádné okraje
             viewport_width: Omezit maximální šířku na zobrazení aplikace
           step:
+            announcement: Oznámení
             iframe: Kód Iframe
       awesome_map:
         name: Úžasná mapa
@@ -37,14 +49,24 @@ cs:
             map_height: Výška mapy (px)
           step:
             announcement: Oznámení
+            show_accepted: Zobrazit přijaté návrhy
+            show_evaluating: Zobrazit hodnocení návrhů
+            show_not_answered: Zobrazit nezodpovězené návrhy
+            show_rejected: Zobrazit odmítnuté návrhy
+            show_withdrawn: Zobrazit stažené návrhy
     decidim_awesome:
       admin:
         checks:
           index:
+            admin_head_tags: Úžasné tagy zahrnuté v hlavičce administrace aplikace
             decidim-admin: Z modulu Admin
             decidim-core: Z hlavního Core modulu
             decidim-proposals: Z modulu Návrhy
             decidim_version: Decidim verze %{version}
+            errors:
+              CSS: Hlavička neobsahuje požadované položky <link> stylu. Chcete-li to vyřešit, můžete je ručně přidat do vlastního _head.html.erb
+              JavaScript: Hlavička neobsahuje požadované <script> položky javascriptu. Pro vyřešení je můžete ručně přidat do vlastního admin/_header.html.erb
+            head_tags: Úžasné tagy zahrnuté v hlavičce aplikace
             title: Kontroly kompatibility systému
         config:
           constraints:
@@ -62,7 +84,9 @@ cs:
               allow_images_in_small_editor: Tímto se přidá ikona pro nahrávání obrázků ve všech editorech WYSIWYG s minimálními možnostmi v panelu nástrojů.
               auto_save_forms: Toto bude používat místní úložiště pro automatické ukládání dat zavedených uživateli do průzkumů a jiných formulářů během vyplňování. Data budou obnovena v budoucí návštěvě stejného prohlížeče v případě, že formulář nebude odeslán. Pokud je formulář odeslán, data budou odstraněna. Pokud uživatelé odstraní svá data z místního úložiště, data nebudou obnovena.
               drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
-              use_markdown_editor: Toto nahradí WYSIWYG editor, použije Markdown editor v administraci a webový procesor pro vykreslení textu (text v databázi bude uložen jako text markdown)
+              intergram_about: Intergram používá Telegram messenger pro zpracování widgetu live podpory v dolní části stránky.
+              intergram_config: 'Pozvěte <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bota</a> do vaší skupiny nebo začněte chatovat přímo. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
+              use_markdown_editor: Toto nahradí WYSIWYG editor, místo toho použijte Markdown editor. Text bude vykreslen jako HTML na veřejných stránkách (text v databázi bude uložen jako text markdown)
           rich_text_editor_in_public_views: 'POZNÁMKA: "Kompletní textový editor pro účastníky" je povolen, tato možnost nebude využita. Pro povolení obrázků v Návrzích používejte místo toho hacky editoru.'
           show:
             title: Vylepšení pro %{setting}
@@ -94,8 +118,16 @@ cs:
         menu:
           checks: Systémová kompatibilita
           editors: Hack editoru
+          livechat: Live Chat
           proposals: Návrhy hacků
           surveys: Průzkumy a formuláře
+      config:
+        intergram:
+          auto_no_response: Zdá se, že právě teď nikdo není k dispozici odpovědět. Řekněte nám, jak vás můžeme kontaktovat, a co nejdříve se k vám vrátíme.
+          auto_response: Hledání prvního dostupného administrátora (může to chvíli trvat)
+          intro_message: Dobrý den! Jak Vám můžeme pomoci?
+          title_closed: Kliknutím chatujte!
+          title_open: Pojďme chatovat!
       credits: Vylepšení Decidim %{version} · Vyrobeno s ♥ od Platoniq
       editor_images:
         create:
