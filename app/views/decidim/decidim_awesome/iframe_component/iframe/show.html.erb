@@ -1,7 +1,12 @@
+<%= announcement = render(partial: "decidim/shared/component_announcement") %>
+
 <%= stylesheet_link_tag "decidim/decidim_awesome/awesome_iframe/iframe" %>
 
 <style rel="stylesheet" type="text/css">
-<%= ".wrapper { padding: 0; }" if remove_margins? %>
+<% if remove_margins? %>
+  <%= ".wrapper { padding-left: 0;padding-right: 0;padding-bottom: 0; }" %>
+  <%= ".wrapper { padding-top: 0; }" unless announcement.present? %>
+<% end %>
 </style>
 
 <div class="awesome-iframe<%= " row" if viewport_width? %>">

@@ -11,6 +11,7 @@ Compatibility:
 Features:
   - Improve awesome map categories visualitzation
   - Fix image uploader
+  - Adds announcements for full screen iframes
 
 v0.6
 ----
