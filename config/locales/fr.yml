@@ -1,0 +1,157 @@
+fr:
+  activemodel:
+    attributes:
+      config:
+        allow_images_in_full_editor: Allow images in the full HTML editor
+        allow_images_in_markdown_editor: Allow images in the markdown editor
+        allow_images_in_proposals: Allow images in the proposals editor
+        allow_images_in_small_editor: Allow images in the minimal HTML editor
+        auto_save_forms: Auto save forms in local storage
+        intergram_auto_no_response: A message that is sent one minute after the user sends its first message and no response was received
+        intergram_auto_response: A message that is sent immediately after the user sends its first message
+        intergram_chat_id: Chat ID
+        intergram_color: Color of the widget
+        intergram_for_admins: Enable Intergram Chat in the admin backend
+        intergram_intro_message: First message when the user opens the chat for the first time
+        intergram_require_login: Only for logged users
+        intergram_title_closed: Closed chat title
+        intergram_title_open: Opened chat title
+        intergram_use_floating_button: If checked, the closed chat is always a button instead of a text
+        use_markdown_editor: Use a Markdown editor instead of the HTML editor
+      constraint:
+        component_id: or specifically in
+        component_manifest: Only in components of type
+        participatory_space_manifest: Apply to participatory spaces of type
+        participatory_space_slug: Only in
+  decidim:
+    admin:
+      menu:
+        decidim_awesome: Decidim awesome
+    components:
+      awesome_iframe:
+        name: Fullscreen Iframe
+        settings:
+          global:
+            announcement: Announcement
+            iframe: Iframe code
+            iframe_help: 'Put your code as html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Content will be sanitized from other HTML tags. Ensure to use 100% as width to fill the screen.'
+            no_margins: No margins between the iframe and the rest of the page
+            viewport_width: Limit maximum width to the application viewport
+          step:
+            announcement: Announcement
+            iframe: Iframe code
+      awesome_map:
+        name: Awesome Map
+        settings:
+          global:
+            announcement: Announcement
+            collapse: Start with collapsed menu
+            map_height: Map height (px)
+          step:
+            announcement: Announcement
+            show_accepted: Show accepted proposals
+            show_evaluating: Show evaluating proposals
+            show_not_answered: Show not answered proposals
+            show_rejected: Show rejected proposals
+            show_withdrawn: Show withdrawn proposals
+    decidim_awesome:
+      admin:
+        checks:
+          index:
+            admin_head_tags: Awesome tags included in the admin application header
+            decidim-admin: From Admin module
+            decidim-core: From Core module
+            decidim-proposals: From Proposals module
+            decidim_version: Decidim version %{version}
+            errors:
+              CSS: Head does not contain the required <link> stylesheet entries. To solve it, you can manually add it to your custom _head.html.erb
+              JavaScript: Head does not contain the required <script> Javascript entries. To solve it, you can manually add it to your custom admin/_header.html.erb
+            head_tags: Awesome tags included in the application header
+            title: System compatibility checks
+        config:
+          constraints:
+            add_condition: Add case
+            always: Always
+            delete: Supprimer
+            edit: Modifier
+            title: 'Applicable only in these cases:'
+          experimental: Experimental options
+          form:
+            help:
+              allow_images_in_full_editor: This will add an image uploader icon in all the editors WYSIWYG with the full toolbar enabled.
+              allow_images_in_markdown_editor: This will allow markdown editor to upload images by copy & paste or drag & drop.
+              allow_images_in_proposals: This will allow to upload images in the proposals editor, available to any user
+              allow_images_in_small_editor: This will add an image uploader icon in all the editors WYSIWYG with minimal options in the toolbar enabled.
+              auto_save_forms: This will use LocalStorage to automatically save data introduced by users in surveys and other forms while they are filling it. Data will be restored in a future visit with the same browser in case the form is not submitted. If the form is submitted, data will be removed. If users remove their LocalStorage data, data won't be restored either.
+              drag_and_drop_supported: When uploading images, Drag & Drop is supported. Images will be uploaded to the server and inserted as external resources (it doesn't use base64 inline encoding).
+              intergram_about: Intergram uses Telegram messenger to handle a live support chat widget embedded in the bottom of the page.
+              intergram_config: 'Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> to your group or start a chat with it directly. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
+              use_markdown_editor: This will substitute the Quill WYSIWYG editor, use a Markdown editor instead. Text will be rendered as HTML in the public pages (text in database will be saved as markdown text)
+          rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants" is enabled, this option won''t apply. Use the editors hacks instead to enable images in proposals.'
+          show:
+            title: Tweaks for %{setting}
+            update: Update configuration
+          system: Everywhere except participatory spaces
+          update:
+            error: Error updating configuration! %{error}
+            success: Configuration updated successfully!
+        constraints:
+          create:
+            error: Error creating condition case
+            success: Condition case created successfully
+          destroy:
+            error: Error removing condition case
+            success: Condition case removed successfully
+          errors:
+            not_unique: Same condition already exists
+          new:
+            cancel: Cancel
+            constraint: New condition case
+            save: Save
+          show:
+            cancel: Cancel
+            constraint: Edit condition case
+            save: Save
+          update:
+            error: Error updating condition case
+            success: Condition case updated successfully
+        menu:
+          checks: System compatibility
+          editors: Editor hacks
+          livechat: Live Chat
+          proposals: Proposals hacks
+          surveys: Surveys & forms
+      config:
+        intergram:
+          auto_no_response: It seems that no one is available to answer right now. Please tell us how we can contact you, and we will get back to you as soon as we can.
+          auto_response: Looking for the first available admin (It might take a minute)
+          intro_message: Hello! How can we help you?
+          title_closed: Click to chat!
+          title_open: Let's chat!
+      credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
+      editor_images:
+        create:
+          error: Error uploading image!
+          success: Image uploaded successfully!
+      map_component:
+        map:
+          error:
+            unavailable: The map is unavailable. Please configure geocoding to enable this component.
+          show:
+            view_meeting: View meeting
+            view_proposal: View proposal
+  layouts:
+    decidim:
+      admin:
+        decidim_awesome:
+          title: Decidim Tweaks
+      decidim_awesome:
+        awesome_config:
+          amendments: Amendments
+          autosaved_error: LocalStorage is not supported in your browser, form cannot be saved automatically.
+          autosaved_retrieved: Data for this form has been recovered from a previous session
+          autosaved_success: Data saved in local storage
+          categories: Categories
+          drag_and_drop_image: Add images by dragging & dropping or pasting them.
+          meetings: Meetings
+          proposals: Proposals
