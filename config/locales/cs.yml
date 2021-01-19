@@ -1,0 +1,157 @@
+cs:
+  activemodel:
+    attributes:
+      config:
+        allow_images_in_full_editor: Povolit obrázky v kompletním HTML editoru
+        allow_images_in_markdown_editor: Povolit obrázky v editoru markdown
+        allow_images_in_proposals: Povolit obrázky v editoru návrhů
+        allow_images_in_small_editor: Povolit obrázky v minimálním HTML editoru
+        auto_save_forms: Automaticky ukládat formuláře v místním úložišti
+        intergram_auto_no_response: Zpráva, která je odeslána jednu minutu poté, co uživatel odešle svou první zprávu a nebyla obdržena odpověď
+        intergram_auto_response: Zpráva, která je odeslána okamžitě poté, co uživatel odešle svou první zprávu
+        intergram_chat_id: ID Chatu
+        intergram_color: Barva widgetu
+        intergram_for_admins: Povolit Intergram chat v administraci
+        intergram_intro_message: První zpráva při prvním otevření chatu
+        intergram_require_login: Pouze pro přihlášené uživatele
+        intergram_title_closed: Titulek uzavřeného chatu
+        intergram_title_open: Titulek otevřeného chatu
+        intergram_use_floating_button: Je-li zaškrtnuto, uzavřený chat je vždy tlačítko místo textu
+        use_markdown_editor: Použít Markdown editor namísto HTML editoru
+      constraint:
+        component_id: nebo konkrétně v
+        component_manifest: Pouze v komponentách typu
+        participatory_space_manifest: Použít na participační prostory typu
+        participatory_space_slug: Pouze v
+  decidim:
+    admin:
+      menu:
+        decidim_awesome: Úžasné Decidim
+    components:
+      awesome_iframe:
+        name: Celá obrazovka Iframe
+        settings:
+          global:
+            announcement: Oznámení
+            iframe: Kód Iframe
+            iframe_help: 'Zadejte kód jako html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Obsah bude sanitován z jiných HTML tagů. Pro vyplnění obrazovky použijte 100% šířku.'
+            no_margins: Mezi iframe a zbytkem stránky nejsou žádné okraje
+            viewport_width: Omezit maximální šířku na zobrazení aplikace
+          step:
+            announcement: Oznámení
+            iframe: Kód Iframe
+      awesome_map:
+        name: Úžasná mapa
+        settings:
+          global:
+            announcement: Oznámení
+            collapse: Začít se sbaleným menu
+            map_height: Výška mapy (px)
+          step:
+            announcement: Oznámení
+            show_accepted: Zobrazit přijaté návrhy
+            show_evaluating: Zobrazit hodnocení návrhů
+            show_not_answered: Zobrazit nezodpovězené návrhy
+            show_rejected: Zobrazit odmítnuté návrhy
+            show_withdrawn: Zobrazit stažené návrhy
+    decidim_awesome:
+      admin:
+        checks:
+          index:
+            admin_head_tags: Úžasné tagy zahrnuté v hlavičce administrace aplikace
+            decidim-admin: Z modulu Admin
+            decidim-core: Z hlavního Core modulu
+            decidim-proposals: Z modulu Návrhy
+            decidim_version: Decidim verze %{version}
+            errors:
+              CSS: Hlavička neobsahuje požadované položky <link> stylu. Chcete-li to vyřešit, můžete je ručně přidat do vlastního _head.html.erb
+              JavaScript: Hlavička neobsahuje požadované <script> položky javascriptu. Pro vyřešení je můžete ručně přidat do vlastního admin/_header.html.erb
+            head_tags: Úžasné tagy zahrnuté v hlavičce aplikace
+            title: Kontroly kompatibility systému
+        config:
+          constraints:
+            add_condition: Přidat případ
+            always: Vždy
+            delete: Smazat
+            edit: Upravit
+            title: 'Platí pouze v těchto případech:'
+          experimental: Experimentální možnosti
+          form:
+            help:
+              allow_images_in_full_editor: Tímto se přidá ikona pro nahrávání obrázků ve všech editorech WYSIWYG s povoleným plným nástrojovým řádkem.
+              allow_images_in_markdown_editor: To umožní editoru markdown nahrávat obrázky pomocí kopírování a vkládání nebo přetažení.
+              allow_images_in_proposals: Toto umožní nahrávat obrázky do editoru návrhů, které jsou k dispozici každému uživateli
+              allow_images_in_small_editor: Tímto se přidá ikona pro nahrávání obrázků ve všech editorech WYSIWYG s minimálními možnostmi v panelu nástrojů.
+              auto_save_forms: Toto bude používat místní úložiště pro automatické ukládání dat zavedených uživateli do průzkumů a jiných formulářů během vyplňování. Data budou obnovena v budoucí návštěvě stejného prohlížeče v případě, že formulář nebude odeslán. Pokud je formulář odeslán, data budou odstraněna. Pokud uživatelé odstraní svá data z místního úložiště, data nebudou obnovena.
+              drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
+              intergram_about: Intergram používá Telegram messenger pro zpracování widgetu live podpory v dolní části stránky.
+              intergram_config: 'Pozvěte <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bota</a> do vaší skupiny nebo začněte chatovat přímo. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
+              use_markdown_editor: Toto nahradí WYSIWYG editor, místo toho použijte Markdown editor. Text bude vykreslen jako HTML na veřejných stránkách (text v databázi bude uložen jako text markdown)
+          rich_text_editor_in_public_views: 'POZNÁMKA: "Kompletní textový editor pro účastníky" je povolen, tato možnost nebude využita. Pro povolení obrázků v Návrzích používejte místo toho hacky editoru.'
+          show:
+            title: Vylepšení pro %{setting}
+            update: Aktualizace konfigurace
+          system: Všude kromě participačních prostor
+          update:
+            error: Chyba při aktualizaci konfigurace! %{error}
+            success: Konfigurace byla úspěšně aktualizována!
+        constraints:
+          create:
+            error: Chyba při vytváření případu stavu
+            success: Případ stavu byl úspěšně vytvořen
+          destroy:
+            error: Chyba při odstraňování případu stavu
+            success: Případ stavu byl úspěšně odstraněn
+          errors:
+            not_unique: Stejná podmínka již existuje
+          new:
+            cancel: Zrušit
+            constraint: Nový případ podmínky
+            save: Uložit
+          show:
+            cancel: Zrušit
+            constraint: Upravit stav případu
+            save: Uložit
+          update:
+            error: Chyba při aktualizaci případu podmínky
+            success: Případ stavu byl úspěšně aktualizován
+        menu:
+          checks: Systémová kompatibilita
+          editors: Hack editoru
+          livechat: Live Chat
+          proposals: Návrhy hacků
+          surveys: Průzkumy a formuláře
+      config:
+        intergram:
+          auto_no_response: Zdá se, že právě teď nikdo není k dispozici odpovědět. Řekněte nám, jak vás můžeme kontaktovat, a co nejdříve se k vám vrátíme.
+          auto_response: Hledání prvního dostupného administrátora (může to chvíli trvat)
+          intro_message: Dobrý den! Jak Vám můžeme pomoci?
+          title_closed: Kliknutím chatujte!
+          title_open: Pojďme chatovat!
+      credits: Vylepšení Decidim %{version} · Vyrobeno s ♥ od Platoniq
+      editor_images:
+        create:
+          error: Chyba při nahrávání obrázku!
+          success: Obrázek byl úspěšně nahrán!
+      map_component:
+        map:
+          error:
+            unavailable: Mapa není dostupná. Pro povolení této komponenty nakonfigurujte geocoding.
+          show:
+            view_meeting: Zobrazit schůzku
+            view_proposal: Zobrazit návrh
+  layouts:
+    decidim:
+      admin:
+        decidim_awesome:
+          title: Vylepšení Decidim
+      decidim_awesome:
+        awesome_config:
+          amendments: Pozměňovací návrhy
+          autosaved_error: Místní úložiště není ve vašem prohlížeči podporováno, formulář nelze uložit automaticky.
+          autosaved_retrieved: Údaje pro tento formulář byly obnoveny z předchozí relace
+          autosaved_success: Data uložena v místním úložišti
+          categories: Kategorie
+          drag_and_drop_image: Přidejte obrázky přetažením nebo vložením.
+          meetings: Schůzky
+          proposals: Návrhy
