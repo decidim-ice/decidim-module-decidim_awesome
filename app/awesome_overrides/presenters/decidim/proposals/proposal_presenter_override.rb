@@ -11,7 +11,7 @@ Decidim::Proposals::ProposalPresenter.class_eval do
       renderer = Decidim::ContentRenderers::HashtagRenderer.new(content)
       content = renderer.render(links: links, extras: extras).html_safe
 
-      if use_markdown? proposal
+      if use_markdown?(proposal) && !all_locales # avoid rendering in editors
         content = Decidim::DecidimAwesome::ContentRenderers::MarkdownRenderer.new(content).render
         # HACK: to avoid the replacement of lines to <br> that simple_format does
         content = content.gsub(">\n", ">").gsub("\n<", "<")
