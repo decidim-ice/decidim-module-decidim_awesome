@@ -2,28 +2,24 @@
 
 # Tune Proposal presenter to use markdown if configured
 Decidim::Proposals::ProposalPresenter.class_eval do
-  def body(links: false, extras: true, strip_tags: false)
-    if respond_to? :translated_attribute
-      text = translated_attribute(proposal.body)
+  def body(links: false, extras: true, strip_tags: false, all_locales: false)
+    return unless proposal
 
-      text = strip_tags(sanitize_text(text)) if strip_tags
-    else
-      # TODO: remove when 0.22 is diched
-      text = proposal.body
-      text = strip_tags(text) if strip_tags
+    handle_locales(proposal.body, all_locales) do |content|
+      content = strip_tags(sanitize_text(content)) if strip_tags
+
+      renderer = Decidim::ContentRenderers::HashtagRenderer.new(content)
+      content = renderer.render(links: links, extras: extras).html_safe
+
+      if use_markdown? proposal
+        content = Decidim::DecidimAwesome::ContentRenderers::MarkdownRenderer.new(content).render
+        # HACK: to avoid the replacement of lines to <br> that simple_format does
+        content = content.gsub(">\n", ">").gsub("\n<", "<")
+      elsif links
+        content = Decidim::ContentRenderers::LinkRenderer.new(content).render if links
+      end
+      content
     end
-
-    renderer = Decidim::ContentRenderers::HashtagRenderer.new(text)
-    text = renderer.render(links: links, extras: extras).html_safe
-
-    if use_markdown? proposal
-      text = Decidim::DecidimAwesome::ContentRenderers::MarkdownRenderer.new(text).render
-      # HACK: to avoid the replacement of lines to <br> that simple_format does
-      text = text.gsub(">\n", ">").gsub("\n<", "<")
-    elsif links
-      text = Decidim::ContentRenderers::LinkRenderer.new(text).render
-    end
-    text
   end
 
   private
