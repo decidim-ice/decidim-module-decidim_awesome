@@ -7,7 +7,7 @@ Decidim::Proposals::ProposalPresenter.class_eval do
   def body(links: false, extras: true, strip_tags: false, all_locales: false)
     return unless proposal
 
-    if respond_to? :handle_locales
+    if defined? handle_locales
       return handle_locales(proposal.body, all_locales) do |content|
         content = strip_tags(sanitize_text(content)) if strip_tags
 
@@ -25,7 +25,7 @@ Decidim::Proposals::ProposalPresenter.class_eval do
     # rubocop:enable Metrics/CyclomaticComplexity
     # rubocop:enable Metrics/PerceivedComplexity
 
-    if respond_to? :translated_attribute
+    if defined? translated_attribute
       text = translated_attribute(proposal.body)
 
       text = strip_tags(sanitize_text(text)) if strip_tags
