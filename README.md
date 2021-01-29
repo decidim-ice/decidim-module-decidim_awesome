@@ -6,7 +6,7 @@
 
 Usability and UX tweaks for Decidim.
 
-This plugin allows the administrators to expand the possibilities of Decidim beyond some existing limitations. 
+This plugin allows the administrators to expand the possibilities of Decidim beyond some existing limitations.
 All tweaks are provided in a optional fashion with granular permissions that let the administrator to choose exactly where to apply those mods. Some tweaks can be applied to any assembly, other in an specific participatory process or even in type of component only.
 
 **This in beta status, we do not accept any responsibility for breaking anything. Feedback is appreciated though.**
@@ -16,7 +16,7 @@ All tweaks are provided in a optional fashion with granular permissions that let
 At Platoniq, we like to explore and combine open tools for enriching democracy in many levels. And also for organizations or companies, not only governments.
 Currently we are working very closely with the team behind [Decidim](https://decidim.org) because we believe that it is a great software.
 
-However in Platoniq we have this slogan: "Democracy is fun if you take it seriously" (feel free to ask for T-shirts 😉). 
+However in Platoniq we have this slogan: "Democracy is fun if you take it seriously" (feel free to ask for T-shirts 😉).
 And, let's face it, sometimes we feel that Decidim lacks a bit of the "fun" part so we created this.
 Because Decidim is awesome and so is this!
 
@@ -89,7 +89,7 @@ This feature allows to customize each organization css without affecting the oth
 4. Modify that file as you like, you can use any SASS function available (such as `@import`)
 5. Restart your server, enjoy!
 
-See an example here: 
+See an example here:
 https://github.com/Platoniq/decidim-demo/tree/master/app/assets/themes
 
 NOTE: Files presents in the `app/assets/themes` folder are added automatically into the precompile list of Rails by this plugin.
@@ -109,7 +109,7 @@ With this feature you can have a support chat in Decidim. It is linked to a [Tel
 
 #### To be continued...
 
-Some things in the road-map: 
+Some things in the road-map:
 
 1. Improve the conversation in comments by allowing images
 1. Direct export of surveys in PDF
@@ -121,7 +121,7 @@ Some things in the road-map:
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-decidim_awesome", "~> 0.6.1"
+gem "decidim-decidim_awesome", "~> 0.6.2"
 ```
 
 And then execute:
@@ -141,7 +141,7 @@ Depending on your Decidim version, choose the corresponding Awesome version to e
 
 ## Configuration
 
-Each tweak can be enabled or disabled by default. It also can be deactivated so 
+Each tweak can be enabled or disabled by default. It also can be deactivated so
 admins do not even see it.
 
 In order to personalize default values, create an initializer such as:
