@@ -4,7 +4,9 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = "0.23.1"
+# We need to keep version here for Appraisal compatibility
+# DECIDIM_VERSION = "0.23.1"
+DECIDIM_VERSION = { git: "https://github.com/decidim/decidim", branch: "release/0.23-stable" }.freeze
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-decidim_awesome", path: "."

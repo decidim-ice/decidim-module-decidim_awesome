@@ -31,7 +31,7 @@ Decidim.register_component(:awesome_iframe) do |component|
   # end
 
   component.seeds do |participatory_space|
-    # Create a Iframe and a few geolocated proposals
+    # Create a Iframe component in all participatory spaces
     admin_user = Decidim::User.find_by(
       organization: participatory_space.organization,
       email: "admin@example.org"

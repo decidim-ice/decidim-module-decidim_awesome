@@ -201,7 +201,7 @@ GIT
       decidim-core (= 0.23.1)
 
 PATH
-  remote: .
+  remote: ..
   specs:
     decidim-decidim_awesome (0.6.2)
       decidim-admin (>= 0.22.0, < 0.24)
@@ -788,6 +788,8 @@ DEPENDENCIES
   byebug (~> 11.0)
   codecov
   decidim!
+  decidim-admin!
+  decidim-core!
   decidim-decidim_awesome!
   decidim-dev!
   faker (~> 1.9)

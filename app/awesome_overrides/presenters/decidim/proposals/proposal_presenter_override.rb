@@ -2,8 +2,30 @@
 
 # Tune Proposal presenter to use markdown if configured
 Decidim::Proposals::ProposalPresenter.class_eval do
-  def body(links: false, extras: true, strip_tags: false)
-    if respond_to? :translated_attribute
+  # rubocop:disable Metrics/CyclomaticComplexity
+  # rubocop:disable Metrics/PerceivedComplexity
+  def body(links: false, extras: true, strip_tags: false, all_locales: false)
+    return unless proposal
+
+    if defined? handle_locales
+      return handle_locales(proposal.body, all_locales) do |content|
+        content = strip_tags(sanitize_text(content)) if strip_tags
+
+        renderer = Decidim::ContentRenderers::HashtagRenderer.new(content)
+        content = renderer.render(links: links, extras: extras).html_safe
+
+        if use_markdown?(proposal) && !all_locales # avoid rendering in editors
+          content = render_markdown(content)
+        elsif links
+          content = Decidim::ContentRenderers::LinkRenderer.new(content).render
+        end
+        content
+      end
+    end
+    # rubocop:enable Metrics/CyclomaticComplexity
+    # rubocop:enable Metrics/PerceivedComplexity
+
+    if defined? translated_attribute
       text = translated_attribute(proposal.body)
 
       text = strip_tags(sanitize_text(text)) if strip_tags
@@ -17,9 +39,7 @@ Decidim::Proposals::ProposalPresenter.class_eval do
     text = renderer.render(links: links, extras: extras).html_safe
 
     if use_markdown? proposal
-      text = Decidim::DecidimAwesome::ContentRenderers::MarkdownRenderer.new(text).render
-      # HACK: to avoid the replacement of lines to <br> that simple_format does
-      text = text.gsub(">\n", ">").gsub("\n<", "<")
+      text = render_markdown(text)
     elsif links
       text = Decidim::ContentRenderers::LinkRenderer.new(text).render
     end
@@ -34,5 +54,11 @@ Decidim::Proposals::ProposalPresenter.class_eval do
     config = Decidim::DecidimAwesome::Config.new(proposal.organization)
     config.context_from_component proposal
     config.enabled_for? :use_markdown_editor
+  end
+
+  def render_markdown(content)
+    content = Decidim::DecidimAwesome::ContentRenderers::MarkdownRenderer.new(content).render
+    # HACK: to avoid the replacement of lines to <br> that simple_format does
+    content.gsub(">\n", ">").gsub("\n<", "<")
   end
 end
