@@ -18,3 +18,13 @@ appraise "decidim-0.23" do
   end
 end
 
+appraise "decidim-0.23.1" do
+  gem "decidim", git: "https://github.com/decidim/decidim", branch: "release/0.23-stable"
+  gem "decidim-admin", git: "https://github.com/decidim/decidim", branch: "release/0.23-stable"
+  gem "decidim-core", git: "https://github.com/decidim/decidim", branch: "release/0.23-stable"
+  gem "puma", ">= 4.3.5"
+  group :development, :test do
+    gem "decidim-dev", git: "https://github.com/decidim/decidim", branch: "release/0.23-stable"
+  end
+end
+

@@ -244,13 +244,21 @@ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rake test_
 DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rspec
 ```
 
-However, this project also make use of the gem [Appraisals](https://github.com/thoughtbot/appraisal) in order to test againts several versions of Decidim. The idea is to suport same supported versions of Decidim.
+However, this project also make use of the gem [Appraisals](https://github.com/thoughtbot/appraisal) in order to test against several versions of Decidim. The idea is to support same supported versions of Decidim.
 
 You can run run all tests against all Decidim versions by using:
+
 ```bash
 bundle exec appraisal install
-DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rake test_app
+DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal rake test_app
 DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal rspec
+```
+
+To test a specific apprasail configured version do the following:
+
+```
+DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal decidim-0.23 rake test_app
+DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal decidim-0.23 rspec
 ```
 
 Note that the database user has to have rights to create and drop a database in
@@ -276,13 +284,15 @@ the code coverage report.
 
 ### Appraisals commands
 
+The [Appraisals](Appraisals) file contains the supported versions. In i each version defines the changes respect to the main `Gemfile`.
+
 Appraisal uses custom gems for testing in the folder `gemfiles`, these gemfiles are generated from the file `Appraisals`. To update definitions do:
 
 ```
 bundle exec appraisal install
 ```
 
-To update the Appraisal definitions manually do the following:
+The former command will take care of updating all configured version. To update the Appraisal definitions manually (not usually necessary) do the following:
 
 ```
 cd gemfiles
