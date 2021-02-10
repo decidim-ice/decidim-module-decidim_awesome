@@ -50,6 +50,11 @@ module Decidim
       false
     end
 
+    # enables to tweak menus, reorder, hide, add external links
+    config_accessor :menu_hacks do
+      false
+    end
+
     # Live chat widget linked to Telegram account or group
     config_accessor :intergram_for_admins do
       false

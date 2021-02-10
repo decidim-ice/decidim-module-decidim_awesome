@@ -149,6 +149,7 @@ en:
           livechat: Live Chat
           proposals: Proposals hacks
           surveys: Surveys & forms
+          menu_hacks: Menu tweaks
       config:
         intergram:
           auto_no_response: It seems that no one is available to answer right now.

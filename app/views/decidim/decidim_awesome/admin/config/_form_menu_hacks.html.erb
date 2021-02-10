@@ -1,0 +1,13 @@
+<div class="row column decidim_awesome-form">
+  <% if config_enabled? :menu_hacks %>
+    <table>
+      <% find_menu(:menu).each do |item| %>
+        <tr>
+          <td><%= item.label %></td>
+          <td><%= item.url %></td>
+          <td><%= item.position %></td>
+        </tr>
+      <% end%>
+    </table>
+  <% end %>
+</div>

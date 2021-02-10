@@ -11,7 +11,7 @@ module Decidim
 
         layout "decidim/admin/decidim_awesome"
 
-        helper_method :constraints_for
+        helper_method :constraints_for, :find_menu
 
         def show
           @form = form(ConfigForm).from_params(organization_awesome_config)
@@ -37,6 +37,12 @@ module Decidim
 
         def constraints_for(key)
           awesome_config_instance.setting_for(key)&.constraints
+        end
+
+        def find_menu(name)
+          menu = Decidim::Menu.new(name)
+          menu.build_for(self)
+          menu.items
         end
       end
     end

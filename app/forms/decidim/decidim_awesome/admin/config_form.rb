@@ -12,6 +12,7 @@ module Decidim
         attribute :use_markdown_editor, Boolean
         attribute :allow_images_in_markdown_editor, Boolean
         attribute :auto_save_forms, Boolean
+        attribute :menu_hacks, Boolean
         attribute :intergram_for_admins, Boolean
         attribute :intergram_for_admins_settings, IntergramForm
         attribute :intergram_for_public, Boolean
