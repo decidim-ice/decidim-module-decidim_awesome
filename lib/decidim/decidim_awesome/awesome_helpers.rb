@@ -49,6 +49,7 @@ module Decidim
         return @tenant_stylesheets = current_organization.host.to_s if File.exist?("#{prefix}.css") || File.exist?("#{prefix}.scss") || File.exist?("#{prefix}.scss.erb")
       end
 
+      # Collects all CSS that is applied in the current URL context
       def awesome_custom_styles
         return unless awesome_config[:scoped_styles]
         return @awesome_custom_styles if @awesome_custom_styles

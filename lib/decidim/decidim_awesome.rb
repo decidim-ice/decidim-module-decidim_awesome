@@ -63,6 +63,10 @@ module Decidim
     # Valid values differ a little from the previous convention:
     #   :disabled => false and non available, hidden from admins
     #   Hash => hash of different css text, each key will be used for the contraints
+    # Admins create this hash dynamically but some pre-defined css boxes can be created here as:
+    #   {
+    #      some_identifier: ".wrapper { background: red; }"
+    #   }
     config_accessor :scoped_styles do
       {}
     end

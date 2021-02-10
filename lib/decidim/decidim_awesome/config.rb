@@ -87,7 +87,7 @@ module Decidim
         # check if current context matches some constraint
         constraints.detect do |constraint|
           # if some setting is different, rejects
-          invalid = constraint.settings.detect { |key, val| context[key.to_sym] != val }
+          invalid = constraint.settings.detect { |key, val| context[key.to_sym].to_s != val.to_s }
           invalid.blank?
         end
       end
