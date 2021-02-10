@@ -79,6 +79,19 @@ module Decidim
         config[setting]
       end
 
+      # checks if some constraint blocks the validity fot the current context
+      def valid_in_context?(constraints)
+        # if no constraints defined, applies to everything
+        return true if constraints.blank?
+
+        # check if current context matches some constraint
+        constraints.detect do |constraint|
+          # if some setting is different, rejects
+          invalid = constraint.settings.detect { |key, val| context[key.to_sym] != val }
+          invalid.blank?
+        end
+      end
+
       private
 
       def map_defaults
@@ -111,18 +124,6 @@ module Decidim
           end
         end
         true
-      end
-
-      def valid_in_context?(constraints)
-        # if no constraints defined, applies to everything
-        return true if constraints.blank?
-
-        # check if current context matches some constraint
-        constraints.detect do |constraint|
-          # if some setting is different, rejects
-          invalid = constraint.settings.detect { |key, val| context[key.to_sym] != val }
-          invalid.blank?
-        end
       end
     end
   end

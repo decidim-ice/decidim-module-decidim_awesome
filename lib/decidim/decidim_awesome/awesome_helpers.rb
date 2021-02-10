@@ -19,6 +19,10 @@ module Decidim
         @awesome_config ||= awesome_config_instance.config
       end
 
+      def javascript_config_vars
+        awesome_config.except(:scoped_styles).to_json.html_safe
+      end
+
       def show_public_intergram?
         return unless awesome_config[:intergram_for_public]
         return true unless awesome_config[:intergram_for_public_settings][:require_login]
@@ -43,6 +47,17 @@ module Decidim
 
         prefix = Rails.root.join("app", "assets", "themes", current_organization.host)
         return @tenant_stylesheets = current_organization.host.to_s if File.exist?("#{prefix}.css") || File.exist?("#{prefix}.scss") || File.exist?("#{prefix}.scss.erb")
+      end
+
+      def awesome_custom_styles
+        return unless awesome_config[:scoped_styles]
+        return @awesome_custom_styles if @awesome_custom_styles
+
+        styles = awesome_config[:scoped_styles]&.filter do |key, _value|
+          config = AwesomeConfig.find_by(var: "scoped_style_#{key}", organization: current_organization)
+          @awesome_config_instance.valid_in_context?(config.constraints)
+        end
+        @awesome_custom_styles = styles.values.join("\n")
       end
 
       def version_prefix

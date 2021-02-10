@@ -59,6 +59,13 @@ module Decidim
       false
     end
 
+    # allows admins to created specific CSS snippets affecting only some specific parts
+    # Valid values differ a little from the previous convention:
+    #   :disabled => false and non available, hidden from admins
+    #   Hash => hash of different css text, each key will be used for the contraints
+    config_accessor :scoped_styles do
+    end
+
     # these settings do not follow the :disabled convention but
     # depends on the previous intergram configurations
     config_accessor :intergram_url do

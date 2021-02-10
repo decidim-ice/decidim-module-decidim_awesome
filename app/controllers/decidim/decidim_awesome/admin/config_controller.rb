@@ -19,7 +19,6 @@ module Decidim
 
         def update
           @form = form(ConfigForm).from_params(params)
-
           UpdateConfig.call(@form) do
             on(:ok) do
               flash[:notice] = I18n.t("config.update.success", scope: "decidim.decidim_awesome.admin")
@@ -31,6 +30,28 @@ module Decidim
               render :show
             end
           end
+        end
+
+        # TODO: use commands, add flash messages
+        def new_scoped_style
+          styles = AwesomeConfig.find_or_initialize_by(var: :scoped_styles, organization: current_organization)
+          styles.value = {} unless styles.value.is_a? Hash
+          styles.value[rand(36**8).to_s(36)] = ""
+          styles.save!
+          redirect_to decidim_admin_decidim_awesome.config_path(:styles)
+        end
+
+        # TODO: use commands, add flash messages
+        def destroy_scoped_style
+          styles = AwesomeConfig.find_by(var: :scoped_styles, organization: current_organization)
+          if styles&.value.is_a? Hash
+            styles.value.except!(params[:key])
+            styles.save!
+            # remove constrains associated (a new config var is generated automatically, by removing it, it will trigger destroy on dependents)
+            constraint = AwesomeConfig.find_by(var: "scoped_style_#{params[:key]}", organization: current_organization)
+            constraint.destroy! if constraint.present?
+          end
+          redirect_to decidim_admin_decidim_awesome.config_path(:styles)
         end
 
         private
