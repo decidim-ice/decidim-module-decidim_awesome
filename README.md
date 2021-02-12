@@ -106,14 +106,20 @@ With this feature you can have a support chat in Decidim. It is linked to a [Tel
 
 ![Intergram screenshot](examples/intergram.png)
 
+#### 10. Custom CSS applied only according scopes restrictions
+
+For instance, with this feature you can create directly from the admin a CSS snipped that is only applied globally, in a particular assembly or even a single proposal!
+
+![CSS screenshot](examples/custom_styles.png)
+
 
 #### To be continued...
 
 Some things in the road-map:
 
 1. Improve the conversation in comments by allowing images
-1. Direct export of surveys in PDF
-1. Allow to create surveys where the responding user is known
+1. Allow to create non-private surveys where the responding user is known by admins
+1. Manipulate menus (reorder, change texts, add new items)
 1. Propose something! or even better send a PR!
 
 ## Installation
@@ -121,7 +127,7 @@ Some things in the road-map:
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-decidim_awesome", "~> 0.6.2"
+gem "decidim-decidim_awesome", "~> 0.6.3"
 ```
 
 And then execute:

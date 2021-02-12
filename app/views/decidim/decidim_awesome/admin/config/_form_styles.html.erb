@@ -1,0 +1,28 @@
+<div class="row column decidim_awesome-form">
+  <% if config_enabled? :scoped_styles %>
+    <p class="help-text"><%= t("help.scoped_styles", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+    <p class="help-text">
+      <%= t("help.scoped_styles_variables", scope: "decidim.decidim_awesome.admin.config.form") %><br>
+      <% [:primary, :secondary, :success, :warning, :alert, :highlight, :highlight_alternative].each do |color| %>
+        var(--<%= color %>),
+      <% end %>
+    </p>
+
+    <% form.object.scoped_styles&.each do |key, value| %>
+      <div class="scoped-style" data-key="<%= key %>">
+        <%= label_tag :scoped_styles do %>
+          <%= t("config.scoped_styles", scope: "activemodel.attributes", id: key) %>
+          <%= link_to t(".remove"), decidim_admin_decidim_awesome.destroy_scoped_style_path(key: key), method: :post, class: "float-right", data: { confirm: t(".sure_to_remove") } %>
+        <% end %>
+        <%= text_area_tag key, value, name: "config[scoped_styles][#{key}]", rows: 5 %>
+        <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: "scoped_style_#{key}", constraints: constraints_for("scoped_style_#{key}") }) %>
+      </div>
+    <% end %>
+
+    <%= link_to t(".new"), decidim_admin_decidim_awesome.new_scoped_style_path, method: :post %>
+
+  <% end %>
+</div>
+
+
+<%= javascript_include_tag "decidim/decidim_awesome/admin/form_exit_warn" %>

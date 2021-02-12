@@ -13,6 +13,8 @@ module Decidim
         # Add admin engine routes here
         resources :constraints
         resources :config, param: :var, only: [:show, :update]
+        post :new_scoped_style, to: "config#new_scoped_style"
+        post :destroy_scoped_style, param: :key, to: "config#destroy_scoped_style"
         get :checks, to: "checks#index"
         root to: "config#show", var: :editors
       end
