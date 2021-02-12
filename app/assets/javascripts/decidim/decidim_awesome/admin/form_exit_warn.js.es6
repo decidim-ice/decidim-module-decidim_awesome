@@ -15,7 +15,7 @@ $(() => {
       window.exitUrl = event.currentTarget.action;
     });
 
-    window.onbeforeunload = () => {
+    window.addEventListener("beforeunload", (event) => {
       const exitUrl = window.exitUrl;
       const hasChanged = $form.data("changed");
       window.exitUrl = null;
@@ -24,7 +24,7 @@ $(() => {
         return null;
       }
 
-      return "";
-    }
+      event.returnValue = true;
+    });
   }
 });
