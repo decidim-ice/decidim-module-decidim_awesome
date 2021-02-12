@@ -1,6 +1,19 @@
 CHANGELOG
 =========
 
+v0.6.3
+------
+
+Compatibility:
+  - Decidim 0.23.3
+  - Decidim 0.23.2
+  - Decidim v0.23.1
+  - Decidim v0.23
+  - Decidim v0.22
+
+Features:
+  - Adds custom scoped styles
+
 v0.6.2
 ------
 
