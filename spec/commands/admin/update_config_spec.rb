@@ -52,6 +52,19 @@ module Decidim::DecidimAwesome
           expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_full_editor).value).to eq(false)
         end
       end
+
+      describe "when updating CSS" do
+        let!(:config) { create :awesome_config, organization: organization, var: "scoped_styles", value: { test: ".body {background: red;}" } }
+
+        it "saves the content in the hash" do
+          expect(AwesomeConfig.find_by(organization: organization, var: "scoped_styles").value).to be_a(Hash)
+        end
+
+        context "and has a constraint" do
+          it "creates an associated config constraint var" do
+          end
+        end
+      end
     end
   end
 end

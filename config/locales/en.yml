@@ -86,6 +86,12 @@ en:
             delete: Delete
             edit: Edit
             title: 'Applicable only in these cases:'
+          create_scoped_style:
+            error: Error creating a new CSS box! %{error}
+            success: CSS box %{key} created successfully!
+          destroy_scoped_style:
+            error: Error removing CSS box! %{error}
+            success: CSS box %{key} removed successfully!
           experimental: Experimental options
           form:
             help:
@@ -132,12 +138,6 @@ en:
           update:
             error: Error updating configuration! %{error}
             success: Configuration updated successfully!
-          create_scoped_style:
-            error: Error creating a new CSS box! %{error}
-            success: CSS box %{key} created successfully!
-          destroy_scoped_style:
-            error: Error removing CSS box! %{error}
-            success: CSS box %{key} removed successfully!
         constraints:
           create:
             error: Error creating condition case
