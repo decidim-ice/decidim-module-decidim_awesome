@@ -17,6 +17,7 @@ ca:
         intergram_title_closed: Títol del xat tancat
         intergram_title_open: Títol del xat obert
         intergram_use_floating_button: Si està marcat, el xat tancat és sempre un botó en lloc d'un text
+        scoped_styles: 'Custom styles #%{id}'
         use_markdown_editor: Fes servir l'editor Markdown en comptes de l'editor HTML
       constraint:
         component_id: o específicament a
@@ -75,6 +76,12 @@ ca:
             delete: Esborra
             edit: Edita
             title: 'S''aplica només en aquests casos:'
+          create_scoped_style:
+            error: Error creating a new CSS box! %{error}
+            success: CSS box %{key} created successfully!
+          destroy_scoped_style:
+            error: Error removing CSS box! %{error}
+            success: CSS box %{key} removed successfully!
           experimental: Opcions experimentals
           form:
             help:
@@ -86,7 +93,13 @@ ca:
               drag_and_drop_supported: Quan es pugin imatges, es pot fer a través del mètode de "arrossegar i deixar anar". Les imatges seran pujades al servidor i inserides com recursos externs (no es fa servir codificació en línia base64).
               intergram_about: Intergram utilitza el Telegram Messenger per gestionar un widget de xat en viu de suport incrustat a la part inferior de la pàgina.
               intergram_config: 'Convida a la <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> al teu grup o comença un xat amb ella directament. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
+              scoped_styles: Create custom CSS that applies only in certain parts of the public web (use the restrictions editor for that)
+              scoped_styles_variables: 'You can use the following CSS variables for organization customized colors:'
               use_markdown_editor: Això substituirà l'editor HTML (Quill), en el seu lloc s'utilitzarà un editor Markdown tant a l'admin com a la pàgina pública per processar el text (a la base de dades el text es desarà com a markdown)
+          form_styles:
+            new: Add a new CSS box
+            remove: Remove this CSS box
+            sure_to_remove: Are you sure you want to destroy this CSS box?
           rich_text_editor_in_public_views: 'NOTA: "Editor de text enriquit per participants" està habilitat a la configuració general, aquesta opció no aplicarà. Feu servir les modificacions d''editor general per afegir imatges a les propostes.'
           show:
             title: Modificacions per %{setting}
@@ -120,6 +133,7 @@ ca:
           editors: Modificacions als editors
           livechat: Xat en directe
           proposals: Modificacions a propostes
+          styles: Custom styles
           surveys: Formularis i enquestes
       config:
         intergram:
