@@ -17,7 +17,7 @@ cs:
         intergram_title_closed: Titulek uzavřeného chatu
         intergram_title_open: Titulek otevřeného chatu
         intergram_use_floating_button: Je-li zaškrtnuto, uzavřený chat je vždy tlačítko místo textu
-        scoped_styles: 'Custom styles #%{id}'
+        scoped_styles: 'Vlastní styly číslo %{id}'
         use_markdown_editor: Použít Markdown editor namísto HTML editoru
       constraint:
         component_id: nebo konkrétně v
@@ -77,11 +77,11 @@ cs:
             edit: Upravit
             title: 'Platí pouze v těchto případech:'
           create_scoped_style:
-            error: Error creating a new CSS box! %{error}
-            success: CSS box %{key} created successfully!
+            error: Chyba při vytváření nového CSS boxu! %{error}
+            success: CSS box %{key} byl úspěšně vytvořen!
           destroy_scoped_style:
-            error: Error removing CSS box! %{error}
-            success: CSS box %{key} removed successfully!
+            error: Chyba při odstraňování CSS boxu! %{error}
+            success: CSS box %{key} byl úspěšně odstraněn!
           experimental: Experimentální možnosti
           form:
             help:
@@ -93,13 +93,13 @@ cs:
               drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
               intergram_about: Intergram používá Telegram messenger pro zpracování widgetu live podpory v dolní části stránky.
               intergram_config: 'Pozvěte <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bota</a> do vaší skupiny nebo začněte chatovat přímo. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
-              scoped_styles: Create custom CSS that applies only in certain parts of the public web (use the restrictions editor for that)
-              scoped_styles_variables: 'You can use the following CSS variables for organization customized colors:'
+              scoped_styles: Vytvořte vlastní CSS aplikovaný pouze na určitých částech veřejného webu (použijte pro to editor omezení)
+              scoped_styles_variables: 'Můžete použít následující CSS proměnné pro nastavené barvy organizace:'
               use_markdown_editor: Toto nahradí WYSIWYG editor, místo toho použijte Markdown editor. Text bude vykreslen jako HTML na veřejných stránkách (text v databázi bude uložen jako text markdown)
           form_styles:
-            new: Add a new CSS box
-            remove: Remove this CSS box
-            sure_to_remove: Are you sure you want to destroy this CSS box?
+            new: Přidat nový CSS box
+            remove: Odstranit tento CSS box
+            sure_to_remove: Opravdu chcete zničit tento CSS box?
           rich_text_editor_in_public_views: 'POZNÁMKA: "Kompletní textový editor pro účastníky" je povolen, tato možnost nebude využita. Pro povolení obrázků v Návrzích používejte místo toho hacky editoru.'
           show:
             title: Vylepšení pro %{setting}
@@ -133,7 +133,7 @@ cs:
           editors: Hack editoru
           livechat: Live Chat
           proposals: Návrhy hacků
-          styles: Custom styles
+          styles: Vlastní styly
           surveys: Průzkumy a formuláře
       config:
         intergram:
