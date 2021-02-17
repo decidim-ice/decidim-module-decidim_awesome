@@ -17,6 +17,16 @@ module Decidim
         attribute :intergram_for_admins_settings, IntergramForm
         attribute :intergram_for_public, Boolean
         attribute :intergram_for_public_settings, IntergramForm
+
+        # convert to nil anything not specified in the params (UpdateConfig command ignores nil entries)
+        def self.from_params(params, additional_params = {})
+          instance = super(params, additional_params)
+          nillable_keys = instance.attributes.keys - params.keys
+          nillable_keys.each do |key|
+            instance.send("#{key}=", nil)
+          end
+          instance
+        end
       end
     end
   end
