@@ -22,6 +22,7 @@ en:
         intergram_title_open: Opened chat title
         intergram_use_floating_button: If checked, the closed chat is always a button
           instead of a text
+        scoped_styles: 'Custom styles #%{id}'
         use_markdown_editor: Use a Markdown editor instead of the HTML editor
       constraint:
         component_id: or specifically in
@@ -85,6 +86,12 @@ en:
             delete: Delete
             edit: Edit
             title: 'Applicable only in these cases:'
+          create_scoped_style:
+            error: Error creating a new CSS box! %{error}
+            success: CSS box %{key} created successfully!
+          destroy_scoped_style:
+            error: Error removing CSS box! %{error}
+            success: CSS box %{key} removed successfully!
           experimental: Experimental options
           form:
             help:
@@ -110,9 +117,17 @@ en:
               intergram_config: Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram
                 bot</a> to your group or start a chat with it directly. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+
                 info</a>
+              scoped_styles: Create custom CSS that applies only in certain parts
+                of the public web (use the restrictions editor for that)
+              scoped_styles_variables: 'You can use the following CSS variables for
+                organization customized colors:'
               use_markdown_editor: This will substitute the Quill WYSIWYG editor,
                 use a Markdown editor instead. Text will be rendered as HTML in the
                 public pages (text in database will be saved as markdown text)
+          form_styles:
+            new: Add a new CSS box
+            remove: Remove this CSS box
+            sure_to_remove: Are you sure you want to destroy this CSS box?
           rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants"
             is enabled, this option won''t apply. Use the editors hacks instead to
             enable images in proposals.'
@@ -148,6 +163,7 @@ en:
           editors: Editor hacks
           livechat: Live Chat
           proposals: Proposals hacks
+          styles: Custom styles
           surveys: Surveys & forms
           menu_hacks: Menu tweaks
       config:
