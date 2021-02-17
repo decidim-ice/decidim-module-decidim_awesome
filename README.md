@@ -127,7 +127,7 @@ Some things in the road-map:
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-decidim_awesome", "~> 0.6.3"
+gem "decidim-decidim_awesome", "~> 0.6.4"
 ```
 
 And then execute:

@@ -34,6 +34,16 @@ module Decidim::DecidimAwesome
         ConfigForm.from_params(params).with_context(context)
       end
       let!(:config) { create :awesome_config, organization: organization, var: :scoped_styles, value: oldstyles }
+      let(:params2) do
+        {
+          allow_images_in_full_editor: true,
+          allow_images_in_small_editor: true
+        }
+      end
+      let(:form2) do
+        ConfigForm.from_params(params2).with_context(context)
+      end
+      let(:another_config) { UpdateConfig.new(form2) }
 
       describe "when valid" do
         before do
@@ -56,6 +66,22 @@ module Decidim::DecidimAwesome
           expect { subject.call }.to broadcast(:invalid)
 
           expect(AwesomeConfig.find_by(organization: organization, var: :scoped_styles).value).to eq(oldstyles)
+        end
+      end
+
+      context "when other config are created" do
+        let!(:config) { create :awesome_config, organization: organization, var: :scoped_styles, value: styles }
+
+        it "modifies the other config" do
+          expect { another_config.call }.to broadcast(:ok)
+          expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_full_editor).value).to eq(true)
+          expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_small_editor).value).to eq(true)
+        end
+
+        it "do not modifiy current config" do
+          expect(AwesomeConfig.find_by(organization: organization, var: :scoped_styles).value).to eq(styles)
+          expect { another_config.call }.to broadcast(:ok)
+          expect(AwesomeConfig.find_by(organization: organization, var: :scoped_styles).value).to eq(styles)
         end
       end
     end

@@ -66,13 +66,15 @@ describe "Admin manages custom CSS", type: :system do
         expect(page).to have_content("body {background: red;}")
         expect(page).to have_content("body {background: blue;}")
 
-        within first(".scoped-style") do
+        within ".scoped-style[data-key=\"foo\"]" do
           accept_confirm { click_link "Remove this CSS box" }
         end
 
         expect(page).to have_admin_callout("removed successfully")
-        expect(page).to have_content("body {background: red;}")
-        expect(page).not_to have_content("body {background: blue;}")
+        expect(page).to have_content("body {background: blue;}")
+        expect(page).not_to have_content("body {background: red;}")
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :scoped_style_foo)).not_to be_present
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :scoped_style_bar)).to be_present
       end
     end
 
@@ -85,7 +87,7 @@ describe "Admin manages custom CSS", type: :system do
       end
 
       it "adds a new config helper var" do
-        within first(".scoped-style") do
+        within ".scoped-style[data-key=\"foo\"]" do
           click_link "Add case"
         end
 
@@ -96,7 +98,7 @@ describe "Admin manages custom CSS", type: :system do
 
         sleep 2
 
-        within first(".constraints-editor") do
+        within ".scoped-style[data-key=\"foo\"] .constraints-editor" do
           expect(page).to have_content("Processes")
         end
 
@@ -113,19 +115,26 @@ describe "Admin manages custom CSS", type: :system do
         end
 
         it "removes the helper config var" do
-          within first(".constraints-editor") do
+          within ".scoped-style[data-key=\"bar\"] .constraints-editor" do
             expect(page).to have_content("Processes")
           end
 
-          within first(".scoped-style") do
-            accept_confirm { click_link "Remove this CSS box" }
+          within ".scoped-style[data-key=\"bar\"]" do
+            click_link "Delete"
           end
 
-          within first(".constraints-editor") do
+          within ".scoped-style[data-key=\"bar\"] .constraints-editor" do
             expect(page).not_to have_content("Processes")
           end
 
-          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :scoped_style_bar)).not_to be_present
+          visit decidim_admin_decidim_awesome.config_path(:styles)
+
+          within ".scoped-style[data-key=\"bar\"] .constraints-editor" do
+            expect(page).not_to have_content("Processes")
+          end
+
+          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :scoped_style_bar)).to be_present
+          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :scoped_style_bar).constraints).not_to be_present
         end
       end
     end

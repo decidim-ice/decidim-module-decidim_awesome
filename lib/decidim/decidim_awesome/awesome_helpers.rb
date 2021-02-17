@@ -56,7 +56,7 @@ module Decidim
 
         styles = awesome_config[:scoped_styles]&.filter do |key, _value|
           config = AwesomeConfig.find_by(var: "scoped_style_#{key}", organization: current_organization)
-          @awesome_config_instance.valid_in_context?(config.constraints)
+          @awesome_config_instance.valid_in_context?(config&.constraints)
         end
         @awesome_custom_styles = styles.values.join("\n")
       end

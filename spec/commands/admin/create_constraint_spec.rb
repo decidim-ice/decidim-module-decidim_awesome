@@ -35,6 +35,22 @@ module Decidim::DecidimAwesome
 
           expect(AwesomeConfig.find_by(organization: organization, var: config.var).constraints.first.settings).to eq(params)
         end
+
+        context "and adding a repeated config" do
+          let!(:constraint) { create(:config_constraint, awesome_config: config, settings: params) }
+
+          it "broadcasts :invalid" do
+            expect { subject.call }.to broadcast(:invalid)
+          end
+        end
+
+        context "and adding a non repeated config" do
+          let!(:constraint) { create(:config_constraint, awesome_config: config, settings: params.merge("test" => 1)) }
+
+          it "broadcasts :invalid" do
+            expect { subject.call }.to broadcast(:ok)
+          end
+        end
       end
 
       describe "when invalid" do

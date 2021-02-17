@@ -7,14 +7,10 @@ describe "Visit the home page", type: :system do
   let!(:participatory_process) { create :participatory_process, organization: organization }
   let!(:config) { create :awesome_config, organization: organization, var: :scoped_styles, value: styles }
   let(:config_helper) { create :awesome_config, organization: organization, var: :scoped_style_bar }
-  let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: settings) }
   let(:styles) do
     {
       "bar" => "body {background: red;}"
     }
-  end
-  let(:settings) do
-    {}
   end
 
   before do
@@ -46,7 +42,7 @@ describe "Visit the home page", type: :system do
     it_behaves_like "extra css is added"
   end
 
-  context "when there are no custom styles" do
+  context "when there are emtpy css boxes" do
     let(:styles) do
       {}
     end
@@ -54,21 +50,44 @@ describe "Visit the home page", type: :system do
     it_behaves_like "no extra css is added"
   end
 
-  context "when custom styles are scoped" do
+  context "when constraints are present" do
+    let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: settings) }
     let(:settings) do
-      { "participatory_space_manifest" => "participatory_processes" }
+      {}
     end
 
-    context "and page do not match the scope" do
+    before do
+      visit decidim.root_path
+    end
+
+    context "when there are custom styles" do
+      it_behaves_like "extra css is added"
+    end
+
+    context "and there are no custom styles" do
+      let(:styles) do
+        {}
+      end
+
       it_behaves_like "no extra css is added"
     end
 
-    context "and page matches the scope" do
-      before do
-        click_link "Processes"
+    context "and custom styles are scoped" do
+      let(:settings) do
+        { "participatory_space_manifest" => "participatory_processes" }
       end
 
-      it_behaves_like "extra css is added"
+      context "and page do not match the scope" do
+        it_behaves_like "no extra css is added"
+      end
+
+      context "and page matches the scope" do
+        before do
+          click_link "Processes"
+        end
+
+        it_behaves_like "extra css is added"
+      end
     end
   end
 end

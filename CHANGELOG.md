@@ -1,6 +1,20 @@
 CHANGELOG
 =========
 
+v0.6.4
+------
+
+Compatibility:
+  - Decidim 0.23.3
+  - Decidim 0.23.2
+  - Decidim v0.23.1
+  - Decidim v0.23
+  - Decidim v0.22
+
+Features:
+  - Fixes a 500 error when custom styles is empty
+  - Fixes removal of existing css boxes when other configuration are changed
+
 v0.6.3
 ------
 
