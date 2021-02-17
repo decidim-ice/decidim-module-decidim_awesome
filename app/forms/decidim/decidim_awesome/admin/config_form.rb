@@ -21,7 +21,7 @@ module Decidim
         # convert to nil anything not specified in the params (UpdateConfig command ignores nil entries)
         def self.from_params(params, additional_params = {})
           instance = super(params, additional_params)
-          nillable_keys = instance.attributes.keys - params.keys
+          nillable_keys = instance.attributes.keys - params.keys.map(&:to_sym)
           nillable_keys.each do |key|
             instance.send("#{key}=", nil)
           end
