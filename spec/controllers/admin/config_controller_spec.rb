@@ -82,8 +82,10 @@ module Decidim::DecidimAwesome
         let(:params) do
           {
             var: :editors,
-            allow_images_in_full_editor: true,
-            allow_images_in_small_editor: true
+            config: {
+              allow_images_in_full_editor: true,
+              allow_images_in_small_editor: true
+            }
           }
         end
 

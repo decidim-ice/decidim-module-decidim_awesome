@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-v0.6.34
+v0.6.4
 ------
 
 Compatibility:
@@ -13,6 +13,7 @@ Compatibility:
 
 Features:
   - Fixes a 500 error when custom styles is empty
+  - Fixes removal of existing css boxes when other configuration are changed
 
 v0.6.3
 ------
