@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-v0.6.34
+v0.6.4
 ------
 
 Compatibility:
