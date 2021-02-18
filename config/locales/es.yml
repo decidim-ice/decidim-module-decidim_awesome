@@ -17,6 +17,7 @@ es:
         intergram_title_closed: Título del chat cerrado
         intergram_title_open: Título del chat abierto
         intergram_use_floating_button: Si está marcado, el chat cerrado siempre es un botón en lugar de un texto
+        scoped_styles: 'Estilos personalizados #%{id}'
         use_markdown_editor: Utilizar el editor Markdown en lugar del editor HTML
       constraint:
         component_id: o específicamente en
@@ -75,6 +76,12 @@ es:
             delete: Eliminar
             edit: Editar
             title: 'Se aplica solo en estos casos:'
+          create_scoped_style:
+            error: '¡Error al crear una nueva caja CSS! %{error}'
+            success: '¡Caja CSS %{key} creada correctamente!'
+          destroy_scoped_style:
+            error: '¡Error al eliminar la caja CSS! %{error}'
+            success: '¡Caja CSS %{key} eliminada correctamente!'
           experimental: Opciones experimentales
           form:
             help:
@@ -86,7 +93,13 @@ es:
               drag_and_drop_supported: Cuando se suban imágenes, se puede hacer a través del método "arrastrar & soltar". Las imágenes se subirán en el servidor y se insertarán como recursos externos (no se utiliza codificación en línea base64).
               intergram_about: Intergram utiliza el Telegram Messenger para gestionar un widget de chat de soporte incrustado en la parte inferior de la página.
               intergram_config: 'Invita a la <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> a tu grupo o inicia un chat con ella directamente. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
+              scoped_styles: Crea CSS personalizados que solo se apliquen en ciertas partes de la web pública (para ello, utiliza el editor de restricciones)
+              scoped_styles_variables: 'Puedes utilizar las siguientes variables CSS para los colores personalizados de la organización:'
               use_markdown_editor: Esto sustituirá al editor HTML (Quill), utilice un editor de Markdown en su lugar. El texto se mostrará como HTML en las páginas públicas (en la base de datos, el texto se almacenará como markdown)
+          form_styles:
+            new: Añadir una nueva caja CSS
+            remove: Eliminar esta caja CSS
+            sure_to_remove: '¿Estás segura de que quieres eliminar esta caja CSS?'
           rich_text_editor_in_public_views: 'NOTA: "Editor de texto enriquecido para participantes" está habilitado, esta opción no se aplicará. Utiliza las modificaciones del editor general para añadir imágenes a las propuestas.'
           show:
             title: Ajustes para %{setting}
@@ -120,6 +133,7 @@ es:
           editors: Modificaciones a los editores
           livechat: Chat en vivo
           proposals: Modificaciones a las propuestas
+          styles: Estilos personalizados
           surveys: Encuestas y formularios
       config:
         intergram:

@@ -18,7 +18,7 @@ module Decidim
         end
 
         def update
-          @form = form(ConfigForm).from_params(params)
+          @form = form(ConfigForm).from_params(params[:config])
           UpdateConfig.call(@form) do
             on(:ok) do
               flash[:notice] = I18n.t("config.update.success", scope: "decidim.decidim_awesome.admin")
