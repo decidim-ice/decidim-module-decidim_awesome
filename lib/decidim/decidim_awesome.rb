@@ -18,6 +18,7 @@ module Decidim
     autoload :SystemChecker, "decidim/decidim_awesome/system_checker"
     autoload :ContentRenderes, "decidim/decidim_awesome/content_renderers"
     autoload :ContextAnalyzers, "decidim/decidim_awesome/context_analyzers"
+    autoload :MenuHacker, "decidim/decidim_awesome/menu_hacker"
 
     # Boolean configuration options
     #
@@ -50,11 +51,6 @@ module Decidim
       false
     end
 
-    # enables to tweak menus, reorder, hide, add external links
-    config_accessor :menu_hacks do
-      false
-    end
-
     # Live chat widget linked to Telegram account or group
     config_accessor :intergram_for_admins do
       false
@@ -74,6 +70,11 @@ module Decidim
     #   }
     config_accessor :scoped_styles do
       {}
+    end
+
+    # allows to keep modifications for the main menu
+    config_accessor :menu do
+      []
     end
 
     # these settings do not follow the :disabled convention but

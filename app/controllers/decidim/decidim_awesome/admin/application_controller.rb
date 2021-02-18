@@ -9,9 +9,10 @@ module Decidim
       # Note that it inherits from `Decidim::Admin::Components::BaseController`, which
       # override its layout and provide all kinds of useful methods.
       class ApplicationController < Decidim::Admin::ApplicationController
-        # def permission_class_chain
-        #   [::Decidim::DecidimAwesome::Admin::Permissions] + super
-        # end
+        def permission_class_chain
+          [::Decidim::DecidimAwesome::Admin::Permissions] + super
+        end
+
         before_action do
           enforce_permission_to :update, :organization, organization: current_organization
         end

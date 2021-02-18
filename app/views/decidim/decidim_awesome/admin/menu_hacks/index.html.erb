@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-divider">
+    <h2 class="card-title"><%= t(".title") %></h2>
+  </div>
+  <div class="card-section">
+  <div class="row column decidim_awesome-form">
+    <table class="table-list">
+      <thead>
+        <tr>
+          <th><%= t(".label") %></th>
+          <th><%= t(".url") %></th>
+          <th><%= t(".position") %></th>
+          <th><%= t(".open_in") %></th>
+          <th><%= t(".visible") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% current_menu.each do |item| %>
+          <tr>
+            <td><%= item.label %></td>
+            <td><%= item.url %></td>
+            <td><%= item.position %></td>
+            <td><%= "self" %></td>
+            <td><%= item.visible? %></td>
+            <td><%= t(".remove#{'_hack' if item.overrided?}") if item.is_a? OpenStruct %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= link_to t(".new"), decidim_admin_decidim_awesome.new_menu_hack_path %>
+  </div>
+</div>

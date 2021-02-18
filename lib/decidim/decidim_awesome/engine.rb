@@ -3,6 +3,7 @@
 require "rails"
 require "decidim/core"
 require "decidim/decidim_awesome/awesome_helpers"
+require "decidim/decidim_awesome/menu_hacker"
 
 module Decidim
   module DecidimAwesome

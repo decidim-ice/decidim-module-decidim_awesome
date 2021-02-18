@@ -79,6 +79,27 @@ en:
                 To solve it, you can manually add it to your custom admin/_header.html.erb
             head_tags: Awesome tags included in the application header
             title: System compatibility checks
+        menu_hacks:
+          index:
+            title: Main menu
+            label: Label
+            url: URL
+            open_in: Opens in
+            position: Position
+            visible: Visible?
+            new: New item
+            remove: Remove added
+            remove_hack: Remove customization
+          new:
+            title: New menu item
+            save: Save
+          create:
+            error: Error creating menu item! %{error}
+            success: Menu item created successfully!
+          update:
+            error: Error updating menu item! %{error}
+            success: Menu item updated successfully!
+          url_exists: The same URL is already configured, please edit that instead of creating it again.
         config:
           constraints:
             add_condition: Add case
