@@ -17,10 +17,10 @@ module Decidim
 
         @items = default_items
         menu_overrides.each do |item|
-          default = default_items.find { |i| i.url == item.url }
+          default = default_items.find { |i| i.url.gsub(/\?.*/, "") == item.url }
           if default
             item.send("overrided?=", true)
-            @items.reject! { |i| i.url == item.url }
+            @items.reject! { |i| i.url.gsub(/\?.*/, "") == item.url }
           end
           @items << item if include_invisible || visible?(item)
         end
@@ -71,7 +71,7 @@ module Decidim
       end
 
       def current_config
-        @current_config ||= AwesomeConfig.find_by(var: name, organization: organization)&.value || []
+        @current_config ||= (AwesomeConfig.find_by(var: name, organization: organization)&.value || []).filter { |i| i.is_a? Hash }
       end
     end
   end

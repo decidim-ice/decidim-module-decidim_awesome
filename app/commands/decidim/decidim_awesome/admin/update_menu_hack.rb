@@ -21,12 +21,12 @@ module Decidim
           return broadcast(:invalid) if form.invalid?
 
           menu.value = [] unless menu.value.is_a? Array
-
+          menu.value = menu.value.filter { |i| i.is_a? Hash }
           found = false
           menu.value.map! do |item|
             if item["url"] == form.url
-              form.to_params
               found = true
+              form.to_params
             else
               item
             end
