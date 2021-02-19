@@ -36,7 +36,7 @@ module Decidim
         def url_exists?
           return false unless menu
 
-          menu.value&.detect { |i| i["url"].gsub(/\?.*/, "") == form.url }
+          menu.value&.detect { |i| i["url"] == form.url.gsub(/\?.*/, "") }
         end
       end
     end

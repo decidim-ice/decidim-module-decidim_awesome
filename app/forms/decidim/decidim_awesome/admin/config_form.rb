@@ -17,13 +17,12 @@ module Decidim
         attribute :intergram_for_public, Boolean
         attribute :intergram_for_public_settings, IntergramForm
 
-        # convert to nil anything not specified in the params (UpdateConfig command ignores nil entries)
+        # collect all keys anything not specified in the params (UpdateConfig command ignores it)
+        attr_accessor :valid_keys
+
         def self.from_params(params, additional_params = {})
           instance = super(params, additional_params)
-          nillable_keys = instance.attributes.keys - params.keys.map(&:to_sym)
-          nillable_keys.each do |key|
-            instance.send("#{key}=", nil)
-          end
+          instance.valid_keys = params.keys.map(&:to_sym) || []
           instance
         end
       end
