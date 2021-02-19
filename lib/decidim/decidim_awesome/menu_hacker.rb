@@ -37,10 +37,12 @@ module Decidim
         case item.visibility
         when "hidden"
           false
+        when "logged"
+          user.present?
+        when "non_logged"
+          user.blank?
         else
           true
-          # when :logged_in
-          #   current_user?
         end
       end
 

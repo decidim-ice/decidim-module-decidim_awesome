@@ -54,7 +54,17 @@ module Decidim
           end
         end
 
-        # TODO: destroy
+        def destroy
+          DestroyMenuHack.call(menu_item, current_menu_name, current_organization) do
+            on(:ok) do
+              flash[:notice] = I18n.t("menu_hacks.destroy.success", scope: "decidim.decidim_awesome.admin")
+            end
+            on(:invalid) do |error|
+              flash[:alert] = I18n.t("menu_hacks.destroy.error", scope: "decidim.decidim_awesome.admin", error: error)
+            end
+          end
+          redirect_to decidim_admin_decidim_awesome.menu_hacks_path
+        end
 
         private
 
@@ -86,11 +96,14 @@ module Decidim
         end
 
         def visibility_options
-          [:default, :hidden]
+          MenuForm::VISIBILITY_STATES.map { |key| [I18n.t(".menu_hacks.form.visibility.#{key}", scope: "decidim.decidim_awesome.admin"), key] }.to_h
         end
 
         def target_options
-          ["", :_blank]
+          {
+            I18n.t(".menu_hacks.form.target.self", scope: "decidim.decidim_awesome.admin") => "",
+            I18n.t(".menu_hacks.form.target.blank", scope: "decidim.decidim_awesome.admin") => "_blank"
+          }
         end
       end
     end
