@@ -10,7 +10,7 @@ module Decidim
 
         layout "decidim/admin/decidim_awesome"
 
-        helper_method :current_menu, :current_menu_name
+        helper_method :current_items, :md5, :visibility_options, :target_options
 
         before_action do
           enforce_permission_to :edit_config, :menu
@@ -35,6 +35,10 @@ module Decidim
           end
         end
 
+        def edit
+          @form = form(MenuForm).from_model(menu_item)
+        end
+
         def update
           @form = form(MenuForm).from_params(params)
           UpdateMenuHack.call(@form, current_menu_name) do
@@ -50,12 +54,43 @@ module Decidim
           end
         end
 
+        # TODO: destroy
+
+        private
+
+        def menu_item
+          item = current_items.find { |i| md5(i.url) == params[:id] }
+          OpenStruct.new(
+            raw_label: item.try(:raw_label) || { current_organization.default_locale => item.label },
+            url: item.url,
+            position: item.position,
+            target: item.try(:target),
+            visibility: item.try(:visibility)
+          )
+        end
+
+        def current_items
+          @current_items ||= current_menu.items(true)
+        end
+
         def current_menu
-          @current_menu ||= MenuHacker.new(current_menu_name, current_organization, self).items
+          @current_menu ||= MenuHacker.new(current_menu_name, self)
         end
 
         def current_menu_name
           :menu
+        end
+
+        def md5(text)
+          Digest::MD5.hexdigest(text)
+        end
+
+        def visibility_options
+          [:default, :hidden]
+        end
+
+        def target_options
+          ["", :_blank]
         end
       end
     end

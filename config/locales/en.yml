@@ -79,27 +79,6 @@ en:
                 To solve it, you can manually add it to your custom admin/_header.html.erb
             head_tags: Awesome tags included in the application header
             title: System compatibility checks
-        menu_hacks:
-          index:
-            title: Main menu
-            label: Label
-            url: URL
-            open_in: Opens in
-            position: Position
-            visible: Visible?
-            new: New item
-            remove: Remove added
-            remove_hack: Remove customization
-          new:
-            title: New menu item
-            save: Save
-          create:
-            error: Error creating menu item! %{error}
-            success: Menu item created successfully!
-          update:
-            error: Error updating menu item! %{error}
-            success: Menu item updated successfully!
-          url_exists: The same URL is already configured, please edit that instead of creating it again.
         config:
           constraints:
             add_condition: Add case
@@ -183,10 +162,40 @@ en:
           checks: System compatibility
           editors: Editor hacks
           livechat: Live Chat
+          menu_hacks: Menu tweaks
           proposals: Proposals hacks
           styles: Custom styles
           surveys: Surveys & forms
-          menu_hacks: Menu tweaks
+        menu_hacks:
+          create:
+            error: Error creating menu item! %{error}
+            success: Menu item created successfully!
+          edit:
+            save: Save
+            title: Edit menu item
+          form:
+            label_help: Translations aren't detected automatically, be sure to fill
+              all the fields!
+          index:
+            actions: Actions
+            edit: Edit
+            label: Label
+            new: New item
+            open_in: Opens in
+            position: Position
+            remove: Remove addition
+            remove_hack: Remove customization
+            title: Main menu
+            url: URL
+            visibility: Visible?
+          new:
+            save: Save
+            title: New menu item
+          update:
+            error: Error updating menu item! %{error}
+            success: Menu item updated successfully!
+          url_exists: The same URL is already configured, please edit that instead
+            of creating it again.
       config:
         intergram:
           auto_no_response: It seems that no one is available to answer right now.

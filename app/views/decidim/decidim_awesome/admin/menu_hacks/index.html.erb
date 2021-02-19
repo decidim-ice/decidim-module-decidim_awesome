@@ -11,18 +11,23 @@
           <th><%= t(".url") %></th>
           <th><%= t(".position") %></th>
           <th><%= t(".open_in") %></th>
-          <th><%= t(".visible") %></th>
+          <th><%= t(".visibility") %></th>
+          <th><%= t(".actions") %></th>
         </tr>
       </thead>
       <tbody>
-        <% current_menu.each do |item| %>
+        <% current_items.each do |item| %>
           <tr>
             <td><%= item.label %></td>
             <td><%= item.url %></td>
             <td><%= item.position %></td>
-            <td><%= "self" %></td>
-            <td><%= item.visible? %></td>
-            <td><%= t(".remove#{'_hack' if item.overrided?}") if item.is_a? OpenStruct %></td>
+            <td><%= item.try(:target) %></td>
+            <td><%= item.try(:visibility) %></td>
+            <td>
+              <%= link_to t(".edit"), decidim_admin_decidim_awesome.edit_menu_hack_path(md5(item.url)) %>
+
+              <%= t(".remove#{'_hack' if item.overrided?}") if item.is_a? OpenStruct %>
+            </td>
           </tr>
         <% end %>
       </tbody>

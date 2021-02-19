@@ -6,23 +6,23 @@ module Decidim
       class MenuForm < Decidim::Form
         include Decidim::TranslatableAttributes
 
-        translatable_attribute :label, String
+        translatable_attribute :raw_label, String
         attribute :url, String
         attribute :position, Integer
         attribute :target, String
-        attribute :visible, Boolean
+        attribute :visibility, Boolean
 
-        validates :label, translatable_presence: true
+        validates :raw_label, translatable_presence: true
         validates :url, presence: true
         validates :position, numericality: { greater_than: 0 }
 
         def to_params
           {
-            label: label,
+            label: raw_label,
             position: position,
-            url: url
-            #  target: target,
-            #  visible: visible
+            url: url,
+            target: target,
+            visibility: visibility
           }
         end
       end
