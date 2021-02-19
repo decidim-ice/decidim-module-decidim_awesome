@@ -17,6 +17,7 @@ module Decidim
         validates :url, presence: true
         validates :position, numericality: { greater_than: 0 }
         validates :visibility, inclusion: { in: VISIBILITY_STATES }
+        validates :target, inclusion: { in: ["", "_blank"] }
 
         def to_params
           {
