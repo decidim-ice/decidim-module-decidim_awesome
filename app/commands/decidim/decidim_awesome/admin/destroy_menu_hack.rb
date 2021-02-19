@@ -21,8 +21,7 @@ module Decidim
         #
         # Returns nothing.
         def call
-          return broadcast(:invalid) unless menu
-          return broadcast(:invalid) unless menu.value.is_a? Array
+          return broadcast(:invalid) unless url_exists?
 
           menu.value&.reject! { |i| i["url"] == item.url }
           menu.save!
@@ -35,6 +34,13 @@ module Decidim
         private
 
         attr_reader :organization, :item, :menu
+
+        def url_exists?
+          return false unless menu
+          return false unless menu.value.is_a? Array
+
+          menu.value&.detect { |i| i["url"] == item.url }
+        end
       end
     end
   end
