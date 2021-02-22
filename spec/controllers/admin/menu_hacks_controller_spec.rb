@@ -24,17 +24,25 @@ module Decidim::DecidimAwesome
           get :new
           expect(response).to have_http_status(:success)
         end
+
+        it_behaves_like "forbids disabled feature" do
+          let(:action) { get :new }
+        end
       end
 
       describe "POST #create" do
+        let(:action) { post :create, params: params }
+
         it "returns http success" do
-          post :create, params: params
+          action
           expect(flash[:notice]).not_to be_empty
           expect(response).to have_http_status(:redirect)
         end
 
+        it_behaves_like "forbids disabled feature"
+
         it "creates the new menu entry" do
-          post :create, params: params
+          action
 
           items = AwesomeConfig.find_by(organization: organization, var: menu_name).value
           expect(items).to be_a(Array)
@@ -46,13 +54,13 @@ module Decidim::DecidimAwesome
           let(:label) { { en: "" } }
 
           it "returns error" do
-            post :create, params: params
+            action
             expect(flash[:alert]).not_to be_empty
             expect(response).to have_http_status(:ok)
           end
 
           it "do not create the new menu entry" do
-            post :create, params: params
+            action
 
             expect(AwesomeConfig.find_by(organization: organization, var: menu_name)).not_to be_present
           end
@@ -66,13 +74,13 @@ module Decidim::DecidimAwesome
           let(:url) { "/some-path?querystring" }
 
           it "returns error" do
-            post :create, params: params
+            action
             expect(flash[:alert]).not_to be_empty
             expect(response).to have_http_status(:ok)
           end
 
           it "do not create the new menu entry" do
-            post :create, params: params
+            action
 
             expect(AwesomeConfig.find_by(organization: organization, var: menu_name).value.count).to eq(1)
           end
@@ -80,6 +88,7 @@ module Decidim::DecidimAwesome
       end
 
       describe "GET #edit" do
+        let(:action) { get :edit, params: params }
         let(:previous_menu) do
           [{ "url" => url, "position" => 10 }]
         end
@@ -91,9 +100,11 @@ module Decidim::DecidimAwesome
         end
 
         it "returns http success" do
-          get :edit, params: params
+          action
           expect(response).to have_http_status(:success)
         end
+
+        it_behaves_like "forbids disabled feature"
 
         context "when editing a non existing menu" do
           let(:params) do
@@ -103,12 +114,13 @@ module Decidim::DecidimAwesome
           end
 
           it "returns error" do
-            expect { get :edit, params: params }.to raise_error(ActiveRecord::RecordNotFound)
+            expect { action }.to raise_error(ActiveRecord::RecordNotFound)
           end
         end
       end
 
       describe "PATCH #update" do
+        let(:action) { patch :update, params: params.merge(id) }
         let(:previous_menu) do
           [{ "url" => url, "position" => 10 }]
         end
@@ -119,14 +131,16 @@ module Decidim::DecidimAwesome
           }
         end
 
+        it_behaves_like "forbids disabled feature"
+
         it "returns http success" do
-          patch :update, params: params.merge(id)
+          action
           expect(flash[:notice]).not_to be_empty
           expect(response).to have_http_status(:redirect)
         end
 
-        it "creates the new menu entry" do
-          patch :update, params: params.merge(id)
+        it "updates the menu entry" do
+          action
 
           items = AwesomeConfig.find_by(organization: organization, var: menu_name).value
           expect(items).to be_a(Array)
@@ -134,15 +148,17 @@ module Decidim::DecidimAwesome
           expect(items.first).to eq(attributes)
         end
 
-        context "when editing a non existing menu" do
-          let(:id) do
-            {
-              id: "nonsense"
-            }
+        context "when updating a non existing menu" do
+          let(:previous_menu) do
+            [{ "url" => "/another-menu", "position" => 10 }]
           end
 
-          it "returns error" do
-            expect { get :edit, params: params.merge(id) }.to raise_error(ActiveRecord::RecordNotFound)
+          it "creates a new item" do
+            action
+            items = AwesomeConfig.find_by(organization: organization, var: menu_name).value
+
+            expect(items).to be_a(Array)
+            expect(items.count).to eq(2)
           end
         end
 
@@ -150,13 +166,13 @@ module Decidim::DecidimAwesome
           let(:label) { { en: "" } }
 
           it "returns error" do
-            patch :update, params: params.merge(id)
+            action
             expect(flash[:alert]).not_to be_empty
             expect(response).to have_http_status(:ok)
           end
 
           it "do not create the new menu entry" do
-            patch :update, params: params.merge(id)
+            action
 
             expect(AwesomeConfig.find_by(organization: organization, var: menu_name).value).to eq(previous_menu)
           end
@@ -164,6 +180,7 @@ module Decidim::DecidimAwesome
       end
 
       describe "DELETE #destroys" do
+        let(:action) { delete :destroy, params: params }
         let(:previous_menu) do
           [{ "url" => url, "position" => 10 }]
         end
@@ -175,13 +192,15 @@ module Decidim::DecidimAwesome
         end
 
         it "returns ok" do
-          delete :destroy, params: params
+          action
           expect(flash[:notice]).not_to be_empty
           expect(response).to have_http_status(:redirect)
         end
 
+        it_behaves_like "forbids disabled feature"
+
         it "destroy the task" do
-          delete :destroy, params: params
+          action
           expect(AwesomeConfig.find_by(organization: organization, var: menu_name).value).to eq([])
         end
 
@@ -193,7 +212,7 @@ module Decidim::DecidimAwesome
           end
 
           it "returns error" do
-            expect { delete :destroy, params: params }.to raise_error(ActiveRecord::RecordNotFound)
+            expect { action }.to raise_error(ActiveRecord::RecordNotFound)
             expect(AwesomeConfig.find_by(organization: organization, var: menu_name).value).to eq(previous_menu)
           end
         end

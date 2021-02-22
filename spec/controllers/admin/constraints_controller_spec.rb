@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "decidim/decidim_awesome/test/shared_examples/menu_hack_contexts"
 
 module Decidim::DecidimAwesome
   module Admin
@@ -41,6 +42,11 @@ module Decidim::DecidimAwesome
         it "returns http success" do
           get :new, params: params
           expect(response).to have_http_status(:success)
+        end
+
+        it_behaves_like "forbids disabled feature" do
+          let(:feature) { key }
+          let(:action) { get :new, params: params }
         end
 
         it "has helper with participatory space manifests" do
@@ -84,6 +90,11 @@ module Decidim::DecidimAwesome
           expect(response).to have_http_status(:success)
         end
 
+        it_behaves_like "forbids disabled feature" do
+          let(:feature) { key }
+          let(:action) { post :create, params: params }
+        end
+
         context "when wrong params" do
           before do
             allow(controller).to receive(:current_setting).and_return(double(var: "some-var"))
@@ -103,6 +114,11 @@ module Decidim::DecidimAwesome
           get :show, params: params
           expect(response).to have_http_status(:success)
         end
+
+        it_behaves_like "forbids disabled feature" do
+          let(:feature) { key }
+          let(:action) { get :show, params: params }
+        end
       end
 
       describe "PATCH #update" do
@@ -111,6 +127,11 @@ module Decidim::DecidimAwesome
         it "redirects as success success" do
           patch :update, params: params
           expect(response).to have_http_status(:success)
+        end
+
+        it_behaves_like "forbids disabled feature" do
+          let(:feature) { key }
+          let(:action) { patch :update, params: params }
         end
 
         context "when wrong params" do
@@ -127,8 +148,13 @@ module Decidim::DecidimAwesome
         let(:id) { constraint.id }
 
         it "redirects as success success" do
-          get :destroy, params: params
+          delete :destroy, params: params
           expect(response).to have_http_status(:success)
+        end
+
+        it_behaves_like "forbids disabled feature" do
+          let(:feature) { key }
+          let(:action) { delete :destroy, params: params }
         end
       end
     end

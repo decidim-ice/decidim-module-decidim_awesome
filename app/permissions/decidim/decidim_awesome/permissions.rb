@@ -6,6 +6,8 @@ module Decidim
       def permissions
         return permission_action unless user
 
+        return Decidim::DecidimAwesome::Admin::Permissions.new(user, permission_action, context).permissions if permission_action.scope == :admin
+
         editor_image_action?
 
         permission_action

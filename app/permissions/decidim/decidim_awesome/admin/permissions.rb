@@ -13,16 +13,6 @@ module Decidim
 
           permission_action
         end
-
-        private
-
-        def budget
-          @budget ||= context.fetch(:budget, nil)
-        end
-
-        def project
-          @project ||= context.fetch(:project, nil)
-        end
       end
     end
   end

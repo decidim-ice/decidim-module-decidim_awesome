@@ -9,6 +9,9 @@ module Decidim
         helper ConfigConstraintsHelpers
 
         layout false
+        before_action do
+          enforce_permission_to :edit_config, (params[:key] || params[:id])
+        end
 
         def new
           @form = form(ConstraintForm).from_params(filtered_params, setting: current_setting)

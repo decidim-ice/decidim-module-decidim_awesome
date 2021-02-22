@@ -13,7 +13,7 @@ module Decidim
 
         helper_method :constraints_for
         before_action do
-          enforce_permission_to :edit_config, params[:var]
+          enforce_permission_to :edit_config, configs
         end
 
         def show
@@ -67,6 +67,12 @@ module Decidim
 
         def constraints_for(key)
           awesome_config_instance.setting_for(key)&.constraints
+        end
+
+        def configs
+          return params[:config].keys if params.has_key?(:config)
+
+          DecidimAwesome.config.keys
         end
       end
     end

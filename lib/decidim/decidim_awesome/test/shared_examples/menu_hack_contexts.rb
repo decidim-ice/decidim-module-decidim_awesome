@@ -52,3 +52,20 @@ shared_context "with menu hacks params" do
   end
   let(:another_config) { Decidim::DecidimAwesome::Admin::UpdateConfig.new(another_form) }
 end
+
+shared_examples "forbids disabled feature" do
+  let(:feature) { :menu }
+  let(:features) { [feature] }
+  before do
+    features.each do |feat|
+      allow(Decidim::DecidimAwesome.config).to receive(feat).and_return(:disabled)
+    end
+  end
+
+  it "redirects with error" do
+    action
+
+    expect(flash[:alert]).not_to be_empty
+    expect(response).to redirect_to("/admin/")
+  end
+end
