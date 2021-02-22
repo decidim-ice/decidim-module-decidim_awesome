@@ -3,14 +3,16 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/menu_hack_contexts"
 
-describe "Admin manages custom CSS", type: :system do
+describe "Admin manages hacked menus", type: :system do
   let(:organization) { create :organization }
+  let!(:config) { create :awesome_config, organization: organization, var: menu_name, value: previous_menu }
   let!(:user) { create(:user, :admin, :confirmed, organization: organization) }
   let!(:participatory_process) { create :participatory_process, organization: organization }
   let(:previous_menu) do
     []
   end
-  let!(:config) { create :awesome_config, organization: organization, var: menu_name, value: previous_menu }
+
+  include_context "with menu hacks params"
 
   before do
     switch_to_host(organization.host)
