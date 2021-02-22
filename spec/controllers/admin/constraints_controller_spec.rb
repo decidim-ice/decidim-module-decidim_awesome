@@ -78,9 +78,9 @@ module Decidim::DecidimAwesome
         end
       end
 
-      describe "PATCH #create" do
-        it "redirects as success success" do
-          get :create, params: params
+      describe "POST #create" do
+        it "returns a success response" do
+          post :create, params: params
           expect(response).to have_http_status(:success)
         end
 
@@ -109,14 +109,11 @@ module Decidim::DecidimAwesome
         let(:id) { constraint.id }
 
         it "redirects as success success" do
-          get :update, params: params
+          patch :update, params: params
           expect(response).to have_http_status(:success)
         end
 
         context "when wrong params" do
-          # before do
-          #   allow(controller).to receive(:current_setting).and_return(double(var: "some-var"))
-          # end
           let!(:prev_constraint) { create :config_constraint, awesome_config: config, settings: { participatory_space_manifest: "assemblies" } }
 
           it "returns error" do

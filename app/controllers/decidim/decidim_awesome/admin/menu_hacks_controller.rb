@@ -70,6 +70,8 @@ module Decidim
 
         def menu_item
           item = current_items.find { |i| md5(i.url) == params[:id] }
+          raise ActiveRecord::RecordNotFound unless item
+
           OpenStruct.new(
             raw_label: item.try(:raw_label) || { current_organization.default_locale => item.label },
             url: item.url,
