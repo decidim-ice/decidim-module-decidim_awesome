@@ -82,6 +82,15 @@ module Decidim::DecidimAwesome
             expect(controller.helpers.components_list(:participatory_processes, process.slug)).to eq({})
           end
         end
+
+        context "when key is scoped_style" do
+          let(:key) { :scoped_style_test }
+
+          it "returns http success" do
+            get :new, params: params
+            expect(response).to have_http_status(:success)
+          end
+        end
       end
 
       describe "POST #create" do

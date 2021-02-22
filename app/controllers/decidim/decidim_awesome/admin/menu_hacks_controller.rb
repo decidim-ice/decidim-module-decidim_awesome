@@ -16,6 +16,8 @@ module Decidim
           enforce_permission_to :edit_config, :menu
         end
 
+        def index; end
+
         def new
           @form = form(MenuForm).instance
         end

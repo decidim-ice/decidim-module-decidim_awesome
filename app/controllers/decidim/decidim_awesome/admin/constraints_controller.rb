@@ -10,7 +10,7 @@ module Decidim
 
         layout false
         before_action do
-          enforce_permission_to :edit_config, (params[:key] || params[:id])
+          enforce_permission_to :edit_config, constraint_key
         end
 
         def new
@@ -120,6 +120,16 @@ module Decidim
 
         def current_setting
           awesome_config_instance.setting_for params[:key]
+        end
+
+        def constraint_key
+          key = params[:key] || constraint.awesome_config.var
+          case key
+          when /^scoped_style_/
+            :scoped_styles
+          else
+            key
+          end
         end
       end
     end
