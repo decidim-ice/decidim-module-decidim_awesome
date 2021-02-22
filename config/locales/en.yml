@@ -107,8 +107,8 @@ en:
                 upload images by copy & paste or drag & drop.
               allow_images_in_proposals: This will allow to upload images in the proposals
                 editor, available to any user
-              allow_images_in_small_editor: A nThis will add an image uploader icon
-                in all the editors WYSIWYG with minimal options in the toolbar enabled.
+              allow_images_in_small_editor: This will add an image uploader icon in
+                all the editors WYSIWYG with minimal options in the toolbar enabled.
               auto_save_forms: This will use LocalStorage to automatically save data
                 introduced by users in surveys and other forms while they are filling
                 it. Data will be restored in a future visit with the same browser

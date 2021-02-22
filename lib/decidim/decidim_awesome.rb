@@ -73,6 +73,15 @@ module Decidim
     end
 
     # allows to keep modifications for the main menu
+    # can return :disabled to completly remove this feature
+    # otherwise it should be an array (some overrides can be specified by default):
+    # [
+    #    {
+    #       url: "/a-new-link",
+    #       label: { "en" => "The label to show in the menu" },
+    #       position: 10
+    #    }
+    # ]
     config_accessor :menu do
       []
     end
