@@ -20,6 +20,17 @@ module Decidim::DecidimAwesome
           expect(items.first).to eq(attributes)
         end
 
+        context "and url includes organization host" do
+          let(:url) { "http://#{organization.host}/some-path" }
+
+          it "leaves only the path" do
+            expect { subject.call }.to broadcast(:ok)
+
+            items = AwesomeConfig.find_by(organization: organization, var: menu_name).value
+            expect(items.first["url"]).to eq("/some-path")
+          end
+        end
+
         context "and entries already exist" do
           let!(:config) { create :awesome_config, organization: organization, var: menu_name, value: [{ url: "/another-menu", position: 10 }] }
 

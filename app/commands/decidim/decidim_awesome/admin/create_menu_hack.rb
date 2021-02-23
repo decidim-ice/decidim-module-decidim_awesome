@@ -22,7 +22,7 @@ module Decidim
           return broadcast(:invalid, I18n.t("menu_hacks.url_exists", scope: "decidim.decidim_awesome.admin")) if url_exists?
 
           menu.value = [] unless menu.value.is_a? Array
-          menu.value << form.to_params
+          menu.value << to_params
           menu.save!
           broadcast(:ok, menu)
         rescue StandardError => e
@@ -37,6 +37,13 @@ module Decidim
           return false unless menu
 
           menu.value&.detect { |i| i["url"] == form.url.gsub(/\?.*/, "") }
+        end
+
+        def to_params
+          params = form.to_params
+          url = Addressable::URI.parse(params[:url])
+          params[:url] = url.path if url.host == form.current_organization.host
+          params
         end
       end
     end
