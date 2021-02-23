@@ -19,6 +19,11 @@ module Decidim
         validates :visibility, inclusion: { in: VISIBILITY_STATES }
         validates :target, inclusion: { in: ["", "_blank"] }
 
+        # remove query string from native menu element (to avoid interactions with the locale in the generated url)
+        def map_model(model)
+          self.url = Addressable::URI.parse(model.url).path if model.native?
+        end
+
         def to_params
           {
             label: raw_label,

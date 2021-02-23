@@ -117,6 +117,30 @@ module Decidim::DecidimAwesome
             expect { action }.to raise_error(ActiveRecord::RecordNotFound)
           end
         end
+
+        context "when editing a native menu" do
+          let(:url) { "/processes?locale=ca" }
+          let(:params) do
+            {
+              id: Digest::MD5.hexdigest(url)
+            }
+          end
+
+          before do
+            Decidim.menu :menu do |menu|
+              menu.item "Native",
+                        "/processes?locale=ca",
+                        position: 1
+            end
+          end
+
+          it "removes the querystring" do
+            action
+
+            expect(controller.instance_variable_get(:@form).url).to eq("/processes")
+            expect(response).to have_http_status(:success)
+          end
+        end
       end
 
       describe "PATCH #update" do

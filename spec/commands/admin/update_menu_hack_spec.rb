@@ -55,9 +55,9 @@ module Decidim::DecidimAwesome
         end
       end
 
-      context "when updating an non configured menu" do
+      context "when updating an non existing menu" do
         let(:previous_menu) do
-          [{ "url" => "/processes", "position" => 10 }]
+          [{ "url" => "/another-menu", "position" => 10 }]
         end
 
         it "adds a new menu entry" do
@@ -69,6 +69,33 @@ module Decidim::DecidimAwesome
           expect(items.first).to eq(attributes)
           expect(items.first["url"]).to eq(url)
           expect(items.second).to eq(previous_menu.first)
+        end
+      end
+
+      context "when updating an native menu" do
+        let(:previous_menu) do
+          [{ "url" => "/another-menu", "position" => 10 }]
+        end
+        let(:url) { "/another-menu?querystring" }
+        let(:params) do
+          {
+            raw_label: label,
+            url: url,
+            position: position,
+            target: target,
+            visibility: visibility,
+            native?: true
+          }
+        end
+
+        it "adds a new menu entry" do
+          expect { subject.call }.to broadcast(:ok)
+
+          items = AwesomeConfig.find_by(organization: organization, var: menu_name).value.sort_by { |i| i["position"] }
+          expect(items).to be_a(Array)
+          expect(items.count).to eq(2)
+          expect(items.first["url"]).to eq(url)
+          expect(items.second["url"]).to eq("/another-menu")
         end
       end
     end

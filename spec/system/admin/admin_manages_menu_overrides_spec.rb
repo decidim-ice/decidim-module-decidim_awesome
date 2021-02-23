@@ -61,7 +61,33 @@ describe "Admin manages hacked menus", type: :system do
       end
     end
 
-    context "when index has overrides" do
+    context "when native menu has query strings" do
+      before do
+        Decidim.menu :menu do |menu|
+          menu.item "Native",
+                    "/some-path?locale=ca",
+                    position: 5
+        end
+        visit decidim_admin_decidim_awesome.menu_hacks_path
+      end
+
+      it "allows to edit it" do
+        within find("tr", text: "Native") do
+          click_link "Edit"
+        end
+
+        fill_in "menu_raw_label_en", with: "Native edited"
+        find("*[type=submit]").click
+
+        within "table tbody" do
+          expect(page).to have_content("Native edited")
+          expect(page).to have_content("/some-path")
+          expect(page).not_to have_content("/some-path?locale=ca")
+        end
+      end
+    end
+
+    context "when menu has overrides" do
       include_context "with menu hacks params"
 
       let(:url) { "/" }
@@ -105,7 +131,7 @@ describe "Admin manages hacked menus", type: :system do
       end
     end
 
-    context "when index has new items" do
+    context "when menu has new items" do
       include_context "with menu hacks params"
 
       let(:url) { "/a-new-link" }

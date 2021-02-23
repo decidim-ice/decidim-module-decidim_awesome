@@ -79,7 +79,8 @@ module Decidim
             url: item.url,
             position: item.position,
             target: item.try(:target),
-            visibility: item.try(:visibility)
+            visibility: item.try(:visibility),
+            native?: !item.respond_to?(:overrided?)
           )
         end
 
