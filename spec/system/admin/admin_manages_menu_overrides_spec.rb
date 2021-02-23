@@ -15,9 +15,18 @@ describe "Admin manages hacked menus", type: :system do
   include_context "with menu hacks params"
 
   before do
+    Decidim::MenuRegistry.register :menu do |menu|
+      menu.item "Native",
+                "/some-path?locale=ca",
+                position: 5
+    end
     switch_to_host(organization.host)
     login_as user, scope: :user
     visit decidim_admin_decidim_awesome.menu_hacks_path
+  end
+
+  after do
+    Decidim::MenuRegistry.find(:menu).configurations.pop
   end
 
   context "when visiting the index" do
@@ -62,15 +71,6 @@ describe "Admin manages hacked menus", type: :system do
     end
 
     context "when native menu has query strings" do
-      before do
-        Decidim.menu :menu do |menu|
-          menu.item "Native",
-                    "/some-path?locale=ca",
-                    position: 5
-        end
-        visit decidim_admin_decidim_awesome.menu_hacks_path
-      end
-
       it "allows to edit it" do
         within find("tr", text: "Native") do
           click_link "Edit"

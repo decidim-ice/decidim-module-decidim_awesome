@@ -15,8 +15,17 @@ module Decidim::DecidimAwesome
       let(:organization) { create(:organization) }
 
       before do
+        Decidim::MenuRegistry.register :menu do |menu|
+          menu.item "Native",
+                    "/processes?locale=ca",
+                    position: 1
+        end
         request.env["decidim.current_organization"] = user.organization
         sign_in user, scope: :user
+      end
+
+      after do
+        Decidim::MenuRegistry.find(:menu).configurations.pop
       end
 
       describe "GET #new" do
@@ -124,14 +133,6 @@ module Decidim::DecidimAwesome
             {
               id: Digest::MD5.hexdigest(url)
             }
-          end
-
-          before do
-            Decidim.menu :menu do |menu|
-              menu.item "Native",
-                        "/processes?locale=ca",
-                        position: 1
-            end
           end
 
           it "removes the querystring" do
