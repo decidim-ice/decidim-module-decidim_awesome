@@ -167,4 +167,84 @@ describe "Hacked menus", type: :system do
       end
     end
   end
+
+  describe "active" do
+    let!(:component) { create(:proposal_component, participatory_space: participatory_process) }
+    let!(:participatory_process2) { create :participatory_process, organization: organization }
+    let!(:component2) { create(:proposal_component, participatory_space: participatory_process2) }
+    let(:menu) do
+      [
+        {
+          url: "/",
+          label: {
+            "en" => "A new beggining"
+          },
+          position: 1
+        },
+        {
+          url: "/processes/#{participatory_process.slug}",
+          label: {
+            "en" => "A single process"
+          },
+          position: 2
+        }
+      ]
+    end
+
+    shared_examples "has active link" do |text|
+      it "has only one active link" do
+        within ".main-nav" do
+          expect(page).to have_css(".main-nav__link--active", count: 1)
+        end
+      end
+
+      it "active link containts text" do
+        within ".main-nav .main-nav__link--active" do
+          expect(page).to have_content(text)
+        end
+      end
+    end
+
+    it_behaves_like "has active link", "A new beggining"
+
+    context "when visiting all processes list" do
+      before do
+        visit decidim_participatory_processes.participatory_processes_path
+      end
+
+      it_behaves_like "has active link", "Processes"
+    end
+
+    context "when visiting a process in a custom link" do
+      before do
+        visit decidim_participatory_processes.participatory_process_path(participatory_process.slug)
+      end
+
+      it_behaves_like "has active link", "A single process"
+    end
+
+    context "when visiting a sublink of a process in a custom link" do
+      before do
+        visit main_component_path(component)
+      end
+
+      it_behaves_like "has active link", "A single process"
+    end
+
+    context "when visiting a process not in a custom link" do
+      before do
+        visit decidim_participatory_processes.participatory_process_path(participatory_process2.slug)
+      end
+
+      it_behaves_like "has active link", "Processes"
+    end
+
+    context "when visiting a sublink of a process not in a custom link" do
+      before do
+        visit main_component_path(component2)
+      end
+
+      it_behaves_like "has active link", "Processes"
+    end
+  end
 end

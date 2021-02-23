@@ -189,7 +189,7 @@ en:
               blank: New window
               self: Same window
             visibility:
-              default: System default (usually visible)
+              default: Visible
               hidden: Always hidden
               logged: Only visible for logged users
               non_logged: Only visible for non-logged users

@@ -47,7 +47,10 @@ module Decidim
       end
 
       def default_items
-        @default_items ||= build_menu.instance_variable_get(:@items)
+        @default_items ||= build_menu.instance_variable_get(:@items).map do |item|
+          item.instance_variable_set(:@active, method(:activate?)) unless item.active == :exact
+          item
+        end
       end
 
       def build_menu
@@ -64,12 +67,17 @@ module Decidim
             url: item["url"],
             position: item["position"] || 1,
             # see options in https://github.com/comfy/active_link_to
-            active: :exact,
+            active: method(:activate?),
             visibility: item["visibility"],
             target: item["target"],
             overrided?: false
           )
         end
+      end
+
+      def activate?(url, view)
+        urls = @items.map(&:url).sort_by(&:length).reverse
+        url == urls.find { |u| view.request.original_fullpath.start_with?(u) }
       end
 
       def current_config
