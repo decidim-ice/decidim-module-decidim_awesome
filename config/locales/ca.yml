@@ -25,11 +25,11 @@ ca:
         participatory_space_manifest: Aplica-ho a espais participatius de tipus
         participatory_space_slug: Només a
       menu:
-        position: Position
-        raw_label: Label
-        target: Opens in
+        position: Posició
+        raw_label: Etiqueta
+        target: Obre a
         url: URL
-        visibility: Visibility
+        visibility: Visibilitat
   decidim:
     admin:
       menu:
@@ -84,10 +84,10 @@ ca:
             title: 'S''aplica només en aquests casos:'
           create_scoped_style:
             error: Error en crear una nova caixa CSS! %{error}
-            success: CSS box %{key} created successfully
+            success: Caixa CSS %{key} creada correctament
           destroy_scoped_style:
             error: Error en eliminar una caixa CSS! %{error}
-            success: CSS box %{key} removed successfully
+            success: Caixa CSS %{key} eliminada correctament
           experimental: Opcions experimentals
           form:
             help:
@@ -113,7 +113,7 @@ ca:
           system: A tot arreu excepte espais participatius
           update:
             error: Error actualitzant la configuració! %{error}
-            success: Configuration updated successfully
+            success: Configuració actualitzada correctament
         constraints:
           create:
             error: Error creant una nova restricció
@@ -138,44 +138,44 @@ ca:
           checks: Compatibilitat de sistema
           editors: Modificacions als editors
           livechat: Xat en directe
-          menu_hacks: Menu tweaks
+          menu_hacks: Retocs al menú
           proposals: Modificacions a propostes
           styles: Estils personalitzats
           surveys: Formularis i enquestes
         menu_hacks:
           create:
-            error: Error creating menu item! %{error}
-            success: Menu item created successfully
+            error: 'Error en crear un nou ítem de menú: %{error}'
+            success: Ítem de menú creat correctament
           destroy:
-            error: Error removing menu item! %{error}
-            success: Menu item removed successfully
+            error: 'Error en eliminar l''ítem de menú: %{error}'
+            success: Ítem de menú eliminat correctament
           edit:
-            save: Save
-            title: Edit menu item
+            save: Desar
+            title: Editar ítem de menú
           form:
-            label_help: Translations aren't automatically detected, be sure to fill in all the fields!
+            label_help: Les traduccions no es detecten automàticament, asegura't de completar tots els camps!
             target:
-              blank: New window
-              self: Same window
+              blank: Nova finestra
+              self: La mateixa finestra
             visibility:
               default: Visible
-              hidden: Always hidden
-              logged: Only visible for logged users
-              non_logged: Only visible for non-logged users
+              hidden: Sempre ocult
+              logged: Només visible per usuàries loguejades
+              non_logged: Només visible per usuàries no loguejades
           index:
-            confirm_destroy: Are you sure to remove this customization?
-            edit: Edit
-            new: New item
-            remove: Remove addition
-            remove_hack: Remove customization
-            title: Main menu
+            confirm_destroy: Estàs segura que vols eliminar aquest retoc?
+            edit: Editar
+            new: Nou ítem
+            remove: Eliminar addició
+            remove_hack: Eliminar retoc
+            title: Menú principal
           new:
-            save: Save
-            title: New menu item
+            save: Desar
+            title: Nou ítem de menú
           update:
-            error: Error updating menu item! %{error}
-            success: Menu item updated successfully
-          url_exists: The same URL is already configured, please edit that instead of creating it again.
+            error: 'Error en actualitzar l''ítem de menú: %{error}'
+            success: Ítem de menú actualitzat correctament
+          url_exists: Aquesta URL ha estat configurada en un altre ítem de menú, si us plau edita'l en comptes de crear-ne un de nou.
       config:
         intergram:
           auto_no_response: Sembla que no hi ha ningú disponible per a respondre en aquest moment. Si us plau, indica'ns com et podem contactar i ens comunicarem amb tu tan aviat com ens sigui possible.
@@ -187,7 +187,7 @@ ca:
       editor_images:
         create:
           error: Error en pujar la imatge!
-          success: Image uploaded successfully
+          success: Imatge pujada correctament
       map_component:
         map:
           error:
