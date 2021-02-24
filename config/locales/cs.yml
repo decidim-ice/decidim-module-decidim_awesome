@@ -25,11 +25,11 @@ cs:
         participatory_space_manifest: Použít na participační prostory typu
         participatory_space_slug: Pouze v
       menu:
-        position: Position
-        raw_label: Label
-        target: Opens in
+        position: Pozice
+        raw_label: Popisek
+        target: Otevře se v
         url: URL
-        visibility: Visibility
+        visibility: Viditelnost
   decidim:
     admin:
       menu:
@@ -84,10 +84,10 @@ cs:
             title: 'Platí pouze v těchto případech:'
           create_scoped_style:
             error: Chyba při vytváření nového CSS boxu! %{error}
-            success: CSS box %{key} created successfully
+            success: CSS box %{key} úspěšně vytvořen
           destroy_scoped_style:
             error: Chyba při odstraňování CSS boxu! %{error}
-            success: CSS box %{key} removed successfully
+            success: CSS box %{key} byl úspěšně odstraněn
           experimental: Experimentální možnosti
           form:
             help:
@@ -113,7 +113,7 @@ cs:
           system: Všude kromě participačních prostor
           update:
             error: Chyba při aktualizaci konfigurace! %{error}
-            success: Configuration updated successfully
+            success: Konfigurace byla úspěšně aktualizována
         constraints:
           create:
             error: Chyba při vytváření případu stavu
@@ -138,40 +138,40 @@ cs:
           checks: Systémová kompatibilita
           editors: Hack editoru
           livechat: Live Chat
-          menu_hacks: Menu tweaks
+          menu_hacks: Vylepšení menu
           proposals: Návrhy hacků
           styles: Vlastní styly
           surveys: Průzkumy a formuláře
         menu_hacks:
           create:
-            error: Error creating menu item! %{error}
-            success: Menu item created successfully
+            error: Chyba při vytváření položky menu! %{error}
+            success: Položka menu byla úspěšně vytvořena
           destroy:
-            error: Error removing menu item! %{error}
-            success: Menu item removed successfully
+            error: Chyba při odstraňování položky menu! %{error}
+            success: Položka menu byla úspěšně smazána
           edit:
-            save: Save
-            title: Edit menu item
+            save: Uložit
+            title: Upravit položku menu
           form:
-            label_help: Translations aren't automatically detected, be sure to fill in all the fields!
+            label_help: Překlady nejsou automaticky rozpoznány, nezapomeňte vyplnit všechna pole!
             target:
-              blank: New window
-              self: Same window
+              blank: Nové okno
+              self: Stejné okno
             visibility:
-              default: Visible
-              hidden: Always hidden
-              logged: Only visible for logged users
-              non_logged: Only visible for non-logged users
+              default: Viditelný
+              hidden: Vždy skryto
+              logged: Viditelné pouze pro přihlášené uživatele
+              non_logged: Viditelné pouze pro nepřihlášené uživatele
           index:
-            confirm_destroy: Are you sure to remove this customization?
-            edit: Edit
-            new: New item
-            remove: Remove addition
-            remove_hack: Remove customization
-            title: Main menu
+            confirm_destroy: Opravdu chcete odstranit toto přizpůsobení?
+            edit: Upravit
+            new: Nová položka
+            remove: Odstranit přidání
+            remove_hack: Odstranit přizpůsobení
+            title: Hlavní menu
           new:
-            save: Save
-            title: New menu item
+            save: Uložit
+            title: Nová položka menu
           update:
             error: Error updating menu item! %{error}
             success: Menu item updated successfully
