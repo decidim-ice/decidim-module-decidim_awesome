@@ -25,10 +25,29 @@ describe "Hacked menus", type: :system do
       position: 9
     }
   end
+  let(:disabled_features) { [] }
 
   before do
+    disabled_features.each do |feature|
+      allow(Decidim::DecidimAwesome.config).to receive(feature).and_return(:disabled)
+    end
+
     switch_to_host(organization.host)
     visit decidim.root_path
+  end
+
+  shared_examples "has active link" do |text|
+    it "has only one active link" do
+      within ".main-nav" do
+        expect(page).to have_css(".main-nav__link--active", count: 1)
+      end
+    end
+
+    it "active link containts text" do
+      within ".main-nav .main-nav__link--active" do
+        expect(page).to have_content(text)
+      end
+    end
   end
 
   it "renders the hacked menu" do
@@ -191,20 +210,6 @@ describe "Hacked menus", type: :system do
       ]
     end
 
-    shared_examples "has active link" do |text|
-      it "has only one active link" do
-        within ".main-nav" do
-          expect(page).to have_css(".main-nav__link--active", count: 1)
-        end
-      end
-
-      it "active link containts text" do
-        within ".main-nav .main-nav__link--active" do
-          expect(page).to have_content(text)
-        end
-      end
-    end
-
     it_behaves_like "has active link", "A new beggining"
 
     context "when visiting all processes list" do
@@ -242,6 +247,30 @@ describe "Hacked menus", type: :system do
     context "when visiting a sublink of a process not in a custom link" do
       before do
         visit main_component_path(component2)
+      end
+
+      it_behaves_like "has active link", "Processes"
+    end
+  end
+
+  context "when menu is :disabled" do
+    let(:disabled_features) { [:menu] }
+
+    it "renders the normal menu" do
+      within ".main-nav" do
+        expect(page).to have_content("Home")
+        expect(page).to have_content("Processes")
+        expect(page).to have_content("Help")
+        expect(page).not_to have_content("A new beggining")
+        expect(page).not_to have_content("Blog")
+      end
+    end
+
+    it_behaves_like "has active link", "Home"
+
+    context "when visiting another page" do
+      before do
+        visit decidim_participatory_processes.participatory_processes_path
       end
 
       it_behaves_like "has active link", "Processes"

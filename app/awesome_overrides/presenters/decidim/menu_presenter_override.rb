@@ -4,7 +4,7 @@ Decidim::MenuPresenter.class_eval do
   def evaluated_menu
     @evaluated_menu ||= if Decidim::DecidimAwesome.config.send(@name) == :disabled
                           begin
-                            menu = Menu.new(@name)
+                            menu = Decidim::Menu.new(@name)
                             menu.build_for(@view)
                             menu
                           end
