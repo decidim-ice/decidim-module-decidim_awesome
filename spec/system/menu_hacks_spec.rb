@@ -65,12 +65,9 @@ describe "Hacked menus", type: :system do
       expect(page).to have_content("Processes")
     end
     within ".main-nav li:nth-child(2)" do
-      expect(page).to have_content("Assemblies")
-    end
-    within ".main-nav li:nth-child(3)" do
       expect(page).to have_content("Help")
     end
-    within ".main-nav li:nth-child(4)" do
+    within ".main-nav li:nth-child(3)" do
       expect(page).to have_content("Blog")
     end
     within ".main-nav li:last-child" do
@@ -91,8 +88,8 @@ describe "Hacked menus", type: :system do
     end
 
     it "has target blank" do
-      expect(find(".main-nav li:nth-child(4) a")[:class]).to include("external-link-container")
-      expect(find(".main-nav li:nth-child(4) a")[:target]).to eq("_blank")
+      expect(find(".main-nav li:nth-child(3) a")[:class]).to include("external-link-container")
+      expect(find(".main-nav li:nth-child(3) a")[:target]).to eq("_blank")
       expect(find(".main-nav li:last-child a")[:class]).not_to include("external-link-container")
     end
   end

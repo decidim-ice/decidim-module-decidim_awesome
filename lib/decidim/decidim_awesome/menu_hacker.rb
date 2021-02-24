@@ -22,9 +22,10 @@ module Decidim
             item.send("overrided?=", true)
             @items.reject! { |i| i.url.gsub(/\?.*/, "") == item.url }
           end
-          @items << item if include_invisible || visible?(item)
+          @items << item
         end
 
+        @items.select!(&:visible?) unless include_invisible
         @items.sort_by!(&:position)
       end
 
@@ -32,19 +33,6 @@ module Decidim
 
       attr_accessor :organization, :user
       attr_reader :name, :view
-
-      def visible?(item)
-        case item.visibility
-        when "hidden"
-          false
-        when "logged"
-          user.present?
-        when "non_logged"
-          user.blank?
-        else
-          true
-        end
-      end
 
       def default_items
         @default_items ||= build_menu.instance_variable_get(:@items).map do |item|
@@ -69,6 +57,7 @@ module Decidim
             # see options in https://github.com/comfy/active_link_to
             active: method(:activate?),
             visibility: item["visibility"],
+            visible?: visible?(item),
             target: item["target"],
             overrided?: false
           )
@@ -78,6 +67,19 @@ module Decidim
       def activate?(url, view)
         urls = @items.map(&:url).sort_by(&:length).reverse
         url == urls.find { |u| view.request.original_fullpath.start_with?(u) }
+      end
+
+      def visible?(item)
+        case item["visibility"]
+        when "hidden"
+          false
+        when "logged"
+          user.present?
+        when "non_logged"
+          user.blank?
+        else
+          true
+        end
       end
 
       def current_config
