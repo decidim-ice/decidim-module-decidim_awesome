@@ -2,74 +2,74 @@ nl:
   activemodel:
     attributes:
       config:
-        allow_images_in_full_editor: Allow images in the full HTML editor
-        allow_images_in_markdown_editor: Allow images in the markdown editor
-        allow_images_in_proposals: Allow images in the proposals editor
-        allow_images_in_small_editor: Allow images in the minimal HTML editor
-        auto_save_forms: Auto save forms in local storage
-        intergram_auto_no_response: A message that is sent one minute after the user sends its first message and no response was received
-        intergram_auto_response: A message that is sent immediately after the user sends its first message
+        allow_images_in_full_editor: Afbeeldingen in de volledige HTML editor toestaan
+        allow_images_in_markdown_editor: Afbeeldingen in de markdown editor toestaan
+        allow_images_in_proposals: Afbeeldingen in de voorstellen editor toestaan
+        allow_images_in_small_editor: Afbeeldingen in de minimale HTML editor toestaan
+        auto_save_forms: Formulieren automatisch opslaan in lokale opslag
+        intergram_auto_no_response: Een bericht dat wordt verzonden één minuut nadat de gebruiker zijn eerste bericht heeft verzonden en er geen antwoord is ontvangen
+        intergram_auto_response: Een bericht dat direct wordt verzonden nadat de gebruiker zijn eerste bericht heeft verzonden
         intergram_chat_id: Chat ID
-        intergram_color: Color of the widget
-        intergram_for_admins: Enable Intergram Chat in the admin backend
-        intergram_intro_message: First message when the user opens the chat for the first time
-        intergram_require_login: Only for logged users
-        intergram_title_closed: Closed chat title
-        intergram_title_open: Opened chat title
-        intergram_use_floating_button: If checked, the closed chat is always a button instead of a text
-        scoped_styles: 'Custom styles #%{id}'
-        use_markdown_editor: Use a Markdown editor instead of the HTML editor
+        intergram_color: Kleur van de widget
+        intergram_for_admins: Activeer Intergram Chat in de admin backend
+        intergram_intro_message: Eerste bericht wanneer de gebruiker de chat voor de eerste keer opent
+        intergram_require_login: Alleen voor ingelogde gebruikers
+        intergram_title_closed: Gesloten chat titel
+        intergram_title_open: Geopende chat titel
+        intergram_use_floating_button: Indien aangevinkt, is de gesloten chat altijd een knop in plaats van een tekst
+        scoped_styles: 'Aangepaste stijlen #%{id}'
+        use_markdown_editor: Gebruik een Markdown editor in plaats van de HTML editor
       constraint:
-        component_id: or specifically in
-        component_manifest: Only in components of type
-        participatory_space_manifest: Apply to participatory spaces of type
-        participatory_space_slug: Only in
+        component_id: of specifiek in
+        component_manifest: Alleen in componenten van het type
+        participatory_space_manifest: Toepassen op participerende ruimten van het type
+        participatory_space_slug: Alleen in
       menu:
-        position: Position
+        position: Positie
         raw_label: Label
-        target: Opens in
+        target: Opent in
         url: URL
-        visibility: Visibility
+        visibility: Zichtbaarheid
   decidim:
     admin:
       menu:
         decidim_awesome: Decidim awesome
     components:
       awesome_iframe:
-        name: Fullscreen Iframe
+        name: Iframe op volledig scherm
         settings:
           global:
-            announcement: Announcement
+            announcement: Aankondiging
             iframe: Iframe code
-            iframe_help: 'Put your code as html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Content will be sanitized from other HTML tags. Ensure to use 100% as width to fill the screen.'
-            no_margins: No margins between the iframe and the rest of the page
-            viewport_width: Limit maximum width to the application viewport
+            iframe_help: 'Zet je code als html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Inhoud wordt verwijderd uit andere HTML-tags. Zorg ervoor dat u 100% als breedte gebruikt om het scherm te vullen.'
+            no_margins: Geen marges tussen het iframe en de rest van de pagina
+            viewport_width: Beperk de maximale breedte tot het toepassingsvenster
           step:
-            announcement: Announcement
+            announcement: Aankondiging
             iframe: Iframe code
       awesome_map:
         name: Awesome Map
         settings:
           global:
-            announcement: Announcement
-            collapse: Start with collapsed menu
-            map_height: Map height (px)
+            announcement: Aankondiging
+            collapse: Begin met samengevouwen menu
+            map_height: Map hoogte (px)
           step:
-            announcement: Announcement
-            show_accepted: Show accepted proposals
-            show_evaluating: Show evaluating proposals
-            show_not_answered: Show not answered proposals
-            show_rejected: Show rejected proposals
-            show_withdrawn: Show withdrawn proposals
+            announcement: Aankondiging
+            show_accepted: Toon geaccepteerde voorstellen
+            show_evaluating: Toon evaluatievoorstellen
+            show_not_answered: Toon niet beantwoorde voorstellen
+            show_rejected: Toon afgewezen voorstellen
+            show_withdrawn: Toon ingetrokken voorstellen
     decidim_awesome:
       admin:
         checks:
           index:
-            admin_head_tags: Awesome tags included in the admin application header
-            decidim-admin: From Admin module
-            decidim-core: From Core module
-            decidim-proposals: From Proposals module
-            decidim_version: Decidim version %{version}
+            admin_head_tags: Awesome tags opgenomen in de header van de admin applicatie
+            decidim-admin: Van Admin module
+            decidim-core: Van Core module
+            decidim-proposals: Van Voorstellen Module
+            decidim_version: Decidim versie %{version}
             errors:
               CSS: Head does not contain the required <link> stylesheet entries. To solve it, you can manually add it to your custom _head.html.erb
               JavaScript: Head does not contain the required <script> Javascript entries. To solve it, you can manually add it to your custom admin/_header.html.erb
@@ -139,62 +139,62 @@ nl:
           editors: Editor hacks
           livechat: Live Chat
           menu_hacks: Menu tweaks
-          proposals: Proposals hacks
-          styles: Custom styles
-          surveys: Surveys & forms
+          proposals: Voorstellen hacks
+          styles: Aangepaste stijlen
+          surveys: Enquêtes & formulieren
         menu_hacks:
           create:
-            error: Error creating menu item! %{error}
-            success: Menu item created successfully
+            error: Fout bij maken menu item! %{error}
+            success: Menu item succesvol aangemaakt
           destroy:
-            error: Error removing menu item! %{error}
-            success: Menu item removed successfully
+            error: Fout bij verwijderen menu item! %{error}
+            success: Menu item verwijderd
           edit:
-            save: Save
-            title: Edit menu item
+            save: Opslaan
+            title: Bewerk menu-item
           form:
-            label_help: Translations aren't automatically detected, be sure to fill in all the fields!
+            label_help: Vertalingen worden niet automatisch gedetecteerd, zorg ervoor dat alle velden ingevuld worden!
             target:
-              blank: New window
-              self: Same window
+              blank: Nieuw venster
+              self: Hetzelfde venster
             visibility:
-              default: Visible
-              hidden: Always hidden
-              logged: Only visible for logged users
-              non_logged: Only visible for non-logged users
+              default: Zichtbaar
+              hidden: Altijd verborgen
+              logged: Alleen zichtbaar voor ingelogde gebruikers
+              non_logged: Alleen zichtbaar voor niet-ingelogde gebruikers
           index:
-            confirm_destroy: Are you sure to remove this customization?
-            edit: Edit
-            new: New item
-            remove: Remove addition
-            remove_hack: Remove customization
-            title: Main menu
+            confirm_destroy: Weet u zeker dat u deze aanpassing wilt verwijderen?
+            edit: Bewerken
+            new: Nieuw item
+            remove: Verwijder toevoeging
+            remove_hack: Verwijder aanpassing
+            title: Hoofdmenu
           new:
-            save: Save
-            title: New menu item
+            save: Opslaan
+            title: Nieuw menu-item
           update:
-            error: Error updating menu item! %{error}
-            success: Menu item updated successfully
-          url_exists: The same URL is already configured, please edit that instead of creating it again.
+            error: Fout bij bijwerken menu-item! %{error}
+            success: Menu-item succesvol bijgewerkt
+          url_exists: Dezelfde URL is al geconfigureerd, bewerk dit in plaats van deze opnieuw aan te maken.
       config:
         intergram:
-          auto_no_response: It seems that no one is available to answer right now. Please tell us how we can contact you, and we will get back to you as soon as we can.
-          auto_response: Looking for the first available admin (It might take a minute)
-          intro_message: Hello! How can we help you?
-          title_closed: Click to chat!
-          title_open: Let's chat!
-      credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
+          auto_no_response: Het lijkt erop dat er op dit moment niemand beschikbaar is om te antwoorden. Vertel ons alsjeblieft hoe we je kunnen contacteren, en we zullen zo snel mogelijk contact met je opnemen.
+          auto_response: Op zoek naar de eerste beschikbare admin (dit kan even duren)
+          intro_message: Hallo! Hoe kunnen we je helpen?
+          title_closed: Klik om te chatten!
+          title_open: Laten we chatten!
+      credits: Decidim Awesome %{version} · Gemaakt met ♥ door Platoniq
       editor_images:
         create:
-          error: Error uploading image!
-          success: Image uploaded successfully
+          error: Fout bij uploaden afbeelding!
+          success: Afbeelding met succes geüpload
       map_component:
         map:
           error:
-            unavailable: The map is unavailable. Please configure geocoding to enable this component.
+            unavailable: De kaart is niet beschikbaar. Configureer geocoding om deze component in te schakelen.
           show:
-            view_meeting: View meeting
-            view_proposal: View proposal
+            view_meeting: Vergadering bekijken
+            view_proposal: Bekijk voorstel
   layouts:
     decidim:
       admin:
@@ -202,11 +202,11 @@ nl:
           title: Decidim Tweaks
       decidim_awesome:
         awesome_config:
-          amendments: Amendments
-          autosaved_error: LocalStorage is not supported in your browser, form cannot be saved automatically.
-          autosaved_retrieved: Data for this form has been recovered from a previous session
-          autosaved_success: Data saved in local storage
-          categories: Categories
-          drag_and_drop_image: Add images by dragging & dropping or pasting them.
-          meetings: Meetings
-          proposals: Proposals
+          amendments: Amendementen
+          autosaved_error: LocalStorage wordt niet ondersteund in uw browser, formulier kan niet automatisch worden opgeslagen.
+          autosaved_retrieved: Gegevens voor dit formulier zijn hersteld van een vorige sessie
+          autosaved_success: Data opgeslagen in lokale opslag
+          categories: Categorieën
+          drag_and_drop_image: Voeg afbeeldingen toe door ze te slepen, te slepen of te plakken.
+          meetings: Vergaderingen
+          proposals: Voorstellen
