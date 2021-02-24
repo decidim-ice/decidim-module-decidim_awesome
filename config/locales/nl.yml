@@ -1,4 +1,4 @@
-eu:
+nl:
   activemodel:
     attributes:
       config:
@@ -39,23 +39,23 @@ eu:
         name: Fullscreen Iframe
         settings:
           global:
-            announcement: Oharra
+            announcement: Announcement
             iframe: Iframe code
             iframe_help: 'Put your code as html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Content will be sanitized from other HTML tags. Ensure to use 100% as width to fill the screen.'
             no_margins: No margins between the iframe and the rest of the page
             viewport_width: Limit maximum width to the application viewport
           step:
-            announcement: Oharra
+            announcement: Announcement
             iframe: Iframe code
       awesome_map:
         name: Awesome Map
         settings:
           global:
-            announcement: Oharra
+            announcement: Announcement
             collapse: Start with collapsed menu
             map_height: Map height (px)
           step:
-            announcement: Oharra
+            announcement: Announcement
             show_accepted: Show accepted proposals
             show_evaluating: Show evaluating proposals
             show_not_answered: Show not answered proposals
@@ -79,8 +79,8 @@ eu:
           constraints:
             add_condition: Add case
             always: Always
-            delete: Ezabatu
-            edit: Editatu
+            delete: Delete
+            edit: Edit
             title: 'Applicable only in these cases:'
           create_scoped_style:
             error: Error creating a new CSS box! %{error}
@@ -124,11 +124,11 @@ eu:
           errors:
             not_unique: Same condition already exists
           new:
-            cancel: Ezeztatu
+            cancel: Cancel
             constraint: New condition case
             save: Save
           show:
-            cancel: Ezeztatu
+            cancel: Cancel
             constraint: Edit condition case
             save: Save
           update:
@@ -193,8 +193,8 @@ eu:
           error:
             unavailable: The map is unavailable. Please configure geocoding to enable this component.
           show:
-            view_meeting: Ikusi bilera
-            view_proposal: Ikusi proposamena
+            view_meeting: View meeting
+            view_proposal: View proposal
   layouts:
     decidim:
       admin:
@@ -202,11 +202,11 @@ eu:
           title: Decidim Tweaks
       decidim_awesome:
         awesome_config:
-          amendments: Zuzenketak
-          autosaved_error: LocalStorage ez da onartzen zure arakatzailean, inprimakia ezin da automatikoki gorde.
+          amendments: Amendments
+          autosaved_error: LocalStorage is not supported in your browser, form cannot be saved automatically.
           autosaved_retrieved: Data for this form has been recovered from a previous session
-          autosaved_success: Tokiko biltegian gordetako datuak
-          categories: Kategoriak
-          drag_and_drop_image: Gehitu irudiak arrastatuz, jareginez edo itsatsita.
-          meetings: Topaketa-zerrenda
-          proposals: Proposamenak
+          autosaved_success: Data saved in local storage
+          categories: Categories
+          drag_and_drop_image: Add images by dragging & dropping or pasting them.
+          meetings: Meetings
+          proposals: Proposals

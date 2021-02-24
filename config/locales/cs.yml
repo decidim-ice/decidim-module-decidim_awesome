@@ -24,6 +24,12 @@ cs:
         component_manifest: Pouze v komponentách typu
         participatory_space_manifest: Použít na participační prostory typu
         participatory_space_slug: Pouze v
+      menu:
+        position: Pozice
+        raw_label: Popisek
+        target: Otevře se v
+        url: URL
+        visibility: Viditelnost
   decidim:
     admin:
       menu:
@@ -35,7 +41,7 @@ cs:
           global:
             announcement: Oznámení
             iframe: Kód Iframe
-            iframe_help: 'Zadejte kód jako html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Obsah bude sanitován z jiných HTML tagů. Pro vyplnění obrazovky použijte 100% šířku.'
+            iframe_help: 'Zadejte kód jako html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Obsah bude vylepšen z jiných HTML tagů. Pro vyplnění obrazovky použijte 100% šířku.'
             no_margins: Mezi iframe a zbytkem stránky nejsou žádné okraje
             viewport_width: Omezit maximální šířku na zobrazení aplikace
           step:
@@ -78,10 +84,10 @@ cs:
             title: 'Platí pouze v těchto případech:'
           create_scoped_style:
             error: Chyba při vytváření nového CSS boxu! %{error}
-            success: CSS box %{key} byl úspěšně vytvořen!
+            success: CSS box %{key} úspěšně vytvořen
           destroy_scoped_style:
             error: Chyba při odstraňování CSS boxu! %{error}
-            success: CSS box %{key} byl úspěšně odstraněn!
+            success: CSS box %{key} byl úspěšně odstraněn
           experimental: Experimentální možnosti
           form:
             help:
@@ -107,7 +113,7 @@ cs:
           system: Všude kromě participačních prostor
           update:
             error: Chyba při aktualizaci konfigurace! %{error}
-            success: Konfigurace byla úspěšně aktualizována!
+            success: Konfigurace byla úspěšně aktualizována
         constraints:
           create:
             error: Chyba při vytváření případu stavu
@@ -132,9 +138,44 @@ cs:
           checks: Systémová kompatibilita
           editors: Hack editoru
           livechat: Live Chat
+          menu_hacks: Vylepšení menu
           proposals: Návrhy hacků
           styles: Vlastní styly
           surveys: Průzkumy a formuláře
+        menu_hacks:
+          create:
+            error: Chyba při vytváření položky menu! %{error}
+            success: Položka menu byla úspěšně vytvořena
+          destroy:
+            error: Chyba při odstraňování položky menu! %{error}
+            success: Položka menu byla úspěšně smazána
+          edit:
+            save: Uložit
+            title: Upravit položku menu
+          form:
+            label_help: Překlady nejsou automaticky rozpoznány, nezapomeňte vyplnit všechna pole!
+            target:
+              blank: Nové okno
+              self: Stejné okno
+            visibility:
+              default: Viditelný
+              hidden: Vždy skryto
+              logged: Viditelné pouze pro přihlášené uživatele
+              non_logged: Viditelné pouze pro nepřihlášené uživatele
+          index:
+            confirm_destroy: Opravdu chcete odstranit toto přizpůsobení?
+            edit: Upravit
+            new: Nová položka
+            remove: Odstranit přidání
+            remove_hack: Odstranit přizpůsobení
+            title: Hlavní menu
+          new:
+            save: Uložit
+            title: Nová položka menu
+          update:
+            error: Error updating menu item! %{error}
+            success: Menu item updated successfully
+          url_exists: The same URL is already configured, please edit that instead of creating it again.
       config:
         intergram:
           auto_no_response: Zdá se, že právě teď nikdo není k dispozici odpovědět. Řekněte nám, jak vás můžeme kontaktovat, a co nejdříve se k vám vrátíme.
@@ -146,7 +187,7 @@ cs:
       editor_images:
         create:
           error: Chyba při nahrávání obrázku!
-          success: Obrázek byl úspěšně nahrán!
+          success: Image uploaded successfully
       map_component:
         map:
           error:

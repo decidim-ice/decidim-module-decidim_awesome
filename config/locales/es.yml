@@ -24,6 +24,12 @@ es:
         component_manifest: Solo en componentes de tipo
         participatory_space_manifest: Aplicar en los espacios participativos de tipo
         participatory_space_slug: Solo en
+      menu:
+        position: Posición
+        raw_label: Etiqueta
+        target: Abrir en
+        url: URL
+        visibility: Visibilidad
   decidim:
     admin:
       menu:
@@ -78,10 +84,10 @@ es:
             title: 'Se aplica solo en estos casos:'
           create_scoped_style:
             error: '¡Error al crear una nueva caja CSS! %{error}'
-            success: '¡Caja CSS %{key} creada correctamente!'
+            success: Caja CSS %{key} creada correctamente
           destroy_scoped_style:
             error: '¡Error al eliminar la caja CSS! %{error}'
-            success: '¡Caja CSS %{key} eliminada correctamente!'
+            success: Caja CSS %{key} eliminada correctamente
           experimental: Opciones experimentales
           form:
             help:
@@ -107,7 +113,7 @@ es:
           system: En todas partes excepto en espacios participativos
           update:
             error: '¡Error actualizando la configuración! %{error}'
-            success: '¡Configuración actualizada correctamente!'
+            success: Configuración actualizada correctamente
         constraints:
           create:
             error: Error creando una nueva restricción
@@ -132,9 +138,44 @@ es:
           checks: Compatibilidad del sistema
           editors: Modificaciones a los editores
           livechat: Chat en vivo
+          menu_hacks: Ajustes en el menú
           proposals: Modificaciones a las propuestas
           styles: Estilos personalizados
           surveys: Encuestas y formularios
+        menu_hacks:
+          create:
+            error: 'Error al crear nuevo ítem de menú: %{error}'
+            success: Ítem de menú creado correctamente
+          destroy:
+            error: 'Error al eliminar ítem de menú: %{error}'
+            success: Ítem de menú eliminado correctamente
+          edit:
+            save: Guardar
+            title: Editar ítem de menú
+          form:
+            label_help: Las traducciones no se detectan automáticamente, ¡asegúrate de rellenar todos los campos!
+            target:
+              blank: Nueva ventana
+              self: La misma ventana
+            visibility:
+              default: Visible
+              hidden: Siempre oculto
+              logged: Solo visible para usuarias logeadas
+              non_logged: Solo visible para usuarias no logeadas
+          index:
+            confirm_destroy: '¿Estás segura que quieres eliminar este elemento?'
+            edit: Editar
+            new: Crear nuevo ítem
+            remove: Eliminar adición
+            remove_hack: Eliminar personalización
+            title: Menú principal
+          new:
+            save: Guardar
+            title: Nuevo ítem de menú
+          update:
+            error: 'Error al actualizar el ítem de menú: %{error}'
+            success: Ítem de menú actualizado correctamente
+          url_exists: Esta URL ya ha sido configurada en otro ítem de menú, por favor edítalo en lugar de crear uno nuevo.
       config:
         intergram:
           auto_no_response: Parece que no hay nadie disponible para responder en este momento. Por favor, indícanos cómo te podemos contactar y nos comunicaremos contigo lo antes posible.
@@ -146,7 +187,7 @@ es:
       editor_images:
         create:
           error: '¡Error cargando imagen!'
-          success: '¡La imagen se ha cargado correctamente!'
+          success: Imagen subida correctamente
       map_component:
         map:
           error:
