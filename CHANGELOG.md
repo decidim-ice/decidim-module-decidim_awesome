@@ -1,6 +1,20 @@
 CHANGELOG
 =========
 
+v0.6.6
+------
+
+Compatibility:
+  - Decidim 0.23.3
+  - Decidim 0.23.2
+  - Decidim v0.23.1
+  - Decidim v0.23
+  - Decidim v0.22
+
+Features:
+  - Fix: Prevents overrides for menus not specified in awesomes config
+  - Fix: Respect original @if condition for menu presenter for native menus
+
 v0.6.5
 ------
 
