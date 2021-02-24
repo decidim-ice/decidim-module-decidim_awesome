@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "decidim/decidim_awesome/test/shared_examples/menu_hack_contexts"
 
 module Decidim::DecidimAwesome
   module Admin
@@ -31,6 +32,11 @@ module Decidim::DecidimAwesome
         it "returns http success" do
           get :show, params: params
           expect(response).to have_http_status(:success)
+        end
+
+        it_behaves_like "forbids disabled feature" do
+          let(:features) { Decidim::DecidimAwesome.config.keys }
+          let(:action) { get :show, params: params }
         end
 
         context "when constraint exists" do
@@ -92,6 +98,11 @@ module Decidim::DecidimAwesome
         it "redirects as success success" do
           get :update, params: params
           expect(response).to have_http_status(:redirect)
+        end
+
+        it_behaves_like "forbids disabled feature" do
+          let(:features) { config.keys }
+          let(:action) { get :show, params: params }
         end
       end
     end

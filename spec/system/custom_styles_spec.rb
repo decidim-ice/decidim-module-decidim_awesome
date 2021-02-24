@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Visit the home page", type: :system do
+describe "Custom styles", type: :system do
   let(:organization) { create :organization }
   let!(:participatory_process) { create :participatory_process, organization: organization }
   let!(:config) { create :awesome_config, organization: organization, var: :scoped_styles, value: styles }

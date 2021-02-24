@@ -18,6 +18,7 @@ module Decidim
     autoload :SystemChecker, "decidim/decidim_awesome/system_checker"
     autoload :ContentRenderes, "decidim/decidim_awesome/content_renderers"
     autoload :ContextAnalyzers, "decidim/decidim_awesome/context_analyzers"
+    autoload :MenuHacker, "decidim/decidim_awesome/menu_hacker"
 
     # Boolean configuration options
     #
@@ -69,6 +70,20 @@ module Decidim
     #   }
     config_accessor :scoped_styles do
       {}
+    end
+
+    # allows to keep modifications for the main menu
+    # can return :disabled to completly remove this feature
+    # otherwise it should be an array (some overrides can be specified by default):
+    # [
+    #    {
+    #       url: "/a-new-link",
+    #       label: { "en" => "The label to show in the menu" },
+    #       position: 10
+    #    }
+    # ]
+    config_accessor :menu do
+      []
     end
 
     # these settings do not follow the :disabled convention but

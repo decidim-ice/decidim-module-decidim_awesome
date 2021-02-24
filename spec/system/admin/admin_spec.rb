@@ -163,4 +163,28 @@ describe "Visit the admin page", type: :system do
 
     it_behaves_like "do not have menu link", "styles"
   end
+
+  context "when visiting Menu hacks" do
+    context "when menu_hacks are enabled" do
+      before do
+        click_link "Menu tweaks"
+      end
+
+      it_behaves_like "has menu link", "menu_hacks" do
+        let(:prefix) { "" }
+      end
+
+      it "renders the page" do
+        expect(page).to have_content(/Main menu/i)
+      end
+    end
+  end
+
+  context "when menu_hacks are disabled" do
+    let(:disabled_features) { [:menu] }
+
+    it_behaves_like "do not have menu link", "menu_hacks" do
+      let(:prefix) { "" }
+    end
+  end
 end

@@ -9,6 +9,9 @@ module Decidim
         helper ConfigConstraintsHelpers
 
         layout false
+        before_action do
+          enforce_permission_to :edit_config, constraint_key
+        end
 
         def new
           @form = form(ConstraintForm).from_params(filtered_params, setting: current_setting)
@@ -117,6 +120,16 @@ module Decidim
 
         def current_setting
           awesome_config_instance.setting_for params[:key]
+        end
+
+        def constraint_key
+          key = params[:key] || constraint.awesome_config.var
+          case key
+          when /^scoped_style_/
+            :scoped_styles
+          else
+            key
+          end
         end
       end
     end
