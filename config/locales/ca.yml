@@ -24,6 +24,12 @@ ca:
         component_manifest: Només en components de tipus
         participatory_space_manifest: Aplica-ho a espais participatius de tipus
         participatory_space_slug: Només a
+      menu:
+        position: Position
+        raw_label: Label
+        target: Opens in
+        url: URL
+        visibility: Visibility
   decidim:
     admin:
       menu:
@@ -78,10 +84,10 @@ ca:
             title: 'S''aplica només en aquests casos:'
           create_scoped_style:
             error: Error en crear una nova caixa CSS! %{error}
-            success: Caixa CSS %{key} creada correctament!
+            success: CSS box %{key} created successfully
           destroy_scoped_style:
             error: Error en eliminar una caixa CSS! %{error}
-            success: Caixa CSS %{key} eliminada correctament!
+            success: CSS box %{key} removed successfully
           experimental: Opcions experimentals
           form:
             help:
@@ -107,7 +113,7 @@ ca:
           system: A tot arreu excepte espais participatius
           update:
             error: Error actualitzant la configuració! %{error}
-            success: Configuració actualitzada correctament!
+            success: Configuration updated successfully
         constraints:
           create:
             error: Error creant una nova restricció
@@ -132,9 +138,44 @@ ca:
           checks: Compatibilitat de sistema
           editors: Modificacions als editors
           livechat: Xat en directe
+          menu_hacks: Menu tweaks
           proposals: Modificacions a propostes
           styles: Estils personalitzats
           surveys: Formularis i enquestes
+        menu_hacks:
+          create:
+            error: Error creating menu item! %{error}
+            success: Menu item created successfully
+          destroy:
+            error: Error removing menu item! %{error}
+            success: Menu item removed successfully
+          edit:
+            save: Save
+            title: Edit menu item
+          form:
+            label_help: Translations aren't automatically detected, be sure to fill in all the fields!
+            target:
+              blank: New window
+              self: Same window
+            visibility:
+              default: Visible
+              hidden: Always hidden
+              logged: Only visible for logged users
+              non_logged: Only visible for non-logged users
+          index:
+            confirm_destroy: Are you sure to remove this customization?
+            edit: Edit
+            new: New item
+            remove: Remove addition
+            remove_hack: Remove customization
+            title: Main menu
+          new:
+            save: Save
+            title: New menu item
+          update:
+            error: Error updating menu item! %{error}
+            success: Menu item updated successfully
+          url_exists: The same URL is already configured, please edit that instead of creating it again.
       config:
         intergram:
           auto_no_response: Sembla que no hi ha ningú disponible per a respondre en aquest moment. Si us plau, indica'ns com et podem contactar i ens comunicarem amb tu tan aviat com ens sigui possible.
@@ -146,7 +187,7 @@ ca:
       editor_images:
         create:
           error: Error en pujar la imatge!
-          success: La imatge s'ha pujat correctament!
+          success: Image uploaded successfully
       map_component:
         map:
           error:
