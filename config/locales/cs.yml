@@ -173,9 +173,9 @@ cs:
             save: Uložit
             title: Nová položka menu
           update:
-            error: Error updating menu item! %{error}
-            success: Menu item updated successfully
-          url_exists: The same URL is already configured, please edit that instead of creating it again.
+            error: Chyba při aktualizaci položky menu! %{error}
+            success: Položka menu byla úspěšne aktualizována
+          url_exists: Stejná adresa URL je již nakonfigurována, prosím upravte ji místo jejího vytvoření.
       config:
         intergram:
           auto_no_response: Zdá se, že právě teď nikdo není k dispozici odpovědět. Řekněte nám, jak vás můžeme kontaktovat, a co nejdříve se k vám vrátíme.
@@ -187,7 +187,7 @@ cs:
       editor_images:
         create:
           error: Chyba při nahrávání obrázku!
-          success: Image uploaded successfully
+          success: Obrázek byl úspěšně nahrán
       map_component:
         map:
           error:
