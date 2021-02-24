@@ -33,7 +33,7 @@ Each hack can be scoped to one or more specific participatory spaces or componen
 
 #### 1. Image support for the Quill editor
 
-Modifies the WYSIWYG editor in Decidim by adding the possibility to insert images. When uploading images, Drag & Drop is supported. Images will be uploaded to the server and inserted as external resources (it doesn't use base64 inline encoding).
+Modifies the WYSIWYG editor in Decidim by adding the possibility to insert images. When uploading images, Drag & Drop is supported. Images will be uploaded to the server and inserted as external resources (it doesn't use base64 in-line encoding).
 
 This feature allows you use images in newsletters as well.
 
@@ -71,13 +71,13 @@ Many scopes can be defined for every tweak.
 
 This is a component you can add in any participatory space. It retrieves all the geolocated content in that participatory space (meetings or proposals) and displays it in a big map.
 
-It also provides a simple search by category, each category is assignated to a different color.
+It also provides a simple search by category, each category is assigned to a different color.
 
 ![Awesome map](examples/awesome-map.png)
 
 #### 7. Allow Decidim to use custom CSS themes for every tenant
 
-When customizind CSS for a Decidim installation, each change affects all the organizations (tenant).
+When customizing CSS for a Decidim installation, each change affects all the organizations (tenant).
 
 This feature allows to customize each organization css without affecting the others in the same Decidim installation.
 
@@ -106,12 +106,20 @@ With this feature you can have a support chat in Decidim. It is linked to a [Tel
 
 ![Intergram screenshot](examples/intergram.png)
 
-#### 10. Custom CSS applied only according scopes restrictions
+#### 10. Custom CSS applied only according scoped restrictions
 
-For instance, with this feature you can create directly from the admin a CSS snipped that is only applied globally, in a particular assembly or even a single proposal!
+With this feature you can create directly in the admin a CSS snipped that is only applied globally, in a particular assembly or even a single proposal!
 
 ![CSS screenshot](examples/custom_styles.png)
 
+#### 11. Change the main menu of Decidim entirely!
+
+Feel free to hide, modify or add items in the Decidim's main menu. You can also change the order, establish some conditions (like showing only for logged users) or open in a new window.
+
+![Menu hacks screenshot](examples/menu-1.png)
+![Menu hacks screenshot](examples/menu-2.png)
+![Menu hacks screenshot](examples/menu-3.png)
+![Menu hacks screenshot](examples/menu-4.png)
 
 #### To be continued...
 
@@ -127,7 +135,7 @@ Some things in the road-map:
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-decidim_awesome", "~> 0.6.4"
+gem "decidim-decidim_awesome", "~> 0.6.5"
 ```
 
 And then execute:
