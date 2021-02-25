@@ -91,51 +91,51 @@ nl:
           experimental: Experimentele opties
           form:
             help:
-              allow_images_in_full_editor: This will add an image uploader icon in all the editors WYSIWYG with the full toolbar enabled.
-              allow_images_in_markdown_editor: This will allow markdown editor to upload images by copy & paste or drag & drop.
-              allow_images_in_proposals: This will allow to upload images in the proposals editor, available to any user
-              allow_images_in_small_editor: This will add an image uploader icon in all the editors WYSIWYG with minimal options in the toolbar enabled.
-              auto_save_forms: This will use LocalStorage to automatically save data introduced by users in surveys and other forms while they are filling it. Data will be restored in a future visit with the same browser in case the form is not submitted. If the form is submitted, data will be removed. If users remove their LocalStorage data, data won't be restored either.
-              drag_and_drop_supported: When uploading images, Drag & Drop is supported. Images will be uploaded to the server and inserted as external resources (it doesn't use base64 inline encoding).
-              intergram_about: Intergram uses Telegram messenger to handle a live support chat widget embedded in the bottom of the page.
-              intergram_config: 'Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> to your group or start a chat with it directly. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
-              scoped_styles: Create custom CSS that applies only in certain parts of the public web (use the restrictions editor for that)
-              scoped_styles_variables: 'You can use the following CSS variables for organization customized colors:'
-              use_markdown_editor: This will substitute the Quill WYSIWYG editor, use a Markdown editor instead. Text will be rendered as HTML in the public pages (text in database will be saved as markdown text)
+              allow_images_in_full_editor: Dit zal een afbeelding uploader pictogram toevoegen in alle editors WYSIWYG met de volledige werkbalk ingeschakeld.
+              allow_images_in_markdown_editor: Hiermee kan de markdown editor afbeeldingen uploaden door ze te kopiëren en plakken of slepen & neerzetten.
+              allow_images_in_proposals: Hiermee kunnen afbeeldingen geüpload worden in de voorstellen editor, beschikbaar voor elke gebruiker
+              allow_images_in_small_editor: Dit zal een afbeelding uploader pictogram toevoegen in alle WYSIWYG editors met de minimale werkbalk ingeschakeld.
+              auto_save_forms: Dit zal LocalStorage gebruiken om automatisch gegevens op te slaan die zijn ingevoerd door gebruikers in enquêtes en andere formulieren terwijl ze deze invullen. De gegevens worden hersteld in een toekomstig bezoek met dezelfde browser voor het geval het formulier nog niet is ingediend. Als het formulier is ingediend, worden de gegevens verwijderd. Als gebruikers hun LocalStorage gegevens verwijderen, worden de gegevens ook niet hersteld.
+              drag_and_drop_supported: Bij het uploaden van afbeeldingen wordt wordt slepen en neerzetten ondersteund. Afbeeldingen worden naar de server geüpload en ingevoegd als externe bronnen (er wordt geen base64 inline codering gebruikt).
+              intergram_about: Intergram gebruikt Telegram messenger voor het verwerken van een live-support chat widget ingebed aan de onderkant van de pagina.
+              intergram_config: 'Nodig de <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> uit voor je groep of begin direct met een chat. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
+              scoped_styles: Maak aangepaste CSS aan die alleen van toepassing is in bepaalde delen van het openbare web (gebruik hiervoor de restrictie-editor)
+              scoped_styles_variables: 'Je kunt de volgende CSS variabelen gebruiken voor de organisatie op maat gemaakte kleuren:'
+              use_markdown_editor: Dit vervangt de Quill WYSIWYG editor, gebruik in plaats daarvan een Markdown editor. Tekst zal worden weergegeven als HTML in de openbare pagina's (tekst in de database zal worden opgeslagen als markdown tekst)
           form_styles:
-            new: Add a new CSS box
-            remove: Remove this CSS box
-            sure_to_remove: Are you sure you want to destroy this CSS box?
-          rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants" is enabled, this option won''t apply. Use the editors hacks instead to enable images in proposals.'
+            new: Voeg een nieuwe CSS-box toe
+            remove: Verwijder dit CSS-vak
+            sure_to_remove: Weet je zeker dat je dit CSS-vak wilt verwijderen?
+          rich_text_editor_in_public_views: 'Let op: "rich text editor voor deelnemers" is ingeschakeld, deze optie is niet van toepassing. Gebruik de editors hacks om afbeeldingen in voorstellen in te schakelen.'
           show:
-            title: Tweaks for %{setting}
-            update: Update configuration
-          system: Everywhere except participatory spaces
+            title: Tweaks voor %{setting}
+            update: Configuratie bijwerken
+          system: Overal, behalve participatieve ruimtes
           update:
-            error: Error updating configuration! %{error}
-            success: Configuration updated successfully
+            error: Fout bij het bijwerken van de configuratie! %{error}
+            success: Configuratie succesvol aangepast
         constraints:
           create:
-            error: Error creating condition case
-            success: Condition case created successfully
+            error: Fout bij maken voorwaardelijke case
+            success: Voorwaardelijke case succesvol aangemaakt
           destroy:
-            error: Error removing condition case
-            success: Condition case removed successfully
+            error: Fout bij verwijderen van voorwaardelijke case
+            success: Voorwaardelijke case succesvol verwijderd
           errors:
-            not_unique: Same condition already exists
+            not_unique: Dezelfde voorwaarde bestaat al
           new:
-            cancel: Cancel
-            constraint: New condition case
-            save: Save
+            cancel: Annuleren
+            constraint: Nieuwe voorwaarde case
+            save: Opslaan
           show:
-            cancel: Cancel
-            constraint: Edit condition case
-            save: Save
+            cancel: Annuleren
+            constraint: Bewerk conditie case
+            save: Opslaan
           update:
-            error: Error updating condition case
-            success: Condition case updated successfully
+            error: Fout tijdens bijwerken voorwaardelijke case
+            success: Voorwaardelijke case succesvol bijgewerkt
         menu:
-          checks: System compatibility
+          checks: Systeemcompabiliteit
           editors: Editor hacks
           livechat: Live Chat
           menu_hacks: Menu tweaks
@@ -148,7 +148,7 @@ nl:
             success: Menu item succesvol aangemaakt
           destroy:
             error: Fout bij verwijderen menu item! %{error}
-            success: Menu item verwijderd
+            success: Menu item succesvol verwijderd
           edit:
             save: Opslaan
             title: Bewerk menu-item
@@ -207,6 +207,6 @@ nl:
           autosaved_retrieved: Gegevens voor dit formulier zijn hersteld van een vorige sessie
           autosaved_success: Data opgeslagen in lokale opslag
           categories: Categorieën
-          drag_and_drop_image: Voeg afbeeldingen toe door ze te slepen, te slepen of te plakken.
+          drag_and_drop_image: Voeg afbeeldingen toe door ze te slepen, te plaatsen of te plakken.
           meetings: Vergaderingen
           proposals: Voorstellen
