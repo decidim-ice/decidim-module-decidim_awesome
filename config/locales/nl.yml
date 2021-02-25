@@ -71,24 +71,24 @@ nl:
             decidim-proposals: Van Voorstellen Module
             decidim_version: Decidim versie %{version}
             errors:
-              CSS: Head does not contain the required <link> stylesheet entries. To solve it, you can manually add it to your custom _head.html.erb
-              JavaScript: Head does not contain the required <script> Javascript entries. To solve it, you can manually add it to your custom admin/_header.html.erb
-            head_tags: Awesome tags included in the application header
-            title: System compatibility checks
+              CSS: Head bevat niet de vereiste <link> stylesheet entries. Om dit op te lossen kun je ze handmatig toevoegen aan je custom -head.html.erb
+              JavaScript: Hoofd bevat niet de vereiste <script> Javascript-vermeldingen. Om het op te lossen kun je het handmatig toevoegen aan je aangepaste admin/_header.html.erb
+            head_tags: Awesome tags zijn in de application header ingevoegd
+            title: Systeem compatibility checks
         config:
           constraints:
-            add_condition: Add case
-            always: Always
+            add_condition: Voeg een case toe
+            always: Altijd
             delete: Delete
             edit: Edit
-            title: 'Applicable only in these cases:'
+            title: 'Alleen toepasbaar in de volgende gevallen:'
           create_scoped_style:
-            error: Error creating a new CSS box! %{error}
-            success: CSS box %{key} created successfully
+            error: Error bij het maken van een nieuwe CSS box! %{error}
+            success: CSS box %{key} succesvol aangemaakt
           destroy_scoped_style:
-            error: Error removing CSS box! %{error}
-            success: CSS box %{key} removed successfully
-          experimental: Experimental options
+            error: Fout bij verwijderen van CSS-box! %{error}
+            success: CSS box %{key} succesvol verwijderd
+          experimental: Experimentele opties
           form:
             help:
               allow_images_in_full_editor: This will add an image uploader icon in all the editors WYSIWYG with the full toolbar enabled.
