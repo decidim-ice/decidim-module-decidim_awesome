@@ -85,7 +85,7 @@ module Decidim
         end
 
         def current_items
-          @current_items ||= current_menu.items(true)
+          @current_items ||= current_menu.items(include_invisible: true)
         end
 
         def current_menu
