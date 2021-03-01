@@ -93,14 +93,14 @@
     });
 
     element.title.translation = ApiFetcher.findTranslation(element.title.translations);
-    element.description.translation = ApiFetcher.findTranslation(element.description.translations).replace(/\n/g, "<br>");;
+    element.description.translation = ApiFetcher.findTranslation(element.description.translations).replace(/\n/g, "<br>");
     element.location.translation = ApiFetcher.findTranslation(element.location.translations);
     element.locationHints.translation = ApiFetcher.findTranslation(element.locationHints.translations);
     callback(element, marker);
   };
 
   const fetchMeetings = (component, after, callback, finalCall = () => {}) => {
-    
+
     const variables = {
       "id": component.id,
       "after": after
@@ -110,7 +110,7 @@
       if(result) {
         result.component.meetings.edges.forEach((element) => {
           if(!element.node) return;
-          
+
           if(element.node.coordinates) {
             element.node.link = component.url + '/meetings/' + element.node.id;
             createMarker(element.node, callback);

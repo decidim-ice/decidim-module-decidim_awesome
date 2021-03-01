@@ -2,28 +2,6 @@
 
 <%= awesome_map_for map_components do %>
 
-  <script id="legacy-marker-proposal-popup" type="text/x-jsrender">
-    <div class="map-info__content">
-      <h3>{{>title}}</h3>
-      <div id="bodyContent">
-        <p>{{:body}}</p>
-        <div class="map__date-adress">
-          <div class="address card__extra">
-            <div class="address__icon">{{:icon}}</div>
-            <div class="address__details">
-              <span>{{>address}}</span><br>
-            </div>
-          </div>
-        </div>
-        <div class="map-info__button">
-          <a href="{{>link}}" class="button button--sc">
-            <%= t(".view_proposal") %>
-          </a>
-        </div>
-      </div>
-    </div>
-  </script>
-
   <script id="marker-proposal-popup" type="text/x-jsrender">
     <div class="map-info__content">
       <h3>{{>title.translation}}</h3>
@@ -92,9 +70,5 @@
     window.AwesomeMap = window.AwesomeMap || {};
     window.AwesomeMap.categories = <%= current_categories.to_json.html_safe %>;
   </script>
-  <% if version_prefix == "v0.23" %>
-    <%= javascript_include_tag "decidim/decidim_awesome/awesome_map/map" %>
-  <% else %>
-    <%= javascript_include_tag "decidim/decidim_awesome/awesome_map/legacy_map" %>
-  <% end %>
+  <%= javascript_include_tag "decidim/decidim_awesome/awesome_map/map" %>
 <% end %>

@@ -1,6 +1,16 @@
 CHANGELOG
 =========
 
+v0.7.0
+------
+
+Compatibility:
+  - Decidim v0.24
+  - Decidim 0.23.3
+  - Decidim 0.23.2
+  - Decidim v0.23.1
+  - Decidim v0.23
+
 v0.6.6
 ------
 

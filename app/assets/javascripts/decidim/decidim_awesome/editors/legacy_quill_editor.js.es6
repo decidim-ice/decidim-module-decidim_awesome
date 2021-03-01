@@ -12,14 +12,14 @@
   // Redefines Quill editor with images
   if(exports.DecidimAwesome.allow_images_in_full_editor  || exports.DecidimAwesome.allow_images_in_small_editor || exports.DecidimAwesome.use_markdown_editor) {
 
-    const quillFormats = ["bold", "italic", "link", "underline", "header", "list", "video", "image", "alt", "break"];
+    const quillFormats = ["bold", "italic", "link", "underline", "header", "list", "video", "image", "alt"];
 
     const createQuillEditor = (container) => {
       const toolbar = $(container).data("toolbar");
       const disabled = $(container).data("disabled");
 
       let quillToolbar = [
-        ["bold", "italic", "underline", "linebreak"],
+        ["bold", "italic", "underline"],
         [{ list: "ordered" }, { list: "bullet" }],
         ["link", "clean"]
       ];
@@ -50,13 +50,7 @@
       }
 
       let modules = {
-        linebreak: {},
-        toolbar: {
-          container: quillToolbar,
-          handlers: {
-            "linebreak": exports.Decidim.Editor.lineBreakButtonHandler
-          }
-        }
+        toolbar: quillToolbar
       };
       const $input = $(container).siblings('input[type="hidden"]');
       container.innerHTML = $input.val() || "";
@@ -120,11 +114,6 @@
         const t = window.DecidimAwesome.texts["drag_and_drop_image"];
         $(container).after(`<p class="help-text" style="margin-top:-1.5rem;">${t}</p>`);
       }
-
-      // After editor is ready, linebreak_module deletes two extraneous new lines
-      quill.emitter.emit("editor-ready");
-
-      return quill;
     };
 
     const createMarkdownEditor = (container) => {

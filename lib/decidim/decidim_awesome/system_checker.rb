@@ -14,7 +14,7 @@ module Decidim
           @overrides = checksums.map do |package, files|
             props = {
               spec: ::Gem::Specification.find_by_name(package),
-              files: files.map { |file, signatures| [file, signatures.values] }.to_h
+              files: files.transform_values(&:values)
             }
             [package, to_struct(props)]
           end

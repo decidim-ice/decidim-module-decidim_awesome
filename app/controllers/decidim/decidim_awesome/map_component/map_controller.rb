@@ -14,10 +14,7 @@ module Decidim
         private
 
         def maps_enabled?
-          return Decidim::Map.configured? if defined?(Decidim::Map)
-
-          # TODO: remove when 0.22 support is diched
-          Decidim.geocoder.present?
+          Decidim::Map.configured?
         end
 
         def map_components

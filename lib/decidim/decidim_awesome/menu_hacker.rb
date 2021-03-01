@@ -12,7 +12,7 @@ module Decidim
       end
 
       # returns a combined array of the Decidim defined menu and the hacked stored as config vars
-      def items(include_invisible = false)
+      def items(include_invisible: false)
         return @items if @items
 
         @items = default_items

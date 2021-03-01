@@ -6,8 +6,6 @@ module Decidim
       include Decidim::MapHelper
 
       def awesome_map_for(components, &block)
-        return legacy_map_for(components, &block) unless defined?(Decidim::Map)
-
         map = dynamic_map_for({}, {}, &block)
         return unless map
 
@@ -33,50 +31,6 @@ module Decidim
         content_tag(:div, map, map_html_options)
       end
 
-      # TODO: remove when 0.22 support is diched
-      def legacy_map_for(components)
-        return if Decidim.geocoder.blank?
-
-        map_html_options = {
-          class: "google-map",
-          id: "map",
-          "data-components" => components.map do |component|
-                                 {
-                                   id: component.id,
-                                   type: component.manifest.name,
-                                   name: translated_attribute(component.name),
-                                   url: Decidim::EngineRouter.main_proxy(component).root_path,
-                                   amendments: component.manifest.name == :proposals ? Decidim::Proposals::Proposal.where(component: component).only_emendations.count : 0
-                                 }
-                               end.to_json,
-          "data-collapsed" => current_component.settings.collapse,
-          "data-show-not-answered" => current_component.current_settings.show_not_answered,
-          "data-show-accepted" => current_component.current_settings.show_accepted,
-          "data-show-withdrawn" => current_component.current_settings.show_withdrawn,
-          "data-show-evaluating" => current_component.current_settings.show_evaluating,
-          # "data-show-rejected" => current_component.current_settings.show_rejected,
-          "data-markers-data" => [].to_json
-        }
-
-        if Decidim.geocoder[:here_api_key]
-          map_html_options["data-here-api-key"] = Decidim.geocoder[:here_api_key]
-        else
-          # Compatibility mode for old api_id/app_code configurations
-          map_html_options["data-here-app-id"] = Decidim.geocoder[:here_app_id]
-          map_html_options["data-here-app-code"] = Decidim.geocoder[:here_app_code]
-        end
-
-        content = capture { yield }.html_safe
-        help = content_tag(:div, class: "map__help") do
-          content_tag(:p, I18n.t("screen_reader_explanation", scope: "decidim.map.dynamic"), class: "show-for-sr")
-        end
-        content_tag :div, class: "awesome-map" do
-          map = content_tag(:div, "", map_html_options)
-
-          help + map + content
-        end
-      end
-
       # rubocop:disable Rails/HelperInstanceVariable
       def current_categories
         return @current_categories if @current_categories
@@ -96,6 +50,7 @@ module Decidim
 
       private
 
+      # rubocop:disable Style/FormatStringToken
       def append_category(category)
         @h += @golden_ratio_conjugate
         @h %= 1
@@ -108,11 +63,12 @@ module Decidim
           color: format("#%02x%02x%02x", r, g, b)
         )
       end
+      # rubocop:enable Style/FormatStringToken
       # rubocop:enable Rails/HelperInstanceVariable
 
-      # rubocop:disable Naming/UncommunicativeMethodParamName
       # HSV values in [0..1[
       # returns [r, g, b] values from 0 to 255
+      # rubocop:disable Naming/MethodParameterName
       def hsv_to_rgb(h, s, v)
         h_i = (h * 6).to_i
         f = h * 6 - h_i
@@ -151,7 +107,7 @@ module Decidim
         end
         [(r * 256).to_i, (g * 256).to_i, (b * 256).to_i]
       end
-      # rubocop:enable Naming/UncommunicativeMethodParamName
     end
+    # rubocop:enable Naming/MethodParameterName
   end
 end

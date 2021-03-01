@@ -135,7 +135,7 @@ Some things in the road-map:
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-decidim_awesome", "~> 0.6.6"
+gem "decidim-decidim_awesome", "~> 0.7.0"
 ```
 
 And then execute:
@@ -152,6 +152,7 @@ Depending on your Decidim version, choose the corresponding Awesome version to e
 |---|---|
 | 0.5.x | 0.21.x, 0.22.x |
 | 0.6.x | 0.22.x, 0.23.x |
+| 0.7.x | 0.23.x, 0.24.x |
 
 ## Configuration
 
