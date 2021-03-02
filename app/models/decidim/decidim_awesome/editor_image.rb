@@ -11,9 +11,10 @@ module Decidim
       validates :organization, presence: true
       validates :author, presence: true
 
-      validates :image,
-                file_size: { less_than_or_equal_to: ->(_record) { Decidim.maximum_attachment_size } },
-                file_content_type: { allow: ["image/jpeg", "image/png"] }
+      validates :image, presence: true
+      # validates :image,
+      #           file_size: { less_than_or_equal_to: ->(_record) { Decidim.maximum_attachment_size } },
+      #           file_content_type: { allow: ["image/jpeg", "image/png"] }
 
       mount_uploader :image, Decidim::DecidimAwesome::ImageUploader
 

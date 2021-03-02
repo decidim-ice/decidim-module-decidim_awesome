@@ -16,7 +16,7 @@ FactoryBot.define do
   end
 
   factory :editor_image, class: "Decidim::DecidimAwesome::EditorImage" do
-    image { Faker::Hacker.noun }
+    image { Decidim::Dev.test_file("city.jpeg", "image/jpeg") }
     path { Faker::Internet.url(host: "", scheme: "") }
     author { create :user }
     organization { create :organization }

@@ -16,6 +16,11 @@
           <%= aria_selected_link_to I18n.t("menu.surveys", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:surveys) %>
         </li>
       <% end %>
+      <% if config_enabled? :scoped_styles %>
+        <li <% if is_active_link?(decidim_admin_decidim_awesome.config_path(:styles)) %> class="is-active" <% end %>>
+          <%= aria_selected_link_to I18n.t("menu.styles", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:styles) %>
+        </li>
+      <% end %>
       <% if config_enabled? :allow_images_in_proposals %>
         <li <% if is_active_link?(decidim_admin_decidim_awesome.config_path(:proposals)) %> class="is-active" <% end %>>
           <%= aria_selected_link_to I18n.t("menu.proposals", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:proposals) %>
@@ -24,6 +29,11 @@
       <% if config_enabled?([:intergram_for_admins, :intergram_for_public]) %>
         <li <% if is_active_link?(decidim_admin_decidim_awesome.config_path(:livechat)) %> class="is-active" <% end %>>
           <%= aria_selected_link_to I18n.t("menu.livechat", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:livechat) %>
+        </li>
+      <% end %>
+      <% if config_enabled? :menu %>
+        <li <% if is_active_link?(decidim_admin_decidim_awesome.menu_hacks_path) %> class="is-active" <% end %>>
+          <%= aria_selected_link_to I18n.t("menu.menu_hacks", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.menu_hacks_path %>
         </li>
       <% end %>
       <li <% if is_active_link?(decidim_admin_decidim_awesome.checks_path) %> class="is-active" <% end %>>

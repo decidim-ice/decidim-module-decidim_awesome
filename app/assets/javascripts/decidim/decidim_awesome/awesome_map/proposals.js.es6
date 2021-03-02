@@ -16,8 +16,19 @@
             edges {
               node {  
                 id
-                title
-                body
+                state
+                title {
+                  translations {
+                    text
+                    locale
+                  }
+                }
+                body {
+                  translations {
+                    text
+                    locale
+                  }
+                }
                 address
                 coordinates {
                   latitude
@@ -47,6 +58,9 @@
       })
     });
 
+    element.title.translation = ApiFetcher.findTranslation(element.title.translations);
+    element.body.translation = ApiFetcher.findTranslation(element.body.translations).replace(/\n/g, "<br>");
+
     callback(element, marker);
   };
 
@@ -57,18 +71,20 @@
     };
     const api = new ApiFetcher(query, variables);
     api.fetchAll((result) => {
-      result.component.proposals.edges.forEach((element) => {
-        if(!element.node) return;
-        
-        if(element.node.coordinates) {
-          element.node.link = component.url + '/proposals/' + element.node.id;
-          createMarker(element.node, callback);
+      if(result) {
+        result.component.proposals.edges.forEach((element) => {
+          if(!element.node) return;
+          
+          if(element.node.coordinates) {
+            element.node.link = component.url + '/proposals/' + element.node.id;
+            createMarker(element.node, callback);
+          }
+        });
+        if (result.component.proposals.pageInfo.hasNextPage) {
+          fetchProposals(component, result.component.proposals.pageInfo.endCursor, callback, finalCall);
+        } else {
+          finalCall();
         }
-      });
-      if (result.component.proposals.pageInfo.hasNextPage) {
-        fetchProposals(component, result.component.proposals.pageInfo.endCursor, callback, finalCall);
-      } else {
-        finalCall();
       }
     });
   };

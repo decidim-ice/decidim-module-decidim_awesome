@@ -22,12 +22,19 @@ en:
         intergram_title_open: Opened chat title
         intergram_use_floating_button: If checked, the closed chat is always a button
           instead of a text
+        scoped_styles: 'Custom styles #%{id}'
         use_markdown_editor: Use a Markdown editor instead of the HTML editor
       constraint:
         component_id: or specifically in
         component_manifest: Only in components of type
         participatory_space_manifest: Apply to participatory spaces of type
         participatory_space_slug: Only in
+      menu:
+        position: Position
+        raw_label: Label
+        target: Opens in
+        url: URL
+        visibility: Visibility
   decidim:
     admin:
       menu:
@@ -37,6 +44,7 @@ en:
         name: Fullscreen Iframe
         settings:
           global:
+            announcement: Announcement
             iframe: Iframe code
             iframe_help: 'Put your code as html: <iframe width="100%" height="700"
               frameBorder="0" allowFullscreen src="..."></iframe>. Content will be
@@ -45,6 +53,7 @@ en:
             no_margins: No margins between the iframe and the rest of the page
             viewport_width: Limit maximum width to the application viewport
           step:
+            announcement: Announcement
             iframe: Iframe code
       awesome_map:
         name: Awesome Map
@@ -55,6 +64,11 @@ en:
             map_height: Map height (px)
           step:
             announcement: Announcement
+            show_accepted: Show accepted proposals
+            show_evaluating: Show evaluating proposals
+            show_not_answered: Show not answered proposals
+            show_rejected: Show rejected proposals
+            show_withdrawn: Show withdrawn proposals
     decidim_awesome:
       admin:
         checks:
@@ -78,6 +92,12 @@ en:
             delete: Delete
             edit: Edit
             title: 'Applicable only in these cases:'
+          create_scoped_style:
+            error: Error creating a new CSS box! %{error}
+            success: CSS box %{key} created successfully
+          destroy_scoped_style:
+            error: Error removing CSS box! %{error}
+            success: CSS box %{key} removed successfully
           experimental: Experimental options
           form:
             help:
@@ -103,9 +123,17 @@ en:
               intergram_config: Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram
                 bot</a> to your group or start a chat with it directly. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+
                 info</a>
+              scoped_styles: Create custom CSS that applies only in certain parts
+                of the public web (use the restrictions editor for that)
+              scoped_styles_variables: 'You can use the following CSS variables for
+                organization customized colors:'
               use_markdown_editor: This will substitute the Quill WYSIWYG editor,
-                use a Markdown editor in the admin side and a frontend processor to
-                render the text (text in database will be saved as markdown text)
+                use a Markdown editor instead. Text will be rendered as HTML in the
+                public pages (text in database will be saved as markdown text)
+          form_styles:
+            new: Add a new CSS box
+            remove: Remove this CSS box
+            sure_to_remove: Are you sure you want to destroy this CSS box?
           rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants"
             is enabled, this option won''t apply. Use the editors hacks instead to
             enable images in proposals.'
@@ -115,7 +143,7 @@ en:
           system: Everywhere except participatory spaces
           update:
             error: Error updating configuration! %{error}
-            success: Configuration updated successfully!
+            success: Configuration updated successfully
         constraints:
           create:
             error: Error creating condition case
@@ -140,8 +168,46 @@ en:
           checks: System compatibility
           editors: Editor hacks
           livechat: Live Chat
+          menu_hacks: Menu tweaks
           proposals: Proposals hacks
+          styles: Custom styles
           surveys: Surveys & forms
+        menu_hacks:
+          create:
+            error: Error creating menu item! %{error}
+            success: Menu item created successfully
+          destroy:
+            error: Error removing menu item! %{error}
+            success: Menu item removed successfully
+          edit:
+            save: Save
+            title: Edit menu item
+          form:
+            label_help: Translations aren't automatically detected, be sure to fill
+              in all the fields!
+            target:
+              blank: New window
+              self: Same window
+            visibility:
+              default: Visible
+              hidden: Always hidden
+              logged: Only visible for logged users
+              non_logged: Only visible for non-logged users
+          index:
+            confirm_destroy: Are you sure to remove this customization?
+            edit: Edit
+            new: New item
+            remove: Remove addition
+            remove_hack: Remove customization
+            title: Main menu
+          new:
+            save: Save
+            title: New menu item
+          update:
+            error: Error updating menu item! %{error}
+            success: Menu item updated successfully
+          url_exists: The same URL is already configured, please edit that instead
+            of creating it again.
       config:
         intergram:
           auto_no_response: It seems that no one is available to answer right now.
@@ -155,7 +221,7 @@ en:
       editor_images:
         create:
           error: Error uploading image!
-          success: Image uploaded successfully!
+          success: Image uploaded successfully
       map_component:
         map:
           error:

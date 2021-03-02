@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "decidim/decidim_awesome/test/shared_examples/menu_hack_contexts"
 
 module Decidim::DecidimAwesome
   module Admin
@@ -43,6 +44,11 @@ module Decidim::DecidimAwesome
           expect(response).to have_http_status(:success)
         end
 
+        it_behaves_like "forbids disabled feature" do
+          let(:feature) { key }
+          let(:action) { get :new, params: params }
+        end
+
         it "has helper with participatory space manifests" do
           expect(controller.helpers.participatory_space_manifests).to include(:participatory_processes)
           expect(controller.helpers.participatory_space_manifests).to include(:assemblies)
@@ -76,12 +82,26 @@ module Decidim::DecidimAwesome
             expect(controller.helpers.components_list(:participatory_processes, process.slug)).to eq({})
           end
         end
+
+        context "when key is scoped_style" do
+          let(:key) { :scoped_style_test }
+
+          it "returns http success" do
+            get :new, params: params
+            expect(response).to have_http_status(:success)
+          end
+        end
       end
 
-      describe "PATCH #create" do
-        it "redirects as success success" do
-          get :create, params: params
+      describe "POST #create" do
+        it "returns a success response" do
+          post :create, params: params
           expect(response).to have_http_status(:success)
+        end
+
+        it_behaves_like "forbids disabled feature" do
+          let(:feature) { key }
+          let(:action) { post :create, params: params }
         end
 
         context "when wrong params" do
@@ -103,20 +123,27 @@ module Decidim::DecidimAwesome
           get :show, params: params
           expect(response).to have_http_status(:success)
         end
+
+        it_behaves_like "forbids disabled feature" do
+          let(:feature) { key }
+          let(:action) { get :show, params: params }
+        end
       end
 
       describe "PATCH #update" do
         let(:id) { constraint.id }
 
         it "redirects as success success" do
-          get :update, params: params
+          patch :update, params: params
           expect(response).to have_http_status(:success)
         end
 
+        it_behaves_like "forbids disabled feature" do
+          let(:feature) { key }
+          let(:action) { patch :update, params: params }
+        end
+
         context "when wrong params" do
-          # before do
-          #   allow(controller).to receive(:current_setting).and_return(double(var: "some-var"))
-          # end
           let!(:prev_constraint) { create :config_constraint, awesome_config: config, settings: { participatory_space_manifest: "assemblies" } }
 
           it "returns error" do
@@ -130,8 +157,13 @@ module Decidim::DecidimAwesome
         let(:id) { constraint.id }
 
         it "redirects as success success" do
-          get :destroy, params: params
+          delete :destroy, params: params
           expect(response).to have_http_status(:success)
+        end
+
+        it_behaves_like "forbids disabled feature" do
+          let(:feature) { key }
+          let(:action) { delete :destroy, params: params }
         end
       end
     end

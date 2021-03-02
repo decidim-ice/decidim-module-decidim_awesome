@@ -18,6 +18,7 @@ module Decidim
     autoload :SystemChecker, "decidim/decidim_awesome/system_checker"
     autoload :ContentRenderes, "decidim/decidim_awesome/content_renderers"
     autoload :ContextAnalyzers, "decidim/decidim_awesome/context_analyzers"
+    autoload :MenuHacker, "decidim/decidim_awesome/menu_hacker"
 
     # Boolean configuration options
     #
@@ -57,6 +58,32 @@ module Decidim
 
     config_accessor :intergram_for_public do
       false
+    end
+
+    # allows admins to created specific CSS snippets affecting only some specific parts
+    # Valid values differ a little from the previous convention:
+    #   :disabled => false and non available, hidden from admins
+    #   Hash => hash of different css text, each key will be used for the contraints
+    # Admins create this hash dynamically but some pre-defined css boxes can be created here as:
+    #   {
+    #      some_identifier: ".wrapper { background: red; }"
+    #   }
+    config_accessor :scoped_styles do
+      {}
+    end
+
+    # allows to keep modifications for the main menu
+    # can return :disabled to completly remove this feature
+    # otherwise it should be an array (some overrides can be specified by default):
+    # [
+    #    {
+    #       url: "/a-new-link",
+    #       label: { "en" => "The label to show in the menu" },
+    #       position: 10
+    #    }
+    # ]
+    config_accessor :menu do
+      []
     end
 
     # these settings do not follow the :disabled convention but

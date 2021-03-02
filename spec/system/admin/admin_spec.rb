@@ -143,4 +143,48 @@ describe "Visit the admin page", type: :system do
 
     it_behaves_like "do not have menu link", "livechat"
   end
+
+  context "when visiting CSS tweaks" do
+    context "when scoped styles are enabled" do
+      before do
+        click_link "Custom styles"
+      end
+
+      it_behaves_like "has menu link", "styles"
+
+      it "renders the page" do
+        expect(page).to have_content(/Tweaks for styles/i)
+      end
+    end
+  end
+
+  context "when scoped styles are disabled" do
+    let(:disabled_features) { [:scoped_styles] }
+
+    it_behaves_like "do not have menu link", "styles"
+  end
+
+  context "when visiting Menu hacks" do
+    context "when menu_hacks are enabled" do
+      before do
+        click_link "Menu tweaks"
+      end
+
+      it_behaves_like "has menu link", "menu_hacks" do
+        let(:prefix) { "" }
+      end
+
+      it "renders the page" do
+        expect(page).to have_content(/Main menu/i)
+      end
+    end
+  end
+
+  context "when menu_hacks are disabled" do
+    let(:disabled_features) { [:menu] }
+
+    it_behaves_like "do not have menu link", "menu_hacks" do
+      let(:prefix) { "" }
+    end
+  end
 end

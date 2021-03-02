@@ -11,6 +11,8 @@ module Decidim
 
       validates :author_id, presence: true
       validates :image, presence: true
+
+      alias organization current_organization
     end
   end
 end

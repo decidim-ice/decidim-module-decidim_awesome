@@ -12,8 +12,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu]
-        ruby: [2.6, 2.7]
-        decidim: [decidim-0.22, decidim-0.23]
+        ruby: [2.7]
+        decidim: [decidim-0.22, decidim-0.23, decidim-0.23.2]
     runs-on: ${{ matrix.os }}-latest
     continue-on-error: ${{ endsWith(matrix.ruby, 'head') || matrix.ruby == 'debug' }}
 
@@ -57,3 +57,9 @@ jobs:
 
       - name: Run RSpec
         run: SIMPLECOV=1 CODECOV=1 bundle exec appraisal ${{ matrix.decidim }} rake
+
+      - uses: actions/upload-artifact@v2-preview
+        if: always()
+        with:
+          name: screenshots
+          path: ./spec/decidim_dummy_app/tmp/screenshots

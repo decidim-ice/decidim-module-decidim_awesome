@@ -17,7 +17,12 @@ module Decidim::DecidimAwesome
         path: "/somepath"
       }
     end
-    let(:image) { fixture_file_upload(Decidim::Dev.test_file("city.jpeg", "image/jpeg")) }
+    let(:image) do
+      Rack::Test::UploadedFile.new(
+        Decidim::Dev.test_file("city.jpeg", "image/jpeg"),
+        "image/jpeg"
+      )
+    end
 
     before do
       allow(controller).to receive(:awesome_config).and_return(config)
@@ -34,7 +39,7 @@ module Decidim::DecidimAwesome
 
       context "when everything is ok" do
         it "redirects as success success" do
-          get :create, params: params
+          post :create, params: params
           expect(response).to have_http_status(:success)
         end
       end
@@ -43,7 +48,7 @@ module Decidim::DecidimAwesome
         let(:image) { nil }
 
         it "returns failure" do
-          get :create, params: params
+          post :create, params: params
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end
@@ -56,7 +61,7 @@ module Decidim::DecidimAwesome
         end
 
         it "returns no permissions" do
-          get :create, params: params
+          post :create, params: params
           expect(response).to have_http_status(:redirect)
         end
       end

@@ -10,8 +10,17 @@ module Decidim
         process resize_to_fit: [nil, 237]
       end
 
+      # TODO: remove when diching 0.22 support
       def extension_white_list
         %w(jpg jpeg png)
+      end
+
+      def extension_whitelist
+        %w(jpg jpeg png)
+      end
+
+      def content_type_whitelist
+        %w(image/jpeg image/png)
       end
 
       def max_image_height_or_width

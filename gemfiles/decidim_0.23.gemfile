@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-ruby "2.6.6"
+ruby "2.7.2"
 
 gem "decidim", "0.23"
 gem "decidim-decidim_awesome", path: "../"

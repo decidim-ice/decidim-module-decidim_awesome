@@ -42,7 +42,7 @@ module Decidim
         {
           image: params[:image],
           author_id: current_user.id,
-          path: request.original_fullpath
+          path: request.referer
         }
       end
     end

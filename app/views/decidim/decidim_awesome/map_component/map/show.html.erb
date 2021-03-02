@@ -2,57 +2,79 @@
 
 <%= awesome_map_for map_components do %>
 
-  <template id="marker-proposal-popup">
+  <script id="legacy-marker-proposal-popup" type="text/x-jsrender">
     <div class="map-info__content">
-      <h3>${title}</h3>
+      <h3>{{>title}}</h3>
       <div id="bodyContent">
-        <p>{{html body}}</p>
+        <p>{{:body}}</p>
         <div class="map__date-adress">
           <div class="address card__extra">
-            <div class="address__icon">{{html icon}}</div>
+            <div class="address__icon">{{:icon}}</div>
             <div class="address__details">
-              <span>${address}</span><br>
+              <span>{{>address}}</span><br>
             </div>
           </div>
         </div>
         <div class="map-info__button">
-          <a href="${link}" class="button button--sc">
+          <a href="{{>link}}" class="button button--sc">
             <%= t(".view_proposal") %>
           </a>
         </div>
       </div>
     </div>
-  </template>
+  </script>
 
-  <template id="marker-meeting-popup">
+  <script id="marker-proposal-popup" type="text/x-jsrender">
     <div class="map-info__content">
-      <h3>${title.translation}</h3>
+      <h3>{{>title.translation}}</h3>
       <div id="bodyContent">
-        <p>{{html description.translation}}</p>
+        <p>{{:body.translation}}</p>
         <div class="map__date-adress">
-          <div class="card__datetime">
-            <div class="card__datetime__date">
-              ${startTimeDay} <span class="card__datetime__month">${startTimeMonth} ${startTimeYear}</span>
-            </div>
-            <div class="card__datetime__time">${starTime}</div>
-          </div>
           <div class="address card__extra">
-            <div class="address__icon">{{html icon}}</div>
+            <div class="address__icon">{{:icon}}</div>
             <div class="address__details">
-              <strong>{{html location.translation}}</strong><br>
-              <span>${address}</span><br>
-              <span>{{html locationHints.translation}}</span>
+              <span>{{>address}}</span><br>
             </div>
           </div>
         </div>
         <div class="map-info__button">
-          <a href="${link}" class="button button--sc">
+          <a href="{{>link}}" class="button button--sc">
+            <%= t(".view_proposal") %>
+          </a>
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <script id="marker-meeting-popup" type="text/x-jsrender">
+    <div class="map-info__content">
+      <h3>{{>title.translation}}</h3>
+      <div id="bodyContent">
+        <p>{{:description.translation}}</p>
+        <div class="map__date-adress">
+          <div class="card__datetime">
+            <div class="card__datetime__date">
+              {{>startTimeDay}} <span class="card__datetime__month">{{>startTimeMonth}} {{>startTimeYear}}</span>
+            </div>
+            <div class="card__datetime__time">{{>starTime}}</div>
+          </div>
+          <div class="address card__extra">
+            <div class="address__icon">{{:icon}}</div>
+            <div class="address__details">
+              <strong>{{:location.translation}}</strong><br>
+              <span>{{>address}}</span><br>
+              <span>{{:locationHints.translation}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="map-info__button">
+          <a href="{{>link}}" class="button button--sc">
             <%= t("decidim.meetings.meetings_map.view_meeting") %>
           </a>
         </div>
       </div>
     </div>
-  </template>
+  </script>
 
   <%= stylesheet_link_tag "decidim/decidim_awesome/awesome_map/map" %>
   <style type="text/css">

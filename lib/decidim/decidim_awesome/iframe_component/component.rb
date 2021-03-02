@@ -14,7 +14,7 @@ Decidim.register_component(:awesome_iframe) do |component|
   component.settings(:global) do |settings|
     # Add your global settings
     # Available types: :integer, :boolean
-    # settings.attribute :announcement, type: :text, translated: true, editor: true
+    settings.attribute :announcement, type: :text, translated: true, editor: true
     settings.attribute :iframe, type: :text
     settings.attribute :viewport_width, type: :boolean, default: false
     settings.attribute :no_margins, type: :boolean, default: false
@@ -22,7 +22,7 @@ Decidim.register_component(:awesome_iframe) do |component|
 
   component.settings(:step) do |settings|
     # Add your settings per step
-    # settings.attribute :announcement, type: :text, translated: true, editor: true
+    settings.attribute :announcement, type: :text, translated: true, editor: true
     settings.attribute :iframe, type: :text
   end
 
@@ -31,7 +31,7 @@ Decidim.register_component(:awesome_iframe) do |component|
   # end
 
   component.seeds do |participatory_space|
-    # Create a Iframe and a few geolocated proposals
+    # Create a Iframe component in all participatory spaces
     admin_user = Decidim::User.find_by(
       organization: participatory_space.organization,
       email: "admin@example.org"

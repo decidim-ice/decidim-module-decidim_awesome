@@ -18,7 +18,11 @@ module Decidim
         end
 
         def config_enabled?(var)
-          return DecidimAwesome.config.send(var) != :disabled unless var.is_a? Array
+          unless var.is_a?(Array)
+            return false unless DecidimAwesome.config.has_key?(var.to_sym)
+
+            return DecidimAwesome.config.send(var) != :disabled
+          end
 
           var.detect { |v| DecidimAwesome.config.send(v) != :disabled }
         end
