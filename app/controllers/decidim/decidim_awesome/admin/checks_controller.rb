@@ -37,7 +37,7 @@ module Decidim
         end
 
         def decidim_version_valid?
-          Gem::Dependency.new("", DecidimAwesome::COMPAT_DECIDIM_VERSION).match?("", decidim_version)
+          Gem::Dependency.new("", DecidimAwesome::COMPAT_DECIDIM_VERSION).match?("", decidim_version, true)
         end
 
         def head_addons(part)
