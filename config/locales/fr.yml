@@ -2,9 +2,9 @@ fr:
   activemodel:
     attributes:
       config:
-        allow_images_in_full_editor: Allow images in the full HTML editor
-        allow_images_in_markdown_editor: Allow images in the markdown editor
-        allow_images_in_proposals: Allow images in the proposals editor
+        allow_images_in_full_editor: Autoriser les images dans l'éditeur HTML complet
+        allow_images_in_markdown_editor: Autoriser les images dans l'éditeur de markdown
+        allow_images_in_proposals: Autoriser les images dans l'éditeur de propositions
         allow_images_in_small_editor: Allow images in the minimal HTML editor
         auto_save_forms: Auto save forms in local storage
         intergram_auto_no_response: A message that is sent one minute after the user sends its first message and no response was received
