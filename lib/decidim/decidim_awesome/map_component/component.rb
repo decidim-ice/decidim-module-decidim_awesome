@@ -16,6 +16,7 @@ Decidim.register_component(:awesome_map) do |component|
     # Available types: :integer, :boolean
     settings.attribute :announcement, type: :text, translated: true, editor: true
     settings.attribute :map_height, type: :integer, default: 700
+    settings.attribute :truncate, type: :integer, default: 255
     settings.attribute :collapse, type: :boolean, default: false
   end
 

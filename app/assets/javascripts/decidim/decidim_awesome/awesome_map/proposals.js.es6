@@ -1,8 +1,9 @@
 // = require decidim/decidim_awesome/awesome_map/api_fetcher
 // = require decidim/decidim_awesome/awesome_map/categories
+// = require decidim/decidim_awesome/awesome_map/utilities
 
 ((exports) => {
-  const { getCategory } = exports.AwesomeMap;
+  const { getCategory, truncate } = exports.AwesomeMap;
   const query = `query ($id: ID!, $after: String!) {
     component(id: $id) {
         id
@@ -59,7 +60,7 @@
     });
 
     element.title.translation = ApiFetcher.findTranslation(element.title.translations);
-    element.body.translation = $.truncate(ApiFetcher.findTranslation(element.body.translations), { length: 255 }).replace(/\n/g, "<br>");
+    element.body.translation = truncate(ApiFetcher.findTranslation(element.body.translations)).replace(/\n/g, "<br>");
 
     callback(element, marker);
   };
