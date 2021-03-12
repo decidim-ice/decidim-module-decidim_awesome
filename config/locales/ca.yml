@@ -54,7 +54,7 @@ ca:
             announcement: Anunci
             collapse: Inicia amb el menú col·lapsat
             map_height: Alçada del mapa (px)
-            truncate: Maximum characters for popup descriptions
+            truncate: Nombre màxim de caràcters per les descripcions emergents
           step:
             announcement: Anunci
             show_accepted: Mostra les propostes acceptades
