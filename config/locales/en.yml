@@ -62,6 +62,7 @@ en:
             announcement: Announcement
             collapse: Start with collapsed menu
             map_height: Map height (px)
+            truncate: Maximum characters for popup descriptions
           step:
             announcement: Announcement
             show_accepted: Show accepted proposals

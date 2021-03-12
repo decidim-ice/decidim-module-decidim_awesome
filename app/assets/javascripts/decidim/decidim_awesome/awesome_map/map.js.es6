@@ -89,7 +89,7 @@
       if(component.type == "proposals") {
         // add control layer for proposals
         layers.proposals = {
-          label: `<span id="awesome_map-component-${component.id}" title="0">${component.name || window.DecidimAwesome.texts.proposals}</span>`,
+          label: `<span class="awesome_map-component" id="awesome_map-component-${component.id}" title="0">${component.name || window.DecidimAwesome.texts.proposals}</span>`,
           group: L.featureGroup.subGroup(cluster)
         };
         control.addOverlay(layers.proposals.group, layers.proposals.label);
@@ -98,7 +98,7 @@
         // add control layer for amendments if any
         if(component.amendments) {
           layers.amendments = {
-            label: `<span id="awesome_map-component-${component.d}" title="0">${window.DecidimAwesome.texts.amendments}</span>`,
+            label: `<span class="awesome_map-component" id="awesome_map-component-${component.d}" title="0">${window.DecidimAwesome.texts.amendments}</span>`,
             group: L.featureGroup.subGroup(cluster)
           }
           control.addOverlay(layers.amendments.group, layers.amendments.label);
@@ -126,7 +126,7 @@
       if(component.type == "meetings") {
         // add control layer for meetings
         layers.meetings = {
-          label: `<span id="awesome_map-component-${component.id}" title="0">${component.name || window.DecidimAwesome.texts.meetings}</span>`,
+          label: `<span class="awesome_map-component" id="awesome_map-component-${component.id}" title="0">${component.name || window.DecidimAwesome.texts.meetings}</span>`,
           group: L.featureGroup.subGroup(cluster)
         };
         control.addOverlay(layers.meetings.group, layers.meetings.label);

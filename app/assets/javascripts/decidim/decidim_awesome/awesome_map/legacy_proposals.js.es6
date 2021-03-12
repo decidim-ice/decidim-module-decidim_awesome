@@ -1,8 +1,9 @@
 // = require decidim/decidim_awesome/awesome_map/api_fetcher
 // = require decidim/decidim_awesome/awesome_map/categories
+// = require decidim/decidim_awesome/awesome_map/utilities
 
 ((exports) => {
-  const { getCategory } = exports.AwesomeMap;
+  const { getCategory, truncate } = exports.AwesomeMap;
   const query = `query ($id: ID!, $after: String!) {
     component(id: $id) {
         id
@@ -48,7 +49,7 @@
       })
     });
 
-    element.body = element.body.replace(/\n/g, "<br>");
+    element.body = truncate(element.body.replace(/\n/g, "<br>"));
     callback(element, marker);
   };
 

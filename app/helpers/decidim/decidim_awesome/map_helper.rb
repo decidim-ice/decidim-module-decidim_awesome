@@ -24,6 +24,7 @@ module Decidim
                                  }
                                end.to_json,
           "data-collapsed" => current_component.settings.collapse,
+          "data-truncate" => current_component.settings.truncate,
           "data-show-not-answered" => current_component.current_settings.show_not_answered,
           "data-show-accepted" => current_component.current_settings.show_accepted,
           "data-show-withdrawn" => current_component.current_settings.show_withdrawn,
