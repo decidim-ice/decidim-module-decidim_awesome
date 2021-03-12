@@ -1,3 +1,5 @@
+// From https://github.com/pathable/truncate/
+
 (function($) {
 
   // Matches trailing non-space characters.
