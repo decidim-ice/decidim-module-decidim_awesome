@@ -54,6 +54,7 @@ fr:
             announcement: Annonce
             collapse: Démarrer avec le menu réduit
             map_height: Hauteur max (px)
+            truncate: Maximum characters for popup descriptions
           step:
             announcement: Annonce
             show_accepted: Propositions acceptées
