@@ -31,7 +31,7 @@ Decidim.register_component(:awesome_map) do |component|
     settings.attribute :show_evaluating, type: :boolean, default: true
     settings.attribute :show_accepted, type: :boolean, default: true
     # Not possible yet (needs graphql update):
-    # settings.attribute :show_rejected, type: :boolean, default: false
+    settings.attribute :show_rejected, type: :boolean, default: false
     settings.attribute :show_withdrawn, type: :boolean, default: false
   end
 
