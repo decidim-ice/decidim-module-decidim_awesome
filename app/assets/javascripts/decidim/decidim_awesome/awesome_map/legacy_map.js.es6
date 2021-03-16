@@ -1,6 +1,7 @@
 // = require jsrender.min
 // = require decidim/map
 // = require leaflet.featuregroup.subgroup
+// = require decidim/decidim_awesome/awesome_map/utilities
 // = require decidim/decidim_awesome/awesome_map/categories
 // = require decidim/decidim_awesome/awesome_map/legacy_proposals
 // = require decidim/decidim_awesome/awesome_map/meetings
@@ -27,9 +28,9 @@
   const layers = {};
 
   const control = L.control.layers(null, null, {
-    position: 'topleft', 
+    position: 'topleft',
     sortLayers: false,
-    collapsed: collapsedMenu, 
+    collapsed: collapsedMenu,
     // hideSingleBase: true
   });
   const allMarkers = [];
@@ -39,14 +40,14 @@
         node = document.createElement("div");
 
     $($.templates(`#${tmpl}`).render(element)).appendTo(node);
-    
+
     marker.bindPopup(node, {
       maxwidth: 640,
       minWidth: 500,
       keepInView: true,
       className: "map-info"
     }).openPopup();
-    
+
     allMarkers.push({
       marker: marker,
       component: component,
@@ -86,7 +87,7 @@
     cluster.addTo(map);
 
     // Load markers
-    components.forEach((component) => {  
+    components.forEach((component) => {
       if(component.type == "proposals") {
         // add control layer for proposals
         layers.proposals = {
@@ -108,7 +109,7 @@
 
         fetchProposals(component, '', (element, marker) => {
             if(show[element.state || 'notAnswered']) {
-              drawMarker(element, marker, component).addTo(layers.proposals.group)   
+              drawMarker(element, marker, component).addTo(layers.proposals.group)
             }
           }, () => {
             // finall call
@@ -122,7 +123,7 @@
             });
           });
       }
-      
+
       if(component.type == "meetings") {
         // add control layer for meetings
         layers.meetings = {
@@ -131,7 +132,7 @@
         };
         control.addOverlay(layers.meetings.group, layers.meetings.label);
         layers.meetings.group.addTo(map);
-      
+
         fetchMeetings(component, '', (element, marker) => {
             drawMarker(element, marker, component).addTo(layers.meetings.group);
           }, () => {
@@ -167,12 +168,12 @@
 
       // watch events for subcategories syncronitzation
       const getCatFromClass = (name) => {
-        let id = name.match(/awesome_map-category_(\d+)/) 
+        let id = name.match(/awesome_map-category_(\d+)/)
         if(!id) return;
         const cat = getCategory(id[1]);
         if(!cat || !cat.name) return;
 
-        return cat;        
+        return cat;
       };
 
       const indeterminateInput = (id) => {

@@ -1,22 +1,14 @@
 // = require jsrender.min
 // = require leaflet.featuregroup.subgroup
+// = require decidim/decidim_awesome/awesome_map/utilities
 // = require decidim/decidim_awesome/awesome_map/categories
 // = require decidim/decidim_awesome/awesome_map/proposals
 // = require decidim/decidim_awesome/awesome_map/meetings
 // = require_self
 
 ((exports) => {
-  const { fetchProposals, fetchMeetings, getCategory } = exports.AwesomeMap;
+  const { fetchProposals, fetchMeetings, getCategory, options, show, collapsedMenu, components } = exports.AwesomeMap;
 
-  const collapsedMenu = $("#awesome-map").data("collapsed");
-  const show = {
-    withdrawn: $("#awesome-map").data("show-withdrawn"),
-    accepted: $("#awesome-map").data("show-accepted"),
-    evaluating: $("#awesome-map").data("show-evaluating"),
-    notAnswered: $("#awesome-map").data("show-not-answered"),
-    rejected: $("#awesome-map").data("show-rejected")
-  };
-  const components = $("#awesome-map").data("components");
   const popupMeetingTemplateId = "marker-meeting-popup";
   const popupProposalTemplateId = "marker-proposal-popup";
 
@@ -26,9 +18,9 @@
   const layers = {};
 
   const control = L.control.layers(null, null, {
-    position: 'topleft', 
+    position: 'topleft',
     sortLayers: false,
-    collapsed: collapsedMenu, 
+    collapsed: collapsedMenu,
     // hideSingleBase: true
   });
   const allMarkers = [];
@@ -38,14 +30,14 @@
         node = document.createElement("div");
 
     $($.templates(`#${tmpl}`).render(element)).appendTo(node);
-    
+
     marker.bindPopup(node, {
       maxwidth: 640,
       minWidth: 500,
       keepInView: true,
       className: "map-info"
     }).openPopup();
-    
+
     allMarkers.push({
       marker: marker,
       component: component,
@@ -72,7 +64,7 @@
       $parent.show();
       $parent.attr("title", parseInt($parent.attr("title") || 0) + 1);
       // update component stats
-      const $component = $(`#awesome_map-component-${component.id}`);
+      const $component = $(`#awesome_map-component_${component.id}`);
       $component.attr("title", parseInt($component.attr("title") || 0) + 1);
     }
 
@@ -85,20 +77,20 @@
     cluster.addTo(map);
 
     // Load markers
-    components.forEach((component) => {  
+    components.forEach((component) => {
       if(component.type == "proposals") {
         // add control layer for proposals
         layers.proposals = {
-          label: `<span class="awesome_map-component" id="awesome_map-component-${component.id}" title="0">${component.name || window.DecidimAwesome.texts.proposals}</span>`,
+          label: `<span class="awesome_map-component" id="awesome_map-component_${component.id}" title="0">${component.name || window.DecidimAwesome.texts.proposals}</span>`,
           group: L.featureGroup.subGroup(cluster)
         };
         control.addOverlay(layers.proposals.group, layers.proposals.label);
         layers.proposals.group.addTo(map);
 
         // add control layer for amendments if any
-        if(component.amendments) {
+        if(options.menu.amendments && component.amendments) {
           layers.amendments = {
-            label: `<span class="awesome_map-component" id="awesome_map-component-${component.d}" title="0">${window.DecidimAwesome.texts.amendments}</span>`,
+            label: `<span class="awesome_map-component" id="awesome_map-amendments_${component.id}" title="0">${window.DecidimAwesome.texts.amendments}</span>`,
             group: L.featureGroup.subGroup(cluster)
           }
           control.addOverlay(layers.amendments.group, layers.amendments.label);
@@ -106,36 +98,45 @@
         }
 
         fetchProposals(component, '', (element, marker) => {
-            console.log(element.state, show[element.state || 'notAnswered'], show, element);
+            // console.log(element.state, show[element.state || 'notAnswered'], show, element);
             if(show[element.state || 'notAnswered']) {
-              drawMarker(element, marker, component).addTo(layers.proposals.group)   
+              drawMarker(element, marker, component).addTo(layers.proposals.group)
             }
           }, () => {
             // finall call
-            map.fitBounds(cluster.getBounds(), { padding: [50, 50] });
+            if(options.center) {
+              map.setView(options.center, options.zoom);
+            } else {
+              map.fitBounds(cluster.getBounds(), { padding: [50, 50] });
+            }
+
             allMarkers.forEach((item) => {
               // add marker to amendments layers if it's an amendment
               if(amendments.find((a) => a == item.element.id)) {
                 item.marker.removeFrom(layers.proposals.group);
-                item.marker.addTo(layers.amendments.group);
+                if(options.menu.amendments) {
+                  item.marker.addTo(layers.amendments.group);
+                }
               }
             });
           });
       }
-      
-      if(component.type == "meetings") {
+
+      if(options.menu.meetings && component.type == "meetings") {
         // add control layer for meetings
         layers.meetings = {
-          label: `<span class="awesome_map-component" id="awesome_map-component-${component.id}" title="0">${component.name || window.DecidimAwesome.texts.meetings}</span>`,
+          label: `<span class="awesome_map-component" id="awesome_map-component_${component.id}" title="0">${component.name || window.DecidimAwesome.texts.meetings}</span>`,
           group: L.featureGroup.subGroup(cluster)
         };
         control.addOverlay(layers.meetings.group, layers.meetings.label);
         layers.meetings.group.addTo(map);
-      
+
         fetchMeetings(component, '', (element, marker) => {
             drawMarker(element, marker, component).addTo(layers.meetings.group);
           }, () => {
-            map.fitBounds(cluster.getBounds(), { padding: [50, 50] });
+            if(!options.center) {
+              map.fitBounds(cluster.getBounds(), { padding: [50, 50] });
+            }
           });
       }
     });
@@ -167,12 +168,12 @@
 
       // watch events for subcategories syncronitzation
       const getCatFromClass = (name) => {
-        let id = name.match(/awesome_map-category_(\d+)/) 
+        let id = name.match(/awesome_map-category_(\d+)/)
         if(!id) return;
         const cat = getCategory(id[1]);
         if(!cat || !cat.name) return;
 
-        return cat;        
+        return cat;
       };
 
       const indeterminateInput = (id) => {
@@ -209,6 +210,9 @@
   };
 
   $("#map").on("ready.decidim", (ev, map) => {
+    if(options.center) {
+      map.setView(options.center, options.zoom);
+    }
     loadElements(map);
   });
 
