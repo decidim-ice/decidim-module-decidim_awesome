@@ -72,6 +72,14 @@ en:
             show_withdrawn: Show withdrawn proposals
       awesome_overview:
         name: Awesome Overview
+        components:
+          meetings:
+            items_count: "%{count} Meetings"
+          proposals:
+            items_count: "%{count} Proposals"
+            vote_limit: Votes remaining
+          surveys:
+            items_count: "%{count} Surveys"
         settings:
           global:
             announcement: Announcement
