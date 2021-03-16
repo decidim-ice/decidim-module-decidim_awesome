@@ -79,7 +79,7 @@ en:
             items_count: "%{count} Proposals"
             vote_limit: Votes remaining
           surveys:
-            items_count: "%{count} Surveys"
+            items_count: "%{count} Questions"
         settings:
           global:
             announcement: Announcement

@@ -9,18 +9,17 @@ module Decidim
         def title
           translated_attribute model.name
         end
-        
-        def description
-        end
+
+        def description; end
 
         def type
           model.manifest_name
         end
 
         private
-        
+
         def has_children?
-          true
+          items.count > 1
         end
 
         def resource_icon
@@ -40,7 +39,7 @@ module Decidim
         def items; end
 
         def items_count_title
-          t([i18n_scope,type, "items_count"].join("."), count: items.count)
+          t([i18n_scope, type, "items_count"].join("."), count: items.count)
         end
 
         def items_count_status

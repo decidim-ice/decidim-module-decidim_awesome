@@ -6,7 +6,7 @@ module Decidim
       class OverviewController < DecidimAwesome::OverviewComponent::ApplicationController
         helper_method :components
 
-        ALLOWED_COMPONENTS = %w(meetings proposals survey)
+        ALLOWED_COMPONENTS = %w(meetings proposals surveys).freeze
 
         def show; end
 

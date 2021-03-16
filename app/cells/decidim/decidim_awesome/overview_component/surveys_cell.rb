@@ -5,9 +5,13 @@ module Decidim
     module OverviewComponent
       # This cell renders the Medium (:m) overview card
       # for an given instance of a Component
-      class SurveyCell < OverviewMCell
+      class SurveysCell < OverviewMCell
         def items
-          Decidim::Surveys::Survey.where(component: model)
+          Decidim::Surveys::Survey.find_by(component: model).questionnaire.questions
+        end
+
+        def has_children?
+          false
         end
       end
     end

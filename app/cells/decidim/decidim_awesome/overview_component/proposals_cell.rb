@@ -11,9 +11,7 @@ module Decidim
         end
 
         def description
-          if current_user
-            votes_remaining
-          end
+          votes_remaining if current_user
         end
 
         def voted_n_times
