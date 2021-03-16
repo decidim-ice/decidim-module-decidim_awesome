@@ -70,6 +70,13 @@ en:
             show_not_answered: Show not answered proposals
             show_rejected: Show rejected proposals
             show_withdrawn: Show withdrawn proposals
+      awesome_overview:
+        name: Awesome Overview
+        settings:
+          global:
+            announcement: Announcement
+          step:
+            announcement: Announcement
     decidim_awesome:
       admin:
         checks:
