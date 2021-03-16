@@ -54,6 +54,7 @@ cs:
             announcement: Oznámení
             collapse: Začít se sbaleným menu
             map_height: Výška mapy (px)
+            truncate: Maximum znaků pro popisy vyskakovacích oken
           step:
             announcement: Oznámení
             show_accepted: Zobrazit přijaté návrhy

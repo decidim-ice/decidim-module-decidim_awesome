@@ -54,6 +54,7 @@ es:
             announcement: Anuncio
             collapse: Iniciar con el menú contraído
             map_height: Altura del mapa (px)
+            truncate: Número máximo de caracteres para las descripciones emergentes
           step:
             announcement: Anuncio
             show_accepted: Muestra las propuestas aceptadas
