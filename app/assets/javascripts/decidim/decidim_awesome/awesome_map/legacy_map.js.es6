@@ -8,7 +8,7 @@
 // = require_self
 
 ((exports) => {
-  const { fetchProposals, fetchMeetings, getCategory } = exports.AwesomeMap;
+  const { fetchProposals, fetchMeetings, getCategory, amendments } = exports.AwesomeMap;
 
   const collapsedMenu = $("#map").data("collapsed");
   const show = {
@@ -23,8 +23,6 @@
   const popupProposalTemplateId = "legacy-marker-proposal-popup";
 
   const cluster = L.markerClusterGroup();
-  const amendments = [];
-
   const layers = {};
 
   const control = L.control.layers(null, null, {
@@ -54,12 +52,6 @@
       element: element
     });
 
-    // Check if it has amendments, add it to a list
-    if(element.amendments && element.amendments.length) {
-      element.amendments.forEach((amendment) => {
-        amendments.push(amendment.emendation.id);
-      });
-    }
     // Add to category layer
     let cat = getCategory(element.category);
     if(layers[cat.id]) {

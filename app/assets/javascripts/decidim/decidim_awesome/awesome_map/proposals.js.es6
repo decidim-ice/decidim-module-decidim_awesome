@@ -51,6 +51,7 @@
       }
     }`;
 
+  let amendments = [];
   const ProposalIcon = L.DivIcon.SVGIcon.DecidimIcon;
 
   const createMarker = (element, callback) => {
@@ -83,6 +84,13 @@
             element.node.link = component.url + '/proposals/' + element.node.id;
             createMarker(element.node, callback);
           }
+
+          // Check if it has amendments, add it to a list
+          if(element.node.amendments && element.node.amendments.length) {
+            element.node.amendments.forEach((amendment) => {
+              amendments.push(amendment.emendation.id);
+            });
+          }
         });
         if (result.component.proposals.pageInfo.hasNextPage) {
           fetchProposals(component, result.component.proposals.pageInfo.endCursor, callback, finalCall);
@@ -95,4 +103,5 @@
 
   exports.AwesomeMap = exports.AwesomeMap || {};
   exports.AwesomeMap.fetchProposals = fetchProposals;
+  exports.AwesomeMap.amendments = amendments;
 })(window);
