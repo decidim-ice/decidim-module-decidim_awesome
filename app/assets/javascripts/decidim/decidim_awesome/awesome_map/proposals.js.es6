@@ -1,9 +1,10 @@
 // = require decidim/decidim_awesome/awesome_map/api_fetcher
 // = require decidim/decidim_awesome/awesome_map/categories
+// = require decidim/decidim_awesome/awesome_map/hashtags
 // = require decidim/decidim_awesome/awesome_map/utilities
 
 ((exports) => {
-  const { getCategory, truncate } = exports.AwesomeMap;
+  const { getCategory, truncate, collectHashtags, removeHashtags, appendHtmlHashtags } = exports.AwesomeMap;
   const query = `query ($id: ID!, $after: String!) {
     component(id: $id) {
         id
@@ -15,7 +16,7 @@
               endCursor
             }
             edges {
-              node {  
+              node {
                 id
                 state
                 title {
@@ -60,7 +61,9 @@
     });
 
     element.title.translation = ApiFetcher.findTranslation(element.title.translations);
-    element.body.translation = truncate(ApiFetcher.findTranslation(element.body.translations)).replace(/\n/g, "<br>");
+    const body = ApiFetcher.findTranslation(element.body.translations);
+    element.hashtags = collectHashtags(body);
+    element.body.translation = appendHtmlHashtags(truncate(removeHashtags(body)).replace(/\n/g, "<br>"), element.hashtags);
 
     callback(element, marker);
   };
@@ -75,7 +78,7 @@
       if(result) {
         result.component.proposals.edges.forEach((element) => {
           if(!element.node) return;
-          
+
           if(element.node.coordinates) {
             element.node.link = component.url + '/proposals/' + element.node.id;
             createMarker(element.node, callback);
