@@ -338,7 +338,7 @@ GEM
       decidim-core (= 0.23.4)
     declarative-builder (0.1.0)
       declarative-option (< 0.2.0)
-    declarative-option (0.1.1)
+    declarative-option (0.1.0)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     devise (4.7.3)
