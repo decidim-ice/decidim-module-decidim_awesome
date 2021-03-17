@@ -19,7 +19,8 @@
     zoom: $("#awesome-map").data("map-zoom"),
     menu: {
       amendments: $("#awesome-map").data("menu-amendments"),
-      meetings: $("#awesome-map").data("menu-meetings")
+      meetings: $("#awesome-map").data("menu-meetings"),
+      hashtags: $("#awesome-map").data("menu-hashtags")
     }
   }
 

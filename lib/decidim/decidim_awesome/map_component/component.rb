@@ -22,6 +22,7 @@ Decidim.register_component(:awesome_map) do |component|
     settings.attribute :collapse, type: :boolean, default: false
     settings.attribute :menu_amendments, type: :boolean, default: true
     settings.attribute :menu_meetings, type: :boolean, default: true
+    settings.attribute :menu_hashtags, type: :boolean, default: true
   end
 
   component.settings(:step) do |settings|

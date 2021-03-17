@@ -50,7 +50,9 @@
             // console.log(element.state, show[element.state || 'notAnswered'], show, element);
             if(show[element.state || 'notAnswered']) {
               drawMarker(element, marker, component).addTo(layers.proposals.group);
-              addHashtagsControls(map, element.hashtags, marker);
+              if(options.menu.hashtags) {
+                addHashtagsControls(map, element.hashtags, marker);
+              }
             }
           }, () => { // final call
             // Setup center/zoom options if specified, otherwise fitbounds

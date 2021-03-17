@@ -29,6 +29,7 @@ module Decidim
           "data-map-zoom" => current_component.settings.map_zoom,
           "data-menu-amendments" => current_component.settings.menu_amendments,
           "data-menu-meetings" => current_component.settings.menu_meetings,
+          "data-menu-hashtags" => current_component.settings.menu_hashtags,
           "data-show-not-answered" => current_component.current_settings.show_not_answered,
           "data-show-accepted" => current_component.current_settings.show_accepted,
           "data-show-withdrawn" => current_component.current_settings.show_withdrawn,

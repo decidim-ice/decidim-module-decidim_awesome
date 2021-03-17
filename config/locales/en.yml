@@ -68,6 +68,7 @@ en:
             map_zoom: Zoom (any number betwen 0 and 18)
             map_zoom_help: Only applies if a map center is defined
             menu_amendments: Show amendments
+            menu_hashtags: Show Hasthag search menu
             menu_meetings: Show meetings
             truncate: Maximum characters for popup descriptions
           step:
@@ -252,7 +253,7 @@ en:
             session
           autosaved_success: Data saved in local storage
           categories: Categories
-          hashtags: Hashtags
           drag_and_drop_image: Add images by dragging & dropping or pasting them.
+          hashtags: Hashtags
           meetings: Meetings
           proposals: Proposals
