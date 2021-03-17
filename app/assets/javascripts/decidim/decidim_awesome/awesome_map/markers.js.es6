@@ -1,3 +1,4 @@
+// = require jsrender.min
 // = require decidim/decidim_awesome/awesome_map/layers
 // = require decidim/decidim_awesome/awesome_map/categories
 
@@ -30,20 +31,43 @@
     // Add to category layer
     let cat = getCategory(element.category);
     if(layers[cat.id]) {
+      $('#awesome_map-categories-control').show();
       marker.addTo(layers[cat.id].group);
       // show category if hidden
-      const $label = $(`.awesome_map-category_${cat.id}`).closest("label");
-      const $parent = $(`.awesome_map-category_${cat.parent}`).closest("label");
+      const $label = $(`label.awesome_map-category-${cat.id}`);
+      const $parent = $(`label.awesome_map-category-${cat.parent}`);
       $label.show();
       // update number of items
       $label.attr("title", parseInt($label.attr("title") || 0) + 1);
       // show parent if apply
       $parent.show();
       $parent.attr("title", parseInt($parent.attr("title") || 0) + 1);
-      // update component stats
-      const $component = $(`#awesome_map-component_${component.id}`);
-      $component.attr("title", parseInt($component.attr("title") || 0) + 1);
     }
+
+    // // show hashtag layer
+    // if(element.hashtags) {
+    //   $('#awesome_map-hashtags-control').show();
+    //   element.hashtags.forEach(hashtag => {
+    //     // Add layer if not exists, otherwise just add the marker to the group
+    //     if(!layers[hashtag.gid]) {
+    //       layers[hashtag.gid] = {
+    //         label: hashtag.name,
+    //         group: L.featureGroup.subGroup(cluster)
+    //       };
+    //       layers[hashtag.gid].group.addTo(map);
+    //       $('#awesome_map-hashtags-control').append(`<label data-layer="${hashtag.gid}" class="awesome_map-hashtag-${hashtag.id}"><input type="checkbox" class="awesome_map-hashtags-selector" checked><span>${hashtag.name}</span></label>`);
+    //     }
+    //     marker.addTo(layers[hashtag.id].group);
+
+    //     const $label = $(`label.awesome_map-hashtag-${hashtag.gid}`);
+    //     // update number of items
+    //     $label.attr("title", parseInt($label.attr("title") || 0) + 1);
+    //   });
+    //}
+
+    // update component stats
+    const $component = $(`#awesome_map-component_${component.id}`);
+    $component.attr("title", parseInt($component.attr("title") || 0) + 1);
 
     return marker;
   };

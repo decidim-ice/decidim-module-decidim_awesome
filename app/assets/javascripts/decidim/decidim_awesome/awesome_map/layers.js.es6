@@ -1,9 +1,10 @@
+// = require leaflet.featuregroup.subgroup
 // = require decidim/decidim_awesome/awesome_map/utilities
 // = require decidim/decidim_awesome/awesome_map/categories
 // = require decidim/decidim_awesome/awesome_map/hashtags
 
 ((exports) => {
-  const { collapsedMenu, options, getCategory, hashtags, categories } = exports.AwesomeMap;
+  const { collapsedMenu, options, categories } = exports.AwesomeMap;
   const layers = {};
   const cluster = L.markerClusterGroup();
 
@@ -32,7 +33,6 @@
       control.addOverlay(layers.amendments.group, layers.amendments.label);
       layers.amendments.group.addTo(map);
     }
-
   };
 
   const addMeetingsControls = (map, component) => {
@@ -45,72 +45,51 @@
     layers.meetings.group.addTo(map);
   };
 
-  const addCategoriesControls = (map) => {
-    let lastLayer = layers[Object.keys(layers)[Object.keys(layers).length - 1]];
-    // Add Categories "title"
-    if(lastLayer) {
-      lastLayer.label = `${lastLayer.label}<hr><b>${window.DecidimAwesome.texts.categories}</b>`;
-      control.removeLayer(lastLayer.group);
-      control.addOverlay(lastLayer.group, lastLayer.label);
-    }
+  const addSearchControls = () => {
+    $(control.getContainer()).contents("form").after(`<div id="awesome_map-categories-control" class="active"><b class="awesome_map-title-control">${window.DecidimAwesome.texts.categories}</b><div class="categories-container"></div></div>
+    <div id="awesome_map-hashtags-control"><b class="awesome_map-title-control">${window.DecidimAwesome.texts.hashtags}</b><div class="hashtags-container"></div></div>`);
+  };
 
-    categories.forEach((category) => {
-      // add control layer for this category
+  const addCategoriesControls = (map) => {
+    if(categories && categories.length) {
+      categories.forEach((category) => {
+        // add control layer for this category
+      const label = `<i class="awesome_map-category-${category.id}"></i> ${category.name}`;
       layers[category.id] = {
-        label: `<i class="awesome_map-category_${category.id}"></i> ${category.name}`,
+        label: label,
         group: L.featureGroup.subGroup(cluster)
       };
       layers[category.id].group.addTo(map);
-      control.addOverlay(layers[category.id].group, layers[category.id].label);
-      // hide layer by default, it will be activated if there's any marker in it
+      // In the next iteration to be sure layers are rendered
       setTimeout(() => {
-        $(`.awesome_map-category_${category.id}`).closest("label").hide();
+        $('#awesome_map-categories-control .categories-container').append(`<label data-layer="${category.id}" class="awesome_map-category-${category.id}${category.parent?" subcategory":""}"><input type="checkbox" class="awesome_map-categories-selector" checked><span>${label}</span></label>`);
       });
     });
-
-    // watch events for subcategories sync
-    const getCatFromClass = (name) => {
-      let id = name.match(/awesome_map-category_(\d+)/)
-      if(!id) return;
-      const cat = getCategory(id[1]);
-      if(!cat || !cat.name) return;
-
-      return cat;
-    };
-
-    const indeterminateInput = (id) => {
-      $('[class^="awesome_map-category_"]').parent().prev().prop("indeterminate", false);
-      if(id) {
-        let $input = $(`.awesome_map-category_${id}`).parent().prev();
-        if(!$input.prop("checked")) {
-          $input.prop("indeterminate", true);
-        }
-      }
-    };
-
-    map.on('overlayadd', (e) => {
-      const cat = getCatFromClass(e.name);
-      if(!cat) return;
-      // if it's a children, put the parent to indeterminate
-      indeterminateInput(cat.parent);
-    });
-
-    // on remove a parent category, remove all children
-    map.on('overlayremove', (e) => {
-      const cat = getCatFromClass(e.name);
-      if(!cat) return;
-      cat.children().forEach((c) => {
-        let $el = $(`.awesome_map-category_${c.id}`);
-        if($el.parent().prev().prop("checked")) {
-          $el.click();
-        }
-      });
-    });
+  }
   };
 
-  const addHashtagsControls = (map) => {
-    console.log("add hashtags control");
-    console.log(hashtags);
+  // Hashtags are collected directly from proposals (this is different than categories)
+  const addHashtagsControls = (map, hashtags, marker) => {
+     // show hashtag layer
+    if(hashtags && hashtags.length) {
+      $('#awesome_map-hashtags-control').show();
+      hashtags.forEach(hashtag => {
+        // Add layer if not exists, otherwise just add the marker to the group
+        if(!layers[hashtag.gid]) {
+          layers[hashtag.gid] = {
+            label: hashtag.name,
+            group: L.featureGroup.subGroup(cluster)
+          };
+          layers[hashtag.gid].group.addTo(map);
+          $('#awesome_map-hashtags-control .hashtags-container').append(`<label data-layer="${hashtag.gid}" class="awesome_map-hashtag-${hashtag.tag}"><input type="checkbox" class="awesome_map-hashtags-selector" checked><span>${hashtag.name}</span></label>`);
+        }
+        marker.addTo(layers[hashtag.gid].group);
+
+        const $label = $(`label.awesome_map-hashtag-${hashtag.tag}`);
+        // update number of items
+        $label.attr("title", parseInt($label.attr("title") || 0) + 1);
+      });
+    }
   };
 
   exports.AwesomeMap.layers = layers;
@@ -118,6 +97,7 @@
   exports.AwesomeMap.cluster = cluster;
   exports.AwesomeMap.addProposalsControls = addProposalsControls;
   exports.AwesomeMap.addMeetingsControls = addMeetingsControls;
+  exports.AwesomeMap.addSearchControls = addSearchControls;
   exports.AwesomeMap.addCategoriesControls = addCategoriesControls;
   exports.AwesomeMap.addHashtagsControls = addHashtagsControls;
 })(window);
