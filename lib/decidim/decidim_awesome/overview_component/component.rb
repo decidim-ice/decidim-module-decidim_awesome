@@ -4,7 +4,7 @@ require_dependency "decidim/components/namer"
 
 Decidim.register_component(:awesome_overview) do |component|
   component.engine = Decidim::DecidimAwesome::OverviewComponent::Engine
-  # component.admin_engine = Decidim::DecidimAwesome::AdminOverviewEngine
+  component.admin_engine = Decidim::DecidimAwesome::OverviewComponent::AdminEngine
   component.icon = "decidim/decidim_awesome/awesome_overview/icon.svg"
   component.permissions_class_name = "Decidim::DecidimAwesome::Permissions"
 
