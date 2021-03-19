@@ -13,7 +13,7 @@ module Decidim
         def items_count_title
           t("#{i18n_scope}.items_count", count: items.count)
         end
-        
+
         def items_tooltip
           t("#{i18n_scope}.items_tooltip")
         end

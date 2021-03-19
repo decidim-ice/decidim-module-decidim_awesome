@@ -28,7 +28,7 @@ module Decidim
           classes = [base_card_class]
           classes = classes.concat(["card--stack"]) if has_children?
           return classes.join(" ") unless has_state?
-    
+
           classes.concat(state_classes).join(" ")
         end
 

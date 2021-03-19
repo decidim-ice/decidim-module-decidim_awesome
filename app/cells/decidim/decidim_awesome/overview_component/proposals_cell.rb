@@ -19,7 +19,7 @@ module Decidim
         end
 
         private
-  
+
         def has_children?
           true
         end
@@ -43,7 +43,7 @@ module Decidim
         def statuses
           [:end_date] + super
         end
-  
+
         def end_date_status
           explanation = tag.strong(t("#{i18n_scope}.date"))
           "#{explanation}<br>#{l(date, format: :decidim_short)}"
@@ -51,11 +51,13 @@ module Decidim
 
         def show_progress?
           return unless current_user
+
           has_vote_limit?
         end
-        
+
         def needs_participation?
           return unless current_user
+
           has_vote_limit? ? remaining_votes.positive? : true
         end
 
@@ -66,7 +68,7 @@ module Decidim
         def remaining_votes
           model.settings.vote_limit - consumed_votes
         end
-        
+
         def consumed_votes
           Decidim::Proposals::ProposalVote.where(proposal: items, author: current_user).count
         end
@@ -74,7 +76,7 @@ module Decidim
         def progress_bar_progress
           consumed_votes
         end
-        
+
         def progress_bar_total
           model.settings.vote_limit || 0
         end
