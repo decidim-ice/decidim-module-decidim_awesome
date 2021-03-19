@@ -9,10 +9,10 @@ require "decidim/decidim_awesome/map_component/engine"
 require "decidim/decidim_awesome/map_component/component"
 require "decidim/decidim_awesome/iframe_component/engine"
 require "decidim/decidim_awesome/iframe_component/component"
-require "decidim/decidim_awesome/overview_component/admin"
-require "decidim/decidim_awesome/overview_component/admin_engine"
-require "decidim/decidim_awesome/overview_component/engine"
-require "decidim/decidim_awesome/overview_component/component"
+require "decidim/decidim_awesome/call_to_awesome/admin"
+require "decidim/decidim_awesome/call_to_awesome/admin_engine"
+require "decidim/decidim_awesome/call_to_awesome/engine"
+require "decidim/decidim_awesome/call_to_awesome/component"
 
 module Decidim
   module DecidimAwesome

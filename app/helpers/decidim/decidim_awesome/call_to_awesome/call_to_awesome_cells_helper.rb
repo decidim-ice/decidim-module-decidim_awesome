@@ -2,12 +2,12 @@
 
 module Decidim
   module DecidimAwesome
-    module OverviewComponent
-      # Custom helpers for overview cells.
+    module CallToAwesome
+      # Custom helpers for CallToAwesome cells.
       #
-      module OverviewCellsHelper
+      module CallToAwesomeCellsHelper
         def i18n_scope
-          "decidim.components.awesome_overview.components.#{type}"
+          "decidim.components.call_to_awesome.components.#{type}"
         end
 
         def items_count_title

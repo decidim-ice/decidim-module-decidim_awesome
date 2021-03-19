@@ -1,11 +1,11 @@
 <%= announcement = render(partial: "decidim/shared/component_announcement") %>
 
-<%= stylesheet_link_tag "decidim/decidim_awesome/awesome_overview/overview" %>
+<%= stylesheet_link_tag "decidim/decidim_awesome/call_to_awesome/call_to_awesome" %>
 
-<div id="overview" class="row">
+<div id="call_to_awesome" class="row">
   <div class="small-up-1 medium-up-1 mediumlarge-up-2 large-up-3 card-grid">
     <% components.each do |component| %>
-      <%= cell "decidim/decidim_awesome/overview_component/#{component.manifest_name}", component %>
+      <%= cell "decidim/decidim_awesome/call_to_awesome/#{component.manifest_name}", component %>
     <% end %>
   </div>
 </div>

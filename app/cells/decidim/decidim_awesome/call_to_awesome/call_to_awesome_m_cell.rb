@@ -2,11 +2,11 @@
 
 module Decidim
   module DecidimAwesome
-    module OverviewComponent
-      # This cell renders the Medium (:m) overview card
+    module CallToAwesome
+      # This cell renders the Medium (:m) CallToAwesome card
       # for an given instance of a Component
-      class OverviewMCell < Decidim::CardMCell
-        include OverviewCellsHelper
+      class CallToAwesomeMCell < Decidim::CardMCell
+        include CallToAwesomeCellsHelper
 
         def title
           decidim_html_escape(translated_attribute(model.name))

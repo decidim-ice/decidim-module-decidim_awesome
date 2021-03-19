@@ -70,8 +70,8 @@ en:
             show_not_answered: Show not answered proposals
             show_rejected: Show rejected proposals
             show_withdrawn: Show withdrawn proposals
-      awesome_overview:
-        name: Awesome Overview
+      call_to_awesome:
+        name: Call To Awesome
         components:
           proposals:
             call_to_action: "Vote now!"

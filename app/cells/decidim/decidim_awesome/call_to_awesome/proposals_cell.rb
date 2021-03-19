@@ -2,10 +2,10 @@
 
 module Decidim
   module DecidimAwesome
-    module OverviewComponent
-      # This cell renders the Medium (:m) overview card
+    module CallToAwesome
+      # This cell renders the Medium (:m) CallToAwesome card
       # for an given instance of a Component
-      class ProposalsCell < OverviewMCell
+      class ProposalsCell < CallToAwesomeMCell
         def items
           Decidim::Proposals::Proposal.where(component: model)
         end

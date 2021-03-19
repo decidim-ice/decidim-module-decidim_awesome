@@ -2,8 +2,8 @@
 
 module Decidim
   module DecidimAwesome
-    module OverviewComponent
-      class OverviewController < DecidimAwesome::OverviewComponent::ApplicationController
+    module CallToAwesome
+      class CallToAwesomeController < DecidimAwesome::CallToAwesome::ApplicationController
         helper_method :components
 
         ALLOWED_COMPONENTS = %w(proposals).freeze

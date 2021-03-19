@@ -2,10 +2,10 @@
 
 module Decidim
   module DecidimAwesome
-    module OverviewComponent
-      # This is the engine that runs on the admin interface of `DecidimAwesome::OverviewComponent`.
+    module CallToAwesome
+      # This is the engine that runs on the admin interface of `DecidimAwesome::CallToAwesome`.
       class AdminEngine < ::Rails::Engine
-        isolate_namespace Decidim::DecidimAwesome::OverviewComponent::Admin
+        isolate_namespace Decidim::DecidimAwesome::CallToAwesome::Admin
 
         paths["db/migrate"] = nil
         paths["lib/tasks"] = nil
