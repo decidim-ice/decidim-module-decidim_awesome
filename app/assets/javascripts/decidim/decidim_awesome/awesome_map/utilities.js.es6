@@ -22,7 +22,7 @@
       meetings: $("#awesome-map").data("menu-meetings"),
       hashtags: $("#awesome-map").data("menu-hashtags")
     }
-  }
+  };
 
   const truncate = (string) => {
     return $.truncate(string, options);

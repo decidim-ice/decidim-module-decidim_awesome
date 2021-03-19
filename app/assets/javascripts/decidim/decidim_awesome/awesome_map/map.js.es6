@@ -27,6 +27,8 @@
     getCategory
   } = exports.AwesomeMap;
 
+  exports.AwesomeMap.allMarkersLoaded = $.noop;
+
   const autoResizeMap = (map) => {
     // Setup center/zoom options if specified, otherwise fitbounds
     if(options.center) {
@@ -50,6 +52,7 @@
             // console.log(element.state, show[element.state || 'notAnswered'], show, element);
             if(show[element.state || 'notAnswered']) {
               drawMarker(element, marker, component).addTo(layers.proposals.group);
+              // Add hashtags menu items here, only hashtags with proposals associated will be present
               if(options.menu.hashtags) {
                 addHashtagsControls(map, element.hashtags, marker);
               }
@@ -67,6 +70,8 @@
                 }
               }
             });
+            // Call a trigger, might be useful for customizations
+            AwesomeMap.allMarkersLoaded();
           });
         }
 
@@ -79,6 +84,11 @@
         }
       });
 
+    /*
+    * We add all categories and hide those that have no proposals
+    * This is done this way to ensure all parent categories are displayed
+    * even if the have not proposals associated
+    */
     addSearchControls(map);
     addCategoriesControls(map);
 
@@ -149,6 +159,19 @@
       map.setView(options.center, options.zoom);
     }
     loadElements(map);
+
+    AwesomeMap.hashtagAdded = (hashtag, $div) => {
+      let $last = $div.contents("label:last");
+      if($last.prev("label").length) {
+        // move the label to order it alphabetically
+        $div.contents("label").each((_idx, el) => {
+          if($(el).text().localeCompare($last.text()) > 0) {
+            $(el).before($last);
+            return false;
+          }
+        });
+      }
+    };
   });
 
 })(window);

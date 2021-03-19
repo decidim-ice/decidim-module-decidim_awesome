@@ -82,6 +82,8 @@
           };
           layers[hashtag.gid].group.addTo(map);
           $('#awesome_map-hashtags-control .hashtags-container').append(`<label data-layer="${hashtag.gid}" class="awesome_map-hashtag-${hashtag.tag}"><input type="checkbox" class="awesome_map-hashtags-selector" checked><span>${hashtag.name}</span></label>`);
+          // Call a trigger, might be in service for customizations
+          AwesomeMap.hashtagAdded(hashtag, $('#awesome_map-hashtags-control .hashtags-container'));
         }
         marker.addTo(layers[hashtag.gid].group);
 
@@ -100,4 +102,5 @@
   exports.AwesomeMap.addSearchControls = addSearchControls;
   exports.AwesomeMap.addCategoriesControls = addCategoriesControls;
   exports.AwesomeMap.addHashtagsControls = addHashtagsControls;
+  exports.AwesomeMap.hashtagAdded = $.noop;
 })(window);
