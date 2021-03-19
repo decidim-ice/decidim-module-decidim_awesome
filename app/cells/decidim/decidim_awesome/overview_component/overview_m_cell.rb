@@ -6,8 +6,10 @@ module Decidim
       # This cell renders the Medium (:m) overview card
       # for an given instance of a Component
       class OverviewMCell < Decidim::CardMCell
+        include OverviewCellsHelper
+
         def title
-          translated_attribute model.name
+          decidim_html_escape(translated_attribute(model.name))
         end
 
         def description; end
@@ -18,8 +20,28 @@ module Decidim
 
         private
 
+        def has_badge?
+          false
+        end
+
+        def card_classes
+          classes = [base_card_class]
+          classes = classes.concat(["card--stack"]) if has_children?
+          return classes.join(" ") unless has_state?
+    
+          classes.concat(state_classes).join(" ")
+        end
+
         def has_children?
           items.count > 1
+        end
+
+        def statuses
+          [:items_count]
+        end
+
+        def label
+          "hola"
         end
 
         def resource_icon
@@ -27,35 +49,11 @@ module Decidim
         end
 
         def resource_path
-          Decidim::Assemblies::Engine.routes.url_helpers.assembly_path(model)
+          raise NotImplementedError
         end
 
-        def statuses
-          collection = [:creation_date, :items_count]
-          collection << :follow if model.is_a?(Decidim::Followable) && model != try(:current_user)
-          collection
-        end
-
-        def items; end
-
-        def items_count_title
-          t([i18n_scope, type, "items_count"].join("."), count: items.count)
-        end
-
-        def items_count_status
-          link_to resource_path, "aria-label" => items_count_title, title: items_count_title do
-            render_items_count
-          end
-        end
-
-        def render_items_count
-          with_tooltip items_count_title do
-            items_count_title
-          end
-        end
-
-        def i18n_scope
-          "decidim.components.awesome_overview.components"
+        def items
+          raise NotImplementedError
         end
       end
     end

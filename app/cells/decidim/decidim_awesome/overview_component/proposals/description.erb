@@ -1,0 +1,7 @@
+<% if remaining_votes.positive? %>
+  <strong class="heading6">
+    <%= t("#{i18n_scope}.remaining_votes", count: remaining_votes)  %>
+  </strong>
+<% else %>
+  <%= t("#{i18n_scope}.info")  %>
+<% end %>

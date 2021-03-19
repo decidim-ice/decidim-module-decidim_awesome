@@ -73,13 +73,15 @@ en:
       awesome_overview:
         name: Awesome Overview
         components:
-          meetings:
-            items_count: "%{count} Meetings"
           proposals:
+            call_to_action: "Vote now!"
+            date: Ends at
+            info: "Keep participating! You can comment on the proposals and [todo]"
             items_count: "%{count} Proposals"
-            vote_limit: Votes remaining
-          surveys:
-            items_count: "%{count} Questions"
+            items_tooltip: "View the proposals"
+            remaining_votes: "%{count} votes remaining"
+            progress_subtitle: "Vote now!"
+            progress_units: "votes"
         settings:
           global:
             announcement: Announcement
