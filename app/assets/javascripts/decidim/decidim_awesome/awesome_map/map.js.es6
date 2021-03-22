@@ -182,7 +182,8 @@
     }
     loadElements(map);
 
-    window.AwesomeMap.hashtagAdded = (hashtag, $div) => {
+    // order hashtags alphabetically
+    exports.AwesomeMap.hashtagAdded = (_hashtag, $div) => {
       let $last = $div.contents("label:last");
       if($last.prev("label").length) {
         // move the label to order it alphabetically
