@@ -17,7 +17,7 @@
   font-size: .8em;
 }
 
-.decidim_awesome {
+.decidim_awesome{
   &.modal{
     .spinner{
       @include spinner(25px, #aaa, var(--secondary), 800ms);
@@ -33,17 +33,18 @@
     }
   }
 
-  &-form {
+  &-form{
     margin-bottom: 2em;
     border-bottom: 1px solid #999;
     padding-bottom: 1.5em;
   }
-  &-form:last-child {
+
+  &-form:last-child{
     border-bottom: none;
     padding-bottom: 0;
   }
 }
 
-tbody tr.menu_hack-addition {
+tbody tr.menu_hack-addition{
   background: rgb(255, 248, 222);
 }

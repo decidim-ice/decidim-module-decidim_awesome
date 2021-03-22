@@ -25,11 +25,16 @@ module Decidim
                                end.to_json,
           "data-collapsed" => current_component.settings.collapse,
           "data-truncate" => current_component.settings.truncate,
+          "data-map-center" => current_component.settings.map_center,
+          "data-map-zoom" => current_component.settings.map_zoom,
+          "data-menu-amendments" => current_component.settings.menu_amendments,
+          "data-menu-meetings" => current_component.settings.menu_meetings,
+          "data-menu-hashtags" => current_component.settings.menu_hashtags,
           "data-show-not-answered" => current_component.current_settings.show_not_answered,
           "data-show-accepted" => current_component.current_settings.show_accepted,
           "data-show-withdrawn" => current_component.current_settings.show_withdrawn,
-          "data-show-evaluating" => current_component.current_settings.show_evaluating
-          # "data-show-rejected" => current_component.current_settings.show_rejected
+          "data-show-evaluating" => current_component.current_settings.show_evaluating,
+          "data-show-rejected" => current_component.current_settings.show_rejected
         }
         content_tag(:div, map, map_html_options)
       end
@@ -55,7 +60,7 @@ module Decidim
           "data-show-accepted" => current_component.current_settings.show_accepted,
           "data-show-withdrawn" => current_component.current_settings.show_withdrawn,
           "data-show-evaluating" => current_component.current_settings.show_evaluating,
-          # "data-show-rejected" => current_component.current_settings.show_rejected,
+          "data-show-rejected" => current_component.current_settings.show_rejected,
           "data-markers-data" => [].to_json
         }
 
