@@ -160,6 +160,8 @@ admins do not even see it.
 
 In order to personalize default values, create an initializer such as:
 
+> **NOTE**: this is not necessary unless you want to **disable** some features. All features are enabled by default.
+
 ```ruby
 # config/initializers/awesome_defaults.rb
 
@@ -173,6 +175,9 @@ Decidim::DecidimAwesome.configure do |config|
 
   # De-activated, admins don't even see it as an option
   config.use_markdown_editor = :disabled
+
+  # any other config var from lib/decidim/decidim_awesome.rb
+  ...
 end
 ```
 
