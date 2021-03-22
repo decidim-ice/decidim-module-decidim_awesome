@@ -71,7 +71,7 @@
               }
             });
             // Call a trigger, might be useful for customizations
-            AwesomeMap.allMarkersLoaded();
+            exports.AwesomeMap.allMarkersLoaded();
           });
         }
 
@@ -131,28 +131,50 @@
       }
     };
 
+    const updateHashtagLayers = () => {
+      // hide all
+      $(".awesome_map-hashtags-selector").each((_idx, el) => {
+        const layer = layers[$(el).closest("label").data("layer")];
+        if(layer) {
+          map.removeLayer(layer.group);
+        }
+      });
+      // show selected only
+      $(".awesome_map-hashtags-selector:checked").each((_idx, el) => {
+        const layer = layers[$(el).closest("label").data("layer")];
+        if(layer) {
+          map.addLayer(layer.group);
+        }
+      });
+    };
+
     // hashtag events
     $("#awesome-map").on("change", ".awesome_map-hashtags-selector", (e) => {
       e.preventDefault();
       e.stopPropagation();
-      const gid = $(e.target).closest("label").data("layer");
-      // console.log("changed, layer", gid, "checked", e.target.checked, e);
-      if(gid) {
-        const layer = layers[gid];
-        if(e.target.checked) {
-          // show group of markers
-          map.addLayer(layer.group);
-        } else {
-          // show group of markers
-          map.removeLayer(layer.group);
-        }
+      const tag = $(e.target).closest("label").data("layer");
+      // console.log("changed, layer", tag, "checked", e.target.checked, e);
+      if(tag) {
+        updateHashtagLayers();
       }
     });
+
+    // select/deselect all tags
+    $("#awesome-map").on("click", ".awesome_map-toggle_all_tags", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      $("#awesome-map .awesome_map-hashtags-selector").prop("checked", $("#awesome-map .awesome_map-hashtags-selector:checked").length < $("#awesome-map .awesome_map-hashtags-selector").length);
+      updateHashtagLayers();
+    });
+
     // sub-layer hashtag title toggle
     $("#awesome-map").on("click", ".awesome_map-title-control", (e) => {
-      $(e.target).parent().toggleClass("active");
+      e.preventDefault();
+      e.stopPropagation();
+      $("#awesome_map-hashtags-control").toggleClass("active");
     });
   };
+
 
   $("#map").on("ready.decidim", (_e, map) => {
     if(options.center) {
@@ -160,7 +182,7 @@
     }
     loadElements(map);
 
-    AwesomeMap.hashtagAdded = (hashtag, $div) => {
+    window.AwesomeMap.hashtagAdded = (hashtag, $div) => {
       let $last = $div.contents("label:last");
       if($last.prev("label").length) {
         // move the label to order it alphabetically

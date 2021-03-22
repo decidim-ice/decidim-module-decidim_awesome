@@ -47,7 +47,7 @@
 
   const addSearchControls = () => {
     $(control.getContainer()).contents("form").after(`<div id="awesome_map-categories-control" class="active"><b class="awesome_map-title-control">${window.DecidimAwesome.texts.categories}</b><div class="categories-container"></div></div>
-    <div id="awesome_map-hashtags-control"><b class="awesome_map-title-control">${window.DecidimAwesome.texts.hashtags}</b><div class="hashtags-container"></div></div>`);
+    <div id="awesome_map-hashtags-control"><b class="awesome_map-title-control">${window.DecidimAwesome.texts.hashtags}</b><div class="hashtags-container"></div><a href="#" class="awesome_map-toggle_all_tags">${window.DecidimAwesome.texts.select_deselect_all}</a></div>`);
   };
 
   const addCategoriesControls = (map) => {
@@ -75,21 +75,21 @@
       $('#awesome_map-hashtags-control').show();
       hashtags.forEach(hashtag => {
         // Add layer if not exists, otherwise just add the marker to the group
-        if(!layers[hashtag.gid]) {
-          layers[hashtag.gid] = {
+        if(!layers[hashtag.tag]) {
+          layers[hashtag.tag] = {
             label: hashtag.name,
             group: L.featureGroup.subGroup(cluster)
           };
-          layers[hashtag.gid].group.addTo(map);
-          $('#awesome_map-hashtags-control .hashtags-container').append(`<label data-layer="${hashtag.gid}" class="awesome_map-hashtag-${hashtag.tag}"><input type="checkbox" class="awesome_map-hashtags-selector" checked><span>${hashtag.name}</span></label>`);
+          layers[hashtag.tag].group.addTo(map);
+          $('#awesome_map-hashtags-control .hashtags-container').append(`<label data-layer="${hashtag.tag}" class="awesome_map-hashtag-${hashtag.tag}"><input type="checkbox" class="awesome_map-hashtags-selector" checked><span>${hashtag.name}</span></label>`);
           // Call a trigger, might be in service for customizations
-          AwesomeMap.hashtagAdded(hashtag, $('#awesome_map-hashtags-control .hashtags-container'));
+          exports.AwesomeMap.hashtagAdded(hashtag, $('#awesome_map-hashtags-control .hashtags-container'));
         }
-        marker.addTo(layers[hashtag.gid].group);
+        marker.addTo(layers[hashtag.tag].group);
 
         const $label = $(`label.awesome_map-hashtag-${hashtag.tag}`);
         // update number of items
-        $label.attr("title", parseInt($label.attr("title") || 0) + 1);
+        $label.attr("title", (parseInt($label.attr("title") || 0) + 1) + " " +  window.DecidimAwesome.texts.items);
       });
     }
   };

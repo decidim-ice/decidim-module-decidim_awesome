@@ -38,32 +38,11 @@
       const $parent = $(`label.awesome_map-category-${cat.parent}`);
       $label.show();
       // update number of items
-      $label.attr("title", parseInt($label.attr("title") || 0) + 1);
+      $label.attr("title", (parseInt($label.attr("title") || 0) + 1) + " " +  window.DecidimAwesome.texts.items);
       // show parent if apply
       $parent.show();
-      $parent.attr("title", parseInt($parent.attr("title") || 0) + 1);
+      $parent.attr("title", (parseInt($parent.attr("title") || 0) + 1) + " " +  window.DecidimAwesome.texts.items);
     }
-
-    // // show hashtag layer
-    // if(element.hashtags) {
-    //   $('#awesome_map-hashtags-control').show();
-    //   element.hashtags.forEach(hashtag => {
-    //     // Add layer if not exists, otherwise just add the marker to the group
-    //     if(!layers[hashtag.gid]) {
-    //       layers[hashtag.gid] = {
-    //         label: hashtag.name,
-    //         group: L.featureGroup.subGroup(cluster)
-    //       };
-    //       layers[hashtag.gid].group.addTo(map);
-    //       $('#awesome_map-hashtags-control').append(`<label data-layer="${hashtag.gid}" class="awesome_map-hashtag-${hashtag.id}"><input type="checkbox" class="awesome_map-hashtags-selector" checked><span>${hashtag.name}</span></label>`);
-    //     }
-    //     marker.addTo(layers[hashtag.id].group);
-
-    //     const $label = $(`label.awesome_map-hashtag-${hashtag.gid}`);
-    //     // update number of items
-    //     $label.attr("title", parseInt($label.attr("title") || 0) + 1);
-    //   });
-    //}
 
     // update component stats
     const $component = $(`#awesome_map-component_${component.id}`);

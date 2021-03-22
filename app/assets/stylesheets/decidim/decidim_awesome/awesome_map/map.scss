@@ -140,12 +140,19 @@
         }
       }
 
-      .hashtags-container{
+      .awesome_map-toggle_all_tags{
+        margin: .5rem 1rem;
+        font-size: .875rem;
+      }
+
+      .hashtags-container,
+      .awesome_map-toggle_all_tags{
         display: none;
       }
 
       &.active{
-        .hashtags-container{
+        .hashtags-container,
+        .awesome_map-toggle_all_tags{
           display: block;
         }
       }

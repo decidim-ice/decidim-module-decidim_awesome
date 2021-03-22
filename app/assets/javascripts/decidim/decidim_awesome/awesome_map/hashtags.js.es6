@@ -11,7 +11,7 @@
           const fromSelector = parts[5].charAt(0) == '_';
           const tag = fromSelector ? parts[5].substr(1) : parts[5];
           const name = '#' + tag;
-          const html = `<a>${name}</a>`;
+          const html = `<a href="/search?term=${name}">${name}</a>`;
           const hashtag = {
             color: getComputedStyle(document.documentElement).getPropertyValue('--secondary'),
             gid: gid,
