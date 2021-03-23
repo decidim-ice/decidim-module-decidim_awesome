@@ -54,7 +54,7 @@ nl:
             announcement: Aankondiging
             collapse: Begin met samengevouwen menu
             map_height: Map hoogte (px)
-            truncate: Maximum characters for popup descriptions
+            truncate: Maximaal aantal tekens voor popup beschrijvingen
           step:
             announcement: Aankondiging
             show_accepted: Toon geaccepteerde voorstellen
