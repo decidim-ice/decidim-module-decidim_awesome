@@ -53,7 +53,14 @@ ca:
           global:
             announcement: Anunci
             collapse: Inicia amb el menú col·lapsat
+            map_center: Map center (Latitude, Longitude)
+            map_center_help: 'Use decimal points (ie: 41.38879, 2.15899). Leave it empty to automatically fit all the markers'
             map_height: Alçada del mapa (px)
+            map_zoom: Zoom (any number betwen 0 and 18)
+            map_zoom_help: Only applies if a map center is defined
+            menu_amendments: Show amendments
+            menu_hashtags: Show Hasthag search menu
+            menu_meetings: Show meetings
             truncate: Nombre màxim de caràcters per les descripcions emergents
           step:
             announcement: Anunci
@@ -209,5 +216,8 @@ ca:
           autosaved_success: Dades desades a l'emmagatzematge local
           categories: Categories
           drag_and_drop_image: Afegeix imatges "arrastrant i deixant anar" o bé enganxant-les.
+          hashtags: Hashtags
+          items: items
           meetings: Trobades
           proposals: Propostes
+          select_deselect_all: Select/deselect all
