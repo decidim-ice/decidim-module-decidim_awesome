@@ -53,14 +53,14 @@ cs:
           global:
             announcement: Oznámení
             collapse: Začít se sbaleným menu
-            map_center: Map center (Latitude, Longitude)
-            map_center_help: 'Use decimal points (ie: 41.38879, 2.15899). Leave it empty to automatically fit all the markers'
+            map_center: Střed mapy (zeměpisná šířka, zeměpisná délka)
+            map_center_help: 'Použijte desetinné body (ie: 41.38879, 2.15899). Nechte prázdné, aby se automaticky vešly všechny značky'
             map_height: Výška mapy (px)
-            map_zoom: Zoom (any number betwen 0 and 18)
-            map_zoom_help: Only applies if a map center is defined
-            menu_amendments: Show amendments
-            menu_hashtags: Show Hasthag search menu
-            menu_meetings: Show meetings
+            map_zoom: Zvětšení (libovolné číslo mezi 0 a 18)
+            map_zoom_help: Použije se pouze v případě, že je definován střed mapy
+            menu_amendments: Zobrazit pozměňovací návrhy
+            menu_hashtags: Zobrazit vyhledávací menu Hasthag
+            menu_meetings: Zobrazit schůzky
             truncate: Maximum znaků pro popisy vyskakovacích oken
           step:
             announcement: Oznámení
@@ -216,8 +216,8 @@ cs:
           autosaved_success: Data uložena v místním úložišti
           categories: Kategorie
           drag_and_drop_image: Přidejte obrázky přetažením nebo vložením.
-          hashtags: Hashtags
-          items: items
+          hashtags: Hashtagy
+          items: položky
           meetings: Schůzky
           proposals: Návrhy
-          select_deselect_all: Select/deselect all
+          select_deselect_all: Vybrat/odebrat vše
