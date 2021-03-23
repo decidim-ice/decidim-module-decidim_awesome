@@ -53,7 +53,14 @@ es:
           global:
             announcement: Anuncio
             collapse: Iniciar con el menú contraído
+            map_center: Map center (Latitude, Longitude)
+            map_center_help: 'Use decimal points (ie: 41.38879, 2.15899). Leave it empty to automatically fit all the markers'
             map_height: Altura del mapa (px)
+            map_zoom: Zoom (any number betwen 0 and 18)
+            map_zoom_help: Only applies if a map center is defined
+            menu_amendments: Show amendments
+            menu_hashtags: Show Hasthag search menu
+            menu_meetings: Show meetings
             truncate: Número máximo de caracteres para las descripciones emergentes
           step:
             announcement: Anuncio
@@ -209,5 +216,8 @@ es:
           autosaved_success: Datos guardados en el almacenamiento local
           categories: Categorías
           drag_and_drop_image: Puedes añadir imágenes arrastrando y soltándolas o también pegándolas.
+          hashtags: Hashtags
+          items: items
           meetings: Encuentros
           proposals: Propuestas
+          select_deselect_all: Select/deselect all
