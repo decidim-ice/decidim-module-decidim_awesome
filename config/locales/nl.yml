@@ -53,8 +53,15 @@ nl:
           global:
             announcement: Aankondiging
             collapse: Begin met samengevouwen menu
+            map_center: Map center (Latitude, Longitude)
+            map_center_help: 'Use decimal points (ie: 41.38879, 2.15899). Leave it empty to automatically fit all the markers'
             map_height: Map hoogte (px)
-            truncate: Maximum characters for popup descriptions
+            map_zoom: Zoom (any number betwen 0 and 18)
+            map_zoom_help: Only applies if a map center is defined
+            menu_amendments: Show amendments
+            menu_hashtags: Show Hasthag search menu
+            menu_meetings: Show meetings
+            truncate: Maximaal aantal tekens voor popup beschrijvingen
           step:
             announcement: Aankondiging
             show_accepted: Toon geaccepteerde voorstellen
@@ -209,5 +216,8 @@ nl:
           autosaved_success: Data opgeslagen in lokale opslag
           categories: Categorieën
           drag_and_drop_image: Voeg afbeeldingen toe door ze te slepen, te plaatsen of te plakken.
+          hashtags: Hashtags
+          items: items
           meetings: Vergaderingen
           proposals: Voorstellen
+          select_deselect_all: Select/deselect all
