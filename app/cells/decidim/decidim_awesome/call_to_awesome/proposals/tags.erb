@@ -1,0 +1,13 @@
+<ul class="tags">
+  <% scope_name = translated_attribute model.scope.name %>
+
+  <li>
+    <%= link_to resource_path, title: translated_attribute(model.name) do %>
+      <%= content_tag(
+        :span,
+        scope_name,
+        "aria-hidden": true
+      ) %>
+    <% end %>
+  </li>
+</ul>

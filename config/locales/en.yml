@@ -78,6 +78,23 @@ en:
             show_not_answered: Show not answered proposals
             show_rejected: Show rejected proposals
             show_withdrawn: Show withdrawn proposals
+      call_to_awesome:
+        name: Call To Awesome
+        components:
+          proposals:
+            call_to_action: "Vote now!"
+            date: Ends at
+            info: "Keep participating! You can comment on the proposals and [todo]"
+            items_count: "%{count} Proposals"
+            items_tooltip: "View the proposals"
+            remaining_votes: "%{count} votes remaining"
+            progress_subtitle: "Vote now!"
+            progress_units: "votes"
+        settings:
+          global:
+            announcement: Announcement
+          step:
+            announcement: Announcement
     decidim_awesome:
       admin:
         checks:
