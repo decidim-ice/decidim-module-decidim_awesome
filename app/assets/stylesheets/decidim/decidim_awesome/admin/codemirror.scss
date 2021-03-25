@@ -1,9 +1,11 @@
 .awesome-edit-config{
-  .scoped-style{
+  .scoped-style,
+  .proposal-custom-field{
     >.CodeMirror{
       border-top: .5em solid #f6f6f6;
       border-right: .5em solid #f6f6f6;
-      height: 100px;
+      min-height: 6em;
+      height: auto;
       resize: vertical;
       overflow: vertical !important;
     }
