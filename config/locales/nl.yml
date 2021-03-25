@@ -22,7 +22,7 @@ nl:
       constraint:
         component_id: of specifiek in
         component_manifest: Alleen in componenten van het type
-        participatory_space_manifest: Toepassen op participerende ruimten van het type
+        participatory_space_manifest: Toepassen op participatieve ruimten van het type
         participatory_space_slug: Alleen in
       menu:
         position: Positie
@@ -41,9 +41,9 @@ nl:
           global:
             announcement: Aankondiging
             iframe: Iframe code
-            iframe_help: 'Zet je code als html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Inhoud wordt verwijderd uit andere HTML-tags. Zorg ervoor dat u 100% als breedte gebruikt om het scherm te vullen.'
+            iframe_help: 'Zet je code als html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Inhoud wordt verwijderd uit andere HTML-tags. Zorg ervoor dat je 100% als breedte gebruikt om het scherm te vullen.'
             no_margins: Geen marges tussen het iframe en de rest van de pagina
-            viewport_width: Beperk de maximale breedte tot het toepassingsvenster
+            viewport_width: Maximale breedte beperken tot applicatie viewport
           step:
             announcement: Aankondiging
             iframe: Iframe code
@@ -53,14 +53,14 @@ nl:
           global:
             announcement: Aankondiging
             collapse: Begin met samengevouwen menu
-            map_center: Map center (Latitude, Longitude)
-            map_center_help: 'Use decimal points (ie: 41.38879, 2.15899). Leave it empty to automatically fit all the markers'
+            map_center: Kaart midden (breedtegraad, lengtegraad)
+            map_center_help: 'Gebruik decimale punten (bv. 41.38879, 2.15899). Laat het leeg om automatisch aan alle markers te voldoen'
             map_height: Map hoogte (px)
-            map_zoom: Zoom (any number betwen 0 and 18)
-            map_zoom_help: Only applies if a map center is defined
-            menu_amendments: Show amendments
-            menu_hashtags: Show Hasthag search menu
-            menu_meetings: Show meetings
+            map_zoom: Zoom (elk willekeurig getal tussen 0 en 18)
+            map_zoom_help: Alleen van toepassing als een centrum van de kaart is gedefinieerd
+            menu_amendments: Toon amendementen
+            menu_hashtags: Toon Hasthag zoekmenu
+            menu_meetings: Toon vergaderingen
             truncate: Maximaal aantal tekens voor popup beschrijvingen
           step:
             announcement: Aankondiging
@@ -220,4 +220,4 @@ nl:
           items: items
           meetings: Vergaderingen
           proposals: Voorstellen
-          select_deselect_all: Select/deselect all
+          select_deselect_all: Alles selecteren/deselecteren
