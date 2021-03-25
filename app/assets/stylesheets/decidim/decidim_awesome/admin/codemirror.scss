@@ -1,0 +1,11 @@
+.awesome-edit-config{
+  .scoped-style{
+    >.CodeMirror{
+      border-top: .5em solid #f6f6f6;
+      border-right: .5em solid #f6f6f6;
+      height: 100px;
+      resize: vertical;
+      overflow: vertical !important;
+    }
+  }
+}
