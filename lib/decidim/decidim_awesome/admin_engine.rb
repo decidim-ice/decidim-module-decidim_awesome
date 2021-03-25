@@ -14,8 +14,8 @@ module Decidim
         resources :constraints
         resources :menu_hacks, except: [:show]
         resources :config, param: :var, only: [:show, :update]
-        post :new_scoped_style, to: "config#new_scoped_style"
-        post :destroy_scoped_style, param: :key, to: "config#destroy_scoped_style"
+        resources :scoped_styles, param: :var, only: [:create, :destroy]
+        resources :proposal_custom_fields, param: :var, only: [:create, :destroy]
         get :checks, to: "checks#index"
         root to: "config#show", var: :editors
       end

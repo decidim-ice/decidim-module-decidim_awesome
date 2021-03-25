@@ -23,6 +23,7 @@ en:
         intergram_use_floating_button: If checked, the closed chat is always a button
           instead of a text
         scoped_styles: 'Custom styles #%{id}'
+        proposal_custom_fields: 'Custom fields #%{id}'
         use_markdown_editor: Use a Markdown editor instead of the HTML editor
       constraint:
         component_id: or specifically in
@@ -107,6 +108,12 @@ en:
           destroy_scoped_style:
             error: Error removing CSS box! %{error}
             success: CSS box %{key} removed successfully
+          create_proposal_custom_field:
+            error: 'Error creating a new "custom field" box! %{error}'
+            success: '"custom field" box %{key} created successfully'
+          destroy_proposal_custom_field:
+            error: 'Error removing "custom field" box! %{error}'
+            success: '"custom field" box %{key} removed successfully'
           experimental: Experimental options
           form:
             help:
@@ -136,6 +143,9 @@ en:
                 of the public web (use the restrictions editor for that)
               scoped_styles_variables: 'You can use the following CSS variables for
                 organization customized colors:'
+              proposal_custom_fields: Create custom proposal fields that applies only in certain parts
+                of the public web (use the restrictions editor for that)
+              proposal_custom_fields_example: 'Check this site for format options https://github.com/jsonform/jsonform/wiki'
               use_markdown_editor: This will substitute the Quill WYSIWYG editor,
                 use a Markdown editor instead. Text will be rendered as HTML in the
                 public pages (text in database will be saved as markdown text)
@@ -143,6 +153,10 @@ en:
             new: Add a new CSS box
             remove: Remove this CSS box
             sure_to_remove: Are you sure you want to destroy this CSS box?
+          form_proposals:
+            new: Add a new "custom fields" box
+            remove: Remove this "custom fields" box
+            sure_to_remove: Are you sure you want to destroy this fields box?
           rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants"
             is enabled, this option won''t apply. Use the editors hacks instead to
             enable images in proposals.'

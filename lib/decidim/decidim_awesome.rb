@@ -72,6 +72,19 @@ module Decidim
       {}
     end
 
+    # custom fields for proposals using JSON specification:
+    # https://github.com/jsonform/jsonform/wiki
+    # Valid values uses the same structure as :scoped_styles
+    #   :disabled => false and non available, hidden from admins
+    #   Hash => hash of different JSON texts, each key will be used for the contraints
+    # Admins can create this hash dynamically but some pre-defined css boxes can be created here as:
+    #   {
+    #      some_identifier: "{ ... some definition... }"
+    #   }
+    config_accessor :proposal_custom_fields do
+      {}
+    end
+
     # allows to keep modifications for the main menu
     # can return :disabled to completly remove this feature
     # otherwise it should be an array (some overrides can be specified by default):

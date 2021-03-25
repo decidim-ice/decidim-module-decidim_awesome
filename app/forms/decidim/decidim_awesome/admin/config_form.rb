@@ -11,6 +11,7 @@ module Decidim
         attribute :allow_images_in_markdown_editor, Boolean
         attribute :auto_save_forms, Boolean
         attribute :scoped_styles, Hash
+        attribute :proposal_custom_fields, Hash
         attribute :menu, Array[MenuForm]
         attribute :intergram_for_admins, Boolean
         attribute :intergram_for_admins_settings, IntergramForm
