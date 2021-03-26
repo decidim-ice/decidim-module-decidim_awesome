@@ -98,6 +98,8 @@ ca:
             success: Caixa CSS %{key} eliminada correctament
           experimental: Opcions experimentals
           form:
+            errors:
+              incorrect_css: 'CSS in box #%{key} is invalid'
             help:
               allow_images_in_full_editor: Això afegirà un botó per pujar imatges a l'editor HTML complet.
               allow_images_in_markdown_editor: Això permetrà a l'editor markdown pujar imatges amb "copiar i enganxar" o "arrastrant i deixant anar".
@@ -146,7 +148,7 @@ ca:
           checks: Compatibilitat de sistema
           editors: Modificacions als editors
           livechat: Xat en directe
-          menu_hacks: Retocs al menú
+          menu_hacks: 'Menu tweaks#{key} styles are incorrect'
           proposals: Modificacions a propostes
           styles: Estils personalitzats
           surveys: Formularis i enquestes
