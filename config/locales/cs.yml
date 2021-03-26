@@ -99,7 +99,7 @@ cs:
           experimental: Experimentální možnosti
           form:
             errors:
-              incorrect_css: 'CSS in box #%{key} is invalid'
+              incorrect_css: 'CSS v poli #%{key} je neplatné'
             help:
               allow_images_in_full_editor: Tímto se přidá ikona pro nahrávání obrázků ve všech editorech WYSIWYG s povoleným plným nástrojovým řádkem.
               allow_images_in_markdown_editor: To umožní editoru markdown nahrávat obrázky pomocí kopírování a vkládání nebo přetažení.
@@ -148,7 +148,7 @@ cs:
           checks: Systémová kompatibilita
           editors: Hack editoru
           livechat: Live Chat
-          menu_hacks: 'Menu tweaks#{key} styles are incorrect'
+          menu_hacks: 'Vylepšení nabídky#{key} stylů není správné'
           proposals: Návrhy hacků
           styles: Vlastní styly
           surveys: Průzkumy a formuláře
