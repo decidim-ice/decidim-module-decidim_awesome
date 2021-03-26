@@ -98,6 +98,8 @@ es:
             success: Caja CSS %{key} eliminada correctamente
           experimental: Opciones experimentales
           form:
+            errors:
+              incorrect_css: 'CSS in box #%{key} is invalid'
             help:
               allow_images_in_full_editor: Esto añadirá un botón para subir imágenes en el editor HTML completo.
               allow_images_in_markdown_editor: Esto permitirá al editor markdown subir imágenes con "copiar & pegar" o con "arrastrar & soltar".
@@ -146,7 +148,7 @@ es:
           checks: Compatibilidad del sistema
           editors: Modificaciones a los editores
           livechat: Chat en vivo
-          menu_hacks: Ajustes en el menú
+          menu_hacks: 'Menu tweaks#{key} styles are incorrect'
           proposals: Modificaciones a las propuestas
           styles: Estilos personalizados
           surveys: Encuestas y formularios
