@@ -18,7 +18,10 @@ module Decidim
         #
         # Returns nothing.
         def call
-          return broadcast(:invalid) if form.invalid?
+          if form.invalid?
+            message = form.errors[:scoped_styles].join("; ") if @form.errors[:scoped_styles].any?
+            return broadcast(:invalid, message, form.errors)
+          end
 
           begin
             form.attributes.each do |key, val|

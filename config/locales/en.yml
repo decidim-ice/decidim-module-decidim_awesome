@@ -116,6 +116,8 @@ en:
             success: CSS box %{key} removed successfully
           experimental: Experimental options
           form:
+            errors:
+              incorrect_css: 'CSS in box #%{key} is invalid'
             help:
               allow_images_in_full_editor: This will add an image uploader icon in
                 all the editors WYSIWYG with the full toolbar enabled.
@@ -192,7 +194,7 @@ en:
           checks: System compatibility
           editors: Editor hacks
           livechat: Live Chat
-          menu_hacks: Menu tweaks
+          menu_hacks: Menu tweaks#{key} styles are incorrect
           proposals: Proposals hacks
           styles: Custom styles
           surveys: Surveys & forms

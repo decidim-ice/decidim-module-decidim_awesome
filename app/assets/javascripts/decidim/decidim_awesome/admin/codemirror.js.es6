@@ -1,6 +1,7 @@
 // = require codemirror
 // = require mode/css/css
 // = require mode/yaml/yaml
+// = require keymap/sublime
 // = require_self
 
 $(() => {
@@ -8,7 +9,8 @@ $(() => {
     console.log(el)
     var editor = CodeMirror.fromTextArea(el, {
       lineNumbers: true,
-      mode: "css"
+      mode: "css",
+      keymap: "sublime"
     });
   })
 
@@ -16,7 +18,8 @@ $(() => {
     console.log(el)
     var editor = CodeMirror.fromTextArea(el, {
       lineNumbers: true,
-      mode: "yaml"
+      mode: "yaml",
+      keymap: "sublime"
     });
   })
 });
