@@ -20,10 +20,23 @@ module Decidim
         # collect all keys anything not specified in the params (UpdateConfig command ignores it)
         attr_accessor :valid_keys
 
+        validate :css_syntax, if: ->(form) { form.scoped_styles.present? }
+
         def self.from_params(params, additional_params = {})
           instance = super(params, additional_params)
           instance.valid_keys = params.keys.map(&:to_sym) || []
           instance
+        end
+
+        def css_syntax
+          scoped_styles.each do |key, code|
+            begin
+              SassC::Engine.new(code).render
+            rescue SassC::SyntaxError => e
+              errors.add(:scoped_styles, I18n.t("config.form.errors.incorrect_css", key: key, scope: "decidim.decidim_awesome.admin"))
+              errors.add(key.to_sym, e.message)
+            end
+          end
         end
       end
     end

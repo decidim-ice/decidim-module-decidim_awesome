@@ -28,9 +28,9 @@ module Decidim
               redirect_to decidim_admin_decidim_awesome.config_path
             end
 
-            on(:invalid) do |message|
+            on(:invalid) do |message, err|
               flash.now[:alert] = I18n.t("config.update.error", error: message, scope: "decidim.decidim_awesome.admin")
-              render :show
+              render :show, locals: {errors: err.presence }
             end
           end
         end

@@ -135,10 +135,12 @@ en:
               scoped_styles: Create custom CSS that applies only in certain parts
                 of the public web (use the restrictions editor for that)
               scoped_styles_variables: 'You can use the following CSS variables for
-                organization customized colors:'
+                organization customized colors:'#{key} styles are incorrect
               use_markdown_editor: This will substitute the Quill WYSIWYG editor,
                 use a Markdown editor instead. Text will be rendered as HTML in the
                 public pages (text in database will be saved as markdown text)
+            errors:
+              incorrect_css: "CSS in box #%{key} is invalid"
           form_styles:
             new: Add a new CSS box
             remove: Remove this CSS box
@@ -177,7 +179,7 @@ en:
           checks: System compatibility
           editors: Editor hacks
           livechat: Live Chat
-          menu_hacks: Menu tweaks
+          menu_hacks: Menu tweaks#{key} styles are incorrect
           proposals: Proposals hacks
           styles: Custom styles
           surveys: Surveys & forms
