@@ -24,8 +24,10 @@ describe "Admin manages custom CSS", type: :system do
 
       expect(page).to have_admin_callout("created successfully")
 
-      textarea = page.find("textarea")
-      textarea.fill_in with: "body {background: red;}"
+      # textarea = page.find("textarea")
+      # textarea.fill_in with: "body {background: red;}"
+      page.execute_script('document.querySelector(".CodeMirror").CodeMirror.setValue("body {background: red;}");')
+
       find("*[type=submit]").click
 
       expect(page).to have_admin_callout("updated successfully")
@@ -45,7 +47,8 @@ describe "Admin manages custom CSS", type: :system do
       expect(page).to have_content("body {background: red;}")
       expect(page).to have_content("body {background: blue;}")
 
-      fill_in "foo", with: "body {background: green;}"
+      # fill_in "foo", with: "body {background: green;}"
+      page.execute_script('document.querySelector("[data-key=foo] .CodeMirror").CodeMirror.setValue("body {background: green;}");')
       find("*[type=submit]").click
 
       expect(page).to have_admin_callout("updated successfully")
