@@ -30,7 +30,7 @@ module Decidim
 
             on(:invalid) do |message, err|
               flash.now[:alert] = I18n.t("config.update.error", error: message, scope: "decidim.decidim_awesome.admin")
-              render :show, locals: {errors: err.presence }
+              render :show, locals: { errors: err.presence }
             end
           end
         end

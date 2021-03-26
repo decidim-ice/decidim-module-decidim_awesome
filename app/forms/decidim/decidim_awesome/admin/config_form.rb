@@ -30,12 +30,10 @@ module Decidim
 
         def css_syntax
           scoped_styles.each do |key, code|
-            begin
-              SassC::Engine.new(code).render
-            rescue SassC::SyntaxError => e
-              errors.add(:scoped_styles, I18n.t("config.form.errors.incorrect_css", key: key, scope: "decidim.decidim_awesome.admin"))
-              errors.add(key.to_sym, e.message)
-            end
+            SassC::Engine.new(code).render
+          rescue SassC::SyntaxError => e
+            errors.add(:scoped_styles, I18n.t("config.form.errors.incorrect_css", key: key, scope: "decidim.decidim_awesome.admin"))
+            errors.add(key.to_sym, e.message)
           end
         end
       end
