@@ -98,6 +98,8 @@ nl:
             success: CSS box %{key} succesvol verwijderd
           experimental: Experimentele opties
           form:
+            errors:
+              incorrect_css: 'CSS in box #%{key} is invalid'
             help:
               allow_images_in_full_editor: Dit zal een afbeelding uploader pictogram toevoegen in alle editors WYSIWYG met de volledige werkbalk ingeschakeld.
               allow_images_in_markdown_editor: Hiermee kan de markdown editor afbeeldingen uploaden door ze te kopiëren en plakken of slepen & neerzetten.
@@ -146,7 +148,7 @@ nl:
           checks: Systeemcompabiliteit
           editors: Editor hacks
           livechat: Live Chat
-          menu_hacks: Menu tweaks
+          menu_hacks: 'Menu tweaks#{key} styles are incorrect'
           proposals: Voorstellen hacks
           styles: Aangepaste stijlen
           surveys: Enquêtes & formulieren
