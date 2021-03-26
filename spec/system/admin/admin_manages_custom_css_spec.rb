@@ -57,6 +57,21 @@ describe "Admin manages custom CSS", type: :system do
       expect(page).to have_content("body {background: blue;}")
     end
 
+    context "and there are CSS errors" do
+      it "shows error message" do
+        page.execute_script('document.querySelector("[data-key=foo] .CodeMirror").CodeMirror.setValue("I am invalid CSS");')
+        find("*[type=submit]").click
+
+        expect(page).to have_admin_callout("Error updating configuration! CSS in box #foo is invalid")
+        expect(page).not_to have_content("body {background: red;}")
+        expect(page).to have_content("body {background: blue;}")
+        expect(page).to have_content("I am invalid CSS")
+        within ".scoped-style[data-key=\"foo\"] .form-error" do
+          expect(page).to have_content("Error: Invalid CSS ")
+        end
+      end
+    end
+
     context "when removing a box" do
       let(:styles) do
         {

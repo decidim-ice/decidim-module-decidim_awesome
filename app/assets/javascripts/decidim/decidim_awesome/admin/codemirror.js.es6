@@ -1,5 +1,6 @@
 // = require codemirror
 // = require mode/css/css
+// = require keymap/sublime
 // = require_self
 
 $(() => {
@@ -7,9 +8,8 @@ $(() => {
     console.log(el)
     var editor = CodeMirror.fromTextArea(el, {
       lineNumbers: true,
-      // theme: "monokai",
       mode: "css",
-      viewportMargin: 5
+      keymap: "sublime"
     });
   })
 });

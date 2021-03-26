@@ -5,6 +5,7 @@ PATH
       decidim-admin (>= 0.22.0, < 0.24)
       decidim-core (>= 0.22.0, < 0.24)
       redcarpet (~> 3.4)
+      sassc (~> 2.3.0)
 
 GEM
   remote: https://rubygems.org/
@@ -492,10 +493,11 @@ GEM
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2021.0225)
-    mimemagic (0.3.7)
-      nokogiri (~> 1.11.2)
+    mimemagic (0.3.9)
+      nokogiri (~> 1)
+      rake
     mini_magick (4.11.0)
-    mini_mime (1.0.2)
+    mini_mime (1.0.3)
     mini_portile2 (2.5.0)
     minitest (5.14.4)
     mixlib-cli (2.1.8)
