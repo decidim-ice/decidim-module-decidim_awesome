@@ -148,7 +148,7 @@ ca:
           checks: Compatibilitat de sistema
           editors: Modificacions als editors
           livechat: Xat en directe
-          menu_hacks: 'Els estils dels retocs de menú #{key} són incorrectes'
+          menu_hacks: Menu tweaks
           proposals: Modificacions a propostes
           styles: Estils personalitzats
           surveys: Formularis i enquestes
