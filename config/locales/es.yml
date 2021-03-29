@@ -148,7 +148,7 @@ es:
           checks: Compatibilidad del sistema
           editors: Modificaciones a los editores
           livechat: Chat en vivo
-          menu_hacks: 'Los estilos de los ajustes de menú #{key} son incorrectos'
+          menu_hacks: Menu tweaks
           proposals: Modificaciones a las propuestas
           styles: Estilos personalizados
           surveys: Encuestas y formularios
