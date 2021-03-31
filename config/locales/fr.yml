@@ -2,211 +2,222 @@ fr:
   activemodel:
     attributes:
       config:
-        allow_images_in_full_editor: Allow images in the full HTML editor
-        allow_images_in_markdown_editor: Allow images in the markdown editor
-        allow_images_in_proposals: Allow images in the proposals editor
-        allow_images_in_small_editor: Allow images in the minimal HTML editor
-        auto_save_forms: Auto save forms in local storage
-        intergram_auto_no_response: A message that is sent one minute after the user sends its first message and no response was received
-        intergram_auto_response: A message that is sent immediately after the user sends its first message
-        intergram_chat_id: Chat ID
-        intergram_color: Color of the widget
-        intergram_for_admins: Enable Intergram Chat in the admin backend
-        intergram_intro_message: First message when the user opens the chat for the first time
-        intergram_require_login: Only for logged users
-        intergram_title_closed: Closed chat title
-        intergram_title_open: Opened chat title
-        intergram_use_floating_button: If checked, the closed chat is always a button instead of a text
-        scoped_styles: 'Custom styles #%{id}'
-        use_markdown_editor: Use a Markdown editor instead of the HTML editor
+        allow_images_in_full_editor: Autoriser les images dans l'éditeur HTML complet
+        allow_images_in_markdown_editor: Autoriser les images dans l'éditeur de markdown
+        allow_images_in_proposals: Autoriser les images dans l'éditeur de propositions
+        allow_images_in_small_editor: Autoriser les images dans l'éditeur HTML simple
+        auto_save_forms: Sauvegarde automatique des formulaires dans le stockage local du navigateur
+        intergram_auto_no_response: Un message qui est envoyé une minute après que l'utilisateur envoie son premier message et qu'aucune réponse n'a été reçue
+        intergram_auto_response: Un message qui est envoyé immédiatement après que l'utilisateur envoie son premier message
+        intergram_chat_id: ID de la conversation
+        intergram_color: Couleur du widget
+        intergram_for_admins: Activé Intergram Chat dans l'interface d'administration
+        intergram_intro_message: Premier message lorsque l'utilisateur ouvre le chat pour la première fois
+        intergram_require_login: Uniquement pour les utilisateurs connectés
+        intergram_title_closed: Titre de la conversation fermé
+        intergram_title_open: Titre de la conversation ouverte
+        intergram_use_floating_button: Si coché, la conversation fermée est toujours un bouton au lieu d'un texte
+        scoped_styles: 'Style personnalisés #%{id}'
+        use_markdown_editor: Utiliser un éditeur Markdown au lieu de l'éditeur HTML
       constraint:
-        component_id: or specifically in
-        component_manifest: Only in components of type
-        participatory_space_manifest: Apply to participatory spaces of type
-        participatory_space_slug: Only in
+        component_id: ou spécifiquement dans
+        component_manifest: Uniquement dans les composants de type
+        participatory_space_manifest: Appliquer aux espaces participatifs de type
+        participatory_space_slug: Seulement dans
       menu:
         position: Position
         raw_label: Label
-        target: Opens in
+        target: Ouvrir dans
         url: URL
-        visibility: Visibility
+        visibility: Visibilité
   decidim:
     admin:
       menu:
         decidim_awesome: Decidim awesome
     components:
       awesome_iframe:
-        name: Fullscreen Iframe
+        name: Iframe en mode plein écran
         settings:
           global:
-            announcement: Announcement
-            iframe: Iframe code
-            iframe_help: 'Put your code as html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Content will be sanitized from other HTML tags. Ensure to use 100% as width to fill the screen.'
-            no_margins: No margins between the iframe and the rest of the page
-            viewport_width: Limit maximum width to the application viewport
+            announcement: Annonce
+            iframe: Code iframe
+            iframe_help: 'Mettez votre code en html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Le contenu sera nettoyé à partir d''autres balises HTML. Assurez-vous d''utiliser 100% comme largeur pour remplir l''écran.'
+            no_margins: Aucune marge entre l'iframe et le reste de la page
+            viewport_width: Limiter la largeur maximale à la fenêtre de l'application
           step:
-            announcement: Announcement
-            iframe: Iframe code
+            announcement: Annonce
+            iframe: Code iframe
       awesome_map:
-        name: Awesome Map
+        name: Awesome Map (Cartographie interactive)
         settings:
           global:
-            announcement: Announcement
-            collapse: Start with collapsed menu
-            map_height: Map height (px)
+            announcement: Annonce
+            collapse: Démarrer avec le menu réduit
+            map_center: Map center (Latitude, Longitude)
+            map_center_help: 'Use decimal points (ie: 41.38879, 2.15899). Leave it empty to automatically fit all the markers'
+            map_height: Hauteur max (px)
+            map_zoom: Zoom (any number betwen 0 and 18)
+            map_zoom_help: Only applies if a map center is defined
+            menu_amendments: Show amendments
+            menu_hashtags: Show Hasthag search menu
+            menu_meetings: Show meetings
+            truncate: Maximum characters for popup descriptions
           step:
-            announcement: Announcement
-            show_accepted: Show accepted proposals
-            show_evaluating: Show evaluating proposals
-            show_not_answered: Show not answered proposals
-            show_rejected: Show rejected proposals
-            show_withdrawn: Show withdrawn proposals
+            announcement: Annonce
+            show_accepted: Propositions acceptées
+            show_evaluating: Afficher les propositions en cours d'évaluation
+            show_not_answered: Afficher les propositions n'ayant pas reçu de réponses
+            show_rejected: Afficher les propositions rejetées
+            show_withdrawn: Afficher les propositions retirées
     decidim_awesome:
       admin:
         checks:
           index:
-            admin_head_tags: Awesome tags included in the admin application header
-            decidim-admin: From Admin module
-            decidim-core: From Core module
-            decidim-proposals: From Proposals module
-            decidim_version: Decidim version %{version}
+            admin_head_tags: '"Awesome tags" (balises) inclus dans l''en-tête de l''application d''administration'
+            decidim-admin: Depuis le module Admin
+            decidim-core: Depuis le module coeur
+            decidim-proposals: Depuis le module Propositions
+            decidim_version: Version %{version} de Decidim
             errors:
-              CSS: Head does not contain the required <link> stylesheet entries. To solve it, you can manually add it to your custom _head.html.erb
-              JavaScript: Head does not contain the required <script> Javascript entries. To solve it, you can manually add it to your custom admin/_header.html.erb
-            head_tags: Awesome tags included in the application header
-            title: System compatibility checks
+              CSS: La balise <head> ne contient pas les entrées de la feuille de style <link> requises. Pour la résoudre, vous pouvez l'ajouter manuellement à votre _head.html.erb personnalisé
+              JavaScript: La balise <head> ne contient pas les entrées  javascript nécessaire <script>  Pour la résoudre, vous pouvez l'ajouter manuellement à votre _head.html.erb personnalisé
+            head_tags: '"Awesome tags" (balises) inclus entre les balises <head>'
+            title: Compatibilité système
         config:
           constraints:
-            add_condition: Add case
-            always: Always
+            add_condition: Ajouter une contrainte d'application
+            always: Toujours
             delete: Supprimer
             edit: Modifier
-            title: 'Applicable only in these cases:'
+            title: 'Applicable uniquement dans ces cas:'
           create_scoped_style:
-            error: Error creating a new CSS box! %{error}
-            success: CSS box %{key} created successfully
+            error: Erreur lors de la création d'une nouvelle boîte CSS ! %{error}
+            success: La boîte CSS %{key} a été créée avec succès
           destroy_scoped_style:
-            error: Error removing CSS box! %{error}
-            success: CSS box %{key} removed successfully
-          experimental: Experimental options
+            error: Erreur lors de la suppression de la boîte CSS! %{error}
+            success: Boîte CSS %{key} supprimée avec succès
+          experimental: Fonctionnalités expérimentales
           form:
             help:
-              allow_images_in_full_editor: This will add an image uploader icon in all the editors WYSIWYG with the full toolbar enabled.
-              allow_images_in_markdown_editor: This will allow markdown editor to upload images by copy & paste or drag & drop.
-              allow_images_in_proposals: This will allow to upload images in the proposals editor, available to any user
-              allow_images_in_small_editor: This will add an image uploader icon in all the editors WYSIWYG with minimal options in the toolbar enabled.
-              auto_save_forms: This will use LocalStorage to automatically save data introduced by users in surveys and other forms while they are filling it. Data will be restored in a future visit with the same browser in case the form is not submitted. If the form is submitted, data will be removed. If users remove their LocalStorage data, data won't be restored either.
-              drag_and_drop_supported: When uploading images, Drag & Drop is supported. Images will be uploaded to the server and inserted as external resources (it doesn't use base64 inline encoding).
-              intergram_about: Intergram uses Telegram messenger to handle a live support chat widget embedded in the bottom of the page.
-              intergram_config: 'Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> to your group or start a chat with it directly. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
-              scoped_styles: Create custom CSS that applies only in certain parts of the public web (use the restrictions editor for that)
-              scoped_styles_variables: 'You can use the following CSS variables for organization customized colors:'
-              use_markdown_editor: This will substitute the Quill WYSIWYG editor, use a Markdown editor instead. Text will be rendered as HTML in the public pages (text in database will be saved as markdown text)
+              allow_images_in_full_editor: Ceci ajoutera une icône d'ajout d'images dans tous les éditeurs WYSIWYG avec toutes les options activées (icônes).
+              allow_images_in_markdown_editor: Cela permettra à l'éditeur markdown de télécharger des images par copier, coller ou glisser-déposer.
+              allow_images_in_proposals: Cela permettra de télécharger des images dans l'éditeur de propositions, disponible pour n'importe quel utilisateur
+              allow_images_in_small_editor: Ceci ajoutera une icône d'ajout d'images dans tous les éditeurs WYSIWYG avec seulement les options minimales activées (icônes).
+              auto_save_forms: Ceci utilisera LocalStorage ( cache navigateur) pour enregistrer automatiquement les données introduites par les utilisateurs dans les enquêtes et autres formulaires pendant qu'ils le remplissent. Les données seront restaurées lors d'une prochaine visite avec le même navigateur au cas où le formulaire ne serait pas soumis. Si le formulaire est soumis, les données seront supprimées. Si les utilisateurs suppriment leurs données LocalStorage ne seront pas non plus restaurées.
+              drag_and_drop_supported: Lorsque vous ajoutez des images, le glisser-déposer est pris en charge. Les images seront envoyées sur le serveur et insérées en tant que ressources externes (il n'utilise pas l'encodage en base64).
+              intergram_about: Intergram utilise la messagerie Telegram pour gérer un widget de chat en direct intégré dans le bas de la page.
+              intergram_config: 'Invitez le bot <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram</a> dans votre groupe ou commencez une conversation avec lui directement. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
+              scoped_styles: Créer un CSS personnalisé qui s'applique uniquement à certaines parties du site web public (front-end) (utilisez l'éditeur de restrictions pour cela)
+              scoped_styles_variables: 'Vous pouvez utiliser les variables CSS suivantes pour les couleurs personnalisées de l''organisation :'
+              use_markdown_editor: Cela remplacera l'éditeur Quill WYSIWYG par un éditeur Markdown. Le texte sera affiché en HTML dans les pages publiques (le texte dans la base de données sera sauvegardé en tant que texte markdown)
           form_styles:
-            new: Add a new CSS box
-            remove: Remove this CSS box
-            sure_to_remove: Are you sure you want to destroy this CSS box?
-          rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants" is enabled, this option won''t apply. Use the editors hacks instead to enable images in proposals.'
+            new: Ajouter une nouvelle boîte CSS
+            remove: Supprimer cette boîte CSS
+            sure_to_remove: Etes-vous sûr de vouloir supprimer cette boîte CSS ?
+          rich_text_editor_in_public_views: 'NOTE : "Éditeur de texte enrichi pour les participants" est activé, cette option ne s''appliquera pas. Utilisez les hacks de l''éditeur de texte à la place pour activer les images dans les propositions.'
           show:
-            title: Tweaks for %{setting}
-            update: Update configuration
-          system: Everywhere except participatory spaces
+            title: Tweaks pour %{setting}
+            update: Mettre à jour la configuration
+          system: Partout sauf les espaces participatifs
           update:
-            error: Error updating configuration! %{error}
-            success: Configuration updated successfully
+            error: Erreur lors de la mise à jour de la configuration ! %{error}
+            success: La configuration a bien été mise à jour
         constraints:
           create:
-            error: Error creating condition case
-            success: Condition case created successfully
+            error: Erreur lors de la création de la contrainte
+            success: Contrainte appliquée avec succès
           destroy:
-            error: Error removing condition case
-            success: Condition case removed successfully
+            error: Erreur lors de la suppression de la contrainte
+            success: Contrainte supprimée avec succès
           errors:
-            not_unique: Same condition already exists
+            not_unique: La contrainte existe déjà
           new:
-            cancel: Cancel
-            constraint: New condition case
-            save: Save
+            cancel: Annuler
+            constraint: Nouvelle contrainte
+            save: Enregistrer
           show:
-            cancel: Cancel
-            constraint: Edit condition case
-            save: Save
+            cancel: Annuler
+            constraint: Editer la contrainte
+            save: Enregistrer
           update:
-            error: Error updating condition case
-            success: Condition case updated successfully
+            error: Erreur lors de la mise à jour de la contrainte
+            success: Contrainte mise à jour avec succès
         menu:
-          checks: System compatibility
-          editors: Editor hacks
-          livechat: Live Chat
-          menu_hacks: Menu tweaks
-          proposals: Proposals hacks
-          styles: Custom styles
-          surveys: Surveys & forms
+          checks: Compatibilité système
+          editors: Hacks de l'éditeur
+          livechat: Chat en direct
+          menu_hacks: Tweaks de menu
+          proposals: Hacks pour les propositions
+          styles: Style personnalisés
+          surveys: Enquêtes et formulaires
         menu_hacks:
           create:
-            error: Error creating menu item! %{error}
-            success: Menu item created successfully
+            error: Erreur lors de la création de l'élément de menu ! %{error}
+            success: Élément de menu créé avec succès
           destroy:
-            error: Error removing menu item! %{error}
-            success: Menu item removed successfully
+            error: Erreur lors de la suppression de l'élément de menu ! %{error}
+            success: Élément de menu supprimé avec succès
           edit:
-            save: Save
-            title: Edit menu item
+            save: Enregistrer
+            title: Editer l'élément de menu
           form:
-            label_help: Translations aren't automatically detected, be sure to fill in all the fields!
+            label_help: Les traductions ne sont pas automatiquement détectées, assurez-vous de remplir tous les champs !
             target:
-              blank: New window
-              self: Same window
+              blank: Nouvel onglet
+              self: Même onglet
             visibility:
               default: Visible
-              hidden: Always hidden
-              logged: Only visible for logged users
-              non_logged: Only visible for non-logged users
+              hidden: Toujours caché
+              logged: Uniquement visible pour utilisateurs identifiés
+              non_logged: Visible uniquement pour les utilisateurs non connectés
           index:
-            confirm_destroy: Are you sure to remove this customization?
-            edit: Edit
-            new: New item
-            remove: Remove addition
-            remove_hack: Remove customization
-            title: Main menu
+            confirm_destroy: Êtes-vous sûr de vouloir supprimer cette personnalisation ?
+            edit: Modifier
+            new: Nouvel élément de menu
+            remove: Supprimer l'ajout
+            remove_hack: Supprimer la personnalisation
+            title: Menu principal
           new:
-            save: Save
-            title: New menu item
+            save: Enregistrer
+            title: Nouvel élément de menu
           update:
-            error: Error updating menu item! %{error}
-            success: Menu item updated successfully
-          url_exists: The same URL is already configured, please edit that instead of creating it again.
+            error: Erreur lors de la mise à jour de l'élément de menu ! %{error}
+            success: Élément de menu mis à jour avec succès
+          url_exists: La même URL est déjà configurée, veuillez la modifier au lieu de la créer à nouveau.
       config:
         intergram:
-          auto_no_response: It seems that no one is available to answer right now. Please tell us how we can contact you, and we will get back to you as soon as we can.
-          auto_response: Looking for the first available admin (It might take a minute)
-          intro_message: Hello! How can we help you?
-          title_closed: Click to chat!
-          title_open: Let's chat!
-      credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
+          auto_no_response: Il semble que personne ne soit disponible pour répondre à l'heure actuelle. Dites-nous comment nous pouvons vous contacter, et nous vous contacterons dès que possible.
+          auto_response: Recherche d'un administrateur disponible (Cela peut prendre quelques minutes)
+          intro_message: Bonjour. Comment puis-je vous aider ?
+          title_closed: Cliquez pour ouvrir une conversation !
+          title_open: Ouvrez une conversation !
+      credits: Décidim Awesome %{version} · Fait avec ♥ par Platoniq
       editor_images:
         create:
-          error: Error uploading image!
-          success: Image uploaded successfully
+          error: Erreur lors de l'ajout de l'image !
+          success: Image ajoutée avec succès
       map_component:
         map:
           error:
-            unavailable: The map is unavailable. Please configure geocoding to enable this component.
+            unavailable: La carte n'est pas disponible. Veuillez configurer le géocodage pour activer ce composant.
           show:
-            view_meeting: View meeting
-            view_proposal: View proposal
+            view_meeting: Voir la rencontre
+            view_proposal: Voir la proposition
   layouts:
     decidim:
       admin:
         decidim_awesome:
-          title: Decidim Tweaks
+          title: Tweaks Decidim
       decidim_awesome:
         awesome_config:
-          amendments: Amendments
-          autosaved_error: LocalStorage is not supported in your browser, form cannot be saved automatically.
-          autosaved_retrieved: Data for this form has been recovered from a previous session
-          autosaved_success: Data saved in local storage
-          categories: Categories
-          drag_and_drop_image: Add images by dragging & dropping or pasting them.
-          meetings: Meetings
-          proposals: Proposals
+          amendments: Amendements
+          autosaved_error: LocalStorage n'est pas pris en charge dans votre navigateur, le formulaire ne peut pas être enregistré automatiquement.
+          autosaved_retrieved: Les données de ce formulaire ont été récupérées à partir d'une session précédente
+          autosaved_success: Données enregistrées dans le stockage local de votre navigateur
+          categories: Catégories
+          drag_and_drop_image: Ajoutez des images en les glissant - déposant ou en les collant depuis votre presse-papier.
+          hashtags: Hashtags
+          items: items
+          meetings: Rencontres
+          proposals: Propositions
+          select_deselect_all: Select/deselect all

@@ -24,8 +24,10 @@ describe "Admin manages custom CSS", type: :system do
 
       expect(page).to have_admin_callout("created successfully")
 
-      textarea = page.find("textarea")
-      textarea.fill_in with: "body {background: red;}"
+      # textarea = page.find("textarea")
+      # textarea.fill_in with: "body {background: red;}"
+      page.execute_script('document.querySelector(".CodeMirror").CodeMirror.setValue("body {background: red;}");')
+
       find("*[type=submit]").click
 
       expect(page).to have_admin_callout("updated successfully")
@@ -45,13 +47,29 @@ describe "Admin manages custom CSS", type: :system do
       expect(page).to have_content("body {background: red;}")
       expect(page).to have_content("body {background: blue;}")
 
-      fill_in "foo", with: "body {background: green;}"
+      # fill_in "foo", with: "body {background: green;}"
+      page.execute_script('document.querySelector("[data-key=foo] .CodeMirror").CodeMirror.setValue("body {background: green;}");')
       find("*[type=submit]").click
 
       expect(page).to have_admin_callout("updated successfully")
       expect(page).not_to have_content("body {background: red;}")
       expect(page).to have_content("body {background: green;}")
       expect(page).to have_content("body {background: blue;}")
+    end
+
+    context "and there are CSS errors" do
+      it "shows error message" do
+        page.execute_script('document.querySelector("[data-key=foo] .CodeMirror").CodeMirror.setValue("I am invalid CSS");')
+        find("*[type=submit]").click
+
+        expect(page).to have_admin_callout("Error updating configuration! CSS in box #foo is invalid")
+        expect(page).not_to have_content("body {background: red;}")
+        expect(page).to have_content("body {background: blue;}")
+        expect(page).to have_content("I am invalid CSS")
+        within ".scoped-style[data-key=\"foo\"] .form-error" do
+          expect(page).to have_content("Error: Invalid CSS ")
+        end
+      end
     end
 
     context "when removing a box" do

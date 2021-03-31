@@ -61,7 +61,16 @@ en:
           global:
             announcement: Announcement
             collapse: Start with collapsed menu
+            map_center: Map center (Latitude, Longitude)
+            map_center_help: 'Use decimal points (ie: 41.38879, 2.15899). Leave it
+              empty to automatically fit all the markers'
             map_height: Map height (px)
+            map_zoom: Zoom (any number betwen 0 and 18)
+            map_zoom_help: Only applies if a map center is defined
+            menu_amendments: Show amendments
+            menu_hashtags: Show Hasthag search menu
+            menu_meetings: Show meetings
+            truncate: Maximum characters for popup descriptions
           step:
             announcement: Announcement
             show_accepted: Show accepted proposals
@@ -100,6 +109,8 @@ en:
             success: CSS box %{key} removed successfully
           experimental: Experimental options
           form:
+            errors:
+              incorrect_css: 'CSS in box #%{key} is invalid'
             help:
               allow_images_in_full_editor: This will add an image uploader icon in
                 all the editors WYSIWYG with the full toolbar enabled.
@@ -245,5 +256,8 @@ en:
           autosaved_success: Data saved in local storage
           categories: Categories
           drag_and_drop_image: Add images by dragging & dropping or pasting them.
+          hashtags: Hashtags
+          items: items
           meetings: Meetings
           proposals: Proposals
+          select_deselect_all: Select/deselect all

@@ -187,5 +187,8 @@
     "eslint": "^7.8.1",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0"
+  },
+  "dependencies": {
+    "codemirror": "^5.60.0"
   }
 }

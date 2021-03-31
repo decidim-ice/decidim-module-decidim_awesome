@@ -1,0 +1,16 @@
+.awesome-edit-config{
+  .scoped-style{
+    .form-error {
+      margin: 0;
+    }
+    >.CodeMirror{
+      border-top: .5em solid #f6f6f6;
+      border-right: .5em solid #f6f6f6;
+      min-height: 6em;
+      height: auto;
+      max-height: 40em;
+      resize: vertical;
+      overflow: vertical !important;
+    }
+  }
+}

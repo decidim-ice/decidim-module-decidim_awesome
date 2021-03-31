@@ -1,8 +1,10 @@
 // = require decidim/decidim_awesome/awesome_map/api_fetcher
 // = require decidim/decidim_awesome/awesome_map/categories
+// = require decidim/decidim_awesome/awesome_map/hashtags
+// = require decidim/decidim_awesome/awesome_map/utilities
 
 ((exports) => {
-  const { getCategory } = exports.AwesomeMap;
+  const { getCategory, truncate, collectHashtags, removeHashtags, appendHtmlHashtags } = exports.AwesomeMap;
   const query = `query ($id: ID!, $after: String!) {
     component(id: $id) {
         id
@@ -14,7 +16,7 @@
               endCursor
             }
             edges {
-              node {  
+              node {
                 id
                 state
                 title {
@@ -49,6 +51,7 @@
       }
     }`;
 
+  let amendments = [];
   const ProposalIcon = L.DivIcon.SVGIcon.DecidimIcon;
 
   const createMarker = (element, callback) => {
@@ -59,7 +62,9 @@
     });
 
     element.title.translation = ApiFetcher.findTranslation(element.title.translations);
-    element.body.translation = ApiFetcher.findTranslation(element.body.translations).replace(/\n/g, "<br>");
+    const body = ApiFetcher.findTranslation(element.body.translations);
+    element.hashtags = collectHashtags(body);
+    element.body.translation = appendHtmlHashtags(truncate(removeHashtags(body)).replace(/\n/g, "<br>"), element.hashtags);
 
     callback(element, marker);
   };
@@ -74,10 +79,17 @@
       if(result) {
         result.component.proposals.edges.forEach((element) => {
           if(!element.node) return;
-          
+
           if(element.node.coordinates) {
             element.node.link = component.url + '/proposals/' + element.node.id;
             createMarker(element.node, callback);
+          }
+
+          // Check if it has amendments, add it to a list
+          if(element.node.amendments && element.node.amendments.length) {
+            element.node.amendments.forEach((amendment) => {
+              amendments.push(amendment.emendation.id);
+            });
           }
         });
         if (result.component.proposals.pageInfo.hasNextPage) {
@@ -91,4 +103,5 @@
 
   exports.AwesomeMap = exports.AwesomeMap || {};
   exports.AwesomeMap.fetchProposals = fetchProposals;
+  exports.AwesomeMap.amendments = amendments;
 })(window);
