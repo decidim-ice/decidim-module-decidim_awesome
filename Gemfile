@@ -5,7 +5,7 @@ source "https://rubygems.org"
 ruby RUBY_VERSION
 
 # We need to keep version here for Appraisal compatibility
-DECIDIM_VERSION = "0.24.0.rc1"
+DECIDIM_VERSION = "0.24"
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-decidim_awesome", path: "."
