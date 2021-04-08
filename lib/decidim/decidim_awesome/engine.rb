@@ -15,13 +15,13 @@ module Decidim
       end
 
       initializer "decidim_awesome.view_helpers" do
-        ActionView::Base.send :include, AwesomeHelpers
+        ActionView::Base.include AwesomeHelpers
       end
 
       initializer "decidim_decidim_awesome.assets" do |app|
         app.config.assets.precompile += %w(decidim_decidim_awesome_manifest.js decidim_decidim_awesome_manifest.css)
         # add to precompile any present theme asset
-        Dir.glob(Rails.root.join("app", "assets", "themes", "*.*")).each do |path|
+        Dir.glob(Rails.root.join("app/assets/themes/*.*")).each do |path|
           app.config.assets.precompile << path
         end
       end

@@ -119,9 +119,7 @@ module Decidim
       def enabled_for_organization?(key)
         case key.to_sym
         when :allow_images_in_proposals
-          if @organization.respond_to? :rich_text_editor_in_public_views
-            return false if @organization.rich_text_editor_in_public_views
-          end
+          return false if @organization.rich_text_editor_in_public_views
         end
         true
       end
