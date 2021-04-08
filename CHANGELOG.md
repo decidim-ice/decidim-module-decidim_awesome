@@ -5,14 +5,14 @@ v0.6.7
 ------
 
 Compatibility:
-  - Decidim 0.23.3
-  - Decidim 0.23.2
-  - Decidim v0.23.1
+  - Decidim v0.23.x
   - Decidim v0.23
   - Decidim v0.22
 
 Features:
   - Feature: Truncate description in map popups to configurable character limit
+  - Add CSS validation and syntax highlighting in CSS boxes editors
+  - Fix: filter awesome map by hash takes into account the status of categories
 
 v0.6.6
 ------
@@ -25,7 +25,7 @@ Compatibility:
   - Decidim v0.22
 
 Features:
-  - Fix: Prevents overrides for menus not specified in awesomes config
+  - Fix: Prevents overrides for menus not specified in awesome config
   - Fix: Respect original @if condition for menu presenter for native menus
 
 v0.6.5
