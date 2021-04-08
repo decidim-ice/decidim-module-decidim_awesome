@@ -108,7 +108,7 @@
           // if it's a children, put the parent to indeterminate
           indeterminateInput(cat.parent);
         } else {
-          // show group of markers
+          // hide group of markers
           map.removeLayer(layer.group);
           // if it's a children, put the parent to indeterminate
           cat.children().forEach((c) => {
@@ -118,6 +118,8 @@
             }
           });
         }
+        // sync tags
+        updateHashtagLayers();
       }
     });
 
@@ -144,6 +146,15 @@
         const layer = layers[$(el).closest("label").data("layer")];
         if(layer) {
           map.addLayer(layer.group);
+        }
+      });
+      // hide non-selected categories
+      $(".awesome_map-categories-selector:not(:checked)").each((_idx, el) => {
+        const layer = layers[$(el).closest("label").data("layer")];
+        console.log(el, layer, map)
+        if(layer) {
+          map.addLayer(layer.group);
+          map.removeLayer(layer.group);
         }
       });
     };
