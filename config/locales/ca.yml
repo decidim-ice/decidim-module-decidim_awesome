@@ -98,6 +98,8 @@ ca:
             success: Caixa CSS %{key} eliminada correctament
           experimental: Opcions experimentals
           form:
+            errors:
+              incorrect_css: 'El CSS de la caixa #%{key} no és vàlid'
             help:
               allow_images_in_full_editor: Això afegirà un botó per pujar imatges a l'editor HTML complet.
               allow_images_in_markdown_editor: Això permetrà a l'editor markdown pujar imatges amb "copiar i enganxar" o "arrastrant i deixant anar".

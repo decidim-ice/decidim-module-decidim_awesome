@@ -98,6 +98,8 @@ eu:
             success: CSS box %{key} removed successfully
           experimental: Experimental options
           form:
+            errors:
+              incorrect_css: 'CSS in box #%{key} is invalid'
             help:
               allow_images_in_full_editor: This will add an image uploader icon in all the editors WYSIWYG with the full toolbar enabled.
               allow_images_in_markdown_editor: This will allow markdown editor to upload images by copy & paste or drag & drop.
