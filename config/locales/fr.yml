@@ -98,6 +98,8 @@ fr:
             success: Boîte CSS %{key} supprimée avec succès
           experimental: Fonctionnalités expérimentales
           form:
+            errors:
+              incorrect_css: 'CSS in box #%{key} is invalid'
             help:
               allow_images_in_full_editor: Ceci ajoutera une icône d'ajout d'images dans tous les éditeurs WYSIWYG avec toutes les options activées (icônes).
               allow_images_in_markdown_editor: Cela permettra à l'éditeur markdown de télécharger des images par copier, coller ou glisser-déposer.
