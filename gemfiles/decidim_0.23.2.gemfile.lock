@@ -1,7 +1,7 @@
 PATH
   remote: ..
   specs:
-    decidim-decidim_awesome (0.6.6)
+    decidim-decidim_awesome (0.6.7)
       decidim-admin (>= 0.22.0, < 0.24)
       decidim-core (>= 0.22.0, < 0.24)
       redcarpet (~> 3.4)
@@ -493,7 +493,7 @@ GEM
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2021.0225)
-    mimemagic (0.3.9)
+    mimemagic (0.3.10)
       nokogiri (~> 1)
       rake
     mini_magick (4.11.0)
@@ -513,7 +513,7 @@ GEM
     netrc (0.11.0)
     nio4r (2.5.7)
     nobspw (0.6.2)
-    nokogiri (1.11.2)
+    nokogiri (1.11.3)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     oauth (0.5.5)
