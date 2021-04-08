@@ -1,0 +1,65 @@
+name: "[CI] Test 0.24"
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  test-report:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu]
+        ruby: [2.7]
+        decidim: [decidim-0.24]
+    runs-on: ${{ matrix.os }}-latest
+    continue-on-error: ${{ endsWith(matrix.ruby, 'head') || matrix.ruby == 'debug' }}
+
+    services:
+      postgres:
+        image: postgres:11
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        env:
+          POSTGRES_PASSWORD: postgres
+    env:
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_HOST: localhost
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+        # do not use cache as appraisal is not compatible with gems installed locally
+
+      - name: Install Ruby deps
+        run: |
+          gem install bundler:2.1.4
+          bundle install  --jobs 4 --retry 3
+
+      - name: Install Appraisal
+        run: |
+          bundle exec appraisal install
+
+      - name: Setup Database
+        run: bundle exec appraisal ${{ matrix.decidim }} rake test_app
+
+      - name: Run RSpec
+        run: SIMPLECOV=1 CODECOV=1 bundle exec appraisal ${{ matrix.decidim }} rake
+
+      - uses: actions/upload-artifact@v2-preview
+        if: always()
+        with:
+          name: screenshots
+          path: ./spec/decidim_dummy_app/tmp/screenshots

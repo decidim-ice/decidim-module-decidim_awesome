@@ -1,6 +1,7 @@
 # Decidim::DecidimAwesome
 
-[![Build](https://github.com/Platoniq/decidim-module-decidim_awesome/workflows/Build/badge.svg)](https://github.com/Platoniq/decidim-module-decidim_awesome/actions)
+[![[CI] Test 0.24](https://github.com/Platoniq/decidim-module-decidim_awesome/actions/workflows/test%20-24.yml/badge.svg)](https://github.com/Platoniq/decidim-module-decidim_awesome/actions/workflows/test%20-24.yml)
+[![[CI] Test 0.23](https://github.com/Platoniq/decidim-module-decidim_awesome/actions/workflows/test%20-23.yml/badge.svg)](https://github.com/Platoniq/decidim-module-decidim_awesome/actions/workflows/test%20-23.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/2dada53525dd5a944089/maintainability)](https://codeclimate.com/github/Platoniq/decidim-module-decidim_awesome/maintainability)
 [![Test Coverage](https://codecov.io/gh/Platoniq/decidim-module-decidim_awesome/branch/master/graph/badge.svg?token=TFBMCLLZJG)](undefined)
 
@@ -135,7 +136,7 @@ Some things in the road-map:
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-decidim_awesome", "~> 0.6.6"
+gem "decidim-decidim_awesome", "~> 0.7.0"
 ```
 
 And then execute:
@@ -152,6 +153,7 @@ Depending on your Decidim version, choose the corresponding Awesome version to e
 |---|---|
 | 0.5.x | 0.21.x, 0.22.x |
 | 0.6.x | 0.22.x, 0.23.x |
+| 0.7.x | 0.23.x, 0.24.x |
 
 ## Configuration
 

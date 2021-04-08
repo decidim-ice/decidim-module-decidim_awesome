@@ -25,15 +25,9 @@ Decidim::Proposals::ProposalPresenter.class_eval do
     # rubocop:enable Metrics/CyclomaticComplexity
     # rubocop:enable Metrics/PerceivedComplexity
 
-    if defined? translated_attribute
-      text = translated_attribute(proposal.body)
-
-      text = strip_tags(sanitize_text(text)) if strip_tags
-    else
-      # TODO: remove when 0.22 is diched
-      text = proposal.body
-      text = strip_tags(text) if strip_tags
-    end
+    # TODO: remove when 0.23 is ditched
+    text = translated_attribute(proposal.body)
+    text = strip_tags(sanitize_text(text)) if strip_tags
 
     renderer = Decidim::ContentRenderers::HashtagRenderer.new(text)
     text = renderer.render(links: links, extras: extras).html_safe

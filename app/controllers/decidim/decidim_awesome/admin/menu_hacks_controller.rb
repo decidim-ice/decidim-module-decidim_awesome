@@ -85,7 +85,7 @@ module Decidim
         end
 
         def current_items
-          @current_items ||= current_menu.items(true)
+          @current_items ||= current_menu.items(include_invisible: true)
         end
 
         def current_menu
@@ -101,7 +101,7 @@ module Decidim
         end
 
         def visibility_options
-          MenuForm::VISIBILITY_STATES.map { |key| [I18n.t(".menu_hacks.form.visibility.#{key}", scope: "decidim.decidim_awesome.admin"), key] }.to_h
+          MenuForm::VISIBILITY_STATES.index_by { |key| I18n.t(".menu_hacks.form.visibility.#{key}", scope: "decidim.decidim_awesome.admin") }
         end
 
         def target_options

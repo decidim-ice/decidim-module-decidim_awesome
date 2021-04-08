@@ -10,11 +10,6 @@ module Decidim
         process resize_to_fit: [nil, 237]
       end
 
-      # TODO: remove when diching 0.22 support
-      def extension_white_list
-        %w(jpg jpeg png)
-      end
-
       def extension_whitelist
         %w(jpg jpeg png)
       end
