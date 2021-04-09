@@ -21,12 +21,21 @@ module Decidim
           fields = AwesomeConfig.find_or_initialize_by(var: :proposal_custom_fields, organization: @organization)
           fields.value = {} unless fields.value.is_a? Hash
           # TODO: prevent (unlikely) colisions with exisiting values
-          fields.value[@ident] = ""
+          fields.value[@ident] = default_definition
           fields.save!
 
           broadcast(:ok, @ident)
         rescue StandardError => e
           broadcast(:invalid, e.message)
+        end
+
+        private
+
+        def default_definition
+          "body:
+  type: 'textarea'
+  title: 'activemodel.attributes.proposal.body'
+  required: true"
         end
       end
     end
