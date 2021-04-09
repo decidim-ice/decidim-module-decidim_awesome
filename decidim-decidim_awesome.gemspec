@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency "decidim-admin", Decidim::DecidimAwesome::COMPAT_DECIDIM_VERSION
   s.add_dependency "decidim-core", Decidim::DecidimAwesome::COMPAT_DECIDIM_VERSION
   s.add_dependency "redcarpet", "~> 3.4"
-  s.add_dependency "sassc", "~> 2.3.0"
+  s.add_dependency "sassc", "~> 2.3" # compabitilize between 0.23 (2.3.0) and 0.24 (2.4.0)
 
   s.add_development_dependency "appraisal"
   s.add_development_dependency "decidim-dev", Decidim::DecidimAwesome::COMPAT_DECIDIM_VERSION
