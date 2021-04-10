@@ -1,6 +1,6 @@
 {
   "name": "decidim-module-decidim_awesome",
-  "version": "0.6.5",
+  "version": "0.7.1",
   "description": "Mods and tweaks for Decidim",
   "main": "index.js",
   "directories": {
@@ -189,6 +189,8 @@
     "eslint-plugin-import": "^2.22.0"
   },
   "dependencies": {
-    "codemirror": "^5.60.0"
+    "codemirror": "^5.60.0",
+    "formBuilder": "^3.6.2",
+    "jquery-ui": "^1.12.1"
   }
 }

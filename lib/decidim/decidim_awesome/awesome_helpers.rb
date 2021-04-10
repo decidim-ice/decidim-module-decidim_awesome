@@ -20,7 +20,7 @@ module Decidim
       end
 
       def javascript_config_vars
-        awesome_config.except(:scoped_styles).to_json.html_safe
+        awesome_config.except(:scoped_styles, :proposal_custom_fields).to_json.html_safe
       end
 
       def show_public_intergram?
@@ -51,14 +51,23 @@ module Decidim
 
       # Collects all CSS that is applied in the current URL context
       def awesome_custom_styles
-        return unless awesome_config[:scoped_styles]
-        return @awesome_custom_styles if @awesome_custom_styles
+        @awesome_custom_styles ||= awesome_collect_sub_configs("scoped_style", awesome_config_instance)
+      end
 
-        styles = awesome_config[:scoped_styles]&.filter do |key, _value|
-          config = AwesomeConfig.find_by(var: "scoped_style_#{key}", organization: current_organization)
-          @awesome_config_instance.valid_in_context?(config&.constraints)
+      # Collects all proposal custom fields that is applied in the current URL context
+      def awesome_proposal_custom_fields
+        @awesome_proposal_custom_fields ||= awesome_collect_sub_configs("proposal_custom_field", awesome_config_instance)
+      end
+
+      def awesome_collect_sub_configs(singular_key, config_instance)
+        plural_key = singular_key.pluralize.to_sym
+        return unless awesome_config[plural_key]
+
+        fields = awesome_config[plural_key]&.filter do |key, _value|
+          config = AwesomeConfig.find_by(var: "#{singular_key}_#{key}", organization: current_organization)
+          config_instance.valid_in_context?(config&.constraints)
         end
-        @awesome_custom_styles = styles.values.join("\n")
+        fields.values
       end
 
       def version_prefix

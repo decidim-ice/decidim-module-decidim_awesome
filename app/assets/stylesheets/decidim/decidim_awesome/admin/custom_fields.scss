@@ -1,0 +1,47 @@
+.proposal-custom-field {
+  &-editor {
+    background-color: #f6f6f6;
+    padding: .5em .5em 1em .5em;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    label {
+      display: inline-block;
+      max-width: 100%;
+      font-weight: 600 !important;
+    }
+    li[type] {
+      display: inherit;
+      width: 100%;
+      height: inherit;
+      margin: inherit;
+      border: inherit;
+      box-shadow: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+      color: inherit;
+    }
+    .form-group {
+      background-color: inherit;
+      margin: 0;
+      padding: 0;
+    }
+    .form-wrap.form-builder .form-group {
+      margin-bottom: 10px !important;
+    }
+    .form-control {
+      color: #555;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+      transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+      margin: 0;
+      padding: 6px 12px;
+    }
+  }
+  .constraints-editor {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
