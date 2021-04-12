@@ -114,11 +114,11 @@ en:
           destroy_scoped_style:
             error: Error removing CSS box! %{error}
             success: CSS box %{key} removed successfully
-          experimental: Experimental options
+          experimental: 'NOTE: These features are experimental. Use them with caution!'
           form:
             errors:
               incorrect_css: 'CSS in box #%{key} is invalid'
-              incorrect_yaml: 'YAML in box #%{key} is invalid'
+              incorrect_json: 'JSON definition in box #%{key} is invalid'
             help:
               allow_images_in_full_editor: This will add an image uploader icon in
                 all the editors WYSIWYG with the full toolbar enabled.
@@ -145,7 +145,9 @@ en:
               proposal_custom_fields: Create custom proposal fields that applies only
                 in certain parts of the public web (use the restrictions editor for
                 that)
-              proposal_custom_fields_example: Check this site for format options https://github.com/jsonform/jsonform/wiki
+              proposal_custom_fields_example: Data is stored in a XML object using
+                compatible HTML attributes (dl,dt,dd elements) replacing the "body"
+                in a normal proposal.
               scoped_styles: Create custom CSS that applies only in certain parts
                 of the public web (use the restrictions editor for that)
               scoped_styles_variables: 'You can use the following CSS variables for
@@ -153,7 +155,7 @@ en:
               use_markdown_editor: This will substitute the Quill WYSIWYG editor,
                 use a Markdown editor instead. Text will be rendered as HTML in the
                 public pages (text in database will be saved as markdown text)
-          form_proposals:
+          form_proposal_custom_fields:
             new: Add a new "custom fields" box
             remove: Remove this "custom fields" box
             sure_to_remove: Are you sure you want to destroy this fields box?
@@ -192,13 +194,14 @@ en:
             error: Error updating condition case
             success: Condition case updated successfully
         menu:
-          checks: System compatibility
-          editors: Editor hacks
+          checks: System Compatibility
+          editors: Editor Hacks
           livechat: Live Chat
-          menu_hacks: Menu tweaks#{key} styles are incorrect
-          proposals: Proposals hacks
-          styles: Custom styles
-          surveys: Surveys & forms
+          menu_hacks: Menu Tweaks
+          proposal_custom_fields: Proposals Custom Fields
+          proposals: Proposals Hacks
+          styles: Custom Styles
+          surveys: Surveys & Forms
         menu_hacks:
           create:
             error: Error creating menu item! %{error}

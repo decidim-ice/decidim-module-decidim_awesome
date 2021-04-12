@@ -18,6 +18,7 @@
         "FormStorage": false,
         "Quill": false,
         "InscrybMDE": false,
+        "CodeMirror": false,
         "inlineAttachment": false
     },
     "rules": {

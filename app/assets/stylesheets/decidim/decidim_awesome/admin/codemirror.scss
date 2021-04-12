@@ -1,17 +1,27 @@
 .awesome-edit-config{
   .scoped-style,
   .proposal-custom-field{
-    .form-error {
+    .form-error{
       margin: 0;
     }
+
     >.CodeMirror{
-      border-top: .5em solid #f6f6f6;
-      border-right: .5em solid #f6f6f6;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      border-top: .5em solid #e0e0e0;
+      border-right: .5em solid #e0e0e0;
+      border-bottom: .5em solid #e0e0e0;
       min-height: 6em;
       height: auto;
       max-height: 40em;
       resize: vertical;
       overflow: vertical !important;
+
+      >.CodeMirror-scroll{
+        >.CodeMirror-gutters{
+          background: #e0e0e0;
+        }
+      }
     }
   }
 }

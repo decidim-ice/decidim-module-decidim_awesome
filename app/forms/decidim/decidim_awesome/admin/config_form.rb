@@ -22,7 +22,7 @@ module Decidim
         attr_accessor :valid_keys
 
         validate :css_syntax, if: ->(form) { form.scoped_styles.present? }
-        validate :yaml_syntax, if: ->(form) { form.proposal_custom_fields.present? }
+        validate :json_syntax, if: ->(form) { form.proposal_custom_fields.present? }
 
         def self.from_params(params, additional_params = {})
           instance = super(params, additional_params)
@@ -39,11 +39,11 @@ module Decidim
           end
         end
 
-        def yaml_syntax
+        def json_syntax
           proposal_custom_fields.each do |key, code|
-            YAML.parse(code)
+            JSON.parse(code)
           rescue StandardError => e
-            errors.add(:scoped_styles, I18n.t("config.form.errors.incorrect_yaml", key: key, scope: "decidim.decidim_awesome.admin"))
+            errors.add(:scoped_styles, I18n.t("config.form.errors.incorrect_json", key: key, scope: "decidim.decidim_awesome.admin"))
             errors.add(key.to_sym, e.message)
           end
         end

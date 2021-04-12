@@ -1,27 +1,11 @@
+<div class="callout warning"><%= t("experimental", scope: "decidim.decidim_awesome.admin.config") %></div>
 <div class="row column decidim_awesome-form">
-  <% if config_enabled? :proposal_custom_fields %>
-    <p class="help-text"><%= t("help.proposal_custom_fields", scope: "decidim.decidim_awesome.admin.config.form") %></p>
-    <p class="help-text"><%= t("help.proposal_custom_fields_example", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+  <% enabled_configs([:use_markdown_editor, :allow_images_in_markdown_editor]).each do |key| %>
+    <%= form.check_box key %>
+    <p class="help-text"><%= t("help.#{key}", scope: "decidim.decidim_awesome.admin.config.form") %></p>
 
-    <% form.object.proposal_custom_fields&.each do |key, value| %>
-      <div class="proposal-custom-field" data-key="<%= key %>">
-        <%= label_tag :proposal_custom_fields do %>
-          <%= t("config.proposal_custom_fields", scope: "activemodel.attributes", id: key) %>
-          <%= link_to t(".remove"), decidim_admin_decidim_awesome.proposal_custom_field_path(key: key), method: :delete, class: "float-right", data: { confirm: t(".sure_to_remove") } %>
-        <% end %>
-        <p class="form-error is-visible" id="proposal-custom-field-error-<%= key %>"><%= errors[key.to_sym].join("<br>") if errors %></p>
-        <%= hidden_field_tag key, value, name: "config[proposal_custom_fields][#{key}]", id: "proposal-custom-field-spec-#{key}" %>
-        <div class="proposal-custom-field-editor" id="proposal-custom-field-editor-<%= key %>"></div>
-        <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: "proposal_custom_field_#{key}", constraints: constraints_for("proposal_custom_field_#{key}") }) %>
-      </div>
-    <% end %>
-
-    <%= link_to t(".new"), decidim_admin_decidim_awesome.proposal_custom_fields_path, method: :post %>
-
+    <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: key, constraints: constraints_for(key) }) %>
   <% end %>
-
-  <hr>
-  <h2 class="card-title"><%= t("experimental", scope: "decidim.decidim_awesome.admin.config") %></h2>
 
   <% if config_enabled? :allow_images_in_proposals %>
     <p class="text-info"><%= t("rich_text_editor_in_public_views", scope: "decidim.decidim_awesome.admin.config") if current_organization.rich_text_editor_in_public_views %></p>

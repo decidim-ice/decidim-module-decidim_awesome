@@ -16,7 +16,7 @@ module Decidim
             end
           end
 
-          redirect_to decidim_admin_decidim_awesome.config_path(:proposals)
+          redirect_to decidim_admin_decidim_awesome.config_path(:proposal_custom_fields)
         end
 
         def destroy
@@ -30,7 +30,7 @@ module Decidim
             end
           end
 
-          redirect_to decidim_admin_decidim_awesome.config_path(:proposals)
+          redirect_to decidim_admin_decidim_awesome.config_path(:proposal_custom_fields)
         end
       end
     end

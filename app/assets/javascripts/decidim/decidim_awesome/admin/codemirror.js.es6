@@ -6,7 +6,7 @@
 
 $(() => {
   $(".awesome-edit-config .scoped-style textarea").each((_idx, el) => {
-    var editor = CodeMirror.fromTextArea(el, {
+    CodeMirror.fromTextArea(el, {
       lineNumbers: true,
       mode: "css",
       keymap: "sublime"

@@ -10,25 +10,24 @@ $(() => {
     const doc = $.parseXML("<xml/>");
     const xml = doc.getElementsByTagName("xml")[0];
     const dl = doc.createElement("dl");
-    let key, dt, dd, ul, li, val;
+    let key, dt, dd, div, val;
     xml.appendChild(dl);
     $(dl).attr("class", "decidim_awesome-custom_fields");
     $(dl).attr("data-generator", "decidim_awesome");
-    $(dl).attr("data-version", DecidimAwesome.version);
+    $(dl).attr("data-version", window.DecidimAwesome.version);
     for (key in data) {
-      if (data.hasOwnProperty(key) && data[key].userData && data[key].userData.length) {
+      if (data[key].userData && data[key].userData.length) {
         dt = doc.createElement("dt");
-        dd = doc.createElement("dd");
-        $(dt).attr("name", data[key].name);
         $(dt).text(data[key].label);
-        ul = doc.createElement("ul")
+        $(dt).attr("name", data[key].name);
+        dd = doc.createElement("dd");
         for(val in data[key].userData) {
-          li = doc.createElement("li");
-          $(li).text(data[key].userData[val]);
-          ul.appendChild(li);
+          div = doc.createElement("div");
+          $(div).text(data[key].userData[val]);
+          dd.appendChild(div);
         }
-        dd.appendChild(ul);
-        $(dd).attr("name", data[key].name);
+        $(dd).attr("id", data[key].name);
+        $(dd).attr("name", data[key].type);
         dl.appendChild(dt);
         dl.appendChild(dd);
       }
@@ -41,12 +40,22 @@ $(() => {
     const $form = $(element).closest("form");
     const $body = $form.find("#proposal_body");
     const formRenderOps = {
-      formData: data
+      i18n: {
+        locale: 'en-US',
+        location: 'https://cdn.jsdelivr.net/npm/formbuilder-languages@1.1.0/'
+      },
+      formData: data,
+      render: true
     };
 
     const $render = $(element).formRender(formRenderOps);
     $form.on("submit", (e) => {
-      $body.val(dataToXML($render.userData));
+      if(e.target.checkValidity()) {
+        $body.val(dataToXML($render.userData));
+      } else {
+        e.preventDefault();
+        e.target.reportValidity();
+      }
     });
   });
 });

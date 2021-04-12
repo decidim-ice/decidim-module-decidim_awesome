@@ -8,6 +8,21 @@
 @import "./forms/autosave";
 
 // Custom fields tunning
-.rendered-form .form-control.ql-container {
+.rendered-form .form-control.ql-container{
   height: auto !important;
+}
+
+.decidim_awesome-custom_fields{
+  dd{
+    >div:last-child{
+      margin-bottom: 1rem;
+    }
+
+    &[name="textarea"]{
+      >div > p{
+        margin-top: 1rem;
+        margin-bottom: 0;
+      }
+    }
+  }
 }

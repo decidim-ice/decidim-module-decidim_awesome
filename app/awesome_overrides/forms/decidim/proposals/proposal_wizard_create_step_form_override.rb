@@ -3,15 +3,20 @@
 # Body valitation are overriden with a custom html/xml structure to store
 # the custom fields definition
 Decidim::Proposals::ProposalWizardCreateStepForm.class_eval do
+  class_attribute :original_validators
+
   # remove body validation if custom_styles apply
   def before_validation
-    @@original_validators ||= _validators.deep_dup
+    original_validators ||= _validators.deep_dup
 
     if custom_fields.present?
       _validators.delete(:body)
       _validators.each { |_key, validators| validators.each { |val| val.attributes.delete :body } }
+      _validate_callbacks.each do |callback|
+        callback.raw_filter.attributes.delete(:body) if callback.raw_filter.respond_to?(:attributes)
+      end
     else
-      _validators = @@original_validators
+      _validators = original_validators
     end
   end
 
