@@ -92,6 +92,18 @@ module Decidim
         end
       end
 
+      # Merges all subconfigs for custom_styles or proposal_custom_fields styled confs
+      def collect_sub_configs(singular_key)
+        plural_key = singular_key.pluralize.to_sym
+        return unless config[plural_key]
+
+        fields = config[plural_key]&.filter do |key, _value|
+          sub_config = AwesomeConfig.find_by(var: "#{singular_key}_#{key}", organization: @organization)
+          valid_in_context?(sub_config&.constraints)
+        end
+        fields.values
+      end
+
       private
 
       def map_defaults

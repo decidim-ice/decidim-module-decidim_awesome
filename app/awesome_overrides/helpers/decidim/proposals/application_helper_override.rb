@@ -10,11 +10,11 @@ Decidim::Proposals::ApplicationHelper.module_eval do
     apply_custom_fields_override(custom_fields, form)
   end
 
-  def apply_custom_fields_override(fields, _form)
-    # form.text_area :body, id: "custom_fields_container", rows: 10, value: fields
-    all_fields = fields.map {|f| JSON.parse(f) }.inject(&:merge)
+  def apply_custom_fields_override(fields, form)
+    custom_fields = Decidim::DecidimAwesome::CustomFields.new(fields)
+    custom_fields.apply_xml(form_presenter.body(extras: false).strip)
     console
-    render partial: "decidim/decidim_awesome/custom_fields/form_render", locals: {spec: all_fields}
+    render partial: "decidim/decidim_awesome/custom_fields/form_render", locals: { spec: custom_fields.to_json, form: form }
   end
 
   # original function from ApplicationHelper

@@ -19,6 +19,7 @@ module Decidim
     autoload :ContentRenderes, "decidim/decidim_awesome/content_renderers"
     autoload :ContextAnalyzers, "decidim/decidim_awesome/context_analyzers"
     autoload :MenuHacker, "decidim/decidim_awesome/menu_hacker"
+    autoload :CustomFields, "decidim/decidim_awesome/custom_fields"
 
     # Boolean configuration options
     #

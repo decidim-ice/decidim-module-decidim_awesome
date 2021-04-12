@@ -32,10 +32,8 @@ module Decidim
         private
 
         def default_definition
-          "body:
-  type: 'textarea'
-  title: 'activemodel.attributes.proposal.body'
-  required: true"
+          # '[{"type":"textarea","required":true,"label":"Body","className":"form-control","name":"body","subtype":"textarea"}]'
+          "[]"
         end
       end
     end

@@ -51,23 +51,12 @@ module Decidim
 
       # Collects all CSS that is applied in the current URL context
       def awesome_custom_styles
-        @awesome_custom_styles ||= awesome_collect_sub_configs("scoped_style", awesome_config_instance)
+        @awesome_custom_styles ||= awesome_config_instance.collect_sub_configs("scoped_style")
       end
 
       # Collects all proposal custom fields that is applied in the current URL context
       def awesome_proposal_custom_fields
-        @awesome_proposal_custom_fields ||= awesome_collect_sub_configs("proposal_custom_field", awesome_config_instance)
-      end
-
-      def awesome_collect_sub_configs(singular_key, config_instance)
-        plural_key = singular_key.pluralize.to_sym
-        return unless awesome_config[plural_key]
-
-        fields = awesome_config[plural_key]&.filter do |key, _value|
-          config = AwesomeConfig.find_by(var: "#{singular_key}_#{key}", organization: current_organization)
-          config_instance.valid_in_context?(config&.constraints)
-        end
-        fields.values
+        @awesome_proposal_custom_fields ||= awesome_config_instance.collect_sub_configs("proposal_custom_field")
       end
 
       def version_prefix

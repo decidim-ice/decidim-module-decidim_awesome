@@ -6,3 +6,8 @@
 @import "./editors/markdown_editor";
 @import "./editors/markdown_view";
 @import "./forms/autosave";
+
+// Custom fields tunning
+.rendered-form .form-control.ql-container {
+  height: auto !important;
+}

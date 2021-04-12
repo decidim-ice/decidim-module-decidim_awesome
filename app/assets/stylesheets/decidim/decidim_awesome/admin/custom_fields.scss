@@ -45,3 +45,8 @@
     border-top-right-radius: 0;
   }
 }
+
+// Custom fields tunning
+.rendered-form .form-control.ql-container {
+  height: auto !important;
+}
