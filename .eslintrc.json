@@ -19,6 +19,7 @@
         "Quill": false,
         "InscrybMDE": false,
         "CodeMirror": false,
+        "Europa": false,
         "inlineAttachment": false
     },
     "rules": {

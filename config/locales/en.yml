@@ -153,8 +153,8 @@ en:
               scoped_styles_variables: 'You can use the following CSS variables for
                 organization customized colors:'
               use_markdown_editor: This will substitute the Quill WYSIWYG editor,
-                use a Markdown editor instead. Text will be rendered as HTML in the
-                public pages (text in database will be saved as markdown text)
+                use a Markdown editor instead. Text will be converted and saved as
+                HTML in the database.
           form_proposal_custom_fields:
             new: Add a new "custom fields" box
             remove: Remove this "custom fields" box

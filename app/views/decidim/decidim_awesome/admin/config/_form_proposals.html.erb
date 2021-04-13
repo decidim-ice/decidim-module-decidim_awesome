@@ -1,12 +1,4 @@
-<div class="callout warning"><%= t("experimental", scope: "decidim.decidim_awesome.admin.config") %></div>
 <div class="row column decidim_awesome-form">
-  <% enabled_configs([:use_markdown_editor, :allow_images_in_markdown_editor]).each do |key| %>
-    <%= form.check_box key %>
-    <p class="help-text"><%= t("help.#{key}", scope: "decidim.decidim_awesome.admin.config.form") %></p>
-
-    <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: key, constraints: constraints_for(key) }) %>
-  <% end %>
-
   <% if config_enabled? :allow_images_in_proposals %>
     <p class="text-info"><%= t("rich_text_editor_in_public_views", scope: "decidim.decidim_awesome.admin.config") if current_organization.rich_text_editor_in_public_views %></p>
 
@@ -16,5 +8,3 @@
     <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :allow_images_in_proposals, constraints: constraints_for(:allow_images_in_proposals) }) %>
   <% end %>
 </div>
-
-<%= javascript_include_tag "decidim/decidim_awesome/admin/form_exit_warn" %>
