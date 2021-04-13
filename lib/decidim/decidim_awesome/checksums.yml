@@ -15,10 +15,9 @@ decidim-core:
     decidim-0.23: 70db39954b5840924530bf94d2a0a73a
 decidim-proposals:
   /app/forms/decidim/proposals/proposal_wizard_create_step_form.rb:
-    decidim-0.23: db69edd0ba8ffa3965a5c44a6bfaba8d
-    decidim-0.23.1: db69edd0ba8ffa3965a5c44a6bfaba8d
+    decidim-0.23: b99c3223f1e75f2a69a89ae9a3d28182
+    decidim-0.23.1: 13ebf86ec88fa64d2651ab9735d5de90
     decidim-0.24: db69edd0ba8ffa3965a5c44a6bfaba8d
   /app/helpers/decidim/proposals/application_helper.rb:
-    decidim-0.23: c5f99f5fa7de9a6e45776983330e9d73
-    decidim-0.23.1: c5f99f5fa7de9a6e45776983330e9d73
+    decidim-0.23: d923323e3db542b84f42db3a4f782a8d
     decidim-0.24: c5f99f5fa7de9a6e45776983330e9d73

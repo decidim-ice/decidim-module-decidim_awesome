@@ -78,14 +78,14 @@ describe "Admin edits proposals", type: :system do
     let(:rte_enabled) { true }
     let(:markdown_enabled) { true }
     let(:text) { "# title\\n\\nParagraph\\nline 2" }
-    let(:html) { "<h1 id=\"title\">title</h1>\r\n<p>Paragraph<br>line 2</p>\r\n" }
+    let(:html) { "<h1 id=\"title\">title</h1><p>Paragraph<br>line 2</p>" }
 
     it "converts markdown to html before saving" do
       page.execute_script("$('input[name=\"faker-inscrybmde\"]:first')[0].InscrybMDE.value('#{text}')")
 
       click_button "Update"
 
-      expect(Decidim::Proposals::Proposal.last.body["en"]).to eq(html)
+      expect(Decidim::Proposals::Proposal.last.body["en"].gsub(/[\n\r]/, "")).to eq(html)
     end
   end
 end
