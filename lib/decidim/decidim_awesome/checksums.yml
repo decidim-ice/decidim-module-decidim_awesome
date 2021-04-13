@@ -14,7 +14,11 @@ decidim-core:
   /app/presenters/decidim/menu_item_presenter.rb:
     decidim-0.23: 70db39954b5840924530bf94d2a0a73a
 decidim-proposals:
-  /app/presenters/decidim/proposals/proposal_presenter.rb:
-    decidim-0.23: 437c0c25151f605401a4f14d090ba5ea
-    decidim-0.23.1: 892021b2ce9ac10c2e1b738e6948cde0
-    decidim-0.24: 0b6717a3eeecad03277cea5ed6ba1fb7
+  /app/forms/decidim/proposals/proposal_wizard_create_step_form.rb:
+    decidim-0.23: db69edd0ba8ffa3965a5c44a6bfaba8d
+    decidim-0.23.1: db69edd0ba8ffa3965a5c44a6bfaba8d
+    decidim-0.24: db69edd0ba8ffa3965a5c44a6bfaba8d
+  /app/helpers/decidim/proposals/application_helper.rb:
+    decidim-0.23: c5f99f5fa7de9a6e45776983330e9d73
+    decidim-0.23.1: c5f99f5fa7de9a6e45776983330e9d73
+    decidim-0.24: c5f99f5fa7de9a6e45776983330e9d73

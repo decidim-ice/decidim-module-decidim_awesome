@@ -1,6 +1,5 @@
 // = require codemirror
 // = require mode/css/css
-// = require mode/yaml/yaml
 // = require keymap/sublime
 // = require_self
 

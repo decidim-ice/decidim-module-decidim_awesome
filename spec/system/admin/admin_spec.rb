@@ -33,11 +33,11 @@ describe "Visit the admin page", type: :system do
 
   context "when visiting system compatibility" do
     before do
-      click_link "System compatibility"
+      click_link "System Compatibility"
     end
 
     it "renders the page" do
-      expect(page).to have_content(/System compatibility checks/i)
+      expect(page).to have_content(/System Compatibility Checks/i)
       expect(page).not_to have_xpath("//span[@class='text-alert']")
       expect(page).to have_xpath("//span[@class='text-success']")
     end
@@ -54,7 +54,7 @@ describe "Visit the admin page", type: :system do
   context "when visiting editor hacks" do
     context "when editor hacks are enabled" do
       before do
-        click_link "Editor hacks"
+        click_link "Editor Hacks"
       end
 
       it_behaves_like "has menu link", "editors"
@@ -77,7 +77,7 @@ describe "Visit the admin page", type: :system do
   context "when visiting surveys hacks" do
     context "when survey hacks are enabled" do
       before do
-        click_link "Surveys & forms"
+        click_link "Surveys & Forms"
       end
 
       it_behaves_like "has menu link", "surveys"
@@ -97,7 +97,7 @@ describe "Visit the admin page", type: :system do
   context "when visiting proposal hacks" do
     context "when proposal hacks are enabled" do
       before do
-        click_link "Proposals hacks"
+        click_link "Proposals Hacks"
       end
 
       it_behaves_like "has menu link", "proposals"
@@ -147,7 +147,7 @@ describe "Visit the admin page", type: :system do
   context "when visiting CSS tweaks" do
     context "when scoped styles are enabled" do
       before do
-        click_link "Custom styles"
+        click_link "Custom Styles"
       end
 
       it_behaves_like "has menu link", "styles"
@@ -167,7 +167,7 @@ describe "Visit the admin page", type: :system do
   context "when visiting Menu hacks" do
     context "when menu_hacks are enabled" do
       before do
-        click_link "Menu tweaks"
+        click_link "Menu Tweaks"
       end
 
       it_behaves_like "has menu link", "menu_hacks" do
@@ -177,6 +177,28 @@ describe "Visit the admin page", type: :system do
       it "renders the page" do
         expect(page).to have_content(/Main menu/i)
       end
+    end
+  end
+
+  context "when visiting proposal custom fields" do
+    context "when custom fields are enabled" do
+      before do
+        click_link "Proposals Custom Fields"
+      end
+
+      it_behaves_like "has menu link", "proposal_custom_fields"
+
+      it "renders the page" do
+        expect(page).to have_content(/Tweaks for proposal_custom_fields/i)
+      end
+    end
+
+    context "when custom fields are disabled" do
+      let(:disabled_features) do
+        [:proposal_custom_fields]
+      end
+
+      it_behaves_like "do not have menu link", "proposal_custom_fields"
     end
   end
 
