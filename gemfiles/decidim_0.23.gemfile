@@ -4,18 +4,18 @@ source "https://rubygems.org"
 
 ruby "2.7.2"
 
-gem "decidim", "0.23"
+gem "decidim", "0.23.4"
 gem "decidim-decidim_awesome", path: "../"
 gem "bootsnap", "~> 1.4"
 gem "puma", ">= 4.3.5"
 gem "uglifier", "~> 4.1"
 gem "faker", "~> 1.9"
-gem "decidim-admin", "0.23"
-gem "decidim-core", "0.23"
+gem "decidim-admin", "0.23.4"
+gem "decidim-core", "0.23.4"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
-  gem "decidim-dev", "0.23"
+  gem "decidim-dev", "0.23.4"
 end
 
 group :development do

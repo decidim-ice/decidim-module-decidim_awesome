@@ -6,16 +6,12 @@ on:
       - master
   pull_request:
 
+env:
+  RUBY_VERSION: 2.7.1
+
 jobs:
   test-report:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu]
-        ruby: [2.7]
-        decidim: [decidim-0.23, decidim-0.23.4]
-    runs-on: ${{ matrix.os }}-latest
-    continue-on-error: ${{ endsWith(matrix.ruby, 'head') || matrix.ruby == 'debug' }}
+    runs-on: ubuntu-latest
 
     services:
       postgres:
@@ -40,7 +36,7 @@ jobs:
 
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.ruby }}
+          ruby-version: ${{ env.RUBY_VERSION }}
         # do not use cache as appraisal is not compatible with gems installed locally
 
       - name: Install Ruby deps
@@ -53,10 +49,10 @@ jobs:
           bundle exec appraisal install
 
       - name: Setup Database
-        run: bundle exec appraisal ${{ matrix.decidim }} rake test_app
+        run: bundle exec appraisal decidim-0.23 rake test_app
 
       - name: Run RSpec
-        run: SIMPLECOV=1 CODECOV=1 bundle exec appraisal ${{ matrix.decidim }} rake
+        run: SIMPLECOV=1 CODECOV=1 bundle exec appraisal decidim-0.23 rake
 
       - uses: actions/upload-artifact@v2-preview
         if: always()
