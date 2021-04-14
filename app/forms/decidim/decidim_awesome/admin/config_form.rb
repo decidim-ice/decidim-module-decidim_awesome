@@ -4,6 +4,8 @@ module Decidim
   module DecidimAwesome
     module Admin
       class ConfigForm < Decidim::Form
+        include ActionView::Helpers::SanitizeHelper
+
         attribute :allow_images_in_full_editor, Boolean
         attribute :allow_images_in_small_editor, Boolean
         attribute :allow_images_in_proposals, Boolean
@@ -27,6 +29,7 @@ module Decidim
         def self.from_params(params, additional_params = {})
           instance = super(params, additional_params)
           instance.valid_keys = params.keys.map(&:to_sym) || []
+          instance.sanitize_labels!
           instance
         end
 
@@ -42,9 +45,25 @@ module Decidim
         def json_syntax
           proposal_custom_fields.each do |key, code|
             JSON.parse(code)
-          rescue StandardError => e
+          rescue JSON::ParserError => e
             errors.add(:scoped_styles, I18n.t("config.form.errors.incorrect_json", key: key, scope: "decidim.decidim_awesome.admin"))
             errors.add(key.to_sym, e.message)
+          end
+        end
+
+        # formBuilder has a bug and do not sanitize text if users copy/paste text with format in the label input
+        def sanitize_labels!
+          return unless proposal_custom_fields
+
+          proposal_custom_fields.transform_values! do |code|
+            json = JSON.parse(code)
+            json.map! do |item|
+              item["label"] = strip_tags(item["label"])
+              item
+            end
+            JSON.generate(json)
+          rescue JSON::ParserError
+            code
           end
         end
       end

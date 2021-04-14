@@ -71,6 +71,15 @@ module Decidim::DecidimAwesome
 
           it { is_expected.not_to be_valid }
         end
+
+        context "and sending labels with html" do
+          let(:valid_fields) { '[{"label":"<p>Santana</p>"}]' }
+
+          it "sanitize labels from html" do
+            expect(subject.proposal_custom_fields[:foo]).to include("Santana")
+            expect(subject.proposal_custom_fields[:foo]).not_to include("<p>Santana</p>")
+          end
+        end
       end
     end
   end
