@@ -4,7 +4,11 @@ module Decidim
   module DecidimAwesome
     class CustomFields
       def initialize(fields)
-        @fields = fields.map { |f| JSON.parse(f) }.flatten
+        @fields = if fields.respond_to? :map
+                    fields.map { |f| JSON.parse(f) }.flatten
+                  else
+                    JSON.parse(fields)
+                  end
       end
 
       attr_reader :fields, :xml, :errors
@@ -12,7 +16,10 @@ module Decidim
       def apply_xml(xml)
         @xml = Hash.from_xml(xml)
         data = @xml&.dig("xml", "dl", "dd")
-        return if data.blank?
+        if data.blank?
+          @errors = "DL/DD elements not found in the XML"
+          return
+        end
 
         @fields.map! do |field|
           value = data.find { |d| d["id"] == field["name"] }
