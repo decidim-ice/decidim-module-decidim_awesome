@@ -9,7 +9,7 @@ module Decidim
         @vars = AwesomeConfig.for_organization(organization).includes(:constraints)
         @context = {
           participatory_space_manifest: nil,
-          participatory_slug: nil,
+          participatory_space_slug: nil,
           component_id: nil,
           component_manifest: nil
         }

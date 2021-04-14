@@ -24,8 +24,7 @@ describe "Admin manages custom CSS", type: :system do
 
       expect(page).to have_admin_callout("created successfully")
 
-      # textarea = page.find("textarea")
-      # textarea.fill_in with: "body {background: red;}"
+      sleep 1
       page.execute_script('document.querySelector(".CodeMirror").CodeMirror.setValue("body {background: red;}");')
 
       find("*[type=submit]").click
@@ -47,7 +46,7 @@ describe "Admin manages custom CSS", type: :system do
       expect(page).to have_content("body {background: red;}")
       expect(page).to have_content("body {background: blue;}")
 
-      # fill_in "foo", with: "body {background: green;}"
+      sleep 1
       page.execute_script('document.querySelector("[data-key=foo] .CodeMirror").CodeMirror.setValue("body {background: green;}");')
       find("*[type=submit]").click
 
@@ -59,6 +58,7 @@ describe "Admin manages custom CSS", type: :system do
 
     context "and there are CSS errors" do
       it "shows error message" do
+        sleep 1
         page.execute_script('document.querySelector("[data-key=foo] .CodeMirror").CodeMirror.setValue("I am invalid CSS");')
         find("*[type=submit]").click
 

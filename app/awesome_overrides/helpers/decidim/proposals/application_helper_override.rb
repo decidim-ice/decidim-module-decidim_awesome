@@ -12,7 +12,8 @@ Decidim::Proposals::ApplicationHelper.module_eval do
 
   def apply_custom_fields_override(fields, form)
     custom_fields = Decidim::DecidimAwesome::CustomFields.new(fields)
-    custom_fields.apply_xml(form_presenter.body(extras: false).strip)
+    body = form_presenter.body(extras: false).strip
+    custom_fields.apply_xml(body) if body.present?
     form.object.errors.add(:body, custom_fields.errors) if custom_fields.errors
     render partial: "decidim/decidim_awesome/custom_fields/form_render", locals: { spec: custom_fields.to_json, form: form }
   end
