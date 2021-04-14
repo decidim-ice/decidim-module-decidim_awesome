@@ -21,7 +21,7 @@ module Decidim::DecidimAwesome
     end
 
     it "has 2 modified files in proposals" do
-      expect(subject.overrides["decidim-proposals"].files.length).to eq(2)
+      expect(subject.overrides["decidim-proposals"].files.length).to eq(3)
     end
 
     context "when file" do

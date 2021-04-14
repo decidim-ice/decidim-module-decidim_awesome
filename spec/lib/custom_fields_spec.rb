@@ -57,6 +57,15 @@ module Decidim::DecidimAwesome
       end
     end
 
+    context "when xml is contains only one dd" do
+      let(:xml) { '<xml><dl><dt name="bio">Bio</dt><dd id="bio"><div>Lonely cowboy</div></dd></dl></xml>' }
+
+      it "fills what's available" do
+        expect(subject.to_json).to eq(partial_json)
+        expect(subject.errors).to be_nil
+      end
+    end
+
     context "when xml containts partial answers" do
       let(:xml) { '<xml><dl><dt name="name">Name</dt><dd id="name"><div>Lucky Luke</div></dd><dt name="bio">Bio</dt><dd id="bio"><div>Lonely cowboy</div></dd></dl></xml>' }
 

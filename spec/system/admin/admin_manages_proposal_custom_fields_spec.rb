@@ -128,8 +128,8 @@ describe "Admin manages custom proposal fields", type: :system do
       context "when removing a constraint" do
         let(:custom_fields) do
           {
-            "foo" => data1,
-            "bar" => data2
+            "foo" => "[#{data1}]",
+            "bar" => "[#{data2}]"
           }
         end
 

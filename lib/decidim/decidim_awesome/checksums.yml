@@ -21,3 +21,5 @@ decidim-proposals:
   /app/helpers/decidim/proposals/application_helper.rb:
     decidim-0.23: d923323e3db542b84f42db3a4f782a8d
     decidim-0.24: c5f99f5fa7de9a6e45776983330e9d73
+  /app/views/decidim/proposals/admin/proposals/_form.html.erb:
+    decidim-0.23: 022eef3e8f57ccc2136ed1289b0f217d

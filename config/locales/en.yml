@@ -36,6 +36,8 @@ en:
         target: Opens in
         url: URL
         visibility: Visibility
+      proposal:
+        proposal_custom_fields: Custom fields
   decidim:
     admin:
       menu:

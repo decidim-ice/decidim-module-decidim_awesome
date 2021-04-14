@@ -21,6 +21,8 @@ module Decidim
           return
         end
 
+        data = [data] unless data.is_a?(Array)
+
         @fields.map! do |field|
           value = data.find { |d| d["id"] == field["name"] }
           if value

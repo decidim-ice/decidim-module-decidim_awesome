@@ -38,7 +38,9 @@ $(() => {
   $(".proposal_custom_field").each((_idx, element) => {
     const data = $(element).data("spec");
     const $form = $(element).closest("form");
-    const $body = $form.find("#proposal_body");
+    const name = $(element).data("name");
+    console.log(name, data);
+    const $body = $form.find('input[name="proposal[' + name +']"]');
     const formRenderOps = {
       i18n: {
         locale: 'en-US',
@@ -48,10 +50,15 @@ $(() => {
       render: true
     };
 
-    const $render = $(element).formRender(formRenderOps);
+    const fr = $(element).formRender(formRenderOps);
+    // Attach to DOM
+    element.FormRender = fr;
+    // for external use
+    $(document).trigger("formRender.created", fr);
+
     $form.on("submit", (e) => {
       if(e.target.checkValidity()) {
-        $body.val(dataToXML($render.userData));
+        $body.val(dataToXML(fr.userData));
       } else {
         e.preventDefault();
         e.target.reportValidity();

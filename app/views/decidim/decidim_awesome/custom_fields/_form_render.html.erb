@@ -1,5 +1,5 @@
-<div class="proposal_custom_field" data-spec="<%= spec.to_json %>">
+<div class="proposal_custom_field" data-spec="<%= spec.to_json %>" data-name="<%= name %>">
   <div class="loading-spinner"></div>
 </div>
-<%= form.hidden_field :body %>
-<%= form.error_for :body %>
+<%= form.hidden_field name %>
+<%= form.error_for name %>
