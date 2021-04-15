@@ -14,7 +14,8 @@ module Decidim
       attr_reader :fields, :xml, :errors
 
       def apply_xml(xml)
-        map_fields! parse_xml(xml)
+        data = parse_xml(xml)
+        map_fields!(data) if data
       rescue StandardError => e
         @errors = e.message
       end
@@ -37,8 +38,6 @@ module Decidim
       end
 
       def map_fields!(data)
-        return unless data
-
         @fields.map! do |field|
           value = data.find { |d| d["id"] == field["name"] }.try(:dig, "div")
           value = [value] unless value.blank? || value.is_a?(Array)

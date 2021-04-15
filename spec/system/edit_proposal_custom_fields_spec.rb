@@ -71,7 +71,7 @@ describe "Custom proposals fields", type: :system do
         expect(page).to have_selector("dd#textarea-1476748007461", text: "I shot everything")
       end
       expect(page).to have_content("Occupation")
-      expect(page).to have_content("Street Sweeper")
+      expect(page).to have_content("Moth Man")
       expect(page).to have_content("Short Bio")
       expect(page).not_to have_css(".form-error.is-visible")
     end
@@ -82,8 +82,8 @@ describe "Custom proposals fields", type: :system do
       expect(page).to have_content("Title")
       expect(page).to have_content("Body")
       expect(page).not_to have_content("Full Name")
-      expect(page).not_to have_content("Occupation")
-      expect(page).not_to have_content("Street Sweeper")
+      expect(page).to have_content("Occupation")
+      expect(page).to have_content("Moth Man")
       expect(page).not_to have_content("Short Bio")
       expect(page).to have_content("I shot the sheriff")
       expect(page).not_to have_css(".form-error.is-visible")
@@ -157,11 +157,11 @@ describe "Custom proposals fields", type: :system do
       click_link "Amend Proposal"
     end
 
-    it_behaves_like "has default fields" do
-      it "is amendment editor page" do
-        expect(page).to have_content("CREATE AMENDMENT DRAFT")
-      end
+    it "is amendment editor page" do
+      expect(page).to have_content("CREATE AMENDMENT DRAFT")
     end
+
+    it_behaves_like "has default fields"
   end
 
   # context "when collaborative drafts" do
