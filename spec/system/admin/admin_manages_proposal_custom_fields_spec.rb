@@ -29,11 +29,12 @@ describe "Admin manages custom proposal fields", type: :system do
 
       expect(page).to have_admin_callout("created successfully")
 
-      sleep 1
+      sleep 2
       page.execute_script("$('.proposal-custom-field-editor:first')[0].FormBuilder.actions.setData(#{data})")
 
       find("*[type=submit]").click
 
+      sleep 2
       expect(page).to have_admin_callout("updated successfully")
       expect(page).to have_content("Full Name")
       expect(page).to have_content("Occupation")
@@ -52,15 +53,16 @@ describe "Admin manages custom proposal fields", type: :system do
     end
 
     it "updates the content in the hash" do
+      sleep 2
       expect(page).to have_content("Full Name")
       expect(page).to have_content("Occupation")
       expect(page).to have_content("Street Sweeper")
       expect(page).not_to have_content("Short Bio")
 
-      sleep 1
       page.execute_script("$('#proposal-custom-field-editor-foo')[0].FormBuilder.actions.setData(#{data})")
       find("*[type=submit]").click
 
+      sleep 2
       expect(page).to have_admin_callout("updated successfully")
       expect(page).to have_content("Full Name")
       expect(page).not_to have_content("Occupation")
@@ -77,6 +79,7 @@ describe "Admin manages custom proposal fields", type: :system do
       end
 
       it "updates the content in the hash" do
+        sleep 2
         expect(page).to have_content("Full Name")
         expect(page).to have_content("Occupation")
         expect(page).to have_content("Street Sweeper")
@@ -86,6 +89,7 @@ describe "Admin manages custom proposal fields", type: :system do
           accept_confirm { click_link 'Remove this "custom fields" box' }
         end
 
+        sleep 2
         expect(page).to have_admin_callout("removed successfully")
         expect(page).not_to have_content("Full Name")
         expect(page).to have_content("Occupation")

@@ -122,6 +122,17 @@ Feel free to hide, modify or add items in the Decidim's main menu. You can also 
 ![Menu hacks screenshot](examples/menu-3.png)
 ![Menu hacks screenshot](examples/menu-4.png)
 
+#### 12. Custom fields for proposals
+
+Now admins can substitute the body of a proposal with a set of form fields.
+Edition is make with a Drag & Drop interface in the admin and can (and should) be scoped to apply only to certain proposal components.
+
+Technically, the content is stored in the database as an XML document compatible with normal HTML (it uses the DL/DT/DD elements).
+
+![Custom fields screenshot](examples/custom-fields-1.png)
+![Custom fields screenshot](examples/custom-fields-2.png)
+![Custom fields screenshot](examples/custom-fields-1.gif)
+
 #### To be continued...
 
 Some things in the road-map:
