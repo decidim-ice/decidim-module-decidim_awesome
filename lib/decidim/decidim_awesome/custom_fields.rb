@@ -14,28 +14,38 @@ module Decidim
       attr_reader :fields, :xml, :errors
 
       def apply_xml(xml)
-        @xml = Hash.from_xml(xml)
-        data = @xml&.dig("xml", "dl", "dd")
-        if data.blank?
-          @errors = "DL/DD elements not found in the XML"
-          return
-        end
-
-        data = [data] unless data.is_a?(Array)
-
-        @fields.map! do |field|
-          value = data.find { |d| d["id"] == field["name"] }
-          if value
-            field["userData"] = value["div"].is_a?(Array) ? value["div"] : [value["div"]]
-          end
-          field
-        end
+        map_fields! parse_xml(xml)
       rescue StandardError => e
         @errors = e.message
       end
 
       def to_json(*_args)
         @fields
+      end
+
+      private
+
+      def parse_xml(xml)
+        @xml = ActiveSupport::XmlMini.parse(xml)
+        data = @xml&.dig("xml", "dl", "dd")
+        if data.blank?
+          @errors = "DL/DD elements not found in the XML"
+          return
+        end
+
+        data.is_a?(Array) ? data : [data]
+      end
+
+      def map_fields!(data)
+        @fields.map! do |field|
+          value = data.find { |d| d["id"] == field["name"] }.try(:dig, "div")
+          value = [value] unless value.blank? || value.is_a?(Array)
+          if value.present?
+            content = value.map { |v| v["alt"].presence || v["__content__"] }
+            field["userData"] = content if content
+          end
+          field
+        end
       end
     end
   end

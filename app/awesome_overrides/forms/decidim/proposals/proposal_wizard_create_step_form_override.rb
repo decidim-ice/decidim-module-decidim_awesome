@@ -11,14 +11,14 @@ class Decidim::Proposals::ProposalWizardCreateStepForm < Decidim::Form
   attribute :user_group_id, Integer
 
   validates :title, presence: true, etiquette: true
-  validates :body, presence: true, etiquette: true, unless: -> { override_validations? }
+  validates :body, presence: true, etiquette: true, unless: ->(form) { form.override_validations? }
   validates :title, length: { in: 15..150 }
   validates :body, proposal_length: {
     minimum: 15,
     maximum: ->(record) { record.component.settings.proposal_length }
-  }, unless: -> { override_validations? }
+  }, unless: ->(form) { form.override_validations? }
 
-  validate :body_is_not_bare_template, unless: -> { override_validations? }
+  validate :body_is_not_bare_template, unless: ->(form) { form.override_validations? }
 
   alias component current_component
 
@@ -29,6 +29,12 @@ class Decidim::Proposals::ProposalWizardCreateStepForm < Decidim::Form
     self.category_id = model.categorization.decidim_category_id
   end
 
+  def override_validations?
+    return false if context.current_component.settings.participatory_texts_enabled
+
+    custom_fields.present?
+  end
+
   private
 
   def body_is_not_bare_template
@@ -37,15 +43,9 @@ class Decidim::Proposals::ProposalWizardCreateStepForm < Decidim::Form
     errors.add(:body, :cant_be_equal_to_template) if body.presence == body_template.presence
   end
 
-  def override_validations?
-    return false if context.current_component.settings.participatory_texts_enabled
-
-    custom_fields.present?
-  end
-
   def custom_fields
-    @awesome_config = Decidim::DecidimAwesome::Config.new(context.current_organization)
-    @awesome_config.context_from_component(context.current_component)
-    @awesome_config.collect_sub_configs("proposal_custom_field")
+    awesome_config = Decidim::DecidimAwesome::Config.new(context.current_organization)
+    awesome_config.context_from_component(context.current_component)
+    awesome_config.collect_sub_configs("proposal_custom_field")
   end
 end

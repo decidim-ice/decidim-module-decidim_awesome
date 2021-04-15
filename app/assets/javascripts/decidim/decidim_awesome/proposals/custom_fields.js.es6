@@ -10,7 +10,7 @@ $(() => {
     const doc = $.parseXML("<xml/>");
     const xml = doc.getElementsByTagName("xml")[0];
     const dl = doc.createElement("dl");
-    let key, dt, dd, div, val;
+    let key, dt, dd, div, val, text, label, l;
     xml.appendChild(dl);
     $(dl).attr("class", "decidim_awesome-custom_fields");
     $(dl).attr("data-generator", "decidim_awesome");
@@ -21,9 +21,24 @@ $(() => {
         $(dt).text(data[key].label);
         $(dt).attr("name", data[key].name);
         dd = doc.createElement("dd");
+        // console.log("data for", key, data[key].name, data[key])
         for(val in data[key].userData) {
           div = doc.createElement("div");
-          $(div).text(data[key].userData[val]);
+          text = data[key].userData[val];
+          label = text;
+          if(data[key].values) {
+            if(l = data[key].values.find((v) => v["value"] == data[key].userData[val])) {
+              label = l.label;
+            }
+          } else if(data[key].type == "date") {
+             l = new Date(text).toLocaleDateString();
+             if(l) {
+               label = l;
+             }
+          }
+          // console.log("userData", text, "label", label)
+          $(div).text(label);
+          $(div).attr("alt", text);
           dd.appendChild(div);
         }
         $(dd).attr("id", data[key].name);
@@ -39,8 +54,8 @@ $(() => {
     const data = $(element).data("spec");
     const $form = $(element).closest("form");
     const name = $(element).data("name");
-    console.log(name, data);
-    const $body = $form.find('input[name="proposal[' + name +']"]');
+    // console.log(name, data);
+    const $body = $form.find('input[name="' + name +'"]');
     const formRenderOps = {
       i18n: {
         locale: 'en-US',
@@ -57,6 +72,8 @@ $(() => {
     $(document).trigger("formRender.created", fr);
 
     $form.on("submit", (e) => {
+      // console.log("submit!", fr, $body);
+
       if(e.target.checkValidity()) {
         $body.val(dataToXML(fr.userData));
       } else {

@@ -13,6 +13,8 @@ decidim-core:
     decidim-0.24: 284c96f19cd98df091d8178d6db5a8b3
   /app/presenters/decidim/menu_item_presenter.rb:
     decidim-0.23: 70db39954b5840924530bf94d2a0a73a
+  /app/helpers/decidim/amendments_helper.rb:
+    decidim-0.23: 75bd41c3186729c7c84911bc7c7e9677
 decidim-proposals:
   /app/forms/decidim/proposals/proposal_wizard_create_step_form.rb:
     decidim-0.23: b99c3223f1e75f2a69a89ae9a3d28182
