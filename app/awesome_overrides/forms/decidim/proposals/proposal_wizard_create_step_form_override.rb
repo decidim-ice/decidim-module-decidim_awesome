@@ -6,7 +6,7 @@ class Decidim::Proposals::ProposalWizardCreateStepForm < Decidim::Form
   mimic :proposal
 
   attribute :title, String
-  attribute :body, Decidim::Attributes::CleanString
+  attribute :body, defined?(Decidim::Attributes::CleanString) ? Decidim::Attributes::CleanString : String
   attribute :body_template, String
   attribute :user_group_id, Integer
 

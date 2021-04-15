@@ -22,7 +22,7 @@ describe "Custom proposals fields", type: :system do
   let(:body) do
     { en: answer }
   end
-  let(:answer) { '<xml><dl><dt>Bio</dt><dd id="textarea-1476748007461"><div>I shot the sheriff</div></dd></dl></xml>' }
+  let(:answer) { '<xml><dl><dt>Occupation</dt><dd id="select-1476748006618"><div alt="option-2">Moth Man</div></dd><dt>Bio</dt><dd id="textarea-1476748007461"><div>I shot the sheriff</div></dd></dl></xml>' }
   let(:data) { "[#{data1},#{data2},#{data3}]" }
   let(:data1) { '{"type":"text","label":"Full Name","subtype":"text","className":"form-control","name":"text-1476748004559"}' }
   let(:data2) { '{"type":"select","label":"Occupation","className":"form-control","name":"select-1476748006618","values":[{"label":"Street Sweeper","value":"option-1","selected":true},{"label":"Moth Man","value":"option-2"},{"label":"Chemist","value":"option-3"}]}' }
@@ -46,7 +46,8 @@ describe "Custom proposals fields", type: :system do
       expect(page).not_to have_content("Body")
       expect(page).to have_content("Full Name")
       expect(page).to have_content("Occupation")
-      expect(page).to have_content("Street Sweeper")
+      expect(page).to have_content("Moth Man")
+      expect(page).to have_xpath("//select[@class='form-control'][@id='select-1476748006618'][@user-data='option-2']")
       expect(page).to have_content("Short Bio")
       expect(page).to have_xpath("//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the sheriff']")
       expect(page).not_to have_css(".form-error.is-visible")
@@ -73,8 +74,6 @@ describe "Custom proposals fields", type: :system do
       expect(page).to have_content("Street Sweeper")
       expect(page).to have_content("Short Bio")
       expect(page).not_to have_css(".form-error.is-visible")
-      expect(Decidim::Proposals::Proposal.last.body["en"]).to include('<dd id="text-1476748004559" name="text"><div>Lucky Luke</div>')
-      expect(Decidim::Proposals::Proposal.last.body["en"]).to include('<dd id="textarea-1476748007461" name="textarea"><div>I shot everything</div></dd>')
     end
   end
 

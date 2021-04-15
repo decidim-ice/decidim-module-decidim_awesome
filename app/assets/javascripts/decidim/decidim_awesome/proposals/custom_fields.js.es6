@@ -24,21 +24,25 @@ $(() => {
         // console.log("data for", key, data[key].name, data[key])
         for(val in data[key].userData) {
           div = doc.createElement("div");
-          text = data[key].userData[val];
-          label = text;
+          label = data[key].userData[val];
+          text = null;
           if(data[key].values) {
             if(l = data[key].values.find((v) => v["value"] == data[key].userData[val])) {
+              text = label;
               label = l.label;
             }
           } else if(data[key].type == "date") {
-             l = new Date(text).toLocaleDateString();
-             if(l) {
-               label = l;
-             }
+            l = new Date(text).toLocaleDateString();
+            if(l) {
+              text = label;
+              label = l;
+            }
           }
           // console.log("userData", text, "label", label)
           $(div).text(label);
-          $(div).attr("alt", text);
+          if(text) {
+            $(div).attr("alt", text);
+          }
           dd.appendChild(div);
         }
         $(dd).attr("id", data[key].name);

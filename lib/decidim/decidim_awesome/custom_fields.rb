@@ -37,6 +37,8 @@ module Decidim
       end
 
       def map_fields!(data)
+        return unless data
+
         @fields.map! do |field|
           value = data.find { |d| d["id"] == field["name"] }.try(:dig, "div")
           value = [value] unless value.blank? || value.is_a?(Array)
