@@ -47,24 +47,26 @@ $(() => {
     });
   });
 
-  const initFormBuilder = (i) => {
-    if (i < fbList.length) {
-      $(fbList[i].el).formBuilder(fbList[i].config).promise.then(function(res){
-        fbList[i].instance = res;
-        // Attach to DOM
-        fbList[i].el.FormBuilder = res;
-        // remove spinner
-        $(fbList[i].el).find(".loading-spinner").remove();
-        // for external use
-        $(document).trigger("formBuilder.created", res);
-        initFormBuilder(i + 1);
-      });
-    } else {
-      return;
-    }
-  };
-  initFormBuilder(0);
+  $(document).on("formBuilder.create", (_event, i, list) => {
+    if(!list[i]) return;
 
+    $(list[i].el).formBuilder(list[i].config).promise.then(function(res){
+      list[i].instance = res;
+      // Attach to DOM
+      list[i].el.FormBuilder = res;
+      // remove spinner
+      $(list[i].el).find(".loading-spinner").remove();
+      // for external use
+      $(document).trigger("formBuilder.created", [list[i]]);
+      if(i < list.length) {
+        $(document).trigger("formBuilder.create", [i + 1, list]);
+      }
+    });
+  });
+
+  if(fbList.length) {
+    $(document).trigger("formBuilder.create", [0, fbList]);
+  }
 
   $("form.awesome-edit-config").on("submit", () => {
     // e.preventDefault();

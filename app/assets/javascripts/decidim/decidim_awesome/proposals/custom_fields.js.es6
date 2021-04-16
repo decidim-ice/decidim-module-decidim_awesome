@@ -73,7 +73,7 @@ $(() => {
     // Attach to DOM
     element.FormRender = fr;
     // for external use
-    $(document).trigger("formRender.created", fr);
+    $(document).trigger("formRender.created", [fr]);
 
     $form.on("submit", (e) => {
       // console.log("submit!", fr, $body);
