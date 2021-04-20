@@ -31,14 +31,14 @@ $(() => {
               text = label;
               label = l.label;
             }
-          } else if(data[key].type == "date") {
-            l = new Date(text).toLocaleDateString();
+          } else if(data[key].type == "date" && label) {
+            l = new Date(label).toLocaleDateString();
             if(l) {
               text = label;
               label = l;
             }
           }
-          // console.log("userData", text, "label", label)
+          console.log("userData", text, "label", label)
           $(div).text(label);
           if(text) {
             $(div).attr("alt", text);

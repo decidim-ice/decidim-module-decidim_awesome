@@ -164,12 +164,23 @@ describe "Custom proposals fields", type: :system do
     it_behaves_like "has default fields"
   end
 
-  # context "when collaborative drafts" do
-  #   it_behaves_like "has custom fields" do
-  #     before do
-  #       click_link proposal.title["en"]
-  #       click_link "Edit proposal"
-  #     end
-  #   end
-  # end
+  context "when editing collaborative drafts" do
+    let(:component) do
+      create(:proposal_component,
+             :with_creation_enabled,
+             :with_collaborative_drafts_enabled,
+             manifest: manifest,
+             participatory_space: participatory_process)
+    end
+    let!(:collaborative_draft) { create :collaborative_draft, users: [author, user], body: answer, component: component }
+
+    before do
+      click_link "Access collaborative drafts"
+      click_link collaborative_draft.title
+      click_link "Edit collaborative draft"
+    end
+
+    it_behaves_like "has custom fields"
+    it_behaves_like "saves custom fields", :collaborative_draft_title, "Send", false
+  end
 end
