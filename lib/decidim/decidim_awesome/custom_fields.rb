@@ -11,11 +11,11 @@ module Decidim
                   end
       end
 
-      attr_reader :fields, :xml, :errors
+      attr_reader :fields, :xml, :errors, :data
 
       def apply_xml(xml)
-        data = parse_xml(xml)
-        map_fields!(data) if data
+        parse_xml(xml)
+        map_fields!
       rescue StandardError => e
         @errors = e.message
       end
@@ -27,26 +27,35 @@ module Decidim
       private
 
       def parse_xml(xml)
-        @xml = ActiveSupport::XmlMini.parse(xml)
-        data = @xml&.dig("xml", "dl", "dd")
-        if data.blank?
-          @errors = "DL/DD elements not found in the XML"
-          return
-        end
+        @xml = xml
+        @data = Nokogiri.XML(xml).xpath("//dl/dd")
+        return if @data.present?
 
-        data.is_a?(Array) ? data : [data]
+        # Apply to the first textarea if exists
+        name = apply_to_first_textarea
+        @errors = if name
+                    "Content couldn't be parsed but has been assigned to the field '#{name}'"
+                  else
+                    "Content couldn't be parsed: DL/DD elements not found in the XML"
+                  end
       end
 
-      def map_fields!(data)
+      def map_fields!
+        return unless data
+
         @fields.map! do |field|
-          value = data.find { |d| d["id"] == field["name"] }.try(:dig, "div")
-          value = [value] unless value.blank? || value.is_a?(Array)
-          if value.present?
-            content = value.map { |v| v["alt"].presence || v["__content__"] }
-            field["userData"] = content if content
-          end
+          value = data.search("##{field["name"]} div")
+          field["userData"] = value.map { |v| v.attribute("alt")&.value || v.inner_html } if value.present?
           field
         end
+      end
+
+      def apply_to_first_textarea
+        textarea = @fields.find { |field| field["type"] == "textarea" }
+        return unless textarea
+
+        textarea["userData"] = [xml]
+        textarea["name"]
       end
     end
   end

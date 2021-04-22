@@ -17,12 +17,24 @@ module Decidim::DecidimAwesome
     let(:bare_json) do
       [
         { "type" => "text", "required" => true, "label" => "Age", "name" => "age" },
-        { "type" => "textarea", "required" => true, "label" => "Birthday", "name" => "date" }
+        { "type" => "text", "required" => true, "label" => "Birthday", "name" => "date" }
+      ]
+    end
+    let(:compatible_json) do
+      [
+        { "type" => "text", "required" => true, "label" => "Age", "name" => "age" },
+        { "type" => "textarea", "required" => true, "label" => "Birthday", "name" => "date", "userData" => ["I am a former text, written <b>before</b> definition of custom fields in this proposal."] }
       ]
     end
     let(:partial_json) do
       [
         { "type" => "text", "required" => true, "label" => "Age", "name" => "age" },
+        { "type" => "textarea", "required" => true, "label" => "Birthday", "name" => "date", "userData" => ["1980-04-16"] }
+      ]
+    end
+    let(:html_json) do
+      [
+        { "type" => "text", "required" => true, "label" => "Textarea", "name" => "textarea", "userData" => ["<p>I am Pi!</p>"] },
         { "type" => "textarea", "required" => true, "label" => "Birthday", "name" => "date", "userData" => ["1980-04-16"] }
       ]
     end
@@ -61,11 +73,23 @@ module Decidim::DecidimAwesome
     end
 
     context "when xml is malformed" do
-      let(:xml) { '<dl><dt name="age">Age</dt><dd id="age"><div>44</div></dd><dt name="date">Birthday</dt><dd id="date"><div>16/4/1980</div></dd></dl>' }
+      context "and there's no textarea type in the definition" do
+        let(:box2) { '[{"type":"text","required":true,"label":"Birthday","name":"date"}]' }
+        let(:xml) { '<dt name="age">Age</dt><dd id="age"><div>44</div></dd><dt name="date">Birthday</dt><dd id="date"><div>16/4/1980</div></dd></dl>' }
 
-      it "returns original json and errors" do
-        expect(subject.to_json).to eq(bare_json)
-        expect(subject.errors).to include("DL/DD elements not found")
+        it "returns original json and errors" do
+          expect(subject.to_json).to eq(bare_json)
+          expect(subject.errors).to include("DL/DD elements not found")
+        end
+      end
+
+      context "and there's a textarea type in the definition" do
+        let(:xml) { "I am a former text, written <b>before</b> definition of custom fields in this proposal." }
+
+        it "returns original json and errors" do
+          expect(subject.to_json).to eq(compatible_json)
+          expect(subject.errors).to include("Content couldn't be parsed but has been assigned to the field 'date'")
+        end
       end
     end
 
@@ -119,6 +143,16 @@ module Decidim::DecidimAwesome
 
       it "returns the json or one element" do
         expect(subject.to_json).to eq(one_json)
+        expect(subject.errors).to be_nil
+      end
+    end
+
+    context "when xml contains html inside div" do
+      let(:box1) { '[{"type":"text","required":true,"label":"Textarea","name":"textarea"}]' }
+      let(:xml) { '<xml><dl><dt name="textarea">Textarea</dt><dd id="textarea"><div><p>I am Pi!</p></div></dd><dt name="date">Birthday</dt><dd id="date"><div alt="1980-04-16">16/4/1980</div></dd></dl></xml>' }
+
+      it "collects all the inner html" do
+        expect(subject.to_json).to eq(html_json)
         expect(subject.errors).to be_nil
       end
     end

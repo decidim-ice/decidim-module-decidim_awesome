@@ -1,3 +1,5 @@
+// = require decidim/decidim_awesome/editors/quill_editor
+// = require decidim/decidim_awesome/form_builder/rich_text_plugin
 // = require form-render.min
 // = require_self
 
@@ -16,6 +18,11 @@ $(() => {
     $(dl).attr("data-generator", "decidim_awesome");
     $(dl).attr("data-version", window.DecidimAwesome.version);
     for (key in data) {
+      // Richtext plugin does not saves userdata, so we get it from the hidden input
+      if(data[key].type == "textarea" && data[key].subtype == "richtext") {
+        data[key].userData = [$(`#${data[key].name}-input`).val()];
+        console.log("get the data!", data[key]);
+      }
       if (data[key].userData && data[key].userData.length) {
         dt = doc.createElement("dt");
         $(dt).text(data[key].label);
@@ -38,8 +45,12 @@ $(() => {
               label = l;
             }
           }
-          console.log("userData", text, "label", label)
-          $(div).text(label);
+          console.log("userData", text, "label", label, 'key', key, 'data', data)
+          if(data[key].type == "textarea" && data[key].subtype == "richtext") {
+            $(div).html(label);
+          } else {
+            $(div).text(label);
+          }
           if(text) {
             $(div).attr("alt", text);
           }
@@ -76,7 +87,7 @@ $(() => {
     $(document).trigger("formRender.created", [fr]);
 
     $form.on("submit", (e) => {
-      // console.log("submit!", fr, $body);
+      console.log("submit!", "fr",fr, "userData", fr.userData);
 
       if(e.target.checkValidity()) {
         $body.val(dataToXML(fr.userData));

@@ -1,4 +1,6 @@
 // = require jquery-ui.min
+// = require decidim/decidim_awesome/editors/quill_editor
+// = require decidim/decidim_awesome/form_builder/rich_text_plugin
 // = require form-builder.min
 // = require_self
 

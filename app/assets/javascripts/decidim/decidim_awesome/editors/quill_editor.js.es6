@@ -119,7 +119,7 @@
 
       if(addImage) {
         const t = window.DecidimAwesome.texts["drag_and_drop_image"];
-        $(container).after(`<p class="help-text" style="margin-top:-1.5rem;">${t}</p>`);
+        $(container).after(`<p class="help-text">${t}</p>`);
       }
 
       // After editor is ready, linebreak_module deletes two extraneous new lines

@@ -6,11 +6,6 @@
 @import "./editors/markdown_editor";
 @import "./forms/autosave";
 
-// Custom fields tunning
-.rendered-form .form-control.ql-container{
-  height: auto !important;
-}
-
 .decidim_awesome-custom_fields{
   dd{
     >div:last-child{
