@@ -40,7 +40,7 @@ describe "Custom proposals fields", type: :system do
     visit_component
   end
 
-  shared_examples "has custom fields" do
+  shared_examples "has custom fields" do |textarea|
     it "displays custom fields" do
       expect(page).to have_content("Title")
       expect(page).not_to have_content("Body")
@@ -49,7 +49,7 @@ describe "Custom proposals fields", type: :system do
       expect(page).to have_content("Moth Man")
       expect(page).to have_xpath("//select[@class='form-control'][@id='select-1476748006618'][@user-data='option-2']")
       expect(page).to have_content("Short Bio")
-      expect(page).to have_xpath("//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the sheriff']")
+      expect(page).to have_xpath(textarea)
       expect(page).not_to have_css(".form-error.is-visible")
     end
   end
@@ -98,13 +98,13 @@ describe "Custom proposals fields", type: :system do
       click_link "Edit proposal"
     end
 
-    it_behaves_like "has custom fields"
+    it_behaves_like "has custom fields", "//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the sheriff']"
     it_behaves_like "saves custom fields", :proposal_title, "Send", false
 
     context "and RTE is enabled" do
       let(:rte_enabled) { true }
 
-      it_behaves_like "has custom fields"
+      it_behaves_like "has custom fields", "//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the sheriff']"
       it_behaves_like "saves custom fields", :proposal_title, "Send", false
     end
 
@@ -112,6 +112,35 @@ describe "Custom proposals fields", type: :system do
       let(:slug) { "another-slug" }
 
       it_behaves_like "has default fields"
+    end
+
+    context "and proposal has unformatted content" do
+      let(:answer) { "I shot the Sheriff\\nbut not Deputy" }
+
+      it "has custom fields with first textarea with the content" do
+        expect(page).to have_content("Title")
+        expect(page).not_to have_content("Body")
+        expect(page).to have_content("Full Name")
+        expect(page).to have_content("Occupation")
+        expect(page).to have_content("Moth Man")
+        expect(page).not_to have_xpath("//select[@class='form-control'][@id='select-1476748006618'][@user-data='option-2']")
+        expect(page).to have_content("Short Bio")
+        expect(page).to have_xpath("//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the Sheriff\\nbut not Deputy']")
+        expect(page).to have_css(".form-error.is-visible")
+      end
+    end
+
+    context "and there a RicheText Editor type field" do
+      let(:data3) { '{"type":"textarea","subtype":"richtext","label":"Short Bio","rows":"5","className":"form-control","name":"textarea-1476748007461"}' }
+
+      it "has custom fields with richttext editor" do
+        expect(page).to have_content("Full Name")
+        expect(page).to have_xpath("//input[@id='textarea-1476748007461-input'][@value='<p>I shot the sheriff</p>']", visible: false)
+        expect(page).to have_content("Occupation")
+        expect(page).to have_content("Moth Man")
+        expect(page).to have_content("Short Bio")
+        expect(page).not_to have_css(".form-error.is-visible")
+      end
     end
   end
 
@@ -125,7 +154,7 @@ describe "Custom proposals fields", type: :system do
       expect(page).to have_content("CREATE AMENDMENT DRAFT")
     end
 
-    it_behaves_like "has custom fields"
+    it_behaves_like "has custom fields", "//input[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the sheriff']"
     it_behaves_like "saves custom fields", :amendment_emendation_params_title, "Create", true
 
     context "and RTE is enabled" do
