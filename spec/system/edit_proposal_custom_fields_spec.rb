@@ -135,7 +135,7 @@ describe "Custom proposals fields", type: :system do
 
       it "has custom fields with richttext editor" do
         expect(page).to have_content("Full Name")
-        expect(page).to have_xpath("//input[@id='textarea-1476748007461-input'][@value='<p>I shot the sheriff</p>']", visible: false)
+        expect(page).to have_xpath("//input[@id='textarea-1476748007461-input'][@value='<p>I shot the sheriff</p>']", visible: :hidden)
         expect(page).to have_content("Occupation")
         expect(page).to have_content("Moth Man")
         expect(page).to have_content("Short Bio")
@@ -154,13 +154,13 @@ describe "Custom proposals fields", type: :system do
       expect(page).to have_content("CREATE AMENDMENT DRAFT")
     end
 
-    it_behaves_like "has custom fields", "//input[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the sheriff']"
+    it_behaves_like "has custom fields", "//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the sheriff']"
     it_behaves_like "saves custom fields", :amendment_emendation_params_title, "Create", true
 
     context "and RTE is enabled" do
       let(:rte_enabled) { true }
 
-      it_behaves_like "has custom fields"
+      it_behaves_like "has custom fields", "//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the sheriff']"
       it_behaves_like "saves custom fields", :amendment_emendation_params_title, "Create", true
     end
 
@@ -209,7 +209,7 @@ describe "Custom proposals fields", type: :system do
       click_link "Edit collaborative draft"
     end
 
-    it_behaves_like "has custom fields"
+    it_behaves_like "has custom fields", "//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the sheriff']"
     it_behaves_like "saves custom fields", :collaborative_draft_title, "Send", false
   end
 end

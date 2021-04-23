@@ -8,7 +8,7 @@
 <% if current_user.nil? || allowed_to?(:request_access, :collaborative_draft, collaborative_draft: @collaborative_draft) %>
   <div class="row">
     <div class="columns">
-      <div class="callout secondary"><%= t(".info-message").html_safe %></div>
+      <div class="callout secondary"><%= t("info-message", scope:"decidim.proposals.collaborative_drafts.show").html_safe %></div>
     </div>
   </div>
 <% end %>
@@ -17,7 +17,7 @@
   <div class="m-bottom">
     <%= link_to collaborative_drafts_path do %>
       <%= icon "chevron-left", class: "icon--small", role: "img", "aria-hidden": true %>
-      <%= t(".back") %>
+      <%= t("back", scope:"decidim.proposals.collaborative_drafts.show") %>
     <% end %>
   </div>
 
