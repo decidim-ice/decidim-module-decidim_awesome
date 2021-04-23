@@ -135,7 +135,7 @@ describe "Custom proposals fields", type: :system do
 
       it "has custom fields with richttext editor" do
         expect(page).to have_content("Full Name")
-        expect(page).to have_xpath("//input[@id='textarea-1476748007461-input'][@value='<p>I shot the sheriff</p>']", visible: :hidden)
+        expect(page).to have_xpath("//input[@id='textarea-1476748007461-input'][contains(@value, 'I shot the sheriff')]", visible: :hidden)
         expect(page).to have_content("Occupation")
         expect(page).to have_content("Moth Man")
         expect(page).to have_content("Short Bio")
