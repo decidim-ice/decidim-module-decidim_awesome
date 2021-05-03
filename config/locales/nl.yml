@@ -193,6 +193,22 @@ nl:
           intro_message: Hallo! Hoe kunnen we je helpen?
           title_closed: Klik om te chatten!
           title_open: Laten we chatten!
+      content_blocks:
+        map:
+          button_1_text: "Tekst voor knop #1"
+          button_1_url: "URL voor knop #1"
+          button_2_text: "Tekst voor knop #2"
+          button_2_url: "URL voor knop #2"
+          button_3_text: "Tekst voor knop #3"
+          button_3_url: "URL voor knop #3"
+          button_4_text: "Tekst voor knop #4"
+          button_4_url: "URL voor knop #4"
+          button_5_text: "Tekst voor knop #5"
+          button_5_url: "URL voor knop #5"
+          link_text: Linktekst
+          link_url: Link-URL
+          name: Map
+          title: Title
       credits: Decidim Awesome %{version} · Gemaakt met ♥ door Platoniq
       editor_images:
         create:

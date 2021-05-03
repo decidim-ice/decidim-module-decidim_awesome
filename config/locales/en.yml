@@ -228,6 +228,22 @@ en:
           intro_message: Hello! How can we help you?
           title_closed: Click to chat!
           title_open: Let's chat!
+      content_blocks:
+        map:
+          button_1_text: "Text for button #1"
+          button_1_url: "URL for button #1"
+          button_2_text: "Text for button #2"
+          button_2_url: "URL for button #2"
+          button_3_text: "Text for button #3"
+          button_3_url: "URL for button #3"
+          button_4_text: "Text for button #4"
+          button_4_url: "URL for button #4"
+          button_5_text: "Text for button #5"
+          button_5_url: "URL for button #5"
+          link_text: Link text
+          link_url: Link URL
+          name: Map
+          title: Title
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
       editor_images:
         create:

@@ -21,20 +21,28 @@ module Decidim
                                    amendments: component.manifest.name == :proposals ? Decidim::Proposals::Proposal.where(component: component).only_emendations.count : 0
                                  }
                                end.to_json,
-          "data-collapsed" => current_component.settings.collapse,
-          "data-truncate" => current_component.settings.truncate,
-          "data-map-center" => current_component.settings.map_center,
-          "data-map-zoom" => current_component.settings.map_zoom,
-          "data-menu-amendments" => current_component.settings.menu_amendments,
-          "data-menu-meetings" => current_component.settings.menu_meetings,
-          "data-menu-hashtags" => current_component.settings.menu_hashtags,
-          "data-show-not-answered" => current_component.current_settings.show_not_answered,
-          "data-show-accepted" => current_component.current_settings.show_accepted,
-          "data-show-withdrawn" => current_component.current_settings.show_withdrawn,
-          "data-show-evaluating" => current_component.current_settings.show_evaluating,
-          "data-show-rejected" => current_component.current_settings.show_rejected
+          "data-collapsed" => settings.collapse,
+          "data-truncate" => settings.truncate,
+          "data-map-center" => settings.map_center,
+          "data-map-zoom" => settings.map_zoom,
+          "data-menu-amendments" => settings.menu_amendments,
+          "data-menu-meetings" => settings.menu_meetings,
+          "data-menu-hashtags" => settings.menu_hashtags,
+          "data-show-not-answered" => settings.show_not_answered,
+          "data-show-accepted" => settings.show_accepted,
+          "data-show-withdrawn" => settings.show_withdrawn,
+          "data-show-evaluating" => settings.show_evaluating,
+          "data-show-rejected" => settings.show_rejected
         }
         content_tag(:div, map, map_html_options)
+      end
+
+      def settings
+        settings_source.try(:current_settings) || settings_source.try(:settings)
+      end
+
+      def settings_source
+        try(:current_component) || try(:model)
       end
 
       # rubocop:disable Rails/HelperInstanceVariable
