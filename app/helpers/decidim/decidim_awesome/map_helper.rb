@@ -21,24 +21,28 @@ module Decidim
                                    amendments: component.manifest.name == :proposals ? Decidim::Proposals::Proposal.where(component: component).only_emendations.count : 0
                                  }
                                end.to_json,
-          "data-collapsed" => settings.collapse,
-          "data-truncate" => settings.truncate,
-          "data-map-center" => settings.map_center,
-          "data-map-zoom" => settings.map_zoom,
-          "data-menu-amendments" => settings.menu_amendments,
-          "data-menu-meetings" => settings.menu_meetings,
-          "data-menu-hashtags" => settings.menu_hashtags,
-          "data-show-not-answered" => settings.show_not_answered,
-          "data-show-accepted" => settings.show_accepted,
-          "data-show-withdrawn" => settings.show_withdrawn,
-          "data-show-evaluating" => settings.show_evaluating,
-          "data-show-rejected" => settings.show_rejected
+          "data-collapsed" => global_settings.collapse,
+          "data-truncate" => global_settings.truncate,
+          "data-map-center" => global_settings.map_center,
+          "data-map-zoom" => global_settings.map_zoom,
+          "data-menu-amendments" => global_settings.menu_amendments,
+          "data-menu-meetings" => global_settings.menu_meetings,
+          "data-menu-hashtags" => global_settings.menu_hashtags,
+          "data-show-not-answered" => step_settings&.show_not_answered,
+          "data-show-accepted" => step_settings&.show_accepted,
+          "data-show-withdrawn" => step_settings&.show_withdrawn,
+          "data-show-evaluating" => step_settings&.show_evaluating,
+          "data-show-rejected" => step_settings&.show_rejected
         }
         content_tag(:div, map, map_html_options)
       end
 
-      def settings
-        settings_source.try(:current_settings) || settings_source.try(:settings)
+      def step_settings
+        settings_source.try(:current_settings)
+      end
+
+      def global_settings
+         settings_source.try(:settings)
       end
 
       def settings_source
