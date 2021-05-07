@@ -70,7 +70,6 @@ module Decidim
             settings.attribute :show_rejected, type: :boolean, default: false
           end
         end
-
       end
 
       # Prepare a zone to create overrides

@@ -42,7 +42,7 @@ module Decidim
       end
 
       def global_settings
-         settings_source.try(:settings)
+        settings_source.try(:settings)
       end
 
       def settings_source

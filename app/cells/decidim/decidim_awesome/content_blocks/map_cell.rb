@@ -15,7 +15,7 @@ module Decidim
           return if @all_categories.present?
 
           @category_ids ||= Decidim::Category.pluck(:id, :decidim_participatory_space_type, :decidim_participatory_space_id).select do |category|
-            id, space_type, space_id = category
+            _id, space_type, space_id = category
             space = space_type.constantize.find(space_id)
             space.organization == current_organization
           end.map(&:first)
