@@ -8,7 +8,8 @@ module Decidim
 
         include Decidim::DecidimAwesome::MapHelper
         include Decidim::CardHelper
-        include Decidim::NeedsSnippets
+
+        delegate :snippets, to: :controller
 
         def global_map_components
           @global_map_components ||= Decidim::Component.where(manifest_name: "meetings").published
