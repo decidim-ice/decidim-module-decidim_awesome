@@ -36,7 +36,7 @@ module Decidim
             1.upto(BUTTONS_COUNT).map do |x|
               next unless translated_attribute(model.settings.send(:"button_#{x}_text"))
 
-              link_to translated_attribute(model.settings.send(:"button_#{x}_text")), translated_attribute(model.settings.send(:"button_#{x}_url"))
+              link_to translated_attribute(model.settings.send(:"button_#{x}_text")), translated_attribute(model.settings.send(:"button_#{x}_url")), class: "button button--sc expanded"
             end.compact
           )
         end

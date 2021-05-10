@@ -70,6 +70,28 @@ module Decidim
             settings.attribute :show_rejected, type: :boolean, default: false
           end
         end
+
+        # === Buttons block ===
+        Decidim.content_blocks.register(:homepage, :buttons_row) do |content_block|
+          content_block.cell = "decidim/decidim_awesome/content_blocks/buttons_row"
+          content_block.settings_form_cell = "decidim/decidim_awesome/content_blocks/buttons_row_form"
+          content_block.public_name_key = "decidim.decidim_awesome.content_blocks.buttons_row.name"
+
+          content_block.settings do |settings|
+            settings.attribute :title, type: :text, translated: true
+
+            settings.attribute :button_1_text, type: :text, translated: true
+            settings.attribute :button_1_url, type: :text, translated: true
+            settings.attribute :button_2_text, type: :text, translated: true
+            settings.attribute :button_2_url, type: :text, translated: true
+            settings.attribute :button_3_text, type: :text, translated: true
+            settings.attribute :button_3_url, type: :text, translated: true
+            settings.attribute :button_4_text, type: :text, translated: true
+            settings.attribute :button_4_url, type: :text, translated: true
+            settings.attribute :button_5_text, type: :text, translated: true
+            settings.attribute :button_5_url, type: :text, translated: true
+          end
+        end
       end
 
       # Prepare a zone to create overrides
