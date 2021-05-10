@@ -1,52 +1,54 @@
 <% form.fields_for :settings, form.object.settings do |settings_fields| %>
-  <h3><%= t(".text_settings") %></h3>
+  <h3><%= t("text_settings", scope: i18n_scope) %></h3>
 
   <div class="row">
-    <%= settings_fields.translated :text_field, :title, label: t("decidim.decidim_awesome.content_blocks.map.title") %>
-    <%= settings_fields.translated :text_field, :link_text, label: t("decidim.decidim_awesome.content_blocks.map.link_text") %>
-    <%= settings_fields.translated :text_field, :link_url, label: t("decidim.decidim_awesome.content_blocks.map.link_url") %>
+    <%= settings_fields.translated :text_field, :title, label: t("title", scope: i18n_scope) %>
+    <%= settings_fields.translated :text_field, :link_text, label: t("link_text", scope: i18n_scope) %>
+    <%= settings_fields.translated :text_field, :link_url, label: t("link_url", scope: i18n_scope) %>
+  </div>
+
+  <h3 class="mt-m"><%= t("buttons_settings", scope: i18n_scope) %></h3>
+
+  <div class="row two-buttons">
+    <div><%= settings_fields.translated :text_field, :button_1_text, label: t("button_1_text", scope: i18n_scope) %></div>
+    <div><%= settings_fields.translated :text_field, :button_1_url, label: t("button_1_url", scope: i18n_scope) %></div>
   </div>
   <div class="row two-buttons">
-    <div><%= settings_fields.translated :text_field, :button_1_text, label: t("decidim.decidim_awesome.content_blocks.map.button_1_text") %></div>
-    <div><%= settings_fields.translated :text_field, :button_1_url, label: t("decidim.decidim_awesome.content_blocks.map.button_1_url") %></div>
+    <div><%= settings_fields.translated :text_field, :button_2_text, label: t("button_2_text", scope: i18n_scope) %></div>
+    <div><%= settings_fields.translated :text_field, :button_2_url, label: t("button_2_url", scope: i18n_scope) %></div>
   </div>
   <div class="row two-buttons">
-    <div><%= settings_fields.translated :text_field, :button_2_text, label: t("decidim.decidim_awesome.content_blocks.map.button_2_text") %></div>
-    <div><%= settings_fields.translated :text_field, :button_2_url, label: t("decidim.decidim_awesome.content_blocks.map.button_2_url") %></div>
+    <div><%= settings_fields.translated :text_field, :button_3_text, label: t("button_3_text", scope: i18n_scope) %></div>
+    <div><%= settings_fields.translated :text_field, :button_3_url, label: t("button_3_url", scope: i18n_scope) %></div>
   </div>
   <div class="row two-buttons">
-    <div><%= settings_fields.translated :text_field, :button_3_text, label: t("decidim.decidim_awesome.content_blocks.map.button_3_text") %></div>
-    <div><%= settings_fields.translated :text_field, :button_3_url, label: t("decidim.decidim_awesome.content_blocks.map.button_3_url") %></div>
+    <div><%= settings_fields.translated :text_field, :button_4_text, label: t("button_4_text", scope: i18n_scope) %></div>
+    <div><%= settings_fields.translated :text_field, :button_4_url, label: t("button_4_url", scope: i18n_scope) %></div>
   </div>
   <div class="row two-buttons">
-    <div><%= settings_fields.translated :text_field, :button_4_text, label: t("decidim.decidim_awesome.content_blocks.map.button_4_text") %></div>
-    <div><%= settings_fields.translated :text_field, :button_4_url, label: t("decidim.decidim_awesome.content_blocks.map.button_4_url") %></div>
+    <div><%= settings_fields.translated :text_field, :button_5_text, label: t("button_5_text", scope: i18n_scope) %></div>
+    <div><%= settings_fields.translated :text_field, :button_5_url, label: t("button_5_url", scope: i18n_scope) %></div>
   </div>
+
+  <h3 class="mt-m"><%= t("map_settings", scope: i18n_scope) %></h3>
+
   <div class="row two-buttons">
-    <div><%= settings_fields.translated :text_field, :button_5_text, label: t("decidim.decidim_awesome.content_blocks.map.button_5_text") %></div>
-    <div><%= settings_fields.translated :text_field, :button_5_url, label: t("decidim.decidim_awesome.content_blocks.map.button_5_url") %></div>
+    <div>
+      <%= settings_fields.number_field :truncate, label: t("truncate", scope: i18n_scope) %>
+    </div>
+    <div>
+      <%= settings_fields.number_field :map_height, label: t("map_height", scope: i18n_scope) %>
+    </div>
   </div>
 
-  <hr>
-
-  <h3><%= t(".map_settings") %></h3>
-
-  <div class="row">
-    <%= settings_fields.number_field :map_height, label: t("decidim.decidim_awesome.content_blocks.map.map_height") %>
-  </div>
-
-  <div class="row">
-    <%= settings_fields.text_field :map_center, label: t("decidim.decidim_awesome.content_blocks.map.map_center") %>
-    <%= t("decidim.decidim_awesome.content_blocks.map.map_center_help") %>
-  </div>
-
-  <div class="row">
-    <%= settings_fields.number_field :map_zoom, label: t("decidim.decidim_awesome.content_blocks.map.map_zoom") %>
-    <%= t("decidim.decidim_awesome.content_blocks.map.map_zoom_help") %>
-  </div>
-
-  <div class="row">
-    <%= settings_fields.number_field :truncate, label: t("decidim.decidim_awesome.content_blocks.map.truncate") %>
+  <div class="row two-buttons">
+    <div>
+      <%= settings_fields.text_field :map_center, label: t("map_center", scope: i18n_scope) %>
+      <%= t("map_center_help", scope: i18n_scope) %>
+    </div>
+    <div><%= settings_fields.number_field :map_zoom, label: t("map_zoom", scope: i18n_scope) %>
+      <%= t("map_zoom_help", scope: i18n_scope) %>
+    </div>
   </div>
 <% end %>
 

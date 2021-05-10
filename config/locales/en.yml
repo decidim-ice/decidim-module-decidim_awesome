@@ -230,8 +230,6 @@ en:
           title_open: Let's chat!
       content_blocks:
         buttons_row:
-          name: Buttons row
-        buttons_row_form:
           button_1_text: 'Text for button #1'
           button_1_url: 'URL for button #1'
           button_2_text: 'Text for button #2'
@@ -242,10 +240,9 @@ en:
           button_4_url: 'URL for button #4'
           button_5_text: 'Text for button #5'
           button_5_url: 'URL for button #5'
+          name: Buttons row
           title: Title
         map:
-          name: Map
-        map_form:
           button_1_text: 'Text for button #1'
           button_1_url: 'URL for button #1'
           button_2_text: 'Text for button #2'
@@ -256,6 +253,7 @@ en:
           button_4_url: 'URL for button #4'
           button_5_text: 'Text for button #5'
           button_5_url: 'URL for button #5'
+          buttons_settings: Buttons settings
           collapse: Start with collapsed menu
           link_text: Link text
           link_url: Link URL
@@ -266,6 +264,7 @@ en:
           map_settings: Map settings
           map_zoom: Zoom (any number betwen 0 and 18)
           map_zoom_help: Only applies if a map center is defined
+          name: Map
           text_settings: Text settings
           title: Title
           truncate: Maximum characters for popup descriptions

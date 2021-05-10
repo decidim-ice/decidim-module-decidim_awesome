@@ -9,6 +9,10 @@ module Decidim
         def content_block
           options[:content_block]
         end
+
+        def i18n_scope
+          "decidim.decidim_awesome.content_blocks.map"
+        end
       end
     end
   end
