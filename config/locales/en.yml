@@ -255,8 +255,6 @@ en:
           button_5_url: 'URL for button #5'
           buttons_settings: Buttons settings
           collapse: Start with collapsed menu
-          link_text: Link text
-          link_url: Link URL
           map_center: Map center (Latitude, Longitude)
           map_center_help: 'Use decimal points (ie: 41.38879, 2.15899). Leave it empty
             to automatically fit all the markers'

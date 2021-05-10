@@ -40,8 +40,6 @@ module Decidim
 
           content_block.settings do |settings|
             settings.attribute :title, type: :text, translated: true
-            settings.attribute :link_text, type: :text, translated: true
-            settings.attribute :link_url, type: :text, translated: true
 
             settings.attribute :button_1_text, type: :text, translated: true
             settings.attribute :button_1_url, type: :text, translated: true
