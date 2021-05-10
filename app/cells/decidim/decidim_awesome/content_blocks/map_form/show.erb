@@ -1,4 +1,6 @@
 <% form.fields_for :settings, form.object.settings do |settings_fields| %>
+  <h3><%= t(".text_settings") %></h3>
+
   <div class="row">
     <%= settings_fields.translated :text_field, :title, label: t("decidim.decidim_awesome.content_blocks.map.title") %>
     <%= settings_fields.translated :text_field, :link_text, label: t("decidim.decidim_awesome.content_blocks.map.link_text") %>
@@ -23,6 +25,28 @@
   <div class="row two-buttons">
     <div><%= settings_fields.translated :text_field, :button_5_text, label: t("decidim.decidim_awesome.content_blocks.map.button_5_text") %></div>
     <div><%= settings_fields.translated :text_field, :button_5_url, label: t("decidim.decidim_awesome.content_blocks.map.button_5_url") %></div>
+  </div>
+
+  <hr>
+
+  <h3><%= t(".map_settings") %></h3>
+
+  <div class="row">
+    <%= settings_fields.number_field :map_height, label: t("decidim.components.decidim_awesome.settings.global.map_height") %>
+  </div>
+  
+  <div class="row">
+    <%= settings_fields.text_field :map_center, label: t("decidim.components.decidim_awesome.settings.global.map_center") %>
+    <%= t("decidim.components.decidim_awesome.settings.global.map_center_help") %>
+  </div>
+  
+  <div class="row">
+    <%= settings_fields.number_field :map_zoom, label: t("decidim.components.decidim_awesome.settings.global.map_zoom") %>
+    <%= t("decidim.components.decidim_awesome.settings.global.map_zoom_help") %>
+  </div>
+  
+  <div class="row">
+    <%= settings_fields.number_field :truncate, label: t("decidim.components.decidim_awesome.settings.global.truncate") %>
   </div>
 <% end %>
 
