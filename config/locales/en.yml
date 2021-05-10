@@ -232,35 +232,43 @@ en:
         buttons_row:
           name: Buttons row
         buttons_row_form:
-          button_1_text: "Text for button #1"
-          button_1_url: "URL for button #1"
-          button_2_text: "Text for button #2"
-          button_2_url: "URL for button #2"
-          button_3_text: "Text for button #3"
-          button_3_url: "URL for button #3"
-          button_4_text: "Text for button #4"
-          button_4_url: "URL for button #4"
-          button_5_text: "Text for button #5"
-          button_5_url: "URL for button #5"
+          button_1_text: 'Text for button #1'
+          button_1_url: 'URL for button #1'
+          button_2_text: 'Text for button #2'
+          button_2_url: 'URL for button #2'
+          button_3_text: 'Text for button #3'
+          button_3_url: 'URL for button #3'
+          button_4_text: 'Text for button #4'
+          button_4_url: 'URL for button #4'
+          button_5_text: 'Text for button #5'
+          button_5_url: 'URL for button #5'
           title: Title
         map:
           name: Map
         map_form:
-          button_1_text: "Text for button #1"
-          button_1_url: "URL for button #1"
-          button_2_text: "Text for button #2"
-          button_2_url: "URL for button #2"
-          button_3_text: "Text for button #3"
-          button_3_url: "URL for button #3"
-          button_4_text: "Text for button #4"
-          button_4_url: "URL for button #4"
-          button_5_text: "Text for button #5"
-          button_5_url: "URL for button #5"
+          button_1_text: 'Text for button #1'
+          button_1_url: 'URL for button #1'
+          button_2_text: 'Text for button #2'
+          button_2_url: 'URL for button #2'
+          button_3_text: 'Text for button #3'
+          button_3_url: 'URL for button #3'
+          button_4_text: 'Text for button #4'
+          button_4_url: 'URL for button #4'
+          button_5_text: 'Text for button #5'
+          button_5_url: 'URL for button #5'
+          collapse: Start with collapsed menu
           link_text: Link text
           link_url: Link URL
+          map_center: Map center (Latitude, Longitude)
+          map_center_help: 'Use decimal points (ie: 41.38879, 2.15899). Leave it empty
+            to automatically fit all the markers'
+          map_height: Map height (px)
           map_settings: Map settings
+          map_zoom: Zoom (any number betwen 0 and 18)
+          map_zoom_help: Only applies if a map center is defined
           text_settings: Text settings
           title: Title
+          truncate: Maximum characters for popup descriptions
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
       editor_images:
         create:
