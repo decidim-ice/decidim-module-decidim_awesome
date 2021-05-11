@@ -9,6 +9,7 @@
 ((exports) => {
   const {
     layers,
+    hideControls,
     cluster,
     control,
     addProposalsControls,
@@ -26,34 +27,39 @@
     drawMarker,
     getCategory
   } = exports.AwesomeMap;
+  const $ = exports.$; // eslint-disable-line
 
   exports.AwesomeMap.allMarkersLoaded = $.noop;
 
   const autoResizeMap = (map) => {
     // Setup center/zoom options if specified, otherwise fitbounds
-    if(options.center) {
-      map.setView(options.center, options.zoom);
-    } else {
+    if(options().center) {
+      map.setView(options().center, options().zoom);
+    } else if(cluster.getBounds().isValid()) {
       map.fitBounds(cluster.getBounds(), { padding: [50, 50] });
     }
   };
 
-  const loadElements = (map) => {
+  exports.AwesomeMap.loadMapElements = (map) => {
+    autoResizeMap(map);
     // legends
     control.addTo(map);
     cluster.addTo(map);
+    if(hideControls()) {
+      $(control.getContainer()).hide()
+    }
 
     // Load markers
-    components.forEach((component) => {
+    components().forEach((component) => {
       if(component.type == "proposals") {
         addProposalsControls(map, component);
 
         fetchProposals(component, '', (element, marker) => {
             // console.log(element.state, show[element.state || 'notAnswered'], show, element);
-            if(show[element.state || 'notAnswered']) {
+            if(show()[element.state || 'notAnswered']) {
               drawMarker(element, marker, component).addTo(layers.proposals.group);
               // Add hashtags menu items here, only hashtags with proposals associated will be present
-              if(options.menu.hashtags) {
+              if(options().menu.hashtags) {
                 addHashtagsControls(map, element.hashtags, marker);
               }
             }
@@ -65,7 +71,7 @@
               // add marker to amendments layers if it's an amendment
               if(amendments.find((a) => a == item.element.id)) {
                 item.marker.removeFrom(layers.proposals.group);
-                if(options.menu.amendments) {
+                if(options().menu.amendments) {
                   item.marker.addTo(layers.amendments.group);
                 }
               }
@@ -75,7 +81,7 @@
           });
         }
 
-        if(options.menu.meetings && component.type == "meetings") {
+        if(options().menu.meetings && component.type == "meetings") {
           addMeetingsControls(map, component);
 
           fetchMeetings(component, '', (element, marker) => {
@@ -151,7 +157,6 @@
       // hide non-selected categories
       $(".awesome_map-categories-selector:not(:checked)").each((_idx, el) => {
         const layer = layers[$(el).closest("label").data("layer")];
-        console.log(el, layer, map)
         if(layer) {
           map.addLayer(layer.group);
           map.removeLayer(layer.group);
@@ -186,26 +191,17 @@
     });
   };
 
-
-  $("#map").on("ready.decidim", (_e, map) => {
-    if(options.center) {
-      map.setView(options.center, options.zoom);
+  // order hashtags alphabetically
+  exports.AwesomeMap.hashtagAdded = (_hashtag, $div) => {
+    let $last = $div.contents("label:last");
+    if($last.prev("label").length) {
+      // move the label to order it alphabetically
+      $div.contents("label").each((_idx, el) => {
+        if($(el).text().localeCompare($last.text()) > 0) {
+          $(el).before($last);
+          return false;
+        }
+      });
     }
-    loadElements(map);
-
-    // order hashtags alphabetically
-    exports.AwesomeMap.hashtagAdded = (_hashtag, $div) => {
-      let $last = $div.contents("label:last");
-      if($last.prev("label").length) {
-        // move the label to order it alphabetically
-        $div.contents("label").each((_idx, el) => {
-          if($(el).text().localeCompare($last.text()) > 0) {
-            $(el).before($last);
-            return false;
-          }
-        });
-      }
-    };
-  });
-
+  };
 })(window);

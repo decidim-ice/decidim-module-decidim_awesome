@@ -54,7 +54,6 @@
     </div>
   </script>
 
-  <%= stylesheet_link_tag "decidim/decidim_awesome/awesome_map/map" %>
   <style type="text/css">
     #map, .wrapper #map {
       height: <%= current_component.settings.map_height %>px;
@@ -69,5 +68,4 @@
     window.AwesomeMap = window.AwesomeMap || {};
     window.AwesomeMap.categories = <%= current_categories.to_json.html_safe %>;
   </script>
-  <%= javascript_include_tag "decidim/decidim_awesome/awesome_map/map" %>
 <% end %>

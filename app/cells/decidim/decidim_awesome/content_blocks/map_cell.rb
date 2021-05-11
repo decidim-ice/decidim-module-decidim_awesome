@@ -10,6 +10,12 @@ module Decidim
         include Decidim::CardHelper
 
         delegate :snippets, to: :controller
+        delegate :settings, to: :model
+        alias current_settings settings
+
+        def hide_controls
+          true
+        end
 
         def all_categories
           return if @all_categories.present?
