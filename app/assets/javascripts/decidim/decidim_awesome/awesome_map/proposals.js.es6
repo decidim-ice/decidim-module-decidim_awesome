@@ -80,7 +80,7 @@
         result.component.proposals.edges.forEach((element) => {
           if(!element.node) return;
 
-          if(element.node.coordinates) {
+          if(element.node.coordinates && element.node.coordinates.latitude && element.node.coordinates.longitude) {
             element.node.link = component.url + '/proposals/' + element.node.id;
             createMarker(element.node, callback);
           }
