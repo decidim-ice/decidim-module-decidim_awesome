@@ -55,40 +55,40 @@
         addProposalsControls(map, component);
 
         fetchProposals(component, '', (element, marker) => {
-            // console.log(element.state, show[element.state || 'notAnswered'], show, element);
-            if(show()[element.state || 'notAnswered']) {
-              drawMarker(element, marker, component).addTo(layers.proposals.group);
-              // Add hashtags menu items here, only hashtags with proposals associated will be present
-              if(options().menu.hashtags) {
-                addHashtagsControls(map, element.hashtags, marker);
+          // console.log(element.state, show[element.state || 'notAnswered'], show, element);
+          if(show()[element.state || 'notAnswered']) {
+            drawMarker(element, marker, component).addTo(layers.proposals.group);
+            // Add hashtags menu items here, only hashtags with proposals associated will be present
+            if(options().menu.hashtags) {
+              addHashtagsControls(map, element.hashtags, marker);
+            }
+          }
+        }, () => { // final call
+          // Setup center/zoom options if specified, otherwise fitbounds
+          autoResizeMap(map);
+
+          allMarkers.forEach((item) => {
+            // add marker to amendments layers if it's an amendment
+            if(amendments.find((a) => a == item.element.id)) {
+              item.marker.removeFrom(layers.proposals.group);
+              if(options().menu.amendments) {
+                item.marker.addTo(layers.amendments.group);
               }
             }
-          }, () => { // final call
-            // Setup center/zoom options if specified, otherwise fitbounds
-            autoResizeMap(map);
-
-            allMarkers.forEach((item) => {
-              // add marker to amendments layers if it's an amendment
-              if(amendments.find((a) => a == item.element.id)) {
-                item.marker.removeFrom(layers.proposals.group);
-                if(options().menu.amendments) {
-                  item.marker.addTo(layers.amendments.group);
-                }
-              }
-            });
-            // Call a trigger, might be useful for customizations
-            exports.AwesomeMap.allMarkersLoaded();
           });
-        }
+          // Call a trigger, might be useful for customizations
+          exports.AwesomeMap.allMarkersLoaded();
+        });
+      }
 
-        if(options().menu.meetings && component.type == "meetings") {
-          addMeetingsControls(map, component);
+      if(options().menu.meetings && component.type == "meetings") {
+        addMeetingsControls(map, component);
 
-          fetchMeetings(component, '', (element, marker) => {
-            drawMarker(element, marker, component).addTo(layers.meetings.group);
-          }, () => autoResizeMap(map) );
-        }
-      });
+        fetchMeetings(component, '', (element, marker) => {
+          drawMarker(element, marker, component).addTo(layers.meetings.group);
+        }, () => autoResizeMap(map) );
+      }
+    });
 
     /*
     * We add all categories and hide those that have no proposals

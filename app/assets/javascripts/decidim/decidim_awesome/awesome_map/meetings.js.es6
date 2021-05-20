@@ -57,10 +57,10 @@
       }
     }`;
 
+  // Shows a human figure instead of a dot
   const MeetingIcon = L.DivIcon.SVGIcon.extend({
     options: {
       fillColor: "#ef604d",
-      iconSize: { x: 300, y: 150 },
       opacity: 0
     },
     _createPathDescription: function() {
