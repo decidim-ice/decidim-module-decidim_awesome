@@ -61,6 +61,11 @@ module Decidim::DecidimAwesome
         { "type" => "textarea", "required" => true, "label" => "Birthday", "name" => "date", "userData" => ["1980-04-16"] }
       ]
     end
+    let(:utf8_json) do
+      [
+        { "type" => "textarea", "required" => true, "label" => "Textarea", "name" => "textarea", "userData" => ["Test äöüéè👽"] }
+      ]
+    end
     let(:xml) { '<xml><dl><dt name="age">Age</dt><dd id="age" name="text"><div>44</div></dd><dt name="date">Birthday</dt><dd id="date" name="date"><div alt="1980-04-16">16/4/1980</div></dd></dl></xml>' }
 
     before do
@@ -153,6 +158,17 @@ module Decidim::DecidimAwesome
 
       it "collects all the inner html" do
         expect(subject.to_json).to eq(html_json)
+        expect(subject.errors).to be_nil
+      end
+    end
+
+    context "when xml contains utf-8 characters" do
+      let(:fields) { box1 }
+      let(:box1) { '[{"type":"textarea","required":true,"label":"Textarea","name":"textarea"}]' }
+      let(:xml) { '<xml><dl><dt name="textarea">Textarea</dt><dd id="textarea"><div>Test äöüéè👽</div></dd></dl></xml>' }
+
+      it "does not mangle them" do
+        expect(subject.to_json).to eq(utf8_json)
         expect(subject.errors).to be_nil
       end
     end
