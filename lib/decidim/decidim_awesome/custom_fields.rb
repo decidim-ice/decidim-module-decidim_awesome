@@ -44,8 +44,11 @@ module Decidim
         return unless data
 
         @fields.map! do |field|
-          value = data.search("##{field["name"]} div")
-          field["userData"] = value.map { |v| v.attribute("alt")&.value || v.inner_html(encoding: "UTF-8") } if value.present?
+          if field["name"] # ignore headers/paragraphs
+            value = data.search("##{field["name"]} div")
+            field["userData"] = value.map { |v| v.attribute("alt")&.value || v.inner_html(encoding: "UTF-8") } if value.present?
+          end
+
           field
         end
       end
