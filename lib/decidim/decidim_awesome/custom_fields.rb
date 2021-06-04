@@ -45,7 +45,7 @@ module Decidim
 
         @fields.map! do |field|
           value = data.search("##{field["name"]} div")
-          field["userData"] = value.map { |v| v.attribute("alt")&.value || v.inner_html } if value.present?
+          field["userData"] = value.map { |v| v.attribute("alt")&.value || v.inner_html(encoding: "UTF-8") } if value.present?
           field
         end
       end
