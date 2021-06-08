@@ -66,6 +66,12 @@ module Decidim::DecidimAwesome
         { "type" => "textarea", "required" => true, "label" => "Textarea", "name" => "textarea", "userData" => ["Test äöüéè👽"] }
       ]
     end
+    let(:header_json) do
+      [
+        { "type" => "header", "label" => "Header", "subtype" => "h1" },
+        { "type" => "textarea", "required" => true, "label" => "Birthday", "name" => "date", "userData" => ["1980-04-16"] }
+      ]
+    end
     let(:xml) { '<xml><dl><dt name="age">Age</dt><dd id="age" name="text"><div>44</div></dd><dt name="date">Birthday</dt><dd id="date" name="date"><div alt="1980-04-16">16/4/1980</div></dd></dl></xml>' }
 
     before do
@@ -169,6 +175,16 @@ module Decidim::DecidimAwesome
 
       it "does not mangle them" do
         expect(subject.to_json).to eq(utf8_json)
+        expect(subject.errors).to be_nil
+      end
+    end
+
+    context "when xml contains a header" do
+      let(:box1) { '[{"type":"header","subtype":"h1","label":"Header"}]' }
+      let(:xml) { '<xml><dl><dt name="date">Birthday</dt><dd id="date" name="date"><div alt="1980-04-16">16/4/1980</div></dd></dl></xml>' }
+
+      it "skips the header during parsing" do
+        expect(subject.to_json).to eq(header_json)
         expect(subject.errors).to be_nil
       end
     end
