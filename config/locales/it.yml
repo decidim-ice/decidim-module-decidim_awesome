@@ -63,8 +63,8 @@ it:
             menu_meetings: Show meetings
             truncate: Maximum characters for popup descriptions
           step:
-            announcement: Announcement
-            show_accepted: Show accepted proposals
+            announcement: Annuncio
+            show_accepted: Mostra le proposte accettate
             show_evaluating: Show evaluating proposals
             show_not_answered: Show not answered proposals
             show_rejected: Show rejected proposals
