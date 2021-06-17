@@ -85,16 +85,25 @@ $(() => {
     element.FormRender = fr;
     // for external use
     $(document).trigger("formRender.created", [fr]);
+    
+    $form.on("submit", (e) => {
+      console.log("submit!", "fr",fr, "userData", fr.userData);
 
-   /*
-     Hack to fix required checkboxes being reset
-     Issue: https://github.com/Platoniq/decidim-module-decidim_awesome/issues/82#issuecomment-862535250
-     The problem probably exists somewhere around here:
-     Source: https://github.com/kevinchappell/formBuilder/blob/902206505760b8af8417f479a4ddcdc641c46b10/src/js/control/select.js#L36
+      if(e.target.checkValidity()) {
+        $body.val(dataToXML(fr.userData));
+      } else {
+        e.preventDefault();
+        e.target.reportValidity();
+      }
+    });
+    
+    /*
+      Hack to fix required checkboxes being reset
+      Issue: https://github.com/Platoniq/decidim-module-decidim_awesome/issues/82
     */
     $('.formbuilder-checkbox-group').each(function (_key, group) {
       const inputs = $('.formbuilder-checkbox input', group);
-      var values = inputs.attr('user-data').split(' ');
+      var values = inputs[0].getAttribute('user-data').split(' ');
 
       inputs.each(function (_key, input) {
         var index = values.indexOf(input.value);
@@ -114,22 +123,13 @@ $(() => {
       if (other_option) {
         if (other_text) {
           other_option.checked = true;
+          other_option.value = other_text;
           other_val.value = other_text;
         } else {
           other_option.checked = false;
+          other_option.value = '';
           other_val.value = '';
         }
-      }
-    });
-    
-    $form.on("submit", (e) => {
-      console.log("submit!", "fr",fr, "userData", fr.userData);
-
-      if(e.target.checkValidity()) {
-        $body.val(dataToXML(fr.userData));
-      } else {
-        e.preventDefault();
-        e.target.reportValidity();
       }
     });
   });
