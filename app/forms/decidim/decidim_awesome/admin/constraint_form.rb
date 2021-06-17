@@ -11,7 +11,7 @@ module Decidim
         attribute :component_id, Integer
 
         validates :component_manifest, absence: true, if: lambda { |form|
-          form.component_id.present? || ConfigConstraintsHelpers::OTHER_MANIFESTS.include?(form.participatory_space_manifest)
+          form.component_id.present? || ConfigConstraintsHelpers::OTHER_MANIFESTS.include?(form.participatory_space_manifest&.to_sym)
         }
         validates :component_id, absence: true, if: ->(form) { form.component_manifest.present? }
       end

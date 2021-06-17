@@ -9,12 +9,65 @@ module Decidim::DecidimAwesome
 
       let(:attributes) do
         {
-          participatory_space_manifest: true
+          participatory_space_manifest: "some-manifest"
         }
       end
 
       context "when everything is OK" do
         it { is_expected.to be_valid }
+      end
+
+      context "when component manifest specified" do
+        let(:attributes) do
+          {
+            component_manifest: "some-manifest"
+          }
+        end
+
+        it { is_expected.to be_valid }
+
+        context "and component_id is specified" do
+          let(:attributes) do
+            {
+              component_manifest: "some-manifest",
+              component_id: 123
+            }
+          end
+
+          it { is_expected.to be_invalid }
+        end
+
+        context "and space manifest is not a participatory space" do
+          let(:attributes) do
+            {
+              participatory_space_manifest: "system",
+              component_manifest: "some-manifest"
+            }
+          end
+
+          it { is_expected.to be_invalid }
+        end
+      end
+
+      context "when component ID specified" do
+        let(:attributes) do
+          {
+            component_id: 123
+          }
+        end
+
+        it { is_expected.to be_valid }
+
+        context "and component manifest is specified" do
+          let(:attributes) do
+            {
+              component_manifest: "some-manifest",
+              component_id: 123
+            }
+          end
+
+          it { is_expected.to be_invalid }
+        end
       end
     end
   end

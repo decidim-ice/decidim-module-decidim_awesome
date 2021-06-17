@@ -11,6 +11,7 @@ Compatibility:
 Features:
   - Fix CSS custom styles when using html characters
   - Add Awesome Map content block for the homepage
+  - Added processes groups constraint for different scoped tweaks
 
 v0.7.0
 ------
