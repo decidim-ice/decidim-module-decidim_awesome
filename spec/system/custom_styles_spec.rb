@@ -90,4 +90,17 @@ describe "Custom styles", type: :system do
       end
     end
   end
+
+  context "when there are custom styles with special characters" do
+    let(:css) { %(body > a[href="hey"] { color: blue; }) }
+    let(:styles) do
+      {
+        "special" => css
+      }
+    end
+
+    it "decodes them correctly" do
+      expect(page.body).to have_content(css)
+    end
+  end
 end
