@@ -4,6 +4,8 @@ module Decidim
   module DecidimAwesome
     module Admin
       module ConfigConstraintsHelpers
+        OTHER_MANIFESTS = [:system, :process_groups].freeze
+
         include Decidim::TranslatableAttributes
 
         def check(status)
@@ -28,7 +30,7 @@ module Decidim
         end
 
         def participatory_space_manifests
-          manifests = { system: I18n.t("decidim.decidim_awesome.admin.config.system") }
+          manifests = OTHER_MANIFESTS.map { |m| [m, I18n.t("decidim.decidim_awesome.admin.config.#{m}")] }.to_h
           Decidim.participatory_space_manifests.pluck(:name).each do |name|
             manifests[name.to_sym] = I18n.t("decidim.admin.menu.#{name}")
           end
@@ -36,7 +38,7 @@ module Decidim
         end
 
         def component_manifests(space = nil)
-          return {} if space == "system"
+          return {} if OTHER_MANIFESTS.include?(space)
 
           Decidim.component_manifests.pluck(:name).map do |name|
             [name.to_sym, I18n.t("decidim.components.#{name}.name")]
@@ -44,17 +46,17 @@ module Decidim
         end
 
         def participatory_spaces_list(manifest)
-          space = participatory_space_for_manifest(manifest)
+          space = model_for_manifest(manifest)
           return {} if space.blank?
 
           space.where(organization: current_organization).map do |item|
-            [item.slug, translated_attribute(item.title)]
+            [item.try(:slug) || item.id.to_s, translated_attribute(item.title)]
           end.to_h
         end
 
         def components_list(manifest, slug)
-          space = participatory_space_for_manifest(manifest)
-          return {} if space.blank?
+          space = model_for_manifest(manifest)
+          return {} unless space.respond_to? :slug
 
           components = Component.where(participatory_space: space.find_by(slug: slug))
           components.map do |item|
@@ -84,8 +86,10 @@ module Decidim
 
         private
 
-        def participatory_space_for_manifest(manifest)
+        def model_for_manifest(manifest)
           return nil if manifest.blank?
+
+          return Decidim::ParticipatoryProcessGroup if manifest == "process_groups"
 
           space = Decidim.find_participatory_space_manifest(manifest)
           return nil unless space

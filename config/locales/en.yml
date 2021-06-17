@@ -152,6 +152,7 @@ en:
             title: Tweaks for %{setting}
             update: Update configuration
           system: Everywhere except participatory spaces
+          process_groups: Process groups
           update:
             error: Error updating configuration! %{error}
             success: Configuration updated successfully
