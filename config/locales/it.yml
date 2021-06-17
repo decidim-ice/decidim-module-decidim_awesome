@@ -2,63 +2,63 @@ it:
   activemodel:
     attributes:
       config:
-        allow_images_in_full_editor: Allow images in the full HTML editor
-        allow_images_in_markdown_editor: Allow images in the markdown editor
-        allow_images_in_proposals: Allow images in the proposals editor
-        allow_images_in_small_editor: Allow images in the minimal HTML editor
-        auto_save_forms: Auto save forms in local storage
-        intergram_auto_no_response: A message that is sent one minute after the user sends its first message and no response was received
-        intergram_auto_response: A message that is sent immediately after the user sends its first message
+        allow_images_in_full_editor: Consenti l'uso di immagini nell'editor HTML completo
+        allow_images_in_markdown_editor: Consenti l'uso di immagini nell'editor markdown
+        allow_images_in_proposals: Consenti l'uso di immagini nell'editor di proposte
+        allow_images_in_small_editor: Consenti l'uso di immagini nell'editor HTML semplificato
+        auto_save_forms: Salva automaticamente i moduli nel LocalStorage
+        intergram_auto_no_response: Un messaggio che viene inviato un minuto dopo che l'utente invia il suo primo messaggio e che non è stata ricevuta risposta
+        intergram_auto_response: Un messaggio che viene inviato immediatamente dopo che l'utente invia il primo messaggio
         intergram_chat_id: Chat ID
-        intergram_color: Color of the widget
-        intergram_for_admins: Enable Intergram Chat in the admin backend
-        intergram_intro_message: First message when the user opens the chat for the first time
-        intergram_require_login: Only for logged users
-        intergram_title_closed: Closed chat title
-        intergram_title_open: Opened chat title
-        intergram_use_floating_button: If checked, the closed chat is always a button instead of a text
-        scoped_styles: 'Custom styles #%{id}'
-        use_markdown_editor: Use a Markdown editor instead of the HTML editor
+        intergram_color: Colore del widget
+        intergram_for_admins: Abilita la chat Intergram nel backend di amministrazione
+        intergram_intro_message: Primo messaggio quando l'utente apre la chat per la prima volta
+        intergram_require_login: Solo per gli utenti registrati
+        intergram_title_closed: Titolo chat chiusa
+        intergram_title_open: Titolo della chat aperta
+        intergram_use_floating_button: Se selezionato, la chat chiusa è sempre un pulsante invece di un testo
+        scoped_styles: 'Stile personalizzato #%{id}'
+        use_markdown_editor: Utilizza un editor Markdown invece dell'editor HTML
       constraint:
-        component_id: or specifically in
-        component_manifest: Only in components of type
-        participatory_space_manifest: Apply to participatory spaces of type
-        participatory_space_slug: Only in
+        component_id: o specificatamente in
+        component_manifest: Solo in componenti di tipo
+        participatory_space_manifest: Applicare a spazi partecipativi di tipo
+        participatory_space_slug: Solo in
       menu:
-        position: Position
-        raw_label: Label
-        target: Opens in
+        position: Posizione
+        raw_label: Etichetta
+        target: Apri in
         url: URL
-        visibility: Visibility
+        visibility: Visibilità
   decidim:
     admin:
       menu:
         decidim_awesome: Decidim awesome
     components:
       awesome_iframe:
-        name: Fullscreen Iframe
+        name: Iframe a schermo intero
         settings:
           global:
-            announcement: Announcement
-            iframe: Iframe code
-            iframe_help: 'Put your code as html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Content will be sanitized from other HTML tags. Ensure to use 100% as width to fill the screen.'
-            no_margins: No margins between the iframe and the rest of the page
-            viewport_width: Limit maximum width to the application viewport
+            announcement: Annuncio
+            iframe: Codice iframe
+            iframe_help: 'Metti il tuo codice come html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Il contenuto sarà sanificato da altri tag HTML. Assicurati di utilizzare il 100% come larghezza per riempire lo schermo.'
+            no_margins: Nessun margine tra l'iframe e il resto della pagina
+            viewport_width: Limita la larghezza massima alla vista dell'applicazione
           step:
-            announcement: Announcement
-            iframe: Iframe code
+            announcement: Annuncio
+            iframe: Codice iframe
       awesome_map:
-        name: Awesome Map
+        name: Mappa Awesome
         settings:
           global:
-            announcement: Announcement
-            collapse: Start with collapsed menu
-            map_center: Map center (Latitude, Longitude)
-            map_center_help: 'Use decimal points (ie: 41.38879, 2.15899). Leave it empty to automatically fit all the markers'
-            map_height: Map height (px)
-            map_zoom: Zoom (any number betwen 0 and 18)
-            map_zoom_help: Only applies if a map center is defined
-            menu_amendments: Show amendments
+            announcement: Annuncio
+            collapse: Inizia con il menu ridotto
+            map_center: Centro della mappa (Latitudine, Longitudine)
+            map_center_help: 'Usa i punti decimali (es: 41.38879, 2.15899). Lascialo vuoto affinché tutti i marcatori vengano adattati automaticamente'
+            map_height: Altezza mappa (px)
+            map_zoom: Zoom (qualsiasi numero tra 0 e 18)
+            map_zoom_help: Si applica solo se è stato definito il centro della mappa
+            menu_amendments: Mostra le correzioni
             menu_hashtags: Show Hasthag search menu
             menu_meetings: Show meetings
             truncate: Maximum characters for popup descriptions
