@@ -229,31 +229,7 @@ en:
           title_closed: Click to chat!
           title_open: Let's chat!
       content_blocks:
-        buttons_row:
-          button_1_text: 'Text for button #1'
-          button_1_url: 'URL for button #1'
-          button_2_text: 'Text for button #2'
-          button_2_url: 'URL for button #2'
-          button_3_text: 'Text for button #3'
-          button_3_url: 'URL for button #3'
-          button_4_text: 'Text for button #4'
-          button_4_url: 'URL for button #4'
-          button_5_text: 'Text for button #5'
-          button_5_url: 'URL for button #5'
-          name: Buttons row
-          title: Title
         map:
-          button_1_text: 'Text for button #1'
-          button_1_url: 'URL for button #1'
-          button_2_text: 'Text for button #2'
-          button_2_url: 'URL for button #2'
-          button_3_text: 'Text for button #3'
-          button_3_url: 'URL for button #3'
-          button_4_text: 'Text for button #4'
-          button_4_url: 'URL for button #4'
-          button_5_text: 'Text for button #5'
-          button_5_url: 'URL for button #5'
-          buttons_settings: Buttons settings
           collapse: Start with collapsed menu
           map_center: Map center (Latitude, Longitude)
           map_center_help: 'Use decimal points (ie: 41.38879, 2.15899). Leave it empty
