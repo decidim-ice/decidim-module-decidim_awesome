@@ -1,6 +1,8 @@
 <section class="wrapper-home map-block home-section">
   <div class="row">
-    <h3 class="section-heading"><%= section_title %></h3>
+
+    <%= section_title %></h3>
+
     <div class="row">
       <div class="columns medium-12">
         <%= awesome_map_for global_map_components do %>
@@ -57,7 +59,7 @@
           </script>
 
           <style type="text/css">
-            #map, .wrapper #map {
+            #awesome-map .leaflet-container {
               height: <%= model.settings.map_height %>px;
             }
           </style>

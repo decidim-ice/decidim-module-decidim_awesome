@@ -32,7 +32,12 @@ module Decidim
         end
 
         def section_title
-          translated_attribute(model.settings.title)
+          return if model.settings.title.blank?
+          return if model.settings.title.values.join.blank?
+
+          content_tag :h3, class: "section-heading" do
+            translated_attribute(model.settings.title)
+          end
         end
       end
     end

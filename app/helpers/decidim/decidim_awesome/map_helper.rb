@@ -11,12 +11,10 @@ module Decidim
         return unless map_utility_dynamic
 
         map = awesome_builder.map_element({ class: "google-map" }, &block)
-        link = link_to("", "#", id: "awesome_map_bottom")
         help = content_tag(:div, class: "map__help") do
           sr_content = content_tag(:p, t("screen_reader_explanation", scope: "decidim.map.dynamic"), class: "show-for-sr")
-          link = link_to(t("skip_button", scope: "decidim.map.dynamic"), "#awesome_map_bottom", class: "skip")
 
-          sr_content + link
+          sr_content
         end
 
         html_options = {
@@ -48,7 +46,7 @@ module Decidim
 
         content_tag(:div, html_options) do
           content_tag :div, class: "row column" do
-            help + map + link
+            help + map
           end
         end
       end

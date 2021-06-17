@@ -238,7 +238,7 @@ en:
           map_settings: Map settings
           map_zoom: Zoom (any number betwen 0 and 18)
           map_zoom_help: Only applies if a map center is defined
-          name: Map
+          name: Awesome Map
           text_settings: Text settings
           title: Title
           truncate: Maximum characters for popup descriptions
