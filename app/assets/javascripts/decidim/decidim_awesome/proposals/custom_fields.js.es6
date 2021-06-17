@@ -86,6 +86,42 @@ $(() => {
     // for external use
     $(document).trigger("formRender.created", [fr]);
 
+   /*
+     Hack to fix required checkboxes being reset
+     Issue: https://github.com/Platoniq/decidim-module-decidim_awesome/issues/82#issuecomment-862535250
+     The problem probably exists somewhere around here:
+     Source: https://github.com/kevinchappell/formBuilder/blob/902206505760b8af8417f479a4ddcdc641c46b10/src/js/control/select.js#L36
+    */
+    $('.formbuilder-checkbox-group').each(function (_key, group) {
+      const inputs = $('.formbuilder-checkbox input', group);
+      var values = inputs.attr('user-data').split(' ');
+
+      inputs.each(function (_key, input) {
+        var index = values.indexOf(input.value);
+        if (index >= 0) {
+          input.checked = true;
+          delete values[index];
+        } else {
+          input.checked = false;
+        }
+      });
+
+      // Fill "other" option
+      const other_option = $('.other-option', inputs.parent())[0]
+      const other_val = $('.other-val', inputs.parent())[0]
+      const other_text = values.filter(Boolean)[0]
+
+      if (other_option) {
+        if (other_text) {
+          other_option.checked = true;
+          other_val.value = other_text;
+        } else {
+          other_option.checked = false;
+          other_val.value = '';
+        }
+      }
+    });
+    
     $form.on("submit", (e) => {
       console.log("submit!", "fr",fr, "userData", fr.userData);
 
