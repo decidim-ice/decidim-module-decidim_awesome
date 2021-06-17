@@ -57,10 +57,10 @@
       }
     }`;
 
+  // Shows a human figure instead of a dot
   const MeetingIcon = L.DivIcon.SVGIcon.extend({
     options: {
       fillColor: "#ef604d",
-      iconSize: { x: 300, y: 150 },
       opacity: 0
     },
     _createPathDescription: function() {
@@ -112,7 +112,7 @@
         result.component.meetings.edges.forEach((element) => {
           if(!element.node) return;
 
-          if(element.node.coordinates) {
+          if(element.node.coordinates && element.node.coordinates.latitude && element.node.coordinates.longitude) {
             element.node.link = component.url + '/meetings/' + element.node.id;
             createMarker(element.node, callback);
           }

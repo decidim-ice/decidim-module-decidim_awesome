@@ -228,6 +228,27 @@ en:
           intro_message: Hello! How can we help you?
           title_closed: Click to chat!
           title_open: Let's chat!
+      content_blocks:
+        map:
+          collapse: Start with collapsed menu
+          map_center: Map center (Latitude, Longitude)
+          map_center_help: 'Use decimal points (ie: 41.38879, 2.15899). Leave it empty
+            to automatically fit all the markers'
+          map_height: Map height (px)
+          map_settings: Map settings
+          map_zoom: Zoom (any number betwen 0 and 18)
+          map_zoom_help: Only applies if a map center is defined
+          menu_amendments: Show amendments
+          menu_meetings: Show meetings
+          name: Awesome Map
+          show_accepted: Show accepted proposals
+          show_evaluating: Show evaluating proposals
+          show_not_answered: Show not answered proposals
+          show_rejected: Show rejected proposals
+          show_withdrawn: Show withdrawn proposals
+          text_settings: Text settings
+          title: Title
+          truncate: Maximum characters for popup descriptions
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
       editor_images:
         create:

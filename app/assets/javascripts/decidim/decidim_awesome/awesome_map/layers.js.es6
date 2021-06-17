@@ -11,7 +11,7 @@
   const control = L.control.layers(null, null, {
     position: 'topleft',
     sortLayers: false,
-    collapsed: collapsedMenu,
+    collapsed: collapsedMenu(),
     // hideSingleBase: true
   });
 
@@ -25,7 +25,7 @@
     layers.proposals.group.addTo(map);
 
     // add control layer for amendments if any
-    if(options.menu.amendments && component.amendments) {
+    if(options().menu.amendments && component.amendments) {
       layers.amendments = {
         label: `<span class="awesome_map-component" id="awesome_map-amendments_${component.id}" title="0">${window.DecidimAwesome.texts.amendments}</span>`,
         group: L.featureGroup.subGroup(cluster)
@@ -42,6 +42,7 @@
       group: L.featureGroup.subGroup(cluster)
     };
     control.addOverlay(layers.meetings.group, layers.meetings.label);
+    // console.log("map",map,"cluster", cluster, "layers", layers, "component", component)
     layers.meetings.group.addTo(map);
   };
 
