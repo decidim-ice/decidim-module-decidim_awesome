@@ -145,6 +145,7 @@ en:
             new: Add a new CSS box
             remove: Remove this CSS box
             sure_to_remove: Are you sure you want to destroy this CSS box?
+          process_groups: Process groups
           rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants"
             is enabled, this option won''t apply. Use the editors hacks instead to
             enable images in proposals.'
@@ -152,7 +153,6 @@ en:
             title: Tweaks for %{setting}
             update: Update configuration
           system: Everywhere except participatory spaces
-          process_groups: Process groups
           update:
             error: Error updating configuration! %{error}
             success: Configuration updated successfully
