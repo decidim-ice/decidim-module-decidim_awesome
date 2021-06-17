@@ -25,6 +25,26 @@
       <%= t("map_zoom_help", scope: i18n_scope) %>
     </div>
   </div>
+  <div class="row two-buttons">
+    <div>
+      <%= settings_fields.check_box :menu_amendments, label: t("menu_amendments", scope: i18n_scope) %>
+    </div>
+    <div><%= settings_fields.check_box :menu_meetings, label: t("menu_meetings", scope: i18n_scope) %>
+    </div>
+  </div>
+  <div class="row two-buttons">
+    <div><%= settings_fields.check_box :show_not_answered, label: t("show_not_answered", scope: i18n_scope) %></div>
+    <div><%= settings_fields.check_box :show_accepted, label: t("show_accepted", scope: i18n_scope) %>
+    </div>
+  </div>
+  <div class="row two-buttons">
+    <div><%= settings_fields.check_box :show_withdrawn, label: t("show_withdrawn", scope: i18n_scope) %></div>
+    <div><%= settings_fields.check_box :show_evaluating, label: t("show_evaluating", scope: i18n_scope) %>
+    </div>
+  </div>
+  <div class="row">
+      <%= settings_fields.check_box :show_rejected, label: t("show_rejected", scope: i18n_scope) %>
+  </div>
 <% end %>
 
 <style>

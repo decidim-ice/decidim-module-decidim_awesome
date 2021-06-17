@@ -238,7 +238,14 @@ en:
           map_settings: Map settings
           map_zoom: Zoom (any number betwen 0 and 18)
           map_zoom_help: Only applies if a map center is defined
+          menu_amendments: Show amendments
+          menu_meetings: Show meetings
           name: Awesome Map
+          show_accepted: Show accepted proposals
+          show_evaluating: Show evaluating proposals
+          show_not_answered: Show not answered proposals
+          show_rejected: Show rejected proposals
+          show_withdrawn: Show withdrawn proposals
           text_settings: Text settings
           title: Title
           truncate: Maximum characters for popup descriptions

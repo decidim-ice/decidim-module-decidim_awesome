@@ -28,7 +28,16 @@ module Decidim
         end
 
         def global_map_components
-          @global_map_components ||= Decidim::Component.where(manifest_name: "meetings").published
+          @global_map_components ||= Decidim::Component.where(manifest_name: [:meetings, :proposals]).published.filter do |component|
+            case component.manifest.name
+            when :meetings
+              true
+            when :proposals
+              component.settings.geocoding_enabled
+            else
+              false
+            end
+          end
         end
 
         def section_title
