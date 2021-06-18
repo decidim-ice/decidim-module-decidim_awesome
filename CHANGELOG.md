@@ -1,17 +1,29 @@
 CHANGELOG
 =========
 
-v0.7.1
+v0.7.2
 ------
+
+Compatibility:
+  - Decidim v0.24.x
+  - Decidim v0.23.x
 
 Features:
   - Added custom fields (with admin interface and scopable) to replace normal body in proposals.
   - Change Markdown editor behaviour: now it is converted to HTML before storing in the database. This makes the editor compatible with all Rich Text editors.
 
+v0.7.1
+------
+
 Compatibility:
-  - Decidim v0.24
+  - Decidim v0.24.x
   - Decidim v0.23.x
-  - Decidim v0.23
+
+Features:
+  - Fix CSS custom styles when using html characters
+  - Add Awesome Map content block for the homepage
+  - Added processes groups constraint for different scoped tweaks
+  - Added "Never" constraint to deactivated scoped tweaks temporarily
 
 v0.7.0
 ------

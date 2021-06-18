@@ -1,0 +1,61 @@
+<% form.fields_for :settings, form.object.settings do |settings_fields| %>
+  <h3><%= t("text_settings", scope: i18n_scope) %></h3>
+
+  <div class="row">
+    <%= settings_fields.translated :text_field, :title, label: t("title", scope: i18n_scope) %>
+  </div>
+
+  <h3 class="mt-m"><%= t("map_settings", scope: i18n_scope) %></h3>
+
+  <div class="row two-buttons">
+    <div>
+      <%= settings_fields.number_field :truncate, label: t("truncate", scope: i18n_scope) %>
+    </div>
+    <div>
+      <%= settings_fields.number_field :map_height, label: t("map_height", scope: i18n_scope) %>
+    </div>
+  </div>
+
+  <div class="row two-buttons">
+    <div>
+      <%= settings_fields.text_field :map_center, label: t("map_center", scope: i18n_scope) %>
+      <%= t("map_center_help", scope: i18n_scope) %>
+    </div>
+    <div><%= settings_fields.number_field :map_zoom, label: t("map_zoom", scope: i18n_scope) %>
+      <%= t("map_zoom_help", scope: i18n_scope) %>
+    </div>
+  </div>
+  <div class="row two-buttons">
+    <div>
+      <%= settings_fields.check_box :menu_amendments, label: t("menu_amendments", scope: i18n_scope) %>
+    </div>
+    <div><%= settings_fields.check_box :menu_meetings, label: t("menu_meetings", scope: i18n_scope) %>
+    </div>
+  </div>
+  <div class="row two-buttons">
+    <div><%= settings_fields.check_box :show_not_answered, label: t("show_not_answered", scope: i18n_scope) %></div>
+    <div><%= settings_fields.check_box :show_accepted, label: t("show_accepted", scope: i18n_scope) %>
+    </div>
+  </div>
+  <div class="row two-buttons">
+    <div><%= settings_fields.check_box :show_withdrawn, label: t("show_withdrawn", scope: i18n_scope) %></div>
+    <div><%= settings_fields.check_box :show_evaluating, label: t("show_evaluating", scope: i18n_scope) %>
+    </div>
+  </div>
+  <div class="row">
+      <%= settings_fields.check_box :show_rejected, label: t("show_rejected", scope: i18n_scope) %>
+  </div>
+<% end %>
+
+<style>
+  .two-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+  }
+  .two-buttons > div {
+    width: 50%;
+  }
+</style>

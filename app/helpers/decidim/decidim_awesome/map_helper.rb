@@ -5,11 +5,19 @@ module Decidim
     module MapHelper
       include Decidim::MapHelper
 
+      # rubocop:disable Metrics/CyclomaticComplexity
+      # rubocop:disable Metrics/PerceivedComplexity:
       def awesome_map_for(components, &block)
-        map = dynamic_map_for({}, {}, &block)
-        return unless map
+        return unless map_utility_dynamic
 
-        map_html_options = {
+        map = awesome_builder.map_element({ class: "google-map" }, &block)
+        help = content_tag(:div, class: "map__help") do
+          sr_content = content_tag(:p, t("screen_reader_explanation", scope: "decidim.map.dynamic"), class: "show-for-sr")
+
+          sr_content
+        end
+
+        html_options = {
           "class" => "awesome-map",
           "id" => "awesome-map",
           "data-components" => components.map do |component|
@@ -21,20 +29,40 @@ module Decidim
                                    amendments: component.manifest.name == :proposals ? Decidim::Proposals::Proposal.where(component: component).only_emendations.count : 0
                                  }
                                end.to_json,
-          "data-collapsed" => current_component.settings.collapse,
-          "data-truncate" => current_component.settings.truncate,
-          "data-map-center" => current_component.settings.map_center,
-          "data-map-zoom" => current_component.settings.map_zoom,
-          "data-menu-amendments" => current_component.settings.menu_amendments,
-          "data-menu-meetings" => current_component.settings.menu_meetings,
-          "data-menu-hashtags" => current_component.settings.menu_hashtags,
-          "data-show-not-answered" => current_component.current_settings.show_not_answered,
-          "data-show-accepted" => current_component.current_settings.show_accepted,
-          "data-show-withdrawn" => current_component.current_settings.show_withdrawn,
-          "data-show-evaluating" => current_component.current_settings.show_evaluating,
-          "data-show-rejected" => current_component.current_settings.show_rejected
+          "data-hide-controls" => settings_source.try(:hide_controls),
+          "data-collapsed" => global_settings.collapse,
+          "data-truncate" => global_settings.truncate || 255,
+          "data-map-center" => global_settings.map_center,
+          "data-map-zoom" => global_settings.map_zoom || 8,
+          "data-menu-amendments" => global_settings.menu_amendments,
+          "data-menu-meetings" => global_settings.menu_meetings,
+          "data-menu-hashtags" => global_settings.menu_hashtags,
+          "data-show-not-answered" => step_settings&.show_not_answered,
+          "data-show-accepted" => step_settings&.show_accepted,
+          "data-show-withdrawn" => step_settings&.show_withdrawn,
+          "data-show-evaluating" => step_settings&.show_evaluating,
+          "data-show-rejected" => step_settings&.show_rejected
         }
-        content_tag(:div, map, map_html_options)
+
+        content_tag(:div, html_options) do
+          content_tag :div, class: "row column" do
+            help + map
+          end
+        end
+      end
+      # rubocop:enable Metrics/CyclomaticComplexity
+      # rubocop:enable Metrics/PerceivedComplexity:
+
+      def step_settings
+        settings_source.try(:current_settings)
+      end
+
+      def global_settings
+        settings_source.try(:settings)
+      end
+
+      def settings_source
+        try(:current_component) || self
       end
 
       # rubocop:disable Rails/HelperInstanceVariable
@@ -55,6 +83,29 @@ module Decidim
       end
 
       private
+
+      def awesome_builder
+        options = {
+          popup_template_id: "marker-popup",
+          markers: []
+        }
+        builder = map_utility_dynamic.create_builder(self, options)
+
+        unless snippets.any?(:map)
+          snippets.add(:map, builder.stylesheet_snippets)
+          snippets.add(:map, builder.javascript_snippets)
+          snippets.add(:head, snippets.for(:map))
+        end
+
+        unless snippets.any?(:awesome_map)
+          snippets.add(:awesome_map, stylesheet_link_tag("decidim/decidim_awesome/awesome_map/map"))
+          snippets.add(:awesome_map, javascript_include_tag("decidim/decidim_awesome/awesome_map/map"))
+          snippets.add(:awesome_map, javascript_include_tag("decidim/decidim_awesome/awesome_map/load_map"))
+          snippets.add(:head, snippets.for(:awesome_map))
+        end
+
+        builder
+      end
 
       # rubocop:disable Style/FormatStringToken
       def append_category(category)

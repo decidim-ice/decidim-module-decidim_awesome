@@ -16,6 +16,7 @@
         "L": false,
         "ApiFetcher": false,
         "FormStorage": false,
+        "CodeMirror": false,
         "Quill": false,
         "InscrybMDE": false,
         "CodeMirror": false,

@@ -30,7 +30,7 @@ describe "Show awesome map", type: :system do
   it "shows the map" do
     within ".wrapper" do
       expect(page).to have_selector(".awesome-map")
-      expect(page).to have_selector("#map")
+      expect(page).to have_selector("#awesome-map")
     end
   end
 
