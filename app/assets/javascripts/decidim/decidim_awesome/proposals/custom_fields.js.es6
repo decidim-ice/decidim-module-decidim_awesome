@@ -103,6 +103,9 @@ $(() => {
     */
     $('.formbuilder-checkbox-group').each(function (_key, group) {
       const inputs = $('.formbuilder-checkbox input', group);
+      if(!inputs.length) {
+          return;
+      }
       var values = inputs[0].getAttribute('user-data').split(' ');
 
       inputs.each(function (_key, input) {
