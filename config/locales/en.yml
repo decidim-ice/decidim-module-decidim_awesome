@@ -145,6 +145,7 @@ en:
             new: Add a new CSS box
             remove: Remove this CSS box
             sure_to_remove: Are you sure you want to destroy this CSS box?
+          none: "⛔ Never! - Deactivate any other constraint"
           process_groups: Process groups
           rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants"
             is enabled, this option won''t apply. Use the editors hacks instead to

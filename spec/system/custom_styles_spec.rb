@@ -52,8 +52,13 @@ describe "Custom styles", type: :system do
 
   context "when constraints are present" do
     let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: settings) }
+    let!(:other_constraint) { create(:config_constraint, awesome_config: config_helper, settings: other_settings) }
     let(:settings) do
       {}
+    end
+
+    let(:other_settings) do
+      { "participatory_space_manifest" => "other" }
     end
 
     before do
@@ -87,6 +92,14 @@ describe "Custom styles", type: :system do
         end
 
         it_behaves_like "extra css is added"
+
+        context "and none constraint is present" do
+          let(:other_settings) do
+            { "participatory_space_manifest" => "none" }
+          end
+
+          it_behaves_like "no extra css is added"
+        end
       end
     end
   end

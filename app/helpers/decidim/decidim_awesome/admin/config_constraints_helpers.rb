@@ -4,7 +4,7 @@ module Decidim
   module DecidimAwesome
     module Admin
       module ConfigConstraintsHelpers
-        OTHER_MANIFESTS = [:system, :process_groups].freeze
+        OTHER_MANIFESTS = [:none, :system, :process_groups].freeze
 
         include Decidim::TranslatableAttributes
 
