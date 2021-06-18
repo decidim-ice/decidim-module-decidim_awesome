@@ -56,7 +56,7 @@ module Decidim
 
         def components_list(manifest, slug)
           space = model_for_manifest(manifest)
-          return {} unless space.column_names.include? "slug"
+          return {} unless space&.column_names&.include? "slug"
 
           components = Component.where(participatory_space: space.find_by(slug: slug))
           components.map do |item|
