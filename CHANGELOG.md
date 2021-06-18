@@ -1,6 +1,19 @@
 CHANGELOG
 =========
 
+v0.7.1
+------
+
+Compatibility:
+  - Decidim v0.24.x
+  - Decidim v0.23.x
+
+Features:
+  - Fix CSS custom styles when using html characters
+  - Add Awesome Map content block for the homepage
+  - Added processes groups constraint for different scoped tweaks
+  - Added "Never" constraint to deactivated scoped tweaks temporarily
+
 v0.7.0
 ------
 

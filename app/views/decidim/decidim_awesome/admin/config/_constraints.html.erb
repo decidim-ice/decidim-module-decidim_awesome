@@ -11,11 +11,11 @@
     <span class="label warning"><%= t ".always" %></span>
   <% end %>
 
-  <ul class="constraints-list">
+  <ul class="constraints-list<%= " inactive" if constraints&.detect{|c| c.settings["participatory_space_manifest"]=="none" } %>">
     <% constraints&.each do |constraint| %>
         <li>
             <% constraint.settings.reverse_each do |k, val| %>
-              <span class="label <%= k %>"><%= translate_constraint_value constraint, k %></span>
+              <span class="label <%= k %> constraint-<%= val %>"><%= translate_constraint_value constraint, k %></span>
             <% end %>
           <a href="<%= constraint_path(id: constraint.id, key: key) %>" class="edit-condition"><%= t ".edit" %></a>
           <%= link_to t(".delete"), constraint_path(id: constraint.id), remote: true, method: :delete %>

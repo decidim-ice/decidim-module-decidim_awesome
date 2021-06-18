@@ -32,7 +32,8 @@ module Decidim
           end.to_h
           spaces.merge(
             "processes" => "participatory_processes",
-            "participatory_process_groups" => "participatory_processes",
+            "participatory_process_groups" => "process_groups",
+            "processes_groups" => "process_groups",
             "assemblies_types" => "assemblies"
           )
         end

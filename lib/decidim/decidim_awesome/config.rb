@@ -84,6 +84,9 @@ module Decidim
         # if no constraints defined, applies to everything
         return true if constraints.blank?
 
+        # if containts the "none" constraints, deactivate everything else
+        return false if constraints.detect { |c| c.settings["participatory_space_manifest"] == "none" }
+
         # check if current context matches some constraint
         constraints.detect do |constraint|
           # if some setting is different, rejects

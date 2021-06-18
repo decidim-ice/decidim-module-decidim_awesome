@@ -41,6 +41,15 @@ module Decidim::DecidimAwesome
         end
       end
 
+      context "and url is process group" do
+        let(:request) { double(url: "/participatory_process_groups/123") }
+
+        it "converts url to context" do
+          subject.context_from_request(request)
+          expect(subject.context).to eq(participatory_space_manifest: "process_groups", participatory_space_slug: "123")
+        end
+      end
+
       context "and url is not a participatory space" do
         let(:request) { double(url: "/admin/newsletters/new") }
 
