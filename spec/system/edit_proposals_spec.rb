@@ -76,11 +76,11 @@ describe "Show proposals editor", type: :system do
     end
   end
 
- context "when editing in markdown mode" do
+  context "when editing in markdown mode" do
     let(:rte_enabled) { true }
     let(:markdown_enabled) { true }
     let(:text) { "# title\\n\\nParagraph\\nline 2" }
-    let(:html) { "<h1 id=\"title\">title</h1>\n<p>Paragraph<br>line 2</p>" }
+    let(:html) { "<h1 id=\"title\">title</h1><p>Paragraph<br>line 2</p>" }
 
     it "converts markdown to html before saving" do
       page.execute_script("$('input[name=\"faker-inscrybmde\"]:first')[0].InscrybMDE.value('#{text}')")
@@ -90,7 +90,7 @@ describe "Show proposals editor", type: :system do
       expect(page).not_to have_content("# title")
       expect(page).to have_selector("h1", text: "title")
       expect(page).to have_selector("p", text: "Paragraph\nline 2")
-      expect(Decidim::Proposals::Proposal.last.body["en"]).to eq(html)
+      expect(Decidim::Proposals::Proposal.last.body["en"].gsub(/[\n\r]/, "")).to eq(html)
     end
   end
 end
