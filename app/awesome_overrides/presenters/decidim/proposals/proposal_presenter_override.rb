@@ -2,17 +2,12 @@
 
 # Tune Proposal presenter to use markdown if configured
 Decidim::Proposals::ProposalPresenter.class_eval do
-  # rubocop:disable Metrics/CyclomaticComplexity
-  # rubocop:disable Metrics/PerceivedComplexity
   def body(links: false, extras: true, strip_tags: false, all_locales: false)
     return unless proposal
 
     if defined? handle_locales
       return handle_locales(proposal.body, all_locales) do |content|
-        content = strip_tags(sanitize_text(content)) if strip_tags
-
-        renderer = Decidim::ContentRenderers::HashtagRenderer.new(content)
-        content = renderer.render(links: links, extras: extras).html_safe
+        content = rendered_content(content, links, strip_tags, extras)
 
         if use_markdown?(proposal) && !all_locales # avoid rendering in editors
           content = render_markdown(content)
@@ -22,15 +17,9 @@ Decidim::Proposals::ProposalPresenter.class_eval do
         content
       end
     end
-    # rubocop:enable Metrics/CyclomaticComplexity
-    # rubocop:enable Metrics/PerceivedComplexity
 
     # TODO: remove when 0.23 is ditched
-    text = translated_attribute(proposal.body)
-    text = strip_tags(sanitize_text(text)) if strip_tags
-
-    renderer = Decidim::ContentRenderers::HashtagRenderer.new(text)
-    text = renderer.render(links: links, extras: extras).html_safe
+    text = rendered_content(translated_attribute(proposal.body), links, strip_tags, extras)
 
     if use_markdown? proposal
       text = render_markdown(text)
@@ -41,6 +30,13 @@ Decidim::Proposals::ProposalPresenter.class_eval do
   end
 
   private
+
+  def rendered_content(content, links, strip_tags, extras)
+    content = strip_tags(sanitize_text(content)) if strip_tags
+
+    renderer = Decidim::ContentRenderers::HashtagRenderer.new(content)
+    renderer.render(links: links, extras: extras).html_safe
+  end
 
   def use_markdown?(proposal)
     return false unless proposal.respond_to? :organization
