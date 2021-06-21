@@ -24,6 +24,7 @@ Features:
   - Add Awesome Map content block for the homepage
   - Added processes groups constraint for different scoped tweaks
   - Added "Never" constraint to deactivated scoped tweaks temporarily
+  - Change Markdown editor behaviour: now it is converted to HTML before storing in the database. This makes the editor compatible with all Rich Text editors. This also takes this feature out the the "experimental" zone as the resulting edited text is fully compatible with standard Decidim.
 
 v0.7.0
 ------

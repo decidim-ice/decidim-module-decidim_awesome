@@ -95,7 +95,7 @@ module Decidim
         end
       end
 
-      # Merges all subconfigs for custom_styles or proposal_custom_fields styled confs
+      # Merges all subconfigs for custom_styles or any other scoped confs
       def collect_sub_configs(singular_key)
         plural_key = singular_key.pluralize.to_sym
         return unless config[plural_key]

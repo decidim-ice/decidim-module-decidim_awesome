@@ -14,13 +14,13 @@ appraise "decidim-0.23" do
 end
 
 appraise "decidim-0.24" do
-  gem "decidim", "0.24"
-  gem "decidim-admin", "0.24"
-  gem "decidim-core", "0.24"
+  gem "decidim", "0.24.3"
+  gem "decidim-admin", "0.24.3"
+  gem "decidim-core", "0.24.3"
   gem "puma", ">= 5.0.0"
 
   group :development, :test do
-    gem "decidim-dev", "0.24"
+    gem "decidim-dev", "0.24.3"
   end
 end
 

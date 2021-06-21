@@ -5,6 +5,7 @@
 // = require codemirror-4.inline-attachment.js
 // = require jquery.inline-attachment.js
 // = require europa.min.js
+// = require decidim/editor/linebreak_module
 // = require_self
 
 ((exports) => {
