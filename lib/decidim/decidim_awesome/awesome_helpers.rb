@@ -51,14 +51,7 @@ module Decidim
 
       # Collects all CSS that is applied in the current URL context
       def awesome_custom_styles
-        return unless awesome_config[:scoped_styles]
-        return @awesome_custom_styles if @awesome_custom_styles
-
-        styles = awesome_config[:scoped_styles]&.filter do |key, _value|
-          config = AwesomeConfig.find_by(var: "scoped_style_#{key}", organization: current_organization)
-          @awesome_config_instance.valid_in_context?(config&.constraints)
-        end
-        @awesome_custom_styles = styles.values.join("\n")
+        @awesome_custom_styles ||= awesome_config_instance.collect_sub_configs("scoped_style")
       end
 
       def version_prefix

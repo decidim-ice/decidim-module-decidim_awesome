@@ -111,7 +111,7 @@ eu:
               intergram_config: 'Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> to your group or start a chat with it directly. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               scoped_styles: Create custom CSS that applies only in certain parts of the public web (use the restrictions editor for that)
               scoped_styles_variables: 'You can use the following CSS variables for organization customized colors:'
-              use_markdown_editor: This will substitute the Quill WYSIWYG editor, use a Markdown editor instead. Text will be rendered as HTML in the public pages (text in database will be saved as markdown text)
+              use_markdown_editor: This will substitute the Quill WYSIWYG editor, use a Markdown editor instead. Text will be saved as HTML in the database.
           form_styles:
             new: Add a new CSS box
             remove: Remove this CSS box
