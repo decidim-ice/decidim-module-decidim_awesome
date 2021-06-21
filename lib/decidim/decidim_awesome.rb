@@ -86,6 +86,18 @@ module Decidim
       []
     end
 
+    # Allows admins to assignate "fake" admins scoped to some admin zones using the
+    # same scope editor as :scoped_styles, valid values uses the same convention:
+    #   :disabled => false and non available, hidden from admins
+    #   Hash => hash of different admin ids, each key will be used for the contraints
+    # Admins create this hash dynamically but some pre-defined admin boxes can be created here as:
+    #   {
+    #      some_identifier: [1234, 5678, 90123]
+    #   }
+    config_accessor :scoped_admins do
+      {}
+    end
+
     # these settings do not follow the :disabled convention but
     # depends on the previous intergram configurations
     config_accessor :intergram_url do
