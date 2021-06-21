@@ -9,7 +9,7 @@ module Decidim
         @vars = AwesomeConfig.for_organization(organization).includes(:constraints)
         @context = {
           participatory_space_manifest: nil,
-          participatory_slug: nil,
+          participatory_space_slug: nil,
           component_id: nil,
           component_manifest: nil
         }
@@ -93,6 +93,18 @@ module Decidim
           invalid = constraint.settings.detect { |key, val| context[key.to_sym].to_s != val.to_s }
           invalid.blank?
         end
+      end
+
+      # Merges all subconfigs for custom_styles or any other scoped confs
+      def collect_sub_configs(singular_key)
+        plural_key = singular_key.pluralize.to_sym
+        return unless config[plural_key]
+
+        fields = config[plural_key]&.filter do |key, _value|
+          sub_config = AwesomeConfig.find_by(var: "#{singular_key}_#{key}", organization: @organization)
+          valid_in_context?(sub_config&.constraints)
+        end
+        fields.values
       end
 
       private
