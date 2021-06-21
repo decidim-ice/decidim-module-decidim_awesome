@@ -1,6 +1,4 @@
 <div class="row column decidim_awesome-form">
-  <h2 class="card-title"><%= t("experimental", scope: "decidim.decidim_awesome.admin.config") %></h2>
-
   <% if config_enabled? :allow_images_in_proposals %>
     <p class="text-info"><%= t("rich_text_editor_in_public_views", scope: "decidim.decidim_awesome.admin.config") if current_organization.rich_text_editor_in_public_views %></p>
 

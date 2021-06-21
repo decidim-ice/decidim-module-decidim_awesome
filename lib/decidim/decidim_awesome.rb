@@ -3,7 +3,6 @@
 require "decidim/decidim_awesome/admin"
 require "decidim/decidim_awesome/engine"
 require "decidim/decidim_awesome/admin_engine"
-require "decidim/decidim_awesome/content_renderers"
 require "decidim/decidim_awesome/context_analyzers"
 require "decidim/decidim_awesome/map_component/engine"
 require "decidim/decidim_awesome/map_component/component"
@@ -16,7 +15,6 @@ module Decidim
 
     autoload :Config, "decidim/decidim_awesome/config"
     autoload :SystemChecker, "decidim/decidim_awesome/system_checker"
-    autoload :ContentRenderes, "decidim/decidim_awesome/content_renderers"
     autoload :ContextAnalyzers, "decidim/decidim_awesome/context_analyzers"
     autoload :MenuHacker, "decidim/decidim_awesome/menu_hacker"
 

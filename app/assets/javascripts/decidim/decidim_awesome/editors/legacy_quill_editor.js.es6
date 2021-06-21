@@ -4,6 +4,7 @@
 // = require inline-attachment.js
 // = require codemirror-4.inline-attachment.js
 // = require jquery.inline-attachment.js
+// = require europa.min.js
 // = require_self
 
 ((exports) => {
@@ -117,17 +118,23 @@
     };
 
     const createMarkdownEditor = (container) => {
-      $(container).hide();
       const t = window.DecidimAwesome.texts["drag_and_drop_image"];
       const token = $( 'meta[name="csrf-token"]' ).attr( 'content' );
       const $input = $(container).siblings('input[type="hidden"]');
+      const $faker = $('<input type="hidden" name="faker-inscrybmde">');
+      const $form = $(container).closest('form');
+      const europa = new Europa();
+      $faker.val(europa.convert($input.val()));
+      $faker.insertBefore($(container));
+      $(container).hide();
       const inscrybmde = new InscrybMDE({
-        element: $input[0],
+        element: $faker[0],
         spellChecker: false,
         renderingConfig: {
           codeSyntaxHighlighting: true
         }
       });
+      $faker[0].InscrybMDE = inscrybmde;
 
       // Allow image upload
       if(window.DecidimAwesome.allow_images_in_markdown_editor) {
@@ -139,6 +146,11 @@
           extraHeaders: { "X-CSRF-Token": token }
         });
       }
+
+      // convert to html on submit
+      $form.on("submit", () => {
+        $input.val(inscrybmde.markdown(inscrybmde.value()));
+      });
     };
 
     const quillEditor = () => {
