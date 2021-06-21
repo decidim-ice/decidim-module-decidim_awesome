@@ -13,7 +13,7 @@ appraise "decidim-0.23" do
   end
 end
 
-appraise "decidim-0.24.3" do
+appraise "decidim-0.24" do
   gem "decidim", "0.24.3"
   gem "decidim-admin", "0.24.3"
   gem "decidim-core", "0.24.3"
