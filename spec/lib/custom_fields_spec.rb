@@ -188,5 +188,66 @@ module Decidim::DecidimAwesome
         expect(subject.errors).to be_nil
       end
     end
+
+    context "when values contain translation keys" do
+      let(:box1) { '[{"type":"text","required":true,"label":"custom_fields.age.label","name":"age","placeholder":"custom_fields.age.placeholder"}]' }
+      let(:box2) { '[{"type":"textarea","required":true,"label":"custom_fields.birthday.label","name":"date","placeholder":"custom_fields.birthday.placeholder"}]' }
+      let(:translations_en) do
+        {
+          custom_fields: {
+            age: {
+              label: "Age",
+              placeholder: "Please enter your age."
+            },
+            birthday: {
+              label: "Birthday",
+              placeholder: "Please enter your birthday."
+            }
+          }
+        }
+      end
+      let(:translations_de) do
+        {
+          custom_fields: {
+            age: {
+              label: "Alter",
+              placeholder: "Bitte gib dein Alter ein."
+            },
+            birthday: {
+              label: "Geburtstag",
+              placeholder: "Bitte gib deinen Geburtstag ein."
+            }
+          }
+        }
+      end
+
+      before do
+        I18n.config.available_locales << :de
+        I18n.backend.store_translations(:en, translations_en)
+        I18n.backend.store_translations(:de, translations_de)
+      end
+
+      it "translates to en" do
+        I18n.locale = :en
+        subject.translate!
+
+        json = subject.to_json
+        expect(json[0]["label"]).to eq translations_en[:custom_fields][:age][:label]
+        expect(json[0]["placeholder"]).to eq translations_en[:custom_fields][:age][:placeholder]
+        expect(json[1]["label"]).to eq translations_en[:custom_fields][:birthday][:label]
+        expect(json[1]["placeholder"]).to eq translations_en[:custom_fields][:birthday][:placeholder]
+      end
+
+      it "translates to de" do
+        I18n.locale = :de
+        subject.translate!
+
+        json = subject.to_json
+        expect(json[0]["label"]).to eq translations_de[:custom_fields][:age][:label]
+        expect(json[0]["placeholder"]).to eq translations_de[:custom_fields][:age][:placeholder]
+        expect(json[1]["label"]).to eq translations_de[:custom_fields][:birthday][:label]
+        expect(json[1]["placeholder"]).to eq translations_de[:custom_fields][:birthday][:placeholder]
+      end
+    end
   end
 end

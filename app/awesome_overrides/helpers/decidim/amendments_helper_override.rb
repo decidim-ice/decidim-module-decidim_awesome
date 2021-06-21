@@ -13,6 +13,7 @@ Decidim::AmendmentsHelper.module_eval do
 
   def render_amendment_custom_fields_override(fields, attribute, form, original_resource)
     custom_fields = Decidim::DecidimAwesome::CustomFields.new(fields)
+    custom_fields.translate!
     body = amendments_form_fields_value(original_resource, attribute)
     custom_fields.apply_xml(body) if body.present?
     # TODO: find a way to add errors as form is not the parent form

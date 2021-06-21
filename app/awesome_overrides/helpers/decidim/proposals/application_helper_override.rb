@@ -50,6 +50,8 @@ Decidim::Proposals::ApplicationHelper.module_eval do
 
   def render_proposal_custom_fields_override(fields, form, name, locale)
     custom_fields = Decidim::DecidimAwesome::CustomFields.new(fields)
+    custom_fields.translate!
+
     body = if form_presenter.proposal.body.is_a?(Hash)
              form_presenter.body(extras: false, all_locales: true)[locale]
            else
