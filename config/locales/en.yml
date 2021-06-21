@@ -141,7 +141,7 @@ en:
               use_markdown_editor: This will substitute the Quill WYSIWYG editor,
                 to use a Markdown editor instead. Text will be converted and saved as
                 HTML in the database.
-        form_styles:
+          form_styles:
             new: Add a new CSS box
             remove: Remove this CSS box
             sure_to_remove: Are you sure you want to destroy this CSS box?
