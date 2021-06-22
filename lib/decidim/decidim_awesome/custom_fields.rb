@@ -70,7 +70,9 @@ module Decidim
           next value unless value.is_a? String
           next value unless (match = value.match(/^(.*\..*)$/))
 
-          I18n.t(match[1])
+          I18n.t(match[1], raise: true)
+        rescue I18n::MissingTranslationData
+          value
         end
         @fields
       end
