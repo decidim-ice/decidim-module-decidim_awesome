@@ -23,7 +23,7 @@ describe "Custom styles", type: :system do
       expect(page.body).to have_content("body {background: red;}")
     end
 
-    it "css is applyied" do
+    it "css is applied" do
       expect(page.execute_script("return window.getComputedStyle($('body')[0]).backgroundColor")).to eq("rgb(255, 0, 0)")
     end
   end
@@ -42,7 +42,7 @@ describe "Custom styles", type: :system do
     it_behaves_like "extra css is added"
   end
 
-  context "when there are emtpy css boxes" do
+  context "when there are empty css boxes" do
     let(:styles) do
       {}
     end

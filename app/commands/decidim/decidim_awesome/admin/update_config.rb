@@ -20,6 +20,7 @@ module Decidim
         def call
           if form.invalid?
             message = form.errors[:scoped_styles].join("; ") if @form.errors[:scoped_styles].any?
+            message = form.errors[:scoped_admins].join("; ") if @form.errors[:scoped_admins].any?
             return broadcast(:invalid, message, form.errors)
           end
 

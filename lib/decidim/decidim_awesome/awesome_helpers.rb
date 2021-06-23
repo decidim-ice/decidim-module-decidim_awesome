@@ -20,7 +20,7 @@ module Decidim
       end
 
       def javascript_config_vars
-        awesome_config.except(:scoped_styles).to_json.html_safe
+        awesome_config.except(:scoped_styles, :scoped_admins).to_json.html_safe
       end
 
       def show_public_intergram?
@@ -52,6 +52,11 @@ module Decidim
       # Collects all CSS that is applied in the current URL context
       def awesome_custom_styles
         @awesome_custom_styles ||= awesome_config_instance.collect_sub_configs("scoped_style")
+      end
+
+      # Collects all proposal custom fields that is applied in the current URL context
+      def awesome_scoped_admins
+        @awesome_scoped_admins ||= awesome_config_instance.collect_sub_configs("scoped_admin")
       end
 
       def version_prefix

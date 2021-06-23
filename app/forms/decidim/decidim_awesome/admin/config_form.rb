@@ -11,6 +11,7 @@ module Decidim
         attribute :allow_images_in_markdown_editor, Boolean
         attribute :auto_save_forms, Boolean
         attribute :scoped_styles, Hash
+        attribute :scoped_admins, Hash
         attribute :menu, Array[MenuForm]
         attribute :intergram_for_admins, Boolean
         attribute :intergram_for_admins_settings, IntergramForm
@@ -21,6 +22,8 @@ module Decidim
         attr_accessor :valid_keys
 
         validate :css_syntax, if: ->(form) { form.scoped_styles.present? }
+
+        # TODO: validate non general admins are here
 
         def self.from_params(params, additional_params = {})
           instance = super(params, additional_params)
