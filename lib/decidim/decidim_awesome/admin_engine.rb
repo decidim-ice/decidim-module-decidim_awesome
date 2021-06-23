@@ -1,10 +1,13 @@
 # frozen_string_literal: true
+
 require "decidim/decidim_awesome/awesome_helpers"
 
 module Decidim
   module DecidimAwesome
     # This is the engine that runs on the public interface of `DecidimAwesome`.
     class AdminEngine < ::Rails::Engine
+      include AwesomeHelpers
+
       isolate_namespace Decidim::DecidimAwesome::Admin
 
       paths["db/migrate"] = nil
@@ -22,12 +25,11 @@ module Decidim
       end
 
       initializer "decidim_admin_awesome.assets" do |app|
-        if AwesomeHelpers.version_prefix == "0.23"
-          app.config.assets.precompile += %w(legacy_decidim_admin_decidim_awesome_manifest.js decidim_admin_decidim_awesome_manifest.css)
-        else
-          app.config.assets.precompile += %w(decidim_admin_decidim_awesome_manifest.js decidim_admin_decidim_awesome_manifest.css)
-        end
-
+        app.config.assets.precompile += if version_prefix == "0.23"
+                                          %w(legacy_decidim_admin_decidim_awesome_manifest.js decidim_admin_decidim_awesome_manifest.css)
+                                        else
+                                          %w(decidim_admin_decidim_awesome_manifest.js decidim_admin_decidim_awesome_manifest.css)
+                                        end
       end
 
       initializer "decidim_decidim_awesome.admin_mount_routes" do
