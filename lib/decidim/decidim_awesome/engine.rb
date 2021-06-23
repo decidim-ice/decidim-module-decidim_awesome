@@ -19,7 +19,11 @@ module Decidim
       end
 
       initializer "decidim_decidim_awesome.assets" do |app|
-        app.config.assets.precompile += %w(decidim_decidim_awesome_manifest.js decidim_decidim_awesome_manifest.css)
+        if AwesomeHelpers.version_prefix == "0.23"
+          app.config.assets.precompile += %w(legacy_decidim_decidim_awesome_manifest.js decidim_decidim_awesome_manifest.css)
+        else
+          app.config.assets.precompile += %w(decidim_decidim_awesome_manifest.js decidim_decidim_awesome_manifest.css)
+        end
         # add to precompile any present theme asset
         Dir.glob(Rails.root.join("app/assets/themes/*.*")).each do |path|
           app.config.assets.precompile << path
