@@ -101,9 +101,15 @@ en:
             delete: Delete
             edit: Edit
             title: 'Applicable only in these cases:'
+          create_scoped_admin:
+            error: Error creating a new Admin group! %{error}
+            success: Admin group %{key} created successfully
           create_scoped_style:
             error: Error creating a new CSS box! %{error}
             success: CSS box %{key} created successfully
+          destroy_scoped_admin:
+            error: Error removing Admin group! %{error}
+            success: Admin group %{key} removed successfully
           destroy_scoped_style:
             error: Error removing CSS box! %{error}
             success: CSS box %{key} removed successfully
