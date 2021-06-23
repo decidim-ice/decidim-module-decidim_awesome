@@ -8,6 +8,8 @@ module Decidim
   module DecidimAwesome
     # This is the engine that runs on the public interface of decidim_awesome.
     class Engine < ::Rails::Engine
+      include AwesomeHelpers
+
       isolate_namespace Decidim::DecidimAwesome
 
       routes do
@@ -19,7 +21,11 @@ module Decidim
       end
 
       initializer "decidim_decidim_awesome.assets" do |app|
-        app.config.assets.precompile += %w(decidim_decidim_awesome_manifest.js decidim_decidim_awesome_manifest.css)
+        app.config.assets.precompile += if version_prefix == "0.23"
+                                          %w(legacy_decidim_decidim_awesome_manifest.js decidim_decidim_awesome_manifest.css)
+                                        else
+                                          %w(decidim_decidim_awesome_manifest.js decidim_decidim_awesome_manifest.css)
+                                        end
         # add to precompile any present theme asset
         Dir.glob(Rails.root.join("app/assets/themes/*.*")).each do |path|
           app.config.assets.precompile << path
