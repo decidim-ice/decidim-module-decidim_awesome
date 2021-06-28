@@ -18,7 +18,12 @@ module Decidim
 
       # overrides
       config.to_prepare do
-        Decidim::User.include(Decidim::DecidimAwesome::UserOverride)
+        # override user's admin property
+        Decidim::User.include(UserOverride) if DecidimAwesome.config[:scoped_admins] != :disabled
+      end
+
+      initializer "decidim.middleware" do |app|
+        app.config.middleware.insert_after Decidim::CurrentOrganization, Decidim::DecidimAwesome::CurrentConfig
       end
 
       # Prepare a zone to create overrides
