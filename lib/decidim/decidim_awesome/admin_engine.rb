@@ -20,6 +20,7 @@ module Decidim
         resources :config, param: :var, only: [:show, :update]
         resources :scoped_styles, param: :var, only: [:create, :destroy]
         resources :scoped_admins, param: :var, only: [:create, :destroy]
+        get :users, to: "config#users"
         get :checks, to: "checks#index"
         root to: "config#show", var: :editors
       end

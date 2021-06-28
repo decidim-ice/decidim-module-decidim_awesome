@@ -11,7 +11,7 @@ module Decidim
 
         layout "decidim/admin/decidim_awesome"
 
-        helper_method :constraints_for
+        helper_method :constraints_for, :users_for
         before_action do
           enforce_permission_to :edit_config, configs
         end
@@ -35,6 +35,21 @@ module Decidim
           end
         end
 
+        def users
+          respond_to do |format|
+            format.json do
+              if (term = params[:term].to_s).present?
+                query = current_organization.users.order(name: :asc)
+                query = query.where("name ILIKE :term OR nickname ILIKE :term OR email ILIKE :term", term: "%#{term}%")
+
+                render json: query.all.collect { |u| { id: u.id, text: format_user_name(u) } }
+              else
+                render json: []
+              end
+            end
+          end
+        end
+
         private
 
         def constraints_for(key)
@@ -45,6 +60,14 @@ module Decidim
           return params[:config].keys if params.has_key?(:config)
 
           DecidimAwesome.config.keys
+        end
+
+        def users_for(ids_list)
+          Decidim::User.where(id: ids_list).map { |user| OpenStruct.new(text: format_user_name(user), id: user.id) }
+        end
+
+        def format_user_name(user)
+          "<span class='#{"is-admin" if user.admin}'>#{user.name} (@#{user.nickname} - #{user.email})</span>"
         end
       end
     end

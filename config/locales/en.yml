@@ -22,6 +22,7 @@ en:
         intergram_title_open: Opened chat title
         intergram_use_floating_button: If checked, the closed chat is always a button
           instead of a text
+        scoped_admins: 'Scoped admins group #%{id}'
         scoped_styles: 'Custom styles #%{id}'
         use_markdown_editor: Use a Markdown editor instead of the HTML editor
       constraint:
@@ -141,7 +142,8 @@ en:
                 bot</a> to your group or start a chat with it directly. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+
                 info</a>
               scoped_admins: Promote regular user to admins that can only administrate
-                certain parts of the public web (use the restrictions editor for that)
+                certain parts of the public web (use the restrictions editor for that).
+                Note that any user, if already admin, will be ignored.
               scoped_styles: Create custom CSS that applies only in certain parts
                 of the public web (use the restrictions editor for that)
               scoped_styles_variables: 'You can use the following CSS variables for
