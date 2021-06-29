@@ -13,6 +13,7 @@ module Decidim::DecidimAwesome
     let!(:organization) { create(:organization, host: host) }
     let!(:organization2) { create(:organization, host: "another.host.org") }
     let!(:assembly) { create(:assembly, organization: organization) }
+    let!(:another_assembly) { create(:assembly, organization: organization) }
     let!(:user) { create(:user, :confirmed, organization: organization) }
     let!(:admin) { create(:user, :confirmed, :admin, organization: organization) }
 
@@ -119,6 +120,12 @@ module Decidim::DecidimAwesome
             it_behaves_like "untampered user model"
           end
         end
+      end
+
+      context "and accessing another assemblies index" do
+        let(:path) { "admin/assemblies/#{another_assembly.slug}" }
+
+        it_behaves_like "untampered user model"
       end
 
       context "when admin a participatory process" do

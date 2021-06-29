@@ -89,9 +89,17 @@ module Decidim
 
         # check if current context matches some constraint
         constraints.detect do |constraint|
-          # if some setting is different, rejects
-          invalid = constraint.settings.detect { |key, val| context[key.to_sym].to_s != val.to_s }
-          invalid.blank?
+          settings = constraint.settings.symbolize_keys
+          match_method = settings.delete(:match)
+          if match_method == "exclusive"
+            # all keys must match
+            settings == context
+          else
+            # constraints keys can match the context partially (ie: if slug is not specified, any space matches in the same manifest)
+            # if some setting is different, rejects
+            invalid = constraint.settings.detect { |key, val| context[key.to_sym].to_s != val.to_s }
+            invalid.blank?
+          end
         end
       end
 

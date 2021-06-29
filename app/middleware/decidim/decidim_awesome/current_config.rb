@@ -84,9 +84,12 @@ module Decidim
         additional_constraints = []
         if @request.get?
           constraints.each do |constraint|
-            if constraint.settings["participatory_space_manifest"].present? && constraint.settings.size > 1
-              additional_constraints << OpenStruct.new(settings: { participatory_space_manifest: constraint.settings["participatory_space_manifest"] })
-            end
+            next unless constraint.settings["participatory_space_manifest"].present? && constraint.settings.size > 1
+
+            additional_constraints << OpenStruct.new(settings: {
+                                                       "participatory_space_manifest" => constraint.settings["participatory_space_manifest"],
+                                                       "match" => "exclusive"
+                                                     })
           end
         end
 
