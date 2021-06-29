@@ -102,7 +102,12 @@ module Decidim
 
         fields = config[plural_key]&.filter do |key, _value|
           sub_config = AwesomeConfig.find_by(var: "#{singular_key}_#{key}", organization: @organization)
-          valid_in_context?(sub_config&.constraints)
+          # allow custom filtering if block given
+          if block_given?
+            yield sub_config
+          else
+            valid_in_context?(sub_config&.constraints)
+          end
         end
         fields.values
       end
