@@ -79,6 +79,18 @@ module Decidim::DecidimAwesome
 
         it_behaves_like "tampered users model"
 
+        context "when additional slashes" do
+          let(:path) { "/admin/" }
+
+          it_behaves_like "untampered user model"
+        end
+
+        context "when multiple slashes" do
+          let(:path) { "//admin/" }
+
+          it_behaves_like "untampered user model"
+        end
+
         context "when POST" do
           let(:method) { "POST" }
 

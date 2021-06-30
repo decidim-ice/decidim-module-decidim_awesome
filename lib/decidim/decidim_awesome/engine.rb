@@ -16,19 +16,22 @@ module Decidim
         post :editor_images, to: "editor_images#create"
       end
 
-      # overrides
-      config.to_prepare do
-        # override user's admin property
-        Decidim::User.include(UserOverride) if DecidimAwesome.config[:scoped_admins] != :disabled
-      end
-
       initializer "decidim.middleware" do |app|
         app.config.middleware.insert_after Decidim::CurrentOrganization, Decidim::DecidimAwesome::CurrentConfig
       end
 
       # Prepare a zone to create overrides
       # https://edgeguides.rubyonrails.org/engines.html#overriding-models-and-controllers
+      # overrides
       config.to_prepare do
+        if DecidimAwesome.config[:scoped_admins] != :disabled
+          # override user's admin property
+          Decidim::User.include(UserOverride)
+          # redirect unauthorized scoped admins to allowed places
+          Decidim::ErrorsController.include(AdminNotFoundRedirect)
+        end
+
+        # TODO: move to include overrides
         Dir.glob("#{Engine.root}/app/awesome_overrides/**/*_override.rb").each do |override|
           require_dependency override
         end

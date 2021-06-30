@@ -7,7 +7,7 @@ module Decidim
 
       included do
         class << self
-          attr_accessor :awesome_admins_for_current_scope
+          attr_accessor :awesome_admins_for_current_scope, :awesome_potential_admins
         end
 
         # TODO: Assign admin if is a constraint exists for the current_context
