@@ -67,7 +67,7 @@ module Decidim
         end
 
         def format_user_name(user)
-          "<span class='#{"is-admin" if user.admin}'>#{user.name} (@#{user.nickname} - #{user.email})</span>"
+          "<span class='#{"is-admin" if user.read_attribute("admin")}'>#{user.name} (@#{user.nickname} - #{user.email})</span>"
         end
       end
     end

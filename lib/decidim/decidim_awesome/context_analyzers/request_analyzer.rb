@@ -26,20 +26,20 @@ module Decidim
         private
 
         # In the frontend there's no a 100% correspondence between url and manifest name
-        def participatory_spaces
-          spaces = Decidim.participatory_space_manifests.map do |space|
-            [space.name.to_s, space.name.to_s]
-          end.to_h
-          spaces.merge(
-            "processes" => "participatory_processes",
-            "participatory_process_groups" => "process_groups",
-            "processes_groups" => "process_groups",
-            "assemblies_types" => "assemblies"
-          )
+        def participatory_spaces_routes
+          spaces = Decidim.participatory_space_manifests \
+                          .filter { |space| !DecidimAwesome.config.participatory_spaces_routes_context.has_key?(space.name) } \
+                          .map { |space| [space.name.to_s, space.name.to_s] }.to_h
+          DecidimAwesome.config.participatory_spaces_routes_context.each do |manifest, routes|
+            routes.each do |route|
+              spaces[route.to_s] = manifest.to_s
+            end
+          end
+          spaces
         end
 
         def process_admin_segments(segments)
-          spaces = participatory_spaces
+          spaces = participatory_spaces_routes
           return unless spaces[segments[0]]
 
           @context[:participatory_space_manifest] = spaces[segments[0]]
@@ -54,7 +54,7 @@ module Decidim
         end
 
         def process_front_segments(segments)
-          spaces = participatory_spaces
+          spaces = participatory_spaces_routes
           return unless spaces[segments[0]]
 
           @context[:participatory_space_manifest] = spaces[segments[0]]
@@ -71,8 +71,11 @@ module Decidim
         def system_manifest?(path)
           patterns = [
             %r{^/admin/newsletters},
+            %r{^/admin/moderations},
+            %r{^/admin/users},
             %r{^/admin/organization},
-            %r{^/admin/static_pages}
+            %r{^/admin/static_pages},
+            %r{^/admin/logs}
           ]
           path.match(Regexp.union(patterns))
         end

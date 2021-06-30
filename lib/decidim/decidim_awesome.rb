@@ -129,6 +129,21 @@ module Decidim
         auto_no_response: nil
       }
     end
+
+    # additional correspondences between participatory spaces manifests and routes
+    # ie: /admin/assemblies and /admin/assemblies_types are both treated as a "assembly" participatory space in terms of permission scoping
+    # This can be tuned in a initialized if some other hacks over routes are applied
+    # if a registered participatory space is not listed here then the name manifest will be used as a default route /manifest_name /admin/manifes_name
+    config_accessor :participatory_spaces_routes_context do
+      {
+        # route in admin is diferent than in the frontend: /processes, /admin/participatory_processes
+        participatory_processes: [:participatory_processes, :processes],
+        # both /admin/assemblies and /admin/assemblies_types are considered assemblies
+        assemblies: [:assemblies, :assemblies_types],
+        # route in admin is diferent than in the frontend: /process_groups, /admin/participatory_process_groups
+        process_groups: [:processes_groups, :participatory_process_groups]
+      }
+    end
   end
 end
 
@@ -139,9 +154,3 @@ Decidim.register_global_engine(
   ::Decidim::DecidimAwesome::Engine,
   at: "/decidim_awesome"
 )
-
-# Decidim.register_global_engine(
-#   :decidim_admin_action_awesome,
-#   ::Decidim::DecidimAwesome::AdminEngine,
-#   at: "/admin/action_awesome"
-# )

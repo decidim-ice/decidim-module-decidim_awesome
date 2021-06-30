@@ -41,6 +41,70 @@ describe "Scoped admin journeys", type: :system do
     end
   end
 
+  shared_examples "redirects to index" do |_link|
+    it "display admin index page" do
+      expect(page).to have_content("You are not authorized to perform this action")
+      expect(page).to have_content("Welcome to the Decidim Admin Panel.")
+      expect(page).to have_current_path(decidim_admin.root_path, ignore_query: true)
+    end
+  end
+
+  shared_examples "forbids awesome access" do
+    it "does not have awesome link" do
+      expect(page).not_to have_content("Decidim awesome")
+    end
+
+    describe "forbids module access" do
+      before do
+        visit decidim_admin_decidim_awesome.config_path(:editors)
+      end
+
+      it_behaves_like "redirects to index"
+    end
+  end
+
+  shared_examples "forbids external accesses" do
+    describe "forbids newsletter access" do
+      before do
+        visit decidim_admin.newsletters_path
+      end
+
+      it_behaves_like "redirects to index"
+    end
+
+    describe "forbids participants access" do
+      before do
+        decidim_admin.users_path
+      end
+
+      it_behaves_like "redirects to index"
+    end
+
+    describe "forbids pages access" do
+      before do
+        decidim_admin.static_pages_path
+      end
+
+      it_behaves_like "redirects to index"
+    end
+
+    describe "forbids moderation access" do
+      before do
+        decidim_admin.moderations_path
+      end
+
+      it_behaves_like "redirects to index"
+    end
+
+    describe "forbids organization access" do
+      before do
+        decidim_admin.edit_organization_path
+      end
+
+      it_behaves_like "redirects to index"
+    end
+  end
+
   shared_examples "allows all admin routes" do
     before do
       visit decidim_admin.root_path
@@ -62,19 +126,8 @@ describe "Scoped admin journeys", type: :system do
       expect(page).to have_content("New process")
     end
 
-    it "do not allow a module page" do
-      click_link "Decidim awesome"
-
-      expect(page).to have_content("Tweaks for editors")
-    end
-  end
-
-  shared_examples "redirects to index" do |_link|
-    it "display admin index page" do
-      expect(page).to have_content("You are not authorized to perform this action")
-      expect(page).to have_content("Welcome to the Decidim Admin Panel.")
-      expect(page).to have_current_path(decidim_admin.root_path, ignore_query: true)
-    end
+    it_behaves_like "forbids awesome access"
+    it_behaves_like "forbids external accesses"
   end
 
   shared_examples "allows limited admin routes" do
@@ -99,22 +152,13 @@ describe "Scoped admin journeys", type: :system do
 
       it_behaves_like "redirects to index"
 
-      it "is not process page" do
+      it "is not a process page" do
         expect(page).not_to have_content("New process")
       end
     end
 
-    describe "forbids modules" do
-      before do
-        click_link "Decidim awesome"
-      end
-
-      it_behaves_like "redirects to index"
-
-      it "is not process page" do
-        expect(page).not_to have_content("Tweaks for editors")
-      end
-    end
+    it_behaves_like "forbids awesome access"
+    it_behaves_like "forbids external accesses"
   end
 
   context "when is not a scoped admin" do
