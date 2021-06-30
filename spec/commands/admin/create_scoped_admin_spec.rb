@@ -36,7 +36,7 @@ module Decidim::DecidimAwesome
         context "and entries already exist" do
           let!(:config) { create :awesome_config, organization: organization, var: :scoped_admins, value: { test: [123, 456] } }
 
-          shared_examples "has css boxes content" do
+          shared_examples "has scoped admin boxes content" do
             it "do not removes previous entries" do
               expect { subject.call }.to broadcast(:ok)
 
@@ -45,7 +45,7 @@ module Decidim::DecidimAwesome
             end
           end
 
-          it_behaves_like "has css boxes content"
+          it_behaves_like "has scoped admin boxes content"
 
           context "and another configuration is created" do
             before do
@@ -57,7 +57,7 @@ module Decidim::DecidimAwesome
               expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_small_editor).value).to eq(true)
             end
 
-            it_behaves_like "has css boxes content"
+            it_behaves_like "has scoped admin boxes content"
           end
 
           context "and another configuration is updated" do
@@ -72,7 +72,7 @@ module Decidim::DecidimAwesome
               expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_small_editor).value).to eq(true)
             end
 
-            it_behaves_like "has css boxes content"
+            it_behaves_like "has scoped admin boxes content"
           end
         end
       end
