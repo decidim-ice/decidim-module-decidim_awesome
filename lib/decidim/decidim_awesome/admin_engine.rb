@@ -45,7 +45,8 @@ module Decidim
                     decidim_admin_decidim_awesome.config_path(:editors),
                     icon_name: "fire",
                     position: 7.5,
-                    active: is_active_link?(decidim_admin_decidim_awesome.config_path(:editors), :inclusive)
+                    active: is_active_link?(decidim_admin_decidim_awesome.config_path(:editors), :inclusive),
+                    if: defined?(current_user) && current_user&.read_attribute("admin")
         end
       end
 
