@@ -126,7 +126,7 @@ shared_examples "allows all admin routes" do
   end
 end
 
-shared_examples "allows limited admin routes" do
+shared_examples "allows scoped admin routes" do
   before do
     visit decidim_admin.root_path
   end
