@@ -20,17 +20,18 @@ module Decidim
 
           # assiging a flash message here does not work after redirection due the order of middleware in Rails
           # as a workaround, send a message through a get parameter
+          path = "/admin/?unauthorized"
           referer = request.headers["Referer"]
           if referer
             uri = URI(referer)
             params = Rack::Utils.parse_query uri.query
-            params["unauthorized"] = nil
-            referer = "#{uri.path}?#{Rack::Utils.build_query(params)}"
-          else
-            referer = "/admin?unauthorized"
+            unless request.params.has_key? "unauthorized"
+              params["unauthorized"] = nil
+              path = "#{uri.path}?#{Rack::Utils.build_query(params)}"
+            end
           end
 
-          redirect_to referer
+          redirect_to path
         end
       end
     end

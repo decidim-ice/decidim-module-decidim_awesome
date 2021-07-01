@@ -9,7 +9,7 @@ module Decidim::DecidimAwesome
     let(:host) { "city.domain.org" }
     let(:method) { "GET" }
     let(:middleware) { described_class.new(app) }
-    let(:path) { "some_path" }
+    let(:path) { "" }
     let!(:organization) { create(:organization, host: host) }
     let!(:organization2) { create(:organization, host: "another.host.org") }
     let!(:assembly) { create(:assembly, organization: organization) }
@@ -196,6 +196,48 @@ module Decidim::DecidimAwesome
         it_behaves_like "same environment"
         it_behaves_like "tampered users model"
         it_behaves_like "generic admin routes"
+
+        context "when visiting assemblies" do
+          let(:path) { "assemblies" }
+
+          it_behaves_like "tampered users model"
+        end
+
+        context "when visiting admin assemblies" do
+          let(:path) { "admin/assemblies" }
+
+          it_behaves_like "tampered users model"
+        end
+
+        context "when visiting admin assembly" do
+          let(:path) { "admin/assemblies/#{assembly.slug}" }
+
+          it_behaves_like "tampered users model"
+        end
+
+        context "when editing admin assembly" do
+          let(:path) { "admin/assemblies/#{assembly.id}" }
+
+          it_behaves_like "untampered user model"
+
+          context "and is POST" do
+            let(:method) { "POST" }
+
+            it_behaves_like "tampered users model"
+          end
+        end
+
+        context "when visiting processes" do
+          let(:path) { "processes" }
+
+          it_behaves_like "tampered admin model"
+        end
+
+        context "when visiting admin processes" do
+          let(:path) { "admin/processes" }
+
+          it_behaves_like "tampered admin model"
+        end
 
         context "and user have the none constraint" do
           let!(:constraint_bar2) { create(:config_constraint, awesome_config: config_helper_bar, settings: settings_none) }

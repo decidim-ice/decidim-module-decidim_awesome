@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "decidim/decidim_awesome/test/shared_examples/scoped_admins_examples"
 
 describe "Scoped admin journeys", type: :system do
   let(:organization) { create :organization }
@@ -8,7 +9,8 @@ describe "Scoped admin journeys", type: :system do
   let!(:another_assembly) { create(:assembly, organization: organization) }
   let!(:participatory_process) { create(:participatory_process, organization: organization) }
   let!(:user) { create(:user, :confirmed, organization: organization) }
-  # let!(:admin) { create(:user, :confirmed, :admin, organization: organization) }
+  let!(:user_accepted) { create(:user, :confirmed, :admin_terms_accepted, organization: organization) }
+  let!(:admin) { create(:user, :confirmed, :admin, organization: organization) }
   let!(:config) { create :awesome_config, organization: organization, var: :scoped_admins, value: admins }
   let(:config_helper) { create :awesome_config, organization: organization, var: :scoped_admin_bar }
   let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: settings) }
@@ -33,132 +35,6 @@ describe "Scoped admin journeys", type: :system do
 
     switch_to_host(organization.host)
     login_as user, scope: :user
-    # visit decidim_admin.root_path
-  end
-
-  shared_examples "admin terms can be accepted" do
-    it "allows the admin root page" do
-    end
-  end
-
-  shared_examples "redirects to index" do |_link|
-    it "display admin index page" do
-      expect(page).to have_content("You are not authorized to perform this action")
-      expect(page).to have_content("Welcome to the Decidim Admin Panel.")
-      expect(page).to have_current_path(decidim_admin.root_path, ignore_query: true)
-    end
-  end
-
-  shared_examples "forbids awesome access" do
-    it "does not have awesome link" do
-      expect(page).not_to have_content("Decidim awesome")
-    end
-
-    describe "forbids module access" do
-      before do
-        visit decidim_admin_decidim_awesome.config_path(:editors)
-      end
-
-      it_behaves_like "redirects to index"
-    end
-  end
-
-  shared_examples "forbids external accesses" do
-    describe "forbids newsletter access" do
-      before do
-        visit decidim_admin.newsletters_path
-      end
-
-      it_behaves_like "redirects to index"
-    end
-
-    describe "forbids participants access" do
-      before do
-        decidim_admin.users_path
-      end
-
-      it_behaves_like "redirects to index"
-    end
-
-    describe "forbids pages access" do
-      before do
-        decidim_admin.static_pages_path
-      end
-
-      it_behaves_like "redirects to index"
-    end
-
-    describe "forbids moderation access" do
-      before do
-        decidim_admin.moderations_path
-      end
-
-      it_behaves_like "redirects to index"
-    end
-
-    describe "forbids organization access" do
-      before do
-        decidim_admin.edit_organization_path
-      end
-
-      it_behaves_like "redirects to index"
-    end
-  end
-
-  shared_examples "allows all admin routes" do
-    before do
-      visit decidim_admin.root_path
-    end
-
-    it "allows the admin root page" do
-      expect(page).to have_content("Welcome to the Decidim Admin Panel.")
-    end
-
-    it "allows the assemblies page" do
-      click_link "Assemblies"
-
-      expect(page).to have_content("New assembly")
-    end
-
-    it "allows the processes page" do
-      click_link "Processes"
-
-      expect(page).to have_content("New process")
-    end
-
-    it_behaves_like "forbids awesome access"
-    it_behaves_like "forbids external accesses"
-  end
-
-  shared_examples "allows limited admin routes" do
-    before do
-      visit decidim_admin.root_path
-    end
-
-    it "allows the admin root page" do
-      expect(page).to have_content("Welcome to the Decidim Admin Panel.")
-    end
-
-    it "allows the assemblies page" do
-      click_link "Assemblies"
-
-      expect(page).to have_content("New assembly")
-    end
-
-    describe "forbids processes" do
-      before do
-        click_link "Processes"
-      end
-
-      it_behaves_like "redirects to index"
-
-      it "is not a process page" do
-        expect(page).not_to have_content("New process")
-      end
-    end
-
-    it_behaves_like "forbids awesome access"
-    it_behaves_like "forbids external accesses"
   end
 
   context "when is not a scoped admin" do
@@ -204,9 +80,12 @@ describe "Scoped admin journeys", type: :system do
     end
 
     context "and admin terms are accepted" do
-      let!(:user) { create(:user, :confirmed, :admin_terms_accepted, organization: organization) }
+      let(:user) { user_accepted }
 
       it_behaves_like "allows all admin routes"
+      it_behaves_like "allows external accesses"
+      it_behaves_like "forbids awesome access"
+      it_behaves_like "edits all assemblies"
 
       context "and there's constraints" do
         let(:settings) do
@@ -217,6 +96,17 @@ describe "Scoped admin journeys", type: :system do
         end
 
         it_behaves_like "allows limited admin routes"
+        it_behaves_like "shows partial admin links in the frontend"
+        it_behaves_like "edits allowed assemblies"
+
+        context "and user is a real admin" do
+          let(:user) { admin }
+
+          it_behaves_like "allows all admin routes"
+          it_behaves_like "allows external accesses"
+          it_behaves_like "allows awesome access"
+          it_behaves_like "edits all assemblies"
+        end
       end
     end
   end
