@@ -143,7 +143,8 @@ en:
                 info</a>
               scoped_admins: Promote regular user to admins that can only administrate
                 certain parts of the public web (use the restrictions editor for that).
-                Note that users who already have regular admin permissions will be ignored.
+                Note that users who already have regular admin permissions will be
+                ignored.
               scoped_styles: Create custom CSS that applies only in certain parts
                 of the public web (use the restrictions editor for that)
               scoped_styles_variables: 'You can use the following CSS variables for
