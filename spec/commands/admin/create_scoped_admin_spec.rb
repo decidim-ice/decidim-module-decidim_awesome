@@ -24,13 +24,32 @@ module Decidim::DecidimAwesome
         ConfigForm.from_params(params).with_context(context)
       end
       let(:another_config) { UpdateConfig.new(form) }
+      let(:scoped_admins) do
+        AwesomeConfig.find_by(organization: organization, var: :scoped_admins)
+      end
+
+      shared_examples "create default constraints" do
+        let(:subconfig) do
+          AwesomeConfig.find_by(organization: organization, var: "scoped_admin_#{key}")
+        end
+
+        it "creates a 'none' constraint by default" do
+          expect { subject.call }.to broadcast(:ok)
+          expect(subconfig.constraints.count).to eq(1)
+          expect(subconfig.constraints.first.settings).to eq({ "participatory_space_manifest" => "none" })
+        end
+      end
 
       describe "when valid" do
         it "broadcasts :ok and creates a Hash" do
           expect { subject.call }.to broadcast(:ok)
 
-          expect(AwesomeConfig.find_by(organization: organization, var: :scoped_admins).value).to be_a(Hash)
-          expect(AwesomeConfig.find_by(organization: organization, var: :scoped_admins).value.keys.count).to eq(1)
+          expect(scoped_admins.value).to be_a(Hash)
+          expect(scoped_admins.value.keys.count).to eq(1)
+        end
+
+        it_behaves_like "create default constraints" do
+          let(:key) { scoped_admins.value.keys.first }
         end
 
         context "and entries already exist" do
@@ -40,12 +59,15 @@ module Decidim::DecidimAwesome
             it "do not removes previous entries" do
               expect { subject.call }.to broadcast(:ok)
 
-              expect(AwesomeConfig.find_by(organization: organization, var: :scoped_admins).value.keys.count).to eq(2)
-              expect(AwesomeConfig.find_by(organization: organization, var: :scoped_admins).value.values).to include([123, 456])
+              expect(scoped_admins.value.keys.count).to eq(2)
+              expect(scoped_admins.value.values).to include([123, 456])
             end
           end
 
           it_behaves_like "has scoped admin boxes content"
+          it_behaves_like "create default constraints" do
+            let(:key) { scoped_admins.value.keys.last }
+          end
 
           context "and another configuration is created" do
             before do
@@ -83,7 +105,7 @@ module Decidim::DecidimAwesome
         it "broadcasts :invalid and does not modifiy the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
-          expect(AwesomeConfig.find_by(organization: organization, var: :scoped_admins)).to eq(nil)
+          expect(scoped_admins).to eq(nil)
         end
       end
     end

@@ -10,7 +10,7 @@ Usability and UX tweaks for Decidim.
 This plugin allows the administrators to expand the possibilities of Decidim beyond some existing limitations.
 All tweaks are provided in a optional fashion with granular permissions that let the administrator to choose exactly where to apply those mods. Some tweaks can be applied to any assembly, other in an specific participatory process or even in type of component only.
 
-**This in beta status, we do not accept any responsibility for breaking anything. Feedback is appreciated though.**
+**DISCLAIMER: This module is heavily tested and widely used, howevever we do not accept any responsibility for breaking anything. Feedback is appreciated though.**
 
 ## Why this plugin?
 
@@ -122,6 +122,14 @@ Feel free to hide, modify or add items in the Decidim's main menu. You can also 
 ![Menu hacks screenshot](examples/menu-3.png)
 ![Menu hacks screenshot](examples/menu-4.png)
 
+#### 12. Assign admins to specific scopes and prevent them modify anything else
+
+Convert any user on the platform (that is not currently an admin) to a limited subset of participatory spaces or event compoponents. Just add users to a box and scope them to some constraints. These users will se the "Edit" button in everywhere they have permissions. Any access to unallowed zones will redirect the user to the admin index page.
+
+![Scoped admins authorized](examples/scoped_admins_authorized.png)
+![Scoped admins unauthorized](examples/scoped_admins_unauthorized.png)
+![Scoped admins configuration](examples/scoped_admins_config.png)
+
 #### To be continued...
 
 Some things in the road-map:
@@ -136,7 +144,7 @@ Some things in the road-map:
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-decidim_awesome", "~> 0.7.0"
+gem "decidim-decidim_awesome", "~> 0.7.1"
 ```
 
 And then execute:
@@ -177,6 +185,9 @@ Decidim::DecidimAwesome.configure do |config|
 
   # De-activated, admins don't even see it as an option
   config.use_markdown_editor = :disabled
+
+  # Disable scoped admins
+  config.scoped_admins = :disabled
 
   # any other config var from lib/decidim/decidim_awesome.rb
   ...
