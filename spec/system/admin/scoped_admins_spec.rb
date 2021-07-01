@@ -6,13 +6,16 @@ require "decidim/decidim_awesome/test/shared_examples/scoped_admins_examples"
 describe "Scoped admin journeys", type: :system do
   let(:organization) { create :organization }
   let!(:assembly) { create(:assembly, organization: organization) }
+  let!(:component) { create(:proposal_component, participatory_space: assembly) }
+  let!(:proposal) { create(:proposal, :official, component: component) }
+  let!(:another_component) { create(:meeting_component, participatory_space: assembly) }
   let!(:another_assembly) { create(:assembly, organization: organization) }
   let!(:participatory_process) { create(:participatory_process, organization: organization) }
   let!(:user) { create(:user, :confirmed, organization: organization) }
   let!(:user_accepted) { create(:user, :confirmed, :admin_terms_accepted, organization: organization) }
   let!(:admin) { create(:user, :confirmed, :admin, organization: organization) }
   let!(:config) { create :awesome_config, organization: organization, var: :scoped_admins, value: admins }
-  let(:config_helper) { create :awesome_config, organization: organization, var: :scoped_admin_bar }
+  let(:config_helper) { create :awesome_config, organization: organization, var: :scoped_admin_bar, value: nil }
   let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: settings) }
   let(:admins) do
     {
@@ -33,6 +36,8 @@ describe "Scoped admin journeys", type: :system do
         )
       end
 
+    component.update!(default_step_settings: { creation_enabled: true })
+    another_component.update!(default_step_settings: { creation_enabled: true })
     switch_to_host(organization.host)
     login_as user, scope: :user
   end
@@ -106,6 +111,20 @@ describe "Scoped admin journeys", type: :system do
           it_behaves_like "allows external accesses"
           it_behaves_like "allows awesome access"
           it_behaves_like "edits all assemblies"
+        end
+
+        context "and scoped to a component" do
+          let(:settings) do
+            {
+              "participatory_space_manifest" => "assemblies",
+              "participatory_space_slug" => assembly.slug,
+              "component_manifest" => "proposals"
+            }
+          end
+
+          it_behaves_like "allows limited admin routes"
+          it_behaves_like "shows component partial admin links in the frontend"
+          it_behaves_like "edits allowed components"
         end
       end
     end

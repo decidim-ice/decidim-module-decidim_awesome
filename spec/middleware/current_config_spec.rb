@@ -96,6 +96,12 @@ module Decidim::DecidimAwesome
 
           it_behaves_like "untampered user model"
         end
+
+        context "when PATCH" do
+          let(:method) { "PATCH" }
+
+          it_behaves_like "untampered user model"
+        end
       end
 
       context "when admin terms" do
@@ -105,6 +111,12 @@ module Decidim::DecidimAwesome
 
         context "when POST" do
           let(:method) { "POST" }
+
+          it_behaves_like "tampered users model"
+        end
+
+        context "when PATCH" do
+          let(:method) { "PATCH" }
 
           it_behaves_like "tampered users model"
         end
@@ -128,6 +140,12 @@ module Decidim::DecidimAwesome
 
           context "when POST" do
             let(:method) { "POST" }
+
+            it_behaves_like "untampered user model"
+          end
+
+          context "when PATCH" do
+            let(:method) { "PATCH" }
 
             it_behaves_like "untampered user model"
           end
@@ -222,6 +240,12 @@ module Decidim::DecidimAwesome
 
           context "and is POST" do
             let(:method) { "POST" }
+
+            it_behaves_like "tampered users model"
+          end
+
+          context "and is PATCH" do
+            let(:method) { "PATCH" }
 
             it_behaves_like "tampered users model"
           end

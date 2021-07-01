@@ -136,8 +136,9 @@ module Decidim
 
       # adds access to REST routes with id instead of the slug ot allow editing
       # rubocop:disable Metrics/CyclomaticComplexity
+      # rubocop:disable Metrics/PerceivedComplexity:
       def additional_post_constraints(constraints)
-        return [] unless @request.post?
+        return [] unless @request.post? || @request.patch?
 
         constraints.filter_map do |constraint|
           settings = constraint.settings.dup
@@ -155,6 +156,7 @@ module Decidim
         end
       end
       # rubocop:enable Metrics/CyclomaticComplexity
+      # rubocop:enable Metrics/PerceivedComplexity:
     end
   end
 end
