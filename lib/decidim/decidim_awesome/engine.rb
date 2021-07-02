@@ -42,7 +42,7 @@ module Decidim
       end
 
       initializer "decidim_decidim_awesome.assets" do |app|
-        app.config.assets.precompile += if version_prefix == "0.23"
+        app.config.assets.precompile += if version_prefix == "v0.23"
                                           %w(legacy_decidim_decidim_awesome_manifest.js decidim_decidim_awesome_manifest.css)
                                         else
                                           %w(decidim_decidim_awesome_manifest.js decidim_decidim_awesome_manifest.css)

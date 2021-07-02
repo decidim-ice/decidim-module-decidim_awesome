@@ -60,12 +60,14 @@ shared_examples "forbids external accesses" do
     it_behaves_like "redirects to index"
   end
 
-  describe "forbids moderation access" do
-    before do
-      visit decidim_admin.moderations_path
-    end
+  unless legacy_version?
+    describe "forbids moderation access" do
+      before do
+        visit decidim_admin.moderations_path
+      end
 
-    it_behaves_like "redirects to index"
+      it_behaves_like "redirects to index"
+    end
   end
 
   describe "forbids organization access" do

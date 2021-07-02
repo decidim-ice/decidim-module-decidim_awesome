@@ -111,7 +111,7 @@ module Decidim
       end
 
       def safe_post_route?
-        return unless @request.post?
+        return unless @request.post? || @request.put? || @request.patch?
 
         case @request.path
         when %r{^/admin/admin_terms}
