@@ -95,9 +95,11 @@ shared_examples "allows external accesses" do
     expect(page).to have_content("Pages without topic")
   end
 
-  it "shows moderation access" do
-    visit decidim_admin.moderations_path
-    expect(page).to have_content("Reported content URL")
+  unless legacy_version?
+    it "shows moderation access" do
+      visit decidim_admin.moderations_path
+      expect(page).to have_content("Reported content URL")
+    end
   end
 
   it "shows organization access" do
