@@ -60,12 +60,14 @@ shared_examples "forbids external accesses" do
     it_behaves_like "redirects to index"
   end
 
-  describe "forbids moderation access" do
-    before do
-      visit decidim_admin.moderations_path
-    end
+  unless legacy_version?
+    describe "forbids moderation access" do
+      before do
+        visit decidim_admin.moderations_path
+      end
 
-    it_behaves_like "redirects to index"
+      it_behaves_like "redirects to index"
+    end
   end
 
   describe "forbids organization access" do
@@ -93,9 +95,11 @@ shared_examples "allows external accesses" do
     expect(page).to have_content("Pages without topic")
   end
 
-  it "shows moderation access" do
-    visit decidim_admin.moderations_path
-    expect(page).to have_content("Reported content URL")
+  unless legacy_version?
+    it "shows moderation access" do
+      visit decidim_admin.moderations_path
+      expect(page).to have_content("Reported content URL")
+    end
   end
 
   it "shows organization access" do
