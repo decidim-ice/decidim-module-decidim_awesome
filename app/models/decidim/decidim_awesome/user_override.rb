@@ -10,8 +10,6 @@ module Decidim
           attr_accessor :awesome_admins_for_current_scope, :awesome_potential_admins
         end
 
-        # TODO: Assign admin if is a constraint exists for the current_context
-        # TODO: add a middleware to store the current context
         def admin
           return self["admin"] if self["admin"]
 

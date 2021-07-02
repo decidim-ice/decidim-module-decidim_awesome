@@ -3,7 +3,7 @@ name: "[CI] Test 0.24"
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
 
 env:
