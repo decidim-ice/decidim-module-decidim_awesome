@@ -104,7 +104,7 @@ describe "Scoped admin journeys", type: :system do
           }
         end
 
-        it_behaves_like "allows limited admin routes"
+        it_behaves_like "allows scoped admin routes"
         it_behaves_like "shows partial admin links in the frontend"
         it_behaves_like "edits allowed assemblies"
 
@@ -126,7 +126,7 @@ describe "Scoped admin journeys", type: :system do
             }
           end
 
-          it_behaves_like "allows limited admin routes"
+          it_behaves_like "allows scoped admin routes"
           it_behaves_like "shows component partial admin links in the frontend"
           it_behaves_like "edits allowed components"
         end
