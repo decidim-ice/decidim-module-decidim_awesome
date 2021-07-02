@@ -87,7 +87,11 @@ shared_examples "allows external accesses" do
 
   it "shows participants access" do
     visit decidim_admin.users_path
-    expect(page).to have_content("New user")
+    if legacy_version?
+      expect(page).to have_content("New Participant")
+    else
+      expect(page).to have_content("New user")
+    end
   end
 
   it "shows pages access" do

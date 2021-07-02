@@ -28,13 +28,15 @@ describe "Scoped admin journeys", type: :system do
 
   before do
     # ErrorController is only called when in production mode
-    allow(Rails.application).to \
-      receive(:env_config).with(no_args).and_wrap_original do |m, *|
-        m.call.merge(
-          "action_dispatch.show_exceptions" => true,
-          "action_dispatch.show_detailed_exceptions" => false
-        )
-      end
+    unless ENV["SHOW_EXCEPTIONS"]
+      allow(Rails.application).to \
+        receive(:env_config).with(no_args).and_wrap_original do |m, *|
+          m.call.merge(
+            "action_dispatch.show_exceptions" => true,
+            "action_dispatch.show_detailed_exceptions" => false
+          )
+        end
+    end
 
     component.update!(default_step_settings: { creation_enabled: true })
     another_component.update!(default_step_settings: { creation_enabled: true })
