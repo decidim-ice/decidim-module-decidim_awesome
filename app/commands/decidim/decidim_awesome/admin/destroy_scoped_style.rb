@@ -6,7 +6,7 @@ module Decidim
       class DestroyScopedStyle < Rectify::Command
         # Public: Initializes the command.
         #
-        # key - the key to destroy inise scoped_styles
+        # key - the key to destroy inside scoped_styles
         # organization
         def initialize(key, organization)
           @key = key

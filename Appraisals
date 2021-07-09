@@ -1,11 +1,12 @@
 appraise "decidim-0.23" do
-  gem "decidim", "0.23.4"
-  gem "decidim-admin", "0.23.4"
-  gem "decidim-core", "0.23.4"
+  gem "decidim", "0.23.5"
+  gem "decidim-admin", "0.23.5"
+  gem "decidim-core", "0.23.5"
   gem "puma", ">= 4.3.5"
   gem "faker", "~> 1.9"
+  gem "rails", "5.2.4.5"
   group :development, :test do
-    gem "decidim-dev", "0.23.4"
+    gem "decidim-dev", "0.23.5"
   end
 
   group :development do

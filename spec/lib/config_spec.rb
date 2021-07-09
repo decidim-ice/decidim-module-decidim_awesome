@@ -184,5 +184,87 @@ module Decidim::DecidimAwesome
         end
       end
     end
+
+    context "when there are subconfigs" do
+      let!(:awesome_config) { create :awesome_config, organization: organization, var: :scoped_styles, value: values }
+      let(:config_helper_foo) { create :awesome_config, organization: organization, var: :scoped_style_foo, value: nil }
+      let(:config_helper_bar) { create :awesome_config, organization: organization, var: :scoped_style_bar, value: nil }
+      let!(:constraint_foo) { create(:config_constraint, awesome_config: config_helper_foo, settings: settings_foo) }
+      let!(:constraint_bar) { create(:config_constraint, awesome_config: config_helper_bar, settings: settings_bar) }
+      let(:values) do
+        {
+          "foo" => "{ color: red; }",
+          "bar" => "{ color: blue; }"
+        }
+      end
+      let(:settings_foo) do
+        {
+          "participatory_space_manifest" => participatory_process.manifest.name.to_s,
+          "participatory_space_slug" => participatory_process.slug
+        }
+      end
+      let(:settings_bar) do
+        {
+          "participatory_space_manifest" => "assemblies"
+        }
+      end
+      let(:all_subconfigs) do
+        {
+          foo: config_helper_foo,
+          bar: config_helper_bar
+        }
+      end
+      let(:request) { double(url: "/processes/#{participatory_process.slug}") }
+      let(:subconfigs) { subject.sub_configs_for("scoped_style") }
+      let(:collected_values) { subject.collect_sub_configs_values("scoped_style") }
+      let(:unfiltered_collected_values) do
+        subject.collect_sub_configs_values("scoped_style") { true }
+      end
+      let(:additional_constraints) do
+        [double(settings: { "participatory_space_manifest" => "none" })]
+      end
+
+      it "gathers subconfigs" do
+        expect(subconfigs).to eq(all_subconfigs)
+        expect(collected_values).to eq([])
+      end
+
+      it "filters subconfig values in the current context" do
+        subject.context_from_request(request)
+        expect(collected_values).to eq([values["foo"]])
+      end
+
+      it "can collect all subconfig values" do
+        subject.context_from_request(request)
+        expect(unfiltered_collected_values).to match_array(values.values)
+      end
+
+      it "can dynamically add constraints" do
+        subject.inject_sub_config_constraints("scoped_style", "foo", additional_constraints)
+        expect(subconfigs[:foo].constraints).not_to include(additional_constraints.first)
+        expect(subconfigs[:foo].all_constraints).to include(additional_constraints.first)
+      end
+
+      context "when several results" do
+        let(:settings_bar) do
+          {
+            "participatory_space_manifest" => participatory_process.manifest.name.to_s
+          }
+        end
+
+        before do
+          subject.context_from_request(request)
+        end
+
+        it "callects all matching values" do
+          expect(collected_values).to match_array(values.values)
+        end
+
+        it "dynamically added constraints affectes evaluated subconfig values" do
+          subject.inject_sub_config_constraints("scoped_style", "bar", additional_constraints)
+          expect(collected_values).to eq([values["foo"]])
+        end
+      end
+    end
   end
 end

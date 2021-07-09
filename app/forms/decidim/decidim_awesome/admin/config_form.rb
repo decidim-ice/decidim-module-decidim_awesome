@@ -14,6 +14,7 @@ module Decidim
         attribute :auto_save_forms, Boolean
         attribute :scoped_styles, Hash
         attribute :proposal_custom_fields, Hash
+        attribute :scoped_admins, Hash
         attribute :menu, Array[MenuForm]
         attribute :intergram_for_admins, Boolean
         attribute :intergram_for_admins_settings, IntergramForm
@@ -25,6 +26,8 @@ module Decidim
 
         validate :css_syntax, if: ->(form) { form.scoped_styles.present? }
         validate :json_syntax, if: ->(form) { form.proposal_custom_fields.present? }
+
+        # TODO: validate non general admins are here
 
         def self.from_params(params, additional_params = {})
           instance = super(params, additional_params)

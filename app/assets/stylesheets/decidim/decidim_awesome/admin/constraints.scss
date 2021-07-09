@@ -28,8 +28,9 @@
       &.component_id{
         background-color: #ee449c;
       }
-      &.constraint {
-        &-none {
+
+      &.constraint{
+        &-none{
           background-color: #ff3000;
         }
       }
@@ -39,8 +40,8 @@
       margin-left: 1rem;
     }
 
-    &.inactive {
-      .label:not(.constraint-none) {
+    &.inactive{
+      .label:not(.constraint-none){
         filter: saturate(10%);
       }
     }

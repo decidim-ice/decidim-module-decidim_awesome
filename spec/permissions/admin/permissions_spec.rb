@@ -52,5 +52,16 @@ module Decidim::DecidimAwesome::Admin
         end
       end
     end
+
+    context "when is scoped admin accessing" do
+      let(:user) { create :user, organization: organization }
+
+      before do
+        allow(user).to receive(:admin).and_return(true)
+        allow(user).to receive(:admin?).and_return(true)
+      end
+
+      it_behaves_like "permission is not set"
+    end
   end
 end

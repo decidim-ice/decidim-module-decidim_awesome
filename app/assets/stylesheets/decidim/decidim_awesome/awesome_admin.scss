@@ -8,6 +8,7 @@
 @import "decidim/utils/mixins";
 @import "./admin/constraints";
 @import "./admin/codemirror";
+@import "./admin/user_picker";
 @import "./admin/custom_fields";
 @import "./editors/quill_editor";
 @import "./editors/markdown_editor";
@@ -50,4 +51,10 @@
 
 tbody tr.menu_hack-addition{
   background: rgb(255, 248, 222);
+}
+
+.secondary-nav {
+  li .icon {
+    margin-right: 0.5rem;
+  }
 }

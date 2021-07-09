@@ -23,6 +23,7 @@ en:
         intergram_use_floating_button: If checked, the closed chat is always a button
           instead of a text
         proposal_custom_fields: 'Custom fields #%{id}'
+        scoped_admins: 'Scoped admins group #%{id}'
         scoped_styles: 'Custom styles #%{id}'
         use_markdown_editor: Use a Markdown editor instead of the HTML editor
       constraint:
@@ -113,6 +114,15 @@ en:
           destroy_proposal_custom_field:
             error: Error removing "custom field" box! %{error}
             success: '"custom field" box %{key} removed successfully'
+          create_scoped_admin:
+            error: Error creating a new Admin group! %{error}
+            success: Admin group %{key} created successfully
+          create_scoped_style:
+            error: Error creating a new CSS box! %{error}
+            success: CSS box %{key} created successfully
+          destroy_scoped_admin:
+            error: Error removing Admin group! %{error}
+            success: Admin group %{key} removed successfully
           destroy_scoped_style:
             error: Error removing CSS box! %{error}
             success: CSS box %{key} removed successfully
@@ -144,6 +154,10 @@ en:
               intergram_config: Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram
                 bot</a> to your group or start a chat with it directly. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+
                 info</a>
+              scoped_admins: Promote regular user to admins that can only administrate
+                certain parts of the public web (use the restrictions editor for that).
+                Note that users who already have regular admin permissions will be
+                ignored.
               proposal_custom_fields: Create custom proposal fields that applies only
                 in certain parts of the public web (use the restrictions editor for
                 that)
@@ -156,7 +170,12 @@ en:
                 organization customized colors:'
               use_markdown_editor: This will substitute the Quill WYSIWYG editor,
                 to use a Markdown editor instead. Text will be converted and saved
-                as as HTML in the database.
+                as HTML in the database.
+          form_admins:
+            new: Add a new "Scoped Admins" group
+            remove: Remove this "Scoped Admins" group
+            sure_to_remove: Are you sure you want to destroy this "Scoped Admins"
+              group?
           form_proposal_custom_fields:
             new: Add a new "custom fields" box
             remove: Remove this "custom fields" box
@@ -198,6 +217,7 @@ en:
             error: Error updating condition case
             success: Condition case updated successfully
         menu:
+          admins: Scoped Admins
           checks: System Compatibility
           editors: Editor Hacks
           livechat: Live Chat

@@ -16,12 +16,33 @@ module Decidim
         post :editor_images, to: "editor_images#create"
       end
 
+      initializer "decidim.middleware" do |app|
+        app.config.middleware.insert_after Decidim::CurrentOrganization, Decidim::DecidimAwesome::CurrentConfig
+      end
+
+      # Prepare a zone to create overrides
+      # https://edgeguides.rubyonrails.org/engines.html#overriding-models-and-controllers
+      # overrides
+      config.to_prepare do
+        if DecidimAwesome.config[:scoped_admins] != :disabled
+          # override user's admin property
+          Decidim::User.include(UserOverride)
+          # redirect unauthorized scoped admins to allowed places
+          Decidim::ErrorsController.include(AdminNotFoundRedirect)
+        end
+
+        # TODO: move to include overrides
+        Dir.glob("#{Engine.root}/app/awesome_overrides/**/*_override.rb").each do |override|
+          require_dependency override
+        end
+      end
+
       initializer "decidim_awesome.view_helpers" do
         ActionView::Base.include AwesomeHelpers
       end
 
       initializer "decidim_decidim_awesome.assets" do |app|
-        app.config.assets.precompile += if version_prefix == "0.23"
+        app.config.assets.precompile += if version_prefix == "v0.23"
                                           %w(legacy_decidim_decidim_awesome_manifest.js decidim_decidim_awesome_manifest.css)
                                         else
                                           %w(decidim_decidim_awesome_manifest.js decidim_decidim_awesome_manifest.css)
@@ -64,14 +85,6 @@ module Decidim
           end
         end
         # === TODO: processes groups map block ===
-      end
-
-      # Prepare a zone to create overrides
-      # https://edgeguides.rubyonrails.org/engines.html#overriding-models-and-controllers
-      config.to_prepare do
-        Dir.glob("#{Engine.root}/app/awesome_overrides/**/*_override.rb").each do |override|
-          require_dependency override
-        end
       end
     end
   end
