@@ -36,7 +36,7 @@ module Decidim
 
       def default_items
         @default_items ||= build_menu.instance_variable_get(:@items).map do |item|
-          item.instance_variable_set(:@active, method(:activate?)) unless item.active == :exact
+          item.instance_variable_set(:@active, method(:activate?)) if item.active == :inclusive
           item
         end
       end
