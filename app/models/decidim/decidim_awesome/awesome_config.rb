@@ -15,8 +15,23 @@ module Decidim
       validates :organization, presence: true
       validates :var, uniqueness: { scope: :decidim_organization_id }
 
+      def additional_constraints
+        @additional_constraints ||= []
+      end
+
+      def add_constraints(constraints)
+        return if constraints.blank?
+
+        additional_constraints.concat(constraints.respond_to?(:each) ? constraints : [constraints])
+      end
+
       def self.for_organization(organization)
         where(organization: organization)
+      end
+
+      # use this instead of "constraints" to evaluate dynamically added constants
+      def all_constraints
+        constraints + additional_constraints
       end
     end
   end

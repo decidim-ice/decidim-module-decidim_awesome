@@ -10,8 +10,12 @@ module Decidim
       def awesome_config_instance
         return @awesome_config_instance if @awesome_config_instance
 
-        @awesome_config_instance = Config.new request.env["decidim.current_organization"]
-        @awesome_config_instance.context_from_request request
+        # if already created in the middleware, reuse it as it might have additional constraints
+        @awesome_config_instance = request.env["decidim_awesome.current_config"]
+        unless @awesome_config_instance.is_a? Config
+          @awesome_config_instance = Config.new request.env["decidim.current_organization"]
+          @awesome_config_instance.context_from_request request
+        end
         @awesome_config_instance
       end
 
@@ -20,7 +24,7 @@ module Decidim
       end
 
       def javascript_config_vars
-        awesome_config.except(:scoped_styles).to_json.html_safe
+        awesome_config.except(:scoped_styles, :scoped_admins).to_json.html_safe
       end
 
       def show_public_intergram?
@@ -51,7 +55,12 @@ module Decidim
 
       # Collects all CSS that is applied in the current URL context
       def awesome_custom_styles
-        @awesome_custom_styles ||= awesome_config_instance.collect_sub_configs("scoped_style")
+        @awesome_custom_styles ||= awesome_config_instance.collect_sub_configs_values("scoped_style")
+      end
+
+      # Collects all proposal custom fields that is applied in the current URL context
+      def awesome_scoped_admins
+        @awesome_scoped_admins ||= awesome_config_instance.collect_sub_configs_values("scoped_admin")
       end
 
       def version_prefix

@@ -127,6 +127,8 @@ module Decidim
           case key
           when /^scoped_style_/
             :scoped_styles
+          when /^scoped_admin_/
+            :scoped_admins
           else
             key
           end

@@ -12,15 +12,15 @@
       <div class="scoped-style" data-key="<%= key %>">
         <%= label_tag :scoped_styles do %>
           <%= t("config.scoped_styles", scope: "activemodel.attributes", id: key) %>
-          <%= link_to t(".remove"), decidim_admin_decidim_awesome.destroy_scoped_style_path(key: key), method: :post, class: "float-right", data: { confirm: t(".sure_to_remove") } %>
+          <%= link_to t(".remove"), decidim_admin_decidim_awesome.scoped_style_path(key: key), method: :delete, class: "float-right", data: { confirm: t(".sure_to_remove") } %>
         <% end %>
-        <p class="form-error is-visible" id="custom-style-error-<%= $key %>"><%= errors[key.to_sym].join("<br>") if errors %></p>
+        <p class="form-error is-visible" id="custom-style-error-<%= key %>"><%= errors[key.to_sym].join("<br>") if errors %></p>
         <%= text_area_tag key, value, name: "config[scoped_styles][#{key}]", rows: 5 %>
         <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: "scoped_style_#{key}", constraints: constraints_for("scoped_style_#{key}") }) %>
       </div>
     <% end %>
 
-    <%= link_to t(".new"), decidim_admin_decidim_awesome.new_scoped_style_path, method: :post %>
+    <%= link_to t(".new"), decidim_admin_decidim_awesome.scoped_styles_path, method: :post %>
 
   <% end %>
 </div>

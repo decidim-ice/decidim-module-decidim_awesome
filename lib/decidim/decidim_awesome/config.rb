@@ -13,9 +13,10 @@ module Decidim
           component_id: nil,
           component_manifest: nil
         }
+        @sub_configs = {}
       end
 
-      attr_reader :context
+      attr_reader :context, :organization, :vars
       attr_writer :defaults
 
       def defaults
@@ -89,22 +90,53 @@ module Decidim
 
         # check if current context matches some constraint
         constraints.detect do |constraint|
-          # if some setting is different, rejects
-          invalid = constraint.settings.detect { |key, val| context[key.to_sym].to_s != val.to_s }
-          invalid.blank?
+          settings = constraint.settings.symbolize_keys
+          match_method = settings.delete(:match)
+          if match_method == "exclusive"
+            # all keys must match
+            settings == context
+          else
+            # constraints keys can match the context partially (ie: if slug is not specified, any space matches in the same manifest)
+            # if some setting is different, rejects
+            invalid = constraint.settings.detect { |key, val| context[key.to_sym].to_s != val.to_s }
+            invalid.blank?
+          end
         end
       end
 
-      # Merges all subconfigs for custom_styles or any other scoped confs
-      def collect_sub_configs(singular_key)
+      # adds some custom constraints for the instance that can be generated dynamically
+      def inject_sub_config_constraints(singular_key, subkey, constraints)
+        sub_configs_for(singular_key)[subkey.to_sym]&.add_constraints constraints
+      end
+
+      # Merges all subconfigs values for custom_styles or any other scoped confs
+      # by default filtered according to the current scope, a block can be passed for custom filtering
+      # ie, collect everything:
+      #    collect_sub_configs_values("scoped_style") { true }
+      def collect_sub_configs_values(singular_key)
         plural_key = singular_key.pluralize.to_sym
-        return unless config[plural_key]
 
         fields = config[plural_key]&.filter do |key, _value|
-          sub_config = AwesomeConfig.find_by(var: "#{singular_key}_#{key}", organization: @organization)
-          valid_in_context?(sub_config&.constraints)
+          subconfig = sub_configs_for(singular_key)[key]
+          # allow custom filtering if block given
+          if block_given?
+            yield subconfig
+          else
+            valid_in_context?(subconfig&.all_constraints)
+          end
         end
         fields.values
+      end
+
+      def sub_configs_for(singular_key)
+        return @sub_configs[singular_key] if @sub_configs[singular_key]
+
+        plural_key = singular_key.pluralize.to_sym
+        return {} unless config[plural_key]
+
+        @sub_configs[singular_key] = config[plural_key].map do |key, _value|
+          [key, AwesomeConfig.find_by(var: "#{singular_key}_#{key}", organization: @organization)]
+        end.to_h
       end
 
       private
@@ -122,7 +154,7 @@ module Decidim
 
       def calculate_config
         # filter vars compliant with current context
-        valid = @vars.filter { |item| enabled_for_organization?(item.var) && valid_in_context?(item.constraints) }
+        valid = @vars.filter { |item| enabled_for_organization?(item.var) && valid_in_context?(item.all_constraints) }
                      .map { |v| [v.var.to_sym, v.value] }.to_h
 
         map_defaults do |key|

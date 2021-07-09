@@ -14,6 +14,9 @@ Features:
   - Added processes groups constraint for different scoped tweaks
   - Added "Never" constraint to deactivated scoped tweaks temporarily
   - Change Markdown editor behaviour: now it is converted to HTML before storing in the database. This makes the editor compatible with all Rich Text editors. This also takes this feature out the the "experimental" zone as the resulting edited text is fully compatible with standard Decidim.
+  - Added scoped admins feature: Any user can be turned into a limited admin and scoped to one or more participatory spaces.
+  - Fix allowing access to participatory space admins (only full admins can access the module).
+  - Added `participatory_spaces_routes_context` config variable to specify additional routes correspondences to participatory spaces.
 
 v0.7.0
 ------

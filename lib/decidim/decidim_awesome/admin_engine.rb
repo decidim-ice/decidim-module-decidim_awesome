@@ -18,14 +18,15 @@ module Decidim
         resources :constraints
         resources :menu_hacks, except: [:show]
         resources :config, param: :var, only: [:show, :update]
-        post :new_scoped_style, to: "config#new_scoped_style"
-        post :destroy_scoped_style, param: :key, to: "config#destroy_scoped_style"
+        resources :scoped_styles, param: :var, only: [:create, :destroy]
+        resources :scoped_admins, param: :var, only: [:create, :destroy]
+        get :users, to: "config#users"
         get :checks, to: "checks#index"
         root to: "config#show", var: :editors
       end
 
       initializer "decidim_admin_awesome.assets" do |app|
-        app.config.assets.precompile += if version_prefix == "0.23"
+        app.config.assets.precompile += if version_prefix == "v0.23"
                                           %w(legacy_decidim_admin_decidim_awesome_manifest.js decidim_admin_decidim_awesome_manifest.css)
                                         else
                                           %w(decidim_admin_decidim_awesome_manifest.js decidim_admin_decidim_awesome_manifest.css)
@@ -44,7 +45,8 @@ module Decidim
                     decidim_admin_decidim_awesome.config_path(:editors),
                     icon_name: "fire",
                     position: 7.5,
-                    active: is_active_link?(decidim_admin_decidim_awesome.config_path(:editors), :inclusive)
+                    active: is_active_link?(decidim_admin_decidim_awesome.config_path(:editors), :inclusive),
+                    if: defined?(current_user) && current_user&.read_attribute("admin")
         end
       end
 
