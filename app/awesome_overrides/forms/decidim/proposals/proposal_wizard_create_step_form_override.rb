@@ -46,6 +46,6 @@ class Decidim::Proposals::ProposalWizardCreateStepForm < Decidim::Form
   def custom_fields
     awesome_config = Decidim::DecidimAwesome::Config.new(context.current_organization)
     awesome_config.context_from_component(context.current_component)
-    awesome_config.collect_sub_configs("proposal_custom_field")
+    awesome_config.collect_sub_configs_values("proposal_custom_field")
   end
 end

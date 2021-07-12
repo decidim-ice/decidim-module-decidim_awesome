@@ -31,7 +31,7 @@ Decidim::AmendmentsHelper.module_eval do
 
     awesome_config = Decidim::DecidimAwesome::Config.new(component.organization)
     awesome_config.context_from_component(component)
-    awesome_config.collect_sub_configs("proposal_custom_field")
+    awesome_config.collect_sub_configs_values("proposal_custom_field")
   end
 
   # original method
