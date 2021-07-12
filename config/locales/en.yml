@@ -108,18 +108,15 @@ en:
           create_proposal_custom_field:
             error: Error creating a new "custom field" box! %{error}
             success: '"custom field" box %{key} created successfully'
-          create_scoped_style:
-            error: Error creating a new CSS box! %{error}
-            success: CSS box %{key} created successfully
-          destroy_proposal_custom_field:
-            error: Error removing "custom field" box! %{error}
-            success: '"custom field" box %{key} removed successfully'
           create_scoped_admin:
             error: Error creating a new Admin group! %{error}
             success: Admin group %{key} created successfully
           create_scoped_style:
             error: Error creating a new CSS box! %{error}
             success: CSS box %{key} created successfully
+          destroy_proposal_custom_field:
+            error: Error removing "custom field" box! %{error}
+            success: '"custom field" box %{key} removed successfully'
           destroy_scoped_admin:
             error: Error removing Admin group! %{error}
             success: Admin group %{key} removed successfully
@@ -154,16 +151,16 @@ en:
               intergram_config: Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram
                 bot</a> to your group or start a chat with it directly. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+
                 info</a>
-              scoped_admins: Promote regular user to admins that can only administrate
-                certain parts of the public web (use the restrictions editor for that).
-                Note that users who already have regular admin permissions will be
-                ignored.
               proposal_custom_fields: Create custom proposal fields that applies only
                 in certain parts of the public web (use the restrictions editor for
                 that)
               proposal_custom_fields_example: Data is stored in a XML object using
                 compatible HTML attributes (dl,dt,dd elements) replacing the "body"
                 in a normal proposal.
+              scoped_admins: Promote regular user to admins that can only administrate
+                certain parts of the public web (use the restrictions editor for that).
+                Note that users who already have regular admin permissions will be
+                ignored.
               scoped_styles: Create custom CSS that applies only in certain parts
                 of the public web (use the restrictions editor for that)
               scoped_styles_variables: 'You can use the following CSS variables for
