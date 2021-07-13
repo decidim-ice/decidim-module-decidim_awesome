@@ -17,6 +17,7 @@ cs:
         intergram_title_closed: Titulek uzavřeného chatu
         intergram_title_open: Titulek otevřeného chatu
         intergram_use_floating_button: Je-li zaškrtnuto, uzavřený chat je vždy tlačítko místo textu
+        scoped_admins: 'Scoped admins group #%{id}'
         scoped_styles: 'Vlastní styly číslo %{id}'
         use_markdown_editor: Použít Markdown editor namísto HTML editoru
       constraint:
@@ -90,9 +91,15 @@ cs:
             delete: Smazat
             edit: Upravit
             title: 'Platí pouze v těchto případech:'
+          create_scoped_admin:
+            error: Error creating a new Admin group! %{error}
+            success: Admin group %{key} created successfully
           create_scoped_style:
             error: Chyba při vytváření nového CSS boxu! %{error}
             success: CSS box %{key} úspěšně vytvořen
+          destroy_scoped_admin:
+            error: Error removing Admin group! %{error}
+            success: Admin group %{key} removed successfully
           destroy_scoped_style:
             error: Chyba při odstraňování CSS boxu! %{error}
             success: CSS box %{key} byl úspěšně odstraněn
@@ -109,13 +116,20 @@ cs:
               drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
               intergram_about: Intergram používá Telegram messenger pro zpracování widgetu live podpory v dolní části stránky.
               intergram_config: 'Pozvěte <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bota</a> do vaší skupiny nebo začněte chatovat přímo. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
+              scoped_admins: Promote regular user to admins that can only administrate certain parts of the public web (use the restrictions editor for that). Note that users who already have regular admin permissions will be ignored.
               scoped_styles: Vytvořte vlastní CSS aplikovaný pouze na určitých částech veřejného webu (použijte pro to editor omezení)
               scoped_styles_variables: 'Můžete použít následující CSS proměnné pro nastavené barvy organizace:'
               use_markdown_editor: Toto nahradí WYSIWYG editor, místo toho použijte Markdown editor. Text bude vykreslen jako HTML na veřejných stránkách (text v databázi bude uložen jako text markdown)
+          form_admins:
+            new: Add a new "Scoped Admins" group
+            remove: Remove this "Scoped Admins" group
+            sure_to_remove: Are you sure you want to destroy this "Scoped Admins" group?
           form_styles:
             new: Přidat nový CSS box
             remove: Odstranit tento CSS box
             sure_to_remove: Opravdu chcete zničit tento CSS box?
+          none: "⛔ Never! - Deactivate any other constraint"
+          process_groups: Process groups
           rich_text_editor_in_public_views: 'POZNÁMKA: "Kompletní textový editor pro účastníky" je povolen, tato možnost nebude využita. Pro povolení obrázků v Návrzích používejte místo toho hacky editoru.'
           show:
             title: Vylepšení pro %{setting}
@@ -145,6 +159,7 @@ cs:
             error: Chyba při aktualizaci případu podmínky
             success: Případ stavu byl úspěšně aktualizován
         menu:
+          admins: Scoped Admins
           checks: Systémová kompatibilita
           editors: Hack editoru
           livechat: Live Chat
@@ -193,6 +208,26 @@ cs:
           intro_message: Dobrý den! Jak Vám můžeme pomoci?
           title_closed: Kliknutím chatujte!
           title_open: Pojďme chatovat!
+      content_blocks:
+        map:
+          collapse: Začít se sbaleným menu
+          map_center: Střed mapy (zeměpisná šířka, zeměpisná délka)
+          map_center_help: 'Použijte desetinné body (ie: 41.38879, 2.15899). Nechte prázdné, aby se automaticky vešly všechny značky'
+          map_height: Výška mapy (px)
+          map_settings: Map settings
+          map_zoom: Zvětšení (libovolné číslo mezi 0 a 18)
+          map_zoom_help: Použije se pouze v případě, že je definován střed mapy
+          menu_amendments: Zobrazit pozměňovací návrhy
+          menu_meetings: Zobrazit schůzky
+          name: Úžasná mapa
+          show_accepted: Zobrazit přijaté návrhy
+          show_evaluating: Zobrazit hodnocení návrhů
+          show_not_answered: Zobrazit nezodpovězené návrhy
+          show_rejected: Zobrazit odmítnuté návrhy
+          show_withdrawn: Zobrazit stažené návrhy
+          text_settings: Text settings
+          title: Title
+          truncate: Maximum znaků pro popisy vyskakovacích oken
       credits: Vylepšení Decidim %{version} · Vyrobeno s ♥ od Platoniq
       editor_images:
         create:
