@@ -17,8 +17,8 @@ es:
         intergram_title_closed: Título del chat cerrado
         intergram_title_open: Título del chat abierto
         intergram_use_floating_button: Si está marcado, el chat cerrado siempre es un botón en lugar de un texto
-        proposal_custom_fields: 'Custom fields #%{id}'
-        scoped_admins: 'Scoped admins group #%{id}'
+        proposal_custom_fields: 'Campos personalizados #%{id}'
+        scoped_admins: 'Grupo de administradores acotados #%{id}'
         scoped_styles: 'Estilos personalizados #%{id}'
         use_markdown_editor: Utilizar el editor Markdown en lugar del editor HTML
       constraint:
@@ -33,7 +33,7 @@ es:
         url: URL
         visibility: Visibilidad
       proposal:
-        proposal_custom_fields: Custom fields
+        proposal_custom_fields: Campos personalizados
   decidim:
     admin:
       menu:
@@ -95,20 +95,20 @@ es:
             edit: Editar
             title: 'Se aplica solo en estos casos:'
           create_proposal_custom_field:
-            error: Error creating a new "custom field" box! %{error}
-            success: '"custom field" box %{key} created successfully'
+            error: '¡Error al crear una nueva caja de "campo personalizado"! %{error}'
+            success: 'La caja "campo personalizado" %{key} se ha creado correctamente'
           create_scoped_admin:
-            error: Error creating a new Admin group! %{error}
-            success: Admin group %{key} created successfully
+            error: '¡Error al crear un nuevo grupo de administradores! %{error}'
+            success: Grupo de administradores %{key} creado correctamente
           create_scoped_style:
             error: '¡Error al crear una nueva caja CSS! %{error}'
             success: Caja CSS %{key} creada correctamente
           destroy_proposal_custom_field:
-            error: Error removing "custom field" box! %{error}
-            success: '"custom field" box %{key} removed successfully'
+            error: '¡Error al eliminar la caja "campo personalizado"! %{error}'
+            success: 'La caja "campo personalizado" %{key} se ha eliminado correctamente'
           destroy_scoped_admin:
-            error: Error removing Admin group! %{error}
-            success: Admin group %{key} removed successfully
+            error: '¡Error al eliminar el grupo de administradores! %{error}'
+            success: Grupo de administradores %{key} eliminado correctamente
           destroy_scoped_style:
             error: '¡Error al eliminar la caja CSS! %{error}'
             success: Caja CSS %{key} eliminada correctamente
@@ -116,7 +116,7 @@ es:
           form:
             errors:
               incorrect_css: 'El CSS de la caja #%{key} no es válido'
-              incorrect_json: 'JSON definition in box #%{key} is invalid'
+              incorrect_json: 'La definición JSON en la caja #%{key} no es válida'
             help:
               allow_images_in_full_editor: Esto añadirá un botón para subir imágenes en el editor HTML completo.
               allow_images_in_markdown_editor: Esto permitirá al editor markdown subir imágenes con "copiar & pegar" o con "arrastrar & soltar".
@@ -126,26 +126,26 @@ es:
               drag_and_drop_supported: Cuando se suban imágenes, se puede hacer a través del método "arrastrar & soltar". Las imágenes se subirán en el servidor y se insertarán como recursos externos (no se utiliza codificación en línea base64).
               intergram_about: Intergram utiliza el Telegram Messenger para gestionar un widget de chat de soporte incrustado en la parte inferior de la página.
               intergram_config: 'Invita a la <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> a tu grupo o inicia un chat con ella directamente. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
-              proposal_custom_fields: Create custom proposal fields that applies only in certain parts of the public web (use the restrictions editor for that)
-              proposal_custom_fields_example: Data is stored in a XML object using compatible HTML attributes (dl,dt,dd elements) replacing the "body" in a normal proposal.
-              scoped_admins: Promote regular user to admins that can only administrate certain parts of the public web (use the restrictions editor for that). Note that users who already have regular admin permissions will be ignored.
+              proposal_custom_fields: Crea campos personalizados en las propuestas que sólo se aplican en ciertas partes de la web pública (utilizar el editor de restricciones para ello)
+              proposal_custom_fields_example: Los datos se almacenan en un objeto XML utilizando atributos HTML compatibles (dl,dt,dd elements) que reemplazan el "cuerpo" en una propuesta normal.
+              scoped_admins: Promueve usuarios normales a administradores con acceso limitado a ciertas partes de la web pública (utilizar el editor de restricciones para eso). Tener en cuenta que los usuarios que ya tienen permisos regulares de administrador serán ignorados.
               scoped_styles: Crea CSS personalizados que solo se apliquen en ciertas partes de la web pública (para ello, utiliza el editor de restricciones)
               scoped_styles_variables: 'Puedes utilizar las siguientes variables CSS para los colores personalizados de la organización:'
               use_markdown_editor: Esto sustituirá al editor HTML (Quill), utilice un editor de Markdown en su lugar. El texto se mostrará como HTML en las páginas públicas (en la base de datos, el texto se almacenará como markdown)
           form_admins:
-            new: Add a new "Scoped Admins" group
-            remove: Remove this "Scoped Admins" group
-            sure_to_remove: Are you sure you want to destroy this "Scoped Admins" group?
+            new: Añadir un nuevo grupo de "Administradores acotados"
+            remove: Eliminar este grupo de "Administradores acotados"
+            sure_to_remove: '¿Estás segura de que quieres eliminar este grupo de "administradores acotados"?'
           form_proposal_custom_fields:
-            new: Add a new "custom fields" box
-            remove: Remove this "custom fields" box
-            sure_to_remove: Are you sure you want to destroy this fields box?
+            new: Añadir una nueva caja de "campos personalizados"
+            remove: Eliminar esta caja de "campos personalizados"
+            sure_to_remove: '¿Estás segura de que quieres eliminar esta caja de campos personalizados?'
           form_styles:
             new: Añadir una nueva caja CSS
             remove: Eliminar esta caja CSS
             sure_to_remove: '¿Estás segura de que quieres eliminar esta caja CSS?'
-          none: "⛔ Never! - Deactivate any other constraint"
-          process_groups: Process groups
+          none: "⛔ ¡Nunca! - Desactiva cualquier otra restricción"
+          process_groups: Grupo de procesos
           rich_text_editor_in_public_views: 'NOTA: "Editor de texto enriquecido para participantes" está habilitado, esta opción no se aplicará. Utiliza las modificaciones del editor general para añadir imágenes a las propuestas.'
           show:
             title: Ajustes para %{setting}
@@ -175,12 +175,12 @@ es:
             error: Error actualizando la restricción
             success: Restricción actualizada correctamente
         menu:
-          admins: Scoped Admins
+          admins: Administradores acotados
           checks: Compatibilidad del sistema
           editors: Modificaciones a los editores
           livechat: Chat en vivo
           menu_hacks: Ajustes en el menú
-          proposal_custom_fields: Proposals Custom Fields
+          proposal_custom_fields: Campos personalizados para propuestas
           proposals: Modificaciones a las propuestas
           styles: Estilos personalizados
           surveys: Encuestas y formularios
@@ -231,7 +231,7 @@ es:
           map_center: Centro del mapa (Latitud, Longitud)
           map_center_help: 'Utiliza un punto para marcar los decimales (pe: 41.38879, 2.15899). Deja este campo vacío para incluir automáticamente todos los marcadores'
           map_height: Altura del mapa (px)
-          map_settings: Map settings
+          map_settings: Ajustes del mapa
           map_zoom: Zoom (cualquier número entre 0 y 18)
           map_zoom_help: Solo aplica si se define el punto central del mapa
           menu_amendments: Mostrar enmiendas
@@ -242,8 +242,8 @@ es:
           show_not_answered: Muestra las propuestas pendientes de contestart
           show_rejected: Muestra las propuestas rechazadas
           show_withdrawn: Muestra las propuestas retiradas
-          text_settings: Text settings
-          title: Title
+          text_settings: Ajustes del texto
+          title: Título
           truncate: Número máximo de caracteres para las descripciones emergentes
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
       editor_images:
