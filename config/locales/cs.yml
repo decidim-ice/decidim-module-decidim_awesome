@@ -98,8 +98,8 @@ cs:
             error: Error creating a new "custom field" box! %{error}
             success: '"custom field" box %{key} created successfully'
           create_scoped_admin:
-            error: Error creating a new Admin group! %{error}
-            success: Admin group %{key} created successfully
+            error: Chyba při vytváření nové skupiny administrátorů! %{error}
+            success: Skupina administrátorů %{key} úspěšně vytvořena
           create_scoped_style:
             error: Chyba při vytváření nového CSS boxu! %{error}
             success: CSS box %{key} úspěšně vytvořen
@@ -107,7 +107,7 @@ cs:
             error: Error removing "custom field" box! %{error}
             success: '"custom field" box %{key} removed successfully'
           destroy_scoped_admin:
-            error: Error removing Admin group! %{error}
+            error: Chyba při odstraňování skupiny administrátorů! %{error}
             success: Admin group %{key} removed successfully
           destroy_scoped_style:
             error: Chyba při odstraňování CSS boxu! %{error}
