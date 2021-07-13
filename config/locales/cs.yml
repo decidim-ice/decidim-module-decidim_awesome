@@ -33,7 +33,7 @@ cs:
         url: URL
         visibility: Viditelnost
       proposal:
-        proposal_custom_fields: Custom fields
+        proposal_custom_fields: Vlastní pole
   decidim:
     admin:
       menu:
@@ -108,7 +108,7 @@ cs:
             success: '"custom field" box %{key} removed successfully'
           destroy_scoped_admin:
             error: Chyba při odstraňování skupiny administrátorů! %{error}
-            success: Admin group %{key} removed successfully
+            success: Skupina administrátorů %{key} byla úspěšně odstraněna
           destroy_scoped_style:
             error: Chyba při odstraňování CSS boxu! %{error}
             success: CSS box %{key} byl úspěšně odstraněn
@@ -116,7 +116,7 @@ cs:
           form:
             errors:
               incorrect_css: 'CSS v poli #%{key} je neplatné'
-              incorrect_json: 'JSON definition in box #%{key} is invalid'
+              incorrect_json: 'Definice JSON v poli #%{key} je neplatná'
             help:
               allow_images_in_full_editor: Tímto se přidá ikona pro nahrávání obrázků ve všech editorech WYSIWYG s povoleným plným nástrojovým řádkem.
               allow_images_in_markdown_editor: To umožní editoru markdown nahrávat obrázky pomocí kopírování a vkládání nebo přetažení.
@@ -231,7 +231,7 @@ cs:
           map_center: Střed mapy (zeměpisná šířka, zeměpisná délka)
           map_center_help: 'Použijte desetinné body (ie: 41.38879, 2.15899). Nechte prázdné, aby se automaticky vešly všechny značky'
           map_height: Výška mapy (px)
-          map_settings: Map settings
+          map_settings: Nastavení mapy
           map_zoom: Zvětšení (libovolné číslo mezi 0 a 18)
           map_zoom_help: Použije se pouze v případě, že je definován střed mapy
           menu_amendments: Zobrazit pozměňovací návrhy
@@ -242,8 +242,8 @@ cs:
           show_not_answered: Zobrazit nezodpovězené návrhy
           show_rejected: Zobrazit odmítnuté návrhy
           show_withdrawn: Zobrazit stažené návrhy
-          text_settings: Text settings
-          title: Title
+          text_settings: Nastavení textu
+          title: Nadpis
           truncate: Maximum znaků pro popisy vyskakovacích oken
       credits: Vylepšení Decidim %{version} · Vyrobeno s ♥ od Platoniq
       editor_images:
