@@ -99,7 +99,7 @@ cs:
             success: CSS box %{key} úspěšně vytvořen
           destroy_scoped_admin:
             error: Chyba při odstraňování skupiny administrátorů! %{error}
-            success: Admin group %{key} removed successfully
+            success: Skupina administrátorů %{key} byla úspěšně odstraněna
           destroy_scoped_style:
             error: Chyba při odstraňování CSS boxu! %{error}
             success: CSS box %{key} byl úspěšně odstraněn
@@ -214,7 +214,7 @@ cs:
           map_center: Střed mapy (zeměpisná šířka, zeměpisná délka)
           map_center_help: 'Použijte desetinné body (ie: 41.38879, 2.15899). Nechte prázdné, aby se automaticky vešly všechny značky'
           map_height: Výška mapy (px)
-          map_settings: Map settings
+          map_settings: Nastavení mapy
           map_zoom: Zvětšení (libovolné číslo mezi 0 a 18)
           map_zoom_help: Použije se pouze v případě, že je definován střed mapy
           menu_amendments: Zobrazit pozměňovací návrhy
@@ -225,8 +225,8 @@ cs:
           show_not_answered: Zobrazit nezodpovězené návrhy
           show_rejected: Zobrazit odmítnuté návrhy
           show_withdrawn: Zobrazit stažené návrhy
-          text_settings: Text settings
-          title: Title
+          text_settings: Nastavení textu
+          title: Nadpis
           truncate: Maximum znaků pro popisy vyskakovacích oken
       credits: Vylepšení Decidim %{version} · Vyrobeno s ♥ od Platoniq
       editor_images:
