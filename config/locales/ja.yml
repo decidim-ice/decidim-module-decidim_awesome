@@ -18,7 +18,7 @@ ja:
         intergram_title_open: Opened chat title
         intergram_use_floating_button: If checked, the closed chat is always a button instead of a text
         proposal_custom_fields: 'カスタム項目 #%{id}'
-        scoped_admins: 'Scoped admins group #%{id}'
+        scoped_admins: 'スコープ付き管理者グループ #%{id}'
         scoped_styles: 'Custom styles #%{id}'
         use_markdown_editor: Use a Markdown editor instead of the HTML editor
       constraint:
@@ -95,28 +95,28 @@ ja:
             edit: Edit
             title: 'Applicable only in these cases:'
           create_proposal_custom_field:
-            error: Error creating a new "custom field" box! %{error}
-            success: '"custom field" box %{key} created successfully'
+            error: 新しい「カスタム項目」ボックスの作成中にエラーが発生しました! %{error}
+            success: '「カスタム項目」ボックス %{key} が正常に作成されました'
           create_scoped_admin:
-            error: Error creating a new Admin group! %{error}
-            success: Admin group %{key} created successfully
+            error: 新しい管理グループの作成中にエラーが発生しました! %{error}
+            success: 管理グループ %{key} が正常に作成されました
           create_scoped_style:
             error: Error creating a new CSS box! %{error}
             success: CSS box %{key} created successfully
           destroy_proposal_custom_field:
-            error: Error removing "custom field" box! %{error}
-            success: '"custom field" box %{key} removed successfully'
+            error: '「カスタム項目」ボックスの削除中にエラーが発生しました! %{error}'
+            success: '「カスタム項目」ボックス %{key} が正常に削除されました'
           destroy_scoped_admin:
-            error: Error removing Admin group! %{error}
-            success: Admin group %{key} removed successfully
+            error: 管理グループの削除中にエラーが発生しました! %{error}
+            success: 管理グループ %{key} が正常に削除されました
           destroy_scoped_style:
             error: Error removing CSS box! %{error}
             success: CSS box %{key} removed successfully
-          experimental: 'NOTE: These features are experimental. Use them with caution!'
+          experimental: '注意: これらの機能は実験的です。注意して使用してください！'
           form:
             errors:
               incorrect_css: 'CSS in box #%{key} is invalid'
-              incorrect_json: 'JSON definition in box #%{key} is invalid'
+              incorrect_json: 'ボックス #%{key} 内の JSON 定義は無効です'
             help:
               allow_images_in_full_editor: This will add an image uploader icon in all the editors WYSIWYG with the full toolbar enabled.
               allow_images_in_markdown_editor: This will allow markdown editor to upload images by copy & paste or drag & drop.
@@ -126,8 +126,8 @@ ja:
               drag_and_drop_supported: When uploading images, Drag & Drop is supported. Images will be uploaded to the server and inserted as external resources (it doesn't use base64 inline encoding).
               intergram_about: Intergram uses Telegram messenger to handle a live support chat widget embedded in the bottom of the page.
               intergram_config: 'Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> to your group or start a chat with it directly. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
-              proposal_custom_fields: Create custom proposal fields that applies only in certain parts of the public web (use the restrictions editor for that)
-              proposal_custom_fields_example: Data is stored in a XML object using compatible HTML attributes (dl,dt,dd elements) replacing the "body" in a normal proposal.
+              proposal_custom_fields: 公開ウェブの特定の部分にのみ適用されるカスタム提案項目を作成します (制限されたエディタを使用してください)
+              proposal_custom_fields_example: データは、互換性のある HTML 属性 (dl,dt,dd 要素) を使用した XML オブジェクトとして格納され、通常の提案の "body" を置き換えます。
               scoped_admins: Promote regular user to admins that can only administrate certain parts of the public web (use the restrictions editor for that). Note that users who already have regular admin permissions will be ignored.
               scoped_styles: Create custom CSS that applies only in certain parts of the public web (use the restrictions editor for that)
               scoped_styles_variables: 'You can use the following CSS variables for organization customized colors:'
@@ -137,9 +137,9 @@ ja:
             remove: Remove this "Scoped Admins" group
             sure_to_remove: Are you sure you want to destroy this "Scoped Admins" group?
           form_proposal_custom_fields:
-            new: Add a new "custom fields" box
-            remove: Remove this "custom fields" box
-            sure_to_remove: Are you sure you want to destroy this fields box?
+            new: 新しい「カスタム項目」ボックスを追加
+            remove: '「カスタム項目」ボックスを削除'
+            sure_to_remove: この項目ボックスを削除してもよろしいですか？
           form_styles:
             new: Add a new CSS box
             remove: Remove this CSS box
@@ -180,7 +180,7 @@ ja:
           editors: Editor Hacks
           livechat: Live Chat
           menu_hacks: Menu Tweaks
-          proposal_custom_fields: Proposals Custom Fields
+          proposal_custom_fields: 提案カスタム項目
           proposals: Proposals Hacks
           styles: Custom Styles
           surveys: Surveys & Forms
