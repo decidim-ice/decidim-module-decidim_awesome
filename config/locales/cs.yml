@@ -137,9 +137,9 @@ cs:
             remove: Remove this "Scoped Admins" group
             sure_to_remove: Are you sure you want to destroy this "Scoped Admins" group?
           form_proposal_custom_fields:
-            new: Add a new "custom fields" box
-            remove: Remove this "custom fields" box
-            sure_to_remove: Are you sure you want to destroy this fields box?
+            new: Přidat nové pole "vlastní pole"
+            remove: Odstranit toto "vlastní pole"
+            sure_to_remove: Opravdu chcete zničit toto pole?
           form_styles:
             new: Přidat nový CSS box
             remove: Odstranit tento CSS box
