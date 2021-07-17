@@ -17,7 +17,7 @@ cs:
         intergram_title_closed: Titulek uzavřeného chatu
         intergram_title_open: Titulek otevřeného chatu
         intergram_use_floating_button: Je-li zaškrtnuto, uzavřený chat je vždy tlačítko místo textu
-        proposal_custom_fields: 'Custom fields #%{id}'
+        proposal_custom_fields: 'Uživatelská pole #%{id}'
         scoped_admins: 'Scoped admins group #%{id}'
         scoped_styles: 'Vlastní styly číslo %{id}'
         use_markdown_editor: Použít Markdown editor namísto HTML editoru
