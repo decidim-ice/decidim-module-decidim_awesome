@@ -17,7 +17,7 @@ ja:
         intergram_title_closed: Closed chat title
         intergram_title_open: Opened chat title
         intergram_use_floating_button: If checked, the closed chat is always a button instead of a text
-        scoped_admins: 'Scoped admins group #%{id}'
+        scoped_admins: 'スコープ付き管理者グループ #%{id}'
         scoped_styles: 'Custom styles #%{id}'
         use_markdown_editor: Use a Markdown editor instead of the HTML editor
       constraint:
@@ -92,14 +92,14 @@ ja:
             edit: Edit
             title: 'Applicable only in these cases:'
           create_scoped_admin:
-            error: Error creating a new Admin group! %{error}
-            success: Admin group %{key} created successfully
+            error: 新しい管理グループの作成中にエラーが発生しました! %{error}
+            success: 管理グループ %{key} が正常に作成されました
           create_scoped_style:
             error: Error creating a new CSS box! %{error}
             success: CSS box %{key} created successfully
           destroy_scoped_admin:
-            error: Error removing Admin group! %{error}
-            success: Admin group %{key} removed successfully
+            error: 管理グループの削除中にエラーが発生しました! %{error}
+            success: 管理グループ %{key} が正常に削除されました
           destroy_scoped_style:
             error: Error removing CSS box! %{error}
             success: CSS box %{key} removed successfully
