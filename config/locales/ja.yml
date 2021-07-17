@@ -2,36 +2,36 @@ ja:
   activemodel:
     attributes:
       config:
-        allow_images_in_full_editor: Allow images in the full HTML editor
-        allow_images_in_markdown_editor: Allow images in the markdown editor
-        allow_images_in_proposals: Allow images in the proposals editor
-        allow_images_in_small_editor: Allow images in the minimal HTML editor
-        auto_save_forms: Auto save forms in local storage
-        intergram_auto_no_response: A message that is sent one minute after the user sends its first message and no response was received
-        intergram_auto_response: A message that is sent immediately after the user sends its first message
-        intergram_chat_id: Chat ID
-        intergram_color: Color of the widget
-        intergram_for_admins: Enable Intergram Chat in the admin backend
-        intergram_intro_message: First message when the user opens the chat for the first time
-        intergram_require_login: Only for logged users
-        intergram_title_closed: Closed chat title
-        intergram_title_open: Opened chat title
-        intergram_use_floating_button: If checked, the closed chat is always a button instead of a text
+        allow_images_in_full_editor: フルHTMLエディターでの画像を許可する
+        allow_images_in_markdown_editor: Markdownエディターでの画像を許可する
+        allow_images_in_proposals: 提案エディターでの画像を許可する
+        allow_images_in_small_editor: ミニマルHTMLエディターでの画像を許可する
+        auto_save_forms: ローカルストレージにフォームを自動保存する
+        intergram_auto_no_response: ユーザーが最初のメッセージを送信し、応答が受信されなかった後1分後に送信されたメッセージ
+        intergram_auto_response: ユーザーが最初のメッセージを送信した直後に送信されるメッセージ
+        intergram_chat_id: チャットID
+        intergram_color: ウィジェットの色
+        intergram_for_admins: 管理画面でIntergram Chatを有効にする
+        intergram_intro_message: ユーザーが初めてチャットを開いた時最初に表示されるメッセージ
+        intergram_require_login: ログインユーザーのみ
+        intergram_title_closed: 閉じられたチャットタイトル
+        intergram_title_open: 開いたチャットのタイトル
+        intergram_use_floating_button: チェックした場合、閉じたチャットは常にテキストの代わりにボタンになります
         proposal_custom_fields: 'カスタム項目 #%{id}'
         scoped_admins: 'スコープ付き管理者グループ #%{id}'
-        scoped_styles: 'Custom styles #%{id}'
-        use_markdown_editor: Use a Markdown editor instead of the HTML editor
+        scoped_styles: 'カスタムスタイル #%{id}'
+        use_markdown_editor: HTMLエディターの代わりにMarkdownエディターを使用する
       constraint:
-        component_id: or specifically in
-        component_manifest: Only in components of type
-        participatory_space_manifest: Apply to participatory spaces of type
-        participatory_space_slug: Only in
+        component_id: 以下のみに適用
+        component_manifest: このタイプのコンポーネントのみ有効
+        participatory_space_manifest: 以下のタイプの参加スペースに適用
+        participatory_space_slug: あるいは、以下の参加スペースに適用
       menu:
-        position: Position
-        raw_label: Label
-        target: Opens in
+        position: 位置
+        raw_label: ラベル
+        target: リンク先
         url: URL
-        visibility: Visibility
+        visibility: 表示・非表示
       proposal:
         proposal_custom_fields: カスタム項目
   decidim:
@@ -40,36 +40,36 @@ ja:
         decidim_awesome: Decidim awesome
     components:
       awesome_iframe:
-        name: Fullscreen Iframe
+        name: 全画面 Iframe
         settings:
           global:
-            announcement: Announcement
-            iframe: Iframe code
-            iframe_help: 'Put your code as html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Content will be sanitized from other HTML tags. Ensure to use 100% as width to fill the screen.'
-            no_margins: No margins between the iframe and the rest of the page
-            viewport_width: Limit maximum width to the application viewport
+            announcement: アナウンス
+            iframe: Iframeコード
+            iframe_help: 'あなたのコードを <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe> というHTMLとして入れてください。コンテンツは他のHTMLタグからサニタイズされます。 画面幅を埋めるためにwidthを100%にして使用するようにしてください。'
+            no_margins: Iframeと残りのページの間に余白はありません
+            viewport_width: アプリケーションのビューポートを最大幅として制限する
           step:
-            announcement: Announcement
-            iframe: Iframe code
+            announcement: アナウンス
+            iframe: Iframeコード
       awesome_map:
         name: Awesome Map
         settings:
           global:
-            announcement: Announcement
-            collapse: Start with collapsed menu
-            map_center: Map center (Latitude, Longitude)
-            map_center_help: 'Use decimal points (ie: 41.38879, 2.15899). Leave it empty to automatically fit all the markers'
-            map_height: Map height (px)
-            map_zoom: Zoom (any number betwen 0 and 18)
-            map_zoom_help: Only applies if a map center is defined
-            menu_amendments: Show amendments
-            menu_hashtags: Show Hasthag search menu
-            menu_meetings: Show meetings
-            truncate: Maximum characters for popup descriptions
+            announcement: アナウンス
+            collapse: メニューは折りたたまれた状態で開始
+            map_center: マップの中央 (緯度、経度)
+            map_center_help: '小数点を使用 (例：41.38879、2.15899)。すべてのマーカーに自動的に合うように空のままにします'
+            map_height: マップの高さ (px)
+            map_zoom: ズーム ( 0 と 18 の間の任意の数字)
+            map_zoom_help: 地図の中心が定義されている場合にのみ適用されます
+            menu_amendments: 修正を表示
+            menu_hashtags: Hasthag 検索メニューを表示
+            menu_meetings: ミーティングを表示
+            truncate: ポップアップの説明のための最大文字数
           step:
-            announcement: Announcement
-            show_accepted: Show accepted proposals
-            show_evaluating: Show evaluating proposals
+            announcement: アナウンス
+            show_accepted: 受理済みの提案を表示
+            show_evaluating: 評価中の提案を表示
             show_not_answered: Show not answered proposals
             show_rejected: Show rejected proposals
             show_withdrawn: Show withdrawn proposals
@@ -131,11 +131,11 @@ ja:
               scoped_admins: Promote regular user to admins that can only administrate certain parts of the public web (use the restrictions editor for that). Note that users who already have regular admin permissions will be ignored.
               scoped_styles: Create custom CSS that applies only in certain parts of the public web (use the restrictions editor for that)
               scoped_styles_variables: 'You can use the following CSS variables for organization customized colors:'
-              use_markdown_editor: This will substitute the Quill WYSIWYG editor, to use a Markdown editor instead. Text will be converted and saved as HTML in the database.
+              use_markdown_editor: これはQuill WYSIWYGエディターを置き換えて、代わりにMarkdownエディターを使えるようにします。テキストはDB内ではHTML形式に変換・保存されます。
           form_admins:
-            new: Add a new "Scoped Admins" group
-            remove: Remove this "Scoped Admins" group
-            sure_to_remove: Are you sure you want to destroy this "Scoped Admins" group?
+            new: 新しい「スコープ付き管理者」グループを追加
+            remove: '「スコープ付き管理者」グループを削除'
+            sure_to_remove: この「スコープ付き管理者」グループを削除してもよろしいですか？
           form_proposal_custom_fields:
             new: 新しい「カスタム項目」ボックスを追加
             remove: '「カスタム項目」ボックスを削除'
@@ -144,8 +144,8 @@ ja:
             new: Add a new CSS box
             remove: Remove this CSS box
             sure_to_remove: Are you sure you want to destroy this CSS box?
-          none: "⛔ Never! - Deactivate any other constraint"
-          process_groups: Process groups
+          none: "⛔ Never! - 他の制約を無効にします"
+          process_groups: プロセスグループ
           rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants" is enabled, this option won''t apply. Use the editors hacks instead to enable images in proposals.'
           show:
             title: Tweaks for %{setting}
@@ -166,85 +166,85 @@ ja:
           new:
             cancel: Cancel
             constraint: New condition case
-            save: Save
+            save: 保存
           show:
-            cancel: Cancel
-            constraint: Edit condition case
-            save: Save
+            cancel: キャンセル
+            constraint: 条件設定の編集
+            save: 保存
           update:
-            error: Error updating condition case
-            success: Condition case updated successfully
+            error: 条件設定更新エラー
+            success: 条件設定は正常に更新されました
         menu:
-          admins: Scoped Admins
-          checks: System Compatibility
-          editors: Editor Hacks
-          livechat: Live Chat
-          menu_hacks: Menu Tweaks
+          admins: スコープ付き管理者
+          checks: システム互換性
+          editors: エディター設定
+          livechat: ライブチャット
+          menu_hacks: メニュー調整
           proposal_custom_fields: 提案カスタム項目
-          proposals: Proposals Hacks
-          styles: Custom Styles
-          surveys: Surveys & Forms
+          proposals: 提案の設定
+          styles: 独自スタイル
+          surveys: 調査＆フォーム
         menu_hacks:
           create:
-            error: Error creating menu item! %{error}
-            success: Menu item created successfully
+            error: メニュー項目作成エラー %{error}
+            success: メニュー項目は正常に作成されました
           destroy:
-            error: Error removing menu item! %{error}
-            success: Menu item removed successfully
+            error: メニュー項目削除エラー %{error}
+            success: メニュー項目は正常に削除されました
           edit:
-            save: Save
-            title: Edit menu item
+            save: 保存
+            title: メニュー項目を編集
           form:
-            label_help: Translations aren't automatically detected, be sure to fill in all the fields!
+            label_help: 翻訳は自動的に検出されません。すべての項目を入力してください
             target:
-              blank: New window
-              self: Same window
+              blank: 新規ウィンドウ
+              self: 同一ウィンドウ
             visibility:
-              default: Visible
-              hidden: Always hidden
-              logged: Only visible for logged users
-              non_logged: Only visible for non-logged users
+              default: 表示する
+              hidden: 常に非表示
+              logged: ログインしたユーザーにのみ表示
+              non_logged: ログインしていないユーザーにのみ表示
           index:
-            confirm_destroy: Are you sure to remove this customization?
-            edit: Edit
-            new: New item
-            remove: Remove addition
-            remove_hack: Remove customization
-            title: Main menu
+            confirm_destroy: この設定を削除しますか？
+            edit: 編集
+            new: 新しい項目
+            remove: 追加の削除
+            remove_hack: カスタマイズの削除
+            title: メインメニュー
           new:
-            save: Save
-            title: New menu item
+            save: 保存
+            title: 新規メニュー項目
           update:
-            error: Error updating menu item! %{error}
-            success: Menu item updated successfully
-          url_exists: The same URL is already configured, please edit that instead of creating it again.
+            error: メニュー項目更新エラー %{error}
+            success: メニュー項目は正常に更新されました
+          url_exists: 同じURLがすでに設定されています。もう一度作成し直す前に、内容を修正してください。
       config:
         intergram:
-          auto_no_response: It seems that no one is available to answer right now. Please tell us how we can contact you, and we will get back to you as soon as we can.
+          auto_no_response: 現在、回答できる者がおりません。 早急に折り返しご連絡しますので、あなたへの連絡方法を教えてください
           auto_response: Looking for the first available admin (It might take a minute)
           intro_message: Hello! How can we help you?
           title_closed: Click to chat!
           title_open: Let's chat!
       content_blocks:
         map:
-          collapse: Start with collapsed menu
-          map_center: Map center (Latitude, Longitude)
-          map_center_help: 'Use decimal points (ie: 41.38879, 2.15899). Leave it empty to automatically fit all the markers'
-          map_height: Map height (px)
-          map_settings: Map settings
-          map_zoom: Zoom (any number betwen 0 and 18)
-          map_zoom_help: Only applies if a map center is defined
-          menu_amendments: Show amendments
-          menu_meetings: Show meetings
+          collapse: メニューは折りたたまれた状態で開始
+          map_center: マップの中央 (緯度、経度)
+          map_center_help: '小数点を使用 (例：41.38879、2.15899)。すべてのマーカーに自動的に合うように空のままにします'
+          map_height: マップの高さ (px)
+          map_settings: マップの設定
+          map_zoom: ズーム ( 0 と 18 の間の任意の数字)
+          map_zoom_help: 地図の中心が定義されている場合にのみ適用されます
+          menu_amendments: 修正を表示
+          menu_meetings: ミーティングを表示
           name: Awesome Map
-          show_accepted: Show accepted proposals
-          show_evaluating: Show evaluating proposals
+          show_accepted: 受理済みの提案を表示
+          show_evaluating: 評価中の提案を表示
           show_not_answered: Show not answered proposals
           show_rejected: Show rejected proposals
           show_withdrawn: Show withdrawn proposals
-          text_settings: Text settings
-          title: Title
-          truncate: Maximum characters for popup descriptions
+          text_settings: テキストの設定
+          title: タイトル
+          truncate: ポップアップの説明のための最大文字数
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
       editor_images:
         create:
