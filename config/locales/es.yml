@@ -17,6 +17,8 @@ es:
         intergram_title_closed: Título del chat cerrado
         intergram_title_open: Título del chat abierto
         intergram_use_floating_button: Si está marcado, el chat cerrado siempre es un botón en lugar de un texto
+        proposal_custom_fields: 'Campos personalizados #%{id}'
+        scoped_admins: 'Grupo de administradores acotados #%{id}'
         scoped_styles: 'Estilos personalizados #%{id}'
         use_markdown_editor: Utilizar el editor Markdown en lugar del editor HTML
       constraint:
@@ -30,6 +32,8 @@ es:
         target: Abrir en
         url: URL
         visibility: Visibilidad
+      proposal:
+        proposal_custom_fields: Campos personalizados
   decidim:
     admin:
       menu:
@@ -90,16 +94,29 @@ es:
             delete: Eliminar
             edit: Editar
             title: 'Se aplica solo en estos casos:'
+          create_proposal_custom_field:
+            error: '¡Error al crear una nueva caja de "campo personalizado"! %{error}'
+            success: 'La caja "campo personalizado" %{key} se ha creado correctamente'
+          create_scoped_admin:
+            error: '¡Error al crear un nuevo grupo de administradores! %{error}'
+            success: Grupo de administradores %{key} creado correctamente
           create_scoped_style:
             error: '¡Error al crear una nueva caja CSS! %{error}'
             success: Caja CSS %{key} creada correctamente
+          destroy_proposal_custom_field:
+            error: '¡Error al eliminar la caja "campo personalizado"! %{error}'
+            success: 'La caja "campo personalizado" %{key} se ha eliminado correctamente'
+          destroy_scoped_admin:
+            error: '¡Error al eliminar el grupo de administradores! %{error}'
+            success: Grupo de administradores %{key} eliminado correctamente
           destroy_scoped_style:
             error: '¡Error al eliminar la caja CSS! %{error}'
             success: Caja CSS %{key} eliminada correctamente
-          experimental: Opciones experimentales
+          experimental: 'Opciones experimentales'
           form:
             errors:
               incorrect_css: 'El CSS de la caja #%{key} no es válido'
+              incorrect_json: 'La definición JSON en la caja #%{key} no es válida'
             help:
               allow_images_in_full_editor: Esto añadirá un botón para subir imágenes en el editor HTML completo.
               allow_images_in_markdown_editor: Esto permitirá al editor markdown subir imágenes con "copiar & pegar" o con "arrastrar & soltar".
@@ -109,13 +126,26 @@ es:
               drag_and_drop_supported: Cuando se suban imágenes, se puede hacer a través del método "arrastrar & soltar". Las imágenes se subirán en el servidor y se insertarán como recursos externos (no se utiliza codificación en línea base64).
               intergram_about: Intergram utiliza el Telegram Messenger para gestionar un widget de chat de soporte incrustado en la parte inferior de la página.
               intergram_config: 'Invita a la <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> a tu grupo o inicia un chat con ella directamente. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
+              proposal_custom_fields: Crea campos personalizados en las propuestas que sólo se aplican en ciertas partes de la web pública (utilizar el editor de restricciones para ello)
+              proposal_custom_fields_example: Los datos se almacenan en un objeto XML utilizando atributos HTML compatibles (dl,dt,dd elements) que reemplazan el "cuerpo" en una propuesta normal.
+              scoped_admins: Promueve usuarios normales a administradores con acceso limitado a ciertas partes de la web pública (utilizar el editor de restricciones para eso). Tener en cuenta que los usuarios que ya tienen permisos regulares de administrador serán ignorados.
               scoped_styles: Crea CSS personalizados que solo se apliquen en ciertas partes de la web pública (para ello, utiliza el editor de restricciones)
               scoped_styles_variables: 'Puedes utilizar las siguientes variables CSS para los colores personalizados de la organización:'
               use_markdown_editor: Esto sustituirá al editor HTML (Quill), utilice un editor de Markdown en su lugar. El texto se mostrará como HTML en las páginas públicas (en la base de datos, el texto se almacenará como markdown)
+          form_admins:
+            new: Añadir un nuevo grupo de "Administradores acotados"
+            remove: Eliminar este grupo de "Administradores acotados"
+            sure_to_remove: '¿Estás segura de que quieres eliminar este grupo de "administradores acotados"?'
+          form_proposal_custom_fields:
+            new: Añadir una nueva caja de "campos personalizados"
+            remove: Eliminar esta caja de "campos personalizados"
+            sure_to_remove: '¿Estás segura de que quieres eliminar esta caja de campos personalizados?'
           form_styles:
             new: Añadir una nueva caja CSS
             remove: Eliminar esta caja CSS
             sure_to_remove: '¿Estás segura de que quieres eliminar esta caja CSS?'
+          none: "⛔ ¡Nunca! - Desactiva cualquier otra restricción"
+          process_groups: Grupo de procesos
           rich_text_editor_in_public_views: 'NOTA: "Editor de texto enriquecido para participantes" está habilitado, esta opción no se aplicará. Utiliza las modificaciones del editor general para añadir imágenes a las propuestas.'
           show:
             title: Ajustes para %{setting}
@@ -145,10 +175,12 @@ es:
             error: Error actualizando la restricción
             success: Restricción actualizada correctamente
         menu:
+          admins: Administradores acotados
           checks: Compatibilidad del sistema
           editors: Modificaciones a los editores
           livechat: Chat en vivo
           menu_hacks: Ajustes en el menú
+          proposal_custom_fields: Campos personalizados para propuestas
           proposals: Modificaciones a las propuestas
           styles: Estilos personalizados
           surveys: Encuestas y formularios
@@ -193,6 +225,26 @@ es:
           intro_message: Hola, ¿en qué puedo ayudarte?
           title_closed: '¡Haz clic para chatear!'
           title_open: '¡Hablemos!'
+      content_blocks:
+        map:
+          collapse: Iniciar con el menú contraído
+          map_center: Centro del mapa (Latitud, Longitud)
+          map_center_help: 'Utiliza un punto para marcar los decimales (pe: 41.38879, 2.15899). Deja este campo vacío para incluir automáticamente todos los marcadores'
+          map_height: Altura del mapa (px)
+          map_settings: Ajustes del mapa
+          map_zoom: Zoom (cualquier número entre 0 y 18)
+          map_zoom_help: Solo aplica si se define el punto central del mapa
+          menu_amendments: Mostrar enmiendas
+          menu_meetings: Mostrar encuentros
+          name: Mapa Global
+          show_accepted: Muestra las propuestas aceptadas
+          show_evaluating: Muestra las propuestas en evaluación
+          show_not_answered: Muestra las propuestas pendientes de contestart
+          show_rejected: Muestra las propuestas rechazadas
+          show_withdrawn: Muestra las propuestas retiradas
+          text_settings: Ajustes del texto
+          title: Título
+          truncate: Número máximo de caracteres para las descripciones emergentes
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
       editor_images:
         create:

@@ -17,6 +17,8 @@ it:
         intergram_title_closed: Titolo chat chiusa
         intergram_title_open: Titolo della chat aperta
         intergram_use_floating_button: Se selezionato, la chat chiusa è sempre un pulsante invece di un testo
+        proposal_custom_fields: 'Custom fields #%{id}'
+        scoped_admins: 'Scoped admins group #%{id}'
         scoped_styles: 'Stile personalizzato #%{id}'
         use_markdown_editor: Utilizza un editor Markdown invece dell'editor HTML
       constraint:
@@ -30,6 +32,8 @@ it:
         target: Apri in
         url: URL
         visibility: Visibilità
+      proposal:
+        proposal_custom_fields: Custom fields
   decidim:
     admin:
       menu:
@@ -59,152 +63,200 @@ it:
             map_zoom: Zoom (qualsiasi numero tra 0 e 18)
             map_zoom_help: Si applica solo se è stato definito il centro della mappa
             menu_amendments: Mostra le correzioni
-            menu_hashtags: Show Hasthag search menu
-            menu_meetings: Show meetings
-            truncate: Maximum characters for popup descriptions
+            menu_hashtags: Mostra il menu di ricerca di Hasthag
+            menu_meetings: Mostra meeting
+            truncate: Numero massimo di caratteri per le descrizioni nei popup
           step:
             announcement: Annuncio
             show_accepted: Mostra le proposte accettate
-            show_evaluating: Show evaluating proposals
-            show_not_answered: Show not answered proposals
-            show_rejected: Show rejected proposals
-            show_withdrawn: Show withdrawn proposals
+            show_evaluating: Mostra le proposte in valutazione
+            show_not_answered: Mostra le proposte senza risposta
+            show_rejected: Mostra le proposte respinte
+            show_withdrawn: Mostra le proposte ritirate
     decidim_awesome:
       admin:
         checks:
           index:
-            admin_head_tags: Awesome tags included in the admin application header
-            decidim-admin: From Admin module
-            decidim-core: From Core module
-            decidim-proposals: From Proposals module
-            decidim_version: Decidim version %{version}
+            admin_head_tags: Tag Awesome visualizzate nel header della sezione amministrativa
+            decidim-admin: Dal modulo di amministrazione
+            decidim-core: Dal modulo Core
+            decidim-proposals: Da modulo Proposte
+            decidim_version: Decidim versione %{version}
             errors:
-              CSS: Head does not contain the required <link> stylesheet entries. To solve it, you can manually add it to your custom _head.html.erb
-              JavaScript: Head does not contain the required <script> Javascript entries. To solve it, you can manually add it to your custom admin/_header.html.erb
-            head_tags: Awesome tags included in the application header
-            title: System compatibility checks
+              CSS: Lo Head non contiene le voci <link> del foglio di stile richieste. Per risolverlo, puoi aggiungerlo manualmente al tuo _head.html.erb personalizzato
+              JavaScript: Lo Head non contiene le voci <script> delle librerie Javascript richieste. Per risolverlo, puoi aggiungerlo manualmente al tuo admin/_head.html.erb personalizzato
+            head_tags: Tag Awesome visualizzate nel header dell'applicazione
+            title: Controlli di compatibilità del sistema
         config:
           constraints:
-            add_condition: Add case
-            always: Always
-            delete: Delete
-            edit: Edit
-            title: 'Applicable only in these cases:'
+            add_condition: Aggiungi una condizione
+            always: Sempre
+            delete: Elimina
+            edit: Modifica
+            title: 'Applicabile solo in questi casi:'
+          create_proposal_custom_field:
+            error: Error creating a new "custom field" box! %{error}
+            success: '"custom field" box %{key} created successfully'
+          create_scoped_admin:
+            error: Error creating a new Admin group! %{error}
+            success: Admin group %{key} created successfully
           create_scoped_style:
-            error: Error creating a new CSS box! %{error}
-            success: CSS box %{key} created successfully
+            error: Errore nella creazione di un nuovo box CSS! %{error}
+            success: Box CSS %{key} creato correttamente
+          destroy_proposal_custom_field:
+            error: Error removing "custom field" box! %{error}
+            success: '"custom field" box %{key} removed successfully'
+          destroy_scoped_admin:
+            error: Error removing Admin group! %{error}
+            success: Admin group %{key} removed successfully
           destroy_scoped_style:
-            error: Error removing CSS box! %{error}
-            success: CSS box %{key} removed successfully
-          experimental: Experimental options
+            error: Errore nella rimozione del box CSS! %{error}
+            success: Box CSS %{key} rimosso correttamente
+          experimental: 'Experimental options'
           form:
             errors:
-              incorrect_css: 'CSS in box #%{key} is invalid'
+              incorrect_css: 'Il box CSS #%{key} non è valido'
+              incorrect_json: 'JSON definition in box #%{key} is invalid'
             help:
-              allow_images_in_full_editor: This will add an image uploader icon in all the editors WYSIWYG with the full toolbar enabled.
-              allow_images_in_markdown_editor: This will allow markdown editor to upload images by copy & paste or drag & drop.
-              allow_images_in_proposals: This will allow to upload images in the proposals editor, available to any user
-              allow_images_in_small_editor: This will add an image uploader icon in all the editors WYSIWYG with minimal options in the toolbar enabled.
-              auto_save_forms: This will use LocalStorage to automatically save data introduced by users in surveys and other forms while they are filling it. Data will be restored in a future visit with the same browser in case the form is not submitted. If the form is submitted, data will be removed. If users remove their LocalStorage data, data won't be restored either.
-              drag_and_drop_supported: When uploading images, Drag & Drop is supported. Images will be uploaded to the server and inserted as external resources (it doesn't use base64 inline encoding).
-              intergram_about: Intergram uses Telegram messenger to handle a live support chat widget embedded in the bottom of the page.
-              intergram_config: 'Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> to your group or start a chat with it directly. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
-              scoped_styles: Create custom CSS that applies only in certain parts of the public web (use the restrictions editor for that)
-              scoped_styles_variables: 'You can use the following CSS variables for organization customized colors:'
+              allow_images_in_full_editor: Questo aggiungerà un'icona di uploader di immagini in tutti gli editor WYSIWYG con la barra degli strumenti completa abilitata.
+              allow_images_in_markdown_editor: Questo permetterà all'editor di markdown di caricare le immagini tramite copia e incolla o trascina.
+              allow_images_in_proposals: Questo permetterà di caricare le immagini nell'editor delle proposte, disponibile per qualsiasi utente
+              allow_images_in_small_editor: Questo aggiungerà un'icona di caricamento di immagini in tutti gli editor WYSIWYG con opzioni minime nella barra degli strumenti abilitata.
+              auto_save_forms: Questo utilizzerà LocalStorage per salvare automaticamente i dati introdotti dagli utenti nei sondaggi e in altri moduli durante il riempimento. I dati verranno ripristinati in una visita futura con lo stesso browser nel caso in cui il modulo non venga inviato. Se il modulo viene inviato, i dati verranno rimossi. Se gli utenti rimuoveranno i dati di LocalStorage, i dati non verranno ripristinati.
+              drag_and_drop_supported: Quando si caricano le immagini, è supportato il Drag & Drop. Le immagini verranno caricate sul server e inserite come risorse esterne (non utilizza la codifica base64).
+              intergram_about: Intergram utilizza Telegram messenger per gestire un widget di chat di supporto live incorporato nella parte inferiore della pagina.
+              intergram_config: 'Invita il bot <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram</a> al tuo gruppo o avvia una chat direttamente con esso. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
+              proposal_custom_fields: Create custom proposal fields that applies only in certain parts of the public web (use the restrictions editor for that)
+              proposal_custom_fields_example: Data is stored in a XML object using compatible HTML attributes (dl,dt,dd elements) replacing the "body" in a normal proposal.
+              scoped_admins: Promote regular user to admins that can only administrate certain parts of the public web (use the restrictions editor for that). Note that users who already have regular admin permissions will be ignored.
+              scoped_styles: Crea CSS personalizzato che si applica solo in alcune parti del web pubblico (usa l'apposito editor delle restrizioni)
+              scoped_styles_variables: 'È possibile utilizzare le seguenti variabili CSS per i colori personalizzati dell''organizzazione:'
               use_markdown_editor: This will substitute the Quill WYSIWYG editor, use a Markdown editor instead. Text will be rendered as HTML in the public pages (text in database will be saved as markdown text)
+          form_admins:
+            new: Add a new "Scoped Admins" group
+            remove: Remove this "Scoped Admins" group
+            sure_to_remove: Are you sure you want to destroy this "Scoped Admins" group?
+          form_proposal_custom_fields:
+            new: Add a new "custom fields" box
+            remove: Remove this "custom fields" box
+            sure_to_remove: Are you sure you want to destroy this fields box?
           form_styles:
-            new: Add a new CSS box
-            remove: Remove this CSS box
-            sure_to_remove: Are you sure you want to destroy this CSS box?
-          rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants" is enabled, this option won''t apply. Use the editors hacks instead to enable images in proposals.'
+            new: Aggiungi un nuovo box CSS
+            remove: Rimuovi questo box CSS
+            sure_to_remove: Sei sicura di voler distruggere questo box CSS?
+          none: "⛔ Never! - Deactivate any other constraint"
+          process_groups: Process groups
+          rich_text_editor_in_public_views: 'NOTA: "Editor completo per i partecipanti" è abilitato, questa opzione non si applica. Usa gli hack degli editor per abilitare le immagini nelle proposte.'
           show:
-            title: Tweaks for %{setting}
-            update: Update configuration
-          system: Everywhere except participatory spaces
+            title: Tweaks per %{setting}
+            update: Aggiorna la configurazione
+          system: Ovunque tranne gli spazi partecipativi
           update:
-            error: Error updating configuration! %{error}
-            success: Configuration updated successfully
+            error: Errore nell'aggiornamento della configurazione! %{error}
+            success: Configurazione aggiornata correttamente
         constraints:
           create:
-            error: Error creating condition case
-            success: Condition case created successfully
+            error: Errore nella creazione della condizione
+            success: Condizione creata con successo
           destroy:
-            error: Error removing condition case
-            success: Condition case removed successfully
+            error: Errore nella rimozione della condizione
+            success: Condizione rimossa correttamente
           errors:
-            not_unique: Same condition already exists
+            not_unique: Esiste già la stessa condizione
           new:
-            cancel: Cancel
-            constraint: New condition case
-            save: Save
+            cancel: Annulla
+            constraint: Nuova condizione
+            save: Salva
           show:
-            cancel: Cancel
-            constraint: Edit condition case
-            save: Save
+            cancel: Annulla
+            constraint: Modifica condizione
+            save: Salva
           update:
-            error: Error updating condition case
-            success: Condition case updated successfully
+            error: Errore nell'aggiornamento della condizione
+            success: Condizione aggiornata con successo
         menu:
+          admins: Scoped Admins
           checks: System compatibility
           editors: Editor hacks
-          livechat: Live Chat
+          livechat: Chat in tempo reale
           menu_hacks: Menu tweaks
+          proposal_custom_fields: Proposals Custom Fields
           proposals: Proposals hacks
           styles: Custom styles
           surveys: Surveys & forms
         menu_hacks:
           create:
-            error: Error creating menu item! %{error}
-            success: Menu item created successfully
+            error: Errore nella creazione della voce di menu! %{error}
+            success: Elemento di menu creato con successo
           destroy:
-            error: Error removing menu item! %{error}
-            success: Menu item removed successfully
+            error: Errore nella rimozione della voce di menu! %{error}
+            success: Voce di menu rimossa correttamente
           edit:
-            save: Save
-            title: Edit menu item
+            save: Salva
+            title: Modifica voce di menu
           form:
-            label_help: Translations aren't automatically detected, be sure to fill in all the fields!
+            label_help: Le traduzioni non vengono rilevate automaticamente, assicurati di compilare tutti i campi!
             target:
-              blank: New window
-              self: Same window
+              blank: Nuova finestra
+              self: Stessa finestra
             visibility:
-              default: Visible
-              hidden: Always hidden
-              logged: Only visible for logged users
-              non_logged: Only visible for non-logged users
+              default: Visibile
+              hidden: Sempre nascosto
+              logged: Visibile solo agli utenti registrati
+              non_logged: Visibile solo per gli utenti non registrati
           index:
-            confirm_destroy: Are you sure to remove this customization?
-            edit: Edit
-            new: New item
-            remove: Remove addition
-            remove_hack: Remove customization
-            title: Main menu
+            confirm_destroy: Sei sicuro di voler rimuovere questa personalizzazione?
+            edit: Modifica
+            new: Nuova elemento
+            remove: Rimuovi aggiunta
+            remove_hack: Rimuovi personalizzazione
+            title: Menù principale
           new:
-            save: Save
-            title: New menu item
+            save: Salva
+            title: Nuova voce di menu
           update:
-            error: Error updating menu item! %{error}
-            success: Menu item updated successfully
-          url_exists: The same URL is already configured, please edit that instead of creating it again.
+            error: Errore nell'aggiornamento della voce di menu! %{error}
+            success: Voce di menu aggiornata con successo
+          url_exists: Lo stesso URL è già configurato, per favore modificalo invece di crearlo nuovamente.
       config:
         intergram:
-          auto_no_response: It seems that no one is available to answer right now. Please tell us how we can contact you, and we will get back to you as soon as we can.
-          auto_response: Looking for the first available admin (It might take a minute)
-          intro_message: Hello! How can we help you?
-          title_closed: Click to chat!
-          title_open: Let's chat!
-      credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
+          auto_no_response: Sembra che nessuno sia a disposizione per rispondere in questo momento. Vi prego di dirci come possiamo contattarvi e torneremo a voi il prima possibile.
+          auto_response: Alla ricerca del primo admin disponibile (potrebbe richiedere un minuto)
+          intro_message: Ciao! Come possiamo aiutarti?
+          title_closed: Clicca per chattare!
+          title_open: Chattiamo!
+      content_blocks:
+        map:
+          collapse: Inizia con il menu ridotto
+          map_center: Centro della mappa (Latitudine, Longitudine)
+          map_center_help: 'Usa i punti decimali (es: 41.38879, 2.15899). Lascialo vuoto affinché tutti i marcatori vengano adattati automaticamente'
+          map_height: Altezza mappa (px)
+          map_settings: Map settings
+          map_zoom: Zoom (qualsiasi numero tra 0 e 18)
+          map_zoom_help: Si applica solo se è stato definito il centro della mappa
+          menu_amendments: Mostra le correzioni
+          menu_meetings: Mostra meeting
+          name: Mappa Awesome
+          show_accepted: Mostra le proposte accettate
+          show_evaluating: Mostra le proposte in valutazione
+          show_not_answered: Mostra le proposte senza risposta
+          show_rejected: Mostra le proposte respinte
+          show_withdrawn: Mostra le proposte ritirate
+          text_settings: Text settings
+          title: Title
+          truncate: Numero massimo di caratteri per le descrizioni nei popup
+      credits: Decidim Awesome %{version} · Fatto con ♥ da Platoniq
       editor_images:
         create:
-          error: Error uploading image!
-          success: Image uploaded successfully
+          error: Errore nel caricamento dell'immagine!
+          success: Immagine caricata correttamente
       map_component:
         map:
           error:
-            unavailable: The map is unavailable. Please configure geocoding to enable this component.
+            unavailable: La mappa non è disponibile. Configura la geocodifica per abilitare questo componente.
           show:
-            view_meeting: View meeting
-            view_proposal: View proposal
+            view_meeting: Visualizza meeting
+            view_proposal: Visualizza proposta
   layouts:
     decidim:
       admin:
@@ -212,14 +264,14 @@ it:
           title: Decidim Tweaks
       decidim_awesome:
         awesome_config:
-          amendments: Amendments
-          autosaved_error: LocalStorage is not supported in your browser, form cannot be saved automatically.
-          autosaved_retrieved: Data for this form has been recovered from a previous session
-          autosaved_success: Data saved in local storage
-          categories: Categories
-          drag_and_drop_image: Add images by dragging & dropping or pasting them.
-          hashtags: Hashtags
-          items: items
+          amendments: Emendamenti
+          autosaved_error: LocalStorage non è supportato nel browser, il modulo non può essere salvato automaticamente.
+          autosaved_retrieved: I dati per questo modulo sono stati recuperati da una sessione precedente
+          autosaved_success: Dati salvati nella memoria locale
+          categories: Categorie
+          drag_and_drop_image: Aggiungi immagini trascinandole o incollandole.
+          hashtags: Hashtag
+          items: elementi
           meetings: Meetings
-          proposals: Proposals
-          select_deselect_all: Select/deselect all
+          proposals: Proposte
+          select_deselect_all: Seleziona/deseleziona tutto
