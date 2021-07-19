@@ -24,6 +24,10 @@ module Decidim
         @fields
       end
 
+      def translate!
+        translate_values!
+      end
+
       private
 
       def parse_xml(xml)
@@ -59,6 +63,29 @@ module Decidim
 
         textarea["userData"] = [xml]
         textarea["name"]
+      end
+
+      def translate_values!
+        deep_transform_values!(@fields) do |value|
+          next value unless value.is_a? String
+          next value unless (match = value.match(/^(.*\..*)$/))
+
+          I18n.t(match[1], raise: true)
+        rescue I18n::MissingTranslationData
+          value
+        end
+        @fields
+      end
+
+      def deep_transform_values!(object, &block)
+        case object
+        when Hash
+          object.transform_values! { |value| deep_transform_values!(value, &block) }
+        when Array
+          object.map! { |e| deep_transform_values!(e, &block) }
+        else
+          yield(object)
+        end
       end
     end
   end

@@ -188,5 +188,64 @@ module Decidim::DecidimAwesome
         expect(subject.errors).to be_nil
       end
     end
+
+    context "when values contain translation keys" do
+      let(:box1) { '[{"type":"text","required":true,"label":"custom_fields.age.label","name":"age","placeholder":"custom_fields.age.placeholder"}]' }
+      let(:box2) { '[{"type":"textarea","required":true,"label":"custom_fields.birthday.label","name":"date","placeholder":"custom_fields.birthday.placeholder"}]' }
+      let(:translations_de) do
+        { custom_fields: { age: { label: "Test 1", placeholder: "Test 2" }, birthday: { label: "Test 3", placeholder: "Test 4" } } }
+      end
+      let(:translations_ch) do
+        { custom_fields: { age: { label: "Test 5", placeholder: "Test 6" }, birthday: { label: "Test 7", placeholder: "Test 8" } } }
+      end
+
+      before do
+        I18n.config.available_locales = [:en, :de, :ch, :at]
+        I18n.backend.store_translations(:de, translations_de)
+        I18n.backend.store_translations(:ch, translations_ch)
+        I18n.fallbacks = [:en]
+      end
+
+      after do
+        I18n.locale = :en
+        I18n.config.available_locales = [:en, :ca, :es]
+        I18n.backend.reload!
+        I18n.fallbacks = [:en]
+        I18n.default_locale = :en
+      end
+
+      it "translates to de" do
+        I18n.locale = :de
+        subject.translate!
+
+        json = subject.to_json
+        expect(json[0]["label"]).to eq translations_de[:custom_fields][:age][:label]
+        expect(json[0]["placeholder"]).to eq translations_de[:custom_fields][:age][:placeholder]
+        expect(json[1]["label"]).to eq translations_de[:custom_fields][:birthday][:label]
+        expect(json[1]["placeholder"]).to eq translations_de[:custom_fields][:birthday][:placeholder]
+      end
+
+      it "translates to ch" do
+        I18n.locale = :ch
+        subject.translate!
+
+        json = subject.to_json
+        expect(json[0]["label"]).to eq translations_ch[:custom_fields][:age][:label]
+        expect(json[0]["placeholder"]).to eq translations_ch[:custom_fields][:age][:placeholder]
+        expect(json[1]["label"]).to eq translations_ch[:custom_fields][:birthday][:label]
+        expect(json[1]["placeholder"]).to eq translations_ch[:custom_fields][:birthday][:placeholder]
+      end
+
+      it "ignores missing translation keys" do
+        I18n.locale = :at
+        subject.translate!
+
+        json = subject.to_json
+        expect(json[0]["label"]).to eq "custom_fields.age.label"
+        expect(json[0]["placeholder"]).to eq "custom_fields.age.placeholder"
+        expect(json[1]["label"]).to eq "custom_fields.birthday.label"
+        expect(json[1]["placeholder"]).to eq "custom_fields.birthday.placeholder"
+      end
+    end
   end
 end
