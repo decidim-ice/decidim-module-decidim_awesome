@@ -74,6 +74,7 @@ module Decidim::DecidimAwesome
           end
 
           it "user model is not tampered" do
+            Decidim::User.awesome_admins_for_current_scope = nil
             middleware.call(env)
 
             expect(Decidim::User.awesome_admins_for_current_scope).not_to be_present
