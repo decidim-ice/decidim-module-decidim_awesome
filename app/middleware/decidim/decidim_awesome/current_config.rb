@@ -37,6 +37,7 @@ module Decidim
 
       # a workaround to set a flash message if comming from the error controller (route not found)
       def add_flash_message_from_request(env)
+        return unless scoped_admins_active?
         return unless @request.params.has_key? "unauthorized"
 
         env["rack.session"]["flash"] = ActionDispatch::Flash::FlashHash.new(alert: I18n.t("decidim.core.actions.unauthorized")).to_session_value
@@ -49,12 +50,14 @@ module Decidim
       end
 
       def reset_user_model
+        return unless scoped_admins_active?
+
         Decidim::User.awesome_potential_admins = []
         Decidim::User.awesome_admins_for_current_scope = []
       end
 
       def tamper_user_model
-        return unless Decidim::User.respond_to? :awesome_admins_for_current_scope
+        return unless scoped_admins_active?
 
         Decidim::User.awesome_potential_admins = potential_admins
 
@@ -136,7 +139,7 @@ module Decidim
 
       # adds access to REST routes with id instead of the slug ot allow editing
       # rubocop:disable Metrics/CyclomaticComplexity
-      # rubocop:disable Metrics/PerceivedComplexity:
+      # rubocop:disable Metrics/PerceivedComplexity
       def additional_post_constraints(constraints)
         return [] unless @request.post? || @request.patch?
 
@@ -156,7 +159,11 @@ module Decidim
         end
       end
       # rubocop:enable Metrics/CyclomaticComplexity
-      # rubocop:enable Metrics/PerceivedComplexity:
+      # rubocop:enable Metrics/PerceivedComplexity
+
+      def scoped_admins_active?
+        Decidim::User.respond_to?(:awesome_admins_for_current_scope) && Decidim::User.respond_to?(:awesome_potential_admins)
+      end
     end
   end
 end
