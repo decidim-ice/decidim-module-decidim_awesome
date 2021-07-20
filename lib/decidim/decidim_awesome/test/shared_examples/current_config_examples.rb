@@ -17,7 +17,7 @@ shared_examples "same environment" do
 end
 
 shared_examples "untampered user model" do
-  it "user model is not tampered" do
+  it "user model is reset" do
     # ensure model is always reset after calling the middleware
     Decidim::User.awesome_admins_for_current_scope = [123]
     middleware.call(env)

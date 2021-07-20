@@ -68,6 +68,18 @@ module Decidim::DecidimAwesome
         it_behaves_like "tampered users model"
         it_behaves_like "generic admin routes"
 
+        context "and custom admins is disabled" do
+          before do
+            allow(Decidim::User).to receive(:respond_to?).with(:awesome_admins_for_current_scope).and_return(false)
+          end
+
+          it "user model is not tampered" do
+            middleware.call(env)
+
+            expect(Decidim::User.awesome_admins_for_current_scope).not_to be_present
+          end
+        end
+
         context "when visiting assemblies" do
           let(:path) { "assemblies" }
 
