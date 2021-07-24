@@ -95,7 +95,7 @@ cs:
             edit: Upravit
             title: 'Platí pouze v těchto případech:'
           create_proposal_custom_field:
-            error: Error creating a new "custom field" box! %{error}
+            error: Chyba při vytváření nového pole "vlastní pole"! %{error}
             success: '"custom field" box %{key} created successfully'
           create_scoped_admin:
             error: Chyba při vytváření nové skupiny administrátorů! %{error}
@@ -126,8 +126,8 @@ cs:
               drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
               intergram_about: Intergram používá Telegram messenger pro zpracování widgetu live podpory v dolní části stránky.
               intergram_config: 'Pozvěte <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bota</a> do vaší skupiny nebo začněte chatovat přímo. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
-              proposal_custom_fields: Create custom proposal fields that applies only in certain parts of the public web (use the restrictions editor for that)
-              proposal_custom_fields_example: Data is stored in a XML object using compatible HTML attributes (dl,dt,dd elements) replacing the "body" in a normal proposal.
+              proposal_custom_fields: Vytvoření vlastních polí návrhu, která se použijí pouze v určitých částech veřejného webu (použijte k tomu editor omezení)
+              proposal_custom_fields_example: Data jsou uložena v objektu XML pomocí kompatibilních atributů HTML (prvky dl,dt,dd), které v běžném návrhu nahrazují "tělo".
               scoped_admins: Promote regular user to admins that can only administrate certain parts of the public web (use the restrictions editor for that). Note that users who already have regular admin permissions will be ignored.
               scoped_styles: Vytvořte vlastní CSS aplikovaný pouze na určitých částech veřejného webu (použijte pro to editor omezení)
               scoped_styles_variables: 'Můžete použít následující CSS proměnné pro nastavené barvy organizace:'
@@ -180,7 +180,7 @@ cs:
           editors: Hack editoru
           livechat: Live Chat
           menu_hacks: Vylepšení menu
-          proposal_custom_fields: Proposals Custom Fields
+          proposal_custom_fields: Vlastní pole pro návrhy
           proposals: Návrhy hacků
           styles: Vlastní styly
           surveys: Průzkumy a formuláře
