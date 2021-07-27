@@ -17,6 +17,7 @@ nl:
         intergram_title_closed: Gesloten chat titel
         intergram_title_open: Geopende chat titel
         intergram_use_floating_button: Indien aangevinkt, is de gesloten chat altijd een knop in plaats van een tekst
+        scoped_admins: 'Scoped admins group #%{id}'
         scoped_styles: 'Aangepaste stijlen #%{id}'
         use_markdown_editor: Gebruik een Markdown editor in plaats van de HTML editor
       constraint:
@@ -90,9 +91,15 @@ nl:
             delete: Delete
             edit: Edit
             title: 'Alleen toepasbaar in de volgende gevallen:'
+          create_scoped_admin:
+            error: Error creating a new Admin group! %{error}
+            success: Admin group %{key} created successfully
           create_scoped_style:
             error: Error bij het maken van een nieuwe CSS box! %{error}
             success: CSS box %{key} succesvol aangemaakt
+          destroy_scoped_admin:
+            error: Error removing Admin group! %{error}
+            success: Admin group %{key} removed successfully
           destroy_scoped_style:
             error: Fout bij verwijderen van CSS-box! %{error}
             success: CSS box %{key} succesvol verwijderd
@@ -109,13 +116,20 @@ nl:
               drag_and_drop_supported: Bij het uploaden van afbeeldingen wordt wordt slepen en neerzetten ondersteund. Afbeeldingen worden naar de server geüpload en ingevoegd als externe bronnen (er wordt geen base64 inline codering gebruikt).
               intergram_about: Intergram gebruikt Telegram messenger voor het verwerken van een live-support chat widget ingebed aan de onderkant van de pagina.
               intergram_config: 'Nodig de <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> uit voor je groep of begin direct met een chat. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
+              scoped_admins: Promote regular user to admins that can only administrate certain parts of the public web (use the restrictions editor for that). Note that users who already have regular admin permissions will be ignored.
               scoped_styles: Maak aangepaste CSS aan die alleen van toepassing is in bepaalde delen van het openbare web (gebruik hiervoor de restrictie-editor)
               scoped_styles_variables: 'Je kunt de volgende CSS variabelen gebruiken voor de organisatie op maat gemaakte kleuren:'
               use_markdown_editor: Dit vervangt de Quill WYSIWYG editor, gebruik in plaats daarvan een Markdown editor. Tekst zal worden weergegeven als HTML in de openbare pagina's (tekst in de database zal worden opgeslagen als markdown tekst)
+          form_admins:
+            new: Add a new "Scoped Admins" group
+            remove: Remove this "Scoped Admins" group
+            sure_to_remove: Are you sure you want to destroy this "Scoped Admins" group?
           form_styles:
             new: Voeg een nieuwe CSS-box toe
             remove: Verwijder dit CSS-vak
             sure_to_remove: Weet je zeker dat je dit CSS-vak wilt verwijderen?
+          none: "⛔ Never! - Deactivate any other constraint"
+          process_groups: Process groups
           rich_text_editor_in_public_views: 'Let op: "rich text editor voor deelnemers" is ingeschakeld, deze optie is niet van toepassing. Gebruik de editors hacks om afbeeldingen in voorstellen in te schakelen.'
           show:
             title: Tweaks voor %{setting}
@@ -145,6 +159,7 @@ nl:
             error: Fout tijdens bijwerken voorwaardelijke case
             success: Voorwaardelijke case succesvol bijgewerkt
         menu:
+          admins: Scoped Admins
           checks: Systeemcompabiliteit
           editors: Editor hacks
           livechat: Live Chat
@@ -193,6 +208,26 @@ nl:
           intro_message: Hallo! Hoe kunnen we je helpen?
           title_closed: Klik om te chatten!
           title_open: Laten we chatten!
+      content_blocks:
+        map:
+          collapse: Begin met samengevouwen menu
+          map_center: Kaart midden (breedtegraad, lengtegraad)
+          map_center_help: 'Gebruik decimale punten (bv. 41.38879, 2.15899). Laat het leeg om automatisch aan alle markers te voldoen'
+          map_height: Map hoogte (px)
+          map_settings: Map settings
+          map_zoom: Zoom (elk willekeurig getal tussen 0 en 18)
+          map_zoom_help: Alleen van toepassing als een centrum van de kaart is gedefinieerd
+          menu_amendments: Toon amendementen
+          menu_meetings: Toon vergaderingen
+          name: Awesome Map
+          show_accepted: Toon geaccepteerde voorstellen
+          show_evaluating: Toon evaluatievoorstellen
+          show_not_answered: Toon niet beantwoorde voorstellen
+          show_rejected: Toon afgewezen voorstellen
+          show_withdrawn: Toon ingetrokken voorstellen
+          text_settings: Text settings
+          title: Title
+          truncate: Maximaal aantal tekens voor popup beschrijvingen
       credits: Decidim Awesome %{version} · Gemaakt met ♥ door Platoniq
       editor_images:
         create:

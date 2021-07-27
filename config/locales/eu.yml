@@ -17,6 +17,7 @@ eu:
         intergram_title_closed: Closed chat title
         intergram_title_open: Opened chat title
         intergram_use_floating_button: If checked, the closed chat is always a button instead of a text
+        scoped_admins: 'Scoped admins group #%{id}'
         scoped_styles: 'Custom styles #%{id}'
         use_markdown_editor: Use a Markdown editor instead of the HTML editor
       constraint:
@@ -90,9 +91,15 @@ eu:
             delete: Ezabatu
             edit: Editatu
             title: 'Applicable only in these cases:'
+          create_scoped_admin:
+            error: Error creating a new Admin group! %{error}
+            success: Admin group %{key} created successfully
           create_scoped_style:
             error: Error creating a new CSS box! %{error}
             success: CSS box %{key} created successfully
+          destroy_scoped_admin:
+            error: Error removing Admin group! %{error}
+            success: Admin group %{key} removed successfully
           destroy_scoped_style:
             error: Error removing CSS box! %{error}
             success: CSS box %{key} removed successfully
@@ -109,13 +116,20 @@ eu:
               drag_and_drop_supported: When uploading images, Drag & Drop is supported. Images will be uploaded to the server and inserted as external resources (it doesn't use base64 inline encoding).
               intergram_about: Intergram uses Telegram messenger to handle a live support chat widget embedded in the bottom of the page.
               intergram_config: 'Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> to your group or start a chat with it directly. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
+              scoped_admins: Promote regular user to admins that can only administrate certain parts of the public web (use the restrictions editor for that). Note that users who already have regular admin permissions will be ignored.
               scoped_styles: Create custom CSS that applies only in certain parts of the public web (use the restrictions editor for that)
               scoped_styles_variables: 'You can use the following CSS variables for organization customized colors:'
               use_markdown_editor: This will substitute the Quill WYSIWYG editor, use a Markdown editor instead. Text will be saved as HTML in the database.
+          form_admins:
+            new: Add a new "Scoped Admins" group
+            remove: Remove this "Scoped Admins" group
+            sure_to_remove: Are you sure you want to destroy this "Scoped Admins" group?
           form_styles:
             new: Add a new CSS box
             remove: Remove this CSS box
             sure_to_remove: Are you sure you want to destroy this CSS box?
+          none: "⛔ Never! - Deactivate any other constraint"
+          process_groups: Process groups
           rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants" is enabled, this option won''t apply. Use the editors hacks instead to enable images in proposals.'
           show:
             title: Tweaks for %{setting}
@@ -145,6 +159,7 @@ eu:
             error: Error updating condition case
             success: Condition case updated successfully
         menu:
+          admins: Scoped Admins
           checks: System compatibility
           editors: Editor hacks
           livechat: Live Chat
@@ -193,6 +208,26 @@ eu:
           intro_message: Hello! How can we help you?
           title_closed: Click to chat!
           title_open: Let's chat!
+      content_blocks:
+        map:
+          collapse: Start with collapsed menu
+          map_center: Map center (Latitude, Longitude)
+          map_center_help: 'Use decimal points (ie: 41.38879, 2.15899). Leave it empty to automatically fit all the markers'
+          map_height: Map height (px)
+          map_settings: Map settings
+          map_zoom: Zoom (any number betwen 0 and 18)
+          map_zoom_help: Only applies if a map center is defined
+          menu_amendments: Show amendments
+          menu_meetings: Show meetings
+          name: Awesome Map
+          show_accepted: Show accepted proposals
+          show_evaluating: Show evaluating proposals
+          show_not_answered: Show not answered proposals
+          show_rejected: Show rejected proposals
+          show_withdrawn: Show withdrawn proposals
+          text_settings: Text settings
+          title: Title
+          truncate: Maximum characters for popup descriptions
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
       editor_images:
         create:
