@@ -112,7 +112,7 @@ cs:
           destroy_scoped_style:
             error: Chyba při odstraňování CSS boxu! %{error}
             success: CSS box %{key} byl úspěšně odstraněn
-          experimental: 'Experimentální možnosti'
+          experimental: Experimentální možnosti
           form:
             errors:
               incorrect_css: 'CSS v poli #%{key} je neplatné'

@@ -112,7 +112,7 @@ eu:
           destroy_scoped_style:
             error: Error removing CSS box! %{error}
             success: CSS box %{key} removed successfully
-          experimental: 'Experimental options'
+          experimental: Experimental options
           form:
             errors:
               incorrect_css: 'CSS in box #%{key} is invalid'

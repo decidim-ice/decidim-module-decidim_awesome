@@ -112,7 +112,7 @@ nl:
           destroy_scoped_style:
             error: Fout bij verwijderen van CSS-box! %{error}
             success: CSS box %{key} succesvol verwijderd
-          experimental: 'Experimentele opties'
+          experimental: Experimentele opties
           form:
             errors:
               incorrect_css: 'CSS in box #%{key} is invalid'

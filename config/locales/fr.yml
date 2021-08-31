@@ -112,7 +112,7 @@ fr:
           destroy_scoped_style:
             error: Erreur lors de la suppression de la boîte CSS! %{error}
             success: Boîte CSS %{key} supprimée avec succès
-          experimental: 'Fonctionnalités expérimentales'
+          experimental: Fonctionnalités expérimentales
           form:
             errors:
               incorrect_css: 'CSS in box #%{key} is invalid'

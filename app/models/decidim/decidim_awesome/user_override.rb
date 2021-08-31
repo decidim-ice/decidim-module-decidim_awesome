@@ -13,7 +13,7 @@ module Decidim
         def admin
           return self["admin"] if self["admin"]
 
-          Decidim::User.awesome_admins_for_current_scope.include? id
+          Decidim::User.awesome_admins_for_current_scope&.include?(id)
         end
 
         def admin?

@@ -112,7 +112,7 @@ ja:
           destroy_scoped_style:
             error: 'CSS box削除エラー: %{error}'
             success: CSS ボックス %{key} は正常に削除されました
-          experimental: '注意: これらの機能は実験的です。注意して使用してください！'
+          experimental: 試験的オプション
           form:
             errors:
               incorrect_css: 'Box #%{key} のCSSに問題があります'

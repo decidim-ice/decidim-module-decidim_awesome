@@ -112,7 +112,7 @@ it:
           destroy_scoped_style:
             error: Errore nella rimozione del box CSS! %{error}
             success: Box CSS %{key} rimosso correttamente
-          experimental: 'Experimental options'
+          experimental: Opzioni sperimentali
           form:
             errors:
               incorrect_css: 'Il box CSS #%{key} non è valido'
