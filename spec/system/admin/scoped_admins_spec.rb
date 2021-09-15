@@ -135,27 +135,29 @@ describe "Scoped admin journeys", type: :system do
           it_behaves_like "edits allowed components"
         end
 
-        context "and scoped to aany process group" do
-          let(:settings) do
-            {
-              "participatory_space_manifest" => "process_groups"
-            }
+        unless legacy_version? # 0.23 version does not have process groups management
+          context "and scoped to aany process group" do
+            let(:settings) do
+              {
+                "participatory_space_manifest" => "process_groups"
+              }
+            end
+
+            it_behaves_like "allows access to group processes"
+            it_behaves_like "allows edit any group process"
           end
 
-          it_behaves_like "allows access to group processes"
-          it_behaves_like "allows edit any group process"
-        end
+          context "and scoped to a specfic processes group" do
+            let(:settings) do
+              {
+                "participatory_space_manifest" => "process_groups",
+                "participatory_space_slug" => process_group.id
+              }
+            end
 
-        context "and scoped to a specfic processes group" do
-          let(:settings) do
-            {
-              "participatory_space_manifest" => "process_groups",
-              "participatory_space_slug" => process_group.id
-            }
+            it_behaves_like "allows access to group processes"
+            it_behaves_like "allows edit only allowed group process"
           end
-
-          it_behaves_like "allows access to group processes"
-          it_behaves_like "allows edit only allowed group process"
         end
       end
     end
