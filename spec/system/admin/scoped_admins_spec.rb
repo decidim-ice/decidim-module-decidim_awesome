@@ -11,6 +11,8 @@ describe "Scoped admin journeys", type: :system do
   let!(:another_component) { create(:meeting_component, participatory_space: assembly) }
   let!(:another_assembly) { create(:assembly, organization: organization) }
   let!(:participatory_process) { create(:participatory_process, organization: organization) }
+  let!(:process_group) { create(:participatory_process_group, organization: organization) }
+  let!(:another_process_group) { create(:participatory_process_group, organization: organization) }
   let!(:user) { create(:user, :confirmed, organization: organization) }
   let!(:user_accepted) { create(:user, :confirmed, :admin_terms_accepted, organization: organization) }
   let!(:admin) { create(:user, :confirmed, :admin, organization: organization) }
@@ -131,6 +133,29 @@ describe "Scoped admin journeys", type: :system do
           it_behaves_like "allows scoped admin routes"
           it_behaves_like "shows component partial admin links in the frontend"
           it_behaves_like "edits allowed components"
+        end
+
+        context "and scoped to aany process group" do
+          let(:settings) do
+            {
+              "participatory_space_manifest" => "process_groups"
+            }
+          end
+
+          it_behaves_like "allows access to group processes"
+          it_behaves_like "allows edit any group process"
+        end
+
+        context "and scoped to a specfic processes group" do
+          let(:settings) do
+            {
+              "participatory_space_manifest" => "process_groups",
+              "participatory_space_slug" => process_group.id
+            }
+          end
+
+          it_behaves_like "allows access to group processes"
+          it_behaves_like "allows edit only allowed group process"
         end
       end
     end
