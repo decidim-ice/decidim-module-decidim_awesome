@@ -122,19 +122,32 @@ module Decidim
         end
       end
 
-      # adds a exclusive constraint to the parent participatory space (so index page can be accessed)
+      # to access certain deeper routes it requires first to click on a parent route, even without Post permissions in there
+      # this adds this additional routes to these cases
+      # For instance:
+      #        accessing /admin/participatory_processes/som-procress requires access first to /admin/participatory_processes
       def additional_get_constraints(constraints)
         return [] unless @request.get?
 
-        # ruby 2.7 required!
-        constraints.filter_map do |constraint|
-          next unless constraint.settings["participatory_space_manifest"].present? && constraint.settings.size > 1
+        additions = []
+        constraints.each do |constraint|
+          next if constraint.settings["participatory_space_manifest"].blank?
 
-          OpenStruct.new(settings: {
-                           "participatory_space_manifest" => constraint.settings["participatory_space_manifest"],
-                           "match" => "exclusive"
-                         })
+          # processes groups must give access to processes generic url
+          if constraint.settings["participatory_space_manifest"] == "process_groups"
+            additions << OpenStruct.new(settings: { "participatory_space_manifest" => "participatory_processes", "match" => "exclusive" })
+          end
+
+          # adds a exclusive constraint to the parent participatory space (so index page can be accessed)
+          next unless constraint.settings.size > 1
+
+          additions << OpenStruct.new(settings: {
+                                        "participatory_space_manifest" => constraint.settings["participatory_space_manifest"],
+                                        "match" => "exclusive"
+                                      })
         end
+
+        additions
       end
 
       # adds access to REST routes with id instead of the slug ot allow editing
