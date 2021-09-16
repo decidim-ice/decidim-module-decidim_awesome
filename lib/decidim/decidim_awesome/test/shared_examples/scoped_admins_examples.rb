@@ -363,3 +363,66 @@ shared_examples "shows component partial admin links in the frontend" do
     end
   end
 end
+
+shared_examples "allows access to group processes" do
+  before do
+    visit decidim_admin_participatory_processes.participatory_processes_path
+  end
+
+  it "shows the list of processes" do
+    expect(page).to have_content("Participatory processes")
+    expect(page).to have_content(participatory_process.title["en"])
+  end
+
+  describe "forbids editing processes" do
+    before do
+      visit decidim_admin_participatory_processes.edit_participatory_process_path(participatory_process.slug)
+    end
+
+    it_behaves_like "redirects to index"
+  end
+
+  describe "allows listing group process" do
+    before do
+      visit decidim_admin_participatory_processes.participatory_process_groups_path
+    end
+
+    it "shows the list of groups" do
+      expect(page).to have_content("Participatory process groups")
+      expect(page).to have_content(process_group.title["en"])
+    end
+  end
+end
+
+shared_examples "allows edit any group process" do
+  before do
+    visit decidim_admin_participatory_processes.edit_participatory_process_group_path(another_process_group.id)
+  end
+
+  it "allows to edit group processes" do
+    expect(page).to have_content("Edit process group")
+    fill_in_i18n(
+      :participatory_process_group_title,
+      "#participatory_process_group-title-tabs",
+      en: "Edited process group",
+      ca: "Proces grup editat",
+      es: "Grupo de procesos editado"
+    )
+    find("*[type=submit]").click
+    expect(page).to have_admin_callout("successfully")
+  end
+end
+
+shared_examples "allows edit only allowed group process" do
+  before do
+    visit decidim_admin_participatory_processes.participatory_processes_path
+  end
+
+  describe "forbids editing group" do
+    before do
+      visit decidim_admin_participatory_processes.edit_participatory_process_group_path(another_process_group.id)
+    end
+
+    it_behaves_like "redirects to index"
+  end
+end
