@@ -93,13 +93,13 @@ es:
             title: 'Se aplica solo en estos casos:'
           create_scoped_admin:
             error: '¡Error al crear un nuevo grupo de administradoras! %{error}'
-            success: Grupo de administradores %{key} creado correctamente
+            success: Grupo de administradoras %{key} creado correctamente
           create_scoped_style:
             error: '¡Error al crear una nueva caja CSS! %{error}'
             success: Caja CSS %{key} creada correctamente
           destroy_scoped_admin:
-            error: '¡Error al eliminar el grupo de administradores! %{error}'
-            success: Grupo de administradores %{key} eliminado correctamente
+            error: '¡Error al eliminar el grupo de administradoras! %{error}'
+            success: Grupo de administradoras %{key} eliminado correctamente
           destroy_scoped_style:
             error: '¡Error al eliminar la caja CSS! %{error}'
             success: Caja CSS %{key} eliminada correctamente
@@ -116,14 +116,14 @@ es:
               drag_and_drop_supported: Cuando se suban imágenes, se puede hacer a través del método "arrastrar & soltar". Las imágenes se subirán en el servidor y se insertarán como recursos externos (no se utiliza codificación en línea base64).
               intergram_about: Intergram utiliza el Telegram Messenger para gestionar un widget de chat de soporte incrustado en la parte inferior de la página.
               intergram_config: 'Invita a la <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> a tu grupo o inicia un chat con ella directamente. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
-              scoped_admins: Promueve usuarios normales a administradores con acceso limitado a ciertas partes de la web pública (utilizar el editor de restricciones para eso). Tener en cuenta que los usuarios que ya tienen permisos regulares de administrador serán ignorados.
+              scoped_admins: Promueve usuarias normales a administradoras con acceso limitado a ciertas partes de la web pública (utilizar el editor de restricciones para eso). Tener en cuenta que las usuarias que ya tienen permisos regulares de administración serán ignorados.
               scoped_styles: Crea CSS personalizados que solo se apliquen en ciertas partes de la web pública (para ello, utiliza el editor de restricciones)
               scoped_styles_variables: 'Puedes utilizar las siguientes variables CSS para los colores personalizados de la organización:'
               use_markdown_editor: Esto sustituirá al editor HTML (Quill), utilice un editor de Markdown en su lugar. El texto se mostrará como HTML en las páginas públicas (en la base de datos, el texto se almacenará como markdown)
           form_admins:
-            new: Añadir un nuevo grupo de "Administradores acotados"
-            remove: Eliminar este grupo de "Administradores acotados"
-            sure_to_remove: '¿Estás segura de que quieres eliminar este grupo de "administradores acotados"?'
+            new: Añadir un nuevo grupo de "Administradoras acotadas"
+            remove: Eliminar este grupo de "Administradoras acotadas"
+            sure_to_remove: '¿Estás segura de que quieres eliminar este grupo de "administradoras acotadas"?'
           form_styles:
             new: Añadir una nueva caja CSS
             remove: Eliminar esta caja CSS
@@ -159,7 +159,7 @@ es:
             error: Error actualizando la restricción
             success: Restricción actualizada correctamente
         menu:
-          admins: Administradores acotados
+          admins: Administradoras acotadas
           checks: Compatibilidad del sistema
           editors: Modificaciones a los editores
           livechat: Chat en vivo
