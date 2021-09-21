@@ -17,7 +17,7 @@ es:
         intergram_title_closed: Título del chat cerrado
         intergram_title_open: Título del chat abierto
         intergram_use_floating_button: Si está marcado, el chat cerrado siempre es un botón en lugar de un texto
-        scoped_admins: 'Grupo de administradores acotados #%{id}'
+        scoped_admins: 'Grupo de administradoras acotadas #%{id}'
         scoped_styles: 'Estilos personalizados #%{id}'
         use_markdown_editor: Utilizar el editor Markdown en lugar del editor HTML
       constraint:
@@ -92,7 +92,7 @@ es:
             edit: Editar
             title: 'Se aplica solo en estos casos:'
           create_scoped_admin:
-            error: '¡Error al crear un nuevo grupo de administradores! %{error}'
+            error: '¡Error al crear un nuevo grupo de administradoras! %{error}'
             success: Grupo de administradores %{key} creado correctamente
           create_scoped_style:
             error: '¡Error al crear una nueva caja CSS! %{error}'
