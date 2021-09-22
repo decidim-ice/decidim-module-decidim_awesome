@@ -17,7 +17,7 @@ cs:
         intergram_title_closed: Titulek uzavřeného chatu
         intergram_title_open: Titulek otevřeného chatu
         intergram_use_floating_button: Je-li zaškrtnuto, uzavřený chat je vždy tlačítko místo textu
-        scoped_admins: 'Rozsah skupiny administrátorů #%{id}'
+        scoped_admins: 'Skupina Škálovaní administrátoři #%{id}'
         scoped_styles: 'Vlastní styly číslo %{id}'
         use_markdown_editor: Použít Markdown editor namísto HTML editoru
       constraint:
@@ -121,9 +121,9 @@ cs:
               scoped_styles_variables: 'Můžete použít následující CSS proměnné pro nastavené barvy organizace:'
               use_markdown_editor: Toto nahradí WYSIWYG editor, místo toho použijte Markdown editor. Text bude vykreslen jako HTML na veřejných stránkách (text v databázi bude uložen jako text markdown)
           form_admins:
-            new: Přidání nové skupiny "Rozsah administrátorů"
-            remove: Odstranit tuto skupinu "Rozsah administrátorů""
-            sure_to_remove: Opravdu chcete zničit tuto skupinu "Rozsah administrátorů"?
+            new: Přidání nové skupiny "Škálovaní administrátoři"
+            remove: Odstranit tuto skupinu "Škálovaní administrátoři""
+            sure_to_remove: Opravdu chcete zničit tuto skupinu "Škálovaní administrátoři"?
           form_styles:
             new: Přidat nový CSS box
             remove: Odstranit tento CSS box
@@ -159,7 +159,7 @@ cs:
             error: Chyba při aktualizaci případu podmínky
             success: Případ stavu byl úspěšně aktualizován
         menu:
-          admins: Scoped Admins
+          admins: Škálovaní administrátoři
           checks: Systémová kompatibilita
           editors: Hack editoru
           livechat: Live Chat
