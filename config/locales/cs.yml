@@ -17,7 +17,7 @@ cs:
         intergram_title_closed: Titulek uzavřeného chatu
         intergram_title_open: Titulek otevřeného chatu
         intergram_use_floating_button: Je-li zaškrtnuto, uzavřený chat je vždy tlačítko místo textu
-        scoped_admins: 'Scoped admins group #%{id}'
+        scoped_admins: 'Rozsah skupiny administrátorů #%{id}'
         scoped_styles: 'Vlastní styly číslo %{id}'
         use_markdown_editor: Použít Markdown editor namísto HTML editoru
       constraint:
@@ -116,20 +116,20 @@ cs:
               drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
               intergram_about: Intergram používá Telegram messenger pro zpracování widgetu live podpory v dolní části stránky.
               intergram_config: 'Pozvěte <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bota</a> do vaší skupiny nebo začněte chatovat přímo. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
-              scoped_admins: Promote regular user to admins that can only administrate certain parts of the public web (use the restrictions editor for that). Note that users who already have regular admin permissions will be ignored.
+              scoped_admins: Povýšení běžného uživatele na administrátora, který může spravovat pouze určité části veřejného webu (k tomu použijte editor omezení). Všimněte si, že uživatelé, kteří již mají oprávnění běžného správce, budou ignorováni.
               scoped_styles: Vytvořte vlastní CSS aplikovaný pouze na určitých částech veřejného webu (použijte pro to editor omezení)
               scoped_styles_variables: 'Můžete použít následující CSS proměnné pro nastavené barvy organizace:'
               use_markdown_editor: Toto nahradí WYSIWYG editor, místo toho použijte Markdown editor. Text bude vykreslen jako HTML na veřejných stránkách (text v databázi bude uložen jako text markdown)
           form_admins:
-            new: Add a new "Scoped Admins" group
-            remove: Remove this "Scoped Admins" group
-            sure_to_remove: Are you sure you want to destroy this "Scoped Admins" group?
+            new: Přidání nové skupiny "Rozsah administrátorů"
+            remove: Odstranit tuto skupinu "Rozsah administrátorů""
+            sure_to_remove: Opravdu chcete zničit tuto skupinu "Rozsah administrátorů"?
           form_styles:
             new: Přidat nový CSS box
             remove: Odstranit tento CSS box
             sure_to_remove: Opravdu chcete zničit tento CSS box?
-          none: "⛔ Never! - Deactivate any other constraint"
-          process_groups: Process groups
+          none: ": no_enty: Nikdy! - Deaktivujte jiná omezení"
+          process_groups: Skupiny procesů
           rich_text_editor_in_public_views: 'POZNÁMKA: "Kompletní textový editor pro účastníky" je povolen, tato možnost nebude využita. Pro povolení obrázků v Návrzích používejte místo toho hacky editoru.'
           show:
             title: Vylepšení pro %{setting}
