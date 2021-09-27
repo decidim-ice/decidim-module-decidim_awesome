@@ -94,6 +94,7 @@ fr:
             delete: Supprimer
             edit: Modifier
             title: 'Applicable uniquement dans ces cas:'
+            cannot_be_destroyed: Sorry, this cannot be deleted. This configuration needs at least one constraint.
           create_proposal_custom_field:
             error: Error creating a new "custom field" box! %{error}
             success: '"custom field" box %{key} created successfully'
@@ -112,7 +113,7 @@ fr:
           destroy_scoped_style:
             error: Erreur lors de la suppression de la boîte CSS! %{error}
             success: Boîte CSS %{key} supprimée avec succès
-          experimental: Fonctionnalités expérimentales
+          experimental: 'Fonctionnalités expérimentales'
           form:
             errors:
               incorrect_css: 'CSS in box #%{key} is invalid'
