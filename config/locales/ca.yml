@@ -94,6 +94,7 @@ ca:
             delete: Esborra
             edit: Edita
             title: 'S''aplica només en aquests casos:'
+            cannot_be_destroyed: Sorry, this cannot be deleted. This configuration needs at least one constraint.
           create_proposal_custom_field:
             error: Error en crear una nova caixa de "camps personalitzats"! %{error}
             success: 'Caixa de "camps personalitzats" %{key} creada correctament'
@@ -112,7 +113,7 @@ ca:
           destroy_scoped_style:
             error: Error en eliminar una caixa CSS! %{error}
             success: Caixa CSS %{key} eliminada correctament
-          experimental: Opcions experimentals
+          experimental: 'Opcions experimentals'
           form:
             errors:
               incorrect_css: 'El CSS de la caixa #%{key} no és vàlid'
