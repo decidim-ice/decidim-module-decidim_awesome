@@ -61,7 +61,7 @@ module Decidim
         textarea = @fields.find { |field| field["type"] == "textarea" }
         return unless textarea
 
-        textarea["userData"] = [xml]
+        textarea["userData"] = [textarea["subtype"] == "textarea" ? Nokogiri.XML(xml).text : xml]
         textarea["name"]
       end
 

@@ -23,7 +23,13 @@ module Decidim::DecidimAwesome
     let(:compatible_json) do
       [
         { "type" => "text", "required" => true, "label" => "Age", "name" => "age" },
-        { "type" => "textarea", "required" => true, "label" => "Birthday", "name" => "date", "userData" => ["I am a former text, written <b>before</b> definition of custom fields in this proposal."] }
+        { "type" => "textarea", "required" => true, "label" => "Birthday", "name" => "date", "userData" => ["<p>I am a former text, written <b>before</b> definition of custom fields in this proposal.</p>"] }
+      ]
+    end
+    let(:compatible_text_json) do
+      [
+        { "type" => "text", "required" => true, "label" => "Age", "name" => "age" },
+        { "type" => "textarea", "required" => true, "subtype" => "textarea", "label" => "Birthday", "name" => "date", "userData" => ["I am a former text, written before definition of custom fields in this proposal."] }
       ]
     end
     let(:partial_json) do
@@ -95,11 +101,20 @@ module Decidim::DecidimAwesome
       end
 
       context "and there's a textarea type in the definition" do
-        let(:xml) { "I am a former text, written <b>before</b> definition of custom fields in this proposal." }
+        let(:xml) { "<p>I am a former text, written <b>before</b> definition of custom fields in this proposal.</p>" }
 
         it "returns original json and errors" do
           expect(subject.to_json).to eq(compatible_json)
           expect(subject.errors).to include("Content couldn't be parsed but has been assigned to the field 'date'")
+        end
+
+        context "and the textarea has no richtext" do
+          let(:box2) { '[{"type":"textarea","subtype":"textarea","required":true,"label":"Birthday","name":"date"}]' }
+
+          it "assigns the text without html" do
+            expect(subject.to_json).to eq(compatible_text_json)
+            expect(subject.errors).to include("Content couldn't be parsed but has been assigned to the field 'date'")
+          end
         end
       end
     end
