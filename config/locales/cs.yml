@@ -94,6 +94,7 @@ cs:
             delete: Smazat
             edit: Upravit
             title: 'Platí pouze v těchto případech:'
+            cannot_be_destroyed: Sorry, this cannot be deleted. This configuration needs at least one constraint.
           create_proposal_custom_field:
             error: Chyba při vytváření nového pole "vlastní pole"! %{error}
             success: '"vlastní pole" %{key} úspěšně vytvořeno'
