@@ -21,6 +21,7 @@ module Decidim
         resources :scoped_styles, param: :var, only: [:create, :destroy]
         resources :proposal_custom_fields, param: :var, only: [:create, :destroy]
         resources :scoped_admins, param: :var, only: [:create, :destroy]
+        get :users, to: "config#users"
         get :checks, to: "checks#index"
         root to: "config#show", var: :editors
       end
