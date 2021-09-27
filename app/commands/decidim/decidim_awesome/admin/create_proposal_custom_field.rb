@@ -4,7 +4,7 @@ module Decidim
   module DecidimAwesome
     module Admin
       class CreateProposalCustomField < Rectify::Command
-        include NeedsDefaultConstraints
+        include NeedsConstraintHelpers
 
         # Public: Initializes the command.
         #
@@ -26,7 +26,7 @@ module Decidim
           fields.value[@ident] = default_definition
           fields.save!
 
-          create_default_constraints(:proposal_custom_field)
+          create_constraint_never(:proposal_custom_field)
 
           broadcast(:ok, @ident)
         rescue StandardError => e

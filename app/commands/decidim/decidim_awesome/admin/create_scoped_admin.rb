@@ -4,7 +4,7 @@ module Decidim
   module DecidimAwesome
     module Admin
       class CreateScopedAdmin < Rectify::Command
-        include NeedsDefaultConstraints
+        include NeedsConstraintHelpers
 
         # Public: Initializes the command.
         #
@@ -26,7 +26,7 @@ module Decidim
           admins.value[@ident] = []
           admins.save!
 
-          create_default_constraints(:scoped_admin)
+          create_constraint_never(:scoped_admin)
 
           broadcast(:ok, @ident)
         rescue StandardError => e
