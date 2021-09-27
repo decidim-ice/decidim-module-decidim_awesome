@@ -4,6 +4,8 @@ module Decidim
   module DecidimAwesome
     module Admin
       class CreateProposalCustomField < Rectify::Command
+        include NeedsDefaultConstraints
+
         # Public: Initializes the command.
         #
         def initialize(organization)
@@ -23,6 +25,8 @@ module Decidim
           # TODO: prevent (unlikely) colisions with exisiting values
           fields.value[@ident] = default_definition
           fields.save!
+
+          create_default_constraints(:proposal_custom_field)
 
           broadcast(:ok, @ident)
         rescue StandardError => e
