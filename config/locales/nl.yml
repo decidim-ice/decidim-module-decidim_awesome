@@ -91,10 +91,10 @@ nl:
           constraints:
             add_condition: Voeg een case toe
             always: Altijd
+            cannot_be_destroyed: Sorry, this cannot be deleted. This configuration needs at least one constraint.
             delete: Delete
             edit: Edit
             title: 'Alleen toepasbaar in de volgende gevallen:'
-            cannot_be_destroyed: Sorry, this cannot be deleted. This configuration needs at least one constraint.
           create_proposal_custom_field:
             error: Error creating a new "custom field" box! %{error}
             success: '"custom field" box %{key} created successfully'
@@ -247,6 +247,10 @@ nl:
           title: Title
           truncate: Maximaal aantal tekens voor popup beschrijvingen
       credits: Decidim Awesome %{version} · Gemaakt met ♥ door Platoniq
+      custom_fields:
+        errors:
+          invalid_fields: Content couldn't be parsed but has been assigned to the field '%{field}'
+          invalid_xml: 'Content couldn''t be parsed: DL/DD elements not found in the XML'
       editor_images:
         create:
           error: Fout bij uploaden afbeelding!
