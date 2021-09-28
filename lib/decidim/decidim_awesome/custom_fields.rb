@@ -36,11 +36,11 @@ module Decidim
         return if @data.present?
 
         # Apply to the first textarea if exists
-        name = apply_to_first_textarea
-        @errors = if name
-                    "Content couldn't be parsed but has been assigned to the field '#{name}'"
+        field = apply_to_first_textarea
+        @errors = if field
+                    I18n.t(".invalid_fields", scope: "decidim.decidim_awesome.custom_fields.errors", field: field["label"] || field["name"])
                   else
-                    "Content couldn't be parsed: DL/DD elements not found in the XML"
+                    I18n.t(".invalid_xml", scope: "decidim.decidim_awesome.custom_fields.errors")
                   end
       end
 
@@ -62,7 +62,7 @@ module Decidim
         return unless textarea
 
         textarea["userData"] = [textarea["subtype"] == "textarea" ? Nokogiri.XML(xml).text : xml]
-        textarea["name"]
+        textarea
       end
 
       def translate_values!
