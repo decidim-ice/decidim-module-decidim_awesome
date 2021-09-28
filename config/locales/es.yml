@@ -91,10 +91,10 @@ es:
           constraints:
             add_condition: Añadir restricción
             always: Siempre
+            cannot_be_destroyed: Sorry, this cannot be deleted. This configuration needs at least one constraint.
             delete: Eliminar
             edit: Editar
             title: 'Se aplica solo en estos casos:'
-            cannot_be_destroyed: Sorry, this cannot be deleted. This configuration needs at least one constraint.
           create_proposal_custom_field:
             error: '¡Error al crear una nueva caja de "campo personalizado"! %{error}'
             success: 'La caja "campo personalizado" %{key} se ha creado correctamente'
@@ -247,6 +247,10 @@ es:
           title: Título
           truncate: Número máximo de caracteres para las descripciones emergentes
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
+      custom_fields:
+        errors:
+          invalid_fields: Content couldn't be parsed but has been assigned to the field '%{field}'
+          invalid_xml: 'Content couldn''t be parsed: DL/DD elements not found in the XML'
       editor_images:
         create:
           error: '¡Error cargando imagen!'
