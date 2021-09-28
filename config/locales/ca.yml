@@ -91,7 +91,7 @@ ca:
           constraints:
             add_condition: Afegeix una restricció
             always: Sempre
-            cannot_be_destroyed: Sorry, this cannot be deleted. This configuration needs at least one constraint.
+            cannot_be_destroyed: Disculpa, però això no es pot eliminar. Aquesta configuració necessita almenys una restricció.
             delete: Esborra
             edit: Edita
             title: 'S''aplica només en aquests casos:'
@@ -249,8 +249,8 @@ ca:
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
       custom_fields:
         errors:
-          invalid_fields: Content couldn't be parsed but has been assigned to the field '%{field}'
-          invalid_xml: 'Content couldn''t be parsed: DL/DD elements not found in the XML'
+          invalid_fields: No s'ha pogut analitzar el contingut però s'ha assignat al camp '%{field}'
+          invalid_xml: 'No s''ha pogut analitzar el contingut: no s''han trobat els elements DL/DD a l''XML'
       editor_images:
         create:
           error: Error en pujar la imatge!
