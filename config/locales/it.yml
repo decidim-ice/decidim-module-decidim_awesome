@@ -91,10 +91,10 @@ it:
           constraints:
             add_condition: Aggiungi una condizione
             always: Sempre
+            cannot_be_destroyed: Sorry, this cannot be deleted. This configuration needs at least one constraint.
             delete: Elimina
             edit: Modifica
             title: 'Applicabile solo in questi casi:'
-            cannot_be_destroyed: Sorry, this cannot be deleted. This configuration needs at least one constraint.
           create_proposal_custom_field:
             error: Error creating a new "custom field" box! %{error}
             success: '"custom field" box %{key} created successfully'
@@ -247,6 +247,10 @@ it:
           title: Title
           truncate: Numero massimo di caratteri per le descrizioni nei popup
       credits: Decidim Awesome %{version} · Fatto con ♥ da Platoniq
+      custom_fields:
+        errors:
+          invalid_fields: Content couldn't be parsed but has been assigned to the field '%{field}'
+          invalid_xml: 'Content couldn''t be parsed: DL/DD elements not found in the XML'
       editor_images:
         create:
           error: Errore nel caricamento dell'immagine!
