@@ -249,8 +249,8 @@ cs:
       credits: Vylepšení Decidim %{version} · Vyrobeno s ♥ od Platoniq
       custom_fields:
         errors:
-          invalid_fields: Content couldn't be parsed but has been assigned to the field '%{field}'
-          invalid_xml: 'Content couldn''t be parsed: DL/DD elements not found in the XML'
+          invalid_fields: Obsah nemohl být analyzován, ale byl přiřazen do pole '%{field}'
+          invalid_xml: 'Obsah se nepodařilo analyzovat: DL/DD prvky nebyly v XML nalezeny'
       editor_images:
         create:
           error: Chyba při nahrávání obrázku!
