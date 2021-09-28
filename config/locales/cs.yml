@@ -91,10 +91,10 @@ cs:
           constraints:
             add_condition: Přidat případ
             always: Vždy
+            cannot_be_destroyed: Omlouváme se, toto nelze odstranit. Tato konfigurace potřebuje alespoň jednu vazbu.
             delete: Smazat
             edit: Upravit
             title: 'Platí pouze v těchto případech:'
-            cannot_be_destroyed: Omlouváme se, toto nelze odstranit. Tato konfigurace potřebuje alespoň jednu vazbu.
           create_proposal_custom_field:
             error: Chyba při vytváření nového pole "vlastní pole"! %{error}
             success: '"vlastní pole" %{key} úspěšně vytvořeno'
@@ -247,6 +247,10 @@ cs:
           title: Nadpis
           truncate: Maximum znaků pro popisy vyskakovacích oken
       credits: Vylepšení Decidim %{version} · Vyrobeno s ♥ od Platoniq
+      custom_fields:
+        errors:
+          invalid_fields: Content couldn't be parsed but has been assigned to the field '%{field}'
+          invalid_xml: 'Content couldn''t be parsed: DL/DD elements not found in the XML'
       editor_images:
         create:
           error: Chyba při nahrávání obrázku!
