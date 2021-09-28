@@ -91,10 +91,10 @@ ja:
           constraints:
             add_condition: 条件を追加
             always: すべて
+            cannot_be_destroyed: Sorry, this cannot be deleted. This configuration needs at least one constraint.
             delete: 削除
             edit: 編集
             title: '一部のケースのみ適用する:'
-            cannot_be_destroyed: Sorry, this cannot be deleted. This configuration needs at least one constraint.
           create_proposal_custom_field:
             error: 新しい「カスタム項目」ボックスの作成中にエラーが発生しました! %{error}
             success: '「カスタム項目」ボックス %{key} が正常に作成されました'
@@ -247,6 +247,10 @@ ja:
           title: タイトル
           truncate: ポップアップの説明のための最大文字数
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
+      custom_fields:
+        errors:
+          invalid_fields: Content couldn't be parsed but has been assigned to the field '%{field}'
+          invalid_xml: 'Content couldn''t be parsed: DL/DD elements not found in the XML'
       editor_images:
         create:
           error: 画像アップロードエラー
