@@ -91,7 +91,7 @@ ja:
           constraints:
             add_condition: 条件を追加
             always: すべて
-            cannot_be_destroyed: Sorry, this cannot be deleted. This configuration needs at least one constraint.
+            cannot_be_destroyed: 申し訳ありませんが、この設定は削除できません。この設定には少なくとも1つの制約が必要です
             delete: 削除
             edit: 編集
             title: '一部のケースのみ適用する:'
@@ -249,8 +249,8 @@ ja:
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
       custom_fields:
         errors:
-          invalid_fields: Content couldn't be parsed but has been assigned to the field '%{field}'
-          invalid_xml: 'Content couldn''t be parsed: DL/DD elements not found in the XML'
+          invalid_fields: コンテンツは解析できませんでしたが、フィールド '%{field}' に割り当てられました
+          invalid_xml: 'コンテンツを解析できませんでした: DL/DD要素がXMLに見つかりません'
       editor_images:
         create:
           error: 画像アップロードエラー
