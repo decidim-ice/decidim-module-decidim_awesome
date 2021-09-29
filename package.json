@@ -8,7 +8,8 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint -c .eslintrc.json --ext .js,.js.es6 app/"
   },
   "repository": {
     "type": "git",
@@ -184,7 +185,7 @@
     }
   },
   "devDependencies": {
-    "eslint": "^7.8.1",
+    "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0"
   },

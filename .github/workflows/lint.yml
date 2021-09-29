@@ -7,7 +7,9 @@ on:
   pull_request:
 
 env:
-  RUBY_VERSION: 2.7.1
+  RUBY_VERSION: 2.7.4
+  NODE_VERSION: 12.9.1
+
 
 jobs:
   lint-report:
@@ -22,7 +24,12 @@ jobs:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
+      - uses: actions/setup-node@master
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
       - name: Lint and Rubocop
         run: |
+          npm run lint
           bundle exec rubocop -P
-        # bundle exec erblint app/views/**/*.erb
+          bundle exec erblint app/views/**/*.erb

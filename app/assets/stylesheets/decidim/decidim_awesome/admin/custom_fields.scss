@@ -1,3 +1,10 @@
+// hide custom-fields inside tabs, an extra (unique) container is used instead
+.tabs-content {
+  .proposal_custom_field {
+    display: none;
+  }
+}
+
 .proposal-custom-field{
   &-editor{
     background-color: #e0e0e0;

@@ -1,6 +1,6 @@
 // = require jquery-ui.min
 // = require decidim/decidim_awesome/editors/quill_editor
-// = require decidim/decidim_awesome/form_builder/rich_text_plugin
+// = require decidim/decidim_awesome/forms/rich_text_plugin
 // = require form-builder.min
 // = require_self
 
@@ -40,7 +40,7 @@ $(() => {
         ],
         disabledSubtypes: {
           text: ['color'], // TODO: fix hashtag generator with this
-          // disable wysiwg editors as they present problems
+          // disable wysiwyg editors as they present problems
           // TODO: create custom type to integrate decidim Quill Editor
           textarea: ['tinymce', 'quill']
         },

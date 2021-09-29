@@ -61,7 +61,7 @@ window.fbControls.push(function(controlClass, allControlClasses) {
         `,
         { type: 'text/css' }
       );
-      console.log("build value", value, "userData", userData, "attrs", attrs, attrs.id);
+      // console.log("build value", value, "userData", userData, "attrs", attrs, attrs.id);
       this.wrapper = this.markup('div', null, attrs);
       return this.markup('div', [css, this.input, this.wrapper], attrs);
     }
@@ -71,9 +71,9 @@ window.fbControls.push(function(controlClass, allControlClasses) {
      * @param {Object} evt - event
      */
     onRender(evt) {
-      const value = this.config.value || '';
+      // const value = this.config.value || '';
       if (window.fbEditors.richtext[this.id]) {
-        console.log("todo destroy", window.fbEditors.richtext[this.id]);
+        // console.log("todo destroy", window.fbEditors.richtext[this.id]);
         // window.fbEditors.richtext[this.id].richtext('destroy')
       }
 
