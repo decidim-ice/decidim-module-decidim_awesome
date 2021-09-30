@@ -88,6 +88,7 @@ ja:
             head_tags: アプリケーションヘッダーに含まれる Awesome tags
             title: システム互換性チェック
         config:
+          caution: 'NOTE: This feature heavily modifies some default behaviours that might lead to unexpected results. Use it with caution!'
           constraints:
             add_condition: 条件を追加
             always: すべて
@@ -113,7 +114,6 @@ ja:
           destroy_scoped_style:
             error: 'CSS box削除エラー: %{error}'
             success: CSS ボックス %{key} は正常に削除されました
-          experimental: '注意: これらの機能は実験的です。注意して使用してください！'
           form:
             errors:
               incorrect_css: 'Box #%{key} のCSSに問題があります'
@@ -129,6 +129,7 @@ ja:
               intergram_config: '<a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> をグループに招待するか、直接チャットを開始します。 <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               proposal_custom_fields: 公開ウェブの特定の部分にのみ適用されるカスタム提案項目を作成します (制限されたエディタを使用してください)
               proposal_custom_fields_example: データは、互換性のある HTML 属性 (dl,dt,dd 要素) を使用した XML オブジェクトとして格納され、通常の提案の "body" を置き換えます。
+              proposal_custom_fields_translations: "Labels, help text, placeholders and default values can use your application custom translations. \nFor that, instead of using a string literal, use the i18n key (it must containt at least one dot).\nFor instance:\n  \"activemodel.attributes.proposal.title\" instead of \"Title\"\n  \"activemodel.attributes.proposal.address\" instead of \"Address\"\nOr use your own keys in combination with other tools to define translations (ie: using the module Term Customizer):\n \\ \"myapp.custom_fields.bio\" instead of \"Biography\"\n"
               scoped_admins: 一般ユーザーを公開ウェブの特定の部分だけを管理できる管理者に昇格させます(制限エディターを使用してください)。 すでに通常の管理者権限を持つユーザーは無視されることに注意してください。
               scoped_styles: 公開ウェブの特定の部分にのみ適用されるカスタムCSSを作成します (制限されたエディタを使用してください)
               scoped_styles_variables: '組織の色のカスタマイズには、以下のCSS変数が使用できます。'
