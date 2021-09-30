@@ -88,6 +88,7 @@ cs:
             head_tags: Úžasné tagy zahrnuté v hlavičce aplikace
             title: Kontroly kompatibility systému
         config:
+          caution: 'NOTE: This feature heavily modifies some default behaviours that might lead to unexpected results. Use it with caution!'
           constraints:
             add_condition: Přidat případ
             always: Vždy
@@ -113,7 +114,6 @@ cs:
           destroy_scoped_style:
             error: Chyba při odstraňování CSS boxu! %{error}
             success: CSS box %{key} byl úspěšně odstraněn
-          experimental: 'Experimentální možnosti'
           form:
             errors:
               incorrect_css: 'CSS v poli #%{key} je neplatné'
@@ -129,6 +129,7 @@ cs:
               intergram_config: 'Pozvěte <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bota</a> do vaší skupiny nebo začněte chatovat přímo. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               proposal_custom_fields: Vytvoření vlastních polí návrhu, která se použijí pouze v určitých částech veřejného webu (použijte k tomu editor omezení)
               proposal_custom_fields_example: Data jsou uložena v objektu XML pomocí kompatibilních atributů HTML (prvky dl,dt,dd), které v běžném návrhu nahrazují "tělo".
+              proposal_custom_fields_translations: "Labels, help text, placeholders and default values can use your application custom translations. \nFor that, instead of using a string literal, use the i18n key (it must containt at least one dot).\nFor instance:\n  \"activemodel.attributes.proposal.title\" instead of \"Title\"\n  \"activemodel.attributes.proposal.address\" instead of \"Address\"\nOr use your own keys in combination with other tools to define translations (ie: using the module Term Customizer):\n \\ \"myapp.custom_fields.bio\" instead of \"Biography\"\n"
               scoped_admins: Povýšení běžného uživatele na administrátora, který může spravovat pouze určité části veřejného webu (k tomu použijte editor omezení). Všimněte si, že uživatelé, kteří již mají oprávnění běžného správce, budou ignorováni.
               scoped_styles: Vytvořte vlastní CSS aplikovaný pouze na určitých částech veřejného webu (použijte pro to editor omezení)
               scoped_styles_variables: 'Můžete použít následující CSS proměnné pro nastavené barvy organizace:'
