@@ -99,6 +99,8 @@ en:
             head_tags: Awesome tags included in the application header
             title: System compatibility checks
         config:
+          caution: 'NOTE: This feature heavily modifies some default behaviours that
+            might lead to unexpected results. Use it with caution!'
           constraints:
             add_condition: Add case
             always: Always
@@ -125,7 +127,6 @@ en:
           destroy_scoped_style:
             error: Error removing CSS box! %{error}
             success: CSS box %{key} removed successfully
-          experimental: 'NOTE: These features are experimental. Use them with caution!'
           form:
             errors:
               incorrect_css: 'CSS in box #%{key} is invalid'
@@ -159,6 +160,14 @@ en:
               proposal_custom_fields_example: Data is stored in a XML object using
                 compatible HTML attributes (dl,dt,dd elements) replacing the "body"
                 in a normal proposal.
+              proposal_custom_fields_translations: "Labels, help text, placeholders
+                and default values can use your application custom translations. \nFor
+                that, instead of using a string literal, use the i18n key (it must
+                containt at least one dot).\nFor instance:\n  \"activemodel.attributes.proposal.title\"
+                instead of \"Title\"\n  \"activemodel.attributes.proposal.address\"
+                instead of \"Address\"\nOr use your own keys in combination with other
+                tools to define translations (ie: using the module Term Customizer):\n
+                \ \"myapp.custom_fields.bio\" instead of \"Biography\"\n"
               scoped_admins: Promote regular user to admins that can only administrate
                 certain parts of the public web (use the restrictions editor for that).
                 Note that users who already have regular admin permissions will be
