@@ -10,7 +10,8 @@ describe "Admin manages custom proposal fields", type: :system do
   end
   let!(:config) { create :awesome_config, organization: organization, var: :proposal_custom_fields, value: custom_fields }
   let(:config_helper) { create :awesome_config, organization: organization, var: :proposal_custom_field_bar }
-  let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes" }) }
+  let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes", "component_manifest": "proposals" }) }
+  let!(:another_constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes" }) }
 
   let(:data) { "[#{data1},#{data2},#{data3}]" }
   let(:data1) { '{"type":"text","label":"Full Name","subtype":"text","className":"form-control","name":"text-1476748004559"}' }
@@ -126,7 +127,7 @@ describe "Admin manages custom proposal fields", type: :system do
         end
 
         expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar)).to be_present
-        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar).constraints.first.settings).to eq("participatory_space_manifest" => "participatory_processes")
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar).constraints.first.settings).to eq(constraint.settings)
       end
 
       context "when removing a constraint" do
@@ -140,24 +141,46 @@ describe "Admin manages custom proposal fields", type: :system do
         it "removes the helper config var" do
           within ".proposal-custom-field[data-key=\"bar\"] .constraints-editor" do
             expect(page).to have_content("Processes")
+            expect(page).to have_content("Proposals")
           end
 
           within ".proposal-custom-field[data-key=\"bar\"]" do
-            click_link "Delete"
+            within first(".constraints-list li") do
+              click_link "Delete"
+            end
           end
 
           within ".proposal-custom-field[data-key=\"bar\"] .constraints-editor" do
-            expect(page).not_to have_content("Processes")
+            expect(page).not_to have_content("Proposals")
           end
 
           visit decidim_admin_decidim_awesome.config_path(:proposal_custom_fields)
 
           within ".proposal-custom-field[data-key=\"bar\"] .constraints-editor" do
-            expect(page).not_to have_content("Processes")
+            expect(page).not_to have_content("Proposals")
           end
 
           expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar)).to be_present
-          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar).constraints).not_to be_present
+          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar).constraints.count).to eq(1)
+          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar).constraints.first).to eq(another_constraint)
+        end
+
+        context "and there is only one constraint" do
+          let!(:another_constraint) { nil }
+
+          it "do not remove the helper config var" do
+            within ".proposal-custom-field[data-key=\"bar\"]" do
+              click_link "Delete"
+            end
+
+            within ".proposal-custom-field[data-key=\"bar\"] .constraints-editor" do
+              expect(page).to have_content("Proposals")
+            end
+
+            expect(page).to have_content("Sorry, this cannot be deleted")
+            expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar).constraints.count).to eq(1)
+            expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar).constraints.first).to eq(constraint)
+          end
         end
       end
     end

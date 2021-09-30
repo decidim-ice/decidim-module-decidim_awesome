@@ -22,7 +22,15 @@ describe "Admin edits proposals", type: :system do
       "bar" => "[#{data3}]"
     }
   end
-  let!(:proposal) { create :proposal, :official, component: component, body: { en: '<xml><dl><dt>Bio</dt><dd id="textarea-1476748007461"><div>I shot the sheriff</div></dd></dl></xml>' } }
+  let!(:proposal) do
+    create(:proposal,
+           :official,
+           component: component,
+           body: {
+             en: '<xml><dl><dt>Bio</dt><dd id="textarea-1476748007461"><div>I shot the sheriff</div></dd></dl></xml>',
+             ca: '<xml><dl><dt>Bio</dt><dd id="textarea-1476748007461"><div>Jo disparo al sheriff</div></dd></dl></xml>'
+           })
+  end
 
   include_context "when managing a component as an admin"
 
@@ -41,6 +49,12 @@ describe "Admin edits proposals", type: :system do
     expect(page).to have_content("Short Bio")
     expect(page).to have_xpath("//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the sheriff']")
     expect(page).not_to have_css(".form-error.is-visible")
+
+    within "#proposal-body-tabs" do
+      click_link "Català"
+
+      expect(page).to have_xpath("//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='Jo disparo al sheriff']")
+    end
   end
 
   context "and there are out of scope" do
@@ -85,6 +99,27 @@ describe "Admin edits proposals", type: :system do
 
       expect(Decidim::Proposals::Proposal.last.body["en"]).to include('<dd id="text-1476748004559" name="text"><div>Lucky Luke</div>')
       expect(Decidim::Proposals::Proposal.last.body["en"]).to include('<dd id="textarea-1476748007461" name="textarea"><div>I shot everything</div></dd>')
+    end
+
+    context "and has multiple languages" do
+      it "saves the proposal in XML" do
+        fill_in :proposal_title_en, with: "A far west character"
+        fill_in :"text-1476748004559", with: "Lucky Luke"
+        fill_in :"textarea-1476748007461", with: "I shot everything"
+
+        within "#proposal-body-tabs" do
+          click_link "Català"
+        end
+
+        fill_in :"text-1476748004559", with: "Lucky Luke"
+        fill_in :"textarea-1476748007461", with: "Li agrada disparar"
+
+        click_button "Update"
+
+        expect(Decidim::Proposals::Proposal.last.body["en"]).to include('<dd id="text-1476748004559" name="text"><div>Lucky Luke</div>')
+        expect(Decidim::Proposals::Proposal.last.body["en"]).to include('<dd id="textarea-1476748007461" name="textarea"><div>I shot everything</div></dd>')
+        expect(Decidim::Proposals::Proposal.last.body["ca"]).to include('<dd id="textarea-1476748007461" name="textarea"><div>Li agrada disparar</div></dd>')
+      end
     end
   end
 end

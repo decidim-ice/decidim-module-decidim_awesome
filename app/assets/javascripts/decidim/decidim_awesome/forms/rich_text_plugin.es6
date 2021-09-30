@@ -1,4 +1,9 @@
 /**
+ * 
+ * NOTE: For some reason, this seems to throw an error while transpiling
+ * For this reason a rich_text_plugin.js is provided using the online transpiler https://babeljs.io/repl
+ * Hopefully, this situation will change when webpacker is updated in the v0.25 of Decidim
+ * 
  * Decidim rich text editor control plugin
  * Renders standard Decidim WYSIWYG editor
  *
@@ -23,6 +28,7 @@ window.fbControls.push(function(controlClass, allControlClasses) {
      */
     static get definition() {
       return {
+        icon: '📝',
         i18n: {
           default: 'Rich Text Editor'
         },
@@ -80,7 +86,7 @@ window.fbControls.push(function(controlClass, allControlClasses) {
       window.fbEditors.quill[this.id] = {};
       const editor = window.fbEditors.quill[this.id];
       // createQuillEditor does all the job to update the hidden input wrapper
-      editor.instance = new window.Decidim.createQuillEditor(this.wrapper);
+      editor.instance = window.Decidim.createQuillEditor(this.wrapper);
       // editor.data = new Delta();
       // if (value) {
       //   editor.instance.setContents(window.JSON.parse(this.parsedHtml(value)));
@@ -91,7 +97,7 @@ window.fbControls.push(function(controlClass, allControlClasses) {
       // });
 
       // console.log("render! editor", editor, "this", this, "value", value);
-      return evt
+      return evt;
     }
   }
 

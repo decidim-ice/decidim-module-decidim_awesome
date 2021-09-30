@@ -101,6 +101,16 @@ describe "Custom proposals fields", type: :system do
     it_behaves_like "has custom fields", "//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the sheriff']"
     it_behaves_like "saves custom fields", :proposal_title, "Send", false
 
+    context "and has i18n keys" do
+      let(:data3) { '{"type":"textarea","label":"activemodel.attributes.user.nickname","rows":"5","className":"form-control","name":"textarea-1476748007461"}' }
+
+      it "displays the translation" do
+        expect(page).to have_content("Nickname")
+        expect(page).not_to have_content("activemodel.attributes.user.nickname")
+        expect(page).not_to have_content("Short Bio")
+      end
+    end
+
     context "and RTE is enabled" do
       let(:rte_enabled) { true }
 
