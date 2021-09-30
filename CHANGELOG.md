@@ -11,6 +11,8 @@ Compatibility:
 Features:
   - Added custom fields (with admin interface and scopable) to replace normal body in proposals.
   - Change Markdown editor behaviour: now it is converted to HTML before storing in the database. This makes the editor compatible with all Rich Text editors.
+  - Added icons in the awesome config menu
+  - Fixes scoped admins accessing process groups
 
 v0.7.1
 ------
