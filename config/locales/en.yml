@@ -167,7 +167,7 @@ en:
                 instead of \"Title\"\n  \"activemodel.attributes.proposal.address\"
                 instead of \"Address\"\nOr use your own keys in combination with other
                 tools to define translations (ie: using the module Term Customizer):\n
-                \ \"myapp.custom_fields.bio\" instead of \"Biography\"\n"
+                \ \"myapp.custom_fields.bio\" instead of \"Biography\""
               scoped_admins: Promote regular user to admins that can only administrate
                 certain parts of the public web (use the restrictions editor for that).
                 Note that users who already have regular admin permissions will be
