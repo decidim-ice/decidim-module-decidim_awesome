@@ -88,7 +88,7 @@ cs:
             head_tags: Úžasné tagy zahrnuté v hlavičce aplikace
             title: Kontroly kompatibility systému
         config:
-          caution: 'NOTE: This feature heavily modifies some default behaviours that might lead to unexpected results. Use it with caution!'
+          caution: 'POZNÁMKA: Tato funkce silně mění některé výchozí chování, které by mohlo vést k neočekávaným výsledkům. Používejte ji s opatrností!'
           constraints:
             add_condition: Přidat případ
             always: Vždy
