@@ -128,7 +128,7 @@ cs:
             new: Přidat nový CSS box
             remove: Odstranit tento CSS box
             sure_to_remove: Opravdu chcete zničit tento CSS box?
-          none: ": no_enty: Nikdy! - Deaktivujte jiná omezení"
+          none: "⛔ Nikdy! - Deaktivujte jiná omezení"
           process_groups: Skupiny procesů
           rich_text_editor_in_public_views: 'POZNÁMKA: "Kompletní textový editor pro účastníky" je povolen, tato možnost nebude využita. Pro povolení obrázků v Návrzích používejte místo toho hacky editoru.'
           show:
