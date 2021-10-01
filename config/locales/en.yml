@@ -22,9 +22,9 @@ en:
         intergram_title_open: Opened chat title
         intergram_use_floating_button: If checked, the closed chat is always a button
           instead of a text
-        proposal_custom_fields: 'Custom fields #%{id}'
-        scoped_admins: 'Scoped admins group #%{id}'
-        scoped_styles: 'Custom styles #%{id}'
+        proposal_custom_fields: 'Custom fields %{id}'
+        scoped_admins: 'Scoped admins group %{id}'
+        scoped_styles: 'Custom styles %{id}'
         use_markdown_editor: Use a Markdown editor instead of the HTML editor
       constraint:
         component_id: or specifically in

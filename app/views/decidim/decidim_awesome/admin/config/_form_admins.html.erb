@@ -5,7 +5,7 @@
     <% form.object.scoped_admins&.each do |key, value| %>
       <div class="scoped_admins_container" data-key="<%= key %>">
         <%= render(partial: "decidim/decidim_awesome/admin/config/autoedit_box_label", locals: { var: "scoped_admins", key: key, scope: "scoped_admin_#{key}", delete_path: decidim_admin_decidim_awesome.scoped_admin_path(key: key) }) %>
-        <p class="form-error is-visible" id="custom-admin-error-<%= $key %>"><%= errors[key.to_sym].join("<br>") if errors %></p>
+        <p class="form-error is-visible" id="scoped-admin-error-<%= $key %>"><%= errors[key.to_sym].join("<br>") if errors %></p>
 
         <%= select_tag "config[scoped_admins][#{key}]", options_from_collection_for_select(users_for(value), :id, :text, proc { true }), { include_blank: false ,  class: "multiusers-select", multiple: true, data: { url: decidim_admin_decidim_awesome.users_path } } %>
 
@@ -13,7 +13,7 @@
       </div>
     <% end %>
 
-    <%= link_to t(".new"), decidim_admin_decidim_awesome.scoped_admins_path, method: :post %>
+    <%= link_to t("new", scope: "decidim.decidim_awesome.admin.config.form_scoped_admins"), decidim_admin_decidim_awesome.scoped_admins_path, method: :post %>
 
   <% end %>
 </div>
