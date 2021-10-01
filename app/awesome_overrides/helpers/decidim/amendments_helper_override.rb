@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 Decidim::AmendmentsHelper.module_eval do
+  # original method
+  alias_method :amendments_form_field_for, :decidim_amendments_form_field_for
+
   # override with custom fields if scope applies
   def amendments_form_field_for(attribute, form, original_resource)
     custom_fields = awesome_custom_fields(attribute, form)
@@ -33,21 +36,5 @@ Decidim::AmendmentsHelper.module_eval do
     awesome_config = Decidim::DecidimAwesome::Config.new(component.organization)
     awesome_config.context_from_component(component)
     awesome_config.collect_sub_configs_values("proposal_custom_field")
-  end
-
-  # original method
-  def decidim_amendments_form_field_for(attribute, form, original_resource)
-    options = {
-      class: "js-hashtags",
-      label: amendments_form_fields_label(attribute),
-      value: amendments_form_fields_value(original_resource, attribute)
-    }
-
-    case attribute
-    when :title
-      form.text_field(:title, options)
-    when :body
-      text_editor_for(form, :body, options.merge(hashtaggable: true))
-    end
   end
 end

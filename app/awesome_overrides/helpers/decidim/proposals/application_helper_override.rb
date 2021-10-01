@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 Decidim::Proposals::ApplicationHelper.module_eval do
+  alias_method :text_editor_for_proposal_body, :decidim_text_editor_for_proposal_body
+  alias_method :safe_content?, :decidim_safe_content?
+
   # replace safe content to consider all custom fields save (then embeded html will be rendered)
   def safe_content?
     awesome_proposal_custom_fields.present? || decidim_safe_content?
@@ -60,26 +63,5 @@ Decidim::Proposals::ApplicationHelper.module_eval do
     custom_fields.apply_xml(body) if body.present?
     form.object.errors.add(name, custom_fields.errors) if custom_fields.errors
     render partial: "decidim/decidim_awesome/custom_fields/form_render", locals: { spec: custom_fields.to_json, form: form, name: name }
-  end
-
-  private
-
-  # original functions from ApplicationHelper
-  def decidim_text_editor_for_proposal_body(form)
-    options = {
-      class: "js-hashtags",
-      hashtaggable: true,
-      value: form_presenter.body(extras: false).strip
-    }
-
-    text_editor_for(form, :body, options)
-  end
-
-  # If the proposal is official or the rich text editor is enabled on the
-  # frontend, the proposal body is considered as safe content; that's unless
-  # the proposal comes from a collaborative_draft or a participatory_text.
-  def decidim_safe_content?
-    rich_text_editor_in_public_views? && not_from_collaborative_draft(@proposal) ||
-      (@proposal.official? || @proposal.official_meeting?) && not_from_participatory_text(@proposal)
   end
 end
