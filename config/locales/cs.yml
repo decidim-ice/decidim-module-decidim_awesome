@@ -18,7 +18,7 @@ cs:
         intergram_title_open: Titulek otevřeného chatu
         intergram_use_floating_button: Je-li zaškrtnuto, uzavřený chat je vždy tlačítko místo textu
         proposal_custom_fields: 'Uživatelská pole #%{id}'
-        scoped_admins: 'Scoped admins group #%{id}'
+        scoped_admins: 'Skupina Škálovaní administrátoři #%{id}'
         scoped_styles: 'Vlastní styly číslo %{id}'
         use_markdown_editor: Použít Markdown editor namísto HTML editoru
       constraint:
@@ -88,15 +88,17 @@ cs:
             head_tags: Úžasné tagy zahrnuté v hlavičce aplikace
             title: Kontroly kompatibility systému
         config:
+          caution: 'POZNÁMKA: Tato funkce silně mění některé výchozí chování, které by mohlo vést k neočekávaným výsledkům. Používejte ji s opatrností!'
           constraints:
             add_condition: Přidat případ
             always: Vždy
+            cannot_be_destroyed: Omlouváme se, toto nelze odstranit. Tato konfigurace potřebuje alespoň jednu vazbu.
             delete: Smazat
             edit: Upravit
             title: 'Platí pouze v těchto případech:'
           create_proposal_custom_field:
             error: Chyba při vytváření nového pole "vlastní pole"! %{error}
-            success: '"custom field" box %{key} created successfully'
+            success: '"vlastní pole" %{key} úspěšně vytvořeno'
           create_scoped_admin:
             error: Chyba při vytváření nové skupiny administrátorů! %{error}
             success: Skupina administrátorů %{key} úspěšně vytvořena
@@ -104,15 +106,14 @@ cs:
             error: Chyba při vytváření nového CSS boxu! %{error}
             success: CSS box %{key} úspěšně vytvořen
           destroy_proposal_custom_field:
-            error: Error removing "custom field" box! %{error}
-            success: '"custom field" box %{key} removed successfully'
+            error: Chyba při odebírání "vlastního pole"! %{error}
+            success: '"vlastní pole" %{key} bylo úspěšně odebráno'
           destroy_scoped_admin:
             error: Chyba při odstraňování skupiny administrátorů! %{error}
             success: Skupina administrátorů %{key} byla úspěšně odstraněna
           destroy_scoped_style:
             error: Chyba při odstraňování CSS boxu! %{error}
             success: CSS box %{key} byl úspěšně odstraněn
-          experimental: Experimentální možnosti
           form:
             errors:
               incorrect_css: 'CSS v poli #%{key} je neplatné'
@@ -128,14 +129,15 @@ cs:
               intergram_config: 'Pozvěte <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bota</a> do vaší skupiny nebo začněte chatovat přímo. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               proposal_custom_fields: Vytvoření vlastních polí návrhu, která se použijí pouze v určitých částech veřejného webu (použijte k tomu editor omezení)
               proposal_custom_fields_example: Data jsou uložena v objektu XML pomocí kompatibilních atributů HTML (prvky dl,dt,dd), které v běžném návrhu nahrazují "tělo".
-              scoped_admins: Promote regular user to admins that can only administrate certain parts of the public web (use the restrictions editor for that). Note that users who already have regular admin permissions will be ignored.
+              proposal_custom_fields_translations: "Štítky, text nápovědy, zástupné symboly a výchozí hodnoty mohou používat vlastní překlady aplikace. \nK tomu použijte místo doslovného řetězce klíč i18n (musí obsahovat alespoň jednu tečku).\nNapříklad:\n  \"activemodel.attributes.proposal.title\" místo \"Title\".\n  \"activemodel.attributes.proposal.address\" místo \"Address\".\nNebo použijte vlastní klíče v kombinaci s dalšími nástroji pro definici překladů (např.: pomocí modulu Term Customizer):\n \\ \"myapp.custom_fields.bio\" místo \"Biography\""
+              scoped_admins: Povýšení běžného uživatele na administrátora, který může spravovat pouze určité části veřejného webu (k tomu použijte editor omezení). Všimněte si, že uživatelé, kteří již mají oprávnění běžného správce, budou ignorováni.
               scoped_styles: Vytvořte vlastní CSS aplikovaný pouze na určitých částech veřejného webu (použijte pro to editor omezení)
               scoped_styles_variables: 'Můžete použít následující CSS proměnné pro nastavené barvy organizace:'
               use_markdown_editor: Toto nahradí WYSIWYG editor, místo toho použijte Markdown editor. Text bude vykreslen jako HTML na veřejných stránkách (text v databázi bude uložen jako text markdown)
           form_admins:
-            new: Add a new "Scoped Admins" group
-            remove: Remove this "Scoped Admins" group
-            sure_to_remove: Are you sure you want to destroy this "Scoped Admins" group?
+            new: Přidání nové skupiny "Škálovaní administrátoři"
+            remove: Odstranit tuto skupinu "Škálovaní administrátoři""
+            sure_to_remove: Opravdu chcete zničit tuto skupinu "Škálovaní administrátoři"?
           form_proposal_custom_fields:
             new: Přidat nové pole "vlastní pole"
             remove: Odstranit toto "vlastní pole"
@@ -144,8 +146,8 @@ cs:
             new: Přidat nový CSS box
             remove: Odstranit tento CSS box
             sure_to_remove: Opravdu chcete zničit tento CSS box?
-          none: "⛔ Never! - Deactivate any other constraint"
-          process_groups: Process groups
+          none: "⛔ Nikdy! - Deaktivujte jiná omezení"
+          process_groups: Skupiny procesů
           rich_text_editor_in_public_views: 'POZNÁMKA: "Kompletní textový editor pro účastníky" je povolen, tato možnost nebude využita. Pro povolení obrázků v Návrzích používejte místo toho hacky editoru.'
           show:
             title: Vylepšení pro %{setting}
@@ -175,7 +177,7 @@ cs:
             error: Chyba při aktualizaci případu podmínky
             success: Případ stavu byl úspěšně aktualizován
         menu:
-          admins: Scoped Admins
+          admins: Škálovaní administrátoři
           checks: Systémová kompatibilita
           editors: Hack editoru
           livechat: Live Chat
@@ -246,6 +248,10 @@ cs:
           title: Nadpis
           truncate: Maximum znaků pro popisy vyskakovacích oken
       credits: Vylepšení Decidim %{version} · Vyrobeno s ♥ od Platoniq
+      custom_fields:
+        errors:
+          invalid_fields: Obsah nemohl být analyzován, ale byl přiřazen do pole '%{field}'
+          invalid_xml: 'Obsah se nepodařilo analyzovat: DL/DD prvky nebyly v XML nalezeny'
       editor_images:
         create:
           error: Chyba při nahrávání obrázku!

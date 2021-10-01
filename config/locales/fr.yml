@@ -88,9 +88,11 @@ fr:
             head_tags: '"Awesome tags" (balises) inclus entre les balises <head>'
             title: Compatibilité système
         config:
+          caution: 'NOTE: This feature heavily modifies some default behaviours that might lead to unexpected results. Use it with caution!'
           constraints:
             add_condition: Ajouter une contrainte d'application
             always: Toujours
+            cannot_be_destroyed: Sorry, this cannot be deleted. This configuration needs at least one constraint.
             delete: Supprimer
             edit: Modifier
             title: 'Applicable uniquement dans ces cas:'
@@ -112,7 +114,6 @@ fr:
           destroy_scoped_style:
             error: Erreur lors de la suppression de la boîte CSS! %{error}
             success: Boîte CSS %{key} supprimée avec succès
-          experimental: Fonctionnalités expérimentales
           form:
             errors:
               incorrect_css: 'CSS in box #%{key} is invalid'
@@ -128,6 +129,7 @@ fr:
               intergram_config: 'Invitez le bot <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram</a> dans votre groupe ou commencez une conversation avec lui directement. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               proposal_custom_fields: Create custom proposal fields that applies only in certain parts of the public web (use the restrictions editor for that)
               proposal_custom_fields_example: Data is stored in a XML object using compatible HTML attributes (dl,dt,dd elements) replacing the "body" in a normal proposal.
+              proposal_custom_fields_translations: "Labels, help text, placeholders and default values can use your application custom translations. \nFor that, instead of using a string literal, use the i18n key (it must containt at least one dot).\nFor instance:\n  \"activemodel.attributes.proposal.title\" instead of \"Title\"\n  \"activemodel.attributes.proposal.address\" instead of \"Address\"\nOr use your own keys in combination with other tools to define translations (eg: using the module Term Customizer):\n \\ \"myapp.custom_fields.bio\" instead of \"Biography\""
               scoped_admins: Promote regular user to admins that can only administrate certain parts of the public web (use the restrictions editor for that). Note that users who already have regular admin permissions will be ignored.
               scoped_styles: Créer un CSS personnalisé qui s'applique uniquement à certaines parties du site web public (front-end) (utilisez l'éditeur de restrictions pour cela)
               scoped_styles_variables: 'Vous pouvez utiliser les variables CSS suivantes pour les couleurs personnalisées de l''organisation :'
@@ -144,7 +146,7 @@ fr:
             new: Ajouter une nouvelle boîte CSS
             remove: Supprimer cette boîte CSS
             sure_to_remove: Etes-vous sûr de vouloir supprimer cette boîte CSS ?
-          none: "⛔ Never! - Deactivate any other constraint"
+          none: "⛔ Jamais! - Désactive toute autre contrainte"
           process_groups: Process groups
           rich_text_editor_in_public_views: 'NOTE : "Éditeur de texte enrichi pour les participants" est activé, cette option ne s''appliquera pas. Utilisez les hacks de l''éditeur de texte à la place pour activer les images dans les propositions.'
           show:
@@ -246,6 +248,10 @@ fr:
           title: Title
           truncate: Maximum characters for popup descriptions
       credits: Décidim Awesome %{version} · Fait avec ♥ par Platoniq
+      custom_fields:
+        errors:
+          invalid_fields: Content couldn't be parsed but has been assigned to the field '%{field}'
+          invalid_xml: 'Content couldn''t be parsed: DL/DD elements not found in the XML'
       editor_images:
         create:
           error: Erreur lors de l'ajout de l'image !
