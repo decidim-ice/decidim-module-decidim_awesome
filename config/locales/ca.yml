@@ -88,9 +88,11 @@ ca:
             head_tags: Etiquetes Awesome incloses a la capçalera de l'aplicació
             title: Anàlisi de compatibilitat amb el sistema
         config:
+          caution: 'NOTA: Aquesta funció modifica en gran mesura alguns comportaments predeterminats que podrien provocar resultats inesperats. Utilitzeu-lo amb precaució!'
           constraints:
             add_condition: Afegeix una restricció
             always: Sempre
+            cannot_be_destroyed: Disculpa, però això no es pot eliminar. Aquesta configuració necessita almenys una restricció.
             delete: Esborra
             edit: Edita
             title: 'S''aplica només en aquests casos:'
@@ -112,7 +114,6 @@ ca:
           destroy_scoped_style:
             error: Error en eliminar una caixa CSS! %{error}
             success: Caixa CSS %{key} eliminada correctament
-          experimental: Opcions experimentals
           form:
             errors:
               incorrect_css: 'El CSS de la caixa #%{key} no és vàlid'
@@ -128,6 +129,7 @@ ca:
               intergram_config: 'Convida a la <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> al teu grup o comença un xat amb ella directament. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               proposal_custom_fields: Crea camps personalitzats per a propostes que només s'apliquin a determinades parts de la web pública (per fer-ho, utilitza l'editor de restriccions)
               proposal_custom_fields_example: Les dades son desades en un objecte XML fent servir atributs compatibles amb HTML (elements DL, DT, DD) que reemplacen el "cos" de la proposat normal.
+              proposal_custom_fields_translations: "Les etiquetes, el text d’ajuda, placeholders i els valors predeterminats poden utilitzar les traduccions personalitzades de la vostra aplicació.\nPer a això, en lloc d'utilitzar un text literal, utilitzeu la clau i18n (ha de contenir almenys un punt).\nPer exemple:\n   \"activemodel.attributes.proposal.title\" en lloc de \"Títol\"\n   \"activemodel.attributes.proposal.address\" en lloc de \"Adreça\"\nO bé utilitzeu les vostres pròpies tecles en combinació amb altres eines per definir traduccions (per exemple, mitjançant el mòdul Personalitzador de termes):\n\\  \"myapp.custom_fields.bio\" en lloc de \"Biografia\""
               scoped_admins: Promou usuaries normals a administradores amb accés limitat a certes parts de la web pública (feu servir l'editor de restriccions per això). Noteu que afegir usuaries que ja tenen permisos d'administració no té cap efecte.
               scoped_styles: Crea CSS personalitzats que només s'apliquin a determinades parts de la web pública (per fer-ho, utilitza l'editor de restriccions)
               scoped_styles_variables: 'Pots fer servir les següents variables CSS pels colors personalitzats de l''organització:'
@@ -246,6 +248,10 @@ ca:
           title: Títol
           truncate: Nombre màxim de caràcters per les descripcions emergents
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
+      custom_fields:
+        errors:
+          invalid_fields: No s'ha pogut analitzar el contingut però s'ha assignat al camp '%{field}'
+          invalid_xml: 'No s''ha pogut analitzar el contingut: no s''han trobat els elements DL/DD a l''XML'
       editor_images:
         create:
           error: Error en pujar la imatge!
