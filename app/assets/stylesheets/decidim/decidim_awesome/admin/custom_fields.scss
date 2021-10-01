@@ -5,8 +5,8 @@
   }
 }
 
-.proposal-custom-field{
-  &-editor{
+.proposal_custom_fields{
+  &_editor{
     background-color: #e0e0e0;
     padding: .5em .5em 1em;
     border-top-left-radius: 5px;
@@ -52,9 +52,11 @@
     }
   }
 
-  .constraints-editor{
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+  &_container{
+    .constraints-editor{
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
   }
 }
 

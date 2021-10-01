@@ -180,7 +180,7 @@ en:
               use_markdown_editor: This will substitute the Quill WYSIWYG editor,
                 to use a Markdown editor instead. Text will be converted and saved
                 as HTML in the database.
-          form_admins:
+          form_scoped_admins:
             new: Add a new "Scoped Admins" group
             remove: Remove this "Scoped Admins" group
             sure_to_remove: Are you sure you want to destroy this "Scoped Admins"
@@ -189,7 +189,7 @@ en:
             new: Add a new "custom fields" box
             remove: Remove this "custom fields" box
             sure_to_remove: Are you sure you want to destroy this fields box?
-          form_styles:
+          form_scoped_styles:
             new: Add a new CSS box
             remove: Remove this CSS box
             sure_to_remove: Are you sure you want to destroy this CSS box?

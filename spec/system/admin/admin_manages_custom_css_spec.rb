@@ -66,7 +66,7 @@ describe "Admin manages custom CSS", type: :system do
         expect(page).not_to have_content("body {background: red;}")
         expect(page).to have_content("body {background: blue;}")
         expect(page).to have_content("I am invalid CSS")
-        within ".scoped-style[data-key=\"foo\"] .form-error" do
+        within ".scoped_styles_container[data-key=\"foo\"] .form-error" do
           expect(page).to have_content("Error: Invalid CSS ")
         end
       end
@@ -84,7 +84,7 @@ describe "Admin manages custom CSS", type: :system do
         expect(page).to have_content("body {background: red;}")
         expect(page).to have_content("body {background: blue;}")
 
-        within ".scoped-style[data-key=\"foo\"]" do
+        within ".scoped_styles_container[data-key=\"foo\"]" do
           accept_confirm { click_link "Remove this CSS box" }
         end
 
@@ -105,7 +105,7 @@ describe "Admin manages custom CSS", type: :system do
       end
 
       it "adds a new config helper var" do
-        within ".scoped-style[data-key=\"foo\"]" do
+        within ".scoped_styles_container[data-key=\"foo\"]" do
           click_link "Add case"
         end
 
@@ -116,7 +116,7 @@ describe "Admin manages custom CSS", type: :system do
 
         sleep 2
 
-        within ".scoped-style[data-key=\"foo\"] .constraints-editor" do
+        within ".scoped_styles_container[data-key=\"foo\"] .constraints-editor" do
           expect(page).to have_content("Processes")
         end
 
@@ -133,21 +133,21 @@ describe "Admin manages custom CSS", type: :system do
         end
 
         it "removes the helper config var" do
-          within ".scoped-style[data-key=\"bar\"] .constraints-editor" do
+          within ".scoped_styles_container[data-key=\"bar\"] .constraints-editor" do
             expect(page).to have_content("Processes")
           end
 
-          within ".scoped-style[data-key=\"bar\"]" do
+          within ".scoped_styles_container[data-key=\"bar\"]" do
             click_link "Delete"
           end
 
-          within ".scoped-style[data-key=\"bar\"] .constraints-editor" do
+          within ".scoped_styles_container[data-key=\"bar\"] .constraints-editor" do
             expect(page).not_to have_content("Processes")
           end
 
           visit decidim_admin_decidim_awesome.config_path(:styles)
 
-          within ".scoped-style[data-key=\"bar\"] .constraints-editor" do
+          within ".scoped_styles_container[data-key=\"bar\"] .constraints-editor" do
             expect(page).not_to have_content("Processes")
           end
 
