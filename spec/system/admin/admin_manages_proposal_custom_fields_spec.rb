@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "decidim/decidim_awesome/test/shared_examples/box_label_editor"
 
 describe "Admin manages custom proposal fields", type: :system do
   let(:organization) { create :organization }
@@ -25,7 +26,7 @@ describe "Admin manages custom proposal fields", type: :system do
   end
 
   context "when creating a new box" do
-    it "saves the content in the hash" do
+    it "saves the content" do
       click_link 'Add a new "custom fields" box'
 
       expect(page).to have_admin_callout("created successfully")
@@ -53,7 +54,7 @@ describe "Admin manages custom proposal fields", type: :system do
       }
     end
 
-    it "updates the content in the hash" do
+    it "updates the content" do
       sleep 2
       expect(page).to have_content("Full Name")
       expect(page).to have_content("Occupation")
@@ -71,6 +72,8 @@ describe "Admin manages custom proposal fields", type: :system do
       expect(page).to have_content("Short Bio")
     end
 
+    it_behaves_like "edits box label inline", :fields, :foo
+
     context "when removing a box" do
       let(:custom_fields) do
         {
@@ -79,7 +82,7 @@ describe "Admin manages custom proposal fields", type: :system do
         }
       end
 
-      it "updates the content in the hash" do
+      it "updates the content" do
         sleep 2
         expect(page).to have_content("Full Name")
         expect(page).to have_content("Occupation")

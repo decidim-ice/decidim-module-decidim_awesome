@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "decidim/decidim_awesome/test/shared_examples/box_label_editor"
 
-describe "Admin manages custom CSS", type: :system do
+describe "Admin manages scoped styles", type: :system do
   let(:organization) { create :organization }
   let!(:admin) { create(:user, :admin, :confirmed, organization: organization) }
   let(:styles) do
@@ -34,20 +35,13 @@ describe "Admin manages custom CSS", type: :system do
     end
   end
 
-  context "when updating new box" do
-    let(:styles) do
-      {
-        "foo" => "body {background: red;}",
-        "bar" => "body {background: blue;}"
-      }
-    end
-
-    it "updates the content in the hash" do
+  shared_examples "saves content" do |key|
+    it "updates succesfully" do
       expect(page).to have_content("body {background: red;}")
       expect(page).to have_content("body {background: blue;}")
 
       sleep 1
-      page.execute_script('document.querySelector("[data-key=foo] .CodeMirror").CodeMirror.setValue("body {background: green;}");')
+      page.execute_script("document.querySelector(\"[data-key=#{key}] .CodeMirror\").CodeMirror.setValue(\"body {background: green;}\");")
       find("*[type=submit]").click
 
       expect(page).to have_admin_callout("updated successfully")
@@ -56,21 +50,32 @@ describe "Admin manages custom CSS", type: :system do
       expect(page).to have_content("body {background: blue;}")
     end
 
-    context "and there are CSS errors" do
-      it "shows error message" do
-        sleep 1
-        page.execute_script('document.querySelector("[data-key=foo] .CodeMirror").CodeMirror.setValue("I am invalid CSS");')
-        find("*[type=submit]").click
+    it "shows error message if invalid" do
+      sleep 1
+      page.execute_script("document.querySelector(\"[data-key=#{key}] .CodeMirror\").CodeMirror.setValue(\"I am invalid CSS\");")
+      find("*[type=submit]").click
 
-        expect(page).to have_admin_callout("Error updating configuration! CSS in box #foo is invalid")
-        expect(page).not_to have_content("body {background: red;}")
-        expect(page).to have_content("body {background: blue;}")
-        expect(page).to have_content("I am invalid CSS")
-        within ".scoped_styles_container[data-key=\"foo\"] .form-error" do
-          expect(page).to have_content("Error: Invalid CSS ")
-        end
+      expect(page).to have_admin_callout("Error updating configuration! CSS in box ##{key} is invalid")
+      expect(page).not_to have_content("body {background: red;}")
+      expect(page).to have_content("body {background: blue;}")
+      expect(page).to have_content("I am invalid CSS")
+      within ".scoped_styles_container[data-key=\"#{key}\"] .form-error" do
+        expect(page).to have_content("Error: Invalid CSS ")
       end
     end
+  end
+
+  context "when updating new box" do
+    let(:styles) do
+      {
+        "foo" => "body {background: red;}",
+        "bar" => "body {background: blue;}"
+      }
+    end
+
+    it_behaves_like "saves content", "foo"
+
+    it_behaves_like "edits box label inline", :css, :foo
 
     context "when removing a box" do
       let(:styles) do
@@ -83,7 +88,7 @@ describe "Admin manages custom CSS", type: :system do
       it "updates the content in the hash" do
         expect(page).to have_content("body {background: red;}")
         expect(page).to have_content("body {background: blue;}")
-
+        custom_admins
         within ".scoped_styles_container[data-key=\"foo\"]" do
           accept_confirm { click_link "Remove this CSS box" }
         end

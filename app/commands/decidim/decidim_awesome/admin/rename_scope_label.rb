@@ -8,8 +8,7 @@ module Decidim
         #
         # params - A constraint params
         def initialize(params, organization)
-          # @text = params[:text]&.camelize&.parameterize&.gsub("_", "")&.truncate(64)
-          @text = params[:text]&.parameterize&.truncate(64)
+          @text = params[:text]&.strip&.gsub(" ", "_")&.parameterize&.truncate(64)
           @scope = params[:scope]
           @key = params[:key]
           @attribute = params[:attribute]
