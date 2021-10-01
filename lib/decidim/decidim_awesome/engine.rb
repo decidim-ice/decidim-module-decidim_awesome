@@ -31,6 +31,9 @@ module Decidim
           Decidim::ErrorsController.include(AdminNotFoundRedirect)
         end
 
+        Decidim::Proposals::ApplicationHelper.include(Decidim::DecidimAwesome::Proposals::ApplicationHelperOverride)
+        Decidim::AmendmentsHelper.include(Decidim::DecidimAwesome::AmendmentsHelperOverride)
+
         # TODO: move to include overrides
         Dir.glob("#{Engine.root}/app/awesome_overrides/**/*_override.rb").each do |override|
           require_dependency override
