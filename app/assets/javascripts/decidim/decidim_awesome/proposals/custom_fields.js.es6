@@ -1,4 +1,3 @@
-// = require decidim/decidim_awesome/editors/quill_editor
 // = require decidim/decidim_awesome/forms/custom_fields_builder
 // = require form-render.min
 // = require_self
