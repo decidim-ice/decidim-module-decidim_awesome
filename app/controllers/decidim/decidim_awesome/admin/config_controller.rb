@@ -50,6 +50,22 @@ module Decidim
           end
         end
 
+        def rename_scope_label
+          respond_to do |format|
+            format.json do
+              RenameScopeLabel.call(params, current_organization) do
+                on(:ok) do |result|
+                  render json: result
+                end
+
+                on(:invalid) do |message|
+                  render json: { error: message }, status: :unprocessable_entity
+                end
+              end
+            end
+          end
+        end
+
         private
 
         def constraints_for(key)
