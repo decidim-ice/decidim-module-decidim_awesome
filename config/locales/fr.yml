@@ -146,7 +146,7 @@ fr:
             new: Ajouter une nouvelle boîte CSS
             remove: Supprimer cette boîte CSS
             sure_to_remove: Etes-vous sûr de vouloir supprimer cette boîte CSS ?
-          none: "⛔ Never! - Deactivate any other constraint"
+          none: "⛔ Jamais! - Désactive toute autre contrainte"
           process_groups: Process groups
           rich_text_editor_in_public_views: 'NOTE : "Éditeur de texte enrichi pour les participants" est activé, cette option ne s''appliquera pas. Utilisez les hacks de l''éditeur de texte à la place pour activer les images dans les propositions.'
           show:
