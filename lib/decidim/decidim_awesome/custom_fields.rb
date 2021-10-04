@@ -35,13 +35,7 @@ module Decidim
         @data = Nokogiri.XML(xml).xpath("//dl/dd")
         return if @data.present?
 
-        # Apply to the first textarea if exists
-        field = apply_to_first_textarea
-        @errors = if field
-                    I18n.t(".invalid_fields", scope: "decidim.decidim_awesome.custom_fields.errors", field: field["label"] || field["name"])
-                  else
-                    I18n.t(".invalid_xml", scope: "decidim.decidim_awesome.custom_fields.errors")
-                  end
+        apply_to_first_textarea
       end
 
       def map_fields!
@@ -57,12 +51,20 @@ module Decidim
         end
       end
 
+      # Finds the first textarea and applies non-xml compatible content
+      # when textarea has not wysiwyg assigned, strips html
       def apply_to_first_textarea
+        # quill editor might leave html traces without any user content
+        # so we won't process it if there is no text (html free) result
+        text = Nokogiri.XML(xml).text.strip
+        return if text.blank?
+
         textarea = @fields.find { |field| field["type"] == "textarea" }
+        @errors = I18n.t(".invalid_xml", scope: "decidim.decidim_awesome.custom_fields.errors")
         return unless textarea
 
-        textarea["userData"] = [textarea["subtype"] == "textarea" ? Nokogiri.XML(xml).text : xml]
-        textarea
+        textarea["userData"] = [textarea["subtype"] == "textarea" ? text : xml]
+        @errors = I18n.t(".invalid_fields", scope: "decidim.decidim_awesome.custom_fields.errors", field: textarea["label"] || textarea["name"])
       end
 
       def translate_values!
