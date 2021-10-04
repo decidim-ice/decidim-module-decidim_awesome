@@ -4,13 +4,13 @@
 // = require form-builder.min
 // = require_self
 
-$(() => {
-  let fbList = [];
+let formBuilderList = [];
 
-  $(".awesome-edit-config .proposal-custom-field-editor").each((_idx, el) => {
-    const key = $(el).closest(".proposal-custom-field").data("key");
+$(() => {
+  $(".awesome-edit-config .proposal_custom_fields_editor").each((_idx, el) => {
+    const key = $(el).closest(".proposal_custom_fields_container").data("key");
     // DOCS: https://formbuilder.online/docs
-    fbList.push({
+    formBuilderList.push({
       el: el,
       key: key,
       config: {
@@ -18,7 +18,7 @@ $(() => {
           locale: 'en-US',
           location: 'https://cdn.jsdelivr.net/npm/formbuilder-languages@1.1.0/'
         },
-        formData: $("#proposal-custom-field-spec-" +  key).val(),
+        formData: $(`input[name="config[proposal_custom_fields][${key}]"]`).val(),
         disableFields: ['button', 'file'],
         disabledActionButtons: ['save', 'data', 'clear'],
         disabledAttrs: [
@@ -66,14 +66,14 @@ $(() => {
     });
   });
 
-  if(fbList.length) {
-    $(document).trigger("formBuilder.create", [0, fbList]);
+  if(formBuilderList.length) {
+    $(document).trigger("formBuilder.create", [0, formBuilderList]);
   }
 
   $("form.awesome-edit-config").on("submit", () => {
     // e.preventDefault();
-    fbList.forEach((builder) =>{
-      $("#proposal-custom-field-spec-" +  builder.key).val(builder.instance.actions.getData("json"));
+    formBuilderList.forEach((builder) =>{
+      $(`input[name="config[proposal_custom_fields][${builder.key}]"]`).val(builder.instance.actions.getData("json"));
     });
   });
 });

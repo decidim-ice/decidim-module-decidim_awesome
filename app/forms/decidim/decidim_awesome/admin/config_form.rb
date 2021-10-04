@@ -38,6 +38,8 @@ module Decidim
 
         def css_syntax
           scoped_styles.each do |key, code|
+            next unless code
+
             SassC::Engine.new(code).render
           rescue SassC::SyntaxError => e
             errors.add(:scoped_styles, I18n.t("config.form.errors.incorrect_css", key: key, scope: "decidim.decidim_awesome.admin"))
@@ -47,6 +49,8 @@ module Decidim
 
         def json_syntax
           proposal_custom_fields.each do |key, code|
+            next unless code
+
             JSON.parse(code)
           rescue JSON::ParserError => e
             errors.add(:scoped_styles, I18n.t("config.form.errors.incorrect_json", key: key, scope: "decidim.decidim_awesome.admin"))
@@ -59,6 +63,8 @@ module Decidim
           return unless proposal_custom_fields
 
           proposal_custom_fields.transform_values! do |code|
+            next unless code
+
             json = JSON.parse(code)
             json.map! do |item|
               item["label"] = strip_tags(item["label"])

@@ -4,3 +4,4 @@
 // = require decidim/decidim_awesome/editors/tabs_focus
 // = require decidim/decidim_awesome/admin/codemirror
 // = require decidim/decidim_awesome/admin/user_picker.js
+// = require decidim/decidim_awesome/admin/auto_edit.js

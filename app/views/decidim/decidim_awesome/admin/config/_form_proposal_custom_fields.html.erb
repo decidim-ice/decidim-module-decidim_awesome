@@ -6,14 +6,11 @@
     <p class="help-text"><%= t("help.proposal_custom_fields_translations", scope: "decidim.decidim_awesome.admin.config.form") %></p>
 
     <% form.object.proposal_custom_fields&.each do |key, value| %>
-      <div class="proposal-custom-field" data-key="<%= key %>">
-        <%= label_tag :proposal_custom_fields do %>
-          <%= t("config.proposal_custom_fields", scope: "activemodel.attributes", id: key) %>
-          <%= link_to t(".remove"), decidim_admin_decidim_awesome.proposal_custom_field_path(key: key), method: :delete, class: "float-right", data: { confirm: t(".sure_to_remove") } %>
-        <% end %>
-        <p class="form-error is-visible" id="proposal-custom-field-error-<%= key %>"><%= errors[key.to_sym].join("<br>") if errors %></p>
-        <%= hidden_field_tag key, value, name: "config[proposal_custom_fields][#{key}]", id: "proposal-custom-field-spec-#{key}" %>
-        <div class="proposal-custom-field-editor" id="proposal-custom-field-editor-<%= key %>">
+      <div class="proposal_custom_fields_container" data-key="<%= key %>">
+        <%= render(partial: "decidim/decidim_awesome/admin/config/autoedit_box_label", locals: { var: "proposal_custom_fields", key: key, scope: "proposal_custom_field_#{key}", delete_path: decidim_admin_decidim_awesome.proposal_custom_field_path(key: key) }) %>
+        <p class="form-error is-visible"><%= errors[key.to_sym].join("<br>") if errors %></p>
+        <%= hidden_field_tag key, value, name: "config[proposal_custom_fields][#{key}]" %>
+        <div class="proposal_custom_fields_editor">
           <div class="loading-spinner"></div>
         </div>
         <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: "proposal_custom_field_#{key}", constraints: constraints_for("proposal_custom_field_#{key}") }) %>

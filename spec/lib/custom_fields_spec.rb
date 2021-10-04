@@ -89,6 +89,16 @@ module Decidim::DecidimAwesome
       expect(subject.errors).to be_nil
     end
 
+    context "when xml is empty" do
+      let(:xml) { "<p>\n <br></p>" }
+      let(:box2) { '[{"type":"text","required":true,"label":"Birthday","name":"date"}]' }
+
+      it "returns custom fields default values" do
+        expect(subject.to_json).to eq(bare_json)
+        expect(subject.errors).to be_nil
+      end
+    end
+
     context "when xml is malformed" do
       context "and there's no textarea type in the definition" do
         let(:box2) { '[{"type":"text","required":true,"label":"Birthday","name":"date"}]' }
