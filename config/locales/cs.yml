@@ -115,7 +115,7 @@ cs:
             error: Chyba při odstraňování CSS boxu! %{error}
             success: CSS box %{key} byl úspěšně odstraněn
           form:
-            edit_label: Rename label
+            edit_label: Přejmenovat štítek
             errors:
               incorrect_css: 'CSS v poli #%{key} je neplatné'
               incorrect_json: 'Definice JSON v poli #%{key} je neplatná'
