@@ -20,8 +20,8 @@
         "InscrybMDE": false,
         "CodeMirror": false,
         "Europa": false,
+        "DecidimAwesome": false,
         "inlineAttachment": false,
-        "FormRenderBuilder": false,
         "CustomFieldsBuilder": false
     },
     "rules": {

@@ -16,9 +16,9 @@ $(() => {
     $input = $container.find(".proposal_custom_field:first");
     if($input.length > 0) {
       // saves current data to the hidden field for the lang
-      FormRenderBuilder.storeData();
+      DecidimAwesome.FormRenderBuilder.storeData();
       // init the current language
-      FormRenderBuilder.init($input);
+      DecidimAwesome.FormRenderBuilder.init($input);
     }
   });
 });

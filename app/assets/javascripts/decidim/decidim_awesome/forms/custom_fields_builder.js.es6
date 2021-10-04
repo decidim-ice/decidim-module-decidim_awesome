@@ -1,3 +1,4 @@
+// = require form-render.min
 // = require decidim/decidim_awesome/forms/rich_text_plugin
 
 class CustomFieldsBuilder { // eslint-disable-line no-unused-vars
