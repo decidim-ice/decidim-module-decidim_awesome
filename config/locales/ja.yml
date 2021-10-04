@@ -17,9 +17,9 @@ ja:
         intergram_title_closed: 閉じられたチャットタイトル
         intergram_title_open: 開いたチャットのタイトル
         intergram_use_floating_button: チェックした場合、閉じたチャットは常にテキストの代わりにボタンになります
-        proposal_custom_fields: 'カスタム項目 #%{id}'
-        scoped_admins: 'スコープ付き管理者グループ #%{id}'
-        scoped_styles: 'カスタムスタイル #%{id}'
+        proposal_custom_fields: Custom fields %{id}
+        scoped_admins: Scoped admins group %{id}
+        scoped_styles: Custom styles %{id}
         use_markdown_editor: HTMLエディターの代わりにMarkdownエディターを使用する
       constraint:
         component_id: 以下のみに適用
@@ -115,6 +115,7 @@ ja:
             error: 'CSS box削除エラー: %{error}'
             success: CSS ボックス %{key} は正常に削除されました
           form:
+            edit_label: Rename label
             errors:
               incorrect_css: 'Box #%{key} のCSSに問題があります'
               incorrect_json: 'ボックス #%{key} 内の JSON 定義は無効です'
@@ -129,20 +130,20 @@ ja:
               intergram_config: '<a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> をグループに招待するか、直接チャットを開始します。 <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               proposal_custom_fields: 公開ウェブの特定の部分にのみ適用されるカスタム提案項目を作成します (制限されたエディタを使用してください)
               proposal_custom_fields_example: データは、互換性のある HTML 属性 (dl,dt,dd 要素) を使用した XML オブジェクトとして格納され、通常の提案の "body" を置き換えます。
-              proposal_custom_fields_translations: "Labels, help text, placeholders and default values can use your application custom translations. \nFor that, instead of using a string literal, use the i18n key (it must containt at least one dot).\nFor instance:\n  \"activemodel.attributes.proposal.title\" instead of \"Title\"\n  \"activemodel.attributes.proposal.address\" instead of \"Address\"\nOr use your own keys in combination with other tools to define translations (eg: using the module Term Customizer):\n \\ \"myapp.custom_fields.bio\" instead of \"Biography\""
+              proposal_custom_fields_translations: "Labels, help text, placeholders and default values can use your application custom translations. \nFor that, instead of using a string literal, use the i18n key (it must containt at least one dot).\nFor instance:\n- \"activemodel.attributes.proposal.title\" instead of \"Title\"\n- \"activemodel.attributes.proposal.address\" instead of \"Address\"\nOr use your own keys in combination with other tools to define translations (eg: using the module Term Customizer):\n - \"myapp.custom_fields.bio\" instead of \"Biography\""
               scoped_admins: 一般ユーザーを公開ウェブの特定の部分だけを管理できる管理者に昇格させます(制限エディターを使用してください)。 すでに通常の管理者権限を持つユーザーは無視されることに注意してください。
               scoped_styles: 公開ウェブの特定の部分にのみ適用されるカスタムCSSを作成します (制限されたエディタを使用してください)
               scoped_styles_variables: '組織の色のカスタマイズには、以下のCSS変数が使用できます。'
               use_markdown_editor: これはQuill WYSIWYGエディターを置き換えて、代わりにMarkdownエディターを使えるようにします。テキストはDB内ではHTML形式に変換・保存されます。
-          form_admins:
-            new: 新しい「スコープ付き管理者」グループを追加
-            remove: '「スコープ付き管理者」グループを削除'
-            sure_to_remove: この「スコープ付き管理者」グループを削除してもよろしいですか？
           form_proposal_custom_fields:
             new: 新しい「カスタム項目」ボックスを追加
             remove: '「カスタム項目」ボックスを削除'
             sure_to_remove: この項目ボックスを削除してもよろしいですか？
-          form_styles:
+          form_scoped_admins:
+            new: 新しい「スコープ付き管理者」グループを追加
+            remove: '「スコープ付き管理者」グループを削除'
+            sure_to_remove: この「スコープ付き管理者」グループを削除してもよろしいですか？
+          form_scoped_styles:
             new: 新規CSS boxを追加
             remove: CSS boxを削除
             sure_to_remove: このCSS boxを削除してもよろしいですか？
