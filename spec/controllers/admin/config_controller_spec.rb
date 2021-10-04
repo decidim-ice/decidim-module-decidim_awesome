@@ -158,7 +158,7 @@ module Decidim::DecidimAwesome
               expect(response).to have_http_status(:ok)
             end
 
-            context "in another organization" do
+            context "and is in another organization" do
               let!(:config) { create :awesome_config, var: "scoped_something", value: { "foo" => "something" } }
 
               it "returns invalid" do

@@ -88,7 +88,7 @@ describe "Admin manages scoped styles", type: :system do
       it "updates the content in the hash" do
         expect(page).to have_content("body {background: red;}")
         expect(page).to have_content("body {background: blue;}")
-        custom_admins
+
         within ".scoped_styles_container[data-key=\"foo\"]" do
           accept_confirm { click_link "Remove this CSS box" }
         end
