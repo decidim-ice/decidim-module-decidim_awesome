@@ -56,7 +56,7 @@ module Decidim
       def apply_to_first_textarea
         # quill editor might leave html traces without any user content
         # so we won't process it if there is no text (html free) result
-        text = Nokogiri.XML(xml).text.strip
+        text = Nokogiri.HTML(xml).html? ? Nokogiri.HTML(xml).text.strip : text.strip
         return if text.blank?
 
         textarea = @fields.find { |field| field["type"] == "textarea" }

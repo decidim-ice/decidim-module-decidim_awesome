@@ -90,12 +90,22 @@ module Decidim::DecidimAwesome
     end
 
     context "when xml is empty" do
-      let(:xml) { "<p>\n <br></p>" }
+      let(:xml) { " \n " }
       let(:box2) { '[{"type":"text","required":true,"label":"Birthday","name":"date"}]' }
 
       it "returns custom fields default values" do
         expect(subject.to_json).to eq(bare_json)
         expect(subject.errors).to be_nil
+      end
+
+      context "and is html" do
+        let(:xml) { "<p>\n <br></p>" }
+        let(:box2) { '[{"type":"text","required":true,"label":"Birthday","name":"date"}]' }
+
+        it "returns custom fields default values" do
+          expect(subject.to_json).to eq(bare_json)
+          expect(subject.errors).to be_nil
+        end
       end
     end
 
@@ -119,6 +129,16 @@ module Decidim::DecidimAwesome
         end
 
         context "and the textarea has no richtext" do
+          let(:box2) { '[{"type":"textarea","subtype":"textarea","required":true,"name":"date"}]' }
+
+          it "assigns the text without html" do
+            expect(subject.to_json).to eq(compatible_text_json)
+            expect(subject.errors).to include("Content couldn't be parsed but has been assigned to the field 'date'")
+          end
+        end
+
+        context "and text is not html" do
+          let(:xml) { "I am a former text, written before definition of custom fields in this proposal." }
           let(:box2) { '[{"type":"textarea","subtype":"textarea","required":true,"name":"date"}]' }
 
           it "assigns the text without html" do

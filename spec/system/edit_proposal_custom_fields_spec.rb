@@ -127,7 +127,7 @@ describe "Custom proposals fields", type: :system do
     context "and proposal has unformatted content" do
       let(:answer) { "I shot the Sheriff\\nbut not Deputy" }
 
-      it "has custom fields with first textarea with the content" do
+      it "has custom fields with content in the first textarea" do
         expect(page).to have_content("Title")
         expect(page).not_to have_content("Body")
         expect(page).to have_content("Full Name")
