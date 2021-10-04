@@ -19,7 +19,7 @@ cs:
         intergram_use_floating_button: Je-li zaškrtnuto, uzavřený chat je vždy tlačítko místo textu
         proposal_custom_fields: 'Uživatelská pole #%{id}'
         scoped_admins: 'Skupina Škálovaní administrátoři #%{id}'
-        scoped_styles: 'Vlastní styly číslo %{id}'
+        scoped_styles: Vlastní styly číslo %{id}
         use_markdown_editor: Použít Markdown editor namísto HTML editoru
       constraint:
         component_id: nebo konkrétně v
@@ -115,6 +115,7 @@ cs:
             error: Chyba při odstraňování CSS boxu! %{error}
             success: CSS box %{key} byl úspěšně odstraněn
           form:
+            edit_label: Rename label
             errors:
               incorrect_css: 'CSS v poli #%{key} je neplatné'
               incorrect_json: 'Definice JSON v poli #%{key} je neplatná'
@@ -129,20 +130,20 @@ cs:
               intergram_config: 'Pozvěte <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bota</a> do vaší skupiny nebo začněte chatovat přímo. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               proposal_custom_fields: Vytvoření vlastních polí návrhu, která se použijí pouze v určitých částech veřejného webu (použijte k tomu editor omezení)
               proposal_custom_fields_example: Data jsou uložena v objektu XML pomocí kompatibilních atributů HTML (prvky dl,dt,dd), které v běžném návrhu nahrazují "tělo".
-              proposal_custom_fields_translations: "Štítky, text nápovědy, zástupné symboly a výchozí hodnoty mohou používat vlastní překlady aplikace. \nK tomu použijte místo doslovného řetězce klíč i18n (musí obsahovat alespoň jednu tečku).\nNapříklad:\n  \"activemodel.attributes.proposal.title\" místo \"Title\".\n  \"activemodel.attributes.proposal.address\" místo \"Address\".\nNebo použijte vlastní klíče v kombinaci s dalšími nástroji pro definici překladů (např.: pomocí modulu Term Customizer):\n \\ \"myapp.custom_fields.bio\" místo \"Biography\""
+              proposal_custom_fields_translations: "Štítky, text nápovědy, zástupné symboly a výchozí hodnoty mohou používat vlastní překlady aplikace. \nK tomu použijte místo doslovného řetězce klíč i18n (musí obsahovat alespoň jednu tečku).\nNapříklad:\n- \"activemodel.attributes.proposal.title\" místo \"Title\".\n- \"activemodel.attributes.proposal.address\" místo \"Address\".\nNebo použijte vlastní klíče v kombinaci s dalšími nástroji pro definici překladů (např.: pomocí modulu Term Customizer):\n- \"myapp.custom_fields.bio\" místo \"Biography\""
               scoped_admins: Povýšení běžného uživatele na administrátora, který může spravovat pouze určité části veřejného webu (k tomu použijte editor omezení). Všimněte si, že uživatelé, kteří již mají oprávnění běžného správce, budou ignorováni.
               scoped_styles: Vytvořte vlastní CSS aplikovaný pouze na určitých částech veřejného webu (použijte pro to editor omezení)
               scoped_styles_variables: 'Můžete použít následující CSS proměnné pro nastavené barvy organizace:'
               use_markdown_editor: Toto nahradí WYSIWYG editor, místo toho použijte Markdown editor. Text bude vykreslen jako HTML na veřejných stránkách (text v databázi bude uložen jako text markdown)
-          form_admins:
-            new: Přidání nové skupiny "Škálovaní administrátoři"
-            remove: Odstranit tuto skupinu "Škálovaní administrátoři""
-            sure_to_remove: Opravdu chcete zničit tuto skupinu "Škálovaní administrátoři"?
           form_proposal_custom_fields:
             new: Přidat nové pole "vlastní pole"
             remove: Odstranit toto "vlastní pole"
             sure_to_remove: Opravdu chcete zničit toto pole?
-          form_styles:
+          form_scoped_admins:
+            new: Přidání nové skupiny "Škálovaní administrátoři"
+            remove: Odstranit tuto skupinu "Škálovaní administrátoři""
+            sure_to_remove: Opravdu chcete zničit tuto skupinu "Škálovaní administrátoři"?
+          form_scoped_styles:
             new: Přidat nový CSS box
             remove: Odstranit tento CSS box
             sure_to_remove: Opravdu chcete zničit tento CSS box?

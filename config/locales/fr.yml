@@ -17,9 +17,9 @@ fr:
         intergram_title_closed: Titre de la conversation fermé
         intergram_title_open: Titre de la conversation ouverte
         intergram_use_floating_button: Si coché, la conversation fermée est toujours un bouton au lieu d'un texte
-        proposal_custom_fields: 'Custom fields #%{id}'
-        scoped_admins: 'Scoped admins group #%{id}'
-        scoped_styles: 'Style personnalisés #%{id}'
+        proposal_custom_fields: Custom fields %{id}
+        scoped_admins: Scoped admins group %{id}
+        scoped_styles: Custom styles %{id}
         use_markdown_editor: Utiliser un éditeur Markdown au lieu de l'éditeur HTML
       constraint:
         component_id: ou spécifiquement dans
@@ -115,6 +115,7 @@ fr:
             error: Erreur lors de la suppression de la boîte CSS! %{error}
             success: Boîte CSS %{key} supprimée avec succès
           form:
+            edit_label: Rename label
             errors:
               incorrect_css: 'CSS in box #%{key} is invalid'
               incorrect_json: 'JSON definition in box #%{key} is invalid'
@@ -129,20 +130,20 @@ fr:
               intergram_config: 'Invitez le bot <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram</a> dans votre groupe ou commencez une conversation avec lui directement. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               proposal_custom_fields: Create custom proposal fields that applies only in certain parts of the public web (use the restrictions editor for that)
               proposal_custom_fields_example: Data is stored in a XML object using compatible HTML attributes (dl,dt,dd elements) replacing the "body" in a normal proposal.
-              proposal_custom_fields_translations: "Labels, help text, placeholders and default values can use your application custom translations. \nFor that, instead of using a string literal, use the i18n key (it must containt at least one dot).\nFor instance:\n  \"activemodel.attributes.proposal.title\" instead of \"Title\"\n  \"activemodel.attributes.proposal.address\" instead of \"Address\"\nOr use your own keys in combination with other tools to define translations (eg: using the module Term Customizer):\n \\ \"myapp.custom_fields.bio\" instead of \"Biography\""
+              proposal_custom_fields_translations: "Labels, help text, placeholders and default values can use your application custom translations. \nFor that, instead of using a string literal, use the i18n key (it must containt at least one dot).\nFor instance:\n- \"activemodel.attributes.proposal.title\" instead of \"Title\"\n- \"activemodel.attributes.proposal.address\" instead of \"Address\"\nOr use your own keys in combination with other tools to define translations (eg: using the module Term Customizer):\n - \"myapp.custom_fields.bio\" instead of \"Biography\""
               scoped_admins: Promote regular user to admins that can only administrate certain parts of the public web (use the restrictions editor for that). Note that users who already have regular admin permissions will be ignored.
               scoped_styles: Créer un CSS personnalisé qui s'applique uniquement à certaines parties du site web public (front-end) (utilisez l'éditeur de restrictions pour cela)
               scoped_styles_variables: 'Vous pouvez utiliser les variables CSS suivantes pour les couleurs personnalisées de l''organisation :'
               use_markdown_editor: Cela remplacera l'éditeur Quill WYSIWYG par un éditeur Markdown. Le texte sera affiché en HTML dans les pages publiques (le texte dans la base de données sera sauvegardé en tant que texte markdown)
-          form_admins:
-            new: Add a new "Scoped Admins" group
-            remove: Remove this "Scoped Admins" group
-            sure_to_remove: Are you sure you want to destroy this "Scoped Admins" group?
           form_proposal_custom_fields:
             new: Add a new "custom fields" box
             remove: Remove this "custom fields" box
             sure_to_remove: Are you sure you want to destroy this fields box?
-          form_styles:
+          form_scoped_admins:
+            new: Add a new "Scoped Admins" group
+            remove: Remove this "Scoped Admins" group
+            sure_to_remove: Are you sure you want to destroy this "Scoped Admins" group?
+          form_scoped_styles:
             new: Ajouter une nouvelle boîte CSS
             remove: Supprimer cette boîte CSS
             sure_to_remove: Etes-vous sûr de vouloir supprimer cette boîte CSS ?

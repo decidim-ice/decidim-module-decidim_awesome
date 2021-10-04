@@ -115,6 +115,7 @@ es:
             error: '¡Error al eliminar la caja CSS! %{error}'
             success: Caja CSS %{key} eliminada correctamente
           form:
+            edit_label: Renombrar la etiqueta
             errors:
               incorrect_css: 'El CSS de la caja #%{key} no es válido'
               incorrect_json: 'La definición JSON en la caja #%{key} no es válida'
@@ -129,20 +130,20 @@ es:
               intergram_config: 'Invita a la <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> a tu grupo o inicia un chat con ella directamente. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               proposal_custom_fields: Crea campos personalizados en las propuestas que sólo se aplican en ciertas partes de la web pública (utilizar el editor de restricciones para ello)
               proposal_custom_fields_example: Los datos se almacenan en un objeto XML utilizando atributos HTML compatibles (dl,dt,dd elements) que reemplazan el "cuerpo" en una propuesta normal.
-              proposal_custom_fields_translations: "Las etiquetas, el texto de ayuda, placeholders, y los valores predeterminados pueden utilizar las traducciones personalizadas de la aplicación.\nPara eso, en lugar de usar un texto literal, use la clave i18n (debe contener al menos un punto).\nPor ejemplo:\n  \"activemodel.attributes.proposal.title\" en lugar de \"Título\"\n  \"activemodel.attributes.proposal.address\" en lugar de \"Address\"\nO simplemente usar claves propias en combinación con otras herramientas para definir traducciones (por ejemplo, usando el módulo Term Customizer):\n\\  \"myapp.custom_fields.bio\" en lugar de \"Biografía\""
+              proposal_custom_fields_translations: "Las etiquetas, el texto de ayuda, placeholders, y los valores predeterminados pueden utilizar las traducciones personalizadas de la aplicación.\nPara eso, en lugar de usar un texto literal, use la clave i18n (debe contener al menos un punto).\nPor ejemplo:\n- \"activemodel.attributes.proposal.title\" en lugar de \"Título\"\n- \"activemodel.attributes.proposal.address\" en lugar de \"Address\"\nO simplemente usar claves propias en combinación con otras herramientas para definir traducciones (por ejemplo, usando el módulo Term Customizer):\n- \"myapp.custom_fields.bio\" en lugar de \"Biografía\""
               scoped_admins: Promueve usuarias normales a administradoras con acceso limitado a ciertas partes de la web pública (utilizar el editor de restricciones para eso). Tener en cuenta que las usuarias que ya tienen permisos regulares de administración serán ignorados.
               scoped_styles: Crea CSS personalizados que solo se apliquen en ciertas partes de la web pública (para ello, utiliza el editor de restricciones)
               scoped_styles_variables: 'Puedes utilizar las siguientes variables CSS para los colores personalizados de la organización:'
               use_markdown_editor: Esto sustituirá al editor HTML (Quill), utilice un editor de Markdown en su lugar. El texto se mostrará como HTML en las páginas públicas (en la base de datos, el texto se almacenará como markdown)
-          form_admins:
-            new: Añadir un nuevo grupo de "Administradoras acotadas"
-            remove: Eliminar este grupo de "Administradoras acotadas"
-            sure_to_remove: '¿Estás segura de que quieres eliminar este grupo de "administradoras acotadas"?'
           form_proposal_custom_fields:
             new: Añadir una nueva caja de "campos personalizados"
             remove: Eliminar esta caja de "campos personalizados"
             sure_to_remove: '¿Estás segura de que quieres eliminar esta caja de campos personalizados?'
-          form_styles:
+          form_scoped_admins:
+            new: Añadir un nuevo grupo de "Administradoras acotadas"
+            remove: Eliminar este grupo de "Administradoras acotadas"
+            sure_to_remove: '¿Estás segura de que quieres eliminar este grupo de "administradoras acotadas"?'
+          form_scoped_styles:
             new: Añadir una nueva caja CSS
             remove: Eliminar esta caja CSS
             sure_to_remove: '¿Estás segura de que quieres eliminar esta caja CSS?'
