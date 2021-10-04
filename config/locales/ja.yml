@@ -17,9 +17,9 @@ ja:
         intergram_title_closed: 閉じられたチャットタイトル
         intergram_title_open: 開いたチャットのタイトル
         intergram_use_floating_button: チェックした場合、閉じたチャットは常にテキストの代わりにボタンになります
-        proposal_custom_fields: Custom fields %{id}
-        scoped_admins: Scoped admins group %{id}
-        scoped_styles: Custom styles %{id}
+        proposal_custom_fields: 'カスタム項目 #%{id}'
+        scoped_admins: 'スコープ付き管理者グループ #%{id}'
+        scoped_styles: 'カスタムスタイル #%{id}'
         use_markdown_editor: HTMLエディターの代わりにMarkdownエディターを使用する
       constraint:
         component_id: 以下のみに適用
