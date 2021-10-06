@@ -20,7 +20,6 @@ shared_examples "edits box label inline" do |test_case, key|
     find("*[type=submit]").click
     case test_case
     when :css
-
       expect(page).to have_content("body {background: red;}")
     when :fields
       expect(page).to have_content("Occupation")
@@ -44,7 +43,8 @@ shared_examples "edits box label inline" do |test_case, key|
       sleep 2
       page.execute_script("$('.proposal_custom_fields_container[data-key=#{key}] .proposal_custom_fields_editor')[0].FormBuilder.actions.setData(#{data})")
     when :admins
-      # todo
+      sleep 1
+      page.execute_script("$('.multiusers-select:first').append(new Option('#{user.name}', #{user.id}, true, true)).trigger('change');")
     end
 
     link = find("[data-key=#{key}] a.awesome-auto-edit", match: :first)
@@ -60,15 +60,17 @@ shared_examples "edits box label inline" do |test_case, key|
     expect(page).not_to have_css("input.awesome-auto-edit")
     expect(page).to have_css("span.awesome-auto-edit[data-key=a_new_label]")
 
+    find("*[type=submit]").click
     case test_case
     when :css
-      find("*[type=submit]").click
       expect(page).to have_admin_callout("updated successfully")
       expect(page).to have_content("div {background: brown;}")
     when :fields
-      # todo
-    when :admins
       expect(page).to have_content("Short Name")
+    when :admins
+      expect(page).to have_content(user.name.to_s)
+      expect(page).to have_content(user2.name.to_s)
+      expect(page).to have_content(user3.name.to_s)
     end
     expect(page).to have_css("span.awesome-auto-edit[data-key=a_new_label]")
     expect(page).not_to have_css("span.awesome-auto-edit[data-key=#{key}]")
@@ -102,7 +104,11 @@ shared_examples "edits box label inline" do |test_case, key|
       find("*[type=submit]").click
       expect(page).to have_content("Short Name")
     when :admins
-      # todo
+      page.execute_script("$('.multiusers-select:first').append(new Option('#{user.name}', #{user.id}, true, true)).trigger('change');")
+      find("*[type=submit]").click
+      expect(page).to have_content(user.name.to_s)
+      expect(page).to have_content(user2.name.to_s)
+      expect(page).to have_content(user3.name.to_s)
     end
     expect(page).to have_css("span.awesome-auto-edit[data-key=a_new_label]")
     expect(page).not_to have_css("span.awesome-auto-edit[data-key=#{key}]")
