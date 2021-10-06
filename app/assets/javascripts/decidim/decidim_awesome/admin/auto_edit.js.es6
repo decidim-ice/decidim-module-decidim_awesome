@@ -13,7 +13,11 @@ $(() => {
     
     const key = $target.data('key');
     const attribute = $target.data('var');
-    const $hidden = $(`input[name="config[${attribute}][${key}]"]`);
+    let $hidden = $(`[name="config[${attribute}][${key}]"]`);
+    if($hidden.length == 0) {
+      $hidden = $(`[name="config[${attribute}][${key}][]"]`);
+    }
+    console.log(attribute, key, $hidden.attr("name"))
     const $container = $(`.${attribute}_container[data-key="${key}"]`);
     const $delete = $('.delete-box', $container);
 
@@ -29,12 +33,13 @@ $(() => {
       }
       $link.show();
     };
-
+    
     const rebuildHmtl = (result) => {
       rebuildLabel(result.key, result.scope);
       $constraints.replaceWith(result.html);
       // update hidden input if exists
       $hidden.attr("name", `config[${attribute}][${result.key}]`);
+      console.log($hidden.attr("name"))
       $container.data("key", result.key);
       $container.attr("data-key", result.key);
       $delete.attr("href", $delete.attr("href").replace(`key=${key}`, `key=${result.key}`))

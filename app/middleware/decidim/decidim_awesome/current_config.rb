@@ -80,7 +80,7 @@ module Decidim
           constraints = subconfig&.constraints || []
           additional_constraints = additional_get_constraints(constraints) + additional_post_constraints(constraints)
           # inject additional constraints here for further use
-          @config.inject_sub_config_constraints("scoped_admin", subconfig.var[13..], additional_constraints)
+          @config.inject_sub_config_constraints("scoped_admin", subconfig.var[13..], additional_constraints) if subconfig
           @config.valid_in_context?(constraints + additional_constraints)
         end.flatten.uniq.map(&:to_i)
       end
