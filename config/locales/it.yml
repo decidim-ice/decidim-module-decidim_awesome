@@ -17,7 +17,7 @@ it:
         intergram_title_closed: Titolo chat chiusa
         intergram_title_open: Titolo della chat aperta
         intergram_use_floating_button: Se selezionato, la chat chiusa è sempre un pulsante invece di un testo
-        scoped_admins: 'Scoped admins group #%{id}'
+        scoped_admins: 'Gruppo di amministratori con ambito #%{id}'
         scoped_styles: 'Stile personalizzato #%{id}'
         use_markdown_editor: Utilizza un editor Markdown invece dell'editor HTML
       constraint:
@@ -92,14 +92,14 @@ it:
             edit: Modifica
             title: 'Applicabile solo in questi casi:'
           create_scoped_admin:
-            error: Error creating a new Admin group! %{error}
-            success: Admin group %{key} created successfully
+            error: Errore nella creazione di un nuovo gruppo di amministratore! %{error}
+            success: Gruppo di amministrazione %{key} creato con successo
           create_scoped_style:
             error: Errore nella creazione di un nuovo box CSS! %{error}
             success: Box CSS %{key} creato correttamente
           destroy_scoped_admin:
-            error: Error removing Admin group! %{error}
-            success: Admin group %{key} removed successfully
+            error: Errore nella rimozione del gruppo Admin! %{error}
+            success: Gruppo di amministrazione %{key} rimosso con successo
           destroy_scoped_style:
             error: Errore nella rimozione del box CSS! %{error}
             success: Box CSS %{key} rimosso correttamente
@@ -116,20 +116,20 @@ it:
               drag_and_drop_supported: Quando si caricano le immagini, è supportato il Drag & Drop. Le immagini verranno caricate sul server e inserite come risorse esterne (non utilizza la codifica base64).
               intergram_about: Intergram utilizza Telegram messenger per gestire un widget di chat di supporto live incorporato nella parte inferiore della pagina.
               intergram_config: 'Invita il bot <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram</a> al tuo gruppo o avvia una chat direttamente con esso. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
-              scoped_admins: Promote regular user to admins that can only administrate certain parts of the public web (use the restrictions editor for that). Note that users who already have regular admin permissions will be ignored.
+              scoped_admins: Promuovi l'utente ad admin che può amministrare solo alcune parti pubbliche (usa l'editor delle restrizioni). Gli utenti che hanno già i permessi di amministrazione verranno ignorati.
               scoped_styles: Crea CSS personalizzato che si applica solo in alcune parti del web pubblico (usa l'apposito editor delle restrizioni)
               scoped_styles_variables: 'È possibile utilizzare le seguenti variabili CSS per i colori personalizzati dell''organizzazione:'
               use_markdown_editor: This will substitute the Quill WYSIWYG editor, use a Markdown editor instead. Text will be rendered as HTML in the public pages (text in database will be saved as markdown text)
           form_admins:
-            new: Add a new "Scoped Admins" group
-            remove: Remove this "Scoped Admins" group
-            sure_to_remove: Are you sure you want to destroy this "Scoped Admins" group?
+            new: Aggiungi un nuovo gruppo "Amministratori con ambito"
+            remove: Rimuovi questo gruppo "Amministratori con ambito"
+            sure_to_remove: Sei sicuro di voler eliminare questo gruppo "Amministratori con ambito"?
           form_styles:
             new: Aggiungi un nuovo box CSS
             remove: Rimuovi questo box CSS
             sure_to_remove: Sei sicura di voler distruggere questo box CSS?
-          none: "⛔ Never! - Deactivate any other constraint"
-          process_groups: Process groups
+          none: "⛔ Mai! - Disattiva ogni altro vincolo"
+          process_groups: Gruppi di processo
           rich_text_editor_in_public_views: 'NOTA: "Editor completo per i partecipanti" è abilitato, questa opzione non si applica. Usa gli hack degli editor per abilitare le immagini nelle proposte.'
           show:
             title: Tweaks per %{setting}
@@ -159,7 +159,7 @@ it:
             error: Errore nell'aggiornamento della condizione
             success: Condizione aggiornata con successo
         menu:
-          admins: Scoped Admins
+          admins: Amministratori con ambito
           checks: System compatibility
           editors: Editor hacks
           livechat: Chat in tempo reale
@@ -214,7 +214,7 @@ it:
           map_center: Centro della mappa (Latitudine, Longitudine)
           map_center_help: 'Usa i punti decimali (es: 41.38879, 2.15899). Lascialo vuoto affinché tutti i marcatori vengano adattati automaticamente'
           map_height: Altezza mappa (px)
-          map_settings: Map settings
+          map_settings: Impostazioni Mappa
           map_zoom: Zoom (qualsiasi numero tra 0 e 18)
           map_zoom_help: Si applica solo se è stato definito il centro della mappa
           menu_amendments: Mostra le correzioni
@@ -225,8 +225,8 @@ it:
           show_not_answered: Mostra le proposte senza risposta
           show_rejected: Mostra le proposte respinte
           show_withdrawn: Mostra le proposte ritirate
-          text_settings: Text settings
-          title: Title
+          text_settings: Impostazioni Testo
+          title: Titolo
           truncate: Numero massimo di caratteri per le descrizioni nei popup
       credits: Decidim Awesome %{version} · Fatto con ♥ da Platoniq
       editor_images:
