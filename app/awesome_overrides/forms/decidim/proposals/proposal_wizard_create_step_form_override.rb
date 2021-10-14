@@ -4,8 +4,9 @@
 Decidim::Proposals::ProposalWizardCreateStepForm.class_eval do
   clear_validators!
 
-  validates :title, :body, presence: true, etiquette: true
+  validates :title, presence: true, etiquette: true
   validates :title, length: { in: 15..150 }
+  validates :body, presence: true, etiquette: true, unless: ->(form) { form.override_validations? }
   validates :body, proposal_length: {
     minimum: 15,
     maximum: ->(record) { record.override_validations? ? 0 : record.component.settings.proposal_length }

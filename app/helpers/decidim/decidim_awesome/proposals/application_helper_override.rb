@@ -21,7 +21,7 @@ module Decidim
 
             return decidim_text_editor_for_proposal_body(form) if custom_fields.blank?
 
-            render_proposal_custom_fields_override(custom_fields, form, :body, current_locale)
+            render_proposal_custom_fields_override(custom_fields, form, :body)
           end
 
           # replace admin method to draw the editor (multi lang)
@@ -57,15 +57,16 @@ module Decidim
             safe_join [label_tabs, tabs_content]
           end
 
-          def render_proposal_custom_fields_override(fields, form, name, locale)
+          def render_proposal_custom_fields_override(fields, form, name, locale = nil)
             custom_fields = Decidim::DecidimAwesome::CustomFields.new(fields)
             custom_fields.translate!
 
-            body = if form_presenter.proposal.body.is_a?(Hash)
+            body = if form_presenter.proposal.body.is_a?(Hash) && locale
                      form_presenter.body(extras: false, all_locales: true)[locale]
                    else
                      form_presenter.body(extras: false)
                    end
+
             custom_fields.apply_xml(body) if body.present?
             form.object.errors.add(name, custom_fields.errors) if custom_fields.errors
             render partial: "decidim/decidim_awesome/custom_fields/form_render", locals: { spec: custom_fields.to_json, form: form, name: name }

@@ -123,17 +123,21 @@ class CustomFieldsBuilder { // eslint-disable-line no-unused-vars
     this.$container.find('.formbuilder-checkbox-group').each((_key, group) => {
       const inputs = $('.formbuilder-checkbox input', group);
       const data = this.spec.find((a) => a.type=="checkbox-group");
-      if(!inputs.length || !data || !data.userData) {
+      let values = data.userData;
+      if(!inputs.length || !data || !values) {
         return;
       }
-      let values = data.userData;
 
       inputs.each((_key, input) => {
         let index = values.indexOf(input.value);
         if(index >= 0) {
           values.splice(index, 1)
           // setting checked=true do not makes the browser aware that the form is valid if the field is required
-          $(input).click(); 
+          if(!input.checked)
+            $(input).click();
+        } else {
+          if(input.checked)
+            $(input).click();
         }
       });
       
