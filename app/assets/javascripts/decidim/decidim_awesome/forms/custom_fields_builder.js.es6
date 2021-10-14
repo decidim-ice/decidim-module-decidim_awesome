@@ -112,14 +112,14 @@ class CustomFieldsBuilder { // eslint-disable-line no-unused-vars
     return xml.outerHTML;
   }
 
-  /**
-  * Hack to fix required checkboxes being reset
-  * Issue: https://github.com/Platoniq/decidim-module-decidim_awesome/issues/82
-  */
   fixBuggyFields() {
     if(!this.$container) {
       return false;
     }
+    /**
+    * Hack to fix required checkboxes being reset
+    * Issue: https://github.com/Platoniq/decidim-module-decidim_awesome/issues/82
+    */
     this.$container.find('.formbuilder-checkbox-group').each((_key, group) => {
       const inputs = $('.formbuilder-checkbox input', group);
       const data = this.spec.find((a) => a.type=="checkbox-group");
@@ -128,14 +128,13 @@ class CustomFieldsBuilder { // eslint-disable-line no-unused-vars
       }
       let values = data.userData;
 
-      inputs.each(function (_key, input) {
+      inputs.each((_key, input) => {
         let index = values.indexOf(input.value);
         if(index >= 0) {
           values.splice(index, 1)
           // setting checked=true do not makes the browser aware that the form is valid if the field is required
           $(input).click(); 
         }
-
       });
       
       // Fill "other" option
@@ -154,6 +153,20 @@ class CustomFieldsBuilder { // eslint-disable-line no-unused-vars
           other_val.value = '';
         }
       }
+    });
+    /**
+    * Hack to fix required radio buttons "other" value
+    * Issue: https://github.com/Platoniq/decidim-module-decidim_awesome/issues/133
+    */
+    this.$container.find('.formbuilder-radio input.other-val').on('input', (input) => {
+      const $input = $(input.currentTarget);
+      const $group = $input.closest('.formbuilder-radio-group');
+      $group.find("input").each((_key, radio) => {
+        const name = $(radio).attr('name');
+        if(name && name.endsWith('[]')) {
+          $(radio).attr('name', name.slice(0, -2));
+        }
+      });
     });
   }
 
