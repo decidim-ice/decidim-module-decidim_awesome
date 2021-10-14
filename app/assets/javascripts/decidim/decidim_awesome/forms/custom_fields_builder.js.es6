@@ -127,11 +127,15 @@ class CustomFieldsBuilder { // eslint-disable-line no-unused-vars
         return;
       }
       let values = data.userData;
-      
+
       inputs.each(function (_key, input) {
         let index = values.indexOf(input.value);
-        input.checked = (index >= 0);
-        if(input.checked) values.splice(index, 1)
+        if(index >= 0) {
+          values.splice(index, 1)
+          // setting checked=true do not makes the browser aware that the form is valid if the field is required
+          $(input).click(); 
+        }
+
       });
       
       // Fill "other" option
