@@ -17,8 +17,9 @@ ca:
         intergram_title_closed: Títol del xat tancat
         intergram_title_open: Títol del xat obert
         intergram_use_floating_button: Si està marcat, el xat tancat és sempre un botó en lloc d'un text
+        proposal_custom_fields: 'Camps personalitzats #%{id}'
         scoped_admins: 'Grup d''administradores acotades #%{id}'
-        scoped_styles: 'Estils personalitzats #%{id}'
+        scoped_styles: 'Personalització d''estils #%{id}'
         use_markdown_editor: Fes servir l'editor Markdown en comptes de l'editor HTML
       constraint:
         component_id: o específicament a
@@ -31,6 +32,8 @@ ca:
         target: Obre a
         url: URL
         visibility: Visibilitat
+      proposal:
+        proposal_custom_fields: Camps personalitzats
   decidim:
     admin:
       menu:
@@ -85,28 +88,37 @@ ca:
             head_tags: Etiquetes Awesome incloses a la capçalera de l'aplicació
             title: Anàlisi de compatibilitat amb el sistema
         config:
+          caution: 'NOTA: Aquesta funció modifica en gran mesura alguns comportaments predeterminats que podrien provocar resultats inesperats. Utilitzeu-lo amb precaució!'
           constraints:
             add_condition: Afegeix una restricció
             always: Sempre
+            cannot_be_destroyed: Disculpa, però això no es pot eliminar. Aquesta configuració necessita almenys una restricció.
             delete: Esborra
             edit: Edita
             title: 'S''aplica només en aquests casos:'
+          create_proposal_custom_field:
+            error: Error en crear una nova caixa de "camps personalitzats"! %{error}
+            success: 'Caixa de "camps personalitzats" %{key} creada correctament'
           create_scoped_admin:
             error: Error en crear una nou grup d'administradores! %{error}
             success: Grup d'administradores %{key} creat correctament
           create_scoped_style:
             error: Error en crear una nova caixa CSS! %{error}
             success: Caixa CSS %{key} creada correctament
+          destroy_proposal_custom_field:
+            error: Error en eliminar la caixa de "camps personalitzats"! %{error}
+            success: 'Caixa de "camps personalitzats" %{key} eliminada correctament'
           destroy_scoped_admin:
             error: Error en eliminar el grup d'administradores! %{error}
             success: Grup d'administradores %{key} eliminat correctament
           destroy_scoped_style:
             error: Error en eliminar una caixa CSS! %{error}
             success: Caixa CSS %{key} eliminada correctament
-          experimental: Opcions experimentals
           form:
+            edit_label: Canviar el nom de l'etiqueta
             errors:
               incorrect_css: 'El CSS de la caixa #%{key} no és vàlid'
+              incorrect_json: 'La sintaxi JSON de la caixa #%{key} és invàlida'
             help:
               allow_images_in_full_editor: Això afegirà un botó per pujar imatges a l'editor HTML complet.
               allow_images_in_markdown_editor: Això permetrà a l'editor markdown pujar imatges amb "copiar i enganxar" o "arrastrant i deixant anar".
@@ -116,15 +128,22 @@ ca:
               drag_and_drop_supported: Quan es pugin imatges, es pot fer a través del mètode de "arrossegar i deixar anar". Les imatges seran pujades al servidor i inserides com recursos externs (no es fa servir codificació en línia base64).
               intergram_about: Intergram utilitza el Telegram Messenger per gestionar un widget de xat en viu de suport incrustat a la part inferior de la pàgina.
               intergram_config: 'Convida a la <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> al teu grup o comença un xat amb ella directament. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
+              proposal_custom_fields: Crea camps personalitzats per a propostes que només s'apliquin a determinades parts de la web pública (per fer-ho, utilitza l'editor de restriccions)
+              proposal_custom_fields_example: Les dades son desades en un objecte XML fent servir atributs compatibles amb HTML (elements DL, DT, DD) que reemplacen el "cos" de la proposat normal.
+              proposal_custom_fields_translations: "Les etiquetes, el text d’ajuda, placeholders i els valors predeterminats poden utilitzar les traduccions personalitzades de la vostra aplicació.\nPer a això, en lloc d'utilitzar un text literal, utilitzeu la clau i18n (ha de contenir almenys un punt).\nPer exemple:\n- \"activemodel.attributes.proposal.title\" en lloc de \"Títol\"\n- \"activemodel.attributes.proposal.address\" en lloc de \"Adreça\"\nO bé utilitzeu les vostres pròpies tecles en combinació amb altres eines per definir traduccions (per exemple, mitjançant el mòdul Personalitzador de termes):\n- \"myapp.custom_fields.bio\" en lloc de \"Biografia\""
               scoped_admins: Promou usuaries normals a administradores amb accés limitat a certes parts de la web pública (feu servir l'editor de restriccions per això). Noteu que afegir usuaries que ja tenen permisos d'administració no té cap efecte.
               scoped_styles: Crea CSS personalitzats que només s'apliquin a determinades parts de la web pública (per fer-ho, utilitza l'editor de restriccions)
               scoped_styles_variables: 'Pots fer servir les següents variables CSS pels colors personalitzats de l''organització:'
               use_markdown_editor: Això substituirà l'editor HTML (Quill), en el seu lloc s'utilitzarà un editor Markdown tant a l'admin com a la pàgina pública per processar el text (a la base de dades el text es desarà com a markdown)
-          form_admins:
+          form_proposal_custom_fields:
+            new: Afegeix una nova caixa de "camps personalitzats"
+            remove: Elimina aquesta caixa de "camps personalitzats"
+            sure_to_remove: Estàs segura que vols eliminar aquesta caixa de camps personalitzats?
+          form_scoped_admins:
             new: Afegir un nou grup "d'Administradores acotades"
             remove: Elimineu aquest grup "d'Administradores acotades"
             sure_to_remove: Estàs segura que vols eliminar aquest grup "d'Administradores acotades"?
-          form_styles:
+          form_scoped_styles:
             new: Afegeix una nova caixa CSS
             remove: Elimina aquesta caixa CSS
             sure_to_remove: Estàs segura que vols eliminar aquesta caixa CSS?
@@ -164,6 +183,7 @@ ca:
           editors: Modificacions als editors
           livechat: Xat en directe
           menu_hacks: Retocs al menú
+          proposal_custom_fields: Camps personalitzats per propostes
           proposals: Modificacions a propostes
           styles: Estils personalitzats
           surveys: Formularis i enquestes
@@ -229,6 +249,10 @@ ca:
           title: Títol
           truncate: Nombre màxim de caràcters per les descripcions emergents
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
+      custom_fields:
+        errors:
+          invalid_fields: No s'ha pogut analitzar el contingut però s'ha assignat al camp '%{field}'
+          invalid_xml: 'No s''ha pogut analitzar el contingut: no s''han trobat els elements DL/DD a l''XML'
       editor_images:
         create:
           error: Error en pujar la imatge!
