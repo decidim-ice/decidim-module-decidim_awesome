@@ -81,6 +81,7 @@ describe "Admin edits proposals", type: :system do
     let(:html) { "<h1 id=\"title\">title</h1><p>Paragraph<br>line 2</p>" }
 
     it "converts markdown to html before saving" do
+      sleep 1
       page.execute_script("$('input[name=\"faker-inscrybmde\"]:first')[0].InscrybMDE.value('#{text}')")
 
       click_button "Update"

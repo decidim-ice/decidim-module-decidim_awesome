@@ -7,7 +7,7 @@ on:
   pull_request:
 
 env:
-  RUBY_VERSION: 2.7.1
+  RUBY_VERSION: 2.7.4
 
 jobs:
   test-report:
@@ -50,6 +50,14 @@ jobs:
 
       - name: Setup Database
         run: bundle exec appraisal decidim-0.24 rake test_app
+
+      - name: Precompile
+        run: |
+          cd spec/decidim_dummy_app
+          bundle exec rails assets:precompile
+        env:
+          RAILS_ENV: production
+          SECRET_KEY_BASE: just-testing
 
       - name: Run RSpec
         run: SIMPLECOV=1 CODECOV=1 bundle exec appraisal decidim-0.24 rake

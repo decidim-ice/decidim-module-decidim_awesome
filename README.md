@@ -130,6 +130,17 @@ Convert any user on the platform (that is not currently an admin) to a limited s
 ![Scoped admins unauthorized](examples/scoped_admins_unauthorized.png)
 ![Scoped admins configuration](examples/scoped_admins_config.png)
 
+#### 13. Custom fields for proposals
+
+Now admins can substitute the body of a proposal with a set of form fields.
+Edition is make with a Drag & Drop interface in the admin and can (and should) be scoped to apply only to certain proposal components.
+
+Technically, the content is stored in the database as an XML document compatible with normal HTML (it uses the DL/DT/DD elements).
+
+![Custom fields screenshot](examples/custom-fields-1.png)
+![Custom fields screenshot](examples/custom-fields-2.png)
+![Custom fields screenshot](examples/custom-fields-1.gif)
+
 #### To be continued...
 
 Some things in the road-map:
@@ -154,7 +165,6 @@ bundle
 bundle exec rails decidim_decidim_awesome:install:migrations
 bundle exec rails db:migrate
 ```
-
 
 Depending on your Decidim version, choose the corresponding Awesome version to ensure compatibility:
 

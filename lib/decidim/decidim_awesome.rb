@@ -17,6 +17,7 @@ module Decidim
     autoload :SystemChecker, "decidim/decidim_awesome/system_checker"
     autoload :ContextAnalyzers, "decidim/decidim_awesome/context_analyzers"
     autoload :MenuHacker, "decidim/decidim_awesome/menu_hacker"
+    autoload :CustomFields, "decidim/decidim_awesome/custom_fields"
 
     # Boolean configuration options
     #
@@ -67,6 +68,19 @@ module Decidim
     #      some_identifier: ".wrapper { background: red; }"
     #   }
     config_accessor :scoped_styles do
+      {}
+    end
+
+    # custom fields for proposals using JSON specification:
+    # https://github.com/jsonform/jsonform/wiki
+    # Valid values uses the same structure as :scoped_styles
+    #   :disabled => false and non available, hidden from admins
+    #   Hash => hash of different JSON texts, each key will be used for the contraints
+    # Admins can create this hash dynamically but some pre-defined css boxes can be created here as:
+    #   {
+    #      some_identifier: "{ ... some definition... }"
+    #   }
+    config_accessor :proposal_custom_fields do
       {}
     end
 

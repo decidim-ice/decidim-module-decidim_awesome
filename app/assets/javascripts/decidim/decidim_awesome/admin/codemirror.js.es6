@@ -4,7 +4,7 @@
 // = require_self
 
 $(() => {
-  $(".awesome-edit-config .scoped-style textarea").each((_idx, el) => {
+  $(".awesome-edit-config .scoped_styles_container textarea").each((_idx, el) => {
     CodeMirror.fromTextArea(el, {
       lineNumbers: true,
       mode: "css",

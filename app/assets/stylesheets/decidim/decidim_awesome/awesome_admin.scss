@@ -9,6 +9,8 @@
 @import "./admin/constraints";
 @import "./admin/codemirror";
 @import "./admin/user_picker";
+@import "./admin/custom_fields";
+@import "./admin/auto_edits";
 @import "./editors/quill_editor";
 @import "./editors/markdown_editor";
 
@@ -40,6 +42,9 @@
     margin-bottom: 2em;
     border-bottom: 1px solid #999;
     padding-bottom: 1.5em;
+    .help-text {
+      white-space: pre-wrap;
+    }
   }
 
   &-form:last-child{

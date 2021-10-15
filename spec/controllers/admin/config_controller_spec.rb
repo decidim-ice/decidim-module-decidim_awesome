@@ -105,6 +105,70 @@ module Decidim::DecidimAwesome
           let(:action) { get :show, params: params }
         end
       end
+
+      describe "GET #users" do
+        let(:params) do
+          {}
+        end
+
+        it "raises unkown format" do
+          expect do
+            get :users, params: params
+          end.to raise_exception(ActionController::UnknownFormat)
+        end
+
+        context "when format is json" do
+          it "retuns a list of users" do
+            get :users, params: params, format: :json
+            expect(response).to have_http_status(:ok)
+          end
+        end
+      end
+
+      describe "POST #rename_scope_label" do
+        let(:params) do
+          {}
+        end
+
+        it "returns invalid" do
+          post :rename_scope_label, params: params
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+
+        context "when data is present" do
+          let(:params) do
+            {
+              text: "bar",
+              key: "foo",
+              scope: "scoped_something_foo",
+              attribute: "scoped_something"
+            }
+          end
+
+          it "returns invalid" do
+            post :rename_scope_label, params: params
+            expect(response).to have_http_status(:unprocessable_entity)
+          end
+
+          context "and config exists" do
+            let!(:config) { create :awesome_config, organization: organization, var: "scoped_something", value: { "foo" => "something" } }
+
+            it "retuns ok" do
+              post :rename_scope_label, params: params
+              expect(response).to have_http_status(:ok)
+            end
+
+            context "and is in another organization" do
+              let!(:config) { create :awesome_config, var: "scoped_something", value: { "foo" => "something" } }
+
+              it "returns invalid" do
+                post :rename_scope_label, params: params
+                expect(response).to have_http_status(:unprocessable_entity)
+              end
+            end
+          end
+        end
+      end
     end
   end
 end

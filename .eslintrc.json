@@ -20,7 +20,9 @@
         "InscrybMDE": false,
         "CodeMirror": false,
         "Europa": false,
-        "inlineAttachment": false
+        "DecidimAwesome": false,
+        "inlineAttachment": false,
+        "CustomFieldsBuilder": false
     },
     "rules": {
     }

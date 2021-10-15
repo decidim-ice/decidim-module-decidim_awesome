@@ -180,6 +180,28 @@ describe "Visit the admin page", type: :system do
     end
   end
 
+  context "when visiting proposal custom fields" do
+    context "when custom fields are enabled" do
+      before do
+        click_link "Proposals Custom Fields"
+      end
+
+      it_behaves_like "has menu link", "proposal_custom_fields"
+
+      it "renders the page" do
+        expect(page).to have_content(/Tweaks for proposal_custom_fields/i)
+      end
+    end
+
+    context "when custom fields are disabled" do
+      let(:disabled_features) do
+        [:proposal_custom_fields]
+      end
+
+      it_behaves_like "do not have menu link", "proposal_custom_fields"
+    end
+  end
+
   context "when menu_hacks are disabled" do
     let(:disabled_features) { [:menu] }
 

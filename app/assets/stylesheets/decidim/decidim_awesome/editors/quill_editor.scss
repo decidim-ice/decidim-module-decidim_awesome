@@ -1,7 +1,22 @@
+@import "decidim/variables";
+@import "decidim/utils/settings";
+@import "decidim/utils/mixins";
+
 .editor-loading{
-  background: url(loading.gif) no-repeat center right;
+  &::before{
+    @include spinner(25px, $medium-gray, var(--primary), 800ms);
+
+    float: right;
+    content: "";
+    vertical-align: middle;
+  }
 }
 
 .editor-container{
   overflow: hidden;
+}
+
+.editor.hashtags__container>p.help-text {
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
 }

@@ -4,6 +4,8 @@ module Decidim
   module DecidimAwesome
     module Admin
       class DestroyConstraint < Rectify::Command
+        include NeedsConstraintHelpers
+
         # Public: Initializes the command.
         #
         # constraint - A constraint constraint
@@ -18,6 +20,8 @@ module Decidim
         #
         # Returns nothing.
         def call
+          return broadcast(:invalid, I18n.t("cannot_be_destroyed", scope: "decidim.decidim_awesome.admin.config.constraints")) unless constraint_can_be_destroyed?(constraint)
+
           constraint.destroy!
           broadcast(:ok)
         rescue StandardError => e

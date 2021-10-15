@@ -17,8 +17,9 @@ eu:
         intergram_title_closed: Closed chat title
         intergram_title_open: Opened chat title
         intergram_use_floating_button: If checked, the closed chat is always a button instead of a text
-        scoped_admins: 'Scoped admins group #%{id}'
-        scoped_styles: 'Custom styles #%{id}'
+        proposal_custom_fields: Custom fields %{id}
+        scoped_admins: Scoped admins group %{id}
+        scoped_styles: Custom styles %{id}
         use_markdown_editor: Use a Markdown editor instead of the HTML editor
       constraint:
         component_id: or specifically in
@@ -31,6 +32,8 @@ eu:
         target: Opens in
         url: URL
         visibility: Visibility
+      proposal:
+        proposal_custom_fields: Custom fields
   decidim:
     admin:
       menu:
@@ -85,28 +88,37 @@ eu:
             head_tags: Awesome tags included in the application header
             title: System compatibility checks
         config:
+          caution: 'NOTE: This feature heavily modifies some default behaviours that might lead to unexpected results. Use it with caution!'
           constraints:
             add_condition: Add case
             always: Always
+            cannot_be_destroyed: Sorry, this cannot be deleted. This configuration needs at least one constraint.
             delete: Ezabatu
             edit: Editatu
             title: 'Applicable only in these cases:'
+          create_proposal_custom_field:
+            error: Error creating a new "custom field" box! %{error}
+            success: '"custom field" box %{key} created successfully'
           create_scoped_admin:
             error: Error creating a new Admin group! %{error}
             success: Admin group %{key} created successfully
           create_scoped_style:
             error: Error creating a new CSS box! %{error}
             success: CSS box %{key} created successfully
+          destroy_proposal_custom_field:
+            error: Error removing "custom field" box! %{error}
+            success: '"custom field" box %{key} removed successfully'
           destroy_scoped_admin:
             error: Error removing Admin group! %{error}
             success: Admin group %{key} removed successfully
           destroy_scoped_style:
             error: Error removing CSS box! %{error}
             success: CSS box %{key} removed successfully
-          experimental: Experimental options
           form:
+            edit_label: Rename label
             errors:
               incorrect_css: 'CSS in box #%{key} is invalid'
+              incorrect_json: 'JSON definition in box #%{key} is invalid'
             help:
               allow_images_in_full_editor: This will add an image uploader icon in all the editors WYSIWYG with the full toolbar enabled.
               allow_images_in_markdown_editor: This will allow markdown editor to upload images by copy & paste or drag & drop.
@@ -116,15 +128,22 @@ eu:
               drag_and_drop_supported: When uploading images, Drag & Drop is supported. Images will be uploaded to the server and inserted as external resources (it doesn't use base64 inline encoding).
               intergram_about: Intergram uses Telegram messenger to handle a live support chat widget embedded in the bottom of the page.
               intergram_config: 'Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> to your group or start a chat with it directly. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
+              proposal_custom_fields: Create custom proposal fields that applies only in certain parts of the public web (use the restrictions editor for that)
+              proposal_custom_fields_example: Data is stored in a XML object using compatible HTML attributes (dl,dt,dd elements) replacing the "body" in a normal proposal.
+              proposal_custom_fields_translations: "Labels, help text, placeholders and default values can use your application custom translations. \nFor that, instead of using a string literal, use the i18n key (it must containt at least one dot).\nFor instance:\n- \"activemodel.attributes.proposal.title\" instead of \"Title\"\n- \"activemodel.attributes.proposal.address\" instead of \"Address\"\nOr use your own keys in combination with other tools to define translations (eg: using the module Term Customizer):\n - \"myapp.custom_fields.bio\" instead of \"Biography\""
               scoped_admins: Promote regular user to admins that can only administrate certain parts of the public web (use the restrictions editor for that). Note that users who already have regular admin permissions will be ignored.
               scoped_styles: Create custom CSS that applies only in certain parts of the public web (use the restrictions editor for that)
               scoped_styles_variables: 'You can use the following CSS variables for organization customized colors:'
               use_markdown_editor: This will substitute the Quill WYSIWYG editor, use a Markdown editor instead. Text will be saved as HTML in the database.
-          form_admins:
+          form_proposal_custom_fields:
+            new: Add a new "custom fields" box
+            remove: Remove this "custom fields" box
+            sure_to_remove: Are you sure you want to destroy this fields box?
+          form_scoped_admins:
             new: Add a new "Scoped Admins" group
             remove: Remove this "Scoped Admins" group
             sure_to_remove: Are you sure you want to destroy this "Scoped Admins" group?
-          form_styles:
+          form_scoped_styles:
             new: Add a new CSS box
             remove: Remove this CSS box
             sure_to_remove: Are you sure you want to destroy this CSS box?
@@ -164,6 +183,7 @@ eu:
           editors: Editor hacks
           livechat: Live Chat
           menu_hacks: Menu tweaks
+          proposal_custom_fields: Proposals Custom Fields
           proposals: Proposals hacks
           styles: Custom styles
           surveys: Surveys & forms
@@ -229,6 +249,10 @@ eu:
           title: Title
           truncate: Maximum characters for popup descriptions
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
+      custom_fields:
+        errors:
+          invalid_fields: Content couldn't be parsed but has been assigned to the field '%{field}'
+          invalid_xml: 'Content couldn''t be parsed: DL/DD elements not found in the XML'
       editor_images:
         create:
           error: Error uploading image!

@@ -1,10 +1,9 @@
 PATH
   remote: .
   specs:
-    decidim-decidim_awesome (0.7.1)
+    decidim-decidim_awesome (0.7.2)
       decidim-admin (>= 0.23.0, < 0.25)
       decidim-core (>= 0.23.0, < 0.25)
-      redcarpet (~> 3.4)
       sassc (~> 2.3)
 
 GEM

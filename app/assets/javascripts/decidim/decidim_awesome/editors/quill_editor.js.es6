@@ -5,7 +5,7 @@
 // = require codemirror-4.inline-attachment.js
 // = require jquery.inline-attachment.js
 // = require europa.min.js
-// = require decidim/editor/linebreak_module
+// = require decidim/editor/linebreak_module.js
 // = require_self
 
 ((exports) => {
@@ -120,7 +120,7 @@
 
       if(addImage) {
         const t = window.DecidimAwesome.texts["drag_and_drop_image"];
-        $(container).after(`<p class="help-text" style="margin-top:-1.5rem;">${t}</p>`);
+        $(container).after(`<p class="help-text">${t}</p>`);
       }
 
       // After editor is ready, linebreak_module deletes two extraneous new lines

@@ -13,7 +13,7 @@ describe "Show proposals editor", type: :system do
   end
 
   let!(:proposal) { create(:proposal, users: [user], component: component) }
-  let(:proposal_title) { proposal.title.is_a?(Hash) ? translated(proposal.title) : proposal.title }
+  let(:proposal_title) { translated(proposal.title) }
 
   let!(:user) { create :user, :confirmed, organization: organization }
   let(:rte_enabled) { false }
@@ -83,6 +83,7 @@ describe "Show proposals editor", type: :system do
     let(:html) { "<h1 id=\"title\">title</h1><p>Paragraph<br>line 2</p>" }
 
     it "converts markdown to html before saving" do
+      sleep 1
       page.execute_script("$('input[name=\"faker-inscrybmde\"]:first')[0].InscrybMDE.value('#{text}')")
 
       click_button "Send"

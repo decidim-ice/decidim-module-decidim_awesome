@@ -50,6 +50,24 @@ module Decidim
           end
         end
 
+        def rename_scope_label
+          RenameScopeLabel.call(params, current_organization) do
+            on(:ok) do |result|
+              render json: result.merge({
+                                          html: render_to_string(partial: "decidim/decidim_awesome/admin/config/constraints",
+                                                                 locals: {
+                                                                   key: result[:scope],
+                                                                   constraints: constraints_for(result[:scope])
+                                                                 })
+                                        })
+            end
+
+            on(:invalid) do |message|
+              render json: { error: message }, status: :unprocessable_entity
+            end
+          end
+        end
+
         private
 
         def constraints_for(key)

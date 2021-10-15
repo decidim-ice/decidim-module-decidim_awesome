@@ -30,6 +30,11 @@ end %>
           <%= icon_aria_selected_link_to I18n.t("menu.styles", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:styles), "brush" %>
         </li>
       <% end %>
+      <% if config_enabled? :proposal_custom_fields %>
+        <li <% if is_active_link?(decidim_admin_decidim_awesome.config_path(:proposal_custom_fields)) %> class="is-active" <% end %>>
+          <%= icon_aria_selected_link_to I18n.t("menu.proposal_custom_fields", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:proposal_custom_fields), "layers" %>
+        </li>
+      <% end %>
       <% if config_enabled? :scoped_admins %>
         <li <% if is_active_link?(decidim_admin_decidim_awesome.config_path(:admins)) %> class="is-active" <% end %>>
           <%= icon_aria_selected_link_to I18n.t("menu.admins", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:admins), "people" %>
