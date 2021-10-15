@@ -25,6 +25,8 @@ Because Decidim is awesome and so is this!
 
 Read the [CHANGELOG](CHANGELOG.md) for Decidim compatibility.
 
+> **TL;DR people**: Jump to the [installation part](#installation)
+
 DecidimAwesome is a module that hacks Decidim in order to provide more features or improve some aspects of it.
 
 It generates and admin module that allows to choose what hacks to apply.
@@ -143,19 +145,16 @@ Technically, the content is stored in the database as an XML document compatible
 
 #### To be continued...
 
-Some things in the road-map:
+We're not done! Please check the [issues](/Platoniq/decidim-module-decidim_awesome/issues) (and participate) to see what's on our mind
 
-1. Improve the conversation in comments by allowing images
-1. Allow to create non-private surveys where the responding user is known by admins
-1. Manipulate menus (reorder, change texts, add new items)
-1. Propose something! or even better send a PR!
+Also feel free to propose something! or even better send a PR!
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-decidim_awesome", "~> 0.7.1"
+gem "decidim-decidim_awesome", "~> 0.7.2"
 ```
 
 And then execute:
@@ -174,7 +173,7 @@ Depending on your Decidim version, choose the corresponding Awesome version to e
 | 0.6.x | 0.22.x, 0.23.x |
 | 0.7.x | 0.23.x, 0.24.x |
 
-> *Heads up!* version 0.7.1 requires database migrations! Don't forget the migrations steps when updating.
+> *Heads up!* version 0.7.1 requires database migrations! Don't forget the migrations step when updating.
 
 ## Configuration
 
