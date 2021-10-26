@@ -192,6 +192,6 @@
   "dependencies": {
     "codemirror": "^5.60.0",
     "formBuilder": "^3.6.2",
-    "jquery-ui": "^1.12.1"
+    "jquery-ui": "^1.13.0"
   }
 }
