@@ -2,51 +2,51 @@ pt:
   activemodel:
     attributes:
       config:
-        allow_images_in_full_editor: Allow images in the full HTML editor
-        allow_images_in_markdown_editor: Allow images in the markdown editor
-        allow_images_in_proposals: Allow images in the proposals editor
-        allow_images_in_small_editor: Allow images in the minimal HTML editor
-        auto_save_forms: Auto save forms in local storage
-        intergram_auto_no_response: A message that is sent one minute after the user sends its first message and no response was received
-        intergram_auto_response: A message that is sent immediately after the user sends its first message
-        intergram_chat_id: Chat ID
-        intergram_color: Color of the widget
-        intergram_for_admins: Enable Intergram Chat in the admin backend
-        intergram_intro_message: First message when the user opens the chat for the first time
-        intergram_require_login: Only for logged users
-        intergram_title_closed: Closed chat title
-        intergram_title_open: Opened chat title
-        intergram_use_floating_button: If checked, the closed chat is always a button instead of a text
+        allow_images_in_full_editor: Permitir imagens no editor completo HTML
+        allow_images_in_markdown_editor: Permitir imagens no editor de markdown
+        allow_images_in_proposals: Permitir imagens no editor de propostas
+        allow_images_in_small_editor: Permitir imagens no editor mínimo HTML
+        auto_save_forms: Salvar formulários automaticamente no armazenamento local
+        intergram_auto_no_response: Uma mensagem que é enviada um minuto após o usuário enviar sua primeira mensagem e nenhuma resposta foi recebida
+        intergram_auto_response: Uma mensagem que é enviada imediatamente após o usuário enviar sua primeira mensagem
+        intergram_chat_id: ID do Chat
+        intergram_color: Cor do widget
+        intergram_for_admins: Ativar Chat do Intergram no backend do administrador
+        intergram_intro_message: Primeira mensagem quando o usuário abre o bate-papo pela primeira vez
+        intergram_require_login: Somente para usuários logados
+        intergram_title_closed: Título do chat fechado
+        intergram_title_open: Título do chat aberto
+        intergram_use_floating_button: Se marcado, o bate-papo sempre é um botão em vez de um texto
         proposal_custom_fields: Campos personalizados %{id}
         scoped_admins: Escopos de grupo de administração %{id}
         scoped_styles: Estilos personalizados %{id}
-        use_markdown_editor: Use a Markdown editor instead of the HTML editor
+        use_markdown_editor: Usar um editor Markdown em vez do editor HTML
       constraint:
-        component_id: or specifically in
-        component_manifest: Only in components of type
-        participatory_space_manifest: Apply to participatory spaces of type
-        participatory_space_slug: Only in
+        component_id: ou especificamente em
+        component_manifest: Apenas em componentes do tipo
+        participatory_space_manifest: Aplicar a espaços participativos do tipo
+        participatory_space_slug: Somente em
       menu:
-        position: Position
-        raw_label: Label
-        target: Opens in
+        position: Posição
+        raw_label: Rótulo
+        target: Aberto em
         url: URL
-        visibility: Visibility
+        visibility: Visibilidade
       proposal:
         proposal_custom_fields: Campos personalizados
   decidim:
     admin:
       menu:
-        decidim_awesome: Decidim awesome
+        decidim_awesome: Decidim incrível
     components:
       awesome_iframe:
-        name: Fullscreen Iframe
+        name: Iframe de Tela Cheia
         settings:
           global:
-            announcement: Announcement
-            iframe: Iframe code
-            iframe_help: 'Put your code as html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Content will be sanitized from other HTML tags. Ensure to use 100% as width to fill the screen.'
-            no_margins: No margins between the iframe and the rest of the page
+            announcement: Anúncio
+            iframe: Código do iframe
+            iframe_help: 'Coloque seu código como html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. O conteúdo será sanitizado de outras tags HTML. Certifique-se de usar 100% como largura para preencher a tela.'
+            no_margins: Nenhuma margem entre o iframe e o resto da página
             viewport_width: Limit maximum width to the application viewport
           step:
             announcement: Announcement
