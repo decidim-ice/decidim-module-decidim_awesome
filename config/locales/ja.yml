@@ -88,7 +88,7 @@ ja:
             head_tags: アプリケーションヘッダーに含まれる Awesome tags
             title: システム互換性チェック
         config:
-          caution: 'NOTE: This feature heavily modifies some default behaviours that might lead to unexpected results. Use it with caution!'
+          caution: '注意: この機能は、予期しない結果につながる可能性があるデフォルトの動作を大きく変更します。注意して使用してください！'
           constraints:
             add_condition: 条件を追加
             always: すべて
@@ -115,7 +115,7 @@ ja:
             error: 'CSS box削除エラー: %{error}'
             success: CSS ボックス %{key} は正常に削除されました
           form:
-            edit_label: Rename label
+            edit_label: ラベルを変更する
             errors:
               incorrect_css: 'Box #%{key} のCSSに問題があります'
               incorrect_json: 'ボックス #%{key} 内の JSON 定義は無効です'
