@@ -47,55 +47,55 @@ pt:
             iframe: Código do iframe
             iframe_help: 'Coloque seu código como html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. O conteúdo será sanitizado de outras tags HTML. Certifique-se de usar 100% como largura para preencher a tela.'
             no_margins: Nenhuma margem entre o iframe e o resto da página
-            viewport_width: Limit maximum width to the application viewport
+            viewport_width: Limitar a largura máxima à viewport da aplicação
           step:
-            announcement: Announcement
-            iframe: Iframe code
+            announcement: Anúncio
+            iframe: Código do iframe
       awesome_map:
-        name: Awesome Map
+        name: Mapa Incrível
         settings:
           global:
-            announcement: Announcement
-            collapse: Start with collapsed menu
-            map_center: Map center (Latitude, Longitude)
-            map_center_help: 'Use decimal points (ie: 41.38879, 2.15899). Leave it empty to automatically fit all the markers'
-            map_height: Map height (px)
-            map_zoom: Zoom (any number betwen 0 and 18)
-            map_zoom_help: Only applies if a map center is defined
-            menu_amendments: Show amendments
-            menu_hashtags: Show Hasthag search menu
-            menu_meetings: Show meetings
-            truncate: Maximum characters for popup descriptions
+            announcement: Anúncio
+            collapse: Iniciar com o menu recolhido
+            map_center: Centro do Mapa (Latitude, Longitude)
+            map_center_help: 'Use pontos decimais (ex: 41.38879, 2.15899). Deixe em branco para caber automaticamente em todos os marcadores'
+            map_height: Altura do mapa (px)
+            map_zoom: Zoom (qualquer número entre 0 e 18)
+            map_zoom_help: Só se aplica se um centro de mapa estiver definido
+            menu_amendments: Mostrar emendas
+            menu_hashtags: Mostrar menu de pesquisa do Hasthag
+            menu_meetings: Mostrar reuniões
+            truncate: Máximo de caracteres para descrições em popup
           step:
-            announcement: Announcement
-            show_accepted: Show accepted proposals
-            show_evaluating: Show evaluating proposals
-            show_not_answered: Show not answered proposals
-            show_rejected: Show rejected proposals
-            show_withdrawn: Show withdrawn proposals
+            announcement: Anúncio
+            show_accepted: Mostrar propostas aceitas
+            show_evaluating: Mostrar propostas de avaliação
+            show_not_answered: Mostrar propostas não respondidas
+            show_rejected: Mostrar propostas rejeitadas
+            show_withdrawn: Mostrar propostas retiradas
     decidim_awesome:
       admin:
         checks:
           index:
-            admin_head_tags: Awesome tags included in the admin application header
-            decidim-admin: From Admin module
-            decidim-core: From Core module
-            decidim-proposals: From Proposals module
-            decidim_version: Decidim version %{version}
+            admin_head_tags: Tags incríveis incluídas no cabeçalho do aplicativo admin
+            decidim-admin: Do módulo Admin
+            decidim-core: Do módulo Core
+            decidim-proposals: Do módulo de propostas
+            decidim_version: Decidim versão %{version}
             errors:
-              CSS: Head does not contain the required <link> stylesheet entries. To solve it, you can manually add it to your custom _head.html.erb
-              JavaScript: Head does not contain the required <script> Javascript entries. To solve it, you can manually add it to your custom admin/_header.html.erb
-            head_tags: Awesome tags included in the application header
-            title: System compatibility checks
+              CSS: O cabeçalho não contém as entradas de folha de estilo <link> necessárias. Para resolvê-lo, você pode adicioná-lo manualmente ao seu _head.html.erb
+              JavaScript: O cabeçalho não contém as entradas Javascript <script> necessárias. Para resolvê-lo, você pode adicioná-las manualmente ao seu custom admin/_header.html.erb
+            head_tags: Tags incríveis incluídas no cabeçalho do aplicativo
+            title: Checar compatibilidade do sistema
         config:
           caution: 'NOTA: Este recurso modifica fortemente alguns comportamentos padrão que podem levar a resultados inesperados. Use-o com cuidado!'
           constraints:
-            add_condition: Add case
-            always: Always
+            add_condition: Adicionar Caso
+            always: Sempre
             cannot_be_destroyed: Desculpe, isso não pode ser excluído. Essa configuração precisa de pelo menos uma restrição.
-            delete: Delete
-            edit: Edit
-            title: 'Applicable only in these cases:'
+            delete: Deletar
+            edit: Editar
+            title: 'Aplicável somente nestes casos:'
           create_proposal_custom_field:
             error: Erro ao criar uma nova caixa de "campo personalizado"! %{error}
             success: 'Caixa "campo personalizado" %{key} criado com sucesso'
@@ -103,8 +103,8 @@ pt:
             error: Erro ao criar um novo grupo Administrador! %{error}
             success: Grupo de administrador %{key} criado com sucesso
           create_scoped_style:
-            error: Error creating a new CSS box! %{error}
-            success: CSS box %{key} created successfully
+            error: Erro criando uma nova caixa CSS!%{error}
+            success: Caixa CSS %{key} criada com sucesso
           destroy_proposal_custom_field:
             error: Erro ao remover caixa de "campo personalizado"! %{error}
             success: 'Caixa "campo personalizado" %{key} removida com sucesso'
@@ -112,28 +112,28 @@ pt:
             error: Erro ao remover grupo de administrador! %{error}
             success: Grupo de administrador %{key} removido com sucesso
           destroy_scoped_style:
-            error: Error removing CSS box! %{error}
-            success: CSS box %{key} removed successfully
+            error: Erro ao remover caixa CSS! %{error}
+            success: Caixa CSS %{key} removida com sucesso
           form:
             edit_label: Renomear Título
             errors:
-              incorrect_css: 'CSS in box #%{key} is invalid'
+              incorrect_css: 'CSS na caixa #%{key} é inválido'
               incorrect_json: 'Definição JSON na caixa #%{key} é inválida'
             help:
-              allow_images_in_full_editor: This will add an image uploader icon in all the editors WYSIWYG with the full toolbar enabled.
-              allow_images_in_markdown_editor: This will allow markdown editor to upload images by copy & paste or drag & drop.
-              allow_images_in_proposals: This will allow to upload images in the proposals editor, available to any user
-              allow_images_in_small_editor: This will add an image uploader icon in all the editors WYSIWYG with minimal options in the toolbar enabled.
-              auto_save_forms: This will use LocalStorage to automatically save data introduced by users in surveys and other forms while they are filling it. Data will be restored in a future visit with the same browser in case the form is not submitted. If the form is submitted, data will be removed. If users remove their LocalStorage data, data won't be restored either.
-              drag_and_drop_supported: When uploading images, Drag & Drop is supported. Images will be uploaded to the server and inserted as external resources (it doesn't use base64 inline encoding).
-              intergram_about: Intergram uses Telegram messenger to handle a live support chat widget embedded in the bottom of the page.
-              intergram_config: 'Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> to your group or start a chat with it directly. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
+              allow_images_in_full_editor: Isto adicionará um ícone para carregar imagens em todos os editores WYSIWYG com a barra de ferramentas completa habilitada.
+              allow_images_in_markdown_editor: Isso permitirá que o editor de markdown carregue imagens copiando e colando ou arrastando e soltando.
+              allow_images_in_proposals: Isso permitirá fazer upload de imagens no editor de propostas, disponível para qualquer usuário
+              allow_images_in_small_editor: Isto adicionará um ícone para carregar imagens em todos os editores WYSIWYG com a barra de ferramentas mínima habilitada.
+              auto_save_forms: Isto usará o LocalStorage para salvar automaticamente dados introduzidos pelos usuários em pesquisas e outros formulários enquanto eles o preenchem. Os dados serão restaurados em uma visita futura com o mesmo navegador, caso o formulário não seja enviado. Se o formulário for enviado, os dados serão removidos. Se os usuários removerem seus dados de LocalStorage os dados também não serão restaurados.
+              drag_and_drop_supported: Ao carregar imagens, arraste e solte é suportado. As imagens serão enviadas para o servidor e inseridas como recursos externos (não usa codificação base64 inline).
+              intergram_about: O Intergram usa o Telegram messenger para lidar com uma widget de chat de suporte embutida no final da página.
+              intergram_config: 'Convide o <a href="https://web.telegram.org/#/im?p=@IntergramBot">bot @Intergram</a> para seu grupo ou inicie um chat diretamente com ele. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ informações</a>'
               proposal_custom_fields: Crie campos personalizados de proposta que se aplicam somente em certas partes da web pública (use o editor de restrições para isso)
               proposal_custom_fields_example: Os dados são armazenados em um objeto XML usando atributos HTML compatíveis (dl, dt, dd) substituindo o "corpo" em uma proposta normal.
               proposal_custom_fields_translations: "Titulos, texto de ajuda, espaços reservados e valores padrão podem usar traduções personalizadas de sua aplicação. \nPara isso, ao invés de usar uma string literal, use a chave i18n (ela deve conter pelo menos um ponto).\nPor exemplo:\n- \"activemodel.attributes.proposal.title\" em vez de \"Título\"\n- \"activemodel.attributes.proposal.address\" em vez de \"Endereço\"\nou use suas próprias chaves em combinação com outras ferramentas para definir traduções (por exemplo: usando o módulo Term Customizer):\n - \"meuapp.custom_fields.bio\" em vez de \"Biografia\""
               scoped_admins: Promover o usuário regular para administradores que só podem administrar certas partes da web pública (use o editor de restrições para isso). Note que usuários que já possuem permissões de administrador regulares serão ignorados.
-              scoped_styles: Create custom CSS that applies only in certain parts of the public web (use the restrictions editor for that)
-              scoped_styles_variables: 'You can use the following CSS variables for organization customized colors:'
+              scoped_styles: Crie CSS personalizado que se aplica somente em certas partes da web pública (use o editor de restrições para isso)
+              scoped_styles_variables: 'Você pode usar as seguintes variáveis CSS para cores personalizadas da organização:'
               use_markdown_editor: Isto irá substituir o editor do Quill WYSIWYG, para usar um editor de Markdown. O texto será convertido e salvo como HTML no banco de dados.
           form_proposal_custom_fields:
             new: Adicionar uma nova caixa "campos personalizados"
@@ -144,44 +144,44 @@ pt:
             remove: Remover este grupo "Administradores com Escopos"
             sure_to_remove: Deseja mesmo destruir esse grupo de "Administradores com Escopos"?
           form_scoped_styles:
-            new: Add a new CSS box
-            remove: Remove this CSS box
-            sure_to_remove: Are you sure you want to destroy this CSS box?
+            new: Adicionar uma nova caixa CSS
+            remove: Remover esta caixa CSS
+            sure_to_remove: Deseja mesmo destruir essa caixa de CSS?
           none: "⛔ Nunca! - Desativar qualquer outra restrição"
           process_groups: Grupos de processo
-          rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants" is enabled, this option won''t apply. Use the editors hacks instead to enable images in proposals.'
+          rich_text_editor_in_public_views: 'OBSERVAÇÃO: "Editor de texto rico para os participantes" está habilitado, esta opção não será aplicada. Use os hacks dos editores ao invés disso habilite as imagens em propostas.'
           show:
-            title: Tweaks for %{setting}
-            update: Update configuration
-          system: Everywhere except participatory spaces
+            title: Ajustes para %{setting}
+            update: Configuração atualizada
+          system: Qualquer lugar exceto salas participativas
           update:
-            error: Error updating configuration! %{error}
-            success: Configuration updated successfully
+            error: Erro ao atualizar configuração!%{error}
+            success: Configuração atualizada com sucesso
         constraints:
           create:
-            error: Error creating condition case
-            success: Condition case created successfully
+            error: Erro ao criar condição de caso
+            success: Condição de caso criada com sucesso
           destroy:
-            error: Error removing condition case
-            success: Condition case removed successfully
+            error: Erro removendo caso de condição
+            success: Caso de condição removido com sucesso
           errors:
-            not_unique: Same condition already exists
+            not_unique: A mesma condição já existe
           new:
-            cancel: Cancel
-            constraint: New condition case
-            save: Save
+            cancel: Cancelar
+            constraint: Novo caso de condição
+            save: Salvar
           show:
-            cancel: Cancel
-            constraint: Edit condition case
-            save: Save
+            cancel: Cancelar
+            constraint: Editar casos de condição
+            save: Salvar
           update:
-            error: Error updating condition case
-            success: Condition case updated successfully
+            error: Erro ao atualizar condição de caso
+            success: Condição de caso aplicadas com sucesso
         menu:
           admins: Administradores com escopo
           checks: Compatibilidade de sistema
           editors: Hacks do editor
-          livechat: Live Chat
+          livechat: Chat Ao Vivo
           menu_hacks: Ajustes do menu
           proposal_custom_fields: Campos Personalizados de Propostas
           proposals: Pacotes de Propostas
@@ -189,96 +189,96 @@ pt:
           surveys: Pesquisas e Formulários
         menu_hacks:
           create:
-            error: Error creating menu item! %{error}
-            success: Menu item created successfully
+            error: Erro ao criar item de menu! %{error}
+            success: Item de menu criado com sucesso
           destroy:
-            error: Error removing menu item! %{error}
-            success: Menu item removed successfully
+            error: Erro ao remover item do menu! %{error}
+            success: Item de menu excluído com sucesso
           edit:
-            save: Save
-            title: Edit menu item
+            save: Salvar
+            title: Editar item de menu
           form:
-            label_help: Translations aren't automatically detected, be sure to fill in all the fields!
+            label_help: Traduções não são detectadas automaticamente, certifique-se de preencher todos os campos!
             target:
-              blank: New window
-              self: Same window
+              blank: Nova janela
+              self: Na mesma janela
             visibility:
-              default: Visible
-              hidden: Always hidden
-              logged: Only visible for logged users
-              non_logged: Only visible for non-logged users
+              default: Visível
+              hidden: Sempre oculto
+              logged: Visível somente para usuários logados
+              non_logged: Visível somente para usuários deslogados
           index:
-            confirm_destroy: Are you sure to remove this customization?
-            edit: Edit
-            new: New item
-            remove: Remove addition
-            remove_hack: Remove customization
-            title: Main menu
+            confirm_destroy: Tem certeza que deseja remover esta customização?
+            edit: Editar
+            new: Novo item
+            remove: Remover adição
+            remove_hack: Remover personalização
+            title: Menu Principal
           new:
-            save: Save
-            title: New menu item
+            save: Salvar
+            title: Novo item de menu
           update:
-            error: Error updating menu item! %{error}
-            success: Menu item updated successfully
-          url_exists: The same URL is already configured, please edit that instead of creating it again.
+            error: Erro ao atualizar item de menu! %{error}
+            success: Item de menu atualizado com sucesso
+          url_exists: O mesmo URL já está configurado, por favor edite-o em vez de criá-lo novamente.
       config:
         intergram:
-          auto_no_response: It seems that no one is available to answer right now. Please tell us how we can contact you, and we will get back to you as soon as we can.
-          auto_response: Looking for the first available admin (It might take a minute)
-          intro_message: Hello! How can we help you?
-          title_closed: Click to chat!
-          title_open: Let's chat!
+          auto_no_response: Parece que ninguém está disponível para responder agora. Por favor, diga-nos como podemos entrar em contato com você, e entraremos em contato assim que pudermos.
+          auto_response: Procurando o primeiro administrador disponível (Pode demorar um minuto)
+          intro_message: Olá! Como posso te ajudar?
+          title_closed: Clique para conversar!
+          title_open: Vamos conversar!
       content_blocks:
         map:
-          collapse: Start with collapsed menu
-          map_center: Map center (Latitude, Longitude)
-          map_center_help: 'Use decimal points (ie: 41.38879, 2.15899). Leave it empty to automatically fit all the markers'
-          map_height: Map height (px)
+          collapse: Iniciar com o menu recolhido
+          map_center: Centro do Mapa (Latitude, Longitude)
+          map_center_help: 'Use pontos decimais (ex: 41.38879, 2.15899). Deixe em branco para caber automaticamente em todos os marcadores'
+          map_height: Altura do mapa (px)
           map_settings: Configurações do mapa
-          map_zoom: Zoom (any number betwen 0 and 18)
-          map_zoom_help: Only applies if a map center is defined
-          menu_amendments: Show amendments
-          menu_meetings: Show meetings
-          name: Awesome Map
-          show_accepted: Show accepted proposals
-          show_evaluating: Show evaluating proposals
-          show_not_answered: Show not answered proposals
-          show_rejected: Show rejected proposals
-          show_withdrawn: Show withdrawn proposals
+          map_zoom: Zoom (qualquer número entre 0 e 18)
+          map_zoom_help: Só se aplica se um centro de mapa estiver definido
+          menu_amendments: Mostrar emendas
+          menu_meetings: Mostrar reuniões
+          name: Mapa Incrível
+          show_accepted: Mostrar propostas aceitas
+          show_evaluating: Mostrar propostas de avaliação
+          show_not_answered: Mostrar propostas não respondidas
+          show_rejected: Mostrar propostas rejeitadas
+          show_withdrawn: Mostrar propostas retiradas
           text_settings: Configurações de texto
           title: Título
-          truncate: Maximum characters for popup descriptions
-      credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
+          truncate: Máximo de caracteres para descrições em popup
+      credits: Decidim Incrível %{version} · Feito com ♥ por Platoniq
       custom_fields:
         errors:
           invalid_fields: O conteúdo não pode ser analisado, mas foi atribuído ao campo '%{field}'
           invalid_xml: 'O conteúdo não pode ser analisado: elementos DL/DD não encontrados no XML'
       editor_images:
         create:
-          error: Error uploading image!
-          success: Image uploaded successfully
+          error: Erro ao enviar a imagem!
+          success: Imagem enviada com sucesso
       map_component:
         map:
           error:
-            unavailable: The map is unavailable. Please configure geocoding to enable this component.
+            unavailable: O mapa está indisponível. Por favor configure a geocodificação para habilitar este componente.
           show:
-            view_meeting: View meeting
-            view_proposal: View proposal
+            view_meeting: Ver reunião
+            view_proposal: Ver proposta
   layouts:
     decidim:
       admin:
         decidim_awesome:
-          title: Decidim Tweaks
+          title: Ajustes Decidim
       decidim_awesome:
         awesome_config:
-          amendments: Amendments
-          autosaved_error: LocalStorage is not supported in your browser, form cannot be saved automatically.
-          autosaved_retrieved: Data for this form has been recovered from a previous session
-          autosaved_success: Data saved in local storage
-          categories: Categories
-          drag_and_drop_image: Add images by dragging & dropping or pasting them.
+          amendments: Emendas
+          autosaved_error: O armazenamento local não é suportado no seu navegador, o formulário não pode ser salvo automaticamente.
+          autosaved_retrieved: Os dados para este formulário foram recuperados de uma sessão anterior
+          autosaved_success: Dados salvos no armazenamento local
+          categories: Categorias
+          drag_and_drop_image: Adicione imagens arrastando e soltando ou colando-as.
           hashtags: Hashtags
-          items: items
-          meetings: Meetings
-          proposals: Proposals
-          select_deselect_all: Select/deselect all
+          items: itens
+          meetings: Reuniões
+          proposals: Propostas
+          select_deselect_all: Marcar/Desmarcar todos
