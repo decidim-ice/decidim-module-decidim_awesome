@@ -128,27 +128,27 @@ pt:
               drag_and_drop_supported: When uploading images, Drag & Drop is supported. Images will be uploaded to the server and inserted as external resources (it doesn't use base64 inline encoding).
               intergram_about: Intergram uses Telegram messenger to handle a live support chat widget embedded in the bottom of the page.
               intergram_config: 'Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> to your group or start a chat with it directly. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
-              proposal_custom_fields: Create custom proposal fields that applies only in certain parts of the public web (use the restrictions editor for that)
-              proposal_custom_fields_example: Data is stored in a XML object using compatible HTML attributes (dl,dt,dd elements) replacing the "body" in a normal proposal.
-              proposal_custom_fields_translations: "Labels, help text, placeholders and default values can use your application custom translations. \nFor that, instead of using a string literal, use the i18n key (it must containt at least one dot).\nFor instance:\n- \"activemodel.attributes.proposal.title\" instead of \"Title\"\n- \"activemodel.attributes.proposal.address\" instead of \"Address\"\nOr use your own keys in combination with other tools to define translations (eg: using the module Term Customizer):\n - \"myapp.custom_fields.bio\" instead of \"Biography\""
-              scoped_admins: Promote regular user to admins that can only administrate certain parts of the public web (use the restrictions editor for that). Note that users who already have regular admin permissions will be ignored.
+              proposal_custom_fields: Crie campos personalizados de proposta que se aplicam somente em certas partes da web pública (use o editor de restrições para isso)
+              proposal_custom_fields_example: Os dados são armazenados em um objeto XML usando atributos HTML compatíveis (dl, dt, dd) substituindo o "corpo" em uma proposta normal.
+              proposal_custom_fields_translations: "Titulos, texto de ajuda, espaços reservados e valores padrão podem usar traduções personalizadas de sua aplicação. \nPara isso, ao invés de usar uma string literal, use a chave i18n (ela deve conter pelo menos um ponto).\nPor exemplo:\n- \"activemodel.attributes.proposal.title\" em vez de \"Título\"\n- \"activemodel.attributes.proposal.address\" em vez de \"Endereço\"\nou use suas próprias chaves em combinação com outras ferramentas para definir traduções (por exemplo: usando o módulo Term Customizer):\n - \"meuapp.custom_fields.bio\" em vez de \"Biografia\""
+              scoped_admins: Promover o usuário regular para administradores que só podem administrar certas partes da web pública (use o editor de restrições para isso). Note que usuários que já possuem permissões de administrador regulares serão ignorados.
               scoped_styles: Create custom CSS that applies only in certain parts of the public web (use the restrictions editor for that)
               scoped_styles_variables: 'You can use the following CSS variables for organization customized colors:'
-              use_markdown_editor: This will substitute the Quill WYSIWYG editor, to use a Markdown editor instead. Text will be converted and saved as HTML in the database.
+              use_markdown_editor: Isto irá substituir o editor do Quill WYSIWYG, para usar um editor de Markdown. O texto será convertido e salvo como HTML no banco de dados.
           form_proposal_custom_fields:
-            new: Add a new "custom fields" box
-            remove: Remove this "custom fields" box
-            sure_to_remove: Are you sure you want to destroy this fields box?
+            new: Adicionar uma nova caixa "campos personalizados"
+            remove: Remover esta caixa "campos personalizados"
+            sure_to_remove: Deseja mesmo destruir essa caixa de campos?
           form_scoped_admins:
-            new: Add a new "Scoped Admins" group
-            remove: Remove this "Scoped Admins" group
-            sure_to_remove: Are you sure you want to destroy this "Scoped Admins" group?
+            new: Adicionar um novo grupo "Administradores com Escopos"
+            remove: Remover este grupo "Administradores com Escopos"
+            sure_to_remove: Deseja mesmo destruir esse grupo de "Administradores com Escopos"?
           form_scoped_styles:
             new: Add a new CSS box
             remove: Remove this CSS box
             sure_to_remove: Are you sure you want to destroy this CSS box?
-          none: "⛔ Never! - Deactivate any other constraint"
-          process_groups: Process groups
+          none: "⛔ Nunca! - Desativar qualquer outra restrição"
+          process_groups: Grupos de processo
           rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants" is enabled, this option won''t apply. Use the editors hacks instead to enable images in proposals.'
           show:
             title: Tweaks for %{setting}
@@ -178,15 +178,15 @@ pt:
             error: Error updating condition case
             success: Condition case updated successfully
         menu:
-          admins: Scoped Admins
-          checks: System Compatibility
-          editors: Editor Hacks
+          admins: Administradores com escopo
+          checks: Compatibilidade de sistema
+          editors: Hacks do editor
           livechat: Live Chat
-          menu_hacks: Menu Tweaks
-          proposal_custom_fields: Proposals Custom Fields
-          proposals: Proposals Hacks
-          styles: Custom Styles
-          surveys: Surveys & Forms
+          menu_hacks: Ajustes do menu
+          proposal_custom_fields: Campos Personalizados de Propostas
+          proposals: Pacotes de Propostas
+          styles: Estilos Personalizados
+          surveys: Pesquisas e Formulários
         menu_hacks:
           create:
             error: Error creating menu item! %{error}
@@ -234,7 +234,7 @@ pt:
           map_center: Map center (Latitude, Longitude)
           map_center_help: 'Use decimal points (ie: 41.38879, 2.15899). Leave it empty to automatically fit all the markers'
           map_height: Map height (px)
-          map_settings: Map settings
+          map_settings: Configurações do mapa
           map_zoom: Zoom (any number betwen 0 and 18)
           map_zoom_help: Only applies if a map center is defined
           menu_amendments: Show amendments
@@ -245,14 +245,14 @@ pt:
           show_not_answered: Show not answered proposals
           show_rejected: Show rejected proposals
           show_withdrawn: Show withdrawn proposals
-          text_settings: Text settings
-          title: Title
+          text_settings: Configurações de texto
+          title: Título
           truncate: Maximum characters for popup descriptions
       credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
       custom_fields:
         errors:
-          invalid_fields: Content couldn't be parsed but has been assigned to the field '%{field}'
-          invalid_xml: 'Content couldn''t be parsed: DL/DD elements not found in the XML'
+          invalid_fields: O conteúdo não pode ser analisado, mas foi atribuído ao campo '%{field}'
+          invalid_xml: 'O conteúdo não pode ser analisado: elementos DL/DD não encontrados no XML'
       editor_images:
         create:
           error: Error uploading image!
