@@ -9,7 +9,7 @@ pt:
         auto_save_forms: Auto save forms in local storage
         intergram_auto_no_response: A message that is sent one minute after the user sends its first message and no response was received
         intergram_auto_response: A message that is sent immediately after the user sends its first message
-        intergram_chat_id: Chat ID
+        intergram_chat_id: ID do Chat
         intergram_color: Color of the widget
         intergram_for_admins: Enable Intergram Chat in the admin backend
         intergram_intro_message: First message when the user opens the chat for the first time
