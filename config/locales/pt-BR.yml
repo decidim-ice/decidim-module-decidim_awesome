@@ -1,4 +1,4 @@
-pt-BR:
+pt:
   activemodel:
     attributes:
       config:
@@ -9,7 +9,7 @@ pt-BR:
         auto_save_forms: Salvar formulários automaticamente no armazenamento local
         intergram_auto_no_response: Uma mensagem que é enviada um minuto após o usuário enviar sua primeira mensagem e nenhuma resposta foi recebida
         intergram_auto_response: Uma mensagem que é enviada imediatamente após o usuário enviar sua primeira mensagem
-        intergram_chat_id: ID do Chat
+        intergram_chat_id: Id do Chat
         intergram_color: Cor do widget
         intergram_for_admins: Ativar Chat do Intergram no backend do administrador
         intergram_intro_message: Primeira mensagem quando o usuário abre o bate-papo pela primeira vez
