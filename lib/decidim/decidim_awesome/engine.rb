@@ -41,19 +41,21 @@ module Decidim
       end
 
       initializer "decidim_awesome.view_helpers" do
-        ActionView::Base.include AwesomeHelpers
+        config.to_prepare do
+          ActionView::Base.include AwesomeHelpers
+        end
       end
 
       initializer "decidim_decidim_awesome.assets" do |app|
-        app.config.assets.precompile += if version_prefix == "v0.23"
-                                          %w(legacy_decidim_decidim_awesome_manifest.js decidim_decidim_awesome_manifest.css)
-                                        else
-                                          %w(decidim_decidim_awesome_manifest.js decidim_decidim_awesome_manifest.css)
-                                        end
-        # add to precompile any present theme asset
-        Dir.glob(Rails.root.join("app/assets/themes/*.*")).each do |path|
-          app.config.assets.precompile << path
-        end
+        # app.config.assets.precompile += if version_prefix == "v0.23"
+        #                                   %w(legacy_decidim_decidim_awesome_manifest.js decidim_decidim_awesome_manifest.css)
+        #                                 else
+        #                                   %w(decidim_decidim_awesome_manifest.js decidim_decidim_awesome_manifest.css)
+        #                                 end
+        # # add to precompile any present theme asset
+        # Dir.glob(Rails.root.join("app/assets/themes/*.*")).each do |path|
+        #   app.config.assets.precompile << path
+        # end
       end
 
       initializer "decidim_decidim_awesome.add_cells_view_paths" do
