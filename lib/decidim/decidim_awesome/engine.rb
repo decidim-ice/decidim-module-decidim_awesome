@@ -24,6 +24,10 @@ module Decidim
       # https://edgeguides.rubyonrails.org/engines.html#overriding-models-and-controllers
       # overrides
       config.to_prepare do
+        ActiveSupport.on_load :action_controller do
+          helper Decidim::LayoutHelper if respond_to?(:helper)
+        end
+
         if DecidimAwesome.config[:scoped_admins] != :disabled
           # override user's admin property
           Decidim::User.include(UserOverride)
