@@ -17,7 +17,7 @@ module Decidim
       end
 
       initializer "decidim.middleware" do |app|
-        app.config.middleware.insert_after Decidim::CurrentOrganization, Decidim::DecidimAwesome::CurrentConfig
+        app.config.middleware.insert_after Decidim::Middleware::CurrentOrganization, Decidim::DecidimAwesome::CurrentConfig
       end
 
       # Prepare a zone to create overrides
