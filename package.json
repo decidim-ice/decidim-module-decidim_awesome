@@ -190,8 +190,10 @@
     "eslint-plugin-import": "^2.22.0"
   },
   "dependencies": {
-    "codemirror": "^5.60.0",
-    "formBuilder": "^3.6.2",
-    "jquery-ui": "^1.12.1"
+    "codemirror": "^5.64.0",
+    "formBuilder": "^3.6.1",
+    "jquery-ui-sortable": "^1.0.0",
+    "jsrender": "^1.0.9",
+    "webpack-jquery-ui": "^2.0.1"
   }
 }
