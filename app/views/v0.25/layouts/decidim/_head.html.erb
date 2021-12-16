@@ -25,8 +25,8 @@
 <%= javascript_pack_tag "decidim_core", defer: false %>
 
 <%# start TODO %>
-<%# <%= stylesheet_link_tag    "decidim/decidim_awesome/awesome_application", media: "all" %1> %>
-<%# <%= stylesheet_link_tag(tenant_stylesheets, media: "all") if tenant_stylesheets %1> %>
+<%= stylesheet_pack_tag "decidim_decidim_awesome", media: "all" %>
+<%= stylesheet_pack_tag(tenant_stylesheets, media: "all") if tenant_stylesheets %>
 <%= render(partial: "layouts/decidim/decidim_awesome/custom_styles") if awesome_custom_styles %>
 <%# end TODO %>
 
@@ -39,5 +39,5 @@
 
 <%# start TODO %>
 <%= render partial: "layouts/decidim/decidim_awesome/awesome_config" %>
-<%# <%= javascript_include_tag "decidim/decidim_awesome/awesome_application" %1> %>
+<%= javascript_pack_tag "decidim_decidim_awesome" %>
 <%# end TODO %>

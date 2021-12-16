@@ -358,4 +358,4 @@ This engine is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 
 ## Credits
 
-This plugin has been developed by ![Platoniq](app/assets/images/decidim/decidim_awesome/platoniq-logo.png)
+This plugin has been developed by ![Platoniq](app/packs/images/decidim/decidim_awesome/platoniq-logo.png)

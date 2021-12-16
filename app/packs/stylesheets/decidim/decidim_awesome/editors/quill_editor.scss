@@ -1,0 +1,22 @@
+@import "stylesheets/decidim/variables";
+@import "stylesheets/decidim/utils/settings";
+@import "stylesheets/decidim/utils/mixins";
+
+.editor-loading{
+  &::before{
+    @include spinner(25px, $medium-gray, var(--primary), 800ms);
+
+    float: right;
+    content: "";
+    vertical-align: middle;
+  }
+}
+
+.editor-container{
+  overflow: hidden;
+}
+
+.editor.hashtags__container>p.help-text {
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+}
