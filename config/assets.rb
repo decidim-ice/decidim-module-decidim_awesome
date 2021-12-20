@@ -20,8 +20,6 @@ Decidim::Webpacker.register_path("#{base_path}/app/packs")
 Decidim::Webpacker.register_entrypoints(
   decidim_decidim_awesome: "#{base_path}/app/packs/entrypoints/decidim_decidim_awesome.js",
   decidim_admin_decidim_awesome: "#{base_path}/app/packs/entrypoints/decidim_admin_decidim_awesome.js",
-  legacy_decidim_decidim_awesome: "#{base_path}/app/packs/entrypoints/legacy_decidim_decidim_awesome.js",
-  legacy_decidim_admin_decidim_awesome: "#{base_path}/app/packs/entrypoints/legacy_decidim_admin_decidim_awesome.js",
   decidim_decidim_awesome_proposals_custom_fields: "#{base_path}/app/packs/entrypoints/decidim_decidim_awesome_proposals_custom_fields.js",
   decidim_decidim_awesome_admin_form_exit_warn: "#{base_path}/app/packs/entrypoints/decidim_decidim_awesome_admin_form_exit_warn.js"
 )
