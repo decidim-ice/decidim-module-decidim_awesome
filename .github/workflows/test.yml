@@ -1,4 +1,4 @@
-name: "[CI] Test 0.24"
+name: "[CI] Tests"
 
 on:
   push:
@@ -12,6 +12,9 @@ env:
 jobs:
   test-report:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        decidim_version: [ 0.23, 0.24 ]
 
     services:
       postgres:
@@ -49,7 +52,7 @@ jobs:
           bundle exec appraisal install
 
       - name: Setup Database
-        run: bundle exec appraisal decidim-0.24 rake test_app
+        run: bundle exec appraisal decidim-${{ matrix.decidim_version }} rake test_app
 
       - name: Precompile
         run: |
@@ -60,7 +63,7 @@ jobs:
           SECRET_KEY_BASE: just-testing
 
       - name: Run RSpec
-        run: SIMPLECOV=1 CODECOV=1 bundle exec appraisal decidim-0.24 rake
+        run: SIMPLECOV=1 CODECOV=1 bundle exec appraisal decidim-${{ matrix.decidim_version }} rake
 
       - uses: actions/upload-artifact@v2-preview
         if: always()
