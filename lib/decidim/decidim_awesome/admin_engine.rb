@@ -27,14 +27,6 @@ module Decidim
         root to: "config#show", var: :editors
       end
 
-      initializer "decidim_admin_awesome.assets" do |app|
-        # app.config.assets.precompile += if version_prefix == "v0.23"
-        #                                   %w(legacy_decidim_admin_decidim_awesome_manifest.js decidim_admin_decidim_awesome_manifest.css)
-        #                                 else
-        #                                   %w(decidim_admin_decidim_awesome_manifest.js decidim_admin_decidim_awesome_manifest.css)
-        #                                 end
-      end
-
       initializer "decidim_decidim_awesome.admin_mount_routes" do
         Decidim::Core::Engine.routes do
           mount Decidim::DecidimAwesome::AdminEngine, at: "/admin/decidim_awesome", as: "decidim_admin_decidim_awesome"
