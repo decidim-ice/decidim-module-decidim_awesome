@@ -17,7 +17,7 @@ def seed_db(path)
 end
 
 def copy_themes
-  FileUtils.cp_r "lib/decidim/decidim_awesome/test/themes", "spec/decidim_dummy_app/app/assets/themes", verbose: true
+  FileUtils.cp_r "lib/decidim/decidim_awesome/test/themes", "spec/decidim_dummy_app/app/packs/themes", verbose: true
 end
 
 def copy_headers
