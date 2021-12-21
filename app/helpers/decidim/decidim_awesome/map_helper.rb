@@ -98,9 +98,9 @@ module Decidim
         end
 
         unless snippets.any?(:awesome_map)
-          snippets.add(:awesome_map, stylesheet_pack_tag("decidim/decidim_awesome/awesome_map/map"))
-          snippets.add(:awesome_map, javascript_pack_tag("decidim/decidim_awesome/awesome_map/map"))
-          snippets.add(:awesome_map, javascript_pack_tag("decidim/decidim_awesome/awesome_map/load_map"))
+          snippets.add(:awesome_map, javascript_pack_tag("decidim_decidim_awesome_map"))
+          snippets.add(:awesome_map, javascript_pack_tag("decidim_decidim_awesome_load_map"))
+          snippets.add(:awesome_map, stylesheet_pack_tag("decidim_decidim_awesome_map"))
           snippets.add(:head, snippets.for(:awesome_map))
         end
 
