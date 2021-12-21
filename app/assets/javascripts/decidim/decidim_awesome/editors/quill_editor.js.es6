@@ -14,7 +14,7 @@
   // Redefines Quill editor with images
   if(exports.DecidimAwesome.allow_images_in_full_editor  || exports.DecidimAwesome.allow_images_in_small_editor || exports.DecidimAwesome.use_markdown_editor) {
 
-    const quillFormats = ["bold", "italic", "link", "underline", "header", "list", "video", "image", "alt", "width"];
+    const quillFormats = ["bold", "italic", "link", "underline", "header", "list", "video", "image", "alt", "break", "width"];
 
     const createQuillEditor = (container) => {
       const toolbar = $(container).data("toolbar");
