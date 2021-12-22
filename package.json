@@ -198,11 +198,9 @@
     "formBuilder": "^3.6.1",
     "inline-attachment": "^2.0.3",
     "inscrybmde": "^1.11.6",
-    "jquery-ui-sortable": "^1.0.0",
     "jsrender": "^1.0.9",
     "leaflet.featuregroup.subgroup": "^1.0.2",
     "query-string": "^5.1.1",
-    "select2": "*",
-    "webpack-jquery-ui": "^2.0.1"
+    "select2": "*"
   }
 }

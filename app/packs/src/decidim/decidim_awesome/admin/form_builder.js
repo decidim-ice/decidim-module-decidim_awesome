@@ -1,12 +1,8 @@
-// TODO
-// = require jquery-ui.min
-// = require form-builder.min
-// TODO
-
 import "src/decidim/decidim_awesome/editors/quill_editor"
 import "src/decidim/decidim_awesome/forms/rich_text_plugin"
-// import "jquery-ui-sortable"
-// require('webpack-jquery-ui/sortable');
+
+import "jquery-ui/ui/widgets/sortable"
+import "formBuilder"
 
 let formBuilderList = [];
 
