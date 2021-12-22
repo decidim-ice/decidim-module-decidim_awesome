@@ -1,13 +1,11 @@
-// TODO
-// = require image-upload.min
-// = require image-resize.min
-// = require inscrybmde.min.js
-// = require inline-attachment.js
-// = require codemirror-4.inline-attachment.js
-// = require jquery.inline-attachment.js
-// = require europa.min.js
-// = require decidim/editor/linebreak_module.js
-// TODO
+import "src/vendor/image-upload.min"
+import "src/vendor/image-resize.min"
+import "inscrybmde"
+import "inline-attachment/src/inline-attachment"
+import "inline-attachment/src/codemirror-4.inline-attachment"
+import "inline-attachment/src/jquery.inline-attachment"
+import "europa"
+import "src/decidim/editor/linebreak_module"
 
 ((exports) => {
   exports.DecidimAwesome = exports.DecidimAwesome || {};

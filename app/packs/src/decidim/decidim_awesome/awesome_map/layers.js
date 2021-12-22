@@ -1,9 +1,7 @@
-// TODO
-// = require leaflet.featuregroup.subgroup
-// TODO
 import "src/decidim/decidim_awesome/awesome_map/utilities"
 import "src/decidim/decidim_awesome/awesome_map/categories"
 import "src/decidim/decidim_awesome/awesome_map/hashtags"
+import "leaflet.featuregroup.subgroup"
 
 ((exports) => {
   const { collapsedMenu, options, categories } = exports.AwesomeMap;

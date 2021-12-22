@@ -1,6 +1,7 @@
-// TODO
-// = require form-storage.js
-// TODO
+import "form-storage"
+import "decode-uri-component"
+import "form-serialize"
+import "query-string-es5"
 
 $(() => {
   window.DecidimAwesome = window.DecidimAwesome || {};

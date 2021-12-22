@@ -1,5 +1,4 @@
 // TODO
-// = require codemirror
 // = require mode/css/css
 // = require keymap/sublime
 // TODO

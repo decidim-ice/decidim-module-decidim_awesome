@@ -1,6 +1,4 @@
-// TODO
-// = require select2
-// TODO
+import "select2"
 
 $(() => {
     $('select.multiusers-select').each(function() {
