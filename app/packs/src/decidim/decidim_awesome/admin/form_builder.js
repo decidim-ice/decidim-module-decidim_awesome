@@ -70,11 +70,17 @@ $(() => {
     $(document).trigger("formBuilder.create", [0, formBuilderList]);
   }
 
-  $("form.awesome-edit-config").on("submit", () => {
-    // e.preventDefault();
-    formBuilderList.forEach((builder) =>{
-      $(`input[name="config[proposal_custom_fields][${builder.key}]"]`).val(builder.instance.actions.getData("json"));
+  setTimeout(() => {
+    console.log("After a while the listener is loaded...")
+    document.querySelector("#new_config_").addEventListener("submit", () => {
+      console.log("Submit event detected")
+      // e.preventDefault();
+      formBuilderList.forEach((builder) =>{
+        $(`input[name="config[proposal_custom_fields][${builder.key}]"]`).val(builder.instance.actions.getData("json"));
+      });
     });
-  });
+  }, 3000)
+  $("#event-test").text("The text of the button changes")
+  $("#event-test").submit()
 });
 
