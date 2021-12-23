@@ -10,7 +10,7 @@ $(() => {
     $callout.hide();
     $callout.removeClass('alert success');
     $modal.find('.modal-content').html('');
-    $modal.addClass('loading').foundation('open');
+    $modal.addClass('loading');
     $modal.data("url", url);
     $modal.find('.modal-content').load(url, () => {
       $modal.removeClass('loading');
@@ -45,8 +45,4 @@ $(() => {
     // reconstruct list
     $container.replaceWith(responseText.detail[0].html);
   });
-
-  document.body.addEventListener('ajax:complete', () => {
-    $modal.foundation('close');
-  })
 });
