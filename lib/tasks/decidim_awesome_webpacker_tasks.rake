@@ -10,6 +10,31 @@ namespace :decidim_decidim_awesome do
 
       # Ovewrite JS custom config file
       copy_awesome_file_to_application "lib/decidim/webpacker/webpack/custom.js", "config/webpack/custom.js"
+      install_decidim_awesome_npm
+    end
+
+    desc "Adds Decidim Awesome dependencies in package.json"
+    task upgrade: :environment do
+      raise "Decidim gem is not installed" if decidim_path.nil?
+
+      install_decidim_awesome_npm
+    end
+
+    def install_decidim_awesome_npm
+      decidim_awesome_npm_dependencies.each do |type, packages|
+        system! "npm i --save-#{type} #{packages.join(" ")}"
+      end
+    end
+
+    def decidim_awesome_npm_dependencies
+      @decidim_awesome_npm_dependencies ||= begin
+        package_json = JSON.parse(File.read(decidim_awesome_path.join("package.json")))
+
+        {
+          prod: package_json["dependencies"].map { |package, version| "#{package}@#{version}" },
+          dev: package_json["devDependencies"].map { |package, version| "#{package}@#{version}" }
+        }.freeze
+      end
     end
 
     def decidim_awesome_path
