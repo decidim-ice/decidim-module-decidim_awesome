@@ -1,7 +1,6 @@
 # Decidim::DecidimAwesome
 
-[![[CI] Test 0.24](https://github.com/Platoniq/decidim-module-decidim_awesome/actions/workflows/test-24.yml/badge.svg)](https://github.com/Platoniq/decidim-module-decidim_awesome/actions/workflows/test-24.yml)
-[![[CI] Test 0.23](https://github.com/Platoniq/decidim-module-decidim_awesome/actions/workflows/test-23.yml/badge.svg)](https://github.com/Platoniq/decidim-module-decidim_awesome/actions/workflows/test-23.yml)
+[![[CI] Test 0.25](https://github.com/Platoniq/decidim-module-decidim_awesome/actions/workflows/test-latest.yml/badge.svg)](https://github.com/Platoniq/decidim-module-decidim_awesome/actions/workflows/test-latest.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/2dada53525dd5a944089/maintainability)](https://codeclimate.com/github/Platoniq/decidim-module-decidim_awesome/maintainability)
 [![Test Coverage](https://codecov.io/gh/Platoniq/decidim-module-decidim_awesome/branch/master/graph/badge.svg?token=TFBMCLLZJG)](undefined)
 
@@ -154,7 +153,7 @@ Also feel free to propose something! or even better send a PR!
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-decidim_awesome", "~> 0.7.2"
+gem "decidim-decidim_awesome", "~> 0.8.0"
 ```
 
 And then execute:
@@ -172,6 +171,7 @@ Depending on your Decidim version, choose the corresponding Awesome version to e
 | 0.5.x | 0.21.x, 0.22.x |
 | 0.6.x | 0.22.x, 0.23.x |
 | 0.7.x | 0.23.x, 0.24.x |
+| 0.8.x | 0.25.x |
 
 > *Heads up!* version 0.7.1 requires database migrations! Don't forget the migrations step when updating.
 
@@ -301,8 +301,8 @@ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal 
 To test a specific apprasail configured version do the following:
 
 ```
-DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal decidim-0.23 rake test_app
-DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal decidim-0.23 rspec
+DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal decidim-0.25 rake test_app
+DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal decidim-0.25 rspec
 ```
 
 Note that the database user has to have rights to create and drop a database in

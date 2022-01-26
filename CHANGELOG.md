@@ -1,6 +1,15 @@
 CHANGELOG
 =========
 
+v0.8.0
+------
+
+Compatibility:
+  - Decidim v0.25.x
+
+Features:
+  - Update to webpacker compatiblity and Decidim 0.25
+
 v0.7.2
 ------
 
