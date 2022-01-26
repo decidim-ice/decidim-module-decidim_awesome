@@ -1,6 +1,6 @@
 # Decidim::DecidimAwesome
 
-[![[CI] Test 0.25](https://github.com/Platoniq/decidim-module-decidim_awesome/actions/workflows/test-latest.yml/badge.svg)](https://github.com/Platoniq/decidim-module-decidim_awesome/actions/workflows/test-latest.yml)
+[![[CI] Test](https://github.com/Platoniq/decidim-module-decidim_awesome/actions/workflows/test.yml/badge.svg)](https://github.com/Platoniq/decidim-module-decidim_awesome/actions/workflows/test.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/2dada53525dd5a944089/maintainability)](https://codeclimate.com/github/Platoniq/decidim-module-decidim_awesome/maintainability)
 [![Test Coverage](https://codecov.io/gh/Platoniq/decidim-module-decidim_awesome/branch/master/graph/badge.svg?token=TFBMCLLZJG)](undefined)
 
