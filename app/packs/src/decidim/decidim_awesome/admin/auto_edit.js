@@ -1,5 +1,6 @@
-let formBuilderList = formBuilderList || [];
-let DecidimAwesome = DecidimAwesome || {};
+let formBuilderList = window.formBuilderList || [];
+let DecidimAwesome = window.DecidimAwesome || {};
+
 $(() => {
   $("body").on("click", "a.awesome-auto-edit", (e) => {
     e.preventDefault();
@@ -15,6 +16,7 @@ $(() => {
     const $multiple = $(`[name="config[${attribute}][${key}][]"]`);
     const $container = $(`.${attribute}_container[data-key="${key}"]`);
     const $delete = $('.delete-box', $container);
+    const token = $('meta[name="csrf-token"]').attr('content');
 
     const rebuildLabel = (text, scope) => {
       $target.text(text);
@@ -55,17 +57,25 @@ $(() => {
       // }
       if(e.code == "Enter") {
         e.preventDefault();
-        $.post(DecidimAwesome.rename_scope_label_path,
-          { key: key,
-            scope: scope,
-            attribute: attribute,
-            text: $input.val()
-          },
-          (result) => rebuildHmtl(result),
-          "json").fail((err) => {
+        $.ajax(
+          {
+            type: "POST",
+            url: DecidimAwesome.rename_scope_label_path,
+            dataType: "json",
+            headers: {
+              "X-CSRF-Token": $("meta[name=csrf-token]").attr("content")
+            },
+            data: { key: key,
+              scope: scope,
+              attribute: attribute,
+              text: $input.val()
+            }
+          })
+          .done((result) => rebuildHmtl(result))
+          .fail((err) => {
             console.error("Error saving key", key, "ERR:", err);
             rebuildLabel(key);
-          })
+          });
       }
     });
     $input.on("blur", () => {

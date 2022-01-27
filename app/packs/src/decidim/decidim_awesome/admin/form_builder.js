@@ -39,9 +39,8 @@ $(() => {
           "paragraph"
         ],
         disabledSubtypes: {
-          text: ['color'], // TODO: fix hashtag generator with this
-          // disable wysiwyg editors as they present problems
-          // TODO: create custom type to integrate decidim Quill Editor
+          text: ['color'], // default color as it generate hashtags in decidim (TODO: fix hashtag generator with this)
+          // disable default wysiwyg editors as they present problems
           textarea: ['tinymce', 'quill']
         },
       },
@@ -70,17 +69,22 @@ $(() => {
     $(document).trigger("formBuilder.create", [0, formBuilderList]);
   }
 
-  setTimeout(() => {
-    console.log("After a while the listener is loaded...")
-    document.querySelector("#new_config_").addEventListener("submit", () => {
-      console.log("Submit event detected")
-      // e.preventDefault();
-      formBuilderList.forEach((builder) =>{
-        $(`input[name="config[proposal_custom_fields][${builder.key}]"]`).val(builder.instance.actions.getData("json"));
-      });
+  $("form.awesome-edit-config").on("submit", () => {
+    // e.preventDefault();
+    formBuilderList.forEach((builder) =>{
+      $(`input[name="config[proposal_custom_fields][${builder.key}]"]`).val(builder.instance.actions.getData("json"));
     });
-  }, 3000)
-  $("#event-test").text("The text of the button changes")
-  $("#event-test").submit()
+  });
+
+  // setTimeout(() => {
+  //   console.log("After a while the listener is loaded...")
+  //   document.querySelector("#new_config_").addEventListener("submit", () => {
+  //     console.log("Submit event detected")
+  //     // e.preventDefault();
+  //     formBuilderList.forEach((builder) =>{
+  //       $(`input[name="config[proposal_custom_fields][${builder.key}]"]`).val(builder.instance.actions.getData("json"));
+  //     });
+  //   });
+  // }, 3000)
 });
 
