@@ -1,8 +1,6 @@
 import "src/decidim/decidim_awesome/editors/quill_editor"
 import "src/decidim/decidim_awesome/forms/rich_text_plugin"
-
-// import "jquery-ui/ui/widgets/sortable"
-import "formBuilder"
+import "jquery-ui/ui/widgets/sortable"
 
 let formBuilderList = [];
 
@@ -70,21 +68,9 @@ $(() => {
   }
 
   $("form.awesome-edit-config").on("submit", () => {
-    // e.preventDefault();
     formBuilderList.forEach((builder) =>{
       $(`input[name="config[proposal_custom_fields][${builder.key}]"]`).val(builder.instance.actions.getData("json"));
     });
   });
-
-  // setTimeout(() => {
-  //   console.log("After a while the listener is loaded...")
-  //   document.querySelector("#new_config_").addEventListener("submit", () => {
-  //     console.log("Submit event detected")
-  //     // e.preventDefault();
-  //     formBuilderList.forEach((builder) =>{
-  //       $(`input[name="config[proposal_custom_fields][${builder.key}]"]`).val(builder.instance.actions.getData("json"));
-  //     });
-  //   });
-  // }, 3000)
 });
 
