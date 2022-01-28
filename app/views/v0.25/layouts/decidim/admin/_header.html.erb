@@ -1,13 +1,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <%= csrf_meta_tags %>
-<%= stylesheet_pack_tag "decidim_admin", media: "all" %>
-<%= javascript_pack_tag "decidim_admin", defer: false %>
 <%= organization_colors %>
-<%= snippets.display(:head) %>
 
 <%= render partial: "layouts/decidim/decidim_awesome/awesome_config" %>
 
-<%# start TODO %>
 <%= stylesheet_pack_tag "decidim_admin_decidim_awesome", media: "all" %>
-<%= javascript_pack_tag "decidim_admin_decidim_awesome" %>
-<%# end TODO %>
+<%= javascript_pack_tag "decidim_admin_decidim_awesome", defer: false %>
+<%= javascript_pack_tag "decidim_decidim_awesome_proposals_custom_fields" if awesome_proposal_custom_fields %>
+
+<%= snippets.display(:head) %>

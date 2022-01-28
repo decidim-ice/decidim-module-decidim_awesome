@@ -12,6 +12,7 @@ $(() => {
     $modal.find('.modal-content').html('');
     $modal.addClass('loading');
     $modal.data("url", url);
+    $modal.foundation("open");
     $modal.find('.modal-content').load(url, () => {
       $modal.removeClass('loading');
     });
@@ -20,7 +21,8 @@ $(() => {
   // Custom event listener to reload the modal if needed
   document.body.addEventListener("constraint:change", (e) => {
     const vars = e.detail.map((setting) => `${setting.key}=${setting.value}`);
-    const url = $modal.data("url") + "&" + vars.join("&")
+    const url = $modal.data("url") + "&" + vars.join("&");
+    // console.log("constraint:change vars:", vars, "url:", url)
     $modal.addClass('loading');
     $modal.find('.modal-content').load(url, () => {
       $modal.removeClass('loading');
@@ -29,6 +31,7 @@ $(() => {
 
   // Rails AJAX events
   document.body.addEventListener('ajax:error', (responseText) => {
+    // console.log("ajax:error", responseText)
     const $container = $(`.constraints-editor[data-key="${responseText.detail[0].key}"]`)
     const $callout = $container.find(".callout");
     $callout.show();
@@ -37,8 +40,10 @@ $(() => {
   });
 
   document.body.addEventListener('ajax:success', (responseText) => {
+    // console.log("ajax:success", responseText)
     const $container = $(`.constraints-editor[data-key="${responseText.detail[0].key}"]`)
     const $callout = $container.find(".callout");
+    $modal.foundation("close");
     $callout.show();
     $callout.contents('p').html(responseText.detail[0].message);
     $callout.addClass('success');

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This file is located at `config/assets.rb` of your module.
 
 # Define the base path of your module. Please note that `Rails.root` may not be

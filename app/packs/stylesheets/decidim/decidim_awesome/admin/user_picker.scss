@@ -1,5 +1,5 @@
-// @import "select2";
-// @import "select2-foundation-theme";
+@import "select2/dist/css/select2.css";
+@import "stylesheets/vendor/select2-foundation-theme";
 
 .multiusers-select-container{
   form label{
@@ -13,20 +13,26 @@
   }
 }
 
-.select2-container--foundation .select2-selection--multiple .select2-selection__choice{
-  display: inline-block;
-  float: none;
-  font-weight: normal;
+.select2-container--foundation .select2-selection--multiple {
+  .select2-selection__choice{
+    display: inline-block;
+    float: none;
+    font-weight: normal;
 
-  .is-admin{
-    &::before{
-      content: '⛔';
-      display: inline-block;
-      margin-right: .3em;
+    .is-admin{
+      &::before{
+        content: '⛔';
+        display: inline-block;
+        margin-right: .3em;
+      }
+
+      text-decoration: line-through;
+      color: #bbb;
     }
+  }
 
-    text-decoration: line-through;
-    color: #bbb;
+  textarea.select2-search__field {
+    resize: none;
   }
 }
 

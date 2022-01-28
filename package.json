@@ -202,6 +202,6 @@
     "jsrender": "^1.0.9",
     "leaflet.featuregroup.subgroup": "^1.0.2",
     "query-string": "^5.1.1",
-    "select2": "*"
+    "select2": "^4.1.0-rc.0"
   }
 }

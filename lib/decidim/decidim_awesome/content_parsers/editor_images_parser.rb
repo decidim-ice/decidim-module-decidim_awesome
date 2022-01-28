@@ -17,8 +17,8 @@ module Decidim
         end
 
         def editor_images
-          @editor_images ||= parsed_content.search(:img).each_with_object({}) do |image, images|
-            images[image] = context[:routes_mappings].find { |mapping| image.attr(:src).end_with?(mapping[:origin_path]) }
+          @editor_images ||= parsed_content.search(:img).index_with do |image|
+            context[:routes_mappings].find { |mapping| image.attr(:src).end_with?(mapping[:origin_path]) }
           end.compact
         end
 
