@@ -8,8 +8,6 @@ namespace :decidim_decidim_awesome do
     task install: :environment do
       raise "Decidim gem is not installed" if decidim_path.nil?
 
-      # Ovewrite JS custom config file
-      # copy_awesome_file_to_application "lib/decidim/webpacker/webpack/custom.js", "config/webpack/custom.js"
       install_decidim_awesome_npm
     end
 

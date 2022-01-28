@@ -3,7 +3,7 @@
 module Decidim
   module DecidimAwesome
     module MapComponent
-      class MapController < DecidimAwesome::MapComponent::ApplicationController
+      class MapController < DecidimAwesome::BlankComponentController
         helper Decidim::DecidimAwesome::MapHelper
         helper_method :map_components
 

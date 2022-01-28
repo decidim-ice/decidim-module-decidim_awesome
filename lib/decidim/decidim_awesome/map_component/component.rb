@@ -4,7 +4,7 @@ require_dependency "decidim/components/namer"
 
 Decidim.register_component(:awesome_map) do |component|
   component.engine = Decidim::DecidimAwesome::MapComponent::Engine
-  # component.admin_engine = Decidim::DecidimAwesome::AdminMapEngine
+  component.admin_engine = Decidim::DecidimAwesome::MapComponent::AdminEngine
   component.icon = "decidim/meetings/icon.svg" # TODO: create a Icon
   component.permissions_class_name = "Decidim::DecidimAwesome::Permissions"
 

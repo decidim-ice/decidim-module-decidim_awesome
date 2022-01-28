@@ -1,11 +1,11 @@
-import "src/vendor/image-upload.min"
-import "src/vendor/image-resize.min"
-import "inscrybmde"
-import "inline-attachment/src/inline-attachment"
-import "inline-attachment/src/codemirror-4.inline-attachment"
-import "inline-attachment/src/jquery.inline-attachment"
-import "europa"
-import "src/decidim/editor/linebreak_module"
+import "src/vendor/image-upload.min";
+import "src/vendor/image-resize.min";
+import InscrybMDE from "inscrybmde";
+import "inline-attachment/src/inline-attachment";
+import "inline-attachment/src/codemirror-4.inline-attachment";
+import "inline-attachment/src/jquery.inline-attachment";
+import Europa from "europa";
+import "src/decidim/editor/linebreak_module";
 
 ((exports) => {
   exports.DecidimAwesome = exports.DecidimAwesome || {};

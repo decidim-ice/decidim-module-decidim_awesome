@@ -4,7 +4,7 @@ require_dependency "decidim/components/namer"
 
 Decidim.register_component(:awesome_iframe) do |component|
   component.engine = Decidim::DecidimAwesome::IframeComponent::Engine
-  # component.admin_engine = Decidim::DecidimAwesome::AdminIframeEngine
+  component.admin_engine = Decidim::DecidimAwesome::IframeComponent::AdminEngine
   component.icon = "decidim/meetings/icon.svg" # TODO: create a Icon
   component.permissions_class_name = "Decidim::DecidimAwesome::Permissions"
 
