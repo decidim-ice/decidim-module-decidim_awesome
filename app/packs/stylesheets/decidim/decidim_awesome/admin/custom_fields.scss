@@ -1,4 +1,29 @@
 // hide custom-fields inside tabs, an extra (unique) container is used instead
+.color-box {
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  margin-left: 1em;
+  vertical-align: middle;
+  &:first-child {
+    margin-left: 0;
+  }
+  $colors: (
+    "primary": #{$primary},
+    "secondary": #{$secondary},
+    "success": #{$success},
+    "warning": #{$warning},
+    "alert": #{$alert},
+    "highlight": #{$highlight},
+    "highlight_alternative": #{$highlight_alternative}
+  );
+  @each $name, $color in $colors {
+    &.#{$name} {
+      background-color: #{$color};
+    }
+  }
+}
+
 .tabs-content {
   .proposal_custom_field {
     display: none;

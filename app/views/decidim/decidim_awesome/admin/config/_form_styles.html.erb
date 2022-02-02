@@ -1,10 +1,12 @@
 <div class="row column decidim_awesome-form">
+  <% console %>
   <% if config_enabled? :scoped_styles %>
-    <p class="help-text"><%= t("help.scoped_styles", scope: "decidim.decidim_awesome.admin.config.form") %></p>
-    <p class="help-text">
-      <%= t("help.scoped_styles_variables", scope: "decidim.decidim_awesome.admin.config.form") %><br>
-      <% [:primary, :secondary, :success, :warning, :alert, :highlight, :highlight_alternative].each do |color| %>
-        var(--<%= color %>),
+    <p class="help-text"><%= t("help.scoped_styles", scope: "decidim.decidim_awesome.admin.config.form") %>
+      <%= t("help.scoped_styles_variables", scope: "decidim.decidim_awesome.admin.config.form") %>
+    </p>
+    <p class="help-text" style="white-space: unset">
+      <% ["primary", "secondary", "success", "warning", "alert", "highlight", "highlight_alternative"].each do |color| %>
+        <span class="color-box <%= color %>" style="background-color: <%= current_organization.colors[color] %>"></span> var(--<%= color %>)
       <% end %>
     </p>
 
