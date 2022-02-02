@@ -11,6 +11,8 @@ import Europa from "europa"
 import "inline-attachment/src/inline-attachment";
 import "inline-attachment/src/codemirror-4.inline-attachment";
 import "inline-attachment/src/jquery.inline-attachment";
+import "highlight.js";
+import "highlight.js/styles/github.css";
 
 // In 0.26 these files come with Decidim in the folder src/decidim/vendor so the awesome one's could be removed
 import "src/vendor/image-resize.min"
@@ -150,25 +152,25 @@ export function createMarkdownEditor(container) {
   const t = DecidimAwesome.texts["drag_and_drop_image"];
   const token = $('meta[name="csrf-token"]').attr('content');
   const $input = $(container).siblings('input[type="hidden"]');
-  const $faker = $('<input type="hidden" name="faker-inscrybmde">');
+  const $faker = $('<textarea name="faker-inscrybemde"/>');
   const $form = $(container).closest('form');
   const europa = new Europa();
   $faker.val(europa.convert($input.val()));
   $faker.insertBefore($(container));
   $(container).hide();
-  const inscrybmde = new InscrybMDE({
+  const inscrybemde = new InscrybMDE({
     element: $faker[0],
     spellChecker: false,
     renderingConfig: {
       codeSyntaxHighlighting: true
     }
   });
-  $faker[0].InscrybMDE = inscrybmde;
+  $faker[0].InscrybMDE = inscrybemde;
 
   // Allow image upload
   if(DecidimAwesome.allow_images_in_markdown_editor) {
-    $(inscrybmde.gui.statusbar).prepend(`<span class="help-text" style="float:left;margin:0;text-align:left;">${t}</span>`);
-    inlineAttachment.editors.codemirror4.attach(inscrybmde.codemirror, {
+    $(inscrybemde.gui.statusbar).prepend(`<span class="help-text" style="float:left;margin:0;text-align:left;">${t}</span>`);
+    inlineAttachment.editors.codemirror4.attach(inscrybemde.codemirror, {
       uploadUrl: DecidimAwesome.editor_uploader_path,
       uploadFieldName: "image",
       jsonFieldName: "url",
@@ -179,6 +181,6 @@ export function createMarkdownEditor(container) {
   // convert to html on submit
   $form.on("submit", () => {
     // e.preventDefault();
-    $input.val(inscrybmde.markdown(inscrybmde.value()));
+    $input.val(inscrybemde.markdown(inscrybemde.value()));
   });
 }
