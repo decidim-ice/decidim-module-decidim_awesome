@@ -155,6 +155,10 @@ en:
               intergram_config: Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram
                 bot</a> to your group or start a chat with it directly. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+
                 info</a>
+              original_editor_override: Since version 0.26, it is possible (for admins
+                only) to upload images into the editors. Therefore, image settings
+                in here only affect the public editors (admin will always have it
+                available).
               proposal_custom_fields: Create custom proposal fields that applies only
                 in certain parts of the public web (use the restrictions editor for
                 that)
@@ -164,7 +168,7 @@ en:
               proposal_custom_fields_translations: "Labels, help text, placeholders
                 and default values can use your application custom translations. \nFor
                 that, instead of using a string literal, use the i18n key (it must
-                containt at least one dot).\nFor instance:\n- \"activemodel.attributes.proposal.title\"
+                contain at least one dot).\nFor instance:\n- \"activemodel.attributes.proposal.title\"
                 instead of \"Title\"\n- \"activemodel.attributes.proposal.address\"
                 instead of \"Address\"\nOr use your own keys in combination with other
                 tools to define translations (eg: using the module Term Customizer):\n

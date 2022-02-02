@@ -5,7 +5,19 @@ import "entrypoints/decidim_admin"
 import "src/decidim/decidim_awesome/admin/constraints"
 import "src/decidim/decidim_awesome/admin/auto_edit"
 import "src/decidim/decidim_awesome/admin/user_picker"
-// import "src/decidim/decidim_awesome/editors/quill_editor"
 import "src/decidim/decidim_awesome/admin/form_builder"
 import "src/decidim/decidim_awesome/editors/tabs_focus"
 import "src/decidim/decidim_awesome/admin/codemirror"
+
+import {destroyQuillEditor,createQuillEditor,createMarkdownEditor} from "src/decidim/decidim_awesome/editors/editor"
+
+$(() => {
+  $(".editor-container").each((_idx, container) => {
+  	destroyQuillEditor(container);
+    if(window.DecidimAwesome.use_markdown_editor) {
+      createMarkdownEditor(container);
+    } else {
+      createQuillEditor(container);
+    }
+  });
+});
