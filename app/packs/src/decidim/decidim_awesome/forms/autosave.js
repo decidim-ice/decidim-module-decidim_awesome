@@ -1,7 +1,4 @@
-import "form-storage"
-import "decode-uri-component"
-import "form-serialize"
-import "query-string-es5"
+import FormStorage from "form-storage"
 
 $(() => {
   window.DecidimAwesome = window.DecidimAwesome || {};

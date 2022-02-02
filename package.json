@@ -191,9 +191,7 @@
   },
   "dependencies": {
     "codemirror": "^5.65.0",
-    "decode-uri-component": "^0.2.0",
     "europa": "^4.0.0",
-    "form-serialize": "^0.7.2",
     "form-storage": "^1.3.5",
     "formBuilder": "^3.6.1",
     "inline-attachment": "^2.0.3",
@@ -201,7 +199,6 @@
     "jquery-ui": "^1.13.0",
     "jsrender": "^1.0.9",
     "leaflet.featuregroup.subgroup": "^1.0.2",
-    "query-string": "^5.1.1",
     "select2": "^4.1.0-rc.0"
   }
 }
