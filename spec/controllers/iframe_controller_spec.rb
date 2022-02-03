@@ -16,6 +16,8 @@ module Decidim::DecidimAwesome
         request.env["decidim.current_component"] = component
       end
 
+      it_behaves_like "a blank component", Decidim::DecidimAwesome::IframeComponent::AdminEngine
+
       describe "GET show" do
         context "when everything is ok" do
           it "renders the show page" do

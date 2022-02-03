@@ -7,6 +7,10 @@ module Decidim
         helper Decidim::DecidimAwesome::MapHelper
         helper_method :map_components
 
+        def index
+          render "test"
+        end
+
         def show
           render :error unless maps_enabled?
         end
