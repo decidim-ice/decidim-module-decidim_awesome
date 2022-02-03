@@ -11,7 +11,7 @@ import Europa from "europa"
 import "inline-attachment/src/inline-attachment";
 import "inline-attachment/src/codemirror-4.inline-attachment";
 import "inline-attachment/src/jquery.inline-attachment";
-import "highlight.js";
+import hljs from "highlight.js";
 import "highlight.js/styles/github.css";
 
 // In 0.26 these files come with Decidim in the folder src/decidim/vendor so the awesome one's could be removed
@@ -162,7 +162,8 @@ export function createMarkdownEditor(container) {
     element: $faker[0],
     spellChecker: false,
     renderingConfig: {
-      codeSyntaxHighlighting: true
+      codeSyntaxHighlighting: true,
+      hljs: hljs
     }
   });
   $faker[0].InscrybMDE = inscrybemde;

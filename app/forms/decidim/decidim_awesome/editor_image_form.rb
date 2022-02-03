@@ -5,12 +5,13 @@ module Decidim
     class EditorImageForm < Decidim::Form
       mimic :editor_image
 
-      attribute :image
+      attribute :file
       attribute :author_id, Integer
       attribute :path, String
 
       validates :author_id, presence: true
-      validates :image, presence: true
+      validates :file, presence: true
+      validates :file, passthru: { to: Decidim::DecidimAwesome::EditorImage }
 
       alias organization current_organization
     end

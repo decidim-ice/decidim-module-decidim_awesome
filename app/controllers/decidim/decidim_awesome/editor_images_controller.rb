@@ -14,10 +14,9 @@ module Decidim
         enforce_permission_to :create, :editor_image, awesome_config: awesome_config
 
         @form = form(EditorImageForm).from_params(form_values)
-
         CreateEditorImage.call(@form) do
           on(:ok) do |image|
-            url = image.url
+            url = image.attached_uploader(:file).path
             url = "#{request.base_url}#{url}" unless url&.start_with?("http")
             render json: { url: url, message: I18n.t("decidim_awesome.editor_images.create.success", scope: "decidim") }
           end
@@ -40,7 +39,7 @@ module Decidim
 
       def form_values
         {
-          image: params[:image],
+          file: params[:image],
           author_id: current_user.id,
           path: request.referer
         }
