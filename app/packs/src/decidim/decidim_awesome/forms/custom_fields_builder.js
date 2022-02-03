@@ -1,6 +1,6 @@
 import "src/decidim/decidim_awesome/forms/rich_text_plugin"
-import "formBuilder"
 require("formBuilder/dist/form-render.min.js")
+import {destroyQuillEditor} from "src/decidim/decidim_awesome/editors/editor"
 
 export default class CustomFieldsBuilder { // eslint-disable-line no-unused-vars
   constructor(container_selector) {
@@ -56,14 +56,11 @@ export default class CustomFieldsBuilder { // eslint-disable-line no-unused-vars
   * to store the custom fields answers
   */
   dataToXML(data) {
-    const doc = $.parseXML("<xml/>");
-    const xml = doc.getElementsByTagName("xml")[0];
-    const dl = doc.createElement("dl");
-    let key, dt, dd, div, val, text, label, l;
-    xml.appendChild(dl);
-    $(dl).attr("class", "decidim_awesome-custom_fields");
-    $(dl).attr("data-generator", "decidim_awesome");
-    $(dl).attr("data-version", window.DecidimAwesome.version);
+    const $dl = $("<dl/>");
+    let key, $dt, $dd, $div, val, text, label, l;
+    $dl.attr("class", "decidim_awesome-custom_fields");
+    $dl.attr("data-generator", "decidim_awesome");
+    $dl.attr("data-version", window.DecidimAwesome.version);
     for (key in data) {
       // console.log("get the data!", key, data[key]);
       // Richtext plugin does not saves userdata, so we get it from the hidden input
@@ -71,13 +68,13 @@ export default class CustomFieldsBuilder { // eslint-disable-line no-unused-vars
         data[key].userData = [$(`#${data[key].name}-input`).val()];
       }
       if (data[key].userData && data[key].userData.length) {
-        dt = doc.createElement("dt");
-        $(dt).text(data[key].label);
-        $(dt).attr("name", data[key].name);
-        dd = doc.createElement("dd");
+        $dt = $("<dt/>");
+        $dt.text(data[key].label);
+        $dt.attr("name", data[key].name);
+        $dd = $("<dd/>");
         // console.log("data for", key, data[key].name, data[key])
         for(val in data[key].userData) {
-          div = doc.createElement("div");
+          $div = $("<div/>");
           label = data[key].userData[val];
           text = null;
           if(data[key].values) {
@@ -95,22 +92,22 @@ export default class CustomFieldsBuilder { // eslint-disable-line no-unused-vars
           }
             // console.log("userData", text, "label", label, 'key', key, 'data', data)
           if(data[key].type == "textarea" && data[key].subtype == "richtext") {
-            $(div).html(label);
+            $div.html(label);
           } else {
-            $(div).text(label);
+            $div.text(label);
           }
           if(text) {
-            $(div).attr("alt", text);
+            $div.attr("alt", text);
           }
-          dd.appendChild(div);
+          $dd.append($div);
         }
-        $(dd).attr("id", data[key].name);
-        $(dd).attr("name", data[key].type);
-        dl.appendChild(dt);
-        dl.appendChild(dd);
+        $dd.attr("id", data[key].name);
+        $dd.attr("name", data[key].type);
+        $dl.append($dt);
+        $dl.append($dd);
       }
     }
-    return xml.outerHTML;
+    return `<xml>${$dl[0].outerHTML}</xml>`;
   }
 
   fixBuggyFields() {
@@ -187,7 +184,7 @@ export default class CustomFieldsBuilder { // eslint-disable-line no-unused-vars
       $body.val(this.dataToXML(this.spec));
       this.$element.data("spec", this.spec);
     }
-    // console.log("storeData", this.spec, "xml", $body.val());
+    // console.log("storeData spec", this.spec, "$body", $body,"$form",$form,"this",this);
   }
 
   init($element) {
@@ -197,7 +194,6 @@ export default class CustomFieldsBuilder { // eslint-disable-line no-unused-vars
       this.$container = $(this.container_selector);
     }
     // console.log("init", $element, "data", data)
-    // TODO: save current data to the hidden field
     // always use the last field (in case of multilang tabs we only render one form due a limitation of the library to handle several instances)
     this.instance = this.$container.formRender({
       i18n: {

@@ -1,14 +1,10 @@
 /**
- * 
- * NOTE: For some reason, this seems to throw an error while transpiling
- * For this reason a rich_text_plugin.js is provided using the online transpiler https://babeljs.io/repl
- * Hopefully, this situation will change when webpacker is updated in the v0.25 of Decidim
- * 
  * Decidim rich text editor control plugin
  * Renders standard Decidim WYSIWYG editor
  *
  * Registers Decidim Richtext as a subtype for the textarea control
  */
+import {createQuillEditor} from "src/decidim/decidim_awesome/editors/editor"
 
 // configure the class for runtime loading
 if (!window.fbControls) window.fbControls = []
@@ -55,13 +51,13 @@ window.fbControls.push(function(controlClass, allControlClasses) {
         name: name,
         id: this.inputId,
         type: 'hidden',
-        value: (userData && userData[0]) || value
+        value: (userData && userData[0]) || value || ''
       });
 
       const css = this.markup(
         'style',
         `
-        #${attrs.id} { height: auto; padding-left: 0; padding-right: 0; }
+        #${attrs.id} { height: auto; min-height: 6rem; padding-left: 0; padding-right: 0; }
         #${attrs.id} div.ql-container { height: ${attrs.rows || 1}rem; }
         #${attrs.id} p.help-text { margin-top: .5rem; }
         `,
@@ -86,7 +82,7 @@ window.fbControls.push(function(controlClass, allControlClasses) {
       window.fbEditors.quill[this.id] = {};
       const editor = window.fbEditors.quill[this.id];
       // createQuillEditor does all the job to update the hidden input wrapper
-      editor.instance = window.Decidim.createQuillEditor(this.wrapper);
+      editor.instance = createQuillEditor(this.wrapper);
       // editor.data = new Delta();
       // if (value) {
       //   editor.instance.setContents(window.JSON.parse(this.parsedHtml(value)));

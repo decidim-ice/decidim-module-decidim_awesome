@@ -2,7 +2,7 @@
 
 module Decidim::Cw
   module DecidimAwesome
-    # This class deals with uploading images to a Blueprints.
+    # Transitional class to allow carrierwave to active storage migrations
     class ImageUploader < Decidim::Cw::ImageUploader
       process :validate_size, :validate_dimensions
 

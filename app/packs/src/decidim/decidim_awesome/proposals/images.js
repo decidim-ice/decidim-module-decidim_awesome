@@ -2,7 +2,7 @@ $(() => {
   window.DecidimAwesome = window.DecidimAwesome || {};
 
   const token = $( 'meta[name="csrf-token"]' ).attr( 'content' );
-  const $textarea = $("#proposal_body");
+  const $textarea = $("textarea#proposal_body");
   const t = window.DecidimAwesome.texts["drag_and_drop_image"];
 
   if(!$textarea.length) return;
