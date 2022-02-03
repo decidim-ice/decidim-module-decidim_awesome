@@ -193,7 +193,7 @@ export default class CustomFieldsBuilder { // eslint-disable-line no-unused-vars
     if(!this.$container) {
       this.$container = $(this.container_selector);
     }
-    // console.log("init", $element, "data", data)
+    console.log("init", $element, "this", this)
     // always use the last field (in case of multilang tabs we only render one form due a limitation of the library to handle several instances)
     this.instance = this.$container.formRender({
       i18n: {

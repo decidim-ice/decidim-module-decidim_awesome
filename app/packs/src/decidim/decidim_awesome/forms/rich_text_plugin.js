@@ -46,7 +46,8 @@ window.fbControls.push(function(controlClass, allControlClasses) {
       const { value, userData, ...attrs } = this.config;
 
       // hidden input for storing the current HTML value of the div
-      this.inputId = this.id + '-input'
+      this.inputId = this.id + '-input';
+      console.log("build plugin: this",this)
       this.input = this.markup('input', null, {
         name: name,
         id: this.inputId,

@@ -30,4 +30,4 @@ decidim-proposals:
     decidim-0.23: b0fc5dfaf056c1a1dc667f8ded1a4b2e
     decidim-0.24: 6f717555a20e2ab3f555003c337d3003
   /app/views/decidim/proposals/admin/proposals/_form.html.erb:
-    decidim-0.23: 022eef3e8f57ccc2136ed1289b0f217d
+    decidim-0.25: 90a04984d4269398b7cd21aa33763a1f

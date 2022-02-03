@@ -11,7 +11,14 @@
     vertical-align: middle;
   }
 }
+// some fix for the admin
+.form-group {
+  .ql-container {
+    background-color: white;
+  }
+}
 
+// some fix for the public part
 .editor-container{
   overflow: hidden;
 }
