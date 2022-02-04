@@ -36,12 +36,12 @@
         <strong><%= t ".head_tags" %></strong>
         <ul class="vertical menu">
         <% {
-          CSS: "//link[@rel='stylesheet'][contains(@href,'decidim_awesome')]",
-          JavaScript: "//script[contains(@src,'decidim_awesome')]"
+          CSS: "//link[@rel='stylesheet'][contains(@href,'decidim_decidim_awesome')]",
+          JavaScript: "//script[contains(@src,'decidim_decidim_awesome')]"
           }.each do |part, xpath| %>
           <li>
             <%= part %>
-            <% if head.xpath(xpath).count > 0 %>
+            <% if head.xpath(xpath).count.positive? %>
               <%= check :ok %>
             <% else %>
               <%= check :ko %>
@@ -56,12 +56,12 @@
         <strong><%= t ".admin_head_tags" %></strong>
         <ul class="vertical menu">
         <% {
-          CSS: "//link[@rel='stylesheet'][contains(@href,'decidim_awesome/awesome_admin')]",
-          JavaScript: "//script[contains(@src,'decidim_awesome')]"
+          CSS: "//link[@rel='stylesheet'][contains(@href,'decidim_admin_decidim_awesome')]",
+          JavaScript: "//script[contains(@src,'decidim_admin_decidim_awesome')]"
           }.each do |part, xpath| %>
           <li>
             <%= part %>
-            <% if admin_head.xpath(xpath).count > 0 %>
+            <% if admin_head.xpath(xpath).count.positive? %>
               <%= check :ok %>
             <% else %>
               <%= check :ko %>

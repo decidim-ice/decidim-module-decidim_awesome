@@ -1,33 +1,25 @@
 decidim-admin:
   /app/views/layouts/decidim/admin/_header.html.erb:
-    decidim-0.23: 45f0e15f1b02a1c1a73b1a2184fd55af
+    decidim-0.25: 1aff077428830b12306d6c42e6b37216
 decidim-core:
   /app/views/layouts/decidim/_head.html.erb:
-    decidim-0.23: e7f5eea07e884665474948ea750fc720
-  /app/assets/javascripts/decidim/editor.js.es6:
-    decidim-0.23: cb059b8ff0ffc62c67eb99d8d7a6637b
-    decidim-0.23.1: 4787f73f0f33661e3897404f10019d26
-    decidim-0.24: 35262835144421baa700a34ca0939396
+    decidim-0.25: eb490aa482477ff70f541d20cddec773
+  /app/packs/src/decidim/editor.js:
+    decidim-0.25: 742698903a30034094c01aecaca6de84
   /app/presenters/decidim/menu_presenter.rb:
-    decidim-0.23: 042743c44a2aff284b493c7bebbccbb3
-    decidim-0.24: 284c96f19cd98df091d8178d6db5a8b3
+    decidim-0.25: f3b05daf279f909f8b3b628658dd5810
   /app/presenters/decidim/menu_item_presenter.rb:
-    decidim-0.23: 70db39954b5840924530bf94d2a0a73a
+    decidim-0.25: 860ffb160ec5f8552cc2855a6a47851b
   /app/helpers/decidim/amendments_helper.rb:
-    decidim-0.23: 75bd41c3186729c7c84911bc7c7e9677
+    decidim-0.25: 63532a04fcf07cf92b789833a9421416
 decidim-proposals:
   /app/forms/decidim/proposals/proposal_wizard_create_step_form.rb:
-    decidim-0.23: b99c3223f1e75f2a69a89ae9a3d28182
-    decidim-0.23.1: 13ebf86ec88fa64d2651ab9735d5de90
     decidim-0.24: db69edd0ba8ffa3965a5c44a6bfaba8d
   /app/helpers/decidim/proposals/application_helper.rb:
-    decidim-0.23: d923323e3db542b84f42db3a4f782a8d
     decidim-0.24: c5f99f5fa7de9a6e45776983330e9d73
   /app/views/decidim/proposals/collaborative_drafts/show.html.erb:
-    decidim-0.23: b0fc5dfaf056c1a1dc667f8ded1a4b2e
     decidim-0.24: 2a7e0a4c65361f238fd1b917f39c8642
   /app/views/decidim/proposals/collaborative_drafts/_edit_form_fields.html.erb:
-    decidim-0.23: b0fc5dfaf056c1a1dc667f8ded1a4b2e
     decidim-0.24: 6f717555a20e2ab3f555003c337d3003
   /app/views/decidim/proposals/admin/proposals/_form.html.erb:
     decidim-0.25: 90a04984d4269398b7cd21aa33763a1f

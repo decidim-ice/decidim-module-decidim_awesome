@@ -43,20 +43,23 @@ module Decidim
         def head_addons(part)
           case part
           when :CSS
-            ['<%= stylesheet_link_tag "decidim/decidim_awesome/application", media: "all" %>',
-             '<%= stylesheet_link_tag(tenant_stylesheets, media: "all") if tenant_stylesheets %>'].join("\n")
+            ['<%= stylesheet_pack_tag "decidim_decidim_awesome", media: "all" %>',
+             '<%= stylesheet_pack_tag(tenant_stylesheets, media: "all") if tenant_stylesheets %>',
+             '<%= render(partial: "layouts/decidim/decidim_awesome/custom_styles") if awesome_custom_styles %>'].join("\n")
           when :JavaScript
             ['<%= render partial: "layouts/decidim/decidim_awesome/awesome_config" %>',
-             '<%= javascript_include_tag "decidim/decidim_awesome/application" %>'].join("\n")
+             '<%= javascript_pack_tag "decidim_decidim_awesome" %>',
+             '<%= javascript_pack_tag "decidim_decidim_awesome_proposals_custom_fields" if awesome_proposal_custom_fields %>'].join("\n")
           end
         end
 
         def admin_addons(part)
           case part
           when :CSS
-            '<%= stylesheet_link_tag "decidim/decidim_awesome/admin", media: "all" %>'
+            '<%= stylesheet_pack_tag "decidim_admin_decidim_awesome", media: "all" %>'
           when :JavaScript
-            '<%= javascript_include_tag "decidim/decidim_awesome/admin" %>'
+            ['<%= javascript_pack_tag "decidim_admin_decidim_awesome", defer: false %>',
+             '<%= javascript_pack_tag "decidim_decidim_awesome_proposals_custom_fields" if awesome_proposal_custom_fields %>'].join("\n")
           end
         end
       end
