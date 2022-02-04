@@ -22,18 +22,9 @@ def seed_db(path)
   end
 end
 
-def copy_themes
-  FileUtils.cp_r "lib/decidim/decidim_awesome/test/themes", "spec/decidim_dummy_app/app/packs/themes", verbose: true
-end
-
 def copy_headers
   FileUtils.mkdir_p "spec/decidim_dummy_app/app/views/v0.11", verbose: true
   FileUtils.cp_r "lib/decidim/decidim_awesome/test/layouts", "spec/decidim_dummy_app/app/views/v0.11/layouts", verbose: true
-end
-
-desc "copy test theme files"
-task :copy_themes do
-  copy_themes
 end
 
 desc "Generates a dummy app for testing"
@@ -41,7 +32,6 @@ task test_app: "decidim:generate_external_test_app" do
   ENV["RAILS_ENV"] = "test"
   install_module("spec/decidim_dummy_app")
   override_webpacker_config_files("spec/decidim_dummy_app")
-  copy_themes
   copy_headers
 end
 

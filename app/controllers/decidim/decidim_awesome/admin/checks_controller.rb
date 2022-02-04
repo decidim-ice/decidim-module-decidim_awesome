@@ -44,7 +44,6 @@ module Decidim
           case part
           when :CSS
             ['<%= stylesheet_pack_tag "decidim_decidim_awesome", media: "all" %>',
-             '<%= stylesheet_pack_tag(tenant_stylesheets, media: "all") if tenant_stylesheets %>',
              '<%= render(partial: "layouts/decidim/decidim_awesome/custom_styles") if awesome_custom_styles %>'].join("\n")
           when :JavaScript
             ['<%= render partial: "layouts/decidim/decidim_awesome/awesome_config" %>',

@@ -46,13 +46,6 @@ module Decidim
         ::Decidim::DecidimAwesome::VERSION
       end
 
-      def tenant_stylesheets
-        return @tenant_stylesheets if @tenant_stylesheets
-
-        prefix = Rails.root.join("app", "assets", "themes", current_organization.host)
-        return @tenant_stylesheets = current_organization.host.to_s if File.exist?("#{prefix}.css") || File.exist?("#{prefix}.scss") || File.exist?("#{prefix}.scss.erb")
-      end
-
       # Collects all CSS that is applied in the current URL context
       def awesome_custom_styles
         @awesome_custom_styles ||= awesome_config_instance.collect_sub_configs_values("scoped_style")
