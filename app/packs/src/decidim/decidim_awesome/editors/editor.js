@@ -152,13 +152,13 @@ export function createMarkdownEditor(container) {
   const t = DecidimAwesome.texts["drag_and_drop_image"];
   const token = $('meta[name="csrf-token"]').attr('content');
   const $input = $(container).siblings('input[type="hidden"]');
-  const $faker = $('<textarea name="faker-inscrybemde"/>');
+  const $faker = $('<textarea name="faker-inscrybmde"/>');
   const $form = $(container).closest('form');
   const europa = new Europa();
   $faker.val(europa.convert($input.val()));
   $faker.insertBefore($(container));
   $(container).hide();
-  const inscrybemde = new InscrybMDE({
+  const inscrybmde = new InscrybMDE({
     element: $faker[0],
     spellChecker: false,
     renderingConfig: {
@@ -166,12 +166,12 @@ export function createMarkdownEditor(container) {
       hljs: hljs
     }
   });
-  $faker[0].InscrybMDE = inscrybemde;
+  $faker[0].InscrybMDE = inscrybmde;
 
   // Allow image upload
   if(DecidimAwesome.allow_images_in_markdown_editor) {
-    $(inscrybemde.gui.statusbar).prepend(`<span class="help-text" style="float:left;margin:0;text-align:left;">${t}</span>`);
-    inlineAttachment.editors.codemirror4.attach(inscrybemde.codemirror, {
+    $(inscrybmde.gui.statusbar).prepend(`<span class="help-text" style="float:left;margin:0;text-align:left;">${t}</span>`);
+    inlineAttachment.editors.codemirror4.attach(inscrybmde.codemirror, {
       uploadUrl: DecidimAwesome.editor_uploader_path,
       uploadFieldName: "image",
       jsonFieldName: "url",
@@ -182,6 +182,6 @@ export function createMarkdownEditor(container) {
   // convert to html on submit
   $form.on("submit", () => {
     // e.preventDefault();
-    $input.val(inscrybemde.markdown(inscrybemde.value()));
+    $input.val(inscrybmde.markdown(inscrybmde.value()));
   });
 }

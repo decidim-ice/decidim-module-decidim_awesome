@@ -5,7 +5,7 @@ $(() => {
   // Event launched by foundation
   $("[data-tabs]").on("change.zf.tabs", (event) => {
     const $container = $(event.target).closest(".label--tabs").next(".tabs-content").find(".tabs-panel.is-active");
-    // fix inscrybemde if present
+    // fix inscrybmde if present
     let $input = $container.find('[name="faker-inscrybmde"]');
     if ($input.length > 0) {
       $input[0].InscrybMDE.codemirror.refresh();
