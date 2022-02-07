@@ -1,0 +1,113 @@
+import * as L from "leaflet";
+import "src/decidim/map/icon.js" // comes with Decidim
+import "src/decidim/vendor/leaflet-tilelayer-here"
+import "leaflet.markercluster"; // Comes with Decidim
+import "leaflet.featuregroup.subgroup" // included in this package.json
+import "src/vendor/jquery.truncate"
+import "jsrender"
+
+import ControlsUI from "src/decidim/decidim_awesome/awesome_map/controls_ui";
+import ProposalsController from "src/decidim/decidim_awesome/awesome_map/controllers/proposals_controller";
+import MeetingsController from "src/decidim/decidim_awesome/awesome_map/controllers/meetings_controller";
+
+export default class AwesomeMap {
+	constructor(map, config) {
+		this.map = map;
+		this.categories = window.AwesomeMap && window.AwesomeMap.categories || []
+    this.config = $.extend({
+    	length: 255,
+    	center: null,
+    	zoom: 8,
+    	menu: {
+				amendments: false,
+        meetings: false,
+        categories: true,
+        hashtags: false
+    	},
+    	show: {
+	      withdrawn: false,
+	      accepted: false,
+	      evaluating: false,
+	      notAnswered: false,
+	      rejected: false
+    	},
+    	hideControls: false,
+    	collapsedMenu: false,
+    	components: []
+    }, config);
+	  this.layers = {};
+    this.cluster = new L.MarkerClusterGroup();
+    this.map.addLayer(this.cluster);
+    this.controls = new ControlsUI(this);
+	  this.allMarkers = [];
+	  this.onFinished = () => {};
+	  this.controllers = {};
+	  this.loading = [];
+	}
+
+	// Queries the API and load all the markers
+	loadControllers() {
+    this.autoResize();
+    this.controls.attach();
+
+    this.config.components.forEach((component) => {
+    	const controller = this._getController(component);
+    	if(controller) {
+    		controller.addControls();
+    		controller.loadNodes();
+    		this.loading.push(component.type);
+    		controller.onFinished = () => {
+    			this.loading.pop();
+					this.autoResize();
+
+    			if(this.loading.length == 0) {
+    				this.controls.$loading.hide();
+    				// call trigger as all loads are finished
+    				this.onFinished();
+    			}
+    		};
+    	}
+    });
+	}
+
+	autoResize() {
+    // Setup center/zoom options if specified, otherwise fitbounds
+    const bounds = this.cluster.getBounds()
+    if(this.config.center && this.config.zoom) {
+      this.map.setView(this.config.center, this.config.zoom);
+    } else if(bounds.isValid()) {
+      // this.map.fitBounds(bounds, { padding: [50, 50] }); // this doesn't work much of the time, probably some race condition
+      this.map.fitBounds([[bounds.getNorth(),bounds.getEast()],[bounds.getSouth(),bounds.getWest()]], { padding: [50, 50] });
+    }
+	}
+
+   getCategory(category) {
+    let defaultCat = {
+      color: getComputedStyle(document.documentElement).getPropertyValue('--primary'),
+      children: () => {},
+      parent: null,
+      name: null
+    };
+
+    if(category) {
+      let id = category.id ? parseInt(category.id, 10) : parseInt(category, 10);
+      let cat = this.categories.find((c) => c.id == id);
+      if(cat) {
+        cat.children = () => {
+          return this.categories.filter((c) => c.parent === cat.id );
+        }
+        return cat;
+      }
+    }
+    return defaultCat;
+  }
+
+  _getController(component) {
+  	if(component.type == "proposals") {
+  		return this.controllers[component.type] = new ProposalsController(this, component);
+  	}
+  	if(component.type == "meetings" && this.config.menu.meetings) {
+  		return this.controllers[component.type] = new MeetingsController(this, component);
+  	}
+  }
+}

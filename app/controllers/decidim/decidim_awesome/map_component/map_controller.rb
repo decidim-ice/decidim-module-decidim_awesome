@@ -5,7 +5,7 @@ module Decidim
     module MapComponent
       class MapController < DecidimAwesome::BlankComponentController
         helper Decidim::DecidimAwesome::MapHelper
-        helper_method :map_components
+        helper_method :map_components, :api_ready?
 
         def show
           render :error unless maps_enabled?
@@ -15,6 +15,10 @@ module Decidim
 
         def maps_enabled?
           Decidim::Map.configured?
+        end
+
+        def api_ready?
+          Decidim::Api::Schema.max_complexity >= 1300
         end
 
         def map_components

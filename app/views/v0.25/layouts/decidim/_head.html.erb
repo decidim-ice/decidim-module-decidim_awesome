@@ -29,13 +29,13 @@
 <%= organization_colors %>
 <%= javascript_pack_tag "decidim_core", defer: false %>
 
+<%# awesome javascript after app %>
+<%= render partial: "layouts/decidim/decidim_awesome/awesome_config" %>
+<%= javascript_pack_tag "decidim_decidim_awesome", defer: false %>
+<%= javascript_pack_tag "decidim_decidim_awesome_proposals_custom_fields" if awesome_proposal_custom_fields %>
+<%# end awesome %>
+
 <%= render partial: "layouts/decidim/head_extra" %>
 <%== current_organization.header_snippets if Decidim.enable_html_header_snippets %>
 <%= snippets.display(:head) %>
 <%= content_for :header_snippets %>
-
-<%# awesome javascript after app %>
-<%= render partial: "layouts/decidim/decidim_awesome/awesome_config" %>
-<%= javascript_pack_tag "decidim_decidim_awesome" %>
-<%= javascript_pack_tag "decidim_decidim_awesome_proposals_custom_fields" if awesome_proposal_custom_fields %>
-<%# end awesome %>

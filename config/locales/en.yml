@@ -72,6 +72,7 @@ en:
             map_zoom: Zoom (any number betwen 0 and 18)
             map_zoom_help: Only applies if a map center is defined
             menu_amendments: Show amendments
+            menu_categories: Show Category search menu
             menu_hashtags: Show Hasthag search menu
             menu_meetings: Show meetings
             truncate: Maximum characters for popup descriptions
@@ -318,6 +319,14 @@ en:
           success: Image uploaded successfully
       map_component:
         map:
+          api_not_ready: |
+            <b>Warning:</b> This Decidim installation has the API configured to a maximum complexity of <b>%{current_complexity}</b>.
+            This component probably won't work under this configuration. We recommend you to set up in a initializer
+            (for instance at the end of the <code>config/initializers/decidim.rb</code>) the following lines:<br>
+            <br>
+            <pre># Api configuration
+            Decidim::Api::Schema.max_complexity = 5000
+            Decidim::Api::Schema.max_depth = 50</pre>
           error:
             unavailable: The map is unavailable. Please configure geocoding to enable
               this component.

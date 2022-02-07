@@ -22,6 +22,7 @@ Decidim.register_component(:awesome_map) do |component|
     settings.attribute :collapse, type: :boolean, default: false
     settings.attribute :menu_amendments, type: :boolean, default: true
     settings.attribute :menu_meetings, type: :boolean, default: true
+    settings.attribute :menu_categories, type: :boolean, default: true
     settings.attribute :menu_hashtags, type: :boolean, default: true
   end
 
@@ -31,7 +32,6 @@ Decidim.register_component(:awesome_map) do |component|
     settings.attribute :show_not_answered, type: :boolean, default: true
     settings.attribute :show_evaluating, type: :boolean, default: true
     settings.attribute :show_accepted, type: :boolean, default: true
-    # Not possible yet (needs graphql update):
     settings.attribute :show_rejected, type: :boolean, default: false
     settings.attribute :show_withdrawn, type: :boolean, default: false
   end

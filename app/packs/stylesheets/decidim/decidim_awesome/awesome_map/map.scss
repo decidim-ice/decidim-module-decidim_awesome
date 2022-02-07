@@ -1,4 +1,12 @@
-// @import "stylesheets/decidim/decidim_awesome/awesome_map/leaflet";
+.leaflet-container {
+  font: inherit;
+
+  #bodyContent .description {
+    img, iframe {
+      max-height: 5em;
+    }
+  }
+}
 
 // Increase z-index for components menu otherwise map hides menu extensions
 .dropdown-pane{
@@ -44,15 +52,22 @@
     }
   }
 
-  #map{
+  #awesome-map{
     height: 700px;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    .leaflet-marker-icon.svg-icon svg path{
-      filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, .7));
+    // .leaflet-marker-icon.svg-icon svg path{
+    //   filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, .7));
+    // }
+
+    .loading-spinner {
+      z-index: 10000;
+      position: absolute;
+      right: 0;
+      top: 0;
     }
   }
 
@@ -92,10 +107,11 @@
       display: none;
 
       label{
-        margin-left: .5rem;
+        margin-left: 0;
         display: none;
 
         i{
+          margin-left: .5em;
           display: inline-block;
           width: .8rem;
           height: .8rem;
