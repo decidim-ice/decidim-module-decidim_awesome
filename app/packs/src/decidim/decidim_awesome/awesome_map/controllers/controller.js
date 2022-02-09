@@ -6,12 +6,19 @@ export default class Controller {
     this.component = component;
     this.templateId = "marker-meeting-popup";
     this.controls = {
-      label: `<span class="awesome_map-component" id="awesome_map-component_${component.id}" title="0" data-layer="${component.type}">${component.name || window.DecidimAwesome.texts[component.type]}</span>`,
-      group: L.featureGroup.subGroup(this.awesomeMap.cluster)
+      label: this.getLabel(),
+      group: new L.FeatureGroup.SubGroup(this.awesomeMap.cluster)
     };
     this.onFinished = () => {};
     this.allMarkers = [];
 
+  }
+
+  getLabel() {
+    let text = this.awesomeMap.config.menu.mergeComponents || !this.component.name ? 
+               window.DecidimAwesome.texts[this.component.type]
+               : this.component.name;
+    return `<span class="awesome_map-component" id="awesome_map-component_${this.component.id}" title="0" data-layer="${this.component.type}">${text}</span>`
   }
 
   setFetcher(Fetcher) {
@@ -28,7 +35,7 @@ export default class Controller {
 
   addControls() {
     this.awesomeMap.controls.main.addOverlay(this.controls.group, this.controls.label);
-    this.controls.group.addTo(this.awesomeMap.map);
+    this.awesomeMap.map.addLayer(this.controls.group);
   }
 
   loadNodes() {
@@ -58,10 +65,10 @@ export default class Controller {
         className: "map-info"
 
       }).setLatLng(marker.getLatLng()).setContent(dom);
-      pop.addTo(this.awesomeMap.map);
+      this.awesomeMap.map.addlayer(pop);
     });
 
-    marker.addTo(this.controls.group);
+    this.controls.group.addLayer(marker);
 
     this.allMarkers.push({
       marker: marker,

@@ -33,6 +33,7 @@ module Decidim
               settings.attribute :menu_meetings, type: :boolean, default: true
               settings.attribute :menu_hashtags, type: :boolean, default: true
               settings.attribute :menu_categories, type: :boolean, default: true
+              settings.attribute :menu_merge_components, type: :boolean, default: true
 
               settings.attribute :show_not_answered, type: :boolean, default: true
               settings.attribute :show_accepted, type: :boolean, default: true

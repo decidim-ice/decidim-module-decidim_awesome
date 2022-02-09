@@ -22,7 +22,8 @@ $(() => {
       amendments: $("#awesome-map").data("menu-amendments"),
       meetings: $("#awesome-map").data("menu-meetings"),
       categories: $("#awesome-map").data("menu-categories"),
-      hashtags: $("#awesome-map").data("menu-hashtags")
+      hashtags: $("#awesome-map").data("menu-hashtags"),
+      mergeComponents: $("#awesome-map").data("menu-merge-components")
     },
     show: {
       withdrawn: $("#awesome-map").data("show-withdrawn"),

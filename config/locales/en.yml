@@ -75,6 +75,7 @@ en:
             menu_categories: Show Category search menu
             menu_hashtags: Show Hasthag search menu
             menu_meetings: Show meetings
+            menu_merge_components: Merge all components of the same type in the menu
             truncate: Maximum characters for popup descriptions
           step:
             announcement: Announcement
@@ -297,6 +298,7 @@ en:
           map_zoom_help: Only applies if a map center is defined
           menu_amendments: Show amendments
           menu_meetings: Show meetings
+          menu_merge_components: Merge all components of the same type in the menu
           name: Awesome Map
           show_accepted: Show accepted proposals
           show_evaluating: Show evaluating proposals

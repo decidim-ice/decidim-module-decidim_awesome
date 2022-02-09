@@ -118,7 +118,7 @@ export default class ControlsUI {
         if(!this.awesomeMap.layers[hashtag.tag]) {
           this.awesomeMap.layers[hashtag.tag] = {
             label: hashtag.name,
-            group: L.featureGroup.subGroup(this.awesomeMap.cluster)
+            group: new L.FeatureGroup.SubGroup(this.awesomeMap.cluster)
           };
           this.awesomeMap.layers[hashtag.tag].group.addTo(this.awesomeMap.map);
           $('#awesome_map-hashtags-control .hashtags-container').append(`<label data-layer="${hashtag.tag}" class="awesome_map-hashtag-${hashtag.tag}"><input type="checkbox" class="awesome_map-hashtags-selector" checked><span>${hashtag.name}</span></label>`);

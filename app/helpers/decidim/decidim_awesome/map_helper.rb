@@ -38,6 +38,7 @@ module Decidim
           "data-truncate" => global_settings.truncate || 255,
           "data-map-center" => global_settings.map_center,
           "data-map-zoom" => global_settings.map_zoom || 8,
+          "data-menu-merge-components" => global_settings.menu_merge_components,
           "data-menu-amendments" => global_settings.menu_amendments,
           "data-menu-meetings" => global_settings.menu_meetings,
           "data-menu-categories" => global_settings.menu_categories,
@@ -71,14 +72,14 @@ module Decidim
       end
 
       # rubocop:disable Rails/HelperInstanceVariable
-      def current_categories
+      def current_categories(categories)
         return @current_categories if @current_categories
 
         @golden_ratio_conjugate = 0.618033988749895
         # @h = rand # use random start value
         @h = 0.41
         @current_categories = []
-        current_participatory_space.categories.first_class.each do |category|
+        categories.first_class.each do |category|
           append_category category
           category.subcategories.each do |subcat|
             append_category subcat

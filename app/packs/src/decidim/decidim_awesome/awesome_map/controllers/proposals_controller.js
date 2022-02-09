@@ -22,10 +22,10 @@ export default class ProposalsController extends Controller {
     super.addControls();
 
     // add control layer for amendments if any
-    if(this.awesomeMap.config.menu.amendments && this.component.amendments) {
+    if(this.awesomeMap.config.menu.amendments && this.component.amendments && !this.awesomeMap.layers.amendments) {
       this.awesomeMap.layers.amendments = {
         label: `<span class="awesome_map-component" id="awesome_map-amendments_${this.component.id}" title="0" data-layer="amendments">${window.DecidimAwesome.texts.amendments}</span>`,
-        group: L.featureGroup.subGroup(this.awesomeMap.cluster)
+        group: new L.FeatureGroup.SubGroup(this.awesomeMap.cluster)
       }
       this.awesomeMap.controls.main.addOverlay(this.awesomeMap.layers.amendments.group, this.awesomeMap.layers.amendments.label);
       this.awesomeMap.layers.amendments.group.addTo(this.awesomeMap.map);
@@ -48,7 +48,7 @@ export default class ProposalsController extends Controller {
         });
       }
 
-      // console.log("new proposal", proposal, marker)
+      // console.log("new proposal", proposal, "marker",  marker)
       this.addMarker(marker, proposal);
     };
 
@@ -67,7 +67,7 @@ export default class ProposalsController extends Controller {
       // console.log("marker", marker, "parent proposal", parent)
       // add marker to amendments layers and remove it from proposals
       if(marker) {
-        marker.marker.removeFrom(this.controls.group);
+        try { marker.marker.removeFrom(this.controls.group) } catch(e) { console.error("error removeFrom marker", marker, "layer", this.controls.group,  e)}
         if(this.awesomeMap.config.menu.amendments) {
           marker.marker.addTo(this.awesomeMap.layers.amendments.group);
           // mimic parent category (amendments doesn't have categories)

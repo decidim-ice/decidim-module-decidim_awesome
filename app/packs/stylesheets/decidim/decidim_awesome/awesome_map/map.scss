@@ -1,13 +1,3 @@
-.leaflet-container {
-  font: inherit;
-
-  #bodyContent .description {
-    img, iframe {
-      max-height: 5em;
-    }
-  }
-}
-
 // Increase z-index for components menu otherwise map hides menu extensions
 .dropdown-pane{
   z-index: 1000;
@@ -22,6 +12,34 @@
 
   .google-map{
     margin-bottom: 0;
+  }
+}
+
+#awesome-map {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  // .leaflet-marker-icon.svg-icon svg path{
+  //   filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, .7));
+  // }
+
+  .loading-spinner {
+    z-index: 10000;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .leaflet-container {
+    font: inherit;
+
+    #bodyContent .description {
+      img, iframe {
+        max-height: 5em;
+      }
+    }
   }
 
   .leaflet-control-layers-list{
@@ -49,25 +67,6 @@
 
     input{
       margin: 0;
-    }
-  }
-
-  #awesome-map{
-    height: 700px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    // .leaflet-marker-icon.svg-icon svg path{
-    //   filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, .7));
-    // }
-
-    .loading-spinner {
-      z-index: 10000;
-      position: absolute;
-      right: 0;
-      top: 0;
     }
   }
 
@@ -101,75 +100,75 @@
       border-bottom: 5px solid black;
     }
   }
+}
 
-  #awesome_map-{
-    &categories-control{
+#awesome_map-{
+  &categories-control{
+    display: none;
+
+    label{
+      margin-left: 0;
       display: none;
 
-      label{
-        margin-left: 0;
-        display: none;
-
-        i{
-          margin-left: .5em;
-          display: inline-block;
-          width: .8rem;
-          height: .8rem;
-          border-radius: 50%;
-          background-color: var(-- primary);
-        }
-
-        &.subcategory{
-          padding-left: 1em;
-        }
+      i{
+        margin-left: .5em;
+        display: inline-block;
+        width: .8rem;
+        height: .8rem;
+        border-radius: 50%;
+        background-color: var(-- primary);
       }
 
-      .categories-container{
-        display: none;
-      }
-
-      &.active{
-        .categories-container{
-          display: block;
-        }
+      &.subcategory{
+        padding-left: 1em;
       }
     }
 
-    &hashtags-control{
+    .categories-container{
       display: none;
+    }
 
-      label{
-        display: inline-block;
-        line-height: 1;
-        background-color: #f0f0f0;
-        border-radius: 5px;
-        margin: .5rem;
-        padding: .5rem;
+    &.active{
+      .categories-container{
+        display: block;
+      }
+    }
+  }
 
-        span{
-          margin: 0 .5rem 2px 0;
-        }
+  &hashtags-control{
+    display: none;
 
-        input{
-          vertical-align: top;
-        }
+    label{
+      display: inline-block;
+      line-height: 1;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+      margin: .5rem;
+      padding: .5rem;
+
+      span{
+        margin: 0 .5rem 2px 0;
       }
 
-      .awesome_map-toggle_all_tags{
-        margin: .5rem 1rem;
-        font-size: .875rem;
+      input{
+        vertical-align: top;
       }
+    }
 
+    .awesome_map-toggle_all_tags{
+      margin: .5rem 1rem;
+      font-size: .875rem;
+    }
+
+    .hashtags-container,
+    .awesome_map-toggle_all_tags{
+      display: none;
+    }
+
+    &.active{
       .hashtags-container,
       .awesome_map-toggle_all_tags{
-        display: none;
-      }
-
-      &.active{
-        .hashtags-container,
-        .awesome_map-toggle_all_tags{
-          display: block;
-        }
+        display: block;
       }
     }
   }

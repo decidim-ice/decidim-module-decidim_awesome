@@ -45,6 +45,16 @@
   }
 }
 
+// Some global fixes
+.form label {
+  .help-text {
+    display: block;
+    margin-top: -1.5em;
+    font-weight: normal;
+    margin-bottom: 1.5em;
+  }
+}
+
 tbody tr.menu_hack-addition{
   background: rgb(255, 248, 222);
 }

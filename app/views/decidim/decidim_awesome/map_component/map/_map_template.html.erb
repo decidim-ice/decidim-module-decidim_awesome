@@ -56,7 +56,7 @@
   #awesome-map .google-map, .wrapper #awesome-map .google-map {
     height: <%= map_height %>px;
   }
-  <% categories.each do |category| %>
+  <% current_categories(categories).each do |category| %>
     .awesome_map-category_<%= category[:id] %> {
       background-color: <%= category[:color] %> !important;
     }
@@ -64,5 +64,5 @@
 </style>
 <script>
   window.AwesomeMap = window.AwesomeMap || {};
-  window.AwesomeMap.categories = <%= categories.to_json.html_safe %>;
+  window.AwesomeMap.categories = <%= current_categories(categories).to_json.html_safe %>;
 </script>

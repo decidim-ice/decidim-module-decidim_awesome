@@ -22,7 +22,8 @@ export default class AwesomeMap {
         amendments: false,
         meetings: false,
         categories: true,
-        hashtags: false
+        hashtags: false,
+        mergeComponents: false
       },
       show: {
         withdrawn: false,
@@ -43,6 +44,7 @@ export default class AwesomeMap {
     this.onFinished = () => {};
     this.controllers = {};
     this.loading = [];
+    this._firstController = {};
   }
 
   // Queries the API and load all the markers
@@ -53,7 +55,6 @@ export default class AwesomeMap {
     this.config.components.forEach((component) => {
       const controller = this._getController(component);
       if(controller) {
-        controller.addControls();
         controller.loadNodes();
         this.loading.push(component.type);
         controller.onFinished = () => {
@@ -103,11 +104,24 @@ export default class AwesomeMap {
   }
 
   _getController(component) {
+    let controller;
+
     if(component.type == "proposals") {
-      return this.controllers[component.type] = new ProposalsController(this, component);
+      controller = new ProposalsController(this, component);
     }
     if(component.type == "meetings" && this.config.menu.meetings) {
-      return this.controllers[component.type] = new MeetingsController(this, component);
+      controller = new MeetingsController(this, component);
+    }
+
+    if(controller) {
+      // Agrupate layers for controlling components
+      if(this._firstController[component.type] && this.config.menu.mergeComponents) {
+        controller.controls = this._firstController[component.type].controls;
+      } else  {
+        controller.addControls();
+      }
+      this._firstController[component.type] = this._firstController[component.type] || controller;
+      return this.controllers[component.type] = controller;
     }
   }
 }

@@ -106,8 +106,8 @@ module Decidim
 
         def target_options
           {
-            I18n.t(".menu_hacks.form.target.self", scope: "decidim.decidim_awesome.admin") => "",
-            I18n.t(".menu_hacks.form.target.blank", scope: "decidim.decidim_awesome.admin") => "_blank"
+            I18n.t("menu_hacks.form.target.self", scope: "decidim.decidim_awesome.admin") => "",
+            I18n.t("menu_hacks.form.target.blank", scope: "decidim.decidim_awesome.admin") => "_blank"
           }
         end
       end
