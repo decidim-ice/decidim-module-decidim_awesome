@@ -35,12 +35,13 @@ module Decidim
 
       initializer "decidim_awesome.admin_menu" do
         Decidim.menu :admin_menu do |menu|
-          menu.item I18n.t("menu.decidim_awesome", scope: "decidim.admin", default: "Decidim Awesome"),
-                    decidim_admin_decidim_awesome.config_path(:editors),
-                    icon_name: "fire",
-                    position: 7.5,
-                    active: is_active_link?(decidim_admin_decidim_awesome.config_path(:editors), :inclusive),
-                    if: defined?(current_user) && current_user&.read_attribute("admin")
+          menu.add_item :awesome_menu,
+                        I18n.t("menu.decidim_awesome", scope: "decidim.admin", default: "Decidim Awesome"),
+                        decidim_admin_decidim_awesome.config_path(:editors),
+                        icon_name: "fire",
+                        position: 7.5,
+                        active: is_active_link?(decidim_admin_decidim_awesome.config_path(:editors), :inclusive),
+                        if: defined?(current_user) && current_user&.read_attribute("admin")
         end
       end
 

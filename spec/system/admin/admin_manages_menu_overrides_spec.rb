@@ -16,9 +16,10 @@ describe "Admin manages hacked menus", type: :system do
 
   before do
     Decidim::MenuRegistry.register :menu do |menu|
-      menu.item "Native",
-                "/some-path?locale=ca",
-                position: 5
+      menu.add_item :native_menu,
+                    "Native",
+                    "/some-path?locale=ca",
+                    position: 5
     end
     switch_to_host(organization.host)
     login_as user, scope: :user

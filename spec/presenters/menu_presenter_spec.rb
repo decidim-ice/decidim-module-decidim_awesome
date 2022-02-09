@@ -30,10 +30,10 @@ module Decidim
       allow(view).to receive(:current_organization).and_return(organization)
       allow(view).to receive(:current_user).and_return(user)
       MenuRegistry.register :custom_menu do |menu|
-        menu.item "Foo", "/foo", position: 1
-        menu.item "Bar", "/bar", position: 2
-        menu.item "Baz", "/baz", if: Time.current.year == 2000
-        menu.item "Hid", "/hid", if: Time.current.year == 2000
+        menu.add_item :native_foo, "Foo", "/foo", position: 1
+        menu.add_item :native_bar, "Bar", "/bar", position: 2
+        menu.add_item :native_baz, "Baz", "/baz", if: Time.current.year == 2000
+        menu.add_item :native_hid, "Hid", "/hid", if: Time.current.year == 2000
       end
     end
 

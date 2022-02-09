@@ -1,7 +1,7 @@
-import "src/decidim/decidim_awesome/forms/rich_text_plugin"
 require("formBuilder/dist/form-render.min.js")
+import "src/decidim/decidim_awesome/forms/rich_text_plugin"
 
-export default class CustomFieldsBuilder { // eslint-disable-line no-unused-vars
+export default class CustomFieldsRenderer { // eslint-disable-line no-unused-vars
   constructor(container_selector) {
     this.container_selector = container_selector || ".proposal_custom_field:last";
     this.lang = this.getLang($("html").attr("lang"));

@@ -1,6 +1,5 @@
-// import "src/decidim/decidim_awesome/editors/quill_editor"
+require("formBuilder/dist/form-builder.min.js")
 import "src/decidim/decidim_awesome/forms/rich_text_plugin"
-import "jquery-ui/ui/widgets/sortable"
 
 let formBuilderList = [];
 

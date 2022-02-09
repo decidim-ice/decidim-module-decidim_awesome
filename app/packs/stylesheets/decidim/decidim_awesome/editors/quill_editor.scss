@@ -35,8 +35,22 @@
   >p.help-text {
    margin-top: .2rem !important;
   }
-  .ql-snow.ql-toolbar button {
-    width: 24px;
-    margin: 3px 0;
+  .ql-snow.ql-toolbar {
+    button {
+      width: 22px;
+      margin: 1px 0;
+    }
+    + .ql-container.ql-snow {
+      border-radius: 0;
+    }
+  }
+}
+
+.proposal_custom_fields_editor {
+  .form-wrap.form-builder {
+    .form-group > .form-control[type="richtext"] {
+      padding: 0;
+      border: none;
+    }
   }
 }

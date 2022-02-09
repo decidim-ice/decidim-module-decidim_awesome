@@ -82,7 +82,7 @@ describe "Admin edits proposals", type: :system do
 
     it "converts markdown to html before saving" do
       sleep 1
-      page.execute_script("$('input[name=\"faker-inscrybmde\"]:first')[0].InscrybMDE.value('#{text}')")
+      page.execute_script("$('[name=\"faker-inscrybmde\"]:first')[0].InscrybMDE.value('#{text}')")
 
       click_button "Update"
 

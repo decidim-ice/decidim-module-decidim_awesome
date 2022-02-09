@@ -3,7 +3,7 @@
 require "spec_helper"
 require "carrierwave/test/matchers"
 
-module Decidim::DecidimAwesome
+module Decidim::Cw::DecidimAwesome
   describe ImageUploader do
     include CarrierWave::Test::Matchers
 

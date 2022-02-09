@@ -6,7 +6,7 @@ describe "Show intergram chat", type: :system do
   let!(:user) { create :user, :confirmed, organization: organization }
   let(:organization) { create :organization, available_locales: [:en] }
 
-  let(:intergram_url) { "http://some.url/widget.js" }
+  let(:intergram_url) { "http://example.com/widget.js" }
   let(:intergram_for_admins) { true }
   let(:intergram_for_public) { true }
   let(:require_login) { false }
@@ -29,6 +29,7 @@ describe "Show intergram chat", type: :system do
   end
 
   before do
+    stub_request(:get, intergram_url).to_return(status: 200, body: "")
     Decidim::DecidimAwesome.config.intergram_url = intergram_url
 
     switch_to_host(organization.host)

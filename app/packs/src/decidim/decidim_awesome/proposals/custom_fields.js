@@ -1,17 +1,17 @@
-import CustomFieldsBuilder from "src/decidim/decidim_awesome/forms/custom_fields_builder"
+import CustomFieldsRenderer from "src/decidim/decidim_awesome/forms/custom_fields_renderer"
 
-window.DecidimAwesome.FormRenderBuilder = window.DecidimAwesome.FormRenderBuilder || new CustomFieldsBuilder();
+window.DecidimAwesome.CustomFieldsRenderer = window.DecidimAwesome.CustomFieldsRenderer || new CustomFieldsRenderer();
 
 $(() => {
   // use admin multilang specs if exists
   let $el = $("proposal_custom_field:first", ".tabs-title.is-active");
   $el = $el.length ? $el : $(".proposal_custom_field:first");
-  DecidimAwesome.FormRenderBuilder.init($el);
+  DecidimAwesome.CustomFieldsRenderer.init($el);
 
-  DecidimAwesome.FormRenderBuilder.$container.closest("form").on("submit", (e) => {
+  DecidimAwesome.CustomFieldsRenderer.$container.closest("form").on("submit", (e) => {
     if(e.target.checkValidity()) {
       // save current editor
-      DecidimAwesome.FormRenderBuilder.storeData();
+      DecidimAwesome.CustomFieldsRenderer.storeData();
     } else {
       e.preventDefault();
       e.target.reportValidity();

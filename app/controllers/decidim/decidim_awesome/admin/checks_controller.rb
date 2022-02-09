@@ -48,7 +48,7 @@ module Decidim
           when :JavaScript
             ['<%= render partial: "layouts/decidim/decidim_awesome/awesome_config" %>',
              '<%= javascript_pack_tag "decidim_decidim_awesome" %>',
-             '<%= javascript_pack_tag "decidim_decidim_awesome_proposals_custom_fields" if awesome_proposal_custom_fields %>'].join("\n")
+             '<%= javascript_pack_tag "decidim_decidim_awesome_custom_fields" if awesome_proposal_custom_fields %>'].join("\n")
           end
         end
 
@@ -58,7 +58,7 @@ module Decidim
             '<%= stylesheet_pack_tag "decidim_admin_decidim_awesome", media: "all" %>'
           when :JavaScript
             ['<%= javascript_pack_tag "decidim_admin_decidim_awesome", defer: false %>',
-             '<%= javascript_pack_tag "decidim_decidim_awesome_proposals_custom_fields" if awesome_proposal_custom_fields %>'].join("\n")
+             '<%= javascript_pack_tag "decidim_decidim_awesome_custom_fields" if awesome_proposal_custom_fields %>'].join("\n")
           end
         end
       end

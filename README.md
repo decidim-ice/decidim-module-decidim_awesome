@@ -134,7 +134,7 @@ Also feel free to propose something! or even better send a PR!
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-decidim_awesome", "~> 0.8.0"
+gem "decidim-decidim_awesome"
 ```
 
 And then execute:
@@ -144,6 +144,9 @@ bundle
 bundle exec rails decidim_decidim_awesome:install:migrations
 bundle exec rails db:migrate
 ```
+
+The correct version of Decidim Awesome should resolved automatically by the Bundler.
+However you can force some specific version using `gem "decidim-decidim_awesome", "~> 0.8.0"` in the Gemfile.
 
 Depending on your Decidim version, choose the corresponding Awesome version to ensure compatibility:
 
