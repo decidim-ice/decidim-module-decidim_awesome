@@ -37,12 +37,12 @@ $(() => {
   };
 
   // build awesome map (if exist)
-  $("#awesome-map .google-map").on("ready.decidim", (evt, map, mapConfig) => {
+  $("#awesome-map .google-map").on("ready.decidim", (evt, map) => {
     // bindPopup doesn't work for some unknown cause and these handler neither so we're cancelling them
     map.off("popupopen");
     map.off("popupclose");
 
-    // console.log("ready map", map, mapConfig);
+    // console.log("ready map", map);
 
     window.AwesomeMap = new AwesomeMap(map, config);
     window.AwesomeMap.loadControllers();

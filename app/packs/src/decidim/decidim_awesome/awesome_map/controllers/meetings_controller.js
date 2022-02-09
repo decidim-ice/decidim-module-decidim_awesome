@@ -9,23 +9,23 @@ const MeetingIcon = L.DivIcon.SVGIcon.DecidimIcon.extend({
 });
 
 export default class MeetingsController extends Controller {
-	constructor(awesomeMap, component) {
-		super(awesomeMap, component)
-		this.templateId = "marker-meeting-popup";
-		this.setFetcher(MeetingsFetcher);
-	}
+  constructor(awesomeMap, component) {
+    super(awesomeMap, component)
+    this.templateId = "marker-meeting-popup";
+    this.setFetcher(MeetingsFetcher);
+  }
 
-	loadNodes() {
-		// for each meeting, create a marker with an associated popup
-		this.fetcher.onNode = (meeting) => {
-	    let marker = new L.Marker([meeting.coordinates.latitude, meeting.coordinates.longitude], {
-	      icon: this.createIcon(MeetingIcon, this.awesomeMap.getCategory(meeting.category).color),
-	      title: meeting.title.translation
-	    });
-			// console.log("new meeting", meeting, marker)
-			this.addMarker(marker, meeting);
-		};
+  loadNodes() {
+    // for each meeting, create a marker with an associated popup
+    this.fetcher.onNode = (meeting) => {
+      let marker = new L.Marker([meeting.coordinates.latitude, meeting.coordinates.longitude], {
+        icon: this.createIcon(MeetingIcon, this.awesomeMap.getCategory(meeting.category).color),
+        title: meeting.title.translation
+      });
+      // console.log("new meeting", meeting, marker)
+      this.addMarker(marker, meeting);
+    };
 
-		this.fetcher.fetch();
-	}
+    this.fetcher.fetch();
+  }
 }

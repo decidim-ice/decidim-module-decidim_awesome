@@ -13,7 +13,7 @@ import {destroyQuillEditor,createQuillEditor,createMarkdownEditor} from "src/dec
 
 $(() => {
   $(".editor-container").each((_idx, container) => {
-  	destroyQuillEditor(container);
+    destroyQuillEditor(container);
     if(window.DecidimAwesome.use_markdown_editor) {
       createMarkdownEditor(container);
     } else {

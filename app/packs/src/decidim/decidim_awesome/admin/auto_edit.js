@@ -16,7 +16,6 @@ $(() => {
     const $multiple = $(`[name="config[${attribute}][${key}][]"]`);
     const $container = $(`.${attribute}_container[data-key="${key}"]`);
     const $delete = $('.delete-box', $container);
-    const token = $('meta[name="csrf-token"]').attr('content');
 
     const rebuildLabel = (text, scope) => {
       $target.text(text);

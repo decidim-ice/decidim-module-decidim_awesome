@@ -6,7 +6,7 @@ $(() => {
   // rebuild editors
   if(window.DecidimAwesome.allow_images_in_full_editor || window.DecidimAwesome.allow_images_in_small_editor || window.DecidimAwesome.use_markdown_editor) {
     $(".editor-container").each((_idx, container) => {
-    	destroyQuillEditor(container);
+      destroyQuillEditor(container);
       if(window.DecidimAwesome.use_markdown_editor) {
         createMarkdownEditor(container);
       } else {

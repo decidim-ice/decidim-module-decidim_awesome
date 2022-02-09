@@ -31,7 +31,7 @@ export function destroyQuillEditor(container) {
       $(container).removeClass ((index, class_name) => (class_name.match (/(^|\s)ql-\S+/g) || []).join(' '));
     }
     else {
-      console.error(`editor [${selector}] not exists`);
+      console.error(`editor [${container}] not exists`);
     }
 }
 
@@ -138,7 +138,7 @@ export function createQuillEditor(container) {
   quill.emitter.emit("editor-ready");
 
   if (addImage) {
-    const text = $(container).data("dragAndDropHelpText") || DecidimAwesome.texts["drag_and_drop_image"];;
+    const text = $(container).data("dragAndDropHelpText") || DecidimAwesome.texts["drag_and_drop_image"];
     $(container).after(`<p class="help-text" style="margin-top:-1.5rem;">${text}</p>`);
   }
 

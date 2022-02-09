@@ -11,66 +11,66 @@ import ProposalsController from "src/decidim/decidim_awesome/awesome_map/control
 import MeetingsController from "src/decidim/decidim_awesome/awesome_map/controllers/meetings_controller";
 
 export default class AwesomeMap {
-	constructor(map, config) {
-		this.map = map;
-		this.categories = window.AwesomeMap && window.AwesomeMap.categories || []
+  constructor(map, config) {
+    this.map = map;
+    this.categories = window.AwesomeMap && window.AwesomeMap.categories || []
     this.config = $.extend({
-    	length: 255,
-    	center: null,
-    	zoom: 8,
-    	menu: {
-				amendments: false,
+      length: 255,
+      center: null,
+      zoom: 8,
+      menu: {
+        amendments: false,
         meetings: false,
         categories: true,
         hashtags: false
-    	},
-    	show: {
-	      withdrawn: false,
-	      accepted: false,
-	      evaluating: false,
-	      notAnswered: false,
-	      rejected: false
-    	},
-    	hideControls: false,
-    	collapsedMenu: false,
-    	components: []
+      },
+      show: {
+        withdrawn: false,
+        accepted: false,
+        evaluating: false,
+        notAnswered: false,
+        rejected: false
+      },
+      hideControls: false,
+      collapsedMenu: false,
+      components: []
     }, config);
-	  this.layers = {};
+    this.layers = {};
     this.cluster = new L.MarkerClusterGroup();
     this.map.addLayer(this.cluster);
     this.controls = new ControlsUI(this);
-	  this.allMarkers = [];
-	  this.onFinished = () => {};
-	  this.controllers = {};
-	  this.loading = [];
-	}
+    this.allMarkers = [];
+    this.onFinished = () => {};
+    this.controllers = {};
+    this.loading = [];
+  }
 
-	// Queries the API and load all the markers
-	loadControllers() {
+  // Queries the API and load all the markers
+  loadControllers() {
     this.autoResize();
     this.controls.attach();
 
     this.config.components.forEach((component) => {
-    	const controller = this._getController(component);
-    	if(controller) {
-    		controller.addControls();
-    		controller.loadNodes();
-    		this.loading.push(component.type);
-    		controller.onFinished = () => {
-    			this.loading.pop();
-					this.autoResize();
+      const controller = this._getController(component);
+      if(controller) {
+        controller.addControls();
+        controller.loadNodes();
+        this.loading.push(component.type);
+        controller.onFinished = () => {
+          this.loading.pop();
+          this.autoResize();
 
-    			if(this.loading.length == 0) {
-    				this.controls.$loading.hide();
-    				// call trigger as all loads are finished
-    				this.onFinished();
-    			}
-    		};
-    	}
+          if(this.loading.length == 0) {
+            this.controls.$loading.hide();
+            // call trigger as all loads are finished
+            this.onFinished();
+          }
+        };
+      }
     });
-	}
+  }
 
-	autoResize() {
+  autoResize() {
     // Setup center/zoom options if specified, otherwise fitbounds
     const bounds = this.cluster.getBounds()
     if(this.config.center && this.config.zoom) {
@@ -79,7 +79,7 @@ export default class AwesomeMap {
       // this.map.fitBounds(bounds, { padding: [50, 50] }); // this doesn't work much of the time, probably some race condition
       this.map.fitBounds([[bounds.getNorth(),bounds.getEast()],[bounds.getSouth(),bounds.getWest()]], { padding: [50, 50] });
     }
-	}
+  }
 
    getCategory(category) {
     let defaultCat = {
@@ -103,11 +103,11 @@ export default class AwesomeMap {
   }
 
   _getController(component) {
-  	if(component.type == "proposals") {
-  		return this.controllers[component.type] = new ProposalsController(this, component);
-  	}
-  	if(component.type == "meetings" && this.config.menu.meetings) {
-  		return this.controllers[component.type] = new MeetingsController(this, component);
-  	}
+    if(component.type == "proposals") {
+      return this.controllers[component.type] = new ProposalsController(this, component);
+    }
+    if(component.type == "meetings" && this.config.menu.meetings) {
+      return this.controllers[component.type] = new MeetingsController(this, component);
+    }
   }
 }

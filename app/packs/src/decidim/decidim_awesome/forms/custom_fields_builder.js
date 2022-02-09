@@ -1,6 +1,5 @@
 import "src/decidim/decidim_awesome/forms/rich_text_plugin"
 require("formBuilder/dist/form-render.min.js")
-import {destroyQuillEditor} from "src/decidim/decidim_awesome/editors/editor"
 
 export default class CustomFieldsBuilder { // eslint-disable-line no-unused-vars
   constructor(container_selector) {

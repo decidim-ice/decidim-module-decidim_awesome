@@ -15,7 +15,7 @@ Decidim.register_component(:awesome_iframe) do |component|
     # Add your global settings
     # Available types: :integer, :boolean
     settings.attribute :announcement, type: :text, translated: true, editor: true
-    settings.attribute :iframe, type: :text
+    settings.attribute :iframe, type: :text, default: ""
     settings.attribute :viewport_width, type: :boolean, default: false
     settings.attribute :no_margins, type: :boolean, default: false
   end
@@ -23,7 +23,7 @@ Decidim.register_component(:awesome_iframe) do |component|
   component.settings(:step) do |settings|
     # Add your settings per step
     settings.attribute :announcement, type: :text, translated: true, editor: true
-    settings.attribute :iframe, type: :text
+    settings.attribute :iframe, type: :text, default: ""
   end
 
   # component.register_stat :some_stat do |context, start_at, end_at|

@@ -1,9 +1,9 @@
 import Fetcher from "src/decidim/decidim_awesome/awesome_map/api/fetcher";
 
 export default class MeetingsFetcher extends Fetcher {
-	constructor(controller) {
-		super(controller);
-		this.query = `query ($id: ID!, $after: String!) {
+  constructor(controller) {
+    super(controller);
+    this.query = `query ($id: ID!, $after: String!) {
     component(id: $id) {
         id
         __typename
@@ -55,5 +55,5 @@ export default class MeetingsFetcher extends Fetcher {
         }
       }
     }`;
-	}
+  }
 }

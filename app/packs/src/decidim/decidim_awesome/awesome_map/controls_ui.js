@@ -1,30 +1,30 @@
 import * as L from "leaflet";
 
 export default class ControlsUI {
-	constructor(awesomeMap) {
-		this.awesomeMap = awesomeMap;
+  constructor(awesomeMap) {
+    this.awesomeMap = awesomeMap;
 
-  	this.main = L.control.layers(null, null, {
-	    position: 'topleft',
-	    sortLayers: false,
-	    collapsed: this.awesomeMap.config.collapsedMenu,
-	    // hideSingleBase: true
-	  });
+    this.main = L.control.layers(null, null, {
+      position: 'topleft',
+      sortLayers: false,
+      collapsed: this.awesomeMap.config.collapsedMenu,
+      // hideSingleBase: true
+    });
 
-	  if(this.awesomeMap.config.hideControls) {
+    if(this.awesomeMap.config.hideControls) {
       $(this.main.getContainer()).hide();
     }
 
     this.$loading = $("#awesome-map .loading-spinner");
     this.onHashtag = this._orderHashtags;
 
-    this.awesomeMap.map.on("overlayadd",(e) => {
+    this.awesomeMap.map.on("overlayadd",() => {
       this.removeHiddenCategories();
     });
-	}
+  }
 
-	attach() {
-	  // legends
+  attach() {
+    // legends
     this.main.addTo(this.awesomeMap.map);
 
     this.addSearchControls();
@@ -58,14 +58,14 @@ export default class ControlsUI {
       $("#awesome-map .awesome_map-hashtags-selector").prop("checked", $("#awesome-map .awesome_map-hashtags-selector:checked").length < $("#awesome-map .awesome_map-hashtags-selector").length);
       this.updateHashtagLayers();
     });
-	}
+  }
 
-	addSearchControls() {
+  addSearchControls() {
     $(this.main.getContainer()).contents("form").append(`<div id="awesome_map-categories-control" class="active"><b class="awesome_map-title-control">${window.DecidimAwesome.texts.categories}</b><div class="categories-container"></div></div>
     <div id="awesome_map-hashtags-control"><b class="awesome_map-title-control">${window.DecidimAwesome.texts.hashtags}</b><div class="hashtags-container"></div><a href="#" class="awesome_map-toggle_all_tags">${window.DecidimAwesome.texts.select_deselect_all}</a></div>`);
   }
 
-	addCategoriesControls() {
+  addCategoriesControls() {
     this.awesomeMap.categories.forEach((category) => {
       // add control layer for this category
       const label = `<i class="awesome_map-category_${category.id}"></i> ${category.name}`;

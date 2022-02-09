@@ -11,6 +11,7 @@
         "sourceType": "module"
     },
     "globals": {
+        "require": false,
         "$": false,
         "jQuery": false,
         "L": false,

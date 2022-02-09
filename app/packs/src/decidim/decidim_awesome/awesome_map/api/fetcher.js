@@ -1,56 +1,56 @@
 import ApiFetcher from "src/decidim/decidim_awesome/awesome_map/api/api_fetcher";
 
 export default class Fetcher {
-	constructor(controller) {
-		this.controller = controller;
+  constructor(controller) {
+    this.controller = controller;
     this.config = {
-    	length: controller.awesomeMap.config.length || 255
-		};
-		this.onFinished = () => {};
-		this.onNode = () => {};
-		this.hashtags = [];
+      length: controller.awesomeMap.config.length || 255
+    };
+    this.onFinished = () => {};
+    this.onNode = () => {};
+    this.hashtags = [];
 
-		this.collection = this.controller.component.type;
+    this.collection = this.controller.component.type;
     // override in specific components:
-		this.query = `query ($id: ID!, $after: String!) {
-	  	  component(id: $id) {
-  	      id
-      	  __typename
-				}
-			}`;
-	}
+    this.query = `query ($id: ID!, $after: String!) {
+        component(id: $id) {
+          id
+          __typename
+        }
+      }`;
+  }
 
-	fetch(after='') {
+  fetch(after='') {
     const variables = {
       "id": this.controller.component.id,
       "after": after
     };
     const api = new ApiFetcher(this.query, variables);
     api.fetchAll((result) => {
-    	if(result) {
-    		const collection = result.component[this.collection];
-    		// console.log("collection",collection)
-    		
-		    collection.edges.forEach((element) => {
-		    	let node = element.node;
-		      if(!node) return;
-			
-			    if(node.coordinates && node.coordinates.latitude && node.coordinates.longitude) {
-		    		this.decorateNode(node);
-			      this.onNode(node)
-					}
-		    });
+      if(result) {
+        const collection = result.component[this.collection];
+        // console.log("collection",collection)
+        
+        collection.edges.forEach((element) => {
+          let node = element.node;
+          if(!node) return;
+      
+          if(node.coordinates && node.coordinates.latitude && node.coordinates.longitude) {
+            this.decorateNode(node);
+            this.onNode(node)
+          }
+        });
 
-		    if (collection.pageInfo.hasNextPage) {
-		      this.fetch(collection.pageInfo.endCursor);
-		    } else {
-		      this.onFinished();
-		    }
-    	}
+        if (collection.pageInfo.hasNextPage) {
+          this.fetch(collection.pageInfo.endCursor);
+        } else {
+          this.onFinished();
+        }
+      }
     });
-	}
+  }
 
-	decorateNode(node) {
+  decorateNode(node) {
     const body = this.findTranslation(node.body.translations);
     const title = this.findTranslation(node.title.translations);
     node.hashtags = this.collectHashtags(title);
@@ -59,7 +59,7 @@ export default class Fetcher {
     node.title.translation = this.replaceHashtags(title, node.hashtags);
     node.body.translation = this.appendHtmlHashtags(this.truncate(this.removeHashtags(body)).replace(/\n/g, "<br>"), node.hashtags);
     node.link = this.controller.component.url + "/" + this.collection + "/" + node.id;
-	}
+  }
 
   findTranslation(translations) {
     let text, lang = document.querySelector('html').getAttribute('lang');
@@ -121,6 +121,6 @@ export default class Fetcher {
   }
 
   truncate(html) {
-		return $.truncate(html, this.config);
+    return $.truncate(html, this.config);
   }
 }
