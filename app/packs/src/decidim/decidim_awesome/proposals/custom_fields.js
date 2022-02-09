@@ -6,12 +6,12 @@ $(() => {
   // use admin multilang specs if exists
   let $el = $("proposal_custom_field:first", ".tabs-title.is-active");
   $el = $el.length ? $el : $(".proposal_custom_field:first");
-  DecidimAwesome.CustomFieldsRenderer.init($el);
+  window.DecidimAwesome.CustomFieldsRenderer.init($el);
 
-  DecidimAwesome.CustomFieldsRenderer.$container.closest("form").on("submit", (e) => {
+  window.DecidimAwesome.CustomFieldsRenderer.$container.closest("form").on("submit", (e) => {
     if(e.target.checkValidity()) {
       // save current editor
-      DecidimAwesome.CustomFieldsRenderer.storeData();
+      window.DecidimAwesome.CustomFieldsRenderer.storeData();
     } else {
       e.preventDefault();
       e.target.reportValidity();

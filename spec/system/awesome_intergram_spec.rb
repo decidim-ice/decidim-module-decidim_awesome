@@ -29,7 +29,7 @@ describe "Show intergram chat", type: :system do
   end
 
   before do
-    stub_request(:get, intergram_url).to_return(status: 200, body: "")
+    stub_request(:get, /example\.com/).to_return(status: 200, body: "")
     Decidim::DecidimAwesome.config.intergram_url = intergram_url
 
     switch_to_host(organization.host)

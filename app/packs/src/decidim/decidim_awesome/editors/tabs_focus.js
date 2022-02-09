@@ -14,9 +14,9 @@ $(() => {
     $input = $container.find(".proposal_custom_field:first");
     if($input.length > 0) {
       // saves current data to the hidden field for the lang
-      DecidimAwesome.FormRenderBuilder.storeData();
+      window.DecidimAwesome.CustomFieldsRenderer.storeData();
       // init the current language
-      DecidimAwesome.FormRenderBuilder.init($input);
+      window.DecidimAwesome.CustomFieldsRenderer.init($input);
     }
   });
 });
