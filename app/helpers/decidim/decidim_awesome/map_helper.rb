@@ -5,6 +5,10 @@ module Decidim
     module MapHelper
       include Decidim::MapHelper
 
+      def api_ready?
+        Decidim::Api::Schema.max_complexity >= 1300
+      end
+
       # rubocop:disable Metrics/CyclomaticComplexity
       # rubocop:disable Metrics/PerceivedComplexity:
       def awesome_map_for(components, &block)

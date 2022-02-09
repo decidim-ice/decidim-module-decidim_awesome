@@ -6,67 +6,7 @@
     <div class="row">
       <div class="columns medium-12">
         <%= awesome_map_for global_map_components do %>
-          <script id="marker-proposal-popup" type="text/x-jsrender">
-            <div class="map-info__content">
-              <h3>{{>title.translation}}</h3>
-              <div id="bodyContent">
-                <div class="description">{{:body.translation}}</div>
-                <div class="map__date-adress">
-                  <div class="address card__extra">
-                    <div class="address__icon">{{:icon}}</div>
-                    <div class="address__details">
-                      <span>{{>address}}</span><br>
-                    </div>
-                  </div>
-                </div>
-                <div class="map-info__button">
-                  <a href="{{>link}}" class="button button--sc">
-                    <%= t("view_proposal", scope: "decidim.decidim_awesome.map_component.map.show") %>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </script>
-
-          <script id="marker-meeting-popup" type="text/x-jsrender">
-            <div class="map-info__content">
-              <h3>{{>title.translation}}</h3>
-              <div id="bodyContent">
-                <div class="description">{{:description.translation}}</div>
-                <div class="map__date-adress">
-                  <div class="card__datetime">
-                    <div class="card__datetime__date">
-                      {{>startTimeDay}} <span class="card__datetime__month">{{>startTimeMonth}} {{>startTimeYear}}</span>
-                    </div>
-                    <div class="card__datetime__time">{{>starTime}}</div>
-                  </div>
-                  <div class="address card__extra">
-                    <div class="address__icon">{{:icon}}</div>
-                    <div class="address__details">
-                      <strong>{{:location.translation}}</strong><br>
-                      <span>{{>address}}</span><br>
-                      <span>{{:locationHints.translation}}</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="map-info__button">
-                  <a href="{{>link}}" class="button button--sc">
-                    <%= t("decidim.meetings.meetings_map.view_meeting") %>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </script>
-
-          <style type="text/css">
-            #awesome-map .leaflet-container {
-              height: <%= model.settings.map_height %>px;
-            }
-          </style>
-          <script>
-            window.AwesomeMap = window.AwesomeMap || {};
-            window.AwesomeMap.categories = <%= all_categories.to_json.html_safe %>;
-          </script>
+          <%= render partial: "decidim/decidim_awesome/map_component/map/map_template.html", locals: { categories: all_categories, map_height: model.settings.map_height } %>
         <% end %>
       </div>
     </div>

@@ -4,12 +4,23 @@ module Decidim
   module DecidimAwesome
     module ContentBlocks
       class MapCell < Decidim::ViewModel
+        include Cell::ViewModel::Partial
         include Decidim::DecidimAwesome::MapHelper
         include Decidim::CardHelper
 
         delegate :snippets, to: :controller
         delegate :settings, to: :model
         alias current_settings settings
+
+        def show
+          return error unless Decidim::Map.configured?
+
+          render
+        end
+
+        def error
+          render
+        end
 
         def hide_controls
           true

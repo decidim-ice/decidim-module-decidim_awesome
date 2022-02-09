@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "decidim/decidim_awesome/test/shared_examples/controller_examples"
 
 module Decidim::DecidimAwesome
   module IframeComponent

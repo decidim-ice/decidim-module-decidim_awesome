@@ -1,0 +1,68 @@
+<div class="loading-spinner"></div>
+
+<script id="marker-proposal-popup" type="text/x-jsrender">
+  <div class="map-info__content">
+    <h3>{{:title.translation}}</h3>
+    <div id="bodyContent">
+      <div class="description">{{:body.translation}}</div>
+      <div class="map__date-adress">
+        <div class="address card__extra">
+          <div class="address__icon">{{:icon}}</div>
+          <div class="address__details">
+            <span>{{>address}}</span><br>
+          </div>
+        </div>
+      </div>
+      <div class="map-info__button">
+        <a href="{{>link}}" class="button button--sc">
+          <%= t("view_proposal", scope: "decidim.decidim_awesome.map_component.map.show") %>
+        </a>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script id="marker-meeting-popup" type="text/x-jsrender">
+  <div class="map-info__content">
+    <h3>{{:title.translation}}</h3>
+    <div id="bodyContent">
+      <div class="description">{{:body.translation}}</div>
+      <div class="map__date-adress">
+        <div class="card__datetime">
+          <div class="card__datetime__date">
+            {{>startTimeDay}} <span class="card__datetime__month">{{>startTimeMonth}} {{>startTimeYear}}</span>
+          </div>
+          <div class="card__datetime__time">{{>starTime}}</div>
+        </div>
+        <div class="address card__extra">
+          <div class="address__icon">{{:icon}}</div>
+          <div class="address__details">
+            <strong>{{:location.translation}}</strong><br>
+            <span>{{>address}}</span><br>
+            <span>{{:locationHints.translation}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="map-info__button">
+        <a href="{{>link}}" class="button button--sc">
+          <%= t("view_meeting", scope: "decidim.meetings.meetings_map") %>
+        </a>
+      </div>
+    </div>
+  </div>
+</script>
+
+<style type="text/css">
+  #awesome-map .google-map, .wrapper #awesome-map .google-map {
+    height: <%= map_height %>px;
+  }
+  <% categories.each do |category| %>
+    .awesome_map-category_<%= category[:id] %> {
+      background-color: <%= category[:color] %> !important;
+    }
+  <% end %>
+</style>
+<script>
+  window.AwesomeMap = window.AwesomeMap || {};
+  window.AwesomeMap.categories = <%= categories.to_json.html_safe %>;
+</script>
