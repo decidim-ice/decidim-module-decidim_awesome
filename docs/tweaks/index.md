@@ -1,7 +1,9 @@
 ---
 layout: default
-title: Case studies
+title: Tweaks
 nav_order: 2
 has_children: true
 ---
-Case studies index page
+## Tweaks
+
+{:toc}

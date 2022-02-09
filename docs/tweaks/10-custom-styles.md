@@ -1,12 +1,28 @@
 ---
 layout: default
 title: Custom styles
-excerpt: A sample description for SEO.
-parent: Case studies
+excerpt: "DecidimAwesome Tweak: Custom styles"
+parent: Tweaks
+nav_order: 10
 ---
+
+# Custom CSS applied only according scoped restrictions
+{: .no_toc }
+
+This tweak will be deprecated in next version (0.8.0)
+{: .label .label-red }
+
+With this feature you can create directly in the admin a CSS snipped that is only applied globally, in a particular assembly or even a single proposal!
+
+![CSS screenshot]({{ 'assets/images/tweaks/custom_styles.png' | relative_url }})
+
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
 {:toc}
 
-***
+## Examples
 
 Here are some customisations that can be useful. To apply them, follow these steps:
 1. Enter to admin panel > Decidim awesome > Custom styles
@@ -17,9 +33,9 @@ Here are some customisations that can be useful. To apply them, follow these ste
 Customisations have been tested in Firefox, Chrome, and Safari browsers.
 
 ***
-# Participatory process
+### Participatory process
 
-## Remove creation date of process
+#### Remove creation date of process
 
 To remove the creation date of a process card
 
@@ -28,9 +44,9 @@ li.card-data__item.creation_date_status { display:none; }
 ```
 ⚠️ Remember to select "Process" in "Applicable only in these cases".
 
-# Meetings component
+### Meetings component
 
-## Change avatar in official meetings
+#### Change avatar in official meetings
 
 ![Avatar changed for official meetings](http://demo.platoniq.net/uploads/decidim/attachment/file/108/big_official-meeting.png)
 
@@ -57,7 +73,7 @@ div.view-header div.author-data span.author__avatar {
 }
 ```
 
-## Hide meetings map
+#### Hide meetings map
 
 To hide the map above the meetings list, paste the following code in the CSS box.
 
@@ -68,7 +84,7 @@ To hide the map above the meetings list, paste the following code in the CSS box
 div#map { display: none; }
 ```
 
-## Hide filter sidebar
+#### Hide filter sidebar
 
 To hide the filter in the meetings list, paste the following code in the CSS box.
 
@@ -84,9 +100,9 @@ div#meetings { width: 100%; }
 
 ***
 
-# Proposals component
+### Proposals component
 
-## Hide some filters in proposals list
+#### Hide some filters in proposals list
 
 Select the code of the filter you want to hide and paste it to the CSS box.
 
@@ -108,3 +124,8 @@ div.filters__section.activity_collection_radio_buttons_filter { display: none; }
 /* hide related to filter */
 div.filters__section.related_to_collection_radio_buttons_filter { display: none; }
 ```
+
+## Sponsors
+
+> TBD
+
