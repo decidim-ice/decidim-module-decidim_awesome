@@ -77,44 +77,25 @@ It also provides a simple search by category, each category is assigned to a dif
 
 ![Awesome map](examples/awesome-map.png)
 
-#### 7. Allow Decidim to use custom CSS themes for every tenant
-
-When customizing CSS for a Decidim installation, each change affects all the organizations (tenant).
-
-This feature allows to customize each organization css without affecting the others in the same Decidim installation.
-
-##### To create a theme
-
-1. Get your hostname for the organization, theme search will be based on this (e.g: `myorganization.com`)
-2. Create in you Decidim application this folder: `app/assets/themes/`
-3. Create a file in that folder with the same name as the host and suffixed `.css` or `.scss` (e.g: `app/assets/themes/myorganization.com.scss`)
-4. Modify that file as you like, you can use any SASS function available (such as `@import`)
-5. Restart your server, enjoy!
-
-See an example here:
-https://github.com/Platoniq/decidim-demo/tree/master/app/assets/themes
-
-NOTE: Files presents in the `app/assets/themes` folder are added automatically into the precompile list of Rails by this plugin.
-
-#### 8. Fullscreen Iframe component
+#### 7. Fullscreen Iframe component
 
 Another simple component that can be used to embed and Iframe with any external content in it that fills all the viewport.
 
 ![Fullscreen iframe](examples/fullscreen-iframe.png)
 
-#### 9. Live support chat
+#### 8. Live support chat
 
 With this feature you can have a support chat in Decidim. It is linked to a [Telegram](https://telegram.org/) group or a single user chat using the [[IntergramBot](https://web.telegram.org/#/im?p=@IntergramBot). Just invite the bot to a group or chat with it directly, grab your ID, put it on the Awesome settings and have fun!. For more info or for hosting your own version of the bot check the [Intergram project](https://github.com/idoco/intergram).
 
 ![Intergram screenshot](examples/intergram.png)
 
-#### 10. Custom CSS applied only according scoped restrictions
+#### 9. Custom CSS applied only according scoped restrictions
 
 With this feature you can create directly in the admin a CSS snipped that is only applied globally, in a particular assembly or even a single proposal!
 
 ![CSS screenshot](examples/custom_styles.png)
 
-#### 11. Change the main menu of Decidim entirely!
+#### 10. Change the main menu of Decidim entirely!
 
 Feel free to hide, modify or add items in the Decidim's main menu. You can also change the order, establish some conditions (like showing only for logged users) or open in a new window.
 
@@ -123,7 +104,7 @@ Feel free to hide, modify or add items in the Decidim's main menu. You can also 
 ![Menu hacks screenshot](examples/menu-3.png)
 ![Menu hacks screenshot](examples/menu-4.png)
 
-#### 12. Assign admins to specific scopes and prevent them modify anything else
+#### 11. Assign admins to specific scopes and prevent them modify anything else
 
 Convert any user on the platform (that is not currently an admin) to a limited subset of participatory spaces or event compoponents. Just add users to a box and scope them to some constraints. These users will se the "Edit" button in everywhere they have permissions. Any access to unallowed zones will redirect the user to the admin index page.
 
@@ -131,7 +112,7 @@ Convert any user on the platform (that is not currently an admin) to a limited s
 ![Scoped admins unauthorized](examples/scoped_admins_unauthorized.png)
 ![Scoped admins configuration](examples/scoped_admins_config.png)
 
-#### 13. Custom fields for proposals
+#### 12. Custom fields for proposals
 
 Now admins can substitute the body of a proposal with a set of form fields.
 Edition is make with a Drag & Drop interface in the admin and can (and should) be scoped to apply only to certain proposal components.
@@ -153,7 +134,7 @@ Also feel free to propose something! or even better send a PR!
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-decidim_awesome", "~> 0.7.2"
+gem "decidim-decidim_awesome"
 ```
 
 And then execute:
@@ -164,6 +145,9 @@ bundle exec rails decidim_decidim_awesome:install:migrations
 bundle exec rails db:migrate
 ```
 
+The correct version of Decidim Awesome should resolved automatically by the Bundler.
+However you can force some specific version using `gem "decidim-decidim_awesome", "~> 0.8.0"` in the Gemfile.
+
 Depending on your Decidim version, choose the corresponding Awesome version to ensure compatibility:
 
 | Awesome version | Compatible Decidim versions |
@@ -171,8 +155,11 @@ Depending on your Decidim version, choose the corresponding Awesome version to e
 | 0.5.x | 0.21.x, 0.22.x |
 | 0.6.x | 0.22.x, 0.23.x |
 | 0.7.x | 0.23.x, 0.24.x |
+| 0.8.x | 0.25.x |
 
-> *Heads up!* version 0.7.1 requires database migrations! Don't forget the migrations step when updating.
+> *Heads up!* 
+> * version 0.7.1 requires database migrations! Don't forget the migrations step when updating.
+> * version 0.8.0 removes CSS Themes for tenants. If you have been using them you will have to manually migrate them to custom styles.
 
 ## Configuration
 
@@ -300,8 +287,8 @@ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal 
 To test a specific apprasail configured version do the following:
 
 ```
-DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal decidim-0.23 rake test_app
-DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal decidim-0.23 rspec
+DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal decidim-0.25 rake test_app
+DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal decidim-0.25 rspec
 ```
 
 Note that the database user has to have rights to create and drop a database in
@@ -357,4 +344,4 @@ This engine is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 
 ## Credits
 
-This plugin has been developed by ![Platoniq](app/assets/images/decidim/decidim_awesome/platoniq-logo.png)
+This plugin has been developed by ![Platoniq](app/packs/images/decidim/decidim_awesome/platoniq-logo.png)

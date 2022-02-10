@@ -3,7 +3,7 @@
 module Decidim
   module DecidimAwesome
     module IframeComponent
-      class IframeController < DecidimAwesome::IframeComponent::ApplicationController
+      class IframeController < DecidimAwesome::BlankComponentController
         ALLOWED_ATTRIBUTES = %w(src width height frameborder title allow allowpaymentrequest name referrerpolicy sandbox srcdoc allowfullscreen).freeze
         helper_method :iframe, :remove_margins?, :viewport_width?
 

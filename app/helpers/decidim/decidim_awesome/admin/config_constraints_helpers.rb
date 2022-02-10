@@ -30,7 +30,7 @@ module Decidim
         end
 
         def participatory_space_manifests
-          manifests = OTHER_MANIFESTS.map { |m| [m, I18n.t("decidim.decidim_awesome.admin.config.#{m}")] }.to_h
+          manifests = OTHER_MANIFESTS.index_with { |m| I18n.t("decidim.decidim_awesome.admin.config.#{m}") }
           Decidim.participatory_space_manifests.pluck(:name).each do |name|
             manifests[name.to_sym] = I18n.t("decidim.admin.menu.#{name}")
           end

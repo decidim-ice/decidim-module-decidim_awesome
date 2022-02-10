@@ -180,6 +180,26 @@ describe "Visit the admin page", type: :system do
     end
   end
 
+  context "when scoped admins are disabled" do
+    let(:disabled_features) { [:scoped_admins] }
+
+    it_behaves_like "do not have menu link", "admins"
+  end
+
+  context "when visiting Scoped Admins" do
+    context "when menu_hacks are enabled" do
+      before do
+        click_link "Scoped Admins"
+      end
+
+      it_behaves_like "has menu link", "admins"
+
+      it "renders the page" do
+        expect(page).to have_content(/Tweaks for admins/i)
+      end
+    end
+  end
+
   context "when visiting proposal custom fields" do
     context "when custom fields are enabled" do
       before do

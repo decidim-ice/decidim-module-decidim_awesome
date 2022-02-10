@@ -32,7 +32,8 @@ describe "Admin manages custom proposal fields", type: :system do
       expect(page).to have_admin_callout("created successfully")
 
       sleep 2
-      page.execute_script("$('.proposal_custom_fields_editor:first')[0].FormBuilder.actions.setData(#{data})")
+      # page.execute_script("$('.proposal_custom_fields_editor:first')[0].FormBuilder.actions.setData(#{data})")
+      page.execute_script("document.querySelector('.proposal_custom_fields_editor').FormBuilder.actions.setData(#{data})")
 
       find("*[type=submit]").click
 

@@ -19,15 +19,22 @@ module Decidim
       def call
         return broadcast(:invalid) if form.invalid?
 
-        image = EditorImage.new(
+        transaction do
+          create_editor_image!
+        end
+
+        broadcast(:ok, @editor_image)
+      end
+
+      private
+
+      def create_editor_image!
+        @editor_image = EditorImage.create!(
           path: form.path,
           decidim_author_id: form.current_user.id,
           organization: form.organization,
-          image: form.image
+          file: form.file
         )
-
-        image.save!
-        broadcast(:ok, image)
       end
 
       attr_reader :form

@@ -3,19 +3,15 @@
 module Decidim
   module DecidimAwesome
     module MapComponent
-      class MapController < DecidimAwesome::MapComponent::ApplicationController
+      class MapController < DecidimAwesome::BlankComponentController
         helper Decidim::DecidimAwesome::MapHelper
         helper_method :map_components
 
         def show
-          render :error unless maps_enabled?
+          render :error unless Decidim::Map.configured?
         end
 
         private
-
-        def maps_enabled?
-          Decidim::Map.configured?
-        end
 
         def map_components
           @map_components ||= current_participatory_space.components.published.filter do |component|

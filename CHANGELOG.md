@@ -1,6 +1,16 @@
 CHANGELOG
 =========
 
+v0.8.0
+------
+
+Compatibility:
+  - Decidim v0.25.x
+
+Features:
+  - Update to webpacker compatiblity and Decidim 0.25
+  - REMOVED: SCSS themes are not available anymore (the alternative is to use custom styles). This is mostly because of webpacker.
+
 v0.7.2
 ------
 

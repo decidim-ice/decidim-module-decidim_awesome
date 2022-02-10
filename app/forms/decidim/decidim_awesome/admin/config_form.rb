@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "sassc"
+
 module Decidim
   module DecidimAwesome
     module Admin

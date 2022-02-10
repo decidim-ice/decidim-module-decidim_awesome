@@ -5,12 +5,16 @@ module Decidim
     module MapHelper
       include Decidim::MapHelper
 
+      def api_ready?
+        Decidim::Api::Schema.max_complexity >= 1300
+      end
+
       # rubocop:disable Metrics/CyclomaticComplexity
       # rubocop:disable Metrics/PerceivedComplexity:
       def awesome_map_for(components, &block)
         return unless map_utility_dynamic
 
-        map = awesome_builder.map_element({ class: "google-map" }, &block)
+        map = awesome_builder.map_element({ class: "google-map", id: "awesome-map-container" }, &block)
         help = content_tag(:div, class: "map__help") do
           sr_content = content_tag(:p, t("screen_reader_explanation", scope: "decidim.map.dynamic"), class: "show-for-sr")
 
@@ -34,8 +38,10 @@ module Decidim
           "data-truncate" => global_settings.truncate || 255,
           "data-map-center" => global_settings.map_center,
           "data-map-zoom" => global_settings.map_zoom || 8,
+          "data-menu-merge-components" => global_settings.menu_merge_components,
           "data-menu-amendments" => global_settings.menu_amendments,
           "data-menu-meetings" => global_settings.menu_meetings,
+          "data-menu-categories" => global_settings.menu_categories,
           "data-menu-hashtags" => global_settings.menu_hashtags,
           "data-show-not-answered" => step_settings&.show_not_answered,
           "data-show-accepted" => step_settings&.show_accepted,
@@ -66,14 +72,14 @@ module Decidim
       end
 
       # rubocop:disable Rails/HelperInstanceVariable
-      def current_categories
+      def current_categories(categories)
         return @current_categories if @current_categories
 
         @golden_ratio_conjugate = 0.618033988749895
         # @h = rand # use random start value
-        @h = 0.4
+        @h = 0.41
         @current_categories = []
-        current_participatory_space.categories.first_class.each do |category|
+        categories.first_class.each do |category|
           append_category category
           category.subcategories.each do |subcat|
             append_category subcat
@@ -91,17 +97,17 @@ module Decidim
         }
         builder = map_utility_dynamic.create_builder(self, options)
 
+        # We need awesome map listeners before initialize the official map
+        unless snippets.any?(:awesome_map)
+          snippets.add(:awesome_map, javascript_pack_tag("decidim_decidim_awesome_map", defer: false))
+          snippets.add(:awesome_map, stylesheet_pack_tag("decidim_decidim_awesome_map"))
+          snippets.add(:head, snippets.for(:awesome_map))
+        end
+
         unless snippets.any?(:map)
           snippets.add(:map, builder.stylesheet_snippets)
           snippets.add(:map, builder.javascript_snippets)
           snippets.add(:head, snippets.for(:map))
-        end
-
-        unless snippets.any?(:awesome_map)
-          snippets.add(:awesome_map, stylesheet_link_tag("decidim/decidim_awesome/awesome_map/map"))
-          snippets.add(:awesome_map, javascript_include_tag("decidim/decidim_awesome/awesome_map/map"))
-          snippets.add(:awesome_map, javascript_include_tag("decidim/decidim_awesome/awesome_map/load_map"))
-          snippets.add(:head, snippets.for(:awesome_map))
         end
 
         builder
@@ -112,7 +118,7 @@ module Decidim
         @h += @golden_ratio_conjugate
         @h %= 1
         # r,g,b = hsv_to_rgb(@h, 0.5, 0.95)
-        r, g, b = hsv_to_rgb(@h, 0.99, 0.96)
+        r, g, b = hsv_to_rgb(@h, 0.99, 0.95)
         @current_categories.append(
           id: category.id,
           name: translated_attribute(category.name),

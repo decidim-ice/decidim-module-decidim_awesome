@@ -27,14 +27,6 @@ module Decidim
         root to: "config#show", var: :editors
       end
 
-      initializer "decidim_admin_awesome.assets" do |app|
-        app.config.assets.precompile += if version_prefix == "v0.23"
-                                          %w(legacy_decidim_admin_decidim_awesome_manifest.js decidim_admin_decidim_awesome_manifest.css)
-                                        else
-                                          %w(decidim_admin_decidim_awesome_manifest.js decidim_admin_decidim_awesome_manifest.css)
-                                        end
-      end
-
       initializer "decidim_decidim_awesome.admin_mount_routes" do
         Decidim::Core::Engine.routes do
           mount Decidim::DecidimAwesome::AdminEngine, at: "/admin/decidim_awesome", as: "decidim_admin_decidim_awesome"
@@ -43,12 +35,13 @@ module Decidim
 
       initializer "decidim_awesome.admin_menu" do
         Decidim.menu :admin_menu do |menu|
-          menu.item I18n.t("menu.decidim_awesome", scope: "decidim.admin", default: "Decidim Awesome"),
-                    decidim_admin_decidim_awesome.config_path(:editors),
-                    icon_name: "fire",
-                    position: 7.5,
-                    active: is_active_link?(decidim_admin_decidim_awesome.config_path(:editors), :inclusive),
-                    if: defined?(current_user) && current_user&.read_attribute("admin")
+          menu.add_item :awesome_menu,
+                        I18n.t("menu.decidim_awesome", scope: "decidim.admin", default: "Decidim Awesome"),
+                        decidim_admin_decidim_awesome.config_path(:editors),
+                        icon_name: "fire",
+                        position: 7.5,
+                        active: is_active_link?(decidim_admin_decidim_awesome.config_path(:editors), :inclusive),
+                        if: defined?(current_user) && current_user&.read_attribute("admin")
         end
       end
 

@@ -19,10 +19,10 @@
   <div class="row two-buttons">
     <div>
       <%= settings_fields.text_field :map_center, label: t("map_center", scope: i18n_scope) %>
-      <%= t("map_center_help", scope: i18n_scope) %>
+      <p class="help-text"><%= t("map_center_help", scope: i18n_scope) %></p>
     </div>
     <div><%= settings_fields.number_field :map_zoom, label: t("map_zoom", scope: i18n_scope) %>
-      <%= t("map_zoom_help", scope: i18n_scope) %>
+      <p class="help-text"><%= t("map_zoom_help", scope: i18n_scope) %></p>
     </div>
   </div>
   <div class="row two-buttons">
@@ -42,8 +42,9 @@
     <div><%= settings_fields.check_box :show_evaluating, label: t("show_evaluating", scope: i18n_scope) %>
     </div>
   </div>
-  <div class="row">
-      <%= settings_fields.check_box :show_rejected, label: t("show_rejected", scope: i18n_scope) %>
+  <div class="row two-buttons">
+      <div><%= settings_fields.check_box :show_rejected, label: t("show_rejected", scope: i18n_scope) %></div>
+      <div><%= settings_fields.check_box :menu_merge_components, label: t("menu_merge_components", scope: i18n_scope) %></div>
   </div>
 <% end %>
 
@@ -57,5 +58,8 @@
   }
   .two-buttons > div {
     width: 50%;
+  }
+  .help-text {
+    margin-top: -1.5em;
   }
 </style>

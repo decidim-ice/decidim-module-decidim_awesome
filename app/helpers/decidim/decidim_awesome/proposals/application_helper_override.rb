@@ -61,8 +61,8 @@ module Decidim
             custom_fields = Decidim::DecidimAwesome::CustomFields.new(fields)
             custom_fields.translate!
 
-            body = if form_presenter.proposal.body.is_a?(Hash) && locale
-                     form_presenter.body(extras: false, all_locales: true)[locale]
+            body = if form_presenter.proposal.body.is_a?(Hash) && locale.present?
+                     form_presenter.body(extras: false, all_locales: true).with_indifferent_access[locale]
                    else
                      form_presenter.body(extras: false)
                    end

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "decidim/decidim_awesome/test/shared_examples/controller_examples"
 
 module Decidim::DecidimAwesome
   module IframeComponent
@@ -15,6 +16,8 @@ module Decidim::DecidimAwesome
         request.env["decidim.current_participatory_space"] = component.participatory_space
         request.env["decidim.current_component"] = component
       end
+
+      it_behaves_like "a blank component", Decidim::DecidimAwesome::IframeComponent::AdminEngine
 
       describe "GET show" do
         context "when everything is ok" do

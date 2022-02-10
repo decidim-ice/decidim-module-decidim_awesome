@@ -1,0 +1,19 @@
+@import "inscrybmde/src/css/inscrybmde";
+
+// editor tweaks
+//
+.editor .CodeMirror{
+  color: #333;
+  font-weight: normal;
+  line-height: 1.45;
+
+  code{
+    border: none;
+  }
+
+  .CodeMirror-code{
+    span{
+      color: #333 !important;
+    }
+  }
+}

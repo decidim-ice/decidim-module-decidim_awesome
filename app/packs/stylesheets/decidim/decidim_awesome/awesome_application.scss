@@ -1,0 +1,19 @@
+@import "codemirror/lib/codemirror"; // used by inscribemde
+@import "stylesheets/decidim/decidim_awesome/editors/markdown_editor";
+@import "stylesheets/decidim/decidim_awesome/editors/quill_editor";
+@import "stylesheets/decidim/decidim_awesome/forms/autosave";
+
+.decidim_awesome-custom_fields{
+  dd{
+    >div:last-child{
+      margin-bottom: 1rem;
+    }
+
+    &[name="textarea"]{
+      >div > p{
+        margin-top: 1rem;
+        margin-bottom: 0;
+      }
+    }
+  }
+}

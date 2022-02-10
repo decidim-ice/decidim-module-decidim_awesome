@@ -56,7 +56,7 @@ module Decidim::DecidimAwesome
       end
 
       it "return formatted categories" do
-        expect(helper.current_categories).to eq(categories)
+        expect(helper.current_categories(current_participatory_space.categories)).to eq(categories)
       end
     end
 

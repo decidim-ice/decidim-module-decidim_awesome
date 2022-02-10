@@ -7,14 +7,14 @@ on:
   pull_request:
 
 env:
-  RUBY_VERSION: 2.7.4
+  RUBY_VERSION: 2.7.5
 
 jobs:
   test-report:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        decidim_version: [ 0.23, 0.24 ]
+        decidim_version: [ 0.25 ]
 
     services:
       postgres:

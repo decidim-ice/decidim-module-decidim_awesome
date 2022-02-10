@@ -16,9 +16,10 @@ module Decidim::DecidimAwesome
 
       before do
         Decidim::MenuRegistry.register :menu do |menu|
-          menu.item "Native",
-                    "/processes?locale=ca",
-                    position: 1
+          menu.add_item :native_menu,
+                        "Native",
+                        "/processes?locale=ca",
+                        position: 1
         end
         request.env["decidim.current_organization"] = user.organization
         sign_in user, scope: :user

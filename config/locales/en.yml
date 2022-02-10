@@ -72,8 +72,10 @@ en:
             map_zoom: Zoom (any number betwen 0 and 18)
             map_zoom_help: Only applies if a map center is defined
             menu_amendments: Show amendments
+            menu_categories: Show Category search menu
             menu_hashtags: Show Hasthag search menu
             menu_meetings: Show meetings
+            menu_merge_components: Merge all components of the same type in the menu
             truncate: Maximum characters for popup descriptions
           step:
             announcement: Announcement
@@ -155,6 +157,10 @@ en:
               intergram_config: Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram
                 bot</a> to your group or start a chat with it directly. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+
                 info</a>
+              original_editor_override: Since version 0.26, it is possible (for admins
+                only) to upload images into the editors. Therefore, image settings
+                in here only affect the public editors (admin will always have it
+                available).
               proposal_custom_fields: Create custom proposal fields that applies only
                 in certain parts of the public web (use the restrictions editor for
                 that)
@@ -164,7 +170,7 @@ en:
               proposal_custom_fields_translations: "Labels, help text, placeholders
                 and default values can use your application custom translations. \nFor
                 that, instead of using a string literal, use the i18n key (it must
-                containt at least one dot).\nFor instance:\n- \"activemodel.attributes.proposal.title\"
+                contain at least one dot).\nFor instance:\n- \"activemodel.attributes.proposal.title\"
                 instead of \"Title\"\n- \"activemodel.attributes.proposal.address\"
                 instead of \"Address\"\nOr use your own keys in combination with other
                 tools to define translations (eg: using the module Term Customizer):\n
@@ -292,6 +298,7 @@ en:
           map_zoom_help: Only applies if a map center is defined
           menu_amendments: Show amendments
           menu_meetings: Show meetings
+          menu_merge_components: Merge all components of the same type in the menu
           name: Awesome Map
           show_accepted: Show accepted proposals
           show_evaluating: Show evaluating proposals
@@ -314,6 +321,14 @@ en:
           success: Image uploaded successfully
       map_component:
         map:
+          api_not_ready: |
+            <b>Warning:</b> This Decidim installation has the API configured to a maximum complexity of <b>%{current_complexity}</b>.
+            This component probably won't work under this configuration. We recommend you to set up in a initializer
+            (for instance at the end of the <code>config/initializers/decidim.rb</code>) the following lines:<br>
+            <br>
+            <pre># Api configuration
+            Decidim::Api::Schema.max_complexity = 5000
+            Decidim::Api::Schema.max_depth = 50</pre>
           error:
             unavailable: The map is unavailable. Please configure geocoding to enable
               this component.

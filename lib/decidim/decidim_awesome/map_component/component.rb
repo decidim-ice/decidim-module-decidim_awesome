@@ -4,7 +4,7 @@ require_dependency "decidim/components/namer"
 
 Decidim.register_component(:awesome_map) do |component|
   component.engine = Decidim::DecidimAwesome::MapComponent::Engine
-  # component.admin_engine = Decidim::DecidimAwesome::AdminMapEngine
+  component.admin_engine = Decidim::DecidimAwesome::MapComponent::AdminEngine
   component.icon = "decidim/meetings/icon.svg" # TODO: create a Icon
   component.permissions_class_name = "Decidim::DecidimAwesome::Permissions"
 
@@ -22,7 +22,9 @@ Decidim.register_component(:awesome_map) do |component|
     settings.attribute :collapse, type: :boolean, default: false
     settings.attribute :menu_amendments, type: :boolean, default: true
     settings.attribute :menu_meetings, type: :boolean, default: true
+    settings.attribute :menu_categories, type: :boolean, default: true
     settings.attribute :menu_hashtags, type: :boolean, default: true
+    settings.attribute :menu_merge_components, type: :boolean, default: false
   end
 
   component.settings(:step) do |settings|
@@ -31,7 +33,6 @@ Decidim.register_component(:awesome_map) do |component|
     settings.attribute :show_not_answered, type: :boolean, default: true
     settings.attribute :show_evaluating, type: :boolean, default: true
     settings.attribute :show_accepted, type: :boolean, default: true
-    # Not possible yet (needs graphql update):
     settings.attribute :show_rejected, type: :boolean, default: false
     settings.attribute :show_withdrawn, type: :boolean, default: false
   end

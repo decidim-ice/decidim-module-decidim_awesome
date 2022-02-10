@@ -81,11 +81,7 @@ describe "Scoped admin journeys", type: :system do
 
         expect(page).to have_content("Agree to the terms and conditions of use")
 
-        if legacy_version?
-          click_button "I agree this admin terms"
-        else
-          click_button "I agree with the following terms"
-        end
+        click_button "I agree with the following terms"
 
         expect(page).to have_content("Welcome to the Decidim Admin Panel.")
         expect(page).not_to have_content("Review them now")
@@ -135,29 +131,27 @@ describe "Scoped admin journeys", type: :system do
           it_behaves_like "edits allowed components"
         end
 
-        unless legacy_version? # 0.23 version does not have process groups management
-          context "and scoped to aany process group" do
-            let(:settings) do
-              {
-                "participatory_space_manifest" => "process_groups"
-              }
-            end
-
-            it_behaves_like "allows access to group processes"
-            it_behaves_like "allows edit any group process"
+        context "and scoped to aany process group" do
+          let(:settings) do
+            {
+              "participatory_space_manifest" => "process_groups"
+            }
           end
 
-          context "and scoped to a specfic processes group" do
-            let(:settings) do
-              {
-                "participatory_space_manifest" => "process_groups",
-                "participatory_space_slug" => process_group.id
-              }
-            end
+          it_behaves_like "allows access to group processes"
+          it_behaves_like "allows edit any group process"
+        end
 
-            it_behaves_like "allows access to group processes"
-            it_behaves_like "allows edit only allowed group process"
+        context "and scoped to a specfic processes group" do
+          let(:settings) do
+            {
+              "participatory_space_manifest" => "process_groups",
+              "participatory_space_slug" => process_group.id
+            }
           end
+
+          it_behaves_like "allows access to group processes"
+          it_behaves_like "allows edit only allowed group process"
         end
       end
     end
