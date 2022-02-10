@@ -63,8 +63,10 @@ ja:
             map_zoom: ズーム ( 0 と 18 の間の任意の数字)
             map_zoom_help: 地図の中心が定義されている場合にのみ適用されます
             menu_amendments: 修正を表示
+            menu_categories: Show Category search menu
             menu_hashtags: Hasthag 検索メニューを表示
             menu_meetings: ミーティングを表示
+            menu_merge_components: Merge all components of the same type in the menu
             truncate: ポップアップの説明のための最大文字数
           step:
             announcement: アナウンス
@@ -128,9 +130,10 @@ ja:
               drag_and_drop_supported: 画像アップロード時にドラッグ&ドロップが利用できます。画像はサーバーにアップロードされ、外部リソースとして挿入されます(base64インラインエンコーディングは使用しません).
               intergram_about: IntergramはTelegramメッセンジャーを使用してページの下部に埋め込まれたライブサポートチャットウィジェットを処理します。
               intergram_config: '<a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> をグループに招待するか、直接チャットを開始します。 <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
+              original_editor_override: Since version 0.26, it is possible (for admins only) to upload images into the editors. Therefore, image settings in here only affect the public editors (admin will always have it available).
               proposal_custom_fields: 公開ウェブの特定の部分にのみ適用されるカスタム提案項目を作成します (制限されたエディタを使用してください)
               proposal_custom_fields_example: データは、互換性のある HTML 属性 (dl,dt,dd 要素) を使用した XML オブジェクトとして格納され、通常の提案の "body" を置き換えます。
-              proposal_custom_fields_translations: "ラベル、ヘルプテキスト、プレースホルダー、デフォルト値には、アプリケーション独自の翻訳を使用できます。\nそのためには、文字列リテラルを使う代わりに、I18Nキーを使います（少なくとも1つのドットを含んでいなければなりません）。\n例えば、以下のようになります:\n- \"Title\" の代わりに \"activemodel.attributes.proposal.title\" を使用する\n- \"Address \"の代わりに \"activemodel.attributes.proposal.address\" を使用する\nまた、独自のキーを他のツールと組み合わせて翻訳を定義することもできます (例: Term Customizer モジュールを使用する):\n - \"Biography \"の代わりに \"myapp.custom_fields.bio\""
+              proposal_custom_fields_translations: "Labels, help text, placeholders and default values can use your application custom translations. \nFor that, instead of using a string literal, use the i18n key (it must contain at least one dot).\nFor instance:\n- \"activemodel.attributes.proposal.title\" instead of \"Title\"\n- \"activemodel.attributes.proposal.address\" instead of \"Address\"\nOr use your own keys in combination with other tools to define translations (eg: using the module Term Customizer):\n - \"myapp.custom_fields.bio\" instead of \"Biography\""
               scoped_admins: 一般ユーザーを公開ウェブの特定の部分だけを管理できる管理者に昇格させます(制限エディターを使用してください)。 すでに通常の管理者権限を持つユーザーは無視されることに注意してください。
               scoped_styles: 公開ウェブの特定の部分にのみ適用されるカスタムCSSを作成します (制限されたエディタを使用してください)
               scoped_styles_variables: '組織の色のカスタマイズには、以下のCSS変数が使用できます。'
@@ -239,6 +242,7 @@ ja:
           map_zoom_help: 地図の中心が定義されている場合にのみ適用されます
           menu_amendments: 修正を表示
           menu_meetings: ミーティングを表示
+          menu_merge_components: Merge all components of the same type in the menu
           name: Awesome Map
           show_accepted: 受理済みの提案を表示
           show_evaluating: 評価中の提案を表示
@@ -259,6 +263,14 @@ ja:
           success: 画像は正常にアップロードされました
       map_component:
         map:
+          api_not_ready: |
+            <b>Warning:</b> This Decidim installation has the API configured to a maximum complexity of <b>%{current_complexity}</b>.
+            This component probably won't work under this configuration. We recommend you to set up in a initializer
+            (for instance at the end of the <code>config/initializers/decidim.rb</code>) the following lines:<br>
+            <br>
+            <pre># Api configuration
+            Decidim::Api::Schema.max_complexity = 5000
+            Decidim::Api::Schema.max_depth = 50</pre>
           error:
             unavailable: マップは利用できません。このコンポーネントを有効にするにはジオコーディングを設定してください。
           show:
