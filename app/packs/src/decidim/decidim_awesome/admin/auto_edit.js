@@ -1,7 +1,6 @@
-let formBuilderList = window.formBuilderList || [];
-let DecidimAwesome = window.DecidimAwesome || {};
-
 $(() => {
+  let CustomFieldsBuilders = window.CustomFieldsBuilders || [];
+
   $("body").on("click", "a.awesome-auto-edit", (e) => {
     e.preventDefault();
     const $link = $(e.currentTarget);
@@ -39,7 +38,8 @@ $(() => {
       $container.data("key", result.key);
       $container.attr("data-key", result.key);
       $delete.attr("href", $delete.attr("href").replace(`key=${key}`, `key=${result.key}`))
-      formBuilderList.forEach((builder) => {
+      console.log("CustomFieldsBuilders", CustomFieldsBuilders);
+      CustomFieldsBuilders.forEach((builder) => {
         if(builder.key == key) {
           builder.key = result.key;
         }

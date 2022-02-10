@@ -1,13 +1,13 @@
 require("formBuilder/dist/form-builder.min.js")
 import "src/decidim/decidim_awesome/forms/rich_text_plugin"
 
-let formBuilderList = [];
+window.CustomFieldsBuilders = window.CustomFieldsBuilders || [];
 
 $(() => {
   $(".awesome-edit-config .proposal_custom_fields_editor").each((_idx, el) => {
     const key = $(el).closest(".proposal_custom_fields_container").data("key");
     // DOCS: https://formbuilder.online/docs
-    formBuilderList.push({
+    window.CustomFieldsBuilders.push({
       el: el,
       key: key,
       config: {
@@ -62,12 +62,12 @@ $(() => {
     });
   });
 
-  if(formBuilderList.length) {
-    $(document).trigger("formBuilder.create", [0, formBuilderList]);
+  if(window.CustomFieldsBuilders.length) {
+    $(document).trigger("formBuilder.create", [0, window.CustomFieldsBuilders]);
   }
 
   $("form.awesome-edit-config").on("submit", () => {
-    formBuilderList.forEach((builder) =>{
+    window.CustomFieldsBuilders.forEach((builder) =>{
       $(`input[name="config[proposal_custom_fields][${builder.key}]"]`).val(builder.instance.actions.getData("json"));
     });
   });
