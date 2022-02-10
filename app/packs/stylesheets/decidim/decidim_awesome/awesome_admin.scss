@@ -53,9 +53,9 @@
     font-weight: normal;
     margin-bottom: 1.5em;
   }
-  .form-error{
-    margin-top: -2.5rem;
-  }
+}
+.form-input-extra-before ~ .form-error{
+  margin-top: -2.5rem;
 }
 
 tbody tr.menu_hack-addition{

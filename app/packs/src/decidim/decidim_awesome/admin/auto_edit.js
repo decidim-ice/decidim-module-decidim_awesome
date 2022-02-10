@@ -54,7 +54,7 @@ $(() => {
       // if(e.code == "Space") {
       //   e.preventDefault();
       // }
-      if(e.code == "Enter") {
+      if(e.code == "Enter" || e.code == "13" || e.code == "10") {
         e.preventDefault();
         $.ajax(
           {
