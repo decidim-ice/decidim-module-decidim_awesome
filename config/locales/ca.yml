@@ -63,10 +63,10 @@ ca:
             map_zoom: Zoom (qualsevol nombre entre 0 i 18)
             map_zoom_help: Només s’aplica si es defineix el punt central del mapa
             menu_amendments: Mostrar esmenes
-            menu_categories: Show Category search menu
+            menu_categories: Mostrar el menú de cerca per categories
             menu_hashtags: Mostrar el menú de cerca per hashtag
             menu_meetings: Mostrar trobades
-            menu_merge_components: Merge all components of the same type in the menu
+            menu_merge_components: Unifica tots els components del mateix tipus al menú
             truncate: Nombre màxim de caràcters per les descripcions emergents
           step:
             announcement: Anunci
@@ -130,10 +130,10 @@ ca:
               drag_and_drop_supported: Quan es pugin imatges, es pot fer a través del mètode de "arrossegar i deixar anar". Les imatges seran pujades al servidor i inserides com recursos externs (no es fa servir codificació en línia base64).
               intergram_about: Intergram utilitza el Telegram Messenger per gestionar un widget de xat en viu de suport incrustat a la part inferior de la pàgina.
               intergram_config: 'Convida a la <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> al teu grup o comença un xat amb ella directament. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
-              original_editor_override: Since version 0.26, it is possible (for admins only) to upload images into the editors. Therefore, image settings in here only affect the public editors (admin will always have it available).
+              original_editor_override: Desde la versió 0.26, és possible (per administradors només) pujar imatges als editors de text enriquit. Per tant, les opcions d'imatges disponibles en aquesta pàgina només afecten a la part pública de la web (les administradores sempre ho tenen activat).
               proposal_custom_fields: Crea camps personalitzats per a propostes que només s'apliquin a determinades parts de la web pública (per fer-ho, utilitza l'editor de restriccions)
               proposal_custom_fields_example: Les dades son desades en un objecte XML fent servir atributs compatibles amb HTML (elements DL, DT, DD) que reemplacen el "cos" de la proposat normal.
-              proposal_custom_fields_translations: "Labels, help text, placeholders and default values can use your application custom translations. \nFor that, instead of using a string literal, use the i18n key (it must contain at least one dot).\nFor instance:\n- \"activemodel.attributes.proposal.title\" instead of \"Title\"\n- \"activemodel.attributes.proposal.address\" instead of \"Address\"\nOr use your own keys in combination with other tools to define translations (eg: using the module Term Customizer):\n - \"myapp.custom_fields.bio\" instead of \"Biography\""
+              proposal_custom_fields_translations: "Les etiquetes, el text d'ajuda, els \"placeholders\" i els valors predeterminats poden utilitzar les traduccions personalitzades de l'aplicació.\nPer això, en comptes d'utilitzar un text literal, utilitzeu la clau i18n (ha de contenir almenys un punt).\nPer exemple:\n- \"activemodel.attributes.proposal.title\" en lloc de \"Títol\"\n- \"activemodel.attributes.proposal.address\" en lloc de \"Address\"\nO utilitzeu les vostres pròpies claus en combinació amb altres eines per definir traduccions (p. ex.: utilitzant el mòdul Term Customizer):\n - \"myapp.custom_fields.bio\" en lloc de \"Biografia\""
               scoped_admins: Promou usuaries normals a administradores amb accés limitat a certes parts de la web pública (feu servir l'editor de restriccions per això). Noteu que afegir usuaries que ja tenen permisos d'administració no té cap efecte.
               scoped_styles: Crea CSS personalitzats que només s'apliquin a determinades parts de la web pública (per fer-ho, utilitza l'editor de restriccions)
               scoped_styles_variables: 'Pots fer servir les següents variables CSS pels colors personalitzats de l''organització:'
@@ -242,7 +242,7 @@ ca:
           map_zoom_help: Només s’aplica si es defineix el punt central del mapa
           menu_amendments: Mostrar esmenes
           menu_meetings: Mostrar trobades
-          menu_merge_components: Merge all components of the same type in the menu
+          menu_merge_components: Unifica tots els components del mateix tipus al menú
           name: Mapa global
           show_accepted: Mostra les propostes acceptades
           show_evaluating: Mostra les propostes en avaluació
@@ -264,11 +264,11 @@ ca:
       map_component:
         map:
           api_not_ready: |
-            <b>Warning:</b> This Decidim installation has the API configured to a maximum complexity of <b>%{current_complexity}</b>.
-            This component probably won't work under this configuration. We recommend you to set up in a initializer
-            (for instance at the end of the <code>config/initializers/decidim.rb</code>) the following lines:<br>
+            <b>Avís:</b> aquesta instal·lació de Decidim té l'API configurada amb una complexitat màxima de <b>%{current_complexity}</b>.
+            Aquest component probablement no funcionarà amb aquesta configuració. Us recomanem que la configureu en un inicialitzador
+            (per exemple, al final de <code>config/initializers/decidim.rb</code>) hi poseu les línies següents:<br>
             <br>
-            <pre># Api configuration
+            <pre># Configuració de l'API
             Decidim::Api::Schema.max_complexity = 5000
             Decidim::Api::Schema.max_depth = 50</pre>
           error:
