@@ -63,8 +63,10 @@ es:
             map_zoom: Zoom (cualquier número entre 0 y 18)
             map_zoom_help: Solo aplica si se define el punto central del mapa
             menu_amendments: Mostrar enmiendas
+            menu_categories: Mostrar menú de búsqueda por categorías
             menu_hashtags: Mostrar el menú de búsqueda por Hashtag
             menu_meetings: Mostrar encuentros
+            menu_merge_components: Combinar todos los componentes del mismo tipo en el menú
             truncate: Número máximo de caracteres para las descripciones emergentes
           step:
             announcement: Anuncio
@@ -128,9 +130,10 @@ es:
               drag_and_drop_supported: Cuando se suban imágenes, se puede hacer a través del método "arrastrar & soltar". Las imágenes se subirán en el servidor y se insertarán como recursos externos (no se utiliza codificación en línea base64).
               intergram_about: Intergram utiliza el Telegram Messenger para gestionar un widget de chat de soporte incrustado en la parte inferior de la página.
               intergram_config: 'Invita a la <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> a tu grupo o inicia un chat con ella directamente. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
+              original_editor_override: Desde la versión 0.26, es posible (sólo para administradoras) subir imágenes en los editores. Por lo tanto, las opciones de configuración para imágenes aquí sólo afecta a los editores públicos (las administradoras siempre lo tendrán activado).
               proposal_custom_fields: Crea campos personalizados en las propuestas que sólo se aplican en ciertas partes de la web pública (utilizar el editor de restricciones para ello)
               proposal_custom_fields_example: Los datos se almacenan en un objeto XML utilizando atributos HTML compatibles (dl,dt,dd elements) que reemplazan el "cuerpo" en una propuesta normal.
-              proposal_custom_fields_translations: "Las etiquetas, el texto de ayuda, placeholders, y los valores predeterminados pueden utilizar las traducciones personalizadas de la aplicación.\nPara eso, en lugar de usar un texto literal, use la clave i18n (debe contener al menos un punto).\nPor ejemplo:\n- \"activemodel.attributes.proposal.title\" en lugar de \"Título\"\n- \"activemodel.attributes.proposal.address\" en lugar de \"Address\"\nO simplemente usar claves propias en combinación con otras herramientas para definir traducciones (por ejemplo, usando el módulo Term Customizer):\n- \"myapp.custom_fields.bio\" en lugar de \"Biografía\""
+              proposal_custom_fields_translations: "Las etiquetas, el texto de ayuda, placeholders, y los valores predeterminados pueden utilizar las traducciones personalizadas de la aplicación.\nPara ello, en lugar de usar un texto literal, se puede usar la clave i18n (debe contener al menos un punto).\nPor ejemplo:\n- \"activemodel.attributes.proposal.title\" en lugar de \"Título\"\n- \"activemodel.attributes.proposal.address\" en lugar de \"Address\"\nO simplemente usar claves propias en combinación con otras herramientas para definir traducciones (por ejemplo, usando el módulo Term Customizer):\n- \"myapp.custom_fields.bio\" en lugar de \"Biografía\""
               scoped_admins: Promueve usuarias normales a administradoras con acceso limitado a ciertas partes de la web pública (utilizar el editor de restricciones para eso). Tener en cuenta que las usuarias que ya tienen permisos regulares de administración serán ignorados.
               scoped_styles: Crea CSS personalizados que solo se apliquen en ciertas partes de la web pública (para ello, utiliza el editor de restricciones)
               scoped_styles_variables: 'Puedes utilizar las siguientes variables CSS para los colores personalizados de la organización:'
@@ -239,6 +242,7 @@ es:
           map_zoom_help: Solo aplica si se define el punto central del mapa
           menu_amendments: Mostrar enmiendas
           menu_meetings: Mostrar encuentros
+          menu_merge_components: Combinar todos los componentes del mismo tipo en el menú
           name: Mapa Global
           show_accepted: Muestra las propuestas aceptadas
           show_evaluating: Muestra las propuestas en evaluación
@@ -259,6 +263,14 @@ es:
           success: Imagen subida correctamente
       map_component:
         map:
+          api_not_ready: |
+            <b>Advertencia:</b> Esta instalación de Decidim tiene la API configurada a una complejidad máxima de <b>%{current_complexity}</b>.
+            Este componente probablemente no funcione correctament bajo esta configuración. Es recomendado configurar en un inicializador
+            (por ejemplo al final de <code>config/initializers/decidim. b</code>) añadir las siguientes líneas:<br>
+            <br>
+            <pre># Configuración de Api
+            Decidim::Api::Schema. ax_complexity = 5000
+            Decidim::Api::Schema.max_depth = 50</pre>
           error:
             unavailable: El mapa no está disponible. Por favor, configure la geocodificación para habilitar este componente.
           show:

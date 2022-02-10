@@ -63,8 +63,10 @@ it:
             map_zoom: Zoom (qualsiasi numero tra 0 e 18)
             map_zoom_help: Si applica solo se è stato definito il centro della mappa
             menu_amendments: Mostra le correzioni
+            menu_categories: Show Category search menu
             menu_hashtags: Mostra il menu di ricerca di Hasthag
             menu_meetings: Mostra meeting
+            menu_merge_components: Merge all components of the same type in the menu
             truncate: Numero massimo di caratteri per le descrizioni nei popup
           step:
             announcement: Annuncio
@@ -128,9 +130,10 @@ it:
               drag_and_drop_supported: Quando si caricano le immagini, è supportato il Drag & Drop. Le immagini verranno caricate sul server e inserite come risorse esterne (non utilizza la codifica base64).
               intergram_about: Intergram utilizza Telegram messenger per gestire un widget di chat di supporto live incorporato nella parte inferiore della pagina.
               intergram_config: 'Invita il bot <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram</a> al tuo gruppo o avvia una chat direttamente con esso. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
+              original_editor_override: Since version 0.26, it is possible (for admins only) to upload images into the editors. Therefore, image settings in here only affect the public editors (admin will always have it available).
               proposal_custom_fields: Crea campi di proposta personalizzati che si applicano solo in alcune parti del sito (usa l'editor delle restrizioni per quello)
               proposal_custom_fields_example: I dati sono memorizzati in un oggetto XML utilizzando attributi HTML compatibili (dl,dt,dd elementi) sostituendo il "corpo" in una proposta normale.
-              proposal_custom_fields_translations: "Etichette, testo di aiuto, segnaposto e valori predefiniti possono utilizzare le traduzioni personalizzate dell'applicazione. \nPer questo, invece di usare una stringa letterale, utilizzare la chiave i18n (deve contenere almeno un punto).\nAd esempio:\n- \"activemodel.attributes.proposal.title\" invece di \"Titolo\"\n- \"activemodel.attributes.proposal.address\" invece di \"Indirizzo\"\nO utilizzare le proprie chiavi in combinazione con altri strumenti per definire le traduzioni (ad esempio: utilizzando il modulo Term Customizer):\n- \"activemodel.attributes.proposal.address\" invece di \"Biography\""
+              proposal_custom_fields_translations: "Labels, help text, placeholders and default values can use your application custom translations. \nFor that, instead of using a string literal, use the i18n key (it must contain at least one dot).\nFor instance:\n- \"activemodel.attributes.proposal.title\" instead of \"Title\"\n- \"activemodel.attributes.proposal.address\" instead of \"Address\"\nOr use your own keys in combination with other tools to define translations (eg: using the module Term Customizer):\n - \"myapp.custom_fields.bio\" instead of \"Biography\""
               scoped_admins: Promuovi l'utente ad admin che può amministrare solo alcune parti pubbliche (usa l'editor delle restrizioni). Gli utenti che hanno già i permessi di amministrazione verranno ignorati.
               scoped_styles: Crea CSS personalizzato che si applica solo in alcune parti del web pubblico (usa l'apposito editor delle restrizioni)
               scoped_styles_variables: 'È possibile utilizzare le seguenti variabili CSS per i colori personalizzati dell''organizzazione:'
@@ -239,6 +242,7 @@ it:
           map_zoom_help: Si applica solo se è stato definito il centro della mappa
           menu_amendments: Mostra le correzioni
           menu_meetings: Mostra meeting
+          menu_merge_components: Merge all components of the same type in the menu
           name: Mappa Awesome
           show_accepted: Mostra le proposte accettate
           show_evaluating: Mostra le proposte in valutazione
@@ -259,6 +263,14 @@ it:
           success: Immagine caricata correttamente
       map_component:
         map:
+          api_not_ready: |
+            <b>Warning:</b> This Decidim installation has the API configured to a maximum complexity of <b>%{current_complexity}</b>.
+            This component probably won't work under this configuration. We recommend you to set up in a initializer
+            (for instance at the end of the <code>config/initializers/decidim.rb</code>) the following lines:<br>
+            <br>
+            <pre># Api configuration
+            Decidim::Api::Schema.max_complexity = 5000
+            Decidim::Api::Schema.max_depth = 50</pre>
           error:
             unavailable: La mappa non è disponibile. Configura la geocodifica per abilitare questo componente.
           show:

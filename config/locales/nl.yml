@@ -63,8 +63,10 @@ nl:
             map_zoom: Zoom (elk willekeurig getal tussen 0 en 18)
             map_zoom_help: Alleen van toepassing als een centrum van de kaart is gedefinieerd
             menu_amendments: Toon amendementen
+            menu_categories: Show Category search menu
             menu_hashtags: Toon Hasthag zoekmenu
             menu_meetings: Toon vergaderingen
+            menu_merge_components: Merge all components of the same type in the menu
             truncate: Maximaal aantal tekens voor popup beschrijvingen
           step:
             announcement: Aankondiging
@@ -128,9 +130,10 @@ nl:
               drag_and_drop_supported: Bij het uploaden van afbeeldingen wordt wordt slepen en neerzetten ondersteund. Afbeeldingen worden naar de server geüpload en ingevoegd als externe bronnen (er wordt geen base64 inline codering gebruikt).
               intergram_about: Intergram gebruikt Telegram messenger voor het verwerken van een live-support chat widget ingebed aan de onderkant van de pagina.
               intergram_config: 'Nodig de <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> uit voor je groep of begin direct met een chat. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
+              original_editor_override: Since version 0.26, it is possible (for admins only) to upload images into the editors. Therefore, image settings in here only affect the public editors (admin will always have it available).
               proposal_custom_fields: Create custom proposal fields that applies only in certain parts of the public web (use the restrictions editor for that)
               proposal_custom_fields_example: Data is stored in a XML object using compatible HTML attributes (dl,dt,dd elements) replacing the "body" in a normal proposal.
-              proposal_custom_fields_translations: "Labels, help text, placeholders and default values can use your application custom translations. \nFor that, instead of using a string literal, use the i18n key (it must containt at least one dot).\nFor instance:\n- \"activemodel.attributes.proposal.title\" instead of \"Title\"\n- \"activemodel.attributes.proposal.address\" instead of \"Address\"\nOr use your own keys in combination with other tools to define translations (eg: using the module Term Customizer):\n - \"myapp.custom_fields.bio\" instead of \"Biography\""
+              proposal_custom_fields_translations: "Labels, help text, placeholders and default values can use your application custom translations. \nFor that, instead of using a string literal, use the i18n key (it must contain at least one dot).\nFor instance:\n- \"activemodel.attributes.proposal.title\" instead of \"Title\"\n- \"activemodel.attributes.proposal.address\" instead of \"Address\"\nOr use your own keys in combination with other tools to define translations (eg: using the module Term Customizer):\n - \"myapp.custom_fields.bio\" instead of \"Biography\""
               scoped_admins: Promote regular user to admins that can only administrate certain parts of the public web (use the restrictions editor for that). Note that users who already have regular admin permissions will be ignored.
               scoped_styles: Maak aangepaste CSS aan die alleen van toepassing is in bepaalde delen van het openbare web (gebruik hiervoor de restrictie-editor)
               scoped_styles_variables: 'Je kunt de volgende CSS variabelen gebruiken voor de organisatie op maat gemaakte kleuren:'
@@ -239,6 +242,7 @@ nl:
           map_zoom_help: Alleen van toepassing als een centrum van de kaart is gedefinieerd
           menu_amendments: Toon amendementen
           menu_meetings: Toon vergaderingen
+          menu_merge_components: Merge all components of the same type in the menu
           name: Awesome Map
           show_accepted: Toon geaccepteerde voorstellen
           show_evaluating: Toon evaluatievoorstellen
@@ -259,6 +263,14 @@ nl:
           success: Afbeelding met succes geüpload
       map_component:
         map:
+          api_not_ready: |
+            <b>Warning:</b> This Decidim installation has the API configured to a maximum complexity of <b>%{current_complexity}</b>.
+            This component probably won't work under this configuration. We recommend you to set up in a initializer
+            (for instance at the end of the <code>config/initializers/decidim.rb</code>) the following lines:<br>
+            <br>
+            <pre># Api configuration
+            Decidim::Api::Schema.max_complexity = 5000
+            Decidim::Api::Schema.max_depth = 50</pre>
           error:
             unavailable: De kaart is niet beschikbaar. Configureer geocoding om deze component in te schakelen.
           show:

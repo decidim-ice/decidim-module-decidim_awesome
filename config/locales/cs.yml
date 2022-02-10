@@ -63,8 +63,10 @@ cs:
             map_zoom: Zvětšení (libovolné číslo mezi 0 a 18)
             map_zoom_help: Použije se pouze v případě, že je definován střed mapy
             menu_amendments: Zobrazit pozměňovací návrhy
+            menu_categories: Show Category search menu
             menu_hashtags: Zobrazit vyhledávací menu Hasthag
             menu_meetings: Zobrazit schůzky
+            menu_merge_components: Merge all components of the same type in the menu
             truncate: Maximum znaků pro popisy vyskakovacích oken
           step:
             announcement: Oznámení
@@ -128,9 +130,10 @@ cs:
               drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
               intergram_about: Intergram používá Telegram messenger pro zpracování widgetu live podpory v dolní části stránky.
               intergram_config: 'Pozvěte <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bota</a> do vaší skupiny nebo začněte chatovat přímo. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
+              original_editor_override: Since version 0.26, it is possible (for admins only) to upload images into the editors. Therefore, image settings in here only affect the public editors (admin will always have it available).
               proposal_custom_fields: Vytvoření vlastních polí návrhu, která se použijí pouze v určitých částech veřejného webu (použijte k tomu editor omezení)
               proposal_custom_fields_example: Data jsou uložena v objektu XML pomocí kompatibilních atributů HTML (prvky dl,dt,dd), které v běžném návrhu nahrazují "tělo".
-              proposal_custom_fields_translations: "Štítky, text nápovědy, zástupné symboly a výchozí hodnoty mohou používat vlastní překlady aplikace. \nK tomu použijte místo doslovného řetězce klíč i18n (musí obsahovat alespoň jednu tečku).\nNapříklad:\n- \"activemodel.attributes.proposal.title\" místo \"Title\".\n- \"activemodel.attributes.proposal.address\" místo \"Address\".\nNebo použijte vlastní klíče v kombinaci s dalšími nástroji pro definici překladů (např.: pomocí modulu Term Customizer):\n- \"myapp.custom_fields.bio\" místo \"Biography\""
+              proposal_custom_fields_translations: "Labels, help text, placeholders and default values can use your application custom translations. \nFor that, instead of using a string literal, use the i18n key (it must contain at least one dot).\nFor instance:\n- \"activemodel.attributes.proposal.title\" instead of \"Title\"\n- \"activemodel.attributes.proposal.address\" instead of \"Address\"\nOr use your own keys in combination with other tools to define translations (eg: using the module Term Customizer):\n - \"myapp.custom_fields.bio\" instead of \"Biography\""
               scoped_admins: Povýšení běžného uživatele na administrátora, který může spravovat pouze určité části veřejného webu (k tomu použijte editor omezení). Všimněte si, že uživatelé, kteří již mají oprávnění běžného správce, budou ignorováni.
               scoped_styles: Vytvořte vlastní CSS aplikovaný pouze na určitých částech veřejného webu (použijte pro to editor omezení)
               scoped_styles_variables: 'Můžete použít následující CSS proměnné pro nastavené barvy organizace:'
@@ -239,6 +242,7 @@ cs:
           map_zoom_help: Použije se pouze v případě, že je definován střed mapy
           menu_amendments: Zobrazit pozměňovací návrhy
           menu_meetings: Zobrazit schůzky
+          menu_merge_components: Merge all components of the same type in the menu
           name: Úžasná mapa
           show_accepted: Zobrazit přijaté návrhy
           show_evaluating: Zobrazit hodnocení návrhů
@@ -259,6 +263,14 @@ cs:
           success: Obrázek byl úspěšně nahrán
       map_component:
         map:
+          api_not_ready: |
+            <b>Warning:</b> This Decidim installation has the API configured to a maximum complexity of <b>%{current_complexity}</b>.
+            This component probably won't work under this configuration. We recommend you to set up in a initializer
+            (for instance at the end of the <code>config/initializers/decidim.rb</code>) the following lines:<br>
+            <br>
+            <pre># Api configuration
+            Decidim::Api::Schema.max_complexity = 5000
+            Decidim::Api::Schema.max_depth = 50</pre>
           error:
             unavailable: Mapa není dostupná. Pro povolení této komponenty nakonfigurujte geocoding.
           show:
