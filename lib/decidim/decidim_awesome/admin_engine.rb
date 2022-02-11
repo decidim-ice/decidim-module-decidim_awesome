@@ -24,6 +24,7 @@ module Decidim
         get :users, to: "config#users"
         post :rename_scope_label, to: "config#rename_scope_label"
         get :checks, to: "checks#index"
+        post :migrate_images, to: "checks#migrate_images"
         root to: "config#show", var: :editors
       end
 

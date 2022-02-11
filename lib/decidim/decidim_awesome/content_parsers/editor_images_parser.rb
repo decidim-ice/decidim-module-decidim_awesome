@@ -30,7 +30,7 @@ module Decidim
 
         def replace_editor_images
           editor_images.each do |image, mapping|
-            image.set_attribute(:src, mapping[:instance].attached_uploader(:image).path)
+            image.set_attribute(:src, mapping[:instance].attached_uploader(:file).path)
           end
         end
       end
