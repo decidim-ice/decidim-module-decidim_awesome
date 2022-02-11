@@ -44,7 +44,7 @@ module Decidim
 
         def update
           @form = form(CustomRedirectForm).from_params(params)
-          CreateCustomRedirect.call(@form) do
+          UpdateCustomRedirect.call(@form, redirect_item) do
             on(:ok) do
               flash[:notice] = I18n.t("custom_redirects.update.success", scope: "decidim.decidim_awesome.admin")
               redirect_to decidim_admin_decidim_awesome.custom_redirects_path

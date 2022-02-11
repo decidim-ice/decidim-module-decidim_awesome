@@ -7,6 +7,7 @@ import "src/decidim/decidim_awesome/admin/auto_edit"
 import "src/decidim/decidim_awesome/admin/user_picker"
 import "src/decidim/decidim_awesome/editors/tabs_focus"
 import "src/decidim/decidim_awesome/admin/codemirror"
+import "src/decidim/decidim_awesome/admin/check_redirections"
 
 import {destroyQuillEditor,createQuillEditor,createMarkdownEditor} from "src/decidim/decidim_awesome/editors/editor"
 

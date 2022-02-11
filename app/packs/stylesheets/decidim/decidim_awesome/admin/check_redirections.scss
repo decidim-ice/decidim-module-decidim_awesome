@@ -1,0 +1,23 @@
+.custom-redirections-table {
+  th,td {
+    text-align: left !important;
+  }
+  td.redirect-status {
+    font-family: monospace;
+    &.success {
+      &:before {
+        content: "OK! ";
+      }
+    }
+    &.alert {
+      &:before {
+        content: "ERR ";
+      }
+    }
+    &.muted {
+      &:before {
+        content: "N/A ";
+      }
+    }
+  }
+}
