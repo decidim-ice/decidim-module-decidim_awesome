@@ -45,6 +45,11 @@ end %>
           <%= icon_aria_selected_link_to I18n.t("menu.menu_hacks", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.menu_hacks_path, "menu" %>
         </li>
       <% end %>
+      <% if config_enabled? :custom_redirects %>
+        <li <% if is_active_link?(decidim_admin_decidim_awesome.custom_redirects_path) %> class="is-active" <% end %>>
+          <%= icon_aria_selected_link_to I18n.t("menu.custom_redirects", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.custom_redirects_path, "share-boxed" %>
+        </li>
+      <% end %>
       <% if config_enabled?([:intergram_for_admins, :intergram_for_public]) %>
         <li <% if is_active_link?(decidim_admin_decidim_awesome.config_path(:livechat)) %> class="is-active" <% end %>>
           <%= icon_aria_selected_link_to I18n.t("menu.livechat", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:livechat), "chat" %>

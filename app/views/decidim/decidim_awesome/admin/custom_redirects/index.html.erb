@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-divider">
+    <h2 class="card-title">
+      <%= t(".title") %>
+      <%= link_to t(".new"), decidim_admin_decidim_awesome.new_custom_redirect_path, class: "button tiny button--title" %>
+    </h2>
+  </div>
+  <div class="card-section">
+  <p class="help-text"><%= t(".description").html_safe %></p>
+  <div class="row column decidim_awesome-form">
+    <table class="table-list">
+      <thead>
+        <tr>
+          <th><%= t("menu.raw_label", scope: "activemodel.attributes") %></th>
+          <th class="actions"></th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</div>
