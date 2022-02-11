@@ -88,6 +88,13 @@ ja:
               CSS: 必要な <link> スタイルシートエントリがヘッドに含まれていません。この問題を解決するために、独自の _head.html.erbに手動で追加することもできます。
               JavaScript: 必要な <script> JavaScriptエントリがヘッドに含まれていません。この問題を解決するために、独自の admin/_head.html.erbに手動で追加することもできます。
             head_tags: アプリケーションヘッダーに含まれる Awesome tags
+            image_migrations_started: Images migration process has been started successfully
+            images_migrated: Images migrated to ActiveStorage
+            pending_image_migrations: |
+              Since version 0.25, Decidim uses a new technology to upload files.<br>
+              It looks that this installation needs to migrate <strong>%{total}</strong> of the old images to the new system.<br>
+              You can start the process now and it will be performed in the background.
+            start_image_migrations: "\U0001F449 Start the migration process now"
             title: システム互換性チェック
         config:
           caution: '注意: この機能は、予期しない結果につながる可能性があるデフォルトの動作を大きく変更します。注意して使用してください！'
