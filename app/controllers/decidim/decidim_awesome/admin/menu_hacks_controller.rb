@@ -6,11 +6,12 @@ module Decidim
       # Editing menu items
       class MenuHacksController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
-        helper ConfigConstraintsHelpers
+        include ConfigConstraintsHelpers
 
         layout "decidim/admin/decidim_awesome"
 
-        helper_method :current_items, :md5, :visibility_options, :target_options
+        helper ConfigConstraintsHelpers
+        helper_method :current_items, :visibility_options, :target_options
 
         before_action do
           enforce_permission_to :edit_config, :menu

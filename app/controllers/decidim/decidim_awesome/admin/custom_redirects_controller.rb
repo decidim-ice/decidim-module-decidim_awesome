@@ -7,7 +7,6 @@ module Decidim
       class CustomRedirectsController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
         include ConfigConstraintsHelpers
-        helper ConfigConstraintsHelpers
 
         layout "decidim/admin/decidim_awesome"
 
@@ -15,6 +14,7 @@ module Decidim
           enforce_permission_to :edit_config, :menu
         end
 
+        helper ConfigConstraintsHelpers
         helper_method :current_config
 
         def index; end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "decidim/decidim_awesome/test/shared_examples/menu_hack_contexts"
+require "decidim/decidim_awesome/test/shared_examples/config_examples"
 
 module Decidim::DecidimAwesome
   module Admin

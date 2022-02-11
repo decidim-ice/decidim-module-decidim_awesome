@@ -2,32 +2,21 @@
 
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/config_examples"
-require "decidim/decidim_awesome/test/shared_examples/menu_hack_contexts"
+require "decidim/decidim_awesome/test/shared_examples/custom_redirects_contexts"
 
 module Decidim::DecidimAwesome
   module Admin
-    describe MenuHacksController, type: :controller do
-      include Decidim::TranslationsHelper
+    describe CustomRedirectsController, type: :controller do
       routes { Decidim::DecidimAwesome::AdminEngine.routes }
 
-      include_context "with menu hacks params"
+      include_context "with custom redirects params"
 
       let(:user) { create(:user, :confirmed, :admin, organization: organization) }
       let(:organization) { create(:organization) }
 
       before do
-        Decidim::MenuRegistry.register :menu do |menu|
-          menu.add_item :native_menu,
-                        "Native",
-                        "/processes?locale=ca",
-                        position: 1
-        end
         request.env["decidim.current_organization"] = user.organization
         sign_in user, scope: :user
-      end
-
-      after do
-        Decidim::MenuRegistry.find(:menu).configurations.pop
       end
 
       describe "GET #new" do
@@ -52,17 +41,17 @@ module Decidim::DecidimAwesome
 
         it_behaves_like "forbids disabled feature"
 
-        it "creates the new menu entry" do
+        it "creates the new redirection entry" do
           action
 
-          items = AwesomeConfig.find_by(organization: organization, var: menu_name).value
-          expect(items).to be_a(Array)
+          items = AwesomeConfig.find_by(organization: organization, var: :custom_redirects).value
+          expect(items).to be_a(Hash)
           expect(items.count).to eq(1)
           expect(items.first).to eq(attributes)
         end
 
         context "when invalid parameters" do
-          let(:label) { { en: "" } }
+          let(:origin) { "" }
 
           it "returns error" do
             action
@@ -70,19 +59,19 @@ module Decidim::DecidimAwesome
             expect(response).to have_http_status(:ok)
           end
 
-          it "do not create the new menu entry" do
+          it "do not create the new redirection entry" do
             action
 
-            expect(AwesomeConfig.find_by(organization: organization, var: menu_name)).not_to be_present
+            expect(AwesomeConfig.find_by(organization: organization, var: :custom_redirects)).not_to be_present
           end
         end
 
         context "when same url exists" do
-          let(:previous_menu) do
-            [{ "url" => "/some-path", "position" => 10 }]
+          let(:previous_value) do
+            { "/some-path" => { "destination" => "/assemblies", "active" => true } }
           end
-          let!(:config) { create :awesome_config, organization: organization, var: menu_name, value: previous_menu }
-          let(:url) { "/some-path?querystring" }
+          let!(:config) { create :awesome_config, organization: organization, var: :custom_redirects, value: previous_value }
+          let(:origin) { "/some-path" }
 
           it "returns error" do
             action
@@ -90,23 +79,23 @@ module Decidim::DecidimAwesome
             expect(response).to have_http_status(:ok)
           end
 
-          it "do not create the new menu entry" do
+          it "do not create the new redirection entry" do
             action
 
-            expect(AwesomeConfig.find_by(organization: organization, var: menu_name).value.count).to eq(1)
+            expect(AwesomeConfig.find_by(organization: organization, var: :custom_redirects).value.count).to eq(1)
           end
         end
       end
 
       describe "GET #edit" do
         let(:action) { get :edit, params: params }
-        let(:previous_menu) do
-          [{ "url" => url, "position" => 10 }]
+        let(:previous_value) do
+          { origin => { "destination" => "/assemblies", "active" => true } }
         end
-        let!(:config) { create :awesome_config, organization: organization, var: menu_name, value: previous_menu }
+        let!(:config) { create :awesome_config, organization: organization, var: :custom_redirects, value: previous_value }
         let(:params) do
           {
-            id: Digest::MD5.hexdigest(previous_menu.first["url"])
+            id: Digest::MD5.hexdigest(origin)
           }
         end
 
@@ -117,7 +106,7 @@ module Decidim::DecidimAwesome
 
         it_behaves_like "forbids disabled feature"
 
-        context "when editing a non existing menu" do
+        context "when editing a non existing redirection" do
           let(:params) do
             {
               id: "nonsense"
@@ -128,33 +117,17 @@ module Decidim::DecidimAwesome
             expect { action }.to raise_error(ActiveRecord::RecordNotFound)
           end
         end
-
-        context "when editing a native menu" do
-          let(:url) { "/processes?locale=ca" }
-          let(:params) do
-            {
-              id: Digest::MD5.hexdigest(url)
-            }
-          end
-
-          it "removes the querystring" do
-            action
-
-            expect(controller.instance_variable_get(:@form).url).to eq("/processes")
-            expect(response).to have_http_status(:success)
-          end
-        end
       end
 
       describe "PATCH #update" do
         let(:action) { patch :update, params: params.merge(id) }
-        let(:previous_menu) do
-          [{ "url" => url, "position" => 10 }]
+        let(:previous_value) do
+          { origin => { "destination" => "/assemblies", "active" => true } }
         end
-        let!(:config) { create :awesome_config, organization: organization, var: menu_name, value: previous_menu }
+        let!(:config) { create :awesome_config, organization: organization, var: :custom_redirects, value: previous_value }
         let(:id) do
           {
-            id: Digest::MD5.hexdigest(previous_menu.first["url"])
+            id: Digest::MD5.hexdigest(origin)
           }
         end
 
@@ -166,31 +139,27 @@ module Decidim::DecidimAwesome
           expect(response).to have_http_status(:redirect)
         end
 
-        it "updates the menu entry" do
+        it "updates the redirection entry" do
           action
 
-          items = AwesomeConfig.find_by(organization: organization, var: menu_name).value
-          expect(items).to be_a(Array)
+          items = AwesomeConfig.find_by(organization: organization, var: :custom_redirects).value
+          expect(items).to be_a(Hash)
           expect(items.count).to eq(1)
           expect(items.first).to eq(attributes)
         end
 
-        context "when updating a non existing menu" do
-          let(:previous_menu) do
-            [{ "url" => "/another-menu", "position" => 10 }]
+        context "when updating a non existing redirection" do
+          let(:previous_value) do
+            { "/another-redirection" => { "destination" => "/assemblies", "active" => true } }
           end
 
-          it "creates a new item" do
-            action
-            items = AwesomeConfig.find_by(organization: organization, var: menu_name).value
-
-            expect(items).to be_a(Array)
-            expect(items.count).to eq(2)
+          it "returns error" do
+            expect { action }.to raise_error(ActiveRecord::RecordNotFound)
           end
         end
 
         context "when invalid parameters" do
-          let(:label) { { en: "" } }
+          let(:origin) { "" }
 
           it "returns error" do
             action
@@ -198,23 +167,23 @@ module Decidim::DecidimAwesome
             expect(response).to have_http_status(:ok)
           end
 
-          it "do not create the new menu entry" do
+          it "do not create the new redirection entry" do
             action
 
-            expect(AwesomeConfig.find_by(organization: organization, var: menu_name).value).to eq(previous_menu)
+            expect(AwesomeConfig.find_by(organization: organization, var: :custom_redirects).value).to eq(previous_value)
           end
         end
       end
 
-      describe "DELETE #destroys" do
+      describe "DELETE #destroy" do
         let(:action) { delete :destroy, params: params }
-        let(:previous_menu) do
-          [{ "url" => url, "position" => 10 }]
+        let(:previous_value) do
+          { origin => { "destination" => "/assemblies", "active" => true } }
         end
-        let!(:config) { create :awesome_config, organization: organization, var: menu_name, value: previous_menu }
+        let!(:config) { create :awesome_config, organization: organization, var: :custom_redirects, value: previous_value }
         let(:params) do
           {
-            id: Digest::MD5.hexdigest(previous_menu.first["url"])
+            id: Digest::MD5.hexdigest(origin)
           }
         end
 
@@ -228,7 +197,7 @@ module Decidim::DecidimAwesome
 
         it "destroy the task" do
           action
-          expect(AwesomeConfig.find_by(organization: organization, var: menu_name).value).to eq([])
+          expect(AwesomeConfig.find_by(organization: organization, var: :custom_redirects).value).to eq({})
         end
 
         context "when invalid parameters" do
@@ -240,7 +209,7 @@ module Decidim::DecidimAwesome
 
           it "returns error" do
             expect { action }.to raise_error(ActiveRecord::RecordNotFound)
-            expect(AwesomeConfig.find_by(organization: organization, var: menu_name).value).to eq(previous_menu)
+            expect(AwesomeConfig.find_by(organization: organization, var: :custom_redirects).value).to eq(previous_value)
           end
         end
       end
