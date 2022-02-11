@@ -88,13 +88,13 @@ es:
               CSS: El encabezado no contiene las entradas requeridas <link> a la hoja de estilo. Para resolverlo, se pueden añadir manualmente al fichero personalizado _head.html.erb
               JavaScript: El encabezado no contiene las entradas requeridas de Javascript <script>. Para resolverlo, se pueden añadir manualmente al fichero personalizado admin/_header.html.erb
             head_tags: Etiquetas Awesome incluidas en el encabezado de la aplicación
-            image_migrations_started: Images migration process has been started successfully
-            images_migrated: Images migrated to ActiveStorage
+            image_migrations_started: El proceso de migración de imágenes ha iniciado correctamente
+            images_migrated: Imágenes migradas a ActiveStorage
             pending_image_migrations: |
-              Since version 0.25, Decidim uses a new technology to upload files.<br>
-              It looks that this installation needs to migrate <strong>%{total}</strong> of the old images to the new system.<br>
-              You can start the process now and it will be performed in the background.
-            start_image_migrations: "\U0001F449 Start the migration process now"
+              Desde la versión 0.25, Decidim utiliza una nueva tecnología para subir archivos.<br>
+              Parece que esta instalación necesita migrar <strong>%{total}</strong> imágenes antiguas al nuevo sistema.<br>
+              Puedes iniciar el proceso ahora y se realizará en segundo plano.
+            start_image_migrations: "\U0001F449 Iniciar el proceso de migración ahora"
             title: Análisis de compatibilidad del sistema
         config:
           caution: 'NOTA: Esta función modifica en gran medida algunos comportamientos por defecto que pueden llevar a resultados inesperados. ¡Utilícelo con precaución!'
