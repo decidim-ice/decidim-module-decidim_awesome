@@ -88,13 +88,13 @@ ca:
               CSS: La capçalera no conté les entrades necessàries <link> al full d'estil. Per resoldre-ho, es poden afegir manualment al fitxer personalitzat _head.html.erb
               JavaScript: La capçalera no conté les entrades necessàries <script> de Javascript. Per resoldre-ho, es poden afegir manualment al fitxer personalitzat admin/_header.html.erb
             head_tags: Etiquetes Awesome incloses a la capçalera de l'aplicació
-            image_migrations_started: Images migration process has been started successfully
-            images_migrated: Images migrated to ActiveStorage
+            image_migrations_started: El procés de migració de les imatges ha iniciat correctament
+            images_migrated: Imatges migrades a ActiveStorage
             pending_image_migrations: |
-              Since version 0.25, Decidim uses a new technology to upload files.<br>
-              It looks that this installation needs to migrate <strong>%{total}</strong> of the old images to the new system.<br>
-              You can start the process now and it will be performed in the background.
-            start_image_migrations: "\U0001F449 Start the migration process now"
+              Des de la versió 0.25, Decidim utilitza una nova tecnologia per pujar fitxers.<br>
+              Sembla que aquesta instal·lació requereix migrar <strong>%{total}</strong> imatges al nou sistema.<br>
+              Pots iniciar el procés ara i es durà a terme en segon pla.
+            start_image_migrations: "\U0001F449 Iniciar el procés de migració ara"
             title: Anàlisi de compatibilitat amb el sistema
         config:
           caution: 'NOTA: Aquesta funció modifica en gran mesura alguns comportaments predeterminats que podrien provocar resultats inesperats. Utilitzeu-lo amb precaució!'
