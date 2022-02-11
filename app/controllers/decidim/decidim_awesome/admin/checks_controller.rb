@@ -9,10 +9,17 @@ module Decidim
       class ChecksController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
         helper ConfigConstraintsHelpers
+        helper SystemCheckerHelpers
 
         layout "decidim/admin/decidim_awesome"
 
-        helper_method :overrides, :valid?, :decidim_version, :decidim_version_valid?, :head, :admin_head, :head_addons, :admin_addons
+        helper_method :head, :admin_head, :head_addons, :admin_addons
+
+        def migrate_images
+          Decidim::DecidimAwesome::MigrateLegacyImagesJob.perform_later(current_organization.id)
+          flash[:notice] = I18n.t("image_migrations_started", scope: "decidim.decidim_awesome.admin.checks.index")
+          redirect_to checks_path
+        end
 
         private
 
@@ -22,22 +29,6 @@ module Decidim
 
         def admin_head
           @admin_head = Nokogiri::HTML(render_to_string(partial: "layouts/decidim/admin/header"))
-        end
-
-        def overrides
-          SystemChecker.to_h
-        end
-
-        def valid?(spec, file)
-          SystemChecker.valid?(spec, file)
-        end
-
-        def decidim_version
-          Decidim.version
-        end
-
-        def decidim_version_valid?
-          Gem::Dependency.new("", DecidimAwesome::COMPAT_DECIDIM_VERSION).match?("", decidim_version, true)
         end
 
         def head_addons(part)

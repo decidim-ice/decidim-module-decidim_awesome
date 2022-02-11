@@ -1,128 +1,37 @@
 # frozen_string_literal: true
 
-namespace :decidim_decidim_awesome do
+namespace :decidim_awesome do
   namespace :active_storage_migrations do
     desc "Migrates editor images from Carrierwave to ActiveStorage"
-    task migrate_from_carrierwave_to_active_storage: :environment do
-      MIGRATION_ATTRIBUTES = [[
-        Decidim::DecidimAwesome::EditorImage,
-        "image",
-        Decidim::Cw::DecidimAwesome::ImageUploader,
-        "image"
-      ]].freeze
+    task migrate_from_carrierwave: :environment do
+      stdout = Logger.new($stdout)
+      stdout.level = Logger::INFO
+      Rails.logger.extend(ActiveSupport::Logger.broadcast(stdout))
+      Decidim::Organization.find_each do |organization|
+        puts "Migrating Organization #{organization.id} (#{organization.host})..."
+        routes_mappings = []
+        Decidim::DecidimAwesome::MigrateLegacyImagesJob.perform_now(organization.id, routes_mappings)
 
-      # Setup a new logger, using the timestamp to identify each migration
-      logger = ActiveSupport::TaggedLogging.new(Logger.new("log/#{Time.current.strftime("%Y%m%d%H%M")}_decidim_awesome_activestorage_migration.log"))
-      routes_mappings = []
-
-      MIGRATION_ATTRIBUTES.each do |(klass, cw_attribute, cw_uploader, as_attribute)|
-        Decidim::CarrierWaveMigratorService.migrate_attachment!(
-          klass: klass,
-          cw_attribute: cw_attribute,
-          cw_uploader: cw_uploader,
-          as_attribute: as_attribute,
-          logger: logger,
-          routes_mappings: routes_mappings
-        )
-      end
-
-      transform_images_urls(routes_mappings)
-
-      path = Rails.root.join("tmp/decidim_awesome_editor_images_mappings.csv")
-      dirname = File.dirname(path)
-      FileUtils.mkdir_p(dirname) unless File.directory?(dirname)
-      File.open(path, "wb") do |file|
-        file.write(Decidim::Exporters::CSV.new(routes_mappings).export.read)
+        path = Rails.root.join("tmp/decidim_awesome_editor_images_mappings.csv")
+        dirname = File.dirname(path)
+        FileUtils.mkdir_p(dirname) unless File.directory?(dirname)
+        File.open(path, "wb") do |file|
+          file.write(Decidim::Exporters::CSV.new(routes_mappings).export.read)
+        end
       end
     end
 
     desc "Checks editor images migrated from Carrierwave to ActiveStorage"
-    task check_migration_from_carrierwave_to_active_storage: :environment do
-      # Setup a new logger, using the timestamp to identify each migration
-      logger = ActiveSupport::TaggedLogging.new(Logger.new("log/#{Time.current.strftime("%Y%m%d%H%M")}_decidim_awesome_activestorage_migration_check.log"))
-      MIGRATION_ATTRIBUTES.each do |(klass, cw_attribute, cw_uploader, as_attribute)|
-        Decidim::CarrierWaveMigratorService.check_migration(
-          klass: klass,
-          cw_attribute: cw_attribute,
-          cw_uploader: cw_uploader,
-          as_attribute: as_attribute,
-          logger: logger
-        )
-      end
-    end
+    task check_migration_from_carrierwave: :environment do
+      logger = ActiveSupport::TaggedLogging.new(Logger.new($stdout))
 
-    def transform_images_urls(routes_mappings)
-      routes_mappings = routes_mappings.map do |mapping|
-        klass, id = mapping[:instance].split("#")
-        next unless klass == "Decidim::DecidimAwesome::EditorImage"
-
-        instance = Decidim::DecidimAwesome::EditorImage.find_by(id: id)
-
-        next if instance.blank?
-
-        mapping.merge!(instance: instance)
-      end.compact
-
-      editor_images_available_attributes.each do |model, attributes|
-        puts "=== Updating model #{model.name} (attributes: #{attributes.join(", ")})..."
-        model.all.each do |item|
-          attributes.each do |attribute|
-            item.update(attribute => rewrite_value(item.send(attribute), routes_mappings))
-          end
-        end
-        puts "=== Finished update of model #{model.name}\n\n"
-      end
-    end
-
-    def rewrite_value(value, routes_mappings)
-      if value.is_a?(Hash)
-        value.transform_values do |nested_value|
-          rewrite_value(nested_value, routes_mappings)
-        end
-      else
-        parser = Decidim::DecidimAwesome::ContentParsers::EditorImagesParser.new(value, routes_mappings: routes_mappings)
-        parser.rewrite
-      end
-    end
-
-    def editor_images_available_attributes
-      {
-        "Decidim::Accountability::Result" => %w(description),
-        "Decidim::Proposals::Proposal" => %w(body answer cost_report execution_period),
-        "Decidim::Votings::Voting" => %w(description),
-        "Decidim::Elections::Question" => %w(description),
-        "Decidim::Elections::Answer" => %w(description),
-        "Decidim::Elections::Election" => %w(description),
-        "Decidim::Initiative" => %w(description answer),
-        "Decidim::InitiativesType" => %w(description extra_fields_legal_information),
-        "Decidim::Assembly" => %w(short_description description purpose_of_action composition internal_organisation announcement closing_date_reason special_features),
-        "Decidim::Forms::Questionnaire" => %w(description tos),
-        "Decidim::Forms::Question" => %w(description),
-        "Decidim::Organization" => %w(welcome_notification_body admin_terms_of_use_body description highlighted_content_banner_short_description id_documents_explanation_text),
-        "Decidim::StaticPage" => %w(content),
-        "Decidim::ContextualHelpSection" => %w(content),
-        "Decidim::Category" => %w(description),
-        "Decidim::Blogs::Post" => %w(body),
-        "Decidim::Pages::Page" => %w(body),
-        "Decidim::Sortitions::Sortition" => %w(additional_info witnesses cancel_reason),
-        "Decidim::Consultations::Question" => %w(title question_context what_is_decided instructions),
-        "Decidim::Consultation" => %w(description),
-        "Decidim::Debates::Debate" => %w(description instructions information_updates conclusions),
-        "Decidim::Budgets::Budget" => %w(description),
-        "Decidim::Budgets::Project" => %w(description),
-        "Decidim::ConferenceSpeaker" => %w(short_bio),
-        "Decidim::Conferences::RegistrationType" => %w(description),
-        "Decidim::Conference" => %w(short_description description objectives registration_terms),
-        "Decidim::ParticipatoryProcessGroup" => %w(description),
-        "Decidim::ParticipatoryProcess" => %w(short_description description announcement),
-        "Decidim::ParticipatoryProcessStep" => %w(description),
-        "Decidim::Meetings::AgendaItem" => %w(description),
-        "Decidim::Meetings::Meeting" => %w(registration_terms description registration_email_custom_content closing_report)
-      }.each_with_object({}) do |(main_model, attributes), hash|
-        hash[main_model.constantize] = attributes
-      rescue NameError
-        hash
-      end
+      Decidim::CarrierWaveMigratorService.check_migration(
+        klass: Decidim::DecidimAwesome::EditorImage,
+        cw_attribute: "image",
+        cw_uploader: Decidim::Cw::DecidimAwesome::ImageUploader,
+        as_attribute: "file",
+        logger: logger
+      )
     end
   end
 end

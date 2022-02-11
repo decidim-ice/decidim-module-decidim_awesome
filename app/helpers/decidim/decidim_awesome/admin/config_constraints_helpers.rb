@@ -8,10 +8,6 @@ module Decidim
 
         include Decidim::TranslatableAttributes
 
-        def check(status)
-          content_tag(:span, icon("check", class: "icon", aria_label: status, role: "img"), class: "text-#{status == :ok ? "success" : "alert"}")
-        end
-
         # returns only non :disabled vars in config
         def enabled_configs(vars)
           vars.filter do |var|
