@@ -8,24 +8,27 @@ module Decidim
         attribute :origin, String
         attribute :destination, String
         attribute :active, Boolean
+        attribute :pass_query, Boolean
 
         validates :origin, :destination, presence: true
 
         def to_params
           [
-            sanitize_origin(origin),
+            sanitize_url(origin),
             {
-              destination: destination,
-              active: active
+              destination: sanitize_url(destination, strip_host: false),
+              active: active,
+              pass_query: pass_query
             }
           ]
         end
 
-        def sanitize_origin(origin)
-          parsed = Addressable::URI.parse(origin)
-          origin = parsed.path if parsed.host == current_organization.host
-          origin = "/#{origin}" unless origin.start_with? "/"
-          origin
+        def sanitize_url(url, strip_host: true)
+          url = url.strip.downcase
+          parsed = Addressable::URI.parse(url)
+          url = parsed.path if strip_host && parsed.host == current_organization.host
+          url = "/#{url}" unless url.match?(%r{^https?://|^/})
+          url
         end
       end
     end

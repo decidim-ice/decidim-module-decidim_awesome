@@ -31,16 +31,17 @@ en:
         component_manifest: Only in components of type
         participatory_space_manifest: Apply to participatory spaces of type
         participatory_space_slug: Only in
+      custom_redirect:
+        active: Active
+        destination: Destination
+        origin: Origin
+        pass_query: Pass the query string to the destination
       menu:
         position: Position
         raw_label: Label
         target: Opens in
         url: URL
         visibility: Visibility
-      custom_redirect:
-        origin: Origin
-        destination: Destination
-        active: Active
       proposal:
         proposal_custom_fields: Custom fields
   decidim:
@@ -242,49 +243,52 @@ en:
           update:
             error: Error updating condition case
             success: Condition case updated successfully
-        menu:
-          admins: Scoped Admins
-          checks: System Compatibility
-          editors: Editor Hacks
-          livechat: Live Chat
-          menu_hacks: Menu Tweaks
-          custom_redirects: Custom Redirections
-          proposal_custom_fields: Proposals Custom Fields
-          proposals: Proposals Hacks
-          styles: Custom Styles
-          surveys: Surveys & Forms
         custom_redirects:
-          index:
-            title: Custom Redirections
-            description: |
-             You can define any route (starting with <code>/</code>) to redirect any visitor to a destination URL.<br>
-             Destination can be an absolute path (ie: <code>/processes/some-process</code>) or start with <code>https://</code> (ie: <code>http://decidim.org</code>)<br><br>
-             Take into account that a redirection only works if none other route matches. It is not possible to override original routes (this is by design).
-             Moreover, redirections starting with the prefix <code>/admin</code> aren't allowed either.
-            new: New redirection
-            edit: Edit redirection
-            remove: Remove redirection
-            confirm_destroy:  Are you sure to remove this redirection?
-          new:
-            title: New redirection
-            save: Save
-          form:
-            origin_help: Only absolute routes, start with "/"
-            destination_help: Absolute routes (start with "/") or external URLs (http://..)
           create:
             error: Error creating redirection! %{error}
             success: Redirection created successfully
-          update:
-            error: Error updating redirection! %{error}
-            success: Redirection updated successfully
           destroy:
             error: Error removing redirection! %{error}
             success: Redirection removed successfully
           edit:
             save: Save
             title: Edit redirection
+          form:
+            destination_help: Absolute routes (start with "/") or external URLs (http://..)
+            origin_help: Only absolute routes, start with "/"
+            pass_query_help: |
+              Activate this option if you want that the query string to be copied to the destination.<br>
+              For instance, if having configured /my-origin => /my-destination, a request to /my-origin?locale=ca  will be redirected to "/my-destination?locale=ca".
+          index:
+            confirm_destroy: Are you sure to remove this redirection?
+            description: |
+              You can define any route (starting with <code>/</code>) to redirect any visitor to a destination URL.<br>
+              Destination can be an absolute path (ie: <code>/processes/some-process</code>) or start with <code>https://</code> (ie: <code>http://decidim.org</code>)<br><br>
+              Take into account that a redirection only works if none other route matches. It is not possible to override original routes (this is by design).
+              Moreover, redirections starting with the prefix <code>/admin</code> aren't allowed either.
+            edit: Edit redirection
+            new: New redirection
+            remove: Remove redirection
+            title: Custom Redirections
+          new:
+            save: Save
+            title: New redirection
           origin_exists: The same origin is already configured, please edit that instead
             of creating it again.
+          update:
+            error: Error updating redirection! %{error}
+            success: Redirection updated successfully
+        menu:
+          admins: Scoped Admins
+          checks: System Compatibility
+          custom_redirects: Custom Redirections
+          editors: Editor Hacks
+          livechat: Live Chat
+          menu_hacks: Menu Tweaks
+          proposal_custom_fields: Proposals Custom Fields
+          proposals: Proposals Hacks
+          styles: Custom Styles
+          surveys: Surveys & Forms
         menu_hacks:
           create:
             error: Error creating menu item! %{error}

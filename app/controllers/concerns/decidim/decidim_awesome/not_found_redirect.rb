@@ -39,12 +39,18 @@ module Decidim
           redirect_to destination if destination.present?
         end
 
-        def custom_redirects_destination(path)
+        def custom_redirects_destination(fullpath)
           redirects = (AwesomeConfig.find_by(var: :custom_redirects, organization: current_organization)&.value || {}).filter { |_, v| v["active"] }
           return if redirects.blank?
           return unless redirects.is_a? Hash
 
-          destination = redirects.dig(path, "destination")
+          path, query = fullpath.split("?")
+          destination = redirects.dig(path.downcase, "destination")
+          pass_query = redirects.dig(path.downcase, "pass_query")
+          if pass_query.present?
+            union = destination.include?("?") ? "&" : "?"
+            destination = "#{destination}#{union}#{query}"
+          end
 
           return destination.strip if destination.present?
         end
