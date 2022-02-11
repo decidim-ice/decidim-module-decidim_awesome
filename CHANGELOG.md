@@ -9,6 +9,7 @@ Compatibility:
 
 Features:
   - Update to webpacker compatiblity and Decidim 0.25
+  - Added tasks `bin/rails decidim_awesome:active_storage_migrations:check_migration_from_carrierwave` and `bin/rails decidim_awesome:active_storage_migrations:migrate_from_carrierwave` (also accessible as a backgroundjob from the awesome admin checks)
   - REMOVED: SCSS themes are not available anymore (the alternative is to use custom styles). This is mostly because of webpacker.
 
 v0.7.2
