@@ -35,7 +35,18 @@ module Decidim
         def redirect_to_custom_paths
           return if DecidimAwesome.config[:custom_redirects] == :disabled
 
-          redirect_to "/" if request.original_fullpath == "/asdf"
+          destination = custom_redirects_destination(request.original_fullpath)
+          redirect_to destination if destination.present?
+        end
+
+        def custom_redirects_destination(path)
+          redirects = (AwesomeConfig.find_by(var: :custom_redirects, organization: current_organization)&.value || {}).filter { |_, v| v["active"] }
+          return if redirects.blank?
+          return unless redirects.is_a? Hash
+
+          destination = redirects.dig(path, "destination")
+
+          return destination.strip if destination.present?
         end
       end
     end
