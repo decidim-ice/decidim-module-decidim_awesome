@@ -36,12 +36,12 @@ module Decidim
         end
 
         Decidim::Proposals::ApplicationHelper.include(Decidim::DecidimAwesome::Proposals::ApplicationHelperOverride)
+        Decidim::Proposals::ProposalWizardCreateStepForm.include(Decidim::DecidimAwesome::Proposals::ProposalWizardCreateStepFormOverride)
+
         Decidim::AmendmentsHelper.include(Decidim::DecidimAwesome::AmendmentsHelperOverride)
 
-        # TODO: move to include overrides
-        Dir.glob("#{Engine.root}/app/awesome_overrides/**/*_override.rb").each do |override|
-          require_dependency override
-        end
+        Decidim::MenuPresenter.include(Decidim::DecidimAwesome::MenuPresenterOverride)
+        Decidim::MenuItemPresenter.include(Decidim::DecidimAwesome::MenuItemPresenterOverride)
       end
 
       initializer "decidim_awesome.view_helpers" do

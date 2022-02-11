@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_dependency "decidim/components/namer"
+require "decidim/components/namer"
 
 Decidim.register_component(:awesome_iframe) do |component|
   component.engine = Decidim::DecidimAwesome::IframeComponent::Engine
