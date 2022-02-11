@@ -156,7 +156,7 @@ module Decidim
     # can return :disabled to completly remove this feature
     # You can initialize some default redirection if desired as follows:
     #  {
-    #    "/decidim-docs" => { destination: "http://docs.decidim.org" }
+    #    "/decidim-docs" => { destination: "http://docs.decidim.org", active: true }
     #  }
     #
     # To test this feature in development, ensure that config/environmnets/development.rb is configured as:
@@ -165,7 +165,7 @@ module Decidim
     #   config.consider_all_requests_local = false
 
     config_accessor :custom_redirects do
-      []
+      {}
     end
 
     # additional correspondences between participatory spaces manifests and routes

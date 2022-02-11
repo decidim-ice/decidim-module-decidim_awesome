@@ -8,6 +8,10 @@ module Decidim
 
         include Decidim::TranslatableAttributes
 
+        def check(status)
+          content_tag(:span, icon(status ? "check" : "x", class: "icon", aria_label: status, role: "img"), class: "text-#{status ? "success" : "alert"}")
+        end
+
         # returns only non :disabled vars in config
         def enabled_configs(vars)
           vars.filter do |var|
@@ -78,6 +82,10 @@ module Decidim
           else
             value
           end
+        end
+
+        def md5(text)
+          Digest::MD5.hexdigest(text)
         end
 
         private

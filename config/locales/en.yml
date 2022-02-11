@@ -37,6 +37,10 @@ en:
         target: Opens in
         url: URL
         visibility: Visibility
+      custom_redirect:
+        origin: Origin
+        destination: Destination
+        active: Active
       proposal:
         proposal_custom_fields: Custom fields
   decidim:
@@ -254,10 +258,33 @@ en:
             title: Custom Redirections
             description: |
              You can define any route (starting with <code>/</code>) to redirect any visitor to a destination URL.<br>
-             Destination can be an absolute path (ie: <code>/processes/some-process</code>) or start with <code>https://</code> (ie: <code>http://decidim.org</code>)<br>
+             Destination can be an absolute path (ie: <code>/processes/some-process</code>) or start with <code>https://</code> (ie: <code>http://decidim.org</code>)<br><br>
              Take into account that a redirection only works if none other route matches. It is not possible to override original routes (this is by design).
              Moreover, redirections starting with the prefix <code>/admin</code> aren't allowed either.
             new: New redirection
+            edit: Edit redirection
+            remove: Remove redirection
+            confirm_destroy:  Are you sure to remove this redirection?
+          new:
+            title: New redirection
+            save: Save
+          form:
+            origin_help: Only absolute routes, start with "/"
+            destination_help: Absolute routes (start with "/") or external URLs (http://..)
+          create:
+            error: Error creating redirection! %{error}
+            success: Redirection created successfully
+          update:
+            error: Error updating redirection! %{error}
+            success: Redirection updated successfully
+          destroy:
+            error: Error removing redirection! %{error}
+            success: Redirection removed successfully
+          edit:
+            save: Save
+            title: Edit redirection
+          origin_exists: The same origin is already configured, please edit that instead
+            of creating it again.
         menu_hacks:
           create:
             error: Error creating menu item! %{error}

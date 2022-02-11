@@ -96,10 +96,6 @@ module Decidim
           :menu
         end
 
-        def md5(text)
-          Digest::MD5.hexdigest(text)
-        end
-
         def visibility_options
           MenuForm::VISIBILITY_STATES.index_by { |key| I18n.t(".menu_hacks.form.visibility.#{key}", scope: "decidim.decidim_awesome.admin") }
         end

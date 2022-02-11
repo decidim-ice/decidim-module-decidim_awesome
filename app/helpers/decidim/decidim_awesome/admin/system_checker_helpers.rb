@@ -4,10 +4,6 @@ module Decidim
   module DecidimAwesome
     module Admin
       module SystemCheckerHelpers
-        def check(status)
-          content_tag(:span, icon(status ? "check" : "x", class: "icon", aria_label: status, role: "img"), class: "text-#{status ? "success" : "alert"}")
-        end
-
         def decidim_version
           Decidim.version
         end

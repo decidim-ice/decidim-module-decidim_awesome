@@ -11,11 +11,24 @@
     <table class="table-list">
       <thead>
         <tr>
-          <th><%= t("menu.raw_label", scope: "activemodel.attributes") %></th>
+          <th><%= t("custom_redirect.origin", scope: "activemodel.attributes") %></th>
+          <th><%= t("custom_redirect.destination", scope: "activemodel.attributes") %></th>
+          <th><%= t("custom_redirect.active", scope: "activemodel.attributes") %></th>
           <th class="actions"></th>
         </tr>
       </thead>
       <tbody>
+        <% current_config.each do |origin, item| %>
+          <tr>
+            <td><%= origin %></td>
+            <td><%= item["destination"] %></td>
+            <td><%= check item["active"] %></td>
+            <td class="table-list__actions">
+              <%= icon_link_to "pencil", decidim_admin_decidim_awesome.edit_custom_redirect_path(md5(origin)), t(".edit"), class: "action-icon--edit" %>
+              <%= icon_link_to "circle-x", decidim_admin_decidim_awesome.custom_redirect_path(md5(origin)), t(".remove"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
+            </td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </div>
