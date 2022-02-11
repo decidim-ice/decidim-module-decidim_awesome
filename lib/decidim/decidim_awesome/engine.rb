@@ -31,9 +31,9 @@ module Decidim
         if DecidimAwesome.config[:scoped_admins] != :disabled
           # override user's admin property
           Decidim::User.include(UserOverride)
-          # redirect unauthorized scoped admins to allowed places
-          Decidim::ErrorsController.include(AdminNotFoundRedirect)
         end
+        # redirect unauthorized scoped admins to allowed places or custom redirects if configured
+        Decidim::ErrorsController.include(NotFoundRedirect)
 
         Decidim::Proposals::ApplicationHelper.include(Decidim::DecidimAwesome::Proposals::ApplicationHelperOverride)
         Decidim::Proposals::ProposalWizardCreateStepForm.include(Decidim::DecidimAwesome::Proposals::ProposalWizardCreateStepFormOverride)

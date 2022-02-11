@@ -109,6 +109,11 @@ module Decidim
     #   {
     #      some_identifier: [1234, 5678, 90123]
     #   }
+    #
+    # To test this feature in development, ensure that config/environmnets/development.rb is configured as:
+    #   config.action_dispatch.show_exceptions = true
+    #   config.action_dispatch.show_detailed_exceptions = false
+    #   config.consider_all_requests_local = false
     config_accessor :scoped_admins do
       {}
     end
@@ -145,6 +150,22 @@ module Decidim
         auto_response: nil,
         auto_no_response: nil
       }
+    end
+
+    # Allow to configure custom redirections
+    # can return :disabled to completly remove this feature
+    # You can initialize some default redirection if desired as follows:
+    #  {
+    #    "/decidim-docs" => { destination: "http://docs.decidim.org" }
+    #  }
+    #
+    # To test this feature in development, ensure that config/environmnets/development.rb is configured as:
+    #   config.action_dispatch.show_exceptions = true
+    #   config.action_dispatch.show_detailed_exceptions = false
+    #   config.consider_all_requests_local = false
+
+    config_accessor :custom_redirects do
+      []
     end
 
     # additional correspondences between participatory spaces manifests and routes
