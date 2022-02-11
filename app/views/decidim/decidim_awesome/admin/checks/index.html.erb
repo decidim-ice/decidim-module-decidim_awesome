@@ -4,13 +4,23 @@
   </div>
   <div class="card-section">
     <p>
-      <%= t ".decidim_version", version: decidim_version %>
-      <% if decidim_version_valid? %>
-        <%= check :ok %>
-      <% else %>
-        <%= check :ko %>
-      <% end %>
-      </p>
+      <span class="label <%= decidim_version_valid? ? "success" : "alert" %>"><%= t ".decidim_version", version: decidim_version %></span>
+      <%= check decidim_version_valid? %>
+    </p>
+  </div>
+  <div class="card-section">
+    <p><%= t(".images_migrated") %>
+    <% if images_migrated? %>
+      <%= check true %></p>
+    <% else %>
+      <%= check false %></p>
+      <div class="callout alert">
+        <p><%= t(".pending_image_migrations", total: pending_image_migrations).html_safe %></p>
+        <%= link_to t(".start_image_migrations"), migrate_images_path, method: :post, class: "button" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="card-section">
     <ul class="vertical menu">
       <% overrides.each do |group, props| %>
       <li>
@@ -19,11 +29,7 @@
           <% props.files.each do |file, md5| %>
           <li>
             <%= file %>
-            <% if valid?(props.spec, file) %>
-              <%= check :ok %>
-            <% else %>
-              <%= check :ko %>
-            <% end %>
+            <%= check(valid?(props.spec, file)) %>
           </li>
           <% end %>
         </ul>
@@ -42,9 +48,9 @@
           <li>
             <%= part %>
             <% if head.xpath(xpath).count.positive? %>
-              <%= check :ok %>
+              <%= check true %>
             <% else %>
-              <%= check :ko %>
+              <%= check false %>
               <p class="help-text"><%= t ".errors.#{part}" %>:</p>
               <code class="help-text code-block"><%= head_addons(part) %></code>
             <% end %>
@@ -62,9 +68,9 @@
           <li>
             <%= part %>
             <% if admin_head.xpath(xpath).count.positive? %>
-              <%= check :ok %>
+              <%= check true %>
             <% else %>
-              <%= check :ko %>
+              <%= check false %>
               <p class="help-text"><%= t ".errors.#{part}" %>:</p>
               <code class="help-text code-block"><%= admin_addons(part) %></code>
             <% end %>
