@@ -5,9 +5,10 @@ module Decidim
     class MigrateLegacyImagesJob < ApplicationJob
       queue_as :default
 
-      def perform(organization_id, mappings = [])
+      def perform(organization_id, mappings = [], logger = Rails.logger)
         @organization_id = organization_id
         @routes_mappings = mappings
+        @logger = logger
 
         migrate_all!
         transform_images_urls
@@ -15,16 +16,7 @@ module Decidim
 
       private
 
-      attr_reader :routes_mappings
-
-      def pending_migrations
-        migrated = editor_images.joins(:file_attachment).pluck(:id)
-        editor_images.where.not(id: migrated)
-      end
-
-      def editor_images
-        Decidim::DecidimAwesome::EditorImage.where(decidim_organization_id: @organization_id)
-      end
+      attr_reader :routes_mappings, :logger
 
       def migrate_all!
         Decidim::CarrierWaveMigratorService.migrate_attachment!(
@@ -32,7 +24,7 @@ module Decidim
           cw_attribute: "image",
           cw_uploader: Decidim::Cw::DecidimAwesome::ImageUploader,
           as_attribute: "file",
-          logger: Rails.logger,
+          logger: @logger,
           routes_mappings: routes_mappings
         )
       end
@@ -55,7 +47,7 @@ module Decidim
               item.update(attribute => rewrite_value(item.send(attribute), mappings))
             end
           end
-          Rails.logger.info "Updated model #{model.name} (attributes: #{attributes.join(", ")})"
+          @logger.info "Updated model #{model.name} (attributes: #{attributes.join(", ")})"
         end
       end
 

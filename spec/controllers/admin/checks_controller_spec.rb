@@ -69,6 +69,13 @@ module Decidim::DecidimAwesome
           end
         end
       end
+
+      describe "GET #migrate_images" do
+        it "returns http success" do
+          post :migrate_images, params: {}
+          expect(response).to have_http_status(:redirect)
+        end
+      end
     end
   end
 end
