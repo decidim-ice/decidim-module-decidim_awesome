@@ -277,6 +277,7 @@ en:
             title: New redirection
           origin_exists: The same origin is already configured, please edit that instead
             of creating it again.
+          origin_missing: This origin has not been found in the list
           update:
             error: Error updating redirection! %{error}
             success: Redirection updated successfully

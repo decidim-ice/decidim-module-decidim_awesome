@@ -20,7 +20,7 @@ module Decidim
         # Returns nothing.
         def call
           return broadcast(:invalid) if form.invalid?
-          return broadcast(:invalid, I18n.t("custom_redirects.origin_exists", scope: "decidim.decidim_awesome.admin")) if url_exists?
+          return broadcast(:invalid, I18n.t("custom_redirects.origin_missing", scope: "decidim.decidim_awesome.admin")) unless url_exists?
 
           redirects.value&.except!(item.origin)
           redirects.value[to_params[0]] = to_params[1]
@@ -40,9 +40,8 @@ module Decidim
         def url_exists?
           return unless redirects
           return unless redirects.value.is_a? Hash
-          return if form.origin == item.origin
 
-          redirects.value[form.origin].present?
+          redirects.value[item.origin].present?
         end
       end
     end
