@@ -89,6 +89,12 @@ module Decidim::DecidimAwesome
           end
         end
       end
+
+      context "when origin and destination are the same" do
+        let(:destination) { "http://#{organization.host}#{origin} " }
+
+        it { is_expected.to be_invalid }
+      end
     end
   end
 end

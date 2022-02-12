@@ -22,6 +22,18 @@ module Decidim
     autoload :MenuHacker, "decidim/decidim_awesome/menu_hacker"
     autoload :CustomFields, "decidim/decidim_awesome/custom_fields"
 
+    # pass a single config var or an array of them
+    # any non disabled match will return as true
+    def self.enabled?(config_vars)
+      config_vars = [config_vars] unless config_vars.respond_to?(:detect)
+
+      config_vars.detect do |item|
+        next unless config.has_key?(item.to_sym)
+
+        config.send(item) != :disabled
+      end
+    end
+
     # Boolean configuration options
     #
     # Default values for configuration options:

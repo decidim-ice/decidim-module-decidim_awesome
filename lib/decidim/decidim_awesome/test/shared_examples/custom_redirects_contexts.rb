@@ -38,7 +38,7 @@ shared_context "with custom redirects params" do
     }
   end
   let(:form) do
-    Decidim::DecidimAwesome::Admin::MenuForm.from_params(params).with_context(context)
+    Decidim::DecidimAwesome::Admin::CustomRedirectForm.from_params(params).with_context(context)
   end
   let(:another_form) do
     Decidim::DecidimAwesome::Admin::ConfigForm.from_params(another_params).with_context(context)

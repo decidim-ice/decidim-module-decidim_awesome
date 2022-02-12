@@ -28,17 +28,17 @@ module Decidim
           helper Decidim::LayoutHelper if respond_to?(:helper)
         end
 
-        if DecidimAwesome.config[:scoped_admins] != :disabled
-          # override user's admin property
-          Decidim::User.include(UserOverride)
-        end
+        # override user's admin property
+        Decidim::User.include(UserOverride) if DecidimAwesome.enabled?(:scoped_admins)
+
         # redirect unauthorized scoped admins to allowed places or custom redirects if configured
-        Decidim::ErrorsController.include(NotFoundRedirect)
+        Decidim::ErrorsController.include(NotFoundRedirect) if DecidimAwesome.enabled?([:scoped_admins, :custom_redirects])
 
-        Decidim::Proposals::ApplicationHelper.include(Decidim::DecidimAwesome::Proposals::ApplicationHelperOverride)
-        Decidim::Proposals::ProposalWizardCreateStepForm.include(Decidim::DecidimAwesome::Proposals::ProposalWizardCreateStepFormOverride)
-
-        Decidim::AmendmentsHelper.include(Decidim::DecidimAwesome::AmendmentsHelperOverride)
+        if DecidimAwesome.enabled?(:proposal_custom_fields)
+          Decidim::Proposals::ApplicationHelper.include(Decidim::DecidimAwesome::Proposals::ApplicationHelperOverride)
+          Decidim::Proposals::ProposalWizardCreateStepForm.include(Decidim::DecidimAwesome::Proposals::ProposalWizardCreateStepFormOverride)
+          Decidim::AmendmentsHelper.include(Decidim::DecidimAwesome::AmendmentsHelperOverride)
+        end
 
         Decidim::MenuPresenter.include(Decidim::DecidimAwesome::MenuPresenterOverride)
         Decidim::MenuItemPresenter.include(Decidim::DecidimAwesome::MenuItemPresenterOverride)

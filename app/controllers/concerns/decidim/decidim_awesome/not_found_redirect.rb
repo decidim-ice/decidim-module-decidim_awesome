@@ -7,7 +7,7 @@ module Decidim
 
       included do
         before_action :redirect_unallowed_scoped_admins, only: :not_found, if: -> { request.original_fullpath =~ %r{^(/+)admin} }
-        before_action :redirect_to_custom_paths, only: :not_found, if: -> { custom_redirects_enabled? }
+        before_action :redirect_to_custom_paths, only: :not_found, if: -> { DecidimAwesome.enabled? :custom_redirects }
         private
 
         def redirect_unallowed_scoped_admins
@@ -51,10 +51,6 @@ module Decidim
           end
 
           return destination.strip if destination.present?
-        end
-
-        def custom_redirects_enabled?
-          DecidimAwesome.config[:custom_redirects] != :disabled
         end
       end
     end

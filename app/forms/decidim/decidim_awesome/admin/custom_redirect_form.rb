@@ -11,6 +11,7 @@ module Decidim
         attribute :pass_query, Boolean
 
         validates :origin, :destination, presence: true
+        validate :different_origin_destination
 
         def to_params
           [
@@ -29,6 +30,14 @@ module Decidim
           url = parsed.path if strip_host && parsed.host == current_organization.host
           url = "/#{url}" unless url.match?(%r{^https?://|^/})
           url
+        end
+
+        private
+
+        def different_origin_destination
+          return if sanitize_url(origin) != sanitize_url(destination)
+
+          errors.add(:destination, :invalid)
         end
       end
     end
