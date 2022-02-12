@@ -11,13 +11,15 @@ module Decidim
 
         layout "decidim/admin/decidim_awesome"
 
-        helper_method :constraints_for, :users_for
+        helper_method :constraints_for, :users_for, :config_var
         before_action do
           enforce_permission_to :edit_config, configs
         end
 
         def show
           @form = form(ConfigForm).from_params(organization_awesome_config)
+
+          redirect_to decidim_admin_decidim_awesome.checks_path unless config_var
         end
 
         def update
@@ -69,6 +71,10 @@ module Decidim
         end
 
         private
+
+        def config_var
+          menus[params[:var].try(:to_sym)] || menus.key(true)
+        end
 
         def constraints_for(key)
           awesome_config_instance.setting_for(key)&.constraints

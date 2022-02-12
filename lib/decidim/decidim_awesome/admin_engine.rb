@@ -26,7 +26,7 @@ module Decidim
         post :rename_scope_label, to: "config#rename_scope_label"
         get :checks, to: "checks#index"
         post :migrate_images, to: "checks#migrate_images"
-        root to: "config#show", var: :editors
+        root to: "config#show"
       end
 
       initializer "decidim_decidim_awesome.admin_mount_routes" do

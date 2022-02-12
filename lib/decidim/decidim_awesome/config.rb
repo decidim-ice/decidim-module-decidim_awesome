@@ -115,6 +115,7 @@ module Decidim
       #    collect_sub_configs_values("scoped_style") { true }
       def collect_sub_configs_values(singular_key)
         plural_key = singular_key.pluralize.to_sym
+        return [] unless config[plural_key].respond_to?(:filter)
 
         fields = config[plural_key]&.filter do |key, _value|
           subconfig = sub_configs_for(singular_key)[key]

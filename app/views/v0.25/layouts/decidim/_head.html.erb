@@ -23,7 +23,7 @@
 
 <%# awesome styles before custom colors %>
 <%= stylesheet_pack_tag "decidim_decidim_awesome", media: "all" %>
-<%= render(partial: "layouts/decidim/decidim_awesome/custom_styles") if awesome_custom_styles %>
+<%= render(partial: "layouts/decidim/decidim_awesome/custom_styles") if awesome_custom_styles.present? %>
 <%# end awesome %>
 
 <%= organization_colors %>
@@ -32,7 +32,7 @@
 <%# awesome javascript after app %>
 <%= render partial: "layouts/decidim/decidim_awesome/awesome_config" %>
 <%= javascript_pack_tag "decidim_decidim_awesome", defer: false %>
-<%= javascript_pack_tag "decidim_decidim_awesome_custom_fields" if awesome_proposal_custom_fields %>
+<%= javascript_pack_tag("decidim_decidim_awesome_custom_fields") if Decidim::DecidimAwesome.enabled?(:proposal_custom_fields) %>
 <%# end awesome %>
 
 <%= render partial: "layouts/decidim/head_extra" %>

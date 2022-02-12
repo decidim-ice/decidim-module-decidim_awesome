@@ -9,48 +9,47 @@ end %>
     </div>
 
     <ul>
-      <% if config_enabled?([:allow_images_in_full_editor, :allow_images_in_small_editor, :use_markdown_editor,
-:allow_images_in_markdown_editor]) %>
+      <% if menus[:editors] %>
         <li <% if is_active_link?(decidim_admin_decidim_awesome.config_path(:editors)) %> class="is-active" <% end %>>
           <%= icon_aria_selected_link_to I18n.t("menu.editors", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:editors), "text" %>
         </li>
       <% end %>
-      <% if config_enabled? :allow_images_in_proposals %>
+      <% if menus[:proposals] %>
         <li <% if is_active_link?(decidim_admin_decidim_awesome.config_path(:proposals)) %> class="is-active" <% end %>>
           <%= icon_aria_selected_link_to I18n.t("menu.proposals", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:proposals), "document" %>
         </li>
       <% end %>
-      <% if config_enabled? :auto_save_forms %>
+      <% if menus[:surveys] %>
         <li <% if is_active_link?(decidim_admin_decidim_awesome.config_path(:surveys)) %> class="is-active" <% end %>>
           <%= icon_aria_selected_link_to I18n.t("menu.surveys", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:surveys), "spreadsheet" %>
         </li>
       <% end %>
-      <% if config_enabled? :scoped_styles %>
+      <% if menus[:styles] %>
         <li <% if is_active_link?(decidim_admin_decidim_awesome.config_path(:styles)) %> class="is-active" <% end %>>
           <%= icon_aria_selected_link_to I18n.t("menu.styles", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:styles), "brush" %>
         </li>
       <% end %>
-      <% if config_enabled? :proposal_custom_fields %>
+      <% if menus[:proposal_custom_fields] %>
         <li <% if is_active_link?(decidim_admin_decidim_awesome.config_path(:proposal_custom_fields)) %> class="is-active" <% end %>>
           <%= icon_aria_selected_link_to I18n.t("menu.proposal_custom_fields", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:proposal_custom_fields), "layers" %>
         </li>
       <% end %>
-      <% if config_enabled? :scoped_admins %>
+      <% if menus[:admins] %>
         <li <% if is_active_link?(decidim_admin_decidim_awesome.config_path(:admins)) %> class="is-active" <% end %>>
           <%= icon_aria_selected_link_to I18n.t("menu.admins", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:admins), "people" %>
         </li>
       <% end %>
-      <% if config_enabled? :menu %>
+      <% if menus[:menu_hacks] %>
         <li <% if is_active_link?(decidim_admin_decidim_awesome.menu_hacks_path) %> class="is-active" <% end %>>
           <%= icon_aria_selected_link_to I18n.t("menu.menu_hacks", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.menu_hacks_path, "menu" %>
         </li>
       <% end %>
-      <% if config_enabled? :custom_redirects %>
+      <% if menus[:custom_redirects] %>
         <li <% if is_active_link?(decidim_admin_decidim_awesome.custom_redirects_path) %> class="is-active" <% end %>>
           <%= icon_aria_selected_link_to I18n.t("menu.custom_redirects", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.custom_redirects_path, "share-boxed" %>
         </li>
       <% end %>
-      <% if config_enabled?([:intergram_for_admins, :intergram_for_public]) %>
+      <% if menus[:livechat] %>
         <li <% if is_active_link?(decidim_admin_decidim_awesome.config_path(:livechat)) %> class="is-active" <% end %>>
           <%= icon_aria_selected_link_to I18n.t("menu.livechat", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:livechat), "chat" %>
         </li>

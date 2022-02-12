@@ -16,24 +16,24 @@ module Decidim
         post :editor_images, to: "editor_images#create"
       end
 
-      initializer "decidim.middleware" do |app|
-        app.config.middleware.insert_after Decidim::Middleware::CurrentOrganization, Decidim::DecidimAwesome::CurrentConfig
-      end
-
       # Prepare a zone to create overrides
       # https://edgeguides.rubyonrails.org/engines.html#overriding-models-and-controllers
       # overrides
       config.to_prepare do
+        # activate Decidim LayoutHelper for the overriden views
         ActiveSupport.on_load :action_controller do
           helper Decidim::LayoutHelper if respond_to?(:helper)
         end
+        # Include additional helpers globally
+        ActionView::Base.include(Decidim::DecidimAwesome::AwesomeHelpers)
 
         # override user's admin property
-        Decidim::User.include(UserOverride) if DecidimAwesome.enabled?(:scoped_admins)
+        Decidim::User.include(Decidim::DecidimAwesome::UserOverride) if DecidimAwesome.enabled?(:scoped_admins)
 
         # redirect unauthorized scoped admins to allowed places or custom redirects if configured
-        Decidim::ErrorsController.include(NotFoundRedirect) if DecidimAwesome.enabled?([:scoped_admins, :custom_redirects])
+        Decidim::ErrorsController.include(Decidim::DecidimAwesome::NotFoundRedirect) if DecidimAwesome.enabled?([:scoped_admins, :custom_redirects])
 
+        # Custom fields need to deal with several places
         if DecidimAwesome.enabled?(:proposal_custom_fields)
           Decidim::Proposals::ApplicationHelper.include(Decidim::DecidimAwesome::Proposals::ApplicationHelperOverride)
           Decidim::Proposals::ProposalWizardCreateStepForm.include(Decidim::DecidimAwesome::Proposals::ProposalWizardCreateStepFormOverride)
@@ -42,12 +42,15 @@ module Decidim
 
         Decidim::MenuPresenter.include(Decidim::DecidimAwesome::MenuPresenterOverride)
         Decidim::MenuItemPresenter.include(Decidim::DecidimAwesome::MenuItemPresenterOverride)
+
+        # Late registering of components to take into account initializer values
+        DecidimAwesome.registered_components.each do |manifest, block|
+          Decidim.register_component(manifest, &block) unless DecidimAwesome.disabled_components.include?(manifest)
+        end
       end
 
-      initializer "decidim_awesome.view_helpers" do
-        config.to_prepare do
-          ActionView::Base.include AwesomeHelpers
-        end
+      initializer "decidim.middleware" do |app|
+        app.config.middleware.insert_after Decidim::Middleware::CurrentOrganization, Decidim::DecidimAwesome::CurrentConfig
       end
 
       initializer "decidim_decidim_awesome.webpacker.assets_path" do

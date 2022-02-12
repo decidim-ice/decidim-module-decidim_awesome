@@ -2,7 +2,7 @@
 
 require "decidim/components/namer"
 
-Decidim.register_component(:awesome_iframe) do |component|
+Decidim::DecidimAwesome.register_component(:awesome_iframe) do |component|
   component.engine = Decidim::DecidimAwesome::IframeComponent::Engine
   component.admin_engine = Decidim::DecidimAwesome::IframeComponent::AdminEngine
   component.icon = "decidim/meetings/icon.svg" # TODO: create a Icon

@@ -168,10 +168,10 @@ Depending on your Decidim version, choose the corresponding Awesome version to e
 
 | Awesome version | Compatible Decidim versions |
 |---|---|
-| 0.5.x | 0.21.x, 0.22.x |
-| 0.6.x | 0.22.x, 0.23.x |
-| 0.7.x | 0.23.x, 0.24.x |
 | 0.8.x | 0.25.x |
+| 0.7.x | 0.23.x, 0.24.x |
+| 0.6.x | 0.22.x, 0.23.x |
+| 0.5.x | 0.21.x, 0.22.x |
 
 > *Heads up!* 
 > * version 0.8.0 removes CSS Themes for tenants. If you have been using them you will have to manually migrate them to custom styles.
