@@ -6,10 +6,18 @@ shared_examples "registered components" do |enabled|
       expect(Decidim.component_manifests.pluck(:name)).to include(:awesome_map)
       expect(Decidim.component_manifests.pluck(:name)).to include(:awesome_iframe)
     end
+
+    it "has map content block is registered" do
+      expect(Decidim.content_blocks.for(:homepage).pluck(:name)).to include(:awesome_map)
+    end
   else
     it "components are not registered" do
       expect(Decidim.component_manifests.pluck(:name)).not_to include(:awesome_map)
       expect(Decidim.component_manifests.pluck(:name)).not_to include(:awesome_iframe)
+    end
+
+    it "map content block is not registered" do
+      expect(Decidim.content_blocks.for(:homepage).pluck(:name)).not_to include(:awesome_map)
     end
   end
 end
@@ -46,9 +54,6 @@ shared_examples "custom menus" do |enabled|
     before do
       allow(view).to receive(:current_organization).and_return(organization)
       allow(view).to receive(:current_user).and_return(user)
-      Decidim::MenuRegistry.register :menu do |menu|
-        menu.add_item :native_foo, "Foo", "/foo", position: 1
-      end
     end
 
     if enabled

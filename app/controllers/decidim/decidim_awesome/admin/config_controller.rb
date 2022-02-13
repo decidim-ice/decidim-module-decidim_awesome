@@ -73,7 +73,9 @@ module Decidim
         private
 
         def config_var
-          menus[params[:var].try(:to_sym)] || menus.key(true)
+          return params[:var] if menus.has_key?(params[:var].try(:to_sym))
+
+          menus.key(true)
         end
 
         def constraints_for(key)

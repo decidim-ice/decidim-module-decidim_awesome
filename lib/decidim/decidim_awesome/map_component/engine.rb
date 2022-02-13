@@ -15,6 +15,9 @@ module Decidim
         end
 
         initializer "decidim_decidim_awesome.content_blocks" do |_app|
+          # do not register this if awesome_map is disabled
+          next if DecidimAwesome.disabled_components.include?(:awesome_map)
+
           # === Home Map block ===
           Decidim.content_blocks.register(:homepage, :awesome_map) do |content_block|
             content_block.cell = "decidim/decidim_awesome/content_blocks/map"
