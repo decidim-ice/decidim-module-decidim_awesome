@@ -63,7 +63,7 @@ ja:
             map_zoom: ズーム ( 0 と 18 の間の任意の数字)
             map_zoom_help: 地図の中心が定義されている場合にのみ適用されます
             menu_amendments: 修正を表示
-            menu_categories: Show Category search menu
+            menu_categories: カテゴリー検索メニューを表示
             menu_hashtags: Hasthag 検索メニューを表示
             menu_meetings: ミーティングを表示
             menu_merge_components: Merge all components of the same type in the menu
