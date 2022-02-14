@@ -26,6 +26,12 @@ it:
         component_manifest: Solo in componenti di tipo
         participatory_space_manifest: Applicare a spazi partecipativi di tipo
         participatory_space_slug: Solo in
+      custom_redirect:
+        active: Active
+        destination: Destination
+        origin: Origin
+        pass_query: Pass the query string to the destination
+        status: Status
       menu:
         position: Posizione
         raw_label: Etichetta
@@ -187,9 +193,46 @@ it:
           update:
             error: Errore nell'aggiornamento della condizione
             success: Condizione aggiornata con successo
+        custom_redirects:
+          create:
+            error: Error creating redirection! %{error}
+            success: Redirection created successfully
+          destroy:
+            error: Error removing redirection! %{error}
+            success: Redirection removed successfully
+          edit:
+            save: Salva
+            title: Edit redirection
+          form:
+            destination_help: Absolute routes (start with "/") or external URLs (http://..)
+            origin_help: Only absolute routes, start with "/"
+            pass_query_help: |
+              Activate this option if you want that the query string to be copied to the destination.<br>
+              For instance, if having configured /my-origin => /my-destination, a request to /my-origin?locale=ca  will be redirected to "/my-destination?locale=ca".
+          index:
+            check_redirections: "✔ Check redirections"
+            confirm_destroy: Are you sure to remove this redirection?
+            description: |
+              You can define any route (starting with <code>/</code>) to redirect any visitor to a destination URL.<br>
+              Destination can be an absolute path (ie: <code>/processes/some-process</code>) or start with <code>https://</code> (ie: <code>http://decidim.org</code>)<br><br>
+              Take into account that a redirection only works if none other route matches. It is not possible to override original routes (this is by design).<br>
+              If unsure, use the check redirections button to test for incompatibilities.
+            edit: Edit redirection
+            new: New redirection
+            remove: Remove redirection
+            title: Custom Redirections
+          new:
+            save: Salva
+            title: New redirection
+          origin_exists: The same origin is already configured, please edit that instead of creating it again.
+          origin_missing: This origin has not been found in the list
+          update:
+            error: Error updating redirection! %{error}
+            success: Redirection updated successfully
         menu:
           admins: Amministratori con ambito
           checks: System compatibility
+          custom_redirects: Custom Redirections
           editors: Editor hacks
           livechat: Chat in tempo reale
           menu_hacks: Menu tweaks
