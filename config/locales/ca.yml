@@ -207,16 +207,16 @@ ca:
             destination_help: Rutes absolutes (comença amb "/") o URLs externes (http://...)
             origin_help: Només rutes absolutes, comença amb "/"
             pass_query_help: |
-              Activeu aquesta opció si voleu que la cadena de consulta (query string) es copii a la Url de destinació.<br>
-              Per exemple, si heu configurat /my-origin => /my-destination, un petició a /my-origin?locale=ca es redirigirá a "/my-destination?locale=ca".
+              Activa aquesta opció si vols que la cadena de consulta (query string) es copiï a la Url de destinació.<br>
+              Per exemple, si has configurat /my-origin => /my-destination, una petició a /my-origin?locale=ca es redirigirà a "/my-destination?locale=ca".
           index:
             check_redirections: "✔ Comprova les redireccions"
             confirm_destroy: Segur que vols esborrar aquesta redirecció?
             description: |
-              Podeu definir qualsevol ruta (començant amb <code>/</code>) que redirigeixi un visitant a la URL de destinació.<br>
+              Pots definir qualsevol ruta (començant amb <code>/</code>) per redirigir la visitant a la URL de destinació.<br>
               El destí pot ser una ruta absoluta (Exemple: <code>/processes/some-process</code>) o començar amb <code>https://</code> (Exemple: <code>http://decidim.org</code>)<br><br>
-              Tingueu en compte que una redirecció només funciona si cap altra ruta amb el mateix nom esta definida a la aplicació Decidim. No es possible sobreescriure rutes que ja existeixin (això es una desició de disseny).<br>
-              Si no n'esteu segurs, feu servir el botó de comprovar les redireccions per trobar incompatibilitats.
+              Tingues en compte que una redirecció només funciona si no hi ha cap altra ruta amb el mateix nom definida dins de Decidim. No es possible sobreescriure rutes que ja existeixen (això es una decisió de disseny).<br>
+              Si tens dubtes, fes servir el botó de comprovar les redireccions per trobar incompatibilitats.
             edit: Edita la redirecció
             new: Nova redirecció
             remove: Elimina la redirecció
@@ -227,7 +227,7 @@ ca:
           origin_exists: Aquest origen ja existeix, si us plau edita'l en comptes de crear-ne un de nou.
           origin_missing: Aquest origen no s'ha trobat a la llista
           update:
-            error: 'Error en actualiltzar la redirecció: %{error}'
+            error: 'Error en actualitzar la redirecció: %{error}'
             success: Redirecció actualitzada correctament
         menu:
           admins: Administradores acotades
