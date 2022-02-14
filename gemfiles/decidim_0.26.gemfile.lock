@@ -1,5 +1,5 @@
 PATH
-  remote: .
+  remote: ..
   specs:
     decidim-decidim_awesome (0.8.0)
       decidim-admin (>= 0.25.0, < 0.27)
@@ -491,7 +491,6 @@ GEM
     mime-types-data (3.2022.0105)
     mini_magick (4.11.0)
     mini_mime (1.1.2)
-    mini_portile2 (2.6.1)
     minitest (5.15.0)
     mixlib-cli (2.1.8)
     mixlib-config (3.0.9)
@@ -504,8 +503,7 @@ GEM
     multipart-post (2.1.1)
     mustache (1.1.1)
     nio4r (2.5.8)
-    nokogiri (1.12.5)
-      mini_portile2 (~> 2.6.1)
+    nokogiri (1.12.5-x86_64-linux)
       racc (~> 1.4)
     oauth (0.5.8)
     oauth2 (1.4.7)
@@ -783,6 +781,8 @@ DEPENDENCIES
   byebug (~> 11.0)
   codecov
   decidim (= 0.26.0.rc2)
+  decidim-admin (= 0.26.0.rc2)
+  decidim-core (= 0.26.0.rc2)
   decidim-decidim_awesome!
   decidim-dev (= 0.26.0.rc2)
   faker (~> 2.14)

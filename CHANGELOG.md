@@ -5,6 +5,7 @@ v0.8.0
 ------
 
 Compatibility:
+  - Decidim v0.26.x
   - Decidim v0.25.x
 
 Features:
