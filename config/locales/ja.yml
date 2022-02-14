@@ -31,7 +31,7 @@ ja:
         destination: Destination
         origin: Origin
         pass_query: Pass the query string to the destination
-        status: Status
+        status: ステータス
       menu:
         position: 位置
         raw_label: ラベル
