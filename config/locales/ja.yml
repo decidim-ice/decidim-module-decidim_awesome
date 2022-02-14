@@ -210,21 +210,21 @@ ja:
               Activate this option if you want that the query string to be copied to the destination.<br>
               For instance, if having configured /my-origin => /my-destination, a request to /my-origin?locale=ca  will be redirected to "/my-destination?locale=ca".
           index:
-            check_redirections: "✔ Check redirections"
+            check_redirections: "✔リダイレクトをチェック"
             confirm_destroy: Are you sure to remove this redirection?
             description: |
               You can define any route (starting with <code>/</code>) to redirect any visitor to a destination URL.<br>
               Destination can be an absolute path (ie: <code>/processes/some-process</code>) or start with <code>https://</code> (ie: <code>http://decidim.org</code>)<br><br>
               Take into account that a redirection only works if none other route matches. It is not possible to override original routes (this is by design).<br>
               If unsure, use the check redirections button to test for incompatibilities.
-            edit: Edit redirection
-            new: New redirection
-            remove: Remove redirection
-            title: Custom Redirections
+            edit: リダイレクトを編集
+            new: 新しいリダイレクト
+            remove: リダイレクトの削除
+            title: カスタムリダイレクト
           new:
             save: 保存
-            title: New redirection
-          origin_exists: The same origin is already configured, please edit that instead of creating it again.
+            title: 新しいリダイレクト
+          origin_exists: 同じオリジンが既に設定されています。再度作成する代わりに編集してください。
           origin_missing: This origin has not been found in the list
           update:
             error: Error updating redirection! %{error}
