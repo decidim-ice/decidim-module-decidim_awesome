@@ -23,7 +23,7 @@ end
 # rubocop:disable RSpec/EmptyExampleGroup
 describe Decidim::DecidimAwesome do
   let(:organization) { create :organization }
-  let(:user) { create :user, :admin, organization: organization }
+  let(:user) { create :user, :admin, :confirmed, organization: organization }
   let!(:config) { create :awesome_config, organization: organization, var: :scoped_styles, value: { bar: styles } }
   let!(:allow_images_in_proposals) { create(:awesome_config, organization: organization, var: :allow_images_in_proposals, value: true) }
   let!(:allow_images_in_small_editor) { create(:awesome_config, organization: organization, var: :allow_images_in_small_editor, value: true) }

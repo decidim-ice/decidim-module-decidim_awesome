@@ -58,7 +58,7 @@ module Decidim::DecidimAwesome
     end
 
     context "when user is an admin" do
-      let(:user) { create :user, :admin, organization: organization }
+      let(:user) { create :user, :admin, :confirmed, organization: organization }
 
       context "and images in proposals are allowed" do
         it { is_expected.to eq true }
