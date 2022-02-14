@@ -205,7 +205,7 @@ es:
             title: Editar redirección
           form:
             destination_help: Rutas absolutas (comienzan con "/") o URLs externas (http://..)
-            origin_help: Sólo rutas absolutas, comenzar con "/"
+            origin_help: Solo rutas absolutas, comienzan con "/"
             pass_query_help: |
               Active esta opción si desea que la cadena de consulta sea copiada al destino.<br>
               Por ejemplo, si ha configurado /my-origin => /my-destination, una solicitud a /my-origin?locale=es será redirigida a "/my-destination?locale=es".
@@ -213,10 +213,10 @@ es:
             check_redirections: "✔ Comprobar redirecciones"
             confirm_destroy: '¿Seguro que desea eliminar esta redirección?'
             description: |
-              Puedes definir cualquier ruta (comenzando con <code>/</code>) para redirigir una visita a una URL de destino.<br>
+              Se puede definir cualquier ruta (comenzando con <code>/</code>) para redirigir una visita a la URL de destino.<br>
               El destino puede ser una ruta absoluta (por ejemplo: <code>/processes/some-process</code>) o comenzar con <code>https://</code> (es decir, <code>http://decidim.org</code>)<br><br>
-              Tener en cuenta que una redirección sólo funciona si ninguna otra ruta concuerda. No es posible sobreescribir rutas existentes (esto es una decisión de diseño).<br>
-              En caso de duda, utilizar el botón de comprobación de redirecciones para detectar incompatibilidades.
+              Tenga en cuenta que una redirección solo funciona si ninguna otra ruta concuerda. No es posible sobreescribir rutas existentes (esto es una decisión de diseño).<br>
+              En caso de duda, utilice el botón de comprobación de redirecciones para detectar incompatibilidades.
             edit: Editar redirección
             new: Nueva redirección
             remove: Eliminar redirección
