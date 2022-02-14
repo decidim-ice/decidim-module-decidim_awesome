@@ -22,7 +22,7 @@ export default class ProposalsController extends Controller {
     super.addControls();
 
     // add control layer for amendments if any
-    if(this.awesomeMap.config.menu.amendments && this.component.amendments && !this.awesomeMap.layers.amendments) {
+    if (this.awesomeMap.config.menu.amendments && this.component.amendments && !this.awesomeMap.layers.amendments) {
       this.awesomeMap.layers.amendments = {
         label: `<span class="awesome_map-component" id="awesome_map-amendments_${this.component.id}" title="0" data-layer="amendments">${window.DecidimAwesome.texts.amendments}</span>`,
         group: new L.FeatureGroup.SubGroup(this.awesomeMap.cluster)
@@ -42,7 +42,7 @@ export default class ProposalsController extends Controller {
 
       // Check if it has amendments, add it to a list
       // also assign parent's proposal categories to it
-      if(proposal.amendments && proposal.amendments.length) {
+      if (proposal.amendments && proposal.amendments.length) {
         proposal.amendments.forEach((amendment) => {
           this.amendments[amendment.emendation.id] = proposal;
         });
@@ -66,12 +66,16 @@ export default class ProposalsController extends Controller {
       const parent = amendment[1];
       // console.log("marker", marker, "parent proposal", parent)
       // add marker to amendments layers and remove it from proposals
-      if(marker) {
-        try { marker.marker.removeFrom(this.controls.group) } catch(e) { console.error("error removeFrom marker", marker, "layer", this.controls.group,  e)}
-        if(this.awesomeMap.config.menu.amendments) {
+      if (marker) {
+        try { 
+          marker.marker.removeFrom(this.controls.group) 
+        } catch (e) { 
+          console.error("error removeFrom marker", marker, "layer", this.controls.group,  e);
+        }
+        if (this.awesomeMap.config.menu.amendments) {
           marker.marker.addTo(this.awesomeMap.layers.amendments.group);
           // mimic parent category (amendments doesn't have categories)
-          if(parent.category) {
+          if (parent.category) {
             marker.marker.setIcon(this.createIcon(ProposalIcon, this.awesomeMap.getCategory(parent.category).color));
             this.addMarkerCategory(marker.marker, parent.category)
           }

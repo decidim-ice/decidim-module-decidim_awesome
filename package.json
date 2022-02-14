@@ -9,7 +9,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint -c .eslintrc.json --ext .js app/packs/src/decidim/decidim_awesome"
+    "lint": "eslint -c .eslintrc.json --ext .js app/packs/",
+    "lint-fix": "eslint -c .eslintrc.json --ext .js app/packs/ --fix",
+    "stylelint": "stylelint **/*.scss",
+    "stylelint-fix": "stylelint **/*.scss --fix"
   },
   "repository": {
     "type": "git",
@@ -50,7 +53,7 @@
       "block-no-empty": true,
       "block-opening-brace-newline-after": "always-multi-line",
       "block-opening-brace-space-after": "always-single-line",
-      "block-opening-brace-space-before": "never",
+      "block-opening-brace-space-before": "always",
       "color-hex-case": "lower",
       "color-hex-length": "short",
       "color-no-invalid-hex": true,
@@ -186,8 +189,11 @@
   },
   "devDependencies": {
     "eslint": "^7.32.0",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.22.0"
+    "eslint": "^7.25.0",
+    "eslint-config-prettier": "^8.2.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.22.0",
+    "stylelint": "13.11.0"
   },
   "dependencies": {
     "codemirror": "^5.65.0",

@@ -9,12 +9,12 @@ import "src/decidim/decidim_awesome/editors/tabs_focus"
 import "src/decidim/decidim_awesome/admin/codemirror"
 import "src/decidim/decidim_awesome/admin/check_redirections"
 
-import {destroyQuillEditor,createQuillEditor,createMarkdownEditor} from "src/decidim/decidim_awesome/editors/editor"
+import {destroyQuillEditor, createQuillEditor, createMarkdownEditor} from "src/decidim/decidim_awesome/editors/editor"
 
 $(() => {
   $(".editor-container").each((_idx, container) => {
     destroyQuillEditor(container);
-    if(window.DecidimAwesome.use_markdown_editor) {
+    if (window.DecidimAwesome.use_markdown_editor) {
       createMarkdownEditor(container);
     } else {
       createQuillEditor(container);

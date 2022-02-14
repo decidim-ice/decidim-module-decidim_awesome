@@ -54,14 +54,14 @@ export default class AwesomeMap {
 
     this.config.components.forEach((component) => {
       const controller = this._getController(component);
-      if(controller) {
+      if (controller) {
         controller.loadNodes();
         this.loading.push(component.type);
         controller.onFinished = () => {
           this.loading.pop();
           this.autoResize();
 
-          if(this.loading.length == 0) {
+          if (this.loading.length == 0) {
             this.controls.$loading.hide();
             // call trigger as all loads are finished
             this.onFinished();
@@ -74,28 +74,30 @@ export default class AwesomeMap {
   autoResize() {
     // Setup center/zoom options if specified, otherwise fitbounds
     const bounds = this.cluster.getBounds()
-    if(this.config.center && this.config.zoom) {
+    if (this.config.center && this.config.zoom) {
       this.map.setView(this.config.center, this.config.zoom);
-    } else if(bounds.isValid()) {
+    } else if (bounds.isValid()) {
       // this.map.fitBounds(bounds, { padding: [50, 50] }); // this doesn't work much of the time, probably some race condition
-      this.map.fitBounds([[bounds.getNorth(),bounds.getEast()],[bounds.getSouth(),bounds.getWest()]], { padding: [50, 50] });
+      this.map.fitBounds([[bounds.getNorth(), bounds.getEast()], [bounds.getSouth(), bounds.getWest()]], { padding: [50, 50] });
     }
   }
 
-   getCategory(category) {
+  getCategory(category) {
     let defaultCat = {
-      color: getComputedStyle(document.documentElement).getPropertyValue('--primary'),
+      color: getComputedStyle(document.documentElement).getPropertyValue("--primary"),
       children: () => {},
       parent: null,
       name: null
     };
 
-    if(category) {
-      let id = category.id ? parseInt(category.id, 10) : parseInt(category, 10);
+    if (category) {
+      let id = category.id
+        ? parseInt(category.id, 10)
+        : parseInt(category, 10);
       let cat = this.categories.find((c) => c.id == id);
-      if(cat) {
+      if (cat) {
         cat.children = () => {
-          return this.categories.filter((c) => c.parent === cat.id );
+          return this.categories.filter((c) => c.parent === cat.id);
         }
         return cat;
       }
@@ -106,22 +108,23 @@ export default class AwesomeMap {
   _getController(component) {
     let controller;
 
-    if(component.type == "proposals") {
+    if (component.type == "proposals") {
       controller = new ProposalsController(this, component);
     }
-    if(component.type == "meetings" && this.config.menu.meetings) {
+    if (component.type == "meetings" && this.config.menu.meetings) {
       controller = new MeetingsController(this, component);
     }
 
-    if(controller) {
+    if (controller) {
       // Agrupate layers for controlling components
-      if(this._firstController[component.type] && this.config.menu.mergeComponents) {
+      if (this._firstController[component.type] && this.config.menu.mergeComponents) {
         controller.controls = this._firstController[component.type].controls;
       } else  {
         controller.addControls();
       }
       this._firstController[component.type] = this._firstController[component.type] || controller;
-      return this.controllers[component.type] = controller;
+      this.controllers[component.type] = controller;
+      return this.controllers[component.type]
     }
   }
 }

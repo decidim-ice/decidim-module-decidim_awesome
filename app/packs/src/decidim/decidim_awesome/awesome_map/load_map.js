@@ -2,12 +2,12 @@ import AwesomeMap from "src/decidim/decidim_awesome/awesome_map/awesome_map"
 
 $(() => {
   const sanitizeCenter = (string) => {
-    if(string) {
+    if (string) {
       const parts = string.split(",")
       if (parts.length >= 2) {
         const lat = parseFloat(parts[0]);
         const lng = parseFloat(parts[1]);
-        if(lat && lng) {
+        if (lat && lng) {
           return [lat, lng];
         }
       }

@@ -1,0 +1,99 @@
+version: "2"
+
+checks:
+  argument-count:
+    enabled: false
+
+  complex-logic:
+    enabled: false
+
+  file-lines:
+    enabled: false
+
+  identical-code:
+    enabled: false
+
+  method-complexity:
+    enabled: false
+
+  method-count:
+    enabled: false
+
+  method-lines:
+    enabled: false
+
+  nested-control-flow:
+    enabled: false
+
+  return-statements:
+    enabled: false
+
+  similar-code:
+    enabled: false
+
+plugins:
+  bundler-audit:
+    enabled: true
+
+  csslint:
+    enabled: true
+
+  duplication:
+    enabled: true
+
+    config:
+      languages:
+        javascript:
+          mass_threshold: 1000
+
+        ruby:
+          mass_threshold: 80
+
+    exclude_patterns:
+      - "spec/**/*"
+
+  eslint:
+    enabled: false
+
+  fixme:
+    enabled: true
+
+    exclude_patterns:
+      - .rubocop_ruby.yml
+
+  grep:
+    enabled: true
+
+    config:
+      patterns:
+        no-trailing-whitespace:
+          pattern: \s*$
+          annotation: "Don't leave trailing whitespace"
+          severity: minor
+          categories: Style
+
+        no-tabs:
+          pattern: "	"
+          annotation: "Don't use hard tabs"
+          severity: minor
+          categories: Style
+
+    exclude_patterns:
+      - "config/locales/*.yml"
+
+  markdownlint:
+    enabled: true
+
+    exclude_patterns:
+      - .github/*
+
+    issue_override:
+      severity: minor
+
+exclude_patterns:
+  - "**/vendor/"
+  - "node_modules/"
+  - "development_app/"
+  - "spec/decidim_dummy_app/"
+  - "coverage/"
+  - "webpack.report.html"

@@ -2,7 +2,7 @@ $(() => {
   $(".check-custom-redirections").on("click", (evt) => {
     evt.preventDefault();
     
-    if($(evt.target).hasClass("disabled")) {
+    if ($(evt.target).hasClass("disabled")) {
       return;
     }
     
@@ -14,19 +14,19 @@ $(() => {
 
       let type = response.type;
       let status = response.status;
-      if(response.type == 'opaqueredirect') {
+      if (response.type == "opaqueredirect") {
         type = "redirect";
         status = "302";
       }
 
-      if(item.active) {
-        if(type ==  "redirect") {
+      if (item.active) {
+        if (type ==  "redirect") {
           $td.addClass("success");
         } else {
           $td.addClass("alert");
         }
       } else {
-          $td.addClass("muted");
+        $td.addClass("muted");
       }
 
       return `${type} (${status})`;
@@ -35,11 +35,11 @@ $(() => {
     $("tr.custom-redirection").each((index, tr) => {
       const $td = $(tr).find(".redirect-status");
       $td.html('<span class="loading-spinner" />');
-      fetch($(tr).data("origin"), {method: 'HEAD', redirect: "manual"})
-        .then((response) => {
+      fetch($(tr).data("origin"), {method: "HEAD", redirect: "manual"}).
+        then((response) => {
           $td.html(getReport(tr, response))
-        })
-        .catch((error) => {
+        }).
+        catch((error) => {
           console.error("ERROR", error)  
           $td.removeClass("loading");
         });

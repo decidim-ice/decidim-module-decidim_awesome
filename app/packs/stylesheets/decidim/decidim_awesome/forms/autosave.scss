@@ -1,4 +1,4 @@
-.awesome_autosave-notice{
+.awesome_autosave-notice {
   background-color: rgba(var(--success-rgb), .8);
   position: fixed;
   top: 0;
@@ -11,7 +11,7 @@
   color: white;
   z-index: 1000;
 
-  &.error{
+  &.error {
     background-color: rgba(var(--alert-rgb), .8);
   }
 }

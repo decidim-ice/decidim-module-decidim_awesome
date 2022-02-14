@@ -20,22 +20,24 @@ export default class Fetcher {
       }`;
   }
 
-  fetch(after='') {
+  fetch(after = "") {
     const variables = {
       "id": this.controller.component.id,
       "after": after
     };
     const api = new ApiFetcher(this.query, variables);
     api.fetchAll((result) => {
-      if(result) {
+      if (result) {
         const collection = result.component[this.collection];
         // console.log("collection",collection)
         
         collection.edges.forEach((element) => {
           let node = element.node;
-          if(!node) return;
+          if (!node) {
+            return;
+          }
       
-          if(node.coordinates && node.coordinates.latitude && node.coordinates.longitude) {
+          if (node.coordinates && node.coordinates.latitude && node.coordinates.longitude) {
             this.decorateNode(node);
             this.onNode(node)
           }
@@ -58,15 +60,16 @@ export default class Fetcher {
     // hashtags in the title look ugly, lets replace the gid:... structure with the tag #name
     node.title.translation = this.replaceHashtags(title, node.hashtags);
     node.body.translation = this.appendHtmlHashtags(this.truncate(this.removeHashtags(body)).replace(/\n/g, "<br>"), node.hashtags);
-    node.link = this.controller.component.url + "/" + this.collection + "/" + node.id;
+    node.link = `${this.controller.component.url}/${this.collection}/${node.id}`;
   }
 
   findTranslation(translations) {
-    let text, lang = document.querySelector('html').getAttribute('lang');
+    let text, 
+        lang = document.querySelector("html").getAttribute("lang");
     
     translations.forEach((t) => {
-      if(t.text) {
-        if(!text || t.locale == lang) {
+      if (t.text) {
+        if (!text || t.locale == lang) {
           text = t.text
         }
       }
@@ -76,17 +79,19 @@ export default class Fetcher {
 
   collectHashtags(text) {
     let tags = [];
-    if(text) {
+    if (text) {
       const gids = text.match(/gid:\/\/[^\s<]+/g)
-      if(gids) {
-        tags = gids.filter(gid => gid.indexOf("/Decidim::Hashtag/") != -1).map(gid => {
+      if (gids) {
+        tags = gids.filter((gid) => gid.indexOf("/Decidim::Hashtag/") != -1).map((gid) => {
           const parts = gid.split("/");
-          const fromSelector = parts[5].charAt(0) == '_';
-          const tag = fromSelector ? parts[5].substr(1) : parts[5];
-          const name = '#' + tag;
+          const fromSelector = parts[5].charAt(0) == "_";
+          const tag = fromSelector
+            ? parts[5].substr(1)
+            : parts[5];
+          const name = `#${tag}`;
           const html = `<a href="/search?term=${name}">${name}</a>`;
           const hashtag = {
-            color: getComputedStyle(document.documentElement).getPropertyValue('--secondary'),
+            color: getComputedStyle(document.documentElement).getPropertyValue("--secondary"),
             gid: gid,
             id: parseInt(parts[4], 10),
             fromSelector: fromSelector,
@@ -114,7 +119,7 @@ export default class Fetcher {
   }
 
   appendHtmlHashtags(text, tags) {
-    tags.forEach(tag => {
+    tags.forEach((tag) => {
       text += ` ${tag.html}`;
     });
     return text;

@@ -6,8 +6,7 @@
 @import "stylesheets/decidim/decidim_awesome/editors/markdown_editor";
 @import "stylesheets/decidim/decidim_awesome/editors/quill_editor";
 
-
-.platoniq-credits{
+.platoniq-credits {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -15,32 +14,33 @@
   font-size: .8em;
 }
 
-.decidim_awesome{
-  &.modal{
-    .spinner{
+.decidim_awesome {
+  &.modal {
+    .spinner {
       @include spinner(25px, #aaa, var(--secondary), 800ms);
 
       vertical-align: middle;
       display: none;
     }
 
-    &.loading{
-      .spinner{
+    &.loading {
+      .spinner {
         display: inline-block;
       }
     }
   }
 
-  &-form{
+  &-form {
     margin-bottom: 2em;
     border-bottom: 1px solid #999;
     padding-bottom: 1.5em;
+
     .help-text {
       white-space: pre-line;
     }
   }
 
-  &-form:last-child{
+  &-form:last-child {
     border-bottom: none;
     padding-bottom: 0;
   }
@@ -55,16 +55,17 @@
     margin-bottom: 1.5em;
   }
 }
-.form-input-extra-before ~ .form-error{
+
+.form-input-extra-before ~ .form-error {
   margin-top: -2.5rem;
 }
 
-tbody tr.menu_hack-addition{
+tbody tr.menu_hack-addition {
   background: rgb(255, 248, 222);
 }
 
 .secondary-nav {
   li .icon {
-    margin-right: 0.5rem;
+    margin-right: .5rem;
   }
 }

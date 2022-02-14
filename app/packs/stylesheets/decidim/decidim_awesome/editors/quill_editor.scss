@@ -2,8 +2,8 @@
 @import "stylesheets/decidim/utils/settings";
 @import "stylesheets/decidim/utils/mixins";
 
-.editor-loading{
-  &::before{
+.editor-loading {
+  &::before {
     @include spinner(25px, $medium-gray, var(--primary), 800ms);
 
     float: right;
@@ -19,7 +19,7 @@
 }
 
 // some fix for the public part
-.editor-container{
+.editor-container {
   overflow: hidden;
 }
 
@@ -27,19 +27,21 @@
   >p.help-text {
     margin-top: -1rem;
     margin-bottom: 1.5rem;
-  } 
-} 
+  }
+}
 
 // For quill editors in custom fields
 .form-control[type="richtext"] {
   >p.help-text {
-   margin-top: .2rem !important;
+    margin-top: .2rem !important;
   }
+
   .ql-snow.ql-toolbar {
     button {
       width: 22px;
       margin: 1px 0;
     }
+
     + .ql-container.ql-snow {
       border-radius: 0;
     }

@@ -23,19 +23,19 @@ const quillFormats = ["bold", "italic", "link", "underline", "header", "list", "
 
 // A tricky way to destroy the quill editor
 export function destroyQuillEditor(container) {
-  if(container) {
-      const content = $(container).find('.ql-editor').html();
-      $(container).html(content);
-      $(container).siblings('.ql-toolbar').remove();
-      $(container).find("*[class*='ql-']").removeClass((index, class_name) =>(class_name.match (/(^|\s)ql-\S+/g) || []).join(' '));
-      $(container).removeClass ((index, class_name) => (class_name.match (/(^|\s)ql-\S+/g) || []).join(' '));
-      if($(container).next().is("p.help-text")) {
-        $(container).next().remove();
-      }
+  if (container) {
+    const content = $(container).find(".ql-editor").html();
+    $(container).html(content);
+    $(container).siblings(".ql-toolbar").remove();
+    $(container).find("*[class*='ql-']").removeClass((index, class_name) => (class_name.match(/(^|\s)ql-\S+/g) || []).join(" "));
+    $(container).removeClass((index, class_name) => (class_name.match(/(^|\s)ql-\S+/g) || []).join(" "));
+    if ($(container).next().is("p.help-text")) {
+      $(container).next().remove();
     }
-    else {
-      console.error(`editor [${container}] not exists`);
-    }
+  }
+  else {
+    console.error(`editor [${container}] not exists`);
+  }
 }
 
 export function createQuillEditor(container) {
@@ -57,20 +57,20 @@ export function createQuillEditor(container) {
       [{ header: [2, 3, 4, 5, 6, false] }],
       ...quillToolbar
     ];
-      if(DecidimAwesome.allow_images_in_full_editor) {
-        quillToolbar.push(["video", "image"]);
-        addImage = true;
-      } else {
-        quillToolbar.push(["video"]);
-      }
+    if (DecidimAwesome.allow_images_in_full_editor) {
+      quillToolbar.push(["video", "image"]);
+      addImage = true;
+    } else {
+      quillToolbar.push(["video"]);
+    }
   } else if (toolbar === "basic") {
-      if(DecidimAwesome.allow_images_in_small_editor) {
-        quillToolbar.push(["video", "image"]);
-        addImage = true;
-      } else {
-        quillToolbar.push(["video"]);
-      }
-  } else if(DecidimAwesome.allow_images_in_small_editor) {
+    if (DecidimAwesome.allow_images_in_small_editor) {
+      quillToolbar.push(["video", "image"]);
+      addImage = true;
+    } else {
+      quillToolbar.push(["video"]);
+    }
+  } else if (DecidimAwesome.allow_images_in_small_editor) {
     quillToolbar.push(["image"]);
     addImage = true;
   }
@@ -141,7 +141,7 @@ export function createQuillEditor(container) {
   quill.emitter.emit("editor-ready");
 
   if (addImage) {
-    const text = $(container).data("dragAndDropHelpText") || DecidimAwesome.texts["drag_and_drop_image"];
+    const text = $(container).data("dragAndDropHelpText") || DecidimAwesome.texts.drag_and_drop_image;
     $(container).after(`<p class="help-text" style="margin-top:-1.5rem;">${text}</p>`);
   }
 
@@ -152,11 +152,11 @@ export function createQuillEditor(container) {
 }
 
 export function createMarkdownEditor(container) {
-  const t = DecidimAwesome.texts["drag_and_drop_image"];
-  const token = $('meta[name="csrf-token"]').attr('content');
+  const t = DecidimAwesome.texts.drag_and_drop_image;
+  const token = $('meta[name="csrf-token"]').attr("content");
   const $input = $(container).siblings('input[type="hidden"]');
   const $faker = $('<textarea name="faker-inscrybmde"/>');
-  const $form = $(container).closest('form');
+  const $form = $(container).closest("form");
   const europa = new Europa();
   $faker.val(europa.convert($input.val()));
   $faker.insertBefore($(container));
@@ -172,7 +172,7 @@ export function createMarkdownEditor(container) {
   $faker[0].InscrybMDE = inscrybmde;
 
   // Allow image upload
-  if(DecidimAwesome.allow_images_in_markdown_editor) {
+  if (DecidimAwesome.allow_images_in_markdown_editor) {
     $(inscrybmde.gui.statusbar).prepend(`<span class="help-text" style="float:left;margin:0;text-align:left;">${t}</span>`);
     inlineAttachment.editors.codemirror4.attach(inscrybmde.codemirror, {
       uploadUrl: DecidimAwesome.editor_uploader_path,
