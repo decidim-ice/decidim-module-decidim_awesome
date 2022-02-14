@@ -27,10 +27,10 @@ ja:
         participatory_space_manifest: 以下のタイプの参加スペースに適用
         participatory_space_slug: あるいは、以下の参加スペースに適用
       custom_redirect:
-        active: Active
-        destination: Destination
-        origin: Origin
-        pass_query: Pass the query string to the destination
+        active: 有効
+        destination: リダイレクト先
+        origin: リダイレクト元
+        pass_query: クエリ文字列をリダイレクト先に渡します
         status: ステータス
       menu:
         position: 位置
@@ -195,44 +195,45 @@ ja:
             success: 条件設定は正常に更新されました
         custom_redirects:
           create:
-            error: Error creating redirection! %{error}
-            success: Redirection created successfully
+            error: 'リダイレクトの作成中にエラーが発生しました: %{error}'
+            success: リダイレクトを作成しました
           destroy:
-            error: Error removing redirection! %{error}
-            success: Redirection removed successfully
+            error: 'リダイレクトの削除中にエラーが発生しました: %{error}'
+            success: リダイレクトを削除しました
           edit:
             save: 保存
-            title: Edit redirection
+            title: リダイレクトを編集
           form:
-            destination_help: Absolute routes (start with "/") or external URLs (http://..)
-            origin_help: Only absolute routes, start with "/"
+            destination_help: 絶対ルート (「/」で始まる) または外部 URL (http://..)
+            origin_help: '"/"で始まる絶対ルートのみ'
             pass_query_help: |
-              Activate this option if you want that the query string to be copied to the destination.<br>
-              For instance, if having configured /my-origin => /my-destination, a request to /my-origin?locale=ca  will be redirected to "/my-destination?locale=ca".
+              クエリ文字列をコピーする場合は、このオプションをオンにします。<br>
+              例えば、/my-origin == /my-destination が設定されている場合、/my-origin?locale=ca へのリクエストは "/my-destination?locale=ca" にリダイレクトされます。
           index:
             check_redirections: "✔リダイレクトをチェック"
-            confirm_destroy: Are you sure to remove this redirection?
+            confirm_destroy: このリダイレクトを本当に削除しますか？
             description: |
-              You can define any route (starting with <code>/</code>) to redirect any visitor to a destination URL.<br>
-              Destination can be an absolute path (ie: <code>/processes/some-process</code>) or start with <code>https://</code> (ie: <code>http://decidim.org</code>)<br><br>
-              Take into account that a redirection only works if none other route matches. It is not possible to override original routes (this is by design).<br>
-              If unsure, use the check redirections button to test for incompatibilities.
-            edit: リダイレクトを編集
+              訪問者を目的のURLにリダイレクトするルーティング (<code>/</code>で始まる)を定義できます。<br>
+              リダイレクト先は、絶対パス(例: <code>/processes/some-process</code>)または<code>https://</code> で始まるURL (例: <code>http://decidim.org</code>)になります。<br><br>
+              リダイレクトは、他のルーティングがマッチしない場合にのみ機能することに注意してください。オリジナルのルーティングを上書きすることはできません (これは仕様です)。
+              <br>
+              不安な場合は、リダイレクトのチェックボタンを使って非互換性をテストしてください。
+            edit: リダイレクトの編集
             new: 新しいリダイレクト
             remove: リダイレクトの削除
             title: カスタムリダイレクト
           new:
             save: 保存
             title: 新しいリダイレクト
-          origin_exists: 同じオリジンが既に設定されています。再度作成する代わりに編集してください。
-          origin_missing: This origin has not been found in the list
+          origin_exists: 同じリダイレクト元が既に設定されています。再度作成する代わりに編集してください。
+          origin_missing: このリダイレクト元はリストにありません
           update:
-            error: Error updating redirection! %{error}
-            success: Redirection updated successfully
+            error: 'リダイレクトの更新中にエラーが発生しました: %{error}'
+            success: リダイレクトを更新しました
         menu:
           admins: スコープ付き管理者
           checks: システム互換性
-          custom_redirects: Custom Redirections
+          custom_redirects: カスタムリダイレクト
           editors: エディター設定
           livechat: ライブチャット
           menu_hacks: メニュー調整
