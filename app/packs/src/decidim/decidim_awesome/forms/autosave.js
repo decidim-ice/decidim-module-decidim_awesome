@@ -68,8 +68,8 @@ $(() => {
   } catch(e){
     console.log("No checkboxes found");
   }
-  // fire change items
-  $form.find('input, textarea, select').change();
+  // this trigger the "change" event, it seems that it is too much
+  // $form.find('input, textarea, select').change();
 
   const save = () => {
     store.save();
