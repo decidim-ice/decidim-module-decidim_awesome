@@ -26,6 +26,12 @@ pt:
         component_manifest: Apenas em componentes do tipo
         participatory_space_manifest: Aplicar a espaços participativos do tipo
         participatory_space_slug: Somente em
+      custom_redirect:
+        active: Active
+        destination: Destination
+        origin: Origin
+        pass_query: Pass the query string to the destination
+        status: Status
       menu:
         position: Posição
         raw_label: Rótulo
@@ -63,10 +69,10 @@ pt:
             map_zoom: Zoom (qualquer número entre 0 e 18)
             map_zoom_help: Só se aplica se um centro de mapa estiver definido
             menu_amendments: Mostrar emendas
-            menu_categories: Show Category search menu
+            menu_categories: Mostrar menu de pesquisa de categora
             menu_hashtags: Mostrar menu de pesquisa do Hasthag
             menu_meetings: Mostrar reuniões
-            menu_merge_components: Merge all components of the same type in the menu
+            menu_merge_components: Mesclar todos os componentes do mesmo tipo no menu
             truncate: Máximo de caracteres para descrições em popup
           step:
             announcement: Anúncio
@@ -88,6 +94,13 @@ pt:
               CSS: O cabeçalho não contém as entradas de folha de estilo <link> necessárias. Para resolvê-lo, você pode adicioná-lo manualmente ao seu _head.html.erb
               JavaScript: O cabeçalho não contém as entradas Javascript <script> necessárias. Para resolvê-lo, você pode adicioná-las manualmente ao seu custom admin/_header.html.erb
             head_tags: Tags incríveis incluídas no cabeçalho do aplicativo
+            image_migrations_started: Images migration process has been started successfully
+            images_migrated: Images migrated to ActiveStorage
+            pending_image_migrations: |
+              Since version 0.25, Decidim uses a new technology to upload files.<br>
+              It looks that this installation needs to migrate <strong>%{total}</strong> of the old images to the new system.<br>
+              You can start the process now and it will be performed in the background.
+            start_image_migrations: "\U0001F449 Start the migration process now"
             title: Checar compatibilidade do sistema
         config:
           caution: 'NOTA: Este recurso modifica fortemente alguns comportamentos padrão que podem levar a resultados inesperados. Use-o com cuidado!'
@@ -130,10 +143,10 @@ pt:
               drag_and_drop_supported: Ao carregar imagens, arraste e solte é suportado. As imagens serão enviadas para o servidor e inseridas como recursos externos (não usa codificação base64 inline).
               intergram_about: O Intergram usa o Telegram messenger para lidar com uma widget de chat de suporte embutida no final da página.
               intergram_config: 'Convide o <a href="https://web.telegram.org/#/im?p=@IntergramBot">bot @Intergram</a> para seu grupo ou inicie um chat diretamente com ele. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ informações</a>'
-              original_editor_override: Since version 0.26, it is possible (for admins only) to upload images into the editors. Therefore, image settings in here only affect the public editors (admin will always have it available).
+              original_editor_override: Desde a versão 0.26, é possível (somente para administradores) enviar imagens para os editores. Portanto, as configurações de imagem aqui só afetam os editores públicos (administrador sempre terá as disponíveis).
               proposal_custom_fields: Crie campos personalizados de proposta que se aplicam somente em certas partes da web pública (use o editor de restrições para isso)
               proposal_custom_fields_example: Os dados são armazenados em um objeto XML usando atributos HTML compatíveis (dl, dt, dd) substituindo o "corpo" em uma proposta normal.
-              proposal_custom_fields_translations: "Labels, help text, placeholders and default values can use your application custom translations. \nFor that, instead of using a string literal, use the i18n key (it must contain at least one dot).\nFor instance:\n- \"activemodel.attributes.proposal.title\" instead of \"Title\"\n- \"activemodel.attributes.proposal.address\" instead of \"Address\"\nOr use your own keys in combination with other tools to define translations (eg: using the module Term Customizer):\n - \"myapp.custom_fields.bio\" instead of \"Biography\""
+              proposal_custom_fields_translations: "Titulos, texto de ajuda, espaços reservados e valores padrão podem usar traduções personalizadas de sua aplicação. \nPara isso, ao invés de usar uma string literal, use a chave i18n (ela deve conter pelo menos um ponto).\nPor exemplo:\n- \"activemodel.attributes.proposal.title\" em vez de \"Título\"\n- \"activemodel.attributes.proposal.address\" em vez de \"Endereço\"\nou use suas próprias chaves em combinação com outras ferramentas para definir traduções (por exemplo: usando o módulo Term Customizer):\n - \"meuapp.custom_fields.bio\" em vez de \"Biografia\""
               scoped_admins: Promover o usuário regular para administradores que só podem administrar certas partes da web pública (use o editor de restrições para isso). Note que usuários que já possuem permissões de administrador regulares serão ignorados.
               scoped_styles: Crie CSS personalizado que se aplica somente em certas partes da web pública (use o editor de restrições para isso)
               scoped_styles_variables: 'Você pode usar as seguintes variáveis CSS para cores personalizadas da organização:'
@@ -180,9 +193,46 @@ pt:
           update:
             error: Erro ao atualizar condição de caso
             success: Condição de caso aplicadas com sucesso
+        custom_redirects:
+          create:
+            error: Error creating redirection! %{error}
+            success: Redirection created successfully
+          destroy:
+            error: Error removing redirection! %{error}
+            success: Redirection removed successfully
+          edit:
+            save: Salvar
+            title: Edit redirection
+          form:
+            destination_help: Absolute routes (start with "/") or external URLs (http://..)
+            origin_help: Only absolute routes, start with "/"
+            pass_query_help: |
+              Activate this option if you want that the query string to be copied to the destination.<br>
+              For instance, if having configured /my-origin => /my-destination, a request to /my-origin?locale=ca  will be redirected to "/my-destination?locale=ca".
+          index:
+            check_redirections: "✔ Check redirections"
+            confirm_destroy: Are you sure to remove this redirection?
+            description: |
+              You can define any route (starting with <code>/</code>) to redirect any visitor to a destination URL.<br>
+              Destination can be an absolute path (ie: <code>/processes/some-process</code>) or start with <code>https://</code> (ie: <code>http://decidim.org</code>)<br><br>
+              Take into account that a redirection only works if none other route matches. It is not possible to override original routes (this is by design).<br>
+              If unsure, use the check redirections button to test for incompatibilities.
+            edit: Edit redirection
+            new: New redirection
+            remove: Remove redirection
+            title: Custom Redirections
+          new:
+            save: Salvar
+            title: New redirection
+          origin_exists: The same origin is already configured, please edit that instead of creating it again.
+          origin_missing: This origin has not been found in the list
+          update:
+            error: Error updating redirection! %{error}
+            success: Redirection updated successfully
         menu:
           admins: Administradores com escopo
           checks: Compatibilidade de sistema
+          custom_redirects: Custom Redirections
           editors: Hacks do editor
           livechat: Chat Ao Vivo
           menu_hacks: Ajustes do menu
@@ -242,7 +292,7 @@ pt:
           map_zoom_help: Só se aplica se um centro de mapa estiver definido
           menu_amendments: Mostrar emendas
           menu_meetings: Mostrar reuniões
-          menu_merge_components: Merge all components of the same type in the menu
+          menu_merge_components: Mesclar todos os componentes do mesmo tipo no menu
           name: Mapa Incrível
           show_accepted: Mostrar propostas aceitas
           show_evaluating: Mostrar propostas de avaliação
@@ -264,12 +314,12 @@ pt:
       map_component:
         map:
           api_not_ready: |
-            <b>Warning:</b> This Decidim installation has the API configured to a maximum complexity of <b>%{current_complexity}</b>.
-            This component probably won't work under this configuration. We recommend you to set up in a initializer
-            (for instance at the end of the <code>config/initializers/decidim.rb</code>) the following lines:<br>
+            <b>Aviso:</b> Esta instalação Decidim tem a API configurada para uma complexidade máxima de <b>%{current_complexity}</b>.
+            Este componente provavelmente não funcionará sob esta configuração. Recomendamos que você configure em um inicializador
+            (por exemplo, no final do <code>config/initializers/decidim. b</code>) as seguintes linhas:<br>
             <br>
-            <pre># Api configuration
-            Decidim::Api::Schema.max_complexity = 5000
+            <pre># Configuração de Api
+            Decidim::Api::Schema. ax_complexidade = 5000
             Decidim::Api::Schema.max_depth = 50</pre>
           error:
             unavailable: O mapa está indisponível. Por favor configure a geocodificação para habilitar este componente.

@@ -26,6 +26,12 @@ cs:
         component_manifest: Pouze v komponentách typu
         participatory_space_manifest: Použít na participační prostory typu
         participatory_space_slug: Pouze v
+      custom_redirect:
+        active: Aktivní
+        destination: Cíl
+        origin: Původ
+        pass_query: Předložte řetězec dotazu k cíli
+        status: Stav
       menu:
         position: Pozice
         raw_label: Popisek
@@ -63,10 +69,10 @@ cs:
             map_zoom: Zvětšení (libovolné číslo mezi 0 a 18)
             map_zoom_help: Použije se pouze v případě, že je definován střed mapy
             menu_amendments: Zobrazit pozměňovací návrhy
-            menu_categories: Show Category search menu
+            menu_categories: Zobrazit menu hledání kategorií
             menu_hashtags: Zobrazit vyhledávací menu Hasthag
             menu_meetings: Zobrazit schůzky
-            menu_merge_components: Merge all components of the same type in the menu
+            menu_merge_components: Sloučit všechny komponenty stejného typu v menu
             truncate: Maximum znaků pro popisy vyskakovacích oken
           step:
             announcement: Oznámení
@@ -88,6 +94,13 @@ cs:
               CSS: Hlavička neobsahuje požadované položky <link> stylu. Chcete-li to vyřešit, můžete je ručně přidat do vlastního _head.html.erb
               JavaScript: Hlavička neobsahuje požadované <script> položky javascriptu. Pro vyřešení je můžete ručně přidat do vlastního admin/_header.html.erb
             head_tags: Úžasné tagy zahrnuté v hlavičce aplikace
+            image_migrations_started: Proces migrace obrázků byl úspěšně spuštěn
+            images_migrated: Obrázky migrovány do ActiveStorage
+            pending_image_migrations: |
+              Od verze 0.25, Decidim používá novou technologii pro nahrávání souborů.<br>
+              Zdá se, že tato instalace potřebuje přesunout <strong>%{total}</strong> starých obrázků do nového systému.<br>
+              Můžete zahájit proces nyní a bude probíhat na pozadí.
+            start_image_migrations: "\U0001F449 Zahájit proces migrace"
             title: Kontroly kompatibility systému
         config:
           caution: 'POZNÁMKA: Tato funkce silně mění některé výchozí chování, které by mohlo vést k neočekávaným výsledkům. Používejte ji s opatrností!'
@@ -130,10 +143,10 @@ cs:
               drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
               intergram_about: Intergram používá Telegram messenger pro zpracování widgetu live podpory v dolní části stránky.
               intergram_config: 'Pozvěte <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bota</a> do vaší skupiny nebo začněte chatovat přímo. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
-              original_editor_override: Since version 0.26, it is possible (for admins only) to upload images into the editors. Therefore, image settings in here only affect the public editors (admin will always have it available).
+              original_editor_override: Od verze 0.26 je možné nahrávat obrázky do editorů (pouze pro administrátory). Proto zde nastavení obrázků ovlivňuje pouze veřejné editory (správce je bude mít vždy k dispozici).
               proposal_custom_fields: Vytvoření vlastních polí návrhu, která se použijí pouze v určitých částech veřejného webu (použijte k tomu editor omezení)
               proposal_custom_fields_example: Data jsou uložena v objektu XML pomocí kompatibilních atributů HTML (prvky dl,dt,dd), které v běžném návrhu nahrazují "tělo".
-              proposal_custom_fields_translations: "Labels, help text, placeholders and default values can use your application custom translations. \nFor that, instead of using a string literal, use the i18n key (it must contain at least one dot).\nFor instance:\n- \"activemodel.attributes.proposal.title\" instead of \"Title\"\n- \"activemodel.attributes.proposal.address\" instead of \"Address\"\nOr use your own keys in combination with other tools to define translations (eg: using the module Term Customizer):\n - \"myapp.custom_fields.bio\" instead of \"Biography\""
+              proposal_custom_fields_translations: "Štítky, nápověda, zástupné symboly a výchozí hodnoty mohou používat vlastní překlady aplikace. \nPro to použijte klíč i18n (musí obsahovat alespoň jednu tečku), místo použití textového literálu.\nNapříklad:\n- \"activemodel.attributes.proposal.title\" namísto \"Title\"\n- \"activemodel.attributes.proposal.address\" namísto \"Adresa\"\nNebo použijte vlastní klíče v kombinaci s jinými nástroji pro definování překladů (např. pomocí úpravy termínu modulu):\n - \"myapp.custom_fields.bio\" namísto „Životopis“"
               scoped_admins: Povýšení běžného uživatele na administrátora, který může spravovat pouze určité části veřejného webu (k tomu použijte editor omezení). Všimněte si, že uživatelé, kteří již mají oprávnění běžného správce, budou ignorováni.
               scoped_styles: Vytvořte vlastní CSS aplikovaný pouze na určitých částech veřejného webu (použijte pro to editor omezení)
               scoped_styles_variables: 'Můžete použít následující CSS proměnné pro nastavené barvy organizace:'
@@ -180,9 +193,46 @@ cs:
           update:
             error: Chyba při aktualizaci případu podmínky
             success: Případ stavu byl úspěšně aktualizován
+        custom_redirects:
+          create:
+            error: Chyba při vytváření přesměrování! %{error}
+            success: Přesměrování úspěšně vytvořeno
+          destroy:
+            error: Chyba při odstraňování přesměrování! %{error}
+            success: Přesměrování úspěšně odstraněno
+          edit:
+            save: Uložit
+            title: Upravit přesměrování
+          form:
+            destination_help: Absolutní cesty (začněte "/") nebo externí URL (http://..)
+            origin_help: Pouze absolutní cesty, začněte "/"
+            pass_query_help: |
+              Aktivujte tuto možnost, pokud chcete, aby byl řetězec dotazu zkopírován do destinace.<br>
+              Například, pokud jste nakonfigurovali /my-origin => /my-destination, požadavek na /my-origin?locale=ca bude přesměrován na "/my-destination?locale=ca".
+          index:
+            check_redirections: "✔ Zkontrolovat přesměrování"
+            confirm_destroy: Opravdu chcete odstranit tuto přesměrování?
+            description: |
+              Můžete definovat jakoukoli cestu (počínaje <code>/</code>) pro přesměrování návštěvníka na cílovou URL.<br>
+              Místo určení může být absolutní cesta (ie: <code>/processes/some-process</code>) nebo začínat <code>https://://</code> (ie: <code>http://decidim. rg</code>)<br><br>
+              Vezměte v úvahu, že přesměrování funguje pouze v případě, že žádná jiná trasa neodpovídají. Není možné přepsat původní trasy (takto je to navrženo).<br>
+              Pokud si nejste jistí, použijte tlačítko "Přesměrování" pro otestování nekompatibility.
+            edit: Upravit přesměrování
+            new: Nové přesměrování
+            remove: Odstranit přesměrovaní
+            title: Vlastní přesměrování
+          new:
+            save: Uložit
+            title: Nové přesměrování
+          origin_exists: Stejný zdrojoý odkaz je již nakonfigurován, prosím upravte jej místo jeho nového vytvoření.
+          origin_missing: Tento zdrojvý odkaz nebyl nalezen v seznamu
+          update:
+            error: Chyba aktualizace přesměrování! %{error}
+            success: Přesměrování úspěšně aktualizováno
         menu:
           admins: Škálovaní administrátoři
           checks: Systémová kompatibilita
+          custom_redirects: Vlastní přesměrování
           editors: Hack editoru
           livechat: Live Chat
           menu_hacks: Vylepšení menu
@@ -242,7 +292,7 @@ cs:
           map_zoom_help: Použije se pouze v případě, že je definován střed mapy
           menu_amendments: Zobrazit pozměňovací návrhy
           menu_meetings: Zobrazit schůzky
-          menu_merge_components: Merge all components of the same type in the menu
+          menu_merge_components: Sloučit všechny komponenty stejného typu v menu
           name: Úžasná mapa
           show_accepted: Zobrazit přijaté návrhy
           show_evaluating: Zobrazit hodnocení návrhů
@@ -264,11 +314,11 @@ cs:
       map_component:
         map:
           api_not_ready: |
-            <b>Warning:</b> This Decidim installation has the API configured to a maximum complexity of <b>%{current_complexity}</b>.
-            This component probably won't work under this configuration. We recommend you to set up in a initializer
-            (for instance at the end of the <code>config/initializers/decidim.rb</code>) the following lines:<br>
+            <b>Upozornění:</b> Tato instalace Decidim má API nastaveno na maximální složitost <b>%{current_complexity}</b>.
+            Tato komponenta pravděpodobně nebude fungovat v této konfiguraci. Doporučujeme nastavit v inicializátoru
+            (například na konci <code>config/initializers/decidim.rb</code>) následující řádky:<br>
             <br>
-            <pre># Api configuration
+            <pre># Konfigurace Api
             Decidim::Api::Schema.max_complexity = 5000
             Decidim::Api::Schema.max_depth = 50</pre>
           error:

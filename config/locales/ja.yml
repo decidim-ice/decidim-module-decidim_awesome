@@ -26,6 +26,12 @@ ja:
         component_manifest: このタイプのコンポーネントのみ有効
         participatory_space_manifest: 以下のタイプの参加スペースに適用
         participatory_space_slug: あるいは、以下の参加スペースに適用
+      custom_redirect:
+        active: 有効
+        destination: リダイレクト先
+        origin: リダイレクト元
+        pass_query: クエリ文字列をリダイレクト先に渡します
+        status: ステータス
       menu:
         position: 位置
         raw_label: ラベル
@@ -63,10 +69,10 @@ ja:
             map_zoom: ズーム ( 0 と 18 の間の任意の数字)
             map_zoom_help: 地図の中心が定義されている場合にのみ適用されます
             menu_amendments: 修正を表示
-            menu_categories: Show Category search menu
+            menu_categories: カテゴリー検索メニューを表示
             menu_hashtags: Hasthag 検索メニューを表示
             menu_meetings: ミーティングを表示
-            menu_merge_components: Merge all components of the same type in the menu
+            menu_merge_components: 同じ種類のすべてのコンポーネントをメニューに統合します
             truncate: ポップアップの説明のための最大文字数
           step:
             announcement: アナウンス
@@ -88,6 +94,13 @@ ja:
               CSS: 必要な <link> スタイルシートエントリがヘッドに含まれていません。この問題を解決するために、独自の _head.html.erbに手動で追加することもできます。
               JavaScript: 必要な <script> JavaScriptエントリがヘッドに含まれていません。この問題を解決するために、独自の admin/_head.html.erbに手動で追加することもできます。
             head_tags: アプリケーションヘッダーに含まれる Awesome tags
+            image_migrations_started: 画像移行プロセスが正常に開始されました
+            images_migrated: 画像はActiveStorageに移行されました
+            pending_image_migrations: |
+              バージョン0.25から, Decidimはファイルアップロードに新技術を使用するようになりました.<br>
+              このインストールでは、古いイメージ<strong>%{total}</strong>件を新システムに移行する必要があるようです。<br>
+              処理を開始すると、バックグラウンドで実行されます。
+            start_image_migrations: "\U0001F449 今すぐ移行プロセスを開始する"
             title: システム互換性チェック
         config:
           caution: '注意: この機能は、予期しない結果につながる可能性があるデフォルトの動作を大きく変更します。注意して使用してください！'
@@ -130,10 +143,10 @@ ja:
               drag_and_drop_supported: 画像アップロード時にドラッグ&ドロップが利用できます。画像はサーバーにアップロードされ、外部リソースとして挿入されます(base64インラインエンコーディングは使用しません).
               intergram_about: IntergramはTelegramメッセンジャーを使用してページの下部に埋め込まれたライブサポートチャットウィジェットを処理します。
               intergram_config: '<a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> をグループに招待するか、直接チャットを開始します。 <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
-              original_editor_override: Since version 0.26, it is possible (for admins only) to upload images into the editors. Therefore, image settings in here only affect the public editors (admin will always have it available).
+              original_editor_override: バージョン 0.26 以降、エディタに画像をアップロードすることが可能になりました(管理者専用)。 そのため、ここでの画像設定はパブリックエディタにのみ影響を与えます(管理者は常に利用可能です)。
               proposal_custom_fields: 公開ウェブの特定の部分にのみ適用されるカスタム提案項目を作成します (制限されたエディタを使用してください)
               proposal_custom_fields_example: データは、互換性のある HTML 属性 (dl,dt,dd 要素) を使用した XML オブジェクトとして格納され、通常の提案の "body" を置き換えます。
-              proposal_custom_fields_translations: "Labels, help text, placeholders and default values can use your application custom translations. \nFor that, instead of using a string literal, use the i18n key (it must contain at least one dot).\nFor instance:\n- \"activemodel.attributes.proposal.title\" instead of \"Title\"\n- \"activemodel.attributes.proposal.address\" instead of \"Address\"\nOr use your own keys in combination with other tools to define translations (eg: using the module Term Customizer):\n - \"myapp.custom_fields.bio\" instead of \"Biography\""
+              proposal_custom_fields_translations: "ラベル、ヘルプテキスト、プレースホルダー、デフォルト値には、アプリケーション独自の翻訳を使用できます。\nそのためには、文字列リテラルを使う代わりに、I18Nキーを使います（少なくとも1つのドットを含んでいなければなりません）。\n例えば、以下のようになります:\n- \"Title\" の代わりに \"activemodel.attributes.proposal.title\" を使用する\n- \"Address \"の代わりに \"activemodel.attributes.proposal.address\" を使用する\nまた、独自のキーを他のツールと組み合わせて翻訳を定義することもできます (例: Term Customizer モジュールを使用する):\n - \"Biography \"の代わりに \"myapp.custom_fields.bio\"を使用する"
               scoped_admins: 一般ユーザーを公開ウェブの特定の部分だけを管理できる管理者に昇格させます(制限エディターを使用してください)。 すでに通常の管理者権限を持つユーザーは無視されることに注意してください。
               scoped_styles: 公開ウェブの特定の部分にのみ適用されるカスタムCSSを作成します (制限されたエディタを使用してください)
               scoped_styles_variables: '組織の色のカスタマイズには、以下のCSS変数が使用できます。'
@@ -180,9 +193,47 @@ ja:
           update:
             error: 条件設定更新エラー
             success: 条件設定は正常に更新されました
+        custom_redirects:
+          create:
+            error: 'リダイレクトの作成中にエラーが発生しました: %{error}'
+            success: リダイレクトを作成しました
+          destroy:
+            error: 'リダイレクトの削除中にエラーが発生しました: %{error}'
+            success: リダイレクトを削除しました
+          edit:
+            save: 保存
+            title: リダイレクトを編集
+          form:
+            destination_help: 絶対ルート (「/」で始まる) または外部 URL (http://..)
+            origin_help: '"/"で始まる絶対ルートのみ'
+            pass_query_help: |
+              クエリ文字列をコピーする場合は、このオプションをオンにします。<br>
+              例えば、/my-origin == /my-destination が設定されている場合、/my-origin?locale=ca へのリクエストは "/my-destination?locale=ca" にリダイレクトされます。
+          index:
+            check_redirections: "✔リダイレクトをチェック"
+            confirm_destroy: このリダイレクトを本当に削除しますか？
+            description: |
+              訪問者を目的のURLにリダイレクトするルーティング (<code>/</code>で始まる)を定義できます。<br>
+              リダイレクト先は、絶対パス(例: <code>/processes/some-process</code>)または<code>https://</code> で始まるURL (例: <code>http://decidim.org</code>)になります。<br><br>
+              リダイレクトは、他のルーティングがマッチしない場合にのみ機能することに注意してください。オリジナルのルーティングを上書きすることはできません (これは仕様です)。
+              <br>
+              不安な場合は、リダイレクトのチェックボタンを使って非互換性をテストしてください。
+            edit: リダイレクトの編集
+            new: 新しいリダイレクト
+            remove: リダイレクトの削除
+            title: カスタムリダイレクト
+          new:
+            save: 保存
+            title: 新しいリダイレクト
+          origin_exists: 同じリダイレクト元が既に設定されています。再度作成する代わりに編集してください。
+          origin_missing: このリダイレクト元はリストにありません
+          update:
+            error: 'リダイレクトの更新中にエラーが発生しました: %{error}'
+            success: リダイレクトを更新しました
         menu:
           admins: スコープ付き管理者
           checks: システム互換性
+          custom_redirects: カスタムリダイレクト
           editors: エディター設定
           livechat: ライブチャット
           menu_hacks: メニュー調整
@@ -242,7 +293,7 @@ ja:
           map_zoom_help: 地図の中心が定義されている場合にのみ適用されます
           menu_amendments: 修正を表示
           menu_meetings: ミーティングを表示
-          menu_merge_components: Merge all components of the same type in the menu
+          menu_merge_components: 同じ種類のすべてのコンポーネントをメニューに統合します
           name: Awesome Map
           show_accepted: 受理済みの提案を表示
           show_evaluating: 評価中の提案を表示
@@ -264,9 +315,7 @@ ja:
       map_component:
         map:
           api_not_ready: |
-            <b>Warning:</b> This Decidim installation has the API configured to a maximum complexity of <b>%{current_complexity}</b>.
-            This component probably won't work under this configuration. We recommend you to set up in a initializer
-            (for instance at the end of the <code>config/initializers/decidim.rb</code>) the following lines:<br>
+            <b>警告:</b> この Decidim のインストールでは、APIの最大複雑度が <b>%{current_complexity}</b> に設定されています。このコンポーネントは、この設定では動作しないかもしれません。初期化の設定を (例えば<code>config/initializers/decidim.rb</code>の末尾で) 以下のようにすることを推奨します:<br>
             <br>
             <pre># Api configuration
             Decidim::Api::Schema.max_complexity = 5000
