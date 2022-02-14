@@ -27,11 +27,11 @@ ca:
         participatory_space_manifest: Aplica-ho a espais participatius de tipus
         participatory_space_slug: Només a
       custom_redirect:
-        active: Active
-        destination: Destination
-        origin: Origin
-        pass_query: Pass the query string to the destination
-        status: Status
+        active: Actiu
+        destination: Destí
+        origin: Origen
+        pass_query: Traspassa la cadena de consulta (query string) al destí
+        status: Estat
       menu:
         position: Posició
         raw_label: Etiqueta
@@ -195,44 +195,44 @@ ca:
             success: Restricció actualitzada correctament
         custom_redirects:
           create:
-            error: Error creating redirection! %{error}
-            success: Redirection created successfully
+            error: 'Error en crear la redirecció: %{error}'
+            success: Redirecció creada amb èxit
           destroy:
-            error: Error removing redirection! %{error}
-            success: Redirection removed successfully
+            error: 'Error en eliminar la redirecció: %{error}'
+            success: Redirecció eliminada correctament
           edit:
             save: Desa
-            title: Edit redirection
+            title: Edita la redirecció
           form:
-            destination_help: Absolute routes (start with "/") or external URLs (http://..)
-            origin_help: Only absolute routes, start with "/"
+            destination_help: Rutes absolutes (comença amb "/") o URLs externes (http://...)
+            origin_help: Només rutes absolutes, comença amb "/"
             pass_query_help: |
-              Activate this option if you want that the query string to be copied to the destination.<br>
-              For instance, if having configured /my-origin => /my-destination, a request to /my-origin?locale=ca  will be redirected to "/my-destination?locale=ca".
+              Activeu aquesta opció si voleu que la cadena de consulta (query string) es copii a la Url de destinació.<br>
+              Per exemple, si heu configurat /my-origin => /my-destination, un petició a /my-origin?locale=ca es redirigirá a "/my-destination?locale=ca".
           index:
-            check_redirections: "✔ Check redirections"
-            confirm_destroy: Are you sure to remove this redirection?
+            check_redirections: "✔ Comprova les redireccions"
+            confirm_destroy: Segur que vols esborrar aquesta redirecció?
             description: |
-              You can define any route (starting with <code>/</code>) to redirect any visitor to a destination URL.<br>
-              Destination can be an absolute path (ie: <code>/processes/some-process</code>) or start with <code>https://</code> (ie: <code>http://decidim.org</code>)<br><br>
-              Take into account that a redirection only works if none other route matches. It is not possible to override original routes (this is by design).<br>
-              If unsure, use the check redirections button to test for incompatibilities.
-            edit: Edit redirection
-            new: New redirection
-            remove: Remove redirection
-            title: Custom Redirections
+              Podeu definir qualsevol ruta (començant amb <code>/</code>) que redirigeixi un visitant a la URL de destinació.<br>
+              El destí pot ser una ruta absoluta (Exemple: <code>/processes/some-process</code>) o començar amb <code>https://</code> (Exemple: <code>http://decidim.org</code>)<br><br>
+              Tingueu en compte que una redirecció només funciona si cap altra ruta amb el mateix nom esta definida a la aplicació Decidim. No es possible sobreescriure rutes que ja existeixin (això es una desició de disseny).<br>
+              Si no n'esteu segurs, feu servir el botó de comprovar les redireccions per trobar incompatibilitats.
+            edit: Edita la redirecció
+            new: Nova redirecció
+            remove: Elimina la redirecció
+            title: Redireccions personalitzades
           new:
             save: Desa
-            title: New redirection
-          origin_exists: The same origin is already configured, please edit that instead of creating it again.
-          origin_missing: This origin has not been found in the list
+            title: Nova redirecció
+          origin_exists: Aquest origen ja existeix, si us plau edita'l en comptes de crear-ne un de nou.
+          origin_missing: Aquest origen no s'ha trobat a la llista
           update:
-            error: Error updating redirection! %{error}
-            success: Redirection updated successfully
+            error: 'Error en actualiltzar la redirecció: %{error}'
+            success: Redirecció actualitzada correctament
         menu:
           admins: Administradores acotades
           checks: Compatibilitat de sistema
-          custom_redirects: Custom Redirections
+          custom_redirects: Redireccions personalitzades
           editors: Modificacions als editors
           livechat: Xat en directe
           menu_hacks: Retocs al menú
