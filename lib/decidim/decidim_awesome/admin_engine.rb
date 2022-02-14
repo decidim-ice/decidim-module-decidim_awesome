@@ -17,6 +17,7 @@ module Decidim
         # Add admin engine routes here
         resources :constraints
         resources :menu_hacks, except: [:show]
+        resources :custom_redirects, except: [:show]
         resources :config, param: :var, only: [:show, :update]
         resources :scoped_styles, param: :var, only: [:create, :destroy]
         resources :proposal_custom_fields, param: :var, only: [:create, :destroy]
@@ -25,7 +26,7 @@ module Decidim
         post :rename_scope_label, to: "config#rename_scope_label"
         get :checks, to: "checks#index"
         post :migrate_images, to: "checks#migrate_images"
-        root to: "config#show", var: :editors
+        root to: "config#show"
       end
 
       initializer "decidim_decidim_awesome.admin_mount_routes" do

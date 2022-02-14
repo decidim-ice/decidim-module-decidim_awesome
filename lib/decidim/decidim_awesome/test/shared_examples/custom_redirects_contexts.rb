@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-shared_context "with menu hacks params" do
+shared_context "with custom redirects params" do
   let(:organization) { create(:organization) }
   let(:context) do
     {
@@ -10,33 +10,26 @@ shared_context "with menu hacks params" do
   end
   let(:params) do
     {
-      raw_label: label,
-      url: url,
-      position: position,
-      target: target,
-      visibility: visibility
+      origin: origin,
+      destination: destination,
+      active: active,
+      pass_query: pass_query
     }
   end
   let(:attributes) do
-    {
-      "label" => label,
-      "url" => url,
-      "position" => position,
-      "target" => target,
-      "visibility" => visibility
-    }
+    [
+      origin,
+      {
+        "destination" => destination,
+        "active" => active,
+        "pass_query" => pass_query
+      }
+    ]
   end
-  let(:label) do
-    {
-      "en" => "Menu english",
-      "ca" => "Menu catalan"
-    }
-  end
-  let(:url) { "/some-path" }
-  let(:position) { 2 }
-  let(:target) { "_blank" }
-  let(:visibility) { "hidden" }
-  let(:menu_name) { "menu" }
+  let(:origin) { "/origin" }
+  let(:destination) { "/processes" }
+  let(:active) { true }
+  let(:pass_query) { true }
 
   let(:another_params) do
     {
@@ -45,7 +38,7 @@ shared_context "with menu hacks params" do
     }
   end
   let(:form) do
-    Decidim::DecidimAwesome::Admin::MenuForm.from_params(params).with_context(context)
+    Decidim::DecidimAwesome::Admin::CustomRedirectForm.from_params(params).with_context(context)
   end
   let(:another_form) do
     Decidim::DecidimAwesome::Admin::ConfigForm.from_params(another_params).with_context(context)

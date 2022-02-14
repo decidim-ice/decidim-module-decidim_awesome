@@ -2,7 +2,7 @@
 
 [![[CI] Test](https://github.com/Platoniq/decidim-module-decidim_awesome/actions/workflows/test.yml/badge.svg)](https://github.com/Platoniq/decidim-module-decidim_awesome/actions/workflows/test.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/2dada53525dd5a944089/maintainability)](https://codeclimate.com/github/Platoniq/decidim-module-decidim_awesome/maintainability)
-[![Test Coverage](https://codecov.io/gh/Platoniq/decidim-module-decidim_awesome/branch/master/graph/badge.svg?token=TFBMCLLZJG)](undefined)
+[![Test Coverage](https://codecov.io/gh/Platoniq/decidim-module-decidim_awesome/branch/master/graph/badge.svg?token=TFBMCLLZJG)](https://codecov.io/gh/Platoniq/decidim-module-decidim_awesome)
 
 Usability and UX tweaks for Decidim.
 
@@ -123,6 +123,26 @@ Technically, the content is stored in the database as an XML document compatible
 ![Custom fields screenshot](examples/custom-fields-2.png)
 ![Custom fields screenshot](examples/custom-fields-1.gif)
 
+#### 13. Custom Redirections (or URL shortener feature)
+
+Admins can create custom paths that redirect to other places. Destinations can be internal absolute paths or external sites.
+There's also possible to choose to sanitize (ie: remove) any query string or to maintain it (so you can decide to use).
+
+For instance you can create a redirection like 
+
+* `/take-me-somewhere` => `/processes/canary-islands`
+
+Using a link with a query string (ie: `/take-me-somewhere?locale=es`) that will redirect the user to:
+
+* `/processes/canary-islands` if query string is sanitized
+* `/processes/canary-islands?locale=es` if query string is not sanitized
+
+> Redirections work only after all other routes have been processed, you cannot override an existing route.
+> The admin panel comes with a button to check if the redirection works (meaning that no other route is used by te application).
+> Non-working routes will simply be ignored.
+
+![Custom redirections screenshot](examples/custom-redirections.png)
+
 #### To be continued...
 
 We're not done! Please check the [issues](/Platoniq/decidim-module-decidim_awesome/issues) (and participate) to see what's on our mind
@@ -168,10 +188,10 @@ Depending on your Decidim version, choose the corresponding Awesome version to e
 
 | Awesome version | Compatible Decidim versions |
 |---|---|
-| 0.5.x | 0.21.x, 0.22.x |
-| 0.6.x | 0.22.x, 0.23.x |
-| 0.7.x | 0.23.x, 0.24.x |
 | 0.8.x | 0.25.x |
+| 0.7.x | 0.23.x, 0.24.x |
+| 0.6.x | 0.22.x, 0.23.x |
+| 0.5.x | 0.21.x, 0.22.x |
 
 > *Heads up!* 
 > * version 0.8.0 removes CSS Themes for tenants. If you have been using them you will have to manually migrate them to custom styles.

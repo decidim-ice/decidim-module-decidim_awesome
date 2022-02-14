@@ -4,6 +4,7 @@ module Decidim
   module DecidimAwesome
     class MenuHacker
       include Decidim::TranslatableAttributes
+
       def initialize(name, view)
         @name = name
         @organization = view.try(:current_organization)

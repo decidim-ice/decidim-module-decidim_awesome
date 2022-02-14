@@ -2,7 +2,7 @@
 
 require "decidim/components/namer"
 
-Decidim.register_component(:awesome_map) do |component|
+Decidim::DecidimAwesome.register_component(:awesome_map) do |component|
   component.engine = Decidim::DecidimAwesome::MapComponent::Engine
   component.admin_engine = Decidim::DecidimAwesome::MapComponent::AdminEngine
   component.icon = "decidim/meetings/icon.svg" # TODO: create a Icon

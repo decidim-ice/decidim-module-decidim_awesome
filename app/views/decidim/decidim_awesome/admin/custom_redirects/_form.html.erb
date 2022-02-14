@@ -1,0 +1,6 @@
+<div>
+    <%= form.text_field :origin, help_text: t(".origin_help") %>
+    <%= form.text_field :destination, help_text: t(".destination_help") %>
+    <%= form.check_box :active %>
+    <%= form.check_box :pass_query, help_text: t(".pass_query_help").html_safe %>
+</div>

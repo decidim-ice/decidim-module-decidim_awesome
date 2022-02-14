@@ -8,6 +8,24 @@ module Decidim
 
         include Decidim::TranslatableAttributes
 
+        def check(status)
+          content_tag(:span, icon(status ? "check" : "x", class: "icon", aria_label: status, role: "img"), class: "text-#{status ? "success" : "alert"}")
+        end
+
+        def menus
+          @menus ||= {
+            editors: config_enabled?([:allow_images_in_full_editor, :allow_images_in_small_editor, :use_markdown_editor, :allow_images_in_markdown_editor]),
+            proposals: config_enabled?(:allow_images_in_proposals),
+            surveys: config_enabled?(:auto_save_forms),
+            styles: config_enabled?(:scoped_styles),
+            proposal_custom_fields: config_enabled?(:proposal_custom_fields),
+            admins: config_enabled?(:scoped_admins),
+            menu_hacks: config_enabled?(:menu),
+            custom_redirects: config_enabled?(:custom_redirects),
+            livechat: config_enabled?([:intergram_for_admins, :intergram_for_public])
+          }
+        end
+
         # returns only non :disabled vars in config
         def enabled_configs(vars)
           vars.filter do |var|
@@ -15,14 +33,9 @@ module Decidim
           end
         end
 
+        # ensure boolean value
         def config_enabled?(var)
-          unless var.is_a?(Array)
-            return false unless DecidimAwesome.config.has_key?(var.to_sym)
-
-            return DecidimAwesome.config.send(var) != :disabled
-          end
-
-          var.detect { |v| DecidimAwesome.config.send(v) != :disabled }
+          DecidimAwesome.enabled?(var) ? true : false
         end
 
         def participatory_space_manifests
@@ -78,6 +91,10 @@ module Decidim
           else
             value
           end
+        end
+
+        def md5(text)
+          Digest::MD5.hexdigest(text)
         end
 
         private

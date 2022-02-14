@@ -7,7 +7,7 @@ module Decidim
 
       included do
         def evaluated_menu
-          @evaluated_menu ||= if awesome_override?
+          @evaluated_menu ||= if DecidimAwesome.enabled?(@name)
                                 Decidim::DecidimAwesome::MenuHacker.new(@name, @view)
                               else
                                 begin
@@ -16,14 +16,6 @@ module Decidim
                                   menu
                                 end
                               end
-        end
-
-        private
-
-        def awesome_override?
-          return false unless Decidim::DecidimAwesome.config.has_key?(@name)
-
-          Decidim::DecidimAwesome.config.send(@name) != :disabled
         end
       end
     end

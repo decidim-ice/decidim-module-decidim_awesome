@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "decidim/decidim_awesome/test/shared_examples/menu_hack_contexts"
+require "decidim/decidim_awesome/test/shared_examples/config_examples"
 
 module Decidim::DecidimAwesome
   module Admin
@@ -37,6 +37,38 @@ module Decidim::DecidimAwesome
         it_behaves_like "forbids disabled feature" do
           let(:features) { Decidim::DecidimAwesome.config.keys }
           let(:action) { get :show, params: params }
+        end
+
+        context "when params var is empty" do
+          let(:params) { [] }
+          let(:editors) { [:allow_images_in_full_editor, :allow_images_in_small_editor, :use_markdown_editor, :allow_images_in_markdown_editor] }
+          let(:disabled) { [] }
+
+          before do
+            disabled.each do |feat|
+              allow(Decidim::DecidimAwesome.config).to receive(feat).and_return(:disabled)
+            end
+          end
+
+          it "returns editors" do
+            expect(controller.helpers.config_var).to eq(:editors)
+          end
+
+          context "when editors is disabled" do
+            let(:disabled) { editors }
+
+            it "returns proposals" do
+              expect(controller.helpers.config_var).to eq(:proposals)
+            end
+
+            context "and proposals is disabled" do
+              let(:disabled) { editors + [:allow_images_in_proposals] }
+
+              it "returns surveys" do
+                expect(controller.helpers.config_var).to eq(:surveys)
+              end
+            end
+          end
         end
 
         context "when constraint exists" do

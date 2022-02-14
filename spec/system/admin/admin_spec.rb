@@ -136,12 +136,12 @@ describe "Visit the admin page", type: :system do
         expect(page).to have_content(/Tweaks for livechat/i)
       end
     end
-  end
 
-  context "when livechat hacks are disabled" do
-    let(:disabled_features) { [:intergram_for_admins, :intergram_for_public] }
+    context "when livechat hacks are disabled" do
+      let(:disabled_features) { [:intergram_for_admins, :intergram_for_public] }
 
-    it_behaves_like "do not have menu link", "livechat"
+      it_behaves_like "do not have menu link", "livechat"
+    end
   end
 
   context "when visiting CSS tweaks" do
@@ -156,12 +156,12 @@ describe "Visit the admin page", type: :system do
         expect(page).to have_content(/Tweaks for styles/i)
       end
     end
-  end
 
-  context "when scoped styles are disabled" do
-    let(:disabled_features) { [:scoped_styles] }
+    context "when scoped styles are disabled" do
+      let(:disabled_features) { [:scoped_styles] }
 
-    it_behaves_like "do not have menu link", "styles"
+      it_behaves_like "do not have menu link", "styles"
+    end
   end
 
   context "when visiting Menu hacks" do
@@ -178,12 +178,36 @@ describe "Visit the admin page", type: :system do
         expect(page).to have_content(/Main menu/i)
       end
     end
+
+    context "when menu_hacks are disabled" do
+      let(:disabled_features) { [:menu] }
+
+      it_behaves_like "do not have menu link", "menu_hacks" do
+        let(:prefix) { "" }
+      end
+    end
   end
 
-  context "when scoped admins are disabled" do
-    let(:disabled_features) { [:scoped_admins] }
+  context "when visiting custom redirections" do
+    context "when custom_redirections are enabled" do
+      before do
+        click_link "Custom Redirections"
+      end
 
-    it_behaves_like "do not have menu link", "admins"
+      it_behaves_like "has menu link", "custom_redirects" do
+        let(:prefix) { "" }
+      end
+
+      it "renders the page" do
+        expect(page).to have_content(/Custom redirections/i)
+      end
+    end
+
+    context "when custom redirections are disabled" do
+      let(:disabled_features) { [:custom_redirects] }
+
+      it_behaves_like "do not have menu link", "custom_redirects"
+    end
   end
 
   context "when visiting Scoped Admins" do
@@ -197,6 +221,12 @@ describe "Visit the admin page", type: :system do
       it "renders the page" do
         expect(page).to have_content(/Tweaks for admins/i)
       end
+    end
+
+    context "when scoped admins are disabled" do
+      let(:disabled_features) { [:scoped_admins] }
+
+      it_behaves_like "do not have menu link", "admins"
     end
   end
 
@@ -219,14 +249,6 @@ describe "Visit the admin page", type: :system do
       end
 
       it_behaves_like "do not have menu link", "proposal_custom_fields"
-    end
-  end
-
-  context "when menu_hacks are disabled" do
-    let(:disabled_features) { [:menu] }
-
-    it_behaves_like "do not have menu link", "menu_hacks" do
-      let(:prefix) { "" }
     end
   end
 end
