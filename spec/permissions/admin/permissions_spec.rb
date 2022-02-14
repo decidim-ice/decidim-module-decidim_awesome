@@ -7,7 +7,7 @@ module Decidim::DecidimAwesome::Admin
     subject { described_class.new(user, permission_action, context).permissions.allowed? }
 
     let(:organization) { create :organization }
-    let(:user) { create :user, :admin, organization: organization }
+    let(:user) { create :user, :admin, :confirmed, organization: organization }
     let(:context) do
       {
         current_organization: organization

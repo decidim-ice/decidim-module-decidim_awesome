@@ -29,6 +29,9 @@ export function destroyQuillEditor(container) {
       $(container).siblings('.ql-toolbar').remove();
       $(container).find("*[class*='ql-']").removeClass((index, class_name) =>(class_name.match (/(^|\s)ql-\S+/g) || []).join(' '));
       $(container).removeClass ((index, class_name) => (class_name.match (/(^|\s)ql-\S+/g) || []).join(' '));
+      if($(container).next().is("p.help-text")) {
+        $(container).next().remove();
+      }
     }
     else {
       console.error(`editor [${container}] not exists`);
@@ -100,7 +103,7 @@ export function createQuillEditor(container) {
       },
       callbackKO: (serverError) => {
         $("div.ql-toolbar").last().removeClass("editor-loading")
-        console.log(`Image upload error: ${serverError.message}`);
+        console.error(`Image upload error: ${serverError.message}`);
       },
       checkBeforeSend: (file, next) => {
         $("div.ql-toolbar").last().addClass("editor-loading")
