@@ -123,6 +123,26 @@ Technically, the content is stored in the database as an XML document compatible
 ![Custom fields screenshot](examples/custom-fields-2.png)
 ![Custom fields screenshot](examples/custom-fields-1.gif)
 
+#### 13. Custom Redirections (or URL shortener feature)
+
+Admins can create custom paths that redirect to other places. Destinations can be internal absolute paths or external sites.
+There's also possible to choose to sanitize (ie: remove) any query string or to maintain it (so you can decide to use).
+
+For instance you can create a redirection like 
+
+* `/take-me-somewhere` => `/processes/canary-islands`
+
+Using a link with a query string (ie: `/take-me-somewhere?locale=es`) that will redirect the user to:
+
+* `/processes/canary-islands` if query string is sanitized
+* `/processes/canary-islands?locale=es` if query string is not sanitized
+
+> Redirections work only after all other routes have been processed, you cannot override an existing route.
+> The admin panel comes with a button to check if the redirection works (meaning that no other route is used by te application).
+> Non-working routes will simply be ignored.
+
+![Custom redirections screenshot](examples/custom-redirections.png)
+
 #### To be continued...
 
 We're not done! Please check the [issues](/Platoniq/decidim-module-decidim_awesome/issues) (and participate) to see what's on our mind

@@ -8,6 +8,9 @@ Compatibility:
   - Decidim v0.25.x
 
 Features:
+  - Several bug fixing related to deactivating features (now there's a test for it).
+  - Now awesome components can be disabled using the `disabled_components` configuration var.
+  - Feature: Custom redirections editor: Create shorter URL redirections to other places, inside or outside Decidim.
   - Update to webpacker compatiblity and Decidim 0.25
   - Added tasks `bin/rails decidim_awesome:active_storage_migrations:check_migration_from_carrierwave` and `bin/rails decidim_awesome:active_storage_migrations:migrate_from_carrierwave` (also accessible as a backgroundjob from the awesome admin checks)
   - REMOVED: SCSS themes are not available anymore (the alternative is to use custom styles). This is mostly because of webpacker.
