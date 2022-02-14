@@ -15,7 +15,7 @@ FactoryBot.define do
     awesome_config { create :awesome_config }
   end
 
-  factory :awesine_editor_image, class: "Decidim::DecidimAwesome::EditorImage" do
+  factory :awesome_editor_image, class: "Decidim::DecidimAwesome::EditorImage" do
     file { Decidim::Dev.test_file("city.jpeg", "image/jpeg") }
     path { Faker::Internet.url(host: "", scheme: "") }
     author { create :user }
