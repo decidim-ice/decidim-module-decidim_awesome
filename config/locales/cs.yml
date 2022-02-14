@@ -140,7 +140,7 @@ cs:
               original_editor_override: Od verze 0.26 je možné nahrávat obrázky do editorů (pouze pro administrátory). Proto zde nastavení obrázků ovlivňuje pouze veřejné editory (správce je bude mít vždy k dispozici).
               proposal_custom_fields: Vytvoření vlastních polí návrhu, která se použijí pouze v určitých částech veřejného webu (použijte k tomu editor omezení)
               proposal_custom_fields_example: Data jsou uložena v objektu XML pomocí kompatibilních atributů HTML (prvky dl,dt,dd), které v běžném návrhu nahrazují "tělo".
-              proposal_custom_fields_translations: "Labels, help text, placeholders and default values can use your application custom translations. \nFor that, instead of using a string literal, use the i18n key (it must contain at least one dot).\nFor instance:\n- \"activemodel.attributes.proposal.title\" instead of \"Title\"\n- \"activemodel.attributes.proposal.address\" instead of \"Address\"\nOr use your own keys in combination with other tools to define translations (eg: using the module Term Customizer):\n - \"myapp.custom_fields.bio\" instead of \"Biography\""
+              proposal_custom_fields_translations: "Štítky, nápověda, zástupné symboly a výchozí hodnoty mohou používat vlastní překlady aplikace. \nPro to použijte klíč i18n (musí obsahovat alespoň jednu tečku), místo použití textového literálu.\nNapříklad:\n- \"activemodel.attributes.proposal.title\" namísto \"Title\"\n- \"activemodel.attributes.proposal.address\" namísto \"Adresa\"\nNebo použijte vlastní klíče v kombinaci s jinými nástroji pro definování překladů (např. pomocí úpravy termínu modulu):\n - \"myapp.custom_fields.bio\" namísto „Životopis“"
               scoped_admins: Povýšení běžného uživatele na administrátora, který může spravovat pouze určité části veřejného webu (k tomu použijte editor omezení). Všimněte si, že uživatelé, kteří již mají oprávnění běžného správce, budou ignorováni.
               scoped_styles: Vytvořte vlastní CSS aplikovaný pouze na určitých částech veřejného webu (použijte pro to editor omezení)
               scoped_styles_variables: 'Můžete použít následující CSS proměnné pro nastavené barvy organizace:'
@@ -249,7 +249,7 @@ cs:
           map_zoom_help: Použije se pouze v případě, že je definován střed mapy
           menu_amendments: Zobrazit pozměňovací návrhy
           menu_meetings: Zobrazit schůzky
-          menu_merge_components: Merge all components of the same type in the menu
+          menu_merge_components: Sloučit všechny komponenty stejného typu v menu
           name: Úžasná mapa
           show_accepted: Zobrazit přijaté návrhy
           show_evaluating: Zobrazit hodnocení návrhů
@@ -271,11 +271,11 @@ cs:
       map_component:
         map:
           api_not_ready: |
-            <b>Warning:</b> This Decidim installation has the API configured to a maximum complexity of <b>%{current_complexity}</b>.
-            This component probably won't work under this configuration. We recommend you to set up in a initializer
-            (for instance at the end of the <code>config/initializers/decidim.rb</code>) the following lines:<br>
+            <b>Upozornění:</b> Tato instalace Decidim má API nastaveno na maximální složitost <b>%{current_complexity}</b>.
+            Tato komponenta pravděpodobně nebude fungovat v této konfiguraci. Doporučujeme nastavit v inicializátoru
+            (například na konci <code>config/initializers/decidim.rb</code>) následující řádky:<br>
             <br>
-            <pre># Api configuration
+            <pre># Konfigurace Api
             Decidim::Api::Schema.max_complexity = 5000
             Decidim::Api::Schema.max_depth = 50</pre>
           error:
