@@ -63,10 +63,10 @@ cs:
             map_zoom: Zvětšení (libovolné číslo mezi 0 a 18)
             map_zoom_help: Použije se pouze v případě, že je definován střed mapy
             menu_amendments: Zobrazit pozměňovací návrhy
-            menu_categories: Show Category search menu
+            menu_categories: Zobrazit menu hledání kategorií
             menu_hashtags: Zobrazit vyhledávací menu Hasthag
             menu_meetings: Zobrazit schůzky
-            menu_merge_components: Merge all components of the same type in the menu
+            menu_merge_components: Sloučit všechny komponenty stejného typu v menu
             truncate: Maximum znaků pro popisy vyskakovacích oken
           step:
             announcement: Oznámení
@@ -88,13 +88,13 @@ cs:
               CSS: Hlavička neobsahuje požadované položky <link> stylu. Chcete-li to vyřešit, můžete je ručně přidat do vlastního _head.html.erb
               JavaScript: Hlavička neobsahuje požadované <script> položky javascriptu. Pro vyřešení je můžete ručně přidat do vlastního admin/_header.html.erb
             head_tags: Úžasné tagy zahrnuté v hlavičce aplikace
-            image_migrations_started: Images migration process has been started successfully
-            images_migrated: Images migrated to ActiveStorage
+            image_migrations_started: Proces migrace obrázků byl úspěšně spuštěn
+            images_migrated: Obrázky migrovány do ActiveStorage
             pending_image_migrations: |
-              Since version 0.25, Decidim uses a new technology to upload files.<br>
-              It looks that this installation needs to migrate <strong>%{total}</strong> of the old images to the new system.<br>
-              You can start the process now and it will be performed in the background.
-            start_image_migrations: "\U0001F449 Start the migration process now"
+              Od verze 0.25, Decidim používá novou technologii pro nahrávání souborů.<br>
+              Zdá se, že tato instalace potřebuje přesunout <strong>%{total}</strong> starých obrázků do nového systému.<br>
+              Můžete zahájit proces nyní a bude probíhat na pozadí.
+            start_image_migrations: "\U0001F449 Zahájit proces migrace"
             title: Kontroly kompatibility systému
         config:
           caution: 'POZNÁMKA: Tato funkce silně mění některé výchozí chování, které by mohlo vést k neočekávaným výsledkům. Používejte ji s opatrností!'
@@ -137,7 +137,7 @@ cs:
               drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
               intergram_about: Intergram používá Telegram messenger pro zpracování widgetu live podpory v dolní části stránky.
               intergram_config: 'Pozvěte <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bota</a> do vaší skupiny nebo začněte chatovat přímo. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
-              original_editor_override: Since version 0.26, it is possible (for admins only) to upload images into the editors. Therefore, image settings in here only affect the public editors (admin will always have it available).
+              original_editor_override: Od verze 0.26 je možné nahrávat obrázky do editorů (pouze pro administrátory). Proto zde nastavení obrázků ovlivňuje pouze veřejné editory (správce je bude mít vždy k dispozici).
               proposal_custom_fields: Vytvoření vlastních polí návrhu, která se použijí pouze v určitých částech veřejného webu (použijte k tomu editor omezení)
               proposal_custom_fields_example: Data jsou uložena v objektu XML pomocí kompatibilních atributů HTML (prvky dl,dt,dd), které v běžném návrhu nahrazují "tělo".
               proposal_custom_fields_translations: "Labels, help text, placeholders and default values can use your application custom translations. \nFor that, instead of using a string literal, use the i18n key (it must contain at least one dot).\nFor instance:\n- \"activemodel.attributes.proposal.title\" instead of \"Title\"\n- \"activemodel.attributes.proposal.address\" instead of \"Address\"\nOr use your own keys in combination with other tools to define translations (eg: using the module Term Customizer):\n - \"myapp.custom_fields.bio\" instead of \"Biography\""
