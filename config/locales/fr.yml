@@ -17,9 +17,9 @@ fr:
         intergram_title_closed: Titre de la conversation fermé
         intergram_title_open: Titre de la conversation ouverte
         intergram_use_floating_button: Si coché, la conversation fermée est toujours un bouton au lieu d'un texte
-        proposal_custom_fields: Custom fields %{id}
-        scoped_admins: Scoped admins group %{id}
-        scoped_styles: Custom styles %{id}
+        proposal_custom_fields: Champs personnalisés %{id}
+        scoped_admins: Groupe d'administrateurs restreints %{id}
+        scoped_styles: Style personnalisés %{id}
         use_markdown_editor: Utiliser un éditeur Markdown au lieu de l'éditeur HTML
       constraint:
         component_id: ou spécifiquement dans
@@ -27,11 +27,11 @@ fr:
         participatory_space_manifest: Appliquer aux espaces participatifs de type
         participatory_space_slug: Seulement dans
       custom_redirect:
-        active: Active
+        active: Actif
         destination: Destination
-        origin: Origin
-        pass_query: Pass the query string to the destination
-        status: Status
+        origin: Origine
+        pass_query: Passer la chaîne de requête à la destination
+        status: Statut
       menu:
         position: Position
         raw_label: Label
@@ -39,7 +39,7 @@ fr:
         url: URL
         visibility: Visibilité
       proposal:
-        proposal_custom_fields: Custom fields
+        proposal_custom_fields: Champs personnalisés
   decidim:
     admin:
       menu:
@@ -63,17 +63,17 @@ fr:
           global:
             announcement: Annonce
             collapse: Démarrer avec le menu réduit
-            map_center: Map center (Latitude, Longitude)
-            map_center_help: 'Use decimal points (ie: 41.38879, 2.15899). Leave it empty to automatically fit all the markers'
+            map_center: Centre de la carte (Latitude, Longitude)
+            map_center_help: 'Utilisez des points décimaux (c.-à-d. 41.38879, 2.15899). Laissez vide pour correspondre automatiquement à tous les marqueurs'
             map_height: Hauteur max (px)
-            map_zoom: Zoom (any number betwen 0 and 18)
-            map_zoom_help: Only applies if a map center is defined
-            menu_amendments: Show amendments
-            menu_categories: Show Category search menu
-            menu_hashtags: Show Hasthag search menu
-            menu_meetings: Show meetings
-            menu_merge_components: Merge all components of the same type in the menu
-            truncate: Maximum characters for popup descriptions
+            map_zoom: Zoom (n'importe quel nombre entre 0 et 18)
+            map_zoom_help: Ne s'applique que si un centre de carte est défini
+            menu_amendments: Afficher les amendements
+            menu_categories: Afficher le menu de recherche par catégorie
+            menu_hashtags: Voir le menu de recherche Hasthag
+            menu_meetings: Montrer les rencontres
+            menu_merge_components: Fusionner toutes les fonctionnalités du même type dans le menu
+            truncate: Caractères maximum pour les descriptions des popups
           step:
             announcement: Annonce
             show_accepted: Propositions acceptées
@@ -94,46 +94,46 @@ fr:
               CSS: La balise <head> ne contient pas les entrées de la feuille de style <link> requises. Pour la résoudre, vous pouvez l'ajouter manuellement à votre _head.html.erb personnalisé
               JavaScript: La balise <head> ne contient pas les entrées  javascript nécessaire <script>  Pour la résoudre, vous pouvez l'ajouter manuellement à votre _head.html.erb personnalisé
             head_tags: '"Awesome tags" (balises) inclus entre les balises <head>'
-            image_migrations_started: Images migration process has been started successfully
-            images_migrated: Images migrated to ActiveStorage
+            image_migrations_started: Le processus de migration des images a été démarré avec succès
+            images_migrated: Images migrées vers ActiveStorage
             pending_image_migrations: |
-              Since version 0.25, Decidim uses a new technology to upload files.<br>
-              It looks that this installation needs to migrate <strong>%{total}</strong> of the old images to the new system.<br>
-              You can start the process now and it will be performed in the background.
-            start_image_migrations: "\U0001F449 Start the migration process now"
+              Depuis la version 0.25, Decidim utilise une nouvelle technologie pour télécharger des fichiers.<br>
+              Il semble que cette installation a besoin de migrer <strong>%{total}</strong> des anciennes images vers le nouveau système.<br>
+              Vous pouvez démarrer le processus maintenant et il sera effectué en arrière-plan.
+            start_image_migrations: "\U0001F449 Démarrez le processus de migration maintenant"
             title: Compatibilité système
         config:
-          caution: 'NOTE: This feature heavily modifies some default behaviours that might lead to unexpected results. Use it with caution!'
+          caution: 'REMARQUE : Cette fonctionnalité modifie fortement certains comportements par défaut qui peuvent conduire à des résultats inattendus. Utilisez-la avec précaution !'
           constraints:
             add_condition: Ajouter une contrainte d'application
             always: Toujours
-            cannot_be_destroyed: Sorry, this cannot be deleted. This configuration needs at least one constraint.
+            cannot_be_destroyed: Désolé, cela ne peut pas être supprimé. Cette configuration nécessite au moins une contrainte.
             delete: Supprimer
             edit: Modifier
             title: 'Applicable uniquement dans ces cas:'
           create_proposal_custom_field:
-            error: Error creating a new "custom field" box! %{error}
-            success: '"custom field" box %{key} created successfully'
+            error: Erreur lors de la création d'un nouveau "champ personnalisé" ! %{error}
+            success: 'le champ personnalisé %{key} a été créé avec succès'
           create_scoped_admin:
-            error: Error creating a new Admin group! %{error}
-            success: Admin group %{key} created successfully
+            error: Erreur lors de la création d'un nouveau groupe admin ! %{error}
+            success: Le groupe d'administration %{key} a été créé avec succès
           create_scoped_style:
             error: Erreur lors de la création d'une nouvelle boîte CSS ! %{error}
             success: La boîte CSS %{key} a été créée avec succès
           destroy_proposal_custom_field:
-            error: Error removing "custom field" box! %{error}
-            success: '"custom field" box %{key} removed successfully'
+            error: Erreur lors de la suppression du "champ personnalisé" ! %{error}
+            success: '"champ personnalisé" %{key} supprimé avec succès'
           destroy_scoped_admin:
-            error: Error removing Admin group! %{error}
-            success: Admin group %{key} removed successfully
+            error: Erreur lors de la suppression du groupe Admin ! %{error}
+            success: Groupe admin %{key} supprimé avec succès
           destroy_scoped_style:
             error: Erreur lors de la suppression de la boîte CSS! %{error}
             success: Boîte CSS %{key} supprimée avec succès
           form:
-            edit_label: Rename label
+            edit_label: Renommer le label
             errors:
-              incorrect_css: 'CSS in box #%{key} is invalid'
-              incorrect_json: 'JSON definition in box #%{key} is invalid'
+              incorrect_css: 'CSS dans la boîte #%{key} est invalide'
+              incorrect_json: 'La définition JSON dans la boite #%{key} n''est pas valide'
             help:
               allow_images_in_full_editor: Ceci ajoutera une icône d'ajout d'images dans tous les éditeurs WYSIWYG avec toutes les options activées (icônes).
               allow_images_in_markdown_editor: Cela permettra à l'éditeur markdown de télécharger des images par copier, coller ou glisser-déposer.
@@ -143,28 +143,28 @@ fr:
               drag_and_drop_supported: Lorsque vous ajoutez des images, le glisser-déposer est pris en charge. Les images seront envoyées sur le serveur et insérées en tant que ressources externes (il n'utilise pas l'encodage en base64).
               intergram_about: Intergram utilise la messagerie Telegram pour gérer un widget de chat en direct intégré dans le bas de la page.
               intergram_config: 'Invitez le bot <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram</a> dans votre groupe ou commencez une conversation avec lui directement. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
-              original_editor_override: Since version 0.26, it is possible (for admins only) to upload images into the editors. Therefore, image settings in here only affect the public editors (admin will always have it available).
-              proposal_custom_fields: Create custom proposal fields that applies only in certain parts of the public web (use the restrictions editor for that)
-              proposal_custom_fields_example: Data is stored in a XML object using compatible HTML attributes (dl,dt,dd elements) replacing the "body" in a normal proposal.
-              proposal_custom_fields_translations: "Labels, help text, placeholders and default values can use your application custom translations. \nFor that, instead of using a string literal, use the i18n key (it must contain at least one dot).\nFor instance:\n- \"activemodel.attributes.proposal.title\" instead of \"Title\"\n- \"activemodel.attributes.proposal.address\" instead of \"Address\"\nOr use your own keys in combination with other tools to define translations (eg: using the module Term Customizer):\n - \"myapp.custom_fields.bio\" instead of \"Biography\""
-              scoped_admins: Promote regular user to admins that can only administrate certain parts of the public web (use the restrictions editor for that). Note that users who already have regular admin permissions will be ignored.
+              original_editor_override: Depuis la version 0.26, il est possible (pour les administrateurs seulement) de charger des images dans les éditeurs. Par conséquent, les paramètres d'image activés ici n'affectent que les éditeurs publics (ce sera toujours disponible pour l'admin).
+              proposal_custom_fields: Créer des champs personnalisés pour la création de proposition qui s'appliquent uniquement à certaines parties du web public (utilisez les restrictions pour cela)
+              proposal_custom_fields_example: Les données sont stockées dans un objet XML en utilisant des attributs HTML compatibles (dl,dt,dd éléments) en remplaçant le "body" dans une proposition standard.
+              proposal_custom_fields_translations: "Les libellés, le texte d’aide, les espaces réservés et les valeurs par défaut peuvent utiliser les traductions personnalisées de votre application. \nPour cela, au lieu d'utiliser une chaîne de caractères littérale, utilisez la clé i18n (elle doit contenir au moins un point).\nPar exemple :\n- \"activemodel.attributes.proposal.title au lieu de \"Titre\"\n- \"activemodel.attributes.proposition.address\" au lieu de \"Adresse\"\nOu utilisez vos propres clés en combinaison avec d'autres outils pour définir des traductions (par exemple: utiliser le module de personnalisation des termes) :\n- \"myapp.custom_fields.bio\" à la place de \"Biography\""
+              scoped_admins: Promouvoir les utilisateurs réguliers en administrateurs qui ne peuvent administrer que certaines parties de la plateforme (utilisez l'éditeur de restrictions pour cela). Notez que les utilisateurs qui ont déjà les permissions d'administration habituelles seront ignorés.
               scoped_styles: Créer un CSS personnalisé qui s'applique uniquement à certaines parties du site web public (front-end) (utilisez l'éditeur de restrictions pour cela)
               scoped_styles_variables: 'Vous pouvez utiliser les variables CSS suivantes pour les couleurs personnalisées de l''organisation :'
               use_markdown_editor: Cela remplacera l'éditeur Quill WYSIWYG par un éditeur Markdown. Le texte sera affiché en HTML dans les pages publiques (le texte dans la base de données sera sauvegardé en tant que texte markdown)
           form_proposal_custom_fields:
-            new: Add a new "custom fields" box
-            remove: Remove this "custom fields" box
-            sure_to_remove: Are you sure you want to destroy this fields box?
+            new: Ajouter une nouvelle boîte de champs personnalisés
+            remove: Supprimer cette boîte de champs personnalisés
+            sure_to_remove: Êtes-vous sûr de vouloir détruire ce champ ?
           form_scoped_admins:
-            new: Add a new "Scoped Admins" group
-            remove: Remove this "Scoped Admins" group
-            sure_to_remove: Are you sure you want to destroy this "Scoped Admins" group?
+            new: Ajouter un nouveau groupe "Administrateurs de secteur"
+            remove: Supprimer ce groupe "Administrateurs de secteur"
+            sure_to_remove: Êtes-vous sûr de vouloir détruire ce groupe « Administrateurs de secteur »?
           form_scoped_styles:
             new: Ajouter une nouvelle boîte CSS
             remove: Supprimer cette boîte CSS
             sure_to_remove: Etes-vous sûr de vouloir supprimer cette boîte CSS ?
           none: "⛔ Jamais! - Désactive toute autre contrainte"
-          process_groups: Process groups
+          process_groups: Groupes de processus
           rich_text_editor_in_public_views: 'NOTE : "Éditeur de texte enrichi pour les participants" est activé, cette option ne s''appliquera pas. Utilisez les hacks de l''éditeur de texte à la place pour activer les images dans les propositions.'
           show:
             title: Tweaks pour %{setting}
@@ -195,50 +195,50 @@ fr:
             success: Contrainte mise à jour avec succès
         custom_redirects:
           create:
-            error: Error creating redirection! %{error}
-            success: Redirection created successfully
+            error: Erreur lors de la création de la redirection! %{error}
+            success: Redirection créée avec succès
           destroy:
-            error: Error removing redirection! %{error}
-            success: Redirection removed successfully
+            error: Erreur lors de la suppression de la redirection! %{error}
+            success: Redirection supprimée avec succès
           edit:
             save: Enregistrer
-            title: Edit redirection
+            title: Modifier la redirection
           form:
-            destination_help: Absolute routes (start with "/") or external URLs (http://..)
-            origin_help: Only absolute routes, start with "/"
+            destination_help: Routes absolues (commencer par "/") ou URL externes (http://..)
+            origin_help: Seulement les routes absolues, commencer par "/"
             pass_query_help: |
-              Activate this option if you want that the query string to be copied to the destination.<br>
-              For instance, if having configured /my-origin => /my-destination, a request to /my-origin?locale=ca  will be redirected to "/my-destination?locale=ca".
+              Activez cette option si vous voulez que la chaîne de requête soit copiée vers la destination.<br>
+              Par exemple, si vous avez configuré /my-origin => /my-destination, une requête vers /my-origin?locale=ca sera redirigée vers "/my-destination?locale=ca".
           index:
-            check_redirections: "✔ Check redirections"
-            confirm_destroy: Are you sure to remove this redirection?
+            check_redirections: "✔ Vérifier les redirections"
+            confirm_destroy: Voulez-vous vraiment supprimer cette redirection ?
             description: |
-              You can define any route (starting with <code>/</code>) to redirect any visitor to a destination URL.<br>
-              Destination can be an absolute path (ie: <code>/processes/some-process</code>) or start with <code>https://</code> (ie: <code>http://decidim.org</code>)<br><br>
-              Take into account that a redirection only works if none other route matches. It is not possible to override original routes (this is by design).<br>
-              If unsure, use the check redirections button to test for incompatibilities.
-            edit: Edit redirection
-            new: New redirection
-            remove: Remove redirection
-            title: Custom Redirections
+              Vous pouvez définir n'importe quelle redirection (à partir de <code>/</code>) pour rediriger n'importe quel visiteur vers une URL de destination.<br>
+              La destination peut être un chemin absolu (i.e.: <code>/processes/some-process</code>) ou commencer par <code>https://</code> (ie: <code>http://decidim.org</code>)<br><br>
+              Prenez en compte le fait que la redirection ne fonctionne que si aucun autre itinéraire ne correspond. Il n'est pas possible de surcharger les routes originales.<br>
+              En cas d'incertitude, utilisez le bouton de vérification des redirections pour tester l'incompatibilité.
+            edit: Modifier la redirection
+            new: Nouvelle redirection
+            remove: Supprimer la redirection
+            title: Redirections personnalisées
           new:
             save: Enregistrer
-            title: New redirection
-          origin_exists: The same origin is already configured, please edit that instead of creating it again.
-          origin_missing: This origin has not been found in the list
+            title: Nouvelle redirection
+          origin_exists: La même origine est déjà configurée, merci de la modifier au lieu d'en créer une nouvelle.
+          origin_missing: Cette origine n'a pas été trouvée dans la liste
           update:
-            error: Error updating redirection! %{error}
-            success: Redirection updated successfully
+            error: Erreur lors de la mise à jour de la redirection! %{error}
+            success: Redirection mise à jour avec succès
         menu:
-          admins: Scoped Admins
+          admins: Administrateurs de secteur
           checks: Compatibilité système
-          custom_redirects: Custom Redirections
+          custom_redirects: Redirections personnalisées
           editors: Hacks de l'éditeur
           livechat: Chat en direct
           menu_hacks: Tweaks de menu
-          proposal_custom_fields: Proposals Custom Fields
+          proposal_custom_fields: Champs de propositions personnalisés
           proposals: Hacks pour les propositions
-          styles: Style personnalisés
+          styles: Styles personnalisés
           surveys: Enquêtes et formulaires
         menu_hacks:
           create:
@@ -284,29 +284,29 @@ fr:
       content_blocks:
         map:
           collapse: Démarrer avec le menu réduit
-          map_center: Map center (Latitude, Longitude)
-          map_center_help: 'Use decimal points (ie: 41.38879, 2.15899). Leave it empty to automatically fit all the markers'
+          map_center: Centre de la carte (Latitude, Longitude)
+          map_center_help: 'Utilisez des points décimaux (c.-à-d. 41.38879, 2.15899). Laissez vide pour correspondre automatiquement à tous les marqueurs'
           map_height: Hauteur max (px)
-          map_settings: Map settings
-          map_zoom: Zoom (any number betwen 0 and 18)
-          map_zoom_help: Only applies if a map center is defined
-          menu_amendments: Show amendments
-          menu_meetings: Show meetings
-          menu_merge_components: Merge all components of the same type in the menu
+          map_settings: Paramètres de la carte
+          map_zoom: Zoom (n'importe quel nombre entre 0 et 18)
+          map_zoom_help: Ne s'applique que si un centre de carte est défini
+          menu_amendments: Afficher les amendements
+          menu_meetings: Montrer les rencontres
+          menu_merge_components: Fusionner toutes les fonctionnalités du même type dans le menu
           name: Awesome Map (Cartographie interactive)
           show_accepted: Propositions acceptées
           show_evaluating: Afficher les propositions en cours d'évaluation
           show_not_answered: Afficher les propositions n'ayant pas reçu de réponses
           show_rejected: Afficher les propositions rejetées
           show_withdrawn: Afficher les propositions retirées
-          text_settings: Text settings
-          title: Title
-          truncate: Maximum characters for popup descriptions
+          text_settings: Paramètres de texte
+          title: Titre
+          truncate: Caractères maximum pour les descriptions des popups
       credits: Décidim Awesome %{version} · Fait avec ♥ par Platoniq
       custom_fields:
         errors:
-          invalid_fields: Content couldn't be parsed but has been assigned to the field '%{field}'
-          invalid_xml: 'Content couldn''t be parsed: DL/DD elements not found in the XML'
+          invalid_fields: Le contenu n'a pas pu être analysé mais a été assigné au champ '%{field}'
+          invalid_xml: 'Le contenu n''a pas pu être analysé: les éléments DL/DD n''ont pas été trouvés dans le XML'
       editor_images:
         create:
           error: Erreur lors de l'ajout de l'image !
@@ -314,12 +314,12 @@ fr:
       map_component:
         map:
           api_not_ready: |
-            <b>Warning:</b> This Decidim installation has the API configured to a maximum complexity of <b>%{current_complexity}</b>.
-            This component probably won't work under this configuration. We recommend you to set up in a initializer
-            (for instance at the end of the <code>config/initializers/decidim.rb</code>) the following lines:<br>
+            <b>Attention :</b> Cette installation de Decidim a l'API configurée à une complexité maximale de <b>%{current_complexity}</b>.
+            Ce composant ne fonctionnera probablement pas avec cette configuration. Nous vous recommandons de configurer dans un initialiseur
+            (par exemple à la fin de <code>config/initializers/decidim.rb</code>) les lignes suivantes :<br>
             <br>
-            <pre># Api configuration
-            Decidim::Api::Schema.max_complexity = 5000
+            <pre># Configuration Api
+            Decidim::Api::Schema. ax_complexity = 5000
             Decidim::Api::Schema.max_depth = 50</pre>
           error:
             unavailable: La carte n'est pas disponible. Veuillez configurer le géocodage pour activer ce composant.
@@ -340,7 +340,7 @@ fr:
           categories: Catégories
           drag_and_drop_image: Ajoutez des images en les glissant - déposant ou en les collant depuis votre presse-papier.
           hashtags: Hashtags
-          items: items
+          items: éléments
           meetings: Rencontres
           proposals: Propositions
-          select_deselect_all: Select/deselect all
+          select_deselect_all: Sélectionner/Désélectionner tout
