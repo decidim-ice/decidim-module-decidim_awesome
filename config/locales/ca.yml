@@ -13,9 +13,9 @@ ca:
         intergram_color: Color del widget
         intergram_for_admins: Activar el xat de Intergram al backend d'administració
         intergram_intro_message: Primer missatge que s'envia quan la usuària obre el xat per primera vegada
-        intergram_require_login: Només per usuàries registrades
-        intergram_title_closed: Títol del xat tancat
-        intergram_title_open: Títol del xat obert
+        intergram_require_login: Només per a usuàries registrades
+        intergram_title_closed: Títol del xat quan està tancat
+        intergram_title_open: Títol del xat quan està obert
         intergram_use_floating_button: Si està marcat, el xat tancat és sempre un botó en lloc d'un text
         proposal_custom_fields: 'Camps personalitzats #%{id}'
         scoped_admins: 'Grup d''administradores acotades #%{id}'
@@ -51,19 +51,19 @@ ca:
           global:
             announcement: Anunci
             iframe: Codi Iframe
-            iframe_help: 'Posa el teu codi com html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. El contingut serà netejat de qualsevol altre tag HTML. Assegureu-vos de fer servir 100% per l''amplada per tal d''omplir la pantalla.'
-            no_margins: Sense marges entre el iframe i la resta de la pàgina
-            viewport_width: Limita l'amplada a màxima com a la resta de l'aplicació
+            iframe_help: 'Posa el teu codi com a HTML: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. S''eliminarà qualsevol altre element HTML que no sigui l''Iframe. Assegureu-vos de fer servir 100% a l''amplada (width="100%") per tal d''omplir la pantalla.'
+            no_margins: Sense marges entre l'Iframe i la resta de la pàgina
+            viewport_width: Limita l'amplada màxima com a la resta de l'aplicació
           step:
             announcement: Anunci
-            iframe: Codi del Iframe
+            iframe: Codi de l'Iframe
       awesome_map:
         name: Mapa global
         settings:
           global:
             announcement: Anunci
             collapse: Inicia amb el menú col·lapsat
-            map_center: Centre del mapa (Latitud, Longitud)
+            map_center: Punt central del mapa (Latitud, Longitud)
             map_center_help: 'Utilitza un punt per marcar els decimals (pe: 41.38879, 2.15899). Deixa aquest camp buit per incloure automàticament tots els marcadors'
             map_height: Alçada del mapa (px)
             map_zoom: Zoom (qualsevol nombre entre 0 i 18)
@@ -251,7 +251,7 @@ ca:
             save: Desar
             title: Editar ítem de menú
           form:
-            label_help: Les traduccions no es detecten automàticament, asegura't de completar tots els camps!
+            label_help: Les traduccions no es detecten automàticament, assegura't de completar tots els camps!
             target:
               blank: Nova finestra
               self: La mateixa finestra
@@ -261,7 +261,7 @@ ca:
               logged: Només visible per usuàries loguejades
               non_logged: Només visible per usuàries no loguejades
           index:
-            confirm_destroy: Estàs segura que vols eliminar aquest retoc?
+            confirm_destroy: Confirmes que vols eliminar aquest retoc?
             edit: Editar
             new: Nou ítem
             remove: Eliminar addició
@@ -284,7 +284,7 @@ ca:
       content_blocks:
         map:
           collapse: Inicia amb el menú col·lapsat
-          map_center: Centre del mapa (Latitud, Longitud)
+          map_center: Punt central del mapa (Latitud, Longitud)
           map_center_help: 'Utilitza un punt per marcar els decimals (pe: 41.38879, 2.15899). Deixa aquest camp buit per incloure automàticament tots els marcadors'
           map_height: Alçada del mapa (px)
           map_settings: Configuració del mapa
@@ -338,7 +338,7 @@ ca:
           autosaved_retrieved: Les dades d'aquest formulari s'han recuperat d'una sessió anterior
           autosaved_success: Dades desades a l'emmagatzematge local
           categories: Categories
-          drag_and_drop_image: Afegeix imatges "arrastrant i deixant anar" o bé enganxant-les.
+          drag_and_drop_image: Afegeix imatges arrossegant-les i deixant-les anar o bé enganxant-les.
           hashtags: Hashtags
           items: elements
           meetings: Trobades
