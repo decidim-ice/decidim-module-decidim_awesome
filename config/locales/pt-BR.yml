@@ -27,11 +27,7 @@ pt:
         participatory_space_manifest: Aplicar a espaços participativos do tipo
         participatory_space_slug: Somente em
       custom_redirect:
-        active: Active
-        destination: Destination
-        origin: Origin
-        pass_query: Pass the query string to the destination
-        status: Status
+        active: Ativo
       menu:
         position: Posição
         raw_label: Rótulo
@@ -94,13 +90,6 @@ pt:
               CSS: O cabeçalho não contém as entradas de folha de estilo <link> necessárias. Para resolvê-lo, você pode adicioná-lo manualmente ao seu _head.html.erb
               JavaScript: O cabeçalho não contém as entradas Javascript <script> necessárias. Para resolvê-lo, você pode adicioná-las manualmente ao seu custom admin/_header.html.erb
             head_tags: Tags incríveis incluídas no cabeçalho do aplicativo
-            image_migrations_started: Images migration process has been started successfully
-            images_migrated: Images migrated to ActiveStorage
-            pending_image_migrations: |
-              Since version 0.25, Decidim uses a new technology to upload files.<br>
-              It looks that this installation needs to migrate <strong>%{total}</strong> of the old images to the new system.<br>
-              You can start the process now and it will be performed in the background.
-            start_image_migrations: "\U0001F449 Start the migration process now"
             title: Checar compatibilidade do sistema
         config:
           caution: 'NOTA: Este recurso modifica fortemente alguns comportamentos padrão que podem levar a resultados inesperados. Use-o com cuidado!'
@@ -194,45 +183,13 @@ pt:
             error: Erro ao atualizar condição de caso
             success: Condição de caso aplicadas com sucesso
         custom_redirects:
-          create:
-            error: Error creating redirection! %{error}
-            success: Redirection created successfully
-          destroy:
-            error: Error removing redirection! %{error}
-            success: Redirection removed successfully
           edit:
             save: Salvar
-            title: Edit redirection
-          form:
-            destination_help: Absolute routes (start with "/") or external URLs (http://..)
-            origin_help: Only absolute routes, start with "/"
-            pass_query_help: |
-              Activate this option if you want that the query string to be copied to the destination.<br>
-              For instance, if having configured /my-origin => /my-destination, a request to /my-origin?locale=ca  will be redirected to "/my-destination?locale=ca".
-          index:
-            check_redirections: "✔ Check redirections"
-            confirm_destroy: Are you sure to remove this redirection?
-            description: |
-              You can define any route (starting with <code>/</code>) to redirect any visitor to a destination URL.<br>
-              Destination can be an absolute path (ie: <code>/processes/some-process</code>) or start with <code>https://</code> (ie: <code>http://decidim.org</code>)<br><br>
-              Take into account that a redirection only works if none other route matches. It is not possible to override original routes (this is by design).<br>
-              If unsure, use the check redirections button to test for incompatibilities.
-            edit: Edit redirection
-            new: New redirection
-            remove: Remove redirection
-            title: Custom Redirections
           new:
             save: Salvar
-            title: New redirection
-          origin_exists: The same origin is already configured, please edit that instead of creating it again.
-          origin_missing: This origin has not been found in the list
-          update:
-            error: Error updating redirection! %{error}
-            success: Redirection updated successfully
         menu:
           admins: Administradores com escopo
           checks: Compatibilidade de sistema
-          custom_redirects: Custom Redirections
           editors: Hacks do editor
           livechat: Chat Ao Vivo
           menu_hacks: Ajustes do menu
