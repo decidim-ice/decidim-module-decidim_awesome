@@ -1,47 +1,47 @@
-.constraints-editor{
+.constraints-editor {
   background: #f6f6f6;
   padding: 1rem;
   margin: -.5rem 0 2rem;
   border-radius: 5px;
 
-  .constraints-list{
+  .constraints-list {
     padding: 0;
     // margin:0 0 1em 0 ;
-    li{
+    li {
       margin: 0 1em 0 0;
       padding: 0;
     }
 
-    .label{
-      &.participatory_space_manifest{
+    .label {
+      &.participatory_space_manifest {
         background-color: #f7b230;
       }
 
-      &.participatory_space_slug{
+      &.participatory_space_slug {
         background-color: #19b380;
       }
 
-      &.component_manifest{
+      &.component_manifest {
         background-color: #b31919;
       }
 
-      &.component_id{
+      &.component_id {
         background-color: #ee449c;
       }
 
-      &.constraint{
-        &-none{
+      &.constraint {
+        &-none {
           background-color: #ff3000;
         }
       }
     }
 
-    a{
+    a {
       margin-left: 1rem;
     }
 
-    &.inactive{
-      .label:not(.constraint-none){
+    &.inactive {
+      .label:not(.constraint-none) {
         filter: saturate(10%);
       }
     }

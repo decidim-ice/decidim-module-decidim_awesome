@@ -5,6 +5,7 @@
   width: 1em;
   margin-left: 1em;
   vertical-align: middle;
+
   &:first-child {
     margin-left: 0;
   }
@@ -17,6 +18,7 @@
     "highlight": #{$highlight},
     "highlight_alternative": #{$highlight_alternative}
   );
+
   @each $name, $color in $colors {
     &.#{$name} {
       background-color: #{$color};
@@ -30,20 +32,20 @@
   }
 }
 
-.proposal_custom_fields{
-  &_editor{
+.proposal_custom_fields {
+  &_editor {
     background-color: #e0e0e0;
     padding: .5em .5em 1em;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 
-    label{
+    label {
       display: inline-block;
       max-width: 100%;
       font-weight: 600 !important;
     }
 
-    li[type]{
+    li[type] {
       display: inherit;
       width: 100%;
       height: inherit;
@@ -56,17 +58,17 @@
       color: inherit;
     }
 
-    .form-group{
+    .form-group {
       background-color: inherit;
       margin: 0;
       padding: 0;
     }
 
-    .form-wrap.form-builder .form-group{
+    .form-wrap.form-builder .form-group {
       margin-bottom: 10px !important;
     }
 
-    .form-control{
+    .form-control {
       color: #555;
       background-color: #fff;
       border: 1px solid #ccc;
@@ -77,8 +79,8 @@
     }
   }
 
-  &_container{
-    .constraints-editor{
+  &_container {
+    .constraints-editor {
       border-top-left-radius: 0;
       border-top-right-radius: 0;
     }
@@ -86,6 +88,6 @@
 }
 
 // Custom fields tunning
-.rendered-form .form-control.ql-container{
+.rendered-form .form-control.ql-container {
   height: auto !important;
 }

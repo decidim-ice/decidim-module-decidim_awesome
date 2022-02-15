@@ -1,16 +1,16 @@
 // Increase z-index for components menu otherwise map hides menu extensions
-.dropdown-pane{
+.dropdown-pane {
   z-index: 1000;
 }
 // Override padding in this component
-.wrapper{
+.wrapper {
   padding: 0;
 
-  .callout.announcement{
+  .callout.announcement {
     margin-top: 2rem;
   }
 
-  .google-map{
+  .google-map {
     margin-bottom: 0;
   }
 }
@@ -36,28 +36,29 @@
     font: inherit;
 
     #bodyContent .description {
-      img, iframe {
+      img,
+      iframe {
         max-height: 5em;
       }
     }
   }
 
-  .leaflet-control-layers-list{
-    hr{
+  .leaflet-control-layers-list {
+    hr {
       margin: .5em 0;
     }
 
-    b{
+    b {
       margin: 1em 0;
       display: block;
     }
 
-    label{
+    label {
       line-height: 1;
       font-size: .8rem;
       margin: 0 0 .5em;
 
-      i{
+      i {
         display: inline-block;
         width: .8rem;
         height: .8rem;
@@ -65,23 +66,23 @@
       }
     }
 
-    input{
+    input {
       margin: 0;
     }
   }
 
-  .map-legend{
+  .map-legend {
     background: rgba(255, 255, 255, .8);
     padding: 1em;
     border: 2px solid #bbb;
     border-radius: 4px;
   }
 
-  .awesome_map-title-control{
+  .awesome_map-title-control {
     display: block;
     cursor: pointer;
 
-    &::after{
+    &::after {
       content: '';
       width: 0;
       height: 0;
@@ -94,23 +95,23 @@
     }
   }
 
-  .active{
-    .awesome_map-title-control::after{
+  .active {
+    .awesome_map-title-control::after {
       border-top: 0;
       border-bottom: 5px solid black;
     }
   }
 }
 
-#awesome_map-{
-  &categories-control{
+#awesome_map- {
+  &categories-control {
     display: none;
 
-    label{
+    label {
       margin-left: 0;
       display: none;
 
-      i{
+      i {
         margin-left: .5em;
         display: inline-block;
         width: .8rem;
@@ -119,26 +120,26 @@
         background-color: var(-- primary);
       }
 
-      &.subcategory{
+      &.subcategory {
         padding-left: 1em;
       }
     }
 
-    .categories-container{
+    .categories-container {
       display: none;
     }
 
-    &.active{
-      .categories-container{
+    &.active {
+      .categories-container {
         display: block;
       }
     }
   }
 
-  &hashtags-control{
+  &hashtags-control {
     display: none;
 
-    label{
+    label {
       display: inline-block;
       line-height: 1;
       background-color: #f0f0f0;
@@ -146,28 +147,28 @@
       margin: .5rem;
       padding: .5rem;
 
-      span{
+      span {
         margin: 0 .5rem 2px 0;
       }
 
-      input{
+      input {
         vertical-align: top;
       }
     }
 
-    .awesome_map-toggle_all_tags{
+    .awesome_map-toggle_all_tags {
       margin: .5rem 1rem;
       font-size: .875rem;
     }
 
     .hashtags-container,
-    .awesome_map-toggle_all_tags{
+    .awesome_map-toggle_all_tags {
       display: none;
     }
 
-    &.active{
+    &.active {
       .hashtags-container,
-      .awesome_map-toggle_all_tags{
+      .awesome_map-toggle_all_tags {
         display: block;
       }
     }

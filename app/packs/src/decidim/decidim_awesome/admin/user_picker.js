@@ -2,7 +2,7 @@ import "select2"
 import "stylesheets/decidim/decidim_awesome/admin/user_picker.scss"
 
 $(() => {
-    $('select.multiusers-select').each(function() {
+  $("select.multiusers-select").each(function() {
     const url = $(this).attr("data-url");
     $(this).select2({
       ajax: {

@@ -7,24 +7,26 @@ $(() => {
     const scope = $link.data("scope");
     const $target = $(`span.awesome-auto-edit[data-scope="${scope}"]`);
     const $constraints = $(`.constraints-editor[data-key="${scope}"]`);
-    if($target.length == 0) return;
+    if ($target.length == 0) {
+      return;
+    }
 
-    const key = $target.data('key');
-    const attribute = $target.data('var');
+    const key = $target.data("key");
+    const attribute = $target.data("var");
     const $hidden = $(`[name="config[${attribute}][${key}]"]`);
     const $multiple = $(`[name="config[${attribute}][${key}][]"]`);
     const $container = $(`.${attribute}_container[data-key="${key}"]`);
-    const $delete = $('.delete-box', $container);
+    const $delete = $(".delete-box", $container);
 
-    const rebuildLabel = (text, scope) => {
+    const rebuildLabel = (text, withScope) => {
       $target.text(text);
       $target.attr("data-key", text);
       $target.data("key", text);
-      if(scope) {
-        $target.attr("data-scope", scope);
-        $target.data("scope", scope);
-        $link.attr("data-scope", scope);
-        $link.data("scope", scope);
+      if (withScope) {
+        $target.attr("data-scope", withScope);
+        $target.data("scope", withScope);
+        $link.attr("data-scope", withScope);
+        $link.data("scope", withScope);
       }
       $link.show();
     };
@@ -38,9 +40,8 @@ $(() => {
       $container.data("key", result.key);
       $container.attr("data-key", result.key);
       $delete.attr("href", $delete.attr("href").replace(`key=${key}`, `key=${result.key}`))
-      console.log("CustomFieldsBuilders", CustomFieldsBuilders);
       CustomFieldsBuilders.forEach((builder) => {
-        if(builder.key == key) {
+        if (builder.key == key) {
           builder.key = result.key;
         }
       });
@@ -50,12 +51,9 @@ $(() => {
     const $input = $(`input.awesome-auto-edit[data-scope="${scope}"]`);
     $link.hide();
     $input.select();
-    $input.on("keypress", (e) => {
-      // if(e.code == "Space") {
-      //   e.preventDefault();
-      // }
-      if(e.code == "Enter" || e.code == "13" || e.code == "10") {
-        e.preventDefault();
+    $input.on("keypress", (evt) => {
+      if (evt.code == "Enter" || evt.code == "13" || evt.code == "10") {
+        evt.preventDefault();
         $.ajax(
           {
             type: "POST",
@@ -69,9 +67,9 @@ $(() => {
               attribute: attribute,
               text: $input.val()
             }
-          })
-          .done((result) => rebuildHmtl(result))
-          .fail((err) => {
+          }).
+          done((result) => rebuildHmtl(result)).
+          fail((err) => {
             console.error("Error saving key", key, "ERR:", err);
             rebuildLabel(key);
           });

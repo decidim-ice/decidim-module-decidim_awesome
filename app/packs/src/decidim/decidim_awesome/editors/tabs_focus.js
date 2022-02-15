@@ -12,7 +12,7 @@ $(() => {
     }
     // fix custom fields if present
     $input = $container.find(".proposal_custom_field:first");
-    if($input.length > 0) {
+    if ($input.length > 0) {
       // saves current data to the hidden field for the lang
       window.DecidimAwesome.CustomFieldsRenderer.storeData();
       // init the current language

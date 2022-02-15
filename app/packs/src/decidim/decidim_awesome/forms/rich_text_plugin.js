@@ -7,9 +7,12 @@
 import {createQuillEditor} from "src/decidim/decidim_awesome/editors/editor"
 
 // configure the class for runtime loading
-if (!window.fbControls) window.fbControls = []
+if (!window.fbControls) {
+  window.fbControls = []
+}
 window.fbControls.push(function(controlClass, allControlClasses) {
   const controlTextarea = allControlClasses.textarea
+
   /**
    * DecidimRichtext control class
    *
@@ -18,16 +21,17 @@ window.fbControls.push(function(controlClass, allControlClasses) {
    *       from the hidden input name same as the field with the suffix '-input'
    */
   class controlRichtext extends controlTextarea {
+
     /**
      * Class configuration - return the icons & label related to this control
      * @returndefinition object
      */
     static get definition() {
       return {
-        icon: '📝',
+        icon: "📝",
         i18n: {
-          default: 'Rich Text Editor'
-        },
+          default: "Rich Text Editor"
+        }
       }
     }
 
@@ -46,27 +50,27 @@ window.fbControls.push(function(controlClass, allControlClasses) {
       const { value, userData, ...attrs } = this.config;
 
       // hidden input for storing the current HTML value of the div
-      this.inputId = this.id + '-input';
+      this.inputId = `${this.id}-input`;
       // console.log("build plugin: this",this)
-      this.input = this.markup('input', null, {
+      this.input = this.markup("input", null, {
         name: name,
         id: this.inputId,
-        type: 'hidden',
-        value: (userData && userData[0]) || value || ''
+        type: "hidden",
+        value: (userData && userData[0]) || value || ""
       });
 
       const css = this.markup(
-        'style',
+        "style",
         `
         #${attrs.id} { height: auto; min-height: 6rem; padding-left: 0; padding-right: 0; }
         #${attrs.id} div.ql-container { height: ${attrs.rows || 1}rem; }
         #${attrs.id} p.help-text { margin-top: .5rem; }
         `,
-        { type: 'text/css' }
+        { type: "text/css" }
       );
       // console.log("build value", value, "userData", userData, "attrs", attrs, attrs.id);
-      this.wrapper = this.markup('div', null, attrs);
-      return this.markup('div', [css, this.input, this.wrapper], attrs);
+      this.wrapper = this.markup("div", null, attrs);
+      return this.markup("div", [css, this.input, this.wrapper], attrs);
     }
 
     /**
@@ -99,5 +103,5 @@ window.fbControls.push(function(controlClass, allControlClasses) {
   }
 
   // register Decidim richtext as a richtext control
-  controlTextarea.register('richtext', controlRichtext, 'textarea');
+  controlTextarea.register("richtext", controlRichtext, "textarea");
 })

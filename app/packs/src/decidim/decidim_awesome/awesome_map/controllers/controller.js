@@ -15,9 +15,9 @@ export default class Controller {
   }
 
   getLabel() {
-    let text = this.awesomeMap.config.menu.mergeComponents || !this.component.name ? 
-               window.DecidimAwesome.texts[this.component.type]
-               : this.component.name;
+    let text = this.awesomeMap.config.menu.mergeComponents || !this.component.name 
+      ? window.DecidimAwesome.texts[this.component.type]
+      : this.component.name;
     return `<span class="awesome_map-component" id="awesome_map-component_${this.component.id}" title="0" data-layer="${this.component.type}">${text}</span>`
   }
 
@@ -27,10 +27,6 @@ export default class Controller {
       // console.log(`all ${this.component.type} loaded`, this)
       this._onFinished();
     };
-  }
-
-  getFetcher() {
-    this.fetcher;
   }
 
   addControls() {
@@ -43,6 +39,7 @@ export default class Controller {
   }
 
   addMarker(marker, node) {
+
     /* theorically, this should be enough to create popups on markers but looks that there is som bug in leaflet that sometimes prevents this to work
     let node = document.createElement("div");
     // console.log("addMarker", marker, "node", node)
@@ -83,7 +80,7 @@ export default class Controller {
   addMarkerCategory(marker, category) {
     // Add to category layer
     const cat = this.awesomeMap.getCategory(category);
-    if(this.awesomeMap.layers[cat.id]) {
+    if (this.awesomeMap.layers[cat.id]) {
       marker.addTo(this.awesomeMap.layers[cat.id].group);
       this.awesomeMap.controls.showCategory(cat);
     }   
@@ -91,7 +88,7 @@ export default class Controller {
 
   addMarkerHashtags(marker, hashtags) {
     // Add hashtag layer
-    if(this.awesomeMap.config.menu.hashtags) {
+    if (this.awesomeMap.config.menu.hashtags) {
       this.awesomeMap.controls.addHashtagsControls(hashtags, marker);
     }
   }

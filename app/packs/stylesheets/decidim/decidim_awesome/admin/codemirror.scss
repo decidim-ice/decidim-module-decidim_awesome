@@ -1,13 +1,13 @@
 @import "codemirror/lib/codemirror.css";
 
-.awesome-edit-config{
+.awesome-edit-config {
   .scoped_styles_container,
-  .proposal_custom_fields_container{
-    .form-error{
+  .proposal_custom_fields_container {
+    .form-error {
       margin: 0;
     }
 
-    >.CodeMirror{
+    >.CodeMirror {
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
       border-top: .5em solid #e0e0e0;
@@ -19,8 +19,8 @@
       resize: vertical;
       overflow: vertical !important;
 
-      >.CodeMirror-scroll{
-        >.CodeMirror-gutters{
+      >.CodeMirror-scroll {
+        >.CodeMirror-gutters {
           background: #e0e0e0;
         }
       }
