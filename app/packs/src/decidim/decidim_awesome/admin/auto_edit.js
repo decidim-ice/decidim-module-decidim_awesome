@@ -51,9 +51,9 @@ $(() => {
     const $input = $(`input.awesome-auto-edit[data-scope="${scope}"]`);
     $link.hide();
     $input.select();
-    $input.on("keypress", () => {
-      if (e.code == "Enter" || e.code == "13" || e.code == "10") {
-        e.preventDefault();
+    $input.on("keypress", (evt) => {
+      if (evt.code == "Enter" || evt.code == "13" || evt.code == "10") {
+        evt.preventDefault();
         $.ajax(
           {
             type: "POST",
