@@ -319,7 +319,7 @@ fr:
             (par exemple à la fin de <code>config/initializers/decidim.rb</code>) les lignes suivantes :<br>
             <br>
             <pre># Configuration Api
-            Decidim::Api::Schema. ax_complexity = 5000
+            Decidim::Api::Schema.max_complexity = 5000
             Decidim::Api::Schema.max_depth = 50</pre>
           error:
             unavailable: La carte n'est pas disponible. Veuillez configurer le géocodage pour activer ce composant.
