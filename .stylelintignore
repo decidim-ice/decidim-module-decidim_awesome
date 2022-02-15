@@ -1,1 +1,2 @@
-/app/packs/stylesheets/vendor/*
+app/packs/stylesheets/vendor/*
+vendor/*
