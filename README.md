@@ -162,8 +162,11 @@ And then execute:
 ```bash
 bundle
 bundle exec rails decidim_decidim_awesome:install:migrations
+bundle exec rails decidim_decidim_awesome:webpacker:install
 bundle exec rails db:migrate
 ```
+
+> NOTE: the `decidim_decidim_awesome:webpacker:install` is only necessary for Decidim versions starting at 0.25.
 
 If you are upgrading from a version prior to 0.8, make sure to visit the URL `/admin/decidim_awesome/checks` and run image migrations for the old images:
 
