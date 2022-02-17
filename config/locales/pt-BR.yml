@@ -28,6 +28,8 @@ pt-BR:
         participatory_space_slug: Somente em
       custom_redirect:
         active: Ativo
+        origin: Origem
+        status: Status
       menu:
         position: Posição
         raw_label: Rótulo
@@ -90,6 +92,7 @@ pt-BR:
               CSS: O cabeçalho não contém as entradas de folha de estilo <link> necessárias. Para resolvê-lo, você pode adicioná-lo manualmente ao seu _head.html.erb
               JavaScript: O cabeçalho não contém as entradas Javascript <script> necessárias. Para resolvê-lo, você pode adicioná-las manualmente ao seu custom admin/_header.html.erb
             head_tags: Tags incríveis incluídas no cabeçalho do aplicativo
+            images_migrated: Imagens migradas para o ActiveStorage
             title: Checar compatibilidade do sistema
         config:
           caution: 'NOTA: Este recurso modifica fortemente alguns comportamentos padrão que podem levar a resultados inesperados. Use-o com cuidado!'
@@ -187,9 +190,12 @@ pt-BR:
             save: Salvar
           new:
             save: Salvar
+          update:
+            error: Erro ao atualizar redirecionamento! %{error}
         menu:
           admins: Administradores com escopo
           checks: Compatibilidade de sistema
+          custom_redirects: Redirecionamentos personalizados
           editors: Hacks do editor
           livechat: Chat Ao Vivo
           menu_hacks: Ajustes do menu
