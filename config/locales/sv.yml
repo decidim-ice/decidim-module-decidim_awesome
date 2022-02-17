@@ -11,30 +11,45 @@ sv:
         intergram_color: Huvudfärg för widget
         intergram_intro_message: Första meddelandet när användaren öppnar chatten för första gången
         intergram_require_login: Endast för inloggade användare
+        proposal_custom_fields: Tilläggsfält %{id}
+        scoped_styles: Tilläggsstilar %{id}
       constraint:
+        component_id: eller specifikt i
         participatory_space_slug: Endast i
+      custom_redirect:
+        active: Aktiv
+        destination: Mål
+        origin: Ursprung
+        status: Status
       menu:
         position: Position
-        raw_label: Etikett
+        raw_label: Text
+        target: Öppna i
         url: Webbadress
         visibility: Synlighet
+      proposal:
+        proposal_custom_fields: Tilläggsfält
   decidim:
     admin:
       menu:
         decidim_awesome: Decidim Awesome
     components:
       awesome_iframe:
+        name: Fullskärm Iframe
         settings:
           global:
             announcement: Meddelande
             iframe: Iframe kod
           step:
+            announcement: Meddelande
             iframe: Iframe kod
       awesome_map:
         name: Karta
         settings:
           global:
             announcement: Meddelande
+            map_height: Karthöjd (px)
+            menu_amendments: Visa ändringsförslag
             menu_meetings: Visa möten
           step:
             announcement: Meddelande
@@ -42,13 +57,57 @@ sv:
             show_evaluating: Visa förslag som utvärderas
     decidim_awesome:
       admin:
+        checks:
+          index:
+            decidim-admin: Från Admin modul
+            decidim-core: Från Core modul
+            decidim-proposals: Från Proposals modul
+            decidim_version: Decidim version %{version}
+            images_migrated: Bilder migrerade till ActiveStorage
         config:
+          constraints:
+            add_condition: Lägg till begränsning
+            always: Alltid
+            delete: Radera
+            edit: Redigera
           form:
+            edit_label: Byt namn på etikett
             help:
               use_markdown_editor: This will substitute the Quill WYSIWYG editor, use a Markdown editor instead. Text will be rendered as HTML in the public pages (text in database will be saved as markdown text)
+          form_scoped_styles:
+            remove: Ta bort CSS-rutan
+          process_groups: Dialoggrupper
+          show:
+            title: Tweaks för %{setting}
+            update: Uppdatera konfiguration
+        constraints:
+          new:
+            cancel: Avbryt
+            constraint: Ny begränsning
+            save: Spara
+          show:
+            cancel: Avbryt
+            constraint: Redigera begränsning
+            save: Spara
+        custom_redirects:
+          edit:
+            save: Spara
+            title: Redigera omdirigering
+          index:
+            check_redirections: "✔ Kontrollera omdirigeringar"
+            edit: Redigera omdirigering
+            new: Ny omdirigering
+            remove: Ta bort omdirigering
+            title: Anpassade omdirigeringar
+          new:
+            save: Spara
+            title: Ny omdirigering
         menu:
+          admins: Begränsade administratörer
           checks: System compatibility
+          custom_redirects: Anpassade omdirigeringar
           editors: Editor hacks
+          livechat: Live Chat
           menu_hacks: Menu tweaks
           proposals: Proposals hacks
           styles: Custom styles
@@ -65,14 +124,30 @@ sv:
               default: Synligt
               hidden: Alltid dolt
               logged: Endast synlig för inloggade användare
+          index:
+            edit: Redigera
+            new: Ny menyknapp
+            remove: Ta bort menyknapp
+            remove_hack: Ta bort menyknapp
+            title: Huvudmeny
           new:
             save: Spara
+            title: Ny menyknapp
+      config:
+        intergram:
+          title_closed: Klicka här för att chatta!
+          title_open: Låt oss chatta!
       content_blocks:
         map:
+          map_height: Karthöjd (px)
+          map_settings: Kartinställningar
+          menu_amendments: Visa ändringsförslag
           menu_meetings: Visa möten
           name: Karta
           show_accepted: Visa godkända förslag
           show_evaluating: Visa förslag som utvärderas
+          text_settings: Textinställningar
+          title: Titel
       map_component:
         map:
           show:
@@ -80,7 +155,15 @@ sv:
             view_proposal: Visa förslag
   layouts:
     decidim:
+      admin:
+        decidim_awesome:
+          title: Decidim Tweaks
       decidim_awesome:
         awesome_config:
+          amendments: Ändringsförslag
+          categories: Kategorier
+          hashtags: Hashtaggar
+          items: föremål
           meetings: Möten
           proposals: Förslag
+          select_deselect_all: Markera/avmarkera alla
