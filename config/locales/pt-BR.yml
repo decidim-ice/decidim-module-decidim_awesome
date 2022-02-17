@@ -30,6 +30,7 @@ pt-BR:
         active: Ativo
         destination: Destino
         origin: Origem
+        pass_query: Passar a string de consulta ao destino
         status: Status
       menu:
         position: Posição
@@ -205,9 +206,17 @@ pt-BR:
           form:
             destination_help: Rotas absolutas (começam com "/") ou URLs externas (http://..)
             origin_help: Apenas rotas absolutas, comece com "/"
+            pass_query_help: |
+              Ative esta opção se você quiser que a string de consulta seja copiada para o destino.<br>
+              Por exemplo, se você tiver configurado /my-origin => /my-destination, uma solicitação para /my-origin?locale=ca será redirecionada para "/my-destination?locale=ca".
           index:
             check_redirections: "✔ Verificar redirecionamentos"
             confirm_destroy: Tem certeza que deseja remover este redirecionamento?
+            description: |
+              Você pode definir qualquer rota (começando com <code>/</code>) para redirecionar qualquer visitante para uma URL de destino. Destino de<br>
+              pode ser um caminho absoluto (ex: <code>/processes/some-process</code>) ou comece com <code>https://</code> (ex: <code>http://decidim. rg</code>)<br><br>
+              Leve em conta que um redirecionamento só funciona se nenhuma outra rota o corresponder exatamente. Não é possível substituir as rotas originais (esta configuração é by design).<br>
+              Se não tiver certeza, use o botão de verificar redirecionamentos para testar incompatibilidades.
             edit: Editar redirecionamento
             new: Novo redirecionamento
             remove: Remover redirecionamento
