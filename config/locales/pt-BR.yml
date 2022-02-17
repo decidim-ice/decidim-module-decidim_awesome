@@ -9,7 +9,7 @@ pt-BR:
         auto_save_forms: Salvar formulários automaticamente no armazenamento local
         intergram_auto_no_response: Uma mensagem que é enviada um minuto após o usuário enviar sua primeira mensagem e nenhuma resposta foi recebida
         intergram_auto_response: Uma mensagem que é enviada imediatamente após o usuário enviar sua primeira mensagem
-        intergram_chat_id: Id do Chat
+        intergram_chat_id: ID do Chat
         intergram_color: Cor do widget
         intergram_for_admins: Ativar Chat do Intergram no backend do administrador
         intergram_intro_message: Primeira mensagem quando o usuário abre o bate-papo pela primeira vez
@@ -28,6 +28,7 @@ pt-BR:
         participatory_space_slug: Somente em
       custom_redirect:
         active: Ativo
+        destination: Destino
         origin: Origem
         status: Status
       menu:
@@ -92,7 +93,13 @@ pt-BR:
               CSS: O cabeçalho não contém as entradas de folha de estilo <link> necessárias. Para resolvê-lo, você pode adicioná-lo manualmente ao seu _head.html.erb
               JavaScript: O cabeçalho não contém as entradas Javascript <script> necessárias. Para resolvê-lo, você pode adicioná-las manualmente ao seu custom admin/_header.html.erb
             head_tags: Tags incríveis incluídas no cabeçalho do aplicativo
+            image_migrations_started: O processo de migração de imagens foi iniciado com sucesso
             images_migrated: Imagens migradas para o ActiveStorage
+            pending_image_migrations: |
+              Desde a versão 0.25, o Decidim utiliza uma nova tecnologia para fazer o upload de arquivos.<br>
+              Parece que essa instalação precisa migrar <strong>%{total}</strong> das imagens antigas para o novo sistema.<br>
+              Você pode iniciar o processo agora e ele será realizado em segundo plano.
+            start_image_migrations: "\U0001F449 Inicie o processo de migração agora"
             title: Checar compatibilidade do sistema
         config:
           caution: 'NOTA: Este recurso modifica fortemente alguns comportamentos padrão que podem levar a resultados inesperados. Use-o com cuidado!'
@@ -186,12 +193,33 @@ pt-BR:
             error: Erro ao atualizar condição de caso
             success: Condição de caso aplicadas com sucesso
         custom_redirects:
+          create:
+            error: Erro ao criar redirecionamento! %{error}
+            success: Redirecionamento criado com sucesso
+          destroy:
+            error: Erro ao remover redirecionamento! %{error}
+            success: Redirecionamento removido com sucesso
           edit:
             save: Salvar
+            title: Editar redirecionamento
+          form:
+            destination_help: Rotas absolutas (começam com "/") ou URLs externas (http://..)
+            origin_help: Apenas rotas absolutas, comece com "/"
+          index:
+            check_redirections: "✔ Verificar redirecionamentos"
+            confirm_destroy: Tem certeza que deseja remover este redirecionamento?
+            edit: Editar redirecionamento
+            new: Novo redirecionamento
+            remove: Remover redirecionamento
+            title: Redirecionamentos personalizados
           new:
             save: Salvar
+            title: Novo redirecionamento
+          origin_exists: A mesma origem já está configurada, por favor edite-a ao invés de criá-la novamente.
+          origin_missing: Esta origem não foi encontrada na lista
           update:
             error: Erro ao atualizar redirecionamento! %{error}
+            success: Redirecionamento atualizado com sucesso
         menu:
           admins: Administradores com escopo
           checks: Compatibilidade de sistema
