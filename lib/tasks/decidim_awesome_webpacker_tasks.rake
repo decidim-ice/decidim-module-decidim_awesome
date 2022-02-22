@@ -20,6 +20,8 @@ namespace :decidim_decidim_awesome do
 
     def install_decidim_awesome_npm
       decidim_awesome_npm_dependencies.each do |type, packages|
+        puts "install NPM packages. You can also do this manually with this command:"
+        puts "npm i --save-#{type} #{packages.join(" ")}"
         system! "npm i --save-#{type} #{packages.join(" ")}"
       end
     end

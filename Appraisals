@@ -1,10 +1,10 @@
 appraise "decidim-0.26" do
-  gem "decidim", "0.26.0.rc2"
-  gem "decidim-admin", "0.26.0.rc2"
-  gem "decidim-core", "0.26.0.rc2"
+  gem "decidim", "0.26.0"
+  gem "decidim-admin", "0.26.0"
+  gem "decidim-core", "0.26.0"
 
   group :development, :test do
-    gem "decidim-dev", "0.26.0.rc2"
+    gem "decidim-dev", "0.26.0"
   end
 end
 
