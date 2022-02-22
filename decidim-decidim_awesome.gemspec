@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.summary = "A decidim decidim_awesome module"
   s.description = "Some usability and UX tweaks for Decidim."
 
-  s.files = Dir["{app,config,lib,vendor,db}/**/*", "LICENSE-AGPLv3.txt", "Rakefile", "README.md"]
+  s.files = Dir["{app,config,lib,vendor,db}/**/*", "LICENSE-AGPLv3.txt", "Rakefile", "package.json", "README.md", "CHANGELOG.md"]
 
   s.add_dependency "decidim-admin", Decidim::DecidimAwesome::COMPAT_DECIDIM_VERSION
   s.add_dependency "decidim-core", Decidim::DecidimAwesome::COMPAT_DECIDIM_VERSION
