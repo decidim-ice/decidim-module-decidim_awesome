@@ -71,7 +71,7 @@ export default class ControlsUI {
       const label = `<i class="awesome_map-category_${category.id}"></i> ${category.name}`;
       this.awesomeMap.layers[category.id] = {
         label: label,
-        group: L.featureGroup.subGroup(this.awesomeMap.cluster)
+        group: new L.FeatureGroup.SubGroup(this.awesomeMap.cluster)
       };
       this.awesomeMap.layers[category.id].group.addTo(this.awesomeMap.map);
       $("#awesome_map-categories-control .categories-container").append(`<label data-layer="${category.id}" class="awesome_map-category-${category.id}${category.parent
@@ -122,12 +122,12 @@ export default class ControlsUI {
             label: hashtag.name,
             group: new L.FeatureGroup.SubGroup(this.awesomeMap.cluster)
           };
-          this.awesomeMap.layers[hashtag.tag].group.addTo(this.awesomeMap.map);
+          this.awesomeMap.map.addLayer(this.awesomeMap.layers[hashtag.tag].group);
           $("#awesome_map-hashtags-control .hashtags-container").append(`<label data-layer="${hashtag.tag}" class="awesome_map-hashtag-${hashtag.tag}"><input type="checkbox" class="awesome_map-hashtags-selector" checked><span>${hashtag.name}</span></label>`);
           // Call a trigger, might be in service for customizations
           this.onHashtag(hashtag, $("#awesome_map-hashtags-control .hashtags-container"));
         }
-        marker.addTo(this.awesomeMap.layers[hashtag.tag].group);
+        this.awesomeMap.layers[hashtag.tag].group.addLayer(marker);
 
         const $label = $(`label.awesome_map-hashtag-${hashtag.tag}`);
         // update number of items

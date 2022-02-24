@@ -10,8 +10,7 @@ export default class Controller {
       group: new L.FeatureGroup.SubGroup(this.awesomeMap.cluster)
     };
     this.onFinished = () => {};
-    this.allMarkers = [];
-
+    this.allNodes = [];
   }
 
   getLabel() {
@@ -27,6 +26,21 @@ export default class Controller {
       // console.log(`all ${this.component.type} loaded`, this)
       this._onFinished();
     };
+    this.fetcher.onCollection = (collection) =>  {
+      if (collection && collection.edges)  { 
+        // Add markers to the main cluster group
+        try {
+          this.awesomeMap.cluster.addLayers(collection.edges.map((item) => item.node.marker));
+        } catch (e) {
+          console.error("Failed marker collection assignation", collection);
+        }
+        // subgroups don't have th addLayers utility
+        collection.edges.forEach((item) => {
+          this.addMarkerCategory(item.node.marker, item.node.category);
+          this.addMarkerHashtags(item.node.marker, item.node.hashtags);
+        });
+      }
+    };
   }
 
   addControls() {
@@ -40,16 +54,20 @@ export default class Controller {
 
   addMarker(marker, node) {
 
-    /* theorically, this should be enough to create popups on markers but looks that there is som bug in leaflet that sometimes prevents this to work
-    let node = document.createElement("div");
-    // console.log("addMarker", marker, "node", node)
-    node.innerHTML = $.templates(`#${this.templateId}`).render(node);
-    marker.bindPopup(node, {
+    /* 
+    theorically, this should be enough to create popups on markers but it looks that
+    there is some bug in leaflet that sometimes prevents this to work
+    */
+    /*
+    let dom = document.createElement("div");
+    // console.log("addMarker", marker, "dom", dom)
+    dom.innerHTML = $.templates(`#${this.templateId}`).render(node);
+    marker.bindPopup(dom, {
       maxwidth: 640,
       minWidth: 500,
       keepInView: true,
       className: "map-info"
-    }); */
+    }); //*/
 
     marker.on("click", () => {
       let dom = document.createElement("div");
@@ -62,40 +80,40 @@ export default class Controller {
         className: "map-info"
 
       }).setLatLng(marker.getLatLng()).setContent(dom);
-      this.awesomeMap.map.addlayer(pop);
+      this.awesomeMap.map.addLayer(pop);
     });
-
-    this.controls.group.addLayer(marker);
-
-    this.allMarkers.push({
-      marker: marker,
-      component: this.component,
-      node: node
-    });
-
-    this.addMarkerCategory(marker, node.category);
-    this.addMarkerHashtags(marker, node.hashtags);
+    node.marker = marker;
+    node.component = this.component;
+    this.allNodes.push(node);
   }
 
   addMarkerCategory(marker, category) {
     // Add to category layer
     const cat = this.awesomeMap.getCategory(category);
     if (this.awesomeMap.layers[cat.id]) {
-      marker.addTo(this.awesomeMap.layers[cat.id].group);
-      this.awesomeMap.controls.showCategory(cat);
+      try {
+        this.awesomeMap.layers[cat.id].group.addLayer(marker);
+        this.awesomeMap.controls.showCategory(cat);
+      } catch (e) {
+        console.error("Failed category marker assignation", marker, e.message);
+      }
     }   
   }
 
   addMarkerHashtags(marker, hashtags) {
     // Add hashtag layer
     if (this.awesomeMap.config.menu.hashtags) {
-      this.awesomeMap.controls.addHashtagsControls(hashtags, marker);
+      try {
+        this.awesomeMap.controls.addHashtagsControls(hashtags, marker);
+      } catch (e) {
+        console.error("Failed hashtags marker assignation", marker, e.message);
+      }
     }
   }
 
   // Override if needed (call this.onFinished() at the end!)
   _onFinished() {
-    this.awesomeMap.controls.updateStats(`component_${this.component.id}`, this.allMarkers.length);
+    this.awesomeMap.controls.updateStats(`component_${this.component.id}`, this.allNodes.length);
     this.onFinished();
   }
 
