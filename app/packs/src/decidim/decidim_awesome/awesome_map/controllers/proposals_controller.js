@@ -57,12 +57,12 @@ export default class ProposalsController extends Controller {
 
   _onFinished() {
     const iterableAmendments = Object.entries(this.amendments);
-    this.awesomeMap.controls.updateStats(`component_${this.component.id}`, this.allMarkers.length - iterableAmendments.length);
+    this.awesomeMap.controls.updateStats(`component_${this.component.id}`, this.allNodes.length - iterableAmendments.length);
     this.awesomeMap.controls.updateStats(`amendments_${this.component.id}`, iterableAmendments.length);
 
     // Process all amendments
     iterableAmendments.forEach((amendment) => {
-      const marker = this.allMarkers.find((item) => item.node.id == amendment[0]);
+      const marker = this.allNodes.find((node) => node.id == amendment[0]);
       const parent = amendment[1];
       // console.log("marker", marker, "parent proposal", parent)
       // add marker to amendments layers and remove it from proposals

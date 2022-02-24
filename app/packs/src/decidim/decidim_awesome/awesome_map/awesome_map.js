@@ -40,7 +40,6 @@ export default class AwesomeMap {
     this.cluster = new L.MarkerClusterGroup();
     this.map.addLayer(this.cluster);
     this.controls = new ControlsUI(this);
-    this.allMarkers = [];
     this.onFinished = () => {};
     this.controllers = {};
     this.loading = [];

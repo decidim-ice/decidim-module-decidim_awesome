@@ -8,6 +8,7 @@ export default class Fetcher {
     };
     this.onFinished = () => {};
     this.onNode = () => {};
+    this.onCollection = () => {};
     this.hashtags = [];
 
     this.collection = this.controller.component.type;
@@ -42,6 +43,8 @@ export default class Fetcher {
             this.onNode(node)
           }
         });
+
+        this.onCollection(collection);
 
         if (collection.pageInfo.hasNextPage) {
           this.fetch(collection.pageInfo.endCursor);
@@ -80,7 +83,7 @@ export default class Fetcher {
   collectHashtags(text) {
     let tags = [];
     if (text) {
-      const gids = text.match(/gid:\/\/[^\s<]+/g)
+      const gids = text.match(/gid:\/\/[^\s<&]+/g)
       if (gids) {
         tags = gids.filter((gid) => gid.indexOf("/Decidim::Hashtag/") != -1).map((gid) => {
           const parts = gid.split("/");
@@ -115,7 +118,7 @@ export default class Fetcher {
   }
 
   removeHashtags(text) {
-    return text.replace(/gid:\/\/[^\s<]+/g, "");
+    return text.replace(/gid:\/\/[^\s<&]+/g, "");
   }
 
   appendHtmlHashtags(text, tags) {
