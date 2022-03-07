@@ -313,6 +313,16 @@ ca:
           success: Imatge pujada correctament
       map_component:
         map:
+          api_not_ready: |2
+            <b>Avís:</b> aquesta instal·lació de Decidim té l'API configurada amb una complexitat màxima de <b>%{current_complexity}</b>.
+            Aquest component probablement no funcionarà amb aquesta configuració. Us recomanem que la configureu en un inicialitzador
+            (per exemple, al final de <code>config/initializers/decidim.rb</code>) hi poseu les línies següents:<br>
+            <br>
+            <pre># Configuració de l'API
+            Rails.application.config.to_prepare do
+              Decidim::Api::Schema.max_complexity = 5000
+              Decidim::Api::Schema.max_depth = 50
+            end</pre>
           error:
             unavailable: El mapa no està disponible. SI us plau, configureu la geolocalització en aquesta instal·lació per activar aquest component.
           show:
