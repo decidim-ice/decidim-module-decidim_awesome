@@ -10,6 +10,7 @@ module Decidim
         include NeedsAwesomeConfig
         helper ConfigConstraintsHelpers
         helper SystemCheckerHelpers
+        helper CookiesHelper
 
         layout "decidim/admin/decidim_awesome"
 
@@ -24,11 +25,11 @@ module Decidim
         private
 
         def head
-          @head ||= Nokogiri::HTML(render_to_string(partial: "layouts/decidim/head"))
+          @head ||= Nokogiri::HTML(render_template("layouts/decidim/head"))
         end
 
         def admin_head
-          @admin_head = Nokogiri::HTML(render_to_string(partial: "layouts/decidim/admin/header"))
+          @admin_head = Nokogiri::HTML(render_template("layouts/decidim/admin/header"))
         end
 
         def head_addons(part)
@@ -51,6 +52,12 @@ module Decidim
             ['<%= javascript_pack_tag "decidim_admin_decidim_awesome", defer: false %>',
              '<%= javascript_pack_tag "decidim_decidim_awesome_custom_fields" if awesome_proposal_custom_fields %>'].join("\n")
           end
+        end
+
+        def render_template(partial)
+          render_to_string(partial: partial)
+        rescue ActionView::Template::Error => e
+          flash.now[:alert] = "Partial [#{partial}] has thrown an error: #{e.message}"
         end
       end
     end
