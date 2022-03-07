@@ -313,6 +313,16 @@ fr:
           success: Image ajoutée avec succès
       map_component:
         map:
+          api_not_ready: |2
+            <b>Attention :</b> Cette installation de Decidim a l'API configurée à une complexité maximale de <b>%{current_complexity}</b>.
+            Ce composant ne fonctionnera probablement pas avec cette configuration. Nous vous recommandons de configurer dans un initialiseur
+            (par exemple à la fin de <code>config/initializers/decidim.rb</code>) les lignes suivantes :<br>
+            <br>
+            <pre># Configuration Api
+            Rails.application.config.to_prepare do
+              Decidim::Api::Schema.max_complexity = 5000
+              Decidim::Api::Schema.max_depth = 50
+            end</pre>
           error:
             unavailable: La carte n'est pas disponible. Veuillez configurer le géocodage pour activer ce composant.
           show:
