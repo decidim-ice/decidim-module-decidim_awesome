@@ -378,8 +378,10 @@ en:
             (for instance at the end of the <code>config/initializers/decidim.rb</code>) the following lines:<br>
             <br>
             <pre># Api configuration
-            Decidim::Api::Schema.max_complexity = 5000
-            Decidim::Api::Schema.max_depth = 50</pre>
+            Rails.application.config.to_prepare do
+              Decidim::Api::Schema.max_complexity = 5000
+              Decidim::Api::Schema.max_depth = 50
+            end</pre>
           error:
             unavailable: The map is unavailable. Please configure geocoding to enable
               this component.
