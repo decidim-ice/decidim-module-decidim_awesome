@@ -313,6 +313,16 @@ cs:
           success: Obrázek byl úspěšně nahrán
       map_component:
         map:
+          api_not_ready: |2
+            <b>Upozornění:</b> Tato instalace Decidim má API nastaveno na maximální složitost <b>%{current_complexity}</b>.
+            Tato komponenta pravděpodobně nebude fungovat v této konfiguraci. Doporučujeme nastavit v inicializátoru
+            (například na konci <code>config/initializers/decidim.rb</code>) následující řádky:<br>
+            <br>
+            <pre># Konfigurace Api
+            Rails.application.config.to_prepare do
+              Decidim::Api::Schema.max_complexity = 5000
+              Decidim::Api::Schema.max_depth = 50
+            end</pre>
           error:
             unavailable: Mapa není dostupná. Pro povolení této komponenty nakonfigurujte geocoding.
           show:
