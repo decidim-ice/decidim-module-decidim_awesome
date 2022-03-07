@@ -313,14 +313,6 @@ pt-BR:
           success: Imagem enviada com sucesso
       map_component:
         map:
-          api_not_ready: |
-            <b>Aviso:</b> Esta instalação Decidim tem a API configurada para uma complexidade máxima de <b>%{current_complexity}</b>.
-            Este componente provavelmente não funcionará sob esta configuração. Recomendamos que você configure em um inicializador
-            (por exemplo, no final do <code>config/initializers/decidim. b</code>) as seguintes linhas:<br>
-            <br>
-            <pre># Configuração de Api
-            Decidim::Api::Schema. ax_complexidade = 5000
-            Decidim::Api::Schema.max_depth = 50</pre>
           error:
             unavailable: O mapa está indisponível. Por favor configure a geocodificação para habilitar este componente.
           show:
