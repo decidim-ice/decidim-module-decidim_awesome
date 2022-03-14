@@ -46,7 +46,7 @@ ja:
         decidim_awesome: Decidim awesome
     components:
       awesome_iframe:
-        name: 全画面 Iframe
+        name: 全画面 iframe
         settings:
           global:
             announcement: アナウンス
