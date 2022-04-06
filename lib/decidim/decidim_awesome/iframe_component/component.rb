@@ -5,7 +5,7 @@ require "decidim/components/namer"
 Decidim::DecidimAwesome.register_component(:awesome_iframe) do |component|
   component.engine = Decidim::DecidimAwesome::IframeComponent::Engine
   component.admin_engine = Decidim::DecidimAwesome::IframeComponent::AdminEngine
-  component.icon = "decidim/meetings/icon.svg" # TODO: create a Icon
+  component.icon = "media/images/decidim_meetings.svg" # TODO: create a Icon
   component.permissions_class_name = "Decidim::DecidimAwesome::Permissions"
 
   # These actions permissions can be configured in the admin panel
