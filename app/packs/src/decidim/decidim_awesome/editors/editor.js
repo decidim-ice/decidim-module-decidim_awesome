@@ -84,6 +84,7 @@ export function createQuillEditor(container) {
       }
     }
   };
+
   const $input = $(container).siblings('input[type="hidden"]');
   container.innerHTML = $input.val() || "";
   const token = $('meta[name="csrf-token"]').attr("content");

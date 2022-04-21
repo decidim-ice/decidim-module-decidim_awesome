@@ -68,8 +68,9 @@ window.fbControls.push(function(controlClass, allControlClasses) {
         `,
         { type: "text/css" }
       );
-      // console.log("build value", value, "userData", userData, "attrs", attrs, attrs.id);
-      this.wrapper = this.markup("div", null, attrs);
+      const wrapper_attrs = {...attrs, "data-toolbar": "full" };
+      // console.log("build value", value, "userData", userData, "attrs", attrs, attrs.id, "wrapper_attrs", wrapper_attrs);
+      this.wrapper = this.markup("div", null, wrapper_attrs);
       return this.markup("div", [css, this.input, this.wrapper], attrs);
     }
 

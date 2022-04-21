@@ -183,7 +183,6 @@ Or check your migration status with:
 RAILS_ENV=production bin/rails decidim_awesome:active_storage_migrations:check_migration_from_carrierwave
 ```
 
-
 The correct version of Decidim Awesome should resolved automatically by the Bundler.
 However you can force some specific version using `gem "decidim-decidim_awesome", "~> 0.8.0"` in the Gemfile.
 
