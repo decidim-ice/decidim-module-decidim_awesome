@@ -1,11 +1,208 @@
 de:
+  activemodel:
+    attributes:
+      config:
+        proposal_custom_fields: 'Eingabefeld #%{id}'
+      proposal:
+        proposal_custom_fields: Eingabefelder
   decidim:
+    admin:
+      menu:
+        decidim_awesome: Decidim Awesome
     decidim_awesome:
+      admin:
+        checks:
+          index:
+            decidim-admin: decidim-admin
+        config:
+          caution: 'HINWEIS: Mit dieser Funktion werden einige Standardverhaltensweisen stark verändert, was zu unerwarteten Ergebnissen führen kann. Verwenden Sie sie mit Vorsicht!'
+          constraints:
+            add_condition: Einschränkung hinzufügen
+            always: Immer
+            title: 'Einschränkungen'
+          create_proposal_custom_field:
+            error: Beim Erstellen eines neuen Eingabefeldes ist ein Fehler aufgetreten! %{error}
+            success: 'Eingabefeld %{key} erfolgreich erstellt!'
+          destroy_proposal_custom_field:
+            error: Das Eingabefeld konnte aufgrund eines Fehlers nicht entfernt werden! %{error}
+            success: 'Das Eingabefeld %{key} wurde erfolgreich entfernt.'
+          form:
+            help:
+              allow_images_in_full_editor: Bilder im vollen Editor erlauben
+              allow_images_in_markdown_editor: Bilder im Markdown Editor erlauben
+              allow_images_in_proposals: Bilder in Vorschlägen erlauben
+              allow_images_in_small_editor: Bilder in kleinem Editor erlauben
+              auto_save_forms: Formulare automatisch speichern
+              drag_and_drop_supported: Drag and Drop unterstützen
+              intergram_about: Über Intergram
+              intergram_config: Intergram Konfiguration
+              proposal_custom_fields: Erstelle eigene Eingabefelder für das Vorschlagsmodul. Du kannst die Funktion auf einzelne Prozesse / Module beschränken.
+              proposal_custom_fields_example: Die Daten werden in einem XML-Objekt unter Verwendung kompatibler HTML-Attribute (dl,dt,dd-Elemente) gespeichert, die den "body" in einem normalen Vorschlag ersetzen.
+              scoped_admins: Befördern Sie normale Benutzer zu Administratoren, die nur bestimmte Teile der öffentlichen Seite verwalten können (verwenden Sie dazu den Editor für Einschränkungen). Beachten Sie, dass Benutzer, die bereits reguläre Administratorrechte haben, ignoriert werden. For instance, if having configured /my-origin => /my-destination, a request to /my-origin?locale=ca  will be redirected to "/my-destination?locale=ca".
+              scoped_styles: Erstellen Sie benutzerdefinierte CSS, die nur in bestimmten Bereichen der öffentlichen Seite gelten (vewenden Sie dazu die Einschränkungen)
+              scoped_styles_variables: 'Sie können die folgenden CSS-Variablen für die benutzerdefinierter Farben der Organisation verwenden:'
+              use_markdown_editor: Markdown Editor benutzen
+          form_proposal_custom_fields:
+            new: Neues Eingabefeld
+            remove: Eingabefeld entfernen
+            sure_to_remove: Bist du sicher, dass du dieses Eingabefeld entfernen möchtest?
+          form_scoped_admins:
+            new: Hinzufügen einer neuen "Eingeschränkte Admins"-Gruppe
+            remove: Diese Gruppe "Eingeschränkte Admins" entfernen
+          form_scoped_styles:
+            new: Neue CSS Box hinzufügen
+            remove: CSS Box entfernen
+            sure_to_remove: Sind Sie sicher, dass Sie diese CSS-Box entfernen möchten?
+          none: "⛔ Niemals! - Deaktivieren Sie jede andere Einschränkung"
+          process_groups: Prozessgruppen
+          rich_text_editor_in_public_views: 'Warnung: "Erweiterter Text Editor für Teilnehmer" ist aktiviert, diese Option ist inaktiv. Bitte benutzen Sie die Editor Hacks, um Bilder in Vorschlägen zu aktivieren.'
+          show:
+            title: Decidim Awesome
+            update: Aktualisieren
+          system: Überall ausser...
+          update:
+            error: Fehler beim Aktualisieren der Konfiguration! %{error}
+            success: Konfiguration erfolgreich aktualisiert
+        constraints:
+          destroy:
+            error: Es gab einen Fehler beim Löschen der Einschränkung
+            success: Einschränkung erfolgreich entfernt
+        custom_redirects:
+          create:
+            error: Fehler beim Erstellen der Umleitung! %{error}
+            success: Umleitung erfolgreich erstellt
+          destroy:
+            error: Fehler beim Entfernen der Umleitung! %{error}
+            success: Umleitung erfolgreich entfernt
+          edit:
+            save: Sichern
+            title: Umleitung bearbeiten
+          form:
+            destination_help: Absolute Pfade (beginnen mit "/") oder externe URLs (http://..)
+            origin_help: Nur absolute Pfade, beginnen mit "/"
+            pass_query_help: |
+              Aktivieren Sie diese Option, wenn Sie möchten, dass der Abfrage-String an das Ziel kopiert wird.<br> Wenn Sie zum Beispiel "/my-origin" => "/my-destination" konfiguriert haben, wird eine Anfrage an "/my-origin?locale=ca" an "/my-destination?locale=ca" weitergeleitet.
+          index:
+            check_redirections: "✔ Umleitungen prüfen"
+            confirm_destroy: Sind Sie sicher, dass Sie diese Umleitung entfernen möchten?
+            description: |
+              Sie können eine beliebige Route (beginnend mit <code>/</code>) definieren, um jeden Besucher zu einer Ziel-URL umzuleiten. <br> Ziel kann ein absoluter Pfad sein (z.B.: <code>/processes/ein-prozess</code>) oder mit <code>https://</code> (z.B.: <code>http://decidim: org</code>) beginnen.<br><br> Berücksichtigen Sie, dass eine Umleitung nur funktioniert, wenn keine andere Route passt. Es ist nicht möglich, ursprüngliche Routen außer Kraft zu setzen (dies ist beabsichtigt).<br> Wenn Sie sich nicht sicher sind, verwenden Sie die Funktion «Umleitungen prüfen», um die Umleitung zu testen.
+            edit: Umleitung bearbeiten
+            new: Neue Umleitung
+            remove: Umleitung entfernen
+            title: Benutzerdefinierte Umleitungen
+          new:
+            save: Sichern
+            title: Neue Umleitung
+          origin_exists: Die Quell-URL wurde bereits konfiguriert. Bitte bearbeiten Sie die bestehende Umleitung, anstatt sie neu zu erstellen.
+          origin_missing: Die Quell-URL wurde in der Liste nicht gefunden
+          update:
+            error: Fehler beim Aktualisieren der Umleitung! %{error}
+            success: Umleitung erfolgreich aktualisiert
+        menu:
+          admins: Eingeschränkte Admins
+          checks: Checks
+          custom_redirects: Benutzerdefinierte Umleitungen
+          editors: Editoren
+          menu_hacks: Menüanpassungen
+          proposal_custom_fields: 'Vorschläge: Eigene Eingabefelder'
+          proposals: Vorschläge
+          styles: Eigene Styles
+          surveys: Umfragen
+        menu_hacks:
+          create:
+            error: Fehler beim Erstellen des Menüpunkts! %{error}
+            success: Menüpunkt erfolgreich erstellt
+          destroy:
+            error: Fehler beim Entfernen des Menüpunkts! %{error}
+            success: Menüpunkt erfolgreich entfernt
+          edit:
+            save: Sichern
+            title: Menüpunkt Bearbeiten
+          form:
+            label_help: Übersetzungen werden nicht automatisch erkannt. Füllen Sie alle Felder aus!
+            target:
+              blank: Neues Fenster
+              self: Gleiches Fenster
+            visibility:
+              default: Sichtbar
+              hidden: Immer versteckt
+              logged: Nur für angemeldete Nutzende sichtbar
+              non_logged: Nur sichtbar für nicht angemeldete Nutzende
+          index:
+            confirm_destroy: Sind Sie sicher, dass Sie diese Anpassung entfernen wollen?
+            edit: Bearbeiten
+            new: Neuer Menüpunkt
+            remove: Zusatz entfernen
+            remove_hack: Anpassungen entfernen
+            title: Hauptmenü
+          new:
+            save: Sichern
+            title: Neuer Menüpunkt
+          update:
+            error: Fehler beim Aktualisieren des Menüpunkts! %{error}
+            success: Menüpunkt erfolgreich aktualisiert
+          url_exists: Die gleiche URL ist bereits konfiguriert. bitte bearbeiten Sie diese, anstatt sie neu zu erstellen.
+      config:
+        intergram:
+          auto_no_response: Es scheint, dass im Moment niemand verfügbar ist. Bitte sagen Sie uns, wie wir Sie erreichen können und wir melden uns baldmöglichst bei Ihnen.
+          auto_response: Suche nach dem ersten verfügbaren Admin (Kann eine Weile dauern)
+          intro_message: Hallo! Wie können wir Ihnen helfen?
+          title_closed: Klicken um zu chatten!
+          title_open: Lassen Sie uns chatten!
+      content_blocks:
+        map:
+          collapse: Start mit eingeklapptem Menü
+          map_center: Kartenmitte (Breitengrad, Längengrad)
+          map_center_help: 'Verwenden Sie Dezimalpunkte (z. B. 41.38879, 2.15899). Lassen Sie das Feld leer, um alle Markierungen automatisch einzupassen.'
+          map_height: Höhe der Karte (px)
+          map_settings: Karteneinstellungen
+          map_zoom: Zoom (beliebige Zahl zwischen 0 und 18)
+          map_zoom_help: Gilt nur, wenn ein Kartenzentrum definiert ist
+          menu_amendments: Änderungen anzeigen
+          menu_meetings: Veranstaltungen anzeigen
+          menu_merge_components: Alle Komponenten desselben Typs im Menü zusammenführen
+          name: Awesome Karte
+          show_accepted: Angenommene Vorschläge anzeigen
+          show_evaluating: Bewertung der Vorschläge anzeigen
+          show_not_answered: Nicht beantwortete Vorschläge anzeigen
+          show_rejected: Abgelehnte Vorschläge anzeigen
+          show_withdrawn: Zurückgezogene Vorschläge anzeigen
+          text_settings: Text-Einstellungen
+          title: Titel
+          truncate: Maximale Zeichenanzahl für Popup-Beschreibungen
+      credits: Danksagungen
+      custom_fields:
+        errors:
+          invalid_fields: Der Inhalt konnte nicht geparst werden, wurde aber dem Feld '%{field}' zugewiesen.
+          invalid_xml: 'Der Inhalt konnte nicht geparst werden: DL/DD-Elemente nicht in der XML-Datei gefunden'
       editor_images:
         create:
+          error: Fehler beim Hochladen des Bildes!
           success: "Bild erfolgreich hochgeladen\nThis component probably won't work under this configuration. We recommend you to set up in a initializer\n(for instance at the end of the <code>config/initializers/decidim: rb</code>) the following lines:<br>\n<br>\n<pre># Api configuration\nDecidim::Api::Schema.max_complexity = 5000\nDecidim::Api::Schema.max_depth = 50</pre> "
+      map_component:
+        map:
+          api_not_ready: |
+            <b>Warnung:</b>Bei dieser Decidim-Installation ist die API mit einer maximalen Komplexität von <b>%{current_complexity}</b> eingestellt. Diese Komponente wird unter dieser Konfiguration wahrscheinlich nicht funktionieren. Wir empfehlen, dass Sie einen Initializer mit folgendem Code einrichten (z.B. am Ende von <code>config/initializers/decidim: rb</code>):<br> <br> <pre># Api configuration Decidim::Api::Schema.max_complexity = 5000 Decidim::Api::Schema.max_depth = 50</pre>
+          error:
+            unavailable: Die Karte ist nicht verfügbar. Bitte konfigurieren Sie die Geokodierung, um diese Komponente zu aktivieren.
+          show:
+            view_meeting: Sitzung ansehen
+            view_proposal: Vorschlag ansehen
   layouts:
     decidim:
+      admin:
+        decidim_awesome:
+          title: Decidim Awesome
       decidim_awesome:
         awesome_config:
+          amendments: Änderungsvorschläge
+          autosaved_error: Automatisches Speichern fehlgeschlagen
+          autosaved_retrieved: Text automatisch wiederhergestellt
+          autosaved_success: Text automatisch gespeichert
+          categories: Kategorien
+          drag_and_drop_image: Sie können Bilder per Drag & Drop ins Textfeld ziehen.
+          items: Items
+          meetings: Veranstaltungen
+          proposals: Vorschläge
           select_deselect_all: Alles auswählen / Auswahl aufheben
