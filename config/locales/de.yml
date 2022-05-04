@@ -188,6 +188,11 @@ de:
             save: Sichern
           show:
             cancel: Abbrechen
+            constraint: Einschränkung bearbeiten
+            save: Sichern
+          update:
+            error: Es gab einen Fehler beim Aktualisieren der Einschränkung
+            success: Einschränkung erfolgreich aktualisiert
         custom_redirects:
           create:
             error: Fehler beim Erstellen der Umleitung! %{error}
@@ -225,6 +230,7 @@ de:
           checks: Checks
           custom_redirects: Benutzerdefinierte Umleitungen
           editors: Editoren
+          livechat: Live-Chat
           menu_hacks: Menüanpassungen
           proposal_custom_fields: 'Vorschläge: Eigene Eingabefelder'
           proposals: Vorschläge
@@ -323,6 +329,7 @@ de:
           autosaved_success: Text automatisch gespeichert
           categories: Kategorien
           drag_and_drop_image: Sie können Bilder per Drag & Drop ins Textfeld ziehen.
+          hashtags: Hashtags
           items: Items
           meetings: Veranstaltungen
           proposals: Vorschläge
