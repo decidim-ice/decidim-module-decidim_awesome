@@ -2,6 +2,7 @@
 
 require "decidim/core/test/factories"
 require "decidim/proposals/test/factories"
+require "decidim/surveys/test/factories"
 
 FactoryBot.define do
   factory :awesome_config, class: "Decidim::DecidimAwesome::AwesomeConfig" do

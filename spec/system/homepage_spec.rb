@@ -15,5 +15,5 @@ describe "Visit the home page", type: :system, perform_enqueued: true do
     expect(page).to have_content("Home")
   end
 
-  include_examples "javascript config vars"
+  it_behaves_like "javascript config vars"
 end
