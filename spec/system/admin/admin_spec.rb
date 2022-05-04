@@ -23,7 +23,7 @@ describe "Visit the admin page", type: :system do
     click_link "Decidim awesome"
   end
 
-  include_examples "javascript config vars"
+  it_behaves_like "javascript config vars"
 
   context "when manages tweaks" do
     it "renders the admin page" do
