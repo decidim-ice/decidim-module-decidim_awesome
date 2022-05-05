@@ -1,6 +1,37 @@
 CHANGELOG
 =========
 
+v0.8.3
+------
+
+Compatibility:
+  - Decidim v0.26.x
+  - Decidim v0.25.x
+
+Features:
+  - Fix error 500 when visiting pages with questionnaires that are not created
+  - Added German language
+
+v0.8.2
+------
+
+Compatibility:
+  - Decidim v0.26.x
+  - Decidim v0.25.x
+
+Features:
+  - Fixes in the quill editor
+
+v0.8.1
+------
+
+Compatibility:
+  - Decidim v0.26.x
+  - Decidim v0.25.x
+
+Features:
+  - Fixes in the 0.26 webpacker compatibility
+
 v0.8.0
 ------
 
