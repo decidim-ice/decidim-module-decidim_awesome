@@ -18,13 +18,11 @@ module Decidim
 
         config = context.fetch(:awesome_config, {})
 
+        return allow! if user.admin?
         return allow! if config[:allow_images_in_proposals]
-
-        if user.admin
-          return allow! if config[:allow_images_in_small_editor]
-          return allow! if config[:allow_images_in_full_editor]
-          return allow! if config[:allow_images_in_markdown_editor]
-        end
+        return allow! if config[:allow_images_in_small_editor]
+        return allow! if config[:allow_images_in_full_editor]
+        return allow! if config[:allow_images_in_markdown_editor]
       end
     end
   end

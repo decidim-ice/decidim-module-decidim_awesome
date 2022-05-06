@@ -32,8 +32,6 @@ module Decidim
       # Rescue ajax calls and print the update.js view which prints the info on the message ajax form
       # Only if the request is AJAX, otherwise behave as Decidim standards
       def ajax_user_has_no_permission
-        return user_has_no_permission unless request.xhr?
-
         render json: { message: I18n.t("actions.unauthorized", scope: "decidim.core") }, status: :unprocessable_entity
       end
 
