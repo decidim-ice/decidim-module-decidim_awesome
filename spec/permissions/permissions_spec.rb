@@ -53,6 +53,15 @@ module Decidim::DecidimAwesome
       context "and images in proposals are no allowed" do
         let(:in_proposals) { false }
 
+        it { is_expected.to eq true }
+      end
+
+      context "and images are no allowed" do
+        let(:in_proposals) { false }
+        let(:in_small) { false }
+        let(:in_full) { false }
+        let(:in_markdown) { false }
+
         it_behaves_like "permission is not set"
       end
     end
@@ -76,7 +85,7 @@ module Decidim::DecidimAwesome
         let(:in_full) { false }
         let(:in_markdown) { false }
 
-        it_behaves_like "permission is not set"
+        it { is_expected.to eq true }
       end
     end
   end
