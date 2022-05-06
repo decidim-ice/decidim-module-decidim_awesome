@@ -9,8 +9,17 @@ module Decidim::DecidimAwesome
     let(:user) { create(:user, :confirmed, :admin, organization: organization) }
     let(:organization) { create(:organization) }
     let(:config) do
-      {}
+      {
+        allow_images_in_proposals: in_proposals,
+        allow_images_in_small_editor: in_small,
+        allow_images_in_full_editor: in_full,
+        allow_images_in_markdown_editor: in_markdown
+      }
     end
+    let(:in_proposals) { true }
+    let(:in_small) { true }
+    let(:in_full) { true }
+    let(:in_markdown) { true }
     let(:params) do
       {
         image: image,
@@ -30,13 +39,7 @@ module Decidim::DecidimAwesome
       sign_in user, scope: :user
     end
 
-    shared_examples "uploads image" do |config_var|
-      let(:config) do
-        {
-          config_var => true
-        }
-      end
-
+    shared_examples "uploads image" do
       context "when everything is ok" do
         it "redirects as success success" do
           post :create, params: params
@@ -52,30 +55,40 @@ module Decidim::DecidimAwesome
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end
-
-      context "when #{config_var} is false" do
-        let(:config) do
-          {
-            config_var => false
-          }
-        end
-
-        it "returns no permissions" do
-          post :create, params: params
-          expect(response).to have_http_status(:redirect)
-        end
-      end
     end
 
     describe "POST #create" do
-      include_examples "uploads image", :allow_images_in_small_editor
-      include_examples "uploads image", :allow_images_in_full_editor
+      include_examples "uploads image"
+
+      context "when all config vars are false" do
+        let(:in_proposals) { false }
+        let(:in_small) { false }
+        let(:in_full) { false }
+        let(:in_markdown) { false }
+
+        it "returns no permissions" do
+          post :create, params: params
+          expect(response).to have_http_status(:success)
+        end
+      end
     end
 
     context "when user is not admin" do
       let(:user) { create(:user, :confirmed, organization: organization) }
 
-      include_examples "uploads image", :allow_images_in_proposals
+      include_examples "uploads image"
+
+      context "when all config vars are false" do
+        let(:in_proposals) { false }
+        let(:in_small) { false }
+        let(:in_full) { false }
+        let(:in_markdown) { false }
+
+        it "returns no permissions" do
+          post :create, params: params
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+      end
     end
   end
 end
