@@ -22,14 +22,14 @@ module Decidim
         attribute :intergram_for_admins_settings, IntergramForm
         attribute :intergram_for_public, Boolean
         attribute :intergram_for_public_settings, IntergramForm
-        attribute :validate_title_min_length, Integer
-        attribute :validate_title_max_caps_percent, Integer
-        attribute :validate_title_max_marks_together, Integer
-        attribute :validate_title_start_with_caps, Boolean
-        attribute :validate_body_min_length, Integer
-        attribute :validate_body_max_caps_percent, Integer
-        attribute :validate_body_max_marks_together, Integer
-        attribute :validate_body_start_with_caps, Boolean
+        attribute :validate_title_min_length, Integer, default: 15
+        attribute :validate_title_max_caps_percent, Integer, default: 25
+        attribute :validate_title_max_marks_together, Integer, default: 1
+        attribute :validate_title_start_with_caps, Boolean, default: true
+        attribute :validate_body_min_length, Integer, default: 15
+        attribute :validate_body_max_caps_percent, Integer, default: 25
+        attribute :validate_body_max_marks_together, Integer, default: 1
+        attribute :validate_body_start_with_caps, Boolean, default: true
 
         # collect all keys anything not specified in the params (UpdateConfig command ignores it)
         attr_accessor :valid_keys

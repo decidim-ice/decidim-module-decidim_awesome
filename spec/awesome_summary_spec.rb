@@ -35,7 +35,6 @@ describe Decidim::DecidimAwesome do
   let!(:intergram_for_public) { create(:awesome_config, organization: organization, var: :intergram_for_public, value: true) }
   let!(:config_public_settings) { create(:awesome_config, organization: organization, var: :intergram_for_public_settings, value: intergram) }
   let!(:config_admins_settings) { create(:awesome_config, organization: organization, var: :intergram_for_admins_settings, value: intergram) }
-  let!(:allow_images_in_proposals) { create(:awesome_config, organization: organization, var: :allow_images_in_proposals, value: 10) }
   let!(:validate_title_min_length) { create(:awesome_config, organization: organization, var: :validate_title_min_length, value: 10) }
   let!(:validate_title_max_caps_percent) { create(:awesome_config, organization: organization, var: :validate_title_max_caps_percent, value: 10) }
   let!(:validate_title_max_marks_together) { create(:awesome_config, organization: organization, var: :validate_title_max_marks_together, value: 10) }

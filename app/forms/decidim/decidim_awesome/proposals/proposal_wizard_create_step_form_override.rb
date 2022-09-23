@@ -39,7 +39,7 @@ module Decidim
           end
 
           def custom_fields
-            awesome_config.collect_sub_configs_values("proposal_custom_field")
+            @custom_fields ||= awesome_config.collect_sub_configs_values("proposal_custom_field")
           end
 
           def awesome_config

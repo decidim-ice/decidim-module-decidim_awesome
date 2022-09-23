@@ -191,10 +191,17 @@ module Decidim::Proposals
 
       it { is_expected.to be_valid }
 
+      shared_examples "invalid percentage" do |per|
+        it "error message returns percentage" do
+          expect(form).to be_invalid
+          expect(form.errors.messages.values.flatten.first).to include("over #{per}% of the text")
+        end
+      end
+
       context "when scoped under different context" do
         let(:slug) { "another-slug" }
 
-        it { is_expected.to be_invalid }
+        it_behaves_like "invalid percentage", 25
 
         context "when has less than 25% caps" do
           let(prop.to_sym) { "Í only have some CÁPS" }
@@ -206,7 +213,7 @@ module Decidim::Proposals
       context "when less than allowed" do
         let(:percent) { 11 }
 
-        it { is_expected.to be_invalid }
+        it_behaves_like "invalid percentage", 11
       end
     end
 

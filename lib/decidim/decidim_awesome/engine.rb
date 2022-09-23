@@ -35,11 +35,32 @@ module Decidim
                                                                                                                     :validate_body_max_marks_together,
                                                                                                                     :validate_body_start_with_caps])
 
+        # Custom fields need to deal with several places
+        if DecidimAwesome.enabled?([:proposal_custom_fields,
+                                    :validate_title_min_length,
+                                    :validate_title_max_caps_percent,
+                                    :validate_title_max_marks_together,
+                                    :validate_title_start_with_caps,
+                                    :validate_body_min_length,
+                                    :validate_body_max_caps_percent,
+                                    :validate_body_max_marks_together,
+                                    :validate_body_start_with_caps])
+          Decidim::Proposals::ProposalWizardCreateStepForm.include(Decidim::DecidimAwesome::Proposals::ProposalWizardCreateStepFormOverride)
+        end
+
         # override user's admin property
         Decidim::User.include(Decidim::DecidimAwesome::UserOverride) if DecidimAwesome.enabled?(:scoped_admins)
 
         Decidim::MenuPresenter.include(Decidim::DecidimAwesome::MenuPresenterOverride)
         Decidim::MenuItemPresenter.include(Decidim::DecidimAwesome::MenuItemPresenterOverride)
+
+        # Late registering of components to take into account initializer values
+        DecidimAwesome.registered_components.each do |manifest, block|
+          next if DecidimAwesome.disabled_components.include?(manifest)
+          next if Decidim.find_component_manifest(manifest)
+
+          Decidim.register_component(manifest, &block)
+        end
       end
 
       initializer "decidim_decidim_awesome.overrides", after: "decidim.action_controller" do
@@ -51,12 +72,6 @@ module Decidim
           if DecidimAwesome.enabled?(:proposal_custom_fields)
             Decidim::Proposals::ApplicationHelper.include(Decidim::DecidimAwesome::Proposals::ApplicationHelperOverride)
             Decidim::AmendmentsHelper.include(Decidim::DecidimAwesome::AmendmentsHelperOverride)
-            Decidim::Proposals::ProposalWizardCreateStepForm.include(Decidim::DecidimAwesome::Proposals::ProposalWizardCreateStepFormOverride)
-          end
-
-          # Late registering of components to take into account initializer values
-          DecidimAwesome.registered_components.each do |manifest, block|
-            Decidim.register_component(manifest, &block) unless DecidimAwesome.disabled_components.include?(manifest)
           end
         end
       end
