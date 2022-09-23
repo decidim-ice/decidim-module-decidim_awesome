@@ -22,12 +22,28 @@ module Decidim
         attribute :intergram_for_admins_settings, IntergramForm
         attribute :intergram_for_public, Boolean
         attribute :intergram_for_public_settings, IntergramForm
+        attribute :validate_title_min_length, Integer
+        attribute :validate_title_max_caps_percent, Integer
+        attribute :validate_title_max_marks_together, Integer
+        attribute :validate_title_start_with_caps, Boolean
+        attribute :validate_body_min_length, Integer
+        attribute :validate_body_max_caps_percent, Integer
+        attribute :validate_body_max_marks_together, Integer
+        attribute :validate_body_start_with_caps, Boolean
 
         # collect all keys anything not specified in the params (UpdateConfig command ignores it)
         attr_accessor :valid_keys
 
         validate :css_syntax, if: ->(form) { form.scoped_styles.present? }
         validate :json_syntax, if: ->(form) { form.proposal_custom_fields.present? }
+        validates :validate_title_start_with_caps, presence: true
+        validates :validate_title_min_length, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 100 }
+        validates :validate_title_max_caps_percent, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
+        validates :validate_title_max_marks_together, presence: true, numericality: { greater_than_or_equal_to: 1 }
+        validates :validate_body_start_with_caps, presence: true
+        validates :validate_body_min_length, presence: true, numericality: { greater_than_or_equal_to: 0 }
+        validates :validate_body_max_caps_percent, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
+        validates :validate_body_max_marks_together, presence: true, numericality: { greater_than_or_equal_to: 1 }
 
         # TODO: validate non general admins are here
 

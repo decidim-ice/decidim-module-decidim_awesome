@@ -61,6 +61,41 @@ module Decidim
       false
     end
 
+    # Configuration options to handle different validations in proposals
+    # (maybe in the future will apply to other places)
+    # Set it to :disabled if you don't want to use this feature
+    config_accessor :validate_title_min_length do
+      15
+    end
+
+    config_accessor :validate_title_max_caps_percent do
+      25
+    end
+
+    config_accessor :validate_title_max_marks_together do
+      2
+    end
+
+    config_accessor :validate_title_start_with_caps do
+      true
+    end
+
+    config_accessor :validate_body_min_length do
+      15
+    end
+
+    config_accessor :validate_body_max_caps_percent do
+      25
+    end
+
+    config_accessor :validate_body_max_marks_together do
+      2
+    end
+
+    config_accessor :validate_body_start_with_caps do
+      true
+    end
+
     config_accessor :intergram_for_public do
       false
     end
