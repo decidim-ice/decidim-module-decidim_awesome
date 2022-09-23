@@ -28,7 +28,12 @@ module Decidim
         ActionView::Base.include(Decidim::DecidimAwesome::AwesomeHelpers)
 
         # Override EtiquetteValidator
-        EtiquetteValidator.include(Decidim::DecidimAwesome::EtiquetteValidatorOverride)
+        EtiquetteValidator.include(Decidim::DecidimAwesome::EtiquetteValidatorOverride) if DecidimAwesome.enabled?([:validate_title_max_caps_percent,
+                                                                                                                    :validate_title_max_marks_together,
+                                                                                                                    :validate_title_start_with_caps,
+                                                                                                                    :validate_body_max_caps_percent,
+                                                                                                                    :validate_body_max_marks_together,
+                                                                                                                    :validate_body_start_with_caps])
 
         # override user's admin property
         Decidim::User.include(Decidim::DecidimAwesome::UserOverride) if DecidimAwesome.enabled?(:scoped_admins)
