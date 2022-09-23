@@ -140,7 +140,7 @@ module Decidim
         end.to_h
       end
 
-      # private
+      private
 
       def map_defaults
         defaults.map do |key, val|

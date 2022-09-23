@@ -143,6 +143,19 @@ Using a link with a query string (ie: `/take-me-somewhere?locale=es`) that will 
 
 ![Custom redirections screenshot](examples/custom-redirections.png)
 
+#### 14. Custom validation rules for title and body in proposals
+
+Configure as you wish how the fields "title" and "body" are validated in proposals creation.
+
+Rules available:
+
+* Minimum title and body length (defaults to 15 chars).
+* Maximum percentage of capital letters for title and body (defaults to 25%).
+* Maximum number of "marks" (aka: exclamation and interrogation signs) that can be consective in the title or the body (defaults to 1).
+* Enable/disable forcing to start the title or the body with a capital letter (defaults to "enabled").
+
+![Custom validations](examples/custom_validations.png)
+
 #### To be continued...
 
 We're not done! Please check the [issues](/Platoniq/decidim-module-decidim_awesome/issues) (and participate) to see what's on our mind
