@@ -27,6 +27,9 @@ module Decidim
         # Include additional helpers globally
         ActionView::Base.include(Decidim::DecidimAwesome::AwesomeHelpers)
 
+        # Override EtiquetteValidator
+        EtiquetteValidator.include(Decidim::DecidimAwesome::EtiquetteValidatorOverride)
+
         # override user's admin property
         Decidim::User.include(Decidim::DecidimAwesome::UserOverride) if DecidimAwesome.enabled?(:scoped_admins)
 

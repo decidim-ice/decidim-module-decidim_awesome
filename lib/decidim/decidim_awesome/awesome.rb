@@ -73,7 +73,7 @@ module Decidim
     end
 
     config_accessor :validate_title_max_marks_together do
-      2
+      1
     end
 
     config_accessor :validate_title_start_with_caps do
@@ -89,7 +89,7 @@ module Decidim
     end
 
     config_accessor :validate_body_max_marks_together do
-      2
+      1
     end
 
     config_accessor :validate_body_start_with_caps do

@@ -107,10 +107,10 @@ module Decidim::DecidimAwesome
 
         it { is_expected.to be_valid }
 
-        context "and title start with caps is empty" do
-          let(:validate_title_start_with_caps) { nil }
+        context "and title start with caps is false" do
+          let(:validate_title_start_with_caps) { false }
 
-          it { is_expected.to be_invalid }
+          it { is_expected.to be_valid }
         end
 
         context "and title min length is empty" do
@@ -161,10 +161,10 @@ module Decidim::DecidimAwesome
           it { is_expected.to be_invalid }
         end
 
-        context "and body start with caps is empty" do
-          let(:validate_body_start_with_caps) { nil }
+        context "and body start with caps is false" do
+          let(:validate_body_start_with_caps) { false }
 
-          it { is_expected.to be_invalid }
+          it { is_expected.to be_valid }
         end
 
         context "and body max caps percent empty" do

@@ -417,6 +417,9 @@ en:
           show:
             view_meeting: View meeting
             view_proposal: View proposal
+      validators:
+        too_much_caps: Is using too many capital letters (over %{percent}% of the
+          text)
   layouts:
     decidim:
       admin:
