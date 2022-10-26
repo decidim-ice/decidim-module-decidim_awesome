@@ -182,6 +182,55 @@ describe "Hacked menus", type: :system do
         end
       end
     end
+
+    context "when only verified user" do
+      let(:visibility) { "verified_user" }
+      let(:verified_user) { create(:user, :confirmed, organization: organization) }
+      let(:non_verified_user) { create(:user, :confirmed, organization: organization) }
+      let(:expired_verified_user) { create(:user, :confirmed, organization: organization) }
+      let!(:authorization) { create(:authorization, granted_at: Time.zone.now, user: verified_user, name: "dummy_authorization_handler") }
+
+      let(:overriden) do
+        {
+          url: "/",
+          label: {
+            "en" => "A new beggining"
+          },
+          position: 10,
+          visibility: visibility
+        }
+      end
+
+      it "do not show the item for not verified user" do
+        switch_to_host(organization.host)
+        login_as non_verified_user, scope: :user
+        visit decidim.root_path
+
+        within ".main-nav" do
+          expect(page).not_to have_content("A new beggining")
+        end
+      end
+
+      it "do show the item for verified user" do
+        switch_to_host(organization.host)
+        login_as verified_user, scope: :user
+        visit decidim.root_path
+
+        within ".main-nav" do
+          expect(page).to have_content("A new beggining")
+        end
+      end
+
+      it "do not show the item for expired verified user" do
+        switch_to_host(organization.host)
+        login_as expired_verified_user, scope: :user
+        visit decidim.root_path
+
+        within ".main-nav" do
+          expect(page).not_to have_content("A new beggining")
+        end
+      end
+    end
   end
 
   describe "active" do
