@@ -181,131 +181,134 @@ describe "Hacked menus", type: :system do
           end
         end
       end
-    end
 
-    context "when only verified user", with_authorization_workflows: ["dummy_authorization_handler"] do
-      let!(:authorization) { create(:authorization, granted_at: Time.zone.now, user: user, name: "dummy_authorization_handler") }
+      context "when only verified user", with_authorization_workflows: ["dummy_authorization_handler"] do
+        let!(:authorization) { create(:authorization, granted_at: Time.zone.now, user: user, name: "dummy_authorization_handler") }
 
-      before do
-        switch_to_host(organization.host)
-        login_as user, scope: :user
-        visit decidim.root_path
-      end
+        before do
+          switch_to_host(organization.host)
+          login_as user, scope: :user
+          visit decidim.root_path
+        end
 
-      context "when user is verified" do
-        it "shows the item" do
-          within ".main-nav" do
-            expect(page).to have_content("A new beggining")
+        context "when user is verified" do
+          it "shows the item" do
+            within ".main-nav" do
+              expect(page).to have_content("A new beggining")
+            end
+          end
+        end
+
+        context "when user is not verified" do
+          let(:authorization) { nil }
+
+          it "shows the item" do
+            within ".main-nav" do
+              expect(page).not_to have_content("A new beggining")
+            end
+          end
+        end
+
+        context "when verification is expired" do
+          let!(:authorization) { create(:authorization, granted_at: 1.month.ago, user: expired_verified_user, name: "dummy_authorization_handler") }
+
+          it "shows the item" do
+            within ".main-nav" do
+              expect(page).not_to have_content("A new beggining")
+            end
           end
         end
       end
 
-      context "when user is not verified" do
-        let(:authorization) { nil }
-        it "shows the item" do
+      describe "active" do
+        let!(:component) { create(:proposal_component, participatory_space: participatory_process) }
+        let!(:participatory_process2) { create :participatory_process, organization: organization }
+        let!(:component2) { create(:proposal_component, participatory_space: participatory_process2) }
+        let(:menu) do
+          [
+            {
+              url: "/",
+              label: {
+                "en" => "A new beggining"
+              },
+              position: 1
+            },
+            {
+              url: "/processes/#{participatory_process.slug}",
+              label: {
+                "en" => "A single process"
+              },
+              position: 2
+            }
+          ]
+        end
+
+        it_behaves_like "has active link", "A new beggining"
+
+        context "when visiting all processes list" do
+          before do
+            visit decidim_participatory_processes.participatory_processes_path
+          end
+
+          it_behaves_like "has active link", "Processes"
+        end
+
+        context "when visiting a process in a custom link" do
+          before do
+            visit decidim_participatory_processes.participatory_process_path(participatory_process.slug)
+          end
+
+          it_behaves_like "has active link", "A single process"
+        end
+
+        context "when visiting a sublink of a process in a custom link" do
+          before do
+            visit main_component_path(component)
+          end
+
+          it_behaves_like "has active link", "A single process"
+        end
+
+        context "when visiting a process not in a custom link" do
+          before do
+            visit decidim_participatory_processes.participatory_process_path(participatory_process2.slug)
+          end
+
+          it_behaves_like "has active link", "Processes"
+        end
+
+        context "when visiting a sublink of a process not in a custom link" do
+          before do
+            visit main_component_path(component2)
+          end
+
+          it_behaves_like "has active link", "Processes"
+        end
+      end
+
+      context "when menu is :disabled" do
+        let(:disabled_features) { [:menu] }
+
+        it "renders the normal menu" do
           within ".main-nav" do
+            expect(page).to have_content("Home")
+            expect(page).to have_content("Processes")
+            expect(page).to have_content("Help")
             expect(page).not_to have_content("A new beggining")
+            expect(page).not_to have_content("Blog")
           end
         end
-      end
 
-      context "when verification is expired" do
-        let!(:authorization) { create(:authorization, granted_at: 1.month.ago, user: expired_verified_user, name: "dummy_authorization_handler") }
-        it "shows the item" do
-          within ".main-nav" do
-            expect(page).not_to have_content("A new beggining")
+        it_behaves_like "has active link", "Home"
+
+        context "when visiting another page" do
+          before do
+            visit decidim_participatory_processes.participatory_processes_path
           end
+
+          it_behaves_like "has active link", "Processes"
         end
       end
-  end
-
-  describe "active" do
-    let!(:component) { create(:proposal_component, participatory_space: participatory_process) }
-    let!(:participatory_process2) { create :participatory_process, organization: organization }
-    let!(:component2) { create(:proposal_component, participatory_space: participatory_process2) }
-    let(:menu) do
-      [
-        {
-          url: "/",
-          label: {
-            "en" => "A new beggining"
-          },
-          position: 1
-        },
-        {
-          url: "/processes/#{participatory_process.slug}",
-          label: {
-            "en" => "A single process"
-          },
-          position: 2
-        }
-      ]
-    end
-
-    it_behaves_like "has active link", "A new beggining"
-
-    context "when visiting all processes list" do
-      before do
-        visit decidim_participatory_processes.participatory_processes_path
-      end
-
-      it_behaves_like "has active link", "Processes"
-    end
-
-    context "when visiting a process in a custom link" do
-      before do
-        visit decidim_participatory_processes.participatory_process_path(participatory_process.slug)
-      end
-
-      it_behaves_like "has active link", "A single process"
-    end
-
-    context "when visiting a sublink of a process in a custom link" do
-      before do
-        visit main_component_path(component)
-      end
-
-      it_behaves_like "has active link", "A single process"
-    end
-
-    context "when visiting a process not in a custom link" do
-      before do
-        visit decidim_participatory_processes.participatory_process_path(participatory_process2.slug)
-      end
-
-      it_behaves_like "has active link", "Processes"
-    end
-
-    context "when visiting a sublink of a process not in a custom link" do
-      before do
-        visit main_component_path(component2)
-      end
-
-      it_behaves_like "has active link", "Processes"
-    end
-  end
-
-  context "when menu is :disabled" do
-    let(:disabled_features) { [:menu] }
-
-    it "renders the normal menu" do
-      within ".main-nav" do
-        expect(page).to have_content("Home")
-        expect(page).to have_content("Processes")
-        expect(page).to have_content("Help")
-        expect(page).not_to have_content("A new beggining")
-        expect(page).not_to have_content("Blog")
-      end
-    end
-
-    it_behaves_like "has active link", "Home"
-
-    context "when visiting another page" do
-      before do
-        visit decidim_participatory_processes.participatory_processes_path
-      end
-
-      it_behaves_like "has active link", "Processes"
     end
   end
 end
