@@ -183,54 +183,40 @@ describe "Hacked menus", type: :system do
       end
     end
 
-    context "when only verified user" do
-      let(:visibility) { "verified_user" }
-      let(:verified_user) { create(:user, :confirmed, organization: organization) }
-      let(:non_verified_user) { create(:user, :confirmed, organization: organization) }
-      let(:expired_verified_user) { create(:user, :confirmed, organization: organization) }
-      let!(:authorization) { create(:authorization, granted_at: Time.zone.now, user: verified_user, name: "dummy_authorization_handler") }
+    context "when only verified user", with_authorization_workflows: ["dummy_authorization_handler"] do
+      let!(:authorization) { create(:authorization, granted_at: Time.zone.now, user: user, name: "dummy_authorization_handler") }
 
-      let(:overriden) do
-        {
-          url: "/",
-          label: {
-            "en" => "A new beggining"
-          },
-          position: 10,
-          visibility: visibility
-        }
+      before do
+        switch_to_host(organization.host)
+        login_as user, scope: :user
+        visit decidim.root_path
       end
 
-      it "do not show the item for not verified user" do
-        switch_to_host(organization.host)
-        login_as non_verified_user, scope: :user
-        visit decidim.root_path
-
-        within ".main-nav" do
-          expect(page).not_to have_content("A new beggining")
+      context "when user is verified" do
+        it "shows the item" do
+          within ".main-nav" do
+            expect(page).to have_content("A new beggining")
+          end
         end
       end
 
-      it "do show the item for verified user" do
-        switch_to_host(organization.host)
-        login_as verified_user, scope: :user
-        visit decidim.root_path
-
-        within ".main-nav" do
-          expect(page).to have_content("A new beggining")
+      context "when user is not verified" do
+        let(:authorization) { nil }
+        it "shows the item" do
+          within ".main-nav" do
+            expect(page).not_to have_content("A new beggining")
+          end
         end
       end
 
-      it "do not show the item for expired verified user" do
-        switch_to_host(organization.host)
-        login_as expired_verified_user, scope: :user
-        visit decidim.root_path
-
-        within ".main-nav" do
-          expect(page).not_to have_content("A new beggining")
+      context "when verification is expired" do
+        let!(:authorization) { create(:authorization, granted_at: 1.month.ago, user: expired_verified_user, name: "dummy_authorization_handler") }
+        it "shows the item" do
+          within ".main-nav" do
+            expect(page).not_to have_content("A new beggining")
+          end
         end
       end
-    end
   end
 
   describe "active" do
