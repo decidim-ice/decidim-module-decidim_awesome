@@ -184,6 +184,7 @@ describe "Hacked menus", type: :system do
 
       context "when only verified user", with_authorization_workflows: ["dummy_authorization_handler"] do
         let!(:authorization) { create(:authorization, granted_at: Time.zone.now, user: user, name: "dummy_authorization_handler") }
+        let(:visibility) { "verified_user" }
 
         before do
           switch_to_host(organization.host)
@@ -210,7 +211,7 @@ describe "Hacked menus", type: :system do
         end
 
         context "when verification is expired" do
-          let!(:authorization) { create(:authorization, granted_at: 1.month.ago, user: expired_verified_user, name: "dummy_authorization_handler") }
+          let!(:authorization) { create(:authorization, granted_at: 3.months.ago, user: user, name: "dummy_authorization_handler") }
 
           it "shows the item" do
             within ".main-nav" do
