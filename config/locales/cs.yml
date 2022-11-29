@@ -260,6 +260,7 @@ cs:
               hidden: Vždy skryto
               logged: Viditelné pouze pro přihlášené uživatele
               non_logged: Viditelné pouze pro nepřihlášené uživatele
+              verified_user: Viditelné pouze pro uživatele s platnou autorizací
           index:
             confirm_destroy: Opravdu chcete odstranit toto přizpůsobení?
             edit: Upravit
