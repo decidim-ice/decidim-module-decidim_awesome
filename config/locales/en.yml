@@ -313,6 +313,7 @@ en:
               hidden: Always hidden
               logged: Only visible for logged users
               non_logged: Only visible for non-logged users
+              verified_user: Only visible for users with a valid authorization
           index:
             confirm_destroy: Are you sure to remove this customization?
             edit: Edit

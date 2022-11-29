@@ -5,7 +5,7 @@ module Decidim
     module Admin
       class MenuForm < Decidim::Form
         include Decidim::TranslatableAttributes
-        VISIBILITY_STATES = %w(default hidden logged non_logged).freeze
+        VISIBILITY_STATES = %w(default hidden logged non_logged verified_user).freeze
 
         translatable_attribute :raw_label, String
         attribute :url, String
