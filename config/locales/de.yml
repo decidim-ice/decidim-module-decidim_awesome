@@ -256,6 +256,7 @@ de:
               hidden: Immer versteckt
               logged: Nur für angemeldete Nutzende sichtbar
               non_logged: Nur sichtbar für nicht angemeldete Nutzende
+              verified_user: Nur für Benutzer mit einer gültigen Berechtigung sichtbar
           index:
             confirm_destroy: Sind Sie sicher, dass Sie diese Anpassung entfernen wollen?
             edit: Bearbeiten
