@@ -260,6 +260,7 @@ fr:
               hidden: Toujours caché
               logged: Uniquement visible pour utilisateurs identifiés
               non_logged: Visible uniquement pour les utilisateurs non connectés
+              verified_user: Visible uniquement pour les utilisateurs ayant une autorisation valide
           index:
             confirm_destroy: Êtes-vous sûr de vouloir supprimer cette personnalisation ?
             edit: Modifier
