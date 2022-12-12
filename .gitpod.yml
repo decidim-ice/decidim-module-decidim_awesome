@@ -1,0 +1,17 @@
+image:
+  file: .gitpod.dockerfile
+
+tasks:
+  - name: dev
+    before: rvm --default use "ruby-3.0.5"
+    init: bundle install && yarn install && bundle exec rake test_app
+    command: bundle exec rspec
+  #- name: webpacker
+  #  before: rvm --default use "ruby-3.0.4"
+  #  command: bin/webpack-dev-server
+vscode:
+  extensions:
+    - dbaeumer.vscode-eslint
+    - eamodio.gitlens
+    - akamud.vscode-theme-onedark
+    - rebornix.ruby
