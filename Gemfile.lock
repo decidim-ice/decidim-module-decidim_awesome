@@ -4,6 +4,7 @@ PATH
     decidim-decidim_awesome (0.8.3)
       decidim-admin (>= 0.25.0, < 0.28)
       decidim-core (>= 0.25.0, < 0.28)
+      rectify (~> 0.13.0)
       sassc (~> 2.3)
 
 GEM
