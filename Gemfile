@@ -17,6 +17,8 @@ gem "uglifier", "~> 4.1"
 
 gem "faker", "~> 2.14"
 
+gem "rectify", "~> 0.13.0"
+
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
 
@@ -28,7 +30,7 @@ group :development do
   gem "listen", "~> 3.1"
   gem "rubocop-faker"
   gem "spring", "~> 2.0"
-  gem "spring-watcher-listen", "~> 2.0"
+  gem "spring-watcher-listen", "~> 2.0.0"
   gem "web-console", "~> 3.5"
 end
 
