@@ -10,7 +10,6 @@ module Decidim
         include NeedsAwesomeConfig
         helper ConfigConstraintsHelpers
         helper SystemCheckerHelpers
-        helper CookiesHelper
 
         layout "decidim/admin/decidim_awesome"
 
