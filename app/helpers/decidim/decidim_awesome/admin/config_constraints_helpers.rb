@@ -15,7 +15,11 @@ module Decidim
         def menus
           @menus ||= {
             editors: config_enabled?([:allow_images_in_full_editor, :allow_images_in_small_editor, :use_markdown_editor, :allow_images_in_markdown_editor]),
-            proposals: config_enabled?(:allow_images_in_proposals),
+            proposals: config_enabled?([:allow_images_in_proposals,
+                                        :validate_title_min_length, :validate_title_max_caps_percent,
+                                        :validate_title_max_marks_together, :validate_title_start_with_caps,
+                                        :validate_body_min_length, :validate_body_max_caps_percent,
+                                        :validate_body_max_marks_together, :validate_body_start_with_caps]),
             surveys: config_enabled?(:auto_save_forms),
             styles: config_enabled?(:scoped_styles),
             proposal_custom_fields: config_enabled?(:proposal_custom_fields),

@@ -15,7 +15,15 @@ Decidim::DecidimAwesome.configure do |config|
       :proposal_custom_fields,
       :menu,
       :scoped_admins,
-      :custom_redirects
+      :custom_redirects,
+      :validate_title_min_length,
+      :validate_title_max_caps_percent,
+      :validate_title_max_marks_together,
+      :validate_title_start_with_caps,
+      :validate_body_min_length,
+      :validate_body_max_caps_percent,
+      :validate_body_max_marks_together,
+      :validate_body_start_with_caps
     ].each do |conf|
       config.send("#{conf}=", :disabled)
     end

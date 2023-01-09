@@ -1,6 +1,17 @@
 CHANGELOG
 =========
 
+v0.8.4
+------
+
+Compatibility:
+  - Decidim v0.26.x
+  - Decidim v0.25.x
+
+Features:
+  - Feature: Override validation rules for title and body in proposals, with constrains available
+  - Improve loading process to facilitate development
+
 v0.8.3
 ------
 
