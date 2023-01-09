@@ -78,6 +78,10 @@ module Decidim
           user.present?
         when "non_logged"
           user.blank?
+        when "verified_user"
+          # the cleaner version should be user.authorizations.any?
+          # but there is not relationship between users and authorizations
+          Decidim::Authorization.where(user: user).any? { |auth| auth.granted? && !auth.expired? }
         else
           true
         end
