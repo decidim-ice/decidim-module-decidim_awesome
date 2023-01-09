@@ -21,6 +21,14 @@ ca:
         scoped_admins: 'Grup d''administradores acotades #%{id}'
         scoped_styles: 'Personalització d''estils #%{id}'
         use_markdown_editor: Fes servir l'editor Markdown en comptes de l'editor HTML
+        validate_body_max_caps_percent: Percentatge màxim de majúscules en el cos de la proposta
+        validate_body_max_marks_together: Nombre màxim de símbols consecutius permesos al cos de la proposta
+        validate_body_min_length: Nombre de caràcters mínims requerits pel cos de la proposta
+        validate_body_start_with_caps: Força que el text del cos s'inici amb una majúscula
+        validate_title_max_caps_percent: Percentatge màxim de majúscules en el títol de la proposta
+        validate_title_max_marks_together: Nombre màxim de símbols consecutius permesos al títol de la proposta
+        validate_title_min_length: Nombre de caràcters mínims requerits pel títol de la proposta
+        validate_title_start_with_caps: Força que el text del títol s'inici amb una majúscula
       constraint:
         component_id: o específicament a
         component_manifest: Només en components de tipus
@@ -151,6 +159,15 @@ ca:
               scoped_styles: Crea CSS personalitzats que només s'apliquin a determinades parts de la web pública (per fer-ho, utilitza l'editor de restriccions)
               scoped_styles_variables: 'Pots fer servir les següents variables CSS pels colors personalitzats de l''organització:'
               use_markdown_editor: Això substituirà l'editor HTML (Quill), en el seu lloc s'utilitzarà un editor Markdown tant a l'admin com a la pàgina pública per processar el text (a la base de dades el text es desarà com a markdown)
+              validate_body_max_caps_percent: Zero no permetrà cap majúscula, 100 obligarà a escriure-ho tot en majúscules
+              validate_body_max_marks_together: 'Limiteu el nombre de signes d''interrogació i d''exclamació que es poden escriure junts. És a dir: si és 2, aleshores ''!!!'' no es permetrà al text'
+              validate_body_min_length: Aquest nombre pot ser zero, això farà que aquest camp no sigui obligatori
+              validate_title_max_caps_percent: Zero no permetrà cap majúscula, 100 obligarà a escriure-ho tot en majúscules
+              validate_title_max_marks_together: 'Limiteu el nombre de signes d''interrogació i d''exclamació que es poden escriure junts. És a dir: si és 2, aleshores ''!!!'' no es permetrà al text'
+              validate_title_min_length: El títol sempre és obligatori i aquest número no pot ser zero
+            validators:
+              body: Validacions d'entrada per l'usuari en el camp cos de la proposta
+              title: Validacions d'entrada per l'usuari en el camp títol de la proposta
           form_proposal_custom_fields:
             new: Afegeix una nova caixa de "camps personalitzats"
             remove: Elimina aquesta caixa de "camps personalitzats"
@@ -260,6 +277,7 @@ ca:
               hidden: Sempre ocult
               logged: Només visible per usuàries loguejades
               non_logged: Només visible per usuàries no loguejades
+              verified_user: Només visible per als usuaris amb una autorització vàlida
           index:
             confirm_destroy: Confirmes que vols eliminar aquest retoc?
             edit: Editar
@@ -328,6 +346,8 @@ ca:
           show:
             view_meeting: Veure trobada
             view_proposal: Veure proposta
+      validators:
+        too_much_caps: Fa servir massa lletres majúscules (més %{percent}% del text)
   layouts:
     decidim:
       admin:
