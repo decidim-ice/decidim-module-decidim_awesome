@@ -60,6 +60,7 @@ en:
   decidim:
     admin:
       menu:
+        admin_accountability: Admin accountability
         decidim_awesome: Decidim awesome
     components:
       awesome_iframe:
