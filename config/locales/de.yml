@@ -24,6 +24,11 @@ de:
         validate_body_max_caps_percent: Maximal erlaubter Prozentsatz an Großbuchstaben für den Textkörper
         validate_body_max_marks_together: Maximal erlaubte aufeinanderfolgende Zeichen im Textkörper
         validate_body_min_length: Minimale zwingend erforderliche Anzahl Zeichen im Textkörper
+        validate_body_start_with_caps: Textkörper muss zwingend mit einem Großbuchstaben beginnen
+        validate_title_max_caps_percent: Maximal erlaubter Prozentsatz an Großbuchstaben für den Titel
+        validate_title_max_marks_together: Maximal erlaubte aufeinanderfolgende Zeichen im Titel
+        validate_title_min_length: Minimale zwingend erforderliche Anzahl Zeichen im Titel
+        validate_title_start_with_caps: Titel muss zwingend mit einem Großbuchstaben beginnen
       constraint:
         component_id: oder spezifisch in
         component_manifest: Nur in Komponenten vom Typ
@@ -154,6 +159,15 @@ de:
               scoped_styles: Erstellen Sie benutzerdefinierte CSS, die nur in bestimmten Bereichen der öffentlichen Seite gelten (vewenden Sie dazu die Einschränkungen)
               scoped_styles_variables: 'Sie können die folgenden CSS-Variablen für die benutzerdefinierter Farben der Organisation verwenden:'
               use_markdown_editor: Markdown Editor benutzen
+              validate_body_max_caps_percent: 0 lässt keinen Großbuchstaben zu, 100 lässt ausschliesslich Großbuchstaben zu
+              validate_body_max_marks_together: 'Begrenzt die Anzahl der Frage- und Ausrufezeichen, die zusammen geschrieben werden können. Zum Beispiel: Der Wert 2 führt dazu, dass ''!!!'' im Text nicht erlaubt ist'
+              validate_body_min_length: Diese Zahl kann Null sein, was das Feld dann effektiv als "nicht obligatorisch" setzt
+              validate_title_max_caps_percent: 0 lässt keinen Großbuchstaben zu, 100 lässt ausschliesslich Großbuchstaben zu
+              validate_title_max_marks_together: 'Begrenzt die Anzahl der Frage- und Ausrufezeichen, die zusammen geschrieben werden können. Zum Beispiel: Der Wert 2 führt dazu, dass ''!!!'' im Text nicht erlaubt ist'
+              validate_title_min_length: Der Titel ist immer obligatorisch und diese Zahl kann nicht Null sein
+            validators:
+              body: Eingabevalidierungen für das Feld "Textkörper"
+              title: Eingabevalidierungen für das Feld "Titel"
           form_proposal_custom_fields:
             new: Neues Eingabefeld
             remove: Eingabefeld entfernen
@@ -320,6 +334,8 @@ de:
           show:
             view_meeting: Sitzung ansehen
             view_proposal: Vorschlag ansehen
+      validators:
+        too_much_caps: Es werden zu viele Großbuchstaben verwendet (über %{percent}% des Textes)
   layouts:
     decidim:
       admin:
