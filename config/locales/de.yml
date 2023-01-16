@@ -21,6 +21,9 @@ de:
         scoped_admins: Eingeschränkte Admin-Gruppe %{id}
         scoped_styles: Eigene Eingabefelder %{id}
         use_markdown_editor: Markdown Editor anstelle des HTML-Editors verwenden
+        validate_body_max_caps_percent: Maximal erlaubter Prozentsatz an Großbuchstaben für den Textkörper
+        validate_body_max_marks_together: Maximal erlaubte aufeinanderfolgende Zeichen im Textkörper
+        validate_body_min_length: Minimale zwingend erforderliche Anzahl Zeichen im Textkörper
       constraint:
         component_id: oder spezifisch in
         component_manifest: Nur in Komponenten vom Typ
