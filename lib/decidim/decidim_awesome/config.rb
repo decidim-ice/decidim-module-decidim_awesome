@@ -63,8 +63,8 @@ module Decidim
       def unfiltered_config
         valid = @vars.to_h { |v| [v.var.to_sym, v.value] }
 
-        map_defaults do |key|
-          valid[key].presence
+        map_defaults do |key, val|
+          valid.has_key?(key) ? valid[key] : val
         end
       end
 
@@ -146,8 +146,8 @@ module Decidim
         defaults.to_h do |key, val|
           value = false
           unless val == :disabled
-            value = yield(key) || val
-            value = val.merge(value.transform_keys(&:to_sym)) if val.is_a? Hash
+            value = yield(key, val)
+            value = val.merge(value.transform_keys(&:to_sym)) if val.is_a?(Hash) && value.is_a?(Hash)
           end
           [key, value]
         end
@@ -158,8 +158,8 @@ module Decidim
         valid = @vars.filter { |item| enabled_for_organization?(item.var) && valid_in_context?(item.all_constraints) }
                      .to_h { |v| [v.var.to_sym, v.value] }
 
-        map_defaults do |key|
-          valid[key].presence
+        map_defaults do |key, val|
+          valid.has_key?(key) ? valid[key] : val
         end
       end
 

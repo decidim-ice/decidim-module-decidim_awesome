@@ -2,6 +2,8 @@ decidim-admin:
   /app/views/layouts/decidim/admin/_header.html.erb:
     decidim-0.25: 1aff077428830b12306d6c42e6b37216
 decidim-core:
+  /app/validators/etiquette_validator.rb:
+    decidim-0.25: f7a4a652005385a994208f1ab41c4f08
   /app/views/layouts/decidim/_head.html.erb:
     decidim-0.26: 0927fc81123addec70853c2e7986c538
     decidim-0.27: c82ac6defe55b6d4f6a54544dbf2ac58
