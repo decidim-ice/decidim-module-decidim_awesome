@@ -6,8 +6,6 @@ on:
       - main
   pull_request:
 
-env:
-
 jobs:
   test-report:
     runs-on: ubuntu-20.04
