@@ -1,4 +1,4 @@
-name: "[CI] Integration"
+name: "[CI] Unit tests"
 
 on:
   push:
@@ -12,9 +12,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - decidim_version: 0.26
-            ruby_version: 2.7.5
-          - decidim_version: 0.27
+          - gemfile: Gemfile.legacy
+            ruby_version: 2.7.6
+          - gemfile: Gemfile
             ruby_version: 3.0.5
 
     services:
@@ -32,6 +32,7 @@ jobs:
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: postgres
       DATABASE_HOST: localhost
+      BUNDLE_GEMFILE: ${{ matrix.gemfile }}
 
     steps:
       - uses: actions/checkout@v2
@@ -41,29 +42,14 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby_version }}
-        # do not use cache as appraisal is not compatible with gems installed locally
-
-      - name: Install Ruby deps
-        run: |
-          gem install bundler:2.3.20
-          bundle install  --jobs 4 --retry 3
-
-      - name: Install Appraisal
-        run: |
-          bundle exec appraisal install
+          bundler-cache: true
 
       - name: Setup Database
-        run: bundle exec appraisal decidim-${{ matrix.decidim_version }} rake test_app
+        run: bundle exec rake test_app
 
       - name: General RSpec with config vars enabled
-        run: bundle exec appraisal decidim-${{ matrix.decidim_version }} rspec spec/system
+        run: bundle exec rspec spec/system/
         env:
           FEATURES: enabled
           SIMPLECOV: 1
           CODECOV: 1
-
-      - uses: actions/upload-artifact@v2-preview
-        if: always()
-        with:
-          name: screenshots
-          path: ./spec/decidim_dummy_app/tmp/screenshots
