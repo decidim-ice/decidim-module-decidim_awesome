@@ -53,8 +53,8 @@ module Decidim::DecidimAwesome
             end
 
             it "modifies the other config" do
-              expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_full_editor).value).to eq(true)
-              expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_small_editor).value).to eq(true)
+              expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_full_editor).value).to be(true)
+              expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_small_editor).value).to be(true)
             end
 
             it_behaves_like "has css boxes content"
@@ -68,8 +68,8 @@ module Decidim::DecidimAwesome
             end
 
             it "modifies the other config" do
-              expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_full_editor).value).to eq(true)
-              expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_small_editor).value).to eq(true)
+              expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_full_editor).value).to be(true)
+              expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_small_editor).value).to be(true)
             end
 
             it_behaves_like "has css boxes content"
@@ -83,7 +83,7 @@ module Decidim::DecidimAwesome
         it "broadcasts :invalid and does not modifiy the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
-          expect(AwesomeConfig.find_by(organization: organization, var: :proposal_custom_fields)).to eq(nil)
+          expect(AwesomeConfig.find_by(organization: organization, var: :proposal_custom_fields)).to be_nil
         end
       end
     end

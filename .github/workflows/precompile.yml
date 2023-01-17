@@ -1,4 +1,4 @@
-name: "[CI] Lint"
+name: "[CI] Precompile"
 
 on:
   push:
@@ -27,17 +27,10 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - run: npm ci
-        name: Install JS deps
-
-      - run: bundle exec rubocop -P
-        name: Lint Ruby files
-
-      - run: npm run lint
-        name: Lint JS files
-
-      - run: npm run stylelint
-        name: Lint SCSS files
-
-      - run: bundle exec erblint app/**/*.erb
-        name: Lint ERB files
+      - name: Precompile
+        run: |
+          cd spec/decidim_dummy_app
+          bundle exec rails assets:precompile
+        env:
+          RAILS_ENV: production
+          SECRET_KEY_BASE: just-testing

@@ -48,7 +48,7 @@ module Decidim::DecidimAwesome
       end
 
       context "when there's no file" do
-        let(:image) { nil }
+        let(:image) { upload_test_file(Decidim::Dev.test_file("invalid.jpeg", "image/jpeg")) }
 
         it "returns failure" do
           post :create, params: params

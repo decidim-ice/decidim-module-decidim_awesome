@@ -190,6 +190,7 @@ Depending on your Decidim version, choose the corresponding Awesome version to e
 
 | Awesome version | Compatible Decidim versions |
 |---|---|
+| 0.9.x | 0.26.x, 0.27.x |
 | 0.8.x | 0.25.x, 0.26.x |
 | 0.7.x | 0.23.x, 0.24.x |
 | 0.6.x | 0.22.x, 0.23.x |
@@ -327,8 +328,8 @@ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal 
 To test a specific apprasail configured version do the following:
 
 ```
-DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal decidim-0.25 rake test_app
-DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal decidim-0.25 rspec
+DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal decidim-0.27 rake test_app
+DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal decidim-0.27 rspec
 ```
 
 Note that the database user has to have rights to create and drop a database in

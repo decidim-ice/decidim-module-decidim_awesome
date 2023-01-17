@@ -17,8 +17,6 @@ gem "uglifier", "~> 4.1"
 
 gem "faker", "~> 2.14"
 
-gem "rectify", "~> 0.13.0"
-
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
 

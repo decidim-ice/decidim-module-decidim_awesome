@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Decidim::DecidimAwesome.configure do |config|
-  if ENV["FEATURES"] == "disabled"
+  if ENV.fetch("FEATURES", nil) == "disabled"
     [
       :allow_images_in_full_editor,
       :allow_images_in_small_editor,

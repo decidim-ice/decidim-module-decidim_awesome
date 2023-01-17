@@ -1,6 +1,6 @@
 {
   "name": "decidim-module-decidim_awesome",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Mods and tweaks for Decidim",
   "main": "index.js",
   "directories": {

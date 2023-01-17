@@ -114,8 +114,8 @@ module Decidim::DecidimAwesome
         it "returns the config normalized" do
           expect(subject.config[:intergram_for_public_settings][:chat_id]).to eq("-1234")
           expect(subject.config[:intergram_for_public_settings][:color]).to eq("red")
-          expect(subject.config[:intergram_for_public_settings][:require_login]).to eq(true)
-          expect(subject.config[:intergram_for_public_settings][:use_floating_button]).to eq(true)
+          expect(subject.config[:intergram_for_public_settings][:require_login]).to be(true)
+          expect(subject.config[:intergram_for_public_settings][:use_floating_button]).to be(true)
         end
       end
     end
@@ -130,7 +130,7 @@ module Decidim::DecidimAwesome
       let!(:awesome_config) { create :awesome_config, organization: organization, var: :allow_images_in_full_editor, value: true }
 
       it "always defaults to false" do
-        expect(subject.config[:allow_images_in_full_editor]).to eq(false)
+        expect(subject.config[:allow_images_in_full_editor]).to be(false)
       end
     end
 

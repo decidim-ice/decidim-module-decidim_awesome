@@ -17,5 +17,5 @@ Decidim::Dev.dummy_app_path =
 require "decidim/dev/test/base_spec_helper"
 
 def legacy_version?
-  Decidim.version[0..3] == "0.25"
+  Decidim.version[0..3] == "0.26"
 end

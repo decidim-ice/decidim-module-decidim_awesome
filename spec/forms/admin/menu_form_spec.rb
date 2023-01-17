@@ -20,8 +20,8 @@ module Decidim::DecidimAwesome
 
       let(:label) do
         {
-          en: "Menu english",
-          ca: "Menu catalan"
+          "en" => "Menu english",
+          "ca" => "Menu catalan"
         }
       end
       let(:url) { "/some-path" }

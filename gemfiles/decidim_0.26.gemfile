@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-ruby "2.7.5"
+ruby "2.7.6"
 
 gem "decidim", "0.26.0"
 gem "decidim-decidim_awesome", path: "../"
@@ -23,7 +23,7 @@ group :development do
   gem "listen", "~> 3.1"
   gem "rubocop-faker"
   gem "spring", "~> 2.0"
-  gem "spring-watcher-listen", "~> 2.0"
+  gem "spring-watcher-listen", "~> 2.0.0"
   gem "web-console", "~> 3.5"
 end
 

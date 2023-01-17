@@ -32,8 +32,8 @@ module Decidim::DecidimAwesome
         it "broadcasts :ok and modifies the config options" do
           expect { subject.call }.to broadcast(:ok)
 
-          expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_full_editor).value).to eq(true)
-          expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_small_editor).value).to eq(true)
+          expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_full_editor).value).to be(true)
+          expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_small_editor).value).to be(true)
         end
       end
 
@@ -49,7 +49,7 @@ module Decidim::DecidimAwesome
         it "broadcasts :invalid and does not modifiy the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
-          expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_full_editor).value).to eq(false)
+          expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_full_editor).value).to be(false)
         end
       end
 

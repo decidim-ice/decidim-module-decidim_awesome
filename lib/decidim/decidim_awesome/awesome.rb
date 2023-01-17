@@ -194,7 +194,7 @@ module Decidim
     def self.enabled?(config_vars)
       config_vars = [config_vars] unless config_vars.respond_to?(:detect)
 
-      config_vars.detect do |item|
+      config_vars.any? do |item|
         next unless config.has_key?(item.to_sym)
 
         config.send(item) != :disabled

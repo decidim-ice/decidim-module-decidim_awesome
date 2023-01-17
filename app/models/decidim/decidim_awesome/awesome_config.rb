@@ -12,7 +12,6 @@ module Decidim
                class_name: "Decidim::DecidimAwesome::ConfigConstraint",
                dependent: :destroy
 
-      validates :organization, presence: true
       validates :var, uniqueness: { scope: :decidim_organization_id }
 
       def additional_constraints

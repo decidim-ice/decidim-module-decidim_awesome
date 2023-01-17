@@ -1,4 +1,4 @@
-name: "[CI] Tests"
+name: "[CI] Integration"
 
 on:
   push:
@@ -7,14 +7,17 @@ on:
   pull_request:
 
 env:
-  RUBY_VERSION: 2.7.5
 
 jobs:
   test-report:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
-        decidim_version: [ 0.25, 0.26 ]
+        include:
+          - decidim_version: 0.26
+            ruby_version: 2.7.5
+          - decidim_version: 0.27
+            ruby_version: 3.0.5
 
     services:
       postgres:
@@ -39,12 +42,12 @@ jobs:
 
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ env.RUBY_VERSION }}
+          ruby-version: ${{ matrix.ruby_version }}
         # do not use cache as appraisal is not compatible with gems installed locally
 
       - name: Install Ruby deps
         run: |
-          gem install bundler:2.1.4
+          gem install bundler:2.3.20
           bundle install  --jobs 4 --retry 3
 
       - name: Install Appraisal
@@ -54,23 +57,8 @@ jobs:
       - name: Setup Database
         run: bundle exec appraisal decidim-${{ matrix.decidim_version }} rake test_app
 
-      - name: Precompile
-        run: |
-          cd spec/decidim_dummy_app
-          bundle exec rails assets:precompile
-        env:
-          RAILS_ENV: production
-          SECRET_KEY_BASE: just-testing
-
-      - name: Summary RSpec with config vars disabled
-        run: bundle exec appraisal decidim-${{ matrix.decidim_version }} rspec spec/awesome_summary_spec.rb
-        env:
-          FEATURES: disabled
-          SIMPLECOV: 1
-          CODECOV: 1
-
       - name: General RSpec with config vars enabled
-        run: bundle exec appraisal decidim-${{ matrix.decidim_version }} rspec spec/
+        run: bundle exec appraisal decidim-${{ matrix.decidim_version }} rspec spec/system
         env:
           FEATURES: enabled
           SIMPLECOV: 1

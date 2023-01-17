@@ -50,7 +50,7 @@ module Decidim::DecidimAwesome
           expect { subject.call }.to broadcast(:ok)
 
           expect(AwesomeConfig.find_by(organization: organization, var: :scoped_styles).value.keys).not_to include("foo")
-          expect(AwesomeConfig.find_by(organization: organization, var: :scoped_style_foo)).to be(nil)
+          expect(AwesomeConfig.find_by(organization: organization, var: :scoped_style_foo)).to be_nil
         end
       end
     end

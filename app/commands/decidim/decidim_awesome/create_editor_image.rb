@@ -2,7 +2,7 @@
 
 module Decidim
   module DecidimAwesome
-    class CreateEditorImage < ::Rectify::Command
+    class CreateEditorImage < Command
       # Creates a blueprint.
       #
       # form - The form with the data.

@@ -3,7 +3,7 @@
 module Decidim
   module DecidimAwesome
     module Admin
-      class CreateScopedStyle < Rectify::Command
+      class CreateScopedStyle < Command
         # Public: Initializes the command.
         #
         def initialize(organization)

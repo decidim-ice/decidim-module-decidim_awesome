@@ -53,15 +53,15 @@ module Decidim
 
       # config processed for the organization config, without context
       def organization_config
-        @organization_config ||= unfiltered_config.map do |key, value|
+        @organization_config ||= unfiltered_config.to_h do |key, value|
           value = defaults[key] unless enabled_for_organization? key
           [key, value]
-        end.to_h
+        end
       end
 
       # config normalized according default values, without context, without organization config
       def unfiltered_config
-        valid = @vars.map { |v| [v.var.to_sym, v.value] }.to_h
+        valid = @vars.to_h { |v| [v.var.to_sym, v.value] }
 
         map_defaults do |key|
           valid[key].presence
@@ -135,28 +135,28 @@ module Decidim
         plural_key = singular_key.pluralize.to_sym
         return {} unless config[plural_key]
 
-        @sub_configs[singular_key] = config[plural_key].map do |key, _value|
+        @sub_configs[singular_key] = config[plural_key].to_h do |key, _value|
           [key, AwesomeConfig.find_by(var: "#{singular_key}_#{key}", organization: @organization)]
-        end.to_h
+        end
       end
 
       private
 
       def map_defaults
-        defaults.map do |key, val|
+        defaults.to_h do |key, val|
           value = false
           unless val == :disabled
             value = yield(key) || val
             value = val.merge(value.transform_keys(&:to_sym)) if val.is_a? Hash
           end
           [key, value]
-        end.to_h
+        end
       end
 
       def calculate_config
         # filter vars compliant with current context
         valid = @vars.filter { |item| enabled_for_organization?(item.var) && valid_in_context?(item.all_constraints) }
-                     .map { |v| [v.var.to_sym, v.value] }.to_h
+                     .to_h { |v| [v.var.to_sym, v.value] }
 
         map_defaults do |key|
           valid[key].presence

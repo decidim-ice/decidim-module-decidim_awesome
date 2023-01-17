@@ -1,0 +1,72 @@
+name: "[CI] Unit tests"
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+
+jobs:
+  test-report:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        include:
+          - decidim_version: 0.26
+            ruby_version: 2.7.5
+          - decidim_version: 0.27
+            ruby_version: 3.0.5
+
+    services:
+      postgres:
+        image: postgres:11
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        env:
+          POSTGRES_PASSWORD: postgres
+    env:
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_HOST: localhost
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby_version }}
+        # do not use cache as appraisal is not compatible with gems installed locally
+
+      - name: Install Ruby deps
+        run: |
+          gem install bundler:2.3.20
+          bundle install  --jobs 4 --retry 3
+
+      - name: Install Appraisal
+        run: |
+          bundle exec appraisal install
+
+      - name: Setup Database
+        run: bundle exec appraisal decidim-${{ matrix.decidim_version }} rake test_app
+
+      - name: Summary RSpec with config vars disabled
+        run: bundle exec appraisal decidim-${{ matrix.decidim_version }} rspec spec/awesome_summary_spec.rb
+        env:
+          FEATURES: disabled
+          SIMPLECOV: 1
+          CODECOV: 1
+
+      - name: General RSpec with config vars enabled
+        run: bundle exec appraisal decidim-${{ matrix.decidim_version }} rspec spec/ --exclude-pattern 'spec/system/**/*_spec.rb'
+        env:
+          FEATURES: enabled
+          SIMPLECOV: 1
+          CODECOV: 1
