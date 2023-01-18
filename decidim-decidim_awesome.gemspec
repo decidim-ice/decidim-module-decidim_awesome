@@ -7,9 +7,9 @@ require "decidim/decidim_awesome/version"
 Gem::Specification.new do |s|
   s.version = Decidim::DecidimAwesome::VERSION
   s.authors = ["Ivan Vergés"]
-  s.email = ["ivan@platoniq.net"]
+  s.email = ["ivan@pokecode.net"]
   s.license = "AGPL-3.0"
-  s.homepage = "https://github.com/platoniq/decidim-module-decidim_awesome"
+  s.homepage = "https://github.com/decidim-ice/decidim-module-decidim_awesome"
   # rubocop:disable Gemspec/RequiredRubyVersion
   s.required_ruby_version = ">= 2.7"
   # rubocop:enable Gemspec/RequiredRubyVersion

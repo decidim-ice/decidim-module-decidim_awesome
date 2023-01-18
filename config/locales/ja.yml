@@ -303,7 +303,7 @@ ja:
           text_settings: テキストの設定
           title: タイトル
           truncate: ポップアップの説明のための最大文字数
-      credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
+      credits: Decidim Awesome %{version} · Maintained with ♥ by PokeCode
       custom_fields:
         errors:
           invalid_fields: コンテンツは解析できませんでしたが、フィールド '%{field}' に割り当てられました

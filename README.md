@@ -1,8 +1,8 @@
 # Decidim::DecidimAwesome
 
-[![[CI] Test](https://github.com/Platoniq/decidim-module-decidim_awesome/actions/workflows/test.yml/badge.svg)](https://github.com/Platoniq/decidim-module-decidim_awesome/actions/workflows/test.yml)
-[![Maintainability](https://api.codeclimate.com/v1/badges/2dada53525dd5a944089/maintainability)](https://codeclimate.com/github/Platoniq/decidim-module-decidim_awesome/maintainability)
-[![Test Coverage](https://codecov.io/gh/Platoniq/decidim-module-decidim_awesome/branch/master/graph/badge.svg?token=TFBMCLLZJG)](https://codecov.io/gh/Platoniq/decidim-module-decidim_awesome)
+[![[CI] Test](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/test.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/test.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/2dada53525dd5a944089/maintainability)](https://codeclimate.com/github/decidim-ice/decidim-module-decidim_awesome/maintainability)
+[![Test Coverage](https://codecov.io/gh/decidim-ice/decidim-module-decidim_awesome/branch/master/graph/badge.svg?token=TFBMCLLZJG)](https://codecov.io/gh/decidim-ice/decidim-module-decidim_awesome)
 
 Usability and UX tweaks for Decidim.
 
@@ -13,12 +13,7 @@ All tweaks are provided in a optional fashion with granular permissions that let
 
 ## Why this plugin?
 
-At Platoniq, we like to explore and combine open tools for enriching democracy in many levels. And also for organizations or companies, not only governments.
-Currently we are working very closely with the team behind [Decidim](https://decidim.org) because we believe that it is a great software.
-
-However in Platoniq we have this slogan: "Democracy is fun if you take it seriously" (feel free to ask for T-shirts 😉).
-And, let's face it, sometimes we feel that Decidim lacks a bit of the "fun" part so we created this.
-Because Decidim is awesome and so is this!
+Decidim is an awesome platform, but it has some limitations that can be annoying for the users or the admins. This plugin tries to solve some of them. See the list of tweaks below.
 
 ## Usage
 
@@ -158,7 +153,7 @@ Rules available:
 
 #### To be continued...
 
-We're not done! Please check the [issues](/Platoniq/decidim-module-decidim_awesome/issues) (and participate) to see what's on our mind
+We're not done! Please check the [issues](/decidim-ice/decidim-module-decidim_awesome/issues) (and participate) to see what's on our mind
 
 Also feel free to propose something! or even better send a PR!
 

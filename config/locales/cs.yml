@@ -302,7 +302,7 @@ cs:
           text_settings: Nastavení textu
           title: Nadpis
           truncate: Maximum znaků pro popisy vyskakovacích oken
-      credits: Vylepšení Decidim %{version} · Vyrobeno s ♥ od Platoniq
+      credits: Vylepšení Decidim %{version} · Maintained with ♥ by PokeCode
       custom_fields:
         errors:
           invalid_fields: Obsah nemohl být analyzován, ale byl přiřazen do pole '%{field}'

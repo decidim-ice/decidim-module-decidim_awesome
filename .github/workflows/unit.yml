@@ -16,6 +16,7 @@ jobs:
             ruby_version: 2.7.6
           - gemfile: Gemfile
             ruby_version: 3.0.5
+      fail-fast: false
 
     services:
       postgres:
