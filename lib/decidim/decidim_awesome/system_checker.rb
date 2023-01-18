@@ -54,9 +54,11 @@ module Decidim
           Digest::MD5.hexdigest(File.read(file))
         end
 
+        # rubocop:disable Style/OpenStructUse
         def to_struct(obj)
-          Struct.new obj
+          OpenStruct.new obj
         end
+        # rubocop:enable Style/OpenStructUse
       end
     end
   end
