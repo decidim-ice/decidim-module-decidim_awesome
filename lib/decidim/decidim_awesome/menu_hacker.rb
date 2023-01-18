@@ -50,7 +50,7 @@ module Decidim
 
       def menu_overrides
         @menu_overrides ||= current_config.map do |item|
-          OpenStruct.new(
+          Struct.new(
             label: translated_attribute(item["label"], organization),
             raw_label: item["label"],
             url: item["url"],

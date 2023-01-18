@@ -60,10 +60,10 @@ module Decidim::DecidimAwesome
           expect(AwesomeConfig.find_by(organization: organization, var: "scoped_styles").value).to be_a(Hash)
         end
 
-        context "and has a constraint" do
-          it "creates an associated config constraint var" do
-          end
-        end
+        # context "and has a constraint" do
+        #   it "creates an associated config constraint var" do
+        #   end
+        # end
       end
     end
   end

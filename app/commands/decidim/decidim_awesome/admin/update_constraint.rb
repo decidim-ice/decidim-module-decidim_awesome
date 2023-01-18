@@ -36,7 +36,7 @@ module Decidim
         attr_reader :form
 
         def attributes
-          form.attributes.filter { |key, val| key !="id" && val.present? }
+          form.attributes.filter { |key, val| key != "id" && val.present? }
         end
       end
     end

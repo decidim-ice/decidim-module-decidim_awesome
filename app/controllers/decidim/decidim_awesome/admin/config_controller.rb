@@ -89,7 +89,7 @@ module Decidim
         end
 
         def users_for(ids_list)
-          Decidim::User.where(id: ids_list).map { |user| OpenStruct.new(text: format_user_name(user), id: user.id) }
+          Decidim::User.where(id: ids_list).map { |user| Struct.new(text: format_user_name(user), id: user.id) }
         end
 
         def format_user_name(user)

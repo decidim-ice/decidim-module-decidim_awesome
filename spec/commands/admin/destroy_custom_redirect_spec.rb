@@ -10,7 +10,7 @@ module Decidim::DecidimAwesome
 
       include_context "with custom redirects params"
 
-      let(:item) { OpenStruct.new({ origin: attributes[0] }.merge(attributes[1])) }
+      let(:item) { Struct.new({ origin: attributes[0] }.merge(attributes[1])) }
       let(:previous_value) do
         { "/previous-route" => { "destination" => "/another-place", "active" => true } }
       end
@@ -29,7 +29,7 @@ module Decidim::DecidimAwesome
       end
 
       describe "when invalid" do
-        let(:item) { OpenStruct.new({ origin: "/not-in-the-list" }.merge(attributes[1])) }
+        let(:item) { Struct.new({ origin: "/not-in-the-list" }.merge(attributes[1])) }
 
         it "broadcasts :invalid and does not modifiy the config options" do
           expect { subject.call }.to broadcast(:invalid)

@@ -85,6 +85,7 @@ module Decidim
         end.flatten.uniq.map(&:to_i)
       end
 
+      # rubocop:disable Lint/DuplicateBranch
       # avoid unnecessary processing for non-user routes
       def processable_path?
         return true if safe_get_route?
@@ -121,6 +122,7 @@ module Decidim
           true
         end
       end
+      # rubocop:enable Lint/DuplicateBranch
 
       # to access certain deeper routes it requires first to click on a parent route, even without Post permissions in there
       # this adds this additional routes to these cases
@@ -135,16 +137,16 @@ module Decidim
 
           # processes groups must give access to processes generic url
           if constraint.settings["participatory_space_manifest"] == "process_groups"
-            additions << OpenStruct.new(settings: { "participatory_space_manifest" => "participatory_processes", "match" => "exclusive" })
+            additions << Struct.new(settings: { "participatory_space_manifest" => "participatory_processes", "match" => "exclusive" })
           end
 
           # adds a exclusive constraint to the parent participatory space (so index page can be accessed)
           next unless constraint.settings.size > 1
 
-          additions << OpenStruct.new(settings: {
-                                        "participatory_space_manifest" => constraint.settings["participatory_space_manifest"],
-                                        "match" => "exclusive"
-                                      })
+          additions << Struct.new(settings: {
+                                    "participatory_space_manifest" => constraint.settings["participatory_space_manifest"],
+                                    "match" => "exclusive"
+                                  })
         end
 
         additions
@@ -168,7 +170,7 @@ module Decidim
           next unless model
 
           settings["participatory_space_slug"] = model.find_by(slug: settings["participatory_space_slug"])&.id
-          OpenStruct.new(settings: settings) if settings["participatory_space_slug"]
+          Struct.new(settings: settings) if settings["participatory_space_slug"]
         end
       end
       # rubocop:enable Metrics/CyclomaticComplexity

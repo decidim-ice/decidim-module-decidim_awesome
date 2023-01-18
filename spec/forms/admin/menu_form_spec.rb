@@ -8,6 +8,10 @@ module Decidim::DecidimAwesome
       subject { described_class.from_params(attributes).with_context(current_organization: organization) }
 
       let(:organization) { create :organization }
+      let(:url) { "/some-path" }
+      let(:position) { 2 }
+      let(:target) { "_blank" }
+      let(:visibility) { "hidden" }
       let(:attributes) do
         {
           raw_label: label,
@@ -18,16 +22,21 @@ module Decidim::DecidimAwesome
         }
       end
 
-      let(:label) do
-        {
-          "en" => "Menu english",
-          "ca" => "Menu catalan"
-        }
+      if legacy_version?
+        let(:label) do
+          {
+            en: "Menu english",
+            ca: "Menu catalan"
+          }
+        end
+      else
+        let(:label) do
+          {
+            "en" => "Menu english",
+            "ca" => "Menu catalan"
+          }
+        end
       end
-      let(:url) { "/some-path" }
-      let(:position) { 2 }
-      let(:target) { "_blank" }
-      let(:visibility) { "hidden" }
 
       context "when everything is OK" do
         it { is_expected.to be_valid }

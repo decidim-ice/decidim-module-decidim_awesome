@@ -15,7 +15,7 @@ AllCops:
   Exclude:
     - "**/vendor/**/*"
     - "development_app/**/*"
-    - "spec/decidim_dummy_app/**/*"
+    - "spec/decidim_dummy_app*/**/*"
     - "node_modules/**/*"
   # Default formatter will be used if no -f/--format option is given.
   DefaultFormatter: progress

@@ -55,7 +55,7 @@ module Decidim
         end
 
         def to_struct(obj)
-          OpenStruct.new obj
+          Struct.new obj
         end
       end
     end

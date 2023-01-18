@@ -10,7 +10,7 @@ module Decidim::DecidimAwesome
 
       include_context "with menu hacks params"
 
-      let(:item) { OpenStruct.new(attributes) }
+      let(:item) { Struct.new(attributes) }
       let(:previous_menu) do
         { "url" => "/another-link", "position" => 10 }
       end
@@ -29,7 +29,7 @@ module Decidim::DecidimAwesome
       end
 
       describe "when invalid" do
-        let(:item) { OpenStruct.new("url" => "/not-in-the-menu") }
+        let(:item) { Struct.new("url" => "/not-in-the-menu") }
 
         it "broadcasts :invalid and does not modifiy the config options" do
           expect { subject.call }.to broadcast(:invalid)

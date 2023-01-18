@@ -251,5 +251,9 @@ module Decidim
     def self.register_component(manifest, &block)
       registered_components << [manifest, block]
     end
+
+    def self.legacy_version?
+      Decidim.version[0..3] == "0.26"
+    end
   end
 end
