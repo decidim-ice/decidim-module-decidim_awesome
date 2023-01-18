@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Style/OpenStructUse
 module Decidim
   module DecidimAwesome
     # A middleware that stores the current awesome context by parsing the request
@@ -137,16 +138,16 @@ module Decidim
 
           # processes groups must give access to processes generic url
           if constraint.settings["participatory_space_manifest"] == "process_groups"
-            additions << Struct.new(settings: { "participatory_space_manifest" => "participatory_processes", "match" => "exclusive" })
+            additions << OpenStruct.new(settings: { "participatory_space_manifest" => "participatory_processes", "match" => "exclusive" })
           end
 
           # adds a exclusive constraint to the parent participatory space (so index page can be accessed)
           next unless constraint.settings.size > 1
 
-          additions << Struct.new(settings: {
-                                    "participatory_space_manifest" => constraint.settings["participatory_space_manifest"],
-                                    "match" => "exclusive"
-                                  })
+          additions << OpenStruct.new(settings: {
+                                        "participatory_space_manifest" => constraint.settings["participatory_space_manifest"],
+                                        "match" => "exclusive"
+                                      })
         end
 
         additions
@@ -170,7 +171,7 @@ module Decidim
           next unless model
 
           settings["participatory_space_slug"] = model.find_by(slug: settings["participatory_space_slug"])&.id
-          Struct.new(settings: settings) if settings["participatory_space_slug"]
+          OpenStruct.new(settings: settings) if settings["participatory_space_slug"]
         end
       end
       # rubocop:enable Metrics/CyclomaticComplexity
@@ -182,3 +183,4 @@ module Decidim
     end
   end
 end
+# rubocop:enable Style/OpenStructUse

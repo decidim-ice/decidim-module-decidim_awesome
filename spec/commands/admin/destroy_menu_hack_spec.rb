@@ -3,6 +3,7 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/menu_hack_contexts"
 
+# rubocop:disable Style/OpenStructUse
 module Decidim::DecidimAwesome
   module Admin
     describe DestroyMenuHack do
@@ -10,7 +11,7 @@ module Decidim::DecidimAwesome
 
       include_context "with menu hacks params"
 
-      let(:item) { Struct.new(attributes) }
+      let(:item) { OpenStruct.new(attributes) }
       let(:previous_menu) do
         { "url" => "/another-link", "position" => 10 }
       end
@@ -29,7 +30,7 @@ module Decidim::DecidimAwesome
       end
 
       describe "when invalid" do
-        let(:item) { Struct.new("url" => "/not-in-the-menu") }
+        let(:item) { OpenStruct.new("url" => "/not-in-the-menu") }
 
         it "broadcasts :invalid and does not modifiy the config options" do
           expect { subject.call }.to broadcast(:invalid)
@@ -42,3 +43,4 @@ module Decidim::DecidimAwesome
     end
   end
 end
+# rubocop:enable Style/OpenStructUse
