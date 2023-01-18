@@ -340,6 +340,20 @@ RBENV_VERSION=2.7.6 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rake test_app
 RBENV_VERSION=2.7.6 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rspec
 ```
 
+For convenience, you can use the scripts `bin/rspec` and `bin/rspec-legacy` to run tests against one or the other version:
+
+```bash
+bin/rspec spec/
+bin/rspec-legacy spec/
+```
+
+> **NOTE:** Remember to reset the database when changing between tests:
+> ```bash
+> bin/rspec --reset
+> bin/rspec-legacy --reset
+> ```
+
+
 Note that the database user has to have rights to create and drop a database in
 order to create the dummy test app database.
 
@@ -351,15 +365,12 @@ commands shown above.
 
 ### Test code coverage
 
-If you want to generate the code coverage report for the tests, you can use
-the `SIMPLECOV=1` environment variable in the rspec command as follows:
+Code coverage report is generated automatically in a folder named `coverage` in the project root which contains
+the code coverage report.
 
 ```bash
-SIMPLECOV=1 bundle exec rspec
+firefox coverage/index.html
 ```
-
-This will generate a folder named `coverage` in the project root which contains
-the code coverage report.
 
 ### Localization
 
@@ -374,4 +385,4 @@ This engine is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 
 ## Credits
 
-This plugin has been developed by ![Platoniq](app/packs/images/decidim/decidim_awesome/platoniq-logo.png)
+This plugin maintainted by ![PokeCode](app/packs/images/decidim/decidim_awesome/pokecode-logo.png)

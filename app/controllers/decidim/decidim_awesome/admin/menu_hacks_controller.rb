@@ -71,11 +71,12 @@ module Decidim
 
         private
 
+        # rubocop:disable Style/OpenStructUse
         def menu_item
           item = current_items.find { |i| md5(i.url) == params[:id] }
           raise ActiveRecord::RecordNotFound unless item
 
-          Struct.new(
+          OpenStruct.new(
             raw_label: item.try(:raw_label) || { current_organization.default_locale => item.label },
             url: item.url,
             position: item.position,
@@ -84,6 +85,7 @@ module Decidim
             native?: !item.respond_to?(:overrided?)
           )
         end
+        # rubocop:enable Style/OpenStructUse
 
         def current_items
           @current_items ||= current_menu.items(include_invisible: true)

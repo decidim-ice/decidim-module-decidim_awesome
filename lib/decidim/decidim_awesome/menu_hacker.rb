@@ -48,9 +48,10 @@ module Decidim
         menu
       end
 
+      # rubocop:disable Style/OpenStructUse
       def menu_overrides
         @menu_overrides ||= current_config.map do |item|
-          Struct.new(
+          OpenStruct.new(
             label: translated_attribute(item["label"], organization),
             raw_label: item["label"],
             url: item["url"],
@@ -64,6 +65,7 @@ module Decidim
           )
         end
       end
+      # rubocop:enable Style/OpenStructUse
 
       def activate?(url, view)
         urls = @items.map(&:url).sort_by(&:length).reverse
