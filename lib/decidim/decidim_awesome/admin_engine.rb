@@ -22,7 +22,6 @@ module Decidim
         resources :scoped_styles, param: :var, only: [:create, :destroy]
         resources :proposal_custom_fields, param: :var, only: [:create, :destroy]
         resources :scoped_admins, param: :var, only: [:create, :destroy]
-        resources :admin_actions, only: [:index, :export_xls]
         get :users, to: "config#users"
         post :rename_scope_label, to: "config#rename_scope_label"
         get :checks, to: "checks#index"
@@ -45,18 +44,6 @@ module Decidim
                         position: 7.5,
                         active: is_active_link?(decidim_admin_decidim_awesome.config_path(:editors), :inclusive),
                         if: defined?(current_user) && current_user&.read_attribute("admin")
-        end
-      end
-
-      initializer "decidim_awesome.admin_menu" do
-        Decidim.menu :admin_user_menu do |menu|
-          if DecidimAwesome.enabled? :allow_admin_accountability
-            menu.add_item :admin_accountability,
-                          I18n.t("menu.admin_accountability", scope: "decidim.admin", default: "Admin accountability"),
-                          decidim_admin_decidim_awesome.admin_actions_path,
-                          active: is_active_link?(decidim_admin_decidim_awesome.admin_actions_path, :inclusive),
-                          position: 7
-          end
         end
       end
 

@@ -221,12 +221,6 @@ module Decidim
       }
     end
 
-    # If true, enables a new section in "Participants" where to audit all the admin roles that have been enabled/disabled historically in Decidim
-    # Set to :disabled to completly remove this feature
-    config_accessor :allow_admin_accountability do
-      true
-    end
-
     #
     # HELPERS
     #
