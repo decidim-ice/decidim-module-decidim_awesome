@@ -316,7 +316,6 @@ de:
           text_settings: Text-Einstellungen
           title: Titel
           truncate: Maximale Zeichenanzahl für Popup-Beschreibungen
-      credits: Danksagungen
       custom_fields:
         errors:
           invalid_fields: Der Inhalt konnte nicht geparst werden, wurde aber dem Feld '%{field}' zugewiesen.
