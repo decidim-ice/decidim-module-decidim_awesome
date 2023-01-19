@@ -6,11 +6,14 @@
 @import "stylesheets/decidim/decidim_awesome/editors/markdown_editor";
 @import "stylesheets/decidim/decidim_awesome/editors/quill_editor";
 
-.platoniq-credits {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin: 1em;
+.pokecode-credits {
+  float: right;
+  margin: 0 1em 0.5em 0;
+
+  // position: absolute;
+  // bottom: 0;
+  // right: 0;
+  // margin: 1em;
   font-size: .8em;
 }
 

@@ -56,8 +56,8 @@ describe Decidim::DecidimAwesome do
   else
     puts 'Please execute this test with the env FEATURES set to "enabled" or "disabled"'
     puts ""
-    puts "FEATUES=disabled bundle exec rspec spec/system/awesome_summary_spec.rb"
-    puts "FEATUES=enabled bundle exec rspec spec/system/awesome_summary_spec.rb"
+    puts "FEATURES=disabled bundle exec rspec spec/system/awesome_summary_spec.rb"
+    puts "FEATURES=enabled bundle exec rspec spec/system/awesome_summary_spec.rb"
     puts ""
     puts "TEST SKIPPED!"
   end

@@ -1,8 +1,12 @@
 # Decidim::DecidimAwesome
 
-[![[CI] Test](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/test.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/test.yml)
+[![[CI] Unit](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/unit.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/unit.yml)
+[![[CI] Integration Public](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/integration-public.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/integration-public.yml)
+[![[CI] Integration Admin](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/integration-admin.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/integration-admin.yml)
+[![[CI] Lint](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/lint.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/lint.yml)
+[![[CI] Precompile](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/precompile.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/precompile.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/2dada53525dd5a944089/maintainability)](https://codeclimate.com/github/decidim-ice/decidim-module-decidim_awesome/maintainability)
-[![Test Coverage](https://codecov.io/gh/decidim-ice/decidim-module-decidim_awesome/branch/master/graph/badge.svg?token=TFBMCLLZJG)](https://codecov.io/gh/decidim-ice/decidim-module-decidim_awesome)
+[![Test Coverage](https://codecov.io/gh/decidim-ice/decidim-module-decidim_awesome/branch/main/graph/badge.svg?token=TFBMCLLZJG)](https://codecov.io/gh/decidim-ice/decidim-module-decidim_awesome)
 
 Usability and UX tweaks for Decidim.
 

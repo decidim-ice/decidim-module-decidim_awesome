@@ -390,7 +390,7 @@ en:
           text_settings: Text settings
           title: Title
           truncate: Maximum characters for popup descriptions
-      credits: Decidim Awesome %{version} · Maintained with ♥ by PokeCode
+      credits: Decidim Awesome %{version} · Maintained with ♥ by %{company}
       custom_fields:
         errors:
           invalid_fields: Content couldn't be parsed but has been assigned to the

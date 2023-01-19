@@ -70,6 +70,6 @@ end %>
 
   <%= yield %>
 
-<div class="pokecode-credits"><%= link_to t("credits", scope: "decidim.decidim_awesome", version: awesome_version), "https://github.com/decidim-ice/decidim-module-decidim_awesome/" %></div>
+<div class="pokecode-credits"><%= t("credits", scope: "decidim.decidim_awesome", version: link_to(awesome_version, "https://github.com/decidim-ice/decidim-module-decidim_awesome/"), company: link_to("PokeCode", "https://pokecode.net")).html_safe %></div>
 
 <% end %>

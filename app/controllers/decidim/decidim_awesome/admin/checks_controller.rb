@@ -13,7 +13,7 @@ module Decidim
 
         layout "decidim/admin/decidim_awesome"
 
-        helper_method :head, :admin_head, :head_addons, :admin_addons
+        helper_method :head, :admin_head, :head_addons, :admin_addons, :legacy_version?
 
         def migrate_images
           Decidim::DecidimAwesome::MigrateLegacyImagesJob.perform_later(current_organization.id)
@@ -23,8 +23,12 @@ module Decidim
 
         private
 
+        def legacy_version?
+          DecidimAwesome.legacy_version?
+        end
+
         def head
-          @head ||= Nokogiri::HTML(render_template("layouts/decidim/head"))
+          @head ||= Nokogiri::HTML(render_template("decidim/decidim_awesome/admin/checks/assets_tester"))
         end
 
         def admin_head
