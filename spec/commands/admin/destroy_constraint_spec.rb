@@ -43,6 +43,8 @@ module Decidim::DecidimAwesome
         end
 
         context "and is a critical scope" do
+          let(:name) { :proposal_custom_field }
+
           it_behaves_like "destroys the constraint"
         end
       end

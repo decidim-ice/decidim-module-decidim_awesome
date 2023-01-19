@@ -17,7 +17,7 @@ module Decidim::DecidimAwesome
     end
 
     it "has 5 modified files in core" do
-      expect(subject.overrides["decidim-core"].files.length).to eq(5)
+      expect(subject.overrides["decidim-core"].files.length).to eq(6)
     end
 
     it "has 5 modified files in proposals" do
@@ -36,7 +36,7 @@ module Decidim::DecidimAwesome
       context "when iterating by group #{group}" do
         it "each file is valid" do
           props.files do |file, _signature|
-            expect(subject.valid?(props.spec, file)).to eq(true)
+            expect(subject.valid?(props.spec, file)).to be(true)
           end
         end
       end

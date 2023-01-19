@@ -302,6 +302,7 @@ pt-BR:
           text_settings: Configurações de texto
           title: Título
           truncate: Máximo de caracteres para descrições em popup
+      credits: Decidim Incrível %{version} · Maintained with ♥ by %{company}
       custom_fields:
         errors:
           invalid_fields: O conteúdo não pode ser analisado, mas foi atribuído ao campo '%{field}'

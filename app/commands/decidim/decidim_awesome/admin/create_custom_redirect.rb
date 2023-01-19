@@ -3,7 +3,7 @@
 module Decidim
   module DecidimAwesome
     module Admin
-      class CreateCustomRedirect < Rectify::Command
+      class CreateCustomRedirect < Command
         # Public: Initializes the command.
         #
         def initialize(form)

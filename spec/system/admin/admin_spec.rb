@@ -105,6 +105,8 @@ describe "Visit the admin page", type: :system do
       it "renders the page" do
         expect(page).to have_content(/Tweaks for proposals/i)
         expect(page).to have_content("\"Rich text editor for participants\" is enabled")
+        expect(page).to have_content("User input validations for the \"title\" field")
+        expect(page).to have_content("User input validations for the \"body\" field")
       end
 
       context "and rich text editor for participants is disabled" do
@@ -115,10 +117,36 @@ describe "Visit the admin page", type: :system do
           expect(page).not_to have_content("\"Rich text editor for participants\" is enabled")
         end
       end
+
+      context "when all title validators are disabled" do
+        let(:disabled_features) { [:validate_title_min_length, :validate_title_max_caps_percent, :validate_title_max_marks_together, :validate_title_start_with_caps] }
+
+        it "does not show title options" do
+          expect(page).not_to have_content("User input validations for the \"title\" field")
+          expect(page).to have_content("User input validations for the \"body\" field")
+        end
+      end
+
+      context "when all body validators are disabled" do
+        let(:disabled_features) { [:validate_body_min_length, :validate_body_max_caps_percent, :validate_body_max_marks_together, :validate_body_start_with_caps] }
+
+        it "does not show body options" do
+          expect(page).to have_content("User input validations for the \"title\" field")
+          expect(page).not_to have_content("User input validations for the \"body\" field")
+        end
+      end
     end
 
-    context "when proposal hacks are disabled" do
-      let(:disabled_features) { [:allow_images_in_proposals] }
+    context "when some proposals hacks are disabled" do
+      [:allow_images_in_proposals, :validate_title_min_length, :validate_title_max_caps_percent, :validate_title_max_marks_together, :validate_title_start_with_caps, :validate_body_min_length, :validate_body_max_caps_percent, :validate_body_max_marks_together, :validate_body_start_with_caps].each do |var|
+        let(:disabled_features) { [var] }
+
+        it_behaves_like "has menu link", "proposals"
+      end
+    end
+
+    context "when all proposals hacks are disabled" do
+      let(:disabled_features) { [:allow_images_in_proposals, :validate_title_min_length, :validate_title_max_caps_percent, :validate_title_max_marks_together, :validate_title_start_with_caps, :validate_body_min_length, :validate_body_max_caps_percent, :validate_body_max_marks_together, :validate_body_start_with_caps] }
 
       it_behaves_like "do not have menu link", "proposals"
     end

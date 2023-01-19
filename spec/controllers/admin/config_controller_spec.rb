@@ -40,7 +40,7 @@ module Decidim::DecidimAwesome
         end
 
         context "when params var is empty" do
-          let(:params) { [] }
+          let(:params) { {} }
           let(:editors) { [:allow_images_in_full_editor, :allow_images_in_small_editor, :use_markdown_editor, :allow_images_in_markdown_editor] }
           let(:disabled) { [] }
 
@@ -62,7 +62,17 @@ module Decidim::DecidimAwesome
             end
 
             context "and proposals is disabled" do
-              let(:disabled) { editors + [:allow_images_in_proposals] }
+              let(:disabled) do
+                editors + [:allow_images_in_proposals,
+                           :validate_title_min_length,
+                           :validate_title_max_caps_percent,
+                           :validate_title_max_marks_together,
+                           :validate_title_start_with_caps,
+                           :validate_body_min_length,
+                           :validate_body_max_caps_percent,
+                           :validate_body_max_marks_together,
+                           :validate_body_start_with_caps]
+              end
 
               it "returns surveys" do
                 expect(controller.helpers.config_var).to eq(:surveys)

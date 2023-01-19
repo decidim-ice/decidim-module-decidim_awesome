@@ -11,7 +11,7 @@
 .rspec-failures
 
 # default test application
-spec/decidim_dummy_app
+spec/decidim_dummy_app*
 
 # default development application
 development_app

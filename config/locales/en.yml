@@ -26,6 +26,18 @@ en:
         scoped_admins: Scoped admins group %{id}
         scoped_styles: Custom styles %{id}
         use_markdown_editor: Use a Markdown editor instead of the HTML editor
+        validate_body_max_caps_percent: Maximum allowed percentage of capital letters
+          for the body
+        validate_body_max_marks_together: Maximum consecutive marks symbols allowed
+          in the body
+        validate_body_min_length: Minimum required characters for the body
+        validate_body_start_with_caps: Force the body to start with a capital letter
+        validate_title_max_caps_percent: Maximum allowed percentage of capital letters
+          for the title
+        validate_title_max_marks_together: Maximum consecutive marks symbols allowed
+          in the title
+        validate_title_min_length: Minimum required characters for the title
+        validate_title_start_with_caps: Force the title to start with a capital letter
       constraint:
         component_id: or specifically in
         component_manifest: Only in components of type
@@ -199,6 +211,23 @@ en:
               use_markdown_editor: This will substitute the Quill WYSIWYG editor,
                 to use a Markdown editor instead. Text will be converted and saved
                 as HTML in the database.
+              validate_body_max_caps_percent: Zero won't allow any capital letter,
+                100 will force to write everything in capital letters
+              validate_body_max_marks_together: 'Limit the number of question and
+                exclamation marks that can be written together. Ie: if it is 2, then
+                ''!!!'' won''t be allowed in the text'
+              validate_body_min_length: This number can be zero, this will effectively
+                make this field non-mandatory
+              validate_title_max_caps_percent: Zero won't allow any capital letter,
+                100 will force to write everything in capital letters
+              validate_title_max_marks_together: 'Limit the number of question and
+                exclamation marks that can be written together. Ie: if it is 2, then
+                ''!!!'' won''t be allowed in the text'
+              validate_title_min_length: Title is always mandatory and this number
+                cannot be zero
+            validators:
+              body: User input validations for the "body" field
+              title: User input validations for the "title" field
           form_proposal_custom_fields:
             new: Add a new "custom fields" box
             remove: Remove this "custom fields" box
@@ -313,6 +342,7 @@ en:
               hidden: Always hidden
               logged: Only visible for logged users
               non_logged: Only visible for non-logged users
+              verified_user: Only visible for users with a valid authorization
           index:
             confirm_destroy: Are you sure to remove this customization?
             edit: Edit
@@ -359,7 +389,7 @@ en:
           text_settings: Text settings
           title: Title
           truncate: Maximum characters for popup descriptions
-      credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
+      credits: Decidim Awesome %{version} · Maintained with ♥ by %{company}
       custom_fields:
         errors:
           invalid_fields: Content couldn't be parsed but has been assigned to the
@@ -388,6 +418,9 @@ en:
           show:
             view_meeting: View meeting
             view_proposal: View proposal
+      validators:
+        too_much_caps: Is using too many capital letters (over %{percent}% of the
+          text)
   layouts:
     decidim:
       admin:

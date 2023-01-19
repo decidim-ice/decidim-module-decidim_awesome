@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Style/OpenStructUse
 module Decidim
   module DecidimAwesome
     # A middleware that stores the current awesome context by parsing the request
@@ -85,6 +86,7 @@ module Decidim
         end.flatten.uniq.map(&:to_i)
       end
 
+      # rubocop:disable Lint/DuplicateBranch
       # avoid unnecessary processing for non-user routes
       def processable_path?
         return true if safe_get_route?
@@ -121,6 +123,7 @@ module Decidim
           true
         end
       end
+      # rubocop:enable Lint/DuplicateBranch
 
       # to access certain deeper routes it requires first to click on a parent route, even without Post permissions in there
       # this adds this additional routes to these cases
@@ -180,3 +183,4 @@ module Decidim
     end
   end
 end
+# rubocop:enable Style/OpenStructUse

@@ -61,6 +61,41 @@ module Decidim
       false
     end
 
+    # Configuration options to handle different validations in proposals
+    # (maybe in the future will apply to other places)
+    # Set it to :disabled if you don't want to use this feature
+    config_accessor :validate_title_min_length do
+      15
+    end
+
+    config_accessor :validate_title_max_caps_percent do
+      25
+    end
+
+    config_accessor :validate_title_max_marks_together do
+      1
+    end
+
+    config_accessor :validate_title_start_with_caps do
+      true
+    end
+
+    config_accessor :validate_body_min_length do
+      15
+    end
+
+    config_accessor :validate_body_max_caps_percent do
+      25
+    end
+
+    config_accessor :validate_body_max_marks_together do
+      1
+    end
+
+    config_accessor :validate_body_start_with_caps do
+      true
+    end
+
     config_accessor :intergram_for_public do
       false
     end
@@ -194,7 +229,7 @@ module Decidim
     def self.enabled?(config_vars)
       config_vars = [config_vars] unless config_vars.respond_to?(:detect)
 
-      config_vars.detect do |item|
+      config_vars.any? do |item|
         next unless config.has_key?(item.to_sym)
 
         config.send(item) != :disabled
@@ -209,6 +244,10 @@ module Decidim
     # so we can honor disabled_components config
     def self.register_component(manifest, &block)
       registered_components << [manifest, block]
+    end
+
+    def self.legacy_version?
+      Decidim.version[0..3] == "0.26"
     end
   end
 end

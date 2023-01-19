@@ -3,7 +3,7 @@
 module Decidim
   module DecidimAwesome
     module Admin
-      class CreateProposalCustomField < Rectify::Command
+      class CreateProposalCustomField < Command
         include NeedsConstraintHelpers
 
         # Public: Initializes the command.

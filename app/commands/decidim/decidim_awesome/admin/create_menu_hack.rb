@@ -3,7 +3,7 @@
 module Decidim
   module DecidimAwesome
     module Admin
-      class CreateMenuHack < Rectify::Command
+      class CreateMenuHack < Command
         # Public: Initializes the command.
         #
         def initialize(form, menu_name)

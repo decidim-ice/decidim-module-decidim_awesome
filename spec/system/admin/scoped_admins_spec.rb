@@ -73,17 +73,21 @@ describe "Scoped admin journeys", type: :system do
 
     context "and admin terms not accepted" do
       it "allows admin terms to be accepted" do
+        welcome_text = "Welcome to the Admin Panel."
+        welcome_text = "Welcome to the Decidim Admin Panel." if legacy_version?
         visit decidim_admin.root_path
 
-        expect(page).to have_content("Welcome to the Decidim Admin Panel.")
+        expect(page).to have_content(welcome_text)
 
         click_link "Review them now"
 
         expect(page).to have_content("Agree to the terms and conditions of use")
 
-        click_button "I agree with the following terms"
+        agree_to_terms = "I agree with the following terms"
+        agree_to_terms = "I agree with the terms" if legacy_version?
+        click_button agree_to_terms
 
-        expect(page).to have_content("Welcome to the Decidim Admin Panel.")
+        expect(page).to have_content(welcome_text)
         expect(page).not_to have_content("Review them now")
       end
     end

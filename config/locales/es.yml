@@ -302,6 +302,7 @@ es:
           text_settings: Ajustes del texto
           title: Título
           truncate: Número máximo de caracteres para las descripciones emergentes
+      credits: Decidim Awesome %{version} · Maintained with ♥ by %{company}
       custom_fields:
         errors:
           invalid_fields: No se ha podido analizar el contenido pero se ha asignado al campo '%{field}'

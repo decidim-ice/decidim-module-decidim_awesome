@@ -1,8 +1,11 @@
 # Decidim::DecidimAwesome
 
-[![[CI] Test](https://github.com/Platoniq/decidim-module-decidim_awesome/actions/workflows/test.yml/badge.svg)](https://github.com/Platoniq/decidim-module-decidim_awesome/actions/workflows/test.yml)
-[![Maintainability](https://api.codeclimate.com/v1/badges/2dada53525dd5a944089/maintainability)](https://codeclimate.com/github/Platoniq/decidim-module-decidim_awesome/maintainability)
-[![Test Coverage](https://codecov.io/gh/Platoniq/decidim-module-decidim_awesome/branch/master/graph/badge.svg?token=TFBMCLLZJG)](https://codecov.io/gh/Platoniq/decidim-module-decidim_awesome)
+[![[CI] Tests 0.27](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/tests.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/tests.yml)
+[![[CI] Tests 0.26](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/tests-legacy.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/tests-legacy.yml)
+[![[CI] Lint](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/lint.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/lint.yml)
+[![[CI] Precompile](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/precompile.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/precompile.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/2dada53525dd5a944089/maintainability)](https://codeclimate.com/github/decidim-ice/decidim-module-decidim_awesome/maintainability)
+[![Test Coverage](https://codecov.io/gh/decidim-ice/decidim-module-decidim_awesome/branch/main/graph/badge.svg?token=TFBMCLLZJG)](https://codecov.io/gh/decidim-ice/decidim-module-decidim_awesome)
 
 Usability and UX tweaks for Decidim.
 
@@ -13,12 +16,7 @@ All tweaks are provided in a optional fashion with granular permissions that let
 
 ## Why this plugin?
 
-At Platoniq, we like to explore and combine open tools for enriching democracy in many levels. And also for organizations or companies, not only governments.
-Currently we are working very closely with the team behind [Decidim](https://decidim.org) because we believe that it is a great software.
-
-However in Platoniq we have this slogan: "Democracy is fun if you take it seriously" (feel free to ask for T-shirts 😉).
-And, let's face it, sometimes we feel that Decidim lacks a bit of the "fun" part so we created this.
-Because Decidim is awesome and so is this!
+Decidim is an awesome platform, but it has some limitations that can be annoying for the users or the admins. This plugin tries to solve some of them. See the list of tweaks below.
 
 ## Usage
 
@@ -143,9 +141,22 @@ Using a link with a query string (ie: `/take-me-somewhere?locale=es`) that will 
 
 ![Custom redirections screenshot](examples/custom-redirections.png)
 
+#### 14. Custom validation rules for title and body in proposals
+
+Configure as you wish how the fields "title" and "body" are validated in proposals creation.
+
+Rules available:
+
+* Minimum title and body length (defaults to 15 chars).
+* Maximum percentage of capital letters for title and body (defaults to 25%).
+* Maximum number of "marks" (aka: exclamation and interrogation signs) that can be consective in the title or the body (defaults to 1).
+* Enable/disable forcing to start the title or the body with a capital letter (defaults to "enabled").
+
+![Custom validations](examples/custom_validations.png)
+
 #### To be continued...
 
-We're not done! Please check the [issues](/Platoniq/decidim-module-decidim_awesome/issues) (and participate) to see what's on our mind
+We're not done! Please check the [issues](/decidim-ice/decidim-module-decidim_awesome/issues) (and participate) to see what's on our mind
 
 Also feel free to propose something! or even better send a PR!
 
@@ -190,6 +201,7 @@ Depending on your Decidim version, choose the corresponding Awesome version to e
 
 | Awesome version | Compatible Decidim versions |
 |---|---|
+| 0.9.x | 0.26.x, 0.27.x |
 | 0.8.x | 0.25.x, 0.26.x |
 | 0.7.x | 0.23.x, 0.24.x |
 | 0.6.x | 0.22.x, 0.23.x |
@@ -314,22 +326,33 @@ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rake test_
 DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rspec
 ```
 
-However, this project also make use of the gem [Appraisals](https://github.com/thoughtbot/appraisal) in order to test against several versions of Decidim. The idea is to support same supported versions of Decidim.
+However, this project works with different versions of Decidim. In order to test them all, we maintain two different Gemfiles: `Gemfile` and `Gemfile.legacy`. The first one is used for development and testing the latest Decidim version supported, the second one is used for testing against the old Decidim version.
 
-You can run run all tests against all Decidim versions by using:
+You can run run tests against the legacy Decidim versions by using:
 
 ```bash
-bundle exec appraisal install
-DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal rake test_app
-DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal rspec
+export DATABASE_USERNAME=<username> 
+export DATABASE_PASSWORD=<password> 
+RBENV_VERSION=2.7.6 BUNDLE_GEMFILE=Gemfile.legacy bundle
+RBENV_VERSION=2.7.6 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rake test_app
+RBENV_VERSION=2.7.6 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rspec
 ```
 
-To test a specific apprasail configured version do the following:
+For convenience, you can use the scripts `bin/rspec` and `bin/rspec-legacy` to run tests against one or the other version:
 
+```bash
+bin/rspec spec/
+bin/rspec-legacy spec/
 ```
-DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal decidim-0.25 rake test_app
-DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec appraisal decidim-0.25 rspec
-```
+
+- Rbenv is required for this script to work.
+
+> **NOTE:** Remember to reset the database when changing between tests:
+> ```bash
+> bin/rspec --reset
+> bin/rspec-legacy --reset
+> ```
+
 
 Note that the database user has to have rights to create and drop a database in
 order to create the dummy test app database.
@@ -342,34 +365,12 @@ commands shown above.
 
 ### Test code coverage
 
-If you want to generate the code coverage report for the tests, you can use
-the `SIMPLECOV=1` environment variable in the rspec command as follows:
-
-```bash
-SIMPLECOV=1 bundle exec rspec
-```
-
-This will generate a folder named `coverage` in the project root which contains
+Code coverage report is generated automatically in a folder named `coverage` in the project root which contains
 the code coverage report.
 
-### Appraisals commands
-
-The [Appraisals](Appraisals) file contains the supported versions. In i each version defines the changes respect to the main `Gemfile`.
-
-Appraisal uses custom gems for testing in the folder `gemfiles`, these gemfiles are generated from the file `Appraisals`. To update definitions do:
-
+```bash
+firefox coverage/index.html
 ```
-bundle exec appraisal install
-```
-
-The former command will take care of updating all configured version. To update the Appraisal definitions manually (not usually necessary) do the following:
-
-```
-cd gemfiles
-BUNDLE_GEMFILE=./decidim_0.XX.gemfile bundle update
-```
-
-Where 0.XX is the supported version that needs to be updated.
 
 ### Localization
 
@@ -384,4 +385,4 @@ This engine is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 
 ## Credits
 
-This plugin has been developed by ![Platoniq](app/packs/images/decidim/decidim_awesome/platoniq-logo.png)
+This plugin maintainted by ![PokeCode](app/packs/images/decidim/decidim_awesome/pokecode-logo.png)

@@ -26,7 +26,7 @@ module Decidim::DecidimAwesome
     let(:in_small) { true }
     let(:in_full) { true }
     let(:in_markdown) { true }
-    let(:permission_action) { Decidim::PermissionAction.new(action) }
+    let(:permission_action) { Decidim::PermissionAction.new(**action) }
     let(:action) do
       { scope: :public, action: :create, subject: :editor_image }
     end
@@ -47,13 +47,13 @@ module Decidim::DecidimAwesome
 
     context "when user is no an admin" do
       context "and images in proposals are allowed" do
-        it { is_expected.to eq true }
+        it { is_expected.to be true }
       end
 
       context "and images in proposals are no allowed" do
         let(:in_proposals) { false }
 
-        it { is_expected.to eq true }
+        it { is_expected.to be true }
       end
 
       context "and images are no allowed" do
@@ -70,13 +70,13 @@ module Decidim::DecidimAwesome
       let(:user) { create :user, :admin, :confirmed, organization: organization }
 
       context "and images in proposals are allowed" do
-        it { is_expected.to eq true }
+        it { is_expected.to be true }
       end
 
       context "and images in proposals are no allowed" do
         let(:in_proposals) { false }
 
-        it { is_expected.to eq true }
+        it { is_expected.to be true }
       end
 
       context "and images are no allowed" do
@@ -85,7 +85,7 @@ module Decidim::DecidimAwesome
         let(:in_full) { false }
         let(:in_markdown) { false }
 
-        it { is_expected.to eq true }
+        it { is_expected.to be true }
       end
     end
   end

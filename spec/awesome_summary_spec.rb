@@ -20,7 +20,6 @@ shared_examples "with features disabled" do
   it_behaves_like "custom menus", false
 end
 
-# rubocop:disable RSpec/EmptyExampleGroup
 describe Decidim::DecidimAwesome do
   let(:organization) { create :organization }
   let(:user) { create :user, :admin, :confirmed, organization: organization }
@@ -35,12 +34,21 @@ describe Decidim::DecidimAwesome do
   let!(:intergram_for_public) { create(:awesome_config, organization: organization, var: :intergram_for_public, value: true) }
   let!(:config_public_settings) { create(:awesome_config, organization: organization, var: :intergram_for_public_settings, value: intergram) }
   let!(:config_admins_settings) { create(:awesome_config, organization: organization, var: :intergram_for_admins_settings, value: intergram) }
+  let!(:validate_title_min_length) { create(:awesome_config, organization: organization, var: :validate_title_min_length, value: 10) }
+  let!(:validate_title_max_caps_percent) { create(:awesome_config, organization: organization, var: :validate_title_max_caps_percent, value: 10) }
+  let!(:validate_title_max_marks_together) { create(:awesome_config, organization: organization, var: :validate_title_max_marks_together, value: 10) }
+  let!(:validate_title_start_with_caps) { create(:awesome_config, organization: organization, var: :validate_title_start_with_caps, value: true) }
+  let!(:validate_body_min_length) { create(:awesome_config, organization: organization, var: :validate_body_min_length, value: 10) }
+  let!(:validate_body_max_caps_percent) { create(:awesome_config, organization: organization, var: :validate_body_max_caps_percent, value: 10) }
+  let!(:validate_body_max_marks_together) { create(:awesome_config, organization: organization, var: :validate_body_max_marks_together, value: 10) }
+  let!(:validate_body_start_with_caps) { create(:awesome_config, organization: organization, var: :validate_body_start_with_caps, value: true) }
+
   let(:styles) { "body {background: red;}" }
   let(:intergram) do
     { chat_id: "some-id" }
   end
 
-  case ENV["FEATURES"]
+  case ENV.fetch("FEATURES", nil)
   when "enabled"
     it_behaves_like "with features enabled"
   when "disabled"
@@ -48,10 +56,9 @@ describe Decidim::DecidimAwesome do
   else
     puts 'Please execute this test with the env FEATURES set to "enabled" or "disabled"'
     puts ""
-    puts "FEATUES=disabled bundle exec rspec spec/system/awesome_summary_spec.rb"
-    puts "FEATUES=enabled bundle exec rspec spec/system/awesome_summary_spec.rb"
+    puts "FEATURES=disabled bundle exec rspec spec/system/awesome_summary_spec.rb"
+    puts "FEATURES=enabled bundle exec rspec spec/system/awesome_summary_spec.rb"
     puts ""
     puts "TEST SKIPPED!"
   end
 end
-# rubocop:enable RSpec/EmptyExampleGroup

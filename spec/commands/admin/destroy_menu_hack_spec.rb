@@ -3,6 +3,7 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/menu_hack_contexts"
 
+# rubocop:disable Style/OpenStructUse
 module Decidim::DecidimAwesome
   module Admin
     describe DestroyMenuHack do
@@ -42,3 +43,4 @@ module Decidim::DecidimAwesome
     end
   end
 end
+# rubocop:enable Style/OpenStructUse

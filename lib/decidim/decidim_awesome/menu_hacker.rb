@@ -48,6 +48,7 @@ module Decidim
         menu
       end
 
+      # rubocop:disable Style/OpenStructUse
       def menu_overrides
         @menu_overrides ||= current_config.map do |item|
           OpenStruct.new(
@@ -64,6 +65,7 @@ module Decidim
           )
         end
       end
+      # rubocop:enable Style/OpenStructUse
 
       def activate?(url, view)
         urls = @items.map(&:url).sort_by(&:length).reverse
@@ -78,6 +80,10 @@ module Decidim
           user.present?
         when "non_logged"
           user.blank?
+        when "verified_user"
+          # the cleaner version should be user.authorizations.any?
+          # but there is not relationship between users and authorizations
+          Decidim::Authorization.where(user: user).any? { |auth| auth.granted? && !auth.expired? }
         else
           true
         end

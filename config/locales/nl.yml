@@ -211,6 +211,7 @@ nl:
           show_rejected: Toon afgewezen voorstellen
           show_withdrawn: Toon ingetrokken voorstellen
           truncate: Maximaal aantal tekens voor popup beschrijvingen
+      credits: Decidim Awesome %{version} · Maintained with ♥ by %{company}
       editor_images:
         create:
           error: Fout bij uploaden afbeelding!
