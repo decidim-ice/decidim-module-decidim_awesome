@@ -342,6 +342,8 @@ bin/rspec spec/
 bin/rspec-legacy spec/
 ```
 
+- Rbenv is required for this script to work.
+
 > **NOTE:** Remember to reset the database when changing between tests:
 > ```bash
 > bin/rspec --reset

@@ -29,7 +29,11 @@ fi
 if [ "$1" == "--reset" ]; then
 	echo "Reseting the database"
 	cd decidim_dummy_app
-	RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load
+	if [ "$BUNDLE_GEMFILE" == "Gemfile.legacy" ]; then
+		BUNDLE_GEMFILE="../../Gemfile.legacy" RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load
+	else
+		RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load
+	fi
 else
 	cd ..
 	bundle exec rspec $@

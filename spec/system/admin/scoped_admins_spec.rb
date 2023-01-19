@@ -81,7 +81,7 @@ describe "Scoped admin journeys", type: :system do
 
         expect(page).to have_content("Agree to the terms and conditions of use")
 
-        click_button "I agree with the following terms"
+        click_button "I agree with the terms"
 
         expect(page).to have_content("Welcome to the Decidim Admin Panel.")
         expect(page).not_to have_content("Review them now")
