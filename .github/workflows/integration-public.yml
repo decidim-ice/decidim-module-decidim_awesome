@@ -1,4 +1,4 @@
-name: "[CI] Integration"
+name: "[CI] Integration Public"
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   pull_request:
 
 jobs:
-  integration-test:
+  integration-public:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
@@ -49,7 +49,7 @@ jobs:
         run: bundle exec rake test_app
 
       - name: General RSpec with config vars enabled
-        run: bundle exec rspec spec/system/
+        run: bundle exec rspec spec/system/*_spec.rb
         env:
           FEATURES: enabled
           SIMPLECOV: 1
