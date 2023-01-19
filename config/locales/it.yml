@@ -302,7 +302,6 @@ it:
           text_settings: Impostazioni Testo
           title: Titolo
           truncate: Numero massimo di caratteri per le descrizioni nei popup
-      credits: Decidim Awesome %{version} · Fatto con ♥ da Platoniq
       custom_fields:
         errors:
           invalid_fields: Il contenuto non può essere analizzato ma è stato assegnato al campo '%{field}'
