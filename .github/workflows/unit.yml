@@ -6,6 +6,9 @@ on:
       - main
   pull_request:
 
+env:
+  NODE_VERSION: 16.9.1
+
 jobs:
   unit-test:
     runs-on: ubuntu-20.04

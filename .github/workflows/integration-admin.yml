@@ -6,6 +6,9 @@ on:
       - main
   pull_request:
 
+env:
+  NODE_VERSION: 16.9.1
+
 jobs:
   integration-admin:
     runs-on: ubuntu-20.04
@@ -54,3 +57,9 @@ jobs:
           FEATURES: enabled
           SIMPLECOV: 1
           CODECOV: 1
+
+      - uses: actions/upload-artifact@v2-preview
+        if: always()
+        with:
+          name: screenshots
+          path: ./spec/decidim_dummy_app/tmp/screenshots
