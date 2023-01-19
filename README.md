@@ -1,8 +1,7 @@
 # Decidim::DecidimAwesome
 
-[![[CI] Unit](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/unit.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/unit.yml)
-[![[CI] Integration Public](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/integration-public.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/integration-public.yml)
-[![[CI] Integration Admin](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/integration-admin.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/integration-admin.yml)
+[![[CI] Tests 0.27](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/tests.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/tests.yml)
+[![[CI] Tests 0.26](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/tests-legacy.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/tests-legacy.yml)
 [![[CI] Lint](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/lint.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/lint.yml)
 [![[CI] Precompile](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/precompile.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/precompile.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/2dada53525dd5a944089/maintainability)](https://codeclimate.com/github/decidim-ice/decidim-module-decidim_awesome/maintainability)
