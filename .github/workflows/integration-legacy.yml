@@ -1,4 +1,4 @@
-name: "[CI] Tests 0.27"
+name: "[CI] Tests 0.26"
 
 on:
   push:
@@ -8,11 +8,11 @@ on:
 
 env:
   NODE_VERSION: 16.9.1
-  RUBY_VERSION: 3.0.5
-  BUNDLE_GEMFILE: Gemfile
+  RUBY_VERSION: 2.7.6
+  BUNDLE_GEMFILE: Gemfile.legacy
 
 jobs:
-  integration-latest:
+  integration-legacy:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
