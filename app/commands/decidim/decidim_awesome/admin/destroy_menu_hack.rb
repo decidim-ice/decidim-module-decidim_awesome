@@ -3,7 +3,7 @@
 module Decidim
   module DecidimAwesome
     module Admin
-      class DestroyMenuHack < Rectify::Command
+      class DestroyMenuHack < Command
         # Public: Initializes the command.
         #
         # item - the menu item to destroy

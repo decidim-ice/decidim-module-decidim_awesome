@@ -3,7 +3,7 @@
 module Decidim
   module DecidimAwesome
     module Admin
-      class DestroyCustomRedirect < Rectify::Command
+      class DestroyCustomRedirect < Command
         # Public: Initializes the command.
         #
         # item - the redirections item to destroy

@@ -20,7 +20,6 @@ shared_examples "with features disabled" do
   it_behaves_like "custom menus", false
 end
 
-# rubocop:disable RSpec/EmptyExampleGroup
 describe Decidim::DecidimAwesome do
   let(:organization) { create :organization }
   let(:user) { create :user, :admin, :confirmed, organization: organization }
@@ -49,7 +48,7 @@ describe Decidim::DecidimAwesome do
     { chat_id: "some-id" }
   end
 
-  case ENV["FEATURES"]
+  case ENV.fetch("FEATURES", nil)
   when "enabled"
     it_behaves_like "with features enabled"
   when "disabled"
@@ -57,10 +56,9 @@ describe Decidim::DecidimAwesome do
   else
     puts 'Please execute this test with the env FEATURES set to "enabled" or "disabled"'
     puts ""
-    puts "FEATUES=disabled bundle exec rspec spec/system/awesome_summary_spec.rb"
-    puts "FEATUES=enabled bundle exec rspec spec/system/awesome_summary_spec.rb"
+    puts "FEATURES=disabled bundle exec rspec spec/system/awesome_summary_spec.rb"
+    puts "FEATURES=enabled bundle exec rspec spec/system/awesome_summary_spec.rb"
     puts ""
     puts "TEST SKIPPED!"
   end
 end
-# rubocop:enable RSpec/EmptyExampleGroup

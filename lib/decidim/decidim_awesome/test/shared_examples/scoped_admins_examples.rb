@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
+welcome_text = "Welcome to the Admin Panel."
+welcome_text = "Welcome to the Decidim Admin Panel." if legacy_version?
+
 shared_examples "redirects to index" do |_link|
   it "display index page" do
     expect(page).to have_content("You are not authorized to perform this action")
-    expect(page).to have_content("Welcome to the Decidim Admin Panel.")
+    expect(page).to have_content(welcome_text)
     expect(page).to have_current_path(decidim_admin.root_path, ignore_query: true)
   end
 end
@@ -85,7 +88,7 @@ shared_examples "allows external accesses" do
 
   it "shows participants access" do
     visit decidim_admin.users_path
-    expect(page).to have_content("New user")
+    expect(page).to have_content(legacy_version? ? "New user" : "New admin")
   end
 
   it "shows pages access" do
@@ -110,7 +113,7 @@ shared_examples "allows all admin routes" do
   end
 
   it "allows the admin root page" do
-    expect(page).to have_content("Welcome to the Decidim Admin Panel.")
+    expect(page).to have_content(welcome_text)
   end
 
   it "allows the assemblies page" do
@@ -132,7 +135,7 @@ shared_examples "allows scoped admin routes" do
   end
 
   it "allows the admin root page" do
-    expect(page).to have_content("Welcome to the Decidim Admin Panel.")
+    expect(page).to have_content(welcome_text)
   end
 
   it "allows the assemblies page" do

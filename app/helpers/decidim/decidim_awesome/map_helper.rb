@@ -134,10 +134,10 @@ module Decidim
       # rubocop:disable Naming/MethodParameterName
       def hsv_to_rgb(h, s, v)
         h_i = (h * 6).to_i
-        f = h * 6 - h_i
+        f = (h * 6) - h_i
         p = v * (1 - s)
-        q = v * (1 - f * s)
-        t = v * (1 - (1 - f) * s)
+        q = v * (1 - (f * s))
+        t = v * (1 - ((1 - f) * s))
         if h_i.zero?
           r = v
           g = t

@@ -44,8 +44,8 @@ module Decidim::DecidimAwesome
 
         it "modifies the other config" do
           expect { another_config.call }.to broadcast(:ok)
-          expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_full_editor).value).to eq(true)
-          expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_small_editor).value).to eq(true)
+          expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_full_editor).value).to be(true)
+          expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_small_editor).value).to be(true)
         end
 
         it "do not modifiy current config" do

@@ -73,7 +73,7 @@ describe "Show intergram chat", type: :system do
     end
 
     it "no variables are initialized" do
-      expect(page.execute_script("return window.intergramId")).to eq(nil)
+      expect(page.execute_script("return window.intergramId")).to be_nil
     end
   end
 

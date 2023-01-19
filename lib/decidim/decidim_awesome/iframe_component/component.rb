@@ -43,7 +43,8 @@ Decidim::DecidimAwesome.register_component(:awesome_iframe) do |component|
       published_at: Time.current,
       participatory_space: participatory_space,
       settings: {
-        announcement: { en: Faker::Lorem.paragraphs(number: 2).join("\n") }
+        announcement: { en: Faker::Lorem.paragraphs(number: 2).join("\n") },
+        iframe: '<iframe src="https://picsum.photos/800/600" width="100%" height="700" frameborder="0"></iframe>'
       }
     }
 

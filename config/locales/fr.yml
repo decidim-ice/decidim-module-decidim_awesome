@@ -302,7 +302,7 @@ fr:
           text_settings: Paramètres de texte
           title: Titre
           truncate: Caractères maximum pour les descriptions des popups
-      credits: Décidim Awesome %{version} · Fait avec ♥ par Platoniq
+      credits: Décidim Awesome %{version} · Maintained with ♥ by %{company}
       custom_fields:
         errors:
           invalid_fields: Le contenu n'a pas pu être analysé mais a été assigné au champ '%{field}'

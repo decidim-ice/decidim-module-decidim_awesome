@@ -3,7 +3,7 @@
 module Decidim
   module DecidimAwesome
     module Admin
-      class DestroyScopedAdmin < Rectify::Command
+      class DestroyScopedAdmin < Command
         # Public: Initializes the command.
         #
         # key - the key to destroy inside scoped_admins

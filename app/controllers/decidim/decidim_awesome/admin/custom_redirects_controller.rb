@@ -75,11 +75,13 @@ module Decidim
           origin, item = current_config.find { |origin, _| md5(origin) == params[:id] }
           raise ActiveRecord::RecordNotFound unless item
 
+          # rubocop:disable Style/OpenStructUse
           OpenStruct.new(
             origin: origin,
             destination: item["destination"],
             active: item["active"]
           )
+          # rubocop:enable Style/OpenStructUse
         end
 
         def current_config

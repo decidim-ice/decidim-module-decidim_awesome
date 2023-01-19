@@ -24,6 +24,10 @@ describe "Show awesome iframe", type: :system do
   before do
     component.update!(settings: settings)
     visit_component
+    unless legacy_version?
+      click_link "Change cookie settings"
+      click_button "Accept all"
+    end
   end
 
   it "shows the iframe wrapper" do

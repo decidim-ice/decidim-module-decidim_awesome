@@ -18,6 +18,12 @@ module Decidim::DecidimAwesome
     let!(:user) { create(:user, :confirmed, organization: organization) }
     let!(:admin) { create(:user, :confirmed, :admin, organization: organization) }
 
+    # clean the tampered User model
+    after do
+      Decidim::User.awesome_potential_admins = []
+      Decidim::User.awesome_admins_for_current_scope = []
+    end
+
     context "when no scoped admins" do
       it_behaves_like "same environment"
       it_behaves_like "untampered user model"

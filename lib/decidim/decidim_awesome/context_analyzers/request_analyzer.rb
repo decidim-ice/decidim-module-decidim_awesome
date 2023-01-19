@@ -16,7 +16,7 @@ module Decidim
           def participatory_spaces_routes
             spaces = Decidim.participatory_space_manifests \
                             .filter { |space| !DecidimAwesome.config.participatory_spaces_routes_context.has_key?(space.name) } \
-                            .map { |space| [space.name.to_s, space.name.to_s] }.to_h
+                            .to_h { |space| [space.name.to_s, space.name.to_s] }
             DecidimAwesome.config.participatory_spaces_routes_context.each do |manifest, routes|
               routes.each do |route|
                 spaces[route.to_s] = manifest.to_s

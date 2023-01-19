@@ -3,7 +3,7 @@
 module Decidim
   module DecidimAwesome
     module Admin
-      class UpdateConstraint < Rectify::Command
+      class UpdateConstraint < Command
         # Public: Initializes the command.
         #
         # form - A constraint form
@@ -36,7 +36,7 @@ module Decidim
         attr_reader :form
 
         def attributes
-          form.attributes.filter { |_i, v| v.present? }
+          form.attributes.filter { |key, val| key != "id" && val.present? }
         end
       end
     end

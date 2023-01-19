@@ -3,7 +3,7 @@
 module Decidim
   module DecidimAwesome
     module Admin
-      class UpdateConfig < Rectify::Command
+      class UpdateConfig < Command
         # Public: Initializes the command.
         #
         # form - A config form
@@ -27,10 +27,9 @@ module Decidim
           begin
             form.attributes.each do |key, val|
               # ignore nil attributes (must specifically be set to false if necessary)
-              next unless form.valid_keys.include?(key)
+              next unless form.valid_keys.include?(key.to_sym)
 
               setting = AwesomeConfig.find_or_initialize_by(var: key, organization: form.current_organization)
-
               setting.value = val.respond_to?(:attributes) ? val.attributes : val
               setting.save!
             end

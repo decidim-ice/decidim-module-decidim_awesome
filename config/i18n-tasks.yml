@@ -14,3 +14,6 @@ ignore_unused:
 
 ignore_missing:
   - decidim.participatory_processes.scopes.global
+  # TODO: remove when diching support for 0.26
+  - decidim.proposals.collaborative_drafts.new.add_file
+  - decidim.proposals.collaborative_drafts.new.edit_file

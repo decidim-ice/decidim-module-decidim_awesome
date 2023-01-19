@@ -3,7 +3,7 @@
 module Decidim
   module DecidimAwesome
     module Admin
-      class RenameScopeLabel < Rectify::Command
+      class RenameScopeLabel < Command
         # Public: Initializes the command.
         #
         # params - A constraint params
