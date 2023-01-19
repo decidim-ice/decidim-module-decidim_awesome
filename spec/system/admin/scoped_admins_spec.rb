@@ -84,7 +84,7 @@ describe "Scoped admin journeys", type: :system do
         expect(page).to have_content("Agree to the terms and conditions of use")
 
         agree_to_terms = "I agree with the following terms"
-        agree_to_terms = "I agree to the terms" if legacy_version?
+        agree_to_terms = "I agree with the terms" if legacy_version?
         click_button agree_to_terms
 
         expect(page).to have_content(welcome_text)
