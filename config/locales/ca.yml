@@ -320,7 +320,6 @@ ca:
           text_settings: Configuració del text
           title: Títol
           truncate: Nombre màxim de caràcters per les descripcions emergents
-      credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
       custom_fields:
         errors:
           invalid_fields: No s'ha pogut analitzar el contingut però s'ha assignat al camp '%{field}'
