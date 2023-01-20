@@ -24,6 +24,7 @@ cs:
         validate_body_max_caps_percent: Maximální povolený procentní podíl velkých písmen pro tělo zprávy
         validate_body_max_marks_together: Maximální počet po sobě jdoucích značek povolených v těle zprávy
         validate_body_min_length: Minimální požadované znaky pro tělo zprávy
+        validate_title_max_caps_percent: Maximální povolený procentní podíl velkých písmen pro nadpis zprávy
       constraint:
         component_id: nebo konkrétně v
         component_manifest: Pouze v komponentách typu
