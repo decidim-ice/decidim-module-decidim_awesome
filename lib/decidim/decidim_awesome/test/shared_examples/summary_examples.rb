@@ -51,7 +51,6 @@ shared_examples "activated concerns" do |enabled|
 end
 
 shared_examples "custom menus" do |enabled|
-  # rubocop:disable RSpec/EmptyExampleGroup
   describe Decidim::MenuPresenter, type: :helper do
     before do
       allow(view).to receive(:current_organization).and_return(organization)
@@ -68,7 +67,6 @@ shared_examples "custom menus" do |enabled|
       end
     end
   end
-  # rubocop:enable RSpec/EmptyExampleGroup
 end
 
 shared_examples "basic rendering" do |enabled|

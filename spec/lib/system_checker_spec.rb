@@ -36,7 +36,7 @@ module Decidim::DecidimAwesome
       context "when iterating by group #{group}" do
         it "each file is valid" do
           props.files do |file, _signature|
-            expect(subject.valid?(props.spec, file)).to eq(true)
+            expect(subject.valid?(props.spec, file)).to be(true)
           end
         end
       end

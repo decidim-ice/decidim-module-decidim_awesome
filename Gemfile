@@ -4,8 +4,7 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-# We need to keep version here for Appraisal compatibility
-DECIDIM_VERSION = "0.26.0"
+DECIDIM_VERSION = "0.27.0"
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-decidim_awesome", path: "."
@@ -28,11 +27,10 @@ group :development do
   gem "listen", "~> 3.1"
   gem "rubocop-faker"
   gem "spring", "~> 2.0"
-  gem "spring-watcher-listen", "~> 2.0"
+  gem "spring-watcher-listen", "~> 2.0.0"
   gem "web-console", "~> 3.5"
 end
 
 group :test do
-  gem "appraisal"
   gem "codecov", require: false
 end

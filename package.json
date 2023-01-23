@@ -1,6 +1,6 @@
 {
   "name": "decidim-module-decidim_awesome",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Mods and tweaks for Decidim",
   "main": "index.js",
   "directories": {
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Platoniq/decidim-module-decidim_awesome.git"
+    "url": "git+https://github.com/decidim-ice/decidim-module-decidim_awesome.git"
   },
   "keywords": [
     "decidim"
@@ -24,9 +24,9 @@
   "author": "ivan@platoniq.net",
   "license": "AGPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/Platoniq/decidim-module-decidim_awesome/issues"
+    "url": "https://github.com/decidim-ice/decidim-module-decidim_awesome/issues"
   },
-  "homepage": "https://github.com/Platoniq/decidim-module-decidim_awesome#readme",
+  "homepage": "https://github.com/decidim-ice/decidim-module-decidim_awesome#readme",
   "stylelint": {
     "rules": {
       "at-rule-empty-line-before": [

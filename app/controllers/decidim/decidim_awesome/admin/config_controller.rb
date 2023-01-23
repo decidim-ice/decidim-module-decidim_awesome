@@ -88,9 +88,11 @@ module Decidim
           DecidimAwesome.config.keys
         end
 
+        # rubocop:disable Style/OpenStructUse
         def users_for(ids_list)
           Decidim::User.where(id: ids_list).map { |user| OpenStruct.new(text: format_user_name(user), id: user.id) }
         end
+        # rubocop:enable Style/OpenStructUse
 
         def format_user_name(user)
           "<span class='#{"is-admin" if user.read_attribute("admin")}'>#{user.name} (@#{user.nickname} - #{user.email})</span>"

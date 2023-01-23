@@ -3,7 +3,7 @@
 module Decidim
   module DecidimAwesome
     module Admin
-      class CreateConstraint < Rectify::Command
+      class CreateConstraint < Command
         # Public: Initializes the command.
         #
         # form - A constraint form

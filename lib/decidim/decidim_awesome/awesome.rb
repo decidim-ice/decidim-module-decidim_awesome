@@ -235,7 +235,7 @@ module Decidim
     def self.enabled?(config_vars)
       config_vars = [config_vars] unless config_vars.respond_to?(:detect)
 
-      config_vars.detect do |item|
+      config_vars.any? do |item|
         next unless config.has_key?(item.to_sym)
 
         config.send(item) != :disabled
@@ -250,6 +250,10 @@ module Decidim
     # so we can honor disabled_components config
     def self.register_component(manifest, &block)
       registered_components << [manifest, block]
+    end
+
+    def self.legacy_version?
+      Decidim.version[0..3] == "0.26"
     end
   end
 end

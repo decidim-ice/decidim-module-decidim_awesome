@@ -3,7 +3,7 @@
 module Decidim
   module DecidimAwesome
     module Admin
-      class DestroyConstraint < Rectify::Command
+      class DestroyConstraint < Command
         include NeedsConstraintHelpers
 
         # Public: Initializes the command.

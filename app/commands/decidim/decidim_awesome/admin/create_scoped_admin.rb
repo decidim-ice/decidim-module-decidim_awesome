@@ -3,7 +3,7 @@
 module Decidim
   module DecidimAwesome
     module Admin
-      class CreateScopedAdmin < Rectify::Command
+      class CreateScopedAdmin < Command
         include NeedsConstraintHelpers
 
         # Public: Initializes the command.

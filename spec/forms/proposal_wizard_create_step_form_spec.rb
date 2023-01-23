@@ -168,7 +168,6 @@ module Decidim::Proposals
         it { is_expected.to be_invalid }
       end
 
-      # rubocop:disable RSpec/EmptyExampleGroup
       context "when min_length is zero" do
         let(:min_length) { 0 }
         let(prop.to_sym) { "" }
@@ -179,7 +178,6 @@ module Decidim::Proposals
           it { is_expected.to be_invalid }
         end
       end
-      # rubocop:enable RSpec/EmptyExampleGroup
     end
 
     shared_examples "max caps percent" do |prop|

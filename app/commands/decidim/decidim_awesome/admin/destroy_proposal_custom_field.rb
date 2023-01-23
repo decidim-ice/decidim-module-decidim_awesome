@@ -3,7 +3,7 @@
 module Decidim
   module DecidimAwesome
     module Admin
-      class DestroyProposalCustomField < Rectify::Command
+      class DestroyProposalCustomField < Command
         # Public: Initializes the command.
         #
         # key - the key to destroy inise proposal_custom_fields

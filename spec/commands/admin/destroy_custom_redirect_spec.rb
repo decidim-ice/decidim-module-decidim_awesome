@@ -3,6 +3,7 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/custom_redirects_contexts"
 
+# rubocop:disable Style/OpenStructUse
 module Decidim::DecidimAwesome
   module Admin
     describe DestroyCustomRedirect do
@@ -42,3 +43,4 @@ module Decidim::DecidimAwesome
     end
   end
 end
+# rubocop:enable Style/OpenStructUse

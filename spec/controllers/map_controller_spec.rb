@@ -67,7 +67,7 @@ module Decidim::DecidimAwesome
           end
         end
 
-        context "when a component is not geolocated " do
+        context "when a component is not geolocated" do
           let(:geocoding_enabled) { false }
 
           it "returns all geolocated components" do

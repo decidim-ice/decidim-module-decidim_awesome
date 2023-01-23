@@ -3,7 +3,7 @@
 module Decidim
   module DecidimAwesome
     module Admin
-      class DestroyScopedStyle < Rectify::Command
+      class DestroyScopedStyle < Command
         # Public: Initializes the command.
         #
         # key - the key to destroy inside scoped_styles

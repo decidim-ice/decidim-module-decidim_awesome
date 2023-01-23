@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+version="last"
+prefix=
+if [ "$BUNDLE_GEMFILE" == "Gemfile.legacy" ]; then
+	version="legacy"
+	prefix="BUNDLE_GEMFILE=$BUNDLE_GEMFILE RBENV_VERSION=$RBENV_VERSION"
+	echo "Using legacy version (gemfile: $BUNDLE_GEMFILE, ruby: $RBENV_VERSION)"
+else
+	echo "Using latest version"
+fi
+
+cd spec
+# check if directory exists
+if [ ! -d "decidim_dummy_app_$version" ]; then
+	echo "Please generate the test app first:"
+	echo -n "$prefix "
+	echo "bundle exec rake test_app && mv spec/decidim_dummy_app spec/decidim_dummy_app_$version"
+	exit 1
+fi
+# check if directory is a symlink pointing where it should
+if [ ! "decidim_dummy_app_$version" -ef "decidim_dummy_app" ]; then
+	# if it is a symlink, delete it
+	echo "creating symlink to decidim_dummy_app_$version"
+	rm decidim_dummy_app
+	ln -s decidim_dummy_app_$version decidim_dummy_app
+fi
+
+if [ "$1" == "--reset" ]; then
+	echo "Reseting the database"
+	cd decidim_dummy_app
+	if [ "$BUNDLE_GEMFILE" == "Gemfile.legacy" ]; then
+		BUNDLE_GEMFILE="../../Gemfile.legacy" RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load
+	else
+		RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load
+	fi
+else
+	cd ..
+	bundle exec rspec $@
+fi

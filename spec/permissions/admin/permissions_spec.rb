@@ -17,7 +17,7 @@ module Decidim::DecidimAwesome::Admin
     let(:action) do
       { scope: :admin, action: :edit_config, subject: feature }
     end
-    let(:permission_action) { Decidim::PermissionAction.new(action) }
+    let(:permission_action) { Decidim::PermissionAction.new(**action) }
 
     context "when scope is not admin" do
       let(:action) do
@@ -37,7 +37,7 @@ module Decidim::DecidimAwesome::Admin
 
     context "when accessing awesome config variables" do
       context "and config is enabled" do
-        it { is_expected.to eq true }
+        it { is_expected.to be true }
       end
 
       Decidim::DecidimAwesome.config.keys.each do |key|
@@ -48,7 +48,7 @@ module Decidim::DecidimAwesome::Admin
             allow(Decidim::DecidimAwesome.config).to receive(key).and_return(:disabled)
           end
 
-          it { is_expected.to eq false }
+          it { is_expected.to be false }
         end
       end
     end
