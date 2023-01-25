@@ -31,7 +31,11 @@ describe "Show awesome map", type: :system do
     within ".wrapper" do
       expect(page).to have_selector(".awesome-map")
       expect(page).to have_selector("#awesome-map")
-      errors = page.driver.browser.logs.get(:browser)
+      errors = if legacy_version?
+                 page.driver.browser.manage.logs.get(:browser)
+               else
+                 page.driver.browser.logs.get(:browser)
+               end
 
       errors.each do |error|
         expect(error.message).not_to include("map.js"), error.message if error.level == "SEVERE"
