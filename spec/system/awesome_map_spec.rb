@@ -31,6 +31,26 @@ describe "Show awesome map", type: :system do
     within ".wrapper" do
       expect(page).to have_selector(".awesome-map")
       expect(page).to have_selector("#awesome-map")
+      errors = if legacy_version?
+                 page.driver.browser.manage.logs.get(:browser)
+               else
+                 page.driver.browser.logs.get(:browser)
+               end
+
+      errors.each do |error|
+        expect(error.message).not_to include("map.js"), error.message if error.level == "SEVERE"
+      end
+    end
+  end
+
+  it "has AwesomeMap javascript and CSS" do
+    within "head", visible: :all do
+      expect(page).to have_xpath("//link[@rel='stylesheet'][contains(@href,'decidim_decidim_awesome_map')]", visible: :all)
+      expect(page).to have_xpath("//link[@rel='stylesheet'][contains(@href,'decidim_map')]", visible: :all)
+    end
+    within(legacy_version? ? "head" : ".wrapper", visible: :all) do
+      expect(page).to have_xpath("//script[contains(@src,'decidim_decidim_awesome_map')]", visible: :all)
+      expect(page).to have_xpath("//script[contains(@src,'decidim_map')]", visible: :all)
     end
   end
 

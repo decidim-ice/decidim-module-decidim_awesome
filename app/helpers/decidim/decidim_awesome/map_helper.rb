@@ -98,16 +98,19 @@ module Decidim
         builder = map_utility_dynamic.create_builder(self, options)
 
         # We need awesome map listeners before initialize the official map
-        unless snippets.any?(:awesome_map)
-          snippets.add(:awesome_map, javascript_pack_tag("decidim_decidim_awesome_map", defer: false))
-          snippets.add(:awesome_map, stylesheet_pack_tag("decidim_decidim_awesome_map"))
-          snippets.add(:head, snippets.for(:awesome_map))
+        unless snippets.any?(:awesome_map_styles) || snippets.any?(:awesome_map_scripts)
+          snippets.add(:awesome_map_styles, stylesheet_pack_tag("decidim_decidim_awesome_map"))
+          snippets.add(:awesome_map_scripts, javascript_pack_tag("decidim_decidim_awesome_map", defer: false))
+          snippets.add(:head, snippets.for(:awesome_map_styles))
+          snippets.add(DecidimAwesome.legacy_version? ? :head : :foot, snippets.for(:awesome_map_scripts))
         end
 
-        unless snippets.any?(:map)
-          snippets.add(:map, builder.stylesheet_snippets)
-          snippets.add(:map, builder.javascript_snippets)
-          snippets.add(:head, snippets.for(:map))
+        unless snippets.any?(:map_styles) || snippets.any?(:map_scripts)
+          snippets.add(:map_styles, builder.stylesheet_snippets)
+          snippets.add(:map_scripts, builder.javascript_snippets)
+
+          snippets.add(:head, snippets.for(:map_styles))
+          snippets.add(DecidimAwesome.legacy_version? ? :head : :foot, snippets.for(:map_scripts))
         end
 
         builder

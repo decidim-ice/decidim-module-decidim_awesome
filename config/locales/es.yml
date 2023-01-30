@@ -313,7 +313,7 @@ es:
           success: Imagen subida correctamente
       map_component:
         map:
-          api_not_ready: |2
+          api_not_ready: |
             <b>Advertencia:</b> Esta instalación de Decidim tiene la API configurada a una complejidad máxima de <b>%{current_complexity}</b>.
             Este componente probablemente no funcione correctament bajo esta configuración. Es recomendado configurar en un inicializador
             (por ejemplo al final de <code>config/initializers/decidim. b</code>) añadir las siguientes líneas:<br>

@@ -21,6 +21,10 @@ cs:
         scoped_admins: 'Skupina Škálovaní administrátoři #%{id}'
         scoped_styles: Vlastní styly číslo %{id}
         use_markdown_editor: Použít Markdown editor namísto HTML editoru
+        validate_body_max_caps_percent: Maximální povolený procentní podíl velkých písmen pro tělo zprávy
+        validate_body_max_marks_together: Maximální počet po sobě jdoucích značek povolených v těle zprávy
+        validate_body_min_length: Minimální požadované znaky pro tělo zprávy
+        validate_title_max_caps_percent: Maximální povolený procentní podíl velkých písmen pro nadpis zprávy
       constraint:
         component_id: nebo konkrétně v
         component_manifest: Pouze v komponentách typu
@@ -260,6 +264,7 @@ cs:
               hidden: Vždy skryto
               logged: Viditelné pouze pro přihlášené uživatele
               non_logged: Viditelné pouze pro nepřihlášené uživatele
+              verified_user: Viditelné pouze pro uživatele s platnou autorizací
           index:
             confirm_destroy: Opravdu chcete odstranit toto přizpůsobení?
             edit: Upravit
@@ -302,7 +307,7 @@ cs:
           text_settings: Nastavení textu
           title: Nadpis
           truncate: Maximum znaků pro popisy vyskakovacích oken
-      credits: Vylepšení Decidim %{version} · Maintained with ♥ by %{company}
+      credits: Decidim Awesome %{version} · Udržováno s ♥ od %{company}
       custom_fields:
         errors:
           invalid_fields: Obsah nemohl být analyzován, ale byl přiřazen do pole '%{field}'
@@ -313,7 +318,7 @@ cs:
           success: Obrázek byl úspěšně nahrán
       map_component:
         map:
-          api_not_ready: |2
+          api_not_ready: |
             <b>Upozornění:</b> Tato instalace Decidim má API nastaveno na maximální složitost <b>%{current_complexity}</b>.
             Tato komponenta pravděpodobně nebude fungovat v této konfiguraci. Doporučujeme nastavit v inicializátoru
             (například na konci <code>config/initializers/decidim.rb</code>) následující řádky:<br>
