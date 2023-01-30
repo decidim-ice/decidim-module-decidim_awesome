@@ -261,6 +261,7 @@ ja:
               hidden: 常に非表示
               logged: ログインしたユーザーにのみ表示
               non_logged: ログインしていないユーザーにのみ表示
+              verified_user: 権限のあるユーザーのみ表示
           index:
             confirm_destroy: この設定を削除しますか？
             edit: 編集
@@ -314,7 +315,7 @@ ja:
           success: 画像は正常にアップロードされました
       map_component:
         map:
-          api_not_ready: |2
+          api_not_ready: |
             <b>警告:</b> この Decidim のインストールでは、APIの最大複雑度が <b>%{current_complexity}</b> に設定されています。このコンポーネントは、この設定では動作しないかもしれません。初期化の設定を (例えば<code>config/initializers/decidim.rb</code>の末尾で) 以下のようにすることを推奨します:<br>
             <br>
             <pre># Api configuration
