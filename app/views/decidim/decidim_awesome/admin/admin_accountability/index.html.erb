@@ -1,0 +1,42 @@
+<div class="card">
+  <div class="card-divider">
+    <h2 class="card-title"><%= t(".title") %></h2>
+  </div>
+  <div class="card-section fcell grid-x">
+    <div class="cell auto text-right">
+      <%= admin_filters_pagination %>
+    </div>
+  </div>
+  <div class="card-section">
+    <p class="help-text"><%= t(".description") %></p>
+    <div class="table-scroll">
+      <table class="table-list">
+        <thead>
+        <tr>
+          <th><%= t("role", scope: "decidim.decidim_awesome.admin.admin_accountability") %></th>
+          <th><%= t("name", scope: "decidim.decidim_awesome.admin.admin_accountability") %></th>
+          <th><%= t("email", scope: "decidim.decidim_awesome.admin.admin_accountability") %></th>
+          <th><%= t("participatory_space", scope: "decidim.decidim_awesome.admin.admin_accountability") %></th>
+          <th><%= t("last_login", scope: "decidim.decidim_awesome.admin.admin_accountability") %></th>
+          <th><%= t("created_at", scope: "decidim.decidim_awesome.admin.admin_accountability") %></th>
+          <th><%= t("removal_date", scope: "decidim.decidim_awesome.admin.admin_accountability") %></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% admin_actions.each do |log| %>
+          <tr class="<%= log.present.destroyed? ? "text-muted" : nil %>">
+            <td class="<%= log.present.role_class %>"><%= log.present.role_name %></td>
+            <td><%= log.present.user_name %></td>
+            <td><%= link_to(log.present.user_email, "mailto:#{log.present.user_email}") if log.present.user_email %></td>
+            <td><%= link_to log.present.participatory_space_name, log.present.participatory_space_path %></td>
+            <td><%= log.present.last_sign_in_date %></td>
+            <td><%= log.present.created_date %></td>
+            <td><%= log.present.removal_date %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <%= paginate admin_actions, theme: "decidim" %>
+    </div>
+  </div>
+</div>

@@ -72,12 +72,12 @@ module Decidim::DecidimAwesome::Admin
         allow(Decidim::DecidimAwesome.config).to receive(feature).and_return(status)
       end
 
-      it { is_expected.to eq true }
+      it { is_expected.to be true }
 
       context "when admin_accountability is disabled" do
         let(:status) { :disabled }
 
-        it { is_expected.to eq false }
+        it { is_expected.to be false }
       end
     end
   end

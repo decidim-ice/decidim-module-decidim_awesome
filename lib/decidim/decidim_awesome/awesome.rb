@@ -227,6 +227,11 @@ module Decidim
       true
     end
 
+    # Roles for which it is necessary to show admin_accountability
+    config_accessor :admin_user_roles do
+      %w(Decidim::AssemblyUserRole Decidim::ParticipatoryProcessUserRole Decidim::ConferencesUserRole)
+    end
+
     #
     # HELPERS
     #
