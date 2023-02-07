@@ -13,10 +13,9 @@ import "inline-attachment/src/codemirror-4.inline-attachment";
 import "inline-attachment/src/jquery.inline-attachment";
 import hljs from "highlight.js";
 import "highlight.js/styles/github.css";
-
-// In 0.26 these files come with Decidim in the folder src/decidim/vendor so the awesome one's could be removed
-import "src/vendor/image-resize.min"
-import "src/vendor/image-upload.min"
+import "src/decidim/editor/clipboard_override"
+import "src/decidim/vendor/image-resize.min"
+import "src/decidim/vendor/image-upload.min"
 
 const DecidimAwesome = window.DecidimAwesome || {};
 const quillFormats = ["bold", "italic", "link", "underline", "header", "list", "video", "image", "alt", "break", "width", "style", "code", "blockquote", "indent"];
@@ -41,6 +40,7 @@ export function destroyQuillEditor(container) {
 export function createQuillEditor(container) {
   const toolbar = $(container).data("toolbar");
   const disabled = $(container).data("disabled");
+  const allowedEmptyContentSelector = "iframe";
 
   let quillToolbar = [
     ["bold", "italic", "underline", "linebreak"],
@@ -147,6 +147,16 @@ export function createQuillEditor(container) {
       $input.val("");
     } else {
       $input.val(quill.root.innerHTML);
+    }
+    if ((text === "\n" || text === "\n\n") && quill.root.querySelectorAll(allowedEmptyContentSelector).length === 0) {
+      $input.val("");
+    } else {
+      const emptyParagraph = "<p><br></p>";
+      const cleanHTML = quill.root.innerHTML.replace(
+        new RegExp(`^${emptyParagraph}|${emptyParagraph}$`, "g"),
+        ""
+      );
+      $input.val(cleanHTML);
     }
   });
   // After editor is ready, linebreak_module deletes two extraneous new lines
