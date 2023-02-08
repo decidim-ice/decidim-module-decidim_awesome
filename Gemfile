@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = "0.27.0"
+DECIDIM_VERSION = "0.27.1"
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-decidim_awesome", path: "."

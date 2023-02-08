@@ -29,13 +29,15 @@ export default class Controller {
     this.fetcher.onCollection = (collection) =>  {
       if (collection && collection.edges)  { 
         // Add markers to the main cluster group
+        const collectionEdges = collection.edges.filter((item) => item.node.coordinates && item.node.coordinates.latitude && item.node.coordinates.longitude);
         try {
-          this.awesomeMap.cluster.addLayers(collection.edges.map((item) => item.node.marker));
+          this.awesomeMap.cluster.addLayers(collectionEdges.map((item) => item.node.marker));
         } catch (e) {
-          console.error("Failed marker collection assignation", collection);
+          console.error("Failed marker collection assignation", collectionEdges, "error", e);
         }
         // subgroups don't have th addLayers utility
-        collection.edges.forEach((item) => {
+        collectionEdges.forEach((item) => {
+          this.awesomeMap.layers[this.component.type].group.addLayer(item.node.marker);
           this.addMarkerCategory(item.node.marker, item.node.category);
           this.addMarkerHashtags(item.node.marker, item.node.hashtags);
         });
@@ -45,7 +47,8 @@ export default class Controller {
 
   addControls() {
     this.awesomeMap.controls.main.addOverlay(this.controls.group, this.controls.label);
-    this.awesomeMap.map.addLayer(this.controls.group);
+    this.controls.group.addTo(this.awesomeMap.map);
+    this.awesomeMap.layers[this.component.type] = this.controls;
   }
 
   loadNodes() {
