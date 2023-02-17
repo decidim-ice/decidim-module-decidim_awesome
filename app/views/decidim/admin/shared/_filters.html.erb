@@ -1,0 +1,58 @@
+<div class="filters__section">
+  <div class="fcell filter">
+    <ul class="dropdown menu" data-dropdown-menu data-close-on-click-inside="false">
+      <li>
+        <a href="#" class="dropdown button">
+          <%= t("filter_label", scope: "decidim.admin.filters") %>
+        </a>
+        <%= dropdown_submenu(submenu_options_tree(i18n_ctx)) %>
+      </li>
+    </ul>
+  </div>
+  <div class="fcell search">
+    <%= search_form_for(query, url: url_for) do |form| %>
+      <%= applied_filters_hidden_field_tags %>
+      <div class="input-group">
+        <%= form.search_field(
+              search_field_predicate,
+              class: "input-group-field",
+              label: false,
+              placeholder: t(search_field_predicate,
+                             collection: collection_name,
+                             scope: "decidim.admin.filters.search_placeholder")
+            ) %>
+        <div class="input-group-button">
+          <button type="submit" class="button">
+            <%= icon "magnifying-glass", aria_label: t("search_label", scope: "decidim.admin.filters") %>
+          </button>
+        </div>
+      </div>
+      <% if @render_date_fields %>
+        <div class="input-group mt-xs">
+          <div class="input-group-field">
+            <%= form.label t("search_field_start_date", scope: "decidim.admin.filters.label") %>
+            <%= form.date_field(:created_at_gteq,
+                                class: "input-group-field",
+                                label: false,
+                                datepicker: true) %>
+          </div>
+          <div class="input-group-field">
+            <%= form.label t("search_field_end_date", scope: "decidim.admin.filters.label") %>
+            <%= form.date_field(:created_at_lteq,
+                                class: "input-group-field",
+                                label: false,
+                                datepicker: true) %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<div class="card-section fcell grid-x">
+  <div class="cell medium-10 filter-status">
+    <%= applied_filters_tags(i18n_ctx) %>
+  </div>
+  <div class="cell auto text-right">
+    <%= admin_filters_pagination %>
+  </div>
+</div>

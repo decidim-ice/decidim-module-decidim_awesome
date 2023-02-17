@@ -59,6 +59,19 @@ en:
         proposal_custom_fields: Custom fields
   decidim:
     admin:
+      filters:
+        admin_actions:
+          participatory_space_type_eq:
+            label: Participatory space type
+          role:
+            label: Role
+          role_type_eq:
+            label: Role type
+        label:
+          search_field_end_date: "To date:"
+          search_field_start_date: "From date:"
+        search_placeholder:
+          user_name_or_user_email_cont: Search by user name, email
       menu:
         admin_accountability: Admin accountability
         decidim_awesome: Decidim awesome
