@@ -7,7 +7,7 @@ module Decidim
         include NeedsAwesomeConfig
         include Decidim::DecidimAwesome::AdminAccountability::Admin::Filterable
 
-        helper_method :admin_actions, :admin_action, :collection
+        helper_method :admin_actions, :admin_action, :collection, :export_params
 
         layout "decidim/admin/users"
 
@@ -20,7 +20,12 @@ module Decidim
         end
 
         def export
-          # TODO: export to xls, csv
+          format = params[:format].to_s
+          filters = export_params[:q]
+
+          Decidim::DecidimAwesome::ExportAdminActionsJob.perform_later(current_user, format, admin_actions.ransack(filters).result.ids)
+
+          redirect_to decidim_admin_decidim_awesome.admin_accountability_path, notice: t("decidim.decidim_awesome.admin.admin_accountability.exports.notice")
         end
 
         private
@@ -35,6 +40,10 @@ module Decidim
 
         def admin_action
           @admin_action ||= collection.find(params[:id])
+        end
+
+        def export_params
+          params.permit(:format, q: [:role_type_eq, :user_name_or_user_email_cont, :created_at_gteq, :created_at_lteq])
         end
       end
     end

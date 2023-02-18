@@ -33,18 +33,14 @@ $(() => {
       '[name="utf8"]',
       '[name="authenticity_token"]',
       "[disabled]",
-      '[type="checkbox"]' // there are problems with matrix questions
+      // there are problems with matrix questions
+      '[type="checkbox"]' 
     ]
   });
 
-  const showMsg = (msg, error = false, default_time = 700) => {
-    const time = error
-      ? 5000
-      : default_time;
-    const $div = $(`<div class="awesome_autosave-notice${error
-      ? " error"
-      : ""}">${msg}</div>`).
-      appendTo($form);
+  const showMsg = (msg, error = false, defaultTime = 700) => {
+    const time = error ? 5000 : defaultTime; // eslint-disable-line no-ternary, multiline-ternary
+    const $div = $(`<div class="awesome_autosave-notice${error ? " error" : ""}">${msg}</div>`).appendTo($form); // eslint-disable-line no-ternary, multiline-ternary
     setTimeout(() => {
       $div.fadeOut(500, () => {
         $div.remove();
@@ -62,14 +58,14 @@ $(() => {
   }
 
   // restore if available
-  store.apply();
+  store.apply(); // eslint-disable-line prefer-reflect
   // restore checkboxes
   try {
     let checkboxes = JSON.parse(window.localStorage.getItem(storeCheckboxesId));
-    for (let id in checkboxes) {
+    for (let id in checkboxes) { // eslint-disable-line guard-for-in
       $(`#${id}`).prop("checked", checkboxes[id]);
     }
-  } catch (e) {
+  } catch (evt) {
     console.log("No checkboxes found");
   }
   // this trigger the "change" event, it seems that it is too much

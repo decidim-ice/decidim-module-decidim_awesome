@@ -7,202 +7,212 @@ describe "Filter Admin actions", type: :system do
   let(:login_date) { 6.days.ago }
   let(:organization) { create :organization }
   let!(:admin) { create :user, :admin, :confirmed, organization: organization }
-  let!(:resource_controller) { Decidim::DecidimAwesome::Admin::AdminAccountabilityController }
   let(:administrator) { create(:user, organization: organization, last_sign_in_at: login_date, created_at: user_creation_date) }
   let(:valuator) { create(:user, name: "Lorry", email: "test@example.org", organization: organization, created_at: user_creation_date) }
   let(:collaborator) { create(:user, organization: organization, created_at: user_creation_date) }
   let(:moderator) { create(:user, organization: organization, created_at: user_creation_date) }
-  let(:participatory_process) { create(:participatory_process, organization: organization) }
 
   let(:status) { true }
+  let(:resource_controller) { Decidim::DecidimAwesome::Admin::AdminAccountabilityController }
+
+  let!(:participatory_process_user_role1) { create(:participatory_process_user_role, user: administrator, role: "admin", created_at: 4.days.ago) }
+  let!(:participatory_process_user_role2) { create(:participatory_process_user_role, user: valuator, role: "valuator", created_at: 3.days.ago) }
+  let!(:participatory_process_user_role3) { create(:participatory_process_user_role, user: collaborator, role: "collaborator", created_at: 2.days.ago) }
+  let!(:participatory_process_user_role4) { create(:participatory_process_user_role, user: moderator, role: "moderator", created_at: 1.day.ago) }
+  let!(:assembly_user_role1) { create(:assembly_user_role, user: administrator, role: "admin", created_at: 4.days.ago) }
+  let!(:assembly_user_role2) { create(:assembly_user_role, user: valuator, role: "valuator", created_at: 3.days.ago) }
+  let!(:assembly_user_role3) { create(:assembly_user_role, user: collaborator, role: "collaborator", created_at: 2.days.ago) }
+  let!(:assembly_user_role4) { create(:assembly_user_role, user: moderator, role: "moderator", created_at: 1.day.ago) }
 
   include_context "with filterable context"
 
   before do
     allow(Decidim::DecidimAwesome.config).to receive(:allow_admin_accountability).and_return(status)
+    # ensure papertrail has the same created_at date as the object being mocked
+    Decidim::DecidimAwesome::PaperTrailVersion.role_actions.map { |v| v.update(created_at: v.item.created_at) }
+
     switch_to_host(organization.host)
     login_as admin, scope: :user
 
     visit decidim_admin.root_path
+
+    click_link "Participants"
+    click_link "Admin accountability"
   end
 
-  describe "admin action list" do
-    context "when there are admin actions" do
-      let!(:participatory_process_user_role1) { create(:participatory_process_user_role, user: administrator, role: "admin", created_at: 4.days.ago) }
-      let!(:participatory_process_user_role2) { create(:participatory_process_user_role, user: valuator, role: "valuator", created_at: 3.days.ago) }
-      let!(:participatory_process_user_role3) { create(:participatory_process_user_role, user: collaborator, role: "collaborator", created_at: 2.days.ago) }
-      let!(:participatory_process_user_role4) { create(:participatory_process_user_role, user: moderator, role: "moderator", created_at: 1.day.ago) }
-      let!(:assembly_user_role1) { create(:assembly_user_role, user: administrator, role: "admin", created_at: 4.days.ago) }
-      let!(:assembly_user_role2) { create(:assembly_user_role, user: valuator, role: "valuator", created_at: 3.days.ago) }
-      let!(:assembly_user_role3) { create(:assembly_user_role, user: collaborator, role: "collaborator", created_at: 2.days.ago) }
-      let!(:assembly_user_role4) { create(:assembly_user_role, user: moderator, role: "moderator", created_at: 1.day.ago) }
+  with_versioning do
+    it "shows filters" do
+      expect(page).to have_content("Filter")
+      expect(page).to have_css("#q_user_name_or_user_email_cont")
+      expect(page).to have_css("#q_created_at_gteq")
+      expect(page).to have_css("#q_created_at_lteq")
+    end
 
-      before do
-        # ensure papertrail has the same created_at date as the object being mocked
-        Decidim::DecidimAwesome::PaperTrailVersion.role_actions.map { |v| v.update(created_at: v.item.created_at) }
+    it "displays the filter labels" do
+      find("a.dropdown").hover
+      expect(page).to have_content("Participatory space type")
+      expect(page).to have_content("Role type")
 
-        click_link "Participants"
-        click_link "Admin accountability"
-      end
+      find("a", text: "Participatory space type").hover
+      expect(page).to have_content("Process")
+      expect(page).to have_content("Assembly")
 
-      it "shows filters", versioning: true do
-        expect(page).to have_content("Filter")
-        expect(page).to have_css("#q_user_name_or_user_email_cont")
-        expect(page).to have_css("#q_created_at_gteq")
-        expect(page).to have_css("#q_created_at_lteq")
-      end
+      find("a", text: "Role type").hover
+      expect(page).to have_content("admin")
+      expect(page).to have_content("collaborator")
+      expect(page).to have_content("moderator")
+      expect(page).to have_content("valuator")
+    end
 
-      it "displays the filter labels", versioning: true do
-        find("a.dropdown").hover
-        expect(page).to have_content("Participatory space type")
-        expect(page).to have_content("Role type")
+    context "when filtering admin_actions by PARTICIPATORY SPACE" do
+      it "Assemblies space type" do
+        apply_filter("Participatory space type", "Assembly")
 
-        find("a", text: "Participatory space type").hover
-        expect(page).to have_content("Process")
-        expect(page).to have_content("Assembly")
-
-        find("a", text: "Role type").hover
-        expect(page).to have_content("admin")
-        expect(page).to have_content("collaborator")
-        expect(page).to have_content("moderator")
-        expect(page).to have_content("valuator")
-      end
-
-      context "when filtering admin_actions by PARTICIPATORY SPACE" do
-        it "Assemblies space type", versioning: true do
-          apply_filter("Participatory space type", "Assembly")
-
-          within "tbody" do
-            expect(page).to have_content("Assemblies >", count: 4)
-          end
-        end
-
-        it "Processes space type", versioning: true do
-          apply_filter("Participatory space type", "Process")
-
-          within "tbody" do
-            expect(page).to have_content("Processes >", count: 4)
-          end
+        within "tbody" do
+          expect(page).to have_content("Assemblies >", count: 4)
         end
       end
 
-      context "when filtering admin_actions by ROLE TYPE" do
-        it "Admin role type", versioning: true do
-          apply_filter("Role type", "admin")
+      it "Processes space type" do
+        apply_filter("Participatory space type", "Process")
 
-          within "tbody" do
-            expect(page).to have_content("Administrator", count: 2)
-          end
+        within "tbody" do
+          expect(page).to have_content("Processes >", count: 4)
+        end
+      end
+
+      it "exports the result" do
+        apply_filter("Participatory space type", "Process")
+
+        find(".exports.dropdown").click
+        perform_enqueued_jobs { click_link "Export as CSV" }
+
+        within ".callout.success" do
+          expect(page).to have_content("Export job has been enqueued. You will receive an email when it's ready.")
         end
 
-        it "Collaborator role type", versioning: true do
-          apply_filter("Role type", "collaborator")
+        expect(last_email.subject).to include("Your export", "csv", "is ready")
+        expect(last_email.attachments.length).to be_positive
+        expect(last_email.attachments.first.filename).to match(/^admin_actions.*\.zip$/)
+      end
+    end
+
+    context "when filtering admin_actions by ROLE TYPE" do
+      it "Admin role type" do
+        apply_filter("Role type", "admin")
+
+        within "tbody" do
+          expect(page).to have_content("Administrator", count: 2)
+        end
+      end
+
+      it "Collaborator role type" do
+        apply_filter("Role type", "collaborator")
+
+        within "tbody" do
+          expect(page).to have_content("Collaborator", count: 2)
+        end
+      end
+
+      it "Moderator role type" do
+        apply_filter("Role type", "moderator")
+
+        within "tbody" do
+          expect(page).to have_content("Moderator", count: 2)
+        end
+      end
+
+      it "Valuator role type" do
+        apply_filter("Role type", "valuator")
+
+        within "tbody" do
+          expect(page).to have_content("Valuator", count: 2)
+        end
+      end
+    end
+
+    context "when searching by name or email" do
+      it "searches by name" do
+        search_by_text("Lorry")
+
+        within "tbody" do
+          expect(page).to have_content("Lorry", count: 2)
+        end
+      end
+
+      it "searches by email" do
+        search_by_text("test@example.org")
+
+        within "tbody" do
+          expect(page).to have_content("test@example.org", count: 2)
+        end
+      end
+    end
+
+    context "when searching by date" do
+      def search_by_date(start_date, end_date)
+        within(".filters__section") do
+          fill_in(:q_created_at_gteq, with: start_date) if start_date.present?
+          fill_in(:q_created_at_lteq, with: end_date) if end_date.present?
+
+          find("*[type=submit]").click
+        end
+      end
+
+      context "when the start date is earlier" do
+        it "displays all entries" do
+          search_by_date(6.days.ago, "")
 
           within "tbody" do
+            expect(page).to have_css("tr", count: 8)
+          end
+        end
+      end
+
+      context "when the start date is later" do
+        it "displays no entries" do
+          search_by_date(1.day.from_now, "")
+
+          within "tbody" do
+            expect(page).to have_css("tr", count: 0)
+          end
+        end
+      end
+
+      context "when the end date is later" do
+        it "displays all entries" do
+          search_by_date("", 5.days.from_now)
+
+          within "tbody" do
+            expect(page).to have_css("tr", count: 8)
+          end
+        end
+      end
+
+      context "when the end date is earlier" do
+        it "displays no entries" do
+          search_by_date("", 6.days.ago)
+
+          within "tbody" do
+            expect(page).to have_css("tr", count: 0)
+          end
+        end
+      end
+
+      context "when searching in range" do
+        it "displays entries in range" do
+          search_by_date(3.days.ago, 2.days.ago)
+
+          within "tbody" do
+            expect(page).to have_css("tr", count: 4)
             expect(page).to have_content("Collaborator", count: 2)
-          end
-        end
-
-        it "Moderator role type", versioning: true do
-          apply_filter("Role type", "moderator")
-
-          within "tbody" do
-            expect(page).to have_content("Moderator", count: 2)
-          end
-        end
-
-        it "Valuator role type", versioning: true do
-          apply_filter("Role type", "valuator")
-
-          within "tbody" do
             expect(page).to have_content("Valuator", count: 2)
-          end
-        end
-      end
-
-      context "when searching by name or email" do
-        it "searches by name", versioning: true do
-          search_by_text("Lorry")
-
-          within "tbody" do
-            expect(page).to have_content("Lorry", count: 2)
-          end
-        end
-
-        it "searches by email", versioning: true do
-          search_by_text("test@example.org")
-
-          within "tbody" do
-            expect(page).to have_content("test@example.org", count: 2)
-          end
-        end
-      end
-
-      context "when searching by date" do
-        def search_by_date(start_date, end_date)
-          within(".filters__section") do
-            fill_in(:q_created_at_gteq, with: start_date) if start_date.present?
-            fill_in(:q_created_at_lteq, with: end_date) if end_date.present?
-
-            find("*[type=submit]").click
-          end
-        end
-
-        context "when the start date is earlier" do
-          it "displays all entries", versioning: true do
-            search_by_date(6.days.ago, "")
-
-            within "tbody" do
-              expect(page).to have_css("tr", count: 8)
-            end
-          end
-        end
-
-        context "when the start date is later" do
-          it "displays no entries", versioning: true do
-            search_by_date(1.day.from_now, "")
-
-            within "tbody" do
-              expect(page).to have_css("tr", count: 0)
-            end
-          end
-        end
-
-        context "when the end date is later" do
-          it "displays all entries", versioning: true do
-            search_by_date("", 5.days.from_now)
-
-            within "tbody" do
-              expect(page).to have_css("tr", count: 8)
-            end
-          end
-        end
-
-        context "when the end date is earlier" do
-          it "displays no entries", versioning: true do
-            search_by_date("", 6.days.ago)
-
-            within "tbody" do
-              expect(page).to have_css("tr", count: 0)
-            end
-          end
-        end
-
-        context "when searching in range" do
-          it "displays entries in range", versioning: true do
-            search_by_date(3.days.ago, 2.days.ago)
-
-            within "tbody" do
-              expect(page).to have_css("tr", count: 4)
-              expect(page).to have_content("Collaborator", count: 2)
-              expect(page).to have_content("Valuator", count: 2)
-              expect(page).to have_content(collaborator.name, count: 2)
-              expect(page).to have_content(valuator.name, count: 2)
-              expect(page).to have_content(participatory_process_user_role2.participatory_space.title["en"])
-              expect(page).to have_content(participatory_process_user_role3.participatory_space.title["en"])
-              expect(page).to have_content(assembly_user_role2.participatory_space.title["en"])
-              expect(page).to have_content(assembly_user_role3.participatory_space.title["en"])
-            end
+            expect(page).to have_content(collaborator.name, count: 2)
+            expect(page).to have_content(valuator.name, count: 2)
+            expect(page).to have_content(participatory_process_user_role2.participatory_space.title["en"])
+            expect(page).to have_content(participatory_process_user_role3.participatory_space.title["en"])
+            expect(page).to have_content(assembly_user_role2.participatory_space.title["en"])
+            expect(page).to have_content(assembly_user_role3.participatory_space.title["en"])
           end
         end
       end

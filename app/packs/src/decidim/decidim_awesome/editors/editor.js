@@ -1,4 +1,4 @@
-/* eslint-disable require-jsdoc */
+/* eslint-disable require-jsdoc, func-style */
 
 /*
 * Since version 0.25 we follow a different strategy and opt to destroy and override completely the original editor
@@ -26,8 +26,8 @@ export function destroyQuillEditor(container) {
     const content = $(container).find(".ql-editor").html();
     $(container).html(content);
     $(container).siblings(".ql-toolbar").remove();
-    $(container).find("*[class*='ql-']").removeClass((index, class_name) => (class_name.match(/(^|\s)ql-\S+/g) || []).join(" "));
-    $(container).removeClass((index, class_name) => (class_name.match(/(^|\s)ql-\S+/g) || []).join(" "));
+    $(container).find("*[class*='ql-']").removeClass((index, className) => (className.match(/(^|\s)ql-\S+/g) || []).join(" "));
+    $(container).removeClass((index, className) => (className.match(/(^|\s)ql-\S+/g) || []).join(" "));
     if ($(container).next().is("p.help-text")) {
       $(container).next().remove();
     }
@@ -107,7 +107,7 @@ export function createQuillEditor(container) {
         let msg = serverError && serverError.body;
         try { 
           msg = JSON.parse(msg).message; 
-        } catch (e) { console.error("Parsing error", e); }
+        } catch (evt) { console.error("Parsing error", evt); }
         console.error(`Image upload error: ${msg}`);
         let $p = $(`<p class="text-alert help-text">${msg}</p>`);
         $(container).after($p)
@@ -174,7 +174,7 @@ export function createQuillEditor(container) {
 }
 
 export function createMarkdownEditor(container) {
-  const t = DecidimAwesome.texts.drag_and_drop_image;
+  const text = DecidimAwesome.texts.drag_and_drop_image;
   const token = $('meta[name="csrf-token"]').attr("content");
   const $input = $(container).siblings('input[type="hidden"]');
   const $faker = $('<textarea name="faker-inscrybmde"/>');
@@ -195,8 +195,8 @@ export function createMarkdownEditor(container) {
 
   // Allow image upload
   if (DecidimAwesome.allow_images_in_markdown_editor) {
-    $(inscrybmde.gui.statusbar).prepend(`<span class="help-text" style="float:left;margin:0;text-align:left;">${t}</span>`);
-    inlineAttachment.editors.codemirror4.attach(inscrybmde.codemirror, {
+    $(inscrybmde.gui.statusbar).prepend(`<span class="help-text" style="float:left;margin:0;text-align:left;">${text}</span>`);
+    window.inlineAttachment.editors.codemirror4.attach(inscrybmde.codemirror, {
       uploadUrl: DecidimAwesome.editor_uploader_path,
       uploadFieldName: "image",
       jsonFieldName: "url",

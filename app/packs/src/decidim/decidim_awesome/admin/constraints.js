@@ -4,9 +4,9 @@ $(() => {
     return;
   }
 
-  $(".decidim_awesome-form").on("click", ".constraints-editor .add-condition,.constraints-editor .edit-condition", (e) => {
-    e.preventDefault();
-    const $this = $(e.target)
+  $(".decidim_awesome-form").on("click", ".constraints-editor .add-condition,.constraints-editor .edit-condition", (evt) => {
+    evt.preventDefault();
+    const $this = $(evt.target)
     const url = $this.attr("href");
     const $callout = $this.closest(".constraints-editor").find(".callout");
     $callout.hide();
@@ -21,8 +21,8 @@ $(() => {
   });
 
   // Custom event listener to reload the modal if needed
-  document.body.addEventListener("constraint:change", (e) => {
-    const vars = e.detail.map((setting) => `${setting.key}=${setting.value}`);
+  document.body.addEventListener("constraint:change", (evt) => {
+    const vars = evt.detail.map((setting) => `${setting.key}=${setting.value}`);
     const url = `${$modal.data("url")}&${vars.join("&")}`;
     // console.log("constraint:change vars:", vars, "url:", url)
     $modal.addClass("loading");

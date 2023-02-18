@@ -6,9 +6,9 @@ module Decidim
       default_scope { order("created_at DESC") }
       scope :role_actions, -> { where(item_type: ::Decidim::DecidimAwesome.admin_user_roles, event: "create") }
 
-      def present
+      def present(html: true)
         @present ||= if item_type.in?(Decidim::DecidimAwesome.admin_user_roles)
-                       PaperTrailRolePresenter.new(self)
+                       PaperTrailRolePresenter.new(self, html: html)
                      else
                        self
                      end

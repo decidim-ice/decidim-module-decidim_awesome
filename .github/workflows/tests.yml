@@ -60,6 +60,8 @@ jobs:
         run: bundle exec rspec spec/${{ matrix.rspec }}
         env:
           FEATURES: ${{ matrix.features }}
+          SIMPLECOV: 1
+          CODECOV: 1
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3

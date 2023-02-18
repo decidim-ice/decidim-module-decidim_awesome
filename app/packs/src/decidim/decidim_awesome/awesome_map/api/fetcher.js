@@ -67,13 +67,13 @@ export default class Fetcher {
   }
 
   findTranslation(translations) {
-    let text, 
-        lang = document.querySelector("html").getAttribute("lang");
+    let lang = document.querySelector("html").getAttribute("lang"),
+        text = "";
     
-    translations.forEach((t) => {
-      if (t.text) {
-        if (!text || t.locale == lang) {
-          text = t.text
+    translations.forEach((txt) => {
+      if (txt.text) {
+        if (!text || txt.locale === lang) {
+          text = txt.text
         }
       }
     });
@@ -85,12 +85,10 @@ export default class Fetcher {
     if (text) {
       const gids = text.match(/gid:\/\/[^\s<&]+/g)
       if (gids) {
-        tags = gids.filter((gid) => gid.indexOf("/Decidim::Hashtag/") != -1).map((gid) => {
+        tags = gids.filter((gid) => gid.indexOf("/Decidim::Hashtag/") !== -1).map((gid) => {
           const parts = gid.split("/");
-          const fromSelector = parts[5].charAt(0) == "_";
-          const tag = fromSelector
-            ? parts[5].substr(1)
-            : parts[5];
+          const fromSelector = parts[5].charAt(0) === "_";
+          const tag = fromSelector ? parts[5].substr(1) : parts[5]; // eslint-disable-line no-ternary, multiline-ternary
           const name = `#${tag}`;
           const html = `<a href="/search?term=${name}">${name}</a>`;
           const hashtag = {
@@ -110,7 +108,8 @@ export default class Fetcher {
     return tags;
   }
 
-  replaceHashtags(text, hashtags) {
+  replaceHashtags(txt, hashtags) {
+    let text = txt;
     hashtags.forEach((tag) => {
       text = text.replace(tag.gid, tag.name)
     });
@@ -121,7 +120,8 @@ export default class Fetcher {
     return text.replace(/gid:\/\/[^\s<&]+/g, "");
   }
 
-  appendHtmlHashtags(text, tags) {
+  appendHtmlHashtags(txt, tags) {
+    let text = txt;
     tags.forEach((tag) => {
       text += ` ${tag.html}`;
     });
