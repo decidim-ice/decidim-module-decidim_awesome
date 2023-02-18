@@ -60,7 +60,7 @@ en:
   decidim:
     admin:
       filters:
-        admin_actions:
+        admin_accountability:
           participatory_space_type_eq:
             label: Participatory space type
           role:

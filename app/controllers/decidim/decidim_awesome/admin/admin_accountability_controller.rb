@@ -15,9 +15,7 @@ module Decidim
           enforce_permission_to :edit_config, :allow_admin_accountability
         end
 
-        def index
-          @render_date_fields = true
-        end
+        def index; end
 
         def export
           format = params[:format].to_s

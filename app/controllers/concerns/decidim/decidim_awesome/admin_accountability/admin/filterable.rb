@@ -37,13 +37,11 @@ module Decidim
             end
 
             def translated_role_type_eq(role)
-              admin_action = collection.find { |action| action.item && action.item[:role] == role }
-              admin_action ? translated_attribute(admin_action.item[:role]) : nil
+              I18n.t(role, scope: "decidim.decidim_awesome.admin.admin_accountability.roles")
             end
 
             def translated_participatory_space_type_eq(item_type)
-              admin_action = collection.find { |action| action.item_type == item_type }
-              admin_action ? translated_attribute(admin_action.item_type.demodulize.gsub("UserRole", "")) : nil
+              item_type.gsub("UserRole", "").safe_constantize&.model_name&.human&.pluralize || item_type
             end
 
             def search_field_predicate
@@ -55,11 +53,11 @@ module Decidim
             end
 
             def participatory_space_types
-              collection.pluck(:item_type).uniq.sort
+              @participatory_space_types ||= collection.pluck(:item_type).uniq.sort
             end
 
             def role_types
-              collection.map { |admin_action| admin_action.item&.[](:role) }.compact.uniq.sort
+              @role_types ||= collection.map { |admin_action| admin_action.item&.role }.compact.uniq.sort
             end
           end
         end

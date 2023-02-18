@@ -54,19 +54,19 @@ describe "Filter Admin actions", type: :system do
       expect(page).to have_content("Role type")
 
       find("a", text: "Participatory space type").hover
-      expect(page).to have_content("Process")
-      expect(page).to have_content("Assembly")
+      expect(page).to have_content("Participatory processes")
+      expect(page).to have_content("Assemblies")
 
       find("a", text: "Role type").hover
-      expect(page).to have_content("admin")
-      expect(page).to have_content("collaborator")
-      expect(page).to have_content("moderator")
-      expect(page).to have_content("valuator")
+      expect(page).to have_content("Admin")
+      expect(page).to have_content("Collaborator")
+      expect(page).to have_content("Moderator")
+      expect(page).to have_content("Valuator")
     end
 
     context "when filtering admin_actions by PARTICIPATORY SPACE" do
       it "Assemblies space type" do
-        apply_filter("Participatory space type", "Assembly")
+        apply_filter("Participatory space type", "Assemblies")
 
         within "tbody" do
           expect(page).to have_content("Assemblies >", count: 4)
@@ -74,7 +74,7 @@ describe "Filter Admin actions", type: :system do
       end
 
       it "Processes space type" do
-        apply_filter("Participatory space type", "Process")
+        apply_filter("Participatory space type", "Participatory processes")
 
         within "tbody" do
           expect(page).to have_content("Processes >", count: 4)
@@ -82,7 +82,7 @@ describe "Filter Admin actions", type: :system do
       end
 
       it "exports the result" do
-        apply_filter("Participatory space type", "Process")
+        apply_filter("Participatory space type", "Participatory processes")
 
         find(".exports.dropdown").click
         perform_enqueued_jobs { click_link "Export as CSV" }
@@ -99,7 +99,7 @@ describe "Filter Admin actions", type: :system do
 
     context "when filtering admin_actions by ROLE TYPE" do
       it "Admin role type" do
-        apply_filter("Role type", "admin")
+        apply_filter("Role type", "Admin")
 
         within "tbody" do
           expect(page).to have_content("Administrator", count: 2)
@@ -107,7 +107,7 @@ describe "Filter Admin actions", type: :system do
       end
 
       it "Collaborator role type" do
-        apply_filter("Role type", "collaborator")
+        apply_filter("Role type", "Collaborator")
 
         within "tbody" do
           expect(page).to have_content("Collaborator", count: 2)
@@ -115,7 +115,7 @@ describe "Filter Admin actions", type: :system do
       end
 
       it "Moderator role type" do
-        apply_filter("Role type", "moderator")
+        apply_filter("Role type", "Moderator")
 
         within "tbody" do
           expect(page).to have_content("Moderator", count: 2)
@@ -123,7 +123,7 @@ describe "Filter Admin actions", type: :system do
       end
 
       it "Valuator role type" do
-        apply_filter("Role type", "valuator")
+        apply_filter("Role type", "Valuator")
 
         within "tbody" do
           expect(page).to have_content("Valuator", count: 2)

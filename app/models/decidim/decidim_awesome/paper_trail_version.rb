@@ -4,10 +4,15 @@ module Decidim
   module DecidimAwesome
     class PaperTrailVersion < PaperTrail::Version
       default_scope { order("created_at DESC") }
-      scope :role_actions, -> { where(item_type: ::Decidim::DecidimAwesome.admin_user_roles, event: "create") }
+
+      def self.safe_user_roles
+        DecidimAwesome.admin_user_roles.filter(&:safe_constantize)
+      end
+
+      scope :role_actions, -> { where(item_type: PaperTrailVersion.safe_user_roles, event: "create") }
 
       def present(html: true)
-        @present ||= if item_type.in?(Decidim::DecidimAwesome.admin_user_roles)
+        @present ||= if item_type.in?(PaperTrailVersion.safe_user_roles)
                        PaperTrailRolePresenter.new(self, html: html)
                      else
                        self
@@ -15,55 +20,51 @@ module Decidim
       end
 
       ransacker :role_type do
-        Arel.sql(%{
-              (
-                SELECT cast("decidim_assembly_user_roles"."role" as text) FROM "decidim_assembly_user_roles"
-                WHERE "decidim_assembly_user_roles"."id" = "versions"."item_id"
-                AND item_type = 'Decidim::AssemblyUserRole'
-                UNION
-                SELECT cast("decidim_participatory_process_user_roles"."role" as text) FROM decidim_participatory_process_user_roles
-                WHERE decidim_participatory_process_user_roles.id = versions.item_id
-                AND item_type = 'Decidim::ParticipatoryProcessUserRole'
-              )
-            })
+        @role_type ||= begin
+          queries = PaperTrailVersion.safe_user_roles.map do |role_class|
+            table = role_class.safe_constantize.table_name
+            %{
+              SELECT ("#{table}"."role")::text FROM "#{table}"
+              WHERE "#{table}"."id" = "versions"."item_id"
+              AND item_type = '#{role_class}'
+            }
+          end
+          Arel.sql("(#{queries.join(" UNION ")})")
+        end
       end
 
       ransacker :participatory_space_type do
-        Arel.sql(%{ (cast("item_type" as text))})
+        Arel.sql(%{("item_type")::text})
       end
 
       ransacker :user_email do
-        query = <<-SQL.squish
-            (
-            SELECT decidim_users.email FROM decidim_users
-            JOIN decidim_assembly_user_roles ON decidim_users.id = decidim_assembly_user_roles.decidim_user_id
-            WHERE decidim_assembly_user_roles.id = versions.item_id
-            AND item_type = 'Decidim::AssemblyUserRole'
-            UNION
-            SELECT decidim_users.email FROM decidim_users
-            JOIN decidim_participatory_process_user_roles ON decidim_users.id = decidim_participatory_process_user_roles.decidim_user_id
-            WHERE decidim_participatory_process_user_roles.id = versions.item_id
-            AND item_type = 'Decidim::ParticipatoryProcessUserRole'
+        @user_email ||= begin
+          queries = PaperTrailVersion.safe_user_roles.map do |role_class|
+            table = role_class.safe_constantize.table_name
+            %(
+              SELECT decidim_users.email FROM decidim_users
+              JOIN #{table} ON decidim_users.id = #{table}.decidim_user_id
+              WHERE #{table}.id = versions.item_id
+              AND item_type = '#{role_class}'
             )
-        SQL
-        Arel.sql(query)
+          end
+          Arel.sql("(#{queries.join(" UNION ")})")
+        end
       end
 
       ransacker :user_name do
-        query = <<-SQL.squish
-            (
-            SELECT decidim_users.name FROM decidim_users
-            JOIN decidim_assembly_user_roles ON decidim_users.id = decidim_assembly_user_roles.decidim_user_id
-            WHERE decidim_assembly_user_roles.id = versions.item_id
-            AND item_type = 'Decidim::AssemblyUserRole'
-            UNION
-            SELECT decidim_users.name FROM decidim_users
-            JOIN decidim_participatory_process_user_roles ON decidim_users.id = decidim_participatory_process_user_roles.decidim_user_id
-            WHERE decidim_participatory_process_user_roles.id = versions.item_id
-            AND item_type = 'Decidim::ParticipatoryProcessUserRole'
+        @user_name ||= begin
+          queries = PaperTrailVersion.safe_user_roles.map do |role_class|
+            table = role_class.safe_constantize.table_name
+            %(
+              SELECT decidim_users.name FROM decidim_users
+              JOIN #{table} ON decidim_users.id = #{table}.decidim_user_id
+              WHERE #{table}.id = versions.item_id
+              AND item_type = '#{role_class}'
             )
-        SQL
-        Arel.sql(query)
+          end
+          Arel.sql("(#{queries.join(" UNION ")})")
+        end
       end
 
       ransacker :created_at, type: :date do
