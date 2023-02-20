@@ -23,12 +23,24 @@ module Decidim::DecidimAwesome
       expect(PaperTrailVersion.all).to eq([paper_trail_version])
     end
 
-    it "returns role_actions scope correctly" do
-      expect(PaperTrailVersion.role_actions).to include(paper_trail_version)
+    it "returns space_role_actions scope correctly" do
+      expect(PaperTrailVersion.space_role_actions).to include(paper_trail_version)
     end
 
-    it "present method returns a PaperTrailRolePresenter object" do
-      expect(subject.present).to be_a(PaperTrailRolePresenter)
+    it "present method returns a PaperTrailBasePresenter object" do
+      expect(subject.present).to be_a(PaperTrailBasePresenter)
+    end
+
+    it "present method returns a ParticipatorySpaceRolePresenter object" do
+      expect(subject.present).to be_a(ParticipatorySpaceRolePresenter)
+    end
+
+    context "when admin roles" do
+      let(:paper_trail_version) { create(:paper_trail_version, item_type: "Decidim::UserBaseEntity", item_id: user.id, event: "create") }
+
+      it "present method returns a UserEntityPresenter object" do
+        expect(subject.present).to be_a(UserEntityPresenter)
+      end
     end
   end
 end

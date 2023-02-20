@@ -17,7 +17,7 @@ describe "Admin accountability", type: :system do
   let(:status) { true }
 
   before do
-    allow(Decidim::DecidimAwesome.config).to receive(:allow_admin_accountability).and_return(status)
+    allow(Decidim::DecidimAwesome.config).to receive(:admin_accountability).and_return(status)
     switch_to_host(organization.host)
     login_as admin, scope: :user
 

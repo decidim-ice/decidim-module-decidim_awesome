@@ -12,6 +12,8 @@ module Decidim
           included do
             include Decidim::Admin::Filterable
 
+            helper Decidim::DecidimAwesome::AdminAccountability::Admin::FilterableHelper
+
             private
 
             def base_query
@@ -19,21 +21,21 @@ module Decidim
             end
 
             def filters
-              [
-                :role_type_eq,
-                :participatory_space_type_eq
-              ]
+              [:role_type_eq, :participatory_space_type_eq]
             end
 
             def filters_with_values
-              {
-                role_type_eq: role_types,
-                participatory_space_type_eq: participatory_space_types
-              }
+              return { admin_role_type: [] } if global?
+
+              { role_type_eq: role_types, participatory_space_type_eq: participatory_space_types }
             end
 
             def dynamically_translated_filters
               [:role_type_eq, :participatory_space_type_eq]
+            end
+
+            def extra_allowed_params
+              [:per_page, :admins, :admin_role_type]
             end
 
             def translated_role_type_eq(role)
@@ -48,16 +50,14 @@ module Decidim
               :user_name_or_user_email_cont
             end
 
-            def extra_allowed_params
-              [:per_page]
-            end
-
             def participatory_space_types
               @participatory_space_types ||= collection.pluck(:item_type).uniq.sort
             end
 
             def role_types
-              @role_types ||= collection.map { |admin_action| admin_action.item&.role }.compact.uniq.sort
+              @role_types ||= PaperTrailVersion.safe_user_roles.map do |role_class|
+                role_class.safe_constantize.select(:role).distinct.pluck(:role)
+              end.union.flatten.sort
             end
           end
         end

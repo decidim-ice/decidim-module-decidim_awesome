@@ -17,7 +17,7 @@ module Decidim
 
       def serialized_collection(collection_ids)
         @serialized_collection ||= begin
-          collection = PaperTrailVersion.role_actions.where(id: collection_ids)
+          collection = PaperTrailVersion.where(id: collection_ids)
           collection.map do |item|
             PaperTrailVersionSerializer.new(item).serialize
           end

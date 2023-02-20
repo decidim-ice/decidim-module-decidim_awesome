@@ -12,7 +12,6 @@ describe "Filter Admin actions", type: :system do
   let(:collaborator) { create(:user, organization: organization, created_at: user_creation_date) }
   let(:moderator) { create(:user, organization: organization, created_at: user_creation_date) }
 
-  let(:status) { true }
   let(:resource_controller) { Decidim::DecidimAwesome::Admin::AdminAccountabilityController }
 
   let!(:participatory_process_user_role1) { create(:participatory_process_user_role, user: administrator, role: "admin", created_at: 4.days.ago) }
@@ -27,9 +26,8 @@ describe "Filter Admin actions", type: :system do
   include_context "with filterable context"
 
   before do
-    allow(Decidim::DecidimAwesome.config).to receive(:allow_admin_accountability).and_return(status)
     # ensure papertrail has the same created_at date as the object being mocked
-    Decidim::DecidimAwesome::PaperTrailVersion.role_actions.map { |v| v.update(created_at: v.item.created_at) }
+    Decidim::DecidimAwesome::PaperTrailVersion.space_role_actions.map { |v| v.update(created_at: v.item.created_at) }
 
     switch_to_host(organization.host)
     login_as admin, scope: :user
@@ -94,6 +92,8 @@ describe "Filter Admin actions", type: :system do
         expect(last_email.subject).to include("Your export", "csv", "is ready")
         expect(last_email.attachments.length).to be_positive
         expect(last_email.attachments.first.filename).to match(/^admin_actions.*\.zip$/)
+        expect(current_url).to include(decidim_admin_decidim_awesome.admin_accountability_path)
+        expect(current_url).not_to include("admins=true")
       end
     end
 

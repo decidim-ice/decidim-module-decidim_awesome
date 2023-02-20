@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "decidim/decidim_awesome/test/shared_examples/action_log_presenter_examples"
 
 module Decidim::DecidimAwesome
-  describe PaperTrailRolePresenter, type: :helper do
+  describe ParticipatorySpaceRolePresenter, type: :helper do
     let(:user) { create :user, organization: organization }
     let(:organization) { create :organization }
     let(:participatory_space) { create(:participatory_process, organization: organization) }
@@ -30,7 +31,6 @@ module Decidim::DecidimAwesome
                                    event: "create")
     end
 
-    let(:action_log) { create(:action_log, organization: organization, resource_id: entry.reload.changeset["decidim_user_id"].last, action: "create") }
     let(:html) { true }
 
     subject { described_class.new(entry, html: html) }
@@ -56,60 +56,52 @@ module Decidim::DecidimAwesome
         expect(subject.role).to eq("admin")
       end
 
-      it "returns the role name" do
-        expect(subject.role_name).to eq("Administrator")
+      it "returns the role name in html" do
+        expect(subject.role_name).to eq("<span class=\"text-alert\">Administrator</span>")
       end
 
-      it "returns the role class" do
-        expect(subject.role_class).to eq("text-alert")
+      context "when html is disabled" do
+        let(:html) { false }
+
+        it "returns without classes" do
+          expect(subject.role_name).to eq("Administrator")
+        end
       end
 
       context "when role is a valuator" do
         let(:role) { "valuator" }
 
-        it "returns the role name" do
-          expect(subject.role_name).to eq("Valuator")
+        it "returns the role name in html" do
+          expect(subject.role_name).to eq("<span class=\"text-secondary\">Valuator</span>")
         end
 
-        it "returns the role class" do
-          expect(subject.role_class).to eq("text-secondary")
+        context "when html is disabled" do
+          let(:html) { false }
+
+          it "returns without classes" do
+            expect(subject.role_name).to eq("Valuator")
+          end
         end
       end
 
       context "when role is a collaborator" do
         let(:role) { "collaborator" }
 
-        it "returns the role name" do
+        it "returns the role name in html" do
           expect(subject.role_name).to eq("Collaborator")
         end
 
-        it "returns the role class" do
-          expect(subject.role_class).to be_blank
+        context "when html is disabled" do
+          let(:html) { false }
+
+          it "returns without classes" do
+            expect(subject.role_name).to eq("Collaborator")
+          end
         end
       end
     end
 
-    describe "#removal_date" do
-      it "returns currently active" do
-        expect(subject.removal_date).to eq("<span class=\"text-success\">Currently active</span>")
-      end
-
-      context "when html is disabled" do
-        let(:html) { false }
-
-        it "returns currently active" do
-          expect(subject.removal_date).to eq("Currently active")
-        end
-      end
-
-      context "when the role was removed" do
-        include_context "with role destroyed"
-
-        it "returns the removal date" do
-          expect(subject.removal_date).to eq(destroyed_at.strftime("%d/%m/%Y %H:%M"))
-        end
-      end
-    end
+    it_behaves_like "a user presenter"
 
     describe "#participatory_space_name" do
       it "returns the participatory space name" do
@@ -157,48 +149,6 @@ module Decidim::DecidimAwesome
         end
       end
       # rubocop:enable RSpec/AnyInstance
-    end
-
-    describe "#created_date" do
-      it "returns the creation date" do
-        expect(subject.created_date).to eq(entry.created_at.strftime("%d/%m/%Y %H:%M"))
-      end
-
-      context "when date is missing" do
-        let(:entry) { nil }
-
-        it "returns the creation date" do
-          expect(subject.created_date).to eq("")
-        end
-      end
-    end
-
-    describe "#last_sign_in_date" do
-      it "returns never logged in yet" do
-        expect(subject.last_sign_in_date).to eq("<span class=\"muted\">Never logged yet</span>")
-      end
-
-      context "when no html" do
-        let(:html) { false }
-
-        it "returns never logged in yet" do
-          expect(subject.last_sign_in_date).to eq("Never logged yet")
-        end
-      end
-
-      context "when user has logged before" do
-        let(:user) { create :user, organization: organization, last_sign_in_at: 1.day.ago }
-
-        it "returns the last sign in date" do
-          expect(subject.last_sign_in_date).to eq(1.day.ago.strftime("%d/%m/%Y %H:%M"))
-        end
-      end
-    end
-
-    describe "#user" do
-      it "returns the user" do
-        expect(subject.user).to eq(user)
-      end
     end
   end
 end

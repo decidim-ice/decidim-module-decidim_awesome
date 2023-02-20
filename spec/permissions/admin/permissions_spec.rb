@@ -65,7 +65,7 @@ module Decidim::DecidimAwesome::Admin
     end
 
     context "when accessing admin_accountability" do
-      let(:feature) { :allow_admin_accountability }
+      let(:feature) { :admin_accountability }
       let(:status) { true }
 
       before do
