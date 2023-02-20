@@ -24,7 +24,7 @@ window.fbControls.push(function(controlClass, allControlClasses) {
 
     /**
      * Class configuration - return the icons & label related to this control
-     * @returndefinition object
+     * @return {JSON} definition object
      */
     static get definition() {
       return {
@@ -37,6 +37,7 @@ window.fbControls.push(function(controlClass, allControlClasses) {
 
     /**
      * configure the richtext editor requirements
+     * @return {void}
      */
     configure() {
       window.fbEditors.richtext = {};
@@ -68,15 +69,16 @@ window.fbControls.push(function(controlClass, allControlClasses) {
         `,
         { type: "text/css" }
       );
-      const wrapper_attrs = {...attrs, "data-toolbar": "full" };
-      // console.log("build value", value, "userData", userData, "attrs", attrs, attrs.id, "wrapper_attrs", wrapper_attrs);
-      this.wrapper = this.markup("div", null, wrapper_attrs);
+      const wrapperAttrs = {...attrs, "data-toolbar": "full" };
+      // console.log("build value", value, "userData", userData, "attrs", attrs, attrs.id, "wrapperAttrs", wrapperAttrs);
+      this.wrapper = this.markup("div", null, wrapperAttrs);
       return this.markup("div", [css, this.input, this.wrapper], attrs);
     }
 
     /**
      * When the element is rendered into the DOM, execute the following code to initialise it
      * @param {Object} evt - event
+     * @return {Object} evt - event
      */
     onRender(evt) {
       // const value = this.config.value || '';

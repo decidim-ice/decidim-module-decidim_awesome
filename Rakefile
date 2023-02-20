@@ -51,6 +51,6 @@ task :development_app do
   end
 
   install_module("development_app")
-  seed_db("development_app")
   override_webpacker_config_files("development_app")
+  seed_db("development_app")
 end

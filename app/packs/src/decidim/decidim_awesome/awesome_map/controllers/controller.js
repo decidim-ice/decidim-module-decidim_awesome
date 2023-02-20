@@ -14,9 +14,10 @@ export default class Controller {
   }
 
   getLabel() {
-    let text = this.awesomeMap.config.menu.mergeComponents || !this.component.name 
-      ? window.DecidimAwesome.texts[this.component.type]
-      : this.component.name;
+    let text = this.awesomeMap.config.menu.mergeComponents || this.component.name;
+    if (!text) {
+      text = window.DecidimAwesome.texts[this.component.type];
+    }
     return `<span class="awesome_map-component" id="awesome_map-component_${this.component.id}" title="0" data-layer="${this.component.type}">${text}</span>`
   }
 
@@ -29,13 +30,15 @@ export default class Controller {
     this.fetcher.onCollection = (collection) =>  {
       if (collection && collection.edges)  { 
         // Add markers to the main cluster group
+        const collectionEdges = collection.edges.filter((item) => item.node.coordinates && item.node.coordinates.latitude && item.node.coordinates.longitude);
         try {
-          this.awesomeMap.cluster.addLayers(collection.edges.map((item) => item.node.marker));
-        } catch (e) {
-          console.error("Failed marker collection assignation", collection);
+          this.awesomeMap.cluster.addLayers(collectionEdges.map((item) => item.node.marker));
+        } catch (evt) {
+          console.error("Failed marker collection assignation", collectionEdges, "error", evt);
         }
         // subgroups don't have th addLayers utility
-        collection.edges.forEach((item) => {
+        collectionEdges.forEach((item) => {
+          this.awesomeMap.layers[this.component.type].group.addLayer(item.node.marker);
           this.addMarkerCategory(item.node.marker, item.node.category);
           this.addMarkerHashtags(item.node.marker, item.node.hashtags);
         });
@@ -45,7 +48,8 @@ export default class Controller {
 
   addControls() {
     this.awesomeMap.controls.main.addOverlay(this.controls.group, this.controls.label);
-    this.awesomeMap.map.addLayer(this.controls.group);
+    this.controls.group.addTo(this.awesomeMap.map);
+    this.awesomeMap.layers[this.component.type] = this.controls;
   }
 
   loadNodes() {
@@ -94,8 +98,8 @@ export default class Controller {
       try {
         this.awesomeMap.layers[cat.id].group.addLayer(marker);
         this.awesomeMap.controls.showCategory(cat);
-      } catch (e) {
-        console.error("Failed category marker assignation", marker, e.message);
+      } catch (evt) {
+        console.error("Failed category marker assignation", marker, evt.message);
       }
     }   
   }
@@ -105,8 +109,8 @@ export default class Controller {
     if (this.awesomeMap.config.menu.hashtags) {
       try {
         this.awesomeMap.controls.addHashtagsControls(hashtags, marker);
-      } catch (e) {
-        console.error("Failed hashtags marker assignation", marker, e.message);
+      } catch (evt) {
+        console.error("Failed hashtags marker assignation", marker, evt.message);
       }
     }
   }

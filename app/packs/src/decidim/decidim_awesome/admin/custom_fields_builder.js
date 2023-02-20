@@ -36,7 +36,8 @@ $(() => {
           "paragraph"
         ],
         disabledSubtypes: {
-          text: ["color"], // default color as it generate hashtags in decidim (TODO: fix hashtag generator with this)
+          // default color as it generate hashtags in decidim (TODO: fix hashtag generator with this)
+          text: ["color"], 
           // disable default wysiwyg editors as they present problems
           textarea: ["tinymce", "quill"]
         }
@@ -45,21 +46,21 @@ $(() => {
     });
   });
 
-  $(document).on("formBuilder.create", (_event, i, list) => {
-    if (!list[i]) {
+  $(document).on("formBuilder.create", (_event, idx, list) => {
+    if (!list[idx]) {
       return;
     }
 
-    $(list[i].el).formBuilder(list[i].config).promise.then(function(res) {
-      list[i].instance = res;
+    $(list[idx].el).formBuilder(list[idx].config).promise.then(function(res) {
+      list[idx].instance = res;
       // Attach to DOM
-      list[i].el.FormBuilder = res;
+      list[idx].el.FormBuilder = res;
       // remove spinner
-      $(list[i].el).find(".loading-spinner").remove();
+      $(list[idx].el).find(".loading-spinner").remove();
       // for external use
-      $(document).trigger("formBuilder.created", [list[i]]);
-      if (i < list.length) {
-        $(document).trigger("formBuilder.create", [i + 1, list]);
+      $(document).trigger("formBuilder.created", [list[idx]]);
+      if (idx < list.length) {
+        $(document).trigger("formBuilder.create", [idx + 1, list]);
       }
     });
   });

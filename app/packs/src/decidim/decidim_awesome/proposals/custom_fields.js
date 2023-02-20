@@ -5,18 +5,18 @@ window.DecidimAwesome.CustomFieldsRenderer = window.DecidimAwesome.CustomFieldsR
 $(() => {
   // use admin multilang specs if exists
   let $el = $("proposal_custom_field:first", ".tabs-title.is-active");
-  $el = $el.length
-    ? $el
-    : $(".proposal_custom_field:first");
+  if (!$el.length) {
+    $el = $(".proposal_custom_field:first");
+  }
   window.DecidimAwesome.CustomFieldsRenderer.init($el);
 
-  window.DecidimAwesome.CustomFieldsRenderer.$container.closest("form").on("submit", (e) => {
-    if (e.target.checkValidity()) {
+  window.DecidimAwesome.CustomFieldsRenderer.$container.closest("form").on("submit", (evt) => {
+    if (evt.target.checkValidity()) {
       // save current editor
       window.DecidimAwesome.CustomFieldsRenderer.storeData();
     } else {
-      e.preventDefault();
-      e.target.reportValidity();
+      evt.preventDefault();
+      evt.target.reportValidity();
     }
   });
 });

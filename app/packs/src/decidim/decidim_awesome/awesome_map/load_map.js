@@ -12,6 +12,7 @@ $(() => {
         }
       }
     }
+    return null;
   };
 
   const config = {

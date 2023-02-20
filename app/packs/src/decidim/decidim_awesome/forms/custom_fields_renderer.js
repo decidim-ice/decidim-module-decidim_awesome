@@ -2,8 +2,8 @@ require("formBuilder/dist/form-render.min.js")
 import "src/decidim/decidim_awesome/forms/rich_text_plugin"
 
 export default class CustomFieldsRenderer { // eslint-disable-line no-unused-vars
-  constructor(container_selector) {
-    this.container_selector = container_selector || ".proposal_custom_field:last";
+  constructor(containerSelector) {
+    this.containerSelector = containerSelector || ".proposal_custom_field:last";
     this.lang = this.getLang($("html").attr("lang"));
   }
 
@@ -56,14 +56,21 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
   */
   dataToXML(data) {
     const $dl = $("<dl/>");
-    let $dd, $div, $dt, key, l, label, text, val;
+    let $dd = null, 
+        $div = null, 
+        $dt = null, 
+        datum = null, 
+        key = null, 
+        label = null, 
+        text = null, 
+        val = null;
     $dl.attr("class", "decidim_awesome-custom_fields");
     $dl.attr("data-generator", "decidim_awesome");
     $dl.attr("data-version", window.DecidimAwesome.version);
-    for (key in data) {
+    for (key in data) { // eslint-disable-line guard-for-in
       // console.log("get the data!", key, data[key]);
       // Richtext plugin does not saves userdata, so we get it from the hidden input
-      if (data[key].type == "textarea" && data[key].subtype == "richtext") {
+      if (data[key].type === "textarea" && data[key].subtype === "richtext") {
         data[key].userData = [$(`#${data[key].name}-input`).val()];
       }
       if (data[key].userData && data[key].userData.length) {
@@ -72,25 +79,25 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
         $dt.attr("name", data[key].name);
         $dd = $("<dd/>");
         // console.log("data for", key, data[key].name, data[key])
-        for (val in data[key].userData) {
+        for (val in data[key].userData) { // eslint-disable-line guard-for-in
           $div = $("<div/>");
           label = data[key].userData[val];
           text = null;
           if (data[key].values) {
-            l = data[key].values.find((v) => v.value == label);
-            if (l) {
+            datum = data[key].values.find((obj) => obj.value === label); // eslint-disable-line no-loop-func
+            if (datum) { // eslint-disable-line max-depth
               text = label;
-              label = l.label;
+              label = datum.label;
             }
-          } else if (data[key].type == "date" && label) {
-            l = new Date(label).toLocaleDateString();
-            if (l) {
+          } else if (data[key].type === "date" && label) {
+            datum = new Date(label).toLocaleDateString();
+            if (datum) { // eslint-disable-line max-depth
               text = label;
-              label = l;
+              label = datum;
             }
           }
           // console.log("userData", text, "label", label, 'key', key, 'data', data)
-          if (data[key].type == "textarea" && data[key].subtype == "richtext") {
+          if (data[key].type === "textarea" && data[key].subtype === "richtext") {
             $div.html(label);
           } else {
             $div.text(label);
@@ -120,7 +127,7 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
     */
     this.$container.find(".formbuilder-checkbox-group").each((_key, group) => {
       const inputs = $(".formbuilder-checkbox input", group);
-      const data = this.spec.find((a) => a.type == "checkbox-group");
+      const data = this.spec.find((obj) => obj.type === "checkbox-group");
       let values = data.userData;
       if (!inputs.length || !data || !values) {
         return;
@@ -138,19 +145,19 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
       });
 
       // Fill "other" option
-      const other_option = $(".other-option", inputs.parent())[0];
-      const other_val = $(".other-val", inputs.parent())[0];
-      const other_text = values.join(" ");
+      const otherOption = $(".other-option", inputs.parent())[0];
+      const otherVal = $(".other-val", inputs.parent())[0];
+      const otherText = values.join(" ");
 
-      if (other_option) {
-        if (other_text) {
-          other_option.checked = true;
-          other_option.value = other_text;
-          other_val.value = other_text;
+      if (otherOption) {
+        if (otherText) {
+          otherOption.checked = true;
+          otherOption.value = otherText;
+          otherVal.value = otherText;
         } else {
-          other_option.checked = false;
-          other_option.value = "";
-          other_val.value = "";
+          otherOption.checked = false;
+          otherOption.value = "";
+          otherVal.value = "";
         }
       }
     });
@@ -169,6 +176,7 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
         }
       });
     });
+    return this;
   }
 
   // Saves xml to the hidden input
@@ -184,13 +192,14 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
       this.$element.data("spec", this.spec);
     }
     // console.log("storeData spec", this.spec, "$body", $body,"$form",$form,"this",this);
+    return this;
   }
 
   init($element) {
     this.$element = $element;
     this.spec = $element.data("spec");
     if (!this.$container) {
-      this.$container = $(this.container_selector);
+      this.$container = $(this.containerSelector);
     }
     // console.log("init", $element, "this", this)
     // always use the last field (in case of multilang tabs we only render one form due a limitation of the library to handle several instances)

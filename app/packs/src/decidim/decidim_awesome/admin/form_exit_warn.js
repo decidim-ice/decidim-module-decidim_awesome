@@ -23,6 +23,7 @@ $(() => {
       }
 
       event.returnValue = true;
+      return true;
     });
   }
 });
