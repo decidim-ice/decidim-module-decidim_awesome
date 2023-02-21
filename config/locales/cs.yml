@@ -46,7 +46,23 @@ cs:
         proposal_custom_fields: Vlastní pole
   decidim:
     admin:
+      filters:
+        admin_accountability:
+          admin_role_type:
+            label: Typ role
+          participatory_space_type_eq:
+            label: Typ participačního prostoru
+          role:
+            label: Role
+          role_type_eq:
+            label: Typ role
+        label:
+          search_field_end_date: 'Do dne:'
+          search_field_start_date: 'Od dne:'
+        search_placeholder:
+          user_name_or_user_email_cont: Hledat podle uživatelského jména, emailu
       menu:
+        admin_accountability: Odpovědnost správce
         decidim_awesome: Úžasné Decidim
     components:
       awesome_iframe:
@@ -87,6 +103,34 @@ cs:
             show_withdrawn: Zobrazit stažené návrhy
     decidim_awesome:
       admin:
+        admin_accountability:
+          admin_roles:
+            admin: Super správce
+            user_manager: Správce uživatelů
+          created_at: Role vytvořena v
+          currently_active: Nyní aktivní
+          deleted_user: Smazat uživatele
+          email: E-mail
+          exports:
+            button: Exportovat toto hledání
+            export_as: Export jako %{export_format}
+            export_format:
+              csv: CSV
+              json: JSON
+              xlsx: XLSX
+            notice: Export úlohy byl zařazen do fronty. Až bude připraven, obdržíte e-mail.
+          index:
+            description: Zde najdete všechny uživatele, kteří měli nějakou roli ve správě participačního prostoru. Běžní správci nejsou uvedeni.
+            see_global: Seznam globálních správců
+          name: Jméno
+          never_logged: Nikdy nepřihlášen
+          removal_date: Role odebrána v
+          role: Role
+          roles:
+            admin: Administrátor
+            collaborator: Spolupracovník
+            moderator: Moderátor
+            valuator: Hodnotitel
         checks:
           index:
             admin_head_tags: Úžasné tagy zahrnuté v hlavičce administrace aplikace
