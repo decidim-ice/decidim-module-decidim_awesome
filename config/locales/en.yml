@@ -59,7 +59,23 @@ en:
         proposal_custom_fields: Custom fields
   decidim:
     admin:
+      filters:
+        admin_accountability:
+          admin_role_type:
+            label: Role type
+          participatory_space_type_eq:
+            label: Participatory space type
+          role:
+            label: Role
+          role_type_eq:
+            label: Role type
+        label:
+          search_field_end_date: 'To date:'
+          search_field_start_date: 'From date:'
+        search_placeholder:
+          user_name_or_user_email_cont: Search by user name, email
       menu:
+        admin_accountability: Admin accountability
         decidim_awesome: Decidim awesome
     components:
       awesome_iframe:
@@ -104,6 +120,46 @@ en:
             show_withdrawn: Show withdrawn proposals
     decidim_awesome:
       admin:
+        admin_accountability:
+          admin_roles:
+            admin: Super admin
+            user_manager: User manager
+          created_at: Role created at
+          currently_active: Currently active
+          deleted_user: Deleted user
+          email: Email
+          exports:
+            button: Export this search
+            export_as: Export as %{export_format}
+            export_format:
+              csv: CSV
+              json: JSON
+              xlsx: XLSX
+            notice: Export job has been enqueued. You will receive an email when it's
+              ready.
+          index:
+            description: Listed here you'll find all users that have had some role
+              in the administration of a participatory space. Normal admins are not
+              listed.
+            global_description: Listed here you'll find all users that have had some
+              global role in administrating this organization. Participatory space
+              admins are not listed.
+            see_global: List global admins
+            see_spaces: List participatory space admins
+            title: Admin accountability
+          last_login: Last sign in date
+          missing_info: "(missing information)"
+          missing_user: User not in the database
+          name: Name
+          never_logged: Never logged yet
+          participatory_space: Participatory space
+          removal_date: Role removed at
+          role: Role
+          roles:
+            admin: Administrator
+            collaborator: Collaborator
+            moderator: Moderator
+            valuator: Valuator
         checks:
           index:
             admin_head_tags: Awesome tags included in the admin application header

@@ -14,13 +14,13 @@ $(() => {
 
       let type = response.type;
       let status = response.status;
-      if (response.type == "opaqueredirect") {
+      if (response.type === "opaqueredirect") {
         type = "redirect";
         status = "302";
       }
 
       if (item.active) {
-        if (type ==  "redirect") {
+        if (type ===  "redirect") {
           $td.addClass("success");
         } else {
           $td.addClass("alert");

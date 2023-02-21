@@ -1,6 +1,17 @@
 CHANGELOG
 =========
 
+v0.9.1
+------
+
+Compatibility:
+  - Decidim v0.27.x
+  - Decidim v0.26.x
+
+Features:
+  - Fixes for the Awesome Map
+  - Added Admin Accountability feature
+
 v0.9.0
 ------
 

@@ -62,15 +62,15 @@ export default class ProposalsController extends Controller {
 
     // Process all amendments
     iterableAmendments.forEach((amendment) => {
-      const marker = this.allNodes.find((node) => node.id == amendment[0]);
+      const marker = this.allNodes.find((node) => node.id === amendment[0]);
       const parent = amendment[1];
       // console.log("marker", marker, "parent proposal", parent)
       // add marker to amendments layers and remove it from proposals
       if (marker) {
         try { 
           marker.marker.removeFrom(this.controls.group) 
-        } catch (e) { 
-          console.error("error removeFrom marker", marker, "layer", this.controls.group,  e);
+        } catch (evt) { 
+          console.error("error removeFrom marker", marker, "layer", this.controls.group,  evt);
         }
         if (this.awesomeMap.config.menu.amendments) {
           marker.marker.addTo(this.awesomeMap.layers.amendments.group);

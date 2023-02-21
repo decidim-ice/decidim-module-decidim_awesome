@@ -1,13 +1,13 @@
 $(() => {
   let CustomFieldsBuilders = window.CustomFieldsBuilders || [];
 
-  $("body").on("click", "a.awesome-auto-edit", (e) => {
-    e.preventDefault();
-    const $link = $(e.currentTarget);
+  $("body").on("click", "a.awesome-auto-edit", (ev) => {
+    ev.preventDefault();
+    const $link = $(ev.currentTarget);
     const scope = $link.data("scope");
     const $target = $(`span.awesome-auto-edit[data-scope="${scope}"]`);
     const $constraints = $(`.constraints-editor[data-key="${scope}"]`);
-    if ($target.length == 0) {
+    if ($target.length === 0) {
       return;
     }
 
@@ -41,7 +41,7 @@ $(() => {
       $container.attr("data-key", result.key);
       $delete.attr("href", $delete.attr("href").replace(`key=${key}`, `key=${result.key}`))
       CustomFieldsBuilders.forEach((builder) => {
-        if (builder.key == key) {
+        if (builder.key === key) {
           builder.key = result.key;
         }
       });
@@ -52,12 +52,12 @@ $(() => {
     $link.hide();
     $input.select();
     $input.on("keypress", (evt) => {
-      if (evt.code == "Enter" || evt.code == "13" || evt.code == "10") {
+      if (evt.code === "Enter" || evt.code === "13" || evt.code === "10") {
         evt.preventDefault();
         $.ajax(
           {
             type: "POST",
-            url: DecidimAwesome.rename_scope_label_path,
+            url: window.DecidimAwesome.rename_scope_label_path,
             dataType: "json",
             headers: {
               "X-CSRF-Token": $("meta[name=csrf-token]").attr("content")

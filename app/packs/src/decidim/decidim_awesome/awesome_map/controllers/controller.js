@@ -14,9 +14,10 @@ export default class Controller {
   }
 
   getLabel() {
-    let text = this.awesomeMap.config.menu.mergeComponents || !this.component.name 
-      ? window.DecidimAwesome.texts[this.component.type]
-      : this.component.name;
+    let text = this.awesomeMap.config.menu.mergeComponents || this.component.name;
+    if (!text) {
+      text = window.DecidimAwesome.texts[this.component.type];
+    }
     return `<span class="awesome_map-component" id="awesome_map-component_${this.component.id}" title="0" data-layer="${this.component.type}">${text}</span>`
   }
 
@@ -32,8 +33,8 @@ export default class Controller {
         const collectionEdges = collection.edges.filter((item) => item.node.coordinates && item.node.coordinates.latitude && item.node.coordinates.longitude);
         try {
           this.awesomeMap.cluster.addLayers(collectionEdges.map((item) => item.node.marker));
-        } catch (e) {
-          console.error("Failed marker collection assignation", collectionEdges, "error", e);
+        } catch (evt) {
+          console.error("Failed marker collection assignation", collectionEdges, "error", evt);
         }
         // subgroups don't have th addLayers utility
         collectionEdges.forEach((item) => {
@@ -97,8 +98,8 @@ export default class Controller {
       try {
         this.awesomeMap.layers[cat.id].group.addLayer(marker);
         this.awesomeMap.controls.showCategory(cat);
-      } catch (e) {
-        console.error("Failed category marker assignation", marker, e.message);
+      } catch (evt) {
+        console.error("Failed category marker assignation", marker, evt.message);
       }
     }   
   }
@@ -108,8 +109,8 @@ export default class Controller {
     if (this.awesomeMap.config.menu.hashtags) {
       try {
         this.awesomeMap.controls.addHashtagsControls(hashtags, marker);
-      } catch (e) {
-        console.error("Failed hashtags marker assignation", marker, e.message);
+      } catch (evt) {
+        console.error("Failed hashtags marker assignation", marker, evt.message);
       }
     }
   }

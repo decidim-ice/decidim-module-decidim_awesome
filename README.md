@@ -154,6 +154,14 @@ Rules available:
 
 ![Custom validations](examples/custom_validations.png)
 
+#### 15. Admin accountability
+
+This feature allows you to list all the users that are, or have been at any point in time, admins, valuators, user managers or any other role in Decidim. Including global admin roles or private admins of a particular participatory space.
+
+Results can be filtered by role and by time range and also exported as CSV or other formats.
+
+![Admin accountability](examples/admin_accountability.png)
+
 #### To be continued...
 
 We're not done! Please check the [issues](/decidim-ice/decidim-module-decidim_awesome/issues) (and participate) to see what's on our mind

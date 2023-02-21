@@ -1,8 +1,11 @@
 import * as L from "leaflet";
-import "src/decidim/map/icon.js" // comes with Decidim
+// comes with Decidim
+import "src/decidim/map/icon.js" 
 import "src/decidim/vendor/leaflet-tilelayer-here"
-import "leaflet.markercluster"; // Comes with Decidim
-import "leaflet.featuregroup.subgroup" // included in this package.json
+// Comes with Decidim
+import "leaflet.markercluster"; 
+// included in this package.json
+import "leaflet.featuregroup.subgroup" 
 import "src/vendor/jquery.truncate"
 import "jsrender"
 
@@ -60,7 +63,7 @@ export default class AwesomeMap {
           this.loading.pop();
           this.autoResize();
 
-          if (this.loading.length == 0) {
+          if (this.loading.length === 0) {
             this.controls.$loading.hide();
             // call trigger as all loads are finished
             this.onFinished();
@@ -90,13 +93,11 @@ export default class AwesomeMap {
     };
 
     if (category) {
-      let id = category.id
-        ? parseInt(category.id, 10)
-        : parseInt(category, 10);
-      let cat = this.categories.find((c) => c.id == id);
+      let id = category.id ? parseInt(category.id, 10) : parseInt(category, 10); // eslint-disable-line no-ternary, multiline-ternary
+      let cat = this.categories.find((ct) => ct.id === id);
       if (cat) {
         cat.children = () => {
-          return this.categories.filter((c) => c.parent === cat.id);
+          return this.categories.filter((ct) => ct.parent === cat.id);
         }
         return cat;
       }
@@ -105,12 +106,12 @@ export default class AwesomeMap {
   }
 
   _getController(component) {
-    let controller;
+    let controller = null;
 
-    if (component.type == "proposals") {
+    if (component.type === "proposals") {
       controller = new ProposalsController(this, component);
     }
-    if (component.type == "meetings" && this.config.menu.meetings) {
+    if (component.type === "meetings" && this.config.menu.meetings) {
       controller = new MeetingsController(this, component);
     }
 
@@ -125,5 +126,6 @@ export default class AwesomeMap {
       this.controllers[component.type] = controller;
       return this.controllers[component.type]
     }
+    return null;
   }
 }

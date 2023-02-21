@@ -1,3 +1,5 @@
+/* eslint-disable no-ternary, multiline-ternary */
+
 import * as L from "leaflet";
 
 export default class ControlsUI {
@@ -33,28 +35,28 @@ export default class ControlsUI {
     }
 
     // sub-layer hashtag title toggle
-    $("#awesome-map").on("click", ".awesome_map-title-control", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
+    $("#awesome-map").on("click", ".awesome_map-title-control", (evt) => {
+      evt.preventDefault();
+      evt.stopPropagation();
       $("#awesome_map-categories-control").toggleClass("active");
       $("#awesome_map-hashtags-control").toggleClass("active");
     });
 
     // hashtag events
-    $("#awesome-map").on("change", ".awesome_map-hashtags-selector", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const tag = $(e.target).closest("label").data("layer");
-      // console.log("changed, layer", tag, "checked", e.target.checked, e);
+    $("#awesome-map").on("change", ".awesome_map-hashtags-selector", (evt) => {
+      evt.preventDefault();
+      evt.stopPropagation();
+      const tag = $(evt.target).closest("label").data("layer");
+      // console.log("changed, layer", tag, "checked", evt.target.checked, e);
       if (tag) {
         this.updateHashtagLayers();
       }
     });
 
     // select/deselect all tags
-    $("#awesome-map").on("click", ".awesome_map-toggle_all_tags", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
+    $("#awesome-map").on("click", ".awesome_map-toggle_all_tags", (evt) => {
+      evt.preventDefault();
+      evt.stopPropagation();
       $("#awesome-map .awesome_map-hashtags-selector").prop("checked", $("#awesome-map .awesome_map-hashtags-selector:checked").length < $("#awesome-map .awesome_map-hashtags-selector").length);
       this.updateHashtagLayers();
     });
@@ -74,22 +76,20 @@ export default class ControlsUI {
         group: new L.FeatureGroup.SubGroup(this.awesomeMap.cluster)
       };
       this.awesomeMap.layers[category.id].group.addTo(this.awesomeMap.map);
-      $("#awesome_map-categories-control .categories-container").append(`<label data-layer="${category.id}" class="awesome_map-category-${category.id}${category.parent
-        ? " subcategory"
-        : ""}" data-parent="${category.parent}"><input type="checkbox" class="awesome_map-categories-selector" checked><span>${label}</span></label>`);
+      $("#awesome_map-categories-control .categories-container").append(`<label data-layer="${category.id}" class="awesome_map-category-${category.id}${category.parent ? " subcategory" : ""}" data-parent="${category.parent}"><input type="checkbox" class="awesome_map-categories-selector" checked><span>${label}</span></label>`);
     })
 
     // category events
-    $("#awesome-map").on("change", ".awesome_map-categories-selector", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
+    $("#awesome-map").on("change", ".awesome_map-categories-selector", (evt) => {
+      evt.preventDefault();
+      evt.stopPropagation();
 
-      const id = $(e.target).closest("label").data("layer");
+      const id = $(evt.target).closest("label").data("layer");
       const cat = this.awesomeMap.getCategory(id);
-      // console.log("changed, layer", id, "cat", cat, "checked", e.target.checked, e);
+      // console.log("changed, layer", id, "cat", cat, "checked", evt.target.checked, e);
       if (cat) {
         const layer = this.awesomeMap.layers[cat.id];
-        if (e.target.checked) {
+        if (evt.target.checked) {
           // show group of markers
           this.awesomeMap.map.addLayer(layer.group);
         } else {
@@ -131,7 +131,7 @@ export default class ControlsUI {
 
         const $label = $(`label.awesome_map-hashtag-${hashtag.tag}`);
         // update number of items
-        $label.attr("title", `${parseInt($label.attr("title") || 0) + 1} ${window.DecidimAwesome.texts.items}`);
+        $label.attr("title", `${parseInt($label.attr("title") || 0, 10) + 1} ${window.DecidimAwesome.texts.items}`);
       });
     }
   }
@@ -143,10 +143,10 @@ export default class ControlsUI {
     const $parent = $(`label.awesome_map-category-${cat.parent}`);
     $label.show();
     // update number of items
-    $label.attr("title", `${parseInt($label.attr("title") || 0) + 1} ${window.DecidimAwesome.texts.items}`);
+    $label.attr("title", `${parseInt($label.attr("title") || 0, 10) + 1} ${window.DecidimAwesome.texts.items}`);
     // show parent if apply
     $parent.show();
-    $parent.attr("title", `${parseInt($parent.attr("title") || 0) + 1} ${window.DecidimAwesome.texts.items}`);
+    $parent.attr("title", `${parseInt($parent.attr("title") || 0, 10) + 1} ${window.DecidimAwesome.texts.items}`);
   }
 
   removeHiddenComponents() {
@@ -200,8 +200,8 @@ export default class ControlsUI {
     if (cat.parent) {
       let $input = $(`.awesome_map-category-${cat.parent}`).contents("input");
       let $subcats = $(`[class^="awesome_map-category-"][data-parent="${cat.parent}"]:visible`);
-      let num_checked = $subcats.contents("input:checked").length;
-      $input.prop("indeterminate", num_checked != $subcats.length && num_checked != 0);
+      let numChecked = $subcats.contents("input:checked").length;
+      $input.prop("indeterminate", numChecked !== $subcats.length && numChecked !== 0);
     }
   }
 
@@ -213,7 +213,6 @@ export default class ControlsUI {
       $div.contents("label").each((_idx, el) => {
         if ($(el).text().localeCompare($last.text()) > 0) {
           $(el).before($last);
-          return false;
         }
       });
     }
