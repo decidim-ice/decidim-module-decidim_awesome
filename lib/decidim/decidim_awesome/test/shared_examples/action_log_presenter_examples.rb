@@ -15,7 +15,7 @@ shared_examples "a user presenter" do
     end
 
     context "when user has logged before" do
-      let(:user) { create :user, organization: organization, last_sign_in_at: 1.day.ago }
+      let(:last_sign_in_at) { 1.day.ago }
 
       it "returns the last sign in date" do
         expect(subject.last_sign_in_date).to eq(1.day.ago.strftime("%d/%m/%Y %H:%M"))
