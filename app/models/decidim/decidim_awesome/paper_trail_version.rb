@@ -19,7 +19,7 @@ module Decidim
         when "admin"
           base.where("object_changes LIKE '%\nadmin:\n- false\n- true%'")
         else
-          base.where(Arel.sql("object_changes LIKE '%\nroles:\n- []\n- - %\n- - #{filter}\n%'"))
+          base.where(Arel.sql("object_changes LIKE '%\nroles:\n- []\n- - #{filter}\n%'"))
         end
       end
 

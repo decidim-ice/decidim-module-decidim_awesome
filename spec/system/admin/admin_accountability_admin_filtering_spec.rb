@@ -66,7 +66,7 @@ describe "Filter Admin actions", type: :system do
       expect(page).not_to have_content(user.name, count: 1)
 
       expect(page).to have_content(login_date.strftime("%d/%m/%Y %H:%M"))
-      expect(page).to have_content("Currently active", count: 3)
+      expect(page).to have_content("Currently active", count: 4)
     end
 
     context "when filtering admin_actions by ROLE TYPE" do
