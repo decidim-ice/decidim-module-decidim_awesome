@@ -15,11 +15,11 @@ module Decidim
         base = where(item_type: "Decidim::UserBaseEntity", event: %w(create update))
         case filter
         when nil
-          base.where("object_changes LIKE '%\nroles:\n%' OR object_changes LIKE '%\nadmin:\n- false\n%'")
+          base.where("object_changes LIKE '%\nroles:\n- []\n- - %' OR object_changes LIKE '%\nadmin:\n- false\n- true%'")
         when "admin"
-          base.where("object_changes LIKE '%\nadmin:\n- false\n%'")
+          base.where("object_changes LIKE '%\nadmin:\n- false\n- true%'")
         else
-          base.where(Arel.sql("object_changes LIKE '%\nroles:\n%\n- - #{filter}\n%'"))
+          base.where(Arel.sql("object_changes LIKE '%\nroles:\n- []\n- - #{filter}\n%'"))
         end
       end
 
