@@ -41,8 +41,13 @@ $(() => {
       $container.attr("data-key", result.key);
       $delete.attr("href", $delete.attr("href").replace(`key=${key}`, `key=${result.key}`))
       CustomFieldsBuilders.forEach((builder) => {
-        if (builder.key === key) {
-          builder.key = result.key;
+        const publicBuilder = builder[0];
+        const privateBuilder = builder[1];
+        if (publicBuilder.key === key) {
+          publicBuilder.key = result.key;
+        }
+        if (privateBuilder.key === key) {
+          privateBuilder.key = result.key;
         }
       });
     };
