@@ -22,5 +22,5 @@ development_app
 *.gem
 node_modules/
 npm_debug.log
-
+vendor
 .ruby-version

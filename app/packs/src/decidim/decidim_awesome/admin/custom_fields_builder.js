@@ -6,15 +6,17 @@ import "src/decidim/decidim_awesome/forms/rich_text_plugin"
 window.CustomFieldsBuilders = window.CustomFieldsBuilders || [];
 
 $(() => {
-  $(".awesome-edit-config .proposal_custom_fields_editors").each((_idx, el) => {
-    const $container = $(el).closest(".proposal_custom_fields_container")
+  $(".awesome-edit-config .proposal_custom_fields_container").each((_idx, el) => {
+    console.log("Found one editor, setup public/private formbuilder")
+    const $container = $(el);
     const key = $container.data("key");
-    window.CustomFieldsBuilders.push($container.find(".proposal_custom_fields_editor").map((_idx, $editor) => {
-      const editorKey = $(el).data("key")
+    const optionsPair=[]
+    $container.find(".proposal_custom_fields_editor").each((idx, editor) => {
+      const editorKey = $(editor).data("key")
       // DOCS: https://formbuilder.online/docs
-      return {
-        el: el,
-        key: key,
+      optionsPair.push({
+        el: editor,
+        key: `${key}:${idx}`,
         config: {
           i18n: {
             locale: "en-US",
@@ -48,13 +50,16 @@ $(() => {
           }
         },
         instance: null
-      }
-    }));
+      })
+    })
+    console.log({optionsPair})
+    window.CustomFieldsBuilders.push(optionsPair);
   });
 
 
   $(document).on("formBuilder.create", (_event, idx, list) => {
     if (!list[idx]) {
+      console.log("Does not exists", {idx, list})
       return;
     }
 
@@ -66,25 +71,23 @@ $(() => {
       $(list[idx].el).find(".loading-spinner").remove();
       // for external use
       $(document).trigger("formBuilder.created", [list[idx]]);
-      if (idx < list.length) {
+      if (idx < list.length - 1) {
         $(document).trigger("formBuilder.create", [idx + 1, list]);
       }
     });
   });
 
-  if (window.CustomFieldsBuilders.length) {
-    window.CustomFieldsBuilders.forEach((form) => {
-      $(document).trigger("formBuilder.create", [0, form]);
+  if (window.CustomFieldsBuilders.length > 0) {
+    window.CustomFieldsBuilders.forEach((privatePublicEditors) => {
+      $(document).trigger("formBuilder.create", [0, privatePublicEditors]);
     })
   }
 
   $("form.awesome-edit-config").on("submit", () => {
-    window.CustomFieldsBuilders.forEach((builder) => {
-      const publicBuilder = builder[0];
-      const privateBuilder = builder[1];
+    window.CustomFieldsBuilders.forEach(([publicForm, privateForm]) => {
       // I think this part needs a builder loop for each input
-      $(`input[name="config[proposal_custom_fields][${builder.key}]"]`).val(publicBuilder.instance.actions.getData("json"));
-      $(`input[name="config[private_proposal_custom_fields][${builder.key}]"]`).val(privateBuilder.instance.actions.getData("json"));
+      $(`input[name="config[proposal_custom_fields][${publicForm.key}]"]`).val(publicForm.instance.actions.getData("json"));
+      $(`input[name="config[private_proposal_custom_fields][${privateForm.key}]"]`).val(privateForm.instance.actions.getData("json"));
     });
   });
 });
