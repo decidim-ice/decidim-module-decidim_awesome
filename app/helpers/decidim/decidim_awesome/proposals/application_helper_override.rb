@@ -17,6 +17,7 @@ module Decidim
 
           # replace normal method to draw the editor
           def text_editor_for_proposal_body(form)
+            byebug
             custom_fields = awesome_proposal_custom_fields
 
             return decidim_text_editor_for_proposal_body(form) if custom_fields.blank?

@@ -8,11 +8,19 @@
     <% form.object.proposal_custom_fields&.each do |key, value| %>
       <div class="proposal_custom_fields_container" data-key="<%= key %>">
         <%= render(partial: "decidim/decidim_awesome/admin/config/autoedit_box_label", locals: { var: "proposal_custom_fields", key: key, scope: "proposal_custom_field_#{key}", delete_path: decidim_admin_decidim_awesome.proposal_custom_field_path(key: key) }) %>
-        <p class="form-error is-visible"><%= errors[key.to_sym].join("<br>") if errors %></p>
+        
         <%= hidden_field_tag key, value, name: "config[proposal_custom_fields][#{key}]" %>
         <div class="proposal_custom_fields_editor">
+          <div><%= "Public fields" %></div>
           <div class="loading-spinner"></div>
-        </div>
+        </div>       
+
+        <%= hidden_field_tag key, value, name: "config[private_proposal_custom_fields][#{key}]" %>
+        <div class="private_proposal_custom_fields_editor">
+          <div><%= "Private fields" %></div>
+          <div class="loading-spinner"></div>
+        </div> 
+
         <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: "proposal_custom_field_#{key}", constraints: constraints_for("proposal_custom_field_#{key}") }) %>
       </div>
     <% end %>

@@ -4,6 +4,7 @@
       <h2 class="card-title"><%= t(".title", setting: config_var) %></h2>
     </div>
     <div class="card-section">
+      <% byebug %>
       <%= render partial: "form_#{config_var}", locals: { form: f, errors: defined?(errors) ? errors : nil } %>
     </div>
   </div>
