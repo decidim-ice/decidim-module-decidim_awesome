@@ -124,6 +124,9 @@ module Decidim
     config_accessor :proposal_custom_fields do
       {}
     end
+    config_accessor :private_proposal_custom_fields do
+      {}
+    end
 
     # allows to keep modifications for the main menu
     # can return :disabled to completly remove this feature

@@ -1,22 +1,28 @@
 require("formBuilder/dist/form-builder.min.js")
 import "src/decidim/decidim_awesome/forms/rich_text_plugin"
-/**
- * [[publicFormBuilder],[pprivateFormBuilder]]
- */
-window.CustomFieldsBuilders = window.CustomFieldsBuilders || [];
+
+let CustomFieldsBuilders = window.CustomFieldsBuilders || {}
+window.CustomFieldsBuilders = CustomFieldsBuilders;
+
+async function initializeForm(editor){
+  const $editor = $(editor.el);
+  // remove spinner
+  $editor.find(".loading-spinner").remove();
+  return await $editor.formBuilder(JSON.parse(JSON.stringify(editor.config))).promise;
+}
 
 $(() => {
   $(".awesome-edit-config .proposal_custom_fields_container").each((_idx, el) => {
     console.log("Found one editor, setup public/private formbuilder")
     const $container = $(el);
     const key = $container.data("key");
-    const optionsPair=[]
     $container.find(".proposal_custom_fields_editor").each((idx, editor) => {
       const editorKey = $(editor).data("key")
       // DOCS: https://formbuilder.online/docs
-      optionsPair.push({
+      CustomFieldsBuilders[`${key}${idx}`] =  {
         el: editor,
-        key: `${key}:${idx}`,
+        key: `${key}${idx}`,
+        input: `input[name="config[${editorKey}][${key}]"]`,
         config: {
           i18n: {
             locale: "en-US",
@@ -46,49 +52,49 @@ $(() => {
             // default color as it generate hashtags in decidim (TODO: fix hashtag generator with this)
             text: ["color"], 
             // disable default wysiwyg editors as they present problems
-            textarea: ["tinymce", "quill"]
+            textarea: ["tinymce", "quill"] 
           }
         },
-        instance: null
-      })
-    })
-    console.log({optionsPair})
-    window.CustomFieldsBuilders.push(optionsPair);
-  });
-
-
-  $(document).on("formBuilder.create", (_event, idx, list) => {
-    if (!list[idx]) {
-      console.log("Does not exists", {idx, list})
-      return;
-    }
-
-    $(list[idx].el).formBuilder(list[idx].config).promise.then(function(res) {
-      list[idx].instance = res;
-      // Attach to DOM
-      list[idx].el.FormBuilder = res;
-      // remove spinner
-      $(list[idx].el).find(".loading-spinner").remove();
-      // for external use
-      $(document).trigger("formBuilder.created", [list[idx]]);
-      if (idx < list.length - 1) {
-        $(document).trigger("formBuilder.create", [idx + 1, list]);
+        instance: null,
+        instanceId: -1
       }
-    });
-  });
-
-  if (window.CustomFieldsBuilders.length > 0) {
-    window.CustomFieldsBuilders.forEach((privatePublicEditors) => {
-      $(document).trigger("formBuilder.create", [0, privatePublicEditors]);
     })
-  }
+  })
 
-  $("form.awesome-edit-config").on("submit", () => {
-    window.CustomFieldsBuilders.forEach(([publicForm, privateForm]) => {
-      // I think this part needs a builder loop for each input
-      $(`input[name="config[proposal_custom_fields][${publicForm.key}]"]`).val(publicForm.instance.actions.getData("json"));
-      $(`input[name="config[private_proposal_custom_fields][${privateForm.key}]"]`).val(privateForm.instance.actions.getData("json"));
+  let formIDs = Object.keys(CustomFieldsBuilders)
+  let fbInstances = []
+  let options = Object.values(CustomFieldsBuilders)
+  let init = function(i) {
+      if (i < formIDs.length) {
+          const form = CustomFieldsBuilders[formIDs[i]]
+          $(form.el).find(".loading-spinner").remove();
+          const deepClonedOptions = JSON.parse(JSON.stringify(options[i].config))
+          $(form.el).formBuilder(deepClonedOptions).promise.then(res => {
+              fbInstances.push(res)
+              form.instance = res;
+              form.instanceId = i;
+              form.el.FormBuilder = res;
+              i++
+              init(i)
+          })
+      }
+  }
+  init(0)
+
+
+  $("form.awesome-edit-config").on("submit", (event) => {
+    Object.entries(CustomFieldsBuilders).forEach(([key, config]) => {
+      console.log({
+        instance: fbInstances[config.instanceId],
+        input: $(config.input)[0],
+      })
+      const value = JSON.stringify(fbInstances[config.instanceId].actions.getData());
+      $(config.input).val(value)
+      console.log(`${config.input} is ${value}`)
     });
+
+    return true;
   });
+
 });
 

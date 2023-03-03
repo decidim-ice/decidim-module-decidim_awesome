@@ -20,12 +20,15 @@ module Decidim
         #
         # Returns nothing.
         def call
+          private_fields = AwesomeConfig.find_by(var: :private_proposal_custom_fields, organization: @organization)
           fields = AwesomeConfig.find_by(var: :proposal_custom_fields, organization: @organization)
           return broadcast(:invalid, "Not a hash") unless fields&.value.is_a? Hash
           return broadcast(:invalid, "#{key} key invalid") unless fields.value.has_key?(@key)
 
           fields.value.except!(@key)
           fields.save!
+          private_fields.value.except!(@key)
+          private_fields.save!
           # remove constrains associated (a new config var is generated automatically, by removing it, it will trigger destroy on dependents)
           constraint = AwesomeConfig.find_by(var: "proposal_custom_field_#{@key}", organization: @organization)
           constraint.destroy! if constraint.present?

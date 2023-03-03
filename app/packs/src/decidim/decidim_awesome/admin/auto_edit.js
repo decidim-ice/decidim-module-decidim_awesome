@@ -1,5 +1,5 @@
 $(() => {
-  let CustomFieldsBuilders = window.CustomFieldsBuilders || [];
+  let CustomFieldsBuilders = window.CustomFieldsBuilders || {};
 
   $("body").on("click", "a.awesome-auto-edit", (ev) => {
     ev.preventDefault();
@@ -40,14 +40,9 @@ $(() => {
       $container.data("key", result.key);
       $container.attr("data-key", result.key);
       $delete.attr("href", $delete.attr("href").replace(`key=${key}`, `key=${result.key}`))
-      CustomFieldsBuilders.forEach((builder) => {
-        const publicBuilder = builder[0];
-        const privateBuilder = builder[1];
-        if (publicBuilder.key === key) {
-          publicBuilder.key = result.key;
-        }
-        if (privateBuilder.key === key) {
-          privateBuilder.key = result.key;
+      Object.entries(CustomFieldsBuilders).map(([formKey, form]) => {
+        if (formKey === key) {
+          form.key = result.key;
         }
       });
     };
