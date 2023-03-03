@@ -22,6 +22,7 @@ module Decidim
             return decidim_text_editor_for_proposal_body(form) if custom_fields.blank?
 
             render_proposal_custom_fields_override(custom_fields, form, :body)
+            render_proposal_custom_fields_override(awesome_private_proposal_custom_fields, form, :private_body)
           end
 
           # replace admin method to draw the editor (multi lang)
