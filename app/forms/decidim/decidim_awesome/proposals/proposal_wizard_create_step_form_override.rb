@@ -10,6 +10,8 @@ module Decidim
         included do
           clear_validators!
 
+          attribute :private_body, Decidim::Attributes::CleanString
+
           validates :title, presence: true, etiquette: true
           validates :title, proposal_length: {
             minimum: ->(form) { form.minimum_title_length },
@@ -22,7 +24,25 @@ module Decidim
             maximum: ->(form) { form.override_validations? ? 0 : form.component.settings.proposal_length }
           }
 
-          validate :body_is_not_bare_template, unless: ->(form) { form.override_validations? }
+          validates :private_body, presence: true, unless: ->(form) { form.override_validations? || form.minimum_body_length.zero? }
+          validates :private_body, etiquette: true, unless: ->(form) { form.override_validations? }
+          validates :private_body, proposal_length: {
+            minimum: ->(form) { form.minimum_body_length },
+            maximum: ->(form) { form.override_validations? ? 0 : form.component.settings.proposal_length }
+          }
+
+          validate :private_body_is_not_bare_template, unless: ->(form) { form.override_validations? }
+
+          def map_model(model)
+            self.title = translated_attribute(model.title)
+            self.body = translated_attribute(model.body)
+            #self.private_body = translated_attribute(model.private_body)
+
+            self.user_group_id = model.user_groups.first&.id
+            return unless model.categorization
+
+            self.category_id = model.categorization.decidim_category_id
+          end
 
           def override_validations?
             return false if context.current_component.settings.participatory_texts_enabled

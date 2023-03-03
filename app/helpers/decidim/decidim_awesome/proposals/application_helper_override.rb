@@ -14,7 +14,7 @@ module Decidim
           def safe_content?
             awesome_proposal_custom_fields.present? || decidim_safe_content?
           end
-
+          
           # replace normal method to draw the editor
           def text_editor_for_proposal_body(form)
             custom_fields = awesome_proposal_custom_fields
@@ -70,7 +70,11 @@ module Decidim
 
             custom_fields.apply_xml(body) if body.present?
             form.object.errors.add(name, custom_fields.errors) if custom_fields.errors
-            render partial: "decidim/decidim_awesome/custom_fields/form_render", locals: { spec: custom_fields.to_json, form: form, name: name }
+            if name == "private_body".to_sym
+              render partial: "decidim/decidim_awesome/custom_fields/form_render_private_fields", locals: { spec: custom_fields.to_json, form: form, name: name }
+            else
+              render partial: "decidim/decidim_awesome/custom_fields/form_render", locals: { spec: custom_fields.to_json, form: form, name: name }
+            end
           end
         end
       end
