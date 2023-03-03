@@ -4,16 +4,8 @@ import "src/decidim/decidim_awesome/forms/rich_text_plugin"
 let CustomFieldsBuilders = window.CustomFieldsBuilders || {}
 window.CustomFieldsBuilders = CustomFieldsBuilders;
 
-async function initializeForm(editor){
-  const $editor = $(editor.el);
-  // remove spinner
-  $editor.find(".loading-spinner").remove();
-  return await $editor.formBuilder(JSON.parse(JSON.stringify(editor.config))).promise;
-}
-
 $(() => {
   $(".awesome-edit-config .proposal_custom_fields_container").each((_idx, el) => {
-    console.log("Found one editor, setup public/private formbuilder")
     const $container = $(el);
     const key = $container.data("key");
     $container.find(".proposal_custom_fields_editor").each((idx, editor) => {
@@ -87,7 +79,6 @@ $(() => {
       const value = JSON.stringify(fbInstances[config.instanceId].actions.getData());
       $(config.input).val(value)
     });
-
     return true;
   });
 

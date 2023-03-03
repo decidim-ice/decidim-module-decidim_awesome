@@ -4,7 +4,7 @@
     <p class="help-text"><%= t("help.proposal_custom_fields", scope: "decidim.decidim_awesome.admin.config.form") %></p>
     <p class="help-text"><%= t("help.proposal_custom_fields_example", scope: "decidim.decidim_awesome.admin.config.form") %></p>
     <p class="help-text"><%= t("help.proposal_custom_fields_translations", scope: "decidim.decidim_awesome.admin.config.form") %></p>
-    <pre><%= form.object.to_json %></pre>
+
     <% form.object.proposal_custom_fields&.each do |key, value| %>
       <div class="proposal_custom_fields_container" data-key="<%= key %>">
         <%= render(partial: "decidim/decidim_awesome/admin/config/autoedit_box_label", locals: { var: "proposal_custom_fields", key: key, scope: "proposal_custom_field_#{key}", delete_path: decidim_admin_decidim_awesome.proposal_custom_field_path(key: key) }) %>
@@ -24,7 +24,6 @@
           </div>
         </div>
 
-        
         <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: "proposal_custom_field_#{key}", constraints: constraints_for("proposal_custom_field_#{key}") }) %>
       </div>
     <% end %>
