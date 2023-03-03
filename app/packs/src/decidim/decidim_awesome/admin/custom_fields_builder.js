@@ -84,13 +84,8 @@ $(() => {
 
   $("form.awesome-edit-config").on("submit", (event) => {
     Object.entries(CustomFieldsBuilders).forEach(([key, config]) => {
-      console.log({
-        instance: fbInstances[config.instanceId],
-        input: $(config.input)[0],
-      })
       const value = JSON.stringify(fbInstances[config.instanceId].actions.getData());
       $(config.input).val(value)
-      console.log(`${config.input} is ${value}`)
     });
 
     return true;
