@@ -21,6 +21,9 @@ es:
         scoped_admins: 'Grupo de administradoras acotadas #%{id}'
         scoped_styles: 'Estilos personalizados #%{id}'
         use_markdown_editor: Utilizar el editor Markdown en lugar del editor HTML
+        validate_body_max_caps_percent: Porcentaje máximo permitido de letras mayúsculas para el cuerpo
+        validate_body_max_marks_together: Máximo número de símbolos consecutivos permitidos en el cuerpo
+        validate_body_min_length: Mínimo de caracteres requeridos para el cuerpo
       constraint:
         component_id: o específicamente en
         component_manifest: Solo en componentes de tipo
