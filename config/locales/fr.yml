@@ -123,7 +123,24 @@ fr:
               json: JSON
               xlsx: XLSX
             notice: La tâche d'exportation a été mise en file d'attente. Vous recevrez un email quand elle sera réalisée.
+          index:
+            description: Vous trouverez ici la liste de tous les utilisateurs ayant un rôle dans l'administration d'un espace participatif. Les administrateurs "normaux" ne sont pas listés.
+            global_description: Vous trouverez ici la liste de tous les utilisateurs ayant un rôle global dans l'administration de cette organisation. Les administrateurs d'espaces participatifs ne sont pas listés.
+            see_global: Lister les administrateurs globaux
+            see_spaces: Lister les administrateurs d'espace participatif
+            title: Suivi administrateur
+          last_login: Date de la dernière connexion
+          missing_info: "(informations manquantes)"
+          missing_user: Utilisateur introuvable dans la base de données
+          name: Nom
+          never_logged: Ne s'est jamais connecté
+          participatory_space: Espace participatif
+          removal_date: Rôle retiré le
+          role: Rôle
           roles:
+            admin: Administrateur
+            collaborator: Collaborateur
+            moderator: Modérateur
             valuator: Evaluateur
         checks:
           index:
@@ -354,6 +371,7 @@ fr:
           text_settings: Paramètres de texte
           title: Titre
           truncate: Caractères maximum pour les descriptions des popups
+      credits: Décidim Awesome %{version} · Fait avec ♥ par %{company}
       custom_fields:
         errors:
           invalid_fields: Le contenu n'a pas pu être analysé mais a été assigné au champ '%{field}'
