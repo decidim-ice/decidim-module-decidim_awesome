@@ -1,3 +1,5 @@
+
+const customFieldRenderers = window.DecidimAwesome.CustomFieldsRenderer || [];
 /**
  * When switching tabs in i18n fields, autofocus on the markdown if exists
  */
@@ -11,12 +13,15 @@ $(() => {
       $input[0].InscrybMDE.codemirror.refresh();
     }
     // fix custom fields if present
-    $input = $container.find(".proposal_custom_field:first");
-    if ($input.length > 0) {
-      // saves current data to the hidden field for the lang
-      window.DecidimAwesome.CustomFieldsRenderer.storeData();
-      // init the current language
-      window.DecidimAwesome.CustomFieldsRenderer.init($input);
+    $inputs = $container.find(".proposal_custom_field");
+    if ($inputs.length > 0) {
+      customFieldRenderers.forEach(r => r.storeData());
+      $inputs.each((input, index) => {
+        // saves current data to the hidden field for the lang
+        // init the current language
+        customFieldRenderers[index].init($(input))
+      })
+     
     }
   });
 });
