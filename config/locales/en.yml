@@ -58,6 +58,11 @@ en:
       proposal:
         proposal_custom_fields: Custom fields
   decidim:
+    proposals:
+      admin:
+        proposals:
+          show:
+            private_body: Private body
     admin:
       filters:
         admin_accountability:
@@ -477,6 +482,10 @@ en:
       validators:
         too_much_caps: Is using too many capital letters (over %{percent}% of the
           text)
+      custom_fields:
+        private_field_notice:
+          will_ask_later: We will ask you %{count} more private questions in the following step. This information will be kept only between you and the platform administrator for the duration of the phase.
+          private_fields_to_ask: "Additional information needed:"
   layouts:
     decidim:
       admin:

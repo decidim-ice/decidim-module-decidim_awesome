@@ -1,0 +1,14 @@
+<% question_fields = fields.select{|f| !["header", "paragraph", "hidden"].include?(f["type"])} %>
+<div class="proposal_custom_field_notice proposal_custom_field--<%= name %>" >
+  <div class="proposal_custom_field_notice__header">
+    <%= t(".will_ask_later", count: question_fields.count ) %>
+  </div>
+  <div class="proposal_custom_field_notice__content">
+    <dl class="proposal_custom_field_notice__list">
+      <% question_fields.map do |f| %>
+        <dt><%= f["label"] %></dt>
+        <dd><%= f["description"] %></dd>
+      <% end %>
+    </dl>
+  </div>
+</div>
