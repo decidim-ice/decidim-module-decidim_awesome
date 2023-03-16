@@ -70,8 +70,7 @@ module Decidim
 
             custom_fields.apply_xml(body) if body.present?
             form.object.errors.add(name, custom_fields.errors) if custom_fields.errors
-            is_new = !form.object.attributes[:id]
-            puts name, is_new
+            is_new = form.options[:html][:method] == :post
             if is_new && name == :private_body
               render partial: "decidim/decidim_awesome/custom_fields/private_field_notice", locals: { fields: custom_fields.fields, name: name }
             else
