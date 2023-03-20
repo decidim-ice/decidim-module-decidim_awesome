@@ -71,7 +71,7 @@ module Decidim
       end
     end
 
-    shared_examples "has overriden items" do
+    shared_examples "has overridden items" do
       it "renders the menu as a navigation list" do
         expect(subject.render).to \
           have_selector("ul") &
@@ -138,12 +138,12 @@ module Decidim
       end
     end
 
-    context "when overrided menu is not an awesome config var" do
+    context "when overrode menu is not an awesome config var" do
       it_behaves_like "has default items"
       it_behaves_like "removed item is not present"
     end
 
-    context "when overrided menu is disabled" do
+    context "when overrode menu is disabled" do
       before do
         Decidim::DecidimAwesome.config[:custom_menu] = :disabled
       end
@@ -152,12 +152,12 @@ module Decidim
       it_behaves_like "removed item is not present"
     end
 
-    context "when overrided menu is enabled" do
+    context "when overrode menu is enabled" do
       before do
         Decidim::DecidimAwesome.config[:custom_menu] = []
       end
 
-      it_behaves_like "has overriden items"
+      it_behaves_like "has overridden items"
       it_behaves_like "removed item is not present and other items are overridden"
     end
   end
