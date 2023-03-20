@@ -94,7 +94,7 @@ module Decidim
     end
 
     shared_examples "removed item is not present" do
-      include_context "removes item"
+      include_context "when an item is removed"
 
       it "renders the menu as a navigation list" do
         expect(subject.render).to \
@@ -116,7 +116,7 @@ module Decidim
     end
 
     shared_examples "removed item is not present and other items are overridden" do
-      include_context "removes item"
+      include_context "when an item is removed"
 
       it "renders the menu as a navigation list" do
         expect(subject.render).to \
