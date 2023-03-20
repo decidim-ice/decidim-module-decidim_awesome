@@ -42,7 +42,7 @@ module Decidim
       Decidim::DecidimAwesome.config.except!(:custom_menu)
     end
 
-    shared_context "removes item" do
+    shared_context "when an item is removed" do
       before do
         Decidim.menu :custom_menu do |menu|
           menu.remove_item :native_bar
