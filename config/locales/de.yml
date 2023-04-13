@@ -50,7 +50,23 @@ de:
         proposal_custom_fields: Eingabefelder
   decidim:
     admin:
+      filters:
+        admin_accountability:
+          admin_role_type:
+            label: Rollen-Typ
+          participatory_space_type_eq:
+            label: Partizipativer Raumtyp
+          role:
+            label: Rolle
+          role_type_eq:
+            label: Rollen-Typ
+        label:
+          search_field_end_date: 'Bis heute:'
+          search_field_start_date: 'Ab Datum:'
+        search_placeholder:
+          user_name_or_user_email_cont: Suche nach Benutzernamen oder E-Mail
       menu:
+        admin_accountability: Admin Verantwortlichkeit
         decidim_awesome: Decidim Awesome
     components:
       awesome_iframe:
@@ -91,6 +107,14 @@ de:
             show_withdrawn: Zurückgezogene Vorschläge anzeigen
     decidim_awesome:
       admin:
+        admin_accountability:
+          admin_roles:
+            admin: Superadministrator
+            user_manager: Benutzer Manager
+          created_at: Rolle erstellt am
+          currently_active: Derzeit aktiv
+          deleted_user: Gelöschter Benutzer
+          email: E-Mail
         checks:
           index:
             admin_head_tags: Angezeigte Awesome Tags im Admin Application Header
