@@ -126,6 +126,22 @@ de:
           index:
             description: Hier finden Sie alle Benutzer, die eine administrator-Rolle in der Verwaltung eines partizipatorischen Raumes gespielt haben. Superadministratoren sind nicht aufgeführt.
             global_description: Hier finden Sie alle Benutzer, die eine superadministratoren-Rolle in der Verwaltung eines partizipatorischen Raumes gespielt haben. Normalen administrator-Rolle sind nicht aufgeführt.
+            see_global: Globale Admins auflisten
+            see_spaces: Admins von partizipativen Räumen auflisten
+            title: Admin-Verantwortung
+          last_login: Letztes Anmeldedatum
+          missing_info: "(fehlende Informationen)"
+          missing_user: Benutzer nicht in der Datenbank
+          name: Name
+          never_logged: Nie angemeldet
+          participatory_space: Partizipativer Raum
+          removal_date: Rolle entfernt am
+          role: Rolle
+          roles:
+            admin: Admin
+            collaborator: Mitarbeiter
+            moderator: Moderator
+            valuator: Schätzer
         checks:
           index:
             admin_head_tags: Angezeigte Awesome Tags im Admin Application Header
@@ -351,6 +367,7 @@ de:
           text_settings: Text-Einstellungen
           title: Titel
           truncate: Maximale Zeichenanzahl für Popup-Beschreibungen
+      credits: Decidim awesome %{version} · Gepflegt mit ❤️ durch %{company}
       custom_fields:
         errors:
           invalid_fields: Der Inhalt konnte nicht geparst werden, wurde aber dem Feld '%{field}' zugewiesen.
