@@ -215,6 +215,10 @@ es:
               validate_body_min_length: Este número puede ser cero, lo que permite que este campo no sea obligatorio
               validate_title_max_caps_percent: Cero no permitirá ninguna letra mayúscula, 100 forzará a escribir todo en mayúsculas
               validate_title_max_marks_together: 'Limitar el número de símbolos de preguntas y exclamaciones que se pueden escribir juntos. Es decir, si es 2, entonces ''!!!'' no estará permitido en el texto'
+              validate_title_min_length: El título siempre es obligatorio y este número no puede ser cero
+            validators:
+              body: Validaciones de entrada de usuario para el campo "cuerpo"
+              title: Validaciones de entrada de usuario para el campo "título"
           form_proposal_custom_fields:
             new: Añadir una nueva caja de "campos personalizados"
             remove: Eliminar esta caja de "campos personalizados"
@@ -324,6 +328,7 @@ es:
               hidden: Siempre oculto
               logged: Solo visible para usuarias logeadas
               non_logged: Solo visible para usuarias no logeadas
+              verified_user: Sólo visible para usuarios con una autorización válida
           index:
             confirm_destroy: '¿Estás segura que quieres eliminar este elemento?'
             edit: Editar
@@ -391,6 +396,8 @@ es:
           show:
             view_meeting: Ver encuentro
             view_proposal: Ver propuesta
+      validators:
+        too_much_caps: Contiene demasiadas letras mayúsculas (más del %{percent}% del texto)
   layouts:
     decidim:
       admin:
