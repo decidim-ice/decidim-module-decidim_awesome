@@ -50,7 +50,23 @@ ca:
         proposal_custom_fields: Camps personalitzats
   decidim:
     admin:
+      filters:
+        admin_accountability:
+          admin_role_type:
+            label: Tipus de rol
+          participatory_space_type_eq:
+            label: Tipus d'espai participatiu
+          role:
+            label: Rol
+          role_type_eq:
+            label: Tipus de rol
+        label:
+          search_field_end_date: 'Fins al dia:'
+          search_field_start_date: 'Des del dia:'
+        search_placeholder:
+          user_name_or_user_email_cont: Cerca per nom de participant, email
       menu:
+        admin_accountability: Històric d'administradores
         decidim_awesome: Decidim Awesome
     components:
       awesome_iframe:
@@ -91,6 +107,41 @@ ca:
             show_withdrawn: Mostra les propostes retirades
     decidim_awesome:
       admin:
+        admin_accountability:
+          admin_roles:
+            admin: Administradora de plataforma
+            user_manager: Administradora de participants
+          created_at: Rol creat el
+          currently_active: Actiu
+          deleted_user: Rol eliminat
+          email: Email
+          exports:
+            button: Exporta aquesta cerca
+            export_as: Exporta com %{export_format}
+            export_format:
+              csv: CSV
+              json: JSON
+              xlsx: XLSX
+            notice: L'exportació s'està enviant. Rebràs un correu electrònic quan estigui llest.
+          index:
+            description: Aquí trobareu totes les participants que han tingut algun paper en l'administració d'un espai participatiu. Les administradores de plataforma no apareixen a la llista.
+            global_description: Aquí trobareu totes les participants que han tingut algun paper en l'administració de la plataforma. Les administradores d'un espai participatiu no apareixen a la llista.
+            see_global: Llista global d'administradores de plataforma
+            see_spaces: Llista global d'administradores d'un espai participatiu
+            title: Històric d'administradores
+          last_login: Darrera data d'identificació
+          missing_info: "(falta informació)"
+          missing_user: La participant no existeix a la base de dades
+          name: Nom
+          never_logged: No loguejat encara
+          participatory_space: Espai participatiu
+          removal_date: Rol eliminat el
+          role: Rol
+          roles:
+            admin: Administradora
+            collaborator: Col·laboradora
+            moderator: Moderadora
+            valuator: Avaluadora
         checks:
           index:
             admin_head_tags: Etiquetes Awesome incloses a la capçalera de l'aplicació d'administració
@@ -320,7 +371,7 @@ ca:
           text_settings: Configuració del text
           title: Títol
           truncate: Nombre màxim de caràcters per les descripcions emergents
-      credits: Decidim Awesome %{version} · Maintained with ♥ by %{company}
+      credits: Decidim Awesome %{version} · Mantingut amb ♥ per %{company}
       custom_fields:
         errors:
           invalid_fields: No s'ha pogut analitzar el contingut però s'ha assignat al camp '%{field}'
