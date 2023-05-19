@@ -209,6 +209,7 @@ Depending on your Decidim version, choose the corresponding Awesome version to e
 
 | Awesome version | Compatible Decidim versions |
 |---|---|
+| 0.9.2 | >= 0.26.7, >= 0.27.3 |
 | 0.9.x | 0.26.x, 0.27.x |
 | 0.8.x | 0.25.x, 0.26.x |
 | 0.7.x | 0.23.x, 0.24.x |
