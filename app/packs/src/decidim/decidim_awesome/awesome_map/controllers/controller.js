@@ -22,15 +22,32 @@ export default class Controller {
   }
 
   setFetcher(Fetcher) {
+    function checkProposalState(node) {
+      const showConfig = AwesomeMap.config.show;
+      const { withdrawn, accepted, evaluating, notAnswered, rejected } = showConfig;
+
+      return withdrawn && node.state === "withdrawn" ||
+        accepted && node.state === "accepted" ||
+        evaluating && node.state === "evaluating" ||
+        notAnswered && node.state === "notAnswered" ||
+        rejected && node.state === "rejected";
+    }
+
     this.fetcher = new Fetcher(this);
     this.fetcher.onFinished = () => {
       // console.log(`all ${this.component.type} loaded`, this)
       this._onFinished();
     };
     this.fetcher.onCollection = (collection) =>  {
-      if (collection && collection.edges)  { 
+      if (collection && collection.edges)  {
         // Add markers to the main cluster group
-        const collectionEdges = collection.edges.filter((item) => item.node.coordinates && item.node.coordinates.latitude && item.node.coordinates.longitude);
+        let collectionEdges;
+        if (this.fetcher.collection === "meetings") {
+          collectionEdges = collection.edges.filter((item) => item.node.coordinates && item.node.coordinates.latitude && item.node.coordinates.longitude);
+        } else {
+          collectionEdges = collection.edges.filter((item) => item.node.coordinates && item.node.coordinates.latitude && item.node.coordinates.longitude && checkProposalState(item.node));
+        }
+
         try {
           this.awesomeMap.cluster.addLayers(collectionEdges.map((item) => item.node.marker));
         } catch (evt) {
@@ -58,7 +75,7 @@ export default class Controller {
 
   addMarker(marker, node) {
 
-    /* 
+    /*
     theorically, this should be enough to create popups on markers but it looks that
     there is some bug in leaflet that sometimes prevents this to work
     */
@@ -101,7 +118,7 @@ export default class Controller {
       } catch (evt) {
         console.error("Failed category marker assignation", marker, evt.message);
       }
-    }   
+    }
   }
 
   addMarkerHashtags(marker, hashtags) {
