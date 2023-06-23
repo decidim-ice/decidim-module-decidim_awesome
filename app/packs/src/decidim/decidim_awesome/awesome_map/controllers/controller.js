@@ -22,8 +22,8 @@ export default class Controller {
   }
 
   setFetcher(Fetcher) {
-    function checkProposalState(node) {
-      const showConfig = AwesomeMap.config.show;
+    let checkProposalState = function (node, map) {
+      const showConfig = map.config.show;
       const { withdrawn, accepted, evaluating, notAnswered, rejected } = showConfig;
 
       return withdrawn && node.state === "withdrawn" ||
@@ -41,11 +41,11 @@ export default class Controller {
     this.fetcher.onCollection = (collection) =>  {
       if (collection && collection.edges)  {
         // Add markers to the main cluster group
-        let collectionEdges;
+        let collectionEdges = [];
         if (this.fetcher.collection === "meetings") {
           collectionEdges = collection.edges.filter((item) => item.node.coordinates && item.node.coordinates.latitude && item.node.coordinates.longitude);
         } else {
-          collectionEdges = collection.edges.filter((item) => item.node.coordinates && item.node.coordinates.latitude && item.node.coordinates.longitude && checkProposalState(item.node));
+          collectionEdges = collection.edges.filter((item) => item.node.coordinates && item.node.coordinates.latitude && item.node.coordinates.longitude && checkProposalState(item.node, this.awesomeMap));
         }
 
         try {
