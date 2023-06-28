@@ -10,11 +10,11 @@ describe "Show awesome map", type: :system do
   let!(:proposal) { create(:proposal, component: proposal_component, latitude: 40, longitude: 2) }
   let(:emendation) { build(:proposal, component: proposal_component, latitude: 42, longitude: 4) }
   let!(:proposal_amendment) { create(:proposal_amendment, amendable: proposal, emendation: emendation) }
-  let!(:accepted_proposal) { create(:proposal, :accepted, component: proposal_component, latitude: 50, longitude: 30) }
-  let!(:evaluating_proposal) { create(:proposal, :evaluating, component: proposal_component, latitude: 30, longitude: 10) }
+  let!(:accepted_proposal) { create(:proposal, :accepted, component: proposal_component, latitude: 40, longitude: -50) }
+  let!(:evaluating_proposal) { create(:proposal, :evaluating, component: proposal_component, latitude: 30, longitude: 45) }
   let!(:not_answered_proposal) { create(:proposal, :not_answered, component: proposal_component, latitude: 70, longitude: 6) }
-  let!(:withdrawn_proposal) { create(:proposal, :withdrawn, component: proposal_component, latitude: 60, longitude: 2) }
-  let!(:rejected_proposal) { create(:proposal, :rejected, component: proposal_component, latitude: 10, longitude: 2) }
+  let!(:withdrawn_proposal) { create(:proposal, :withdrawn, component: proposal_component, latitude: 60, longitude: -30) }
+  let!(:rejected_proposal) { create(:proposal, :rejected, component: proposal_component, latitude: 10, longitude: 80) }
   let!(:category) { create(:category, participatory_space: participatory_process) }
   let!(:subcategory) { create(:subcategory, parent: category, participatory_space: participatory_process) }
   let!(:user) { create :user, :confirmed, organization: organization }
@@ -92,6 +92,7 @@ describe "Show awesome map", type: :system do
   context "when step settings are all true" do
     it "shows all proposals markers" do
       sleep(1)
+      expect(false).to be_truthy
       expect(page.body).to have_selector("div[title='#{accepted_proposal.title["en"]}']")
       expect(page.body).to have_selector("div[title='#{evaluating_proposal.title["en"]}']")
       expect(page.body).to have_selector("div[title='#{rejected_proposal.title["en"]}']")
