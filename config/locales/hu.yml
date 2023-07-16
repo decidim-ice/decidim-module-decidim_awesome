@@ -1,1 +1,20 @@
 hu:
+  activemodel:
+    attributes:
+      config:
+        allow_images_in_full_editor: A teljesértékű HTML szerkesztőben a képek engedélyezése
+        allow_images_in_markdown_editor: A markdown szerkesztőben a képek engedélyezése
+        allow_images_in_proposals: A javaslatok szerkesztőben a képek engedélyezése
+        allow_images_in_small_editor: A minimalista HTML szerkesztőben a képek engedélyezése
+        auto_save_forms: A helyi tárolóban az űrlapok automatikus mentése
+        intergram_auto_no_response: A kiküldött üzenet, amit a felhasználó első üzenete után kap, amelyet akkor küldünk, ha nem érkezett válasz
+        intergram_auto_response: Az üzeenet, amit a felhasználó első üzenete után küldönk ki
+        intergram_chat_id: Chat ID
+        intergram_color: A widget színe
+        intergram_for_admins: Az admin backendben az Intergram chat enegedélyezése
+        intergram_intro_message: Az első üzenet, amit a felhasználó a cset első megnyitásakor kap
+        intergram_require_login: Csak bejelnetkezett felhasználóknak
+        intergram_title_closed: Zárt chet cím
+        intergram_title_open: Nyitott cset cím
+        intergram_use_floating_button: Ha be van jelölve, egy zárt cset mindig gomb szöveg helyett
+        proposal_custom_fields: Egyéni mezők %{id}
