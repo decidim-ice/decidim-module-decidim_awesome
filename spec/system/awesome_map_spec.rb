@@ -13,6 +13,7 @@ describe "Show awesome map", type: :system do
   let!(:accepted_proposal) { create(:proposal, :accepted, component: proposal_component, latitude: 40, longitude: -50) }
   let!(:evaluating_proposal) { create(:proposal, :evaluating, component: proposal_component, latitude: 30, longitude: 45) }
   let!(:not_answered_proposal) { create(:proposal, :not_answered, component: proposal_component, latitude: 70, longitude: 6) }
+  let!(:null_state_proposal) { create(:proposal, nil, component: proposal_component, latitude: 50, longitude: 10) }
   let!(:withdrawn_proposal) { create(:proposal, :withdrawn, component: proposal_component, latitude: 60, longitude: -30) }
   let!(:rejected_proposal) { create(:proposal, :rejected, component: proposal_component, latitude: 10, longitude: 80) }
   let!(:category) { create(:category, participatory_space: participatory_process) }
