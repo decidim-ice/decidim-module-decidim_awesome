@@ -29,7 +29,7 @@ export default class Controller {
       return withdrawn && node.state === "withdrawn" ||
         accepted && node.state === "accepted" ||
         evaluating && node.state === "evaluating" ||
-        notAnswered && node.state === "notAnswered" ||
+        notAnswered && (node.state === "notAnswered" || node.state === null) ||
         rejected && node.state === "rejected";
     }
 
