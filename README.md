@@ -154,7 +154,7 @@ Rules available:
 
 ![Custom validations](examples/custom_validations.png)
 
-#### 15. Admin accountability
+#### 15. Admin accountability [Alert! This feature is under testing and we do not recomend to use it in a production site] 
 
 This feature allows you to list all the users that are, or have been at any point in time, admins, valuators, user managers or any other role in Decidim. Including global admin roles or private admins of a particular participatory space.
 
