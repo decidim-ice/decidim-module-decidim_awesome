@@ -35,7 +35,15 @@ module Decidim
         end
 
         def collection
-          @collection ||= paginate(global? ? PaperTrailVersion.admin_role_actions(params[:admin_role_type]) : PaperTrailVersion.space_role_actions)
+          @collection = global? ? paginate(admin_role_actions) : paginate(space_role_actions)
+        end
+
+        def space_role_actions
+          @space_role_actions ||= Decidim::DecidimAwesome::PaperTrailVersion.space_role_actions(current_organization)
+        end
+
+        def admin_role_actions
+          @admin_role_actions ||= Decidim::DecidimAwesome::PaperTrailVersion.in_organization(current_organization).admin_role_actions(params[:admin_role_type])
         end
 
         def export_params

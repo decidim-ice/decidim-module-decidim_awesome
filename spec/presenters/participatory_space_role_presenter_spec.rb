@@ -7,8 +7,8 @@ module Decidim::DecidimAwesome
   describe ParticipatorySpaceRolePresenter, type: :helper do
     let(:user) { create :user, organization: organization, last_sign_in_at: last_sign_in_at }
     let(:last_sign_in_at) { nil }
-    let(:entry) { Decidim::DecidimAwesome::PaperTrailVersion.space_role_actions.first }
-    let(:organization) { create :organization }
+    let(:entry) { Decidim::DecidimAwesome::PaperTrailVersion.space_role_actions(organization).first }
+    let!(:organization) { create :organization }
     let(:participatory_space) { create(:participatory_process, organization: organization) }
     let(:role) { "admin" }
     let!(:participatory_process_user_role) { create(:participatory_process_user_role, role: role, participatory_process: participatory_space, user: user) }

@@ -20,13 +20,13 @@ module Decidim::DecidimAwesome
     let!(:assembly_user_role2) { create(:assembly_user_role, user: valuator, role: "valuator", created_at: 3.days.ago) }
     let!(:assembly_user_role3) { create(:assembly_user_role, user: collaborator, role: "collaborator", created_at: 2.days.ago) }
     let!(:assembly_user_role4) { create(:assembly_user_role, user: moderator, role: "moderator", created_at: 1.day.ago) }
-    let(:collection_ids) { Decidim::DecidimAwesome::PaperTrailVersion.space_role_actions.pluck(:id) }
+    let(:collection_ids) { Decidim::DecidimAwesome::PaperTrailVersion.space_role_actions(organization).pluck(:id) }
     let(:format) { "CSV" }
     let(:ext) { "csv" }
 
     before do
       # ensure papertrail has the same created_at date as the object being mocked
-      Decidim::DecidimAwesome::PaperTrailVersion.space_role_actions.map { |v| v.update(created_at: v.item.created_at) }
+      Decidim::DecidimAwesome::PaperTrailVersion.space_role_actions(organization).map { |v| v.update(created_at: v.item.created_at) }
     end
 
     shared_examples "an export job" do
@@ -54,7 +54,7 @@ module Decidim::DecidimAwesome
     end
 
     context "when filtered data" do
-      let(:collection_ids) { PaperTrailVersion.space_role_actions.where(item_type: "Decidim::AssemblyUserRole").where("created_at > ?", 3.days.ago).pluck(:id) }
+      let(:collection_ids) { PaperTrailVersion.space_role_actions(organization).where(item_type: "Decidim::AssemblyUserRole").where("created_at > ?", 3.days.ago).pluck(:id) }
       let(:result) do
         [
           {
