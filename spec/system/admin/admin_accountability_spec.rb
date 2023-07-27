@@ -6,13 +6,21 @@ describe "Admin accountability", type: :system do
   let(:user_creation_date) { 7.days.ago }
   let(:login_date) { 6.days.ago }
   let(:organization) { create :organization }
+  let(:organization2) { create :organization }
   let!(:admin) { create :user, :admin, :confirmed, organization: organization }
+  let!(:admin2) { create :user, :admin, :confirmed, organization: organization2 }
 
   let(:administrator) { create(:user, organization: organization, last_sign_in_at: login_date, created_at: user_creation_date) }
   let(:valuator) { create(:user, organization: organization, created_at: user_creation_date) }
   let(:collaborator) { create(:user, organization: organization, created_at: user_creation_date) }
   let(:moderator) { create(:user, organization: organization, created_at: user_creation_date) }
   let(:participatory_process) { create(:participatory_process, organization: organization) }
+
+  let(:administrator2) { create(:user, organization: organization2, last_sign_in_at: login_date, created_at: user_creation_date) }
+  let(:valuator2) { create(:user, organization: organization2, created_at: user_creation_date) }
+  let(:collaborator2) { create(:user, organization: organization2, created_at: user_creation_date) }
+  let(:moderator2) { create(:user, organization: organization2, created_at: user_creation_date) }
+  let(:participatory_process2) { create(:participatory_process, organization: organization2) }
 
   let(:status) { true }
 
@@ -181,6 +189,39 @@ describe "Admin accountability", type: :system do
           expect(page).to have_content("Currently active")
         end
       end
+    end
+  end
+
+  context "when another organization" do
+    before do
+      switch_to_host(organization2.host)
+      login_as admin2, scope: :user
+      visit decidim_admin.root_path
+
+      create(:participatory_process_user_role, user: administrator2, participatory_process: participatory_process2, role: "admin", created_at: 4.days.ago)
+      create(:participatory_process_user_role, user: valuator2, participatory_process: participatory_process2, role: "valuator", created_at: 3.days.ago)
+      create(:participatory_process_user_role, user: collaborator2, participatory_process: participatory_process2, role: "collaborator", created_at: 2.days.ago)
+      create(:participatory_process_user_role, user: moderator2, participatory_process: participatory_process2, role: "moderator", created_at: 1.day.ago)
+
+      Decidim::ParticipatoryProcessUserRole.find_by(user: collaborator2).destroy
+
+      click_link "Participants"
+      click_link "Admin accountability"
+    end
+
+    it "shows data only for organization2", versioning: true do
+      expect(page).not_to have_link("Processes > #{participatory_process.title["en"]}",
+                                    href: "/admin/participatory_processes/#{participatory_process.slug}/user_roles")
+      expect(page).to have_link("Processes > #{participatory_process2.title["en"]}",
+                                href: "/admin/participatory_processes/#{participatory_process2.slug}/user_roles")
+      expect(page).not_to have_content(administrator.name)
+      expect(page).not_to have_content(valuator.name)
+      expect(page).not_to have_content(collaborator.name)
+      expect(page).not_to have_content(moderator.name)
+      expect(page).to have_content(administrator2.name)
+      expect(page).to have_content(valuator2.name)
+      expect(page).to have_content(collaborator2.name)
+      expect(page).to have_content(moderator2.name)
     end
   end
 end

@@ -6,11 +6,17 @@ module Decidim::DecidimAwesome
     subject { paper_trail_version }
 
     let(:organization) { create(:organization) }
+    let(:organization2) { create(:organization) }
     let(:user) { create(:user, organization: organization) }
+    let(:user2) { create(:user, organization: organization2) }
     let(:participatory_process_user_role) { create(:participatory_process_user_role, participatory_process: participatory_process, user: administrator, role: "admin", created_at: 1.day.ago) }
+    let(:participatory_process_user_role2) { create(:participatory_process_user_role, participatory_process: participatory_process, user: valuator, role: "valuator", created_at: 1.day.ago) }
     let!(:paper_trail_version) { create(:paper_trail_version, item_type: "Decidim::AssemblyUserRole", item_id: participatory_process_user_role.id, whodunnit: user.id, event: "create") }
+    let!(:paper_trail_version2) { create(:paper_trail_version, item_type: "Decidim::AssemblyUserRole", item_id: participatory_process_user_role2.id, whodunnit: user.id, event: "create") }
     let(:administrator) { create(:user, organization: organization, last_sign_in_at: 1.day.ago) }
+    let(:valuator) { create(:user, organization: organization, last_sign_in_at: 1.day.ago) }
     let(:participatory_process) { create(:participatory_process, organization: organization) }
+    let(:participatory_process2) { create(:participatory_process, organization: organization2) }
 
     before do
       paper_trail_version.update!(
@@ -19,9 +25,20 @@ module Decidim::DecidimAwesome
           "decidim_participatory_process_id" => [nil, participatory_process.id]
         }.to_yaml
       )
+
+      paper_trail_version2.update!(
+        object_changes: {
+          "decidim_user_id" => [nil, valuator.id],
+          "decidim_participatory_process_id" => [nil, participatory_process2.id]
+        }.to_yaml
+      )
     end
 
     it { is_expected.to be_valid }
+
+    it "returns space_role_actions scope correctly for second organization" do
+      expect(PaperTrailVersion.space_role_actions(organization2)).not_to include(paper_trail_version)
+    end
 
     it "paper_trail_version is associated with user" do
       expect(subject).to eq(paper_trail_version)
@@ -29,7 +46,7 @@ module Decidim::DecidimAwesome
     end
 
     it "returns default_scope ordered by created_at" do
-      expect(PaperTrailVersion.all).to eq([paper_trail_version])
+      expect(PaperTrailVersion.all).to eq([paper_trail_version2, paper_trail_version])
     end
 
     it "returns space_role_actions scope correctly" do
