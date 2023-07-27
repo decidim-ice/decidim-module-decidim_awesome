@@ -7,7 +7,7 @@ describe "Admin accountability", type: :system do
   let(:login_date) { 6.days.ago }
   let(:organization) { create :organization }
   let(:external_organization) { create :organization }
-  let!(:admin) { create :user, :admin, :confirmed, organization: organization }
+  let!(:admin) { create :user, :admin, :confirmed, organization: organization, created_at: 9.days.ago }
   let!(:external_admin) { create :user, :admin, :confirmed, organization: external_organization }
 
   let(:administrator) { create(:user, organization: organization, last_sign_in_at: login_date, created_at: user_creation_date) }
@@ -25,6 +25,9 @@ describe "Admin accountability", type: :system do
   let(:status) { true }
 
   before do
+    # rubocop:disable Rails/SkipsModelValidations:
+    Decidim::DecidimAwesome::PaperTrailVersion.find_by(item: admin)&.update_column(:created_at, admin.created_at)
+    # rubocop:enable Rails/SkipsModelValidations:
     allow(Decidim::DecidimAwesome.config).to receive(:admin_accountability).and_return(status)
     switch_to_host(organization.host)
     login_as admin, scope: :user
@@ -50,7 +53,7 @@ describe "Admin accountability", type: :system do
     end
   end
 
-  context "when there are admin actions" do
+  context "when there are admin role actions" do
     before do
       create(:participatory_process_user_role, user: administrator, participatory_process: participatory_process, role: "admin", created_at: 4.days.ago)
       create(:participatory_process_user_role, user: valuator, participatory_process: participatory_process, role: "valuator", created_at: 3.days.ago)
@@ -64,6 +67,8 @@ describe "Admin accountability", type: :system do
 
     it "shows the correct information for each user", versioning: true do
       click_link "Admin accountability"
+
+      expect(page).not_to have_content("NOTE: This list might not include users created/removed before")
 
       expect(page).to have_link("Processes > #{participatory_process.title["en"]}",
                                 href: "/admin/participatory_processes/#{participatory_process.slug}/user_roles", count: 4)
@@ -242,6 +247,57 @@ describe "Admin accountability", type: :system do
         expect(page).to have_content(3.days.ago.strftime("%d/%m/%Y %H:%M"))
         expect(page).not_to have_content(Time.current.strftime("%d/%m/%Y %H:%M"))
         expect(page).to have_content("Currently active")
+      end
+    end
+  end
+
+  context "when global admins" do
+    let!(:second_admin) { create(:user, :admin, organization: organization, created_at: 3.days.ago) }
+
+    before do
+      click_link "Participants"
+      click_link "Admin accountability"
+    end
+
+    it "shows the current admins", versioning: true do
+      click_link "List global admins"
+
+      expect(page).not_to have_content("NOTE: This list might not include users created/removed before")
+
+      expect(page).not_to have_content(external_admin.name)
+      expect(page).not_to have_content(external_admin.email)
+
+      within all("table tr")[1] do
+        expect(page).to have_content("Super admin")
+        expect(page).to have_content(second_admin.name)
+        expect(page).to have_content(second_admin.email)
+        expect(page).to have_content("Never logged yet")
+        expect(page).to have_content(second_admin.created_at.strftime("%d/%m/%Y %H:%M"))
+        expect(page).to have_content("Currently active")
+      end
+
+      within all("table tr")[2] do
+        expect(page).to have_content("Super admin")
+        expect(page).to have_content(admin.name)
+        expect(page).to have_content(admin.email)
+        expect(page).not_to have_content("Never logged yet")
+        expect(page).to have_content(admin.created_at.strftime("%d/%m/%Y %H:%M"))
+        expect(page).to have_content("Currently active")
+      end
+    end
+
+    context "when first versioning is newer than the user creation date" do
+      let(:missing_date) { 8.days.ago }
+
+      before do
+        # rubocop:disable Rails/SkipsModelValidations:
+        Decidim::DecidimAwesome::PaperTrailVersion.where(item_type: "Decidim::UserBaseEntity").last.update_column(:created_at, missing_date)
+        # rubocop:enable Rails/SkipsModelValidations:
+      end
+
+      it "shows a warning message", versioning: true do
+        click_link "List global admins"
+        expect(page).to have_content("NOTE: This list might not include users created/removed before #{missing_date.strftime("%d/%m/%Y %H:%M")}")
       end
     end
   end

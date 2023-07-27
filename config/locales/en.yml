@@ -144,6 +144,9 @@ en:
             global_description: Listed here you'll find all users that have had some
               global role in administrating this organization. Participatory space
               admins are not listed.
+            missing_users: 'NOTE: This list might not include users created/removed
+              before %{date}. This is because "user traceability" was introduced in
+              Decidim v0.24 and this installation is probably older.'
             see_global: List global admins
             see_spaces: List participatory space admins
             title: Admin accountability

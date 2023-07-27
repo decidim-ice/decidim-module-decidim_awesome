@@ -7,7 +7,7 @@ module Decidim
         include NeedsAwesomeConfig
         include Decidim::DecidimAwesome::AdminAccountability::Admin::Filterable
 
-        helper_method :admin_actions, :collection, :export_params, :global?
+        helper_method :admin_actions, :collection, :export_params, :global?, :global_users_missing_date
 
         layout "decidim/admin/users"
 
@@ -52,6 +52,19 @@ module Decidim
 
         def global?
           params[:admins] == "true"
+        end
+
+        # User traceability was introduced in version 0.24. Users created before that might appear in the list.
+        # Returns the first traceability record available if there are users created before.
+        # Returns nil otherwise
+        def global_users_missing_date
+          return unless global?
+
+          @global_users_missing_date ||= begin
+            first_version = Decidim::DecidimAwesome::PaperTrailVersion.where(item_type: "Decidim::UserBaseEntity").last
+            first_user = Decidim::User.first
+            first_version.created_at if first_user && first_version && (first_version.created_at > first_user.created_at + 1.second)
+          end
         end
       end
     end
