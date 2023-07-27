@@ -9,12 +9,14 @@ module Decidim
         DecidimAwesome.participatory_space_roles.filter(&:safe_constantize)
       end
 
-      scope :space_role_actions, lambda { |current_organization_id|
+      scope :space_role_actions, lambda { |organization|
         role_changes = where(item_type: PaperTrailVersion.safe_user_roles, event: "create")
-        user_ids_from_object_changes = role_changes.pluck(:object_changes).map { |change| change.match(/decidim_user_id:\n-\n- (\d+)/)[1].to_i }
-        relevant_user_ids = Decidim::User.where(id: user_ids_from_object_changes, decidim_organization_id: current_organization_id).pluck(:id)
+        user_ids_from_object_changes = role_changes.pluck(:object_changes).map { |change| change.match(/decidim_user_id:\n- ?\n- (\d+)/)[1].to_i }
+        relevant_user_ids = Decidim::User.select(:id).where(id: user_ids_from_object_changes, organization: organization).pluck(:id)
+        # add users that might have been completly destroyed in any organization
+        relevant_user_ids += user_ids_from_object_changes - Decidim::User.select("id").where(id: user_ids_from_object_changes).pluck(:id)
 
-        role_changes.where("object_changes ~ ANY (array[?])", relevant_user_ids.map { |id| "decidim_user_id:\n-\n- #{id}" })
+        role_changes.where("object_changes ~ ANY (array[?])", relevant_user_ids.map { |id| "decidim_user_id:\n- ?\n- #{id}" })
       }
 
       scope :in_organization, lambda { |organization|
