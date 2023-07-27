@@ -5,7 +5,7 @@ require "spec_helper"
 describe "Filter Admin actions", type: :system do
   let(:user_creation_date) { 7.days.ago }
   let(:login_date) { 6.days.ago }
-  let(:organization) { create :organization }
+  let!(:organization) { create :organization }
   let!(:admin) { create :user, :admin, :confirmed, organization: organization }
   let(:administrator) { create(:user, organization: organization, last_sign_in_at: login_date, created_at: user_creation_date) }
   let(:valuator) { create(:user, name: "Lorry", email: "test@example.org", organization: organization, created_at: user_creation_date) }
@@ -27,7 +27,7 @@ describe "Filter Admin actions", type: :system do
 
   before do
     # ensure papertrail has the same created_at date as the object being mocked
-    Decidim::DecidimAwesome::PaperTrailVersion.space_role_actions.map { |v| v.update(created_at: v.item.created_at) }
+    Decidim::DecidimAwesome::PaperTrailVersion.space_role_actions(organization).map { |v| v.update(created_at: v.item.created_at) }
 
     switch_to_host(organization.host)
     login_as admin, scope: :user
