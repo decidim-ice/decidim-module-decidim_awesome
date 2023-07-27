@@ -22,7 +22,7 @@
 
   <div class="card-section">
     <p class="help-text"><%= t(global? ? ".global_description" : ".description") %></p>
-    
+
     <% if global_users_missing_date %>
       <div class="callout warning"><%= t(".missing_users", date: l(global_users_missing_date, format: :decidim_short)) %></div>
     <% end %>
