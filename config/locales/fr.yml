@@ -126,6 +126,7 @@ fr:
           index:
             description: Vous trouverez ici la liste de tous les utilisateurs ayant un rôle dans l'administration d'un espace participatif. Les administrateurs "normaux" ne sont pas listés.
             global_description: Vous trouverez ici la liste de tous les utilisateurs ayant un rôle global dans l'administration de cette organisation. Les administrateurs d'espaces participatifs ne sont pas listés.
+            missing_users: 'NOTE : Cette liste peut ne pas inclure les utilisateurs créés/supprimés avant le %{date}. En effet, la "traçabilité des utilisateurs" a été introduite dans Decidim v0.24 et cette installation est probablement plus ancienne.'
             see_global: Lister les administrateurs globaux
             see_spaces: Lister les administrateurs d'espace participatif
             title: Suivi administrateur

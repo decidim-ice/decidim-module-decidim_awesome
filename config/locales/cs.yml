@@ -126,6 +126,7 @@ cs:
           index:
             description: Zde najdete všechny uživatele, kteří měli nějakou roli ve správě participačního prostoru. Běžní správci nejsou uvedeni.
             global_description: Zde najdete všechny uživatele, kteří měli nějakou globální roli ve správě participačního prostoru. Běžní správci nejsou uvedeni.
+            missing_users: 'POZNÁMKA: Tento seznam nemusí zahrnovat uživatele vytvořené/odebrané před %{date}. Je to proto, že "sledovatelnost uživatele" byla zavedena v Decidim v0.24 a tato instalace je pravděpodobně starší.'
             see_global: Seznam globálních správců
             see_spaces: Seznam administrátorů participačního prostoru
             title: Odpovědnost správce
@@ -214,6 +215,11 @@ cs:
               validate_body_max_marks_together: 'Omezit počet otazníků a vykřičníků, které lze psát dohromada. Např: Pokud je 2, pak ''!!!'' nebude v textu povoleno'
               validate_body_min_length: Toto číslo může být nulové, toto pole bude ve skutečnosti nepovinné
               validate_title_max_caps_percent: Nula nedovolí žádné velké písmeno, 100 bude nutit psát vše velkými písmeny
+              validate_title_max_marks_together: 'Omezit počet otazníků a vykřičníků, které lze psát dohromada. Např: Pokud je 2, pak ''!!!'' nebude v textu povoleno'
+              validate_title_min_length: Název je vždy povinný a toto číslo nemůže být nulové
+            validators:
+              body: Ověření vstupu uživatele pro pole "tělo"
+              title: Ověření uživatelem pro pole "Název"
           form_proposal_custom_fields:
             new: Přidat nové pole "vlastní pole"
             remove: Odstranit toto "vlastní pole"
@@ -392,6 +398,8 @@ cs:
           show:
             view_meeting: Zobrazit schůzku
             view_proposal: Zobrazit návrh
+      validators:
+        too_much_caps: Používá příliš mnoho velkých písmen (více než %{percent}% textu)
   layouts:
     decidim:
       admin:

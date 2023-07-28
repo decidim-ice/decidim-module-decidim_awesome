@@ -126,6 +126,7 @@ de:
           index:
             description: Hier finden Sie alle Benutzer, die eine administrator-Rolle in der Verwaltung eines partizipatorischen Raumes gespielt haben. Superadministratoren sind nicht aufgeführt.
             global_description: Hier finden Sie alle Benutzer, die eine superadministratoren-Rolle in der Verwaltung eines partizipatorischen Raumes gespielt haben. Normalen administrator-Rolle sind nicht aufgeführt.
+            missing_users: 'HINWEIS: Diese Liste enthält möglicherweise keine vor %{date} erstellten/entfernten Benutzer. Dies liegt daran, dass die "Benutzerverfolgbarkeit" in Decidim v0.24 eingeführt wurde und diese Installation wahrscheinlich älter ist.'
             see_global: Globale Admins auflisten
             see_spaces: Admins von partizipativen Räumen auflisten
             title: Admin-Verantwortung
