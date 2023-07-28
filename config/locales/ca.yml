@@ -126,6 +126,7 @@ ca:
           index:
             description: Aquí trobareu totes les participants que han tingut algun paper en l'administració d'un espai participatiu. Les administradores de plataforma no apareixen a la llista.
             global_description: Aquí trobareu totes les participants que han tingut algun paper en l'administració de la plataforma. Les administradores d'un espai participatiu no apareixen a la llista.
+            missing_users: 'NOTA: És possible que aquesta llista no inclogui usuaris creats/eliminats abans de %{date}. Això es deu al fet que la "traçabilitat dels usuaris" es va introduir a Decidim v0.24 i aquesta instal·lació probablement és més antiga.'
             see_global: Llista global d'administradores de plataforma
             see_spaces: Llista global d'administradores d'un espai participatiu
             title: Històric d'administradores
