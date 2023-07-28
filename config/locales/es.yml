@@ -126,6 +126,7 @@ es:
           index:
             description: Listado aquí encontrarás todas las participantes que han tenido algún papel en la administración de un espacio participativo. Las administradoras de plataforma no aparecen en la lista.
             global_description: Listado aquí encontrarás todos los usuarios que han tenido un papel en la administración de la plataforma. Las administradoras de espacio participativo no están listadas.
+            missing_users: 'NOTA: Esta lista podría no incluir usuarios creados/eliminados antes de %{date}. Esto se debe a que la "trazabilidad del usuario" fue introducida en Decidim v0.24 y esta instalación probablemente sea más antigua.'
             see_global: Lista de administradoras de plataforma
             see_spaces: Lista de administradoras de espacio participativo
             title: Histórico de administradoras
