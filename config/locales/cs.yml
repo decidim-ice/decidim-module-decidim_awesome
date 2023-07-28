@@ -126,6 +126,7 @@ cs:
           index:
             description: Zde najdete všechny uživatele, kteří měli nějakou roli ve správě participačního prostoru. Běžní správci nejsou uvedeni.
             global_description: Zde najdete všechny uživatele, kteří měli nějakou globální roli ve správě participačního prostoru. Běžní správci nejsou uvedeni.
+            missing_users: 'POZNÁMKA: Tento seznam nemusí zahrnovat uživatele vytvořené/odebrané před %{date}. Je to proto, že "sledovatelnost uživatele" byla zavedena v Decidim v0.24 a tato instalace je pravděpodobně starší.'
             see_global: Seznam globálních správců
             see_spaces: Seznam administrátorů participačního prostoru
             title: Odpovědnost správce
