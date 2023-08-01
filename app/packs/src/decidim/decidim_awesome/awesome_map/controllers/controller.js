@@ -24,13 +24,7 @@ export default class Controller {
   setFetcher(Fetcher) {
     let checkProposalState = function (node, map) {
       const showConfig = map.config.show;
-      const { withdrawn, accepted, evaluating, notAnswered, rejected } = showConfig;
-
-      return withdrawn && node.state === "withdrawn" ||
-        accepted && node.state === "accepted" ||
-        evaluating && node.state === "evaluating" ||
-        notAnswered && node.state === "notAnswered" ||
-        rejected && node.state === "rejected";
+      return showConfig[node.state] || showConfig.notAnswered;
     }
 
     this.fetcher = new Fetcher(this);

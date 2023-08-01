@@ -13,6 +13,7 @@ describe "Show awesome map", type: :system do
   let!(:accepted_proposal) { create(:proposal, :accepted, component: proposal_component, latitude: 40, longitude: -50) }
   let!(:evaluating_proposal) { create(:proposal, :evaluating, component: proposal_component, latitude: 30, longitude: 45) }
   let!(:not_answered_proposal) { create(:proposal, :not_answered, component: proposal_component, latitude: 70, longitude: 6) }
+  let!(:null_state_proposal) { create(:proposal, state: nil, component: proposal_component, latitude: 50, longitude: 10) }
   let!(:withdrawn_proposal) { create(:proposal, :withdrawn, component: proposal_component, latitude: 60, longitude: -30) }
   let!(:rejected_proposal) { create(:proposal, :rejected, component: proposal_component, latitude: 10, longitude: 80) }
   let!(:category) { create(:category, participatory_space: participatory_process) }
@@ -31,13 +32,15 @@ describe "Show awesome map", type: :system do
       show_accepted: show_accepted,
       show_evaluating: show_evaluating,
       show_rejected: show_rejected,
-      show_withdrawn: show_withdrawn
+      show_withdrawn: show_withdrawn,
+      show_not_answered: show_not_answered
     }
   end
   let(:show_accepted) { true }
   let(:show_evaluating) { true }
   let(:show_rejected) { true }
   let(:show_withdrawn) { true }
+  let(:show_not_answered) { true }
 
   let(:show_amendments) { true }
   let(:show_meetings) { true }
@@ -96,6 +99,7 @@ describe "Show awesome map", type: :system do
       expect(page.body).to have_selector("div[title='#{evaluating_proposal.title["en"]}']")
       expect(page.body).to have_selector("div[title='#{rejected_proposal.title["en"]}']")
       expect(page.body).to have_selector("div[title='#{withdrawn_proposal.title["en"]}']")
+      expect(page.body).to have_selector("div[title='#{null_state_proposal.title["en"]}']")
     end
   end
 
@@ -104,6 +108,7 @@ describe "Show awesome map", type: :system do
     let(:show_evaluating) { false }
     let(:show_rejected) { false }
     let(:show_withdrawn) { false }
+    let(:show_not_answered) { false }
 
     it "does not show any proposal" do
       sleep(1)
@@ -111,6 +116,7 @@ describe "Show awesome map", type: :system do
       expect(page.body).not_to have_selector("div[title='#{evaluating_proposal.title["en"]}']")
       expect(page.body).not_to have_selector("div[title='#{rejected_proposal.title["en"]}']")
       expect(page.body).not_to have_selector("div[title='#{withdrawn_proposal.title["en"]}']")
+      expect(page.body).not_to have_selector("div[title='#{null_state_proposal.title["en"]}']")
     end
   end
 
