@@ -1,1 +1,28 @@
 lt:
+  activemodel:
+    attributes:
+      config:
+        allow_images_in_full_editor: Leisti paveikslėlius pilname HTML redaktoriuje
+        allow_images_in_markdown_editor: Leisti paveikslėlius markdown redaktoriuje
+        allow_images_in_proposals: Leisti paveikslėlius pasiūlymų redaktoriuje
+        allow_images_in_small_editor: Leisti paveikslėlius minimaliame HTML redaktoriuje
+        auto_save_forms: Automatiškai išsaugoti formas vietinėje atmintyje
+        intergram_auto_no_response: Žinutė, kuri išsiunčiama vieną minutę po to, kai vartotojas išsiunčia savo pirmąją žinutę ir negauna atsakymo
+        intergram_auto_response: Žinutė, kuri išsiunčiama iš karto po to, kai vartotojas išsiunčia savo pirmąją žinutę
+        intergram_chat_id: Pokalbio ID
+        intergram_color: Valdiklio spalva
+        intergram_for_admins: Įjungti Intergram pokalbį administratoriaus sąsajoje
+        intergram_intro_message: Žinutė, kuri išsiunčiama iš karto po to, kai vartotojas atidaro pokalbį
+        intergram_require_login: Tik prisijungusiems naudotojams
+        intergram_title_closed: Uždaryto pokalbio pavadinimas
+        intergram_title_open: Atviro pokalbio pavadinimas
+        intergram_use_floating_button: Jei pažymėta, uždarytas pokalbis visada yra mygtukas, o ne tekstas
+        proposal_custom_fields: Personalizuotų laukų %{id}
+        scoped_admins: Erdvei priskirtos administratorių grupės %{id}
+        scoped_styles: Personalizuotų stilių %{id}
+        use_markdown_editor: Naudoti Markdown redaktorių vietoj HTML redaktoriaus
+        validate_body_max_caps_percent: Maksimali leidžiama didžiųjų raidžių dalis teksto turinyje
+        validate_body_max_marks_together: Maksimalus iš eilės einančių žymėjimo simbolių skaičius leidžiamas teksto turinyje
+        validate_body_min_length: Minimalus reikalingų simbolių skaičius teksto turiniui
+        validate_body_start_with_caps: Priversti teksto turinį prasidėti iš didžiosios raidės
+        validate_title_max_caps_percent: Maksimali leidžiama didžiųjų raidžių dalis pavadinime
