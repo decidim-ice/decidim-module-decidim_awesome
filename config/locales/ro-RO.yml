@@ -1,1 +1,141 @@
 ro:
+  activemodel:
+    attributes:
+      config:
+        allow_images_in_markdown_editor: Permite imagini în editorul markdown
+        allow_images_in_proposals: Permite imaginile în editorul de propuneri
+        allow_images_in_small_editor: Permite imagini în editorul HTML minimal
+        intergram_chat_id: ID Conversație
+        intergram_color: Culoarea widget-ului
+        intergram_require_login: Doar pentru utilizatorii înregistrați
+        proposal_custom_fields: Câmpuri personalizate %{id}
+      constraint:
+        component_id: sau mai precis în
+        participatory_space_slug: Numai în
+      custom_redirect:
+        destination: Destinație
+        origin: Originea
+        status: Stare
+      menu:
+        position: Poziție
+        raw_label: Etichetă
+        target: Deschidere in
+        url: URL
+        visibility: Vizibilitate
+      proposal:
+        proposal_custom_fields: Câmpuri particularizate
+  decidim:
+    admin:
+      filters:
+        admin_accountability:
+          participatory_space_type_eq:
+            label: Tip de spaţiu participativ
+          role:
+            label: Rol
+        label:
+          search_field_end_date: 'Până la data:'
+          search_field_start_date: 'De la data:'
+      menu:
+        decidim_awesome: Decidim Awesome
+    components:
+      awesome_iframe:
+        settings:
+          global:
+            announcement: Anunț
+            iframe: Cod Iframe
+      awesome_map:
+        settings:
+          global:
+            announcement: Anunț
+            map_height: Înălțimea hărții (px)
+            menu_amendments: Arată amendamentele
+    decidim_awesome:
+      admin:
+        admin_accountability:
+          admin_roles:
+            admin: Super Administrator
+            user_manager: Manager de utilizatori
+          created_at: Rolul creat la
+          currently_active: Activ în prezent
+          deleted_user: Utilizator șters
+          email: Email
+          exports:
+            export_format:
+              csv: CSV
+              json: JSON
+              xlsx: XLSX
+          index:
+            see_global: Lista administratorilor globali
+          last_login: Data ultimei conectări
+          missing_info: "(lipsă informații)"
+          missing_user: Utilizatorul nu este in baza de date
+          name: Nume
+          participatory_space: Spaţiu participativ
+          removal_date: Rol șters la
+          role: Rol
+          roles:
+            admin: Administrator
+            collaborator: Colaborator
+            moderator: Moderator
+        checks:
+          index:
+            decidim_version: Versiune Decidim %{version}
+            images_migrated: Imagini migrate în ActiveStorage
+            start_image_migrations: "\U0001F449 Începe procesul de migrare acum"
+            title: Verificări compatibilitate sistem
+        config:
+          constraints:
+            always: Întotdeauna
+            cannot_be_destroyed: Ne pare rău, acest lucru nu poate fi șters. Această configurație are nevoie de cel puțin o restricție.
+            delete: Șterge
+            edit: Editare
+            title: 'Aplicabil numai în aceste cazuri:'
+          create_proposal_custom_field:
+            error: Eroare la crearea unui nou "câmp personalizat"! %{error}
+          form:
+            edit_label: Redenumește eticheta
+          process_groups: Grupuri de procese
+        constraints:
+          errors:
+            not_unique: Această condiție există deja
+          new:
+            cancel: Anulare
+            save: Salvează
+          show:
+            cancel: Anulare
+            save: Salvează
+        custom_redirects:
+          edit:
+            save: Salvează
+          index:
+            edit: Editează redirecționare
+            new: Redirecționare nouă
+            remove: Elimină redirecționarea
+            title: Redirecționări personalizate
+          new:
+            save: Salvează
+        menu:
+          custom_redirects: Redirecționări personalizate
+          styles: Stiluri personalizate
+          surveys: Chestionare și formulare
+        menu_hacks:
+          edit:
+            save: Salvează
+          form:
+            target:
+              self: Aceeaşi fereastră
+            visibility:
+              hidden: Ascuns întotdeauna
+      content_blocks:
+        map:
+          map_settings: Setări pentru hartă
+          text_settings: Setări de text
+          title: Titlu
+      editor_images:
+        create:
+          error: Eroare la încărcarea imaginii!
+  layouts:
+    decidim:
+      decidim_awesome:
+        awesome_config:
+          categories: Categorii
