@@ -94,7 +94,6 @@ de:
             map_zoom_help: Gilt nur, wenn ein Kartenzentrum definiert ist
             menu_amendments: Änderungen anzeigen
             menu_categories: Kategorie-Suchmenü anzeigen
-            menu_hashtags: Hashtag-Suchmenü anzeigen
             menu_meetings: Veranstaltungen anzeigen
             menu_merge_components: Alle Komponenten desselben Typs im Menü zusammenführen
             truncate: Maximale Zeichenanzahl für Popup-Beschreibungen
