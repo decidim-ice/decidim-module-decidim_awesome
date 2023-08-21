@@ -94,7 +94,6 @@ es:
             map_zoom_help: Solo aplica si se define el punto central del mapa
             menu_amendments: Mostrar enmiendas
             menu_categories: Mostrar menú de búsqueda por categorías
-            menu_hashtags: Mostrar el menú de búsqueda por Hashtag
             menu_meetings: Mostrar encuentros
             menu_merge_components: Combinar todos los componentes del mismo tipo en el menú
             truncate: Número máximo de caracteres para las descripciones emergentes
