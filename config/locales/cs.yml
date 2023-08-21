@@ -94,7 +94,6 @@ cs:
             map_zoom_help: Použije se pouze v případě, že je definován střed mapy
             menu_amendments: Zobrazit pozměňovací návrhy
             menu_categories: Zobrazit menu hledání kategorií
-            menu_hashtags: Zobrazit vyhledávací menu Hasthag
             menu_meetings: Zobrazit schůzky
             menu_merge_components: Sloučit všechny komponenty stejného typu v menu
             truncate: Maximum znaků pro popisy vyskakovacích oken
