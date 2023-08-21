@@ -70,7 +70,6 @@ it:
             map_zoom_help: Si applica solo se è stato definito il centro della mappa
             menu_amendments: Mostra le correzioni
             menu_categories: Mostra Categoria nel menu di ricerca
-            menu_hashtags: Mostra il menu di ricerca di Hasthag
             menu_meetings: Mostra meeting
             menu_merge_components: Fondi tutti i componenti dello stesso tipo nel menu
             truncate: Numero massimo di caratteri per le descrizioni nei popup
