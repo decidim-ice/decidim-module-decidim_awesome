@@ -107,7 +107,7 @@ en:
             map_zoom_help: Only applies if a map center is defined
             menu_amendments: Show amendments
             menu_categories: Show Category search menu
-            menu_hashtags: Show Hasthag search menu
+            menu_hashtags: Show Hashtag search menu
             menu_meetings: Show meetings
             menu_merge_components: Merge all components of the same type in the menu
             truncate: Maximum characters for popup descriptions
