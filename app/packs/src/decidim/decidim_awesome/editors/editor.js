@@ -16,6 +16,7 @@ import "highlight.js/styles/github.css";
 import "src/decidim/editor/clipboard_override"
 import "src/decidim/vendor/image-resize.min"
 import "src/decidim/vendor/image-upload.min"
+import { marked } from 'marked';
 
 const DecidimAwesome = window.DecidimAwesome || {};
 const quillFormats = ["bold", "italic", "link", "underline", "header", "list", "video", "image", "alt", "break", "width", "style", "code", "blockquote", "indent"];
@@ -105,14 +106,14 @@ export function createQuillEditor(container) {
       callbackKO: (serverError) => {
         $("div.ql-toolbar").last().removeClass("editor-loading")
         let msg = serverError && serverError.body;
-        try { 
-          msg = JSON.parse(msg).message; 
+        try {
+          msg = JSON.parse(msg).message;
         } catch (evt) { console.error("Parsing error", evt); }
         console.error(`Image upload error: ${msg}`);
         let $p = $(`<p class="text-alert help-text">${msg}</p>`);
         $(container).after($p)
         setTimeout(() => {
-          $p.fadeOut(1000, () => { 
+          $p.fadeOut(1000, () => {
             $p.destroy();
           });
         }, 3000);
@@ -204,9 +205,14 @@ export function createMarkdownEditor(container) {
     });
   }
 
+  // Allow linebreaks
+  marked.setOptions({
+    breaks: true
+  });
+
   // convert to html on submit
   $form.on("submit", () => {
     // e.preventDefault();
-    $input.val(inscrybmde.markdown(inscrybmde.value()));
+    $input.val(marked(inscrybmde.value()));
   });
 }
