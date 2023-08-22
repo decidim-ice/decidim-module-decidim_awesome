@@ -16,7 +16,7 @@ import "highlight.js/styles/github.css";
 import "src/decidim/editor/clipboard_override"
 import "src/decidim/vendor/image-resize.min"
 import "src/decidim/vendor/image-upload.min"
-import { marked } from 'marked';
+import { marked } from "marked";
 
 const DecidimAwesome = window.DecidimAwesome || {};
 const quillFormats = ["bold", "italic", "link", "underline", "header", "list", "video", "image", "alt", "break", "width", "style", "code", "blockquote", "indent"];
