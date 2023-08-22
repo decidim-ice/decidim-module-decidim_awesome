@@ -775,7 +775,7 @@ GEM
     zeitwerk (2.6.11)
 
 PLATFORMS
-  arm64-darwin-22
+  x86_64-linux
 
 DEPENDENCIES
   bootsnap (~> 1.4)
