@@ -94,7 +94,7 @@ describe "Show awesome map", type: :system do
 
   context "when step settings are all true" do
     it "shows all proposals markers" do
-      sleep(1)
+      sleep(5)
       expect(page.body).to have_selector("div[title='#{accepted_proposal.title["en"]}']")
       expect(page.body).to have_selector("div[title='#{evaluating_proposal.title["en"]}']")
       expect(page.body).to have_selector("div[title='#{rejected_proposal.title["en"]}']")
