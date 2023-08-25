@@ -11,6 +11,13 @@
   <% end %>
 </div>
 
+<% if config_enabled? :allow_to_edit_proposals_after_import %>
+  <p class="text-info"><%= t("edit_proposals_after_import", scope: "decidim.decidim_awesome.admin.config") %></p>
+
+  <%= form.check_box :allow_to_edit_proposals_after_import %>
+  <p class="help-text"><%= t("help.allow_to_edit_proposals_after_import", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+<% end %>
+
 <% if config_enabled? %i(validate_title_min_length validate_title_max_caps_percent validate_title_max_marks_together validate_title_start_with_caps) %>
   </div> <!-- .card-section -->
   </div><!-- .card -->

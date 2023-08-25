@@ -48,6 +48,9 @@ module Decidim
           Decidim::Proposals::ProposalWizardCreateStepForm.include(Decidim::DecidimAwesome::Proposals::ProposalWizardCreateStepFormOverride)
         end
 
+        # override admin's permissions to edit proposals after import
+        Decidim::Proposals::Admin::Permissions.include(Decidim::DecidimAwesome::Admin::PermissionsOverride) if DecidimAwesome.enabled?(:allow_to_edit_proposals_after_import)
+
         # override user's admin property
         Decidim::User.include(Decidim::DecidimAwesome::UserOverride) if DecidimAwesome.enabled?(:scoped_admins)
 

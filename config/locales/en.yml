@@ -213,6 +213,9 @@ en:
           destroy_scoped_style:
             error: Error removing CSS box! %{error}
             success: CSS box %{key} removed successfully
+          edit_proposals_after_import: When proposals are imported between components,
+            not the original or the duplciated can be edited by the owners. This setting
+            changes that
           form:
             edit_label: Rename label
             errors:
@@ -227,6 +230,8 @@ en:
                 editor, available to any user
               allow_images_in_small_editor: This will add an image uploader icon in
                 all the editors WYSIWYG with minimal options in the toolbar enabled.
+              allow_to_edit_proposals_after_import: Other component settings still
+                apply (time limit, owner only, etc)
               auto_save_forms: This will use LocalStorage to automatically save data
                 introduced by users in surveys and other forms while they are filling
                 it. Data will be restored in a future visit with the same browser
