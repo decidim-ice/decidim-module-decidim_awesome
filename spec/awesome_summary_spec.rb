@@ -27,6 +27,7 @@ describe Decidim::DecidimAwesome do
   let!(:allow_images_in_proposals) { create(:awesome_config, organization: organization, var: :allow_images_in_proposals, value: true) }
   let!(:allow_images_in_small_editor) { create(:awesome_config, organization: organization, var: :allow_images_in_small_editor, value: true) }
   let!(:allow_images_in_full_editor) { create(:awesome_config, organization: organization, var: :allow_images_in_full_editor, value: true) }
+  let!(:allow_to_edit_proposals_after_import) { create(:awesome_config, organization: organization, var: :allow_to_edit_proposals_after_import, value: true) }
   let!(:use_markdown_editor) { create(:awesome_config, organization: organization, var: :use_markdown_editor, value: true) }
   let!(:allow_images_in_markdown_editor) { create(:awesome_config, organization: organization, var: :allow_images_in_markdown_editor, value: true) }
   let!(:auto_save_forms) { create(:awesome_config, organization: organization, var: :auto_save_forms, value: true) }

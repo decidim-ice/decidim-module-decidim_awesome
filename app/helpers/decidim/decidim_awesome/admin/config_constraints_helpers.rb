@@ -15,7 +15,7 @@ module Decidim
         def menus
           @menus ||= {
             editors: config_enabled?([:allow_images_in_full_editor, :allow_images_in_small_editor, :use_markdown_editor, :allow_images_in_markdown_editor]),
-            proposals: config_enabled?([:allow_images_in_proposals,
+            proposals: config_enabled?([:allow_images_in_proposals, :allow_to_edit_proposals_after_import,
                                         :validate_title_min_length, :validate_title_max_caps_percent,
                                         :validate_title_max_marks_together, :validate_title_start_with_caps,
                                         :validate_body_min_length, :validate_body_max_caps_percent,
