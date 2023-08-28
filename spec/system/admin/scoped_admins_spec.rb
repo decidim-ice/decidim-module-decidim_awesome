@@ -77,10 +77,6 @@ describe "Scoped admin journeys", type: :system do
         welcome_text = "Welcome to the Decidim Admin Panel." if legacy_version?
         visit decidim_admin.root_path
 
-        expect(page).to have_content(welcome_text)
-
-        click_link "Review them now"
-
         expect(page).to have_content("Agree to the terms and conditions of use")
 
         click_button "I agree with the terms"
