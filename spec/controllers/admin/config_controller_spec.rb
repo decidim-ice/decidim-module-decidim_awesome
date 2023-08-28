@@ -64,6 +64,7 @@ module Decidim::DecidimAwesome
             context "and proposals is disabled" do
               let(:disabled) do
                 editors + [:allow_images_in_proposals,
+                           :allow_to_edit_proposals_after_import,
                            :validate_title_min_length,
                            :validate_title_max_caps_percent,
                            :validate_title_max_marks_together,
