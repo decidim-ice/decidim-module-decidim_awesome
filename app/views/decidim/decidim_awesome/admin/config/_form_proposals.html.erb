@@ -11,12 +11,16 @@
   <% end %>
 </div>
 
-<% if config_enabled? :allow_to_edit_proposals_after_import %>
-  <p class="text-info"><%= t("edit_proposals_after_import", scope: "decidim.decidim_awesome.admin.config") %></p>
+<div class="row column decidim_awesome-form">
+  <% if config_enabled? :allow_to_edit_proposals_after_import %>
+    <p class="text-info"><%= t("edit_proposals_after_import", scope: "decidim.decidim_awesome.admin.config") %></p>
 
-  <%= form.check_box :allow_to_edit_proposals_after_import %>
-  <p class="help-text"><%= t("help.allow_to_edit_proposals_after_import", scope: "decidim.decidim_awesome.admin.config.form") %></p>
-<% end %>
+    <%= form.check_box :allow_to_edit_proposals_after_import %>
+    <p class="help-text"><%= t("help.allow_to_edit_proposals_after_import", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+
+    <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :allow_to_edit_proposals_after_import, constraints: constraints_for(:allow_to_edit_proposals_after_import) }) %>
+  <% end %>
+</div>
 
 <% if config_enabled? %i(validate_title_min_length validate_title_max_caps_percent validate_title_max_marks_together validate_title_start_with_caps) %>
   </div> <!-- .card-section -->
@@ -67,6 +71,7 @@
       <h2 class="card-title"><%= t("validators.body", scope: "decidim.decidim_awesome.admin.config.form") %></h2>
     </div>
     <div class="card-section">
+      <div class="row column decidim_awesome-form">
         <% if config_enabled? :validate_body_start_with_caps %>
           <%= form.check_box :validate_body_start_with_caps %>
 
@@ -94,4 +99,5 @@
           <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :validate_body_max_marks_together, constraints: constraints_for(:validate_body_max_marks_together) }) %>
         <% end %>
       </div>
+    </div>
 <% end %>
