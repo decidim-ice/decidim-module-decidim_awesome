@@ -9,17 +9,23 @@ module Decidim
         included do
           def editable_by?(user)
             return true if draft? && created_by?(user)
-            return true if awesome_config_allows_editing?(user)
+            return false unless default_edit_permissions(user)
 
-            !published_state? && within_edit_time_limit? && !copied_from_other_component? && created_by?(user)
+            allow_to_edit_proposals_after_import ? awesome_config_allows_editing? : true
           end
 
           private
 
-          def awesome_config_allows_editing?(user)
+          def default_edit_permissions(user)
+            return true if !published_state? && within_edit_time_limit? &&
+                           !copied_from_other_component? && created_by?(user)
+
+            false
+          end
+
+          def awesome_config_allows_editing?
             awesome_config = allow_to_edit_proposals_after_import
 
-            return false unless awesome_config.value && created_by?(user)
             return true if awesome_config.constraints.blank?
 
             constraints_to_check = manifest_to_check(awesome_config)
