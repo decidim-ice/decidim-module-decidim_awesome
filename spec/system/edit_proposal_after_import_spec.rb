@@ -18,11 +18,7 @@ describe "Edit proposals after import", type: :system do
     let(:edit_proposal) { true }
 
     before do
-      switch_to_host(organization.host)
-      login_as user, scope: :user
-      proposal.coauthorships.first.update!(author: user)
-      copied_proposal.link_resources([proposal], "copied_from_component")
-      visit_component
+      visit_proposal(user)
     end
 
     context "when constrains are not present" do
@@ -63,12 +59,7 @@ describe "Edit proposals after import", type: :system do
     let(:edit_proposal) { false }
 
     before do
-      switch_to_host(organization.host)
-      login_as user, scope: :user
-      proposal.coauthorships.first.update!(author: user)
-      copied_proposal.link_resources([proposal], "copied_from_component")
-      allow_to_edit_proposals_after_import.reload
-      visit_component
+      visit_proposal(user)
     end
 
     it "does not allow editing the proposal" do
@@ -82,16 +73,20 @@ describe "Edit proposals after import", type: :system do
     let(:edit_proposal) { true }
 
     before do
-      switch_to_host(organization.host)
-      login_as another_user, scope: :user
-      proposal.coauthorships.first.update!(author: user)
-      copied_proposal.link_resources([proposal], "copied_from_component")
-      visit_component
+      visit_proposal(another_user)
     end
 
     it "does not allow editing the proposal" do
       click_link proposal_title
       expect(page).not_to have_content("EDIT PROPOSAL")
     end
+  end
+
+  private
+
+  def visit_proposal(user)
+    login_as user, scope: :user
+    copied_proposal.link_resources([proposal], "copied_from_component")
+    visit_component
   end
 end
