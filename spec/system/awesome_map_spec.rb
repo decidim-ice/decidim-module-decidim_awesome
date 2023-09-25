@@ -120,6 +120,23 @@ describe "Show awesome map", type: :system do
     end
   end
 
+  context "when only the not answered option is enabled" do
+    let(:show_accepted) { false }
+    let(:show_evaluating) { false }
+    let(:show_rejected) { false }
+    let(:show_withdrawn) { false }
+    let(:show_not_answered) { true }
+
+    it "only shows proposal without state" do
+      sleep(1)
+      expect(page.body).not_to have_selector("div[title='#{accepted_proposal.title["en"]}']")
+      expect(page.body).not_to have_selector("div[title='#{evaluating_proposal.title["en"]}']")
+      expect(page.body).not_to have_selector("div[title='#{rejected_proposal.title["en"]}']")
+      expect(page.body).not_to have_selector("div[title='#{withdrawn_proposal.title["en"]}']")
+      expect(page.body).to have_selector("div[title='#{null_state_proposal.title["en"]}']")
+    end
+  end
+
   # TODO: figure out a way to test leaflet without any map provider
   # it "shows the proposal component as a menu" do
   #   expect(page.body).to have_content(".awesome_map-component_#{component.id}")
