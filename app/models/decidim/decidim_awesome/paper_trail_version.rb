@@ -3,23 +3,37 @@
 module Decidim
   module DecidimAwesome
     class PaperTrailVersion < PaperTrail::Version
-      default_scope { order("created_at DESC") }
+      default_scope { order("versions.created_at DESC") }
 
       def self.safe_user_roles
         DecidimAwesome.participatory_space_roles.filter(&:safe_constantize)
       end
 
-      scope :space_role_actions, -> { where(item_type: PaperTrailVersion.safe_user_roles, event: "create") }
+      scope :space_role_actions, lambda { |organization|
+        role_changes = where(item_type: PaperTrailVersion.safe_user_roles, event: "create")
+        user_ids_from_object_changes = role_changes.pluck(:object_changes).map { |change| change.match(/decidim_user_id:\n- ?\n- (\d+)/)[1].to_i }
+        relevant_user_ids = Decidim::User.select(:id).where(id: user_ids_from_object_changes, organization: organization).pluck(:id)
+        # add users that might have been completly destroyed in any organization
+        relevant_user_ids += user_ids_from_object_changes - Decidim::User.select("id").where(id: user_ids_from_object_changes).pluck(:id)
+
+        role_changes.where("object_changes ~ ANY (array[?])", relevant_user_ids.map { |id| "decidim_user_id:\n- ?\n- #{id}" })
+      }
+
+      scope :in_organization, lambda { |organization|
+        joins("LEFT JOIN decidim_users ON decidim_users.id = item_id")
+          .where("item_type = 'Decidim::UserBaseEntity' AND decidim_users.decidim_organization_id = ?", organization.id)
+          .order("versions.created_at DESC")
+      }
 
       def self.admin_role_actions(filter = nil)
         base = where(item_type: "Decidim::UserBaseEntity", event: %w(create update))
         case filter
         when nil
-          base.where("object_changes LIKE '%\nroles:\n%' OR object_changes LIKE '%\nadmin:\n- false\n%'")
+          base.where("object_changes LIKE '%\nroles:\n- []\n- - %' OR object_changes LIKE '%\nadmin:\n- false\n- true%'")
         when "admin"
-          base.where("object_changes LIKE '%\nadmin:\n- false\n%'")
+          base.where("object_changes LIKE '%\nadmin:\n- false\n- true%'")
         else
-          base.where(Arel.sql("object_changes LIKE '%\nroles:\n%\n- - #{filter}\n%'"))
+          base.where(Arel.sql("object_changes LIKE '%\nroles:\n- []\n- - #{filter}\n%'"))
         end
       end
 
@@ -92,7 +106,7 @@ module Decidim
       end
 
       ransacker :created_at, type: :date do
-        Arel.sql("date(created_at)")
+        Arel.sql("date(versions.created_at)")
       end
     end
   end

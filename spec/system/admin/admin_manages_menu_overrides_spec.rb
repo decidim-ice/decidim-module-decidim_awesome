@@ -34,7 +34,6 @@ describe "Admin manages hacked menus", type: :system do
     it "shows default menu items" do
       within "table tbody" do
         expect(page).to have_content("Home")
-        expect(page).to have_content("Assemblies")
         expect(page).to have_content("Processes")
         expect(page).to have_content("Help")
       end
@@ -67,7 +66,6 @@ describe "Admin manages hacked menus", type: :system do
         expect(page).to have_content("Home")
         expect(page).to have_content("Blog")
         expect(page).to have_content("http://external.blog")
-        expect(page).to have_content("Assemblies")
         expect(page).to have_content("Processes")
         expect(page).to have_content("Help")
       end

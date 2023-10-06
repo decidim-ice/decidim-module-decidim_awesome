@@ -6,6 +6,7 @@ module Decidim::DecidimAwesome
   describe ExportAdminActionsJob do
     subject { described_class }
     let(:organization) { create :organization }
+    let(:external_organization) { create :organization }
     let!(:user) { create :user, :admin, :confirmed, organization: organization }
     let!(:manager) { create(:user, :user_manager, organization: organization, last_sign_in_at: 6.days.ago, created_at: 7.days.ago) }
     let(:administrator) { create(:user, organization: organization, last_sign_in_at: 6.days.ago, created_at: 7.days.ago) }
@@ -20,13 +21,17 @@ module Decidim::DecidimAwesome
     let!(:assembly_user_role2) { create(:assembly_user_role, user: valuator, role: "valuator", created_at: 3.days.ago) }
     let!(:assembly_user_role3) { create(:assembly_user_role, user: collaborator, role: "collaborator", created_at: 2.days.ago) }
     let!(:assembly_user_role4) { create(:assembly_user_role, user: moderator, role: "moderator", created_at: 1.day.ago) }
-    let(:collection_ids) { Decidim::DecidimAwesome::PaperTrailVersion.space_role_actions.pluck(:id) }
+
+    let!(:external_administrator) { create(:user, organization: external_organization, last_sign_in_at: 6.days.ago, created_at: 7.days.ago) }
+    let!(:external_participatory_process_user_role1) { create(:participatory_process_user_role, user: external_administrator, role: "admin", created_at: 4.days.ago) }
+
+    let(:collection_ids) { Decidim::DecidimAwesome::PaperTrailVersion.space_role_actions(organization).pluck(:id) }
     let(:format) { "CSV" }
     let(:ext) { "csv" }
 
     before do
       # ensure papertrail has the same created_at date as the object being mocked
-      Decidim::DecidimAwesome::PaperTrailVersion.space_role_actions.map { |v| v.update(created_at: v.item.created_at) }
+      Decidim::DecidimAwesome::PaperTrailVersion.space_role_actions(organization).map { |v| v.update(created_at: v.item.created_at) }
     end
 
     shared_examples "an export job" do
@@ -53,8 +58,22 @@ module Decidim::DecidimAwesome
       let(:ext) { "xlsx" }
     end
 
+    it "serializes the data", versioning: true do
+      expect(subject.new.send(:serialized_collection, collection_ids).count).to eq(8)
+      expect(subject.new.send(:serialized_collection, collection_ids).pluck(:user_email).uniq).to match_array([administrator.email, valuator.email, collaborator.email, moderator.email])
+    end
+
+    context "when external organization" do
+      let(:collection_ids) { Decidim::DecidimAwesome::PaperTrailVersion.space_role_actions(external_organization).pluck(:id) }
+
+      it "serializes the data", versioning: true do
+        expect(subject.new.send(:serialized_collection, collection_ids).count).to eq(1)
+        expect(subject.new.send(:serialized_collection, collection_ids).pluck(:user_email).uniq).to match_array([external_administrator.email])
+      end
+    end
+
     context "when filtered data" do
-      let(:collection_ids) { PaperTrailVersion.space_role_actions.where(item_type: "Decidim::AssemblyUserRole").where("created_at > ?", 3.days.ago).pluck(:id) }
+      let(:collection_ids) { PaperTrailVersion.space_role_actions(organization).where(item_type: "Decidim::AssemblyUserRole").where("created_at > ?", 3.days.ago).pluck(:id) }
       let(:result) do
         [
           {
@@ -82,10 +101,8 @@ module Decidim::DecidimAwesome
         ]
       end
 
-      subject { described_class.new }
-
       it "serializes the data", versioning: true do
-        expect(subject.send(:serialized_collection, collection_ids)).to eq(result)
+        expect(subject.new.send(:serialized_collection, collection_ids)).to eq(result)
       end
     end
 
@@ -133,10 +150,8 @@ module Decidim::DecidimAwesome
           ]
         end
 
-        subject { described_class.new }
-
         it "serializes the data", versioning: true do
-          expect(subject.send(:serialized_collection, collection_ids)).to eq(result)
+          expect(subject.new.send(:serialized_collection, collection_ids)).to eq(result)
         end
       end
     end

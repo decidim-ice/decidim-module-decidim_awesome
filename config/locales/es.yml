@@ -21,6 +21,14 @@ es:
         scoped_admins: 'Grupo de administradoras acotadas #%{id}'
         scoped_styles: 'Estilos personalizados #%{id}'
         use_markdown_editor: Utilizar el editor Markdown en lugar del editor HTML
+        validate_body_max_caps_percent: Porcentaje máximo permitido de letras mayúsculas para el cuerpo
+        validate_body_max_marks_together: Máximo número de símbolos consecutivos permitidos en el cuerpo
+        validate_body_min_length: Mínimo de caracteres requeridos para el cuerpo
+        validate_body_start_with_caps: Forzar al cuerpo a comenzar con una letra mayúscula
+        validate_title_max_caps_percent: Porcentaje máximo permitido de letras mayúsculas para el título
+        validate_title_max_marks_together: Máximo número de símbolos consecutivos permitidos en el título
+        validate_title_min_length: Mínimo de caracteres requeridos para el título
+        validate_title_start_with_caps: Forzar al título a comenzar con una letra mayúscula
       constraint:
         component_id: o específicamente en
         component_manifest: Solo en componentes de tipo
@@ -42,7 +50,23 @@ es:
         proposal_custom_fields: Campos personalizados
   decidim:
     admin:
+      filters:
+        admin_accountability:
+          admin_role_type:
+            label: Tipo de rol
+          participatory_space_type_eq:
+            label: Tipo de espacio participativo
+          role:
+            label: Rol
+          role_type_eq:
+            label: Tipo de rol
+        label:
+          search_field_end_date: 'Hasta la fecha:'
+          search_field_start_date: 'Desde la fecha:'
+        search_placeholder:
+          user_name_or_user_email_cont: Buscar por nombre de participante, email
       menu:
+        admin_accountability: Histórico de administradoras
         decidim_awesome: Decidim Awesome
     components:
       awesome_iframe:
@@ -83,6 +107,42 @@ es:
             show_withdrawn: Muestra las propuestas retiradas
     decidim_awesome:
       admin:
+        admin_accountability:
+          admin_roles:
+            admin: Administradora de plataforma
+            user_manager: Administradora de participantes
+          created_at: Rol creado en
+          currently_active: Activo
+          deleted_user: Participante eliminada
+          email: Correo electrónico
+          exports:
+            button: Exportar esta búsqueda
+            export_as: Exporta como %{export_format}
+            export_format:
+              csv: CSV
+              json: JSON
+              xlsx: XLSX
+            notice: La exportación se está preparando. Recibirá un correo electrónico cuando esté listo.
+          index:
+            description: Listado aquí encontrarás todas las participantes que han tenido algún papel en la administración de un espacio participativo. Las administradoras de plataforma no aparecen en la lista.
+            global_description: Listado aquí encontrarás todos los usuarios que han tenido un papel en la administración de la plataforma. Las administradoras de espacio participativo no están listadas.
+            missing_users: 'NOTA: Esta lista podría no incluir usuarios creados/eliminados antes de %{date}. Esto se debe a que la "trazabilidad del usuario" fue introducida en Decidim v0.24 y esta instalación probablemente sea más antigua.'
+            see_global: Lista de administradoras de plataforma
+            see_spaces: Lista de administradoras de espacio participativo
+            title: Histórico de administradoras
+          last_login: Última fecha de conexión
+          missing_info: "(falta información)"
+          missing_user: Participante no está en la base de datos
+          name: Nombre
+          never_logged: Nunca ha iniciado sesión aún
+          participatory_space: Espacio participativo
+          removal_date: Rol eliminado en
+          role: Rol
+          roles:
+            admin: Administradora
+            collaborator: Colaborador/a
+            moderator: Moderadora
+            valuator: Evaluador/a
         checks:
           index:
             admin_head_tags: Etiquetas Awesome incluidas en el encabezado de la aplicación de administración
@@ -151,6 +211,15 @@ es:
               scoped_styles: Crea CSS personalizados que solo se apliquen en ciertas partes de la web pública (para ello, utiliza el editor de restricciones)
               scoped_styles_variables: 'Puedes utilizar las siguientes variables CSS para los colores personalizados de la organización:'
               use_markdown_editor: Esto sustituirá al editor HTML (Quill), utilice un editor de Markdown en su lugar. El texto se mostrará como HTML en las páginas públicas (en la base de datos, el texto se almacenará como markdown)
+              validate_body_max_caps_percent: Cero no permitirá ninguna letra mayúscula, 100 forzará a escribir todo en mayúsculas
+              validate_body_max_marks_together: 'Limitar el número de símbolos de preguntas y exclamaciones que se pueden escribir juntos. Es decir, si es 2, entonces ''!!!'' no estará permitido en el texto'
+              validate_body_min_length: Este número puede ser cero, lo que permite que este campo no sea obligatorio
+              validate_title_max_caps_percent: Cero no permitirá ninguna letra mayúscula, 100 forzará a escribir todo en mayúsculas
+              validate_title_max_marks_together: 'Limitar el número de símbolos de preguntas y exclamaciones que se pueden escribir juntos. Es decir, si es 2, entonces ''!!!'' no estará permitido en el texto'
+              validate_title_min_length: El título siempre es obligatorio y este número no puede ser cero
+            validators:
+              body: Validaciones de entrada de usuario para el campo "cuerpo"
+              title: Validaciones de entrada de usuario para el campo "título"
           form_proposal_custom_fields:
             new: Añadir una nueva caja de "campos personalizados"
             remove: Eliminar esta caja de "campos personalizados"
@@ -260,6 +329,7 @@ es:
               hidden: Siempre oculto
               logged: Solo visible para usuarias logeadas
               non_logged: Solo visible para usuarias no logeadas
+              verified_user: Sólo visible para usuarios con una autorización válida
           index:
             confirm_destroy: '¿Estás segura que quieres eliminar este elemento?'
             edit: Editar
@@ -302,7 +372,6 @@ es:
           text_settings: Ajustes del texto
           title: Título
           truncate: Número máximo de caracteres para las descripciones emergentes
-      credits: Decidim Awesome %{version} · Maintained with ♥ by %{company}
       custom_fields:
         errors:
           invalid_fields: No se ha podido analizar el contenido pero se ha asignado al campo '%{field}'
@@ -328,6 +397,8 @@ es:
           show:
             view_meeting: Ver encuentro
             view_proposal: Ver propuesta
+      validators:
+        too_much_caps: Contiene demasiadas letras mayúsculas (más del %{percent}% del texto)
   layouts:
     decidim:
       admin:

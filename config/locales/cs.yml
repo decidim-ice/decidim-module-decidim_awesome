@@ -24,7 +24,11 @@ cs:
         validate_body_max_caps_percent: Maximální povolený procentní podíl velkých písmen pro tělo zprávy
         validate_body_max_marks_together: Maximální počet po sobě jdoucích značek povolených v těle zprávy
         validate_body_min_length: Minimální požadované znaky pro tělo zprávy
+        validate_body_start_with_caps: Vynutit začít tělo textu velkým písmenem
         validate_title_max_caps_percent: Maximální povolený procentní podíl velkých písmen pro nadpis zprávy
+        validate_title_max_marks_together: Maximální počet po sobě jdoucích značek povolených v těle zprávy
+        validate_title_min_length: Minimální počet znaků pro tělo zprávy
+        validate_title_start_with_caps: Vynutit začít tělo textu velkým písmenem
       constraint:
         component_id: nebo konkrétně v
         component_manifest: Pouze v komponentách typu
@@ -46,7 +50,23 @@ cs:
         proposal_custom_fields: Vlastní pole
   decidim:
     admin:
+      filters:
+        admin_accountability:
+          admin_role_type:
+            label: Typ role
+          participatory_space_type_eq:
+            label: Typ participačního prostoru
+          role:
+            label: Role
+          role_type_eq:
+            label: Typ role
+        label:
+          search_field_end_date: 'Do dne:'
+          search_field_start_date: 'Od dne:'
+        search_placeholder:
+          user_name_or_user_email_cont: Hledat podle uživatelského jména, emailu
       menu:
+        admin_accountability: Odpovědnost správce
         decidim_awesome: Úžasné Decidim
     components:
       awesome_iframe:
@@ -87,6 +107,42 @@ cs:
             show_withdrawn: Zobrazit stažené návrhy
     decidim_awesome:
       admin:
+        admin_accountability:
+          admin_roles:
+            admin: Super správce
+            user_manager: Správce uživatelů
+          created_at: Role vytvořena v
+          currently_active: Nyní aktivní
+          deleted_user: Smazat uživatele
+          email: E-mail
+          exports:
+            button: Exportovat toto hledání
+            export_as: Export jako %{export_format}
+            export_format:
+              csv: CSV
+              json: JSON
+              xlsx: XLSX
+            notice: Export úlohy byl zařazen do fronty. Až bude připraven, obdržíte e-mail.
+          index:
+            description: Zde najdete všechny uživatele, kteří měli nějakou roli ve správě participačního prostoru. Běžní správci nejsou uvedeni.
+            global_description: Zde najdete všechny uživatele, kteří měli nějakou globální roli ve správě participačního prostoru. Běžní správci nejsou uvedeni.
+            missing_users: 'POZNÁMKA: Tento seznam nemusí zahrnovat uživatele vytvořené/odebrané před %{date}. Je to proto, že "sledovatelnost uživatele" byla zavedena v Decidim v0.24 a tato instalace je pravděpodobně starší.'
+            see_global: Seznam globálních správců
+            see_spaces: Seznam administrátorů participačního prostoru
+            title: Odpovědnost správce
+          last_login: Datum posledního přihlášení
+          missing_info: "(chybějící informace)"
+          missing_user: Uživatel není v databázi
+          name: Jméno
+          never_logged: Nikdy nepřihlášen
+          participatory_space: Participační prostor
+          removal_date: Role odebrána v
+          role: Role
+          roles:
+            admin: Administrátor
+            collaborator: Spolupracovník
+            moderator: Moderátor
+            valuator: Hodnotitel
         checks:
           index:
             admin_head_tags: Úžasné tagy zahrnuté v hlavičce administrace aplikace
@@ -155,6 +211,15 @@ cs:
               scoped_styles: Vytvořte vlastní CSS aplikovaný pouze na určitých částech veřejného webu (použijte pro to editor omezení)
               scoped_styles_variables: 'Můžete použít následující CSS proměnné pro nastavené barvy organizace:'
               use_markdown_editor: Toto nahradí WYSIWYG editor, místo toho použijte Markdown editor. Text bude vykreslen jako HTML na veřejných stránkách (text v databázi bude uložen jako text markdown)
+              validate_body_max_caps_percent: Nula nedovolí žádné velké písmeno, 100 bude nutit psát vše velkými písmeny
+              validate_body_max_marks_together: 'Omezit počet otazníků a vykřičníků, které lze psát dohromada. Např: Pokud je 2, pak ''!!!'' nebude v textu povoleno'
+              validate_body_min_length: Toto číslo může být nulové, toto pole bude ve skutečnosti nepovinné
+              validate_title_max_caps_percent: Nula nedovolí žádné velké písmeno, 100 bude nutit psát vše velkými písmeny
+              validate_title_max_marks_together: 'Omezit počet otazníků a vykřičníků, které lze psát dohromada. Např: Pokud je 2, pak ''!!!'' nebude v textu povoleno'
+              validate_title_min_length: Název je vždy povinný a toto číslo nemůže být nulové
+            validators:
+              body: Ověření vstupu uživatele pro pole "tělo"
+              title: Ověření uživatelem pro pole "Název"
           form_proposal_custom_fields:
             new: Přidat nové pole "vlastní pole"
             remove: Odstranit toto "vlastní pole"
@@ -333,6 +398,8 @@ cs:
           show:
             view_meeting: Zobrazit schůzku
             view_proposal: Zobrazit návrh
+      validators:
+        too_much_caps: Používá příliš mnoho velkých písmen (více než %{percent}% textu)
   layouts:
     decidim:
       admin:

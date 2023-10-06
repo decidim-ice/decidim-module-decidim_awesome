@@ -1,6 +1,26 @@
 CHANGELOG
 =========
 
+v0.9.3
+------
+
+Compatibility:
+  - Decidim v0.27.3
+  - Decidim v0.26.7
+
+Features:
+  - Fixes for admin accountability leaking other tenants data
+
+v0.9.2
+------
+
+Compatibility:
+  - Decidim v0.27.3
+  - Decidim v0.26.7
+
+Features:
+  - Fixes for the menu hacker
+ 
 v0.9.1
 ------
 

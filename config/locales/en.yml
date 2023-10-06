@@ -107,7 +107,7 @@ en:
             map_zoom_help: Only applies if a map center is defined
             menu_amendments: Show amendments
             menu_categories: Show Category search menu
-            menu_hashtags: Show Hasthag search menu
+            menu_hashtags: Show Hashtag search menu
             menu_meetings: Show meetings
             menu_merge_components: Merge all components of the same type in the menu
             truncate: Maximum characters for popup descriptions
@@ -144,6 +144,9 @@ en:
             global_description: Listed here you'll find all users that have had some
               global role in administrating this organization. Participatory space
               admins are not listed.
+            missing_users: 'NOTE: This list might not include users created/removed
+              before %{date}. This is because "user traceability" was introduced in
+              Decidim v0.24 and this installation is probably older.'
             see_global: List global admins
             see_spaces: List participatory space admins
             title: Admin accountability
