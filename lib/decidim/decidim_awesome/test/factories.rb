@@ -41,4 +41,22 @@ FactoryBot.define do
     manifest_name { :awesome_iframe }
     participatory_space { create(:participatory_process, :with_steps, organization: organization) }
   end
+
+  factory :awesome_vote_weight, class: "Decidim::DecidimAwesome::VoteWeight" do
+    vote { create :proposal_vote }
+    sequence(:weight) { |n| n }
+  end
+
+  factory :awesome_weight_cache, class: "Decidim::DecidimAwesome::WeightCache" do
+    proposal { create :proposal }
+
+    trait :with_votes do
+      after :create do |weight|
+        5.times.collect do |n|
+          vote = create(:proposal_vote, proposal: weight.proposal, author: create(:user, organization: weight.proposal.organization))
+          create(:awesome_vote_weight, vote: vote, weight: n + 1)
+        end
+      end
+    end
+  end
 end

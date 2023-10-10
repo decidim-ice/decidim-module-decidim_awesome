@@ -50,6 +50,10 @@ module Decidim
 
         # override user's admin property
         Decidim::User.include(Decidim::DecidimAwesome::UserOverride) if DecidimAwesome.enabled?(:scoped_admins)
+        # add vote weight to proposal vote
+        Decidim::Proposals::ProposalVote.include(Decidim::DecidimAwesome::HasVoteWeight) # if DecidimAwesome.enabled?(:proposal_vote_weight)
+        # add vote weight cache to proposal
+        Decidim::Proposals::Proposal.include(Decidim::DecidimAwesome::HasWeightCache) # if DecidimAwesome.enabled?(:proposal_vote_weight)
 
         Decidim::MenuPresenter.include(Decidim::DecidimAwesome::MenuPresenterOverride)
         Decidim::MenuItemPresenter.include(Decidim::DecidimAwesome::MenuItemPresenterOverride)
