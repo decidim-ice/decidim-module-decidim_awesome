@@ -61,6 +61,7 @@ module Decidim
           def render_proposal_custom_fields_override(fields, form, name, locale = nil)
             custom_fields = Decidim::DecidimAwesome::CustomFields.new(fields)
             custom_fields.translate!
+
             proposal_body = nil
             if name == :private_body
               proposal_body = form_presenter.private_body(extras: false, all_locales: locale.present?)
@@ -72,11 +73,11 @@ module Decidim
                    else
                      proposal_body
                    end
-            custom_fields.apply_xml(body ) if body.present?
+            custom_fields.apply_xml(body) if body.present?
             form.object.errors.add(name, custom_fields.errors) if custom_fields.errors
             is_new = form.options[:html][:method] == :post
             if is_new && name == :private_body
-              render partial: "decidim/decidim_awesome/custom_fields/private_field_notice", locals: { fields: custom_fields.fields, name: name }
+              ""
             else
               render partial: "decidim/decidim_awesome/custom_fields/form_render", locals: { spec: custom_fields.to_json, form: form, name: name }
             end

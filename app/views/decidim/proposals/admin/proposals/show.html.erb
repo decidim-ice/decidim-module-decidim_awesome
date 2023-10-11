@@ -35,11 +35,25 @@
     </div>
 
     <div class="row column">
-      <strong><%= t ".body" %>:</strong> <%= present(proposal).body %>
+        <div class="card">
+            <div class="card-divider card-header">
+                <strong><%= t ".body" %>:</strong>
+            </div>
+            <div class="card-section">
+                <%= present(proposal).body(strip_tags: false) %>
+            </div>
+        </div>
     </div>
 
     <div class="row column">
-      <strong><%= t ".private_body" %>:</strong> <%= present(proposal).private_body %>
+        <div class="card">
+            <div class="card-divider card-header">
+                <strong><%= t ".private_body" %>:</strong>
+            </div>
+            <div class="card-section">
+                <%= present(proposal).private_body(strip_tags: false) %>
+            </div>
+        </div>
     </div>
 
     <div class="row column">

@@ -26,11 +26,6 @@ module Decidim
           fields.value[@ident] = default_definition
           fields.save!
 
-          private_fields = AwesomeConfig.find_or_initialize_by(var: :private_proposal_custom_fields, organization: @organization)
-          private_fields.value = {} unless private_fields.value.is_a? Hash
-          private_fields.value[@ident] = default_definition
-          private_fields.save!
-
           create_constraint_never(:proposal_custom_field)
 
           broadcast(:ok, @ident)

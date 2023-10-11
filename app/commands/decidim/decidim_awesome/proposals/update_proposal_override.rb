@@ -14,7 +14,7 @@ module Decidim
               body: {
                 I18n.locale => body_with_hashtags
               },
-              private_body: form.private_body,
+              private_body: form.private_body ? form.private_body : "{}",
               category: form.category,
               scope: form.scope,
               address: form.address,
