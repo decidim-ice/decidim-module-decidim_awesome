@@ -35,5 +35,31 @@ module Decidim::DecidimAwesome
         expect { vote_weight.destroy }.not_to change(Decidim::Proposals::ProposalVote, :count)
       end
     end
+
+    describe "weight" do
+      let(:vote) { create(:proposal_vote) }
+
+      context "when vote_weight already exists" do
+        let!(:vote_weight) { create(:awesome_vote_weight, vote: vote, weight: 1) }
+
+        it "can be changed" do
+          expect(vote.weight).to eq(1)
+          vote.weight = 3
+          expect(vote.weight).to eq(3)
+          expect(vote_weight.reload.weight).to eq(3)
+        end
+      end
+
+      context "when vote_weight does not exist" do
+        let(:vote_weight) { VoteWeight.last }
+
+        it "can be set" do
+          expect(vote.weight).to be_nil
+          vote.weight = 3
+          expect(vote.weight).to eq(3)
+          expect(vote_weight.weight).to eq(3)
+        end
+      end
+    end
   end
 end

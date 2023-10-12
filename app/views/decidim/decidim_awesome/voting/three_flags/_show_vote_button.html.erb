@@ -1,0 +1,17 @@
+<p>VOTE:
+<%= proposal.weight_count(1) %> <%= action_authorized_link_to :vote, proposal_proposal_vote_path(proposal_id: proposal, from_proposals_list: from_proposals_list, weight: 1), resource: proposal, remote: true, method: :post, data: { disable: true, "redirect-url": proposal_path(proposal) }, class: "text-success" do %>
+  green
+<% end %>
+
+<%= proposal.weight_count(2) %> <%= action_authorized_link_to :vote, proposal_proposal_vote_path(proposal_id: proposal, from_proposals_list: from_proposals_list, weight: 2), resource: proposal, remote: true, method: :post, data: { disable: true, "redirect-url": proposal_path(proposal) }, class: "text-warning" do %>
+  orange
+<% end %>
+
+<%= proposal.weight_count(3) %> <%= action_authorized_link_to :vote, proposal_proposal_vote_path(proposal_id: proposal, from_proposals_list: from_proposals_list, weight: 3), resource: proposal, remote: true, method: :post, data: { disable: true, "redirect-url": proposal_path(proposal) }, class: "text-alert" do %>
+  red
+<% end %>
+
+<%= action_authorized_link_to :vote, proposal_proposal_vote_path(proposal_id: proposal, from_proposals_list: from_proposals_list), resource: proposal, remote: true, method: :delete, data: { disable: true, "redirect-url": proposal_path(proposal) } do %>
+  destroy vote
+<% end %>
+</p>

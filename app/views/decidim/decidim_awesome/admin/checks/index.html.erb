@@ -27,6 +27,7 @@
         <strong><%= t ".#{group}" %></strong>
         <ul class="vertical menu">
           <% props.files.each do |file, md5| %>
+          <% next unless exists?(props.spec, file) %>
           <li>
             <%= file %>
             <%= check(valid?(props.spec, file)) %>

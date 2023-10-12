@@ -46,7 +46,7 @@ describe "Visit the admin page", type: :system do
       let(:version) { "0.11" }
 
       it "detects missing css" do
-        expect(page).to have_xpath("//span[@class='text-alert']", count: 5)
+        expect(page).to have_xpath("//span[@class='text-alert']", count: 1)
       end
     end
   end

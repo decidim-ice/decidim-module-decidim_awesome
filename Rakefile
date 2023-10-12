@@ -26,6 +26,7 @@ def copy_helpers
   FileUtils.mkdir_p "spec/decidim_dummy_app/app/views/v0.11", verbose: true
   FileUtils.cp_r "lib/decidim/decidim_awesome/test/layouts", "spec/decidim_dummy_app/app/views/v0.11/layouts", verbose: true
   FileUtils.cp "lib/decidim/decidim_awesome/test/initializer.rb", "spec/decidim_dummy_app/config/initializers/decidim_awesome.rb", verbose: true
+  FileUtils.cp "spec/fixtures/files/tile-0.png", "spec/decidim_dummy_app/public/tile-0.png", verbose: true
 end
 
 desc "Generates a dummy app for testing"

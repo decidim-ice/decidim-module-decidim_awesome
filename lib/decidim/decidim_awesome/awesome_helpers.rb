@@ -61,6 +61,13 @@ module Decidim
         @awesome_proposal_custom_fields ||= awesome_config_instance.collect_sub_configs_values("proposal_custom_field")
       end
 
+      # this will check if the current component has been configured to use a custom voting manifest
+      def awesome_voting_manifest_for(_component)
+        # TODO: do actual checking here
+        # to be done by https://github.com/Green-Party-of-Canada-Members/gpc-decidim/issues/113
+        DecidimAwesome.voting_registry.find :three_flags
+      end
+
       def version_prefix
         "v#{Decidim.version[0..3]}"
       end

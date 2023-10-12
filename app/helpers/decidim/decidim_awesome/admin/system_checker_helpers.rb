@@ -16,6 +16,10 @@ module Decidim
           SystemChecker.to_h
         end
 
+        def exists?(spec, file)
+          SystemChecker.exists?(spec, file)
+        end
+
         def valid?(spec, file)
           SystemChecker.valid?(spec, file)
         end

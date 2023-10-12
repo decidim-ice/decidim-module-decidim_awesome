@@ -19,6 +19,65 @@ module Decidim::DecidimAwesome
       expect(weight_cache.proposal.weight_cache).to eq(weight_cache)
     end
 
+    describe "weight_count" do
+      let!(:weight_cache) { create(:awesome_weight_cache, proposal: proposal) }
+      let!(:vote_weights) do
+        [
+          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 1),
+          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 2),
+          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 3)
+        ]
+      end
+
+      it "returns the weight count for a weight" do
+        expect(proposal.weight_count(1)).to eq(1)
+        expect(proposal.weight_count(2)).to eq(1)
+        expect(proposal.weight_count(3)).to eq(1)
+      end
+
+      context "when a vote is added" do
+        before do
+          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 5)
+          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 3)
+        end
+
+        it "returns the weight count for a weight" do
+          expect(proposal.weight_count(1)).to eq(1)
+          expect(proposal.weight_count(2)).to eq(1)
+          expect(proposal.weight_count(3)).to eq(2)
+          expect(proposal.weight_count(4)).to eq(0)
+          expect(proposal.weight_count(5)).to eq(1)
+        end
+      end
+
+      context "when weight_cache does not exist" do
+        let(:weight_cache) { nil }
+        let(:vote_weights) { nil }
+
+        it "returns 0" do
+          expect(proposal.weight_count(1)).to eq(0)
+          expect(proposal.weight_count(2)).to eq(0)
+          expect(proposal.weight_count(3)).to eq(0)
+          expect(proposal.weight_count(100)).to eq(0)
+        end
+
+        context "when a vote is added" do
+          before do
+            create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 5)
+            create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 3)
+          end
+
+          it "returns the weight count for a weight" do
+            expect(proposal.weight_count(1)).to eq(0)
+            expect(proposal.weight_count(2)).to eq(0)
+            expect(proposal.weight_count(3)).to eq(1)
+            expect(proposal.weight_count(4)).to eq(0)
+            expect(proposal.weight_count(5)).to eq(1)
+          end
+        end
+      end
+    end
+
     context "when proposal is destroyed" do
       let!(:weight_cache) { create(:awesome_weight_cache, proposal: proposal) }
 

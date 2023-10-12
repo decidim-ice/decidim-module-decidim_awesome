@@ -36,6 +36,10 @@ module Decidim
           end
         end
 
+        def exists?(spec, file)
+          File.exist?("#{spec.gem_dir}#{file}")
+        end
+
         def valid?(spec, file)
           find_signatures("#{spec.gem_dir}#{file}").detect { |s| md5("#{spec.gem_dir}#{file}") == s }
         end

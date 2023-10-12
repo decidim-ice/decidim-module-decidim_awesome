@@ -12,7 +12,7 @@ Usability and UX tweaks for Decidim.
 This plugin allows the administrators to expand the possibilities of Decidim beyond some existing limitations.
 All tweaks are provided in a optional fashion with granular permissions that let the administrator to choose exactly where to apply those mods. Some tweaks can be applied to any assembly, other in an specific participatory process or even in type of component only.
 
-**DISCLAIMER: This module is heavily tested and widely used, howevever we do not accept any responsibility for breaking anything. Feedback is appreciated though.**
+**DISCLAIMER: This module is heavily tested and widely used, however we do not accept any responsibility for breaking anything. Feedback is appreciated though.**
 
 ## Why this plugin?
 
@@ -104,7 +104,7 @@ Feel free to hide, modify or add items in the Decidim's main menu. You can also 
 
 #### 11. Assign admins to specific scopes and prevent them modify anything else
 
-Convert any user on the platform (that is not currently an admin) to a limited subset of participatory spaces or event compoponents. Just add users to a box and scope them to some constraints. These users will se the "Edit" button in everywhere they have permissions. Any access to unallowed zones will redirect the user to the admin index page.
+Convert any user on the platform (that is not currently an admin) to a limited subset of participatory spaces or event components. Just add users to a box and scope them to some constraints. These users will see the "Edit" button in everywhere they have permissions. Any access to non allowed zones will redirect the user to the admin index page.
 
 ![Scoped admins authorized](examples/scoped_admins_authorized.png)
 ![Scoped admins unauthorized](examples/scoped_admins_unauthorized.png)
@@ -136,7 +136,7 @@ Using a link with a query string (ie: `/take-me-somewhere?locale=es`) that will 
 * `/processes/canary-islands?locale=es` if query string is not sanitized
 
 > Redirections work only after all other routes have been processed, you cannot override an existing route.
-> The admin panel comes with a button to check if the redirection works (meaning that no other route is used by te application).
+> The admin panel comes with a button to check if the redirection works (meaning that no other route is used by the application).
 > Non-working routes will simply be ignored.
 
 ![Custom redirections screenshot](examples/custom-redirections.png)
@@ -149,7 +149,7 @@ Rules available:
 
 * Minimum title and body length (defaults to 15 chars).
 * Maximum percentage of capital letters for title and body (defaults to 25%).
-* Maximum number of "marks" (aka: exclamation and interrogation signs) that can be consective in the title or the body (defaults to 1).
+* Maximum number of "marks" (aka: exclamation and interrogation signs) that can be consecutive in the title or the body (defaults to 1).
 * Enable/disable forcing to start the title or the body with a capital letter (defaults to "enabled").
 
 ![Custom validations](examples/custom_validations.png)
@@ -161,6 +161,81 @@ This feature allows you to list all the users that are, or have been at any poin
 Results can be filtered by role and by time range and also exported as CSV or other formats.
 
 ![Admin accountability](examples/admin_accountability.png)
+
+#### 16. Weighted voting
+
+This feature allows you to configure a proposals component to use a weighted voting system. This means that each vote can have a different weight and the result of the vote is calculated as the sum of all the weights.
+
+Weighted voting can have different presentations that can be registered in a manifest. Admins can then choose between what type of voting they want for their proposals according to the different manifests registered (classic is always available).
+
+Some manifests are included by default in Decidim Awesome, if you consider to create (or pay) for a new one, please open a PR or contact us.
+
+For instance, here is how the 3-flag voting system looks like:
+
+![Weighted voting](examples/weighted_voting.png)
+
+##### Creating a new manifest for weighted voting
+
+A manifest is defined in a initializer in this way:
+
+```ruby
+if Decidim::DecidimAwesome.enabled?(:weighted_proposal_voting)
+  # register available processors
+  Decidim::DecidimAwesome.voting_registry.register(:no_admins_vote) do |voting|
+    voting.show_vote_button_view = "decidim/decidim_awesome/voting/no_admins_vote/show_vote_button"
+    voting.show_votes_count_view = "decidim/decidim_awesome/voting/no_admins_vote/show_votes_count"
+    # voting.show_votes_count_view = "" # hide votes count if needed
+    voting.proposal_m_cell_footer = "decidim/decidim_awesome/voting/no_admins_vote/proposal_m_cell_footer"
+    voting.weight_validator do |weight, context|
+      # don't allow admins to vote
+      next if context[:user].admin?
+      # don't allow to vote official proposals
+      next if context[:proposal].official?
+
+      weight.in? [1, 2, 3, 5]
+    end
+  end
+end
+```
+
+A manifest must define a vote button view for the main proposal view, a vote count view for the proposal list view, a footer for the proposal cell (used in lists) and a validator for the weight value.
+
+All views are optional, if set to `nil` they will use the original ones. If set to an empty string `""` they will be hidden.
+
+The `weight_validator` is a Proc that receives the weight value and the context with the current user and the proposal and returns true or false if the weight is valid or not.
+
+**Notes for view `show_vote_button_view`**
+
+When building a new view for the vote button ([see the original](https://github.com/decidim/decidim/blob/release/0.27-stable/decidim-proposals/app/views/decidim/proposals/proposals/_vote_button.html.erb)) is important to take into account the following situations:
+
+- If there's a `current_user` logged in
+- If votes are blocked `if current_settings.votes_blocked?`
+- If the user has already voted `if @voted_proposals ? @voted_proposals.include?(proposal.id) : proposal.voted_by?(current_user)`
+- If maximum votes have already reached `if proposal.maximum_votes_reached?`
+- If the proposal can accumulate supports beyond maximum `if proposal.can_accumulate_supports_beyond_threshold`
+- If the current component allows the user to participate `if current_component.participatory_space.can_participate?(current_user)`
+- Note that the [original view](https://github.com/decidim/decidim/blob/release/0.27-stable/decidim-proposals/app/views/decidim/proposals/proposals/_vote_button.html.erb) is overridden only inside the tag  `<div id="proposal-<%= proposal.id %>-vote-button" class="button--vote-button">`. You only need to substitute the part inside.
+
+To cast a vote a `POST` action is needed with the parameters `proposal_id`, `from_proposals_list` and `weight`. The route where to send the vote can be constructed such as:
+
+```erb
+<%= link_to "Vote with weight=3", proposal_proposal_vote_path(proposal_id: proposal, from_proposals_list: from_proposals_list, weight: 3), remote: true, method: :post %>
+```
+
+To delete a vote, you just need to change the method to `:delete`
+
+**Notes for view `show_votes_count_view`**
+
+This view must implement the number of votes already cast. It requires an HTML tag with the id `proposal-<%= proposal.id %>-votes-count`, this is used by the Ajax vote re-loader feature: It will replace it's content with the new number.
+
+You can also completely hide this view (using `voting.show_votes_count_view = ""` in the manifest declaration). This is useful if you are using the same `show_vote_button_view` to also display the total counters (or your implementation does not use that).
+
+**Notes for view `proposal_m_cell_footer`**
+
+This view is used by the proposal cell in lists. It must implement the vote button and the vote count. The vote button must be a link with the same characteristics as the one explained above for the `show_vote_button_view` (typically you can just render the same view using `<%= render partial: my/path/to/view, { locals: model: proposal, from_proposals_list: true } %>`).
+
+Note that, it is strongly recommended to add and HTML tag element with the id `proposal-<%= proposal.id %>-votes-count` so the Ajax vote re-loader can work. Even if you don't use (in this case use a `style="display:none"` attribute), this is because the Ajax reloader always look for this element and throw JavaScript errors if not.
+
 
 #### To be continued...
 
