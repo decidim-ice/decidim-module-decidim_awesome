@@ -4,7 +4,8 @@ require "spec_helper"
 
 module Decidim::DecidimAwesome
   describe VotingManifest do
-    subject { described_class.new }
+    subject { described_class.new(name: name) }
+    let(:name) { :test }
 
     before do
       subject.weight_validator do |weight, context|
@@ -12,6 +13,14 @@ module Decidim::DecidimAwesome
 
         weight.in? [1, 2, 3, 4, 5]
       end
+    end
+
+    it { is_expected.to be_valid }
+
+    context "when no name" do
+      let(:name) { nil }
+
+      it { is_expected.to be_invalid }
     end
 
     it "validates weights" do

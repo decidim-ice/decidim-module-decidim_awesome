@@ -106,6 +106,18 @@ module Decidim
               weight.in? [1, 2, 3]
             end
           end
+
+          Decidim.component_registry.find(:proposals).tap do |component|
+            component.settings(:global) do |settings|
+              settings.attribute :awesome_voting_manifest,
+                                 type: :select,
+                                 default: "",
+                                 choices: -> { ["default"] + Decidim::DecidimAwesome.voting_registry.manifests.map(&:name) },
+                                 readonly: lambda { |context|
+                                   Decidim::Proposals::Proposal.where(component: context[:component]).where.not(proposal_votes_count: 0).any?
+                                 }
+            end
+          end
         end
       end
 

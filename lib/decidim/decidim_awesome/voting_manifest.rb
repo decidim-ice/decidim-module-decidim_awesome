@@ -28,6 +28,8 @@ module Decidim
       # Do not access this parameter directly, use the weight_validator method to register a block
       attribute :on_weight_validation, Proc, default: nil
 
+      validates :name, presence: true
+
       # registers a weight validator
       def weight_validator(&block)
         @on_weight_validation = block

@@ -62,10 +62,8 @@ module Decidim
       end
 
       # this will check if the current component has been configured to use a custom voting manifest
-      def awesome_voting_manifest_for(_component)
-        # TODO: do actual checking here
-        # to be done by https://github.com/Green-Party-of-Canada-Members/gpc-decidim/issues/113
-        DecidimAwesome.voting_registry.find :three_flags
+      def awesome_voting_manifest_for(component)
+        DecidimAwesome.voting_registry.find(component.settings.awesome_voting_manifest)
       end
 
       def version_prefix
