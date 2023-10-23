@@ -7,6 +7,8 @@ on:
   pull_request:
 
 env:
+  CI: 1
+  SIMPLECOV: 1
   NODE_VERSION: 16.9.1
   RUBY_VERSION: 3.0.6
   BUNDLE_GEMFILE: Gemfile
@@ -64,8 +66,6 @@ jobs:
         run: bundle exec rspec spec/${{ matrix.rspec }}
         env:
           FEATURES: ${{ matrix.features }}
-          SIMPLECOV: 1
-          CODECOV: 1
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
