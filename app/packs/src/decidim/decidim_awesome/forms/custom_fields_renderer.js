@@ -191,7 +191,6 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
       $body.val(this.dataToXML(this.spec));
       this.$element.data("spec", this.spec);
     }
-    // console.log("storeData spec", this.spec, "$body", $body,"$form",$form,"this",this);
     return this;
   }
 

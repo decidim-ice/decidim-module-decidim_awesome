@@ -17,13 +17,12 @@ $(() => {
       console.log("add", index)
     }
   })
-  console.log($customFieldElements.length, "added", customFieldsRenderers)
+
   if(customFieldsRenderers.length > 0){
     customFieldsRenderers[0].$container.closest("form").on("submit", (evt) => {
         if (evt.target.checkValidity()) {
           // save current editor
           customFieldsRenderers.forEach(renderer => {
-            console.log("SAVE builder")
             renderer.storeData()
           })
         } else {

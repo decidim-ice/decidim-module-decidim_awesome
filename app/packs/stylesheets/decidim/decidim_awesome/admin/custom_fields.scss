@@ -56,6 +56,11 @@
       font-weight: inherit;
       line-height: inherit;
       color: inherit;
+      flex-wrap: wrap;
+    }
+
+    .prev-holder, .frm-holder {
+      min-width: 100%;
     }
 
     .form-group {
