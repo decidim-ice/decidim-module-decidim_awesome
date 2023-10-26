@@ -8,10 +8,10 @@ module Decidim
 
       delegate :proposal, to: :vote
 
-      after_destroy :update_vote_weight_totals
-      after_save :update_vote_weight_totals
+      after_destroy :update_vote_weight_totals!
+      after_save :update_vote_weight_totals!
 
-      def update_vote_weight_totals
+      def update_vote_weight_totals!
         cache = Decidim::DecidimAwesome::WeightCache.find_or_initialize_by(proposal: proposal)
         cache.totals = cache.totals || {}
 

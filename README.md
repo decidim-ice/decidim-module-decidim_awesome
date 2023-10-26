@@ -186,6 +186,7 @@ if Decidim::DecidimAwesome.enabled?(:weighted_proposal_voting)
     voting.show_votes_count_view = "decidim/decidim_awesome/voting/no_admins_vote/show_votes_count"
     # voting.show_votes_count_view = "" # hide votes count if needed
     voting.proposal_m_cell_footer = "decidim/decidim_awesome/voting/no_admins_vote/proposal_m_cell_footer"
+    # define a weight validator (optional, by default all weights are valid)
     voting.weight_validator do |weight, context|
       # don't allow admins to vote
       next if context[:user].admin?
@@ -194,6 +195,14 @@ if Decidim::DecidimAwesome.enabled?(:weighted_proposal_voting)
 
       weight.in? [1, 2, 3, 5]
     end
+
+    # optionally, define a label generator block
+    # by default labels are extracted from a I18n key following this rule
+    # "decidim.decidim_awesome.votings.manifests.{MANIFEST_NAME}.weight_{WEIGHT}"
+    #
+    # voting.label_generator do |weight, context|
+    #   "Weight #{weight.round}"
+    # end
   end
 end
 ```

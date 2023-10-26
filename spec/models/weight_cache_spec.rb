@@ -139,7 +139,7 @@ module Decidim::DecidimAwesome
         end
       end
 
-      # this is un unlikely scenario as voting removes and creates new vote weights, just in case...
+      # this is an unlikely scenario where voting removes and creates new vote weights, just in case...
       describe "updated" do
         let!(:vote_weight1) { create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 1) }
         let!(:vote_weight2) { create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 2) }
@@ -169,6 +169,47 @@ module Decidim::DecidimAwesome
           vote_weight1.destroy
           expect(weight_cache.totals).to eq({ "2" => 1 })
           expect(weight_cache.weight_total).to eq(2)
+        end
+      end
+    end
+
+    describe "all_vote_weights" do
+      let!(:weight_cache) { create(:awesome_weight_cache, proposal: proposal) }
+      let!(:another_weight_cache) { create(:awesome_weight_cache, proposal: another_proposal) }
+      let!(:unrelated_another_weight_cache) { create(:awesome_weight_cache, :with_votes) }
+      let(:another_proposal) { create(:proposal, component: proposal.component) }
+      let!(:votes) do
+        vote = create(:proposal_vote, proposal: proposal, author: create(:user, organization: proposal.organization))
+        create(:awesome_vote_weight, vote: vote, weight: 1)
+      end
+      let!(:other_votes) do
+        vote = create(:proposal_vote, proposal: another_proposal, author: create(:user, organization: proposal.organization))
+        create(:awesome_vote_weight, vote: vote, weight: 2)
+      end
+
+      it "returns all vote weights for a component" do
+        expect(proposal.all_vote_weights).to match_array([1, 2])
+        expect(another_proposal.all_vote_weights).to match_array([1, 2])
+        expect(proposal.vote_weights).to eq({ "1" => 1, "2" => 0 })
+        expect(another_proposal.vote_weights).to eq({ "1" => 0, "2" => 1 })
+      end
+
+      context "when wrong cache exists" do
+        before do
+          # rubocop:disable Rails/SkipsModelValidations:
+          # we don't want to trigger the active record hooks
+          weight_cache.update_columns(totals: { "3" => 1, "4" => 1 })
+          # rubocop:enable Rails/SkipsModelValidations:
+        end
+
+        it "returns all vote weights for a component" do
+          expect(proposal.weight_cache.totals).to eq({ "3" => 1, "4" => 1 })
+          expect(proposal.vote_weights).to eq({ "1" => 0, "2" => 0 })
+          proposal.update_vote_weights!
+          expect(proposal.vote_weights).to eq({ "1" => 1, "2" => 0 })
+          expect(another_proposal.vote_weights).to eq({ "1" => 0, "2" => 1 })
+          expect(proposal.weight_cache.totals).to eq({ "1" => 1 })
+          expect(another_proposal.weight_cache.totals).to eq({ "2" => 1 })
         end
       end
     end

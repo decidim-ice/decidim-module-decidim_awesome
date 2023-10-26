@@ -9,6 +9,7 @@ module Decidim
         has_one :vote_weight, foreign_key: "proposal_vote_id", class_name: "Decidim::DecidimAwesome::VoteWeight", dependent: :destroy
 
         delegate :weight, to: :vote_weight, allow_nil: true
+        delegate :update_vote_weight_totals!, to: :vote_weight, allow_nil: true
 
         def weight=(new_weight)
           vote_weight = VoteWeight.find_or_initialize_by(vote: self)

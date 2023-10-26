@@ -38,9 +38,22 @@ module Decidim
       # validates the weight using the Proc defined by weight_validator
       # Receives the weight and a context with the user and the proposal to be voted
       def valid_weight?(weight, context = {})
-        return unless @on_weight_validation
+        return true unless @on_weight_validation
 
         @on_weight_validation.call(weight, **context)
+      end
+
+      # registers an optional label generator block
+      def label_generator(&block)
+        @on_label_generation = block
+      end
+
+      # returns the label used in export or other places for a given weight
+      # defaults to a I18n key scoped under decidim_awesome
+      def label_for(weight, context = {})
+        return I18n.t("decidim.decidim_awesome.votings.manifests.#{name}.weight_#{weight}", default: "weight_#{weight}") unless @on_label_generation
+
+        @on_label_generation.call(weight, **context)
       end
     end
   end

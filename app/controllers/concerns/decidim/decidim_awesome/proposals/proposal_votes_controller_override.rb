@@ -55,7 +55,7 @@ module Decidim
           end
 
           def weight
-            params[:weight].to_i
+            params[:weight].to_i if params.has_key?(:weight)
           end
         end
       end
