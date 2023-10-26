@@ -16,7 +16,7 @@ module Decidim::DecidimAwesome
       expect(subject.overrides["decidim-admin"].files.length).to eq(1)
     end
 
-    it "has 5 modified files in core" do
+    it "has 6 modified files in core" do
       expect(subject.overrides["decidim-core"].files.length).to eq(6)
     end
 

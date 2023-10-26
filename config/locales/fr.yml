@@ -50,7 +50,23 @@ fr:
         proposal_custom_fields: Champs personnalisés
   decidim:
     admin:
+      filters:
+        admin_accountability:
+          admin_role_type:
+            label: Type de rôle
+          participatory_space_type_eq:
+            label: Type d'espace participatif
+          role:
+            label: Rôle
+          role_type_eq:
+            label: Type de rôle
+        label:
+          search_field_end_date: 'Jusqu''à:'
+          search_field_start_date: 'De:'
+        search_placeholder:
+          user_name_or_user_email_cont: Recherche par nom d'utilisateur ou email
       menu:
+        admin_accountability: Suivi administrateur
         decidim_awesome: Decidim awesome
     components:
       awesome_iframe:
@@ -91,6 +107,41 @@ fr:
             show_withdrawn: Afficher les propositions retirées
     decidim_awesome:
       admin:
+        admin_accountability:
+          admin_roles:
+            admin: Super administrateur
+            user_manager: Gestionnaire d'utilisateurs
+          created_at: Rôle créé le
+          currently_active: Actuellement actif
+          deleted_user: Utilisateur supprimé
+          email: Email
+          exports:
+            button: Exporter cette recherche
+            export_as: Exporter en tant que %{export_format}
+            export_format:
+              csv: CSV
+              json: JSON
+              xlsx: XLSX
+            notice: La tâche d'exportation a été mise en file d'attente. Vous recevrez un email quand elle sera réalisée.
+          index:
+            description: Vous trouverez ici la liste de tous les utilisateurs ayant un rôle dans l'administration d'un espace participatif. Les administrateurs "normaux" ne sont pas listés.
+            global_description: Vous trouverez ici la liste de tous les utilisateurs ayant un rôle global dans l'administration de cette organisation. Les administrateurs d'espaces participatifs ne sont pas listés.
+            see_global: Lister les administrateurs globaux
+            see_spaces: Lister les administrateurs d'espace participatif
+            title: Suivi administrateur
+          last_login: Date de la dernière connexion
+          missing_info: "(informations manquantes)"
+          missing_user: Utilisateur introuvable dans la base de données
+          name: Nom
+          never_logged: Ne s'est jamais connecté
+          participatory_space: Espace participatif
+          removal_date: Rôle retiré le
+          role: Rôle
+          roles:
+            admin: Administrateur
+            collaborator: Collaborateur
+            moderator: Modérateur
+            valuator: Evaluateur
         checks:
           index:
             admin_head_tags: '"Awesome tags" (balises) inclus dans l''en-tête de l''application d''administration'
@@ -320,7 +371,7 @@ fr:
           text_settings: Paramètres de texte
           title: Titre
           truncate: Caractères maximum pour les descriptions des popups
-      credits: Décidim Awesome %{version} · Maintained with ♥ by %{company}
+      credits: Décidim Awesome %{version} · Fait avec ♥ par %{company}
       custom_fields:
         errors:
           invalid_fields: Le contenu n'a pas pu être analysé mais a été assigné au champ '%{field}'

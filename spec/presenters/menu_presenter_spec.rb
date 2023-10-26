@@ -42,6 +42,14 @@ module Decidim
       Decidim::DecidimAwesome.config.except!(:custom_menu)
     end
 
+    shared_context "when an item is removed" do
+      before do
+        Decidim.menu :custom_menu do |menu|
+          menu.remove_item :native_bar
+        end
+      end
+    end
+
     shared_examples "has default items" do
       it "renders the menu as a navigation list and skips non visible" do
         expect(subject.render).to \
@@ -63,7 +71,7 @@ module Decidim
       end
     end
 
-    shared_examples "has overriden items" do
+    shared_examples "has overridden items" do
       it "renders the menu as a navigation list" do
         expect(subject.render).to \
           have_selector("ul") &
@@ -85,24 +93,72 @@ module Decidim
       end
     end
 
-    context "when overrided menu is not an awesome config var" do
-      it_behaves_like "has default items"
+    shared_examples "removed item is not present" do
+      include_context "when an item is removed"
+
+      it "renders the menu as a navigation list" do
+        expect(subject.render).to \
+          have_selector("ul") &
+          have_selector("li", count: 1) &
+          have_link("Foo", href: "/foo")
+      end
+
+      it "renders the menu in the right order" do
+        expect(subject.render).to \
+          have_selector("ul") &
+          have_selector("li:first-child", text: "Foo") &
+          have_selector("li:last-child", text: "Foo")
+      end
+
+      it "returns instance of Decidim:Menu" do
+        expect(subject.evaluated_menu).to be_a(Decidim::Menu)
+      end
     end
 
-    context "when overrided menu is disabled" do
+    shared_examples "removed item is not present and other items are overridden" do
+      include_context "when an item is removed"
+
+      it "renders the menu as a navigation list" do
+        expect(subject.render).to \
+          have_selector("ul") &
+          have_selector("li", count: 2) &
+          have_link("Baz", href: "/baz") &
+          have_link("Fumanchu", href: "/foo")
+      end
+
+      it "renders the menu in the right order" do
+        expect(subject.render).to \
+          have_selector("ul") &
+          have_selector("li:first-child", text: "Baz") &
+          have_selector("li:last-child", text: "Fumanchu")
+      end
+
+      it "returns instance of Decidim:Menu" do
+        expect(subject.evaluated_menu).to be_a(Decidim::DecidimAwesome::MenuHacker)
+      end
+    end
+
+    context "when overrode menu is not an awesome config var" do
+      it_behaves_like "has default items"
+      it_behaves_like "removed item is not present"
+    end
+
+    context "when overrode menu is disabled" do
       before do
         Decidim::DecidimAwesome.config[:custom_menu] = :disabled
       end
 
       it_behaves_like "has default items"
+      it_behaves_like "removed item is not present"
     end
 
-    context "when overrided menu is enabled" do
+    context "when overrode menu is enabled" do
       before do
         Decidim::DecidimAwesome.config[:custom_menu] = []
       end
 
-      it_behaves_like "has overriden items"
+      it_behaves_like "has overridden items"
+      it_behaves_like "removed item is not present and other items are overridden"
     end
   end
 end
