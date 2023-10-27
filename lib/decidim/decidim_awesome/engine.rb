@@ -74,6 +74,7 @@ module Decidim
           if DecidimAwesome.enabled?(:proposal_custom_fields)
             Decidim::Proposals::ApplicationHelper.include(Decidim::DecidimAwesome::Proposals::ApplicationHelperOverride)
             Decidim::AmendmentsHelper.include(Decidim::DecidimAwesome::AmendmentsHelperOverride)
+            Decidim::Proposals::ProposalSerializer.include(Decidim::DecidimAwesome::ProposalSerializerDecorator)
           end
         end
       end

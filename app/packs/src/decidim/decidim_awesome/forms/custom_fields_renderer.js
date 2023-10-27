@@ -113,6 +113,7 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
         $dl.append($dd);
       }
     }
+    console.log(`<xml>${$dl[0].outerHTML}</xml>`)
     return `<xml>${$dl[0].outerHTML}</xml>`;
   }
 
@@ -138,10 +139,12 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
         if (index >= 0) {
           values.splice(index, 1)
           // setting checked=true do not makes the browser aware that the form is valid if the field is required
-          if (!input.checked)
-          {$(input).click();}
-        } else if (input.checked)
-        {$(input).click();}
+          if (!input.checked){
+            $(input).trigger("click");
+          }
+        } else if (input.checked){
+          $(input).trigger("click");
+        }
       });
 
       // Fill "other" option
