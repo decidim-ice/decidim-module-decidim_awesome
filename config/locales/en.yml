@@ -129,8 +129,9 @@ en:
             awesome_voting_manifest_options:
               default: Simple vote (default)
               three_flags: Traffic lights using flags
-            proposal_vote_abstain: Allow abstentions for any particular vote.
-            proposal_vote_instructions: Voting instructions (modal window)
+            proposal_vote_abstain: Add an abstain option
+            proposal_vote_instructions: Support instructions/help (dissmissable modal
+              window)
     decidim_awesome:
       admin:
         admin_accountability:
@@ -492,6 +493,7 @@ en:
             view_proposal: View proposal
       proposal_m:
         abstain: Abstain
+        change_vote: Change my vote
         modal:
           message: Your vote will be considered final on %{date}. You can change it
             until then

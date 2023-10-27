@@ -1,14 +1,28 @@
 <h4 class="heading4 vote-title"><%= t("decidim.decidim_awesome.proposal_m.modal.title") %></h4>
+<% if voted_for_any? %>
+  <p class="text-center">
+    <%= action_authorized_link_to :unvote,
+                                  "👉 #{t('decidim.decidim_awesome.proposal_m.change_vote')}",
+                                  proposal_vote_path(current_vote&.weight),
+                                  resource: proposal,
+                                  remote: true,
+                                  method: :delete,
+                                  id: "change-vote",
+                                  class: "change-vote-button" %>
+<% end %>
+</p>
+
 <div class="flex--sbc">
   <%= vote_block_for(proposal, 3, "green") %>
   <%= vote_block_for(proposal, 2, "yellow") %>
   <%= vote_block_for(proposal, 1, "red") %>
 </div>
-
-<%= action_authorized_link_to :vote,
-                              t("decidim.decidim_awesome.proposal_m.abstain"),
-                              proposal_vote_path(0),
-                              resource: proposal,
-                              remote: true,
-                              method: voted_for?(0) ? :delete : :post,
-                              class: "button expanded abstain-button small #{opacity_class_for(0)}" %>
+<% if current_component.settings.proposal_vote_abstain %>
+  <%= action_authorized_link_to :vote,
+                                t("decidim.decidim_awesome.proposal_m.abstain"),
+                                proposal_vote_path(0),
+                                resource: proposal,
+                                remote: true,
+                                method: :post,
+                                class: "button expanded abstain-button small #{opacity_class_for(0)}" %>
+<% end %>

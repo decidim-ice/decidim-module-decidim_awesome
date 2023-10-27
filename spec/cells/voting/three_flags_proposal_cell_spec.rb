@@ -63,13 +63,13 @@ module Decidim
               create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal, author: user), weight: 1)
             end
 
-            it "returns 'fully-opaque' for the weight the user has voted for" do
-              expect(subject.opacity_class_for(1)).to eq("fully-opaque")
+            it "returns 'fully-opaque non-clickable' for the weight the user has voted for" do
+              expect(subject.opacity_class_for(1)).to eq("fully-opaque non-clickable")
             end
 
-            it "returns 'semi-opaque' for the weights the user has not voted for" do
-              expect(subject.opacity_class_for(2)).to eq("semi-opaque")
-              expect(subject.opacity_class_for(3)).to eq("semi-opaque")
+            it "returns 'semi-opaque non-clickable' for the weights the user has not voted for" do
+              expect(subject.opacity_class_for(2)).to eq("semi-opaque non-clickable")
+              expect(subject.opacity_class_for(3)).to eq("semi-opaque non-clickable")
             end
           end
 

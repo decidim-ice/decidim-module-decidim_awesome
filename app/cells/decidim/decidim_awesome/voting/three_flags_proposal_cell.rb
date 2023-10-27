@@ -34,8 +34,11 @@ module Decidim
           proposal_proposal_vote_path(proposal_id: proposal.id, from_proposals_list: from_proposals_list, weight: weight)
         end
 
-        def opacity_class_for(option)
-          !voted_for_any? || voted_for?(option) ? "fully-opaque" : "semi-opaque"
+        def opacity_class_for(weight)
+          opacity = !voted_for_any? || voted_for?(weight) ? "fully-opaque" : "semi-opaque"
+          clickable = voted_for_any? ? "non-clickable" : ""
+
+          [opacity, clickable].reject(&:empty?).join(" ")
         end
 
         def voted_for_any?
