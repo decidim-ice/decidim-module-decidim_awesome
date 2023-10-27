@@ -88,6 +88,7 @@ module Decidim
 
           if DecidimAwesome.enabled?(:weighted_proposal_voting)
             Decidim::Proposals::ProposalVotesController.include(Decidim::DecidimAwesome::Proposals::ProposalVotesControllerOverride)
+            Decidim::Proposals::ProposalsController.include(Decidim::DecidimAwesome::Proposals::OrderableOverride)
           end
         end
       end

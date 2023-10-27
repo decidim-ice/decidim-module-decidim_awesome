@@ -120,7 +120,7 @@ module Decidim::Proposals
       end
     end
 
-    describe "destroy" do
+    describe "DELETE destroy" do
       before do
         create(:proposal_vote, proposal: proposal, author: user)
       end

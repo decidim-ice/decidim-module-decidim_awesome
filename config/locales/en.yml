@@ -498,6 +498,11 @@ en:
             weight_1: Red
             weight_2: Yellow
             weight_3: Green
+    proposals:
+      proposals:
+        orders:
+          supported_first: Supported first
+          supported_last: Supported last
   layouts:
     decidim:
       admin:
