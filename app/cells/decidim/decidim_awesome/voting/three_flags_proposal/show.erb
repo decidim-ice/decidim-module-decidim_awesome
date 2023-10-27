@@ -1,0 +1,14 @@
+<h4 class="heading4 vote-title"><%= t("decidim.decidim_awesome.proposal_m.modal.title") %></h4>
+<div class="flex--sbc">
+  <%= vote_block_for(proposal, 3, "green") %>
+  <%= vote_block_for(proposal, 2, "yellow") %>
+  <%= vote_block_for(proposal, 1, "red") %>
+</div>
+
+<%= action_authorized_link_to :vote,
+                              t("decidim.decidim_awesome.proposal_m.abstain"),
+                              proposal_vote_path(0),
+                              resource: proposal,
+                              remote: true,
+                              method: voted_for?(0) ? :delete : :post,
+                              class: "button expanded abstain-button small #{opacity_class_for(0)}" %>

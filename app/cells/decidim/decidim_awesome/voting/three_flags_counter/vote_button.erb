@@ -1,0 +1,10 @@
+<%= link_to resource_path,
+            class: "button #{vote_btn_class} button--sc",
+            title: t("decidim.decidim_awesome.proposal_m.vote_button"),
+            style: "cursor: pointer; padding-top: 0.6rem; padding-bottom: 0.6rem; margin-bottom: 0" do %>
+  <% if user_voted_weight %>
+    <%= icon "actions", class: "icon" %><span><%= t("decidim.decidim_awesome.proposal_m.voted") %></span>
+  <% else %>
+    <%= t("decidim.decidim_awesome.proposal_m.vote_button") %>
+  <% end %>
+<% end %>

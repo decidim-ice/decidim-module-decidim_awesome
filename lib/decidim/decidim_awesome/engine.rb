@@ -103,7 +103,7 @@ module Decidim
           Decidim::DecidimAwesome.voting_registry.register(:three_flags) do |voting|
             voting.show_vote_button_view = "decidim/decidim_awesome/voting/three_flags/show_vote_button"
             voting.show_votes_count_view = "decidim/decidim_awesome/voting/three_flags/show_votes_count"
-            # voting.show_votes_count_view = "" # hide votes count if needed
+            voting.show_votes_count_view = "" # hide votes count if needed
             voting.proposal_m_cell_footer = "decidim/decidim_awesome/voting/three_flags/proposal_m_cell_footer"
             voting.weight_validator do |weight, _context|
               weight.in? [0, 1, 2, 3]
@@ -119,6 +119,13 @@ module Decidim
                                  readonly: lambda { |context|
                                    Decidim::Proposals::Proposal.where(component: context[:component]).where.not(proposal_votes_count: 0).any?
                                  }
+              settings.attribute :proposal_vote_abstain,
+                                 type: :boolean,
+                                 default: false
+              settings.attribute :proposal_vote_instructions,
+                                 type: :text,
+                                 translated: true,
+                                 editor: true
             end
           end
         end

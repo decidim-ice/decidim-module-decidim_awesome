@@ -1,0 +1,14 @@
+<div id="vote-container" data-proposal-id="<%= proposal.id %>">
+  <div class="vote-block modal" data-modal-id="voteProposalModal<%= proposal.id %>" id="vote-proposal-<%= proposal.id %>-<%= weight %>">
+    <p class="vote-count" data-id="<%= proposal.id %>" data-weight="<%= weight %>"><%= proposal_votes(weight) %></p>
+    <p class="vote-label <%= color %>"><%= color.capitalize %></p>
+    <%= action_authorized_link_to :vote,
+                                  proposal_vote_path(weight),
+                                  resource: proposal,
+                                  remote: true,
+                                  method: voted_for?(weight) ? :delete : :post,
+                                  class: "rectangle voting-block #{color} #{opacity_class_for(weight)} #{'voted' if voted_for?(weight)}" do %>
+      <%= icon "thumb-up" %>
+    <% end %>
+  </div>
+</div>

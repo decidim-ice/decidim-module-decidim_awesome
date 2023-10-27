@@ -129,6 +129,8 @@ en:
             awesome_voting_manifest_options:
               default: Simple vote (default)
               three_flags: Traffic lights using flags
+            proposal_vote_abstain: Allow abstentions for any particular vote.
+            proposal_vote_instructions: Voting instructions (modal window)
     decidim_awesome:
       admin:
         admin_accountability:
@@ -488,6 +490,14 @@ en:
           show:
             view_meeting: View meeting
             view_proposal: View proposal
+      proposal_m:
+        abstain: Abstain
+        modal:
+          message: Your vote will be considered final on %{date}. You can change it
+            until then
+          title: Categorization Poll
+        vote_button: Click to vote
+        voted: Voted
       validators:
         too_much_caps: Is using too many capital letters (over %{percent}% of the
           text)

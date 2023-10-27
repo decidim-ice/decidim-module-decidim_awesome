@@ -1,0 +1,110 @@
+.voting-three-flag,
+.button--vote-button {
+  $rectangle-width: 3rem;
+  $green-color: #4caf50;
+  $yellow-color: #ffc107;
+  $red-color: #f44336;
+
+  .vote-title {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  .votes_counter {
+    letter-spacing: .2rem;
+    font-size: 1rem;
+  }
+
+  .vote-link.hidden {
+    display: none;
+  }
+
+  .rectangle {
+    width: $rectangle-width;
+    height: calc($rectangle-width * 2);
+    display: inline-block;
+    margin: 5px;
+    border-radius: 5px;
+    position: relative;
+
+    &.green {
+      background-color: $green-color;
+    }
+
+    &.yellow {
+      background-color: $yellow-color;
+    }
+
+    &.red {
+      background-color: $red-color;
+    }
+  }
+
+  .voting-block {
+    text-align: center;
+    line-height: 40px;
+  }
+
+  .voting-button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  .fully-opaque {
+    opacity: 1;
+  }
+
+  .semi-opaque {
+    opacity: .3;
+    pointer-events: none;
+  }
+
+  .vote-block,
+  .vote-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    .vote-count {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 0;
+    }
+
+    .vote-label {
+      font-size: 1rem;
+      margin-bottom: 0;
+
+      &.green {
+        color: $green-color;
+      }
+
+      &.yellow {
+        color: $yellow-color;
+      }
+
+      &.red {
+        color: $red-color;
+      }
+    }
+
+    .icon--thumb-up {
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      height: 20px;
+      width: 20px;
+    }
+  }
+
+  .button.abstain-button {
+    background-color: transparent;
+    color: black;
+    box-shadow: 0 2px 6px 4px rgba(0, 0, 0, .1);
+    margin-top: 1rem;
+  }
+}
