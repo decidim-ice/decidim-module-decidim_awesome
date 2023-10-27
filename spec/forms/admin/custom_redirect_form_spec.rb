@@ -95,6 +95,16 @@ module Decidim::DecidimAwesome
 
         it { is_expected.to be_invalid }
       end
+
+      context "when origin and destination are not case sensitive" do
+        let(:origin) { "/Some-Origin-Path".downcase }
+        let(:destination) { "http://#{organization.host}/Some-Origin-Path".downcase }
+
+        it "compares origin and destination without considering case" do
+          expect(origin).not_to eq("/Some-Origin-Path")
+          expect(destination).not_to eq("http://#{organization.host}/Some-Origin-Path")
+        end
+      end
     end
   end
 end
