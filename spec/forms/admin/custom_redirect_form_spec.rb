@@ -60,14 +60,14 @@ module Decidim::DecidimAwesome
         it { is_expected.to be_valid }
 
         it "sanitizes origin" do
-          expect(subject.to_params[0]).to eq("/some-origin")
+          expect(subject.to_params[0]).to eq("/some-Origin")
         end
 
         context "and origin has organization host" do
           let(:origin) { "http://#{organization.host}/some-Origin " }
 
           it "strips host" do
-            expect(subject.to_params[0]).to eq("/some-origin")
+            expect(subject.to_params[0]).to eq("/some-Origin")
           end
         end
       end
@@ -78,7 +78,7 @@ module Decidim::DecidimAwesome
         it { is_expected.to be_valid }
 
         it "sanitizes destination" do
-          expect(subject.to_params[1][:destination]).to eq("/some-destination")
+          expect(subject.to_params[1][:destination]).to eq("/some-destInation")
         end
 
         context "and destination has organization host" do

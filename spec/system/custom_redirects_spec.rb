@@ -93,7 +93,7 @@ describe "Custom Redirections", type: :system do
     end
 
     context "when origin is malformed" do
-      let(:goto) { "#{origin.upcase} " }
+      let(:goto) { "#{origin} " }
 
       it "reaches destination anyway" do
         visit goto
