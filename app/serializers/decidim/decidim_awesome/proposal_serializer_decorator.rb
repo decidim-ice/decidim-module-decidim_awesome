@@ -4,7 +4,7 @@ module Decidim
             extend ActiveSupport::Concern
             included do |base|
                 base.include(AwesomeHelpers)
-                base.alias_method :decidim_original_serialize, :serialize
+                alias_method :decidim_original_serialize, :serialize
 
                 def serialize
                     serialized_proposal = decidim_original_serialize
@@ -27,7 +27,7 @@ module Decidim
                                 custom_fields.apply_xml(proposal.body[locale])
                                 custom_fields.fields.each do |field|
                                     if field["label"] && field["name"]
-                                        payload["body/#{locale}/#{field["label"].parameterize}".to_sym] = field["userData"]
+                                        payload["body/#{field["label"].parameterize}/#{locale}".to_sym] = field["userData"]
                                     end
                                 end
                             end

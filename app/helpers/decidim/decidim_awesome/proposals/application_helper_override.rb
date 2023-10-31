@@ -75,12 +75,7 @@ module Decidim
                    end
             custom_fields.apply_xml(body) if body.present?
             form.object.errors.add(name, custom_fields.errors) if custom_fields.errors
-            is_new = form.options[:html][:method] == :post
-            if is_new && name == :private_body
-              ""
-            else
-              render partial: "decidim/decidim_awesome/custom_fields/form_render", locals: { spec: custom_fields.to_json, form: form, name: name }
-            end
+            render partial: "decidim/decidim_awesome/custom_fields/form_render", locals: { spec: custom_fields.to_json, form: form, name: name }
           end
         end
       end
