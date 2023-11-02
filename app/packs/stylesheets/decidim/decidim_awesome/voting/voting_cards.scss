@@ -1,9 +1,14 @@
-.voting-three-flags {
-  $rectangle-width: 3rem;
-  $green-color: #4caf50;
-  $yellow-color: #ffc107;
-  $red-color: #f44336;
+:root {
+  --voting-cards-weight-0: #8b898b;
+  --voting-cards-weight-1: #f44336;
+  --voting-cards-weight-2: #ffc107;
+  --voting-cards-weight-3: #4caf50;
+}
 
+.voting-voting_cards {
+  $rectangle-width: 3rem;
+
+  // ProposalM card
   &-card {
     a {
       margin-bottom: 0;
@@ -11,6 +16,39 @@
       > svg {
         margin-bottom: 2px;
         vertical-align: middle;
+      }
+
+      &.button {
+        &.weight_0 {
+          background-color: var(--voting-cards-weight-0);
+        }
+
+        &.weight_1 {
+          background-color: var(--voting-cards-weight-1);
+        }
+
+        &.weight_2 {
+          background-color: var(--voting-cards-weight-2);
+        }
+
+        &.weight_3 {
+          background-color: var(--voting-cards-weight-3);
+        }
+      }
+    }
+
+    .votes_counter {
+      .weight_0 {
+        color: var(--voting-cards-weight-0);
+      }
+      .weight_1 {
+        color: var(--voting-cards-weight-1);
+      }
+      .weight_2 {
+        color: var(--voting-cards-weight-2);
+      }
+      .weight_3 {
+        color: var(--voting-cards-weight-3);
       }
     }
   }
@@ -92,26 +130,26 @@
     }
 
     &.weight_3 {
-      color: $green-color;
+      color: var(--voting-cards-weight-3);
 
       & > svg {
-        fill: $green-color;
+        fill: var(--voting-cards-weight-3);
       }
     }
 
     &.weight_2 {
-      color: $yellow-color;
+      color: var(--voting-cards-weight-2);
 
       & > svg {
-        fill: $yellow-color;
+        fill: var(--voting-cards-weight-2);
       }
     }
 
     &.weight_1 {
-      color: $red-color;
+      color: var(--voting-cards-weight-1);
 
       & > svg {
-        fill: $red-color;
+        fill: var(--voting-cards-weight-1);
       }
     }
 
@@ -165,5 +203,18 @@
 
   .button.abstain-button {
     text-transform: uppercase;
+    color: var(--voting-cards-weight-0);
+    border-color: var(--voting-cards-weight-0);
+    background-color: transparent;
+
+    &.voted {
+      background-color: var(--voting-cards-weight-0);
+      color: #fff;
+      border-color: transparent;
+
+      &.disabled {
+        opacity: 1;
+      }
+    }
   }
 }

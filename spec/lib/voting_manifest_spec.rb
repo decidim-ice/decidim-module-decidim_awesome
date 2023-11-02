@@ -30,7 +30,7 @@ module Decidim::DecidimAwesome
     end
 
     context "when I18n labels exist" do
-      let(:name) { :three_flags }
+      let(:name) { :voting_cards }
 
       it "returns I18n labels" do
         expect(subject.label_for(0)).to eq("Abstain")

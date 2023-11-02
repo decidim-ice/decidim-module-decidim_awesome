@@ -22,7 +22,7 @@ module Decidim::Assemblies
           participatory_space: assembly
         )
       end
-      let(:manifest) { :three_flags }
+      let(:manifest) { :voting_cards }
 
       before do
         request.env["decidim.current_organization"] = organization
@@ -43,7 +43,7 @@ module Decidim::Assemblies
         it "changes the voting manifest" do
           patch :update, params: { assembly_slug: assembly.slug, id: component.id, component: component_params }
 
-          expect(component.reload.settings.awesome_voting_manifest).to eq("three_flags")
+          expect(component.reload.settings.awesome_voting_manifest).to eq("voting_cards")
           expect(response).to redirect_to components_path
         end
 

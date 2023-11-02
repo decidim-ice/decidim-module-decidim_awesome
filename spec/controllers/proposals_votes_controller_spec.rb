@@ -17,7 +17,7 @@ module Decidim::Proposals
     end
 
     let(:manifest) { nil }
-    let(:valid_manifest) { Decidim::DecidimAwesome.voting_registry.find(:three_flags) }
+    let(:valid_manifest) { Decidim::DecidimAwesome.voting_registry.find(:voting_cards) }
 
     before do
       allow(controller).to receive(:awesome_voting_manifest_for).and_return(manifest)
@@ -76,7 +76,7 @@ module Decidim::Proposals
         end
         let(:settings) do
           {
-            three_flags_show_abstain: abstain
+            voting_cards_show_abstain: abstain
           }
         end
         let(:abstain) { true }

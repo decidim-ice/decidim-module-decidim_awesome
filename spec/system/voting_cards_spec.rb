@@ -2,9 +2,9 @@
 
 require "spec_helper"
 
-describe "Three flags", type: :system do
+describe "Voting weights with cards", type: :system do
   include_context "with a component"
-  let(:manifest) { :three_flags }
+  let(:voting_manifest) { :voting_cards }
   let!(:component) { create :proposal_component, :with_votes_enabled, participatory_space: participatory_space, settings: settings }
   let(:settings) do
     {
@@ -12,14 +12,14 @@ describe "Three flags", type: :system do
       threshold_per_proposal: threshold_per_proposal,
       can_accumulate_supports_beyond_threshold: can_accumulate_supports_beyond_threshold,
       minimum_votes_per_user: minimum_votes_per_user,
-      awesome_voting_manifest: manifest,
-      three_flags_show_abstain: abstain,
-      three_flags_box_title: box_title,
-      three_flags_instructions: instructions,
-      three_flags_show_modal_help: modal_help
+      awesome_voting_manifest: voting_manifest,
+      voting_cards_show_abstain: abstain,
+      voting_cards_box_title: box_title,
+      voting_cards_instructions: instructions,
+      voting_cards_show_modal_help: modal_help
     }
   end
-  let!(:proposals) { create_list(:proposal, 3, component: component) }
+  let!(:proposals) { create_list(:proposal, 4, component: component) }
   let(:proposal) { proposals.first }
   let(:proposal_title) { translated(proposal.title) }
   let(:user) { create :user, :confirmed, organization: organization }
@@ -55,7 +55,7 @@ describe "Three flags", type: :system do
 
       click_link "Abstain"
       within ".vote_proposal_modal" do
-        expect(page).to have_content('My vote is "Abstain"')
+        expect(page).to have_content("My vote on \"#{strip_tags(proposal_title)}\" is \"Abstain\"")
         expect(page).to have_content("Please read the election rules carefully to understand how your vote will be used by #{organization.name}")
         click_button "Cancel"
       end
@@ -64,7 +64,7 @@ describe "Three flags", type: :system do
           click_link color
         end
         within ".vote_proposal_modal" do
-          expect(page).to have_content("My vote is \"#{color}\"")
+          expect(page).to have_content("My vote on \"#{strip_tags(proposal_title)}\" is \"#{color}\"")
           click_button "Cancel"
         end
       end
@@ -441,7 +441,10 @@ describe "Three flags", type: :system do
           create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 2),
           create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 3),
           create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 3),
-          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 3)
+          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 3),
+          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposals[1], author: user), weight: 2),
+          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposals[2], author: user), weight: 3),
+          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposals[3], author: user), weight: 0)
         ]
       end
 
@@ -452,6 +455,31 @@ describe "Three flags", type: :system do
           expect(page).to have_content("R: 1")
           expect(page).to have_content("A: 0")
           expect(page).to have_link("Voted")
+          expect(page).to have_css("a.button.weight_1")
+        end
+        within "#proposal_#{proposals[1].id}" do
+          expect(page).to have_content("G: 0")
+          expect(page).to have_content("Y: 1")
+          expect(page).to have_content("R: 0")
+          expect(page).to have_content("A: 0")
+          expect(page).to have_link("Voted")
+          expect(page).to have_css("a.button.weight_2")
+        end
+        within "#proposal_#{proposals[2].id}" do
+          expect(page).to have_content("G: 1")
+          expect(page).to have_content("Y: 0")
+          expect(page).to have_content("R: 0")
+          expect(page).to have_content("A: 0")
+          expect(page).to have_link("Voted")
+          expect(page).to have_css("a.button.weight_3")
+        end
+        within "#proposal_#{proposals[3].id}" do
+          expect(page).to have_content("G: 0")
+          expect(page).to have_content("Y: 0")
+          expect(page).to have_content("R: 0")
+          expect(page).to have_content("A: 1")
+          expect(page).to have_link("Voted")
+          expect(page).to have_css("a.button.weight_0")
         end
       end
 
@@ -511,8 +539,8 @@ describe "Three flags", type: :system do
       end
     end
 
-    context "when no manifest" do
-      let(:manifest) { nil }
+    context "when no voting_manifest" do
+      let(:voting_manifest) { nil }
 
       it "has normal support button" do
         within "#proposal_#{proposal.id}" do

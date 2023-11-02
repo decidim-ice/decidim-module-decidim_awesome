@@ -1,11 +1,11 @@
 $(() => {
-  if ($(".voting-three-flags").length === 0 || $("#threeFlagsModalHelp").length === 0 || $(".sign-out-link").length === 0) {
+  if ($(".voting-voting_cards").length === 0 || $("#VotingCardsModalHelp").length === 0 || $(".sign-out-link").length === 0) {
     return;
   }
 
-  const $modal = $("#threeFlagsModalHelp");
+  const $modal = $("#VotingCardsModalHelp");
   const $card = $modal.find(".current-choice .vote-card");
-  const $check = $("#three_flag-skip_help");
+  const $check = $("#voting_cards-skip_help");
 
   const storage = () => {
     return JSON.parse(localStorage.getItem("hideTreeFlagsModalHelp") || "{}")
@@ -40,7 +40,7 @@ $(() => {
     $modal.foundation("close");
   });
 
-  $(".button--vote-button .voting-three-flags").on("click", ".vote-action", (evt) => {
+  $(".button--vote-button .voting-voting_cards").on("click", ".vote-action", (evt) => {
     if (showModal()) {
       evt.stopPropagation();
       evt.preventDefault();
@@ -57,7 +57,7 @@ $(() => {
       }
       $modal.foundation("open");
     } else {
-      $(evt.currentTarget).closest(".voting-three-flags").addClass("loading");
+      $(evt.currentTarget).closest(".voting-voting_cards").addClass("loading");
     }
   });
 });

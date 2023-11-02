@@ -5,10 +5,10 @@ require "spec_helper"
 module Decidim
   module DecidimAwesome
     module Voting
-      describe ThreeFlagsProposalCell, type: :cell do
-        subject { cell("decidim/decidim_awesome/voting/three_flags_proposal", proposal, context: { current_user: user }) }
+      describe VotingCardsProposalCell, type: :cell do
+        subject { cell("decidim/decidim_awesome/voting/voting_cards_proposal", proposal, context: { current_user: user }) }
 
-        let(:manifest) { :three_flags }
+        let(:manifest) { :voting_cards }
         let!(:organization) { create :organization }
         let(:user) { create(:user, :confirmed, organization: organization) }
         let!(:component) { create :proposal_component, :with_votes_enabled, organization: organization, settings: { awesome_voting_manifest: manifest } }
@@ -49,10 +49,10 @@ module Decidim
 
         describe "#from_proposals_list" do
           it "returns the value passed in options" do
-            cell_with_option = cell("decidim/decidim_awesome/voting/three_flags_proposal", proposal, current_user: user, from_proposals_list: true)
+            cell_with_option = cell("decidim/decidim_awesome/voting/voting_cards_proposal", proposal, current_user: user, from_proposals_list: true)
             expect(cell_with_option.from_proposals_list).to be(true)
 
-            cell_without_option = cell("decidim/decidim_awesome/voting/three_flags_proposal", proposal, current_user: user)
+            cell_without_option = cell("decidim/decidim_awesome/voting/voting_cards_proposal", proposal, current_user: user)
             expect(cell_without_option.from_proposals_list).to be_nil
           end
         end

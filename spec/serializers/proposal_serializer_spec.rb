@@ -43,7 +43,7 @@ module Decidim::Proposals
         "weight_5" => 0
       }
     end
-    let(:manifest) { :three_flags }
+    let(:manifest) { :voting_cards }
 
     let!(:proposals_component) { create(:component, manifest_name: "proposals", participatory_space: participatory_process) }
 

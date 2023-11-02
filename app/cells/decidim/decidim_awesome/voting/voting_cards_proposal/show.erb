@@ -6,20 +6,20 @@
   <%= vote_block_for(proposal, 1) %>
 </div>
 
-<% if component_settings.three_flags_show_abstain? %>
+<% if component_settings.voting_cards_show_abstain? %>
   <%= action_authorized_link_to :vote,
-                                voted_for?(0) ? t("decidim.decidim_awesome.voting.three_flags.abstained") : proposal.manifest.label_for(0),
+                                voted_for?(0) ? t("decidim.decidim_awesome.voting.voting_cards.abstained") : proposal.manifest.label_for(0),
                                 proposal_vote_path(0),
                                 link_options(0).merge({
-                                  title: t("decidim.decidim_awesome.voting.three_flags.voting_for", type: proposal.manifest.label_for(0)),
-                                  class: "button secondary hollow expanded vote-action abstain-button small #{classes_for(0)}"
+                                  title: t("decidim.decidim_awesome.voting.voting_cards.voting_for", proposal: sanitized_title, type: proposal.manifest.label_for(0)),
+                                  class: "button expanded vote-action abstain-button small #{classes_for(0)}"
                                   }) %>
 <% end %>
 
 <% if voted_for_any? && !current_settings.votes_blocked? %>
   <p class="text-center">
     <%= action_authorized_link_to :unvote,
-                                  t("decidim.decidim_awesome.voting.three_flags.change_vote"),
+                                  t("decidim.decidim_awesome.voting.voting_cards.change_vote"),
                                   proposal_vote_path(current_vote&.weight),
                                   remote: true,
                                   method: :delete,

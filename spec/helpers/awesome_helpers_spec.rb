@@ -7,7 +7,7 @@ module Decidim::DecidimAwesome
     let!(:organization) { create :organization }
     let!(:another_organization) { create :organization }
     let(:component) { create :proposal_component, organization: organization, settings: { awesome_voting_manifest: manifest } }
-    let(:manifest) { :three_flags }
+    let(:manifest) { :voting_cards }
     let(:request) { double(env: env, url: "/") }
     let(:env) do
       {
