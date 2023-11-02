@@ -164,6 +164,8 @@ Results can be filtered by role and by time range and also exported as CSV or ot
 
 #### 16. Additional proposal sortings
 
+![Proposal sorting](examples/proposal_sorting.png)
+
 This feature allows you to add additional sorting options to the proposals component. By default 4 additional sortings are included:
 
 - `supported_first`: Sort proposals supported by me first.
