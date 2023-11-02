@@ -106,6 +106,10 @@ fr:
             show_not_answered: Afficher les propositions n'ayant pas reçu de réponses
             show_rejected: Afficher les propositions rejetées
             show_withdrawn: Afficher les propositions retirées
+      proposals:
+        settings:
+          global:
+            voting_cards_show_abstain: Ajouter l'option de s'abstenir
     decidim_awesome:
       admin:
         admin_accountability:
