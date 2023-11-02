@@ -401,6 +401,12 @@ fr:
             view_proposal: Voir la proposition
       validators:
         too_much_caps: Utilise trop de majuscule (plus de %{percent} du texte)
+      voting:
+        voting_cards:
+          modal:
+            cancel: Annuler
+          weights:
+            y: Y
   layouts:
     decidim:
       admin:
