@@ -225,3 +225,7 @@ hu:
       editor_images:
         create:
           error: Hiba történt a kép feltöltése közben!
+      voting:
+        voting_cards:
+          weights:
+            y: Y
