@@ -389,6 +389,12 @@ de:
             view_proposal: Vorschlag ansehen
       validators:
         too_much_caps: Es werden zu viele Großbuchstaben verwendet (über %{percent}% des Textes)
+      voting:
+        voting_cards:
+          modal:
+            cancel: Abbrechen
+          weights:
+            y: Y
   layouts:
     decidim:
       admin:
