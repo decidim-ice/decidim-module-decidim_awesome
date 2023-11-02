@@ -106,6 +106,31 @@ es:
             show_not_answered: Muestra las propuestas pendientes de contestart
             show_rejected: Muestra las propuestas rechazadas
             show_withdrawn: Muestra las propuestas retiradas
+      proposals:
+        settings:
+          global:
+            awesome_voting_manifest: Tipos de soporte
+            awesome_voting_manifest_help_html: <strong class="text-alert">Sé consciente de que cambiar esta configuración en medio de un período de votación puede producir resultados inexactos o inesperados.</strong><br>Tenga en cuenta que esta configuración solo se puede editar si el componente aún no tiene ningún soporte.
+            awesome_voting_manifest_options:
+              default: Voto simple (por defecto)
+              voting_cards: Votación con tarjetas de color
+            default_sort_order_options:
+              az: A-Z (Alfabético)
+              supported_first: Mis soportes primero
+              supported_last: Mis soportes últimos
+              za: Z-A (Alfabético inverso)
+            voting_cards_box_title: Título de la cabina de votación
+            voting_cards_box_title_help: Por defecto es "Votar en esta propuesta". Use "-" para ocultarla.
+            voting_cards_instructions: Instrucciones/ayuda de soporte (ventana modal descartable)
+            voting_cards_instructions_help: Por defecto es "Por favor lee las reglas de votación cuidadosamente para entender cómo se usará tu voto por %{organization}""
+            voting_cards_show_abstain: Añadir una opción de abstención
+            voting_cards_show_modal_help: Mostrar instrucciones/ayuda modal cuando se haga clic en el soporte
+          step:
+            default_sort_order_options:
+              az: A-Z (Alfabético)
+              supported_first: Mis soportes primero
+              supported_last: Mis soportes últimos
+              za: Z-A (Alfabético inverso)
     decidim_awesome:
       admin:
         admin_accountability:
@@ -403,10 +428,34 @@ es:
         too_much_caps: Contiene demasiadas letras mayúsculas (más del %{percent}% del texto)
       voting:
         voting_cards:
+          abstained: "✔️ Abstenido"
+          change_vote: Cambiar mi voto
+          default_box_title: Votar esta propuesta
+          default_instructions_html: <p>Por defecto es "Por favor lee las reglas de votación cuidadosamente para entender cómo se usará tu voto por %{organization}""</p>
           modal:
             cancel: Cancelar
+            message: Tu voto se considerará final el %{date}. Puedes cambiarlo hasta entonces
+            proceed: Proceder
+            skip: Marca aquí para omitir esta ventana en el futuro
+          vote_button: Clica para votar
+          voted: Votado
+          voting_for: Mi voto sobre "%{proposal}" es "%{type}"
           weights:
+            a: AB
+            g: A
+            r: R
+            weight_0: Abstenerse
+            weight_1: Rojo
+            weight_2: Amarillo
+            weight_3: Verde
             y: Y
+    proposals:
+      proposals:
+        orders:
+          az: A-Z (Alfabético)
+          supported_first: Mis soportes primero
+          supported_last: Mis soportes últimos
+          za: Z-A (Alfabético inverso)
   layouts:
     decidim:
       admin:
