@@ -154,6 +154,12 @@ sv:
           show:
             view_meeting: Visa möte
             view_proposal: Visa förslag
+      voting:
+        voting_cards:
+          modal:
+            cancel: Avbryt
+          weights:
+            y: Y
   layouts:
     decidim:
       admin:
