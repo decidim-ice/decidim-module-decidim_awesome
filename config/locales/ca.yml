@@ -1,3 +1,4 @@
+---
 ca:
   activemodel:
     attributes:
@@ -94,7 +95,7 @@ ca:
             map_zoom_help: Només s’aplica si es defineix el punt central del mapa
             menu_amendments: Mostrar esmenes
             menu_categories: Mostrar el menú de cerca per categories
-            menu_hashtags: Mostrar el menú de cerca per hashtag
+            menu_hashtags: Mostrar el menú de cerca per hashtags
             menu_meetings: Mostrar trobades
             menu_merge_components: Unifica tots els components del mateix tipus al menú
             truncate: Nombre màxim de caràcters per les descripcions emergents
