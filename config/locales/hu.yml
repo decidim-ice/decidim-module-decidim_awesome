@@ -1,3 +1,4 @@
+---
 hu:
   activemodel:
     attributes:
@@ -88,7 +89,6 @@ hu:
             map_zoom_help: Csak akkor érvényes, ha a térkép közepe meghatározott
             menu_amendments: Módosítások mutatása
             menu_categories: A Kategória kereső menü megjelenítése
-            menu_hashtags: Hashtag kereső menü megjelenítése
             menu_meetings: Találkozók mutatása
             menu_merge_components: Az összes, azonos típusú komponens egyesítése a menüben
             truncate: A felugró ablakban lévő leírások maximális karakterszáma
