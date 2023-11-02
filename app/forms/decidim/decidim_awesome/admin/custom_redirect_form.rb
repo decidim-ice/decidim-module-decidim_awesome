@@ -25,7 +25,7 @@ module Decidim
         end
 
         def sanitize_url(url, strip_host: true)
-          url = url.strip.downcase
+          url = url.strip
           parsed = Addressable::URI.parse(url)
           url = parsed.path if strip_host && parsed.host == current_organization.host
           url = "/#{url}" unless url.match?(%r{^https?://|^/})

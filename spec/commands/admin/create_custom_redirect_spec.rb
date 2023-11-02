@@ -49,7 +49,7 @@ module Decidim::DecidimAwesome
             expect { subject.call }.to broadcast(:ok)
 
             items = AwesomeConfig.find_by(organization: organization, var: :custom_redirects).value
-            expect(items.first[0]).to eq("/some-path")
+            expect(items.first[0]).to eq("/Some-path")
           end
         end
 
@@ -60,7 +60,7 @@ module Decidim::DecidimAwesome
             expect { subject.call }.to broadcast(:ok)
 
             items = AwesomeConfig.find_by(organization: organization, var: :custom_redirects).value
-            expect(items.first[1]["destination"]).to eq("/some-path")
+            expect(items.first[1]["destination"]).to eq("/sOme-path")
           end
         end
 
