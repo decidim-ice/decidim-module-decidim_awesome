@@ -136,6 +136,12 @@ ro:
       editor_images:
         create:
           error: Eroare la încărcarea imaginii!
+      voting:
+        voting_cards:
+          modal:
+            cancel: Anulare
+          weights:
+            y: Y
   layouts:
     decidim:
       decidim_awesome:
