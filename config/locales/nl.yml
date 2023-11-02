@@ -1,3 +1,4 @@
+---
 nl:
   activemodel:
     attributes:
@@ -58,7 +59,6 @@ nl:
             map_zoom: Zoom (elk willekeurig getal tussen 0 en 18)
             map_zoom_help: Alleen van toepassing als een centrum van de kaart is gedefinieerd
             menu_amendments: Toon amendementen
-            menu_hashtags: Toon Hasthag zoekmenu
             menu_meetings: Toon vergaderingen
             truncate: Maximaal aantal tekens voor popup beschrijvingen
           step:
