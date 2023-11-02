@@ -401,6 +401,12 @@ es:
             view_proposal: Ver propuesta
       validators:
         too_much_caps: Contiene demasiadas letras mayúsculas (más del %{percent}% del texto)
+      voting:
+        voting_cards:
+          modal:
+            cancel: Cancelar
+          weights:
+            y: Y
   layouts:
     decidim:
       admin:
