@@ -222,6 +222,12 @@ nl:
           show:
             view_meeting: Vergadering bekijken
             view_proposal: Bekijk voorstel
+      voting:
+        voting_cards:
+          modal:
+            cancel: Annuleren
+          weights:
+            y: Y
   layouts:
     decidim:
       admin:
