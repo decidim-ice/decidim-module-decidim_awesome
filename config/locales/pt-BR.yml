@@ -327,6 +327,12 @@ pt-BR:
           show:
             view_meeting: Ver reunião
             view_proposal: Ver proposta
+      voting:
+        voting_cards:
+          modal:
+            cancel: Cancelar
+          weights:
+            y: Y
   layouts:
     decidim:
       admin:
