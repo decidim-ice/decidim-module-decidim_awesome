@@ -400,6 +400,12 @@ ja:
             view_proposal: 提案を表示
       validators:
         too_much_caps: 大文字が多すぎます（テキストの %{percent}%以上）
+      voting:
+        voting_cards:
+          modal:
+            cancel: キャンセル
+          weights:
+            y: Y
   layouts:
     decidim:
       admin:
