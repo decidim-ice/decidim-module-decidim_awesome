@@ -401,6 +401,12 @@ cs:
             view_proposal: Zobrazit návrh
       validators:
         too_much_caps: Používá příliš mnoho velkých písmen (více než %{percent}% textu)
+      voting:
+        voting_cards:
+          modal:
+            cancel: Zrušit
+          weights:
+            y: Y
   layouts:
     decidim:
       admin:
