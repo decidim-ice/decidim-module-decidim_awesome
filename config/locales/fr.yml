@@ -109,7 +109,28 @@ fr:
       proposals:
         settings:
           global:
+            awesome_voting_manifest: Types de support
+            awesome_voting_manifest_help_html: <strong class="text-alert">Sachez que la modification de ce paramètre au milieu d'une période de vote peut entraîner des résultats inexacts ou inattendus.</strong><br>Notez également que ce paramètre ne peut être modifié que si le composant n'a pas encore de support.
+            awesome_voting_manifest_options:
+              default: Supports simples (par défaut)
+              voting_cards: Voter avec des cartes de couleur
+            default_sort_order_options:
+              az: A-Z (alphabétique)
+              supported_first: Déjà supporté en priorité
+              supported_last: A supporter en priorité
+              za: Z-A (alphabétique inverse)
+            voting_cards_box_title: Titre pour le boîtier de vote
+            voting_cards_box_title_help: La valeur par défaut est "Vote sur cette proposition". Utilisez "-" pour la masquer.
+            voting_cards_instructions: Instructions de soutien/aide pour le vote (fenêtre modale révocable)
+            voting_cards_instructions_help: La valeur par défaut est "Veuillez lire attentivement les règles électorales pour comprendre comment votre vote sera utilisé par %{organization}"
             voting_cards_show_abstain: Ajouter l'option de s'abstenir
+            voting_cards_show_modal_help: Afficher une fenêtre modale d'instructions/d'aide lorsque l'on clique sur le support
+          step:
+            default_sort_order_options:
+              az: A-Z (alphabétique)
+              supported_first: Déjà supporté en priorité
+              supported_last: A supporter en priorité
+              za: Z-A (alphabétique inverse)
     decidim_awesome:
       admin:
         admin_accountability:
@@ -407,10 +428,34 @@ fr:
         too_much_caps: Utilise trop de majuscule (plus de %{percent} du texte)
       voting:
         voting_cards:
+          abstained: "✔ Abstenu.e"
+          change_vote: Modifier mon vote
+          default_box_title: Votez sur la proposition
+          default_instructions_html: <p>Veuillez lire attentivement les règles électorales pour comprendre comment votre vote sera utilisé par %{organization}"</p>
           modal:
             cancel: Annuler
+            message: Votre vote sera considéré comme définitif le %{date}. Vous pouvez le modifier jusque-là
+            proceed: Procéder
+            skip: Cochez cette case pour ignorer cette fenêtre à l'avenir
+          vote_button: Cliquez pour voter
+          voted: Voté.e
+          voting_for: Mon vote sur "%{proposal}" est "%{type}"
           weights:
+            a: A
+            g: V
+            r: R
+            weight_0: Abstention
+            weight_1: Rouge
+            weight_2: Jaune
+            weight_3: Verte
             y: Y
+    proposals:
+      proposals:
+        orders:
+          az: A-Z (alphabétique)
+          supported_first: Déjà supporté en priorité
+          supported_last: A supporter en priorité
+          za: Z-A (alphabétique inverse)
   layouts:
     decidim:
       admin:
