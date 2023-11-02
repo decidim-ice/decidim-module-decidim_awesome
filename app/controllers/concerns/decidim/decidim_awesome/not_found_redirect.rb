@@ -43,8 +43,8 @@ module Decidim
           return unless redirects.is_a? Hash
 
           path, query = fullpath.split("?")
-          destination = redirects.dig(path.downcase, "destination")
-          pass_query = redirects.dig(path.downcase, "pass_query")
+          destination = redirects.dig(path, "destination")
+          pass_query = redirects.dig(path, "pass_query")
           if pass_query.present?
             union = destination.include?("?") ? "&" : "?"
             destination = "#{destination}#{union}#{query}"
