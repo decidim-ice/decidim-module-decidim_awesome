@@ -401,6 +401,12 @@ ca:
             view_proposal: Veure proposta
       validators:
         too_much_caps: Fa servir massa lletres majúscules (més %{percent}% del text)
+      voting:
+        voting_cards:
+          modal:
+            cancel: Cancel·la
+          weights:
+            y: Y
   layouts:
     decidim:
       admin:
