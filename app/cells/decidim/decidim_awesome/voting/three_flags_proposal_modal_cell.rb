@@ -10,24 +10,9 @@ module Decidim
           render :show
         end
 
-        def modal_id
-          options[:modal_id] || "voteProposalModal"
-        end
-
-        def from_proposals_list
-          options[:from_proposals_list]
-        end
-
         def vote_instructions
-          translated_attribute(current_component.settings.proposal_vote_instructions)
-        end
-
-        def proposal_vote_path(weight)
-          proposal_proposal_vote_path(proposal_id: proposal.id, from_proposals_list: from_proposals_list, weight: weight)
-        end
-
-        def weight
-          options[:weight].to_i
+          translated_attribute(current_component.settings.three_flags_instructions).presence || t("decidim.decidim_awesome.voting.three_flags.default_instructions_html",
+                                                                                                  organization: current_organization.name)
         end
       end
     end

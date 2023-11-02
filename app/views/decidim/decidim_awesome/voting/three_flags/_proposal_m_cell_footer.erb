@@ -2,10 +2,7 @@
   <div class="card__footer">
     <div class="card__support" style="display: block">
       <% if has_actions? %>
-        <% if !current_settings.votes_hidden? %>
-          <span id="proposal-<%= model.id %>-votes-count"><%= model.proposal_votes_count || 0 %></span>
-          <div class="flex--sbc" id="proposal-<%= model.id %>-votes-count"><%= cell("decidim/decidim_awesome/voting/three_flags_counter", model) %></div>
-        <% end %>
+        <div class="flex--sbc voting-three-flags-card" id="proposal-<%= model.id %>-votes-count"><%= cell("decidim/decidim_awesome/voting/three_flags_counter", model) %></div>
       <% elsif has_footer? %>
         <div class="card__support__data"></div>
         <%= link_to resource_path, class: "card__button button--sc light button small" do %>

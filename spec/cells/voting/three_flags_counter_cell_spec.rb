@@ -22,24 +22,6 @@ module Decidim
           ]
         end
 
-        describe "#green_votes" do
-          it "returns the correct span for green votes" do
-            expect(subject.green_votes).to include("G:1")
-          end
-        end
-
-        describe "#yellow_votes" do
-          it "returns the correct span for yellow votes" do
-            expect(subject.yellow_votes).to include("Y:2")
-          end
-        end
-
-        describe "#red_votes" do
-          it "returns the correct span for red votes" do
-            expect(subject.red_votes).to include("R:3")
-          end
-        end
-
         describe "#user_voted_weight" do
           context "when user has voted" do
             before do

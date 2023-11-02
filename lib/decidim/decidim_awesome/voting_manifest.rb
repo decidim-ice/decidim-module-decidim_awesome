@@ -51,7 +51,7 @@ module Decidim
       # returns the label used in export or other places for a given weight
       # defaults to a I18n key scoped under decidim_awesome
       def label_for(weight, context = {})
-        return I18n.t("decidim.decidim_awesome.votings.manifests.#{name}.weight_#{weight}", default: "weight_#{weight}") unless @on_label_generation
+        return I18n.t("decidim.decidim_awesome.voting.#{name}.weights.weight_#{weight}", default: "weight_#{weight}") unless @on_label_generation
 
         @on_label_generation.call(weight, **context)
       end

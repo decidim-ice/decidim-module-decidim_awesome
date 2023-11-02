@@ -4,6 +4,57 @@
   $yellow-color: #ffc107;
   $red-color: #f44336;
 
+  &-card {
+    a {
+      margin-bottom: 0;
+
+      > svg {
+        margin-bottom: 2px;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #d9d9d9;
+
+  &.current-choice {
+    text-align: center;
+    margin-bottom: 0;
+    border-bottom: none;
+
+    .vote-card {
+      margin-top: .5rem;
+
+      .vote-label {
+        margin-bottom: 1rem;
+        color: $black;
+      }
+    }
+
+    .change-vote-button:hover {
+      font-size: 1rem;
+      margin-top: 0;
+    }
+  }
+
+  &.loading {
+    opacity: .3;
+    pointer-events: none;
+    position: relative;
+
+    &::before {
+      @include spinner(25px, $medium-gray, var(--primary), 800ms);
+
+      z-index: 1000;
+      content: "";
+      vertical-align: middle;
+      position: absolute;
+      top: calc(50% - 12.5px);
+      left: calc(50% - 12.5px);
+    }
+  }
+
   .vote-title {
     text-align: center;
     font-size: 1.5rem;
@@ -18,30 +69,57 @@
     display: none;
   }
 
-  .rectangle {
-    width: $rectangle-width;
-    height: calc($rectangle-width * 2);
+  .vote-card {
     display: inline-block;
-    margin: 5px;
-    border-radius: 5px;
-    position: relative;
 
-    &.green {
-      background-color: $green-color;
+    .vote-label {
+      font-size: 1rem;
+      margin-bottom: 0;
     }
 
-    &.yellow {
-      background-color: $yellow-color;
+    > svg {
+      display: inline-block;
+      width: $rectangle-width;
+      height: calc($rectangle-width * 2);
+      vertical-align: middle;
+      margin: -.5rem 0 0 .5rem;
+      max-width: 100%;
+      transition: transform 150ms ease-in-out;
+
+      &:hover {
+        transform: scale(1.15) rotate(-5deg);
+      }
     }
 
-    &.red {
-      background-color: $red-color;
-    }
-  }
+    &.weight_3 {
+      color: $green-color;
 
-  .voting-block {
-    text-align: center;
-    line-height: 40px;
+      & > svg {
+        fill: $green-color;
+      }
+    }
+
+    &.weight_2 {
+      color: $yellow-color;
+
+      & > svg {
+        fill: $yellow-color;
+      }
+    }
+
+    &.weight_1 {
+      color: $red-color;
+
+      & > svg {
+        fill: $red-color;
+      }
+    }
+
+    &.voted {
+      & > svg {
+        transform: scale(1.15) rotate(-5deg);
+      }
+    }
   }
 
   .voting-button {
@@ -51,63 +129,41 @@
     font-weight: bold;
   }
 
-  .fully-opaque {
-    opacity: 1;
-  }
-
-  .semi-opaque {
+  .dim {
     opacity: .3;
     pointer-events: none;
   }
 
-  .non-clickable {
+  .disabled {
     pointer-events: none;
   }
 
-  .vote-block,
-  .vote-link {
+  .vote-block {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
+    text-align: center;
 
     .vote-count {
       font-size: 2rem;
-      font-weight: bold;
+      font-weight: bolder;
       margin-bottom: 0;
     }
+  }
 
-    .vote-label {
-      font-size: 1rem;
-      margin-bottom: 0;
+  .change-vote-button {
+    transition: all 150ms ease-in-out;
 
-      &.green {
-        color: $green-color;
-      }
-
-      &.yellow {
-        color: $yellow-color;
-      }
-
-      &.red {
-        color: $red-color;
-      }
-    }
-
-    .icon--thumb-up {
-      position: absolute;
-      bottom: 0;
-      left: 10%;
-      height: 20px;
-      width: 20px;
+    &:hover {
+      text-decoration: none;
+      font-size: .9rem;
+      margin-top: .1rem;
     }
   }
 
   .button.abstain-button {
-    background-color: transparent;
-    color: black;
-    box-shadow: 0 2px 6px 4px rgba(0, 0, 0, .1);
-    margin-top: 1rem;
+    text-transform: uppercase;
   }
 }

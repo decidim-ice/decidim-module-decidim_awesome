@@ -3,7 +3,7 @@
 <% if view = awesome_voting_manifest_for(current_component)&.show_votes_count_view %>
   <% if view.present? %>
     <%= render view, local_assigns %>
-  <% else %>
+  <% elsif !current_settings.votes_hidden? %>
     <%# Hidden placeholder for votes count to avoid update_button_adn_counter.js.erb cause a javascript console error %>
     <span style="display: none" id="proposal-<%= proposal.id %>-votes-count"><%= proposal.proposal_votes_count || 0 %></span>
   <% end %>

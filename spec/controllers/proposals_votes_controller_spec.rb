@@ -72,8 +72,14 @@ module Decidim::Proposals
     describe "POST create" do
       context "with votes enabled" do
         let(:component) do
-          create(:proposal_component, :with_votes_enabled)
+          create(:proposal_component, :with_votes_enabled, settings: settings)
         end
+        let(:settings) do
+          {
+            three_flags_show_abstain: abstain
+          }
+        end
+        let(:abstain) { true }
 
         it_behaves_like "can vote"
 
@@ -98,6 +104,18 @@ module Decidim::Proposals
               let(:weight) { 4 }
 
               it_behaves_like "invalid weight"
+            end
+
+            context "and weight is abstain" do
+              let(:weight) { 0 }
+
+              it_behaves_like "can vote"
+
+              context "and abstain is disabled" do
+                let(:abstain) { false }
+
+                it_behaves_like "invalid weight"
+              end
             end
           end
         end

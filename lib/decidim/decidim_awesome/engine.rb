@@ -61,6 +61,7 @@ module Decidim
           Decidim::Proposals::Proposal.include(Decidim::DecidimAwesome::HasWeightCache)
           Decidim::Proposals::ProposalSerializer.include(Decidim::DecidimAwesome::ProposalSerializerOverride)
           Decidim::Proposals::ProposalType.include(Decidim::DecidimAwesome::ProposalTypeOverride)
+          Decidim::Proposals::ProposalMCell.include(Decidim::DecidimAwesome::ProposalMCellOverride)
         end
 
         Decidim::MenuPresenter.include(Decidim::DecidimAwesome::MenuPresenterOverride)
@@ -88,13 +89,29 @@ module Decidim
 
           if DecidimAwesome.enabled?(:weighted_proposal_voting)
             Decidim::Proposals::ProposalVotesController.include(Decidim::DecidimAwesome::Proposals::ProposalVotesControllerOverride)
-            Decidim::Proposals::ProposalsController.include(Decidim::DecidimAwesome::Proposals::OrderableOverride)
           end
+
+          Decidim::Proposals::ProposalsController.include(Decidim::DecidimAwesome::Proposals::OrderableOverride) if DecidimAwesome.enabled?(:additional_proposal_sortings)
         end
       end
 
       initializer "decidim_decidim_awesome.middleware" do |app|
         app.config.middleware.insert_after Decidim::Middleware::CurrentOrganization, Decidim::DecidimAwesome::CurrentConfig
+      end
+
+      initializer "decidim_decidim_awesome.additional_proposal_sortings" do |_app|
+        if DecidimAwesome.enabled?(:additional_proposal_sortings) && DecidimAwesome.additional_proposal_sortings.is_a?(Array)
+          possible_orders = %w(default random recent most_endorsed most_voted most_commented most_followed
+                               with_more_authors) + DecidimAwesome.additional_proposal_sortings.map(&:to_s)
+          Decidim.component_registry.find(:proposals).tap do |component|
+            component.settings(:global) do |settings|
+              settings.attribute :default_sort_order, type: :select, default: "default", choices: -> { possible_orders }
+            end
+            component.settings(:step) do |settings|
+              settings.attribute :default_sort_order, type: :select, include_blank: true, choices: -> { possible_orders }
+            end
+          end
+        end
       end
 
       initializer "decidim_decidim_awesome.weighted_proposal_voting" do |_app|
@@ -105,8 +122,10 @@ module Decidim
             voting.show_votes_count_view = "decidim/decidim_awesome/voting/three_flags/show_votes_count"
             voting.show_votes_count_view = "" # hide votes count if needed
             voting.proposal_m_cell_footer = "decidim/decidim_awesome/voting/three_flags/proposal_m_cell_footer"
-            voting.weight_validator do |weight, _context|
-              weight.in? [0, 1, 2, 3]
+            voting.weight_validator do |weight, context|
+              allowed = [1, 2, 3]
+              allowed << 0 if context[:proposal]&.component&.settings&.three_flags_show_abstain
+              weight.in? allowed
             end
           end
 
@@ -119,10 +138,16 @@ module Decidim
                                  readonly: lambda { |context|
                                    Decidim::Proposals::Proposal.where(component: context[:component]).where.not(proposal_votes_count: 0).any?
                                  }
-              settings.attribute :proposal_vote_abstain,
+              settings.attribute :three_flags_box_title,
+                                 type: :string,
+                                 translated: true
+              settings.attribute :three_flags_show_modal_help,
+                                 type: :boolean,
+                                 default: true
+              settings.attribute :three_flags_show_abstain,
                                  type: :boolean,
                                  default: false
-              settings.attribute :proposal_vote_instructions,
+              settings.attribute :three_flags_instructions,
                                  type: :text,
                                  translated: true,
                                  editor: true

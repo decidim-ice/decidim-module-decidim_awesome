@@ -162,7 +162,33 @@ Results can be filtered by role and by time range and also exported as CSV or ot
 
 ![Admin accountability](examples/admin_accountability.png)
 
-#### 16. Weighted voting
+#### 16. Additional proposal sortings
+
+This feature allows you to add additional sorting options to the proposals component. By default 4 additional sortings are included:
+
+- `supported_first`: Sort proposals supported by me first.
+- `supported_last`: Sort proposals supported by me last.
+- `az`: Sort proposals alphabetically.
+- `za`: Sort proposals alphabetically (reverse).
+
+By enabling this feature the user choosed sorting method will be stored in the browser's session. This means that if the user changes the sorting method and then navigates to another page, the same sorting will be applied.
+
+You can disable or configure this feature setting the variable `additional_proposal_sortings` configuration in an initializer:
+
+```ruby
+# config/initializers/awesome_defaults.rb
+Decidim::DecidimAwesome.configure do |config|
+  config.additional_proposal_sortings = :disabled
+end
+
+# Or, to disable alphabetical sorting:
+
+Decidim::DecidimAwesome.configure do |config|
+  config.additional_proposal_sortings = [:supported_first, :supported_last]
+end
+```
+
+#### 17. Weighted voting
 
 This feature allows you to configure a proposals component to use a weighted voting system. This means that each vote can have a different weight and the result of the vote is calculated as the sum of all the weights.
 
@@ -198,7 +224,7 @@ if Decidim::DecidimAwesome.enabled?(:weighted_proposal_voting)
 
     # optionally, define a label generator block
     # by default labels are extracted from a I18n key following this rule
-    # "decidim.decidim_awesome.votings.manifests.{MANIFEST_NAME}.weight_{WEIGHT}"
+    # "decidim.decidim_awesome.voting.{MANIFEST_NAME}.weights.weight_{WEIGHT}"
     #
     # voting.label_generator do |weight, context|
     #   "Weight #{weight.round}"

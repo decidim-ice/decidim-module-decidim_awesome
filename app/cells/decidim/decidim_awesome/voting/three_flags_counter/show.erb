@@ -1,8 +1,15 @@
-<span class="votes_counter">
-  <span id="green-votes-<%= model.id %>" data-weight="3" class="text-success">G: <%= model.weight_count(3) %></span> |
-  <span id="yellow-votes-<%= model.id %>" data-weight="2" class="text-warning">Y: <%= model.weight_count(2) %></span> |
-  <span id="red-votes-<%= model.id %>" data-weight="1" class="text-alert">R: <%= model.weight_count(1) %></span>
-</span>
-<div id="proposal-<%= model.id %>-vote-button">
-  <%= render "vote_button" %>
-</div>
+<% unless proposal.rejected? || proposal.withdrawn? %>
+  <% unless current_settings.votes_hidden? %>
+    <span class="votes_counter">
+      <span data-weight="3" title="<%= proposal.manifest.label_for(3) %>" class="text-success"><%= t("decidim.decidim_awesome.voting.three_flags.weights.g") %>: <%= model.weight_count(3) %></span> |
+      <span data-weight="2" title="<%= proposal.manifest.label_for(2) %>" class="text-warning"><%= t("decidim.decidim_awesome.voting.three_flags.weights.y") %>: <%= model.weight_count(2) %></span> |
+      <span data-weight="1" title="<%= proposal.manifest.label_for(1) %>" class="text-alert"><%= t("decidim.decidim_awesome.voting.three_flags.weights.r") %>: <%= model.weight_count(1) %></span>
+      <% if current_component.settings.three_flags_show_abstain %>
+      | <span title="<%= proposal.manifest.label_for(0) %>" data-weight="0"><%= t("decidim.decidim_awesome.voting.three_flags.weights.a") %>: <%= model.weight_count(0) %></span>
+      <% end %>
+    </span>
+  <% end %>
+  <div id="proposal-<%= model.id %>-vote-button">
+    <%= render "vote_button" %>
+  </div>
+<% end %>

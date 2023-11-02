@@ -56,29 +56,6 @@ module Decidim
             expect(cell_without_option.from_proposals_list).to be_nil
           end
         end
-
-        describe "#opacity_class_for" do
-          context "when user has voted" do
-            before do
-              create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal, author: user), weight: 1)
-            end
-
-            it "returns 'fully-opaque non-clickable' for the weight the user has voted for" do
-              expect(subject.opacity_class_for(1)).to eq("fully-opaque non-clickable")
-            end
-
-            it "returns 'semi-opaque non-clickable' for the weights the user has not voted for" do
-              expect(subject.opacity_class_for(2)).to eq("semi-opaque non-clickable")
-              expect(subject.opacity_class_for(3)).to eq("semi-opaque non-clickable")
-            end
-          end
-
-          context "when user has not voted" do
-            it "returns 'fully-opaque'" do
-              expect(subject.opacity_class_for(1)).to eq("fully-opaque")
-            end
-          end
-        end
       end
     end
   end

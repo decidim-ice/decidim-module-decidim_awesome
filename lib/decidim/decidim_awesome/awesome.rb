@@ -110,6 +110,17 @@ module Decidim
       true
     end
 
+    # Additional sorting methods for proposals
+    # this setting also stores the selected sorting method in the user's session
+    config_accessor :additional_proposal_sortings do
+      [
+        :supported_first,
+        :supported_last,
+        :az,
+        :za
+      ]
+    end
+
     # allows admins to created specific CSS snippets affecting only some specific parts
     # Valid values differ a little from the previous convention:
     #   :disabled => false and non available, hidden from admins

@@ -55,5 +55,9 @@ decidim-proposals:
     decidim-0.27: f7202c37fe042cd816a6f9fd0f9e6807
   /app/views/decidim/proposals/proposals/_votes_count.html.erb:
     decidim-0.27: 33339aae5004361e24c4c5b009cc2888
+  /app/cells/decidim/proposals/proposal_m_cell.rb:
+    decidim-0.26: 21cc09a45efa20dbcda5c943d820c867
+    decidim-0.27: 9df97ded3e6594b65b85fcbf1e5b0644
+    decidim-0.27.4: ce3b30cdddfee547b8fb089c0fddd8a4
   /app/cells/decidim/proposals/proposal_m/footer.erb:
-    decidim-0.27: 7ade5bbd8412f44f1c4ed913ae1834c6
+    decidim-0.26: 7ade5bbd8412f44f1c4ed913ae1834c6

@@ -128,10 +128,28 @@ en:
               setting can only be edited if the component has no supports yet.
             awesome_voting_manifest_options:
               default: Simple vote (default)
-              three_flags: Traffic lights using flags
-            proposal_vote_abstain: Add an abstain option
-            proposal_vote_instructions: Support instructions/help (dissmissable modal
+              three_flags: Voting using coloured cards
+            default_sort_order_options:
+              az: A-Z (Alphabetical)
+              supported_first: Supported first
+              supported_last: Supported last
+              za: Z-A (Reverse alphabetical)
+            three_flags_box_title: Title for the voting box
+            three_flags_box_title_help: Default is "Vote on this proposal". Use "-"
+              to hide it.
+            three_flags_instructions: Support instructions/help (dissmissable modal
               window)
+            three_flags_instructions_help: Default is "Please read the election rules
+              carefully to understand how your vote will be used by %{organization}""
+            three_flags_show_abstain: Add an abstention option
+            three_flags_show_modal_help: Show instructions/help modal when support
+              is clicked
+          step:
+            default_sort_order_options:
+              az: A-Z (Alphabetical)
+              supported_first: Supported first
+              supported_last: Supported last
+              za: Z-A (Reverse alphabetical)
     decidim_awesome:
       admin:
         admin_accountability:
@@ -491,30 +509,41 @@ en:
           show:
             view_meeting: View meeting
             view_proposal: View proposal
-      proposal_m:
-        abstain: Abstain
-        change_vote: Change my vote
-        modal:
-          message: Your vote will be considered final on %{date}. You can change it
-            until then
-          title: Categorization Poll
-        vote_button: Click to vote
-        voted: Voted
       validators:
         too_much_caps: Is using too many capital letters (over %{percent}% of the
           text)
-      votings:
-        manifests:
-          three_flags:
+      voting:
+        three_flags:
+          abstained: "✔ Abstained"
+          change_vote: Change my vote
+          default_box_title: Vote on this proposal
+          default_instructions_html: <p>Please read the election rules carefully to
+            understand how your vote will be used by %{organization}"</p>
+          modal:
+            cancel: Cancel
+            message: Your vote will be considered final on %{date}. You can change
+              it until then
+            proceed: Proceed
+            skip: Check here to skip this window in the future
+          vote_button: Click to vote
+          voted: Voted
+          voting_for: My vote is "%{type}"
+          weights:
+            a: A
+            g: G
+            r: R
             weight_0: Abstain
             weight_1: Red
             weight_2: Yellow
             weight_3: Green
+            y: Y
     proposals:
       proposals:
         orders:
+          az: A-Z (Alphabetical)
           supported_first: Supported first
           supported_last: Supported last
+          za: Z-A (Reverse alphabetical)
   layouts:
     decidim:
       admin:

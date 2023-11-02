@@ -1,14 +1,16 @@
 <div id="vote-container" data-proposal-id="<%= proposal.id %>">
-  <div class="vote-block modal" data-modal-id="voteProposalModal<%= proposal.id %>" id="vote-proposal-<%= proposal.id %>-<%= weight %>">
-    <p class="vote-count" data-id="<%= proposal.id %>" data-weight="<%= weight %>"><%= proposal_votes(weight) %></p>
-    <p class="vote-label <%= color %>"><%= color.capitalize %></p>
+  <div class="vote-block">
+    <% unless current_settings.votes_hidden? %>
+      <p class="vote-count" data-weight="<%= weight %>"><%= proposal_votes(weight) %></p>
+    <% end %>
     <%= action_authorized_link_to :vote,
                                   proposal_vote_path(weight),
-                                  resource: proposal,
-                                  remote: true,
-                                  method: :post,
-                                  class: "rectangle voting-block #{color} #{opacity_class_for(weight)} #{'voted' if voted_for?(weight)}" do %>
-      <%= icon "thumb-up" %>
+                                  **link_options(weight) do %>
+      <span class="vote-label"><%= proposal.manifest.label_for(weight) %></span>
+      <%= content_tag :svg, role: "img" do
+        content_tag(:title, t("decidim.decidim_awesome.voting.three_flags.voting_for", type: proposal.manifest.label_for(weight))) +
+        content_tag(:use, "", "href" => svg_path(weight))
+      end %>
     <% end %>
   </div>
 </div>

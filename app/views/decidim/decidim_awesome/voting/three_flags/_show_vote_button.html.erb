@@ -1,3 +1,6 @@
 <div class="voting-three-flags">
   <%= cell("decidim/decidim_awesome/voting/three_flags_proposal", proposal, from_proposals_list: true) %>
+  <% if current_component.settings.three_flags_show_modal_help %>
+    <%= cell("decidim/decidim_awesome/voting/three_flags_proposal_modal", proposal) %>
+  <% end %>
 </div>

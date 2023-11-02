@@ -7,13 +7,21 @@ module Decidim
         extend ActiveSupport::Concern
 
         included do
+          before_action only: [:index] do
+            session[:order] = params[:order] if params[:order].present?
+          end
+
           private
+
+          # read order from session if available
+          def order
+            @order ||= detect_order(session[:order]) || default_order
+          end
 
           def possible_orders
             @possible_orders ||= begin
               possible_orders = %w(random recent)
-              possible_orders << "supported_first" if supported_order_available?
-              possible_orders << "supported_last" if supported_order_available?
+              possible_orders += awesome_additional_sortings
               possible_orders << "most_voted" if most_voted_order_available?
               possible_orders << "most_endorsed" if current_settings.endorsements_enabled?
               possible_orders << "most_commented" if component_settings.comments_enabled?
@@ -25,6 +33,10 @@ module Decidim
           # rubocop:disable Metrics/CyclomaticComplexity
           def reorder(proposals)
             case order
+            when "az"
+              proposals.order(Arel.sql("decidim_proposals_proposals.title->>'#{I18n.locale}' ASC"))
+            when "za"
+              proposals.order(Arel.sql("decidim_proposals_proposals.title->>'#{I18n.locale}' DESC"))
             when "supported_first"
               proposals.joins(my_votes_join).group(:id).order(Arel.sql("COUNT(decidim_proposals_proposal_votes.id) DESC"))
             when "supported_last"
@@ -61,6 +73,17 @@ module Decidim
 
           def supported_order_available?
             most_voted_order_available? && current_user
+          end
+
+          def awesome_additional_sortings
+            return [] unless DecidimAwesome.additional_proposal_sortings.is_a?(Array)
+
+            DecidimAwesome.additional_proposal_sortings.filter_map do |sort|
+              next unless sort.to_sym.in?([:az, :za, :supported_first, :supported_last])
+              next if sort.to_sym.in?([:supported_first, :supported_last]) && !supported_order_available?
+
+              sort.to_s
+            end
           end
         end
       end

@@ -15,22 +15,6 @@ module Decidim
           resource_locator(model).path
         end
 
-        def vote_span(weight, color)
-          content_tag :span, "#{color[0].upcase}:#{model.weight_count(weight)}", class: "text-#{color}"
-        end
-
-        def green_votes
-          vote_span(3, "green")
-        end
-
-        def yellow_votes
-          vote_span(2, "yellow")
-        end
-
-        def red_votes
-          vote_span(1, "red")
-        end
-
         def user_voted_weight
           current_vote&.weight
         end
