@@ -327,6 +327,12 @@ it:
           show:
             view_meeting: Visualizza meeting
             view_proposal: Visualizza proposta
+      voting:
+        voting_cards:
+          modal:
+            cancel: Annulla
+          weights:
+            y: Y
   layouts:
     decidim:
       admin:
