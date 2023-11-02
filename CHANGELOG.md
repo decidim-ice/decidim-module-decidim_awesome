@@ -1,6 +1,18 @@
 CHANGELOG
 =========
 
+v0.10.0
+------
+
+Compatibility:
+  - Decidim v0.27.4
+  - Decidim v0.26.8
+
+Features:
+  - Migrate to [Deface](https://github.com/spree/deface) for overrides
+  - Introduce Weighted Voting with configurable manifests for different types of votings with grades
+  - Fix wrong behaviour showing proposals on map
+
 v0.9.3
 ------
 

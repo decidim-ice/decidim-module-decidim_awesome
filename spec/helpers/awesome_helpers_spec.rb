@@ -6,6 +6,8 @@ module Decidim::DecidimAwesome
   describe AwesomeHelpers, type: :helper do
     let!(:organization) { create :organization }
     let!(:another_organization) { create :organization }
+    let(:component) { create :proposal_component, organization: organization, settings: { awesome_voting_manifest: manifest } }
+    let(:manifest) { :voting_cards }
     let(:request) { double(env: env, url: "/") }
     let(:env) do
       {
@@ -37,6 +39,19 @@ module Decidim::DecidimAwesome
         expect(helper.awesome_config_instance).to be_a(Config)
         expect(helper.awesome_config_instance.organization).not_to eq(organization)
         expect(helper.awesome_config_instance.organization).to eq(another_organization)
+      end
+    end
+
+    it "returns a voting manifest" do
+      expect(helper.awesome_voting_manifest_for(component)).to be_a(VotingManifest)
+      expect(helper.awesome_voting_manifest_for(component).name).to eq(manifest)
+    end
+
+    context "when no manifest" do
+      let(:manifest) { nil }
+
+      it "returns nil" do
+        expect(helper.awesome_voting_manifest_for(component)).to be_nil
       end
     end
   end

@@ -7,12 +7,12 @@ on:
   pull_request:
 
 env:
-  RUBY_VERSION: 3.0.5
+  RUBY_VERSION: 3.0.6
   NODE_VERSION: 16.9.1
 
 jobs:
   lint-report:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     services:
       postgres:
@@ -31,7 +31,7 @@ jobs:
       DATABASE_HOST: localhost
 
     steps:
-      - uses: actions/checkout@v2.0.0
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
 

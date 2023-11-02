@@ -11,9 +11,9 @@ module Decidim
         helper ConfigConstraintsHelpers
         helper SystemCheckerHelpers
 
-        layout "decidim/admin/decidim_awesome"
+        layout "decidim/decidim_awesome/admin/application"
 
-        helper_method :head, :admin_head, :head_addons, :admin_addons, :legacy_version?
+        helper_method :head, :admin_head, :head_addons, :admin_addons
 
         def migrate_images
           Decidim::DecidimAwesome::MigrateLegacyImagesJob.perform_later(current_organization.id)
@@ -22,10 +22,6 @@ module Decidim
         end
 
         private
-
-        def legacy_version?
-          DecidimAwesome.legacy_version?
-        end
 
         def head
           @head ||= Nokogiri::HTML(render_template("decidim/decidim_awesome/admin/checks/assets_tester"))

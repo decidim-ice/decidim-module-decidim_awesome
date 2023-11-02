@@ -118,6 +118,38 @@ en:
             show_not_answered: Show not answered proposals
             show_rejected: Show rejected proposals
             show_withdrawn: Show withdrawn proposals
+      proposals:
+        settings:
+          global:
+            awesome_voting_manifest: Support type
+            awesome_voting_manifest_help_html: <strong class="text-alert">Be aware
+              that changing this setting in the middle of a votation period can result
+              in innacurate or unexpected results.</strong><br>Note also that this
+              setting can only be edited if the component has no supports yet.
+            awesome_voting_manifest_options:
+              default: Simple vote (default)
+              voting_cards: Voting using coloured cards
+            default_sort_order_options:
+              az: A-Z (Alphabetical)
+              supported_first: Supported first
+              supported_last: Supported last
+              za: Z-A (Reverse alphabetical)
+            voting_cards_box_title: Title for the voting box
+            voting_cards_box_title_help: Default is "Vote on this proposal". Use "-"
+              to hide it.
+            voting_cards_instructions: Support instructions/help (dissmissable modal
+              window)
+            voting_cards_instructions_help: Default is "Please read the election rules
+              carefully to understand how your vote will be used by %{organization}""
+            voting_cards_show_abstain: Add an abstention option
+            voting_cards_show_modal_help: Show instructions/help modal when support
+              is clicked
+          step:
+            default_sort_order_options:
+              az: A-Z (Alphabetical)
+              supported_first: Supported first
+              supported_last: Supported last
+              za: Z-A (Reverse alphabetical)
     decidim_awesome:
       admin:
         admin_accountability:
@@ -480,6 +512,38 @@ en:
       validators:
         too_much_caps: Is using too many capital letters (over %{percent}% of the
           text)
+      voting:
+        voting_cards:
+          abstained: "✔ Abstained"
+          change_vote: Change my vote
+          default_box_title: Vote on this proposal
+          default_instructions_html: <p>Please read the election rules carefully to
+            understand how your vote will be used by %{organization}"</p>
+          modal:
+            cancel: Cancel
+            message: Your vote will be considered final on %{date}. You can change
+              it until then
+            proceed: Proceed
+            skip: Check here to skip this window in the future
+          vote_button: Click to vote
+          voted: Voted
+          voting_for: My vote on "%{proposal}" is "%{type}"
+          weights:
+            a: A
+            g: G
+            r: R
+            weight_0: Abstain
+            weight_1: Red
+            weight_2: Yellow
+            weight_3: Green
+            y: Y
+    proposals:
+      proposals:
+        orders:
+          az: A-Z (Alphabetical)
+          supported_first: Supported first
+          supported_last: Supported last
+          za: Z-A (Reverse alphabetical)
   layouts:
     decidim:
       admin:

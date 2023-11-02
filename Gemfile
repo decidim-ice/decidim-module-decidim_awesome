@@ -12,7 +12,6 @@ gem "decidim-decidim_awesome", path: "."
 gem "bootsnap", "~> 1.4"
 
 gem "puma", ">= 5.5.1"
-gem "uglifier", "~> 4.1"
 
 gem "faker", "~> 2.14"
 
