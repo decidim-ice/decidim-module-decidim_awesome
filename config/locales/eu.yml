@@ -44,8 +44,6 @@ eu:
         voting_cards:
           modal:
             cancel: Ezeztatu
-          weights:
-            weight_2_short: Y
   layouts:
     decidim:
       decidim_awesome:
