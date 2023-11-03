@@ -1,3 +1,4 @@
+---
 ca:
   activemodel:
     attributes:
@@ -94,7 +95,7 @@ ca:
             map_zoom_help: Només s’aplica si es defineix el punt central del mapa
             menu_amendments: Mostrar esmenes
             menu_categories: Mostrar el menú de cerca per categories
-            menu_hashtags: Mostrar el menú de cerca per hashtag
+            menu_hashtags: Mostrar el menú de cerca per hashtags
             menu_meetings: Mostrar trobades
             menu_merge_components: Unifica tots els components del mateix tipus al menú
             truncate: Nombre màxim de caràcters per les descripcions emergents
@@ -105,6 +106,31 @@ ca:
             show_not_answered: Mostra les propostes pendents de contestar
             show_rejected: Mostra les propostes rebutjades
             show_withdrawn: Mostra les propostes retirades
+      proposals:
+        settings:
+          global:
+            awesome_voting_manifest: Tipus de suport
+            awesome_voting_manifest_help_html: <strong class="text-alert">Sigues conscient que canviar aquesta configuració enmig d'un període de votació pot donar lloc a resultats inexactes o inesperats.</strong><br>També tingueu en compte que aquesta configuració només es pot editar si el component encara no té cap suport.
+            awesome_voting_manifest_options:
+              default: Vot simple (suports per defecte)
+              voting_cards: Votació amb targetes de colors
+            default_sort_order_options:
+              az: A-Z (Alfabètic)
+              supported_first: Votades per mi primer
+              supported_last: Votades últimes per mi
+              za: Z-A (ordre alfabètic invers)
+            voting_cards_box_title: Títol per la cabina de votació
+            voting_cards_box_title_help: L'opció per defecte és 'Votar a aquesta proposta'. Utilitzeu '-' per amagar-la.
+            voting_cards_instructions: Instruccions d'ajuda en el suport/votació (finestra modal que es pot tancar).
+            voting_cards_instructions_help: L'opció per defecte és 'Llegeix les normes de la votació amb atenció per entendre com s'utilitzarà el teu vot per %{organization}"
+            voting_cards_show_abstain: Afegeix l'opció d'abstenció
+            voting_cards_show_modal_help: Mostra la finestra modal d'instruccions/ajuda quan es faci clic al suport
+          step:
+            default_sort_order_options:
+              az: A-Z (Alfabètic)
+              supported_first: Votades per mi primer
+              supported_last: Votades últimes per mi
+              za: Z-A (ordre alfabètic invers)
     decidim_awesome:
       admin:
         admin_accountability:
@@ -400,6 +426,36 @@ ca:
             view_proposal: Veure proposta
       validators:
         too_much_caps: Fa servir massa lletres majúscules (més %{percent}% del text)
+      voting:
+        voting_cards:
+          abstained: "✔ Abstenció"
+          change_vote: Canvia el meu vot
+          default_box_title: Vota en aquesta proposta
+          default_instructions_html: <p>Llegeix les normes de la votació amb atenció per entendre com s'utilitzarà el teu vot per %{organization}"</p>
+          modal:
+            cancel: Cancel·la
+            message: El teu vot es considerarà definitiu el %{date}. Pots canviar-lo fins a aquest moment
+            proceed: Procedeix
+            skip: Marca aquí per no mostrar aquesta finestra en el futur
+          vote_button: Clica per votar
+          voted: Votat
+          voting_for: El meu vot a "%{proposal}" és "%{type}"
+          weights:
+            weight_0: Abstenció
+            weight_0_short: 'A:'
+            weight_1: Roig
+            weight_1_short: 'R:'
+            weight_2: Groc
+            weight_2_short: 'G:'
+            weight_3: Verd
+            weight_3_short: 'V:'
+    proposals:
+      proposals:
+        orders:
+          az: A-Z (Alfabètic)
+          supported_first: Votades per mi primer
+          supported_last: Votades últimes per mi
+          za: Z-A (ordre alfabètic invers)
   layouts:
     decidim:
       admin:
