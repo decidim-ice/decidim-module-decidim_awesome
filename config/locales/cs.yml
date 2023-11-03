@@ -405,8 +405,6 @@ cs:
         voting_cards:
           modal:
             cancel: Zrušit
-          weights:
-            weight_2_short: Y
   layouts:
     decidim:
       admin:
