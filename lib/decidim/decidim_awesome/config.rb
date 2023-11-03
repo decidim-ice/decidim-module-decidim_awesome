@@ -75,9 +75,17 @@ module Decidim
         )
       end
 
-      # Checks if some config option es enabled in a certain context
+      # Checks if some config setting is enabled in a certain context
       def enabled_for?(setting)
         config[setting]
+      end
+
+      # returns true if some setting is constrained in the current context
+      # if no constraints defined, applies to everything
+      def constrained_in_context?(setting)
+        return true unless @vars.exists?(var: setting)
+
+        @vars.where(var: setting).any? { |v| valid_in_context?(v.all_constraints) }
       end
 
       # checks if some constraint blocks the validity fot the current context

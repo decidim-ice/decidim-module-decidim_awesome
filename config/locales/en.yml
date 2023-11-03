@@ -3,6 +3,7 @@ en:
   activemodel:
     attributes:
       config:
+        additional_proposal_sortings: Enabled additional sorting options
         allow_images_in_full_editor: Allow images in the full HTML editor
         allow_images_in_markdown_editor: Allow images in the markdown editor
         allow_images_in_proposals: Allow images in the proposals editor
@@ -134,6 +135,7 @@ en:
               supported_first: Supported first
               supported_last: Supported last
               za: Z-A (Reverse alphabetical)
+            sort_orders_enabled: Enabled sorting types
             voting_cards_box_title: Title for the voting box
             voting_cards_box_title_help: Default is "Vote on this proposal". Use "-"
               to hide it.
@@ -246,6 +248,10 @@ en:
             error: Error removing CSS box! %{error}
             success: CSS box %{key} removed successfully
           form:
+            additional_proposal_sortings:
+              enable_all: Enable all additional sorting options
+              help: These sorting options are additional to the default ones.
+              title: Customize sorting options for the proposals list
             edit_label: Rename label
             errors:
               incorrect_css: 'CSS in box #%{key} is invalid'

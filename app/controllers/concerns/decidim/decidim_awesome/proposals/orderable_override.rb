@@ -5,9 +5,11 @@ module Decidim
     module Proposals
       module OrderableOverride
         extend ActiveSupport::Concern
+        include Decidim::DecidimAwesome::NeedsAwesomeConfig
 
         included do
           before_action only: [:index] do
+            console
             session[:order] = params[:order] if params[:order].present?
           end
 
@@ -76,11 +78,11 @@ module Decidim
           end
 
           def awesome_additional_sortings
-            return [] unless DecidimAwesome.additional_proposal_sortings.is_a?(Array)
+            return [] unless awesome_config_instance.constrained_in_context?(:additional_proposal_sortings)
 
-            DecidimAwesome.additional_proposal_sortings.filter_map do |sort|
-              next unless sort.to_sym.in?([:az, :za, :supported_first, :supported_last])
-              next if sort.to_sym.in?([:supported_first, :supported_last]) && !supported_order_available?
+            awesome_config[:additional_proposal_sortings].filter_map do |sort|
+              next if sort.blank?
+              next if sort.in?(%w(supported_first supported_last)) && !supported_order_available?
 
               sort.to_s
             end
