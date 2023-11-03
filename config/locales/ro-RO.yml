@@ -140,8 +140,6 @@ ro:
         voting_cards:
           modal:
             cancel: Anulare
-          weights:
-            weight_2_short: Y
   layouts:
     decidim:
       decidim_awesome:
