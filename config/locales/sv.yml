@@ -159,7 +159,7 @@ sv:
           modal:
             cancel: Avbryt
           weights:
-            y: Y
+            weight_2_short: Y
   layouts:
     decidim:
       admin:
