@@ -100,7 +100,3 @@ lt:
               Galite pradėti procesą dabar, ir jis bus atliekamas fone.
             start_image_migrations: "\U0001F449 Pradėti migracijos procesą dabar"
             title: Sistemos suderinamumo patikrinimai
-      voting:
-        voting_cards:
-          weights:
-            weight_2_short: Y
