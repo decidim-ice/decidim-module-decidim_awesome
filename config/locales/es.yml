@@ -444,7 +444,6 @@ es:
             weight_0: Abstenerse
             weight_1: Rojo
             weight_2: Amarillo
-            weight_2_short: Y
             weight_3: Verde
     proposals:
       proposals:
