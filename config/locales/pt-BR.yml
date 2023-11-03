@@ -332,7 +332,7 @@ pt-BR:
           modal:
             cancel: Cancelar
           weights:
-            y: Y
+            weight_2_short: Y
   layouts:
     decidim:
       admin:
