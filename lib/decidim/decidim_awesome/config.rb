@@ -76,7 +76,7 @@ module Decidim
       end
 
       # Checks if some config setting is enabled in a certain context
-      def enabled_for?(setting)
+      def enabled_in_context?(setting)
         config[setting]
       end
 

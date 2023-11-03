@@ -6,17 +6,19 @@ module Decidim::Proposals
   describe ProposalsController, type: :controller do
     routes { Decidim::Proposals::Engine.routes }
 
+    let(:organization) { participatory_space.organization }
+    let(:participatory_space) { component.participatory_space }
     let(:component) { create(:proposal_component, :with_votes_enabled, settings: settings) }
-    let!(:proposal) { create(:proposal, title: { en: "m middle" }, component: component) }
-    let!(:proposal2) { create(:proposal, title: { en: "z last" }, component: component) }
-    let!(:proposal3) { create(:proposal, title: { en: "a first" }, component: component) }
+    let!(:proposal1) { create(:proposal, title: { en: "m middle", ca: "z últim" }, component: component) }
+    let!(:proposal2) { create(:proposal, title: { en: "z last", ca: "m mig" }, component: component) }
+    let!(:proposal3) { create(:proposal, title: { en: "a first", ca: "a primer" }, component: component) }
     let(:user) { create(:user, :confirmed, organization: component.organization) }
     let!(:vote1) { create(:proposal_vote, proposal: proposal2, author: user) }
     let!(:vote2) { create(:proposal_vote, proposal: proposal3, author: user) }
 
     let(:params) do
       {
-        proposal_id: proposal.id,
+        process_id: participatory_space.id,
         component_id: component.id
       }
     end
@@ -29,11 +31,22 @@ module Decidim::Proposals
     let(:default_order) { "default" }
 
     let(:additional_sortings) { [:supported_first, :supported_last, :az, :za] }
+    let(:config_defaults) do
+      {
+        additional_proposal_sortings: additional_sortings
+      }
+    end
+    let!(:awesome_config) { nil }
+    let!(:awesome_constraint) { nil }
 
     before do
-      allow(Decidim::DecidimAwesome).to receive(:additional_proposal_sortings).and_return(additional_sortings)
-      request.env["decidim.current_organization"] = component.organization
-      request.env["decidim.current_participatory_space"] = component.participatory_space
+      # rubocop:disable RSpec/AnyInstance
+      allow_any_instance_of(Decidim::DecidimAwesome::Config).to receive(:defaults).and_return(config_defaults)
+      allow_any_instance_of(Decidim::DecidimAwesome).to receive(:additional_proposal_sortings).and_return(additional_sortings)
+      allow_any_instance_of(ActionController::TestRequest).to receive(:url).and_return("/processes/#{participatory_space.slug}/proposals")
+      # rubocop:enable RSpec/AnyInstance
+      request.env["decidim.current_organization"] = organization
+      request.env["decidim.current_participatory_space"] = participatory_space
       request.env["decidim.current_component"] = component
       sign_in user
     end
@@ -68,7 +81,7 @@ module Decidim::Proposals
         end
       end
 
-      context "when strange additional_sortings" do
+      context "when unsupported additional_sortings" do
         let(:additional_sortings) { [:baz, :az] }
 
         it "has standard order filters" do
@@ -79,10 +92,42 @@ module Decidim::Proposals
         end
       end
 
+      context "when awesome config exists" do
+        let!(:awesome_config) { create :awesome_config, organization: organization, var: :additional_proposal_sortings, value: additional_sortings }
+
+        it "has order filters" do
+          get :index, params: params
+
+          expect(response).to have_http_status(:ok)
+          expect(controller.helpers.available_orders).to eq(%w(random recent supported_first supported_last az za most_voted most_endorsed most_commented most_followed with_more_authors))
+        end
+
+        context "when customized" do
+          let(:additional_sortings) { [:az, :za] }
+
+          it "has order filters" do
+            get :index, params: params
+
+            expect(response).to have_http_status(:ok)
+            expect(controller.helpers.available_orders).to eq(%w(random recent az za most_voted most_endorsed most_commented most_followed with_more_authors))
+          end
+
+          context "when constrained" do
+            let!(:awesome_constraint) { create(:config_constraint, awesome_config: awesome_config, settings: { "participatory_space_manifest" => "participatory_processes" }) }
+
+            it "has order filters" do
+              get :index, params: params
+
+              expect(response).to have_http_status(:ok)
+              expect(controller.helpers.available_orders).to eq(%w(random recent az za most_voted most_endorsed most_commented most_followed with_more_authors))
+            end
+          end
+        end
+      end
+
       context "when az order" do
         let(:params) do
           {
-            proposal_id: proposal.id,
             component_id: component.id,
             order: "az"
           }
@@ -92,14 +137,30 @@ module Decidim::Proposals
           get :index, params: params
 
           expect(response).to have_http_status(:ok)
-          expect(assigns(:proposals).to_a).to eq([proposal3, proposal, proposal2])
+          expect(assigns(:proposals).to_a).to eq([proposal3, proposal1, proposal2])
+        end
+
+        context "when other locale" do
+          let(:params) do
+            {
+              component_id: component.id,
+              order: "az",
+              locale: "ca"
+            }
+          end
+
+          it "orders by az" do
+            get :index, params: params
+
+            expect(response).to have_http_status(:ok)
+            expect(assigns(:proposals).to_a).to eq([proposal3, proposal2, proposal1])
+          end
         end
       end
 
       context "when za order" do
         let(:params) do
           {
-            proposal_id: proposal.id,
             component_id: component.id,
             order: "za"
           }
@@ -109,14 +170,30 @@ module Decidim::Proposals
           get :index, params: params
 
           expect(response).to have_http_status(:ok)
-          expect(assigns(:proposals).to_a).to eq([proposal2, proposal, proposal3])
+          expect(assigns(:proposals).to_a).to eq([proposal2, proposal1, proposal3])
+        end
+
+        context "when other locale" do
+          let(:params) do
+            {
+              component_id: component.id,
+              order: "za",
+              locale: "ca"
+            }
+          end
+
+          it "orders by za" do
+            get :index, params: params
+
+            expect(response).to have_http_status(:ok)
+            expect(assigns(:proposals).to_a).to eq([proposal1, proposal2, proposal3])
+          end
         end
       end
 
       context "when supported_first order" do
         let(:params) do
           {
-            proposal_id: proposal.id,
             component_id: component.id,
             order: "supported_first"
           }
@@ -126,14 +203,13 @@ module Decidim::Proposals
           get :index, params: params
 
           expect(response).to have_http_status(:ok)
-          expect(assigns(:proposals).to_a).to eq([proposal2, proposal3, proposal])
+          expect(assigns(:proposals).to_a).to eq([proposal2, proposal3, proposal1])
         end
       end
 
       context "when supported_last order" do
         let(:params) do
           {
-            proposal_id: proposal.id,
             component_id: component.id,
             order: "supported_last"
           }
@@ -143,7 +219,7 @@ module Decidim::Proposals
           get :index, params: params
 
           expect(response).to have_http_status(:ok)
-          expect(assigns(:proposals).to_a).to eq([proposal, proposal2, proposal3])
+          expect(assigns(:proposals).to_a).to eq([proposal1, proposal2, proposal3])
         end
       end
 
@@ -180,7 +256,7 @@ module Decidim::Proposals
           get :index, params: params
 
           expect(response).to have_http_status(:ok)
-          expect(assigns(:proposals).to_a).to eq([proposal2, proposal3, proposal])
+          expect(assigns(:proposals).to_a).to eq([proposal2, proposal3, proposal1])
         end
 
         context "when order is nonsense" do
@@ -194,7 +270,7 @@ module Decidim::Proposals
             get :index, params: params
 
             expect(response).to have_http_status(:ok)
-            expect(assigns(:proposals).to_a).to eq([proposal3, proposal, proposal2])
+            expect(assigns(:proposals).to_a).to eq([proposal3, proposal1, proposal2])
           end
         end
       end
@@ -202,7 +278,6 @@ module Decidim::Proposals
       context "when order in params" do
         let(:params) do
           {
-            proposal_id: proposal.id,
             component_id: component.id,
             order: "supported_last"
           }
@@ -212,10 +287,10 @@ module Decidim::Proposals
           get :index, params: params
 
           expect(response).to have_http_status(:ok)
-          expect(assigns(:proposals).to_a).to eq([proposal, proposal2, proposal3])
+          expect(assigns(:proposals).to_a).to eq([proposal1, proposal2, proposal3])
 
           get :index, params: params.except(:order)
-          expect(assigns(:proposals).to_a).to eq([proposal, proposal2, proposal3])
+          expect(assigns(:proposals).to_a).to eq([proposal1, proposal2, proposal3])
         end
       end
     end
