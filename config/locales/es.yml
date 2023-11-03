@@ -441,14 +441,11 @@ es:
           voted: Votado
           voting_for: Mi voto sobre "%{proposal}" es "%{type}"
           weights:
-            a: AB
-            g: A
-            r: R
             weight_0: Abstenerse
             weight_1: Rojo
             weight_2: Amarillo
+            weight_2_short: Y
             weight_3: Verde
-            y: Y
     proposals:
       proposals:
         orders:
