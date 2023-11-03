@@ -442,9 +442,13 @@ ca:
           voting_for: El meu vot a "%{proposal}" és "%{type}"
           weights:
             weight_0: Abstenció
+            weight_0_short: 'A:'
             weight_1: Roig
+            weight_1_short: 'R:'
             weight_2: Groc
+            weight_2_short: 'G:'
             weight_3: Verd
+            weight_3_short: 'V:'
     proposals:
       proposals:
         orders:
