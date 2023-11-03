@@ -106,6 +106,21 @@ cs:
             show_not_answered: Zobrazit nezodpovězené návrhy
             show_rejected: Zobrazit odmítnuté návrhy
             show_withdrawn: Zobrazit stažené návrhy
+      proposals:
+        settings:
+          global:
+            awesome_voting_manifest: Typ podpory
+            awesome_voting_manifest_options:
+              voting_cards: Hlasování pomocí barevných karet
+            default_sort_order_options:
+              az: A-Z (abecední)
+              za: Z-A (obrácená abeceda)
+            voting_cards_box_title: Název hlasovacího pole
+            voting_cards_instructions_help: Výchozí hodnota je "Přečtěte si pečlivě pravidla voleb, abyste pochopili, jak bude vaše hlasování použito %{organization}""
+          step:
+            default_sort_order_options:
+              az: A-Z (abecední)
+              za: Z-A (obrácená abeceda)
     decidim_awesome:
       admin:
         admin_accountability:
@@ -403,8 +418,23 @@ cs:
         too_much_caps: Používá příliš mnoho velkých písmen (více než %{percent}% textu)
       voting:
         voting_cards:
+          abstained: "✔️ Zdržel se hlasování"
+          change_vote: Změnit můj hlas
           modal:
             cancel: Zrušit
+          weights:
+            weight_0_short: 'A:'
+            weight_1: Červená
+            weight_1_short: 'R:'
+            weight_2: Žlutá
+            weight_2_short: 'Y:'
+            weight_3: Zelená
+            weight_3_short: 'G:'
+    proposals:
+      proposals:
+        orders:
+          az: A-Z (abecední)
+          za: Z-A (obrácená abeceda)
   layouts:
     decidim:
       admin:
