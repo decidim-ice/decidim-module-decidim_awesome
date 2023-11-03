@@ -332,7 +332,7 @@ it:
           modal:
             cancel: Annulla
           weights:
-            y: Y
+            weight_2_short: Y
   layouts:
     decidim:
       admin:
