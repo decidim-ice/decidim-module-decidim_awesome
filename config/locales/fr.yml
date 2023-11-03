@@ -442,9 +442,13 @@ fr:
           voting_for: Mon vote sur "%{proposal}" est "%{type}"
           weights:
             weight_0: Abstention
+            weight_0_short: 'A:'
             weight_1: Rouge
+            weight_1_short: 'R:'
             weight_2: Jaune
+            weight_2_short: 'J:'
             weight_3: Verte
+            weight_3_short: 'V:'
     proposals:
       proposals:
         orders:
