@@ -14,8 +14,8 @@ describe "Voting weights with cards", type: :system do
       minimum_votes_per_user: minimum_votes_per_user,
       awesome_voting_manifest: voting_manifest,
       voting_cards_show_abstain: abstain,
-      voting_cards_box_title: box_title,
-      voting_cards_instructions: instructions,
+      voting_cards_box_title: { en: box_title },
+      voting_cards_instructions: { en: instructions },
       voting_cards_show_modal_help: modal_help
     }
   end
@@ -403,7 +403,8 @@ describe "Voting weights with cards", type: :system do
       let!(:vote_weights) { [] }
 
       it "shows the vote count" do
-        within ".filters .with_any_state_check_boxes_tree_filter" do
+        filter = legacy_version? ? ".state_check_boxes_tree_filter" : ".with_any_state_check_boxes_tree_filter"
+        within ".filters #{filter}" do
           check "All"
           uncheck "All"
           check "Rejected"

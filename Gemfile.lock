@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    decidim-decidim_awesome (0.9.3)
+    decidim-decidim_awesome (0.10.0)
       decidim-admin (>= 0.26.0, < 0.28)
       decidim-core (>= 0.26.0, < 0.28)
       deface (>= 1.5)
@@ -100,7 +100,7 @@ GEM
       parser (>= 2.4)
       smart_properties
     bindex (0.8.1)
-    bootsnap (1.16.0)
+    bootsnap (1.17.0)
       msgpack (~> 1.2)
     browser (2.7.1)
     builder (3.2.4)
@@ -348,7 +348,7 @@ GEM
       warden (~> 1.2.3)
     devise-i18n (1.12.0)
       devise (>= 4.9.0)
-    devise_invitable (2.0.8)
+    devise_invitable (2.0.9)
       actionmailer (>= 5.0)
       devise (>= 4.6)
     diff-lcs (1.5.0)
@@ -440,7 +440,7 @@ GEM
       rails-i18n
       rainbow (>= 2.2.2, < 4.0)
       terminal-table (>= 1.5.1)
-    icalendar (2.9.0)
+    icalendar (2.10.0)
       ice_cube (~> 0.16)
     ice_cube (0.16.4)
     ice_nine (0.11.2)
@@ -509,7 +509,7 @@ GEM
     msgpack (1.7.2)
     multi_xml (0.6.0)
     mustache (1.1.1)
-    net-imap (0.4.2)
+    net-imap (0.4.4)
       date
       net-protocol
     net-pop (0.1.2)
@@ -583,7 +583,7 @@ GEM
     public_suffix (5.0.3)
     puma (5.6.7)
       nio4r (~> 2.0)
-    racc (1.7.1)
+    racc (1.7.2)
     rack (2.2.8)
     rack-attack (6.7.0)
       rack (>= 1.0, < 4)
@@ -630,7 +630,7 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
     rainbow (3.1.1)
-    rake (13.0.6)
+    rake (13.1.0)
     ransack (2.4.2)
       activerecord (>= 5.2.4)
       activesupport (>= 5.2.4)
@@ -687,7 +687,7 @@ GEM
       rubocop-ast (>= 1.17.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.29.0)
+    rubocop-ast (1.30.0)
       parser (>= 3.2.1.0)
     rubocop-faker (1.1.0)
       faker (>= 2.12.0)
@@ -757,8 +757,6 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uber (0.1.0)
-    uglifier (4.2.0)
-      execjs (>= 0.3.0, < 3)
     unicode-display_width (2.5.0)
     valid_email2 (2.3.1)
       activemodel (>= 3.2)
@@ -830,4 +828,4 @@ RUBY VERSION
    ruby 3.0.6p216
 
 BUNDLED WITH
-   2.4.20
+   2.4.21

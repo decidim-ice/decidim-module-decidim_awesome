@@ -104,9 +104,18 @@ describe "Visit the admin page", type: :system do
 
       it "renders the page" do
         expect(page).to have_content(/Tweaks for proposals/i)
+        expect(page).to have_content("Customize sorting options for the proposals list")
         expect(page).to have_content("\"Rich text editor for participants\" is enabled")
         expect(page).to have_content("User input validations for the \"title\" field")
         expect(page).to have_content("User input validations for the \"body\" field")
+      end
+
+      context "and additional_proposal_sortings is disabled" do
+        let(:disabled_features) { [:additional_proposal_sortings] }
+
+        it "renders the page" do
+          expect(page).not_to have_content("Customize sorting options for the proposals list")
+        end
       end
 
       context "and rich text editor for participants is disabled" do

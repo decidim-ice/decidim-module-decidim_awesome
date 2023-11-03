@@ -65,6 +65,7 @@ describe "Show awesome map", type: :system do
 
   it "shows the map" do
     within ".wrapper" do
+      expect(page).not_to have_content("maximum complexity")
       expect(page).to have_selector(".awesome-map")
       expect(page).to have_selector("#awesome-map")
       errors = if legacy_version?
@@ -99,7 +100,7 @@ describe "Show awesome map", type: :system do
 
   context "when step settings are all true" do
     it "shows all proposals markers" do
-      sleep(1)
+      sleep(3)
       expect(page.body).to have_selector("div[title='#{accepted_proposal.title["en"]}']")
       expect(page.body).to have_selector("div[title='#{evaluating_proposal.title["en"]}']")
       expect(page.body).to have_selector("div[title='#{rejected_proposal.title["en"]}']")
@@ -116,7 +117,7 @@ describe "Show awesome map", type: :system do
     let(:show_not_answered) { false }
 
     it "does not show any proposal" do
-      sleep(1)
+      sleep(3)
       expect(page.body).not_to have_selector("div[title='#{accepted_proposal.title["en"]}']")
       expect(page.body).not_to have_selector("div[title='#{evaluating_proposal.title["en"]}']")
       expect(page.body).not_to have_selector("div[title='#{rejected_proposal.title["en"]}']")
@@ -133,7 +134,7 @@ describe "Show awesome map", type: :system do
     let(:show_not_answered) { true }
 
     it "only shows proposal without state" do
-      sleep(1)
+      sleep(3)
       expect(page.body).not_to have_selector("div[title='#{accepted_proposal.title["en"]}']")
       expect(page.body).not_to have_selector("div[title='#{evaluating_proposal.title["en"]}']")
       expect(page.body).not_to have_selector("div[title='#{rejected_proposal.title["en"]}']")

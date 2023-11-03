@@ -23,11 +23,20 @@ Decidim::DecidimAwesome.configure do |config|
       :validate_body_min_length,
       :validate_body_max_caps_percent,
       :validate_body_max_marks_together,
-      :validate_body_start_with_caps
+      :validate_body_start_with_caps,
+      :weighted_proposal_voting,
+      :additional_proposal_scopes
     ].each do |conf|
       config.send("#{conf}=", :disabled)
     end
 
     config.disabled_components = [:awesome_map, :awesome_iframe]
+  end
+end
+
+if Decidim::DecidimAwesome.legacy_version?
+  Rails.application.config.to_prepare do
+    Decidim::Api::Schema.max_complexity = 5000
+    Decidim::Api::Schema.max_depth = 50
   end
 end

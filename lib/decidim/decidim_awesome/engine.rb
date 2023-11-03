@@ -100,15 +100,13 @@ module Decidim
       end
 
       initializer "decidim_decidim_awesome.additional_proposal_sortings" do |_app|
-        if DecidimAwesome.enabled?(:additional_proposal_sortings) && DecidimAwesome.additional_proposal_sortings.is_a?(Array)
-          possible_orders = %w(default random recent most_endorsed most_voted most_commented most_followed
-                               with_more_authors) + DecidimAwesome.additional_proposal_sortings.map(&:to_s)
+        if DecidimAwesome.enabled?(:additional_proposal_sortings)
           Decidim.component_registry.find(:proposals).tap do |component|
             component.settings(:global) do |settings|
-              settings.attribute :default_sort_order, type: :select, default: "default", choices: -> { possible_orders }
+              settings.attribute :default_sort_order, type: :select, default: "default", choices: -> { ["default"] + DecidimAwesome.possible_additional_proposal_sortings }
             end
             component.settings(:step) do |settings|
-              settings.attribute :default_sort_order, type: :select, include_blank: true, choices: -> { possible_orders }
+              settings.attribute :default_sort_order, type: :select, include_blank: true, choices: -> { ["default"] + DecidimAwesome.possible_additional_proposal_sortings }
             end
           end
         end

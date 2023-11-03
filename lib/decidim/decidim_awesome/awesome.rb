@@ -267,8 +267,16 @@ module Decidim
     #
     # pass a single config var or an array of them
     # any non disabled match will return as true
+    def self.possible_additional_proposal_sortings
+      @possible_additional_proposal_sortings ||= additional_proposal_sortings.to_a.filter_map do |sort|
+        next unless sort.to_sym.in?([:az, :za, :supported_first, :supported_last])
+
+        sort.to_s
+      end
+    end
+
     def self.enabled?(config_vars)
-      config_vars = [config_vars] unless config_vars.respond_to?(:detect)
+      config_vars = [config_vars] unless config_vars.respond_to?(:any?)
 
       config_vars.any? do |item|
         next unless config.has_key?(item.to_sym)

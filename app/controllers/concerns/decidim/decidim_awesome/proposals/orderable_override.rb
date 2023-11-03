@@ -5,6 +5,7 @@ module Decidim
     module Proposals
       module OrderableOverride
         extend ActiveSupport::Concern
+        include Decidim::DecidimAwesome::NeedsAwesomeConfig
 
         included do
           before_action only: [:index] do
@@ -34,9 +35,13 @@ module Decidim
           def reorder(proposals)
             case order
             when "az"
-              proposals.order(Arel.sql("decidim_proposals_proposals.title->>'#{I18n.locale}' ASC"))
+              proposals.order(Arel.sql("decidim_proposals_proposals.title->>'#{locale}' ASC,
+                                        decidim_proposals_proposals.title->'machine_translations'->>'#{locale}' ASC,
+                                        decidim_proposals_proposals.title->>'#{default_locale}' ASC"))
             when "za"
-              proposals.order(Arel.sql("decidim_proposals_proposals.title->>'#{I18n.locale}' DESC"))
+              proposals.order(Arel.sql("decidim_proposals_proposals.title->>'#{locale}' DESC,
+                                        decidim_proposals_proposals.title->'machine_translations'->>'#{locale}' DESC,
+                                        decidim_proposals_proposals.title->>'#{default_locale}' DESC"))
             when "supported_first"
               proposals.joins(my_votes_join).group(:id).order(Arel.sql("COUNT(decidim_proposals_proposal_votes.id) DESC"))
             when "supported_last"
@@ -76,13 +81,16 @@ module Decidim
           end
 
           def awesome_additional_sortings
-            return [] unless DecidimAwesome.additional_proposal_sortings.is_a?(Array)
+            return [] unless DecidimAwesome.enabled?(:additional_proposal_sortings)
+            return [] if awesome_config[:additional_proposal_sortings].blank?
+            return [] unless awesome_config_instance.constrained_in_context?(:additional_proposal_sortings)
 
-            DecidimAwesome.additional_proposal_sortings.filter_map do |sort|
-              next unless sort.to_sym.in?([:az, :za, :supported_first, :supported_last])
-              next if sort.to_sym.in?([:supported_first, :supported_last]) && !supported_order_available?
+            awesome_config[:additional_proposal_sortings].filter_map do |sort|
+              sort = sort.to_s
+              next unless sort.in? DecidimAwesome.possible_additional_proposal_sortings
+              next if sort.in?(%w(supported_first supported_last)) && !supported_order_available?
 
-              sort.to_s
+              sort
             end
           end
         end

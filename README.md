@@ -165,6 +165,7 @@ Results can be filtered by role and by time range and also exported as CSV or ot
 #### 16. Additional proposal sortings
 
 ![Proposal sorting](examples/proposal_sorting.png)
+![Proposal sorting admin](examples/proposal_sorting-admin.png)
 
 This feature allows you to add additional sorting options to the proposals component. By default 4 additional sortings are included:
 
@@ -175,7 +176,7 @@ This feature allows you to add additional sorting options to the proposals compo
 
 By enabling this feature the user choosed sorting method will be stored in the browser's session. This means that if the user changes the sorting method and then navigates to another page, the same sorting will be applied.
 
-You can disable or configure this feature setting the variable `additional_proposal_sortings` configuration in an initializer:
+You can disable or configure the available sorting types by setting the variable `additional_proposal_sortings` configuration in an initializer:
 
 ```ruby
 # config/initializers/awesome_defaults.rb
