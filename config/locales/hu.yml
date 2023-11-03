@@ -228,4 +228,4 @@ hu:
       voting:
         voting_cards:
           weights:
-            y: Y
+            weight_2_short: Y
