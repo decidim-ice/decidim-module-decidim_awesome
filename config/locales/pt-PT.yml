@@ -6,9 +6,3 @@ pt:
         intergram_chat_id: ID do Chat
       menu:
         url: URL
-  decidim:
-    decidim_awesome:
-      voting:
-        voting_cards:
-          weights:
-            weight_2_short: Y
