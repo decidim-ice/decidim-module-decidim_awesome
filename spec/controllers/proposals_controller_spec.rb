@@ -9,16 +9,15 @@ module Decidim::Proposals
     let(:organization) { participatory_space.organization }
     let(:participatory_space) { component.participatory_space }
     let(:component) { create(:proposal_component, :with_votes_enabled, settings: settings) }
-    let!(:proposal1) { create(:proposal, title: { en: "m middle", ca: "z últim" }, component: component) }
-    let!(:proposal2) { create(:proposal, title: { en: "z last", ca: "m mig" }, component: component) }
-    let!(:proposal3) { create(:proposal, title: { en: "a first", ca: "a primer" }, component: component) }
+    let!(:proposal1) { create(:proposal, title: { en: "m middle", ca: "z últim", "machine_translations" => { es: "a primero" } }, component: component) }
+    let!(:proposal2) { create(:proposal, title: { en: "z last", ca: "m mig", "machine_translations" => { es: "z último" } }, component: component) }
+    let!(:proposal3) { create(:proposal, title: { en: "a first", ca: "a primer", "machine_translations" => { es: "m medio" } }, component: component) }
     let(:user) { create(:user, :confirmed, organization: component.organization) }
     let!(:vote1) { create(:proposal_vote, proposal: proposal2, author: user) }
     let!(:vote2) { create(:proposal_vote, proposal: proposal3, author: user) }
 
     let(:params) do
       {
-        process_id: participatory_space.id,
         component_id: component.id
       }
     end
@@ -156,6 +155,36 @@ module Decidim::Proposals
             expect(assigns(:proposals).to_a).to eq([proposal3, proposal2, proposal1])
           end
         end
+
+        context "when machine_translations" do
+          let(:params) do
+            {
+              component_id: component.id,
+              order: "az",
+              locale: "es"
+            }
+          end
+
+          it "orders by az" do
+            get :index, params: params
+
+            expect(response).to have_http_status(:ok)
+            expect(assigns(:proposals).to_a).to eq([proposal1, proposal3, proposal2])
+          end
+
+          context "and machine_translations are missing" do
+            let!(:proposal1) { create(:proposal, title: { en: "m middle", ca: "z últim" }, component: component) }
+            let!(:proposal2) { create(:proposal, title: { en: "z last", ca: "m mig" }, component: component) }
+            let!(:proposal3) { create(:proposal, title: { en: "a first", ca: "a primer" }, component: component) }
+
+            it "orders by az as per default locale" do
+              get :index, params: params
+
+              expect(response).to have_http_status(:ok)
+              expect(assigns(:proposals).to_a).to eq([proposal3, proposal1, proposal2])
+            end
+          end
+        end
       end
 
       context "when za order" do
@@ -187,6 +216,36 @@ module Decidim::Proposals
 
             expect(response).to have_http_status(:ok)
             expect(assigns(:proposals).to_a).to eq([proposal1, proposal2, proposal3])
+          end
+        end
+
+        context "when machine_translations" do
+          let(:params) do
+            {
+              component_id: component.id,
+              order: "za",
+              locale: "es"
+            }
+          end
+
+          it "orders by za" do
+            get :index, params: params
+
+            expect(response).to have_http_status(:ok)
+            expect(assigns(:proposals).to_a).to eq([proposal2, proposal3, proposal1])
+          end
+
+          context "and machine_translations are missing" do
+            let!(:proposal1) { create(:proposal, title: { en: "m middle", ca: "z últim" }, component: component) }
+            let!(:proposal2) { create(:proposal, title: { en: "z last", ca: "m mig" }, component: component) }
+            let!(:proposal3) { create(:proposal, title: { en: "a first", ca: "a primer" }, component: component) }
+
+            it "orders by za as per default locale" do
+              get :index, params: params
+
+              expect(response).to have_http_status(:ok)
+              expect(assigns(:proposals).to_a).to eq([proposal2, proposal1, proposal3])
+            end
           end
         end
       end

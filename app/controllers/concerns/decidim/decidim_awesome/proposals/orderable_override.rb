@@ -35,9 +35,13 @@ module Decidim
           def reorder(proposals)
             case order
             when "az"
-              proposals.order(Arel.sql("decidim_proposals_proposals.title->>'#{I18n.locale}' ASC"))
+              proposals.order(Arel.sql("decidim_proposals_proposals.title->>'#{locale}' ASC,
+                                        decidim_proposals_proposals.title->'machine_translations'->>'#{locale}' ASC,
+                                        decidim_proposals_proposals.title->>'#{default_locale}' ASC"))
             when "za"
-              proposals.order(Arel.sql("decidim_proposals_proposals.title->>'#{I18n.locale}' DESC"))
+              proposals.order(Arel.sql("decidim_proposals_proposals.title->>'#{locale}' DESC,
+                                        decidim_proposals_proposals.title->'machine_translations'->>'#{locale}' DESC,
+                                        decidim_proposals_proposals.title->>'#{default_locale}' DESC"))
             when "supported_first"
               proposals.joins(my_votes_join).group(:id).order(Arel.sql("COUNT(decidim_proposals_proposal_votes.id) DESC"))
             when "supported_last"
