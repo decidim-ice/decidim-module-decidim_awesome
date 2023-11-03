@@ -141,7 +141,7 @@ ro:
           modal:
             cancel: Anulare
           weights:
-            y: Y
+            weight_2_short: Y
   layouts:
     decidim:
       decidim_awesome:
