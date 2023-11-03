@@ -3,9 +3,9 @@ it:
     attributes:
       config:
         allow_images_in_full_editor: Consenti l'uso di immagini nell'editor HTML completo
-        allow_images_in_markdown_editor: Consenti l'uso di immagini nell'editor markdown
-        allow_images_in_proposals: Consenti l'uso di immagini nell'editor di proposte
-        allow_images_in_small_editor: Consenti l'uso di immagini nell'editor HTML semplificato
+        allow_images_in_markdown_editor: Consenti l'uso d'immagini nell'editor markdown
+        allow_images_in_proposals: Consenti l'uso d'immagini nell'editor di proposte
+        allow_images_in_small_editor: Consenti l'uso d'immagini nell'editor HTML semplificato
         auto_save_forms: Salva automaticamente i moduli nel LocalStorage
         intergram_auto_no_response: Un messaggio che viene inviato un minuto dopo che l'utente invia il suo primo messaggio e che non è stata ricevuta risposta
         intergram_auto_response: Un messaggio che viene inviato immediatamente dopo che l'utente invia il primo messaggio
@@ -21,6 +21,14 @@ it:
         scoped_admins: Gruppo di amministratori con ambito %{id}
         scoped_styles: Stili personalizzati %{id}
         use_markdown_editor: Utilizza un editor Markdown invece dell'editor HTML
+        validate_body_max_caps_percent: Percentuale massima consentita di lettere maiuscole per il corpo
+        validate_body_max_marks_together: Numero massimo di simboli consecutivi ammessi nel corpo
+        validate_body_min_length: Caratteri minimi necessari per il corpo
+        validate_body_start_with_caps: Obbliga il corpo del testo con una lettera maiuscola
+        validate_title_max_caps_percent: Percentuale massima consentita di lettere maiuscole per il titolo
+        validate_title_max_marks_together: Numero massimo di simboli consecutivi ammessi nel titolo
+        validate_title_min_length: Caratteri minimi necessari per il titolo
+        validate_title_start_with_caps: Obbliga il titolo con una lettera maiuscola
       constraint:
         component_id: o specificatamente in
         component_manifest: Solo in componenti di tipo
@@ -42,7 +50,23 @@ it:
         proposal_custom_fields: Campi personalizzati
   decidim:
     admin:
+      filters:
+        admin_accountability:
+          admin_role_type:
+            label: Tipo di ruolo
+          participatory_space_type_eq:
+            label: Tipo di spazio partecipativo
+          role:
+            label: Ruolo
+          role_type_eq:
+            label: Tipo di ruolo
+        label:
+          search_field_end_date: 'Alla data:'
+          search_field_start_date: 'Dalla data:'
+        search_placeholder:
+          user_name_or_user_email_cont: Cerca per utente o per email
       menu:
+        admin_accountability: Responsabilità amministrativa
         decidim_awesome: Decidim awesome
     components:
       awesome_iframe:
@@ -70,6 +94,7 @@ it:
             map_zoom_help: Si applica solo se è stato definito il centro della mappa
             menu_amendments: Mostra le correzioni
             menu_categories: Mostra Categoria nel menu di ricerca
+            menu_hashtags: Mostra menu di ricerca Hashtag
             menu_meetings: Mostra meeting
             menu_merge_components: Fondi tutti i componenti dello stesso tipo nel menu
             truncate: Numero massimo di caratteri per le descrizioni nei popup
@@ -82,6 +107,42 @@ it:
             show_withdrawn: Mostra le proposte ritirate
     decidim_awesome:
       admin:
+        admin_accountability:
+          admin_roles:
+            admin: Super admin
+            user_manager: Gestore utenti
+          created_at: Ruolo creato il
+          currently_active: Attualmente attivo
+          deleted_user: Utente eliminato
+          email: Email
+          exports:
+            button: Esporta questa ricerca
+            export_as: Esporta come %{export_format}
+            export_format:
+              csv: CSV
+              json: JSON
+              xlsx: XLSX
+            notice: Il lavoro di esportazione è in coda. Riceverai un'email quando sarà pronto.
+          index:
+            description: Elencato qui troverai tutti gli utenti che hanno avuto un certo ruolo nell'amministrazione di uno spazio partecipativo. Gli amministratori normali non sono elencati.
+            global_description: Elencato qui troverai tutti gli utenti che hanno avuto un ruolo globale nell'amministrazione di questa organizzazione. Gli amministratori dello spazio partecipativo non sono elencati.
+            missing_users: 'NOTA: Questo elenco potrebbe non includere gli utenti creati/rimossi prima di %{date}. Questo perché la "tracciabilità dell''utente" è stata introdotta in Decidim v0.24 e questa installazione è probabilmente più vecchia.'
+            see_global: Elenca gli amministratori globali
+            see_spaces: Elenca gli amministratori dello spazio partecipativo
+            title: Responsabilità amministrativa
+          last_login: Data ultimo accesso
+          missing_info: "(informazioni mancanti)"
+          missing_user: Utente non presente nel database
+          name: Nome
+          never_logged: Non ha mai effettuato l'accesso
+          participatory_space: Spazio partecipativo
+          removal_date: Ruolo rimosso il
+          role: Ruolo
+          roles:
+            admin: Amministratore
+            collaborator: Collaboratore
+            moderator: Moderatore
+            valuator: Valutatore
         checks:
           index:
             admin_head_tags: Tag Awesome visualizzate nel header della sezione amministrativa
@@ -150,6 +211,15 @@ it:
               scoped_styles: Crea CSS personalizzato che si applica solo in alcune parti del web pubblico (usa l'apposito editor delle restrizioni)
               scoped_styles_variables: 'È possibile utilizzare le seguenti variabili CSS per i colori personalizzati dell''organizzazione:'
               use_markdown_editor: This will substitute the Quill WYSIWYG editor, use a Markdown editor instead. Text will be rendered as HTML in the public pages (text in database will be saved as markdown text)
+              validate_body_max_caps_percent: Zero non permetterà a nessuna lettera maiuscola, 100 forzerà a scrivere tutto in lettere maiuscole
+              validate_body_max_marks_together: 'Limita il numero di punti interrogativi e esclamativi che possono essere scritti insieme. Es.: se è 2, allora ''!!!'' non sarà permesso nel testo'
+              validate_body_min_length: Questo numero può essere zero, questo renderà effettivamente questo campo non obbligatorio
+              validate_title_max_caps_percent: Zero non permetterà nessuna lettera maiuscola, 100 forzerà a scrivere tutto in lettere maiuscole
+              validate_title_max_marks_together: 'Limita il numero di punti interrogativi e esclamativi che possono essere scritti insieme. Es.: se è 2, allora ''!!!'' non sarà permesso nel testo'
+              validate_title_min_length: Il titolo è sempre obbligatorio e questo numero non può essere zero
+            validators:
+              body: Convalide dell'input dell'utente per il campo "body"
+              title: Convalide di input dell'utente per il campo "titolo"
           form_proposal_custom_fields:
             new: Aggiungi una nuova casella "campi personalizzati"
             remove: Rimuovi questa casella "campi personalizzati"
@@ -259,6 +329,7 @@ it:
               hidden: Sempre nascosto
               logged: Visibile solo agli utenti registrati
               non_logged: Visibile solo per gli utenti non registrati
+              verified_user: Visibile solo per gli utenti con un'autorizzazione valida
           index:
             confirm_destroy: Sei sicuro di voler rimuovere questa personalizzazione?
             edit: Modifica
@@ -301,6 +372,7 @@ it:
           text_settings: Impostazioni Testo
           title: Titolo
           truncate: Numero massimo di caratteri per le descrizioni nei popup
+      credits: Decidim Awesome %{version} · Mantenuto con ♥️ di %{company}
       custom_fields:
         errors:
           invalid_fields: Il contenuto non può essere analizzato ma è stato assegnato al campo '%{field}'
@@ -326,6 +398,8 @@ it:
           show:
             view_meeting: Visualizza meeting
             view_proposal: Visualizza proposta
+      validators:
+        too_much_caps: Sta usando troppe lettere maiuscole (oltre %{percent}% del testo)
   layouts:
     decidim:
       admin:
