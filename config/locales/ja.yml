@@ -405,7 +405,7 @@ ja:
           modal:
             cancel: キャンセル
           weights:
-            y: Y
+            weight_2_short: Y
   layouts:
     decidim:
       admin:
