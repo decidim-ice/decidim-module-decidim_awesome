@@ -227,7 +227,7 @@ nl:
           modal:
             cancel: Annuleren
           weights:
-            y: Y
+            weight_2_short: Y
   layouts:
     decidim:
       admin:
