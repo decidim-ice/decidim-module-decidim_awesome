@@ -15,8 +15,8 @@ module Decidim::DecidimAwesome
     let!(:organization2) { create(:organization, host: "another.host.org") }
     let!(:assembly) { create(:assembly, organization: organization) }
     let!(:another_assembly) { create(:assembly, organization: organization) }
-    let!(:user) { create(:user, :confirmed, organization: organization) }
-    let!(:admin) { create(:user, :confirmed, :admin, organization: organization) }
+    let!(:user) { create(:user, :confirmed, name: "Bob Marley", organization: organization) }
+    let!(:admin) { create(:user, :confirmed, :admin, name: "Peter Green", organization: organization) }
 
     # clean the tampered User model
     after do

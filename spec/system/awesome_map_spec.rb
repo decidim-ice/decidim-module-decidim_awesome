@@ -65,6 +65,7 @@ describe "Show awesome map", type: :system do
 
   it "shows the map" do
     within ".wrapper" do
+      expect(page).not_to have_content("maximum complexity")
       expect(page).to have_selector(".awesome-map")
       expect(page).to have_selector("#awesome-map")
       errors = if legacy_version?

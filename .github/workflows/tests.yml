@@ -62,7 +62,7 @@ jobs:
       - name: Setup Test App
         run: bundle exec rake test_app
 
-      - name: General RSpec with config vars enabled
+      - name: General RSpec with config vars ${{ matrix.features }}
         run: bundle exec rspec spec/${{ matrix.rspec }}
         env:
           FEATURES: ${{ matrix.features }}

@@ -250,7 +250,9 @@ en:
           form:
             additional_proposal_sortings:
               enable_all: Enable all additional sorting options
-              help: These sorting options are additional to the default ones.
+              help: These sorting options are additional to the default ones. Also,
+                remember that you can choose the default order in the proposals component
+                settings.
               title: Customize sorting options for the proposals list
             edit_label: Rename label
             errors:

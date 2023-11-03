@@ -12,6 +12,7 @@ Features:
   - Migrate to [Deface](https://github.com/spree/deface) for overrides
   - Introduce Weighted Voting with configurable manifests for different types of votings with grades
   - Fix wrong behaviour showing proposals on map
+  - Introduced new sorting options for proposals. Added alphabetical sorting, reverse sorting, sorting by votes first and last.
 
 v0.9.3
 ------
