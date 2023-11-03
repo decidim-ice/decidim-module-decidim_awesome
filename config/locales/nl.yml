@@ -226,8 +226,6 @@ nl:
         voting_cards:
           modal:
             cancel: Annuleren
-          weights:
-            weight_2_short: Y
   layouts:
     decidim:
       admin:
