@@ -444,7 +444,6 @@ fr:
             weight_0: Abstention
             weight_1: Rouge
             weight_2: Jaune
-            weight_2_short: Y
             weight_3: Verte
     proposals:
       proposals:
