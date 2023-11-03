@@ -331,8 +331,6 @@ pt-BR:
         voting_cards:
           modal:
             cancel: Cancelar
-          weights:
-            weight_2_short: Y
   layouts:
     decidim:
       admin:
