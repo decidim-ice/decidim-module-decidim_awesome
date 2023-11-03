@@ -406,7 +406,7 @@ cs:
           modal:
             cancel: Zrušit
           weights:
-            y: Y
+            weight_2_short: Y
   layouts:
     decidim:
       admin:
