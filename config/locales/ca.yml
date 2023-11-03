@@ -444,7 +444,6 @@ ca:
             weight_0: Abstenció
             weight_1: Roig
             weight_2: Groc
-            weight_2_short: Y
             weight_3: Verd
     proposals:
       proposals:
