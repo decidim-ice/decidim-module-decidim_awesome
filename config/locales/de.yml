@@ -393,8 +393,6 @@ de:
         voting_cards:
           modal:
             cancel: Abbrechen
-          weights:
-            weight_2_short: Y
   layouts:
     decidim:
       admin:
