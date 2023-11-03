@@ -404,8 +404,6 @@ ja:
         voting_cards:
           modal:
             cancel: キャンセル
-          weights:
-            weight_2_short: Y
   layouts:
     decidim:
       admin:
