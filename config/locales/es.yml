@@ -94,7 +94,7 @@ es:
             map_zoom_help: Solo aplica si se define el punto central del mapa
             menu_amendments: Mostrar enmiendas
             menu_categories: Mostrar menú de búsqueda por categorías
-            menu_hashtags: Mostrar el menú de búsqueda por Hashtag
+            menu_hashtags: Mostrar el menú de búsqueda por hashtag
             menu_meetings: Mostrar encuentros
             menu_merge_components: Combinar todos los componentes del mismo tipo en el menú
             truncate: Número máximo de caracteres para las descripciones emergentes
@@ -372,6 +372,7 @@ es:
           text_settings: Ajustes del texto
           title: Título
           truncate: Número máximo de caracteres para las descripciones emergentes
+      credits: Decidim Awesome %{version} · Mantenida con ♥ por %{company}
       custom_fields:
         errors:
           invalid_fields: No se ha podido analizar el contenido pero se ha asignado al campo '%{field}'

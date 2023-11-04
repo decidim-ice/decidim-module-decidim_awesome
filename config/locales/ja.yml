@@ -94,7 +94,7 @@ ja:
             map_zoom_help: 地図の中心が定義されている場合にのみ適用されます
             menu_amendments: 修正を表示
             menu_categories: カテゴリー検索メニューを表示
-            menu_hashtags: Hasthag 検索メニューを表示
+            menu_hashtags: ハッシュタグ検索メニューの表示
             menu_meetings: ミーティングを表示
             menu_merge_components: 同じ種類のすべてのコンポーネントをメニューに統合します
             truncate: ポップアップの説明のための最大文字数

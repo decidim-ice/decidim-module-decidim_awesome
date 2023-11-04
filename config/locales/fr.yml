@@ -94,7 +94,7 @@ fr:
             map_zoom_help: Ne s'applique que si un centre de carte est défini
             menu_amendments: Afficher les amendements
             menu_categories: Afficher le menu de recherche par catégorie
-            menu_hashtags: Voir le menu de recherche Hasthag
+            menu_hashtags: Afficher le menu de recherche des hashtags
             menu_meetings: Montrer les rencontres
             menu_merge_components: Fusionner toutes les fonctionnalités du même type dans le menu
             truncate: Caractères maximum pour les descriptions des popups
