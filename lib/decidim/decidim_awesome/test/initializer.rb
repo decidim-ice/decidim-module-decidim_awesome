@@ -6,6 +6,7 @@ Decidim::DecidimAwesome.configure do |config|
       :allow_images_in_full_editor,
       :allow_images_in_small_editor,
       :allow_images_in_proposals,
+      :allow_to_edit_proposals_after_import,
       :use_markdown_editor,
       :allow_images_in_markdown_editor,
       :auto_save_forms,

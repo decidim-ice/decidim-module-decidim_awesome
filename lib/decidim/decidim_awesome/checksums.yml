@@ -33,6 +33,9 @@ decidim-proposals:
     decidim-0.27: c0ebeac39ebe4926bf0e5fc585a384d7
     decidim-0.27.1: a4f902d1c4829a7f7f62299686f8604e
     decidim-0.27.3: a9c9ed5eedaf7bf80afaf9ff5a89c254
+  /app/models/decidim/proposals/proposal.rb:
+    decidim-0.26.8: 7aba8a3b12b2fa0214ad6d83f5e6e0ce
+    decidim-0.27.4: 079dbce3c0d567b1f0feb75fe7f88919
   /app/views/decidim/proposals/collaborative_drafts/_edit_form_fields.html.erb:
     # this file is not overriden anymore but it needs to be the last version
     decidim-0.26: 519a0d34a9ffbd8b9c26d9b68ff4e2a3

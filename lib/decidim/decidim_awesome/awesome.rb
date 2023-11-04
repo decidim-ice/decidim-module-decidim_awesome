@@ -43,6 +43,10 @@ module Decidim
       false
     end
 
+    config_accessor :allow_to_edit_proposals_after_import do
+      false
+    end
+
     config_accessor :use_markdown_editor do
       false
     end
