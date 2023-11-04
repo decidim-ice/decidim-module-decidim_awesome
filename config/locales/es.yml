@@ -3,6 +3,7 @@ es:
   activemodel:
     attributes:
       config:
+        additional_proposal_sortings: Opciones adicionales de ordenación habilitadas
         allow_images_in_full_editor: Permitir imágenes en el editor HTML completo
         allow_images_in_markdown_editor: Permitir imágenes en el editor Markdown
         allow_images_in_proposals: Permitir imágenes en el editor de propuestas
@@ -119,6 +120,7 @@ es:
               supported_first: Mis soportes primero
               supported_last: Mis soportes últimos
               za: Z-A (Alfabético inverso)
+            sort_orders_enabled: Tipos de ordenación habilitados
             voting_cards_box_title: Título de la cabina de votación
             voting_cards_box_title_help: Por defecto es "Votar en esta propuesta". Use "-" para ocultarla.
             voting_cards_instructions: Instrucciones/ayuda de soporte (ventana modal descartable)
@@ -216,6 +218,10 @@ es:
             error: '¡Error al eliminar la caja CSS! %{error}'
             success: Caja CSS %{key} eliminada correctamente
           form:
+            additional_proposal_sortings:
+              enable_all: Habilitar todas las opciones de ordenación adicionales
+              help: Estas opciones de ordenación son adicionales a las predeterminadas. Además, recuerda que puedes elegir el orden por defecto en los ajustes del componente de propuestas.
+              title: Personalizar las opciones de ordenación para la lista de propuestas
             edit_label: Renombrar la etiqueta
             errors:
               incorrect_css: 'El CSS de la caja #%{key} no es válido'
