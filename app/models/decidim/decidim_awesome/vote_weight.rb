@@ -12,18 +12,18 @@ module Decidim
       after_save :update_vote_weight_totals!
 
       def update_vote_weight_totals!
-        cache = Decidim::DecidimAwesome::WeightCache.find_or_initialize_by(proposal: proposal)
-        cache.totals = cache.totals || {}
+        extra = Decidim::DecidimAwesome::ProposalExtraField.find_or_initialize_by(proposal: proposal)
+        extra.vote_weight_totals = extra.vote_weight_totals || {}
 
         prev = weight_previous_change&.first
         if prev.present?
-          cache.totals[prev.to_s] = Decidim::DecidimAwesome::VoteWeight.where(vote: proposal.votes, weight: prev).count
-          cache.totals.delete(prev.to_s) if cache.totals[prev.to_s].zero?
+          extra.vote_weight_totals[prev.to_s] = Decidim::DecidimAwesome::VoteWeight.where(vote: proposal.votes, weight: prev).count
+          extra.vote_weight_totals.delete(prev.to_s) if extra.vote_weight_totals[prev.to_s].zero?
         end
-        cache.totals[weight.to_s] = Decidim::DecidimAwesome::VoteWeight.where(vote: proposal.votes, weight: weight).count
-        cache.totals.delete(weight.to_s) if cache.totals[weight.to_s].zero?
-        cache.weight_total = cache.totals.inject(0) { |sum, (weight, count)| sum + (weight.to_i * count) }
-        cache.save!
+        extra.vote_weight_totals[weight.to_s] = Decidim::DecidimAwesome::VoteWeight.where(vote: proposal.votes, weight: weight).count
+        extra.vote_weight_totals.delete(weight.to_s) if extra.vote_weight_totals[weight.to_s].zero?
+        extra.weight_total = extra.vote_weight_totals.inject(0) { |sum, (weight, count)| sum + (weight.to_i * count) }
+        extra.save!
       end
     end
   end

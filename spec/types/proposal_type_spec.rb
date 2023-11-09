@@ -7,7 +7,7 @@ module Decidim::Proposals
   describe ProposalType, type: :graphql do
     include_context "with a graphql class type"
     let(:component) { create(:proposal_component) }
-    let!(:weight_cache) { create(:awesome_weight_cache, :with_votes, proposal: model) }
+    let!(:extra_fields) { create(:awesome_proposal_extra_fields, :with_votes, proposal: model) }
     let(:model) { create :proposal, component: component }
 
     describe "id" do

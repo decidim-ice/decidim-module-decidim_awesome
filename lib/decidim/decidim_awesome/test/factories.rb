@@ -47,7 +47,7 @@ FactoryBot.define do
     sequence(:weight) { |n| n }
   end
 
-  factory :awesome_weight_cache, class: "Decidim::DecidimAwesome::WeightCache" do
+  factory :awesome_proposal_extra_fields, class: "Decidim::DecidimAwesome::ProposalExtraField" do
     proposal { create :proposal }
 
     trait :with_votes do

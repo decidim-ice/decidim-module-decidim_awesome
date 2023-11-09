@@ -10,7 +10,7 @@ module Decidim::Proposals
 
     let!(:proposal) { create(:proposal, :accepted, component: component) }
     let!(:another_proposal) { create(:proposal, :accepted, component: component) }
-    let!(:weight_cache) { create(:awesome_weight_cache, proposal: proposal) }
+    let!(:extra_fields) { create(:awesome_proposal_extra_fields, proposal: proposal) }
     let(:weights) do
       {
         "0" => 1,
@@ -25,7 +25,7 @@ module Decidim::Proposals
         end
       end
     end
-    let!(:another_weight_cache) { create(:awesome_weight_cache, :with_votes, proposal: another_proposal) }
+    let!(:another_extra_fields) { create(:awesome_proposal_extra_fields, :with_votes, proposal: another_proposal) }
     let(:participatory_process) { component.participatory_space }
     let(:component) { create :proposal_component, settings: settings }
     let(:settings) do
@@ -81,14 +81,14 @@ module Decidim::Proposals
         before do
           # rubocop:disable Rails/SkipsModelValidations:
           # we don't want to trigger the active record hooks
-          weight_cache.update_columns(totals: wrong_weights)
+          extra_fields.update_columns(vote_weight_totals: wrong_weights)
           # rubocop:enable Rails/SkipsModelValidations:
         end
 
         it "serializes the weights" do
           expect(proposal.vote_weights).to eq(labeled_wrong_weights)
           expect(serialized).to include(weights: labeled_weights)
-          weight_cache.reload
+          extra_fields.reload
           expect(proposal.reload.vote_weights).to eq(labeled_weights)
         end
       end
