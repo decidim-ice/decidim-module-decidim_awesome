@@ -12,7 +12,7 @@ module Decidim
           hash << I18n.locale.to_s
           hash << model.cache_key_with_version
           hash << model.proposal_votes_count
-          hash << model.weight_cache&.totals
+          hash << model.extra_fields&.vote_weights_totals
           hash << model.endorsements_count
           hash << model.comments_count
           hash << Digest::MD5.hexdigest(model.component.cache_key_with_version)

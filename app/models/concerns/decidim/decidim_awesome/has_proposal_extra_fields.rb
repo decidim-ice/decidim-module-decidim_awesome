@@ -2,14 +2,14 @@
 
 module Decidim
   module DecidimAwesome
-    module HasWeightCache
+    module HasProposalExtraFields
       extend ActiveSupport::Concern
 
       included do
-        has_one :weight_cache, foreign_key: "decidim_proposal_id", class_name: "Decidim::DecidimAwesome::WeightCache", dependent: :destroy
+        has_one :extra_fields, foreign_key: "decidim_proposal_id", class_name: "Decidim::DecidimAwesome::ProposalExtraField", dependent: :destroy
 
         def weight_count(weight)
-          (weight_cache && weight_cache.totals[weight.to_s]) || 0
+          (extra_fields && extra_fields.vote_weights_totals[weight.to_s]) || 0
         end
 
         def vote_weights
@@ -25,14 +25,14 @@ module Decidim
         end
 
         def update_vote_weights!
-          weight_cache ||= Decidim::DecidimAwesome::WeightCache.find_or_initialize_by(proposal: self)
-          weight_cache.totals = {}
+          extra_fields ||= Decidim::DecidimAwesome::ProposalExtraField.find_or_initialize_by(proposal: self)
+          extra_fields.vote_weights_totals = {}
           votes.each do |vote|
-            weight_cache.totals[vote.weight] ||= 0
-            weight_cache.totals[vote.weight] += 1
+            extra_fields.vote_weights_totals[vote.weight] ||= 0
+            extra_fields.vote_weights_totals[vote.weight] += 1
           end
-          weight_cache.save!
-          self.weight_cache = weight_cache
+          extra_fields.save!
+          self.extra_fields = extra_fields
           @vote_weights = nil
           @all_vote_weights = nil
         end

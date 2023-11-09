@@ -13,7 +13,7 @@ module Decidim
         let(:user) { create(:user, :confirmed, organization: organization) }
         let!(:component) { create :proposal_component, :with_votes_enabled, organization: organization, settings: { awesome_voting_manifest: manifest } }
         let(:proposal) { create(:proposal, component: component) }
-        let!(:weight_cache) { create(:awesome_weight_cache, proposal: proposal) }
+        let!(:extra_fields) { create(:awesome_proposal_extra_fields, proposal: proposal) }
         let!(:vote_weights) do
           [
             create_list(:awesome_vote_weight, 3, vote: create(:proposal_vote, proposal: proposal), weight: 1),
