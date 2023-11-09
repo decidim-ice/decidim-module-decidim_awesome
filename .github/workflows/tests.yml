@@ -25,7 +25,7 @@ jobs:
             features: enabled
           - rspec: system/admin
             features: enabled
-          - rspec: system/*_spec.rb'
+          - rspec: system/*_spec.rb
             features: enabled
           - rspec: system/awesome_map
             features: enabled

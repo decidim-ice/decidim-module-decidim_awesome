@@ -293,6 +293,7 @@ And then execute:
 
 ```bash
 bundle
+bundle exec rails decidim_decidim_awesome:install:migrations
 bundle exec rails decidim:upgrade
 bundle exec rails db:migrate
 ```

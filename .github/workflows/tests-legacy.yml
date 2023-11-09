@@ -25,9 +25,9 @@ jobs:
             features: enabled
           - rspec: system/admin
             features: enabled
-          - rspec: system/*_spec.rb --exclude-pattern 'spec/system/awesome_map_spec.rb'
+          - rspec: system/*_spec.rb
             features: enabled
-          - rspec: system/awesome_map_spec.rb
+          - rspec: system/awesome_map
             features: enabled
       fail-fast: false
 
