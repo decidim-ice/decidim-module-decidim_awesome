@@ -314,12 +314,13 @@ RAILS_ENV=production bin/rails decidim_awesome:active_storage_migrations:check_m
 ```
 
 The correct version of Decidim Awesome should resolved automatically by the Bundler.
-However you can force some specific version using `gem "decidim-decidim_awesome", "~> 0.8.0"` in the Gemfile.
+However you can force some specific version using `gem "decidim-decidim_awesome", "~> 0.10.0"` in the Gemfile.
 
 Depending on your Decidim version, choose the corresponding Awesome version to ensure compatibility:
 
 | Awesome version | Compatible Decidim versions |
 |---|---|
+| 0.10.0 | >= 0.26.7, >= 0.27.3 |
 | 0.9.2 | >= 0.26.7, >= 0.27.3 |
 | 0.9.x | 0.26.x, 0.27.x |
 | 0.8.x | 0.25.x, 0.26.x |
