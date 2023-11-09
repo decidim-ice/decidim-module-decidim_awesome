@@ -3,7 +3,7 @@
 require "spec_helper"
 
 module Decidim::DecidimAwesome
-  describe VoteWeight do
+  describe ProposalExtraField do
     subject { extra_fields }
 
     let(:extra_fields) { create(:awesome_proposal_extra_fields) }
