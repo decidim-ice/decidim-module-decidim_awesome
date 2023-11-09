@@ -81,7 +81,7 @@ module Decidim::Proposals
         before do
           # rubocop:disable Rails/SkipsModelValidations:
           # we don't want to trigger the active record hooks
-          extra_fields.update_columns(vote_weights_totals: wrong_weights)
+          extra_fields.update_columns(vote_weight_totals: wrong_weights)
           # rubocop:enable Rails/SkipsModelValidations:
         end
 

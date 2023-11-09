@@ -6,7 +6,7 @@ class CreateDecidimAwesomeProposalExtraFields < ActiveRecord::Migration[6.0]
       # this might be polymorphic in the future (if other types of votes are supported)
       t.references :decidim_proposal, null: false, index: { name: "decidim_awesome_extra_fields_on_proposal" }
 
-      t.jsonb :vote_weights_totals
+      t.jsonb :vote_weight_totals
       t.integer :weight_total, default: 0
       t.timestamps
     end

@@ -99,7 +99,7 @@ module Decidim::DecidimAwesome
         it "increments the weight cache" do
           expect { create(:proposal_vote, proposal: proposal) }.to change { proposal.votes.count }.by(1)
           expect { create(:awesome_vote_weight, vote: proposal.votes.first, weight: 3) }.to change(Decidim::DecidimAwesome::ProposalExtraField, :count).by(1)
-          expect(proposal.extra_fields.vote_weights_totals).to eq({ "3" => 1 })
+          expect(proposal.extra_fields.vote_weight_totals).to eq({ "3" => 1 })
           expect(proposal.extra_fields.weight_total).to eq(3)
         end
 
@@ -109,7 +109,7 @@ module Decidim::DecidimAwesome
           let!(:another_extra_fields) { create(:awesome_proposal_extra_fields, :with_votes, proposal: another_proposal) }
 
           it "has weights and votes" do
-            expect(extra_fields.reload.vote_weights_totals).to eq({ "1" => 1, "2" => 1, "3" => 1, "4" => 1, "5" => 1 })
+            expect(extra_fields.reload.vote_weight_totals).to eq({ "1" => 1, "2" => 1, "3" => 1, "4" => 1, "5" => 1 })
             expect(extra_fields.weight_total).to eq(15)
           end
 
@@ -117,7 +117,7 @@ module Decidim::DecidimAwesome
             create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 1)
             create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 3)
             create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 3)
-            expect(extra_fields.reload.vote_weights_totals).to eq({ "1" => 2, "2" => 1, "3" => 3, "4" => 1, "5" => 1 })
+            expect(extra_fields.reload.vote_weight_totals).to eq({ "1" => 2, "2" => 1, "3" => 3, "4" => 1, "5" => 1 })
             expect(extra_fields.weight_total).to eq(22)
           end
         end
@@ -133,7 +133,7 @@ module Decidim::DecidimAwesome
             create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 1)
             create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 3)
             create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 3)
-            expect(extra_fields.vote_weights_totals).to eq({ "1" => 1, "3" => 2 })
+            expect(extra_fields.vote_weight_totals).to eq({ "1" => 1, "3" => 2 })
             expect(extra_fields.weight_total).to eq(7)
           end
         end
@@ -148,14 +148,14 @@ module Decidim::DecidimAwesome
         it "increments the weight cache" do
           vote_weight1.weight = 3
           vote_weight1.save
-          expect(extra_fields.vote_weights_totals).to eq({ "2" => 1, "3" => 1 })
+          expect(extra_fields.vote_weight_totals).to eq({ "2" => 1, "3" => 1 })
           expect(extra_fields.weight_total).to eq(5)
         end
 
         it "decreases the weight cache" do
           vote_weight2.weight = 1
           vote_weight2.save
-          expect(extra_fields.vote_weights_totals).to eq({ "1" => 2 })
+          expect(extra_fields.vote_weight_totals).to eq({ "1" => 2 })
           expect(extra_fields.weight_total).to eq(2)
         end
       end
@@ -167,7 +167,7 @@ module Decidim::DecidimAwesome
 
         it "decreases the weight cache" do
           vote_weight1.destroy
-          expect(extra_fields.vote_weights_totals).to eq({ "2" => 1 })
+          expect(extra_fields.vote_weight_totals).to eq({ "2" => 1 })
           expect(extra_fields.weight_total).to eq(2)
         end
       end
@@ -203,13 +203,13 @@ module Decidim::DecidimAwesome
         end
 
         it "returns all vote weights for a component" do
-          expect(proposal.extra_fields.vote_weights_totals).to eq({ "3" => 1, "4" => 1 })
+          expect(proposal.extra_fields.vote_weight_totals).to eq({ "3" => 1, "4" => 1 })
           expect(proposal.vote_weights).to eq({ "1" => 0, "2" => 0 })
           proposal.update_vote_weights!
           expect(proposal.vote_weights).to eq({ "1" => 1, "2" => 0 })
           expect(another_proposal.vote_weights).to eq({ "1" => 0, "2" => 1 })
-          expect(proposal.extra_fields.vote_weights_totals).to eq({ "1" => 1 })
-          expect(another_proposal.extra_fields.vote_weights_totals).to eq({ "2" => 1 })
+          expect(proposal.extra_fields.vote_weight_totals).to eq({ "1" => 1 })
+          expect(another_proposal.extra_fields.vote_weight_totals).to eq({ "2" => 1 })
         end
       end
     end

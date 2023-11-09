@@ -9,7 +9,7 @@ module Decidim
         has_one :extra_fields, foreign_key: "decidim_proposal_id", class_name: "Decidim::DecidimAwesome::ProposalExtraField", dependent: :destroy
 
         def weight_count(weight)
-          (extra_fields && extra_fields.vote_weights_totals[weight.to_s]) || 0
+          (extra_fields && extra_fields.vote_weight_totals[weight.to_s]) || 0
         end
 
         def vote_weights
@@ -26,10 +26,10 @@ module Decidim
 
         def update_vote_weights!
           extra_fields ||= Decidim::DecidimAwesome::ProposalExtraField.find_or_initialize_by(proposal: self)
-          extra_fields.vote_weights_totals = {}
+          extra_fields.vote_weight_totals = {}
           votes.each do |vote|
-            extra_fields.vote_weights_totals[vote.weight] ||= 0
-            extra_fields.vote_weights_totals[vote.weight] += 1
+            extra_fields.vote_weight_totals[vote.weight] ||= 0
+            extra_fields.vote_weight_totals[vote.weight] += 1
           end
           extra_fields.save!
           self.extra_fields = extra_fields

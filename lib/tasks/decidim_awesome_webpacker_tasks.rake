@@ -62,3 +62,9 @@ namespace :decidim_decidim_awesome do
     end
   end
 end
+
+
+Rake::Task["decidim:webpacker:upgrade"].enhance do
+  Rake::Task["decidim_decidim_awesome:webpacker:install"].invoke
+  Rake::Task["decidim_decidim_awesome:install:migrations"].invoke
+end
