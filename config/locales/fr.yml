@@ -21,7 +21,7 @@ fr:
         scoped_admins: Groupe d'administrateurs restreints %{id}
         scoped_styles: Style personnalisés %{id}
         use_markdown_editor: Utiliser un éditeur Markdown au lieu de l'éditeur HTML
-        validate_body_max_caps_percent: Pourcentage maximum autorisé de lettres majuscules pour le corps
+        validate_body_max_caps_percent: Pourcentage maximum autorisé de lettres majuscules pour la description
         validate_body_max_marks_together: Nombre maximum de caractères spéciaux autorisés dans le corps
         validate_body_min_length: Nombre de caractères minimum pour le corps
         validate_body_start_with_caps: Forcer le corps à commencer par une lettre majuscule
