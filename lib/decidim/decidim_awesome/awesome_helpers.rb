@@ -63,6 +63,8 @@ module Decidim
 
       # this will check if the current component has been configured to use a custom voting manifest
       def awesome_voting_manifest_for(component)
+        return nil unless component.settings.respond_to? :awesome_voting_manifest
+
         DecidimAwesome.voting_registry.find(component.settings.awesome_voting_manifest)
       end
 

@@ -257,6 +257,11 @@ module Decidim
       ]
     end
 
+    # Which components will be tampered to add the voting registry override
+    config_accessor :voting_components do
+      [:proposals, :reporting_propposals]
+    end
+
     # Public: Stores an instance of ContentBlockRegistry
     def self.voting_registry
       @voting_registry ||= Decidim::ManifestRegistry.new("decidim_awesome/voting")

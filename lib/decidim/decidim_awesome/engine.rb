@@ -127,7 +127,10 @@ module Decidim
             end
           end
 
-          Decidim.component_registry.find(:proposals).tap do |component|
+          Decidim::DecidimAwesome.voting_components&.each do |manifest|
+            component = Decidim.component_registry.find(manifest)
+            next unless component
+
             component.settings(:global) do |settings|
               settings.attribute :awesome_voting_manifest,
                                  type: :select,
