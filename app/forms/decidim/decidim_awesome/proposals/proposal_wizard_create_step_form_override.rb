@@ -27,7 +27,7 @@ module Decidim
           def override_validations?
             return false if context.current_component.settings.participatory_texts_enabled
 
-            custom_fields.present? || awesome_config.enabled_for?(:use_markdown_editor)
+            custom_fields.present? || awesome_config.enabled_in_context?(:use_markdown_editor)
           end
 
           def minimum_title_length

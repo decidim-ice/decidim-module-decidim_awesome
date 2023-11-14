@@ -11,6 +11,25 @@
   <% end %>
 </div>
 
+<% if config_enabled? :additional_proposal_sortings %>
+  </div> <!-- .card-section -->
+  </div><!-- .card -->
+
+  <div class="card">
+    <div class="card-divider">
+      <h2 class="card-title"><%= t("additional_proposal_sortings.title", scope: "decidim.decidim_awesome.admin.config.form") %></h2>
+    </div>
+    <div class="card-section">
+      <div class="row column decidim_awesome-form">
+        <%= form.select :additional_proposal_sortings, @form.additional_proposal_sorting_labels, { include_blank: false }, { multiple: true } %>
+        <p class="help-text">
+          <%= t("additional_proposal_sortings.help", scope: "decidim.decidim_awesome.admin.config.form") %> <%= link_to t("additional_proposal_sortings.enable_all", scope: "decidim.decidim_awesome.admin.config.form"), "#", id: "additional_proposal_sortings-enable-all" %>.
+        </p>
+
+        <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :additional_proposal_sortings, constraints: constraints_for(:additional_proposal_sortings) }) %>
+      </div>
+<% end %>
+
 <% if config_enabled? %i(validate_title_min_length validate_title_max_caps_percent validate_title_max_marks_together validate_title_start_with_caps) %>
   </div> <!-- .card-section -->
   </div><!-- .card -->
@@ -20,7 +39,6 @@
       <h2 class="card-title"><%= t("validators.title", scope: "decidim.decidim_awesome.admin.config.form") %></h2>
     </div>
     <div class="card-section">
-
       <div class="row column decidim_awesome-form">
         <% if config_enabled? :validate_title_start_with_caps %>
           <%= form.check_box :validate_title_start_with_caps %>

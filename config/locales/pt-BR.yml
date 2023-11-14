@@ -1,3 +1,4 @@
+---
 pt-BR:
   activemodel:
     attributes:
@@ -326,6 +327,10 @@ pt-BR:
           show:
             view_meeting: Ver reunião
             view_proposal: Ver proposta
+      voting:
+        voting_cards:
+          modal:
+            cancel: Cancelar
   layouts:
     decidim:
       admin:

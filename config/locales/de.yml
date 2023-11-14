@@ -1,7 +1,9 @@
+---
 de:
   activemodel:
     attributes:
       config:
+        additional_proposal_sortings: Zusätzliche Sortieroptionen aktiviert
         allow_images_in_full_editor: Bilder im vollständigen HTML-Editor erlauben
         allow_images_in_markdown_editor: Bilder im Markdown-Editor erlauben
         allow_images_in_proposals: Bilder im Vorschlags-Editor erlauben
@@ -105,6 +107,32 @@ de:
             show_not_answered: Nicht beantwortete Vorschläge anzeigen
             show_rejected: Abgelehnte Vorschläge anzeigen
             show_withdrawn: Zurückgezogene Vorschläge anzeigen
+      proposals:
+        settings:
+          global:
+            awesome_voting_manifest: Art der Unterstützung
+            awesome_voting_manifest_help_html: <strong class="text-alert">Seien Sie sich bewusst, dass eine Änderung dieser Einstellung während einer Abstimmungsperiode zu ungenauen oder unerwarteten Ergebnissen führen kann.</strong><br>Beachten Sie auch, dass diese Einstellung nur bearbeitet werden kann, wenn die Komponente noch keine Unterstützung hat.
+            awesome_voting_manifest_options:
+              default: Einfache Abstimmung (Standard)
+              voting_cards: Abstimmung mit farbigen Karten
+            default_sort_order_options:
+              az: A-Z (alphabetisch)
+              supported_first: Zuerst unterstützt
+              supported_last: Zuletzt unterstützt
+              za: Z-A (umgekehrt alphabetisch)
+            sort_orders_enabled: Aktivierte Sortierarten
+            voting_cards_box_title: Titel für das Abstimmungsfeld
+            voting_cards_box_title_help: Standardmässig "Für diesen Vorschlag abstimmen". Verwenden Sie "-", um den Text auszublenden.
+            voting_cards_instructions: Hilfe/Anleitung zum Unterstützen (schliessbares Pop-Up-Fenster)
+            voting_cards_instructions_help: Standardmässig "Bitte lesen Sie die Wahlregeln sorgfältig durch, um zu verstehen, wie Ihre Stimme von %{organization} verwendet wird"
+            voting_cards_show_abstain: Enthaltungsmöglichkeit hinzufügen
+            voting_cards_show_modal_help: Zeige die Hilfe/Anleitung zum Unterstützen an, wenn "Hilfe" angewählt wird
+          step:
+            default_sort_order_options:
+              az: A-Z (alphabetisch)
+              supported_first: Zuerst unterstützt
+              supported_last: Zuletzt unterstützt
+              za: Z-A (umgekehrt alphabetisch)
     decidim_awesome:
       admin:
         admin_accountability:
@@ -190,6 +218,10 @@ de:
             error: Fehler beim Entfernen der CSS-Box! %{error}
             success: CSS-Box %{key} erfolgreich entfernt
           form:
+            additional_proposal_sortings:
+              enable_all: Alle zusätzlichen Sortieroptionen aktiviert
+              help: Diese Sortieroptionen sind zusätzlich zu den Standardeinstellungen. Denken Sie auch daran, dass Sie die Standardreihenfolge in den Komponenteneinstellungen für Vorschläge wählen können.
+              title: Sortieroptionen für die Vorschlagsliste anpassen
             edit_label: Bezeichnung umbenennen
             errors:
               incorrect_css: 'CSS in Box #%{key} ist ungültig'
@@ -388,6 +420,36 @@ de:
             view_proposal: Vorschlag ansehen
       validators:
         too_much_caps: Es werden zu viele Großbuchstaben verwendet (über %{percent}% des Textes)
+      voting:
+        voting_cards:
+          abstained: "✔ Enthalten"
+          change_vote: Meine Stimme ändern
+          default_box_title: Über diesen Vorschlag abstimmen
+          default_instructions_html: <p>Bitte lesen Sie die Wahlregeln sorgfältig durch, um zu verstehen, wie Ihre Stimme von %{organization}" verwendet wird</p>
+          modal:
+            cancel: Abbrechen
+            message: Ihre Stimme wird am %{date} als endgültig betrachtet. Sie können sie bis dahin ändern
+            proceed: Fortfahren
+            skip: Auswählen, um dieses Fenster in Zukunft zu überspringen
+          vote_button: Klicken, um abzustimmen
+          voted: Abgestimmt
+          voting_for: Meine Stimme für "%{proposal}" ist "%{type}"
+          weights:
+            weight_0: Enthalten
+            weight_0_short: 'A:'
+            weight_1: Rot
+            weight_1_short: 'R:'
+            weight_2: Gelb
+            weight_2_short: 'Y:'
+            weight_3: Grün
+            weight_3_short: 'G:'
+    proposals:
+      proposals:
+        orders:
+          az: A-Z (alphabetisch)
+          supported_first: Zuerst unterstützt
+          supported_last: Zuletzt unterstützt
+          za: Z-A (umgekehrt alphabetisch)
   layouts:
     decidim:
       admin:

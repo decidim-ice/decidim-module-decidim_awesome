@@ -4,7 +4,7 @@ import "src/decidim/decidim_awesome/forms/rich_text_plugin"
 export default class CustomFieldsRenderer { // eslint-disable-line no-unused-vars
   constructor(containerSelector) {
     this.containerSelector = containerSelector || ".proposal_custom_field:last";
-    this.lang = this.getLang($("html").attr("lang"));
+    this.lang = this.getLang(window.DecidimAwesome.currentLocale);
   }
 
   getLang(lang) {

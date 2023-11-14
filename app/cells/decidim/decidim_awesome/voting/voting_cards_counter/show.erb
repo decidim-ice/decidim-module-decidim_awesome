@@ -1,0 +1,15 @@
+<% unless proposal.rejected? || proposal.withdrawn? %>
+  <% unless current_settings.votes_hidden? %>
+    <span class="votes_counter">
+      <span data-weight="3" title="<%= proposal.manifest.label_for(3) %>" class="weight_3"><%= t("decidim.decidim_awesome.voting.voting_cards.weights.weight_3_short") %> <%= model.weight_count(3) %></span> |
+      <span data-weight="2" title="<%= proposal.manifest.label_for(2) %>" class="weight_2"><%= t("decidim.decidim_awesome.voting.voting_cards.weights.weight_2_short") %> <%= model.weight_count(2) %></span> |
+      <span data-weight="1" title="<%= proposal.manifest.label_for(1) %>" class="weight_1"><%= t("decidim.decidim_awesome.voting.voting_cards.weights.weight_1_short") %> <%= model.weight_count(1) %></span>
+      <% if current_component.settings.voting_cards_show_abstain %>
+      | <span title="<%= proposal.manifest.label_for(0) %>" data-weight="0" class="weight_0"><%= t("decidim.decidim_awesome.voting.voting_cards.weights.weight_0_short") %> <%= model.weight_count(0) %></span>
+      <% end %>
+    </span>
+  <% end %>
+  <div id="proposal-<%= model.id %>-vote-button">
+    <%= render "vote_button" %>
+  </div>
+<% end %>

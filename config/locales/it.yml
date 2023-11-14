@@ -1,3 +1,4 @@
+---
 it:
   activemodel:
     attributes:
@@ -105,6 +106,31 @@ it:
             show_not_answered: Mostra le proposte senza risposta
             show_rejected: Mostra le proposte respinte
             show_withdrawn: Mostra le proposte ritirate
+      proposals:
+        settings:
+          global:
+            awesome_voting_manifest: Tipo di sostegno
+            awesome_voting_manifest_help_html: <strong class="text-alert">Tieni presente che cambiare questa impostazione nel mezzo di un periodo di votazione può portare a risultati inaccurati o inattesi.</strong><br>Nota anche che questa impostazione può essere modificata solo se il componente non ha ancora sostegni.
+            awesome_voting_manifest_options:
+              default: Voto semplice (default)
+              voting_cards: Votazione con carte colorate
+            default_sort_order_options:
+              az: A-Z (alfabetico)
+              supported_first: Prima i sostegni
+              supported_last: Sostegni al fondo
+              za: Z-A (Alfabetico inverso)
+            voting_cards_box_title: Titolo del riquadro di voto
+            voting_cards_box_title_help: Il valore predefinito è "Votare su questa proposta". Usa "-" per nasconderla.
+            voting_cards_instructions: Istruzioni di supporto/aiuto (finestra modale dissmissibile)
+            voting_cards_instructions_help: Il valore predefinito è "Si prega di leggere attentamente le regole elettorali per capire come il tuo voto sarà utilizzato da %{organization}""
+            voting_cards_show_abstain: Aggiungi un'opzione di astensione
+            voting_cards_show_modal_help: Mostra le istruzioni/modalità di aiuto quando si fa clic sul supporto
+          step:
+            default_sort_order_options:
+              az: A-Z (alfabetico)
+              supported_first: Prima i sostegni
+              supported_last: Sostegni al fondo
+              za: Z-A (Alfabetico inverso)
     decidim_awesome:
       admin:
         admin_accountability:
@@ -400,6 +426,36 @@ it:
             view_proposal: Visualizza proposta
       validators:
         too_much_caps: Sta usando troppe lettere maiuscole (oltre %{percent}% del testo)
+      voting:
+        voting_cards:
+          abstained: "✔️ Astenuti"
+          change_vote: Cambia il mio voto
+          default_box_title: Vota la proposta
+          default_instructions_html: <p>Si prega di leggere attentamente le regole elettorali per capire come il tuo voto sarà utilizzato da %{organization}"</p>
+          modal:
+            cancel: Annulla
+            message: Il tuo voto sarà considerato definitivo il %{date}. Fino ad allora puoi cambiarlo
+            proceed: Procedi
+            skip: Seleziona qui per ignorare questa finestra in futuro
+          vote_button: Clicca per votare
+          voted: Votato
+          voting_for: Il mio voto su "%{proposal}" è "%{type}"
+          weights:
+            weight_0: Astensione
+            weight_0_short: 'A:'
+            weight_1: Rosso
+            weight_1_short: 'R:'
+            weight_2: Giallo
+            weight_2_short: 'G:'
+            weight_3: Verde
+            weight_3_short: 'V:'
+    proposals:
+      proposals:
+        orders:
+          az: A-Z (alfabetico)
+          supported_first: Prima i sostegni
+          supported_last: Sostegni al fondo
+          za: Z-A (Alfabetico inverso)
   layouts:
     decidim:
       admin:
