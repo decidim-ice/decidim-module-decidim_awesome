@@ -2,6 +2,7 @@ ja:
   activemodel:
     attributes:
       config:
+        additional_proposal_sortings: 有効な追加ソートオプション
         allow_images_in_full_editor: フルHTMLエディターでの画像を許可する
         allow_images_in_markdown_editor: Markdownエディターでの画像を許可する
         allow_images_in_proposals: 提案エディターでの画像を許可する
@@ -105,6 +106,32 @@ ja:
             show_not_answered: 未回答の提案を表示
             show_rejected: 却下された提案を表示
             show_withdrawn: 撤回された提案を表示
+      proposals:
+        settings:
+          global:
+            awesome_voting_manifest: サポート種別
+            awesome_voting_manifest_help_html: <strong class="text-alert">投票期間の途中でこの設定を変更すると、不正確な結果や予期せぬ結果が生じることに注意してください。 </strong><br>また、コンポーネントにまだサポートがついていない場合にのみ、この設定を編集できることに注意してください。
+            awesome_voting_manifest_options:
+              default: 単純投票 (デフォルト)
+              voting_cards: カラーカードを使った投票
+            default_sort_order_options:
+              az: A-Z (アルファベット順)
+              supported_first: 最初にサポートした順
+              supported_last: 最後にサポートした順
+              za: Z-A (アルファベット逆順)
+            sort_orders_enabled: 有効なソート種別
+            voting_cards_box_title: 投票箱のタイトル
+            voting_cards_box_title_help: デフォルトは「この提案に投票する」です。非表示にするには「-」を使用してください。
+            voting_cards_instructions: 手順/ヘルプ (解除可能なモーダルウィンドウ) をサポート
+            voting_cards_instructions_help: デフォルトは " %{organization} がどのように投票を使用するか理解するため、選挙ルールをよくお読みください" です
+            voting_cards_show_abstain: 棄権オプションを追加
+            voting_cards_show_modal_help: サポートをクリックしたときに手順/ヘルプ モーダルを表示する
+          step:
+            default_sort_order_options:
+              az: A-Z (アルファベット順)
+              supported_first: 最初にサポートした順
+              supported_last: 最後にサポートした順
+              za: Z-A (アルファベット逆順)
     decidim_awesome:
       admin:
         admin_accountability:
@@ -190,6 +217,10 @@ ja:
             error: 'CSS box削除エラー: %{error}'
             success: CSS ボックス %{key} は正常に削除されました
           form:
+            additional_proposal_sortings:
+              enable_all: すべての追加ソートオプションを有効にする
+              help: これらのソートオプションはデフォルトのソートオプションに追加されます。また、提案コンポーネントの設定でデフォルトのソート順を選択できることを覚えておいてください。
+              title: 提案リストのソートオプションをカスタマイズする
             edit_label: ラベルを変更する
             errors:
               incorrect_css: 'Box #%{key} のCSSに問題があります'
@@ -399,6 +430,35 @@ ja:
             view_proposal: 提案を表示
       validators:
         too_much_caps: 大文字が多すぎます（テキストの %{percent}%以上）
+      voting:
+        voting_cards:
+          abstained: "✔️棄権"
+          change_vote: 投票を変更する
+          default_box_title: この提案に投票する
+          default_instructions_html: <p> %{organization} がどのように投票を使用するか理解するため、選挙ルールをよくお読みください</p>
+          modal:
+            message: あなたの投票は %{date} に確定したことになります。それまでは変更可能です
+            proceed: 続ける
+            skip: 今後このウィンドウをスキップする場合は、ここをチェックしてください
+          vote_button: クリックして投票
+          voted: 投票済
+          voting_for: '"%{proposal}" に対する私の投票 は "%{type}"です'
+          weights:
+            weight_0: 棄権
+            weight_0_short: 'A:'
+            weight_1: 赤
+            weight_1_short: 'R:'
+            weight_2: 黄
+            weight_2_short: 'Y:'
+            weight_3: 緑
+            weight_3_short: 'G:'
+    proposals:
+      proposals:
+        orders:
+          az: A-Z (アルファベット順)
+          supported_first: 最初にサポートした順
+          supported_last: 最後にサポートした順
+          za: Z-A (アルファベット逆順)
   layouts:
     decidim:
       admin:
