@@ -2,6 +2,7 @@ es:
   activemodel:
     attributes:
       config:
+        additional_proposal_sortings: Opciones adicionales de ordenación habilitadas
         allow_images_in_full_editor: Permitir imágenes en el editor HTML completo
         allow_images_in_markdown_editor: Permitir imágenes en el editor Markdown
         allow_images_in_proposals: Permitir imágenes en el editor de propuestas
@@ -105,6 +106,32 @@ es:
             show_not_answered: Muestra las propuestas pendientes de contestart
             show_rejected: Muestra las propuestas rechazadas
             show_withdrawn: Muestra las propuestas retiradas
+      proposals:
+        settings:
+          global:
+            awesome_voting_manifest: Tipos de soporte
+            awesome_voting_manifest_help_html: <strong class="text-alert">Sé consciente de que cambiar esta configuración en medio de un período de votación puede producir resultados inexactos o inesperados.</strong><br>Tenga en cuenta que esta configuración solo se puede editar si el componente aún no tiene ningún soporte.
+            awesome_voting_manifest_options:
+              default: Voto simple (por defecto)
+              voting_cards: Votación con tarjetas de color
+            default_sort_order_options:
+              az: A-Z (Alfabético)
+              supported_first: Mis soportes primero
+              supported_last: Mis soportes últimos
+              za: Z-A (Alfabético inverso)
+            sort_orders_enabled: Tipos de ordenación habilitados
+            voting_cards_box_title: Título de la cabina de votación
+            voting_cards_box_title_help: Por defecto es "Votar en esta propuesta". Use "-" para ocultarla.
+            voting_cards_instructions: Instrucciones/ayuda de soporte (ventana modal descartable)
+            voting_cards_instructions_help: Por defecto es "Por favor lee las reglas de votación cuidadosamente para entender cómo se usará tu voto por %{organization}""
+            voting_cards_show_abstain: Añadir una opción de abstención
+            voting_cards_show_modal_help: Mostrar instrucciones/ayuda modal cuando se haga clic en el soporte
+          step:
+            default_sort_order_options:
+              az: A-Z (Alfabético)
+              supported_first: Mis soportes primero
+              supported_last: Mis soportes últimos
+              za: Z-A (Alfabético inverso)
     decidim_awesome:
       admin:
         admin_accountability:
@@ -190,6 +217,10 @@ es:
             error: '¡Error al eliminar la caja CSS! %{error}'
             success: Caja CSS %{key} eliminada correctamente
           form:
+            additional_proposal_sortings:
+              enable_all: Habilitar todas las opciones de ordenación adicionales
+              help: Estas opciones de ordenación son adicionales a las predeterminadas. Además, recuerda que puedes elegir el orden por defecto en los ajustes del componente de propuestas.
+              title: Personalizar las opciones de ordenación para la lista de propuestas
             edit_label: Renombrar la etiqueta
             errors:
               incorrect_css: 'El CSS de la caja #%{key} no es válido'
@@ -400,6 +431,35 @@ es:
             view_proposal: Ver propuesta
       validators:
         too_much_caps: Contiene demasiadas letras mayúsculas (más del %{percent}% del texto)
+      voting:
+        voting_cards:
+          abstained: "✔️ Abstenido"
+          change_vote: Cambiar mi voto
+          default_box_title: Votar esta propuesta
+          default_instructions_html: <p>Por defecto es "Por favor lee las reglas de votación cuidadosamente para entender cómo se usará tu voto por %{organization}""</p>
+          modal:
+            message: Tu voto se considerará final el %{date}. Puedes cambiarlo hasta entonces
+            proceed: Proceder
+            skip: Marca aquí para omitir esta ventana en el futuro
+          vote_button: Clica para votar
+          voted: Votado
+          voting_for: Mi voto sobre "%{proposal}" es "%{type}"
+          weights:
+            weight_0: Abstenerse
+            weight_0_short: 'Ab:'
+            weight_1: Rojo
+            weight_1_short: 'R:'
+            weight_2: Amarillo
+            weight_2_short: 'A:'
+            weight_3: Verde
+            weight_3_short: 'V:'
+    proposals:
+      proposals:
+        orders:
+          az: A-Z (Alfabético)
+          supported_first: Mis soportes primero
+          supported_last: Mis soportes últimos
+          za: Z-A (Alfabético inverso)
   layouts:
     decidim:
       admin:
