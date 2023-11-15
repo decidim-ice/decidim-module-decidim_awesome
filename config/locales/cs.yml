@@ -428,8 +428,10 @@ cs:
         voting_cards:
           abstained: "✔️ Zdržel se hlasování"
           change_vote: Změnit můj hlas
+          default_box_title: Hlasovat o tomto návrhu
           modal:
             cancel: Zrušit
+          vote_button: Kliknutím hlasujte
           voted: Odhlasováno
           weights:
             weight_0_short: 'A:'
