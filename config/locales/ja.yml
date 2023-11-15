@@ -1,3 +1,4 @@
+---
 ja:
   activemodel:
     attributes:
@@ -437,6 +438,7 @@ ja:
           default_box_title: この提案に投票する
           default_instructions_html: <p> %{organization} がどのように投票を使用するか理解するため、選挙ルールをよくお読みください</p>
           modal:
+            cancel: キャンセル
             message: あなたの投票は %{date} に確定したことになります。それまでは変更可能です
             proceed: 続ける
             skip: 今後このウィンドウをスキップする場合は、ここをチェックしてください

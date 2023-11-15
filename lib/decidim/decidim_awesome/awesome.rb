@@ -9,6 +9,7 @@ module Decidim
     autoload :ContextAnalyzers, "decidim/decidim_awesome/context_analyzers"
     autoload :MenuHacker, "decidim/decidim_awesome/menu_hacker"
     autoload :CustomFields, "decidim/decidim_awesome/custom_fields"
+    autoload :VotingManifest, "decidim/decidim_awesome/voting_manifest"
 
     # Awesome coms with some components for participatory spaces
     # Currently :awesome_map and :awesome_iframe, list them here
@@ -57,7 +58,13 @@ module Decidim
     end
 
     # Live chat widget linked to Telegram account or group
+    # In the admin side only
     config_accessor :intergram_for_admins do
+      false
+    end
+
+    # In the public side only
+    config_accessor :intergram_for_public do
       false
     end
 
@@ -96,8 +103,22 @@ module Decidim
       true
     end
 
-    config_accessor :intergram_for_public do
-      false
+    # This transforms the proposal voting into a weighted voting
+    # Different processors can be registered and configured in the component's settings
+    # Each processor must account for a cell to display how to vote and a cell to display the results
+    config_accessor :weighted_proposal_voting do
+      true
+    end
+
+    # Additional sorting methods for proposals
+    # this setting also stores the selected sorting method in the user's session
+    config_accessor :additional_proposal_sortings do
+      [
+        :supported_first,
+        :supported_last,
+        :az,
+        :za
+      ]
     end
 
     # allows admins to created specific CSS snippets affecting only some specific parts
@@ -236,13 +257,31 @@ module Decidim
       ]
     end
 
+    # Which components will be tampered to add the voting registry override
+    config_accessor :voting_components do
+      [:proposals, :reporting_propposals]
+    end
+
+    # Public: Stores an instance of ContentBlockRegistry
+    def self.voting_registry
+      @voting_registry ||= Decidim::ManifestRegistry.new("decidim_awesome/voting")
+    end
+
     #
     # HELPERS
     #
     # pass a single config var or an array of them
     # any non disabled match will return as true
+    def self.possible_additional_proposal_sortings
+      @possible_additional_proposal_sortings ||= additional_proposal_sortings.to_a.filter_map do |sort|
+        next unless sort.to_sym.in?([:az, :za, :supported_first, :supported_last])
+
+        sort.to_s
+      end
+    end
+
     def self.enabled?(config_vars)
-      config_vars = [config_vars] unless config_vars.respond_to?(:detect)
+      config_vars = [config_vars] unless config_vars.respond_to?(:any?)
 
       config_vars.any? do |item|
         next unless config.has_key?(item.to_sym)
@@ -255,7 +294,7 @@ module Decidim
       @registered_components ||= []
     end
 
-    # Wrapp component registering to register component later, after initializer
+    # Wrap registered components to register it later, after initializing
     # so we can honor disabled_components config
     def self.register_component(manifest, &block)
       registered_components << [manifest, block]

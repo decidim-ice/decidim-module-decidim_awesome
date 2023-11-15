@@ -1,3 +1,4 @@
+---
 de:
   activemodel:
     attributes:
@@ -426,6 +427,7 @@ de:
           default_box_title: Über diesen Vorschlag abstimmen
           default_instructions_html: <p>Bitte lesen Sie die Wahlregeln sorgfältig durch, um zu verstehen, wie Ihre Stimme von %{organization}" verwendet wird</p>
           modal:
+            cancel: Abbrechen
             message: Ihre Stimme wird am %{date} als endgültig betrachtet. Sie können sie bis dahin ändern
             proceed: Fortfahren
             skip: Auswählen, um dieses Fenster in Zukunft zu überspringen

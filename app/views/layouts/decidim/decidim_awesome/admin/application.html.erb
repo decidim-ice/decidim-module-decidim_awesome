@@ -1,0 +1,75 @@
+<% def icon_aria_selected_link_to(text, link, icon_name, options = {})
+  aria_selected_link_to(safe_join([icon(icon_name), text]), link, options)
+end %>
+
+<% content_for :secondary_nav do %>
+  <div class="secondary-nav">
+    <div class="secondary-nav__title">
+      <%= t "layouts.decidim.admin.decidim_awesome.title" %>
+    </div>
+
+    <ul>
+      <% if menus[:editors] %>
+        <li <% if is_active_link?(decidim_admin_decidim_awesome.config_path(:editors)) %> class="is-active" <% end %>>
+          <%= icon_aria_selected_link_to I18n.t("menu.editors", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:editors), "text" %>
+        </li>
+      <% end %>
+      <% if menus[:proposals] %>
+        <li <% if is_active_link?(decidim_admin_decidim_awesome.config_path(:proposals)) %> class="is-active" <% end %>>
+          <%= icon_aria_selected_link_to I18n.t("menu.proposals", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:proposals), "document" %>
+        </li>
+      <% end %>
+      <% if menus[:surveys] %>
+        <li <% if is_active_link?(decidim_admin_decidim_awesome.config_path(:surveys)) %> class="is-active" <% end %>>
+          <%= icon_aria_selected_link_to I18n.t("menu.surveys", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:surveys), "spreadsheet" %>
+        </li>
+      <% end %>
+      <% if menus[:styles] %>
+        <li <% if is_active_link?(decidim_admin_decidim_awesome.config_path(:styles)) %> class="is-active" <% end %>>
+          <%= icon_aria_selected_link_to I18n.t("menu.styles", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:styles), "brush" %>
+        </li>
+      <% end %>
+      <% if menus[:proposal_custom_fields] %>
+        <li <% if is_active_link?(decidim_admin_decidim_awesome.config_path(:proposal_custom_fields)) %> class="is-active" <% end %>>
+          <%= icon_aria_selected_link_to I18n.t("menu.proposal_custom_fields", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:proposal_custom_fields), "layers" %>
+        </li>
+      <% end %>
+      <% if menus[:admins] %>
+        <li <% if is_active_link?(decidim_admin_decidim_awesome.config_path(:admins)) %> class="is-active" <% end %>>
+          <%= icon_aria_selected_link_to I18n.t("menu.admins", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:admins), "people" %>
+        </li>
+      <% end %>
+      <% if menus[:menu_hacks] %>
+        <li <% if is_active_link?(decidim_admin_decidim_awesome.menu_hacks_path) %> class="is-active" <% end %>>
+          <%= icon_aria_selected_link_to I18n.t("menu.menu_hacks", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.menu_hacks_path, "menu" %>
+        </li>
+      <% end %>
+      <% if menus[:custom_redirects] %>
+        <li <% if is_active_link?(decidim_admin_decidim_awesome.custom_redirects_path) %> class="is-active" <% end %>>
+          <%= icon_aria_selected_link_to I18n.t("menu.custom_redirects", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.custom_redirects_path, "share-boxed" %>
+        </li>
+      <% end %>
+      <% if menus[:livechat] %>
+        <li <% if is_active_link?(decidim_admin_decidim_awesome.config_path(:livechat)) %> class="is-active" <% end %>>
+          <%= icon_aria_selected_link_to I18n.t("menu.livechat", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.config_path(:livechat), "chat" %>
+        </li>
+      <% end %>
+      <li <% if is_active_link?(decidim_admin_decidim_awesome.checks_path) %> class="is-active" <% end %>>
+        <%= icon_aria_selected_link_to I18n.t("menu.checks", scope: "decidim.decidim_awesome.admin"), decidim_admin_decidim_awesome.checks_path, "pulse" %>
+      </li>
+    </ul>
+  </div>
+<% end %>
+
+<%= render "layouts/decidim/admin/application" do %>
+  <div class="process-title">
+    <div class="process-title-content">
+      <%= link_to t("decidim.admin.menu.decidim_awesome"), decidim_admin_decidim_awesome.config_path(:editors), target: "_blank" %>
+    </div>
+  </div>
+
+  <%= yield %>
+
+<div class="pokecode-credits"><%= t("credits", scope: "decidim.decidim_awesome", version: link_to(awesome_version, "https://github.com/decidim-ice/decidim-module-decidim_awesome/"), company: link_to("PokeCode", "https://pokecode.net")).html_safe %></div>
+
+<% end %>

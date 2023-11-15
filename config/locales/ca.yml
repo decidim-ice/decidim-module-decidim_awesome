@@ -1,3 +1,4 @@
+---
 ca:
   activemodel:
     attributes:
@@ -438,6 +439,7 @@ ca:
           default_box_title: Vota en aquesta proposta
           default_instructions_html: <p>Llegeix les normes de la votació amb atenció per entendre com s'utilitzarà el teu vot per %{organization}"</p>
           modal:
+            cancel: Cancel·la
             message: El teu vot es considerarà definitiu el %{date}. Pots canviar-lo fins a aquest moment
             proceed: Procedeix
             skip: Marca aquí per no mostrar aquesta finestra en el futur

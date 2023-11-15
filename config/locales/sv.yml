@@ -1,3 +1,4 @@
+---
 sv:
   activemodel:
     attributes:
@@ -153,6 +154,10 @@ sv:
           show:
             view_meeting: Visa möte
             view_proposal: Visa förslag
+      voting:
+        voting_cards:
+          modal:
+            cancel: Avbryt
   layouts:
     decidim:
       admin:

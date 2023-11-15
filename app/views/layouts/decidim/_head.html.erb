@@ -1,5 +1,0 @@
-<%= render partial: "#{version_prefix}/layouts/decidim/head" %>
-
-<% if show_public_intergram? %>
-  <%= render partial: "layouts/decidim/decidim_awesome/intergram_widget", locals: { settings: organization_awesome_config[:intergram_for_public_settings] } %>
-<% end %>

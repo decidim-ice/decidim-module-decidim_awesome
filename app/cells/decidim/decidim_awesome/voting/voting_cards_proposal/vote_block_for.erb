@@ -1,0 +1,16 @@
+<div id="vote-container" data-proposal-id="<%= proposal.id %>">
+  <div class="vote-block">
+    <% unless current_settings.votes_hidden? %>
+      <p class="vote-count" data-weight="<%= weight %>"><%= proposal_votes(weight) %></p>
+    <% end %>
+    <%= action_authorized_link_to :vote,
+                                  proposal_vote_path(weight),
+                                  **link_options(weight) do %>
+      <span class="vote-label"><%= proposal.manifest.label_for(weight) %></span>
+      <%= content_tag :svg, role: "img" do
+        content_tag(:title, t("decidim.decidim_awesome.voting.voting_cards.voting_for", proposal: sanitized_title, type: proposal.manifest.label_for(weight))) +
+        content_tag(:use, "", "href" => svg_path(weight))
+      end %>
+    <% end %>
+  </div>
+</div>

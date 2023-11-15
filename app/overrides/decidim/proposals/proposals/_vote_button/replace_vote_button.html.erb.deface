@@ -1,0 +1,7 @@
+<!-- surround_contents "div.button--vote-button" -->
+
+<% if view = awesome_voting_manifest_for(current_component)&.show_vote_button_view %>
+  <%= render view, local_assigns if view.present? %>
+<% else %>
+  <%= render_original %>
+<% end %>

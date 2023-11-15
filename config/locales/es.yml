@@ -1,3 +1,4 @@
+---
 es:
   activemodel:
     attributes:
@@ -438,6 +439,7 @@ es:
           default_box_title: Votar esta propuesta
           default_instructions_html: <p>Por defecto es "Por favor lee las reglas de votación cuidadosamente para entender cómo se usará tu voto por %{organization}""</p>
           modal:
+            cancel: Cancelar
             message: Tu voto se considerará final el %{date}. Puedes cambiarlo hasta entonces
             proceed: Proceder
             skip: Marca aquí para omitir esta ventana en el futuro
