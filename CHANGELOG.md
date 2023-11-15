@@ -11,6 +11,7 @@ Compatibility:
 Features:
   - Added translations
   - Fix deface override updating <body> tag
+  - Fix ordering with accents
 
 v0.10.0
 ------

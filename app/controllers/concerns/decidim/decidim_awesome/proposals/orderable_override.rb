@@ -35,13 +35,13 @@ module Decidim
           def reorder(proposals)
             case order
             when "az"
-              proposals.order(Arel.sql("decidim_proposals_proposals.title->>'#{locale}' ASC,
-                                        decidim_proposals_proposals.title->'machine_translations'->>'#{locale}' ASC,
-                                        decidim_proposals_proposals.title->>'#{default_locale}' ASC"))
+              proposals.order(Arel.sql("CONCAT(decidim_proposals_proposals.title->>'#{locale}',
+                                        decidim_proposals_proposals.title->'machine_translations'->>'#{locale}',
+                                        decidim_proposals_proposals.title->>'#{default_locale}') #{collation} ASC"))
             when "za"
-              proposals.order(Arel.sql("decidim_proposals_proposals.title->>'#{locale}' DESC,
-                                        decidim_proposals_proposals.title->'machine_translations'->>'#{locale}' DESC,
-                                        decidim_proposals_proposals.title->>'#{default_locale}' DESC"))
+              proposals.order(Arel.sql("CONCAT(decidim_proposals_proposals.title->>'#{locale}',
+                                        decidim_proposals_proposals.title->'machine_translations'->>'#{locale}',
+                                        decidim_proposals_proposals.title->>'#{default_locale}') #{collation} DESC"))
             when "supported_first"
               proposals.joins(my_votes_join).group(:id).order(Arel.sql("COUNT(decidim_proposals_proposal_votes.id) DESC"))
             when "supported_last"
@@ -63,6 +63,13 @@ module Decidim
             end
           end
           # rubocop:enable Metrics/CyclomaticComplexity
+
+          def collation
+            @collation ||= begin
+              collation = Decidim::DecidimAwesome.collation_for(locale)
+              "COLLATE \"#{collation}\"" if collation.present?
+            end
+          end
 
           def my_votes_join
             votes_table = Decidim::Proposals::ProposalVote.arel_table
