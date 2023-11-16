@@ -43,7 +43,7 @@
         <strong><%= t ".head_tags" %></strong>
         <ul class="vertical menu">
         <% {
-          CSS: "//link[@rel='stylesheet'][contains(@href,'decidim_decidim_awesome')]",
+          CSS: "//head/link[@rel='stylesheet'][contains(@href,'decidim_decidim_awesome')]",
           JavaScript: "//script[contains(@src,'decidim_decidim_awesome')]"
           }.each do |part, xpath| %>
           <li>
@@ -63,7 +63,7 @@
         <strong><%= t ".admin_head_tags" %></strong>
         <ul class="vertical menu">
         <% {
-          CSS: "//link[@rel='stylesheet'][contains(@href,'decidim_admin_decidim_awesome')]",
+          CSS: "//head/link[@rel='stylesheet'][contains(@href,'decidim_admin_decidim_awesome')]",
           JavaScript: "//script[contains(@src,'decidim_admin_decidim_awesome')]"
           }.each do |part, xpath| %>
           <li>

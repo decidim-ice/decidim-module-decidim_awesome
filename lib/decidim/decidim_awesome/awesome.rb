@@ -280,6 +280,15 @@ module Decidim
       end
     end
 
+    def self.collation_for(locale)
+      @collation_for ||= {}
+      @collation_for[locale] ||= begin
+        res = ActiveRecord::Base.connection.execute(Arel.sql("SELECT collname FROM pg_collation WHERE collname LIKE '#{locale}-x-icu' LIMIT 1")).first
+        res ||= ActiveRecord::Base.connection.execute(Arel.sql("SELECT collname FROM pg_collation WHERE collname LIKE '#{locale[0..1]}%' LIMIT 1")).first
+        res["collname"] if res
+      end
+    end
+
     def self.enabled?(config_vars)
       config_vars = [config_vars] unless config_vars.respond_to?(:any?)
 

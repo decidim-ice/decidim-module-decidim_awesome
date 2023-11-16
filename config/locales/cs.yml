@@ -3,6 +3,7 @@ cs:
   activemodel:
     attributes:
       config:
+        additional_proposal_sortings: Povoleny další možnosti řazení
         allow_images_in_full_editor: Povolit obrázky v kompletním HTML editoru
         allow_images_in_markdown_editor: Povolit obrázky v editoru markdown
         allow_images_in_proposals: Povolit obrázky v editoru návrhů
@@ -111,10 +112,14 @@ cs:
           global:
             awesome_voting_manifest: Typ podpory
             awesome_voting_manifest_options:
+              default: Jednoduché hlasování (výchozí)
               voting_cards: Hlasování pomocí barevných karet
             default_sort_order_options:
               az: A-Z (abecední)
+              supported_first: Nejdříve podporováno
+              supported_last: Naposledy podporováno
               za: Z-A (obrácená abeceda)
+            sort_orders_enabled: Typy řazeníí povoleny
             voting_cards_box_title: Název hlasovacího pole
             voting_cards_instructions_help: Výchozí hodnota je "Přečtěte si pečlivě pravidla voleb, abyste pochopili, jak bude vaše hlasování použito %{organization}""
             voting_cards_show_abstain: Přidat možnost zdržet se hlasování
@@ -208,6 +213,8 @@ cs:
             error: Chyba při odstraňování CSS boxu! %{error}
             success: CSS box %{key} byl úspěšně odstraněn
           form:
+            additional_proposal_sortings:
+              enable_all: Povolit všechny další možnosti řazení
             edit_label: Přejmenovat štítek
             errors:
               incorrect_css: 'CSS v poli #%{key} je neplatné'
@@ -422,8 +429,11 @@ cs:
         voting_cards:
           abstained: "✔️ Zdržel se hlasování"
           change_vote: Změnit můj hlas
+          default_box_title: Hlasovat o tomto návrhu
           modal:
             cancel: Zrušit
+          vote_button: Kliknutím hlasujte
+          voted: Odhlasováno
           weights:
             weight_0_short: 'A:'
             weight_1: Červená
