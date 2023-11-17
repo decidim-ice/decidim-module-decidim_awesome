@@ -1,10 +1,10 @@
-@import "stylesheets/decidim/variables";
-@import "stylesheets/decidim/utils/settings";
-@import "stylesheets/decidim/utils/mixins";
+// @import "stylesheets/decidim/variables";
+// @import "stylesheets/decidim/utils/settings";
+// @import "stylesheets/decidim/utils/mixins";
 
 .editor-loading {
   &::before {
-    @include spinner(25px, $medium-gray, var(--primary), 800ms);
+    // @include spinner(25px, $medium-gray, var(--primary), 800ms);
 
     float: right;
     content: "";

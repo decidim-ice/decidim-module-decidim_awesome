@@ -20,7 +20,7 @@
 .decidim_awesome {
   &.modal {
     .spinner {
-      @include spinner(25px, #aaa, var(--secondary), 800ms);
+      // @include spinner(25px, #aaa, var(--secondary), 800ms);
 
       vertical-align: middle;
       display: none;

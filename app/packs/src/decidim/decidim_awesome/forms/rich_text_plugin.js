@@ -4,7 +4,7 @@
  *
  * Registers Decidim Richtext as a subtype for the textarea control
  */
-import {createQuillEditor} from "src/decidim/decidim_awesome/editors/editor"
+// import {createQuillEditor} from "src/decidim/decidim_awesome/editors/editor"
 
 // configure the class for runtime loading
 if (!window.fbControls) {
@@ -90,7 +90,7 @@ window.fbControls.push(function(controlClass, allControlClasses) {
       window.fbEditors.quill[this.id] = {};
       const editor = window.fbEditors.quill[this.id];
       // createQuillEditor does all the job to update the hidden input wrapper
-      editor.instance = createQuillEditor(this.wrapper);
+      // editor.instance = createQuillEditor(this.wrapper);
       // editor.data = new Delta();
       // if (value) {
       //   editor.instance.setContents(window.JSON.parse(this.parsedHtml(value)));

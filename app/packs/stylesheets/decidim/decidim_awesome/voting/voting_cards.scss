@@ -85,7 +85,7 @@
     position: relative;
 
     &::before {
-      @include spinner(25px, $medium-gray, var(--primary), 800ms);
+      // @include spinner(25px, $medium-gray, var(--primary), 800ms);
 
       z-index: 1000;
       content: "";
