@@ -61,7 +61,7 @@ module Decidim
           Decidim::Proposals::Proposal.include(Decidim::DecidimAwesome::HasProposalExtraFields)
           Decidim::Proposals::ProposalSerializer.include(Decidim::DecidimAwesome::ProposalSerializerOverride)
           Decidim::Proposals::ProposalType.include(Decidim::DecidimAwesome::ProposalTypeOverride)
-          Decidim::Proposals::ProposalMCell.include(Decidim::DecidimAwesome::ProposalMCellOverride)
+          Decidim::Proposals::ProposalLCell.include(Decidim::DecidimAwesome::ProposalLCellOverride)
         end
 
         Decidim::MenuPresenter.include(Decidim::DecidimAwesome::MenuPresenterOverride)
