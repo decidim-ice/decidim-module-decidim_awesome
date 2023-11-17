@@ -545,6 +545,9 @@ en:
             weight_2_short: 'Y:'
             weight_3: Green
             weight_3_short: 'G:'
+    meetings:
+      meetings_map:
+        view_meeting: View meeting
     proposals:
       proposals:
         orders:
