@@ -1,3 +1,0 @@
-<!-- replace "erb[loud]:contains('stylesheet_pack_tag')" -->
-
-<%= stylesheet_pack_tag "decidim_admin_decidim_awesome", media: "all" %>
