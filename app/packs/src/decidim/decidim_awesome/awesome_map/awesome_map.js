@@ -1,11 +1,11 @@
 import * as L from "leaflet";
 // comes with Decidim
-import "src/decidim/map/icon.js" 
+// import "src/decidim/map/icon.js"
 import "src/decidim/vendor/leaflet-tilelayer-here"
 // Comes with Decidim
-import "leaflet.markercluster"; 
+import "leaflet.markercluster";
 // included in this package.json
-import "leaflet.featuregroup.subgroup" 
+import "leaflet.featuregroup.subgroup"
 import "src/vendor/jquery.truncate"
 import "jsrender"
 
