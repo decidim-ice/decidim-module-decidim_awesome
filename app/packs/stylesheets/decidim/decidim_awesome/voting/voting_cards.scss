@@ -69,7 +69,7 @@
 
       .vote-label {
         margin-bottom: 1rem;
-        color: $black;
+        @apply text-black;
       }
     }
 
