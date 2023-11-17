@@ -11,6 +11,15 @@ module Decidim
 
       private
 
+      def set_component_breadcrumb_item
+        context_breadcrumb_items << {
+          label: current_component.name,
+          url: EngineRouter.admin_proxy(component.participatory_space).edit_component_path(id: component),
+          active: false,
+          resource: current_component
+        }
+      end
+
       def component
         Decidim::Component.find(params[:component_id])
       end
