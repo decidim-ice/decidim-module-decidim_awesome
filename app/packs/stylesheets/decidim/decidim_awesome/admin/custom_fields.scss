@@ -9,21 +9,13 @@
   &:first-child {
     margin-left: 0;
   }
-  $colors: (
-    "primary": #{$primary},
-    "secondary": #{$secondary},
-    "success": #{$success},
-    "warning": #{$warning},
-    "alert": #{$alert},
-    "highlight": #{$highlight},
-    "highlight_alternative": #{$highlight_alternative}
-  );
 
-  @each $name, $color in $colors {
-    &.#{$name} {
-      background-color: #{$color};
-    }
-  }
+  &.primary { background-color: var(--primary)}
+  &.secondary { background-color: var(--secondary)}
+  &.tertiary { background-color: var(--tertiary)}
+  &.alert { background-color: var(--alert)}
+  &.warning { background-color: var(--warning)}
+  &.success { background-color: var(--success)}
 }
 
 .tabs-content {
