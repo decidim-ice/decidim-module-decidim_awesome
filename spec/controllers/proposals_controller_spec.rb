@@ -9,9 +9,9 @@ module Decidim::Proposals
     let(:organization) { participatory_space.organization }
     let(:participatory_space) { component.participatory_space }
     let(:component) { create(:proposal_component, :with_votes_enabled, settings: settings) }
-    let!(:proposal1) { create(:proposal, title: { en: "m middle", ca: "z últim", "machine_translations" => { es: "a primero" } }, component: component) }
-    let!(:proposal2) { create(:proposal, title: { en: "z last", ca: "m mig", "machine_translations" => { es: "z último" } }, component: component) }
-    let!(:proposal3) { create(:proposal, title: { en: "a first", ca: "a primer", "machine_translations" => { es: "m medio" } }, component: component) }
+    let!(:proposal1) { create(:proposal, title: { en: "m middle", ca: "à 3", "machine_translations" => { es: "a primero" } }, component: component) }
+    let!(:proposal2) { create(:proposal, title: { en: "z last", ca: "A 2", "machine_translations" => { es: "z último" } }, component: component) }
+    let!(:proposal3) { create(:proposal, title: { en: "a first", ca: "a 1", "machine_translations" => { es: "m medio" } }, component: component) }
     let(:user) { create(:user, :confirmed, organization: component.organization) }
     let!(:vote1) { create(:proposal_vote, proposal: proposal2, author: user) }
     let!(:vote2) { create(:proposal_vote, proposal: proposal3, author: user) }
@@ -37,12 +37,15 @@ module Decidim::Proposals
     end
     let!(:awesome_config) { nil }
     let!(:awesome_constraint) { nil }
+    let(:skip_collation_for) { "" }
 
     before do
       # rubocop:disable RSpec/AnyInstance
       allow_any_instance_of(Decidim::DecidimAwesome::Config).to receive(:defaults).and_return(config_defaults)
       allow_any_instance_of(Decidim::DecidimAwesome).to receive(:additional_proposal_sortings).and_return(additional_sortings)
       allow_any_instance_of(ActionController::TestRequest).to receive(:url).and_return("/processes/#{participatory_space.slug}/proposals")
+      allow(Decidim::DecidimAwesome).to receive(:collation_for).and_call_original
+      allow(Decidim::DecidimAwesome).to receive(:collation_for).with(skip_collation_for).and_return(nil)
       # rubocop:enable RSpec/AnyInstance
       request.env["decidim.current_organization"] = organization
       request.env["decidim.current_participatory_space"] = participatory_space
@@ -56,6 +59,18 @@ module Decidim::Proposals
 
         expect(response).to have_http_status(:ok)
         expect(controller.helpers.available_orders).to eq(%w(random recent supported_first supported_last az za most_voted most_endorsed most_commented most_followed with_more_authors))
+        expect(controller.send(:collation)).to eq('COLLATE "en-x-icu"')
+      end
+
+      context "when collation is not found" do
+        let(:skip_collation_for) { :en }
+
+        it "has order filters" do
+          get :index, params: params
+          expect(response).to have_http_status(:ok)
+          expect(controller.helpers.available_orders).to eq(%w(random recent supported_first supported_last az za most_voted most_endorsed most_commented most_followed with_more_authors))
+          expect(controller.send(:collation)).to be_blank
+        end
       end
 
       context "when no additional_sortings" do
