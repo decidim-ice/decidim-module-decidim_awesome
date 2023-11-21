@@ -17,11 +17,16 @@
             <% constraint.settings.reverse_each do |k, val| %>
               <span class="label <%= k %> constraint-<%= val %>"><%= translate_constraint_value constraint, k %></span>
             <% end %>
-          <a href="<%= constraint_path(id: constraint.id, key: key) %>" class="edit-condition"><%= t ".edit" %></a>
+            <button id="<%= "edit-#{key}" %>"  type="button" name="button" class="edit-condition" data-dialog-open="<%= "edit-modal-#{key}" %>" data-dialog-remote-url="<%= constraint_path(id: constraint.id, key: key) %>">
+              <%= t ".edit" %>
+            </button>
+            <%= decidim_modal id: "edit-modal-#{key}", class: "decidim_awesome modal", remote: true %>
           <%= link_to t(".delete"), constraint_path(id: constraint.id), remote: true, method: :delete %>
         </li>
       <% end %>
   </ul>
-  <a href="<%= new_constraint_path(key: key) %>" class="add-condition" data-open="constraintsModal"><%= t ".add_condition" %></a>
-
+  <button id="<%= "new-#{key}" %>" type="button" name="button" class="add-condition" data-dialog-open="<%= "new-modal-#{key}" %>" data-dialog-remote-url="<%= new_constraint_path(key: key) %>">
+    <%= t ".add_condition" %>
+  </button>
+  <%= decidim_modal id: "new-modal-#{key}", class: "decidim_awesome modal", remote: true %>
 </div>
