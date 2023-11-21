@@ -1,4 +1,3 @@
----
 cs:
   activemodel:
     attributes:
@@ -111,6 +110,7 @@ cs:
         settings:
           global:
             awesome_voting_manifest: Typ podpory
+            awesome_voting_manifest_help_html: <strong class="text-alert">Uvědomte si, že změna tohoto nastavení uprostřed hlasovacího období může mít za následek nepřesné nebo neočekávané výsledky.</strong><br>Všimněte si, že toto nastavení může být upraveno pouze v případě, že komponenta nemá zatím žádnou podporu.
             awesome_voting_manifest_options:
               default: Jednoduché hlasování (výchozí)
               voting_cards: Hlasování pomocí barevných karet
@@ -121,12 +121,16 @@ cs:
               za: Z-A (obrácená abeceda)
             sort_orders_enabled: Typy řazeníí povoleny
             voting_cards_box_title: Název hlasovacího pole
+            voting_cards_box_title_help: Výchozí hodnota je "Hlasovat pro tento návrh". Použijte "-" pro jeho schování.
+            voting_cards_instructions: Instrukce podpory/nápověda (zrušitelné modální okno)
             voting_cards_instructions_help: Výchozí hodnota je "Přečtěte si pečlivě pravidla voleb, abyste pochopili, jak bude vaše hlasování použito %{organization}""
             voting_cards_show_abstain: Přidat možnost zdržet se hlasování
             voting_cards_show_modal_help: Po kliknutí na podporu zobrazit instrukce/nápovědu
           step:
             default_sort_order_options:
               az: A-Z (abecední)
+              supported_first: Nejdříve podporováno
+              supported_last: Naposledy podporováno
               za: Z-A (obrácená abeceda)
     decidim_awesome:
       admin:
@@ -215,6 +219,7 @@ cs:
           form:
             additional_proposal_sortings:
               enable_all: Povolit všechny další možnosti řazení
+              help: Tyto možnosti řazení jsou navíc k výchozím možnostem. Nezapomeňte, že si můžete vybrat výchozí pořadí v nastavení komponenty návrhu.
             edit_label: Přejmenovat štítek
             errors:
               incorrect_css: 'CSS v poli #%{key} je neplatné'
@@ -432,8 +437,10 @@ cs:
           default_box_title: Hlasovat o tomto návrhu
           modal:
             cancel: Zrušit
+            message: Váš hlas bude považován za konečný v %{date}. Do té doby jej můžete změnit,
           vote_button: Kliknutím hlasujte
           voted: Odhlasováno
+          voting_for: Můj hlas pro "%{proposal}" je "%{type}"
           weights:
             weight_0_short: 'A:'
             weight_1: Červená
@@ -446,6 +453,8 @@ cs:
       proposals:
         orders:
           az: A-Z (abecední)
+          supported_first: Nejdříve podporováno
+          supported_last: Naposledy podporováno
           za: Z-A (obrácená abeceda)
   layouts:
     decidim:
