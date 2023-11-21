@@ -1,6 +1,17 @@
 CHANGELOG
 =========
 
+v0.10.2
+------
+
+Compatibility:
+  - Decidim v0.27.4
+  - Decidim v0.26.8
+
+Features:
+  - Added translations
+  - Fix deface override updating <body> tag in the admin
+
 v0.10.1
 ------
 
