@@ -1,4 +1,3 @@
----
 ca:
   activemodel:
     attributes:
@@ -479,4 +478,4 @@ ca:
           items: elements
           meetings: Trobades
           proposals: Propostes
-          select_deselect_all: Seleccionar/desseleccionar tot
+          select_deselect_all: Selecciona/Des-selecciona tot
