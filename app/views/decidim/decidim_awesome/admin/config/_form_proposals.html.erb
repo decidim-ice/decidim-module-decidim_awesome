@@ -1,9 +1,8 @@
-<div class="row column decidim_awesome-form">
+<div class="form__wrapper row column decidim_awesome-form">
   <% if config_enabled? :allow_images_in_proposals %>
     <p class="text-info"><%= t("rich_text_editor_in_public_views", scope: "decidim.decidim_awesome.admin.config") if current_organization.rich_text_editor_in_public_views %></p>
 
-    <%= form.check_box :allow_images_in_proposals, disabled: current_organization.rich_text_editor_in_public_views %>
-    <p class="help-text"><%= t("help.allow_images_in_proposals", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+    <%= form.check_box :allow_images_in_proposals, disabled: current_organization.rich_text_editor_in_public_views, help_text: t("help.allow_images_in_proposals", scope: "decidim.decidim_awesome.admin.config.form") %>
 
     <% unless current_organization.rich_text_editor_in_public_views %>
       <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :allow_images_in_proposals, constraints: constraints_for(:allow_images_in_proposals) }) %>
@@ -20,8 +19,9 @@
       <h2 class="card-title"><%= t("additional_proposal_sortings.title", scope: "decidim.decidim_awesome.admin.config.form") %></h2>
     </div>
     <div class="card-section">
-      <div class="row column decidim_awesome-form">
+      <div class="form__wrapper row column decidim_awesome-form">
         <%= form.select :additional_proposal_sortings, @form.additional_proposal_sorting_labels, { include_blank: false }, { multiple: true } %>
+
         <p class="help-text">
           <%= t("additional_proposal_sortings.help", scope: "decidim.decidim_awesome.admin.config.form") %> <%= link_to t("additional_proposal_sortings.enable_all", scope: "decidim.decidim_awesome.admin.config.form"), "#", id: "additional_proposal_sortings-enable-all" %>.
         </p>
@@ -39,7 +39,7 @@
       <h2 class="card-title"><%= t("validators.title", scope: "decidim.decidim_awesome.admin.config.form") %></h2>
     </div>
     <div class="card-section">
-      <div class="row column decidim_awesome-form">
+      <div class="form__wrapper row column decidim_awesome-form">
         <% if config_enabled? :validate_title_start_with_caps %>
           <%= form.check_box :validate_title_start_with_caps %>
 
@@ -47,22 +47,19 @@
         <% end %>
 
         <% if config_enabled? :validate_title_min_length %>
-          <%= form.number_field :validate_title_min_length %>
-          <p class="help-text"><%= t("help.validate_title_min_length", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+          <%= form.number_field :validate_title_min_length, help_text: t("help.validate_title_min_length", scope: "decidim.decidim_awesome.admin.config.form") %>
 
           <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :validate_title_min_length, constraints: constraints_for(:validate_title_min_length) }) %>
         <% end %>
 
         <% if config_enabled? :validate_title_max_caps_percent %>
-          <%= form.number_field :validate_title_max_caps_percent %>
-          <p class="help-text"><%= t("help.validate_title_max_caps_percent", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+          <%= form.number_field :validate_title_max_caps_percent, help_text: t("help.validate_title_max_caps_percent", scope: "decidim.decidim_awesome.admin.config.form") %>
 
           <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :validate_title_max_caps_percent, constraints: constraints_for(:validate_title_max_caps_percent) }) %>
         <% end %>
 
         <% if config_enabled? :validate_title_max_marks_together %>
-          <%= form.number_field :validate_title_max_marks_together %>
-          <p class="help-text"><%= t("help.validate_title_max_marks_together", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+          <%= form.number_field :validate_title_max_marks_together, help_text: t("help.validate_title_max_marks_together", scope: "decidim.decidim_awesome.admin.config.form") %>
 
           <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :validate_title_max_marks_together, constraints: constraints_for(:validate_title_max_marks_together) }) %>
         <% end %>
@@ -85,22 +82,19 @@
         <% end %>
 
         <% if config_enabled? :validate_body_min_length %>
-          <%= form.number_field :validate_body_min_length %>
-          <p class="help-text"><%= t("help.validate_body_min_length", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+          <%= form.number_field :validate_body_min_length, help_text: t("help.validate_body_min_length", scope: "decidim.decidim_awesome.admin.config.form") %>
 
           <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :validate_body_min_length, constraints: constraints_for(:validate_body_min_length) }) %>
         <% end %>
 
         <% if config_enabled? :validate_body_max_caps_percent %>
-          <%= form.number_field :validate_body_max_caps_percent %>
-          <p class="help-text"><%= t("help.validate_body_max_caps_percent", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+          <%= form.number_field :validate_body_max_caps_percent, help_text: t("help.validate_body_max_caps_percent", scope: "decidim.decidim_awesome.admin.config.form") %>
 
           <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :validate_body_max_caps_percent, constraints: constraints_for(:validate_body_max_caps_percent) }) %>
         <% end %>
 
         <% if config_enabled? :validate_body_max_marks_together %>
-          <%= form.number_field :validate_body_max_marks_together %>
-          <p class="help-text"><%= t("help.validate_body_max_marks_together", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+          <%= form.number_field :validate_body_max_marks_together, help_text: t("help.validate_body_max_marks_together", scope: "decidim.decidim_awesome.admin.config.form") %>
 
           <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :validate_body_max_marks_together, constraints: constraints_for(:validate_body_max_marks_together) }) %>
         <% end %>
