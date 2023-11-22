@@ -4,6 +4,7 @@ require "rails"
 require "deface"
 require "decidim/core"
 require "decidim/decidim_awesome/awesome_helpers"
+require "decidim/decidim_awesome/menu"
 
 module Decidim
   module DecidimAwesome
@@ -175,6 +176,10 @@ module Decidim
         Decidim.icons.register(name: "pulse", icon: "pulse-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "fire", icon: "fire-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "line-chart-line", icon: "line-chart-line", category: "system", description: "", engine: :decidim_awesome)
+      end
+
+      initializer "decidim_decidim_awesome.awesome_admin_menu" do
+        Decidim::DecidimAwesome::Menu.register_awesome_admin_menu!
       end
     end
   end
