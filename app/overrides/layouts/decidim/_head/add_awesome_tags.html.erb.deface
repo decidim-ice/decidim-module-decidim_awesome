@@ -1,7 +1,7 @@
 <!-- insert_before "erb[loud]:contains('organization_colors')" -->
 
 <%#= append_stylesheet_pack_tag "decidim_decidim_awesome", media: "all" %>
-<%#= render(partial: "layouts/decidim/decidim_awesome/custom_styles") if awesome_custom_styles.present? %>
+<%= render(partial: "layouts/decidim/decidim_awesome/custom_styles") if awesome_custom_styles.present? %>
 
 <%= render partial: "layouts/decidim/decidim_awesome/awesome_config" %>
 <%# This will render scripts only on Decidim 0.27 %>
