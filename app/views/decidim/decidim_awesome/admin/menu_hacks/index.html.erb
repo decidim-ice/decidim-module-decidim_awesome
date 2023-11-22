@@ -27,9 +27,9 @@
             <td><%= target_options.invert[item.try(:target)||""] %></td>
             <td><%= visibility_options.invert[item.try(:visibility)] %></td>
             <td class="table-list__actions">
-              <%= icon_link_to "pencil", decidim_admin_decidim_awesome.edit_menu_hack_path(md5(item.url)), t(".edit"), class: "action-icon--edit" %>
+              <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_menu_hack_path(md5(item.url)), t(".edit"), class: "action-icon--edit" %>
               <% if item.respond_to?(:overrided?) %>
-                <%= icon_link_to "circle-x", decidim_admin_decidim_awesome.menu_hack_path(md5(item.url)), t(".remove#{'_hack' if item.overrided?}"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
+                <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.menu_hack_path(md5(item.url)), t(".remove#{'_hack' if item.overrided?}"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
               <% else %>
                   <span class="action-icon">
                     <%= icon "circle-x", class: "action-icon action-icon--disabled", role: "img" %>

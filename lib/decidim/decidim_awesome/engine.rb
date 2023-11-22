@@ -166,6 +166,16 @@ module Decidim
         Cell::ViewModel.view_paths << File.expand_path("#{Decidim::DecidimAwesome::Engine.root}/app/cells")
         Cell::ViewModel.view_paths << File.expand_path("#{Decidim::DecidimAwesome::Engine.root}/app/views")
       end
+
+      initializer "decidim_decidim_awesome.register_icons" do
+        Decidim.icons.register(name: "editors-text", icon: "text", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "surveys", icon: "survey-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "brush", icon: "brush-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "layers", icon: "stack-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "pulse", icon: "pulse-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "fire", icon: "fire-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "line-chart-line", icon: "line-chart-line", category: "system", description: "", engine: :decidim_awesome)
+      end
     end
   end
 end

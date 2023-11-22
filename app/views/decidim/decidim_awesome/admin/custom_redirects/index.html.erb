@@ -26,8 +26,8 @@
             <td><%= item["destination"] %></td>
             <td class="redirect-status"></td>
             <td class="table-list__actions">
-              <%= icon_link_to "pencil", decidim_admin_decidim_awesome.edit_custom_redirect_path(md5(origin)), t(".edit"), class: "action-icon--edit" %>
-              <%= icon_link_to "circle-x", decidim_admin_decidim_awesome.custom_redirect_path(md5(origin)), t(".remove"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
+              <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_custom_redirect_path(md5(origin)), t(".edit"), class: "action-icon--edit" %>
+              <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.custom_redirect_path(md5(origin)), t(".remove"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
             </td>
           </tr>
         <% end %>

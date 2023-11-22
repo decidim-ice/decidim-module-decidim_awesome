@@ -9,7 +9,7 @@ module Decidim
         include Decidim::TranslatableAttributes
 
         def check(status)
-          content_tag(:span, icon(status ? "check" : "x", class: "icon", aria_label: status, role: "img"), class: "text-#{status ? "success" : "alert"}")
+          content_tag(:span, icon(status ? "check-line" : "close-line", class: "icon", aria_label: status, role: "img"), class: "text-#{status ? "success" : "alert"}")
         end
 
         def menus
