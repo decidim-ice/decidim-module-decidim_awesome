@@ -78,7 +78,6 @@ ja:
             announcement: アナウンス
             iframe: Iframeコード
             iframe_help: 'あなたのコードを <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe> というHTMLとして入れてください。コンテンツは他のHTMLタグからサニタイズされます。 画面幅を埋めるためにwidthを100%にして使用するようにしてください。'
-            no_margins: Iframeと残りのページの間に余白はありません
             viewport_width: アプリケーションのビューポートを最大幅として制限する
           step:
             announcement: アナウンス

@@ -5,7 +5,7 @@ module Decidim
     module IframeComponent
       class IframeController < DecidimAwesome::BlankComponentController
         ALLOWED_ATTRIBUTES = %w(src width height frameborder title allow allowpaymentrequest name referrerpolicy sandbox srcdoc allowfullscreen).freeze
-        helper_method :iframe, :remove_margins?, :viewport_width?
+        helper_method :iframe, :viewport_width?
         before_action :add_additional_csp_directives, only: :show
 
         def show; end
@@ -19,10 +19,6 @@ module Decidim
         def sanitize(html)
           sanitizer = Rails::Html::SafeListSanitizer.new
           sanitizer.sanitize(html, tags: %w(iframe), attributes: ALLOWED_ATTRIBUTES)
-        end
-
-        def remove_margins?
-          current_component.settings.no_margins
         end
 
         def viewport_width?

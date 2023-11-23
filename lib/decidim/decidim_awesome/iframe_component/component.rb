@@ -17,7 +17,6 @@ Decidim::DecidimAwesome.register_component(:awesome_iframe) do |component|
     settings.attribute :announcement, type: :text, translated: true, editor: true
     settings.attribute :iframe, type: :text, default: ""
     settings.attribute :viewport_width, type: :boolean, default: false
-    settings.attribute :no_margins, type: :boolean, default: false
   end
 
   component.settings(:step) do |settings|

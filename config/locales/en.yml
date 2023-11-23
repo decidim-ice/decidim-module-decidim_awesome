@@ -89,7 +89,6 @@ en:
               frameBorder="0" allowFullscreen src="..."></iframe>. Content will be
               sanitized from other HTML tags. Ensure to use 100% as width to fill
               the screen.'
-            no_margins: No margins between the iframe and the rest of the page
             viewport_width: Limit maximum width to the application viewport
           step:
             announcement: Announcement

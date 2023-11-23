@@ -11,13 +11,11 @@ describe "Show awesome iframe", type: :system do
     {
       announcement: announcement,
       iframe: iframe,
-      no_margins: no_margins,
       viewport_width: viewport_width
     }
   end
 
   let(:iframe) { '<iframe src="https://test.test"></iframe>' }
-  let(:no_margins) { false }
   let(:viewport_width) { false }
   let(:announcement) { {} }
 
@@ -52,33 +50,6 @@ describe "Show awesome iframe", type: :system do
     it "shows the announcement" do
       within ".wrapper" do
         expect(page).to have_content("I'm awesome!")
-      end
-    end
-  end
-
-  context "when no_margins is enabled" do
-    let(:no_margins) { true }
-
-    it "removes the css margin" do
-      expect(page).to have_selector(".wrapper")
-      expect(page.execute_script("return $('.wrapper').css('padding-left')")).to eq("0px")
-      expect(page.execute_script("return $('.wrapper').css('padding-right')")).to eq("0px")
-      expect(page.execute_script("return $('.wrapper').css('padding-bottom')")).to eq("0px")
-      expect(page.execute_script("return $('.wrapper').css('padding-top')")).to eq("0px")
-    end
-
-    context "and announcement is present" do
-      let(:announcement) do
-        {
-          en: "I'm awesome!"
-        }
-      end
-
-      it "has margin on top" do
-        expect(page.execute_script("return $('.wrapper').css('padding-left')")).to eq("0px")
-        expect(page.execute_script("return $('.wrapper').css('padding-right')")).to eq("0px")
-        expect(page.execute_script("return $('.wrapper').css('padding-bottom')")).to eq("0px")
-        expect(page.execute_script("return $('.wrapper').css('padding-top')")).not_to eq("0px")
       end
     end
   end

@@ -78,7 +78,6 @@ de:
             announcement: Ankündigung
             iframe: iFrame-Code
             iframe_help: 'Geben Sie Ihren Code als html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe> ein. Andere HTML-Tags werden vom Inhalt entfernt. Stellen Sie sicher, dass Sie 100% als Breite/width verwenden, um gesamten Platz zu füllen.'
-            no_margins: Keine Ränder zwischen iFrame und der restlichen Seite
             viewport_width: Maximale Breite auf den App-Viewport beschränken
           step:
             announcement: Ankündigung
