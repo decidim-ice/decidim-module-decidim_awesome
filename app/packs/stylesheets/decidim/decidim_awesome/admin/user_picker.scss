@@ -1,29 +1,20 @@
-// @import "select2/dist/css/select2.css";
-@import "stylesheets/vendor/select2-foundation-theme";
+@import "tom-select/dist/scss/tom-select";
 
-.multiusers-select-container {
-  form label {
-    margin-bottom: 1rem;
-  }
+/* overwrite tom-select defaults */
+.ts {
+  &-control {
+    @apply border-gray text-md min-h-[40px];
 
-  .switch-paddle {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 1em;
-  }
-}
-
-.select2-container--foundation .select2-selection--multiple {
-  .select2-selection__choice {
-    display: inline-block;
-    float: none;
-    font-weight: normal;
+    input {
+      @apply font-normal text-black text-md;
+    }
 
     .is-admin {
       &::before {
         content: '⛔';
         display: inline-block;
         margin-right: .3em;
+        text-decoration: none;
       }
 
       text-decoration: line-through;
@@ -31,11 +22,11 @@
     }
   }
 
-  textarea.select2-search__field {
-    resize: none;
-  }
-}
+  &-dropdown {
+    @apply text-md text-gray-2 font-normal;
 
-.form-conversations-submit {
-  margin-top: 2rem;
+    .active {
+      @apply text-white bg-secondary;
+    }
+  }
 }
