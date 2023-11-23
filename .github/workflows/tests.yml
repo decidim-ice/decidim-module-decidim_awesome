@@ -9,8 +9,8 @@ on:
 env:
   CI: 1
   SIMPLECOV: 1
-  NODE_VERSION: 16.9.1
-  RUBY_VERSION: 3.0.6
+  NODE_VERSION: 16.18.1
+  RUBY_VERSION: 3.1.1
   BUNDLE_GEMFILE: Gemfile
 
 jobs:
