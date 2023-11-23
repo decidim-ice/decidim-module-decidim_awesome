@@ -22,7 +22,7 @@
       <div class="form__wrapper row column decidim_awesome-form">
         <%= form.select :additional_proposal_sortings, @form.additional_proposal_sorting_labels, { include_blank: false }, { multiple: true } %>
 
-        <p class="help-text">
+        <p>
           <%= t("additional_proposal_sortings.help", scope: "decidim.decidim_awesome.admin.config.form") %> <%= link_to t("additional_proposal_sortings.enable_all", scope: "decidim.decidim_awesome.admin.config.form"), "#", id: "additional_proposal_sortings-enable-all" %>.
         </p>
 

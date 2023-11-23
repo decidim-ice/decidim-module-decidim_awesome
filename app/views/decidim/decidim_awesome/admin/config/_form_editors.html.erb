@@ -1,6 +1,6 @@
 <div class="form__wrapper row column decidim_awesome-form">
-  <p class="help-text"><%= t("help.drag_and_drop_supported", scope: "decidim.decidim_awesome.admin.config.form") %></p>
-  <p class="help-text"><%= t("help.original_editor_override", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+  <p><%= t("help.drag_and_drop_supported", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+  <p><%= t("help.original_editor_override", scope: "decidim.decidim_awesome.admin.config.form") %></p>
 
   <% enabled_configs([:allow_images_in_full_editor, :allow_images_in_small_editor]).each do |key| %>
     <%= form.check_box key, help_text: t("help.#{key}", scope: "decidim.decidim_awesome.admin.config.form") %>

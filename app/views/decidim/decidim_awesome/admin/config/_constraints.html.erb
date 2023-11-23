@@ -1,10 +1,5 @@
 <div class="constraints-editor" data-key="<%= key %>">
-  <div class="callout" style="display:none" data-closable>
-    <p></p>
-    <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
+  <%= cell "decidim/announcement", "<p></p>".html_safe, hidden: true %>
 
   <h5><%= t ".title" %></h5>
   <% if constraints.blank? %>
@@ -13,20 +8,25 @@
 
   <ul class="constraints-list<%= " inactive" if constraints&.detect{|c| c.settings["participatory_space_manifest"]=="none" } %>">
     <% constraints&.each do |constraint| %>
-        <li>
-            <% constraint.settings.reverse_each do |k, val| %>
-              <span class="label <%= k %> constraint-<%= val %>"><%= translate_constraint_value constraint, k %></span>
-            <% end %>
-            <button id="<%= "edit-#{key}" %>"  type="button" name="button" class="edit-condition" data-dialog-open="<%= "edit-modal-#{key}" %>" data-dialog-remote-url="<%= constraint_path(id: constraint.id, key: key) %>">
-              <%= t ".edit" %>
-            </button>
-            <%= decidim_modal id: "edit-modal-#{key}", class: "decidim_awesome modal", remote: true %>
-          <%= link_to t(".delete"), constraint_path(id: constraint.id), remote: true, method: :delete %>
-        </li>
-      <% end %>
+      <li>
+        <% constraint.settings.reverse_each do |k, val| %>
+          <span class="label <%= k %> constraint-<%= val %>"><%= translate_constraint_value constraint, k %></span>
+        <% end %>
+
+        <button id="<%= "edit-#{key}" %>" type="button" name="button" class="edit-condition button button__sm button__secondary" data-dialog-open="<%= "edit-modal-#{key}" %>" data-dialog-remote-url="<%= constraint_path(id: constraint.id, key: key) %>">
+          <%= t ".edit" %>
+        </button>
+
+        <%= decidim_modal id: "edit-modal-#{key}", class: "decidim_awesome modal", remote: true %>
+
+        <%= link_to t(".delete"), constraint_path(id: constraint.id), remote: true, method: :delete, class: "button button__sm button__transparent-secondary" %>
+      </li>
+    <% end %>
   </ul>
-  <button id="<%= "new-#{key}" %>" type="button" name="button" class="add-condition" data-dialog-open="<%= "new-modal-#{key}" %>" data-dialog-remote-url="<%= new_constraint_path(key: key) %>">
+
+  <button id="<%= "new-#{key}" %>" type="button" name="button" class="add-condition button button__sm button__secondary" data-dialog-open="<%= "new-modal-#{key}" %>" data-dialog-remote-url="<%= new_constraint_path(key: key) %>">
     <%= t ".add_condition" %>
   </button>
+
   <%= decidim_modal id: "new-modal-#{key}", class: "decidim_awesome modal", remote: true %>
 </div>

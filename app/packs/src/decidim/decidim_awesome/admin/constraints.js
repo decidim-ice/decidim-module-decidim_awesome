@@ -1,53 +1,43 @@
 $(() => {
-  const $modal = $("#constraintsModal");
-  if (!$modal.length) {
-    return;
-  }
-
-  $(".decidim_awesome-form").on("click", ".constraints-editor .add-condition,.constraints-editor .edit-condition", (evt) => {
-    evt.preventDefault();
-    const $this = $(evt.target)
-    const url = $this.attr("href");
-    const $callout = $this.closest(".constraints-editor").find(".callout");
-    $callout.hide();
-    $callout.removeClass("alert success");
-    $modal.find(".modal-content").html("");
-    $modal.addClass("loading");
-    $modal.data("url", url);
-    $modal.foundation("open");
-    $modal.find(".modal-content").load(url, () => {
-      $modal.removeClass("loading");
-    });
-  });
-
   // Custom event listener to reload the modal if needed
   document.body.addEventListener("constraint:change", (evt) => {
+    // Identify the modal element to be updated
+    const [{ modalId }] = evt.detail;
+    const modal = window.Decidim.currentDialogs[modalId];
+    const { dialogRemoteUrl } = modal.openingTrigger.dataset;
+
+    // Prepare parameters to request the modal content again, but updated based on the user selections
     const vars = evt.detail.map((setting) => `${setting.key}=${setting.value}`);
-    const url = `${$modal.data("url")}&${vars.join("&")}`;
-    // console.log("constraint:change vars:", vars, "url:", url)
-    $modal.addClass("loading");
-    $modal.find(".modal-content").load(url, () => {
-      $modal.removeClass("loading");
-    });
+    const url = `${dialogRemoteUrl}&${vars.join("&")}`;
+
+    // Replace only the "-content" markup
+    $(modal.dialog.firstElementChild).load(url);
   });
 
   // Rails AJAX events
   document.body.addEventListener("ajax:error", (responseText) => {
-    // console.log("ajax:error", responseText)
-    const $container = $(`.constraints-editor[data-key="${responseText.detail[0].key}"]`)
-    const $callout = $container.find(".callout");
+    const $container = $(
+      `.constraints-editor[data-key="${responseText.detail[0].key}"]`
+    );
+    const $callout = $container.find(".flash");
     $callout.show();
-    $callout.contents("p").html(`${responseText.detail[0].message}: <strong>${responseText.detail[0].error}</strong>`);
+    $callout
+      .find("p")
+      .html(
+        `${responseText.detail[0].message}: <strong>${responseText.detail[0].error}</strong>`
+      );
     $callout.addClass("alert");
   });
 
   document.body.addEventListener("ajax:success", (responseText) => {
-    // console.log("ajax:success", responseText)
-    const $container = $(`.constraints-editor[data-key="${responseText.detail[0].key}"]`)
-    const $callout = $container.find(".callout");
-    $modal.foundation("close");
+    // console.log("ajax:success", responseText);
+    const $container = $(
+      `.constraints-editor[data-key="${responseText.detail[0].key}"]`
+    );
+    const $callout = $container.find(".flash");
+
     $callout.show();
-    $callout.contents("p").html(responseText.detail[0].message);
+    $callout.find("p").html(responseText.detail[0].message);
     $callout.addClass("success");
     // reconstruct list
     $container.replaceWith(responseText.detail[0].html);
