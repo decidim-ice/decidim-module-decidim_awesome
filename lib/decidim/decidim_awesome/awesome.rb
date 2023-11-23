@@ -33,74 +33,90 @@ module Decidim
     #   false => default false, admins can turn it true
     #   :disabled => false and non available, hidden from admins
     config_accessor :allow_images_in_full_editor do
-      false
+      # false
+      :disabled
     end
 
     config_accessor :allow_images_in_small_editor do
-      false
+      # false
+      :disabled
     end
 
     config_accessor :allow_images_in_proposals do
-      false
+      # false
+      :disabled
     end
 
     config_accessor :use_markdown_editor do
-      false
+      # false
+      :disabled
     end
 
     config_accessor :allow_images_in_markdown_editor do
-      false
+      # false
+      :disabled
     end
 
     # used to save forms in localstorage
     config_accessor :auto_save_forms do
-      false
+      # false
+      :disabled
     end
 
     # Live chat widget linked to Telegram account or group
     # In the admin side only
     config_accessor :intergram_for_admins do
-      false
+      # false
+      :disabled
     end
 
     # In the public side only
     config_accessor :intergram_for_public do
-      false
+      # false
+      :disabled
     end
 
     # Configuration options to handle different validations in proposals
     # (maybe in the future will apply to other places)
     # Set it to :disabled if you don't want to use this feature
     config_accessor :validate_title_min_length do
-      15
+      # 15
+      :disabled
     end
 
     config_accessor :validate_title_max_caps_percent do
-      25
+      # 25
+      :disabled
     end
 
     config_accessor :validate_title_max_marks_together do
-      1
+      # 1
+      :disabled
     end
 
     config_accessor :validate_title_start_with_caps do
-      true
+      # true
+      :disabled
     end
 
     config_accessor :validate_body_min_length do
-      15
+      # 15
+      :disabled
     end
 
     config_accessor :validate_body_max_caps_percent do
-      25
+      # 25
+      :disabled
     end
 
     config_accessor :validate_body_max_marks_together do
-      1
+      # 1
+      :disabled
     end
 
     config_accessor :validate_body_start_with_caps do
-      true
+      # true
+      :disabled
     end
 
     # This transforms the proposal voting into a weighted voting
@@ -143,7 +159,8 @@ module Decidim
     #      some_identifier: "{ ... some definition... }"
     #   }
     config_accessor :proposal_custom_fields do
-      {}
+      # {}
+      :disabled
     end
 
     # allows to keep modifications for the main menu
@@ -190,7 +207,8 @@ module Decidim
     #   config.consider_all_requests_local = false
 
     config_accessor :custom_redirects do
-      {}
+      # {}
+      :disabled
     end
 
     # these settings do not follow the :disabled convention but
