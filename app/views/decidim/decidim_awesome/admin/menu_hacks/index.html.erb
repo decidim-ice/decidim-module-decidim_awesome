@@ -32,7 +32,7 @@
                 <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.menu_hack_path(md5(item.url)), t(".remove#{'_hack' if item.overrided?}"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
               <% else %>
                   <span class="action-icon">
-                    <%= icon "circle-x", class: "action-icon action-icon--disabled", role: "img" %>
+                    <%= icon "close-circle-line", class: "action-icon action-icon--disabled", role: "img" %>
                   </span>
               <% end %>
             </td>
