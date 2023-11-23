@@ -29,7 +29,7 @@ describe "Show awesome iframe", type: :system do
   end
 
   it "shows the iframe wrapper" do
-    within ".wrapper" do
+    within "[data-content]" do
       expect(page).to have_selector(".awesome-iframe")
     end
   end
@@ -37,6 +37,12 @@ describe "Show awesome iframe", type: :system do
   it "shows the iframe" do
     within ".awesome-iframe" do
       expect(page).to have_selector("iframe")
+    end
+  end
+
+  it "adds the #html-block-html id" do
+    within "[data-content]" do
+      expect(page).to have_css("#html-block-html.awesome-iframe")
     end
   end
 
@@ -48,7 +54,7 @@ describe "Show awesome iframe", type: :system do
     end
 
     it "shows the announcement" do
-      within ".wrapper" do
+      within "[data-content]" do
         expect(page).to have_content("I'm awesome!")
       end
     end
@@ -57,9 +63,9 @@ describe "Show awesome iframe", type: :system do
   context "when viewport_width is enabled" do
     let(:viewport_width) { true }
 
-    it "adds the .row class" do
-      within ".wrapper" do
-        expect(page).to have_selector(".awesome-iframe.row")
+    it "adds the #iframe-block id" do
+      within "[data-content]" do
+        expect(page).to have_css("#iframe-block.awesome-iframe")
       end
     end
   end
