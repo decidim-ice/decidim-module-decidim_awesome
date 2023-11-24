@@ -45,7 +45,7 @@ describe "Admin manages hacked menus", type: :system do
       end
 
       fill_in "menu_raw_label_en", with: "A new beggining"
-      find("*[type=submit]").click
+      click_button "Save"
 
       within "table tbody" do
         expect(page).to have_content("A new beggining")
@@ -60,7 +60,7 @@ describe "Admin manages hacked menus", type: :system do
       fill_in "menu_url", with: "http://external.blog"
       fill_in "menu_position", with: "1.5"
 
-      find("*[type=submit]").click
+      click_button "Save"
 
       within "table tbody" do
         expect(page).to have_content("Home")
@@ -78,7 +78,7 @@ describe "Admin manages hacked menus", type: :system do
         end
 
         fill_in "menu_raw_label_en", with: "Native edited"
-        find("*[type=submit]").click
+        click_button "Save"
 
         within "table tbody" do
           expect(page).to have_content("Native edited")
@@ -111,7 +111,7 @@ describe "Admin manages hacked menus", type: :system do
         end
 
         fill_in "menu_raw_label_en", with: "Another thing"
-        find("*[type=submit]").click
+        click_button "Save"
 
         within "table tbody" do
           expect(page).to have_content("Another thing")
@@ -155,7 +155,7 @@ describe "Admin manages hacked menus", type: :system do
         end
 
         fill_in "menu_raw_label_en", with: "Another thing"
-        find("*[type=submit]").click
+        click_button "Save"
 
         within "table tbody" do
           expect(page).to have_content("Another thing")
