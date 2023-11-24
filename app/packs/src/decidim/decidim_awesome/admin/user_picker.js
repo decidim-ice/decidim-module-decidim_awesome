@@ -36,7 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return `<div>${escape(data.text)}</div>`;
       },
       item: function (data, escape) {
-        console.log(data);
         return !!data.is_admin || data.isAdmin === "true"
           ? `<div class="is-admin">${escape(data.text)}</div>`
           : `<div>${escape(data.text)}</div>`;

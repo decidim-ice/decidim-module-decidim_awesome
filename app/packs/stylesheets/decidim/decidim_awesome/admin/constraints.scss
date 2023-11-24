@@ -4,8 +4,9 @@
   border-radius: 5px;
 
   .constraints-list {
-    padding: 0;
+    padding: inherit;
     margin: 0 0 1em 0;
+    list-style-type: disc;
 
     li {
       margin: 0 1em 0 0;
@@ -34,10 +35,6 @@
           background-color: #ff3000;
         }
       }
-    }
-
-    a {
-      margin-left: 1rem;
     }
 
     &.inactive {

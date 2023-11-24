@@ -13,13 +13,13 @@
           <span class="label <%= k %> constraint-<%= val %>"><%= translate_constraint_value constraint, k %></span>
         <% end %>
 
-        <button id="<%= "edit-#{key}" %>" type="button" name="button" class="edit-condition button button__sm button__secondary" data-dialog-open="<%= "edit-modal-#{key}" %>" data-dialog-remote-url="<%= constraint_path(id: constraint.id, key: key) %>">
-          <%= t ".edit" %>
-        </button>
+        <div class="inline-flex items-center gap-1 ml-10">
+          <button id="<%= "edit-#{key}" %>" type="button" name="button" class="edit-condition button button__sm button__secondary" data-dialog-open="<%= "edit-modal-#{key}" %>" data-dialog-remote-url="<%= constraint_path(id: constraint.id, key: key) %>">
+            <%= t ".edit" %>
+          </button>
 
-        <%= decidim_modal id: "edit-modal-#{key}", class: "decidim_awesome modal", remote: true %>
-
-        <%= link_to t(".delete"), constraint_path(id: constraint.id), remote: true, method: :delete, class: "button button__sm button__transparent-secondary" %>
+          <%= link_to t(".delete"), constraint_path(id: constraint.id), remote: true, method: :delete, class: "button button__sm button__transparent-secondary" %>
+        </div>
       </li>
     <% end %>
   </ul>
@@ -28,5 +28,7 @@
     <%= t ".add_condition" %>
   </button>
 
-  <%= decidim_modal id: "new-modal-#{key}", class: "decidim_awesome modal", remote: true %>
 </div>
+
+<%= decidim_modal id: "edit-modal-#{key}", class: "decidim_awesome modal", remote: true %>
+<%= decidim_modal id: "new-modal-#{key}", class: "decidim_awesome modal", remote: true %>
