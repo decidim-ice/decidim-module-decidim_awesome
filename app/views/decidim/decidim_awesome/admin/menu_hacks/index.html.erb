@@ -1,44 +1,41 @@
-<div class="card">
-  <div class="card-divider">
-    <h2 class="card-title">
-      <%= t(".title") %>
-      <%= link_to t(".new"), decidim_admin_decidim_awesome.new_menu_hack_path, class: "button tiny button--title" %>
-    </h2>
-  </div>
-  <div class="card-section">
-  <div class="row column decidim_awesome-form">
-    <table class="table-list">
-      <thead>
-        <tr>
-          <th><%= t("menu.raw_label", scope: "activemodel.attributes") %></th>
-          <th><%= t("menu.url", scope: "activemodel.attributes") %></th>
-          <th><%= t("menu.position", scope: "activemodel.attributes") %></th>
-          <th><%= t("menu.target", scope: "activemodel.attributes") %></th>
-          <th><%= t("menu.visibility", scope: "activemodel.attributes") %></th>
-          <th class="actions"></th>
+<div class="item_show__header">
+  <h2 class="item_show__header-title">
+    <%= t(".title") %>
+    <%= link_to t(".new"), decidim_admin_decidim_awesome.new_menu_hack_path, class: "button button__sm button__secondary ml-auto" %>
+  </h2>
+</div>
+<div class="table-scroll">
+  <table class="table-list">
+    <thead>
+      <tr>
+        <th><%= t("menu.raw_label", scope: "activemodel.attributes") %></th>
+        <th><%= t("menu.url", scope: "activemodel.attributes") %></th>
+        <th><%= t("menu.position", scope: "activemodel.attributes") %></th>
+        <th><%= t("menu.target", scope: "activemodel.attributes") %></th>
+        <th><%= t("menu.visibility", scope: "activemodel.attributes") %></th>
+        <th class="actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% current_items.each do |item| %>
+        <tr<%= " class=menu_hack-addition" if item.try(:overrided?) == false %>>
+          <td><%= item.label %></td>
+          <td><%= item.url %></td>
+          <td><%= item.position %></td>
+          <td><%= target_options.invert[item.try(:target)||""] %></td>
+          <td><%= visibility_options.invert[item.try(:visibility)] %></td>
+          <td class="table-list__actions">
+            <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_menu_hack_path(md5(item.url)), t(".edit"), class: "action-icon--edit" %>
+            <% if item.respond_to?(:overrided?) %>
+              <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.menu_hack_path(md5(item.url)), t(".remove#{'_hack' if item.overrided?}"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
+            <% else %>
+                <span class="action-icon">
+                  <%= icon "close-circle-line", class: "action-icon action-icon--disabled", role: "img" %>
+                </span>
+            <% end %>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        <% current_items.each do |item| %>
-          <tr<%= " class=menu_hack-addition" if item.try(:overrided?) == false %>>
-            <td><%= item.label %></td>
-            <td><%= item.url %></td>
-            <td><%= item.position %></td>
-            <td><%= target_options.invert[item.try(:target)||""] %></td>
-            <td><%= visibility_options.invert[item.try(:visibility)] %></td>
-            <td class="table-list__actions">
-              <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_menu_hack_path(md5(item.url)), t(".edit"), class: "action-icon--edit" %>
-              <% if item.respond_to?(:overrided?) %>
-                <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.menu_hack_path(md5(item.url)), t(".remove#{'_hack' if item.overrided?}"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
-              <% else %>
-                  <span class="action-icon">
-                    <%= icon "close-circle-line", class: "action-icon action-icon--disabled", role: "img" %>
-                  </span>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+      <% end %>
+    </tbody>
+  </table>
 </div>
