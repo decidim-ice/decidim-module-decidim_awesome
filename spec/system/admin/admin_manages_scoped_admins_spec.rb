@@ -32,7 +32,7 @@ describe "Admin manages scoped admins", type: :system do
       sleep 1
       page.execute_script("$('.multiusers-select:first').append(new Option('#{user.name}', #{user.id}, true, true)).trigger('change');")
 
-      find("*[type=submit]").click
+      click_button "Update configuration"
 
       expect(page).to have_admin_callout("updated successfully")
       expect(page).to have_content(user.name.to_s)
@@ -47,7 +47,7 @@ describe "Admin manages scoped admins", type: :system do
 
       sleep 1
       page.execute_script("$('.multiusers-select:first').append(new Option('#{user.name}', #{user.id}, true, true)).trigger('change');")
-      find("*[type=submit]").click
+      click_button "Update configuration"
 
       expect(page).to have_admin_callout("updated successfully")
       expect(page).to have_content(user.name.to_s)
@@ -102,11 +102,11 @@ describe "Admin manages scoped admins", type: :system do
 
       it "adds a new config helper var" do
         within ".scoped_admins_container[data-key=\"foo\"]" do
-          click_link "Add case"
+          click_button "Add case"
         end
 
         select "Processes", from: "constraint_participatory_space_manifest"
-        within ".modal-content" do
+        within "#new-modal-scoped_admin_foo-content" do
           find("*[type=submit]").click
         end
 

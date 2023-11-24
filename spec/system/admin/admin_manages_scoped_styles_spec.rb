@@ -28,7 +28,7 @@ describe "Admin manages scoped styles", type: :system do
       sleep 1
       page.execute_script('document.querySelector(".CodeMirror").CodeMirror.setValue("body {background: red;}");')
 
-      find("*[type=submit]").click
+      click_button "Update configuration"
 
       expect(page).to have_admin_callout("updated successfully")
       expect(page).to have_content("body {background: red;}")
@@ -42,7 +42,7 @@ describe "Admin manages scoped styles", type: :system do
 
       sleep 1
       page.execute_script("document.querySelector(\"[data-key=#{key}] .CodeMirror\").CodeMirror.setValue(\"body {background: green;}\");")
-      find("*[type=submit]").click
+      click_button "Update configuration"
 
       expect(page).to have_admin_callout("updated successfully")
       expect(page).not_to have_content("body {background: red;}")
@@ -53,7 +53,7 @@ describe "Admin manages scoped styles", type: :system do
     it "shows error message if invalid" do
       sleep 1
       page.execute_script("document.querySelector(\"[data-key=#{key}] .CodeMirror\").CodeMirror.setValue(\"I am invalid CSS\");")
-      find("*[type=submit]").click
+      click_button "Update configuration"
 
       expect(page).to have_admin_callout("Error updating configuration! CSS in box ##{key} is invalid")
       expect(page).not_to have_content("body {background: red;}")
@@ -111,11 +111,11 @@ describe "Admin manages scoped styles", type: :system do
 
       it "adds a new config helper var" do
         within ".scoped_styles_container[data-key=\"foo\"]" do
-          click_link "Add case"
+          click_button "Add case"
         end
 
         select "Processes", from: "constraint_participatory_space_manifest"
-        within ".modal-content" do
+        within "#new-modal-scoped_style_foo-content" do
           find("*[type=submit]").click
         end
 
