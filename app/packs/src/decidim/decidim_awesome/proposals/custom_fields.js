@@ -1,8 +1,8 @@
 import CustomFieldsRenderer from "src/decidim/decidim_awesome/forms/custom_fields_renderer"
 
-window.DecidimAwesome.CustomFieldsRenderer = window.DecidimAwesome.CustomFieldsRenderer || new CustomFieldsRenderer();
-
 $(() => {
+  window.DecidimAwesome.CustomFieldsRenderer = window.DecidimAwesome.CustomFieldsRenderer || new CustomFieldsRenderer();
+
   // use admin multilang specs if exists
   let $el = $("proposal_custom_field:first", ".tabs-title.is-active");
   if (!$el.length) {

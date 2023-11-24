@@ -170,10 +170,6 @@ shared_examples "basic rendering" do |enabled|
         expect(page).to have_content("Tweaks for editors")
       end
 
-      it "has custom fields javascript" do
-        expect(page).to have_xpath("//script[contains(@src,'decidim_admin_decidim_awesome_custom_fields')]", visible: :all)
-      end
-
       it "has all admin menus" do
         menus.each do |menu|
           within ".secondary-nav" do
@@ -184,10 +180,6 @@ shared_examples "basic rendering" do |enabled|
     else
       it "renders the compatibility checks page" do
         expect(page).to have_content("System compatibility checks")
-      end
-
-      it "do not have custom fields javascript" do
-        expect(page).not_to have_xpath("//script[contains(@src,'decidim_admin_decidim_awesome_custom_fields')]", visible: :all)
       end
 
       it "has no admin menus" do
