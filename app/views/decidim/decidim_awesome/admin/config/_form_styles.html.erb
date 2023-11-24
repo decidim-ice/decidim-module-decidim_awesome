@@ -4,8 +4,9 @@
       <%= t("help.scoped_styles_variables", scope: "decidim.decidim_awesome.admin.config.form") %>
     </p>
     <p style="white-space: unset">
-      <% ["primary", "secondary", "success", "warning", "alert", "highlight", "highlight_alternative"].each do |color| %>
-        <span class="color-box <%= color %>" style="background-color: <%= current_organization.colors[color] %>"></span> var(--<%= color %>)
+      <% ["primary", "secondary", "success", "warning", "alert"].each do |color| %>
+        <span class="color-box <%= color %>" style="background-color: <%= current_organization.colors[color] %>"></span>
+        <code>var(--<%= color %>)</code>
       <% end %>
     </p>
 
