@@ -36,6 +36,8 @@ module Decidim::DecidimAwesome
       before do
         request.env["decidim.current_organization"] = user.organization
         sign_in user, scope: :user
+
+        allow(Decidim::DecidimAwesome.config).to receive(key).and_return(true)
       end
 
       describe "GET #new" do
@@ -85,6 +87,10 @@ module Decidim::DecidimAwesome
 
         context "when key is scoped_style" do
           let(:key) { :scoped_style_test }
+
+          before do
+            allow(Decidim::DecidimAwesome.config).to receive(:scoped_styles).and_return(true)
+          end
 
           it "returns http success" do
             get :new, params: params
