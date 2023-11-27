@@ -216,7 +216,7 @@ shared_examples "can edit assembly" do
       ca: "Assamblea editada",
       es: "Asamblea editada"
     )
-    find("*[type=submit]").click
+    click_button "Update"
     expect(page).to have_admin_callout("successfully")
   end
 end
@@ -274,7 +274,7 @@ shared_examples "can manage component" do
       ca: "Proposta editada",
       es: "Propuesta editada"
     )
-    find("*[type=submit]").click
+    click_button "Update"
     expect(page).to have_admin_callout("successfully")
   end
 
@@ -297,7 +297,7 @@ shared_examples "can manage component" do
       ca: "Body creat",
       es: "Body creat"
     )
-    find("*[type=submit]").click
+    click_button "Create"
     expect(page).to have_admin_callout("successfully")
   end
 end
@@ -407,7 +407,7 @@ shared_examples "allows edit any group process" do
       ca: "Proces grup editat",
       es: "Grupo de procesos editado"
     )
-    find("*[type=submit]").click
+    click_button "Update"
     expect(page).to have_admin_callout("successfully")
   end
 end
