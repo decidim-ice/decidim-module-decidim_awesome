@@ -174,7 +174,7 @@ describe "Filter Admin actions", type: :system do
           find(".exports.dropdown").click
           perform_enqueued_jobs { click_link "Export as CSV" }
 
-          within ".callout.success" do
+          within ".flash.success" do
             expect(page).to have_content("Export job has been enqueued. You will receive an email when it's ready.")
           end
 
