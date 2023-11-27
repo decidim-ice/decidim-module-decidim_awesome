@@ -19,6 +19,10 @@ module Decidim::DecidimAwesome::Admin
     end
     let(:permission_action) { Decidim::PermissionAction.new(**action) }
 
+    before do
+      allow(Decidim::DecidimAwesome.config).to receive(feature).and_return(true)
+    end
+
     context "when scope is not admin" do
       let(:action) do
         { scope: :foo, action: :edit_config, subject: :some_feature }
