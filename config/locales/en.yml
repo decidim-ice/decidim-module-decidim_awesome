@@ -554,6 +554,8 @@ en:
           supported_first: Supported first
           supported_last: Supported last
           za: Z-A (Reverse alphabetical)
+        proposal:
+          view_proposal: View proposal
   layouts:
     decidim:
       decidim_awesome:
