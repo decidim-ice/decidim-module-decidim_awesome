@@ -20,6 +20,8 @@ describe "Admin manages custom proposal fields", type: :system do
   let(:data3) { '{"type":"textarea","label":"Short Bio","rows":"5","className":"form-control","name":"textarea-1476748007461"}' }
 
   before do
+    skip "Custom fields feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
+
     switch_to_host(organization.host)
     login_as admin, scope: :user
     visit decidim_admin_decidim_awesome.config_path(:proposal_custom_fields)

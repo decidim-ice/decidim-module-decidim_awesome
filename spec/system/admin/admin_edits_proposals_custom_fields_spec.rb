@@ -35,6 +35,8 @@ describe "Admin edits proposals", type: :system do
   include_context "when managing a component as an admin"
 
   before do
+    skip "Proposals custom fields feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
+
     visit_component_admin
 
     find("a.action-icon--edit-proposal").click
