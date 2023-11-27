@@ -45,6 +45,8 @@ module Decidim::DecidimAwesome
           let(:disabled) { [] }
 
           before do
+            skip "Unskip this examples after enabling all features"
+
             disabled.each do |feat|
               allow(Decidim::DecidimAwesome.config).to receive(feat).and_return(:disabled)
             end

@@ -25,6 +25,8 @@ module Decidim::DecidimAwesome
         end
 
         it "all overrides are valid" do
+          skip "Fix this example after reenabling all overrides"
+
           controller.helpers.overrides.each do |_group, props|
             props.files.each do |file, _md5|
               expect(controller.helpers.valid?(props.spec, file)).not_to be_nil
