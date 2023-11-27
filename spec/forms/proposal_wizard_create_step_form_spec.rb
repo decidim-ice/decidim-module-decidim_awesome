@@ -41,6 +41,10 @@ module Decidim::Proposals
     let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes", "participatory_space_slug" => slug }) }
     let(:slug) { participatory_space.slug }
 
+    before do
+      skip "Proposals hacks feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
+    end
+
     context "when is scoped under custom fields" do
       it { is_expected.to be_valid }
     end
