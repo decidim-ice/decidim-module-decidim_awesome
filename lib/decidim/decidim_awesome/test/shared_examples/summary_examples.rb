@@ -172,7 +172,7 @@ shared_examples "basic rendering" do |enabled|
 
       it "has all admin menus" do
         menus.each do |menu|
-          within ".secondary-nav" do
+          within ".sidebar-menu" do
             expect(page).to have_link(href: "/admin/decidim_awesome/#{menu}")
           end
         end
@@ -184,7 +184,7 @@ shared_examples "basic rendering" do |enabled|
 
       it "has no admin menus" do
         menus.each do |menu|
-          within ".secondary-nav" do
+          within ".sidebar-menu" do
             expect(page).not_to have_link(href: "/admin/decidim_awesome/#{menu}")
           end
         end
