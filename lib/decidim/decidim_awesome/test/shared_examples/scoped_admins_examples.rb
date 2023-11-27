@@ -159,16 +159,16 @@ end
 
 shared_examples "has admin link" do
   it "has menu link" do
-    within ".topbar__dropmenu.topbar__user__logged" do
-      expect(page).to have_selector("#user-menu li", text: "Admin dashboard", visible: :hidden)
+    within "header" do
+      expect(page).to have_css("#admin-bar", text: "Admin dashboard")
     end
   end
 end
 
 shared_examples "has no admin link" do
-  it "has menu link" do
-    within ".topbar__dropmenu.topbar__user__logged" do
-      expect(page).not_to have_selector("#user-menu li", text: "Admin dashboard", visible: :hidden)
+  it "has no menu link" do
+    within "header" do
+      expect(page).not_to have_css("#admin-bar", text: "Admin dashboard")
     end
   end
 end
@@ -365,8 +365,10 @@ shared_examples "allows access to group processes" do
   end
 
   it "shows the list of processes" do
-    expect(page).to have_content("Participatory processes")
-    expect(page).to have_content(participatory_process.title["en"])
+    within("[data-content]") do
+      expect(page).to have_content("Processes")
+      expect(page).to have_content(participatory_process.title["en"])
+    end
   end
 
   describe "forbids editing processes" do
@@ -383,8 +385,10 @@ shared_examples "allows access to group processes" do
     end
 
     it "shows the list of groups" do
-      expect(page).to have_content("Participatory process groups")
-      expect(page).to have_content(process_group.title["en"])
+      within("[data-content]") do
+        expect(page).to have_content("Process groups")
+        expect(page).to have_content(process_group.title["en"])
+      end
     end
   end
 end
