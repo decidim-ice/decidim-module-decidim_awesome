@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-welcome_text = "Welcome to the Admin Panel."
+welcome_text = "Dashboard"
 welcome_text = "Welcome to the Decidim Admin Panel." if legacy_version?
 
 shared_examples "redirects to index" do |_link|
