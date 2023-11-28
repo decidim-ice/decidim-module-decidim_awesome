@@ -34,7 +34,7 @@ describe "Custom styles" do
     end
 
     it "css is not applyied" do
-      expect(page.execute_script("return window.getComputedStyle($('body')[0]).backgroundColor")).to eq("rgb(250, 250, 250)")
+      expect(page.execute_script("return window.getComputedStyle($('body')[0]).backgroundColor")).to eq("rgba(0, 0, 0, 0)")
     end
   end
 
