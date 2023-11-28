@@ -46,7 +46,6 @@ describe "Hacked menus" do
 
     it "active link containts text" do
       within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu .active" do
-
         expect(page).to have_content(text)
       end
     end
@@ -256,7 +255,7 @@ describe "Hacked menus" do
             find_by_id("main-dropdown-summary").hover
           end
 
-          it_behaves_like "has active link", "Processes"
+          it_behaves_like "has active link", "A new beggining"
         end
 
         context "when visiting a process in a custom link" do
@@ -283,7 +282,7 @@ describe "Hacked menus" do
             find_by_id("main-dropdown-summary").hover
           end
 
-          it_behaves_like "has active link", "Processes"
+          it_behaves_like "has active link", "A new beggining"
         end
 
         context "when visiting a sublink of a process not in a custom link" do
@@ -292,7 +291,7 @@ describe "Hacked menus" do
             find_by_id("main-dropdown-summary").hover
           end
 
-          it_behaves_like "has active link", "Processes"
+          it_behaves_like "has active link", "A new beggining"
         end
       end
 
