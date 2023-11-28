@@ -29,29 +29,29 @@ shared_examples "with features disabled" do
 end
 
 describe Decidim::DecidimAwesome do
-  let(:organization) { create :organization }
-  let(:user) { create :user, :admin, :confirmed, organization: organization }
-  let!(:config) { create :awesome_config, organization: organization, var: :scoped_styles, value: { bar: styles } }
-  let!(:allow_images_in_proposals) { create(:awesome_config, organization: organization, var: :allow_images_in_proposals, value: true) }
-  let!(:allow_images_in_small_editor) { create(:awesome_config, organization: organization, var: :allow_images_in_small_editor, value: true) }
-  let!(:allow_images_in_full_editor) { create(:awesome_config, organization: organization, var: :allow_images_in_full_editor, value: true) }
-  let!(:use_markdown_editor) { create(:awesome_config, organization: organization, var: :use_markdown_editor, value: true) }
-  let!(:allow_images_in_markdown_editor) { create(:awesome_config, organization: organization, var: :allow_images_in_markdown_editor, value: true) }
-  let!(:auto_save_forms) { create(:awesome_config, organization: organization, var: :auto_save_forms, value: true) }
-  let!(:intergram_for_admins) { create(:awesome_config, organization: organization, var: :intergram_for_admins, value: true) }
-  let!(:intergram_for_public) { create(:awesome_config, organization: organization, var: :intergram_for_public, value: true) }
-  let!(:config_public_settings) { create(:awesome_config, organization: organization, var: :intergram_for_public_settings, value: intergram) }
-  let!(:config_admins_settings) { create(:awesome_config, organization: organization, var: :intergram_for_admins_settings, value: intergram) }
-  let!(:validate_title_min_length) { create(:awesome_config, organization: organization, var: :validate_title_min_length, value: 10) }
-  let!(:validate_title_max_caps_percent) { create(:awesome_config, organization: organization, var: :validate_title_max_caps_percent, value: 10) }
-  let!(:validate_title_max_marks_together) { create(:awesome_config, organization: organization, var: :validate_title_max_marks_together, value: 10) }
-  let!(:validate_title_start_with_caps) { create(:awesome_config, organization: organization, var: :validate_title_start_with_caps, value: true) }
-  let!(:validate_body_min_length) { create(:awesome_config, organization: organization, var: :validate_body_min_length, value: 10) }
-  let!(:validate_body_max_caps_percent) { create(:awesome_config, organization: organization, var: :validate_body_max_caps_percent, value: 10) }
-  let!(:validate_body_max_marks_together) { create(:awesome_config, organization: organization, var: :validate_body_max_marks_together, value: 10) }
-  let!(:validate_body_start_with_caps) { create(:awesome_config, organization: organization, var: :validate_body_start_with_caps, value: true) }
-  let!(:weighted_proposal_voting) { create(:awesome_config, organization: organization, var: :weighted_proposal_voting, value: []) }
-  let!(:additional_proposal_sortings) { create(:awesome_config, organization: organization, var: :additional_proposal_sortings, value: []) }
+  let(:organization) { create(:organization) }
+  let(:user) { create(:user, :admin, :confirmed, organization:) }
+  let!(:config) { create(:awesome_config, organization:, var: :scoped_styles, value: { bar: styles }) }
+  let!(:allow_images_in_proposals) { create(:awesome_config, organization:, var: :allow_images_in_proposals, value: true) }
+  let!(:allow_images_in_small_editor) { create(:awesome_config, organization:, var: :allow_images_in_small_editor, value: true) }
+  let!(:allow_images_in_full_editor) { create(:awesome_config, organization:, var: :allow_images_in_full_editor, value: true) }
+  let!(:use_markdown_editor) { create(:awesome_config, organization:, var: :use_markdown_editor, value: true) }
+  let!(:allow_images_in_markdown_editor) { create(:awesome_config, organization:, var: :allow_images_in_markdown_editor, value: true) }
+  let!(:auto_save_forms) { create(:awesome_config, organization:, var: :auto_save_forms, value: true) }
+  let!(:intergram_for_admins) { create(:awesome_config, organization:, var: :intergram_for_admins, value: true) }
+  let!(:intergram_for_public) { create(:awesome_config, organization:, var: :intergram_for_public, value: true) }
+  let!(:config_public_settings) { create(:awesome_config, organization:, var: :intergram_for_public_settings, value: intergram) }
+  let!(:config_admins_settings) { create(:awesome_config, organization:, var: :intergram_for_admins_settings, value: intergram) }
+  let!(:validate_title_min_length) { create(:awesome_config, organization:, var: :validate_title_min_length, value: 10) }
+  let!(:validate_title_max_caps_percent) { create(:awesome_config, organization:, var: :validate_title_max_caps_percent, value: 10) }
+  let!(:validate_title_max_marks_together) { create(:awesome_config, organization:, var: :validate_title_max_marks_together, value: 10) }
+  let!(:validate_title_start_with_caps) { create(:awesome_config, organization:, var: :validate_title_start_with_caps, value: true) }
+  let!(:validate_body_min_length) { create(:awesome_config, organization:, var: :validate_body_min_length, value: 10) }
+  let!(:validate_body_max_caps_percent) { create(:awesome_config, organization:, var: :validate_body_max_caps_percent, value: 10) }
+  let!(:validate_body_max_marks_together) { create(:awesome_config, organization:, var: :validate_body_max_marks_together, value: 10) }
+  let!(:validate_body_start_with_caps) { create(:awesome_config, organization:, var: :validate_body_start_with_caps, value: true) }
+  let!(:weighted_proposal_voting) { create(:awesome_config, organization:, var: :weighted_proposal_voting, value: []) }
+  let!(:additional_proposal_sortings) { create(:awesome_config, organization:, var: :additional_proposal_sortings, value: []) }
 
   let(:styles) { "body {background: red;}" }
   let(:intergram) do

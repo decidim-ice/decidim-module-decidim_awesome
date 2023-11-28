@@ -4,11 +4,11 @@ require "spec_helper"
 
 module Decidim::DecidimAwesome
   describe RoleBasePresenter, type: :helper do
-    let(:user) { create :user, organization: organization }
-    let(:organization) { create :organization }
-    let(:participatory_space) { create(:participatory_process, organization: organization) }
+    let(:user) { create(:user, organization:) }
+    let(:organization) { create(:organization) }
+    let(:participatory_space) { create(:participatory_process, organization:) }
     let(:role) { "admin" }
-    let(:participatory_process_user_role) { create(:participatory_process_user_role, role: role, participatory_process: participatory_space, user: user) }
+    let(:participatory_process_user_role) { create(:participatory_process_user_role, role:, participatory_process: participatory_space, user:) }
     let(:changes_create) do
       {
         "decidim_user_id" => [nil, user.id],
@@ -24,7 +24,7 @@ module Decidim::DecidimAwesome
 
     let(:html) { true }
 
-    subject { described_class.new(entry, html: html) }
+    subject { described_class.new(entry, html:) }
 
     before do
       allow(entry).to receive(:changeset).and_return(changes_create)

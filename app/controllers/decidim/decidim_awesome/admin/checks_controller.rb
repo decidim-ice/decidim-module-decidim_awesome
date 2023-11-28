@@ -54,7 +54,7 @@ module Decidim
         end
 
         def render_template(partial)
-          render_to_string(partial: partial)
+          render_to_string(partial:)
         rescue ActionView::Template::Error => e
           flash.now[:alert] = "Partial [#{partial}] has thrown an error: #{e.message}"
         end

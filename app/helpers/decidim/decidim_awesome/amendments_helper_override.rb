@@ -26,7 +26,7 @@ module Decidim
           custom_fields.apply_xml(body) if body.present?
           # TODO: find a way to add errors as form is not the parent form
           # form.object.errors.add(attribute, custom_fields.errors) if custom_fields.errors
-          render partial: "decidim/decidim_awesome/custom_fields/form_render", locals: { spec: custom_fields.to_json, form: form, name: attribute }
+          render partial: "decidim/decidim_awesome/custom_fields/form_render", locals: { spec: custom_fields.to_json, form:, name: attribute }
         end
 
         # Amendments don't use a URL specifying participatory space and component

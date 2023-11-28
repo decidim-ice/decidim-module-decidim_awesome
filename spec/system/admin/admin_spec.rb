@@ -4,8 +4,8 @@ require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/config_examples"
 
 describe "Visit the admin page", type: :system do
-  let(:organization) { create :organization, rich_text_editor_in_public_views: rte_enabled }
-  let!(:admin) { create(:user, :admin, :confirmed, organization: organization) }
+  let(:organization) { create(:organization, rich_text_editor_in_public_views: rte_enabled) }
+  let!(:admin) { create(:user, :admin, :confirmed, organization:) }
   let(:rte_enabled) { true }
   let(:disabled_features) { [] }
   let(:version_original) { Decidim.version }
@@ -157,7 +157,6 @@ describe "Visit the admin page", type: :system do
     end
 
     context "when some proposals hacks are disabled" do
-
       [:allow_images_in_proposals, :validate_title_min_length, :validate_title_max_caps_percent, :validate_title_max_marks_together, :validate_title_start_with_caps, :validate_body_min_length, :validate_body_max_caps_percent, :validate_body_max_marks_together, :validate_body_start_with_caps].each do |var|
         let(:disabled_features) { [var] }
 

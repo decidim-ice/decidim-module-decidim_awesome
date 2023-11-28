@@ -13,7 +13,7 @@ module Decidim
           # rubocop:enable Rails/LexicallyScopedActionFilter
 
           def create
-            enforce_permission_to :vote, :proposal, proposal: proposal
+            enforce_permission_to(:vote, :proposal, proposal:)
             @from_proposals_list = params[:from_proposals_list] == "true"
 
             Decidim::Proposals::VoteProposal.call(proposal, current_user) do
@@ -27,7 +27,7 @@ module Decidim
                   proposal: Decidim::Proposals::Proposal.where(component: current_component)
                 ).map(&:proposal)
 
-                expose(proposals: proposals)
+                expose(proposals:)
                 render :update_buttons_and_counters
               end
 
@@ -47,7 +47,7 @@ module Decidim
           end
 
           def current_vote
-            @current_vote ||= Decidim::Proposals::ProposalVote.find_by(author: current_user, proposal: proposal)
+            @current_vote ||= Decidim::Proposals::ProposalVote.find_by(author: current_user, proposal:)
           end
 
           def vote_manifest

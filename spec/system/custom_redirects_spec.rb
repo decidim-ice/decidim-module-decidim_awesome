@@ -3,15 +3,15 @@
 require "spec_helper"
 
 describe "Custom Redirections", type: :system do
-  let(:organization) { create :organization }
+  let(:organization) { create(:organization) }
   let(:origin) { "/send-me-somewhere" }
   let(:destination) { "/canary-islands" }
   let(:active) { true }
   let(:pass_query) { true }
-  let!(:config) { create :awesome_config, organization: organization, var: :custom_redirects, value: redirections }
+  let!(:config) { create(:awesome_config, organization:, var: :custom_redirects, value: redirections) }
   let(:redirections) do
     {
-      origin => { destination: destination, active: active, pass_query: pass_query },
+      origin => { destination:, active:, pass_query: },
       "/a-cheaper-place" => { destination: "/lloret", active: true, pass_query: false }
     }
   end

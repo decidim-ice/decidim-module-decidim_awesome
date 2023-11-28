@@ -5,13 +5,13 @@ require "spec_helper"
 describe "Voting weights with cards", type: :system do
   include_context "with a component"
   let(:voting_manifest) { :voting_cards }
-  let!(:component) { create :proposal_component, :with_votes_enabled, participatory_space: participatory_space, settings: settings }
+  let!(:component) { create(:proposal_component, :with_votes_enabled, participatory_space:, settings:) }
   let(:settings) do
     {
-      vote_limit: vote_limit,
-      threshold_per_proposal: threshold_per_proposal,
-      can_accumulate_supports_beyond_threshold: can_accumulate_supports_beyond_threshold,
-      minimum_votes_per_user: minimum_votes_per_user,
+      vote_limit:,
+      threshold_per_proposal:,
+      can_accumulate_supports_beyond_threshold:,
+      minimum_votes_per_user:,
       awesome_voting_manifest: voting_manifest,
       voting_cards_show_abstain: abstain,
       voting_cards_box_title: { en: box_title },
@@ -19,10 +19,10 @@ describe "Voting weights with cards", type: :system do
       voting_cards_show_modal_help: modal_help
     }
   end
-  let!(:proposals) { create_list(:proposal, 4, component: component) }
+  let!(:proposals) { create_list(:proposal, 4, component:) }
   let(:proposal) { proposals.first }
   let(:proposal_title) { translated(proposal.title) }
-  let(:user) { create :user, :confirmed, organization: organization }
+  let(:user) { create(:user, :confirmed, organization:) }
   let(:abstain) { true }
   let(:box_title) { nil }
   let(:instructions) { nil }
@@ -49,9 +49,9 @@ describe "Voting weights with cards", type: :system do
       expect(page).to have_content("Red")
       expect(page).to have_content("Yellow")
       expect(page).not_to have_content("Change my vote")
-      expect(page).to have_selector(".vote-count[data-weight=\"1\"]", text: "0")
-      expect(page).to have_selector(".vote-count[data-weight=\"2\"]", text: "0")
-      expect(page).to have_selector(".vote-count[data-weight=\"3\"]", text: "0")
+      expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "0")
+      expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "0")
+      expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "0")
 
       click_link "Abstain"
       within ".vote_proposal_modal" do
@@ -142,27 +142,27 @@ describe "Voting weights with cards", type: :system do
       let(:modal_help) { false }
       let!(:vote_weights) do
         [
-          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 1),
-          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 1),
-          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 1),
-          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 2),
-          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 2),
-          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 3)
+          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 1),
+          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 1),
+          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 1),
+          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 2),
+          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 2),
+          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 3)
         ]
       end
 
       it "shows existing votes" do
-        expect(page).to have_selector(".vote-count[data-weight=\"1\"]", text: "3")
-        expect(page).to have_selector(".vote-count[data-weight=\"2\"]", text: "2")
-        expect(page).to have_selector(".vote-count[data-weight=\"3\"]", text: "1")
+        expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "3")
+        expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "2")
+        expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "1")
       end
 
       it "updates vote counts when the user votes" do
         click_link "Green"
-        expect(page).to have_selector(".vote-count[data-weight=\"3\"]", text: "2")
+        expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "2")
         click_link "Change my vote"
         click_link "Abstain"
-        expect(page).to have_selector(".vote-count[data-weight=\"3\"]", text: "1")
+        expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "1")
       end
     end
   end
@@ -175,16 +175,16 @@ describe "Voting weights with cards", type: :system do
 
     let!(:vote_weights) do
       [
-        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 1),
-        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 1),
-        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 1),
-        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 2),
-        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 2),
-        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 3),
-        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 0),
-        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 0),
-        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 0),
-        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 0)
+        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 1),
+        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 1),
+        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 1),
+        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 2),
+        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 2),
+        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 3),
+        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 0),
+        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 0),
+        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 0),
+        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 0)
       ]
     end
 
@@ -199,7 +199,7 @@ describe "Voting weights with cards", type: :system do
     end
 
     context "when votes are blocked" do
-      let!(:component) { create :proposal_component, :with_votes_blocked, participatory_space: participatory_space, settings: settings }
+      let!(:component) { create(:proposal_component, :with_votes_blocked, participatory_space:, settings:) }
 
       it "shows the vote count and the vote button is disabled" do
         within "#proposal_#{proposal.id}" do
@@ -207,13 +207,13 @@ describe "Voting weights with cards", type: :system do
           expect(page).to have_content("SUPPORTS DISABLED")
           click_link "Click to vote"
         end
-        expect(page).to have_selector(".vote-count[data-weight=\"1\"]", text: "3")
-        expect(page).to have_selector(".vote-count[data-weight=\"2\"]", text: "2")
-        expect(page).to have_selector(".vote-count[data-weight=\"3\"]", text: "1")
-        expect(page).to have_selector(".vote-action.weight_1.disabled")
-        expect(page).to have_selector(".vote-action.weight_2.disabled")
-        expect(page).to have_selector(".vote-action.weight_3.disabled")
-        expect(page).to have_selector(".vote-action.weight_0.disabled")
+        expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "3")
+        expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "2")
+        expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "1")
+        expect(page).to have_css(".vote-action.weight_1.disabled")
+        expect(page).to have_css(".vote-action.weight_2.disabled")
+        expect(page).to have_css(".vote-action.weight_3.disabled")
+        expect(page).to have_css(".vote-action.weight_0.disabled")
         expect(page).not_to have_content("Change my vote")
       end
     end
@@ -231,22 +231,22 @@ describe "Voting weights with cards", type: :system do
           expect(page).not_to have_content("G: 1")
           click_link "Click to vote"
         end
-        expect(page).not_to have_selector(".vote-count[data-weight=\"1\"]")
-        expect(page).not_to have_selector(".vote-count[data-weight=\"2\"]")
-        expect(page).not_to have_selector(".vote-count[data-weight=\"3\"]")
+        expect(page).not_to have_css(".vote-count[data-weight=\"1\"]")
+        expect(page).not_to have_css(".vote-count[data-weight=\"2\"]")
+        expect(page).not_to have_css(".vote-count[data-weight=\"3\"]")
         expect(page).not_to have_content("Change my vote")
         click_link "Green"
-        expect(page).not_to have_selector(".vote-count[data-weight=\"3\"]")
+        expect(page).not_to have_css(".vote-count[data-weight=\"3\"]")
         click_link "Change my vote"
         click_link "Abstain"
-        expect(page).not_to have_selector(".vote-count[data-weight=\"3\"]")
+        expect(page).not_to have_css(".vote-count[data-weight=\"3\"]")
       end
     end
 
     context "when vote limit has been reached" do
       let!(:vote_weights) do
         [
-          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal, author: user), weight: 1),
+          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:, author: user), weight: 1),
           create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposals[1], author: user), weight: 2),
           create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposals[2], author: user), weight: 3)
         ]
@@ -262,20 +262,20 @@ describe "Voting weights with cards", type: :system do
           expect(page).to have_content("VOTED")
           click_link "Click to vote"
         end
-        expect(page).to have_selector(".vote-count[data-weight=\"1\"]", text: "1")
-        expect(page).to have_selector(".vote-count[data-weight=\"2\"]", text: "0")
-        expect(page).to have_selector(".vote-count[data-weight=\"3\"]", text: "0")
-        expect(page).to have_selector(".vote-action.weight_1.disabled")
-        expect(page).to have_selector(".vote-action.weight_2.disabled")
-        expect(page).to have_selector(".vote-action.weight_3.disabled")
-        expect(page).to have_selector(".vote-action.weight_0.disabled")
+        expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "1")
+        expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "0")
+        expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "0")
+        expect(page).to have_css(".vote-action.weight_1.disabled")
+        expect(page).to have_css(".vote-action.weight_2.disabled")
+        expect(page).to have_css(".vote-action.weight_3.disabled")
+        expect(page).to have_css(".vote-action.weight_0.disabled")
         expect(page).to have_content("Change my vote")
       end
 
       context "and has not voted on the proposal" do
         let!(:vote_weights) do
           [
-            create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 1),
+            create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 1),
             create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposals[1], author: user), weight: 2),
             create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposals[2], author: user), weight: 3)
           ]
@@ -291,13 +291,13 @@ describe "Voting weights with cards", type: :system do
             expect(page).to have_content("NO SUPPORTS REMAINING")
             click_link "Click to vote"
           end
-          expect(page).to have_selector(".vote-count[data-weight=\"1\"]", text: "1")
-          expect(page).to have_selector(".vote-count[data-weight=\"2\"]", text: "0")
-          expect(page).to have_selector(".vote-count[data-weight=\"3\"]", text: "0")
-          expect(page).to have_selector(".vote-action.weight_1.disabled")
-          expect(page).to have_selector(".vote-action.weight_2.disabled")
-          expect(page).to have_selector(".vote-action.weight_3.disabled")
-          expect(page).to have_selector(".vote-action.weight_0.disabled")
+          expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "1")
+          expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "0")
+          expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "0")
+          expect(page).to have_css(".vote-action.weight_1.disabled")
+          expect(page).to have_css(".vote-action.weight_2.disabled")
+          expect(page).to have_css(".vote-action.weight_3.disabled")
+          expect(page).to have_css(".vote-action.weight_0.disabled")
           expect(page).not_to have_content("Change my vote")
           expect(page).to have_content("No supports remaining")
         end
@@ -307,7 +307,7 @@ describe "Voting weights with cards", type: :system do
     context "when proposals have a voting limit" do
       let!(:vote_weights) do
         [
-          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 1)
+          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 1)
         ]
       end
       let(:threshold_per_proposal) { 1 }
@@ -322,13 +322,13 @@ describe "Voting weights with cards", type: :system do
           expect(page).to have_content("SUPPORT LIMIT REACHED")
           click_link "Click to vote"
         end
-        expect(page).to have_selector(".vote-count[data-weight=\"1\"]", text: "1")
-        expect(page).to have_selector(".vote-count[data-weight=\"2\"]", text: "0")
-        expect(page).to have_selector(".vote-count[data-weight=\"3\"]", text: "0")
-        expect(page).to have_selector(".vote-action.weight_1.disabled")
-        expect(page).to have_selector(".vote-action.weight_2.disabled")
-        expect(page).to have_selector(".vote-action.weight_3.disabled")
-        expect(page).to have_selector(".vote-action.weight_0.disabled")
+        expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "1")
+        expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "0")
+        expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "0")
+        expect(page).to have_css(".vote-action.weight_1.disabled")
+        expect(page).to have_css(".vote-action.weight_2.disabled")
+        expect(page).to have_css(".vote-action.weight_3.disabled")
+        expect(page).to have_css(".vote-action.weight_0.disabled")
         expect(page).to have_content("Support limit reached")
       end
 
@@ -344,15 +344,15 @@ describe "Voting weights with cards", type: :system do
             expect(page).to have_content("CLICK TO VOTE")
             click_link "Click to vote"
           end
-          expect(page).to have_selector(".vote-count[data-weight=\"1\"]", text: "1")
-          expect(page).to have_selector(".vote-count[data-weight=\"2\"]", text: "0")
-          expect(page).to have_selector(".vote-count[data-weight=\"3\"]", text: "0")
+          expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "1")
+          expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "0")
+          expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "0")
           expect(page).not_to have_content("Change my vote")
           click_link "Green"
-          expect(page).to have_selector(".vote-count[data-weight=\"3\"]", text: "1")
+          expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "1")
           click_link "Change my vote"
           click_link "Abstain"
-          expect(page).to have_selector(".vote-count[data-weight=\"3\"]", text: "0")
+          expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "0")
         end
       end
     end
@@ -368,9 +368,9 @@ describe "Voting weights with cards", type: :system do
           expect(page).to have_content("G: 0")
           click_link "Click to vote"
         end
-        expect(page).to have_selector(".vote-count[data-weight=\"3\"]", text: "0")
+        expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "0")
         click_link "Green"
-        expect(page).to have_selector(".vote-count[data-weight=\"3\"]", text: "0")
+        expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "0")
         visit_component
         within "#proposal_#{proposal.id}" do
           expect(page).to have_content("G: 0")
@@ -379,15 +379,15 @@ describe "Voting weights with cards", type: :system do
           expect(page).to have_content("G: 0")
           click_link "Click to vote"
         end
-        expect(page).to have_selector(".vote-count[data-weight=\"1\"]", text: "0")
+        expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "0")
         click_link "Red"
-        expect(page).to have_selector(".vote-count[data-weight=\"1\"]", text: "1")
+        expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "1")
         visit_component
         within "#proposal_#{proposal.id}" do
           expect(page).to have_content("G: 1")
           click_link "Click to vote"
         end
-        expect(page).to have_selector(".vote-count[data-weight=\"3\"]", text: "1")
+        expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "1")
         visit_component
         within "#proposal_#{proposal.id}" do
           expect(page).to have_content("G: 1")
@@ -399,7 +399,7 @@ describe "Voting weights with cards", type: :system do
     end
 
     context "when proposal is rejected" do
-      let(:proposal) { create(:proposal, :rejected, component: component) }
+      let(:proposal) { create(:proposal, :rejected, component:) }
       let!(:vote_weights) { [] }
 
       it "shows the vote count" do
@@ -437,12 +437,12 @@ describe "Voting weights with cards", type: :system do
     context "when the user has voted" do
       let!(:vote_weights) do
         [
-          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal, author: user), weight: 1),
-          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 2),
-          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 2),
-          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 3),
-          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 3),
-          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 3),
+          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:, author: user), weight: 1),
+          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 2),
+          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 2),
+          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 3),
+          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 3),
+          create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 3),
           create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposals[1], author: user), weight: 2),
           create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposals[2], author: user), weight: 3),
           create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposals[3], author: user), weight: 0)
@@ -485,19 +485,19 @@ describe "Voting weights with cards", type: :system do
       end
 
       context "when votes are blocked" do
-        let!(:component) { create :proposal_component, :with_votes_blocked, participatory_space: participatory_space, settings: settings }
+        let!(:component) { create(:proposal_component, :with_votes_blocked, participatory_space:, settings:) }
 
         it "shows the vote count and the vote button is disabled" do
           within "#proposal_#{proposal.id}" do
             expect(page).to have_content("G: 3")
             click_link "Voted"
           end
-          expect(page).to have_selector(".vote-count[data-weight=\"1\"]", text: "1")
-          expect(page).to have_selector(".vote-count[data-weight=\"2\"]", text: "2")
-          expect(page).to have_selector(".vote-count[data-weight=\"3\"]", text: "3")
-          expect(page).to have_selector(".vote-action.weight_1.disabled")
-          expect(page).to have_selector(".vote-action.weight_2.disabled")
-          expect(page).to have_selector(".vote-action.weight_3.disabled")
+          expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "1")
+          expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "2")
+          expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "3")
+          expect(page).to have_css(".vote-action.weight_1.disabled")
+          expect(page).to have_css(".vote-action.weight_2.disabled")
+          expect(page).to have_css(".vote-action.weight_3.disabled")
           expect(page).not_to have_content("Change my vote")
         end
       end
@@ -511,16 +511,16 @@ describe "Voting weights with cards", type: :system do
 
     let!(:vote_weights) do
       [
-        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 1),
-        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 1),
-        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 1),
-        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 2),
-        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 2),
-        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 3),
-        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 0),
-        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 0),
-        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 0),
-        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 0)
+        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 1),
+        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 1),
+        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 1),
+        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 2),
+        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 2),
+        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 3),
+        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 0),
+        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 0),
+        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 0),
+        create(:awesome_vote_weight, vote: create(:proposal_vote, proposal:), weight: 0)
       ]
     end
 
@@ -565,9 +565,9 @@ describe "Voting weights with cards", type: :system do
       within "#proposal_#{proposal.id}" do
         click_link "Click to vote"
       end
-      expect(page).to have_selector("#loginModal", visible: :hidden)
+      expect(page).to have_css("#loginModal", visible: :hidden)
       click_link "Abstain"
-      expect(page).to have_selector("#loginModal", visible: :visible)
+      expect(page).to have_css("#loginModal", visible: :visible)
     end
   end
 end

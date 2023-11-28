@@ -6,7 +6,7 @@ module Decidim::DecidimAwesome
   describe EditorImagesController, type: :controller do
     routes { Decidim::DecidimAwesome::Engine.routes }
 
-    let(:user) { create(:user, :confirmed, :admin, organization: organization) }
+    let(:user) { create(:user, :confirmed, :admin, organization:) }
     let(:organization) { create(:organization) }
     let(:config) do
       {
@@ -22,7 +22,7 @@ module Decidim::DecidimAwesome
     let(:in_markdown) { true }
     let(:params) do
       {
-        image: image,
+        image:,
         path: "/somepath"
       }
     end
@@ -42,7 +42,7 @@ module Decidim::DecidimAwesome
     shared_examples "uploads image" do
       context "when everything is ok" do
         it "redirects as success success" do
-          post :create, params: params
+          post(:create, params:)
           expect(response).to have_http_status(:success)
         end
       end
@@ -52,7 +52,7 @@ module Decidim::DecidimAwesome
         let(:image) { legacy_version? ? nil : upload_test_file(Decidim::Dev.test_file("invalid.jpeg", "image/jpeg")) }
 
         it "returns failure" do
-          post :create, params: params
+          post(:create, params:)
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end
@@ -68,14 +68,14 @@ module Decidim::DecidimAwesome
         let(:in_markdown) { false }
 
         it "returns no permissions" do
-          post :create, params: params
+          post(:create, params:)
           expect(response).to have_http_status(:success)
         end
       end
     end
 
     context "when user is not admin" do
-      let(:user) { create(:user, :confirmed, organization: organization) }
+      let(:user) { create(:user, :confirmed, organization:) }
 
       include_examples "uploads image"
 
@@ -86,7 +86,7 @@ module Decidim::DecidimAwesome
         let(:in_markdown) { false }
 
         it "returns no permissions" do
-          post :create, params: params
+          post(:create, params:)
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end

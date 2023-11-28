@@ -44,11 +44,13 @@ module Decidim
                 query = current_organization.users.order(name: :asc)
                 query = query.where("name ILIKE :term OR nickname ILIKE :term OR email ILIKE :term", term: "%#{term}%")
 
-                render json: query.all.collect { |u| {
-                  value: u.id,
-                  text: format_user_name(u),
-                  is_admin: u.read_attribute("admin")
-                } }
+                render json: query.all.collect { |u|
+                               {
+                                 value: u.id,
+                                 text: format_user_name(u),
+                                 is_admin: u.read_attribute("admin")
+                               }
+                             }
               else
                 render json: []
               end

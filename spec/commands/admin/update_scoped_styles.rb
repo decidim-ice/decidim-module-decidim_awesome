@@ -33,7 +33,7 @@ module Decidim::DecidimAwesome
       let(:form) do
         ConfigForm.from_params(params).with_context(context)
       end
-      let!(:config) { create :awesome_config, organization: organization, var: :scoped_styles, value: oldstyles }
+      let!(:config) { create(:awesome_config, organization:, var: :scoped_styles, value: oldstyles) }
       let(:params2) do
         {
           allow_images_in_full_editor: true,
@@ -53,7 +53,7 @@ module Decidim::DecidimAwesome
         it "broadcasts :ok and modifies the config options" do
           expect { subject.call }.to broadcast(:ok)
 
-          expect(AwesomeConfig.find_by(organization: organization, var: :scoped_styles).value).to eq(styles)
+          expect(AwesomeConfig.find_by(organization:, var: :scoped_styles).value).to eq(styles)
         end
       end
 
@@ -65,23 +65,23 @@ module Decidim::DecidimAwesome
         it "broadcasts :invalid and does not modifiy the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
-          expect(AwesomeConfig.find_by(organization: organization, var: :scoped_styles).value).to eq(oldstyles)
+          expect(AwesomeConfig.find_by(organization:, var: :scoped_styles).value).to eq(oldstyles)
         end
       end
 
       context "when other config are created" do
-        let!(:config) { create :awesome_config, organization: organization, var: :scoped_styles, value: styles }
+        let!(:config) { create(:awesome_config, organization:, var: :scoped_styles, value: styles) }
 
         it "modifies the other config" do
           expect { another_config.call }.to broadcast(:ok)
-          expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_full_editor).value).to be(true)
-          expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_small_editor).value).to be(true)
+          expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_full_editor).value).to be(true)
+          expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_small_editor).value).to be(true)
         end
 
         it "do not modifiy current config" do
-          expect(AwesomeConfig.find_by(organization: organization, var: :scoped_styles).value).to eq(styles)
+          expect(AwesomeConfig.find_by(organization:, var: :scoped_styles).value).to eq(styles)
           expect { another_config.call }.to broadcast(:ok)
-          expect(AwesomeConfig.find_by(organization: organization, var: :scoped_styles).value).to eq(styles)
+          expect(AwesomeConfig.find_by(organization:, var: :scoped_styles).value).to eq(styles)
         end
       end
     end

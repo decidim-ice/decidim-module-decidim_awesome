@@ -94,14 +94,14 @@ module Decidim::DecidimAwesome
       describe "validators" do
         let(:attributes) do
           {
-            validate_title_min_length: validate_title_min_length,
-            validate_title_max_caps_percent: validate_title_max_caps_percent,
-            validate_title_max_marks_together: validate_title_max_marks_together,
-            validate_title_start_with_caps: validate_title_start_with_caps,
-            validate_body_min_length: validate_body_min_length,
-            validate_body_max_caps_percent: validate_body_max_caps_percent,
-            validate_body_max_marks_together: validate_body_max_marks_together,
-            validate_body_start_with_caps: validate_body_start_with_caps
+            validate_title_min_length:,
+            validate_title_max_caps_percent:,
+            validate_title_max_marks_together:,
+            validate_title_start_with_caps:,
+            validate_body_min_length:,
+            validate_body_max_caps_percent:,
+            validate_body_max_marks_together:,
+            validate_body_start_with_caps:
           }
         end
 

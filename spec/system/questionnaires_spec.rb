@@ -8,12 +8,12 @@ describe "Questionnaires", type: :system do
   let(:manifest_name) { "meetings" }
 
   let(:user) do
-    create :user,
+    create(:user,
            :confirmed,
-           organization: organization
+           organization:)
   end
 
-  let(:meeting) { create :meeting, :published, :online, :live, component: component }
+  let(:meeting) { create(:meeting, :published, :online, :live, component:) }
   let(:meeting_live_event_path) do
     decidim_participatory_process_meetings.meeting_live_event_path(
       participatory_process_slug: participatory_process.slug,
@@ -29,9 +29,9 @@ describe "Questionnaires", type: :system do
   end
 
   context "when questionnaire exist" do
-    let!(:poll) { create(:poll, meeting: meeting) }
+    let!(:poll) { create(:poll, meeting:) }
     let!(:questionnaire) { create(:meetings_poll_questionnaire, questionnaire_for: poll) }
-    let!(:question_single_option) { create(:meetings_poll_question, :unpublished, questionnaire: questionnaire) }
+    let!(:question_single_option) { create(:meetings_poll_question, :unpublished, questionnaire:) }
 
     it "has current_questionnaire" do
       login_as user, scope: :user

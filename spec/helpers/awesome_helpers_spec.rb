@@ -4,12 +4,12 @@ require "spec_helper"
 
 module Decidim::DecidimAwesome
   describe AwesomeHelpers, type: :helper do
-    let!(:organization) { create :organization }
-    let!(:another_organization) { create :organization }
-    let(:component) { create :proposal_component, organization: organization, settings: { awesome_voting_manifest: manifest } }
-    let(:another_component) { create :proposal_component, manifest_name: :another_component, organization: organization, settings: { awesome_voting_manifest: manifest } }
+    let!(:organization) { create(:organization) }
+    let!(:another_organization) { create(:organization) }
+    let(:component) { create(:proposal_component, organization:, settings: { awesome_voting_manifest: manifest }) }
+    let(:another_component) { create(:proposal_component, manifest_name: :another_component, organization:, settings: { awesome_voting_manifest: manifest }) }
     let(:manifest) { :voting_cards }
-    let(:request) { double(env: env, url: "/") }
+    let(:request) { double(env:, url: "/") }
     let(:env) do
       {
         "decidim.current_organization" => organization

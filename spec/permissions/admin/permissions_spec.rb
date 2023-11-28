@@ -6,8 +6,8 @@ module Decidim::DecidimAwesome::Admin
   describe Permissions do
     subject { described_class.new(user, permission_action, context).permissions.allowed? }
 
-    let(:organization) { create :organization }
-    let(:user) { create :user, :admin, :confirmed, organization: organization }
+    let(:organization) { create(:organization) }
+    let(:user) { create(:user, :admin, :confirmed, organization:) }
     let(:context) do
       {
         current_organization: organization
@@ -58,7 +58,7 @@ module Decidim::DecidimAwesome::Admin
     end
 
     context "when is scoped admin accessing" do
-      let(:user) { create :user, organization: organization }
+      let(:user) { create(:user, organization:) }
 
       before do
         allow(user).to receive(:admin).and_return(true)

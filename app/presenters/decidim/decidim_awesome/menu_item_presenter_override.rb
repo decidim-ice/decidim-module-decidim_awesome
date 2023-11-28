@@ -6,12 +6,12 @@ module Decidim
       extend ActiveSupport::Concern
 
       included do
-        def link_to(name = nil, options = nil, html_options = nil, &block)
+        def link_to(name = nil, options = nil, html_options = nil, &)
           html_options ||= {}
           html_options[:target] = @menu_item.try(:target)
 
           options ||= html_options
-          @view.link_to(name, options, html_options, &block)
+          @view.link_to(name, options, html_options, &)
         end
 
         def active

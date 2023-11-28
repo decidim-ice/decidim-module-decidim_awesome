@@ -7,14 +7,14 @@ module Decidim::DecidimAwesome
     subject { cell(content_block.cell, content_block).call }
 
     let(:organization) { create(:organization) }
-    let(:content_block) { create :content_block, organization: organization, manifest_name: :awesome_map, scope_name: :homepage, settings: settings }
+    let(:content_block) { create(:content_block, organization:, manifest_name: :awesome_map, scope_name: :homepage, settings:) }
     let(:settings) { {} }
-    let!(:participatory_process) { create :participatory_process, organization: organization }
-    let!(:category) { create :category, participatory_space: participatory_process }
-    let!(:proposal_component) { create :proposal_component, :with_geocoding_enabled, participatory_space: participatory_process }
-    let!(:meeting_component) { create :meeting_component, participatory_space: participatory_process }
-    let!(:proposal) { create :proposal, component: proposal_component }
-    let!(:meeting) { create :meeting, component: meeting_component }
+    let!(:participatory_process) { create(:participatory_process, organization:) }
+    let!(:category) { create(:category, participatory_space: participatory_process) }
+    let!(:proposal_component) { create(:proposal_component, :with_geocoding_enabled, participatory_space: participatory_process) }
+    let!(:meeting_component) { create(:meeting_component, participatory_space: participatory_process) }
+    let!(:proposal) { create(:proposal, component: proposal_component) }
+    let!(:meeting) { create(:meeting, component: meeting_component) }
 
     controller Decidim::PagesController
 
@@ -23,12 +23,12 @@ module Decidim::DecidimAwesome
     end
 
     it "shows the map" do
-      expect(subject).to have_selector("#awesome-map")
+      expect(subject).to have_css("#awesome-map")
       expect(subject).to have_content("window.AwesomeMap.categories")
     end
 
     it "do not show the title" do
-      expect(subject).not_to have_selector("h3.section-heading")
+      expect(subject).not_to have_css("h3.section-heading")
     end
 
     it "uses default height" do
@@ -69,7 +69,7 @@ module Decidim::DecidimAwesome
       end
 
       it "shows the title" do
-        expect(subject).to have_selector("h3.section-heading")
+        expect(subject).to have_css("h3.section-heading")
         expect(subject).to have_content("Look this beautiful map!")
       end
     end

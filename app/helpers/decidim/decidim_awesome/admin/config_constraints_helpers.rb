@@ -50,7 +50,7 @@ module Decidim
           space = model_for_manifest(manifest)
           return {} unless space&.column_names&.include? "slug"
 
-          components = Component.where(participatory_space: space.find_by(slug: slug))
+          components = Component.where(participatory_space: space.find_by(slug:))
           components.to_h do |item|
             [item.id, "#{item.id}: #{translated_attribute(item.name)}"]
           end

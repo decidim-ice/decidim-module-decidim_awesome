@@ -3,9 +3,9 @@
 require "spec_helper"
 
 describe "Hacked menus", type: :system do
-  let(:organization) { create :organization }
-  let!(:participatory_process) { create :participatory_process, organization: organization }
-  let!(:config) { create :awesome_config, organization: organization, var: :menu, value: menu }
+  let(:organization) { create(:organization) }
+  let!(:participatory_process) { create(:participatory_process, organization:) }
+  let!(:config) { create(:awesome_config, organization:, var: :menu, value: menu) }
   let(:menu) { [overriden, added] }
   let(:overriden) do
     {
@@ -103,7 +103,7 @@ describe "Hacked menus", type: :system do
           "en" => "A new beggining"
         },
         position: 10,
-        visibility: visibility
+        visibility:
       }
     end
 
@@ -144,7 +144,7 @@ describe "Hacked menus", type: :system do
     end
 
     context "when user is logged" do
-      let!(:user) { create(:user, :confirmed, organization: organization) }
+      let!(:user) { create(:user, :confirmed, organization:) }
 
       before do
         switch_to_host(organization.host)
@@ -183,7 +183,7 @@ describe "Hacked menus", type: :system do
       end
 
       context "when only verified user", with_authorization_workflows: ["dummy_authorization_handler"] do
-        let!(:authorization) { create(:authorization, granted_at: Time.zone.now, user: user, name: "dummy_authorization_handler") }
+        let!(:authorization) { create(:authorization, granted_at: Time.zone.now, user:, name: "dummy_authorization_handler") }
         let(:visibility) { "verified_user" }
 
         before do
@@ -211,7 +211,7 @@ describe "Hacked menus", type: :system do
         end
 
         context "when verification is expired" do
-          let!(:authorization) { create(:authorization, granted_at: 3.months.ago, user: user, name: "dummy_authorization_handler") }
+          let!(:authorization) { create(:authorization, granted_at: 3.months.ago, user:, name: "dummy_authorization_handler") }
 
           it "shows the item" do
             within ".main-nav" do
@@ -223,7 +223,7 @@ describe "Hacked menus", type: :system do
 
       describe "active" do
         let!(:component) { create(:proposal_component, participatory_space: participatory_process) }
-        let!(:participatory_process2) { create :participatory_process, organization: organization }
+        let!(:participatory_process2) { create(:participatory_process, organization:) }
         let!(:component2) { create(:proposal_component, participatory_space: participatory_process2) }
         let(:menu) do
           [

@@ -7,7 +7,7 @@ module Decidim::DecidimAwesome
     describe AdminAccountabilityController, type: :controller do
       routes { Decidim::DecidimAwesome::AdminEngine.routes }
 
-      let(:user) { create(:user, :confirmed, :admin, organization: organization) }
+      let(:user) { create(:user, :confirmed, :admin, organization:) }
       let(:organization) { create(:organization) }
       let(:admin_accountability) { [:participatory_space_roles, :admin_roles] }
 

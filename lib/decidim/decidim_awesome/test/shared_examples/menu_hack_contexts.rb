@@ -4,17 +4,17 @@ shared_context "with menu hacks params" do
   let(:organization) { create(:organization) }
   let(:context) do
     {
-      current_user: create(:user, organization: organization),
+      current_user: create(:user, organization:),
       current_organization: organization
     }
   end
   let(:params) do
     {
       raw_label: label,
-      url: url,
-      position: position,
-      target: target,
-      visibility: visibility
+      url:,
+      position:,
+      target:,
+      visibility:
     }
   end
   let(:attributes) do

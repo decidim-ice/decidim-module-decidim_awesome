@@ -46,7 +46,7 @@ module Decidim::DecidimAwesome
       describe "map_components" do
         let(:geocoding_enabled) { true }
         let!(:meetings) { create(:component, participatory_space: component.participatory_space, manifest_name: :meetings) }
-        let!(:proposals) { create(:component, participatory_space: component.participatory_space, manifest_name: :proposals, settings: { geocoding_enabled: geocoding_enabled }) }
+        let!(:proposals) { create(:component, participatory_space: component.participatory_space, manifest_name: :proposals, settings: { geocoding_enabled: }) }
         let!(:other) { create(:component, participatory_space: component.participatory_space, manifest_name: :dummy) }
 
         let(:components) do

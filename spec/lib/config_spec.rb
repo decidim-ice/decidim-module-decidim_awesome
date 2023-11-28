@@ -6,8 +6,8 @@ module Decidim::DecidimAwesome
   describe Config do
     subject { described_class.new organization }
 
-    let(:organization) { create :organization }
-    let(:participatory_process) { create :participatory_process, organization: organization }
+    let(:organization) { create(:organization) }
+    let(:participatory_process) { create(:participatory_process, organization:) }
     let(:component) { create(:dummy_component, participatory_space: participatory_process) }
     let(:config) do
       Decidim::DecidimAwesome.config
@@ -93,7 +93,7 @@ module Decidim::DecidimAwesome
       let(:custom_config) do
         config.merge(allow_images_in_full_editor: true)
       end
-      let!(:awesome_config) { create :awesome_config, organization: organization, var: :allow_images_in_full_editor, value: true }
+      let!(:awesome_config) { create(:awesome_config, organization:, var: :allow_images_in_full_editor, value: true) }
 
       it "differs from the basic config" do
         expect(subject.config).not_to eq(config)
@@ -113,7 +113,7 @@ module Decidim::DecidimAwesome
             use_floating_button: true
           }
         end
-        let!(:awesome_config) { create :awesome_config, organization: organization, var: :intergram_for_public_settings, value: settings }
+        let!(:awesome_config) { create(:awesome_config, organization:, var: :intergram_for_public_settings, value: settings) }
 
         it "returns the config normalized" do
           expect(subject.config[:intergram_for_public_settings][:chat_id]).to eq("-1234")
@@ -131,7 +131,7 @@ module Decidim::DecidimAwesome
         subject.instance_variable_set :@config, nil
       end
 
-      let!(:awesome_config) { create :awesome_config, organization: organization, var: :allow_images_in_full_editor, value: true }
+      let!(:awesome_config) { create(:awesome_config, organization:, var: :allow_images_in_full_editor, value: true) }
 
       it "always defaults to false" do
         expect(subject.config[:allow_images_in_full_editor]).to be(false)
@@ -139,9 +139,9 @@ module Decidim::DecidimAwesome
     end
 
     context "when there are constraints" do
-      let!(:awesome_config) { create :awesome_config, organization: organization, var: :allow_images_in_full_editor, value: true }
-      let!(:constraint1) { create :config_constraint, awesome_config: awesome_config, settings: settings1 }
-      let!(:constraint2) { create :config_constraint, awesome_config: awesome_config, settings: settings2 }
+      let!(:awesome_config) { create(:awesome_config, organization:, var: :allow_images_in_full_editor, value: true) }
+      let!(:constraint1) { create(:config_constraint, awesome_config:, settings: settings1) }
+      let!(:constraint2) { create(:config_constraint, awesome_config:, settings: settings2) }
       let(:settings1) do
         {
           participatory_space_manifest: "assemblies"
@@ -194,9 +194,9 @@ module Decidim::DecidimAwesome
     end
 
     context "when there are subconfigs" do
-      let!(:awesome_config) { create :awesome_config, organization: organization, var: :scoped_styles, value: values }
-      let(:config_helper_foo) { create :awesome_config, organization: organization, var: :scoped_style_foo, value: nil }
-      let(:config_helper_bar) { create :awesome_config, organization: organization, var: :scoped_style_bar, value: nil }
+      let!(:awesome_config) { create(:awesome_config, organization:, var: :scoped_styles, value: values) }
+      let(:config_helper_foo) { create(:awesome_config, organization:, var: :scoped_style_foo, value: nil) }
+      let(:config_helper_bar) { create(:awesome_config, organization:, var: :scoped_style_bar, value: nil) }
       let!(:constraint_foo) { create(:config_constraint, awesome_config: config_helper_foo, settings: settings_foo) }
       let!(:constraint_bar) { create(:config_constraint, awesome_config: config_helper_bar, settings: settings_bar) }
       let(:values) do

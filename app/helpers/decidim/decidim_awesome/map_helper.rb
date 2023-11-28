@@ -11,10 +11,10 @@ module Decidim
 
       # rubocop:disable Metrics/CyclomaticComplexity
       # rubocop:disable Metrics/PerceivedComplexity:
-      def awesome_map_for(components, &block)
+      def awesome_map_for(components, &)
         return unless map_utility_dynamic
 
-        map = awesome_builder.map_element({ class: "google-map", id: "awesome-map-container" }, &block)
+        map = awesome_builder.map_element({ class: "google-map", id: "awesome-map-container" }, &)
         help = content_tag(:div, class: "map__help") do
           sr_content = content_tag(:p, t("screen_reader_explanation", scope: "decidim.map.dynamic"), class: "show-for-sr")
 
@@ -30,7 +30,7 @@ module Decidim
                                    type: component.manifest.name,
                                    name: translated_attribute(component.name),
                                    url: Decidim::EngineRouter.main_proxy(component).root_path,
-                                   amendments: component.manifest.name == :proposals ? Decidim::Proposals::Proposal.where(component: component).only_emendations.count : 0
+                                   amendments: component.manifest.name == :proposals ? Decidim::Proposals::Proposal.where(component:).only_emendations.count : 0
                                  }
                                end.to_json,
           "data-hide-controls" => settings_source.try(:hide_controls),
@@ -97,13 +97,12 @@ module Decidim
         }
         builder = map_utility_dynamic.create_builder(self, options)
 
-        self.append_stylesheet_pack_tag("decidim_decidim_awesome_map")
-        self.append_javascript_pack_tag("decidim_decidim_awesome_map")
+        append_stylesheet_pack_tag("decidim_decidim_awesome_map")
+        append_javascript_pack_tag("decidim_decidim_awesome_map")
 
         builder
       end
 
-      # rubocop:disable Style/FormatStringToken
       def append_category(category)
         @h += @golden_ratio_conjugate
         @h %= 1
@@ -116,7 +115,6 @@ module Decidim
           color: format("#%02x%02x%02x", r, g, b)
         )
       end
-      # rubocop:enable Style/FormatStringToken
       # rubocop:enable Rails/HelperInstanceVariable
 
       # HSV values in [0..1[

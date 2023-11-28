@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim::DecidimAwesome
   describe VotingManifest do
-    subject { described_class.new(name: name) }
+    subject { described_class.new(name:) }
     let(:name) { :test }
 
     it { is_expected.to be_valid }

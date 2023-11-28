@@ -9,16 +9,16 @@ module Decidim::DecidimAwesome
       include Decidim::TranslationsHelper
       routes { Decidim::DecidimAwesome::AdminEngine.routes }
 
-      let(:user) { create(:user, :confirmed, :admin, organization: organization) }
+      let(:user) { create(:user, :confirmed, :admin, organization:) }
       let(:organization) { create(:organization) }
-      let(:config) { create(:awesome_config, organization: organization, var: key) }
+      let(:config) { create(:awesome_config, organization:, var: key) }
       let(:constraint) { create(:config_constraint, awesome_config: config) }
       let(:key) { :allow_images_in_full_editor }
       let(:id) { nil }
       let(:params) do
         {
-          key: key,
-          id: id,
+          key:,
+          id:,
           participatory_space_manifest: "assemblies"
         }
       end
@@ -42,13 +42,13 @@ module Decidim::DecidimAwesome
 
       describe "GET #new" do
         it "returns http success" do
-          get :new, params: params
+          get(:new, params:)
           expect(response).to have_http_status(:success)
         end
 
         it_behaves_like "forbids disabled feature" do
           let(:feature) { key }
-          let(:action) { get :new, params: params }
+          let(:action) { get :new, params: }
         end
 
         it "has helper with participatory space manifests" do
@@ -64,8 +64,8 @@ module Decidim::DecidimAwesome
         end
 
         context "when participatory process exists" do
-          let!(:process) { create :participatory_process, organization: organization }
-          let!(:component) { create :component, participatory_space: process }
+          let!(:process) { create(:participatory_process, organization:) }
+          let!(:component) { create(:component, participatory_space: process) }
 
           it "has helper with existing participatory spaces" do
             expect(controller.helpers.participatory_spaces_list(:participatory_processes)).to eq(spaces)
@@ -77,7 +77,7 @@ module Decidim::DecidimAwesome
         end
 
         context "when process is in another organization" do
-          let!(:process) { create :participatory_process }
+          let!(:process) { create(:participatory_process) }
 
           it "has empty helpers" do
             expect(controller.helpers.participatory_spaces_list(:participatory_processes)).to eq({})
@@ -93,7 +93,7 @@ module Decidim::DecidimAwesome
           end
 
           it "returns http success" do
-            get :new, params: params
+            get(:new, params:)
             expect(response).to have_http_status(:success)
           end
         end
@@ -101,13 +101,13 @@ module Decidim::DecidimAwesome
 
       describe "POST #create" do
         it "returns a success response" do
-          post :create, params: params
+          post(:create, params:)
           expect(response).to have_http_status(:success)
         end
 
         it_behaves_like "forbids disabled feature" do
           let(:feature) { key }
-          let(:action) { post :create, params: params }
+          let(:action) { post :create, params: }
         end
 
         context "when wrong params" do
@@ -116,7 +116,7 @@ module Decidim::DecidimAwesome
           end
 
           it "returns error" do
-            get :create, params: params
+            get(:create, params:)
             expect(response).to have_http_status(:unprocessable_entity)
           end
         end
@@ -126,13 +126,13 @@ module Decidim::DecidimAwesome
         let(:id) { constraint.id }
 
         it "returns http success" do
-          get :show, params: params
+          get(:show, params:)
           expect(response).to have_http_status(:success)
         end
 
         it_behaves_like "forbids disabled feature" do
           let(:feature) { key }
-          let(:action) { get :show, params: params }
+          let(:action) { get :show, params: }
         end
       end
 
@@ -140,20 +140,20 @@ module Decidim::DecidimAwesome
         let(:id) { constraint.id }
 
         it "redirects as success success" do
-          patch :update, params: params
+          patch(:update, params:)
           expect(response).to have_http_status(:success)
         end
 
         it_behaves_like "forbids disabled feature" do
           let(:feature) { key }
-          let(:action) { patch :update, params: params }
+          let(:action) { patch :update, params: }
         end
 
         context "when wrong params" do
-          let!(:prev_constraint) { create :config_constraint, awesome_config: config, settings: { participatory_space_manifest: "assemblies" } }
+          let!(:prev_constraint) { create(:config_constraint, awesome_config: config, settings: { participatory_space_manifest: "assemblies" }) }
 
           it "returns error" do
-            get :update, params: params
+            get(:update, params:)
             expect(response).to have_http_status(:unprocessable_entity)
           end
         end
@@ -163,13 +163,13 @@ module Decidim::DecidimAwesome
         let(:id) { constraint.id }
 
         it "redirects as success success" do
-          delete :destroy, params: params
+          delete(:destroy, params:)
           expect(response).to have_http_status(:success)
         end
 
         it_behaves_like "forbids disabled feature" do
           let(:feature) { key }
-          let(:action) { delete :destroy, params: params }
+          let(:action) { delete :destroy, params: }
         end
       end
     end

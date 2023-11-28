@@ -8,7 +8,7 @@ module Decidim::Proposals
     include_context "with a graphql class type"
     let(:component) { create(:proposal_component) }
     let!(:extra_fields) { create(:awesome_proposal_extra_fields, :with_votes, proposal: model) }
-    let(:model) { create :proposal, component: component }
+    let(:model) { create(:proposal, component:) }
 
     describe "id" do
       let(:query) { "{ id }" }

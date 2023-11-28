@@ -6,7 +6,7 @@ module Decidim::Proposals
   describe ProposalVotesController, type: :controller do
     routes { Decidim::Proposals::Engine.routes }
 
-    let(:proposal) { create(:proposal, component: component) }
+    let(:proposal) { create(:proposal, component:) }
     let(:user) { create(:user, :confirmed, organization: component.organization) }
 
     let(:params) do
@@ -30,7 +30,7 @@ module Decidim::Proposals
     shared_examples "can vote" do
       it "allows voting" do
         expect do
-          post :create, format: :js, params: params
+          post :create, format: :js, params:
         end.to change(ProposalVote, :count).by(1)
 
         expect(ProposalVote.last.author).to eq(user)
@@ -41,7 +41,7 @@ module Decidim::Proposals
     shared_examples "no vote permissions" do
       it "doesn't allow voting" do
         expect do
-          post :create, format: :js, params: params
+          post :create, format: :js, params:
         end.not_to change(ProposalVote, :count)
 
         expect(flash[:alert]).not_to be_empty
@@ -52,7 +52,7 @@ module Decidim::Proposals
     shared_examples "invalid weight" do
       it "doesn't allow voting" do
         expect do
-          post :create, format: :js, params: params
+          post :create, format: :js, params:
         end.not_to change(ProposalVote, :count)
 
         expect(response).to have_http_status(:unprocessable_entity)
@@ -62,7 +62,7 @@ module Decidim::Proposals
     shared_examples "destroy vote" do
       it "deletes the vote" do
         expect do
-          delete :destroy, format: :js, params: params
+          delete :destroy, format: :js, params:
         end.to change(ProposalVote, :count).by(-1)
 
         expect(ProposalVote.count).to eq(0)
@@ -72,7 +72,7 @@ module Decidim::Proposals
     describe "POST create" do
       context "with votes enabled" do
         let(:component) do
-          create(:proposal_component, :with_votes_enabled, settings: settings)
+          create(:proposal_component, :with_votes_enabled, settings:)
         end
         let(:settings) do
           {
@@ -94,7 +94,7 @@ module Decidim::Proposals
               {
                 proposal_id: proposal.id,
                 component_id: component.id,
-                weight: weight
+                weight:
               }
             end
 
@@ -140,7 +140,7 @@ module Decidim::Proposals
 
     describe "DELETE destroy" do
       before do
-        create(:proposal_vote, proposal: proposal, author: user)
+        create(:proposal_vote, proposal:, author: user)
       end
 
       context "with vote limit enabled" do

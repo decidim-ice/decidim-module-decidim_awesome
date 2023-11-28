@@ -6,12 +6,12 @@ describe "Show awesome iframe", type: :system do
   include_context "with a component"
   let(:manifest_name) { "awesome_iframe" }
 
-  let!(:user) { create :user, :confirmed, organization: organization }
+  let!(:user) { create(:user, :confirmed, organization:) }
   let(:settings) do
     {
-      announcement: announcement,
-      iframe: iframe,
-      viewport_width: viewport_width
+      announcement:,
+      iframe:,
+      viewport_width:
     }
   end
 
@@ -20,7 +20,7 @@ describe "Show awesome iframe", type: :system do
   let(:announcement) { {} }
 
   before do
-    component.update!(settings: settings)
+    component.update!(settings:)
     visit_component
     unless legacy_version?
       click_link "Change cookie settings"
@@ -30,13 +30,13 @@ describe "Show awesome iframe", type: :system do
 
   it "shows the iframe wrapper" do
     within "[data-content]" do
-      expect(page).to have_selector(".awesome-iframe")
+      expect(page).to have_css(".awesome-iframe")
     end
   end
 
   it "shows the iframe" do
     within ".awesome-iframe" do
-      expect(page).to have_selector("iframe")
+      expect(page).to have_css("iframe")
     end
   end
 

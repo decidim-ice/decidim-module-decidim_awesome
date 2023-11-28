@@ -4,13 +4,13 @@ require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/box_label_editor"
 
 describe "Admin manages scoped styles", type: :system do
-  let(:organization) { create :organization }
-  let!(:admin) { create(:user, :admin, :confirmed, organization: organization) }
+  let(:organization) { create(:organization) }
+  let!(:admin) { create(:user, :admin, :confirmed, organization:) }
   let(:styles) do
     {}
   end
-  let!(:config) { create :awesome_config, organization: organization, var: :scoped_styles, value: styles }
-  let(:config_helper) { create :awesome_config, organization: organization, var: :scoped_style_bar }
+  let!(:config) { create(:awesome_config, organization:, var: :scoped_styles, value: styles) }
+  let(:config_helper) { create(:awesome_config, organization:, var: :scoped_style_bar) }
   let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes" }) }
 
   before do
@@ -96,8 +96,8 @@ describe "Admin manages scoped styles", type: :system do
         expect(page).to have_admin_callout("removed successfully")
         expect(page).to have_content("body {background: blue;}")
         expect(page).not_to have_content("body {background: red;}")
-        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :scoped_style_foo)).not_to be_present
-        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :scoped_style_bar)).to be_present
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_style_foo)).not_to be_present
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_style_bar)).to be_present
       end
     end
 
@@ -125,8 +125,8 @@ describe "Admin manages scoped styles", type: :system do
           expect(page).to have_content("Processes")
         end
 
-        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :scoped_style_bar)).to be_present
-        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :scoped_style_bar).constraints.first.settings).to eq("participatory_space_manifest" => "participatory_processes")
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_style_bar)).to be_present
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_style_bar).constraints.first.settings).to eq("participatory_space_manifest" => "participatory_processes")
       end
 
       context "when removing a constraint" do
@@ -156,8 +156,8 @@ describe "Admin manages scoped styles", type: :system do
             expect(page).not_to have_content("Processes")
           end
 
-          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :scoped_style_bar)).to be_present
-          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :scoped_style_bar).constraints).not_to be_present
+          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_style_bar)).to be_present
+          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_style_bar).constraints).not_to be_present
         end
       end
     end

@@ -4,16 +4,16 @@ shared_context "with custom redirects params" do
   let(:organization) { create(:organization) }
   let(:context) do
     {
-      current_user: create(:user, organization: organization),
+      current_user: create(:user, organization:),
       current_organization: organization
     }
   end
   let(:params) do
     {
-      origin: origin,
-      destination: destination,
-      active: active,
-      pass_query: pass_query
+      origin:,
+      destination:,
+      active:,
+      pass_query:
     }
   end
   let(:attributes) do

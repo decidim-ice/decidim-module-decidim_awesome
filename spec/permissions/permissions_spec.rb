@@ -6,8 +6,8 @@ module Decidim::DecidimAwesome
   describe Permissions do
     subject { described_class.new(user, permission_action, context).permissions.allowed? }
 
-    let(:organization) { create :organization }
-    let(:user) { create :user, organization: organization }
+    let(:organization) { create(:organization) }
+    let(:user) { create(:user, organization:) }
     let(:context) do
       {
         current_organization: organization,
@@ -67,7 +67,7 @@ module Decidim::DecidimAwesome
     end
 
     context "when user is an admin" do
-      let(:user) { create :user, :admin, :confirmed, organization: organization }
+      let(:user) { create(:user, :admin, :confirmed, organization:) }
 
       context "and images in proposals are allowed" do
         it { is_expected.to be true }

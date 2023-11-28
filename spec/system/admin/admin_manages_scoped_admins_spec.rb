@@ -4,16 +4,16 @@ require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/box_label_editor"
 
 describe "Admin manages scoped admins", type: :system do
-  let(:organization) { create :organization }
-  let!(:admin) { create(:user, :admin, :confirmed, organization: organization) }
-  let!(:user) { create(:user, :confirmed, organization: organization) }
-  let!(:user2) { create(:user, :confirmed, organization: organization) }
-  let!(:user3) { create(:user, :confirmed, organization: organization) }
+  let(:organization) { create(:organization) }
+  let!(:admin) { create(:user, :admin, :confirmed, organization:) }
+  let!(:user) { create(:user, :confirmed, organization:) }
+  let!(:user2) { create(:user, :confirmed, organization:) }
+  let!(:user3) { create(:user, :confirmed, organization:) }
   let(:admins) do
     {}
   end
-  let!(:config) { create :awesome_config, organization: organization, var: :scoped_admins, value: admins }
-  let(:config_helper) { create :awesome_config, organization: organization, var: :scoped_admin_bar }
+  let!(:config) { create(:awesome_config, organization:, var: :scoped_admins, value: admins) }
+  let(:config_helper) { create(:awesome_config, organization:, var: :scoped_admin_bar) }
   let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes" }) }
 
   before do
@@ -87,8 +87,8 @@ describe "Admin manages scoped admins", type: :system do
         expect(page).to have_admin_callout("removed successfully")
         expect(page).to have_content(user3.name.to_s)
         expect(page).not_to have_content(user2.name.to_s)
-        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :scoped_admin_foo)).not_to be_present
-        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :scoped_admin_bar)).to be_present
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_admin_foo)).not_to be_present
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_admin_bar)).to be_present
       end
     end
 
@@ -116,8 +116,8 @@ describe "Admin manages scoped admins", type: :system do
           expect(page).to have_content("Processes")
         end
 
-        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :scoped_admin_bar)).to be_present
-        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :scoped_admin_bar).constraints.first.settings).to eq("participatory_space_manifest" => "participatory_processes")
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_admin_bar)).to be_present
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_admin_bar).constraints.first.settings).to eq("participatory_space_manifest" => "participatory_processes")
       end
 
       context "when removing a constraint" do
@@ -147,8 +147,8 @@ describe "Admin manages scoped admins", type: :system do
             expect(page).not_to have_content("Processes")
           end
 
-          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :scoped_admin_bar)).to be_present
-          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :scoped_admin_bar).constraints).not_to be_present
+          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_admin_bar)).to be_present
+          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_admin_bar).constraints).not_to be_present
         end
       end
     end

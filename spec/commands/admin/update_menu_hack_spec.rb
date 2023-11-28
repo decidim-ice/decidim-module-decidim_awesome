@@ -13,13 +13,13 @@ module Decidim::DecidimAwesome
       let(:previous_menu) do
         [{ "url" => url, "position" => 10 }]
       end
-      let!(:config) { create :awesome_config, organization: organization, var: menu_name, value: previous_menu }
+      let!(:config) { create(:awesome_config, organization:, var: menu_name, value: previous_menu) }
 
       describe "when valid" do
         it "broadcasts :ok and modifies the config options" do
           expect { subject.call }.to broadcast(:ok)
 
-          items = AwesomeConfig.find_by(organization: organization, var: menu_name).value
+          items = AwesomeConfig.find_by(organization:, var: menu_name).value
           expect(items).to be_a(Array)
           expect(items.count).to eq(1)
           expect(items.first).to eq(attributes)
@@ -35,23 +35,23 @@ module Decidim::DecidimAwesome
         it "broadcasts :invalid and does not modifiy the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
-          expect(AwesomeConfig.find_by(organization: organization, var: menu_name).value).to eq(previous_menu)
+          expect(AwesomeConfig.find_by(organization:, var: menu_name).value).to eq(previous_menu)
         end
       end
 
       context "when other config are created" do
-        let!(:config) { create :awesome_config, organization: organization, var: menu_name, value: attributes }
+        let!(:config) { create(:awesome_config, organization:, var: menu_name, value: attributes) }
 
         it "modifies the other config" do
           expect { another_config.call }.to broadcast(:ok)
-          expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_full_editor).value).to be(true)
-          expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_small_editor).value).to be(true)
+          expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_full_editor).value).to be(true)
+          expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_small_editor).value).to be(true)
         end
 
         it "do not modifiy current config" do
-          expect(AwesomeConfig.find_by(organization: organization, var: menu_name).value).to eq(attributes)
+          expect(AwesomeConfig.find_by(organization:, var: menu_name).value).to eq(attributes)
           expect { another_config.call }.to broadcast(:ok)
-          expect(AwesomeConfig.find_by(organization: organization, var: menu_name).value).to eq(attributes)
+          expect(AwesomeConfig.find_by(organization:, var: menu_name).value).to eq(attributes)
         end
       end
 
@@ -63,7 +63,7 @@ module Decidim::DecidimAwesome
         it "adds a new menu entry" do
           expect { subject.call }.to broadcast(:ok)
 
-          items = AwesomeConfig.find_by(organization: organization, var: menu_name).value.sort_by { |i| i["position"] }
+          items = AwesomeConfig.find_by(organization:, var: menu_name).value.sort_by { |i| i["position"] }
           expect(items).to be_a(Array)
           expect(items.count).to eq(2)
           expect(items.first).to eq(attributes)
@@ -80,10 +80,10 @@ module Decidim::DecidimAwesome
         let(:params) do
           {
             raw_label: label,
-            url: url,
-            position: position,
-            target: target,
-            visibility: visibility,
+            url:,
+            position:,
+            target:,
+            visibility:,
             native?: true
           }
         end
@@ -91,7 +91,7 @@ module Decidim::DecidimAwesome
         it "adds a new menu entry" do
           expect { subject.call }.to broadcast(:ok)
 
-          items = AwesomeConfig.find_by(organization: organization, var: menu_name).value.sort_by { |i| i["position"] }
+          items = AwesomeConfig.find_by(organization:, var: menu_name).value.sort_by { |i| i["position"] }
           expect(items).to be_a(Array)
           expect(items.count).to eq(2)
           expect(items.first["url"]).to eq(url)

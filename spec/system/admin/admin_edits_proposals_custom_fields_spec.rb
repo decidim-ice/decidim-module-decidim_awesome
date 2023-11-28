@@ -5,9 +5,9 @@ require "spec_helper"
 describe "Admin edits proposals", type: :system do
   let(:manifest_name) { "proposals" }
   let(:organization) { participatory_process.organization }
-  let!(:user) { create :user, :admin, :confirmed, organization: organization }
-  let!(:config) { create :awesome_config, organization: organization, var: :proposal_custom_fields, value: custom_fields }
-  let(:config_helper) { create :awesome_config, organization: organization, var: :proposal_custom_field_bar }
+  let!(:user) { create(:user, :admin, :confirmed, organization:) }
+  let!(:config) { create(:awesome_config, organization:, var: :proposal_custom_fields, value: custom_fields) }
+  let(:config_helper) { create(:awesome_config, organization:, var: :proposal_custom_field_bar) }
   let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes", "participatory_space_slug" => slug }) }
   let(:slug) { participatory_process.slug }
 
@@ -25,7 +25,7 @@ describe "Admin edits proposals", type: :system do
   let!(:proposal) do
     create(:proposal,
            :official,
-           component: component,
+           component:,
            body: {
              en: '<xml><dl><dt>Bio</dt><dd id="textarea-1476748007461"><div>I shot the sheriff</div></dd></dl></xml>',
              ca: '<xml><dl><dt>Bio</dt><dd id="textarea-1476748007461"><div>Jo disparo al sheriff</div></dd></dl></xml>'

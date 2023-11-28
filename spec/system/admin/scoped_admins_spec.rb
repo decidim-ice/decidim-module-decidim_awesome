@@ -4,21 +4,21 @@ require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/scoped_admins_examples"
 
 describe "Scoped admin journeys", type: :system do
-  let(:organization) { create :organization }
-  let!(:assembly) { create(:assembly, organization: organization) }
+  let(:organization) { create(:organization) }
+  let!(:assembly) { create(:assembly, organization:) }
   let!(:component) { create(:proposal_component, participatory_space: assembly) }
-  let!(:proposal) { create(:proposal, :official, component: component) }
+  let!(:proposal) { create(:proposal, :official, component:) }
   let!(:another_component) { create(:meeting_component, participatory_space: assembly) }
-  let!(:another_assembly) { create(:assembly, organization: organization) }
-  let!(:participatory_process) { create(:participatory_process, organization: organization) }
-  let!(:process_group) { create(:participatory_process_group, organization: organization) }
-  let!(:another_process_group) { create(:participatory_process_group, organization: organization) }
-  let!(:user) { create(:user, :confirmed, organization: organization) }
-  let!(:user_accepted) { create(:user, :confirmed, :admin_terms_accepted, organization: organization) }
-  let!(:admin) { create(:user, :confirmed, :admin, organization: organization) }
-  let!(:config) { create :awesome_config, organization: organization, var: :scoped_admins, value: admins }
-  let(:config_helper) { create :awesome_config, organization: organization, var: :scoped_admin_bar, value: nil }
-  let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: settings) }
+  let!(:another_assembly) { create(:assembly, organization:) }
+  let!(:participatory_process) { create(:participatory_process, organization:) }
+  let!(:process_group) { create(:participatory_process_group, organization:) }
+  let!(:another_process_group) { create(:participatory_process_group, organization:) }
+  let!(:user) { create(:user, :confirmed, organization:) }
+  let!(:user_accepted) { create(:user, :confirmed, :admin_terms_accepted, organization:) }
+  let!(:admin) { create(:user, :confirmed, :admin, organization:) }
+  let!(:config) { create(:awesome_config, organization:, var: :scoped_admins, value: admins) }
+  let(:config_helper) { create(:awesome_config, organization:, var: :scoped_admin_bar, value: nil) }
+  let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings:) }
   let(:admins) do
     {
       "bar" => []

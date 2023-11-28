@@ -3,8 +3,8 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/config_examples"
 
-describe "Visit the home page", type: :system, perform_enqueued: true do
-  let(:organization) { create :organization, available_locales: [:en] }
+describe "Visit the home page", :perform_enqueued, type: :system do
+  let(:organization) { create(:organization, available_locales: [:en]) }
 
   before do
     switch_to_host(organization.host)

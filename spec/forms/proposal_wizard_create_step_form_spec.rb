@@ -8,19 +8,19 @@ module Decidim::Proposals
 
     let(:params) do
       {
-        title: title,
-        body: body,
-        body_template: body_template
+        title:,
+        body:,
+        body_template:
       }
     end
 
     let(:organization) { create(:organization, available_locales: [:en]) }
-    let(:participatory_space) { create(:participatory_process, :with_steps, organization: organization) }
-    let(:component) { create(:proposal_component, participatory_space: participatory_space) }
+    let(:participatory_space) { create(:participatory_process, :with_steps, organization:) }
+    let(:component) { create(:proposal_component, participatory_space:) }
     let(:title) { "More sidewalks and less roads" }
     let(:body) { nil }
     let(:body_template) { nil }
-    let(:author) { create(:user, organization: organization) }
+    let(:author) { create(:user, organization:) }
 
     let(:form) do
       described_class.from_params(params).with_context(
@@ -36,8 +36,8 @@ module Decidim::Proposals
         "foo" => "[#{data}]"
       }
     end
-    let!(:config) { create :awesome_config, organization: organization, var: :proposal_custom_fields, value: custom_fields }
-    let(:config_helper) { create :awesome_config, organization: organization, var: :proposal_custom_field_foo }
+    let!(:config) { create(:awesome_config, organization:, var: :proposal_custom_fields, value: custom_fields) }
+    let(:config_helper) { create(:awesome_config, organization:, var: :proposal_custom_field_foo) }
     let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes", "participatory_space_slug" => slug }) }
     let(:slug) { participatory_space.slug }
 
@@ -90,13 +90,13 @@ module Decidim::Proposals
     end
 
     context "when is a participatory text" do
-      let(:component) { create(:proposal_component, :with_participatory_texts_enabled, participatory_space: participatory_space) }
+      let(:component) { create(:proposal_component, :with_participatory_texts_enabled, participatory_space:) }
 
       it { is_expected.to be_invalid }
     end
 
     context "when the body exceeds the permited length" do
-      let(:component) { create(:proposal_component, :with_proposal_length, participatory_space: participatory_space, proposal_length: allowed_length) }
+      let(:component) { create(:proposal_component, :with_proposal_length, participatory_space:, proposal_length: allowed_length) }
       let(:allowed_length) { 15 }
       let(:body) { "A body longer than the permitted" }
 
@@ -112,7 +112,7 @@ module Decidim::Proposals
     end
 
     shared_examples "starts with caps" do |prop|
-      let!(:config) { create :awesome_config, organization: organization, var: "validate_#{prop}_start_with_caps", value: enabled }
+      let!(:config) { create(:awesome_config, organization:, var: "validate_#{prop}_start_with_caps", value: enabled) }
       let!(:constraint) { create(:config_constraint, awesome_config: config, settings: { "participatory_space_manifest" => "participatory_processes", "participatory_space_slug" => slug }) }
 
       let(:enabled) { false }
@@ -146,7 +146,7 @@ module Decidim::Proposals
     end
 
     shared_examples "minimum length" do |prop|
-      let!(:config) { create :awesome_config, organization: organization, var: "validate_#{prop}_min_length", value: min_length }
+      let!(:config) { create(:awesome_config, organization:, var: "validate_#{prop}_min_length", value: min_length) }
       let!(:constraint) { create(:config_constraint, awesome_config: config, settings: { "participatory_space_manifest" => "participatory_processes", "participatory_space_slug" => slug }) }
 
       let(:min_length) { 10 }
@@ -185,7 +185,7 @@ module Decidim::Proposals
     end
 
     shared_examples "max caps percent" do |prop|
-      let!(:config) { create :awesome_config, organization: organization, var: "validate_#{prop}_max_caps_percent", value: percent }
+      let!(:config) { create(:awesome_config, organization:, var: "validate_#{prop}_max_caps_percent", value: percent) }
       let!(:constraint) { create(:config_constraint, awesome_config: config, settings: { "participatory_space_manifest" => "participatory_processes", "participatory_space_slug" => slug }) }
 
       let(:percent) { 90 }
@@ -220,7 +220,7 @@ module Decidim::Proposals
     end
 
     shared_examples "max marks together" do |prop|
-      let!(:config) { create :awesome_config, organization: organization, var: "validate_#{prop}_max_marks_together", value: max_marks }
+      let!(:config) { create(:awesome_config, organization:, var: "validate_#{prop}_max_marks_together", value: max_marks) }
       let!(:constraint) { create(:config_constraint, awesome_config: config, settings: { "participatory_space_manifest" => "participatory_processes", "participatory_space_slug" => slug }) }
 
       let(:max_marks) { 5 }

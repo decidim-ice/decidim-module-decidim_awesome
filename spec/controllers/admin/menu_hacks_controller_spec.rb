@@ -12,7 +12,7 @@ module Decidim::DecidimAwesome
 
       include_context "with menu hacks params"
 
-      let(:user) { create(:user, :confirmed, :admin, organization: organization) }
+      let(:user) { create(:user, :confirmed, :admin, organization:) }
       let(:organization) { create(:organization) }
 
       before do
@@ -42,7 +42,7 @@ module Decidim::DecidimAwesome
       end
 
       describe "POST #create" do
-        let(:action) { post :create, params: params }
+        let(:action) { post :create, params: }
 
         it "returns http success" do
           action
@@ -55,7 +55,7 @@ module Decidim::DecidimAwesome
         it "creates the new menu entry" do
           action
 
-          items = AwesomeConfig.find_by(organization: organization, var: menu_name).value
+          items = AwesomeConfig.find_by(organization:, var: menu_name).value
           expect(items).to be_a(Array)
           expect(items.count).to eq(1)
           expect(items.first).to eq(attributes)
@@ -73,7 +73,7 @@ module Decidim::DecidimAwesome
           it "do not create the new menu entry" do
             action
 
-            expect(AwesomeConfig.find_by(organization: organization, var: menu_name)).not_to be_present
+            expect(AwesomeConfig.find_by(organization:, var: menu_name)).not_to be_present
           end
         end
 
@@ -81,7 +81,7 @@ module Decidim::DecidimAwesome
           let(:previous_menu) do
             [{ "url" => "/some-path", "position" => 10 }]
           end
-          let!(:config) { create :awesome_config, organization: organization, var: menu_name, value: previous_menu }
+          let!(:config) { create(:awesome_config, organization:, var: menu_name, value: previous_menu) }
           let(:url) { "/some-path?querystring" }
 
           it "returns error" do
@@ -93,17 +93,17 @@ module Decidim::DecidimAwesome
           it "do not create the new menu entry" do
             action
 
-            expect(AwesomeConfig.find_by(organization: organization, var: menu_name).value.count).to eq(1)
+            expect(AwesomeConfig.find_by(organization:, var: menu_name).value.count).to eq(1)
           end
         end
       end
 
       describe "GET #edit" do
-        let(:action) { get :edit, params: params }
+        let(:action) { get :edit, params: }
         let(:previous_menu) do
           [{ "url" => url, "position" => 10 }]
         end
-        let!(:config) { create :awesome_config, organization: organization, var: menu_name, value: previous_menu }
+        let!(:config) { create(:awesome_config, organization:, var: menu_name, value: previous_menu) }
         let(:params) do
           {
             id: Digest::MD5.hexdigest(previous_menu.first["url"])
@@ -151,7 +151,7 @@ module Decidim::DecidimAwesome
         let(:previous_menu) do
           [{ "url" => url, "position" => 10 }]
         end
-        let!(:config) { create :awesome_config, organization: organization, var: menu_name, value: previous_menu }
+        let!(:config) { create(:awesome_config, organization:, var: menu_name, value: previous_menu) }
         let(:id) do
           {
             id: Digest::MD5.hexdigest(previous_menu.first["url"])
@@ -169,7 +169,7 @@ module Decidim::DecidimAwesome
         it "updates the menu entry" do
           action
 
-          items = AwesomeConfig.find_by(organization: organization, var: menu_name).value
+          items = AwesomeConfig.find_by(organization:, var: menu_name).value
           expect(items).to be_a(Array)
           expect(items.count).to eq(1)
           expect(items.first).to eq(attributes)
@@ -182,7 +182,7 @@ module Decidim::DecidimAwesome
 
           it "creates a new item" do
             action
-            items = AwesomeConfig.find_by(organization: organization, var: menu_name).value
+            items = AwesomeConfig.find_by(organization:, var: menu_name).value
 
             expect(items).to be_a(Array)
             expect(items.count).to eq(2)
@@ -201,17 +201,17 @@ module Decidim::DecidimAwesome
           it "do not create the new menu entry" do
             action
 
-            expect(AwesomeConfig.find_by(organization: organization, var: menu_name).value).to eq(previous_menu)
+            expect(AwesomeConfig.find_by(organization:, var: menu_name).value).to eq(previous_menu)
           end
         end
       end
 
       describe "DELETE #destroys" do
-        let(:action) { delete :destroy, params: params }
+        let(:action) { delete :destroy, params: }
         let(:previous_menu) do
           [{ "url" => url, "position" => 10 }]
         end
-        let!(:config) { create :awesome_config, organization: organization, var: menu_name, value: previous_menu }
+        let!(:config) { create(:awesome_config, organization:, var: menu_name, value: previous_menu) }
         let(:params) do
           {
             id: Digest::MD5.hexdigest(previous_menu.first["url"])
@@ -228,7 +228,7 @@ module Decidim::DecidimAwesome
 
         it "destroy the task" do
           action
-          expect(AwesomeConfig.find_by(organization: organization, var: menu_name).value).to eq([])
+          expect(AwesomeConfig.find_by(organization:, var: menu_name).value).to eq([])
         end
 
         context "when invalid parameters" do
@@ -240,7 +240,7 @@ module Decidim::DecidimAwesome
 
           it "returns error" do
             expect { action }.to raise_error(ActiveRecord::RecordNotFound)
-            expect(AwesomeConfig.find_by(organization: organization, var: menu_name).value).to eq(previous_menu)
+            expect(AwesomeConfig.find_by(organization:, var: menu_name).value).to eq(previous_menu)
           end
         end
       end
