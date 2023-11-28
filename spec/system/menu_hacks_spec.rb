@@ -90,9 +90,9 @@ describe "Hacked menus" do
     end
 
     it "has target blank" do
-      expect(find("#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:nth-child(3) a")[:class]).to include("external-link-container")
+      expect(find("#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:nth-child(3) a")["data-remote"]).to eq("true")
       expect(find("#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:nth-child(3) a")[:target]).to eq("_blank")
-      expect(find("#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:last-child a")[:class]).not_to include("external-link-container")
+      expect(find("#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:last-child a")["data-remote"]).not_to eq("true")
     end
   end
 
