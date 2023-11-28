@@ -29,6 +29,8 @@ describe "Custom proposals fields" do
   end
 
   before do
+    skip "Proposals custom fields feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
+
     login_as user, scope: :user
     visit_component
 

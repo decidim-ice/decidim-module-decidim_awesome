@@ -33,6 +33,10 @@ describe "Voting weights with cards" do
   let(:can_accumulate_supports_beyond_threshold) { false }
   let(:minimum_votes_per_user) { 0 }
 
+  before do
+    skip "Weighted voting feature is pending to be adapted to Decidim 0.28"
+  end
+
   context "when the user is logged in" do
     before do
       login_as user, scope: :user
