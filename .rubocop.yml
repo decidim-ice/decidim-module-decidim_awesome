@@ -4,3 +4,6 @@ inherit_from:
   - config/rubocop/rspec.yml
   - config/rubocop/faker.yml
   - config/rubocop/disabled.yml
+
+RSpec/IndexedLet:
+  Enabled: false

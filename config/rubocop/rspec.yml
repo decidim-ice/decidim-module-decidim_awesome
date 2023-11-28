@@ -20,6 +20,7 @@ RSpec/DescribeClass:
   Exclude:
     - spec/i18n_spec.rb
     - "**/tasks/**/*"
+    - "spec/system/**/*"
 
 RSpec/ExampleLength:
   Max: 49
