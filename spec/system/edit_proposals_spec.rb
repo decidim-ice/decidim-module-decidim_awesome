@@ -28,6 +28,8 @@ describe "Show proposals editor" do
   let(:editor_selector) { "#proposal_body" }
 
   before do
+    skip "Proposals hacks feature is pending to be adapted to Decidim 0.28 and currently is disabled"
+
     organization.update(rich_text_editor_in_public_views: rte_enabled)
     login_as user, scope: :user
     visit_component
