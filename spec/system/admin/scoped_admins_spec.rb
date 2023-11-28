@@ -3,7 +3,7 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/scoped_admins_examples"
 
-describe "Scoped admin journeys", type: :system do
+describe "Scoped admin journeys" do
   let(:organization) { create(:organization) }
   let!(:assembly) { create(:assembly, organization:) }
   let!(:component) { create(:proposal_component, participatory_space: assembly) }

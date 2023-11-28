@@ -58,7 +58,7 @@ module Decidim::DecidimAwesome
             }
           end
 
-          it { is_expected.to be_invalid }
+          it { is_expected.not_to be_valid }
         end
       end
 
@@ -78,7 +78,7 @@ module Decidim::DecidimAwesome
             }
           end
 
-          it { is_expected.to be_invalid }
+          it { is_expected.not_to be_valid }
         end
 
         context "and sending labels with html" do
@@ -116,25 +116,25 @@ module Decidim::DecidimAwesome
         context "and title min length is empty" do
           let(:validate_title_min_length) { nil }
 
-          it { is_expected.to be_invalid }
+          it { is_expected.not_to be_valid }
         end
 
         context "and title min length is zero" do
           let(:validate_title_min_length) { 0 }
 
-          it { is_expected.to be_invalid }
+          it { is_expected.not_to be_valid }
         end
 
         context "and title min length greater than 100" do
           let(:validate_title_min_length) { 101 }
 
-          it { is_expected.to be_invalid }
+          it { is_expected.not_to be_valid }
         end
 
         context "and body min length is empty" do
           let(:validate_body_min_length) { nil }
 
-          it { is_expected.to be_invalid }
+          it { is_expected.not_to be_valid }
         end
 
         context "and body min length is zero" do
@@ -146,7 +146,7 @@ module Decidim::DecidimAwesome
         context "and title max caps percent empty" do
           let(:validate_title_max_caps_percent) { nil }
 
-          it { is_expected.to be_invalid }
+          it { is_expected.not_to be_valid }
         end
 
         context "and title max caps percent is zero" do
@@ -158,7 +158,7 @@ module Decidim::DecidimAwesome
         context "and title max caps percent is bigger than 100" do
           let(:validate_title_max_caps_percent) { 101 }
 
-          it { is_expected.to be_invalid }
+          it { is_expected.not_to be_valid }
         end
 
         context "and body start with caps is false" do
@@ -170,7 +170,7 @@ module Decidim::DecidimAwesome
         context "and body max caps percent empty" do
           let(:validate_body_max_caps_percent) { nil }
 
-          it { is_expected.to be_invalid }
+          it { is_expected.not_to be_valid }
         end
 
         context "and body max caps percent is zero" do
@@ -182,31 +182,31 @@ module Decidim::DecidimAwesome
         context "and body max caps percent is bigger than 100" do
           let(:validate_body_max_caps_percent) { 101 }
 
-          it { is_expected.to be_invalid }
+          it { is_expected.not_to be_valid }
         end
 
         context "and title max marks together is empty" do
           let(:validate_title_max_marks_together) { nil }
 
-          it { is_expected.to be_invalid }
+          it { is_expected.not_to be_valid }
         end
 
         context "and title max marks together is zero" do
           let(:validate_title_max_marks_together) { 0 }
 
-          it { is_expected.to be_invalid }
+          it { is_expected.not_to be_valid }
         end
 
         context "and body max marks together is empty" do
           let(:validate_body_max_marks_together) { nil }
 
-          it { is_expected.to be_invalid }
+          it { is_expected.not_to be_valid }
         end
 
         context "and body max marks together is zero" do
           let(:validate_body_max_marks_together) { 0 }
 
-          it { is_expected.to be_invalid }
+          it { is_expected.not_to be_valid }
         end
       end
     end

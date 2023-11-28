@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Admin accountability", type: :system do
+describe "Admin accountability" do
   let(:user_creation_date) { 7.days.ago }
   let(:login_date) { 6.days.ago }
   let(:organization) { create(:organization) }

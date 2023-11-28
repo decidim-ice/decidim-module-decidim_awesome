@@ -3,7 +3,7 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/editor_examples"
 
-describe "Admin edits proposals", type: :system do
+describe "Admin edits proposals" do
   let(:manifest_name) { "proposals" }
   let(:organization) { participatory_process.organization }
   let!(:user) { create(:user, :admin, :confirmed, organization:) }

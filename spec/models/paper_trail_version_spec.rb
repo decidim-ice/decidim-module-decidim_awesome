@@ -2,7 +2,7 @@
 
 require "spec_helper"
 module Decidim::DecidimAwesome
-  describe PaperTrailVersion, type: :model do
+  describe PaperTrailVersion do
     subject { paper_trail_version }
 
     let(:organization) { create(:organization) }

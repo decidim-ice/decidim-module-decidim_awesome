@@ -3,7 +3,7 @@
 require "spec_helper"
 
 module Decidim::DecidimAwesome
-  describe EditorImagesController, type: :controller do
+  describe EditorImagesController do
     routes { Decidim::DecidimAwesome::Engine.routes }
 
     let(:user) { create(:user, :confirmed, :admin, organization:) }

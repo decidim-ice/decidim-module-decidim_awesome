@@ -3,7 +3,7 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/menu_hack_contexts"
 
-describe "Admin manages hacked menus", type: :system do
+describe "Admin manages hacked menus" do
   let(:organization) { create(:organization) }
   let!(:config) { create(:awesome_config, organization:, var: menu_name, value: previous_menu) }
   let!(:user) { create(:user, :admin, :confirmed, organization:) }

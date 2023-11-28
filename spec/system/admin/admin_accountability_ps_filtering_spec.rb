@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Filter Admin actions", type: :system do
+describe "Filter Admin actions" do
   let(:user_creation_date) { 7.days.ago }
   let(:login_date) { 6.days.ago }
   let!(:organization) { create(:organization) }

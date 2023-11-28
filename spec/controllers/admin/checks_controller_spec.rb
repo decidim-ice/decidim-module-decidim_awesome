@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim::DecidimAwesome
   module Admin
-    describe ChecksController, type: :controller do
+    describe ChecksController do
       routes { Decidim::DecidimAwesome::AdminEngine.routes }
 
       let(:user) { create(:user, :confirmed, :admin, organization:) }

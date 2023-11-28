@@ -6,7 +6,7 @@ require "decidim/decidim_awesome/test/shared_examples/menu_hack_contexts"
 
 module Decidim::DecidimAwesome
   module Admin
-    describe MenuHacksController, type: :controller do
+    describe MenuHacksController do
       include Decidim::TranslationsHelper
       routes { Decidim::DecidimAwesome::AdminEngine.routes }
 

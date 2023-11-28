@@ -27,7 +27,7 @@ module Decidim
           helper Decidim::LayoutHelper if respond_to?(:helper)
         end
         # Include additional helpers globally
-        ActionView::Base.include(Decidim::DecidimAwesome::AwesomeHelpers)
+        ActiveSupport.on_load(:action_view) { include Decidim::DecidimAwesome::AwesomeHelpers }
         # Also for cells
         Decidim::ViewModel.include(Decidim::DecidimAwesome::AwesomeHelpers)
 

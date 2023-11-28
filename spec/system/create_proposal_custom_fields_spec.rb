@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Custom proposals fields", type: :system do
+describe "Custom proposals fields" do
   include_context "with a component"
   let(:manifest_name) { "proposals" }
   let!(:component) do

@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Custom styles", type: :system do
+describe "Custom styles" do
   let(:organization) { create(:organization) }
   let!(:participatory_process) { create(:participatory_process, organization:) }
   let!(:config) { create(:awesome_config, organization:, var: :scoped_styles, value: styles) }

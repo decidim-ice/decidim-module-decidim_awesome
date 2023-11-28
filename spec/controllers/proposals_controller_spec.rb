@@ -3,7 +3,7 @@
 require "spec_helper"
 
 module Decidim::Proposals
-  describe ProposalsController, type: :controller do
+  describe ProposalsController do
     routes { Decidim::Proposals::Engine.routes }
 
     let(:organization) { participatory_space.organization }

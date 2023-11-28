@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Show intergram chat", type: :system do
+describe "Show intergram chat" do
   let!(:user) { create(:user, :confirmed, organization:) }
   let(:organization) { create(:organization, available_locales: [:en]) }
 

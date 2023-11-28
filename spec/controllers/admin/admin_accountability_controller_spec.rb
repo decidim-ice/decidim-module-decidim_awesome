@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim::DecidimAwesome
   module Admin
-    describe AdminAccountabilityController, type: :controller do
+    describe AdminAccountabilityController do
       routes { Decidim::DecidimAwesome::AdminEngine.routes }
 
       let(:user) { create(:user, :confirmed, :admin, organization:) }

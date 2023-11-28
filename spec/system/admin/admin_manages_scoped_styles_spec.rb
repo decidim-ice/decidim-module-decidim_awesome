@@ -3,7 +3,7 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/box_label_editor"
 
-describe "Admin manages scoped styles", type: :system do
+describe "Admin manages scoped styles" do
   let(:organization) { create(:organization) }
   let!(:admin) { create(:user, :admin, :confirmed, organization:) }
   let(:styles) do

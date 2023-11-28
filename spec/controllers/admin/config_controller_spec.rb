@@ -5,7 +5,7 @@ require "decidim/decidim_awesome/test/shared_examples/config_examples"
 
 module Decidim::DecidimAwesome
   module Admin
-    describe ConfigController, type: :controller do
+    describe ConfigController do
       include Decidim::TranslationsHelper
       routes { Decidim::DecidimAwesome::AdminEngine.routes }
 

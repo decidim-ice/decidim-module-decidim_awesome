@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Custom Redirections", type: :system do
+describe "Custom Redirections" do
   let(:organization) { create(:organization) }
   let(:origin) { "/send-me-somewhere" }
   let(:destination) { "/canary-islands" }

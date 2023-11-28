@@ -12,7 +12,7 @@ module Decidim::DecidimAwesome
     context "when no name" do
       let(:name) { nil }
 
-      it { is_expected.to be_invalid }
+      it { is_expected.not_to be_valid }
     end
 
     it "any weight is valid" do

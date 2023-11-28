@@ -3,7 +3,7 @@
 require "spec_helper"
 
 module Decidim::DecidimAwesome
-  describe AwesomeHelpers, type: :helper do
+  describe AwesomeHelpers do
     let!(:organization) { create(:organization) }
     let!(:another_organization) { create(:organization) }
     let(:component) { create(:proposal_component, organization:, settings: { awesome_voting_manifest: manifest }) }

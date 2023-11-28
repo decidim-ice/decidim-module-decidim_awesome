@@ -61,8 +61,7 @@ module Decidim::DecidimAwesome::Admin
       let(:user) { create(:user, organization:) }
 
       before do
-        allow(user).to receive(:admin).and_return(true)
-        allow(user).to receive(:admin?).and_return(true)
+        allow(user).to receive_messages(admin: true, admin?: true)
       end
 
       it_behaves_like "permission is not set"

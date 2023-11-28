@@ -3,7 +3,7 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/box_label_editor"
 
-describe "Admin manages custom proposal fields", type: :system do
+describe "Admin manages custom proposal fields" do
   let(:organization) { create(:organization) }
   let!(:admin) { create(:user, :admin, :confirmed, organization:) }
   let(:custom_fields) do

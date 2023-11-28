@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = { git: "https://github.com/decidim/decidim.git", branch: "develop" }
+DECIDIM_VERSION = { git: "https://github.com/decidim/decidim.git", branch: "develop" }.freeze
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-decidim_awesome", path: "."

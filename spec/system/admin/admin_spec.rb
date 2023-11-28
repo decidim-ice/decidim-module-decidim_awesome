@@ -3,7 +3,7 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/config_examples"
 
-describe "Visit the admin page", type: :system do
+describe "Visit the admin page" do
   let(:organization) { create(:organization, rich_text_editor_in_public_views: rte_enabled) }
   let!(:admin) { create(:user, :admin, :confirmed, organization:) }
   let(:rte_enabled) { true }

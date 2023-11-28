@@ -3,7 +3,7 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/config_examples"
 
-describe "Questionnaires", type: :system do
+describe "Questionnaires" do
   include_context "with a component"
   let(:manifest_name) { "meetings" }
 

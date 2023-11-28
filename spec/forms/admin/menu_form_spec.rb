@@ -49,31 +49,31 @@ module Decidim::DecidimAwesome
       context "when label is not a hash" do
         let(:label) { nil }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
       end
 
       context "when url is empty" do
         let(:url) { "" }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
       end
 
       context "when position is not numeric" do
         let(:position) { "hacker!" }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
       end
 
       context "when target is not included in options" do
         let(:target) { "hacker!" }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
       end
 
       context "when visibility is not included in options" do
         let(:visibility) { "hacker!" }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
       end
     end
   end

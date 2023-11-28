@@ -5,7 +5,7 @@ require "decidim/decidim_awesome/test/shared_examples/controller_examples"
 
 module Decidim::DecidimAwesome
   module MapComponent
-    describe MapController, type: :controller do
+    describe MapController do
       routes { Decidim::DecidimAwesome::MapComponent::Engine.routes }
 
       let(:user) { create(:user, :confirmed, organization: component.organization) }
@@ -30,9 +30,8 @@ module Decidim::DecidimAwesome
 
         context "when no geocoder is available" do
           before do
-            allow(Decidim).to receive(:maps).and_return(nil)
             # TODO: remove when 0.22 is diched
-            allow(Decidim).to receive(:geocoder).and_return(nil)
+            allow(Decidim).to receive_messages(maps: nil, geocoder: nil)
           end
 
           it "renders error page" do

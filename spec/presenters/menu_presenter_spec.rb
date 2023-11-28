@@ -27,8 +27,7 @@ module Decidim
     let!(:config) { create(:awesome_config, organization:, var: :custom_menu, value: override) }
 
     before do
-      allow(view).to receive(:current_organization).and_return(organization)
-      allow(view).to receive(:current_user).and_return(user)
+      allow(view).to receive_messages(current_organization: organization, current_user: user)
       MenuRegistry.register :custom_menu do |menu|
         menu.add_item :native_foo, "Foo", "/foo", position: 1
         menu.add_item :native_bar, "Bar", "/bar", position: 2

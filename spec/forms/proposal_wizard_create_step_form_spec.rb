@@ -53,13 +53,13 @@ module Decidim::Proposals
       let(:slug) { "another-slug" }
 
       context "and body is not present" do
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
       end
 
       context "and body is invalid" do
         let(:body) { "aa" }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
       end
     end
 
@@ -79,12 +79,12 @@ module Decidim::Proposals
       context "when not scoped under custom fields" do
         let(:slug) { "another-slug" }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
 
         context "when the template and the body are the same" do
           let(:body) { body_template }
 
-          it { is_expected.to be_invalid }
+          it { is_expected.not_to be_valid }
         end
       end
     end
@@ -92,7 +92,7 @@ module Decidim::Proposals
     context "when is a participatory text" do
       let(:component) { create(:proposal_component, :with_participatory_texts_enabled, participatory_space:) }
 
-      it { is_expected.to be_invalid }
+      it { is_expected.not_to be_valid }
     end
 
     context "when the body exceeds the permited length" do
@@ -103,7 +103,7 @@ module Decidim::Proposals
       context "when not scoped under custom fields" do
         let(:slug) { "another-slug" }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
       end
 
       context "when is scoped under custom fields" do
@@ -123,7 +123,7 @@ module Decidim::Proposals
       context "when scoped under different context" do
         let(:slug) { "another-slug" }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
 
         context "when starts with caps" do
           let(prop.to_sym) { "Í start with caps" }
@@ -135,7 +135,7 @@ module Decidim::Proposals
       context "when enabled" do
         let(:enabled) { true }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
 
         context "when starts with caps" do
           let(prop.to_sym) { "Í start with caps" }
@@ -157,7 +157,7 @@ module Decidim::Proposals
       context "when scoped under different context" do
         let(:slug) { "another-slug" }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
 
         context "when has more than 15 chars" do
           let(prop.to_sym) { "I am 17 years old" }
@@ -169,7 +169,7 @@ module Decidim::Proposals
       context "when less than allowed" do
         let(:min_length) { 11 }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
       end
 
       context "when min_length is zero" do
@@ -179,7 +179,7 @@ module Decidim::Proposals
         if prop == :body
           it { is_expected.to be_valid }
         else
-          it { is_expected.to be_invalid }
+          it { is_expected.not_to be_valid }
         end
       end
     end
@@ -195,7 +195,7 @@ module Decidim::Proposals
 
       shared_examples "invalid percentage" do |per|
         it "error message returns percentage" do
-          expect(form).to be_invalid
+          expect(form).not_to be_valid
           expect(form.errors.messages.values.flatten.first).to include("over #{per}% of the text")
         end
       end
@@ -231,7 +231,7 @@ module Decidim::Proposals
       context "when scoped under different context" do
         let(:slug) { "another-slug" }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
 
         context "when has only 1 mark" do
           let(prop.to_sym) { "I am not noisy!" }
@@ -242,14 +242,14 @@ module Decidim::Proposals
         context "when has 2 marks" do
           let(prop.to_sym) { "I am not noisy!?" }
 
-          it { is_expected.to be_invalid }
+          it { is_expected.not_to be_valid }
         end
       end
 
       context "when less than allowed" do
         let(:max_marks) { 4 }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
       end
     end
 

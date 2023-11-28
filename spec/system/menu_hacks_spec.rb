@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Hacked menus", type: :system do
+describe "Hacked menus" do
   let(:organization) { create(:organization) }
   let!(:participatory_process) { create(:participatory_process, organization:) }
   let!(:config) { create(:awesome_config, organization:, var: :menu, value: menu) }

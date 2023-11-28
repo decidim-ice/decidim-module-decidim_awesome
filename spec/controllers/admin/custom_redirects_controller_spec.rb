@@ -6,7 +6,7 @@ require "decidim/decidim_awesome/test/shared_examples/custom_redirects_contexts"
 
 module Decidim::DecidimAwesome
   module Admin
-    describe CustomRedirectsController, type: :controller do
+    describe CustomRedirectsController do
       routes { Decidim::DecidimAwesome::AdminEngine.routes }
 
       include_context "with custom redirects params"
