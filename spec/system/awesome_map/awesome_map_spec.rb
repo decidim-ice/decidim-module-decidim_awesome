@@ -63,7 +63,7 @@ describe "Show awesome map" do
   end
 
   it "shows the map" do
-    within ".wrapper" do
+    within "[data-content]" do
       expect(page).not_to have_content("maximum complexity")
       expect(page).to have_css(".awesome-map")
       expect(page).to have_css("#awesome-map")
@@ -84,7 +84,7 @@ describe "Show awesome map" do
       expect(page).to have_xpath("//link[@rel='stylesheet'][contains(@href,'decidim_decidim_awesome_map')]", visible: :all)
       expect(page).to have_xpath("//link[@rel='stylesheet'][contains(@href,'decidim_map')]", visible: :all)
     end
-    within(legacy_version? ? "head" : ".wrapper", visible: :all) do
+    within(legacy_version? ? "head" : "[data-content]", visible: :all) do
       expect(page).to have_xpath("//script[contains(@src,'decidim_decidim_awesome_map')]", visible: :all)
       expect(page).to have_xpath("//script[contains(@src,'decidim_map')]", visible: :all)
     end
