@@ -67,6 +67,7 @@ module Decidim
 
         Decidim::MenuPresenter.include(Decidim::DecidimAwesome::MenuPresenterOverride)
         Decidim::MenuItemPresenter.include(Decidim::DecidimAwesome::MenuItemPresenterOverride)
+        Decidim::BreadcrumbRootMenuItemPresenter.include(Decidim::DecidimAwesome::BreadcrumbRootMenuItemPresenterOverride)
 
         # Late registering of components to take into account initializer values
         DecidimAwesome.registered_components.each do |manifest, block|
