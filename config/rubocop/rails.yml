@@ -59,6 +59,7 @@ Rails/Output:
     - lib/**/*.rb
   Exclude:
     - db/seeds.rb
+
 Rails/OutputSafety:
   Enabled: false
 
