@@ -33,13 +33,13 @@ FactoryBot.define do
   factory :map_component, parent: :component do
     name { Decidim::Components::Namer.new(participatory_space.organization.available_locales, :proposals).i18n_name }
     manifest_name { :awesome_map }
-    participatory_space { factory(:participatory_process, :with_steps, organization:) }
+    participatory_space { association(:participatory_process, :with_steps, organization:) }
   end
 
   factory :iframe_component, parent: :component do
     name { Decidim::Components::Namer.new(participatory_space.organization.available_locales, :proposals).i18n_name }
     manifest_name { :awesome_iframe }
-    participatory_space { factory(:participatory_process, :with_steps, organization:) }
+    participatory_space { association(:participatory_process, :with_steps, organization:) }
   end
 
   factory :awesome_vote_weight, class: "Decidim::DecidimAwesome::VoteWeight" do
