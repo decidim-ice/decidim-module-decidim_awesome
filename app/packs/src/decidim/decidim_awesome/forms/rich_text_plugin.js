@@ -88,7 +88,7 @@ window.fbControls.push(function(controlClass, allControlClasses) {
       }
 
       window.fbEditors.quill[this.id] = {};
-      const editor = window.fbEditors.quill[this.id];
+      // const editor = window.fbEditors.quill[this.id];
       // createQuillEditor does all the job to update the hidden input wrapper
       // editor.instance = createQuillEditor(this.wrapper);
       // editor.data = new Delta();

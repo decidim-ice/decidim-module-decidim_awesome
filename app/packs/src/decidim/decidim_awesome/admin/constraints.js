@@ -21,9 +21,9 @@ $(() => {
     );
     const $callout = $container.find(".flash");
     $callout.show();
-    $callout
-      .find("p")
-      .html(
+    $callout.
+      find("p").
+      html(
         `${responseText.detail[0].message}: <strong>${responseText.detail[0].error}</strong>`
       );
     $callout.addClass("alert");

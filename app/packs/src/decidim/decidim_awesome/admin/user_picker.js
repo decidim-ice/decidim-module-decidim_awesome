@@ -1,4 +1,4 @@
-/* eslint-disable no-invalid-this */
+/* eslint-disable no-invalid-this, no-ternary */
 // import "select2"
 // import "stylesheets/decidim/decidim_awesome/admin/user_picker.scss"
 
@@ -36,10 +36,10 @@ document.addEventListener("DOMContentLoaded", () => {
         return `<div>${escape(data.text)}</div>`;
       },
       item: function (data, escape) {
-        return !!data.is_admin || data.isAdmin === "true"
+        return Boolean(data.is_admin) || data.isAdmin === "true"
           ? `<div class="is-admin">${escape(data.text)}</div>`
           : `<div>${escape(data.text)}</div>`;
-      },
+      }
     },
     shouldLoad: function (query) {
       return query.length > 1;
@@ -47,14 +47,14 @@ document.addEventListener("DOMContentLoaded", () => {
     load: function (query, callback) {
       const { url } = element.dataset;
       const params = new URLSearchParams({
-        term: query,
+        term: query
       });
 
-      fetch(`${url}?${params}`)
-        .then((response) => response.json())
-        .then((json) => callback(json))
-        .catch(() => callback());
-    },
+      fetch(`${url}?${params}`).
+        then((response) => response.json()).
+        then((json) => callback(json)).
+        catch(() => callback());
+    }
   });
 
   tagContainers.forEach((container) => new TomSelect(container, config(container)));
