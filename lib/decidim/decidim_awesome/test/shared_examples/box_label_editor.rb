@@ -5,16 +5,16 @@ shared_examples "edits box label inline" do |test_case, key|
 
   it "updates the label when no changes" do
     link = find("[data-key=#{key}] a.awesome-auto-edit", match: :first)
-    expect(page).not_to have_css("input.awesome-auto-edit")
+    expect(page).not_to have_field(class: "awesome-auto-edit")
     link.click
-    expect(page).to have_css("input.awesome-auto-edit")
+    expect(page).to have_field(class: "awesome-auto-edit")
     find("body").click
-    expect(page).not_to have_css("input.awesome-auto-edit")
+    expect(page).not_to have_field(class: "awesome-auto-edit")
     link.click
     input = find("[data-key=#{key}] input.awesome-auto-edit")
     input.fill_in with: "A new làbel\n"
     sleep 1
-    expect(page).not_to have_css("input.awesome-auto-edit")
+    expect(page).not_to have_field(class: "awesome-auto-edit")
     expect(page).to have_css("span.awesome-auto-edit[data-key=a_new_label]")
 
     click_button "Update configuration"
@@ -48,16 +48,16 @@ shared_examples "edits box label inline" do |test_case, key|
     end
 
     link = find("[data-key=#{key}] a.awesome-auto-edit", match: :first)
-    expect(page).not_to have_css("input.awesome-auto-edit")
+    expect(page).not_to have_field(class: "awesome-auto-edit")
     link.click
-    expect(page).to have_css("input.awesome-auto-edit")
+    expect(page).to have_field(class: "awesome-auto-edit")
     find("body").click
-    expect(page).not_to have_css("input.awesome-auto-edit")
+    expect(page).not_to have_field(class: "awesome-auto-edit")
     link.click
     input = find("[data-key=#{key}] input.awesome-auto-edit")
     input.fill_in with: "A new làbel\n"
     sleep 1
-    expect(page).not_to have_css("input.awesome-auto-edit")
+    expect(page).not_to have_field(class: "awesome-auto-edit")
     expect(page).to have_css("span.awesome-auto-edit[data-key=a_new_label]")
 
     click_button "Update configuration"
@@ -78,16 +78,16 @@ shared_examples "edits box label inline" do |test_case, key|
 
   it "updates the label with post changes" do
     link = find("[data-key=#{key}] a.awesome-auto-edit", match: :first)
-    expect(page).not_to have_css("input.awesome-auto-edit")
+    expect(page).not_to have_field(class: "awesome-auto-edit")
     link.click
-    expect(page).to have_css("input.awesome-auto-edit")
+    expect(page).to have_field(class: "awesome-auto-edit")
     find("body").click
-    expect(page).not_to have_css("input.awesome-auto-edit")
+    expect(page).not_to have_field(class: "awesome-auto-edit")
     link.click
     input = find("[data-key=#{key}] input.awesome-auto-edit")
     input.fill_in with: "A new làbel\n"
     sleep 1
-    expect(page).not_to have_css("input.awesome-auto-edit")
+    expect(page).not_to have_field(class: "awesome-auto-edit")
     expect(page).to have_css("span.awesome-auto-edit[data-key=a_new_label]")
 
     case test_case
