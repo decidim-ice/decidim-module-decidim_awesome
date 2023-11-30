@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/decidim/decidim.git
-  revision: 757b3af0c06294db4860a08bb5a5feb13f34310f
-  branch: develop
+  revision: 803ac2650fd125247a713116d726b334e88acc49
+  branch: release/0.28-stable
   specs:
     decidim (0.28.0.dev)
       decidim-accountability (= 0.28.0.dev)
@@ -253,9 +253,9 @@ GEM
     addressable (2.8.5)
       public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
-    base64 (0.1.1)
+    base64 (0.2.0)
     batch-loader (1.5.0)
-    bcrypt (3.1.19)
+    bcrypt (3.1.20)
     better_html (2.0.2)
       actionview (>= 6.0)
       activesupport (>= 6.0)
@@ -281,7 +281,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
-    carrierwave (2.2.4)
+    carrierwave (2.2.5)
       activemodel (>= 5.0.0)
       activesupport (>= 5.0.0)
       addressable (~> 2.6)
@@ -311,7 +311,7 @@ GEM
     crass (1.0.6)
     css_parser (1.16.0)
       addressable
-    date (3.3.3)
+    date (3.3.4)
     date_validator (0.12.0)
       activemodel (>= 3)
       activesupport (>= 3)
@@ -341,7 +341,7 @@ GEM
       nokogiri (>= 1.13.2, < 1.15.0)
       rubyzip (~> 2.3.0)
     docile (1.4.0)
-    doorkeeper (5.6.6)
+    doorkeeper (5.6.7)
       railties (>= 5)
     doorkeeper-i18n (4.0.1)
     erb_lint (0.4.0)
@@ -355,17 +355,17 @@ GEM
       temple
     erubi (1.12.0)
     escape_utils (1.2.2)
-    excon (0.104.0)
+    excon (0.105.0)
     extended-markdown-filter (0.7.0)
       html-pipeline (~> 2.9)
     factory_bot (6.4.2)
       activesupport (>= 5.0.0)
-    factory_bot_rails (6.4.0)
+    factory_bot_rails (6.4.2)
       factory_bot (~> 6.4)
       railties (>= 5.0.0)
     faker (3.2.2)
       i18n (>= 1.8.11, < 2)
-    faraday (2.7.11)
+    faraday (2.7.12)
       base64
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
@@ -453,9 +453,9 @@ GEM
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    loofah (2.19.1)
+    loofah (2.22.0)
       crass (~> 1.0.2)
-      nokogiri (>= 1.5.9)
+      nokogiri (>= 1.12.0)
     mail (2.8.1)
       mini_mime (>= 0.1.1)
       net-imap
@@ -473,16 +473,16 @@ GEM
     msgpack (1.7.2)
     multi_xml (0.6.0)
     mustache (1.1.1)
-    net-imap (0.4.4)
+    net-imap (0.4.7)
       date
       net-protocol
     net-pop (0.1.2)
       net-protocol
-    net-protocol (0.2.1)
+    net-protocol (0.2.2)
       timeout
     net-smtp (0.3.3)
       net-protocol
-    nio4r (2.5.9)
+    nio4r (2.6.1)
     nokogiri (1.14.5-x86_64-linux)
       racc (~> 1.4)
     oauth (1.1.0)
@@ -547,10 +547,10 @@ GEM
       premailer (~> 1.7, >= 1.7.9)
     psych (4.0.6)
       stringio
-    public_suffix (5.0.3)
+    public_suffix (5.0.4)
     puma (6.4.0)
       nio4r (~> 2.0)
-    racc (1.7.2)
+    racc (1.7.3)
     rack (2.2.8)
     rack-attack (6.7.0)
       rack (>= 1.0, < 4)
@@ -585,8 +585,9 @@ GEM
       activesupport (>= 5.0.0)
       minitest
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.5.0)
-      loofah (~> 2.19, >= 2.19.1)
+    rails-html-sanitizer (1.6.0)
+      loofah (~> 2.21)
+      nokogiri (~> 1.14)
     rails-i18n (6.0.0)
       i18n (>= 0.7, < 2)
       railties (>= 6.0.0, < 7)
@@ -724,13 +725,13 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     ssrf_filter (1.1.2)
-    stringio (3.0.9)
+    stringio (3.1.0)
     temple (0.10.3)
     terminal-table (3.0.2)
       unicode-display_width (>= 1.1.1, < 3)
     thor (1.3.0)
     tilt (2.3.0)
-    timeout (0.4.0)
+    timeout (0.4.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uber (0.1.0)
