@@ -177,6 +177,10 @@ module Decidim
       []
     end
 
+    config_accessor :home_content_block_menu do
+      []
+    end
+
     # Allows admins to assignate "fake" admins scoped to some admin zones using the
     # same scope editor as :scoped_styles, valid values uses the same convention:
     #   :disabled => false and non available, hidden from admins
