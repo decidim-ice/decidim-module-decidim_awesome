@@ -16,7 +16,9 @@ module Decidim
       routes do
         # Add admin engine routes here
         resources :constraints
-        resources :menu_hacks, except: [:show]
+        resources :menus, only: [:show] do
+          resources :hacks, except: [:show], controller: "menu_hacks"
+        end
         resources :custom_redirects, except: [:show]
         resources :config, param: :var, only: [:show, :update]
         resources :scoped_styles, param: :var, only: [:create, :destroy]

@@ -1,6 +1,6 @@
 <div class="item_show__header">
   <h2 class="item_show__header-title">
-    <%= t(".title") %>
+    <%= t(".#{params[:menu_id]}.title") %>
     <%= link_to t(".new"), decidim_admin_decidim_awesome.new_menu_hack_path, class: "button button__sm button__secondary ml-auto" %>
   </h2>
 </div>
@@ -25,9 +25,9 @@
           <td><%= target_options.invert[item.try(:target)||""] %></td>
           <td><%= visibility_options.invert[item.try(:visibility)] %></td>
           <td class="table-list__actions">
-            <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_menu_hack_path(md5(item.url)), t(".edit"), class: "action-icon--edit" %>
+            <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_menu_hack_path(params[:menu_id], md5(item.url)), t(".edit"), class: "action-icon--edit" %>
             <% if item.respond_to?(:overrided?) %>
-              <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.menu_hack_path(md5(item.url)), t(".remove#{'_hack' if item.overrided?}"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
+              <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.menu_hack_path(params[:menu_id], md5(item.url)), t(".remove#{'_hack' if item.overrided?}"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
             <% else %>
                 <span class="action-icon">
                   <%= icon "close-circle-line", class: "action-icon action-icon--disabled", role: "img" %>
