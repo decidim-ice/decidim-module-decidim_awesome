@@ -180,6 +180,7 @@ module Decidim
       end
 
       initializer "decidim_decidim_awesome.awesome_admin_menu" do
+        Decidim::DecidimAwesome::Menu.register_menu_hacks_submenu!
         Decidim::DecidimAwesome::Menu.register_awesome_admin_menu!
       end
     end
