@@ -67,11 +67,7 @@ describe "Show awesome map" do
       expect(page).not_to have_content("maximum complexity")
       expect(page).to have_css(".awesome-map")
       expect(page).to have_css("#awesome-map")
-      errors = if legacy_version?
-                 page.driver.browser.manage.logs.get(:browser)
-               else
-                 page.driver.browser.logs.get(:browser)
-               end
+      errors = page.driver.browser.logs.get(:browser)
 
       errors.each do |error|
         expect(error.message).not_to include("map.js"), error.message if error.level == "SEVERE"
@@ -84,7 +80,7 @@ describe "Show awesome map" do
       expect(page).to have_xpath("//link[@rel='stylesheet'][contains(@href,'decidim_decidim_awesome_map')]", visible: :all)
       expect(page).to have_xpath("//link[@rel='stylesheet'][contains(@href,'decidim_map')]", visible: :all)
     end
-    within(legacy_version? ? "head" : "[data-content]", visible: :all) do
+    within("[data-content]", visible: :all) do
       expect(page).to have_xpath("//script[contains(@src,'decidim_decidim_awesome_map')]", visible: :all)
       expect(page).to have_xpath("//script[contains(@src,'decidim_map')]", visible: :all)
     end

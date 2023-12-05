@@ -22,20 +22,11 @@ module Decidim::DecidimAwesome
         }
       end
 
-      if legacy_version?
-        let(:label) do
-          {
-            en: "Menu english",
-            ca: "Menu catalan"
-          }
-        end
-      else
-        let(:label) do
-          {
-            "en" => "Menu english",
-            "ca" => "Menu catalan"
-          }
-        end
+      let(:label) do
+        {
+          "en" => "Menu english",
+          "ca" => "Menu catalan"
+        }
       end
 
       context "when everything is OK" do

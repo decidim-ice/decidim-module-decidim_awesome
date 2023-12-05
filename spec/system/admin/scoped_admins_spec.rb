@@ -74,7 +74,6 @@ describe "Scoped admin journeys" do
     context "and admin terms not accepted" do
       it "allows admin terms to be accepted" do
         welcome_text = "Dashboard"
-        welcome_text = "Welcome to the Decidim Admin Panel." if legacy_version?
         visit decidim_admin.root_path
 
         expect(page).to have_content("Please take a moment to review the admin terms of service.")

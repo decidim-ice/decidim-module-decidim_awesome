@@ -22,10 +22,8 @@ describe "Show awesome iframe" do
   before do
     component.update!(settings:)
     visit_component
-    unless legacy_version?
-      click_link "Change cookie settings"
-      click_button "Accept all"
-    end
+    click_link "Change cookie settings"
+    click_button "Accept all"
   end
 
   it "shows the iframe wrapper" do

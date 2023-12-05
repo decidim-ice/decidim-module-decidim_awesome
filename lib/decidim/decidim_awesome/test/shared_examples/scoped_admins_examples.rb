@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 welcome_text = "Dashboard"
-welcome_text = "Welcome to the Decidim Admin Panel." if legacy_version?
 
 shared_examples "redirects to index" do |_link|
   it "display index page" do
@@ -88,7 +87,7 @@ shared_examples "allows external accesses" do
 
   it "shows participants access" do
     visit decidim_admin.users_path
-    expect(page).to have_content(legacy_version? ? "New user" : "New admin")
+    expect(page).to have_content("New admin")
   end
 
   it "shows pages access" do
