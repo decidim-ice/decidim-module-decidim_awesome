@@ -15,6 +15,7 @@ module Decidim::DecidimAwesome
         { "url" => "/another-link", "position" => 10 }
       end
       let!(:config) { create(:awesome_config, organization:, var: menu_name, value: [attributes, previous_menu]) }
+      let(:menu_name) { :menu }
 
       describe "when valid" do
         it "broadcasts :ok and removes the item" do

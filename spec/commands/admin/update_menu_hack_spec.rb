@@ -14,6 +14,7 @@ module Decidim::DecidimAwesome
         [{ "url" => url, "position" => 10 }]
       end
       let!(:config) { create(:awesome_config, organization:, var: menu_name, value: previous_menu) }
+      let(:menu_name) { :menu }
 
       describe "when valid" do
         it "broadcasts :ok and modifies the config options" do

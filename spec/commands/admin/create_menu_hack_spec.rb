@@ -10,6 +10,8 @@ module Decidim::DecidimAwesome
 
       include_context "with menu hacks params"
 
+      let(:menu_name) { :menu }
+
       describe "when valid" do
         it "broadcasts :ok and creates an array" do
           expect { subject.call }.to broadcast(:ok)
