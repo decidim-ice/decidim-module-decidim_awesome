@@ -229,15 +229,21 @@ describe "Visit the admin page" do
 
   context "when visiting Menu hacks" do
     context "when menu_hacks are enabled" do
+      let(:disabled_features) { [] }
+
       before do
         click_link "Menu Tweaks"
       end
 
-      it_behaves_like "has menu link", "menu_hacks" do
+      it_behaves_like "has menu link", "menus/home_content_block_menu/hacks" do
         let(:prefix) { "" }
       end
 
-      it "renders the page" do
+      it_behaves_like "has menu link", "menus/menu/hacks" do
+        let(:prefix) { "" }
+      end
+
+      it "renders the main menu page" do
         expect(page).to have_content(/Main menu/i)
       end
     end
