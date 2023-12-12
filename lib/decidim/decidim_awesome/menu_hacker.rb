@@ -21,6 +21,7 @@ module Decidim
           default = default_items.find { |i| i.url.gsub(/\?.*/, "") == item.url }
           if default
             item.send("overrided?=", true)
+            item[:original_active] = default.active
             @items.reject! { |i| i.url.gsub(/\?.*/, "") == item.url }
           end
           @items << item

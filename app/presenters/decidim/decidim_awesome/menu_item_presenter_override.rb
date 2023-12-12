@@ -19,6 +19,14 @@ module Decidim
 
           @menu_item&.active
         end
+
+        def active_for_breadcrumb?
+          is_active_link?(url, @menu_item.try(:original_active) || active)
+        end
+
+        def hacked_not_overriding?
+          !(@menu_item.is_a?(Decidim::MenuItem) || @menu_item.overrided?)
+        end
       end
     end
   end

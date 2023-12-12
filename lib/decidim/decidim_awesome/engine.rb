@@ -65,6 +65,7 @@ module Decidim
           Decidim::Proposals::ProposalLCell.include(Decidim::DecidimAwesome::ProposalLCellOverride)
         end
 
+        Decidim::BreadcrumbHelper.include(Decidim::DecidimAwesome::BreadcrumbHelperOverride)
         Decidim::MenuPresenter.include(Decidim::DecidimAwesome::MenuPresenterOverride)
         Decidim::MenuItemPresenter.include(Decidim::DecidimAwesome::MenuItemPresenterOverride)
         Decidim::BreadcrumbRootMenuItemPresenter.include(Decidim::DecidimAwesome::BreadcrumbRootMenuItemPresenterOverride)
