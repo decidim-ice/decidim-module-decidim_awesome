@@ -36,10 +36,7 @@ module Decidim
       attr_reader :name, :view
 
       def default_items
-        @default_items ||= build_menu.items.map do |item|
-          item.instance_variable_set(:@active, method(:activate?)) unless item.active == :exact
-          item
-        end
+        @default_items ||= build_menu.items
       end
 
       def build_menu
