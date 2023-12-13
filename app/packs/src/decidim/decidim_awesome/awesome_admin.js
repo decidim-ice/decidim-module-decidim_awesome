@@ -1,5 +1,4 @@
 // Custom scripts for awesome
-import "src/decidim/decidim_awesome/admin/constraints"
 import "src/decidim/decidim_awesome/admin/constraint_form_events"
 import "src/decidim/decidim_awesome/admin/auto_edit"
 import "src/decidim/decidim_awesome/admin/user_picker"
