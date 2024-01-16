@@ -138,7 +138,7 @@ hu:
         config:
           caution: 'MEGJEGYZÉS: Ez a funkció erősen módosít néhány alapértelmezett viselkedést, ami váratlan eredményekhez vezethet. Óvatosan használja!'
           constraints:
-            add_condition: Ügy hozzáadása
+            add_condition: Eset hozzáadása
             always: Mindig
             cannot_be_destroyed: Sajnálom, ezt nem lehet törölni. Ennek a konfigurációnak legalább egy megkötésre van szüksége.
             delete: Törlés
@@ -152,6 +152,8 @@ hu:
           form:
             edit_label: Címke átnevezése
             help:
+              auto_save_forms: Ez a LocalStorage segítségével automatikusan elmenti a felhasználók által a felmérésekbe és egyéb űrlapokba bevitt adatokat, miközben kitöltik azokat. Az adatok egy későbbi, ugyanazzal a böngészővel történő látogatáskor visszaállnak, ha az űrlapot nem küldik el. Ha az űrlap elküldésre kerül, az adatok törlődnek. Ha a felhasználók eltávolítják a LocalStorage adatait, az adatok sem lesznek visszaállítva.
+              proposal_custom_fields_translations: "A címkék, a súgószöveg, a helyőrző és az alapértelmezett értékek használhatják az alkalmazás egyéni fordításait. Ehhez a string literál használata helyett használja az i18n kulcsot (legalább egy pontot kell tartalmaznia). Például: - \"activemodel.attributes.proposal.title\" helyett \"Cím\" - \"activemodel.attributes.proposal.address\" helyett \"Cím\" Vagy használjon saját kulcsokat más eszközökkel kombinálva a fordítások meghatározásához (pl.: a Term Customizer modul használatával): - \"myapp.custom_fields.bio\" helyett \"Biography\""
               validate_title_max_caps_percent: A 0 nem fog engedni nagybetűt, 100 mindent nagybetűvel fog írni
               validate_title_max_marks_together: 'Korlátozza az együtt írható kérdő- és felkiáltójelek számát. Vagyis: ha 2, akkor a ''!!!'' nem szerepelhet a szövegben'
               validate_title_min_length: Ez mindig kötelező és nem lehet 0
@@ -166,12 +168,24 @@ hu:
           none: "⛔ Soha! - Minden más korlátozás kikapcsolása"
           process_groups: Folyamatcsoportok
           rich_text_editor_in_public_views: 'MEGJEGYZÉS: Ha a "Rich text szerkesztő" engedélyezve van a felhasználók számára, ez az opció nem lesz alkalmazható. Használja helyette a szerkesztői hackeket a képek engedélyezéséhez a javaslatokban.'
+          show:
+            update: Beállítás frissítése
           system: Mindenütt, kivéve ezekben a részvételi terekben
+          update:
+            error: Hiba a beállítás frissítésekor %{error}
+            success: A beállítás sikeresen frissült
         constraints:
           new:
             save: Mentés
           show:
             cancel: Elvetés
+        menu:
+          editors: Szerkesztő finomítása
+          menu_hacks: Menü trükkök
+          proposal_custom_fields: Javaslatok egyedi mezői
+          proposals: Javaslatok finomítása
+          styles: Egyedi stílusok
+          surveys: Kérdőívek és Űrlapok
         menu_hacks:
           destroy:
             success: Menü elem eltávolítása sikerült
