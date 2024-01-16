@@ -1,4 +1,3 @@
----
 hu:
   activemodel:
     attributes:
@@ -225,3 +224,28 @@ hu:
       editor_images:
         create:
           error: Hiba történt a kép feltöltése közben!
+      voting:
+        voting_cards:
+          change_vote: Szavazatom megváltoztatása
+          default_box_title: Szavazás erre a javaslatra
+          default_instructions_html: <p>Kérjük ovlassa el a választási szabályokat, hogy pontosan megértse hogy került számításra szavazata a %{organization}" által</p>
+          modal:
+            cancel: Elvetés
+            message: A szavazata ekkor %{date} válig véglegessé. A dátumig módosítható
+            proceed: Folytatás
+            skip: Kattintson ide, hogy a jövőben átugorja ezt az ablakot
+          vote_button: Kattintson a szavazához
+          voted: Szavazott
+          voting_for: A szavaztom a" %{proposal}" "%{type}"
+  layouts:
+    decidim:
+      decidim_awesome:
+        awesome_config:
+          amendments: Módosítások
+          categories: Kategóriák
+          drag_and_drop_image: Képek hozzáadása húzással és ejtéssel vagy beillesztéssel.
+          hashtags: Hashtagek
+          items: elemek
+          meetings: Találkozók
+          proposals: Javaslatok
+          select_deselect_all: Összes kijelölése / kijelölés megszüntetése
