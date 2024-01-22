@@ -121,6 +121,14 @@ module Decidim
       ]
     end
 
+    # Allows admins to limit the amount of pending amendments to (currently) one per proposal before it's accepted.
+    # Once a pending amendment is accepted, a new on can be created.
+    # Note that this does not limit the number of amendment per se, the admin has to set the limit in the proposal's component configuration.
+    # Disabling this will prevent admins to set an amendment's limit in the proposal's component configuration.
+    config_accessor :allow_limiting_amendments do
+      true
+    end
+
     # allows admins to created specific CSS snippets affecting only some specific parts
     # Valid values differ a little from the previous convention:
     #   :disabled => false and non available, hidden from admins

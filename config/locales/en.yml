@@ -122,6 +122,7 @@ en:
       proposals:
         settings:
           global:
+            allow_limiting_amendments: Allow only one pending amendment on each proposal.
             awesome_voting_manifest: Support type
             awesome_voting_manifest_help_html: <strong class="text-alert">Be aware
               that changing this setting in the middle of a votation period can result

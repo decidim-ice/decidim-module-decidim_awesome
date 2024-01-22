@@ -110,6 +110,13 @@ module Decidim
             end
           end
         end
+        if DecidimAwesome.enabled?(:allow_limiting_amendments)
+          Decidim.component_registry.find(:proposals).tap do |component|
+            component.settings(:global) do |settings|
+              settings.attribute :allow_limiting_amendments, type: :boolean, default: false
+            end
+          end
+        end
       end
 
       initializer "decidim_decidim_awesome.weighted_proposal_voting" do |_app|
