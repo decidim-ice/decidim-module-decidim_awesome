@@ -1,0 +1,5 @@
+<!-- replace "erb[loud]:contains('amend_button_for @proposal')" -->
+
+<%= amend_button_for @proposal %>
+
+<%= render "decidim/decidim_awesome/amendments/modal" if @proposal.amendment %>

@@ -1,0 +1,12 @@
+<!--the modal window will be used in another pr-->
+<div class="reveal show limit_amendments_modal limit-amendments-modal" id="LimitAmendmentsModal" data-reveal role="dialog" aria-modal="true" aria-labelledby="LimitAmendmentsModal-label">
+  <div class="reveal__content">
+    <div class="instructions"><%= t("decidim.decidim_awesome.amendments.modal.explanation_html",
+                                    proposal_link: present(@proposal).proposal_path + "#comments",
+                                    amendment_link: present(@proposal.amendment.emendation).proposal_path) %></div>
+
+    <div class="text-center">
+      <button class="button vote-action" data-close><%= t("decidim.decidim_awesome.amendments.modal.dismiss") %></button>
+    </div>
+  </div>
+</div>
