@@ -115,7 +115,7 @@ module Decidim
         if DecidimAwesome.enabled?(:allow_limiting_amendments)
           Decidim.component_registry.find(:proposals).tap do |component|
             component.settings(:global) do |settings|
-              settings.attribute :limit_pending_amendments, type: :boolean, default: false
+              settings.attribute :limit_pending_amendments, type: :boolean, default: DecidimAwesome.allow_limiting_amendments
             end
           end
         end

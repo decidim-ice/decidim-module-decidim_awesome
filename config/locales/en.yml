@@ -460,7 +460,7 @@ en:
             of creating it again.
       amendments:
         pending_limit_reached: Sorry, it can only be one pending amendment at a time.
-          Please wait until %{amendment} it is accepted or rejected.
+          Please wait until "%{emendation}"" it is accepted or rejected.
       config:
         intergram:
           auto_no_response: It seems that no one is available to answer right now.
