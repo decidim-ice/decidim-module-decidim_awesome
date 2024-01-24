@@ -122,7 +122,6 @@ en:
       proposals:
         settings:
           global:
-            allow_limiting_amendments: Allow only one pending amendment on each proposal.
             awesome_voting_manifest: Support type
             awesome_voting_manifest_help_html: <strong class="text-alert">Be aware
               that changing this setting in the middle of a votation period can result
@@ -136,6 +135,7 @@ en:
               supported_first: Supported first
               supported_last: Supported last
               za: Z-A (Reverse alphabetical)
+            limit_pending_amendments: Allow only one pending amendment on each proposal.
             sort_orders_enabled: Enabled sorting types
             voting_cards_box_title: Title for the voting box
             voting_cards_box_title_help: Default is "Vote on this proposal". Use "-"
