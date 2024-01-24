@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    decidim-decidim_awesome (0.10.1)
+    decidim-decidim_awesome (0.10.2)
       decidim-admin (>= 0.26.0, < 0.29)
       decidim-core (>= 0.26.0, < 0.29)
       deface (>= 1.5)

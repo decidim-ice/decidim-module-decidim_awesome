@@ -67,4 +67,17 @@ describe "Show awesome iframe" do
       end
     end
   end
+
+  context "when iframe code contains a script in srcdoc" do
+    let(:iframe) { '<iframe srcdoc="<script>alert(\'XSS\');</script>"></iframe>' }
+
+    it "removes the script" do
+      within ".awesome-iframe" do
+        expect(page).not_to have_selector("script")
+        expect(page).to have_selector("iframe")
+        expect(page).not_to have_text("XSS")
+        expect { page.driver.browser.switch_to.alert }.to raise_error(Selenium::WebDriver::Error::NoSuchAlertError)
+      end
+    end
+  end
 end

@@ -18,7 +18,14 @@ module Decidim
 
         def sanitize(html)
           sanitizer = Rails::Html::SafeListSanitizer.new
-          sanitizer.sanitize(html, tags: %w(iframe), attributes: ALLOWED_ATTRIBUTES)
+          partially_sanitized_html = sanitizer.sanitize(html, tags: %w(iframe), attributes: ALLOWED_ATTRIBUTES)
+
+          document = Nokogiri::HTML::DocumentFragment.parse(partially_sanitized_html)
+          document.css("iframe").each do |iframe|
+            iframe["srcdoc"] = Loofah.fragment(iframe["srcdoc"]).scrub!(:prune).to_s if iframe["srcdoc"]
+          end
+
+          document.to_s
         end
 
         def viewport_width?
