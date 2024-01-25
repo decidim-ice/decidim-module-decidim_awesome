@@ -5,10 +5,16 @@ $(() => {
   }
 
   const showModal = () => {
+    console.log("$modal", $modal)
     if ($modal.is(":visible")) {
       return false;
     }
-    return true;
+
+    if ($modal.data("limitAmendments")) {
+      return true;
+    }
+
+    return false;
   };
 
   $modal.find("a").on("click", () => {

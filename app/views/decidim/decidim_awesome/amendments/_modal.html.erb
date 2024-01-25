@@ -1,5 +1,5 @@
 <!--the modal window will be used in another pr-->
-<div class="reveal show limit_amendments_modal limit-amendments-modal" id="LimitAmendmentsModal" data-reveal role="dialog" aria-modal="true" aria-labelledby="LimitAmendmentsModal-label">
+<div class="reveal show limit_amendments_modal limit-amendments-modal" id="LimitAmendmentsModal" data-reveal role="dialog" aria-modal="true" aria-labelledby="LimitAmendmentsModal-label" data-limit-amendments="<%= current_component.settings&.limit_pending_amendments %>">
   <div class="reveal__content">
     <div class="instructions"><%= t("decidim.decidim_awesome.amendments.modal.explanation_html",
                                     proposal_link: present(@proposal).proposal_path + "#comments",
