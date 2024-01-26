@@ -71,7 +71,6 @@ module Decidim
         try(:current_component) || self
       end
 
-      # rubocop:disable Rails/HelperInstanceVariable
       def current_categories(categories)
         return @current_categories if @current_categories
 
@@ -115,7 +114,6 @@ module Decidim
           color: format("#%02x%02x%02x", r, g, b)
         )
       end
-      # rubocop:enable Rails/HelperInstanceVariable
 
       # HSV values in [0..1[
       # returns [r, g, b] values from 0 to 255
