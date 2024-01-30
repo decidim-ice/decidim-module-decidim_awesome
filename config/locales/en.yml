@@ -460,12 +460,14 @@ en:
             of creating it again.
       amendments:
         modal:
+          current_amendment_html: '<p>You can <a href="%{amendment_link}">access the
+            current amendment here</a>.</p>
+
+            '
           dismiss: Ok, got it
           explanation_html: |
             <p>Currently, there's another amendment being evaluated for this proposal. In order to create a new one, you must wait until the current one is accepted or rejected.</p>
             <p>You can also reach the author of this proposal by <a href="%{proposal_link}">leaving a comment</a> and try to speed up the resolution of the current amendment.</p>
-          current_amendment_html: |
-            <p>You can <a href="%{amendment_link}">access the current amendment here</a>.</p>
         pending_limit_reached: Sorry, it can only be one pending amendment at a time.
           Please wait until "%{emendation}"" it is accepted or rejected.
       config:
