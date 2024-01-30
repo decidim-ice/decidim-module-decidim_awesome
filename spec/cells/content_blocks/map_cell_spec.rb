@@ -116,5 +116,26 @@ module Decidim::DecidimAwesome
         expect(subject.to_s).to include('data-show-rejected="true"')
       end
     end
+
+    context "with another organization" do
+      subject { cell(another_content_block.cell, another_content_block).call }
+
+      let(:another_organization) { create(:organization) }
+      let(:another_content_block) { create :content_block, organization: another_organization, manifest_name: :awesome_map, scope_name: :homepage, settings: settings }
+      let(:another_participatory_process) { create :participatory_process, organization: another_organization }
+      let!(:another_meeting_component) { create :meeting_component, participatory_space: another_participatory_process }
+
+      before do
+        allow(controller).to receive(:current_organization).and_return(another_organization)
+      end
+
+      it "uses its own components" do
+        components = JSON.parse(subject.to_s.match(/data-components='(.*)'/)[1])
+
+        expect(components.pluck("id")).not_to include(meeting_component.id)
+        expect(components.pluck("id")).not_to include(proposal_component.id)
+        expect(components.pluck("id")).to include(another_meeting_component.id)
+      end
+    end
   end
 end
