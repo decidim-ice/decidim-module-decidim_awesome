@@ -137,10 +137,6 @@ ro:
       editor_images:
         create:
           error: Eroare la încărcarea imaginii!
-      voting:
-        voting_cards:
-          modal:
-            cancel: Anulare
   layouts:
     decidim:
       decidim_awesome:
