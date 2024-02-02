@@ -375,6 +375,9 @@ cs:
             error: Chyba při aktualizaci položky menu! %{error}
             success: Položka menu byla úspěšne aktualizována
           url_exists: Stejná adresa URL je již nakonfigurována, prosím upravte ji místo jejího vytvoření.
+      amendments:
+        modal:
+          dismiss: Ok, rozumím
       config:
         intergram:
           auto_no_response: Zdá se, že právě teď nikdo není k dispozici odpovědět. Řekněte nám, jak vás můžeme kontaktovat, a co nejdříve se k vám vrátíme.
