@@ -120,6 +120,7 @@ fr:
               supported_first: Déjà supporté en priorité
               supported_last: A supporter en priorité
               za: Z-A (alphabétique inverse)
+            limit_pending_amendments: Ne permettre qu'un seul amendement en attente pour chaque proposition.
             sort_orders_enabled: Types de tri activés
             voting_cards_box_title: Titre pour le boîtier de vote
             voting_cards_box_title_help: La valeur par défaut est "Vote sur cette proposition". Utilisez "-" pour la masquer.
@@ -376,6 +377,10 @@ fr:
             error: Erreur lors de la mise à jour de l'élément de menu ! %{error}
             success: Élément de menu mis à jour avec succès
           url_exists: La même URL est déjà configurée, veuillez la modifier au lieu de la créer à nouveau.
+      amendments:
+        modal:
+          current_amendment_html: '<p>Vous pouvez <a href="%{amendment_link}">accéder à l''amendement actuel ici</a>.</p> '
+          dismiss: D'accord
       config:
         intergram:
           auto_no_response: Il semble que personne ne soit disponible pour répondre à l'heure actuelle. Dites-nous comment nous pouvons vous contacter, et nous vous contacterons dès que possible.
