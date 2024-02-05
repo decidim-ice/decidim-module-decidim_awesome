@@ -3,7 +3,6 @@ ca:
   activemodel:
     attributes:
       config:
-        additional_proposal_sortings: Opcions d'ordenació addicionals actives
         allow_images_in_full_editor: Permet imatges a l'editor HTML complet
         allow_images_in_markdown_editor: Permet imatges a l'editor Markdown
         allow_images_in_proposals: Permet imatges a l'editor de propostes
