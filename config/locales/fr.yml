@@ -3,7 +3,6 @@ fr:
   activemodel:
     attributes:
       config:
-        additional_proposal_sortings: Options de tri supplémentaires activées
         allow_images_in_full_editor: Autoriser les images dans l'éditeur HTML complet
         allow_images_in_markdown_editor: Autoriser les images dans l'éditeur de markdown
         allow_images_in_proposals: Autoriser les images dans l'éditeur de propositions
@@ -384,7 +383,6 @@ fr:
           explanation_html: |
             <p>Actuellement, il y a un autre amendement est en cours d'analyse pour cette proposition. Pour en créer un nouveau, vous devez attendre que l'amendement actuel soit accepté ou rejeté.</p>
             <p>Vous pouvez également contacter l'auteur de la présente proposition à l'adresse suivante <a href="%{proposal_link}">en laissant un commentaire</a> et tenter d'accélérer la résolution de l'amendement actuel.</p>
-        pending_limit_reached: Désolé, il ne peut y avoir qu'un seul amendement en attente à la fois. Veuillez patienter jusqu'à ce que "%{emendation}"" soit accepté ou rejeté.
       config:
         intergram:
           auto_no_response: Il semble que personne ne soit disponible pour répondre à l'heure actuelle. Dites-nous comment nous pouvons vous contacter, et nous vous contacterons dès que possible.
