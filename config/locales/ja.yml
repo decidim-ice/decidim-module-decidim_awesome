@@ -3,7 +3,6 @@ ja:
   activemodel:
     attributes:
       config:
-        additional_proposal_sortings: 有効な追加ソートオプション
         allow_images_in_full_editor: フルHTMLエディターでの画像を許可する
         allow_images_in_markdown_editor: Markdownエディターでの画像を許可する
         allow_images_in_proposals: 提案エディターでの画像を許可する
