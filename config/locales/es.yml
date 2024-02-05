@@ -3,7 +3,6 @@ es:
   activemodel:
     attributes:
       config:
-        additional_proposal_sortings: Opciones adicionales de ordenación habilitadas
         allow_images_in_full_editor: Permitir imágenes en el editor HTML completo
         allow_images_in_markdown_editor: Permitir imágenes en el editor Markdown
         allow_images_in_proposals: Permitir imágenes en el editor de propuestas
