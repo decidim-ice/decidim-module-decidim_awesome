@@ -375,10 +375,12 @@ de:
           url_exists: Die gleiche URL ist bereits konfiguriert. bitte bearbeiten Sie diese, anstatt sie neu zu erstellen.
       amendments:
         modal:
+          current_amendment_html: <p>Sie können <a href="%{amendment_link}"> hier auf die aktuelle Änderung</a>zugreifen.</p>
           dismiss: Ok, verstanden
           explanation_html: |
             <p>Derzeit wird eine weitere Änderung für diesen Vorschlag bewertet. Um eine neue zu erstellen, müssen Sie warten, bis die aktuelle akzeptiert oder abgelehnt wird.</p>
             <p>Sie können auch den Autor dieses Vorschlags durch <a href="%{proposal_link}">erreichen und einen Kommentar</a> hinterlassen und versuchen, die Lösung des aktuellen Änderungsantrags zu beschleunigen.</p>
+        pending_limit_reached: Leider kann es immer nur eine ausstehende Änderung geben. Bitte warten Sie, bis "%{emendation}" akzeptiert oder abgelehnt wird.
       config:
         intergram:
           auto_no_response: Es scheint, dass im Moment niemand verfügbar ist. Bitte sagen Sie uns, wie wir Sie erreichen können und wir melden uns baldmöglichst bei Ihnen.
