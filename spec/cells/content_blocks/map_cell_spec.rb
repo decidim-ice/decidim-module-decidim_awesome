@@ -121,9 +121,9 @@ module Decidim::DecidimAwesome
       subject { cell(another_content_block.cell, another_content_block).call }
 
       let(:another_organization) { create(:organization) }
-      let(:another_content_block) { create :content_block, organization: another_organization, manifest_name: :awesome_map, scope_name: :homepage, settings: settings }
-      let(:another_participatory_process) { create :participatory_process, organization: another_organization }
-      let!(:another_meeting_component) { create :meeting_component, participatory_space: another_participatory_process }
+      let(:another_content_block) { create(:content_block, organization: another_organization, manifest_name: :awesome_map, scope_name: :homepage, settings:) }
+      let(:another_participatory_process) { create(:participatory_process, organization: another_organization) }
+      let!(:another_meeting_component) { create(:meeting_component, participatory_space: another_participatory_process) }
 
       before do
         allow(controller).to receive(:current_organization).and_return(another_organization)

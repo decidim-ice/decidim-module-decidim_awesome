@@ -17,7 +17,7 @@ module Decidim
         attribute :scoped_styles, Hash
         attribute :proposal_custom_fields, Hash
         attribute :scoped_admins, Hash
-        attribute :menu, Array[MenuForm]
+        attribute :menu, [MenuForm]
         attribute :intergram_for_admins, Boolean
         attribute :intergram_for_admins_settings, IntergramForm
         attribute :intergram_for_public, Boolean

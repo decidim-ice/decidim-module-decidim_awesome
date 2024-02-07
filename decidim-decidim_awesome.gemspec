@@ -10,10 +10,7 @@ Gem::Specification.new do |s|
   s.email = ["ivan@pokecode.net"]
   s.license = "AGPL-3.0"
   s.homepage = "https://github.com/decidim-ice/decidim-module-decidim_awesome"
-  # rubocop:disable Gemspec/RequiredRubyVersion
   s.required_ruby_version = ">= 3.1"
-  # rubocop:enable Gemspec/RequiredRubyVersion
-
   s.name = "decidim-decidim_awesome"
   s.summary = "A decidim decidim_awesome module"
   s.description = "Some usability and UX tweaks for Decidim."
@@ -25,6 +22,5 @@ Gem::Specification.new do |s|
   s.add_dependency "deface", ">= 1.5"
   s.add_dependency "sassc", "~> 2.3" # TODO: check if this can be removed
 
-  s.add_development_dependency "decidim-dev", Decidim::DecidimAwesome::COMPAT_DECIDIM_VERSION
   s.metadata["rubygems_mfa_required"] = "true"
 end

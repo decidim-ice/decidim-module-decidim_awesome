@@ -68,7 +68,7 @@ module Decidim
             return true
           end
 
-          return true if vote_limit_enabled? && remaining_votes_count_for(current_user) <= 0
+          true if vote_limit_enabled? && remaining_votes_count_for(current_user) <= 0
         end
 
         def voted_for_any?

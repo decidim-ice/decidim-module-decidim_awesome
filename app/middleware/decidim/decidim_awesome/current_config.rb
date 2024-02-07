@@ -100,7 +100,7 @@ module Decidim
       end
 
       def safe_get_route?
-        return unless @request.get?
+        return false unless @request.get?
 
         case @request.path
         when "/"
@@ -115,7 +115,7 @@ module Decidim
       end
 
       def safe_post_route?
-        return unless @request.post? || @request.put? || @request.patch?
+        return false unless @request.post? || @request.put? || @request.patch?
 
         case @request.path
         when %r{^/admin/admin_terms}

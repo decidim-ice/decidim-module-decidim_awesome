@@ -50,7 +50,7 @@ module Decidim
             destination = "#{destination}#{union}#{query}"
           end
 
-          return destination.strip if destination.present?
+          destination.strip if destination.present?
         end
       end
     end
