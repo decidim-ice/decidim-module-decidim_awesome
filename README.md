@@ -463,11 +463,11 @@ RBENV_VERSION=3.1.1 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rake test_app
 RBENV_VERSION=3.1.1 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rspec
 ```
 
-For convenience, you can use the scripts `bin/rspec` and `bin/rspec-legacy` to run tests against one or the other version:
+For convenience, you can use the scripts `bin/test` and `bin/test-legacy` to run tests against one or the other version:
 
 ```bash
-bin/rspec spec/
-bin/rspec-legacy spec/
+bin/test spec/
+bin/test-legacy spec/
 ```
 
 - Rbenv is required for this script to work.

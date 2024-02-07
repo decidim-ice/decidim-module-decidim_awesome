@@ -112,6 +112,7 @@ jobs:
       - name: General RSpec with config vars ${{ matrix.features }}
         run: |
           sudo Xvfb -ac $DISPLAY -screen 0 1920x1084x24 > /dev/null 2>&1 & # optional
+          ln -s spec/decidim_dummy_app spec/decidim_dummy_app_last
           bundle exec parallel_test --type rspec spec/${{ matrix.rspec }}
         env:
           FEATURES: ${{ matrix.features }}
