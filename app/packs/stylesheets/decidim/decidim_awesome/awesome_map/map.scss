@@ -45,7 +45,7 @@
 
   .leaflet-control-layers-list {
     hr {
-      margin: .5em 0;
+      margin: 0.5em 0;
     }
 
     b {
@@ -55,13 +55,13 @@
 
     label {
       line-height: 1;
-      font-size: .8rem;
-      margin: 0 .5em .5em;
+      font-size: 0.8rem;
+      margin: 0 0.5em 0.5em;
 
       i {
         display: inline-block;
-        width: .8rem;
-        height: .8rem;
+        width: 0.8rem;
+        height: 0.8rem;
         background-color: var(--primary);
       }
     }
@@ -72,7 +72,7 @@
   }
 
   .map-legend {
-    background: rgba(255, 255, 255, .8);
+    background: rgba(255, 255, 255, 0.8);
     padding: 1em;
     border: 2px solid #bbb;
     border-radius: 4px;
@@ -83,7 +83,7 @@
     cursor: pointer;
 
     &::after {
-      content: '';
+      content: "";
       width: 0;
       height: 0;
       border-left: 5px solid transparent;
@@ -112,10 +112,10 @@
       display: none;
 
       i {
-        margin-left: .5em;
+        margin-left: 0.5em;
         display: inline-block;
-        width: .8rem;
-        height: .8rem;
+        width: 0.8rem;
+        height: 0.8rem;
         border-radius: 50%;
         background-color: var(-- primary);
       }
@@ -144,11 +144,11 @@
       line-height: 1;
       background-color: #f0f0f0;
       border-radius: 5px;
-      margin: .5rem;
-      padding: .5rem;
+      margin: 0.5rem;
+      padding: 0.5rem;
 
       span {
-        margin: 0 .5rem 2px 0;
+        margin: 0 0.5rem 2px 0;
       }
 
       input {
@@ -157,8 +157,8 @@
     }
 
     .awesome_map-toggle_all_tags {
-      margin: .5rem 1rem;
-      font-size: .875rem;
+      margin: 0.5rem 1rem;
+      font-size: 0.875rem;
     }
 
     .hashtags-container,

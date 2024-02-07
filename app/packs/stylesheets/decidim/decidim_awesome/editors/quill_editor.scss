@@ -24,7 +24,7 @@
 }
 
 .editor.hashtags__container {
-  >p.help-text {
+  > p.help-text {
     margin-top: -1rem;
     margin-bottom: 1.5rem;
   }
@@ -32,8 +32,8 @@
 
 // For quill editors in custom fields
 .form-control[type="richtext"] {
-  >p.help-text {
-    margin-top: .2rem !important;
+  > p.help-text {
+    margin-top: 0.2rem !important;
   }
 
   .ql-snow.ql-toolbar {

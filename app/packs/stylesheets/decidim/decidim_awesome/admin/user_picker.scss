@@ -11,9 +11,9 @@
 
     .is-admin {
       &::before {
-        content: '⛔';
+        content: "⛔";
         display: inline-block;
-        margin-right: .3em;
+        margin-right: 0.3em;
         text-decoration: none;
       }
 
