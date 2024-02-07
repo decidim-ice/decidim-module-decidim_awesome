@@ -407,7 +407,7 @@ describe "Voting weights with cards" do
       let!(:vote_weights) { [] }
 
       it "shows the vote count" do
-        filter = legacy_version? ? ".state_check_boxes_tree_filter" : ".with_any_state_check_boxes_tree_filter"
+        filter = ".with_any_state_check_boxes_tree_filter"
         within ".filters #{filter}" do
           check "All"
           uncheck "All"

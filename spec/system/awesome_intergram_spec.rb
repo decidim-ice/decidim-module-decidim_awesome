@@ -81,14 +81,8 @@ describe "Show intergram chat" do
 
   it_behaves_like "shows the chat", false
 
-  if legacy_version?
-    it "has the script tag in the head" do
-      expect(page).to have_xpath("//head/script[@src='#{intergram_url}']", visible: :all)
-    end
-  else
-    it "has the script tag in the body" do
-      expect(page).to have_xpath("//body/script[@src='#{intergram_url}']", visible: :all)
-    end
+  it "has the script tag in the body" do
+    expect(page).to have_xpath("//body/script[@src='#{intergram_url}']", visible: :all)
   end
 
   context "when login is required" do

@@ -331,8 +331,10 @@ module Decidim
       registered_components << [manifest, block]
     end
 
+    # version 0.11 is compatible only with decidim 0.28
     def self.legacy_version?
-      Decidim.version[0..3] == "0.26"
+      # Decidim.version[0..3] == "0.28"
+      false
     end
   end
 end

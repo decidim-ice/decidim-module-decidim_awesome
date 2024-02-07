@@ -243,7 +243,7 @@ The `weight_validator` is a Proc that receives the weight value and the context 
 
 **Notes for view `show_vote_button_view`**
 
-When building a new view for the vote button ([see the original](https://github.com/decidim/decidim/blob/release/0.27-stable/decidim-proposals/app/views/decidim/proposals/proposals/_vote_button.html.erb)) is important to take into account the following situations:
+When building a new view for the vote button ([see the original](https://github.com/decidim/decidim/blob/release/0.28-stable/decidim-proposals/app/views/decidim/proposals/proposals/_vote_button.html.erb)) is important to take into account the following situations:
 
 - If there's a `current_user` logged in
 - If votes are blocked `if current_settings.votes_blocked?`
@@ -251,7 +251,7 @@ When building a new view for the vote button ([see the original](https://github.
 - If maximum votes have already reached `if proposal.maximum_votes_reached?`
 - If the proposal can accumulate supports beyond maximum `if proposal.can_accumulate_supports_beyond_threshold`
 - If the current component allows the user to participate `if current_component.participatory_space.can_participate?(current_user)`
-- Note that the [original view](https://github.com/decidim/decidim/blob/release/0.27-stable/decidim-proposals/app/views/decidim/proposals/proposals/_vote_button.html.erb) is overridden only inside the tag  `<div id="proposal-<%= proposal.id %>-vote-button" class="button--vote-button">`. You only need to substitute the part inside.
+- Note that the [original view](https://github.com/decidim/decidim/blob/release/0.28-stable/decidim-proposals/app/views/decidim/proposals/proposals/_vote_button.html.erb) is overridden only inside the tag  `<div id="proposal-<%= proposal.id %>-vote-button" class="button--vote-button">`. You only need to substitute the part inside.
 
 To cast a vote a `POST` action is needed with the parameters `proposal_id`, `from_proposals_list` and `weight`. The route where to send the vote can be constructed such as:
 
@@ -313,13 +313,14 @@ RAILS_ENV=production bin/rails decidim_awesome:active_storage_migrations:check_m
 ```
 
 The correct version of Decidim Awesome should resolved automatically by the Bundler.
-However you can force some specific version using `gem "decidim-decidim_awesome", "~> 0.10.0"` in the Gemfile.
+However you can force some specific version using `gem "decidim-decidim_awesome", "~> 0.11.0"` in the Gemfile.
 
 Depending on your Decidim version, choose the corresponding Awesome version to ensure compatibility:
 
 | Awesome version | Compatible Decidim versions |
 |---|---|
-| 0.10.0 | >= 0.26.7, >= 0.27.3 |
+| 0.11.x | 0.28.x |
+| 0.10.x | >= 0.26.7, >= 0.27.x |
 | 0.9.2 | >= 0.26.7, >= 0.27.3 |
 | 0.9.x | 0.26.x, 0.27.x |
 | 0.8.x | 0.25.x, 0.26.x |
@@ -328,6 +329,7 @@ Depending on your Decidim version, choose the corresponding Awesome version to e
 | 0.5.x | 0.21.x, 0.22.x |
 
 > *Heads up!* 
+> * version 0.11.0 is only compatible with Decidim v0.28 as a major redesign makes backward compatibility impractical.
 > * version 0.10.0 requires database migrations! Don't forget the migrations step when updating.
 > * version 0.8.0 removes CSS Themes for tenants. If you have been using them you will have to manually migrate them to custom styles.
 > * version 0.8.0 uses ActiveStorage, same as Decidim 0.25. 2 new rake task have been introduced to facilitate the migration: `bin/rails decidim_awesome:active_storage_migrations:check_migration_from_carrierwave` and 
@@ -447,6 +449,9 @@ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rake test_
 DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rspec
 ```
 
+> Note: the following is not currently applicable as version v0.11 is only compatible with version Decidim v0.28
+> Is left here for future reference
+
 However, this project works with different versions of Decidim. In order to test them all, we maintain two different Gemfiles: `Gemfile` and `Gemfile.legacy`. The first one is used for development and testing the latest Decidim version supported, the second one is used for testing against the old Decidim version.
 
 You can run run tests against the legacy Decidim versions by using:
@@ -454,9 +459,9 @@ You can run run tests against the legacy Decidim versions by using:
 ```bash
 export DATABASE_USERNAME=<username> 
 export DATABASE_PASSWORD=<password> 
-RBENV_VERSION=2.7.6 BUNDLE_GEMFILE=Gemfile.legacy bundle
-RBENV_VERSION=2.7.6 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rake test_app
-RBENV_VERSION=2.7.6 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rspec
+RBENV_VERSION=3.1.1 BUNDLE_GEMFILE=Gemfile.legacy bundle
+RBENV_VERSION=3.1.1 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rake test_app
+RBENV_VERSION=3.1.1 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rspec
 ```
 
 For convenience, you can use the scripts `bin/rspec` and `bin/rspec-legacy` to run tests against one or the other version:

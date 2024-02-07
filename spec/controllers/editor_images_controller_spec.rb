@@ -48,8 +48,7 @@ module Decidim::DecidimAwesome
       end
 
       context "when there's no file" do
-        # TODO: remove nil when diching 0.26 support
-        let(:image) { legacy_version? ? nil : upload_test_file(Decidim::Dev.test_file("invalid.jpeg", "image/jpeg")) }
+        let(:image) { upload_test_file(Decidim::Dev.test_file("invalid.jpeg", "image/jpeg")) }
 
         it "returns failure" do
           post(:create, params:)
