@@ -176,6 +176,7 @@ hu:
             success: A beállítás sikeresen frissült
         constraints:
           new:
+            cancel: Elvetés
             save: Mentés
           show:
             cancel: Elvetés
