@@ -19,22 +19,9 @@ env:
   RAILS_ENV: "test"
   RUBYOPT: '-W:no-deprecated'
 jobs:
-  tests-latest:
+  build:
+    name: Build & Precompile
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - rspec: awesome_summary_spec.rb
-            features: disabled
-          - rspec: " --exclude-pattern 'spec/system/**/*_spec.rb'"
-            features: enabled
-          - rspec: system/admin
-            features: enabled
-          - rspec: system/*_spec.rb
-            features: enabled
-          - rspec: system/awesome_map
-            features: enabled
-      fail-fast: false
 
     services:
       postgres:
@@ -101,6 +88,63 @@ jobs:
         shell: "bash"
         env:
           BUNDLE_GEMFILE: ../../Gemfile
+
+      - run: tar -zcf /tmp/testapp-env.tar.gz ./spec/decidim_dummy_app
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: workspace
+          path: /tmp/testapp-env.tar.gz
+
+  tests-latest:
+    name: Tests latest
+    runs-on: ubuntu-latest
+    needs: build
+
+    strategy:
+      matrix:
+        include:
+          - rspec: awesome_summary_spec.rb
+            features: disabled
+          - rspec: " --exclude-pattern 'spec/system/**/*_spec.rb'"
+            features: enabled
+          - rspec: system/admin
+            features: enabled
+          - rspec: system/*_spec.rb
+            features: enabled
+          - rspec: system/awesome_map
+            features: enabled
+      fail-fast: false
+
+    services:
+      postgres:
+        image: postgres:11
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        env:
+          POSTGRES_PASSWORD: postgres
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: workspace
+          path: /tmp
+      
+      - run: tar -zxf /tmp/testapp-env.tar.gz
+        name: Restore application
 
       - run: bundle exec rake parallel:create parallel:load_schema
         name: Parallel tests
