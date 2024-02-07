@@ -21,7 +21,7 @@
   "keywords": [
     "decidim"
   ],
-  "author": "ivan@platoniq.net",
+  "author": "ivan@pokecode.net",
   "license": "AGPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/decidim-ice/decidim-module-decidim_awesome/issues"
@@ -47,7 +47,10 @@
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-standard": "^3.1.0",
-    "sass-embedded": "~1.57.1"
+    "sass-embedded": "~1.57.1",
+    "@decidim/dev": "0.28.0",
+    "@decidim/eslint-config": "0.28.0",
+    "@decidim/stylelint-config": "0.28.0"
   },
   "dependencies": {
     "@rails/actioncable": "^6.1.7-6",

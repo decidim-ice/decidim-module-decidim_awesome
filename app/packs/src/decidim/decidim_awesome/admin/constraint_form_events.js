@@ -1,3 +1,5 @@
+/* eslint func-style: "off", require-jsdoc: "off", no-use-before-define: "off" */
+
 function constraintChange(data) {
   // Identify the modal element to be updated
   const [{ modalId }] = data;
@@ -60,4 +62,4 @@ function updateModalContent({ detail }) {
   });
 }
 
-document.addEventListener("remote-modal:loaded", event => updateModalContent(event));
+document.addEventListener("remote-modal:loaded", (event) => updateModalContent(event));
