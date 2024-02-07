@@ -120,6 +120,7 @@ es:
               supported_first: Mis soportes primero
               supported_last: Mis soportes últimos
               za: Z-A (Alfabético inverso)
+            limit_pending_amendments: Permitir sólo una enmienda pendiente sobre cada propuesta.
             sort_orders_enabled: Tipos de ordenación habilitados
             voting_cards_box_title: Título de la cabina de votación
             voting_cards_box_title_help: Por defecto es "Votar en esta propuesta". Use "-" para ocultarla.
@@ -378,6 +379,7 @@ es:
           url_exists: Esta URL ya ha sido configurada en otro ítem de menú, por favor edítalo en lugar de crear uno nuevo.
       amendments:
         modal:
+          current_amendment_html: <p>Puedes <a href="%{amendment_link}">acceder a la enmienda actual aquí</a>.</p>
           dismiss: De acuerdo
           explanation_html: |
             <p>Actualmente, hay otra enmienda que se está evaluando para esta propuesta. Para crear una nueva, debes esperar hasta que la actual sea aceptada o rechazada.</p>
