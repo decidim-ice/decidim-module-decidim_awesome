@@ -18,6 +18,11 @@ env:
   NODE_ENV: "test"
   RAILS_ENV: "test"
   RUBYOPT: '-W:no-deprecated'
+  DATABASE_USERNAME: postgres
+  DATABASE_PASSWORD: postgres
+  DATABASE_HOST: localhost
+  POSTGRES_PASSWORD: postgres
+
 jobs:
   build:
     name: Build & Precompile
@@ -32,12 +37,6 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-        env:
-          POSTGRES_PASSWORD: postgres
-    env:
-      DATABASE_USERNAME: postgres
-      DATABASE_PASSWORD: postgres
-      DATABASE_HOST: localhost
 
     steps:
       - uses: actions/checkout@v4
@@ -125,8 +124,6 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-        env:
-          POSTGRES_PASSWORD: postgres
 
     steps:
       - uses: actions/checkout@v4
