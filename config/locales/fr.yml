@@ -3,7 +3,7 @@ fr:
   activemodel:
     attributes:
       config:
-        additional_proposal_sortings: Options de tri supplémentaires activées
+        additional_proposal_sortings: Activer les options de tri supplémentaires
         allow_images_in_full_editor: Autoriser les images dans l'éditeur HTML complet
         allow_images_in_markdown_editor: Autoriser les images dans l'éditeur de markdown
         allow_images_in_proposals: Autoriser les images dans l'éditeur de propositions
