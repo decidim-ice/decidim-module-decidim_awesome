@@ -460,10 +460,8 @@ en:
             of creating it again.
       amendments:
         modal:
-          current_amendment_html: '<p>You can <a href="%{amendment_link}">access the
+          current_amendment_html: <p>You can <a href="%{amendment_link}">access the
             current amendment here</a>.</p>
-
-            '
           dismiss: Ok, got it
           explanation_html: |
             <p>Currently, there's another amendment being evaluated for this proposal. In order to create a new one, you must wait until the current one is accepted or rejected.</p>
