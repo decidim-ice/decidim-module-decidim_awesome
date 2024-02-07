@@ -106,6 +106,8 @@ jobs:
         name: Parallel tests
         shell: "bash"
         working-directory: ./spec/decidim_dummy_app/
+        env:
+          BUNDLE_GEMFILE: ../../Gemfile
 
       - name: General RSpec with config vars ${{ matrix.features }}
         run: |
