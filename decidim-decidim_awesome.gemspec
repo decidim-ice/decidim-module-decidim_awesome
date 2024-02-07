@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.license = "AGPL-3.0"
   s.homepage = "https://github.com/decidim-ice/decidim-module-decidim_awesome"
   # rubocop:disable Gemspec/RequiredRubyVersion
-  s.required_ruby_version = ">= 2.7"
+  s.required_ruby_version = ">= 3.1"
   # rubocop:enable Gemspec/RequiredRubyVersion
 
   s.name = "decidim-decidim_awesome"
