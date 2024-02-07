@@ -3,6 +3,7 @@ cs:
   activemodel:
     attributes:
       config:
+        additional_proposal_sortings: Povoleny další možnosti řazení
         allow_images_in_full_editor: Povolit obrázky v kompletním HTML editoru
         allow_images_in_markdown_editor: Povolit obrázky v editoru markdown
         allow_images_in_proposals: Povolit obrázky v editoru návrhů
