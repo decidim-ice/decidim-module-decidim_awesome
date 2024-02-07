@@ -469,7 +469,7 @@ en:
             <p>Currently, there's another amendment being evaluated for this proposal. In order to create a new one, you must wait until the current one is accepted or rejected.</p>
             <p>You can also reach the author of this proposal by <a href="%{proposal_link}">leaving a comment</a> and try to speed up the resolution of the current amendment.</p>
         pending_limit_reached: Sorry, there can only be one pending amendment at a
-          time. Please wait until "%{emendation}" is accepted or rejected."
+          time. Please wait until "%{emendation}" is accepted or rejected.
       config:
         intergram:
           auto_no_response: It seems that no one is available to answer right now.
