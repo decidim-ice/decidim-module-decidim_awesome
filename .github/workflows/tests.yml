@@ -56,6 +56,16 @@ jobs:
         with:
           chromedriver-version: 119.0.6045.105
 
+      - name: List Chrome
+        run: apt list --installed | grep chrome
+
+      - name: Remove Chrome
+        run: sudo apt remove google-chrome-stable
+
+      - uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: 119.0.6045.105
+
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
