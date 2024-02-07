@@ -39,6 +39,10 @@ eu:
           show:
             view_meeting: Ikusi bilera
             view_proposal: Ikusi proposamena
+      voting:
+        voting_cards:
+          modal:
+            cancel: Ezeztatu
   layouts:
     decidim:
       decidim_awesome:
