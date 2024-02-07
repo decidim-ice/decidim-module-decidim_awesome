@@ -36,5 +36,5 @@ if [ "$1" == "--reset" ]; then
 	fi
 else
 	cd ..
-	bundle exec rspec $@
+	SHAKAPACKER_RUNTIME_COMPILE=true bundle exec rspec $@
 fi
