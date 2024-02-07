@@ -16,7 +16,7 @@ env:
   PARALLEL_TEST_PROCESSORS: 2
   SHAKAPACKER_RUNTIME_COMPILE: "false"
   NODE_ENV: "test"
-
+  RUBYOPT: '-W:no-deprecated'
 jobs:
   tests-latest:
     runs-on: ubuntu-latest
@@ -98,8 +98,6 @@ jobs:
         name: Precompile assets
         working-directory: ./spec/decidim_dummy_app/
         shell: "bash"
-        env:
-          NODE_ENV: "test"
 
       - run: bundle exec rake parallel:create parallel:load_schema
         name: Parallel tests
