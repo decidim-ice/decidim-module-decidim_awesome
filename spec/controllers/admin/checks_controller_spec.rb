@@ -65,7 +65,7 @@ module Decidim::DecidimAwesome
           end
 
           context "and is higher than supported" do
-            let(:version) { "0.28" }
+            let(:version) { "0.29" }
 
             it_behaves_like "invalid decidim version"
           end
