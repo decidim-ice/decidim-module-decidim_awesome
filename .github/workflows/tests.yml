@@ -107,7 +107,7 @@ jobs:
         include:
           - rspec: awesome_summary_spec.rb
             features: disabled
-          - rspec: " --exclude-pattern='spec/system/**/*_spec.rb'"
+          - rspec: " --exclude-pattern='spec/system/**_spec.rb,spec/system/*/**_spec.rb'"
             features: enabled
           - rspec: system/admin
             features: enabled
