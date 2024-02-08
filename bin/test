@@ -7,6 +7,7 @@ if [ "$BUNDLE_GEMFILE" == "Gemfile.legacy" ]; then
 	prefix="BUNDLE_GEMFILE=$BUNDLE_GEMFILE RBENV_VERSION=$RBENV_VERSION"
 	echo "Using legacy version (gemfile: $BUNDLE_GEMFILE, ruby: $RBENV_VERSION)"
 else
+	BUNDLE_GEMFILE="Gemfile"
 	echo "Using latest version"
 fi
 
@@ -35,6 +36,12 @@ if [ "$1" == "--reset" ]; then
 		RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load
 	fi
 else
-	cd ..
-	SHAKAPACKER_RUNTIME_COMPILE=true bundle exec rspec $@
+	echo "Precompiling test assets"
+	cd decidim_dummy_app
+	if [ -z "$SKIP_PRECOMPILE" ]; then
+		BUNDLE_GEMFILE="../../$BUNDLE_GEMFILE" RAILS_ENV=test bundle exec rails assets:precompile
+	fi
+	cd ../..
+	echo bundle exec rspec $@
+	bundle exec rspec $@
 fi

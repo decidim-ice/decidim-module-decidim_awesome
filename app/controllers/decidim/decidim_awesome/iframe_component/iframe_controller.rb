@@ -33,7 +33,7 @@ module Decidim
         end
 
         def add_additional_csp_directives
-          iframe_urls = Nokogiri::HTML::DocumentFragment.parse(iframe).children.select { |x| x.name == "iframe" }.map { |x| x.attribute("src").value }
+          iframe_urls = Nokogiri::HTML::DocumentFragment.parse(iframe).children.select { |x| x.name == "iframe" }.filter_map { |x| x.attribute("src")&.value }
           return if iframe_urls.blank?
 
           iframe_urls.each do |url|
