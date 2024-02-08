@@ -2,7 +2,7 @@
             class: "button #{vote_btn_class} small button--sc#{" disabled" if current_settings.votes_blocked?}",
             title: t("decidim.decidim_awesome.voting.voting_cards.vote_button") do %>
   <% if user_voted_weight %>
-    <%= icon "actions", class: "icon" %> <%= t("decidim.decidim_awesome.voting.voting_cards.voted") %>
+    <%= icon "dashboard-line", class: "icon" %> <%= t("decidim.decidim_awesome.voting.voting_cards.voted") %>
   <% elsif proposal.maximum_votes_reached? && !proposal.can_accumulate_supports_beyond_threshold && current_component.participatory_space.can_participate?(current_user) %>
     <%= t("decidim.proposals.proposals.vote_button.maximum_votes_reached") %>
   <% elsif vote_limit_enabled? && remaining_votes_count_for(current_user) <= 0 %>

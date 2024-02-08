@@ -3,15 +3,15 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/editor_examples"
 
-describe "Admin edits proposals", type: :system do
+describe "Admin edits proposals" do
   let(:manifest_name) { "proposals" }
   let(:organization) { participatory_process.organization }
-  let!(:user) { create :user, :admin, :confirmed, organization: organization }
-  let!(:proposal) { create :proposal, :official, component: component }
-  let!(:allow_images_in_proposals) { create(:awesome_config, organization: organization, var: :allow_images_in_proposals, value: images_in_proposals) }
-  let!(:allow_images_in_small_editor) { create(:awesome_config, organization: organization, var: :allow_images_in_full_editor, value: images_editor) }
-  let!(:use_markdown_editor) { create(:awesome_config, organization: organization, var: :use_markdown_editor, value: markdown_enabled) }
-  let!(:allow_images_in_markdown_editor) { create(:awesome_config, organization: organization, var: :allow_images_in_markdown_editor, value: markdown_images) }
+  let!(:user) { create(:user, :admin, :confirmed, organization:) }
+  let!(:proposal) { create(:proposal, :official, component:) }
+  let!(:allow_images_in_proposals) { create(:awesome_config, organization:, var: :allow_images_in_proposals, value: images_in_proposals) }
+  let!(:allow_images_in_small_editor) { create(:awesome_config, organization:, var: :allow_images_in_full_editor, value: images_editor) }
+  let!(:use_markdown_editor) { create(:awesome_config, organization:, var: :use_markdown_editor, value: markdown_enabled) }
+  let!(:allow_images_in_markdown_editor) { create(:awesome_config, organization:, var: :allow_images_in_markdown_editor, value: markdown_images) }
   let(:images_in_proposals) { false }
   let(:images_editor) { false }
   let(:markdown_enabled) { false }
@@ -81,6 +81,8 @@ describe "Admin edits proposals", type: :system do
     let(:html) { "<h1 id=\"title\">title</h1><p>Paragraph<br>line 2</p>" }
 
     it "converts markdown to html before saving" do
+      skip "This feature is pending to be adapted to Decidim 0.28"
+
       sleep 1
       page.execute_script("$('[name=\"faker-inscrybmde\"]:first')[0].InscrybMDE.value('#{text}')")
 

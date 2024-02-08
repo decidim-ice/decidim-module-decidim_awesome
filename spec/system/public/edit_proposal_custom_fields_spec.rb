@@ -2,21 +2,21 @@
 
 require "spec_helper"
 
-describe "Custom proposals fields", type: :system do
+describe "Custom proposals fields" do
   include_context "with a component"
   let(:manifest_name) { "proposals" }
   let(:component) do
     create(:proposal_component,
            :with_creation_enabled,
            :with_amendments_enabled,
-           manifest: manifest,
+           manifest:,
            participatory_space: participatory_process)
   end
   let(:rte_enabled) { false }
-  let!(:proposal) { create :proposal, :with_amendments, users: [author], body: body, component: component }
-  let(:author) { create :user, :confirmed, organization: organization }
-  let!(:config) { create :awesome_config, organization: organization, var: :proposal_custom_fields, value: custom_fields }
-  let(:config_helper) { create :awesome_config, organization: organization, var: :proposal_custom_field_foo }
+  let!(:proposal) { create(:proposal, :with_amendments, users: [author], body:, component:) }
+  let(:author) { create(:user, :confirmed, organization:) }
+  let!(:config) { create(:awesome_config, organization:, var: :proposal_custom_fields, value: custom_fields) }
+  let(:config_helper) { create(:awesome_config, organization:, var: :proposal_custom_field_foo) }
   let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes", "participatory_space_slug" => slug }) }
   let(:slug) { participatory_process.slug }
   let(:body) do
@@ -35,6 +35,8 @@ describe "Custom proposals fields", type: :system do
   end
 
   before do
+    skip "Proposals custom fields feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
+
     organization.update(rich_text_editor_in_public_views: rte_enabled)
     login_as user, scope: :user
     visit_component
@@ -67,8 +69,8 @@ describe "Custom proposals fields", type: :system do
         expect(page).to have_xpath("//input[@class='form-control'][@id='text-1476748004559'][@user-data='Lucky Luke']")
         expect(page).to have_xpath("//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot everything']")
       else
-        expect(page).to have_selector("dd#text-1476748004559", text: "Lucky Luke")
-        expect(page).to have_selector("dd#textarea-1476748007461", text: "I shot everything")
+        expect(page).to have_css("dd#text-1476748004559", text: "Lucky Luke")
+        expect(page).to have_css("dd#textarea-1476748007461", text: "I shot everything")
       end
       expect(page).to have_content("Occupation")
       expect(page).to have_content("Moth Man")
@@ -182,12 +184,12 @@ describe "Custom proposals fields", type: :system do
   end
 
   context "when participatory texts" do
-    let!(:participatory_text) { create :participatory_text, component: component }
+    let!(:participatory_text) { create(:participatory_text, component:) }
     let(:component) do
       create(:proposal_component,
              :with_creation_enabled,
              :with_amendments_and_participatory_texts_enabled,
-             manifest: manifest,
+             manifest:,
              participatory_space: participatory_process)
     end
 
@@ -208,10 +210,10 @@ describe "Custom proposals fields", type: :system do
       create(:proposal_component,
              :with_creation_enabled,
              :with_collaborative_drafts_enabled,
-             manifest: manifest,
+             manifest:,
              participatory_space: participatory_process)
     end
-    let!(:collaborative_draft) { create :collaborative_draft, users: [author, user], body: answer, component: component }
+    let!(:collaborative_draft) { create(:collaborative_draft, users: [author, user], body: answer, component:) }
 
     before do
       click_link "Access collaborative drafts"

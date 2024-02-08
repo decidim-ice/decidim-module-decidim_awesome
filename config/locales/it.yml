@@ -76,7 +76,6 @@ it:
             announcement: Annuncio
             iframe: Codice iframe
             iframe_help: 'Metti il tuo codice come html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Il contenuto sarà sanificato da altri tag HTML. Assicurati di utilizzare il 100% come larghezza per riempire lo schermo.'
-            no_margins: Nessun margine tra l'iframe e il resto della pagina
             viewport_width: Limita la larghezza massima alla vista dell'applicazione
           step:
             announcement: Annuncio

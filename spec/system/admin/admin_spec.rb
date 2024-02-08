@@ -3,9 +3,9 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/config_examples"
 
-describe "Visit the admin page", type: :system do
-  let(:organization) { create :organization, rich_text_editor_in_public_views: rte_enabled }
-  let!(:admin) { create(:user, :admin, :confirmed, organization: organization) }
+describe "Visit the admin page" do
+  let(:organization) { create(:organization, rich_text_editor_in_public_views: rte_enabled) }
+  let!(:admin) { create(:user, :admin, :confirmed, organization:) }
   let(:rte_enabled) { true }
   let(:disabled_features) { [] }
   let(:version_original) { Decidim.version }
@@ -37,6 +37,8 @@ describe "Visit the admin page", type: :system do
     end
 
     it "renders the page" do
+      skip "This feature is pending to be adapted to Decidim 0.28"
+
       expect(page).to have_content(/System Compatibility Checks/i)
       expect(page).not_to have_xpath("//span[@class='text-alert']")
       expect(page).to have_xpath("//span[@class='text-success']")
@@ -46,6 +48,8 @@ describe "Visit the admin page", type: :system do
       let(:version) { "0.11" }
 
       it "detects missing css" do
+        skip "This feature is pending to be adapted to Decidim 0.28"
+
         expect(page).to have_xpath("//span[@class='text-alert']", count: 1)
       end
     end
@@ -54,6 +58,8 @@ describe "Visit the admin page", type: :system do
   context "when visiting editor hacks" do
     context "when editor hacks are enabled" do
       before do
+        skip "Custom redirects feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
+
         click_link "Editor Hacks"
       end
 
@@ -77,6 +83,8 @@ describe "Visit the admin page", type: :system do
   context "when visiting surveys hacks" do
     context "when survey hacks are enabled" do
       before do
+        skip "auto_save_forms feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
+
         click_link "Surveys & Forms"
       end
 
@@ -97,6 +105,8 @@ describe "Visit the admin page", type: :system do
   context "when visiting proposal hacks" do
     context "when proposal hacks are enabled" do
       before do
+        skip "Proposals hacks feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
+
         click_link "Proposals Hacks"
       end
 
@@ -150,12 +160,20 @@ describe "Visit the admin page", type: :system do
       [:allow_images_in_proposals, :validate_title_min_length, :validate_title_max_caps_percent, :validate_title_max_marks_together, :validate_title_start_with_caps, :validate_body_min_length, :validate_body_max_caps_percent, :validate_body_max_marks_together, :validate_body_start_with_caps].each do |var|
         let(:disabled_features) { [var] }
 
+        before do
+          skip "Proposals hacks feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
+        end
+
         it_behaves_like "has menu link", "proposals"
       end
     end
 
     context "when all proposals hacks are disabled" do
       let(:disabled_features) { [:allow_images_in_proposals, :validate_title_min_length, :validate_title_max_caps_percent, :validate_title_max_marks_together, :validate_title_start_with_caps, :validate_body_min_length, :validate_body_max_caps_percent, :validate_body_max_marks_together, :validate_body_start_with_caps] }
+
+      before do
+        skip "Proposals hacks feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
+      end
 
       it_behaves_like "do not have menu link", "proposals"
     end
@@ -164,6 +182,8 @@ describe "Visit the admin page", type: :system do
   context "when visiting live chat" do
     context "when livechat hacks are enabled" do
       before do
+        skip "Live chat feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
+
         click_link "Live Chat"
       end
 
@@ -184,6 +204,8 @@ describe "Visit the admin page", type: :system do
   context "when visiting CSS tweaks" do
     context "when scoped styles are enabled" do
       before do
+        skip "Recover this tests after adapting and enabling all features"
+
         click_link "Custom Styles"
       end
 
@@ -197,27 +219,41 @@ describe "Visit the admin page", type: :system do
     context "when scoped styles are disabled" do
       let(:disabled_features) { [:scoped_styles] }
 
+      before do
+        skip "Recover this tests after adapting and enabling all features"
+      end
+
       it_behaves_like "do not have menu link", "styles"
     end
   end
 
   context "when visiting Menu hacks" do
     context "when menu_hacks are enabled" do
+      let(:disabled_features) { [] }
+
       before do
         click_link "Menu Tweaks"
       end
 
-      it_behaves_like "has menu link", "menu_hacks" do
+      it_behaves_like "has menu link", "menus/home_content_block_menu/hacks" do
         let(:prefix) { "" }
       end
 
-      it "renders the page" do
+      it_behaves_like "has menu link", "menus/menu/hacks" do
+        let(:prefix) { "" }
+      end
+
+      it "renders the main menu page" do
         expect(page).to have_content(/Main menu/i)
       end
     end
 
     context "when menu_hacks are disabled" do
       let(:disabled_features) { [:menu] }
+
+      before do
+        skip "Recover this tests after adapting and enabling all features"
+      end
 
       it_behaves_like "do not have menu link", "menu_hacks" do
         let(:prefix) { "" }
@@ -228,6 +264,8 @@ describe "Visit the admin page", type: :system do
   context "when visiting custom redirections" do
     context "when custom_redirections are enabled" do
       before do
+        skip "Custom redirects feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
+
         click_link "Custom Redirections"
       end
 
@@ -263,6 +301,10 @@ describe "Visit the admin page", type: :system do
     context "when scoped admins are disabled" do
       let(:disabled_features) { [:scoped_admins] }
 
+      before do
+        skip "Recover this tests after adapting and enabling all features"
+      end
+
       it_behaves_like "do not have menu link", "admins"
     end
   end
@@ -270,6 +312,8 @@ describe "Visit the admin page", type: :system do
   context "when visiting proposal custom fields" do
     context "when custom fields are enabled" do
       before do
+        skip "Proposal custom fields feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
+
         click_link "Proposals Custom Fields"
       end
 

@@ -2,10 +2,10 @@
 
 require "spec_helper"
 
-describe "Hacked menus", type: :system do
-  let(:organization) { create :organization }
-  let!(:participatory_process) { create :participatory_process, organization: organization }
-  let!(:config) { create :awesome_config, organization: organization, var: :menu, value: menu }
+describe "Hacked menus" do
+  let(:organization) { create(:organization) }
+  let!(:participatory_process) { create(:participatory_process, organization:) }
+  let!(:config) { create(:awesome_config, organization:, var: :menu, value: menu) }
   let(:menu) { [overriden, added] }
   let(:overriden) do
     {
@@ -33,25 +33,26 @@ describe "Hacked menus", type: :system do
     end
 
     switch_to_host(organization.host)
-    visit decidim.root_path
+    visit decidim_participatory_processes.participatory_processes_path
+    find_by_id("main-dropdown-summary").hover
   end
 
   shared_examples "has active link" do |text|
     it "has only one active link" do
-      within ".main-nav" do
-        expect(page).to have_css(".main-nav__link--active", count: 1)
+      within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
+        expect(page).to have_css("li.active", count: 1)
       end
     end
 
     it "active link containts text" do
-      within ".main-nav .main-nav__link--active" do
+      within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu .active" do
         expect(page).to have_content(text)
       end
     end
   end
 
   it "renders the hacked menu" do
-    within ".main-nav" do
+    within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
       expect(page).not_to have_content("Home")
       expect(page).to have_content("Processes")
       expect(page).to have_content("Help")
@@ -61,16 +62,16 @@ describe "Hacked menus", type: :system do
   end
 
   it "renders in the proper order" do
-    within ".main-nav li:nth-child(1)" do
+    within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:nth-child(1)" do
       expect(page).to have_content("Processes")
     end
-    within ".main-nav li:nth-child(2)" do
+    within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:nth-child(2)" do
       expect(page).to have_content("Help")
     end
-    within ".main-nav li:nth-child(3)" do
+    within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:nth-child(3)" do
       expect(page).to have_content("Blog")
     end
-    within ".main-nav li:last-child" do
+    within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:last-child" do
       expect(page).to have_content("A new beggining")
     end
   end
@@ -88,9 +89,9 @@ describe "Hacked menus", type: :system do
     end
 
     it "has target blank" do
-      expect(find(".main-nav li:nth-child(3) a")[:class]).to include("external-link-container")
-      expect(find(".main-nav li:nth-child(3) a")[:target]).to eq("_blank")
-      expect(find(".main-nav li:last-child a")[:class]).not_to include("external-link-container")
+      expect(find("#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:nth-child(3) a")["data-remote"]).to eq("true")
+      expect(find("#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:nth-child(3) a")[:target]).to eq("_blank")
+      expect(find("#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:last-child a")["data-remote"]).not_to eq("true")
     end
   end
 
@@ -103,12 +104,12 @@ describe "Hacked menus", type: :system do
           "en" => "A new beggining"
         },
         position: 10,
-        visibility: visibility
+        visibility:
       }
     end
 
     it "renders the item" do
-      within ".main-nav" do
+      within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
         expect(page).to have_content("A new beggining")
       end
     end
@@ -117,7 +118,7 @@ describe "Hacked menus", type: :system do
       let(:visibility) { "hidden" }
 
       it "do not show the menu item" do
-        within ".main-nav" do
+        within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
           expect(page).not_to have_content("A new beggining")
         end
       end
@@ -127,7 +128,7 @@ describe "Hacked menus", type: :system do
       let(:visibility) { "logged" }
 
       it "do not show the menu item" do
-        within ".main-nav" do
+        within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
           expect(page).not_to have_content("A new beggining")
         end
       end
@@ -137,26 +138,27 @@ describe "Hacked menus", type: :system do
       let(:visibility) { "non_logged" }
 
       it "do not show the menu item" do
-        within ".main-nav" do
+        within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
           expect(page).to have_content("A new beggining")
         end
       end
     end
 
     context "when user is logged" do
-      let!(:user) { create(:user, :confirmed, organization: organization) }
+      let!(:user) { create(:user, :confirmed, organization:) }
 
       before do
         switch_to_host(organization.host)
         login_as user, scope: :user
-        visit decidim.root_path
+        visit decidim_participatory_processes.participatory_processes_path
+        find_by_id("main-dropdown-summary").hover
       end
 
       context "when hidden" do
         let(:visibility) { "hidden" }
 
         it "do not show the menu item" do
-          within ".main-nav" do
+          within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
             expect(page).not_to have_content("A new beggining")
           end
         end
@@ -166,7 +168,7 @@ describe "Hacked menus", type: :system do
         let(:visibility) { "logged" }
 
         it "do not show the menu item" do
-          within ".main-nav" do
+          within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
             expect(page).to have_content("A new beggining")
           end
         end
@@ -176,25 +178,26 @@ describe "Hacked menus", type: :system do
         let(:visibility) { "non_logged" }
 
         it "do not show the menu item" do
-          within ".main-nav" do
+          within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
             expect(page).not_to have_content("A new beggining")
           end
         end
       end
 
       context "when only verified user", with_authorization_workflows: ["dummy_authorization_handler"] do
-        let!(:authorization) { create(:authorization, granted_at: Time.zone.now, user: user, name: "dummy_authorization_handler") }
+        let!(:authorization) { create(:authorization, granted_at: Time.zone.now, user:, name: "dummy_authorization_handler") }
         let(:visibility) { "verified_user" }
 
         before do
           switch_to_host(organization.host)
           login_as user, scope: :user
-          visit decidim.root_path
+          visit decidim_participatory_processes.participatory_processes_path
+          find_by_id("main-dropdown-summary").hover
         end
 
         context "when user is verified" do
           it "shows the item" do
-            within ".main-nav" do
+            within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
               expect(page).to have_content("A new beggining")
             end
           end
@@ -204,17 +207,17 @@ describe "Hacked menus", type: :system do
           let(:authorization) { nil }
 
           it "shows the item" do
-            within ".main-nav" do
+            within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
               expect(page).not_to have_content("A new beggining")
             end
           end
         end
 
         context "when verification is expired" do
-          let!(:authorization) { create(:authorization, granted_at: 3.months.ago, user: user, name: "dummy_authorization_handler") }
+          let!(:authorization) { create(:authorization, granted_at: 3.months.ago, user:, name: "dummy_authorization_handler") }
 
           it "shows the item" do
-            within ".main-nav" do
+            within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
               expect(page).not_to have_content("A new beggining")
             end
           end
@@ -223,12 +226,12 @@ describe "Hacked menus", type: :system do
 
       describe "active" do
         let!(:component) { create(:proposal_component, participatory_space: participatory_process) }
-        let!(:participatory_process2) { create :participatory_process, organization: organization }
+        let!(:participatory_process2) { create(:participatory_process, organization:) }
         let!(:component2) { create(:proposal_component, participatory_space: participatory_process2) }
         let(:menu) do
           [
             {
-              url: "/",
+              url: "/processes",
               label: {
                 "en" => "A new beggining"
               },
@@ -249,14 +252,16 @@ describe "Hacked menus", type: :system do
         context "when visiting all processes list" do
           before do
             visit decidim_participatory_processes.participatory_processes_path
+            find_by_id("main-dropdown-summary").hover
           end
 
-          it_behaves_like "has active link", "Processes"
+          it_behaves_like "has active link", "A new beggining"
         end
 
         context "when visiting a process in a custom link" do
           before do
             visit decidim_participatory_processes.participatory_process_path(participatory_process.slug)
+            find_by_id("main-dropdown-summary").hover
           end
 
           it_behaves_like "has active link", "A single process"
@@ -265,6 +270,7 @@ describe "Hacked menus", type: :system do
         context "when visiting a sublink of a process in a custom link" do
           before do
             visit main_component_path(component)
+            find_by_id("main-dropdown-summary").hover
           end
 
           it_behaves_like "has active link", "A single process"
@@ -273,17 +279,19 @@ describe "Hacked menus", type: :system do
         context "when visiting a process not in a custom link" do
           before do
             visit decidim_participatory_processes.participatory_process_path(participatory_process2.slug)
+            find_by_id("main-dropdown-summary").hover
           end
 
-          it_behaves_like "has active link", "Processes"
+          it_behaves_like "has active link", "A new beggining"
         end
 
         context "when visiting a sublink of a process not in a custom link" do
           before do
             visit main_component_path(component2)
+            find_by_id("main-dropdown-summary").hover
           end
 
-          it_behaves_like "has active link", "Processes"
+          it_behaves_like "has active link", "A new beggining"
         end
       end
 
@@ -291,7 +299,7 @@ describe "Hacked menus", type: :system do
         let(:disabled_features) { [:menu] }
 
         it "renders the normal menu" do
-          within ".main-nav" do
+          within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
             expect(page).to have_content("Home")
             expect(page).to have_content("Processes")
             expect(page).to have_content("Help")
@@ -300,14 +308,15 @@ describe "Hacked menus", type: :system do
           end
         end
 
-        it_behaves_like "has active link", "Home"
+        it_behaves_like "has active link", "Processes"
 
         context "when visiting another page" do
           before do
-            visit decidim_participatory_processes.participatory_processes_path
+            visit decidim.pages_path
+            find_by_id("main-dropdown-summary").hover
           end
 
-          it_behaves_like "has active link", "Processes"
+          it_behaves_like "has active link", "Help"
         end
       end
     end

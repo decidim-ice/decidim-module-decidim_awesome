@@ -123,7 +123,7 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
 
     /**
     * Hack to fix required checkboxes being reset
-    * Issue: https://github.com/Platoniq/decidim-module-decidim_awesome/issues/82
+    * Issue: https://github.com/decidim-ice/decidim-module-decidim_awesome/issues/82
     */
     this.$container.find(".formbuilder-checkbox-group").each((_key, group) => {
       const inputs = $(".formbuilder-checkbox input", group);
@@ -164,7 +164,7 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
 
     /**
     * Hack to fix required radio buttons "other" value
-    * Issue: https://github.com/Platoniq/decidim-module-decidim_awesome/issues/133
+    * Issue: https://github.com/decidim-ice/decidim-module-decidim_awesome/issues/133
     */
     this.$container.find(".formbuilder-radio input.other-val").on("input", (input) => {
       const $input = $(input.currentTarget);

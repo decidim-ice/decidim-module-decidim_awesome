@@ -74,7 +74,6 @@ hu:
           global:
             announcement: Közlemény
             iframe_help: 'Rakja a kódot a következő html formátumban: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. A tartalom szanálásra kerül a többi HTML-címkétől. Ügyeljen arra, hogy 100%-os szélességet használjon a képernyő kitöltéséhez.'
-            no_margins: Nincsenek margók az iframe és az oldal többi része között
           step:
             announcement: Közlemény
       awesome_map:

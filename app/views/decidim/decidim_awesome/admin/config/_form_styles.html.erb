@@ -1,11 +1,12 @@
-<div class="row column decidim_awesome-form">
+<div class="form__wrapper row column decidim_awesome-form">
   <% if config_enabled? :scoped_styles %>
-    <p class="help-text"><%= t("help.scoped_styles", scope: "decidim.decidim_awesome.admin.config.form") %>
+    <p><%= t("help.scoped_styles", scope: "decidim.decidim_awesome.admin.config.form") %>
       <%= t("help.scoped_styles_variables", scope: "decidim.decidim_awesome.admin.config.form") %>
     </p>
-    <p class="help-text" style="white-space: unset">
-      <% ["primary", "secondary", "success", "warning", "alert", "highlight", "highlight_alternative"].each do |color| %>
-        <span class="color-box <%= color %>" style="background-color: <%= current_organization.colors[color] %>"></span> var(--<%= color %>)
+    <p style="white-space: unset">
+      <% ["primary", "secondary", "tertiary", "success", "warning", "alert"].each do |color| %>
+        <span class="color-box <%= color %>" style="background-color: <%= current_organization.colors[color] %>"></span>
+        <code>var(--<%= color %>)</code>
       <% end %>
     </p>
 
@@ -18,9 +19,7 @@
       </div>
     <% end %>
 
-    <%= link_to t("new", scope: "decidim.decidim_awesome.admin.config.form_scoped_styles"), decidim_admin_decidim_awesome.scoped_styles_path, method: :post %>
+    <%= link_to t("new", scope: "decidim.decidim_awesome.admin.config.form_scoped_styles"), decidim_admin_decidim_awesome.scoped_styles_path, method: :post, class: "button button__sm button__text-secondary mr-auto" %>
 
   <% end %>
 </div>
-
-<%= javascript_pack_tag "decidim_decidim_awesome_admin_form_exit_warn" %>

@@ -12,8 +12,8 @@ module Decidim
 
         def vote_block_for(proposal, weight)
           render partial: "vote_block", locals: {
-            proposal: proposal,
-            weight: weight
+            proposal:,
+            weight:
           }
         end
 
@@ -30,7 +30,7 @@ module Decidim
         end
 
         def proposal_vote_path(weight)
-          proposal_proposal_vote_path(proposal_id: proposal.id, from_proposals_list: from_proposals_list, weight: weight)
+          proposal_proposal_vote_path(proposal_id: proposal.id, from_proposals_list:, weight:)
         end
 
         def link_options(weight)
@@ -68,7 +68,7 @@ module Decidim
             return true
           end
 
-          return true if vote_limit_enabled? && remaining_votes_count_for(current_user) <= 0
+          true if vote_limit_enabled? && remaining_votes_count_for(current_user) <= 0
         end
 
         def voted_for_any?

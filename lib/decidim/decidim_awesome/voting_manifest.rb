@@ -4,12 +4,7 @@ module Decidim
   module DecidimAwesome
     class VotingManifest
       include ActiveModel::Model
-      # From 0.27 onwards, Virtus is deprecated
-      if defined? Decidim::AttributeObject::Model
-        include Decidim::AttributeObject::Model
-      else
-        include Virtus.model
-      end
+      include Decidim::AttributeObject::Model
 
       attribute :name, Symbol
 

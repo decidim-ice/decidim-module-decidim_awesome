@@ -2,14 +2,14 @@
 
 require "spec_helper"
 
-describe "Filter Admin actions", type: :system do
+describe "Filter Admin actions" do
   let(:login_date) { 3.days.ago }
-  let(:organization) { create :organization }
-  let!(:user) { create :user, :confirmed, organization: organization }
-  let!(:admin) { create :user, :admin, :confirmed, organization: organization }
-  let!(:admin2) { create(:user, :admin, :confirmed, name: "Lorry 1", email: "test@test.com", organization: organization, created_at: 6.days.ago) }
-  let!(:manager) { create(:user, :user_manager, :confirmed, organization: organization, created_at: 5.days.ago, last_sign_in_at: login_date) }
-  let!(:manager2) { create(:user, :user_manager, :confirmed, name: "Lorry 2", email: "test2@test.com", organization: organization, created_at: 4.days.ago) }
+  let(:organization) { create(:organization) }
+  let!(:user) { create(:user, :confirmed, organization:) }
+  let!(:admin) { create(:user, :admin, :confirmed, organization:) }
+  let!(:admin2) { create(:user, :admin, :confirmed, name: "Lorry 1", email: "test@test.com", organization:, created_at: 6.days.ago) }
+  let!(:manager) { create(:user, :user_manager, :confirmed, organization:, created_at: 5.days.ago, last_sign_in_at: login_date) }
+  let!(:manager2) { create(:user, :user_manager, :confirmed, name: "Lorry 2", email: "test2@test.com", organization:, created_at: 4.days.ago) }
 
   let(:resource_controller) { Decidim::DecidimAwesome::Admin::AdminAccountabilityController }
 
@@ -174,7 +174,7 @@ describe "Filter Admin actions", type: :system do
           find(".exports.dropdown").click
           perform_enqueued_jobs { click_link "Export as CSV" }
 
-          within ".callout.success" do
+          within ".flash.success" do
             expect(page).to have_content("Export job has been enqueued. You will receive an email when it's ready.")
           end
 

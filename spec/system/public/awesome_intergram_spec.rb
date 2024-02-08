@@ -2,22 +2,22 @@
 
 require "spec_helper"
 
-describe "Show intergram chat", type: :system do
-  let!(:user) { create :user, :confirmed, organization: organization }
-  let(:organization) { create :organization, available_locales: [:en] }
+describe "Show intergram chat" do
+  let!(:user) { create(:user, :confirmed, organization:) }
+  let(:organization) { create(:organization, available_locales: [:en]) }
 
   let(:intergram_url) { "http://example.com/widget.js" }
   let(:intergram_for_admins) { true }
   let(:intergram_for_public) { true }
   let(:require_login) { false }
-  let!(:config_public) { create(:awesome_config, organization: organization, var: :intergram_for_public, value: intergram_for_public) }
-  let!(:config_admins) { create(:awesome_config, organization: organization, var: :intergram_for_admins, value: intergram_for_admins) }
-  let!(:config_public_settings) { create(:awesome_config, organization: organization, var: :intergram_for_public_settings, value: settings) }
-  let!(:config_admins_settings) { create(:awesome_config, organization: organization, var: :intergram_for_admins_settings, value: settings) }
+  let!(:config_public) { create(:awesome_config, organization:, var: :intergram_for_public, value: intergram_for_public) }
+  let!(:config_admins) { create(:awesome_config, organization:, var: :intergram_for_admins, value: intergram_for_admins) }
+  let!(:config_public_settings) { create(:awesome_config, organization:, var: :intergram_for_public_settings, value: settings) }
+  let!(:config_admins_settings) { create(:awesome_config, organization:, var: :intergram_for_admins_settings, value: settings) }
   let(:settings) do
     {
       chat_id: "some-id",
-      require_login: require_login,
+      require_login:,
       color: "some-color",
       use_floating_button: true,
       title_closed: "title-closed",
@@ -29,6 +29,8 @@ describe "Show intergram chat", type: :system do
   end
 
   before do
+    skip "Awesome chat feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
+
     stub_request(:get, /example\.com/).to_return(status: 200, body: "")
     Decidim::DecidimAwesome.config.intergram_url = intergram_url
 
@@ -79,14 +81,8 @@ describe "Show intergram chat", type: :system do
 
   it_behaves_like "shows the chat", false
 
-  if legacy_version?
-    it "has the script tag in the head" do
-      expect(page).to have_xpath("//head/script[@src='#{intergram_url}']", visible: :all)
-    end
-  else
-    it "has the script tag in the body" do
-      expect(page).to have_xpath("//body/script[@src='#{intergram_url}']", visible: :all)
-    end
+  it "has the script tag in the body" do
+    expect(page).to have_xpath("//body/script[@src='#{intergram_url}']", visible: :all)
   end
 
   context "when login is required" do
@@ -120,7 +116,7 @@ describe "Show intergram chat", type: :system do
   end
 
   context "when is and admin" do
-    let!(:user) { create(:user, :admin, :confirmed, organization: organization) }
+    let!(:user) { create(:user, :admin, :confirmed, organization:) }
 
     before do
       login_as user, scope: :user

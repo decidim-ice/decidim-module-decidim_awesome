@@ -11,10 +11,10 @@ module Decidim
 
       # rubocop:disable Metrics/CyclomaticComplexity
       # rubocop:disable Metrics/PerceivedComplexity:
-      def awesome_map_for(components, &block)
+      def awesome_map_for(components, &)
         return unless map_utility_dynamic
 
-        map = awesome_builder.map_element({ class: "google-map", id: "awesome-map-container" }, &block)
+        map = awesome_builder.map_element({ class: "google-map", id: "awesome-map-container" }, &)
         help = content_tag(:div, class: "map__help") do
           sr_content = content_tag(:p, t("screen_reader_explanation", scope: "decidim.map.dynamic"), class: "show-for-sr")
 
@@ -30,7 +30,7 @@ module Decidim
                                    type: component.manifest.name,
                                    name: translated_attribute(component.name),
                                    url: Decidim::EngineRouter.main_proxy(component).root_path,
-                                   amendments: component.manifest.name == :proposals ? Decidim::Proposals::Proposal.where(component: component).only_emendations.count : 0
+                                   amendments: component.manifest.name == :proposals ? Decidim::Proposals::Proposal.where(component:).only_emendations.count : 0
                                  }
                                end.to_json,
           "data-hide-controls" => settings_source.try(:hide_controls),
@@ -71,7 +71,6 @@ module Decidim
         try(:current_component) || self
       end
 
-      # rubocop:disable Rails/HelperInstanceVariable
       def current_categories(categories)
         return @current_categories if @current_categories
 
@@ -97,26 +96,12 @@ module Decidim
         }
         builder = map_utility_dynamic.create_builder(self, options)
 
-        # We need awesome map listeners before initialize the official map
-        unless snippets.any?(:awesome_map_styles) || snippets.any?(:awesome_map_scripts)
-          snippets.add(:awesome_map_styles, stylesheet_pack_tag("decidim_decidim_awesome_map"))
-          snippets.add(:awesome_map_scripts, javascript_pack_tag("decidim_decidim_awesome_map", defer: false))
-          snippets.add(:head, snippets.for(:awesome_map_styles))
-          snippets.add(DecidimAwesome.legacy_version? ? :head : :foot, snippets.for(:awesome_map_scripts))
-        end
-
-        unless snippets.any?(:map_styles) || snippets.any?(:map_scripts)
-          snippets.add(:map_styles, builder.stylesheet_snippets)
-          snippets.add(:map_scripts, builder.javascript_snippets)
-
-          snippets.add(:head, snippets.for(:map_styles))
-          snippets.add(DecidimAwesome.legacy_version? ? :head : :foot, snippets.for(:map_scripts))
-        end
+        append_stylesheet_pack_tag("decidim_decidim_awesome_map")
+        append_javascript_pack_tag("decidim_decidim_awesome_map")
 
         builder
       end
 
-      # rubocop:disable Style/FormatStringToken
       def append_category(category)
         @h += @golden_ratio_conjugate
         @h %= 1
@@ -129,8 +114,6 @@ module Decidim
           color: format("#%02x%02x%02x", r, g, b)
         )
       end
-      # rubocop:enable Style/FormatStringToken
-      # rubocop:enable Rails/HelperInstanceVariable
 
       # HSV values in [0..1[
       # returns [r, g, b] values from 0 to 255

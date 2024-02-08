@@ -89,7 +89,6 @@ en:
               frameBorder="0" allowFullscreen src="..."></iframe>. Content will be
               sanitized from other HTML tags. Ensure to use 100% as width to fill
               the screen.'
-            no_margins: No margins between the iframe and the rest of the page
             viewport_width: Limit maximum width to the application viewport
           step:
             announcement: Announcement
@@ -216,7 +215,7 @@ en:
               Since version 0.25, Decidim uses a new technology to upload files.<br>
               It looks that this installation needs to migrate <strong>%{total}</strong> of the old images to the new system.<br>
               You can start the process now and it will be performed in the background.
-            start_image_migrations: "\U0001F449 Start the migration process now"
+            start_image_migrations: "👉 Start the migration process now"
             title: System compatibility checks
         config:
           caution: 'NOTE: This feature heavily modifies some default behaviours that
@@ -445,10 +444,13 @@ en:
           index:
             confirm_destroy: Are you sure to remove this customization?
             edit: Edit
+            home_content_block_menu:
+              title: Home content block menu
+            menu:
+              title: Main menu
             new: New item
             remove: Remove addition
             remove_hack: Remove customization
-            title: Main menu
           new:
             save: Save
             title: New menu item
@@ -545,6 +547,9 @@ en:
             weight_2_short: 'Y:'
             weight_3: Green
             weight_3_short: 'G:'
+    meetings:
+      meetings_map:
+        view_meeting: View meeting
     proposals:
       proposals:
         orders:
@@ -552,11 +557,10 @@ en:
           supported_first: Supported first
           supported_last: Supported last
           za: Z-A (Reverse alphabetical)
+        proposal:
+          view_proposal: View proposal
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Decidim Tweaks
       decidim_awesome:
         awesome_config:
           amendments: Amendments

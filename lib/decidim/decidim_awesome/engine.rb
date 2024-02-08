@@ -4,6 +4,7 @@ require "rails"
 require "deface"
 require "decidim/core"
 require "decidim/decidim_awesome/awesome_helpers"
+require "decidim/decidim_awesome/menu"
 
 module Decidim
   module DecidimAwesome
@@ -26,7 +27,7 @@ module Decidim
           helper Decidim::LayoutHelper if respond_to?(:helper)
         end
         # Include additional helpers globally
-        ActionView::Base.include(Decidim::DecidimAwesome::AwesomeHelpers)
+        ActiveSupport.on_load(:action_view) { include Decidim::DecidimAwesome::AwesomeHelpers }
         # Also for cells
         Decidim::ViewModel.include(Decidim::DecidimAwesome::AwesomeHelpers)
 
@@ -61,11 +62,13 @@ module Decidim
           Decidim::Proposals::Proposal.include(Decidim::DecidimAwesome::HasProposalExtraFields)
           Decidim::Proposals::ProposalSerializer.include(Decidim::DecidimAwesome::ProposalSerializerOverride)
           Decidim::Proposals::ProposalType.include(Decidim::DecidimAwesome::ProposalTypeOverride)
-          Decidim::Proposals::ProposalMCell.include(Decidim::DecidimAwesome::ProposalMCellOverride)
+          Decidim::Proposals::ProposalLCell.include(Decidim::DecidimAwesome::ProposalLCellOverride)
         end
 
+        Decidim::BreadcrumbHelper.include(Decidim::DecidimAwesome::BreadcrumbHelperOverride)
         Decidim::MenuPresenter.include(Decidim::DecidimAwesome::MenuPresenterOverride)
         Decidim::MenuItemPresenter.include(Decidim::DecidimAwesome::MenuItemPresenterOverride)
+        Decidim::BreadcrumbRootMenuItemPresenter.include(Decidim::DecidimAwesome::BreadcrumbRootMenuItemPresenterOverride)
 
         # Late registering of components to take into account initializer values
         DecidimAwesome.registered_components.each do |manifest, block|
@@ -165,6 +168,21 @@ module Decidim
       initializer "decidim_decidim_awesome.add_cells_view_paths", before: "decidim_proposals.add_cells_view_paths" do
         Cell::ViewModel.view_paths << File.expand_path("#{Decidim::DecidimAwesome::Engine.root}/app/cells")
         Cell::ViewModel.view_paths << File.expand_path("#{Decidim::DecidimAwesome::Engine.root}/app/views")
+      end
+
+      initializer "decidim_decidim_awesome.register_icons" do
+        Decidim.icons.register(name: "editors-text", icon: "text", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "surveys", icon: "survey-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "brush", icon: "brush-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "layers", icon: "stack-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "pulse", icon: "pulse-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "fire", icon: "fire-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "line-chart-line", icon: "line-chart-line", category: "system", description: "", engine: :decidim_awesome)
+      end
+
+      initializer "decidim_decidim_awesome.awesome_admin_menu" do
+        Decidim::DecidimAwesome::Menu.register_menu_hacks_submenu!
+        Decidim::DecidimAwesome::Menu.register_awesome_admin_menu!
       end
     end
   end

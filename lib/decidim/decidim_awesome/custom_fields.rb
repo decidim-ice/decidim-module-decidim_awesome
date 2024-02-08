@@ -79,12 +79,12 @@ module Decidim
         @fields
       end
 
-      def deep_transform_values!(object, &block)
+      def deep_transform_values!(object, &)
         case object
         when Hash
-          object.transform_values! { |value| deep_transform_values!(value, &block) }
+          object.transform_values! { |value| deep_transform_values!(value, &) }
         when Array
-          object.map! { |e| deep_transform_values!(e, &block) }
+          object.map! { |e| deep_transform_values!(e, &) }
         else
           yield(object)
         end

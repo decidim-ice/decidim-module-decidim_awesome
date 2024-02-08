@@ -99,6 +99,8 @@ shared_examples "basic rendering" do |enabled|
     end
 
     it "has DecidimAwesome javascript and CSS" do
+      skip "The insertion of awesome javascript and CSS is disabled pending of 0.28 integration"
+
       expect(page).to have_xpath("//link[@rel='stylesheet'][contains(@href,'decidim_decidim_awesome')]", visible: :all)
       expect(page).to have_xpath("//script[contains(@src,'decidim_decidim_awesome')]", visible: :all)
     end
@@ -170,13 +172,9 @@ shared_examples "basic rendering" do |enabled|
         expect(page).to have_content("Tweaks for editors")
       end
 
-      it "has custom fields javascript" do
-        expect(page).to have_xpath("//script[contains(@src,'decidim_admin_decidim_awesome_custom_fields')]", visible: :all)
-      end
-
       it "has all admin menus" do
         menus.each do |menu|
-          within ".secondary-nav" do
+          within ".sidebar-menu" do
             expect(page).to have_link(href: "/admin/decidim_awesome/#{menu}")
           end
         end
@@ -186,13 +184,9 @@ shared_examples "basic rendering" do |enabled|
         expect(page).to have_content("System compatibility checks")
       end
 
-      it "do not have custom fields javascript" do
-        expect(page).not_to have_xpath("//script[contains(@src,'decidim_admin_decidim_awesome_custom_fields')]", visible: :all)
-      end
-
       it "has no admin menus" do
         menus.each do |menu|
-          within ".secondary-nav" do
+          within ".sidebar-menu" do
             expect(page).not_to have_link(href: "/admin/decidim_awesome/#{menu}")
           end
         end

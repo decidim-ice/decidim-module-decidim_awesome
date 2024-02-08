@@ -1,26 +1,27 @@
-@import "entrypoints/decidim_admin";
 @import "stylesheets/decidim/decidim_awesome/admin/constraints";
 @import "stylesheets/decidim/decidim_awesome/admin/custom_fields";
 @import "stylesheets/decidim/decidim_awesome/admin/auto_edits";
 @import "stylesheets/decidim/decidim_awesome/admin/check_redirections";
+@import "stylesheets/decidim/decidim_awesome/admin/user_picker";
+@import "stylesheets/decidim/decidim_awesome/admin/codemirror";
 @import "stylesheets/decidim/decidim_awesome/editors/markdown_editor";
 @import "stylesheets/decidim/decidim_awesome/editors/quill_editor";
 
 .pokecode-credits {
   float: right;
-  margin: 0 1em .5em 0;
+  margin: 0 1em 0.5em 0;
 
   // position: absolute;
   // bottom: 0;
   // right: 0;
   // margin: 1em;
-  font-size: .8em;
+  font-size: 0.8em;
 }
 
 .decidim_awesome {
   &.modal {
     .spinner {
-      @include spinner(25px, #aaa, var(--secondary), 800ms);
+      // @include spinner(25px, #aaa, var(--secondary), 800ms);
 
       vertical-align: middle;
       display: none;
@@ -69,6 +70,6 @@ tbody tr.menu_hack-addition {
 
 .secondary-nav {
   li .icon {
-    margin-right: .5rem;
+    margin-right: 0.5rem;
   }
 }

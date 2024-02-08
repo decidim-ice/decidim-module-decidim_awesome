@@ -11,14 +11,14 @@ module Decidim
       rescue_from Decidim::ActionForbidden, with: :ajax_user_has_no_permission
 
       def create
-        enforce_permission_to :create, :editor_image, awesome_config: awesome_config
+        enforce_permission_to(:create, :editor_image, awesome_config:)
 
         @form = form(EditorImageForm).from_params(form_values)
         CreateEditorImage.call(@form) do
           on(:ok) do |image|
             url = image.attached_uploader(:file).path
             url = "#{request.base_url}#{url}" unless url&.start_with?("http")
-            render json: { url: url, message: I18n.t("decidim_awesome.editor_images.create.success", scope: "decidim") }
+            render json: { url:, message: I18n.t("decidim_awesome.editor_images.create.success", scope: "decidim") }
           end
 
           on(:invalid) do |_message|

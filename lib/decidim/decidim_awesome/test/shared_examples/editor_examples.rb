@@ -24,11 +24,15 @@ end
 
 shared_examples "has drag and drop" do |rte|
   it "has help text" do
+    skip "This feature is pending to be adapted to Decidim 0.28"
+
     expect(page).to have_content("Add images by dragging & dropping or pasting them.")
   end
 
   if rte
     it "has image button" do
+      skip "This feature is pending to be adapted to Decidim 0.28"
+
       expect(page).to have_xpath("//button[@class='ql-image']")
     end
   else
@@ -46,6 +50,8 @@ end
 
 shared_examples "has markdown editor" do |images|
   it "has CodeMirror class" do
+    skip "This feature is pending to be adapted to Decidim 0.28"
+
     expect(page).to have_xpath("//div[@class='CodeMirror cm-s-paper CodeMirror-wrap']")
   end
 
@@ -55,6 +61,8 @@ shared_examples "has markdown editor" do |images|
 
   if images
     it "has help text" do
+      skip "This feature is pending to be adapted to Decidim 0.28"
+
       expect(page).to have_content("Add images by dragging & dropping or pasting them.")
     end
   else

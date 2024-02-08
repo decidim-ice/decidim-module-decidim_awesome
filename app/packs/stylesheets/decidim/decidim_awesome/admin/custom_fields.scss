@@ -9,20 +9,29 @@
   &:first-child {
     margin-left: 0;
   }
-  $colors: (
-    "primary": #{$primary},
-    "secondary": #{$secondary},
-    "success": #{$success},
-    "warning": #{$warning},
-    "alert": #{$alert},
-    "highlight": #{$highlight},
-    "highlight_alternative": #{$highlight_alternative}
-  );
 
-  @each $name, $color in $colors {
-    &.#{$name} {
-      background-color: #{$color};
-    }
+  &.primary {
+    background-color: var(--primary);
+  }
+
+  &.secondary {
+    background-color: var(--secondary);
+  }
+
+  &.tertiary {
+    background-color: var(--tertiary);
+  }
+
+  &.alert {
+    background-color: var(--alert);
+  }
+
+  &.warning {
+    background-color: var(--warning);
+  }
+
+  &.success {
+    background-color: var(--success);
   }
 }
 
@@ -35,7 +44,7 @@
 .proposal_custom_fields {
   &_editor {
     background-color: #e0e0e0;
-    padding: .5em .5em 1em;
+    padding: 0.5em 0.5em 1em;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 
@@ -72,8 +81,8 @@
       color: #555;
       background-color: #fff;
       border: 1px solid #ccc;
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-      transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
       margin: 0;
       padding: 6px 12px;
     }

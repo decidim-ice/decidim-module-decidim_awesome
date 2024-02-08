@@ -2,21 +2,23 @@
 
 require "spec_helper"
 
-describe "Custom Redirections", type: :system do
-  let(:organization) { create :organization }
+describe "Custom Redirections" do
+  let(:organization) { create(:organization) }
   let(:origin) { "/send-me-somewhere" }
   let(:destination) { "/canary-islands" }
   let(:active) { true }
   let(:pass_query) { true }
-  let!(:config) { create :awesome_config, organization: organization, var: :custom_redirects, value: redirections }
+  let!(:config) { create(:awesome_config, organization:, var: :custom_redirects, value: redirections) }
   let(:redirections) do
     {
-      origin => { destination: destination, active: active, pass_query: pass_query },
+      origin => { destination:, active:, pass_query: },
       "/a-cheaper-place" => { destination: "/lloret", active: true, pass_query: false }
     }
   end
 
   before do
+    skip "Custom redirects feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
+
     # ErrorController is only called when in production mode
     unless ENV["SHOW_EXCEPTIONS"]
       allow(Rails.application).to \

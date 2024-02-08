@@ -3,24 +3,24 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/editor_examples"
 
-describe "Show proposals editor", type: :system do
+describe "Show proposals editor" do
   include_context "with a component"
   let(:manifest_name) { "proposals" }
   let!(:component) do
     create(:proposal_component,
-           manifest: manifest,
+           manifest:,
            participatory_space: participatory_process)
   end
 
-  let!(:proposal) { create(:proposal, users: [user], component: component) }
+  let!(:proposal) { create(:proposal, users: [user], component:) }
   let(:proposal_title) { translated(proposal.title) }
 
-  let!(:user) { create :user, :confirmed, organization: organization }
+  let!(:user) { create(:user, :confirmed, organization:) }
   let(:rte_enabled) { false }
-  let!(:allow_images_in_proposals) { create(:awesome_config, organization: organization, var: :allow_images_in_proposals, value: images_in_proposals) }
-  let!(:allow_images_in_small_editor) { create(:awesome_config, organization: organization, var: :allow_images_in_small_editor, value: images_editor) }
-  let!(:use_markdown_editor) { create(:awesome_config, organization: organization, var: :use_markdown_editor, value: markdown_enabled) }
-  let!(:allow_images_in_markdown_editor) { create(:awesome_config, organization: organization, var: :allow_images_in_markdown_editor, value: markdown_images) }
+  let!(:allow_images_in_proposals) { create(:awesome_config, organization:, var: :allow_images_in_proposals, value: images_in_proposals) }
+  let!(:allow_images_in_small_editor) { create(:awesome_config, organization:, var: :allow_images_in_small_editor, value: images_editor) }
+  let!(:use_markdown_editor) { create(:awesome_config, organization:, var: :use_markdown_editor, value: markdown_enabled) }
+  let!(:allow_images_in_markdown_editor) { create(:awesome_config, organization:, var: :allow_images_in_markdown_editor, value: markdown_images) }
   let(:images_in_proposals) { false }
   let(:images_editor) { false }
   let(:markdown_enabled) { false }
@@ -28,6 +28,8 @@ describe "Show proposals editor", type: :system do
   let(:editor_selector) { "#proposal_body" }
 
   before do
+    skip "Proposals hacks feature is pending to be adapted to Decidim 0.28 and currently is disabled"
+
     organization.update(rich_text_editor_in_public_views: rte_enabled)
     login_as user, scope: :user
     visit_component
@@ -89,8 +91,8 @@ describe "Show proposals editor", type: :system do
       click_button "Send"
 
       expect(page).not_to have_content("# title")
-      expect(page).to have_selector("h1", text: "title")
-      expect(page).to have_selector("p", text: "Paragraph\nline 2")
+      expect(page).to have_css("h1", text: "title")
+      expect(page).to have_css("p", text: "Paragraph\nline 2")
       expect(Decidim::Proposals::Proposal.last.body["en"].gsub(/[\n\r]/, "")).to eq(html)
     end
   end

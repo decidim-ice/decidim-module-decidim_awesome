@@ -10,11 +10,13 @@ module Decidim::DecidimAwesome
 
       include_context "with menu hacks params"
 
+      let(:menu_name) { :menu }
+
       describe "when valid" do
         it "broadcasts :ok and creates an array" do
           expect { subject.call }.to broadcast(:ok)
 
-          items = AwesomeConfig.find_by(organization: organization, var: menu_name).value
+          items = AwesomeConfig.find_by(organization:, var: menu_name).value
           expect(items).to be_a(Array)
           expect(items.count).to eq(1)
           expect(items.first).to eq(attributes)
@@ -26,19 +28,19 @@ module Decidim::DecidimAwesome
           it "leaves only the path" do
             expect { subject.call }.to broadcast(:ok)
 
-            items = AwesomeConfig.find_by(organization: organization, var: menu_name).value
+            items = AwesomeConfig.find_by(organization:, var: menu_name).value
             expect(items.first["url"]).to eq("/some-path")
           end
         end
 
         context "and entries already exist" do
-          let!(:config) { create :awesome_config, organization: organization, var: menu_name, value: [{ url: "/another-menu", position: 10 }] }
+          let!(:config) { create(:awesome_config, organization:, var: menu_name, value: [{ url: "/another-menu", position: 10 }]) }
 
           shared_examples "has menu content" do
             it "do not removes previous entries" do
               expect { subject.call }.to broadcast(:ok)
 
-              items = AwesomeConfig.find_by(organization: organization, var: menu_name).value.sort_by { |i| i["position"] }
+              items = AwesomeConfig.find_by(organization:, var: menu_name).value.sort_by { |i| i["position"] }
               expect(items.count).to eq(2)
               expect(items.first).to eq(attributes)
               expect(items.second).to eq("url" => "/another-menu", "position" => 10)
@@ -53,23 +55,23 @@ module Decidim::DecidimAwesome
             end
 
             it "modifies the other config" do
-              expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_full_editor).value).to be(true)
-              expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_small_editor).value).to be(true)
+              expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_full_editor).value).to be(true)
+              expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_small_editor).value).to be(true)
             end
 
             it_behaves_like "has menu content"
           end
 
           context "and another configuration is updated" do
-            let!(:existing_config) { create :awesome_config, organization: organization, var: :allow_images_in_full_editor, value: false }
+            let!(:existing_config) { create(:awesome_config, organization:, var: :allow_images_in_full_editor, value: false) }
 
             before do
               another_config.call
             end
 
             it "modifies the other config" do
-              expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_full_editor).value).to be(true)
-              expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_small_editor).value).to be(true)
+              expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_full_editor).value).to be(true)
+              expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_small_editor).value).to be(true)
             end
 
             it_behaves_like "has menu content"
@@ -81,13 +83,13 @@ module Decidim::DecidimAwesome
         let(:previous_menu) do
           [{ "url" => "/some-path", "position" => 10 }]
         end
-        let!(:config) { create :awesome_config, organization: organization, var: menu_name, value: previous_menu }
+        let!(:config) { create(:awesome_config, organization:, var: menu_name, value: previous_menu) }
         let(:url) { "/some-path?querystring" }
 
         it "broadcasts :invalid and does not modifiy the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
-          expect(AwesomeConfig.find_by(organization: organization, var: menu_name).value).to eq(previous_menu)
+          expect(AwesomeConfig.find_by(organization:, var: menu_name).value).to eq(previous_menu)
         end
       end
     end

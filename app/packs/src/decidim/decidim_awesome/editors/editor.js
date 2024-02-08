@@ -124,6 +124,8 @@ export function createQuillEditor(container) {
       }
     }
   }
+  // NOTE: this is work in progress and is going to be removed
+  /* eslint-disable no-undef */
   const quill = new Quill(container, {
     modules: modules,
     formats: quillFormats,

@@ -6,8 +6,8 @@ module Decidim::DecidimAwesome::Admin
   describe Permissions do
     subject { described_class.new(user, permission_action, context).permissions.allowed? }
 
-    let(:organization) { create :organization }
-    let(:user) { create :user, :admin, :confirmed, organization: organization }
+    let(:organization) { create(:organization) }
+    let(:user) { create(:user, :admin, :confirmed, organization:) }
     let(:context) do
       {
         current_organization: organization
@@ -18,6 +18,10 @@ module Decidim::DecidimAwesome::Admin
       { scope: :admin, action: :edit_config, subject: feature }
     end
     let(:permission_action) { Decidim::PermissionAction.new(**action) }
+
+    before do
+      allow(Decidim::DecidimAwesome.config).to receive(feature).and_return(true)
+    end
 
     context "when scope is not admin" do
       let(:action) do
@@ -54,11 +58,10 @@ module Decidim::DecidimAwesome::Admin
     end
 
     context "when is scoped admin accessing" do
-      let(:user) { create :user, organization: organization }
+      let(:user) { create(:user, organization:) }
 
       before do
-        allow(user).to receive(:admin).and_return(true)
-        allow(user).to receive(:admin?).and_return(true)
+        allow(user).to receive_messages(admin: true, admin?: true)
       end
 
       it_behaves_like "permission is not set"

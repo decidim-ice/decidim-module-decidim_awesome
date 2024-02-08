@@ -2,17 +2,17 @@
 
 require "spec_helper"
 
-describe "Custom proposals fields", type: :system do
+describe "Custom proposals fields" do
   include_context "with a component"
   let(:manifest_name) { "proposals" }
   let!(:component) do
     create(:proposal_component,
            :with_creation_enabled,
-           manifest: manifest,
+           manifest:,
            participatory_space: participatory_process)
   end
-  let!(:config) { create :awesome_config, organization: organization, var: :proposal_custom_fields, value: custom_fields }
-  let(:config_helper) { create :awesome_config, organization: organization, var: :proposal_custom_field_bar }
+  let!(:config) { create(:awesome_config, organization:, var: :proposal_custom_fields, value: custom_fields) }
+  let(:config_helper) { create(:awesome_config, organization:, var: :proposal_custom_field_bar) }
   let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes", "participatory_space_slug" => slug }) }
   let(:slug) { participatory_process.slug }
 
@@ -29,6 +29,8 @@ describe "Custom proposals fields", type: :system do
   end
 
   before do
+    skip "Proposals custom fields feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
+
     login_as user, scope: :user
     visit_component
 

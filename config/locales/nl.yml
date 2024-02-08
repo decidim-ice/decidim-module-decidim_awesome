@@ -41,7 +41,6 @@ nl:
             announcement: Aankondiging
             iframe: Iframe code
             iframe_help: 'Zet je code als html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Inhoud wordt verwijderd uit andere HTML-tags. Zorg ervoor dat je 100% als breedte gebruikt om het scherm te vullen.'
-            no_margins: Geen marges tussen het iframe en de rest van de pagina
             viewport_width: Maximale breedte beperken tot applicatie viewport
           step:
             announcement: Aankondiging

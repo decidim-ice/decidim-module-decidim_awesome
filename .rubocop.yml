@@ -1,3 +1,5 @@
 inherit_from:
-  - .rubocop_ruby.yml
-  - .rubocop_rails.yml
+  - https://raw.githubusercontent.com/decidim/decidim/release/0.28-stable/.rubocop.yml
+
+RSpec/IndexedLet:
+  Enabled: false

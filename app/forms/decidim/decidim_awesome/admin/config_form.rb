@@ -17,7 +17,7 @@ module Decidim
         attribute :scoped_styles, Hash
         attribute :proposal_custom_fields, Hash
         attribute :scoped_admins, Hash
-        attribute :menu, Array[MenuForm]
+        attribute :menu, [MenuForm]
         attribute :intergram_for_admins, Boolean
         attribute :intergram_for_admins_settings, IntergramForm
         attribute :intergram_for_public, Boolean
@@ -65,7 +65,7 @@ module Decidim
 
             SassC::Engine.new(code).render
           rescue SassC::SyntaxError => e
-            errors.add(:scoped_styles, I18n.t("config.form.errors.incorrect_css", key: key, scope: "decidim.decidim_awesome.admin"))
+            errors.add(:scoped_styles, I18n.t("config.form.errors.incorrect_css", key:, scope: "decidim.decidim_awesome.admin"))
             errors.add(key.to_sym, e.message)
           end
         end
@@ -76,7 +76,7 @@ module Decidim
 
             JSON.parse(code)
           rescue JSON::ParserError => e
-            errors.add(:scoped_styles, I18n.t("config.form.errors.incorrect_json", key: key, scope: "decidim.decidim_awesome.admin"))
+            errors.add(:scoped_styles, I18n.t("config.form.errors.incorrect_json", key:, scope: "decidim.decidim_awesome.admin"))
             errors.add(key.to_sym, e.message)
           end
         end

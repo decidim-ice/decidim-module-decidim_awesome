@@ -3,14 +3,14 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/box_label_editor"
 
-describe "Admin manages custom proposal fields", type: :system do
-  let(:organization) { create :organization }
-  let!(:admin) { create(:user, :admin, :confirmed, organization: organization) }
+describe "Admin manages custom proposal fields" do
+  let(:organization) { create(:organization) }
+  let!(:admin) { create(:user, :admin, :confirmed, organization:) }
   let(:custom_fields) do
     {}
   end
-  let!(:config) { create :awesome_config, organization: organization, var: :proposal_custom_fields, value: custom_fields }
-  let(:config_helper) { create :awesome_config, organization: organization, var: :proposal_custom_field_bar }
+  let!(:config) { create(:awesome_config, organization:, var: :proposal_custom_fields, value: custom_fields) }
+  let(:config_helper) { create(:awesome_config, organization:, var: :proposal_custom_field_bar) }
   let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes", component_manifest: "proposals" }) }
   let!(:another_constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes" }) }
 
@@ -20,6 +20,8 @@ describe "Admin manages custom proposal fields", type: :system do
   let(:data3) { '{"type":"textarea","label":"Short Bio","rows":"5","className":"form-control","name":"textarea-1476748007461"}' }
 
   before do
+    skip "Custom fields feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
+
     switch_to_host(organization.host)
     login_as admin, scope: :user
     visit decidim_admin_decidim_awesome.config_path(:proposal_custom_fields)
@@ -101,8 +103,8 @@ describe "Admin manages custom proposal fields", type: :system do
         expect(page).to have_content("Street Sweeper")
         expect(page).not_to have_content("Short Bio")
 
-        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_foo)).not_to be_present
-        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar)).to be_present
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :proposal_custom_field_foo)).not_to be_present
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :proposal_custom_field_bar)).to be_present
       end
     end
 
@@ -130,8 +132,8 @@ describe "Admin manages custom proposal fields", type: :system do
           expect(page).to have_content("Processes")
         end
 
-        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar)).to be_present
-        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar).constraints.first.settings).to eq(constraint.settings)
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :proposal_custom_field_bar)).to be_present
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :proposal_custom_field_bar).constraints.first.settings).to eq(constraint.settings)
       end
 
       context "when removing a constraint" do
@@ -164,9 +166,9 @@ describe "Admin manages custom proposal fields", type: :system do
             expect(page).not_to have_content("Proposals")
           end
 
-          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar)).to be_present
-          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar).constraints.count).to eq(1)
-          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar).constraints.first).to eq(another_constraint)
+          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :proposal_custom_field_bar)).to be_present
+          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :proposal_custom_field_bar).constraints.count).to eq(1)
+          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :proposal_custom_field_bar).constraints.first).to eq(another_constraint)
         end
 
         context "and there is only one constraint" do
@@ -182,8 +184,8 @@ describe "Admin manages custom proposal fields", type: :system do
             end
 
             expect(page).to have_content("Sorry, this cannot be deleted")
-            expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar).constraints.count).to eq(1)
-            expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar).constraints.first).to eq(constraint)
+            expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :proposal_custom_field_bar).constraints.count).to eq(1)
+            expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :proposal_custom_field_bar).constraints.first).to eq(constraint)
           end
         end
       end

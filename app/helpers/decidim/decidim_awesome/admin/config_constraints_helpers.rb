@@ -8,26 +8,10 @@ module Decidim
 
         include Decidim::TranslatableAttributes
 
-        def check(status)
-          content_tag(:span, icon(status ? "check" : "x", class: "icon", aria_label: status, role: "img"), class: "text-#{status ? "success" : "alert"}")
-        end
+        delegate :menus, :config_enabled?, to: "Decidim::DecidimAwesome::Menu"
 
-        def menus
-          @menus ||= {
-            editors: config_enabled?([:allow_images_in_full_editor, :allow_images_in_small_editor, :use_markdown_editor, :allow_images_in_markdown_editor]),
-            proposals: config_enabled?([:allow_images_in_proposals,
-                                        :validate_title_min_length, :validate_title_max_caps_percent,
-                                        :validate_title_max_marks_together, :validate_title_start_with_caps,
-                                        :validate_body_min_length, :validate_body_max_caps_percent,
-                                        :validate_body_max_marks_together, :validate_body_start_with_caps]),
-            surveys: config_enabled?(:auto_save_forms),
-            styles: config_enabled?(:scoped_styles),
-            proposal_custom_fields: config_enabled?(:proposal_custom_fields),
-            admins: config_enabled?(:scoped_admins),
-            menu_hacks: config_enabled?(:menu),
-            custom_redirects: config_enabled?(:custom_redirects),
-            livechat: config_enabled?([:intergram_for_admins, :intergram_for_public])
-          }
+        def check(status)
+          content_tag(:span, icon(status ? "check-line" : "close-line", class: "icon", aria_label: status, role: "img"), class: "text-#{status ? "success" : "alert"}")
         end
 
         # returns only non :disabled vars in config
@@ -35,11 +19,6 @@ module Decidim
           vars.filter do |var|
             config_enabled? var
           end
-        end
-
-        # ensure boolean value
-        def config_enabled?(var)
-          DecidimAwesome.enabled?(var)
         end
 
         def participatory_space_manifests
@@ -71,7 +50,7 @@ module Decidim
           space = model_for_manifest(manifest)
           return {} unless space&.column_names&.include? "slug"
 
-          components = Component.where(participatory_space: space.find_by(slug: slug))
+          components = Component.where(participatory_space: space.find_by(slug:))
           components.to_h do |item|
             [item.id, "#{item.id}: #{translated_attribute(item.name)}"]
           end

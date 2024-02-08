@@ -7,6 +7,7 @@ $(() => {
     const scope = $link.data("scope");
     const $target = $(`span.awesome-auto-edit[data-scope="${scope}"]`);
     const $constraints = $(`.constraints-editor[data-key="${scope}"]`);
+
     if ($target.length === 0) {
       return;
     }
@@ -16,7 +17,7 @@ $(() => {
     const $hidden = $(`[name="config[${attribute}][${key}]"]`);
     const $multiple = $(`[name="config[${attribute}][${key}][]"]`);
     const $container = $(`.${attribute}_container[data-key="${key}"]`);
-    const $delete = $(".delete-box", $container);
+    const $delete = $("#delete-box", $container);
 
     const rebuildLabel = (text, withScope) => {
       $target.text(text);
