@@ -27,7 +27,7 @@ function updateModalContent({ detail }) {
   let spaceSlug = div.getElementsByTagName("select")[1];
   let componentManifest = div.getElementsByTagName("select")[2];
   let componentId = div.getElementsByTagName("select")[3];
-
+  console.log(div, spaceManifest, spaceSlug, componentManifest, componentId);
   spaceManifest.addEventListener("change", function(event) {
     constraintChange([{
       key: "participatory_space_manifest",
