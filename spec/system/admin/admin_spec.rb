@@ -20,7 +20,7 @@ describe "Visit the admin page" do
     switch_to_host(organization.host)
     login_as admin, scope: :user
     visit decidim_admin.root_path
-    click_link "Decidim awesome"
+    click_link_or_button "Decidim awesome"
   end
 
   it_behaves_like "javascript config vars"
@@ -33,14 +33,14 @@ describe "Visit the admin page" do
 
   context "when visiting system compatibility" do
     before do
-      click_link "System Compatibility"
+      click_link_or_button "System Compatibility"
     end
 
     it "renders the page" do
       skip "This feature is pending to be adapted to Decidim 0.28"
 
       expect(page).to have_content(/System Compatibility Checks/i)
-      expect(page).not_to have_xpath("//span[@class='text-alert']")
+      expect(page).to have_no_xpath("//span[@class='text-alert']")
       expect(page).to have_xpath("//span[@class='text-success']")
     end
 
@@ -60,7 +60,7 @@ describe "Visit the admin page" do
       before do
         skip "Custom redirects feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
 
-        click_link "Editor Hacks"
+        click_link_or_button "Editor Hacks"
       end
 
       it_behaves_like "has menu link", "editors"
@@ -85,7 +85,7 @@ describe "Visit the admin page" do
       before do
         skip "auto_save_forms feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
 
-        click_link "Surveys & Forms"
+        click_link_or_button "Surveys & Forms"
       end
 
       it_behaves_like "has menu link", "surveys"
@@ -107,7 +107,7 @@ describe "Visit the admin page" do
       before do
         skip "Proposals hacks feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
 
-        click_link "Proposals Hacks"
+        click_link_or_button "Proposals Hacks"
       end
 
       it_behaves_like "has menu link", "proposals"
@@ -124,7 +124,7 @@ describe "Visit the admin page" do
         let(:disabled_features) { [:additional_proposal_sortings] }
 
         it "renders the page" do
-          expect(page).not_to have_content("Customize sorting options for the proposals list")
+          expect(page).to have_no_content("Customize sorting options for the proposals list")
         end
       end
 
@@ -133,7 +133,7 @@ describe "Visit the admin page" do
 
         it "renders the page" do
           expect(page).to have_content(/Tweaks for proposals/i)
-          expect(page).not_to have_content("\"Rich text editor for participants\" is enabled")
+          expect(page).to have_no_content("\"Rich text editor for participants\" is enabled")
         end
       end
 
@@ -141,7 +141,7 @@ describe "Visit the admin page" do
         let(:disabled_features) { [:validate_title_min_length, :validate_title_max_caps_percent, :validate_title_max_marks_together, :validate_title_start_with_caps] }
 
         it "does not show title options" do
-          expect(page).not_to have_content("User input validations for the \"title\" field")
+          expect(page).to have_no_content("User input validations for the \"title\" field")
           expect(page).to have_content("User input validations for the \"body\" field")
         end
       end
@@ -151,7 +151,7 @@ describe "Visit the admin page" do
 
         it "does not show body options" do
           expect(page).to have_content("User input validations for the \"title\" field")
-          expect(page).not_to have_content("User input validations for the \"body\" field")
+          expect(page).to have_no_content("User input validations for the \"body\" field")
         end
       end
     end
@@ -184,7 +184,7 @@ describe "Visit the admin page" do
       before do
         skip "Live chat feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
 
-        click_link "Live Chat"
+        click_link_or_button "Live Chat"
       end
 
       it_behaves_like "has menu link", "livechat"
@@ -206,7 +206,7 @@ describe "Visit the admin page" do
       before do
         skip "Recover this tests after adapting and enabling all features"
 
-        click_link "Custom Styles"
+        click_link_or_button "Custom Styles"
       end
 
       it_behaves_like "has menu link", "styles"
@@ -232,7 +232,7 @@ describe "Visit the admin page" do
       let(:disabled_features) { [] }
 
       before do
-        click_link "Menu Tweaks"
+        click_link_or_button "Menu Tweaks"
       end
 
       it_behaves_like "has menu link", "menus/home_content_block_menu/hacks" do
@@ -266,7 +266,7 @@ describe "Visit the admin page" do
       before do
         skip "Custom redirects feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
 
-        click_link "Custom Redirections"
+        click_link_or_button "Custom Redirections"
       end
 
       it_behaves_like "has menu link", "custom_redirects" do
@@ -288,7 +288,7 @@ describe "Visit the admin page" do
   context "when visiting Scoped Admins" do
     context "when menu_hacks are enabled" do
       before do
-        click_link "Scoped Admins"
+        click_link_or_button "Scoped Admins"
       end
 
       it_behaves_like "has menu link", "admins"
@@ -314,7 +314,7 @@ describe "Visit the admin page" do
       before do
         skip "Proposal custom fields feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
 
-        click_link "Proposals Custom Fields"
+        click_link_or_button "Proposals Custom Fields"
       end
 
       it_behaves_like "has menu link", "proposal_custom_fields"

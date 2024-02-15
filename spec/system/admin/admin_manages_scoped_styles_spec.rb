@@ -21,14 +21,14 @@ describe "Admin manages scoped styles" do
 
   context "when creating a new box" do
     it "saves the content in the hash" do
-      click_link "Add a new CSS box"
+      click_link_or_button "Add a new CSS box"
 
       expect(page).to have_admin_callout("created successfully")
 
       sleep 1
       page.execute_script('document.querySelector(".CodeMirror").CodeMirror.setValue("body {background: red;}");')
 
-      click_button "Update configuration"
+      click_link_or_button "Update configuration"
 
       expect(page).to have_admin_callout("updated successfully")
       expect(page).to have_content("body {background: red;}")
@@ -42,10 +42,10 @@ describe "Admin manages scoped styles" do
 
       sleep 1
       page.execute_script("document.querySelector(\"[data-key=#{key}] .CodeMirror\").CodeMirror.setValue(\"body {background: green;}\");")
-      click_button "Update configuration"
+      click_link_or_button "Update configuration"
 
       expect(page).to have_admin_callout("updated successfully")
-      expect(page).not_to have_content("body {background: red;}")
+      expect(page).to have_no_content("body {background: red;}")
       expect(page).to have_content("body {background: green;}")
       expect(page).to have_content("body {background: blue;}")
     end
@@ -53,10 +53,10 @@ describe "Admin manages scoped styles" do
     it "shows error message if invalid" do
       sleep 1
       page.execute_script("document.querySelector(\"[data-key=#{key}] .CodeMirror\").CodeMirror.setValue(\"I am invalid CSS\");")
-      click_button "Update configuration"
+      click_link_or_button "Update configuration"
 
       expect(page).to have_admin_callout("Error updating configuration! CSS in box ##{key} is invalid")
-      expect(page).not_to have_content("body {background: red;}")
+      expect(page).to have_no_content("body {background: red;}")
       expect(page).to have_content("body {background: blue;}")
       expect(page).to have_content("I am invalid CSS")
       within ".scoped_styles_container[data-key=\"#{key}\"] .form-error" do
@@ -90,12 +90,12 @@ describe "Admin manages scoped styles" do
         expect(page).to have_content("body {background: blue;}")
 
         within ".scoped_styles_container[data-key=\"foo\"]" do
-          accept_confirm { click_link "Remove this CSS box" }
+          accept_confirm { click_link_or_button "Remove this CSS box" }
         end
 
         expect(page).to have_admin_callout("removed successfully")
         expect(page).to have_content("body {background: blue;}")
-        expect(page).not_to have_content("body {background: red;}")
+        expect(page).to have_no_content("body {background: red;}")
         expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_style_foo)).not_to be_present
         expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_style_bar)).to be_present
       end
@@ -113,7 +113,7 @@ describe "Admin manages scoped styles" do
         skip "Adapt the accountability feature to 0.28"
 
         within ".scoped_styles_container[data-key=\"foo\"]" do
-          click_button "Add case"
+          click_link_or_button "Add case"
         end
 
         select "Processes", from: "constraint_participatory_space_manifest"
@@ -147,17 +147,17 @@ describe "Admin manages scoped styles" do
           end
 
           within ".scoped_styles_container[data-key=\"bar\"]" do
-            click_link "Delete"
+            click_link_or_button "Delete"
           end
 
           within ".scoped_styles_container[data-key=\"bar\"] .constraints-editor" do
-            expect(page).not_to have_content("Processes")
+            expect(page).to have_no_content("Processes")
           end
 
           visit decidim_admin_decidim_awesome.config_path(:styles)
 
           within ".scoped_styles_container[data-key=\"bar\"] .constraints-editor" do
-            expect(page).not_to have_content("Processes")
+            expect(page).to have_no_content("Processes")
           end
 
           expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_style_bar)).to be_present

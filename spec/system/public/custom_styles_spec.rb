@@ -30,7 +30,7 @@ describe "Custom styles" do
 
   shared_examples "no extra css is added" do
     it "css is no present" do
-      expect(page.body).not_to have_content("body {background: red;}")
+      expect(page.body).to have_no_content("body {background: red;}")
     end
 
     it "css is not applyied" do
@@ -88,7 +88,7 @@ describe "Custom styles" do
 
       context "and page matches the scope" do
         before do
-          click_link "Processes"
+          click_link_or_button "Processes"
         end
 
         it_behaves_like "extra css is added"

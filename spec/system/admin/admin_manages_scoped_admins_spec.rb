@@ -24,15 +24,15 @@ describe "Admin manages scoped admins" do
 
   context "when creating a new box" do
     it "saves the content" do
-      click_link 'Add a new "Scoped Admins" group'
+      click_link_or_button 'Add a new "Scoped Admins" group'
 
       expect(page).to have_admin_callout("created successfully")
 
-      expect(page).not_to have_content(user.name.to_s)
+      expect(page).to have_no_content(user.name.to_s)
       sleep 1
       page.execute_script("$('.multiusers-select:first').append(new Option('#{user.name}', #{user.id}, true, true)).trigger('change');")
 
-      click_button "Update configuration"
+      click_link_or_button "Update configuration"
 
       expect(page).to have_admin_callout("updated successfully")
       expect(page).to have_content(user.name.to_s)
@@ -41,13 +41,13 @@ describe "Admin manages scoped admins" do
 
   shared_examples "saves content" do |_key|
     it "updates succesfully" do
-      expect(page).not_to have_content(user.name.to_s)
+      expect(page).to have_no_content(user.name.to_s)
       expect(page).to have_content(user2.name.to_s)
       expect(page).to have_content(user3.name.to_s)
 
       sleep 1
       page.execute_script("$('.multiusers-select:first').append(new Option('#{user.name}', #{user.id}, true, true)).trigger('change');")
-      click_button "Update configuration"
+      click_link_or_button "Update configuration"
 
       expect(page).to have_admin_callout("updated successfully")
       expect(page).to have_content(user.name.to_s)
@@ -83,12 +83,12 @@ describe "Admin manages scoped admins" do
         expect(page).to have_content(user3.name.to_s)
 
         within ".scoped_admins_container[data-key=\"foo\"]" do
-          accept_confirm { click_link 'Remove this "Scoped Admins" group' }
+          accept_confirm { click_link_or_button 'Remove this "Scoped Admins" group' }
         end
 
         expect(page).to have_admin_callout("removed successfully")
         expect(page).to have_content(user3.name.to_s)
-        expect(page).not_to have_content(user2.name.to_s)
+        expect(page).to have_no_content(user2.name.to_s)
         expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_admin_foo)).not_to be_present
         expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_admin_bar)).to be_present
       end
@@ -106,7 +106,7 @@ describe "Admin manages scoped admins" do
         skip "Adapt the accountability feature to 0.28"
 
         within ".scoped_admins_container[data-key=\"foo\"]" do
-          click_button "Add case"
+          click_link_or_button "Add case"
         end
 
         select "Processes", from: "constraint_participatory_space_manifest"
@@ -140,17 +140,17 @@ describe "Admin manages scoped admins" do
           end
 
           within ".scoped_admins_container[data-key=\"bar\"]" do
-            click_link "Delete"
+            click_link_or_button "Delete"
           end
 
           within ".scoped_admins_container[data-key=\"bar\"] .constraints-editor" do
-            expect(page).not_to have_content("Processes")
+            expect(page).to have_no_content("Processes")
           end
 
           visit decidim_admin_decidim_awesome.config_path(:admins)
 
           within ".scoped_admins_container[data-key=\"bar\"] .constraints-editor" do
-            expect(page).not_to have_content("Processes")
+            expect(page).to have_no_content("Processes")
           end
 
           expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_admin_bar)).to be_present

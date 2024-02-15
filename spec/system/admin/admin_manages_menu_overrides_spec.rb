@@ -41,27 +41,27 @@ describe "Admin manages hacked menus" do
       end
 
       it "allows to edit a default item" do
-        within find("tr", text: default_menu_item[:label]) do
-          click_link "Edit"
+        within "tr", text: default_menu_item[:label] do
+          click_link_or_button "Edit"
         end
 
         fill_in "menu_raw_label_en", with: "A new beggining"
-        click_button "Save"
+        click_link_or_button "Save"
 
         within "table tbody" do
           expect(page).to have_content("A new beggining")
-          expect(page).not_to have_content("Home")
+          expect(page).to have_no_content("Home")
         end
       end
 
       it "allows to create a new item" do
-        click_link "New item"
+        click_link_or_button "New item"
 
         fill_in "menu_raw_label_en", with: "Blog"
         fill_in "menu_url", with: "http://external.blog"
         fill_in "menu_position", with: "1.5"
 
-        click_button "Save"
+        click_link_or_button "Save"
 
         within "table tbody" do
           default_menu_labels.each do |label|
@@ -74,17 +74,17 @@ describe "Admin manages hacked menus" do
 
       context "when native menu has query strings" do
         it "allows to edit it" do
-          within find("tr", text: "Native") do
-            click_link "Edit"
+          within "tr", text: "Native" do
+            click_link_or_button "Edit"
           end
 
           fill_in "menu_raw_label_en", with: "Native edited"
-          click_button "Save"
+          click_link_or_button "Save"
 
           within "table tbody" do
             expect(page).to have_content("Native edited")
             expect(page).to have_content("/some-path")
-            expect(page).not_to have_content("/some-path?locale=ca")
+            expect(page).to have_no_content("/some-path?locale=ca")
           end
         end
       end
@@ -100,7 +100,7 @@ describe "Admin manages hacked menus" do
         it "shows default and overrides menu items" do
           within "table tbody" do
             expect(page).to have_content("A new beggining")
-            expect(page).not_to have_content(default_menu_item[:label])
+            expect(page).to have_no_content(default_menu_item[:label])
             (default_menu_labels - [default_menu_item[:label]]).each do |label|
               expect(page).to have_content(label)
             end
@@ -108,28 +108,28 @@ describe "Admin manages hacked menus" do
         end
 
         it "can be edited" do
-          within find("tr", text: "A new beggining") do
-            click_link "Edit"
+          within "tr", text: "A new beggining" do
+            click_link_or_button "Edit"
           end
 
           fill_in "menu_raw_label_en", with: "Another thing"
-          click_button "Save"
+          click_link_or_button "Save"
 
           within "table tbody" do
             expect(page).to have_content("Another thing")
-            expect(page).not_to have_content("A new beggining")
-            expect(page).not_to have_content("Home")
+            expect(page).to have_no_content("A new beggining")
+            expect(page).to have_no_content("Home")
           end
         end
 
         it "can be deleted" do
-          within find("tr", text: "A new beggining") do
-            accept_confirm { click_link "Remove customization" }
+          within "tr", text: "A new beggining" do
+            accept_confirm { click_link_or_button "Remove customization" }
           end
 
           within "table tbody" do
             expect(page).to have_content(default_menu_item[:label])
-            expect(page).not_to have_content("A new beggining")
+            expect(page).to have_no_content("A new beggining")
           end
         end
       end
@@ -152,26 +152,26 @@ describe "Admin manages hacked menus" do
         end
 
         it "can be edited" do
-          within find("tr", text: "A new link") do
-            click_link "Edit"
+          within "tr", text: "A new link" do
+            click_link_or_button "Edit"
           end
 
           fill_in "menu_raw_label_en", with: "Another thing"
-          click_button "Save"
+          click_link_or_button "Save"
 
           within "table tbody" do
             expect(page).to have_content("Another thing")
-            expect(page).not_to have_content("A new link")
+            expect(page).to have_no_content("A new link")
           end
         end
 
         it "can be deleted" do
-          within find("tr", text: "A new link") do
-            accept_confirm { click_link "Remove addition" }
+          within "tr", text: "A new link" do
+            accept_confirm { click_link_or_button "Remove addition" }
           end
 
           within "table tbody" do
-            expect(page).not_to have_content("A new link")
+            expect(page).to have_no_content("A new link")
           end
         end
       end

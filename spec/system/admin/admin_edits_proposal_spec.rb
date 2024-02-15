@@ -86,7 +86,7 @@ describe "Admin edits proposals" do
       sleep 1
       page.execute_script("$('[name=\"faker-inscrybmde\"]:first')[0].InscrybMDE.value('#{text}')")
 
-      click_button "Update"
+      click_link_or_button "Update"
 
       expect(Decidim::Proposals::Proposal.last.body["en"].gsub(/[\n\r]/, "")).to eq(html)
     end

@@ -24,14 +24,14 @@ describe "Filter Admin actions" do
 
     visit decidim_admin_decidim_awesome.admin_accountability_path
 
-    click_link "List global admins"
+    click_link_or_button "List global admins"
   end
 
   def apply_admin_filter(options, filter)
     within(".filters__section") do
       find_link("Filter").hover
       find_link(options).hover
-      click_link(filter)
+      click_link_or_button(filter)
     end
   end
 
@@ -45,7 +45,7 @@ describe "Filter Admin actions" do
 
     it "displays the filter labels" do
       find("a.dropdown").hover
-      expect(page).not_to have_content("Participatory space type")
+      expect(page).to have_no_content("Participatory space type")
       expect(page).to have_content("Role type")
 
       find("a", text: "Role type").hover
@@ -63,7 +63,7 @@ describe "Filter Admin actions" do
       expect(page).to have_content(admin2.name, count: 1)
       expect(page).to have_content(manager.name, count: 1)
       expect(page).to have_content(manager2.name, count: 1)
-      expect(page).not_to have_content(user.name, count: 1)
+      expect(page).to have_no_content(user.name, count: 1)
 
       expect(page).to have_content(login_date.strftime("%d/%m/%Y %H:%M"))
       expect(page).to have_content("Currently active", count: 4)
@@ -172,7 +172,7 @@ describe "Filter Admin actions" do
           search_by_date(6.days.ago, 5.days.ago)
 
           find(".exports.dropdown").click
-          perform_enqueued_jobs { click_link "Export as CSV" }
+          perform_enqueued_jobs { click_link_or_button "Export as CSV" }
 
           within ".flash.success" do
             expect(page).to have_content("Export job has been enqueued. You will receive an email when it's ready.")

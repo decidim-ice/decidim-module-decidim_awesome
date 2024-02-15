@@ -13,7 +13,7 @@ end
 shared_examples "forbids awesome access" do
   it "does not have awesome link" do
     visit decidim_admin.root_path
-    expect(page).not_to have_content("Decidim awesome")
+    expect(page).to have_no_content("Decidim awesome")
   end
 
   describe "forbids module access" do
@@ -116,13 +116,13 @@ shared_examples "allows all admin routes" do
   end
 
   it "allows the assemblies page" do
-    click_link "Assemblies"
+    click_link_or_button "Assemblies"
 
     expect(page).to have_content("New assembly")
   end
 
   it "allows the processes page" do
-    click_link "Processes"
+    click_link_or_button "Processes"
 
     expect(page).to have_content("New process")
   end
@@ -138,20 +138,20 @@ shared_examples "allows scoped admin routes" do
   end
 
   it "allows the assemblies page" do
-    click_link "Assemblies"
+    click_link_or_button "Assemblies"
 
     expect(page).to have_content("New assembly")
   end
 
   describe "forbids processes" do
     before do
-      click_link "Processes"
+      click_link_or_button "Processes"
     end
 
     it_behaves_like "redirects to index"
 
     it "is not a process page" do
-      expect(page).not_to have_content("New process")
+      expect(page).to have_no_content("New process")
     end
   end
 end
@@ -167,7 +167,7 @@ end
 shared_examples "has no admin link" do
   it "has no menu link" do
     within "header" do
-      expect(page).not_to have_css("#admin-bar", text: "Admin dashboard")
+      expect(page).to have_no_css("#admin-bar", text: "Admin dashboard")
     end
   end
 end
@@ -199,7 +199,7 @@ shared_examples "shows partial admin links in the frontend" do
 
     it_behaves_like "has no admin link"
     it "has no Edit button" do
-      expect(page).not_to have_link(href: "/admin/processes")
+      expect(page).to have_no_link(href: "/admin/processes")
     end
   end
 end
@@ -215,7 +215,7 @@ shared_examples "can edit assembly" do
       ca: "Assamblea editada",
       es: "Asamblea editada"
     )
-    click_button "Update"
+    click_link_or_button "Update"
     expect(page).to have_admin_callout("successfully")
   end
 end
@@ -264,7 +264,7 @@ shared_examples "can manage component" do
     expect(page).to have_content("Title")
     expect(page).to have_content(proposal.title["en"])
 
-    click_link "Edit proposal"
+    click_link_or_button "Edit proposal"
     expect(page).to have_content("Update proposal")
     fill_in_i18n(
       :proposal_title,
@@ -273,14 +273,14 @@ shared_examples "can manage component" do
       ca: "Proposta editada",
       es: "Propuesta editada"
     )
-    click_button "Update"
+    click_link_or_button "Update"
     expect(page).to have_admin_callout("successfully")
   end
 
   it "can create a proposal" do
     visit manage_component_path(component)
 
-    click_link "New proposal"
+    click_link_or_button "New proposal"
     expect(page).to have_content("Create proposal")
     fill_in_i18n(
       :proposal_title,
@@ -296,7 +296,7 @@ shared_examples "can manage component" do
       ca: "Body creat",
       es: "Body creat"
     )
-    click_button "Create"
+    click_link_or_button "Create"
     expect(page).to have_admin_callout("successfully")
   end
 end
@@ -353,7 +353,7 @@ shared_examples "shows component partial admin links in the frontend" do
 
     it_behaves_like "has no admin link"
     it "has no Edit button" do
-      expect(page).not_to have_link(href: manage_component_path(another_component))
+      expect(page).to have_no_link(href: manage_component_path(another_component))
     end
   end
 end
@@ -406,7 +406,7 @@ shared_examples "allows edit any group process" do
       ca: "Proces grup editat",
       es: "Grupo de procesos editado"
     )
-    click_button "Update"
+    click_link_or_button "Update"
     expect(page).to have_admin_callout("successfully")
   end
 end

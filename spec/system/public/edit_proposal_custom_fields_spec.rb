@@ -45,14 +45,14 @@ describe "Custom proposals fields" do
   shared_examples "has custom fields" do |textarea|
     it "displays custom fields" do
       expect(page).to have_content("Title")
-      expect(page).not_to have_content("Body")
+      expect(page).to have_no_content("Body")
       expect(page).to have_content("Full Name")
       expect(page).to have_content("Occupation")
       expect(page).to have_content("Moth Man")
       expect(page).to have_xpath("//select[@class='form-control'][@id='select-1476748006618'][@user-data='option-2']")
       expect(page).to have_content("Short Bio")
       expect(page).to have_xpath(textarea)
-      expect(page).not_to have_css(".form-error.is-visible")
+      expect(page).to have_no_css(".form-error.is-visible")
     end
   end
 
@@ -62,7 +62,7 @@ describe "Custom proposals fields" do
       fill_in :"text-1476748004559", with: "Lucky Luke"
       fill_in :"textarea-1476748007461", with: "I shot everything"
 
-      click_button button
+      click_link_or_button button
       sleep 1
       expect(page).to have_content("Full Name")
       if xpath
@@ -75,7 +75,7 @@ describe "Custom proposals fields" do
       expect(page).to have_content("Occupation")
       expect(page).to have_content("Moth Man")
       expect(page).to have_content("Short Bio")
-      expect(page).not_to have_css(".form-error.is-visible")
+      expect(page).to have_no_css(".form-error.is-visible")
     end
   end
 
@@ -83,12 +83,12 @@ describe "Custom proposals fields" do
     it "displays title and body" do
       expect(page).to have_content("Title")
       expect(page).to have_content("Body")
-      expect(page).not_to have_content("Full Name")
+      expect(page).to have_no_content("Full Name")
       expect(page).to have_content("Occupation")
       expect(page).to have_content("Moth Man")
-      expect(page).not_to have_content("Short Bio")
+      expect(page).to have_no_content("Short Bio")
       expect(page).to have_content("I shot the sheriff")
-      expect(page).not_to have_css(".form-error.is-visible")
+      expect(page).to have_no_css(".form-error.is-visible")
     end
   end
 
@@ -96,8 +96,8 @@ describe "Custom proposals fields" do
     let(:author) { user }
 
     before do
-      click_link proposal.title["en"]
-      click_link "Edit proposal"
+      click_link_or_button proposal.title["en"]
+      click_link_or_button "Edit proposal"
     end
 
     it_behaves_like "has custom fields", "//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the sheriff']"
@@ -108,8 +108,8 @@ describe "Custom proposals fields" do
 
       it "displays the translation" do
         expect(page).to have_content("Nickname")
-        expect(page).not_to have_content("activemodel.attributes.user.nickname")
-        expect(page).not_to have_content("Short Bio")
+        expect(page).to have_no_content("activemodel.attributes.user.nickname")
+        expect(page).to have_no_content("Short Bio")
       end
     end
 
@@ -131,11 +131,11 @@ describe "Custom proposals fields" do
 
       it "has custom fields with content in the first textarea" do
         expect(page).to have_content("Title")
-        expect(page).not_to have_content("Body")
+        expect(page).to have_no_content("Body")
         expect(page).to have_content("Full Name")
         expect(page).to have_content("Occupation")
         expect(page).to have_content("Moth Man")
-        expect(page).not_to have_xpath("//select[@class='form-control'][@id='select-1476748006618'][@user-data='option-2']")
+        expect(page).to have_no_xpath("//select[@class='form-control'][@id='select-1476748006618'][@user-data='option-2']")
         expect(page).to have_content("Short Bio")
         expect(page).to have_xpath("//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the Sheriff\\nbut not Deputy']")
         expect(page).to have_css(".form-error.is-visible")
@@ -151,15 +151,15 @@ describe "Custom proposals fields" do
         expect(page).to have_content("Occupation")
         expect(page).to have_content("Moth Man")
         expect(page).to have_content("Short Bio")
-        expect(page).not_to have_css(".form-error.is-visible")
+        expect(page).to have_no_css(".form-error.is-visible")
       end
     end
   end
 
   context "when amending the proposal" do
     before do
-      click_link proposal.title["en"]
-      click_link "Amend Proposal"
+      click_link_or_button proposal.title["en"]
+      click_link_or_button "Amend Proposal"
     end
 
     it "is amendment editor page" do
@@ -194,8 +194,8 @@ describe "Custom proposals fields" do
     end
 
     before do
-      click_link proposal.title["en"]
-      click_link "Amend Proposal"
+      click_link_or_button proposal.title["en"]
+      click_link_or_button "Amend Proposal"
     end
 
     it "is amendment editor page" do
@@ -216,9 +216,9 @@ describe "Custom proposals fields" do
     let!(:collaborative_draft) { create(:collaborative_draft, users: [author, user], body: answer, component:) }
 
     before do
-      click_link "Access collaborative drafts"
-      click_link collaborative_draft.title
-      click_link "Edit collaborative draft"
+      click_link_or_button "Access collaborative drafts"
+      click_link_or_button collaborative_draft.title
+      click_link_or_button "Edit collaborative draft"
     end
 
     it_behaves_like "has custom fields", "//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the sheriff']"
