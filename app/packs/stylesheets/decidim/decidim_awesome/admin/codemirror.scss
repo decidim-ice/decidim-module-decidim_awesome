@@ -6,20 +6,22 @@
     }
 
     > .CodeMirror {
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
-      border-top: 0.5em solid #e0e0e0;
-      border-right: 0.5em solid #e0e0e0;
-      border-bottom: 0.5em solid #e0e0e0;
-      min-height: 6em;
+      border-radius: 4px;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border: 5px solid #eee;
+      border-left: none;
+      min-height: 4em;
       height: auto;
-      max-height: 40em;
       resize: vertical;
       overflow: vertical !important;
+      padding: 0;
+      margin: 0;
+      width: 100%;
 
       > .CodeMirror-scroll {
         > .CodeMirror-gutters {
-          background: #e0e0e0;
+          background: #eee;
         }
       }
     }

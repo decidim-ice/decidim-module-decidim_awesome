@@ -1,6 +1,7 @@
 /* eslint func-style: "off", require-jsdoc: "off", no-use-before-define: "off" */
 
 function constraintChange(data) {
+  // console.log("constraintChange", data)
   // Identify the modal element to be updated
   const [{ modalId }] = data;
   const modal = window.Decidim.currentDialogs[modalId];
@@ -22,12 +23,13 @@ function constraintChange(data) {
 }
 
 function updateModalContent({ detail }) {
-  let div = detail.querySelector("[id^=constraint-form");
-  let spaceManifest = div.getElementsByTagName("select")[0];
-  let spaceSlug = div.getElementsByTagName("select")[1];
-  let componentManifest = div.getElementsByTagName("select")[2];
-  let componentId = div.getElementsByTagName("select")[3];
-  console.log(div, spaceManifest, spaceSlug, componentManifest, componentId);
+  const div = detail.querySelector("[id^=constraint-form");
+  const spaceManifest = div.getElementsByTagName("select")[0];
+  const spaceSlug = div.getElementsByTagName("select")[1];
+  const componentManifest = div.getElementsByTagName("select")[2];
+  const componentId = div.getElementsByTagName("select")[3];
+  // console.log("remote-modal:loaded", detail);
+
   spaceManifest.addEventListener("change", function(event) {
     constraintChange([{
       key: "participatory_space_manifest",
@@ -63,3 +65,24 @@ function updateModalContent({ detail }) {
 }
 
 document.addEventListener("remote-modal:loaded", (event) => updateModalContent(event));
+document.addEventListener("remote-modal:failed", (event) => console.log("failed", event));
+
+// Rails AJAX events, this will update the parent page constrains
+document.body.addEventListener("ajax:error", (responseText) => {
+  // console.log("ajax:error", responseText)
+  const container = document.querySelector(`.constraints-editor[data-key="${responseText.detail[0].key}"]`);
+  const callout = container.querySelector(".flash");
+  callout.hidden = false;
+  callout.classList.add("alert");
+  callout.getElementsByTagName("p")[0].innerHTML = `${responseText.detail[0].message}: <strong>${responseText.detail[0].error}</strong>`;
+});
+
+document.body.addEventListener("ajax:success", (responseText) => {
+  // console.log("ajax:success", responseText)
+  const container = document.querySelector(`.constraints-editor[data-key="${responseText.detail[0].key}"]`);
+  const callout = container.querySelector(".flash");
+  callout.hidden = false;
+  callout.classList.add("success");
+  callout.getElementsByTagName("p")[0].innerHTML = responseText.detail[0].message;
+  container.outerHTML = responseText.detail[0].html;
+});

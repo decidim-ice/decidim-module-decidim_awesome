@@ -14,17 +14,18 @@
         <% end %>
 
         <div class="inline-flex items-center gap-1 ml-10">
-          <button id="<%= "edit-#{key}" %>" type="button" name="button" class="edit-condition button button__sm button__secondary" data-dialog-open="<%= "edit-modal-#{key}" %>" data-dialog-remote-url="<%= constraint_path(id: constraint.id, key: key) %>">
+          <button id="<%= "edit-#{key}" %>" type="button" name="button" class="edit-condition button button__xs button__transparent-secondary" data-dialog-open="<%= "edit-modal-#{key}" %>" data-dialog-remote-url="<%= constraint_path(id: constraint.id, key: key, fetch_uncacher: Time.current.to_i) %>">
             <%= t ".edit" %>
           </button>
 
-          <%= link_to t(".delete"), constraint_path(id: constraint.id), remote: true, method: :delete, class: "button button__sm button__transparent-secondary" %>
+          <%= link_to t(".delete"), constraint_path(id: constraint.id), remote: true, method: :delete, class: "button button__xs button__transparent-primary" %>
         </div>
       </li>
     <% end %>
   </ul>
 
-  <button id="<%= "new-#{key}" %>" type="button" name="button" class="add-condition button button__sm button__secondary" data-dialog-open="<%= "new-modal-#{key}" %>" data-dialog-remote-url="<%= new_constraint_path(key: key) %>">
+  <button id="<%= "new-#{key}" %>" type="button" name="button" class="add-condition button button__xs button__secondary" data-dialog-open="<%= "new-modal-#{key}" %>" data-dialog-remote-url="<%= new_constraint_path(key: key, fetch_uncacher: Time.current.to_i) %>">
+    <%= icon "add-box-line" %>
     <%= t ".add_condition" %>
   </button>
 
