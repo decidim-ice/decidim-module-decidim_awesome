@@ -1,83 +1,91 @@
-$(() => {
+document.addEventListener("DOMContentLoaded", () => {
   let CustomFieldsBuilders = window.CustomFieldsBuilders || [];
 
-  $("body").on("click", "a.awesome-auto-edit", (ev) => {
-    ev.preventDefault();
-    const $link = $(ev.currentTarget);
-    const scope = $link.data("scope");
-    const $target = $(`span.awesome-auto-edit[data-scope="${scope}"]`);
-    const $constraints = $(`.constraints-editor[data-key="${scope}"]`);
+  document.querySelectorAll("a.awesome-auto-edit").forEach((link) => {
+    link.addEventListener("click", (ev) => {
+      ev.preventDefault();
+      const scope = link.dataset.scope;
+      const target = document.querySelector(`span.awesome-auto-edit[data-scope="${scope}"]`);
+      const constraints = document.querySelector(`.constraints-editor[data-key="${scope}"]`);
 
-    if ($target.length === 0) {
-      return;
-    }
-
-    const key = $target.data("key");
-    const attribute = $target.data("var");
-    const $hidden = $(`[name="config[${attribute}][${key}]"]`);
-    const $multiple = $(`[name="config[${attribute}][${key}][]"]`);
-    const $container = $(`.${attribute}_container[data-key="${key}"]`);
-    const $delete = $("#delete-box", $container);
-
-    const rebuildLabel = (text, withScope) => {
-      $target.text(text);
-      $target.attr("data-key", text);
-      $target.data("key", text);
-      if (withScope) {
-        $target.attr("data-scope", withScope);
-        $target.data("scope", withScope);
-        $link.attr("data-scope", withScope);
-        $link.data("scope", withScope);
+      if (!target) {
+        return;
       }
-      $link.show();
-    };
 
-    const rebuildHmtl = (result) => {
-      rebuildLabel(result.key, result.scope);
-      $constraints.replaceWith(result.html);
-      // update hidden input if exists
-      $hidden.attr("name", `config[${attribute}][${result.key}]`);
-      $multiple.attr("name", `config[${attribute}][${result.key}][]`);
-      $container.data("key", result.key);
-      $container.attr("data-key", result.key);
-      $delete.attr("href", $delete.attr("href").replace(`key=${key}`, `key=${result.key}`))
-      CustomFieldsBuilders.forEach((builder) => {
-        if (builder.key === key) {
-          builder.key = result.key;
+      const key = target.dataset.key;
+      const attribute = target.dataset.var;
+      const hidden = document.querySelector(`[name="config[${attribute}][${key}]"]`);
+      const multiple = document.querySelector(`[name="config[${attribute}][${key}][]"]`);
+      const container = document.querySelector(`.${attribute}_container[data-key="${key}"]`);
+      const deleteBox = container.querySelector("#delete-box");
+
+      const rebuildLabel = (text, withScope) => {
+        target.innerText = text;
+        target.dataset.key = text;
+        if (withScope) {
+          target.dataset.scope = withScope;
+          link.dataset.scope = withScope;
+        }
+        link.style.display = "";
+      };
+
+      const rebuildHtml = (result) => {
+        // console.log(result, hidden, multiple, attribute, "key", key)
+        rebuildLabel(result.key, result.scope);
+        constraints.outerHTML = result.html;
+        hidden.setAttribute("name", `config[${attribute}][${result.key}]`);
+        if (multiple) {
+          multiple.setAttribute("name", `config[${attribute}][${result.key}][]`);
+        }
+        container.dataset.key = result.key;
+        container.setAttribute("data-key", result.key);
+        deleteBox.setAttribute("href", deleteBox.getAttribute("href").replace(`key=${key}`, `key=${result.key}`));
+        CustomFieldsBuilders.forEach((builder) => {
+          if (builder.key === key) {
+            builder.key = result.key;
+          }
+        });
+        // Reinitialize Decidim DOM events
+        // console.log("Reinitializing Decidim DOM events", "constraints", constraints, "container", container);
+        // Remove existing dialogs
+        Reflect.deleteProperty(window.Decidim.currentDialogs, `edit-modal-${scope}`);
+        Reflect.deleteProperty(window.Decidim.currentDialogs, `new-modal-${scope}`);
+        const editModal = document.getElementById(`edit-modal-${result.scope}`);
+        const newModal = document.getElementById(`new-modal-${result.scope}`);
+        // Rebuild the manual handling of remote modals
+        document.dispatchEvent(new CustomEvent("ajax:loaded:modals", { detail: [editModal, newModal] }));
+      };
+
+      target.innerHTML = `<input class="awesome-auto-edit" data-scope="${scope}" type="text" value="${key}">`;
+      const input = target.querySelector(`input.awesome-auto-edit[data-scope="${scope}"]`);
+      link.style.display = "none";
+      input.focus();
+      let config = {};
+      config[attribute] = true;
+      input.addEventListener("keypress", (evt) => {
+        if (["Enter", "13", "10"].includes(evt.code)) {
+          evt.preventDefault();
+          fetch(window.DecidimAwesome.rename_scope_label_path, {
+            method: "POST",
+            headers: {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+            },
+            body: JSON.stringify({ key: key, scope: scope, attribute: attribute, text: input.value, config: config })
+          }).
+            then((response) => response.json()).
+            then((result) => rebuildHtml(result)).
+            catch((err) => {
+              console.error("Error saving key", key, "ERR:", err);
+              rebuildLabel(key);
+            });
         }
       });
-    };
 
-    $target.html(`<input class="awesome-auto-edit" data-scope="${scope}" type="text" value="${key}">`);
-    const $input = $(`input.awesome-auto-edit[data-scope="${scope}"]`);
-    $link.hide();
-    $input.select();
-    $input.on("keypress", (evt) => {
-      if (evt.code === "Enter" || evt.code === "13" || evt.code === "10") {
-        evt.preventDefault();
-        $.ajax(
-          {
-            type: "POST",
-            url: window.DecidimAwesome.rename_scope_label_path,
-            dataType: "json",
-            headers: {
-              "X-CSRF-Token": $("meta[name=csrf-token]").attr("content")
-            },
-            data: { key: key,
-              scope: scope,
-              attribute: attribute,
-              text: $input.val()
-            }
-          }).
-          done((result) => rebuildHmtl(result)).
-          fail((err) => {
-            console.error("Error saving key", key, "ERR:", err);
-            rebuildLabel(key);
-          });
-      }
-    });
-    $input.on("blur", () => {
-      rebuildLabel(key);
+      input.addEventListener("blur", () => {
+        rebuildLabel(key);
+      });
     });
   });
 });

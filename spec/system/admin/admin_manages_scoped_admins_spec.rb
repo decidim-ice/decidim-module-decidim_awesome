@@ -77,8 +77,6 @@ describe "Admin manages scoped admins" do
       end
 
       it "updates the content" do
-        skip "Adapt the accountability feature to 0.28"
-
         expect(page).to have_content(user2.name.to_s)
         expect(page).to have_content(user3.name.to_s)
 
@@ -103,8 +101,6 @@ describe "Admin manages scoped admins" do
       end
 
       it "adds a new config helper var" do
-        skip "Adapt the accountability feature to 0.28"
-
         within ".scoped_admins_container[data-key=\"foo\"]" do
           click_link_or_button "Add case"
         end
@@ -133,8 +129,6 @@ describe "Admin manages scoped admins" do
         end
 
         it "removes the helper config var" do
-          skip "Adapt the accountability feature to 0.28"
-
           within ".scoped_admins_container[data-key=\"bar\"] .constraints-editor" do
             expect(page).to have_content("Processes")
           end
