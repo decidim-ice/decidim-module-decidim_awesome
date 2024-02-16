@@ -75,9 +75,10 @@ const bindModalEvents = (detail) => {
 
 
 const initializeDialog = (dialog) => {
-  // console.log("initializeDialog", dialog)
   dialog.addEventListener("open.dialog", async (el) => {
-    const url = el.explicitOriginalTarget.dataset.constraintsUrl;
+    // console.log("open.dialog", el)
+    const button = document.querySelector(`[data-dialog-open="${el.target.id}"]`)
+    const url = button.dataset.constraintsUrl;
     fetchConstraints(url, (res) => renderModal(el.target, res));
   });
 };

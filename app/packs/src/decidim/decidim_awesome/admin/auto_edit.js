@@ -52,6 +52,10 @@ document.addEventListener("DOMContentLoaded", () => {
         Reflect.deleteProperty(window.Decidim.currentDialogs, `new-modal-${scope}`);
         const editModal = document.getElementById(`edit-modal-${result.scope}`);
         const newModal = document.getElementById(`new-modal-${result.scope}`);
+        if (container) {
+          // reloads dialogs (modals)
+          document.dispatchEvent(new CustomEvent("ajax:loaded", { detail: container }));
+        }
         // Rebuild the manual handling of remote modals
         document.dispatchEvent(new CustomEvent("ajax:loaded:modals", { detail: [editModal, newModal] }));
       };

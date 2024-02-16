@@ -110,16 +110,12 @@ describe "Admin manages scoped styles" do
       end
 
       it "adds a new config helper var" do
-        within ".scoped_styles_container[data-key=\"foo\"]" do
-          click_link_or_button "Add case"
-        end
+        find("#new-scoped_style_foo").click
 
         select "Processes", from: "constraint_participatory_space_manifest"
-        within "#new-modal-scoped_style_foo-content" do
+        within "#new-modal-scoped_style_foo" do
           find("*[type=submit]").click
         end
-
-        sleep 2
 
         within ".scoped_styles_container[data-key=\"foo\"] .constraints-editor" do
           expect(page).to have_content("Processes")
