@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       const rebuildHtml = (result) => {
-        // console.log(result, hidden, multiple, attribute, "key", key)
         rebuildLabel(result.key, result.scope);
         constraints.outerHTML = result.html;
         hidden.setAttribute("name", `config[${attribute}][${result.key}]`);
@@ -66,20 +65,33 @@ document.addEventListener("DOMContentLoaded", () => {
       input.focus();
       let config = {};
       config[attribute] = true;
+      let token = document.querySelector('meta[name="csrf-token"]');
       input.addEventListener("keypress", (evt) => {
-        if (["Enter", "13", "10"].includes(evt.code)) {
+        if (evt.key === "Enter" || evt.keyCode === 13 || evt.keyCode ===  10) {
+          if (key === input.value) {
+            rebuildLabel(key);
+            return;
+          }
+          // console.log("Saving key", key, "to", input.value, "with scope", scope);
           evt.preventDefault();
           fetch(window.DecidimAwesome.rename_scope_label_path, {
             method: "POST",
             headers: {
               "Accept": "application/json, text/plain, */*",
               "Content-Type": "application/json",
-              "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+              "X-CSRF-Token": token && token.getAttribute("content")
             },
             body: JSON.stringify({ key: key, scope: scope, attribute: attribute, text: input.value, config: config })
           }).
-            then((response) => response.json()).
-            then((result) => rebuildHtml(result)).
+            then((response) => {
+              if (!response.ok) {
+                throw response;
+              }
+              return response.json()
+            }).
+            then((result) => {
+              rebuildHtml(result)
+            }).
             catch((err) => {
               console.error("Error saving key", key, "ERR:", err);
               rebuildLabel(key);
