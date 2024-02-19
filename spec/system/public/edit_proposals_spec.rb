@@ -90,7 +90,7 @@ describe "Show proposals editor" do
 
       click_link_or_button "Send"
 
-      expect(page).to have_no_content("# title")
+      expect(page).not_to have_content("# title")
       expect(page).to have_css("h1", text: "title")
       expect(page).to have_css("p", text: "Paragraph\nline 2")
       expect(Decidim::Proposals::Proposal.last.body["en"].gsub(/[\n\r]/, "")).to eq(html)

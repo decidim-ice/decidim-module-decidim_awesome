@@ -44,13 +44,13 @@ describe "Admin edits proposals" do
 
   it "displays custom fields" do
     expect(page).to have_content("Title")
-    expect(page).to have_no_content("Body")
+    expect(page).not_to have_content("Body")
     expect(page).to have_content("Full Name")
     expect(page).to have_content("Occupation")
     expect(page).to have_content("Street Sweeper")
     expect(page).to have_content("Short Bio")
     expect(page).to have_xpath("//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the sheriff']")
-    expect(page).to have_no_css(".form-error.is-visible")
+    expect(page).not_to have_css(".form-error.is-visible")
 
     within "#proposal-body-tabs" do
       click_link_or_button "Català"
@@ -70,10 +70,10 @@ describe "Admin edits proposals" do
     it "displays normal proposal editor" do
       expect(page).to have_content("Title")
       expect(page).to have_content("Body")
-      expect(page).to have_no_content("Full Name")
-      expect(page).to have_no_content("Occupation")
-      expect(page).to have_no_content("Street Sweeper")
-      expect(page).to have_no_content("Short Bio")
+      expect(page).not_to have_content("Full Name")
+      expect(page).not_to have_content("Occupation")
+      expect(page).not_to have_content("Street Sweeper")
+      expect(page).not_to have_content("Short Bio")
     end
   end
 
@@ -82,12 +82,12 @@ describe "Admin edits proposals" do
 
     it "displays the scoped fields" do
       expect(page).to have_content("Title")
-      expect(page).to have_no_content("Body")
+      expect(page).not_to have_content("Body")
       expect(page).to have_content("Full Name")
       expect(page).to have_content("Occupation")
       expect(page).to have_content("Street Sweeper")
-      expect(page).to have_no_content("Short Bio")
-      expect(page).to have_no_css(".form-error.is-visible")
+      expect(page).not_to have_content("Short Bio")
+      expect(page).not_to have_css(".form-error.is-visible")
     end
   end
 

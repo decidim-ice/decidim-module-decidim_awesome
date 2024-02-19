@@ -70,7 +70,7 @@ describe "Custom Redirections" do
         visit goto
 
         expect(page).to have_current_path("#{destination}?#{query}")
-        expect(page).to have_no_current_path(destination)
+        expect(page).not_to have_current_path(destination)
       end
 
       context "when destination has already a query string" do

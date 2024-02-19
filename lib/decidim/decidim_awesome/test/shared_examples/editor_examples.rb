@@ -2,12 +2,12 @@
 
 shared_examples "has no drag and drop" do |rte|
   it "has no help text" do
-    expect(page).to have_no_content("Add images by dragging & dropping or pasting them.")
+    expect(page).not_to have_content("Add images by dragging & dropping or pasting them.")
   end
 
   if rte
     it "has image button" do
-      expect(page).to have_no_xpath("//button[@class='ql-image']")
+      expect(page).not_to have_xpath("//button[@class='ql-image']")
     end
   else
     it "has no paste event" do
@@ -67,17 +67,17 @@ shared_examples "has markdown editor" do |images|
     end
   else
     it "has no help text" do
-      expect(page).to have_no_content("Add images by dragging & dropping or pasting them.")
+      expect(page).not_to have_content("Add images by dragging & dropping or pasting them.")
     end
   end
 end
 
 shared_examples "has no markdown editor" do
   it "has CodeMirror class" do
-    expect(page).to have_no_xpath("//div[@class='CodeMirror cm-s-paper CodeMirror-wrap']")
+    expect(page).not_to have_xpath("//div[@class='CodeMirror cm-s-paper CodeMirror-wrap']")
   end
 
   it "has toolbar" do
-    expect(page).to have_no_xpath("//div[@class='editor-toolbar']")
+    expect(page).not_to have_xpath("//div[@class='editor-toolbar']")
   end
 end
