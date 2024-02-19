@@ -106,7 +106,7 @@ describe "Admin manages scoped admins" do
         end
 
         select "Processes", from: "constraint_participatory_space_manifest"
-        within "#new-modal-scoped_admin_foo-content" do
+        within "#new-modal-scoped_admin_foo" do
           find("*[type=submit]").click
         end
 
