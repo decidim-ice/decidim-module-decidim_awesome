@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const key = target.dataset.key;
       const attribute = target.dataset.var;
-      const hidden = document.querySelector(`[name="config[${attribute}][${key}]"]`);
-      const multiple = document.querySelector(`[name="config[${attribute}][${key}][]"]`);
+      const inputField = document.querySelector(`[name="config[${attribute}][${key}]"]`);
+      const multipleField = document.querySelector(`[name="config[${attribute}][${key}][]"]`);
       const container = document.querySelector(`.${attribute}_container[data-key="${key}"]`);
       const deleteBox = container.querySelector("#delete-box");
 
@@ -32,9 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const rebuildHtml = (result) => {
         rebuildLabel(result.key, result.scope);
         constraints.outerHTML = result.html;
-        hidden.setAttribute("name", `config[${attribute}][${result.key}]`);
-        if (multiple) {
-          multiple.setAttribute("name", `config[${attribute}][${result.key}][]`);
+        if (inputField) {
+          inputField.setAttribute("name", `config[${attribute}][${result.key}]`);
+        }
+        if (multipleField) {
+          multipleField.setAttribute("name", `config[${attribute}][${result.key}][]`);
         }
         container.dataset.key = result.key;
         container.setAttribute("data-key", result.key);
