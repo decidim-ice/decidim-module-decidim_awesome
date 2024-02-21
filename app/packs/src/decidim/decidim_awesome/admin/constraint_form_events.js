@@ -76,9 +76,10 @@ const bindModalEvents = (detail) => {
 
 const initializeDialog = (dialog) => {
   dialog.addEventListener("open.dialog", async (el) => {
-    // console.log("open.dialog", el)
-    const button = document.querySelector(`[data-dialog-open="${el.target.id}"]`)
+    const dialog = window.Decidim.currentDialogs[el.target.id];
+    const button = dialog && dialog.openingTrigger;
     const url = button.dataset.constraintsUrl;
+    // console.log("open.dialog", el, url, "dialog",dialog);
     fetchConstraints(url, (res) => renderModal(el.target, res));
   });
 };
