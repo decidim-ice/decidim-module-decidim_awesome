@@ -2,4 +2,4 @@
 
 <%= amend_button_for @proposal %>
 
-<%= render "decidim/decidim_awesome/amendments/modal" if @proposal.emendations.where(decidim_amendments: { state: :evaluating }).count.positive? && @proposal.amendable? %>
+<%= render "decidim/decidim_awesome/amendments/modal" if @proposal.emendations.not_hidden.where(decidim_amendments: { state: :evaluating }).count.positive? && @proposal.amendable? %>

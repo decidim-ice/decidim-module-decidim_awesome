@@ -16,6 +16,9 @@ module Decidim
     let!(:amendable) { create(:proposal, component: component) }
     let!(:emendation) { create(:proposal, title: { en: "An emendation" }, component: component) }
     let!(:amendment) { create(:amendment, amendable: amendable, emendation: emendation, state: amendment_state) }
+    let!(:hidden_emendation) { create(:proposal, :hidden, title: { en: "A stupid emendation" }, component: component) }
+    let!(:hidden_amendment) { create(:amendment, amendable: amendable, emendation: hidden_emendation, state: "evaluating") }
+
     let(:amendment_state) { "evaluating" }
     let(:limit_pending_amendments) { true }
     let(:amendments_enabled) { true }
@@ -50,7 +53,7 @@ module Decidim
         get action, params: params
 
         expect(response).to have_http_status(:redirect)
-        expect(flash[:alert]).to include("Sorry, it can only be one pending amendment at a time")
+        expect(flash[:alert]).to include("Sorry, there can only be one pending amendment at a time")
         expect(flash[:alert]).to include(emendation.title["en"])
       end
     end
@@ -72,6 +75,8 @@ module Decidim
         let(:component) { create(:component, participatory_space: participatory_process, settings: settings, step_settings: step_settings) }
         let!(:amendable) { create(:dummy_resource, component: component) }
         let!(:emendation) { create(:dummy_resource, component: component) }
+        let(:hidden_emendation) { nil }
+        let(:hidden_amendment) { nil }
 
         it_behaves_like "renders the template", :new
       end

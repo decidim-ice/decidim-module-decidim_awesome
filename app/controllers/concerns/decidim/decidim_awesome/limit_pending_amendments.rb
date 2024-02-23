@@ -10,18 +10,24 @@ module Decidim
         before_action :limit_pending_amendments, only: [:new, :create]
         # rubocop:enable Rails/LexicallyScopedActionFilter
 
+        private
+
         def limit_pending_amendments
           return unless amendable&.amendments && amendable&.component&.settings.try(:limit_pending_amendments)
           return unless amendable.component.settings.try(:amendments_enabled)
           return unless amendable.component.current_settings.try(:amendment_creation_enabled)
 
-          existing = amendable.amendments.where(state: :evaluating)
-          return unless existing.count.positive?
+          return unless existing_emendations.any?
 
-          emendation = existing.first.emendation
-
-          flash[:alert] = t("pending_limit_reached", scope: "decidim.decidim_awesome.amendments", emendation: translated_attribute(emendation.title))
+          flash[:alert] = t("pending_limit_reached", scope: "decidim.decidim_awesome.amendments", emendation: translated_attribute(existing_emendations.first.title))
           redirect_back(fallback_location: Decidim::ResourceLocatorPresenter.new(amendable).path)
+        end
+
+        def existing_emendations
+          @existing_emendations ||= begin
+            existing = amendable.amendments.where(state: :evaluating)
+            existing.filter_map { |amendment| !amendment.emendation&.hidden? && amendment.emendation }
+          end
         end
       end
     end

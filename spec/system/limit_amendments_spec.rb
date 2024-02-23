@@ -19,6 +19,8 @@ describe "Custom proposals fields", type: :system do
   let!(:proposal) { create :proposal, component: component }
   let!(:emendation) { create(:proposal, title: { en: "An emendation" }, component: component) }
   let!(:amendment) { create(:amendment, amendable: proposal, emendation: emendation, state: amendment_state) }
+  let!(:hidden_emendation) { create(:proposal, :hidden, title: { en: "A stupid emendation" }, component: component) }
+  let!(:hidden_amendment) { create(:amendment, amendable: proposal, emendation: hidden_emendation, state: "evaluating") }
 
   let(:amendment_state) { "evaluating" }
   let(:limit_pending_amendments) { true }
