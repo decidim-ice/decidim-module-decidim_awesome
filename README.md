@@ -274,6 +274,16 @@ This view is used by the proposal cell in lists. It must implement the vote butt
 
 Note that, it is strongly recommended to add and HTML tag element with the id `proposal-<%= proposal.id %>-votes-count` so the Ajax vote re-loader can work. Even if you don't use (in this case use a `style="display:none"` attribute), this is because the Ajax reloader always look for this element and throw JavaScript errors if not.
 
+#### 18. Limiting amendments in proposals
+
+By default, when proposals can be amended, any number of amendments can be created.
+
+This feature allows admins to configure a specific Proposal's component to limit the number of evaluating amendments that can be created to one.
+Note that this only applies to amendments being in the state "evaluating", not to accepted or rejected.
+
+This option is disable by default, must be enabled in the component's configuration:
+
+![Limiting amendments](examples/limit_amendments.png)
 
 #### To be continued...
 
