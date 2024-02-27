@@ -27,7 +27,9 @@ module Decidim
           def map_model(model)
             self.title = translated_attribute(model.title)
             self.body = translated_attribute(model.body)
-            self.private_body = translated_attribute(model.private_body)
+
+            private_field = model.awesome_private_proposal_field || PrivateProposalField.new(proposal_id: model.id)
+            self.private_body = private_field.private_body
 
             self.user_group_id = model.user_groups.first&.id
             return unless model.categorization

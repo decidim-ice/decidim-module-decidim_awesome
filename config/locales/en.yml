@@ -57,13 +57,17 @@ en:
         visibility: Visibility
       proposal:
         proposal_custom_fields: Custom fields
+
   decidim:
     proposals:
       admin:
         proposals:
           show:
             private_body: Private body
+        exports: 
+          private_proposals: "Proposals with Private Data"
     admin:
+    
       filters:
         admin_accountability:
           admin_role_type:
@@ -165,6 +169,9 @@ en:
             collaborator: Collaborator
             moderator: Moderator
             valuator: Valuator
+        custom_proposal_fields:
+          public_fields: Public Fields
+          private_fields: Private Fields
         checks:
           index:
             admin_head_tags: Awesome tags included in the admin application header

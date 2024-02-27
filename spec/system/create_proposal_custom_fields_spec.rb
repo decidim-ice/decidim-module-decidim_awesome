@@ -5,6 +5,8 @@ require "spec_helper"
 describe "Custom proposals fields", type: :system do
   include_context "with a component"
   let(:manifest_name) { "proposals" }
+
+  let!(:participatory_process) { create :participatory_process, organization: organization }
   let!(:component) do
     create(:proposal_component,
            :with_creation_enabled,
@@ -12,6 +14,7 @@ describe "Custom proposals fields", type: :system do
            participatory_space: participatory_process)
   end
   let!(:config) { create :awesome_config, organization: organization, var: :proposal_custom_fields, value: custom_fields }
+  let!(:config) { create :awesome_config, organization: organization, var: :private_proposal_custom_fields, value: private_custom_fields }
   let(:config_helper) { create :awesome_config, organization: organization, var: :proposal_custom_field_bar }
   let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes", "participatory_space_slug" => slug }) }
   let(:slug) { participatory_process.slug }
@@ -20,11 +23,18 @@ describe "Custom proposals fields", type: :system do
   let(:data1) { '{"type":"text","label":"Full Name","subtype":"text","className":"form-control","name":"text-1476748004559"}' }
   let(:data2) { '{"type":"select","label":"Occupation","className":"form-control","name":"select-1476748006618","values":[{"label":"Street Sweeper","value":"option-1","selected":true},{"label":"Moth Man","value":"option-2"},{"label":"Chemist","value":"option-3"}]}' }
   let(:data3) { '{"type":"textarea","label":"Short Bio","rows":"5","className":"form-control","name":"textarea-1476748007461"}' }
+  let(:private_data1) { '{"type":"text","label":"Phone Number","subtype":"text","className":"form-control","name":"text-1476748004579"}' }
 
   let(:custom_fields) do
     {
       "foo" => "[#{data1},#{data2}]",
       "bar" => "[#{data3}]"
+    }
+  end
+
+  let(:private_custom_fields) do
+    {
+      "foo" => "[#{private_data1}]"
     }
   end
 
@@ -43,6 +53,11 @@ describe "Custom proposals fields", type: :system do
     expect(page).to have_content("Street Sweeper")
     expect(page).to have_content("Short Bio")
     expect(page).not_to have_css(".form-error.is-visible")
+  end
+
+  it "displays private custom fields" do 
+    expect(page).to have_content("Phone Number")
+    expect(page).to have_css("#foo_private")    
   end
 
   context "when there are not custom fields" do

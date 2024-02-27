@@ -80,6 +80,7 @@ module Decidim
         def private_json_syntax
           private_proposal_custom_fields.each do |key, code|
             next unless code
+
             JSON.parse(code)
           rescue JSON::ParserError => e
             errors.add(:scoped_styles, I18n.t("config.form.errors.incorrect_json", key: key, scope: "decidim.decidim_awesome.admin"))

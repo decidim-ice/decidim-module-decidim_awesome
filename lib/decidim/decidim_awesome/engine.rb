@@ -45,9 +45,11 @@ module Decidim
                                     :validate_body_max_caps_percent,
                                     :validate_body_max_marks_together,
                                     :validate_body_start_with_caps])
+          Decidim::Proposals::Proposal.include(Decidim::DecidimAwesome::ProposalDecorator)
+          Decidim::Proposals::ProposalPresenter.include(Decidim::DecidimAwesome::Proposals::ProposalPresenterOverride)
           Decidim::Proposals::ProposalWizardCreateStepForm.include(Decidim::DecidimAwesome::Proposals::ProposalWizardCreateStepFormOverride)
           Decidim::Proposals::UpdateProposal.include(Decidim::DecidimAwesome::Proposals::UpdateProposalOverride)
-          Decidim::Proposals::ProposalPresenter.include(Decidim::DecidimAwesome::Proposals::ProposalPresenterOverride)
+          Decidim::Proposals::CreateProposal.include(Decidim::DecidimAwesome::Proposals::CreateProposalOverride)
         end
 
         # override user's admin property

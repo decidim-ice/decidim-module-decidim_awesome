@@ -7,8 +7,7 @@
 
 </div>
 
-<script type="text/javascript">
-
+<%= javascript_tag nonce: true do -%>
 (function() {
   var div = document.getElementById('constraint-form-<%= params[:id] %>');
   var space_manifest = div.getElementsByTagName("select")[0];
@@ -53,4 +52,4 @@
   });
 })();
 
-</script>
+<% end -%>

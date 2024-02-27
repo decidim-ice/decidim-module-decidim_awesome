@@ -14,7 +14,7 @@ module Decidim
           def safe_content?
             awesome_proposal_custom_fields.present? || decidim_safe_content?
           end
-          
+
           # replace normal method to draw the editor
           def text_editor_for_proposal_body(form)
             custom_fields = awesome_proposal_custom_fields
@@ -24,7 +24,6 @@ module Decidim
             custom_field_form = render_proposal_custom_fields_override(custom_fields, form, :body)
             custom_field_form + render_proposal_custom_fields_override(awesome_private_proposal_custom_fields, form, :private_body)
           end
-
 
           # replace admin method to draw the editor (multi lang)
           def admin_editor_for_proposal_body(form)
@@ -58,16 +57,16 @@ module Decidim
 
             safe_join [label_tabs, tabs_content]
           end
+
           def render_proposal_custom_fields_override(fields, form, name, locale = nil)
             custom_fields = Decidim::DecidimAwesome::CustomFields.new(fields)
             custom_fields.translate!
 
-            proposal_body = nil
-            if name == :private_body
-              proposal_body = form_presenter.private_body(extras: false, all_locales: locale.present?)
-            else
-              proposal_body = form_presenter.body(extras: false, all_locales: locale.present?)
-            end
+            proposal_body = if name == :private_body
+                              form_presenter.private_body(extras: false)
+                            else
+                              form_presenter.body(extras: false, all_locales: locale.present?)
+                            end
             body = if locale.present?
                      proposal_body.with_indifferent_access[locale]
                    else

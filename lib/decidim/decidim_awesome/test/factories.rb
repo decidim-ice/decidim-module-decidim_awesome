@@ -41,4 +41,8 @@ FactoryBot.define do
     manifest_name { :awesome_iframe }
     participatory_space { create(:participatory_process, :with_steps, organization: organization) }
   end
+
+  factory :private_proposal_field, class: "Decidim::DecidimAwesome::PrivateProposalField" do 
+    proposal { create :proposal }
+  end
 end

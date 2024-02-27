@@ -9,7 +9,7 @@
       <div class="proposal_custom_fields_container" data-key="<%= key %>">
         <%= render(partial: "decidim/decidim_awesome/admin/config/autoedit_box_label", locals: { var: "proposal_custom_fields", key: key, scope: "proposal_custom_field_#{key}", delete_path: decidim_admin_decidim_awesome.proposal_custom_field_path(key: key) }) %>
         <div id="<%= key %>_public">
-          <div><%= "Public fields" %></div>
+          <div class="decidim_awesome-custom-fields__title"><%= t("public_fields", scope: "decidim.decidim_awesome.admin.custom_proposal_fields") %></div>
           <%= hidden_field_tag "#{key}0", value, name: "config[proposal_custom_fields][#{key}]" %>
           <div class="proposal_custom_fields_editor" data-key="proposal_custom_fields">
             <div class="loading-spinner"></div>
@@ -17,8 +17,8 @@
         </div>
 
         <div id="<%= key %>_private">
-          <div><%= "Private fields" %></div>
-          <%= hidden_field_tag "#{key}1", form.object.private_proposal_custom_fields[key] || "[]", name: "config[private_proposal_custom_fields][#{key}]" %>
+        <div class="decidim_awesome-custom-fields__title"><%= t("private_fields", scope: "decidim.decidim_awesome.admin.custom_proposal_fields") %></div>
+        <%= hidden_field_tag "#{key}1", form.object.private_proposal_custom_fields[key] || "[]", name: "config[private_proposal_custom_fields][#{key}]" %>
           <div class="proposal_custom_fields_editor proposal_custom_fields_editor--private" data-key="private_proposal_custom_fields">
             <div class="loading-spinner"></div>
           </div>
