@@ -45,14 +45,14 @@ describe "Custom proposals fields" do
   shared_examples "has custom fields" do |textarea|
     it "displays custom fields" do
       expect(page).to have_content("Title")
-      expect(page).not_to have_content("Body")
+      expect(page).to have_no_content("Body")
       expect(page).to have_content("Full Name")
       expect(page).to have_content("Occupation")
       expect(page).to have_content("Moth Man")
       expect(page).to have_xpath("//select[@class='form-control'][@id='select-1476748006618'][@user-data='option-2']")
       expect(page).to have_content("Short Bio")
       expect(page).to have_xpath(textarea)
-      expect(page).not_to have_css(".form-error.is-visible")
+      expect(page).to have_no_css(".form-error.is-visible")
     end
   end
 
@@ -75,7 +75,7 @@ describe "Custom proposals fields" do
       expect(page).to have_content("Occupation")
       expect(page).to have_content("Moth Man")
       expect(page).to have_content("Short Bio")
-      expect(page).not_to have_css(".form-error.is-visible")
+      expect(page).to have_no_css(".form-error.is-visible")
     end
   end
 
@@ -83,12 +83,12 @@ describe "Custom proposals fields" do
     it "displays title and body" do
       expect(page).to have_content("Title")
       expect(page).to have_content("Body")
-      expect(page).not_to have_content("Full Name")
+      expect(page).to have_no_content("Full Name")
       expect(page).to have_content("Occupation")
       expect(page).to have_content("Moth Man")
-      expect(page).not_to have_content("Short Bio")
+      expect(page).to have_no_content("Short Bio")
       expect(page).to have_content("I shot the sheriff")
-      expect(page).not_to have_css(".form-error.is-visible")
+      expect(page).to have_no_css(".form-error.is-visible")
     end
   end
 
@@ -108,8 +108,8 @@ describe "Custom proposals fields" do
 
       it "displays the translation" do
         expect(page).to have_content("Nickname")
-        expect(page).not_to have_content("activemodel.attributes.user.nickname")
-        expect(page).not_to have_content("Short Bio")
+        expect(page).to have_no_content("activemodel.attributes.user.nickname")
+        expect(page).to have_no_content("Short Bio")
       end
     end
 
@@ -131,11 +131,11 @@ describe "Custom proposals fields" do
 
       it "has custom fields with content in the first textarea" do
         expect(page).to have_content("Title")
-        expect(page).not_to have_content("Body")
+        expect(page).to have_no_content("Body")
         expect(page).to have_content("Full Name")
         expect(page).to have_content("Occupation")
         expect(page).to have_content("Moth Man")
-        expect(page).not_to have_xpath("//select[@class='form-control'][@id='select-1476748006618'][@user-data='option-2']")
+        expect(page).to have_no_xpath("//select[@class='form-control'][@id='select-1476748006618'][@user-data='option-2']")
         expect(page).to have_content("Short Bio")
         expect(page).to have_xpath("//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the Sheriff\\nbut not Deputy']")
         expect(page).to have_css(".form-error.is-visible")
@@ -151,7 +151,7 @@ describe "Custom proposals fields" do
         expect(page).to have_content("Occupation")
         expect(page).to have_content("Moth Man")
         expect(page).to have_content("Short Bio")
-        expect(page).not_to have_css(".form-error.is-visible")
+        expect(page).to have_no_css(".form-error.is-visible")
       end
     end
   end
