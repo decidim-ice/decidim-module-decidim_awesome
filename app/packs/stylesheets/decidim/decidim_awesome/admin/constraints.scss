@@ -3,38 +3,51 @@
   padding: 1rem;
   border-radius: 5px;
 
+  .label {
+    font-weight: normal;
+    font-size: 0.8rem;
+    padding: 1px 5px;
+
+    &.participatory_space_manifest {
+      background-color: #f7b230;
+    }
+
+    &.participatory_space_slug {
+      background-color: #19b380;
+    }
+
+    &.component_manifest {
+      background-color: #b31919;
+    }
+
+    &.component_id {
+      background-color: #ee449c;
+    }
+
+    &.constraint {
+      &-none {
+        background-color: #ff3000;
+      }
+    }
+  }
+
   .constraints-list {
     padding: inherit;
     margin: 0 0 1em;
     list-style-type: disc;
 
-    li {
-      margin: 0 1em 0 0;
-      padding: 0;
+    .button__xs {
+      padding: 1px 5px;
+      font-size: 0.8rem;
     }
 
     .label {
-      &.participatory_space_manifest {
-        background-color: #f7b230;
-      }
+      color: #fff;
+    }
 
-      &.participatory_space_slug {
-        background-color: #19b380;
-      }
-
-      &.component_manifest {
-        background-color: #b31919;
-      }
-
-      &.component_id {
-        background-color: #ee449c;
-      }
-
-      &.constraint {
-        &-none {
-          background-color: #ff3000;
-        }
-      }
+    li {
+      margin: 0 1em 0 0;
+      padding: 0;
     }
 
     &.inactive {

@@ -34,8 +34,8 @@ describe "Filter Admin actions" do
 
     visit decidim_admin.root_path
 
-    click_link "Participants"
-    click_link "Admin accountability"
+    click_link_or_button "Participants"
+    click_link_or_button "Admin accountability"
   end
 
   with_versioning do
@@ -91,7 +91,7 @@ describe "Filter Admin actions" do
         apply_filter("Participatory space type", "Participatory processes")
 
         find(".exports.dropdown").click
-        perform_enqueued_jobs { click_link "Export as CSV" }
+        perform_enqueued_jobs { click_link_or_button "Export as CSV" }
 
         within ".flash.success" do
           expect(page).to have_content("Export job has been enqueued. You will receive an email when it's ready.")

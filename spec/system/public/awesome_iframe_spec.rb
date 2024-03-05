@@ -22,8 +22,8 @@ describe "Show awesome iframe" do
   before do
     component.update!(settings:)
     visit_component
-    click_link "Change cookie settings"
-    click_button "Accept all"
+    click_link_or_button "Change cookie settings"
+    click_link_or_button "Accept all"
   end
 
   it "shows the iframe wrapper" do
@@ -73,9 +73,9 @@ describe "Show awesome iframe" do
 
     it "removes the script" do
       within ".awesome-iframe" do
-        expect(page).not_to have_css("script")
+        expect(page).to have_no_css("script")
         expect(page).to have_css("iframe")
-        expect(page).not_to have_text("XSS")
+        expect(page).to have_no_text("XSS")
         expect { page.driver.browser.switch_to.alert }.to raise_error(Selenium::WebDriver::Error::NoSuchAlertError)
       end
     end

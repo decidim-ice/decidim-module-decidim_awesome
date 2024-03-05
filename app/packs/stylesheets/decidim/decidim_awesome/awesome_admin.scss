@@ -1,4 +1,5 @@
 @import "stylesheets/decidim/decidim_awesome/admin/constraints";
+@import "stylesheets/decidim/decidim_awesome/admin/custom_styles";
 @import "stylesheets/decidim/decidim_awesome/admin/custom_fields";
 @import "stylesheets/decidim/decidim_awesome/admin/auto_edits";
 @import "stylesheets/decidim/decidim_awesome/admin/check_redirections";
@@ -6,6 +7,11 @@
 @import "stylesheets/decidim/decidim_awesome/admin/codemirror";
 @import "stylesheets/decidim/decidim_awesome/editors/markdown_editor";
 @import "stylesheets/decidim/decidim_awesome/editors/quill_editor";
+
+// Remove the 20% right column from the item__edit class
+.item__edit {
+  @apply grid grid-cols-1 md:grid-cols-[100%_0%] mb-8;
+}
 
 .pokecode-credits {
   float: right;

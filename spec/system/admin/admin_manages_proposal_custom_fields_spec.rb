@@ -29,7 +29,7 @@ describe "Admin manages custom proposal fields" do
 
   context "when creating a new box" do
     it "saves the content" do
-      click_link 'Add a new "custom fields" box'
+      click_link_or_button 'Add a new "custom fields" box'
 
       expect(page).to have_admin_callout("created successfully")
 
@@ -62,7 +62,7 @@ describe "Admin manages custom proposal fields" do
       expect(page).to have_content("Full Name")
       expect(page).to have_content("Occupation")
       expect(page).to have_content("Street Sweeper")
-      expect(page).not_to have_content("Short Bio")
+      expect(page).to have_no_content("Short Bio")
 
       page.execute_script("$('.proposal_custom_fields_container[data-key=\"foo\"] .proposal_custom_fields_editor')[0].FormBuilder.actions.setData(#{data})")
       find("*[type=submit]").click
@@ -70,8 +70,8 @@ describe "Admin manages custom proposal fields" do
       sleep 2
       expect(page).to have_admin_callout("updated successfully")
       expect(page).to have_content("Full Name")
-      expect(page).not_to have_content("Occupation")
-      expect(page).not_to have_content("Street Sweeper")
+      expect(page).to have_no_content("Occupation")
+      expect(page).to have_no_content("Street Sweeper")
       expect(page).to have_content("Short Bio")
     end
 
@@ -90,18 +90,18 @@ describe "Admin manages custom proposal fields" do
         expect(page).to have_content("Full Name")
         expect(page).to have_content("Occupation")
         expect(page).to have_content("Street Sweeper")
-        expect(page).not_to have_content("Short Bio")
+        expect(page).to have_no_content("Short Bio")
 
         within ".proposal_custom_fields_container[data-key=\"foo\"]" do
-          accept_confirm { click_link 'Remove this "custom fields" box' }
+          accept_confirm { click_link_or_button 'Remove this "custom fields" box' }
         end
 
         sleep 2
         expect(page).to have_admin_callout("removed successfully")
-        expect(page).not_to have_content("Full Name")
+        expect(page).to have_no_content("Full Name")
         expect(page).to have_content("Occupation")
         expect(page).to have_content("Street Sweeper")
-        expect(page).not_to have_content("Short Bio")
+        expect(page).to have_no_content("Short Bio")
 
         expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :proposal_custom_field_foo)).not_to be_present
         expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :proposal_custom_field_bar)).to be_present
@@ -118,7 +118,7 @@ describe "Admin manages custom proposal fields" do
 
       it "adds a new config helper var" do
         within ".proposal_custom_fields_container[data-key=\"foo\"]" do
-          click_link "Add case"
+          click_link_or_button "Add case"
         end
 
         select "Processes", from: "constraint_participatory_space_manifest"
@@ -152,18 +152,18 @@ describe "Admin manages custom proposal fields" do
 
           within ".proposal_custom_fields_container[data-key=\"bar\"]" do
             within first(".constraints-list li") do
-              click_link "Delete"
+              click_link_or_button "Delete"
             end
           end
 
           within ".proposal_custom_fields_container[data-key=\"bar\"] .constraints-editor" do
-            expect(page).not_to have_content("Proposals")
+            expect(page).to have_no_content("Proposals")
           end
 
           visit decidim_admin_decidim_awesome.config_path(:proposal_custom_fields)
 
           within ".proposal_custom_fields_container[data-key=\"bar\"] .constraints-editor" do
-            expect(page).not_to have_content("Proposals")
+            expect(page).to have_no_content("Proposals")
           end
 
           expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :proposal_custom_field_bar)).to be_present
@@ -176,7 +176,7 @@ describe "Admin manages custom proposal fields" do
 
           it "do not remove the helper config var" do
             within ".proposal_custom_fields_container[data-key=\"bar\"]" do
-              click_link "Delete"
+              click_link_or_button "Delete"
             end
 
             within ".proposal_custom_fields_container[data-key=\"bar\"] .constraints-editor" do

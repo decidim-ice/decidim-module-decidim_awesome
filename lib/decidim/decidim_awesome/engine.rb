@@ -179,11 +179,6 @@ module Decidim
         Decidim.icons.register(name: "fire", icon: "fire-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "line-chart-line", icon: "line-chart-line", category: "system", description: "", engine: :decidim_awesome)
       end
-
-      initializer "decidim_decidim_awesome.awesome_admin_menu" do
-        Decidim::DecidimAwesome::Menu.register_menu_hacks_submenu!
-        Decidim::DecidimAwesome::Menu.register_awesome_admin_menu!
-      end
     end
   end
 end

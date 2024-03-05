@@ -6,6 +6,7 @@ module Decidim
       # Constraints configuration controller for config keys
       class ConstraintsController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
+        include Decidim::Headers::HttpCachingDisabler
         helper ConfigConstraintsHelpers
 
         layout false

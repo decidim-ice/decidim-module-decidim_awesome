@@ -3,7 +3,10 @@
         scope: "activemodel.attributes",
         id: "<span class='awesome-auto-edit' data-var='#{var}' data-scope='#{scope}' data-key='#{key}'>#{key}</span>").html_safe %>
 
-    <%= icon_link_to "pencil-line", "#", t("edit_label", scope: "decidim.decidim_awesome.admin.config.form"), class: "action-icon--edit awesome-auto-edit", data: { "scope" => "#{scope}" } %>
+    <%= icon_link_to "pencil-line", "#", t("edit_label", scope: "decidim.decidim_awesome.admin.config.form"), class: "action-icon--edit inline-block awesome-auto-edit", data: { "scope" => "#{scope}" } %>
 
-    <%= link_to t("remove", scope: "decidim.decidim_awesome.admin.config.form_#{var}"), delete_path, method: :delete, id: "delete-box", class: "float-right button button__sm button__text-secondary", data: { confirm: t("sure_to_remove", scope: "decidim.decidim_awesome.admin.config.form_#{var}") } %>
+    <%= link_to delete_path, method: :delete, id: "delete-box", class: "float-right mt-2 button button__xs button__text-secondary", data: { confirm: t("sure_to_remove", scope: "decidim.decidim_awesome.admin.config.form_#{var}") } do %>
+        <%= icon "delete-bin-line" %>
+        <%= t("remove", scope: "decidim.decidim_awesome.admin.config.form_#{var}") %>
+    <% end %>
 <% end %>

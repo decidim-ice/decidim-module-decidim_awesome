@@ -3,4 +3,4 @@
 
 Dir.chdir("development_app")
 
-load "bin/webpack-dev-server"
+load "bin/shakapacker-dev-server"
