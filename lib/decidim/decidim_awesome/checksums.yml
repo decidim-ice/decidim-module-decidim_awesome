@@ -2,12 +2,14 @@ decidim-admin:
   /app/views/layouts/decidim/admin/_header.html.erb:
     decidim-0.25: 1aff077428830b12306d6c42e6b37216
 decidim-core:
+  /app/packs/entrypoints/decidim_editor.js:
+    decidim-0.28: beddd77e3893fd0b7cd2679a7ee6e536
+  /app/packs/src/decidim/editor/index.js:
+    decidim-0.28: 90dfac3acae97202dec083955e2249e4
   /app/validators/etiquette_validator.rb:
     decidim-0.28: e9ad91d824ad48ac2075a088a0d21349
   /app/views/layouts/decidim/_head.html.erb:
     decidim-0.28: e51e400a98821f4ca0fff26ebd4d0741
-  /app/packs/src/decidim/editor.js:
-    decidim-0.27.3: a9585960d5979aa3adbf5561010513fe
   /app/presenters/decidim/menu_presenter.rb:
     decidim-0.28: 220c8865a43bd8b7b12a7f926f7f4324
   /app/presenters/decidim/menu_item_presenter.rb:

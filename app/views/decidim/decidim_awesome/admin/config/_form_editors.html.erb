@@ -1,16 +1,22 @@
-<div class="form__wrapper row column decidim_awesome-form">
-  <p><%= t("help.drag_and_drop_supported", scope: "decidim.decidim_awesome.admin.config.form") %></p>
-  <p><%= t("help.original_editor_override", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+<div class="form__wrapper decidim_awesome-form">
+  <div class="row column ">
+    <p class="help-text"><%= t("help.drag_and_drop_supported", scope: "decidim.decidim_awesome.admin.config.form") %>
+    <%= t("help.original_editor_override", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+  </div>
 
-  <% enabled_configs([:allow_images_in_full_editor, :allow_images_in_small_editor]).each do |key| %>
-    <%= form.check_box key, help_text: t("help.#{key}", scope: "decidim.decidim_awesome.admin.config.form") %>
+  <% enabled_configs([:allow_images_in_editors, :allow_videos_in_editors]).each do |key| %>
+    <div class="row column">
+      <%= form.check_box key, help_text: t("help.#{key}", scope: "decidim.decidim_awesome.admin.config.form") %>
 
-    <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: key, constraints: constraints_for(key) }) %>
+      <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: key, constraints: constraints_for(key) }) %>
+    </div>
   <% end %>
 
   <% enabled_configs([:use_markdown_editor, :allow_images_in_markdown_editor]).each do |key| %>
-    <%= form.check_box key, help_text: t("help.#{key}", scope: "decidim.decidim_awesome.admin.config.form") %>
+    <div class="row column">
+      <%= form.check_box key, help_text: t("help.#{key}", scope: "decidim.decidim_awesome.admin.config.form") %>
 
-    <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: key, constraints: constraints_for(key) }) %>
+      <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: key, constraints: constraints_for(key) }) %>
+    </div>
   <% end %>
 </div>

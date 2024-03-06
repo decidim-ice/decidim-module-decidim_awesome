@@ -16,8 +16,8 @@ module Decidim::DecidimAwesome
       end
       let(:params) do
         {
-          allow_images_in_full_editor: true,
-          allow_images_in_small_editor: true
+          allow_images_in_editors: true,
+          allow_videos_in_editors: true
         }
       end
       let(:form) do
@@ -32,8 +32,8 @@ module Decidim::DecidimAwesome
         it "broadcasts :ok and modifies the config options" do
           expect { subject.call }.to broadcast(:ok)
 
-          expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_full_editor).value).to be(true)
-          expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_small_editor).value).to be(true)
+          expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_editors).value).to be(true)
+          expect(AwesomeConfig.find_by(organization:, var: :allow_videos_in_editors).value).to be(true)
         end
       end
 
@@ -43,13 +43,13 @@ module Decidim::DecidimAwesome
         end
 
         let!(:config) do
-          create(:awesome_config, organization:, var: :allow_images_in_full_editor, value: false)
+          create(:awesome_config, organization:, var: :allow_images_in_editors, value: false)
         end
 
         it "broadcasts :invalid and does not modifiy the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
-          expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_full_editor).value).to be(false)
+          expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_editors).value).to be(false)
         end
       end
 

@@ -91,9 +91,9 @@ module Decidim::DecidimAwesome
 
     context "when some config is personalized" do
       let(:custom_config) do
-        config.merge(allow_images_in_full_editor: true)
+        config.merge(allow_images_in_editors: true)
       end
-      let!(:awesome_config) { create(:awesome_config, organization:, var: :allow_images_in_full_editor, value: true) }
+      let!(:awesome_config) { create(:awesome_config, organization:, var: :allow_images_in_editors, value: true) }
 
       it "differs from the basic config" do
         expect(subject.config).not_to eq(config)
@@ -126,20 +126,20 @@ module Decidim::DecidimAwesome
 
     context "when some config is disabled" do
       before do
-        subject.defaults = Decidim::DecidimAwesome.config.merge(allow_images_in_full_editor: :disabled)
+        subject.defaults = Decidim::DecidimAwesome.config.merge(allow_images_in_editors: :disabled)
         # de-memoize
         subject.instance_variable_set :@config, nil
       end
 
-      let!(:awesome_config) { create(:awesome_config, organization:, var: :allow_images_in_full_editor, value: true) }
+      let!(:awesome_config) { create(:awesome_config, organization:, var: :allow_images_in_editors, value: true) }
 
       it "always defaults to false" do
-        expect(subject.config[:allow_images_in_full_editor]).to be(false)
+        expect(subject.config[:allow_images_in_editors]).to be(false)
       end
     end
 
     context "when there are constraints" do
-      let!(:awesome_config) { create(:awesome_config, organization:, var: :allow_images_in_full_editor, value: true) }
+      let!(:awesome_config) { create(:awesome_config, organization:, var: :allow_images_in_editors, value: true) }
       let!(:constraint1) { create(:config_constraint, awesome_config:, settings: settings1) }
       let!(:constraint2) { create(:config_constraint, awesome_config:, settings: settings2) }
       let(:settings1) do
@@ -158,7 +158,7 @@ module Decidim::DecidimAwesome
       let(:slug) { participatory_process.slug }
       let(:id) { nil }
       let(:custom_config) do
-        config.merge(allow_images_in_full_editor: true)
+        config.merge(allow_images_in_editors: true)
       end
 
       before do

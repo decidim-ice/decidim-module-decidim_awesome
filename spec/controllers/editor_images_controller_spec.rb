@@ -11,8 +11,8 @@ module Decidim::DecidimAwesome
     let(:config) do
       {
         allow_images_in_proposals: in_proposals,
-        allow_images_in_small_editor: in_small,
-        allow_images_in_full_editor: in_full,
+        allow_videos_in_editors: in_small,
+        allow_images_in_editors: in_full,
         allow_images_in_markdown_editor: in_markdown
       }
     end

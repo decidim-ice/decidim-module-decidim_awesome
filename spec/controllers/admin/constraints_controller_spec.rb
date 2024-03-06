@@ -13,7 +13,7 @@ module Decidim::DecidimAwesome
       let(:organization) { create(:organization) }
       let(:config) { create(:awesome_config, organization:, var: key) }
       let(:constraint) { create(:config_constraint, awesome_config: config) }
-      let(:key) { :allow_images_in_full_editor }
+      let(:key) { :allow_images_in_editors }
       let(:id) { nil }
       let(:params) do
         {

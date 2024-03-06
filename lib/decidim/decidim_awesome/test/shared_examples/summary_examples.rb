@@ -74,8 +74,8 @@ shared_examples "basic rendering" do |enabled|
     let(:image_vars) do
       [
         :allow_images_in_proposals,
-        :allow_images_in_small_editor,
-        :allow_images_in_full_editor,
+        :allow_videos_in_editors,
+        :allow_images_in_editors,
         :allow_images_in_proposals,
         :use_markdown_editor,
         :allow_images_in_markdown_editor,

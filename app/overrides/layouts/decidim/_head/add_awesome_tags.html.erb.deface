@@ -3,9 +3,8 @@
 <%#= append_stylesheet_pack_tag "decidim_decidim_awesome", media: "all" %>
 <%= render(partial: "layouts/decidim/decidim_awesome/custom_styles") if awesome_custom_styles.present? %>
 
-<%= render partial: "layouts/decidim/decidim_awesome/awesome_config" %>
-<%# This will render scripts only on Decidim 0.27 %>
 <% content_for :js_content do %>
+  <%= render partial: "layouts/decidim/decidim_awesome/awesome_config" %>
   <%= append_javascript_pack_tag "decidim_decidim_awesome", defer: false %>
   <%= append_javascript_pack_tag("decidim_decidim_awesome_custom_fields") if Decidim::DecidimAwesome.enabled?(:proposal_custom_fields) %>
   <% if show_public_intergram? %>

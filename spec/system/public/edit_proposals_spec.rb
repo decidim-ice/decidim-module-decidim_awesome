@@ -18,7 +18,7 @@ describe "Show proposals editor" do
   let!(:user) { create(:user, :confirmed, organization:) }
   let(:rte_enabled) { false }
   let!(:allow_images_in_proposals) { create(:awesome_config, organization:, var: :allow_images_in_proposals, value: images_in_proposals) }
-  let!(:allow_images_in_small_editor) { create(:awesome_config, organization:, var: :allow_images_in_small_editor, value: images_editor) }
+  let!(:allow_images_in_editors) { create(:awesome_config, organization:, var: :allow_images_in_editors, value: images_editor) }
   let!(:use_markdown_editor) { create(:awesome_config, organization:, var: :use_markdown_editor, value: markdown_enabled) }
   let!(:allow_images_in_markdown_editor) { create(:awesome_config, organization:, var: :allow_images_in_markdown_editor, value: markdown_images) }
   let(:images_in_proposals) { false }

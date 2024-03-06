@@ -4,10 +4,10 @@ en:
     attributes:
       config:
         additional_proposal_sortings: Enabled additional sorting options
-        allow_images_in_full_editor: Allow images in the full HTML editor
+        allow_images_in_editors: Allow images in the HTML editor
         allow_images_in_markdown_editor: Allow images in the markdown editor
         allow_images_in_proposals: Allow images in the proposals editor
-        allow_images_in_small_editor: Allow images in the minimal HTML editor
+        allow_videos_in_editors: Allow videos in the HTML editor
         auto_save_forms: Auto save forms in local storage
         intergram_auto_no_response: A message that is sent one minute after the user
           sends its first message and no response was received
@@ -258,14 +258,14 @@ en:
               incorrect_css: 'CSS in box #%{key} is invalid'
               incorrect_json: 'JSON definition in box #%{key} is invalid'
             help:
-              allow_images_in_full_editor: This will add an image uploader icon in
-                all the editors WYSIWYG with the full toolbar enabled.
+              allow_images_in_editors: This will add an image uploader icon in
+                all the WYSIWYG editors
               allow_images_in_markdown_editor: This will allow markdown editor to
                 upload images by copy & paste or drag & drop.
               allow_images_in_proposals: This will allow to upload images in the proposals
                 editor, available to any user
-              allow_images_in_small_editor: This will add an image uploader icon in
-                all the editors WYSIWYG with minimal options in the toolbar enabled.
+              allow_videos_in_editors: This will add an video link icon in
+                all the WYSIWYG editors
               auto_save_forms: This will use LocalStorage to automatically save data
                 introduced by users in surveys and other forms while they are filling
                 it. Data will be restored in a future visit with the same browser

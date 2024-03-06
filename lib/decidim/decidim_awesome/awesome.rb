@@ -11,7 +11,7 @@ module Decidim
     autoload :CustomFields, "decidim/decidim_awesome/custom_fields"
     autoload :VotingManifest, "decidim/decidim_awesome/voting_manifest"
 
-    # Awesome coms with some components for participatory spaces
+    # Awesome comes with some components for participatory spaces
     # Currently :awesome_map and :awesome_iframe, list them here
     # if you wan to disable them
     # NOTE if you have spaces with some of these components already configured
@@ -32,14 +32,12 @@ module Decidim
     #   true  => always true but admins can still restrict its scope
     #   false => default false, admins can turn it true
     #   :disabled => false and non available, hidden from admins
-    config_accessor :allow_images_in_full_editor do
-      # false
-      :disabled
+    config_accessor :allow_images_in_editors do
+      false
     end
 
-    config_accessor :allow_images_in_small_editor do
-      # false
-      :disabled
+    config_accessor :allow_videos_in_editors do
+      false
     end
 
     config_accessor :allow_images_in_proposals do

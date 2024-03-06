@@ -33,8 +33,8 @@ describe Decidim::DecidimAwesome do
   let(:user) { create(:user, :admin, :confirmed, organization:) }
   let!(:config) { create(:awesome_config, organization:, var: :scoped_styles, value: { bar: styles }) }
   let!(:allow_images_in_proposals) { create(:awesome_config, organization:, var: :allow_images_in_proposals, value: true) }
-  let!(:allow_images_in_small_editor) { create(:awesome_config, organization:, var: :allow_images_in_small_editor, value: true) }
-  let!(:allow_images_in_full_editor) { create(:awesome_config, organization:, var: :allow_images_in_full_editor, value: true) }
+  let!(:allow_images_in_editors) { create(:awesome_config, organization:, var: :allow_images_in_editors, value: true) }
+  let!(:allow_videos_in_editors) { create(:awesome_config, organization:, var: :allow_videos_in_editors, value: true) }
   let!(:use_markdown_editor) { create(:awesome_config, organization:, var: :use_markdown_editor, value: true) }
   let!(:allow_images_in_markdown_editor) { create(:awesome_config, organization:, var: :allow_images_in_markdown_editor, value: true) }
   let!(:auto_save_forms) { create(:awesome_config, organization:, var: :auto_save_forms, value: true) }
