@@ -211,8 +211,7 @@ module Decidim
     #   config.consider_all_requests_local = false
 
     config_accessor :custom_redirects do
-      # {}
-      :disabled
+      {}
     end
 
     # these settings do not follow the :disabled convention but
