@@ -11,7 +11,7 @@ module Decidim
     autoload :CustomFields, "decidim/decidim_awesome/custom_fields"
     autoload :VotingManifest, "decidim/decidim_awesome/voting_manifest"
 
-    # Awesome coms with some components for participatory spaces
+    # Awesome comes with some components for participatory spaces
     # Currently :awesome_map and :awesome_iframe, list them here
     # if you wan to disable them
     # NOTE if you have spaces with some of these components already configured
@@ -32,29 +32,16 @@ module Decidim
     #   true  => always true but admins can still restrict its scope
     #   false => default false, admins can turn it true
     #   :disabled => false and non available, hidden from admins
-    config_accessor :allow_images_in_full_editor do
-      # false
-      :disabled
+    config_accessor :allow_images_in_editors do
+      false
     end
 
-    config_accessor :allow_images_in_small_editor do
-      # false
-      :disabled
+    config_accessor :allow_videos_in_editors do
+      false
     end
 
     config_accessor :allow_images_in_proposals do
-      # false
-      :disabled
-    end
-
-    config_accessor :use_markdown_editor do
-      # false
-      :disabled
-    end
-
-    config_accessor :allow_images_in_markdown_editor do
-      # false
-      :disabled
+      false
     end
 
     # used to save forms in localstorage
@@ -80,43 +67,35 @@ module Decidim
     # (maybe in the future will apply to other places)
     # Set it to :disabled if you don't want to use this feature
     config_accessor :validate_title_min_length do
-      # 15
-      :disabled
+      15
     end
 
     config_accessor :validate_title_max_caps_percent do
-      # 25
-      :disabled
+      25
     end
 
     config_accessor :validate_title_max_marks_together do
-      # 1
-      :disabled
+      1
     end
 
     config_accessor :validate_title_start_with_caps do
-      # true
-      :disabled
+      true
     end
 
     config_accessor :validate_body_min_length do
-      # 15
-      :disabled
+      15
     end
 
     config_accessor :validate_body_max_caps_percent do
-      # 25
-      :disabled
+      25
     end
 
     config_accessor :validate_body_max_marks_together do
-      # 1
-      :disabled
+      1
     end
 
     config_accessor :validate_body_start_with_caps do
-      # true
-      :disabled
+      true
     end
 
     # This transforms the proposal voting into a weighted voting

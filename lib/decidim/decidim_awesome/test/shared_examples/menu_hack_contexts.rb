@@ -41,8 +41,8 @@ shared_context "with menu hacks params" do
 
   let(:another_params) do
     {
-      allow_images_in_full_editor: true,
-      allow_images_in_small_editor: true
+      allow_images_in_editors: true,
+      allow_videos_in_editors: true
     }
   end
   let(:form) do

@@ -18,10 +18,10 @@ if !Rails.env.production? || ENV.fetch("SEED", nil)
   )
 
   # Enable images in general
-  setting = Decidim::DecidimAwesome::AwesomeConfig.find_or_initialize_by(var: :allow_images_in_full_editor, organization:)
+  setting = Decidim::DecidimAwesome::AwesomeConfig.find_or_initialize_by(var: :allow_images_in_editors, organization:)
   setting.value = true
   setting.save!
-  setting = Decidim::DecidimAwesome::AwesomeConfig.find_or_initialize_by(var: :allow_images_in_small_editor, organization:)
+  setting = Decidim::DecidimAwesome::AwesomeConfig.find_or_initialize_by(var: :allow_videos_in_editors, organization:)
   setting.value = true
   setting.save!
 end

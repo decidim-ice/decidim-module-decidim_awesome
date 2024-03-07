@@ -20,10 +20,8 @@ module Decidim
 
         return allow! if user.admin?
         return allow! if config[:allow_images_in_proposals]
-        return allow! if config[:allow_images_in_small_editor]
-        return allow! if config[:allow_images_in_full_editor]
-
-        allow! if config[:allow_images_in_markdown_editor]
+        return allow! if config[:allow_images_in_editors]
+        return allow! if config[:allow_videos_in_editors]
       end
     end
   end
