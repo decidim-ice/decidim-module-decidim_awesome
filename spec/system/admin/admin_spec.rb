@@ -111,7 +111,6 @@ describe "Visit the admin page" do
       it "renders the page" do
         expect(page).to have_content(/Tweaks for proposals/i)
         expect(page).to have_content("Customize sorting options for the proposals list")
-        expect(page).to have_content("\"Rich text editor for participants\" is enabled")
         expect(page).to have_content("User input validations for the \"title\" field")
         expect(page).to have_content("User input validations for the \"body\" field")
       end
