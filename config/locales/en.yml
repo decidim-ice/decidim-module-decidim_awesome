@@ -307,7 +307,7 @@ en:
                 of the public web (use the restrictions editor for that)
               scoped_styles_variables: 'You can use the following CSS variables for
                 organization customized colors:'
-              use_markdown_editor: This will substitute the Quill WYSIWYG editor,
+              use_markdown_editor: This will substitute the WYSIWYG editor,
                 to use a Markdown editor instead. Text will be converted and saved
                 as HTML in the database.
               validate_body_max_caps_percent: Zero won't allow any capital letter,

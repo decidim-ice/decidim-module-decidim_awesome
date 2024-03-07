@@ -5,6 +5,10 @@ import TomSelect from "tom-select/dist/cjs/tom-select.popular";
 document.addEventListener("DOMContentLoaded", () => {
   const selectContainer = document.getElementById("config_additional_proposal_sortings");
 
+  if (!selectContainer) {
+    return;
+  }
+
   new TomSelect(selectContainer, {
     plugins: ["remove_button", "dropdown_input"],
     create: false,

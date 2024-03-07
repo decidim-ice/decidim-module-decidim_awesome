@@ -45,13 +45,11 @@ module Decidim
     end
 
     config_accessor :use_markdown_editor do
-      # false
-      :disabled
+      false
     end
 
     config_accessor :allow_images_in_markdown_editor do
-      # false
-      :disabled
+      false
     end
 
     # used to save forms in localstorage
