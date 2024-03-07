@@ -15,7 +15,7 @@ decidim-core:
   /app/presenters/decidim/menu_item_presenter.rb:
     decidim-0.28: 4e4cd366a8a313079ac5fab466bd3679
   /app/helpers/decidim/amendments_helper.rb:
-    decidim-0.26: 636943ccb2e994fe0124dc87e72e49e9
+    decidim-0.28: df28f9321d1bc07757746ed608274e3d
 decidim-proposals:
   /lib/decidim/proposals/proposal_serializer.rb:
     decidim-0.26: 2d817775f79a19cfcf9cfae8e5b68c5a

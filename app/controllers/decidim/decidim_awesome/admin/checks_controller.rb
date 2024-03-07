@@ -38,7 +38,7 @@ module Decidim
              '<%= render(partial: "layouts/decidim/decidim_awesome/custom_styles") if awesome_custom_styles %>'].join("\n")
           when :JavaScript
             ['<%= render partial: "layouts/decidim/decidim_awesome/awesome_config" %>',
-             '<%= append_javascript_pack_tag "decidim_decidim_awesome" %>',
+             '<%= append_javascript_pack_tag "decidim_decidim_awesome", defer: false %>',
              '<%= append_javascript_pack_tag "decidim_decidim_awesome_custom_fields" if awesome_proposal_custom_fields %>'].join("\n")
           end
         end
