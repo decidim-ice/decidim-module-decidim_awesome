@@ -1,13 +1,8 @@
 <div class="form__wrapper decidim_awesome-form">
-  <% if config_enabled? :allow_images_in_proposals %>
+  <% if config_enabled?(:allow_images_in_proposals) && !current_organization.rich_text_editor_in_public_views %>
     <div class="row column">
-      <p class="help-text text-alert"><%= t("rich_text_editor_in_public_views", scope: "decidim.decidim_awesome.admin.config") if current_organization.rich_text_editor_in_public_views %></p>
-
-      <%= form.check_box :allow_images_in_proposals, disabled: current_organization.rich_text_editor_in_public_views, help_text: t("help.allow_images_in_proposals", scope: "decidim.decidim_awesome.admin.config.form") %>
-
-      <% unless current_organization.rich_text_editor_in_public_views %>
-        <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :allow_images_in_proposals, constraints: constraints_for(:allow_images_in_proposals) }) %>
-      <% end %>
+      <%= form.check_box :allow_images_in_proposals, help_text: t("help.allow_images_in_proposals", scope: "decidim.decidim_awesome.admin.config.form") %>
+      <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :allow_images_in_proposals, constraints: constraints_for(:allow_images_in_proposals) }) %>
     </div>
   <% end %>
 
