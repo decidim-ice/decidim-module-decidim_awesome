@@ -1,5 +1,5 @@
 <%= decidim_form_for(@form, url: custom_redirects_path, html: { class: "form-defaults form new_custom_redirect_" }) do |f| %>
-  <div class="card__grid">
+  <div class="card">
     <div class="bg-gray-6 p-4 rounded-t">
       <h2 class="card-title"><%= t ".title" %></h2>
     </div>
@@ -8,6 +8,6 @@
     </div>
   </div>
   <div class="flex items-center justify-center mt-12 w-full text-white form-general-submit">
-    <%= f.submit t(".save"), class: "button button__lg bg-awesomeblue" %>
+    <%= f.submit t(".save"), class: "button button__lg button__secondary" %>
   </div>
 <% end %>
