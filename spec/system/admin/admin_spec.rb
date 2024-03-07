@@ -264,8 +264,6 @@ describe "Visit the admin page" do
   context "when visiting custom redirections" do
     context "when custom_redirections are enabled" do
       before do
-        skip "Custom redirects feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
-
         click_link_or_button "Custom Redirections"
       end
 
