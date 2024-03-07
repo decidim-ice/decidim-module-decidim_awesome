@@ -12,14 +12,12 @@ module Decidim::DecidimAwesome
       {
         allow_images_in_proposals: in_proposals,
         allow_videos_in_editors: in_small,
-        allow_images_in_editors: in_full,
-        allow_images_in_markdown_editor: in_markdown
+        allow_images_in_editors: in_full
       }
     end
     let(:in_proposals) { true }
     let(:in_small) { true }
     let(:in_full) { true }
-    let(:in_markdown) { true }
     let(:params) do
       {
         image:,
@@ -64,7 +62,6 @@ module Decidim::DecidimAwesome
         let(:in_proposals) { false }
         let(:in_small) { false }
         let(:in_full) { false }
-        let(:in_markdown) { false }
 
         it "returns no permissions" do
           post(:create, params:)
@@ -82,7 +79,6 @@ module Decidim::DecidimAwesome
         let(:in_proposals) { false }
         let(:in_small) { false }
         let(:in_full) { false }
-        let(:in_markdown) { false }
 
         it "returns no permissions" do
           post(:create, params:)

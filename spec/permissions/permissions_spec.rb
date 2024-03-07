@@ -18,14 +18,12 @@ module Decidim::DecidimAwesome
       {
         allow_images_in_proposals: in_proposals,
         allow_videos_in_editors: in_videos,
-        allow_images_in_editors: in_images,
-        allow_images_in_markdown_editor: in_markdown
+        allow_images_in_editors: in_images
       }
     end
     let(:in_proposals) { true }
     let(:in_videos) { true }
     let(:in_images) { true }
-    let(:in_markdown) { true }
     let(:permission_action) { Decidim::PermissionAction.new(**action) }
     let(:action) do
       { scope: :public, action: :create, subject: :editor_image }
@@ -60,7 +58,6 @@ module Decidim::DecidimAwesome
         let(:in_proposals) { false }
         let(:in_videos) { false }
         let(:in_images) { false }
-        let(:in_markdown) { false }
 
         it_behaves_like "permission is not set"
       end
@@ -83,7 +80,6 @@ module Decidim::DecidimAwesome
         let(:in_proposals) { false }
         let(:in_videos) { false }
         let(:in_images) { false }
-        let(:in_markdown) { false }
 
         it { is_expected.to be true }
       end

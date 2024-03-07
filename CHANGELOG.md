@@ -9,6 +9,7 @@ Compatibility:
 
 Features:
   - Redesign to version 0.28
+  - Removed markdown editor
 
 v0.10.2
 ------

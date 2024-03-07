@@ -44,14 +44,6 @@ module Decidim
       false
     end
 
-    config_accessor :use_markdown_editor do
-      false
-    end
-
-    config_accessor :allow_images_in_markdown_editor do
-      false
-    end
-
     # used to save forms in localstorage
     config_accessor :auto_save_forms do
       # false

@@ -5,7 +5,6 @@ en:
       config:
         additional_proposal_sortings: Enabled additional sorting options
         allow_images_in_editors: Allow images in the HTML editor
-        allow_images_in_markdown_editor: Allow images in the markdown editor
         allow_images_in_proposals: Allow images in the proposals editor
         allow_videos_in_editors: Allow videos in the HTML editor
         auto_save_forms: Auto save forms in local storage
@@ -26,7 +25,6 @@ en:
         proposal_custom_fields: Custom fields %{id}
         scoped_admins: Scoped admins group %{id}
         scoped_styles: Custom styles %{id}
-        use_markdown_editor: Use a Markdown editor instead of the HTML editor
         validate_body_max_caps_percent: Maximum allowed percentage of capital letters
           for the body
         validate_body_max_marks_together: Maximum consecutive marks symbols allowed
@@ -260,8 +258,6 @@ en:
             help:
               allow_images_in_editors: This will add an image uploader icon in all
                 the WYSIWYG editors
-              allow_images_in_markdown_editor: This will allow markdown editor to
-                upload images by copy & paste or drag & drop.
               allow_images_in_proposals: This will allow to upload images in the proposals
                 editor, available to any user. Images will be presented as links in
                 the public proposal view.
@@ -307,9 +303,6 @@ en:
                 of the public web (use the restrictions editor for that)
               scoped_styles_variables: 'You can use the following CSS variables for
                 organization customized colors:'
-              use_markdown_editor: This will substitute the WYSIWYG editor,
-                to use a Markdown editor instead. Text will be converted and saved
-                as HTML in the database.
               validate_body_max_caps_percent: Zero won't allow any capital letter,
                 100 will force to write everything in capital letters
               validate_body_max_marks_together: 'Limit the number of question and

@@ -71,8 +71,7 @@ describe "Visit the admin page" do
 
     context "when editor hacks are disabled" do
       let(:disabled_features) do
-        [:allow_images_in_editors, :allow_videos_in_editors, :use_markdown_editor,
-         :allow_images_in_markdown_editor]
+        [:allow_images_in_editors, :allow_videos_in_editors]
       end
 
       it_behaves_like "do not have menu link", "editors"

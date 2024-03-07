@@ -1,6 +1,6 @@
 <!-- insert_before "erb[loud]:contains('organization_colors')" -->
 
-<%#= append_stylesheet_pack_tag "decidim_decidim_awesome", media: "all" %>
+<%= stylesheet_pack_tag "decidim_decidim_awesome", media: "all" %>
 <%= render(partial: "layouts/decidim/decidim_awesome/custom_styles") if awesome_custom_styles.present? %>
 
 <% content_for :js_content do %>

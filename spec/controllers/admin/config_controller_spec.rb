@@ -41,7 +41,7 @@ module Decidim::DecidimAwesome
 
         context "when params var is empty" do
           let(:params) { {} }
-          let(:editors) { [:allow_images_in_editors, :allow_videos_in_editors, :use_markdown_editor, :allow_images_in_markdown_editor] }
+          let(:editors) { [:allow_images_in_editors, :allow_videos_in_editors] }
           let(:disabled) { [] }
 
           before do

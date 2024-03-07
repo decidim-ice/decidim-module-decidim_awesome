@@ -11,12 +11,4 @@
       <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: key, constraints: constraints_for(key) }) %>
     </div>
   <% end %>
-
-  <% enabled_configs([:use_markdown_editor, :allow_images_in_markdown_editor]).each do |key| %>
-    <div class="row column">
-      <%= form.check_box key, help_text: t("help.#{key}", scope: "decidim.decidim_awesome.admin.config.form") %>
-
-      <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: key, constraints: constraints_for(key) }) %>
-    </div>
-  <% end %>
 </div>

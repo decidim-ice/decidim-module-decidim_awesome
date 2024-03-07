@@ -10,12 +10,8 @@ describe "Admin edits proposals" do
   let!(:proposal) { create(:proposal, :official, component:) }
   let!(:allow_images_in_proposals) { create(:awesome_config, organization:, var: :allow_images_in_proposals, value: images_in_proposals) }
   let!(:allow_images_in_editors) { create(:awesome_config, organization:, var: :allow_images_in_editors, value: images_editor) }
-  let!(:use_markdown_editor) { create(:awesome_config, organization:, var: :use_markdown_editor, value: markdown_enabled) }
-  let!(:allow_images_in_markdown_editor) { create(:awesome_config, organization:, var: :allow_images_in_markdown_editor, value: markdown_images) }
   let(:images_in_proposals) { false }
   let(:images_editor) { false }
-  let(:markdown_enabled) { false }
-  let(:markdown_images) { false }
   let(:rte_enabled) { false }
   let(:editor_selector) { "#proposal_body_en" }
 
@@ -38,18 +34,6 @@ describe "Admin edits proposals" do
 
       it_behaves_like "has drag and drop", true
     end
-
-    context "and markdown is enabled" do
-      let(:markdown_enabled) { true }
-
-      it_behaves_like "has markdown editor"
-
-      context "and images are enabled" do
-        let(:markdown_images) { true }
-
-        it_behaves_like "has markdown editor", true
-      end
-    end
   end
 
   context "when rich text editor is NOT enabled for participants" do
@@ -65,30 +49,6 @@ describe "Admin edits proposals" do
       let(:images_in_proposals) { true }
 
       it_behaves_like "has no drag and drop", true
-    end
-
-    context "and markdown is enabled" do
-      let(:markdown_enabled) { true }
-
-      it_behaves_like "has markdown editor"
-    end
-  end
-
-  context "when editing in markdown mode" do
-    let(:rte_enabled) { true }
-    let(:markdown_enabled) { true }
-    let(:text) { "# title\\n\\nParagraph\\nline 2" }
-    let(:html) { "<h1 id=\"title\">title</h1><p>Paragraph<br>line 2</p>" }
-
-    it "converts markdown to html before saving" do
-      skip "This feature is pending to be adapted to Decidim 0.28"
-
-      sleep 1
-      page.execute_script("$('[name=\"faker-inscrybmde\"]:first')[0].InscrybMDE.value('#{text}')")
-
-      click_link_or_button "Update"
-
-      expect(Decidim::Proposals::Proposal.last.body["en"].gsub(/[\n\r]/, "")).to eq(html)
     end
   end
 end

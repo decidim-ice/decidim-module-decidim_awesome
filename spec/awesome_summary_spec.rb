@@ -35,8 +35,6 @@ describe Decidim::DecidimAwesome do
   let!(:allow_images_in_proposals) { create(:awesome_config, organization:, var: :allow_images_in_proposals, value: true) }
   let!(:allow_images_in_editors) { create(:awesome_config, organization:, var: :allow_images_in_editors, value: true) }
   let!(:allow_videos_in_editors) { create(:awesome_config, organization:, var: :allow_videos_in_editors, value: true) }
-  let!(:use_markdown_editor) { create(:awesome_config, organization:, var: :use_markdown_editor, value: true) }
-  let!(:allow_images_in_markdown_editor) { create(:awesome_config, organization:, var: :allow_images_in_markdown_editor, value: true) }
   let!(:auto_save_forms) { create(:awesome_config, organization:, var: :auto_save_forms, value: true) }
   let!(:intergram_for_admins) { create(:awesome_config, organization:, var: :intergram_for_admins, value: true) }
   let!(:intergram_for_public) { create(:awesome_config, organization:, var: :intergram_for_public, value: true) }

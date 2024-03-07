@@ -77,8 +77,6 @@ shared_examples "basic rendering" do |enabled|
         :allow_videos_in_editors,
         :allow_images_in_editors,
         :allow_images_in_proposals,
-        :use_markdown_editor,
-        :allow_images_in_markdown_editor,
         :auto_save_forms,
         :intergram_for_admins,
         :intergram_for_public

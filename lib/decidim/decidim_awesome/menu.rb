@@ -95,7 +95,7 @@ module Decidim
 
       def self.menus
         @menus ||= {
-          editors: config_enabled?([:allow_images_in_editors, :allow_videos_in_editors, :use_markdown_editor, :allow_images_in_markdown_editor]),
+          editors: config_enabled?([:allow_images_in_editors, :allow_videos_in_editors]),
           proposals: config_enabled?(
             [
               :allow_images_in_proposals,

@@ -22,8 +22,6 @@ module Decidim
         return allow! if config[:allow_images_in_proposals]
         return allow! if config[:allow_images_in_editors]
         return allow! if config[:allow_videos_in_editors]
-
-        allow! if config[:allow_images_in_markdown_editor]
       end
     end
   end

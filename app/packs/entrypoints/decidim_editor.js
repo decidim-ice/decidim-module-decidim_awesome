@@ -1,4 +1,4 @@
-import awesomeCreateEditor from "src/decidim/decidim_awesome/editor";
+import createEditor from "src/decidim/decidim_awesome/editor";
 import DecidimKit from "src/decidim/editor/extensions/decidim_kit";
 
 // CSS
@@ -8,8 +8,7 @@ window.DecidimKit = DecidimKit;
 window.currentEditors = window.currentEditors || [];
 
 window.createEditor = (container) => {
-  let editor = awesomeCreateEditor(container);
+  let editor = createEditor(container);
   window.currentEditors.push(editor);
-  console.log("createEditor", container, editor);
   return editor;
 }
