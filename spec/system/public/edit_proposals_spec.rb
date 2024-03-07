@@ -19,17 +19,18 @@ describe "Show proposals editor" do
   let(:rte_enabled) { false }
   let!(:allow_images_in_proposals) { create(:awesome_config, organization:, var: :allow_images_in_proposals, value: images_in_proposals) }
   let!(:allow_images_in_editors) { create(:awesome_config, organization:, var: :allow_images_in_editors, value: images_editor) }
+  let!(:allow_videos_in_editors) { create(:awesome_config, organization:, var: :allow_videos_in_editors, value: videos_editor) }
   let!(:use_markdown_editor) { create(:awesome_config, organization:, var: :use_markdown_editor, value: markdown_enabled) }
   let!(:allow_images_in_markdown_editor) { create(:awesome_config, organization:, var: :allow_images_in_markdown_editor, value: markdown_images) }
   let(:images_in_proposals) { false }
   let(:images_editor) { false }
+  let(:videos_editor) { false }
   let(:markdown_enabled) { false }
   let(:markdown_images) { false }
-  let(:editor_selector) { "#proposal_body" }
+  let(:editor_selector) { "textarea#proposal_body" }
+  let(:image) { Decidim::Dev.test_file("city.jpeg", "image/jpeg") }
 
   before do
-    skip "Proposals hacks feature is pending to be adapted to Decidim 0.28 and currently is disabled"
-
     organization.update(rich_text_editor_in_public_views: rte_enabled)
     login_as user, scope: :user
     visit_component
@@ -41,25 +42,40 @@ describe "Show proposals editor" do
   context "when rich text editor is enabled for participants" do
     let(:rte_enabled) { true }
 
-    it_behaves_like "has no drag and drop", true
+    it_behaves_like "has no image support"
+    it_behaves_like "has no video support"
 
     context "and images in RTE are enabled" do
       let(:images_editor) { true }
 
-      it_behaves_like "has drag and drop", true
+      it_behaves_like "has image support"
     end
 
-    context "and markdown is enabled" do
-      let(:markdown_enabled) { true }
+    context "and videos in RTE are enabled" do
+      let(:videos_editor) { true }
 
-      it_behaves_like "has markdown editor"
-
-      context "and images are enabled" do
-        let(:markdown_images) { true }
-
-        it_behaves_like "has markdown editor", true
-      end
+      it_behaves_like "has video support"
     end
+
+    context "and both in RTE are enabled" do
+      let(:images_editor) { true }
+      let(:videos_editor) { true }
+
+      it_behaves_like "has image support"
+      it_behaves_like "has video support"
+    end
+
+    # context "and markdown is enabled" do
+    #   let(:markdown_enabled) { true }
+
+    #   it_behaves_like "has markdown editor"
+
+    #   context "and images are enabled" do
+    #     let(:markdown_images) { true }
+
+    #     it_behaves_like "has markdown editor", true
+    #   end
+    # end
   end
 
   context "when rich text editor is NOT enabled for participants" do
@@ -71,29 +87,29 @@ describe "Show proposals editor" do
       it_behaves_like "has drag and drop"
     end
 
-    context "and markdown is enabled" do
-      let(:markdown_enabled) { true }
+    # context "and markdown is enabled" do
+    #   let(:markdown_enabled) { true }
 
-      it_behaves_like "has no markdown editor"
-    end
+    #   it_behaves_like "has no markdown editor"
+    # end
   end
 
-  context "when editing in markdown mode" do
-    let(:rte_enabled) { true }
-    let(:markdown_enabled) { true }
-    let(:text) { "# title\\n\\nParagraph\\nline 2" }
-    let(:html) { "<h1 id=\"title\">title</h1><p>Paragraph<br>line 2</p>" }
+  # context "when editing in markdown mode" do
+  #   let(:rte_enabled) { true }
+  #   let(:markdown_enabled) { true }
+  #   let(:text) { "# title\\n\\nParagraph\\nline 2" }
+  #   let(:html) { "<h1 id=\"title\">title</h1><p>Paragraph<br>line 2</p>" }
 
-    it "converts markdown to html before saving" do
-      sleep 1
-      page.execute_script("$('[name=\"faker-inscrybmde\"]:first')[0].InscrybMDE.value('#{text}')")
+  #   it "converts markdown to html before saving" do
+  #     sleep 1
+  #     page.execute_script("$('[name=\"faker-inscrybmde\"]:first')[0].InscrybMDE.value('#{text}')")
 
-      click_link_or_button "Send"
+  #     click_link_or_button "Send"
 
-      expect(page).to have_no_content("# title")
-      expect(page).to have_css("h1", text: "title")
-      expect(page).to have_css("p", text: "Paragraph\nline 2")
-      expect(Decidim::Proposals::Proposal.last.body["en"].gsub(/[\n\r]/, "")).to eq(html)
-    end
-  end
+  #     expect(page).to have_no_content("# title")
+  #     expect(page).to have_css("h1", text: "title")
+  #     expect(page).to have_css("p", text: "Paragraph\nline 2")
+  #     expect(Decidim::Proposals::Proposal.last.body["en"].gsub(/[\n\r]/, "")).to eq(html)
+  #   end
+  # end
 end

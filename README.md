@@ -291,10 +291,17 @@ And then execute:
 
 ```bash
 bundle
-bundle exec rails decidim_decidim_awesome:install:migrations
-bundle exec rails decidim:upgrade
-bundle exec rails db:migrate
+bin/rails decidim:upgrade
+bin/rails db:migrate
 ```
+
+> Under the hood, when running `bundle exec rails decidim:upgrade` the `decidim-decidim_awesome` gem will run the following two tasks (that can also be run manually if you consider):
+> 
+> ```bash
+> bin/rails decidim_decidim_awesome:install:migrations
+> bin/rails decidim_decidim_awesome:webpacker:install
+> ```
+
 
 If you are upgrading from a version prior to 0.8, make sure to visit the URL `/admin/decidim_awesome/checks` and run image migrations for the old images:
 

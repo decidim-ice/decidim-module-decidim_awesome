@@ -41,8 +41,7 @@ module Decidim
     end
 
     config_accessor :allow_images_in_proposals do
-      # false
-      :disabled
+      false
     end
 
     config_accessor :use_markdown_editor do
@@ -78,43 +77,35 @@ module Decidim
     # (maybe in the future will apply to other places)
     # Set it to :disabled if you don't want to use this feature
     config_accessor :validate_title_min_length do
-      # 15
-      :disabled
+      15
     end
 
     config_accessor :validate_title_max_caps_percent do
-      # 25
-      :disabled
+      25
     end
 
     config_accessor :validate_title_max_marks_together do
-      # 1
-      :disabled
+      1
     end
 
     config_accessor :validate_title_start_with_caps do
-      # true
-      :disabled
+      true
     end
 
     config_accessor :validate_body_min_length do
-      # 15
-      :disabled
+      15
     end
 
     config_accessor :validate_body_max_caps_percent do
-      # 25
-      :disabled
+      25
     end
 
     config_accessor :validate_body_max_marks_together do
-      # 1
-      :disabled
+      1
     end
 
     config_accessor :validate_body_start_with_caps do
-      # true
-      :disabled
+      true
     end
 
     # This transforms the proposal voting into a weighted voting

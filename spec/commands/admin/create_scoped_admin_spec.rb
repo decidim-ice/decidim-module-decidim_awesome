@@ -17,7 +17,7 @@ module Decidim::DecidimAwesome
       let(:params) do
         {
           allow_images_in_editors: true,
-          allow_video_in_editors: true
+          allow_videos_in_editors: true
         }
       end
       let(:form) do
@@ -76,7 +76,7 @@ module Decidim::DecidimAwesome
 
             it "modifies the other config" do
               expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_editors).value).to be(true)
-              expect(AwesomeConfig.find_by(organization:, var: :allow_video_in_editors).value).to be(true)
+              expect(AwesomeConfig.find_by(organization:, var: :allow_videos_in_editors).value).to be(true)
             end
 
             it_behaves_like "has scoped admin boxes content"
@@ -91,7 +91,7 @@ module Decidim::DecidimAwesome
 
             it "modifies the other config" do
               expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_editors).value).to be(true)
-              expect(AwesomeConfig.find_by(organization:, var: :allow_video_in_editors).value).to be(true)
+              expect(AwesomeConfig.find_by(organization:, var: :allow_videos_in_editors).value).to be(true)
             end
 
             it_behaves_like "has scoped admin boxes content"
