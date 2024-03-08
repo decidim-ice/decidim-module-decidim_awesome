@@ -1,48 +1,53 @@
-$(() => {
-  $(".check-custom-redirections").on("click", (evt) => {
-    evt.preventDefault();
-    
-    if ($(evt.target).hasClass("disabled")) {
-      return;
-    }
-    
-    $(evt.target).addClass("disabled");
+document.addEventListener("DOMContentLoaded", () => {
+  const checkCustomRedirections = document.querySelector(".check-custom-redirections");
 
-    const getReport = (tr, response) => {
-      const item = $(tr).data("item");
-      const $td = $(tr).find(".redirect-status");
+  if (checkCustomRedirections) {
+    checkCustomRedirections.addEventListener("click", (evt) => {
+      evt.preventDefault();
 
-      let type = response.type;
-      let status = response.status;
-      if (response.type === "opaqueredirect") {
-        type = "redirect";
-        status = "302";
+      if (evt.target.classList.contains("disabled")) {
+        return;
       }
 
-      if (item.active) {
-        if (type ===  "redirect") {
-          $td.addClass("success");
-        } else {
-          $td.addClass("alert");
+      evt.target.classList.add("disabled");
+
+      const getReport = (tr, response) => {
+        const item = tr.dataset.item;
+        const td = tr.querySelector(".redirect-status");
+
+        let type = response.type;
+        let status = response.status;
+        if (response.type === "opaqueredirect") {
+          type = "redirect";
+          status = "302";
         }
-      } else {
-        $td.addClass("muted");
-      }
 
-      return `${type} (${status})`;
-    };
+        if (item.active) {
+          if (type === "redirect") {
+            td.classList.add("success");
+          } else {
+            td.classList.add("alert");
+          }
+        } else {
+          td.classList.add("muted");
+        }
 
-    $("tr.custom-redirection").each((index, tr) => {
-      const $td = $(tr).find(".redirect-status");
-      $td.html('<span class="loading-spinner" />');
-      fetch($(tr).data("origin"), {method: "HEAD", redirect: "manual"}).
-        then((response) => {
-          $td.html(getReport(tr, response))
-        }).
-        catch((error) => {
-          console.error("ERROR", error)  
-          $td.removeClass("loading");
-        });
+        return `${type} (${status})`;
+      };
+
+      document.querySelectorAll("tr.custom-redirection").forEach((tr) => {
+        const td = tr.querySelector(".redirect-status");
+        td.innerHTML = '<span class="loading-spinner"></span>';
+
+        fetch(tr.dataset.origin, { method: "HEAD", redirect: "manual" })
+          .then((response) => {
+            td.innerHTML = getReport(tr, response);
+          })
+          .catch((error) => {
+            console.error("ERROR", error);
+            td.classList.remove("loading");
+          });
+      });
     });
-  });
+  }
 });
