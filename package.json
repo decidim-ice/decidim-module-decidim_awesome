@@ -9,9 +9,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint -c .eslintrc.json --no-error-on-unmatched-pattern --ignore-pattern app/packs/vendor --ext .js app/packs",
+    "lint": "eslint -c .eslintrc.json --ext .js app/packs/",
     "lint-fix": "eslint -c .eslintrc.json --ext .js app/packs/ --fix",
-    "stylelint": "stylelint app/packs/**/*.scss",
+    "stylelint": "stylelint **/*.scss",
     "stylelint-fix": "stylelint **/*.scss --fix",
     "prettier": "prettier --check '**/*.scss'",
     "prettify": "prettier --write '**/*.scss'"
@@ -29,10 +29,6 @@
     "url": "https://github.com/decidim-ice/decidim-module-decidim_awesome/issues"
   },
   "homepage": "https://github.com/decidim-ice/decidim-module-decidim_awesome#readme",
-  "engines": {
-    "node": "18.17.1",
-    "npm": ">=9.6.7"
-  },
   "stylelint": {
     "extends": "@decidim/stylelint-config"
   },
