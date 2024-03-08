@@ -55,23 +55,23 @@ module Decidim::DecidimAwesome
             end
 
             it "modifies the other config" do
-              expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_full_editor).value).to be(true)
-              expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_small_editor).value).to be(true)
+              expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_editors).value).to be(true)
+              expect(AwesomeConfig.find_by(organization:, var: :allow_videos_in_editors).value).to be(true)
             end
 
             it_behaves_like "has menu content"
           end
 
           context "and another configuration is updated" do
-            let!(:existing_config) { create(:awesome_config, organization:, var: :allow_images_in_full_editor, value: false) }
+            let!(:existing_config) { create(:awesome_config, organization:, var: :allow_images_in_editors, value: false) }
 
             before do
               another_config.call
             end
 
             it "modifies the other config" do
-              expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_full_editor).value).to be(true)
-              expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_small_editor).value).to be(true)
+              expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_editors).value).to be(true)
+              expect(AwesomeConfig.find_by(organization:, var: :allow_videos_in_editors).value).to be(true)
             end
 
             it_behaves_like "has menu content"

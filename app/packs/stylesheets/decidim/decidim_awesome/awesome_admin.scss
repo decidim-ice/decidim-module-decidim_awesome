@@ -5,8 +5,6 @@
 @import "stylesheets/decidim/decidim_awesome/admin/check_redirections";
 @import "stylesheets/decidim/decidim_awesome/admin/user_picker";
 @import "stylesheets/decidim/decidim_awesome/admin/codemirror";
-@import "stylesheets/decidim/decidim_awesome/editors/markdown_editor";
-@import "stylesheets/decidim/decidim_awesome/editors/quill_editor";
 
 // Remove the 20% right column from the item__edit class
 .item__edit {
@@ -16,11 +14,6 @@
 .pokecode-credits {
   float: right;
   margin: 0 1em 0.5em 0;
-
-  // position: absolute;
-  // bottom: 0;
-  // right: 0;
-  // margin: 1em;
   font-size: 0.8em;
 }
 

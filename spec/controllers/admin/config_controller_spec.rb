@@ -13,8 +13,8 @@ module Decidim::DecidimAwesome
       let(:organization) { create(:organization) }
       let(:config) do
         {
-          allow_images_in_full_editor: false,
-          allow_images_in_small_editor: false
+          allow_images_in_editors: false,
+          allow_videos_in_editors: false
         }
       end
       let(:params) do
@@ -41,7 +41,7 @@ module Decidim::DecidimAwesome
 
         context "when params var is empty" do
           let(:params) { {} }
-          let(:editors) { [:allow_images_in_full_editor, :allow_images_in_small_editor, :use_markdown_editor, :allow_images_in_markdown_editor] }
+          let(:editors) { [:allow_images_in_editors, :allow_videos_in_editors] }
           let(:disabled) { [] }
 
           before do
@@ -84,7 +84,7 @@ module Decidim::DecidimAwesome
         end
 
         context "when constraint exists" do
-          let(:key) { :allow_images_in_full_editor }
+          let(:key) { :allow_images_in_editors }
           let(:settings) do
             {
               participatory_space_manifest: manifest,
@@ -133,8 +133,8 @@ module Decidim::DecidimAwesome
           {
             var: :editors,
             config: {
-              allow_images_in_full_editor: true,
-              allow_images_in_small_editor: true
+              allow_images_in_editors: true,
+              allow_videos_in_editors: true
             }
           }
         end

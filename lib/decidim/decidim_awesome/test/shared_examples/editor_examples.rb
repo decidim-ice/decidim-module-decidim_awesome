@@ -1,83 +1,55 @@
 # frozen_string_literal: true
 
-shared_examples "has no drag and drop" do |rte|
-  it "has no help text" do
+shared_examples "has no image support" do
+  it "has no image button" do
+    expect(page).to have_no_xpath("//button[@class='editor-toolbar-control'][@data-editor-type='image']")
+  end
+end
+
+shared_examples "has image support" do
+  it "has image button" do
+    expect(page).to have_xpath("//button[@class='editor-toolbar-control'][@data-editor-type='image']")
+  end
+end
+
+shared_examples "has no video support" do
+  it "has no video button" do
+    expect(page).to have_no_xpath("//button[@class='editor-toolbar-control'][@data-editor-type='videoEmbed']")
+  end
+end
+
+shared_examples "has video support" do
+  it "has video button" do
+    expect(page).to have_xpath("//button[@class='editor-toolbar-control'][@data-editor-type='videoEmbed']")
+  end
+end
+
+shared_examples "has no drag and drop" do
+  it "cannot drop a file" do
     expect(page).to have_no_content("Add images by dragging & dropping or pasting them.")
-  end
-
-  if rte
-    it "has image button" do
-      expect(page).to have_no_xpath("//button[@class='ql-image']")
-    end
-  else
-    it "has no paste event" do
-      sleep 1
-      expect(page.execute_script("return typeof $._data($('#{editor_selector}')[0], 'events').paste")).to eq("undefined")
-    end
-
-    it "has no drop event" do
-      sleep 1
-      expect(page.execute_script("return typeof $._data($('#{editor_selector}')[0], 'events').drop")).to eq("undefined")
-    end
+    find(editor_selector).drop(image)
+    expect(page.execute_script("return document.querySelector('#{editor_selector}').value")).not_to eq("[Uploading file...]")
+    sleep 1
+    last_image = Decidim::DecidimAwesome::EditorImage.last
+    expect(last_image).to be_nil
   end
 end
 
-shared_examples "has drag and drop" do |rte|
-  it "has help text" do
-    skip "This feature is pending to be adapted to Decidim 0.28"
-
+shared_examples "has drag and drop" do
+  it "can drop a file" do
     expect(page).to have_content("Add images by dragging & dropping or pasting them.")
-  end
-
-  if rte
-    it "has image button" do
-      skip "This feature is pending to be adapted to Decidim 0.28"
-
-      expect(page).to have_xpath("//button[@class='ql-image']")
-    end
-  else
-    it "has paste event" do
-      sleep 1
-      expect(page.execute_script("return typeof $._data($('#{editor_selector}')[0], 'events').paste")).to eq("object")
-    end
-
-    it "has drop event" do
-      sleep 1
-      expect(page.execute_script("return typeof $._data($('#{editor_selector}')[0], 'events').drop")).to eq("object")
-    end
-  end
-end
-
-shared_examples "has markdown editor" do |images|
-  it "has CodeMirror class" do
-    skip "This feature is pending to be adapted to Decidim 0.28"
-
-    expect(page).to have_xpath("//div[@class='CodeMirror cm-s-paper CodeMirror-wrap']")
-  end
-
-  it "has toolbar" do
-    expect(page).to have_xpath("//div[@class='editor-toolbar']")
-  end
-
-  if images
-    it "has help text" do
-      skip "This feature is pending to be adapted to Decidim 0.28"
-
-      expect(page).to have_content("Add images by dragging & dropping or pasting them.")
-    end
-  else
-    it "has no help text" do
-      expect(page).to have_no_content("Add images by dragging & dropping or pasting them.")
-    end
-  end
-end
-
-shared_examples "has no markdown editor" do
-  it "has CodeMirror class" do
-    expect(page).to have_no_xpath("//div[@class='CodeMirror cm-s-paper CodeMirror-wrap']")
-  end
-
-  it "has toolbar" do
-    expect(page).to have_no_xpath("//div[@class='editor-toolbar']")
+    fill_in "proposal_title", with: "This is a test proposal"
+    fill_in "proposal_body", with: ""
+    find(editor_selector).drop(image)
+    expect(page.execute_script("return document.querySelector('#{editor_selector}').value")).to eq("[Uploading file...]")
+    sleep 1
+    last_image = Decidim::DecidimAwesome::EditorImage.last
+    expect(last_image).to be_present
+    content = page.execute_script("return document.querySelector('#{editor_selector}').value")
+    expect(content).to include(last_image.attached_uploader(:file).path)
+    # ensures valid body validations
+    fill_in "proposal_body", with: "This is a super test\n#{content}"
+    click_link_or_button "Send"
+    expect(proposal.reload.body["en"]).to include(last_image.attached_uploader(:file).path)
   end
 end

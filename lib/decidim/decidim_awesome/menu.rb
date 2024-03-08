@@ -85,7 +85,7 @@ module Decidim
                         position: 7.1,
                         if: menus[:menu_hacks_menu]
 
-          menu.add_item :main_menu,
+          menu.add_item :content_block_main_menu,
                         I18n.t("home_content_block_menu.title", scope: "decidim.decidim_awesome.admin.menu_hacks.index"),
                         decidim_admin_decidim_awesome.menu_hacks_path(:home_content_block_menu),
                         position: 7.2,
@@ -95,7 +95,7 @@ module Decidim
 
       def self.menus
         @menus ||= {
-          editors: config_enabled?([:allow_images_in_full_editor, :allow_images_in_small_editor, :use_markdown_editor, :allow_images_in_markdown_editor]),
+          editors: config_enabled?([:allow_images_in_editors, :allow_videos_in_editors]),
           proposals: config_enabled?(
             [
               :allow_images_in_proposals,

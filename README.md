@@ -53,11 +53,7 @@ Event if you haven't activated the WYSIWYG editor (Quill) in public views (eg: p
 
 ![Proposal images](examples/proposal-images.png)
 
-#### 4. Markdown editor for proposals
-
-Allows to use markdown when creating proposals instead of a bare textarea.
-
-#### 5. Admin scope configuration
+#### 4. Admin scope configuration
 
 All tweaks can be configured and scoped to a specific participatory space, a type of participatory space, a type of component or a specific component.
 
@@ -65,7 +61,7 @@ Many scopes can be defined for every tweak.
 
 ![Admin tweaks for editors](examples/admin-editors.png)
 
-#### 6. Awesome map component
+#### 5. Awesome map component
 
 This is a component you can add in any participatory space. It retrieves all the geolocated content in that participatory space (meetings or proposals) and displays it in a big map.
 
@@ -73,25 +69,25 @@ It also provides a simple search by category, each category is assigned to a dif
 
 ![Awesome map](examples/awesome-map.png)
 
-#### 7. Fullscreen Iframe component
+#### 6. Fullscreen Iframe component
 
 Another simple component that can be used to embed and Iframe with any external content in it that fills all the viewport.
 
 ![Fullscreen iframe](examples/fullscreen-iframe.png)
 
-#### 8. Live support chat
+#### 7. Live support chat
 
 With this feature you can have a support chat in Decidim. It is linked to a [Telegram](https://telegram.org/) group or a single user chat using the [[IntergramBot](https://web.telegram.org/#/im?p=@IntergramBot). Just invite the bot to a group or chat with it directly, grab your ID, put it on the Awesome settings and have fun!. For more info or for hosting your own version of the bot check the [Intergram project](https://github.com/idoco/intergram).
 
 ![Intergram screenshot](examples/intergram.png)
 
-#### 9. Custom CSS applied only according scoped restrictions
+#### 8. Custom CSS applied only according scoped restrictions
 
 With this feature you can create directly in the admin a CSS snipped that is only applied globally, in a particular assembly or even a single proposal!
 
 ![CSS screenshot](examples/custom_styles.png)
 
-#### 10. Change the main menu of Decidim entirely!
+#### 9. Change the main menu of Decidim entirely!
 
 Feel free to hide, modify or add items in the Decidim's main menu. You can also change the order, establish some conditions (like showing only for logged users) or open in a new window.
 
@@ -100,7 +96,7 @@ Feel free to hide, modify or add items in the Decidim's main menu. You can also 
 ![Menu hacks screenshot](examples/menu-3.png)
 ![Menu hacks screenshot](examples/menu-4.png)
 
-#### 11. Assign admins to specific scopes and prevent them modify anything else
+#### 10. Assign admins to specific scopes and prevent them modify anything else
 
 Convert any user on the platform (that is not currently an admin) to a limited subset of participatory spaces or event components. Just add users to a box and scope them to some constraints. These users will see the "Edit" button in everywhere they have permissions. Any access to non allowed zones will redirect the user to the admin index page.
 
@@ -108,7 +104,7 @@ Convert any user on the platform (that is not currently an admin) to a limited s
 ![Scoped admins unauthorized](examples/scoped_admins_unauthorized.png)
 ![Scoped admins configuration](examples/scoped_admins_config.png)
 
-#### 12. Custom fields for proposals
+#### 11. Custom fields for proposals
 
 Now admins can substitute the body of a proposal with a set of form fields.
 Edition is make with a Drag & Drop interface in the admin and can (and should) be scoped to apply only to certain proposal components.
@@ -119,7 +115,7 @@ Technically, the content is stored in the database as an XML document compatible
 ![Custom fields screenshot](examples/custom-fields-2.png)
 ![Custom fields screenshot](examples/custom-fields-1.gif)
 
-#### 13. Custom Redirections (or URL shortener feature)
+#### 12. Custom Redirections (or URL shortener feature)
 
 Admins can create custom paths that redirect to other places. Destinations can be internal absolute paths or external sites.
 There's also possible to choose to sanitize (ie: remove) any query string or to maintain it (so you can decide to use).
@@ -139,7 +135,7 @@ Using a link with a query string (ie: `/take-me-somewhere?locale=es`) that will 
 
 ![Custom redirections screenshot](examples/custom-redirections.png)
 
-#### 14. Custom validation rules for title and body in proposals
+#### 13. Custom validation rules for title and body in proposals
 
 Configure as you wish how the fields "title" and "body" are validated in proposals creation.
 
@@ -152,7 +148,7 @@ Rules available:
 
 ![Custom validations](examples/custom_validations.png)
 
-#### 15. Admin accountability
+#### 14. Admin accountability
 
 This feature allows you to list all the users that are, or have been at any point in time, admins, valuators, user managers or any other role in Decidim. Including global admin roles or private admins of a particular participatory space.
 
@@ -160,7 +156,7 @@ Results can be filtered by role and by time range and also exported as CSV or ot
 
 ![Admin accountability](examples/admin_accountability.png)
 
-#### 16. Additional proposal sortings
+#### 15. Additional proposal sortings
 
 ![Proposal sorting](examples/proposal_sorting.png)
 ![Proposal sorting admin](examples/proposal_sorting-admin.png)
@@ -189,7 +185,7 @@ Decidim::DecidimAwesome.configure do |config|
 end
 ```
 
-#### 17. Weighted voting
+#### 16. Weighted voting
 
 This feature allows you to configure a proposals component to use a weighted voting system. This means that each vote can have a different weight and the result of the vote is calculated as the sum of all the weights.
 
@@ -291,10 +287,17 @@ And then execute:
 
 ```bash
 bundle
-bundle exec rails decidim_decidim_awesome:install:migrations
-bundle exec rails decidim:upgrade
-bundle exec rails db:migrate
+bin/rails decidim:upgrade
+bin/rails db:migrate
 ```
+
+> Under the hood, when running `bundle exec rails decidim:upgrade` the `decidim-decidim_awesome` gem will run the following two tasks (that can also be run manually if you consider):
+> 
+> ```bash
+> bin/rails decidim_decidim_awesome:install:migrations
+> bin/rails decidim_decidim_awesome:webpacker:install
+> ```
+
 
 If you are upgrading from a version prior to 0.8, make sure to visit the URL `/admin/decidim_awesome/checks` and run image migrations for the old images:
 
@@ -350,13 +353,10 @@ In order to personalize default values, create an initializer such as:
 # Change some variables defaults
 Decidim::DecidimAwesome.configure do |config|
   # Enabled by default to all scopes, admins can still limit it's scope
-  config.allow_images_in_full_editor = true
+  config.allow_images_in_editors = true
 
   # Disabled by default to all scopes, admins can enable it and limit it's scope
-  config.allow_images_in_small_editor = false
-
-  # De-activated, admins don't even see it as an option
-  config.use_markdown_editor = :disabled
+  config.allow_videos_in_editors = false
 
   # Disable scoped admins
   config.scoped_admins = :disabled

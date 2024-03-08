@@ -6,8 +6,6 @@ module Decidim
       extend ActiveSupport::Concern
 
       included do
-        # alias_method :decidim_active_breadcr, :amendments_form_field_for
-
         def active_breadcrumb_item(target_menu)
           active_item = ::Decidim::MenuPresenter.new(target_menu, self).active_item_for_breadcrumb
 

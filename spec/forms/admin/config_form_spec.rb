@@ -9,8 +9,8 @@ module Decidim::DecidimAwesome
 
       let(:attributes) do
         {
-          allow_images_in_full_editor: true,
-          allow_images_in_small_editor: true
+          allow_images_in_editors: true,
+          allow_videos_in_editors: true
         }
       end
 

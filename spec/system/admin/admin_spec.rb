@@ -16,7 +16,9 @@ describe "Visit the admin page" do
     disabled_features.each do |feature|
       allow(Decidim::DecidimAwesome.config).to receive(feature).and_return(:disabled)
     end
-
+    Decidim::MenuRegistry.destroy(:awesome_admin_menu)
+    Decidim::DecidimAwesome::Menu.instance_variable_set(:@menus, nil)
+    Decidim::DecidimAwesome::Menu.register_awesome_admin_menu!
     switch_to_host(organization.host)
     login_as admin, scope: :user
     visit decidim_admin.root_path
@@ -33,24 +35,23 @@ describe "Visit the admin page" do
 
   context "when visiting system compatibility" do
     before do
+      skip "Skipped until all overrides are adapted to Decidim 0.28"
       click_link_or_button "System Compatibility"
     end
 
     it "renders the page" do
-      skip "This feature is pending to be adapted to Decidim 0.28"
-
       expect(page).to have_content(/System Compatibility Checks/i)
-      expect(page).to have_no_xpath("//span[@class='text-alert']")
-      expect(page).to have_xpath("//span[@class='text-success']")
+      expect(page).to have_no_xpath("//span[@class='fill-alert']")
+      expect(page).to have_xpath("//span[@class='fill-success']")
     end
 
     context "and header is overriden" do
       let(:version) { "0.11" }
 
       it "detects missing css" do
-        skip "This feature is pending to be adapted to Decidim 0.28"
-
-        expect(page).to have_xpath("//span[@class='text-alert']", count: 1)
+        within ".decidim-version" do
+          expect(page).to have_xpath("//span[@class='fill-alert']", count: 1)
+        end
       end
     end
   end
@@ -58,8 +59,6 @@ describe "Visit the admin page" do
   context "when visiting editor hacks" do
     context "when editor hacks are enabled" do
       before do
-        skip "Custom redirects feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
-
         click_link_or_button "Editor Hacks"
       end
 
@@ -72,8 +71,7 @@ describe "Visit the admin page" do
 
     context "when editor hacks are disabled" do
       let(:disabled_features) do
-        [:allow_images_in_full_editor, :allow_images_in_small_editor, :use_markdown_editor,
-         :allow_images_in_markdown_editor]
+        [:allow_images_in_editors, :allow_videos_in_editors]
       end
 
       it_behaves_like "do not have menu link", "editors"
@@ -105,8 +103,6 @@ describe "Visit the admin page" do
   context "when visiting proposal hacks" do
     context "when proposal hacks are enabled" do
       before do
-        skip "Proposals hacks feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
-
         click_link_or_button "Proposals Hacks"
       end
 
@@ -115,7 +111,6 @@ describe "Visit the admin page" do
       it "renders the page" do
         expect(page).to have_content(/Tweaks for proposals/i)
         expect(page).to have_content("Customize sorting options for the proposals list")
-        expect(page).to have_content("\"Rich text editor for participants\" is enabled")
         expect(page).to have_content("User input validations for the \"title\" field")
         expect(page).to have_content("User input validations for the \"body\" field")
       end
@@ -160,20 +155,12 @@ describe "Visit the admin page" do
       [:allow_images_in_proposals, :validate_title_min_length, :validate_title_max_caps_percent, :validate_title_max_marks_together, :validate_title_start_with_caps, :validate_body_min_length, :validate_body_max_caps_percent, :validate_body_max_marks_together, :validate_body_start_with_caps].each do |var|
         let(:disabled_features) { [var] }
 
-        before do
-          skip "Proposals hacks feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
-        end
-
         it_behaves_like "has menu link", "proposals"
       end
     end
 
     context "when all proposals hacks are disabled" do
       let(:disabled_features) { [:allow_images_in_proposals, :validate_title_min_length, :validate_title_max_caps_percent, :validate_title_max_marks_together, :validate_title_start_with_caps, :validate_body_min_length, :validate_body_max_caps_percent, :validate_body_max_marks_together, :validate_body_start_with_caps] }
-
-      before do
-        skip "Proposals hacks feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
-      end
 
       it_behaves_like "do not have menu link", "proposals"
     end
@@ -204,8 +191,6 @@ describe "Visit the admin page" do
   context "when visiting CSS tweaks" do
     context "when scoped styles are enabled" do
       before do
-        skip "Recover this tests after adapting and enabling all features"
-
         click_link_or_button "Custom Styles"
       end
 
@@ -218,10 +203,6 @@ describe "Visit the admin page" do
 
     context "when scoped styles are disabled" do
       let(:disabled_features) { [:scoped_styles] }
-
-      before do
-        skip "Recover this tests after adapting and enabling all features"
-      end
 
       it_behaves_like "do not have menu link", "styles"
     end
@@ -250,10 +231,6 @@ describe "Visit the admin page" do
 
     context "when menu_hacks are disabled" do
       let(:disabled_features) { [:menu] }
-
-      before do
-        skip "Recover this tests after adapting and enabling all features"
-      end
 
       it_behaves_like "do not have menu link", "menu_hacks" do
         let(:prefix) { "" }
@@ -298,10 +275,6 @@ describe "Visit the admin page" do
 
     context "when scoped admins are disabled" do
       let(:disabled_features) { [:scoped_admins] }
-
-      before do
-        skip "Recover this tests after adapting and enabling all features"
-      end
 
       it_behaves_like "do not have menu link", "admins"
     end

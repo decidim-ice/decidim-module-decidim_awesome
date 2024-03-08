@@ -13,7 +13,7 @@ module Decidim::DecidimAwesome::Admin
         current_organization: organization
       }
     end
-    let(:feature) { :allow_images_in_full_editor }
+    let(:feature) { :allow_images_in_editors }
     let(:action) do
       { scope: :admin, action: :edit_config, subject: feature }
     end
