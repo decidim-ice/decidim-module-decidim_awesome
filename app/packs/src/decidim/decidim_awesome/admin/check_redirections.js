@@ -39,11 +39,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const td = tr.querySelector(".redirect-status");
         td.innerHTML = '<span class="loading-spinner"></span>';
 
-        fetch(tr.dataset.origin, { method: "HEAD", redirect: "manual" })
-          .then((response) => {
+        fetch(tr.dataset.origin, { method: "HEAD", redirect: "manual" }).
+          then((response) => {
             td.innerHTML = getReport(tr, response);
-          })
-          .catch((error) => {
+          }).
+          catch((error) => {
             console.error("ERROR", error);
             td.classList.remove("loading");
           });
