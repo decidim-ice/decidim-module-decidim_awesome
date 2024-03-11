@@ -17,8 +17,6 @@ describe "Custom Redirections" do
   end
 
   before do
-    skip "Custom redirects feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
-
     # ErrorController is only called when in production mode
     unless ENV["SHOW_EXCEPTIONS"]
       allow(Rails.application).to \
