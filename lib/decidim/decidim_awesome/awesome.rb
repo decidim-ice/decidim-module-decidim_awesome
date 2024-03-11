@@ -138,8 +138,7 @@ module Decidim
     #      some_identifier: "{ ... some definition... }"
     #   }
     config_accessor :proposal_custom_fields do
-      # {}
-      :disabled
+      {}
     end
 
     # allows to keep modifications for the main menu
