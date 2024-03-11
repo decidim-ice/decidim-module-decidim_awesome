@@ -55,6 +55,7 @@
     "highlight.js": "^11.4.0",
     "inline-attacher": "^0.0.7",
     "jsrender": "^1.0.9",
-    "leaflet.featuregroup.subgroup": "^1.0.2"
+    "leaflet.featuregroup.subgroup": "^1.0.2",
+    "tom-select": "2.2.2"
   }
 }
