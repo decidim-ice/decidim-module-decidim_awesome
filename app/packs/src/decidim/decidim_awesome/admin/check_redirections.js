@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
       evt.target.classList.add("disabled");
 
       const getReport = (tr, response) => {
-        const item = tr.dataset.item;
+        const item = JSON.parse(tr.dataset.item);
         const td = tr.querySelector(".redirect-status");
 
         let type = response.type;
@@ -24,12 +24,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (item.active) {
           if (type === "redirect") {
-            td.classList.add("success");
+            td.classList.add("text-success");
           } else {
-            td.classList.add("alert");
+            td.classList.add("text-alert");
           }
         } else {
-          td.classList.add("muted");
+          td.classList.add("text-gray");
         }
 
         return `${type} (${status})`;
