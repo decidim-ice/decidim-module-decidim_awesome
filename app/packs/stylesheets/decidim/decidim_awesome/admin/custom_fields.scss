@@ -1,40 +1,4 @@
 // hide custom-fields inside tabs, an extra (unique) container is used instead
-.color-box {
-  display: inline-block;
-  height: 1em;
-  width: 1em;
-  margin-left: 1em;
-  vertical-align: middle;
-
-  &:first-child {
-    margin-left: 0;
-  }
-
-  &.primary {
-    background-color: var(--primary);
-  }
-
-  &.secondary {
-    background-color: var(--secondary);
-  }
-
-  &.tertiary {
-    background-color: var(--tertiary);
-  }
-
-  &.alert {
-    background-color: var(--alert);
-  }
-
-  &.warning {
-    background-color: var(--warning);
-  }
-
-  &.success {
-    background-color: var(--success);
-  }
-}
-
 .tabs-content {
   .proposal_custom_field {
     display: none;
@@ -48,44 +12,51 @@
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 
-    label {
-      display: inline-block;
-      max-width: 100%;
-      font-weight: 600 !important;
+    li > label {
+      line-height: 27px !important;
+      font-size: 16px !important;
+
+      //     display: inline-block;
+      //     max-width: 100%;
+      //     font-weight: 600 !important;
     }
 
-    li[type] {
-      display: inherit;
-      width: 100%;
-      height: inherit;
-      margin: inherit;
-      border: inherit;
-      box-shadow: inherit;
-      font-size: inherit;
-      font-weight: inherit;
-      line-height: inherit;
-      color: inherit;
+    .frmb-control li {
+      cursor: cell !important;
     }
 
-    .form-group {
-      background-color: inherit;
-      margin: 0;
-      padding: 0;
-    }
+    //   li[type] {
+    //     display: inherit;
+    //     width: 100%;
+    //     height: inherit;
+    //     margin: inherit;
+    //     border: inherit;
+    //     box-shadow: inherit;
+    //     font-size: inherit;
+    //     font-weight: inherit;
+    //     line-height: inherit;
+    //     color: inherit;
+    //   }
 
-    .form-wrap.form-builder .form-group {
-      margin-bottom: 10px !important;
-    }
+    //   .form-group {
+    //     background-color: inherit;
+    //     margin: 0;
+    //     padding: 0;
+    //   }
 
-    .form-control {
-      color: #555;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-      transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-      margin: 0;
-      padding: 6px 12px;
-    }
+    //   .form-wrap.form-builder .form-group {
+    //     margin-bottom: 10px !important;
+    //   }
+
+    //   .form-control {
+    //     color: #555;
+    //     background-color: #fff;
+    //     border: 1px solid #ccc;
+    //     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    //     transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    //     margin: 0;
+    //     padding: 6px 12px;
+    //   }
   }
 
   &_container {
@@ -97,6 +68,6 @@
 }
 
 // Custom fields tunning
-.rendered-form .form-control.ql-container {
-  height: auto !important;
-}
+// .rendered-form .form-control.ql-container {
+//   height: auto !important;
+// }
