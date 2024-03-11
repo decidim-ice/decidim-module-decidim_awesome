@@ -4,8 +4,9 @@
       <%= t(".title") %>
       <div class="flex gap-4">
         <%= link_to t(global? ? ".see_spaces" : ".see_global"), admin_accountability_path(admins: !global?), class: "button button__sm button__secondary tiny button--title new" %>
-        <span class="exports dropdown button__sm button__secondary button button--simple button--title" data-toggle="export-dropdown">
+        <span class="exports dropdown button button__sm button__secondary bg-secondary button--simple button--title" data-toggle="export-dropdown">
           <%= t "exports.button", scope: "decidim.decidim_awesome.admin.admin_accountability" %>
+          <%= icon "arrow-down-s-fill" %>
         </span>
         <div class="dropdown-pane" id="export-dropdown" data-dropdown data-auto-focus="true" data-close-on-click="true">
           <ul class="vertical menu add-components">
@@ -23,7 +24,7 @@
 
   <%= render partial: "decidim/decidim_awesome/admin/shared/filters_with_date", locals: { i18n_ctx: "admin_accountability" } %>
 
-  <div class="card-section">
+  <div class="card-section p-4">
     <p class="help-text"><%= t(global? ? ".global_description" : ".description") %></p>
 
     <% if global_users_missing_date %>
