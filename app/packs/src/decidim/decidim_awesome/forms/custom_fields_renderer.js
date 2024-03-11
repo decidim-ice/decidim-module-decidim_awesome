@@ -1,5 +1,5 @@
-require("formBuilder/dist/form-render.min.js")
-import "src/decidim/decidim_awesome/forms/rich_text_plugin"
+import "formBuilder/dist/form-render.min.js";
+// import "src/decidim/decidim_awesome/forms/rich_text_plugin"
 
 export default class CustomFieldsRenderer { // eslint-disable-line no-unused-vars
   constructor(containerSelector) {

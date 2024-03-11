@@ -1,5 +1,8 @@
-require("formBuilder/dist/form-builder.min.js")
-import "src/decidim/decidim_awesome/forms/rich_text_plugin"
+import "formBuilder/dist/form-builder.min.js";
+// import "src/decidim/decidim_awesome/forms/rich_text_plugin"
+// formBuilder uses jquery-ui-sortable which is a very dirty npm package with no neat source code available
+// For the moment, we remove the sortable functionality with a dummy jQuery plugin using another sortable plugin
+jQuery.fn.sortable = () => {}
 
 window.CustomFieldsBuilders = window.CustomFieldsBuilders || [];
 
