@@ -28,15 +28,15 @@
           </button>
         </div>
       </div>
-      <div class="input-group mt-4">
-        <div class="input-group-field">
+      <div class="input-group flex mt-4 w-full justify-center">
+        <div class="input-group-field flex flex-col w-full">
           <%= form.label t("search_field_start_date", scope: "decidim.admin.filters.label") %>
           <%= form.date_field(:created_at_gteq,
                               class: "input-group-field",
                               label: false,
                               datepicker: true) %>
         </div>
-        <div class="input-group-field">
+        <div class="input-group-field flex flex-col w-full">
           <%= form.label t("search_field_end_date", scope: "decidim.admin.filters.label") %>
           <%= form.date_field(:created_at_lteq,
                               class: "input-group-field",
