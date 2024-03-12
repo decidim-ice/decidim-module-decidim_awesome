@@ -8,7 +8,7 @@
 .proposal_custom_fields {
   &_editor {
     background-color: #e0e0e0;
-    padding: 0.5em 0.5em 1em;
+    padding: 0.5em;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 
@@ -19,6 +19,18 @@
       //     display: inline-block;
       //     max-width: 100%;
       //     font-weight: 600 !important;
+    }
+
+    input.form-control {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+
+      &:focus {
+        outline: 0;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+          0 0 8px rgba(102, 175, 233, 0.6) !important;
+      }
     }
 
     .frmb-control li {

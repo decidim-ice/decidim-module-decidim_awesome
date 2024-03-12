@@ -7,7 +7,7 @@ jQuery.fn.sortable = () => {}
 window.CustomFieldsBuilders = window.CustomFieldsBuilders || [];
 
 $(() => {
-  $(".awesome-edit-config .proposal_custom_fields_editor").each((_idx, el) => {
+  $(".awesome-edit-config .proposal_custom_fields_editor__").each((_idx, el) => {
     const key = $(el).closest(".proposal_custom_fields_container").data("key");
     // DOCS: https://formbuilder.online/docs
     window.CustomFieldsBuilders.push({

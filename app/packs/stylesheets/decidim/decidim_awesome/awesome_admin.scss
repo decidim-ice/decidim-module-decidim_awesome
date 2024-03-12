@@ -11,6 +11,15 @@
   @apply grid grid-cols-1 md:grid-cols-[100%_0%] mb-8;
 }
 
+// Loading spinner does not ocuppy all the width and height as the new spinner-container
+.loading-spinner {
+  @apply relative cursor-wait;
+
+  &::before {
+    @apply content-[""] ml-[50%] md:ml-[calc(50%-4rem)] block w-6 h-6 rounded-full animate-spin border-4 border-l-background border-y-background border-r-secondary z-20;
+  }
+}
+
 .pokecode-credits {
   float: right;
   margin: 0 1em 0.5em 0;
@@ -20,8 +29,6 @@
 .decidim_awesome {
   &.modal {
     .spinner {
-      // @include spinner(25px, #aaa, var(--secondary), 800ms);
-
       vertical-align: middle;
       display: none;
     }
@@ -50,25 +57,25 @@
 }
 
 // Some global fixes
-.form label {
-  .help-text {
-    display: block;
-    margin-top: -1.5em;
-    font-weight: normal;
-    margin-bottom: 1.5em;
-  }
-}
+// .form label {
+//   .help-text {
+//     display: block;
+//     margin-top: -1.5em;
+//     font-weight: normal;
+//     margin-bottom: 1.5em;
+//   }
+// }
 
-.form-input-extra-before ~ .form-error {
-  margin-top: -2.5rem;
-}
+// .form-input-extra-before ~ .form-error {
+//   margin-top: -2.5rem;
+// }
 
-tbody tr.menu_hack-addition {
-  background: rgb(255, 248, 222);
-}
+// tbody tr.menu_hack-addition {
+//   background: rgb(255, 248, 222);
+// }
 
-.secondary-nav {
-  li .icon {
-    margin-right: 0.5rem;
-  }
-}
+// .secondary-nav {
+//   li .icon {
+//     margin-right: 0.5rem;
+//   }
+// }
