@@ -53,12 +53,12 @@ module Decidim
     # Live chat widget linked to Telegram account or group
     # In the admin side only
     config_accessor :intergram_for_admins do
-      false
+      true
     end
 
     # In the public side only
     config_accessor :intergram_for_public do
-      false
+      true
     end
 
     # Configuration options to handle different validations in proposals
