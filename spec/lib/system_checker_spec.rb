@@ -8,10 +8,6 @@ module Decidim::DecidimAwesome
   describe SystemChecker do
     subject { described_class }
 
-    before do
-      # skip "Review this tests after adapting all features to 0.28"
-    end
-
     it "has overrides" do
       expect(subject.overrides.to_h.length).to eq(3)
     end

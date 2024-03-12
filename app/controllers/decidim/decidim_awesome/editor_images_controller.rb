@@ -2,7 +2,7 @@
 
 module Decidim
   module DecidimAwesome
-    # This controller handles image uploads for the hacked Quill editor
+    # This controller handles image uploads for the Tiptap editor
     class EditorImagesController < DecidimAwesome::ApplicationController
       include FormFactory
       include NeedsAwesomeConfig

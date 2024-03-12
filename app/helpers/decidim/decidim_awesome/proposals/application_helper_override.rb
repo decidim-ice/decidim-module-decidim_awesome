@@ -74,7 +74,7 @@ module Decidim
             custom_fields.apply_xml(body) if body.present?
             form.object.errors.add(name, custom_fields.errors) if custom_fields.errors
             editor_image = Decidim::EditorImage.new
-            editor_options = form.send(:editor_options, editor_image, {context: "participant", lines: 10})
+            editor_options = form.send(:editor_options, editor_image, { context: "participant", lines: 10 })
             editor_upload = form.send(:editor_upload, editor_image, editor_options[:upload])
             render partial: "decidim/decidim_awesome/custom_fields/form_render", locals: { spec: custom_fields.to_json, editor_options:, editor_upload:, form:, name: }
           end
