@@ -1,17 +1,8 @@
-// .decidim_awesome-custom_fields {
-//   dd {
-//     > div:last-child {
-//       margin-bottom: 1rem;
-//     }
-
-//     &[name="textarea"] {
-//       > div > p {
-//         margin-top: 1rem;
-//         margin-bottom: 0;
-//       }
-//     }
-//   }
-// }
+.decidim_awesome-custom_fields {
+  dd {
+    @apply px-0;
+  }
+}
 
 // styles to tune a bit the form presentation in proposals creation
 .proposal_custom_field {

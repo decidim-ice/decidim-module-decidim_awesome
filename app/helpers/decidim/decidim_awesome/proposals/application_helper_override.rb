@@ -37,7 +37,7 @@ module Decidim
             tabs_id = form.send(:sanitize_tabs_selector, form.options[:tabs_id] || "#{form.object_name}-body-tabs")
 
             label_tabs = form.content_tag(:div, class: "label--tabs") do
-              field_label = form.send(:label_i18n, "body", form.label_for("proposal_custom_fields"))
+              field_label = form.send(:label_i18n, "body", form.label_for("proposal_custom_fields"), required: form.options[:required])
 
               language_selector = "".html_safe
               language_selector = form.create_language_selector(locales, tabs_id, "body") if form.options[:label] != false
@@ -48,7 +48,7 @@ module Decidim
             tabs_content = form.content_tag(:div, class: "tabs-content", data: { tabs_content: tabs_id }) do
               locales.each_with_index.inject("".html_safe) do |string, (locale, index)|
                 tab_content_id = "#{tabs_id}-body-panel-#{index}"
-                string + content_tag(:div, class: form.send(:tab_element_class_for, "panel", index), id: tab_content_id) do
+                string + content_tag(:div, class: form.send(:tab_element_class_for, "panel", index), id: tab_content_id, "aria-hidden": index.zero? ? "false" : "true") do
                   render_proposal_custom_fields_override(custom_fields, form, "body_#{locale}", locale)
                 end
               end

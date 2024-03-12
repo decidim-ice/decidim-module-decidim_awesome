@@ -1,6 +1,6 @@
 decidim-admin:
   /app/views/layouts/decidim/admin/_header.html.erb:
-    decidim-0.25: 1aff077428830b12306d6c42e6b37216
+    decidim-0.28: 25bf272ac5a70eb8a975f4889fa46095
 decidim-core:
   /app/packs/entrypoints/decidim_editor.js:
     decidim-0.28: beddd77e3893fd0b7cd2679a7ee6e536
