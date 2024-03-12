@@ -13,7 +13,7 @@
             <% %w{CSV JSON Excel}.each do |format| %>
               <li class="exports--format--<%= format.downcase %> exports--registrations">
                 <%= link_to t("decidim.decidim_awesome.admin.admin_accountability.exports.export_as", export_format:
-                  format.upcase), export_admin_accountability_path(export_params.merge(format: format)), 
+                  format.upcase), export_admin_accountability_path(export_params.merge(format: format)),
                   method: :post,
                   class: "focus-visible:outline-none" %>
               </li>
