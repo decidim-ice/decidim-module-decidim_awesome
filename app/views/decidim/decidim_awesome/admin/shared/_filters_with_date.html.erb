@@ -47,11 +47,6 @@
     <% end %>
   </div>
 </div>
-<div class="card-section fcell grid-x flex flex-row p-4 justify-end">
-  <div class="cell medium-10 filter-status" data-applied-filters-tags>
-    <%= applied_filters_tags(i18n_ctx) %>
-  </div>
-  <div class="cell auto w-auto text-right">
-    <%= admin_filters_pagination %>
-  </div>
+<div class="fcell grid-x" data-applied-filters-tags>
+  <%= applied_filters_tags(i18n_ctx) %>
 </div>
