@@ -1,5 +1,5 @@
 import "formBuilder/dist/form-render.min.js";
-// import "src/decidim/decidim_awesome/forms/rich_text_plugin"
+import "src/decidim/decidim_awesome/forms/rich_text_plugin"
 
 export default class CustomFieldsRenderer { // eslint-disable-line no-unused-vars
   constructor(containerSelector) {
@@ -201,7 +201,7 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
     if (!this.$container) {
       this.$container = $(this.containerSelector);
     }
-    // console.log("init", $element, "this", this)
+    console.log("init", $element, "this", this)
     // always use the last field (in case of multilang tabs we only render one form due a limitation of the library to handle several instances)
     this.instance = this.$container.formRender({
       i18n: {
@@ -210,7 +210,12 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
       },
       formData: this.spec,
       render: true,
-      disableInjectedStyle: true
+      disableInjectedStyle: true,
+      controlConfig: {
+        "textarea.richtext": {
+          editorOptions: $element.data("editorOptions")
+        }
+      }
     });
     this.fixBuggyFields();
   }

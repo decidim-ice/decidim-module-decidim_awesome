@@ -1,3 +1,5 @@
+@import "stylesheets/decidim/editor";
+
 // hide custom-fields inside tabs, an extra (unique) container is used instead
 .tabs-content {
   .proposal_custom_field {
@@ -11,6 +13,10 @@
     padding: 0.5em;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+
+    svg {
+      @apply fill-black;
+    }
 
     li > label {
       line-height: 27px !important;
@@ -31,6 +37,10 @@
 
     .frmb-control li {
       cursor: cell !important;
+    }
+    // drag and drop is disabled, let's not show the move cursor
+    .frmb .prev-holder {
+      cursor: default !important;
     }
   }
 

@@ -24,7 +24,7 @@ decidim-proposals:
   /app/forms/decidim/proposals/proposal_wizard_create_step_form.rb:
     decidim-0.27: b495d37088ecebcbe4ac9563bb3498d5
   /app/helpers/decidim/proposals/application_helper.rb:
-    decidim-0.27.3: a9c9ed5eedaf7bf80afaf9ff5a89c254
+    decidim-0.28: 89df14045349cc2eaaec78f79f6140b1
   /app/controllers/decidim/proposals/proposal_votes_controller.rb:
     decidim-0.27: a1d416491752f4c2fb2668b29ceb8e09
   /app/views/decidim/proposals/collaborative_drafts/_edit_form_fields.html.erb:

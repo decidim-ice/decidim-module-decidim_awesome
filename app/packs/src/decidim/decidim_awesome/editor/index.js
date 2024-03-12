@@ -37,6 +37,7 @@ export default function createEditor(container) {
    */
   const features = container.dataset?.toolbar || "basic";
   const options = JSON.parse(container.dataset.options);
+  console.log("options for this editor", options, "container", container, "editorContainer", editorContainer, "input", input, "label", label)
   const { context, contentTypes } = options;
 
   const decidimOptions = {};

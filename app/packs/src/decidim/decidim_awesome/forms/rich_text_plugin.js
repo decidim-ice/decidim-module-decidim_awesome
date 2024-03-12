@@ -4,7 +4,8 @@
  *
  * Registers Decidim Richtext as a subtype for the textarea control
  */
-// import {createQuillEditor} from "src/decidim/decidim_awesome/editors/editor"
+
+import createEditor from "src/decidim/decidim_awesome/editor";
 
 // configure the class for runtime loading
 if (!window.fbControls) {
@@ -40,7 +41,7 @@ window.fbControls.push(function(controlClass, allControlClasses) {
      * @return {void}
      */
     configure() {
-      window.fbEditors.richtext = {};
+      window.fbEditors.tiptap = {};
     }
 
     /**
@@ -60,19 +61,24 @@ window.fbControls.push(function(controlClass, allControlClasses) {
         value: (userData && userData[0]) || value || ""
       });
 
-      const css = this.markup(
-        "style",
-        `
-        #${attrs.id} { height: auto; min-height: 6rem; padding-left: 0; padding-right: 0; }
-        #${attrs.id} div.ql-container { height: ${attrs.rows || 1}rem; }
-        #${attrs.id} p.help-text { margin-top: .5rem; }
-        `,
-        { type: "text/css" }
-      );
-      const wrapperAttrs = {...attrs, "data-toolbar": "full" };
-      // console.log("build value", value, "userData", userData, "attrs", attrs, attrs.id, "wrapperAttrs", wrapperAttrs);
-      this.wrapper = this.markup("div", null, wrapperAttrs);
-      return this.markup("div", [css, this.input, this.wrapper], attrs);
+      this.editorInput = this.markup("div", null, {
+        style: "height: 25rem",
+        class: "editor-input"
+      });
+
+      const options = this.classConfig && this.classConfig.editorOptions || {"contentTypes": {image: ["image/jpeg", "image/png"]}};
+      const wrapperAttrs = {
+        "id": attrs.id, 
+        "name": attrs.name, 
+        "type": attrs.type, 
+        "className": "editor-container", 
+        "data-toolbar": "basic", 
+        "data-disabled": "false", 
+        "data-options": JSON.stringify(options)
+      };
+      // console.log("build value", value, "userData", userData, "attrs", attrs, attrs.id, "wrapperAttrs", wrapperAttrs,"this",this);
+      this.wrapper = this.markup("div", this.editorInput, wrapperAttrs);
+      return this.markup("div", [this.input, this.wrapper], {style: "margin-top: 1rem"});
     }
 
     /**
@@ -81,16 +87,16 @@ window.fbControls.push(function(controlClass, allControlClasses) {
      * @return {Object} evt - event
      */
     onRender(evt) {
-      // const value = this.config.value || '';
-      if (window.fbEditors.richtext[this.id]) {
-        // console.log("todo destroy", window.fbEditors.richtext[this.id]);
-        // window.fbEditors.richtext[this.id].richtext('destroy')
+      if (window.fbEditors.tiptap[this.id]) {
+        console.log("destroying editor", window.fbEditors.tiptap[this.id]);
+        window.fbEditors.tiptap[this.id].instance.destroy();
       }
 
-      window.fbEditors.quill[this.id] = {};
-      // const editor = window.fbEditors.quill[this.id];
-      // createQuillEditor does all the job to update the hidden input wrapper
-      // editor.instance = createQuillEditor(this.wrapper);
+      window.fbEditors.tiptap[this.id] = {};
+      const editor = window.fbEditors.tiptap[this.id];
+      editor.instance = createEditor(this.wrapper);
+      // const value = this.config.value || "";
+      // console.log("render! editor", editor, "this", this, "value", value);
       // editor.data = new Delta();
       // if (value) {
       //   editor.instance.setContents(window.JSON.parse(this.parsedHtml(value)));
@@ -100,7 +106,6 @@ window.fbControls.push(function(controlClass, allControlClasses) {
       // //   // editor.data = editor.data.compose(delta);
       // });
 
-      // console.log("render! editor", editor, "this", this, "value", value);
       return evt;
     }
   }

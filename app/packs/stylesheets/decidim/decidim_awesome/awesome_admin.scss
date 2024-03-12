@@ -8,9 +8,9 @@
 @import "stylesheets/decidim/decidim_awesome/shared/spinner";
 
 // Remove the 20% right column from the item__edit class
-.item__edit {
-  @apply grid grid-cols-1 md:grid-cols-[100%_0%] mb-8;
-}
+// .item__edit {
+//   @apply grid grid-cols-1 md:grid-cols-[100%_0%] mb-8;
+// }
 
 .pokecode-credits {
   float: right;

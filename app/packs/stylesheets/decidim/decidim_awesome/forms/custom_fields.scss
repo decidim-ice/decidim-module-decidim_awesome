@@ -72,6 +72,12 @@
     }
   }
 
+  .formbuilder-checkbox {
+    > label {
+      @apply font-normal;
+    }
+  }
+
   .formbuilder-autocomplete {
     @apply relative;
 
