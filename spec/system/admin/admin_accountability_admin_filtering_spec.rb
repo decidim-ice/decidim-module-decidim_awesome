@@ -171,7 +171,7 @@ describe "Filter Admin actions" do
         it "exports the result" do
           search_by_date(6.days.ago, 5.days.ago)
 
-          find(".exports.dropdown").click
+          find(".exports.button.tiny").click
           perform_enqueued_jobs { click_link_or_button "Export as CSV" }
 
           within ".flash.success" do
