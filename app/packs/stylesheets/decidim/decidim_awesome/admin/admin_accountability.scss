@@ -1,1 +1,5 @@
 // filter button stile
+.dropdown.menu > li.is-dropdown-submenu-parent > a {
+    position: relative;
+    padding-right: 1.5rem;
+}

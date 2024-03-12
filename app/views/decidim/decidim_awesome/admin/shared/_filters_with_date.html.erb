@@ -1,4 +1,4 @@
-<div class="filters__section p-4 flex">
+<div class="filters__section p-4 flex mb-0">
   <div class="fcell filter self-start">
     <ul class="dropdown menu" data-dropdown-menu data-close-on-click-inside="false">
       <li>
@@ -10,7 +10,7 @@
       </li>
     </ul>
   </div>
-  <div class="fcell search mb-2">
+  <div class="fcell search">
     <%= search_form_for(query, url: url_for, html: { class: "form-defaults form" }) do |form| %>
       <%= applied_filters_hidden_field_tags %>
       <div class="input-group flex items-center">
@@ -47,11 +47,11 @@
     <% end %>
   </div>
 </div>
-<div class="flex flex-row p-4 justify-end">
-  <div class="">
+<div class="card-section fcell grid-x flex flex-row p-4 justify-end">
+  <div class="cell medium-10 filter-status" data-applied-filters-tags>
     <%= applied_filters_tags(i18n_ctx) %>
   </div>
-  <div class="w-auto text-right">
+  <div class="cell auto w-auto text-right">
     <%= admin_filters_pagination %>
   </div>
 </div>
