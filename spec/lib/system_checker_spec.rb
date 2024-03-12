@@ -9,7 +9,7 @@ module Decidim::DecidimAwesome
     subject { described_class }
 
     before do
-      skip "Review this tests after adapting all features to 0.28"
+      # skip "Review this tests after adapting all features to 0.28"
     end
 
     it "has overrides" do

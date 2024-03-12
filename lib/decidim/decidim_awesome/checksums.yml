@@ -34,7 +34,7 @@ decidim-proposals:
     # this file is not overriden anymore but it needs to be the last version
     decidim-0.27.3: b1ec22d35263a2ac96fe4604c0ceb752
   /app/views/decidim/proposals/admin/proposals/_form.html.erb:
-    decidim-0.27: f60168e432e1d419e5aec5d3d1e53f0e
+    decidim-0.28: 824463b320562c15fdb530bfebbf2f0f
   /app/views/decidim/proposals/proposals/_vote_button.html.erb:
     decidim-0.27: f7202c37fe042cd816a6f9fd0f9e6807
   /app/views/decidim/proposals/proposals/_votes_count.html.erb:

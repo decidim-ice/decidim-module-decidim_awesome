@@ -6,5 +6,5 @@
     </div>
   <% end %>
 <% else %>
-  <%= form.translated(:editor, :body, hashtaggable: true) %>
+  <%= form.translated :editor, :body, hashtaggable: true, aria: { label: :body } %>
 <% end %>

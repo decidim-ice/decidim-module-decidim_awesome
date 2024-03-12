@@ -209,7 +209,8 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
         location: "https://cdn.jsdelivr.net/npm/formbuilder-languages@1.1.0/"
       },
       formData: this.spec,
-      render: true
+      render: true,
+      disableInjectedStyle: true
     });
     this.fixBuggyFields();
   }

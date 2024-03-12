@@ -15,15 +15,11 @@
     li > label {
       line-height: 27px !important;
       font-size: 16px !important;
-
-      //     display: inline-block;
-      //     max-width: 100%;
-      //     font-weight: 600 !important;
     }
 
     input.form-control {
       background-color: #fff;
-      border: 1px solid #ccc;
+      border: 1px solid #ccc !important;
       box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 
       &:focus {
@@ -36,39 +32,6 @@
     .frmb-control li {
       cursor: cell !important;
     }
-
-    //   li[type] {
-    //     display: inherit;
-    //     width: 100%;
-    //     height: inherit;
-    //     margin: inherit;
-    //     border: inherit;
-    //     box-shadow: inherit;
-    //     font-size: inherit;
-    //     font-weight: inherit;
-    //     line-height: inherit;
-    //     color: inherit;
-    //   }
-
-    //   .form-group {
-    //     background-color: inherit;
-    //     margin: 0;
-    //     padding: 0;
-    //   }
-
-    //   .form-wrap.form-builder .form-group {
-    //     margin-bottom: 10px !important;
-    //   }
-
-    //   .form-control {
-    //     color: #555;
-    //     background-color: #fff;
-    //     border: 1px solid #ccc;
-    //     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    //     transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-    //     margin: 0;
-    //     padding: 6px 12px;
-    //   }
   }
 
   &_container {
@@ -78,8 +41,3 @@
     }
   }
 }
-
-// Custom fields tunning
-// .rendered-form .form-control.ql-container {
-//   height: auto !important;
-// }
