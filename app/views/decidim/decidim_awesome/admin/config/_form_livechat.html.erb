@@ -14,6 +14,7 @@
           <%= t("help.intergram_config", scope: "decidim.decidim_awesome.admin.config.form").html_safe %>
         </p>
       </div>
+            
       <%= f.check_box :require_login, label: t("intergram_require_login", scope: "activemodel.attributes.config") %>
       <%= f.check_box :use_floating_button, label: t("intergram_use_floating_button", scope: "activemodel.attributes.config") %>
       <%= f.color_field :color, label: t("intergram_color", scope: "activemodel.attributes.config") %>
@@ -26,14 +27,22 @@
   <% end %>
 </div>
 
-<div class="form__wrapper row column decidim_awesome-form">
+<div class="gap-0 form__wrapper p-4 decidim_awesome-form">
   <% if config_enabled? :intergram_for_admins %>
-    <%= form.check_box :intergram_for_admins, help_text: t("help.intergram_about", scope: "decidim.decidim_awesome.admin.config.form").html_safe %>
+    <%= form.check_box :intergram_for_admins %>
+    <span class="help_text mb-4">
+      <%= t("help.intergram_about", scope: "decidim.decidim_awesome.admin.config.form").html_safe %>
+    </span>
 
     <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :intergram_for_admins, constraints: constraints_for(:intergram_for_admins) }) %>
 
     <%= fields_for "config[intergram_for_admins_settings]", form.object.intergram_for_admins_settings do |f| %>
-      <%= f.text_field :chat_id, label: t("intergram_chat_id", scope: "activemodel.attributes.config"), help_text: t("help.intergram_config", scope: "decidim.decidim_awesome.admin.config.form").html_safe %>
+      <div class="mb-4">
+        <%= f.text_field :chat_id, label: t("intergram_chat_id", scope: "activemodel.attributes.config") %>
+        <p class="help_text">
+          <%= t("help.intergram_config", scope: "decidim.decidim_awesome.admin.config.form").html_safe %>
+        </p>
+      </div>
 
       <%= f.check_box :use_floating_button, label: t("intergram_use_floating_button", scope: "activemodel.attributes.config") %>
       <%= f.color_field :color, label: t("intergram_color", scope: "activemodel.attributes.config") %>
