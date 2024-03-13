@@ -6,7 +6,7 @@
     <span class="label warning"><%= t ".always" %></span>
   <% end %>
 
-  <ul class="constraints-list<%= " inactive" if constraints&.detect{|c| c.settings["participatory_space_manifest"]=="none" } %>">
+  <ul class="constraints-list<%= " inactive" if constraints&.detect{|c| c.settings["participatory_space_manifest"]=="none" } %>" style= "padding: 0;">
     <% constraints&.each do |constraint| %>
       <li>
         <% constraint.settings.reverse_each do |k, val| %>
