@@ -1,6 +1,9 @@
-<div class="form__wrapper row column decidim_awesome-form">
+<div class="gap-0 form__wrapper p-4 decidim_awesome-form">
   <% if config_enabled? :intergram_for_public %>
-    <%= form.check_box :intergram_for_public, help_text: t("help.intergram_about", scope: "decidim.decidim_awesome.admin.config.form").html_safe %>
+    <%= form.check_box :intergram_for_public %>
+    <span class="help_text mb-4">
+      <%= t("help.intergram_about", scope: "decidim.decidim_awesome.admin.config.form").html_safe %>
+    </span>
 
     <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :intergram_for_public, constraints: constraints_for(:intergram_for_public) }) %>
 
