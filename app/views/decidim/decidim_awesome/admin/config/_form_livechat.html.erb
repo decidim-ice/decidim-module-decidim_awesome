@@ -10,7 +10,7 @@
     <%= fields_for "config[intergram_for_public_settings]", form.object.intergram_for_public_settings do |f| %>
       <div class="mb-4">
         <%= f.text_field :chat_id, label: t("intergram_chat_id", scope: "activemodel.attributes.config") %>
-        <p class="help-text" style= "margin-top: -1rem;">
+        <p class="help-text" style="margin-top: -1rem;">
           <%= t("help.intergram_config", scope: "decidim.decidim_awesome.admin.config.form").html_safe %>
         </p>
       </div>

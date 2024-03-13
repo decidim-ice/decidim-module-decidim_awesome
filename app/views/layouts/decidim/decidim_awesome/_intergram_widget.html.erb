@@ -1,5 +1,5 @@
 <script>
-  window.intergramId = "<%= j (settings[:chat_id]&.html_safe || '').html_safe %>";
+  window.intergramId = "<%= j (settings[:chat_id]&.html_safe || "").html_safe %>";
 
   window.intergramOnOpen = {};
   window.intergramOnOpen.visitorName = "<%= j current_user&.nickname %>";
