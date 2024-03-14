@@ -1,15 +1,15 @@
 <script>
-  window.intergramId = "<%= j (settings[:chat_id]&.html_safe || "").html_safe %>";
+  window.intergramId = "<%= j (settings[:chat_id]).html_safe %>";
 
   window.intergramOnOpen = {};
-  window.intergramOnOpen.visitorName = "<%= j (current_user&.nickname || "").html_safe %>";
+  window.intergramOnOpen.visitorName = "<%= j current_user&.nickname %>";
   window.intergramCustomizations = {
-    titleClosed: "<%= j ((settings[:title_closed].presence || t("decidim.decidim_awesome.config.intergram.title_closed")) || "").html_safe %>",
-    titleOpen: "<%= j ((settings[:title_open].presence || t("decidim.decidim_awesome.config.intergram.title_open")) || "").html_safe %>",
-    introMessage: "<%= j ((settings[:intro_message].presence || t("decidim.decidim_awesome.config.intergram.intro_message")) || "").html_safe %>",
-    autoResponse: "<%= j ((settings[:auto_response].presence || t("decidim.decidim_awesome.config.intergram.auto_response")) || "").html_safe %>",
-    autoNoResponse: "<%= j ((settings[:auto_no_response].presence || t("decidim.decidim_awesome.config.intergram.auto_no_response")) || "").html_safe %>",
-    mainColor: "<%= j ((settings[:color].presence || "#E91E63") || "").html_safe %>",
+    titleClosed: "<%= j (settings[:title_closed].presence || t("decidim.decidim_awesome.config.intergram.title_closed")).html_safe %>",
+    titleOpen: "<%= j (settings[:title_open].presence || t("decidim.decidim_awesome.config.intergram.title_open")).html_safe %>",
+    introMessage: "<%= j (settings[:intro_message].presence || t("decidim.decidim_awesome.config.intergram.intro_message")).html_safe %>",
+    autoResponse: "<%= j (settings[:auto_response].presence || t("decidim.decidim_awesome.config.intergram.auto_response")).html_safe %>",
+    autoNoResponse: "<%= j (settings[:auto_no_response].presence || t("decidim.decidim_awesome.config.intergram.auto_no_response")).html_safe %>",
+    mainColor: "<%= j (settings[:color].presence || "#E91E63").html_safe %>",
     alwaysUseFloatingButton: <%= settings[:use_floating_button] ? "true" : "false" %> // Use the mobile floating button also on large screens
   };
 </script>
