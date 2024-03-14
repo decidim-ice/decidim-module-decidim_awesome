@@ -1,7 +1,7 @@
 <div class="gap-0 form__wrapper p-4 decidim_awesome-form">
   <% if config_enabled? :intergram_for_public %>
     <%= form.check_box :intergram_for_public %>
-    <span class="help-text mb-4">
+    <span class="help-text mb-4" style="margin-top:-1rem;">
       <%= t("help.intergram_about", scope: "decidim.decidim_awesome.admin.config.form").html_safe %>
     </span>
 
@@ -30,7 +30,7 @@
 <div class="gap-0 form__wrapper p-4 decidim_awesome-form">
   <% if config_enabled? :intergram_for_admins %>
     <%= form.check_box :intergram_for_admins %>
-    <span class="help-text mb-4">
+    <span class="help-text mb-4" style="margin-top:-1rem;">
       <%= t("help.intergram_about", scope: "decidim.decidim_awesome.admin.config.form").html_safe %>
     </span>
 
