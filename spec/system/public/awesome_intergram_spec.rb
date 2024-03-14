@@ -29,6 +29,8 @@ describe "Show intergram chat" do
   end
 
   before do
+    skip "Awesome chat feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
+
     stub_request(:get, /example\.com/).to_return(status: 200, body: "")
     Decidim::DecidimAwesome.config.intergram_url = intergram_url
 
