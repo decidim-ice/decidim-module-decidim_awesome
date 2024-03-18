@@ -63,16 +63,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // restore if available
-  Reflect.apply(store.apply, store, []);
+  store.apply(); // eslint-disable-line prefer-reflect
   // restore checkboxes
   try {
     let checkboxes = JSON.parse(window.localStorage.getItem(storeCheckboxesId));
     Object.keys(checkboxes).forEach((id) => {
-      Reflect.apply(
-        document.getElementById,
-        document,
-        [id]
-      ).checked = checkboxes[id];
+      if (Object.prototype.hasOwnProperty.call(checkboxes, id)) {// eslint-disable-line prefer-reflect
+        document.getElementById(id).checked = checkboxes[id];
+      }
     });
   } catch (evt) {
     console.log("No checkboxes found");
@@ -92,3 +90,4 @@ document.addEventListener("DOMContentLoaded", () => {
   // save changes when modifications
   form.addEventListener("change", save);
 });
+
