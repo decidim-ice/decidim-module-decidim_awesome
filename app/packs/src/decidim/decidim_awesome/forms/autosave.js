@@ -39,9 +39,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const showMsg = (msg, error = false, defaultTime = 700) => {
-    const time = error ? 5000 : defaultTime;
+    const time = error
+      ? 5000
+      : defaultTime;
     const div = document.createElement("div");
-    div.className = `awesome_autosave-notice${error ? " error" : ""}`;
+    div.className = `awesome_autosave-notice${error
+      ? " error"
+      : ""}`;
     div.textContent = msg;
     form.appendChild(div);
     setTimeout(() => {
@@ -59,15 +63,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // restore if available
-  store.apply();
+  Reflect.apply(store.apply, store, []);
   // restore checkboxes
   try {
     let checkboxes = JSON.parse(window.localStorage.getItem(storeCheckboxesId));
-    for (let id in checkboxes) {
-      if (checkboxes.hasOwnProperty(id)) {
-        document.getElementById(id).checked = checkboxes[id];
-      }
-    }
+    Object.keys(checkboxes).forEach((id) => {
+      Reflect.apply(
+        document.getElementById,
+        document,
+        [id]
+      ).checked = checkboxes[id];
+    });
   } catch (evt) {
     console.log("No checkboxes found");
   }
@@ -76,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
     store.save();
     // save checkbox manually
     let checkboxes = {};
-    form.querySelectorAll('input[type="checkbox"]').forEach(el => {
+    form.querySelectorAll('input[type="checkbox"]').forEach((el) => {
       checkboxes[el.id] = el.checked;
     });
     window.localStorage.setItem(storeCheckboxesId, JSON.stringify(checkboxes));
