@@ -1,5 +1,6 @@
-<div class="gap-0 form__wrapper p-4 decidim_awesome-form">
+<div class="form__wrapper p-4 decidim_awesome-form">
   <% if config_enabled? :intergram_for_public %>
+  <div class="row column">
     <%= form.check_box :intergram_for_public %>
     <span class="help-text mb-4" style="margin-top:-1rem;">
       <%= t("help.intergram_about", scope: "decidim.decidim_awesome.admin.config.form").html_safe %>
@@ -24,11 +25,13 @@
       <%= f.text_field :intro_message, class: "mb-4", label: t("intergram_intro_message", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.intro_message") %>
       <%= f.text_field :auto_no_response, class: "mb-4", label: t("intergram_auto_no_response", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.auto_no_response") %>
     <% end %>
+  </div>
   <% end %>
 </div>
 
-<div class="gap-0 form__wrapper p-4 decidim_awesome-form">
+<div class="form__wrapper p-4 decidim_awesome-form">
   <% if config_enabled? :intergram_for_admins %>
+  <div class="row column">
     <%= form.check_box :intergram_for_admins %>
     <span class="help-text mb-4" style="margin-top:-1rem;">
       <%= t("help.intergram_about", scope: "decidim.decidim_awesome.admin.config.form").html_safe %>
@@ -52,6 +55,6 @@
       <%= f.text_field :intro_message, class: "mb-4", label: t("intergram_intro_message", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.intro_message") %>
       <%= f.text_field :auto_no_response, class: "mb-4", label: t("intergram_auto_no_response", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.auto_no_response") %>
     <% end %>
-
+  </div>
   <% end %>
 </div>

@@ -119,8 +119,6 @@ describe "Show intergram chat" do
     before do
       login_as user, scope: :user
       visit decidim_admin.root_path
-      click_on "Decidim awesome"
-      click_on "Live Chat"
     end
 
     it_behaves_like "shows the chat", true
