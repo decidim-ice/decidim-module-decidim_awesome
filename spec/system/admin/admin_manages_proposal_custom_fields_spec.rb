@@ -35,7 +35,7 @@ describe "Admin manages custom proposal fields" do
       # page.execute_script("$('.proposal_custom_fields_editor:first')[0].FormBuilder.actions.setData(#{data})")
       page.execute_script("document.querySelector('.proposal_custom_fields_editor').FormBuilder.actions.setData(#{data})")
 
-      find("*[type=submit]").click
+      click_link_or_button "Update configuration"
 
       sleep 2
       expect(page).to have_admin_callout("updated successfully")
@@ -63,7 +63,7 @@ describe "Admin manages custom proposal fields" do
       expect(page).to have_no_content("Short Bio")
 
       page.execute_script("$('.proposal_custom_fields_container[data-key=\"foo\"] .proposal_custom_fields_editor')[0].FormBuilder.actions.setData(#{data})")
-      find("*[type=submit]").click
+      click_link_or_button "Update configuration"
 
       sleep 2
       expect(page).to have_admin_callout("updated successfully")
@@ -120,8 +120,8 @@ describe "Admin manages custom proposal fields" do
         end
 
         select "Processes", from: "constraint_participatory_space_manifest"
-        within ".modal-content" do
-          find("*[type=submit]").click
+        within "#new-modal-proposal_custom_field_foo" do
+          click_link_or_button "Save"
         end
 
         sleep 2
