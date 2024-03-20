@@ -47,6 +47,7 @@ export default class MeetingsFetcher extends Fetcher {
                   latitude
                   longitude
                 }
+                typeOfMeeting
                 category {
                   id
                 }

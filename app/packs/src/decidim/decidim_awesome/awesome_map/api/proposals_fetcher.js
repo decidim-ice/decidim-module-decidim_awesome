@@ -23,12 +23,17 @@ export default class ProposalsFetcher extends Fetcher {
                       locale
                     }
                   }
+                  author {
+                    name
+                  }
                   body {
                     translations {
                       text
                       locale
                     }
                   }
+                  totalCommentsCount
+                  endorsementsCount
                   address
                   coordinates {
                     latitude

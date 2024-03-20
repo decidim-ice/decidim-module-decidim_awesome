@@ -7,13 +7,13 @@
         <h3 class="h4 card__list-title">{{:title.translation}}</h3>
         <div class="card__list-metadata">
           <span>
-            <%= icon "account-circle-line" %>
+            {{:author}}
           </span>
           <span>
-            <%= icon "wechat-line" %>
+            {{:totalCommentsCount}}
           </span>
           <span>
-            <%= icon "like" %>
+            {{:endorsementsCount}}
           </span>
         </div>
       </div>
@@ -28,13 +28,10 @@
         <h3 class="h4 card__list-title">{{:title.translation}}</h3>
         <div class="card__list-metadata">
           <span>
-            <%= icon "calendar-line" %>
-            {{>starTime}}
-            
+            {{:startTime}}
           </span>
           <span>
-            <%= icon "community-line" %>
-            
+            {{:typeOfMeeting}}
           </span>
         </div>
       </div>
