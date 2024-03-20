@@ -46,8 +46,9 @@ document.addEventListener("DOMContentLoaded", () => {
     div.className = `awesome_autosave-notice${error
       ? " error"
       : ""}`;
-    div.textContent = msg;
+    div.innerHTML = msg;
     form.appendChild(div);
+    // console.log("showMsg", "form", form, "div", div, "msg", msg, "error", error, "defaultTime", defaultTime, "time", time);
     setTimeout(() => {
       div.remove();
     }, time);
