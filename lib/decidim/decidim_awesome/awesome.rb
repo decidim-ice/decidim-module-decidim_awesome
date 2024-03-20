@@ -137,8 +137,7 @@ module Decidim
     #      some_identifier: "{ ... some definition... }"
     #   }
     config_accessor :proposal_custom_fields do
-      # {}
-      :disabled
+      {}
     end
 
     # allows to keep modifications for the main menu
@@ -259,6 +258,13 @@ module Decidim
     # Which components will be tampered to add the voting registry override
     config_accessor :voting_components do
       [:proposals, :reporting_propposals]
+    end
+
+    # A URL where to obtain the translations for the FormBuilder component
+    # you can a custom place if you are worried about the CDN geolocation
+    # Download them from https://github.com/kevinchappell/formBuilder-languages
+    config_accessor :form_builder_langs_location do
+      "https://cdn.jsdelivr.net/npm/formbuilder-languages@1.1.0/"
     end
 
     # Public: Stores an instance of ContentBlockRegistry
