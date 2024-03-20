@@ -29,10 +29,10 @@ decidim-proposals:
     decidim-0.27: a1d416491752f4c2fb2668b29ceb8e09
   /app/views/decidim/proposals/collaborative_drafts/_edit_form_fields.html.erb:
     # this file is not overriden anymore but it needs to be the last version
-    decidim-0.27.3: 949b2163c547742549531320bf5e0de1
+    decidim-0.28: ce2a23a28d1584b4528b16fa46691824
   /app/views/decidim/proposals/collaborative_drafts/show.html.erb:
     # this file is not overriden anymore but it needs to be the last version
-    decidim-0.27.3: b1ec22d35263a2ac96fe4604c0ceb752
+    decidim-0.28: c4bb2062c96527e46b66b782b022806e
   /app/views/decidim/proposals/admin/proposals/_form.html.erb:
     decidim-0.28: 824463b320562c15fdb530bfebbf2f0f
   /app/views/decidim/proposals/proposals/_vote_button.html.erb:

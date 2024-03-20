@@ -198,7 +198,7 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
     this.$element = $element;
     this.spec = $element.data("spec");
     // console.log("init", $element, "this", this)
-    // always use the last field (in case of multilang tabs we only render one form due a limitation of the library to handle several instances)
+    // in case of multilang tabs we only render one form due a limitation in the library for handling several instances
     this.instance = $element.formRender({
       i18n: {
         locale: this.lang,
