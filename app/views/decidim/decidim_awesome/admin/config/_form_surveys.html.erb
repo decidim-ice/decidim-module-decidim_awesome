@@ -1,9 +1,11 @@
-<div class="gap-0 form__wrapper p-4 decidim_awesome-form">
+<div class="form__wrapper decidim_awesome-form">
   <% if config_enabled? :auto_save_forms %>
-    <%= form.check_box :auto_save_forms %>
-    <span class="help-text mb-4" style="margin-top: -1rem;">
-      <%= t("help.auto_save_forms", scope: "decidim.decidim_awesome.admin.config.form") %>
-    </span>
-    <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :auto_save_forms, constraints: constraints_for(:auto_save_forms) }) %>
+    <div class="row column">
+      <%= form.check_box :auto_save_forms %>
+      <span class="help-text mb-4" style="margin-top: -1rem;">
+        <%= t("help.auto_save_forms", scope: "decidim.decidim_awesome.admin.config.form") %>
+      </span>
+      <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :auto_save_forms, constraints: constraints_for(:auto_save_forms) }) %>
+    </div>
   <% end %>
 </div>
