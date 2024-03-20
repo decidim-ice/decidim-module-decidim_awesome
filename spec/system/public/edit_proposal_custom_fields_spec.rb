@@ -35,8 +35,6 @@ describe "Custom proposals fields" do
   end
 
   before do
-    skip "Proposals custom fields feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
-
     organization.update(rich_text_editor_in_public_views: rte_enabled)
     login_as user, scope: :user
     visit_component
@@ -159,11 +157,11 @@ describe "Custom proposals fields" do
   context "when amending the proposal" do
     before do
       click_link_or_button proposal.title["en"]
-      click_link_or_button "Amend Proposal"
+      click_link_or_button "Amend"
     end
 
     it "is amendment editor page" do
-      expect(page).to have_content("CREATE AMENDMENT DRAFT")
+      expect(page).to have_content("Create Amendment Draft")
     end
 
     it_behaves_like "has custom fields", "//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the sheriff']"
@@ -195,11 +193,11 @@ describe "Custom proposals fields" do
 
     before do
       click_link_or_button proposal.title["en"]
-      click_link_or_button "Amend Proposal"
+      click_link_or_button "Amend"
     end
 
     it "is amendment editor page" do
-      expect(page).to have_content("CREATE AMENDMENT DRAFT")
+      expect(page).to have_content("Create Amendment Draft")
     end
 
     it_behaves_like "has default fields"

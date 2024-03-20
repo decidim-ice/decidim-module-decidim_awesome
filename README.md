@@ -29,13 +29,13 @@ Each hack can be scoped to one or more specific participatory spaces or componen
 
 ### Tweaks:
 
-#### 1. Image support for the Quill editor
+#### 1. Image support for the RichText editor
 
 Modifies the WYSIWYG editor in Decidim by adding the possibility to insert images. When uploading images, Drag & Drop is supported. Images will be uploaded to the server and inserted as external resources (it doesn't use base64 in-line encoding).
 
 This feature allows you use images in newsletters as well.
 
-![Images in Quill Editor](examples/quill-images.png)
+![Images in RichText Editor](examples/quill-images.png)
 
 #### 2. Auto-save for surveys and forms
 
@@ -49,7 +49,7 @@ Saving the form removes the stored data.
 
 #### 3. Images in proposals
 
-Event if you haven't activated the WYSIWYG editor (Quill) in public views (eg: proposals use a simple textarea if rich text editor has not been activated for users). You can allow users to upload images in them by drag & drop over the text area.
+Event if you haven't activated the WYSIWYG editor (RichText) in public views (eg: proposals use a simple textarea if rich text editor has not been activated for users). You can allow users to upload images in them by drag & drop over the text area.
 
 ![Proposal images](examples/proposal-images.png)
 
@@ -114,6 +114,22 @@ Technically, the content is stored in the database as an XML document compatible
 ![Custom fields screenshot](examples/custom-fields-1.png)
 ![Custom fields screenshot](examples/custom-fields-2.png)
 ![Custom fields screenshot](examples/custom-fields-1.gif)
+
+Note that the custom fields are build using the jQuery library [formBuilder](https://formbuilder.online). This package is included in Decidim Awesome but the i18n translations are not. By default are dynamically downloaded from the CDN https://cdn.jsdelivr.net/npm/formbuilder-languages@1.1.0/.
+If you wish to provide an alternative place for those files, you can configure the variable `form_builder_langs_location` in an initializer:
+
+```ruby
+# config/initializers/awesome_defaults.rb
+
+# A URL where to obtain the translations for the FormBuilder component
+# you can a custom place if you are worried about the CDN geolocation
+# Download them from https://github.com/kevinchappell/formBuilder-languages
+
+# For instance, copy them to your /public/fb_locales/ directory and set the path here:
+Decidim::DecidimAwesome.configure do |config|
+  config.form_builder_langs_location = "/fb_locales/"
+end
+```
 
 #### 12. Custom Redirections (or URL shortener feature)
 
