@@ -2,15 +2,18 @@
 
 <script id="marker-proposal-popup" type="text/x-jsrender">
   <div class="space-y-6">
-    <a href="#" class="card__list">
+    <a href="${link}" class="card__list">
       <div class="card__list-content">
         <h3 class="h4 card__list-title">{{:title.translation}}</h3>
         <div class="card__list-metadata">
           <span>
-            <%= icon "calendar-line" %>
+            <%= icon "account-circle-line" %>
           </span>
           <span>
-            <%= icon "community-line" %>
+            <%= icon "wechat-line" %>
+          </span>
+          <span>
+            <%= icon "like" %>
           </span>
         </div>
       </div>
@@ -20,17 +23,18 @@
 
 <script id="marker-meeting-popup" type="text/x-jsrender">
   <div class="space-y-6">
-    <a href="#" class="card__list">
+    <a href="${link}" class="card__list">
       <div class="card__list-content">
         <h3 class="h4 card__list-title">{{:title.translation}}</h3>
         <div class="card__list-metadata">
           <span>
             <%= icon "calendar-line" %>
             {{>starTime}}
+            
           </span>
           <span>
             <%= icon "community-line" %>
-            {{ :type.translation }}
+            
           </span>
         </div>
       </div>

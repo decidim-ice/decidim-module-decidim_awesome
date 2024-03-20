@@ -29,6 +29,7 @@ export default class MeetingsFetcher extends Fetcher {
                   }
                 }
                 startTime
+                endTime
                 location {
                   translations {
                     text
