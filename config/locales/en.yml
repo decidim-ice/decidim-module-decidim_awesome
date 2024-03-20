@@ -120,9 +120,9 @@ en:
         settings:
           global:
             awesome_voting_manifest: Support type
-            awesome_voting_manifest_help_html: <strong class="text-alert">Be aware
+            awesome_voting_manifest_help_html: <span class="text-alert">Be aware
               that changing this setting in the middle of a votation period can result
-              in innacurate or unexpected results.</strong><br>Note also that this
+              in innacurate or unexpected results.</span><br>Note also that this
               setting can only be edited if the component has no supports yet.
             awesome_voting_manifest_options:
               default: Simple vote (default)
