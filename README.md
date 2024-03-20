@@ -29,13 +29,13 @@ Each hack can be scoped to one or more specific participatory spaces or componen
 
 ### Tweaks:
 
-#### 1. Image support for the Quill editor
+#### 1. Image support for the RichText editor
 
 Modifies the WYSIWYG editor in Decidim by adding the possibility to insert images. When uploading images, Drag & Drop is supported. Images will be uploaded to the server and inserted as external resources (it doesn't use base64 in-line encoding).
 
 This feature allows you use images in newsletters as well.
 
-![Images in Quill Editor](examples/quill-images.png)
+![Images in RichText Editor](examples/quill-images.png)
 
 #### 2. Auto-save for surveys and forms
 
@@ -49,7 +49,7 @@ Saving the form removes the stored data.
 
 #### 3. Images in proposals
 
-Event if you haven't activated the WYSIWYG editor (Quill) in public views (eg: proposals use a simple textarea if rich text editor has not been activated for users). You can allow users to upload images in them by drag & drop over the text area.
+Event if you haven't activated the WYSIWYG editor (RichText) in public views (eg: proposals use a simple textarea if rich text editor has not been activated for users). You can allow users to upload images in them by drag & drop over the text area.
 
 ![Proposal images](examples/proposal-images.png)
 

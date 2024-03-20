@@ -95,16 +95,6 @@ window.fbControls.push(function(controlClass, allControlClasses) {
       window.fbEditors.tiptap[this.id] = {};
       const editor = window.fbEditors.tiptap[this.id];
       editor.instance = createEditor(this.wrapper);
-      // const value = this.config.value || "";
-      // console.log("render! editor", editor, "this", this, "value", value);
-      // editor.data = new Delta();
-      // if (value) {
-      //   editor.instance.setContents(window.JSON.parse(this.parsedHtml(value)));
-      // }
-      // editor.instance.on('text-change', function(delta) {
-      //   console.log("text-change", "delta", delta, "editor", editor);
-      // //   // editor.data = editor.data.compose(delta);
-      // });
 
       return evt;
     }
