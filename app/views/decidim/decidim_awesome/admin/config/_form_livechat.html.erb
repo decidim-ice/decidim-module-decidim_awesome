@@ -1,56 +1,40 @@
-<div class="gap-0 form__wrapper p-4 decidim_awesome-form">
+<div class="form__wrapper row column decidim_awesome-form">
   <% if config_enabled? :intergram_for_public %>
-    <%= form.check_box :intergram_for_public %>
-    <span class="help-text mb-4">
-      <%= t("help.intergram_about", scope: "decidim.decidim_awesome.admin.config.form").html_safe %>
-    </span>
+    <%= form.check_box :intergram_for_public, help_text: t("help.intergram_about", scope: "decidim.decidim_awesome.admin.config.form").html_safe %>
 
     <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :intergram_for_public, constraints: constraints_for(:intergram_for_public) }) %>
 
     <%= fields_for "config[intergram_for_public_settings]", form.object.intergram_for_public_settings do |f| %>
-      <div class="mb-4">
-        <%= f.text_field :chat_id, label: t("intergram_chat_id", scope: "activemodel.attributes.config") %>
-        <p class="help-text" style="margin-top: -1rem;">
-          <%= t("help.intergram_config", scope: "decidim.decidim_awesome.admin.config.form").html_safe %>
-        </p>
-      </div>
+      <%= f.text_field :chat_id, label: t("intergram_chat_id", scope: "activemodel.attributes.config"), help_text: t("help.intergram_config", scope: "decidim.decidim_awesome.admin.config.form").html_safe %>
 
       <%= f.check_box :require_login, label: t("intergram_require_login", scope: "activemodel.attributes.config") %>
-      <%= f.check_box :use_floating_button, class: "mb-4", label: t("intergram_use_floating_button", scope: "activemodel.attributes.config") %>
-      <%= f.color_field :color, class: "mb-4 block w-full p-1", label: t("intergram_color", scope: "activemodel.attributes.config") %>
+      <%= f.check_box :use_floating_button, label: t("intergram_use_floating_button", scope: "activemodel.attributes.config") %>
+      <%= f.color_field :color, label: t("intergram_color", scope: "activemodel.attributes.config") %>
 
-      <%= f.text_field :title_open, class: "mb-4", label: t("intergram_title_open", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.title_open") %>
-      <%= f.text_field :title_closed, class: "mb-4", label: t("intergram_title_closed", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.title_closed") %>
-      <%= f.text_field :intro_message, class: "mb-4", label: t("intergram_intro_message", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.intro_message") %>
-      <%= f.text_field :auto_no_response, class: "mb-4", label: t("intergram_auto_no_response", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.auto_no_response") %>
+      <%= f.text_field :title_open, label: t("intergram_title_open", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.title_open") %>
+      <%= f.text_field :title_closed, label: t("intergram_title_closed", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.title_closed") %>
+      <%= f.text_field :intro_message, label: t("intergram_intro_message", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.intro_message") %>
+      <%= f.text_field :auto_no_response, label: t("intergram_auto_no_response", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.auto_no_response") %>
     <% end %>
   <% end %>
 </div>
 
-<div class="gap-0 form__wrapper p-4 decidim_awesome-form">
+<div class="form__wrapper row column decidim_awesome-form">
   <% if config_enabled? :intergram_for_admins %>
-    <%= form.check_box :intergram_for_admins %>
-    <span class="help-text mb-4">
-      <%= t("help.intergram_about", scope: "decidim.decidim_awesome.admin.config.form").html_safe %>
-    </span>
+    <%= form.check_box :intergram_for_admins, help_text: t("help.intergram_about", scope: "decidim.decidim_awesome.admin.config.form").html_safe %>
 
     <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :intergram_for_admins, constraints: constraints_for(:intergram_for_admins) }) %>
 
     <%= fields_for "config[intergram_for_admins_settings]", form.object.intergram_for_admins_settings do |f| %>
-      <div class="mb-4">
-        <%= f.text_field :chat_id, label: t("intergram_chat_id", scope: "activemodel.attributes.config") %>
-        <p class="help-text" style="margin-top: -1rem;">
-          <%= t("help.intergram_config", scope: "decidim.decidim_awesome.admin.config.form").html_safe %>
-        </p>
-      </div>
+      <%= f.text_field :chat_id, label: t("intergram_chat_id", scope: "activemodel.attributes.config"), help_text: t("help.intergram_config", scope: "decidim.decidim_awesome.admin.config.form").html_safe %>
 
-      <%= f.check_box :use_floating_button, class: "mb-4", label: t("intergram_use_floating_button", scope: "activemodel.attributes.config") %>
-      <%= f.color_field :color, class: "mb-4 block w-full p-1", label: t("intergram_color", scope: "activemodel.attributes.config") %>
+      <%= f.check_box :use_floating_button, label: t("intergram_use_floating_button", scope: "activemodel.attributes.config") %>
+      <%= f.color_field :color, label: t("intergram_color", scope: "activemodel.attributes.config") %>
 
-      <%= f.text_field :title_open, class: "mb-4", label: t("intergram_title_open", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.title_open") %>
-      <%= f.text_field :title_closed, class: "mb-4", label: t("intergram_title_closed", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.title_closed") %>
-      <%= f.text_field :intro_message, class: "mb-4", label: t("intergram_intro_message", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.intro_message") %>
-      <%= f.text_field :auto_no_response, class: "mb-4", label: t("intergram_auto_no_response", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.auto_no_response") %>
+      <%= f.text_field :title_open, label: t("intergram_title_open", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.title_open") %>
+      <%= f.text_field :title_closed, label: t("intergram_title_closed", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.title_closed") %>
+      <%= f.text_field :intro_message, label: t("intergram_intro_message", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.intro_message") %>
+      <%= f.text_field :auto_no_response, label: t("intergram_auto_no_response", scope: "activemodel.attributes.config"), placeholder: t("decidim.decidim_awesome.config.intergram.auto_no_response") %>
     <% end %>
 
   <% end %>
