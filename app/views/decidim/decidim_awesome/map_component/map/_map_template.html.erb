@@ -2,7 +2,7 @@
 
 <script id="marker-proposal-popup" type="text/x-jsrender">
   <div class="map-info__content">
-    <h3>{{:title.translation}}</h3>
+    <h3 class="h4 card__list-title">{{:title.translation}}</h3>
     <div id="bodyContent">
       <div class="description">{{:body.translation}}</div>
       <div class="map__date-adress">
@@ -23,32 +23,20 @@
 </script>
 
 <script id="marker-meeting-popup" type="text/x-jsrender">
-  <div class="map-info__content">
-    <h3>{{:title.translation}}</h3>
-    <div id="bodyContent">
-      <div class="description">{{:body.translation}}</div>
-      <div class="map__date-adress">
-        <div class="card__datetime">
-          <div class="card__datetime__date">
-            {{>startTimeDay}} <span class="card__datetime__month">{{>startTimeMonth}} {{>startTimeYear}}</span>
-          </div>
-          <div class="card__datetime__time">{{>starTime}}</div>
-        </div>
-        <div class="address card__extra">
-          <div class="address__icon">{{:icon}}</div>
-          <div class="address__details">
-            <strong>{{:location.translation}}</strong><br>
-            <span>{{>address}}</span><br>
-            <span>{{:locationHints.translation}}</span>
-          </div>
+  <div class="space-y-6">
+    <a href="" class="card__list">
+      <div class="card__list-content">
+        <h3 class="h4 card__list-title">{{:title.translation}}</h3>
+        <div class="card__list-metadata">
+          <span>
+            <%= icon "calendar-line" %>
+          </span>
+          <span>
+            <%= icon "community-line" %>
+          </span>
         </div>
       </div>
-      <div class="map-info__button">
-        <a href="{{>link}}" class="button button--sc">
-          <%= t("view_meeting", scope: "decidim.meetings.meetings_map") %>
-        </a>
-      </div>
-    </div>
+    </a>
   </div>
 </script>
 
