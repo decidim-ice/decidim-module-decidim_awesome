@@ -1,30 +1,8 @@
 <div class="loading-spinner"></div>
 
 <script id="marker-proposal-popup" type="text/x-jsrender">
-  <div class="map-info__content">
-    <h3 class="h4 card__list-title">{{:title.translation}}</h3>
-    <div id="bodyContent">
-      <div class="description">{{:body.translation}}</div>
-      <div class="map__date-adress">
-        <div class="address card__extra">
-          <div class="address__icon">{{:icon}}</div>
-          <div class="address__details">
-            <span>{{>address}}</span><br>
-          </div>
-        </div>
-      </div>
-      <div class="map-info__button">
-        <a href="{{>link}}" class="button button--sc">
-          <%= t("view_proposal", scope: "decidim.decidim_awesome.map_component.map.show") %>
-        </a>
-      </div>
-    </div>
-  </div>
-</script>
-
-<script id="marker-meeting-popup" type="text/x-jsrender">
   <div class="space-y-6">
-    <a href="" class="card__list">
+    <a href="#" class="card__list">
       <div class="card__list-content">
         <h3 class="h4 card__list-title">{{:title.translation}}</h3>
         <div class="card__list-metadata">
@@ -33,6 +11,26 @@
           </span>
           <span>
             <%= icon "community-line" %>
+          </span>
+        </div>
+      </div>
+    </a>
+  </div>
+</script>
+
+<script id="marker-meeting-popup" type="text/x-jsrender">
+  <div class="space-y-6">
+    <a href="#" class="card__list">
+      <div class="card__list-content">
+        <h3 class="h4 card__list-title">{{:title.translation}}</h3>
+        <div class="card__list-metadata">
+          <span>
+            <%= icon "calendar-line" %>
+            {{>starTime}}
+          </span>
+          <span>
+            <%= icon "community-line" %>
+            {{ :type.translation }}
           </span>
         </div>
       </div>
