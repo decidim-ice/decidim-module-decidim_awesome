@@ -10,7 +10,7 @@ $(() => {
   }
   window.DecidimAwesome.CustomFieldsRenderer.init($el);
 
-  window.DecidimAwesome.CustomFieldsRenderer.$container.closest("form").on("submit", (evt) => {
+  window.DecidimAwesome.CustomFieldsRenderer.$element.closest("form").on("submit", (evt) => {
     if (evt.target.checkValidity()) {
       // save current editor
       window.DecidimAwesome.CustomFieldsRenderer.storeData();

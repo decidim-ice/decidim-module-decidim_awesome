@@ -1,17 +1,4 @@
-// @import "stylesheets/decidim/decidim_awesome/forms/autosave";
 // @import "stylesheets/decidim/decidim_awesome/voting/voting_cards";
-
-// .decidim_awesome-custom_fields {
-//   dd {
-//     > div:last-child {
-//       margin-bottom: 1rem;
-//     }
-
-//     &[name="textarea"] {
-//       > div > p {
-//         margin-top: 1rem;
-//         margin-bottom: 0;
-//       }
-//     }
-//   }
-// }
+@import "stylesheets/decidim/decidim_awesome/shared/spinner";
+@import "stylesheets/decidim/decidim_awesome/forms/autosave";
+@import "stylesheets/decidim/decidim_awesome/forms/custom_fields";

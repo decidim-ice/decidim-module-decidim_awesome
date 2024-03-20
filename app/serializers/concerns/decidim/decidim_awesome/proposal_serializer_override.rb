@@ -31,6 +31,7 @@ module Decidim
             state: proposal.state.to_s,
             reference: proposal.reference,
             answer: ensure_translatable(proposal.answer),
+            answered_at: proposal.answered_at,
             supports: proposal.proposal_votes_count,
             weights: proposal_vote_weights,
             endorsements: {
@@ -38,7 +39,7 @@ module Decidim
               user_endorsements:
             },
             comments: proposal.comments_count,
-            attachments: proposal.attachments.size,
+            attachments: proposal.attachments.count,
             followers: proposal.follows.size,
             published_at: proposal.published_at,
             url:,

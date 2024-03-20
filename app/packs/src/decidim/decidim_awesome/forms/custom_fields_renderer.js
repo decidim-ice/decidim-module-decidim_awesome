@@ -1,9 +1,8 @@
-require("formBuilder/dist/form-render.min.js")
+import "formBuilder/dist/form-render.min.js";
 import "src/decidim/decidim_awesome/forms/rich_text_plugin"
 
 export default class CustomFieldsRenderer { // eslint-disable-line no-unused-vars
-  constructor(containerSelector) {
-    this.containerSelector = containerSelector || ".proposal_custom_field:last";
+  constructor() {
     this.lang = this.getLang(window.DecidimAwesome.currentLocale);
   }
 
@@ -117,7 +116,7 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
   }
 
   fixBuggyFields() {
-    if (!this.$container) {
+    if (!this.$element) {
       return false;
     }
 
@@ -125,7 +124,7 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
     * Hack to fix required checkboxes being reset
     * Issue: https://github.com/decidim-ice/decidim-module-decidim_awesome/issues/82
     */
-    this.$container.find(".formbuilder-checkbox-group").each((_key, group) => {
+    this.$element.find(".formbuilder-checkbox-group").each((_key, group) => {
       const inputs = $(".formbuilder-checkbox input", group);
       const data = this.spec.find((obj) => obj.type === "checkbox-group");
       let values = data.userData;
@@ -166,7 +165,7 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
     * Hack to fix required radio buttons "other" value
     * Issue: https://github.com/decidim-ice/decidim-module-decidim_awesome/issues/133
     */
-    this.$container.find(".formbuilder-radio input.other-val").on("input", (input) => {
+    this.$element.find(".formbuilder-radio input.other-val").on("input", (input) => {
       const $input = $(input.currentTarget);
       const $group = $input.closest(".formbuilder-radio-group");
       $group.find("input").each((_key, radio) => {
@@ -181,10 +180,10 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
 
   // Saves xml to the hidden input
   storeData() {
-    if (!this.$container) {
+    if (!this.$element) {
       return false;
     }
-    const $form = this.$container.closest("form");
+    const $form = this.$element.closest("form");
     const $body = $form.find(`input[name="${this.$element.data("name")}"]`);
     if ($body.length && this.instance) {
       this.spec = this.instance.userData;
@@ -198,18 +197,21 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
   init($element) {
     this.$element = $element;
     this.spec = $element.data("spec");
-    if (!this.$container) {
-      this.$container = $(this.containerSelector);
-    }
     // console.log("init", $element, "this", this)
-    // always use the last field (in case of multilang tabs we only render one form due a limitation of the library to handle several instances)
-    this.instance = this.$container.formRender({
+    // in case of multilang tabs we only render one form due a limitation in the library for handling several instances
+    this.instance = $element.formRender({
       i18n: {
         locale: this.lang,
-        location: "https://cdn.jsdelivr.net/npm/formbuilder-languages@1.1.0/"
+        location: window.DecidimAwesome.formBuilderLangsLocation
       },
       formData: this.spec,
-      render: true
+      render: true,
+      disableInjectedStyle: true,
+      controlConfig: {
+        "textarea.richtext": {
+          editorOptions: $element.data("editorOptions")
+        }
+      }
     });
     this.fixBuggyFields();
   }
