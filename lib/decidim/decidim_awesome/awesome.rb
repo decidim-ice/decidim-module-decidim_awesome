@@ -46,8 +46,7 @@ module Decidim
 
     # used to save forms in localstorage
     config_accessor :auto_save_forms do
-      # false
-      :disabled
+      true
     end
 
     # Live chat widget linked to Telegram account or group
