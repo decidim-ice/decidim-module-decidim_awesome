@@ -63,7 +63,6 @@ export default class ControlsUI {
   }
 
   addSearchControls() {
-    console.log("add search", this.main.getContainer())
     this.main.getContainer().querySelector("form").insertAdjacentHTML("beforeend", `<div id="awesome_map-categories-control" class="active"><b class="awesome_map-title-control">${window.DecidimAwesome.texts.categories}</b><div class="categories-container"></div></div>
     <div id="awesome_map-hashtags-control"><b class="awesome_map-title-control">${window.DecidimAwesome.texts.hashtags}</b><div class="hashtags-container"></div><a href="#" class="awesome_map-toggle_all_tags">${window.DecidimAwesome.texts.select_deselect_all}</a></div>`);
   }
@@ -77,7 +76,7 @@ export default class ControlsUI {
         group: new L.FeatureGroup.SubGroup(this.awesomeMap.cluster)
       };
       this.awesomeMap.layers[category.id].group.addTo(this.awesomeMap.map);
-      $("#awesome_map-categories-control .categories-container").append(`<label data-layer="${category.id}" class="awesome_map-category-${category.id}${category.parent ? " subcategory" : ""}" data-parent="${category.parent}"><input type="checkbox" class="awesome_map-categories-selector" checked><span>${label}</span></label>`);
+      document.querySelector("#awesome_map-categories-control .categories-container").insertAdjacentHTML("beforeend", `<label data-layer="${category.id}" class="awesome_map-category-${category.id}${category.parent ? " subcategory" : ""}" data-parent="${category.parent}"><input type="checkbox" class="awesome_map-categories-selector" checked><span>${label}</span></label>`);
     })
 
     // category events
@@ -124,15 +123,15 @@ export default class ControlsUI {
             group: new L.FeatureGroup.SubGroup(this.awesomeMap.cluster)
           };
           this.awesomeMap.map.addLayer(this.awesomeMap.layers[hashtag.tag].group);
-          $("#awesome_map-hashtags-control .hashtags-container").append(`<label data-layer="${hashtag.tag}" class="awesome_map-hashtag-${hashtag.tag}"><input type="checkbox" class="awesome_map-hashtags-selector" checked><span>${hashtag.name}</span></label>`);
+          document.querySelector("#awesome_map-hashtags-control .hashtags-container").insertAdjacentHTML("beforeend", `<label data-layer="${hashtag.tag}" class="awesome_map-hashtag-${hashtag.tag}"><input type="checkbox" class="awesome_map-hashtags-selector" checked><span>${hashtag.name}</span></label>`);
           // Call a trigger, might be in service for customizations
           this.onHashtag(hashtag, $("#awesome_map-hashtags-control .hashtags-container"));
         }
         this.awesomeMap.layers[hashtag.tag].group.addLayer(marker);
 
-        const $label = $(`label.awesome_map-hashtag-${hashtag.tag}`);
+        const label = document.querySelector(`label.awesome_map-hashtag-${hashtag.tag}`);
         // update number of items
-        $label.attr("title", `${parseInt($label.attr("title") || 0, 10) + 1} ${window.DecidimAwesome.texts.items}`);
+        label.setAttribute("title", `${parseInt(label.title || 0, 10) + 1} ${window.DecidimAwesome.texts.items}`);
       });
     }
   }

@@ -28,7 +28,7 @@ export default class ProposalsController extends Controller {
     // for each proposal, create a marker with an associated popup
     this.fetcher.onNode = (proposal) => {
       let marker = new L.Marker([proposal.coordinates.latitude, proposal.coordinates.longitude], {
-        icon: this.createIcon("text-secondary"),
+        icon: this.createIcon(this.awesomeMap.getCategory(proposal.category).color),
         title: proposal.title.translation
       });
 
