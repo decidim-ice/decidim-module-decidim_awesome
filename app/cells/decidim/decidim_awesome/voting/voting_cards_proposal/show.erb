@@ -1,35 +1,38 @@
-<h4 class="heading4 vote-title mb-4"><%= title %></h4>
+<div class="flex flex-col justify-center">
+  <h4 class="heading4 vote-title mb-4"><%= title %></h4>
 
-<div class="flex flex-row p-4">
-  <%= vote_block_for(proposal, 3) %>
-  <%= vote_block_for(proposal, 2) %>
-  <%= vote_block_for(proposal, 1) %>
+  <div class="flex flex-row p-4">
+    <%= vote_block_for(proposal, 3) %>
+    <%= vote_block_for(proposal, 2) %>
+    <%= vote_block_for(proposal, 1) %>
+  </div>
+
+  <% if component_settings.voting_cards_show_abstain? %>
+    <%= action_authorized_link_to :vote,
+                                  voted_for?(0) ? t("decidim.decidim_awesome.voting.voting_cards.abstained") : proposal.manifest.label_for(0),
+                                  proposal_vote_path(0),
+                                  link_options(0).merge({
+                                    title: t("decidim.decidim_awesome.voting.voting_cards.voting_for", proposal: sanitized_title, type: proposal.manifest.label_for(0)),
+                                    class: "button button__lg button__transparent-secondary expanded vote-action abstain-button #{classes_for(0)}"
+                                    }) %>
+  <% end %>
+
+  <% if voted_for_any? && !current_settings.votes_blocked? %>
+    <p class="text-center">
+      <%= action_authorized_link_to :unvote,
+                                    t("decidim.decidim_awesome.voting.voting_cards.change_vote"),
+                                    proposal_vote_path(current_vote&.weight),
+                                    remote: true,
+                                    method: :delete,
+                                    id: "change-vote",
+                                    class: "change-vote-button vote-action" %>
+    </p>
+  <% elsif proposal.maximum_votes_reached? && !proposal.can_accumulate_supports_beyond_threshold && current_component.participatory_space.can_participate?(current_user) %>
+    <p class="text-center"><%= t("decidim.proposals.proposals.vote_button.maximum_votes_reached") %></p>
+  <% elsif vote_limit_enabled? && remaining_votes_count_for(current_user) <= 0 %>
+    <p class="text-center"><%= t("decidim.proposals.proposals.vote_button.no_votes_remaining") %></p>
+  <% elsif current_settings.votes_blocked? || !current_component.participatory_space.can_participate?(current_user) %>
+    <p class="text-center"><%= t("decidim.proposals.proposals.vote_button.votes_blocked") %></p>
+  <% end %>
+
 </div>
-
-<% if component_settings.voting_cards_show_abstain? %>
-  <%= action_authorized_link_to :vote,
-                                voted_for?(0) ? t("decidim.decidim_awesome.voting.voting_cards.abstained") : proposal.manifest.label_for(0),
-                                proposal_vote_path(0),
-                                link_options(0).merge({
-                                  title: t("decidim.decidim_awesome.voting.voting_cards.voting_for", proposal: sanitized_title, type: proposal.manifest.label_for(0)),
-                                  class: "button expanded vote-action abstain-button small #{classes_for(0)}"
-                                  }) %>
-<% end %>
-
-<% if voted_for_any? && !current_settings.votes_blocked? %>
-  <p class="text-center">
-    <%= action_authorized_link_to :unvote,
-                                  t("decidim.decidim_awesome.voting.voting_cards.change_vote"),
-                                  proposal_vote_path(current_vote&.weight),
-                                  remote: true,
-                                  method: :delete,
-                                  id: "change-vote",
-                                  class: "change-vote-button vote-action" %>
-  </p>
-<% elsif proposal.maximum_votes_reached? && !proposal.can_accumulate_supports_beyond_threshold && current_component.participatory_space.can_participate?(current_user) %>
-  <p class="text-center"><%= t("decidim.proposals.proposals.vote_button.maximum_votes_reached") %></p>
-<% elsif vote_limit_enabled? && remaining_votes_count_for(current_user) <= 0 %>
-  <p class="text-center"><%= t("decidim.proposals.proposals.vote_button.no_votes_remaining") %></p>
-<% elsif current_settings.votes_blocked? || !current_component.participatory_space.can_participate?(current_user) %>
-  <p class="text-center"><%= t("decidim.proposals.proposals.vote_button.votes_blocked") %></p>
-<% end %>
