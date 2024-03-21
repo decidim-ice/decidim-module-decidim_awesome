@@ -63,7 +63,7 @@ export default class Fetcher {
     // hashtags in the title look ugly, lets replace the gid:... structure with the tag #name
     node.title.translation = this.replaceHashtags(title, node.hashtags);
     node.body.translation = this.appendHtmlHashtags(this.truncate(this.removeHashtags(body)).replace(/\n/g, "<br>"), node.hashtags);
-    node.link = `${this.controller.component.url}/${this.collection}/${node.id}`;
+    node.link = `${this.controller.component.url}/${node.id}`;
   }
 
   findTranslation(translations) {
