@@ -16,7 +16,7 @@ module Decidim
 
         map = awesome_builder.map_element({ class: "dynamic-map", id: "awesome-map-container" }, &)
         help = content_tag(:div, class: "map__skip-container") do
-          content_tag(:p, t("screen_reader_explanation", scope: "decidim.map.dynamic"), class: "sr-only") 
+          content_tag(:p, t("screen_reader_explanation", scope: "decidim.map.dynamic"), class: "sr-only")
         end
 
         html_options = {
