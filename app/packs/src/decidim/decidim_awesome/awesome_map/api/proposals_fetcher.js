@@ -24,6 +24,7 @@ export default class ProposalsFetcher extends Fetcher {
                     }
                   }
                   author {
+                    id
                     name
                   }
                   body {
