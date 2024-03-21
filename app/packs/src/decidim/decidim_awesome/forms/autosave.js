@@ -1,6 +1,6 @@
-import FormStorage from "form-storage"
+import FormStorage from "form-storage";
 
-$(() => {
+document.addEventListener("DOMContentLoaded", () => {
   window.DecidimAwesome = window.DecidimAwesome || {};
   if (!window.DecidimAwesome.auto_save_forms) {
     return;
@@ -14,9 +14,9 @@ $(() => {
 
   const storeId = `awesome_autosave:${questionnaireId}`;
   const storeCheckboxesId = `awesome_autosave:checkboxes:${questionnaireId}`;
-  const $form = $("form.answer-questionnaire");
+  const form = document.querySelector("form.answer-questionnaire");
 
-  if (!$form.length) {
+  if (!form) {
     if (window.DecidimAwesome.questionnaire_answered) {
       // console.log("Questionnaire already answered, remove any data saved");
       window.localStorage.removeItem(storeId);
@@ -26,7 +26,7 @@ $(() => {
     return;
   }
 
-  const store = new FormStorage(`#${$form.attr("id")}`, {
+  const store = new FormStorage(`#${form.id}`, {
     name: storeId,
     ignores: [
       // '[type="hidden"]',
@@ -34,17 +34,23 @@ $(() => {
       '[name="authenticity_token"]',
       "[disabled]",
       // there are problems with matrix questions
-      '[type="checkbox"]' 
+      '[type="checkbox"]'
     ]
   });
 
   const showMsg = (msg, error = false, defaultTime = 700) => {
-    const time = error ? 5000 : defaultTime; // eslint-disable-line no-ternary, multiline-ternary
-    const $div = $(`<div class="awesome_autosave-notice${error ? " error" : ""}">${msg}</div>`).appendTo($form); // eslint-disable-line no-ternary, multiline-ternary
+    const time = error
+      ? 5000
+      : defaultTime;
+    const div = document.createElement("div");
+    div.className = `awesome_autosave-notice${error
+      ? " error"
+      : ""}`;
+    div.innerHTML = msg;
+    form.appendChild(div);
+    // console.log("showMsg", "form", form, "div", div, "msg", msg, "error", error, "defaultTime", defaultTime, "time", time);
     setTimeout(() => {
-      $div.fadeOut(500, () => {
-        $div.remove();
-      });
+      div.remove();
     }, time);
   };
 
@@ -62,20 +68,20 @@ $(() => {
   // restore checkboxes
   try {
     let checkboxes = JSON.parse(window.localStorage.getItem(storeCheckboxesId));
-    for (let id in checkboxes) { // eslint-disable-line guard-for-in
-      $(`#${id}`).prop("checked", checkboxes[id]);
-    }
+    Object.keys(checkboxes).forEach((id) => {
+      if (Object.prototype.hasOwnProperty.call(checkboxes, id)) {// eslint-disable-line prefer-reflect
+        document.getElementById(id).checked = checkboxes[id];
+      }
+    });
   } catch (evt) {
     console.log("No checkboxes found");
   }
-  // this trigger the "change" event, it seems that it is too much
-  // $form.find('input, textarea, select').change();
 
   const save = () => {
     store.save();
     // save checkbox manually
     let checkboxes = {};
-    $form.find('input[type="checkbox"]').each((index, el) => {
+    form.querySelectorAll('input[type="checkbox"]').forEach((el) => {
       checkboxes[el.id] = el.checked;
     });
     window.localStorage.setItem(storeCheckboxesId, JSON.stringify(checkboxes));
@@ -83,7 +89,6 @@ $(() => {
   };
 
   // save changes when modifications
-  $form.find("input, textarea, select").on("change", () => {
-    save();
-  });
+  form.addEventListener("change", save);
 });
+

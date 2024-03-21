@@ -1,7 +1,6 @@
 <div class="constraints-editor mb-8 p-4" data-key="<%= key %>">
   <%= cell "decidim/announcement", "<p></p>".html_safe, hidden: true %>
-
-  <h5 class="mb-2 text-base"><%= t ".title" %></h5>
+  <h5 class="mb-2"><%= t ".title" %></h5>
   <% if constraints.blank? %>
     <span class="label warning"><%= t ".always" %></span>
   <% end %>

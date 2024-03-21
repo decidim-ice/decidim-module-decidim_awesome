@@ -5,11 +5,12 @@
 @import "stylesheets/decidim/decidim_awesome/admin/check_redirections";
 @import "stylesheets/decidim/decidim_awesome/admin/user_picker";
 @import "stylesheets/decidim/decidim_awesome/admin/codemirror";
+@import "stylesheets/decidim/decidim_awesome/shared/spinner";
 
 // Remove the 20% right column from the item__edit class
-.item__edit {
-  @apply grid grid-cols-1 md:grid-cols-[100%_0%] mb-8;
-}
+// .item__edit {
+//   @apply grid grid-cols-1 md:grid-cols-[100%_0%] mb-8;
+// }
 
 .pokecode-credits {
   float: right;
@@ -18,21 +19,6 @@
 }
 
 .decidim_awesome {
-  &.modal {
-    .spinner {
-      // @include spinner(25px, #aaa, var(--secondary), 800ms);
-
-      vertical-align: middle;
-      display: none;
-    }
-
-    &.loading {
-      .spinner {
-        display: inline-block;
-      }
-    }
-  }
-
   &-form {
     margin-bottom: 2em;
     border-bottom: 1px solid #999;
@@ -46,29 +32,5 @@
   &-form:last-child {
     border-bottom: none;
     padding-bottom: 0;
-  }
-}
-
-// Some global fixes
-.form label {
-  .help-text {
-    display: block;
-    margin-top: -1.5em;
-    font-weight: normal;
-    margin-bottom: 1.5em;
-  }
-}
-
-.form-input-extra-before ~ .form-error {
-  margin-top: -2.5rem;
-}
-
-tbody tr.menu_hack-addition {
-  background: rgb(255, 248, 222);
-}
-
-.secondary-nav {
-  li .icon {
-    margin-right: 0.5rem;
   }
 }

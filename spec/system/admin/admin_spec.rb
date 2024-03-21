@@ -81,8 +81,6 @@ describe "Visit the admin page" do
   context "when visiting surveys hacks" do
     context "when survey hacks are enabled" do
       before do
-        skip "auto_save_forms feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
-
         click_link_or_button "Surveys & Forms"
       end
 
@@ -169,8 +167,6 @@ describe "Visit the admin page" do
   context "when visiting live chat" do
     context "when livechat hacks are enabled" do
       before do
-        skip "Live chat feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
-
         click_link_or_button "Live Chat"
       end
 
@@ -283,8 +279,6 @@ describe "Visit the admin page" do
   context "when visiting proposal custom fields" do
     context "when custom fields are enabled" do
       before do
-        skip "Proposal custom fields feature is pending to be adapted to Decidim 0.28 and currently is disabled at lib/decidim/decidim_awesome/awesome.rb"
-
         click_link_or_button "Proposals Custom Fields"
       end
 
