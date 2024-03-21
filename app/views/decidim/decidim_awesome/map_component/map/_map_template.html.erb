@@ -7,12 +7,19 @@
         <h3 class="h4 card__list-title">{{:title.translation}}</h3>
         <div class="card__list-metadata">
           <span>
+            <%= icon "account-circle-line" %>
+            {{:authorName}}
+          </span>
+          <span>
             <%= icon "wechat-line" %>
             {{:totalCommentsCount}}
           </span>
           <span>
             <%= icon "like" %>
             {{:endorsementsCount}}
+          </span>
+          <span>
+            <span class="label {{:stateClass}}">{{:humanState}}</span>
           </span>
         </div>
         <div class="description">
@@ -61,6 +68,7 @@
 <script>
   window.AwesomeMap = window.AwesomeMap || {};
   window.AwesomeMap.categories = <%= current_categories(categories).to_json.html_safe %>;
+  window.AwesomeMapProposalTexts = <%= Decidim::Proposals::Proposal::STATES.to_h { |state, _| [state, t("decidim.proposals.answers.#{state}")] }.to_json.html_safe %>;
   window.AwesomeMapMeetingTypes = <%= Decidim::Meetings::Meeting::TYPE_OF_MEETING.to_h { |type, _| [type, Decidim.icons.all[type.to_s]["icon"]] }.to_json.html_safe %>;
   window.AwesomeMapMeetingTexts = <%= Decidim::Meetings::Meeting::TYPE_OF_MEETING.to_h { |type, _| [type, t("decidim.meetings.meetings.filters.type_values.#{type}")] }.to_json.html_safe %>;
 </script>
