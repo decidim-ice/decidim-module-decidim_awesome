@@ -30,19 +30,7 @@ export default class MeetingsFetcher extends Fetcher {
                 }
                 startTime
                 endTime
-                location {
-                  translations {
-                    text
-                    locale
-                  }
-                }
                 address
-                locationHints {
-                  translations {
-                    text
-                    locale
-                  }
-                }
                 coordinates {
                   latitude
                   longitude
@@ -57,5 +45,12 @@ export default class MeetingsFetcher extends Fetcher {
         }
       }
     }`;
+  }
+
+  decorateNode(node) {
+    super.decorateNode(node);
+    node.icon = window.AwesomeMapMeetingTypes[node.typeOfMeeting];
+    node.meetingType = window.AwesomeMapMeetingTexts[node.typeOfMeeting];
+    node.dateRange = this.formatDateRange(node.startTime, node.endTime);
   }
 }

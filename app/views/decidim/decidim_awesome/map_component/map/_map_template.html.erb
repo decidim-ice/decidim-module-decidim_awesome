@@ -7,6 +7,9 @@
         <h3 class="h4 card__list-title">{{:title.translation}}</h3>
         <div class="card__list-metadata">
           <span>
+            <%= icon "{{:icon}}", ignore_missing: true %>
+          </span>
+          <span>
             {{:author}}
           </span>
           <span>
@@ -23,17 +26,23 @@
 
 <script id="marker-meeting-popup" type="text/x-jsrender">
   <div class="space-y-6">
-    <a href="${link}" class="card__list">
+    <a href="{{>link}}" class="card__list">
       <div class="card__list-content">
         <h3 class="h4 card__list-title">{{:title.translation}}</h3>
         <div class="card__list-metadata">
           <span>
-            {{:startTime}}
+            <%= icon "calendar-line" %>
+            {{:dateRange}}
           </span>
           <span>
-            {{:typeOfMeeting}}
+            <%= icon "{{:icon}}", ignore_missing: true %>
+            {{:meetingType}}
           </span>
         </div>
+        <div class="description">
+          <p>{{>address}}</p>
+         {{:body.translation}}
+       </div>
       </div>
     </a>
   </div>
@@ -52,4 +61,6 @@
 <script>
   window.AwesomeMap = window.AwesomeMap || {};
   window.AwesomeMap.categories = <%= current_categories(categories).to_json.html_safe %>;
+  window.AwesomeMapMeetingTypes = <%= Decidim::Meetings::Meeting::TYPE_OF_MEETING.to_h { |type, _| [type, Decidim.icons.all[type.to_s]["icon"]] }.to_json.html_safe %>;
+  window.AwesomeMapMeetingTexts = <%= Decidim::Meetings::Meeting::TYPE_OF_MEETING.to_h { |type, _| [type, t("decidim.meetings.meetings.filters.type_values.#{type}")] }.to_json.html_safe %>;
 </script>

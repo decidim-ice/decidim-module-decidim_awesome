@@ -131,4 +131,22 @@ export default class Fetcher {
   truncate(html) {
     return $.truncate(html, this.config);
   }
+
+  formatDateRange(startDate, endDate) {
+    // Check if either startDate or endDate is blank
+    if (!startDate || !endDate) {
+      return "";
+    }
+
+    // Convert startDate and endDate to JavaScript Date objects
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    const date = Intl.DateTimeFormat(window.DecidimAwesome.currentLocale, { // eslint-disable-line new-cap
+      year: "numeric",
+      month: "short",
+      day: "numeric"
+    });
+    return date.formatRange(start, end);
+  }
 }
