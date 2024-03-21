@@ -30,7 +30,7 @@ export default class Fetcher {
     api.fetchAll((result) => {
       if (result) {
         const collection = result.component[this.collection];
-        console.log("collection", collection)
+        // console.log("collection", collection)
         
         collection.edges.forEach((element) => {
           let node = element.node;

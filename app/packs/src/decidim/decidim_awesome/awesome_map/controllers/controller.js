@@ -86,7 +86,7 @@ export default class Controller {
 
     marker.on("click", () => {
       let dom = document.createElement("div");
-      console.log("marker click", node)
+      // console.log("marker click", node)
       dom.innerHTML = $.templates(`#${this.templateId}`).render(node);
 
       let pop = L.popup({
