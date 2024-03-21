@@ -14,10 +14,10 @@ export default class ControlsUI {
     });
 
     if (this.awesomeMap.config.hideControls) {
-      $(this.main.getContainer()).hide();
+      this.main.getContainer().style.display = "none";
     }
 
-    this.$loading = $("#awesome-map .loading-spinner");
+    this.loading = document.querySelector("#awesome-map .loading-spinner");
     this.onHashtag = this._orderHashtags;
 
     this.awesomeMap.map.on("overlayadd", () => {
@@ -63,7 +63,8 @@ export default class ControlsUI {
   }
 
   addSearchControls() {
-    $(this.main.getContainer()).contents("form").append(`<div id="awesome_map-categories-control" class="active"><b class="awesome_map-title-control">${window.DecidimAwesome.texts.categories}</b><div class="categories-container"></div></div>
+    console.log("add search", this.main.getContainer())
+    this.main.getContainer().querySelector("form").insertAdjacentHTML("beforeend", `<div id="awesome_map-categories-control" class="active"><b class="awesome_map-title-control">${window.DecidimAwesome.texts.categories}</b><div class="categories-container"></div></div>
     <div id="awesome_map-hashtags-control"><b class="awesome_map-title-control">${window.DecidimAwesome.texts.hashtags}</b><div class="hashtags-container"></div><a href="#" class="awesome_map-toggle_all_tags">${window.DecidimAwesome.texts.select_deselect_all}</a></div>`);
   }
 
@@ -114,7 +115,7 @@ export default class ControlsUI {
   addHashtagsControls(hashtags, marker) {
     // show hashtag layer
     if (hashtags && hashtags.length) {
-      $("#awesome_map-hashtags-control").show();
+      document.getElementById("awesome_map-hashtags-control").style.display = "block";
       hashtags.forEach((hashtag) => {
         // Add layer if not exists, otherwise just add the marker to the group
         if (!this.awesomeMap.layers[hashtag.tag]) {
@@ -137,16 +138,20 @@ export default class ControlsUI {
   }
 
   showCategory(cat) {
-    $("#awesome_map-categories-control").show();
+    document.getElementById("awesome_map-categories-control").style.display = "block";
     // show category if hidden
-    const $label = $(`label.awesome_map-category-${cat.id}`);
-    const $parent = $(`label.awesome_map-category-${cat.parent}`);
-    $label.show();
-    // update number of items
-    $label.attr("title", `${parseInt($label.attr("title") || 0, 10) + 1} ${window.DecidimAwesome.texts.items}`);
-    // show parent if apply
-    $parent.show();
-    $parent.attr("title", `${parseInt($parent.attr("title") || 0, 10) + 1} ${window.DecidimAwesome.texts.items}`);
+    const label = document.querySelector(`label.awesome_map-category-${cat.id}`);
+    const parent = document.querySelector(`label.awesome_map-category-${cat.parent}`);
+    if (label) {      
+      label.style.display = "block";
+      // update number of items
+      label.setAttribute("title", `${parseInt(label.title || 0, 10) + 1} ${window.DecidimAwesome.texts.items}`);
+    }
+    if (parent) {
+      // show parent if apply
+      parent.style.display = "block"
+      parent.setAttribute("title", `${parseInt(parent.title || 0, 10) + 1} ${window.DecidimAwesome.texts.items}`);
+    }
   }
 
   removeHiddenComponents() {

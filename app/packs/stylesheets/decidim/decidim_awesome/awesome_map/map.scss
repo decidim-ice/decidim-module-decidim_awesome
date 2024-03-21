@@ -2,18 +2,6 @@
 .dropdown-pane {
   z-index: 1000;
 }
-// Override padding in this component
-// .wrapper {
-//   // padding: 0;
-
-//   .callout.announcement {
-//     margin-top: 2rem;
-//   }
-
-//   .google-map {
-//     margin-bottom: 0;
-//   }
-// }
 
 #awesome-map {
   width: 100%;
@@ -28,8 +16,8 @@
   .loading-spinner {
     z-index: 10000;
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 50%;
+    top: 50%;
   }
 
   .leaflet-container {

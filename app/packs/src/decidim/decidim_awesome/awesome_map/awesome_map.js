@@ -64,7 +64,7 @@ export default class AwesomeMap {
           this.autoResize();
 
           if (this.loading.length === 0) {
-            this.controls.$loading.hide();
+            this.controls.loading.style.display = "none";
             // call trigger as all loads are finished
             this.onFinished();
           }
