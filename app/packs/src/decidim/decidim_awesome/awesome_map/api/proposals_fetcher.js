@@ -74,5 +74,7 @@ export default class ProposalsFetcher extends Fetcher {
     default:
       node.stateClass = "muted";
     }
+
+    node.isAmendment = () => (Boolean(this.controller.amendments[node.id]));
   }
 }

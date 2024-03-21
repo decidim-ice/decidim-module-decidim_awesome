@@ -34,6 +34,7 @@ export default class ProposalsController extends Controller {
 
       // Check if it has amendments, add it to a list
       // also assign parent's proposal categories to it
+      // console.log("onNode proposal", proposal, "amendment:", proposal.amendments)
       if (proposal.amendments && proposal.amendments.length) {
         proposal.amendments.forEach((amendment) => {
           this.amendments[amendment.emendation.id] = proposal;

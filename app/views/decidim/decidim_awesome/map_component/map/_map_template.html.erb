@@ -21,6 +21,12 @@
           <span>
             <span class="label {{:stateClass}}">{{:humanState}}</span>
           </span>
+          {{if isAmendment() }}
+            <span>
+              <%= icon "other" %>
+              <%= t("activerecord.models.decidim/amendment", count: 1) %>
+            </span>
+          {{/if}}
         </div>
         <div class="description">
           <p>{{>address}}</p>
