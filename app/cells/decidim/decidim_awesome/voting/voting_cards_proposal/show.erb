@@ -1,7 +1,7 @@
 <div class="flex flex-col justify-center">
   <h4 class="heading4 vote-title mb-2" style="font-size:1.375rem;"><%= title %></h4>
 
-  <div class="flex flex-row gap-1.5 mt-4" data-dialog-open="voting-cards-modal-help">
+  <div class="flex flex-row gap-1.5 mt-4">
     <%= vote_block_for(proposal, 3) %>
     <%= vote_block_for(proposal, 2) %>
     <%= vote_block_for(proposal, 1) %>
@@ -13,8 +13,7 @@
                                   proposal_vote_path(0),
                                   link_options(0).merge({
                                     title: t("decidim.decidim_awesome.voting.voting_cards.voting_for", proposal: sanitized_title, type: proposal.manifest.label_for(0)),
-                                    class: "button button__sm button__transparent-secondary expanded mb-4 vote-action abstain-button #{classes_for(0)}",
-                                    data: { dialog_open: "voting-cards-modal-help" }
+                                    class: "button button__sm button__transparent-secondary expanded mb-4 vote-action abstain-button #{classes_for(0)}"
                                     }) %>
   <% end %>
 
@@ -23,7 +22,6 @@
       <%= action_authorized_link_to :unvote,
                                     t("decidim.decidim_awesome.voting.voting_cards.change_vote"),
                                     proposal_vote_path(current_vote&.weight),
-                                    data: { dialog_open: "voting-cards-modal-help" },
                                     remote: true,
                                     method: :delete,
                                     id: "change-vote",

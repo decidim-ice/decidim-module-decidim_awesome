@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   modal.querySelector(".vote-action").addEventListener("click", () => {
     modal.action.click();
-    $(modal).foundation("close");
+    window.Decidim.currentDialogs[id].close();
   });
 
   $(".voting-voting_cards").on("click", ".vote-action", (evt) => {
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         card.innerHTML = `<p class="vote-label">${evt.currentTarget.textContent}</p>`;
       }
-      $(modal).foundation("open");
+      window.Decidim.currentDialogs[id].open();
     } else {
       evt.currentTarget.closest(".voting-voting_cards").classList.add("loading");
     }
