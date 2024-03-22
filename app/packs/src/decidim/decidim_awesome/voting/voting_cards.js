@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const votingCards = document.querySelector(".voting-voting_cards");
   const modal = document.getElementById("voting-cards-modal-help");
-  const signOutLink = document.querySelector(".sign-out-link");
+  const signOutLink = document.querySelector('[href="/users/sign_out"]');
+
+console.log("votingCards", votingCards, "modal", modal, "signOutLink", signOutLink);
 
   if (!votingCards || !modal || !signOutLink) {
     return;
@@ -32,35 +34,42 @@ document.addEventListener("DOMContentLoaded", () => {
     return true;
   };
 
+  const bindVoteActions = (evt) => {
+    console.log("binding")
+    document.querySelectorAll(".voting-voting_cards .vote-action").forEach((el) => {
+      el.addEventListener("click", (evt) => {
+        if (showModal()) {
+          evt.stopPropagation();
+          evt.preventDefault();
+          check.checked = isChecked();
+          modal.action = evt.currentTarget;
+          card.classList = evt.currentTarget.classList;
+          console.log("clicked", evt.currentTarget.children.length, evt.currentTarget.children[1].outerHTML, evt.currentTarget.children[1].children[0].textContent, evt.currentTarget.title, evt.currentTarget.textContent);
+          if (evt.currentTarget.children.length > 1) {
+            card.innerHTML = `${evt.currentTarget.children[1].outerHTML}<p class="vote-label">${evt.currentTarget.children[1].children[0].textContent}</p>`;
+          } else if (card.classList.contains("button")) {
+            card.classList.remove("button");
+            card.innerHTML = `<p class="vote-label">${evt.currentTarget.title}</p>`;
+          } else {
+            card.innerHTML = `<p class="vote-label">${evt.currentTarget.textContent}</p>`;
+          }
+          window.Decidim.currentDialogs[modal.id].open();
+        } else {
+          evt.currentTarget.closest(".voting-voting_cards").classList.add("loading");
+        }
+      });
+    });
+  };
+
   check.addEventListener("change", () => {
     saveState(check.checked);
   });
 
   modal.querySelector(".vote-action").addEventListener("click", () => {
     modal.action.click();
-    window.Decidim.currentDialogs[id].close();
+    window.Decidim.currentDialogs[modal.id].close();
   });
 
-  $(".voting-voting_cards").on("click", ".vote-action", (evt) => {
-    if (showModal()) {
-      evt.stopPropagation();
-      evt.preventDefault();
-      check.checked = isChecked();
-      modal.action = evt.currentTarget;
-      card.classList = evt.currentTarget.classList;
-      console.log("clicked", evt.currentTarget.children.length, evt.currentTarget.children[1].outerHTML, evt.currentTarget.children[1].children[0].textContent, evt.currentTarget.title, evt.currentTarget.textContent);
-      if (evt.currentTarget.children.length > 1) {
-        card.innerHTML = `${evt.currentTarget.children[1].outerHTML}<p class="vote-label">${evt.currentTarget.children[1].children[0].textContent}</p>`;
-      } else if (card.classList.contains("button")) {
-        card.classList.remove("button");
-        card.innerHTML = `<p class="vote-label">${evt.currentTarget.title}</p>`;
-      } else {
-        card.innerHTML = `<p class="vote-label">${evt.currentTarget.textContent}</p>`;
-      }
-      window.Decidim.currentDialogs[id].open();
-    } else {
-      evt.currentTarget.closest(".voting-voting_cards").classList.add("loading");
-    }
-  });
+  bindVoteActions();
 });
 
