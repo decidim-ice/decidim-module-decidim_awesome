@@ -23,12 +23,18 @@ export default class ProposalsFetcher extends Fetcher {
                       locale
                     }
                   }
+                  author {
+                    id
+                    name
+                  }
                   body {
                     translations {
                       text
                       locale
                     }
                   }
+                  totalCommentsCount
+                  endorsementsCount
                   address
                   coordinates {
                     latitude
@@ -48,5 +54,27 @@ export default class ProposalsFetcher extends Fetcher {
           }
         }
       }`;
+  }
+
+  decorateNode(node) {
+    super.decorateNode(node);
+    node.authorName = node.author && node.author.name || window.DecidimAwesome.texts.officialAuthor;
+    node.humanState = window.AwesomeMapProposalTexts[node.state];
+    switch (node.state) {
+    case "accepted":
+      node.stateClass = "success";
+      break;
+    case "rejected":
+    case "withdrawn":
+      node.stateClass = "alert";
+      break;
+    case "evaluating":
+      node.stateClass = "warning";
+      break;
+    default:
+      node.stateClass = "muted";
+    }
+
+    node.isAmendment = () => (Boolean(this.controller.amendments[node.id]));
   }
 }

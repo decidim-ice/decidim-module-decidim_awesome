@@ -9,6 +9,7 @@ data:
     - "<%= %x[bundle info decidim-admin --path].chomp %>/config/locales/%{locale}.yml"
     - "<%= %x[bundle info decidim-proposals --path].chomp %>/config/locales/%{locale}.yml"
     - "<%= %x[bundle info decidim-meetings --path].chomp %>/config/locales/%{locale}.yml"
+    - "<%= %x[bundle info decidim-blogs --path].chomp %>/config/locales/%{locale}.yml"
 
 ignore_unused:
   - "decidim.components.decidim_awesome.name"

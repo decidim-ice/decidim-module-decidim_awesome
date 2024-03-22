@@ -1,5 +1,10 @@
 <main class="participatory-space__container">
-  <%= render partial: "decidim/shared/component_announcement" %>
+  <% announcement = translated_attribute(current_settings.announcement).presence || translated_attribute(component_settings.announcement).presence %>
+  <% if strip_tags(announcement).present? %>
+    <section>
+      <%= cell("decidim/announcement", announcement, local_assigns.merge(callout_class: "editor-content")) %>
+    </section>
+  <% end %>
 
   <%= render partial: "api_ready" %>
 
