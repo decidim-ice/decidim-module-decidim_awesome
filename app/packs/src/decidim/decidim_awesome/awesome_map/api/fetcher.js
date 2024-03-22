@@ -56,13 +56,14 @@ export default class Fetcher {
   }
 
   decorateNode(node) {
-    const body = this.findTranslation(node.body.translations);
+    const body = this.findTranslation(node.body.translations)
     const title = this.findTranslation(node.title.translations);
     node.hashtags = this.collectHashtags(title);
     node.hashtags = node.hashtags.concat(this.collectHashtags(body));
     // hashtags in the title look ugly, lets replace the gid:... structure with the tag #name
     node.title.translation = this.replaceHashtags(title, node.hashtags);
-    node.body.translation = this.appendHtmlHashtags(this.truncate(this.removeHashtags(body)).replace(/\n/g, "<br>"), node.hashtags);
+    node.body.translation = this.appendHtmlHashtags(this.truncate(this.removeHashtags(body)), node.hashtags);
+    // console.log("decorateNode", node.title.translation, "BODY", body, "translation", node.body.translation, node.hashtags)
     node.link = `${this.controller.component.url}/${node.id}`;
   }
 
@@ -83,7 +84,7 @@ export default class Fetcher {
   collectHashtags(text) {
     let tags = [];
     if (text) {
-      const gids = text.match(/gid:\/\/[^\s<&]+/g)
+      const gids = text.match(/gid:\/\/[^\s<&,;]+/g)
       if (gids) {
         tags = gids.filter((gid) => gid.indexOf("/Decidim::Hashtag/") !== -1).map((gid) => {
           const parts = gid.split("/");
@@ -117,15 +118,18 @@ export default class Fetcher {
   }
 
   removeHashtags(text) {
-    return text.replace(/gid:\/\/[^\s<&]+/g, "");
+    return text.replace(/gid:\/\/[^\s<&,;]+/g, "");
   }
 
   appendHtmlHashtags(txt, tags) {
-    let text = txt;
-    tags.forEach((tag) => {
-      text += ` ${tag.html}`;
-    });
-    return text;
+    let string = tags.reduce((accumulator, tag) => (accumulator
+      ? `${accumulator} ${tag.html}`
+      : tag.html), "");
+    if (string) {
+      return `${txt}<p>${string}</p>`;
+    } 
+    return txt;
+    
   }
 
   truncate(html) {

@@ -86,7 +86,6 @@ export default class Controller {
 
     marker.on("click", () => {
       let dom = document.createElement("div");
-      // console.log("marker click", node)
       dom.innerHTML = $.templates(`#${this.templateId}`).render(node);
 
       let pop = L.popup({
@@ -97,6 +96,7 @@ export default class Controller {
 
       }).setLatLng(marker.getLatLng()).setContent(dom);
       this.awesomeMap.map.addLayer(pop);
+      // console.log("marker click", node, "pop", pop, "marker", marker, "dom", dom, "templateId", this.templateId)
     });
     node.marker = marker;
     node.component = this.component;

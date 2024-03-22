@@ -13,4 +13,7 @@
     alwaysUseFloatingButton: <%= settings[:use_floating_button] ? "true" : "false" %> // Use the mobile floating button also on large screens
   };
 </script>
-<script id="intergram" type="text/javascript" src="<%= awesome_config[:intergram_url] %>"></script>
+
+<% if settings[:chat_id].present? %>
+  <script id="intergram" type="text/javascript" src="<%= awesome_config[:intergram_url] %>"></script>
+<% end %>

@@ -2,62 +2,66 @@
 
 <script id="marker-proposal-popup" type="text/x-jsrender">
   <div class="space-y-6">
-    <a href="{{>link}}" target="proposal" class="card__list">
+    <div class="card__list">
       <div class="card__list-content">
-        <h3 class="h4 card__list-title">{{:title.translation}}</h3>
-        <div class="card__list-metadata">
-          <span>
-            <%= icon "account-circle-line" %>
-            {{:authorName}}
-          </span>
-          <span>
-            <%= icon "wechat-line" %>
-            {{:totalCommentsCount}}
-          </span>
-          <span>
-            <%= icon "like" %>
-            {{:endorsementsCount}}
-          </span>
-          <span>
-            <span class="label {{:stateClass}}">{{:humanState}}</span>
-          </span>
-          {{if isAmendment() }}
+        <a href="{{>link}}" target="proposal">
+          <h3 class="h4 card__list-title">{{:title.translation}}</h3>
+          <div class="card__list-metadata">
             <span>
-              <%= icon "other" %>
-              <%= t("activerecord.models.decidim/amendment", count: 1) %>
+              <%= icon "account-circle-line" %>
+              {{:authorName}}
             </span>
-          {{/if}}
-        </div>
+            <span>
+              <%= icon "wechat-line" %>
+              {{:totalCommentsCount}}
+            </span>
+            <span>
+              <%= icon "like" %>
+              {{:endorsementsCount}}
+            </span>
+            <span>
+              <span class="label {{:stateClass}}">{{:humanState}}</span>
+            </span>
+            {{if isAmendment() }}
+              <span>
+                <%= icon "other" %>
+                <%= t("activerecord.models.decidim/amendment", count: 1) %>
+              </span>
+            {{/if}}
+          </div>
+          <div class="text-sm">{{>address}}</div>
+        </a>
         <div class="description">
-          <p>{{>address}}</p>
-         {{:body.translation}}
+         <div>{{:body.translation}}</div>
        </div>
       </div>
-    </a>
+    </div>
   </div>
 </script>
 
 <script id="marker-meeting-popup" type="text/x-jsrender">
   <div class="space-y-6">
-    <a href="{{>link}}" target="meeting" class="card__list">
+    <div class="card__list">
       <div class="card__list-content">
-        <h3 class="h4 card__list-title">{{:title.translation}}</h3>
-        <div class="card__list-metadata">
-          <span>
-            <%= icon "calendar-line" %>
-            {{:dateRange}}
-          </span>
-          <span>
-            <%= icon "{{:icon}}", ignore_missing: true %>
-            {{:meetingType}}
-          </span>
-        </div>
+        <a href="{{>link}}" target="meeting">
+          <h3 class="h4 card__list-title">{{:title.translation}}</h3>
+          <div class="card__list-metadata">
+            <span>
+              <%= icon "calendar-line" %>
+              {{:dateRange}}
+            </span>
+            <span>
+              <%= icon "{{:icon}}", ignore_missing: true %>
+              {{:meetingType}}
+            </span>
+          </div>
+          <div class="text-sm">{{>address}}</div>
+        </a>
         <div class="description">
-          <p>{{>address}}</p>
          {{:body.translation}}
        </div>
       </div>
-    </a>
+    </div>
   </div>
 </script>
 

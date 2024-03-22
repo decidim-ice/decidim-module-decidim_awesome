@@ -38,8 +38,14 @@ export default class ControlsUI {
     $("#awesome-map").on("click", ".awesome_map-title-control", (evt) => {
       evt.preventDefault();
       evt.stopPropagation();
-      $("#awesome_map-categories-control").toggleClass("active");
-      $("#awesome_map-hashtags-control").toggleClass("active");
+      const categories = document.getElementById("awesome_map-categories-control");
+      const hashtags = document.getElementById("awesome_map-hashtags-control");
+      if (categories) {
+        categories.classList.toggle("active");
+      }
+      if (hashtags) {
+        hashtags.classList.toggle("active");
+      }
     });
 
     // hashtag events
@@ -59,6 +65,17 @@ export default class ControlsUI {
       evt.stopPropagation();
       $("#awesome-map .awesome_map-hashtags-selector").prop("checked", $("#awesome-map .awesome_map-hashtags-selector:checked").length < $("#awesome-map .awesome_map-hashtags-selector").length);
       this.updateHashtagLayers();
+    });
+
+    this.awesomeMap.map.on("popupopen", () => {
+      // console.log("popup open");
+      // hide Controls
+      document.querySelector(".leaflet-control-layers.leaflet-control").style.display = "none";
+    });
+    this.awesomeMap.map.on("popupclose", () => {
+      // console.log("popup close");
+      // restore controls
+      document.querySelector(".leaflet-control-layers.leaflet-control").style.display = "block";
     });
   }
 
