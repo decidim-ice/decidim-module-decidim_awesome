@@ -105,6 +105,10 @@
   }
 }
 
+.participatory-space__container #awesome-map {
+  @apply mt-8 mb-8;
+}
+
 #awesome_map- {
   &categories-control {
     display: none;
