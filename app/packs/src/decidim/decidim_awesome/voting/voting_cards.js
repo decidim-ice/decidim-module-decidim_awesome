@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return true;
   };
 
-  const bindVoteActions = (evt) => {
+  const bindVoteActions = () => {
     document.querySelectorAll(".awesome-voting-card .vote-action").forEach((el) => {
       el.addEventListener("click", (evt) => {
         console.log("clicking", showModal());
@@ -69,6 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => window.Decidim.currentDialogs[modal.id].close());
   });
 
-  bindVoteActions();
+  document.body.addEventListener("ajax:success", () => 
+    bindVoteActions());
 });
-
