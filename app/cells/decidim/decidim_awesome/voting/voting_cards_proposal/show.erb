@@ -39,15 +39,19 @@
 
 </div>
 
-<%= decidim_modal id: "voting-cards-proposal-modal" do %>
+<%= decidim_modal id: "voting-cards-proposal-modal", class:"reveal vote_proposal_modal voting-voting_cards" do %>
   <div data-dialog-container>
-    <%= icon "information-line" %>
     <div id="instructions-voting-cards-proposal-modal" class="reveal__content">
-      <p class="instructions"><%= vote_instructions %></p>
-      <div class="current-choice voting-voting_cards"><div class="vote-card"></div></div>
+      <div class="flex justify-center items-center">
+        <%= icon "information-line" %>
+      </div>
+      <p id="instructions-voting-cards-proposal-modal" class="instructions"><%= vote_instructions %></p>
+      <div class="current-choice voting-voting_cards">
+        <div class="vote-card"></div>
+      </div>
       <div class="future-dismiss">
-        <%= check_box_tag "voting_cards-skip_help", current_component.id, false %>
-        <%= label_tag "voting_cards-skip_help", t("decidim.decidim_awesome.voting.voting_cards.modal.skip") %>
+          <%= check_box_tag "voting_cards-skip_help", current_component.id, false %>
+          <%= label_tag "voting_cards-skip_help", t("decidim.decidim_awesome.voting.voting_cards.modal.skip") %>
       </div>
     </div>
   </div>
