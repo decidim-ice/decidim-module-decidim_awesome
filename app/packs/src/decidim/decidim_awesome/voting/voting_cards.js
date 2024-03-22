@@ -3,8 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("voting-cards-modal-help");
   const signOutLink = document.querySelector('[href="/users/sign_out"]');
 
-console.log("votingCards", votingCards, "modal", modal, "signOutLink", signOutLink);
-
   if (!votingCards || !modal || !signOutLink) {
     return;
   }
@@ -27,24 +25,24 @@ console.log("votingCards", votingCards, "modal", modal, "signOutLink", signOutLi
   };
 
   const showModal = () => {
-    console.log("showModal", isChecked(), modal.style.display);
-    if (isChecked() || modal.style.display === "block") {
+    console.log("showModal", isChecked(), modal, window.Decidim.currentDialogs[modal.id].isOpen);
+    if (isChecked() || window.Decidim.currentDialogs[modal.id].isOpen) {
       return false;
     }
     return true;
   };
 
   const bindVoteActions = (evt) => {
-    console.log("binding")
-    document.querySelectorAll(".voting-voting_cards .vote-action").forEach((el) => {
+    document.querySelectorAll(".awesome-voting-card .vote-action").forEach((el) => {
       el.addEventListener("click", (evt) => {
+        console.log("clicking", showModal());
         if (showModal()) {
           evt.stopPropagation();
           evt.preventDefault();
           check.checked = isChecked();
           modal.action = evt.currentTarget;
           card.classList = evt.currentTarget.classList;
-          console.log("clicked", evt.currentTarget.children.length, evt.currentTarget.children[1].outerHTML, evt.currentTarget.children[1].children[0].textContent, evt.currentTarget.title, evt.currentTarget.textContent);
+          console.log("clicked", evt.currentTarget);
           if (evt.currentTarget.children.length > 1) {
             card.innerHTML = `${evt.currentTarget.children[1].outerHTML}<p class="vote-label">${evt.currentTarget.children[1].children[0].textContent}</p>`;
           } else if (card.classList.contains("button")) {
@@ -55,6 +53,7 @@ console.log("votingCards", votingCards, "modal", modal, "signOutLink", signOutLi
           }
           window.Decidim.currentDialogs[modal.id].open();
         } else {
+          console.log("adding loading", evt.currentTarget, evt.target)
           evt.currentTarget.closest(".voting-voting_cards").classList.add("loading");
         }
       });
@@ -67,7 +66,7 @@ console.log("votingCards", votingCards, "modal", modal, "signOutLink", signOutLi
 
   modal.querySelector(".vote-action").addEventListener("click", () => {
     modal.action.click();
-    window.Decidim.currentDialogs[modal.id].close();
+    setTimeout(() => window.Decidim.currentDialogs[modal.id].close());
   });
 
   bindVoteActions();
