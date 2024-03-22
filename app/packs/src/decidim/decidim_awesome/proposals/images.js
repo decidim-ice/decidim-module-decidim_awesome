@@ -15,10 +15,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const span = document.createElement("span");
     span.className = "input-character-counter__text";
-    span.innerHTML = window.DecidimAwesome.texts.drag_and_drop_image;
+    span.innerHTML = window.DecidimAwesome.texts.dragAndDropImage;
     textarea.parentNode.appendChild(span);
     attach(textarea, {
-      uploadUrl: window.DecidimAwesome.editor_uploader_path,
+      uploadUrl: window.DecidimAwesome.editorUploaderPath,
       uploadFieldName: "image",
       responseUrlKey: "url",
       progressText: "[Uploading file...]",

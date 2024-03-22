@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }
           // console.log("Saving key", key, "to", input.value, "with scope", scope);
           evt.preventDefault();
-          fetch(window.DecidimAwesome.rename_scope_label_path, {
+          fetch(window.DecidimAwesome.renameScopeLabelPath, {
             method: "POST",
             headers: {
               "Accept": "application/json, text/plain, */*",

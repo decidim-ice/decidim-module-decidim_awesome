@@ -2,18 +2,6 @@
 .dropdown-pane {
   z-index: 1000;
 }
-// Override padding in this component
-.wrapper {
-  padding: 0;
-
-  .callout.announcement {
-    margin-top: 2rem;
-  }
-
-  .google-map {
-    margin-bottom: 0;
-  }
-}
 
 #awesome-map {
   width: 100%;
@@ -21,21 +9,35 @@
   justify-content: center;
   align-items: center;
 
-  // .leaflet-marker-icon.svg-icon svg path{
-  //   filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, .7));
-  // }
-
   .loading-spinner {
     z-index: 10000;
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 50%;
+    top: 50%;
   }
 
-  .leaflet-container {
+  .leaflet-popup-content {
     font: inherit;
 
-    #bodyContent .description {
+    h3 {
+      @apply mb-2;
+    }
+
+    a {
+      @apply text-white;
+    }
+
+    .description {
+      @apply m-0 px-0 text-sm font-sans text-white;
+
+      p {
+        @apply mt-0;
+      }
+
+      a {
+        @apply underline;
+      }
+
       img,
       iframe {
         max-height: 5em;
@@ -103,6 +105,10 @@
   }
 }
 
+.participatory-space__container #awesome-map {
+  @apply mt-8 mb-8;
+}
+
 #awesome_map- {
   &categories-control {
     display: none;
@@ -148,7 +154,7 @@
       padding: 0.5rem;
 
       span {
-        margin: 0 0.5rem 2px 0;
+        margin: 0 0 2px 0.4em;
       }
 
       input {

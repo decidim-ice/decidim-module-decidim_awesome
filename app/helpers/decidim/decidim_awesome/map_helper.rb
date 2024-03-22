@@ -14,11 +14,9 @@ module Decidim
       def awesome_map_for(components, &)
         return unless map_utility_dynamic
 
-        map = awesome_builder.map_element({ class: "google-map", id: "awesome-map-container" }, &)
-        help = content_tag(:div, class: "map__help") do
-          sr_content = content_tag(:p, t("screen_reader_explanation", scope: "decidim.map.dynamic"), class: "show-for-sr")
-
-          sr_content
+        map = awesome_builder.map_element({ class: "dynamic-map", id: "awesome-map-container" }, &)
+        help = content_tag(:div, class: "map__skip-container") do
+          content_tag(:p, t("screen_reader_explanation", scope: "decidim.map.dynamic"), class: "sr-only")
         end
 
         html_options = {
@@ -51,7 +49,7 @@ module Decidim
         }
 
         content_tag(:div, html_options) do
-          content_tag :div, class: "row column" do
+          content_tag :div, class: "w-full" do
             help + map
           end
         end

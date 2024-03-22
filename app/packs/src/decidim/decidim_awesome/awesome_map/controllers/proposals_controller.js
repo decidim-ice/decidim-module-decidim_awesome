@@ -28,12 +28,13 @@ export default class ProposalsController extends Controller {
     // for each proposal, create a marker with an associated popup
     this.fetcher.onNode = (proposal) => {
       let marker = new L.Marker([proposal.coordinates.latitude, proposal.coordinates.longitude], {
-        icon: this.createIcon("text-secondary"),
+        icon: this.createIcon(this.awesomeMap.getCategory(proposal.category).color),
         title: proposal.title.translation
       });
 
       // Check if it has amendments, add it to a list
       // also assign parent's proposal categories to it
+      // console.log("onNode proposal", proposal, "amendment:", proposal.amendments)
       if (proposal.amendments && proposal.amendments.length) {
         proposal.amendments.forEach((amendment) => {
           this.amendments[amendment.emendation.id] = proposal;
