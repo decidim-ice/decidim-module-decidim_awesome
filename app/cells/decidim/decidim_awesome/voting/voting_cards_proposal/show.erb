@@ -1,7 +1,7 @@
 <div class="flex flex-col justify-center">
   <h4 class="heading4 vote-title mb-2" style="font-size:1.375rem;"><%= title %></h4>
 
-  <div class="flex flex-row gap-1.5 mt-4">
+  <div class="flex flex-row gap-1.5 mt-4" data-dialog-open="voting-cards-proposal-modal">
     <%= vote_block_for(proposal, 3) %>
     <%= vote_block_for(proposal, 2) %>
     <%= vote_block_for(proposal, 1) %>
@@ -13,7 +13,8 @@
                                   proposal_vote_path(0),
                                   link_options(0).merge({
                                     title: t("decidim.decidim_awesome.voting.voting_cards.voting_for", proposal: sanitized_title, type: proposal.manifest.label_for(0)),
-                                    class: "button button__sm button__transparent-secondary expanded mb-4 vote-action abstain-button #{classes_for(0)}"
+                                    class: "button button__sm button__transparent-secondary expanded mb-4 vote-action abstain-button #{classes_for(0)}",
+                                    data: { dialog_open: "voting-cards-proposal-modal" }
                                     }) %>
   <% end %>
 
@@ -22,6 +23,7 @@
       <%= action_authorized_link_to :unvote,
                                     t("decidim.decidim_awesome.voting.voting_cards.change_vote"),
                                     proposal_vote_path(current_vote&.weight),
+                                    data: { dialog_open: "voting-cards-proposal-modal" },
                                     remote: true,
                                     method: :delete,
                                     id: "change-vote",
@@ -36,3 +38,21 @@
   <% end %>
 
 </div>
+
+<%= decidim_modal id: "voting-cards-proposal-modal" do %>
+  <div data-dialog-container>
+    <%= icon "information-line" %>
+    <div id="instructions-voting-cards-proposal-modal" class="reveal__content">
+      <p class="instructions"><%= vote_instructions %></p>
+      <div class="current-choice voting-voting_cards"><div class="vote-card"></div></div>
+      <div class="future-dismiss">
+        <%= check_box_tag "voting_cards-skip_help", current_component.id, false %>
+        <%= label_tag "voting_cards-skip_help", t("decidim.decidim_awesome.voting.voting_cards.modal.skip") %>
+      </div>
+    </div>
+  </div>
+  <div data-dialog-actions>
+    <button type="button" class="button button__lg button__primary hover:bg-primary vote-action"><%= t("decidim.decidim_awesome.voting.voting_cards.modal.proceed") %></button>
+    <button type="button" class="button button__lg button__transparent-secondary cancel-action hollow secondary" data-dialog-close="voting-cards-proposal-modal"><%= t("decidim.decidim_awesome.voting.voting_cards.modal.cancel") %></button>
+  </div>
+<% end %>
