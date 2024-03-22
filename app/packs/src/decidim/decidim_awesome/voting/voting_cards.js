@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const showModal = () => {
-    console.log("showModal", isChecked(), modal, window.Decidim.currentDialogs[modal.id].isOpen);
     if (isChecked() || window.Decidim.currentDialogs[modal.id].isOpen) {
       return false;
     }
@@ -35,25 +34,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const bindVoteActions = () => {
     document.querySelectorAll(".awesome-voting-card .vote-action").forEach((el) => {
       el.addEventListener("click", (evt) => {
-        console.log("clicking", showModal());
         if (showModal()) {
           evt.stopPropagation();
           evt.preventDefault();
           check.checked = isChecked();
           modal.action = evt.currentTarget;
           card.classList = evt.currentTarget.classList;
-          console.log("clicked", evt.currentTarget);
           if (evt.currentTarget.children.length > 1) {
-            card.innerHTML = `${evt.currentTarget.children[1].outerHTML}<p class="vote-label">${evt.currentTarget.children[1].children[0].textContent}</p>`;
+            card.innerHTML = `${evt.currentTarget.children[1].outerHTML}<span class="vote-label">${evt.currentTarget.children[1].children[0].textContent}</span>`;
           } else if (card.classList.contains("button")) {
             card.classList.remove("button");
-            card.innerHTML = `<p class="vote-label">${evt.currentTarget.title}</p>`;
+            card.innerHTML = `<span class="vote-label">${evt.currentTarget.title}</span>`;
           } else {
-            card.innerHTML = `<p class="vote-label">${evt.currentTarget.textContent}</p>`;
+            card.innerHTML = `<span class="vote-label">${evt.currentTarget.textContent}</span>`;
           }
           window.Decidim.currentDialogs[modal.id].open();
         } else {
-          console.log("adding loading", evt.currentTarget, evt.target)
           evt.currentTarget.closest(".voting-voting_cards").classList.add("loading");
         }
       });
@@ -69,6 +65,8 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => window.Decidim.currentDialogs[modal.id].close());
   });
 
-  document.body.addEventListener("ajax:success", () => 
-    bindVoteActions());
+  bindVoteActions();
+
+  // re-bind vote actions after AJAX events (due the use of Rails helper remote=treu)
+  document.body.addEventListener("ajax:success", () => bindVoteActions());
 });

@@ -8,7 +8,6 @@
 .voting-voting_cards {
   $rectangle-width: 3rem;
 
-  // ProposalM card
   &-card {
     a {
       margin-bottom: 0;
@@ -221,4 +220,8 @@
       }
     }
   }
+}
+
+.vote_proposal_modal div.button__sm {
+  display: inline-block;
 }
