@@ -58,6 +58,8 @@ en:
         proposal_custom_fields: Custom fields
   decidim:
     admin:
+      actions:
+        manage: Manage
       filters:
         admin_accountability:
           admin_role_type:
@@ -120,10 +122,10 @@ en:
         settings:
           global:
             awesome_voting_manifest: Support type
-            awesome_voting_manifest_help_html: <span class="text-alert">Be aware
-              that changing this setting in the middle of a votation period can result
-              in innacurate or unexpected results.</span><br>Note also that this
-              setting can only be edited if the component has no supports yet.
+            awesome_voting_manifest_help_html: <span class="text-alert">Be aware that
+              changing this setting in the middle of a votation period can result
+              in innacurate or unexpected results.</span><br>Note also that this setting
+              can only be edited if the component has no supports yet.
             awesome_voting_manifest_options:
               default: Simple vote (default)
               voting_cards: Voting using coloured cards
@@ -519,7 +521,7 @@ en:
           change_vote: Change my vote
           default_box_title: Vote on this proposal
           default_instructions_html: <p>Please read the election rules carefully to
-            understand how your vote will be used by %{organization}"</p>
+            understand how your vote will be used by %{organization}</p>
           modal:
             cancel: Cancel
             message: Your vote will be considered final on %{date}. You can change

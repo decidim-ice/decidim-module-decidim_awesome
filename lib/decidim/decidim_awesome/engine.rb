@@ -147,7 +147,7 @@ module Decidim
                                  default: "",
                                  choices: -> { ["default"] + Decidim::DecidimAwesome.voting_registry.manifests.map(&:name) },
                                  readonly: lambda { |context|
-                                   Decidim::Proposals::Proposal.where(component: context[:component]).where.not(proposal_votes_count: 0).any?
+                                   Decidim::Proposals::Proposal.where(component: context[:component]).where.not(proposal_votes_count: -Float::INFINITY..0).any?
                                  }
               settings.attribute :voting_cards_box_title,
                                  type: :string,

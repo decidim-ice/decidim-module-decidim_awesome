@@ -1,13 +1,12 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   const votingCards = document.querySelector(".voting-voting_cards");
-  const modalHelp = document.getElementById("voting-cards-proposal-modal");
+  const modal = document.getElementById("voting-cards-modal-help");
   const signOutLink = document.querySelector(".sign-out-link");
 
-  if (!votingCards || !modalHelp || !signOutLink) {
+  if (!votingCards || !modal || !signOutLink) {
     return;
   }
 
-  const modal = document.getElementById("voting-cards-proposal-modal");
   const card = modal.querySelector(".current-choice .vote-card");
   const check = document.getElementById("voting_cards-skip_help");
 
@@ -26,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   const showModal = () => {
+    console.log("showModal", isChecked(), modal.style.display);
     if (isChecked() || modal.style.display === "block") {
       return false;
     }
@@ -37,17 +37,18 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   modal.querySelector(".vote-action").addEventListener("click", () => {
-    modal.dataset.action.click();
+    modal.action.click();
     $(modal).foundation("close");
   });
 
-  document.querySelector(".button--vote-button .voting-voting_cards").addEventListener("click", function (evt) {
+  $(".voting-voting_cards").on("click", ".vote-action", (evt) => {
     if (showModal()) {
       evt.stopPropagation();
       evt.preventDefault();
       check.checked = isChecked();
-      modal.dataset.action = evt.currentTarget;
-      card.className = evt.currentTarget.className;
+      modal.action = evt.currentTarget;
+      card.classList = evt.currentTarget.classList;
+      console.log("clicked", evt.currentTarget.children.length, evt.currentTarget.children[1].outerHTML, evt.currentTarget.children[1].children[0].textContent, evt.currentTarget.title, evt.currentTarget.textContent);
       if (evt.currentTarget.children.length > 1) {
         card.innerHTML = `${evt.currentTarget.children[1].outerHTML}<p class="vote-label">${evt.currentTarget.children[1].children[0].textContent}</p>`;
       } else if (card.classList.contains("button")) {
