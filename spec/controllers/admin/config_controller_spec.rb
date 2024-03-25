@@ -25,6 +25,7 @@ module Decidim::DecidimAwesome
 
       before do
         request.env["decidim.current_organization"] = user.organization
+        Decidim::DecidimAwesome::Menu.instance_variable_set(:@menus, nil)
         sign_in user, scope: :user
       end
 
