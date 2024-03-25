@@ -29,17 +29,21 @@ module Decidim
           end
         end
 
-        def weight_count_item
-          return unless resource.respond_to?(:weight_count)
-
-          parts = all_weights.map do |num, weight|
+        def weight_tags
+          @weight_tags ||= all_weights.map do |num, weight|
             content_tag "span", title: resource.manifest.label_for(num), class: "voting-weight_#{num}" do
               "#{t("decidim.decidim_awesome.voting.voting_cards.weights.weight_#{num}_short")} #{weight}"
             end.html_safe
           end
+        end
+
+        def weight_count_item
+          return unless resource.respond_to?(:weight_count)
+          return if resource.component.current_settings.votes_hidden?
+          return if resource&.rejected? || resource&.withdrawn?
 
           {
-            text: parts.join(" | ").html_safe,
+            text: weight_tags.join(" | ").html_safe,
             icon: "#{user_voted_weight ? "checkbox" : "close"}-circle-line",
             data_attributes: all_weights.transform_keys { |num| "weight-#{num}" }
           }
