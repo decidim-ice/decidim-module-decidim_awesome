@@ -10,6 +10,7 @@ shared_examples "with features enabled" do
   it_behaves_like "activated concerns", true
   it_behaves_like "basic rendering", true
   it_behaves_like "custom menus", true
+  it_behaves_like "csp directives", true
 end
 
 shared_examples "with features disabled" do
@@ -18,6 +19,7 @@ shared_examples "with features disabled" do
   it_behaves_like "basic rendering", false
   # custom menu checks after system checks so MenuRegistry is initialized with defaults
   it_behaves_like "custom menus", false
+  it_behaves_like "csp directives", false
 end
 
 describe Decidim::DecidimAwesome do

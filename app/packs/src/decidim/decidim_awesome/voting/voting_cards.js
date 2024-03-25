@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const check = document.getElementById("voting_cards-skip_help");
 
   const storage = () => {
-    return JSON.parse(localStorage.getItem("hideTreeFlagsModalHelp") || "{}");
+    return JSON.parse(localStorage.getItem("awesome_voting_cards_hide_modal") || "{}");
   };
 
   const isChecked = () => {
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const saveState = (val) => {
     const show = storage();
     show[check.value] = val;
-    localStorage.setItem("hideTreeFlagsModalHelp", JSON.stringify(show));
+    localStorage.setItem("awesome_voting_cards_hide_modal", JSON.stringify(show));
   };
 
   const showModal = () => {

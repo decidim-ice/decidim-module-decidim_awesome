@@ -40,14 +40,23 @@ module Decidim
       end
 
       initializer "decidim_awesome.admin_menus" do
-        first_available = Decidim::DecidimAwesome::Menu.menus.detect { |_key, val| val.present? }.first
+        first_available = Decidim::DecidimAwesome::Menu.menus.detect { |_key, val| val.present? }&.first
+
         Decidim.menu :admin_menu do |menu|
           menu.add_item :awesome_menu,
                         I18n.t("menu.decidim_awesome", scope: "decidim.admin"),
-                        decidim_admin_decidim_awesome.config_path(first_available),
+                        if first_available
+                          decidim_admin_decidim_awesome.config_path(first_available)
+                        else
+                          decidim_admin_decidim_awesome.checks_path
+                        end,
                         icon_name: "fire",
                         position: 7.5,
-                        active: is_active_link?(decidim_admin_decidim_awesome.config_path(first_available), :inclusive),
+                        active: if first_available
+                                  is_active_link?(decidim_admin_decidim_awesome.config_path(first_available), :inclusive)
+                                else
+                                  is_active_link?(decidim_admin_decidim_awesome.checks_path)
+                                end,
                         if: defined?(current_user) && current_user&.read_attribute("admin")
         end
         # submenus
