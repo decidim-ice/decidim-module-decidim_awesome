@@ -1,4 +1,4 @@
-<div class="form__wrapper decidim_awesome-form">
+<div class="form__wrapper decidim_awesome-form gap-0">
   <% if config_enabled?(:allow_images_in_proposals) && !current_organization.rich_text_editor_in_public_views %>
     <div class="row column">
       <%= form.check_box :allow_images_in_proposals, help_text: t("help.allow_images_in_proposals", scope: "decidim.decidim_awesome.admin.config.form") %>
