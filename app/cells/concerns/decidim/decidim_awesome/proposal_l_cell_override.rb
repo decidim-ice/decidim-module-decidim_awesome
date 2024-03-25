@@ -6,6 +6,12 @@ module Decidim
       extend ActiveSupport::Concern
 
       included do
+        private
+
+        def metadata_cell
+          awesome_voting_manifest_for(resource&.component)&.proposal_metadata_cell.presence || "decidim/proposals/proposal_metadata"
+        end
+
         # rubocop:disable Metrics/CyclomaticComplexity
         def cache_hash
           hash = []

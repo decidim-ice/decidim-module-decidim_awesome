@@ -27,8 +27,6 @@ module Decidim::DecidimAwesome
     context "when file" do
       described_class.each_file do |file, signatures|
         it "#{file} matches checksum" do
-          skip "Skipping checksum check for file #{file} while weighted voting is not finished" if file.include?("proposals/proposals") || file.include?("proposal_m")
-
           expect([signatures].flatten).to include(md5(file))
         end
       end
