@@ -520,8 +520,8 @@ en:
           abstained: "✔ Abstained"
           change_vote: Change my vote
           default_box_title: Vote on this proposal
-          default_instructions_html: <p>Please read the election rules carefully to
-            understand how your vote will be used by %{organization}</p>
+          default_instructions_html: "<p>Please read the election rules carefully
+            to understand how your vote will be used by %{organization}</p>"
           modal:
             cancel: Cancel
             message: Your vote will be considered final on %{date}. You can change

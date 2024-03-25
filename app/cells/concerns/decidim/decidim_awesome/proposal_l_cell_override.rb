@@ -13,12 +13,13 @@ module Decidim
         end
 
         # rubocop:disable Metrics/CyclomaticComplexity
+        # rubocop:disable Metrics/PerceivedComplexity
         def cache_hash
           hash = []
           hash << I18n.locale.to_s
           hash << model.cache_key_with_version
           hash << model.proposal_votes_count
-          hash << model.extra_fields&.vote_weight_totals
+          hash << model.extra_fields&.reload&.vote_weight_totals
           hash << model.endorsements_count
           hash << model.comments_count
           hash << Digest::MD5.hexdigest(model.component.cache_key_with_version)
@@ -36,6 +37,7 @@ module Decidim
           hash.join(Decidim.cache_key_separator)
         end
         # rubocop:enable Metrics/CyclomaticComplexity
+        # rubocop:enable Metrics/PerceivedComplexity
       end
     end
   end
