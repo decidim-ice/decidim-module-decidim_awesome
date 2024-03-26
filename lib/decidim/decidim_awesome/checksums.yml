@@ -30,10 +30,10 @@ decidim-proposals:
   /app/views/decidim/proposals/admin/proposals/_form.html.erb:
     decidim-0.28: 824463b320562c15fdb530bfebbf2f0f
   /app/views/decidim/proposals/proposals/_vote_button.html.erb:
-    decidim-0.27: f7202c37fe042cd816a6f9fd0f9e6807
+    decidim-0.27: 3d087d807238f33b71e6b385db8ffc70
   /app/views/decidim/proposals/proposals/_votes_count.html.erb:
-    decidim-0.27: 33339aae5004361e24c4c5b009cc2888
-  /app/cells/decidim/proposals/proposal_m_cell.rb:
-    decidim-0.27.4: ce3b30cdddfee547b8fb089c0fddd8a4
-  /app/cells/decidim/proposals/proposal_m/footer.erb:
-    decidim-0.26: 7ade5bbd8412f44f1c4ed913ae1834c6
+    decidim-0.27: 6e663e5c82c27291b63f29f346df8737
+  /app/cells/decidim/proposals/proposal_l_cell.rb:
+    decidim-0.27.4: 5e111ed30bca9475bed8247e5e056747
+  /app/cells/decidim/proposals/proposal_metadata_cell.rb:
+    decidim-0.26: eedfd7f813aedbd819b519e03ae4a680

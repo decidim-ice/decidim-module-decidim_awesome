@@ -8,54 +8,6 @@
 .voting-voting_cards {
   $rectangle-width: 3rem;
 
-  // ProposalM card
-  &-card {
-    a {
-      margin-bottom: 0;
-
-      > svg {
-        margin-bottom: 2px;
-        vertical-align: middle;
-      }
-
-      &.button {
-        &.weight_0 {
-          background-color: var(--voting-cards-weight-0);
-        }
-
-        &.weight_1 {
-          background-color: var(--voting-cards-weight-1);
-        }
-
-        &.weight_2 {
-          background-color: var(--voting-cards-weight-2);
-        }
-
-        &.weight_3 {
-          background-color: var(--voting-cards-weight-3);
-        }
-      }
-    }
-
-    .votes_counter {
-      .weight_0 {
-        color: var(--voting-cards-weight-0);
-      }
-
-      .weight_1 {
-        color: var(--voting-cards-weight-1);
-      }
-
-      .weight_2 {
-        color: var(--voting-cards-weight-2);
-      }
-
-      .weight_3 {
-        color: var(--voting-cards-weight-3);
-      }
-    }
-  }
-
   margin-bottom: 1.5rem;
   border-bottom: 2px solid #d9d9d9;
 
@@ -85,11 +37,12 @@
     pointer-events: none;
     position: relative;
 
+    @apply relative cursor-wait;
+
     &::before {
-      // @include spinner(25px, $medium-gray, var(--primary), 800ms);
+      @apply content-[""] block w-6 h-6 rounded-full animate-spin border-4 border-l-background border-y-background border-r-secondary;
 
       z-index: 1000;
-      content: "";
       vertical-align: middle;
       position: absolute;
       top: calc(50% - 12.5px);
@@ -191,7 +144,7 @@
     .vote-count {
       font-size: 2rem;
       font-weight: bolder;
-      margin-bottom: 0;
+      margin-bottom: 0.5rem;
     }
   }
 
@@ -220,5 +173,33 @@
         opacity: 1;
       }
     }
+  }
+}
+
+.vote_proposal_modal {
+  div.button__sm {
+    display: inline-block;
+  }
+
+  .vote-label {
+    @apply ml-2;
+  }
+}
+
+.card__list-metadata {
+  .voting-weight_3 {
+    color: var(--voting-cards-weight-3);
+  }
+
+  .voting-weight_2 {
+    color: var(--voting-cards-weight-2);
+  }
+
+  .voting-weight_1 {
+    color: var(--voting-cards-weight-1);
+  }
+
+  .voting-weight_0 {
+    color: var(--voting-cards-weight-0);
   }
 }

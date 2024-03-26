@@ -25,6 +25,7 @@ module Decidim::DecidimAwesome
 
       before do
         request.env["decidim.current_organization"] = user.organization
+        Decidim::DecidimAwesome::Menu.instance_variable_set(:@menus, nil)
         sign_in user, scope: :user
       end
 
@@ -45,8 +46,6 @@ module Decidim::DecidimAwesome
           let(:disabled) { [] }
 
           before do
-            skip "Unskip this examples after enabling all features"
-
             disabled.each do |feat|
               allow(Decidim::DecidimAwesome.config).to receive(feat).and_return(:disabled)
             end

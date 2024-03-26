@@ -35,7 +35,6 @@ describe "Visit the admin page" do
 
   context "when visiting system compatibility" do
     before do
-      skip "Skipped until all overrides are adapted to Decidim 0.28"
       click_link_or_button "System Compatibility"
     end
 
