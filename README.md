@@ -45,7 +45,7 @@ It works purely in the client side by using LocalStorage capabilities of the bro
 
 Saving the form removes the stored data.
 
-![Auto save in forms](examples/auto-save.png)
+![Auto save in forms](examples/auto-save.gif)
 
 #### 3. Images in proposals
 
