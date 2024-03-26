@@ -361,8 +361,6 @@ fr:
           index:
             confirm_destroy: Êtes-vous sûr de vouloir supprimer cette personnalisation ?
             edit: Modifier
-            home_content_block_menu:
-              title: Menu du bloc de contenu de la page d'accueil
             menu:
               title: Menu principal
             new: Nouvel élément de menu
