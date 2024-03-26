@@ -361,6 +361,8 @@ ca:
           index:
             confirm_destroy: Confirmes que vols eliminar aquest retoc?
             edit: Editar
+            home_content_block_menu:
+              title: Bloc de menú global a la home
             menu:
               title: Menú principal
             new: Nou ítem
