@@ -4,7 +4,9 @@ fr:
     attributes:
       config:
         additional_proposal_sortings: Activer les options de tri supplémentaires
+        allow_images_in_editors: Autoriser les images dans l'éditeur HTML
         allow_images_in_proposals: Autoriser les images dans l'éditeur de propositions
+        allow_videos_in_editors: Autoriser les vidéos dans l'éditeur HTML
         auto_save_forms: Sauvegarde automatique des formulaires dans le stockage local du navigateur
         intergram_auto_no_response: Un message qui est envoyé une minute après que l'utilisateur envoie son premier message et qu'aucune réponse n'a été reçue
         intergram_auto_response: Un message qui est envoyé immédiatement après que l'utilisateur envoie son premier message
@@ -48,6 +50,8 @@ fr:
         proposal_custom_fields: Champs personnalisés
   decidim:
     admin:
+      actions:
+        manage: Gérer
       filters:
         admin_accountability:
           admin_role_type:
@@ -222,7 +226,9 @@ fr:
               incorrect_css: 'CSS dans la boîte #%{key} est invalide'
               incorrect_json: 'La définition JSON dans la boite #%{key} n''est pas valide'
             help:
+              allow_images_in_editors: Ceci ajoutera une icône de téléchargement d'images dans tous les éditeurs WYSIWYG
               allow_images_in_proposals: Cela permettra de télécharger des images dans l'éditeur de propositions, disponible pour n'importe quel utilisateur
+              allow_videos_in_editors: Ceci ajoutera une icône de lien vidéo dans tous les éditeurs WYSIWYG
               auto_save_forms: Ceci utilisera LocalStorage ( cache navigateur) pour enregistrer automatiquement les données introduites par les utilisateurs dans les enquêtes et autres formulaires pendant qu'ils le remplissent. Les données seront restaurées lors d'une prochaine visite avec le même navigateur au cas où le formulaire ne serait pas soumis. Si le formulaire est soumis, les données seront supprimées. Si les utilisateurs suppriment leurs données LocalStorage ne seront pas non plus restaurées.
               drag_and_drop_supported: Lorsque vous ajoutez des images, le glisser-déposer est pris en charge. Les images seront envoyées sur le serveur et insérées en tant que ressources externes (il n'utilise pas l'encodage en base64).
               intergram_about: Intergram utilise la messagerie Telegram pour gérer un widget de chat en direct intégré dans le bas de la page.
@@ -355,6 +361,8 @@ fr:
           index:
             confirm_destroy: Êtes-vous sûr de vouloir supprimer cette personnalisation ?
             edit: Modifier
+            home_content_block_menu:
+              title: Menu du bloc de contenu de la page d'accueil
             menu:
               title: Menu principal
             new: Nouvel élément de menu
