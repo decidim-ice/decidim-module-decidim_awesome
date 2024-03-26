@@ -12,6 +12,7 @@ Decidim::DecidimAwesome.configure do |config|
       :scoped_styles,
       :proposal_custom_fields,
       :menu,
+      :home_content_block_menu,
       :scoped_admins,
       :custom_redirects,
       :validate_title_min_length,

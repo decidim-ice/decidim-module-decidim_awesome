@@ -33,17 +33,11 @@ describe "Voting weights with cards" do
   let(:can_accumulate_supports_beyond_threshold) { false }
   let(:minimum_votes_per_user) { 0 }
 
-  before do
-    skip "Weighted voting feature is pending to be adapted to Decidim 0.28"
-  end
-
   context "when the user is logged in" do
     before do
       login_as user, scope: :user
       visit_component
-      within "#proposal-#{proposal.id}-vote-button" do
-        click_link_or_button "Click to vote"
-      end
+      click_link_or_button proposal.title["en"]
     end
 
     it "has correct copies" do
@@ -64,7 +58,7 @@ describe "Voting weights with cards" do
         click_link_or_button "Cancel"
       end
       %w(Green Yellow Red).each do |color|
-        within ".button--vote-button" do
+        within ".voting-voting_cards" do
           click_link_or_button color
         end
         within ".vote_proposal_modal" do
@@ -77,7 +71,7 @@ describe "Voting weights with cards" do
     shared_examples "can vote" do |color, weight|
       it "votes with modal" do
         expect(page).to have_css(".vote-count[data-weight=\"#{weight}\"]", text: "0") if weight != "0"
-        within ".button--vote-button" do
+        within ".voting-voting_cards" do
           click_link_or_button color
         end
         within ".vote_proposal_modal" do
@@ -193,12 +187,11 @@ describe "Voting weights with cards" do
     end
 
     it "shows the vote count" do
-      within "#proposal_#{proposal.id}" do
+      within "#proposals__proposal_#{proposal.id}" do
         expect(page).to have_content("G: 1")
         expect(page).to have_content("Y: 2")
         expect(page).to have_content("R: 3")
         expect(page).to have_content("A: 4")
-        expect(page).to have_link("Click to vote")
       end
     end
 
@@ -206,11 +199,10 @@ describe "Voting weights with cards" do
       let!(:component) { create(:proposal_component, :with_votes_blocked, participatory_space:, settings:) }
 
       it "shows the vote count and the vote button is disabled" do
-        within "#proposal_#{proposal.id}" do
+        within "#proposals__proposal_#{proposal.id}" do
           expect(page).to have_content("G: 1")
-          expect(page).to have_content("SUPPORTS DISABLED")
-          click_link_or_button "Click to vote"
         end
+        click_link_or_button proposal.title["en"]
         expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "3")
         expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "2")
         expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "1")
@@ -231,10 +223,10 @@ describe "Voting weights with cards" do
 
       it "shows the vote count and the vote button is disabled" do
         visit_component
-        within "#proposal_#{proposal.id}" do
+        within "#proposals__proposal_#{proposal.id}" do
           expect(page).to have_no_content("G: 1")
-          click_link_or_button "Click to vote"
         end
+        click_link_or_button proposal.title["en"]
         expect(page).to have_no_css(".vote-count[data-weight=\"1\"]")
         expect(page).to have_no_css(".vote-count[data-weight=\"2\"]")
         expect(page).to have_no_css(".vote-count[data-weight=\"3\"]")
@@ -258,14 +250,13 @@ describe "Voting weights with cards" do
       let(:vote_limit) { 3 }
 
       it "shows the vote count and the vote button is disabled" do
-        within "#proposal_#{proposal.id}" do
+        within "#proposals__proposal_#{proposal.id}" do
           expect(page).to have_content("G: 0")
           expect(page).to have_content("Y: 0")
           expect(page).to have_content("R: 1")
           expect(page).to have_content("A: 0")
-          expect(page).to have_content("VOTED")
-          click_link_or_button "Click to vote"
         end
+        click_link_or_button proposal.title["en"]
         expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "1")
         expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "0")
         expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "0")
@@ -287,14 +278,13 @@ describe "Voting weights with cards" do
         let(:vote_limit) { 2 }
 
         it "shows the vote count and the vote button is disabled" do
-          within "#proposal_#{proposal.id}" do
+          within "#proposals__proposal_#{proposal.id}" do
             expect(page).to have_content("G: 0")
             expect(page).to have_content("Y: 0")
             expect(page).to have_content("R: 1")
             expect(page).to have_content("A: 0")
-            expect(page).to have_content("NO SUPPORTS REMAINING")
-            click_link_or_button "Click to vote"
           end
+          click_link_or_button proposal.title["en"]
           expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "1")
           expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "0")
           expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "0")
@@ -318,14 +308,13 @@ describe "Voting weights with cards" do
       let(:modal_help) { false }
 
       it "shows the vote count and the vote button is disabled" do
-        within "#proposal_#{proposal.id}" do
+        within "#proposals__proposal_#{proposal.id}" do
           expect(page).to have_content("G: 0")
           expect(page).to have_content("Y: 0")
           expect(page).to have_content("R: 1")
           expect(page).to have_content("A: 0")
-          expect(page).to have_content("SUPPORT LIMIT REACHED")
-          click_link_or_button "Click to vote"
         end
+        click_link_or_button proposal.title["en"]
         expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "1")
         expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "0")
         expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "0")
@@ -340,14 +329,13 @@ describe "Voting weights with cards" do
         let(:can_accumulate_supports_beyond_threshold) { true }
 
         it "shows the vote count and can vote" do
-          within "#proposal_#{proposal.id}" do
+          within "#proposals__proposal_#{proposal.id}" do
             expect(page).to have_content("G: 0")
             expect(page).to have_content("Y: 0")
             expect(page).to have_content("R: 1")
             expect(page).to have_content("A: 0")
-            expect(page).to have_content("CLICK TO VOTE")
-            click_link_or_button "Click to vote"
           end
+          click_link_or_button proposal.title["en"]
           expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "1")
           expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "0")
           expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "0")
@@ -368,35 +356,35 @@ describe "Voting weights with cards" do
       let!(:vote_weights) { [] }
 
       it "doesn't count votes unless the minimum is achieved" do
-        within "#proposal_#{proposal.id}" do
+        within "#proposals__proposal_#{proposal.id}" do
           expect(page).to have_content("G: 0")
-          click_link_or_button "Click to vote"
         end
+        click_link_or_button proposal.title["en"]
         expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "0")
         click_link_or_button "Green"
         expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "0")
         visit_component
-        within "#proposal_#{proposal.id}" do
+        within "#proposals__proposal_#{proposal.id}" do
           expect(page).to have_content("G: 0")
         end
-        within "#proposal_#{proposal2.id}" do
+        within "#proposals__proposal_#{proposal2.id}" do
           expect(page).to have_content("G: 0")
-          click_link_or_button "Click to vote"
         end
+        click_link_or_button proposal2.title["en"]
         expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "0")
         click_link_or_button "Red"
         expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "1")
         visit_component
-        within "#proposal_#{proposal.id}" do
+        within "#proposals__proposal_#{proposal.id}" do
           expect(page).to have_content("G: 1")
-          click_link_or_button "Click to vote"
         end
+        click_link_or_button proposal.title["en"]
         expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "1")
         visit_component
-        within "#proposal_#{proposal.id}" do
+        within "#proposals__proposal_#{proposal.id}" do
           expect(page).to have_content("G: 1")
         end
-        within "#proposal_#{proposal2.id}" do
+        within "#proposals__proposal_#{proposal2.id}" do
           expect(page).to have_content("R: 1")
         end
       end
@@ -407,19 +395,16 @@ describe "Voting weights with cards" do
       let!(:vote_weights) { [] }
 
       it "shows the vote count" do
-        filter = ".with_any_state_check_boxes_tree_filter"
-        within ".filters #{filter}" do
+        within '.filter-container [aria-labelledby="trigger-menu-state"]' do
           check "All"
           uncheck "All"
           check "Rejected"
         end
-        within "#proposal_#{proposal.id}" do
+        within "#proposals__proposal_#{proposal.id}" do
           expect(page).to have_no_content("G: 0")
           expect(page).to have_no_content("Y: 0")
           expect(page).to have_no_content("R: 0")
           expect(page).to have_no_content("A: 0")
-          expect(page).to have_content("REJECTED")
-          expect(page).to have_no_content("Click to vote")
         end
       end
     end
@@ -428,12 +413,11 @@ describe "Voting weights with cards" do
       let(:abstain) { false }
 
       it "shows the vote count" do
-        within "#proposal_#{proposal.id}" do
+        within "#proposals__proposal_#{proposal.id}" do
           expect(page).to have_content("G: 1")
           expect(page).to have_content("Y: 2")
           expect(page).to have_content("R: 3")
           expect(page).to have_no_content("A: 4")
-          expect(page).to have_link("Click to vote")
         end
       end
     end
@@ -454,37 +438,33 @@ describe "Voting weights with cards" do
       end
 
       it "shows the vote count" do
-        within "#proposal_#{proposal.id}" do
+        within "#proposals__proposal_#{proposal.id}" do
           expect(page).to have_content("G: 3")
           expect(page).to have_content("Y: 2")
           expect(page).to have_content("R: 1")
           expect(page).to have_content("A: 0")
-          expect(page).to have_link("Voted")
-          expect(page).to have_css("a.button.weight_1")
+          expect(page).to have_css(".voting-weight_1")
         end
-        within "#proposal_#{proposals[1].id}" do
+        within "#proposals__proposal_#{proposals[1].id}" do
           expect(page).to have_content("G: 0")
           expect(page).to have_content("Y: 1")
           expect(page).to have_content("R: 0")
           expect(page).to have_content("A: 0")
-          expect(page).to have_link("Voted")
-          expect(page).to have_css("a.button.weight_2")
+          expect(page).to have_css(".voting-weight_2")
         end
-        within "#proposal_#{proposals[2].id}" do
+        within "#proposals__proposal_#{proposals[2].id}" do
           expect(page).to have_content("G: 1")
           expect(page).to have_content("Y: 0")
           expect(page).to have_content("R: 0")
           expect(page).to have_content("A: 0")
-          expect(page).to have_link("Voted")
-          expect(page).to have_css("a.button.weight_3")
+          expect(page).to have_css(".voting-weight_3")
         end
-        within "#proposal_#{proposals[3].id}" do
+        within "#proposals__proposal_#{proposals[3].id}" do
           expect(page).to have_content("G: 0")
           expect(page).to have_content("Y: 0")
           expect(page).to have_content("R: 0")
           expect(page).to have_content("A: 1")
-          expect(page).to have_link("Voted")
-          expect(page).to have_css("a.button.weight_0")
+          expect(page).to have_css(".voting-weight_0")
         end
       end
 
@@ -492,10 +472,10 @@ describe "Voting weights with cards" do
         let!(:component) { create(:proposal_component, :with_votes_blocked, participatory_space:, settings:) }
 
         it "shows the vote count and the vote button is disabled" do
-          within "#proposal_#{proposal.id}" do
+          within "#proposals__proposal_#{proposal.id}" do
             expect(page).to have_content("G: 3")
-            click_link_or_button "Voted"
           end
+          click_link_or_button proposal.title["en"]
           expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "1")
           expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "2")
           expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "3")
@@ -529,12 +509,11 @@ describe "Voting weights with cards" do
     end
 
     it "shows the vote count", :caching do
-      within "#proposal_#{proposal.id}" do
+      within "#proposals__proposal_#{proposal.id}" do
         expect(page).to have_content("G: 1")
         expect(page).to have_content("Y: 2")
         expect(page).to have_content("R: 3")
         expect(page).to have_content("A: 4")
-        expect(page).to have_link("Click to vote")
         # check the cached card by maintaining the number of votes and change the weight
         Decidim::DecidimAwesome::VoteWeight.find_by(weight: 3).update(weight: 1)
         visit_component
@@ -548,27 +527,22 @@ describe "Voting weights with cards" do
       let(:voting_manifest) { nil }
 
       it "has normal support button" do
-        within "#proposal_#{proposal.id}" do
-          expect(page).to have_content("Support")
+        within "#proposals__proposal_#{proposal.id}" do
           expect(page).to have_no_content("G:")
           expect(page).to have_no_content("Y:")
           expect(page).to have_no_content("R:")
-          click_link_or_button proposal.title["en"]
         end
+        click_link_or_button proposal.title["en"]
 
-        within ".button--vote-button" do
-          expect(page).to have_content("Support")
-          expect(page).to have_no_content("Green")
-          expect(page).to have_no_content("Yellow")
-          expect(page).to have_no_content("Red")
-        end
+        expect(page).to have_no_css(".voting-voting_cards")
+        expect(page).to have_no_content("Green")
+        expect(page).to have_no_content("Yellow")
+        expect(page).to have_no_content("Red")
       end
     end
 
     it "show the modal window on voting" do
-      within "#proposal_#{proposal.id}" do
-        click_link_or_button "Click to vote"
-      end
+      click_link_or_button proposal.title["en"]
       expect(page).to have_css("#loginModal", visible: :hidden)
       click_link_or_button "Abstain"
       expect(page).to have_css("#loginModal", visible: :visible)
