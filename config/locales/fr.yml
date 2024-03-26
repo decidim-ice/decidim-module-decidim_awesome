@@ -4,10 +4,7 @@ fr:
     attributes:
       config:
         additional_proposal_sortings: Activer les options de tri supplémentaires
-        allow_images_in_full_editor: Autoriser les images dans l'éditeur HTML complet
-        allow_images_in_markdown_editor: Autoriser les images dans l'éditeur de markdown
         allow_images_in_proposals: Autoriser les images dans l'éditeur de propositions
-        allow_images_in_small_editor: Autoriser les images dans l'éditeur HTML simple
         auto_save_forms: Sauvegarde automatique des formulaires dans le stockage local du navigateur
         intergram_auto_no_response: Un message qui est envoyé une minute après que l'utilisateur envoie son premier message et qu'aucune réponse n'a été reçue
         intergram_auto_response: Un message qui est envoyé immédiatement après que l'utilisateur envoie son premier message
@@ -22,7 +19,6 @@ fr:
         proposal_custom_fields: Champs personnalisés %{id}
         scoped_admins: Groupe d'administrateurs restreints %{id}
         scoped_styles: Style personnalisés %{id}
-        use_markdown_editor: Utiliser un éditeur Markdown au lieu de l'éditeur HTML
         validate_body_max_caps_percent: Pourcentage maximum autorisé de lettres majuscules pour la description
         validate_body_max_marks_together: Nombre maximum de caractères spéciaux autorisés dans le corps
         validate_body_min_length: Nombre de caractères minimum pour le corps
@@ -78,7 +74,6 @@ fr:
             announcement: Annonce
             iframe: Code iframe
             iframe_help: 'Mettez votre code en html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Le contenu sera nettoyé à partir d''autres balises HTML. Assurez-vous d''utiliser 100% comme largeur pour remplir l''écran.'
-            no_margins: Aucune marge entre l'iframe et le reste de la page
             viewport_width: Limiter la largeur maximale à la fenêtre de l'application
           step:
             announcement: Annonce
@@ -227,10 +222,7 @@ fr:
               incorrect_css: 'CSS dans la boîte #%{key} est invalide'
               incorrect_json: 'La définition JSON dans la boite #%{key} n''est pas valide'
             help:
-              allow_images_in_full_editor: Ceci ajoutera une icône d'ajout d'images dans tous les éditeurs WYSIWYG avec toutes les options activées (icônes).
-              allow_images_in_markdown_editor: Cela permettra à l'éditeur markdown de télécharger des images par copier, coller ou glisser-déposer.
               allow_images_in_proposals: Cela permettra de télécharger des images dans l'éditeur de propositions, disponible pour n'importe quel utilisateur
-              allow_images_in_small_editor: Ceci ajoutera une icône d'ajout d'images dans tous les éditeurs WYSIWYG avec seulement les options minimales activées (icônes).
               auto_save_forms: Ceci utilisera LocalStorage ( cache navigateur) pour enregistrer automatiquement les données introduites par les utilisateurs dans les enquêtes et autres formulaires pendant qu'ils le remplissent. Les données seront restaurées lors d'une prochaine visite avec le même navigateur au cas où le formulaire ne serait pas soumis. Si le formulaire est soumis, les données seront supprimées. Si les utilisateurs suppriment leurs données LocalStorage ne seront pas non plus restaurées.
               drag_and_drop_supported: Lorsque vous ajoutez des images, le glisser-déposer est pris en charge. Les images seront envoyées sur le serveur et insérées en tant que ressources externes (il n'utilise pas l'encodage en base64).
               intergram_about: Intergram utilise la messagerie Telegram pour gérer un widget de chat en direct intégré dans le bas de la page.
@@ -242,7 +234,6 @@ fr:
               scoped_admins: Promouvoir les utilisateurs réguliers en administrateurs qui ne peuvent administrer que certaines parties de la plateforme (utilisez l'éditeur de restrictions pour cela). Notez que les utilisateurs qui ont déjà les permissions d'administration habituelles seront ignorés.
               scoped_styles: Créer un CSS personnalisé qui s'applique uniquement à certaines parties du site web public (front-end) (utilisez l'éditeur de restrictions pour cela)
               scoped_styles_variables: 'Vous pouvez utiliser les variables CSS suivantes pour les couleurs personnalisées de l''organisation :'
-              use_markdown_editor: Cela remplacera l'éditeur Quill WYSIWYG par un éditeur Markdown. Le texte sera affiché en HTML dans les pages publiques (le texte dans la base de données sera sauvegardé en tant que texte markdown)
               validate_body_max_caps_percent: Zéro n'autorisera aucune lettre majuscule, 100 forcera à tout écrire en majuscule
               validate_body_max_marks_together: 'Limiter le nombre de points d''interrogation et d''exclamation qui peuvent être écrits ensemble. Par exemple : si c''est 2, alors ''!!!'' ne sera pas autorisé dans le texte'
               validate_body_min_length: Ce nombre peut être zéro, ce qui rendra ce champ non obligatoire
@@ -266,7 +257,6 @@ fr:
             sure_to_remove: Etes-vous sûr de vouloir supprimer cette boîte CSS ?
           none: "⛔ Jamais! - Désactive toute autre contrainte"
           process_groups: Groupes de processus
-          rich_text_editor_in_public_views: 'NOTE : "Éditeur de texte enrichi pour les participants" est activé, cette option ne s''appliquera pas. Utilisez les hacks de l''éditeur de texte à la place pour activer les images dans les propositions.'
           show:
             title: Tweaks pour %{setting}
             update: Mettre à jour la configuration
@@ -365,10 +355,11 @@ fr:
           index:
             confirm_destroy: Êtes-vous sûr de vouloir supprimer cette personnalisation ?
             edit: Modifier
+            menu:
+              title: Menu principal
             new: Nouvel élément de menu
             remove: Supprimer l'ajout
             remove_hack: Supprimer la personnalisation
-            title: Menu principal
           new:
             save: Enregistrer
             title: Nouvel élément de menu
@@ -437,7 +428,7 @@ fr:
           abstained: "✔ Abstenu.e"
           change_vote: Modifier mon vote
           default_box_title: Votez sur la proposition
-          default_instructions_html: <p>Veuillez lire attentivement les règles électorales pour comprendre comment votre vote sera utilisé par %{organization}"</p>
+          default_instructions_html: "<p>Veuillez lire attentivement les règles électorales pour comprendre comment votre vote sera utilisé par %{organization}\"</p>"
           modal:
             cancel: Annuler
             message: Votre vote sera considéré comme définitif le %{date}. Vous pouvez le modifier jusque-là
@@ -455,6 +446,9 @@ fr:
             weight_2_short: 'J:'
             weight_3: Verte
             weight_3_short: 'V:'
+    meetings:
+      meetings_map:
+        view_meeting: Voir la rencontre
     proposals:
       proposals:
         orders:
@@ -462,11 +456,10 @@ fr:
           supported_first: Déjà supporté en priorité
           supported_last: A supporter en priorité
           za: Z-A (alphabétique inverse)
+        proposal:
+          view_proposal: Voir la proposition
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Tweaks Decidim
       decidim_awesome:
         awesome_config:
           amendments: Amendements
