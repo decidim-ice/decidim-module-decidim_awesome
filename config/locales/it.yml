@@ -3,10 +3,7 @@ it:
   activemodel:
     attributes:
       config:
-        allow_images_in_full_editor: Consenti l'uso di immagini nell'editor HTML completo
-        allow_images_in_markdown_editor: Consenti l'uso d'immagini nell'editor markdown
         allow_images_in_proposals: Consenti l'uso d'immagini nell'editor di proposte
-        allow_images_in_small_editor: Consenti l'uso d'immagini nell'editor HTML semplificato
         auto_save_forms: Salva automaticamente i moduli nel LocalStorage
         intergram_auto_no_response: Un messaggio che viene inviato un minuto dopo che l'utente invia il suo primo messaggio e che non è stata ricevuta risposta
         intergram_auto_response: Un messaggio che viene inviato immediatamente dopo che l'utente invia il primo messaggio
@@ -21,7 +18,6 @@ it:
         proposal_custom_fields: Campi personalizzati %{id}
         scoped_admins: Gruppo di amministratori con ambito %{id}
         scoped_styles: Stili personalizzati %{id}
-        use_markdown_editor: Utilizza un editor Markdown invece dell'editor HTML
         validate_body_max_caps_percent: Percentuale massima consentita di lettere maiuscole per il corpo
         validate_body_max_marks_together: Numero massimo di simboli consecutivi ammessi nel corpo
         validate_body_min_length: Caratteri minimi necessari per il corpo
@@ -77,7 +73,6 @@ it:
             announcement: Annuncio
             iframe: Codice iframe
             iframe_help: 'Metti il tuo codice come html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Il contenuto sarà sanificato da altri tag HTML. Assicurati di utilizzare il 100% come larghezza per riempire lo schermo.'
-            no_margins: Nessun margine tra l'iframe e il resto della pagina
             viewport_width: Limita la larghezza massima alla vista dell'applicazione
           step:
             announcement: Annuncio
@@ -221,10 +216,7 @@ it:
               incorrect_css: 'Il box CSS #%{key} non è valido'
               incorrect_json: 'La definizione JSON nella casella #%{key} non è valida'
             help:
-              allow_images_in_full_editor: Questo aggiungerà un'icona di uploader di immagini in tutti gli editor WYSIWYG con la barra degli strumenti completa abilitata.
-              allow_images_in_markdown_editor: Questo permetterà all'editor di markdown di caricare le immagini tramite copia e incolla o trascina.
               allow_images_in_proposals: Questo permetterà di caricare le immagini nell'editor delle proposte, disponibile per qualsiasi utente
-              allow_images_in_small_editor: Questo aggiungerà un'icona di caricamento di immagini in tutti gli editor WYSIWYG con opzioni minime nella barra degli strumenti abilitata.
               auto_save_forms: Questo utilizzerà LocalStorage per salvare automaticamente i dati introdotti dagli utenti nei sondaggi e in altri moduli durante il riempimento. I dati verranno ripristinati in una visita futura con lo stesso browser nel caso in cui il modulo non venga inviato. Se il modulo viene inviato, i dati verranno rimossi. Se gli utenti rimuoveranno i dati di LocalStorage, i dati non verranno ripristinati.
               drag_and_drop_supported: Quando si caricano le immagini, è supportato il Drag & Drop. Le immagini verranno caricate sul server e inserite come risorse esterne (non utilizza la codifica base64).
               intergram_about: Intergram utilizza Telegram messenger per gestire un widget di chat di supporto live incorporato nella parte inferiore della pagina.
@@ -236,7 +228,6 @@ it:
               scoped_admins: Promuovi l'utente ad admin che può amministrare solo alcune parti pubbliche (usa l'editor delle restrizioni). Gli utenti che hanno già i permessi di amministrazione verranno ignorati.
               scoped_styles: Crea CSS personalizzato che si applica solo in alcune parti del web pubblico (usa l'apposito editor delle restrizioni)
               scoped_styles_variables: 'È possibile utilizzare le seguenti variabili CSS per i colori personalizzati dell''organizzazione:'
-              use_markdown_editor: This will substitute the Quill WYSIWYG editor, use a Markdown editor instead. Text will be rendered as HTML in the public pages (text in database will be saved as markdown text)
               validate_body_max_caps_percent: Zero non permetterà a nessuna lettera maiuscola, 100 forzerà a scrivere tutto in lettere maiuscole
               validate_body_max_marks_together: 'Limita il numero di punti interrogativi e esclamativi che possono essere scritti insieme. Es.: se è 2, allora ''!!!'' non sarà permesso nel testo'
               validate_body_min_length: Questo numero può essere zero, questo renderà effettivamente questo campo non obbligatorio
@@ -260,7 +251,6 @@ it:
             sure_to_remove: Sei sicura di voler distruggere questo box CSS?
           none: "⛔ Mai! - Disattiva ogni altro vincolo"
           process_groups: Gruppi di processo
-          rich_text_editor_in_public_views: 'NOTA: "Editor completo per i partecipanti" è abilitato, questa opzione non si applica. Usa gli hack degli editor per abilitare le immagini nelle proposte.'
           show:
             title: Tweaks per %{setting}
             update: Aggiorna la configurazione
@@ -359,10 +349,11 @@ it:
           index:
             confirm_destroy: Sei sicuro di voler rimuovere questa personalizzazione?
             edit: Modifica
+            menu:
+              title: Menù principale
             new: Nuova elemento
             remove: Rimuovi aggiunta
             remove_hack: Rimuovi personalizzazione
-            title: Menù principale
           new:
             save: Salva
             title: Nuova voce di menu
@@ -431,7 +422,7 @@ it:
           abstained: "✔️ Astenuti"
           change_vote: Cambia il mio voto
           default_box_title: Vota la proposta
-          default_instructions_html: <p>Si prega di leggere attentamente le regole elettorali per capire come il tuo voto sarà utilizzato da %{organization}"</p>
+          default_instructions_html: "<p>Si prega di leggere attentamente le regole elettorali per capire come il tuo voto sarà utilizzato da %{organization}\"</p>"
           modal:
             cancel: Annulla
             message: Il tuo voto sarà considerato definitivo il %{date}. Fino ad allora puoi cambiarlo
@@ -449,6 +440,9 @@ it:
             weight_2_short: 'G:'
             weight_3: Verde
             weight_3_short: 'V:'
+    meetings:
+      meetings_map:
+        view_meeting: Visualizza meeting
     proposals:
       proposals:
         orders:
@@ -456,11 +450,10 @@ it:
           supported_first: Prima i sostegni
           supported_last: Sostegni al fondo
           za: Z-A (Alfabetico inverso)
+        proposal:
+          view_proposal: Visualizza proposta
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Decidim Tweaks
       decidim_awesome:
         awesome_config:
           amendments: Emendamenti
