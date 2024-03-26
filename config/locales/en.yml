@@ -438,7 +438,7 @@ en:
             confirm_destroy: Are you sure to remove this customization?
             edit: Edit
             home_content_block_menu:
-              title: Home content block menu
+              title: Global menu home block
             menu:
               title: Main menu
             new: New item
