@@ -3,10 +3,7 @@ hu:
   activemodel:
     attributes:
       config:
-        allow_images_in_full_editor: A teljesértékű HTML szerkesztőben a képek engedélyezése
-        allow_images_in_markdown_editor: A markdown szerkesztőben a képek engedélyezése
         allow_images_in_proposals: A javaslatok szerkesztőben a képek engedélyezése
-        allow_images_in_small_editor: A minimalista HTML szerkesztőben a képek engedélyezése
         auto_save_forms: A helyi tárolóban az űrlapok automatikus mentése
         intergram_auto_no_response: A kiküldött üzenet, amit a felhasználó első üzenete után kap, amelyet akkor küldünk, ha nem érkezett válasz
         intergram_auto_response: Az üzeenet, amit a felhasználó első üzenete után küldönk ki
@@ -21,7 +18,6 @@ hu:
         proposal_custom_fields: Egyéni mezők %{id}
         scoped_admins: Területi adminok csoport %{id}
         scoped_styles: Egyedi stílusok %{id}
-        use_markdown_editor: A markdown használata a html szerkesztő helyett
         validate_body_max_caps_percent: A szövegtörzsben a maximálisan engedélyezett nagybetűk százaléka
         validate_body_max_marks_together: A törzsben megengedett maximálisan egymás utáni jelek szimbólumai
         validate_body_min_length: A minimális karakterek száma a szövegtörzsben
@@ -75,7 +71,6 @@ hu:
           global:
             announcement: Közlemény
             iframe_help: 'Rakja a kódot a következő html formátumban: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. A tartalom szanálásra kerül a többi HTML-címkétől. Ügyeljen arra, hogy 100%-os szélességet használjon a képernyő kitöltéséhez.'
-            no_margins: Nincsenek margók az iframe és az oldal többi része között
           step:
             announcement: Közlemény
       awesome_map:
@@ -139,7 +134,7 @@ hu:
         config:
           caution: 'MEGJEGYZÉS: Ez a funkció erősen módosít néhány alapértelmezett viselkedést, ami váratlan eredményekhez vezethet. Óvatosan használja!'
           constraints:
-            add_condition: Ügy hozzáadása
+            add_condition: Eset hozzáadása
             always: Mindig
             cannot_be_destroyed: Sajnálom, ezt nem lehet törölni. Ennek a konfigurációnak legalább egy megkötésre van szüksége.
             delete: Törlés
@@ -153,6 +148,8 @@ hu:
           form:
             edit_label: Címke átnevezése
             help:
+              auto_save_forms: Ez a LocalStorage segítségével automatikusan elmenti a felhasználók által a felmérésekbe és egyéb űrlapokba bevitt adatokat, miközben kitöltik azokat. Az adatok egy későbbi, ugyanazzal a böngészővel történő látogatáskor visszaállnak, ha az űrlapot nem küldik el. Ha az űrlap elküldésre kerül, az adatok törlődnek. Ha a felhasználók eltávolítják a LocalStorage adatait, az adatok sem lesznek visszaállítva.
+              proposal_custom_fields_translations: "A címkék, a súgószöveg, a helyőrző és az alapértelmezett értékek használhatják az alkalmazás egyéni fordításait. Ehhez a string literál használata helyett használja az i18n kulcsot (legalább egy pontot kell tartalmaznia). Például: - \"activemodel.attributes.proposal.title\" helyett \"Cím\" - \"activemodel.attributes.proposal.address\" helyett \"Cím\" Vagy használjon saját kulcsokat más eszközökkel kombinálva a fordítások meghatározásához (pl.: a Term Customizer modul használatával): - \"myapp.custom_fields.bio\" helyett \"Biography\""
               validate_title_max_caps_percent: A 0 nem fog engedni nagybetűt, 100 mindent nagybetűvel fog írni
               validate_title_max_marks_together: 'Korlátozza az együtt írható kérdő- és felkiáltójelek számát. Vagyis: ha 2, akkor a ''!!!'' nem szerepelhet a szövegben'
               validate_title_min_length: Ez mindig kötelező és nem lehet 0
@@ -166,13 +163,25 @@ hu:
             sure_to_remove: Biztosan törölni szeretnéd ezt a CSS dobozt?
           none: "⛔ Soha! - Minden más korlátozás kikapcsolása"
           process_groups: Folyamatcsoportok
-          rich_text_editor_in_public_views: 'MEGJEGYZÉS: Ha a "Rich text szerkesztő" engedélyezve van a felhasználók számára, ez az opció nem lesz alkalmazható. Használja helyette a szerkesztői hackeket a képek engedélyezéséhez a javaslatokban.'
+          show:
+            update: Beállítás frissítése
           system: Mindenütt, kivéve ezekben a részvételi terekben
+          update:
+            error: Hiba a beállítás frissítésekor %{error}
+            success: A beállítás sikeresen frissült
         constraints:
           new:
+            cancel: Elvetés
             save: Mentés
           show:
             cancel: Elvetés
+        menu:
+          editors: Szerkesztő finomítása
+          menu_hacks: Menü trükkök
+          proposal_custom_fields: Javaslatok egyedi mezői
+          proposals: Javaslatok finomítása
+          styles: Egyedi stílusok
+          surveys: Kérdőívek és Űrlapok
         menu_hacks:
           destroy:
             success: Menü elem eltávolítása sikerült
@@ -193,8 +202,9 @@ hu:
           index:
             confirm_destroy: Biztosan eltávolítja ezt az testreszabást?
             edit: Szerkesztés
+            menu:
+              title: Főmenü
             new: Új elem
-            title: Főmenü
           new:
             save: Mentés
             title: Új menüpont
@@ -225,3 +235,28 @@ hu:
       editor_images:
         create:
           error: Hiba történt a kép feltöltése közben!
+      voting:
+        voting_cards:
+          change_vote: Szavazatom megváltoztatása
+          default_box_title: Szavazás erre a javaslatra
+          default_instructions_html: "<p>Kérjük ovlassa el a választási szabályokat, hogy pontosan megértse hogy került számításra szavazata a %{organization}\" által</p>"
+          modal:
+            cancel: Elvetés
+            message: A szavazata ekkor %{date} válig véglegessé. A dátumig módosítható
+            proceed: Folytatás
+            skip: Kattintson ide, hogy a jövőben átugorja ezt az ablakot
+          vote_button: Kattintson a szavazához
+          voted: Szavazott
+          voting_for: A szavaztom a" %{proposal}" "%{type}"
+  layouts:
+    decidim:
+      decidim_awesome:
+        awesome_config:
+          amendments: Módosítások
+          categories: Kategóriák
+          drag_and_drop_image: Képek hozzáadása húzással és ejtéssel vagy beillesztéssel.
+          hashtags: Hashtagek
+          items: elemek
+          meetings: Találkozók
+          proposals: Javaslatok
+          select_deselect_all: Összes kijelölése / kijelölés megszüntetése
