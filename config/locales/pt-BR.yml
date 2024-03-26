@@ -3,10 +3,7 @@ pt-BR:
   activemodel:
     attributes:
       config:
-        allow_images_in_full_editor: Permitir imagens no editor completo HTML
-        allow_images_in_markdown_editor: Permitir imagens no editor de markdown
         allow_images_in_proposals: Permitir imagens no editor de propostas
-        allow_images_in_small_editor: Permitir imagens no editor mínimo HTML
         auto_save_forms: Salvar formulários automaticamente no armazenamento local
         intergram_auto_no_response: Uma mensagem que é enviada um minuto após o usuário enviar sua primeira mensagem e nenhuma resposta foi recebida
         intergram_auto_response: Uma mensagem que é enviada imediatamente após o usuário enviar sua primeira mensagem
@@ -21,7 +18,6 @@ pt-BR:
         proposal_custom_fields: Campos personalizados %{id}
         scoped_admins: Escopos de grupo de administração %{id}
         scoped_styles: Estilos personalizados %{id}
-        use_markdown_editor: Usar um editor Markdown em vez do editor HTML
       constraint:
         component_id: ou especificamente em
         component_manifest: Apenas em componentes do tipo
@@ -53,7 +49,6 @@ pt-BR:
             announcement: Anúncio
             iframe: Código do iframe
             iframe_help: 'Coloque seu código como html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. O conteúdo será sanitizado de outras tags HTML. Certifique-se de usar 100% como largura para preencher a tela.'
-            no_margins: Nenhuma margem entre o iframe e o resto da página
             viewport_width: Limitar a largura máxima à viewport da aplicação
           step:
             announcement: Anúncio
@@ -135,10 +130,7 @@ pt-BR:
               incorrect_css: 'CSS na caixa #%{key} é inválido'
               incorrect_json: 'Definição JSON na caixa #%{key} é inválida'
             help:
-              allow_images_in_full_editor: Isto adicionará um ícone para carregar imagens em todos os editores WYSIWYG com a barra de ferramentas completa habilitada.
-              allow_images_in_markdown_editor: Isso permitirá que o editor de markdown carregue imagens copiando e colando ou arrastando e soltando.
               allow_images_in_proposals: Isso permitirá fazer upload de imagens no editor de propostas, disponível para qualquer usuário
-              allow_images_in_small_editor: Isto adicionará um ícone para carregar imagens em todos os editores WYSIWYG com a barra de ferramentas mínima habilitada.
               auto_save_forms: Isto usará o LocalStorage para salvar automaticamente dados introduzidos pelos usuários em pesquisas e outros formulários enquanto eles o preenchem. Os dados serão restaurados em uma visita futura com o mesmo navegador, caso o formulário não seja enviado. Se o formulário for enviado, os dados serão removidos. Se os usuários removerem seus dados de LocalStorage os dados também não serão restaurados.
               drag_and_drop_supported: Ao carregar imagens, arraste e solte é suportado. As imagens serão enviadas para o servidor e inseridas como recursos externos (não usa codificação base64 inline).
               intergram_about: O Intergram usa o Telegram messenger para lidar com uma widget de chat de suporte embutida no final da página.
@@ -150,7 +142,6 @@ pt-BR:
               scoped_admins: Promover o usuário regular para administradores que só podem administrar certas partes da web pública (use o editor de restrições para isso). Note que usuários que já possuem permissões de administrador regulares serão ignorados.
               scoped_styles: Crie CSS personalizado que se aplica somente em certas partes da web pública (use o editor de restrições para isso)
               scoped_styles_variables: 'Você pode usar as seguintes variáveis CSS para cores personalizadas da organização:'
-              use_markdown_editor: Isto irá substituir o editor do Quill WYSIWYG, para usar um editor de Markdown. O texto será convertido e salvo como HTML no banco de dados.
           form_proposal_custom_fields:
             new: Adicionar uma nova caixa "campos personalizados"
             remove: Remover esta caixa "campos personalizados"
@@ -165,7 +156,6 @@ pt-BR:
             sure_to_remove: Deseja mesmo destruir essa caixa de CSS?
           none: "⛔ Nunca! - Desativar qualquer outra restrição"
           process_groups: Grupos de processo
-          rich_text_editor_in_public_views: 'OBSERVAÇÃO: "Editor de texto rico para os participantes" está habilitado, esta opção não será aplicada. Use os hacks dos editores ao invés disso habilite as imagens em propostas.'
           show:
             title: Ajustes para %{setting}
             update: Configuração atualizada
@@ -263,10 +253,11 @@ pt-BR:
           index:
             confirm_destroy: Tem certeza que deseja remover esta customização?
             edit: Editar
+            menu:
+              title: Menu Principal
             new: Novo item
             remove: Remover adição
             remove_hack: Remover personalização
-            title: Menu Principal
           new:
             save: Salvar
             title: Novo item de menu
@@ -331,11 +322,15 @@ pt-BR:
         voting_cards:
           modal:
             cancel: Cancelar
+    meetings:
+      meetings_map:
+        view_meeting: Ver reunião
+    proposals:
+      proposals:
+        proposal:
+          view_proposal: Ver proposta
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Ajustes Decidim
       decidim_awesome:
         awesome_config:
           amendments: Emendas
