@@ -1,6 +1,7 @@
 decidim-admin:
   /app/views/layouts/decidim/admin/_header.html.erb:
     decidim-0.28: 25bf272ac5a70eb8a975f4889fa46095
+    decidim-0.28.c4d3889: 6391da1f357f9b260622ddd404a47987
 decidim-core:
   /app/packs/entrypoints/decidim_editor.js:
     decidim-0.28: beddd77e3893fd0b7cd2679a7ee6e536
@@ -19,6 +20,7 @@ decidim-core:
 decidim-proposals:
   /lib/decidim/proposals/proposal_serializer.rb:
     decidim-0.28: bbd33bdc60defb734b3fb814666bb622
+    decidim-0.28.4a7f8c0: 7bd5cadb1127a4e81bd5f333670351bd
   /lib/decidim/api/proposal_type.rb:
     decidim-0.26: e38e4875e408ec4f658e28725c5a94d4
   /app/forms/decidim/proposals/proposal_wizard_create_step_form.rb:
