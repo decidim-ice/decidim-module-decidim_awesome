@@ -4,7 +4,9 @@ ca:
     attributes:
       config:
         additional_proposal_sortings: Opcions d'ordenació addicionals actives
+        allow_images_in_editors: Permet imatges a l'editor HTML
         allow_images_in_proposals: Permet imatges a l'editor de propostes
+        allow_videos_in_editors: Permet vídeos a l'editor HTML
         auto_save_forms: Desa automàticament els formularis a l'emmagatzematge local
         intergram_auto_no_response: Un missatge que s'envia un minut després que la usuària hagi enviat el seu primer missatge i no s'hagi rebut cap resposta
         intergram_auto_response: Un missatge que s'envia immediatament després que la usuària enviï el seu primer missatge
@@ -48,6 +50,8 @@ ca:
         proposal_custom_fields: Camps personalitzats
   decidim:
     admin:
+      actions:
+        manage: Configura
       filters:
         admin_accountability:
           admin_role_type:
@@ -222,7 +226,9 @@ ca:
               incorrect_css: 'El CSS de la caixa #%{key} no és vàlid'
               incorrect_json: 'La sintaxi JSON de la caixa #%{key} és invàlida'
             help:
+              allow_images_in_editors: Això afegirà una icona per pujar arxius a l'editor HTML
               allow_images_in_proposals: Això permetrà pujar imatges a l'editor de propostes, disponible per qualsevol usuari
+              allow_videos_in_editors: Això afegirà una icona per enllaçar vídeos a l'editor HTML
               auto_save_forms: Això farà servir l'emmagatzematge local del navegador per desar automàticament les dades introduïdes pels usuaris a les enquestes i altres formularis mentre les omplen. Les dades es restauraran en una futura visita amb el mateix navegador en cas que no s'enviï el formulari. Si s’envia el formulari, s’eliminaran les dades locals. Si els usuaris eliminen les seves dades del navegador, tampoc es restauraran.
               drag_and_drop_supported: Quan es pugin imatges, es pot fer a través del mètode de "arrossegar i deixar anar". Les imatges seran pujades al servidor i inserides com recursos externs (no es fa servir codificació en línia base64).
               intergram_about: Intergram utilitza el Telegram Messenger per gestionar un widget de xat en viu de suport incrustat a la part inferior de la pàgina.
