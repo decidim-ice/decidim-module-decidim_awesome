@@ -20,9 +20,6 @@ eu:
           constraints:
             delete: Ezabatu
             edit: Editatu
-          form:
-            help:
-              use_markdown_editor: This will substitute the Quill WYSIWYG editor, use a Markdown editor instead. Text will be saved as HTML in the database.
         constraints:
           new:
             cancel: Ezeztatu
@@ -44,6 +41,13 @@ eu:
         voting_cards:
           modal:
             cancel: Ezeztatu
+    meetings:
+      meetings_map:
+        view_meeting: Ikusi bilera
+    proposals:
+      proposals:
+        proposal:
+          view_proposal: Ikusi proposamena
   layouts:
     decidim:
       decidim_awesome:
