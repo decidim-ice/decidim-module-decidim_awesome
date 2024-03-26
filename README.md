@@ -115,7 +115,7 @@ Technically, the content is stored in the database as an XML document compatible
 ![Custom fields screenshot](examples/custom-fields-2.png)
 ![Custom fields screenshot](examples/custom-fields-1.gif)
 
-Note that the custom fields are build using the jQuery library [formBuilder](https://formbuilder.online). This package is included in Decidim Awesome but the i18n translations are not. By default are they dynamically downloaded from the CDN https://cdn.jsdelivr.net/npm/formbuilder-languages@1.1.0/.
+Note that the custom fields are build using the jQuery library [formBuilder](https://formbuilder.online). This package is included in Decidim Awesome but the i18n translations are not. By default they are dynamically downloaded from the CDN https://cdn.jsdelivr.net/npm/formbuilder-languages@1.1.0/.
 If you wish to provide an alternative place for those files, you can configure the variable `form_builder_langs_location` in an initializer:
 
 ```ruby
