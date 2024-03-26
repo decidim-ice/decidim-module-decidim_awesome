@@ -5,10 +5,10 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/2dada53525dd5a944089/maintainability)](https://codeclimate.com/github/decidim-ice/decidim-module-decidim_awesome/maintainability)
 [![Test Coverage](https://codecov.io/gh/decidim-ice/decidim-module-decidim_awesome/branch/main/graph/badge.svg?token=TFBMCLLZJG)](https://codecov.io/gh/decidim-ice/decidim-module-decidim_awesome)
 
-Usability and UX tweaks for Decidim.
+**Usability and UX tweaks for Decidim.**
 
 This plugin allows the administrators to expand the possibilities of Decidim beyond some existing limitations.
-All tweaks are provided in a optional fashion with granular permissions that let the administrator to choose exactly where to apply those mods. Some tweaks can be applied to any assembly, other in an specific participatory process or even in type of component only.
+All tweaks are provided in a optional fashion with granular permissions that let the administrator to choose exactly where to apply those mods. Some tweaks can be applied to an assembly, other in an specific participatory process or even in a type of component only (for instance, only in proposals).
 
 **DISCLAIMER: This module is heavily tested and widely used, however we do not accept any responsibility for breaking anything. Feedback is appreciated though.**
 
@@ -53,13 +53,13 @@ Event if you haven't activated the WYSIWYG editor (RichText) in public views (eg
 
 ![Proposal images](examples/proposal-images.png)
 
-#### 4. Admin scope configuration
+#### 4. Restrict scope for tweaks
 
 All tweaks can be configured and scoped to a specific participatory space, a type of participatory space, a type of component or a specific component.
 
-Many scopes can be defined for every tweak.
+Many scopes can be defined for every tweak. If a tweak is not scoped, it will be applied globally.
 
-![Admin tweaks for editors](examples/admin-editors.gif)
+![Tweak scopes](examples/tweak-scopes.png)
 
 #### 5. Awesome map component
 
@@ -77,7 +77,7 @@ Another simple component that can be used to embed and Iframe with any external 
 
 #### 7. Live support chat
 
-With this feature you can have a support chat in Decidim. It is linked to a [Telegram](https://telegram.org/) group or a single user chat using the [[IntergramBot](https://web.telegram.org/#/im?p=@IntergramBot). Just invite the bot to a group or chat with it directly, grab your ID, put it on the Awesome settings and have fun!. For more info or for hosting your own version of the bot check the [Intergram project](https://github.com/idoco/intergram).
+With this feature you can have a support chat in Decidim. It is linked to a [Telegram](https://telegram.org/) group or a single user chat using the [IntergramBot](https://web.telegram.org/#/im?p=@IntergramBot). Just invite the bot to a group or chat with it directly, grab your ID, put it on the Awesome settings and have fun!. For more info or for hosting your own version of the bot check the [Intergram project](https://github.com/idoco/intergram).
 
 ![Intergram screenshot](examples/intergram.png)
 
@@ -115,7 +115,7 @@ Technically, the content is stored in the database as an XML document compatible
 ![Custom fields screenshot](examples/custom-fields-2.png)
 ![Custom fields screenshot](examples/custom-fields-1.gif)
 
-Note that the custom fields are build using the jQuery library [formBuilder](https://formbuilder.online). This package is included in Decidim Awesome but the i18n translations are not. By default are dynamically downloaded from the CDN https://cdn.jsdelivr.net/npm/formbuilder-languages@1.1.0/.
+Note that the custom fields are build using the jQuery library [formBuilder](https://formbuilder.online). This package is included in Decidim Awesome but the i18n translations are not. By default are they dynamically downloaded from the CDN https://cdn.jsdelivr.net/npm/formbuilder-languages@1.1.0/.
 If you wish to provide an alternative place for those files, you can configure the variable `form_builder_langs_location` in an initializer:
 
 ```ruby
@@ -224,7 +224,7 @@ if Decidim::DecidimAwesome.enabled?(:weighted_proposal_voting)
     voting.show_vote_button_view = "decidim/decidim_awesome/voting/no_admins_vote/show_vote_button"
     voting.show_votes_count_view = "decidim/decidim_awesome/voting/no_admins_vote/show_votes_count"
     # voting.show_votes_count_view = "" # hide votes count if needed
-    voting.proposal_m_cell_footer = "decidim/decidim_awesome/voting/no_admins_vote/proposal_m_cell_footer"
+    voting.proposal_metadata_cell = "decidim/decidim_awesome/voting/proposal_metadata"
     # define a weight validator (optional, by default all weights are valid)
     voting.weight_validator do |weight, context|
       # don't allow admins to vote
@@ -250,7 +250,7 @@ A manifest must define a vote button view for the main proposal view, a vote cou
 
 All views are optional, if set to `nil` they will use the original ones. If set to an empty string `""` they will be hidden.
 
-The `weight_validator` is a Proc that receives the weight value and the context with the current user and the proposal and returns true or false if the weight is valid or not.
+The `weight_validator` is a `Proc` that receives the weight value and the context with the current user and the proposal and returns true or false if the weight is valid or not.
 
 **Notes for view `show_vote_button_view`**
 
@@ -278,12 +278,11 @@ This view must implement the number of votes already cast. It requires an HTML t
 
 You can also completely hide this view (using `voting.show_votes_count_view = ""` in the manifest declaration). This is useful if you are using the same `show_vote_button_view` to also display the total counters (or your implementation does not use that).
 
-**Notes for view `proposal_m_cell_footer`**
+**Notes for cell `voting.proposal_metadata_cell`**
 
-This view is used by the proposal cell in lists. It must implement the vote button and the vote count. The vote button must be a link with the same characteristics as the one explained above for the `show_vote_button_view` (typically you can just render the same view using `<%= render partial: my/path/to/view, { locals: model: proposal, from_proposals_list: true } %>`).
+This is the Decidim cell used to provide the metadata that is rendered at the bottom of a proposal card. If empty, defaults to [ProposalMetadataCell](https://github.com/decidim/decidim/blob/release/0.28-stable/decidim-proposals/app/cells/decidim/proposals/proposal_metadata_cell.rb), **wich does not renders the votes**.
 
-Note that, it is strongly recommended to add and HTML tag element with the id `proposal-<%= proposal.id %>-votes-count` so the Ajax vote re-loader can work. Even if you don't use (in this case use a `style="display:none"` attribute), this is because the Ajax reloader always look for this element and throw JavaScript errors if not.
-
+What this cell must do is to provide an array of items to render as part of the cell footer. Check the example used at the [voting cards implementation](app/cells/decidim/decidim_awesome/voting/proposal_metadata_cell.rb) for reference.
 
 #### To be continued...
 
@@ -307,6 +306,10 @@ bin/rails decidim:upgrade
 bin/rails db:migrate
 ```
 
+Go to `yourdomain/admin/decidim_awesome` and start tweaking things!
+
+> **EXPERTS ONLY**
+>
 > Under the hood, when running `bundle exec rails decidim:upgrade` the `decidim-decidim_awesome` gem will run the following two tasks (that can also be run manually if you consider):
 > 
 > ```bash
@@ -490,8 +493,8 @@ bin/test-legacy spec/
 
 > **NOTE:** Remember to reset the database when changing between tests:
 > ```bash
-> bin/rspec --reset
-> bin/rspec-legacy --reset
+> bin/test --reset
+> bin/test-legacy --reset
 > ```
 
 
@@ -526,4 +529,4 @@ This engine is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 
 ## Credits
 
-This plugin maintainted by ![PokeCode](app/packs/images/decidim/decidim_awesome/pokecode-logo.png)
+This plugin maintainted by [![PokeCode](app/packs/images/decidim/decidim_awesome/pokecode-logo.png) PokeCode](https://pokecode.net/)
