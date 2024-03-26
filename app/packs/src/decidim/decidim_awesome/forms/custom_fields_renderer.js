@@ -55,13 +55,13 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
   */
   dataToXML(data) {
     const $dl = $("<dl/>");
-    let $dd = null, 
-        $div = null, 
-        $dt = null, 
-        datum = null, 
-        key = null, 
-        label = null, 
-        text = null, 
+    let $dd = null,
+        $div = null,
+        $dt = null,
+        datum = null,
+        key = null,
+        label = null,
+        text = null,
         val = null;
     $dl.attr("class", "decidim_awesome-custom_fields");
     $dl.attr("data-generator", "decidim_awesome");
@@ -126,7 +126,8 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
     */
     this.$element.find(".formbuilder-checkbox-group").each((_key, group) => {
       const inputs = $(".formbuilder-checkbox input", group);
-      const data = this.spec.find((obj) => obj.type === "checkbox-group");
+      const $label = $(group).find("label");
+      const data = this.spec.find((obj) => obj.type === "checkbox-group" && obj.name === $label.attr("for"));
       let values = data.userData;
       if (!inputs.length || !data || !values) {
         return;
