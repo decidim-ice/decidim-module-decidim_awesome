@@ -59,7 +59,7 @@ All tweaks can be configured and scoped to a specific participatory space, a typ
 
 Many scopes can be defined for every tweak.
 
-![Admin tweaks for editors](examples/admin-editors.png)
+![Admin tweaks for editors](examples/admin-editors.gif)
 
 #### 5. Awesome map component
 
