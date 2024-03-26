@@ -3,10 +3,8 @@ cs:
   activemodel:
     attributes:
       config:
-        allow_images_in_full_editor: Povolit obrázky v kompletním HTML editoru
-        allow_images_in_markdown_editor: Povolit obrázky v editoru markdown
+        additional_proposal_sortings: Povoleny další možnosti řazení
         allow_images_in_proposals: Povolit obrázky v editoru návrhů
-        allow_images_in_small_editor: Povolit obrázky v minimálním HTML editoru
         auto_save_forms: Automaticky ukládat formuláře v místním úložišti
         intergram_auto_no_response: Zpráva, která je odeslána jednu minutu poté, co uživatel odešle svou první zprávu a nebyla obdržena odpověď
         intergram_auto_response: Zpráva, která je odeslána okamžitě poté, co uživatel odešle svou první zprávu
@@ -21,7 +19,6 @@ cs:
         proposal_custom_fields: 'Uživatelská pole #%{id}'
         scoped_admins: 'Skupina Škálovaní administrátoři #%{id}'
         scoped_styles: Vlastní styly číslo %{id}
-        use_markdown_editor: Použít Markdown editor namísto HTML editoru
         validate_body_max_caps_percent: Maximální povolený procentní podíl velkých písmen pro tělo zprávy
         validate_body_max_marks_together: Maximální počet po sobě jdoucích značek povolených v těle zprávy
         validate_body_min_length: Minimální požadované znaky pro tělo zprávy
@@ -77,7 +74,6 @@ cs:
             announcement: Oznámení
             iframe: Kód Iframe
             iframe_help: 'Zadejte kód jako html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Obsah bude vylepšen z jiných HTML tagů. Pro vyplnění obrazovky použijte 100% šířku.'
-            no_margins: Mezi iframe a zbytkem stránky nejsou žádné okraje
             viewport_width: Omezit maximální šířku na zobrazení aplikace
           step:
             announcement: Oznámení
@@ -110,18 +106,27 @@ cs:
         settings:
           global:
             awesome_voting_manifest: Typ podpory
+            awesome_voting_manifest_help_html: <strong class="text-alert">Uvědomte si, že změna tohoto nastavení uprostřed hlasovacího období může mít za následek nepřesné nebo neočekávané výsledky.</strong><br>Všimněte si, že toto nastavení může být upraveno pouze v případě, že komponenta nemá zatím žádnou podporu.
             awesome_voting_manifest_options:
+              default: Jednoduché hlasování (výchozí)
               voting_cards: Hlasování pomocí barevných karet
             default_sort_order_options:
               az: A-Z (abecední)
+              supported_first: Nejdříve podporováno
+              supported_last: Naposledy podporováno
               za: Z-A (obrácená abeceda)
+            sort_orders_enabled: Typy řazeníí povoleny
             voting_cards_box_title: Název hlasovacího pole
+            voting_cards_box_title_help: Výchozí hodnota je "Hlasovat pro tento návrh". Použijte "-" pro jeho schování.
+            voting_cards_instructions: Instrukce podpory/nápověda (zrušitelné modální okno)
             voting_cards_instructions_help: Výchozí hodnota je "Přečtěte si pečlivě pravidla voleb, abyste pochopili, jak bude vaše hlasování použito %{organization}""
             voting_cards_show_abstain: Přidat možnost zdržet se hlasování
             voting_cards_show_modal_help: Po kliknutí na podporu zobrazit instrukce/nápovědu
           step:
             default_sort_order_options:
               az: A-Z (abecední)
+              supported_first: Nejdříve podporováno
+              supported_last: Naposledy podporováno
               za: Z-A (obrácená abeceda)
     decidim_awesome:
       admin:
@@ -208,15 +213,15 @@ cs:
             error: Chyba při odstraňování CSS boxu! %{error}
             success: CSS box %{key} byl úspěšně odstraněn
           form:
+            additional_proposal_sortings:
+              enable_all: Povolit všechny další možnosti řazení
+              help: Tyto možnosti řazení jsou navíc k výchozím možnostem. Nezapomeňte, že si můžete vybrat výchozí pořadí v nastavení komponenty návrhu.
             edit_label: Přejmenovat štítek
             errors:
               incorrect_css: 'CSS v poli #%{key} je neplatné'
               incorrect_json: 'Definice JSON v poli #%{key} je neplatná'
             help:
-              allow_images_in_full_editor: Tímto se přidá ikona pro nahrávání obrázků ve všech editorech WYSIWYG s povoleným plným nástrojovým řádkem.
-              allow_images_in_markdown_editor: To umožní editoru markdown nahrávat obrázky pomocí kopírování a vkládání nebo přetažení.
               allow_images_in_proposals: Toto umožní nahrávat obrázky do editoru návrhů, které jsou k dispozici každému uživateli
-              allow_images_in_small_editor: Tímto se přidá ikona pro nahrávání obrázků ve všech editorech WYSIWYG s minimálními možnostmi v panelu nástrojů.
               auto_save_forms: Toto bude používat místní úložiště pro automatické ukládání dat zavedených uživateli do průzkumů a jiných formulářů během vyplňování. Data budou obnovena v budoucí návštěvě stejného prohlížeče v případě, že formulář nebude odeslán. Pokud je formulář odeslán, data budou odstraněna. Pokud uživatelé odstraní svá data z místního úložiště, data nebudou obnovena.
               drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
               intergram_about: Intergram používá Telegram messenger pro zpracování widgetu live podpory v dolní části stránky.
@@ -228,7 +233,6 @@ cs:
               scoped_admins: Povýšení běžného uživatele na administrátora, který může spravovat pouze určité části veřejného webu (k tomu použijte editor omezení). Všimněte si, že uživatelé, kteří již mají oprávnění běžného správce, budou ignorováni.
               scoped_styles: Vytvořte vlastní CSS aplikovaný pouze na určitých částech veřejného webu (použijte pro to editor omezení)
               scoped_styles_variables: 'Můžete použít následující CSS proměnné pro nastavené barvy organizace:'
-              use_markdown_editor: Toto nahradí WYSIWYG editor, místo toho použijte Markdown editor. Text bude vykreslen jako HTML na veřejných stránkách (text v databázi bude uložen jako text markdown)
               validate_body_max_caps_percent: Nula nedovolí žádné velké písmeno, 100 bude nutit psát vše velkými písmeny
               validate_body_max_marks_together: 'Omezit počet otazníků a vykřičníků, které lze psát dohromada. Např: Pokud je 2, pak ''!!!'' nebude v textu povoleno'
               validate_body_min_length: Toto číslo může být nulové, toto pole bude ve skutečnosti nepovinné
@@ -252,7 +256,6 @@ cs:
             sure_to_remove: Opravdu chcete zničit tento CSS box?
           none: "⛔ Nikdy! - Deaktivujte jiná omezení"
           process_groups: Skupiny procesů
-          rich_text_editor_in_public_views: 'POZNÁMKA: "Kompletní textový editor pro účastníky" je povolen, tato možnost nebude využita. Pro povolení obrázků v Návrzích používejte místo toho hacky editoru.'
           show:
             title: Vylepšení pro %{setting}
             update: Aktualizace konfigurace
@@ -351,10 +354,11 @@ cs:
           index:
             confirm_destroy: Opravdu chcete odstranit toto přizpůsobení?
             edit: Upravit
+            menu:
+              title: Hlavní menu
             new: Nová položka
             remove: Odstranit přidání
             remove_hack: Odstranit přizpůsobení
-            title: Hlavní menu
           new:
             save: Uložit
             title: Nová položka menu
@@ -422,8 +426,13 @@ cs:
         voting_cards:
           abstained: "✔️ Zdržel se hlasování"
           change_vote: Změnit můj hlas
+          default_box_title: Hlasovat o tomto návrhu
           modal:
             cancel: Zrušit
+            message: Váš hlas bude považován za konečný v %{date}. Do té doby jej můžete změnit,
+          vote_button: Kliknutím hlasujte
+          voted: Odhlasováno
+          voting_for: Můj hlas pro "%{proposal}" je "%{type}"
           weights:
             weight_0_short: 'A:'
             weight_1: Červená
@@ -432,16 +441,20 @@ cs:
             weight_2_short: 'Y:'
             weight_3: Zelená
             weight_3_short: 'G:'
+    meetings:
+      meetings_map:
+        view_meeting: Zobrazit schůzku
     proposals:
       proposals:
         orders:
           az: A-Z (abecední)
+          supported_first: Nejdříve podporováno
+          supported_last: Naposledy podporováno
           za: Z-A (obrácená abeceda)
+        proposal:
+          view_proposal: Zobrazit návrh
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Vylepšení Decidim
       decidim_awesome:
         awesome_config:
           amendments: Pozměňovací návrhy
