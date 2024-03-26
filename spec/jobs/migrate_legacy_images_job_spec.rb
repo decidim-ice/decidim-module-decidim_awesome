@@ -6,11 +6,11 @@ module Decidim::DecidimAwesome
   describe MigrateLegacyImagesJob do
     subject { described_class }
 
-    let!(:organization) { create :organization }
-    let!(:another_organization) { create :organization }
-    let!(:user) { create :user, organization: organization }
-    let!(:new_image) { create :awesome_editor_image, organization: organization }
-    let!(:old_image) { create :awesome_editor_image, organization: organization, file: nil, image: "city.jpeg" }
+    let!(:organization) { create(:organization) }
+    let!(:another_organization) { create(:organization) }
+    let!(:user) { create(:user, organization:) }
+    let!(:new_image) { create(:awesome_editor_image, organization:) }
+    let!(:old_image) { create(:awesome_editor_image, organization:, file: nil, image: "city.jpeg") }
     let(:path) { "/uploads/decidim/decidim_awesome/editor_image/image/#{old_image.id}" }
     let(:text) do
       { "en" => body }

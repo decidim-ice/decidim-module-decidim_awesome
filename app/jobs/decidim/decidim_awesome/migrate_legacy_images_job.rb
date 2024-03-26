@@ -25,7 +25,7 @@ module Decidim
           cw_uploader: Decidim::Cw::DecidimAwesome::ImageUploader,
           as_attribute: "file",
           logger: @logger,
-          routes_mappings: routes_mappings
+          routes_mappings:
         )
       end
 
@@ -34,11 +34,11 @@ module Decidim
           klass, id = mapping[:instance].split("#")
           next unless klass == "Decidim::DecidimAwesome::EditorImage"
 
-          instance = Decidim::DecidimAwesome::EditorImage.find_by(id: id)
+          instance = Decidim::DecidimAwesome::EditorImage.find_by(id:)
 
           next if instance.blank?
 
-          mapping.merge!(instance: instance)
+          mapping.merge!(instance:)
         end.compact
 
         editor_images_available_attributes.each do |model, attributes|
@@ -75,7 +75,8 @@ module Decidim
           "Decidim::Assembly" => %w(short_description description purpose_of_action composition internal_organisation announcement closing_date_reason special_features),
           "Decidim::Forms::Questionnaire" => %w(description tos),
           "Decidim::Forms::Question" => %w(description),
-          "Decidim::Organization" => %w(welcome_notification_body admin_terms_of_use_body description highlighted_content_banner_short_description id_documents_explanation_text),
+          "Decidim::Organization" => %w(welcome_notification_body admin_terms_of_service_body description highlighted_content_banner_short_description
+                                        id_documents_explanation_text),
           "Decidim::StaticPage" => %w(content),
           "Decidim::ContextualHelpSection" => %w(content),
           "Decidim::Category" => %w(description),

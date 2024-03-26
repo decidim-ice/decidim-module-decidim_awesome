@@ -23,6 +23,10 @@ module Decidim
           @form = form(MenuForm).instance
         end
 
+        def edit
+          @form = form(MenuForm).from_model(menu_item)
+        end
+
         def create
           @form = form(MenuForm).from_params(params)
           CreateMenuHack.call(@form, current_menu_name) do
@@ -36,10 +40,6 @@ module Decidim
               render :new
             end
           end
-        end
-
-        def edit
-          @form = form(MenuForm).from_model(menu_item)
         end
 
         def update
@@ -63,7 +63,7 @@ module Decidim
               flash[:notice] = I18n.t("menu_hacks.destroy.success", scope: "decidim.decidim_awesome.admin")
             end
             on(:invalid) do |error|
-              flash[:alert] = I18n.t("menu_hacks.destroy.error", scope: "decidim.decidim_awesome.admin", error: error)
+              flash[:alert] = I18n.t("menu_hacks.destroy.error", scope: "decidim.decidim_awesome.admin", error:)
             end
           end
           redirect_to decidim_admin_decidim_awesome.menu_hacks_path
@@ -71,7 +71,6 @@ module Decidim
 
         private
 
-        # rubocop:disable Style/OpenStructUse
         def menu_item
           item = current_items.find { |i| md5(i.url) == params[:id] }
           raise ActiveRecord::RecordNotFound unless item
@@ -85,7 +84,6 @@ module Decidim
             native?: !item.respond_to?(:overrided?)
           )
         end
-        # rubocop:enable Style/OpenStructUse
 
         def current_items
           @current_items ||= current_menu.items(include_invisible: true)
@@ -96,7 +94,7 @@ module Decidim
         end
 
         def current_menu_name
-          :menu
+          params[:menu_id].to_sym
         end
 
         def visibility_options

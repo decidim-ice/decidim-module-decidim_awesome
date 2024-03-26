@@ -25,7 +25,7 @@ module Decidim
       end
 
       def self.for_organization(organization)
-        where(organization: organization)
+        where(organization:)
       end
 
       # use this instead of "constraints" to evaluate dynamically added constants

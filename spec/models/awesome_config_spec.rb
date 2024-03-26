@@ -7,7 +7,7 @@ module Decidim::DecidimAwesome
     subject { awesome_config }
 
     let(:organization) { create(:organization) }
-    let(:awesome_config) { create(:awesome_config, organization: organization) }
+    let(:awesome_config) { create(:awesome_config, organization:) }
 
     it { is_expected.to be_valid }
 

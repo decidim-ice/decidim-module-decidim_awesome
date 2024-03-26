@@ -8,7 +8,7 @@ module Decidim::DecidimAwesome
 
     let(:organization) { create(:organization) }
     let(:user) { create(:user) }
-    let(:editor_image) { create(:awesome_editor_image, organization: organization, author: user) }
+    let(:editor_image) { create(:awesome_editor_image, organization:, author: user) }
 
     it { is_expected.to be_valid }
 

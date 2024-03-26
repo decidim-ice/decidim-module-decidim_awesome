@@ -5,18 +5,18 @@ require "decidim/decidim_awesome/test/shared_examples/action_log_presenter_examp
 
 module Decidim::DecidimAwesome
   describe ParticipatorySpaceRolePresenter, type: :helper do
-    let(:user) { create :user, organization: organization, last_sign_in_at: last_sign_in_at }
+    let(:user) { create(:user, organization:, last_sign_in_at:) }
     let(:last_sign_in_at) { nil }
     let(:entry) { Decidim::DecidimAwesome::PaperTrailVersion.space_role_actions(organization).first }
-    let!(:organization) { create :organization }
-    let(:participatory_space) { create(:participatory_process, organization: organization) }
+    let!(:organization) { create(:organization) }
+    let(:participatory_space) { create(:participatory_process, organization:) }
     let(:role) { "admin" }
-    let!(:participatory_process_user_role) { create(:participatory_process_user_role, role: role, participatory_process: participatory_space, user: user) }
+    let!(:participatory_process_user_role) { create(:participatory_process_user_role, role:, participatory_process: participatory_space, user:) }
     let(:destroyed_at) { 2.days.ago }
 
     let(:html) { true }
 
-    subject { described_class.new(entry, html: html) }
+    subject { described_class.new(entry, html:) }
 
     shared_context "with role destroyed" do
       before do

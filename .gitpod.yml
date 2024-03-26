@@ -8,7 +8,7 @@ tasks:
     command: bundle exec rspec
   #- name: webpacker
   #  before: rvm --default use "ruby-3.0.4"
-  #  command: bin/webpack-dev-server
+  #  command: bin/shakapacker-dev-server
 vscode:
   extensions:
     - dbaeumer.vscode-eslint

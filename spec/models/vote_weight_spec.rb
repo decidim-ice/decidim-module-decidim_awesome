@@ -20,7 +20,7 @@ module Decidim::DecidimAwesome
 
     context "when vote is destroyed" do
       let(:vote) { create(:proposal_vote) }
-      let!(:vote_weight) { create(:awesome_vote_weight, vote: vote) }
+      let!(:vote_weight) { create(:awesome_vote_weight, vote:) }
 
       it "destroys the vote weight" do
         expect { vote.destroy }.to change(Decidim::DecidimAwesome::VoteWeight, :count).by(-1)
@@ -29,7 +29,7 @@ module Decidim::DecidimAwesome
 
     context "when vote weight is destroyed" do
       let(:vote) { create(:proposal_vote) }
-      let!(:vote_weight) { create(:awesome_vote_weight, vote: vote) }
+      let!(:vote_weight) { create(:awesome_vote_weight, vote:) }
 
       it "does not destroy the vote" do
         expect { vote_weight.destroy }.not_to change(Decidim::Proposals::ProposalVote, :count)
@@ -40,7 +40,7 @@ module Decidim::DecidimAwesome
       let(:vote) { create(:proposal_vote) }
 
       context "when vote_weight already exists" do
-        let!(:vote_weight) { create(:awesome_vote_weight, vote: vote, weight: 1) }
+        let!(:vote_weight) { create(:awesome_vote_weight, vote:, weight: 1) }
 
         it "can be changed" do
           expect(vote.weight).to eq(1)

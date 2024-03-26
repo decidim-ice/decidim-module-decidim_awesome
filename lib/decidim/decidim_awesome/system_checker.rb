@@ -24,8 +24,8 @@ module Decidim
 
         delegate :to_h, to: :overrides
 
-        def each(&block)
-          to_h.each(&block)
+        def each(&)
+          to_h.each(&)
         end
 
         def each_file
@@ -58,11 +58,9 @@ module Decidim
           Digest::MD5.hexdigest(File.read(file))
         end
 
-        # rubocop:disable Style/OpenStructUse
         def to_struct(obj)
           OpenStruct.new obj
         end
-        # rubocop:enable Style/OpenStructUse
       end
     end
   end

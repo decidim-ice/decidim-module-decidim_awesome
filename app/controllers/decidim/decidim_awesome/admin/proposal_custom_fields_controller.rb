@@ -8,7 +8,7 @@ module Decidim
         def create
           CreateProposalCustomField.call(current_organization) do
             on(:ok) do |key|
-              flash[:notice] = I18n.t("config.create_proposal_custom_field.success", key: key, scope: "decidim.decidim_awesome.admin")
+              flash[:notice] = I18n.t("config.create_proposal_custom_field.success", key:, scope: "decidim.decidim_awesome.admin")
             end
 
             on(:invalid) do |message|
@@ -22,7 +22,7 @@ module Decidim
         def destroy
           DestroyProposalCustomField.call(params[:key], current_organization) do
             on(:ok) do |key|
-              flash[:notice] = I18n.t("config.destroy_proposal_custom_field.success", key: key, scope: "decidim.decidim_awesome.admin")
+              flash[:notice] = I18n.t("config.destroy_proposal_custom_field.success", key:, scope: "decidim.decidim_awesome.admin")
             end
 
             on(:invalid) do |message|

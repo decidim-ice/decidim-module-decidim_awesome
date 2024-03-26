@@ -16,14 +16,14 @@ module Decidim::DecidimAwesome
       #   }
       # end
       let(:name) { :some_config_var }
-      let(:config) { create :awesome_config, organization: organization, var: name }
+      let(:config) { create(:awesome_config, organization:, var: name) }
       let!(:constraint) { create(:config_constraint, awesome_config: config, settings: { "test" => 1 }) }
 
       shared_examples "destroys the constraint" do
         it "broadcasts :ok and modifies the config options" do
           expect { subject.call }.to broadcast(:ok)
 
-          expect(AwesomeConfig.find_by(organization: organization, var: config.var).constraints).not_to include(constraint)
+          expect(AwesomeConfig.find_by(organization:, var: config.var).constraints).not_to include(constraint)
         end
       end
 
@@ -31,7 +31,7 @@ module Decidim::DecidimAwesome
         it "broadcasts :invalid and does not modify the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
-          expect(AwesomeConfig.find_by(organization: organization, var: config.var).constraints).to include(constraint)
+          expect(AwesomeConfig.find_by(organization:, var: config.var).constraints).to include(constraint)
         end
       end
 

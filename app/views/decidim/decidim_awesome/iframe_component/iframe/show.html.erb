@@ -1,14 +1,9 @@
-<%= announcement = render(partial: "decidim/shared/component_announcement") %>
+<main class="participatory-space__container">
+  <%= announcement = render(partial: "decidim/shared/component_announcement") %>
 
-<%= stylesheet_pack_tag "decidim_decidim_awesome_iframe" %>
+  <%= append_stylesheet_pack_tag "decidim_decidim_awesome_iframe" %>
 
-<style rel="stylesheet" type="text/css">
-<% if remove_margins? %>
-  <%= ".wrapper { padding-left: 0;padding-right: 0;padding-bottom: 0; }" %>
-  <%= ".wrapper { padding-top: 0; }" unless announcement.present? %>
-<% end %>
-</style>
-
-<div class="awesome-iframe<%= " row" if viewport_width? %>">
-  <%= iframe %>
-</div>
+  <section id="<%= viewport_width? ? "iframe-block" : "html-block-html" %>" class="awesome-iframe layout-main__section">
+    <%= iframe %>
+  </section>
+</main>

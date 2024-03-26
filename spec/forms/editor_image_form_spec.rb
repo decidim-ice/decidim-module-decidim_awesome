@@ -6,12 +6,12 @@ module Decidim::DecidimAwesome
   describe EditorImageForm do
     subject { described_class.from_params(attributes).with_context(context) }
 
-    let(:user) { create :user }
+    let(:user) { create(:user) }
     let(:organization) { user.organization }
 
     let(:attributes) do
       {
-        file: file,
+        file:,
         path: "/somepath",
         author_id: user.id
       }

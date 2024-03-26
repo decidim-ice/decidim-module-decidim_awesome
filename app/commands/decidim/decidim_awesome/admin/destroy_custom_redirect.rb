@@ -11,7 +11,7 @@ module Decidim
         def initialize(item, organization)
           @item = item
           @organization = organization
-          @redirections = AwesomeConfig.find_by(var: :custom_redirects, organization: organization)
+          @redirections = AwesomeConfig.find_by(var: :custom_redirects, organization:)
         end
 
         # Executes the command. Broadcasts these events:

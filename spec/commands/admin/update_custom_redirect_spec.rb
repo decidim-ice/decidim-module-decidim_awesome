@@ -14,13 +14,13 @@ module Decidim::DecidimAwesome
       let(:previous_value) do
         { origin => { "destination" => "/previous-redirection", "active" => true } }
       end
-      let!(:config) { create :awesome_config, organization: organization, var: :custom_redirects, value: previous_value }
+      let!(:config) { create(:awesome_config, organization:, var: :custom_redirects, value: previous_value) }
 
       describe "when valid" do
         it "broadcasts :ok and modifies the config options" do
           expect { subject.call }.to broadcast(:ok)
 
-          items = AwesomeConfig.find_by(organization: organization, var: :custom_redirects).value
+          items = AwesomeConfig.find_by(organization:, var: :custom_redirects).value
           expect(items).to be_a(Hash)
           expect(items.count).to eq(1)
           expect(items.first).to eq(attributes)
@@ -35,23 +35,23 @@ module Decidim::DecidimAwesome
         it "broadcasts :invalid and does not modifiy the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
-          expect(AwesomeConfig.find_by(organization: organization, var: :custom_redirects).value).to eq(previous_value)
+          expect(AwesomeConfig.find_by(organization:, var: :custom_redirects).value).to eq(previous_value)
         end
       end
 
       context "when other config are created" do
-        let!(:config) { create :awesome_config, organization: organization, var: :custom_redirects, value: attributes }
+        let!(:config) { create(:awesome_config, organization:, var: :custom_redirects, value: attributes) }
 
         it "modifies the other config" do
           expect { another_config.call }.to broadcast(:ok)
-          expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_full_editor).value).to be(true)
-          expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_small_editor).value).to be(true)
+          expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_editors).value).to be(true)
+          expect(AwesomeConfig.find_by(organization:, var: :allow_videos_in_editors).value).to be(true)
         end
 
         it "do not modifiy current config" do
-          expect(AwesomeConfig.find_by(organization: organization, var: :custom_redirects).value).to eq(attributes)
+          expect(AwesomeConfig.find_by(organization:, var: :custom_redirects).value).to eq(attributes)
           expect { another_config.call }.to broadcast(:ok)
-          expect(AwesomeConfig.find_by(organization: organization, var: :custom_redirects).value).to eq(attributes)
+          expect(AwesomeConfig.find_by(organization:, var: :custom_redirects).value).to eq(attributes)
         end
       end
 
@@ -63,7 +63,7 @@ module Decidim::DecidimAwesome
         it "do not modifiy current config" do
           expect { subject.call }.to broadcast(:invalid)
 
-          items = AwesomeConfig.find_by(organization: organization, var: :custom_redirects).value
+          items = AwesomeConfig.find_by(organization:, var: :custom_redirects).value
           expect(items).to be_a(Hash)
           expect(items.count).to eq(1)
           expect(items).to eq(previous_value)
@@ -81,7 +81,7 @@ module Decidim::DecidimAwesome
         it "modifies the intended item" do
           expect { subject.call }.to broadcast(:ok)
 
-          items = AwesomeConfig.find_by(organization: organization, var: :custom_redirects).value
+          items = AwesomeConfig.find_by(organization:, var: :custom_redirects).value
           expect(items).to be_a(Hash)
           expect(items.count).to eq(2)
           expect(items).not_to eq(previous_value)
@@ -92,25 +92,25 @@ module Decidim::DecidimAwesome
         context "when changing the origin" do
           let(:item) do
             double(
-              origin: origin,
-              destination: destination,
-              active: active,
-              pass_query: pass_query
+              origin:,
+              destination:,
+              active:,
+              pass_query:
             )
           end
           let(:params) do
             {
               origin: "/a-new-origin",
               destination: "/a-new-destination",
-              active: active,
-              pass_query: pass_query
+              active:,
+              pass_query:
             }
           end
 
           it "removes the old, puts the new" do
             expect { subject.call }.to broadcast(:ok)
 
-            items = AwesomeConfig.find_by(organization: organization, var: :custom_redirects).value
+            items = AwesomeConfig.find_by(organization:, var: :custom_redirects).value
             expect(items).to be_a(Hash)
             expect(items.count).to eq(2)
             expect(items).not_to eq(previous_value)

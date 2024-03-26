@@ -11,7 +11,7 @@ module Decidim
     autoload :CustomFields, "decidim/decidim_awesome/custom_fields"
     autoload :VotingManifest, "decidim/decidim_awesome/voting_manifest"
 
-    # Awesome coms with some components for participatory spaces
+    # Awesome comes with some components for participatory spaces
     # Currently :awesome_map and :awesome_iframe, list them here
     # if you wan to disable them
     # NOTE if you have spaces with some of these components already configured
@@ -32,11 +32,11 @@ module Decidim
     #   true  => always true but admins can still restrict its scope
     #   false => default false, admins can turn it true
     #   :disabled => false and non available, hidden from admins
-    config_accessor :allow_images_in_full_editor do
+    config_accessor :allow_images_in_editors do
       false
     end
 
-    config_accessor :allow_images_in_small_editor do
+    config_accessor :allow_videos_in_editors do
       false
     end
 
@@ -44,28 +44,20 @@ module Decidim
       false
     end
 
-    config_accessor :use_markdown_editor do
-      false
-    end
-
-    config_accessor :allow_images_in_markdown_editor do
-      false
-    end
-
     # used to save forms in localstorage
     config_accessor :auto_save_forms do
-      false
+      true
     end
 
     # Live chat widget linked to Telegram account or group
     # In the admin side only
     config_accessor :intergram_for_admins do
-      false
+      true
     end
 
     # In the public side only
     config_accessor :intergram_for_public do
-      false
+      true
     end
 
     # Configuration options to handle different validations in proposals
@@ -157,6 +149,10 @@ module Decidim
     #    }
     # ]
     config_accessor :menu do
+      []
+    end
+
+    config_accessor :home_content_block_menu do
       []
     end
 
@@ -262,6 +258,13 @@ module Decidim
       [:proposals, :reporting_propposals]
     end
 
+    # A URL where to obtain the translations for the FormBuilder component
+    # you can a custom place if you are worried about the CDN geolocation
+    # Download them from https://github.com/kevinchappell/formBuilder-languages
+    config_accessor :form_builder_langs_location do
+      "https://cdn.jsdelivr.net/npm/formbuilder-languages@1.1.0/"
+    end
+
     # Public: Stores an instance of ContentBlockRegistry
     def self.voting_registry
       @voting_registry ||= Decidim::ManifestRegistry.new("decidim_awesome/voting")
@@ -309,8 +312,10 @@ module Decidim
       registered_components << [manifest, block]
     end
 
+    # version 0.11 is compatible only with decidim 0.28
     def self.legacy_version?
-      Decidim.version[0..3] == "0.26"
+      # Decidim.version[0..3] == "0.28"
+      false
     end
   end
 end

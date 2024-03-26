@@ -6,17 +6,17 @@ require "decidim/decidim_awesome/test/shared_examples/current_config_examples"
 module Decidim::DecidimAwesome
   describe CurrentConfig do
     let(:app) { ->(env) { [200, env, "app"] } }
-    let(:env) { Rack::MockRequest.env_for("https://#{host}/#{path}?foo=bar", "decidim.current_organization" => organization, method: method) }
+    let(:env) { Rack::MockRequest.env_for("https://#{host}/#{path}?foo=bar", "decidim.current_organization" => organization, method:) }
     let(:host) { "city.domain.org" }
     let(:method) { "GET" }
     let(:middleware) { described_class.new(app) }
     let(:path) { "" }
-    let!(:organization) { create(:organization, host: host) }
+    let!(:organization) { create(:organization, host:) }
     let!(:organization2) { create(:organization, host: "another.host.org") }
-    let!(:assembly) { create(:assembly, organization: organization) }
-    let!(:another_assembly) { create(:assembly, organization: organization) }
-    let!(:user) { create(:user, :confirmed, name: "Bob Marley", organization: organization) }
-    let!(:admin) { create(:user, :confirmed, :admin, name: "Peter Green", organization: organization) }
+    let!(:assembly) { create(:assembly, organization:) }
+    let!(:another_assembly) { create(:assembly, organization:) }
+    let!(:user) { create(:user, :confirmed, name: "Bob Marley", organization:) }
+    let!(:admin) { create(:user, :confirmed, :admin, name: "Peter Green", organization:) }
 
     # clean the tampered User model
     after do
@@ -30,9 +30,9 @@ module Decidim::DecidimAwesome
     end
 
     context "when scoped admins" do
-      let!(:config) { create :awesome_config, organization: organization, var: :scoped_admins, value: admins }
-      let(:config_helper_bar) { create :awesome_config, organization: organization, var: :scoped_admin_bar }
-      let(:config_helper_foo) { create :awesome_config, organization: organization, var: :scoped_admin_foo }
+      let!(:config) { create(:awesome_config, organization:, var: :scoped_admins, value: admins) }
+      let(:config_helper_bar) { create(:awesome_config, organization:, var: :scoped_admin_bar) }
+      let(:config_helper_foo) { create(:awesome_config, organization:, var: :scoped_admin_foo) }
       let!(:constraint_bar) { create(:config_constraint, awesome_config: config_helper_bar, settings: settings_bar) }
       let!(:constraint_foo) { create(:config_constraint, awesome_config: config_helper_foo, settings: settings_foo) }
       let(:admins) do

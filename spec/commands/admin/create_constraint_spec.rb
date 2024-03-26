@@ -10,12 +10,12 @@ module Decidim::DecidimAwesome
       let(:organization) { create(:organization) }
       let(:context) do
         {
-          current_user: create(:user, organization: organization),
+          current_user: create(:user, organization:),
           current_organization: organization,
           setting: config
         }
       end
-      let(:config) { create :awesome_config, organization: organization }
+      let(:config) { create(:awesome_config, organization:) }
       let(:params) do
         {
           "participatory_space_manifest" => "some-manifest"
@@ -33,7 +33,7 @@ module Decidim::DecidimAwesome
         it "broadcasts :ok and modifies the config options" do
           expect { subject.call }.to broadcast(:ok)
 
-          expect(AwesomeConfig.find_by(organization: organization, var: config.var).constraints.first.settings).to eq(params)
+          expect(AwesomeConfig.find_by(organization:, var: config.var).constraints.first.settings).to eq(params)
         end
 
         context "and adding a repeated config" do
@@ -59,13 +59,13 @@ module Decidim::DecidimAwesome
         end
 
         let!(:config) do
-          create(:awesome_config, organization: organization)
+          create(:awesome_config, organization:)
         end
 
         it "broadcasts :invalid and does not modifiy the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
-          expect(AwesomeConfig.find_by(organization: organization, var: config.var).constraints).to eq([])
+          expect(AwesomeConfig.find_by(organization:, var: config.var).constraints).to eq([])
         end
       end
     end

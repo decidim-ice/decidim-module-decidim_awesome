@@ -2,14 +2,14 @@
 
 require "spec_helper"
 
-describe "Filter Admin actions", type: :system do
+describe "Filter Admin actions" do
   let(:login_date) { 3.days.ago }
-  let(:organization) { create :organization }
-  let!(:user) { create :user, :confirmed, organization: organization }
-  let!(:admin) { create :user, :admin, :confirmed, organization: organization }
-  let!(:admin2) { create(:user, :admin, :confirmed, name: "Lorry 1", email: "test@test.com", organization: organization, created_at: 6.days.ago) }
-  let!(:manager) { create(:user, :user_manager, :confirmed, organization: organization, created_at: 5.days.ago, last_sign_in_at: login_date) }
-  let!(:manager2) { create(:user, :user_manager, :confirmed, name: "Lorry 2", email: "test2@test.com", organization: organization, created_at: 4.days.ago) }
+  let(:organization) { create(:organization) }
+  let!(:user) { create(:user, :confirmed, organization:) }
+  let!(:admin) { create(:user, :admin, :confirmed, organization:) }
+  let!(:admin2) { create(:user, :admin, :confirmed, name: "Lorry 1", email: "test@test.com", organization:, created_at: 6.days.ago) }
+  let!(:manager) { create(:user, :user_manager, :confirmed, organization:, created_at: 5.days.ago, last_sign_in_at: login_date) }
+  let!(:manager2) { create(:user, :user_manager, :confirmed, name: "Lorry 2", email: "test2@test.com", organization:, created_at: 4.days.ago) }
 
   let(:resource_controller) { Decidim::DecidimAwesome::Admin::AdminAccountabilityController }
 
@@ -24,14 +24,14 @@ describe "Filter Admin actions", type: :system do
 
     visit decidim_admin_decidim_awesome.admin_accountability_path
 
-    click_link "List global admins"
+    click_link_or_button "List global admins"
   end
 
   def apply_admin_filter(options, filter)
     within(".filters__section") do
       find_link("Filter").hover
       find_link(options).hover
-      click_link(filter)
+      click_link_or_button(filter)
     end
   end
 
@@ -45,7 +45,7 @@ describe "Filter Admin actions", type: :system do
 
     it "displays the filter labels" do
       find("a.dropdown").hover
-      expect(page).not_to have_content("Participatory space type")
+      expect(page).to have_no_content("Participatory space type")
       expect(page).to have_content("Role type")
 
       find("a", text: "Role type").hover
@@ -63,7 +63,7 @@ describe "Filter Admin actions", type: :system do
       expect(page).to have_content(admin2.name, count: 1)
       expect(page).to have_content(manager.name, count: 1)
       expect(page).to have_content(manager2.name, count: 1)
-      expect(page).not_to have_content(user.name, count: 1)
+      expect(page).to have_no_content(user.name, count: 1)
 
       expect(page).to have_content(login_date.strftime("%d/%m/%Y %H:%M"))
       expect(page).to have_content("Currently active", count: 4)
@@ -171,10 +171,10 @@ describe "Filter Admin actions", type: :system do
         it "exports the result" do
           search_by_date(6.days.ago, 5.days.ago)
 
-          find(".exports.dropdown").click
-          perform_enqueued_jobs { click_link "Export as CSV" }
+          find(".exports.button.tiny").click
+          perform_enqueued_jobs { click_link_or_button "Export as CSV" }
 
-          within ".callout.success" do
+          within ".flash.success" do
             expect(page).to have_content("Export job has been enqueued. You will receive an email when it's ready.")
           end
 

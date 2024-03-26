@@ -1,14 +1,19 @@
-<%= decidim_form_for(@form, url: constraint_path, method: :patch, remote: true) do |f| %>
-  <div class="card">
-    <div class="card-divider">
-      <h2 class="card-title"><%= t ".constraint" %></h2>
-    </div>
-    <div class="card-section">
+<%= decidim_form_for(@form, url: constraint_path, method: :patch, remote: true, html: { class: "form-defaults" }) do |f| %>
+  <div data-dialog-container>
+    <%= icon "lock-line" %>
+    <h2 tabindex="-1" data-dialog-title><%= t ".constraint" %></h2>
+
+    <div>
       <%= render partial: "form", object: f %>
     </div>
   </div>
-  <div class="button--double form-general-submit">
-    <%= f.submit t(".save") %>
-    <button class="button hollow" type="button" data-close><%= t(".cancel") %></button>
+
+  <div data-dialog-actions>
+    <button class="button button__sm md:button__lg button__transparent-secondary" type="button"
+      data-dialog-close="<%= "edit-modal-#{params[:key]}" %>">
+      <%= t(".cancel") %>
+    </button>
+
+    <%= f.submit t(".save"), class: "button button__sm md:button__lg button__secondary", data: { "dialog-close": "edit-modal-#{params[:key]}" } %>
   </div>
 <% end %>

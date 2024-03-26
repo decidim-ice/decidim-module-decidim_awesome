@@ -2,7 +2,7 @@
 <%= csrf_meta_tags %>
 <%= organization_colors %>
 
-<%= stylesheet_pack_tag "decidim_admin", media: "all" %>
-<%= javascript_pack_tag "decidim_admin", defer: false %>
+<%= append_stylesheet_pack_tag "decidim_admin", media: "all" %>
+<%= append_javascript_pack_tag "decidim_admin", defer: false %>
 
 <%= snippets.display(:head) %>

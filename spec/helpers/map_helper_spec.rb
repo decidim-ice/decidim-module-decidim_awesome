@@ -3,7 +3,7 @@
 require "spec_helper"
 
 module Decidim::DecidimAwesome
-  describe MapHelper, type: :helper do
+  describe MapHelper do
     let(:snippets) { defined?(Decidim::Snippets) ? Decidim::Snippets.new : nil }
     let(:current_participatory_space) { create(:participatory_process) }
     let(:current_component) do
@@ -32,10 +32,7 @@ module Decidim::DecidimAwesome
     end
 
     before do
-      allow(helper).to receive(:current_participatory_space).and_return(current_participatory_space)
-      allow(helper).to receive(:current_organization).and_return(current_participatory_space.organization)
-      allow(helper).to receive(:current_component).and_return(current_component)
-      allow(helper).to receive(:snippets).and_return(snippets)
+      allow(helper).to receive_messages(current_participatory_space:, current_organization: current_participatory_space.organization, current_component:, snippets:)
       allow(helper).to receive(:translated_attribute) do |string|
         string["en"]
       end

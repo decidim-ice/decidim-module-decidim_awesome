@@ -1,63 +1,72 @@
-$(() => {
-  if ($(".voting-voting_cards").length === 0 || $("#VotingCardsModalHelp").length === 0 || $(".sign-out-link").length === 0) {
+document.addEventListener("DOMContentLoaded", () => {
+  const votingCards = document.querySelector(".voting-voting_cards");
+  const modal = document.getElementById("voting-cards-modal-help");
+  const signOutLink = document.querySelector('[href="/users/sign_out"]');
+
+  if (!votingCards || !modal || !signOutLink) {
     return;
   }
 
-  const $modal = $("#VotingCardsModalHelp");
-  const $card = $modal.find(".current-choice .vote-card");
-  const $check = $("#voting_cards-skip_help");
+  const card = modal.querySelector(".current-choice .vote-card");
+  const check = document.getElementById("voting_cards-skip_help");
 
   const storage = () => {
-    return JSON.parse(localStorage.getItem("hideTreeFlagsModalHelp") || "{}")
+    return JSON.parse(localStorage.getItem("awesome_voting_cards_hide_modal") || "{}");
   };
 
   const isChecked = () => {
-    return storage()[$check.val()];
+    return storage()[check.value];
   };
 
   const saveState = (val) => {
     const show = storage();
-    show[$check.val()] = val;
-    localStorage.setItem("hideTreeFlagsModalHelp", JSON.stringify(show))
+    show[check.value] = val;
+    localStorage.setItem("awesome_voting_cards_hide_modal", JSON.stringify(show));
   };
 
   const showModal = () => {
-    if (isChecked()) {
-      return false;
-    }
-    if ($modal.is(":visible")) {
+    if (isChecked() || window.Decidim.currentDialogs[modal.id].isOpen) {
       return false;
     }
     return true;
   };
 
-  $check.on("change", () => {
-    saveState($check.is(":checked"))
+  const bindVoteActions = () => {
+    document.querySelectorAll(".awesome-voting-card .vote-action").forEach((el) => {
+      el.addEventListener("click", (evt) => {
+        if (showModal()) {
+          evt.stopPropagation();
+          evt.preventDefault();
+          check.checked = isChecked();
+          modal.action = evt.currentTarget;
+          card.classList = evt.currentTarget.classList;
+          if (evt.currentTarget.children.length > 1) {
+            card.innerHTML = `${evt.currentTarget.children[1].outerHTML}<span class="vote-label">${evt.currentTarget.children[1].children[0].textContent}</span>`;
+          } else if (card.classList.contains("button")) {
+            card.classList.remove("button");
+            card.innerHTML = `<span class="vote-label">${evt.currentTarget.title}</span>`;
+          } else {
+            card.innerHTML = `<span class="vote-label">${evt.currentTarget.textContent}</span>`;
+          }
+          window.Decidim.currentDialogs[modal.id].open();
+        } else {
+          evt.currentTarget.closest(".voting-voting_cards").classList.add("loading");
+        }
+      });
+    });
+  };
+
+  check.addEventListener("change", () => {
+    saveState(check.checked);
   });
 
-  $modal.find(".vote-action").on("click", () => {
-    $modal.data("action").click();
-    $modal.foundation("close");
+  modal.querySelector(".vote-action").addEventListener("click", () => {
+    modal.action.click();
+    setTimeout(() => window.Decidim.currentDialogs[modal.id].close());
   });
 
-  $(".button--vote-button .voting-voting_cards").on("click", ".vote-action", (evt) => {
-    if (showModal()) {
-      evt.stopPropagation();
-      evt.preventDefault();
-      $check.prop("checked", isChecked());
-      $modal.data("action", evt.currentTarget);
-      $card[0].classList = evt.currentTarget.classList;
-      if (evt.currentTarget.children.length > 1) {
-        $card.html(`${evt.currentTarget.children[1].outerHTML}<p class="vote-label">${evt.currentTarget.children[1].children[0].textContent}</p>`);
-      } else if ($card[0].classList.contains("button")) {
-        $card[0].classList.remove("button");
-        $card.html(`<p class="vote-label">${evt.currentTarget.title}</p>`);
-      } else {
-        $card.html(`<p class="vote-label">${evt.currentTarget.textContent}</p>`);
-      }
-      $modal.foundation("open");
-    } else {
-      $(evt.currentTarget).closest(".voting-voting_cards").addClass("loading");
-    }
-  });
+  bindVoteActions();
+
+  // re-bind vote actions after AJAX events (due the use of Rails helper remote=treu)
+  document.body.addEventListener("ajax:success", () => bindVoteActions());
 });

@@ -44,7 +44,13 @@ module Decidim
                 query = current_organization.users.order(name: :asc)
                 query = query.where("name ILIKE :term OR nickname ILIKE :term OR email ILIKE :term", term: "%#{term}%")
 
-                render json: query.all.collect { |u| { id: u.id, text: format_user_name(u) } }
+                render json: query.all.collect { |u|
+                               {
+                                 value: u.id,
+                                 text: format_user_name(u),
+                                 is_admin: u.read_attribute("admin")
+                               }
+                             }
               else
                 render json: []
               end
@@ -88,14 +94,12 @@ module Decidim
           DecidimAwesome.config.keys
         end
 
-        # rubocop:disable Style/OpenStructUse
         def users_for(ids_list)
-          Decidim::User.where(id: ids_list).map { |user| OpenStruct.new(text: format_user_name(user), id: user.id) }
+          Decidim::User.where(id: ids_list).map { |user| [format_user_name(user), user.id, { data: { is_admin: user.read_attribute("admin") } }] }
         end
-        # rubocop:enable Style/OpenStructUse
 
         def format_user_name(user)
-          "<span class='#{"is-admin" if user.read_attribute("admin")}'>#{user.name} (@#{user.nickname} - #{user.email})</span>"
+          "#{user.name} (@#{user.nickname} - #{user.email})"
         end
       end
     end
