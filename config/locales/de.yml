@@ -4,7 +4,9 @@ de:
     attributes:
       config:
         additional_proposal_sortings: Zusätzliche Sortieroptionen aktiviert
+        allow_images_in_editors: Bilder im HTML-Editor erlauben
         allow_images_in_proposals: Bilder im Vorschlags-Editor erlauben
+        allow_videos_in_editors: Videos im HTML-Editor erlauben
         auto_save_forms: Formulare automatisch lokal speichern
         intergram_auto_no_response: Diese Nachricht wird verschickt, sobald eine Minute seit der letzten vom Benutzer verfasste Nachricht verschickt wurde und keine Antwort eingetroffen ist
         intergram_auto_response: Eine Nachricht, die unmittelbar nach dem Senden der ersten Nachricht des Benutzers gesendet wird
@@ -48,6 +50,8 @@ de:
         proposal_custom_fields: Eingabefelder
   decidim:
     admin:
+      actions:
+        manage: Verwalten
       filters:
         admin_accountability:
           admin_role_type:
@@ -222,7 +226,9 @@ de:
               incorrect_css: 'CSS in Box #%{key} ist ungültig'
               incorrect_json: 'JSON-Definition in Box #%{key} ist ungültig'
             help:
+              allow_images_in_editors: Dies fügt ein Bild-Upload-Symbol in allen WYSIWYG-Editoren hinzu
               allow_images_in_proposals: Bilder in Vorschlägen erlauben
+              allow_videos_in_editors: Dies fügt ein Video-Upload-Symbol in allen WYSIWYG-Editoren hinzu
               auto_save_forms: Formulare automatisch speichern
               drag_and_drop_supported: Drag and Drop unterstützen
               intergram_about: Über Intergram
@@ -351,6 +357,8 @@ de:
           index:
             confirm_destroy: Sind Sie sicher, dass Sie diese Anpassung entfernen wollen?
             edit: Bearbeiten
+            home_content_block_menu:
+              title: Startseiten-Abschnitt für globales Menü
             menu:
               title: Hauptmenü
             new: Neuer Menüpunkt
