@@ -4,7 +4,9 @@ ja:
     attributes:
       config:
         additional_proposal_sortings: 有効な追加ソートオプション
+        allow_images_in_editors: HTMLエディターで画像を許可する
         allow_images_in_proposals: 提案エディターでの画像を許可する
+        allow_videos_in_editors: HTMLエディターで動画を許可する
         auto_save_forms: ローカルストレージにフォームを自動保存する
         intergram_auto_no_response: ユーザーが最初のメッセージを送信し、応答が受信されなかった後1分後に送信されたメッセージ
         intergram_auto_response: ユーザーが最初のメッセージを送信した直後に送信されるメッセージ
@@ -48,6 +50,8 @@ ja:
         proposal_custom_fields: カスタム項目
   decidim:
     admin:
+      actions:
+        manage: 管理
       filters:
         admin_accountability:
           admin_role_type:
@@ -222,7 +226,9 @@ ja:
               incorrect_css: 'Box #%{key} のCSSに問題があります'
               incorrect_json: 'ボックス #%{key} 内の JSON 定義は無効です'
             help:
+              allow_images_in_editors: すべてのWYSIWYGエディタに画像アップローダーアイコンを追加します
               allow_images_in_proposals: 提案エディターでの画像アップロードをすべてのユーザーができるようにします。
+              allow_videos_in_editors: すべてのWYSIWYGエディタに動画リンクアイコンを追加します
               auto_save_forms: 調査などのフォームにユーザーが入力したデータを、LocalStorageを使って自動的に保存します。フォームを送信されていない場合、同じブラウザーで次回アクセスした時に復元されます。フォームを送信すると、データは削除されます。ユーザーがLocalStrorageのデータを削除した場合にも、データは復元されなくなります。
               drag_and_drop_supported: 画像アップロード時にドラッグ&ドロップが利用できます。画像はサーバーにアップロードされ、外部リソースとして挿入されます(base64インラインエンコーディングは使用しません).
               intergram_about: IntergramはTelegramメッセンジャーを使用してページの下部に埋め込まれたライブサポートチャットウィジェットを処理します。
@@ -356,6 +362,8 @@ ja:
           index:
             confirm_destroy: この設定を削除しますか？
             edit: 編集
+            home_content_block_menu:
+              title: グローバルメニューホームブロック
             menu:
               title: メインメニュー
             new: 新しい項目
