@@ -15,7 +15,7 @@ module Decidim::DecidimAwesome
       end
 
       context "when participatory_space exists" do
-        let!(:space) { create :participatory_process }
+        let!(:space) { create(:participatory_process) }
         let(:context) do
           {
             participatory_space_manifest: space.manifest.name.to_s,

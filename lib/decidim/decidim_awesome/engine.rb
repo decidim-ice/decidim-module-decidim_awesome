@@ -4,6 +4,7 @@ require "rails"
 require "deface"
 require "decidim/core"
 require "decidim/decidim_awesome/awesome_helpers"
+require "decidim/decidim_awesome/menu"
 
 module Decidim
   module DecidimAwesome
@@ -26,7 +27,7 @@ module Decidim
           helper Decidim::LayoutHelper if respond_to?(:helper)
         end
         # Include additional helpers globally
-        ActionView::Base.include(Decidim::DecidimAwesome::AwesomeHelpers)
+        ActiveSupport.on_load(:action_view) { include Decidim::DecidimAwesome::AwesomeHelpers }
         # Also for cells
         Decidim::ViewModel.include(Decidim::DecidimAwesome::AwesomeHelpers)
 
@@ -61,11 +62,16 @@ module Decidim
           Decidim::Proposals::Proposal.include(Decidim::DecidimAwesome::HasProposalExtraFields)
           Decidim::Proposals::ProposalSerializer.include(Decidim::DecidimAwesome::ProposalSerializerOverride)
           Decidim::Proposals::ProposalType.include(Decidim::DecidimAwesome::ProposalTypeOverride)
-          Decidim::Proposals::ProposalMCell.include(Decidim::DecidimAwesome::ProposalMCellOverride)
+          Decidim::Proposals::ProposalLCell.include(Decidim::DecidimAwesome::ProposalLCellOverride)
         end
 
-        Decidim::MenuPresenter.include(Decidim::DecidimAwesome::MenuPresenterOverride)
-        Decidim::MenuItemPresenter.include(Decidim::DecidimAwesome::MenuItemPresenterOverride)
+        if DecidimAwesome.enabled?([:menu, :content_block_main_menu])
+          Decidim::ContentBlocks::GlobalMenuCell.include(Decidim::DecidimAwesome::GlobalMenuCellOverride)
+          Decidim::BreadcrumbHelper.include(Decidim::DecidimAwesome::BreadcrumbHelperOverride)
+          Decidim::MenuPresenter.include(Decidim::DecidimAwesome::MenuPresenterOverride)
+          Decidim::MenuItemPresenter.include(Decidim::DecidimAwesome::MenuItemPresenterOverride)
+          Decidim::BreadcrumbRootMenuItemPresenter.include(Decidim::DecidimAwesome::BreadcrumbRootMenuItemPresenterOverride)
+        end
 
         # Late registering of components to take into account initializer values
         DecidimAwesome.registered_components.each do |manifest, block|
@@ -78,6 +84,10 @@ module Decidim
 
       initializer "decidim_decidim_awesome.overrides", after: "decidim.action_controller" do
         config.to_prepare do
+          # Auto-insert some csp directives
+          Decidim::ApplicationController.include(Decidim::DecidimAwesome::ContentSecurityPolicy)
+          Decidim::Admin::ApplicationController.include(Decidim::DecidimAwesome::ContentSecurityPolicy)
+
           # redirect unauthorized scoped admins to allowed places or custom redirects if configured
           Decidim::ErrorsController.include(Decidim::DecidimAwesome::NotFoundRedirect) if DecidimAwesome.enabled?([:scoped_admins, :custom_redirects])
 
@@ -117,9 +127,9 @@ module Decidim
           # register available processors
           Decidim::DecidimAwesome.voting_registry.register(:voting_cards) do |voting|
             voting.show_vote_button_view = "decidim/decidim_awesome/voting/voting_cards/show_vote_button"
-            voting.show_votes_count_view = "decidim/decidim_awesome/voting/voting_cards/show_votes_count"
-            voting.show_votes_count_view = "" # hide votes count if needed
-            voting.proposal_m_cell_footer = "decidim/decidim_awesome/voting/voting_cards/proposal_m_cell_footer"
+            # voting.show_votes_count_view = "decidim/decidim_awesome/voting/voting_cards/show_votes_count"
+            voting.show_votes_count_view = "" # hide votes count if not needed (in this case is integrated in the show_vote_button_view)
+            voting.proposal_metadata_cell = "decidim/decidim_awesome/voting/proposal_metadata"
             voting.weight_validator do |weight, context|
               allowed = [1, 2, 3]
               allowed << 0 if context[:proposal]&.component&.settings&.voting_cards_show_abstain
@@ -127,14 +137,17 @@ module Decidim
             end
           end
 
-          Decidim.component_registry.find(:proposals).tap do |component|
+          Decidim::DecidimAwesome.voting_components&.each do |manifest|
+            component = Decidim.component_registry.find(manifest)
+            next unless component
+
             component.settings(:global) do |settings|
               settings.attribute :awesome_voting_manifest,
                                  type: :select,
                                  default: "",
                                  choices: -> { ["default"] + Decidim::DecidimAwesome.voting_registry.manifests.map(&:name) },
                                  readonly: lambda { |context|
-                                   Decidim::Proposals::Proposal.where(component: context[:component]).where.not(proposal_votes_count: 0).any?
+                                   Decidim::Proposals::Proposal.where(component: context[:component]).where.not(proposal_votes_count: -Float::INFINITY..0).any?
                                  }
               settings.attribute :voting_cards_box_title,
                                  type: :string,
@@ -162,6 +175,16 @@ module Decidim
       initializer "decidim_decidim_awesome.add_cells_view_paths", before: "decidim_proposals.add_cells_view_paths" do
         Cell::ViewModel.view_paths << File.expand_path("#{Decidim::DecidimAwesome::Engine.root}/app/cells")
         Cell::ViewModel.view_paths << File.expand_path("#{Decidim::DecidimAwesome::Engine.root}/app/views")
+      end
+
+      initializer "decidim_decidim_awesome.register_icons" do
+        Decidim.icons.register(name: "editors-text", icon: "text", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "surveys", icon: "survey-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "brush", icon: "brush-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "layers", icon: "stack-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "pulse", icon: "pulse-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "fire", icon: "fire-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "line-chart-line", icon: "line-chart-line", category: "system", description: "", engine: :decidim_awesome)
       end
     end
   end

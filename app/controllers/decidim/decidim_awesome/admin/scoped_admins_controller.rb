@@ -8,7 +8,7 @@ module Decidim
         def create
           CreateScopedAdmin.call(current_organization) do
             on(:ok) do |key|
-              flash[:notice] = I18n.t("config.create_scoped_admin.success", key: key, scope: "decidim.decidim_awesome.admin")
+              flash[:notice] = I18n.t("config.create_scoped_admin.success", key:, scope: "decidim.decidim_awesome.admin")
             end
 
             on(:invalid) do |message|
@@ -22,7 +22,7 @@ module Decidim
         def destroy
           DestroyScopedAdmin.call(params[:key], current_organization) do
             on(:ok) do |key|
-              flash[:notice] = I18n.t("config.destroy_scoped_admin.success", key: key, scope: "decidim.decidim_awesome.admin")
+              flash[:notice] = I18n.t("config.destroy_scoped_admin.success", key:, scope: "decidim.decidim_awesome.admin")
             end
 
             on(:invalid) do |message|

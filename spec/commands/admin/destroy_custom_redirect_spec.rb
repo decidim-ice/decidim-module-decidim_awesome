@@ -3,7 +3,6 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/custom_redirects_contexts"
 
-# rubocop:disable Style/OpenStructUse
 module Decidim::DecidimAwesome
   module Admin
     describe DestroyCustomRedirect do
@@ -15,13 +14,13 @@ module Decidim::DecidimAwesome
       let(:previous_value) do
         { "/previous-route" => { "destination" => "/another-place", "active" => true } }
       end
-      let!(:config) { create :awesome_config, organization: organization, var: :custom_redirects, value: [attributes].to_h.merge(previous_value) }
+      let!(:config) { create(:awesome_config, organization:, var: :custom_redirects, value: [attributes].to_h.merge(previous_value)) }
 
       describe "when valid" do
         it "broadcasts :ok and removes the item" do
           expect { subject.call }.to broadcast(:ok)
 
-          items = AwesomeConfig.find_by(organization: organization, var: :custom_redirects).value
+          items = AwesomeConfig.find_by(organization:, var: :custom_redirects).value
 
           expect(items).to be_a(Hash)
           expect(items.count).to eq(1)
@@ -35,7 +34,7 @@ module Decidim::DecidimAwesome
         it "broadcasts :invalid and does not modifiy the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
-          items = AwesomeConfig.find_by(organization: organization, var: :custom_redirects).value
+          items = AwesomeConfig.find_by(organization:, var: :custom_redirects).value
           expect(items).to be_a(Hash)
           expect(items.count).to eq(2)
         end
@@ -43,4 +42,3 @@ module Decidim::DecidimAwesome
     end
   end
 end
-# rubocop:enable Style/OpenStructUse

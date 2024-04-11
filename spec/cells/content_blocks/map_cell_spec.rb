@@ -7,14 +7,14 @@ module Decidim::DecidimAwesome
     subject { cell(content_block.cell, content_block).call }
 
     let(:organization) { create(:organization) }
-    let(:content_block) { create :content_block, organization: organization, manifest_name: :awesome_map, scope_name: :homepage, settings: settings }
+    let(:content_block) { create(:content_block, organization:, manifest_name: :awesome_map, scope_name: :homepage, settings:) }
     let(:settings) { {} }
-    let!(:participatory_process) { create :participatory_process, organization: organization }
-    let!(:category) { create :category, participatory_space: participatory_process }
-    let!(:proposal_component) { create :proposal_component, :with_geocoding_enabled, participatory_space: participatory_process }
-    let!(:meeting_component) { create :meeting_component, participatory_space: participatory_process }
-    let!(:proposal) { create :proposal, component: proposal_component }
-    let!(:meeting) { create :meeting, component: meeting_component }
+    let!(:participatory_process) { create(:participatory_process, organization:) }
+    let!(:category) { create(:category, participatory_space: participatory_process) }
+    let!(:proposal_component) { create(:proposal_component, :with_geocoding_enabled, participatory_space: participatory_process) }
+    let!(:meeting_component) { create(:meeting_component, participatory_space: participatory_process) }
+    let!(:proposal) { create(:proposal, component: proposal_component) }
+    let!(:meeting) { create(:meeting, component: meeting_component) }
 
     controller Decidim::PagesController
 
@@ -23,12 +23,12 @@ module Decidim::DecidimAwesome
     end
 
     it "shows the map" do
-      expect(subject).to have_selector("#awesome-map")
+      expect(subject).to have_css("#awesome-map")
       expect(subject).to have_content("window.AwesomeMap.categories")
     end
 
     it "do not show the title" do
-      expect(subject).not_to have_selector("h3.section-heading")
+      expect(subject).to have_no_css("h3.section-heading")
     end
 
     it "uses default height" do
@@ -69,7 +69,7 @@ module Decidim::DecidimAwesome
       end
 
       it "shows the title" do
-        expect(subject).to have_selector("h3.section-heading")
+        expect(subject).to have_css("h3.section-heading")
         expect(subject).to have_content("Look this beautiful map!")
       end
     end
@@ -82,7 +82,7 @@ module Decidim::DecidimAwesome
       end
 
       it "uses default height" do
-        expect(subject).not_to have_content("height: 500px;")
+        expect(subject).to have_no_content("height: 500px;")
         expect(subject).to have_content("height: 734px;")
       end
     end
@@ -114,6 +114,27 @@ module Decidim::DecidimAwesome
         expect(subject.to_s).to include('data-show-evaluating="false"')
         expect(subject.to_s).to include('data-show-withdrawn="true"')
         expect(subject.to_s).to include('data-show-rejected="true"')
+      end
+    end
+
+    context "with another organization" do
+      subject { cell(another_content_block.cell, another_content_block).call }
+
+      let(:another_organization) { create(:organization) }
+      let(:another_content_block) { create(:content_block, organization: another_organization, manifest_name: :awesome_map, scope_name: :homepage, settings:) }
+      let(:another_participatory_process) { create(:participatory_process, organization: another_organization) }
+      let!(:another_meeting_component) { create(:meeting_component, participatory_space: another_participatory_process) }
+
+      before do
+        allow(controller).to receive(:current_organization).and_return(another_organization)
+      end
+
+      it "uses its own components" do
+        components = JSON.parse(subject.to_s.match(/data-components='(.*)'/)[1])
+
+        expect(components.pluck("id")).not_to include(meeting_component.id)
+        expect(components.pluck("id")).not_to include(proposal_component.id)
+        expect(components.pluck("id")).to include(another_meeting_component.id)
       end
     end
   end

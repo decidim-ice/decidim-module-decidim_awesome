@@ -1,8 +1,15 @@
+<!--
+  Force tailwind to compile these classes
+  class="fill-success fill-alert"
+-->
+
+<div class="item_show__header">
+  <h2 class="item_show__header-title">
+    <%= t(".title") %>
+  </h2>
+</div>
 <div class="card">
-  <div class="card-divider">
-    <h2 class="card-title"><%= t ".title" %></h2>
-  </div>
-  <div class="card-section">
+  <div class="card-section decidim-version">
     <p>
       <span class="label <%= decidim_version_valid? ? "success" : "alert" %>"><%= t ".decidim_version", version: decidim_version %></span>
       <%= check decidim_version_valid? %>
@@ -43,7 +50,7 @@
         <strong><%= t ".head_tags" %></strong>
         <ul class="vertical menu">
         <% {
-          CSS: "//link[@rel='stylesheet'][contains(@href,'decidim_decidim_awesome')]",
+          CSS: "//head/link[@rel='stylesheet'][contains(@href,'decidim_decidim_awesome')]",
           JavaScript: "//script[contains(@src,'decidim_decidim_awesome')]"
           }.each do |part, xpath| %>
           <li>
@@ -63,7 +70,7 @@
         <strong><%= t ".admin_head_tags" %></strong>
         <ul class="vertical menu">
         <% {
-          CSS: "//link[@rel='stylesheet'][contains(@href,'decidim_admin_decidim_awesome')]",
+          CSS: "//head/link[@rel='stylesheet'][contains(@href,'decidim_admin_decidim_awesome')]",
           JavaScript: "//script[contains(@src,'decidim_admin_decidim_awesome')]"
           }.each do |part, xpath| %>
           <li>

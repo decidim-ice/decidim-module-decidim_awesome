@@ -3,17 +3,19 @@
 require "spec_helper"
 
 module Decidim::DecidimAwesome
-  describe AwesomeHelpers, type: :helper do
-    let!(:organization) { create :organization }
-    let!(:another_organization) { create :organization }
-    let(:component) { create :proposal_component, organization: organization, settings: { awesome_voting_manifest: manifest } }
+  describe AwesomeHelpers do
+    let!(:organization) { create(:organization) }
+    let!(:another_organization) { create(:organization) }
+    let(:component) { create(:proposal_component, organization:, settings: { awesome_voting_manifest: manifest }) }
+    let(:another_component) { create(:proposal_component, manifest_name: :another_component, organization:, settings: { awesome_voting_manifest: manifest }) }
     let(:manifest) { :voting_cards }
-    let(:request) { double(env: env, url: "/") }
+    let(:request) { double(env:, url: "/") }
     let(:env) do
       {
         "decidim.current_organization" => organization
       }
     end
+    let(:voting_components) { [:proposals, :another_component] }
 
     before do
       allow(helper).to receive(:request).and_return(request)
@@ -52,6 +54,12 @@ module Decidim::DecidimAwesome
 
       it "returns nil" do
         expect(helper.awesome_voting_manifest_for(component)).to be_nil
+      end
+    end
+
+    context "when no voting components" do
+      it "returns nil" do
+        expect(helper.awesome_voting_manifest_for(another_component)).to be_nil
       end
     end
   end

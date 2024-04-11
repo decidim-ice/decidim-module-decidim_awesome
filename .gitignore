@@ -24,3 +24,4 @@ node_modules/
 npm_debug.log
 
 .ruby-version
+.rubocop-http*

@@ -22,13 +22,12 @@ module Decidim
          position: 3
        }]
     end
-    let(:user) { create :user, organization: organization }
-    let(:organization) { create :organization }
-    let!(:config) { create :awesome_config, organization: organization, var: :custom_menu, value: override }
+    let(:user) { create(:user, organization:) }
+    let(:organization) { create(:organization) }
+    let!(:config) { create(:awesome_config, organization:, var: :custom_menu, value: override) }
 
     before do
-      allow(view).to receive(:current_organization).and_return(organization)
-      allow(view).to receive(:current_user).and_return(user)
+      allow(view).to receive_messages(current_organization: organization, current_user: user)
       MenuRegistry.register :custom_menu do |menu|
         menu.add_item :native_foo, "Foo", "/foo", position: 1
         menu.add_item :native_bar, "Bar", "/bar", position: 2
@@ -53,17 +52,17 @@ module Decidim
     shared_examples "has default items" do
       it "renders the menu as a navigation list and skips non visible" do
         expect(subject.render).to \
-          have_selector("ul") &
-          have_selector("li", count: 2) &
+          have_css("ul") &
+          have_css("li", count: 2) &
           have_link("Foo", href: "/foo") &
           have_link("Bar", href: "/bar")
       end
 
       it "renders the menu in the right order" do
         expect(subject.render).to \
-          have_selector("ul") &
-          have_selector("li:first-child", text: "Foo") &
-          have_selector("li:last-child", text: "Bar")
+          have_css("ul") &
+          have_css("li:first-child", text: "Foo") &
+          have_css("li:last-child", text: "Bar")
       end
 
       it "returns instance of Decidim:Menu" do
@@ -74,8 +73,8 @@ module Decidim
     shared_examples "has overridden items" do
       it "renders the menu as a navigation list" do
         expect(subject.render).to \
-          have_selector("ul") &
-          have_selector("li", count: 3) &
+          have_css("ul") &
+          have_css("li", count: 3) &
           have_link("Bar", href: "/bar") &
           have_link("Fumanchu", href: "/foo") &
           have_link("Baz", href: "/baz")
@@ -83,9 +82,9 @@ module Decidim
 
       it "renders the menu in the right order" do
         expect(subject.render).to \
-          have_selector("ul") &
-          have_selector("li:first-child", text: "Bar") &
-          have_selector("li:last-child", text: "Fumanchu")
+          have_css("ul") &
+          have_css("li:first-child", text: "Bar") &
+          have_css("li:last-child", text: "Fumanchu")
       end
 
       it "returns instance of Decidim:Menu" do
@@ -98,16 +97,16 @@ module Decidim
 
       it "renders the menu as a navigation list" do
         expect(subject.render).to \
-          have_selector("ul") &
-          have_selector("li", count: 1) &
+          have_css("ul") &
+          have_css("li", count: 1) &
           have_link("Foo", href: "/foo")
       end
 
       it "renders the menu in the right order" do
         expect(subject.render).to \
-          have_selector("ul") &
-          have_selector("li:first-child", text: "Foo") &
-          have_selector("li:last-child", text: "Foo")
+          have_css("ul") &
+          have_css("li:first-child", text: "Foo") &
+          have_css("li:last-child", text: "Foo")
       end
 
       it "returns instance of Decidim:Menu" do
@@ -120,17 +119,17 @@ module Decidim
 
       it "renders the menu as a navigation list" do
         expect(subject.render).to \
-          have_selector("ul") &
-          have_selector("li", count: 2) &
+          have_css("ul") &
+          have_css("li", count: 2) &
           have_link("Baz", href: "/baz") &
           have_link("Fumanchu", href: "/foo")
       end
 
       it "renders the menu in the right order" do
         expect(subject.render).to \
-          have_selector("ul") &
-          have_selector("li:first-child", text: "Baz") &
-          have_selector("li:last-child", text: "Fumanchu")
+          have_css("ul") &
+          have_css("li:first-child", text: "Baz") &
+          have_css("li:last-child", text: "Fumanchu")
       end
 
       it "returns instance of Decidim:Menu" do

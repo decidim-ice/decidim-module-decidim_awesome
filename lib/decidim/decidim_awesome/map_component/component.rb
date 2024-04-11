@@ -52,7 +52,7 @@ Decidim::DecidimAwesome.register_component(:awesome_map) do |component|
       name: Decidim::Components::Namer.new(participatory_space.organization.available_locales, :awesome_map).i18n_name,
       manifest_name: :awesome_map,
       published_at: Time.current,
-      participatory_space: participatory_space,
+      participatory_space:,
       settings: {
         announcement: { en: Faker::Lorem.paragraphs(number: 2).join("\n") }
       }

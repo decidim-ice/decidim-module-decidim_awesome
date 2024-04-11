@@ -3,9 +3,9 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/config_examples"
 
-describe "Visit the admin page", type: :system do
-  let(:organization) { create :organization, rich_text_editor_in_public_views: rte_enabled }
-  let!(:admin) { create(:user, :admin, :confirmed, organization: organization) }
+describe "Visit the admin page" do
+  let(:organization) { create(:organization, rich_text_editor_in_public_views: rte_enabled) }
+  let!(:admin) { create(:user, :admin, :confirmed, organization:) }
   let(:rte_enabled) { true }
   let(:disabled_features) { [] }
   let(:version_original) { Decidim.version }
@@ -16,11 +16,13 @@ describe "Visit the admin page", type: :system do
     disabled_features.each do |feature|
       allow(Decidim::DecidimAwesome.config).to receive(feature).and_return(:disabled)
     end
-
+    Decidim::MenuRegistry.destroy(:awesome_admin_menu)
+    Decidim::DecidimAwesome::Menu.instance_variable_set(:@menus, nil)
+    Decidim::DecidimAwesome::Menu.register_awesome_admin_menu!
     switch_to_host(organization.host)
     login_as admin, scope: :user
     visit decidim_admin.root_path
-    click_link "Decidim awesome"
+    click_link_or_button "Decidim awesome"
   end
 
   it_behaves_like "javascript config vars"
@@ -33,20 +35,22 @@ describe "Visit the admin page", type: :system do
 
   context "when visiting system compatibility" do
     before do
-      click_link "System Compatibility"
+      click_link_or_button "System Compatibility"
     end
 
     it "renders the page" do
       expect(page).to have_content(/System Compatibility Checks/i)
-      expect(page).not_to have_xpath("//span[@class='text-alert']")
-      expect(page).to have_xpath("//span[@class='text-success']")
+      expect(page).to have_no_xpath("//span[@class='fill-alert']")
+      expect(page).to have_xpath("//span[@class='fill-success']")
     end
 
     context "and header is overriden" do
       let(:version) { "0.11" }
 
       it "detects missing css" do
-        expect(page).to have_xpath("//span[@class='text-alert']", count: 1)
+        within ".decidim-version" do
+          expect(page).to have_xpath("//span[@class='fill-alert']", count: 1)
+        end
       end
     end
   end
@@ -54,7 +58,7 @@ describe "Visit the admin page", type: :system do
   context "when visiting editor hacks" do
     context "when editor hacks are enabled" do
       before do
-        click_link "Editor Hacks"
+        click_link_or_button "Editor Hacks"
       end
 
       it_behaves_like "has menu link", "editors"
@@ -66,8 +70,7 @@ describe "Visit the admin page", type: :system do
 
     context "when editor hacks are disabled" do
       let(:disabled_features) do
-        [:allow_images_in_full_editor, :allow_images_in_small_editor, :use_markdown_editor,
-         :allow_images_in_markdown_editor]
+        [:allow_images_in_editors, :allow_videos_in_editors]
       end
 
       it_behaves_like "do not have menu link", "editors"
@@ -77,7 +80,7 @@ describe "Visit the admin page", type: :system do
   context "when visiting surveys hacks" do
     context "when survey hacks are enabled" do
       before do
-        click_link "Surveys & Forms"
+        click_link_or_button "Surveys & Forms"
       end
 
       it_behaves_like "has menu link", "surveys"
@@ -97,7 +100,7 @@ describe "Visit the admin page", type: :system do
   context "when visiting proposal hacks" do
     context "when proposal hacks are enabled" do
       before do
-        click_link "Proposals Hacks"
+        click_link_or_button "Proposals Hacks"
       end
 
       it_behaves_like "has menu link", "proposals"
@@ -105,7 +108,6 @@ describe "Visit the admin page", type: :system do
       it "renders the page" do
         expect(page).to have_content(/Tweaks for proposals/i)
         expect(page).to have_content("Customize sorting options for the proposals list")
-        expect(page).to have_content("\"Rich text editor for participants\" is enabled")
         expect(page).to have_content("User input validations for the \"title\" field")
         expect(page).to have_content("User input validations for the \"body\" field")
       end
@@ -114,7 +116,7 @@ describe "Visit the admin page", type: :system do
         let(:disabled_features) { [:additional_proposal_sortings] }
 
         it "renders the page" do
-          expect(page).not_to have_content("Customize sorting options for the proposals list")
+          expect(page).to have_no_content("Customize sorting options for the proposals list")
         end
       end
 
@@ -123,7 +125,7 @@ describe "Visit the admin page", type: :system do
 
         it "renders the page" do
           expect(page).to have_content(/Tweaks for proposals/i)
-          expect(page).not_to have_content("\"Rich text editor for participants\" is enabled")
+          expect(page).to have_no_content("\"Rich text editor for participants\" is enabled")
         end
       end
 
@@ -131,7 +133,7 @@ describe "Visit the admin page", type: :system do
         let(:disabled_features) { [:validate_title_min_length, :validate_title_max_caps_percent, :validate_title_max_marks_together, :validate_title_start_with_caps] }
 
         it "does not show title options" do
-          expect(page).not_to have_content("User input validations for the \"title\" field")
+          expect(page).to have_no_content("User input validations for the \"title\" field")
           expect(page).to have_content("User input validations for the \"body\" field")
         end
       end
@@ -141,7 +143,7 @@ describe "Visit the admin page", type: :system do
 
         it "does not show body options" do
           expect(page).to have_content("User input validations for the \"title\" field")
-          expect(page).not_to have_content("User input validations for the \"body\" field")
+          expect(page).to have_no_content("User input validations for the \"body\" field")
         end
       end
     end
@@ -164,7 +166,7 @@ describe "Visit the admin page", type: :system do
   context "when visiting live chat" do
     context "when livechat hacks are enabled" do
       before do
-        click_link "Live Chat"
+        click_link_or_button "Live Chat"
       end
 
       it_behaves_like "has menu link", "livechat"
@@ -184,7 +186,7 @@ describe "Visit the admin page", type: :system do
   context "when visiting CSS tweaks" do
     context "when scoped styles are enabled" do
       before do
-        click_link "Custom Styles"
+        click_link_or_button "Custom Styles"
       end
 
       it_behaves_like "has menu link", "styles"
@@ -203,15 +205,21 @@ describe "Visit the admin page", type: :system do
 
   context "when visiting Menu hacks" do
     context "when menu_hacks are enabled" do
+      let(:disabled_features) { [] }
+
       before do
-        click_link "Menu Tweaks"
+        click_link_or_button "Menu Tweaks"
       end
 
-      it_behaves_like "has menu link", "menu_hacks" do
+      it_behaves_like "has menu link", "menus/home_content_block_menu/hacks" do
         let(:prefix) { "" }
       end
 
-      it "renders the page" do
+      it_behaves_like "has menu link", "menus/menu/hacks" do
+        let(:prefix) { "" }
+      end
+
+      it "renders the main menu page" do
         expect(page).to have_content(/Main menu/i)
       end
     end
@@ -228,7 +236,7 @@ describe "Visit the admin page", type: :system do
   context "when visiting custom redirections" do
     context "when custom_redirections are enabled" do
       before do
-        click_link "Custom Redirections"
+        click_link_or_button "Custom Redirections"
       end
 
       it_behaves_like "has menu link", "custom_redirects" do
@@ -250,7 +258,7 @@ describe "Visit the admin page", type: :system do
   context "when visiting Scoped Admins" do
     context "when menu_hacks are enabled" do
       before do
-        click_link "Scoped Admins"
+        click_link_or_button "Scoped Admins"
       end
 
       it_behaves_like "has menu link", "admins"
@@ -270,7 +278,7 @@ describe "Visit the admin page", type: :system do
   context "when visiting proposal custom fields" do
     context "when custom fields are enabled" do
       before do
-        click_link "Proposals Custom Fields"
+        click_link_or_button "Proposals Custom Fields"
       end
 
       it_behaves_like "has menu link", "proposal_custom_fields"

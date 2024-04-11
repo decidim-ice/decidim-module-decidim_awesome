@@ -5,16 +5,16 @@ require "decidim/decidim_awesome/test/shared_examples/config_examples"
 
 module Decidim::DecidimAwesome
   module Admin
-    describe ConfigController, type: :controller do
+    describe ConfigController do
       include Decidim::TranslationsHelper
       routes { Decidim::DecidimAwesome::AdminEngine.routes }
 
-      let(:user) { create(:user, :confirmed, :admin, organization: organization) }
+      let(:user) { create(:user, :confirmed, :admin, organization:) }
       let(:organization) { create(:organization) }
       let(:config) do
         {
-          allow_images_in_full_editor: false,
-          allow_images_in_small_editor: false
+          allow_images_in_editors: false,
+          allow_videos_in_editors: false
         }
       end
       let(:params) do
@@ -25,23 +25,24 @@ module Decidim::DecidimAwesome
 
       before do
         request.env["decidim.current_organization"] = user.organization
+        Decidim::DecidimAwesome::Menu.instance_variable_set(:@menus, nil)
         sign_in user, scope: :user
       end
 
       describe "GET #show" do
         it "returns http success" do
-          get :show, params: params
+          get(:show, params:)
           expect(response).to have_http_status(:success)
         end
 
         it_behaves_like "forbids disabled feature" do
           let(:features) { Decidim::DecidimAwesome.config.keys }
-          let(:action) { get :show, params: params }
+          let(:action) { get :show, params: }
         end
 
         context "when params var is empty" do
           let(:params) { {} }
-          let(:editors) { [:allow_images_in_full_editor, :allow_images_in_small_editor, :use_markdown_editor, :allow_images_in_markdown_editor] }
+          let(:editors) { [:allow_images_in_editors, :allow_videos_in_editors] }
           let(:disabled) { [] }
 
           before do
@@ -82,12 +83,12 @@ module Decidim::DecidimAwesome
         end
 
         context "when constraint exists" do
-          let(:key) { :allow_images_in_full_editor }
+          let(:key) { :allow_images_in_editors }
           let(:settings) do
             {
               participatory_space_manifest: manifest,
               participatory_space_slug: slug,
-              component_manifest: component_manifest,
+              component_manifest:,
               component_id: id
             }
           end
@@ -95,10 +96,10 @@ module Decidim::DecidimAwesome
           let(:slug) { process.slug }
           let(:component_manifest) { component.manifest.name }
           let(:id) { component.id }
-          let!(:config) { create(:awesome_config, organization: organization, var: key) }
-          let!(:constraint) { create(:config_constraint, awesome_config: config, settings: settings) }
-          let!(:process) { create :participatory_process, organization: organization }
-          let!(:component) { create :component, participatory_space: process }
+          let!(:config) { create(:awesome_config, organization:, var: key) }
+          let!(:constraint) { create(:config_constraint, awesome_config: config, settings:) }
+          let!(:process) { create(:participatory_process, organization:) }
+          let!(:component) { create(:component, participatory_space: process) }
 
           it "sumarizes the scope for process manifest" do
             expect(controller.helpers.translate_constraint_value(constraint, "participatory_space_manifest")).to eq("Processes")
@@ -131,20 +132,20 @@ module Decidim::DecidimAwesome
           {
             var: :editors,
             config: {
-              allow_images_in_full_editor: true,
-              allow_images_in_small_editor: true
+              allow_images_in_editors: true,
+              allow_videos_in_editors: true
             }
           }
         end
 
         it "redirects as success success" do
-          get :update, params: params
+          get(:update, params:)
           expect(response).to have_http_status(:redirect)
         end
 
         it_behaves_like "forbids disabled feature" do
           let(:features) { config.keys }
-          let(:action) { get :show, params: params }
+          let(:action) { get :show, params: }
         end
       end
 
@@ -155,13 +156,13 @@ module Decidim::DecidimAwesome
 
         it "raises unkown format" do
           expect do
-            get :users, params: params
+            get :users, params:
           end.to raise_exception(ActionController::UnknownFormat)
         end
 
         context "when format is json" do
           it "retuns a list of users" do
-            get :users, params: params, format: :json
+            get :users, params:, format: :json
             expect(response).to have_http_status(:ok)
           end
         end
@@ -173,7 +174,7 @@ module Decidim::DecidimAwesome
         end
 
         it "returns invalid" do
-          post :rename_scope_label, params: params
+          post(:rename_scope_label, params:)
           expect(response).to have_http_status(:unprocessable_entity)
         end
 
@@ -188,23 +189,23 @@ module Decidim::DecidimAwesome
           end
 
           it "returns invalid" do
-            post :rename_scope_label, params: params
+            post(:rename_scope_label, params:)
             expect(response).to have_http_status(:unprocessable_entity)
           end
 
           context "and config exists" do
-            let!(:config) { create :awesome_config, organization: organization, var: "scoped_something", value: { "foo" => "something" } }
+            let!(:config) { create(:awesome_config, organization:, var: "scoped_something", value: { "foo" => "something" }) }
 
             it "retuns ok" do
-              post :rename_scope_label, params: params
+              post(:rename_scope_label, params:)
               expect(response).to have_http_status(:ok)
             end
 
             context "and is in another organization" do
-              let!(:config) { create :awesome_config, var: "scoped_something", value: { "foo" => "something" } }
+              let!(:config) { create(:awesome_config, var: "scoped_something", value: { "foo" => "something" }) }
 
               it "returns invalid" do
-                post :rename_scope_label, params: params
+                post(:rename_scope_label, params:)
                 expect(response).to have_http_status(:unprocessable_entity)
               end
             end
