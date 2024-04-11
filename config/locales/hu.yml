@@ -2,10 +2,7 @@ hu:
   activemodel:
     attributes:
       config:
-        allow_images_in_full_editor: A teljesértékű HTML szerkesztőben a képek engedélyezése
-        allow_images_in_markdown_editor: A markdown szerkesztőben a képek engedélyezése
         allow_images_in_proposals: A javaslatok szerkesztőben a képek engedélyezése
-        allow_images_in_small_editor: A minimalista HTML szerkesztőben a képek engedélyezése
         auto_save_forms: A helyi tárolóban az űrlapok automatikus mentése
         intergram_auto_no_response: A kiküldött üzenet, amit a felhasználó első üzenete után kap, amelyet akkor küldünk, ha nem érkezett válasz
         intergram_auto_response: Az üzeenet, amit a felhasználó első üzenete után küldönk ki
@@ -20,7 +17,6 @@ hu:
         proposal_custom_fields: Egyéni mezők %{id}
         scoped_admins: Területi adminok csoport %{id}
         scoped_styles: Egyedi stílusok %{id}
-        use_markdown_editor: A markdown használata a html szerkesztő helyett
         validate_body_max_caps_percent: A szövegtörzsben a maximálisan engedélyezett nagybetűk százaléka
         validate_body_max_marks_together: A törzsben megengedett maximálisan egymás utáni jelek szimbólumai
         validate_body_min_length: A minimális karakterek száma a szövegtörzsben
@@ -166,7 +162,6 @@ hu:
             sure_to_remove: Biztosan törölni szeretnéd ezt a CSS dobozt?
           none: "⛔ Soha! - Minden más korlátozás kikapcsolása"
           process_groups: Folyamatcsoportok
-          rich_text_editor_in_public_views: 'MEGJEGYZÉS: Ha a "Rich text szerkesztő" engedélyezve van a felhasználók számára, ez az opció nem lesz alkalmazható. Használja helyette a szerkesztői hackeket a képek engedélyezéséhez a javaslatokban.'
           show:
             update: Beállítás frissítése
           system: Mindenütt, kivéve ezekben a részvételi terekben
@@ -206,8 +201,9 @@ hu:
           index:
             confirm_destroy: Biztosan eltávolítja ezt az testreszabást?
             edit: Szerkesztés
+            menu:
+              title: Főmenü
             new: Új elem
-            title: Főmenü
           new:
             save: Mentés
             title: Új menüpont

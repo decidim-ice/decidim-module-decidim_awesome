@@ -3,10 +3,7 @@ cs:
     attributes:
       config:
         additional_proposal_sortings: Povoleny další možnosti řazení
-        allow_images_in_full_editor: Povolit obrázky v kompletním HTML editoru
-        allow_images_in_markdown_editor: Povolit obrázky v editoru markdown
         allow_images_in_proposals: Povolit obrázky v editoru návrhů
-        allow_images_in_small_editor: Povolit obrázky v minimálním HTML editoru
         auto_save_forms: Automaticky ukládat formuláře v místním úložišti
         intergram_auto_no_response: Zpráva, která je odeslána jednu minutu poté, co uživatel odešle svou první zprávu a nebyla obdržena odpověď
         intergram_auto_response: Zpráva, která je odeslána okamžitě poté, co uživatel odešle svou první zprávu
@@ -21,7 +18,6 @@ cs:
         proposal_custom_fields: 'Uživatelská pole #%{id}'
         scoped_admins: 'Skupina Škálovaní administrátoři #%{id}'
         scoped_styles: Vlastní styly číslo %{id}
-        use_markdown_editor: Použít Markdown editor namísto HTML editoru
         validate_body_max_caps_percent: Maximální povolený procentní podíl velkých písmen pro tělo zprávy
         validate_body_max_marks_together: Maximální počet po sobě jdoucích značek povolených v těle zprávy
         validate_body_min_length: Minimální požadované znaky pro tělo zprávy
@@ -224,10 +220,7 @@ cs:
               incorrect_css: 'CSS v poli #%{key} je neplatné'
               incorrect_json: 'Definice JSON v poli #%{key} je neplatná'
             help:
-              allow_images_in_full_editor: Tímto se přidá ikona pro nahrávání obrázků ve všech editorech WYSIWYG s povoleným plným nástrojovým řádkem.
-              allow_images_in_markdown_editor: To umožní editoru markdown nahrávat obrázky pomocí kopírování a vkládání nebo přetažení.
               allow_images_in_proposals: Toto umožní nahrávat obrázky do editoru návrhů, které jsou k dispozici každému uživateli
-              allow_images_in_small_editor: Tímto se přidá ikona pro nahrávání obrázků ve všech editorech WYSIWYG s minimálními možnostmi v panelu nástrojů.
               auto_save_forms: Toto bude používat místní úložiště pro automatické ukládání dat zavedených uživateli do průzkumů a jiných formulářů během vyplňování. Data budou obnovena v budoucí návštěvě stejného prohlížeče v případě, že formulář nebude odeslán. Pokud je formulář odeslán, data budou odstraněna. Pokud uživatelé odstraní svá data z místního úložiště, data nebudou obnovena.
               drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
               intergram_about: Intergram používá Telegram messenger pro zpracování widgetu live podpory v dolní části stránky.
@@ -239,7 +232,6 @@ cs:
               scoped_admins: Povýšení běžného uživatele na administrátora, který může spravovat pouze určité části veřejného webu (k tomu použijte editor omezení). Všimněte si, že uživatelé, kteří již mají oprávnění běžného správce, budou ignorováni.
               scoped_styles: Vytvořte vlastní CSS aplikovaný pouze na určitých částech veřejného webu (použijte pro to editor omezení)
               scoped_styles_variables: 'Můžete použít následující CSS proměnné pro nastavené barvy organizace:'
-              use_markdown_editor: Toto nahradí WYSIWYG editor, místo toho použijte Markdown editor. Text bude vykreslen jako HTML na veřejných stránkách (text v databázi bude uložen jako text markdown)
               validate_body_max_caps_percent: Nula nedovolí žádné velké písmeno, 100 bude nutit psát vše velkými písmeny
               validate_body_max_marks_together: 'Omezit počet otazníků a vykřičníků, které lze psát dohromada. Např: Pokud je 2, pak ''!!!'' nebude v textu povoleno'
               validate_body_min_length: Toto číslo může být nulové, toto pole bude ve skutečnosti nepovinné
@@ -263,7 +255,6 @@ cs:
             sure_to_remove: Opravdu chcete zničit tento CSS box?
           none: "⛔ Nikdy! - Deaktivujte jiná omezení"
           process_groups: Skupiny procesů
-          rich_text_editor_in_public_views: 'POZNÁMKA: "Kompletní textový editor pro účastníky" je povolen, tato možnost nebude využita. Pro povolení obrázků v Návrzích používejte místo toho hacky editoru.'
           show:
             title: Vylepšení pro %{setting}
             update: Aktualizace konfigurace
@@ -362,10 +353,11 @@ cs:
           index:
             confirm_destroy: Opravdu chcete odstranit toto přizpůsobení?
             edit: Upravit
+            menu:
+              title: Hlavní menu
             new: Nová položka
             remove: Odstranit přidání
             remove_hack: Odstranit přizpůsobení
-            title: Hlavní menu
           new:
             save: Uložit
             title: Nová položka menu
@@ -448,6 +440,9 @@ cs:
             weight_2_short: 'Y:'
             weight_3: Zelená
             weight_3_short: 'G:'
+    meetings:
+      meetings_map:
+        view_meeting: Zobrazit schůzku
     proposals:
       proposals:
         orders:
@@ -455,11 +450,10 @@ cs:
           supported_first: Nejdříve podporováno
           supported_last: Naposledy podporováno
           za: Z-A (obrácená abeceda)
+        proposal:
+          view_proposal: Zobrazit návrh
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Vylepšení Decidim
       decidim_awesome:
         awesome_config:
           amendments: Pozměňovací návrhy

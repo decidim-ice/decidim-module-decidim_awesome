@@ -3,10 +3,9 @@ de:
     attributes:
       config:
         additional_proposal_sortings: Zusätzliche Sortieroptionen aktiviert
-        allow_images_in_full_editor: Bilder im vollständigen HTML-Editor erlauben
-        allow_images_in_markdown_editor: Bilder im Markdown-Editor erlauben
+        allow_images_in_editors: Bilder im HTML-Editor erlauben
         allow_images_in_proposals: Bilder im Vorschlags-Editor erlauben
-        allow_images_in_small_editor: Bilder im minimalen HTML-Editor erlauben
+        allow_videos_in_editors: Videos im HTML-Editor erlauben
         auto_save_forms: Formulare automatisch lokal speichern
         intergram_auto_no_response: Diese Nachricht wird verschickt, sobald eine Minute seit der letzten vom Benutzer verfasste Nachricht verschickt wurde und keine Antwort eingetroffen ist
         intergram_auto_response: Eine Nachricht, die unmittelbar nach dem Senden der ersten Nachricht des Benutzers gesendet wird
@@ -21,7 +20,6 @@ de:
         proposal_custom_fields: 'Eingabefeld #%{id}'
         scoped_admins: Eingeschränkte Admin-Gruppe %{id}
         scoped_styles: Eigene Eingabefelder %{id}
-        use_markdown_editor: Markdown Editor anstelle des HTML-Editors verwenden
         validate_body_max_caps_percent: Maximal erlaubter Prozentsatz an Großbuchstaben für den Textkörper
         validate_body_max_marks_together: Maximal erlaubte aufeinanderfolgende Zeichen im Textkörper
         validate_body_min_length: Minimale zwingend erforderliche Anzahl Zeichen im Textkörper
@@ -51,6 +49,8 @@ de:
         proposal_custom_fields: Eingabefelder
   decidim:
     admin:
+      actions:
+        manage: Verwalten
       filters:
         admin_accountability:
           admin_role_type:
@@ -225,10 +225,9 @@ de:
               incorrect_css: 'CSS in Box #%{key} ist ungültig'
               incorrect_json: 'JSON-Definition in Box #%{key} ist ungültig'
             help:
-              allow_images_in_full_editor: Bilder im vollen Editor erlauben
-              allow_images_in_markdown_editor: Bilder im Markdown Editor erlauben
+              allow_images_in_editors: Dies fügt ein Bild-Upload-Symbol in allen WYSIWYG-Editoren hinzu
               allow_images_in_proposals: Bilder in Vorschlägen erlauben
-              allow_images_in_small_editor: Bilder in kleinem Editor erlauben
+              allow_videos_in_editors: Dies fügt ein Video-Upload-Symbol in allen WYSIWYG-Editoren hinzu
               auto_save_forms: Formulare automatisch speichern
               drag_and_drop_supported: Drag and Drop unterstützen
               intergram_about: Über Intergram
@@ -240,7 +239,6 @@ de:
               scoped_admins: Befördern Sie normale Benutzer zu Administratoren, die nur bestimmte Teile der öffentlichen Seite verwalten können (verwenden Sie dazu den Editor für Einschränkungen). Beachten Sie, dass Benutzer, die bereits reguläre Administratorrechte haben, ignoriert werden. For instance, if having configured /my-origin => /my-destination, a request to /my-origin?locale=ca  will be redirected to "/my-destination?locale=ca".
               scoped_styles: Erstellen Sie benutzerdefinierte CSS, die nur in bestimmten Bereichen der öffentlichen Seite gelten (vewenden Sie dazu die Einschränkungen)
               scoped_styles_variables: 'Sie können die folgenden CSS-Variablen für die benutzerdefinierter Farben der Organisation verwenden:'
-              use_markdown_editor: Markdown Editor benutzen
               validate_body_max_caps_percent: 0 lässt keinen Großbuchstaben zu, 100 lässt ausschliesslich Großbuchstaben zu
               validate_body_max_marks_together: 'Begrenzt die Anzahl der Frage- und Ausrufezeichen, die zusammen geschrieben werden können. Zum Beispiel: Der Wert 2 führt dazu, dass ''!!!'' im Text nicht erlaubt ist'
               validate_body_min_length: Diese Zahl kann Null sein, was das Feld dann effektiv als "nicht obligatorisch" setzt
@@ -264,7 +262,6 @@ de:
             sure_to_remove: Sind Sie sicher, dass Sie diese CSS-Box entfernen möchten?
           none: "⛔ Niemals! - Deaktivieren Sie jede andere Einschränkung"
           process_groups: Prozessgruppen
-          rich_text_editor_in_public_views: 'Warnung: "Erweiterter Text Editor für Teilnehmer" ist aktiviert, diese Option ist inaktiv. Bitte benutzen Sie die Editor Hacks, um Bilder in Vorschlägen zu aktivieren.'
           show:
             title: Decidim Awesome
             update: Aktualisieren
@@ -359,10 +356,13 @@ de:
           index:
             confirm_destroy: Sind Sie sicher, dass Sie diese Anpassung entfernen wollen?
             edit: Bearbeiten
+            home_content_block_menu:
+              title: Startseiten-Abschnitt für globales Menü
+            menu:
+              title: Hauptmenü
             new: Neuer Menüpunkt
             remove: Zusatz entfernen
             remove_hack: Anpassungen entfernen
-            title: Hauptmenü
           new:
             save: Sichern
             title: Neuer Menüpunkt
@@ -423,7 +423,7 @@ de:
           abstained: "✔ Enthalten"
           change_vote: Meine Stimme ändern
           default_box_title: Über diesen Vorschlag abstimmen
-          default_instructions_html: <p>Bitte lesen Sie die Wahlregeln sorgfältig durch, um zu verstehen, wie Ihre Stimme von %{organization}" verwendet wird</p>
+          default_instructions_html: "<p>Bitte lesen Sie die Wahlregeln sorgfältig durch, um zu verstehen, wie Ihre Stimme von %{organization}\" verwendet wird</p>"
           modal:
             cancel: Abbrechen
             message: Ihre Stimme wird am %{date} als endgültig betrachtet. Sie können sie bis dahin ändern
@@ -441,6 +441,9 @@ de:
             weight_2_short: 'Y:'
             weight_3: Grün
             weight_3_short: 'G:'
+    meetings:
+      meetings_map:
+        view_meeting: Sitzung ansehen
     proposals:
       proposals:
         orders:
@@ -448,11 +451,10 @@ de:
           supported_first: Zuerst unterstützt
           supported_last: Zuletzt unterstützt
           za: Z-A (umgekehrt alphabetisch)
+        proposal:
+          view_proposal: Vorschlag ansehen
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Decidim Awesome
       decidim_awesome:
         awesome_config:
           amendments: Änderungsvorschläge
