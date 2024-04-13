@@ -120,6 +120,7 @@ cs:
               supported_first: Nejdříve podporováno
               supported_last: Naposledy podporováno
               za: Z-A (obrácená abeceda)
+            limit_pending_amendments: Povolit pouze jeden čekající pozměňovací návrh ke každému návrhu.
             sort_orders_enabled: Typy řazeníí povoleny
             voting_cards_box_title: Název hlasovacího pole
             voting_cards_box_title_help: Výchozí hodnota je "Hlasovat pro tento návrh". Použijte "-" pro jeho schování.
@@ -442,10 +443,13 @@ cs:
           modal:
             cancel: Zrušit
             message: Váš hlas bude považován za konečný v %{date}. Do té doby jej můžete změnit,
+            proceed: Provést
+            skip: Zaškrtněte pro přeskočení tohoto okna v budoucnu
           vote_button: Kliknutím hlasujte
           voted: Odhlasováno
           voting_for: Můj hlas pro "%{proposal}" je "%{type}"
           weights:
+            weight_0: Zdržet se
             weight_0_short: 'A:'
             weight_1: Červená
             weight_1_short: 'R:'
