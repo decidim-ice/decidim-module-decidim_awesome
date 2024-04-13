@@ -220,6 +220,7 @@ cs:
             additional_proposal_sortings:
               enable_all: Povolit všechny další možnosti řazení
               help: Tyto možnosti řazení jsou navíc k výchozím možnostem. Nezapomeňte, že si můžete vybrat výchozí pořadí v nastavení komponenty návrhu.
+              title: Přizpůsobit možnosti řazení seznamu návrhů
             edit_label: Přejmenovat štítek
             errors:
               incorrect_css: 'CSS v poli #%{key} je neplatné'
