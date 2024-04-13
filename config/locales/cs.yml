@@ -438,10 +438,13 @@ cs:
           modal:
             cancel: Zrušit
             message: Váš hlas bude považován za konečný v %{date}. Do té doby jej můžete změnit,
+            proceed: Provést
+            skip: Zaškrtněte pro přeskočení tohoto okna v budoucnu
           vote_button: Kliknutím hlasujte
           voted: Odhlasováno
           voting_for: Můj hlas pro "%{proposal}" je "%{type}"
           weights:
+            weight_0: Zdržet se
             weight_0_short: 'A:'
             weight_1: Červená
             weight_1_short: 'R:'
