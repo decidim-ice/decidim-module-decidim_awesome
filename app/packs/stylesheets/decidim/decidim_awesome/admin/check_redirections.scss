@@ -4,6 +4,21 @@
     text-align: left !important;
   }
 
+  th a.check-custom-redirections {
+    color: white;
+  }
+
+  th a.check-custom-redirections.disabled,
+  th a.check-custom-redirections.disabled:hover {
+    color: gray;
+    border: 1px solid gray;
+    background-color: #eee;
+  }
+
+  th a.check-custom-redirections:hover {
+    text-decoration: none;
+  }
+
   td.redirect-status {
     font-family: monospace;
 

@@ -2,14 +2,6 @@ import * as L from "leaflet";
 import Controller from "src/decidim/decidim_awesome/awesome_map/controllers/controller";
 import ProposalsFetcher from "src/decidim/decidim_awesome/awesome_map/api/proposals_fetcher";
 
-const ProposalIcon = L.DivIcon.SVGIcon.DecidimIcon.extend({
-  options: {
-    fillColor: "#ef604d",
-    fillOpacity: 0.8,
-    strokeWidth: 1,
-    strokeOpcacity: 1
-  }
-});
 export default class ProposalsController extends Controller {
   constructor(awesomeMap, component) {
     super(awesomeMap, component)
@@ -36,12 +28,13 @@ export default class ProposalsController extends Controller {
     // for each proposal, create a marker with an associated popup
     this.fetcher.onNode = (proposal) => {
       let marker = new L.Marker([proposal.coordinates.latitude, proposal.coordinates.longitude], {
-        icon: this.createIcon(ProposalIcon, this.awesomeMap.getCategory(proposal.category).color),
+        icon: this.createIcon(this.awesomeMap.getCategory(proposal.category).color),
         title: proposal.title.translation
       });
 
       // Check if it has amendments, add it to a list
       // also assign parent's proposal categories to it
+      // console.log("onNode proposal", proposal, "amendment:", proposal.amendments)
       if (proposal.amendments && proposal.amendments.length) {
         proposal.amendments.forEach((amendment) => {
           this.amendments[amendment.emendation.id] = proposal;
@@ -67,16 +60,16 @@ export default class ProposalsController extends Controller {
       // console.log("marker", marker, "parent proposal", parent)
       // add marker to amendments layers and remove it from proposals
       if (marker) {
-        try { 
-          marker.marker.removeFrom(this.controls.group) 
-        } catch (evt) { 
+        try {
+          marker.marker.removeFrom(this.controls.group)
+        } catch (evt) {
           console.error("error removeFrom marker", marker, "layer", this.controls.group,  evt);
         }
         if (this.awesomeMap.config.menu.amendments) {
           marker.marker.addTo(this.awesomeMap.layers.amendments.group);
           // mimic parent category (amendments doesn't have categories)
           if (parent.category) {
-            marker.marker.setIcon(this.createIcon(ProposalIcon, this.awesomeMap.getCategory(parent.category).color));
+            marker.marker.setIcon(this.createIcon("text-secondary"));
             this.addMarkerCategory(marker.marker, parent.category)
           }
         }

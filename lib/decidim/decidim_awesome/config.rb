@@ -71,7 +71,7 @@ module Decidim
       def setting_for(var)
         @vars.find_or_initialize_by(
           organization: @organization,
-          var: var
+          var:
         )
       end
 

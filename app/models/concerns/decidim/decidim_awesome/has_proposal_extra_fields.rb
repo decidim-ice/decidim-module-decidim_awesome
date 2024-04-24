@@ -41,7 +41,7 @@ module Decidim
         def self.all_vote_weights_for(component)
           Decidim::DecidimAwesome::VoteWeight.where(
             proposal_vote_id: Decidim::Proposals::ProposalVote.where(
-              proposal: Decidim::Proposals::Proposal.where(component: component)
+              proposal: Decidim::Proposals::Proposal.where(component:)
             )
           ).pluck(:weight)
         end

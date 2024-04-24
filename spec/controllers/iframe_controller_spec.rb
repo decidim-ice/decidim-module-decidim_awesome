@@ -5,7 +5,7 @@ require "decidim/decidim_awesome/test/shared_examples/controller_examples"
 
 module Decidim::DecidimAwesome
   module IframeComponent
-    describe IframeController, type: :controller do
+    describe IframeController do
       routes { Decidim::DecidimAwesome::IframeComponent::Engine.routes }
 
       let(:user) { create(:user, :confirmed, organization: component.organization) }

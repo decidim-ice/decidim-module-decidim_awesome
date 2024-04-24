@@ -3,14 +3,14 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/box_label_editor"
 
-describe "Admin manages scoped styles", type: :system do
-  let(:organization) { create :organization }
-  let!(:admin) { create(:user, :admin, :confirmed, organization: organization) }
+describe "Admin manages scoped styles" do
+  let(:organization) { create(:organization) }
+  let!(:admin) { create(:user, :admin, :confirmed, organization:) }
   let(:styles) do
     {}
   end
-  let!(:config) { create :awesome_config, organization: organization, var: :scoped_styles, value: styles }
-  let(:config_helper) { create :awesome_config, organization: organization, var: :scoped_style_bar }
+  let!(:config) { create(:awesome_config, organization:, var: :scoped_styles, value: styles) }
+  let(:config_helper) { create(:awesome_config, organization:, var: :scoped_style_bar) }
   let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes" }) }
 
   before do
@@ -21,14 +21,14 @@ describe "Admin manages scoped styles", type: :system do
 
   context "when creating a new box" do
     it "saves the content in the hash" do
-      click_link "Add a new CSS box"
+      click_link_or_button "Add a new CSS box"
 
       expect(page).to have_admin_callout("created successfully")
 
       sleep 1
       page.execute_script('document.querySelector(".CodeMirror").CodeMirror.setValue("body {background: red;}");')
 
-      find("*[type=submit]").click
+      click_link_or_button "Update configuration"
 
       expect(page).to have_admin_callout("updated successfully")
       expect(page).to have_content("body {background: red;}")
@@ -42,10 +42,10 @@ describe "Admin manages scoped styles", type: :system do
 
       sleep 1
       page.execute_script("document.querySelector(\"[data-key=#{key}] .CodeMirror\").CodeMirror.setValue(\"body {background: green;}\");")
-      find("*[type=submit]").click
+      click_link_or_button "Update configuration"
 
       expect(page).to have_admin_callout("updated successfully")
-      expect(page).not_to have_content("body {background: red;}")
+      expect(page).to have_no_content("body {background: red;}")
       expect(page).to have_content("body {background: green;}")
       expect(page).to have_content("body {background: blue;}")
     end
@@ -53,10 +53,10 @@ describe "Admin manages scoped styles", type: :system do
     it "shows error message if invalid" do
       sleep 1
       page.execute_script("document.querySelector(\"[data-key=#{key}] .CodeMirror\").CodeMirror.setValue(\"I am invalid CSS\");")
-      find("*[type=submit]").click
+      click_link_or_button "Update configuration"
 
       expect(page).to have_admin_callout("Error updating configuration! CSS in box ##{key} is invalid")
-      expect(page).not_to have_content("body {background: red;}")
+      expect(page).to have_no_content("body {background: red;}")
       expect(page).to have_content("body {background: blue;}")
       expect(page).to have_content("I am invalid CSS")
       within ".scoped_styles_container[data-key=\"#{key}\"] .form-error" do
@@ -90,14 +90,14 @@ describe "Admin manages scoped styles", type: :system do
         expect(page).to have_content("body {background: blue;}")
 
         within ".scoped_styles_container[data-key=\"foo\"]" do
-          accept_confirm { click_link "Remove this CSS box" }
+          accept_confirm { click_link_or_button "Remove this CSS box" }
         end
 
         expect(page).to have_admin_callout("removed successfully")
         expect(page).to have_content("body {background: blue;}")
-        expect(page).not_to have_content("body {background: red;}")
-        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :scoped_style_foo)).not_to be_present
-        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :scoped_style_bar)).to be_present
+        expect(page).to have_no_content("body {background: red;}")
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_style_foo)).not_to be_present
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_style_bar)).to be_present
       end
     end
 
@@ -110,23 +110,19 @@ describe "Admin manages scoped styles", type: :system do
       end
 
       it "adds a new config helper var" do
-        within ".scoped_styles_container[data-key=\"foo\"]" do
-          click_link "Add case"
-        end
+        find("#new-scoped_style_foo").click
 
         select "Processes", from: "constraint_participatory_space_manifest"
-        within ".modal-content" do
+        within "#new-modal-scoped_style_foo" do
           find("*[type=submit]").click
         end
-
-        sleep 2
 
         within ".scoped_styles_container[data-key=\"foo\"] .constraints-editor" do
           expect(page).to have_content("Processes")
         end
 
-        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :scoped_style_bar)).to be_present
-        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :scoped_style_bar).constraints.first.settings).to eq("participatory_space_manifest" => "participatory_processes")
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_style_bar)).to be_present
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_style_bar).constraints.first.settings).to eq("participatory_space_manifest" => "participatory_processes")
       end
 
       context "when removing a constraint" do
@@ -143,21 +139,21 @@ describe "Admin manages scoped styles", type: :system do
           end
 
           within ".scoped_styles_container[data-key=\"bar\"]" do
-            click_link "Delete"
+            click_link_or_button "Delete"
           end
 
           within ".scoped_styles_container[data-key=\"bar\"] .constraints-editor" do
-            expect(page).not_to have_content("Processes")
+            expect(page).to have_no_content("Processes")
           end
 
           visit decidim_admin_decidim_awesome.config_path(:styles)
 
           within ".scoped_styles_container[data-key=\"bar\"] .constraints-editor" do
-            expect(page).not_to have_content("Processes")
+            expect(page).to have_no_content("Processes")
           end
 
-          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :scoped_style_bar)).to be_present
-          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :scoped_style_bar).constraints).not_to be_present
+          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_style_bar)).to be_present
+          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_style_bar).constraints).not_to be_present
         end
       end
     end

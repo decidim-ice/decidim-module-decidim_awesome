@@ -10,14 +10,14 @@ module Decidim::DecidimAwesome
       let(:organization) { create(:organization) }
       let(:context) do
         {
-          current_user: create(:user, organization: organization),
+          current_user: create(:user, organization:),
           current_organization: organization
         }
       end
       let(:params) do
         {
-          allow_images_in_full_editor: true,
-          allow_images_in_small_editor: true
+          allow_images_in_editors: true,
+          allow_videos_in_editors: true
         }
       end
       let(:form) do
@@ -25,12 +25,12 @@ module Decidim::DecidimAwesome
       end
       let(:another_config) { UpdateConfig.new(form) }
       let(:scoped_admins) do
-        AwesomeConfig.find_by(organization: organization, var: :scoped_admins)
+        AwesomeConfig.find_by(organization:, var: :scoped_admins)
       end
 
       shared_examples "create default constraints" do
         let(:subconfig) do
-          AwesomeConfig.find_by(organization: organization, var: "scoped_admin_#{key}")
+          AwesomeConfig.find_by(organization:, var: "scoped_admin_#{key}")
         end
 
         it "creates a 'none' constraint by default" do
@@ -53,7 +53,7 @@ module Decidim::DecidimAwesome
         end
 
         context "and entries already exist" do
-          let!(:config) { create :awesome_config, organization: organization, var: :scoped_admins, value: { test: [123, 456] } }
+          let!(:config) { create(:awesome_config, organization:, var: :scoped_admins, value: { test: [123, 456] }) }
 
           shared_examples "has scoped admin boxes content" do
             it "do not removes previous entries" do
@@ -75,23 +75,23 @@ module Decidim::DecidimAwesome
             end
 
             it "modifies the other config" do
-              expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_full_editor).value).to be(true)
-              expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_small_editor).value).to be(true)
+              expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_editors).value).to be(true)
+              expect(AwesomeConfig.find_by(organization:, var: :allow_videos_in_editors).value).to be(true)
             end
 
             it_behaves_like "has scoped admin boxes content"
           end
 
           context "and another configuration is updated" do
-            let!(:existing_config) { create :awesome_config, organization: organization, var: :allow_images_in_full_editor, value: false }
+            let!(:existing_config) { create(:awesome_config, organization:, var: :allow_images_in_editors, value: false) }
 
             before do
               another_config.call
             end
 
             it "modifies the other config" do
-              expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_full_editor).value).to be(true)
-              expect(AwesomeConfig.find_by(organization: organization, var: :allow_images_in_small_editor).value).to be(true)
+              expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_editors).value).to be(true)
+              expect(AwesomeConfig.find_by(organization:, var: :allow_videos_in_editors).value).to be(true)
             end
 
             it_behaves_like "has scoped admin boxes content"

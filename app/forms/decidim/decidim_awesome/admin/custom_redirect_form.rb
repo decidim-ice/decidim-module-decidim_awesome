@@ -18,8 +18,8 @@ module Decidim
             sanitize_url(origin),
             {
               destination: sanitize_url(destination, strip_host: false),
-              active: active,
-              pass_query: pass_query
+              active:,
+              pass_query:
             }
           ]
         end

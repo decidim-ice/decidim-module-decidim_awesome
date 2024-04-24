@@ -5,14 +5,14 @@ require "spec_helper"
 module Decidim::DecidimAwesome
   describe ExportAdminActionsJob do
     subject { described_class }
-    let(:organization) { create :organization }
-    let(:external_organization) { create :organization }
-    let!(:user) { create :user, :admin, :confirmed, organization: organization }
-    let!(:manager) { create(:user, :user_manager, organization: organization, last_sign_in_at: 6.days.ago, created_at: 7.days.ago) }
-    let(:administrator) { create(:user, organization: organization, last_sign_in_at: 6.days.ago, created_at: 7.days.ago) }
-    let(:valuator) { create(:user, name: "Lorry", email: "test@example.org", organization: organization, created_at: 7.days.ago) }
-    let(:collaborator) { create(:user, organization: organization, created_at: 7.days.ago) }
-    let(:moderator) { create(:user, organization: organization, created_at: 7.days.ago) }
+    let(:organization) { create(:organization) }
+    let(:external_organization) { create(:organization) }
+    let!(:user) { create(:user, :admin, :confirmed, organization:) }
+    let!(:manager) { create(:user, :user_manager, organization:, last_sign_in_at: 6.days.ago, created_at: 7.days.ago) }
+    let(:administrator) { create(:user, organization:, last_sign_in_at: 6.days.ago, created_at: 7.days.ago) }
+    let(:valuator) { create(:user, name: "Lorry", email: "test@example.org", organization:, created_at: 7.days.ago) }
+    let(:collaborator) { create(:user, organization:, created_at: 7.days.ago) }
+    let(:moderator) { create(:user, organization:, created_at: 7.days.ago) }
     let!(:participatory_process_user_role1) { create(:participatory_process_user_role, user: administrator, role: "admin", created_at: 4.days.ago) }
     let!(:participatory_process_user_role2) { create(:participatory_process_user_role, user: valuator, role: "valuator", created_at: 3.days.ago) }
     let!(:participatory_process_user_role3) { create(:participatory_process_user_role, user: collaborator, role: "collaborator", created_at: 2.days.ago) }
@@ -35,7 +35,7 @@ module Decidim::DecidimAwesome
     end
 
     shared_examples "an export job" do
-      it "sends an email with the result of the export", versioning: true do
+      it "sends an email with the result of the export", :versioning do
         perform_enqueued_jobs do
           subject.perform_now(user, format, collection_ids)
         end
@@ -58,17 +58,17 @@ module Decidim::DecidimAwesome
       let(:ext) { "xlsx" }
     end
 
-    it "serializes the data", versioning: true do
+    it "serializes the data", :versioning do
       expect(subject.new.send(:serialized_collection, collection_ids).count).to eq(8)
-      expect(subject.new.send(:serialized_collection, collection_ids).pluck(:user_email).uniq).to match_array([administrator.email, valuator.email, collaborator.email, moderator.email])
+      expect(subject.new.send(:serialized_collection, collection_ids).pluck(:user_email).uniq).to contain_exactly(administrator.email, valuator.email, collaborator.email, moderator.email)
     end
 
     context "when external organization" do
       let(:collection_ids) { Decidim::DecidimAwesome::PaperTrailVersion.space_role_actions(external_organization).pluck(:id) }
 
-      it "serializes the data", versioning: true do
+      it "serializes the data", :versioning do
         expect(subject.new.send(:serialized_collection, collection_ids).count).to eq(1)
-        expect(subject.new.send(:serialized_collection, collection_ids).pluck(:user_email).uniq).to match_array([external_administrator.email])
+        expect(subject.new.send(:serialized_collection, collection_ids).pluck(:user_email).uniq).to contain_exactly(external_administrator.email)
       end
     end
 
@@ -101,7 +101,7 @@ module Decidim::DecidimAwesome
         ]
       end
 
-      it "serializes the data", versioning: true do
+      it "serializes the data", :versioning do
         expect(subject.new.send(:serialized_collection, collection_ids)).to eq(result)
       end
     end
@@ -150,7 +150,7 @@ module Decidim::DecidimAwesome
           ]
         end
 
-        it "serializes the data", versioning: true do
+        it "serializes the data", :versioning do
           expect(subject.new.send(:serialized_collection, collection_ids)).to eq(result)
         end
       end

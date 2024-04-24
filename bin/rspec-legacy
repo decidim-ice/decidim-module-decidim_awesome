@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-RBENV_VERSION=2.7.7 BUNDLE_GEMFILE=Gemfile.legacy bin/rspec $@

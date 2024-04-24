@@ -5,15 +5,15 @@ require "decidim/decidim_awesome/test/shared_examples/action_log_presenter_examp
 
 module Decidim::DecidimAwesome
   describe UserEntityPresenter, type: :helper do
-    let!(:user) { create :user, :admin, organization: organization, last_sign_in_at: last_sign_in_at }
+    let!(:user) { create(:user, :admin, organization:, last_sign_in_at:) }
     let(:entry) { Decidim::DecidimAwesome::PaperTrailVersion.admin_role_actions.first }
     let(:last_sign_in_at) { nil }
-    let(:organization) { create :organization }
+    let(:organization) { create(:organization) }
     let(:destroyed_at) { 2.days.ago }
 
     let(:html) { true }
 
-    subject { described_class.new(entry, html: html) }
+    subject { described_class.new(entry, html:) }
 
     shared_context "with role destroyed" do
       before do
@@ -46,7 +46,7 @@ module Decidim::DecidimAwesome
       it_behaves_like "a user presenter"
 
       context "when the role is a participant manager" do
-        let!(:user) { create :user, :user_manager, organization: organization, last_sign_in_at: last_sign_in_at }
+        let!(:user) { create(:user, :user_manager, organization:, last_sign_in_at:) }
         let(:entry) { Decidim::DecidimAwesome::PaperTrailVersion.admin_role_actions.first }
 
         describe "#roles" do

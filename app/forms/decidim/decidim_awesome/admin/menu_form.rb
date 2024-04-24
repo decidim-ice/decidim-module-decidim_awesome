@@ -27,10 +27,10 @@ module Decidim
         def to_params
           {
             label: raw_label,
-            position: position,
-            url: url,
-            target: target,
-            visibility: visibility
+            position:,
+            url:,
+            target:,
+            visibility:
           }
         end
       end

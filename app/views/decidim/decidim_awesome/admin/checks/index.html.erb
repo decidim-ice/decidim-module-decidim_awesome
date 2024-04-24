@@ -1,8 +1,15 @@
+<!--
+  Force tailwind to compile these classes
+  class="fill-success fill-alert"
+-->
+
+<div class="item_show__header">
+  <h2 class="item_show__header-title">
+    <%= t(".title") %>
+  </h2>
+</div>
 <div class="card">
-  <div class="card-divider">
-    <h2 class="card-title"><%= t ".title" %></h2>
-  </div>
-  <div class="card-section">
+  <div class="card-section decidim-version">
     <p>
       <span class="label <%= decidim_version_valid? ? "success" : "alert" %>"><%= t ".decidim_version", version: decidim_version %></span>
       <%= check decidim_version_valid? %>

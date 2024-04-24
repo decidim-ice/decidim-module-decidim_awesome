@@ -2,19 +2,19 @@
 
 require "spec_helper"
 module Decidim::DecidimAwesome
-  describe PaperTrailVersion, type: :model do
+  describe PaperTrailVersion do
     subject { paper_trail_version }
 
     let(:organization) { create(:organization) }
-    let(:user) { create(:user, organization: organization) }
+    let(:user) { create(:user, organization:) }
 
     let(:external_organization) { create(:organization) }
     let(:external_user) { create(:user, organization: external_organization) }
 
     context "when user roles" do
-      let(:participatory_process_user_role) { create(:participatory_process_user_role, participatory_process: participatory_process, user: administrator, role: "admin", created_at: 1.day.ago) }
-      let(:administrator) { create(:user, organization: organization, last_sign_in_at: 1.day.ago) }
-      let(:participatory_process) { create(:participatory_process, organization: organization) }
+      let(:participatory_process_user_role) { create(:participatory_process_user_role, participatory_process:, user: administrator, role: "admin", created_at: 1.day.ago) }
+      let(:administrator) { create(:user, organization:, last_sign_in_at: 1.day.ago) }
+      let(:participatory_process) { create(:participatory_process, organization:) }
       let!(:paper_trail_version) { create(:paper_trail_version, item_type: "Decidim::ParticipatoryProcessUserRole", item_id: participatory_process_user_role.id, whodunnit: user.id, event: "create") }
 
       let(:external_participatory_process_user_role) { create(:participatory_process_user_role, participatory_process: external_participatory_process, user: external_valuator, role: "valuator", created_at: 1.day.ago) }
@@ -85,7 +85,7 @@ module Decidim::DecidimAwesome
 
       it "returns default_scope ordered by created_at" do
         expect(PaperTrailVersion.all).to eq([external_paper_trail_version, paper_trail_version])
-        expect(PaperTrailVersion.admin_role_actions).to match_array([external_paper_trail_version, paper_trail_version])
+        expect(PaperTrailVersion.admin_role_actions).to contain_exactly(external_paper_trail_version, paper_trail_version)
       end
 
       it "present method returns a UserEntityPresenter object" do

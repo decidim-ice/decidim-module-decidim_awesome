@@ -7,13 +7,13 @@ module Decidim::DecidimAwesome
     describe CustomRedirectForm do
       subject { described_class.from_params(attributes).with_context(current_organization: organization) }
 
-      let(:organization) { create :organization }
+      let(:organization) { create(:organization) }
       let(:attributes) do
         {
-          origin: origin,
-          destination: destination,
-          active: active,
-          pass_query: pass_query
+          origin:,
+          destination:,
+          active:,
+          pass_query:
         }
       end
 
@@ -26,31 +26,31 @@ module Decidim::DecidimAwesome
         it { is_expected.to be_valid }
 
         it "returns normalized values" do
-          expect(subject.to_params).to eq([origin, { destination: destination, active: active, pass_query: pass_query }])
+          expect(subject.to_params).to eq([origin, { destination:, active:, pass_query: }])
         end
       end
 
       context "when origin is empty" do
         let(:origin) { "" }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
 
         context "and is only spaces" do
           let(:origin) { "  " }
 
-          it { is_expected.to be_invalid }
+          it { is_expected.not_to be_valid }
         end
       end
 
       context "when destination empty" do
         let(:destination) { "" }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
 
         context "and is only spaces" do
           let(:destination) { "  " }
 
-          it { is_expected.to be_invalid }
+          it { is_expected.not_to be_valid }
         end
       end
 
@@ -93,7 +93,7 @@ module Decidim::DecidimAwesome
       context "when origin and destination are the same" do
         let(:destination) { "http://#{organization.host}#{origin} " }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
       end
 
       context "when origin and destination are case sensitive" do

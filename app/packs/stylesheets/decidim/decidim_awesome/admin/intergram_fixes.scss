@@ -1,0 +1,11 @@
+#intergramRoot {
+  bottom: 3.5rem;
+  right: -0.5rem;
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+
+  > div {
+    position: absolute !important;
+  }
+}

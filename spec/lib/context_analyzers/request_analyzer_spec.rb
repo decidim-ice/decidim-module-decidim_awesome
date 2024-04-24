@@ -7,7 +7,7 @@ module Decidim::DecidimAwesome
     describe RequestAnalyzer do
       subject { described_class.context_for request }
 
-      let(:request) { double(url: url) }
+      let(:request) { double(url:) }
       let(:url) { "" }
       let(:context) { {} }
 
@@ -82,7 +82,7 @@ module Decidim::DecidimAwesome
       end
 
       context "when component is found" do
-        let!(:participatory_process) { create :participatory_process }
+        let!(:participatory_process) { create(:participatory_process) }
         let!(:component) { create(:dummy_component, participatory_space: participatory_process) }
         let(:context) do
           {

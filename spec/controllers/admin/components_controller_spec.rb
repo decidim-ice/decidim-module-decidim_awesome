@@ -4,16 +4,16 @@ require "spec_helper"
 
 module Decidim::Assemblies
   module Admin
-    describe ComponentsController, type: :controller do
+    describe ComponentsController do
       routes { Decidim::Assemblies::AdminEngine.routes }
 
       let(:organization) { create(:organization) }
-      let(:current_user) { create(:user, :confirmed, :admin, organization: organization) }
+      let(:current_user) { create(:user, :confirmed, :admin, organization:) }
       let!(:assembly) do
         create(
           :assembly,
           :published,
-          organization: organization
+          organization:
         )
       end
       let(:component) do
@@ -48,8 +48,8 @@ module Decidim::Assemblies
         end
 
         context "when votes exist" do
-          let!(:vote) { create :proposal_vote, proposal: proposal }
-          let(:proposal) { create :proposal, component: component }
+          let!(:vote) { create(:proposal_vote, proposal:) }
+          let(:proposal) { create(:proposal, component:) }
 
           it "does not change the voting manifest" do
             patch :update, params: { assembly_slug: assembly.slug, id: component.id, component: component_params }

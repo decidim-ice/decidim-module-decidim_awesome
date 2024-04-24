@@ -1,6 +1,5 @@
-<%= admin_editor_for_proposal_body(form) %>
-<% unless awesome_proposal_custom_fields.blank? %>
-  <div class="proposal_custom_field">
-    <div class="loading-spinner"></div>
-  </div>
+<% if Decidim::DecidimAwesome.enabled?(:proposal_custom_fields) %>
+  <%= admin_editor_for_proposal_body(form) %>
+<% else %>
+  <%= form.translated :editor, :body, hashtaggable: true, aria: { label: :body } %>
 <% end %>

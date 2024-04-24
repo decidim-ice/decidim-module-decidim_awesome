@@ -6,6 +6,7 @@ if ENV["SIMPLECOV"]
     add_filter "/config/"
     add_filter "/db/"
     add_filter "lib/decidim/decidim_awesome/version.rb"
+    add_filter "lib/decidim/decidim_awesome/test"
     add_filter "/spec"
   end
 

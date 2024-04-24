@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Style/OpenStructUse
 module Decidim
   module DecidimAwesome
     # A middleware that stores the current awesome context by parsing the request
@@ -101,7 +100,7 @@ module Decidim
       end
 
       def safe_get_route?
-        return unless @request.get?
+        return false unless @request.get?
 
         case @request.path
         when "/"
@@ -116,7 +115,7 @@ module Decidim
       end
 
       def safe_post_route?
-        return unless @request.post? || @request.put? || @request.patch?
+        return false unless @request.post? || @request.put? || @request.patch?
 
         case @request.path
         when %r{^/admin/admin_terms}
@@ -171,7 +170,7 @@ module Decidim
           next unless model
 
           settings["participatory_space_slug"] = model.find_by(slug: settings["participatory_space_slug"])&.id
-          OpenStruct.new(settings: settings) if settings["participatory_space_slug"]
+          OpenStruct.new(settings:) if settings["participatory_space_slug"]
         end
       end
       # rubocop:enable Metrics/CyclomaticComplexity
@@ -183,4 +182,3 @@ module Decidim
     end
   end
 end
-# rubocop:enable Style/OpenStructUse

@@ -4,10 +4,10 @@ require "spec_helper"
 
 module Decidim::DecidimAwesome
   module Admin
-    describe ChecksController, type: :controller do
+    describe ChecksController do
       routes { Decidim::DecidimAwesome::AdminEngine.routes }
 
-      let(:user) { create(:user, :confirmed, :admin, organization: organization) }
+      let(:user) { create(:user, :confirmed, :admin, organization:) }
       let(:organization) { create(:organization) }
 
       before do
@@ -63,7 +63,7 @@ module Decidim::DecidimAwesome
           end
 
           context "and is higher than supported" do
-            let(:version) { "0.28" }
+            let(:version) { "0.29" }
 
             it_behaves_like "invalid decidim version"
           end

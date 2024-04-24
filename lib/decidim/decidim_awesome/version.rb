@@ -3,7 +3,7 @@
 module Decidim
   # This holds the decidim-decidim_awesome version.
   module DecidimAwesome
-    VERSION = "0.10.2"
-    COMPAT_DECIDIM_VERSION = [">= 0.26.0", "< 0.28"].freeze
+    VERSION = "0.11.0"
+    COMPAT_DECIDIM_VERSION = [">= 0.28.0", "< 0.29"].freeze
   end
 end

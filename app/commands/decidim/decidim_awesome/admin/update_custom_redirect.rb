@@ -38,8 +38,8 @@ module Decidim
         delegate :to_params, to: :form
 
         def url_exists?
-          return unless redirects
-          return unless redirects.value.is_a? Hash
+          return false unless redirects
+          return false unless redirects.value.is_a? Hash
 
           redirects.value[item.origin].present?
         end

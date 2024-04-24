@@ -28,7 +28,7 @@ namespace :decidim_awesome do
         cw_attribute: "image",
         cw_uploader: Decidim::Cw::DecidimAwesome::ImageUploader,
         as_attribute: "file",
-        logger: logger
+        logger:
       )
     end
   end

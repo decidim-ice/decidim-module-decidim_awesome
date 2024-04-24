@@ -10,16 +10,16 @@ module Decidim::DecidimAwesome
       let(:organization) { create(:organization) }
       let(:context) do
         {
-          current_user: create(:user, organization: organization),
+          current_user: create(:user, organization:),
           current_organization: organization,
           setting: config
         }
       end
-      let(:config) { create :awesome_config, organization: organization, var: attribute, value: value }
-      let!(:another_config) { create :awesome_config, var: attribute, value: value }
+      let(:config) { create(:awesome_config, organization:, var: attribute, value:) }
+      let!(:another_config) { create(:awesome_config, var: attribute, value:) }
       let!(:constraint) { create(:config_constraint, awesome_config: config, settings: { "test" => 1 }) }
-      let!(:scoped_config) { create :awesome_config, organization: organization, var: scope }
-      let!(:another_scoped_config) { create :awesome_config, var: scope }
+      let!(:scoped_config) { create(:awesome_config, organization:, var: scope) }
+      let!(:another_scoped_config) { create(:awesome_config, var: scope) }
       let(:value) do
         {
           key => "something"
@@ -32,10 +32,10 @@ module Decidim::DecidimAwesome
       end
       let(:params) do
         {
-          text: text,
-          key: key,
-          attribute: attribute,
-          scope: scope
+          text:,
+          key:,
+          attribute:,
+          scope:
         }
       end
       let(:text) { "bar" }
@@ -47,9 +47,9 @@ module Decidim::DecidimAwesome
       it "broadcasts :ok and modifies the config options" do
         expect { subject.call }.to broadcast(:ok)
 
-        expect(AwesomeConfig.find_by(organization: organization, var: attribute).value).to eq(after_value)
-        expect(AwesomeConfig.find_by(organization: organization, var: after_scope).id).to eq(scoped_config.id)
-        expect(AwesomeConfig.find_by(organization: organization, var: scope)).to be_nil
+        expect(AwesomeConfig.find_by(organization:, var: attribute).value).to eq(after_value)
+        expect(AwesomeConfig.find_by(organization:, var: after_scope).id).to eq(scoped_config.id)
+        expect(AwesomeConfig.find_by(organization:, var: scope)).to be_nil
         expect(AwesomeConfig.find(another_config.id).value).to eq(value)
         expect(AwesomeConfig.find(another_scoped_config.id).var).to eq(scope)
       end
@@ -60,9 +60,9 @@ module Decidim::DecidimAwesome
         it "broadcasts :invalid and does not modifiy the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
-          expect(AwesomeConfig.find_by(organization: organization, var: attribute).value).to eq(value)
-          expect(AwesomeConfig.find_by(organization: organization, var: scope).id).to eq(scoped_config.id)
-          expect(AwesomeConfig.find_by(organization: organization, var: after_scope)).to be_nil
+          expect(AwesomeConfig.find_by(organization:, var: attribute).value).to eq(value)
+          expect(AwesomeConfig.find_by(organization:, var: scope).id).to eq(scoped_config.id)
+          expect(AwesomeConfig.find_by(organization:, var: after_scope)).to be_nil
         end
       end
 
@@ -72,8 +72,8 @@ module Decidim::DecidimAwesome
         it "broadcasts :invalid and does not modifiy the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
-          expect(AwesomeConfig.find_by(organization: organization, var: attribute).value).to eq(value)
-          expect(AwesomeConfig.find_by(organization: organization, var: scope).id).to eq(scoped_config.id)
+          expect(AwesomeConfig.find_by(organization:, var: attribute).value).to eq(value)
+          expect(AwesomeConfig.find_by(organization:, var: scope).id).to eq(scoped_config.id)
         end
       end
 

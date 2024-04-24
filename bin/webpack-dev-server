@@ -1,6 +1,0 @@
-#!/usr/bin/env ruby
-# frozen_string_literal: true
-
-Dir.chdir("development_app")
-
-load "bin/webpack-dev-server"

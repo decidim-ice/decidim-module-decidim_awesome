@@ -11,7 +11,7 @@ module Decidim
           subconfig = AwesomeConfig.find_or_initialize_by(var: "#{var}_#{@ident}", organization: @organization)
           @constraint = ConfigConstraint.create!(
             awesome_config: subconfig,
-            settings: settings
+            settings:
           )
         end
 

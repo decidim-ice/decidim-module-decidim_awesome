@@ -1,7 +1,16 @@
-<%= render partial: "decidim/shared/component_announcement" %>
+<main class="participatory-space__container">
+  <% announcement = translated_attribute(current_settings.announcement).presence || translated_attribute(component_settings.announcement).presence %>
+  <% if strip_tags(announcement).present? %>
+    <section>
+      <%= cell("decidim/announcement", announcement, local_assigns.merge(callout_class: "editor-content")) %>
+    </section>
+  <% end %>
 
-<%= render partial: "api_ready" %>
+  <%= render partial: "api_ready" %>
 
-<%= awesome_map_for map_components do %>
-  <%= render partial: "map_template", locals: { categories: current_participatory_space.categories, map_height: current_component.settings.map_height } %>
-<% end %>
+  <section id="map-block" class="awesome-iframe layout-main__section">
+    <%= awesome_map_for map_components do %>
+      <%= render partial: "map_template", locals: { categories: current_participatory_space.categories, map_height: current_component.settings.map_height } %>
+    <% end %>
+  </section>
+</main>
