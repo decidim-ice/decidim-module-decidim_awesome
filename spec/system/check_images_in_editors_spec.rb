@@ -2,21 +2,21 @@
 
 require "spec_helper"
 
-describe "Check images in editors" do
+describe "Check images in editors", type: :system do
   include_context "with a component"
   let(:manifest_name) { "proposals" }
   let!(:component) do
     create(:proposal_component,
            :with_creation_enabled,
-           manifest:,
+           manifest: manifest,
            participatory_space: participatory_process)
   end
-  let!(:user) { create(:user, :confirmed, organization:) }
+  let!(:user) { create(:user, :confirmed, organization: organization) }
   let(:images_editor) { false }
   let(:rte_enabled) { false }
-  let!(:allow_images_in_editors) { create(:awesome_config, organization:, var: :allow_images_in_editors, value: images_editor) }
-  let!(:official_proposal) { create(:proposal, :official, body: { en: body_with_image }, component:) }
-  let!(:normal_proposal) { create(:proposal, body: { en: body_with_image }, component:) }
+  let!(:allow_images_in_editors) { create(:awesome_config, organization: organization, var: :allow_images_in_editors, value: images_editor) }
+  let!(:official_proposal) { create(:proposal, :official, body: { en: body_with_image }, component: component) }
+  let!(:normal_proposal) { create(:proposal, body: { en: body_with_image }, component: component) }
 
   before do
     organization.update(rich_text_editor_in_public_views: rte_enabled)
@@ -73,8 +73,8 @@ describe "Check images in editors" do
   end
 
   context "when custom fields proposals" do
-    let!(:config) { create(:awesome_config, organization:, var: :proposal_custom_fields, value: custom_fields) }
-    let(:config_helper) { create(:awesome_config, organization:, var: :proposal_custom_field_foo) }
+    let!(:config) { create(:awesome_config, organization: organization, var: :proposal_custom_fields, value: custom_fields) }
+    let(:config_helper) { create(:awesome_config, organization: organization, var: :proposal_custom_field_foo) }
     let(:body_with_image) { '<xml><dl><dt>Title</dt><dd id="text"><div>I am a proposal with an image</div></dd><dt>Image</dt><dd id="textarea"><div><img src="https://www.example.com/someimage.jpeg"></div></dd></dl></xml>' }
     let(:custom_fields) do
       {
