@@ -1,8 +1,9 @@
+---
 es:
   activemodel:
     attributes:
       config:
-        additional_proposal_sortings: Opciones adicionales de ordenación habilitadas
+        additional_proposal_sortings: Habilitar opciones de ordenación adicionales
         allow_images_in_full_editor: Permitir imágenes en el editor HTML completo
         allow_images_in_markdown_editor: Permitir imágenes en el editor Markdown
         allow_images_in_proposals: Permitir imágenes en el editor de propuestas
@@ -119,6 +120,7 @@ es:
               supported_first: Mis soportes primero
               supported_last: Mis soportes últimos
               za: Z-A (Alfabético inverso)
+            limit_pending_amendments: Permitir sólo una enmienda pendiente sobre cada propuesta.
             sort_orders_enabled: Tipos de ordenación habilitados
             voting_cards_box_title: Título de la cabina de votación
             voting_cards_box_title_help: Por defecto es "Votar en esta propuesta". Use "-" para ocultarla.
@@ -375,6 +377,14 @@ es:
             error: 'Error al actualizar el ítem de menú: %{error}'
             success: Ítem de menú actualizado correctamente
           url_exists: Esta URL ya ha sido configurada en otro ítem de menú, por favor edítalo en lugar de crear uno nuevo.
+      amendments:
+        modal:
+          current_amendment_html: <p>Puedes <a href="%{amendment_link}">acceder a la enmienda actual aquí</a>.</p>
+          dismiss: De acuerdo
+          explanation_html: |
+            <p>Actualmente, hay otra enmienda que se está evaluando para esta propuesta. Para crear una nueva, debes esperar hasta que la actual sea aceptada o rechazada.</p>
+            <p>También puedes contactar con el autor de esta propuesta en <a href="%{proposal_link}">dejando un comentario</a> e intentar acelerar la resolución de la enmienda actual.</p>
+        pending_limit_reached: Lo sentimos, solo puede haber una enmienda pendiente a la vez. Por favor, espere hasta que se acepte o rechace "%{emendation}".
       config:
         intergram:
           auto_no_response: Parece que no hay nadie disponible para responder en este momento. Por favor, indícanos cómo te podemos contactar y nos comunicaremos contigo lo antes posible.
