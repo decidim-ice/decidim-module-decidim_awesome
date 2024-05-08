@@ -37,6 +37,8 @@ module Decidim
         end
         resources :admin_authorizations, only: [:edit, :update, :destroy]
         post :migrate_images, to: "checks#migrate_images"
+        resources :users_autoblocks, except: [:show] do
+        end
         root to: "config#show"
       end
 

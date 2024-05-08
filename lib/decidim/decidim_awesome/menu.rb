@@ -83,10 +83,17 @@ module Decidim
                           icon_name: "fingerprint-line",
                           if: menus[:verifications]
 
+            menu.add_item :users_autoblocks,
+                          I18n.t("menu.users_autoblocks", scope: "decidim.decidim_awesome.admin"),
+                          decidim_admin_decidim_awesome.users_autoblocks_path,
+                          position: 11,
+                          icon_name: "user-unfollow-line",
+                          if: menus[:users_autoblocks]
+
             menu.add_item :maintenance,
                           I18n.t("maintenance", scope: "decidim.decidim_awesome.admin.menu.maintenance"),
                           decidim_admin_decidim_awesome.private_data_path,
-                          position: 11,
+                          position: 12,
                           icon_name: "tools-line",
                           active: is_active_link?(decidim_admin_decidim_awesome.private_data_path) ||
                                   is_active_link?(decidim_admin_decidim_awesome.hashcashes_path) ||
