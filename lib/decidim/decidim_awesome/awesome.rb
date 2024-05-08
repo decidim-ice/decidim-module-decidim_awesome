@@ -66,6 +66,10 @@ module Decidim
       true
     end
 
+    config_accessor :users_autoblocks do
+      true
+    end
+
     # Configuration options to handle different validations in proposals
     # (maybe in the future will apply to other places)
     # Set it to :disabled if you don't want to use this feature

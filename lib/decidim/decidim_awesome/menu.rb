@@ -40,6 +40,8 @@ module Decidim
             [:custom_redirects_path, []]
           when :maintenance
             [:checks_path, []]
+          when :users_autoblocks
+            [:users_autoblocks_path, []]
           else
             [:config_path, [config_var]]
           end
@@ -67,8 +69,9 @@ module Decidim
           register_simple_entry(:awesome_admin_menu, :custom_redirects, 8, "external-link-line")
           register_simple_entry(:awesome_admin_menu, :livechat, 9, "chat-1-line")
           register_simple_entry(:awesome_admin_menu, :verifications, 10, "fingerprint-line")
+          register_simple_entry(:awesome_admin_menu, :users_autoblocks, 11, "user-unfollow-line")
 
-          register_simple_entry(:awesome_admin_menu, :maintenance, 11, "tools-line",
+          register_simple_entry(:awesome_admin_menu, :maintenance, 12, "tools-line",
                                 i18n_key: "menu.maintenance.maintenance",
                                 submenu: { target_menu: :maintenance_submenu },
                                 active: [[:private_data_path], [:hashcashes_path], [:checks_path]])
@@ -193,6 +196,7 @@ module Decidim
             custom_redirects: config_enabled?(:custom_redirects),
             livechat: config_enabled?(:intergram_for_admins, :intergram_for_public),
             verifications: config_enabled?(:force_authorizations),
+            users_autoblocks: config_enabled?(:users_autoblocks),
             maintenance: true
           }
         end
