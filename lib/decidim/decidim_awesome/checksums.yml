@@ -1,6 +1,7 @@
 decidim-admin:
   /app/views/layouts/decidim/admin/_header.html.erb:
     decidim-0.25: 1aff077428830b12306d6c42e6b37216
+    decidim-0.27.5: ee303c717d9fc8ea77f644b29981b3f4
 decidim-core:
   /app/validators/etiquette_validator.rb:
     decidim-0.25: f7a4a652005385a994208f1ab41c4f08
@@ -25,6 +26,7 @@ decidim-core:
 decidim-proposals:
   /lib/decidim/proposals/proposal_serializer.rb:
     decidim-0.26: 2d817775f79a19cfcf9cfae8e5b68c5a
+    decidim-0.27.6: 3c2bc99fb00985714c8b55594fa0082e
   /lib/decidim/api/proposal_type.rb:
     decidim-0.26: e38e4875e408ec4f658e28725c5a94d4
   /app/forms/decidim/proposals/proposal_wizard_create_step_form.rb:
@@ -51,6 +53,7 @@ decidim-proposals:
   /app/views/decidim/proposals/admin/proposals/_form.html.erb:
     decidim-0.25: 90a04984d4269398b7cd21aa33763a1f
     decidim-0.27: f60168e432e1d419e5aec5d3d1e53f0e
+    decidim-0.27.6: 05d4ceb99f81a7ad71f2936614d89d23
   /app/views/decidim/proposals/proposals/_vote_button.html.erb:
     decidim-0.27: f7202c37fe042cd816a6f9fd0f9e6807
   /app/views/decidim/proposals/proposals/_votes_count.html.erb:

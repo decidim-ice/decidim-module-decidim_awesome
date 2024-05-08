@@ -8,11 +8,17 @@ module Decidim
 
         included do
           alias_method :decidim_text_editor_for_proposal_body, :text_editor_for_proposal_body
-          alias_method :decidim_safe_content?, :safe_content?
+          alias_method :decidim_render_proposal_body, :render_proposal_body
 
-          # replace safe content to consider all custom fields save (then embeded html will be rendered)
-          def safe_content?
-            awesome_proposal_custom_fields.present? || decidim_safe_content?
+          # If the content is safe, HTML tags are sanitized, otherwise, they are stripped.
+          def render_proposal_body(proposal)
+            if awesome_proposal_custom_fields.present? || awesome_config[:allow_images_in_full_editor] || awesome_config[:allow_images_in_small_editor]
+              content = present(proposal).body(links: true, strip_tags: false)
+              sanitized = decidim_sanitize_editor_admin(content, {})
+              Decidim::ContentProcessor.render_without_format(sanitized).html_safe
+            else
+              decidim_render_proposal_body(proposal)
+            end
           end
 
           # replace normal method to draw the editor
