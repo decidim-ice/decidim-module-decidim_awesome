@@ -11,75 +11,77 @@ describe "Check images in editors" do
            manifest:,
            participatory_space: participatory_process)
   end
-  let(:content) { generate_localized_title }
   let!(:user) { create(:user, :confirmed, organization:) }
-  let(:images_in_proposals) { false }
   let(:images_editor) { false }
-  let(:rte_enabled) { true }
-  let!(:allow_images_in_proposals) { create(:awesome_config, organization:, var: :allow_images_in_proposals, value: images_in_proposals) }
+  let(:rte_enabled) { false }
   let!(:allow_images_in_editors) { create(:awesome_config, organization:, var: :allow_images_in_editors, value: images_editor) }
+  let!(:official_proposal) { create(:proposal, :official, body: { en: body_with_image }, component:) }
+  let!(:normal_proposal) { create(:proposal, body: { en: body_with_image }, component:) }
 
   before do
     organization.update(rich_text_editor_in_public_views: rte_enabled)
     login_as user, scope: :user
+    visit_component
   end
 
-  context "when rich text editor is enabled and images are allowed" do
-    before do
-      allow_images_in_editors.update(value: true)
-      allow_images_in_proposals.update(value: true)
+  shared_examples "official images only" do
+    it "displays image for official proposal" do
+      click_link_or_button translated(official_proposal.title)
+      expect(page).to have_css("img[src*='https://www.example.com/someimage.jpeg']")
     end
 
-    let!(:official_proposal) { create(:proposal, :with_photo, :official, body: content, component:) }
-    let!(:normal_proposal) { create(:proposal, :with_photo, body: content, component:) }
+    it "displays no image for normal proposal" do
+      click_link_or_button translated(normal_proposal.title)
+      expect(page).to have_no_css("img[src*='https://www.example.com/someimage.jpeg']")
+    end
+  end
 
+  shared_examples "official and normal images" do
     it "displays image for official proposal" do
-      visit_component
       click_link_or_button translated(official_proposal.title)
-      expect(page).to have_css("img[src*='city.jpeg']")
+      expect(page).to have_css("img[src*='https://www.example.com/someimage.jpeg']")
     end
 
     it "displays image for normal proposal" do
-      visit_component
       click_link_or_button translated(normal_proposal.title)
-      expect(page).to have_css("img[src*='city.jpeg']")
+      expect(page).to have_css("img[src*='https://www.example.com/someimage.jpeg']")
     end
   end
 
-  context "when rich text editor is disabled and images are allowed only in official proposals" do
-    before do
-      allow_images_in_editors.update(value: false)
-      allow_images_in_proposals.update(value: true)
+  context "when normal proposals" do
+    let(:body_with_image) { '<p>I am a proposal with an image <img src="https://www.example.com/someimage.jpeg"></p>' }
+
+    it_behaves_like "official images only"
+
+    context "and images are allowed" do
+      let(:images_editor) { true }
+
+      it_behaves_like "official and normal images"
     end
 
-    let!(:official_proposal) { create(:proposal, :with_photo, :official, body: content, component:) }
+    context "when RTE enabled" do
+      let(:rte_enabled) { true }
 
-    it "displays image for official proposal despite editor being disabled" do
-      visit_component
-      click_link_or_button translated(official_proposal.title)
-      expect(page).to have_css("img[src*='city.jpeg']")
+      it_behaves_like "official images only"
+
+      context "and images are allowed" do
+        let(:images_editor) { true }
+
+        it_behaves_like "official and normal images"
+      end
     end
   end
 
-  context "when images in proposals are not allowed, despite rich text editor settings" do
-    before do
-      allow_images_in_editors.update(value: true)
-      allow_images_in_proposals.update(value: false)
+  context "when custom fields proposals" do
+    let!(:config) { create(:awesome_config, organization:, var: :proposal_custom_fields, value: custom_fields) }
+    let(:config_helper) { create(:awesome_config, organization:, var: :proposal_custom_field_foo) }
+    let(:body_with_image) { '<xml><dl><dt>Title</dt><dd id="text"><div>I am a proposal with an image</div></dd><dt>Image</dt><dd id="textarea"><div><img src="https://www.example.com/someimage.jpeg"></div></dd></dl></xml>' }
+    let(:custom_fields) do
+      {
+        "foo" => '[{"type":"text","label":"Title","subtype":"text","className":"form-control","name":"text"},{"type":"textarea","label":"Image","subtype":"richtext","className":"form-control","name":"textarea"}]'
+      }
     end
 
-    let!(:normal_proposal) { create(:proposal, :with_photo, body: content, component:) }
-    let!(:official_proposal) { create(:proposal, :with_photo, :official, body: content, component:) }
-
-    it "does not display image for normal proposal" do
-      visit_component
-      click_link_or_button translated(normal_proposal.title)
-      expect(page).to have_css("img[src*='city.jpeg']")
-    end
-
-    it "displays image for official proposal" do
-      visit_component
-      click_link_or_button translated(official_proposal.title)
-      expect(page).to have_css("img[src*='city.jpeg']")
-    end
+    it_behaves_like "official and normal images"
   end
 end
