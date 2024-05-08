@@ -1,0 +1,20 @@
+<div class="border-none item_show__header" style="margin-bottom: 0;">
+  <h2 class="item_show__header-title p-4 bg-gray-6 rounded-t">
+    <%= t(".title") %>
+  </h2>
+</div>
+<div class="item__edit item__edit-1col">
+  <div class="item__edit-form">
+    <%= decidim_form_for(@form, method: :patch, url: users_autoblock_path, html: { class: "form-defaults awesome-edit-config" }) do |f| %>
+      <div class="card pt-4">
+        <div class="card-section">
+          <%= render partial: "form", locals: { form: f } %>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-center mt-12 w-full text-white form-general-submit">
+        <%= f.submit t(".update"), class: "button button__lg button__secondary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
