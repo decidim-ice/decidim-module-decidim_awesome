@@ -14,7 +14,8 @@ describe "Check images in editors", type: :system do
   let!(:user) { create(:user, :confirmed, organization: organization) }
   let(:images_editor) { false }
   let(:rte_enabled) { false }
-  let!(:allow_images_in_editors) { create(:awesome_config, organization: organization, var: :allow_images_in_editors, value: images_editor) }
+  let!(:allow_images_in_full_editor) { create(:awesome_config, organization: organization, var: :allow_images_in_full_editor, value: images_editor) }
+  let!(:allow_images_in_small_editor) { create(:awesome_config, organization: organization, var: :allow_images_in_small_editor, value: images_editor) }
   let!(:official_proposal) { create(:proposal, :official, body: { en: body_with_image }, component: component) }
   let!(:normal_proposal) { create(:proposal, body: { en: body_with_image }, component: component) }
 
