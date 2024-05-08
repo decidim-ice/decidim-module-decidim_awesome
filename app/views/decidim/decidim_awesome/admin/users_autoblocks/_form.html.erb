@@ -1,0 +1,7 @@
+<div class="form__wrapper gap-0">
+  <%= form.select :type, types_options, {}, class: "mb-8", include_blank: true %>
+  <%= form.number_field :weight, class: "mb-6" %>
+  <%= form.text_field :variable, class: "mb-6", help_text: t(".variables_help.about_blank") %>
+  <%= form.check_box :blocklist, class: "mb-6" %>
+  <%= form.check_box :enabled, class: "mb-6" %>
+</div>

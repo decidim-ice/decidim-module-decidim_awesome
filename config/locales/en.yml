@@ -666,6 +666,62 @@ en:
         scoped_styles:
           menu:
             title: Public frontend
+        users_autoblocks:
+          config_form:
+            block_justification_message_help: Justification that will receive the
+              detected users in their block notification
+            threshold_config_help: Define the numerical threshold (equal or greater
+              than) of the "spam risk index score" for automatic blocking of users
+          create:
+            error: Error removing rule! %{error}
+            success: Rule removed successfully
+          destroy:
+            error: Error creating rule! %{error}
+            success: Rule created successfully
+          detect_and_run:
+            error: There has been an error trying to block users! %{error}
+            success: Users blocked successfully
+          edit:
+            title: Edit users automatic block
+            update: Update
+          form:
+            types:
+              about_blank: About user section is blank
+              email_domain: Email domain included in list
+              email_unconfirmed: User email is not confirmed
+              links_in_comments_or_about: Comments or about section contains links
+            variables_help:
+              about_blank: This type has no options
+              email_domain: List of domains separated by spaces
+              email_unconfirmed: This type has no options
+              links_in_comments_or_about: List of domains excluded from being detected
+                separated by spaces
+          index:
+            allow: Allow
+            block: Block
+            confirm_block: Are you sure to block users automatically?
+            confirm_destroy: Are you sure to remove this users autoblock rule?
+            delete: Delete rule
+            description: 'Block users automatically based on their activities or suspicious
+              data
+
+              '
+            detect_and_run: Detect and block users
+            edit: Edit rule
+            headers:
+              blocklist: Allow / Block
+              enabled: Enabled
+              type: Type
+              variable: Optional domain list
+              weight: Weight
+            new: New rule
+            title: Users automatic blocks
+          new:
+            create: Create
+            title: New users automatic block
+          update:
+            error: Error updating rule! %{error}
+            success: Rule updated successfully
         visibility:
           info_html: You can manage additional access restrictions using verifications
             with %{awesome_link}.
