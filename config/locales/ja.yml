@@ -1,3 +1,4 @@
+---
 ja:
   activemodel:
     attributes:
@@ -118,6 +119,7 @@ ja:
               supported_first: 最初にサポートした順
               supported_last: 最後にサポートした順
               za: Z-A (アルファベット逆順)
+            limit_pending_amendments: 各提案に対して保留中の修正案は1件のみ許可します．
             sort_orders_enabled: 有効なソート種別
             voting_cards_box_title: 投票箱のタイトル
             voting_cards_box_title_help: デフォルトは「この提案に投票する」です。非表示にするには「-」を使用してください。
@@ -375,6 +377,14 @@ ja:
             error: メニュー項目更新エラー %{error}
             success: メニュー項目は正常に更新されました
           url_exists: 同じURLがすでに設定されています。もう一度作成し直す前に、内容を修正してください。
+      amendments:
+        modal:
+          current_amendment_html: <p> <a href="%{amendment_link}">現在の修正にアクセスできます</a>.</p>
+          dismiss: OK
+          explanation_html: |
+            <p>現在、この提案には別の修正案が評価中です。新しい修正案を作成するためには、現在の修正案が受け入れられるか拒否されるまで待つ必要があります。</p>
+            <p>この提案の著者に<a href="%{proposal_link}">コメントを残す</a>ことで連絡を取り、現在の修正案の解決を早めることもできます。</p>
+        pending_limit_reached: 申し訳ありませんが、保留中の修正は一度に一件のみです。「%{emendation}」が受け入れられるか拒否されるまでお待ちください
       config:
         intergram:
           auto_no_response: 現在、回答できる者がおりません。 早急に折り返しご連絡しますので、あなたへの連絡方法を教えてください
