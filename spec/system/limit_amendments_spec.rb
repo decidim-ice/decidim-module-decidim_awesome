@@ -34,7 +34,7 @@ describe "Custom proposals fields" do
   end
 
   def amendment_path
-    Decidim::ResourceLocatorPresenter.new(proposal.amendment.emendation).path
+    "#{Decidim::ResourceLocatorPresenter.new(proposal.amendment.emendation).path}#comments"
   end
 
   context "when there's pending amendments" do
@@ -43,7 +43,7 @@ describe "Custom proposals fields" do
       expect(page).to have_content(emendation.title["en"])
       click_link_or_button "Amend"
 
-      within ".limit_amendments_modal" do
+      within ".limit-amendments-modal" do
         expect(page).to have_link(href: amendment_path)
         expect(page).to have_content("Currently, there's another amendment being evaluated for this proposal.")
       end
@@ -59,7 +59,7 @@ describe "Custom proposals fields" do
 
         expect(page).to have_no_content("Currently, there's another amendment being evaluated for this proposal.")
         expect(page).to have_no_content(proposal.title["en"])
-        expect(page).to have_content("CREATE AMENDMENT DRAFT")
+        expect(page).to have_content("Create Amendment Draft")
       end
     end
   end
@@ -74,7 +74,7 @@ describe "Custom proposals fields" do
 
       expect(page).to have_no_content("Currently, there's another amendment being evaluated for this proposal.")
       expect(page).to have_no_content(proposal.title["en"])
-      expect(page).to have_content("CREATE AMENDMENT DRAFT")
+      expect(page).to have_content("Create Amendment Draft")
     end
   end
 
@@ -88,7 +88,7 @@ describe "Custom proposals fields" do
 
       expect(page).to have_no_content("Currently, there's another amendment being evaluated for this proposal.")
       expect(page).to have_no_content(proposal.title["en"])
-      expect(page).to have_content("CREATE AMENDMENT DRAFT")
+      expect(page).to have_content("Create Amendment Draft")
     end
   end
 
@@ -100,7 +100,7 @@ describe "Custom proposals fields" do
       expect(page).to have_no_content(emendation.title["en"])
       click_link_or_button "Amend"
 
-      within ".limit_amendments_modal" do
+      within ".limit-amendments-modal" do
         expect(page).to have_no_link(href: amendment_path)
         expect(page).to have_content("Currently, there's another amendment being evaluated for this proposal.")
       end
