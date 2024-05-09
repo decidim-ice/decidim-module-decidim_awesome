@@ -36,7 +36,7 @@ module Decidim
         get action, params: params
 
         expect(response).to have_http_status(:redirect)
-        expect(flash[:alert]).to eq("You are not authorized to perform this action")
+        expect(flash[:alert]).to eq("You are not authorized to perform this action.")
       end
     end
 
