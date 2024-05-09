@@ -6,7 +6,11 @@ document.addEventListener("DOMContentLoaded", function() {
     return;
   }
 
-  function showModal() {
+  /**
+   * Determines if the modal should be displayed based on its current state and data attributes.
+   * @returns {boolean} True if the modal should be displayed, otherwise false.
+   */
+  const showModal = function() {
     if (!modal.classList.contains("hidden")) {
       return false;
     }
@@ -18,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
     return false;
   }
 
-  closeModalButtons.forEach(button => {
+  closeModalButtons.forEach((button) => {
     button.addEventListener("click", function() {
       modal.classList.add("hidden");
     });
@@ -26,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   const amendButtons = document.querySelectorAll(".card__amend-button .amend_button_card_cell");
 
-  amendButtons.forEach(button => {
+  amendButtons.forEach((button) => {
     button.addEventListener("click", function(event) {
       if (showModal()) {
         event.preventDefault();

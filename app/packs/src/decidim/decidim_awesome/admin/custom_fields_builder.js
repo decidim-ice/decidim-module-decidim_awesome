@@ -6,7 +6,7 @@ window.sortable = () => {}
 window.CustomFieldsBuilders = window.CustomFieldsBuilders || [];
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".awesome-edit-config .proposal_custom_fields_editor").forEach(el => {
+  document.querySelectorAll(".awesome-edit-config .proposal_custom_fields_editor").forEach((el) => {
     const container = el.closest(".proposal_custom_fields_container");
     const key = container.getAttribute("data-key");
 
@@ -80,9 +80,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.dispatchEvent(new CustomEvent("formBuilder.create", { detail: [0, window.CustomFieldsBuilders] }));
   }
 
-  document.querySelectorAll("form.awesome-edit-config").forEach(form => {
+  document.querySelectorAll("form.awesome-edit-config").forEach((form) => {
     form.addEventListener("submit", () => {
-      window.CustomFieldsBuilders.forEach(builder => {
+      window.CustomFieldsBuilders.forEach((builder) => {
         const input = form.querySelector(`input[name="config[proposal_custom_fields][${builder.key}]"]`);
         input.value = builder.instance.actions.getData("json");
       });
