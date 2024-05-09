@@ -1,18 +1,16 @@
 import "formBuilder/dist/form-builder.min.js";
 import "src/decidim/decidim_awesome/forms/rich_text_plugin"
-
-window.sortable = () => {}
+// formBuilder uses jquery-ui-sortable which is a very dirty npm package with no neat source code available, and causes problems with the webpacker configuration of Decidim.
+// For the moment, we'll remove the sortable functionality with a dummy jQuery plugin until we find another sortable plugin (or keep it disabled for good)
+jQuery.fn.sortable = () => {}
 
 window.CustomFieldsBuilders = window.CustomFieldsBuilders || [];
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".awesome-edit-config .proposal_custom_fields_editor").forEach((el) => {
-    const container = el.closest(".proposal_custom_fields_container");
-    const key = container.getAttribute("data-key");
-
-    const formData = document.querySelector(`input[name="config[proposal_custom_fields][${key}]"]`).value;
-
-    const customFieldBuilder = {
+$(() => {
+  $(".awesome-edit-config .proposal_custom_fields_editor").each((_idx, el) => {
+    const key = $(el).closest(".proposal_custom_fields_container").data("key");
+    // DOCS: https://formbuilder.online/docs
+    window.CustomFieldsBuilders.push({
       el: el,
       key: key,
       config: {
@@ -20,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
           locale: "en-US",
           location: "https://cdn.jsdelivr.net/npm/formbuilder-languages@1.1.0/"
         },
-        formData: formData,
+        formData: $(`input[name="config[proposal_custom_fields][${key}]"]`).val(),
         disableFields: ["button", "file"],
         disabledActionButtons: ["save", "data", "clear"],
         disabledAttrs: [
@@ -41,51 +39,42 @@ document.addEventListener("DOMContentLoaded", () => {
           "paragraph"
         ],
         disabledSubtypes: {
+          // default color as it generate hashtags in decidim (TODO: fix hashtag generator with this)
           text: ["color"],
+          // disable default wysiwyg editors as they present problems
           textarea: ["tinymce", "quill"]
         }
       },
       instance: null
-    };
-
-    window.CustomFieldsBuilders.push(customFieldBuilder);
+    });
   });
 
-  document.addEventListener("formBuilder.create", (event) => {
-    const detail = event.detail;
-    const [idx, list] = detail;
+  $(document).on("formBuilder.create", (_event, idx, list) => {
     if (!list[idx]) {
       return;
     }
 
-    // Имитация работы formBuilder без jQuery
-    const formBuilderResult = { actions: { getData: () => JSON.stringify({ key: list[idx].key }) } };
-    list[idx].instance = formBuilderResult;
-    list[idx].el.FormBuilder = formBuilderResult;
-
-    const spinner = list[idx].el.querySelector(".loading-spinner");
-    if (spinner) {
-      spinner.remove();
-    }
-
-    const customEvent = new CustomEvent("formBuilder.created", { detail: [list[idx]] });
-    document.dispatchEvent(customEvent);
-
-    if (idx < list.length) {
-      document.dispatchEvent(new CustomEvent("formBuilder.create", { detail: [idx + 1, list] }));
-    }
+    $(list[idx].el).formBuilder(list[idx].config).promise.then(function(res) {
+      list[idx].instance = res;
+      // Attach to DOM
+      list[idx].el.FormBuilder = res;
+      // remove spinner
+      $(list[idx].el).find(".loading-spinner").remove();
+      // for external use
+      $(document).trigger("formBuilder.created", [list[idx]]);
+      if (idx < list.length) {
+        $(document).trigger("formBuilder.create", [idx + 1, list]);
+      }
+    });
   });
 
   if (window.CustomFieldsBuilders.length) {
-    document.dispatchEvent(new CustomEvent("formBuilder.create", { detail: [0, window.CustomFieldsBuilders] }));
+    $(document).trigger("formBuilder.create", [0, window.CustomFieldsBuilders]);
   }
 
-  document.querySelectorAll("form.awesome-edit-config").forEach((form) => {
-    form.addEventListener("submit", () => {
-      window.CustomFieldsBuilders.forEach((builder) => {
-        const input = form.querySelector(`input[name="config[proposal_custom_fields][${builder.key}]"]`);
-        input.value = builder.instance.actions.getData("json");
-      });
+  $("form.awesome-edit-config").on("submit", () => {
+    window.CustomFieldsBuilders.forEach((builder) => {
+      $(`input[name="config[proposal_custom_fields][${builder.key}]"]`).val(builder.instance.actions.getData("json"));
     });
   });
 });
