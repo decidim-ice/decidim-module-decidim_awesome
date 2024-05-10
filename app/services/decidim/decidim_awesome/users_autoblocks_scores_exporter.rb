@@ -4,6 +4,7 @@ module Decidim
   module DecidimAwesome
     class UsersAutoblocksScoresExporter
       BASIC_ATTRIBUTES = [:id, :name, :nickname, :about].freeze
+      DATA_FILE_PATH = "tmp/block_users_scores.csv"
 
       attr_reader :users
 
@@ -15,14 +16,10 @@ module Decidim
         exporter = Decidim::Exporters::CSV.new(data)
         exported = exporter.export
 
-        # TODO: Use a file in a more stable location to reuse it
-        tmpfile = Tempfile.new("user_autoblocks_scores")
-        tmpfile.write(exported.read)
-        # Do not delete the file when the reference is deleted
-        ObjectSpace.undefine_finalizer(tmpfile)
-        tmpfile.close
+        data_file_path = File.join(Rails.application.root, DATA_FILE_PATH)
+        File.write(data_file_path, exported.read)
 
-        tmpfile.path
+        data_file_path
       end
 
       def data
