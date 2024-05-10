@@ -6,6 +6,7 @@ module Decidim
       class UsersAutoblocksForm < Decidim::Form
         USERS_AUTOBLOCKS_TYPES = {
           "about_blank" => { has_variable: false, default_blocklist: true },
+          "activities_blank" => { has_variable: false, default_blocklist: true },
           "links_in_comments_or_about" => { has_variable: false, default_blocklist: true },
           "email_unconfirmed" => { has_variable: false, default_blocklist: true },
           "email_domain" => { has_variable: true, default_blocklist: true }

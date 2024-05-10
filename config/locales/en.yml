@@ -687,6 +687,7 @@ en:
           form:
             types:
               about_blank: About user section is blank
+              activities_blank: User has not created contents
               email_domain: Email domain included in list
               email_unconfirmed: User email is not confirmed
               links_in_comments_or_about: Comments or about section contains links
