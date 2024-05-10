@@ -12,6 +12,8 @@ module Decidim
         layout "decidim/decidim_awesome/admin/application"
 
         def index
+          load_calculations
+
           @config_form = form(UsersAutoblocksConfigForm).from_model(current_config)
         end
 
@@ -29,6 +31,8 @@ module Decidim
           CreateUsersAutoblockRule.call(@form) do
             on(:ok) do
               flash[:notice] = I18n.t("success", scope: "decidim.decidim_awesome.admin.users_autoblocks.create")
+              remove_calculations_file
+
               redirect_to decidim_admin_decidim_awesome.users_autoblocks_path
             end
 
@@ -44,6 +48,8 @@ module Decidim
           UpdateUsersAutoblockRule.call(@form, users_autoblock_rule) do
             on(:ok) do
               flash[:notice] = I18n.t("success", scope: "decidim.decidim_awesome.admin.users_autoblocks.update")
+              remove_calculations_file
+
               redirect_to decidim_admin_decidim_awesome.users_autoblocks_path
             end
 
@@ -58,6 +64,7 @@ module Decidim
           DestroyUsersAutoblockRule.call(users_autoblock_rule, current_organization) do
             on(:ok) do
               flash[:notice] = I18n.t("success", scope: "decidim.decidim_awesome.admin.users_autoblocks.destroy")
+              remove_calculations_file
             end
 
             on(:invalid) do |message|
@@ -74,14 +81,22 @@ module Decidim
           AutoblockUsers.call(@config_form) do
             on(:ok) do
               flash[:notice] = I18n.t("success", scope: "decidim.decidim_awesome.admin.users_autoblocks.detect_and_run")
-              redirect_to decidim_admin_decidim_awesome.users_autoblocks_path
             end
 
             on(:invalid) do |message|
-              flash.now[:alert] = I18n.t("error", error: message, scope: "decidim.decidim_awesome.admin.users_autoblocks.detect_and_run")
-              render :index
+              flash[:alert] = I18n.t("error", error: message, scope: "decidim.decidim_awesome.admin.users_autoblocks.detect_and_run")
             end
           end
+
+          redirect_to decidim_admin_decidim_awesome.users_autoblocks_path
+        end
+
+        def calculate_scores
+          exporter = Decidim::DecidimAwesome::UsersAutoblocksScoresExporter.new(Decidim::User.where(blocked: false))
+          exporter.export
+
+          flash[:notice] = I18n.t("success", scope: "decidim.decidim_awesome.admin.users_autoblocks.calculate_scores")
+          redirect_to decidim_admin_decidim_awesome.users_autoblocks_path
         end
 
         private
@@ -103,6 +118,26 @@ module Decidim
           raise ActiveRecord::RecordNotFound if rule.blank?
 
           OpenStruct.new(rule)
+        end
+
+        def calculations_path
+          @calculations_path ||= File.join(Rails.application.root, Decidim::DecidimAwesome::UsersAutoblocksScoresExporter::DATA_FILE_PATH)
+        end
+
+        def remove_calculations_file
+          return unless File.exist?(calculations_path)
+
+          File.delete(calculations_path)
+        end
+
+        def load_calculations
+          @scores_counts = {}
+          return unless File.exist?(calculations_path)
+
+          calculations = CSV.read(calculations_path, headers: true, col_sep: ";")
+          rules_headers = calculations.headers.grep(/ - \d+/)
+          counts = rules_headers.index_with { |rule_header| calculations.count { |row| row[rule_header].to_i.positive? } }
+          @scores_counts = counts.transform_keys { |k| k.split(" - ").last.to_i }
         end
       end
     end

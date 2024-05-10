@@ -17,6 +17,9 @@
             <th><%= t(".headers.enabled") %></th>
             <th><%= t(".headers.weight") %></th>
             <th><%= t(".headers.variable") %></th>
+            <th class="redirect-status">
+              <%= t(".headers.count") %>
+            </th>
             <th class="actions"></th>
           </tr>
         </thead>
@@ -28,6 +31,7 @@
               <td><%= item["enabled"] %></td>
               <td><%= item["weight"] %></td>
               <td><%= item["variable"] %></td>
+              <td><%= @scores_counts[item["id"]] %></td>
               <td class="table-list__actions">
                 <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_users_autoblock_path(md5(item.to_json)), t(".edit"), class: "action-icon--edit" %>
                 <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.users_autoblock_path(md5(item.to_json)), t(".delete"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
@@ -47,6 +51,7 @@
 
       <div class="item__edit-sticky">
         <div class="item__edit-sticky-container">
+          <%= link_to t(".calculate_scores"), decidim_admin_decidim_awesome.calculate_scores_users_autoblocks_path, method: :post, class: "button button__sm button__secondary" %>
           <%= f.submit t(".detect_and_run"), class: "button button__sm button__secondary", data: { confirm: t(".confirm_block") } %>
         </div>
       </div>

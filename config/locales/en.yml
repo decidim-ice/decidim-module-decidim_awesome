@@ -652,6 +652,8 @@ en:
           menu:
             title: Public frontend
         users_autoblocks:
+          calculate_scores:
+            success: Scores calculated successfully
           config_form:
             block_justification_message_help: Justification that will receive the
               detected users in their block notification
@@ -685,6 +687,7 @@ en:
           index:
             allow: Allow
             block: Block
+            calculate_scores: Calculate scores
             confirm_block: Are you sure to block users automatically?
             confirm_destroy: Are you sure to remove this users autoblock rule?
             delete: Delete rule
@@ -696,6 +699,7 @@ en:
             edit: Edit rule
             headers:
               blocklist: Allow / Block
+              count: Count cases
               enabled: Enabled
               type: Type
               variable: Optional domain list
