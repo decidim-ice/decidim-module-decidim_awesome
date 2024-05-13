@@ -89,7 +89,7 @@ module Decidim
           @detected_users ||= begin
             threshold = current_config.value&.dig("threshold")
             if threshold.present?
-              user_ids = @block_data.select { |item| item[:total] >= threshold }.map { |item| item[:id] }
+              user_ids = @block_data.select { |item| item[:total_score] >= threshold }.map { |item| item[:id] }
               Decidim::User.where(organization: current_organization, id: user_ids)
             else
               Decidim::User.none
