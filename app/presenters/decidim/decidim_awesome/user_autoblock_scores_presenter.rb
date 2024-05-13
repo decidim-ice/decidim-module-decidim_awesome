@@ -22,6 +22,35 @@ module Decidim
         end
       end
 
+      def about_blank_detection_method(_rule = {})
+        about.blank?
+      end
+
+      def activities_blank_detection_method(_rule = {})
+        UserActivities.new(__getobj__).blank?
+      end
+
+      def links_in_comments_or_about_detection_method(rule = {})
+        allowlist = rule["allowlist"].split(/\s/).compact_blank
+        blocklist = rule["blocklist"].split(/\s/).compact_blank
+        LinksParser.new(about, allowlist:, blocklist:).has_blocked_links? ||
+          Decidim::Comments::Comment.where(author: self).any? { |comment| LinksParser.new(comment.translated_body).has_blocked_links? }
+      end
+
+      def email_unconfirmed_detection_method(rule = {})
+        !confirmed? && email_domain_detection_method(rule)
+      end
+
+      def email_domain_detection_method(rule = {})
+        email_domain = email.split("@").last
+        allowlist = rule["allowlist"].split(/\s/).compact_blank
+        blocklist = rule["blocklist"].split(/\s/).compact_blank - allowlist
+
+        email_domain.blank? ||
+          (allowlist.present? && allowlist.all? { |name| name != email_domain }) ||
+          (blocklist.present? && blocklist.any? { |name| name == email_domain })
+      end
+
       private
 
       def current_rules
@@ -39,30 +68,21 @@ module Decidim
         return 0 unless rule["enabled"]
 
         positive = calculate_positive(rule)
-        return rule["weight"] if (rule["blocklist"] && positive) || (!rule["blocklist"] && !positive)
+        return rule["weight"] if (rule["block_if_detected"] && positive) || (!rule["block_if_detected"] && !positive)
 
         0
       end
 
       def calculate_positive(rule)
-        case rule["type"]
-        when "about_blank"
-          about.blank?
-        when "activities_blank"
-          UserActivities.new(__getobj__).blank?
-        when "links_in_comments_or_about"
-          LinksParser.new(about).has_blocked_links? ||
-            Decidim::Comments::Comment.where(author: self).any? { |comment| LinksParser.new(comment.translated_body).has_blocked_links? }
-        when "email_unconfirmed"
-          !confirmed?
-        when "email_domain"
-          email_domain = email.split("@").last
-          domains = rule["variable"].split(/\s/).compact_blank
-          email_domain.present? && domains.any? { |name| name == email_domain }
-        end
+        return if USERS_AUTOBLOCKS_TYPES.keys.exclude?(rule["type"])
+        return unless respond_to?("#{rule["type"]}_detection_method")
+
+        send "#{rule["type"]}_detection_method", rule
       end
 
       class LinksParser
+        attr_reader :allowlist, :blocklist
+
         def initialize(text, allowlist: [], blocklist: [])
           @text = text
           @allowlist = allowlist
