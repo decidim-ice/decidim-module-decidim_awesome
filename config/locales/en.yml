@@ -72,6 +72,13 @@ en:
           with these authorizations
       user:
         user_time_zone: Personal timezone
+      users_autoblocks:
+        type: Type
+        weight: Weight
+        allowlist: Allow list
+        blocklist: Block list
+        block_if_detected: Sum weight to score of detected items
+        enabled: Enabled
   decidim:
     admin:
       actions:
@@ -699,11 +706,8 @@ en:
               email_unconfirmed: User email is not confirmed
               links_in_comments_or_about: Comments or about section contains links
             variables_help:
-              about_blank: This type has no options
-              email_domain: List of domains separated by spaces
-              email_unconfirmed: This type has no options
-              links_in_comments_or_about: List of domains excluded from being detected
-                separated by spaces
+              allow_domains_list: List of domains to be ignored by the rule separated by spaces
+              block_domains_list: List of domains to be detected by the rule separated by spaces
           index:
             allow: Allow
             block: Block
@@ -718,11 +722,12 @@ en:
             detect_and_run: Detect and block users
             edit: Edit rule
             headers:
-              blocklist: Allow / Block
-              count: Count cases
+              allowlist: Domains ignored from the rule
+              blocklist: Domains to detect in the rule
+              block_if_detected: Score if the rule detects the user
+              count: Detected cases
               enabled: Enabled
               type: Type
-              variable: Optional domain list
               weight: Weight
             new: New rule
             title: Users automatic blocks
