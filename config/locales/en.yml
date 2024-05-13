@@ -682,7 +682,11 @@ en:
             success: Rule created successfully
           detect_and_run:
             error: There has been an error trying to block users! %{error}
-            success: Users blocked successfully
+            success:
+              one: 1 user blocked successfully
+              other: "%{count} users blocked succesfully"
+              zero: No users have been found who have a sufficient score to be blocked
+                automatically
           edit:
             title: Edit users automatic block
             update: Update

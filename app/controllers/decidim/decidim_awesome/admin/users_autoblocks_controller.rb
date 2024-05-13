@@ -79,8 +79,8 @@ module Decidim
           @config_form = form(UsersAutoblocksConfigForm).from_params(params)
 
           AutoblockUsers.call(@config_form) do
-            on(:ok) do
-              flash[:notice] = I18n.t("success", scope: "decidim.decidim_awesome.admin.users_autoblocks.detect_and_run")
+            on(:ok) do |count|
+              flash[:notice] = I18n.t("success", count:, scope: "decidim.decidim_awesome.admin.users_autoblocks.detect_and_run")
             end
 
             on(:invalid) do |message|
