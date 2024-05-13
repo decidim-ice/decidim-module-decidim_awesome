@@ -102,7 +102,9 @@ module Decidim
         private
 
         def types_options
-          UsersAutoblocksForm::USERS_AUTOBLOCKS_TYPES.keys.index_by { |key| I18n.t(key, scope: "decidim.decidim_awesome.admin.users_autoblocks.form.types") }
+          Decidim::DecidimAwesome::UserAutoblockScoresPresenter::USERS_AUTOBLOCKS_TYPES.keys.index_by do |key|
+            I18n.t(key, scope: "decidim.decidim_awesome.admin.users_autoblocks.form.types")
+          end
         end
 
         def current_rules
