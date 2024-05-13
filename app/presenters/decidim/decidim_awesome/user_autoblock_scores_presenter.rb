@@ -7,10 +7,10 @@ module Decidim
     #
     class UserAutoblockScoresPresenter < SimpleDelegator
       def scores
-        @scores ||= current_rules.each_with_object({ total: 0 }) do |rule, calculations|
+        @scores ||= current_rules.each_with_object({ total_score: 0 }) do |rule, calculations|
           val = rule_value(rule)
           calculations[rule_key(rule)] = val
-          calculations[:total] += val
+          calculations[:total_score] += val
         end
       end
 
