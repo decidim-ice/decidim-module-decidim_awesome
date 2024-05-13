@@ -653,6 +653,7 @@ en:
             title: Public frontend
         users_autoblocks:
           calculate_scores:
+            error: There has been an error trying to calculate scores! %{error}
             success: Scores calculated successfully
           config_form:
             block_justification_message_help: Justification that will receive the
