@@ -822,6 +822,13 @@ en:
             Admins will be able to manually verify users with these authorizations.
             <br>Use this feature with caution, as it can lead to security issues.
           awesome_tweaks: Decidim Awesome Tweaks
+      users_autoblocks_report_mailer:
+        notify:
+          body: There are %{count} users who have been automatically blocked
+          details: Justification sent to blocked users
+          greetings: Greetings,<br/>%{organization_name}<br/><a href="%{organization_url}">%{organization_url}</a>
+          hello: Hello %{admin},
+          subject: Users blocked automatically in %{organization_name}
       validators:
         too_much_caps: Is using too many capital letters (over %{percent}% of the
           text)

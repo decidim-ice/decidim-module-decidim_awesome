@@ -24,8 +24,10 @@ module Decidim
           transaction do
             save_configuration!
             calculate_scores
-            block_users!
-            send_notification_to_admins!
+            if detected_users.exists?
+              block_users!
+              send_notification_to_admins!
+            end
           end
 
           broadcast(:ok, detected_users.count)
@@ -79,19 +81,20 @@ module Decidim
           current_organization.admins.each do |admin|
             next unless admin.email_on_moderations
 
-            # TODO
-            # Decidim::AutoblockReportJob.perform_later(admin, users_list)
+            Decidim::DecidimAwesome::UsersAutoblocksReportJob.perform_later(admin, detected_users.map { |user| user.id.to_s })
           end
         end
 
         def detected_users
-          threshold = current_config.value&.dig("threshold")
-
-          return Decidim::User.none if threshold.blank?
-
-          user_ids = @block_data.select { |item| item[:total] >= threshold }.map { |item| item[:id] }
-
-          Decidim::User.where(organization: current_organization, id: user_ids)
+          @detected_users ||= begin
+            threshold = current_config.value&.dig("threshold")
+            if threshold.present?
+              user_ids = @block_data.select { |item| item[:total] >= threshold }.map { |item| item[:id] }
+              Decidim::User.where(organization: current_organization, id: user_ids)
+            else
+              Decidim::User.none
+            end
+          end
         end
 
         def calculate_scores

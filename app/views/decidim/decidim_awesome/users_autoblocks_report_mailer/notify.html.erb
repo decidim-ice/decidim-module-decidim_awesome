@@ -1,0 +1,10 @@
+<p class="email-greeting"><%= t ".hello", admin: h(@admin.name) %></p>
+
+<p class="email-instructions"><%= t ".body", count: h(@blocked_user_ids.count) %></p>
+
+<p class="email-instructions"><%= t(".details") %></p>
+<blockquote>
+  <%= @justification %>
+</blockquote>
+
+<p class="email-closing"><%= t(".greetings", organization_name: h(@organization.name), organization_url: decidim.root_url(host: @organization.host)).html_safe %></p>
