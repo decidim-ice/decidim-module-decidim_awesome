@@ -6,6 +6,14 @@ module Decidim
     # Decorator for users
     #
     class UserAutoblockScoresPresenter < SimpleDelegator
+      USERS_AUTOBLOCKS_TYPES = {
+        "about_blank" => { has_variable: false, default_blocklist: true },
+        "activities_blank" => { has_variable: false, default_blocklist: true },
+        "links_in_comments_or_about" => { has_variable: true, default_blocklist: true },
+        "email_unconfirmed" => { has_variable: true, default_blocklist: true },
+        "email_domain" => { has_variable: true, default_blocklist: true }
+      }.freeze
+
       def scores
         @scores ||= current_rules.each_with_object({ total_score: 0 }) do |rule, calculations|
           val = rule_value(rule)
