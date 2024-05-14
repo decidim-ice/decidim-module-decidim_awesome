@@ -30,7 +30,7 @@
               <td><%= item["weight"] %></td>
               <td><%= item["allowlist"] %></td>
               <td><%= item["blocklist"] %></td>
-              <th><%= item["block_if_detected"] %></th>
+              <td><%= item["block_if_detected"] %></td>
               <td><%= @scores_counts[item["id"]] %></td>
               <td class="table-list__actions">
                 <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_users_autoblock_path(md5(item.to_json)), t(".edit"), class: "action-icon--edit" %>
