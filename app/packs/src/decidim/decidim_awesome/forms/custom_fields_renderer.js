@@ -8,6 +8,8 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
   }
 
   getLang(lang) {
+    const defaultLang = "en-US";
+    if(!lang) return defaultLang;
     const langs = {
       // ar: 'ar-SA', // Not in decidim yet
       "ar": "ar-TN",
@@ -47,7 +49,7 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
     if (langs[lang.substr(0, 2)]) {
       return langs[lang.substr(0, 2)];
     }
-    return "en-US";
+    return defaultLang;
   }
 
   /*
