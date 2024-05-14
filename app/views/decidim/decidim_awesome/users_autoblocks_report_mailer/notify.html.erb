@@ -1,10 +1,14 @@
 <p class="email-greeting"><%= t ".hello", admin: h(@admin.name) %></p>
 
-<p class="email-instructions"><%= t ".body", count: h(@blocked_user_ids.count) %></p>
+<p class="email-instructions"><%= t(@block_performed ? ".body_performed" : ".body_calculated", count: h(@detected_user_ids.count)) %></p>
 
-<p class="email-instructions"><%= t(".details") %></p>
-<blockquote>
-  <%= @justification %>
-</blockquote>
+<% if @block_performed %>
+  <p class="email-instructions"><%= t ".body_check_html", url: decidim_admin.moderated_users_url(host: @organization.host, blocked: true) %></p>
+
+  <p class="email-instructions"><%= t(".details") %></p>
+  <blockquote>
+    <%= @justification %>
+  </blockquote>
+<% end %>
 
 <p class="email-closing"><%= t(".greetings", organization_name: h(@organization.name), organization_url: decidim.root_url(host: @organization.host)).html_safe %></p>

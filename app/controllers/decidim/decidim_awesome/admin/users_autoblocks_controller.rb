@@ -80,7 +80,12 @@ module Decidim
 
           AutoblockUsers.call(@config_form) do
             on(:ok) do |count|
-              flash[:notice] = I18n.t("success", count:, scope: "decidim.decidim_awesome.admin.users_autoblocks.detect_and_run")
+              flash[:notice] = I18n.t(
+                "success_html",
+                count:,
+                url: decidim_admin.moderated_users_path(blocked: true),
+                scope: "decidim.decidim_awesome.admin.users_autoblocks.detect_and_run"
+              )
             end
 
             on(:invalid) do |message|
@@ -92,16 +97,18 @@ module Decidim
         end
 
         def calculate_scores
-          users = Decidim::User
-                  .where(organization: current_organization)
-                  .joins("LEFT JOIN decidim_authorizations ON decidim_authorizations.decidim_user_id = decidim_users.id")
-                  .where(decidim_authorizations: { granted_at: nil })
-                  .not_deleted
-                  .not_blocked
-          exporter = Decidim::DecidimAwesome::UsersAutoblocksScoresExporter.new(users)
-          exporter.export
+          @config_form = form(UsersAutoblocksConfigForm).from_model(current_config)
 
-          flash[:notice] = I18n.t("success", scope: "decidim.decidim_awesome.admin.users_autoblocks.calculate_scores")
+          AutoblockUsers.call(@config_form, perform_block: false) do
+            on(:ok) do |count|
+              flash[:notice] = I18n.t("success", count:, scope: "decidim.decidim_awesome.admin.users_autoblocks.calculate_scores")
+            end
+
+            on(:invalid) do |message|
+              flash[:alert] = I18n.t("error", error: message, scope: "decidim.decidim_awesome.admin.users_autoblocks.calculate_scores")
+            end
+          end
+
           redirect_to decidim_admin_decidim_awesome.users_autoblocks_path
         end
 

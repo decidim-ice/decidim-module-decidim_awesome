@@ -660,7 +660,13 @@ en:
         users_autoblocks:
           calculate_scores:
             error: There has been an error trying to calculate scores! %{error}
-            success: Scores calculated successfully
+            success:
+              one: Scores calculated successfully, 1 user detected. A detailed CSV
+                has been sent to admins by email
+              other: Scores calculated successfully, %{count} users detected. A detailed
+                CSV has been sent to admins by email
+              zero: Scores calculated successfully. No users have been found who have
+                a sufficient score to be blocked automatically
           config_form:
             block_justification_message_help: Justification that will receive the
               detected users in their block notification
@@ -676,9 +682,11 @@ en:
             success: Rule removed successfully
           detect_and_run:
             error: There has been an error trying to block users! %{error}
-            success:
-              one: 1 user blocked successfully
-              other: "%{count} users blocked succesfully"
+            success_html:
+              one: 1 user blocked successfully. You can check at <a href="%{url}">blocked
+                users</a>
+              other: '%{count} users blocked succesfully. You can check at <a href="%{url}">blocked
+                users</a>'
               zero: No users have been found who have a sufficient score to be blocked
                 automatically
           edit:
@@ -835,11 +843,15 @@ en:
           awesome_tweaks: Decidim Awesome Tweaks
       users_autoblocks_report_mailer:
         notify:
-          body: There are %{count} users who have been automatically blocked
+          body_calculated: There are %{count} users who have been detected to block.
+            The automatic block has not been performed yet.
+          body_check_html: You can check at <a href="%{url}">blocked users</a>.
+          body_performed: There are %{count} users who have been automatically blocked.
           details: Justification sent to blocked users
           greetings: Greetings,<br/>%{organization_name}<br/><a href="%{organization_url}">%{organization_url}</a>
           hello: Hello %{admin},
-          subject: Users blocked automatically in %{organization_name}
+          subject_calculated: Users detected to be blocked in %{organization_name}
+          subject_performed: Users blocked automatically in %{organization_name}
       validators:
         too_much_caps: Is using too many capital letters (over %{percent}% of the
           text)

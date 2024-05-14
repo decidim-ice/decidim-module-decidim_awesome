@@ -5,16 +5,18 @@ module Decidim
     # A custom mailer to notify Decidim users
     # that they have been reported
     class UsersAutoblocksReportMailer < ApplicationMailer
-      def notify(admin, blocked_user_ids)
+      def notify(admin, detected_user_ids, block_performed: true)
         @admin = admin
-        @blocked_user_ids = blocked_user_ids
+        @detected_user_ids = detected_user_ids
         @organization = admin.organization
         @justification = current_config["block_justification_message"]
+        @block_performed = block_performed
         add_report_attachment
         with_user(admin) do
           mail(to: admin.email, subject: I18n.t(
-            "decidim.decidim_awesome.users_autoblocks_report_mailer.notify.subject",
-            organization_name: @organization.name
+            block_performed ? "subject_performed" : "subject_calculated",
+            organization_name: @organization.name,
+            scope: "decidim.decidim_awesome.users_autoblocks_report_mailer.notify"
           ))
         end
       end
@@ -31,10 +33,11 @@ module Decidim
 
         calculations = CSV.read(calculations_path, headers: true, col_sep: ";")
 
-        filtered_calculations = calculations.select { |row| @blocked_user_ids.include?(row["id"]) }
+        filtered_calculations = calculations.select { |row| @detected_user_ids.include?(row["id"]) }
         data = Decidim::Exporters::CSV.new(filtered_calculations).export
 
-        attachments["blocked_users.csv"] = data.read
+        filename = @block_performed ? "blocked_users.csv" : "detected_users.csv"
+        attachments[filename] = data.read
       end
     end
   end
