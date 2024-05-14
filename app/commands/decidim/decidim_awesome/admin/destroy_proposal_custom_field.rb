@@ -32,7 +32,7 @@ module Decidim
             private_fields.value.except!(@key)
             private_fields.save!
           end
-          
+
           # remove constrains associated (a new config var is generated automatically, by removing it, it will trigger destroy on dependents)
           constraint = AwesomeConfig.find_by(var: "proposal_custom_field_#{@key}", organization: @organization)
           constraint.destroy! if constraint.present?

@@ -11,6 +11,7 @@ module Decidim
 
         included do
           private
+
           alias_method :decidim_original_update_draft, :update_draft
           alias_method :decidim_original_update_proposal, :update_proposal
 
@@ -24,11 +25,9 @@ module Decidim
             update_private_field
           end
 
-          private
-
           def update_private_field
             @proposal.update(
-              awesome_private_proposal_field_attributes: {private_body: form.private_body}
+              awesome_private_proposal_field_attributes: { private_body: form.private_body }
             )
             @proposal
           end

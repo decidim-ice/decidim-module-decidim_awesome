@@ -17,9 +17,9 @@ module Decidim::DecidimAwesome
     end
 
     it "is destroyed when the proposal is destroyed" do
-        proposal_id = private_proposal_field.proposal.id
-        private_proposal_field.proposal.destroy
-        expect(Decidim::DecidimAwesome::PrivateProposalField.find_by(id: private_proposal_field.id)).to be_nil
+      proposal_id = private_proposal_field.proposal.id
+      private_proposal_field.proposal.destroy
+      expect(Decidim::DecidimAwesome::PrivateProposalField.find_by(id: private_proposal_field.id)).to be_nil
     end
   end
 end

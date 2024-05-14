@@ -10,6 +10,7 @@ module Decidim
         included do
           def private_body(links: false, extras: true, strip_tags: false)
             return unless proposal
+
             content = proposal.private_body
 
             content = strip_tags(sanitize_text(content)) if strip_tags

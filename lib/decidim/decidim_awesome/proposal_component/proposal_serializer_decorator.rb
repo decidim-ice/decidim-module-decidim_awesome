@@ -30,18 +30,20 @@ module Decidim
         end
 
         private
-        
+
         def serialize_custom_fields
-          payload={}
+          payload = {}
           custom_fields = CustomFields.new(awesome_proposal_custom_fields)
-          @proposal.body.keys.each do |locale|
-            fields_entries(custom_fields, proposal.body, "#{locale}") do |key, value|
-              payload["field/#{key}".to_sym] = value
+          if custom_fields.present?
+            @proposal.body.keys.each do |locale|
+              fields_entries(custom_fields, proposal.body, locale.to_s) do |key, value|
+                payload["field/#{key}".to_sym] = value
+              end
             end
-          end unless custom_fields.blank?
+          end
           payload
         end
-        
+
         # Iterate on custom fields that has a label and name
         # (will ignore paragraphs and title)
         def fields_entries(custom_fields, body, locale)

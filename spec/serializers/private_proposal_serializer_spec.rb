@@ -29,7 +29,7 @@ module Decidim::DecidimAwesome
     end
     let(:component) { create(:proposal_component, manifest_name: "proposals", participatory_space: participatory_process) }
     let!(:proposal) do
-      prop = build(:proposal, component: component, body: {"en": public_xml})
+      prop = build(:proposal, component: component, body: { en: public_xml })
       prop.build_awesome_private_proposal_field(private_body: private_xml)
       prop.save
       prop
@@ -38,21 +38,20 @@ module Decidim::DecidimAwesome
     describe "#serialize" do
       let(:serialized) { subject.serialize }
 
-
       it "serializes each body's custom fields" do
-        expect(serialized).to include(:"field/full-name/en" => ["Tiffany Woods"])
+        expect(serialized).to include("field/full-name/en": ["Tiffany Woods"])
       end
 
       it "serializes each private_body's custom fields" do
-        expect(serialized).to include(:"secret/phone-number" => ["021 xxx xx 641"])
+        expect(serialized).to include("secret/phone-number": ["021 xxx xx 641"])
       end
-      
-      context 'when there are no private fields' do
-         # No private data provided
-        let(:private_data) { { "foo" => '[]' } }
-      
-        it 'does not include private field keys in the serialized output' do
-          expect(serialized.keys).not_to include(match(/secret\//))
+
+      context "when there are no private fields" do
+        # No private data provided
+        let(:private_data) { { "foo" => "[]" } }
+
+        it "does not include private field keys in the serialized output" do
+          expect(serialized.keys).not_to include(match(%r{secret/}))
         end
       end
     end

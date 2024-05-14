@@ -40,7 +40,7 @@ describe Decidim::OpenDataExporter do
             proposal_component = create(:proposal_component, manifest_name: "proposals", participatory_space: participatory_process)
             proposal = build(:proposal, component: proposal_component, body: public_xml)
             proposal.update(
-              body: public_xml, awesome_private_proposal_field_attributes: {private_body: form.private_body}
+              body: public_xml, awesome_private_proposal_field_attributes: { private_body: form.private_body }
             )
             proposal
           end

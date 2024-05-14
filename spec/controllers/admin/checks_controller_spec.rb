@@ -21,7 +21,7 @@ module Decidim::DecidimAwesome
         end
 
         it "has a list of overrides" do
-          expect(controller.helpers.overrides.count > 0).to be(true)
+          expect(controller.helpers.overrides.count.positive?).to be(true)
         end
 
         it "all overrides are valid" do
@@ -39,7 +39,7 @@ module Decidim::DecidimAwesome
         end
 
         it "has a list of overrides" do
-          expect(controller.helpers.overrides.count > 0).to be(true)
+          expect(controller.helpers.overrides.count.positive?).to be(true)
         end
       end
 

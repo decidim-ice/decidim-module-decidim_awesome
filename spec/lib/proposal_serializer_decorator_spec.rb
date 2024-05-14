@@ -1,15 +1,19 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 describe Decidim::DecidimAwesome::ProposalSerializerDecorator do
+  subject { serializer_class.new(proposal) }
+
   let(:organization) { create(:organization) }
   let(:participatory_process) { create(:participatory_process, organization: organization) }
   let(:component) { create(:proposal_component, participatory_space: participatory_process) }
   let(:proposal) { create(:proposal, component: component) }
-  let(:data) {
+  let(:data) do
     '<xml><dl class="decidim_awesome-custom_fields" data-generator="decidim_awesome" data-version="0.7.2"><dt name="text-1476748007461">Age</dt><dd id="text-1476748007461" name="text"><div>14</div></dd></dl></xml>'
-  }
+  end
   let(:awesome_proposal_custom_fields) do
-    {"foo": "[#{data}]"}.to_json
+    { foo: "[#{data}]" }.to_json
   end
 
   let(:serializer_class) do
@@ -17,10 +21,10 @@ describe Decidim::DecidimAwesome::ProposalSerializerDecorator do
       def initialize(proposal)
         @proposal = proposal
       end
-      
+
       def serialize
         {
-            propertyA: "a"
+          propertyA: "a"
         }
       end
 
@@ -33,18 +37,16 @@ describe Decidim::DecidimAwesome::ProposalSerializerDecorator do
     klass
   end
 
-  subject { serializer_class.new(proposal) }
-
   before do
     # Assuming `awesome_proposal_custom_fields` is somehow populated for the test environment
     allow(subject).to receive(:awesome_proposal_custom_fields).and_return(awesome_proposal_custom_fields)
   end
 
   describe "#serialize" do
-    let(:expected_custom_field) { { :"field/age" => "12" } }
+    let(:expected_custom_field) { { "field/age": "12" } }
 
     it "keep the original class's serialize method" do
-        expect(subject.serialize).to include({:"propertyA" => "a"})
+      expect(subject.serialize).to include({ propertyA: "a" })
     end
 
     it "includes custom fields in the serialization" do

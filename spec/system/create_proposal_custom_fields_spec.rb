@@ -55,9 +55,9 @@ describe "Custom proposals fields", type: :system do
     expect(page).not_to have_css(".form-error.is-visible")
   end
 
-  it "displays private custom fields" do 
+  it "displays private custom fields" do
     expect(page).to have_content("Phone Number")
-    expect(page).to have_css("#foo_private")    
+    expect(page).to have_css("#foo_private")
   end
 
   context "when there are not custom fields" do
