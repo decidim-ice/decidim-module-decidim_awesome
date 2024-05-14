@@ -7,7 +7,7 @@ module Decidim
       class UsersAutoblocksController < DecidimAwesome::Admin::ConfigController
         include ConfigConstraintsHelpers
 
-        helper_method :types_options, :current_rules
+        helper_method :application_type_options, :types_options, :current_rules
 
         layout "decidim/decidim_awesome/admin/application"
 
@@ -92,7 +92,13 @@ module Decidim
         end
 
         def calculate_scores
-          exporter = Decidim::DecidimAwesome::UsersAutoblocksScoresExporter.new(Decidim::User.where(blocked: false))
+          users = Decidim::User
+                  .where(organization: current_organization)
+                  .joins("LEFT JOIN decidim_authorizations ON decidim_authorizations.decidim_user_id = decidim_users.id")
+                  .where(decidim_authorizations: { granted_at: nil })
+                  .not_deleted
+                  .not_blocked
+          exporter = Decidim::DecidimAwesome::UsersAutoblocksScoresExporter.new(users)
           exporter.export
 
           flash[:notice] = I18n.t("success", scope: "decidim.decidim_awesome.admin.users_autoblocks.calculate_scores")
@@ -105,6 +111,10 @@ module Decidim
           Decidim::DecidimAwesome::UserAutoblockScoresPresenter::USERS_AUTOBLOCKS_TYPES.keys.index_by do |key|
             I18n.t(key, scope: "decidim.decidim_awesome.admin.users_autoblocks.form.types")
           end
+        end
+
+        def application_type_options
+          [:positive, :negative].index_by { |key| I18n.t(key, scope: "decidim.decidim_awesome.admin.users_autoblocks.form.application_types") }
         end
 
         def current_rules
