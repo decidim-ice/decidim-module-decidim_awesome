@@ -60,10 +60,9 @@ module Decidim
       end
 
       def rule_value(rule)
-        return 0 unless rule["enabled"]
-
         positive = calculate_positive(rule)
-        return rule["weight"] if (rule["block_if_detected"] && positive) || (!rule["block_if_detected"] && !positive)
+
+        return rule["weight"] if (rule["application_type"] == "positive" && positive) || (rule["application_type"] == "negative" && !positive)
 
         0
       end

@@ -73,12 +73,11 @@ en:
       user:
         user_time_zone: Personal timezone
       users_autoblocks:
-        type: Type
-        weight: Weight
         allowlist: Allow list
+        application_type: Select application
         blocklist: Block list
-        block_if_detected: Sum weight to score of detected items
-        enabled: Enabled
+        type: Rule
+        weight: Apply weight
   decidim:
     admin:
       actions:
@@ -699,6 +698,9 @@ en:
             title: Edit users automatic block
             update: Update
           form:
+            application_types:
+              negative: When the rule condition is not met
+              positive: When the rule condition is met
             types:
               about_blank: About user section is blank
               activities_blank: User has not created contents
@@ -706,8 +708,10 @@ en:
               email_unconfirmed: User email is not confirmed
               links_in_comments_or_about: Comments or about section contains links
             variables_help:
-              allow_domains_list: List of domains to be ignored by the rule separated by spaces
-              block_domains_list: List of domains to be detected by the rule separated by spaces
+              allow_domains_list: The rule does NOT apply to this list of domains
+                (separated by spaces)
+              block_domains_list: The rule only applies to this list of domains (separated
+                by spaces)
           index:
             allow: Allow
             block: Block
@@ -722,12 +726,11 @@ en:
             detect_and_run: Detect and block users
             edit: Edit rule
             headers:
-              allowlist: Domains ignored from the rule
-              blocklist: Domains to detect in the rule
-              block_if_detected: Score if the rule detects the user
+              allowlist: The rule does NOT apply to the domains
+              application_type: Application type
+              blocklist: The rule applies to the domains
               count: Detected cases
-              enabled: Enabled
-              type: Type
+              type: Rule
               weight: Weight
             new: New rule
             title: Users automatic blocks
