@@ -684,11 +684,11 @@ en:
             threshold_config_help: Define the numerical threshold (equal or greater
               than) of the "spam risk index score" for automatic blocking of users
           create:
-            error: Error removing rule! %{error}
-            success: Rule removed successfully
-          destroy:
             error: Error creating rule! %{error}
             success: Rule created successfully
+          destroy:
+            error: Error removing rule! %{error}
+            success: Rule removed successfully
           detect_and_run:
             error: There has been an error trying to block users! %{error}
             success:
