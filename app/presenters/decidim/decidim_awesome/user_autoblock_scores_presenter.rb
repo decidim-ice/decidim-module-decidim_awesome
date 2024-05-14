@@ -22,30 +22,25 @@ module Decidim
         end
       end
 
-      def about_blank_detection_method(_rule = {})
-        about.blank?
+      def about_blank_detection_method(allowlist:, blocklist:)
+        email_domain_detection_method(allowlist:, blocklist:) && about.blank?
       end
 
-      def activities_blank_detection_method(_rule = {})
-        UserActivities.new(__getobj__).blank?
+      def activities_blank_detection_method(allowlist:, blocklist:)
+        email_domain_detection_method(allowlist:, blocklist:) && UserActivities.new(__getobj__).blank?
       end
 
-      def links_in_comments_or_about_detection_method(rule = {})
-        allowlist = rule["allowlist"].split(/\s/).compact_blank
-        blocklist = rule["blocklist"].split(/\s/).compact_blank
+      def links_in_comments_or_about_detection_method(allowlist:, blocklist:)
         LinksParser.new(about, allowlist:, blocklist:).has_blocked_links? ||
-          Decidim::Comments::Comment.where(author: self).any? { |comment| LinksParser.new(comment.translated_body).has_blocked_links? }
+          Decidim::Comments::Comment.where(author: self).any? { |comment| LinksParser.new(comment.translated_body, allowlist:, blocklist:).has_blocked_links? }
       end
 
-      def email_unconfirmed_detection_method(rule = {})
-        !confirmed? && email_domain_detection_method(rule)
+      def email_unconfirmed_detection_method(allowlist:, blocklist:)
+        email_domain_detection_method(allowlist:, blocklist:) && !confirmed?
       end
 
-      def email_domain_detection_method(rule = {})
+      def email_domain_detection_method(allowlist:, blocklist:)
         email_domain = email.split("@").last
-        allowlist = rule["allowlist"].split(/\s/).compact_blank
-        blocklist = rule["blocklist"].split(/\s/).compact_blank - allowlist
-
         email_domain.blank? ||
           (allowlist.present? && allowlist.all? { |name| name != email_domain }) ||
           (blocklist.present? && blocklist.any? { |name| name == email_domain })
@@ -77,7 +72,10 @@ module Decidim
         return if USERS_AUTOBLOCKS_TYPES.keys.exclude?(rule["type"])
         return unless respond_to?("#{rule["type"]}_detection_method")
 
-        send "#{rule["type"]}_detection_method", rule
+        allowlist = rule["allowlist"].split(/\s/).compact_blank
+        blocklist = rule["blocklist"].split(/\s/).compact_blank - allowlist
+
+        send "#{rule["type"]}_detection_method", allowlist:, blocklist:
       end
 
       class LinksParser
