@@ -34,7 +34,7 @@ module Decidim
 
         def to_params
           params = form.to_params
-          params[:id] = (users_autoblocks.value.map{ |item| item["id"] }.max || 0) + 1
+          params[:id] = (users_autoblocks.value.map { |item| item["id"] }.max || 0) + 1
 
           params
         end
