@@ -69,10 +69,17 @@ module Decidim
                         icon_name: "chat-1-line",
                         if: menus[:livechat]
 
+          menu.add_item :users_autoblocks,
+                        I18n.t("menu.users_autoblocks", scope: "decidim.decidim_awesome.admin"),
+                        decidim_admin_decidim_awesome.users_autoblocks_path,
+                        position: 10,
+                        icon_name: "user-unfollow-line",
+                        if: menus[:users_autoblocks]
+
           menu.add_item :checks,
                         I18n.t("menu.checks", scope: "decidim.decidim_awesome.admin"),
                         decidim_admin_decidim_awesome.checks_path,
-                        position: 10,
+                        position: 11,
                         icon_name: "pulse"
         end
       end
