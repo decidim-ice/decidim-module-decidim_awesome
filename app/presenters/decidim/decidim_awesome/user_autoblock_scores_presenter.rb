@@ -42,8 +42,10 @@ module Decidim
       def email_domain_detection_method(allowlist:, blocklist:)
         email_domain = email.split("@").last
         email_domain.blank? ||
-          (allowlist.present? && allowlist.all? { |name| name != email_domain }) ||
-          (blocklist.present? && blocklist.any? { |name| name == email_domain })
+          (
+            (allowlist.all? { |name| name != email_domain }) &&
+            (blocklist.blank? || blocklist.any? { |name| name == email_domain })
+          )
       end
 
       private
