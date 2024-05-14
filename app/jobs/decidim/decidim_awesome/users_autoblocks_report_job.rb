@@ -5,8 +5,8 @@ module Decidim
     class UsersAutoblocksReportJob < ApplicationJob
       queue_as :user_report
 
-      def perform(admin, blocked_user_ids)
-        UsersAutoblocksReportMailer.notify(admin, blocked_user_ids).deliver_now
+      def perform(admin, detected_user_ids, block_performed: true)
+        UsersAutoblocksReportMailer.notify(admin, detected_user_ids, block_performed:).deliver_now
       end
     end
   end

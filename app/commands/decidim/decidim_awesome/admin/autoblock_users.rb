@@ -6,10 +6,11 @@ module Decidim
       class AutoblockUsers < Command
         # Public: Initializes the command.
         #
-        def initialize(form)
+        def initialize(form, perform_block: true)
           @form = form
           @users_autoblocks = AwesomeConfig.find_or_initialize_by(var: :users_autoblocks, organization: current_organization)
           @current_config = AwesomeConfig.find_or_initialize_by(var: :users_autoblocks_config, organization: current_organization)
+          @perform_block = perform_block
         end
 
         # Executes the command. Broadcasts these events:
@@ -24,10 +25,8 @@ module Decidim
           transaction do
             save_configuration!
             calculate_scores
-            if detected_users.exists?
-              block_users!
-              send_notification_to_admins!
-            end
+            block_users! if perform_block && detected_users.exists?
+            send_notification_to_admins! if detected_users.exists?
           end
 
           broadcast(:ok, detected_users.count)
@@ -37,7 +36,7 @@ module Decidim
 
         private
 
-        attr_reader :form, :users_autoblocks, :current_config
+        attr_reader :form, :users_autoblocks, :current_config, :perform_block
 
         delegate :current_organization, :current_user, to: :form
 
@@ -81,7 +80,7 @@ module Decidim
           current_organization.admins.each do |admin|
             next unless admin.email_on_moderations
 
-            Decidim::DecidimAwesome::UsersAutoblocksReportJob.perform_later(admin, detected_users.map { |user| user.id.to_s })
+            Decidim::DecidimAwesome::UsersAutoblocksReportJob.perform_later(admin, detected_users.map { |user| user.id.to_s }, block_performed: @perform_block)
           end
         end
 
