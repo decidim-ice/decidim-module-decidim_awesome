@@ -7,7 +7,7 @@ module Decidim
         include NeedsAwesomeConfig
         include Decidim::DecidimAwesome::AdminAccountability::Admin::Filterable
 
-        helper_method :admin_actions, :collection, :export_params, :global?
+        helper_method :admin_actions, :collection, :export_params, :global?, :global_users_missing_date
 
         layout "decidim/admin/users"
 
@@ -35,7 +35,15 @@ module Decidim
         end
 
         def collection
-          @collection ||= paginate(global? ? PaperTrailVersion.admin_role_actions(params[:admin_role_type]) : PaperTrailVersion.space_role_actions)
+          @collection = global? ? paginate(admin_role_actions) : paginate(space_role_actions)
+        end
+
+        def space_role_actions
+          @space_role_actions ||= Decidim::DecidimAwesome::PaperTrailVersion.space_role_actions(current_organization)
+        end
+
+        def admin_role_actions
+          @admin_role_actions ||= Decidim::DecidimAwesome::PaperTrailVersion.in_organization(current_organization).admin_role_actions(params[:admin_role_type])
         end
 
         def export_params
@@ -44,6 +52,19 @@ module Decidim
 
         def global?
           params[:admins] == "true"
+        end
+
+        # User traceability was introduced in version 0.24. Users created before that might appear in the list.
+        # Returns the first traceability record available if there are users created before.
+        # Returns nil otherwise
+        def global_users_missing_date
+          return unless global?
+
+          @global_users_missing_date ||= begin
+            first_version = Decidim::DecidimAwesome::PaperTrailVersion.where(item_type: "Decidim::UserBaseEntity").last
+            first_user = Decidim::User.first
+            first_version.created_at if first_user && first_version && (first_version.created_at > first_user.created_at + 1.second)
+          end
         end
       end
     end

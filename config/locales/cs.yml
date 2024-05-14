@@ -2,6 +2,7 @@ cs:
   activemodel:
     attributes:
       config:
+        additional_proposal_sortings: Povoleny další možnosti řazení
         allow_images_in_full_editor: Povolit obrázky v kompletním HTML editoru
         allow_images_in_markdown_editor: Povolit obrázky v editoru markdown
         allow_images_in_proposals: Povolit obrázky v editoru návrhů
@@ -94,7 +95,7 @@ cs:
             map_zoom_help: Použije se pouze v případě, že je definován střed mapy
             menu_amendments: Zobrazit pozměňovací návrhy
             menu_categories: Zobrazit menu hledání kategorií
-            menu_hashtags: Zobrazit vyhledávací menu Hasthag
+            menu_hashtags: Zobrazit nabídku hledání Hashtagu
             menu_meetings: Zobrazit schůzky
             menu_merge_components: Sloučit všechny komponenty stejného typu v menu
             truncate: Maximum znaků pro popisy vyskakovacích oken
@@ -105,6 +106,32 @@ cs:
             show_not_answered: Zobrazit nezodpovězené návrhy
             show_rejected: Zobrazit odmítnuté návrhy
             show_withdrawn: Zobrazit stažené návrhy
+      proposals:
+        settings:
+          global:
+            awesome_voting_manifest: Typ podpory
+            awesome_voting_manifest_help_html: <strong class="text-alert">Uvědomte si, že změna tohoto nastavení uprostřed hlasovacího období může mít za následek nepřesné nebo neočekávané výsledky.</strong><br>Všimněte si, že toto nastavení může být upraveno pouze v případě, že komponenta nemá zatím žádnou podporu.
+            awesome_voting_manifest_options:
+              default: Jednoduché hlasování (výchozí)
+              voting_cards: Hlasování pomocí barevných karet
+            default_sort_order_options:
+              az: A-Z (abecední)
+              supported_first: Nejdříve podporováno
+              supported_last: Naposledy podporováno
+              za: Z-A (obrácená abeceda)
+            sort_orders_enabled: Typy řazeníí povoleny
+            voting_cards_box_title: Název hlasovacího pole
+            voting_cards_box_title_help: Výchozí hodnota je "Hlasovat pro tento návrh". Použijte "-" pro jeho schování.
+            voting_cards_instructions: Instrukce podpory/nápověda (zrušitelné modální okno)
+            voting_cards_instructions_help: Výchozí hodnota je "Přečtěte si pečlivě pravidla voleb, abyste pochopili, jak bude vaše hlasování použito %{organization}""
+            voting_cards_show_abstain: Přidat možnost zdržet se hlasování
+            voting_cards_show_modal_help: Po kliknutí na podporu zobrazit instrukce/nápovědu
+          step:
+            default_sort_order_options:
+              az: A-Z (abecední)
+              supported_first: Nejdříve podporováno
+              supported_last: Naposledy podporováno
+              za: Z-A (obrácená abeceda)
     decidim_awesome:
       admin:
         admin_accountability:
@@ -126,6 +153,7 @@ cs:
           index:
             description: Zde najdete všechny uživatele, kteří měli nějakou roli ve správě participačního prostoru. Běžní správci nejsou uvedeni.
             global_description: Zde najdete všechny uživatele, kteří měli nějakou globální roli ve správě participačního prostoru. Běžní správci nejsou uvedeni.
+            missing_users: 'POZNÁMKA: Tento seznam nemusí zahrnovat uživatele vytvořené/odebrané před %{date}. Je to proto, že "sledovatelnost uživatele" byla zavedena v Decidim v0.24 a tato instalace je pravděpodobně starší.'
             see_global: Seznam globálních správců
             see_spaces: Seznam administrátorů participačního prostoru
             title: Odpovědnost správce
@@ -189,6 +217,9 @@ cs:
             error: Chyba při odstraňování CSS boxu! %{error}
             success: CSS box %{key} byl úspěšně odstraněn
           form:
+            additional_proposal_sortings:
+              enable_all: Povolit všechny další možnosti řazení
+              help: Tyto možnosti řazení jsou navíc k výchozím možnostem. Nezapomeňte, že si můžete vybrat výchozí pořadí v nastavení komponenty návrhu.
             edit_label: Přejmenovat štítek
             errors:
               incorrect_css: 'CSS v poli #%{key} je neplatné'
@@ -214,6 +245,11 @@ cs:
               validate_body_max_marks_together: 'Omezit počet otazníků a vykřičníků, které lze psát dohromada. Např: Pokud je 2, pak ''!!!'' nebude v textu povoleno'
               validate_body_min_length: Toto číslo může být nulové, toto pole bude ve skutečnosti nepovinné
               validate_title_max_caps_percent: Nula nedovolí žádné velké písmeno, 100 bude nutit psát vše velkými písmeny
+              validate_title_max_marks_together: 'Omezit počet otazníků a vykřičníků, které lze psát dohromada. Např: Pokud je 2, pak ''!!!'' nebude v textu povoleno'
+              validate_title_min_length: Název je vždy povinný a toto číslo nemůže být nulové
+            validators:
+              body: Ověření vstupu uživatele pro pole "tělo"
+              title: Ověření uživatelem pro pole "Název"
           form_proposal_custom_fields:
             new: Přidat nové pole "vlastní pole"
             remove: Odstranit toto "vlastní pole"
@@ -392,6 +428,34 @@ cs:
           show:
             view_meeting: Zobrazit schůzku
             view_proposal: Zobrazit návrh
+      validators:
+        too_much_caps: Používá příliš mnoho velkých písmen (více než %{percent}% textu)
+      voting:
+        voting_cards:
+          abstained: "✔️ Zdržel se hlasování"
+          change_vote: Změnit můj hlas
+          default_box_title: Hlasovat o tomto návrhu
+          modal:
+            cancel: Zrušit
+            message: Váš hlas bude považován za konečný v %{date}. Do té doby jej můžete změnit,
+          vote_button: Kliknutím hlasujte
+          voted: Odhlasováno
+          voting_for: Můj hlas pro "%{proposal}" je "%{type}"
+          weights:
+            weight_0_short: 'A:'
+            weight_1: Červená
+            weight_1_short: 'R:'
+            weight_2: Žlutá
+            weight_2_short: 'Y:'
+            weight_3: Zelená
+            weight_3_short: 'G:'
+    proposals:
+      proposals:
+        orders:
+          az: A-Z (abecední)
+          supported_first: Nejdříve podporováno
+          supported_last: Naposledy podporováno
+          za: Z-A (obrácená abeceda)
   layouts:
     decidim:
       admin:

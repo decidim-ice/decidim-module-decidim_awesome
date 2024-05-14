@@ -3,6 +3,7 @@ en:
   activemodel:
     attributes:
       config:
+        additional_proposal_sortings: Enabled additional sorting options
         allow_images_in_full_editor: Allow images in the full HTML editor
         allow_images_in_markdown_editor: Allow images in the markdown editor
         allow_images_in_proposals: Allow images in the proposals editor
@@ -116,7 +117,7 @@ en:
             map_zoom_help: Only applies if a map center is defined
             menu_amendments: Show amendments
             menu_categories: Show Category search menu
-            menu_hashtags: Show Hasthag search menu
+            menu_hashtags: Show Hashtag search menu
             menu_meetings: Show meetings
             menu_merge_components: Merge all components of the same type in the menu
             truncate: Maximum characters for popup descriptions
@@ -127,6 +128,39 @@ en:
             show_not_answered: Show not answered proposals
             show_rejected: Show rejected proposals
             show_withdrawn: Show withdrawn proposals
+      proposals:
+        settings:
+          global:
+            awesome_voting_manifest: Support type
+            awesome_voting_manifest_help_html: <strong class="text-alert">Be aware
+              that changing this setting in the middle of a votation period can result
+              in innacurate or unexpected results.</strong><br>Note also that this
+              setting can only be edited if the component has no supports yet.
+            awesome_voting_manifest_options:
+              default: Simple vote (default)
+              voting_cards: Voting using coloured cards
+            default_sort_order_options:
+              az: A-Z (Alphabetical)
+              supported_first: Supported first
+              supported_last: Supported last
+              za: Z-A (Reverse alphabetical)
+            sort_orders_enabled: Enabled sorting types
+            voting_cards_box_title: Title for the voting box
+            voting_cards_box_title_help: Default is "Vote on this proposal". Use "-"
+              to hide it.
+            voting_cards_instructions: Support instructions/help (dissmissable modal
+              window)
+            voting_cards_instructions_help: Default is "Please read the election rules
+              carefully to understand how your vote will be used by %{organization}""
+            voting_cards_show_abstain: Add an abstention option
+            voting_cards_show_modal_help: Show instructions/help modal when support
+              is clicked
+          step:
+            default_sort_order_options:
+              az: A-Z (Alphabetical)
+              supported_first: Supported first
+              supported_last: Supported last
+              za: Z-A (Reverse alphabetical)
     decidim_awesome:
       admin:
         admin_accountability:
@@ -153,6 +187,9 @@ en:
             global_description: Listed here you'll find all users that have had some
               global role in administrating this organization. Participatory space
               admins are not listed.
+            missing_users: 'NOTE: This list might not include users created/removed
+              before %{date}. This is because "user traceability" was introduced in
+              Decidim v0.24 and this installation is probably older.'
             see_global: List global admins
             see_spaces: List participatory space admins
             title: Admin accountability
@@ -223,6 +260,12 @@ en:
             error: Error removing CSS box! %{error}
             success: CSS box %{key} removed successfully
           form:
+            additional_proposal_sortings:
+              enable_all: Enable all additional sorting options
+              help: These sorting options are additional to the default ones. Also,
+                remember that you can choose the default order in the proposals component
+                settings.
+              title: Customize sorting options for the proposals list
             edit_label: Rename label
             errors:
               incorrect_css: 'CSS in box #%{key} is invalid'
@@ -493,6 +536,38 @@ en:
         private_field_notice:
           will_ask_later: We will ask you %{count} more private questions in the following step. This information will be kept only between you and the platform administrator for the duration of the phase.
           private_fields_to_ask: "Additional information needed:"
+      voting:
+        voting_cards:
+          abstained: "✔ Abstained"
+          change_vote: Change my vote
+          default_box_title: Vote on this proposal
+          default_instructions_html: <p>Please read the election rules carefully to
+            understand how your vote will be used by %{organization}"</p>
+          modal:
+            cancel: Cancel
+            message: Your vote will be considered final on %{date}. You can change
+              it until then
+            proceed: Proceed
+            skip: Check here to skip this window in the future
+          vote_button: Click to vote
+          voted: Voted
+          voting_for: My vote on "%{proposal}" is "%{type}"
+          weights:
+            weight_0: Abstain
+            weight_0_short: 'A:'
+            weight_1: Red
+            weight_1_short: 'R:'
+            weight_2: Yellow
+            weight_2_short: 'Y:'
+            weight_3: Green
+            weight_3_short: 'G:'
+    proposals:
+      proposals:
+        orders:
+          az: A-Z (Alphabetical)
+          supported_first: Supported first
+          supported_last: Supported last
+          za: Z-A (Reverse alphabetical)
   layouts:
     decidim:
       admin:

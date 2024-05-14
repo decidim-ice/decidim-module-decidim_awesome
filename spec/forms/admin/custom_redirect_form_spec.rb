@@ -60,14 +60,14 @@ module Decidim::DecidimAwesome
         it { is_expected.to be_valid }
 
         it "sanitizes origin" do
-          expect(subject.to_params[0]).to eq("/some-origin")
+          expect(subject.to_params[0]).to eq("/some-Origin")
         end
 
         context "and origin has organization host" do
           let(:origin) { "http://#{organization.host}/some-Origin " }
 
           it "strips host" do
-            expect(subject.to_params[0]).to eq("/some-origin")
+            expect(subject.to_params[0]).to eq("/some-Origin")
           end
         end
       end
@@ -78,7 +78,7 @@ module Decidim::DecidimAwesome
         it { is_expected.to be_valid }
 
         it "sanitizes destination" do
-          expect(subject.to_params[1][:destination]).to eq("/some-destination")
+          expect(subject.to_params[1][:destination]).to eq("/some-destInation")
         end
 
         context "and destination has organization host" do
@@ -94,6 +94,16 @@ module Decidim::DecidimAwesome
         let(:destination) { "http://#{organization.host}#{origin} " }
 
         it { is_expected.to be_invalid }
+      end
+
+      context "when origin and destination are case sensitive" do
+        let(:origin) { "/Some-Origin-Path".downcase }
+        let(:destination) { "http://#{organization.host}/Some-Origin-Path".downcase }
+
+        it "compares origin and destination without considering case" do
+          expect(origin).not_to eq("/Some-Origin-Path")
+          expect(destination).not_to eq("http://#{organization.host}/Some-Origin-Path")
+        end
       end
     end
   end

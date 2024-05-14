@@ -42,6 +42,8 @@ describe Decidim::DecidimAwesome do
   let!(:validate_body_max_caps_percent) { create(:awesome_config, organization: organization, var: :validate_body_max_caps_percent, value: 10) }
   let!(:validate_body_max_marks_together) { create(:awesome_config, organization: organization, var: :validate_body_max_marks_together, value: 10) }
   let!(:validate_body_start_with_caps) { create(:awesome_config, organization: organization, var: :validate_body_start_with_caps, value: true) }
+  let!(:weighted_proposal_voting) { create(:awesome_config, organization: organization, var: :weighted_proposal_voting, value: []) }
+  let!(:additional_proposal_sortings) { create(:awesome_config, organization: organization, var: :additional_proposal_sortings, value: []) }
 
   let(:styles) { "body {background: red;}" }
   let(:intergram) do

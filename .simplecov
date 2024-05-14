@@ -1,12 +1,18 @@
 # frozen_string_literal: true
 
-SimpleCov.start do
-  root ENV.fetch("ENGINE_ROOT", nil)
+if ENV["SIMPLECOV"]
+  SimpleCov.start do
+    # We ignore some of the files because they are never tested
+    add_filter "/config/"
+    add_filter "/db/"
+    add_filter "lib/decidim/decidim_awesome/version.rb"
+    add_filter "/spec"
+  end
 
-  add_filter "lib/decidim/decidim_awesome/version.rb"
-  add_filter "/spec"
+  SimpleCov.merge_timeout 1800
+
+  if ENV["CI"]
+    require "simplecov-cobertura"
+    SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
+  end
 end
-
-SimpleCov.command_name ENV.fetch("COMMAND_NAME", nil) || File.basename(Dir.pwd)
-
-SimpleCov.merge_timeout 1800

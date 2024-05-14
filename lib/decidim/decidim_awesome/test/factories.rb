@@ -45,4 +45,22 @@ FactoryBot.define do
   factory :private_proposal_field, class: "Decidim::DecidimAwesome::PrivateProposalField" do 
     proposal { create :proposal }
   end
+  
+  factory :awesome_vote_weight, class: "Decidim::DecidimAwesome::VoteWeight" do
+    vote { create :proposal_vote }
+    sequence(:weight) { |n| n }
+  end
+
+  factory :awesome_proposal_extra_fields, class: "Decidim::DecidimAwesome::ProposalExtraField" do
+    proposal { create :proposal }
+
+    trait :with_votes do
+      after :create do |weight|
+        5.times.collect do |n|
+          vote = create(:proposal_vote, proposal: weight.proposal, author: create(:user, organization: weight.proposal.organization))
+          create(:awesome_vote_weight, vote: vote, weight: n + 1)
+        end
+      end
+    end
+  end
 end

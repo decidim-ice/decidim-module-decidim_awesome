@@ -40,11 +40,15 @@ module Decidim
 
         def global_map_components
           @global_map_components ||= Decidim::Component.where(manifest_name: [:meetings, :proposals]).published.filter do |component|
-            case component.manifest.name
-            when :meetings
-              true
-            when :proposals
-              component.settings.geocoding_enabled
+            if component.organization == current_organization
+              case component.manifest.name
+              when :meetings
+                true
+              when :proposals
+                component.settings.geocoding_enabled
+              else
+                false
+              end
             else
               false
             end

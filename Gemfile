@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = "0.27.3"
+DECIDIM_VERSION = "0.27.4"
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-decidim_awesome", path: "."
@@ -12,7 +12,6 @@ gem "decidim-decidim_awesome", path: "."
 gem "bootsnap", "~> 1.4"
 
 gem "puma", ">= 5.5.1"
-gem "uglifier", "~> 4.1"
 
 gem "faker", "~> 2.14"
 

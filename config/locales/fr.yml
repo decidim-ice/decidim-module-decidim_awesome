@@ -2,6 +2,7 @@ fr:
   activemodel:
     attributes:
       config:
+        additional_proposal_sortings: Activer les options de tri supplémentaires
         allow_images_in_full_editor: Autoriser les images dans l'éditeur HTML complet
         allow_images_in_markdown_editor: Autoriser les images dans l'éditeur de markdown
         allow_images_in_proposals: Autoriser les images dans l'éditeur de propositions
@@ -21,7 +22,7 @@ fr:
         scoped_admins: Groupe d'administrateurs restreints %{id}
         scoped_styles: Style personnalisés %{id}
         use_markdown_editor: Utiliser un éditeur Markdown au lieu de l'éditeur HTML
-        validate_body_max_caps_percent: Pourcentage maximum autorisé de lettres majuscules pour le corps
+        validate_body_max_caps_percent: Pourcentage maximum autorisé de lettres majuscules pour la description
         validate_body_max_marks_together: Nombre maximum de caractères spéciaux autorisés dans le corps
         validate_body_min_length: Nombre de caractères minimum pour le corps
         validate_body_start_with_caps: Forcer le corps à commencer par une lettre majuscule
@@ -94,7 +95,7 @@ fr:
             map_zoom_help: Ne s'applique que si un centre de carte est défini
             menu_amendments: Afficher les amendements
             menu_categories: Afficher le menu de recherche par catégorie
-            menu_hashtags: Voir le menu de recherche Hasthag
+            menu_hashtags: Afficher le menu de recherche des hashtags
             menu_meetings: Montrer les rencontres
             menu_merge_components: Fusionner toutes les fonctionnalités du même type dans le menu
             truncate: Caractères maximum pour les descriptions des popups
@@ -105,6 +106,32 @@ fr:
             show_not_answered: Afficher les propositions n'ayant pas reçu de réponses
             show_rejected: Afficher les propositions rejetées
             show_withdrawn: Afficher les propositions retirées
+      proposals:
+        settings:
+          global:
+            awesome_voting_manifest: Types de support
+            awesome_voting_manifest_help_html: <strong class="text-alert">Sachez que la modification de ce paramètre au milieu d'une période de vote peut entraîner des résultats inexacts ou inattendus.</strong><br>Notez également que ce paramètre ne peut être modifié que si le composant n'a pas encore de support.
+            awesome_voting_manifest_options:
+              default: Supports simples (par défaut)
+              voting_cards: Voter avec des cartes de couleur
+            default_sort_order_options:
+              az: A-Z (alphabétique)
+              supported_first: Déjà supporté en priorité
+              supported_last: A supporter en priorité
+              za: Z-A (alphabétique inverse)
+            sort_orders_enabled: Types de tri activés
+            voting_cards_box_title: Titre pour le boîtier de vote
+            voting_cards_box_title_help: La valeur par défaut est "Vote sur cette proposition". Utilisez "-" pour la masquer.
+            voting_cards_instructions: Instructions de soutien/aide pour le vote (fenêtre modale révocable)
+            voting_cards_instructions_help: La valeur par défaut est "Veuillez lire attentivement les règles électorales pour comprendre comment votre vote sera utilisé par %{organization}"
+            voting_cards_show_abstain: Ajouter l'option de s'abstenir
+            voting_cards_show_modal_help: Afficher une fenêtre modale d'instructions/d'aide lorsque l'on clique sur le support
+          step:
+            default_sort_order_options:
+              az: A-Z (alphabétique)
+              supported_first: Déjà supporté en priorité
+              supported_last: A supporter en priorité
+              za: Z-A (alphabétique inverse)
     decidim_awesome:
       admin:
         admin_accountability:
@@ -126,6 +153,7 @@ fr:
           index:
             description: Vous trouverez ici la liste de tous les utilisateurs ayant un rôle dans l'administration d'un espace participatif. Les administrateurs "normaux" ne sont pas listés.
             global_description: Vous trouverez ici la liste de tous les utilisateurs ayant un rôle global dans l'administration de cette organisation. Les administrateurs d'espaces participatifs ne sont pas listés.
+            missing_users: 'NOTE : Cette liste peut ne pas inclure les utilisateurs créés/supprimés avant le %{date}. En effet, la "traçabilité des utilisateurs" a été introduite dans Decidim v0.24 et cette installation est probablement plus ancienne.'
             see_global: Lister les administrateurs globaux
             see_spaces: Lister les administrateurs d'espace participatif
             title: Suivi administrateur
@@ -189,6 +217,10 @@ fr:
             error: Erreur lors de la suppression de la boîte CSS! %{error}
             success: Boîte CSS %{key} supprimée avec succès
           form:
+            additional_proposal_sortings:
+              enable_all: Activer toutes les options de tri supplémentaires
+              help: Ces options de tri s'ajoutent aux options par défaut. N'oubliez pas que vous pouvez choisir l'ordre par défaut dans les paramètres de la fonctionnalité des propositions.
+              title: Personnaliser les options de tri pour la liste des propositions
             edit_label: Renommer le label
             errors:
               incorrect_css: 'CSS dans la boîte #%{key} est invalide'
@@ -399,6 +431,36 @@ fr:
             view_proposal: Voir la proposition
       validators:
         too_much_caps: Utilise trop de majuscule (plus de %{percent} du texte)
+      voting:
+        voting_cards:
+          abstained: "✔ Abstenu.e"
+          change_vote: Modifier mon vote
+          default_box_title: Votez sur la proposition
+          default_instructions_html: <p>Veuillez lire attentivement les règles électorales pour comprendre comment votre vote sera utilisé par %{organization}"</p>
+          modal:
+            cancel: Annuler
+            message: Votre vote sera considéré comme définitif le %{date}. Vous pouvez le modifier jusque-là
+            proceed: Procéder
+            skip: Cochez cette case pour ignorer cette fenêtre à l'avenir
+          vote_button: Cliquez pour voter
+          voted: Voté.e
+          voting_for: Mon vote sur "%{proposal}" est "%{type}"
+          weights:
+            weight_0: Abstention
+            weight_0_short: 'A:'
+            weight_1: Rouge
+            weight_1_short: 'R:'
+            weight_2: Jaune
+            weight_2_short: 'J:'
+            weight_3: Verte
+            weight_3_short: 'V:'
+    proposals:
+      proposals:
+        orders:
+          az: A-Z (alphabétique)
+          supported_first: Déjà supporté en priorité
+          supported_last: A supporter en priorité
+          za: Z-A (alphabétique inverse)
   layouts:
     decidim:
       admin:

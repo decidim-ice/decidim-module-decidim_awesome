@@ -1,6 +1,52 @@
 CHANGELOG
 =========
 
+v0.10.2
+------
+
+Compatibility:
+  - Decidim v0.27.4
+  - Decidim v0.26.8
+
+Features:
+  - Added translations
+  - Fix deface override updating <body> tag in the admin
+
+v0.10.1
+------
+
+Compatibility:
+  - Decidim v0.27.4
+  - Decidim v0.26.8
+
+Features:
+  - Added translations
+  - Fix deface override updating <body> tag
+  - Fix ordering with accents
+
+v0.10.0
+------
+
+Compatibility:
+  - Decidim v0.27.4
+  - Decidim v0.26.8
+
+Features:
+  - Migrate to [Deface](https://github.com/spree/deface) for overrides
+  - Introduce Weighted Voting with configurable manifests for different types of votings with grades
+  - Fix wrong behaviour showing proposals on map
+  - Introduced new sorting options for proposals. Added alphabetical sorting, reverse sorting, sorting by votes first and last.
+
+v0.9.3
+------
+
+Compatibility:
+  - Decidim v0.27.3
+  - Decidim v0.26.7
+
+Features:
+  - Fixes for admin accountability leaking other tenants data
+
 v0.9.2
 ------
 

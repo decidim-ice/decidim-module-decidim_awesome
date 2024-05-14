@@ -31,6 +31,7 @@ module Decidim
         attribute :validate_body_max_caps_percent, Integer, default: 25
         attribute :validate_body_max_marks_together, Integer, default: 1
         attribute :validate_body_start_with_caps, Boolean, default: true
+        attribute :additional_proposal_sortings, Array, default: Decidim::DecidimAwesome.possible_additional_proposal_sortings
 
         # collect all keys anything not specified in the params (UpdateConfig command ignores it)
         attr_accessor :valid_keys
@@ -53,6 +54,12 @@ module Decidim
           instance.valid_keys = params.keys.map(&:to_sym) || []
           instance.sanitize_labels!
           instance
+        end
+
+        def additional_proposal_sorting_labels
+          Decidim::DecidimAwesome.possible_additional_proposal_sortings.index_by do |sorting|
+            I18n.t(sorting, scope: "decidim.proposals.proposals.orders")
+          end
         end
 
         def css_syntax

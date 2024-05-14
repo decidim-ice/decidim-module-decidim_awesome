@@ -23,6 +23,10 @@ decidim-core:
     decidim-0.25: 63532a04fcf07cf92b789833a9421416
     decidim-0.26: 636943ccb2e994fe0124dc87e72e49e9
 decidim-proposals:
+  /lib/decidim/proposals/proposal_serializer.rb:
+    decidim-0.26: 2d817775f79a19cfcf9cfae8e5b68c5a
+  /lib/decidim/api/proposal_type.rb:
+    decidim-0.26: e38e4875e408ec4f658e28725c5a94d4
   /app/forms/decidim/proposals/proposal_wizard_create_step_form.rb:
     decidim-0.24: db69edd0ba8ffa3965a5c44a6bfaba8d
     decidim-0.27: b495d37088ecebcbe4ac9563bb3498d5
@@ -33,6 +37,9 @@ decidim-proposals:
     decidim-0.27: c0ebeac39ebe4926bf0e5fc585a384d7
     decidim-0.27.1: a4f902d1c4829a7f7f62299686f8604e
     decidim-0.27.3: a9c9ed5eedaf7bf80afaf9ff5a89c254
+  /app/controllers/decidim/proposals/proposal_votes_controller.rb:
+    decidim-0.26: 65ca00fdb4aaf30da37ad75aaf66e70a
+    decidim-0.27: a1d416491752f4c2fb2668b29ceb8e09
   /app/views/decidim/proposals/collaborative_drafts/_edit_form_fields.html.erb:
     # this file is not overriden anymore but it needs to be the last version
     decidim-0.26: 519a0d34a9ffbd8b9c26d9b68ff4e2a3
@@ -44,3 +51,13 @@ decidim-proposals:
   /app/views/decidim/proposals/admin/proposals/_form.html.erb:
     decidim-0.25: 90a04984d4269398b7cd21aa33763a1f
     decidim-0.27: f60168e432e1d419e5aec5d3d1e53f0e
+  /app/views/decidim/proposals/proposals/_vote_button.html.erb:
+    decidim-0.27: f7202c37fe042cd816a6f9fd0f9e6807
+  /app/views/decidim/proposals/proposals/_votes_count.html.erb:
+    decidim-0.27: 33339aae5004361e24c4c5b009cc2888
+  /app/cells/decidim/proposals/proposal_m_cell.rb:
+    decidim-0.26: 21cc09a45efa20dbcda5c943d820c867
+    decidim-0.27: 9df97ded3e6594b65b85fcbf1e5b0644
+    decidim-0.27.4: ce3b30cdddfee547b8fb089c0fddd8a4
+  /app/cells/decidim/proposals/proposal_m/footer.erb:
+    decidim-0.26: 7ade5bbd8412f44f1c4ed913ae1834c6

@@ -1,0 +1,101 @@
+lt:
+  activemodel:
+    attributes:
+      config:
+        allow_images_in_full_editor: Leisti paveikslėlius pilname HTML redaktoriuje
+        allow_images_in_markdown_editor: Leisti paveikslėlius markdown redaktoriuje
+        allow_images_in_proposals: Leisti paveikslėlius pasiūlymų redaktoriuje
+        allow_images_in_small_editor: Leisti paveikslėlius minimaliame HTML redaktoriuje
+        auto_save_forms: Automatiškai išsaugoti formas vietinėje atmintyje
+        intergram_auto_no_response: Žinutė, kuri išsiunčiama vieną minutę po to, kai vartotojas išsiunčia savo pirmąją žinutę ir negauna atsakymo
+        intergram_auto_response: Žinutė, kuri išsiunčiama iš karto po to, kai vartotojas išsiunčia savo pirmąją žinutę
+        intergram_chat_id: Pokalbio ID
+        intergram_color: Valdiklio spalva
+        intergram_for_admins: Įjungti Intergram pokalbį administratoriaus sąsajoje
+        intergram_intro_message: Žinutė, kuri išsiunčiama iš karto po to, kai vartotojas atidaro pokalbį
+        intergram_require_login: Tik prisijungusiems naudotojams
+        intergram_title_closed: Uždaryto pokalbio pavadinimas
+        intergram_title_open: Atviro pokalbio pavadinimas
+        intergram_use_floating_button: Jei pažymėta, uždarytas pokalbis visada yra mygtukas, o ne tekstas
+        proposal_custom_fields: Personalizuotų laukų %{id}
+        scoped_admins: Erdvei priskirtos administratorių grupės %{id}
+        scoped_styles: Personalizuotų stilių %{id}
+        use_markdown_editor: Naudoti Markdown redaktorių vietoj HTML redaktoriaus
+        validate_body_max_caps_percent: Maksimali leidžiama didžiųjų raidžių dalis teksto turinyje
+        validate_body_max_marks_together: Maksimalus iš eilės einančių žymėjimo simbolių skaičius leidžiamas teksto turinyje
+        validate_body_min_length: Minimalus reikalingų simbolių skaičius teksto turiniui
+        validate_body_start_with_caps: Priversti teksto turinį prasidėti iš didžiosios raidės
+        validate_title_max_caps_percent: Maksimali leidžiama didžiųjų raidžių dalis pavadinime
+        validate_title_max_marks_together: Maksimalus iš eilės einančių žymėjimo simbolių skaičius leidžiamas pavadinime
+        validate_title_min_length: Minimalus reikalingų simbolių skaičius pavadinimui
+        validate_title_start_with_caps: Pradėti pavadinimus didžiąja raide
+      constraint:
+        component_id: arba specifiškai tik
+        component_manifest: Tik tokio tipo komponentuose
+        participatory_space_manifest: Taikyti šio tipo dalyvaujamosiose erdvėse
+        participatory_space_slug: Tik
+      custom_redirect:
+        active: Aktyvu
+        destination: Kryptis
+        origin: Kilmė
+        pass_query: Perduoti užklausos eilutę krypčiai
+        status: Būsena
+      menu:
+        position: Padėtis
+        raw_label: Etiketė
+        target: Atsidaro
+        url: Nuoroda
+        visibility: Matomumas
+      proposal:
+        proposal_custom_fields: Papildomi laukai
+  decidim:
+    admin:
+      filters:
+        admin_accountability:
+          admin_role_type:
+            label: Rolės tipas
+          participatory_space_type_eq:
+            label: Dalyvaujamojo proceso tipas
+          role:
+            label: Rolė
+          role_type_eq:
+            label: Rolės tipas
+        label:
+          search_field_end_date: 'Iki datos:'
+          search_field_start_date: 'Nuo datos:'
+        search_placeholder:
+          user_name_or_user_email_cont: Ieškoti pagal naudotojo vardą, el. paštą
+      menu:
+        admin_accountability: Administratorių atskaitomybė
+    decidim_awesome:
+      admin:
+        admin_accountability:
+          name: Pavadinimas
+          never_logged: Niekada neprisijungę
+          participatory_space: Dalyvaujamoji erdvė
+          removal_date: Rolė pašalinta
+          role: Rolė
+          roles:
+            admin: Administratorius
+            collaborator: Pagalbininkas
+            moderator: Moderatorius
+            valuator: Vertintojas
+        checks:
+          index:
+            admin_head_tags: Awesome žymės įtrauktos į administratoriaus aplikaciją
+            decidim-admin: Iš administratorių modulio
+            decidim-core: iš pagrindinio modulio
+            decidim-proposals: Iš pasiūlymų modulio
+            decidim_version: Decidim versija %{version}
+            errors:
+              CSS: "Head dalyje nėra reikalingų <link> stilių aprašymų. Norėdami tai išspręsti, galite rankiniu būdu pridėti juos prie savo individualizuoto _head.html.erb\n\n\n\n\n"
+              JavaScript: Head dalyje nėra reikalingų <script> Javascript įrašų. Norėdami tai išspręsti, galite rankiniu būdu pridėti juos prie savo individualizuoto admin/_header.html.erb
+            head_tags: Awesome žymės įtrauktos į aplikacijos head
+            image_migrations_started: Paveikslėlių perkėlimo procesas sėkmingai pradėtas
+            images_migrated: Paveikslėliai migruoti į aktyviąją atmintį (Active Storage)
+            pending_image_migrations: |
+              Nuo 0.25 versijos, Decidim naudoja naują technologiją failų įkėlimui.<br>
+              Atrodo, kad šiam diegimui reikia perkelti <strong>%{total}</strong> senųjų paveikslėlių į naująją sistemą.<br>
+              Galite pradėti procesą dabar, ir jis bus atliekamas fone.
+            start_image_migrations: "\U0001F449 Pradėti migracijos procesą dabar"
+            title: Sistemos suderinamumo patikrinimai

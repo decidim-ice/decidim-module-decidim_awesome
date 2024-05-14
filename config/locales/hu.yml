@@ -1,0 +1,266 @@
+hu:
+  activemodel:
+    attributes:
+      config:
+        allow_images_in_full_editor: A teljesértékű HTML szerkesztőben a képek engedélyezése
+        allow_images_in_markdown_editor: A markdown szerkesztőben a képek engedélyezése
+        allow_images_in_proposals: A javaslatok szerkesztőben a képek engedélyezése
+        allow_images_in_small_editor: A minimalista HTML szerkesztőben a képek engedélyezése
+        auto_save_forms: A helyi tárolóban az űrlapok automatikus mentése
+        intergram_auto_no_response: A kiküldött üzenet, amit a felhasználó első üzenete után kap, amelyet akkor küldünk, ha nem érkezett válasz
+        intergram_auto_response: Az üzeenet, amit a felhasználó első üzenete után küldönk ki
+        intergram_chat_id: Chat ID
+        intergram_color: A widget színe
+        intergram_for_admins: Az admin backendben az Intergram chat enegedélyezése
+        intergram_intro_message: Az első üzenet, amit a felhasználó a cset első megnyitásakor kap
+        intergram_require_login: Csak bejelnetkezett felhasználóknak
+        intergram_title_closed: Zárt chet cím
+        intergram_title_open: Nyitott cset cím
+        intergram_use_floating_button: Ha be van jelölve, egy zárt cset mindig gomb szöveg helyett
+        proposal_custom_fields: Egyéni mezők %{id}
+        scoped_admins: Területi adminok csoport %{id}
+        scoped_styles: Egyedi stílusok %{id}
+        use_markdown_editor: A markdown használata a html szerkesztő helyett
+        validate_body_max_caps_percent: A szövegtörzsben a maximálisan engedélyezett nagybetűk százaléka
+        validate_body_max_marks_together: A törzsben megengedett maximálisan egymás utáni jelek szimbólumai
+        validate_body_min_length: A minimális karakterek száma a szövegtörzsben
+        validate_body_start_with_caps: A szövegtörzsben a szöveg mindig nagybetűvel kezdődjön
+        validate_title_max_caps_percent: A címben a maximálisan engedélyezett nagybetűk százaléka
+        validate_title_max_marks_together: A címben megengedett maximálisan egymás után következő jelek szimbólumai
+        validate_title_min_length: A cím minimális karakterszáma
+        validate_title_start_with_caps: A cím nagybetűvel kezdődjön
+      constraint:
+        component_id: vagy pontosabban itt
+        component_manifest: Csak ebben a komponens típusban
+        participatory_space_manifest: Alkalmazza a típus szerinti részvétel terekre
+        participatory_space_slug: Csak itt
+      custom_redirect:
+        active: Aktív
+        destination: Célállomás
+        origin: Származás
+        pass_query: A lekérdezési karakterlánc átadása a célállomásnak
+        status: Állapot
+      menu:
+        position: Pozíció
+        raw_label: Címke
+        target: Megnyílik itt
+        url: URL
+        visibility: Láthatóság
+      proposal:
+        proposal_custom_fields: Egyéni mezők
+  decidim:
+    admin:
+      filters:
+        admin_accountability:
+          admin_role_type:
+            label: Szerep típus
+          participatory_space_type_eq:
+            label: Részvételi tér típusa
+          role:
+            label: Szerep
+          role_type_eq:
+            label: Szerep típusa
+        label:
+          search_field_end_date: 'Végdátum:'
+          search_field_start_date: 'Kezdődátum:'
+        search_placeholder:
+          user_name_or_user_email_cont: Keresés felhasználónév vagy e-mail cím alapján
+      menu:
+        admin_accountability: Admin elszámoltathatóság
+    components:
+      awesome_iframe:
+        name: Teljesképernyős iframe
+        settings:
+          global:
+            announcement: Közlemény
+            iframe_help: 'Rakja a kódot a következő html formátumban: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. A tartalom szanálásra kerül a többi HTML-címkétől. Ügyeljen arra, hogy 100%-os szélességet használjon a képernyő kitöltéséhez.'
+            no_margins: Nincsenek margók az iframe és az oldal többi része között
+          step:
+            announcement: Közlemény
+      awesome_map:
+        settings:
+          global:
+            announcement: Közlemény
+            collapse: Összecsukott menüvel kezdődjön
+            map_center: A térkép középpontja (Szélesség, Hosszúság)
+            map_height: Térkép magassága (px)
+            map_zoom: Zoom (bármely szám 0 és 18 között)
+            map_zoom_help: Csak akkor érvényes, ha a térkép közepe meghatározott
+            menu_amendments: Módosítások mutatása
+            menu_categories: A Kategória kereső menü megjelenítése
+            menu_meetings: Találkozók mutatása
+            menu_merge_components: Az összes, azonos típusú komponens egyesítése a menüben
+            truncate: A felugró ablakban lévő leírások maximális karakterszáma
+          step:
+            announcement: Közlemény
+            show_accepted: Elfogadott javaslatok mutatása
+            show_evaluating: Az értékelés alatt álló javaslatok mutatása
+            show_not_answered: A meg nem válaszolt javaslatok mutatása
+            show_rejected: A visszautasított javaslatok mutatása
+            show_withdrawn: A visszavont javaslatok mutatása
+    decidim_awesome:
+      admin:
+        admin_accountability:
+          admin_roles:
+            admin: Szuper Admin
+            user_manager: Felhasználó menedzser
+          created_at: Szerep létrehozva
+          currently_active: Jelenleg aktív
+          deleted_user: Törölt felhasználó
+          email: Email cím
+          exports:
+            button: Keresés exportálása
+          index:
+            see_global: Global adminok listázása
+            title: Admin elszámoltathatóság
+          last_login: Utolsó bejelentkezés dátuma
+          missing_info: "Hiányzó információ"
+          missing_user: A felhasználó nincs a rendszerben
+          name: Név
+          never_logged: Sosem loggolt még
+          participatory_space: Részvételi tér
+          removal_date: Szerep eltávolítva
+          role: Szerep
+          roles:
+            admin: Adminisztrátor
+            collaborator: Együttműködő
+            moderator: Moderátor
+            valuator: Értékelő
+        checks:
+          index:
+            admin_head_tags: Awesome címkék az admin applikáció headerben
+            decidim-admin: Az Admin modulból
+            decidim-core: A központi modulból
+            decidim-proposals: A javaslatok modulból
+            decidim_version: Decidim verzió%{version}
+            head_tags: Awesome címkék az admin applikáció headerben
+            image_migrations_started: A képek migrációs folyamata elkezdődött
+        config:
+          caution: 'MEGJEGYZÉS: Ez a funkció erősen módosít néhány alapértelmezett viselkedést, ami váratlan eredményekhez vezethet. Óvatosan használja!'
+          constraints:
+            add_condition: Eset hozzáadása
+            always: Mindig
+            cannot_be_destroyed: Sajnálom, ezt nem lehet törölni. Ennek a konfigurációnak legalább egy megkötésre van szüksége.
+            delete: Törlés
+            edit: Szerkesztés
+            title: 'Csak a következő esetekben legyen alkalmazva:'
+          create_proposal_custom_field:
+            error: Hiba az új "egyedi mező" doboz létrehozásakor %{error}
+            success: '"egyedi mező" doboz %{key} létrejött'
+          create_scoped_admin:
+            error: Hiba az új Admin csoport létrehozásában %{error}
+          form:
+            edit_label: Címke átnevezése
+            help:
+              auto_save_forms: Ez a LocalStorage segítségével automatikusan elmenti a felhasználók által a felmérésekbe és egyéb űrlapokba bevitt adatokat, miközben kitöltik azokat. Az adatok egy későbbi, ugyanazzal a böngészővel történő látogatáskor visszaállnak, ha az űrlapot nem küldik el. Ha az űrlap elküldésre kerül, az adatok törlődnek. Ha a felhasználók eltávolítják a LocalStorage adatait, az adatok sem lesznek visszaállítva.
+              proposal_custom_fields_translations: "A címkék, a súgószöveg, a helyőrző és az alapértelmezett értékek használhatják az alkalmazás egyéni fordításait. Ehhez a string literál használata helyett használja az i18n kulcsot (legalább egy pontot kell tartalmaznia). Például: - \"activemodel.attributes.proposal.title\" helyett \"Cím\" - \"activemodel.attributes.proposal.address\" helyett \"Cím\" Vagy használjon saját kulcsokat más eszközökkel kombinálva a fordítások meghatározásához (pl.: a Term Customizer modul használatával): - \"myapp.custom_fields.bio\" helyett \"Biography\""
+              validate_title_max_caps_percent: A 0 nem fog engedni nagybetűt, 100 mindent nagybetűvel fog írni
+              validate_title_max_marks_together: 'Korlátozza az együtt írható kérdő- és felkiáltójelek számát. Vagyis: ha 2, akkor a ''!!!'' nem szerepelhet a szövegben'
+              validate_title_min_length: Ez mindig kötelező és nem lehet 0
+          form_proposal_custom_fields:
+            new: Egyéni mező hozzáadása
+            remove: Egyedi mező doboz eltávolítása
+            sure_to_remove: Biztosan törölni szeretnéd ezt a mező dobozt?
+          form_scoped_admins:
+            sure_to_remove: Biztosan törölni szeretnéd ezt területi admin csoportot?
+          form_scoped_styles:
+            sure_to_remove: Biztosan törölni szeretnéd ezt a CSS dobozt?
+          none: "⛔ Soha! - Minden más korlátozás kikapcsolása"
+          process_groups: Folyamatcsoportok
+          rich_text_editor_in_public_views: 'MEGJEGYZÉS: Ha a "Rich text szerkesztő" engedélyezve van a felhasználók számára, ez az opció nem lesz alkalmazható. Használja helyette a szerkesztői hackeket a képek engedélyezéséhez a javaslatokban.'
+          show:
+            update: Beállítás frissítése
+          system: Mindenütt, kivéve ezekben a részvételi terekben
+          update:
+            error: Hiba a beállítás frissítésekor %{error}
+            success: A beállítás sikeresen frissült
+        constraints:
+          new:
+            cancel: Elvetés
+            save: Mentés
+          show:
+            cancel: Elvetés
+        menu:
+          editors: Szerkesztő finomítása
+          menu_hacks: Menü trükkök
+          proposal_custom_fields: Javaslatok egyedi mezői
+          proposals: Javaslatok finomítása
+          styles: Egyedi stílusok
+          surveys: Kérdőívek és Űrlapok
+        menu_hacks:
+          destroy:
+            success: Menü elem eltávolítása sikerült
+          edit:
+            save: Mentés
+            title: Menü elem szerkesztése
+          form:
+            label_help: A fordítások nem kerülnek automatikusan felismerésre, ezért mindenképpen töltsd ki az összes mezőt!
+            target:
+              blank: Új ablak
+              self: Ugyanaz az ablak
+            visibility:
+              default: Látható
+              hidden: Mindig elrejtve
+              logged: Csak bejelentkezett felhasználóknak látható
+              non_logged: Csak nem bejelentkezett felhasználóknak látható
+              verified_user: Csak hitelesített felhasználóknak látható
+          index:
+            confirm_destroy: Biztosan eltávolítja ezt az testreszabást?
+            edit: Szerkesztés
+            new: Új elem
+            title: Főmenü
+          new:
+            save: Mentés
+            title: Új menüpont
+      config:
+        intergram:
+          intro_message: Miben segíthetünk?
+          title_open: Cseteljünk!
+      content_blocks:
+        map:
+          collapse: Összecsukott menüvel kezdődjön
+          map_center: A térkép középpontja (Szélesség, Hosszúság)
+          map_height: Térkép magassága (px)
+          map_settings: Térkép beállítások
+          map_zoom: Zoom (bármely szám 0 és 18 között)
+          map_zoom_help: Csak akkor érvényes, ha a térkép közepe meghatározott
+          menu_amendments: Módosítások mutatása
+          menu_meetings: Találkozók mutatása
+          menu_merge_components: Az összes, azonos típusú komponens egyesítése a menüben
+          name: Awesome térkép
+          show_accepted: Elfogadott javaslatok mutatása
+          show_evaluating: Az értékelés alatt álló javaslatok mutatása
+          show_not_answered: A meg nem válaszolt javaslatok mutatása
+          show_rejected: A visszautasított javaslatok mutatása
+          show_withdrawn: A visszavont javaslatok mutatása
+          text_settings: Szöveg beállítások
+          title: Cím
+          truncate: A felugró ablakban lévő leírások maximális karakterszáma
+      editor_images:
+        create:
+          error: Hiba történt a kép feltöltése közben!
+      voting:
+        voting_cards:
+          change_vote: Szavazatom megváltoztatása
+          default_box_title: Szavazás erre a javaslatra
+          default_instructions_html: <p>Kérjük ovlassa el a választási szabályokat, hogy pontosan megértse hogy került számításra szavazata a %{organization}" által</p>
+          modal:
+            cancel: Elvetés
+            message: A szavazata ekkor %{date} válig véglegessé. A dátumig módosítható
+            proceed: Folytatás
+            skip: Kattintson ide, hogy a jövőben átugorja ezt az ablakot
+          vote_button: Kattintson a szavazához
+          voted: Szavazott
+          voting_for: A szavaztom a" %{proposal}" "%{type}"
+  layouts:
+    decidim:
+      decidim_awesome:
+        awesome_config:
+          amendments: Módosítások
+          categories: Kategóriák
+          drag_and_drop_image: Képek hozzáadása húzással és ejtéssel vagy beillesztéssel.
+          hashtags: Hashtagek
+          items: elemek
+          meetings: Találkozók
+          proposals: Javaslatok
+          select_deselect_all: Összes kijelölése / kijelölés megszüntetése
