@@ -679,6 +679,8 @@ en:
           config_form:
             block_justification_message_help: Justification that will receive the
               detected users in their block notification
+            threshold_config_detected_cases: 'Number of cases that reach the threshold:
+              %{count}'
             threshold_config_help: Define the numerical threshold (equal or greater
               than) of the "spam risk index score" for automatic blocking of users
           create:

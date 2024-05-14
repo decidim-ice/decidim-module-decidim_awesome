@@ -1,4 +1,9 @@
 <div class="form__wrapper gap-0">
   <%= form.number_field :threshold, class: "mb-6", help_text: t(".threshold_config_help") %>
+  <% if @threshold_detected_cases.present? %>
+    <span class="help-text"><%= t(".threshold_config_detected_cases", count: @threshold_detected_cases) %></span>
+  <% end %>
+</div>
+<div class="form__wrapper gap-0">
   <%= form.text_field :block_justification_message, class: "mb-6", help_text: t(".block_justification_message_help") %>
 </div>
