@@ -90,7 +90,7 @@ module Decidim
             threshold = current_config.value&.dig("threshold")
             if threshold.present?
               user_ids = @block_data.select { |item| item[:total_score] >= threshold }.map { |item| item[:id] }
-              Decidim::User.where(organization: current_organization, id: user_ids)
+              users_base_relation.where(organization: current_organization, id: user_ids)
             else
               Decidim::User.none
             end
@@ -98,10 +98,19 @@ module Decidim
         end
 
         def calculate_scores
-          exporter = Decidim::DecidimAwesome::UsersAutoblocksScoresExporter.new(Decidim::User.where(blocked: false))
+          exporter = Decidim::DecidimAwesome::UsersAutoblocksScoresExporter.new(users_base_relation)
 
           @export_path = exporter.export
           @block_data = exporter.data
+        end
+
+        def users_base_relation
+          @users_base_relation ||= Decidim::User
+                                   .where(organization: current_organization)
+                                   .joins("LEFT JOIN decidim_authorizations ON decidim_authorizations.decidim_user_id = decidim_users.id")
+                                   .where(decidim_authorizations: { granted_at: nil })
+                                   .not_deleted
+                                   .not_blocked
         end
       end
     end
