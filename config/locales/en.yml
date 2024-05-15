@@ -64,9 +64,8 @@ en:
           show:
             private_body: Private body
         exports: 
-          private_proposals: "Proposals with Private Data"
+          awesome_private_proposals: "Proposals with Private Data"
     admin:
-    
       filters:
         admin_accountability:
           admin_role_type:
