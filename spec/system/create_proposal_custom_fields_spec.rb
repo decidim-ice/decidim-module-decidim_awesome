@@ -14,7 +14,7 @@ describe "Custom proposals fields", type: :system do
            participatory_space: participatory_process)
   end
   let!(:config) { create :awesome_config, organization: organization, var: :proposal_custom_fields, value: custom_fields }
-  let!(:config) { create :awesome_config, organization: organization, var: :private_proposal_custom_fields, value: private_custom_fields }
+  let!(:private_config) { create :awesome_config, organization: organization, var: :private_proposal_custom_fields, value: private_custom_fields }
   let(:config_helper) { create :awesome_config, organization: organization, var: :proposal_custom_field_bar }
   let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes", "participatory_space_slug" => slug }) }
   let(:slug) { participatory_process.slug }

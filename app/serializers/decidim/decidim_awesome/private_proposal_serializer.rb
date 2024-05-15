@@ -27,7 +27,7 @@ module Decidim::DecidimAwesome
       @config = Config.new(proposal.organization)
       @config.context_from_component(proposal.component)
       @config
-      end
+    end
 
     private
 
