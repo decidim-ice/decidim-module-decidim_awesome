@@ -8,8 +8,6 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
   }
 
   getLang(lang) {
-    const defaultLang = "en-US";
-    if(!lang) return defaultLang;
     const langs = {
       // ar: 'ar-SA', // Not in decidim yet
       "ar": "ar-TN",
@@ -49,7 +47,7 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
     if (langs[lang.substr(0, 2)]) {
       return langs[lang.substr(0, 2)];
     }
-    return defaultLang;
+    return "en-US";
   }
 
   /*
@@ -115,7 +113,6 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
         $dl.append($dd);
       }
     }
-    console.log(`<xml>${$dl[0].outerHTML}</xml>`)
     return `<xml>${$dl[0].outerHTML}</xml>`;
   }
 
@@ -142,12 +139,10 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
         if (index >= 0) {
           values.splice(index, 1)
           // setting checked=true do not makes the browser aware that the form is valid if the field is required
-          if (!input.checked){
-            $(input).trigger("click");
-          }
-        } else if (input.checked){
-          $(input).trigger("click");
-        }
+          if (!input.checked)
+          {$(input).click();}
+        } else if (input.checked)
+        {$(input).click();}
       });
 
       // Fill "other" option
@@ -197,6 +192,7 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
       $body.val(this.dataToXML(this.spec));
       this.$element.data("spec", this.spec);
     }
+    // console.log("storeData spec", this.spec, "$body", $body,"$form",$form,"this",this);
     return this;
   }
 
