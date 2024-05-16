@@ -454,6 +454,7 @@ en:
             of creating it again.
       amendments:
         modal:
+          amendment_exists: An amendment already exists
           current_amendment_html: <p>You can <a href="%{amendment_link}">access the
             current amendment here</a>.</p>
           dismiss: Ok, got it

@@ -1,8 +1,5 @@
 <!-- replace "erb[loud]:contains('amend_button_for @proposal')" -->
 
-<% if @proposal.emendations.not_hidden.where(decidim_amendments: { state: Decidim::Amendment.states['evaluating'] }).count.positive? && @proposal.amendable? %>
-  <%= amend_button_with_modal_for @proposal %>
-  <%= render "decidim/decidim_awesome/amendments/modal" %>
-<% else %>
-  <%= amend_button_for @proposal %>
-<% end %>
+<%= amend_button_for @proposal %>
+
+<%= render "decidim/decidim_awesome/amendments/modal" if @proposal.emendations.not_hidden.where(decidim_amendments: { state: Decidim::Amendment.states["evaluating"] }).count.positive? && @proposal.amendable? %>

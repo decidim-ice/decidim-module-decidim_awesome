@@ -43,7 +43,7 @@ describe "Custom proposals fields" do
       expect(page).to have_content(emendation.title["en"])
       click_link_or_button "Amend"
 
-      within ".limit-amendments-modal" do
+      within "#LimitAmendmentsModal" do
         expect(page).to have_link(href: amendment_path)
         expect(page).to have_content("Currently, there's another amendment being evaluated for this proposal.")
       end
@@ -100,7 +100,7 @@ describe "Custom proposals fields" do
       expect(page).to have_no_content(emendation.title["en"])
       click_link_or_button "Amend"
 
-      within ".limit-amendments-modal" do
+      within "#LimitAmendmentsModal" do
         expect(page).to have_no_link(href: amendment_path)
         expect(page).to have_content("Currently, there's another amendment being evaluated for this proposal.")
       end

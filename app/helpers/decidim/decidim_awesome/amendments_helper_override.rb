@@ -17,14 +17,6 @@ module Decidim
           render_amendment_custom_fields_override(custom_fields, attribute, form, original_resource)
         end
 
-        def amend_button_with_modal_for(amendable)
-          return unless amendments_enabled? && amendable.amendable?
-          return unless current_component.current_settings.amendment_creation_enabled
-          return unless can_participate_in_private_space?
-
-          cell("decidim/decidim_awesome/amendable/amend_button_card_with_modal", amendable)
-        end
-
         private
 
         def render_amendment_custom_fields_override(fields, attribute, form, original_resource)

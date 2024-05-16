@@ -1,12 +1,22 @@
 <!--the modal window will be used in another pr-->
-<%= decidim_modal id: "LimitAmendmentsModal", class:"reveal show limit_amendments_modal limit-amendments-modal" do %>
-  <div data-dialog-container>
-    <div class="reveal__content">
-      <div class="instructions mb-4"><%= t("decidim.decidim_awesome.amendments.modal.explanation_html",
-                                           proposal_link: present(@proposal).proposal_path + "#comments") %></div>
+<%= decidim_modal id: "LimitAmendmentsModal", data: { "limit-amendments": current_component.settings&.limit_pending_amendments } do %>
+  <div data-dialog-container data-limit-amendments="<%= current_component.settings&.limit_pending_amendments %>">
+    <%= icon "notification-3-fill" %>
+    <h3 data-dialog-title><%= t("decidim.decidim_awesome.amendments.modal.amendment_exists") %></h3>
+
+    <div>
+      <div class="instructions">
+        <%= t("decidim.decidim_awesome.amendments.modal.explanation_html",
+                                    proposal_link: present(@proposal).proposal_path + "#comments") %>
+
+        <% if current_component.current_settings&.amendments_visibility == "all" %>
+          <%= t("decidim.decidim_awesome.amendments.modal.current_amendment_html",
+                                        amendment_link: present(@proposal.amendment.emendation).proposal_path) %>
+        <% end %>
+      </div>
     </div>
   </div>
   <div data-dialog-actions>
-    <button type="button" class="button button__lg button__transparent-secondary cancel-action hollow secondary" data-dialog-close="LimitAmendmentsModal"><%= t("decidim.decidim_awesome.amendments.modal.dismiss") %></button>
+    <button type="button" class="button button__sm md:button__lg button__transparent-secondary cancel-action" data-dialog-close="LimitAmendmentsModal"><%= t("decidim.decidim_awesome.amendments.modal.dismiss") %></button>
   </div>
 <% end %>
