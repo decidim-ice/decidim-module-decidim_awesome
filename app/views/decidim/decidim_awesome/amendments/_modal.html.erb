@@ -1,6 +1,6 @@
 <!--the modal window will be used in another pr-->
 <%= decidim_modal id: "LimitAmendmentsModal", data: { "limit-amendments": current_component.settings&.limit_pending_amendments } do %>
-  <div data-dialog-container data-limit-amendments="<%= current_component.settings&.limit_pending_amendments %>">
+  <div data-dialog-container>
     <%= icon "notification-3-fill" %>
     <h3 data-dialog-title><%= t("decidim.decidim_awesome.amendments.modal.amendment_exists") %></h3>
 

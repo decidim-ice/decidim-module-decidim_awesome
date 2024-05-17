@@ -20,11 +20,12 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     load: function (query, callback) {
       const { url } = element.dataset;
+      const join = url.includes("?") ? "&" : "?";
       const params = new URLSearchParams({
         term: query
       });
 
-      fetch(`${url}?${params}`).
+      fetch(`${url}${join}${params}`).
         then((response) => response.json()).
         then((json) => callback(json)).
         catch(() => callback());

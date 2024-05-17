@@ -3,11 +3,5 @@
 <% append_stylesheet_pack_tag "decidim_decidim_awesome", media: "all" %>
 <%= render(partial: "layouts/decidim/decidim_awesome/custom_styles") if awesome_custom_styles.present? %>
 
-<% content_for :js_content do %>
-  <%= render partial: "layouts/decidim/decidim_awesome/awesome_config" %>
-  <% append_javascript_pack_tag "decidim_decidim_awesome", defer: false %>
-  <% append_javascript_pack_tag("decidim_decidim_awesome_custom_fields") if Decidim::DecidimAwesome.enabled?(:proposal_custom_fields) %>
-  <% if show_public_intergram? %>
-    <%= render partial: "layouts/decidim/decidim_awesome/intergram_widget", locals: { settings: organization_awesome_config[:intergram_for_public_settings] } %>
-  <% end %>
-<% end %>
+<% append_javascript_pack_tag "decidim_decidim_awesome", defer: false %>
+<% append_javascript_pack_tag("decidim_decidim_awesome_custom_fields") if Decidim::DecidimAwesome.enabled?(:proposal_custom_fields) %>

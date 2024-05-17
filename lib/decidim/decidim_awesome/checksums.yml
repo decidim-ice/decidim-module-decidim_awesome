@@ -13,6 +13,8 @@ decidim-core:
   /app/views/layouts/decidim/_head.html.erb:
     decidim-0.28: e51e400a98821f4ca0fff26ebd4d0741
     decidim-0.28.1: 8ac1af4e223d9a7a98136760b6194a75
+  /app/views/layouts/decidim/_decidim_javascript.html.erb:
+    decidim-0.28: dc60ed8abf7649611f18804b67b1408d
   /app/presenters/decidim/menu_presenter.rb:
     decidim-0.28: 220c8865a43bd8b7b12a7f926f7f4324
   /app/presenters/decidim/menu_item_presenter.rb:
