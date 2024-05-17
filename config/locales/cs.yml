@@ -6,7 +6,6 @@ cs:
         additional_proposal_sortings: Povoleny další možnosti řazení
         allow_images_in_editors: Povolit obrázky v HTML editoru
         allow_images_in_proposals: Povolit obrázky v editoru návrhů
-        allow_videos_in_editors: Povolit videa v HTML editoru
         auto_save_forms: Automaticky ukládat formuláře v místním úložišti
         intergram_auto_no_response: Zpráva, která je odeslána jednu minutu poté, co uživatel odešle svou první zprávu a nebyla obdržena odpověď
         intergram_auto_response: Zpráva, která je odeslána okamžitě poté, co uživatel odešle svou první zprávu
@@ -119,6 +118,7 @@ cs:
               supported_first: Nejdříve podporováno
               supported_last: Naposledy podporováno
               za: Z-A (obrácená abeceda)
+            limit_pending_amendments: Povolit pouze jeden čekající pozměňovací návrh ke každému návrhu.
             sort_orders_enabled: Typy řazeníí povoleny
             voting_cards_box_title: Název hlasovacího pole
             voting_cards_box_title_help: Výchozí hodnota je "Hlasovat pro tento návrh". Použijte "-" pro jeho schování.
@@ -375,6 +375,14 @@ cs:
             error: Chyba při aktualizaci položky menu! %{error}
             success: Položka menu byla úspěšne aktualizována
           url_exists: Stejná adresa URL je již nakonfigurována, prosím upravte ji místo jejího vytvoření.
+      amendments:
+        modal:
+          current_amendment_html: <p>Můžete <a href="%{amendment_link}">přistupovat k aktuálnímu pozměňovacímu návrhu zde</a>.</p>
+          dismiss: Ok, rozumím
+          explanation_html: |
+            <p>V současné době je pro tento návrh hodnocen další pozměňovací návrh. Chcete-li vytvořit nový, musíte počkat, až bude aktuální přijat nebo odmítnut.</p>
+            <p>Můžete se také ozvat autorovi tohoto návrhu <a href="%{proposal_link}">a zanechat komentář</a> a pokusit se urychlit řešení současného pozměňovacího návrhu.</p>
+        pending_limit_reached: Omlouváme se, ale v jednom okamžiku může být pouze jeden čekající pozměňovací návrh. Počkejte prosím, dokud nebude "%{emendation}" přijat nebo zamítnut.
       config:
         intergram:
           auto_no_response: Zdá se, že právě teď nikdo není k dispozici odpovědět. Řekněte nám, jak vás můžeme kontaktovat, a co nejdříve se k vám vrátíme.
