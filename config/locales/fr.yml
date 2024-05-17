@@ -1,11 +1,10 @@
+---
 fr:
   activemodel:
     attributes:
       config:
         additional_proposal_sortings: Activer les options de tri supplémentaires
-        allow_images_in_editors: Autoriser les images dans l'éditeur HTML
         allow_images_in_proposals: Autoriser les images dans l'éditeur de propositions
-        allow_videos_in_editors: Autoriser les vidéos dans l'éditeur HTML
         auto_save_forms: Sauvegarde automatique des formulaires dans le stockage local du navigateur
         intergram_auto_no_response: Un message qui est envoyé une minute après que l'utilisateur envoie son premier message et qu'aucune réponse n'a été reçue
         intergram_auto_response: Un message qui est envoyé immédiatement après que l'utilisateur envoie son premier message
@@ -20,7 +19,7 @@ fr:
         proposal_custom_fields: Champs personnalisés %{id}
         scoped_admins: Groupe d'administrateurs restreints %{id}
         scoped_styles: Style personnalisés %{id}
-        validate_body_max_caps_percent: Pourcentage maximum autorisé de lettres majuscules pour la description
+        validate_body_max_caps_percent: Pourcentage maximal autorisé de lettres majuscules dans le corps du texte
         validate_body_max_marks_together: Nombre maximum de caractères spéciaux autorisés dans le corps
         validate_body_min_length: Nombre de caractères minimum pour le corps
         validate_body_start_with_caps: Forcer le corps à commencer par une lettre majuscule
@@ -118,6 +117,7 @@ fr:
               supported_first: Déjà supporté en priorité
               supported_last: A supporter en priorité
               za: Z-A (alphabétique inverse)
+            limit_pending_amendments: Ne permettre qu'un seul amendement en attente pour chaque proposition.
             sort_orders_enabled: Types de tri activés
             voting_cards_box_title: Titre pour le boîtier de vote
             voting_cards_box_title_help: La valeur par défaut est "Vote sur cette proposition". Utilisez "-" pour la masquer.
@@ -374,6 +374,14 @@ fr:
             error: Erreur lors de la mise à jour de l'élément de menu ! %{error}
             success: Élément de menu mis à jour avec succès
           url_exists: La même URL est déjà configurée, veuillez la modifier au lieu de la créer à nouveau.
+      amendments:
+        modal:
+          current_amendment_html: <p>Vous pouvez <a href="%{amendment_link}">accéder à l'amendement actuel ici</a>.</p>
+          dismiss: D'accord
+          explanation_html: |
+            <p>Actuellement, il y a un autre amendement est en cours d'analyse pour cette proposition. Pour en créer un nouveau, vous devez attendre que l'amendement actuel soit accepté ou rejeté.</p>
+            <p>Vous pouvez également contacter l'auteur de la présente proposition à l'adresse suivante <a href="%{proposal_link}">en laissant un commentaire</a> et tenter d'accélérer la résolution de l'amendement actuel.</p>
+        pending_limit_reached: Désolé, il ne peut y avoir qu'un seul amendement en attente à la fois. Veuillez patienter jusqu'à ce que "%{emendation}"" soit accepté ou rejeté.
       config:
         intergram:
           auto_no_response: Il semble que personne ne soit disponible pour répondre à l'heure actuelle. Dites-nous comment nous pouvons vous contacter, et nous vous contacterons dès que possible.

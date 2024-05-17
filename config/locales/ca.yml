@@ -1,8 +1,9 @@
+---
 ca:
   activemodel:
     attributes:
       config:
-        additional_proposal_sortings: Opcions d'ordenació addicionals actives
+        additional_proposal_sortings: Activa opcions d'ordenació addicionals
         allow_images_in_editors: Permet imatges a l'editor HTML
         allow_images_in_proposals: Permet imatges a l'editor de propostes
         allow_videos_in_editors: Permet vídeos a l'editor HTML
@@ -118,6 +119,7 @@ ca:
               supported_first: Votades per mi primer
               supported_last: Votades últimes per mi
               za: Z-A (ordre alfabètic invers)
+            limit_pending_amendments: Permetre només una esmena pendent a cada proposta.
             sort_orders_enabled: Opcions d'ordenació actives
             voting_cards_box_title: Títol per la cabina de votació
             voting_cards_box_title_help: L'opció per defecte és 'Votar a aquesta proposta'. Utilitzeu '-' per amagar-la.
@@ -374,6 +376,14 @@ ca:
             error: 'Error en actualitzar l''ítem de menú: %{error}'
             success: Ítem de menú actualitzat correctament
           url_exists: Aquesta URL ha estat configurada en un altre ítem de menú, si us plau edita'l en comptes de crear-ne un de nou.
+      amendments:
+        modal:
+          current_amendment_html: <p>Podeu <a href="%{amendment_link}">accedir a l'esmena actual aquí</a>.</p>
+          dismiss: D'acord
+          explanation_html: |
+            <p>Actualment, s'està avaluant una altra esmena per a aquesta proposta. Per crear-ne una de nova, heu d'esperar fins que l'actual sigui acceptada o rebutjada.</p>
+            <p>També podeu posar-vos en contacte amb l'autor d'aquesta proposta <a href="%{proposal_link}">deixant un comentari</a> i intentar accelerar la resolució de l'esmena actual.</p>
+        pending_limit_reached: Ho sentim, només hi pot haver una esmena pendent alhora. Si us plau, espereu fins que "%{emendation}" sigui acceptat o rebutjat.
       config:
         intergram:
           auto_no_response: Sembla que no hi ha ningú disponible per a respondre en aquest moment. Si us plau, indica'ns com et podem contactar i ens comunicarem amb tu tan aviat com ens sigui possible.

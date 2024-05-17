@@ -33,7 +33,6 @@ describe "Show intergram chat" do
     Decidim::DecidimAwesome.config.intergram_url = intergram_url
 
     switch_to_host(organization.host)
-    visit decidim.root_path
   end
 
   shared_examples "shows the chat" do |logged|
@@ -77,37 +76,42 @@ describe "Show intergram chat" do
     end
   end
 
-  it_behaves_like "shows the chat", false
+  context "when not logged" do
+    before do
+      visit decidim.root_path
+    end
 
-  it "has the script tag in the body" do
-    expect(page).to have_xpath("//body/script[@src='#{intergram_url}']", visible: :all)
-  end
+    it_behaves_like "shows the chat", false
 
-  context "when login is required" do
-    let(:require_login) { true }
+    it "has the script tag in the body" do
+      expect(page).to have_xpath("//body/script[@src='#{intergram_url}']", visible: :all)
+    end
 
-    it_behaves_like "do not show the chat"
+    context "and logged is required" do
+      let(:require_login) { true }
 
-    context "and user is logged in" do
-      before do
-        login_as user, scope: :user
-        visit decidim.root_path
-      end
+      it_behaves_like "do not show the chat"
+    end
 
-      it_behaves_like "shows the chat", true
+    context "and public chat is disabled" do
+      let(:intergram_for_public) { false }
+
+      it_behaves_like "do not show the chat"
     end
   end
 
-  context "when public chat is disabled" do
-    let(:intergram_for_public) { false }
+  context "when logged in" do
+    let(:require_login) { true }
 
-    it_behaves_like "do not show the chat"
+    before do
+      login_as user, scope: :user
+      visit decidim.root_path
+    end
 
-    context "and user is logged in" do
-      before do
-        login_as user, scope: :user
-        visit decidim.root_path
-      end
+    it_behaves_like "shows the chat", true
+
+    context "when public chat is disabled" do
+      let(:intergram_for_public) { false }
 
       it_behaves_like "do not show the chat"
     end
@@ -122,6 +126,7 @@ describe "Show intergram chat" do
     end
 
     it_behaves_like "shows the chat", true
+
     it "has the script tag in the head" do
       expect(page).to have_xpath("//head/script[@src='#{intergram_url}']", visible: :all)
     end

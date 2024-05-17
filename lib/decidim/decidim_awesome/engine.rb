@@ -101,6 +101,8 @@ module Decidim
             Decidim::Proposals::ProposalVotesController.include(Decidim::DecidimAwesome::Proposals::ProposalVotesControllerOverride)
           end
 
+          Decidim::AmendmentsController.include(Decidim::DecidimAwesome::LimitPendingAmendments) if DecidimAwesome.enabled?(:allow_limiting_amendments)
+
           Decidim::Proposals::ProposalsController.include(Decidim::DecidimAwesome::Proposals::OrderableOverride) if DecidimAwesome.enabled?(:additional_proposal_sortings)
         end
       end
@@ -127,6 +129,13 @@ module Decidim
                 include_blank: true,
                 choices: -> { (POSSIBLE_SORT_ORDERS + DecidimAwesome.possible_additional_proposal_sortings).uniq }
               )
+            end
+          end
+        end
+        if DecidimAwesome.enabled?(:allow_limiting_amendments)
+          Decidim.component_registry.find(:proposals).tap do |component|
+            component.settings(:global) do |settings|
+              settings.attribute :limit_pending_amendments, type: :boolean, default: DecidimAwesome.allow_limiting_amendments
             end
           end
         end
