@@ -8,6 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  modalEl.querySelectorAll("a").forEach((aEl) => {
+    aEl.addEventListener("click", () => {
+      window.Decidim.currentDialogs[modalId].close();
+    });
+  });
+
   /**
    * Determines if the modal should be displayed based on its current state and data attributes.
    */

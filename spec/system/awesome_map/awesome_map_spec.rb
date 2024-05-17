@@ -50,7 +50,7 @@ describe "Show awesome map" do
       # static: { url: "https://image.maps.ls.hereapi.com/mia/1.6/mapview" }
       dynamic: {
         tile_layer: {
-          url: "http://#{organization.host}:#{Capybara.current_session.server.port}/tile-0.png"
+          url: "/tile-0.png"
         }
       }
     }

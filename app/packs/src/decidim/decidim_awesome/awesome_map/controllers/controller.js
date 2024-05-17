@@ -111,7 +111,7 @@ export default class Controller {
         this.awesomeMap.layers[cat.id].group.addLayer(marker);
         this.awesomeMap.controls.showCategory(cat);
       } catch (evt) {
-        console.error("Failed category marker assignation", marker, evt.message);
+        console.error("Failed category marker assignation. category:", category, "marker:", marker, evt.message);
       }
     }
   }
@@ -122,7 +122,7 @@ export default class Controller {
       try {
         this.awesomeMap.controls.addHashtagsControls(hashtags, marker);
       } catch (evt) {
-        console.error("Failed hashtags marker assignation", marker, evt.message);
+        console.error("Failed hashtags marker assignation. hashtags:", hashtags, "marker:", marker, evt.message);
       }
     }
   }

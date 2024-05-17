@@ -20,7 +20,9 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     load: function (query, callback) {
       const { url } = element.dataset;
-      const join = url.includes("?") ? "&" : "?";
+      const join = url.includes("?")
+        ? "&"
+        : "?";
       const params = new URLSearchParams({
         term: query
       });

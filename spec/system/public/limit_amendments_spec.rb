@@ -19,7 +19,7 @@ describe "Custom proposals fields" do
   let!(:proposal) { create(:proposal, component:) }
   let!(:emendation) { create(:proposal, title: { en: "An emendation" }, component:) }
   let!(:amendment) { create(:amendment, amendable: proposal, emendation:, state: amendment_state) }
-  let!(:hidden_emendation) { create(:proposal, :hidden, title: { en: "A stupid emendation" }, component:) }
+  let!(:hidden_emendation) { create(:proposal, :hidden, title: { en: "A hidden emendation" }, component:) }
   let!(:hidden_amendment) { create(:amendment, amendable: proposal, emendation: hidden_emendation, state: "evaluating") }
 
   let(:amendment_state) { "evaluating" }
@@ -34,7 +34,11 @@ describe "Custom proposals fields" do
   end
 
   def amendment_path
-    "#{Decidim::ResourceLocatorPresenter.new(proposal.amendment.emendation).path}#comments"
+    Decidim::ResourceLocatorPresenter.new(emendation).path
+  end
+
+  def proposal_path
+    "#{Decidim::ResourceLocatorPresenter.new(proposal).path}#comments"
   end
 
   context "when there's pending amendments" do
@@ -45,6 +49,7 @@ describe "Custom proposals fields" do
 
       within "#LimitAmendmentsModal" do
         expect(page).to have_link(href: amendment_path)
+        expect(page).to have_link(href: proposal_path)
         expect(page).to have_content("Currently, there's another amendment being evaluated for this proposal.")
       end
     end
@@ -101,6 +106,7 @@ describe "Custom proposals fields" do
       click_link_or_button "Amend"
 
       within "#LimitAmendmentsModal" do
+        expect(page).to have_link(href: proposal_path)
         expect(page).to have_no_link(href: amendment_path)
         expect(page).to have_content("Currently, there's another amendment being evaluated for this proposal.")
       end
