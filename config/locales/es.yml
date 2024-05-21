@@ -6,6 +6,7 @@ es:
         additional_proposal_sortings: Habilitar opciones de ordenación adicionales
         allow_images_in_editors: Permitir imágenes en el editor HTML
         allow_images_in_proposals: Permitir imágenes en el editor de propuestas
+        allow_videos_in_editors: Permitir vídeos en el editor HTML
         auto_save_forms: Guardar automáticamente los formularios en el almacenamiento local
         intergram_auto_no_response: Un mensaje que se envía un minuto después de que la usuaria haya enviado su primer mensaje y no se haya recibido respuesta
         intergram_auto_response: Un mensaje que se envía inmediatamente después de que la usuaria envíe su primer mensaje
