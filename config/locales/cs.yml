@@ -6,6 +6,7 @@ cs:
         additional_proposal_sortings: Povoleny další možnosti řazení
         allow_images_in_editors: Povolit obrázky v HTML editoru
         allow_images_in_proposals: Povolit obrázky v editoru návrhů
+        allow_videos_in_editors: Povolit videa v HTML editoru
         auto_save_forms: Automaticky ukládat formuláře v místním úložišti
         intergram_auto_no_response: Zpráva, která je odeslána jednu minutu poté, co uživatel odešle svou první zprávu a nebyla obdržena odpověď
         intergram_auto_response: Zpráva, která je odeslána okamžitě poté, co uživatel odešle svou první zprávu
