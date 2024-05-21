@@ -6,6 +6,7 @@ en:
         additional_proposal_sortings: Additional sorting options enabled
         allow_images_in_editors: Allow images in the HTML editor
         allow_images_in_proposals: Allow images in the proposals editor
+        allow_videos_in_editors: Allow videos in the HTML editor
         auto_save_forms: Auto save forms in local storage
         intergram_auto_no_response: A message that is sent one minute after the user
           sends its first message and no response was received
