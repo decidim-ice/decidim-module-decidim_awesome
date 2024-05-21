@@ -6,6 +6,7 @@ ca:
         additional_proposal_sortings: Activar opcions d'ordenació addicionals
         allow_images_in_editors: Permet imatges a l'editor HTML
         allow_images_in_proposals: Permet imatges a l'editor de propostes
+        allow_videos_in_editors: Permet vídeos a l'editor HTML
         auto_save_forms: Desa automàticament els formularis a l'emmagatzematge local
         intergram_auto_no_response: Un missatge que s'envia un minut després que la usuària hagi enviat el seu primer missatge i no s'hagi rebut cap resposta
         intergram_auto_response: Un missatge que s'envia immediatament després que la usuària enviï el seu primer missatge
