@@ -40,7 +40,7 @@ $(() => {
         ],
         disabledSubtypes: {
           // default color as it generate hashtags in decidim (TODO: fix hashtag generator with this)
-          text: ["color"], 
+          text: ["color"],
           // disable default wysiwyg editors as they present problems
           textarea: ["tinymce", "quill"]
         }
@@ -78,4 +78,3 @@ $(() => {
     });
   });
 });
-

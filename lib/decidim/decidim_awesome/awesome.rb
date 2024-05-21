@@ -113,6 +113,16 @@ module Decidim
       ]
     end
 
+    # Allows admins to limit the amount of pending amendments to (currently) one per proposal before it's accepted.
+    # Once a pending amendment is accepted, a new on can be created.
+    # Note that this does not limit the number of amendment per se, the admin has to set the limit in the proposal's component configuration.
+    # set to :disable to will prevent admins to set an amendment's limit in the proposal's component configuration.
+    # if set to "true" the checkbox will be checked by default
+    # if set to "false" the checkbox will be unchecked by default
+    config_accessor :allow_limiting_amendments do
+      false
+    end
+
     # allows admins to created specific CSS snippets affecting only some specific parts
     # Valid values differ a little from the previous convention:
     #   :disabled => false and non available, hidden from admins
@@ -281,6 +291,24 @@ module Decidim
 
         sort.to_s
       end
+    end
+
+    # appends to a hash a new value in a specified position so that the hash becomes:
+    # { a: 1, b: 2, c: 3 } => append_hash(hash, :b, :d, 4) => { a: 1, b: 2, d: 4, c: 3 }
+    # if key is not found then it will be inserted at the end
+    def self.hash_append!(hash, after_key, key, value)
+      insert_at = hash.to_a.index(hash.assoc(after_key))
+      insert_at = insert_at.nil? ? hash.size : insert_at + 1
+      hash.replace(hash.to_a.insert(insert_at, [key, value]).to_h)
+    end
+
+    # prepends to a hash a new value in a specified position so that the hash becomes:
+    # { a: 1, b: 2, c: 3 } => prepend_hash(hash, :b, :d, 4) => { a: 1, d: 4, b: 2, c: 3 }
+    # if key is not found then it will be inserted at the beggining
+    def self.hash_prepend!(hash, before_key, key, value)
+      insert_at = hash.to_a.index(hash.assoc(before_key))
+      insert_at = 0 if insert_at.nil?
+      hash.replace(hash.to_a.insert(insert_at, [key, value]).to_h)
     end
 
     def self.collation_for(locale)

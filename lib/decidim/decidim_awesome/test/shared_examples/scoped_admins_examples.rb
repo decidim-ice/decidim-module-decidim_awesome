@@ -109,6 +109,10 @@ end
 shared_examples "allows all admin routes" do
   before do
     visit decidim_admin.root_path
+    # this is a workaround to wait for the page to load
+    # it seems that the test might fail randomly otherwise
+    # underlaying issue is unknown, maybe capybara is faster clicking than ruby is at storing class variables?
+    sleep 0.1
   end
 
   it "allows the admin root page" do
@@ -117,7 +121,6 @@ shared_examples "allows all admin routes" do
 
   it "allows the assemblies page" do
     click_link_or_button "Assemblies"
-
     expect(page).to have_content("New assembly")
   end
 
@@ -131,6 +134,7 @@ end
 shared_examples "allows scoped admin routes" do
   before do
     visit decidim_admin.root_path
+    sleep 0.1
   end
 
   it "allows the admin root page" do
@@ -304,6 +308,7 @@ end
 shared_examples "edits allowed components" do
   before do
     visit decidim_admin.root_path
+    sleep 0.1
   end
 
   it_behaves_like "can manage component"

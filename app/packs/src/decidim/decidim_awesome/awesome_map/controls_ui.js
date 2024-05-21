@@ -80,8 +80,13 @@ export default class ControlsUI {
   }
 
   addSearchControls() {
-    this.main.getContainer().querySelector("form").insertAdjacentHTML("beforeend", `<div id="awesome_map-categories-control" class="active"><b class="awesome_map-title-control">${window.DecidimAwesome.texts.categories}</b><div class="categories-container"></div></div>
+    const section = this.main.getContainer().querySelector(".leaflet-control-layers-list");
+    if (section) {
+      section.insertAdjacentHTML("beforeend", `<div id="awesome_map-categories-control" class="active"><b class="awesome_map-title-control">${window.DecidimAwesome.texts.categories}</b><div class="categories-container"></div></div>
     <div id="awesome_map-hashtags-control"><b class="awesome_map-title-control">${window.DecidimAwesome.texts.hashtags}</b><div class="hashtags-container"></div><a href="#" class="awesome_map-toggle_all_tags">${window.DecidimAwesome.texts.selectDeselectAll}</a></div>`);
+    } else {
+      console.error("Can't find the section to insert the controls");
+    }
   }
 
   addCategoriesControls() {
@@ -93,7 +98,12 @@ export default class ControlsUI {
         group: new L.FeatureGroup.SubGroup(this.awesomeMap.cluster)
       };
       this.awesomeMap.layers[category.id].group.addTo(this.awesomeMap.map);
-      document.querySelector("#awesome_map-categories-control .categories-container").insertAdjacentHTML("beforeend", `<label data-layer="${category.id}" class="awesome_map-category-${category.id}${category.parent ? " subcategory" : ""}" data-parent="${category.parent}"><input type="checkbox" class="awesome_map-categories-selector" checked><span>${label}</span></label>`);
+      const categories = document.querySelector("#awesome_map-categories-control .categories-container");
+      if (categories) {
+        categories.insertAdjacentHTML("beforeend", `<label data-layer="${category.id}" class="awesome_map-category-${category.id}${category.parent ? " subcategory" : ""}" data-parent="${category.parent}"><input type="checkbox" class="awesome_map-categories-selector" checked><span>${label}</span></label>`);
+      } else {
+        console.error("Can't find the section to insert the categories");
+      }
     })
 
     // category events

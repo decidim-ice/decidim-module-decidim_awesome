@@ -4,9 +4,7 @@ fr:
     attributes:
       config:
         additional_proposal_sortings: Activer les options de tri supplémentaires
-        allow_images_in_editors: Autoriser les images dans l'éditeur HTML
         allow_images_in_proposals: Autoriser les images dans l'éditeur de propositions
-        allow_videos_in_editors: Autoriser les vidéos dans l'éditeur HTML
         auto_save_forms: Sauvegarde automatique des formulaires dans le stockage local du navigateur
         intergram_auto_no_response: Un message qui est envoyé une minute après que l'utilisateur envoie son premier message et qu'aucune réponse n'a été reçue
         intergram_auto_response: Un message qui est envoyé immédiatement après que l'utilisateur envoie son premier message
@@ -21,7 +19,7 @@ fr:
         proposal_custom_fields: Champs personnalisés %{id}
         scoped_admins: Groupe d'administrateurs restreints %{id}
         scoped_styles: Style personnalisés %{id}
-        validate_body_max_caps_percent: Pourcentage maximum autorisé de lettres majuscules pour la description
+        validate_body_max_caps_percent: Pourcentage maximal autorisé de lettres majuscules dans le corps du texte
         validate_body_max_marks_together: Nombre maximum de caractères spéciaux autorisés dans le corps
         validate_body_min_length: Nombre de caractères minimum pour le corps
         validate_body_start_with_caps: Forcer le corps à commencer par une lettre majuscule

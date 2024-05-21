@@ -101,6 +101,8 @@ module Decidim
             Decidim::Proposals::ProposalVotesController.include(Decidim::DecidimAwesome::Proposals::ProposalVotesControllerOverride)
           end
 
+          Decidim::AmendmentsController.include(Decidim::DecidimAwesome::LimitPendingAmendments) if DecidimAwesome.enabled?(:allow_limiting_amendments)
+
           Decidim::Proposals::ProposalsController.include(Decidim::DecidimAwesome::Proposals::OrderableOverride) if DecidimAwesome.enabled?(:additional_proposal_sortings)
         end
       end
@@ -109,14 +111,34 @@ module Decidim
         app.config.middleware.insert_after Decidim::Middleware::CurrentOrganization, Decidim::DecidimAwesome::CurrentConfig
       end
 
-      initializer "decidim_decidim_awesome.additional_proposal_sortings" do |_app|
-        if DecidimAwesome.enabled?(:additional_proposal_sortings)
-          Decidim.component_registry.find(:proposals).tap do |component|
-            component.settings(:global) do |settings|
-              settings.attribute :default_sort_order, type: :select, default: "default", choices: -> { ["default"] + DecidimAwesome.possible_additional_proposal_sortings }
+      initializer "decidim_decidim_awesome.additional_proposal_options" do |_app|
+        Decidim.component_registry.find(:proposals).tap do |component|
+          component.settings(:global) do |settings|
+            if DecidimAwesome.enabled?(:additional_proposal_sortings)
+              settings.attribute(
+                :default_sort_order,
+                type: :select,
+                default: "default",
+                choices: -> { (POSSIBLE_SORT_ORDERS + DecidimAwesome.possible_additional_proposal_sortings).uniq }
+              )
             end
+            if DecidimAwesome.enabled?(:allow_limiting_amendments)
+              DecidimAwesome.hash_append!(
+                settings.attributes,
+                :amendments_enabled,
+                :limit_pending_amendments,
+                Decidim::SettingsManifest::Attribute.new(type: :boolean, default: DecidimAwesome.allow_limiting_amendments)
+              )
+            end
+          end
+          if DecidimAwesome.enabled?(:additional_proposal_sortings)
             component.settings(:step) do |settings|
-              settings.attribute :default_sort_order, type: :select, include_blank: true, choices: -> { ["default"] + DecidimAwesome.possible_additional_proposal_sortings }
+              settings.attribute(
+                :default_sort_order,
+                type: :select,
+                include_blank: true,
+                choices: -> { (POSSIBLE_SORT_ORDERS + DecidimAwesome.possible_additional_proposal_sortings).uniq }
+              )
             end
           end
         end
@@ -142,26 +164,43 @@ module Decidim
             next unless component
 
             component.settings(:global) do |settings|
-              settings.attribute :awesome_voting_manifest,
-                                 type: :select,
-                                 default: "",
-                                 choices: -> { ["default"] + Decidim::DecidimAwesome.voting_registry.manifests.map(&:name) },
-                                 readonly: lambda { |context|
-                                   Decidim::Proposals::Proposal.where(component: context[:component]).where.not(proposal_votes_count: -Float::INFINITY..0).any?
-                                 }
-              settings.attribute :voting_cards_box_title,
-                                 type: :string,
-                                 translated: true
-              settings.attribute :voting_cards_show_modal_help,
-                                 type: :boolean,
-                                 default: true
-              settings.attribute :voting_cards_show_abstain,
-                                 type: :boolean,
-                                 default: false
-              settings.attribute :voting_cards_instructions,
-                                 type: :text,
-                                 translated: true,
-                                 editor: true
+              DecidimAwesome.hash_append!(
+                settings.attributes,
+                :can_accumulate_supports_beyond_threshold,
+                :awesome_voting_manifest,
+                Decidim::SettingsManifest::Attribute.new(
+                  type: :select,
+                  default: "",
+                  choices: -> { ["default"] + Decidim::DecidimAwesome.voting_registry.manifests.map(&:name) },
+                  readonly: lambda { |context|
+                    Decidim::Proposals::Proposal.where(component: context[:component]).where.not(proposal_votes_count: -Float::INFINITY..0).any?
+                  }
+                )
+              )
+              DecidimAwesome.hash_append!(
+                settings.attributes,
+                :awesome_voting_manifest,
+                :voting_cards_box_title,
+                Decidim::SettingsManifest::Attribute.new(type: :string, translated: true)
+              )
+              DecidimAwesome.hash_append!(
+                settings.attributes,
+                :voting_cards_box_title,
+                :voting_cards_show_modal_help,
+                Decidim::SettingsManifest::Attribute.new(type: :boolean, default: true)
+              )
+              DecidimAwesome.hash_append!(
+                settings.attributes,
+                :voting_cards_show_modal_help,
+                :voting_cards_show_abstain,
+                Decidim::SettingsManifest::Attribute.new(type: :boolean, default: false)
+              )
+              DecidimAwesome.hash_append!(
+                settings.attributes,
+                :voting_cards_show_abstain,
+                :voting_cards_instructions,
+                Decidim::SettingsManifest::Attribute.new(type: :text, translated: true, editor: true)
+              )
             end
           end
         end

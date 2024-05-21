@@ -1,0 +1,23 @@
+<!--the modal window will be used in another pr-->
+<%= decidim_modal id: "LimitAmendmentsModal", data: { "limit-amendments": current_component.settings&.limit_pending_amendments } do %>
+  <div data-dialog-container>
+    <%= icon "notification-3-fill" %>
+    <h3 data-dialog-title><%= t("decidim.decidim_awesome.amendments.modal.amendment_exists") %></h3>
+
+    <div>
+      <div class="instructions">
+        <%= t("decidim.decidim_awesome.amendments.modal.explanation_html",
+                                    proposal_link: present(@proposal).proposal_path + "#comments") %>
+
+        <% emendations = @proposal.emendations.not_hidden.where(decidim_amendments: { state: Decidim::Amendment.states["evaluating"] }) %>
+        <% if current_component.current_settings&.amendments_visibility == "all" && emendations %>
+          <%= t("decidim.decidim_awesome.amendments.modal.current_amendment_html",
+                                        amendment_link: present(emendations&.first).proposal_path) %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div data-dialog-actions>
+    <button type="button" class="button button__sm md:button__lg button__transparent-secondary cancel-action" data-dialog-close="LimitAmendmentsModal"><%= t("decidim.decidim_awesome.amendments.modal.dismiss") %></button>
+  </div>
+<% end %>

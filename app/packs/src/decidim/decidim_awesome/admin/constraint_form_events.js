@@ -36,7 +36,7 @@ const constraintChange = (modalId, data) => {
 };
 
 const bindModalEvents = (detail) => {
-  const div = detail.querySelector("[id^=constraint-form");
+  const div = detail.querySelector("[id^=constraint-form]");
   const spaceManifest = div.getElementsByTagName("select")[0];
   const spaceSlug = div.getElementsByTagName("select")[1];
   const componentManifest = div.getElementsByTagName("select")[2];
