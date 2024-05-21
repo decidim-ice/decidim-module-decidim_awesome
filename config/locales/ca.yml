@@ -3,7 +3,7 @@ ca:
   activemodel:
     attributes:
       config:
-        additional_proposal_sortings: Activar opcions d'ordenació addicionals
+        additional_proposal_sortings: Activa opcions d'ordenació addicionals
         allow_images_in_editors: Permet imatges a l'editor HTML
         allow_images_in_proposals: Permet imatges a l'editor de propostes
         allow_videos_in_editors: Permet vídeos a l'editor HTML
