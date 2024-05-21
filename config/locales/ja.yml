@@ -6,6 +6,7 @@ ja:
         additional_proposal_sortings: 有効な追加ソートオプション
         allow_images_in_editors: HTMLエディターで画像を許可する
         allow_images_in_proposals: 提案エディターでの画像を許可する
+        allow_videos_in_editors: HTMLエディターで動画を許可する
         auto_save_forms: ローカルストレージにフォームを自動保存する
         intergram_auto_no_response: ユーザーが最初のメッセージを送信し、応答が受信されなかった後1分後に送信されたメッセージ
         intergram_auto_response: ユーザーが最初のメッセージを送信した直後に送信されるメッセージ
