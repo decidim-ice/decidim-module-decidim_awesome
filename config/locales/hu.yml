@@ -239,7 +239,7 @@ hu:
         voting_cards:
           change_vote: Szavazatom megváltoztatása
           default_box_title: Szavazás erre a javaslatra
-          default_instructions_html: "<p>Kérjük ovlassa el a választási szabályokat, hogy pontosan megértse hogy került számításra szavazata a %{organization}\" által</p>"
+          default_instructions_html: "<p>Kérjük ovlassa el a választási szabályokat, hogy pontosan megértse hogy került számításra szavazata a %{organization} által</p>"
           modal:
             cancel: Elvetés
             message: A szavazata ekkor %{date} válig véglegessé. A dátumig módosítható
