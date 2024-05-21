@@ -6,6 +6,7 @@ de:
         additional_proposal_sortings: Zusätzliche Sortieroptionen aktiviert
         allow_images_in_editors: Bilder im HTML-Editor erlauben
         allow_images_in_proposals: Bilder im Vorschlags-Editor erlauben
+        allow_videos_in_editors: Videos im HTML-Editor erlauben
         auto_save_forms: Formulare automatisch lokal speichern
         intergram_auto_no_response: Diese Nachricht wird verschickt, sobald eine Minute seit der letzten vom Benutzer verfasste Nachricht verschickt wurde und keine Antwort eingetroffen ist
         intergram_auto_response: Eine Nachricht, die unmittelbar nach dem Senden der ersten Nachricht des Benutzers gesendet wird
