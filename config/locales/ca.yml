@@ -378,6 +378,7 @@ ca:
           url_exists: Aquesta URL ha estat configurada en un altre ítem de menú, si us plau edita'l en comptes de crear-ne un de nou.
       amendments:
         modal:
+          amendment_exists: Una esmena ja existeix
           current_amendment_html: <p>Podeu <a href="%{amendment_link}">accedir a l'esmena actual aquí</a>.</p>
           dismiss: D'acord
           explanation_html: |

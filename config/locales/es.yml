@@ -377,6 +377,7 @@ es:
           url_exists: Esta URL ya ha sido configurada en otro ítem de menú, por favor edítalo en lugar de crear uno nuevo.
       amendments:
         modal:
+          amendment_exists: Ya existe una enmienda
           current_amendment_html: <p>Puedes <a href="%{amendment_link}">acceder a la enmienda actual aquí</a>.</p>
           dismiss: De acuerdo
           explanation_html: |
