@@ -1,4 +1,4 @@
-<!-- insert_before "erb[loud]:contains('stylesheet_pack_tag')" -->
+<!-- insert_after "erb[loud]:contains('append_stylesheet_pack_tag')" -->
 
 <%= render partial: "layouts/decidim/decidim_awesome/awesome_config" %>
 <% append_stylesheet_pack_tag("decidim_admin_decidim_awesome_global") %>
