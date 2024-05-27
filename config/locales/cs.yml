@@ -378,6 +378,7 @@ cs:
           url_exists: Stejná adresa URL je již nakonfigurována, prosím upravte ji místo jejího vytvoření.
       amendments:
         modal:
+          amendment_exists: Pozměňovací návrh již existuje
           current_amendment_html: <p>Můžete <a href="%{amendment_link}">přistupovat k aktuálnímu pozměňovacímu návrhu zde</a>.</p>
           dismiss: Ok, rozumím
           explanation_html: |
