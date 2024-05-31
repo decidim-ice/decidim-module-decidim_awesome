@@ -8,17 +8,10 @@ module Decidim
       module ProposalPresenterOverride
         extend ActiveSupport::Concern
         included do
-          def private_body(links: false, extras: true, strip_tags: false)
+          def private_body(links: false, extras: true, strip_tags: false, all_locales: false)
             return unless proposal
-
-            content = proposal.private_body
-
-            content = strip_tags(sanitize_text(content)) if strip_tags
-            renderer = Decidim::ContentRenderers::HashtagRenderer.new(content)
-            content = renderer.render(links: links, extras: extras).html_safe
-
-            content = Decidim::ContentRenderers::LinkRenderer.new(content).render if links
-            content
+    
+            content_handle_locale(proposal.private_body, all_locales, extras, links, strip_tags)
           end
         end
       end

@@ -8,6 +8,23 @@ module Decidim
       included do
         has_one :extra_fields, foreign_key: "decidim_proposal_id", class_name: "Decidim::DecidimAwesome::ProposalExtraField", dependent: :destroy
 
+        def private_body
+          extra_fields ||= initialized_extra_fields
+          extra_fields.private_body
+        end
+
+        def update_private_body(updated_private_body)
+          extra_fields ||= initialized_extra_fields
+          extra_fields.update!(private_body: updated_private_body)
+          extra_fields
+        end
+        
+        def remove_private_body
+          extra_fields ||= initialized_extra_fields
+          extra_fields.update!(private_body: {})
+          extra_fields
+        end
+
         def weight_count(weight)
           (extra_fields && extra_fields.vote_weight_totals[weight.to_s]) || 0
         end
@@ -25,8 +42,7 @@ module Decidim
         end
 
         def update_vote_weights!
-          extra_fields ||= Decidim::DecidimAwesome::ProposalExtraField.find_or_initialize_by(proposal: self)
-          extra_fields.vote_weight_totals = {}
+          extra_fields ||= initialized_extra_fields
           votes.each do |vote|
             extra_fields.vote_weight_totals[vote.weight] ||= 0
             extra_fields.vote_weight_totals[vote.weight] += 1
@@ -44,6 +60,15 @@ module Decidim
               proposal: Decidim::Proposals::Proposal.where(component: component)
             )
           ).pluck(:weight)
+        end
+
+        private
+
+        def initialized_extra_fields
+          extra_fields ||= Decidim::DecidimAwesome::ProposalExtraField.find_or_initialize_by(proposal: self)
+          extra_fields.vote_weight_totals = {}
+          extra_fields.private_body = {}
+          extra_fields
         end
       end
     end

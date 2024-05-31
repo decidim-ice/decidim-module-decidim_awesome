@@ -9,8 +9,7 @@ module Decidim
 
         included do
           clear_validators!
-
-          attribute :private_body, Decidim::Attributes::CleanString
+          translatable_attribute :private_body, String
 
           validates :title, presence: true, etiquette: true
           validates :title, proposal_length: {
@@ -28,8 +27,7 @@ module Decidim
             self.title = translated_attribute(model.title)
             self.body = translated_attribute(model.body)
 
-            private_field = model.awesome_private_proposal_field || PrivateProposalField.new(proposal_id: model.id)
-            self.private_body = private_field.private_body
+            self.private_body = model.private_body
 
             self.user_group_id = model.user_groups.first&.id
             return unless model.categorization

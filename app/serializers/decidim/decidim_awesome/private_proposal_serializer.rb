@@ -44,8 +44,7 @@ module Decidim::DecidimAwesome
       private_custom_fields = CustomFields.new(awesome_private_proposal_custom_fields)
       return payload if private_custom_fields.blank?
 
-      private_body = proposal.awesome_private_proposal_field.private_body
-      fields_entries(private_custom_fields, private_body) do |key, value|
+      fields_entries(private_custom_fields, proposal.private_body) do |key, value|
         payload["secret/#{key}".to_sym] = value
       end
 

@@ -26,8 +26,8 @@ module Decidim
           end
 
           def update_private_field
-            @proposal.update(
-              awesome_private_proposal_field_attributes: { private_body: form.private_body }
+            @proposal.update_private_body(
+              form.private_body 
             )
             @proposal
           end

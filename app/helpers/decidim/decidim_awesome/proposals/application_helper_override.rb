@@ -63,7 +63,7 @@ module Decidim
             custom_fields.translate!
 
             proposal_body = if name == :private_body
-                              form_presenter.private_body(extras: false)
+                              form_presenter.private_body(extras: false, all_locales: locale.present?)
                             else
                               form_presenter.body(extras: false, all_locales: locale.present?)
                             end

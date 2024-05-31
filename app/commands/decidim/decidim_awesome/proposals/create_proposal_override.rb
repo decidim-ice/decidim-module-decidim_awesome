@@ -16,8 +16,10 @@ module Decidim
 
           def create_proposal
             created_proposal = decidim_original_create_proposal
-            created_proposal.update(
-              awesome_private_proposal_field_attributes: { private_body: form.private_body }
+            created_proposal.update_private_body(
+              {
+                form.private_body
+              }
             )
           end
         end
