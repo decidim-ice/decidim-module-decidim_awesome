@@ -57,7 +57,7 @@ module Decidim
         def self.all_vote_weights_for(component)
           Decidim::DecidimAwesome::VoteWeight.where(
             proposal_vote_id: Decidim::Proposals::ProposalVote.where(
-              proposal: Decidim::Proposals::Proposal.where(component: component)
+              proposal: Decidim::Proposals::Proposal.where(component:)
             )
           ).pluck(:weight)
         end
@@ -65,9 +65,10 @@ module Decidim
         private
 
         def initialized_extra_fields
-          extra_fields ||= Decidim::DecidimAwesome::ProposalExtraField.find_or_initialize_by(proposal: self)
-          extra_fields.vote_weight_totals = {}
-          extra_fields.private_body = {}
+          extra_fields ||= Decidim::DecidimAwesome::ProposalExtraField.find_or_initialize_by(proposal: self) do |extra_fields|
+            extra_fields.vote_weight_totals = {}
+            extra_fields.private_body = {}
+          end
           extra_fields
         end
       end

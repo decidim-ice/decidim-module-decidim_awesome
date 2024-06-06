@@ -8,6 +8,9 @@ module Decidim
         extend ActiveSupport::Concern
 
         included do
+          include Decidim::TranslatableAttributes
+          alias_method :decidim_original_map_model, :map_model
+
           clear_validators!
           translatable_attribute :private_body, String
 
@@ -24,21 +27,14 @@ module Decidim
           }
 
           def map_model(model)
-            self.title = translated_attribute(model.title)
-            self.body = translated_attribute(model.body)
-
-            self.private_body = model.private_body
-
-            self.user_group_id = model.user_groups.first&.id
-            return unless model.categorization
-
-            self.category_id = model.categorization.decidim_category_id
+            decidim_original_map_model(model)
+            self.private_body = translated_attribute(model.private_body)
           end
 
           def override_validations?
             return false if context.current_component.settings.participatory_texts_enabled
 
-            custom_fields.present? || awesome_config.enabled_in_context?(:use_markdown_editor)
+            custom_fields.present?
           end
 
           def minimum_title_length
@@ -51,6 +47,10 @@ module Decidim
 
           def custom_fields
             @custom_fields ||= awesome_config.collect_sub_configs_values("proposal_custom_field")
+          end
+
+          def private_custom_fields
+            @private_custom_fields ||= awesome_config_instance.collect_sub_configs_values("private_proposal_custom_field")
           end
 
           def awesome_config

@@ -1,9 +1,9 @@
 import "src/decidim/decidim_awesome/awesome_application.js"
 
-// Images
+// // Images
 require.context("../images", true)
 
-// CSS
+// // CSS
 import "entrypoints/decidim_decidim_awesome.scss";
 
 

@@ -17,9 +17,8 @@ require "decidim/decidim_awesome/proposal_component/proposal_presenter_override"
 require "decidim/decidim_awesome/proposal_component/proposal_serializer_decorator"
 
 # Engines to handle logic unrelated to participatory spaces or components
-
 Decidim.register_global_engine(
   :decidim_decidim_awesome, # this is the name of the global method to access engine routes
-  ::Decidim::DecidimAwesome::Engine,
+  Decidim::DecidimAwesome::Engine,
   at: "/decidim_awesome"
 )

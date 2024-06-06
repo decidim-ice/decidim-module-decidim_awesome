@@ -42,10 +42,12 @@ module Decidim::DecidimAwesome
 
     def serialize_private_custom_fields(payload)
       private_custom_fields = CustomFields.new(awesome_private_proposal_custom_fields)
-      return payload if private_custom_fields.blank?
 
-      fields_entries(private_custom_fields, proposal.private_body) do |key, value|
-        payload["secret/#{key}".to_sym] = value
+      return payload if private_custom_fields.blank?
+      Decidim.available_locales.each do |locale| 
+        fields_entries(private_custom_fields, proposal.private_body["#{locale}"] || "") do |key, value|
+          payload["secret/#{key}/#{locale}".to_sym] = value
+        end
       end
 
       payload

@@ -1,11 +1,9 @@
+---
 ro:
   activemodel:
     attributes:
       config:
-        allow_images_in_full_editor: Permite imagini în editorul HTML complet
-        allow_images_in_markdown_editor: Permite imagini în editorul markdown
         allow_images_in_proposals: Permite imaginile în editorul de propuneri
-        allow_images_in_small_editor: Permite imagini în editorul HTML minimal
         auto_save_forms: Salvare automată a formularelor în memoria locală
         intergram_chat_id: ID Conversație
         intergram_color: Culoarea widget-ului

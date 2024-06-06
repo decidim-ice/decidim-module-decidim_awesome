@@ -1,13 +1,13 @@
-<%= decidim_form_for(@form, url: custom_redirect_path, method: :patch, html: { class: :form }) do |f| %>
+<%= decidim_form_for(@form, url: custom_redirect_path, method: :patch, html: { class: "form-defaults form new_custom_redirect_" }) do |f| %>
   <div class="card">
-    <div class="card-divider">
+    <div class="bg-gray-6 p-4 rounded-t">
       <h2 class="card-title"><%= t ".title" %></h2>
     </div>
-    <div class="card-section">
+    <div class="card-section p-4">
       <%= render partial: "form", object: f %>
     </div>
   </div>
-  <div class="button--double form-general-submit">
-    <%= f.submit t(".save") %>
+  <div class="flex items-center justify-center mt-12 w-full text-white form-general-submit">
+    <%= f.submit t(".save"), class: "button button__lg button__secondary" %>
   </div>
 <% end %>

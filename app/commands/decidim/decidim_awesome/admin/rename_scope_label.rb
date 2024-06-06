@@ -34,7 +34,7 @@ module Decidim
             end
           end
 
-          broadcast(:ok, { scope: scope, key: @text })
+          broadcast(:ok, { scope:, key: @text })
         rescue StandardError => e
           broadcast(:invalid, e.message)
         end

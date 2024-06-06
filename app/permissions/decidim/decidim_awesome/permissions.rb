@@ -14,15 +14,14 @@ module Decidim
       end
 
       def editor_image_action?
-        return unless permission_action.subject == :editor_image
+        return false unless permission_action.subject == :editor_image
 
         config = context.fetch(:awesome_config, {})
 
         return allow! if user.admin?
         return allow! if config[:allow_images_in_proposals]
-        return allow! if config[:allow_images_in_small_editor]
-        return allow! if config[:allow_images_in_full_editor]
-        return allow! if config[:allow_images_in_markdown_editor]
+        return allow! if config[:allow_images_in_editors]
+        return allow! if config[:allow_videos_in_editors]
       end
     end
   end

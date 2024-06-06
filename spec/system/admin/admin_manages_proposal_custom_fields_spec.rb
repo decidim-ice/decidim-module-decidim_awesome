@@ -3,14 +3,14 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/box_label_editor"
 
-describe "Admin manages custom proposal fields", type: :system do
-  let(:organization) { create :organization }
-  let!(:admin) { create(:user, :admin, :confirmed, organization: organization) }
+describe "Admin manages custom proposal fields" do
+  let(:organization) { create(:organization) }
+  let!(:admin) { create(:user, :admin, :confirmed, organization:) }
   let(:custom_fields) do
     {}
   end
-  let!(:config) { create :awesome_config, organization: organization, var: :proposal_custom_fields, value: custom_fields }
-  let(:config_helper) { create :awesome_config, organization: organization, var: :proposal_custom_field_bar }
+  let!(:config) { create(:awesome_config, organization:, var: :proposal_custom_fields, value: custom_fields) }
+  let(:config_helper) { create(:awesome_config, organization:, var: :proposal_custom_field_bar) }
   let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes", component_manifest: "proposals" }) }
   let!(:another_constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes" }) }
 
@@ -27,7 +27,7 @@ describe "Admin manages custom proposal fields", type: :system do
 
   context "when creating a new box" do
     it "saves the content" do
-      click_link 'Add a new "custom fields" box'
+      click_link_or_button 'Add a new "custom fields" box'
 
       expect(page).to have_admin_callout("created successfully")
 
@@ -35,7 +35,7 @@ describe "Admin manages custom proposal fields", type: :system do
       # page.execute_script("$('.proposal_custom_fields_editor:first')[0].FormBuilder.actions.setData(#{data})")
       page.execute_script("document.querySelector('.proposal_custom_fields_editor').FormBuilder.actions.setData(#{data})")
 
-      find("*[type=submit]").click
+      click_link_or_button "Update configuration"
 
       sleep 2
       expect(page).to have_admin_callout("updated successfully")
@@ -60,16 +60,16 @@ describe "Admin manages custom proposal fields", type: :system do
       expect(page).to have_content("Full Name")
       expect(page).to have_content("Occupation")
       expect(page).to have_content("Street Sweeper")
-      expect(page).not_to have_content("Short Bio")
+      expect(page).to have_no_content("Short Bio")
 
       page.execute_script("$('.proposal_custom_fields_container[data-key=\"foo\"] .proposal_custom_fields_editor')[0].FormBuilder.actions.setData(#{data})")
-      find("*[type=submit]").click
+      click_link_or_button "Update configuration"
 
       sleep 2
       expect(page).to have_admin_callout("updated successfully")
       expect(page).to have_content("Full Name")
-      expect(page).not_to have_content("Occupation")
-      expect(page).not_to have_content("Street Sweeper")
+      expect(page).to have_no_content("Occupation")
+      expect(page).to have_no_content("Street Sweeper")
       expect(page).to have_content("Short Bio")
     end
 
@@ -88,21 +88,21 @@ describe "Admin manages custom proposal fields", type: :system do
         expect(page).to have_content("Full Name")
         expect(page).to have_content("Occupation")
         expect(page).to have_content("Street Sweeper")
-        expect(page).not_to have_content("Short Bio")
+        expect(page).to have_no_content("Short Bio")
 
         within ".proposal_custom_fields_container[data-key=\"foo\"]" do
-          accept_confirm { click_link 'Remove this "custom fields" box' }
+          accept_confirm { click_link_or_button 'Remove this "custom fields" box' }
         end
 
         sleep 2
         expect(page).to have_admin_callout("removed successfully")
-        expect(page).not_to have_content("Full Name")
+        expect(page).to have_no_content("Full Name")
         expect(page).to have_content("Occupation")
         expect(page).to have_content("Street Sweeper")
-        expect(page).not_to have_content("Short Bio")
+        expect(page).to have_no_content("Short Bio")
 
-        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_foo)).not_to be_present
-        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar)).to be_present
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :proposal_custom_field_foo)).not_to be_present
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :proposal_custom_field_bar)).to be_present
       end
     end
 
@@ -116,12 +116,12 @@ describe "Admin manages custom proposal fields", type: :system do
 
       it "adds a new config helper var" do
         within ".proposal_custom_fields_container[data-key=\"foo\"]" do
-          click_link "Add case"
+          click_link_or_button "Add case"
         end
 
         select "Processes", from: "constraint_participatory_space_manifest"
-        within ".modal-content" do
-          find("*[type=submit]").click
+        within "#new-modal-proposal_custom_field_foo" do
+          click_link_or_button "Save"
         end
 
         sleep 2
@@ -130,8 +130,8 @@ describe "Admin manages custom proposal fields", type: :system do
           expect(page).to have_content("Processes")
         end
 
-        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar)).to be_present
-        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar).constraints.first.settings).to eq(constraint.settings)
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :proposal_custom_field_bar)).to be_present
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :proposal_custom_field_bar).constraints.first.settings).to eq(constraint.settings)
       end
 
       context "when removing a constraint" do
@@ -150,23 +150,23 @@ describe "Admin manages custom proposal fields", type: :system do
 
           within ".proposal_custom_fields_container[data-key=\"bar\"]" do
             within first(".constraints-list li") do
-              click_link "Delete"
+              click_link_or_button "Delete"
             end
           end
 
           within ".proposal_custom_fields_container[data-key=\"bar\"] .constraints-editor" do
-            expect(page).not_to have_content("Proposals")
+            expect(page).to have_no_content("Proposals")
           end
 
           visit decidim_admin_decidim_awesome.config_path(:proposal_custom_fields)
 
           within ".proposal_custom_fields_container[data-key=\"bar\"] .constraints-editor" do
-            expect(page).not_to have_content("Proposals")
+            expect(page).to have_no_content("Proposals")
           end
 
-          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar)).to be_present
-          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar).constraints.count).to eq(1)
-          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar).constraints.first).to eq(another_constraint)
+          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :proposal_custom_field_bar)).to be_present
+          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :proposal_custom_field_bar).constraints.count).to eq(1)
+          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :proposal_custom_field_bar).constraints.first).to eq(another_constraint)
         end
 
         context "and there is only one constraint" do
@@ -174,7 +174,7 @@ describe "Admin manages custom proposal fields", type: :system do
 
           it "do not remove the helper config var" do
             within ".proposal_custom_fields_container[data-key=\"bar\"]" do
-              click_link "Delete"
+              click_link_or_button "Delete"
             end
 
             within ".proposal_custom_fields_container[data-key=\"bar\"] .constraints-editor" do
@@ -182,8 +182,8 @@ describe "Admin manages custom proposal fields", type: :system do
             end
 
             expect(page).to have_content("Sorry, this cannot be deleted")
-            expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar).constraints.count).to eq(1)
-            expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: :proposal_custom_field_bar).constraints.first).to eq(constraint)
+            expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :proposal_custom_field_bar).constraints.count).to eq(1)
+            expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :proposal_custom_field_bar).constraints.first).to eq(constraint)
           end
         end
       end

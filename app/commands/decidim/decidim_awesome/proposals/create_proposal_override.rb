@@ -16,10 +16,10 @@ module Decidim
 
           def create_proposal
             created_proposal = decidim_original_create_proposal
+            # Update the proposal with the private body, to
+            # avoid tracebility on private fields.
             created_proposal.update_private_body(
-              {
-                form.private_body
-              }
+              I18n.locale => form.private_body
             )
           end
         end

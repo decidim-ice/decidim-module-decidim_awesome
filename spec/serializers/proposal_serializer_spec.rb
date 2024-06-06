@@ -8,9 +8,9 @@ module Decidim::Proposals
       described_class.new(proposal)
     end
 
-    let!(:proposal) { create(:proposal, :accepted, component: component) }
-    let!(:another_proposal) { create(:proposal, :accepted, component: component) }
-    let!(:extra_fields) { create(:awesome_proposal_extra_fields, proposal: proposal) }
+    let!(:proposal) { create(:proposal, :accepted, component:) }
+    let!(:another_proposal) { create(:proposal, :accepted, component:) }
+    let!(:extra_fields) { create(:awesome_proposal_extra_fields, proposal:) }
     let(:weights) do
       {
         "0" => 1,
@@ -20,14 +20,14 @@ module Decidim::Proposals
     let!(:votes) do
       weights.each do |weight, count|
         count.times do
-          vote = create(:proposal_vote, proposal: proposal, author: create(:user, organization: proposal.organization))
-          create(:awesome_vote_weight, vote: vote, weight: weight)
+          vote = create(:proposal_vote, proposal:, author: create(:user, organization: proposal.organization))
+          create(:awesome_vote_weight, vote:, weight:)
         end
       end
     end
     let!(:another_extra_fields) { create(:awesome_proposal_extra_fields, :with_votes, proposal: another_proposal) }
     let(:participatory_process) { component.participatory_space }
-    let(:component) { create :proposal_component, settings: settings }
+    let(:component) { create(:proposal_component, settings:) }
     let(:settings) do
       {
         awesome_voting_manifest: manifest

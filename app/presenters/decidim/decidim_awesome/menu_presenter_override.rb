@@ -17,6 +17,14 @@ module Decidim
                                 end
                               end
         end
+
+        def active_item_for_breadcrumb
+          presented_items.find do |item|
+            next if item.hacked_not_overriding?
+
+            item.active_for_breadcrumb?
+          end
+        end
       end
     end
   end

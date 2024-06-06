@@ -1,12 +1,12 @@
+---
 ca:
   activemodel:
     attributes:
       config:
-        additional_proposal_sortings: Opcions d'ordenació addicionals actives
-        allow_images_in_full_editor: Permet imatges a l'editor HTML complet
-        allow_images_in_markdown_editor: Permet imatges a l'editor Markdown
+        additional_proposal_sortings: Activa opcions d'ordenació addicionals
+        allow_images_in_editors: Permet imatges a l'editor HTML
         allow_images_in_proposals: Permet imatges a l'editor de propostes
-        allow_images_in_small_editor: Permet imatge a l'editor HTML reduït
+        allow_videos_in_editors: Permet vídeos a l'editor HTML
         auto_save_forms: Desa automàticament els formularis a l'emmagatzematge local
         intergram_auto_no_response: Un missatge que s'envia un minut després que la usuària hagi enviat el seu primer missatge i no s'hagi rebut cap resposta
         intergram_auto_response: Un missatge que s'envia immediatament després que la usuària enviï el seu primer missatge
@@ -21,7 +21,6 @@ ca:
         proposal_custom_fields: 'Camps personalitzats #%{id}'
         scoped_admins: 'Grup d''administradores acotades #%{id}'
         scoped_styles: 'Personalització d''estils #%{id}'
-        use_markdown_editor: Fes servir l'editor Markdown en comptes de l'editor HTML
         validate_body_max_caps_percent: Percentatge màxim de majúscules en el cos de la proposta
         validate_body_max_marks_together: Nombre màxim de símbols consecutius permesos al cos de la proposta
         validate_body_min_length: Nombre de caràcters mínims requerits pel cos de la proposta
@@ -51,6 +50,8 @@ ca:
         proposal_custom_fields: Camps personalitzats
   decidim:
     admin:
+      actions:
+        manage: Configura
       filters:
         admin_accountability:
           admin_role_type:
@@ -77,7 +78,6 @@ ca:
             announcement: Anunci
             iframe: Codi Iframe
             iframe_help: 'Posa el teu codi com a HTML: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. S''eliminarà qualsevol altre element HTML que no sigui l''Iframe. Assegureu-vos de fer servir 100% a l''amplada (width="100%") per tal d''omplir la pantalla.'
-            no_margins: Sense marges entre l'Iframe i la resta de la pàgina
             viewport_width: Limita l'amplada màxima com a la resta de l'aplicació
           step:
             announcement: Anunci
@@ -119,6 +119,7 @@ ca:
               supported_first: Votades per mi primer
               supported_last: Votades últimes per mi
               za: Z-A (ordre alfabètic invers)
+            limit_pending_amendments: Permetre només una esmena pendent a cada proposta.
             sort_orders_enabled: Opcions d'ordenació actives
             voting_cards_box_title: Títol per la cabina de votació
             voting_cards_box_title_help: L'opció per defecte és 'Votar a aquesta proposta'. Utilitzeu '-' per amagar-la.
@@ -226,10 +227,9 @@ ca:
               incorrect_css: 'El CSS de la caixa #%{key} no és vàlid'
               incorrect_json: 'La sintaxi JSON de la caixa #%{key} és invàlida'
             help:
-              allow_images_in_full_editor: Això afegirà un botó per pujar imatges a l'editor HTML complet.
-              allow_images_in_markdown_editor: Això permetrà a l'editor markdown pujar imatges amb "copiar i enganxar" o "arrastrant i deixant anar".
+              allow_images_in_editors: Això afegirà una icona per pujar arxius a l'editor HTML
               allow_images_in_proposals: Això permetrà pujar imatges a l'editor de propostes, disponible per qualsevol usuari
-              allow_images_in_small_editor: Això afegirà un botó per pujar imatges a l'editor HTML mínim.
+              allow_videos_in_editors: Això afegirà una icona per enllaçar vídeos a l'editor HTML
               auto_save_forms: Això farà servir l'emmagatzematge local del navegador per desar automàticament les dades introduïdes pels usuaris a les enquestes i altres formularis mentre les omplen. Les dades es restauraran en una futura visita amb el mateix navegador en cas que no s'enviï el formulari. Si s’envia el formulari, s’eliminaran les dades locals. Si els usuaris eliminen les seves dades del navegador, tampoc es restauraran.
               drag_and_drop_supported: Quan es pugin imatges, es pot fer a través del mètode de "arrossegar i deixar anar". Les imatges seran pujades al servidor i inserides com recursos externs (no es fa servir codificació en línia base64).
               intergram_about: Intergram utilitza el Telegram Messenger per gestionar un widget de xat en viu de suport incrustat a la part inferior de la pàgina.
@@ -241,7 +241,6 @@ ca:
               scoped_admins: Promou usuaries normals a administradores amb accés limitat a certes parts de la web pública (feu servir l'editor de restriccions per això). Noteu que afegir usuaries que ja tenen permisos d'administració no té cap efecte.
               scoped_styles: Crea CSS personalitzats que només s'apliquin a determinades parts de la web pública (per fer-ho, utilitza l'editor de restriccions)
               scoped_styles_variables: 'Pots fer servir les següents variables CSS pels colors personalitzats de l''organització:'
-              use_markdown_editor: Això substituirà l'editor HTML (Quill), en el seu lloc s'utilitzarà un editor Markdown tant a l'admin com a la pàgina pública per processar el text (a la base de dades el text es desarà com a markdown)
               validate_body_max_caps_percent: Zero no permetrà cap majúscula, 100 obligarà a escriure-ho tot en majúscules
               validate_body_max_marks_together: 'Limiteu el nombre de signes d''interrogació i d''exclamació que es poden escriure junts. És a dir: si és 2, aleshores ''!!!'' no es permetrà al text'
               validate_body_min_length: Aquest nombre pot ser zero, això farà que aquest camp no sigui obligatori
@@ -265,7 +264,6 @@ ca:
             sure_to_remove: Estàs segura que vols eliminar aquesta caixa CSS?
           none: "⛔ Mai! - Desactiva qualsevol altra restricció"
           process_groups: Grup de processos
-          rich_text_editor_in_public_views: 'NOTA: "Editor de text enriquit per participants" està habilitat a la configuració general, aquesta opció no aplicarà. Feu servir les modificacions d''editor general per afegir imatges a les propostes.'
           show:
             title: Modificacions per %{setting}
             update: Actualitza la configuració
@@ -364,10 +362,13 @@ ca:
           index:
             confirm_destroy: Confirmes que vols eliminar aquest retoc?
             edit: Editar
+            home_content_block_menu:
+              title: Bloc de menú global a la home
+            menu:
+              title: Menú principal
             new: Nou ítem
             remove: Eliminar addició
             remove_hack: Eliminar retoc
-            title: Menú principal
           new:
             save: Desar
             title: Nou ítem de menú
@@ -375,6 +376,15 @@ ca:
             error: 'Error en actualitzar l''ítem de menú: %{error}'
             success: Ítem de menú actualitzat correctament
           url_exists: Aquesta URL ha estat configurada en un altre ítem de menú, si us plau edita'l en comptes de crear-ne un de nou.
+      amendments:
+        modal:
+          amendment_exists: Una esmena ja existeix
+          current_amendment_html: <p>Podeu <a href="%{amendment_link}">accedir a l'esmena actual aquí</a>.</p>
+          dismiss: D'acord
+          explanation_html: |
+            <p>Actualment, s'està avaluant una altra esmena per a aquesta proposta. Per crear-ne una de nova, heu d'esperar fins que l'actual sigui acceptada o rebutjada.</p>
+            <p>També podeu posar-vos en contacte amb l'autor d'aquesta proposta <a href="%{proposal_link}">deixant un comentari</a> i intentar accelerar la resolució de l'esmena actual.</p>
+        pending_limit_reached: Ho sentim, només hi pot haver una esmena pendent alhora. Si us plau, espereu fins que "%{emendation}" sigui acceptat o rebutjat.
       config:
         intergram:
           auto_no_response: Sembla que no hi ha ningú disponible per a respondre en aquest moment. Si us plau, indica'ns com et podem contactar i ens comunicarem amb tu tan aviat com ens sigui possible.
@@ -436,7 +446,7 @@ ca:
           abstained: "✔ Abstenció"
           change_vote: Canvia el meu vot
           default_box_title: Vota en aquesta proposta
-          default_instructions_html: <p>Llegeix les normes de la votació amb atenció per entendre com s'utilitzarà el teu vot per %{organization}"</p>
+          default_instructions_html: "<p>Llegeix les normes de la votació amb atenció per entendre com s'utilitzarà el teu vot per %{organization}\"</p>"
           modal:
             cancel: Cancel·la
             message: El teu vot es considerarà definitiu el %{date}. Pots canviar-lo fins a aquest moment
@@ -454,6 +464,9 @@ ca:
             weight_2_short: 'G:'
             weight_3: Verd
             weight_3_short: 'V:'
+    meetings:
+      meetings_map:
+        view_meeting: Veure trobada
     proposals:
       proposals:
         orders:
@@ -461,11 +474,10 @@ ca:
           supported_first: Votades per mi primer
           supported_last: Votades últimes per mi
           za: Z-A (ordre alfabètic invers)
+        proposal:
+          view_proposal: Veure proposta
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Modificacions a Decidim
       decidim_awesome:
         awesome_config:
           amendments: Esmenes

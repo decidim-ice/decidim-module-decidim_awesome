@@ -25,28 +25,79 @@ end
 shared_examples "activated concerns" do |enabled|
   it "common concerns are registered" do
     expect(ActionView::Base.included_modules).to include(Decidim::DecidimAwesome::AwesomeHelpers)
-    expect(Decidim::MenuPresenter.included_modules).to include(Decidim::DecidimAwesome::MenuPresenterOverride)
-    expect(Decidim::MenuItemPresenter.included_modules).to include(Decidim::DecidimAwesome::MenuItemPresenterOverride)
+    expect(Decidim::ApplicationController.included_modules).to include(Decidim::DecidimAwesome::ContentSecurityPolicy)
+    expect(Decidim::Admin::ApplicationController.included_modules).to include(Decidim::DecidimAwesome::ContentSecurityPolicy)
   end
 
   if enabled
     it "concerns are registered" do
       expect(Decidim::User.included_modules).to include(Decidim::DecidimAwesome::UserOverride)
+      expect(Decidim::MenuPresenter.included_modules).to include(Decidim::DecidimAwesome::MenuPresenterOverride)
+      expect(Decidim::MenuItemPresenter.included_modules).to include(Decidim::DecidimAwesome::MenuItemPresenterOverride)
       expect(Decidim::ErrorsController.included_modules).to include(Decidim::DecidimAwesome::NotFoundRedirect)
       expect(Decidim::Proposals::ApplicationHelper.included_modules).to include(Decidim::DecidimAwesome::Proposals::ApplicationHelperOverride)
       expect(Decidim::Proposals::ProposalWizardCreateStepForm.included_modules).to include(Decidim::DecidimAwesome::Proposals::ProposalWizardCreateStepFormOverride)
       expect(Decidim::AmendmentsHelper.included_modules).to include(Decidim::DecidimAwesome::AmendmentsHelperOverride)
       expect(EtiquetteValidator.included_modules).to include(Decidim::DecidimAwesome::EtiquetteValidatorOverride)
     end
+
   else
     it "concerns are not registered" do
       expect(Decidim::User.included_modules).not_to include(Decidim::DecidimAwesome::UserOverride)
+      expect(Decidim::MenuPresenter.included_modules).not_to include(Decidim::DecidimAwesome::MenuPresenterOverride)
+      expect(Decidim::MenuItemPresenter.included_modules).not_to include(Decidim::DecidimAwesome::MenuItemPresenterOverride)
       expect(Decidim::ErrorsController.included_modules).not_to include(Decidim::DecidimAwesome::NotFoundRedirect)
       expect(Decidim::Proposals::ApplicationHelper.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ApplicationHelperOverride)
       expect(Decidim::Proposals::ProposalWizardCreateStepForm.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ProposalWizardCreateStepFormOverride)
       expect(Decidim::AmendmentsHelper.included_modules).not_to include(Decidim::DecidimAwesome::AmendmentsHelperOverride)
       expect(EtiquetteValidator.included_modules).not_to include(Decidim::DecidimAwesome::EtiquetteValidatorOverride)
     end
+  end
+end
+
+shared_examples "csp directives" do |enabled|
+  let(:organization) { create(:organization) }
+  let(:fonts) { controller.content_security_policy.send(:policy)["font-src"] }
+  let(:scripts) { controller.content_security_policy.send(:policy)["script-src"] }
+  let(:frames) { controller.content_security_policy.send(:policy)["frame-src"] }
+
+  shared_examples "controller directives" do
+    if enabled
+      it "has CSP directives" do
+        get :show do
+          expect(fonts).to eq(["'self'", "data:"])
+          expect(scripts).to eq(["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://www.intergram.xyz"])
+          expect(frames).to eq(["'self'", "www.youtube-nocookie.com", "player.vimeo.com", "https://www.intergram.xyz"])
+        end
+      end
+    else
+      it "has no CSP directives" do
+        get :show do
+          expect(fonts).to eq(["'self'"])
+          expect(scripts).to eq(["'self'", "'unsafe-inline'", "'unsafe-eval'"])
+          expect(frames).to eq(["'self'", "www.youtube-nocookie.com", "player.vimeo.com"])
+        end
+      end
+    end
+  end
+
+  describe Decidim::HomepageController, type: :controller do
+    routes { Decidim::Core::Engine.routes }
+    before do
+      request.env["decidim.current_organization"] = user.organization
+    end
+
+    it_behaves_like "controller directives"
+  end
+
+  describe Decidim::Admin::DashboardController, type: :controller do
+    routes { Decidim::Admin::Engine.routes }
+
+    before do
+      request.env["decidim.current_organization"] = user.organization
+    end
+
+    it_behaves_like "controller directives"
   end
 end
 
@@ -74,11 +125,9 @@ shared_examples "basic rendering" do |enabled|
     let(:image_vars) do
       [
         :allow_images_in_proposals,
-        :allow_images_in_small_editor,
-        :allow_images_in_full_editor,
+        :allow_videos_in_editors,
+        :allow_images_in_editors,
         :allow_images_in_proposals,
-        :use_markdown_editor,
-        :allow_images_in_markdown_editor,
         :auto_save_forms,
         :intergram_for_admins,
         :intergram_for_public
@@ -111,7 +160,7 @@ shared_examples "basic rendering" do |enabled|
       end
 
       it "has custom fields javascript" do
-        expect(page).to have_xpath("//script[contains(@src,'decidim_decidim_awesome_proposals_custom_fields')]", visible: :all)
+        expect(page).to have_xpath("//script[contains(@src,'decidim_decidim_awesome_custom_fields')]", visible: :all)
       end
 
       it "has custom styles CSS" do
@@ -125,11 +174,11 @@ shared_examples "basic rendering" do |enabled|
       end
 
       it "do not have custom fields javascript" do
-        expect(page).not_to have_xpath("//script[contains(@src,'decidim_decidim_awesome_proposals_custom_fields')]", visible: :all)
+        expect(page).to have_no_xpath("//script[contains(@src,'decidim_decidim_awesome_custom_fields')]", visible: :all)
       end
 
       it "do not have custom styles CSS" do
-        expect(page.body).not_to have_content(styles)
+        expect(page.body).to have_no_content(styles)
       end
     end
   end
@@ -143,7 +192,8 @@ shared_examples "basic rendering" do |enabled|
         "config/styles",
         "config/proposal_custom_fields",
         "config/admins",
-        "menu_hacks",
+        "menus/menu/hacks",
+        "menus/home_content_block_menu/hacks",
         "custom_redirects",
         "config/livechat"
       ]
@@ -170,30 +220,22 @@ shared_examples "basic rendering" do |enabled|
         expect(page).to have_content("Tweaks for editors")
       end
 
-      it "has custom fields javascript" do
-        expect(page).to have_xpath("//script[contains(@src,'decidim_admin_decidim_awesome_custom_fields')]", visible: :all)
-      end
-
       it "has all admin menus" do
         menus.each do |menu|
-          within ".secondary-nav" do
+          within ".sidebar-menu" do
             expect(page).to have_link(href: "/admin/decidim_awesome/#{menu}")
           end
         end
       end
     else
       it "renders the compatibility checks page" do
-        expect(page).to have_content("System compatibility checks")
-      end
-
-      it "do not have custom fields javascript" do
-        expect(page).not_to have_xpath("//script[contains(@src,'decidim_admin_decidim_awesome_custom_fields')]", visible: :all)
+        expect(page).to have_content("System compatibility")
       end
 
       it "has no admin menus" do
         menus.each do |menu|
-          within ".secondary-nav" do
-            expect(page).not_to have_link(href: "/admin/decidim_awesome/#{menu}")
+          within ".sidebar-menu" do
+            expect(page).to have_no_link(href: "/admin/decidim_awesome/#{menu}")
           end
         end
       end

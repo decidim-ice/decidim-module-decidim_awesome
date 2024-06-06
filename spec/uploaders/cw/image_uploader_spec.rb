@@ -8,7 +8,7 @@ module Decidim::Cw::DecidimAwesome
     include CarrierWave::Test::Matchers
 
     let(:organization) { build(:organization) }
-    let(:user) { build(:user, organization: organization) }
+    let(:user) { build(:user, organization:) }
     let(:image) { Decidim::Dev.test_file("city.jpeg", "image/jpeg") }
     let(:uploader) { ImageUploader.new(user, :image) }
 

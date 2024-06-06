@@ -2,11 +2,10 @@ en:
   activemodel:
     attributes:
       config:
-        additional_proposal_sortings: Enabled additional sorting options
-        allow_images_in_full_editor: Allow images in the full HTML editor
-        allow_images_in_markdown_editor: Allow images in the markdown editor
+        additional_proposal_sortings: Additional sorting options enabled
+        allow_images_in_editors: Allow images in the HTML editor
         allow_images_in_proposals: Allow images in the proposals editor
-        allow_images_in_small_editor: Allow images in the minimal HTML editor
+        allow_videos_in_editors: Allow videos in the HTML editor
         auto_save_forms: Auto save forms in local storage
         intergram_auto_no_response: A message that is sent one minute after the user
           sends its first message and no response was received
@@ -25,7 +24,6 @@ en:
         proposal_custom_fields: Custom fields %{id}
         scoped_admins: Scoped admins group %{id}
         scoped_styles: Custom styles %{id}
-        use_markdown_editor: Use a Markdown editor instead of the HTML editor
         validate_body_max_caps_percent: Maximum allowed percentage of capital letters
           for the body
         validate_body_max_marks_together: Maximum consecutive marks symbols allowed
@@ -58,14 +56,9 @@ en:
       proposal:
         proposal_custom_fields: Custom fields
   decidim:
-    proposals:
-      admin:
-        proposals:
-          show:
-            private_body: Private body
-        exports: 
-          awesome_private_proposals: "Proposals with Private Data"
     admin:
+      actions:
+        manage: Manage
       filters:
         admin_accountability:
           admin_role_type:
@@ -95,7 +88,6 @@ en:
               frameBorder="0" allowFullscreen src="..."></iframe>. Content will be
               sanitized from other HTML tags. Ensure to use 100% as width to fill
               the screen.'
-            no_margins: No margins between the iframe and the rest of the page
             viewport_width: Limit maximum width to the application viewport
           step:
             announcement: Announcement
@@ -129,10 +121,10 @@ en:
         settings:
           global:
             awesome_voting_manifest: Support type
-            awesome_voting_manifest_help_html: <strong class="text-alert">Be aware
-              that changing this setting in the middle of a votation period can result
-              in innacurate or unexpected results.</strong><br>Note also that this
-              setting can only be edited if the component has no supports yet.
+            awesome_voting_manifest_help_html: <span class="text-alert">Be aware that
+              changing this setting in the middle of a votation period can result
+              in innacurate or unexpected results.</span><br>Note also that this setting
+              can only be edited if the component has no supports yet.
             awesome_voting_manifest_options:
               default: Simple vote (default)
               voting_cards: Voting using coloured cards
@@ -141,6 +133,7 @@ en:
               supported_first: Supported first
               supported_last: Supported last
               za: Z-A (Reverse alphabetical)
+            limit_pending_amendments: Allow only one pending amendment on each proposal.
             sort_orders_enabled: Enabled sorting types
             voting_cards_box_title: Title for the voting box
             voting_cards_box_title_help: Default is "Vote on this proposal". Use "-"
@@ -203,9 +196,6 @@ en:
             collaborator: Collaborator
             moderator: Moderator
             valuator: Valuator
-        custom_proposal_fields:
-          public_fields: Public Fields
-          private_fields: Private Fields
         checks:
           index:
             admin_head_tags: Awesome tags included in the admin application header
@@ -225,7 +215,7 @@ en:
               Since version 0.25, Decidim uses a new technology to upload files.<br>
               It looks that this installation needs to migrate <strong>%{total}</strong> of the old images to the new system.<br>
               You can start the process now and it will be performed in the background.
-            start_image_migrations: "\U0001F449 Start the migration process now"
+            start_image_migrations: "👉 Start the migration process now"
             title: System compatibility checks
         config:
           caution: 'NOTE: This feature heavily modifies some default behaviours that
@@ -268,14 +258,13 @@ en:
               incorrect_css: 'CSS in box #%{key} is invalid'
               incorrect_json: 'JSON definition in box #%{key} is invalid'
             help:
-              allow_images_in_full_editor: This will add an image uploader icon in
-                all the editors WYSIWYG with the full toolbar enabled.
-              allow_images_in_markdown_editor: This will allow markdown editor to
-                upload images by copy & paste or drag & drop.
+              allow_images_in_editors: This will add an image uploader icon in all
+                the WYSIWYG editors
               allow_images_in_proposals: This will allow to upload images in the proposals
-                editor, available to any user
-              allow_images_in_small_editor: This will add an image uploader icon in
-                all the editors WYSIWYG with minimal options in the toolbar enabled.
+                editor, available to any user. Images will be presented as links in
+                the public proposal view.
+              allow_videos_in_editors: This will add an video link icon in all the
+                WYSIWYG editors
               auto_save_forms: This will use LocalStorage to automatically save data
                 introduced by users in surveys and other forms while they are filling
                 it. Data will be restored in a future visit with the same browser
@@ -316,9 +305,6 @@ en:
                 of the public web (use the restrictions editor for that)
               scoped_styles_variables: 'You can use the following CSS variables for
                 organization customized colors:'
-              use_markdown_editor: This will substitute the Quill WYSIWYG editor,
-                to use a Markdown editor instead. Text will be converted and saved
-                as HTML in the database.
               validate_body_max_caps_percent: Zero won't allow any capital letter,
                 100 will force to write everything in capital letters
               validate_body_max_marks_together: 'Limit the number of question and
@@ -351,9 +337,6 @@ en:
             sure_to_remove: Are you sure you want to destroy this CSS box?
           none: "⛔ Never! - Deactivate any other constraint"
           process_groups: Process groups
-          rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants"
-            is enabled, this option won''t apply. Use the editors hacks instead to
-            enable images in proposals.'
           show:
             title: Tweaks for %{setting}
             update: Update configuration
@@ -454,10 +437,13 @@ en:
           index:
             confirm_destroy: Are you sure to remove this customization?
             edit: Edit
+            home_content_block_menu:
+              title: Global menu home block
+            menu:
+              title: Main menu
             new: New item
             remove: Remove addition
             remove_hack: Remove customization
-            title: Main menu
           new:
             save: Save
             title: New menu item
@@ -466,6 +452,17 @@ en:
             success: Menu item updated successfully
           url_exists: The same URL is already configured, please edit that instead
             of creating it again.
+      amendments:
+        modal:
+          amendment_exists: An amendment already exists
+          current_amendment_html: <p>You can <a href="%{amendment_link}">access the
+            current amendment here</a>.</p>
+          dismiss: Ok, got it
+          explanation_html: |
+            <p>Currently, there's another amendment being evaluated for this proposal. In order to create a new one, you must wait until the current one is accepted or rejected.</p>
+            <p>You can also reach the author of this proposal by <a href="%{proposal_link}">leaving a comment</a> and try to speed up the resolution of the current amendment.</p>
+        pending_limit_reached: Sorry, there can only be one pending amendment at a
+          time. Please wait until "%{emendation}" is accepted or rejected.
       config:
         intergram:
           auto_no_response: It seems that no one is available to answer right now.
@@ -538,8 +535,8 @@ en:
           abstained: "✔ Abstained"
           change_vote: Change my vote
           default_box_title: Vote on this proposal
-          default_instructions_html: <p>Please read the election rules carefully to
-            understand how your vote will be used by %{organization}"</p>
+          default_instructions_html: "<p>Please read the election rules carefully
+            to understand how your vote will be used by %{organization}</p>"
           modal:
             cancel: Cancel
             message: Your vote will be considered final on %{date}. You can change
@@ -558,18 +555,26 @@ en:
             weight_2_short: 'Y:'
             weight_3: Green
             weight_3_short: 'G:'
+    meetings:
+      meetings_map:
+        view_meeting: View meeting
     proposals:
+      admin:
+        proposals:
+          show:
+            private_body: Private body
+        exports: 
+          awesome_private_proposals: "Proposals with Private Data"
       proposals:
         orders:
           az: A-Z (Alphabetical)
           supported_first: Supported first
           supported_last: Supported last
           za: Z-A (Reverse alphabetical)
+        proposal:
+          view_proposal: View proposal
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Decidim Tweaks
       decidim_awesome:
         awesome_config:
           amendments: Amendments

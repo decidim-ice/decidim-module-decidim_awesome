@@ -1,6 +1,16 @@
 CHANGELOG
 =========
 
+v0.11
+------
+
+Compatibility:
+  - Decidim v0.28.x
+
+Features:
+  - Redesign to version 0.28
+  - Removed markdown editor
+
 v0.10.2
 ------
 

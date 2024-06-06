@@ -1,6 +1,7 @@
-<div class="proposal_custom_field proposal_custom_field--<%= name %>" id="proposa-custom-field-<%= name %>" data-spec="<%= spec.to_json %>" data-name="<%= "#{form.object_name}[#{name}]" %>">
+<div class="proposal_custom_field proposal_custom_field--<%= name %>" id="proposal-custom-field-<%= name %>" data-spec="<%= spec.to_json %>" data-editor-options="<%= editor_options[:editor].to_json %>" data-name="<%= "#{form.object_name}[#{name}]" %>">
   <div class="loading-spinner"></div>
 </div>
 
+<%= editor_upload.html_safe %>
 <%= form.hidden_field name %>
 <%= form.error_for name %>
