@@ -108,6 +108,7 @@ module Decidim
                                    .where(organization: current_organization)
                                    .joins("LEFT JOIN decidim_authorizations ON decidim_authorizations.decidim_user_id = decidim_users.id")
                                    .where(decidim_authorizations: { granted_at: nil })
+                                   .where.not(admin: true)
                                    .not_deleted
                                    .not_blocked
         end
