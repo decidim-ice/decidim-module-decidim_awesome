@@ -4,7 +4,8 @@ es:
     attributes:
       config:
         additional_proposal_sortings: Habilitar opciones de ordenación adicionales
-        allow_images_in_editors: Permitir imágenes en el editor HTML
+        allow_images_in_full_editor: Permitir imágenes en el editor HTML completo
+        allow_images_in_markdown_editor: Permitir imágenes en el editor Markdown
         allow_images_in_proposals: Permitir imágenes en el editor de propuestas
         auto_save_forms: Guardar automáticamente los formularios en el almacenamiento local
         intergram_auto_no_response: Un mensaje que se envía un minuto después de que la usuaria haya enviado su primer mensaje y no se haya recibido respuesta
@@ -377,7 +378,6 @@ es:
           url_exists: Esta URL ya ha sido configurada en otro ítem de menú, por favor edítalo en lugar de crear uno nuevo.
       amendments:
         modal:
-          amendment_exists: Ya existe una enmienda
           current_amendment_html: <p>Puedes <a href="%{amendment_link}">acceder a la enmienda actual aquí</a>.</p>
           dismiss: De acuerdo
           explanation_html: |

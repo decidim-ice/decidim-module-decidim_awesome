@@ -376,7 +376,6 @@ fr:
           url_exists: La même URL est déjà configurée, veuillez la modifier au lieu de la créer à nouveau.
       amendments:
         modal:
-          amendment_exists: Un amendement existe déjà
           current_amendment_html: <p>Vous pouvez <a href="%{amendment_link}">accéder à l'amendement actuel ici</a>.</p>
           dismiss: D'accord
           explanation_html: |

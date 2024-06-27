@@ -3,8 +3,9 @@ ca:
   activemodel:
     attributes:
       config:
-        additional_proposal_sortings: Activa opcions d'ordenació addicionals
-        allow_images_in_editors: Permet imatges a l'editor HTML
+        additional_proposal_sortings: Activar opcions d'ordenació addicionals
+        allow_images_in_full_editor: Permet imatges a l'editor HTML complet
+        allow_images_in_markdown_editor: Permet imatges a l'editor Markdown
         allow_images_in_proposals: Permet imatges a l'editor de propostes
         allow_videos_in_editors: Permet vídeos a l'editor HTML
         auto_save_forms: Desa automàticament els formularis a l'emmagatzematge local
@@ -378,7 +379,6 @@ ca:
           url_exists: Aquesta URL ha estat configurada en un altre ítem de menú, si us plau edita'l en comptes de crear-ne un de nou.
       amendments:
         modal:
-          amendment_exists: Una esmena ja existeix
           current_amendment_html: <p>Podeu <a href="%{amendment_link}">accedir a l'esmena actual aquí</a>.</p>
           dismiss: D'acord
           explanation_html: |

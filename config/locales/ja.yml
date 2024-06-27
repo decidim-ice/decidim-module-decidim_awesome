@@ -379,7 +379,6 @@ ja:
           url_exists: 同じURLがすでに設定されています。もう一度作成し直す前に、内容を修正してください。
       amendments:
         modal:
-          amendment_exists: 修正は既に存在します
           current_amendment_html: <p> <a href="%{amendment_link}">現在の修正にアクセスできます</a>.</p>
           dismiss: OK
           explanation_html: |

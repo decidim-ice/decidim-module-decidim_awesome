@@ -3,21 +3,21 @@
 require "spec_helper"
 
 module Decidim
-  describe AmendmentsController do
+  describe AmendmentsController, type: :controller do
     routes { Decidim::Core::Engine.routes }
 
     let!(:participatory_process) { create(:participatory_process, :with_steps) }
     let(:active_step_id) { participatory_process.active_step.id }
-    let(:step_settings) { { active_step_id => { amendment_creation_enabled: } } }
-    let(:settings) { { amendments_enabled:, limit_pending_amendments: } }
-    let!(:component) { create(:proposal_component, participatory_space: participatory_process, settings:, step_settings:) }
+    let(:step_settings) { { active_step_id => { amendment_creation_enabled: amendment_creation_enabled } } }
+    let(:settings) { { amendments_enabled: amendments_enabled, limit_pending_amendments: limit_pending_amendments } }
+    let!(:component) { create(:proposal_component, participatory_space: participatory_process, settings: settings, step_settings: step_settings) }
     let(:user) { create(:user, :confirmed, organization: component.organization) }
 
-    let!(:amendable) { create(:proposal, component:) }
-    let!(:emendation) { create(:proposal, title: { en: "An emendation" }, component:) }
-    let!(:amendment) { create(:amendment, amendable:, emendation:, state: amendment_state) }
-    let!(:hidden_emendation) { create(:proposal, :hidden, title: { en: "A stupid emendation" }, component:) }
-    let!(:hidden_amendment) { create(:amendment, amendable:, emendation: hidden_emendation, state: "evaluating") }
+    let!(:amendable) { create(:proposal, component: component) }
+    let!(:emendation) { create(:proposal, title: { en: "An emendation" }, component: component) }
+    let!(:amendment) { create(:amendment, amendable: amendable, emendation: emendation, state: amendment_state) }
+    let!(:hidden_emendation) { create(:proposal, :hidden, title: { en: "A stupid emendation" }, component: component) }
+    let!(:hidden_amendment) { create(:amendment, amendable: amendable, emendation: hidden_emendation, state: "evaluating") }
 
     let(:amendment_state) { "evaluating" }
     let(:limit_pending_amendments) { true }
@@ -33,16 +33,16 @@ module Decidim
 
     shared_examples "redirects unauthorized" do |action|
       it "is not authorized" do
-        get(action, params:)
+        get action, params: params
 
         expect(response).to have_http_status(:redirect)
-        expect(flash[:alert]).to eq("You are not authorized to perform this action.")
+        expect(flash[:alert]).to eq("You are not authorized to perform this action")
       end
     end
 
     shared_examples "renders the template" do |action|
       it "renders the template" do
-        get(action, params:)
+        get action, params: params
 
         expect(response).to render_template(action)
       end
@@ -50,7 +50,7 @@ module Decidim
 
     shared_examples "redirects back with limits" do |action|
       it "redirects back" do
-        get(action, params:)
+        get action, params: params
 
         expect(response).to have_http_status(:redirect)
         expect(flash[:alert]).to include("Sorry, there can only be one pending amendment at a time")
@@ -72,9 +72,9 @@ module Decidim
       end
 
       context "when not a proposals component" do
-        let(:component) { create(:component, participatory_space: participatory_process, settings:, step_settings:) }
-        let!(:amendable) { create(:dummy_resource, component:) }
-        let!(:emendation) { create(:dummy_resource, component:) }
+        let(:component) { create(:component, participatory_space: participatory_process, settings: settings, step_settings: step_settings) }
+        let!(:amendable) { create(:dummy_resource, component: component) }
+        let!(:emendation) { create(:dummy_resource, component: component) }
         let(:hidden_emendation) { nil }
         let(:hidden_amendment) { nil }
 
