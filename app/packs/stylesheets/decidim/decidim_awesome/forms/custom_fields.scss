@@ -37,7 +37,7 @@
     @apply mt-4;
   }
 
-  .form-group {
+  .form-group:not(:first-of-type) {
     @apply mt-6;
   }
 
