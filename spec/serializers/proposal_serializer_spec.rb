@@ -69,25 +69,26 @@ module Decidim::Proposals
           expect(serialized).to include(weights: { "0" => 1, "1" => 0, "2" => 0, "3" => 2, "4" => 0, "5" => 0 })
         end
       end
-      context "when custom fields are defined" do 
+
+      context "when custom fields are defined" do
         let(:custom_fields) do
           {
-            foo: "[{\"type\":\"number\",\"required\":false,\"label\":\"Age\",\"name\":\"age\",\"subtype\":\"number\"}]",
+            foo: "[{\"type\":\"number\",\"required\":false,\"label\":\"Age\",\"name\":\"age\",\"subtype\":\"number\"}]"
           }
         end
         let!(:config) { create(:awesome_config, organization: participatory_process.organization, var: :proposal_custom_fields, value: custom_fields) }
         let!(:constraint) { create(:config_constraint, awesome_config: config, settings: { "participatory_space_manifest" => "participatory_processes", "participatory_space_slug" => participatory_process.slug }) }
-        
+
         before do
           # rubocop:disable Rails/SkipsModelValidations:
           # we don't want to trigger the active record hooks
-          proposal.update_columns(body: {"en"=>
-          "<xml><dl class=\"decidim_awesome-custom_fields\" data-generator=\"decidim_awesome\" data-version=\"0.11.0\">\n<dt name=\"age\">Age</dt>\n<dd id=\"age\" name=\"number\"><div>12</div></dd>\n</dl></xml>"})
+          proposal.update_columns(body: { "en" =>
+          "<xml><dl class=\"decidim_awesome-custom_fields\" data-generator=\"decidim_awesome\" data-version=\"0.11.0\">\n<dt name=\"age\">Age</dt>\n<dd id=\"age\" name=\"number\"><div>12</div></dd>\n</dl></xml>" })
           # rubocop:enable Rails/SkipsModelValidations:
         end
 
         it "serializes custom fields in field/:name/:locale column" do
-          expect(serialized).to include(:"field/age/en" => "12")
+          expect(serialized).to include("field/age/en": "12")
         end
       end
 

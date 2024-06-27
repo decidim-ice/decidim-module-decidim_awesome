@@ -7,9 +7,9 @@ module Decidim::DecidimAwesome
     subject { serializer_class.new(proposal) }
 
     let(:organization) { create(:organization) }
-    let(:participatory_process) { create(:participatory_process, organization: organization) }
+    let(:participatory_process) { create(:participatory_process, organization:) }
     let(:component) { create(:proposal_component, participatory_space: participatory_process) }
-    let(:proposal) { create(:proposal, component: component) }
+    let(:proposal) { create(:proposal, component:) }
     let(:data) do
       '<xml><dl class="decidim_awesome-custom_fields" data-generator="decidim_awesome" data-version="0.7.2"><dt name="text-1476748007461">Age</dt><dd id="text-1476748007461" name="text"><div>14</div></dd></dl></xml>'
     end

@@ -11,16 +11,21 @@ module Decidim
 
       def private_body
         return nil if private_body_encrypted.nil?
-        private_body_encrypted.entries.map do |key, encrypted_value|
-          [key, Decidim::AttributeEncryptor.decrypt(encrypted_value)]
-        end.to_h
+
+        private_body_encrypted.entries.transform_values do |encrypted_value|
+          Decidim::AttributeEncryptor.decrypt(encrypted_value)
+        end
       end
-      
+
       def private_body=(clear_private_body)
-        return private_body_encrypted = nil if clear_private_body.nil?
-        self.private_body_encrypted = clear_private_body.entries.map do |key, clear_value|
-          [key, Decidim::AttributeEncryptor.encrypt(clear_value)]
-        end.to_h
+        if clear_private_body.nil?
+          self.private_body_encrypted = nil
+          return
+        end
+
+        self.private_body_encrypted = clear_private_body.entries.transform_values do |clear_value|
+          Decidim::AttributeEncryptor.encrypt(clear_value)
+        end
       end
     end
   end

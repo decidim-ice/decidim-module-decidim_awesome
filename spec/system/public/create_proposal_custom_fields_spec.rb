@@ -6,7 +6,7 @@ describe "Custom proposals fields" do
   include_context "with a component"
   let(:manifest_name) { "proposals" }
 
-  let!(:participatory_process) { create :participatory_process, organization: organization }
+  let!(:participatory_process) { create(:participatory_process, organization:) }
   let!(:component) do
     create(:proposal_component,
            :with_creation_enabled,

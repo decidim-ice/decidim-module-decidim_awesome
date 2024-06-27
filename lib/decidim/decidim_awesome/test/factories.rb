@@ -42,10 +42,6 @@ FactoryBot.define do
     participatory_space { association(:participatory_process, :with_steps, organization:) }
   end
 
-  factory :private_proposal_field, class: "Decidim::DecidimAwesome::PrivateProposalField" do
-    proposal { create :proposal }
-  end
-
   factory :awesome_vote_weight, class: "Decidim::DecidimAwesome::VoteWeight" do
     vote { association(:proposal_vote) }
     sequence(:weight) { |n| n }

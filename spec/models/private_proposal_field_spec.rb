@@ -7,7 +7,7 @@ module Decidim::DecidimAwesome
     subject { private_proposal_field }
 
     let(:proposal) { create(:proposal) }
-    let(:private_proposal_field) { create(:private_proposal_field, proposal: proposal) }
+    let(:private_proposal_field) { create(:private_proposal_field, proposal:) }
 
     it { is_expected.to be_valid }
 
