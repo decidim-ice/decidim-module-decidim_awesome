@@ -324,6 +324,9 @@ en:
               body: User input validations for the "body" field
               title: User input validations for the "title" field
           form_proposal_custom_fields:
+            fieldset:
+              public: "Public fields"
+              private: "Private fields"
             new: Add a new "custom fields" box
             remove: Remove this "custom fields" box
             sure_to_remove: Are you sure you want to destroy this fields box?
