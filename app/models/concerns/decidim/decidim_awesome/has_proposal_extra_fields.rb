@@ -15,14 +15,14 @@ module Decidim
 
         def update_private_body(updated_private_body)
           extra_fields ||= initialized_extra_fields
-          extra_fields.update!(private_body: updated_private_body)
-          extra_fields
+          extra_fields.private_body = updated_private_body
+          extra_fields.save!
         end
 
         def remove_private_body
           extra_fields ||= initialized_extra_fields
-          extra_fields.update!(private_body: {})
-          extra_fields
+          extra_fields.private_body = {}
+          extra_fields.save!
         end
 
         def weight_count(weight)

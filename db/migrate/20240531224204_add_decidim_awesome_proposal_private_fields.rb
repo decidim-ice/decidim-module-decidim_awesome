@@ -2,6 +2,6 @@
 
 class AddDecidimAwesomeProposalPrivateFields < ActiveRecord::Migration[6.0]
   def change
-    add_column :decidim_awesome_proposal_extra_fields, :private_body, :jsonb
+    add_column :decidim_awesome_proposal_extra_fields, :private_body_encrypted, :jsonb
   end
 end
