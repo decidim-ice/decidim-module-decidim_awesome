@@ -9,12 +9,16 @@
 
 .proposal_custom_fields {
   &_editor {
-    ul.frmb, .form-wrap.form-builder .frmb li.form-field, .form-wrap.form-builder .stage-wrap.empty{
+    ul.frmb,
+    .form-wrap.form-builder .frmb li.form-field,
+    .form-wrap.form-builder .stage-wrap.empty {
       @apply bg-background-2;
     }
 
     &--private {
-      ul.frmb, .form-wrap.form-builder .frmb li.form-field, .form-wrap.form-builder .stage-wrap.empty{
+      ul.frmb,
+      .form-wrap.form-builder .frmb li.form-field,
+      .form-wrap.form-builder .stage-wrap.empty {
         @apply bg-background-3;
       }
     }
@@ -51,5 +55,4 @@
       cursor: default !important;
     }
   }
-
 }

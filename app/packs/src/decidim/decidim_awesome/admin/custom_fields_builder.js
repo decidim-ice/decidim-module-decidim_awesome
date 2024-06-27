@@ -5,14 +5,15 @@ import "src/decidim/decidim_awesome/forms/rich_text_plugin"
 jQuery.fn.sortable = () => {}
 
 window.CustomFieldsBuilders = window.CustomFieldsBuilders || [];
+
 /**
- * 
+ * Build the configuration for a Builder dom element
  * @param {DOMElement} el JQuery Element to instanciate the builder
  * @param {String} key The proposal box name
  * @param {String} name the name of the input used to save the configuration. Default: `proposal_custom_fields`
- * @returns Record<FormBuilderOptions>
+ * @returns {Record<FormBuilderOptions>} Options for the FormBuilder
  */
-function builderConfig(el, key, name="proposal_custom_fields") {
+const builderConfig = (el, key, name = "proposal_custom_fields") => {
   const formEl = $(`input[name="config[${name}][${key}]"]`)
   // DOCS: https://formbuilder.online/docs
   return {

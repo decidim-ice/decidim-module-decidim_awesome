@@ -7,11 +7,13 @@
   .scoped_styles_container,
   .proposal_custom_fields_container {
     @apply bg-background-3;
+
     border-radius: 16px;
-    > fieldset{
+
+    > fieldset {
       margin-top: 1rem;
     }
-    
+
     fieldset legend {
       font-weight: 600;
       color: rgb(62 76 92 / var(--tw-text-opacity));

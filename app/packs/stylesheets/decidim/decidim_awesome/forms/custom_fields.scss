@@ -6,12 +6,14 @@
 
 // styles to tune a bit the form presentation in proposals creation
 .proposal_custom_field {
-  &.proposal_custom_field--empty{
+  &.proposal_custom_field--empty {
     display: none;
   }
+
   &.proposal_custom_field--private_body {
     @apply px-4 py-6 border border-gray outline outline-1 outline-transparent rounded bg-background-3 text-black font-normal;
   }
+
   h1 {
     @apply font-sans font-bold text-4xl mt-4;
   }
