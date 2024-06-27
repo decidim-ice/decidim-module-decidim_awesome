@@ -9,8 +9,16 @@
 
 .proposal_custom_fields {
   &_editor {
-    background-color: #e0e0e0;
-    padding: 0.5em;
+    ul.frmb, .form-wrap.form-builder .frmb li.form-field, .form-wrap.form-builder .stage-wrap.empty{
+      @apply bg-background-2;
+    }
+
+    &--private {
+      ul.frmb, .form-wrap.form-builder .frmb li.form-field, .form-wrap.form-builder .stage-wrap.empty{
+        @apply bg-background-3;
+      }
+    }
+
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 
@@ -44,10 +52,4 @@
     }
   }
 
-  &_container {
-    .constraints-editor {
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-    }
-  }
 }

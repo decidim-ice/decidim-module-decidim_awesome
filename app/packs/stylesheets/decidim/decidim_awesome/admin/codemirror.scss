@@ -6,16 +6,19 @@
 .awesome-edit-config {
   .scoped_styles_container,
   .proposal_custom_fields_container {
-    > fieldset:not(:first-child){
+    @apply bg-background-3;
+    border-radius: 16px;
+    > fieldset{
       margin-top: 1rem;
     }
+    
     fieldset legend {
-      margin-left: 0.4rem;
       font-weight: 600;
       color: rgb(62 76 92 / var(--tw-text-opacity));
       font-size: 14px;
       line-height: 18px;
     }
+
     .form-error {
       margin: 0;
     }
