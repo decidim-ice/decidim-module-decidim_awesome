@@ -27,7 +27,8 @@ module Decidim
 
             return decidim_text_editor_for_proposal_body(form) if custom_fields.blank?
 
-            render_proposal_custom_fields_override(custom_fields, form, :body)
+            custom_field_form = render_proposal_custom_fields_override(custom_fields, form, :body)
+            custom_field_form + render_proposal_custom_fields_override(awesome_private_proposal_custom_fields, form, :private_body)
           end
 
           # replace admin method to draw the editor (multi lang)
@@ -70,8 +71,14 @@ module Decidim
             custom_fields = Decidim::DecidimAwesome::CustomFields.new(fields)
             custom_fields.translate!
 
-            body = if form_presenter.proposal.body.is_a?(Hash) && locale.present?
-                     form_presenter.body(extras: false, all_locales: true).with_indifferent_access[locale]
+            body = if name == :private_body
+                     if form_presenter.proposal.private_body.is_a?(Hash) && locale.present?
+                       form_presenter.private_body(extras: false, all_locales: locale.present?).with_indifferent_access[locale]
+                     else
+                       form_presenter.private_body(extras: false)
+                     end
+                   elsif form_presenter.proposal.body.is_a?(Hash) && locale.present?
+                     form_presenter.body(extras: false, all_locales: locale.present?).with_indifferent_access[locale]
                    else
                      form_presenter.body(extras: false)
                    end

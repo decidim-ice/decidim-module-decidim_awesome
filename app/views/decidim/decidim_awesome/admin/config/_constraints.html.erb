@@ -1,11 +1,11 @@
-<div class="constraints-editor mb-8 p-4" data-key="<%= key %>">
+<div class="constraints-editor mb-8 mt-4" data-key="<%= key %>">
   <%= cell "decidim/announcement", "<p></p>".html_safe, hidden: true %>
   <h5 class="mb-2"><%= t ".title" %></h5>
   <% if constraints.blank? %>
     <span class="label warning"><%= t ".always" %></span>
   <% end %>
 
-  <ul class="constraints-list<%= " inactive" if constraints&.detect{|c| c.settings["participatory_space_manifest"]=="none" } %>" style="padding: 0;">
+  <ul class="constraints-list<%= " inactive" if constraints&.detect{|c| c.settings["participatory_space_manifest"]=="none" } %>">
     <% constraints&.each do |constraint| %>
       <li>
         <% constraint.settings.reverse_each do |k, val| %>

@@ -49,7 +49,11 @@ module Decidim
                                     :validate_body_max_caps_percent,
                                     :validate_body_max_marks_together,
                                     :validate_body_start_with_caps])
+          Decidim::Proposals::ProposalPresenter.include(Decidim::DecidimAwesome::Proposals::ProposalPresenterOverride)
           Decidim::Proposals::ProposalWizardCreateStepForm.include(Decidim::DecidimAwesome::Proposals::ProposalWizardCreateStepFormOverride)
+          Decidim::Proposals::Admin::ProposalForm.include(Decidim::DecidimAwesome::Admin::ProposalFormOverride)
+          Decidim::Proposals::UpdateProposal.include(Decidim::DecidimAwesome::Proposals::UpdateProposalOverride)
+          Decidim::Proposals::CreateProposal.include(Decidim::DecidimAwesome::Proposals::CreateProposalOverride)
         end
 
         # override user's admin property
@@ -60,7 +64,6 @@ module Decidim
           Decidim::Proposals::ProposalVote.include(Decidim::DecidimAwesome::HasVoteWeight)
           # add vote weight cache to proposal
           Decidim::Proposals::Proposal.include(Decidim::DecidimAwesome::HasProposalExtraFields)
-          Decidim::Proposals::ProposalSerializer.include(Decidim::DecidimAwesome::ProposalSerializerOverride)
           Decidim::Proposals::ProposalType.include(Decidim::DecidimAwesome::ProposalTypeOverride)
           Decidim::Proposals::ProposalLCell.include(Decidim::DecidimAwesome::ProposalLCellOverride)
         end
@@ -95,6 +98,7 @@ module Decidim
           if DecidimAwesome.enabled?(:proposal_custom_fields)
             Decidim::Proposals::ApplicationHelper.include(Decidim::DecidimAwesome::Proposals::ApplicationHelperOverride)
             Decidim::AmendmentsHelper.include(Decidim::DecidimAwesome::AmendmentsHelperOverride)
+            Decidim::Proposals::ProposalSerializer.include(Decidim::DecidimAwesome::ProposalSerializerDecorator)
           end
 
           if DecidimAwesome.enabled?(:weighted_proposal_voting)
@@ -139,6 +143,13 @@ module Decidim
                 include_blank: true,
                 choices: -> { (POSSIBLE_SORT_ORDERS + DecidimAwesome.possible_additional_proposal_sortings).uniq }
               )
+            end
+          end
+        end
+        if DecidimAwesome.enabled?(:allow_limiting_amendments)
+          Decidim.component_registry.find(:proposals).tap do |component|
+            component.settings(:global) do |settings|
+              settings.attribute :limit_pending_amendments, type: :boolean, default: DecidimAwesome.allow_limiting_amendments
             end
           end
         end

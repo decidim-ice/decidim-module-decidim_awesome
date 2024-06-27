@@ -6,47 +6,62 @@ jQuery.fn.sortable = () => {}
 
 window.CustomFieldsBuilders = window.CustomFieldsBuilders || [];
 
-$(() => {
-  $(".awesome-edit-config .proposal_custom_fields_editor").each((_idx, el) => {
-    const key = $(el).closest(".proposal_custom_fields_container").data("key");
-    // DOCS: https://formbuilder.online/docs
-    window.CustomFieldsBuilders.push({
-      el: el,
-      key: key,
-      config: {
-        i18n: {
-          locale: "en-US",
-          location: "https://cdn.jsdelivr.net/npm/formbuilder-languages@1.1.0/"
-        },
-        formData: $(`input[name="config[proposal_custom_fields][${key}]"]`).val(),
-        disableFields: ["button", "file"],
-        disabledActionButtons: ["save", "data", "clear"],
-        disabledAttrs: [
-          "access",
-          "inline",
-          "className"
-        ],
-        controlOrder: [
-          "text",
-          "textarea",
-          "number",
-          "date",
-          "checkbox-group",
-          "radio-group",
-          "select",
-          "autocomplete",
-          "header",
-          "paragraph"
-        ],
-        disabledSubtypes: {
-          // default color as it generate hashtags in decidim (TODO: fix hashtag generator with this)
-          text: ["color"],
-          // disable default wysiwyg editors as they present problems
-          textarea: ["tinymce", "quill"]
-        }
+/**
+ * Build the configuration for a Builder dom element
+ * @param {DOMElement} el JQuery Element to instanciate the builder
+ * @param {String} key The proposal box name
+ * @param {String} name the name of the input used to save the configuration. Default: `proposal_custom_fields`
+ * @returns {Record<FormBuilderOptions>} Options for the FormBuilder
+ */
+const builderConfig = (el, key, name = "proposal_custom_fields") => {
+  const formEl = $(`input[name="config[${name}][${key}]"]`)
+  // DOCS: https://formbuilder.online/docs
+  return {
+    formEl: formEl,
+    el: el,
+    key: key,
+    config: {
+      i18n: {
+        locale: "en-US",
+        location: "https://cdn.jsdelivr.net/npm/formbuilder-languages@1.1.0/"
       },
-      instance: null
-    });
+      formData: formEl.val(),
+      disableFields: ["button", "file"],
+      disabledActionButtons: ["save", "data", "clear"],
+      disabledAttrs: [
+        "access",
+        "inline",
+        "className"
+      ],
+      controlOrder: [
+        "text",
+        "textarea",
+        "number",
+        "date",
+        "checkbox-group",
+        "radio-group",
+        "select",
+        "autocomplete",
+        "header",
+        "paragraph"
+      ],
+      disabledSubtypes: {
+        // default color as it generate hashtags in decidim (TODO: fix hashtag generator with this)
+        text: ["color"],
+        // disable default wysiwyg editors as they present problems
+        textarea: ["tinymce", "quill"]
+      }
+    },
+    instance: null
+  };
+}
+$(() => {
+  $(".awesome-edit-config .proposal_custom_fields_container").each((_idx, container) => {
+    const key = $(container).data("key");
+    const el = $(container).find(".proposal_custom_fields_editor")
+    const privateEl = $(container).find(".proposal_custom_fields_editor--private")
+    window.CustomFieldsBuilders.push(builderConfig(el, key));
+    window.CustomFieldsBuilders.push(builderConfig(privateEl, key, "private_proposal_custom_fields"));
   });
 
   $(document).on("formBuilder.create", (_event, idx, list) => {
@@ -73,8 +88,8 @@ $(() => {
   }
 
   $("form.awesome-edit-config").on("submit", () => {
-    window.CustomFieldsBuilders.forEach((builder) => {
-      $(`input[name="config[proposal_custom_fields][${builder.key}]"]`).val(builder.instance.actions.getData("json"));
+    window.CustomFieldsBuilders.forEach(({formEl, ...builder}) => {
+      formEl.val(builder.instance.actions.getData("json"));
     });
   });
 });
