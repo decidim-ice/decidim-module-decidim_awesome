@@ -559,6 +559,9 @@ en:
       meetings_map:
         view_meeting: View meeting
     proposals:
+      admin:
+        exports:
+          awesome_private_proposals: "Private Data"
       proposals:
         orders:
           az: A-Z (Alphabetical)

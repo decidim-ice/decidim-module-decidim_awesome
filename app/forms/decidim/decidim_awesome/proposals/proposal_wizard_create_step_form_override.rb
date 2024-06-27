@@ -19,12 +19,15 @@ module Decidim
             minimum: ->(form) { form.minimum_title_length },
             maximum: 150
           }
+          
           validates :body, presence: true, unless: ->(form) { form.override_validations? || form.minimum_body_length.zero? }
           validates :body, etiquette: true, unless: ->(form) { form.override_validations? }
           validates :body, proposal_length: {
             minimum: ->(form) { form.minimum_body_length },
             maximum: ->(form) { form.override_validations? ? 0 : form.component.settings.proposal_length }
           }
+
+          validate :body_is_not_bare_template, unless: ->(form) { form.override_validations? }
 
           def map_model(model)
             decidim_original_map_model(model)
