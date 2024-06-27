@@ -27,7 +27,9 @@ describe Decidim::OpenDataExporter do
             }
           end
           let(:private_xml) do
-            '<xml><dl class="decidim_awesome-custom_fields" data-generator="decidim_awesome" data-version="0.7.2"><dt name="text-1476748007461">Phone Number</dt><dd id="text-1476748007461" name="text"><div>021 xxx xx 641</div></dd></dl></xml>'
+            {
+              "en" => '<xml><dl class="decidim_awesome-custom_fields" data-generator="decidim_awesome" data-version="0.7.2"><dt name="text-1476748007461">Phone Number</dt><dd id="text-1476748007461" name="text"><div>021 xxx xx 641</div></dd></dl></xml>'
+            }
           end
           let(:config_helper) { create :awesome_config, organization: organization, var: :proposal_custom_field_foo }
           let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes", "participatory_space_slug" => participatory_process.slug }) }
@@ -42,7 +44,7 @@ describe Decidim::OpenDataExporter do
             proposal.update(
               body: public_xml, 
             )
-            proposal.update_private_body(form.private_body)
+            proposal.update_private_body(private_xml)
             proposal
           end
 

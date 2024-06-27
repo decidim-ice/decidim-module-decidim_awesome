@@ -284,7 +284,7 @@ This is the Decidim cell used to provide the metadata that is rendered at the bo
 
 What this cell must do is to provide an array of items to render as part of the cell footer. Check the example used at the [voting cards implementation](app/cells/decidim/decidim_awesome/voting/proposal_metadata_cell.rb) for reference.
 
-#### 18. Limiting amendments in proposals
+#### 17. Limiting amendments in proposals
 
 By default, when proposals can be amended, any number of amendments can be created.
 

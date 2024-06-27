@@ -14,8 +14,9 @@ module Decidim
         def serialize
           # serialize first the custom fields,
           # as default serialization will strip proposal body's <xml> tags.
-          serialized_custom_fields = serialize_custom_fields
           default_serialization = decidim_original_serialize
+          default_serialization[:weights] = proposal_vote_weights
+          serialized_custom_fields = serialize_custom_fields
           default_serialization.merge(serialized_custom_fields)
         end
 
@@ -31,12 +32,18 @@ module Decidim
 
         private
 
+        def proposal_vote_weights
+          proposal.update_vote_weights!
+          proposal.reload.vote_weights
+        end
+
         def serialize_custom_fields
           payload = {}
           custom_fields = CustomFields.new(awesome_proposal_custom_fields)
           if custom_fields.present?
             @proposal.body.keys.each do |locale|
               fields_entries(custom_fields, proposal.body, locale.to_s) do |key, value|
+                value = value.first if value.is_a? Array
                 payload["field/#{key}".to_sym] = value
               end
             end

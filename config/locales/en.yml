@@ -1,10 +1,10 @@
+---
 en:
   activemodel:
     attributes:
       config:
         additional_proposal_sortings: Additional sorting options enabled
-        allow_images_in_full_editor: Allow images in the full HTML editor
-        allow_images_in_markdown_editor: Allow images in the markdown editor
+        allow_images_in_editors: Allow images in the HTML editor
         allow_images_in_proposals: Allow images in the proposals editor
         allow_videos_in_editors: Allow videos in the HTML editor
         auto_save_forms: Auto save forms in local storage
@@ -455,6 +455,7 @@ en:
             of creating it again.
       amendments:
         modal:
+          amendment_exists: An amendment already exists
           current_amendment_html: <p>You can <a href="%{amendment_link}">access the
             current amendment here</a>.</p>
           dismiss: Ok, got it
@@ -526,10 +527,6 @@ en:
       validators:
         too_much_caps: Is using too many capital letters (over %{percent}% of the
           text)
-      custom_fields:
-        private_field_notice:
-          will_ask_later: We will ask you %{count} more private questions in the following step. This information will be kept only between you and the platform administrator for the duration of the phase.
-          private_fields_to_ask: "Additional information needed:"
       voting:
         voting_cards:
           abstained: "✔ Abstained"
@@ -559,12 +556,6 @@ en:
       meetings_map:
         view_meeting: View meeting
     proposals:
-      admin:
-        proposals:
-          show:
-            private_body: Private body
-        exports: 
-          awesome_private_proposals: "Proposals with Private Data"
       proposals:
         orders:
           az: A-Z (Alphabetical)

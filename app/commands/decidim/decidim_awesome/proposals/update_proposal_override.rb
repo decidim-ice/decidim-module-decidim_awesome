@@ -27,7 +27,7 @@ module Decidim
 
           def update_private_field
             @proposal.update_private_body(
-              I18n.locale => form.private_body 
+              I18n.locale => form.private_body
             )
             @proposal
           end

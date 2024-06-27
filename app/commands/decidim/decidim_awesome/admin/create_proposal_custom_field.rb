@@ -36,6 +36,7 @@ module Decidim
         private
 
         def default_definition
+          # '[{"type":"textarea","required":true,"label":"Body","className":"form-control","name":"body","subtype":"textarea"}]'
           "[]"
         end
       end

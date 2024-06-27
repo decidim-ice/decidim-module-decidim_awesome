@@ -12,7 +12,7 @@ module Decidim
 
           # If the content is safe, HTML tags are sanitized, otherwise, they are stripped.
           def render_proposal_body(proposal)
-            if awesome_proposal_custom_fields.present? || awesome_config[:allow_images_in_full_editor] || awesome_config[:allow_images_in_small_editor]
+            if awesome_proposal_custom_fields.present? || awesome_config[:allow_images_in_editors]
               content = present(proposal).body(links: true, strip_tags: false)
               sanitized = decidim_sanitize_editor_admin(content, {})
               Decidim::ContentProcessor.render_without_format(sanitized).html_safe
@@ -70,16 +70,19 @@ module Decidim
 
             custom_fields = Decidim::DecidimAwesome::CustomFields.new(fields)
             custom_fields.translate!
-            proposal_body = if name == :private_body
-                              form_presenter.private_body(extras: false, all_locales: locale.present?)
-                            else
-                              form_presenter.body(extras: false, all_locales: locale.present?)
-                            end
-            body = if locale.present?
-                     proposal_body.with_indifferent_access[locale]
+
+            body = if name == :private_body
+                     if form_presenter.proposal.private_body.is_a?(Hash) && locale.present?
+                       form_presenter.private_body(extras: false, all_locales: locale.present?).with_indifferent_access[locale]
+                     else
+                       form_presenter.private_body(extras: false)
+                     end
+                   elsif form_presenter.proposal.body.is_a?(Hash) && locale.present?
+                     form_presenter.body(extras: false, all_locales: locale.present?).with_indifferent_access[locale]
                    else
-                     proposal_body
+                     form_presenter.body(extras: false)
                    end
+
             custom_fields.apply_xml(body) if body.present?
             form.object.errors.add(name, custom_fields.errors) if custom_fields.errors
             editor_image = Decidim::EditorImage.new

@@ -445,7 +445,7 @@ cs:
           abstained: "✔️ Zdržel se hlasování"
           change_vote: Změnit můj hlas
           default_box_title: Hlasovat o tomto návrhu
-          default_instructions_html: <p>Přečtěte si pečlivě pravidla voleb, abyste pochopili, jak bude vaše hlasování použito v %{organization}"</p>
+          default_instructions_html: "<p>Přečtěte si pečlivě pravidla voleb, abyste pochopili, jak bude vaše hlasování použito v %{organization}</p>"
           modal:
             cancel: Zrušit
             message: Váš hlas bude považován za konečný v %{date}. Do té doby jej můžete změnit,

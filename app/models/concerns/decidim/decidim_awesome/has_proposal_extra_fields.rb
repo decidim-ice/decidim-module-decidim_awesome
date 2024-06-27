@@ -18,7 +18,7 @@ module Decidim
           extra_fields.update!(private_body: updated_private_body)
           extra_fields
         end
-        
+
         def remove_private_body
           extra_fields ||= initialized_extra_fields
           extra_fields.update!(private_body: {})
@@ -43,6 +43,7 @@ module Decidim
 
         def update_vote_weights!
           extra_fields ||= initialized_extra_fields
+          extra_fields.vote_weight_totals = {}
           votes.each do |vote|
             extra_fields.vote_weight_totals[vote.weight] ||= 0
             extra_fields.vote_weight_totals[vote.weight] += 1
@@ -65,9 +66,9 @@ module Decidim
         private
 
         def initialized_extra_fields
-          extra_fields ||= Decidim::DecidimAwesome::ProposalExtraField.find_or_initialize_by(proposal: self) do |extra_fields|
-            extra_fields.vote_weight_totals = {}
-            extra_fields.private_body = {}
+          extra_fields ||= Decidim::DecidimAwesome::ProposalExtraField.find_or_initialize_by(proposal: self) do |xflds|
+            xflds.vote_weight_totals = {}
+            xflds.private_body = {}
           end
           extra_fields
         end

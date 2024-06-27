@@ -1,30 +1,28 @@
-$(() => {
-  const $modal = $("#LimitAmendmentsModal");
-  if ($modal.length === 0 || $(".sign-out-link").length === 0) {
+document.addEventListener("DOMContentLoaded", () => {
+  const modalId = "LimitAmendmentsModal";
+  const modalEl = document.getElementById(modalId);
+  const amendButton = document.getElementById("amend-button");
+  const limitAmendments = modalEl && JSON.parse(modalEl.dataset.limitAmendments);
+
+  if (!amendButton || !limitAmendments || document.querySelector('a[href^="/users/sign_in"]')) {
     return;
   }
 
-  const showModal = () => {
-    if ($modal.is(":visible")) {
-      return false;
-    }
-
-    if ($modal.data("limitAmendments")) {
-      return true;
-    }
-
-    return false;
-  };
-
-  $modal.find("a").on("click", () => {
-    $modal.foundation("close");
+  modalEl.querySelectorAll("a").forEach((aEl) => {
+    aEl.addEventListener("click", () => {
+      window.Decidim.currentDialogs[modalId].close();
+    });
   });
 
-  $(".card__amend-button").on("click", ".amend_button_card_cell", (evt) => {
-    if (showModal())  {
-      evt.preventDefault();
-      evt.stopPropagation();
-      $modal.foundation("open");
+  /**
+   * Determines if the modal should be displayed based on its current state and data attributes.
+   */
+  amendButton.addEventListener("click", (event) => {
+    const modal = window.Decidim.currentDialogs[modalId];
+    if (modal) {
+      event.preventDefault();
+      event.stopPropagation();
+      modal.open();
     }
   });
 });
