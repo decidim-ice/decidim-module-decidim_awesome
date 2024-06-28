@@ -19,7 +19,7 @@ module Decidim
             minimum: ->(form) { form.minimum_title_length },
             maximum: 150
           }
-          
+
           validates :body, presence: true, unless: ->(form) { form.override_validations? || form.minimum_body_length.zero? }
           validates :body, etiquette: true, unless: ->(form) { form.override_validations? }
           validates :body, proposal_length: {
