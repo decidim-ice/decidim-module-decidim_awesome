@@ -325,8 +325,8 @@ en:
               title: User input validations for the "title" field
           form_proposal_custom_fields:
             fieldset:
-              public: "Public fields"
-              private: "Private fields"
+              private: Private fields
+              public: Public fields
             new: Add a new "custom fields" box
             remove: Remove this "custom fields" box
             sure_to_remove: Are you sure you want to destroy this fields box?
@@ -456,6 +456,10 @@ en:
             success: Menu item updated successfully
           url_exists: The same URL is already configured, please edit that instead
             of creating it again.
+        proposal_custom_fields:
+          menu:
+            title: Public fields
+          private_proposal_custom_fields: Private fields
       amendments:
         modal:
           amendment_exists: An amendment already exists
@@ -561,7 +565,7 @@ en:
     proposals:
       admin:
         exports:
-          awesome_private_proposals: "Private Data"
+          awesome_private_proposals: Private Data
       proposals:
         orders:
           az: A-Z (Alphabetical)

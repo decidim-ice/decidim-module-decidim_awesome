@@ -38,7 +38,8 @@ module Decidim
                         decidim_admin_decidim_awesome.config_path(:proposal_custom_fields),
                         position: 5,
                         icon_name: "layers",
-                        if: menus[:proposal_custom_fields]
+                        if: menus[:proposal_custom_fields],
+                        submenu: { target_menu: :custom_fields_submenu }
 
           menu.add_item :admins,
                         I18n.t("menu.admins", scope: "decidim.decidim_awesome.admin"),
@@ -74,6 +75,22 @@ module Decidim
                         decidim_admin_decidim_awesome.checks_path,
                         position: 10,
                         icon_name: "pulse"
+        end
+      end
+
+      def self.register_custom_fields_submenu!
+        Decidim.menu :custom_fields_submenu do |menu|
+          menu.add_item :proposal_custom_fields,
+                        I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.proposal_custom_fields"),
+                        decidim_admin_decidim_awesome.config_path(:proposal_custom_fields),
+                        position: 5.1,
+                        if: menus[:proposal_custom_fields]
+
+          menu.add_item :private_proposal_custom_fields,
+                        I18n.t("private_proposal_custom_fields", scope: "decidim.decidim_awesome.admin.proposal_custom_fields"),
+                        decidim_admin_decidim_awesome.config_path(:private_proposal_custom_fields),
+                        position: 5.2,
+                        if: menus[:private_proposal_custom_fields]
         end
       end
 
