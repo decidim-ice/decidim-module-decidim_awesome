@@ -61,7 +61,7 @@ $(() => {
     const el = $(container).find(".proposal_custom_fields_editor")
     const privateEl = $(container).find(".proposal_custom_fields_editor--private")
     window.CustomFieldsBuilders.push(builderConfig(el, key));
-    window.CustomFieldsBuilders.push(builderConfig(privateEl, key, "private_proposal_custom_fields"));
+    window.CustomFieldsBuilders.push(builderConfig(privateEl, key, "proposal_private_custom_fields"));
   });
 
   $(document).on("formBuilder.create", (_event, idx, list) => {

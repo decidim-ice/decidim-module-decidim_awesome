@@ -459,7 +459,7 @@ en:
         proposal_custom_fields:
           menu:
             title: Public fields
-          private_proposal_custom_fields: Private fields
+          proposal_private_custom_fields: Private fields
       amendments:
         modal:
           amendment_exists: An amendment already exists

@@ -41,7 +41,7 @@ module Decidim::DecidimAwesome
     end
 
     def serialize_private_custom_fields(payload)
-      private_custom_fields = CustomFields.new(awesome_private_proposal_custom_fields)
+      private_custom_fields = CustomFields.new(awesome_proposal_private_custom_fields)
 
       return payload if private_custom_fields.blank?
 

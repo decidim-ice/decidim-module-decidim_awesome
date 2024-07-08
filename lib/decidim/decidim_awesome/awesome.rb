@@ -147,7 +147,7 @@ module Decidim
     config_accessor :proposal_custom_fields do
       {}
     end
-    config_accessor :private_proposal_custom_fields do
+    config_accessor :proposal_private_custom_fields do
       {}
     end
 

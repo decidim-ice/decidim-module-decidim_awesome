@@ -35,7 +35,7 @@ describe Decidim::OpenDataExporter do
           let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes", "participatory_space_slug" => participatory_process.slug }) }
           let!(:config) do
             create(:awesome_config, organization:, var: :proposal_custom_fields, value: public_data)
-            create(:awesome_config, organization:, var: :private_proposal_custom_fields, value: private_data)
+            create(:awesome_config, organization:, var: :proposal_private_custom_fields, value: private_data)
           end
 
           let!(:proposal) do

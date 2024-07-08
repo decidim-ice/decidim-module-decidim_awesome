@@ -14,7 +14,7 @@ module Decidim
         attribute :auto_save_forms, Boolean
         attribute :scoped_styles, Hash
         attribute :proposal_custom_fields, Hash
-        attribute :private_proposal_custom_fields, Hash
+        attribute :proposal_private_custom_fields, Hash
         attribute :scoped_admins, Hash
         attribute :menu, [MenuForm]
         attribute :intergram_for_admins, Boolean
@@ -36,7 +36,7 @@ module Decidim
 
         validate :css_syntax, if: ->(form) { form.scoped_styles.present? }
         validate :json_syntax, if: ->(form) { form.proposal_custom_fields.present? }
-        validate :private_json_syntax, if: ->(form) { form.private_proposal_custom_fields.present? }
+        validate :private_json_syntax, if: ->(form) { form.proposal_private_custom_fields.present? }
 
         validates :validate_title_min_length, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 100 }
         validates :validate_title_max_caps_percent, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
@@ -83,7 +83,7 @@ module Decidim
         end
 
         def private_json_syntax
-          private_proposal_custom_fields.each do |key, code|
+          proposal_private_custom_fields.each do |key, code|
             next unless code
 
             JSON.parse(code)
@@ -108,7 +108,7 @@ module Decidim
             code
           end
 
-          private_proposal_custom_fields.transform_values! do |code|
+          proposal_private_custom_fields.transform_values! do |code|
             next unless code
 
             json = JSON.parse(code)

@@ -20,7 +20,7 @@ module Decidim
         #
         # Returns nothing.
         def call
-          private_fields = AwesomeConfig.find_by(var: :private_proposal_custom_fields, organization: @organization)
+          private_fields = AwesomeConfig.find_by(var: :proposal_private_custom_fields, organization: @organization)
           fields = AwesomeConfig.find_by(var: :proposal_custom_fields, organization: @organization)
           return broadcast(:invalid, "Not a hash") unless fields&.value.is_a? Hash
           return broadcast(:invalid, "#{key} key invalid") unless fields.value.has_key?(@key)

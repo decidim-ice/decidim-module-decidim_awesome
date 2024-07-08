@@ -86,11 +86,11 @@ module Decidim
                         position: 5.1,
                         if: menus[:proposal_custom_fields]
 
-          menu.add_item :private_proposal_custom_fields,
-                        I18n.t("private_proposal_custom_fields", scope: "decidim.decidim_awesome.admin.proposal_custom_fields"),
-                        decidim_admin_decidim_awesome.config_path(:private_proposal_custom_fields),
+          menu.add_item :proposal_private_custom_fields,
+                        I18n.t("proposal_private_custom_fields", scope: "decidim.decidim_awesome.admin.proposal_custom_fields"),
+                        decidim_admin_decidim_awesome.config_path(:proposal_private_custom_fields),
                         position: 5.2,
-                        if: menus[:private_proposal_custom_fields]
+                        if: menus[:proposal_private_custom_fields]
         end
       end
 
@@ -125,6 +125,7 @@ module Decidim
           surveys: config_enabled?(:auto_save_forms),
           styles: config_enabled?(:scoped_styles),
           proposal_custom_fields: config_enabled?(:proposal_custom_fields),
+          proposal_private_custom_fields: config_enabled?(:proposal_private_custom_fields),
           admins: config_enabled?(:scoped_admins),
           menu_hacks: config_enabled?([:menu, :home_content_block_menu]),
           menu_hacks_menu: config_enabled?(:menu),

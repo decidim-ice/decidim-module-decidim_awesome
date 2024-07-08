@@ -61,8 +61,8 @@ module Decidim
         @awesome_proposal_custom_fields ||= awesome_config_instance.collect_sub_configs_values("proposal_custom_field")
       end
 
-      def awesome_private_proposal_custom_fields
-        @awesome_private_proposal_custom_fields ||= awesome_config_instance.collect_sub_configs_values("private_proposal_custom_field")
+      def awesome_proposal_private_custom_fields
+        @awesome_proposal_private_custom_fields ||= awesome_config_instance.collect_sub_configs_values("proposal_private_custom_field")
       end
 
       # this will check if the current component has been configured to use a custom voting manifest

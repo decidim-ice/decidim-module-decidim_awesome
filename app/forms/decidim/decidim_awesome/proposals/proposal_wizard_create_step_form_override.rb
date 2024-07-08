@@ -53,7 +53,7 @@ module Decidim
           end
 
           def private_custom_fields
-            @private_custom_fields ||= awesome_config_instance.collect_sub_configs_values("private_proposal_custom_field")
+            @private_custom_fields ||= awesome_config_instance.collect_sub_configs_values("proposal_private_custom_field")
           end
 
           def awesome_config
