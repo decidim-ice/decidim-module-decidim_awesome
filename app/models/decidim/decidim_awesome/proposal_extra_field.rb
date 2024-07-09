@@ -12,7 +12,7 @@ module Decidim
       def private_body
         return nil if private_body_encrypted.nil?
 
-        private_body_encrypted.entries.transform_values do |encrypted_value|
+        private_body_encrypted.transform_values do |encrypted_value|
           Decidim::AttributeEncryptor.decrypt(encrypted_value)
         end
       end
@@ -23,7 +23,7 @@ module Decidim
           return
         end
 
-        self.private_body_encrypted = clear_private_body.entries.transform_values do |clear_value|
+        self.private_body_encrypted = clear_private_body.transform_values do |clear_value|
           Decidim::AttributeEncryptor.encrypt(clear_value)
         end
       end
