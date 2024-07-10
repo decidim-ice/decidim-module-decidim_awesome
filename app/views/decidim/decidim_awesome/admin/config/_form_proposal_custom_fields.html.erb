@@ -13,10 +13,10 @@
         <p class="form-error is-visible"><%= errors[key.to_sym].join("<br>") if errors %></p>
         <%= hidden_field_tag key, value, name: "config[proposal_custom_fields][#{key}]" %>
         <fieldset>
-        <legend><%= t("public", scope: "decidim.decidim_awesome.admin.config.form_proposal_custom_fields.fieldset") %></legend>
-        <div class="proposal_custom_fields_editor">
-          <div class="loading-spinner"></div>
-        </div>
+          <legend><%= t("public", scope: "decidim.decidim_awesome.admin.config.form_proposal_custom_fields.fieldset") %></legend>
+          <div class="proposal_custom_fields_editor">
+            <div class="loading-spinner"></div>
+          </div>
         </fieldset>
         <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: "proposal_custom_field_#{key}", constraints: constraints_for("proposal_custom_field_#{key}") }) %>
       </div>

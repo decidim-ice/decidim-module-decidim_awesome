@@ -298,6 +298,8 @@ en:
                 instead of \"Address\"\nOr use your own keys in combination with other
                 tools to define translations (eg: using the module Term Customizer):\n
                 - \"myapp.custom_fields.bio\" instead of \"Biography\""
+              proposal_private_custom_fields_disclosure: This information won't be
+                published
               scoped_admins: Promote regular user to admins that can only administrate
                 certain parts of the public web (use the restrictions editor for that).
                 Note that users who already have regular admin permissions will be
