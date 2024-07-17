@@ -8,22 +8,15 @@ module Decidim
       included do
         has_one :extra_fields, foreign_key: "decidim_proposal_id", class_name: "Decidim::DecidimAwesome::ProposalExtraField", dependent: :destroy
 
+        after_save do |proposal|
+          proposal.safe_extra_fields.save if proposal.safe_extra_fields.changed?
+        end
+
         def private_body
-          extra_fields ||= initialized_extra_fields
-          extra_fields.private_body
+          @safe_extra_fields&.private_body
         end
 
-        def update_private_body(updated_private_body)
-          extra_fields ||= initialized_extra_fields
-          extra_fields.private_body = updated_private_body
-          extra_fields.save!
-        end
-
-        def remove_private_body
-          extra_fields ||= initialized_extra_fields
-          extra_fields.private_body = {}
-          extra_fields.save!
-        end
+        delegate :private_body=, to: :safe_extra_fields
 
         def weight_count(weight)
           (extra_fields && extra_fields.vote_weight_totals[weight.to_s]) || 0
@@ -42,16 +35,20 @@ module Decidim
         end
 
         def update_vote_weights!
-          extra_fields ||= initialized_extra_fields
-          extra_fields.vote_weight_totals = {}
+          votes = Decidim::Proposals::ProposalVote.where(proposal: self)
+          safe_extra_fields.vote_weight_totals = {}
           votes.each do |vote|
-            extra_fields.vote_weight_totals[vote.weight] ||= 0
-            extra_fields.vote_weight_totals[vote.weight] += 1
+            safe_extra_fields.vote_weight_totals[vote.weight] ||= 0
+            safe_extra_fields.vote_weight_totals[vote.weight] += 1
           end
-          extra_fields.save!
-          self.extra_fields = extra_fields
+          safe_extra_fields.save!
+          self.extra_fields = safe_extra_fields
           @vote_weights = nil
           @all_vote_weights = nil
+        end
+
+        def safe_extra_fields
+          @safe_extra_fields ||= Decidim::DecidimAwesome::ProposalExtraField.find_or_initialize_by(proposal: self)
         end
 
         # collects all different weights stored along the different proposals in a different component
@@ -61,16 +58,6 @@ module Decidim
               proposal: Decidim::Proposals::Proposal.where(component:)
             )
           ).pluck(:weight)
-        end
-
-        private
-
-        def initialized_extra_fields
-          extra_fields ||= Decidim::DecidimAwesome::ProposalExtraField.find_or_initialize_by(proposal: self) do |xflds|
-            xflds.vote_weight_totals = {}
-            xflds.private_body = {}
-          end
-          extra_fields
         end
       end
     end

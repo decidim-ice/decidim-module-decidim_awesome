@@ -23,6 +23,7 @@ en:
         intergram_use_floating_button: If checked, the closed chat is always a button
           instead of a text
         proposal_custom_fields: Custom fields %{id}
+        proposal_private_custom_fields: Private Custom fields %{id}
         scoped_admins: Scoped admins group %{id}
         scoped_styles: Custom styles %{id}
         validate_body_max_caps_percent: Maximum allowed percentage of capital letters
@@ -298,6 +299,8 @@ en:
                 instead of \"Address\"\nOr use your own keys in combination with other
                 tools to define translations (eg: using the module Term Customizer):\n
                 - \"myapp.custom_fields.bio\" instead of \"Biography\""
+              proposal_private_custom_fields: Similar as public fields, but this information
+                won't be disclosed publicly (only admins will have access to it).
               proposal_private_custom_fields_disclosure: This information won't be
                 published
               scoped_admins: Promote regular user to admins that can only administrate
@@ -326,18 +329,23 @@ en:
               body: User input validations for the "body" field
               title: User input validations for the "title" field
           form_proposal_custom_fields:
-            fieldset:
-              private: Private fields
-              public: Public fields
+            delete: Delete
             new: Add a new "custom fields" box
             remove: Remove this "custom fields" box
             sure_to_remove: Are you sure you want to destroy this fields box?
+          form_proposal_private_custom_fields:
+            delete: Delete
+            new: Add a new "private custom fields" box
+            remove: Remove this "private custom fields" box
+            sure_to_remove: Are you sure you want to destroy this private fields box?
           form_scoped_admins:
+            delete: Delete
             new: Add a new "Scoped Admins" group
             remove: Remove this "Scoped Admins" group
             sure_to_remove: Are you sure you want to destroy this "Scoped Admins"
               group?
           form_scoped_styles:
+            delete: Delete
             new: Add a new CSS box
             remove: Remove this CSS box
             sure_to_remove: Are you sure you want to destroy this CSS box?
@@ -347,6 +355,18 @@ en:
             title: Tweaks for %{setting}
             update: Update configuration
           system: Everywhere except participatory spaces
+          title:
+            admins: Scoped Admins
+            checks: System Compatibility
+            custom_redirects: Custom Redirections
+            editors: Editor Hacks
+            livechat: Live Chat
+            menu_hacks: Menu Tweaks
+            proposal_custom_fields: 'Proposals Custom Fields: Public fields'
+            proposal_private_custom_fields: 'Proposals Custom Fields: Private fields'
+            proposals: Proposals Hacks
+            styles: Custom Styles
+            surveys: Surveys & Forms
           update:
             error: Error updating configuration! %{error}
             success: Configuration updated successfully

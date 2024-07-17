@@ -35,8 +35,7 @@ module Decidim
         attr_accessor :valid_keys
 
         validate :css_syntax, if: ->(form) { form.scoped_styles.present? }
-        validate :json_syntax, if: ->(form) { form.proposal_custom_fields.present? }
-        validate :private_json_syntax, if: ->(form) { form.proposal_private_custom_fields.present? }
+        validate :json_syntax, if: ->(form) { form.proposal_custom_fields.present? && form.proposal_private_custom_fields.present? }
 
         validates :validate_title_min_length, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 100 }
         validates :validate_title_max_caps_percent, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
@@ -72,18 +71,7 @@ module Decidim
         end
 
         def json_syntax
-          proposal_custom_fields.each do |key, code|
-            next unless code
-
-            JSON.parse(code)
-          rescue JSON::ParserError => e
-            errors.add(:scoped_styles, I18n.t("config.form.errors.incorrect_json", key:, scope: "decidim.decidim_awesome.admin"))
-            errors.add(key.to_sym, e.message)
-          end
-        end
-
-        def private_json_syntax
-          proposal_private_custom_fields.each do |key, code|
+          proposal_custom_fields.merge(proposal_private_custom_fields).each do |key, code|
             next unless code
 
             JSON.parse(code)

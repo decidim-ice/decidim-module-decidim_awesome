@@ -1,30 +1,36 @@
+<%
+  priv = (config_var == "proposal_private_custom_fields")
+  field = priv ? "proposal_private_custom_field" : "proposal_custom_field"
+%>
 <div class="form__wrapper row column decidim_awesome-form">
-  <% if config_enabled? :proposal_custom_fields %>
-    <div class="colors-help">
-      <div class="callout warning"><%= t("caution", scope: "decidim.decidim_awesome.admin.config") %></div>
-      <p class="help-text"><%= t("help.proposal_custom_fields", scope: "decidim.decidim_awesome.admin.config.form") %></p>
-      <p class="help-text"><%= t("help.proposal_custom_fields_example", scope: "decidim.decidim_awesome.admin.config.form") %></p>
-      <p class="help-text"><%= t("help.proposal_custom_fields_translations", scope: "decidim.decidim_awesome.admin.config.form") %></p>
-    </div>
-
-    <% form.object.proposal_custom_fields&.each do |key, value| %>
-      <div class="card p-4 proposal_custom_fields_container" data-key="<%= key %>">
-        <%= render(partial: "decidim/decidim_awesome/admin/config/autoedit_box_label", locals: { var: "proposal_custom_fields", key: key, scope: "proposal_custom_field_#{key}", delete_path: decidim_admin_decidim_awesome.proposal_custom_field_path(key: key) }) %>
+  <% if config_enabled? config_var %>
+    <% if priv %>
+      <p class="help-text text-alert"><%= t("help.#{config_var}", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+    <% else %>
+      <div class="colors-help">
+        <p class="help-text"><%= t("help.#{config_var}", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+        <p class="help-text"><%= t("help.#{config_var}_example", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+        <p class="help-text"><%= t("help.#{config_var}_translations", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+      </div>
+    <% end %>
+    <% form.object.send(config_var)&.each do |key, value| %>
+      <div class="card p-4 proposal_custom_fields_container<%= " private" if priv %>" data-key="<%= key %>" data-var="<%= config_var %>">
+        <%= render("decidim/decidim_awesome/admin/config/autoedit_box_label", var: config_var, key: key, scope: "#{field}_#{key}", delete_path: decidim_admin_decidim_awesome.proposal_custom_field_path(key: key, private: priv)) %>
         <p class="form-error is-visible"><%= errors[key.to_sym].join("<br>") if errors %></p>
-        <%= hidden_field_tag key, value, name: "config[proposal_custom_fields][#{key}]" %>
-        <fieldset>
-          <legend><%= t("public", scope: "decidim.decidim_awesome.admin.config.form_proposal_custom_fields.fieldset") %></legend>
-          <div class="proposal_custom_fields_editor">
-            <div class="loading-spinner"></div>
-          </div>
-        </fieldset>
-        <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: "proposal_custom_field_#{key}", constraints: constraints_for("proposal_custom_field_#{key}") }) %>
+
+        <%= hidden_field_tag key, value, name: "config[#{config_var}][#{key}]" %>
+
+        <div class="proposal_custom_fields_editor mt-4<%= " private" if priv %>">
+          <div class="loading-spinner"></div>
+        </div>
+
+        <%= render("decidim/decidim_awesome/admin/config/constraints", key: "#{field}_#{key}", constraints: constraints_for("#{field}_#{key}")) %>
       </div>
     <% end %>
 
-    <%= link_to decidim_admin_decidim_awesome.proposal_custom_fields_path, method: :post, class: "button button__sm button__text-secondary mr-auto" do %>
+    <%= link_to decidim_admin_decidim_awesome.proposal_custom_fields_path(private: priv), method: :post, class: "button button__sm button__text-secondary mr-auto" do %>
       <%= icon("add-box-line") %>
-      <%= t("new", scope: "decidim.decidim_awesome.admin.config.form_proposal_custom_fields") %>
+      <%= t("new", scope: "decidim.decidim_awesome.admin.config.form_#{config_var}") %>
     <% end %>
   <% end %>
 </div>

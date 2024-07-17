@@ -213,5 +213,52 @@ module Decidim::DecidimAwesome
         end
       end
     end
+
+    describe "private_body" do
+      it "returns nil if no private_body" do
+        expect(extra_fields.private_body).to be_nil
+        expect(extra_fields.private_body_encrypted).to be_nil
+      end
+
+      it "the associated proposal has a private_body" do
+        expect(extra_fields.proposal.private_body).to be_nil
+      end
+
+      context "when private body is set" do
+        let(:extra_fields) { create(:awesome_proposal_extra_fields, :with_private_body) }
+
+        it "sets the private body" do
+          expect(extra_fields.private_body["en"]).to start_with("<xml><dl><dt")
+          expect(extra_fields.private_body_encrypted["en"]).not_to start_with("<xml><dl><dt")
+        end
+
+        it "the associated proposal has a private_body" do
+          expect(extra_fields.proposal.private_body["en"]).to start_with("<xml><dl><dt")
+          expect(extra_fields.proposal.private_body).to eq(extra_fields.private_body)
+        end
+      end
+
+      context "when setting the private body from the proposal" do
+        before do
+          proposal.private_body = { "en" => '<xml><dl><dt name="something">Something</dt></dl></xml>' }
+        end
+
+        it "sets the private body" do
+          expect(proposal.private_body["en"]).to eq('<xml><dl><dt name="something">Something</dt></dl></xml>')
+        end
+      end
+
+      context "when saving the private body from the proposal" do
+        before do
+          proposal.private_body = { "en" => '<xml><dl><dt name="something">Something</dt></dl></xml>' }
+          proposal.save!
+        end
+
+        it "sets the private body" do
+          expect(proposal.extra_fields.private_body["en"]).to eq('<xml><dl><dt name="something">Something</dt></dl></xml>')
+          expect(proposal.extra_fields.private_body_encrypted["en"]).not_to start_with("<xml><dl><dt")
+        end
+      end
+    end
   end
 end

@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.dispatchEvent(new CustomEvent("ajax:loaded:modals", { detail: [editModal, newModal] }));
       };
 
-      target.innerHTML = `<input class="awesome-auto-edit" data-scope="${scope}" type="text" value="${key}">`;
+      target.innerHTML = `<input class="awesome-auto-edit" data-scope="${scope}" type="text" size="${key.length}" value="${key}">`;
       const input = target.querySelector(`input.awesome-auto-edit[data-scope="${scope}"]`);
       link.style.display = "none";
       input.focus();

@@ -12,14 +12,14 @@
     ul.frmb,
     .form-wrap.form-builder .frmb li.form-field,
     .form-wrap.form-builder .stage-wrap.empty {
-      @apply bg-background-2;
+      @apply bg-background mr-2;
     }
 
-    &--private {
+    &.private {
       ul.frmb,
       .form-wrap.form-builder .frmb li.form-field,
       .form-wrap.form-builder .stage-wrap.empty {
-        @apply bg-background-3;
+        // background-color: rgb(var(--alert-rgb) / 0.1);
       }
     }
 

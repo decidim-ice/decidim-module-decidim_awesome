@@ -8,9 +8,10 @@ module Decidim
         #
         # key - the key to destroy inise proposal_custom_fields
         # organization
-        def initialize(key, organization)
+        def initialize(key, organization, config_var = :proposal_custom_fields)
           @key = key
           @organization = organization
+          @config_var = config_var
         end
 
         # Executes the command. Broadcasts these events:
@@ -20,21 +21,16 @@ module Decidim
         #
         # Returns nothing.
         def call
-          private_fields = AwesomeConfig.find_by(var: :proposal_private_custom_fields, organization: @organization)
-          fields = AwesomeConfig.find_by(var: :proposal_custom_fields, organization: @organization)
+          fields = AwesomeConfig.find_by(var: @config_var, organization: @organization)
           return broadcast(:invalid, "Not a hash") unless fields&.value.is_a? Hash
           return broadcast(:invalid, "#{key} key invalid") unless fields.value.has_key?(@key)
 
           fields.value.except!(@key)
           fields.save!
 
-          if private_fields
-            private_fields.value.except!(@key)
-            private_fields.save!
-          end
-
           # remove constrains associated (a new config var is generated automatically, by removing it, it will trigger destroy on dependents)
-          constraint = AwesomeConfig.find_by(var: "proposal_custom_field_#{@key}", organization: @organization)
+          constraint = @config_var == :proposal_custom_fields ? :proposal_custom_field : :proposal_private_custom_field
+          constraint = AwesomeConfig.find_by(var: "#{constraint}_#{@key}", organization: @organization)
           constraint.destroy! if constraint.present?
 
           broadcast(:ok, @key)

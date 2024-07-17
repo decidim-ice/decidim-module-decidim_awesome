@@ -5,8 +5,8 @@
 
     <%= icon_link_to "pencil-line", "#", t("edit_label", scope: "decidim.decidim_awesome.admin.config.form"), class: "action-icon--edit inline-block awesome-auto-edit", data: { "scope" => "#{scope}" } %>
 
-    <%= link_to delete_path, method: :delete, id: "delete-box", class: "float-right mt-2 button button__xs button__text-secondary", data: { confirm: t("sure_to_remove", scope: "decidim.decidim_awesome.admin.config.form_#{var}") } do %>
+    <%= link_to delete_path, method: :delete, id: "delete-box", class: "float-right mt-2 button button__xs button__text-secondary", title: t("remove", scope: "decidim.decidim_awesome.admin.config.form_#{var}"), data: { confirm: t("sure_to_remove", scope: "decidim.decidim_awesome.admin.config.form_#{var}") } do %>
         <%= icon "delete-bin-line" %>
-        <%= t("remove", scope: "decidim.decidim_awesome.admin.config.form_#{var}") %>
+        <%= t("delete", scope: "decidim.decidim_awesome.admin.config.form_#{var}") %>
     <% end %>
 <% end %>
