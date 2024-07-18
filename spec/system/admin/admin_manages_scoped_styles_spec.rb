@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "decidim/decidim_awesome/test/shared_examples/box_label_editor"
+require "decidim/decidim_awesome/test/shared_examples/box_label_editor_examples"
 
 describe "Admin manages scoped styles" do
   let(:organization) { create(:organization) }
