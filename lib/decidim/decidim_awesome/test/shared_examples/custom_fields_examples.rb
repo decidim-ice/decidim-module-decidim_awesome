@@ -26,7 +26,7 @@ shared_examples "updates a box" do
     expect(page).to have_content("Full Name")
     expect(page).to have_content("Occupation")
     expect(page).to have_content("Street Sweeper")
-    expect(page).to have_no_content("Short Bio")
+    expect(page).not_to have_content("Short Bio")
 
     page.execute_script("$('.proposal_custom_fields_container[data-key=\"foo\"] .proposal_custom_fields_editor')[0].FormBuilder.actions.setData(#{data})")
     click_on "Update configuration"
@@ -34,8 +34,8 @@ shared_examples "updates a box" do
     sleep 2
     expect(page).to have_admin_callout("updated successfully")
     expect(page).to have_content("Full Name")
-    expect(page).to have_no_content("Occupation")
-    expect(page).to have_no_content("Street Sweeper")
+    expect(page).not_to have_content("Occupation")
+    expect(page).not_to have_content("Street Sweeper")
     expect(page).to have_content("Short Bio")
   end
 end
@@ -53,7 +53,7 @@ shared_examples "removes a box" do |name|
     expect(page).to have_content("Full Name")
     expect(page).to have_content("Occupation")
     expect(page).to have_content("Street Sweeper")
-    expect(page).to have_no_content("Short Bio")
+    expect(page).not_to have_content("Short Bio")
 
     within ".proposal_custom_fields_container[data-key=\"foo\"]" do
       accept_confirm { click_on "Remove this \"#{name}\" box" }
@@ -61,10 +61,10 @@ shared_examples "removes a box" do |name|
 
     sleep 2
     expect(page).to have_admin_callout("removed successfully")
-    expect(page).to have_no_content("Full Name")
+    expect(page).not_to have_content("Full Name")
     expect(page).to have_content("Occupation")
     expect(page).to have_content("Street Sweeper")
-    expect(page).to have_no_content("Short Bio")
+    expect(page).not_to have_content("Short Bio")
 
     expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: "#{var_name}_foo")).not_to be_present
     expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: "#{var_name}_bar")).to be_present
@@ -121,13 +121,13 @@ shared_examples "removes a constraint" do
     end
 
     within ".proposal_custom_fields_container[data-key=\"bar\"] .constraints-editor" do
-      expect(page).to have_no_content("Proposals")
+      expect(page).not_to have_content("Proposals")
     end
 
     visit decidim_admin_decidim_awesome.config_path("#{var_name}s")
 
     within ".proposal_custom_fields_container[data-key=\"bar\"] .constraints-editor" do
-      expect(page).to have_no_content("Proposals")
+      expect(page).not_to have_content("Proposals")
     end
 
     expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: "#{var_name}_bar")).to be_present

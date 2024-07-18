@@ -8,11 +8,10 @@ module Decidim
         extend ActiveSupport::Concern
 
         included do
-          include Decidim::TranslatableAttributes
           alias_method :decidim_original_map_model, :map_model
 
           clear_validators!
-          translatable_attribute :private_body, String
+          attribute :private_body, Decidim::Attributes::CleanString
 
           validates :title, presence: true, etiquette: true
           validates :title, proposal_length: {
@@ -53,7 +52,7 @@ module Decidim
           end
 
           def private_custom_fields
-            @private_custom_fields ||= awesome_config_instance.collect_sub_configs_values("proposal_private_custom_field")
+            @private_custom_fields ||= awesome_config.collect_sub_configs_values("proposal_private_custom_field")
           end
 
           def awesome_config

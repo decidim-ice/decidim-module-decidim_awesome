@@ -22,7 +22,7 @@ shared_examples "do not have menu link" do |item|
   let(:prefix) { "config/" }
   it "do not show the feature link" do
     within ".sidebar-menu" do
-      expect(page).to have_no_link(href: "/admin/decidim_awesome/#{prefix}#{item}")
+      expect(page).not_to have_link(href: "/admin/decidim_awesome/#{prefix}#{item}")
     end
   end
 end

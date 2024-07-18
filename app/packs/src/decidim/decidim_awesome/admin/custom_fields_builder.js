@@ -9,19 +9,18 @@ window.CustomFieldsBuilders = window.CustomFieldsBuilders || [];
 $(() => {
   $(".awesome-edit-config .proposal_custom_fields_editor").each((_idx, el) => {
     const key = $(el).closest(".proposal_custom_fields_container").data("key");
-    const config_var = $(el).closest(".proposal_custom_fields_container").data("var");
-    console.log("key", key, "config_var", config_var)
+    const configVar = $(el).closest(".proposal_custom_fields_container").data("var");
     // DOCS: https://formbuilder.online/docs
     window.CustomFieldsBuilders.push({
       el: el,
       key: key,
-      var: config_var,
+      var: configVar,
       config: {
         i18n: {
           locale: "en-US",
           location: "https://cdn.jsdelivr.net/npm/formbuilder-languages@1.1.0/"
         },
-        formData: $(`input[name="config[${config_var}][${key}]"]`).val(),
+        formData: $(`input[name="config[${configVar}][${key}]"]`).val(),
         disableFields: ["button", "file"],
         disabledActionButtons: ["save", "data", "clear"],
         disabledAttrs: [

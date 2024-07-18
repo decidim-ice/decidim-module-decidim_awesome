@@ -64,11 +64,11 @@ describe "Show intergram chat" do
 
   shared_examples "do not show the chat" do
     it "do not have the script tag" do
-      expect(page).to have_no_xpath("//script[@src='#{intergram_url}']", visible: :all)
+      expect(page).not_to have_xpath("//script[@src='#{intergram_url}']", visible: :all)
     end
 
     it "has no customized variables" do
-      expect(page.body).to have_no_content('window.intergramId = "some-id";')
+      expect(page.body).not_to have_content('window.intergramId = "some-id";')
     end
 
     it "no variables are initialized" do

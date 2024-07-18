@@ -10,6 +10,7 @@ module Decidim::Proposals
       {
         title:,
         body:,
+        private_body:,
         body_template:
       }
     end
@@ -19,6 +20,7 @@ module Decidim::Proposals
     let(:component) { create(:proposal_component, participatory_space:) }
     let(:title) { "More sidewalks and less roads" }
     let(:body) { nil }
+    let(:private_body) { nil }
     let(:body_template) { nil }
     let(:author) { create(:user, organization:) }
 
@@ -31,22 +33,47 @@ module Decidim::Proposals
     end
 
     let(:data) { '{"type":"text","label":"Full Name","subtype":"text","className":"form-control","name":"text-1476748004559"}' }
+    let(:private_data) { '{"type":"text","label":"Email","subtype":"text","className":"form-control","name":"text-1476748004569"}' }
     let(:custom_fields) do
       {
         "foo" => "[#{data}]"
       }
     end
+    let(:private_custom_fields) do
+      {
+        "bar" => "[#{private_data}]"
+      }
+    end
     let!(:config) { create(:awesome_config, organization:, var: :proposal_custom_fields, value: custom_fields) }
-    let(:config_helper) { create(:awesome_config, organization:, var: :proposal_custom_field_foo) }
+    let!(:private_config) { create(:awesome_config, organization:, var: :proposal_private_custom_fields, value: private_custom_fields) }
+    let(:config_helper) { create(:awesome_config, organization:, var: :proposal_custom_field_foo, value: nil) }
+    let(:private_config_helper) { create(:awesome_config, organization:, var: :proposal_private_custom_field_bar, value: nil) }
     let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes", "participatory_space_slug" => slug }) }
+    let!(:private_constraint) { create(:config_constraint, awesome_config: private_config_helper, settings: { "participatory_space_manifest" => "participatory_processes" }) }
     let(:slug) { participatory_space.slug }
 
     context "when is scoped under custom fields" do
       it { is_expected.to be_valid }
+
+      it "returns custom fields" do
+        expect(form.custom_fields).to eq(custom_fields.values)
+      end
+
+      it "returns private custom fields" do
+        expect(form.private_custom_fields).to eq(private_custom_fields.values)
+      end
     end
 
     context "when not scoped under custom fields" do
       let(:slug) { "another-slug" }
+
+      it "does not return custom fields" do
+        expect(form.custom_fields).to be_empty
+      end
+
+      it "returns private custom fields" do
+        expect(form.private_custom_fields).to eq(private_custom_fields.values)
+      end
 
       context "and body is not present" do
         it { is_expected.not_to be_valid }
@@ -56,6 +83,19 @@ module Decidim::Proposals
         let(:body) { "aa" }
 
         it { is_expected.not_to be_valid }
+      end
+    end
+
+    context "when scope under different constraint" do
+      let(:slug) { "another-slug" }
+      let(:private_constraint) { create(:config_constraint, awesome_config: private_config_helper, settings: { "participatory_space_manifest" => "assemblies" }) }
+
+      it "does not return custom fields" do
+        expect(form.custom_fields).to be_empty
+      end
+
+      it "does not return private custom fields" do
+        expect(form.private_custom_fields).to be_empty
       end
     end
 

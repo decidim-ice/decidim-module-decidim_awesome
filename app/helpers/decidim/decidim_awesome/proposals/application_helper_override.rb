@@ -23,12 +23,17 @@ module Decidim
 
           # replace normal method to draw the editor
           def text_editor_for_proposal_body(form)
-            custom_fields = awesome_proposal_custom_fields
+            custom_fields = if awesome_proposal_custom_fields.blank?
+                              decidim_text_editor_for_proposal_body(form)
+                            else
+                              render_proposal_custom_fields_override(awesome_proposal_custom_fields, form, :body)
+                            end
 
-            return decidim_text_editor_for_proposal_body(form) if custom_fields.blank?
-
-            custom_field_form = render_proposal_custom_fields_override(custom_fields, form, :body)
-            custom_field_form + render_proposal_custom_fields_override(awesome_proposal_private_custom_fields, form, :private_body)
+            if awesome_proposal_private_custom_fields.present?
+              custom_fields = content_tag("div", custom_fields) if awesome_proposal_custom_fields.blank?
+              custom_fields += render_proposal_custom_fields_override(awesome_proposal_private_custom_fields, form, :private_body)
+            end
+            custom_fields
           end
 
           # replace admin method to draw the editor (multi lang)

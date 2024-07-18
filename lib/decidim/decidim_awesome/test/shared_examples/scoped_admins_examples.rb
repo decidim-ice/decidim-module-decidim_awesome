@@ -13,7 +13,7 @@ end
 shared_examples "forbids awesome access" do
   it "does not have awesome link" do
     visit decidim_admin.root_path
-    expect(page).to have_no_content("Decidim awesome")
+    expect(page).not_to have_content("Decidim awesome")
   end
 
   describe "forbids module access" do
@@ -155,7 +155,7 @@ shared_examples "allows scoped admin routes" do
     it_behaves_like "redirects to index"
 
     it "is not a process page" do
-      expect(page).to have_no_content("New process")
+      expect(page).not_to have_content("New process")
     end
   end
 end
@@ -171,7 +171,7 @@ end
 shared_examples "has no admin link" do
   it "has no menu link" do
     within "header" do
-      expect(page).to have_no_css("#admin-bar", text: "Admin dashboard")
+      expect(page).not_to have_css("#admin-bar", text: "Admin dashboard")
     end
   end
 end
@@ -203,7 +203,7 @@ shared_examples "shows partial admin links in the frontend" do
 
     it_behaves_like "has no admin link"
     it "has no Edit button" do
-      expect(page).to have_no_link(href: "/admin/processes")
+      expect(page).not_to have_link(href: "/admin/processes")
     end
   end
 end
@@ -358,7 +358,7 @@ shared_examples "shows component partial admin links in the frontend" do
 
     it_behaves_like "has no admin link"
     it "has no Edit button" do
-      expect(page).to have_no_link(href: manage_component_path(another_component))
+      expect(page).not_to have_link(href: manage_component_path(another_component))
     end
   end
 end

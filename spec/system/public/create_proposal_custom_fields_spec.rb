@@ -46,12 +46,12 @@ describe "Custom proposals fields" do
 
   it "displays custom fields" do
     expect(page).to have_content("Title")
-    expect(page).to have_no_content("Body")
+    expect(page).not_to have_content("Body")
     expect(page).to have_content("Full Name")
     expect(page).to have_content("Occupation")
     expect(page).to have_content("Street Sweeper")
     expect(page).to have_content("Short Bio")
-    expect(page).to have_no_css(".form-error.is-visible")
+    expect(page).not_to have_css(".form-error.is-visible")
   end
 
   it "displays private custom fields" do
@@ -70,10 +70,10 @@ describe "Custom proposals fields" do
     it "displays normal proposal editor" do
       expect(page).to have_content("Title")
       expect(page).to have_content("Body")
-      expect(page).to have_no_content("Full Name")
-      expect(page).to have_no_content("Occupation")
-      expect(page).to have_no_content("Street Sweeper")
-      expect(page).to have_no_content("Short Bio")
+      expect(page).not_to have_content("Full Name")
+      expect(page).not_to have_content("Occupation")
+      expect(page).not_to have_content("Street Sweeper")
+      expect(page).not_to have_content("Short Bio")
     end
   end
 
@@ -82,12 +82,12 @@ describe "Custom proposals fields" do
 
     it "displays the scoped fields" do
       expect(page).to have_content("Title")
-      expect(page).to have_no_content("Body")
+      expect(page).not_to have_content("Body")
       expect(page).to have_content("Full Name")
       expect(page).to have_content("Occupation")
       expect(page).to have_content("Street Sweeper")
-      expect(page).to have_no_content("Short Bio")
-      expect(page).to have_no_css(".form-error.is-visible")
+      expect(page).not_to have_content("Short Bio")
+      expect(page).not_to have_css(".form-error.is-visible")
     end
   end
 
@@ -105,7 +105,7 @@ describe "Custom proposals fields" do
       expect(page).to have_content("Street Sweeper")
       expect(page).to have_content("Short Bio")
       expect(page).to have_xpath("//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot everything']")
-      expect(page).to have_no_css(".form-error.is-visible")
+      expect(page).not_to have_css(".form-error.is-visible")
       expect(Decidim::Proposals::Proposal.last.body["en"]).to include('<dd id="text-1476748004559" name="text"><div>Lucky Luke</div>')
       expect(Decidim::Proposals::Proposal.last.body["en"]).to include('<dd id="textarea-1476748007461" name="textarea"><div>I shot everything</div></dd>')
     end
