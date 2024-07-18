@@ -15,8 +15,17 @@ module Decidim::DecidimAwesome
       expect(extra_fields.proposal).to be_a(Decidim::Proposals::Proposal)
     end
 
-    it "the associated proposal has a weight cache" do
-      expect(extra_fields.proposal.extra_fields).to eq(extra_fields)
+    it "cannot associate more than one extra field to a proposal" do
+      extra_fields
+      expect do
+        another_proposal = create(:proposal, component: extra_fields.proposal.component)
+        create(:awesome_proposal_extra_fields, proposal: another_proposal)
+      end.to change(Decidim::DecidimAwesome::ProposalExtraField, :count).by(1)
+      expect { create(:awesome_proposal_extra_fields, proposal: extra_fields.proposal) }.to raise_error(ActiveRecord::RecordInvalid)
+    end
+
+    it "the associated proposal has the same extra_fields" do
+      expect(extra_fields.proposal.reload.extra_fields).to eq(extra_fields)
     end
 
     describe "weight_count" do
@@ -30,7 +39,7 @@ module Decidim::DecidimAwesome
       end
 
       it "returns the weight count for a weight" do
-        expect(proposal.weight_count(1)).to eq(1)
+        expect(proposal.reload.weight_count(1)).to eq(1)
         expect(proposal.weight_count(2)).to eq(1)
         expect(proposal.weight_count(3)).to eq(1)
       end
@@ -42,7 +51,7 @@ module Decidim::DecidimAwesome
         end
 
         it "returns the weight count for a weight" do
-          expect(proposal.weight_count(1)).to eq(1)
+          expect(proposal.reload.weight_count(1)).to eq(1)
           expect(proposal.weight_count(2)).to eq(1)
           expect(proposal.weight_count(3)).to eq(2)
           expect(proposal.weight_count(4)).to eq(0)
@@ -55,7 +64,7 @@ module Decidim::DecidimAwesome
         let(:vote_weights) { nil }
 
         it "returns 0" do
-          expect(proposal.weight_count(1)).to eq(0)
+          expect(proposal.reload.weight_count(1)).to eq(0)
           expect(proposal.weight_count(2)).to eq(0)
           expect(proposal.weight_count(3)).to eq(0)
           expect(proposal.weight_count(100)).to eq(0)
@@ -68,7 +77,7 @@ module Decidim::DecidimAwesome
           end
 
           it "returns the weight count for a weight" do
-            expect(proposal.weight_count(1)).to eq(0)
+            expect(proposal.reload.weight_count(1)).to eq(0)
             expect(proposal.weight_count(2)).to eq(0)
             expect(proposal.weight_count(3)).to eq(1)
             expect(proposal.weight_count(4)).to eq(0)
@@ -99,7 +108,7 @@ module Decidim::DecidimAwesome
         it "increments the weight cache" do
           expect { create(:proposal_vote, proposal:) }.to change { proposal.votes.count }.by(1)
           expect { create(:awesome_vote_weight, vote: proposal.votes.first, weight: 3) }.to change(Decidim::DecidimAwesome::ProposalExtraField, :count).by(1)
-          expect(proposal.extra_fields.vote_weight_totals).to eq({ "3" => 1 })
+          expect(proposal.reload.extra_fields.vote_weight_totals).to eq({ "3" => 1 })
           expect(proposal.extra_fields.weight_total).to eq(3)
         end
 
@@ -188,8 +197,8 @@ module Decidim::DecidimAwesome
       end
 
       it "returns all vote weights for a component" do
-        expect(proposal.all_vote_weights).to contain_exactly(1, 2)
-        expect(another_proposal.all_vote_weights).to contain_exactly(1, 2)
+        expect(proposal.reload.all_vote_weights).to contain_exactly(1, 2)
+        expect(another_proposal.reload.all_vote_weights).to contain_exactly(1, 2)
         expect(proposal.vote_weights).to eq({ "1" => 1, "2" => 0 })
         expect(another_proposal.vote_weights).to eq({ "1" => 0, "2" => 1 })
       end
@@ -203,11 +212,11 @@ module Decidim::DecidimAwesome
         end
 
         it "returns all vote weights for a component" do
-          expect(proposal.extra_fields.vote_weight_totals).to eq({ "3" => 1, "4" => 1 })
+          expect(proposal.reload.extra_fields.vote_weight_totals).to eq({ "3" => 1, "4" => 1 })
           expect(proposal.vote_weights).to eq({ "1" => 0, "2" => 0 })
           proposal.update_vote_weights!
           expect(proposal.vote_weights).to eq({ "1" => 1, "2" => 0 })
-          expect(another_proposal.vote_weights).to eq({ "1" => 0, "2" => 1 })
+          expect(another_proposal.reload.vote_weights).to eq({ "1" => 0, "2" => 1 })
           expect(proposal.extra_fields.vote_weight_totals).to eq({ "1" => 1 })
           expect(another_proposal.extra_fields.vote_weight_totals).to eq({ "2" => 1 })
         end
@@ -217,7 +226,7 @@ module Decidim::DecidimAwesome
     describe "private_body" do
       it "returns nil if no private_body" do
         expect(extra_fields.private_body).to be_nil
-        expect(extra_fields.private_body_encrypted).to be_nil
+        expect(extra_fields.attributes["private_body"]).to be_nil
       end
 
       it "the associated proposal has a private_body" do
@@ -225,15 +234,18 @@ module Decidim::DecidimAwesome
       end
 
       context "when private body is set" do
-        let(:extra_fields) { create(:awesome_proposal_extra_fields, :with_private_body) }
+        before do
+          extra_fields.private_body = { "en" => '<xml><dl><dt name="something">Something</dt></dl></xml>' }
+          extra_fields.save!
+        end
 
         it "sets the private body" do
-          expect(extra_fields.private_body["en"]).to start_with("<xml><dl><dt")
-          expect(extra_fields.private_body_encrypted["en"]).not_to start_with("<xml><dl><dt")
+          expect(extra_fields.private_body["en"]).to eq('<xml><dl><dt name="something">Something</dt></dl></xml>')
+          expect(extra_fields.attributes["private_body"]["en"]).not_to start_with("<xml><dl><dt")
         end
 
         it "the associated proposal has a private_body" do
-          expect(extra_fields.proposal.private_body["en"]).to start_with("<xml><dl><dt")
+          expect(extra_fields.proposal.private_body["en"]).to eq('<xml><dl><dt name="something">Something</dt></dl></xml>')
           expect(extra_fields.proposal.private_body).to eq(extra_fields.private_body)
         end
       end
@@ -256,7 +268,7 @@ module Decidim::DecidimAwesome
 
         it "sets the private body" do
           expect(proposal.extra_fields.private_body["en"]).to eq('<xml><dl><dt name="something">Something</dt></dl></xml>')
-          expect(proposal.extra_fields.private_body_encrypted["en"]).not_to start_with("<xml><dl><dt")
+          expect(proposal.extra_fields.attributes["private_body"]["en"]).not_to start_with("<xml><dl><dt")
         end
       end
     end

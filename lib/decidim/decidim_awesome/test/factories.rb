@@ -58,13 +58,5 @@ FactoryBot.define do
         end
       end
     end
-
-    trait :with_private_body do
-      private_body do
-        Decidim::Faker::Localized.localized do
-          '<xml><dl><dt name="email">Age</dt><dd id="email" name="text"><div>email@example.org</div></dd></dl></xml>'
-        end
-      end
-    end
   end
 end

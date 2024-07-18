@@ -2,33 +2,24 @@
 
 module Decidim
   module DecidimAwesome
+    # This class adds some attributes to the proposal model in a different table
+    # in particular, it adds a private_body field that should be encrypted
+    # However this field does not work with machine translations as are defined in the current TranslatableResource class
+    # That's because, as the way it is implemented now, it skips callbacks and validations and updates the field directly in the database
+    # (using update_column), efectively bypassing the encryption of the field.
+    # On the other hand, encryption is not ready either to handle nested hashes, required for machine translations
+    # So, for the moment, private_body won't be automatically translated
     class ProposalExtraField < ApplicationRecord
-      include ::Decidim::TranslatableResource
-      include ::Decidim::TranslatableAttributes
+      include Decidim::RecordEncryptor
 
       self.table_name = "decidim_awesome_proposal_extra_fields"
 
-      translatable_fields :private_body
       belongs_to :proposal, foreign_key: "decidim_proposal_id", class_name: "Decidim::Proposals::Proposal"
 
-      def private_body
-        return nil if private_body_encrypted.nil?
+      encrypt_attribute :private_body, type: :hash
 
-        private_body_encrypted.transform_values do |encrypted_value|
-          Decidim::AttributeEncryptor.decrypt(encrypted_value)
-        end
-      end
-
-      def private_body=(clear_private_body)
-        if clear_private_body.nil?
-          self.private_body_encrypted = nil
-          return
-        end
-
-        self.private_body_encrypted = clear_private_body.transform_values do |clear_value|
-          Decidim::AttributeEncryptor.encrypt(clear_value)
-        end
-      end
+      # validate not more than one extra field can be associated to a proposal
+      validates :proposal, uniqueness: true
     end
   end
 end

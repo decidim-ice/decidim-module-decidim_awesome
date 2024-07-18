@@ -9,14 +9,10 @@ module Decidim
         has_one :extra_fields, foreign_key: "decidim_proposal_id", class_name: "Decidim::DecidimAwesome::ProposalExtraField", dependent: :destroy
 
         after_save do |proposal|
-          proposal.safe_extra_fields.save if proposal.safe_extra_fields.changed?
+          proposal.extra_fields.save if proposal.extra_fields && proposal.extra_fields.changed?
         end
 
-        def private_body
-          @safe_extra_fields&.private_body
-        end
-
-        delegate :private_body=, to: :safe_extra_fields
+        delegate :private_body, :private_body=, to: :safe_extra_fields
 
         def weight_count(weight)
           (extra_fields && extra_fields.vote_weight_totals[weight.to_s]) || 0
@@ -48,7 +44,7 @@ module Decidim
         end
 
         def safe_extra_fields
-          @safe_extra_fields ||= Decidim::DecidimAwesome::ProposalExtraField.find_or_initialize_by(proposal: self)
+          @safe_extra_fields ||= reload.extra_fields || build_extra_fields
         end
 
         # collects all different weights stored along the different proposals in a different component
