@@ -12,7 +12,17 @@ module Decidim
           proposal.extra_fields.save if proposal.extra_fields && proposal.extra_fields.changed?
         end
 
-        delegate :private_body, :private_body=, to: :safe_extra_fields
+        delegate :private_body=, to: :safe_extra_fields
+
+        def private_body
+          extra_fields.private_body if extra_fields
+        end
+
+        def update_private_body!(private_body)
+          safe_extra_fields.private_body = private_body
+          safe_extra_fields.save!
+          self.extra_fields = safe_extra_fields
+        end
 
         def weight_count(weight)
           (extra_fields && extra_fields.vote_weight_totals[weight.to_s]) || 0

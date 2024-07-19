@@ -11,7 +11,7 @@ module Decidim
           alias_method :decidim_original_map_model, :map_model
 
           clear_validators!
-          attribute :private_body, Decidim::Attributes::CleanString
+          attribute :private_body, String
 
           validates :title, presence: true, etiquette: true
           validates :title, proposal_length: {
@@ -30,7 +30,7 @@ module Decidim
 
           def map_model(model)
             decidim_original_map_model(model)
-            self.private_body = translated_attribute(model.private_body)
+            self.private_body = model.private_body
           end
 
           def override_validations?

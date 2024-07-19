@@ -112,32 +112,30 @@ module Decidim
 
       def self.menus
         @menus ||= {
-          editors: config_enabled?([:allow_images_in_editors, :allow_videos_in_editors]),
+          editors: config_enabled?(:allow_images_in_editors, :allow_videos_in_editors),
           proposals: config_enabled?(
-            [
-              :allow_images_in_proposals,
-              :validate_title_min_length, :validate_title_max_caps_percent,
-              :validate_title_max_marks_together, :validate_title_start_with_caps,
-              :validate_body_min_length, :validate_body_max_caps_percent,
-              :validate_body_max_marks_together, :validate_body_start_with_caps
-            ]
+            :allow_images_in_proposals,
+            :validate_title_min_length, :validate_title_max_caps_percent,
+            :validate_title_max_marks_together, :validate_title_start_with_caps,
+            :validate_body_min_length, :validate_body_max_caps_percent,
+            :validate_body_max_marks_together, :validate_body_start_with_caps
           ),
           surveys: config_enabled?(:auto_save_forms),
           styles: config_enabled?(:scoped_styles),
           proposal_custom_fields: config_enabled?(:proposal_custom_fields),
           proposal_private_custom_fields: config_enabled?(:proposal_private_custom_fields),
           admins: config_enabled?(:scoped_admins),
-          menu_hacks: config_enabled?([:menu, :home_content_block_menu]),
+          menu_hacks: config_enabled?(:menu, :home_content_block_menu),
           menu_hacks_menu: config_enabled?(:menu),
           menu_hacks_home_content_block_menu: config_enabled?(:home_content_block_menu),
           custom_redirects: config_enabled?(:custom_redirects),
-          livechat: config_enabled?([:intergram_for_admins, :intergram_for_public])
+          livechat: config_enabled?(:intergram_for_admins, :intergram_for_public)
         }
       end
 
       # ensure boolean value
-      def self.config_enabled?(var)
-        DecidimAwesome.enabled?(var)
+      def self.config_enabled?(*vars)
+        DecidimAwesome.enabled?(*vars)
       end
     end
   end

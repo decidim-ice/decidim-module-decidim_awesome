@@ -8,28 +8,16 @@ module Decidim
       # to avoid private field to be logged in PaperTrail.
       module UpdateProposalOverride
         extend ActiveSupport::Concern
+        include Admin::UpdateProposalOverride
 
         included do
           private
 
           alias_method :decidim_original_update_draft, :update_draft
-          alias_method :decidim_original_update_proposal, :update_proposal
-
-          def update_draft
-            decidim_original_update_draft
-            update_private_field
-          end
 
           def update_proposal
             decidim_original_update_proposal
-            update_private_field
-          end
-
-          def update_private_field
-            @proposal.update_private_body(
-              I18n.locale => form.private_body
-            )
-            @proposal
+            update_private_field!
           end
         end
       end

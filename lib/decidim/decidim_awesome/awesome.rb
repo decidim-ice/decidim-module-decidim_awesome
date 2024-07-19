@@ -323,9 +323,7 @@ module Decidim
       end
     end
 
-    def self.enabled?(config_vars)
-      config_vars = [config_vars] unless config_vars.respond_to?(:any?)
-
+    def self.enabled?(*config_vars)
       config_vars.any? do |item|
         next unless config.has_key?(item.to_sym)
 
