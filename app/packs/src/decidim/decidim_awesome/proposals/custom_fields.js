@@ -5,23 +5,34 @@ $(() => {
   window.DecidimAwesome.PrivateCustomFieldsRenderer = window.DecidimAwesome.PrivateCustomFieldsRenderer || new CustomFieldsRenderer();
 
   // use admin multilang specs if exists
-  let $el = $(".proposal_custom_field:first", ".tabs-title.is-active");
-  if (!$el.length) {
-    $el = $(".proposal_custom_field:first");
+  const $public = $(".proposal_custom_field:first");
+  const $private = $(".proposal_custom_field.proposal_custom_field--private_body:first");
+  let $form = null;
+  if ($public.length) {
+    window.DecidimAwesome.CustomFieldsRenderer.init($public);
+    $form = window.DecidimAwesome.CustomFieldsRenderer.$element.closest("form");
   }
-  window.DecidimAwesome.CustomFieldsRenderer.init($el);
-  window.DecidimAwesome.PrivateCustomFieldsRenderer.init(
-    $(".proposal_custom_field.proposal_custom_field--private_body:first")
-  );
-
-  window.DecidimAwesome.CustomFieldsRenderer.$element.closest("form").on("submit", (evt) => {
-    if (evt.target.checkValidity()) {
-      // save current editors
-      window.DecidimAwesome.CustomFieldsRenderer.storeData();
-      window.DecidimAwesome.PrivateCustomFieldsRenderer.storeData();
-    } else {
-      evt.preventDefault();
-      evt.target.reportValidity();
+  if ($private.length) {
+    window.DecidimAwesome.PrivateCustomFieldsRenderer.init($private);
+    if (!$form) {
+      $form = window.DecidimAwesome.PrivateCustomFieldsRenderer.$element.closest("form");
     }
-  });
+  }
+
+  if ($form) {
+    $form.on("submit", (evt) => {
+      if (evt.target.checkValidity()) {
+        // save current editors
+        if ($public.length) {
+          window.DecidimAwesome.CustomFieldsRenderer.storeData();
+        }
+        if ($private.length) {
+          window.DecidimAwesome.PrivateCustomFieldsRenderer.storeData();
+        }
+      } else {
+        evt.preventDefault();
+        evt.target.reportValidity();
+      }
+    });
+  }
 });
