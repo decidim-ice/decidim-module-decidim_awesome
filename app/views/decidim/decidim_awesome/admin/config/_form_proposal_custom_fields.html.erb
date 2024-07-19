@@ -6,8 +6,8 @@
   <% if config_enabled? config_var %>
     <% if priv %>
       <div>
-        <p class="help-text text-alert"><%= t("help.#{config_var}", scope: "decidim.decidim_awesome.admin.config.form") %></p>
-        <p class="help-text"><%= t("help.#{config_var}_translations",
+        <p class="help-text text-alert"><%= t("help.proposal_private_custom_fields", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+        <p class="help-text"><%= t("help.proposal_private_custom_fields_translations",
             scope: "decidim.decidim_awesome.admin.config.form",
             warning: content_tag(:i, t("decidim.decidim_awesome.proposal_private_custom_fields_disclosure")),
             key: content_tag("code", "decidim.decidim_awesome.proposal_private_custom_fields_disclosure")
@@ -15,9 +15,9 @@
       </div>
     <% else %>
       <div class="colors-help">
-        <p class="help-text"><%= t("help.#{config_var}", scope: "decidim.decidim_awesome.admin.config.form") %></p>
-        <p class="help-text"><%= t("help.#{config_var}_example", scope: "decidim.decidim_awesome.admin.config.form") %></p>
-        <p class="help-text"><%= t("help.#{config_var}_translations", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+        <p class="help-text"><%= t("help.proposal_custom_fields", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+        <p class="help-text"><%= t("help.proposal_custom_fields_example", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+        <p class="help-text"><%= t("help.proposal_custom_fields_translations", scope: "decidim.decidim_awesome.admin.config.form") %></p>
       </div>
     <% end %>
     <% form.object.send(config_var)&.each do |key, value| %>
