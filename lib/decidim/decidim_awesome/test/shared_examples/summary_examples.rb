@@ -217,7 +217,7 @@ shared_examples "basic rendering" do |enabled|
 
     if enabled
       it "renders the editors page" do
-        expect(page).to have_content("Tweaks for editors")
+        expect(page).to have_content("Tweaks for Editor Hacks")
       end
 
       it "has all admin menus" do

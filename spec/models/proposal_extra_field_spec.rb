@@ -245,7 +245,7 @@ module Decidim::DecidimAwesome
         end
 
         it "the associated proposal has a private_body" do
-          expect(extra_fields.proposal.private_body["en"]).to eq('<xml><dl><dt name="something">Something</dt></dl></xml>')
+          expect(extra_fields.proposal.reload.private_body["en"]).to eq('<xml><dl><dt name="something">Something</dt></dl></xml>')
           expect(extra_fields.proposal.private_body).to eq(extra_fields.private_body)
         end
       end

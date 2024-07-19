@@ -27,6 +27,7 @@ module Decidim::Proposals
         end
 
         it "returns the weights of votes for this proposal" do
+          model.update_vote_weights!
           expect(response["voteWeights"]).to eq({ "1" => 1, "2" => 1, "3" => 1, "4" => 1, "5" => 1 })
         end
       end

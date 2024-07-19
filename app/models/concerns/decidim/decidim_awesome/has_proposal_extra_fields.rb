@@ -9,7 +9,11 @@ module Decidim
         has_one :extra_fields, foreign_key: "decidim_proposal_id", class_name: "Decidim::DecidimAwesome::ProposalExtraField", dependent: :destroy
 
         after_save do |proposal|
-          proposal.extra_fields.save if proposal.extra_fields && proposal.extra_fields.changed?
+          if proposal.extra_fields && proposal.extra_fields.changed?
+            proposal.extra_fields.save
+            proposal.update_vote_weights
+            proposal.reload
+          end
         end
 
         delegate :private_body=, to: :safe_extra_fields
@@ -40,17 +44,21 @@ module Decidim
           @all_vote_weights ||= self.class.all_vote_weights_for(component)
         end
 
-        def update_vote_weights!
+        def update_vote_weights
           votes = Decidim::Proposals::ProposalVote.where(proposal: self)
           safe_extra_fields.vote_weight_totals = {}
           votes.each do |vote|
             safe_extra_fields.vote_weight_totals[vote.weight] ||= 0
             safe_extra_fields.vote_weight_totals[vote.weight] += 1
           end
-          safe_extra_fields.save!
-          self.extra_fields = safe_extra_fields
           @vote_weights = nil
           @all_vote_weights = nil
+        end
+
+        def update_vote_weights!
+          update_vote_weights
+          safe_extra_fields.save!
+          self.extra_fields = safe_extra_fields
         end
 
         def safe_extra_fields

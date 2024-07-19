@@ -28,6 +28,7 @@ shared_examples "do not have menu link" do |item|
 end
 
 shared_examples "forbids disabled feature" do
+  render_views
   let(:feature) { :menu }
   let(:features) { [feature] }
   before do
@@ -39,7 +40,6 @@ shared_examples "forbids disabled feature" do
   it "redirects with error" do
     action
 
-    expect(flash[:alert]).not_to be_empty
-    expect(response).to redirect_to("/admin/")
+    expect(response.body).to eq("no permissions for #{key}")
   end
 end
