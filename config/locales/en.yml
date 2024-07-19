@@ -55,8 +55,6 @@ en:
         target: Opens in
         url: URL
         visibility: Visibility
-      proposal:
-        proposal_custom_fields: Custom fields
   decidim:
     admin:
       actions:
@@ -301,8 +299,11 @@ en:
                 - \"myapp.custom_fields.bio\" instead of \"Biography\""
               proposal_private_custom_fields: Similar as public fields, but this information
                 won't be disclosed publicly (only admins will have access to it).
-              proposal_private_custom_fields_disclosure: This information won't be
-                published
+              proposal_private_custom_fields_translations: |
+                Private custom fields are displayed in distinct box with this information text:
+                %{warning}
+                This text can be customized with a custom translation by using the key:
+                %{key}
               scoped_admins: Promote regular user to admins that can only administrate
                 certain parts of the public web (use the restrictions editor for that).
                 Note that users who already have regular admin permissions will be
@@ -553,6 +554,7 @@ en:
           show:
             view_meeting: View meeting
             view_proposal: View proposal
+      proposal_private_custom_fields_disclosure: This information won't be published
       validators:
         too_much_caps: Is using too many capital letters (over %{percent}% of the
           text)

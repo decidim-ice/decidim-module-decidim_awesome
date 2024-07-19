@@ -1,12 +1,10 @@
 .decidim_awesome-custom_fields {
-  @apply relative;
-
   &.private_body {
     @apply px-4 py-6 mt-8 border border-gray rounded-s rounded-ee bg-gray-5 text-black font-normal;
   }
 
   .private_body-disclosure {
-    @apply absolute -top-6 h-6 right-[-1px] m-0 z-10 px-2 pt-1 pb-0.5 bg-gray-5 border-x border-t border-solid rounded-tl-lg;
+    @apply -mt-4 mb-8 text-lg italic;
   }
 
   // styles to tune a bit the form presentation in proposals creation

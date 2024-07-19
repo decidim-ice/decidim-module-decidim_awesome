@@ -5,7 +5,7 @@ $(() => {
   window.DecidimAwesome.PrivateCustomFieldsRenderer = window.DecidimAwesome.PrivateCustomFieldsRenderer || new CustomFieldsRenderer();
 
   // use admin multilang specs if exists
-  let $el = $("proposal_custom_field:first", ".tabs-title.is-active");
+  let $el = $(".proposal_custom_field:first", ".tabs-title.is-active");
   if (!$el.length) {
     $el = $(".proposal_custom_field:first");
   }

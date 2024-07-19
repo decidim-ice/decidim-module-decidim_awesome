@@ -5,7 +5,14 @@
 <div class="form__wrapper row column decidim_awesome-form">
   <% if config_enabled? config_var %>
     <% if priv %>
-      <p class="help-text text-alert"><%= t("help.#{config_var}", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+      <div>
+        <p class="help-text text-alert"><%= t("help.#{config_var}", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+        <p class="help-text"><%= t("help.#{config_var}_translations",
+            scope: "decidim.decidim_awesome.admin.config.form",
+            warning: content_tag(:i, t("decidim.decidim_awesome.proposal_private_custom_fields_disclosure")),
+            key: content_tag("code", "decidim.decidim_awesome.proposal_private_custom_fields_disclosure")
+          ).html_safe %></p>
+      </div>
     <% else %>
       <div class="colors-help">
         <p class="help-text"><%= t("help.#{config_var}", scope: "decidim.decidim_awesome.admin.config.form") %></p>

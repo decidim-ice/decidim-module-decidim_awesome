@@ -41,9 +41,9 @@ module Decidim
 
           # replace admin method to draw the editor (multi lang)
           def admin_editor_for_proposal_body(form)
-            custom_fields = awesome_proposal_custom_fields
+            custom_fields = awesome_proposal_custom_fields_for(:body)
 
-            return form.translated(:editor, :body, hashtaggable: true) if custom_fields.blank?
+            return if custom_fields.empty?
 
             locales = form.send(:locales)
             return render_proposal_custom_fields_override(custom_fields, form, "body_#{locales.first}", locales.first) if locales.length == 1
@@ -51,12 +51,10 @@ module Decidim
             tabs_id = form.send(:sanitize_tabs_selector, form.options[:tabs_id] || "#{form.object_name}-body-tabs")
 
             label_tabs = form.content_tag(:div, class: "label--tabs") do
-              field_label = form.send(:label_i18n, "body", form.label_for("proposal_custom_fields"), required: form.options[:required])
-
               language_selector = "".html_safe
               language_selector = form.create_language_selector(locales, tabs_id, "body") if form.options[:label] != false
 
-              safe_join [field_label, language_selector]
+              safe_join [content_tag("label"), language_selector]
             end
 
             tabs_content = form.content_tag(:div, class: "tabs-content", data: { tabs_content: tabs_id }) do
