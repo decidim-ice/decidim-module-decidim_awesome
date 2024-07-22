@@ -18,7 +18,7 @@ module Decidim
       end
 
       def present?
-        !empty?
+        !@fields.empty?
       end
 
       def apply_xml(xml)

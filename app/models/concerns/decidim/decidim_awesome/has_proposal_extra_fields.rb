@@ -63,7 +63,7 @@ module Decidim
         end
 
         def safe_extra_fields
-          @safe_extra_fields ||= (persisted? && reload.extra_fields) || build_extra_fields
+          @safe_extra_fields ||= (persisted? && extra_fields && extra_fields.reload) || build_extra_fields(vote_weight_totals: {})
         end
 
         # collects all different weights stored along the different proposals in a different component

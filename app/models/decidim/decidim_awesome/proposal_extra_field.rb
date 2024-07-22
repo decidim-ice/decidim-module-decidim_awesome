@@ -16,6 +16,15 @@ module Decidim
 
       # validate not more than one extra field can be associated to a proposal
       # validates :proposal, uniqueness: true
+      validate :no_more_than_one_extra_field
+
+      private
+
+      def no_more_than_one_extra_field
+        return unless ProposalExtraField.where(proposal:).where.not(id:).exists?
+
+        errors.add(:proposal, :invalid)
+      end
     end
   end
 end
