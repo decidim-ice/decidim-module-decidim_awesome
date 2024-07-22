@@ -40,6 +40,7 @@ module Decidim
         # rubocop:disable Rails/SkipsModelValidations
         extra_fields.update_column(:vote_weight_totals, 100)
         # rubocop:enable Rails/SkipsModelValidations
+        proposal.reload
         expect(cache1).not_to eq(subject.send(:cache_hash))
       end
     end

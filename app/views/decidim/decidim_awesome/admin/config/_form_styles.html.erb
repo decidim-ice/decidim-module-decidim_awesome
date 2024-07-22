@@ -13,7 +13,7 @@
     </div>
 
     <% form.object.scoped_styles&.each do |key, value| %>
-      <div class="scoped_styles_container p-4" data-key="<%= key %>">
+      <div class="scoped_styles_container p-4 js-box-container" data-key="<%= key %>">
         <%= render(partial: "decidim/decidim_awesome/admin/config/autoedit_box_label", locals: { var: "scoped_styles", key: key, scope: "scoped_style_#{key}", delete_path: decidim_admin_decidim_awesome.scoped_style_path(key: key) }) %>
         <p class="form-error is-visible" id="custom-style-error-<%= key %>"><%= errors[key.to_sym].join("<br>") if errors %></p>
         <%= text_area_tag key, value, name: "config[scoped_styles][#{key}]", rows: 5 %>

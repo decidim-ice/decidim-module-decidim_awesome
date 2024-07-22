@@ -17,6 +17,10 @@ module Decidim
         @fields.empty?
       end
 
+      def present?
+        !empty?
+      end
+
       def apply_xml(xml)
         parse_xml(xml)
         map_fields!

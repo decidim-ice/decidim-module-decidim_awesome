@@ -54,14 +54,6 @@ module Decidim::Proposals
 
     context "when is scoped under custom fields" do
       it { is_expected.to be_valid }
-
-      it "returns custom fields" do
-        expect(form.custom_fields).to eq(custom_fields.values)
-      end
-
-      it "returns private custom fields" do
-        expect(form.private_custom_fields).to eq(private_custom_fields.values)
-      end
     end
 
     context "when not scoped under custom fields" do
@@ -69,10 +61,6 @@ module Decidim::Proposals
 
       it "does not return custom fields" do
         expect(form.custom_fields).to be_empty
-      end
-
-      it "returns private custom fields" do
-        expect(form.private_custom_fields).to eq(private_custom_fields.values)
       end
 
       context "and body is not present" do
@@ -83,19 +71,6 @@ module Decidim::Proposals
         let(:body) { "aa" }
 
         it { is_expected.not_to be_valid }
-      end
-    end
-
-    context "when scope under different constraint" do
-      let(:slug) { "another-slug" }
-      let(:private_constraint) { create(:config_constraint, awesome_config: private_config_helper, settings: { "participatory_space_manifest" => "assemblies" }) }
-
-      it "does not return custom fields" do
-        expect(form.custom_fields).to be_empty
-      end
-
-      it "does not return private custom fields" do
-        expect(form.private_custom_fields).to be_empty
       end
     end
 

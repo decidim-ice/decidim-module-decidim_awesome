@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const attribute = target.dataset.var;
       const inputField = document.querySelector(`[name="config[${attribute}][${key}]"]`);
       const multipleField = document.querySelector(`[name="config[${attribute}][${key}][]"]`);
-      const container = document.querySelector(`[data-var="${attribute}"]`);
+      const container = document.querySelector(`.js-box-container[data-key="${key}"]`);
       const deleteBox = container.querySelector(".awesome-auto-delete");
 
       const rebuildLabel = (text, withScope) => {

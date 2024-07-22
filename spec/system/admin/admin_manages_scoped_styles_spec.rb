@@ -138,7 +138,7 @@ describe "Admin manages scoped styles" do
             expect(page).to have_content("Processes")
           end
 
-          within ".scoped_styles_container[data-key=\"bar\"]" do
+          within ".scoped_styles_container[data-key=\"bar\"] .constraints-editor" do
             click_link_or_button "Delete"
           end
 
