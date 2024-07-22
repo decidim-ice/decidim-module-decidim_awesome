@@ -111,7 +111,9 @@ module Decidim
           if DecidimAwesome.enabled?(:proposal_custom_fields, :proposal_private_custom_fields)
             Decidim::Proposals::ApplicationHelper.include(Decidim::DecidimAwesome::Proposals::ApplicationHelperOverride)
             Decidim::AmendmentsHelper.include(Decidim::DecidimAwesome::AmendmentsHelperOverride)
-            Decidim::Proposals::ProposalSerializer.include(Decidim::DecidimAwesome::ProposalSerializerDecorator)
+          end
+          if DecidimAwesome.enabled?(:proposal_custom_fields, :proposal_private_custom_fields, :weighted_proposal_voting)
+            Decidim::Proposals::ProposalSerializer.include(Decidim::DecidimAwesome::Proposals::ProposalSerializerOverride)
           end
 
           if DecidimAwesome.enabled?(:weighted_proposal_voting)

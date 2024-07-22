@@ -8,10 +8,10 @@ module Decidim
       module ProposalPresenterOverride
         extend ActiveSupport::Concern
         included do
-          def private_body(links: false, extras: true, strip_tags: false, all_locales: false)
+          def private_body(*)
             return unless proposal
 
-            content_handle_locale(proposal.private_body, all_locales, extras, links, strip_tags)
+            proposal.private_body
           end
         end
       end

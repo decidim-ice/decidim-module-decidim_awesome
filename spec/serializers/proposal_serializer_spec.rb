@@ -77,7 +77,8 @@ module Decidim::Proposals
           }
         end
         let!(:config) { create(:awesome_config, organization: participatory_process.organization, var: :proposal_custom_fields, value: custom_fields) }
-        let!(:constraint) { create(:config_constraint, awesome_config: config, settings: { "participatory_space_manifest" => "participatory_processes", "participatory_space_slug" => participatory_process.slug }) }
+        let!(:constraint) { create(:config_constraint, awesome_config: config, settings: { "participatory_space_manifest" => "participatory_processes", "participatory_space_slug" => slug }) }
+        let(:slug) { participatory_process.slug }
 
         before do
           # rubocop:disable Rails/SkipsModelValidations:
@@ -87,8 +88,16 @@ module Decidim::Proposals
           # rubocop:enable Rails/SkipsModelValidations:
         end
 
-        it "serializes custom fields in field/:name/:locale column" do
-          expect(serialized).to include("field/age/en": "12")
+        it "serializes custom fields in body/:name/:locale column" do
+          expect(serialized).to include("body/age/en": "12")
+        end
+
+        context "when not in scope" do
+          let(:slug) { "another-slug" }
+
+          it "does not serialize custom fields" do
+            expect(serialized).not_to include("body/age/en")
+          end
         end
       end
 

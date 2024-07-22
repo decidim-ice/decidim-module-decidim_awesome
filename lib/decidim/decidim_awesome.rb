@@ -13,8 +13,6 @@ require "decidim/decidim_awesome/iframe_component/admin_engine"
 require "decidim/decidim_awesome/iframe_component/component"
 require "decidim/decidim_awesome/content_parsers/editor_images_parser"
 require "decidim/decidim_awesome/proposal_component/component"
-require "decidim/decidim_awesome/proposal_component/proposal_presenter_override"
-require "decidim/decidim_awesome/proposal_component/proposal_serializer_decorator"
 
 # Engines to handle logic unrelated to participatory spaces or components
 Decidim.register_global_engine(
