@@ -150,6 +150,7 @@ module Decidim
               )
             end
           end
+
           if DecidimAwesome.enabled?(:additional_proposal_sortings)
             component.settings(:step) do |settings|
               settings.attribute(
@@ -158,6 +159,32 @@ module Decidim
                 include_blank: true,
                 choices: -> { (POSSIBLE_SORT_ORDERS + DecidimAwesome.possible_additional_proposal_sortings).uniq }
               )
+            end
+          end
+
+          if DecidimAwesome.enabled?(:proposal_private_custom_fields)
+            # Add to the "proposals" component an exporter that is not
+            # included in open-data to be able to export all private fields
+            # from the administration without exposing data to the frontend.
+            component.exports :awesome_private_proposals do |exports|
+              exports.collection do |component_instance, user|
+                space = component_instance.participatory_space
+
+                collection = Decidim::Proposals::Proposal
+                             .published
+                             .not_hidden
+                             .where(component: component_instance)
+                             .includes(:scope, :category, :component)
+
+                if space.user_roles(:valuator).where(user:).any?
+                  collection.with_valuation_assigned_to(user, space)
+                else
+                  collection
+                end
+              end
+
+              exports.include_in_open_data = false
+              exports.serializer Decidim::DecidimAwesome::Proposals::PrivateProposalSerializer
             end
           end
         end

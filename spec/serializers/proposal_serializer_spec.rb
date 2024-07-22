@@ -45,8 +45,6 @@ module Decidim::Proposals
     end
     let(:manifest) { :voting_cards }
 
-    let!(:proposals_component) { create(:component, manifest_name: "proposals", participatory_space: participatory_process) }
-
     describe "#serialize" do
       let(:serialized) { subject.serialize }
 
