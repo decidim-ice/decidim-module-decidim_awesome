@@ -140,7 +140,7 @@ shared_examples "basic rendering" do |enabled|
     end
 
     it "renders the home page" do
-      expect(page).to have_content("Home")
+      expect(page).to have_css(".home")
     end
 
     it "has DecidimAwesome object" do

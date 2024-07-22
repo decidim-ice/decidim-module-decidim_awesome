@@ -1,6 +1,15 @@
 CHANGELOG
 =========
 
+v0.11.1
+------
+
+Compatibility:
+  - Decidim v0.28.x
+
+Features:
+  - Added Private Custom Fields feature
+
 v0.11
 ------
 

@@ -131,6 +131,13 @@ Decidim::DecidimAwesome.configure do |config|
 end
 ```
 
+##### 11.1. Private Custom fields
+
+Similar to the custom fields feature, but only admins can see the content of the fields. This is useful for adding metadata to proposals that should not be visible to the public (such as contact data).
+Data is stored encrypted in the database.
+
+![Private Custom fields screenshot](examples/private_custom_fields.png)
+
 #### 12. Custom Redirections (or URL shortener feature)
 
 Admins can create custom paths that redirect to other places. Destinations can be internal absolute paths or external sites.

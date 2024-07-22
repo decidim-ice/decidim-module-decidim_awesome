@@ -589,7 +589,7 @@ en:
     proposals:
       admin:
         exports:
-          awesome_private_proposals: Private Data
+          awesome_private_proposals: Proposals with private data
       proposals:
         orders:
           az: A-Z (Alphabetical)
