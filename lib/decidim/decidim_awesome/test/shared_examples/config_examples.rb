@@ -27,7 +27,7 @@ shared_examples "do not have menu link" do |item|
   end
 end
 
-shared_examples "forbids disabled feature" do
+shared_examples "forbids disabled feature without redirect" do
   render_views
   let(:feature) { :menu }
   let(:features) { [feature] }
@@ -37,9 +37,27 @@ shared_examples "forbids disabled feature" do
     end
   end
 
-  it "redirects with error" do
+  it "fails with error" do
     action
 
-    expect(response.body).to eq("no permissions for #{key}")
+    expect(response.body).to eq("no permissions for #{feature}")
+  end
+end
+
+shared_examples "forbids disabled feature with redirect" do
+  render_views
+  let(:feature) { :menu }
+  let(:features) { [feature] }
+  before do
+    features.each do |feat|
+      allow(Decidim::DecidimAwesome.config).to receive(feat).and_return(:disabled)
+    end
+  end
+
+  it "fails with error" do
+    action
+
+    expect(flash[:alert]).not_to be_empty
+    expect(response).to redirect_to("/admin/")
   end
 end

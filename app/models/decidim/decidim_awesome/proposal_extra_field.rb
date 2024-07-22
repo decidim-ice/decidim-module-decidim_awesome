@@ -10,12 +10,12 @@ module Decidim
 
       self.table_name = "decidim_awesome_proposal_extra_fields"
 
-      belongs_to :proposal, foreign_key: "decidim_proposal_id", class_name: "Decidim::Proposals::Proposal"
+      belongs_to :proposal, foreign_key: "decidim_proposal_id", foreign_type: "decidim_proposal_type", polymorphic: true
 
       encrypt_attribute :private_body, type: :string
 
       # validate not more than one extra field can be associated to a proposal
-      validates :proposal, uniqueness: true
+      # validates :proposal, uniqueness: true
     end
   end
 end

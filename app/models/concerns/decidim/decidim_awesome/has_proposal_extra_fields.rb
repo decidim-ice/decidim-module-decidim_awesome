@@ -6,7 +6,8 @@ module Decidim
       extend ActiveSupport::Concern
 
       included do
-        has_one :extra_fields, foreign_key: "decidim_proposal_id", class_name: "Decidim::DecidimAwesome::ProposalExtraField", dependent: :destroy
+        has_one :extra_fields, as: :proposal, foreign_key: "decidim_proposal_id", foreign_type: "decidim_proposal_type", class_name: "Decidim::DecidimAwesome::ProposalExtraField",
+                               dependent: :destroy
 
         after_save do |proposal|
           if proposal.extra_fields && proposal.extra_fields.changed?
@@ -29,7 +30,7 @@ module Decidim
         end
 
         def weight_count(weight)
-          (extra_fields && extra_fields.vote_weight_totals[weight.to_s]) || 0
+          safe_extra_fields.vote_weight_totals[weight.to_s] || 0
         end
 
         def vote_weights

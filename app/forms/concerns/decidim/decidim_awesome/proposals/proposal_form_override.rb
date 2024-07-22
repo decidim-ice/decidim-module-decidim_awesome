@@ -2,7 +2,7 @@
 
 module Decidim
   module DecidimAwesome
-    module Admin
+    module Proposals
       module ProposalFormOverride
         extend ActiveSupport::Concern
 

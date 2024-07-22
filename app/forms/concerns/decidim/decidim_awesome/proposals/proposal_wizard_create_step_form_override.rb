@@ -8,10 +8,7 @@ module Decidim
         extend ActiveSupport::Concern
 
         included do
-          alias_method :decidim_original_map_model, :map_model
-
           clear_validators!
-          attribute :private_body, String
 
           validates :title, presence: true, etiquette: true
           validates :title, proposal_length: {
@@ -27,11 +24,6 @@ module Decidim
           }
 
           validate :body_is_not_bare_template, unless: ->(form) { form.override_validations? }
-
-          def map_model(model)
-            decidim_original_map_model(model)
-            self.private_body = model.private_body
-          end
 
           def override_validations?
             return false if context.current_component.settings.participatory_texts_enabled
@@ -49,10 +41,6 @@ module Decidim
 
           def custom_fields
             @custom_fields ||= awesome_config.collect_sub_configs_values("proposal_custom_field")
-          end
-
-          def private_custom_fields
-            @private_custom_fields ||= awesome_config.collect_sub_configs_values("proposal_private_custom_field")
           end
 
           def awesome_config

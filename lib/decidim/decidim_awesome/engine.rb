@@ -54,25 +54,32 @@ module Decidim
         end
 
         if DecidimAwesome.enabled?(:proposal_custom_fields, :proposal_private_custom_fields)
+          Decidim::Proposals::ProposalWizardCreateStepForm.include(Decidim::DecidimAwesome::Proposals::ProposalFormOverride)
+          Decidim::Proposals::Admin::ProposalForm.include(Decidim::DecidimAwesome::Proposals::ProposalFormOverride)
           Decidim::Proposals::ProposalPresenter.include(Decidim::DecidimAwesome::Proposals::ProposalPresenterOverride)
-          Decidim::Proposals::Admin::ProposalForm.include(Decidim::DecidimAwesome::Admin::ProposalFormOverride)
           Decidim::Proposals::CreateProposal.include(Decidim::DecidimAwesome::Proposals::CreateProposalOverride)
+          Decidim::Proposals::CreateCollaborativeDraft.include(Decidim::DecidimAwesome::Proposals::CreateCollaborativeDraftOverride)
           Decidim::Proposals::Admin::CreateProposal.include(Decidim::DecidimAwesome::Proposals::CreateProposalOverride)
           Decidim::Proposals::UpdateProposal.include(Decidim::DecidimAwesome::Proposals::UpdateProposalOverride)
+          Decidim::Proposals::UpdateCollaborativeDraft.include(Decidim::DecidimAwesome::Proposals::UpdateCollaborativeDraftOverride)
           Decidim::Proposals::Admin::UpdateProposal.include(Decidim::DecidimAwesome::Proposals::Admin::UpdateProposalOverride)
         end
 
-        # override user's admin property
-        Decidim::User.include(Decidim::DecidimAwesome::UserOverride) if DecidimAwesome.enabled?(:scoped_admins)
+        if DecidimAwesome.enabled?(:proposal_custom_fields, :proposal_private_custom_fields, :weighted_proposal_voting)
+          # add vote weight/private_body to proposals
+          Decidim::Proposals::Proposal.include(Decidim::DecidimAwesome::HasProposalExtraFields)
+          Decidim::Proposals::CollaborativeDraft.include(Decidim::DecidimAwesome::HasProposalExtraFields)
+        end
 
         if DecidimAwesome.enabled?(:weighted_proposal_voting)
           # add vote weight to proposal vote
           Decidim::Proposals::ProposalVote.include(Decidim::DecidimAwesome::HasVoteWeight)
-          # add vote weight cache to proposal
-          Decidim::Proposals::Proposal.include(Decidim::DecidimAwesome::HasProposalExtraFields)
           Decidim::Proposals::ProposalType.include(Decidim::DecidimAwesome::ProposalTypeOverride)
           Decidim::Proposals::ProposalLCell.include(Decidim::DecidimAwesome::ProposalLCellOverride)
         end
+
+        # override user's admin property
+        Decidim::User.include(Decidim::DecidimAwesome::UserOverride) if DecidimAwesome.enabled?(:scoped_admins)
 
         if DecidimAwesome.enabled?(:menu, :content_block_main_menu)
           Decidim::ContentBlocks::GlobalMenuCell.include(Decidim::DecidimAwesome::GlobalMenuCellOverride)

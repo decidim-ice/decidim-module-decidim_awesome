@@ -133,7 +133,7 @@ describe "Admin manages scoped admins" do
             expect(page).to have_content("Processes")
           end
 
-          within ".scoped_admins_container[data-key=\"bar\"]" do
+          within ".scoped_admins_container[data-key=\"bar\"] .constraints-list" do
             click_link_or_button "Delete"
           end
 

@@ -33,7 +33,7 @@ shared_examples "allows awesome access" do
 
   it "allows module access" do
     visit decidim_admin_decidim_awesome.config_path(:editors)
-    expect(page).to have_content("Tweaks for editors")
+    expect(page).to have_content("Tweaks for Editor Hacks")
   end
 end
 
