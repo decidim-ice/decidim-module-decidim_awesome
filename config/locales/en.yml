@@ -482,6 +482,7 @@ en:
         proposal_custom_fields:
           menu:
             title: Public fields
+          private_body: Private body
           proposal_private_custom_fields: Private fields
       amendments:
         modal:

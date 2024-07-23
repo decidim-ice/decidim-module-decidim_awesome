@@ -15,14 +15,6 @@
       @apply bg-background mr-2;
     }
 
-    &.private {
-      ul.frmb,
-      .form-wrap.form-builder .frmb li.form-field,
-      .form-wrap.form-builder .stage-wrap.empty {
-        // background-color: rgb(var(--alert-rgb) / 0.1);
-      }
-    }
-
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 

@@ -5,6 +5,18 @@
 
   .private_body-disclosure {
     @apply -mt-4 mb-8 text-lg italic;
+
+    svg {
+      @apply inline-block w-6 h-6 mr-2 align-bottom;
+    }
+  }
+
+  dt {
+    @apply font-sans font-semibold;
+  }
+
+  dd {
+    @apply px-0;
   }
 
   // styles to tune a bit the form presentation in proposals creation
@@ -33,12 +45,21 @@
       @apply font-sans font-semibold text-md mt-4;
     }
 
-    dd {
-      @apply px-0;
-    }
-
     p {
       @apply mt-4;
+    }
+
+    // replace tooltips javascript with css
+    label {
+      .tooltip-element {
+        @apply m-0 p-0 invisible block;
+
+        &::before {
+          @apply visible text-xs text-gray-2 italic font-thin;
+
+          content: attr(tooltip);
+        }
+      }
     }
 
     .form-group:not(:first-of-type) {

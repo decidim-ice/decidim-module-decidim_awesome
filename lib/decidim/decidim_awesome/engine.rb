@@ -270,6 +270,7 @@ module Decidim
         Decidim.icons.register(name: "pulse", icon: "pulse-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "fire", icon: "fire-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "line-chart-line", icon: "line-chart-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "spy", icon: "spy-fill", category: "system", description: "", engine: :decidim_awesome)
       end
     end
   end

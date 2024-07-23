@@ -1,0 +1,13 @@
+<div class="card-section" data-component="accordion" id="accordion-private_body">
+  <button class="card-divider-button" data-controls="panel-private_body" type="button">
+    <%= icon "arrow-right-s-line" %>
+    <h2 class="card-title">
+      <%= t "decidim.decidim_awesome.admin.proposal_custom_fields.private_body" %>
+    </h2>
+  </button>
+  <div id="panel-private_body">
+    <div class="component__show_notes-grid">
+      <%= Decidim::ContentProcessor.render_without_format(render_sanitized_content(proposal, :private_body)).html_safe %>
+    </div>
+  </div>
+</div>

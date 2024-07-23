@@ -1,6 +1,6 @@
 <div class="decidim_awesome-custom_fields <%= name %>">
   <% if name == :private_body %>
-    <p class="private_body-disclosure help-text"><%= t("decidim.decidim_awesome.proposal_private_custom_fields_disclosure") %></p>
+    <p class="private_body-disclosure help-text"><%= icon "spy" %><%= t("decidim.decidim_awesome.proposal_private_custom_fields_disclosure") %></p>
   <% end %>
   <div class="proposal_custom_field proposal_custom_field--<%= name %>" id="proposal-custom-field-<%= name %>" data-spec="<%= spec.to_json %>" data-editor-options="<%= editor_options[:editor].to_json %>" data-name="<%= "#{form.object_name}[#{name}]" %>">
     <div class="loading-spinner"></div>
