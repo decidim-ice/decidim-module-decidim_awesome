@@ -6,6 +6,7 @@ es:
         additional_proposal_sortings: Habilitar opciones de ordenación adicionales
         allow_images_in_editors: Permitir imágenes en el editor HTML
         allow_images_in_proposals: Permitir imágenes en el editor de propuestas
+        allow_videos_in_editors: Permitir vídeos en el editor HTML
         auto_save_forms: Guardar automáticamente los formularios en el almacenamiento local
         intergram_auto_no_response: Un mensaje que se envía un minuto después de que la usuaria haya enviado su primer mensaje y no se haya recibido respuesta
         intergram_auto_response: Un mensaje que se envía inmediatamente después de que la usuaria envíe su primer mensaje
@@ -45,8 +46,6 @@ es:
         target: Abrir en
         url: URL
         visibility: Visibilidad
-      proposal:
-        proposal_custom_fields: Campos personalizados
   decidim:
     admin:
       actions:
@@ -250,14 +249,19 @@ es:
               body: Validaciones de entrada de usuario para el campo "cuerpo"
               title: Validaciones de entrada de usuario para el campo "título"
           form_proposal_custom_fields:
+            delete: Eliminar
             new: Añadir una nueva caja de "campos personalizados"
             remove: Eliminar esta caja de "campos personalizados"
             sure_to_remove: '¿Estás segura de que quieres eliminar esta caja de campos personalizados?'
+          form_proposal_private_custom_fields:
+            delete: Eliminar
           form_scoped_admins:
+            delete: Eliminar
             new: Añadir un nuevo grupo de "Administradoras acotadas"
             remove: Eliminar este grupo de "Administradoras acotadas"
             sure_to_remove: '¿Estás segura de que quieres eliminar este grupo de "administradoras acotadas"?'
           form_scoped_styles:
+            delete: Eliminar
             new: Añadir una nueva caja CSS
             remove: Eliminar esta caja CSS
             sure_to_remove: '¿Estás segura de que quieres eliminar esta caja CSS?'
@@ -267,6 +271,16 @@ es:
             title: Ajustes para %{setting}
             update: Actualizar la configuración
           system: En todas partes excepto en espacios participativos
+          title:
+            admins: Administradoras acotadas
+            checks: Compatibilidad del sistema
+            custom_redirects: Redirecciones personalizadas
+            editors: Modificaciones a los editores
+            livechat: Chat en vivo
+            menu_hacks: Ajustes en el menú
+            proposals: Modificaciones a las propuestas
+            styles: Estilos personalizados
+            surveys: Encuestas y formularios
           update:
             error: '¡Error actualizando la configuración! %{error}'
             success: Configuración actualizada correctamente
