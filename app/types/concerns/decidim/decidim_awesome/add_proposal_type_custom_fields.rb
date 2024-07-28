@@ -21,11 +21,11 @@ module Decidim
         # Override the NeedsAwesomeConfig's awesome_config_instance,
         # to take context from proposal instead of controller's request.
         def awesome_config_instance
-          return @config if @config
+          return @custom_config if @custom_config
 
-          @config = Config.new(object.organization)
-          @config.context_from_component(object.component)
-          @config
+          @custom_config = Config.new(object.organization)
+          @custom_config.context_from_component(object.component)
+          @custom_config
         end
 
         private

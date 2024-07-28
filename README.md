@@ -131,7 +131,51 @@ Decidim::DecidimAwesome.configure do |config|
 end
 ```
 
-##### 11.1. Private Custom fields
+##### 11.1. GraphQL types for custom fields
+
+#### 11.1. GraphQL types for custom fields
+
+Custom fields are displayed in the GaphQL API according to their definition in a formatted array of objects in the attribute `bodyFields`.
+
+A query to extract this information could look like this (see that the original `body` is also available):
+
+```graphql
+{
+  component(id: 999) {
+    ... on Proposals {
+      proposals {
+        edges {
+          node {
+            id
+            bodyFields {
+              locales
+              translation(locale: "en")
+              translations {
+                locale
+                fields
+                machineTranslated
+              }
+            }
+            body {
+              locales
+              translations {
+                locale
+                text
+                machineTranslated
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+You can then use this custom type in your GraphQL queries and mutations to handle the custom fields in proposals.
+
+
+##### 11.2. Private Custom fields
 
 Similar to the custom fields feature, but only admins can see the content of the fields. This is useful for adding metadata to proposals that should not be visible to the public (such as contact data).
 Data is stored encrypted in the database.
@@ -143,7 +187,7 @@ Data is stored encrypted in the database.
 Admins can create custom paths that redirect to other places. Destinations can be internal absolute paths or external sites.
 There's also possible to choose to sanitize (ie: remove) any query string or to maintain it (so you can decide to use).
 
-For instance you can create a redirection like 
+For instance you can create a redirection like
 
 * `/take-me-somewhere` => `/processes/canary-islands`
 
@@ -291,6 +335,28 @@ This is the Decidim cell used to provide the metadata that is rendered at the bo
 
 What this cell must do is to provide an array of items to render as part of the cell footer. Check the example used at the [voting cards implementation](app/cells/decidim/decidim_awesome/voting/proposal_metadata_cell.rb) for reference.
 
+##### 16.1 GraphQL Types for weighted voting
+
+When a weighed voting mechanism is selected, the GraphQL API will show those weights separated in each proposal.
+The attribute that holds this information is `vote_weights`, a query example could look like this:
+
+```graphql
+{
+  component(id: 999) {
+    ... on Proposals {
+      proposals {
+        edges {
+          node {
+            id
+            voteWeights
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 #### 17. Limiting amendments in proposals
 
 By default, when proposals can be amended, any number of amendments can be created.
@@ -329,7 +395,7 @@ Go to `yourdomain/admin/decidim_awesome` and start tweaking things!
 > **EXPERTS ONLY**
 >
 > Under the hood, when running `bundle exec rails decidim:upgrade` the `decidim-decidim_awesome` gem will run the following two tasks (that can also be run manually if you consider):
-> 
+>
 > ```bash
 > bin/rails decidim_decidim_awesome:install:migrations
 > bin/rails decidim_decidim_awesome:webpacker:install
@@ -367,11 +433,11 @@ Depending on your Decidim version, choose the corresponding Awesome version to e
 | 0.6.x | 0.22.x, 0.23.x |
 | 0.5.x | 0.21.x, 0.22.x |
 
-> *Heads up!* 
+> *Heads up!*
 > * version 0.11.0 is only compatible with Decidim v0.28 as a major redesign makes backward compatibility impractical.
 > * version 0.10.0 requires database migrations! Don't forget the migrations step when updating.
 > * version 0.8.0 removes CSS Themes for tenants. If you have been using them you will have to manually migrate them to custom styles.
-> * version 0.8.0 uses ActiveStorage, same as Decidim 0.25. 2 new rake task have been introduced to facilitate the migration: `bin/rails decidim_awesome:active_storage_migrations:check_migration_from_carrierwave` and 
+> * version 0.8.0 uses ActiveStorage, same as Decidim 0.25. 2 new rake task have been introduced to facilitate the migration: `bin/rails decidim_awesome:active_storage_migrations:check_migration_from_carrierwave` and
 `bin/rails decidim_awesome:active_storage_migrations:migrate_from_carrierwave`
 > * version 0.7.1 requires database migrations! Don't forget the migrations step when updating.
 
@@ -493,8 +559,8 @@ However, this project works with different versions of Decidim. In order to test
 You can run run tests against the legacy Decidim versions by using:
 
 ```bash
-export DATABASE_USERNAME=<username> 
-export DATABASE_PASSWORD=<password> 
+export DATABASE_USERNAME=<username>
+export DATABASE_PASSWORD=<password>
 RBENV_VERSION=3.1.1 BUNDLE_GEMFILE=Gemfile.legacy bundle
 RBENV_VERSION=3.1.1 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rake test_app
 RBENV_VERSION=3.1.1 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rspec
