@@ -46,8 +46,6 @@ cs:
         target: Otevře se v
         url: URL
         visibility: Viditelnost
-      proposal:
-        proposal_custom_fields: Vlastní pole
   decidim:
     admin:
       actions:
@@ -251,14 +249,19 @@ cs:
               body: Ověření vstupu uživatele pro pole "tělo"
               title: Ověření uživatelem pro pole "Název"
           form_proposal_custom_fields:
+            delete: Smazat
             new: Přidat nové pole "vlastní pole"
             remove: Odstranit toto "vlastní pole"
             sure_to_remove: Opravdu chcete zničit toto pole?
+          form_proposal_private_custom_fields:
+            delete: Smazat
           form_scoped_admins:
+            delete: Smazat
             new: Přidání nové skupiny "Škálovaní administrátoři"
             remove: Odstranit tuto skupinu "Škálovaní administrátoři""
             sure_to_remove: Opravdu chcete zničit tuto skupinu "Škálovaní administrátoři"?
           form_scoped_styles:
+            delete: Smazat
             new: Přidat nový CSS box
             remove: Odstranit tento CSS box
             sure_to_remove: Opravdu chcete zničit tento CSS box?
@@ -268,6 +271,16 @@ cs:
             title: Vylepšení pro %{setting}
             update: Aktualizace konfigurace
           system: Všude kromě participačních prostor
+          title:
+            admins: Škálovaní administrátoři
+            checks: Systémová kompatibilita
+            custom_redirects: Vlastní přesměrování
+            editors: Hack editoru
+            livechat: Live Chat
+            menu_hacks: Vylepšení menu
+            proposals: Návrhy hacků
+            styles: Vlastní styly
+            surveys: Průzkumy a formuláře
           update:
             error: Chyba při aktualizaci konfigurace! %{error}
             success: Konfigurace byla úspěšně aktualizována
