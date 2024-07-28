@@ -32,40 +32,57 @@ module Decidim
         Decidim::ViewModel.include(Decidim::DecidimAwesome::AwesomeHelpers)
 
         # Override EtiquetteValidator
-        EtiquetteValidator.include(Decidim::DecidimAwesome::EtiquetteValidatorOverride) if DecidimAwesome.enabled?([:validate_title_max_caps_percent,
-                                                                                                                    :validate_title_max_marks_together,
-                                                                                                                    :validate_title_start_with_caps,
-                                                                                                                    :validate_body_max_caps_percent,
-                                                                                                                    :validate_body_max_marks_together,
-                                                                                                                    :validate_body_start_with_caps])
+        EtiquetteValidator.include(Decidim::DecidimAwesome::EtiquetteValidatorOverride) if DecidimAwesome.enabled?(:validate_title_max_caps_percent,
+                                                                                                                   :validate_title_max_marks_together,
+                                                                                                                   :validate_title_start_with_caps,
+                                                                                                                   :validate_body_max_caps_percent,
+                                                                                                                   :validate_body_max_marks_together,
+                                                                                                                   :validate_body_start_with_caps)
 
         # Custom fields need to deal with several places
-        if DecidimAwesome.enabled?([:proposal_custom_fields,
-                                    :validate_title_min_length,
-                                    :validate_title_max_caps_percent,
-                                    :validate_title_max_marks_together,
-                                    :validate_title_start_with_caps,
-                                    :validate_body_min_length,
-                                    :validate_body_max_caps_percent,
-                                    :validate_body_max_marks_together,
-                                    :validate_body_start_with_caps])
+        if DecidimAwesome.enabled?(:proposal_custom_fields,
+                                   :proposal_private_custom_fields,
+                                   :validate_title_min_length,
+                                   :validate_title_max_caps_percent,
+                                   :validate_title_max_marks_together,
+                                   :validate_title_start_with_caps,
+                                   :validate_body_min_length,
+                                   :validate_body_max_caps_percent,
+                                   :validate_body_max_marks_together,
+                                   :validate_body_start_with_caps)
           Decidim::Proposals::ProposalWizardCreateStepForm.include(Decidim::DecidimAwesome::Proposals::ProposalWizardCreateStepFormOverride)
+        end
+
+        if DecidimAwesome.enabled?(:proposal_custom_fields, :proposal_private_custom_fields)
+          Decidim::Proposals::ProposalWizardCreateStepForm.include(Decidim::DecidimAwesome::Proposals::ProposalFormOverride)
+          Decidim::Proposals::Admin::ProposalForm.include(Decidim::DecidimAwesome::Proposals::ProposalFormOverride)
+          Decidim::Proposals::ProposalPresenter.include(Decidim::DecidimAwesome::Proposals::ProposalPresenterOverride)
+          Decidim::Proposals::CreateProposal.include(Decidim::DecidimAwesome::Proposals::CreateProposalOverride)
+          Decidim::Proposals::CreateCollaborativeDraft.include(Decidim::DecidimAwesome::Proposals::CreateCollaborativeDraftOverride)
+          Decidim::Proposals::Admin::CreateProposal.include(Decidim::DecidimAwesome::Proposals::CreateProposalOverride)
+          Decidim::Proposals::UpdateProposal.include(Decidim::DecidimAwesome::Proposals::UpdateProposalOverride)
+          Decidim::Proposals::UpdateCollaborativeDraft.include(Decidim::DecidimAwesome::Proposals::UpdateCollaborativeDraftOverride)
+          Decidim::Proposals::Admin::UpdateProposal.include(Decidim::DecidimAwesome::Proposals::Admin::UpdateProposalOverride)
+          Decidim::Proposals::ProposalType.include(Decidim::DecidimAwesome::AddProposalTypeCustomFields)
+        end
+
+        if DecidimAwesome.enabled?(:proposal_custom_fields, :proposal_private_custom_fields, :weighted_proposal_voting)
+          # add vote weight/private_body to proposals
+          Decidim::Proposals::Proposal.include(Decidim::DecidimAwesome::HasProposalExtraFields)
+          Decidim::Proposals::CollaborativeDraft.include(Decidim::DecidimAwesome::HasProposalExtraFields)
+        end
+
+        if DecidimAwesome.enabled?(:weighted_proposal_voting)
+          # add vote weight to proposal vote
+          Decidim::Proposals::ProposalVote.include(Decidim::DecidimAwesome::HasVoteWeight)
+          Decidim::Proposals::ProposalType.include(Decidim::DecidimAwesome::AddProposalTypeVoteWeights)
+          Decidim::Proposals::ProposalLCell.include(Decidim::DecidimAwesome::ProposalLCellOverride)
         end
 
         # override user's admin property
         Decidim::User.include(Decidim::DecidimAwesome::UserOverride) if DecidimAwesome.enabled?(:scoped_admins)
 
-        if DecidimAwesome.enabled?(:weighted_proposal_voting)
-          # add vote weight to proposal vote
-          Decidim::Proposals::ProposalVote.include(Decidim::DecidimAwesome::HasVoteWeight)
-          # add vote weight cache to proposal
-          Decidim::Proposals::Proposal.include(Decidim::DecidimAwesome::HasProposalExtraFields)
-          Decidim::Proposals::ProposalSerializer.include(Decidim::DecidimAwesome::ProposalSerializerOverride)
-          Decidim::Proposals::ProposalType.include(Decidim::DecidimAwesome::ProposalTypeOverride)
-          Decidim::Proposals::ProposalLCell.include(Decidim::DecidimAwesome::ProposalLCellOverride)
-        end
-
-        if DecidimAwesome.enabled?([:menu, :content_block_main_menu])
+        if DecidimAwesome.enabled?(:menu, :content_block_main_menu)
           Decidim::ContentBlocks::GlobalMenuCell.include(Decidim::DecidimAwesome::GlobalMenuCellOverride)
           Decidim::BreadcrumbHelper.include(Decidim::DecidimAwesome::BreadcrumbHelperOverride)
           Decidim::MenuPresenter.include(Decidim::DecidimAwesome::MenuPresenterOverride)
@@ -89,12 +106,15 @@ module Decidim
           Decidim::Admin::ApplicationController.include(Decidim::DecidimAwesome::ContentSecurityPolicy)
 
           # redirect unauthorized scoped admins to allowed places or custom redirects if configured
-          Decidim::ErrorsController.include(Decidim::DecidimAwesome::NotFoundRedirect) if DecidimAwesome.enabled?([:scoped_admins, :custom_redirects])
+          Decidim::ErrorsController.include(Decidim::DecidimAwesome::NotFoundRedirect) if DecidimAwesome.enabled?(:scoped_admins, :custom_redirects)
 
           # Custom fields need to deal with several places
-          if DecidimAwesome.enabled?(:proposal_custom_fields)
+          if DecidimAwesome.enabled?(:proposal_custom_fields, :proposal_private_custom_fields)
             Decidim::Proposals::ApplicationHelper.include(Decidim::DecidimAwesome::Proposals::ApplicationHelperOverride)
             Decidim::AmendmentsHelper.include(Decidim::DecidimAwesome::AmendmentsHelperOverride)
+          end
+          if DecidimAwesome.enabled?(:proposal_custom_fields, :proposal_private_custom_fields, :weighted_proposal_voting)
+            Decidim::Proposals::ProposalSerializer.include(Decidim::DecidimAwesome::Proposals::ProposalSerializerOverride)
           end
 
           if DecidimAwesome.enabled?(:weighted_proposal_voting)
@@ -131,6 +151,7 @@ module Decidim
               )
             end
           end
+
           if DecidimAwesome.enabled?(:additional_proposal_sortings)
             component.settings(:step) do |settings|
               settings.attribute(
@@ -139,6 +160,32 @@ module Decidim
                 include_blank: true,
                 choices: -> { (POSSIBLE_SORT_ORDERS + DecidimAwesome.possible_additional_proposal_sortings).uniq }
               )
+            end
+          end
+
+          if DecidimAwesome.enabled?(:proposal_private_custom_fields)
+            # Add to the "proposals" component an exporter that is not
+            # included in open-data to be able to export all private fields
+            # from the administration without exposing data to the frontend.
+            component.exports :awesome_private_proposals do |exports|
+              exports.collection do |component_instance, user|
+                space = component_instance.participatory_space
+
+                collection = Decidim::Proposals::Proposal
+                             .published
+                             .not_hidden
+                             .where(component: component_instance)
+                             .includes(:scope, :category, :component)
+
+                if space.user_roles(:valuator).where(user:).any?
+                  collection.with_valuation_assigned_to(user, space)
+                else
+                  collection
+                end
+              end
+
+              exports.include_in_open_data = false
+              exports.serializer Decidim::DecidimAwesome::Proposals::PrivateProposalSerializer
             end
           end
         end
@@ -224,6 +271,7 @@ module Decidim
         Decidim.icons.register(name: "pulse", icon: "pulse-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "fire", icon: "fire-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "line-chart-line", icon: "line-chart-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "spy", icon: "spy-fill", category: "system", description: "", engine: :decidim_awesome)
       end
     end
   end

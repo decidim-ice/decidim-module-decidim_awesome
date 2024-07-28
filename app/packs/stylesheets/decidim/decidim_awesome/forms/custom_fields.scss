@@ -1,89 +1,118 @@
 .decidim_awesome-custom_fields {
+  &.private_body {
+    @apply px-4 py-6 mt-8 border border-gray rounded-s rounded-ee bg-gray-5 text-black font-normal;
+  }
+
+  .private_body-disclosure {
+    @apply -mt-4 mb-8 text-lg italic;
+
+    svg {
+      @apply inline-block w-6 h-6 mr-2 align-bottom;
+    }
+  }
+
+  dt {
+    @apply font-sans font-semibold;
+  }
+
   dd {
     @apply px-0;
   }
-}
 
-// styles to tune a bit the form presentation in proposals creation
-.proposal_custom_field {
-  h1 {
-    @apply font-sans font-bold text-4xl mt-4;
-  }
+  // styles to tune a bit the form presentation in proposals creation
+  .proposal_custom_field {
+    h1 {
+      @apply font-sans font-bold text-4xl mt-4;
+    }
 
-  h2 {
-    @apply font-sans font-bold text-3xl mt-4;
-  }
+    h2 {
+      @apply font-sans font-bold text-3xl mt-4;
+    }
 
-  h3 {
-    @apply font-sans font-semibold text-2xl mt-4;
-  }
+    h3 {
+      @apply font-sans font-semibold text-2xl mt-4;
+    }
 
-  h4 {
-    @apply font-sans font-semibold text-xl mt-4;
-  }
+    h4 {
+      @apply font-sans font-semibold text-xl mt-4;
+    }
 
-  h5 {
-    @apply font-sans font-semibold text-lg mt-4;
-  }
+    h5 {
+      @apply font-sans font-semibold text-lg mt-4;
+    }
 
-  h6 {
-    @apply font-sans font-semibold text-md mt-4;
-  }
+    h6 {
+      @apply font-sans font-semibold text-md mt-4;
+    }
 
-  p {
-    @apply mt-4;
-  }
+    p {
+      @apply mt-4;
+    }
 
-  .form-group {
-    @apply mt-6;
-  }
+    // replace tooltips javascript with css
+    label {
+      .tooltip-element {
+        @apply m-0 p-0 invisible block;
 
-  .form-control {
-    @apply w-full block mt-4;
+        &::before {
+          @apply visible text-xs text-gray-2 italic font-thin;
 
-    &:not(.reset-defaults) {
-      @apply inline-block px-4 py-2 border border-gray outline outline-1 outline-transparent rounded bg-background-2 text-black font-normal placeholder:text-gray focus:outline-2 focus:outline-secondary disabled:bg-background-3 disabled:text-gray-2 disabled:cursor-not-allowed;
-
-      &.sm {
-        @apply px-1 py-0.5 text-sm;
-      }
-
-      &.sm-icon {
-        @apply pr-1 pl-6 py-0.5 text-sm;
-      }
-
-      &.is-invalid-input:not(:focus) {
-        @apply outline-2 outline-alert;
+          content: attr(tooltip);
+        }
       }
     }
 
-    /* read-only can be applied only to input and textarea, otherwise selects will be set as readonly */
-    &:not(select) {
-      @apply read-only:bg-background read-only:border-0 read-only:text-gray-2;
+    .form-group:not(:first-of-type) {
+      @apply mt-6;
     }
-  }
 
-  .formbuilder-checkbox {
-    > label {
-      @apply font-normal;
-    }
-  }
+    .form-control {
+      @apply w-full block mt-4;
 
-  .formbuilder-autocomplete {
-    @apply relative;
+      &:not(.reset-defaults) {
+        @apply inline-block px-4 py-2 border border-gray outline outline-1 outline-transparent rounded bg-background-2 text-black font-normal placeholder:text-gray focus:outline-2 focus:outline-secondary disabled:bg-background-3 disabled:text-gray-2 disabled:cursor-not-allowed;
 
-    .formbuilder-autocomplete-list {
-      @apply z-20 max-h-52 outline outline-1 outline-transparent rounded border border-gray text-black font-normal;
+        &.sm {
+          @apply px-1 py-0.5 text-sm;
+        }
 
-      li {
-        @apply cursor-pointer rounded px-4 py-2 bg-background-2;
+        &.sm-icon {
+          @apply pr-1 pl-6 py-0.5 text-sm;
+        }
 
-        &.active-option {
-          @apply bg-background;
+        &.is-invalid-input:not(:focus) {
+          @apply outline-2 outline-alert;
         }
       }
 
-      display: none;
+      /* read-only can be applied only to input and textarea, otherwise selects will be set as readonly */
+      &:not(select) {
+        @apply read-only:bg-background read-only:border-0 read-only:text-gray-2;
+      }
+    }
+
+    .formbuilder-checkbox {
+      > label {
+        @apply font-normal;
+      }
+    }
+
+    .formbuilder-autocomplete {
+      @apply relative;
+
+      .formbuilder-autocomplete-list {
+        @apply z-20 max-h-52 outline outline-1 outline-transparent rounded border border-gray text-black font-normal;
+
+        li {
+          @apply cursor-pointer rounded px-4 py-2 bg-background-2;
+
+          &.active-option {
+            @apply bg-background;
+          }
+        }
+
+        display: none;
+      }
     }
   }
 }

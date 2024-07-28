@@ -38,7 +38,8 @@ module Decidim
                         decidim_admin_decidim_awesome.config_path(:proposal_custom_fields),
                         position: 5,
                         icon_name: "layers",
-                        if: menus[:proposal_custom_fields]
+                        if: menus[:proposal_custom_fields],
+                        submenu: { target_menu: :custom_fields_submenu }
 
           menu.add_item :admins,
                         I18n.t("menu.admins", scope: "decidim.decidim_awesome.admin"),
@@ -77,6 +78,22 @@ module Decidim
         end
       end
 
+      def self.register_custom_fields_submenu!
+        Decidim.menu :custom_fields_submenu do |menu|
+          menu.add_item :proposal_custom_fields,
+                        I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.proposal_custom_fields"),
+                        decidim_admin_decidim_awesome.config_path(:proposal_custom_fields),
+                        position: 5.1,
+                        if: menus[:proposal_custom_fields]
+
+          menu.add_item :proposal_private_custom_fields,
+                        I18n.t("proposal_private_custom_fields", scope: "decidim.decidim_awesome.admin.proposal_custom_fields"),
+                        decidim_admin_decidim_awesome.config_path(:proposal_private_custom_fields),
+                        position: 5.2,
+                        if: menus[:proposal_private_custom_fields]
+        end
+      end
+
       def self.register_menu_hacks_submenu!
         Decidim.menu :menu_hacks_submenu do |menu|
           menu.add_item :main_menu,
@@ -95,31 +112,30 @@ module Decidim
 
       def self.menus
         @menus ||= {
-          editors: config_enabled?([:allow_images_in_editors, :allow_videos_in_editors]),
+          editors: config_enabled?(:allow_images_in_editors, :allow_videos_in_editors),
           proposals: config_enabled?(
-            [
-              :allow_images_in_proposals,
-              :validate_title_min_length, :validate_title_max_caps_percent,
-              :validate_title_max_marks_together, :validate_title_start_with_caps,
-              :validate_body_min_length, :validate_body_max_caps_percent,
-              :validate_body_max_marks_together, :validate_body_start_with_caps
-            ]
+            :allow_images_in_proposals,
+            :validate_title_min_length, :validate_title_max_caps_percent,
+            :validate_title_max_marks_together, :validate_title_start_with_caps,
+            :validate_body_min_length, :validate_body_max_caps_percent,
+            :validate_body_max_marks_together, :validate_body_start_with_caps
           ),
           surveys: config_enabled?(:auto_save_forms),
           styles: config_enabled?(:scoped_styles),
           proposal_custom_fields: config_enabled?(:proposal_custom_fields),
+          proposal_private_custom_fields: config_enabled?(:proposal_private_custom_fields),
           admins: config_enabled?(:scoped_admins),
-          menu_hacks: config_enabled?([:menu, :home_content_block_menu]),
+          menu_hacks: config_enabled?(:menu, :home_content_block_menu),
           menu_hacks_menu: config_enabled?(:menu),
           menu_hacks_home_content_block_menu: config_enabled?(:home_content_block_menu),
           custom_redirects: config_enabled?(:custom_redirects),
-          livechat: config_enabled?([:intergram_for_admins, :intergram_for_public])
+          livechat: config_enabled?(:intergram_for_admins, :intergram_for_public)
         }
       end
 
       # ensure boolean value
-      def self.config_enabled?(var)
-        DecidimAwesome.enabled?(var)
+      def self.config_enabled?(*vars)
+        DecidimAwesome.enabled?(*vars)
       end
     end
   end

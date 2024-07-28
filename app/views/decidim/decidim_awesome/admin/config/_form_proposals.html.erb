@@ -6,7 +6,7 @@
     </div>
   <% end %>
 
-  <% if config_enabled? :additional_proposal_sortings %>
+  <% if config_enabled?(:additional_proposal_sortings) %>
     <div class="row column">
       <h2 class="card-title"><%= t("additional_proposal_sortings.title", scope: "decidim.decidim_awesome.admin.config.form") %></h2>
     </div>
@@ -19,7 +19,7 @@
     </div>
   <% end %>
 
-  <% if config_enabled? %i(validate_title_min_length validate_title_max_caps_percent validate_title_max_marks_together validate_title_start_with_caps) %>
+  <% if config_enabled?(:validate_title_min_length, :validate_title_max_caps_percent, :validate_title_max_marks_together, :validate_title_start_with_caps) %>
     <div class="row column">
       <h2 class="card-title"><%= t("validators.title", scope: "decidim.decidim_awesome.admin.config.form") %></h2>
     </div>
@@ -31,7 +31,7 @@
       </div>
     <% end %>
 
-    <% if config_enabled? :validate_title_min_length %>
+    <% if config_enabled?(:validate_title_min_length) %>
       <div class="row column">
         <%= form.number_field :validate_title_min_length, help_text: t("help.validate_title_min_length", scope: "decidim.decidim_awesome.admin.config.form") %>
 
@@ -39,7 +39,7 @@
       </div>
     <% end %>
 
-    <% if config_enabled? :validate_title_max_caps_percent %>
+    <% if config_enabled?(:validate_title_max_caps_percent) %>
       <div class="row column">
       <%= form.number_field :validate_title_max_caps_percent, help_text: t("help.validate_title_max_caps_percent", scope: "decidim.decidim_awesome.admin.config.form") %>
 
@@ -47,7 +47,7 @@
       </div>
     <% end %>
 
-    <% if config_enabled? :validate_title_max_marks_together %>
+    <% if config_enabled?(:validate_title_max_marks_together) %>
       <div class="row column">
       <%= form.number_field :validate_title_max_marks_together, help_text: t("help.validate_title_max_marks_together", scope: "decidim.decidim_awesome.admin.config.form") %>
 
@@ -56,12 +56,12 @@
     <% end %>
   <% end %>
 
-  <% if config_enabled? %i(validate_body_min_length validate_body_max_caps_percent validate_body_max_marks_together validate_body_start_with_caps) %>
+  <% if config_enabled?(:validate_body_min_length, :validate_body_max_caps_percent, :validate_body_max_marks_together, :validate_body_start_with_caps) %>
     <div class="row column">
       <h2 class="card-title"><%= t("validators.body", scope: "decidim.decidim_awesome.admin.config.form") %></h2>
     </div>
 
-    <% if config_enabled? :validate_body_start_with_caps %>
+    <% if config_enabled?(:validate_body_start_with_caps) %>
       <div class="row column">
         <%= form.check_box :validate_body_start_with_caps %>
 
@@ -69,7 +69,7 @@
       </div>
     <% end %>
 
-    <% if config_enabled? :validate_body_min_length %>
+    <% if config_enabled?(:validate_body_min_length) %>
       <div class="row column">
         <%= form.number_field :validate_body_min_length, help_text: t("help.validate_body_min_length", scope: "decidim.decidim_awesome.admin.config.form") %>
 
@@ -77,7 +77,7 @@
       </div>
     <% end %>
 
-    <% if config_enabled? :validate_body_max_caps_percent %>
+    <% if config_enabled?(:validate_body_max_caps_percent) %>
       <div class="row column">
         <%= form.number_field :validate_body_max_caps_percent, help_text: t("help.validate_body_max_caps_percent", scope: "decidim.decidim_awesome.admin.config.form") %>
 
@@ -85,7 +85,7 @@
       </div>
     <% end %>
 
-    <% if config_enabled? :validate_body_max_marks_together %>
+    <% if config_enabled?(:validate_body_max_marks_together) %>
       <div class="row column">
         <%= form.number_field :validate_body_max_marks_together, help_text: t("help.validate_body_max_marks_together", scope: "decidim.decidim_awesome.admin.config.form") %>
 

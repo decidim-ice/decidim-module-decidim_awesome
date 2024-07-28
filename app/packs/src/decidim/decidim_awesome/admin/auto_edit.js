@@ -16,8 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const attribute = target.dataset.var;
       const inputField = document.querySelector(`[name="config[${attribute}][${key}]"]`);
       const multipleField = document.querySelector(`[name="config[${attribute}][${key}][]"]`);
-      const container = document.querySelector(`.${attribute}_container[data-key="${key}"]`);
-      const deleteBox = container.querySelector("#delete-box");
+      const container = document.querySelector(`.js-box-container[data-key="${key}"]`);
+      const deleteBox = container.querySelector(".awesome-auto-delete");
 
       const rebuildLabel = (text, withScope) => {
         target.innerText = text;
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.dispatchEvent(new CustomEvent("ajax:loaded:modals", { detail: [editModal, newModal] }));
       };
 
-      target.innerHTML = `<input class="awesome-auto-edit" data-scope="${scope}" type="text" value="${key}">`;
+      target.innerHTML = `<input class="awesome-auto-edit" data-scope="${scope}" type="text" size="${key.length}" value="${key}">`;
       const input = target.querySelector(`input.awesome-auto-edit[data-scope="${scope}"]`);
       link.style.display = "none";
       input.focus();

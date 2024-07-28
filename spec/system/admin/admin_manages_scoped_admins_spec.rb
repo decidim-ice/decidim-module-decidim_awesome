@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "decidim/decidim_awesome/test/shared_examples/box_label_editor"
+require "decidim/decidim_awesome/test/shared_examples/box_label_editor_examples"
 
 describe "Admin manages scoped admins" do
   let(:organization) { create(:organization) }
@@ -28,7 +28,7 @@ describe "Admin manages scoped admins" do
 
       expect(page).to have_admin_callout("created successfully")
 
-      expect(page).to have_no_content(user.name.to_s)
+      expect(page).not_to have_content(user.name.to_s)
       sleep 1
       page.execute_script("$('.multiusers-select:first').append(new Option('#{user.name}', #{user.id}, true, true)).trigger('change');")
 
@@ -41,7 +41,7 @@ describe "Admin manages scoped admins" do
 
   shared_examples "saves content" do |_key|
     it "updates succesfully" do
-      expect(page).to have_no_content(user.name.to_s)
+      expect(page).not_to have_content(user.name.to_s)
       expect(page).to have_content(user2.name.to_s)
       expect(page).to have_content(user3.name.to_s)
 
@@ -86,7 +86,7 @@ describe "Admin manages scoped admins" do
 
         expect(page).to have_admin_callout("removed successfully")
         expect(page).to have_content(user3.name.to_s)
-        expect(page).to have_no_content(user2.name.to_s)
+        expect(page).not_to have_content(user2.name.to_s)
         expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_admin_foo)).not_to be_present
         expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_admin_bar)).to be_present
       end
@@ -133,18 +133,18 @@ describe "Admin manages scoped admins" do
             expect(page).to have_content("Processes")
           end
 
-          within ".scoped_admins_container[data-key=\"bar\"]" do
+          within ".scoped_admins_container[data-key=\"bar\"] .constraints-list" do
             click_link_or_button "Delete"
           end
 
           within ".scoped_admins_container[data-key=\"bar\"] .constraints-editor" do
-            expect(page).to have_no_content("Processes")
+            expect(page).not_to have_content("Processes")
           end
 
           visit decidim_admin_decidim_awesome.config_path(:admins)
 
           within ".scoped_admins_container[data-key=\"bar\"] .constraints-editor" do
-            expect(page).to have_no_content("Processes")
+            expect(page).not_to have_content("Processes")
           end
 
           expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_admin_bar)).to be_present

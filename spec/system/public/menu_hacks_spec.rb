@@ -53,7 +53,7 @@ describe "Hacked menus" do
 
   it "renders the hacked menu" do
     within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
-      expect(page).to have_no_content("Home")
+      expect(page).not_to have_content("Home")
       expect(page).to have_content("Processes")
       expect(page).to have_content("Help")
       expect(page).to have_content("A new beggining")
@@ -119,7 +119,7 @@ describe "Hacked menus" do
 
       it "do not show the menu item" do
         within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
-          expect(page).to have_no_content("A new beggining")
+          expect(page).not_to have_content("A new beggining")
         end
       end
     end
@@ -129,7 +129,7 @@ describe "Hacked menus" do
 
       it "do not show the menu item" do
         within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
-          expect(page).to have_no_content("A new beggining")
+          expect(page).not_to have_content("A new beggining")
         end
       end
     end
@@ -159,7 +159,7 @@ describe "Hacked menus" do
 
         it "do not show the menu item" do
           within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
-            expect(page).to have_no_content("A new beggining")
+            expect(page).not_to have_content("A new beggining")
           end
         end
       end
@@ -179,7 +179,7 @@ describe "Hacked menus" do
 
         it "do not show the menu item" do
           within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
-            expect(page).to have_no_content("A new beggining")
+            expect(page).not_to have_content("A new beggining")
           end
         end
       end
@@ -208,7 +208,7 @@ describe "Hacked menus" do
 
           it "shows the item" do
             within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
-              expect(page).to have_no_content("A new beggining")
+              expect(page).not_to have_content("A new beggining")
             end
           end
         end
@@ -218,7 +218,7 @@ describe "Hacked menus" do
 
           it "shows the item" do
             within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
-              expect(page).to have_no_content("A new beggining")
+              expect(page).not_to have_content("A new beggining")
             end
           end
         end
@@ -303,8 +303,8 @@ describe "Hacked menus" do
             expect(page).to have_content("Home")
             expect(page).to have_content("Processes")
             expect(page).to have_content("Help")
-            expect(page).to have_no_content("A new beggining")
-            expect(page).to have_no_content("Blog")
+            expect(page).not_to have_content("A new beggining")
+            expect(page).not_to have_content("Blog")
           end
         end
 

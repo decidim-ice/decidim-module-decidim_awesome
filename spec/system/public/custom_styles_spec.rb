@@ -30,7 +30,7 @@ describe "Custom styles" do
 
   shared_examples "no extra css is added" do
     it "css is no present" do
-      expect(page.body).to have_no_content("body {background: red;}")
+      expect(page.body).not_to have_content("body {background: red;}")
     end
 
     it "css is not applyied" do

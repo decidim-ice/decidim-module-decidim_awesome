@@ -12,7 +12,7 @@ describe "Show proposals editor" do
            participatory_space: participatory_process)
   end
 
-  let!(:proposal) { create(:proposal, users: [user], component:) }
+  let!(:proposal) { create(:proposal, users: [user], skip_injection: true, component:) }
   let(:proposal_title) { translated(proposal.title) }
 
   let!(:user) { create(:user, :confirmed, organization:) }

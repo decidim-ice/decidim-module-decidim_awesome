@@ -16,8 +16,8 @@ module Decidim
 
         # returns only non :disabled vars in config
         def enabled_configs(vars)
-          vars.filter do |var|
-            config_enabled? var
+          vars.filter do |conf|
+            config_enabled?(conf)
           end
         end
 

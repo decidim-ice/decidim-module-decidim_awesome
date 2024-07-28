@@ -40,7 +40,7 @@ describe "Visit the admin page" do
 
     it "renders the page" do
       expect(page).to have_content(/System Compatibility Checks/i)
-      expect(page).to have_no_xpath("//span[@class='fill-alert']")
+      expect(page).not_to have_xpath("//span[@class='fill-alert']")
       expect(page).to have_xpath("//span[@class='fill-success']")
     end
 
@@ -64,7 +64,7 @@ describe "Visit the admin page" do
       it_behaves_like "has menu link", "editors"
 
       it "renders the page" do
-        expect(page).to have_content(/Tweaks for editors/i)
+        expect(page).to have_content(/Tweaks for Editor Hacks/i)
       end
     end
 
@@ -116,7 +116,7 @@ describe "Visit the admin page" do
         let(:disabled_features) { [:additional_proposal_sortings] }
 
         it "renders the page" do
-          expect(page).to have_no_content("Customize sorting options for the proposals list")
+          expect(page).not_to have_content("Customize sorting options for the proposals list")
         end
       end
 
@@ -125,7 +125,7 @@ describe "Visit the admin page" do
 
         it "renders the page" do
           expect(page).to have_content(/Tweaks for proposals/i)
-          expect(page).to have_no_content("\"Rich text editor for participants\" is enabled")
+          expect(page).not_to have_content("\"Rich text editor for participants\" is enabled")
         end
       end
 
@@ -133,7 +133,7 @@ describe "Visit the admin page" do
         let(:disabled_features) { [:validate_title_min_length, :validate_title_max_caps_percent, :validate_title_max_marks_together, :validate_title_start_with_caps] }
 
         it "does not show title options" do
-          expect(page).to have_no_content("User input validations for the \"title\" field")
+          expect(page).not_to have_content("User input validations for the \"title\" field")
           expect(page).to have_content("User input validations for the \"body\" field")
         end
       end
@@ -143,7 +143,7 @@ describe "Visit the admin page" do
 
         it "does not show body options" do
           expect(page).to have_content("User input validations for the \"title\" field")
-          expect(page).to have_no_content("User input validations for the \"body\" field")
+          expect(page).not_to have_content("User input validations for the \"body\" field")
         end
       end
     end
@@ -172,7 +172,7 @@ describe "Visit the admin page" do
       it_behaves_like "has menu link", "livechat"
 
       it "renders the page" do
-        expect(page).to have_content(/Tweaks for livechat/i)
+        expect(page).to have_content(/Tweaks for Live Chat/i)
       end
     end
 
@@ -192,7 +192,7 @@ describe "Visit the admin page" do
       it_behaves_like "has menu link", "styles"
 
       it "renders the page" do
-        expect(page).to have_content(/Tweaks for styles/i)
+        expect(page).to have_content(/Tweaks for Custom Styles/i)
       end
     end
 
@@ -264,7 +264,7 @@ describe "Visit the admin page" do
       it_behaves_like "has menu link", "admins"
 
       it "renders the page" do
-        expect(page).to have_content(/Tweaks for admins/i)
+        expect(page).to have_content(/Tweaks for Scoped Admins/i)
       end
     end
 
@@ -284,7 +284,7 @@ describe "Visit the admin page" do
       it_behaves_like "has menu link", "proposal_custom_fields"
 
       it "renders the page" do
-        expect(page).to have_content(/Tweaks for proposal_custom_fields/i)
+        expect(page).to have_content(/Tweaks for Proposals Custom Fields: Public fields/i)
       end
     end
 
@@ -294,6 +294,28 @@ describe "Visit the admin page" do
       end
 
       it_behaves_like "do not have menu link", "proposal_custom_fields"
+    end
+  end
+
+  context "when visiting private proposal custom fields" do
+    context "when private custom fields are enabled" do
+      before do
+        click_link_or_button "Private fields"
+      end
+
+      it_behaves_like "has menu link", "proposal_private_custom_fields"
+
+      it "renders the page" do
+        expect(page).to have_content(/Tweaks for Proposals Custom Fields: Private fields/i)
+      end
+    end
+
+    context "when private custom fields are disabled" do
+      let(:disabled_features) do
+        [:proposal_private_custom_fields]
+      end
+
+      it_behaves_like "do not have menu link", "proposal_private_custom_fields"
     end
   end
 end

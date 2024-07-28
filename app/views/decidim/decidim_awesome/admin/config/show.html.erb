@@ -1,15 +1,13 @@
 <div class="border-none item_show__header" style="margin-bottom: 0;">
   <h2 class="item_show__header-title p-4 bg-gray-6 rounded-t">
-    <%= t(".title", setting: config_var) %>
+    <%= t(".title", setting: t(config_var, scope: "decidim.decidim_awesome.admin.config.title")) %>
   </h2>
 </div>
 <div class="item__edit item__edit-1col">
   <div class="item__edit-form">
     <%= decidim_form_for(@form, method: :patch, url: decidim_admin_decidim_awesome.config_path(config_var), html: { class: "form-defaults awesome-edit-config" }, data: { "safe-path" => decidim_admin_decidim_awesome.config_path(config_var) }) do |f| %>
-      <div class="card pt-4">
-        <div class="card-section">
-          <%= render partial: "form_#{config_var}", locals: { form: f, errors: defined?(errors) ? errors : nil } %>
-        </div>
+      <div class="card-section">
+        <%= render "form_#{config_var}", form: f, errors: defined?(errors) ? errors : nil %>
       </div>
 
       <div class="item__edit-sticky">

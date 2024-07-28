@@ -81,7 +81,7 @@ describe "Scoped admin journeys" do
         click_link_or_button "I agree with the terms"
 
         expect(page).to have_content(welcome_text)
-        expect(page).to have_no_content("Please take a moment to review the admin terms of service.")
+        expect(page).not_to have_content("Please take a moment to review the admin terms of service.")
       end
     end
 

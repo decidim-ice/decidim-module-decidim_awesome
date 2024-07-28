@@ -62,8 +62,8 @@ describe "Custom proposals fields" do
         expect(page).to have_content(emendation.title["en"])
         click_link_or_button "Amend"
 
-        expect(page).to have_no_content("Currently, there's another amendment being evaluated for this proposal.")
-        expect(page).to have_no_content(proposal.title["en"])
+        expect(page).not_to have_content("Currently, there's another amendment being evaluated for this proposal.")
+        expect(page).not_to have_content(proposal.title["en"])
         expect(page).to have_content("Create Amendment Draft")
       end
     end
@@ -74,11 +74,11 @@ describe "Custom proposals fields" do
 
     it "can create a new one" do
       expect(page).to have_content(proposal.title["en"])
-      expect(page).to have_no_content(emendation.title["en"])
+      expect(page).not_to have_content(emendation.title["en"])
       click_link_or_button "Amend"
 
-      expect(page).to have_no_content("Currently, there's another amendment being evaluated for this proposal.")
-      expect(page).to have_no_content(proposal.title["en"])
+      expect(page).not_to have_content("Currently, there's another amendment being evaluated for this proposal.")
+      expect(page).not_to have_content(proposal.title["en"])
       expect(page).to have_content("Create Amendment Draft")
     end
   end
@@ -91,8 +91,8 @@ describe "Custom proposals fields" do
       expect(page).to have_content(emendation.title["en"])
       click_link_or_button "Amend"
 
-      expect(page).to have_no_content("Currently, there's another amendment being evaluated for this proposal.")
-      expect(page).to have_no_content(proposal.title["en"])
+      expect(page).not_to have_content("Currently, there's another amendment being evaluated for this proposal.")
+      expect(page).not_to have_content(proposal.title["en"])
       expect(page).to have_content("Create Amendment Draft")
     end
   end
@@ -102,12 +102,12 @@ describe "Custom proposals fields" do
 
     it "cannot create a new one" do
       expect(page).to have_content(proposal.title["en"])
-      expect(page).to have_no_content(emendation.title["en"])
+      expect(page).not_to have_content(emendation.title["en"])
       click_link_or_button "Amend"
 
       within "#LimitAmendmentsModal" do
         expect(page).to have_link(href: proposal_path)
-        expect(page).to have_no_link(href: amendment_path)
+        expect(page).not_to have_link(href: amendment_path)
         expect(page).to have_content("Currently, there's another amendment being evaluated for this proposal.")
       end
     end

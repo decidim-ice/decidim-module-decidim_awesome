@@ -60,6 +60,7 @@ module Decidim
                         if: defined?(current_user) && current_user&.read_attribute("admin")
         end
         # submenus
+        Decidim::DecidimAwesome::Menu.register_custom_fields_submenu!
         Decidim::DecidimAwesome::Menu.register_menu_hacks_submenu!
         Decidim::DecidimAwesome::Menu.register_awesome_admin_menu!
 
