@@ -32,7 +32,7 @@ describe "Check images in editors" do
 
     it "displays no image for normal proposal" do
       click_link_or_button translated(normal_proposal.title)
-      expect(page).to have_no_css("img[src*='https://www.example.com/someimage.jpeg']")
+      expect(page).not_to have_css("img[src*='https://www.example.com/someimage.jpeg']")
     end
   end
 

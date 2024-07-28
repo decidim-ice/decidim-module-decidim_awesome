@@ -13,6 +13,14 @@ module Decidim
 
       attr_reader :fields, :xml, :errors, :data
 
+      def empty?
+        @fields.empty?
+      end
+
+      def present?
+        !@fields.empty?
+      end
+
       def apply_xml(xml)
         parse_xml(xml)
         map_fields!

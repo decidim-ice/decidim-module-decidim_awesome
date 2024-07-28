@@ -20,7 +20,7 @@ module Decidim
           return true if constraint.awesome_config.constraints.count > 1
 
           case constraint.awesome_config.var.to_s
-          when /^proposal_custom_field/
+          when /^proposal_(private_)?custom_field/
             false
           else
             true

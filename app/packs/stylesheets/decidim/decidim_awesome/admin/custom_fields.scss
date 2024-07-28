@@ -9,8 +9,12 @@
 
 .proposal_custom_fields {
   &_editor {
-    background-color: #e0e0e0;
-    padding: 0.5em;
+    ul.frmb,
+    .form-wrap.form-builder .frmb li.form-field,
+    .form-wrap.form-builder .stage-wrap.empty {
+      @apply bg-background mr-2;
+    }
+
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 
@@ -41,13 +45,6 @@
     // drag and drop is disabled, let's not show the move cursor
     .frmb .prev-holder {
       cursor: default !important;
-    }
-  }
-
-  &_container {
-    .constraints-editor {
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
     }
   }
 }

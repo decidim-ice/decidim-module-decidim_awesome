@@ -46,7 +46,7 @@ module Decidim::DecidimAwesome
           expect(response).to have_http_status(:success)
         end
 
-        it_behaves_like "forbids disabled feature" do
+        it_behaves_like "forbids disabled feature without redirect" do
           let(:feature) { key }
           let(:action) { get :new, params: }
         end
@@ -105,7 +105,7 @@ module Decidim::DecidimAwesome
           expect(response).to have_http_status(:success)
         end
 
-        it_behaves_like "forbids disabled feature" do
+        it_behaves_like "forbids disabled feature without redirect" do
           let(:feature) { key }
           let(:action) { post :create, params: }
         end
@@ -130,7 +130,7 @@ module Decidim::DecidimAwesome
           expect(response).to have_http_status(:success)
         end
 
-        it_behaves_like "forbids disabled feature" do
+        it_behaves_like "forbids disabled feature without redirect" do
           let(:feature) { key }
           let(:action) { get :show, params: }
         end
@@ -144,7 +144,7 @@ module Decidim::DecidimAwesome
           expect(response).to have_http_status(:success)
         end
 
-        it_behaves_like "forbids disabled feature" do
+        it_behaves_like "forbids disabled feature without redirect" do
           let(:feature) { key }
           let(:action) { patch :update, params: }
         end
@@ -167,7 +167,7 @@ module Decidim::DecidimAwesome
           expect(response).to have_http_status(:success)
         end
 
-        it_behaves_like "forbids disabled feature" do
+        it_behaves_like "forbids disabled feature without redirect" do
           let(:feature) { key }
           let(:action) { delete :destroy, params: }
         end

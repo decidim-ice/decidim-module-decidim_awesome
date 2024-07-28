@@ -1,5 +1,9 @@
-<% if Decidim::DecidimAwesome.enabled?(:proposal_custom_fields) %>
-  <%= admin_editor_for_proposal_body(form) %>
+<% if Decidim::DecidimAwesome.enabled?(:proposal_custom_fields) && editor = admin_editor_for_proposal_body(form) %>
+  <%= editor %>
 <% else %>
   <%= form.translated :editor, :body, hashtaggable: true, aria: { label: :body } %>
+<% end %>
+
+<% if Decidim::DecidimAwesome.enabled?(:proposal_private_custom_fields) && private_custom_fields = awesome_proposal_custom_fields_for(:private_body) %>
+  <%= render_proposal_custom_fields_override(private_custom_fields, form, :private_body) if private_custom_fields.present? %>
 <% end %>

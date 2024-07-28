@@ -24,7 +24,7 @@ module Decidim
         if intergram.host && intergram.scheme
           content_security_policy.append_csp_directive("script-src", "#{intergram.scheme}://#{intergram.host}")
           content_security_policy.append_csp_directive("frame-src", "#{intergram.scheme}://#{intergram.host}")
-          # this is commetes in the intergram github, but does not look necessary
+          # this script is in the intergram code, but does not look necessary to work
           # content_security_policy.append_csp_directive("frame-src", "http://www.loadmill.com")
           # content_security_policy.append_csp_directive("frame-src", "http://app.loadmill.com")
         end

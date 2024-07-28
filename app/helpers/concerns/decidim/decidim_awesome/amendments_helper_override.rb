@@ -11,20 +11,26 @@ module Decidim
 
         # override with custom fields if scope applies
         def amendments_form_field_for(attribute, form, original_resource)
-          custom_fields = awesome_custom_fields(attribute, form)
-          return decidim_amendments_form_field_for(attribute, form, original_resource) if custom_fields.blank?
-
-          render_amendment_custom_fields_override(custom_fields, attribute, form, original_resource)
+          custom_fields, custom_private_fields = awesome_custom_fields(attribute, form)
+          content = if custom_fields.blank?
+                      decidim_amendments_form_field_for(attribute, form, original_resource)
+                    else
+                      render_amendment_custom_fields_override(custom_fields, attribute, form, original_resource)
+                    end
+          if custom_private_fields.present?
+            content = content_tag("div", content)
+            content += content_tag("div", render_amendment_custom_fields_override(custom_private_fields, :private_body, form, original_resource))
+          end
+          content
         end
 
         private
 
-        def render_amendment_custom_fields_override(fields, attribute, form, original_resource)
+        def render_amendment_custom_fields_override(custom_fields, attribute, form, original_resource)
           # ensure decidim_editor is available as it is only required if the original FormBuilder is called
           append_stylesheet_pack_tag "decidim_editor"
           append_javascript_pack_tag "decidim_editor", defer: false
 
-          custom_fields = Decidim::DecidimAwesome::CustomFields.new(fields)
           custom_fields.translate!
           body = amendments_form_fields_value(original_resource, attribute)
           custom_fields.apply_xml(body) if body.present?
@@ -48,7 +54,10 @@ module Decidim
 
           awesome_config = Decidim::DecidimAwesome::Config.new(component.organization)
           awesome_config.context_from_component(component)
-          awesome_config.collect_sub_configs_values("proposal_custom_field")
+
+          pub = awesome_config.collect_sub_configs_values("proposal_custom_field")
+          priv = awesome_config.collect_sub_configs_values("proposal_private_custom_field")
+          [pub.presence && Decidim::DecidimAwesome::CustomFields.new(pub), priv.presence && Decidim::DecidimAwesome::CustomFields.new(priv)]
         end
       end
     end

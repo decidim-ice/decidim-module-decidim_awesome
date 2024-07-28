@@ -43,7 +43,7 @@ module Decidim::DecidimAwesome
             expect(response).to have_http_status(:success)
           end
 
-          it_behaves_like "forbids disabled feature" do
+          it_behaves_like "forbids disabled feature with redirect" do
             let(:action) { get :new, params: }
           end
         end
@@ -57,7 +57,7 @@ module Decidim::DecidimAwesome
             expect(response).to have_http_status(:redirect)
           end
 
-          it_behaves_like "forbids disabled feature"
+          it_behaves_like "forbids disabled feature with redirect"
 
           it "creates the new menu entry" do
             action
@@ -123,7 +123,7 @@ module Decidim::DecidimAwesome
             expect(response).to have_http_status(:success)
           end
 
-          it_behaves_like "forbids disabled feature"
+          it_behaves_like "forbids disabled feature with redirect"
 
           context "when editing a non existing menu" do
             let(:params) do
@@ -168,7 +168,7 @@ module Decidim::DecidimAwesome
             }
           end
 
-          it_behaves_like "forbids disabled feature"
+          it_behaves_like "forbids disabled feature with redirect"
 
           it "returns http success" do
             action
@@ -235,7 +235,7 @@ module Decidim::DecidimAwesome
             expect(response).to have_http_status(:redirect)
           end
 
-          it_behaves_like "forbids disabled feature"
+          it_behaves_like "forbids disabled feature with redirect"
 
           it "destroy the task" do
             action
