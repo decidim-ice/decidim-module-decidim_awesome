@@ -6,52 +6,26 @@ module Decidim
       ##
       # Custom serializer for Proposals with private data.
       # Used to separate open-data export and admin export.
-      class PrivateProposalSerializer < ::Decidim::Exporters::Serializer
-        include NeedsAwesomeConfig
+      class PrivateProposalSerializer < ::Decidim::Proposals::ProposalSerializer
+        include ProposalSerializerMethods
 
-        def initialize(proposal)
-          @proposal = proposal
-        end
-
-        ##
-        # Use the "public" proposal serializer, and add then
-        # private fields.
         def serialize
-          serialized_proposal = ::Decidim::Proposals::ProposalSerializer.new(@proposal).serialize
-          serialize_private_custom_fields(serialized_proposal)
+          serialization = super.merge!(serialize_private_custom_fields)
+          serialization.merge!(serialize_private_notes)
         end
 
-        # override the AwesomeHelper awesome_config_instance to take
-        # proposal context and not request context.
-        def awesome_config_instance
-          return @config if @config
+        def serialize_private_notes
+          payload = {}
+          notes = proposal.notes
+          return payload unless notes.any?
 
-          @config = Config.new(proposal.organization)
-          @config.context_from_component(proposal.component)
-          @config
-        end
-
-        private
-
-        attr_reader :proposal
-
-        def fields_entries(custom_fields, text)
-          custom_fields.apply_xml(text)
-          custom_fields.fields.each do |field|
-            yield field["label"].parameterize.to_s, field["userData"] if field["label"] && field["name"]
+          notes.each do |note|
+            payload["notes/#{note.id}".to_sym] = {
+              created_at: note.created_at,
+              note: note.body,
+              author: author_name(note.author)
+            }
           end
-        end
-
-        def serialize_private_custom_fields(payload)
-          private_custom_fields = CustomFields.new(awesome_proposal_private_custom_fields)
-
-          return payload if private_custom_fields.empty?
-
-          fields_entries(private_custom_fields, proposal.private_body) do |key, value|
-            value = value.first if value.is_a? Array
-            payload["private_body/#{key}".to_sym] = value
-          end
-
           payload
         end
       end

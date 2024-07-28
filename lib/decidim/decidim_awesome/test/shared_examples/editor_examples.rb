@@ -37,19 +37,23 @@ end
 
 shared_examples "has drag and drop" do
   it "can drop a file" do
-    expect(page).to have_content("Add images by dragging & dropping or pasting them.")
-    fill_in "proposal_title", with: "This is a test proposal"
-    fill_in "proposal_body", with: ""
+    within "form.edit_proposal" do
+      expect(page).to have_content("Add images by dragging & dropping or pasting them.")
+      fill_in :proposal_body, with: ""
+    end
     find(editor_selector).drop(image)
-    expect(page.execute_script("return document.querySelector('#{editor_selector}').value")).to eq("[Uploading file...]")
+    expect(page.execute_script("return document.querySelector('#{editor_selector}').value")).to include("[Uploading file...]")
     sleep 1
     last_image = Decidim::DecidimAwesome::EditorImage.last
     expect(last_image).to be_present
     content = page.execute_script("return document.querySelector('#{editor_selector}').value")
     expect(content).to include(last_image.attached_uploader(:file).path)
-    # ensures valid body validations
-    fill_in "proposal_body", with: "This is a super test\n#{content}"
-    click_link_or_button "Send"
+    within "form.edit_proposal" do
+      # ensures valid body validations
+      fill_in :proposal_body, with: "This is a super test with lots of downcases characters to be sure that the image name does not mess with percentage of caps.\n#{content}"
+      fill_in :proposal_title, with: "This is a test proposal"
+      click_on "Send"
+    end
     expect(proposal.reload.body["en"]).to include(last_image.attached_uploader(:file).path)
   end
 end

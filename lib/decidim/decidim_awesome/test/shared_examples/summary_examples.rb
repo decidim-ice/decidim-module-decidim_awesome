@@ -25,6 +25,7 @@ end
 shared_examples "activated concerns" do |enabled|
   it "common concerns are registered" do
     expect(ActionView::Base.included_modules).to include(Decidim::DecidimAwesome::AwesomeHelpers)
+    expect(Decidim::ViewModel.included_modules).to include(Decidim::DecidimAwesome::AwesomeHelpers)
     expect(Decidim::ApplicationController.included_modules).to include(Decidim::DecidimAwesome::ContentSecurityPolicy)
     expect(Decidim::Admin::ApplicationController.included_modules).to include(Decidim::DecidimAwesome::ContentSecurityPolicy)
   end
@@ -37,8 +38,22 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::ErrorsController.included_modules).to include(Decidim::DecidimAwesome::NotFoundRedirect)
       expect(Decidim::Proposals::ApplicationHelper.included_modules).to include(Decidim::DecidimAwesome::Proposals::ApplicationHelperOverride)
       expect(Decidim::Proposals::ProposalWizardCreateStepForm.included_modules).to include(Decidim::DecidimAwesome::Proposals::ProposalWizardCreateStepFormOverride)
+      expect(Decidim::Proposals::ProposalWizardCreateStepForm.included_modules).to include(Decidim::DecidimAwesome::Proposals::ProposalFormOverride)
+      expect(Decidim::Proposals::Admin::ProposalForm.included_modules).to include(Decidim::DecidimAwesome::Proposals::ProposalFormOverride)
       expect(Decidim::AmendmentsHelper.included_modules).to include(Decidim::DecidimAwesome::AmendmentsHelperOverride)
       expect(EtiquetteValidator.included_modules).to include(Decidim::DecidimAwesome::EtiquetteValidatorOverride)
+      expect(Decidim::Proposals::ProposalVote.included_modules).to include(Decidim::DecidimAwesome::HasVoteWeight)
+      expect(Decidim::Proposals::ProposalType.included_modules).to include(Decidim::DecidimAwesome::ProposalTypeOverride)
+      expect(Decidim::Proposals::ProposalLCell.included_modules).to include(Decidim::DecidimAwesome::ProposalLCellOverride)
+      expect(Decidim::Proposals::Proposal.included_modules).to include(Decidim::DecidimAwesome::HasProposalExtraFields)
+      expect(Decidim::Proposals::CollaborativeDraft.included_modules).to include(Decidim::DecidimAwesome::HasProposalExtraFields)
+      expect(Decidim::ContentBlocks::GlobalMenuCell.included_modules).to include(Decidim::DecidimAwesome::GlobalMenuCellOverride)
+      expect(Decidim::BreadcrumbHelper.included_modules).to include(Decidim::DecidimAwesome::BreadcrumbHelperOverride)
+      expect(Decidim::BreadcrumbRootMenuItemPresenter.included_modules).to include(Decidim::DecidimAwesome::BreadcrumbRootMenuItemPresenterOverride)
+      expect(Decidim::Proposals::ProposalSerializer.included_modules).to include(Decidim::DecidimAwesome::Proposals::ProposalSerializerOverride)
+      expect(Decidim::Proposals::ProposalVotesController.included_modules).to include(Decidim::DecidimAwesome::Proposals::ProposalVotesControllerOverride)
+      expect(Decidim::AmendmentsController.included_modules).to include(Decidim::DecidimAwesome::LimitPendingAmendments)
+      expect(Decidim::Proposals::ProposalsController.included_modules).to include(Decidim::DecidimAwesome::Proposals::OrderableOverride)
     end
 
   else
@@ -49,8 +64,22 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::ErrorsController.included_modules).not_to include(Decidim::DecidimAwesome::NotFoundRedirect)
       expect(Decidim::Proposals::ApplicationHelper.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ApplicationHelperOverride)
       expect(Decidim::Proposals::ProposalWizardCreateStepForm.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ProposalWizardCreateStepFormOverride)
+      expect(Decidim::Proposals::ProposalWizardCreateStepForm.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ProposalFormOverride)
+      expect(Decidim::Proposals::Admin::ProposalForm.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ProposalFormOverride)
       expect(Decidim::AmendmentsHelper.included_modules).not_to include(Decidim::DecidimAwesome::AmendmentsHelperOverride)
       expect(EtiquetteValidator.included_modules).not_to include(Decidim::DecidimAwesome::EtiquetteValidatorOverride)
+      expect(Decidim::Proposals::ProposalVote.included_modules).not_to include(Decidim::DecidimAwesome::HasVoteWeight)
+      expect(Decidim::Proposals::ProposalType.included_modules).not_to include(Decidim::DecidimAwesome::ProposalTypeOverride)
+      expect(Decidim::Proposals::ProposalLCell.included_modules).not_to include(Decidim::DecidimAwesome::ProposalLCellOverride)
+      expect(Decidim::Proposals::Proposal.included_modules).not_to include(Decidim::DecidimAwesome::HasProposalExtraFields)
+      expect(Decidim::Proposals::CollaborativeDraft.included_modules).not_to include(Decidim::DecidimAwesome::HasProposalExtraFields)
+      expect(Decidim::ContentBlocks::GlobalMenuCell.included_modules).not_to include(Decidim::DecidimAwesome::GlobalMenuCellOverride)
+      expect(Decidim::BreadcrumbHelper.included_modules).not_to include(Decidim::DecidimAwesome::BreadcrumbHelperOverride)
+      expect(Decidim::BreadcrumbRootMenuItemPresenter.included_modules).not_to include(Decidim::DecidimAwesome::BreadcrumbRootMenuItemPresenterOverride)
+      expect(Decidim::Proposals::ProposalSerializer.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ProposalSerializerOverride)
+      expect(Decidim::Proposals::ProposalVotesController.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ProposalVotesControllerOverride)
+      expect(Decidim::AmendmentsController.included_modules).not_to include(Decidim::DecidimAwesome::LimitPendingAmendments)
+      expect(Decidim::Proposals::ProposalsController.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::OrderableOverride)
     end
   end
 end
