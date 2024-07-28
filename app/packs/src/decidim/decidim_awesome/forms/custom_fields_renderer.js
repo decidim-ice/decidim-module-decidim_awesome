@@ -113,6 +113,7 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
         $dl.append($dd);
       }
     }
+    // console.log("dataToXML", $dl[0].outerHTML);
     return `<xml>${$dl[0].outerHTML}</xml>`;
   }
 

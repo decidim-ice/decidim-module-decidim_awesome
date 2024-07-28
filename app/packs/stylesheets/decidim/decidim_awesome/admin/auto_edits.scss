@@ -14,3 +14,29 @@ span.awesome-auto-edit {
   margin: 0;
   font-weight: 600;
 }
+
+a.awesome-auto-delete {
+  float: right;
+  @extend .button;
+  @extend .button__xs;
+  @extend .button__text-secondary;
+}
+
+.form-defaults input[type="text"].awesome-auto-edit {
+  display: inline-block;
+  margin: 0;
+  padding: 2px 4px;
+  height: auto;
+  width: auto;
+  line-height: 1;
+  outline: 1px solid transparent;
+  font-size: 0.75rem;
+}
+
+span.awesome-auto-edit {
+  background-color: $body-background;
+  padding: 0 0.5rem;
+  border-radius: $global-radius;
+  margin: 0;
+  font-weight: $global-weight-bold;
+}

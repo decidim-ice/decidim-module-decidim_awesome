@@ -121,12 +121,77 @@ Technically, the content is stored in the database as an XML document compatible
 ![Custom fields screenshot](examples/custom-fields-2.png)
 ![Custom fields screenshot](examples/custom-fields-1.gif)
 
+Note that the custom fields are build using the jQuery library [formBuilder](https://formbuilder.online). This package is included in Decidim Awesome but the i18n translations are not. By default they are dynamically downloaded from the CDN https://cdn.jsdelivr.net/npm/formbuilder-languages@1.1.0/.
+If you wish to provide an alternative place for those files, you can configure the variable `form_builder_langs_location` in an initializer:
+
+```ruby
+# config/initializers/awesome_defaults.rb
+
+# A URL where to obtain the translations for the FormBuilder component
+# you can a custom place if you are worried about the CDN geolocation
+# Download them from https://github.com/kevinchappell/formBuilder-languages
+
+# For instance, copy them to your /public/fb_locales/ directory and set the path here:
+Decidim::DecidimAwesome.configure do |config|
+  config.form_builder_langs_location = "/fb_locales/"
+end
+```
+
+##### 12.1. GraphQL types for custom fields
+
+Custom fields are displayed in the GaphQL API according to their definition in a formatted array of objects in the attribute `bodyFields`.
+
+A query to extract this information could look like this (see that the original `body` is also available):
+
+```graphql
+{
+  component(id: 999) {
+    ... on Proposals {
+      proposals {
+        edges {
+          node {
+            id
+            bodyFields {
+              locales
+              translation(locale: "en")
+              translations {
+                locale
+                fields
+                machineTranslated
+              }
+            }
+            body {
+              locales
+              translations {
+                locale
+                text
+                machineTranslated
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+You can then use this custom type in your GraphQL queries and mutations to handle the custom fields in proposals.
+
+
+##### 12.2. Private Custom fields
+
+Similar to the custom fields feature, but only admins can see the content of the fields. This is useful for adding metadata to proposals that should not be visible to the public (such as contact data).
+Data is stored encrypted in the database.
+
+![Private Custom fields screenshot](examples/private_custom_fields.png)
+
 #### 13. Custom Redirections (or URL shortener feature)
 
 Admins can create custom paths that redirect to other places. Destinations can be internal absolute paths or external sites.
 There's also possible to choose to sanitize (ie: remove) any query string or to maintain it (so you can decide to use).
 
-For instance you can create a redirection like 
+For instance you can create a redirection like
 
 * `/take-me-somewhere` => `/processes/canary-islands`
 
@@ -274,6 +339,28 @@ This view is used by the proposal cell in lists. It must implement the vote butt
 
 Note that, it is strongly recommended to add and HTML tag element with the id `proposal-<%= proposal.id %>-votes-count` so the Ajax vote re-loader can work. Even if you don't use (in this case use a `style="display:none"` attribute), this is because the Ajax reloader always look for this element and throw JavaScript errors if not.
 
+##### 17.1 GraphQL Types for weighted voting
+
+When a weighed voting mechanism is selected, the GraphQL API will show those weights separated in each proposal.
+The attribute that holds this information is `vote_weights`, a query example could look like this:
+
+```graphql
+{
+  component(id: 999) {
+    ... on Proposals {
+      proposals {
+        edges {
+          node {
+            id
+            voteWeights
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 #### 18. Limiting amendments in proposals
 
 By default, when proposals can be amended, any number of amendments can be created.
@@ -284,6 +371,17 @@ Note that this only applies to amendments being in the state "evaluating", not t
 This option is disable by default, must be enabled in the component's configuration:
 
 ![Limiting amendments](examples/limit_amendments.png)
+
+#### 18. Maintenance tools
+
+The awesome admin provides with some maintenance tools (more to come in the future);
+
+##### 18.1 Old private data removal
+
+These tools are designed to help remove old data as required by laws such as GDPR, particularly in relation to private custom fields.
+This menu will show if there's any data older than 6 months (configurable) and will let admins remove it component by component.
+
+![Private data](examples/private_data.png)
 
 #### To be continued...
 
@@ -308,6 +406,17 @@ bundle exec rails decidim:upgrade
 bundle exec rails db:migrate
 ```
 
+Go to `yourdomain/admin/decidim_awesome` and start tweaking things!
+
+> **EXPERTS ONLY**
+>
+> Under the hood, when running `bundle exec rails decidim:upgrade` the `decidim-decidim_awesome` gem will run the following two tasks (that can also be run manually if you consider):
+>
+> ```bash
+> bin/rails decidim_decidim_awesome:install:migrations
+> bin/rails decidim_decidim_awesome:webpacker:install
+> ```
+
 If you are upgrading from a version prior to 0.8, make sure to visit the URL `/admin/decidim_awesome/checks` and run image migrations for the old images:
 
 ![Check image migrations](examples/check_image_migrations.png)
@@ -329,20 +438,20 @@ However you can force some specific version using `gem "decidim-decidim_awesome"
 Depending on your Decidim version, choose the corresponding Awesome version to ensure compatibility:
 
 | Awesome version | Compatible Decidim versions |
-|---|---|
-| 0.10.0 | >= 0.26.7, >= 0.27.3 |
-| 0.9.2 | >= 0.26.7, >= 0.27.3 |
-| 0.9.x | 0.26.x, 0.27.x |
-| 0.8.x | 0.25.x, 0.26.x |
-| 0.7.x | 0.23.x, 0.24.x |
-| 0.6.x | 0.22.x, 0.23.x |
-| 0.5.x | 0.21.x, 0.22.x |
+|-----------------|-----------------------------|
+| 0.10.x          | >= 0.26.7, >= 0.27.3        |
+| 0.9.2           | >= 0.26.7, >= 0.27.3        |
+| 0.9.x           | 0.26.x, 0.27.x              |
+| 0.8.x           | 0.25.x, 0.26.x              |
+| 0.7.x           | 0.23.x, 0.24.x              |
+| 0.6.x           | 0.22.x, 0.23.x              |
+| 0.5.x           | 0.21.x, 0.22.x              |
 
-> *Heads up!* 
+> *Heads up!*
 > * version 0.10.0 requires database migrations! Don't forget the migrations step when updating.
 > * version 0.8.0 removes CSS Themes for tenants. If you have been using them you will have to manually migrate them to custom styles.
-> * version 0.8.0 uses ActiveStorage, same as Decidim 0.25. 2 new rake task have been introduced to facilitate the migration: `bin/rails decidim_awesome:active_storage_migrations:check_migration_from_carrierwave` and 
-`bin/rails decidim_awesome:active_storage_migrations:migrate_from_carrierwave`
+> * version 0.8.0 uses ActiveStorage, same as Decidim 0.25. 2 new rake task have been introduced to facilitate the migration: `bin/rails decidim_awesome:active_storage_migrations:check_migration_from_carrierwave` and
+    `bin/rails decidim_awesome:active_storage_migrations:migrate_from_carrierwave`
 > * version 0.7.1 requires database migrations! Don't forget the migrations step when updating.
 
 ## Configuration
@@ -463,8 +572,8 @@ However, this project works with different versions of Decidim. In order to test
 You can run run tests against the legacy Decidim versions by using:
 
 ```bash
-export DATABASE_USERNAME=<username> 
-export DATABASE_PASSWORD=<password> 
+export DATABASE_USERNAME=<username>
+export DATABASE_PASSWORD=<password>
 RBENV_VERSION=2.7.6 BUNDLE_GEMFILE=Gemfile.legacy bundle
 RBENV_VERSION=2.7.6 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rake test_app
 RBENV_VERSION=2.7.6 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rspec

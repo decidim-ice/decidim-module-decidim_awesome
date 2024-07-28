@@ -10,6 +10,8 @@ module Decidim
     autoload :MenuHacker, "decidim/decidim_awesome/menu_hacker"
     autoload :CustomFields, "decidim/decidim_awesome/custom_fields"
     autoload :VotingManifest, "decidim/decidim_awesome/voting_manifest"
+    autoload :TranslatedCustomFieldsType, "decidim/decidim_awesome/api/types/translated_custom_fields_type"
+    autoload :LocalizedCustomFieldsType, "decidim/decidim_awesome/api/types/localized_custom_fields_type"
 
     # Awesome coms with some components for participatory spaces
     # Currently :awesome_map and :awesome_iframe, list them here
@@ -155,6 +157,9 @@ module Decidim
     config_accessor :proposal_custom_fields do
       {}
     end
+    config_accessor :proposal_private_custom_fields do
+      {}
+    end
 
     # allows to keep modifications for the main menu
     # can return :disabled to completly remove this feature
@@ -283,7 +288,9 @@ module Decidim
     # pass a single config var or an array of them
     # any non disabled match will return as true
     def self.possible_additional_proposal_sortings
-      @possible_additional_proposal_sortings ||= additional_proposal_sortings.to_a.filter_map do |sort|
+      return [] unless additional_proposal_sortings.is_a?(Array)
+
+      @possible_additional_proposal_sortings ||= additional_proposal_sortings.filter_map do |sort|
         next unless sort.to_sym.in?([:az, :za, :supported_first, :supported_last])
 
         sort.to_s
@@ -299,9 +306,7 @@ module Decidim
       end
     end
 
-    def self.enabled?(config_vars)
-      config_vars = [config_vars] unless config_vars.respond_to?(:any?)
-
+    def self.enabled?(*config_vars)
       config_vars.any? do |item|
         next unless config.has_key?(item.to_sym)
 

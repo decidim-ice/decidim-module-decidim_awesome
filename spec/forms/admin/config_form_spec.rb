@@ -26,6 +26,11 @@ module Decidim::DecidimAwesome
           foo: valid_fields
         }
       end
+      let(:private_custom_fields) do
+        {
+          foo: valid_fields
+        }
+      end
       let(:valid_fields) { '[{"foo":"bar"}]' }
       let(:invalid_fields) { '[{"foo":"bar"}]{"baz":"zet"}' }
 
@@ -88,6 +93,27 @@ module Decidim::DecidimAwesome
             expect(subject.proposal_custom_fields[:foo]).to include("Santana")
             expect(subject.proposal_custom_fields[:foo]).not_to include("<p>Santana</p>")
           end
+        end
+      end
+
+      describe "proposal private custom fields" do
+        let(:attributes) do
+          {
+            proposal_custom_fields: custom_fields,
+            proposal_private_custom_fields: private_custom_fields
+          }
+        end
+
+        it { is_expected.to be_valid }
+
+        context "and invalid JSON" do
+          let(:private_custom_fields) do
+            {
+              foo: invalid_fields
+            }
+          end
+
+          it { is_expected.not_to be_valid }
         end
       end
 

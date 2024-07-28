@@ -13,24 +13,32 @@ describe "Custom proposals fields", type: :system do
            participatory_space: participatory_process)
   end
   let(:rte_enabled) { false }
-  let!(:proposal) { create :proposal, :with_amendments, users: [author], body: body, component: component }
-  let(:author) { create :user, :confirmed, organization: organization }
-  let!(:config) { create :awesome_config, organization: organization, var: :proposal_custom_fields, value: custom_fields }
-  let(:config_helper) { create :awesome_config, organization: organization, var: :proposal_custom_field_foo }
+  let!(:proposal) { create(:proposal, :with_amendments, users: [author], body: body, component: component) }
+  let(:author) { create(:user, :confirmed, organization: organization) }
+  let!(:config) { create(:awesome_config, organization: organization, var: :proposal_custom_fields, value: custom_fields) }
+  let!(:private_config) { create(:awesome_config, organization: organization, var: :proposal_private_custom_fields, value: private_custom_fields) }
+  let(:config_helper) { create(:awesome_config, organization: organization, var: :proposal_custom_field_foo) }
+  let(:private_config_helper) { create(:awesome_config, organization: organization, var: :proposal_private_custom_field_baz) }
   let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes", "participatory_space_slug" => slug }) }
+  let!(:private_constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes" }) }
   let(:slug) { participatory_process.slug }
   let(:body) do
     { en: answer }
   end
   let(:answer) { '<xml><dl><dt>Occupation</dt><dd id="select-1476748006618"><div alt="option-2">Moth Man</div></dd><dt>Bio</dt><dd id="textarea-1476748007461"><div>I shot the sheriff</div></dd></dl></xml>' }
-  let(:data) { "[#{data1},#{data2},#{data3}]" }
   let(:data1) { '{"type":"text","label":"Full Name","subtype":"text","className":"form-control","name":"text-1476748004559"}' }
   let(:data2) { '{"type":"select","label":"Occupation","className":"form-control","name":"select-1476748006618","values":[{"label":"Street Sweeper","value":"option-1","selected":true},{"label":"Moth Man","value":"option-2"},{"label":"Chemist","value":"option-3"}]}' }
   let(:data3) { '{"type":"textarea","label":"Short Bio","rows":"5","className":"form-control","name":"textarea-1476748007461"}' }
-
+  let(:private_data1) { '{"type":"text","label":"Phone Number","subtype":"text","className":"form-control","name":"text-1476748004579"}' }
+  let(:model) { proposal }
   let(:custom_fields) do
     {
       "foo" => "[#{data1},#{data2},#{data3}]"
+    }
+  end
+  let(:private_custom_fields) do
+    {
+      "baz" => "[#{private_data1}]"
     }
   end
 
@@ -41,7 +49,7 @@ describe "Custom proposals fields", type: :system do
   end
 
   shared_examples "has custom fields" do |textarea|
-    it "displays custom fields" do
+    it "displays public and private" do
       expect(page).to have_content("Title")
       expect(page).not_to have_content("Body")
       expect(page).to have_content("Full Name")
@@ -51,6 +59,10 @@ describe "Custom proposals fields", type: :system do
       expect(page).to have_content("Short Bio")
       expect(page).to have_xpath(textarea)
       expect(page).not_to have_css(".form-error.is-visible")
+      expect(page).to have_content("This information won't be published")
+      within "#proposal-custom-field-private_body" do
+        expect(page).to have_content("Phone Number")
+      end
     end
   end
 
@@ -59,6 +71,7 @@ describe "Custom proposals fields", type: :system do
       fill_in title_field, with: "A far west character"
       fill_in :"text-1476748004559", with: "Lucky Luke"
       fill_in :"textarea-1476748007461", with: "I shot everything"
+      fill_in :"text-1476748004579", with: "555-555-555"
 
       click_button button
       sleep 1
@@ -66,9 +79,13 @@ describe "Custom proposals fields", type: :system do
       if xpath
         expect(page).to have_xpath("//input[@class='form-control'][@id='text-1476748004559'][@user-data='Lucky Luke']")
         expect(page).to have_xpath("//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot everything']")
+        expect(page).to have_xpath("//input[@class='form-control'][@id='text-1476748004579'][@user-data='555-555-555']")
       else
-        expect(page).to have_selector("dd#text-1476748004559", text: "Lucky Luke")
-        expect(page).to have_selector("dd#textarea-1476748007461", text: "I shot everything")
+        expect(page).to have_css("dd#text-1476748004559", text: "Lucky Luke")
+        expect(page).to have_css("dd#textarea-1476748007461", text: "I shot everything")
+        expect(page).not_to have_css("dd#text-1476748004579", text: "555-555-555")
+        expect(page).not_to have_content("Phone Number")
+        expect(model.reload.private_body).to include('<dd id="text-1476748004579" name="text"><div>555-555-555</div></dd>')
       end
       expect(page).to have_content("Occupation")
       expect(page).to have_content("Moth Man")
@@ -87,6 +104,8 @@ describe "Custom proposals fields", type: :system do
       expect(page).not_to have_content("Short Bio")
       expect(page).to have_content("I shot the sheriff")
       expect(page).not_to have_css(".form-error.is-visible")
+      expect(page).not_to have_content("This information won't be published")
+      expect(page).not_to have_content("Phone Number")
     end
   end
 
@@ -119,12 +138,14 @@ describe "Custom proposals fields", type: :system do
     end
 
     context "and custom fields are out of scope" do
+      let!(:private_constraint) { create(:config_constraint, awesome_config: private_config_helper, settings: { "participatory_space_manifest" => "assemblies" }) }
       let(:slug) { "another-slug" }
 
       it_behaves_like "has default fields"
     end
 
     context "and proposal has unformatted content" do
+      let!(:private_constraint) { create(:config_constraint, awesome_config: private_config_helper, settings: { "participatory_space_manifest" => "assemblies" }) }
       let(:answer) { "I shot the Sheriff\\nbut not Deputy" }
 
       it "has custom fields with content in the first textarea" do
@@ -137,6 +158,8 @@ describe "Custom proposals fields", type: :system do
         expect(page).to have_content("Short Bio")
         expect(page).to have_xpath("//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the Sheriff\\nbut not Deputy']")
         expect(page).to have_css(".form-error.is-visible")
+        expect(page).not_to have_content("This information won't be published")
+        expect(page).not_to have_content("Phone Number")
       end
     end
 
@@ -150,6 +173,8 @@ describe "Custom proposals fields", type: :system do
         expect(page).to have_content("Moth Man")
         expect(page).to have_content("Short Bio")
         expect(page).not_to have_css(".form-error.is-visible")
+        expect(page).to have_content("This information won't be published")
+        expect(page).to have_content("Phone Number")
       end
     end
   end
@@ -175,6 +200,7 @@ describe "Custom proposals fields", type: :system do
     end
 
     context "and custom fields are out of scope" do
+      let!(:private_constraint) { create(:config_constraint, awesome_config: private_config_helper, settings: { "participatory_space_manifest" => "assemblies" }) }
       let(:slug) { "another-slug" }
 
       it_behaves_like "has default fields"
@@ -212,6 +238,7 @@ describe "Custom proposals fields", type: :system do
              participatory_space: participatory_process)
     end
     let!(:collaborative_draft) { create :collaborative_draft, users: [author, user], body: answer, component: component }
+    let(:model) { collaborative_draft }
 
     before do
       click_link "Access collaborative drafts"

@@ -3,8 +3,8 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/scoped_admins_examples"
 
-describe "Scoped admin journeys", type: :system do
-  let(:organization) { create :organization }
+describe "Scoped admin journeys" do
+  let(:organization) { create(:organization) }
   let!(:assembly) { create(:assembly, organization: organization) }
   let!(:component) { create(:proposal_component, participatory_space: assembly) }
   let!(:proposal) { create(:proposal, :official, component: component) }
@@ -16,8 +16,8 @@ describe "Scoped admin journeys", type: :system do
   let!(:user) { create(:user, :confirmed, organization: organization) }
   let!(:user_accepted) { create(:user, :confirmed, :admin_terms_accepted, organization: organization) }
   let!(:admin) { create(:user, :confirmed, :admin, organization: organization) }
-  let!(:config) { create :awesome_config, organization: organization, var: :scoped_admins, value: admins }
-  let(:config_helper) { create :awesome_config, organization: organization, var: :scoped_admin_bar, value: nil }
+  let!(:config) { create(:awesome_config, organization: organization, var: :scoped_admins, value: admins) }
+  let(:config_helper) { create(:awesome_config, organization: organization, var: :scoped_admin_bar, value: nil) }
   let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: settings) }
   let(:admins) do
     {
@@ -73,16 +73,15 @@ describe "Scoped admin journeys", type: :system do
 
     context "and admin terms not accepted" do
       it "allows admin terms to be accepted" do
-        welcome_text = "Welcome to the Admin Panel."
-        welcome_text = "Welcome to the Decidim Admin Panel." if legacy_version?
+        welcome_text = "Dashboard"
         visit decidim_admin.root_path
 
-        expect(page).to have_content("Agree to the terms and conditions of use")
+        expect(page).to have_content("Please take a moment to review the admin terms of service.")
 
-        click_button "I agree with the terms"
+        click_link_or_button "I agree with the terms"
 
         expect(page).to have_content(welcome_text)
-        expect(page).not_to have_content("Review them now")
+        expect(page).not_to have_content("Please take a moment to review the admin terms of service.")
       end
     end
 

@@ -16,7 +16,9 @@ module Decidim
       routes do
         # Add admin engine routes here
         resources :constraints
-        resources :menu_hacks, except: [:show]
+        resources :menus, only: [:show] do
+          resources :hacks, except: [:show], controller: "menu_hacks"
+        end
         resources :custom_redirects, except: [:show]
         resources :config, param: :var, only: [:show, :update]
         resources :scoped_styles, param: :var, only: [:create, :destroy]
@@ -37,19 +39,32 @@ module Decidim
         end
       end
 
-      initializer "decidim_awesome.admin_menu" do
+      initializer "decidim_awesome.admin_menus" do
+        first_available = Decidim::DecidimAwesome::Menu.menus.detect { |_key, val| val.present? }&.first
+
         Decidim.menu :admin_menu do |menu|
           menu.add_item :awesome_menu,
                         I18n.t("menu.decidim_awesome", scope: "decidim.admin"),
-                        decidim_admin_decidim_awesome.config_path(:editors),
+                        if first_available
+                          decidim_admin_decidim_awesome.config_path(first_available)
+                        else
+                          decidim_admin_decidim_awesome.checks_path
+                        end,
                         icon_name: "fire",
                         position: 7.5,
-                        active: is_active_link?(decidim_admin_decidim_awesome.config_path(:editors), :inclusive),
+                        active: if first_available
+                                  is_active_link?(decidim_admin_decidim_awesome.config_path(first_available), :inclusive)
+                                else
+                                  is_active_link?(decidim_admin_decidim_awesome.checks_path)
+                                end,
                         if: defined?(current_user) && current_user&.read_attribute("admin")
         end
-      end
+        # submenus
+        Decidim::DecidimAwesome::Menu.register_custom_fields_submenu!
+        Decidim::DecidimAwesome::Menu.register_menu_hacks_submenu!
+        Decidim::DecidimAwesome::Menu.register_awesome_admin_menu!
 
-      initializer "decidim_awesome.admin_menu" do
+        # user menu
         Decidim.menu :admin_user_menu do |menu|
           if DecidimAwesome.enabled? :admin_accountability
             menu.add_item :admin_accountability,

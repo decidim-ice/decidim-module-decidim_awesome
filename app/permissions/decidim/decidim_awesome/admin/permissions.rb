@@ -18,7 +18,7 @@ module Decidim
               toggle_allow(DecidimAwesome.admin_accountability.include?(:participatory_space_roles))
             end
           elsif permission_action.action == :edit_config
-            toggle_allow(config_enabled?(permission_action.subject))
+            toggle_allow(config_enabled?(*permission_action.subject))
           end
 
           permission_action

@@ -34,7 +34,7 @@ module Decidim::DecidimAwesome
           expect(response).to have_http_status(:success)
         end
 
-        it_behaves_like "forbids disabled feature" do
+        it_behaves_like "forbids disabled feature with redirect" do
           let(:features) { Decidim::DecidimAwesome.config.keys }
           let(:action) { get :show, params: params }
         end
@@ -142,7 +142,7 @@ module Decidim::DecidimAwesome
           expect(response).to have_http_status(:redirect)
         end
 
-        it_behaves_like "forbids disabled feature" do
+        it_behaves_like "forbids disabled feature with redirect" do
           let(:features) { config.keys }
           let(:action) { get :show, params: params }
         end
