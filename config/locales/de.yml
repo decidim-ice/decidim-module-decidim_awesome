@@ -46,8 +46,6 @@ de:
         target: Öffnet in
         url: URL
         visibility: Sichtbarkeit
-      proposal:
-        proposal_custom_fields: Eingabefelder
   decidim:
     admin:
       actions:
@@ -251,14 +249,19 @@ de:
               body: Eingabevalidierungen für das Feld "Textkörper"
               title: Eingabevalidierungen für das Feld "Titel"
           form_proposal_custom_fields:
+            delete: Löschen
             new: Neues Eingabefeld
             remove: Eingabefeld entfernen
             sure_to_remove: Bist du sicher, dass du dieses Eingabefeld entfernen möchtest?
+          form_proposal_private_custom_fields:
+            delete: Löschen
           form_scoped_admins:
+            delete: Löschen
             new: Hinzufügen einer neuen "Eingeschränkte Admins"-Gruppe
             remove: Diese Gruppe "Eingeschränkte Admins" entfernen
             sure_to_remove: Sind Sie sicher, dass Sie diese Gruppe eingeschränkter Admins löschen möchten?
           form_scoped_styles:
+            delete: Löschen
             new: Neue CSS Box hinzufügen
             remove: CSS Box entfernen
             sure_to_remove: Sind Sie sicher, dass Sie diese CSS-Box entfernen möchten?
@@ -268,6 +271,16 @@ de:
             title: Decidim Awesome
             update: Aktualisieren
           system: Überall ausser...
+          title:
+            admins: Eingeschränkte Admins
+            checks: Checks
+            custom_redirects: Benutzerdefinierte Umleitungen
+            editors: Editoren
+            livechat: Live-Chat
+            menu_hacks: Menüanpassungen
+            proposals: Vorschläge
+            styles: Eigene Styles
+            surveys: Umfragen
           update:
             error: Fehler beim Aktualisieren der Konfiguration! %{error}
             success: Konfiguration erfolgreich aktualisiert
