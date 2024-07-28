@@ -43,8 +43,6 @@ it:
         target: Apri in
         url: URL
         visibility: Visibilità
-      proposal:
-        proposal_custom_fields: Campi personalizzati
   decidim:
     admin:
       filters:
@@ -238,14 +236,19 @@ it:
               body: Convalide dell'input dell'utente per il campo "body"
               title: Convalide di input dell'utente per il campo "titolo"
           form_proposal_custom_fields:
+            delete: Elimina
             new: Aggiungi una nuova casella "campi personalizzati"
             remove: Rimuovi questa casella "campi personalizzati"
             sure_to_remove: Sei sicuro di voler eliminare questo campo?
+          form_proposal_private_custom_fields:
+            delete: Elimina
           form_scoped_admins:
+            delete: Elimina
             new: Aggiungi un nuovo gruppo "Amministratori con ambito"
             remove: Rimuovi questo gruppo "Amministratori con ambito"
             sure_to_remove: Sei sicuro di voler eliminare questo gruppo "Amministratori con ambito"?
           form_scoped_styles:
+            delete: Elimina
             new: Aggiungi un nuovo box CSS
             remove: Rimuovi questo box CSS
             sure_to_remove: Sei sicura di voler distruggere questo box CSS?
@@ -255,6 +258,16 @@ it:
             title: Tweaks per %{setting}
             update: Aggiorna la configurazione
           system: Ovunque tranne gli spazi partecipativi
+          title:
+            admins: Amministratori con ambito
+            checks: System compatibility
+            custom_redirects: Reindirizzamenti Personalizzati
+            editors: Editor hacks
+            livechat: Chat in tempo reale
+            menu_hacks: Menu tweaks
+            proposals: Proposals hacks
+            styles: Custom styles
+            surveys: Surveys & forms
           update:
             error: Errore nell'aggiornamento della configurazione! %{error}
             success: Configurazione aggiornata correttamente
