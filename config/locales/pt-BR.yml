@@ -35,8 +35,6 @@ pt-BR:
         target: Aberto em
         url: URL
         visibility: Visibilidade
-      proposal:
-        proposal_custom_fields: Campos personalizados
   decidim:
     admin:
       menu:
@@ -143,14 +141,19 @@ pt-BR:
               scoped_styles: Crie CSS personalizado que se aplica somente em certas partes da web pública (use o editor de restrições para isso)
               scoped_styles_variables: 'Você pode usar as seguintes variáveis CSS para cores personalizadas da organização:'
           form_proposal_custom_fields:
+            delete: Deletar
             new: Adicionar uma nova caixa "campos personalizados"
             remove: Remover esta caixa "campos personalizados"
             sure_to_remove: Deseja mesmo destruir essa caixa de campos?
+          form_proposal_private_custom_fields:
+            delete: Deletar
           form_scoped_admins:
+            delete: Deletar
             new: Adicionar um novo grupo "Administradores com Escopos"
             remove: Remover este grupo "Administradores com Escopos"
             sure_to_remove: Deseja mesmo destruir esse grupo de "Administradores com Escopos"?
           form_scoped_styles:
+            delete: Deletar
             new: Adicionar uma nova caixa CSS
             remove: Remover esta caixa CSS
             sure_to_remove: Deseja mesmo destruir essa caixa de CSS?
@@ -160,6 +163,16 @@ pt-BR:
             title: Ajustes para %{setting}
             update: Configuração atualizada
           system: Qualquer lugar exceto salas participativas
+          title:
+            admins: Administradores com escopo
+            checks: Compatibilidade de sistema
+            custom_redirects: Redirecionamentos personalizados
+            editors: Hacks do editor
+            livechat: Chat Ao Vivo
+            menu_hacks: Ajustes do menu
+            proposals: Pacotes de Propostas
+            styles: Estilos Personalizados
+            surveys: Pesquisas e Formulários
           update:
             error: Erro ao atualizar configuração!%{error}
             success: Configuração atualizada com sucesso
