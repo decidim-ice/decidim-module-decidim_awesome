@@ -2,7 +2,7 @@
 
 module Decidim
   module DecidimAwesome
-    module ProposalTypeOverride
+    module AddProposalTypeVoteWeights
       extend ActiveSupport::Concern
 
       included do

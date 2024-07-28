@@ -63,6 +63,7 @@ module Decidim
           Decidim::Proposals::UpdateProposal.include(Decidim::DecidimAwesome::Proposals::UpdateProposalOverride)
           Decidim::Proposals::UpdateCollaborativeDraft.include(Decidim::DecidimAwesome::Proposals::UpdateCollaborativeDraftOverride)
           Decidim::Proposals::Admin::UpdateProposal.include(Decidim::DecidimAwesome::Proposals::Admin::UpdateProposalOverride)
+          Decidim::Proposals::ProposalType.include(Decidim::DecidimAwesome::AddProposalTypeCustomFields)
         end
 
         if DecidimAwesome.enabled?(:proposal_custom_fields, :proposal_private_custom_fields, :weighted_proposal_voting)
@@ -74,7 +75,7 @@ module Decidim
         if DecidimAwesome.enabled?(:weighted_proposal_voting)
           # add vote weight to proposal vote
           Decidim::Proposals::ProposalVote.include(Decidim::DecidimAwesome::HasVoteWeight)
-          Decidim::Proposals::ProposalType.include(Decidim::DecidimAwesome::ProposalTypeOverride)
+          Decidim::Proposals::ProposalType.include(Decidim::DecidimAwesome::AddProposalTypeVoteWeights)
           Decidim::Proposals::ProposalLCell.include(Decidim::DecidimAwesome::ProposalLCellOverride)
         end
 

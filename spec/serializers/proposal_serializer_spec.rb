@@ -8,7 +8,7 @@ module Decidim::Proposals
       described_class.new(proposal)
     end
 
-    let!(:proposal) { create(:proposal, :accepted, component:) }
+    let!(:proposal) { create(:proposal, :accepted, body:, component:) }
     let!(:another_proposal) { create(:proposal, :accepted, component:) }
     let!(:extra_fields) { create(:awesome_proposal_extra_fields, proposal:) }
     let(:weights) do
@@ -44,6 +44,15 @@ module Decidim::Proposals
       }
     end
     let(:manifest) { :voting_cards }
+    let(:xml) { "<xml><dl><dt name=\"name\">Name</dt><dd id=\"name\" name=\"name\"><div>John Barleycorn</div></dd><dt name=\"age\">Age</dt><dd id=\"age\" name=\"age\"><div>12</div></dd></dl></xml>" }
+    let(:body) do
+      {
+        "en" => xml,
+        "machine_translations" => {
+          "ca" => xml.gsub("John Barleycorn", "Joan Ordi")
+        }
+      }
+    end
 
     describe "#serialize" do
       let(:serialized) { subject.serialize }
@@ -71,22 +80,18 @@ module Decidim::Proposals
       context "when custom fields are defined" do
         let(:custom_fields) do
           {
-            foo: "[{\"type\":\"number\",\"required\":false,\"label\":\"Age\",\"name\":\"age\",\"subtype\":\"number\"}]"
+            foo: "[{\"type\":\"text\",\"required\":true,\"label\":\"Name\",\"name\":\"name\",\"subtype\":\"text\"},{\"type\":\"number\",\"required\":false,\"label\":\"Age\",\"name\":\"age\",\"subtype\":\"number\"}]"
           }
         end
         let!(:config) { create(:awesome_config, organization: participatory_process.organization, var: :proposal_custom_fields, value: custom_fields) }
         let!(:constraint) { create(:config_constraint, awesome_config: config, settings: { "participatory_space_manifest" => "participatory_processes", "participatory_space_slug" => slug }) }
         let(:slug) { participatory_process.slug }
 
-        before do
-          # rubocop:disable Rails/SkipsModelValidations
-          proposal.update_columns(body: { "en" =>
-          "<xml><dl class=\"decidim_awesome-custom_fields\" data-generator=\"decidim_awesome\" data-version=\"0.11.0\">\n<dt name=\"age\">Age</dt>\n<dd id=\"age\" name=\"number\"><div>12</div></dd>\n</dl></xml>" })
-          # rubocop:enable Rails/SkipsModelValidations
-        end
-
-        it "serializes custom fields in body/:name/:locale column" do
+        it "serializes custom fields in columns" do
           expect(serialized).to include("body/age/en": "12")
+          expect(serialized).to include("body/age/ca": "12")
+          expect(serialized).to include("body/name/en": "John Barleycorn")
+          expect(serialized).to include("body/name/ca": "Joan Ordi")
         end
 
         context "when not in scope" do
@@ -94,6 +99,9 @@ module Decidim::Proposals
 
           it "does not serialize custom fields" do
             expect(serialized).not_to include("body/age/en")
+            expect(serialized).not_to include("body/name/en")
+            expect(serialized).not_to include("body/age/ca")
+            expect(serialized).not_to include("body/name/ca")
           end
         end
       end

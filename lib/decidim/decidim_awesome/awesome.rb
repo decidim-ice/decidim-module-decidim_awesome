@@ -10,6 +10,8 @@ module Decidim
     autoload :MenuHacker, "decidim/decidim_awesome/menu_hacker"
     autoload :CustomFields, "decidim/decidim_awesome/custom_fields"
     autoload :VotingManifest, "decidim/decidim_awesome/voting_manifest"
+    autoload :TranslatedCustomFieldsType, "decidim/decidim_awesome/api/types/translated_custom_fields_type"
+    autoload :LocalizedCustomFieldsType, "decidim/decidim_awesome/api/types/localized_custom_fields_type"
 
     # Awesome comes with some components for participatory spaces
     # Currently :awesome_map and :awesome_iframe, list them here

@@ -26,8 +26,16 @@ module Decidim
             custom_fields = CustomFields.new(awesome_proposal_custom_fields)
             if custom_fields.present?
               @proposal.body.each do |locale, body|
-                fields_entries(custom_fields, body) do |key, value|
-                  payload["body/#{key}/#{locale}".to_sym] = value
+                if body.is_a?(Hash)
+                  body.each do |translation_locale, value|
+                    fields_entries(custom_fields, value) do |field_key, field_value|
+                      payload["body/#{field_key}/#{translation_locale}".to_sym] = field_value if payload["body/#{field_key}/#{translation_locale}".to_sym].blank?
+                    end
+                  end
+                else
+                  fields_entries(custom_fields, body) do |key, value|
+                    payload["body/#{key}/#{locale}".to_sym] = value
+                  end
                 end
               end
             end
