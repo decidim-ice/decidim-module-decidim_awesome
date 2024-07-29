@@ -358,12 +358,8 @@ en:
           system: Everywhere except participatory spaces
           title:
             admins: Scoped Admins
-            checks: System Compatibility
-            maintenance: Maintenance
-            custom_redirects: Custom Redirections
             editors: Editor Hacks
             livechat: Live Chat
-            menu_hacks: Menu Tweaks
             proposal_custom_fields: 'Proposals Custom Fields: Public fields'
             proposal_private_custom_fields: 'Proposals Custom Fields: Private fields'
             proposals: Proposals Hacks
@@ -429,15 +425,18 @@ en:
           update:
             error: Error updating redirection! %{error}
             success: Redirection updated successfully
+        maintenance:
+          show:
+            title: Maintenance tools
         menu:
           admins: Scoped Admins
-          maintenance: 
-            maintenance: Maintenance
-            private_data: Private data
-            checks: System Compatibility
           custom_redirects: Custom Redirections
           editors: Editor Hacks
           livechat: Live Chat
+          maintenance:
+            checks: System Compatibility
+            maintenance: Maintenance
+            private_data: Private data
           menu_hacks: Menu Tweaks
           proposal_custom_fields: Proposals Custom Fields
           proposals: Proposals Hacks

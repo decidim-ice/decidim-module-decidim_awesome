@@ -1,10 +1,11 @@
+<div class="item_show__header">
+  <h2 class="item_show__header-title">
+    <%= t(".title") %>
+    <%= link_to t(".new"), decidim_admin_decidim_awesome.new_custom_redirect_path, class: "button button__secondary button__xs tiny button--title text-white" %>
+  </h2>
+</div>
+
 <div class="card">
-  <div class="bg-gray-6 p-4 rounded-t">
-    <h2 class="card-title flex flex-row">
-      <%= t(".title") %>
-      <%= link_to t(".new"), decidim_admin_decidim_awesome.new_custom_redirect_path, class: "button button__secondary button__xs tiny button--title text-white" %>
-    </h2>
-  </div>
   <div class="card-section p-4">
   <p class="help-text -mt-2 mb-4"><%= t(".description").html_safe %></p>
   <div class="table-scroll decidim_awesome-form">
