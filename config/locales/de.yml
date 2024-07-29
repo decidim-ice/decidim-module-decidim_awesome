@@ -237,7 +237,12 @@ de:
               proposal_custom_fields: Erstelle eigene Eingabefelder für das Vorschlagsmodul. Du kannst die Funktion auf einzelne Prozesse / Module beschränken.
               proposal_custom_fields_example: Die Daten werden in einem XML-Objekt unter Verwendung kompatibler HTML-Attribute (dl,dt,dd-Elemente) gespeichert, die den "body" in einem normalen Vorschlag ersetzen.
               proposal_custom_fields_translations: "Labels, Hilfetexte, Platzhalter und Standardwerte können benutzerdefinierte Übersetzungen Ihrer Instanz verwenden. \nVerwenden Sie dafür statt eines String-Literals den i18n-Schlüssel (er muss mindestens einen Punkt enthalten).\nZum Beispiel:\n- \"activemodel.attributes.proposal.title\" statt \"Titel\"\n- \"activemodel.attributes.proposal.address\" anstelle von \"Adresse\"\nOder verwenden Sie Ihre eigenen Schlüssel in Kombination mit anderen Tools um Übersetzungen zu definieren (z. B.: mit dem Modul Term Customizer):\n - \"myapp.custom_fields.bio\" statt \"Biographie\""
-              proposal_private_custom_fields: Ähnlich wie öffentlich sichtbare Felder, aber diese Informationen werden nicht öffentlich bekannt gegeben (nur Adminzugriff).
+              proposal_private_custom_fields: Wie öffentlich sichtbare Eingabefelder, jedoch werden diese Informationen nicht veröffentlicht (nur Adminzugriff).
+              proposal_private_custom_fields_translations: |
+                Private Eingabefelder werden in einer hervorgehobenen Box mit diesem Informationstext angezeigt:
+                %{warning}
+                Dieser Text kann mit einer benutzerdefinierten Übersetzung durch Verwendung des Schlüssels angepasst werden:
+                %{key}
               scoped_admins: Befördern Sie normale Benutzer zu Administratoren, die nur bestimmte Teile der öffentlichen Seite verwalten können (verwenden Sie dazu den Editor für Einschränkungen). Beachten Sie, dass Benutzer, die bereits reguläre Administratorrechte haben, ignoriert werden. For instance, if having configured /my-origin => /my-destination, a request to /my-origin?locale=ca  will be redirected to "/my-destination?locale=ca".
               scoped_styles: Erstellen Sie benutzerdefinierte CSS, die nur in bestimmten Bereichen der öffentlichen Seite gelten (vewenden Sie dazu die Einschränkungen)
               scoped_styles_variables: 'Sie können die folgenden CSS-Variablen für die benutzerdefinierter Farben der Organisation verwenden:'
@@ -257,6 +262,9 @@ de:
             sure_to_remove: Bist du sicher, dass du dieses Eingabefeld entfernen möchtest?
           form_proposal_private_custom_fields:
             delete: Löschen
+            new: Neues privates Eingabefeld hinzufügen
+            remove: Privates Eingabefeld entfernen
+            sure_to_remove: Bist du sicher, dass du dieses private Eingabefeld entfernen möchtest?
           form_scoped_admins:
             delete: Löschen
             new: Hinzufügen einer neuen "Eingeschränkte Admins"-Gruppe
@@ -280,6 +288,8 @@ de:
             editors: Editoren
             livechat: Live-Chat
             menu_hacks: Menüanpassungen
+            proposal_custom_fields: 'Benutzerdefinierte Felder: Öffentliche Felder'
+            proposal_private_custom_fields: 'Benutzerdefinierte Felder: Private Felder'
             proposals: Vorschläge
             styles: Eigene Styles
             surveys: Umfragen
@@ -387,6 +397,11 @@ de:
             error: Fehler beim Aktualisieren des Menüpunkts! %{error}
             success: Menüpunkt erfolgreich aktualisiert
           url_exists: Die gleiche URL ist bereits konfiguriert. bitte bearbeiten Sie diese, anstatt sie neu zu erstellen.
+        proposal_custom_fields:
+          menu:
+            title: Öffentlich sichtbare Felder
+          private_body: Privater Textkörper
+          proposal_private_custom_fields: Private Felder
       amendments:
         modal:
           amendment_exists: Eine Änderung existiert bereits
