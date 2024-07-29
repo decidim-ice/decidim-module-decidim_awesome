@@ -19,6 +19,7 @@ de:
         intergram_title_open: Geöffneter Chattitel
         intergram_use_floating_button: Wenn aktiviert, ist der geschlossene Chat immer ein Button statt eines Textes
         proposal_custom_fields: 'Eingabefeld #%{id}'
+        proposal_private_custom_fields: 'Privates Eingabefeld #%{id}'
         scoped_admins: Eingeschränkte Admin-Gruppe %{id}
         scoped_styles: Eigene Eingabefelder %{id}
         validate_body_max_caps_percent: Maximal erlaubter Prozentsatz an Großbuchstaben für den Textkörper
@@ -236,6 +237,7 @@ de:
               proposal_custom_fields: Erstelle eigene Eingabefelder für das Vorschlagsmodul. Du kannst die Funktion auf einzelne Prozesse / Module beschränken.
               proposal_custom_fields_example: Die Daten werden in einem XML-Objekt unter Verwendung kompatibler HTML-Attribute (dl,dt,dd-Elemente) gespeichert, die den "body" in einem normalen Vorschlag ersetzen.
               proposal_custom_fields_translations: "Labels, Hilfetexte, Platzhalter und Standardwerte können benutzerdefinierte Übersetzungen Ihrer Instanz verwenden. \nVerwenden Sie dafür statt eines String-Literals den i18n-Schlüssel (er muss mindestens einen Punkt enthalten).\nZum Beispiel:\n- \"activemodel.attributes.proposal.title\" statt \"Titel\"\n- \"activemodel.attributes.proposal.address\" anstelle von \"Adresse\"\nOder verwenden Sie Ihre eigenen Schlüssel in Kombination mit anderen Tools um Übersetzungen zu definieren (z. B.: mit dem Modul Term Customizer):\n - \"myapp.custom_fields.bio\" statt \"Biographie\""
+              proposal_private_custom_fields: Ähnlich wie öffentlich sichtbare Felder, aber diese Informationen werden nicht öffentlich bekannt gegeben (nur Adminzugriff).
               scoped_admins: Befördern Sie normale Benutzer zu Administratoren, die nur bestimmte Teile der öffentlichen Seite verwalten können (verwenden Sie dazu den Editor für Einschränkungen). Beachten Sie, dass Benutzer, die bereits reguläre Administratorrechte haben, ignoriert werden. For instance, if having configured /my-origin => /my-destination, a request to /my-origin?locale=ca  will be redirected to "/my-destination?locale=ca".
               scoped_styles: Erstellen Sie benutzerdefinierte CSS, die nur in bestimmten Bereichen der öffentlichen Seite gelten (vewenden Sie dazu die Einschränkungen)
               scoped_styles_variables: 'Sie können die folgenden CSS-Variablen für die benutzerdefinierter Farben der Organisation verwenden:'
@@ -440,6 +442,7 @@ de:
           show:
             view_meeting: Sitzung ansehen
             view_proposal: Vorschlag ansehen
+      proposal_private_custom_fields_disclosure: Diese Informationen werden nicht veröffentlicht
       validators:
         too_much_caps: Es werden zu viele Großbuchstaben verwendet (über %{percent}% des Textes)
       voting:
@@ -469,6 +472,9 @@ de:
       meetings_map:
         view_meeting: Sitzung ansehen
     proposals:
+      admin:
+        exports:
+          awesome_private_proposals: Vorschläge mit privaten Daten
       proposals:
         orders:
           az: A-Z (alphabetisch)
