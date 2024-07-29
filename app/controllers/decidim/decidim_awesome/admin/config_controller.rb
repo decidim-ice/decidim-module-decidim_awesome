@@ -9,8 +9,6 @@ module Decidim
         include ConfigConstraintsHelpers
         helper ConfigConstraintsHelpers
 
-        layout "decidim/decidim_awesome/admin/application"
-
         helper_method :constraints_for, :users_for, :config_var
         before_action do
           enforce_permission_to :edit_config, configs

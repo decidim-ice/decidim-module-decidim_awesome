@@ -359,6 +359,7 @@ en:
           title:
             admins: Scoped Admins
             checks: System Compatibility
+            maintenance: Maintenance
             custom_redirects: Custom Redirections
             editors: Editor Hacks
             livechat: Live Chat
@@ -430,7 +431,10 @@ en:
             success: Redirection updated successfully
         menu:
           admins: Scoped Admins
-          checks: System Compatibility
+          maintenance: 
+            maintenance: Maintenance
+            private_data: Private data
+            checks: System Compatibility
           custom_redirects: Custom Redirections
           editors: Editor Hacks
           livechat: Live Chat

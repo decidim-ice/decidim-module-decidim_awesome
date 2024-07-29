@@ -28,7 +28,9 @@ module Decidim
         post :export_admin_accountability, to: "admin_accountability#export", as: "export_admin_accountability"
         get :users, to: "config#users"
         post :rename_scope_label, to: "config#rename_scope_label"
-        get :checks, to: "checks#index"
+        resources :maintenance, only: [:show, :update] do
+          get :checks, on: :collection, to: "checks#index"
+        end
         post :migrate_images, to: "checks#migrate_images"
         root to: "config#show"
       end
@@ -62,6 +64,7 @@ module Decidim
         # submenus
         Decidim::DecidimAwesome::Menu.register_custom_fields_submenu!
         Decidim::DecidimAwesome::Menu.register_menu_hacks_submenu!
+        Decidim::DecidimAwesome::Menu.register_maintenance_admin_menu!
         Decidim::DecidimAwesome::Menu.register_awesome_admin_menu!
 
         # user menu
