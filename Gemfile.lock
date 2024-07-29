@@ -365,7 +365,7 @@ GEM
       logger
     faraday-net_http (3.1.0)
       net-http
-    ffi (1.17.0)
+    ffi (1.17.0-x86_64-linux-gnu)
     file_validators (3.0.0)
       activemodel (>= 3.2)
       mime-types (>= 1.0)
@@ -665,7 +665,7 @@ GEM
       rubocop-ast (>= 1.28.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
-    rubocop-ast (1.28.1)
+    rubocop-ast (1.31.3)
       parser (>= 3.3.1.0)
     rubocop-capybara (2.18.0)
       rubocop (~> 1.41)
