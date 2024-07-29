@@ -16,7 +16,7 @@
           <th><%= t("custom_redirect.origin", scope: "activemodel.attributes") %></th>
           <th><%= t("custom_redirect.destination", scope: "activemodel.attributes") %></th>
           <th class="redirect-status"><%= link_to(t(".check_redirections"), "#", class: "button button__secondary button__xs pull-right secondary check-custom-redirections") if current_config.present? %></th>
-          <th class="actions"></th>
+          <th class="actions"><%= t("decidim.decidim_awesome.admin.actions") %></th>
         </tr>
       </thead>
       <tbody>

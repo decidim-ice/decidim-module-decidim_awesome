@@ -8,6 +8,8 @@ module Decidim
       # System compatibility analyzer
       class ChecksController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
+        include MaintenanceContext
+
         helper ConfigConstraintsHelpers
         helper SystemCheckerHelpers
 
@@ -55,6 +57,10 @@ module Decidim
           render_to_string(partial:)
         rescue ActionView::Template::Error => e
           flash.now[:alert] = "Partial [#{partial}] has thrown an error: #{e.message}"
+        end
+
+        def current_view
+          "checks"
         end
       end
     end

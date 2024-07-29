@@ -122,7 +122,7 @@ module Decidim
                           I18n.t("private_data", scope: "decidim.decidim_awesome.admin.menu.maintenance"),
                           decidim_admin_decidim_awesome.maintenance_path(:private_data),
                           position: 10,
-                          icon_name: "spy"
+                          icon_name: "spy-line"
 
             menu.add_item :checks,
                           I18n.t("checks", scope: "decidim.decidim_awesome.admin.menu.maintenance"),

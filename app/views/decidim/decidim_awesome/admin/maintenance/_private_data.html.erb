@@ -1,0 +1,25 @@
+<div class="table-scroll">
+  <table class="table-list">
+    <thead>
+      <tr>
+        <th><%= t(".component") %></th>
+        <th><%= t(".items_count") %></th>
+        <th><%= t(".last_date") %></th>
+        <th><%= t("decidim.decidim_awesome.admin.actions") %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+    <% filtered_collection.each do |resource| %>
+      <% item = present_private_data(resource) %>
+      <tr class="">
+        <td><%= link_to item.name, item.path %></td>
+        <td><%= item.total %></td>
+        <td><%= t(".time_ago", time: time_ago_in_words(item.last_date)) %></td>
+      </tr>
+    <% end %>
+    <tbody>
+  </table>
+</div>
+
+<%= paginate filtered_collection, theme: "decidim" %>

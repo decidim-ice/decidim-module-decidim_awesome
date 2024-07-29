@@ -10,6 +10,7 @@ module Decidim
     autoload :MenuHacker, "decidim/decidim_awesome/menu_hacker"
     autoload :CustomFields, "decidim/decidim_awesome/custom_fields"
     autoload :VotingManifest, "decidim/decidim_awesome/voting_manifest"
+    autoload :PrivateDataFinder, "decidim/decidim_awesome/private_data_finder"
     autoload :TranslatedCustomFieldsType, "decidim/decidim_awesome/api/types/translated_custom_fields_type"
     autoload :LocalizedCustomFieldsType, "decidim/decidim_awesome/api/types/localized_custom_fields_type"
 
