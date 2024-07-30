@@ -115,6 +115,7 @@ module Decidim
           end
           if DecidimAwesome.enabled?(:proposal_custom_fields, :proposal_private_custom_fields, :weighted_proposal_voting)
             Decidim::Proposals::ProposalSerializer.include(Decidim::DecidimAwesome::Proposals::ProposalSerializerOverride)
+            Decidim::AdminLog::ComponentPresenter.include(Decidim::DecidimAwesome::AdminLog::ComponentPresenterOverride)
           end
 
           if DecidimAwesome.enabled?(:weighted_proposal_voting)
@@ -272,6 +273,7 @@ module Decidim
         Decidim.icons.register(name: "fire", icon: "fire-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "line-chart-line", icon: "line-chart-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "spy", icon: "spy-fill", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "forbid-line", icon: "forbid-line", category: "system", description: "", engine: :decidim_awesome)
       end
     end
   end

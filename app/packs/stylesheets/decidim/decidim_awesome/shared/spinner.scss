@@ -5,4 +5,20 @@
   &::before {
     @apply content-[""] ml-[50%] md:ml-[calc(50%-0.75rem)] block w-6 h-6 rounded-full animate-spin border-4 border-l-background border-y-background border-r-secondary z-20;
   }
+
+  &.alert {
+    &::before {
+      @apply border-r-alert;
+    }
+  }
+  &.warning {
+    &::before {
+      @apply border-r-warning;
+    }
+  }
+  &.primary {
+    &::before {
+      @apply border-r-primary;
+    }
+  }
 }

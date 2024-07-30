@@ -9,25 +9,65 @@ module Decidim
       class MaintenanceController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
         include MaintenanceContext
-        helper ConfigConstraintsHelpers
         include Decidim::Admin::Filterable
-        helper_method :filtered_collection
+        include ActionView::Helpers::DateHelper
 
-        def show; end
+        helper ConfigConstraintsHelpers
+        helper_method :collection, :resource, :present, :time_ago
+
+        before_action do
+          enforce_permission_to :edit_config, :private_data, private_data:
+        end
+
+        def show
+          respond_to do |format|
+            format.json do
+              render json: private_data_finder.for(params[:resources].split(",")).map { |resource| present(resource) }
+            end
+            format.all do
+              render :show
+            end
+          end
+        end
+
+        def destroy_private_data
+          Decidim::ActionLogger.log("destroy_private_data", current_user, resource, nil, count: private_data.total)
+
+          Lock.new(current_organization).get!(resource)
+          DestroyPrivateDataJob.perform_later(resource)
+
+          redirect_to decidim_admin_decidim_awesome.maintenance_path("private_data"),
+                      notice: I18n.t("destroying_private_data", scope: "decidim.decidim_awesome.admin.maintenance.private_data", title: present_private_data(resource).name)
+        end
 
         private
 
-        def collection
-          @collection = paginate(private_data)
-        end
-
-        def base_query
-          collection
+        def resource
+          @resource ||= Component.find_by(id: params[:resource_id])
         end
 
         def private_data
-          # TODO: only after a date
-          @private_data = PrivateDataFinder.new.query
+          @private_data ||= present_private_data(resource) if resource
+        end
+
+        def collection
+          filtered_collection
+        end
+
+        def base_query
+          private_data_finder.query
+        end
+
+        def present(resource)
+          present_private_data(resource)
+        end
+
+        def private_data_finder
+          @private_data ||= PrivateDataFinder.new
+        end
+
+        def time_ago
+          @time_ago ||= time_ago_in_words(Time.current - Decidim::DecidimAwesome.private_data_expiration_time)
         end
       end
     end

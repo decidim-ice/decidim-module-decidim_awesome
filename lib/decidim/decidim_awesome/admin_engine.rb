@@ -28,7 +28,8 @@ module Decidim
         post :export_admin_accountability, to: "admin_accountability#export", as: "export_admin_accountability"
         get :users, to: "config#users"
         post :rename_scope_label, to: "config#rename_scope_label"
-        resources :maintenance, only: [:show, :update] do
+        resources :maintenance, only: [:show] do
+          delete :destroy_private_data, on: :member
           get :checks, on: :collection, to: "checks#index"
         end
         post :migrate_images, to: "checks#migrate_images"

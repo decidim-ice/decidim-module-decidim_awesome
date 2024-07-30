@@ -85,7 +85,7 @@ const initializeDialog = (dialog) => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("[data-dialog]").forEach((dialog) => {
+  document.querySelectorAll("[data-constraint][data-dialog]").forEach((dialog) => {
     initializeDialog(dialog);
   });
 });
