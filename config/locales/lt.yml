@@ -93,4 +93,3 @@ lt:
               Atrodo, kad šiam diegimui reikia perkelti <strong>%{total}</strong> senųjų paveikslėlių į naująją sistemą.<br>
               Galite pradėti procesą dabar, ir jis bus atliekamas fone.
             start_image_migrations: "\U0001F449 Pradėti migracijos procesą dabar"
-            title: Sistemos suderinamumo patikrinimai
