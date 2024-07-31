@@ -188,9 +188,7 @@ de:
               Es sieht so aus, dass diese Instanz <strong>%{total}</strong> der alten Images auf das neue System migrieren muss.<br>
               Sie können den Prozess jetzt starten und er wird im Hintergrund ausgeführt.
             start_image_migrations: "\U0001F449 Starten Sie den Migrationsprozess jetzt"
-            title: Systemkompatibilität
         config:
-          caution: 'HINWEIS: Mit dieser Funktion werden einige Standardverhaltensweisen stark verändert, was zu unerwarteten Ergebnissen führen kann. Verwenden Sie sie mit Vorsicht!'
           constraints:
             add_condition: Einschränkung hinzufügen
             always: Immer
@@ -283,11 +281,8 @@ de:
           system: Überall ausser...
           title:
             admins: Eingeschränkte Admins
-            checks: Checks
-            custom_redirects: Benutzerdefinierte Umleitungen
             editors: Editoren
             livechat: Live-Chat
-            menu_hacks: Menüanpassungen
             proposal_custom_fields: 'Benutzerdefinierte Felder: Öffentliche Felder'
             proposal_private_custom_fields: 'Benutzerdefinierte Felder: Private Felder'
             proposals: Vorschläge
@@ -350,10 +345,11 @@ de:
             success: Umleitung erfolgreich aktualisiert
         menu:
           admins: Eingeschränkte Admins
-          checks: Checks
           custom_redirects: Benutzerdefinierte Umleitungen
           editors: Editoren
           livechat: Live-Chat
+          maintenance:
+            checks: Checks
           menu_hacks: Menüanpassungen
           proposal_custom_fields: 'Vorschläge: Eigene Eingabefelder'
           proposals: Vorschläge
