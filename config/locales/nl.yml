@@ -76,7 +76,6 @@ nl:
               CSS: Head bevat niet de vereiste <link> stylesheet entries. Om dit op te lossen kun je ze handmatig toevoegen aan je custom -head.html.erb
               JavaScript: Hoofd bevat niet de vereiste <script> Javascript-vermeldingen. Om het op te lossen kun je het handmatig toevoegen aan je aangepaste admin/_header.html.erb
             head_tags: Awesome tags zijn in de application header ingevoegd
-            title: Systeem compatibility checks
         config:
           constraints:
             add_condition: Voeg een case toe
@@ -115,10 +114,8 @@ nl:
             update: Configuratie bijwerken
           system: Overal, behalve participatieve ruimtes
           title:
-            checks: Systeemcompabiliteit
             editors: Editor hacks
             livechat: Live Chat
-            menu_hacks: Menu tweaks
             proposals: Voorstellen hacks
             styles: Aangepaste stijlen
             surveys: Enquêtes & formulieren
@@ -151,9 +148,10 @@ nl:
           new:
             save: Opslaan
         menu:
-          checks: Systeemcompabiliteit
           editors: Editor hacks
           livechat: Live Chat
+          maintenance:
+            checks: Systeemcompabiliteit
           menu_hacks: Menu tweaks
           proposals: Voorstellen hacks
           styles: Aangepaste stijlen
