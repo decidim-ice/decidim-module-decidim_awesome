@@ -187,9 +187,7 @@ ca:
               Sembla que aquesta instal·lació requereix migrar <strong>%{total}</strong> imatges al nou sistema.<br>
               Pots iniciar el procés ara i es durà a terme en segon pla.
             start_image_migrations: "\U0001F449 Iniciar el procés de migració ara"
-            title: Anàlisi de compatibilitat amb el sistema
         config:
-          caution: 'NOTA: Aquesta funció modifica en gran mesura alguns comportaments predeterminats que podrien provocar resultats inesperats. Utilitzeu-lo amb precaució!'
           constraints:
             add_condition: Afegeix una restricció
             always: Sempre
@@ -273,11 +271,8 @@ ca:
           system: A tot arreu excepte espais participatius
           title:
             admins: Administradores acotades
-            checks: Compatibilitat de sistema
-            custom_redirects: Redireccions personalitzades
             editors: Modificacions als editors
             livechat: Xat en directe
-            menu_hacks: Retocs al menú
             proposals: Modificacions a propostes
             styles: Estils personalitzats
             surveys: Formularis i enquestes
@@ -342,10 +337,11 @@ ca:
             success: Redirecció actualitzada correctament
         menu:
           admins: Administradores acotades
-          checks: Compatibilitat de sistema
           custom_redirects: Redireccions personalitzades
           editors: Modificacions als editors
           livechat: Xat en directe
+          maintenance:
+            checks: Compatibilitat de sistema
           menu_hacks: Retocs al menú
           proposal_custom_fields: Camps personalitzats per propostes
           proposals: Modificacions a propostes
