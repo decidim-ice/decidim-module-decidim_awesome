@@ -377,6 +377,8 @@ The awesome admin provides with some maintenance tools (more to come in the futu
 These tools are designed to help remove old data as required by laws such as GDPR, particularly in relation to private custom fields.
 This menu will show if there's any data older than 6 months (configurable) and will let admins remove it component by component.
 
+![Private data](examples/private_data.png)
+
 #### To be continued...
 
 We're not done! Please check the [issues](/decidim-ice/decidim-module-decidim_awesome/issues) (and participate) to see what's on our mind

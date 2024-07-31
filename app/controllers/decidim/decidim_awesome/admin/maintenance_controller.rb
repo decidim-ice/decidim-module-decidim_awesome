@@ -33,7 +33,7 @@ module Decidim
         def destroy_private_data
           Decidim::ActionLogger.log("destroy_private_data", current_user, resource, nil, count: private_data.total)
 
-          Lock.new(current_organization).get!(resource)
+          Lock.set(wait: 1.second).new(current_organization).get!(resource)
           DestroyPrivateDataJob.perform_later(resource)
 
           redirect_to decidim_admin_decidim_awesome.maintenance_path("private_data"),
