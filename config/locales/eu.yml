@@ -29,9 +29,7 @@ eu:
           form_scoped_styles:
             delete: Ezabatu
           title:
-            checks: System compatibility
             editors: Editor hacks
-            menu_hacks: Menu tweaks
             proposals: Proposals hacks
             styles: Custom styles
             surveys: Surveys & forms
@@ -41,8 +39,9 @@ eu:
           show:
             cancel: Ezeztatu
         menu:
-          checks: System compatibility
           editors: Editor hacks
+          maintenance:
+            checks: System compatibility
           menu_hacks: Menu tweaks
           proposals: Proposals hacks
           styles: Custom styles
