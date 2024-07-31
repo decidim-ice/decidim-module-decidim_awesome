@@ -55,6 +55,7 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::Proposals::ProposalVotesController.included_modules).to include(Decidim::DecidimAwesome::Proposals::ProposalVotesControllerOverride)
       expect(Decidim::AmendmentsController.included_modules).to include(Decidim::DecidimAwesome::LimitPendingAmendments)
       expect(Decidim::Proposals::ProposalsController.included_modules).to include(Decidim::DecidimAwesome::Proposals::OrderableOverride)
+      expect(Decidim::AdminLog::ComponentPresenter.included_modules).to include(Decidim::DecidimAwesome::AdminLog::ComponentPresenterOverride)
     end
 
   else
@@ -82,6 +83,7 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::Proposals::ProposalVotesController.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ProposalVotesControllerOverride)
       expect(Decidim::AmendmentsController.included_modules).not_to include(Decidim::DecidimAwesome::LimitPendingAmendments)
       expect(Decidim::Proposals::ProposalsController.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::OrderableOverride)
+      expect(Decidim::AdminLog::ComponentPresenter.included_modules).not_to include(Decidim::DecidimAwesome::AdminLog::ComponentPresenterOverride)
     end
   end
 end
@@ -260,7 +262,7 @@ shared_examples "basic rendering" do |enabled|
       end
     else
       it "renders the compatibility checks page" do
-        expect(page).to have_content("System compatibility")
+        expect(page).to have_content("Maintenance tools: System Compatibility Checks")
       end
 
       it "has no admin menus" do

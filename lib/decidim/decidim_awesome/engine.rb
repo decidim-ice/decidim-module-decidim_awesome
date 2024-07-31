@@ -115,6 +115,7 @@ module Decidim
           end
           if DecidimAwesome.enabled?(:proposal_custom_fields, :proposal_private_custom_fields, :weighted_proposal_voting)
             Decidim::Proposals::ProposalSerializer.include(Decidim::DecidimAwesome::Proposals::ProposalSerializerOverride)
+            Decidim::AdminLog::ComponentPresenter.include(Decidim::DecidimAwesome::AdminLog::ComponentPresenterOverride)
           end
 
           if DecidimAwesome.enabled?(:weighted_proposal_voting)

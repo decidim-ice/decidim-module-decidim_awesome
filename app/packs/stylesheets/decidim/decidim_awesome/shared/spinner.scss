@@ -1,0 +1,46 @@
+// Loading spinner does not ocuppy all the width and height as the new spinner-container
+.loading-spinner {
+  position: relative;
+  cursor: wait;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    border: 4px solid;
+    border-color: transparent transparent $secondary-color transparent;
+    z-index: 20;
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &.alert {
+    &::before {
+      border-color: transparent transparent $alert-color transparent;
+    }
+  }
+
+  &.warning {
+    &::before {
+      border-color: transparent transparent $warning-color transparent;
+    }
+  }
+
+  &.primary {
+    &::before {
+      border-color: transparent transparent $primary-color transparent;
+    }
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

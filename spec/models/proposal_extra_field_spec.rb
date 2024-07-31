@@ -226,6 +226,7 @@ module Decidim::DecidimAwesome
     describe "private_body" do
       it "returns nil if no private_body" do
         expect(extra_fields.private_body).to be_nil
+        expect(extra_fields.private_body_updated_at).to be_nil
         expect(extra_fields.attributes["private_body"]).to be_nil
       end
 
@@ -242,6 +243,18 @@ module Decidim::DecidimAwesome
         it "sets the private body" do
           expect(extra_fields.private_body["en"]).to eq('<xml><dl><dt name="something">Something</dt></dl></xml>')
           expect(extra_fields.attributes["private_body"]["en"]).not_to start_with("<xml><dl><dt")
+        end
+
+        it "updates the private_body_updated_at only at private_body changes" do
+          initial_date = extra_fields.private_body_updated_at
+          expect(initial_date).not_to be_nil
+          extra_fields.weight_total = 10
+          extra_fields.save!
+          sleep 0.1
+          expect(extra_fields.private_body_updated_at).to eq(initial_date)
+          extra_fields.private_body = { "en" => '<xml><dl><dt name="something">Something else</dt></dl></xml>' }
+          extra_fields.save!
+          expect(extra_fields.private_body_updated_at).not_to eq(initial_date)
         end
 
         it "the associated proposal has a private_body" do

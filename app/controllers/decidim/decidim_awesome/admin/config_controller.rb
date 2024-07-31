@@ -9,8 +9,6 @@ module Decidim
         include ConfigConstraintsHelpers
         helper ConfigConstraintsHelpers
 
-        layout "decidim/decidim_awesome/admin/application"
-
         helper_method :constraints_for, :users_for, :config_var
         before_action do
           enforce_permission_to :edit_config, configs
@@ -19,7 +17,7 @@ module Decidim
         def show
           @form = form(ConfigForm).from_params(organization_awesome_config)
 
-          redirect_to decidim_admin_decidim_awesome.checks_path unless config_var
+          redirect_to decidim_admin_decidim_awesome.checks_maintenance_index_path unless config_var
         end
 
         def update

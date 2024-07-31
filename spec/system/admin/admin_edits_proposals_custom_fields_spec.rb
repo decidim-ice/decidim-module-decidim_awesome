@@ -169,11 +169,8 @@ describe "Admin edits proposals" do
   end
 
   context "when answering the proposal" do
-    before do
-      find("a.action-icon--show-proposal").click
-    end
-
     it "displays custom fields" do
+      find("a.action-icon--show-proposal").click
       expect(page).to have_content("Bio")
       within "#textarea-1476748007461" do
         expect(page).to have_content("I shot the sheriff")
@@ -183,12 +180,64 @@ describe "Admin edits proposals" do
       within "#text-1476748004579" do
         expect(page).to have_content("555-555-555")
       end
+      expect(page).to have_content("This data was last updated less than a minute ago.")
+      expect(page).not_to have_content("You might want to remove it")
+    end
+
+    context "when private data is required to be removed" do
+      before do
+        # rubocop:disable Rails/SkipsModelValidations
+        proposal.extra_fields.update_column(:private_body_updated_at, 4.months.ago)
+        # rubocop:enable Rails/SkipsModelValidations
+        find("a.action-icon--show-proposal").click
+      end
+
+      it "displays a warning" do
+        click_link_or_button "Private body"
+        expect(page).to have_content("Phone Number")
+        expect(page).to have_content("This data was last updated 4 months ago.")
+        expect(page).to have_content("You might want to remove it")
+      end
+    end
+
+    context "when private data is removed" do
+      before do
+        proposal.extra_fields.update(private_body: nil)
+        find("a.action-icon--show-proposal").click
+      end
+
+      it "shows destroyed date" do
+        click_link_or_button "Private body"
+        expect(page).not_to have_content("Phone Number")
+        expect(page).to have_content("This data was destroyed less than a minute ago.")
+        expect(page).not_to have_content("555-555-555")
+        expect(page).not_to have_content("You might want to remove it")
+      end
+    end
+
+    context "when no private data, nor private data last update is present" do
+      before do
+        # rubocop:disable Rails/SkipsModelValidations
+        proposal.extra_fields.update_column(:private_body, nil)
+        proposal.extra_fields.update_column(:private_body_updated_at, nil)
+        # rubocop:enable Rails/SkipsModelValidations
+        find("a.action-icon--show-proposal").click
+      end
+
+      it "does not display the private data" do
+        click_link_or_button "Private body"
+        expect(page).not_to have_content("Phone Number")
+        expect(page).not_to have_content("This data was last updated")
+        expect(page).not_to have_content("This data was last destroyed")
+        expect(page).not_to have_content("You might want to remove it")
+      end
     end
 
     context "when private fields are scoped to other places" do
       let!(:private_constraint) { create(:config_constraint, awesome_config: private_config_helper, settings: { "participatory_space_manifest" => "assemblies" }) }
 
       it "does not display private custom fields" do
+        find("a.action-icon--show-proposal").click
         expect(page).to have_content("Bio")
         within "#textarea-1476748007461" do
           expect(page).to have_content("I shot the sheriff")
