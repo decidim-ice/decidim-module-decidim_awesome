@@ -51,14 +51,14 @@ module Decidim
                         if first_available
                           decidim_admin_decidim_awesome.config_path(first_available)
                         else
-                          decidim_admin_decidim_awesome.checks_path
+                          decidim_admin_decidim_awesome.checks_maintenance_index_path
                         end,
                         icon_name: "fire",
                         position: 7.5,
                         active: if first_available
                                   is_active_link?(decidim_admin_decidim_awesome.config_path(first_available), :inclusive)
                                 else
-                                  is_active_link?(decidim_admin_decidim_awesome.checks_path)
+                                  is_active_link?(decidim_admin_decidim_awesome.checks_maintenance_index_path)
                                 end,
                         if: defined?(current_user) && current_user&.read_attribute("admin")
         end
