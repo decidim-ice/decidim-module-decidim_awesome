@@ -30,5 +30,5 @@
 
 </div>
 
-<%= decidim_modal id: "edit-modal-#{key}", class: "decidim_awesome modal", remote: true %>
-<%= decidim_modal id: "new-modal-#{key}", class: "decidim_awesome modal", remote: true %>
+<%= decidim_modal id: "edit-modal-#{key}", data: { constraint: key }, remote: true %>
+<%= decidim_modal id: "new-modal-#{key}", data: { constraint: key }, remote: true %>

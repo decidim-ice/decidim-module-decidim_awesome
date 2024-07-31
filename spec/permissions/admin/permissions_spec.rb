@@ -10,9 +10,13 @@ module Decidim::DecidimAwesome::Admin
     let(:user) { create(:user, :admin, :confirmed, organization:) }
     let(:context) do
       {
-        current_organization: organization
+        current_organization: organization,
+        private_data:,
+        global:
       }
     end
+    let(:global) { nil }
+    let(:private_data) { nil }
     let(:feature) { :allow_images_in_editors }
     let(:action) do
       { scope: :admin, action: :edit_config, subject: feature }
@@ -81,6 +85,35 @@ module Decidim::DecidimAwesome::Admin
         let(:status) { :disabled }
 
         it { is_expected.to be false }
+      end
+    end
+
+    context "when accessing private_data" do
+      let(:feature) { :private_data }
+      let(:status) { true }
+
+      before do
+        allow(Decidim::DecidimAwesome.config).to receive(:proposal_private_custom_fields).and_return(status)
+      end
+
+      it { is_expected.to be true }
+
+      context "when proposal private fields is disabled" do
+        let(:status) { :disabled }
+
+        it { is_expected.to be false }
+      end
+
+      context "when private_data is present" do
+        let(:private_data) { double(destroyable?: true) }
+
+        it { is_expected.to be true }
+
+        context "when private_data is not destroyable" do
+          let(:private_data) { double(destroyable?: false) }
+
+          it_behaves_like "permission is not set"
+        end
       end
     end
   end

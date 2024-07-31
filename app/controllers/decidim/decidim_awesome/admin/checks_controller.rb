@@ -8,17 +8,17 @@ module Decidim
       # System compatibility analyzer
       class ChecksController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
+        include MaintenanceContext
+
         helper ConfigConstraintsHelpers
         helper SystemCheckerHelpers
-
-        layout "decidim/decidim_awesome/admin/application"
 
         helper_method :head, :admin_head, :head_addons, :admin_addons
 
         def migrate_images
           Decidim::DecidimAwesome::MigrateLegacyImagesJob.perform_later(current_organization.id)
           flash[:notice] = I18n.t("image_migrations_started", scope: "decidim.decidim_awesome.admin.checks.index")
-          redirect_to checks_path
+          redirect_to checks_maintenance_index_path
         end
 
         private
@@ -57,6 +57,10 @@ module Decidim
           render_to_string(partial:)
         rescue ActionView::Template::Error => e
           flash.now[:alert] = "Partial [#{partial}] has thrown an error: #{e.message}"
+        end
+
+        def current_view
+          "checks"
         end
       end
     end

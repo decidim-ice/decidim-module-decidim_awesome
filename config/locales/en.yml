@@ -153,6 +153,7 @@ en:
               za: Z-A (Reverse alphabetical)
     decidim_awesome:
       admin:
+        actions: Actions
         admin_accountability:
           admin_roles:
             admin: Super admin
@@ -216,9 +217,8 @@ en:
               It looks that this installation needs to migrate <strong>%{total}</strong> of the old images to the new system.<br>
               You can start the process now and it will be performed in the background.
             start_image_migrations: "👉 Start the migration process now"
-            title: System compatibility checks
         config:
-          caution: 'NOTE: This feature heavily modifies some default behaviours that
+          caution: 'NOTE: This feature heavily modifies some default behaviors that
             might lead to unexpected results. Use it with caution!'
           constraints:
             add_condition: Add case
@@ -358,11 +358,8 @@ en:
           system: Everywhere except participatory spaces
           title:
             admins: Scoped Admins
-            checks: System Compatibility
-            custom_redirects: Custom Redirections
             editors: Editor Hacks
             livechat: Live Chat
-            menu_hacks: Menu Tweaks
             proposal_custom_fields: 'Proposals Custom Fields: Public fields'
             proposal_private_custom_fields: 'Proposals Custom Fields: Private fields'
             proposals: Proposals Hacks
@@ -428,12 +425,48 @@ en:
           update:
             error: Error updating redirection! %{error}
             success: Redirection updated successfully
+        maintenance:
+          private_data:
+            component: Space / Component
+            confirm_delete: Are you sure you want to delete all private data for this
+              resource? This cannot be undone.
+            delete: Delete all
+            destroying_private_data: Private data for %{title} is set to be destroyed.
+              Please check again in a few minutes.
+            done: Done
+            help_html: |
+              This tool allows you to delete all private data for a specific participatory space or component. This action is irreversible and will remove all private data from the database.
+              <br><br>
+              <strong>What is considered private data?</strong>
+              <br>
+              Private data is any information that is not publicly available and is only accessible to administrators. This, at the moment, includes private custom fields information.
+              <br><br>
+              <strong>What happens when I delete private data?</strong>
+              <br>
+              When you delete private data, all private information for the selected participatory space or component will be permanently removed from the database. A log of this action will be stored in the system for auditing purposes.
+              <br><br>
+              <strong>What happens to public data?</strong>
+              <br>
+              Public data will not be affected by this action. Only private data will be deleted.
+              <br><br>
+              <strong>Is there a minimum time to wait before deleting private data?</strong>
+              <br>
+              Yes, you cannot delete private data if the last update was less than %{time_ago} ago. You can change this configuration in the initializer file.
+            items_count: Total affected
+            last_date: Last update
+            no_data: No private data found older than %{time_ago} ago
+            not_destroyable: This resource cannot be destroyed yet
+            removing: Removing...
+            time_ago: "%{time} ago"
         menu:
           admins: Scoped Admins
-          checks: System Compatibility
           custom_redirects: Custom Redirections
           editors: Editor Hacks
           livechat: Live Chat
+          maintenance:
+            checks: System Compatibility
+            maintenance: Maintenance
+            private_data: Private data
           menu_hacks: Menu Tweaks
           proposal_custom_fields: Proposals Custom Fields
           proposals: Proposals Hacks
@@ -483,7 +516,14 @@ en:
           menu:
             title: Public fields
           private_body: Private body
+          private_data_last_remove: This data was destroyed %{time_ago} ago.
+          private_data_last_update: This data was last updated %{time_ago} ago.
           proposal_private_custom_fields: Private fields
+          remove_private_data: "👉 You might want to remove it"
+      admin_log:
+        component:
+          destroy_private_data: "%{user_name} destroyed %{count} items of private
+            data for %{resource_name} in %{space_name}"
       amendments:
         modal:
           amendment_exists: An amendment already exists
@@ -602,6 +642,12 @@ en:
   layouts:
     decidim:
       decidim_awesome:
+        admin:
+          maintenance:
+            title: 'Maintenance tools: %{title}'
+            titles:
+              checks: System Compatibility Checks
+              private_data: Private Data Clean-Up
         awesome_config:
           amendments: Amendments
           autosaved_error: LocalStorage is not supported in your browser, form cannot

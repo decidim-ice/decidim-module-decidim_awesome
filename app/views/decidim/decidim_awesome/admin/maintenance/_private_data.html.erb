@@ -1,0 +1,44 @@
+<div class="mb-8">
+  <p class="help-text"><%= t(".help_html", time_ago:) %>
+</div>
+
+<% if collection.empty? %>
+  <div class="callout warning"><%= t(".no_data", time_ago:) %></div>
+<% else %>
+  <div class="table-scroll autorefresh" data-url="<%= maintenance_path(:private_data).split("?").first %>">
+    <table class="table-list">
+      <thead>
+        <tr>
+          <th><%= t(".component") %></th>
+          <th><%= t(".items_count") %></th>
+          <th><%= t(".last_date") %></th>
+          <th><%= t("decidim.decidim_awesome.admin.actions") %></th>
+        </tr>
+      </thead>
+
+      <tbody>
+      <% collection.each do |resource| %>
+        <% item = present(resource) %>
+        <tr data-id="<%= item.id %>">
+          <td><%= link_to item.name, item.path %></td>
+          <td data-autorefresh="total"><%= item.total %></td>
+          <td data-autorefresh="time_ago"><%= item.time_ago %></td>
+          <td data-autorefresh="done">
+            <% if item.locked? %>
+              <span class="loading-spinner primary" title="<%= t(".removing") %>"></span>
+            <% elsif item.destroyable? %>
+              <%= link_to destroy_private_data_maintenance_path(:private_data, resource_id: item), method: :delete, class: "button button__primary button__xs tiny", data: { confirm: t(".confirm_delete") } do %>
+                <%= icon "delete-bin-line" %>
+                <%= t(".delete") %>
+              <% end %>
+            <% else %>
+              <span class="not-destroyable" title="<%= t(".not_destroyable") %>"><%= icon "forbid-line" %></span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+<%= paginate collection, theme: "decidim" %>

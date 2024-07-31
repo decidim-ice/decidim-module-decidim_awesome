@@ -1,3 +1,19 @@
 @import "stylesheets/decidim/decidim_awesome/shared/spinner";
 @import "stylesheets/decidim/decidim_awesome/admin/intergram_fixes";
 @import "stylesheets/decidim/decidim_awesome/forms/custom_fields";
+
+.component__show {
+  &_private_data {
+    &-grid {
+      @apply bg-background grid-cols-2 gap-4 my-4 p-2;
+
+      .date_info {
+        @apply italic text-gray text-sm mt-4;
+
+        a {
+          @apply not-italic text-secondary;
+        }
+      }
+    }
+  }
+}
