@@ -187,9 +187,7 @@ cs:
               Zdá se, že tato instalace potřebuje přesunout <strong>%{total}</strong> starých obrázků do nového systému.<br>
               Můžete zahájit proces nyní a bude probíhat na pozadí.
             start_image_migrations: "\U0001F449 Zahájit proces migrace"
-            title: Kontroly kompatibility systému
         config:
-          caution: 'POZNÁMKA: Tato funkce silně mění některé výchozí chování, které by mohlo vést k neočekávaným výsledkům. Používejte ji s opatrností!'
           constraints:
             add_condition: Přidat případ
             always: Vždy
@@ -273,11 +271,8 @@ cs:
           system: Všude kromě participačních prostor
           title:
             admins: Škálovaní administrátoři
-            checks: Systémová kompatibilita
-            custom_redirects: Vlastní přesměrování
             editors: Hack editoru
             livechat: Live Chat
-            menu_hacks: Vylepšení menu
             proposals: Návrhy hacků
             styles: Vlastní styly
             surveys: Průzkumy a formuláře
@@ -342,10 +337,11 @@ cs:
             success: Přesměrování úspěšně aktualizováno
         menu:
           admins: Škálovaní administrátoři
-          checks: Systémová kompatibilita
           custom_redirects: Vlastní přesměrování
           editors: Hack editoru
           livechat: Live Chat
+          maintenance:
+            checks: Systémová kompatibilita
           menu_hacks: Vylepšení menu
           proposal_custom_fields: Vlastní pole pro návrhy
           proposals: Návrhy hacků
