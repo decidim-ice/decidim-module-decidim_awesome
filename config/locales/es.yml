@@ -187,9 +187,7 @@ es:
               Parece que esta instalación necesita migrar <strong>%{total}</strong> imágenes antiguas al nuevo sistema.<br>
               Puedes iniciar el proceso ahora y se realizará en segundo plano.
             start_image_migrations: "\U0001F449 Iniciar el proceso de migración ahora"
-            title: Análisis de compatibilidad del sistema
         config:
-          caution: 'NOTA: Esta función modifica en gran medida algunos comportamientos por defecto que pueden llevar a resultados inesperados. ¡Utilícelo con precaución!'
           constraints:
             add_condition: Añadir restricción
             always: Siempre
@@ -273,11 +271,8 @@ es:
           system: En todas partes excepto en espacios participativos
           title:
             admins: Administradoras acotadas
-            checks: Compatibilidad del sistema
-            custom_redirects: Redirecciones personalizadas
             editors: Modificaciones a los editores
             livechat: Chat en vivo
-            menu_hacks: Ajustes en el menú
             proposals: Modificaciones a las propuestas
             styles: Estilos personalizados
             surveys: Encuestas y formularios
@@ -342,10 +337,11 @@ es:
             success: Redirección actualizada correctamente
         menu:
           admins: Administradoras acotadas
-          checks: Compatibilidad del sistema
           custom_redirects: Redirecciones personalizadas
           editors: Modificaciones a los editores
           livechat: Chat en vivo
+          maintenance:
+            checks: Compatibilidad del sistema
           menu_hacks: Ajustes en el menú
           proposal_custom_fields: Campos personalizados para propuestas
           proposals: Modificaciones a las propuestas
