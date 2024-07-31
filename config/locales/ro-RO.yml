@@ -80,7 +80,6 @@ ro:
             decidim_version: Versiune Decidim %{version}
             images_migrated: Imagini migrate în ActiveStorage
             start_image_migrations: "\U0001F449 Începe procesul de migrare acum"
-            title: Verificări compatibilitate sistem
         config:
           constraints:
             always: Întotdeauna
@@ -102,7 +101,6 @@ ro:
             delete: Șterge
           process_groups: Grupuri de procese
           title:
-            custom_redirects: Redirecționări personalizate
             styles: Stiluri personalizate
             surveys: Chestionare și formulare
         constraints:
