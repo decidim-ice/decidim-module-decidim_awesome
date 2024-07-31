@@ -26,7 +26,7 @@ module Decidim
         @last_date ||= Decidim::Proposals::Proposal.joins(:extra_fields)
                                                    .where(component: self)
                                                    .where.not(extra_fields: { private_body: nil })
-                                                   .order(private_body_updated_at: :asc)
+                                                   .order(private_body_updated_at: :desc)
                                                    .first&.extra_fields&.private_body_updated_at
       end
 

@@ -516,7 +516,9 @@ en:
           menu:
             title: Public fields
           private_body: Private body
+          private_data_last_update: This data was last updated %{time_ago} ago.
           proposal_private_custom_fields: Private fields
+          remove_private_data: "👉 You might want to remove it"
       admin_log:
         component:
           destroy_private_data: "%{user_name} destroyed %{count} items of private

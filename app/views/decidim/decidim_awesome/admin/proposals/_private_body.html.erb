@@ -6,8 +6,12 @@
     </h2>
   </button>
   <div id="panel-private_body">
-    <div class="component__show_notes-grid">
-      <%= Decidim::ContentProcessor.render_without_format(render_sanitized_content(proposal, :private_body)).html_safe %>
+    <div class="component__show_private_data-grid">
+      <div><%= Decidim::ContentProcessor.render_without_format(render_sanitized_content(proposal, :private_body)).html_safe %></div>
+      <div class="date_info">
+        <%= t("decidim.decidim_awesome.admin.proposal_custom_fields.private_data_last_update", time_ago: time_ago_in_words(proposal&.extra_fields&.private_body_updated_at)) %>
+        <%= link_to t("decidim.decidim_awesome.admin.proposal_custom_fields.remove_private_data"), decidim_admin_decidim_awesome.maintenance_path(:private_data) if proposal&.extra_fields&.private_body_updated_at && proposal.extra_fields.private_body_updated_at < Decidim::DecidimAwesome.private_data_expiration_time.ago %>
+      </div>
     </div>
   </div>
 </div>

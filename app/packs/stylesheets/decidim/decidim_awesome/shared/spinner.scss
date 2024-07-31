@@ -11,11 +11,13 @@
       @apply border-r-alert;
     }
   }
+
   &.warning {
     &::before {
       @apply border-r-warning;
     }
   }
+
   &.primary {
     &::before {
       @apply border-r-primary;
