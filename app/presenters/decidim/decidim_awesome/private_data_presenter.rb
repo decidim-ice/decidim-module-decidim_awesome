@@ -61,6 +61,7 @@ module Decidim
         return content_tag("span", "", class: "loading-spinner primary") if locked?
 
         return if destroyable?
+        return if last_date
 
         I18n.t("decidim.decidim_awesome.admin.maintenance.private_data.done")
       end

@@ -218,7 +218,7 @@ en:
               You can start the process now and it will be performed in the background.
             start_image_migrations: "👉 Start the migration process now"
         config:
-          caution: 'NOTE: This feature heavily modifies some default behaviours that
+          caution: 'NOTE: This feature heavily modifies some default behaviors that
             might lead to unexpected results. Use it with caution!'
           constraints:
             add_condition: Add case

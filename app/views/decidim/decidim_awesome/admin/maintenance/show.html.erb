@@ -17,7 +17,7 @@
             const items = tr.querySelectorAll('[data-autorefresh]');
             const id = parseInt(tr.dataset.id, 10);
             const newData = data.find(item => item.id === id);
-            console.log("newData", newData, "items", items, "id", id, "tr", tr, "data", data);
+            // console.log("newData", newData, "items", items, "id", id, "tr", tr, "data", data);
             if (newData) {
               items.forEach(item => {
                 const field = item.dataset.autorefresh;

@@ -22,7 +22,7 @@ module Decidim
         def show
           respond_to do |format|
             format.json do
-              render json: private_data_finder.for(params[:resources].split(",")).map { |resource| present(resource) }
+              render json: private_data_finder.for(params[:resources].to_s.split(",")).map { |resource| present(resource) }
             end
             format.all do
               render :show
@@ -31,11 +31,12 @@ module Decidim
         end
 
         def destroy_private_data
-          Decidim::ActionLogger.log("destroy_private_data", current_user, resource, nil, count: private_data.total)
+          if private_data && private_data.total.to_i.positive?
+            Decidim::ActionLogger.log("destroy_private_data", current_user, resource, nil, count: private_data.total)
 
-          Lock.new(current_organization).get!(resource)
-          DestroyPrivateDataJob.set(wait: 1.second).perform_later(resource)
-
+            Lock.new(current_organization).get!(resource)
+            DestroyPrivateDataJob.set(wait: 1.second).perform_later(resource)
+          end
           redirect_to decidim_admin_decidim_awesome.maintenance_path("private_data"),
                       notice: I18n.t("destroying_private_data", scope: "decidim.decidim_awesome.admin.maintenance.private_data", title: present_private_data(resource).name)
         end
