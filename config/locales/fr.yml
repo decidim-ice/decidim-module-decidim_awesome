@@ -187,9 +187,7 @@ fr:
               Il semble que cette installation a besoin de migrer <strong>%{total}</strong> des anciennes images vers le nouveau système.<br>
               Vous pouvez démarrer le processus maintenant et il sera effectué en arrière-plan.
             start_image_migrations: "\U0001F449 Démarrez le processus de migration maintenant"
-            title: Compatibilité système
         config:
-          caution: 'REMARQUE : Cette fonctionnalité modifie fortement certains comportements par défaut qui peuvent conduire à des résultats inattendus. Utilisez-la avec précaution !'
           constraints:
             add_condition: Ajouter une contrainte d'application
             always: Toujours
@@ -273,11 +271,8 @@ fr:
           system: Partout sauf les espaces participatifs
           title:
             admins: Administrateurs de secteur
-            checks: Compatibilité système
-            custom_redirects: Redirections personnalisées
             editors: Hacks de l'éditeur
             livechat: Chat en direct
-            menu_hacks: Tweaks de menu
             proposals: Hacks pour les propositions
             styles: Styles personnalisés
             surveys: Enquêtes et formulaires
@@ -342,10 +337,11 @@ fr:
             success: Redirection mise à jour avec succès
         menu:
           admins: Administrateurs de secteur
-          checks: Compatibilité système
           custom_redirects: Redirections personnalisées
           editors: Hacks de l'éditeur
           livechat: Chat en direct
+          maintenance:
+            checks: Compatibilité système
           menu_hacks: Tweaks de menu
           proposal_custom_fields: Champs de propositions personnalisés
           proposals: Hacks pour les propositions
