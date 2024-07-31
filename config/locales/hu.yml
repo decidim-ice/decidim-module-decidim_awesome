@@ -130,7 +130,6 @@ hu:
             head_tags: Awesome címkék az admin applikáció headerben
             image_migrations_started: A képek migrációs folyamata elkezdődött
         config:
-          caution: 'MEGJEGYZÉS: Ez a funkció erősen módosít néhány alapértelmezett viselkedést, ami váratlan eredményekhez vezethet. Óvatosan használja!'
           constraints:
             add_condition: Eset hozzáadása
             always: Mindig
@@ -171,7 +170,6 @@ hu:
           system: Mindenütt, kivéve ezekben a részvételi terekben
           title:
             editors: Szerkesztő finomítása
-            menu_hacks: Menü trükkök
             proposals: Javaslatok finomítása
             styles: Egyedi stílusok
             surveys: Kérdőívek és Űrlapok
