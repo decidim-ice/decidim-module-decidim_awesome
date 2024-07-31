@@ -107,9 +107,14 @@ module Decidim::DecidimAwesome
         expect(presenter.done).to be_nil
       end
 
-      it "returns the done translation if not destroyable" do
+      it "returns the nil if not destroyable" do
         allow(presenter).to receive(:destroyable?).and_return(false)
-        expect(presenter.done).to eq(I18n.t("decidim.decidim_awesome.admin.maintenance.private_data.done"))
+        expect(presenter.done).to be_nil
+      end
+
+      it "returns the correct done message if last_date is nil" do
+        allow(presenter).to receive(:last_date).and_return(nil)
+        expect(presenter.done).to eq("Done")
       end
     end
   end
