@@ -187,9 +187,7 @@ ja:
               このインストールでは、古いイメージ<strong>%{total}</strong>件を新システムに移行する必要があるようです。<br>
               処理を開始すると、バックグラウンドで実行されます。
             start_image_migrations: "\U0001F449 今すぐ移行プロセスを開始する"
-            title: システム互換性チェック
         config:
-          caution: '注意: この機能は、予期しない結果につながる可能性があるデフォルトの動作を大きく変更します。注意して使用してください！'
           constraints:
             add_condition: 条件を追加
             always: すべて
@@ -273,11 +271,8 @@ ja:
           system: 参加型スペース以外のすべて
           title:
             admins: スコープ付き管理者
-            checks: システム互換性
-            custom_redirects: カスタムリダイレクト
             editors: エディター設定
             livechat: ライブチャット
-            menu_hacks: メニュー調整
             proposals: 提案の設定
             styles: 独自スタイル
             surveys: 調査＆フォーム
@@ -343,10 +338,11 @@ ja:
             success: リダイレクトを更新しました
         menu:
           admins: スコープ付き管理者
-          checks: システム互換性
           custom_redirects: カスタムリダイレクト
           editors: エディター設定
           livechat: ライブチャット
+          maintenance:
+            checks: システム互換性
           menu_hacks: メニュー調整
           proposal_custom_fields: 提案カスタム項目
           proposals: 提案の設定
