@@ -3,7 +3,7 @@ ca:
   activemodel:
     attributes:
       config:
-        additional_proposal_sortings: Opcions d'ordenació addicionals actives
+        additional_proposal_sortings: Activa opcions d'ordenació addicionals
         allow_images_in_full_editor: Permet imatges a l'editor HTML complet
         allow_images_in_markdown_editor: Permet imatges a l'editor Markdown
         allow_images_in_proposals: Permet imatges a l'editor de propostes
@@ -333,6 +333,7 @@ ca:
             success: Redirecció actualitzada correctament
         menu:
           admins: Administradores acotades
+          checks: Compatibilitat de sistema
           custom_redirects: Redireccions personalitzades
           editors: Modificacions als editors
           livechat: Xat en directe
