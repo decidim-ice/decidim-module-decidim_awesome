@@ -7,19 +7,19 @@ describe "Custom proposals fields", type: :system do
   let(:manifest_name) { "proposals" }
   let(:component) do
     create(:proposal_component,
-           manifest: manifest,
-           participatory_space: participatory_process, settings: settings, step_settings: step_settings)
+           manifest:,
+           participatory_space: participatory_process, settings:, step_settings:)
   end
   let(:active_step_id) { participatory_process.active_step.id }
-  let(:step_settings) { { active_step_id => { amendment_creation_enabled: amendment_creation_enabled, amendments_visibility: visibility } } }
+  let(:step_settings) { { active_step_id => { amendment_creation_enabled:, amendments_visibility: visibility } } }
   let(:visibility) { "all" }
-  let(:settings) { { amendments_enabled: amendments_enabled, limit_pending_amendments: limit_pending_amendments } }
+  let(:settings) { { amendments_enabled:, limit_pending_amendments: } }
   let(:user) { create(:user, :confirmed, organization: component.organization) }
 
-  let!(:proposal) { create :proposal, component: component }
-  let!(:emendation) { create(:proposal, title: { en: "An emendation" }, component: component) }
-  let!(:amendment) { create(:amendment, amendable: proposal, emendation: emendation, state: amendment_state) }
-  let!(:hidden_emendation) { create(:proposal, :hidden, title: { en: "A stupid emendation" }, component: component) }
+  let!(:proposal) { create(:proposal, component:) }
+  let!(:emendation) { create(:proposal, title: { en: "An emendation" }, component:) }
+  let!(:amendment) { create(:amendment, amendable: proposal, emendation:, state: amendment_state) }
+  let!(:hidden_emendation) { create(:proposal, :hidden, title: { en: "A stupid emendation" }, component:) }
   let!(:hidden_amendment) { create(:amendment, amendable: proposal, emendation: hidden_emendation, state: "evaluating") }
 
   let(:amendment_state) { "evaluating" }
@@ -65,7 +65,7 @@ describe "Custom proposals fields", type: :system do
   end
 
   context "when there's no pending amendments" do
-    let!(:amendment) { create(:amendment, emendation: emendation, state: amendment_state) }
+    let!(:amendment) { create(:amendment, emendation:, state: amendment_state) }
 
     it "can create a new one" do
       expect(page).to have_content(proposal.title["en"])
