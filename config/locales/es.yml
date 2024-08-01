@@ -333,6 +333,7 @@ es:
             success: Redirección actualizada correctamente
         menu:
           admins: Administradoras acotadas
+          checks: Compatibilidad del sistema
           custom_redirects: Redirecciones personalizadas
           editors: Modificaciones a los editores
           livechat: Chat en vivo
