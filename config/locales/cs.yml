@@ -1,3 +1,4 @@
+---
 cs:
   activemodel:
     attributes:
@@ -332,7 +333,6 @@ cs:
             success: Přesměrování úspěšně aktualizováno
         menu:
           admins: Škálovaní administrátoři
-          checks: Systémová kompatibilita
           custom_redirects: Vlastní přesměrování
           editors: Hack editoru
           livechat: Live Chat
