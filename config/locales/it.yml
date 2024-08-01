@@ -1,3 +1,4 @@
+---
 it:
   activemodel:
     attributes:
@@ -325,7 +326,6 @@ it:
             success: Reindirizzamento aggiornato correttamente
         menu:
           admins: Amministratori con ambito
-          checks: System compatibility
           custom_redirects: Reindirizzamenti Personalizzati
           editors: Editor hacks
           livechat: Chat in tempo reale
@@ -457,9 +457,6 @@ it:
           za: Z-A (Alfabetico inverso)
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Decidim Tweaks
       decidim_awesome:
         awesome_config:
           amendments: Emendamenti
