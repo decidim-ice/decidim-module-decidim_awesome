@@ -1,3 +1,4 @@
+---
 it:
   activemodel:
     attributes:
@@ -457,9 +458,6 @@ it:
           za: Z-A (Alfabetico inverso)
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Decidim Tweaks
       decidim_awesome:
         awesome_config:
           amendments: Emendamenti

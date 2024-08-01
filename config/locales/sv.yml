@@ -1,3 +1,4 @@
+---
 sv:
   activemodel:
     attributes:
@@ -159,9 +160,6 @@ sv:
             cancel: Avbryt
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Decidim Tweaks
       decidim_awesome:
         awesome_config:
           amendments: Ändringsförslag

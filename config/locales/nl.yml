@@ -1,3 +1,4 @@
+---
 nl:
   activemodel:
     attributes:
@@ -227,9 +228,6 @@ nl:
             cancel: Annuleren
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Decidim Tweaks
       decidim_awesome:
         awesome_config:
           amendments: Amendementen
