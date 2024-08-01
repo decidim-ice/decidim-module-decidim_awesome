@@ -329,6 +329,7 @@ de:
             success: Umleitung erfolgreich aktualisiert
         menu:
           admins: Eingeschränkte Admins
+          checks: Checks
           custom_redirects: Benutzerdefinierte Umleitungen
           editors: Editoren
           livechat: Live-Chat
