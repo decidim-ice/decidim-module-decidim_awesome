@@ -1,3 +1,4 @@
+---
 ja:
   activemodel:
     attributes:
@@ -333,7 +334,6 @@ ja:
             success: リダイレクトを更新しました
         menu:
           admins: スコープ付き管理者
-          checks: システム互換性
           custom_redirects: カスタムリダイレクト
           editors: エディター設定
           livechat: ライブチャット
