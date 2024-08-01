@@ -1,4 +1,3 @@
----
 cs:
   activemodel:
     attributes:
@@ -19,6 +18,7 @@ cs:
         intergram_title_open: Titulek otevřeného chatu
         intergram_use_floating_button: Je-li zaškrtnuto, uzavřený chat je vždy tlačítko místo textu
         proposal_custom_fields: 'Uživatelská pole #%{id}'
+        proposal_private_custom_fields: Soukromá vlastní pole %{id}
         scoped_admins: 'Skupina Škálovaní administrátoři #%{id}'
         scoped_styles: Vlastní styly číslo %{id}
         validate_body_max_caps_percent: Maximální povolený procentní podíl velkých písmen pro tělo zprávy
@@ -133,6 +133,7 @@ cs:
               za: Z-A (obrácená abeceda)
     decidim_awesome:
       admin:
+        actions: Akce
         admin_accountability:
           admin_roles:
             admin: Super správce
@@ -188,6 +189,7 @@ cs:
               Můžete zahájit proces nyní a bude probíhat na pozadí.
             start_image_migrations: "\U0001F449 Zahájit proces migrace"
         config:
+          caution: 'POZNÁMKA: Tato funkce silně mění některé výchozí chování, které by mohlo vést k neočekávaným výsledkům. Používejte ji s opatrností!'
           constraints:
             add_condition: Přidat případ
             always: Vždy
@@ -234,6 +236,7 @@ cs:
               proposal_custom_fields: Vytvoření vlastních polí návrhu, která se použijí pouze v určitých částech veřejného webu (použijte k tomu editor omezení)
               proposal_custom_fields_example: Data jsou uložena v objektu XML pomocí kompatibilních atributů HTML (prvky dl,dt,dd), které v běžném návrhu nahrazují "tělo".
               proposal_custom_fields_translations: "Štítky, nápověda, zástupné symboly a výchozí hodnoty mohou používat vlastní překlady aplikace. \nPro to použijte klíč i18n (musí obsahovat alespoň jednu tečku), místo použití textového literálu.\nNapříklad:\n- \"activemodel.attributes.proposal.title\" namísto \"Title\"\n- \"activemodel.attributes.proposal.address\" namísto \"Adresa\"\nNebo použijte vlastní klíče v kombinaci s jinými nástroji pro definování překladů (např. pomocí úpravy termínu modulu):\n - \"myapp.custom_fields.bio\" namísto „Životopis“"
+              proposal_private_custom_fields: Podobné jako veřejná pole, ale tyto informace nebudou zveřejněny (k nim budou mít přístup pouze administrátoři).
               scoped_admins: Povýšení běžného uživatele na administrátora, který může spravovat pouze určité části veřejného webu (k tomu použijte editor omezení). Všimněte si, že uživatelé, kteří již mají oprávnění běžného správce, budou ignorováni.
               scoped_styles: Vytvořte vlastní CSS aplikovaný pouze na určitých částech veřejného webu (použijte pro to editor omezení)
               scoped_styles_variables: 'Můžete použít následující CSS proměnné pro nastavené barvy organizace:'
@@ -253,6 +256,8 @@ cs:
             sure_to_remove: Opravdu chcete zničit toto pole?
           form_proposal_private_custom_fields:
             delete: Smazat
+            new: Přidat nové "soukromé vlastní pole"
+            remove: Odstranit toto "ssoukromé vlastní pole"
           form_scoped_admins:
             delete: Smazat
             new: Přidání nové skupiny "Škálovaní administrátoři"
@@ -272,7 +277,8 @@ cs:
           title:
             admins: Škálovaní administrátoři
             editors: Hack editoru
-            livechat: Live Chat
+            livechat: Živý chat
+            proposal_private_custom_fields: 'Vlastní pole návrhů: Soukromá pole'
             proposals: Návrhy hacků
             styles: Vlastní styly
             surveys: Průzkumy a formuláře
@@ -341,7 +347,9 @@ cs:
             confirm_delete: Opravdu chcete odstranit všechna soukromá data tohoto zdroje? Tuto akci nelze vrátit zpět.
             delete: Odstranit vše
             done: Hotovo
+            items_count: Dotčené celkem
             last_date: Poslední aktualizace
+            no_data: Nejsou nalezena žádná soukromá data starší než před %{time_ago}
             removing: Odstraňování...
             time_ago: "Před %{time}"
         menu:
@@ -396,6 +404,12 @@ cs:
             error: Chyba při aktualizaci položky menu! %{error}
             success: Položka menu byla úspěšne aktualizována
           url_exists: Stejná adresa URL je již nakonfigurována, prosím upravte ji místo jejího vytvoření.
+        proposal_custom_fields:
+          menu:
+            title: Veřejná pole
+          private_data_last_remove: Tato data byla zničena před %{time_ago}.
+          private_data_last_update: Tato data byla naposledy aktualizována před %{time_ago}.
+          proposal_private_custom_fields: Soukromá pole
       amendments:
         modal:
           amendment_exists: Pozměňovací návrh již existuje
@@ -466,7 +480,7 @@ cs:
           abstained: "✔️ Zdržel se hlasování"
           change_vote: Změnit můj hlas
           default_box_title: Hlasovat o tomto návrhu
-          default_instructions_html: "<p>Přečtěte si pečlivě pravidla voleb, abyste pochopili, jak bude vaše hlasování použito v %{organization}</p>"
+          default_instructions_html: "<p>Přečtěte si pečlivě pravidla voleb, abyste pochopili, jak bude vaše hlasování použito v %{organization}\"</p>"
           modal:
             cancel: Zrušit
             message: Váš hlas bude považován za konečný v %{date}. Do té doby jej můžete změnit,
@@ -499,6 +513,12 @@ cs:
   layouts:
     decidim:
       decidim_awesome:
+        admin:
+          maintenance:
+            title: 'Nástroj údržby: %{title}'
+            titles:
+              checks: Kontroly kompatibility systému
+              private_data: Vymazání soukromých údajů
         awesome_config:
           amendments: Pozměňovací návrhy
           autosaved_error: Místní úložiště není ve vašem prohlížeči podporováno, formulář nelze uložit automaticky.
