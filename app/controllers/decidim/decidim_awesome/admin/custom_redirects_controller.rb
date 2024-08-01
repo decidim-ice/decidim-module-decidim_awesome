@@ -8,8 +8,6 @@ module Decidim
         include NeedsAwesomeConfig
         include ConfigConstraintsHelpers
 
-        layout "decidim/decidim_awesome/admin/application"
-
         before_action do
           enforce_permission_to :edit_config, :menu
         end
@@ -21,6 +19,10 @@ module Decidim
 
         def new
           @form = form(CustomRedirectForm).instance
+        end
+
+        def edit
+          @form = form(CustomRedirectForm).from_model(redirect_item)
         end
 
         def create
@@ -36,10 +38,6 @@ module Decidim
               render :new
             end
           end
-        end
-
-        def edit
-          @form = form(CustomRedirectForm).from_model(redirect_item)
         end
 
         def update
@@ -63,7 +61,7 @@ module Decidim
               flash[:notice] = I18n.t("custom_redirects.destroy.success", scope: "decidim.decidim_awesome.admin")
             end
             on(:invalid) do |error|
-              flash[:alert] = I18n.t("custom_redirects.destroy.error", scope: "decidim.decidim_awesome.admin", error: error)
+              flash[:alert] = I18n.t("custom_redirects.destroy.error", scope: "decidim.decidim_awesome.admin", error:)
             end
           end
           redirect_to decidim_admin_decidim_awesome.custom_redirects_path
@@ -75,13 +73,11 @@ module Decidim
           origin, item = current_config.find { |origin, _| md5(origin) == params[:id] }
           raise ActiveRecord::RecordNotFound unless item
 
-          # rubocop:disable Style/OpenStructUse
           OpenStruct.new(
-            origin: origin,
+            origin:,
             destination: item["destination"],
             active: item["active"]
           )
-          # rubocop:enable Style/OpenStructUse
         end
 
         def current_config

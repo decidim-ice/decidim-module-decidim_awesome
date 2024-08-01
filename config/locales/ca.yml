@@ -1,3 +1,4 @@
+---
 ca:
   activemodel:
     attributes:
@@ -187,7 +188,6 @@ ca:
               Pots iniciar el procés ara i es durà a terme en segon pla.
             start_image_migrations: "\U0001F449 Iniciar el procés de migració ara"
         config:
-          caution: 'NOTA: Aquesta funció modifica en gran mesura alguns comportaments predeterminats que podrien provocar resultats inesperats. Utilitzeu-lo amb precaució!'
           constraints:
             add_condition: Afegeix una restricció
             always: Sempre

@@ -6,12 +6,12 @@ require "decidim/decidim_awesome/test/shared_examples/custom_redirects_contexts"
 
 module Decidim::DecidimAwesome
   module Admin
-    describe CustomRedirectsController, type: :controller do
+    describe CustomRedirectsController do
       routes { Decidim::DecidimAwesome::AdminEngine.routes }
 
       include_context "with custom redirects params"
 
-      let(:user) { create(:user, :confirmed, :admin, organization: organization) }
+      let(:user) { create(:user, :confirmed, :admin, organization:) }
       let(:organization) { create(:organization) }
 
       before do
@@ -25,13 +25,13 @@ module Decidim::DecidimAwesome
           expect(response).to have_http_status(:success)
         end
 
-        it_behaves_like "forbids disabled feature" do
+        it_behaves_like "forbids disabled feature with redirect" do
           let(:action) { get :new }
         end
       end
 
       describe "POST #create" do
-        let(:action) { post :create, params: params }
+        let(:action) { post :create, params: }
 
         it "returns http success" do
           action
@@ -39,12 +39,12 @@ module Decidim::DecidimAwesome
           expect(response).to have_http_status(:redirect)
         end
 
-        it_behaves_like "forbids disabled feature"
+        it_behaves_like "forbids disabled feature with redirect"
 
         it "creates the new redirection entry" do
           action
 
-          items = AwesomeConfig.find_by(organization: organization, var: :custom_redirects).value
+          items = AwesomeConfig.find_by(organization:, var: :custom_redirects).value
           expect(items).to be_a(Hash)
           expect(items.count).to eq(1)
           expect(items.first).to eq(attributes)
@@ -62,7 +62,7 @@ module Decidim::DecidimAwesome
           it "do not create the new redirection entry" do
             action
 
-            expect(AwesomeConfig.find_by(organization: organization, var: :custom_redirects)).not_to be_present
+            expect(AwesomeConfig.find_by(organization:, var: :custom_redirects)).not_to be_present
           end
         end
 
@@ -70,7 +70,7 @@ module Decidim::DecidimAwesome
           let(:previous_value) do
             { "/some-path" => { "destination" => "/assemblies", "active" => true } }
           end
-          let!(:config) { create :awesome_config, organization: organization, var: :custom_redirects, value: previous_value }
+          let!(:config) { create(:awesome_config, organization:, var: :custom_redirects, value: previous_value) }
           let(:origin) { "/some-path" }
 
           it "returns error" do
@@ -82,17 +82,17 @@ module Decidim::DecidimAwesome
           it "do not create the new redirection entry" do
             action
 
-            expect(AwesomeConfig.find_by(organization: organization, var: :custom_redirects).value.count).to eq(1)
+            expect(AwesomeConfig.find_by(organization:, var: :custom_redirects).value.count).to eq(1)
           end
         end
       end
 
       describe "GET #edit" do
-        let(:action) { get :edit, params: params }
+        let(:action) { get :edit, params: }
         let(:previous_value) do
           { origin => { "destination" => "/assemblies", "active" => true } }
         end
-        let!(:config) { create :awesome_config, organization: organization, var: :custom_redirects, value: previous_value }
+        let!(:config) { create(:awesome_config, organization:, var: :custom_redirects, value: previous_value) }
         let(:params) do
           {
             id: Digest::MD5.hexdigest(origin)
@@ -104,7 +104,7 @@ module Decidim::DecidimAwesome
           expect(response).to have_http_status(:success)
         end
 
-        it_behaves_like "forbids disabled feature"
+        it_behaves_like "forbids disabled feature with redirect"
 
         context "when editing a non existing redirection" do
           let(:params) do
@@ -124,14 +124,14 @@ module Decidim::DecidimAwesome
         let(:previous_value) do
           { origin => { "destination" => "/assemblies", "active" => true } }
         end
-        let!(:config) { create :awesome_config, organization: organization, var: :custom_redirects, value: previous_value }
+        let!(:config) { create(:awesome_config, organization:, var: :custom_redirects, value: previous_value) }
         let(:id) do
           {
             id: Digest::MD5.hexdigest(origin)
           }
         end
 
-        it_behaves_like "forbids disabled feature"
+        it_behaves_like "forbids disabled feature with redirect"
 
         it "returns http success" do
           action
@@ -142,7 +142,7 @@ module Decidim::DecidimAwesome
         it "updates the redirection entry" do
           action
 
-          items = AwesomeConfig.find_by(organization: organization, var: :custom_redirects).value
+          items = AwesomeConfig.find_by(organization:, var: :custom_redirects).value
           expect(items).to be_a(Hash)
           expect(items.count).to eq(1)
           expect(items.first).to eq(attributes)
@@ -170,17 +170,17 @@ module Decidim::DecidimAwesome
           it "do not create the new redirection entry" do
             action
 
-            expect(AwesomeConfig.find_by(organization: organization, var: :custom_redirects).value).to eq(previous_value)
+            expect(AwesomeConfig.find_by(organization:, var: :custom_redirects).value).to eq(previous_value)
           end
         end
       end
 
       describe "DELETE #destroy" do
-        let(:action) { delete :destroy, params: params }
+        let(:action) { delete :destroy, params: }
         let(:previous_value) do
           { origin => { "destination" => "/assemblies", "active" => true } }
         end
-        let!(:config) { create :awesome_config, organization: organization, var: :custom_redirects, value: previous_value }
+        let!(:config) { create(:awesome_config, organization:, var: :custom_redirects, value: previous_value) }
         let(:params) do
           {
             id: Digest::MD5.hexdigest(origin)
@@ -193,11 +193,11 @@ module Decidim::DecidimAwesome
           expect(response).to have_http_status(:redirect)
         end
 
-        it_behaves_like "forbids disabled feature"
+        it_behaves_like "forbids disabled feature with redirect"
 
         it "destroy the task" do
           action
-          expect(AwesomeConfig.find_by(organization: organization, var: :custom_redirects).value).to eq({})
+          expect(AwesomeConfig.find_by(organization:, var: :custom_redirects).value).to eq({})
         end
 
         context "when invalid parameters" do
@@ -209,7 +209,7 @@ module Decidim::DecidimAwesome
 
           it "returns error" do
             expect { action }.to raise_error(ActiveRecord::RecordNotFound)
-            expect(AwesomeConfig.find_by(organization: organization, var: :custom_redirects).value).to eq(previous_value)
+            expect(AwesomeConfig.find_by(organization:, var: :custom_redirects).value).to eq(previous_value)
           end
         end
       end

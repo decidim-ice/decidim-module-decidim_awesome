@@ -4,10 +4,9 @@ en:
     attributes:
       config:
         additional_proposal_sortings: Additional sorting options enabled
-        allow_images_in_full_editor: Allow images in the full HTML editor
-        allow_images_in_markdown_editor: Allow images in the markdown editor
+        allow_images_in_editors: Allow images in the HTML editor
         allow_images_in_proposals: Allow images in the proposals editor
-        allow_images_in_small_editor: Allow images in the minimal HTML editor
+        allow_videos_in_editors: Allow videos in the HTML editor
         auto_save_forms: Auto save forms in local storage
         intergram_auto_no_response: A message that is sent one minute after the user
           sends its first message and no response was received
@@ -24,9 +23,9 @@ en:
         intergram_use_floating_button: If checked, the closed chat is always a button
           instead of a text
         proposal_custom_fields: Custom fields %{id}
+        proposal_private_custom_fields: Private Custom fields %{id}
         scoped_admins: Scoped admins group %{id}
         scoped_styles: Custom styles %{id}
-        use_markdown_editor: Use a Markdown editor instead of the HTML editor
         validate_body_max_caps_percent: Maximum allowed percentage of capital letters
           for the body
         validate_body_max_marks_together: Maximum consecutive marks symbols allowed
@@ -56,10 +55,10 @@ en:
         target: Opens in
         url: URL
         visibility: Visibility
-      proposal:
-        proposal_custom_fields: Custom fields
   decidim:
     admin:
+      actions:
+        manage: Manage
       filters:
         admin_accountability:
           admin_role_type:
@@ -89,7 +88,6 @@ en:
               frameBorder="0" allowFullscreen src="..."></iframe>. Content will be
               sanitized from other HTML tags. Ensure to use 100% as width to fill
               the screen.'
-            no_margins: No margins between the iframe and the rest of the page
             viewport_width: Limit maximum width to the application viewport
           step:
             announcement: Announcement
@@ -123,10 +121,10 @@ en:
         settings:
           global:
             awesome_voting_manifest: Support type
-            awesome_voting_manifest_help_html: <strong class="text-alert">Be aware
-              that changing this setting in the middle of a votation period can result
-              in innacurate or unexpected results.</strong><br>Note also that this
-              setting can only be edited if the component has no supports yet.
+            awesome_voting_manifest_help_html: <span class="text-alert">Be aware that
+              changing this setting in the middle of a votation period can result
+              in innacurate or unexpected results.</span><br>Note also that this setting
+              can only be edited if the component has no supports yet.
             awesome_voting_manifest_options:
               default: Simple vote (default)
               voting_cards: Voting using coloured cards
@@ -155,6 +153,7 @@ en:
               za: Z-A (Reverse alphabetical)
     decidim_awesome:
       admin:
+        actions: Actions
         admin_accountability:
           admin_roles:
             admin: Super admin
@@ -217,10 +216,9 @@ en:
               Since version 0.25, Decidim uses a new technology to upload files.<br>
               It looks that this installation needs to migrate <strong>%{total}</strong> of the old images to the new system.<br>
               You can start the process now and it will be performed in the background.
-            start_image_migrations: "\U0001F449 Start the migration process now"
-            title: System compatibility checks
+            start_image_migrations: "👉 Start the migration process now"
         config:
-          caution: 'NOTE: This feature heavily modifies some default behaviours that
+          caution: 'NOTE: This feature heavily modifies some default behaviors that
             might lead to unexpected results. Use it with caution!'
           constraints:
             add_condition: Add case
@@ -260,14 +258,13 @@ en:
               incorrect_css: 'CSS in box #%{key} is invalid'
               incorrect_json: 'JSON definition in box #%{key} is invalid'
             help:
-              allow_images_in_full_editor: This will add an image uploader icon in
-                all the editors WYSIWYG with the full toolbar enabled.
-              allow_images_in_markdown_editor: This will allow markdown editor to
-                upload images by copy & paste or drag & drop.
+              allow_images_in_editors: This will add an image uploader icon in all
+                the WYSIWYG editors
               allow_images_in_proposals: This will allow to upload images in the proposals
-                editor, available to any user
-              allow_images_in_small_editor: This will add an image uploader icon in
-                all the editors WYSIWYG with minimal options in the toolbar enabled.
+                editor, available to any user. Images will be presented as links in
+                the public proposal view.
+              allow_videos_in_editors: This will add an video link icon in all the
+                WYSIWYG editors
               auto_save_forms: This will use LocalStorage to automatically save data
                 introduced by users in surveys and other forms while they are filling
                 it. Data will be restored in a future visit with the same browser
@@ -300,6 +297,13 @@ en:
                 instead of \"Address\"\nOr use your own keys in combination with other
                 tools to define translations (eg: using the module Term Customizer):\n
                 - \"myapp.custom_fields.bio\" instead of \"Biography\""
+              proposal_private_custom_fields: Similar as public fields, but this information
+                won't be disclosed publicly (only admins will have access to it).
+              proposal_private_custom_fields_translations: |
+                Private custom fields are displayed in distinct box with this information text:
+                %{warning}
+                This text can be customized with a custom translation by using the key:
+                %{key}
               scoped_admins: Promote regular user to admins that can only administrate
                 certain parts of the public web (use the restrictions editor for that).
                 Note that users who already have regular admin permissions will be
@@ -308,9 +312,6 @@ en:
                 of the public web (use the restrictions editor for that)
               scoped_styles_variables: 'You can use the following CSS variables for
                 organization customized colors:'
-              use_markdown_editor: This will substitute the Quill WYSIWYG editor,
-                to use a Markdown editor instead. Text will be converted and saved
-                as HTML in the database.
               validate_body_max_caps_percent: Zero won't allow any capital letter,
                 100 will force to write everything in capital letters
               validate_body_max_marks_together: 'Limit the number of question and
@@ -329,27 +330,41 @@ en:
               body: User input validations for the "body" field
               title: User input validations for the "title" field
           form_proposal_custom_fields:
+            delete: Delete
             new: Add a new "custom fields" box
             remove: Remove this "custom fields" box
             sure_to_remove: Are you sure you want to destroy this fields box?
+          form_proposal_private_custom_fields:
+            delete: Delete
+            new: Add a new "private custom fields" box
+            remove: Remove this "private custom fields" box
+            sure_to_remove: Are you sure you want to destroy this private fields box?
           form_scoped_admins:
+            delete: Delete
             new: Add a new "Scoped Admins" group
             remove: Remove this "Scoped Admins" group
             sure_to_remove: Are you sure you want to destroy this "Scoped Admins"
               group?
           form_scoped_styles:
+            delete: Delete
             new: Add a new CSS box
             remove: Remove this CSS box
             sure_to_remove: Are you sure you want to destroy this CSS box?
           none: "⛔ Never! - Deactivate any other constraint"
           process_groups: Process groups
-          rich_text_editor_in_public_views: 'NOTE: "Rich text editor for participants"
-            is enabled, this option won''t apply. Use the editors hacks instead to
-            enable images in proposals.'
           show:
             title: Tweaks for %{setting}
             update: Update configuration
           system: Everywhere except participatory spaces
+          title:
+            admins: Scoped Admins
+            editors: Editor Hacks
+            livechat: Live Chat
+            proposal_custom_fields: 'Proposals Custom Fields: Public fields'
+            proposal_private_custom_fields: 'Proposals Custom Fields: Private fields'
+            proposals: Proposals Hacks
+            styles: Custom Styles
+            surveys: Surveys & Forms
           update:
             error: Error updating configuration! %{error}
             success: Configuration updated successfully
@@ -410,12 +425,48 @@ en:
           update:
             error: Error updating redirection! %{error}
             success: Redirection updated successfully
+        maintenance:
+          private_data:
+            component: Space / Component
+            confirm_delete: Are you sure you want to delete all private data for this
+              resource? This cannot be undone.
+            delete: Delete all
+            destroying_private_data: Private data for %{title} is set to be destroyed.
+              Please check again in a few minutes.
+            done: Done
+            help_html: |
+              This tool allows you to delete all private data for a specific participatory space or component. This action is irreversible and will remove all private data from the database.
+              <br><br>
+              <strong>What is considered private data?</strong>
+              <br>
+              Private data is any information that is not publicly available and is only accessible to administrators. This, at the moment, includes private custom fields information.
+              <br><br>
+              <strong>What happens when I delete private data?</strong>
+              <br>
+              When you delete private data, all private information for the selected participatory space or component will be permanently removed from the database. A log of this action will be stored in the system for auditing purposes.
+              <br><br>
+              <strong>What happens to public data?</strong>
+              <br>
+              Public data will not be affected by this action. Only private data will be deleted.
+              <br><br>
+              <strong>Is there a minimum time to wait before deleting private data?</strong>
+              <br>
+              Yes, you cannot delete private data if the last update was less than %{time_ago} ago. You can change this configuration in the initializer file.
+            items_count: Total affected
+            last_date: Last update
+            no_data: No private data found older than %{time_ago} ago
+            not_destroyable: This resource cannot be destroyed yet
+            removing: Removing...
+            time_ago: "%{time} ago"
         menu:
           admins: Scoped Admins
-          checks: System Compatibility
           custom_redirects: Custom Redirections
           editors: Editor Hacks
           livechat: Live Chat
+          maintenance:
+            checks: System Compatibility
+            maintenance: Maintenance
+            private_data: Private data
           menu_hacks: Menu Tweaks
           proposal_custom_fields: Proposals Custom Fields
           proposals: Proposals Hacks
@@ -446,10 +497,13 @@ en:
           index:
             confirm_destroy: Are you sure to remove this customization?
             edit: Edit
+            home_content_block_menu:
+              title: Global menu home block
+            menu:
+              title: Main menu
             new: New item
             remove: Remove addition
             remove_hack: Remove customization
-            title: Main menu
           new:
             save: Save
             title: New menu item
@@ -458,8 +512,21 @@ en:
             success: Menu item updated successfully
           url_exists: The same URL is already configured, please edit that instead
             of creating it again.
+        proposal_custom_fields:
+          menu:
+            title: Public fields
+          private_body: Private body
+          private_data_last_remove: This data was destroyed %{time_ago} ago.
+          private_data_last_update: This data was last updated %{time_ago} ago.
+          proposal_private_custom_fields: Private fields
+          remove_private_data: "👉 You might want to remove it"
+      admin_log:
+        component:
+          destroy_private_data: "%{user_name} destroyed %{count} items of private
+            data for %{resource_name} in %{space_name}"
       amendments:
         modal:
+          amendment_exists: An amendment already exists
           current_amendment_html: <p>You can <a href="%{amendment_link}">access the
             current amendment here</a>.</p>
           dismiss: Ok, got it
@@ -528,6 +595,7 @@ en:
           show:
             view_meeting: View meeting
             view_proposal: View proposal
+      proposal_private_custom_fields_disclosure: This information won't be published
       validators:
         too_much_caps: Is using too many capital letters (over %{percent}% of the
           text)
@@ -536,8 +604,8 @@ en:
           abstained: "✔ Abstained"
           change_vote: Change my vote
           default_box_title: Vote on this proposal
-          default_instructions_html: <p>Please read the election rules carefully to
-            understand how your vote will be used by %{organization}"</p>
+          default_instructions_html: "<p>Please read the election rules carefully
+            to understand how your vote will be used by %{organization}</p>"
           modal:
             cancel: Cancel
             message: Your vote will be considered final on %{date}. You can change
@@ -556,19 +624,30 @@ en:
             weight_2_short: 'Y:'
             weight_3: Green
             weight_3_short: 'G:'
+    meetings:
+      meetings_map:
+        view_meeting: View meeting
     proposals:
+      admin:
+        exports:
+          awesome_private_proposals: Proposals with private data
       proposals:
         orders:
           az: A-Z (Alphabetical)
           supported_first: Supported first
           supported_last: Supported last
           za: Z-A (Reverse alphabetical)
+        proposal:
+          view_proposal: View proposal
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Decidim Tweaks
       decidim_awesome:
+        admin:
+          maintenance:
+            title: 'Maintenance tools: %{title}'
+            titles:
+              checks: System Compatibility Checks
+              private_data: Private Data Clean-Up
         awesome_config:
           amendments: Amendments
           autosaved_error: LocalStorage is not supported in your browser, form cannot

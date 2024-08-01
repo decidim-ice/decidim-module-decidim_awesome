@@ -6,7 +6,7 @@ module Decidim
       # Finds the destroyed entry if exists
       def destroy_entry
         @destroy_entry ||= begin
-          query = PaperTrail::Version.where(item_type: item_type, event: "update", item_id: item_id)
+          query = PaperTrail::Version.where(item_type:, event: "update", item_id:)
                                      .where("id > ?", entry.id)
           if roles.include? "admin"
             query.where("object_changes LIKE '%\nadmin:\n- true\n- false%'").first

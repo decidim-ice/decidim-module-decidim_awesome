@@ -7,7 +7,7 @@ module Decidim::DecidimAwesome
     describe ComponentAnalyzer do
       subject { described_class.context_for component }
 
-      let!(:participatory_process) { create :participatory_process }
+      let!(:participatory_process) { create(:participatory_process) }
       let(:component) { double(participatory_space: participatory_process) }
       let(:context) do
         {
@@ -37,8 +37,8 @@ module Decidim::DecidimAwesome
       end
 
       context "when analyzing a named component" do
-        let(:proposal_component) { create :component, manifest_name: :proposals, participatory_space: participatory_process }
-        let!(:component) { create :proposal, component: proposal_component }
+        let(:proposal_component) { create(:component, manifest_name: :proposals, participatory_space: participatory_process) }
+        let!(:component) { create(:proposal, component: proposal_component) }
         let(:context) do
           {
             participatory_space_manifest: participatory_process.manifest.name.to_s,

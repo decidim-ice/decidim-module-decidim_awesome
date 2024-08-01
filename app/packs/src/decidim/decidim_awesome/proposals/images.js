@@ -1,24 +1,30 @@
-$(() => {
+import { attach } from "inline-attacher";
+
+document.addEventListener("DOMContentLoaded", () => {
   window.DecidimAwesome = window.DecidimAwesome || {};
 
-  const token = $('meta[name="csrf-token"]').attr("content");
-  const $textarea = $("textarea#proposal_body");
-  const text = window.DecidimAwesome.texts.drag_and_drop_image;
+  const token = document.querySelector('meta[name="csrf-token"]') && document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+  const textarea = document.querySelector("textarea#proposal_body");
 
-  if (!$textarea.length) {
+  if (!textarea) {
     return;
   }
 
   if (window.DecidimAwesome.allow_images_in_proposals) {
     // Add the capability to upload images only (they will be presented as links)
 
-    $textarea.after(`<p class="help-text">${text}</p>`);
-    $textarea.inlineattachment({
-      uploadUrl: window.DecidimAwesome.editor_uploader_path,
+    const span = document.createElement("span");
+    span.className = "input-character-counter__text";
+    span.innerHTML = window.DecidimAwesome.texts.dragAndDropImage;
+    textarea.parentNode.appendChild(span);
+    attach(textarea, {
+      uploadUrl: window.DecidimAwesome.editorUploaderPath,
       uploadFieldName: "image",
-      jsonFieldName: "url",
+      responseUrlKey: "url",
       progressText: "[Uploading file...]",
-      urlText: "{filename}",
+      urlText: (url, response) =>  {
+        return response.url;
+      },
       extraHeaders: { "X-CSRF-Token": token }
     });
   }

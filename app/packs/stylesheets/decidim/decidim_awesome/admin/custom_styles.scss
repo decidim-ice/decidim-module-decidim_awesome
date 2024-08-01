@@ -1,0 +1,48 @@
+.color-box {
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  margin-left: 1em;
+  vertical-align: middle;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &.primary {
+    background-color: var(--primary);
+  }
+
+  &.secondary {
+    background-color: var(--secondary);
+  }
+
+  &.tertiary {
+    background-color: var(--tertiary);
+  }
+
+  &.alert {
+    background-color: var(--alert);
+  }
+
+  &.warning {
+    background-color: var(--warning);
+  }
+
+  &.success {
+    background-color: var(--success);
+  }
+}
+
+.colors-help {
+  p {
+    @apply block text-sm text-gray-2 font-normal prose-a:text-secondary prose-a:underline;
+
+    margin-bottom: 1em;
+  }
+
+  .colors {
+    white-space: unset;
+    font-size: 0.7rem;
+  }
+}

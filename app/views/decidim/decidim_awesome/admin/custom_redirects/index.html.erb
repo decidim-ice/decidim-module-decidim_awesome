@@ -1,21 +1,22 @@
+<div class="item_show__header">
+  <h2 class="item_show__header-title">
+    <%= t(".title") %>
+    <%= link_to t(".new"), decidim_admin_decidim_awesome.new_custom_redirect_path, class: "button button__secondary button__xs tiny button--title text-white" %>
+  </h2>
+</div>
+
 <div class="card">
-  <div class="card-divider">
-    <h2 class="card-title">
-      <%= t(".title") %>
-      <%= link_to t(".new"), decidim_admin_decidim_awesome.new_custom_redirect_path, class: "button tiny button--title" %>
-    </h2>
-  </div>
-  <div class="card-section">
-  <p class="help-text"><%= t(".description").html_safe %></p>
-  <div class="row column decidim_awesome-form">
+  <div class="card-section p-4">
+  <p class="help-text -mt-2 mb-4"><%= t(".description").html_safe %></p>
+  <div class="table-scroll decidim_awesome-form">
     <table class="table-list custom-redirections-table">
       <thead>
         <tr>
           <th><%= t("custom_redirect.active", scope: "activemodel.attributes") %></th>
           <th><%= t("custom_redirect.origin", scope: "activemodel.attributes") %></th>
           <th><%= t("custom_redirect.destination", scope: "activemodel.attributes") %></th>
-          <th class="redirect-status"><%= link_to(t(".check_redirections"), "#", class: "button small pull-right secondary check-custom-redirections") if current_config.present? %></th>
-          <th class="actions"></th>
+          <th class="redirect-status"><%= link_to(t(".check_redirections"), "#", class: "button button__secondary button__xs pull-right secondary check-custom-redirections") if current_config.present? %></th>
+          <th class="actions"><%= t("decidim.decidim_awesome.admin.actions") %></th>
         </tr>
       </thead>
       <tbody>
@@ -26,8 +27,8 @@
             <td><%= item["destination"] %></td>
             <td class="redirect-status"></td>
             <td class="table-list__actions">
-              <%= icon_link_to "pencil", decidim_admin_decidim_awesome.edit_custom_redirect_path(md5(origin)), t(".edit"), class: "action-icon--edit" %>
-              <%= icon_link_to "circle-x", decidim_admin_decidim_awesome.custom_redirect_path(md5(origin)), t(".remove"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
+              <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_custom_redirect_path(md5(origin)), t(".edit"), class: "action-icon--edit" %>
+              <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.custom_redirect_path(md5(origin)), t(".remove"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
             </td>
           </tr>
         <% end %>

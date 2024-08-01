@@ -1,16 +1,14 @@
 # Decidim::DecidimAwesome
 
-[![[CI] Tests 0.27](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/tests.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/tests.yml)
-[![[CI] Tests 0.26](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/tests-legacy.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/tests-legacy.yml)
+[![[CI] Tests 0.28](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/tests.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/tests.yml)
 [![[CI] Lint](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/lint.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/lint.yml)
-[![[CI] Precompile](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/precompile.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/precompile.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/2dada53525dd5a944089/maintainability)](https://codeclimate.com/github/decidim-ice/decidim-module-decidim_awesome/maintainability)
 [![Test Coverage](https://codecov.io/gh/decidim-ice/decidim-module-decidim_awesome/branch/main/graph/badge.svg?token=TFBMCLLZJG)](https://codecov.io/gh/decidim-ice/decidim-module-decidim_awesome)
 
-Usability and UX tweaks for Decidim.
+**Usability and UX tweaks for Decidim.**
 
 This plugin allows the administrators to expand the possibilities of Decidim beyond some existing limitations.
-All tweaks are provided in a optional fashion with granular permissions that let the administrator to choose exactly where to apply those mods. Some tweaks can be applied to any assembly, other in an specific participatory process or even in type of component only.
+All tweaks are provided in a optional fashion with granular permissions that let the administrator to choose exactly where to apply those mods. Some tweaks can be applied to an assembly, other in an specific participatory process or even in a type of component only (for instance, only in proposals).
 
 **DISCLAIMER: This module is heavily tested and widely used, however we do not accept any responsibility for breaking anything. Feedback is appreciated though.**
 
@@ -31,13 +29,13 @@ Each hack can be scoped to one or more specific participatory spaces or componen
 
 ### Tweaks:
 
-#### 1. Image support for the Quill editor
+#### 1. Image support for the RichText editor
 
 Modifies the WYSIWYG editor in Decidim by adding the possibility to insert images. When uploading images, Drag & Drop is supported. Images will be uploaded to the server and inserted as external resources (it doesn't use base64 in-line encoding).
 
 This feature allows you use images in newsletters as well.
 
-![Images in Quill Editor](examples/quill-images.png)
+![Images in RichText Editor](examples/quill-images.png)
 
 #### 2. Auto-save for surveys and forms
 
@@ -47,27 +45,23 @@ It works purely in the client side by using LocalStorage capabilities of the bro
 
 Saving the form removes the stored data.
 
-![Auto save in forms](examples/auto-save.png)
+![Auto save in forms](examples/auto-save.gif)
 
 #### 3. Images in proposals
 
-Event if you haven't activated the WYSIWYG editor (Quill) in public views (eg: proposals use a simple textarea if rich text editor has not been activated for users). You can allow users to upload images in them by drag & drop over the text area.
+Event if you haven't activated the WYSIWYG editor (RichText) in public views (eg: proposals use a simple textarea if rich text editor has not been activated for users). You can allow users to upload images in them by drag & drop over the text area.
 
 ![Proposal images](examples/proposal-images.png)
 
-#### 4. Markdown editor for proposals
-
-Allows to use markdown when creating proposals instead of a bare textarea.
-
-#### 5. Admin scope configuration
+#### 4. Restrict scope for tweaks
 
 All tweaks can be configured and scoped to a specific participatory space, a type of participatory space, a type of component or a specific component.
 
-Many scopes can be defined for every tweak.
+Many scopes can be defined for every tweak. If a tweak is not scoped, it will be applied globally.
 
-![Admin tweaks for editors](examples/admin-editors.png)
+![Tweak scopes](examples/tweak-scopes.png)
 
-#### 6. Awesome map component
+#### 5. Awesome map component
 
 This is a component you can add in any participatory space. It retrieves all the geolocated content in that participatory space (meetings or proposals) and displays it in a big map.
 
@@ -75,25 +69,25 @@ It also provides a simple search by category, each category is assigned to a dif
 
 ![Awesome map](examples/awesome-map.png)
 
-#### 7. Fullscreen Iframe component
+#### 6. Fullscreen Iframe component
 
 Another simple component that can be used to embed and Iframe with any external content in it that fills all the viewport.
 
 ![Fullscreen iframe](examples/fullscreen-iframe.png)
 
-#### 8. Live support chat
+#### 7. Live support chat
 
-With this feature you can have a support chat in Decidim. It is linked to a [Telegram](https://telegram.org/) group or a single user chat using the [[IntergramBot](https://web.telegram.org/#/im?p=@IntergramBot). Just invite the bot to a group or chat with it directly, grab your ID, put it on the Awesome settings and have fun!. For more info or for hosting your own version of the bot check the [Intergram project](https://github.com/idoco/intergram).
+With this feature you can have a support chat in Decidim. It is linked to a [Telegram](https://telegram.org/) group or a single user chat using the [IntergramBot](https://web.telegram.org/#/im?p=@IntergramBot). Just invite the bot to a group or chat with it directly, grab your ID, put it on the Awesome settings and have fun!. For more info or for hosting your own version of the bot check the [Intergram project](https://github.com/idoco/intergram).
 
 ![Intergram screenshot](examples/intergram.png)
 
-#### 9. Custom CSS applied only according scoped restrictions
+#### 8. Custom CSS applied only according scoped restrictions
 
 With this feature you can create directly in the admin a CSS snipped that is only applied globally, in a particular assembly or even a single proposal!
 
 ![CSS screenshot](examples/custom_styles.png)
 
-#### 10. Change the main menu of Decidim entirely!
+#### 9. Change the main menu of Decidim entirely!
 
 Feel free to hide, modify or add items in the Decidim's main menu. You can also change the order, establish some conditions (like showing only for logged users) or open in a new window.
 
@@ -102,7 +96,7 @@ Feel free to hide, modify or add items in the Decidim's main menu. You can also 
 ![Menu hacks screenshot](examples/menu-3.png)
 ![Menu hacks screenshot](examples/menu-4.png)
 
-#### 11. Assign admins to specific scopes and prevent them modify anything else
+#### 10. Assign admins to specific scopes and prevent them modify anything else
 
 Convert any user on the platform (that is not currently an admin) to a limited subset of participatory spaces or event components. Just add users to a box and scope them to some constraints. These users will see the "Edit" button in everywhere they have permissions. Any access to non allowed zones will redirect the user to the admin index page.
 
@@ -110,7 +104,7 @@ Convert any user on the platform (that is not currently an admin) to a limited s
 ![Scoped admins unauthorized](examples/scoped_admins_unauthorized.png)
 ![Scoped admins configuration](examples/scoped_admins_config.png)
 
-#### 12. Custom fields for proposals
+#### 11. Custom fields for proposals
 
 Now admins can substitute the body of a proposal with a set of form fields.
 Edition is make with a Drag & Drop interface in the admin and can (and should) be scoped to apply only to certain proposal components.
@@ -121,12 +115,79 @@ Technically, the content is stored in the database as an XML document compatible
 ![Custom fields screenshot](examples/custom-fields-2.png)
 ![Custom fields screenshot](examples/custom-fields-1.gif)
 
-#### 13. Custom Redirections (or URL shortener feature)
+Note that the custom fields are build using the jQuery library [formBuilder](https://formbuilder.online). This package is included in Decidim Awesome but the i18n translations are not. By default they are dynamically downloaded from the CDN https://cdn.jsdelivr.net/npm/formbuilder-languages@1.1.0/.
+If you wish to provide an alternative place for those files, you can configure the variable `form_builder_langs_location` in an initializer:
+
+```ruby
+# config/initializers/awesome_defaults.rb
+
+# A URL where to obtain the translations for the FormBuilder component
+# you can a custom place if you are worried about the CDN geolocation
+# Download them from https://github.com/kevinchappell/formBuilder-languages
+
+# For instance, copy them to your /public/fb_locales/ directory and set the path here:
+Decidim::DecidimAwesome.configure do |config|
+  config.form_builder_langs_location = "/fb_locales/"
+end
+```
+
+##### 11.1. GraphQL types for custom fields
+
+#### 11.1. GraphQL types for custom fields
+
+Custom fields are displayed in the GaphQL API according to their definition in a formatted array of objects in the attribute `bodyFields`.
+
+A query to extract this information could look like this (see that the original `body` is also available):
+
+```graphql
+{
+  component(id: 999) {
+    ... on Proposals {
+      proposals {
+        edges {
+          node {
+            id
+            bodyFields {
+              locales
+              translation(locale: "en")
+              translations {
+                locale
+                fields
+                machineTranslated
+              }
+            }
+            body {
+              locales
+              translations {
+                locale
+                text
+                machineTranslated
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+You can then use this custom type in your GraphQL queries and mutations to handle the custom fields in proposals.
+
+
+##### 11.2. Private Custom fields
+
+Similar to the custom fields feature, but only admins can see the content of the fields. This is useful for adding metadata to proposals that should not be visible to the public (such as contact data).
+Data is stored encrypted in the database.
+
+![Private Custom fields screenshot](examples/private_custom_fields.png)
+
+#### 12. Custom Redirections (or URL shortener feature)
 
 Admins can create custom paths that redirect to other places. Destinations can be internal absolute paths or external sites.
 There's also possible to choose to sanitize (ie: remove) any query string or to maintain it (so you can decide to use).
 
-For instance you can create a redirection like 
+For instance you can create a redirection like
 
 * `/take-me-somewhere` => `/processes/canary-islands`
 
@@ -141,7 +202,7 @@ Using a link with a query string (ie: `/take-me-somewhere?locale=es`) that will 
 
 ![Custom redirections screenshot](examples/custom-redirections.png)
 
-#### 14. Custom validation rules for title and body in proposals
+#### 13. Custom validation rules for title and body in proposals
 
 Configure as you wish how the fields "title" and "body" are validated in proposals creation.
 
@@ -154,7 +215,7 @@ Rules available:
 
 ![Custom validations](examples/custom_validations.png)
 
-#### 15. Admin accountability
+#### 14. Admin accountability
 
 This feature allows you to list all the users that are, or have been at any point in time, admins, valuators, user managers or any other role in Decidim. Including global admin roles or private admins of a particular participatory space.
 
@@ -162,7 +223,7 @@ Results can be filtered by role and by time range and also exported as CSV or ot
 
 ![Admin accountability](examples/admin_accountability.png)
 
-#### 16. Additional proposal sortings
+#### 15. Additional proposal sortings
 
 ![Proposal sorting](examples/proposal_sorting.png)
 ![Proposal sorting admin](examples/proposal_sorting-admin.png)
@@ -191,7 +252,7 @@ Decidim::DecidimAwesome.configure do |config|
 end
 ```
 
-#### 17. Weighted voting
+#### 16. Weighted voting
 
 This feature allows you to configure a proposals component to use a weighted voting system. This means that each vote can have a different weight and the result of the vote is calculated as the sum of all the weights.
 
@@ -214,7 +275,7 @@ if Decidim::DecidimAwesome.enabled?(:weighted_proposal_voting)
     voting.show_vote_button_view = "decidim/decidim_awesome/voting/no_admins_vote/show_vote_button"
     voting.show_votes_count_view = "decidim/decidim_awesome/voting/no_admins_vote/show_votes_count"
     # voting.show_votes_count_view = "" # hide votes count if needed
-    voting.proposal_m_cell_footer = "decidim/decidim_awesome/voting/no_admins_vote/proposal_m_cell_footer"
+    voting.proposal_metadata_cell = "decidim/decidim_awesome/voting/proposal_metadata"
     # define a weight validator (optional, by default all weights are valid)
     voting.weight_validator do |weight, context|
       # don't allow admins to vote
@@ -240,11 +301,11 @@ A manifest must define a vote button view for the main proposal view, a vote cou
 
 All views are optional, if set to `nil` they will use the original ones. If set to an empty string `""` they will be hidden.
 
-The `weight_validator` is a Proc that receives the weight value and the context with the current user and the proposal and returns true or false if the weight is valid or not.
+The `weight_validator` is a `Proc` that receives the weight value and the context with the current user and the proposal and returns true or false if the weight is valid or not.
 
 **Notes for view `show_vote_button_view`**
 
-When building a new view for the vote button ([see the original](https://github.com/decidim/decidim/blob/release/0.27-stable/decidim-proposals/app/views/decidim/proposals/proposals/_vote_button.html.erb)) is important to take into account the following situations:
+When building a new view for the vote button ([see the original](https://github.com/decidim/decidim/blob/release/0.28-stable/decidim-proposals/app/views/decidim/proposals/proposals/_vote_button.html.erb)) is important to take into account the following situations:
 
 - If there's a `current_user` logged in
 - If votes are blocked `if current_settings.votes_blocked?`
@@ -252,7 +313,7 @@ When building a new view for the vote button ([see the original](https://github.
 - If maximum votes have already reached `if proposal.maximum_votes_reached?`
 - If the proposal can accumulate supports beyond maximum `if proposal.can_accumulate_supports_beyond_threshold`
 - If the current component allows the user to participate `if current_component.participatory_space.can_participate?(current_user)`
-- Note that the [original view](https://github.com/decidim/decidim/blob/release/0.27-stable/decidim-proposals/app/views/decidim/proposals/proposals/_vote_button.html.erb) is overridden only inside the tag  `<div id="proposal-<%= proposal.id %>-vote-button" class="button--vote-button">`. You only need to substitute the part inside.
+- Note that the [original view](https://github.com/decidim/decidim/blob/release/0.28-stable/decidim-proposals/app/views/decidim/proposals/proposals/_vote_button.html.erb) is overridden only inside the tag  `<div id="proposal-<%= proposal.id %>-vote-button" class="button--vote-button">`. You only need to substitute the part inside.
 
 To cast a vote a `POST` action is needed with the parameters `proposal_id`, `from_proposals_list` and `weight`. The route where to send the vote can be constructed such as:
 
@@ -268,13 +329,35 @@ This view must implement the number of votes already cast. It requires an HTML t
 
 You can also completely hide this view (using `voting.show_votes_count_view = ""` in the manifest declaration). This is useful if you are using the same `show_vote_button_view` to also display the total counters (or your implementation does not use that).
 
-**Notes for view `proposal_m_cell_footer`**
+**Notes for cell `voting.proposal_metadata_cell`**
 
-This view is used by the proposal cell in lists. It must implement the vote button and the vote count. The vote button must be a link with the same characteristics as the one explained above for the `show_vote_button_view` (typically you can just render the same view using `<%= render partial: my/path/to/view, { locals: model: proposal, from_proposals_list: true } %>`).
+This is the Decidim cell used to provide the metadata that is rendered at the bottom of a proposal card. If empty, defaults to [ProposalMetadataCell](https://github.com/decidim/decidim/blob/release/0.28-stable/decidim-proposals/app/cells/decidim/proposals/proposal_metadata_cell.rb), **wich does not renders the votes**.
 
-Note that, it is strongly recommended to add and HTML tag element with the id `proposal-<%= proposal.id %>-votes-count` so the Ajax vote re-loader can work. Even if you don't use (in this case use a `style="display:none"` attribute), this is because the Ajax reloader always look for this element and throw JavaScript errors if not.
+What this cell must do is to provide an array of items to render as part of the cell footer. Check the example used at the [voting cards implementation](app/cells/decidim/decidim_awesome/voting/proposal_metadata_cell.rb) for reference.
 
-#### 18. Limiting amendments in proposals
+##### 16.1 GraphQL Types for weighted voting
+
+When a weighed voting mechanism is selected, the GraphQL API will show those weights separated in each proposal.
+The attribute that holds this information is `vote_weights`, a query example could look like this:
+
+```graphql
+{
+  component(id: 999) {
+    ... on Proposals {
+      proposals {
+        edges {
+          node {
+            id
+            voteWeights
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+#### 17. Limiting amendments in proposals
 
 By default, when proposals can be amended, any number of amendments can be created.
 
@@ -284,6 +367,17 @@ Note that this only applies to amendments being in the state "evaluating", not t
 This option is disable by default, must be enabled in the component's configuration:
 
 ![Limiting amendments](examples/limit_amendments.png)
+
+#### 18. Maintenance tools
+
+The awesome admin provides with some maintenance tools (more to come in the future);
+
+##### 18.1 Old private data removal
+
+These tools are designed to help remove old data as required by laws such as GDPR, particularly in relation to private custom fields.
+This menu will show if there's any data older than 6 months (configurable) and will let admins remove it component by component.
+
+![Private data](examples/private_data.png)
 
 #### To be continued...
 
@@ -303,10 +397,21 @@ And then execute:
 
 ```bash
 bundle
-bundle exec rails decidim_decidim_awesome:install:migrations
-bundle exec rails decidim:upgrade
-bundle exec rails db:migrate
+bin/rails decidim:upgrade
+bin/rails db:migrate
 ```
+
+Go to `yourdomain/admin/decidim_awesome` and start tweaking things!
+
+> **EXPERTS ONLY**
+>
+> Under the hood, when running `bundle exec rails decidim:upgrade` the `decidim-decidim_awesome` gem will run the following two tasks (that can also be run manually if you consider):
+>
+> ```bash
+> bin/rails decidim_decidim_awesome:install:migrations
+> bin/rails decidim_decidim_awesome:webpacker:install
+> ```
+
 
 If you are upgrading from a version prior to 0.8, make sure to visit the URL `/admin/decidim_awesome/checks` and run image migrations for the old images:
 
@@ -324,13 +429,14 @@ RAILS_ENV=production bin/rails decidim_awesome:active_storage_migrations:check_m
 ```
 
 The correct version of Decidim Awesome should resolved automatically by the Bundler.
-However you can force some specific version using `gem "decidim-decidim_awesome", "~> 0.10.0"` in the Gemfile.
+However you can force some specific version using `gem "decidim-decidim_awesome", "~> 0.11.0"` in the Gemfile.
 
 Depending on your Decidim version, choose the corresponding Awesome version to ensure compatibility:
 
 | Awesome version | Compatible Decidim versions |
 |---|---|
-| 0.10.0 | >= 0.26.7, >= 0.27.3 |
+| 0.11.x | 0.28.x |
+| 0.10.x | >= 0.26.7, >= 0.27.x |
 | 0.9.2 | >= 0.26.7, >= 0.27.3 |
 | 0.9.x | 0.26.x, 0.27.x |
 | 0.8.x | 0.25.x, 0.26.x |
@@ -338,10 +444,11 @@ Depending on your Decidim version, choose the corresponding Awesome version to e
 | 0.6.x | 0.22.x, 0.23.x |
 | 0.5.x | 0.21.x, 0.22.x |
 
-> *Heads up!* 
+> *Heads up!*
+> * version 0.11.0 is only compatible with Decidim v0.28 as a major redesign makes backward compatibility impractical.
 > * version 0.10.0 requires database migrations! Don't forget the migrations step when updating.
 > * version 0.8.0 removes CSS Themes for tenants. If you have been using them you will have to manually migrate them to custom styles.
-> * version 0.8.0 uses ActiveStorage, same as Decidim 0.25. 2 new rake task have been introduced to facilitate the migration: `bin/rails decidim_awesome:active_storage_migrations:check_migration_from_carrierwave` and 
+> * version 0.8.0 uses ActiveStorage, same as Decidim 0.25. 2 new rake task have been introduced to facilitate the migration: `bin/rails decidim_awesome:active_storage_migrations:check_migration_from_carrierwave` and
 `bin/rails decidim_awesome:active_storage_migrations:migrate_from_carrierwave`
 > * version 0.7.1 requires database migrations! Don't forget the migrations step when updating.
 
@@ -360,13 +467,10 @@ In order to personalize default values, create an initializer such as:
 # Change some variables defaults
 Decidim::DecidimAwesome.configure do |config|
   # Enabled by default to all scopes, admins can still limit it's scope
-  config.allow_images_in_full_editor = true
+  config.allow_images_in_editors = true
 
   # Disabled by default to all scopes, admins can enable it and limit it's scope
-  config.allow_images_in_small_editor = false
-
-  # De-activated, admins don't even see it as an option
-  config.use_markdown_editor = :disabled
+  config.allow_videos_in_editors = false
 
   # Disable scoped admins
   config.scoped_admins = :disabled
@@ -458,31 +562,34 @@ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rake test_
 DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rspec
 ```
 
+> Note: the following is not currently applicable as version v0.11 is only compatible with version Decidim v0.28
+> Is left here for future reference
+
 However, this project works with different versions of Decidim. In order to test them all, we maintain two different Gemfiles: `Gemfile` and `Gemfile.legacy`. The first one is used for development and testing the latest Decidim version supported, the second one is used for testing against the old Decidim version.
 
 You can run run tests against the legacy Decidim versions by using:
 
 ```bash
-export DATABASE_USERNAME=<username> 
-export DATABASE_PASSWORD=<password> 
-RBENV_VERSION=2.7.6 BUNDLE_GEMFILE=Gemfile.legacy bundle
-RBENV_VERSION=2.7.6 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rake test_app
-RBENV_VERSION=2.7.6 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rspec
+export DATABASE_USERNAME=<username>
+export DATABASE_PASSWORD=<password>
+RBENV_VERSION=3.1.1 BUNDLE_GEMFILE=Gemfile.legacy bundle
+RBENV_VERSION=3.1.1 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rake test_app
+RBENV_VERSION=3.1.1 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rspec
 ```
 
-For convenience, you can use the scripts `bin/rspec` and `bin/rspec-legacy` to run tests against one or the other version:
+For convenience, you can use the scripts `bin/test` and `bin/test-legacy` to run tests against one or the other version:
 
 ```bash
-bin/rspec spec/
-bin/rspec-legacy spec/
+bin/test spec/
+bin/test-legacy spec/
 ```
 
 - Rbenv is required for this script to work.
 
 > **NOTE:** Remember to reset the database when changing between tests:
 > ```bash
-> bin/rspec --reset
-> bin/rspec-legacy --reset
+> bin/test --reset
+> bin/test-legacy --reset
 > ```
 
 
@@ -517,4 +624,4 @@ This engine is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 
 ## Credits
 
-This plugin maintainted by ![PokeCode](app/packs/images/decidim/decidim_awesome/pokecode-logo.png)
+This plugin maintainted by [![PokeCode](app/packs/images/decidim/decidim_awesome/pokecode-logo.png) PokeCode](https://pokecode.net/)

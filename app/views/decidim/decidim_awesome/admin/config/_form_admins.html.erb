@@ -1,21 +1,22 @@
-<div class="row column decidim_awesome-form">
+<div class="form__wrapper row column decidim_awesome-form">
   <% if config_enabled? :scoped_admins %>
     <p class="help-text"><%= t("help.scoped_admins", scope: "decidim.decidim_awesome.admin.config.form") %></p>
 
     <% form.object.scoped_admins&.each do |key, value| %>
-      <div class="scoped_admins_container" data-key="<%= key %>">
+      <div class="card p-4 scoped_admins_container js-box-container" data-key="<%= key %>">
         <%= render(partial: "decidim/decidim_awesome/admin/config/autoedit_box_label", locals: { var: "scoped_admins", key: key, scope: "scoped_admin_#{key}", delete_path: decidim_admin_decidim_awesome.scoped_admin_path(key: key) }) %>
         <p class="form-error is-visible" id="scoped-admin-error-<%= $key %>"><%= errors[key.to_sym].join("<br>") if errors %></p>
 
-        <%= select_tag "config[scoped_admins][#{key}]", options_from_collection_for_select(users_for(value), :id, :text, proc { true }), { include_blank: false ,  class: "multiusers-select", multiple: true, data: { url: decidim_admin_decidim_awesome.users_path } } %>
+        <%= select_tag "config[scoped_admins][#{key}]", options_for_select(users_for(value), value), { include_blank: false ,  class: "multiusers-select", multiple: true, data: { url: decidim_admin_decidim_awesome.users_path } } %>
 
         <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: "scoped_admin_#{key}", constraints: constraints_for("scoped_admin_#{key}") }) %>
       </div>
     <% end %>
 
-    <%= link_to t("new", scope: "decidim.decidim_awesome.admin.config.form_scoped_admins"), decidim_admin_decidim_awesome.scoped_admins_path, method: :post %>
+    <%= link_to decidim_admin_decidim_awesome.scoped_admins_path, method: :post, class: "button button__sm button__text-secondary mr-auto" do %>
+      <%= icon("add-box-line") %>
+      <%= t("new", scope: "decidim.decidim_awesome.admin.config.form_scoped_admins") %>
+    <% end %>
 
   <% end %>
 </div>
-
-<%= javascript_pack_tag "decidim_decidim_awesome_admin_form_exit_warn" %>

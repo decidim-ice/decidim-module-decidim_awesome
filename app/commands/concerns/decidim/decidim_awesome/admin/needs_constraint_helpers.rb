@@ -11,7 +11,7 @@ module Decidim
           subconfig = AwesomeConfig.find_or_initialize_by(var: "#{var}_#{@ident}", organization: @organization)
           @constraint = ConfigConstraint.create!(
             awesome_config: subconfig,
-            settings: settings
+            settings:
           )
         end
 
@@ -20,7 +20,7 @@ module Decidim
           return true if constraint.awesome_config.constraints.count > 1
 
           case constraint.awesome_config.var.to_s
-          when /^proposal_custom_field/
+          when /^proposal_(private_)?custom_field/
             false
           else
             true

@@ -24,11 +24,11 @@ module Decidim
       end
 
       def javascript_config_vars
-        awesome_config.except(:scoped_styles, :proposal_custom_fields, :scoped_admins).to_json.html_safe
+        awesome_config.except(:scoped_styles, :proposal_custom_fields, :proposal_private_custom_fields, :scoped_admins).to_json.html_safe
       end
 
       def show_public_intergram?
-        return unless awesome_config[:intergram_for_public]
+        return false unless awesome_config[:intergram_for_public]
         return true unless awesome_config[:intergram_for_public_settings][:require_login]
 
         user_signed_in?
@@ -59,6 +59,10 @@ module Decidim
       # Collects all proposal custom fields that is applied in the current URL context
       def awesome_proposal_custom_fields
         @awesome_proposal_custom_fields ||= awesome_config_instance.collect_sub_configs_values("proposal_custom_field")
+      end
+
+      def awesome_proposal_private_custom_fields
+        @awesome_proposal_private_custom_fields ||= awesome_config_instance.collect_sub_configs_values("proposal_private_custom_field")
       end
 
       # this will check if the current component has been configured to use a custom voting manifest

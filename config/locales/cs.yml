@@ -1,3 +1,4 @@
+---
 cs:
   activemodel:
     attributes:
@@ -187,7 +188,6 @@ cs:
               Můžete zahájit proces nyní a bude probíhat na pozadí.
             start_image_migrations: "\U0001F449 Zahájit proces migrace"
         config:
-          caution: 'POZNÁMKA: Tato funkce silně mění některé výchozí chování, které by mohlo vést k neočekávaným výsledkům. Používejte ji s opatrností!'
           constraints:
             add_condition: Přidat případ
             always: Vždy
@@ -272,6 +272,7 @@ cs:
           title:
             admins: Škálovaní administrátoři
             editors: Hack editoru
+            livechat: Live Chat
             proposals: Návrhy hacků
             styles: Vlastní styly
             surveys: Průzkumy a formuláře
@@ -465,7 +466,7 @@ cs:
           abstained: "✔️ Zdržel se hlasování"
           change_vote: Změnit můj hlas
           default_box_title: Hlasovat o tomto návrhu
-          default_instructions_html: "<p>Přečtěte si pečlivě pravidla voleb, abyste pochopili, jak bude vaše hlasování použito v %{organization}\"</p>"
+          default_instructions_html: "<p>Přečtěte si pečlivě pravidla voleb, abyste pochopili, jak bude vaše hlasování použito v %{organization}</p>"
           modal:
             cancel: Zrušit
             message: Váš hlas bude považován za konečný v %{date}. Do té doby jej můžete změnit,

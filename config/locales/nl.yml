@@ -1,3 +1,4 @@
+---
 nl:
   activemodel:
     attributes:
@@ -97,7 +98,14 @@ nl:
               intergram_config: 'Nodig de <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> uit voor je groep of begin direct met een chat. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               scoped_styles: Maak aangepaste CSS aan die alleen van toepassing is in bepaalde delen van het openbare web (gebruik hiervoor de restrictie-editor)
               scoped_styles_variables: 'Je kunt de volgende CSS variabelen gebruiken voor de organisatie op maat gemaakte kleuren:'
+          form_proposal_custom_fields:
+            delete: Delete
+          form_proposal_private_custom_fields:
+            delete: Delete
+          form_scoped_admins:
+            delete: Delete
           form_scoped_styles:
+            delete: Delete
             new: Voeg een nieuwe CSS-box toe
             remove: Verwijder dit CSS-vak
             sure_to_remove: Weet je zeker dat je dit CSS-vak wilt verwijderen?
@@ -107,6 +115,7 @@ nl:
           system: Overal, behalve participatieve ruimtes
           title:
             editors: Editor hacks
+            livechat: Live Chat
             proposals: Voorstellen hacks
             styles: Aangepaste stijlen
             surveys: Enquêtes & formulieren

@@ -1,28 +1,31 @@
-<div class="card">
-  <div class="card-divider">
-    <h2 class="card-title"><%= t ".title" %></h2>
-  </div>
-  <div class="card-section">
-    <p>
-      <span class="label <%= decidim_version_valid? ? "success" : "alert" %>"><%= t ".decidim_version", version: decidim_version %></span>
-      <%= check decidim_version_valid? %>
-    </p>
-  </div>
-  <div class="card-section">
-    <p><%= t(".images_migrated") %>
-    <% if images_migrated? %>
-      <%= check true %></p>
-    <% else %>
-      <%= check false %></p>
-      <div class="callout alert">
-        <p><%= t(".pending_image_migrations", total: pending_image_migrations).html_safe %></p>
-        <%= link_to t(".start_image_migrations"), migrate_images_path, method: :post, class: "button" %>
-      </div>
-    <% end %>
-  </div>
-  <div class="card-section">
-    <ul class="vertical menu">
-      <% overrides.each do |group, props| %>
+<!--
+  Force tailwind to compile these classes
+  class="fill-success fill-alert"
+-->
+
+<div class="card-section decidim-version">
+  <p>
+    <span class="label <%= decidim_version_valid? ? "success" : "alert" %>"><%= t ".decidim_version", version: decidim_version %></span>
+    <%= check decidim_version_valid? %>
+  </p>
+</div>
+
+<div class="card-section">
+  <p><%= t(".images_migrated") %>
+  <% if images_migrated? %>
+    <%= check true %></p>
+  <% else %>
+    <%= check false %></p>
+    <div class="callout alert">
+      <p><%= t(".pending_image_migrations", total: pending_image_migrations).html_safe %></p>
+      <%= link_to t(".start_image_migrations"), migrate_images_path, method: :post, class: "button" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="card-section">
+  <ul class="vertical menu">
+    <% overrides.each do |group, props| %>
       <li>
         <strong><%= t ".#{group}" %></strong>
         <ul class="vertical menu">
@@ -36,16 +39,16 @@
         </ul>
         <br>
       </li>
-      <% end %>
-    </ul>
-    <ul class="vertical menu heads">
-      <li>
-        <strong><%= t ".head_tags" %></strong>
-        <ul class="vertical menu">
+    <% end %>
+  </ul>
+  <ul class="vertical menu heads">
+    <li>
+      <strong><%= t ".head_tags" %></strong>
+      <ul class="vertical menu">
         <% {
-          CSS: "//head/link[@rel='stylesheet'][contains(@href,'decidim_decidim_awesome')]",
-          JavaScript: "//script[contains(@src,'decidim_decidim_awesome')]"
-          }.each do |part, xpath| %>
+        CSS: "//head/link[@rel='stylesheet'][contains(@href,'decidim_decidim_awesome')]",
+        JavaScript: "//script[contains(@src,'decidim_decidim_awesome')]"
+        }.each do |part, xpath| %>
           <li>
             <%= part %>
             <% if head.xpath(xpath).count.positive? %>
@@ -56,16 +59,16 @@
               <code class="help-text code-block"><%= head_addons(part) %></code>
             <% end %>
           </li>
-          <% end %>
-        </ul>
-      </li>
-      <li>
-        <strong><%= t ".admin_head_tags" %></strong>
-        <ul class="vertical menu">
+        <% end %>
+      </ul>
+    </li>
+    <li>
+      <strong><%= t ".admin_head_tags" %></strong>
+      <ul class="vertical menu">
         <% {
-          CSS: "//head/link[@rel='stylesheet'][contains(@href,'decidim_admin_decidim_awesome')]",
-          JavaScript: "//script[contains(@src,'decidim_admin_decidim_awesome')]"
-          }.each do |part, xpath| %>
+        CSS: "//head/link[@rel='stylesheet'][contains(@href,'decidim_admin_decidim_awesome')]",
+        JavaScript: "//script[contains(@src,'decidim_admin_decidim_awesome')]"
+        }.each do |part, xpath| %>
           <li>
             <%= part %>
             <% if admin_head.xpath(xpath).count.positive? %>
@@ -76,9 +79,8 @@
               <code class="help-text code-block"><%= admin_addons(part) %></code>
             <% end %>
           </li>
-          <% end %>
-        </ul>
-      </li>
-    </ul>
-  </div>
+        <% end %>
+      </ul>
+    </li>
+  </ul>
 </div>

@@ -14,9 +14,8 @@ require "decidim/decidim_awesome/iframe_component/component"
 require "decidim/decidim_awesome/content_parsers/editor_images_parser"
 
 # Engines to handle logic unrelated to participatory spaces or components
-
 Decidim.register_global_engine(
   :decidim_decidim_awesome, # this is the name of the global method to access engine routes
-  ::Decidim::DecidimAwesome::Engine,
+  Decidim::DecidimAwesome::Engine,
   at: "/decidim_awesome"
 )

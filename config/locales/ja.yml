@@ -1,3 +1,4 @@
+---
 ja:
   activemodel:
     attributes:
@@ -187,7 +188,6 @@ ja:
               処理を開始すると、バックグラウンドで実行されます。
             start_image_migrations: "\U0001F449 今すぐ移行プロセスを開始する"
         config:
-          caution: '注意: この機能は、予期しない結果につながる可能性があるデフォルトの動作を大きく変更します。注意して使用してください！'
           constraints:
             add_condition: 条件を追加
             always: すべて

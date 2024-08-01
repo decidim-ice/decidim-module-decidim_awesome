@@ -13,6 +13,14 @@ module Decidim
 
       attr_reader :fields, :xml, :errors, :data
 
+      def empty?
+        @fields.empty?
+      end
+
+      def present?
+        !@fields.empty?
+      end
+
       def apply_xml(xml)
         parse_xml(xml)
         map_fields!
@@ -32,7 +40,7 @@ module Decidim
 
       def parse_xml(xml)
         @xml = xml
-        @data = Nokogiri.XML(xml).xpath("//dl/dd")
+        @data = Nokogiri.XML(@xml).xpath("//dl/dd")
         return if @data.present?
 
         apply_to_first_textarea
@@ -54,7 +62,7 @@ module Decidim
       # Finds the first textarea and applies non-xml compatible content
       # when textarea has not wysiwyg assigned, strips html
       def apply_to_first_textarea
-        # quill editor might leave html traces without any user content
+        # HTML editors might leave html traces without any user content
         # so we won't process it if there is no text (html free) result
         text = Nokogiri.HTML(xml).html? ? Nokogiri.HTML(xml).text.strip : text.strip
         return if text.blank?
@@ -79,12 +87,12 @@ module Decidim
         @fields
       end
 
-      def deep_transform_values!(object, &block)
+      def deep_transform_values!(object, &)
         case object
         when Hash
-          object.transform_values! { |value| deep_transform_values!(value, &block) }
+          object.transform_values! { |value| deep_transform_values!(value, &) }
         when Array
-          object.map! { |e| deep_transform_values!(e, &block) }
+          object.map! { |e| deep_transform_values!(e, &) }
         else
           yield(object)
         end
