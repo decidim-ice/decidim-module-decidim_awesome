@@ -46,8 +46,6 @@ cs:
         target: Otevře se v
         url: URL
         visibility: Viditelnost
-      proposal:
-        proposal_custom_fields: Vlastní pole
   decidim:
     admin:
       actions:
@@ -189,9 +187,7 @@ cs:
               Zdá se, že tato instalace potřebuje přesunout <strong>%{total}</strong> starých obrázků do nového systému.<br>
               Můžete zahájit proces nyní a bude probíhat na pozadí.
             start_image_migrations: "\U0001F449 Zahájit proces migrace"
-            title: Kontroly kompatibility systému
         config:
-          caution: 'POZNÁMKA: Tato funkce silně mění některé výchozí chování, které by mohlo vést k neočekávaným výsledkům. Používejte ji s opatrností!'
           constraints:
             add_condition: Přidat případ
             always: Vždy
@@ -251,14 +247,19 @@ cs:
               body: Ověření vstupu uživatele pro pole "tělo"
               title: Ověření uživatelem pro pole "Název"
           form_proposal_custom_fields:
+            delete: Smazat
             new: Přidat nové pole "vlastní pole"
             remove: Odstranit toto "vlastní pole"
             sure_to_remove: Opravdu chcete zničit toto pole?
+          form_proposal_private_custom_fields:
+            delete: Smazat
           form_scoped_admins:
+            delete: Smazat
             new: Přidání nové skupiny "Škálovaní administrátoři"
             remove: Odstranit tuto skupinu "Škálovaní administrátoři""
             sure_to_remove: Opravdu chcete zničit tuto skupinu "Škálovaní administrátoři"?
           form_scoped_styles:
+            delete: Smazat
             new: Přidat nový CSS box
             remove: Odstranit tento CSS box
             sure_to_remove: Opravdu chcete zničit tento CSS box?
@@ -268,6 +269,13 @@ cs:
             title: Vylepšení pro %{setting}
             update: Aktualizace konfigurace
           system: Všude kromě participačních prostor
+          title:
+            admins: Škálovaní administrátoři
+            editors: Hack editoru
+            livechat: Live Chat
+            proposals: Návrhy hacků
+            styles: Vlastní styly
+            surveys: Průzkumy a formuláře
           update:
             error: Chyba při aktualizaci konfigurace! %{error}
             success: Konfigurace byla úspěšně aktualizována
@@ -329,10 +337,11 @@ cs:
             success: Přesměrování úspěšně aktualizováno
         menu:
           admins: Škálovaní administrátoři
-          checks: Systémová kompatibilita
           custom_redirects: Vlastní přesměrování
           editors: Hack editoru
           livechat: Live Chat
+          maintenance:
+            checks: Systémová kompatibilita
           menu_hacks: Vylepšení menu
           proposal_custom_fields: Vlastní pole pro návrhy
           proposals: Návrhy hacků
@@ -378,6 +387,7 @@ cs:
           url_exists: Stejná adresa URL je již nakonfigurována, prosím upravte ji místo jejího vytvoření.
       amendments:
         modal:
+          amendment_exists: Pozměňovací návrh již existuje
           current_amendment_html: <p>Můžete <a href="%{amendment_link}">přistupovat k aktuálnímu pozměňovacímu návrhu zde</a>.</p>
           dismiss: Ok, rozumím
           explanation_html: |
