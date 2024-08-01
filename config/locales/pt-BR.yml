@@ -231,6 +231,7 @@ pt-BR:
             success: Redirecionamento atualizado com sucesso
         menu:
           admins: Administradores com escopo
+          checks: Compatibilidade de sistema
           custom_redirects: Redirecionamentos personalizados
           editors: Hacks do editor
           livechat: Chat Ao Vivo
