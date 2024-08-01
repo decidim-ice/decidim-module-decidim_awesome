@@ -2,10 +2,7 @@ lt:
   activemodel:
     attributes:
       config:
-        allow_images_in_full_editor: Leisti paveikslėlius pilname HTML redaktoriuje
-        allow_images_in_markdown_editor: Leisti paveikslėlius markdown redaktoriuje
         allow_images_in_proposals: Leisti paveikslėlius pasiūlymų redaktoriuje
-        allow_images_in_small_editor: Leisti paveikslėlius minimaliame HTML redaktoriuje
         auto_save_forms: Automatiškai išsaugoti formas vietinėje atmintyje
         intergram_auto_no_response: Žinutė, kuri išsiunčiama vieną minutę po to, kai vartotojas išsiunčia savo pirmąją žinutę ir negauna atsakymo
         intergram_auto_response: Žinutė, kuri išsiunčiama iš karto po to, kai vartotojas išsiunčia savo pirmąją žinutę
@@ -20,7 +17,6 @@ lt:
         proposal_custom_fields: Personalizuotų laukų %{id}
         scoped_admins: Erdvei priskirtos administratorių grupės %{id}
         scoped_styles: Personalizuotų stilių %{id}
-        use_markdown_editor: Naudoti Markdown redaktorių vietoj HTML redaktoriaus
         validate_body_max_caps_percent: Maksimali leidžiama didžiųjų raidžių dalis teksto turinyje
         validate_body_max_marks_together: Maksimalus iš eilės einančių žymėjimo simbolių skaičius leidžiamas teksto turinyje
         validate_body_min_length: Minimalus reikalingų simbolių skaičius teksto turiniui
@@ -46,8 +42,6 @@ lt:
         target: Atsidaro
         url: Nuoroda
         visibility: Matomumas
-      proposal:
-        proposal_custom_fields: Papildomi laukai
   decidim:
     admin:
       filters:
@@ -98,4 +92,3 @@ lt:
               Atrodo, kad šiam diegimui reikia perkelti <strong>%{total}</strong> senųjų paveikslėlių į naująją sistemą.<br>
               Galite pradėti procesą dabar, ir jis bus atliekamas fone.
             start_image_migrations: "\U0001F449 Pradėti migracijos procesą dabar"
-            title: Sistemos suderinamumo patikrinimai
