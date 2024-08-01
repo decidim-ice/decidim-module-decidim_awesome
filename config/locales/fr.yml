@@ -333,6 +333,7 @@ fr:
             success: Redirection mise à jour avec succès
         menu:
           admins: Administrateurs de secteur
+          checks: Compatibilité système
           custom_redirects: Redirections personnalisées
           editors: Hacks de l'éditeur
           livechat: Chat en direct
