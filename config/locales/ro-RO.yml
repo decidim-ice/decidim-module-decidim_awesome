@@ -2,10 +2,7 @@ ro:
   activemodel:
     attributes:
       config:
-        allow_images_in_full_editor: Permite imagini în editorul HTML complet
-        allow_images_in_markdown_editor: Permite imagini în editorul markdown
         allow_images_in_proposals: Permite imaginile în editorul de propuneri
-        allow_images_in_small_editor: Permite imagini în editorul HTML minimal
         auto_save_forms: Salvare automată a formularelor în memoria locală
         intergram_chat_id: ID Conversație
         intergram_color: Culoarea widget-ului
@@ -24,8 +21,6 @@ ro:
         target: Deschidere in
         url: URL
         visibility: Vizibilitate
-      proposal:
-        proposal_custom_fields: Câmpuri particularizate
   decidim:
     admin:
       filters:
@@ -84,7 +79,6 @@ ro:
             decidim_version: Versiune Decidim %{version}
             images_migrated: Imagini migrate în ActiveStorage
             start_image_migrations: "\U0001F449 Începe procesul de migrare acum"
-            title: Verificări compatibilitate sistem
         config:
           constraints:
             always: Întotdeauna
@@ -96,7 +90,18 @@ ro:
             error: Eroare la crearea unui nou "câmp personalizat"! %{error}
           form:
             edit_label: Redenumește eticheta
+          form_proposal_custom_fields:
+            delete: Șterge
+          form_proposal_private_custom_fields:
+            delete: Șterge
+          form_scoped_admins:
+            delete: Șterge
+          form_scoped_styles:
+            delete: Șterge
           process_groups: Grupuri de procese
+          title:
+            styles: Stiluri personalizate
+            surveys: Chestionare și formulare
         constraints:
           errors:
             not_unique: Această condiție există deja
