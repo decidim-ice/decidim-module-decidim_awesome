@@ -105,6 +105,7 @@ sv:
             title: Ny omdirigering
         menu:
           admins: Begränsade administratörer
+          checks: System compatibility
           custom_redirects: Anpassade omdirigeringar
           editors: Editor hacks
           livechat: Live Chat
