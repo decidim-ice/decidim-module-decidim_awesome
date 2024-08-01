@@ -335,6 +335,15 @@ cs:
           update:
             error: Chyba aktualizace přesměrování! %{error}
             success: Přesměrování úspěšně aktualizováno
+        maintenance:
+          private_data:
+            component: Prostor / komponenta
+            confirm_delete: Opravdu chcete odstranit všechna soukromá data tohoto zdroje? Tuto akci nelze vrátit zpět.
+            delete: Odstranit vše
+            done: Hotovo
+            last_date: Poslední aktualizace
+            removing: Odstraňování...
+            time_ago: "Před %{time}"
         menu:
           admins: Škálovaní administrátoři
           custom_redirects: Vlastní přesměrování
@@ -342,6 +351,8 @@ cs:
           livechat: Live Chat
           maintenance:
             checks: Systémová kompatibilita
+            maintenance: Údržba
+            private_data: Soukromá data
           menu_hacks: Vylepšení menu
           proposal_custom_fields: Vlastní pole pro návrhy
           proposals: Návrhy hacků
