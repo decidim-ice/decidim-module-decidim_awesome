@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Check images in editors", type: :system do
+describe "Check images in editors" do
   include_context "with a component"
   let(:manifest_name) { "proposals" }
   let!(:component) do
