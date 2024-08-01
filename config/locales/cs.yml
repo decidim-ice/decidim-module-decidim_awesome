@@ -3,10 +3,9 @@ cs:
     attributes:
       config:
         additional_proposal_sortings: Povoleny další možnosti řazení
-        allow_images_in_full_editor: Povolit obrázky v kompletním HTML editoru
-        allow_images_in_markdown_editor: Povolit obrázky v editoru markdown
+        allow_images_in_editors: Povolit obrázky v HTML editoru
         allow_images_in_proposals: Povolit obrázky v editoru návrhů
-        allow_images_in_small_editor: Povolit obrázky v minimálním HTML editoru
+        allow_videos_in_editors: Povolit videa v HTML editoru
         auto_save_forms: Automaticky ukládat formuláře v místním úložišti
         intergram_auto_no_response: Zpráva, která je odeslána jednu minutu poté, co uživatel odešle svou první zprávu a nebyla obdržena odpověď
         intergram_auto_response: Zpráva, která je odeslána okamžitě poté, co uživatel odešle svou první zprávu
@@ -21,7 +20,6 @@ cs:
         proposal_custom_fields: 'Uživatelská pole #%{id}'
         scoped_admins: 'Skupina Škálovaní administrátoři #%{id}'
         scoped_styles: Vlastní styly číslo %{id}
-        use_markdown_editor: Použít Markdown editor namísto HTML editoru
         validate_body_max_caps_percent: Maximální povolený procentní podíl velkých písmen pro tělo zprávy
         validate_body_max_marks_together: Maximální počet po sobě jdoucích značek povolených v těle zprávy
         validate_body_min_length: Minimální požadované znaky pro tělo zprávy
@@ -47,10 +45,10 @@ cs:
         target: Otevře se v
         url: URL
         visibility: Viditelnost
-      proposal:
-        proposal_custom_fields: Vlastní pole
   decidim:
     admin:
+      actions:
+        manage: Spravovat
       filters:
         admin_accountability:
           admin_role_type:
@@ -77,7 +75,6 @@ cs:
             announcement: Oznámení
             iframe: Kód Iframe
             iframe_help: 'Zadejte kód jako html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Obsah bude vylepšen z jiných HTML tagů. Pro vyplnění obrazovky použijte 100% šířku.'
-            no_margins: Mezi iframe a zbytkem stránky nejsou žádné okraje
             viewport_width: Omezit maximální šířku na zobrazení aplikace
           step:
             announcement: Oznámení
@@ -189,7 +186,6 @@ cs:
               Zdá se, že tato instalace potřebuje přesunout <strong>%{total}</strong> starých obrázků do nového systému.<br>
               Můžete zahájit proces nyní a bude probíhat na pozadí.
             start_image_migrations: "\U0001F449 Zahájit proces migrace"
-            title: Kontroly kompatibility systému
         config:
           caution: 'POZNÁMKA: Tato funkce silně mění některé výchozí chování, které by mohlo vést k neočekávaným výsledkům. Používejte ji s opatrností!'
           constraints:
@@ -227,10 +223,9 @@ cs:
               incorrect_css: 'CSS v poli #%{key} je neplatné'
               incorrect_json: 'Definice JSON v poli #%{key} je neplatná'
             help:
-              allow_images_in_full_editor: Tímto se přidá ikona pro nahrávání obrázků ve všech editorech WYSIWYG s povoleným plným nástrojovým řádkem.
-              allow_images_in_markdown_editor: To umožní editoru markdown nahrávat obrázky pomocí kopírování a vkládání nebo přetažení.
+              allow_images_in_editors: Toto přidá ikonu pro nahrávání obrázků ve všech WYSIWYG editorech
               allow_images_in_proposals: Toto umožní nahrávat obrázky do editoru návrhů, které jsou k dispozici každému uživateli
-              allow_images_in_small_editor: Tímto se přidá ikona pro nahrávání obrázků ve všech editorech WYSIWYG s minimálními možnostmi v panelu nástrojů.
+              allow_videos_in_editors: Toto přidá ikonu video odkazu ve všech WYSIWYG editorech
               auto_save_forms: Toto bude používat místní úložiště pro automatické ukládání dat zavedených uživateli do průzkumů a jiných formulářů během vyplňování. Data budou obnovena v budoucí návštěvě stejného prohlížeče v případě, že formulář nebude odeslán. Pokud je formulář odeslán, data budou odstraněna. Pokud uživatelé odstraní svá data z místního úložiště, data nebudou obnovena.
               drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
               intergram_about: Intergram používá Telegram messenger pro zpracování widgetu live podpory v dolní části stránky.
@@ -242,7 +237,6 @@ cs:
               scoped_admins: Povýšení běžného uživatele na administrátora, který může spravovat pouze určité části veřejného webu (k tomu použijte editor omezení). Všimněte si, že uživatelé, kteří již mají oprávnění běžného správce, budou ignorováni.
               scoped_styles: Vytvořte vlastní CSS aplikovaný pouze na určitých částech veřejného webu (použijte pro to editor omezení)
               scoped_styles_variables: 'Můžete použít následující CSS proměnné pro nastavené barvy organizace:'
-              use_markdown_editor: Toto nahradí WYSIWYG editor, místo toho použijte Markdown editor. Text bude vykreslen jako HTML na veřejných stránkách (text v databázi bude uložen jako text markdown)
               validate_body_max_caps_percent: Nula nedovolí žádné velké písmeno, 100 bude nutit psát vše velkými písmeny
               validate_body_max_marks_together: 'Omezit počet otazníků a vykřičníků, které lze psát dohromada. Např: Pokud je 2, pak ''!!!'' nebude v textu povoleno'
               validate_body_min_length: Toto číslo může být nulové, toto pole bude ve skutečnosti nepovinné
@@ -253,24 +247,34 @@ cs:
               body: Ověření vstupu uživatele pro pole "tělo"
               title: Ověření uživatelem pro pole "Název"
           form_proposal_custom_fields:
+            delete: Smazat
             new: Přidat nové pole "vlastní pole"
             remove: Odstranit toto "vlastní pole"
             sure_to_remove: Opravdu chcete zničit toto pole?
+          form_proposal_private_custom_fields:
+            delete: Smazat
           form_scoped_admins:
+            delete: Smazat
             new: Přidání nové skupiny "Škálovaní administrátoři"
             remove: Odstranit tuto skupinu "Škálovaní administrátoři""
             sure_to_remove: Opravdu chcete zničit tuto skupinu "Škálovaní administrátoři"?
           form_scoped_styles:
+            delete: Smazat
             new: Přidat nový CSS box
             remove: Odstranit tento CSS box
             sure_to_remove: Opravdu chcete zničit tento CSS box?
           none: "⛔ Nikdy! - Deaktivujte jiná omezení"
           process_groups: Skupiny procesů
-          rich_text_editor_in_public_views: 'POZNÁMKA: "Kompletní textový editor pro účastníky" je povolen, tato možnost nebude využita. Pro povolení obrázků v Návrzích používejte místo toho hacky editoru.'
           show:
             title: Vylepšení pro %{setting}
             update: Aktualizace konfigurace
           system: Všude kromě participačních prostor
+          title:
+            admins: Škálovaní administrátoři
+            editors: Hack editoru
+            proposals: Návrhy hacků
+            styles: Vlastní styly
+            surveys: Průzkumy a formuláře
           update:
             error: Chyba při aktualizaci konfigurace! %{error}
             success: Konfigurace byla úspěšně aktualizována
@@ -330,12 +334,24 @@ cs:
           update:
             error: Chyba aktualizace přesměrování! %{error}
             success: Přesměrování úspěšně aktualizováno
+        maintenance:
+          private_data:
+            component: Prostor / komponenta
+            confirm_delete: Opravdu chcete odstranit všechna soukromá data tohoto zdroje? Tuto akci nelze vrátit zpět.
+            delete: Odstranit vše
+            done: Hotovo
+            last_date: Poslední aktualizace
+            removing: Odstraňování...
+            time_ago: "Před %{time}"
         menu:
           admins: Škálovaní administrátoři
-          checks: Systémová kompatibilita
           custom_redirects: Vlastní přesměrování
           editors: Hack editoru
           livechat: Live Chat
+          maintenance:
+            checks: Systémová kompatibilita
+            maintenance: Údržba
+            private_data: Soukromá data
           menu_hacks: Vylepšení menu
           proposal_custom_fields: Vlastní pole pro návrhy
           proposals: Návrhy hacků
@@ -365,10 +381,13 @@ cs:
           index:
             confirm_destroy: Opravdu chcete odstranit toto přizpůsobení?
             edit: Upravit
+            home_content_block_menu:
+              title: Blok Globální menu
+            menu:
+              title: Hlavní menu
             new: Nová položka
             remove: Odstranit přidání
             remove_hack: Odstranit přizpůsobení
-            title: Hlavní menu
           new:
             save: Uložit
             title: Nová položka menu
@@ -378,6 +397,7 @@ cs:
           url_exists: Stejná adresa URL je již nakonfigurována, prosím upravte ji místo jejího vytvoření.
       amendments:
         modal:
+          amendment_exists: Pozměňovací návrh již existuje
           current_amendment_html: <p>Můžete <a href="%{amendment_link}">přistupovat k aktuálnímu pozměňovacímu návrhu zde</a>.</p>
           dismiss: Ok, rozumím
           explanation_html: |
@@ -445,7 +465,7 @@ cs:
           abstained: "✔️ Zdržel se hlasování"
           change_vote: Změnit můj hlas
           default_box_title: Hlasovat o tomto návrhu
-          default_instructions_html: <p>Přečtěte si pečlivě pravidla voleb, abyste pochopili, jak bude vaše hlasování použito v %{organization}"</p>
+          default_instructions_html: "<p>Přečtěte si pečlivě pravidla voleb, abyste pochopili, jak bude vaše hlasování použito v %{organization}\"</p>"
           modal:
             cancel: Zrušit
             message: Váš hlas bude považován za konečný v %{date}. Do té doby jej můžete změnit,
@@ -463,6 +483,9 @@ cs:
             weight_2_short: 'Y:'
             weight_3: Zelená
             weight_3_short: 'G:'
+    meetings:
+      meetings_map:
+        view_meeting: Zobrazit schůzku
     proposals:
       proposals:
         orders:
@@ -470,11 +493,10 @@ cs:
           supported_first: Nejdříve podporováno
           supported_last: Naposledy podporováno
           za: Z-A (obrácená abeceda)
+        proposal:
+          view_proposal: Zobrazit návrh
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Vylepšení Decidim
       decidim_awesome:
         awesome_config:
           amendments: Pozměňovací návrhy
