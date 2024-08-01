@@ -1,11 +1,9 @@
+---
 hu:
   activemodel:
     attributes:
       config:
-        allow_images_in_full_editor: A teljesértékű HTML szerkesztőben a képek engedélyezése
-        allow_images_in_markdown_editor: A markdown szerkesztőben a képek engedélyezése
         allow_images_in_proposals: A javaslatok szerkesztőben a képek engedélyezése
-        allow_images_in_small_editor: A minimalista HTML szerkesztőben a képek engedélyezése
         auto_save_forms: A helyi tárolóban az űrlapok automatikus mentése
         intergram_auto_no_response: A kiküldött üzenet, amit a felhasználó első üzenete után kap, amelyet akkor küldünk, ha nem érkezett válasz
         intergram_auto_response: Az üzeenet, amit a felhasználó első üzenete után küldönk ki
@@ -20,7 +18,6 @@ hu:
         proposal_custom_fields: Egyéni mezők %{id}
         scoped_admins: Területi adminok csoport %{id}
         scoped_styles: Egyedi stílusok %{id}
-        use_markdown_editor: A markdown használata a html szerkesztő helyett
         validate_body_max_caps_percent: A szövegtörzsben a maximálisan engedélyezett nagybetűk százaléka
         validate_body_max_marks_together: A törzsben megengedett maximálisan egymás utáni jelek szimbólumai
         validate_body_min_length: A minimális karakterek száma a szövegtörzsben
@@ -46,8 +43,6 @@ hu:
         target: Megnyílik itt
         url: URL
         visibility: Láthatóság
-      proposal:
-        proposal_custom_fields: Egyéni mezők
   decidim:
     admin:
       filters:
@@ -74,7 +69,6 @@ hu:
           global:
             announcement: Közlemény
             iframe_help: 'Rakja a kódot a következő html formátumban: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. A tartalom szanálásra kerül a többi HTML-címkétől. Ügyeljen arra, hogy 100%-os szélességet használjon a képernyő kitöltéséhez.'
-            no_margins: Nincsenek margók az iframe és az oldal többi része között
           step:
             announcement: Közlemény
       awesome_map:
@@ -136,7 +130,6 @@ hu:
             head_tags: Awesome címkék az admin applikáció headerben
             image_migrations_started: A képek migrációs folyamata elkezdődött
         config:
-          caution: 'MEGJEGYZÉS: Ez a funkció erősen módosít néhány alapértelmezett viselkedést, ami váratlan eredményekhez vezethet. Óvatosan használja!'
           constraints:
             add_condition: Eset hozzáadása
             always: Mindig
@@ -158,19 +151,28 @@ hu:
               validate_title_max_marks_together: 'Korlátozza az együtt írható kérdő- és felkiáltójelek számát. Vagyis: ha 2, akkor a ''!!!'' nem szerepelhet a szövegben'
               validate_title_min_length: Ez mindig kötelező és nem lehet 0
           form_proposal_custom_fields:
+            delete: Törlés
             new: Egyéni mező hozzáadása
             remove: Egyedi mező doboz eltávolítása
             sure_to_remove: Biztosan törölni szeretnéd ezt a mező dobozt?
+          form_proposal_private_custom_fields:
+            delete: Törlés
           form_scoped_admins:
+            delete: Törlés
             sure_to_remove: Biztosan törölni szeretnéd ezt területi admin csoportot?
           form_scoped_styles:
+            delete: Törlés
             sure_to_remove: Biztosan törölni szeretnéd ezt a CSS dobozt?
           none: "⛔ Soha! - Minden más korlátozás kikapcsolása"
           process_groups: Folyamatcsoportok
-          rich_text_editor_in_public_views: 'MEGJEGYZÉS: Ha a "Rich text szerkesztő" engedélyezve van a felhasználók számára, ez az opció nem lesz alkalmazható. Használja helyette a szerkesztői hackeket a képek engedélyezéséhez a javaslatokban.'
           show:
             update: Beállítás frissítése
           system: Mindenütt, kivéve ezekben a részvételi terekben
+          title:
+            editors: Szerkesztő finomítása
+            proposals: Javaslatok finomítása
+            styles: Egyedi stílusok
+            surveys: Kérdőívek és Űrlapok
           update:
             error: Hiba a beállítás frissítésekor %{error}
             success: A beállítás sikeresen frissült
@@ -207,8 +209,9 @@ hu:
           index:
             confirm_destroy: Biztosan eltávolítja ezt az testreszabást?
             edit: Szerkesztés
+            menu:
+              title: Főmenü
             new: Új elem
-            title: Főmenü
           new:
             save: Mentés
             title: Új menüpont
@@ -243,7 +246,7 @@ hu:
         voting_cards:
           change_vote: Szavazatom megváltoztatása
           default_box_title: Szavazás erre a javaslatra
-          default_instructions_html: <p>Kérjük ovlassa el a választási szabályokat, hogy pontosan megértse hogy került számításra szavazata a %{organization}" által</p>
+          default_instructions_html: "<p>Kérjük ovlassa el a választási szabályokat, hogy pontosan megértse hogy került számításra szavazata a %{organization} által</p>"
           modal:
             cancel: Elvetés
             message: A szavazata ekkor %{date} válig véglegessé. A dátumig módosítható

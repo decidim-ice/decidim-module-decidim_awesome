@@ -1,14 +1,7 @@
-<section class="wrapper-home map-block home-section">
-  <div class="row">
+<section class="map-block home__section">
+  <%= content_tag("h3", section_title) if section_title.present? %>
 
-    <%= section_title %></h3>
-
-    <div class="row">
-      <div class="columns medium-12">
-        <%= awesome_map_for global_map_components do %>
-          <%= render partial: "decidim/decidim_awesome/map_component/map/map_template.html", locals: { categories: all_categories, map_height: model.settings.map_height } %>
-        <% end %>
-      </div>
-    </div>
-  </div>
+  <%= awesome_map_for global_map_components do %>
+    <%= render partial: "decidim/decidim_awesome/map_component/map/map_template.html", locals: { categories: all_categories, map_height: model.settings.map_height } %>
+  <% end %>
 </section>

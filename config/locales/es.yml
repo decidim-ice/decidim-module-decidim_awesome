@@ -1,12 +1,12 @@
+---
 es:
   activemodel:
     attributes:
       config:
         additional_proposal_sortings: Habilitar opciones de ordenación adicionales
-        allow_images_in_full_editor: Permitir imágenes en el editor HTML completo
-        allow_images_in_markdown_editor: Permitir imágenes en el editor Markdown
+        allow_images_in_editors: Permitir imágenes en el editor HTML
         allow_images_in_proposals: Permitir imágenes en el editor de propuestas
-        allow_images_in_small_editor: Permitir imágenes en el editor HTML reducido
+        allow_videos_in_editors: Permitir vídeos en el editor HTML
         auto_save_forms: Guardar automáticamente los formularios en el almacenamiento local
         intergram_auto_no_response: Un mensaje que se envía un minuto después de que la usuaria haya enviado su primer mensaje y no se haya recibido respuesta
         intergram_auto_response: Un mensaje que se envía inmediatamente después de que la usuaria envíe su primer mensaje
@@ -21,7 +21,6 @@ es:
         proposal_custom_fields: 'Campos personalizados #%{id}'
         scoped_admins: 'Grupo de administradoras acotadas #%{id}'
         scoped_styles: 'Estilos personalizados #%{id}'
-        use_markdown_editor: Utilizar el editor Markdown en lugar del editor HTML
         validate_body_max_caps_percent: Porcentaje máximo permitido de letras mayúsculas para el cuerpo
         validate_body_max_marks_together: Máximo número de símbolos consecutivos permitidos en el cuerpo
         validate_body_min_length: Mínimo de caracteres requeridos para el cuerpo
@@ -47,10 +46,10 @@ es:
         target: Abrir en
         url: URL
         visibility: Visibilidad
-      proposal:
-        proposal_custom_fields: Campos personalizados
   decidim:
     admin:
+      actions:
+        manage: Configurar
       filters:
         admin_accountability:
           admin_role_type:
@@ -77,7 +76,6 @@ es:
             announcement: Anuncio
             iframe: Código iframe
             iframe_help: 'Pon tu código como html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. El contenido se limpiará de otras etiquetas HTML. Asegúrate de usar 100% como ancho de pantalla.'
-            no_margins: Sin márgenes entre el iframe y el resto de la página
             viewport_width: Limitar el ancho máximo a la vista de la aplicación
           step:
             announcement: Anuncio
@@ -189,9 +187,7 @@ es:
               Parece que esta instalación necesita migrar <strong>%{total}</strong> imágenes antiguas al nuevo sistema.<br>
               Puedes iniciar el proceso ahora y se realizará en segundo plano.
             start_image_migrations: "\U0001F449 Iniciar el proceso de migración ahora"
-            title: Análisis de compatibilidad del sistema
         config:
-          caution: 'NOTA: Esta función modifica en gran medida algunos comportamientos por defecto que pueden llevar a resultados inesperados. ¡Utilícelo con precaución!'
           constraints:
             add_condition: Añadir restricción
             always: Siempre
@@ -227,10 +223,9 @@ es:
               incorrect_css: 'El CSS de la caja #%{key} no es válido'
               incorrect_json: 'La definición JSON en la caja #%{key} no es válida'
             help:
-              allow_images_in_full_editor: Esto añadirá un botón para subir imágenes en el editor HTML completo.
-              allow_images_in_markdown_editor: Esto permitirá al editor markdown subir imágenes con "copiar & pegar" o con "arrastrar & soltar".
+              allow_images_in_editors: Esto añadirá un icono para subir imágenes en el editor HTML
               allow_images_in_proposals: Esto permitirá subir imágenes en el editor de propuestas, disponibles para cualquier usuaria
-              allow_images_in_small_editor: Esto añadirá un botón para subir imágenes en el editor HTML mínimo.
+              allow_videos_in_editors: Esto añadirá un icono para enlazar videos en el editor HTML
               auto_save_forms: Esto usará el almacenamiento local del navegador para guardar automáticamente los datos introducidos por las usuarias en las encuestas y otros formularios mientras los rellenen. Si no se ha mandado el formulario, los datos se restaurarán en la siguiente visita con el mismo navegador. Los datos se eliminarán una vez se envíe el formulario. Si las usuarias eliminan sus datos del navegador, estos tampoco se restaurarán.
               drag_and_drop_supported: Cuando se suban imágenes, se puede hacer a través del método "arrastrar & soltar". Las imágenes se subirán en el servidor y se insertarán como recursos externos (no se utiliza codificación en línea base64).
               intergram_about: Intergram utiliza el Telegram Messenger para gestionar un widget de chat de soporte incrustado en la parte inferior de la página.
@@ -242,7 +237,6 @@ es:
               scoped_admins: Promueve usuarias normales a administradoras con acceso limitado a ciertas partes de la web pública (utilizar el editor de restricciones para eso). Tener en cuenta que las usuarias que ya tienen permisos regulares de administración serán ignorados.
               scoped_styles: Crea CSS personalizados que solo se apliquen en ciertas partes de la web pública (para ello, utiliza el editor de restricciones)
               scoped_styles_variables: 'Puedes utilizar las siguientes variables CSS para los colores personalizados de la organización:'
-              use_markdown_editor: Esto sustituirá al editor HTML (Quill), utilice un editor de Markdown en su lugar. El texto se mostrará como HTML en las páginas públicas (en la base de datos, el texto se almacenará como markdown)
               validate_body_max_caps_percent: Cero no permitirá ninguna letra mayúscula, 100 forzará a escribir todo en mayúsculas
               validate_body_max_marks_together: 'Limitar el número de símbolos de preguntas y exclamaciones que se pueden escribir juntos. Es decir, si es 2, entonces ''!!!'' no estará permitido en el texto'
               validate_body_min_length: Este número puede ser cero, lo que permite que este campo no sea obligatorio
@@ -253,24 +247,35 @@ es:
               body: Validaciones de entrada de usuario para el campo "cuerpo"
               title: Validaciones de entrada de usuario para el campo "título"
           form_proposal_custom_fields:
+            delete: Eliminar
             new: Añadir una nueva caja de "campos personalizados"
             remove: Eliminar esta caja de "campos personalizados"
             sure_to_remove: '¿Estás segura de que quieres eliminar esta caja de campos personalizados?'
+          form_proposal_private_custom_fields:
+            delete: Eliminar
           form_scoped_admins:
+            delete: Eliminar
             new: Añadir un nuevo grupo de "Administradoras acotadas"
             remove: Eliminar este grupo de "Administradoras acotadas"
             sure_to_remove: '¿Estás segura de que quieres eliminar este grupo de "administradoras acotadas"?'
           form_scoped_styles:
+            delete: Eliminar
             new: Añadir una nueva caja CSS
             remove: Eliminar esta caja CSS
             sure_to_remove: '¿Estás segura de que quieres eliminar esta caja CSS?'
           none: "⛔ ¡Nunca! - Desactiva cualquier otra restricción"
           process_groups: Grupo de procesos
-          rich_text_editor_in_public_views: 'NOTA: "Editor de texto enriquecido para participantes" está habilitado, esta opción no se aplicará. Utiliza las modificaciones del editor general para añadir imágenes a las propuestas.'
           show:
             title: Ajustes para %{setting}
             update: Actualizar la configuración
           system: En todas partes excepto en espacios participativos
+          title:
+            admins: Administradoras acotadas
+            editors: Modificaciones a los editores
+            livechat: Chat en vivo
+            proposals: Modificaciones a las propuestas
+            styles: Estilos personalizados
+            surveys: Encuestas y formularios
           update:
             error: '¡Error actualizando la configuración! %{error}'
             success: Configuración actualizada correctamente
@@ -332,10 +337,11 @@ es:
             success: Redirección actualizada correctamente
         menu:
           admins: Administradoras acotadas
-          checks: Compatibilidad del sistema
           custom_redirects: Redirecciones personalizadas
           editors: Modificaciones a los editores
           livechat: Chat en vivo
+          maintenance:
+            checks: Compatibilidad del sistema
           menu_hacks: Ajustes en el menú
           proposal_custom_fields: Campos personalizados para propuestas
           proposals: Modificaciones a las propuestas
@@ -365,10 +371,13 @@ es:
           index:
             confirm_destroy: '¿Estás segura que quieres eliminar este elemento?'
             edit: Editar
+            home_content_block_menu:
+              title: Bloque de menú global en la home
+            menu:
+              title: Menú principal
             new: Crear nuevo ítem
             remove: Eliminar adición
             remove_hack: Eliminar personalización
-            title: Menú principal
           new:
             save: Guardar
             title: Nuevo ítem de menú
@@ -378,6 +387,7 @@ es:
           url_exists: Esta URL ya ha sido configurada en otro ítem de menú, por favor edítalo en lugar de crear uno nuevo.
       amendments:
         modal:
+          amendment_exists: Ya existe una enmienda
           current_amendment_html: <p>Puedes <a href="%{amendment_link}">acceder a la enmienda actual aquí</a>.</p>
           dismiss: De acuerdo
           explanation_html: |
@@ -445,7 +455,7 @@ es:
           abstained: "✔️ Abstenido"
           change_vote: Cambiar mi voto
           default_box_title: Votar esta propuesta
-          default_instructions_html: <p>Por defecto es "Por favor lee las reglas de votación cuidadosamente para entender cómo se usará tu voto por %{organization}""</p>
+          default_instructions_html: "<p>Por defecto es \"Por favor lee las reglas de votación cuidadosamente para entender cómo se usará tu voto por %{organization}\"\"</p>"
           modal:
             cancel: Cancelar
             message: Tu voto se considerará final el %{date}. Puedes cambiarlo hasta entonces
@@ -463,6 +473,9 @@ es:
             weight_2_short: 'A:'
             weight_3: Verde
             weight_3_short: 'V:'
+    meetings:
+      meetings_map:
+        view_meeting: Ver encuentro
     proposals:
       proposals:
         orders:
@@ -470,11 +483,10 @@ es:
           supported_first: Mis soportes primero
           supported_last: Mis soportes últimos
           za: Z-A (Alfabético inverso)
+        proposal:
+          view_proposal: Ver propuesta
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Modificaciones a Decidim
       decidim_awesome:
         awesome_config:
           amendments: Enmiendas

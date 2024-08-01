@@ -1,27 +1,39 @@
-@import "codemirror/lib/codemirror.css";
+/* Ensure the sticky save button is over codemirror */
+.item__edit-sticky {
+  z-index: 2;
+}
 
 .awesome-edit-config {
   .scoped_styles_container,
   .proposal_custom_fields_container {
+    @apply bg-background;
+
+    &.private {
+      @apply outline-2 outline-[#fca5a5] outline-dotted;
+    }
+
     .form-error {
       margin: 0;
     }
 
-    >.CodeMirror {
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
-      border-top: .5em solid #e0e0e0;
-      border-right: .5em solid #e0e0e0;
-      border-bottom: .5em solid #e0e0e0;
-      min-height: 6em;
+    > .CodeMirror {
+      border-radius: 4px;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border: 5px solid #eee;
+      border-left: none;
+      min-height: 4em;
       height: auto;
-      max-height: 40em;
       resize: vertical;
       overflow: vertical !important;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      font-size: 0.9rem;
 
-      >.CodeMirror-scroll {
-        >.CodeMirror-gutters {
-          background: #e0e0e0;
+      > .CodeMirror-scroll {
+        > .CodeMirror-gutters {
+          background: #eee;
         }
       }
     }

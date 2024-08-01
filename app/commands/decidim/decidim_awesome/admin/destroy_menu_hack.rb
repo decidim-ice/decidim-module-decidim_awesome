@@ -11,7 +11,7 @@ module Decidim
         def initialize(item, menu_name, organization)
           @item = item
           @organization = organization
-          @menu = AwesomeConfig.find_by(var: menu_name, organization: organization)
+          @menu = AwesomeConfig.find_by(var: menu_name, organization:)
         end
 
         # Executes the command. Broadcasts these events:

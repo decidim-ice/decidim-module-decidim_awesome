@@ -1,0 +1,20 @@
+<div class="card-section" data-component="accordion" id="accordion-private_body">
+  <button class="card-divider-button" data-controls="panel-private_body" type="button">
+    <%= icon "arrow-right-s-line" %>
+    <h2 class="card-title">
+      <%= t "decidim.decidim_awesome.admin.proposal_custom_fields.private_body" %>
+    </h2>
+  </button>
+  <div id="panel-private_body">
+    <div class="component__show_private_data-grid">
+      <div><%= Decidim::ContentProcessor.render_without_format(render_sanitized_content(proposal, :private_body)).html_safe %></div>
+      <% if proposal&.extra_fields&.private_body_updated_at %>
+        <div class="date_info">
+          <%= t("decidim.decidim_awesome.admin.proposal_custom_fields.private_data_last_update", time_ago: time_ago_in_words(proposal.extra_fields.private_body_updated_at)) if proposal.extra_fields.private_body.present? %>
+          <%= t("decidim.decidim_awesome.admin.proposal_custom_fields.private_data_last_remove", time_ago: time_ago_in_words(proposal.extra_fields.private_body_updated_at)) if proposal.extra_fields.private_body.blank? %>
+          <%= link_to t("decidim.decidim_awesome.admin.proposal_custom_fields.remove_private_data"), decidim_admin_decidim_awesome.maintenance_path(:private_data) if proposal.extra_fields.private_body_updated_at && proposal.extra_fields.private_body_updated_at < Decidim::DecidimAwesome.private_data_expiration_time.ago %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,16 +1,15 @@
-input.awesome-auto-edit {
-  display: inline-block;
-  width: auto;
-  margin: 0 2px;
-  padding: 1px;
-  line-height: 0;
-  height: auto;
+a.awesome-auto-edit {
+  @apply inline-block;
+}
+
+a.awesome-auto-delete {
+  @apply float-right button button__xs button__text-secondary;
+}
+
+.form-defaults input[type="text"].awesome-auto-edit {
+  @apply inline-block m-0 py-[2px] px-[4px] h-auto w-auto leading-none outline-1 text-xs;
 }
 
 span.awesome-auto-edit {
-  padding: 0 4px;
-  background-color: #f0f0f0;
-  border-radius: 5px;
-  margin: 0;
-  font-weight: 600;
+  @apply bg-background-4 px-2 rounded m-0 font-semibold;
 }

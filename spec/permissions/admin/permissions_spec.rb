@@ -6,18 +6,26 @@ module Decidim::DecidimAwesome::Admin
   describe Permissions do
     subject { described_class.new(user, permission_action, context).permissions.allowed? }
 
-    let(:organization) { create :organization }
-    let(:user) { create :user, :admin, :confirmed, organization: organization }
+    let(:organization) { create(:organization) }
+    let(:user) { create(:user, :admin, :confirmed, organization:) }
     let(:context) do
       {
-        current_organization: organization
+        current_organization: organization,
+        private_data:,
+        global:
       }
     end
-    let(:feature) { :allow_images_in_full_editor }
+    let(:global) { nil }
+    let(:private_data) { nil }
+    let(:feature) { :allow_images_in_editors }
     let(:action) do
       { scope: :admin, action: :edit_config, subject: feature }
     end
     let(:permission_action) { Decidim::PermissionAction.new(**action) }
+
+    before do
+      allow(Decidim::DecidimAwesome.config).to receive(feature).and_return(true)
+    end
 
     context "when scope is not admin" do
       let(:action) do
@@ -54,11 +62,10 @@ module Decidim::DecidimAwesome::Admin
     end
 
     context "when is scoped admin accessing" do
-      let(:user) { create :user, organization: organization }
+      let(:user) { create(:user, organization:) }
 
       before do
-        allow(user).to receive(:admin).and_return(true)
-        allow(user).to receive(:admin?).and_return(true)
+        allow(user).to receive_messages(admin: true, admin?: true)
       end
 
       it_behaves_like "permission is not set"
@@ -78,6 +85,35 @@ module Decidim::DecidimAwesome::Admin
         let(:status) { :disabled }
 
         it { is_expected.to be false }
+      end
+    end
+
+    context "when accessing private_data" do
+      let(:feature) { :private_data }
+      let(:status) { true }
+
+      before do
+        allow(Decidim::DecidimAwesome.config).to receive(:proposal_private_custom_fields).and_return(status)
+      end
+
+      it { is_expected.to be true }
+
+      context "when proposal private fields is disabled" do
+        let(:status) { :disabled }
+
+        it { is_expected.to be false }
+      end
+
+      context "when private_data is present" do
+        let(:private_data) { double(destroyable?: true) }
+
+        it { is_expected.to be true }
+
+        context "when private_data is not destroyable" do
+          let(:private_data) { double(destroyable?: false) }
+
+          it_behaves_like "permission is not set"
+        end
       end
     end
   end

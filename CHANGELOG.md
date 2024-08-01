@@ -1,6 +1,30 @@
 CHANGELOG
 =========
 
+v0.11.1
+------
+
+Compatibility:
+  - Decidim v0.28.x
+
+Features:
+  - Added Private Custom Fields feature
+  - Added GraphQL types for weighted voting in the API
+  - Added GraphQL types for custom fields in the API
+  - Adds parsed information about custom fields in the Proposals export
+  - Adds parsed information bout private custom fields when admins exports private data
+  - Adds a maintenance menu with tools to remove old private data
+
+v0.11
+------
+
+Compatibility:
+  - Decidim v0.28.x
+
+Features:
+  - Redesign to version 0.28
+  - Removed markdown editor
+
 v0.10.2
 ------
 

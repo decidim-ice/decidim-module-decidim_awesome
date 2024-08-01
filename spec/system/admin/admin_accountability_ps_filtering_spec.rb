@@ -2,15 +2,15 @@
 
 require "spec_helper"
 
-describe "Filter Admin actions", type: :system do
+describe "Filter Admin actions" do
   let(:user_creation_date) { 7.days.ago }
   let(:login_date) { 6.days.ago }
-  let!(:organization) { create :organization }
-  let!(:admin) { create :user, :admin, :confirmed, organization: organization }
-  let(:administrator) { create(:user, organization: organization, last_sign_in_at: login_date, created_at: user_creation_date) }
-  let(:valuator) { create(:user, name: "Lorry", email: "test@example.org", organization: organization, created_at: user_creation_date) }
-  let(:collaborator) { create(:user, organization: organization, created_at: user_creation_date) }
-  let(:moderator) { create(:user, organization: organization, created_at: user_creation_date) }
+  let!(:organization) { create(:organization) }
+  let!(:admin) { create(:user, :admin, :confirmed, organization:) }
+  let(:administrator) { create(:user, organization:, last_sign_in_at: login_date, created_at: user_creation_date) }
+  let(:valuator) { create(:user, name: "Lorry", email: "test@example.org", organization:, created_at: user_creation_date) }
+  let(:collaborator) { create(:user, organization:, created_at: user_creation_date) }
+  let(:moderator) { create(:user, organization:, created_at: user_creation_date) }
 
   let(:resource_controller) { Decidim::DecidimAwesome::Admin::AdminAccountabilityController }
 
@@ -34,8 +34,8 @@ describe "Filter Admin actions", type: :system do
 
     visit decidim_admin.root_path
 
-    click_link "Participants"
-    click_link "Admin accountability"
+    click_link_or_button "Participants"
+    click_link_or_button "Admin accountability"
   end
 
   with_versioning do
@@ -82,10 +82,10 @@ describe "Filter Admin actions", type: :system do
       it "exports the result" do
         apply_filter("Participatory space type", "Participatory processes")
 
-        find(".exports.dropdown").click
-        perform_enqueued_jobs { click_link "Export as CSV" }
+        find(".exports.button.tiny").click
+        perform_enqueued_jobs { click_link_or_button "Export as CSV" }
 
-        within ".callout.success" do
+        within ".flash.success" do
           expect(page).to have_content("Export job has been enqueued. You will receive an email when it's ready.")
         end
 

@@ -14,10 +14,10 @@ export default class ControlsUI {
     });
 
     if (this.awesomeMap.config.hideControls) {
-      $(this.main.getContainer()).hide();
+      this.main.getContainer().style.display = "none";
     }
 
-    this.$loading = $("#awesome-map .loading-spinner");
+    this.loading = document.querySelector("#awesome-map .loading-spinner");
     this.onHashtag = this._orderHashtags;
 
     this.awesomeMap.map.on("overlayadd", () => {
@@ -38,8 +38,14 @@ export default class ControlsUI {
     $("#awesome-map").on("click", ".awesome_map-title-control", (evt) => {
       evt.preventDefault();
       evt.stopPropagation();
-      $("#awesome_map-categories-control").toggleClass("active");
-      $("#awesome_map-hashtags-control").toggleClass("active");
+      const categories = document.getElementById("awesome_map-categories-control");
+      const hashtags = document.getElementById("awesome_map-hashtags-control");
+      if (categories) {
+        categories.classList.toggle("active");
+      }
+      if (hashtags) {
+        hashtags.classList.toggle("active");
+      }
     });
 
     // hashtag events
@@ -60,11 +66,27 @@ export default class ControlsUI {
       $("#awesome-map .awesome_map-hashtags-selector").prop("checked", $("#awesome-map .awesome_map-hashtags-selector:checked").length < $("#awesome-map .awesome_map-hashtags-selector").length);
       this.updateHashtagLayers();
     });
+
+    this.awesomeMap.map.on("popupopen", () => {
+      // console.log("popup open");
+      // hide Controls
+      document.querySelector(".leaflet-control-layers.leaflet-control").style.display = "none";
+    });
+    this.awesomeMap.map.on("popupclose", () => {
+      // console.log("popup close");
+      // restore controls
+      document.querySelector(".leaflet-control-layers.leaflet-control").style.display = "block";
+    });
   }
 
   addSearchControls() {
-    $(this.main.getContainer()).contents("form").append(`<div id="awesome_map-categories-control" class="active"><b class="awesome_map-title-control">${window.DecidimAwesome.texts.categories}</b><div class="categories-container"></div></div>
-    <div id="awesome_map-hashtags-control"><b class="awesome_map-title-control">${window.DecidimAwesome.texts.hashtags}</b><div class="hashtags-container"></div><a href="#" class="awesome_map-toggle_all_tags">${window.DecidimAwesome.texts.select_deselect_all}</a></div>`);
+    const section = this.main.getContainer().querySelector(".leaflet-control-layers-list");
+    if (section) {
+      section.insertAdjacentHTML("beforeend", `<div id="awesome_map-categories-control" class="active"><b class="awesome_map-title-control">${window.DecidimAwesome.texts.categories}</b><div class="categories-container"></div></div>
+    <div id="awesome_map-hashtags-control"><b class="awesome_map-title-control">${window.DecidimAwesome.texts.hashtags}</b><div class="hashtags-container"></div><a href="#" class="awesome_map-toggle_all_tags">${window.DecidimAwesome.texts.selectDeselectAll}</a></div>`);
+    } else {
+      console.error("Can't find the section to insert the controls");
+    }
   }
 
   addCategoriesControls() {
@@ -76,7 +98,12 @@ export default class ControlsUI {
         group: new L.FeatureGroup.SubGroup(this.awesomeMap.cluster)
       };
       this.awesomeMap.layers[category.id].group.addTo(this.awesomeMap.map);
-      $("#awesome_map-categories-control .categories-container").append(`<label data-layer="${category.id}" class="awesome_map-category-${category.id}${category.parent ? " subcategory" : ""}" data-parent="${category.parent}"><input type="checkbox" class="awesome_map-categories-selector" checked><span>${label}</span></label>`);
+      const categories = document.querySelector("#awesome_map-categories-control .categories-container");
+      if (categories) {
+        categories.insertAdjacentHTML("beforeend", `<label data-layer="${category.id}" class="awesome_map-category-${category.id}${category.parent ? " subcategory" : ""}" data-parent="${category.parent}"><input type="checkbox" class="awesome_map-categories-selector" checked><span>${label}</span></label>`);
+      } else {
+        console.error("Can't find the section to insert the categories");
+      }
     })
 
     // category events
@@ -114,7 +141,7 @@ export default class ControlsUI {
   addHashtagsControls(hashtags, marker) {
     // show hashtag layer
     if (hashtags && hashtags.length) {
-      $("#awesome_map-hashtags-control").show();
+      document.getElementById("awesome_map-hashtags-control").style.display = "block";
       hashtags.forEach((hashtag) => {
         // Add layer if not exists, otherwise just add the marker to the group
         if (!this.awesomeMap.layers[hashtag.tag]) {
@@ -123,30 +150,34 @@ export default class ControlsUI {
             group: new L.FeatureGroup.SubGroup(this.awesomeMap.cluster)
           };
           this.awesomeMap.map.addLayer(this.awesomeMap.layers[hashtag.tag].group);
-          $("#awesome_map-hashtags-control .hashtags-container").append(`<label data-layer="${hashtag.tag}" class="awesome_map-hashtag-${hashtag.tag}"><input type="checkbox" class="awesome_map-hashtags-selector" checked><span>${hashtag.name}</span></label>`);
+          document.querySelector("#awesome_map-hashtags-control .hashtags-container").insertAdjacentHTML("beforeend", `<label data-layer="${hashtag.tag}" class="awesome_map-hashtag-${hashtag.tag}"><input type="checkbox" class="awesome_map-hashtags-selector" checked><span>${hashtag.name}</span></label>`);
           // Call a trigger, might be in service for customizations
           this.onHashtag(hashtag, $("#awesome_map-hashtags-control .hashtags-container"));
         }
         this.awesomeMap.layers[hashtag.tag].group.addLayer(marker);
 
-        const $label = $(`label.awesome_map-hashtag-${hashtag.tag}`);
+        const label = document.querySelector(`label.awesome_map-hashtag-${hashtag.tag}`);
         // update number of items
-        $label.attr("title", `${parseInt($label.attr("title") || 0, 10) + 1} ${window.DecidimAwesome.texts.items}`);
+        label.setAttribute("title", `${parseInt(label.title || 0, 10) + 1} ${window.DecidimAwesome.texts.items}`);
       });
     }
   }
 
   showCategory(cat) {
-    $("#awesome_map-categories-control").show();
+    document.getElementById("awesome_map-categories-control").style.display = "block";
     // show category if hidden
-    const $label = $(`label.awesome_map-category-${cat.id}`);
-    const $parent = $(`label.awesome_map-category-${cat.parent}`);
-    $label.show();
-    // update number of items
-    $label.attr("title", `${parseInt($label.attr("title") || 0, 10) + 1} ${window.DecidimAwesome.texts.items}`);
-    // show parent if apply
-    $parent.show();
-    $parent.attr("title", `${parseInt($parent.attr("title") || 0, 10) + 1} ${window.DecidimAwesome.texts.items}`);
+    const label = document.querySelector(`label.awesome_map-category-${cat.id}`);
+    const parent = document.querySelector(`label.awesome_map-category-${cat.parent}`);
+    if (label) {      
+      label.style.display = "block";
+      // update number of items
+      label.setAttribute("title", `${parseInt(label.title || 0, 10) + 1} ${window.DecidimAwesome.texts.items}`);
+    }
+    if (parent) {
+      // show parent if apply
+      parent.style.display = "block"
+      parent.setAttribute("title", `${parseInt(parent.title || 0, 10) + 1} ${window.DecidimAwesome.texts.items}`);
+    }
   }
 
   removeHiddenComponents() {

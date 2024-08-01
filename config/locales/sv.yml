@@ -1,11 +1,9 @@
+---
 sv:
   activemodel:
     attributes:
       config:
-        allow_images_in_full_editor: Tillåt bilder i den fullständiga HTML-editorn
-        allow_images_in_markdown_editor: Tillåt bilder i den fullständiga Markdown-editorn
         allow_images_in_proposals: Tillåt bilder i förslagsfältet
-        allow_images_in_small_editor: Tillåt bilder i den minimala HTML-editorn
         auto_save_forms: Spara formulär automatiskt i lokal lagring
         intergram_chat_id: Chatt ID
         intergram_color: Huvudfärg för widget
@@ -27,8 +25,6 @@ sv:
         target: Öppna i
         url: Webbadress
         visibility: Synlighet
-      proposal:
-        proposal_custom_fields: Tilläggsfält
   decidim:
     admin:
       menu:
@@ -72,14 +68,26 @@ sv:
             edit: Redigera
           form:
             edit_label: Byt namn på etikett
-            help:
-              use_markdown_editor: This will substitute the Quill WYSIWYG editor, use a Markdown editor instead. Text will be rendered as HTML in the public pages (text in database will be saved as markdown text)
+          form_proposal_custom_fields:
+            delete: Radera
+          form_proposal_private_custom_fields:
+            delete: Radera
+          form_scoped_admins:
+            delete: Radera
           form_scoped_styles:
+            delete: Radera
             remove: Ta bort CSS-rutan
           process_groups: Dialoggrupper
           show:
             title: Tweaks för %{setting}
             update: Uppdatera konfiguration
+          title:
+            admins: Begränsade administratörer
+            editors: Editor hacks
+            livechat: Live Chat
+            proposals: Proposals hacks
+            styles: Custom styles
+            surveys: Surveys & forms
         constraints:
           new:
             cancel: Avbryt
@@ -104,10 +112,11 @@ sv:
             title: Ny omdirigering
         menu:
           admins: Begränsade administratörer
-          checks: System compatibility
           custom_redirects: Anpassade omdirigeringar
           editors: Editor hacks
           livechat: Live Chat
+          maintenance:
+            checks: System compatibility
           menu_hacks: Menu tweaks
           proposals: Proposals hacks
           styles: Custom styles
@@ -126,10 +135,11 @@ sv:
               logged: Endast synlig för inloggade användare
           index:
             edit: Redigera
+            menu:
+              title: Huvudmeny
             new: Ny menyknapp
             remove: Ta bort menyknapp
             remove_hack: Ta bort menyknapp
-            title: Huvudmeny
           new:
             save: Spara
             title: Ny menyknapp
@@ -157,11 +167,15 @@ sv:
         voting_cards:
           modal:
             cancel: Avbryt
+    meetings:
+      meetings_map:
+        view_meeting: Visa möte
+    proposals:
+      proposals:
+        proposal:
+          view_proposal: Visa förslag
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Decidim Tweaks
       decidim_awesome:
         awesome_config:
           amendments: Ändringsförslag

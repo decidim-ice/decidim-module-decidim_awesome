@@ -21,6 +21,7 @@ module Decidim
           default = default_items.find { |i| i.url.gsub(/\?.*/, "") == item.url }
           if default
             item.send("overrided?=", true)
+            item[:original_active] = default.active
             @items.reject! { |i| i.url.gsub(/\?.*/, "") == item.url }
           end
           @items << item
@@ -36,10 +37,7 @@ module Decidim
       attr_reader :name, :view
 
       def default_items
-        @default_items ||= build_menu.items.map do |item|
-          item.instance_variable_set(:@active, method(:activate?)) unless item.active == :exact
-          item
-        end
+        @default_items ||= build_menu.items
       end
 
       def build_menu
@@ -48,7 +46,6 @@ module Decidim
         menu
       end
 
-      # rubocop:disable Style/OpenStructUse
       def menu_overrides
         @menu_overrides ||= current_config.map do |item|
           OpenStruct.new(
@@ -65,7 +62,6 @@ module Decidim
           )
         end
       end
-      # rubocop:enable Style/OpenStructUse
 
       def activate?(url, view)
         urls = @items.map(&:url).sort_by(&:length).reverse
@@ -83,14 +79,14 @@ module Decidim
         when "verified_user"
           # the cleaner version should be user.authorizations.any?
           # but there is not relationship between users and authorizations
-          Decidim::Authorization.where(user: user).any? { |auth| auth.granted? && !auth.expired? }
+          Decidim::Authorization.where(user:).any? { |auth| auth.granted? && !auth.expired? }
         else
           true
         end
       end
 
       def current_config
-        @current_config ||= (AwesomeConfig.find_by(var: name, organization: organization)&.value || []).filter { |i| i.is_a? Hash }
+        @current_config ||= (AwesomeConfig.find_by(var: name, organization:)&.value || []).filter { |i| i.is_a? Hash }
       end
     end
   end

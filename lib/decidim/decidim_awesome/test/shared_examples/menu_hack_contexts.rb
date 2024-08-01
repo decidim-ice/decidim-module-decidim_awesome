@@ -4,19 +4,21 @@ shared_context "with menu hacks params" do
   let(:organization) { create(:organization) }
   let(:context) do
     {
-      current_user: create(:user, organization: organization),
+      current_user: create(:user, organization:),
       current_organization: organization
     }
   end
   let(:params) do
     {
+      menu_id:,
       raw_label: label,
-      url: url,
-      position: position,
-      target: target,
-      visibility: visibility
+      url:,
+      position:,
+      target:,
+      visibility:
     }
   end
+  let(:menu_id) { menu_name.to_sym }
   let(:attributes) do
     {
       "label" => label,
@@ -36,12 +38,11 @@ shared_context "with menu hacks params" do
   let(:position) { 2 }
   let(:target) { "_blank" }
   let(:visibility) { "hidden" }
-  let(:menu_name) { "menu" }
 
   let(:another_params) do
     {
-      allow_images_in_full_editor: true,
-      allow_images_in_small_editor: true
+      allow_images_in_editors: true,
+      allow_videos_in_editors: true
     }
   end
   let(:form) do

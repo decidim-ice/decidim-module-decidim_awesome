@@ -13,6 +13,10 @@ module Decidim
         attribute :intro_message, String
         attribute :auto_response, String
         attribute :auto_no_response, String
+
+        def color
+          super || current_organization.colors["secondary"] || "#E91E63"
+        end
       end
     end
   end

@@ -34,7 +34,7 @@ module Decidim::DecidimAwesome
             }
           end
 
-          it { is_expected.to be_invalid }
+          it { is_expected.not_to be_valid }
         end
 
         context "and space manifest is not a participatory space" do
@@ -45,7 +45,7 @@ module Decidim::DecidimAwesome
             }
           end
 
-          it { is_expected.to be_invalid }
+          it { is_expected.not_to be_valid }
         end
       end
 
@@ -66,7 +66,7 @@ module Decidim::DecidimAwesome
             }
           end
 
-          it { is_expected.to be_invalid }
+          it { is_expected.not_to be_valid }
         end
       end
     end

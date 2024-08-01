@@ -1,31 +1,6 @@
+@import "stylesheets/decidim/editor";
+
 // hide custom-fields inside tabs, an extra (unique) container is used instead
-.color-box {
-  display: inline-block;
-  height: 1em;
-  width: 1em;
-  margin-left: 1em;
-  vertical-align: middle;
-
-  &:first-child {
-    margin-left: 0;
-  }
-  $colors: (
-    "primary": #{$primary},
-    "secondary": #{$secondary},
-    "success": #{$success},
-    "warning": #{$warning},
-    "alert": #{$alert},
-    "highlight": #{$highlight},
-    "highlight_alternative": #{$highlight_alternative}
-  );
-
-  @each $name, $color in $colors {
-    &.#{$name} {
-      background-color: #{$color};
-    }
-  }
-}
-
 .tabs-content {
   .proposal_custom_field {
     display: none;
@@ -34,60 +9,42 @@
 
 .proposal_custom_fields {
   &_editor {
-    background-color: #e0e0e0;
-    padding: .5em .5em 1em;
+    ul.frmb,
+    .form-wrap.form-builder .frmb li.form-field,
+    .form-wrap.form-builder .stage-wrap.empty {
+      @apply bg-background mr-2;
+    }
+
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 
-    label {
-      display: inline-block;
-      max-width: 100%;
-      font-weight: 600 !important;
+    svg {
+      @apply fill-black;
     }
 
-    li[type] {
-      display: inherit;
-      width: 100%;
-      height: inherit;
-      margin: inherit;
-      border: inherit;
-      box-shadow: inherit;
-      font-size: inherit;
-      font-weight: inherit;
-      line-height: inherit;
-      color: inherit;
+    li > label {
+      line-height: 27px !important;
+      font-size: 16px !important;
     }
 
-    .form-group {
-      background-color: inherit;
-      margin: 0;
-      padding: 0;
-    }
-
-    .form-wrap.form-builder .form-group {
-      margin-bottom: 10px !important;
-    }
-
-    .form-control {
-      color: #555;
+    input.form-control {
       background-color: #fff;
-      border: 1px solid #ccc;
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-      transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-      margin: 0;
-      padding: 6px 12px;
+      border: 1px solid #ccc !important;
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+
+      &:focus {
+        outline: 0;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+          0 0 8px rgba(102, 175, 233, 0.6) !important;
+      }
+    }
+
+    .frmb-control li {
+      cursor: cell !important;
+    }
+    // drag and drop is disabled, let's not show the move cursor
+    .frmb .prev-holder {
+      cursor: default !important;
     }
   }
-
-  &_container {
-    .constraints-editor {
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-    }
-  }
-}
-
-// Custom fields tunning
-.rendered-form .form-control.ql-container {
-  height: auto !important;
 }

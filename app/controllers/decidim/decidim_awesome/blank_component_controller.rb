@@ -6,13 +6,18 @@ module Decidim
     class BlankComponentController < Decidim::Components::BaseController
       # just redirects to settings
       def settings
-        redirect_to EngineRouter.admin_proxy(component.participatory_space).edit_component_path(id: component)
+        redirect_to EngineRouter.admin_proxy(current_component.participatory_space).edit_component_path(id: current_component)
       end
 
       private
 
-      def component
-        Decidim::Component.find(params[:component_id])
+      def set_component_breadcrumb_item
+        context_breadcrumb_items << {
+          label: current_component.name,
+          url: EngineRouter.admin_proxy(current_component.participatory_space).edit_component_path(id: current_component),
+          active: false,
+          resource: current_component
+        }
       end
     end
   end
