@@ -43,8 +43,6 @@ hu:
         target: Megnyílik itt
         url: URL
         visibility: Láthatóság
-      proposal:
-        proposal_custom_fields: Egyéni mezők
   decidim:
     admin:
       filters:
@@ -132,7 +130,6 @@ hu:
             head_tags: Awesome címkék az admin applikáció headerben
             image_migrations_started: A képek migrációs folyamata elkezdődött
         config:
-          caution: 'MEGJEGYZÉS: Ez a funkció erősen módosít néhány alapértelmezett viselkedést, ami váratlan eredményekhez vezethet. Óvatosan használja!'
           constraints:
             add_condition: Eset hozzáadása
             always: Mindig
@@ -154,18 +151,28 @@ hu:
               validate_title_max_marks_together: 'Korlátozza az együtt írható kérdő- és felkiáltójelek számát. Vagyis: ha 2, akkor a ''!!!'' nem szerepelhet a szövegben'
               validate_title_min_length: Ez mindig kötelező és nem lehet 0
           form_proposal_custom_fields:
+            delete: Törlés
             new: Egyéni mező hozzáadása
             remove: Egyedi mező doboz eltávolítása
             sure_to_remove: Biztosan törölni szeretnéd ezt a mező dobozt?
+          form_proposal_private_custom_fields:
+            delete: Törlés
           form_scoped_admins:
+            delete: Törlés
             sure_to_remove: Biztosan törölni szeretnéd ezt területi admin csoportot?
           form_scoped_styles:
+            delete: Törlés
             sure_to_remove: Biztosan törölni szeretnéd ezt a CSS dobozt?
           none: "⛔ Soha! - Minden más korlátozás kikapcsolása"
           process_groups: Folyamatcsoportok
           show:
             update: Beállítás frissítése
           system: Mindenütt, kivéve ezekben a részvételi terekben
+          title:
+            editors: Szerkesztő finomítása
+            proposals: Javaslatok finomítása
+            styles: Egyedi stílusok
+            surveys: Kérdőívek és Űrlapok
           update:
             error: Hiba a beállítás frissítésekor %{error}
             success: A beállítás sikeresen frissült

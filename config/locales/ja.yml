@@ -46,8 +46,6 @@ ja:
         target: リンク先
         url: URL
         visibility: 表示・非表示
-      proposal:
-        proposal_custom_fields: カスタム項目
   decidim:
     admin:
       actions:
@@ -189,9 +187,7 @@ ja:
               このインストールでは、古いイメージ<strong>%{total}</strong>件を新システムに移行する必要があるようです。<br>
               処理を開始すると、バックグラウンドで実行されます。
             start_image_migrations: "\U0001F449 今すぐ移行プロセスを開始する"
-            title: システム互換性チェック
         config:
-          caution: '注意: この機能は、予期しない結果につながる可能性があるデフォルトの動作を大きく変更します。注意して使用してください！'
           constraints:
             add_condition: 条件を追加
             always: すべて
@@ -251,14 +247,19 @@ ja:
               body: '「body」フィールドのユーザー入力検証'
               title: '「タイトル」フィールドのユーザー入力検証'
           form_proposal_custom_fields:
+            delete: 削除
             new: 新しい「カスタム項目」ボックスを追加
             remove: '「カスタム項目」ボックスを削除'
             sure_to_remove: この項目ボックスを削除してもよろしいですか？
+          form_proposal_private_custom_fields:
+            delete: 削除
           form_scoped_admins:
+            delete: 削除
             new: 新しい「スコープ付き管理者」グループを追加
             remove: '「スコープ付き管理者」グループを削除'
             sure_to_remove: この「スコープ付き管理者」グループを削除してもよろしいですか？
           form_scoped_styles:
+            delete: 削除
             new: 新規CSS boxを追加
             remove: CSS boxを削除
             sure_to_remove: このCSS boxを削除してもよろしいですか？
@@ -268,6 +269,13 @@ ja:
             title: '%{setting} の詳細設定'
             update: 設定を更新する
           system: 参加型スペース以外のすべて
+          title:
+            admins: スコープ付き管理者
+            editors: エディター設定
+            livechat: ライブチャット
+            proposals: 提案の設定
+            styles: 独自スタイル
+            surveys: 調査＆フォーム
           update:
             error: 設定更新エラー %{error}
             success: 設定は正常に更新されました
@@ -330,10 +338,11 @@ ja:
             success: リダイレクトを更新しました
         menu:
           admins: スコープ付き管理者
-          checks: システム互換性
           custom_redirects: カスタムリダイレクト
           editors: エディター設定
           livechat: ライブチャット
+          maintenance:
+            checks: システム互換性
           menu_hacks: メニュー調整
           proposal_custom_fields: 提案カスタム項目
           proposals: 提案の設定

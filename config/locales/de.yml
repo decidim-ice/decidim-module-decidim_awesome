@@ -19,6 +19,7 @@ de:
         intergram_title_open: Geöffneter Chattitel
         intergram_use_floating_button: Wenn aktiviert, ist der geschlossene Chat immer ein Button statt eines Textes
         proposal_custom_fields: 'Eingabefeld #%{id}'
+        proposal_private_custom_fields: 'Privates Eingabefeld #%{id}'
         scoped_admins: Eingeschränkte Admin-Gruppe %{id}
         scoped_styles: Eigene Eingabefelder %{id}
         validate_body_max_caps_percent: Maximal erlaubter Prozentsatz an Großbuchstaben für den Textkörper
@@ -46,8 +47,6 @@ de:
         target: Öffnet in
         url: URL
         visibility: Sichtbarkeit
-      proposal:
-        proposal_custom_fields: Eingabefelder
   decidim:
     admin:
       actions:
@@ -189,9 +188,7 @@ de:
               Es sieht so aus, dass diese Instanz <strong>%{total}</strong> der alten Images auf das neue System migrieren muss.<br>
               Sie können den Prozess jetzt starten und er wird im Hintergrund ausgeführt.
             start_image_migrations: "\U0001F449 Starten Sie den Migrationsprozess jetzt"
-            title: Systemkompatibilität
         config:
-          caution: 'HINWEIS: Mit dieser Funktion werden einige Standardverhaltensweisen stark verändert, was zu unerwarteten Ergebnissen führen kann. Verwenden Sie sie mit Vorsicht!'
           constraints:
             add_condition: Einschränkung hinzufügen
             always: Immer
@@ -238,6 +235,12 @@ de:
               proposal_custom_fields: Erstelle eigene Eingabefelder für das Vorschlagsmodul. Du kannst die Funktion auf einzelne Prozesse / Module beschränken.
               proposal_custom_fields_example: Die Daten werden in einem XML-Objekt unter Verwendung kompatibler HTML-Attribute (dl,dt,dd-Elemente) gespeichert, die den "body" in einem normalen Vorschlag ersetzen.
               proposal_custom_fields_translations: "Labels, Hilfetexte, Platzhalter und Standardwerte können benutzerdefinierte Übersetzungen Ihrer Instanz verwenden. \nVerwenden Sie dafür statt eines String-Literals den i18n-Schlüssel (er muss mindestens einen Punkt enthalten).\nZum Beispiel:\n- \"activemodel.attributes.proposal.title\" statt \"Titel\"\n- \"activemodel.attributes.proposal.address\" anstelle von \"Adresse\"\nOder verwenden Sie Ihre eigenen Schlüssel in Kombination mit anderen Tools um Übersetzungen zu definieren (z. B.: mit dem Modul Term Customizer):\n - \"myapp.custom_fields.bio\" statt \"Biographie\""
+              proposal_private_custom_fields: Wie öffentlich sichtbare Eingabefelder, jedoch werden diese Informationen nicht veröffentlicht (nur Adminzugriff).
+              proposal_private_custom_fields_translations: |
+                Private Eingabefelder werden in einer hervorgehobenen Box mit diesem Informationstext angezeigt:
+                %{warning}
+                Dieser Text kann mit einer benutzerdefinierten Übersetzung durch Verwendung des Schlüssels angepasst werden:
+                %{key}
               scoped_admins: Befördern Sie normale Benutzer zu Administratoren, die nur bestimmte Teile der öffentlichen Seite verwalten können (verwenden Sie dazu den Editor für Einschränkungen). Beachten Sie, dass Benutzer, die bereits reguläre Administratorrechte haben, ignoriert werden. For instance, if having configured /my-origin => /my-destination, a request to /my-origin?locale=ca  will be redirected to "/my-destination?locale=ca".
               scoped_styles: Erstellen Sie benutzerdefinierte CSS, die nur in bestimmten Bereichen der öffentlichen Seite gelten (vewenden Sie dazu die Einschränkungen)
               scoped_styles_variables: 'Sie können die folgenden CSS-Variablen für die benutzerdefinierter Farben der Organisation verwenden:'
@@ -251,14 +254,22 @@ de:
               body: Eingabevalidierungen für das Feld "Textkörper"
               title: Eingabevalidierungen für das Feld "Titel"
           form_proposal_custom_fields:
+            delete: Löschen
             new: Neues Eingabefeld
             remove: Eingabefeld entfernen
             sure_to_remove: Bist du sicher, dass du dieses Eingabefeld entfernen möchtest?
+          form_proposal_private_custom_fields:
+            delete: Löschen
+            new: Neues privates Eingabefeld hinzufügen
+            remove: Privates Eingabefeld entfernen
+            sure_to_remove: Bist du sicher, dass du dieses private Eingabefeld entfernen möchtest?
           form_scoped_admins:
+            delete: Löschen
             new: Hinzufügen einer neuen "Eingeschränkte Admins"-Gruppe
             remove: Diese Gruppe "Eingeschränkte Admins" entfernen
             sure_to_remove: Sind Sie sicher, dass Sie diese Gruppe eingeschränkter Admins löschen möchten?
           form_scoped_styles:
+            delete: Löschen
             new: Neue CSS Box hinzufügen
             remove: CSS Box entfernen
             sure_to_remove: Sind Sie sicher, dass Sie diese CSS-Box entfernen möchten?
@@ -268,6 +279,15 @@ de:
             title: Decidim Awesome
             update: Aktualisieren
           system: Überall ausser...
+          title:
+            admins: Eingeschränkte Admins
+            editors: Editoren
+            livechat: Live-Chat
+            proposal_custom_fields: 'Benutzerdefinierte Felder: Öffentliche Felder'
+            proposal_private_custom_fields: 'Benutzerdefinierte Felder: Private Felder'
+            proposals: Vorschläge
+            styles: Eigene Styles
+            surveys: Umfragen
           update:
             error: Fehler beim Aktualisieren der Konfiguration! %{error}
             success: Konfiguration erfolgreich aktualisiert
@@ -325,10 +345,11 @@ de:
             success: Umleitung erfolgreich aktualisiert
         menu:
           admins: Eingeschränkte Admins
-          checks: Checks
           custom_redirects: Benutzerdefinierte Umleitungen
           editors: Editoren
           livechat: Live-Chat
+          maintenance:
+            checks: Checks
           menu_hacks: Menüanpassungen
           proposal_custom_fields: 'Vorschläge: Eigene Eingabefelder'
           proposals: Vorschläge
@@ -372,8 +393,14 @@ de:
             error: Fehler beim Aktualisieren des Menüpunkts! %{error}
             success: Menüpunkt erfolgreich aktualisiert
           url_exists: Die gleiche URL ist bereits konfiguriert. bitte bearbeiten Sie diese, anstatt sie neu zu erstellen.
+        proposal_custom_fields:
+          menu:
+            title: Öffentlich sichtbare Felder
+          private_body: Privater Textkörper
+          proposal_private_custom_fields: Private Felder
       amendments:
         modal:
+          amendment_exists: Eine Änderung existiert bereits
           current_amendment_html: <p>Sie können <a href="%{amendment_link}"> hier auf die aktuelle Änderung</a>zugreifen.</p>
           dismiss: Ok, verstanden
           explanation_html: |
@@ -426,6 +453,7 @@ de:
           show:
             view_meeting: Sitzung ansehen
             view_proposal: Vorschlag ansehen
+      proposal_private_custom_fields_disclosure: Diese Informationen werden nicht veröffentlicht
       validators:
         too_much_caps: Es werden zu viele Großbuchstaben verwendet (über %{percent}% des Textes)
       voting:
@@ -455,6 +483,9 @@ de:
       meetings_map:
         view_meeting: Sitzung ansehen
     proposals:
+      admin:
+        exports:
+          awesome_private_proposals: Vorschläge mit privaten Daten
       proposals:
         orders:
           az: A-Z (alphabetisch)
