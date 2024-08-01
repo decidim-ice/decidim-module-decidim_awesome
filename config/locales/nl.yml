@@ -1,3 +1,4 @@
+---
 nl:
   activemodel:
     attributes:
@@ -145,7 +146,6 @@ nl:
           new:
             save: Opslaan
         menu:
-          checks: Systeemcompabiliteit
           editors: Editor hacks
           livechat: Live Chat
           menu_hacks: Menu tweaks
@@ -227,9 +227,6 @@ nl:
             cancel: Annuleren
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Decidim Tweaks
       decidim_awesome:
         awesome_config:
           amendments: Amendementen
