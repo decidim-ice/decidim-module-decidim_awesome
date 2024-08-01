@@ -326,6 +326,7 @@ it:
             success: Reindirizzamento aggiornato correttamente
         menu:
           admins: Amministratori con ambito
+          checks: System compatibility
           custom_redirects: Reindirizzamenti Personalizzati
           editors: Editor hacks
           livechat: Chat in tempo reale
