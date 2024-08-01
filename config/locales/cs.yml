@@ -237,6 +237,11 @@ cs:
               proposal_custom_fields_example: Data jsou uložena v objektu XML pomocí kompatibilních atributů HTML (prvky dl,dt,dd), které v běžném návrhu nahrazují "tělo".
               proposal_custom_fields_translations: "Štítky, nápověda, zástupné symboly a výchozí hodnoty mohou používat vlastní překlady aplikace. \nPro to použijte klíč i18n (musí obsahovat alespoň jednu tečku), místo použití textového literálu.\nNapříklad:\n- \"activemodel.attributes.proposal.title\" namísto \"Title\"\n- \"activemodel.attributes.proposal.address\" namísto \"Adresa\"\nNebo použijte vlastní klíče v kombinaci s jinými nástroji pro definování překladů (např. pomocí úpravy termínu modulu):\n - \"myapp.custom_fields.bio\" namísto „Životopis“"
               proposal_private_custom_fields: Podobné jako veřejná pole, ale tyto informace nebudou zveřejněny (k nim budou mít přístup pouze administrátoři).
+              proposal_private_custom_fields_translations: |
+                Soukromá vlastní pole jsou zobrazena v jiném poli s tímto informačním textem:
+                %{warning}
+                Tento text lze přizpůsobit vlastním překladem pomocí klíče:
+                %{key}
               scoped_admins: Povýšení běžného uživatele na administrátora, který může spravovat pouze určité části veřejného webu (k tomu použijte editor omezení). Všimněte si, že uživatelé, kteří již mají oprávnění běžného správce, budou ignorováni.
               scoped_styles: Vytvořte vlastní CSS aplikovaný pouze na určitých částech veřejného webu (použijte pro to editor omezení)
               scoped_styles_variables: 'Můžete použít následující CSS proměnné pro nastavené barvy organizace:'
@@ -258,6 +263,7 @@ cs:
             delete: Smazat
             new: Přidat nové "soukromé vlastní pole"
             remove: Odstranit toto "ssoukromé vlastní pole"
+            sure_to_remove: Opravdu chcete zničit toto soukromé pole?
           form_scoped_admins:
             delete: Smazat
             new: Přidání nové skupiny "Škálovaní administrátoři"
@@ -278,6 +284,7 @@ cs:
             admins: Škálovaní administrátoři
             editors: Hack editoru
             livechat: Živý chat
+            proposal_custom_fields: 'Vlastní pole návrhů: veřejná pole'
             proposal_private_custom_fields: 'Vlastní pole návrhů: Soukromá pole'
             proposals: Návrhy hacků
             styles: Vlastní styly
@@ -350,6 +357,7 @@ cs:
             items_count: Dotčené celkem
             last_date: Poslední aktualizace
             no_data: Nejsou nalezena žádná soukromá data starší než před %{time_ago}
+            not_destroyable: Tento zdroj zatím nelze zničit
             removing: Odstraňování...
             time_ago: "Před %{time}"
         menu:
@@ -410,6 +418,7 @@ cs:
           private_data_last_remove: Tato data byla zničena před %{time_ago}.
           private_data_last_update: Tato data byla naposledy aktualizována před %{time_ago}.
           proposal_private_custom_fields: Soukromá pole
+          remove_private_data: "👉 Možná jej chcete odstranit"
       amendments:
         modal:
           amendment_exists: Pozměňovací návrh již existuje
@@ -473,6 +482,7 @@ cs:
           show:
             view_meeting: Zobrazit schůzku
             view_proposal: Zobrazit návrh
+      proposal_private_custom_fields_disclosure: Tyto informace nebudou publikovány
       validators:
         too_much_caps: Používá příliš mnoho velkých písmen (více než %{percent}% textu)
       voting:
@@ -502,6 +512,9 @@ cs:
       meetings_map:
         view_meeting: Zobrazit schůzku
     proposals:
+      admin:
+        exports:
+          awesome_private_proposals: Návrhy se soukromými údaji
       proposals:
         orders:
           az: A-Z (abecední)
