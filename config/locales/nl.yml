@@ -146,6 +146,7 @@ nl:
           new:
             save: Opslaan
         menu:
+          checks: Systeemcompabiliteit
           editors: Editor hacks
           livechat: Live Chat
           menu_hacks: Menu tweaks
