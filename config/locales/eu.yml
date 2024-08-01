@@ -1,3 +1,4 @@
+---
 eu:
   decidim:
     components:
@@ -28,7 +29,6 @@ eu:
           show:
             cancel: Ezeztatu
         menu:
-          checks: System compatibility
           editors: Editor hacks
           menu_hacks: Menu tweaks
           proposals: Proposals hacks
