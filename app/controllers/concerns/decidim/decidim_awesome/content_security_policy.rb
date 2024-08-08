@@ -5,9 +5,9 @@ module Decidim
     module ContentSecurityPolicy
       extend ActiveSupport::Concern
 
-      included do
-        after_action :append_awesome_csp_directives
-      end
+      # included do
+      #   after_action :append_awesome_csp_directives
+      # end
 
       private
 

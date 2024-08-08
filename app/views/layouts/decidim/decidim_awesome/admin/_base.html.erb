@@ -1,7 +1,9 @@
-<% add_secondary_root_menu(:awesome_admin_menu) %>
+<% content_for :sidebar_menu_nav do %>
+  <%= sidebar_menu(:awesome_admin_menu).render %>
+<% end %>
 
-<%= append_stylesheet_pack_tag "decidim_admin_decidim_awesome", media: "all" %>
-<%= append_javascript_pack_tag "decidim_admin_decidim_awesome", defer: true %>
+<%= stylesheet_pack_tag "decidim_admin_decidim_awesome", media: "all" %>
+<%= javascript_pack_tag "decidim_admin_decidim_awesome", defer: true %>
 
 <%= render "layouts/decidim/admin/application" do %>
   <%= yield %>

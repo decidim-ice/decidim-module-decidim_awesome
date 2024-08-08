@@ -17,9 +17,6 @@ span.awesome-auto-edit {
 
 a.awesome-auto-delete {
   float: right;
-  @extend .button;
-  @extend .button__xs;
-  @extend .button__text-secondary;
 }
 
 .form-defaults input[type="text"].awesome-auto-edit {
