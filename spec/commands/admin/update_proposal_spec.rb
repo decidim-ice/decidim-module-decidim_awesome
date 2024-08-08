@@ -8,8 +8,8 @@ module Decidim::Proposals
       subject { described_class.new(form, proposal) }
 
       let(:organization) { create(:organization) }
-      let(:user) { create(:user, :admin, organization:) }
-      let(:participatory_process) { create(:participatory_process, :with_steps, organization:) }
+      let(:user) { create(:user, :admin, organization: organization) }
+      let(:participatory_process) { create(:participatory_process, :with_steps, organization: organization) }
       let(:component) { create(:proposal_component, :with_creation_enabled, participatory_space: participatory_process) }
       let(:context) do
         {
@@ -20,9 +20,9 @@ module Decidim::Proposals
       end
       let(:params) do
         {
-          title:,
-          body:,
-          private_body:
+          title: title,
+          body: body,
+          private_body: private_body
         }
       end
       let(:title) do
@@ -35,7 +35,7 @@ module Decidim::Proposals
       let(:form) do
         Decidim::Proposals::Admin::ProposalForm.from_params(params).with_context(context)
       end
-      let(:proposal) { create(:proposal, users: [user], component:) }
+      let(:proposal) { create(:proposal, users: [user], component: component) }
 
       it "broadcasts ok and updates the proposal" do
         expect { subject.call }.to broadcast(:ok)

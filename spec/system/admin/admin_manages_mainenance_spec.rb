@@ -3,26 +3,26 @@
 require "spec_helper"
 
 describe "Admin manages maintenance" do
-  let(:user) { create(:user, :confirmed, :admin, organization:) }
+  let(:user) { create(:user, :confirmed, :admin, organization: organization) }
   let(:organization) { create(:organization) }
-  let(:participatory_space) { create(:participatory_process, title: { "en" => "A process" }, organization:) }
-  let!(:component) { create(:proposal_component, name: { "en" => "Erasable" }, participatory_space:) }
-  let!(:another_component) { create(:proposal_component, name: { "en" => "Has mixed data" }, participatory_space:) }
-  let!(:modern_component) { create(:proposal_component, name: { "en" => "Has modern data" }, participatory_space:) }
-  let!(:missing_component) { create(:proposal_component, name: { "en" => "Missing data" }, participatory_space:) }
-  let!(:proposal) { create(:proposal, component:) }
-  let!(:proposal2) { create(:proposal, component:) }
+  let(:participatory_space) { create(:participatory_process, title: { "en" => "A process" }, organization: organization) }
+  let!(:component) { create(:proposal_component, name: { "en" => "Erasable" }, participatory_space: participatory_space) }
+  let!(:another_component) { create(:proposal_component, name: { "en" => "Has mixed data" }, participatory_space: participatory_space) }
+  let!(:modern_component) { create(:proposal_component, name: { "en" => "Has modern data" }, participatory_space: participatory_space) }
+  let!(:missing_component) { create(:proposal_component, name: { "en" => "Missing data" }, participatory_space: participatory_space) }
+  let!(:proposal) { create(:proposal, component: component) }
+  let!(:proposal2) { create(:proposal, component: component) }
   let!(:another_proposal) { create(:proposal, component: another_component) }
   let!(:modern_proposal) { create(:proposal, component: another_component) }
   let!(:modern_proposal2) { create(:proposal, component: modern_component) }
   let!(:missing_proposal) { create(:proposal, component: missing_component) }
-  let!(:extra_fields) { create(:awesome_proposal_extra_fields, private_body: "private", proposal:) }
+  let!(:extra_fields) { create(:awesome_proposal_extra_fields, private_body: "private", proposal: proposal) }
   let!(:extra_fields2) { create(:awesome_proposal_extra_fields, private_body: "private", proposal: proposal2) }
   let!(:modern_extra_fields) { create(:awesome_proposal_extra_fields, private_body: "private", proposal: modern_proposal) }
   let!(:modern_extra_fields2) { create(:awesome_proposal_extra_fields, private_body: "private", proposal: modern_proposal2) }
   let!(:another_extra_fields) { create(:awesome_proposal_extra_fields, private_body: "private", proposal: another_proposal) }
   let(:params) do
-    { id: }
+    { id: id }
   end
   let(:id) { "private_data" }
   let(:time_ago) { 4.months.ago }

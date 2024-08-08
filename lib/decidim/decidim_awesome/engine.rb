@@ -76,18 +76,18 @@ module Decidim
           # add vote weight to proposal vote
           Decidim::Proposals::ProposalVote.include(Decidim::DecidimAwesome::HasVoteWeight)
           Decidim::Proposals::ProposalType.include(Decidim::DecidimAwesome::AddProposalTypeVoteWeights)
-          Decidim::Proposals::ProposalLCell.include(Decidim::DecidimAwesome::ProposalLCellOverride)
+          # Decidim::Proposals::ProposalLCell.include(Decidim::DecidimAwesome::ProposalLCellOverride)
         end
 
         # override user's admin property
         Decidim::User.include(Decidim::DecidimAwesome::UserOverride) if DecidimAwesome.enabled?(:scoped_admins)
 
         if DecidimAwesome.enabled?(:menu, :content_block_main_menu)
-          Decidim::ContentBlocks::GlobalMenuCell.include(Decidim::DecidimAwesome::GlobalMenuCellOverride)
-          Decidim::BreadcrumbHelper.include(Decidim::DecidimAwesome::BreadcrumbHelperOverride)
+          # Decidim::ContentBlocks::GlobalMenuCell.include(Decidim::DecidimAwesome::GlobalMenuCellOverride)
+          # Decidim::BreadcrumbHelper.include(Decidim::DecidimAwesome::BreadcrumbHelperOverride)
           Decidim::MenuPresenter.include(Decidim::DecidimAwesome::MenuPresenterOverride)
           Decidim::MenuItemPresenter.include(Decidim::DecidimAwesome::MenuItemPresenterOverride)
-          Decidim::BreadcrumbRootMenuItemPresenter.include(Decidim::DecidimAwesome::BreadcrumbRootMenuItemPresenterOverride)
+          # Decidim::BreadcrumbRootMenuItemPresenter.include(Decidim::DecidimAwesome::BreadcrumbRootMenuItemPresenterOverride)
         end
 
         # Late registering of components to take into account initializer values
@@ -199,7 +199,7 @@ module Decidim
             voting.show_vote_button_view = "decidim/decidim_awesome/voting/voting_cards/show_vote_button"
             # voting.show_votes_count_view = "decidim/decidim_awesome/voting/voting_cards/show_votes_count"
             voting.show_votes_count_view = "" # hide votes count if not needed (in this case is integrated in the show_vote_button_view)
-            voting.proposal_metadata_cell = "decidim/decidim_awesome/voting/proposal_metadata"
+            # voting.proposal_metadata_cell = "decidim/decidim_awesome/voting/proposal_metadata"
             voting.weight_validator do |weight, context|
               allowed = [1, 2, 3]
               allowed << 0 if context[:proposal]&.component&.settings&.voting_cards_show_abstain

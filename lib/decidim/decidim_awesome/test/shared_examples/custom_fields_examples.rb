@@ -66,8 +66,8 @@ shared_examples "removes a box" do |name|
     expect(page).to have_content("Street Sweeper")
     expect(page).not_to have_content("Short Bio")
 
-    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: "#{var_name}_foo")).not_to be_present
-    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: "#{var_name}_bar")).to be_present
+    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: "#{var_name}_foo")).not_to be_present
+    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: "#{var_name}_bar")).to be_present
   end
 end
 
@@ -95,8 +95,8 @@ shared_examples "adds a constraint" do
       expect(page).to have_content("Processes")
     end
 
-    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: "#{var_name}_bar")).to be_present
-    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: "#{var_name}_bar").constraints.first.settings).to eq(constraint.settings)
+    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: "#{var_name}_bar")).to be_present
+    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: "#{var_name}_bar").constraints.first.settings).to eq(constraint.settings)
   end
 end
 
@@ -130,9 +130,9 @@ shared_examples "removes a constraint" do
       expect(page).not_to have_content("Proposals")
     end
 
-    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: "#{var_name}_bar")).to be_present
-    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: "#{var_name}_bar").constraints.count).to eq(1)
-    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: "#{var_name}_bar").constraints.first).to eq(another_constraint)
+    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: "#{var_name}_bar")).to be_present
+    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: "#{var_name}_bar").constraints.count).to eq(1)
+    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: "#{var_name}_bar").constraints.first).to eq(another_constraint)
   end
 
   context "and there is only one constraint" do
@@ -148,8 +148,8 @@ shared_examples "removes a constraint" do
       end
 
       expect(page).to have_content("Sorry, this cannot be deleted")
-      expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: "#{var_name}_bar").constraints.count).to eq(1)
-      expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: "#{var_name}_bar").constraints.first).to eq(constraint)
+      expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: "#{var_name}_bar").constraints.count).to eq(1)
+      expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: "#{var_name}_bar").constraints.first).to eq(constraint)
     end
   end
 end

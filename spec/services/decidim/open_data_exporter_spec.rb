@@ -12,7 +12,7 @@ describe Decidim::OpenDataExporter do
       let(:csv_file) { Zip::File.open(path).glob("*open-data-proposals.csv").first }
       let(:csv_data) { csv_file.get_input_stream.read }
 
-      let(:participatory_process) { create(:participatory_process, organization:) }
+      let(:participatory_process) { create(:participatory_process, organization: organization) }
       let(:component) { create(:proposal_component, participatory_space: participatory_process) }
 
       let(:public_data) do
@@ -27,14 +27,14 @@ describe Decidim::OpenDataExporter do
         }
       end
       let(:private_body) { '<xml><dl class="decidim_awesome-custom_fields" data-generator="decidim_awesome" data-version="0.7.2"><dt name="text-1476748007461">Phone Number</dt><dd id="text-1476748007461" name="text"><div>021 xxx xx 641</div></dd></dl></xml>' }
-      let(:config_helper) { create(:awesome_config, organization:, var: :proposal_custom_field_foo) }
+      let(:config_helper) { create(:awesome_config, organization: organization, var: :proposal_custom_field_foo) }
       let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes", "participatory_space_slug" => participatory_process.slug }) }
       let!(:config) do
-        create(:awesome_config, organization:, var: :proposal_custom_fields, value: public_data)
-        create(:awesome_config, organization:, var: :proposal_private_custom_fields, value: private_data)
+        create(:awesome_config, organization: organization, var: :proposal_custom_fields, value: public_data)
+        create(:awesome_config, organization: organization, var: :proposal_private_custom_fields, value: private_data)
       end
 
-      let!(:proposal) { create(:proposal, component:, body:, private_body:) }
+      let!(:proposal) { create(:proposal, component: component, body: body, private_body: private_body) }
 
       before do
         subject.export

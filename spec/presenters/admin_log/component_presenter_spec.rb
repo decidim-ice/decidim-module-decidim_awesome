@@ -7,19 +7,19 @@ module Decidim::AdminLog
     subject(:presenter) { described_class.new(action_log, helper) }
 
     let(:organization) { create(:organization) }
-    let(:user) { create(:user, organization:) }
+    let(:user) { create(:user, organization: organization) }
     let(:extra_data) { { count: 137 } }
     let(:action_log) do
       create(
         :action_log,
-        user:,
-        action:,
-        resource:,
-        extra_data:
+        user: user,
+        action: action,
+        resource: resource,
+        extra_data: extra_data
       )
     end
     let(:action) { "destroy_private_data" }
-    let(:resource) { create(:component, organization:) }
+    let(:resource) { create(:component, organization: organization) }
 
     before do
       helper.extend(Decidim::ApplicationHelper)

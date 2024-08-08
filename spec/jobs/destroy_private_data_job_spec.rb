@@ -7,17 +7,17 @@ module Decidim::DecidimAwesome
     subject { described_class }
 
     let!(:organization) { create(:organization) }
-    let!(:user) { create(:user, organization:) }
+    let!(:user) { create(:user, organization: organization) }
 
-    let!(:proposal) { create(:proposal, component:) }
-    let!(:proposal2) { create(:proposal, component:) }
-    let!(:modern_proposal) { create(:proposal, component:) }
-    let!(:component) { create(:proposal_component, organization:) }
-    let!(:extra_field) { create(:awesome_proposal_extra_fields, proposal:, private_body: "private") }
+    let!(:proposal) { create(:proposal, component: component) }
+    let!(:proposal2) { create(:proposal, component: component) }
+    let!(:modern_proposal) { create(:proposal, component: component) }
+    let!(:component) { create(:proposal_component, organization: organization) }
+    let!(:extra_field) { create(:awesome_proposal_extra_fields, proposal: proposal, private_body: "private") }
     let!(:extra_field2) { create(:awesome_proposal_extra_fields, proposal: proposal2, private_body: "private") }
     let!(:modern_extra_field) { create(:awesome_proposal_extra_fields, proposal: modern_proposal, private_body: "private") }
 
-    let!(:another_component) { create(:proposal_component, organization:) }
+    let!(:another_component) { create(:proposal_component, organization: organization) }
     let!(:another_proposal) { create(:proposal, component: another_component) }
     let!(:another_extra_field) { create(:awesome_proposal_extra_fields, proposal: another_proposal, private_body: "private") }
 

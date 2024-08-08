@@ -8,7 +8,7 @@ module Decidim::DecidimAwesome
     include_context "with a graphql class type"
 
     let(:model) do
-      OpenStruct.new(locale: "en", fields:)
+      OpenStruct.new(locale: "en", fields: fields)
     end
 
     let(:fields) do

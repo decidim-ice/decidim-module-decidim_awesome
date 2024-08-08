@@ -46,14 +46,14 @@ module Decidim
 
       def as_json(_options = nil)
         {
-          id:,
-          name:,
-          path:,
-          total:,
-          last_date:,
-          time_ago:,
+          id: id,
+          name: name,
+          path: path,
+          total: total,
+          last_date: last_date,
+          time_ago: time_ago,
           locked: locked?,
-          done:
+          done: done
         }
       end
 

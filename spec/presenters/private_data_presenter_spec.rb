@@ -7,12 +7,12 @@ require "spec_helper"
 module Decidim::DecidimAwesome
   RSpec.describe PrivateDataPresenter, type: :presenter do
     let(:participatory_space) { create(:participatory_process) }
-    let(:component) { create(:proposal_component, participatory_space:) }
-    let(:proposal) { create(:proposal, component:) }
-    let(:proposal2) { create(:proposal, component:) }
-    let(:proposal3) { create(:proposal, component:) }
-    let(:modern_proposal) { create(:proposal, component:) }
-    let!(:extra_fields) { create(:awesome_proposal_extra_fields, proposal:, private_body: "private") }
+    let(:component) { create(:proposal_component, participatory_space: participatory_space) }
+    let(:proposal) { create(:proposal, component: component) }
+    let(:proposal2) { create(:proposal, component: component) }
+    let(:proposal3) { create(:proposal, component: component) }
+    let(:modern_proposal) { create(:proposal, component: component) }
+    let!(:extra_fields) { create(:awesome_proposal_extra_fields, proposal: proposal, private_body: "private") }
     let!(:extra_fields2) { create(:awesome_proposal_extra_fields, proposal: proposal2, private_body: "private") }
     let!(:extra_fields3) { create(:awesome_proposal_extra_fields, proposal: proposal3, private_body: "private") }
     let!(:modern_extra_fields) { create(:awesome_proposal_extra_fields, proposal: modern_proposal, private_body: nil) }

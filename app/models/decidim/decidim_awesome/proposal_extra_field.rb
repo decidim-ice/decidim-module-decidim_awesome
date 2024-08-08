@@ -36,7 +36,7 @@ module Decidim
       end
 
       def no_more_than_one_extra_field
-        return unless ProposalExtraField.where(proposal:).where.not(id:).exists?
+        return unless ProposalExtraField.where(proposal: proposal).where.not(id: id).exists?
 
         errors.add(:proposal, :invalid)
       end

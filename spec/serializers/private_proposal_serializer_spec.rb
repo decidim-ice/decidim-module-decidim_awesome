@@ -8,9 +8,9 @@ module Decidim::DecidimAwesome::Proposals
       described_class.new(proposal)
     end
 
-    let!(:proposal) { create(:proposal, :accepted, body:, component:) }
-    let!(:another_proposal) { create(:proposal, :accepted, component:) }
-    let!(:extra_fields) { create(:awesome_proposal_extra_fields, proposal:, private_body:) }
+    let!(:proposal) { create(:proposal, :accepted, body: body, component: component) }
+    let!(:another_proposal) { create(:proposal, :accepted, component: component) }
+    let!(:extra_fields) { create(:awesome_proposal_extra_fields, proposal: proposal, private_body: private_body) }
     let!(:another_extra_fields) { create(:awesome_proposal_extra_fields, proposal: another_proposal) }
     let(:component) { create(:proposal_component) }
     let(:participatory_process) { component.participatory_space }
@@ -25,11 +25,11 @@ module Decidim::DecidimAwesome::Proposals
         bar: "[{\"type\":\"number\",\"required\":false,\"label\":\"Age\",\"name\":\"age\",\"subtype\":\"number\"}]"
       }
     end
-    let!(:config) { create(:awesome_config, organization:, var: :proposal_custom_fields, value: custom_fields) }
+    let!(:config) { create(:awesome_config, organization: organization, var: :proposal_custom_fields, value: custom_fields) }
     let!(:constraint) { create(:config_constraint, awesome_config: config, settings: { "participatory_space_manifest" => "participatory_processes", "participatory_space_slug" => slug }) }
-    let!(:private_config) { create(:awesome_config, organization:, var: :proposal_private_custom_fields, value: private_custom_fields) }
+    let!(:private_config) { create(:awesome_config, organization: organization, var: :proposal_private_custom_fields, value: private_custom_fields) }
     let!(:private_constraint) { create(:config_constraint, awesome_config: private_config, settings: { "participatory_space_manifest" => "participatory_processes", "participatory_space_slug" => private_slug }) }
-    let!(:notes) { create_list(:proposal_note, 2, proposal:, created_at: "2024-01-01") }
+    let!(:notes) { create_list(:proposal_note, 2, proposal: proposal, created_at: "2024-01-01") }
 
     let(:slug) { participatory_process.slug }
     let(:private_slug) { participatory_process.slug }

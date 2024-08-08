@@ -1,9 +1,9 @@
 <div class="mb-8">
-  <p class="help-text"><%= t(".help_html", time_ago:) %>
+  <p class="help-text"><%= t(".help_html", time_ago: time_ago) %>
 </div>
 
 <% if collection.empty? %>
-  <div class="callout warning"><%= t(".no_data", time_ago:) %></div>
+  <div class="callout warning"><%= t(".no_data", time_ago: time_ago) %></div>
 <% else %>
   <div class="table-scroll autorefresh" data-url="<%= maintenance_path(:private_data).split("?").first %>">
     <table class="table-list">

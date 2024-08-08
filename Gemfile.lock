@@ -765,10 +765,6 @@ GEM
       version_gem (~> 1.1, >= 1.1.1)
     social-share-button (1.2.4)
       coffee-rails
-    spring (2.1.1)
-    spring-watcher-listen (2.0.1)
-      listen (>= 2.7, < 4.0)
-      spring (>= 1.2, < 3.0)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -867,8 +863,6 @@ DEPENDENCIES
   listen (~> 3.1)
   puma (>= 5.5.1)
   rubocop-faker
-  spring (~> 2.0)
-  spring-watcher-listen (~> 2.0.0)
   web-console
 
 RUBY VERSION

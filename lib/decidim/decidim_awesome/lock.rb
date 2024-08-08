@@ -15,7 +15,7 @@ module Decidim
         if config
           config.update!(updated_at: Time.current)
         else
-          AwesomeConfig.create!(var:, organization:)
+          AwesomeConfig.create!(var: var, organization: organization)
         end
       end
 
@@ -34,7 +34,7 @@ module Decidim
       end
 
       def config
-        AwesomeConfig.find_by(var:, organization:)
+        AwesomeConfig.find_by(var: var, organization: organization)
       end
 
       private

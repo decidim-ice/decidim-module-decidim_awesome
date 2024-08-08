@@ -7,13 +7,13 @@ module Decidim::DecidimAwesome
     describe MaintenanceController do
       routes { Decidim::DecidimAwesome::AdminEngine.routes }
 
-      let(:user) { create(:user, :confirmed, :admin, organization:) }
+      let(:user) { create(:user, :confirmed, :admin, organization: organization) }
       let(:organization) { create(:organization) }
-      let!(:component) { create(:proposal_component, organization:) }
-      let!(:proposal) { create(:proposal, component:) }
-      let!(:extra_fields) { create(:awesome_proposal_extra_fields, private_body: "private", proposal:) }
+      let!(:component) { create(:proposal_component, organization: organization) }
+      let!(:proposal) { create(:proposal, component: component) }
+      let!(:extra_fields) { create(:awesome_proposal_extra_fields, private_body: "private", proposal: proposal) }
       let(:params) do
-        { id: }
+        { id: id }
       end
       let(:id) { "private_data" }
       let(:time_ago) { 4.months.ago }
@@ -28,7 +28,7 @@ module Decidim::DecidimAwesome
 
       describe "GET #show" do
         it "returns http success" do
-          get(:show, params:)
+          get(:show, params: params)
           expect(response).to have_http_status(:success)
 
           expect(controller.helpers.current_view).to eq("private_data")
@@ -37,7 +37,7 @@ module Decidim::DecidimAwesome
 
         context "when format is json" do
           it "returns json" do
-            get(:show, params:)
+            get(:show, params: params)
             expect(response).to have_http_status(:success)
           end
         end
@@ -45,12 +45,12 @@ module Decidim::DecidimAwesome
 
       describe "DELETE #destroy_private_data" do
         let(:params) do
-          { id:, resource_id: component.id }
+          { id: id, resource_id: component.id }
         end
 
         it "returns http success" do
           perform_enqueued_jobs do
-            delete(:destroy_private_data, params:)
+            delete(:destroy_private_data, params: params)
           end
           expect(response).to have_http_status(:redirect)
           expect(Decidim::DecidimAwesome::ProposalExtraField.find(extra_fields.id).private_body).to be_nil
@@ -61,7 +61,7 @@ module Decidim::DecidimAwesome
 
           it "returns http success" do
             perform_enqueued_jobs do
-              delete(:destroy_private_data, params:)
+              delete(:destroy_private_data, params: params)
             end
             expect(response).to have_http_status(:redirect)
             expect(Decidim::DecidimAwesome::ProposalExtraField.find(extra_fields.id).private_body).to eq("private")
@@ -69,11 +69,11 @@ module Decidim::DecidimAwesome
         end
 
         context "when no permissions" do
-          let(:user) { create(:user, :confirmed, organization:) }
+          let(:user) { create(:user, :confirmed, organization: organization) }
 
           it "returns http success" do
             perform_enqueued_jobs do
-              delete(:destroy_private_data, params:)
+              delete(:destroy_private_data, params: params)
             end
             expect(response).to have_http_status(:redirect)
             expect(Decidim::DecidimAwesome::ProposalExtraField.find(extra_fields.id).private_body).to eq("private")
