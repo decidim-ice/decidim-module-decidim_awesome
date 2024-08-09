@@ -159,8 +159,8 @@ shared_examples "basic rendering" do |enabled|
       [
         :allow_images_in_proposals,
         :allow_videos_in_editors,
-        :allow_images_in_editors,
-        :allow_images_in_proposals,
+        :allow_images_in_full_editor,
+        :allow_images_in_small_editor,
         :auto_save_forms,
         :intergram_for_admins,
         :intergram_for_public

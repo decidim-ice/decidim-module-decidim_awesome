@@ -11,6 +11,7 @@ module Decidim::DecidimAwesome
 
       include_context "with menu hacks params"
 
+      let(:menu_name) { :menu }
       let(:item) { OpenStruct.new(attributes) }
       let(:previous_menu) do
         { "url" => "/another-link", "position" => 10 }

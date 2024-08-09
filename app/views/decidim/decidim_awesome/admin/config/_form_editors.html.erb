@@ -4,7 +4,7 @@
     <%= t("help.original_editor_override", scope: "decidim.decidim_awesome.admin.config.form") %></p>
   </div>
 
-  <% enabled_configs([:allow_images_in_editors, :allow_videos_in_editors]).each do |key| %>
+  <% enabled_configs([:allow_images_in_full_editor, :allow_images_in_small_editor, :allow_videos_in_editors]).each do |key| %>
     <div class="row column card p-4">
       <%= form.check_box key, help_text: t("help.#{key}", scope: "decidim.decidim_awesome.admin.config.form") %>
 

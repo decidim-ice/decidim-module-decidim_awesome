@@ -12,7 +12,7 @@ module Decidim
 
           # If the content is safe, HTML tags are sanitized, otherwise, they are stripped.
           def render_proposal_body(proposal)
-            if awesome_proposal_custom_fields.present? || awesome_config[:allow_images_in_editors]
+            if awesome_proposal_custom_fields.present? || awesome_config[:allow_images_in_full_editor, :allow_images_in_small_editor,]
               content = present(proposal).body(links: true, strip_tags: false)
               sanitized = decidim_sanitize_editor_admin(content, {})
               Decidim::ContentProcessor.render_without_format(sanitized).html_safe
