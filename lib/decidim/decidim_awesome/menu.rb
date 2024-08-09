@@ -134,7 +134,7 @@ module Decidim
 
         def menus
           @menus ||= {
-            editors: config_enabled?(:allow_images_in_editors, :allow_videos_in_editors),
+            editors: config_enabled?(:allow_images_in_full_editor, :allow_images_in_small_editor),
             proposals: config_enabled?(
               :allow_images_in_proposals,
               :validate_title_min_length, :validate_title_max_caps_percent,

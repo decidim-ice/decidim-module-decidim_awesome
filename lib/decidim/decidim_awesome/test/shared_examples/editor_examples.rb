@@ -57,3 +57,33 @@ shared_examples "has drag and drop" do
     expect(proposal.reload.body["en"]).to include(last_image.attached_uploader(:file).path)
   end
 end
+
+shared_examples "has markdown editor" do |images|
+  it "has CodeMirror class" do
+    expect(page).to have_xpath("//div[@class='CodeMirror cm-s-paper CodeMirror-wrap']")
+  end
+
+  it "has toolbar" do
+    expect(page).to have_xpath("//div[@class='editor-toolbar']")
+  end
+
+  if images
+    it "has help text" do
+      expect(page).to have_content("Add images by dragging & dropping or pasting them.")
+    end
+  else
+    it "has no help text" do
+      expect(page).not_to have_content("Add images by dragging & dropping or pasting them.")
+    end
+  end
+end
+
+shared_examples "has no markdown editor" do
+  it "has CodeMirror class" do
+    expect(page).not_to have_xpath("//div[@class='CodeMirror cm-s-paper CodeMirror-wrap']")
+  end
+
+  it "has toolbar" do
+    expect(page).not_to have_xpath("//div[@class='editor-toolbar']")
+  end
+end

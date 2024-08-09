@@ -27,7 +27,7 @@ module Decidim::Proposals
     end
     let!(:another_extra_fields) { create(:awesome_proposal_extra_fields, :with_votes, proposal: another_proposal) }
     let(:participatory_process) { component.participatory_space }
-    let(:component) { create(:proposal_component, settings settings) }
+    let(:component) { create(:proposal_component, settings: settings) }
     let(:settings) do
       {
         awesome_voting_manifest: manifest

@@ -8,9 +8,12 @@ module Decidim
       class ConfigForm < Decidim::Form
         include ActionView::Helpers::SanitizeHelper
 
-        attribute :allow_images_in_editors, Boolean
-        attribute :allow_videos_in_editors, Boolean
+        attribute :allow_images_in_full_editor, Boolean
+        attribute :allow_images_in_small_editor, Boolean
         attribute :allow_images_in_proposals, Boolean
+        attribute :use_markdown_editor, Boolean
+        attribute :allow_images_in_markdown_editor, Boolean
+        attribute :auto_save_forms, Boolean
         attribute :auto_save_forms, Boolean
         attribute :scoped_styles, Hash
         attribute :proposal_custom_fields, Hash

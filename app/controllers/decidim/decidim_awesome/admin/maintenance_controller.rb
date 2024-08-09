@@ -16,7 +16,7 @@ module Decidim
         helper_method :collection, :resource, :present, :time_ago
 
         before_action do
-          enforce_permission_to :edit_config, :private_data, private_data:
+          enforce_permission_to :edit_config, :private_data, private_data: private_data
         end
 
         def show
