@@ -17,7 +17,7 @@ module Decidim::DecidimAwesome::Admin
     end
     let(:global) { nil }
     let(:private_data) { nil }
-    let(:feature) { [:allow_images_in_full_editor, :allow_images_in_small_editor,] }
+    let(:feature) { :allow_images_in_full_editor }
     let(:action) do
       { scope: :admin, action: :edit_config, subject: feature }
     end
