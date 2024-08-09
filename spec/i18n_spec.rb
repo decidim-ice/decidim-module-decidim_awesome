@@ -16,9 +16,9 @@ describe "I18n sanity" do
     expect(missing_keys).to be_empty, "#{missing_keys.inspect} are missing"
   end
 
-  # it "does not have unused keys" do
-  #   expect(unused_keys).to be_empty, "#{unused_keys.inspect} are unused"
-  # end
+  it "does not have unused keys" do
+    expect(unused_keys).to be_empty, "#{unused_keys.inspect} are unused"
+  end
 
   unless ENV["SKIP_NORMALIZATION"]
     it "is normalized" do

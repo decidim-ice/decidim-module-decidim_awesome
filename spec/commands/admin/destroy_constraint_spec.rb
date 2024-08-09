@@ -47,6 +47,12 @@ module Decidim::DecidimAwesome
 
           it_behaves_like "destroys the constraint"
         end
+
+        context "and is another critical scope" do
+          let(:name) { :proposal_private_custom_field }
+
+          it_behaves_like "destroys the constraint"
+        end
       end
 
       context "when is the last constraint" do
@@ -56,6 +62,12 @@ module Decidim::DecidimAwesome
 
         context "and is a critical scope" do
           let(:name) { :proposal_custom_field }
+
+          it_behaves_like "do not destroy the constraint"
+        end
+
+        context "and is another critical scope" do
+          let(:name) { :proposal_private_custom_field }
 
           it_behaves_like "do not destroy the constraint"
         end

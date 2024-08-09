@@ -9,8 +9,6 @@ module Decidim
         include ConfigConstraintsHelpers
         helper ConfigConstraintsHelpers
 
-        layout "decidim/decidim_awesome/admin/application"
-
         helper_method :constraints_for, :users_for, :config_var
         before_action do
           enforce_permission_to :edit_config, configs
@@ -19,7 +17,7 @@ module Decidim
         def show
           @form = form(ConfigForm).from_params(organization_awesome_config)
 
-          redirect_to decidim_admin_decidim_awesome.checks_path unless config_var
+          redirect_to decidim_admin_decidim_awesome.checks_maintenance_index_path unless config_var
         end
 
         def update
@@ -43,8 +41,13 @@ module Decidim
               if (term = params[:term].to_s).present?
                 query = current_organization.users.order(name: :asc)
                 query = query.where("name ILIKE :term OR nickname ILIKE :term OR email ILIKE :term", term: "%#{term}%")
-
-                render json: query.all.collect { |u| { id: u.id, text: format_user_name(u) } }
+                render json: query.all.collect { |u|
+                  {
+                    value: u.id,
+                    text: format_user_name(u),
+                    is_admin: u.read_attribute("admin")
+                  }
+                }
               else
                 render json: []
               end

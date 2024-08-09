@@ -14,16 +14,16 @@ module Decidim::DecidimAwesome
           current_organization: organization
         }
       end
-      let(:params) do
+      let(:another_params) do
         {
           allow_images_in_full_editor: true,
           allow_images_in_small_editor: true
         }
       end
-      let(:form) do
-        ConfigForm.from_params(params).with_context(context)
+      let(:another_form) do
+        ConfigForm.from_params(another_params).with_context(context)
       end
-      let(:another_config) { UpdateConfig.new(form) }
+      let(:another_config) { UpdateConfig.new(another_form) }
 
       describe "when valid" do
         it "broadcasts :ok and creates a Hash" do

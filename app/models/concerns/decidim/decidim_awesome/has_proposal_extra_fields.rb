@@ -6,10 +6,31 @@ module Decidim
       extend ActiveSupport::Concern
 
       included do
-        has_one :extra_fields, foreign_key: "decidim_proposal_id", class_name: "Decidim::DecidimAwesome::ProposalExtraField", dependent: :destroy
+        has_one :extra_fields, as: :proposal, foreign_key: "decidim_proposal_id", foreign_type: "decidim_proposal_type", class_name: "Decidim::DecidimAwesome::ProposalExtraField",
+                               dependent: :destroy
+
+        after_save do |proposal|
+          if proposal.extra_fields && proposal.extra_fields.changed?
+            proposal.extra_fields.save
+            proposal.update_vote_weights
+            proposal.reload
+          end
+        end
+
+        delegate :private_body=, to: :safe_extra_fields
+
+        def private_body
+          extra_fields.private_body if extra_fields
+        end
+
+        def update_private_body!(private_body)
+          safe_extra_fields.private_body = private_body
+          safe_extra_fields.save!
+          self.extra_fields = safe_extra_fields
+        end
 
         def weight_count(weight)
-          (extra_fields && extra_fields.vote_weight_totals[weight.to_s]) || 0
+          safe_extra_fields.vote_weight_totals[weight.to_s] || 0
         end
 
         def vote_weights
@@ -24,17 +45,25 @@ module Decidim
           @all_vote_weights ||= self.class.all_vote_weights_for(component)
         end
 
-        def update_vote_weights!
-          extra_fields ||= Decidim::DecidimAwesome::ProposalExtraField.find_or_initialize_by(proposal: self)
-          extra_fields.vote_weight_totals = {}
+        def update_vote_weights
+          votes = Decidim::Proposals::ProposalVote.where(proposal: self)
+          safe_extra_fields.vote_weight_totals = {}
           votes.each do |vote|
-            extra_fields.vote_weight_totals[vote.weight] ||= 0
-            extra_fields.vote_weight_totals[vote.weight] += 1
+            safe_extra_fields.vote_weight_totals[vote.weight] ||= 0
+            safe_extra_fields.vote_weight_totals[vote.weight] += 1
           end
-          extra_fields.save!
-          self.extra_fields = extra_fields
           @vote_weights = nil
           @all_vote_weights = nil
+        end
+
+        def update_vote_weights!
+          update_vote_weights
+          safe_extra_fields.save!
+          self.extra_fields = safe_extra_fields
+        end
+
+        def safe_extra_fields
+          @safe_extra_fields ||= (persisted? && reload.extra_fields) || build_extra_fields(vote_weight_totals: {})
         end
 
         # collects all different weights stored along the different proposals in a different component

@@ -2,7 +2,7 @@
 
 module Decidim
   module DecidimAwesome
-    module ProposalTypeOverride
+    module AddProposalTypeVoteWeights
       extend ActiveSupport::Concern
 
       included do
@@ -10,6 +10,8 @@ module Decidim
 
         def vote_weights
           current_component = object.component
+          return unless current_component.current_settings.respond_to?(:votes_hidden?)
+
           object.vote_weights unless current_component.current_settings.votes_hidden?
         end
       end

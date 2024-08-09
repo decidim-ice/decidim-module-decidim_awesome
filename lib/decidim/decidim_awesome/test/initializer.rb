@@ -13,6 +13,7 @@ Decidim::DecidimAwesome.configure do |config|
       :intergram_for_public,
       :scoped_styles,
       :proposal_custom_fields,
+      :proposal_private_custom_fields,
       :menu,
       :scoped_admins,
       :custom_redirects,
@@ -25,7 +26,9 @@ Decidim::DecidimAwesome.configure do |config|
       :validate_body_max_marks_together,
       :validate_body_start_with_caps,
       :weighted_proposal_voting,
-      :additional_proposal_scopes
+      :additional_proposal_sortings,
+      :allow_limiting_amendments,
+      :proposal_private_custom_fields
     ].each do |conf|
       config.send("#{conf}=", :disabled)
     end

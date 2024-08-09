@@ -10,6 +10,7 @@ shared_context "with menu hacks params" do
   end
   let(:params) do
     {
+      menu_id: menu_id,
       raw_label: label,
       url: url,
       position: position,
@@ -17,6 +18,7 @@ shared_context "with menu hacks params" do
       visibility: visibility
     }
   end
+  let(:menu_id) { menu_name.to_sym }
   let(:attributes) do
     {
       "label" => label,
@@ -36,7 +38,6 @@ shared_context "with menu hacks params" do
   let(:position) { 2 }
   let(:target) { "_blank" }
   let(:visibility) { "hidden" }
-  let(:menu_name) { "menu" }
 
   let(:another_params) do
     {

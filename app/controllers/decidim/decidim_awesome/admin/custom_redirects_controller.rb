@@ -8,8 +8,6 @@ module Decidim
         include NeedsAwesomeConfig
         include ConfigConstraintsHelpers
 
-        layout "decidim/decidim_awesome/admin/application"
-
         before_action do
           enforce_permission_to :edit_config, :menu
         end

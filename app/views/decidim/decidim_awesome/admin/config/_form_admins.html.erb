@@ -3,7 +3,7 @@
     <p class="help-text"><%= t("help.scoped_admins", scope: "decidim.decidim_awesome.admin.config.form") %></p>
 
     <% form.object.scoped_admins&.each do |key, value| %>
-      <div class="scoped_admins_container" data-key="<%= key %>">
+      <div class="card p-4 scoped_admins_container js-box-container" data-key="<%= key %>">
         <%= render(partial: "decidim/decidim_awesome/admin/config/autoedit_box_label", locals: { var: "scoped_admins", key: key, scope: "scoped_admin_#{key}", delete_path: decidim_admin_decidim_awesome.scoped_admin_path(key: key) }) %>
         <p class="form-error is-visible" id="scoped-admin-error-<%= $key %>"><%= errors[key.to_sym].join("<br>") if errors %></p>
 

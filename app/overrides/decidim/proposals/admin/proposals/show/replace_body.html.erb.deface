@@ -1,0 +1,5 @@
+<!-- insert_before "erb[silent]:contains('presented_endorsers = endorsers_presenters_for(proposal)')" -->
+
+<% unless awesome_proposal_private_custom_fields.blank? %>
+  <%= render partial: "decidim/decidim_awesome/admin/proposals/private_body", locals: { proposal: proposal } %>
+<% end %>

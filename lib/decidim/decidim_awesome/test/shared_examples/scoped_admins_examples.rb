@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-welcome_text = "Welcome to the Admin Panel."
-welcome_text = "Welcome to the Decidim Admin Panel." if legacy_version?
+welcome_text = "Dashboard"
 
 shared_examples "redirects to index" do |_link|
   it "display index page" do
@@ -34,7 +33,7 @@ shared_examples "allows awesome access" do
 
   it "allows module access" do
     visit decidim_admin_decidim_awesome.config_path(:editors)
-    expect(page).to have_content("Tweaks for editors")
+    expect(page).to have_content("Tweaks for Editor Hacks")
   end
 end
 
@@ -88,7 +87,7 @@ shared_examples "allows external accesses" do
 
   it "shows participants access" do
     visit decidim_admin.users_path
-    expect(page).to have_content(legacy_version? ? "New user" : "New admin")
+    expect(page).to have_content("New admin")
   end
 
   it "shows pages access" do
@@ -110,6 +109,10 @@ end
 shared_examples "allows all admin routes" do
   before do
     visit decidim_admin.root_path
+    # this is a workaround to wait for the page to load
+    # it seems that the test might fail randomly otherwise
+    # underlaying issue is unknown, maybe capybara is faster clicking than ruby is at storing class variables?
+    sleep 0.1
   end
 
   it "allows the admin root page" do
@@ -117,13 +120,12 @@ shared_examples "allows all admin routes" do
   end
 
   it "allows the assemblies page" do
-    click_link "Assemblies"
-
+    click_link_or_button "Assemblies"
     expect(page).to have_content("New assembly")
   end
 
   it "allows the processes page" do
-    click_link "Processes"
+    click_link_or_button "Processes"
 
     expect(page).to have_content("New process")
   end
@@ -132,6 +134,7 @@ end
 shared_examples "allows scoped admin routes" do
   before do
     visit decidim_admin.root_path
+    sleep 0.1
   end
 
   it "allows the admin root page" do
@@ -139,14 +142,14 @@ shared_examples "allows scoped admin routes" do
   end
 
   it "allows the assemblies page" do
-    click_link "Assemblies"
+    click_link_or_button "Assemblies"
 
     expect(page).to have_content("New assembly")
   end
 
   describe "forbids processes" do
     before do
-      click_link "Processes"
+      click_link_or_button "Processes"
     end
 
     it_behaves_like "redirects to index"
@@ -159,16 +162,16 @@ end
 
 shared_examples "has admin link" do
   it "has menu link" do
-    within ".topbar__dropmenu.topbar__user__logged" do
-      expect(page).to have_selector("#user-menu li", text: "Admin dashboard", visible: :hidden)
+    within "header" do
+      expect(page).to have_css("#admin-bar", text: "Admin dashboard")
     end
   end
 end
 
 shared_examples "has no admin link" do
-  it "has menu link" do
-    within ".topbar__dropmenu.topbar__user__logged" do
-      expect(page).not_to have_selector("#user-menu li", text: "Admin dashboard", visible: :hidden)
+  it "has no menu link" do
+    within "header" do
+      expect(page).not_to have_css("#admin-bar", text: "Admin dashboard")
     end
   end
 end
@@ -216,7 +219,7 @@ shared_examples "can edit assembly" do
       ca: "Assamblea editada",
       es: "Asamblea editada"
     )
-    find("*[type=submit]").click
+    click_link_or_button "Update"
     expect(page).to have_admin_callout("successfully")
   end
 end
@@ -265,7 +268,7 @@ shared_examples "can manage component" do
     expect(page).to have_content("Title")
     expect(page).to have_content(proposal.title["en"])
 
-    click_link "Edit proposal"
+    click_link_or_button "Edit proposal"
     expect(page).to have_content("Update proposal")
     fill_in_i18n(
       :proposal_title,
@@ -274,14 +277,14 @@ shared_examples "can manage component" do
       ca: "Proposta editada",
       es: "Propuesta editada"
     )
-    find("*[type=submit]").click
+    click_link_or_button "Update"
     expect(page).to have_admin_callout("successfully")
   end
 
   it "can create a proposal" do
     visit manage_component_path(component)
 
-    click_link "New proposal"
+    click_link_or_button "New proposal"
     expect(page).to have_content("Create proposal")
     fill_in_i18n(
       :proposal_title,
@@ -297,7 +300,7 @@ shared_examples "can manage component" do
       ca: "Body creat",
       es: "Body creat"
     )
-    find("*[type=submit]").click
+    click_link_or_button "Create"
     expect(page).to have_admin_callout("successfully")
   end
 end
@@ -305,6 +308,7 @@ end
 shared_examples "edits allowed components" do
   before do
     visit decidim_admin.root_path
+    sleep 0.1
   end
 
   it_behaves_like "can manage component"
@@ -365,8 +369,10 @@ shared_examples "allows access to group processes" do
   end
 
   it "shows the list of processes" do
-    expect(page).to have_content("Participatory processes")
-    expect(page).to have_content(participatory_process.title["en"])
+    within("[data-content]") do
+      expect(page).to have_content("Processes")
+      expect(page).to have_content(participatory_process.title["en"])
+    end
   end
 
   describe "forbids editing processes" do
@@ -383,8 +389,10 @@ shared_examples "allows access to group processes" do
     end
 
     it "shows the list of groups" do
-      expect(page).to have_content("Participatory process groups")
-      expect(page).to have_content(process_group.title["en"])
+      within("[data-content]") do
+        expect(page).to have_content("Process groups")
+        expect(page).to have_content(process_group.title["en"])
+      end
     end
   end
 end
@@ -403,7 +411,7 @@ shared_examples "allows edit any group process" do
       ca: "Proces grup editat",
       es: "Grupo de procesos editado"
     )
-    find("*[type=submit]").click
+    click_link_or_button "Update"
     expect(page).to have_admin_callout("successfully")
   end
 end
