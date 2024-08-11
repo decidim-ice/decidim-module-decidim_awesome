@@ -28,7 +28,7 @@
       <% end %>
     <% end %>
   </ul>
-  <button id="<%= "new-#{key}" %>" type="button" name="button" class="add-condition button small button__secondary"  data-open="constraintsModal" data-constraints-url="<%= new_constraint_path(key: key) %>">
+  <button id="<%= "new-#{key}" %>" type="button" name="button" class="add-condition button small button__secondary" data-open="constraintsModal" data-constraints-url="<%= new_constraint_path(key: key) %>">
     <%= icon "plus", class: "small" %>
     <%= t ".add_condition" %>
   </button>
