@@ -9,11 +9,14 @@ describe "Admin edits proposals", type: :system do
   let!(:user) { create :user, :admin, :confirmed, organization: organization }
   let!(:proposal) { create :proposal, :official, component: component }
   let!(:allow_images_in_proposals) { create(:awesome_config, organization: organization, var: :allow_images_in_proposals, value: images_in_proposals) }
-  let!(:allow_images_in_small_editor) { create(:awesome_config, organization: organization, var: :allow_images_in_full_editor, value: images_editor) }
+  let!(:allow_images_in_full_editor) { create(:awesome_config, organization: organization, var: :allow_images_in_full_editor, value: images_editor) }
+  let!(:allow_images_in_small_editor) { create(:awesome_config, organization: organization, var: :allow_images_in_small_editor, value: images_editor) }
+  let!(:allow_videos_in_editors) { create(:awesome_config, organization: organization, var: :allow_videos_in_editors, value: videos_editor) }
   let!(:use_markdown_editor) { create(:awesome_config, organization: organization, var: :use_markdown_editor, value: markdown_enabled) }
   let!(:allow_images_in_markdown_editor) { create(:awesome_config, organization: organization, var: :allow_images_in_markdown_editor, value: markdown_images) }
   let(:images_in_proposals) { false }
   let(:images_editor) { false }
+  let(:videos_editor) { false }
   let(:markdown_enabled) { false }
   let(:markdown_images) { false }
   let(:rte_enabled) { false }
