@@ -10,21 +10,21 @@ module Decidim
                           I18n.t("menu.editors", scope: "decidim.decidim_awesome.admin"),
                           decidim_admin_decidim_awesome.config_path(:editors),
                           position: 1,
-                          icon_name: "editors-text",
+                          icon_name: "text",
                           if: menus[:editors]
 
             menu.add_item :proposals,
                           I18n.t("menu.proposals", scope: "decidim.decidim_awesome.admin"),
                           decidim_admin_decidim_awesome.config_path(:proposals),
                           position: 2,
-                          icon_name: "documents",
+                          icon_name: "document",
                           if: menus[:proposals]
 
             menu.add_item :surveys,
                           I18n.t("menu.surveys", scope: "decidim.decidim_awesome.admin"),
                           decidim_admin_decidim_awesome.config_path(:surveys),
                           position: 3,
-                          icon_name: "surveys",
+                          icon_name: "spreadsheet",
                           if: menus[:surveys]
 
             menu.add_item :styles,
@@ -46,14 +46,14 @@ module Decidim
                           I18n.t("menu.admins", scope: "decidim.decidim_awesome.admin"),
                           decidim_admin_decidim_awesome.config_path(:admins),
                           position: 6,
-                          icon_name: "group-line",
+                          icon_name: "people",
                           if: menus[:admins]
 
             menu.add_item :menu_hacks,
                           I18n.t("menu.menu_hacks", scope: "decidim.decidim_awesome.admin"),
                           decidim_admin_decidim_awesome.menu_hacks_path(menus[:menu_hacks_menu] ? :menu : :home_content_block_menu),
                           position: 7,
-                          icon_name: "menu-line",
+                          icon_name: "menu",
                           if: menus[:menu_hacks],
                           submenu: { target_menu: :menu_hacks_submenu }
 
@@ -61,21 +61,21 @@ module Decidim
                           I18n.t("menu.custom_redirects", scope: "decidim.decidim_awesome.admin"),
                           decidim_admin_decidim_awesome.custom_redirects_path,
                           position: 8,
-                          icon_name: "external-link-line",
+                          icon_name: "share-boxed",
                           if: menus[:custom_redirects]
 
             menu.add_item :livechat,
                           I18n.t("menu.livechat", scope: "decidim.decidim_awesome.admin"),
                           decidim_admin_decidim_awesome.config_path(:livechat),
                           position: 9,
-                          icon_name: "chat-1-line",
+                          icon_name: "chat",
                           if: menus[:livechat]
 
             menu.add_item :maintenance,
                           I18n.t("maintenance", scope: "decidim.decidim_awesome.admin.menu.maintenance"),
                           decidim_admin_decidim_awesome.maintenance_path(:private_data),
                           position: 10,
-                          icon_name: "tools-line",
+                          icon_name: "pulse",
                           submenu: { target_menu: :maintenance_submenu }
           end
         end
@@ -86,7 +86,7 @@ module Decidim
                           I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.proposal_custom_fields"),
                           decidim_admin_decidim_awesome.config_path(:proposal_custom_fields),
                           position: 5.1,
-                          icon_name: "draft-line",
+                          icon_name: "draft",
                           if: menus[:proposal_custom_fields]
 
             menu.add_item :proposal_private_custom_fields,

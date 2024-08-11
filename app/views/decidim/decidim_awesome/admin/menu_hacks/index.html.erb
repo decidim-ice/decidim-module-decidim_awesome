@@ -28,7 +28,7 @@
           <td class="table-list__actions">
             <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_menu_hack_path(params[:menu_id], md5(item.url)), t(".edit"), class: "action-icon--edit" %>
             <% if item.respond_to?(:overrided?) %>
-              <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.menu_hack_path(params[:menu_id], md5(item.url)), t(".remove#{'_hack' if item.overrided?}"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
+              <%= icon_link_to "circle-x", decidim_admin_decidim_awesome.menu_hack_path(params[:menu_id], md5(item.url)), t(".remove#{'_hack' if item.overrided?}"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
             <% else %>
                 <span class="action-icon">
                   <%= icon "close-circle-line", class: "action-icon action-icon--disabled", role: "img" %>
