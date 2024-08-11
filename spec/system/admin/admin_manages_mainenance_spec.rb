@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Admin manages maintenance" do
+describe "Admin manages maintenance", type: :system do
   let(:user) { create(:user, :confirmed, :admin, organization: organization) }
   let(:organization) { create(:organization) }
   let(:participatory_space) { create(:participatory_process, title: { "en" => "A process" }, organization: organization) }

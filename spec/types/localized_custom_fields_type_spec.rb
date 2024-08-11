@@ -3,6 +3,7 @@
 require "spec_helper"
 require "decidim/api/test/type_context"
 
+# rubocop:disable Style/OpenStructUse
 module Decidim::DecidimAwesome
   describe LocalizedCustomFieldsType do
     include_context "with a graphql class type"
@@ -89,3 +90,4 @@ module Decidim::DecidimAwesome
     end
   end
 end
+# rubocop:enable Style/OpenStructUse

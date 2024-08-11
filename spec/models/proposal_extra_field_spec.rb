@@ -30,7 +30,8 @@ module Decidim::DecidimAwesome
 
     describe "weight_count" do
       let!(:extra_fields) { create(:awesome_proposal_extra_fields, proposal: proposal) }
-      let!(:vote_weights) do proposal
+      let!(:vote_weights) do
+        proposal
         [
           create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 1),
           create(:awesome_vote_weight, vote: create(:proposal_vote, proposal: proposal), weight: 2),

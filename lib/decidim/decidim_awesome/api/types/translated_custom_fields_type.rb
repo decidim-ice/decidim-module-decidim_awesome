@@ -27,8 +27,9 @@ module Decidim
       def translations(locales: [])
         translations = display_translations
         translations = translations.slice(*locales) unless locales.empty?
-
+        # rubocop:disable Style/OpenStructUse
         translations.map { |locale, fields| OpenStruct.new(locale: locale, fields: fields, machine_translated: defined_translations[locale].blank?) }
+        # rubocop:enable Style/OpenStructUse
       end
 
       private

@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Voting weights with cards" do
+describe "Voting weights with cards", type: :system do
   include_context "with a component"
   let(:voting_manifest) { :voting_cards }
   let!(:component) { create(:proposal_component, :with_votes_enabled, participatory_space: participatory_space, settings: settings) }

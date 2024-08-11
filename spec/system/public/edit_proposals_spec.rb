@@ -3,7 +3,7 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/editor_examples"
 
-describe "Show proposals editor" do
+describe "Show proposals editor", type: :system do
   include_context "with a component"
   let(:manifest_name) { "proposals" }
   let!(:component) do

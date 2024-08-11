@@ -11,7 +11,7 @@ module Decidim::Proposals
         title: title,
         body: body,
         private_body: private_body,
-        body_template: body_template,
+        body_template: body_template
       }
     end
 

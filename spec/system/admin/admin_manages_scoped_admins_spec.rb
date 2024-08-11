@@ -3,7 +3,7 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/box_label_editor_examples"
 
-describe "Admin manages scoped admins" do
+describe "Admin manages scoped admins", type: :system do
   let(:organization) { create(:organization) }
   let!(:admin) { create(:user, :admin, :confirmed, organization: organization) }
   let!(:user) { create(:user, :confirmed, organization: organization) }

@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Hacked home content block menu" do
+describe "Hacked home content block menu", type: :system do
   let(:organization) { create(:organization) }
   let!(:participatory_process) { create(:participatory_process, organization: organization) }
   let!(:config) { create(:awesome_config, organization: organization, var: :home_content_block_menu, value: menu) }
