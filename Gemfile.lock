@@ -390,8 +390,7 @@ GEM
       logger
     faraday-net_http (3.1.1)
       net-http
-    ffi (1.17.0-arm64-darwin)
-    ffi (1.17.0-x86_64-linux-gnu)
+    ffi (1.16.3)
     file_validators (3.0.0)
       activemodel (>= 3.2)
       mime-types (>= 1.0)
@@ -528,6 +527,8 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.3)
+    nokogiri (1.14.5-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.14.5-x86_64-linux)
       racc (~> 1.4)
     oauth (1.1.0)
@@ -821,6 +822,7 @@ GEM
     zeitwerk (2.6.17)
 
 PLATFORMS
+  arm64-darwin-23
   x86_64-linux
 
 DEPENDENCIES
