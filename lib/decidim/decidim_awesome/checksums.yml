@@ -47,6 +47,7 @@ decidim-proposals:
     decidim-0.27: 6e663e5c82c27291b63f29f346df8737
   /app/cells/decidim/proposals/proposal_l_cell.rb:
     decidim-0.27.4: 5e111ed30bca9475bed8247e5e056747
+    decidim-0.28.3: 6d955d56d9d9f0cba46ba157fa923cfc
   /app/cells/decidim/proposals/proposal_metadata_cell.rb:
     decidim-0.26: eedfd7f813aedbd819b519e03ae4a680
   /app/commands/decidim/proposals/create_proposal.rb:
