@@ -94,7 +94,7 @@ module Decidim
         end
 
         def current_menu_name
-          params[:menu_id].to_sym
+          :menu
         end
 
         def visibility_options
