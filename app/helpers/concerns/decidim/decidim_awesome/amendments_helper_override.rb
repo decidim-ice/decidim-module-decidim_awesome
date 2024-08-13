@@ -28,8 +28,8 @@ module Decidim
 
         def render_amendment_custom_fields_override(custom_fields, attribute, form, original_resource)
           # ensure decidim_editor is available as it is only required if the original FormBuilder is called
-          stylesheet_pack_tag "decidim_editor"
-          javascript_pack_tag "decidim_editor", defer: false
+          # stylesheet_pack_tag "decidim_editor"
+          # javascript_pack_tag "decidim_editor", defer: false
 
           custom_fields.translate!
           body = amendments_form_fields_value(original_resource, attribute)

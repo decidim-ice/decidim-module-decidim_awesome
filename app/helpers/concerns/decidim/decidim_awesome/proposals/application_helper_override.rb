@@ -12,7 +12,7 @@ module Decidim
 
           # If the content is safe, HTML tags are sanitized, otherwise, they are stripped.
           def render_proposal_body(proposal)
-            if awesome_proposal_custom_fields.present? || awesome_config[:allow_images_in_full_editor, :allow_images_in_small_editor,]
+            if awesome_proposal_custom_fields.present? || awesome_config[:allow_images_in_full_editor] || awesome_config[:allow_images_in_small_editor]
               content = present(proposal).body(links: true, strip_tags: false)
               sanitized = decidim_sanitize_editor_admin(content, {})
               Decidim::ContentProcessor.render_without_format(sanitized).html_safe
@@ -71,8 +71,8 @@ module Decidim
 
           def render_proposal_custom_fields_override(custom_fields, form, name, locale = nil)
             # ensure decidim_editor is available as it is only required if the original FormBuilder is called
-            append_stylesheet_pack_tag "decidim_editor"
-            append_javascript_pack_tag "decidim_editor", defer: false
+            # stylesheet_pack_tag "decidim_editor"
+            # javascript_pack_tag "decidim_editor", defer: false
 
             custom_fields.translate!
 

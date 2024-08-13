@@ -26,7 +26,7 @@ module Decidim
             {
               "private_data" => {
                 title: I18n.t("private_data", scope: "decidim.decidim_awesome.admin.menu.maintenance"),
-                icon: "spy-line",
+                icon: "lock-locked",
                 path: decidim_admin_decidim_awesome.maintenance_path("private_data")
               },
               "checks" => {

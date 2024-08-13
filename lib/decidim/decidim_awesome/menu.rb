@@ -86,14 +86,14 @@ module Decidim
                           I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.proposal_custom_fields"),
                           decidim_admin_decidim_awesome.config_path(:proposal_custom_fields),
                           position: 5.1,
-                          icon_name: "draft",
+                          icon_name: "lock-unlocked",
                           if: menus[:proposal_custom_fields]
 
             menu.add_item :proposal_private_custom_fields,
                           I18n.t("proposal_private_custom_fields", scope: "decidim.decidim_awesome.admin.proposal_custom_fields"),
                           decidim_admin_decidim_awesome.config_path(:proposal_private_custom_fields),
                           position: 5.2,
-                          icon_name: "spy",
+                          icon_name: "lock-locked",
                           if: menus[:proposal_private_custom_fields]
           end
         end
@@ -104,14 +104,14 @@ module Decidim
                           I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.menu_hacks.index"),
                           decidim_admin_decidim_awesome.menu_hacks_path(:menu),
                           position: 7.1,
-                          icon_name: "global-line",
+                          icon_name: "globe",
                           if: menus[:menu_hacks_menu]
 
             menu.add_item :content_block_main_menu,
                           I18n.t("home_content_block_menu.title", scope: "decidim.decidim_awesome.admin.menu_hacks.index"),
                           decidim_admin_decidim_awesome.menu_hacks_path(:home_content_block_menu),
                           position: 7.2,
-                          icon_name: "layout-masonry-line",
+                          icon_name: "grid-two-up",
                           if: menus[:menu_hacks_home_content_block_menu]
           end
         end
@@ -122,7 +122,7 @@ module Decidim
                           I18n.t("private_data", scope: "decidim.decidim_awesome.admin.menu.maintenance"),
                           decidim_admin_decidim_awesome.maintenance_path(:private_data),
                           position: 10,
-                          icon_name: "spy-line"
+                          icon_name: "lock-locked"
 
             menu.add_item :checks,
                           I18n.t("checks", scope: "decidim.decidim_awesome.admin.menu.maintenance"),

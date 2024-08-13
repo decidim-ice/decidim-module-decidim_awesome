@@ -28,11 +28,11 @@
               <span class="loading-spinner primary" title="<%= t(".removing") %>"></span>
             <% elsif item.destroyable? %>
               <%= link_to destroy_private_data_maintenance_path(:private_data, resource_id: item), method: :delete, class: "button button__primary button__xs tiny", data: { confirm: t(".confirm_delete") } do %>
-                <%= icon "delete-bin-line" %>
+                <%= icon "trash" %>
                 <%= t(".delete") %>
               <% end %>
             <% else %>
-              <span class="not-destroyable" title="<%= t(".not_destroyable") %>"><%= icon "forbid-line" %></span>
+              <span class="not-destroyable" title="<%= t(".not_destroyable") %>"><%= icon "ban" %></span>
             <% end %>
           </td>
         </tr>
