@@ -69,30 +69,12 @@ module Decidim
             safe_join [label_tabs, tabs_content]
           end
 
-
           def render_proposal_custom_fields_override(custom_fields, form, name, locale = nil)
             custom_fields.translate!
 
-            body = case name
-                   when :private_body
-                     if form_presenter.proposal.private_body.is_a?(Hash) && locale.present?
-                       form_presenter.private_body(extras: false, all_locales: locale.present?).with_indifferent_access[locale]
-                     else
-                       form_presenter.private_body(extras: false)
-                     end
-                   else
-                     if form_presenter.proposal.body.is_a?(Hash) && locale.present?
-                       form_presenter.body(extras: false, all_locales: locale.present?).with_indifferent_access[locale]
-                     else
-                       form_presenter.body(extras: false)
-                     end
-                   end
+            body = extract_body_content(name, locale)
+            apply_custom_fields(custom_fields, body, form, name)
 
-            custom_fields.apply_xml(body) if body.present?
-            form.object.errors.add(name, custom_fields.errors) if custom_fields.errors
-
-            custom_fields.apply_xml(body) if body.present?
-            form.object.errors.add(name, custom_fields.errors) if custom_fields.errors
             render partial: "decidim/decidim_awesome/custom_fields/form_render", locals: { spec: custom_fields.to_json, form: form, name: name }
           end
 
@@ -101,6 +83,40 @@ module Decidim
               Decidim::DecidimAwesome::CustomFields.new(awesome_proposal_private_custom_fields)
             else
               Decidim::DecidimAwesome::CustomFields.new(awesome_proposal_custom_fields)
+            end
+          end
+
+          private
+
+          def extract_body_content(name, locale)
+            case name
+            when :private_body
+              extract_private_body(locale)
+            else
+              extract_body(locale)
+            end
+          end
+
+          def extract_private_body(locale)
+            if form_presenter.proposal.private_body.is_a?(Hash) && locale.present?
+              form_presenter.private_body(extras: false, all_locales: locale.present?).with_indifferent_access[locale]
+            else
+              form_presenter.private_body(extras: false)
+            end
+          end
+
+          def extract_body(locale)
+            if form_presenter.proposal.body.is_a?(Hash) && locale.present?
+              form_presenter.body(extras: false, all_locales: locale.present?).with_indifferent_access[locale]
+            else
+              form_presenter.body(extras: false)
+            end
+          end
+
+          def apply_custom_fields(custom_fields, body, form, name)
+            if body.present?
+              custom_fields.apply_xml(body)
+              form.object.errors.add(name, custom_fields.errors) if custom_fields.errors
             end
           end
         end

@@ -195,9 +195,9 @@ module Decidim
           # register available processors
           Decidim::DecidimAwesome.voting_registry.register(:voting_cards) do |voting|
             voting.show_vote_button_view = "decidim/decidim_awesome/voting/voting_cards/show_vote_button"
-            # voting.show_votes_count_view = "decidim/decidim_awesome/voting/voting_cards/show_votes_count"
-            voting.show_votes_count_view = "" # hide votes count if not needed (in this case is integrated in the show_vote_button_view)
-            # voting.proposal_metadata_cell = "decidim/decidim_awesome/voting/proposal_metadata"
+            voting.show_votes_count_view = "decidim/decidim_awesome/voting/voting_cards/show_votes_count"
+            voting.show_votes_count_view = "" # hide votes count if needed
+            voting.proposal_m_cell_footer = "decidim/decidim_awesome/voting/voting_cards/proposal_m_cell_footer"
             voting.weight_validator do |weight, context|
               allowed = [1, 2, 3]
               allowed << 0 if context[:proposal]&.component&.settings&.voting_cards_show_abstain
