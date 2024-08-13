@@ -69,32 +69,31 @@ module Decidim
             safe_join [label_tabs, tabs_content]
           end
 
-          def render_proposal_custom_fields_override(custom_fields, form, name, locale = nil)
-            # ensure decidim_editor is available as it is only required if the original FormBuilder is called
-            # stylesheet_pack_tag "decidim_editor"
-            # javascript_pack_tag "decidim_editor", defer: false
 
+          def render_proposal_custom_fields_override(custom_fields, form, name, locale = nil)
             custom_fields.translate!
 
-            body = if name == :private_body
+            body = case name
+                   when :private_body
                      if form_presenter.proposal.private_body.is_a?(Hash) && locale.present?
                        form_presenter.private_body(extras: false, all_locales: locale.present?).with_indifferent_access[locale]
                      else
                        form_presenter.private_body(extras: false)
                      end
-                   elsif form_presenter.proposal.body.is_a?(Hash) && locale.present?
-                     form_presenter.body(extras: false, all_locales: locale.present?).with_indifferent_access[locale]
                    else
-                     form_presenter.body(extras: false)
+                     if form_presenter.proposal.body.is_a?(Hash) && locale.present?
+                       form_presenter.body(extras: false, all_locales: locale.present?).with_indifferent_access[locale]
+                     else
+                       form_presenter.body(extras: false)
+                     end
                    end
 
             custom_fields.apply_xml(body) if body.present?
             form.object.errors.add(name, custom_fields.errors) if custom_fields.errors
-            editor_image = Decidim::EditorImage.new
-            editor_options = form.send(:editor_options, editor_image, { context: "participant", lines: 10 })
-            editor_upload = form.send(:editor_upload, editor_image, editor_options[:upload])
-            render partial: "decidim/decidim_awesome/custom_fields/form_render",
-                   locals: { spec: custom_fields.to_json, editor_options: editor_options, editor_upload: editor_upload, form: form, name: name }
+
+            custom_fields.apply_xml(body) if body.present?
+            form.object.errors.add(name, custom_fields.errors) if custom_fields.errors
+            render partial: "decidim/decidim_awesome/custom_fields/form_render", locals: { spec: custom_fields.to_json, form: form, name: name }
           end
 
           def awesome_proposal_custom_fields_for(name)
