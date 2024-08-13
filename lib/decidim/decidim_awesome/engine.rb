@@ -99,10 +99,6 @@ module Decidim
 
       initializer "decidim_decidim_awesome.overrides", after: "decidim.action_controller" do
         config.to_prepare do
-          # Auto-insert some csp directives
-          Decidim::ApplicationController.include(Decidim::DecidimAwesome::ContentSecurityPolicy)
-          Decidim::Admin::ApplicationController.include(Decidim::DecidimAwesome::ContentSecurityPolicy)
-
           # redirect unauthorized scoped admins to allowed places or custom redirects if configured
           Decidim::ErrorsController.include(Decidim::DecidimAwesome::NotFoundRedirect) if DecidimAwesome.enabled?(:scoped_admins, :custom_redirects)
 

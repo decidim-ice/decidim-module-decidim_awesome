@@ -26,8 +26,6 @@ shared_examples "activated concerns" do |enabled|
   it "common concerns are registered" do
     expect(ActionView::Base.included_modules).to include(Decidim::DecidimAwesome::AwesomeHelpers)
     expect(Decidim::ViewModel.included_modules).to include(Decidim::DecidimAwesome::AwesomeHelpers)
-    expect(Decidim::ApplicationController.included_modules).to include(Decidim::DecidimAwesome::ContentSecurityPolicy)
-    expect(Decidim::Admin::ApplicationController.included_modules).to include(Decidim::DecidimAwesome::ContentSecurityPolicy)
   end
 
   if enabled
