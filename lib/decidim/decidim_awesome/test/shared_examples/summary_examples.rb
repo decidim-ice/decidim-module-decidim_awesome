@@ -43,10 +43,8 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::Proposals::ProposalVote.included_modules).to include(Decidim::DecidimAwesome::HasVoteWeight)
       expect(Decidim::Proposals::ProposalType.included_modules).to include(Decidim::DecidimAwesome::AddProposalTypeVoteWeights)
       expect(Decidim::Proposals::ProposalType.included_modules).to include(Decidim::DecidimAwesome::AddProposalTypeCustomFields)
-      expect(Decidim::Proposals::ProposalLCell.included_modules).to include(Decidim::DecidimAwesome::ProposalLCellOverride)
       expect(Decidim::Proposals::Proposal.included_modules).to include(Decidim::DecidimAwesome::HasProposalExtraFields)
       expect(Decidim::Proposals::CollaborativeDraft.included_modules).to include(Decidim::DecidimAwesome::HasProposalExtraFields)
-      expect(Decidim::ContentBlocks::GlobalMenuCell.included_modules).to include(Decidim::DecidimAwesome::GlobalMenuCellOverride)
       expect(Decidim::Proposals::ProposalSerializer.included_modules).to include(Decidim::DecidimAwesome::Proposals::ProposalSerializerOverride)
       expect(Decidim::Proposals::ProposalVotesController.included_modules).to include(Decidim::DecidimAwesome::Proposals::ProposalVotesControllerOverride)
       expect(Decidim::AmendmentsController.included_modules).to include(Decidim::DecidimAwesome::LimitPendingAmendments)
@@ -69,10 +67,8 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::Proposals::ProposalVote.included_modules).not_to include(Decidim::DecidimAwesome::HasVoteWeight)
       expect(Decidim::Proposals::ProposalType.included_modules).not_to include(Decidim::DecidimAwesome::AddProposalTypeVoteWeights)
       expect(Decidim::Proposals::ProposalType.included_modules).not_to include(Decidim::DecidimAwesome::AddProposalTypeCustomFields)
-      expect(Decidim::Proposals::ProposalLCell.included_modules).not_to include(Decidim::DecidimAwesome::ProposalLCellOverride)
       expect(Decidim::Proposals::Proposal.included_modules).not_to include(Decidim::DecidimAwesome::HasProposalExtraFields)
       expect(Decidim::Proposals::CollaborativeDraft.included_modules).not_to include(Decidim::DecidimAwesome::HasProposalExtraFields)
-      expect(Decidim::ContentBlocks::GlobalMenuCell.included_modules).not_to include(Decidim::DecidimAwesome::GlobalMenuCellOverride)
       expect(Decidim::Proposals::ProposalSerializer.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ProposalSerializerOverride)
       expect(Decidim::Proposals::ProposalVotesController.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ProposalVotesControllerOverride)
       expect(Decidim::AmendmentsController.included_modules).not_to include(Decidim::DecidimAwesome::LimitPendingAmendments)
@@ -152,9 +148,11 @@ shared_examples "basic rendering" do |enabled|
     let(:image_vars) do
       [
         :allow_images_in_proposals,
-        :allow_videos_in_editors,
-        :allow_images_in_full_editor,
         :allow_images_in_small_editor,
+        :allow_images_in_full_editor,
+        :allow_images_in_proposals,
+        :use_markdown_editor,
+        :allow_images_in_markdown_editor,
         :auto_save_forms,
         :intergram_for_admins,
         :intergram_for_public
@@ -167,7 +165,7 @@ shared_examples "basic rendering" do |enabled|
     end
 
     it "renders the home page" do
-      expect(page).to have_css(".home")
+      expect(page).to have_content("Home")
     end
 
     it "has DecidimAwesome object" do
@@ -187,7 +185,7 @@ shared_examples "basic rendering" do |enabled|
       end
 
       it "has custom fields javascript" do
-        expect(page).to have_xpath("//script[contains(@src,'decidim_decidim_awesome_custom_fields')]", visible: :all)
+        expect(page).to have_xpath("//script[contains(@src,'decidim_decidim_awesome_proposals_custom_fields')]", visible: :all)
       end
 
       it "has custom styles CSS" do
@@ -201,7 +199,7 @@ shared_examples "basic rendering" do |enabled|
       end
 
       it "do not have custom fields javascript" do
-        expect(page).not_to have_xpath("//script[contains(@src,'decidim_decidim_awesome_custom_fields')]", visible: :all)
+        expect(page).not_to have_xpath("//script[contains(@src,'decidim_decidim_awesome_proposals_custom_fields')]", visible: :all)
       end
 
       it "do not have custom styles CSS" do
@@ -261,7 +259,7 @@ shared_examples "basic rendering" do |enabled|
 
       it "has no admin menus" do
         menus.each do |menu|
-          within ".sidebar-menu" do
+          within ".secondary-nav" do
             expect(page).not_to have_link(href: "/admin/decidim_awesome/#{menu}")
           end
         end
