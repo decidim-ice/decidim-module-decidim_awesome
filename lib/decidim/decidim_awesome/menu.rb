@@ -51,7 +51,7 @@ module Decidim
 
             menu.add_item :menu_hacks,
                           I18n.t("menu.menu_hacks", scope: "decidim.decidim_awesome.admin"),
-                          decidim_admin_decidim_awesome.menu_hacks_path(menus[:menu_hacks_menu] ? :menu : :home_content_block_menu),
+                          decidim_admin_decidim_awesome.menu_hacks_path,
                           position: 7,
                           icon_name: "menu",
                           if: menus[:menu_hacks]

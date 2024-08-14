@@ -11,7 +11,7 @@ module Decidim
         delegate :menus, :config_enabled?, to: "Decidim::DecidimAwesome::Menu"
 
         def check(status)
-          content_tag(:span, icon(status ? "check" : "close", class: "inline-block", aria_label: status, role: "img"), class: "fill-#{status ? "success" : "alert"}")
+          content_tag(:span, icon(status ? "check" : "close", class: "inline-block", aria_label: status, role: "img"), class: "text-#{status ? "success" : "alert"}")
         end
 
         # returns only non :disabled vars in config

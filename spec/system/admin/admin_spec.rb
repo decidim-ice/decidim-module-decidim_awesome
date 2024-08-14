@@ -35,22 +35,20 @@ describe "Visit the admin page", type: :system do
 
   context "when visiting system compatibility" do
     before do
-      click_link_or_button "System Compatibility"
+      click_link "System Compatibility"
     end
 
     it "renders the page" do
       expect(page).to have_content(/System Compatibility Checks/i)
-      expect(page).not_to have_xpath("//span[@class='fill-alert']")
-      expect(page).to have_xpath("//span[@class='fill-success']")
+      expect(page).not_to have_xpath("//span[@class='text-alert']")
+      expect(page).to have_xpath("//span[@class='text-success']")
     end
 
     context "and header is overriden" do
       let(:version) { "0.11" }
 
       it "detects missing css" do
-        within ".decidim-version" do
-          expect(page).to have_xpath("//span[@class='fill-alert']", count: 1)
-        end
+        expect(page).to have_xpath("//span[@class='text-alert']", count: 1)
       end
     end
   end
@@ -58,7 +56,7 @@ describe "Visit the admin page", type: :system do
   context "when visiting editor hacks" do
     context "when editor hacks are enabled" do
       before do
-        click_link_or_button "Editor Hacks"
+        click_link "Editor Hacks"
       end
 
       it_behaves_like "has menu link", "editors"
@@ -70,7 +68,8 @@ describe "Visit the admin page", type: :system do
 
     context "when editor hacks are disabled" do
       let(:disabled_features) do
-        [:allow_images_in_full_editor, :allow_images_in_small_editor, :allow_videos_in_editors]
+        [:allow_images_in_full_editor, :allow_images_in_small_editor, :use_markdown_editor,
+         :allow_images_in_markdown_editor]
       end
 
       it_behaves_like "do not have menu link", "editors"
@@ -80,7 +79,7 @@ describe "Visit the admin page", type: :system do
   context "when visiting surveys hacks" do
     context "when survey hacks are enabled" do
       before do
-        click_link_or_button "Surveys & Forms"
+        click_link "Surveys & Forms"
       end
 
       it_behaves_like "has menu link", "surveys"
@@ -100,7 +99,7 @@ describe "Visit the admin page", type: :system do
   context "when visiting proposal hacks" do
     context "when proposal hacks are enabled" do
       before do
-        click_link_or_button "Proposals Hacks"
+        click_link "Proposals Hacks"
       end
 
       it_behaves_like "has menu link", "proposals"
@@ -108,6 +107,7 @@ describe "Visit the admin page", type: :system do
       it "renders the page" do
         expect(page).to have_content(/Tweaks for proposals/i)
         expect(page).to have_content("Customize sorting options for the proposals list")
+        expect(page).to have_content("\"Rich text editor for participants\" is enabled")
         expect(page).to have_content("User input validations for the \"title\" field")
         expect(page).to have_content("User input validations for the \"body\" field")
       end
@@ -166,7 +166,7 @@ describe "Visit the admin page", type: :system do
   context "when visiting live chat" do
     context "when livechat hacks are enabled" do
       before do
-        click_link_or_button "Live Chat"
+        click_link "Live Chat"
       end
 
       it_behaves_like "has menu link", "livechat"
@@ -186,7 +186,7 @@ describe "Visit the admin page", type: :system do
   context "when visiting CSS tweaks" do
     context "when scoped styles are enabled" do
       before do
-        click_link_or_button "Custom Styles"
+        click_link "Custom Styles"
       end
 
       it_behaves_like "has menu link", "styles"
@@ -205,21 +205,15 @@ describe "Visit the admin page", type: :system do
 
   context "when visiting Menu hacks" do
     context "when menu_hacks are enabled" do
-      let(:disabled_features) { [] }
-
       before do
-        click_link_or_button "Menu Tweaks"
+        click_link "Menu Tweaks"
       end
 
-      it_behaves_like "has menu link", "menus/home_content_block_menu/hacks" do
+      it_behaves_like "has menu link", "menu_hacks" do
         let(:prefix) { "" }
       end
 
-      it_behaves_like "has menu link", "menus/menu/hacks" do
-        let(:prefix) { "" }
-      end
-
-      it "renders the main menu page" do
+      it "renders the page" do
         expect(page).to have_content(/Main menu/i)
       end
     end
@@ -236,7 +230,7 @@ describe "Visit the admin page", type: :system do
   context "when visiting custom redirections" do
     context "when custom_redirections are enabled" do
       before do
-        click_link_or_button "Custom Redirections"
+        click_link "Custom Redirections"
       end
 
       it_behaves_like "has menu link", "custom_redirects" do
@@ -258,7 +252,7 @@ describe "Visit the admin page", type: :system do
   context "when visiting Scoped Admins" do
     context "when menu_hacks are enabled" do
       before do
-        click_link_or_button "Scoped Admins"
+        click_link "Scoped Admins"
       end
 
       it_behaves_like "has menu link", "admins"
