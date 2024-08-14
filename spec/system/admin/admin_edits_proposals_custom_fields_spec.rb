@@ -71,7 +71,6 @@ describe "Admin edits proposals", type: :system do
 
       within "#proposal-body-tabs" do
         click_link_or_button "Català"
-
         expect(page).to have_xpath("//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='Jo disparo al sheriff']")
       end
     end

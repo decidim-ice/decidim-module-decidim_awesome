@@ -21,7 +21,7 @@
       </div>
     <% end %>
     <% form.object.send(config_var)&.each do |key, value| %>
-      <div class="card p-4 proposal_custom_fields_container<%= " private" if priv %> js-box-container" data-key="<%= key %>" data-var="<%= config_var %>">
+      <div class="card proposal_custom_fields_container<%= " private" if priv %> js-box-container" data-key="<%= key %>" data-var="<%= config_var %>">
         <%= render("decidim/decidim_awesome/admin/config/autoedit_box_label", var: config_var, key: key, scope: "#{field}_#{key}", delete_path: decidim_admin_decidim_awesome.proposal_custom_field_path(key: key, private: priv)) %>
         <p class="form-error is-visible"><%= errors[key.to_sym].join("<br>") if errors %></p>
 

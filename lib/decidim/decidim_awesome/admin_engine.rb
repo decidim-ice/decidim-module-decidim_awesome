@@ -16,9 +16,7 @@ module Decidim
       routes do
         # Add admin engine routes here
         resources :constraints
-        resources :menus, only: [:show] do
-          resources :hacks, except: [:show], controller: "menu_hacks"
-        end
+        resources :menu_hacks, except: [:show]
         resources :custom_redirects, except: [:show]
         resources :config, param: :var, only: [:show, :update]
         resources :scoped_styles, param: :var, only: [:create, :destroy]
@@ -64,7 +62,6 @@ module Decidim
         end
         # submenus
         Decidim::DecidimAwesome::Menu.register_custom_fields_submenu!
-        Decidim::DecidimAwesome::Menu.register_menu_hacks_submenu!
         Decidim::DecidimAwesome::Menu.register_maintenance_admin_menu!
         Decidim::DecidimAwesome::Menu.register_awesome_admin_menu!
 

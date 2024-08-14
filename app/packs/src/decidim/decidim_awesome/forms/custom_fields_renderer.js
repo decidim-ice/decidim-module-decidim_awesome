@@ -57,13 +57,13 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
   dataToXML(data) {
     const $dl = $("<dl/>");
     let $dd = null,
-      $div = null,
-      $dt = null,
-      datum = null,
-      key = null,
-      label = null,
-      text = null,
-      val = null;
+        $div = null,
+        $dt = null,
+        datum = null,
+        key = null,
+        label = null,
+        text = null,
+        val = null;
     $dl.attr("class", "decidim_awesome-custom_fields");
     $dl.attr("data-generator", "decidim_awesome");
     $dl.attr("data-version", window.DecidimAwesome.version);

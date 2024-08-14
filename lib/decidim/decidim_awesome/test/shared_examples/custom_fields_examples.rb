@@ -81,11 +81,11 @@ shared_examples "adds a constraint" do
 
   it "adds a new config helper var" do
     within ".proposal_custom_fields_container[data-key=\"foo\"]" do
-      click_on "Add case"
+      click_button "Add case"
     end
 
     select "Processes", from: "constraint_participatory_space_manifest"
-    within "#new-modal-#{var_name}_foo" do
+    within ".modal-content" do
       click_on "Save"
     end
 

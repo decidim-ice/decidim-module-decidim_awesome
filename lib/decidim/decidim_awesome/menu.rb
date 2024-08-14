@@ -54,8 +54,7 @@ module Decidim
                           decidim_admin_decidim_awesome.menu_hacks_path(menus[:menu_hacks_menu] ? :menu : :home_content_block_menu),
                           position: 7,
                           icon_name: "menu",
-                          if: menus[:menu_hacks],
-                          submenu: { target_menu: :menu_hacks_submenu }
+                          if: menus[:menu_hacks]
 
             menu.add_item :custom_redirects,
                           I18n.t("menu.custom_redirects", scope: "decidim.decidim_awesome.admin"),
@@ -95,24 +94,6 @@ module Decidim
                           position: 5.2,
                           icon_name: "lock-locked",
                           if: menus[:proposal_private_custom_fields]
-          end
-        end
-
-        def register_menu_hacks_submenu!
-          Decidim.menu :menu_hacks_submenu do |menu|
-            menu.add_item :main_menu,
-                          I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.menu_hacks.index"),
-                          decidim_admin_decidim_awesome.menu_hacks_path(:menu),
-                          position: 7.1,
-                          icon_name: "globe",
-                          if: menus[:menu_hacks_menu]
-
-            menu.add_item :content_block_main_menu,
-                          I18n.t("home_content_block_menu.title", scope: "decidim.decidim_awesome.admin.menu_hacks.index"),
-                          decidim_admin_decidim_awesome.menu_hacks_path(:home_content_block_menu),
-                          position: 7.2,
-                          icon_name: "grid-two-up",
-                          if: menus[:menu_hacks_home_content_block_menu]
           end
         end
 
