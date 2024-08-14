@@ -27,21 +27,13 @@ module Decidim
         private
 
         def render_amendment_custom_fields_override(custom_fields, attribute, form, original_resource)
-          # ensure decidim_editor is available as it is only required if the original FormBuilder is called
-          # stylesheet_pack_tag "decidim_editor"
-          # javascript_pack_tag "decidim_editor", defer: false
-
           custom_fields.translate!
           body = amendments_form_fields_value(original_resource, attribute)
           custom_fields.apply_xml(body) if body.present?
           # TODO: find a way to add errors as form is not the parent form
           # form.object.errors.add(attribute, custom_fields.errors) if custom_fields.errors
 
-          editor_image = Decidim::EditorImage.new
-          editor_options = form.send(:editor_options, editor_image, { context: "participant", lines: 10 })
-          editor_upload = form.send(:editor_upload, editor_image, editor_options[:upload])
-          render partial: "decidim/decidim_awesome/custom_fields/form_render",
-                 locals: { spec: custom_fields.to_json, editor_options: editor_options, editor_upload: editor_upload, form: form, name: attribute }
+          render partial: "decidim/decidim_awesome/custom_fields/form_render", locals: { spec: custom_fields.to_json, form: form, name: attribute }
         end
 
         # Amendments don't use a URL specifying participatory space and component
