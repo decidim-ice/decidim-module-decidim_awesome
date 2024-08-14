@@ -27,7 +27,7 @@
 
         <%= hidden_field_tag key, value, name: "config[#{config_var}][#{key}]" %>
 
-        <div class="proposal_custom_fields_editor mt-4<%= " private" if priv %>">
+        <div class="proposal_custom_fields_editor <%= " private" if priv %>">
           <div class="loading-spinner"></div>
         </div>
 
@@ -41,3 +41,5 @@
     <% end %>
   <% end %>
 </div>
+
+<%= javascript_pack_tag "decidim_decidim_awesome_admin_form_exit_warn" %>

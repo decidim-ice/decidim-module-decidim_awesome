@@ -1,4 +1,4 @@
-require("formBuilder/dist/form-render.min.js")
+import "formBuilder/dist/form-render.min.js";
 import "src/decidim/decidim_awesome/forms/rich_text_plugin"
 
 export default class CustomFieldsRenderer { // eslint-disable-line no-unused-vars
@@ -57,13 +57,13 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
   dataToXML(data) {
     const $dl = $("<dl/>");
     let $dd = null,
-        $div = null,
-        $dt = null,
-        datum = null,
-        key = null,
-        label = null,
-        text = null,
-        val = null;
+      $div = null,
+      $dt = null,
+      datum = null,
+      key = null,
+      label = null,
+      text = null,
+      val = null;
     $dl.attr("class", "decidim_awesome-custom_fields");
     $dl.attr("data-generator", "decidim_awesome");
     $dl.attr("data-version", window.DecidimAwesome.version);
@@ -113,20 +113,19 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
         $dl.append($dd);
       }
     }
-    // console.log("dataToXML", $dl[0].outerHTML);
     return `<xml>${$dl[0].outerHTML}</xml>`;
   }
 
   fixBuggyFields() {
-    if (!this.$container) {
+    if (!this.$element) {
       return false;
     }
 
     /**
-    * Hack to fix required checkboxes being reset
-    * Issue: https://github.com/Platoniq/decidim-module-decidim_awesome/issues/82
-    */
-    this.$container.find(".formbuilder-checkbox-group").each((_key, group) => {
+     * Hack to fix required checkboxes being reset
+     * Issue: https://github.com/decidim-ice/decidim-module-decidim_awesome/issues/82
+     */
+    this.$element.find(".formbuilder-checkbox-group").each((_key, group) => {
       const inputs = $(".formbuilder-checkbox input", group);
       const $label = $(group).find("label");
       const data = this.spec.find((obj) => obj.type === "checkbox-group" && obj.name === $label.attr("for"));
@@ -165,10 +164,10 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
     });
 
     /**
-    * Hack to fix required radio buttons "other" value
-    * Issue: https://github.com/Platoniq/decidim-module-decidim_awesome/issues/133
-    */
-    this.$container.find(".formbuilder-radio input.other-val").on("input", (input) => {
+     * Hack to fix required radio buttons "other" value
+     * Issue: https://github.com/decidim-ice/decidim-module-decidim_awesome/issues/133
+     */
+    this.$element.find(".formbuilder-radio input.other-val").on("input", (input) => {
       const $input = $(input.currentTarget);
       const $group = $input.closest(".formbuilder-radio-group");
       $group.find("input").each((_key, radio) => {
@@ -183,13 +182,14 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
 
   // Saves xml to the hidden input
   storeData() {
-    if (!this.$container) {
+    if (!this.$element) {
       return false;
     }
-    const $form = this.$container.closest("form");
+    const $form = this.$element.closest("form");
     const $body = $form.find(`input[name="${this.$element.data("name")}"]`);
     if ($body.length && this.instance) {
       this.spec = this.instance.userData;
+      console.log("Spec data:", this.spec);
       $body.val(this.dataToXML(this.spec));
       this.$element.data("spec", this.spec);
     }
@@ -198,20 +198,27 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
   }
 
   init($element) {
+    console.log("CustomFieldsRenderer init");
     this.$element = $element;
+    console.log("Element for rendering:", $element);
+
     this.spec = $element.data("spec");
-    if (!this.$container) {
-      this.$container = $(this.containerSelector);
-    }
+    console.log("Spec data:", this.spec);
     // console.log("init", $element, "this", this)
-    // always use the last field (in case of multilang tabs we only render one form due a limitation of the library to handle several instances)
-    this.instance = this.$container.formRender({
+    // in case of multilang tabs we only render one form due a limitation in the library for handling several instances
+    this.instance = $element.formRender({
       i18n: {
         locale: this.lang,
         location: "https://cdn.jsdelivr.net/npm/formbuilder-languages@1.1.0/"
       },
       formData: this.spec,
-      render: true
+      render: true,
+      disableInjectedStyle: true,
+      controlConfig: {
+        "textarea.richtext": {
+          editorOptions: $element.data("editorOptions")
+        }
+      }
     });
     this.fixBuggyFields();
   }
