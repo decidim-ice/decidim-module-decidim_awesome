@@ -106,7 +106,7 @@ describe "Admin manages scoped admins", type: :system do
         end
 
         select "Processes", from: "constraint_participatory_space_manifest"
-        within "#new-modal-scoped_admin_foo" do
+        within ".modal-content" do
           find("*[type=submit]").click
         end
 

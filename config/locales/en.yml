@@ -645,9 +645,6 @@ en:
           za: Z-A (Reverse alphabetical)
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Decidim Tweaks
       decidim_awesome:
         admin:
           maintenance:
