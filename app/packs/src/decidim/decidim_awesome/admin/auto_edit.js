@@ -71,9 +71,9 @@ $(() => {
             attribute: attribute,
             text: $input.val()
           }
-        })
-          .done((result) => rebuildHmtl(result))
-          .fail((err) => {
+        }).
+          done((result) => rebuildHmtl(result)).
+          fail((err) => {
             console.error("Error saving key", key, "ERR:", err);
             rebuildLabel(key);
           });
