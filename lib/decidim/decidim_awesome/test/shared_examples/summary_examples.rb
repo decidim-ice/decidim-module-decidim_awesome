@@ -247,7 +247,7 @@ shared_examples "basic rendering" do |enabled|
 
       it "has all admin menus" do
         menus.each do |menu|
-          within ".sidebar-menu" do
+          within ".secondary-nav" do
             expect(page).to have_link(href: "/admin/decidim_awesome/#{menu}")
           end
         end

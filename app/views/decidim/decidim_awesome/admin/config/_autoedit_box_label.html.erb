@@ -5,7 +5,7 @@
 
     <%= icon_link_to "pencil", "#", t("edit_label", scope: "decidim.decidim_awesome.admin.config.form"), class: "awesome-auto-edit", data: { "scope" => "#{scope}" } %>
 
-    <%= link_to delete_path, method: :delete, class: "awesome-auto-delete", title: t("remove", scope: "decidim.decidim_awesome.admin.config.form_#{var}"), data: { confirm: t("sure_to_remove", scope: "decidim.decidim_awesome.admin.config.form_#{var}") } do %>
+    <%= link_to delete_path, method: :delete, class: "awesome-auto-delete float-right delete-box", title: t("remove", scope: "decidim.decidim_awesome.admin.config.form_#{var}"), data: { confirm: t("sure_to_remove", scope: "decidim.decidim_awesome.admin.config.form_#{var}") } do %>
         <%= icon "circle-x" %>
         <%= t("delete", scope: "decidim.decidim_awesome.admin.config.form_#{var}") %>
     <% end %>

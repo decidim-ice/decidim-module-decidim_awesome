@@ -217,7 +217,7 @@ en:
               Since version 0.25, Decidim uses a new technology to upload files.<br>
               It looks that this installation needs to migrate <strong>%{total}</strong> of the old images to the new system.<br>
               You can start the process now and it will be performed in the background.
-            start_image_migrations: "👉 Start the migration process now"
+            start_image_migrations: "\U0001F449 Start the migration process now"
             title: System compatibility checks
         config:
           caution: 'NOTE: This feature heavily modifies some default behaviors that
@@ -529,7 +529,7 @@ en:
           private_data_last_remove: This data was destroyed %{time_ago} ago.
           private_data_last_update: This data was last updated %{time_ago} ago.
           proposal_private_custom_fields: Private fields
-          remove_private_data: "👉 You might want to remove it"
+          remove_private_data: "\U0001F449 You might want to remove it"
       admin_log:
         component:
           destroy_private_data: "%{user_name} destroyed %{count} items of private
