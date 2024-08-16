@@ -76,7 +76,7 @@ module Decidim
           # add vote weight to proposal vote
           Decidim::Proposals::ProposalVote.include(Decidim::DecidimAwesome::HasVoteWeight)
           Decidim::Proposals::ProposalType.include(Decidim::DecidimAwesome::AddProposalTypeVoteWeights)
-          # Decidim::Proposals::ProposalLCell.include(Decidim::DecidimAwesome::ProposalLCellOverride)
+          Decidim::Proposals::ProposalMCell.include(Decidim::DecidimAwesome::ProposalMCellOverride)
         end
 
         # override user's admin property
