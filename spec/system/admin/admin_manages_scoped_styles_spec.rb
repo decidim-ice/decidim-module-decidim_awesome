@@ -113,7 +113,7 @@ describe "Admin manages scoped styles", type: :system do
         find("#new-scoped_style_foo").click
 
         select "Processes", from: "constraint_participatory_space_manifest"
-        within "#modal-content" do
+        within "#constraintsModal" do
           find("*[type=submit]").click
         end
 
