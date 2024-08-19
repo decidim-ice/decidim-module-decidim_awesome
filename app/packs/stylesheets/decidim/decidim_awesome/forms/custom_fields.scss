@@ -4,7 +4,7 @@
     margin-top: 2rem;
     border: 1px solid $medium-gray;
     border-radius: $global-radius;
-    background-color: $body-background;
+    background-color: $medium-gray;
     color: $black;
     font-weight: $global-weight-normal;
   }
@@ -49,28 +49,28 @@
 
     h3 {
       font-family: $body-font-family;
-      font-weight: $global-weight-semibold;
+      font-weight: $global-weight-bold;
       font-size: 1.75rem;
       margin-top: 1rem;
     }
 
     h4 {
       font-family: $body-font-family;
-      font-weight: $global-weight-semibold;
+      font-weight: $global-weight-bold;
       font-size: 1.5rem;
       margin-top: 1rem;
     }
 
     h5 {
       font-family: $body-font-family;
-      font-weight: $global-weight-semibold;
+      font-weight: $global-weight-bold;
       font-size: 1.125rem;
       margin-top: 1rem;
     }
 
     h6 {
       font-family: $body-font-family;
-      font-weight: $global-weight-semibold;
+      font-weight: $global-weight-bold;
       font-size: 1rem;
       margin-top: 1rem;
     }
@@ -80,6 +80,9 @@
     }
 
     label {
+      font-size: 1rem;
+      font-weight: $global-weight-bold;
+
       .tooltip-element {
         margin: 0;
         padding: 0;
