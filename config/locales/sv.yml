@@ -1,4 +1,3 @@
----
 sv:
   activemodel:
     attributes:
@@ -84,7 +83,6 @@ sv:
           title:
             admins: Begränsade administratörer
             editors: Editor hacks
-            livechat: Live Chat
             proposals: Proposals hacks
             styles: Custom styles
             surveys: Surveys & forms
