@@ -4,7 +4,7 @@ require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/config_examples"
 
 describe "Visit the admin page", type: :system do
-  let(:organization) { create :organization, rich_text_editor_in_public_views: rte_enabled }
+  let(:organization) { create(:organization, rich_text_editor_in_public_views: rte_enabled) }
   let!(:admin) { create(:user, :admin, :confirmed, organization: organization) }
   let(:rte_enabled) { true }
   let(:disabled_features) { [] }
@@ -16,11 +16,13 @@ describe "Visit the admin page", type: :system do
     disabled_features.each do |feature|
       allow(Decidim::DecidimAwesome.config).to receive(feature).and_return(:disabled)
     end
-
+    Decidim::MenuRegistry.destroy(:awesome_admin_menu)
+    Decidim::DecidimAwesome::Menu.instance_variable_set(:@menus, nil)
+    Decidim::DecidimAwesome::Menu.register_awesome_admin_menu!
     switch_to_host(organization.host)
     login_as admin, scope: :user
     visit decidim_admin.root_path
-    click_link "Decidim awesome"
+    click_link_or_button "Decidim awesome"
   end
 
   it_behaves_like "javascript config vars"
@@ -60,7 +62,7 @@ describe "Visit the admin page", type: :system do
       it_behaves_like "has menu link", "editors"
 
       it "renders the page" do
-        expect(page).to have_content(/Tweaks for editors/i)
+        expect(page).to have_content(/Tweaks for Editor Hacks/i)
       end
     end
 
@@ -170,7 +172,7 @@ describe "Visit the admin page", type: :system do
       it_behaves_like "has menu link", "livechat"
 
       it "renders the page" do
-        expect(page).to have_content(/Tweaks for livechat/i)
+        expect(page).to have_content(/Tweaks for Live Chat/i)
       end
     end
 
@@ -190,7 +192,7 @@ describe "Visit the admin page", type: :system do
       it_behaves_like "has menu link", "styles"
 
       it "renders the page" do
-        expect(page).to have_content(/Tweaks for styles/i)
+        expect(page).to have_content(/Tweaks for Custom Styles/i)
       end
     end
 
@@ -256,7 +258,7 @@ describe "Visit the admin page", type: :system do
       it_behaves_like "has menu link", "admins"
 
       it "renders the page" do
-        expect(page).to have_content(/Tweaks for admins/i)
+        expect(page).to have_content(/Tweaks for Scoped Admins/i)
       end
     end
 
@@ -270,13 +272,13 @@ describe "Visit the admin page", type: :system do
   context "when visiting proposal custom fields" do
     context "when custom fields are enabled" do
       before do
-        click_link "Proposals Custom Fields"
+        click_link_or_button "Proposals Custom Fields"
       end
 
       it_behaves_like "has menu link", "proposal_custom_fields"
 
       it "renders the page" do
-        expect(page).to have_content(/Tweaks for proposal_custom_fields/i)
+        expect(page).to have_content(/Tweaks for Proposals Custom Fields: Public fields/i)
       end
     end
 
@@ -286,6 +288,28 @@ describe "Visit the admin page", type: :system do
       end
 
       it_behaves_like "do not have menu link", "proposal_custom_fields"
+    end
+  end
+
+  context "when visiting private proposal custom fields" do
+    context "when private custom fields are enabled" do
+      before do
+        click_link_or_button "Private fields"
+      end
+
+      it_behaves_like "has menu link", "proposal_private_custom_fields"
+
+      it "renders the page" do
+        expect(page).to have_content(/Tweaks for Proposals Custom Fields: Private fields/i)
+      end
+    end
+
+    context "when private custom fields are disabled" do
+      let(:disabled_features) do
+        [:proposal_private_custom_fields]
+      end
+
+      it_behaves_like "do not have menu link", "proposal_private_custom_fields"
     end
   end
 end

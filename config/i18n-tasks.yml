@@ -11,10 +11,29 @@ data:
     - "<%= %x[bundle info decidim-meetings --path].chomp %>/config/locales/%{locale}.yml"
 
 ignore_unused:
+  - "decidim.admin.actions.manage"
+  - "decidim.admin.filters.admin_accountability.*"
+  - "decidim.admin.filters.search_placeholder.*"
+  - "activemodel.attributes.constraint.*"
+  - "activemodel.attributes.custom_redirect.*"
   - "decidim.components.decidim_awesome.name"
+  - "decidim.components.awesome_iframe.settings.*"
+  - "decidim.components.awesome_map.settings.*"
+  - "decidim.components.proposals.settings.global.*"
+  - "decidim.components.proposals.settings.step.*"
+  - "decidim.decidim_awesome.admin.config.*"
+  - "decidim.decidim_awesome.admin.admin_accountability.*"
+  - "decidim.decidim_awesome.admin.menu.*"
+  - "decidim.decidim_awesome.admin.menu_hacks.*"
+  - "decidim.decidim_awesome.admin.proposal_custom_fields.*"
+  - "decidim.decidim_awesome.custom_fields.*"
+  - "decidim.decidim_awesome.map_component.map.show.*"
+  - "decidim.decidim_awesome.voting.voting_cards.*"
+  - "decidim.decidim_awesome.content_blocks.*"
+  - "decidim.decidim_awesome.admin_log.*"
+  - "layouts.decidim.decidim_awesome.admin.maintenance.titles.*"
+  - "decidim.proposals.*"
+  - "decidim.meetings.*"
 
 ignore_missing:
   - decidim.participatory_processes.scopes.global
-  # TODO: remove when diching support for 0.26
-  - decidim.proposals.collaborative_drafts.new.add_file
-  - decidim.proposals.collaborative_drafts.new.edit_file

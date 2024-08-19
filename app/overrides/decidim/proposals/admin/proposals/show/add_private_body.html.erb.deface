@@ -1,0 +1,7 @@
+<!-- replace "erb[loud]:contains('simple_format(present(proposal).body(strip_tags: true))')" -->
+
+<% if awesome_proposal_custom_fields.blank? %>
+  <%= simple_format(present(proposal).body(strip_tags: true)) %>
+<% else %>
+  <%= render_proposal_body(proposal) %>
+<% end %>

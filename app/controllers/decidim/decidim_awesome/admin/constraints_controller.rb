@@ -10,7 +10,7 @@ module Decidim
 
         layout false
         before_action do
-          enforce_permission_to :edit_config, constraint_key
+          render plain: "no permissions for #{constraint_key}" unless allowed_to? :edit_config, constraint_key
         end
 
         def new
@@ -131,6 +131,8 @@ module Decidim
             :scoped_admins
           when /^proposal_custom_field_/
             :proposal_custom_fields
+          when /^proposal_private_custom_field_/
+            :proposal_private_custom_fields
           else
             key
           end

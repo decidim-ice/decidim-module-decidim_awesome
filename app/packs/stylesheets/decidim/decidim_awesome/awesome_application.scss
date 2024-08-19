@@ -2,16 +2,17 @@
 @import "stylesheets/decidim/decidim_awesome/editors/markdown_editor";
 @import "stylesheets/decidim/decidim_awesome/editors/quill_editor";
 @import "stylesheets/decidim/decidim_awesome/forms/autosave";
+@import "stylesheets/decidim/decidim_awesome/forms/custom_fields";
 @import "stylesheets/decidim/decidim_awesome/voting/voting_cards";
 
 .decidim_awesome-custom_fields {
   dd {
-    >div:last-child {
+    > div:last-child {
       margin-bottom: 1rem;
     }
 
     &[name="textarea"] {
-      >div > p {
+      > div > p {
         margin-top: 1rem;
         margin-bottom: 0;
       }

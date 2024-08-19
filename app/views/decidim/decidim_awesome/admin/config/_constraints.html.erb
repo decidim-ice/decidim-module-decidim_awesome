@@ -5,23 +5,31 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-
-  <h5><%= t ".title" %></h5>
+  <h5 class="mb-2"><%= t ".title" %></h5>
   <% if constraints.blank? %>
     <span class="label warning"><%= t ".always" %></span>
   <% end %>
 
-  <ul class="constraints-list<%= " inactive" if constraints&.detect{|c| c.settings["participatory_space_manifest"]=="none" } %>">
+  <ul class="constraints-list<%= " inactive" if constraints.detect { |c| c.settings["participatory_space_manifest"] == "none" } %> <%= "no-items" if constraints.blank? || constraints.all? { |c| c.settings.none? { |k, val| val.present? } } %>">
     <% constraints&.each do |constraint| %>
+      <% if constraint.settings.any? { |k, val| val.present? } %>
         <li>
-            <% constraint.settings.reverse_each do |k, val| %>
+          <% constraint.settings.reverse_each do |k, val| %>
+            <% if val.present? %>
               <span class="label <%= k %> constraint-<%= val %>"><%= translate_constraint_value constraint, k %></span>
             <% end %>
-          <a href="<%= constraint_path(id: constraint.id, key: key) %>" class="edit-condition"><%= t ".edit" %></a>
-          <%= link_to t(".delete"), constraint_path(id: constraint.id), remote: true, method: :delete %>
+          <% end %>
+          <button id="<%= "edit-#{key}-#{constraint.id}" %>" type="button" name="button" class="edit-condition" data-dialog-open="<%= "edit-modal-#{key}" %>" data-constraints-url="<%= constraint_path(id: constraint.id, key: key) %>">
+            <%= t ".edit" %>
+          </button>
+
+          <%= link_to t(".delete"), constraint_path(id: constraint.id), remote: true, method: :delete, class: "delete-condition" %>
         </li>
       <% end %>
+    <% end %>
   </ul>
-  <a href="<%= new_constraint_path(key: key) %>" class="add-condition" data-open="constraintsModal"><%= t ".add_condition" %></a>
-
+  <button id="<%= "new-#{key}" %>" type="button" name="button" class="add-condition button small button__secondary" data-open="constraintsModal" data-constraints-url="<%= new_constraint_path(key: key) %>">
+    <%= icon "plus", class: "small" %>
+    <%= t ".add_condition" %>
+  </button>
 </div>

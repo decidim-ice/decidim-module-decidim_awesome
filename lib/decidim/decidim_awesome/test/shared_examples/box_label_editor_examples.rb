@@ -92,7 +92,7 @@ shared_examples "edits box label inline" do |test_case, key|
 
     case test_case
     when :css
-      sleep 1
+      sleep 2
       page.execute_script('document.querySelector("[data-key=a_new_label] .CodeMirror").CodeMirror.setValue("body {background: lilac;}");')
       find("*[type=submit]").click
       expect(page).to have_admin_callout("updated successfully")

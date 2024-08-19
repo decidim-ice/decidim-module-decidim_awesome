@@ -25,28 +25,102 @@ end
 shared_examples "activated concerns" do |enabled|
   it "common concerns are registered" do
     expect(ActionView::Base.included_modules).to include(Decidim::DecidimAwesome::AwesomeHelpers)
-    expect(Decidim::MenuPresenter.included_modules).to include(Decidim::DecidimAwesome::MenuPresenterOverride)
-    expect(Decidim::MenuItemPresenter.included_modules).to include(Decidim::DecidimAwesome::MenuItemPresenterOverride)
+    expect(Decidim::ViewModel.included_modules).to include(Decidim::DecidimAwesome::AwesomeHelpers)
   end
 
   if enabled
     it "concerns are registered" do
       expect(Decidim::User.included_modules).to include(Decidim::DecidimAwesome::UserOverride)
+      expect(Decidim::MenuPresenter.included_modules).to include(Decidim::DecidimAwesome::MenuPresenterOverride)
+      expect(Decidim::MenuItemPresenter.included_modules).to include(Decidim::DecidimAwesome::MenuItemPresenterOverride)
       expect(Decidim::ErrorsController.included_modules).to include(Decidim::DecidimAwesome::NotFoundRedirect)
       expect(Decidim::Proposals::ApplicationHelper.included_modules).to include(Decidim::DecidimAwesome::Proposals::ApplicationHelperOverride)
       expect(Decidim::Proposals::ProposalWizardCreateStepForm.included_modules).to include(Decidim::DecidimAwesome::Proposals::ProposalWizardCreateStepFormOverride)
+      expect(Decidim::Proposals::ProposalWizardCreateStepForm.included_modules).to include(Decidim::DecidimAwesome::Proposals::ProposalFormOverride)
+      expect(Decidim::Proposals::Admin::ProposalForm.included_modules).to include(Decidim::DecidimAwesome::Proposals::ProposalFormOverride)
       expect(Decidim::AmendmentsHelper.included_modules).to include(Decidim::DecidimAwesome::AmendmentsHelperOverride)
       expect(EtiquetteValidator.included_modules).to include(Decidim::DecidimAwesome::EtiquetteValidatorOverride)
+      expect(Decidim::Proposals::ProposalVote.included_modules).to include(Decidim::DecidimAwesome::HasVoteWeight)
+      expect(Decidim::Proposals::ProposalType.included_modules).to include(Decidim::DecidimAwesome::AddProposalTypeVoteWeights)
+      expect(Decidim::Proposals::ProposalType.included_modules).to include(Decidim::DecidimAwesome::AddProposalTypeCustomFields)
+      expect(Decidim::Proposals::Proposal.included_modules).to include(Decidim::DecidimAwesome::HasProposalExtraFields)
+      expect(Decidim::Proposals::CollaborativeDraft.included_modules).to include(Decidim::DecidimAwesome::HasProposalExtraFields)
+      expect(Decidim::Proposals::ProposalSerializer.included_modules).to include(Decidim::DecidimAwesome::Proposals::ProposalSerializerOverride)
+      expect(Decidim::Proposals::ProposalVotesController.included_modules).to include(Decidim::DecidimAwesome::Proposals::ProposalVotesControllerOverride)
+      expect(Decidim::AmendmentsController.included_modules).to include(Decidim::DecidimAwesome::LimitPendingAmendments)
+      expect(Decidim::Proposals::ProposalsController.included_modules).to include(Decidim::DecidimAwesome::Proposals::OrderableOverride)
+      expect(Decidim::AdminLog::ComponentPresenter.included_modules).to include(Decidim::DecidimAwesome::AdminLog::ComponentPresenterOverride)
     end
+
   else
     it "concerns are not registered" do
       expect(Decidim::User.included_modules).not_to include(Decidim::DecidimAwesome::UserOverride)
+      expect(Decidim::MenuPresenter.included_modules).not_to include(Decidim::DecidimAwesome::MenuPresenterOverride)
+      expect(Decidim::MenuItemPresenter.included_modules).not_to include(Decidim::DecidimAwesome::MenuItemPresenterOverride)
       expect(Decidim::ErrorsController.included_modules).not_to include(Decidim::DecidimAwesome::NotFoundRedirect)
       expect(Decidim::Proposals::ApplicationHelper.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ApplicationHelperOverride)
       expect(Decidim::Proposals::ProposalWizardCreateStepForm.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ProposalWizardCreateStepFormOverride)
+      expect(Decidim::Proposals::ProposalWizardCreateStepForm.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ProposalFormOverride)
+      expect(Decidim::Proposals::Admin::ProposalForm.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ProposalFormOverride)
       expect(Decidim::AmendmentsHelper.included_modules).not_to include(Decidim::DecidimAwesome::AmendmentsHelperOverride)
       expect(EtiquetteValidator.included_modules).not_to include(Decidim::DecidimAwesome::EtiquetteValidatorOverride)
+      expect(Decidim::Proposals::ProposalVote.included_modules).not_to include(Decidim::DecidimAwesome::HasVoteWeight)
+      expect(Decidim::Proposals::ProposalType.included_modules).not_to include(Decidim::DecidimAwesome::AddProposalTypeVoteWeights)
+      expect(Decidim::Proposals::ProposalType.included_modules).not_to include(Decidim::DecidimAwesome::AddProposalTypeCustomFields)
+      expect(Decidim::Proposals::Proposal.included_modules).not_to include(Decidim::DecidimAwesome::HasProposalExtraFields)
+      expect(Decidim::Proposals::CollaborativeDraft.included_modules).not_to include(Decidim::DecidimAwesome::HasProposalExtraFields)
+      expect(Decidim::Proposals::ProposalSerializer.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ProposalSerializerOverride)
+      expect(Decidim::Proposals::ProposalVotesController.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ProposalVotesControllerOverride)
+      expect(Decidim::AmendmentsController.included_modules).not_to include(Decidim::DecidimAwesome::LimitPendingAmendments)
+      expect(Decidim::Proposals::ProposalsController.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::OrderableOverride)
+      expect(Decidim::AdminLog::ComponentPresenter.included_modules).not_to include(Decidim::DecidimAwesome::AdminLog::ComponentPresenterOverride)
     end
+  end
+end
+
+shared_examples "csp directives" do |enabled|
+  let(:organization) { create(:organization) }
+  let(:fonts) { controller.content_security_policy.send(:policy)["font-src"] }
+  let(:scripts) { controller.content_security_policy.send(:policy)["script-src"] }
+  let(:frames) { controller.content_security_policy.send(:policy)["frame-src"] }
+
+  shared_examples "controller directives" do
+    if enabled
+      it "has CSP directives" do
+        get :show do
+          expect(fonts).to eq(["'self'", "data:"])
+          expect(scripts).to eq(["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://www.intergram.xyz"])
+          expect(frames).to eq(["'self'", "www.youtube-nocookie.com", "player.vimeo.com", "https://www.intergram.xyz"])
+        end
+      end
+    else
+      it "has no CSP directives" do
+        get :show do
+          expect(fonts).to eq(["'self'"])
+          expect(scripts).to eq(["'self'", "'unsafe-inline'", "'unsafe-eval'"])
+          expect(frames).to eq(["'self'", "www.youtube-nocookie.com", "player.vimeo.com"])
+        end
+      end
+    end
+  end
+
+  describe Decidim::HomepageController, type: :controller do
+    routes { Decidim::Core::Engine.routes }
+    before do
+      request.env["decidim.current_organization"] = user.organization
+    end
+
+    it_behaves_like "controller directives"
+  end
+
+  describe Decidim::Admin::DashboardController, type: :controller do
+    routes { Decidim::Admin::Engine.routes }
+
+    before do
+      request.env["decidim.current_organization"] = user.organization
+    end
+
+    it_behaves_like "controller directives"
   end
 end
 
@@ -167,11 +241,7 @@ shared_examples "basic rendering" do |enabled|
 
     if enabled
       it "renders the editors page" do
-        expect(page).to have_content("Tweaks for editors")
-      end
-
-      it "has custom fields javascript" do
-        expect(page).to have_xpath("//script[contains(@src,'decidim_admin_decidim_awesome_custom_fields')]", visible: :all)
+        expect(page).to have_content("Tweaks for Editor Hacks")
       end
 
       it "has all admin menus" do
@@ -183,11 +253,7 @@ shared_examples "basic rendering" do |enabled|
       end
     else
       it "renders the compatibility checks page" do
-        expect(page).to have_content("System compatibility checks")
-      end
-
-      it "do not have custom fields javascript" do
-        expect(page).not_to have_xpath("//script[contains(@src,'decidim_admin_decidim_awesome_custom_fields')]", visible: :all)
+        expect(page).to have_content("Maintenance tools: System Compatibility Checks")
       end
 
       it "has no admin menus" do

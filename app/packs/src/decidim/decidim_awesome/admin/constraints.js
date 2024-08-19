@@ -7,7 +7,7 @@ $(() => {
   $(".decidim_awesome-form").on("click", ".constraints-editor .add-condition,.constraints-editor .edit-condition", (evt) => {
     evt.preventDefault();
     const $this = $(evt.target)
-    const url = $this.attr("href");
+    const url = $this.attr("href") || $this.data("constraints-url");
     const $callout = $this.closest(".constraints-editor").find(".callout");
     $callout.hide();
     $callout.removeClass("alert success");

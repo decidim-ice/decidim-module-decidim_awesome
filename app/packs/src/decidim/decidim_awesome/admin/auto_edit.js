@@ -15,7 +15,7 @@ $(() => {
     const attribute = $target.data("var");
     const $hidden = $(`[name="config[${attribute}][${key}]"]`);
     const $multiple = $(`[name="config[${attribute}][${key}][]"]`);
-    const $container = $(`.${attribute}_container[data-key="${key}"]`);
+    const $container = $(`.js-box-container[data-key="${key}"]`);
     const $delete = $(".delete-box", $container);
 
     const rebuildLabel = (text, withScope) => {
@@ -34,12 +34,14 @@ $(() => {
     const rebuildHmtl = (result) => {
       rebuildLabel(result.key, result.scope);
       $constraints.replaceWith(result.html);
-      // update hidden input if exists
       $hidden.attr("name", `config[${attribute}][${result.key}]`);
       $multiple.attr("name", `config[${attribute}][${result.key}][]`);
       $container.data("key", result.key);
       $container.attr("data-key", result.key);
-      $delete.attr("href", $delete.attr("href").replace(`key=${key}`, `key=${result.key}`))
+      if ($delete.length > 0) {
+        $delete.attr("href", $delete.attr("href").replace(`key=${key}`, `key=${result.key}`));
+      }
+
       CustomFieldsBuilders.forEach((builder) => {
         if (builder.key === key) {
           builder.key = result.key;

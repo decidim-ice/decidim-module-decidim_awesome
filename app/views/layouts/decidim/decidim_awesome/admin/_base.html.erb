@@ -1,0 +1,21 @@
+<% content_for :sidebar_menu_nav do %>
+  <%= sidebar_menu(:awesome_admin_menu).render %>
+<% end %>
+
+<%= stylesheet_pack_tag "decidim_admin_decidim_awesome", media: "all" %>
+<%= javascript_pack_tag "decidim_admin_decidim_awesome", defer: true %>
+
+<%= render "layouts/decidim/admin/application" do %>
+  <div class="process-title">
+    <div class="process-title-content">
+      <%= link_to t("decidim.admin.menu.decidim_awesome"), decidim_admin_decidim_awesome.config_path(:editors), target: "_blank" %>
+    </div>
+  </div>
+
+  <%= yield %>
+
+  <div class="pokecode-credits"><%= t("credits", scope: "decidim.decidim_awesome", version: link_to(awesome_version, "https://github.com/decidim-ice/decidim-module-decidim_awesome/"), company: link_to("PokeCode", "https://pokecode.net")).html_safe %></div>
+
+<% end %>
+
+<%= render partial: "layouts/decidim/decidim_awesome/awesome_config" %>

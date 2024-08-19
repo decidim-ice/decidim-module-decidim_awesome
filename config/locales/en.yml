@@ -24,6 +24,7 @@ en:
         intergram_use_floating_button: If checked, the closed chat is always a button
           instead of a text
         proposal_custom_fields: Custom fields %{id}
+        proposal_private_custom_fields: Private Custom fields %{id}
         scoped_admins: Scoped admins group %{id}
         scoped_styles: Custom styles %{id}
         use_markdown_editor: Use a Markdown editor instead of the HTML editor
@@ -56,8 +57,6 @@ en:
         target: Opens in
         url: URL
         visibility: Visibility
-      proposal:
-        proposal_custom_fields: Custom fields
   decidim:
     admin:
       filters:
@@ -155,6 +154,7 @@ en:
               za: Z-A (Reverse alphabetical)
     decidim_awesome:
       admin:
+        actions: Actions
         admin_accountability:
           admin_roles:
             admin: Super admin
@@ -220,7 +220,7 @@ en:
             start_image_migrations: "\U0001F449 Start the migration process now"
             title: System compatibility checks
         config:
-          caution: 'NOTE: This feature heavily modifies some default behaviours that
+          caution: 'NOTE: This feature heavily modifies some default behaviors that
             might lead to unexpected results. Use it with caution!'
           constraints:
             add_condition: Add case
@@ -300,6 +300,13 @@ en:
                 instead of \"Address\"\nOr use your own keys in combination with other
                 tools to define translations (eg: using the module Term Customizer):\n
                 - \"myapp.custom_fields.bio\" instead of \"Biography\""
+              proposal_private_custom_fields: Similar as public fields, but this information
+                won't be disclosed publicly (only admins will have access to it).
+              proposal_private_custom_fields_translations: |
+                Private custom fields are displayed in distinct box with this information text:
+                %{warning}
+                This text can be customized with a custom translation by using the key:
+                %{key}
               scoped_admins: Promote regular user to admins that can only administrate
                 certain parts of the public web (use the restrictions editor for that).
                 Note that users who already have regular admin permissions will be
@@ -329,15 +336,23 @@ en:
               body: User input validations for the "body" field
               title: User input validations for the "title" field
           form_proposal_custom_fields:
+            delete: Delete
             new: Add a new "custom fields" box
             remove: Remove this "custom fields" box
             sure_to_remove: Are you sure you want to destroy this fields box?
+          form_proposal_private_custom_fields:
+            delete: Delete
+            new: Add a new "private custom fields" box
+            remove: Remove this "private custom fields" box
+            sure_to_remove: Are you sure you want to destroy this private fields box?
           form_scoped_admins:
+            delete: Delete
             new: Add a new "Scoped Admins" group
             remove: Remove this "Scoped Admins" group
             sure_to_remove: Are you sure you want to destroy this "Scoped Admins"
               group?
           form_scoped_styles:
+            delete: Delete
             new: Add a new CSS box
             remove: Remove this CSS box
             sure_to_remove: Are you sure you want to destroy this CSS box?
@@ -350,6 +365,15 @@ en:
             title: Tweaks for %{setting}
             update: Update configuration
           system: Everywhere except participatory spaces
+          title:
+            admins: Scoped Admins
+            editors: Editor Hacks
+            livechat: Live Chat
+            proposal_custom_fields: 'Proposals Custom Fields: Public fields'
+            proposal_private_custom_fields: 'Proposals Custom Fields: Private fields'
+            proposals: Proposals Hacks
+            styles: Custom Styles
+            surveys: Surveys & Forms
           update:
             error: Error updating configuration! %{error}
             success: Configuration updated successfully
@@ -410,12 +434,48 @@ en:
           update:
             error: Error updating redirection! %{error}
             success: Redirection updated successfully
+        maintenance:
+          private_data:
+            component: Space / Component
+            confirm_delete: Are you sure you want to delete all private data for this
+              resource? This cannot be undone.
+            delete: Delete all
+            destroying_private_data: Private data for %{title} is set to be destroyed.
+              Please check again in a few minutes.
+            done: Done
+            help_html: |
+              This tool allows you to delete all private data for a specific participatory space or component. This action is irreversible and will remove all private data from the database.
+              <br><br>
+              <strong>What is considered private data?</strong>
+              <br>
+              Private data is any information that is not publicly available and is only accessible to administrators. This, at the moment, includes private custom fields information.
+              <br><br>
+              <strong>What happens when I delete private data?</strong>
+              <br>
+              When you delete private data, all private information for the selected participatory space or component will be permanently removed from the database. A log of this action will be stored in the system for auditing purposes.
+              <br><br>
+              <strong>What happens to public data?</strong>
+              <br>
+              Public data will not be affected by this action. Only private data will be deleted.
+              <br><br>
+              <strong>Is there a minimum time to wait before deleting private data?</strong>
+              <br>
+              Yes, you cannot delete private data if the last update was less than %{time_ago} ago. You can change this configuration in the initializer file.
+            items_count: Total affected
+            last_date: Last update
+            no_data: No private data found older than %{time_ago} ago
+            not_destroyable: This resource cannot be destroyed yet
+            removing: Removing...
+            time_ago: "%{time} ago"
         menu:
           admins: Scoped Admins
-          checks: System Compatibility
           custom_redirects: Custom Redirections
           editors: Editor Hacks
           livechat: Live Chat
+          maintenance:
+            checks: System Compatibility
+            maintenance: Maintenance
+            private_data: Private data
           menu_hacks: Menu Tweaks
           proposal_custom_fields: Proposals Custom Fields
           proposals: Proposals Hacks
@@ -446,6 +506,10 @@ en:
           index:
             confirm_destroy: Are you sure to remove this customization?
             edit: Edit
+            home_content_block_menu:
+              title: Global menu home block
+            menu:
+              title: Main menu
             new: New item
             remove: Remove addition
             remove_hack: Remove customization
@@ -458,6 +522,18 @@ en:
             success: Menu item updated successfully
           url_exists: The same URL is already configured, please edit that instead
             of creating it again.
+        proposal_custom_fields:
+          menu:
+            title: Public fields
+          private_body: Private body
+          private_data_last_remove: This data was destroyed %{time_ago} ago.
+          private_data_last_update: This data was last updated %{time_ago} ago.
+          proposal_private_custom_fields: Private fields
+          remove_private_data: "\U0001F449 You might want to remove it"
+      admin_log:
+        component:
+          destroy_private_data: "%{user_name} destroyed %{count} items of private
+            data for %{resource_name} in %{space_name}"
       amendments:
         modal:
           current_amendment_html: <p>You can <a href="%{amendment_link}">access the
@@ -528,6 +604,7 @@ en:
           show:
             view_meeting: View meeting
             view_proposal: View proposal
+      proposal_private_custom_fields_disclosure: This information won't be published
       validators:
         too_much_caps: Is using too many capital letters (over %{percent}% of the
           text)
@@ -557,6 +634,9 @@ en:
             weight_3: Green
             weight_3_short: 'G:'
     proposals:
+      admin:
+        exports:
+          awesome_private_proposals: Proposals with private data
       proposals:
         orders:
           az: A-Z (Alphabetical)
@@ -565,10 +645,13 @@ en:
           za: Z-A (Reverse alphabetical)
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Decidim Tweaks
       decidim_awesome:
+        admin:
+          maintenance:
+            title: 'Maintenance tools: %{title}'
+            titles:
+              checks: System Compatibility Checks
+              private_data: Private Data Clean-Up
         awesome_config:
           amendments: Amendments
           autosaved_error: LocalStorage is not supported in your browser, form cannot

@@ -10,6 +10,7 @@ shared_context "with menu hacks params" do
   end
   let(:params) do
     {
+      menu_id: :menu,
       raw_label: label,
       url: url,
       position: position,
@@ -36,8 +37,7 @@ shared_context "with menu hacks params" do
   let(:position) { 2 }
   let(:target) { "_blank" }
   let(:visibility) { "hidden" }
-  let(:menu_name) { "menu" }
-
+  let(:menu_name) { :menu }
   let(:another_params) do
     {
       allow_images_in_full_editor: true,

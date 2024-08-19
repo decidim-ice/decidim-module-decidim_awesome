@@ -10,6 +10,8 @@ module Decidim::DecidimAwesome
 
       include_context "with menu hacks params"
 
+      let(:menu_name) { :menu }
+
       let(:previous_menu) do
         [{ "url" => url, "position" => 10 }]
       end

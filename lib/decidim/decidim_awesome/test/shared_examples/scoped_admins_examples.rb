@@ -34,7 +34,7 @@ shared_examples "allows awesome access" do
 
   it "allows module access" do
     visit decidim_admin_decidim_awesome.config_path(:editors)
-    expect(page).to have_content("Tweaks for editors")
+    expect(page).to have_content("Tweaks for Editor Hacks")
   end
 end
 
@@ -117,14 +117,12 @@ shared_examples "allows all admin routes" do
   end
 
   it "allows the assemblies page" do
-    click_link "Assemblies"
-
+    click_link_or_button "Assemblies"
     expect(page).to have_content("New assembly")
   end
 
   it "allows the processes page" do
-    click_link "Processes"
-
+    click_link_or_button "Processes"
     expect(page).to have_content("New process")
   end
 end

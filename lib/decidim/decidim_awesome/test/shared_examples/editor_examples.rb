@@ -1,5 +1,29 @@
 # frozen_string_literal: true
 
+shared_examples "has no image support" do
+  it "has no image button" do
+    expect(page).not_to have_xpath("//button[@class='editor-toolbar-control'][@data-editor-type='image']")
+  end
+end
+
+shared_examples "has image support" do
+  it "has image button" do
+    expect(page).to have_xpath("//button[@class='editor-toolbar-control'][@data-editor-type='image']")
+  end
+end
+
+shared_examples "has no video support" do
+  it "has no video button" do
+    expect(page).not_to have_xpath("//button[@class='editor-toolbar-control'][@data-editor-type='videoEmbed']")
+  end
+end
+
+shared_examples "has video support" do
+  it "has video button" do
+    expect(page).to have_xpath("//button[@class='editor-toolbar-control'][@data-editor-type='videoEmbed']")
+  end
+end
+
 shared_examples "has no drag and drop" do |rte|
   it "has no help text" do
     expect(page).not_to have_content("Add images by dragging & dropping or pasting them.")

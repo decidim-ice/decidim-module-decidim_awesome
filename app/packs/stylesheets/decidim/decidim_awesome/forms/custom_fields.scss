@@ -1,0 +1,187 @@
+.decidim_awesome-custom_fields {
+  &.private_body {
+    padding: 1.5rem 1rem;
+    margin-top: 2rem;
+    border: 1px solid $medium-gray;
+    border-radius: $global-radius;
+    background-color: $medium-gray;
+    color: $black;
+    font-weight: $global-weight-normal;
+  }
+
+  .private_body-disclosure {
+    margin: -1rem 0 2rem;
+    font-size: 1.125rem;
+    font-style: italic;
+
+    svg {
+      display: inline-block;
+      width: 1.5rem;
+      height: 1.5rem;
+      margin-right: 0.5rem;
+      vertical-align: bottom;
+    }
+  }
+
+  dt {
+    font-family: $body-font-family;
+    font-weight: $global-weight-bold;
+  }
+
+  dd {
+    padding: 0;
+  }
+
+  .proposal_custom_field {
+    h1 {
+      font-family: $body-font-family;
+      font-weight: $global-weight-bold;
+      font-size: 2.5rem;
+      margin-top: 1rem;
+    }
+
+    h2 {
+      font-family: $body-font-family;
+      font-weight: $global-weight-bold;
+      font-size: 2rem;
+      margin-top: 1rem;
+    }
+
+    h3 {
+      font-family: $body-font-family;
+      font-weight: $global-weight-bold;
+      font-size: 1.75rem;
+      margin-top: 1rem;
+    }
+
+    h4 {
+      font-family: $body-font-family;
+      font-weight: $global-weight-bold;
+      font-size: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    h5 {
+      font-family: $body-font-family;
+      font-weight: $global-weight-bold;
+      font-size: 1.125rem;
+      margin-top: 1rem;
+    }
+
+    h6 {
+      font-family: $body-font-family;
+      font-weight: $global-weight-bold;
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+
+    p {
+      margin-top: 1rem;
+    }
+
+    label {
+      font-size: 0.875rem;
+      font-weight: $global-weight-bold;
+
+      .tooltip-element {
+        margin: 0;
+        padding: 0;
+        visibility: hidden;
+        display: block;
+
+        &::before {
+          visibility: visible;
+          font-size: 0.75rem;
+          color: $medium-gray;
+          font-weight: $global-weight-normal;
+          font-style: italic;
+          content: attr(tooltip);
+        }
+      }
+    }
+
+    .form-group:not(:first-of-type) {
+      margin-top: 1.5rem;
+    }
+
+    .form-control {
+      width: 100%;
+      display: block;
+
+      &:not(.reset-defaults) {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border: 1px solid $medium-gray;
+        outline: 1px solid transparent;
+        border-radius: $global-radius;
+        background-color: $body-background;
+        color: $black;
+        font-weight: $global-weight-normal;
+
+        &:focus {
+          outline: 2px solid $secondary-color;
+        }
+
+        &:disabled {
+          background-color: $light-gray;
+          color: $medium-gray;
+          cursor: not-allowed;
+        }
+
+        &.sm {
+          padding: 0.25rem;
+          font-size: 0.875rem;
+        }
+
+        &.sm-icon {
+          padding: 0.25rem 0.25rem 0.25rem 1.5rem;
+          font-size: 0.875rem;
+        }
+
+        &.is-invalid-input:not(:focus) {
+          outline: 2px solid $alert-color;
+        }
+      }
+
+      &:not(select) {
+        &:read-only {
+          background-color: $light-gray;
+          border: 0;
+          color: $medium-gray;
+        }
+      }
+    }
+
+    .formbuilder-checkbox {
+      > label {
+        font-weight: $global-weight-normal;
+      }
+    }
+
+    .formbuilder-autocomplete {
+      position: relative;
+
+      .formbuilder-autocomplete-list {
+        z-index: 20;
+        max-height: 13rem;
+        outline: 1px solid transparent;
+        border-radius: $global-radius;
+        border: 1px solid $medium-gray;
+        color: $black;
+        font-weight: $global-weight-normal;
+        display: none;
+
+        li {
+          cursor: pointer;
+          border-radius: $global-radius;
+          padding: 0.5rem 1rem;
+          background-color: $body-background;
+
+          &.active-option {
+            background-color: $light-gray;
+          }
+        }
+      }
+    }
+  }
+}

@@ -8,8 +8,6 @@ module Decidim
         include NeedsAwesomeConfig
         include ConfigConstraintsHelpers
 
-        layout "decidim/decidim_awesome/admin/application"
-
         helper ConfigConstraintsHelpers
         helper_method :current_items, :visibility_options, :target_options
 

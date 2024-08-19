@@ -9,44 +9,58 @@
   &:first-child {
     margin-left: 0;
   }
+
   $colors: (
-    "primary": #{$primary},
-    "secondary": #{$secondary},
-    "success": #{$success},
-    "warning": #{$warning},
-    "alert": #{$alert},
-    "highlight": #{$highlight},
-    "highlight_alternative": #{$highlight_alternative}
+    "primary": $primary,
+    "secondary": $secondary,
+    "success": $success,
+    "warning": $warning,
+    "alert": $alert,
+    "highlight": $highlight,
+    "highlight_alternative": $highlight_alternative,
   );
 
   @each $name, $color in $colors {
     &.#{$name} {
-      background-color: #{$color};
+      background-color: $color;
     }
-  }
-}
-
-.tabs-content {
-  .proposal_custom_field {
-    display: none;
   }
 }
 
 .proposal_custom_fields {
   &_editor {
     background-color: #e0e0e0;
-    padding: .5em .5em 1em;
+    padding: 0.5em 0.5em 1em;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+
+    ul.frmb,
+    .form-wrap.form-builder .frmb li.form-field,
+    .form-wrap.form-builder .stage-wrap.empty {
+      background-color: $body-background;
+      margin-right: 0.5rem;
+
+      .field-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .field-actions .btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
 
     label {
       display: inline-block;
       max-width: 100%;
-      font-weight: 600 !important;
+      font-weight: $global-weight-bold !important;
     }
 
     li[type] {
-      display: inherit;
+      display: block;
       width: 100%;
       height: inherit;
       margin: inherit;
@@ -72,22 +86,15 @@
       color: #555;
       background-color: #fff;
       border: 1px solid #ccc;
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-      transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
       margin: 0;
       padding: 6px 12px;
     }
   }
-
-  &_container {
-    .constraints-editor {
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-    }
-  }
 }
 
-// Custom fields tunning
+// Custom fields tuning
 .rendered-form .form-control.ql-container {
   height: auto !important;
 }

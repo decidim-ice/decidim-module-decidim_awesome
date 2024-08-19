@@ -1,43 +1,71 @@
 .constraints-editor {
   background: #f6f6f6;
   padding: 1rem;
-  margin: -.5rem 0 2rem;
+  margin: 0.5rem 0 2rem;
   border-radius: 5px;
 
+  h5 {
+    font-weight: 600;
+    color: rgb(62 76 92 / var(--tw-text-opacity));
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .label {
+    font-weight: normal;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.5rem;
+
+    &.participatory_space_manifest {
+      background-color: #f7b230;
+      color: #000;
+    }
+
+    &.participatory_space_slug {
+      background-color: #19b380;
+      color: #fff;
+    }
+
+    &.component_manifest {
+      background-color: #b31919;
+      color: #fff;
+    }
+
+    &.component_id {
+      background-color: #ee449c;
+      color: #fff;
+    }
+
+    &.constraint {
+      &-none {
+        background-color: #ff3000;
+        color: #fff;
+      }
+    }
+  }
+
   .constraints-list {
-    padding: 0;
-    // margin:0 0 1em 0 ;
+    margin: 16px 20px;
+    padding: 0 20px 0 0;
+    list-style-type: disc;
+
     li {
       margin: 0 1em 0 0;
       padding: 0;
     }
 
-    .label {
-      &.participatory_space_manifest {
-        background-color: #f7b230;
-      }
-
-      &.participatory_space_slug {
-        background-color: #19b380;
-      }
-
-      &.component_manifest {
-        background-color: #b31919;
-      }
-
-      &.component_id {
-        background-color: #ee449c;
-      }
-
-      &.constraint {
-        &-none {
-          background-color: #ff3000;
-        }
-      }
+    button.edit-condition,
+    a.delete-condition {
+      margin-left: 1rem;
     }
 
-    a {
-      margin-left: 1rem;
+    button.edit-condition {
+      color: $secondary-color;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
 
     &.inactive {
@@ -45,5 +73,21 @@
         filter: saturate(10%);
       }
     }
+
+    &.no-items {
+      margin: 0;
+      padding-bottom: 14px;
+      list-style-type: none;
+    }
+  }
+
+  .flash[hidden] {
+    display: none;
+  }
+
+  .add-condition .icon {
+    width: 11px;
+    height: 11px;
+    margin-right: 0.3rem;
   }
 }

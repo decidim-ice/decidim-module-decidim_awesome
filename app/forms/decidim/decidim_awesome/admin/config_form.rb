@@ -10,14 +10,17 @@ module Decidim
 
         attribute :allow_images_in_full_editor, Boolean
         attribute :allow_images_in_small_editor, Boolean
+        attribute :allow_videos_in_editors, Boolean
         attribute :allow_images_in_proposals, Boolean
         attribute :use_markdown_editor, Boolean
         attribute :allow_images_in_markdown_editor, Boolean
         attribute :auto_save_forms, Boolean
+        attribute :auto_save_forms, Boolean
         attribute :scoped_styles, Hash
         attribute :proposal_custom_fields, Hash
+        attribute :proposal_private_custom_fields, Hash
         attribute :scoped_admins, Hash
-        attribute :menu, Array[MenuForm]
+        attribute :menu, [MenuForm]
         attribute :intergram_for_admins, Boolean
         attribute :intergram_for_admins_settings, IntergramForm
         attribute :intergram_for_public, Boolean
@@ -36,7 +39,8 @@ module Decidim
         attr_accessor :valid_keys
 
         validate :css_syntax, if: ->(form) { form.scoped_styles.present? }
-        validate :json_syntax, if: ->(form) { form.proposal_custom_fields.present? }
+        validate :json_syntax
+
         validates :validate_title_min_length, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 100 }
         validates :validate_title_max_caps_percent, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
         validates :validate_title_max_marks_together, presence: true, numericality: { greater_than_or_equal_to: 1 }
@@ -71,21 +75,41 @@ module Decidim
         end
 
         def json_syntax
-          proposal_custom_fields.each do |key, code|
-            next unless code
+          fields = {}
+          fields.merge!(proposal_custom_fields: proposal_custom_fields.values) if proposal_custom_fields.present?
+          fields.merge!(proposal_private_custom_fields: proposal_private_custom_fields.values) if proposal_private_custom_fields.present?
+          fields.each do |key, values|
+            next if values.blank?
 
-            JSON.parse(code)
-          rescue JSON::ParserError => e
-            errors.add(:scoped_styles, I18n.t("config.form.errors.incorrect_json", key: key, scope: "decidim.decidim_awesome.admin"))
+            values.each { |code| JSON.parse(code) }
+          rescue JSON::JSONError => e
+            errors.add(key, I18n.t("config.form.errors.incorrect_json", key: key, scope: "decidim.decidim_awesome.admin"))
             errors.add(key.to_sym, e.message)
           end
         end
 
         # formBuilder has a bug and do not sanitize text if users copy/paste text with format in the label input
+        # rubocop:disable Metrics/CyclomaticComplexity
+        # rubocop:disable Metrics/PerceivedComplexity
         def sanitize_labels!
-          return unless proposal_custom_fields
+          if proposal_custom_fields
+            proposal_custom_fields.transform_values! do |code|
+              next unless code
 
-          proposal_custom_fields.transform_values! do |code|
+              json = JSON.parse(code)
+              json.map! do |item|
+                item["label"] = strip_tags(item["label"])
+                item
+              end
+              JSON.generate(json)
+            rescue JSON::ParserError
+              code
+            end
+          end
+
+          return unless proposal_private_custom_fields
+
+          proposal_private_custom_fields.transform_values! do |code|
             next unless code
 
             json = JSON.parse(code)
@@ -98,6 +122,8 @@ module Decidim
             code
           end
         end
+        # rubocop:enable Metrics/CyclomaticComplexity
+        # rubocop:enable Metrics/PerceivedComplexity
       end
     end
   end

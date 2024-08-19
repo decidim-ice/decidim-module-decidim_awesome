@@ -14,7 +14,8 @@ module Decidim::DecidimAwesome
       let(:config) do
         {
           allow_images_in_full_editor: false,
-          allow_images_in_small_editor: false
+          allow_images_in_small_editor: false,
+          allow_videos_in_editors: false
         }
       end
       let(:params) do
@@ -25,6 +26,7 @@ module Decidim::DecidimAwesome
 
       before do
         request.env["decidim.current_organization"] = user.organization
+        Decidim::DecidimAwesome::Menu.instance_variable_set(:@menus, nil)
         sign_in user, scope: :user
       end
 
@@ -34,14 +36,14 @@ module Decidim::DecidimAwesome
           expect(response).to have_http_status(:success)
         end
 
-        it_behaves_like "forbids disabled feature" do
+        it_behaves_like "forbids disabled feature with redirect" do
           let(:features) { Decidim::DecidimAwesome.config.keys }
           let(:action) { get :show, params: params }
         end
 
         context "when params var is empty" do
           let(:params) { {} }
-          let(:editors) { [:allow_images_in_full_editor, :allow_images_in_small_editor, :use_markdown_editor, :allow_images_in_markdown_editor] }
+          let(:editors) { [:allow_images_in_full_editor, :allow_images_in_small_editor, :allow_videos_in_editors] }
           let(:disabled) { [] }
 
           before do
@@ -142,7 +144,7 @@ module Decidim::DecidimAwesome
           expect(response).to have_http_status(:redirect)
         end
 
-        it_behaves_like "forbids disabled feature" do
+        it_behaves_like "forbids disabled feature with redirect" do
           let(:features) { config.keys }
           let(:action) { get :show, params: params }
         end
