@@ -47,8 +47,6 @@ lt:
         target: Atsidaro
         url: Nuoroda
         visibility: Matomumas
-      proposal:
-        proposal_custom_fields: Papildomi laukai
   decidim:
     admin:
       filters:
