@@ -39,6 +39,18 @@
     .form-wrap.form-builder .stage-wrap.empty {
       background-color: $body-background;
       margin-right: .5rem;
+
+      .field-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .field-actions .btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
 
     label {
@@ -48,7 +60,7 @@
     }
 
     li[type] {
-      display: inherit;
+      display: block;
       width: 100%;
       height: inherit;
       margin: inherit;
@@ -85,10 +97,4 @@
 // Custom fields tuning
 .rendered-form .form-control.ql-container {
   height: auto !important;
-}
-
-.add-field .icon {
-  width: 11px;
-  height: 11px;
-  margin-right: .3rem;
 }
