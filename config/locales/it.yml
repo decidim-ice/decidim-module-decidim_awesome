@@ -1,4 +1,3 @@
----
 it:
   activemodel:
     attributes:
@@ -181,6 +180,7 @@ it:
               È possibile iniziare il processo ora e verrà eseguito in background.
             start_image_migrations: "\U0001F449 Inizia il processo di migrazione"
         config:
+          caution: 'NOTA: Questa funzione modifica pesantemente alcuni comportamenti predefiniti che potrebbero portare a risultati inattesi. Usalo con cautela!'
           constraints:
             add_condition: Aggiungi una condizione
             always: Sempre
