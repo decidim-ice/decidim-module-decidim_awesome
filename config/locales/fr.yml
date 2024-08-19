@@ -1,4 +1,3 @@
----
 fr:
   activemodel:
     attributes:
@@ -188,6 +187,7 @@ fr:
               Vous pouvez démarrer le processus maintenant et il sera effectué en arrière-plan.
             start_image_migrations: "\U0001F449 Démarrez le processus de migration maintenant"
         config:
+          caution: 'REMARQUE : Cette fonctionnalité modifie fortement certains comportements par défaut qui peuvent conduire à des résultats inattendus. Utilisez-la avec précaution !'
           constraints:
             add_condition: Ajouter une contrainte d'application
             always: Toujours
