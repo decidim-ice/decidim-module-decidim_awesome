@@ -453,21 +453,21 @@ describe "Voting weights with cards", type: :system do
           expect(page).to have_content("Y: 1")
           expect(page).to have_content("R: 0")
           expect(page).to have_content("A: 0")
-          expect(page).to have_css(".voting-weight_2")
+          expect(page).to have_css("a.button.weight_2")
         end
         within "#proposal_#{proposals[2].id}" do
           expect(page).to have_content("G: 1")
           expect(page).to have_content("Y: 0")
           expect(page).to have_content("R: 0")
           expect(page).to have_content("A: 0")
-          expect(page).to have_css(".voting-weight_3")
+          expect(page).to have_css("a.button.weight_3")
         end
         within "#proposal_#{proposals[3].id}" do
           expect(page).to have_content("G: 0")
           expect(page).to have_content("Y: 0")
           expect(page).to have_content("R: 0")
           expect(page).to have_content("A: 1")
-          expect(page).to have_css(".voting-weight_0")
+          expect(page).to have_css("a.button.weight_0")
         end
       end
 
