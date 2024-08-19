@@ -48,8 +48,6 @@ fr:
         target: Ouvrir dans
         url: URL
         visibility: Visibilité
-      proposal:
-        proposal_custom_fields: Champs personnalisés
   decidim:
     admin:
       filters:
@@ -254,14 +252,19 @@ fr:
               body: Validations d'entrée de l'utilisateur pour le champ "body"
               title: Validations d'entrée de l'utilisateur pour le champ "body"
           form_proposal_custom_fields:
+            delete: Supprimer
             new: Ajouter une nouvelle boîte de champs personnalisés
             remove: Supprimer cette boîte de champs personnalisés
             sure_to_remove: Êtes-vous sûr de vouloir détruire ce champ ?
+          form_proposal_private_custom_fields:
+            delete: Supprimer
           form_scoped_admins:
+            delete: Supprimer
             new: Ajouter un nouveau groupe "Administrateurs de secteur"
             remove: Supprimer ce groupe "Administrateurs de secteur"
             sure_to_remove: Êtes-vous sûr de vouloir détruire ce groupe « Administrateurs de secteur »?
           form_scoped_styles:
+            delete: Supprimer
             new: Ajouter une nouvelle boîte CSS
             remove: Supprimer cette boîte CSS
             sure_to_remove: Etes-vous sûr de vouloir supprimer cette boîte CSS ?
@@ -272,6 +275,13 @@ fr:
             title: Tweaks pour %{setting}
             update: Mettre à jour la configuration
           system: Partout sauf les espaces participatifs
+          title:
+            admins: Administrateurs de secteur
+            editors: Hacks de l'éditeur
+            livechat: Chat en direct
+            proposals: Hacks pour les propositions
+            styles: Styles personnalisés
+            surveys: Enquêtes et formulaires
           update:
             error: Erreur lors de la mise à jour de la configuration ! %{error}
             success: La configuration a bien été mise à jour
@@ -333,10 +343,11 @@ fr:
             success: Redirection mise à jour avec succès
         menu:
           admins: Administrateurs de secteur
-          checks: Compatibilité système
           custom_redirects: Redirections personnalisées
           editors: Hacks de l'éditeur
           livechat: Chat en direct
+          maintenance:
+            checks: Compatibilité système
           menu_hacks: Tweaks de menu
           proposal_custom_fields: Champs de propositions personnalisés
           proposals: Hacks pour les propositions
@@ -366,6 +377,10 @@ fr:
           index:
             confirm_destroy: Êtes-vous sûr de vouloir supprimer cette personnalisation ?
             edit: Modifier
+            home_content_block_menu:
+              title: Bloc de menu global
+            menu:
+              title: Menu principal
             new: Nouvel élément de menu
             remove: Supprimer l'ajout
             remove_hack: Supprimer la personnalisation
@@ -473,9 +488,6 @@ fr:
           za: Z-A (alphabétique inverse)
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Tweaks Decidim
       decidim_awesome:
         awesome_config:
           amendments: Amendements
