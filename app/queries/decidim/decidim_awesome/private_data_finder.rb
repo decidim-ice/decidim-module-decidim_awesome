@@ -4,7 +4,7 @@ module Decidim
   module DecidimAwesome
     class PrivateDataFinder
       def query
-        Component.where(id: proposals.where.not(extra_fields: { private_body: nil }))
+        Component.where(id: proposals.where.not(decidim_awesome_proposal_extra_fields: { private_body: nil }))
       end
 
       def proposals

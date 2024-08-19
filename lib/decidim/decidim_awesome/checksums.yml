@@ -65,16 +65,22 @@ decidim-proposals:
   /app/cells/decidim/proposals/proposal_m/footer.erb:
     decidim-0.26: 7ade5bbd8412f44f1c4ed913ae1834c6
   /app/commands/decidim/proposals/create_proposal.rb:
+    decidim-0.26: 8808a4239d750a86edd6e9c309533788
     decidim-0.27: 7a6b8a1ea733e1e331b5251accfc9126
   /app/commands/decidim/proposals/create_collaborative_draft.rb:
+    decidim-0.26: 4ad30f5a912fa5f76e94f686b7f475c1
     decidim-0.27: 2d9a8cef43690e54419f1bd0478fa580
   /app/commands/decidim/proposals/admin/create_proposal.rb:
+    decidim-0.26: e057ebfc83bb8fa4dbfeea4058776f43
     decidim-0.27: 40db71d026e1f8e8086aa149bdd97106
   /app/commands/decidim/proposals/update_proposal.rb:
+    decidim-0.26: 28ebdc4efcb2c9eab307d3bf9f4a7ef7
     decidim-0.27: 5e2f8ef1bfa4edd8fb5479c15c5f06de
   /app/commands/decidim/proposals/update_collaborative_draft.rb:
+    decidim-0.26: df8d09786857b31942c1e1bcb0290551
     decidim-0.27: 2ddf7f98cb085cb4565ec6ac257ca8c9
   /app/commands/decidim/proposals/admin/update_proposal.rb:
+    decidim-0.26: 82478685f772c818d7300551891dc717
     decidim-0.27: aacc7c104abe2bbd2f09c0dfe4f74e0c
   /app/presenters/decidim/proposals/proposal_presenter.rb:
     decidim-0.27: 105b7266bcdd8b947ababbb7ebb78789

@@ -64,9 +64,7 @@ module Decidim
         end
 
         def private_data_finder
-          # rubocop:disable Naming/MemoizedInstanceVariableName
-          @private_data ||= PrivateDataFinder.new
-          # rubocop:enable Naming/MemoizedInstanceVariableName
+          @private_data_finder ||= PrivateDataFinder.new
         end
 
         def time_ago

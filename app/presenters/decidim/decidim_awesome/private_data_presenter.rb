@@ -17,15 +17,15 @@ module Decidim
 
       def total
         @total ||= Decidim::Proposals::Proposal.joins(:extra_fields)
-                                               .where(component: self)
-                                               .where.not(extra_fields: { private_body: nil })
+                                               .where(decidim_component_id: id)
+                                               .where.not(decidim_awesome_proposal_extra_fields: { private_body: nil })
                                                .count.to_s
       end
 
       def last_date
         @last_date ||= Decidim::Proposals::Proposal.joins(:extra_fields)
-                                                   .where(component: self)
-                                                   .where.not(extra_fields: { private_body: nil })
+                                                   .where(decidim_component_id: id)
+                                                   .where.not(decidim_awesome_proposal_extra_fields: { private_body: nil })
                                                    .order(private_body_updated_at: :desc)
                                                    .first&.extra_fields&.private_body_updated_at
       end
