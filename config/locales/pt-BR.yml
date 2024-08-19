@@ -39,8 +39,6 @@ pt-BR:
         target: Aberto em
         url: URL
         visibility: Visibilidade
-      proposal:
-        proposal_custom_fields: Campos personalizados
   decidim:
     admin:
       menu:
@@ -103,7 +101,6 @@ pt-BR:
             start_image_migrations: "\U0001F449 Inicie o processo de migração agora"
             title: Checar compatibilidade do sistema
         config:
-          caution: 'NOTA: Este recurso modifica fortemente alguns comportamentos padrão que podem levar a resultados inesperados. Use-o com cuidado!'
           constraints:
             add_condition: Adicionar Caso
             always: Sempre
@@ -152,14 +149,19 @@ pt-BR:
               scoped_styles_variables: 'Você pode usar as seguintes variáveis CSS para cores personalizadas da organização:'
               use_markdown_editor: Isto irá substituir o editor do Quill WYSIWYG, para usar um editor de Markdown. O texto será convertido e salvo como HTML no banco de dados.
           form_proposal_custom_fields:
+            delete: Deletar
             new: Adicionar uma nova caixa "campos personalizados"
             remove: Remover esta caixa "campos personalizados"
             sure_to_remove: Deseja mesmo destruir essa caixa de campos?
+          form_proposal_private_custom_fields:
+            delete: Deletar
           form_scoped_admins:
+            delete: Deletar
             new: Adicionar um novo grupo "Administradores com Escopos"
             remove: Remover este grupo "Administradores com Escopos"
             sure_to_remove: Deseja mesmo destruir esse grupo de "Administradores com Escopos"?
           form_scoped_styles:
+            delete: Deletar
             new: Adicionar uma nova caixa CSS
             remove: Remover esta caixa CSS
             sure_to_remove: Deseja mesmo destruir essa caixa de CSS?
@@ -170,6 +172,13 @@ pt-BR:
             title: Ajustes para %{setting}
             update: Configuração atualizada
           system: Qualquer lugar exceto salas participativas
+          title:
+            admins: Administradores com escopo
+            editors: Hacks do editor
+            livechat: Chat Ao Vivo
+            proposals: Pacotes de Propostas
+            styles: Estilos Personalizados
+            surveys: Pesquisas e Formulários
           update:
             error: Erro ao atualizar configuração!%{error}
             success: Configuração atualizada com sucesso
@@ -231,10 +240,11 @@ pt-BR:
             success: Redirecionamento atualizado com sucesso
         menu:
           admins: Administradores com escopo
-          checks: Compatibilidade de sistema
           custom_redirects: Redirecionamentos personalizados
           editors: Hacks do editor
           livechat: Chat Ao Vivo
+          maintenance:
+            checks: Compatibilidade de sistema
           menu_hacks: Ajustes do menu
           proposal_custom_fields: Campos Personalizados de Propostas
           proposals: Pacotes de Propostas
@@ -263,6 +273,8 @@ pt-BR:
           index:
             confirm_destroy: Tem certeza que deseja remover esta customização?
             edit: Editar
+            menu:
+              title: Menu Principal
             new: Novo item
             remove: Remover adição
             remove_hack: Remover personalização
@@ -333,9 +345,6 @@ pt-BR:
             cancel: Cancelar
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Ajustes Decidim
       decidim_awesome:
         awesome_config:
           amendments: Emendas
