@@ -48,8 +48,6 @@ es:
         target: Abrir en
         url: URL
         visibility: Visibilidad
-      proposal:
-        proposal_custom_fields: Campos personalizados
   decidim:
     admin:
       filters:
@@ -254,14 +252,19 @@ es:
               body: Validaciones de entrada de usuario para el campo "cuerpo"
               title: Validaciones de entrada de usuario para el campo "título"
           form_proposal_custom_fields:
+            delete: Eliminar
             new: Añadir una nueva caja de "campos personalizados"
             remove: Eliminar esta caja de "campos personalizados"
             sure_to_remove: '¿Estás segura de que quieres eliminar esta caja de campos personalizados?'
+          form_proposal_private_custom_fields:
+            delete: Eliminar
           form_scoped_admins:
+            delete: Eliminar
             new: Añadir un nuevo grupo de "Administradoras acotadas"
             remove: Eliminar este grupo de "Administradoras acotadas"
             sure_to_remove: '¿Estás segura de que quieres eliminar este grupo de "administradoras acotadas"?'
           form_scoped_styles:
+            delete: Eliminar
             new: Añadir una nueva caja CSS
             remove: Eliminar esta caja CSS
             sure_to_remove: '¿Estás segura de que quieres eliminar esta caja CSS?'
@@ -272,6 +275,13 @@ es:
             title: Ajustes para %{setting}
             update: Actualizar la configuración
           system: En todas partes excepto en espacios participativos
+          title:
+            admins: Administradoras acotadas
+            editors: Modificaciones a los editores
+            livechat: Chat en vivo
+            proposals: Modificaciones a las propuestas
+            styles: Estilos personalizados
+            surveys: Encuestas y formularios
           update:
             error: '¡Error actualizando la configuración! %{error}'
             success: Configuración actualizada correctamente
@@ -333,10 +343,11 @@ es:
             success: Redirección actualizada correctamente
         menu:
           admins: Administradoras acotadas
-          checks: Compatibilidad del sistema
           custom_redirects: Redirecciones personalizadas
           editors: Modificaciones a los editores
           livechat: Chat en vivo
+          maintenance:
+            checks: Compatibilidad del sistema
           menu_hacks: Ajustes en el menú
           proposal_custom_fields: Campos personalizados para propuestas
           proposals: Modificaciones a las propuestas
@@ -366,6 +377,10 @@ es:
           index:
             confirm_destroy: '¿Estás segura que quieres eliminar este elemento?'
             edit: Editar
+            home_content_block_menu:
+              title: Bloque de menú global en la home
+            menu:
+              title: Menú principal
             new: Crear nuevo ítem
             remove: Eliminar adición
             remove_hack: Eliminar personalización
@@ -473,9 +488,6 @@ es:
           za: Z-A (Alfabético inverso)
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Modificaciones a Decidim
       decidim_awesome:
         awesome_config:
           amendments: Enmiendas
