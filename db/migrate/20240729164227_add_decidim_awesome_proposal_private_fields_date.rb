@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AddDecidimAwesomeProposalPrivateFieldsDate < ActiveRecord::Migration[6.1]
+class AddDecidimAwesomeProposalPrivateFieldsDate < ActiveRecord::Migration[6.0]
   class ProposalExtraField < ApplicationRecord
     self.table_name = :decidim_awesome_proposal_extra_fields
   end
