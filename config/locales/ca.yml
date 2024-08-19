@@ -48,8 +48,6 @@ ca:
         target: Obre a
         url: URL
         visibility: Visibilitat
-      proposal:
-        proposal_custom_fields: Camps personalitzats
   decidim:
     admin:
       filters:
@@ -254,14 +252,19 @@ ca:
               body: Validacions d'entrada per l'usuari en el camp cos de la proposta
               title: Validacions d'entrada per l'usuari en el camp títol de la proposta
           form_proposal_custom_fields:
+            delete: Esborra
             new: Afegeix una nova caixa de "camps personalitzats"
             remove: Elimina aquesta caixa de "camps personalitzats"
             sure_to_remove: Estàs segura que vols eliminar aquesta caixa de camps personalitzats?
+          form_proposal_private_custom_fields:
+            delete: Esborra
           form_scoped_admins:
+            delete: Esborra
             new: Afegir un nou grup "d'Administradores acotades"
             remove: Elimineu aquest grup "d'Administradores acotades"
             sure_to_remove: Estàs segura que vols eliminar aquest grup "d'Administradores acotades"?
           form_scoped_styles:
+            delete: Esborra
             new: Afegeix una nova caixa CSS
             remove: Elimina aquesta caixa CSS
             sure_to_remove: Estàs segura que vols eliminar aquesta caixa CSS?
@@ -272,6 +275,13 @@ ca:
             title: Modificacions per %{setting}
             update: Actualitza la configuració
           system: A tot arreu excepte espais participatius
+          title:
+            admins: Administradores acotades
+            editors: Modificacions als editors
+            livechat: Xat en directe
+            proposals: Modificacions a propostes
+            styles: Estils personalitzats
+            surveys: Formularis i enquestes
           update:
             error: Error actualitzant la configuració! %{error}
             success: Configuració actualitzada correctament
@@ -333,10 +343,11 @@ ca:
             success: Redirecció actualitzada correctament
         menu:
           admins: Administradores acotades
-          checks: Compatibilitat de sistema
           custom_redirects: Redireccions personalitzades
           editors: Modificacions als editors
           livechat: Xat en directe
+          maintenance:
+            checks: Compatibilitat de sistema
           menu_hacks: Retocs al menú
           proposal_custom_fields: Camps personalitzats per propostes
           proposals: Modificacions a propostes
@@ -366,6 +377,10 @@ ca:
           index:
             confirm_destroy: Confirmes que vols eliminar aquest retoc?
             edit: Editar
+            home_content_block_menu:
+              title: Bloc de menú global a la home
+            menu:
+              title: Menú principal
             new: Nou ítem
             remove: Eliminar addició
             remove_hack: Eliminar retoc
@@ -473,9 +488,6 @@ ca:
           za: Z-A (ordre alfabètic invers)
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Modificacions a Decidim
       decidim_awesome:
         awesome_config:
           amendments: Esmenes
