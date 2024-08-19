@@ -15,7 +15,7 @@ $(() => {
     const attribute = $target.data("var");
     const $hidden = $(`[name="config[${attribute}][${key}]"]`);
     const $multiple = $(`[name="config[${attribute}][${key}][]"]`);
-    const $container = $(`.${attribute}_container[data-key="${key}"]`);
+    const $container = $(`.js-box-container[data-key="${key}"]`);
     const $delete = $(".delete-box", $container);
 
     const rebuildLabel = (text, withScope) => {

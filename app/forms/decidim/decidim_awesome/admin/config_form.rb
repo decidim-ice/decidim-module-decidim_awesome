@@ -89,6 +89,8 @@ module Decidim
         end
 
         # formBuilder has a bug and do not sanitize text if users copy/paste text with format in the label input
+        # rubocop:disable Metrics/CyclomaticComplexity
+        # rubocop:disable Metrics/PerceivedComplexity
         def sanitize_labels!
           if proposal_custom_fields
             proposal_custom_fields.transform_values! do |code|
@@ -120,6 +122,8 @@ module Decidim
             code
           end
         end
+        # rubocop:enable Metrics/CyclomaticComplexity
+        # rubocop:enable Metrics/PerceivedComplexity
       end
     end
   end
