@@ -15,8 +15,8 @@ module Decidim
 
           alias_method :decidim_original_update_draft, :update_draft
 
-          def update_proposal
-            decidim_original_update_proposal
+          def update_draft
+            decidim_original_update_draft
             update_private_field!
           end
         end
