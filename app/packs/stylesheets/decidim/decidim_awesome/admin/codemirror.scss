@@ -3,10 +3,10 @@
 .awesome-edit-config {
   .scoped_styles_container,
   .proposal_custom_fields_container {
-    @apply bg-background;
-
     &.private {
-      @apply outline-2 outline-[#fca5a5] outline-dotted;
+      outline-style: dotted;
+      outline-width: 2px;
+      outline-color: #fca5a5;
     }
 
     .form-error {
