@@ -48,8 +48,6 @@ ja:
         target: リンク先
         url: URL
         visibility: 表示・非表示
-      proposal:
-        proposal_custom_fields: カスタム項目
   decidim:
     admin:
       filters:
@@ -254,14 +252,19 @@ ja:
               body: '「body」フィールドのユーザー入力検証'
               title: '「タイトル」フィールドのユーザー入力検証'
           form_proposal_custom_fields:
+            delete: 削除
             new: 新しい「カスタム項目」ボックスを追加
             remove: '「カスタム項目」ボックスを削除'
             sure_to_remove: この項目ボックスを削除してもよろしいですか？
+          form_proposal_private_custom_fields:
+            delete: 削除
           form_scoped_admins:
+            delete: 削除
             new: 新しい「スコープ付き管理者」グループを追加
             remove: '「スコープ付き管理者」グループを削除'
             sure_to_remove: この「スコープ付き管理者」グループを削除してもよろしいですか？
           form_scoped_styles:
+            delete: 削除
             new: 新規CSS boxを追加
             remove: CSS boxを削除
             sure_to_remove: このCSS boxを削除してもよろしいですか？
@@ -272,6 +275,13 @@ ja:
             title: '%{setting} の詳細設定'
             update: 設定を更新する
           system: 参加型スペース以外のすべて
+          title:
+            admins: スコープ付き管理者
+            editors: エディター設定
+            livechat: ライブチャット
+            proposals: 提案の設定
+            styles: 独自スタイル
+            surveys: 調査＆フォーム
           update:
             error: 設定更新エラー %{error}
             success: 設定は正常に更新されました
@@ -334,10 +344,11 @@ ja:
             success: リダイレクトを更新しました
         menu:
           admins: スコープ付き管理者
-          checks: システム互換性
           custom_redirects: カスタムリダイレクト
           editors: エディター設定
           livechat: ライブチャット
+          maintenance:
+            checks: システム互換性
           menu_hacks: メニュー調整
           proposal_custom_fields: 提案カスタム項目
           proposals: 提案の設定
@@ -367,6 +378,10 @@ ja:
           index:
             confirm_destroy: この設定を削除しますか？
             edit: 編集
+            home_content_block_menu:
+              title: グローバルメニューホームブロック
+            menu:
+              title: メインメニュー
             new: 新しい項目
             remove: 追加の削除
             remove_hack: カスタマイズの削除
@@ -472,9 +487,6 @@ ja:
           za: Z-A (アルファベット逆順)
   layouts:
     decidim:
-      admin:
-        decidim_awesome:
-          title: Decidimの調整
       decidim_awesome:
         awesome_config:
           amendments: 修正
