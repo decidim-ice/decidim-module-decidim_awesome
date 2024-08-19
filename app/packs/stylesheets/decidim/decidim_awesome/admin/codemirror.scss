@@ -4,21 +4,19 @@
   .scoped_styles_container,
   .proposal_custom_fields_container {
     &.private {
-      outline-style: dotted;
-      outline-width: 2px;
-      outline-color: #fca5a5;
+      outline: #fca5a5 dotted 2px;
     }
 
     .form-error {
       margin: 0;
     }
 
-    >.CodeMirror {
+    > .CodeMirror {
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
-      border-top: .5em solid #e0e0e0;
-      border-right: .5em solid #e0e0e0;
-      border-bottom: .5em solid #e0e0e0;
+      border-top: 0.5em solid #e0e0e0;
+      border-right: 0.5em solid #e0e0e0;
+      border-bottom: 0.5em solid #e0e0e0;
       min-height: 6em;
       height: 8em;
       padding: 0;
@@ -26,8 +24,8 @@
       resize: vertical;
       overflow: vertical !important;
 
-      >.CodeMirror-scroll {
-        >.CodeMirror-gutters {
+      > .CodeMirror-scroll {
+        > .CodeMirror-gutters {
           background: #e0e0e0;
         }
       }

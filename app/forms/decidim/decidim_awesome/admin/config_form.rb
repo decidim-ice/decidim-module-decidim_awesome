@@ -90,18 +90,22 @@ module Decidim
 
         # formBuilder has a bug and do not sanitize text if users copy/paste text with format in the label input
         def sanitize_labels!
-          proposal_custom_fields.transform_values! do |code|
-            next unless code
+          if proposal_custom_fields
+            proposal_custom_fields.transform_values! do |code|
+              next unless code
 
-            json = JSON.parse(code)
-            json.map! do |item|
-              item["label"] = strip_tags(item["label"])
-              item
+              json = JSON.parse(code)
+              json.map! do |item|
+                item["label"] = strip_tags(item["label"])
+                item
+              end
+              JSON.generate(json)
+            rescue JSON::ParserError
+              code
             end
-            JSON.generate(json)
-          rescue JSON::ParserError
-            code
           end
+
+          return unless proposal_private_custom_fields
 
           proposal_private_custom_fields.transform_values! do |code|
             next unless code

@@ -18,7 +18,7 @@
       display: inline-block;
       width: 1.5rem;
       height: 1.5rem;
-      margin-right: .5rem;
+      margin-right: 0.5rem;
       vertical-align: bottom;
     }
   }
@@ -80,7 +80,7 @@
     }
 
     label {
-      font-size: .875rem;
+      font-size: 0.875rem;
       font-weight: $global-weight-bold;
 
       .tooltip-element {
@@ -91,7 +91,7 @@
 
         &::before {
           visibility: visible;
-          font-size: .75rem;
+          font-size: 0.75rem;
           color: $medium-gray;
           font-weight: $global-weight-normal;
           font-style: italic;
@@ -110,7 +110,7 @@
 
       &:not(.reset-defaults) {
         display: inline-block;
-        padding: .5rem 1rem;
+        padding: 0.5rem 1rem;
         border: 1px solid $medium-gray;
         outline: 1px solid transparent;
         border-radius: $global-radius;
@@ -129,13 +129,13 @@
         }
 
         &.sm {
-          padding: .25rem;
-          font-size: .875rem;
+          padding: 0.25rem;
+          font-size: 0.875rem;
         }
 
         &.sm-icon {
-          padding: .25rem .25rem .25rem 1.5rem;
-          font-size: .875rem;
+          padding: 0.25rem 0.25rem 0.25rem 1.5rem;
+          font-size: 0.875rem;
         }
 
         &.is-invalid-input:not(:focus) {
@@ -174,7 +174,7 @@
         li {
           cursor: pointer;
           border-radius: $global-radius;
-          padding: .5rem 1rem;
+          padding: 0.5rem 1rem;
           background-color: $body-background;
 
           &.active-option {
