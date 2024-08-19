@@ -80,7 +80,7 @@
     }
 
     label {
-      font-size: 1rem;
+      font-size: .875rem;
       font-weight: $global-weight-bold;
 
       .tooltip-element {
@@ -107,7 +107,6 @@
     .form-control {
       width: 100%;
       display: block;
-      margin-top: 1rem;
 
       &:not(.reset-defaults) {
         display: inline-block;
