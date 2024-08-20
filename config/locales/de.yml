@@ -405,6 +405,7 @@ de:
             title: Öffentlich sichtbare Felder
           private_body: Privater Textkörper
           proposal_private_custom_fields: Private Felder
+          remove_private_data: "\U0001F449 Möglicherweise möchten Sie es entfernen"
       amendments:
         modal:
           current_amendment_html: <p>Sie können <a href="%{amendment_link}"> hier auf die aktuelle Änderung</a>zugreifen.</p>
