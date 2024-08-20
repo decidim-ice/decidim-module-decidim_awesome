@@ -64,7 +64,7 @@ module Decidim
         end
 
         def private_data_finder
-          @private_data ||= PrivateDataFinder.new
+          @private_data_finder ||= PrivateDataFinder.new
         end
 
         def time_ago
