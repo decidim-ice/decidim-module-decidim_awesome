@@ -5,7 +5,7 @@ module Decidim
     module Admin
       class AdminAccountabilityController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
-        include Decidim::DecidimAwesome::AdminAccountability::Admin::Filterable
+        include AdminAccountability::Admin::Filterable
 
         helper_method :admin_actions, :collection, :export_params, :global?, :global_users_missing_date
 
@@ -20,9 +20,9 @@ module Decidim
         def export
           filters = export_params[:q]
 
-          Decidim::DecidimAwesome::ExportAdminActionsJob.perform_later(current_user,
-                                                                       params[:format].to_s,
-                                                                       admin_actions.ransack(filters).result.ids)
+          ExportAdminActionsJob.perform_later(current_user,
+                                              params[:format].to_s,
+                                              admin_actions.ransack(filters).result.ids)
 
           redirect_back fallback_location: decidim_admin_decidim_awesome.admin_accountability_path,
                         notice: t("decidim.decidim_awesome.admin.admin_accountability.exports.notice")
@@ -39,11 +39,11 @@ module Decidim
         end
 
         def space_role_actions
-          @space_role_actions ||= Decidim::DecidimAwesome::PaperTrailVersion.space_role_actions(current_organization)
+          @space_role_actions ||= PaperTrailVersion.space_role_actions(current_organization)
         end
 
         def admin_role_actions
-          @admin_role_actions ||= Decidim::DecidimAwesome::PaperTrailVersion.in_organization(current_organization).admin_role_actions(PaperTrailVersion.safe_admin_role_type(params[:admin_role_type]))
+          @admin_role_actions ||= PaperTrailVersion.in_organization(current_organization).admin_role_actions(PaperTrailVersion.safe_admin_role_type(params[:admin_role_type]))
         end
 
         def export_params
@@ -61,7 +61,7 @@ module Decidim
           return unless global?
 
           @global_users_missing_date ||= begin
-            first_version = Decidim::DecidimAwesome::PaperTrailVersion.where(item_type: "Decidim::UserBaseEntity").last
+            first_version = PaperTrailVersion.where(item_type: "Decidim::UserBaseEntity").last
             first_user = Decidim::User.first
             first_version.created_at if first_user && first_version && (first_version.created_at > first_user.created_at + 1.second)
           end

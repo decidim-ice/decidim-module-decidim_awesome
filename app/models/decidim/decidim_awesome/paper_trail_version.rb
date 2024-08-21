@@ -13,7 +13,6 @@ module Decidim
         Decidim.user_roles.find { |role| role == admin_role }
       end
 
-
       scope :space_role_actions, lambda { |organization|
         role_changes = where(item_type: PaperTrailVersion.safe_user_roles, event: "create")
         user_ids_from_object_changes = role_changes.pluck(:object_changes).map { |change| change.match(/decidim_user_id:\n- ?\n- (\d+)/)[1].to_i }
