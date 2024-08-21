@@ -442,6 +442,13 @@ fr:
           menu:
             title: Champs publiques
           private_body: Corps de proposition privé
+          private_data_last_remove: Ces données ont été détruites il y a %{time_ago}.
+          private_data_last_update: Ces données ont été mises à jour il y a %{time_ago}.
+          proposal_private_custom_fields: Champs privés
+          remove_private_data: "👉 Vous pouvez le supprimer"
+      admin_log:
+        component:
+          destroy_private_data: "%{user_name} a détruit les objets %{count} de données privées pour %{resource_name} dans %{space_name}"
       amendments:
         modal:
           current_amendment_html: <p>Vous pouvez <a href="%{amendment_link}">accéder à l'amendement actuel ici</a>.</p>
@@ -504,6 +511,7 @@ fr:
           show:
             view_meeting: Voir la rencontre
             view_proposal: Voir la proposition
+      proposal_private_custom_fields_disclosure: Cette information ne sera pas publiée
       validators:
         too_much_caps: Utilise trop de majuscule (plus de %{percent} du texte)
       voting:
@@ -530,6 +538,9 @@ fr:
             weight_3: Verte
             weight_3_short: 'V:'
     proposals:
+      admin:
+        exports:
+          awesome_private_proposals: Les propositions avec des données privées
       proposals:
         orders:
           az: A-Z (alphabétique)
@@ -539,6 +550,12 @@ fr:
   layouts:
     decidim:
       decidim_awesome:
+        admin:
+          maintenance:
+            title: 'Outils de maintenance: %{title}'
+            titles:
+              checks: Vérifications de compatibilité système
+              private_data: Nettoyage des données privées
         awesome_config:
           amendments: Amendements
           autosaved_error: LocalStorage n'est pas pris en charge dans votre navigateur, le formulaire ne peut pas être enregistré automatiquement.
