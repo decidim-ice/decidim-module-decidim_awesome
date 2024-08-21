@@ -18,6 +18,7 @@ ca:
         intergram_title_open: Títol del xat quan està obert
         intergram_use_floating_button: Si està marcat, el xat tancat és sempre un botó en lloc d'un text
         proposal_custom_fields: 'Camps personalitzats #%{id}'
+        proposal_private_custom_fields: 'Camps personalitzats #%{id}'
         scoped_admins: 'Grup d''administradores acotades #%{id}'
         scoped_styles: 'Personalització d''estils #%{id}'
         validate_body_max_caps_percent: Percentatge màxim de majúscules en el cos de la proposta
@@ -132,6 +133,7 @@ ca:
               za: Z-A (ordre alfabètic invers)
     decidim_awesome:
       admin:
+        actions: Accions
         admin_accountability:
           admin_roles:
             admin: Administradora de plataforma
@@ -234,6 +236,12 @@ ca:
               proposal_custom_fields: Crea camps personalitzats per a propostes que només s'apliquin a determinades parts de la web pública (per fer-ho, utilitza l'editor de restriccions)
               proposal_custom_fields_example: Les dades son desades en un objecte XML fent servir atributs compatibles amb HTML (elements DL, DT, DD) que reemplacen el "cos" de la proposat normal.
               proposal_custom_fields_translations: "Les etiquetes, el text d'ajuda, els \"placeholders\" i els valors predeterminats poden utilitzar les traduccions personalitzades de l'aplicació.\nPer això, en comptes d'utilitzar un text literal, utilitzeu la clau i18n (ha de contenir almenys un punt).\nPer exemple:\n- \"activemodel.attributes.proposal.title\" en lloc de \"Títol\"\n- \"activemodel.attributes.proposal.address\" en lloc de \"Address\"\nO utilitzeu les vostres pròpies claus en combinació amb altres eines per definir traduccions (p. ex.: utilitzant el mòdul Term Customizer):\n - \"myapp.custom_fields.bio\" en lloc de \"Biografia\""
+              proposal_private_custom_fields: Similar als camps públics, però aquesta informació no es revelarà públicament (només hi tindran accés els administradors).
+              proposal_private_custom_fields_translations: |
+                Els camps personalitzats privats es mostren en un quadre diferent amb aquest text d'informació:
+                %{warning}
+                Aquest text es pot personalitzar amb una traducció personalitzada utilitzant la clau:
+                %{key}
               scoped_admins: Promou usuaries normals a administradores amb accés limitat a certes parts de la web pública (feu servir l'editor de restriccions per això). Noteu que afegir usuaries que ja tenen permisos d'administració no té cap efecte.
               scoped_styles: Crea CSS personalitzats que només s'apliquin a determinades parts de la web pública (per fer-ho, utilitza l'editor de restriccions)
               scoped_styles_variables: 'Pots fer servir les següents variables CSS pels colors personalitzats de l''organització:'
@@ -253,6 +261,9 @@ ca:
             sure_to_remove: Estàs segura que vols eliminar aquesta caixa de camps personalitzats?
           form_proposal_private_custom_fields:
             delete: Esborra
+            new: Afegiu una nova caixa de "camps personalitzats privats"
+            remove: Elimina aquesta caixa de "camps personalitzats"
+            sure_to_remove: Segur que vols eliminar aquesta caixa de camps personalitzats?
           form_scoped_admins:
             delete: Esborra
             new: Afegir un nou grup "d'Administradores acotades"
@@ -273,6 +284,8 @@ ca:
             admins: Administradores acotades
             editors: Modificacions als editors
             livechat: Xat en directe
+            proposal_custom_fields: 'Camps personalitzats per propostes: Camps públics'
+            proposal_private_custom_fields: 'Camps personalitzats per propostes: Camps privats'
             proposals: Modificacions a propostes
             styles: Estils personalitzats
             surveys: Formularis i enquestes
@@ -335,6 +348,37 @@ ca:
           update:
             error: 'Error en actualitzar la redirecció: %{error}'
             success: Redirecció actualitzada correctament
+        maintenance:
+          private_data:
+            component: Espai / Component
+            confirm_delete: Segur que voleu suprimir totes les dades privades d'aquest recurs? Aquesta acció no es pot desfer.
+            delete: Esborrar-ho tot
+            destroying_private_data: Les dades privades de %{title} s'han programat per ser destruïdes. Si us plau, torneu a comprovar d'aquí a uns minuts.
+            done: Fet
+            help_html: |
+              Aquesta eina permet esborrar totes les dades privades d'un espai o component participatiu concret. Aquesta acció és irreversible i eliminarà totes les dades privades de la base de dades.
+              <br><br>
+              <strong>Què es consideren dades privades?</strong>
+              <br>
+              Les dades privades són qualsevol informació que no està disponible públicament i només és accessible per als administradors. Això, de moment, inclou la informació del camps personalitzats privats.
+              <br><br>
+              <strong>Què passa quan suprimeixo dades privades?</strong>
+              <br>
+              Quan suprimiu les dades privades, tota la informació privada de l'espai o component participatiu seleccionat s'eliminarà permanentment de la base de dades. Un registre d'aquesta acció s'emmagatzemarà al sistema amb finalitats d'auditoria (pero no les dades en si).
+              <br><br>
+              <strong>Què passa amb les dades públiques?</strong>
+              <br>
+              Les dades públiques no es veuran afectades per aquesta acció. Només s'eliminaran les dades privades.
+              <br><br>
+              <strong>Hi ha un temps mínim d'espera abans de suprimir les dades privades?</strong>
+              <br>
+              Sí, no podeu suprimir dades privades si l'última actualització va ser fa menys de %{time_ago}. Podeu canviar aquesta configuració al fitxer inicialitzador.
+            items_count: Total afectats
+            last_date: Última actualització
+            no_data: No s'han trobat dades privades més antigues que fa %{time_ago}
+            not_destroyable: Aquest recurs encara no es pot destruir
+            removing: Eliminant...
+            time_ago: "fa %{time}"
         menu:
           admins: Administradores acotades
           custom_redirects: Redireccions personalitzades
@@ -342,6 +386,8 @@ ca:
           livechat: Xat en directe
           maintenance:
             checks: Compatibilitat de sistema
+            maintenance: Manteniment
+            private_data: Dades privades
           menu_hacks: Retocs al menú
           proposal_custom_fields: Camps personalitzats per propostes
           proposals: Modificacions a propostes
@@ -385,6 +431,17 @@ ca:
             error: 'Error en actualitzar l''ítem de menú: %{error}'
             success: Ítem de menú actualitzat correctament
           url_exists: Aquesta URL ha estat configurada en un altre ítem de menú, si us plau edita'l en comptes de crear-ne un de nou.
+        proposal_custom_fields:
+          menu:
+            title: Camps públics
+          private_body: Cos privat
+          private_data_last_remove: Aquestes dades es van destruir fa %{time_ago}.
+          private_data_last_update: Aquestes dades es van actualitzar per última vegada fa %{time_ago}.
+          proposal_private_custom_fields: Camps privats
+          remove_private_data: "👉 És possible que vulgueu eliminar-lo"
+      admin_log:
+        component:
+          destroy_private_data: "%{user_name} ha destruït %{count} elements de dades privades per a %{resource_name} a %{space_name}"
       amendments:
         modal:
           amendment_exists: Una esmena ja existeix
@@ -448,6 +505,7 @@ ca:
           show:
             view_meeting: Veure trobada
             view_proposal: Veure proposta
+      proposal_private_custom_fields_disclosure: Aquesta informació no es publicarà
       validators:
         too_much_caps: Fa servir massa lletres majúscules (més %{percent}% del text)
       voting:
@@ -477,6 +535,9 @@ ca:
       meetings_map:
         view_meeting: Veure trobada
     proposals:
+      admin:
+        exports:
+          awesome_private_proposals: Propostes amb dades privades
       proposals:
         orders:
           az: A-Z (Alfabètic)
@@ -488,6 +549,12 @@ ca:
   layouts:
     decidim:
       decidim_awesome:
+        admin:
+          maintenance:
+            title: 'Eines de manteniment: %{title}'
+            titles:
+              checks: Anàlisi de compatibilitat amb el sistema
+              private_data: Neteja de dades privades
         awesome_config:
           amendments: Esmenes
           autosaved_error: L'emmagatzematge local no està disponible al teu navegador, el formulari no es podrà desar automàticament.
