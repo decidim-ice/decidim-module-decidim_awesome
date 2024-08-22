@@ -333,11 +333,11 @@ module Decidim
 
     def self.collation_for(locale)
       @collation_for ||= {}
-      @collation_for[locale] ||= ["#{locale}-x-icu", "#{locale[0..1]}%"].find do |loc|
+      @collation_for[locale] ||= ["#{locale}-x-icu", "#{locale[0..1]}%"].filter_map do |loc|
         sql = ApplicationRecord.sanitize_sql(["SELECT collname FROM pg_collation WHERE collname LIKE ? LIMIT 1", loc])
         res = ActiveRecord::Base.connection.execute(sql).first
-        break res["collname"] if res
-      end
+        res["collname"] if res
+      end.first
     end
 
     def self.enabled?(*config_vars)
