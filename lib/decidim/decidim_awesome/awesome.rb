@@ -333,10 +333,10 @@ module Decidim
 
     def self.collation_for(locale)
       @collation_for ||= {}
-      @collation_for[locale] ||= begin
-        res = ActiveRecord::Base.connection.execute(Arel.sql("SELECT collname FROM pg_collation WHERE collname LIKE '#{locale}-x-icu' LIMIT 1")).first
-        res ||= ActiveRecord::Base.connection.execute(Arel.sql("SELECT collname FROM pg_collation WHERE collname LIKE '#{locale[0..1]}%' LIMIT 1")).first
-        res["collname"] if res
+      @collation_for[locale] ||= ["#{locale}-x-icu", "#{locale[0..1]}%"].each do |loc|
+        sql = Arel.sql(ActiveRecord::Base.connection.sanitize_sql(["SELECT collname FROM pg_collation WHERE collname LIKE ? LIMIT 1", loc]))
+        res = ActiveRecord::Base.connection.execute(sql).first
+        break res["collname"] if res
       end
     end
 
