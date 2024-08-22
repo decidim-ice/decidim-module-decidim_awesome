@@ -115,7 +115,7 @@ ca:
             default_sort_order_options:
               az: A-Z (Alfabètic)
               supported_first: Votades per mi primer
-              supported_last: Votades últimes per mi
+              supported_last: Votades per mi últimes
               za: Z-A (ordre alfabètic invers)
             limit_pending_amendments: Permetre només una esmena pendent a cada proposta.
             sort_orders_enabled: Opcions d'ordenació actives
