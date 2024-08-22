@@ -116,8 +116,8 @@ es:
               voting_cards: Votación con tarjetas de color
             default_sort_order_options:
               az: A-Z (Alfabético)
-              supported_first: Mis soportes primero
-              supported_last: Mis soportes últimos
+              supported_first: Votadas por mi primero
+              supported_last: Votadas por mí últimas
               za: Z-A (Alfabético inverso)
             limit_pending_amendments: Permitir sólo una enmienda pendiente sobre cada propuesta.
             sort_orders_enabled: Tipos de ordenación habilitados
@@ -445,6 +445,7 @@ es:
           private_data_last_remove: Estos datos fueron destruidos hace %{time_ago}.
           private_data_last_update: Estos datos fueron actualizados hace %{time_ago}.
           proposal_private_custom_fields: Campos privados
+          remove_private_data: "👉 Es posible que quieras eliminarlo"
       admin_log:
         component:
           destroy_private_data: "%{user_name} ha destruido %{count} elementos de datos privados para %{resource_name} en %{space_name}"
