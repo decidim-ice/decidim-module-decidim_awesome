@@ -1,3 +1,4 @@
+---
 eu:
   decidim:
     components:
@@ -22,14 +23,28 @@ eu:
           form:
             help:
               use_markdown_editor: This will substitute the Quill WYSIWYG editor, use a Markdown editor instead. Text will be saved as HTML in the database.
+          form_proposal_custom_fields:
+            delete: Ezabatu
+          form_proposal_private_custom_fields:
+            delete: Ezabatu
+          form_scoped_admins:
+            delete: Ezabatu
+          form_scoped_styles:
+            delete: Ezabatu
+          title:
+            editors: Editor hacks
+            proposals: Proposals hacks
+            styles: Custom styles
+            surveys: Surveys & forms
         constraints:
           new:
             cancel: Ezeztatu
           show:
             cancel: Ezeztatu
         menu:
-          checks: System compatibility
           editors: Editor hacks
+          maintenance:
+            checks: System compatibility
           menu_hacks: Menu tweaks
           proposals: Proposals hacks
           styles: Custom styles

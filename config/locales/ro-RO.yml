@@ -1,3 +1,4 @@
+---
 ro:
   activemodel:
     attributes:
@@ -24,8 +25,6 @@ ro:
         target: Deschidere in
         url: URL
         visibility: Vizibilitate
-      proposal:
-        proposal_custom_fields: Câmpuri particularizate
   decidim:
     admin:
       filters:
@@ -96,7 +95,18 @@ ro:
             error: Eroare la crearea unui nou "câmp personalizat"! %{error}
           form:
             edit_label: Redenumește eticheta
+          form_proposal_custom_fields:
+            delete: Șterge
+          form_proposal_private_custom_fields:
+            delete: Șterge
+          form_scoped_admins:
+            delete: Șterge
+          form_scoped_styles:
+            delete: Șterge
           process_groups: Grupuri de procese
+          title:
+            styles: Stiluri personalizate
+            surveys: Chestionare și formulare
         constraints:
           errors:
             not_unique: Această condiție există deja
