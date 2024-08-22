@@ -1,4 +1,3 @@
----
 fr:
   activemodel:
     attributes:
@@ -19,6 +18,7 @@ fr:
         intergram_title_open: Titre de la conversation ouverte
         intergram_use_floating_button: Si coché, la conversation fermée est toujours un bouton au lieu d'un texte
         proposal_custom_fields: Champs personnalisés %{id}
+        proposal_private_custom_fields: Champs privés personnalisés %{id}
         scoped_admins: Groupe d'administrateurs restreints %{id}
         scoped_styles: Style personnalisés %{id}
         validate_body_max_caps_percent: Pourcentage maximum autorisé de lettres majuscules pour la description
@@ -133,6 +133,7 @@ fr:
               za: Z-A (alphabétique inverse)
     decidim_awesome:
       admin:
+        actions: Actions
         admin_accountability:
           admin_roles:
             admin: Super administrateur
@@ -188,6 +189,7 @@ fr:
               Vous pouvez démarrer le processus maintenant et il sera effectué en arrière-plan.
             start_image_migrations: "\U0001F449 Démarrez le processus de migration maintenant"
         config:
+          caution: 'REMARQUE : Cette fonctionnalité modifie fortement certains comportements par défaut qui peuvent conduire à des résultats inattendus. Utilisez-la avec précaution !'
           constraints:
             add_condition: Ajouter une contrainte d'application
             always: Toujours
@@ -234,6 +236,12 @@ fr:
               proposal_custom_fields: Créer des champs personnalisés pour la création de proposition qui s'appliquent uniquement à certaines parties du web public (utilisez les restrictions pour cela)
               proposal_custom_fields_example: Les données sont stockées dans un objet XML en utilisant des attributs HTML compatibles (dl,dt,dd éléments) en remplaçant le "body" dans une proposition standard.
               proposal_custom_fields_translations: "Les libellés, le texte d’aide, les espaces réservés et les valeurs par défaut peuvent utiliser les traductions personnalisées de votre application. \nPour cela, au lieu d'utiliser une chaîne de caractères littérale, utilisez la clé i18n (elle doit contenir au moins un point).\nPar exemple :\n- \"activemodel.attributes.proposal.title au lieu de \"Titre\"\n- \"activemodel.attributes.proposition.address\" au lieu de \"Adresse\"\nOu utilisez vos propres clés en combinaison avec d'autres outils pour définir des traductions (par exemple: utiliser le module de personnalisation des termes) :\n- \"myapp.custom_fields.bio\" à la place de \"Biography\""
+              proposal_private_custom_fields: Similaire aux champs publics, mais cette information ne sera pas visible publiquement (seuls les administrateurs y auront accès).
+              proposal_private_custom_fields_translations: |
+                Les champs privés personnalisés sont affichés dans une section distincte avec ce texte d'information :
+                %{warning}
+                Ce texte peut être personnalisé avec une traduction personnalisée en utilisant la clé:
+                %{key}
               scoped_admins: Promouvoir les utilisateurs réguliers en administrateurs qui ne peuvent administrer que certaines parties de la plateforme (utilisez l'éditeur de restrictions pour cela). Notez que les utilisateurs qui ont déjà les permissions d'administration habituelles seront ignorés.
               scoped_styles: Créer un CSS personnalisé qui s'applique uniquement à certaines parties du site web public (front-end) (utilisez l'éditeur de restrictions pour cela)
               scoped_styles_variables: 'Vous pouvez utiliser les variables CSS suivantes pour les couleurs personnalisées de l''organisation :'
@@ -253,6 +261,9 @@ fr:
             sure_to_remove: Êtes-vous sûr de vouloir détruire ce champ ?
           form_proposal_private_custom_fields:
             delete: Supprimer
+            new: Ajouter une nouvelle section de champs personnalisés
+            remove: Supprimer cette boîte de champs personnalisés
+            sure_to_remove: Êtes-vous sûr de vouloir supprimer ce champ ?
           form_scoped_admins:
             delete: Supprimer
             new: Ajouter un nouveau groupe "Administrateurs de secteur"
@@ -273,6 +284,8 @@ fr:
             admins: Administrateurs de secteur
             editors: Hacks de l'éditeur
             livechat: Chat en direct
+            proposal_custom_fields: 'Champs personnalisés de propositions : champs publics'
+            proposal_private_custom_fields: 'Champs personnalisés de propositions : champs privés'
             proposals: Hacks pour les propositions
             styles: Styles personnalisés
             surveys: Enquêtes et formulaires
@@ -335,6 +348,37 @@ fr:
           update:
             error: Erreur lors de la mise à jour de la redirection! %{error}
             success: Redirection mise à jour avec succès
+        maintenance:
+          private_data:
+            component: Espace / Fonctionnalité
+            confirm_delete: Êtes-vous sûr de vouloir supprimer toutes les données privées pour cette ressource ? Cette action est irréversible.
+            delete: Tout supprimer
+            destroying_private_data: Les données privées pour %{title} sont sur le point d'être effacées. Veuillez vérifier à nouveau dans quelques minutes.
+            done: Terminé
+            help_html: |
+              Cet outil vous permet de supprimer toutes les données privées d'un espace ou d'une fonctionnalité participatif spécifique. Cette action est irréversible et supprimera toutes les données privées de la base de données.
+              <br><br>
+              <strong>Qu'est-ce qui est considéré comme des données privées ?</strong>
+              <br>
+              Les données privées sont toutes les informations qui ne sont pas accessibles au public et qui sont uniquement accessibles aux administrateurs. Cela inclut, pour le moment, les informations des champs personnalisés privés.
+              <br><br>
+              <strong>Que se passe-t-il lorsque je supprime des données privées ?</strong>
+              <br>
+              Lorsque vous supprimez des données privées, toutes les informations privées de l'espace ou du composant participatif sélectionné seront définitivement supprimées de la base de données. Un journal de cette action sera stocké dans le système à des fins d'audit.
+              <br><br>
+              <strong>Qu'advient-il des données publiques ?</strong>
+              <br>
+              Les données publiques ne seront pas affectées par cette action. Seules les données privées seront supprimées.
+              <br><br>
+              <strong>Y a-t-il un délai minimum à attendre avant de supprimer des données privées ?</strong>
+              <br>
+              Oui, vous ne pouvez pas supprimer des données privées si la dernière mise à jour date de moins de %{time_ago}. Vous pouvez modifier cette configuration dans le fichier d'initialisation.
+            items_count: Total affecté
+            last_date: Dernière mise à jour
+            no_data: Aucune donnée privée plus ancienne que %{time_ago}
+            not_destroyable: Cette ressource ne peut pas encore être supprimée
+            removing: Suppression en cours...
+            time_ago: "Il y a %{time}"
         menu:
           admins: Administrateurs de secteur
           custom_redirects: Redirections personnalisées
@@ -342,6 +386,8 @@ fr:
           livechat: Chat en direct
           maintenance:
             checks: Compatibilité système
+            maintenance: Maintenance
+            private_data: Données privées
           menu_hacks: Tweaks de menu
           proposal_custom_fields: Champs de propositions personnalisés
           proposals: Hacks pour les propositions
@@ -385,6 +431,17 @@ fr:
             error: Erreur lors de la mise à jour de l'élément de menu ! %{error}
             success: Élément de menu mis à jour avec succès
           url_exists: La même URL est déjà configurée, veuillez la modifier au lieu de la créer à nouveau.
+        proposal_custom_fields:
+          menu:
+            title: Champs publiques
+          private_body: Corps de proposition privé
+          private_data_last_remove: Ces données ont été détruites il y a %{time_ago}.
+          private_data_last_update: Ces données ont été mises à jour il y a %{time_ago}.
+          proposal_private_custom_fields: Champs privés
+          remove_private_data: "👉 Vous pouvez le supprimer"
+      admin_log:
+        component:
+          destroy_private_data: "%{user_name} a détruit les objets %{count} de données privées pour %{resource_name} dans %{space_name}"
       amendments:
         modal:
           amendment_exists: Un amendement existe déjà
@@ -448,6 +505,7 @@ fr:
           show:
             view_meeting: Voir la rencontre
             view_proposal: Voir la proposition
+      proposal_private_custom_fields_disclosure: Cette information ne sera pas publiée
       validators:
         too_much_caps: Utilise trop de majuscule (plus de %{percent} du texte)
       voting:
@@ -477,6 +535,9 @@ fr:
       meetings_map:
         view_meeting: Voir la rencontre
     proposals:
+      admin:
+        exports:
+          awesome_private_proposals: Les propositions avec des données privées
       proposals:
         orders:
           az: A-Z (alphabétique)
@@ -488,6 +549,12 @@ fr:
   layouts:
     decidim:
       decidim_awesome:
+        admin:
+          maintenance:
+            title: 'Outils de maintenance: %{title}'
+            titles:
+              checks: Vérifications de compatibilité système
+              private_data: Nettoyage des données privées
         awesome_config:
           amendments: Amendements
           autosaved_error: LocalStorage n'est pas pris en charge dans votre navigateur, le formulaire ne peut pas être enregistré automatiquement.

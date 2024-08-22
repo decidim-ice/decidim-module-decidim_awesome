@@ -1,9 +1,8 @@
----
 es:
   activemodel:
     attributes:
       config:
-        additional_proposal_sortings: Habilitar opciones de ordenación adicionales
+        additional_proposal_sortings: Opciones adicionales de ordenación habilitadas
         allow_images_in_editors: Permitir imágenes en el editor HTML
         allow_images_in_proposals: Permitir imágenes en el editor de propuestas
         allow_videos_in_editors: Permitir vídeos en el editor HTML
@@ -19,6 +18,7 @@ es:
         intergram_title_open: Título del chat abierto
         intergram_use_floating_button: Si está marcado, el chat cerrado siempre es un botón en lugar de un texto
         proposal_custom_fields: 'Campos personalizados #%{id}'
+        proposal_private_custom_fields: 'Campos personalizados #%{id}'
         scoped_admins: 'Grupo de administradoras acotadas #%{id}'
         scoped_styles: 'Estilos personalizados #%{id}'
         validate_body_max_caps_percent: Porcentaje máximo permitido de letras mayúsculas para el cuerpo
@@ -114,8 +114,8 @@ es:
               voting_cards: Votación con tarjetas de color
             default_sort_order_options:
               az: A-Z (Alfabético)
-              supported_first: Mis soportes primero
-              supported_last: Mis soportes últimos
+              supported_first: Votadas por mi primero
+              supported_last: Votadas por mí últimas
               za: Z-A (Alfabético inverso)
             limit_pending_amendments: Permitir sólo una enmienda pendiente sobre cada propuesta.
             sort_orders_enabled: Tipos de ordenación habilitados
@@ -133,6 +133,7 @@ es:
               za: Z-A (Alfabético inverso)
     decidim_awesome:
       admin:
+        actions: Acciones
         admin_accountability:
           admin_roles:
             admin: Administradora de plataforma
@@ -188,6 +189,7 @@ es:
               Puedes iniciar el proceso ahora y se realizará en segundo plano.
             start_image_migrations: "\U0001F449 Iniciar el proceso de migración ahora"
         config:
+          caution: 'NOTA: Esta función modifica en gran medida algunos comportamientos por defecto que pueden llevar a resultados inesperados. ¡Utilícelo con precaución!'
           constraints:
             add_condition: Añadir restricción
             always: Siempre
@@ -234,6 +236,12 @@ es:
               proposal_custom_fields: Crea campos personalizados en las propuestas que sólo se aplican en ciertas partes de la web pública (utilizar el editor de restricciones para ello)
               proposal_custom_fields_example: Los datos se almacenan en un objeto XML utilizando atributos HTML compatibles (dl,dt,dd elements) que reemplazan el "cuerpo" en una propuesta normal.
               proposal_custom_fields_translations: "Las etiquetas, el texto de ayuda, placeholders, y los valores predeterminados pueden utilizar las traducciones personalizadas de la aplicación.\nPara ello, en lugar de usar un texto literal, se puede usar la clave i18n (debe contener al menos un punto).\nPor ejemplo:\n- \"activemodel.attributes.proposal.title\" en lugar de \"Título\"\n- \"activemodel.attributes.proposal.address\" en lugar de \"Address\"\nO simplemente usar claves propias en combinación con otras herramientas para definir traducciones (por ejemplo, usando el módulo Term Customizer):\n- \"myapp.custom_fields.bio\" en lugar de \"Biografía\""
+              proposal_private_custom_fields: Similar a los campos públicos, pero esta información no será divulgada públicamente (sólo los administradores tendrán acceso a ella).
+              proposal_private_custom_fields_translations: |
+                Los campos personalizados privados se muestran en un cuadro distinto con este texto de información:
+                %{warning}
+                Este texto se puede personalizar con una traducción personalizada usando la clave:
+                %{key}
               scoped_admins: Promueve usuarias normales a administradoras con acceso limitado a ciertas partes de la web pública (utilizar el editor de restricciones para eso). Tener en cuenta que las usuarias que ya tienen permisos regulares de administración serán ignorados.
               scoped_styles: Crea CSS personalizados que solo se apliquen en ciertas partes de la web pública (para ello, utiliza el editor de restricciones)
               scoped_styles_variables: 'Puedes utilizar las siguientes variables CSS para los colores personalizados de la organización:'
@@ -253,6 +261,9 @@ es:
             sure_to_remove: '¿Estás segura de que quieres eliminar esta caja de campos personalizados?'
           form_proposal_private_custom_fields:
             delete: Eliminar
+            new: Añadir una nueva caja de "campos personalizados"
+            remove: Eliminar esta caja de "campos personalizados"
+            sure_to_remove: '¿Seguro de que quieres eliminar esta caja de campos personalizados?'
           form_scoped_admins:
             delete: Eliminar
             new: Añadir un nuevo grupo de "Administradoras acotadas"
@@ -273,6 +284,8 @@ es:
             admins: Administradoras acotadas
             editors: Modificaciones a los editores
             livechat: Chat en vivo
+            proposal_custom_fields: 'Campos personalizados de propuestas: campos públicos'
+            proposal_private_custom_fields: 'Campos personalizados de propuestas: Campos privados'
             proposals: Modificaciones a las propuestas
             styles: Estilos personalizados
             surveys: Encuestas y formularios
@@ -335,6 +348,37 @@ es:
           update:
             error: '¡Error al actualizar la redirección! %{error}'
             success: Redirección actualizada correctamente
+        maintenance:
+          private_data:
+            component: Espacio / Componente
+            confirm_delete: '¿Está seguro que desea eliminar todos los datos privados de este recurso? Esta acción no se puede deshacer.'
+            delete: Eliminar todo
+            destroying_private_data: Los datos privados para %{title} serán destruidos en breve. Por favor, compruébalo de nuevo en unos minutos.
+            done: Hecho
+            help_html: |
+              Esta herramienta permite eliminar todos los datos privados de un determinado espacio participativo o componente. Esta acción es irreverible y eliminará todos los datos privados de la base de datos.
+              <br><br>
+              <strong>¿Qué se considera información privada?</strong>
+              <br>
+              Los datos privados son cualquier información que no está disponible públicamente y sólo es accesible a los administradores. Esto, en este momento, incluye información privada de los campos personalizados.
+              <br><br>
+              <strong>¿Qué ocurre cuando elimino datos privados?</strong>
+              <br>
+              Al borrar datos privados, toda la información privada del espacio o componente participativo seleccionado será eliminada permanentemente de la base de datos. Un registro de esta acción se almacenará en el sistema para fines de auditoría (pero no los datos en si).
+              <br><br>
+              <strong>¿Qué pasa con los datos públicos?</strong>
+              <br>
+              datos públicos no se verán afectados por esta acción. Sólo los datos privados serán eliminados.
+              <br><br>
+              <strong>¿Hay un tiempo mínimo para esperar antes de eliminar datos privados?</strong>
+              <br>
+              Sí, no puede eliminar datos privados si la última actualización fue menor que la %{time_ago} . Puede cambiar esta configuración en un archivo inicializador.
+            items_count: Total afectados
+            last_date: Última actualización
+            no_data: No se han encontrado datos privados anteriores a %{time_ago}
+            not_destroyable: Este recurso no puede ser destruido todavía
+            removing: Eliminando...
+            time_ago: "Hace %{time}"
         menu:
           admins: Administradoras acotadas
           custom_redirects: Redirecciones personalizadas
@@ -342,6 +386,8 @@ es:
           livechat: Chat en vivo
           maintenance:
             checks: Compatibilidad del sistema
+            maintenance: Mantenimiento
+            private_data: Datos privados
           menu_hacks: Ajustes en el menú
           proposal_custom_fields: Campos personalizados para propuestas
           proposals: Modificaciones a las propuestas
@@ -385,6 +431,17 @@ es:
             error: 'Error al actualizar el ítem de menú: %{error}'
             success: Ítem de menú actualizado correctamente
           url_exists: Esta URL ya ha sido configurada en otro ítem de menú, por favor edítalo en lugar de crear uno nuevo.
+        proposal_custom_fields:
+          menu:
+            title: Campos públicos
+          private_body: Cuerpo privado
+          private_data_last_remove: Estos datos fueron destruidos hace %{time_ago}.
+          private_data_last_update: Estos datos fueron actualizados hace %{time_ago}.
+          proposal_private_custom_fields: Campos privados
+          remove_private_data: "👉 Es posible que quieras eliminarlo"
+      admin_log:
+        component:
+          destroy_private_data: "%{user_name} ha destruido %{count} elementos de datos privados para %{resource_name} en %{space_name}"
       amendments:
         modal:
           amendment_exists: Ya existe una enmienda
@@ -448,6 +505,7 @@ es:
           show:
             view_meeting: Ver encuentro
             view_proposal: Ver propuesta
+      proposal_private_custom_fields_disclosure: Esta información no será publicada
       validators:
         too_much_caps: Contiene demasiadas letras mayúsculas (más del %{percent}% del texto)
       voting:
@@ -477,6 +535,9 @@ es:
       meetings_map:
         view_meeting: Ver encuentro
     proposals:
+      admin:
+        exports:
+          awesome_private_proposals: Propuestas con datos privados
       proposals:
         orders:
           az: A-Z (Alfabético)
@@ -488,6 +549,12 @@ es:
   layouts:
     decidim:
       decidim_awesome:
+        admin:
+          maintenance:
+            title: 'Herramientas de mantenimiento: %{title}'
+            titles:
+              checks: Análisis de compatibilidad del sistema
+              private_data: Limpieza de datos privados
         awesome_config:
           amendments: Enmiendas
           autosaved_error: El almacenamiento local no es compatible con tu navegador, el formulario no se podrá guardar automáticamente.

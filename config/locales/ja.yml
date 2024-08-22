@@ -1,4 +1,3 @@
----
 ja:
   activemodel:
     attributes:
@@ -19,6 +18,7 @@ ja:
         intergram_title_open: 開いたチャットのタイトル
         intergram_use_floating_button: チェックした場合、閉じたチャットは常にテキストの代わりにボタンになります
         proposal_custom_fields: 'カスタム項目 #%{id}'
+        proposal_private_custom_fields: 非公開カスタムフィールド %{id}
         scoped_admins: 'スコープ付き管理者グループ #%{id}'
         scoped_styles: 'カスタムスタイル #%{id}'
         validate_body_max_caps_percent: 本文内での大文字の最大許容割合
@@ -133,6 +133,7 @@ ja:
               za: Z-A (アルファベット逆順)
     decidim_awesome:
       admin:
+        actions: アクション
         admin_accountability:
           admin_roles:
             admin: スーパー管理者
@@ -188,6 +189,7 @@ ja:
               処理を開始すると、バックグラウンドで実行されます。
             start_image_migrations: "\U0001F449 今すぐ移行プロセスを開始する"
         config:
+          caution: '注意: この機能は、予期しない結果につながる可能性があるデフォルトの動作を大きく変更します。注意して使用してください！'
           constraints:
             add_condition: 条件を追加
             always: すべて
@@ -234,6 +236,12 @@ ja:
               proposal_custom_fields: 公開ウェブの特定の部分にのみ適用されるカスタム提案項目を作成します (制限されたエディタを使用してください)
               proposal_custom_fields_example: データは、互換性のある HTML 属性 (dl,dt,dd 要素) を使用した XML オブジェクトとして格納され、通常の提案の "body" を置き換えます。
               proposal_custom_fields_translations: "ラベル、ヘルプテキスト、プレースホルダー、デフォルト値には、アプリケーション独自の翻訳を使用できます。\nそのためには、文字列リテラルを使う代わりに、I18Nキーを使います（少なくとも1つのドットを含んでいなければなりません）。\n例えば、以下のようになります:\n- \"Title\" の代わりに \"activemodel.attributes.proposal.title\" を使用する\n- \"Address \"の代わりに \"activemodel.attributes.proposal.address\" を使用する\nまた、独自のキーを他のツールと組み合わせて翻訳を定義することもできます (例: Term Customizer モジュールを使用する):\n - \"Biography \"の代わりに \"myapp.custom_fields.bio\"を使用する"
+              proposal_private_custom_fields: 公開フィールドと同様ですが、この情報は公開されません(管理者のみがアクセスできます)。
+              proposal_private_custom_fields_translations: |
+                非公開カスタムフィールドは、このテキストで別個のボックスに表示されます：
+                %{warning}
+                このテキストは、下記のキーを使用してカスタム翻訳でカスタマイズできます：
+                %{key}
               scoped_admins: 一般ユーザーを公開ウェブの特定の部分だけを管理できる管理者に昇格させます(制限エディターを使用してください)。 すでに通常の管理者権限を持つユーザーは無視されることに注意してください。
               scoped_styles: 公開ウェブの特定の部分にのみ適用されるカスタムCSSを作成します (制限されたエディタを使用してください)
               scoped_styles_variables: '組織の色のカスタマイズには、以下のCSS変数が使用できます。'
@@ -253,6 +261,9 @@ ja:
             sure_to_remove: この項目ボックスを削除してもよろしいですか？
           form_proposal_private_custom_fields:
             delete: 削除
+            new: 新しい「非公開カスタムフィールド」を追加
+            remove: '「非公開カスタムフィールド」を削除'
+            sure_to_remove: この非公開フィールドボックスを破棄してもよろしいですか？
           form_scoped_admins:
             delete: 削除
             new: 新しい「スコープ付き管理者」グループを追加
@@ -273,6 +284,8 @@ ja:
             admins: スコープ付き管理者
             editors: エディター設定
             livechat: ライブチャット
+            proposal_custom_fields: '提案カスタムフィールド: 公開フィールド'
+            proposal_private_custom_fields: '提案カスタムフィールド: 非公開フィールド'
             proposals: 提案の設定
             styles: 独自スタイル
             surveys: 調査＆フォーム
@@ -336,6 +349,37 @@ ja:
           update:
             error: 'リダイレクトの更新中にエラーが発生しました: %{error}'
             success: リダイレクトを更新しました
+        maintenance:
+          private_data:
+            component: スペース/コンポーネント
+            confirm_delete: このリソースのすべてのプライベートデータを削除してもよろしいですか？この操作は元に戻せません。
+            delete: 全て削除
+            destroying_private_data: '%{title} のプライベートデータが破棄されるように設定されています。数分後にもう一度確認してください。'
+            done: 実行済み
+            help_html: |
+              このツールを使用すると、特定の参加スペースまたはコンポーネントに関連するすべてのプライベートデータを削除することができます。この操作は取り消しができず、データベースからすべてのプライベートデータが削除されます。
+              <br><br>
+              <strong>プライベートデータとは何ですか？</strong>
+              <br>
+              プライベートデータとは、公開されておらず、管理者のみがアクセスできる情報のことを指します。現在のところ、非公開カスタムフィールドの情報がこれに該当します。
+              <br><br>
+              <strong>プライベートデータを削除するとどうなりますか？</strong>
+              <br>
+              プライベートデータを削除すると、選択した参加スペースまたはコンポーネントに関連するすべてのプライベート情報がデータベースから完全に削除されます。この操作のログは、監査目的でシステムに保存されます。
+              <br><br>
+              <strong>公開データはどうなりますか？</strong>
+              <br>
+              公開データにはこの操作の影響はありません。削除されるのはプライベートデータのみです。
+              <br><br>
+              <strong>プライベートデータを削除するまでの最低待機時間はありますか？</strong>
+              <br>
+              はい、最後の更新から%{time_ago} 未満である場合、プライベートデータを削除することはできません。この設定は、イニシャライザーファイルで変更できます。
+            items_count: 影響の合計数
+            last_date: 最終更新日
+            no_data: '%{time_ago} 前より古いプライベートデータは見つかりませんでした'
+            not_destroyable: このリソースはまだ破棄できません
+            removing: 削除中...
+            time_ago: "%{time} 前"
         menu:
           admins: スコープ付き管理者
           custom_redirects: カスタムリダイレクト
@@ -343,6 +387,8 @@ ja:
           livechat: ライブチャット
           maintenance:
             checks: システム互換性
+            maintenance: メンテナンス
+            private_data: プライベートデータ
           menu_hacks: メニュー調整
           proposal_custom_fields: 提案カスタム項目
           proposals: 提案の設定
@@ -386,6 +432,17 @@ ja:
             error: メニュー項目更新エラー %{error}
             success: メニュー項目は正常に更新されました
           url_exists: 同じURLがすでに設定されています。もう一度作成し直す前に、内容を修正してください。
+        proposal_custom_fields:
+          menu:
+            title: 公開フィールド
+          private_body: 非公開本文
+          private_data_last_remove: このデータは %{time_ago} 前に破棄されました。
+          private_data_last_update: このデータは最後に更新されたのは %{time_ago} 前です。
+          proposal_private_custom_fields: 非公開フィールド
+          remove_private_data: "👉 削除することを検討してもよいでしょう"
+      admin_log:
+        component:
+          destroy_private_data: "%{user_name} は %{space_name} 内のプライベートデータの項目 %{resource_name} を%{count} 件破棄しました"
       amendments:
         modal:
           amendment_exists: 修正は既に存在します
@@ -447,6 +504,7 @@ ja:
           show:
             view_meeting: ミーティングを表示
             view_proposal: 提案を表示
+      proposal_private_custom_fields_disclosure: この情報は公開されません
       validators:
         too_much_caps: 大文字が多すぎます（テキストの %{percent}%以上）
       voting:
@@ -476,6 +534,9 @@ ja:
       meetings_map:
         view_meeting: ミーティングを表示
     proposals:
+      admin:
+        exports:
+          awesome_private_proposals: プライベートデータを含む提案
       proposals:
         orders:
           az: A-Z (アルファベット順)
@@ -487,6 +548,12 @@ ja:
   layouts:
     decidim:
       decidim_awesome:
+        admin:
+          maintenance:
+            title: 'メンテナンスツール： %{title}'
+            titles:
+              checks: システム互換性チェック
+              private_data: プライベートデータのクリーンアップ
         awesome_config:
           amendments: 修正
           autosaved_error: お使いのブラウザーではLocalStorageをサポートしていないため、フォームは自動保存されません。
