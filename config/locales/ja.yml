@@ -18,6 +18,7 @@ ja:
         intergram_title_open: 開いたチャットのタイトル
         intergram_use_floating_button: チェックした場合、閉じたチャットは常にテキストの代わりにボタンになります
         proposal_custom_fields: 'カスタム項目 #%{id}'
+        proposal_private_custom_fields: 非公開カスタムフィールド %{id}
         scoped_admins: 'スコープ付き管理者グループ #%{id}'
         scoped_styles: 'カスタムスタイル #%{id}'
         validate_body_max_caps_percent: 本文内での大文字の最大許容割合
@@ -132,6 +133,7 @@ ja:
               za: Z-A (アルファベット逆順)
     decidim_awesome:
       admin:
+        actions: アクション
         admin_accountability:
           admin_roles:
             admin: スーパー管理者
@@ -253,6 +255,9 @@ ja:
             sure_to_remove: この項目ボックスを削除してもよろしいですか？
           form_proposal_private_custom_fields:
             delete: 削除
+            new: 新しい「非公開カスタムフィールド」を追加
+            remove: '「非公開カスタムフィールド」を削除'
+            sure_to_remove: この非公開フィールドボックスを破棄してもよろしいですか？
           form_scoped_admins:
             delete: 削除
             new: 新しい「スコープ付き管理者」グループを追加
@@ -273,6 +278,8 @@ ja:
             admins: スコープ付き管理者
             editors: エディター設定
             livechat: ライブチャット
+            proposal_custom_fields: '提案カスタムフィールド: 公開フィールド'
+            proposal_private_custom_fields: '提案カスタムフィールド: 非公開フィールド'
             proposals: 提案の設定
             styles: 独自スタイル
             surveys: 調査＆フォーム
@@ -336,6 +343,12 @@ ja:
           update:
             error: 'リダイレクトの更新中にエラーが発生しました: %{error}'
             success: リダイレクトを更新しました
+        maintenance:
+          private_data:
+            component: スペース/コンポーネント
+            confirm_delete: このリソースのすべてのプライベートデータを削除してもよろしいですか？この操作は元に戻せません。
+            delete: 全て削除
+            done: 実行済み
         menu:
           admins: スコープ付き管理者
           custom_redirects: カスタムリダイレクト
