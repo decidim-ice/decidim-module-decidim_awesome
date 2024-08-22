@@ -114,8 +114,8 @@ es:
               voting_cards: Votación con tarjetas de color
             default_sort_order_options:
               az: A-Z (Alfabético)
-              supported_first: Mis soportes primero
-              supported_last: Mis soportes últimos
+              supported_first: Votadas por mi primero
+              supported_last: Votadas por mí últimas
               za: Z-A (Alfabético inverso)
             limit_pending_amendments: Permitir sólo una enmienda pendiente sobre cada propuesta.
             sort_orders_enabled: Tipos de ordenación habilitados
