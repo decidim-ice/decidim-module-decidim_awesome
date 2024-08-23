@@ -1,6 +1,16 @@
 CHANGELOG
 =========
 
+v0.11.2
+-------
+
+Compatibility:
+  - Decidim v0.28.x
+
+Features:
+  - SQL vulnerability fix for admin accountability
+  - Private fields proposal draft update fix
+
 v0.11.1
 ------
 
