@@ -106,6 +106,10 @@ module Decidim::DecidimAwesome
         expect(PaperTrailVersion.in_organization(external_organization).admin_role_actions("valuator")).to include(external_paper_trail_version)
         expect(PaperTrailVersion.in_organization(external_organization).admin_role_actions("admin")).to eq([])
       end
+
+      it "ignores invalid filters" do
+        expect(PaperTrailVersion.in_organization(organization).admin_role_actions("%')")).to eq([])
+      end
     end
   end
 end

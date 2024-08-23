@@ -13,7 +13,8 @@ Features:
   - Added GraphQL types for custom fields in the API
   - Adds parsed information about custom fields in the Proposals export
   - Adds parsed information bout private custom fields when admins exports private data
-  - Adds a maintenance menu with tools to remove old private data
+  - Adds a maintenance menu with tools to remove old private 
+  - SQL vulnerability fix for admin accountability
 
 v0.10.2
 ------
