@@ -133,6 +133,7 @@ de:
               za: Z-A (umgekehrt alphabetisch)
     decidim_awesome:
       admin:
+        actions: Aktionen
         admin_accountability:
           admin_roles:
             admin: Superadministrator
@@ -343,6 +344,11 @@ de:
           update:
             error: Fehler beim Aktualisieren der Umleitung! %{error}
             success: Umleitung erfolgreich aktualisiert
+        maintenance:
+          private_data:
+            component: Bereich / Komponente
+            confirm_delete: Sind Sie sicher, dass Sie alle privaten Daten für diese Ressource löschen möchten? Dies kann nicht rückgängig gemacht werden.
+            delete: Alle löschen
         menu:
           admins: Eingeschränkte Admins
           custom_redirects: Benutzerdefinierte Umleitungen
