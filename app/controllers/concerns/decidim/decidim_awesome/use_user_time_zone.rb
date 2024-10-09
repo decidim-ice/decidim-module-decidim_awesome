@@ -22,6 +22,8 @@ module Decidim
         #
         # Returns a String.
         def user_time_zone
+          return if helpers&.awesome_config&.[](:user_timezone).blank?
+
           @user_time_zone ||= current_user&.extended_data&.[]("time_zone")
         end
       end

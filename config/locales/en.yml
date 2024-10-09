@@ -56,6 +56,8 @@ en:
         target: Opens in
         url: URL
         visibility: Visibility
+      user:
+        user_time_zone: Personal timezone
   decidim:
     admin:
       actions:
@@ -153,6 +155,10 @@ en:
               supported_last: Supported last
               za: Z-A (Reverse alphabetical)
     decidim_awesome:
+      account:
+        timezone_select:
+          time_zone_helper: Use your personal time zone to display dates in your local
+            time when you are logged in.
       admin:
         actions: Actions
         admin_accountability:
