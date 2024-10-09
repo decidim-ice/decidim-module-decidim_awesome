@@ -355,6 +355,8 @@ de:
             component: Bereich / Komponente
             confirm_delete: Sind Sie sicher, dass Sie alle privaten Daten für diese Ressource löschen möchten? Dies kann nicht rückgängig gemacht werden.
             delete: Alle löschen
+            destroying_private_data: Die privaten Daten für %{title} werden gelöscht. Bitte versuchen Sie es in ein paar Minuten noch einmal.
+            done: Erledigt
         menu:
           admins: Eingeschränkte Admins
           custom_redirects: Benutzerdefinierte Umleitungen
