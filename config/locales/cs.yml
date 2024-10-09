@@ -445,6 +445,7 @@ cs:
           private_data_last_remove: Tato data byla zničena před %{time_ago}.
           private_data_last_update: Tato data byla naposledy aktualizována před %{time_ago}.
           proposal_private_custom_fields: Soukromá pole
+          remove_private_data: "👉 Možná je chcete odstranit"
       admin_log:
         component:
           destroy_private_data: "%{user_name} zničil %{count} položky soukromých dat pro %{resource_name} v %{space_name}"
