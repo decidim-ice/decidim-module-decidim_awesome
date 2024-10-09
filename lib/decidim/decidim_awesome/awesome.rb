@@ -160,7 +160,7 @@ module Decidim
     # if set to false, the select won't be shown but it can still be configured by the admins
     # if set to :disabled the feature will be completly removed
     config_accessor :user_timezone do
-      true
+      false
     end
 
     # How old must be the private data to be considered expired and therefore presented to the admins for deletion
