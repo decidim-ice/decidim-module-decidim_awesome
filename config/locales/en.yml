@@ -26,6 +26,7 @@ en:
         proposal_private_custom_fields: Private Custom fields %{id}
         scoped_admins: Scoped admins group %{id}
         scoped_styles: Custom styles %{id}
+        user_timezone: Allow users to set their timezone in their profile
         validate_body_max_caps_percent: Maximum allowed percentage of capital letters
           for the body
         validate_body_max_marks_together: Maximum consecutive marks symbols allowed
@@ -312,6 +313,9 @@ en:
                 of the public web (use the restrictions editor for that)
               scoped_styles_variables: 'You can use the following CSS variables for
                 organization customized colors:'
+              user_timezone: This will a add a select box in the user profile to set
+                the timezone. This will be used to show dates and times in the user
+                local time.
               validate_body_max_caps_percent: Zero won't allow any capital letter,
                 100 will force to write everything in capital letters
               validate_body_max_marks_together: 'Limit the number of question and

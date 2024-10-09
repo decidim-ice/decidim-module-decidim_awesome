@@ -30,6 +30,7 @@ describe Decidim::DecidimAwesome do
   let!(:allow_images_in_editors) { create(:awesome_config, organization:, var: :allow_images_in_editors, value: true) }
   let!(:allow_videos_in_editors) { create(:awesome_config, organization:, var: :allow_videos_in_editors, value: true) }
   let!(:auto_save_forms) { create(:awesome_config, organization:, var: :auto_save_forms, value: true) }
+  let!(:user_timezone) { create(:awesome_config, organization:, var: :user_timezone, value: true) }
   let!(:intergram_for_admins) { create(:awesome_config, organization:, var: :intergram_for_admins, value: true) }
   let!(:intergram_for_public) { create(:awesome_config, organization:, var: :intergram_for_public, value: true) }
   let!(:intergram_public_settings) { create(:awesome_config, organization:, var: :intergram_for_public_settings, value: intergram) }
