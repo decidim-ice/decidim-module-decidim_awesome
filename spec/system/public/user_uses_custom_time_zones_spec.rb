@@ -29,6 +29,7 @@ describe "User uses custom time zones" do
     end
     visit decidim.account_path
     expect(page).to have_select("user_user_time_zone", selected: "(GMT-01:00) Azores")
+    fill_in "Name", with: "John Willson"
     select "(GMT-10:00) Hawaii", from: "user_user_time_zone"
     click_button "Update account"
     expect(page).to have_content("Your account was successfully updated.")
@@ -37,7 +38,8 @@ describe "User uses custom time zones" do
     within ".card__list-metadata" do
       expect(page).to have_content("19:00 PM HST")
     end
-    expect(user.reload.extended_data["some_variable"]).to eq("Some value")
+    expect(user.reload.name).to eq("John Willson")
+    expect(user.extended_data["some_variable"]).to eq("Some value")
     expect(user.extended_data["time_zone"]).to eq("Hawaii")
   end
 
@@ -51,6 +53,9 @@ describe "User uses custom time zones" do
       end
       visit decidim.account_path
       expect(page).not_to have_select("user_user_time_zone")
+      fill_in "Your name", with: "John Willson"
+      click_button "Update account"
+      expect(user.reload.name).to eq("John Willson")
     end
   end
 end
