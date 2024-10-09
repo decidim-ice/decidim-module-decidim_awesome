@@ -29,7 +29,7 @@ describe "User uses custom time zones" do
     end
     visit decidim.account_path
     expect(page).to have_select("user_user_time_zone", selected: "(GMT-01:00) Azores")
-    fill_in "Name", with: "John Willson"
+    fill_in "Your name", with: "John Willson"
     select "(GMT-10:00) Hawaii", from: "user_user_time_zone"
     click_button "Update account"
     expect(page).to have_content("Your account was successfully updated.")
