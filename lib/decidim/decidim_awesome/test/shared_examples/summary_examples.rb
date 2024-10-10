@@ -155,13 +155,14 @@ end
 
 shared_examples "basic rendering" do |enabled|
   describe "shows public pages", type: :system do
-    let(:image_vars) do
+    let(:boolean_vars) do
       [
         :allow_images_in_proposals,
         :allow_videos_in_editors,
         :allow_images_in_editors,
         :allow_images_in_proposals,
         :auto_save_forms,
+        :user_timezone,
         :intergram_for_admins,
         :intergram_for_public
       ]
@@ -186,8 +187,8 @@ shared_examples "basic rendering" do |enabled|
     end
 
     if enabled
-      it "has editor images configs enabled" do
-        image_vars.each do |var|
+      it "has boolean configs enabled" do
+        boolean_vars.each do |var|
           expect(page.body).to have_content("\"#{var}\":true")
         end
       end
@@ -200,8 +201,8 @@ shared_examples "basic rendering" do |enabled|
         expect(page.body).to have_content(styles)
       end
     else
-      it "has editor images configs disabled" do
-        image_vars.each do |var|
+      it "has boolean configs disabled" do
+        boolean_vars.each do |var|
           expect(page.body).to have_content("\"#{var}\":false")
         end
       end

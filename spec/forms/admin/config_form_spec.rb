@@ -31,6 +31,7 @@ module Decidim::DecidimAwesome
           foo: valid_fields
         }
       end
+      let(:user_timezone) { true }
       let(:valid_fields) { '[{"foo":"bar"}]' }
       let(:invalid_fields) { '[{"foo":"bar"}]{"baz":"zet"}' }
 
@@ -114,6 +115,22 @@ module Decidim::DecidimAwesome
           end
 
           it { is_expected.not_to be_valid }
+        end
+      end
+
+      describe "user timezone" do
+        let(:attributes) do
+          {
+            user_timezone:
+          }
+        end
+
+        it { is_expected.to be_valid }
+
+        context "and user timezone is false" do
+          let(:user_timezone) { false }
+
+          it { is_expected.to be_valid }
         end
       end
 

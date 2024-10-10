@@ -1,0 +1,3 @@
+<!-- insert_after 'erb[loud]:contains("@account.organization.available_locales")' -->
+
+<%= render partial: "decidim/decidim_awesome/account/timezone_select", locals: { f: f } %>

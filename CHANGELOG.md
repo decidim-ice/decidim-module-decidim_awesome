@@ -1,6 +1,14 @@
 CHANGELOG
 =========
 
+Current
+-------
+Compatibility:
+  - Decidim v0.28.x
+
+Features:
+  - Added user time zones in account settings
+
 v0.11.2
 -------
 

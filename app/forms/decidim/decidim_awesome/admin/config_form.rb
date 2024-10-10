@@ -15,6 +15,7 @@ module Decidim
         attribute :scoped_styles, Hash
         attribute :proposal_custom_fields, Hash
         attribute :proposal_private_custom_fields, Hash
+        attribute :user_timezone, Boolean
         attribute :scoped_admins, Hash
         attribute :menu, [MenuForm]
         attribute :intergram_for_admins, Boolean

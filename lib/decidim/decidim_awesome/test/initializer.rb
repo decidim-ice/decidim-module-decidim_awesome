@@ -7,6 +7,7 @@ Decidim::DecidimAwesome.configure do |config|
       :allow_videos_in_editors,
       :allow_images_in_proposals,
       :auto_save_forms,
+      :user_timezone,
       :intergram_for_admins,
       :intergram_for_public,
       :scoped_styles,

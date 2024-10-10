@@ -379,6 +379,12 @@ This menu will show if there's any data older than 6 months (configurable) and w
 
 ![Private data](examples/private_data.png)
 
+#### 19. User custom timezone
+
+If your organization spans across multiple timezones, you can enable this feature under the "Surveys & Forms" section in the Awesome admin panel. This allows users to set their own timezone, which will be used to display dates and times throughout the platform according to their preference.
+
+![User time zone select](examples/user_timezone.png)
+
 #### To be continued...
 
 We're not done! Please check the [issues](/decidim-ice/decidim-module-decidim_awesome/issues) (and participate) to see what's on our mind

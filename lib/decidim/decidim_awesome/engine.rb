@@ -72,6 +72,11 @@ module Decidim
           Decidim::Proposals::CollaborativeDraft.include(Decidim::DecidimAwesome::HasProposalExtraFields)
         end
 
+        if Decidim::DecidimAwesome.enabled?(:user_timezone)
+          Decidim::AccountForm.include(Decidim::DecidimAwesome::AccountFormOverride)
+          Decidim::UpdateAccount.include(Decidim::DecidimAwesome::UpdateAccountOverride)
+        end
+
         if DecidimAwesome.enabled?(:weighted_proposal_voting)
           # add vote weight to proposal vote
           Decidim::Proposals::ProposalVote.include(Decidim::DecidimAwesome::HasVoteWeight)
@@ -101,6 +106,8 @@ module Decidim
 
       initializer "decidim_decidim_awesome.overrides", after: "decidim.action_controller" do
         config.to_prepare do
+          Decidim::ApplicationController.include(Decidim::DecidimAwesome::UseUserTimeZone) if Decidim::DecidimAwesome.enabled?(:user_timezone)
+
           # Auto-insert some csp directives
           Decidim::ApplicationController.include(Decidim::DecidimAwesome::ContentSecurityPolicy)
           Decidim::Admin::ApplicationController.include(Decidim::DecidimAwesome::ContentSecurityPolicy)
