@@ -376,6 +376,7 @@ de:
               Ja, Sie können keine privaten Daten löschen, wenn die letzte Aktualisierung weniger als %{time_ago} zurückliegt. Sie können diese Konfiguration in der Initialisierungsdatei ändern.
             items_count: Betroffene Gesamtmenge
             last_date: Letzte Aktualisierung
+            no_data: Es wurden keine privaten Daten gefunden, die älter sind als %{time_ago}
         menu:
           admins: Eingeschränkte Admins
           custom_redirects: Benutzerdefinierte Umleitungen
