@@ -21,6 +21,7 @@ de:
         proposal_private_custom_fields: 'Privates Eingabefeld #%{id}'
         scoped_admins: Eingeschränkte Admin-Gruppe %{id}
         scoped_styles: Eigene Eingabefelder %{id}
+        user_timezone: Erlauben Sie Benutzern, ihre Zeitzone in ihrem Profil einzustellen
         validate_body_max_caps_percent: Maximal erlaubter Prozentsatz an Großbuchstaben für den Textkörper
         validate_body_max_marks_together: Maximal erlaubte aufeinanderfolgende Zeichen im Textkörper
         validate_body_min_length: Minimale zwingend erforderliche Anzahl Zeichen im Textkörper
@@ -46,6 +47,8 @@ de:
         target: Öffnet in
         url: URL
         visibility: Sichtbarkeit
+      user:
+        user_time_zone: Eigene Zeitzone
   decidim:
     admin:
       actions:
@@ -132,6 +135,9 @@ de:
               supported_last: Zuletzt unterstützt
               za: Z-A (umgekehrt alphabetisch)
     decidim_awesome:
+      account:
+        timezone_select:
+          time_zone_helper: Verwenden Sie Ihre eigene Zeitzone, um die Daten in Ihrer Ortszeit anzuzeigen, wenn Sie angemeldet sind.
       admin:
         actions: Aktionen
         admin_accountability:
@@ -245,6 +251,7 @@ de:
               scoped_admins: Befördern Sie normale Benutzer zu Administratoren, die nur bestimmte Teile der öffentlichen Seite verwalten können (verwenden Sie dazu den Editor für Einschränkungen). Beachten Sie, dass Benutzer, die bereits reguläre Administratorrechte haben, ignoriert werden. For instance, if having configured /my-origin => /my-destination, a request to /my-origin?locale=ca  will be redirected to "/my-destination?locale=ca".
               scoped_styles: Erstellen Sie benutzerdefinierte CSS, die nur in bestimmten Bereichen der öffentlichen Seite gelten (vewenden Sie dazu die Einschränkungen)
               scoped_styles_variables: 'Sie können die folgenden CSS-Variablen für die benutzerdefinierter Farben der Organisation verwenden:'
+              user_timezone: Dadurch wird ein Auswahlfeld im Benutzerprofil hinzugefügt, um die Zeitzone festzulegen. Dies wird verwendet, um Datums- und Zeitangaben in der Ortszeit des Benutzers anzuzeigen.
               validate_body_max_caps_percent: 0 lässt keinen Großbuchstaben zu, 100 lässt ausschliesslich Großbuchstaben zu
               validate_body_max_marks_together: 'Begrenzt die Anzahl der Frage- und Ausrufezeichen, die zusammen geschrieben werden können. Zum Beispiel: Der Wert 2 führt dazu, dass ''!!!'' im Text nicht erlaubt ist'
               validate_body_min_length: Diese Zahl kann Null sein, was das Feld dann effektiv als "nicht obligatorisch" setzt
@@ -371,6 +378,9 @@ de:
             items_count: Betroffene Gesamtmenge
             last_date: Letzte Aktualisierung
             no_data: Es wurden keine privaten Daten gefunden, die älter sind als %{time_ago}
+            not_destroyable: Diese Ressource kann nicht gelöscht werden
+            removing: Entfernen...
+            time_ago: "vor %{time}"
         menu:
           admins: Eingeschränkte Admins
           custom_redirects: Benutzerdefinierte Umleitungen
@@ -378,6 +388,8 @@ de:
           livechat: Live-Chat
           maintenance:
             checks: Checks
+            maintenance: Wartung
+            private_data: Persönliche Daten
           menu_hacks: Menüanpassungen
           proposal_custom_fields: 'Vorschläge: Eigene Eingabefelder'
           proposals: Vorschläge
@@ -425,7 +437,13 @@ de:
           menu:
             title: Öffentlich sichtbare Felder
           private_body: Privater Textkörper
+          private_data_last_remove: Diese Daten wurden vor %{time_ago} gelöscht.
+          private_data_last_update: Diese Daten wurden vor %{time_ago} gelöscht.
           proposal_private_custom_fields: Private Felder
+          remove_private_data: "👉 Sie können es entfernen"
+      admin_log:
+        component:
+          destroy_private_data: "%{user_name} hat %{count} private Daten für %{resource_name} in %{space_name} gelöscht"
       amendments:
         modal:
           amendment_exists: Eine Änderung existiert bereits
@@ -525,6 +543,11 @@ de:
   layouts:
     decidim:
       decidim_awesome:
+        admin:
+          maintenance:
+            title: 'Wartungswerkzeuge: %{title}'
+            titles:
+              checks: Systemkompatibilitätsprüfungen
         awesome_config:
           amendments: Änderungsvorschläge
           autosaved_error: Automatisches Speichern fehlgeschlagen
