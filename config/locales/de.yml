@@ -377,6 +377,9 @@ de:
             items_count: Betroffene Gesamtmenge
             last_date: Letzte Aktualisierung
             no_data: Es wurden keine privaten Daten gefunden, die älter sind als %{time_ago}
+            not_destroyable: Diese Ressource kann nicht gelöscht werden
+            removing: Entfernen...
+            time_ago: "vor %{time}"
         menu:
           admins: Eingeschränkte Admins
           custom_redirects: Benutzerdefinierte Umleitungen
@@ -384,6 +387,8 @@ de:
           livechat: Live-Chat
           maintenance:
             checks: Checks
+            maintenance: Wartung
+            private_data: Persönliche Daten
           menu_hacks: Menüanpassungen
           proposal_custom_fields: 'Vorschläge: Eigene Eingabefelder'
           proposals: Vorschläge
@@ -432,8 +437,13 @@ de:
           menu:
             title: Öffentlich sichtbare Felder
           private_body: Privater Textkörper
+          private_data_last_remove: Diese Daten wurden vor %{time_ago} gelöscht.
+          private_data_last_update: Diese Daten wurden vor %{time_ago} gelöscht.
           proposal_private_custom_fields: Private Felder
           remove_private_data: "\U0001F449 Möglicherweise möchten Sie es entfernen"
+      admin_log:
+        component:
+          destroy_private_data: "%{user_name} hat %{count} private Daten für %{resource_name} in %{space_name} gelöscht"
       amendments:
         modal:
           current_amendment_html: <p>Sie können <a href="%{amendment_link}"> hier auf die aktuelle Änderung</a>zugreifen.</p>
@@ -527,6 +537,11 @@ de:
   layouts:
     decidim:
       decidim_awesome:
+        admin:
+          maintenance:
+            title: 'Wartungswerkzeuge: %{title}'
+            titles:
+              checks: Systemkompatibilitätsprüfungen
         awesome_config:
           amendments: Änderungsvorschläge
           autosaved_error: Automatisches Speichern fehlgeschlagen
