@@ -21,6 +21,7 @@ es:
         proposal_private_custom_fields: 'Campos personalizados #%{id}'
         scoped_admins: 'Grupo de administradoras acotadas #%{id}'
         scoped_styles: 'Estilos personalizados #%{id}'
+        user_timezone: Permitir a los usuarios establecer su zona horaria en su perfil
         validate_body_max_caps_percent: Porcentaje máximo permitido de letras mayúsculas para el cuerpo
         validate_body_max_marks_together: Máximo número de símbolos consecutivos permitidos en el cuerpo
         validate_body_min_length: Mínimo de caracteres requeridos para el cuerpo
@@ -46,6 +47,8 @@ es:
         target: Abrir en
         url: URL
         visibility: Visibilidad
+      user:
+        user_time_zone: Zona horaria personal
   decidim:
     admin:
       actions:
@@ -132,6 +135,9 @@ es:
               supported_last: Mis soportes últimos
               za: Z-A (Alfabético inverso)
     decidim_awesome:
+      account:
+        timezone_select:
+          time_zone_helper: Utilice su zona horaria personal para mostrar las fechas en su hora local cuando haya iniciado sesión.
       admin:
         actions: Acciones
         admin_accountability:
@@ -245,6 +251,7 @@ es:
               scoped_admins: Promueve usuarias normales a administradoras con acceso limitado a ciertas partes de la web pública (utilizar el editor de restricciones para eso). Tener en cuenta que las usuarias que ya tienen permisos regulares de administración serán ignorados.
               scoped_styles: Crea CSS personalizados que solo se apliquen en ciertas partes de la web pública (para ello, utiliza el editor de restricciones)
               scoped_styles_variables: 'Puedes utilizar las siguientes variables CSS para los colores personalizados de la organización:'
+              user_timezone: Esto añadirá un selector en el perfil de usuario para establecer la zona horaria. Esto se utilizará para mostrar fechas y horas en la hora local del usuario.
               validate_body_max_caps_percent: Cero no permitirá ninguna letra mayúscula, 100 forzará a escribir todo en mayúsculas
               validate_body_max_marks_together: 'Limitar el número de símbolos de preguntas y exclamaciones que se pueden escribir juntos. Es decir, si es 2, entonces ''!!!'' no estará permitido en el texto'
               validate_body_min_length: Este número puede ser cero, lo que permite que este campo no sea obligatorio
