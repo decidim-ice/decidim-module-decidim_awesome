@@ -156,6 +156,13 @@ module Decidim
       {}
     end
 
+    # whether to add a select to user's profile to allow them to select their preferred time zone
+    # if set to false, the select won't be shown but it can still be configured by the admins
+    # if set to :disabled the feature will be completly removed
+    config_accessor :user_timezone do
+      false
+    end
+
     # How old must be the private data to be considered expired and therefore presented to the admins for deletion
     config_accessor :private_data_expiration_time do
       3.months

@@ -23,6 +23,12 @@ decidim-core:
     decidim-0.28: df28f9321d1bc07757746ed608274e3d
   /app/presenters/decidim/admin_log/component_presenter.rb:
     decidim-0.28: 77e80d527727acdf117a0c4517a69a7c
+  /app/forms/decidim/account_form.rb:
+    decidim-0.28: 11a022ae6ae18ad89da168bec4207935
+  /app/commands/decidim/update_account.rb:
+    decidim-0.28: 363872116fb99372c046b7394d618333
+  /app/views/decidim/account/show.html.erb:
+    decidim-0.28: a0647f1740d696018f73ec8db8c7587a
 decidim-proposals:
   /lib/decidim/proposals/proposal_serializer.rb:
     decidim-0.28: bbd33bdc60defb734b3fb814666bb622
