@@ -163,6 +163,14 @@ module Decidim
       false
     end
 
+    # Forces the user to authorize using some registered verification flow in order to access the platform
+    # if set to an empty array, the user will be able to access the platform without any verification but admins can still enforce it
+    # if set to :disabled the feature will be completly removed
+    # You can initialize some default verification workflow manifests
+    config_accessor :force_authorization_after_login do
+      []
+    end
+
     # How old must be the private data to be considered expired and therefore presented to the admins for deletion
     config_accessor :private_data_expiration_time do
       3.months

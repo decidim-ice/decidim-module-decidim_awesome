@@ -8,6 +8,7 @@ en:
         allow_images_in_proposals: Allow images in the proposals editor
         allow_videos_in_editors: Allow videos in the HTML editor
         auto_save_forms: Auto save forms in local storage
+        force_authorization_after_login: Force authorization after login/registering
         intergram_auto_no_response: A message that is sent one minute after the user
           sends its first message and no response was received
         intergram_auto_response: A message that is sent immediately after the user
@@ -281,6 +282,13 @@ en:
               drag_and_drop_supported: When uploading images, Drag & Drop is supported.
                 Images will be uploaded to the server and inserted as external resources
                 (it doesn't use base64 inline encoding).
+              force_authorization_after_login: 'If enabled, users will be redirected
+                to the authorization page after login or registration if some of the
+                specified authorizations are not granted. This is useful if you want
+                to force users to be verified with a specific authorization before
+                they can login at all (ie: to prevent spam).
+
+                '
               intergram_about: Intergram uses Telegram messenger to handle a live
                 support chat widget embedded in the bottom of the page.
               intergram_config: Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram
@@ -336,6 +344,10 @@ en:
                 ''!!!'' won''t be allowed in the text'
               validate_title_min_length: Title is always mandatory and this number
                 cannot be zero
+              verifications_html: |
+                Here you can make some tweaks to the verification process.<br>
+                <b>NOTE:</b> Be aware that changing these settings might prevent some users from accessing the platform. Use it with caution!<br><br>
+                Also note that these settings are only applied to normal users. Admins will always have access to the platform.
             validators:
               body: User input validations for the "body" field
               title: User input validations for the "title" field
@@ -375,6 +387,7 @@ en:
             proposals: Proposals Hacks
             styles: Custom Styles
             surveys: Surveys & Forms
+            verifications: Verifications / Authorization Hacks
           update:
             error: Error updating configuration! %{error}
             success: Configuration updated successfully
@@ -482,6 +495,7 @@ en:
           proposals: Proposals Hacks
           styles: Custom Styles
           surveys: Surveys & Forms
+          verifications: Verifications
         menu_hacks:
           create:
             error: Error creating menu item! %{error}

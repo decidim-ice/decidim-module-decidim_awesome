@@ -16,6 +16,7 @@ module Decidim
         attribute :proposal_custom_fields, Hash
         attribute :proposal_private_custom_fields, Hash
         attribute :user_timezone, Boolean
+        attribute :force_authorization_after_login, Array
         attribute :scoped_admins, Hash
         attribute :menu, [MenuForm]
         attribute :intergram_for_admins, Boolean
@@ -37,6 +38,7 @@ module Decidim
 
         validate :css_syntax, if: ->(form) { form.scoped_styles.present? }
         validate :json_syntax
+        # validate :authorization_handlers_are_registered, if: ->(form) { form.force_authorization_after_login.present? }
 
         validates :validate_title_min_length, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 100 }
         validates :validate_title_max_caps_percent, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
@@ -44,11 +46,14 @@ module Decidim
         validates :validate_body_min_length, presence: true, numericality: { greater_than_or_equal_to: 0 }
         validates :validate_body_max_caps_percent, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
         validates :validate_body_max_marks_together, presence: true, numericality: { greater_than_or_equal_to: 1 }
-
+        validates :force_authorization_after_login, inclusion: { in: lambda { |form|
+                                                                       form.current_organization.available_authorization_handlers
+                                                                     } }
         # TODO: validate non general admins are here
 
         def self.from_params(params, additional_params = {})
           instance = super(params, additional_params)
+          instance.force_authorization_after_login = instance.force_authorization_after_login.compact_blank if instance.force_authorization_after_login.present?
           instance.valid_keys = params.keys.map(&:to_sym) || []
           instance.sanitize_labels!
           instance
@@ -84,6 +89,8 @@ module Decidim
             errors.add(key.to_sym, e.message)
           end
         end
+
+        def authorization_handlers_are_registered; end
 
         # formBuilder has a bug and do not sanitize text if users copy/paste text with format in the label input
         def sanitize_labels!

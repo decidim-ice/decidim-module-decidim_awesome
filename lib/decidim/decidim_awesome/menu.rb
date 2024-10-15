@@ -71,10 +71,17 @@ module Decidim
                           icon_name: "chat-1-line",
                           if: menus[:livechat]
 
+            menu.add_item :verifications,
+                          I18n.t("menu.verifications", scope: "decidim.decidim_awesome.admin"),
+                          decidim_admin_decidim_awesome.config_path(:verifications),
+                          position: 10,
+                          icon_name: "fingerprint-line",
+                          if: menus[:verifications]
+
             menu.add_item :maintenance,
                           I18n.t("maintenance", scope: "decidim.decidim_awesome.admin.menu.maintenance"),
                           decidim_admin_decidim_awesome.maintenance_path(:private_data),
-                          position: 10,
+                          position: 11,
                           icon_name: "tools-line",
                           submenu: { target_menu: :maintenance_submenu }
           end
@@ -151,7 +158,8 @@ module Decidim
             menu_hacks_menu: config_enabled?(:menu),
             menu_hacks_home_content_block_menu: config_enabled?(:home_content_block_menu),
             custom_redirects: config_enabled?(:custom_redirects),
-            livechat: config_enabled?(:intergram_for_admins, :intergram_for_public)
+            livechat: config_enabled?(:intergram_for_admins, :intergram_for_public),
+            verifications: config_enabled?(:force_authorization_after_login)
           }
         end
 

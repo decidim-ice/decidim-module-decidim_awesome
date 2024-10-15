@@ -5,8 +5,14 @@ require "spec_helper"
 module Decidim::DecidimAwesome
   module Admin
     describe ConfigForm do
-      subject { described_class.from_params(attributes) }
+      subject { described_class.from_params(attributes).with_context(context) }
 
+      let(:context) do
+        {
+          current_organization: organization
+        }
+      end
+      let(:organization) { create(:organization, available_authorizations: [:dummy_authorization_handler, :another_dummy_authorization_handler]) }
       let(:attributes) do
         {
           allow_images_in_editors: true,
@@ -32,6 +38,7 @@ module Decidim::DecidimAwesome
         }
       end
       let(:user_timezone) { true }
+      let(:force_authorization_after_login) { ["", "dummy_authorization_handler", "another_dummy_authorization_handler"] }
       let(:valid_fields) { '[{"foo":"bar"}]' }
       let(:invalid_fields) { '[{"foo":"bar"}]{"baz":"zet"}' }
 
@@ -131,6 +138,28 @@ module Decidim::DecidimAwesome
           let(:user_timezone) { false }
 
           it { is_expected.to be_valid }
+        end
+      end
+
+      describe "force authorization after login" do
+        let(:attributes) do
+          {
+            force_authorization_after_login:
+          }
+        end
+
+        it { is_expected.to be_valid }
+
+        context "and force authorization after login is empty" do
+          let(:force_authorization_after_login) { [] }
+
+          it { is_expected.to be_valid }
+        end
+
+        context "and force authorization after login is not a valid handler" do
+          let(:force_authorization_after_login) { %w(invalid_handler another_dummy_authorization_handler) }
+
+          it { is_expected.not_to be_valid }
         end
       end
 
