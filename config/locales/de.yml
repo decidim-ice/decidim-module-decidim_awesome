@@ -542,6 +542,7 @@ de:
             title: 'Wartungswerkzeuge: %{title}'
             titles:
               checks: Systemkompatibilitätsprüfungen
+              private_data: Bereinigung personenbezogener Daten
         awesome_config:
           amendments: Änderungsvorschläge
           autosaved_error: Automatisches Speichern fehlgeschlagen
