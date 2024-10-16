@@ -8,9 +8,10 @@ module Decidim
         #
         # key - the key to destroy inside scoped_styles
         # organization
-        def initialize(key, organization)
+        def initialize(key, organization, config_var = :scoped_styles)
           @key = key
           @organization = organization
+          @config_var = config_var
         end
 
         # Executes the command. Broadcasts these events:
@@ -20,14 +21,15 @@ module Decidim
         #
         # Returns nothing.
         def call
-          styles = AwesomeConfig.find_by(var: :scoped_styles, organization: @organization)
+          styles = AwesomeConfig.find_by(var: @config_var, organization: @organization)
           return broadcast(:invalid, "Not a hash") unless styles&.value.is_a? Hash
           return broadcast(:invalid, "#{key} key invalid") unless styles.value.has_key?(@key)
 
           styles.value.except!(@key)
           styles.save!
           # remove constrains associated (a new config var is generated automatically, by removing it, it will trigger destroy on dependents)
-          constraint = AwesomeConfig.find_by(var: "scoped_style_#{@key}", organization: @organization)
+          constraint = @config_var == :scoped_styles ? :scoped_styles : :scoped_admin_styles
+          constraint = AwesomeConfig.find_by(var: "#{constraint}_#{@key}", organization: @organization)
           constraint.destroy! if constraint.present?
 
           broadcast(:ok, @key)

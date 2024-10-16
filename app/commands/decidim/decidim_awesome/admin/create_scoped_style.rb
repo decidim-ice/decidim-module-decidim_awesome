@@ -25,7 +25,7 @@ module Decidim
           styles.value[@ident] = ""
           styles.save!
 
-          create_constraint_never(@config_var == :scoped_styles ? :styles : :scoped_admin_styles)
+          create_constraint_never(@config_var == :scoped_styles ? :scoped_styles : :scoped_admin_styles)
 
           broadcast(:ok, @ident)
         rescue StandardError => e

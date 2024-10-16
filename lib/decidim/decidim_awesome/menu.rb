@@ -29,7 +29,7 @@ module Decidim
 
             menu.add_item :styles,
                           I18n.t("menu.styles", scope: "decidim.decidim_awesome.admin"),
-                          decidim_admin_decidim_awesome.config_path(:styles),
+                          decidim_admin_decidim_awesome.config_path(:scoped_styles),
                           position: 4,
                           icon_name: "brush",
                           if: menus[:styles],
@@ -103,7 +103,7 @@ module Decidim
           Decidim.menu :custom_styles_submenu do |menu|
             menu.add_item :scoped_styles,
                           I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.scoped_styles"),
-                          decidim_admin_decidim_awesome.config_path(:styles),
+                          decidim_admin_decidim_awesome.config_path(:scoped_styles),
                           position: 4.1,
                           icon_name: "computer-line",
                           if: config_enabled?(:scoped_styles)
@@ -163,6 +163,9 @@ module Decidim
             ),
             surveys: config_enabled?(:auto_save_forms, :user_timezone),
             styles: config_enabled?(:scoped_styles, :scoped_admin_styles),
+            scoped_styles: config_enabled?(:scoped_styles),
+            scoped_admin_styles: config_enabled?(:scoped_admin_styles),
+            custom_fields: config_enabled?(:proposal_custom_fields, :proposal_private_custom_fields),
             proposal_custom_fields: config_enabled?(:proposal_custom_fields),
             proposal_private_custom_fields: config_enabled?(:proposal_private_custom_fields),
             admins: config_enabled?(:scoped_admins),
