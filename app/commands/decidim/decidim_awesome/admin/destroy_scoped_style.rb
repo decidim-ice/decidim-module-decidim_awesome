@@ -6,7 +6,7 @@ module Decidim
       class DestroyScopedStyle < Command
         # Public: Initializes the command.
         #
-        # key - the key to destroy inside scoped_styles
+        # key - the key to destroy inside scoped_styles/scoped_admin_styles
         # organization
         def initialize(key, organization, config_var = :scoped_styles)
           @key = key
@@ -28,7 +28,6 @@ module Decidim
           styles.value.except!(@key)
           styles.save!
           # remove constrains associated (a new config var is generated automatically, by removing it, it will trigger destroy on dependents)
-          constraint = @config_var == :scoped_styles ? :scoped_styles : :scoped_admin_styles
           constraint = AwesomeConfig.find_by(var: "#{constraint}_#{@key}", organization: @organization)
           constraint.destroy! if constraint.present?
 

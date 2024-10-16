@@ -36,7 +36,7 @@ module Decidim
         private
 
         def config_var
-          return :scoped_admin_styles if params[:private] == "true"
+          return :scoped_admin_styles if params[:admin] == "true"
 
           :scoped_styles
         end

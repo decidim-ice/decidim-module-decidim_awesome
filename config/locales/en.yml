@@ -358,7 +358,7 @@ en:
             sure_to_remove: Are you sure you want to destroy this private fields box?
           form_scoped_admin_styles:
             delete: Delete
-            new: Add a new CSS box
+            new: Add a new "admin panel" CSS box
             remove: Remove this CSS box
             sure_to_remove: Are you sure you want to destroy this CSS box?
           form_scoped_admins:
@@ -369,7 +369,7 @@ en:
               group?
           form_scoped_styles:
             delete: Delete
-            new: Add a new CSS box
+            new: Add a new "public frontend" CSS box
             remove: Remove this CSS box
             sure_to_remove: Are you sure you want to destroy this CSS box?
           none: "⛔ Never! - Deactivate any other constraint"
