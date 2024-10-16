@@ -204,9 +204,6 @@ en:
             collaborator: Collaborator
             moderator: Moderator
             valuator: Valuator
-        admin_custom_styles:
-          menu:
-            title: Admin panel
         checks:
           index:
             admin_head_tags: Awesome tags included in the admin application header
@@ -533,7 +530,10 @@ en:
           private_data_last_update: This data was last updated %{time_ago} ago.
           proposal_private_custom_fields: Private fields
           remove_private_data: "👉 You might want to remove it"
-        public_custom_styles:
+        scoped_admin_styles:
+          menu:
+            title: Admin panel
+        scoped_styles:
           menu:
             title: Public frontend
       admin_log:

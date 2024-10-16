@@ -1,0 +1,30 @@
+<div class="form__wrapper row column decidim_awesome-form">
+  <% if config_enabled? :scoped_admin_styles %>
+    <div class="colors-help">
+      <p><%= t("help.scoped_styles", scope: "decidim.decidim_awesome.admin.config.form") %>
+        <%= t("help.scoped_styles_variables", scope: "decidim.decidim_awesome.admin.config.form") %>
+      </p>
+      <p class="colors">
+        <% ["primary", "secondary", "tertiary", "success", "warning", "alert"].each do |color| %>
+        <span class="color-box <%= color %>" style="background-color: <%= current_organization.colors[color] %>"></span>
+        <code>var(--<%= color %>)</code>
+      <% end %>
+      </p>
+    </div>
+
+    <% form.object.scoped_admin_styles&.each do |key, value| %>
+      <div class="scoped_styles_container p-4 js-box-container" data-key="<%= key %>">
+        <%= render(partial: "decidim/decidim_awesome/admin/config/autoedit_box_label", locals: { var: "scoped_styles", key: key, scope: "scoped_style_#{key}", delete_path: decidim_admin_decidim_awesome.scoped_admin_style_path(key: key) }) %>
+        <p class="form-error is-visible" id="custom-style-error-<%= key %>"><%= errors[key.to_sym].join("<br>") if errors %></p>
+        <%= text_area_tag key, value, name: "config[scoped_styles][#{key}]", rows: 5 %>
+        <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: "scoped_style_#{key}", constraints: constraints_for("scoped_style_#{key}") }) %>
+      </div>
+    <% end %>
+
+    <%= link_to decidim_admin_decidim_awesome.scoped_admin_styles_path, method: :post, class: "button button__sm button__text-secondary mr-auto" do %>
+      <%= icon("add-box-line") %>
+      <%= t("new", scope: "decidim.decidim_awesome.admin.config.form_scoped_styles") %>
+    <% end %>
+
+  <% end %>
+</div>

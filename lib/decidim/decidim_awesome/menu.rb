@@ -101,19 +101,19 @@ module Decidim
 
         def register_custom__styles_submenu!
           Decidim.menu :custom_styles_submenu do |menu|
-            menu.add_item :public_custom_styles,
-                          I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.public_custom_styles"),
+            menu.add_item :scoped_styles,
+                          I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.scoped_styles"),
                           decidim_admin_decidim_awesome.config_path(:styles),
                           position: 4.1,
                           icon_name: "computer-line",
-                          if: menus[:public_custom_styles]
+                          if: config_enabled?(:scoped_styles)
 
-            menu.add_item :admin_custom_styles,
-                          I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.admin_custom_styles"),
-                          decidim_admin_decidim_awesome.config_path(:admin_custom_styles),
+            menu.add_item :scoped_admin_styles,
+                          I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.scoped_admin_styles"),
+                          decidim_admin_decidim_awesome.config_path(:scoped_admin_styles),
                           position: 4.2,
                           icon_name: "file-settings-line",
-                          if: menus[:admin_custom_styles]
+                          if: config_enabled?(:scoped_admin_styles)
           end
         end
 
@@ -162,7 +162,7 @@ module Decidim
               :validate_body_max_marks_together, :validate_body_start_with_caps
             ),
             surveys: config_enabled?(:auto_save_forms, :user_timezone),
-            styles: config_enabled?(:scoped_styles),
+            styles: config_enabled?(:scoped_styles, :scoped_admin_styles),
             proposal_custom_fields: config_enabled?(:proposal_custom_fields),
             proposal_private_custom_fields: config_enabled?(:proposal_private_custom_fields),
             admins: config_enabled?(:scoped_admins),
