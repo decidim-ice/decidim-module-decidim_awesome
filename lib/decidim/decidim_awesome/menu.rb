@@ -32,7 +32,8 @@ module Decidim
                           decidim_admin_decidim_awesome.config_path(:styles),
                           position: 4,
                           icon_name: "brush",
-                          if: menus[:styles]
+                          if: menus[:styles],
+                          submenu: { target_menu: :custom_styles_submenu }
 
             menu.add_item :proposal_custom_fields,
                           I18n.t("menu.proposal_custom_fields", scope: "decidim.decidim_awesome.admin"),
@@ -95,6 +96,24 @@ module Decidim
                           position: 5.2,
                           icon_name: "spy",
                           if: menus[:proposal_private_custom_fields]
+          end
+        end
+
+        def register_custom__styles_submenu!
+          Decidim.menu :custom_styles_submenu do |menu|
+            menu.add_item :public_custom_styles,
+                          I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.public_custom_styles"),
+                          decidim_admin_decidim_awesome.config_path(:styles),
+                          position: 4.1,
+                          icon_name: "computer-line",
+                          if: menus[:public_custom_styles]
+
+            menu.add_item :admin_custom_styles,
+                          I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.admin_custom_styles"),
+                          decidim_admin_decidim_awesome.config_path(:admin_custom_styles),
+                          position: 4.2,
+                          icon_name: "file-settings-line",
+                          if: menus[:admin_custom_styles]
           end
         end
 
