@@ -76,5 +76,22 @@ describe "Forced verifications" do
         expect(page).to have_current_path(restricted_path, ignore_query: true)
       end
     end
+
+    context "when is an admin" do
+      let(:user) { create(:user, :confirmed, :admin, organization:) }
+      let(:restricted_path) { "/admin" }
+
+      it "can visit restricted path" do
+        expect(page).to have_current_path(restricted_path, ignore_query: true)
+      end
+    end
+
+    context "when user is not confirmed" do
+      let(:user) { create(:user, organization:) }
+
+      it "is redirected as normal" do
+        expect(page).to have_current_path("/users/sign_in")
+      end
+    end
   end
 end
