@@ -7,6 +7,7 @@ module Decidim
     module Admin
       class ConfigForm < Decidim::Form
         include ActionView::Helpers::SanitizeHelper
+        include TranslatableAttributes
 
         attribute :allow_images_in_editors, Boolean
         attribute :allow_videos_in_editors, Boolean
@@ -17,6 +18,8 @@ module Decidim
         attribute :proposal_private_custom_fields, Hash
         attribute :user_timezone, Boolean
         attribute :force_authorization_after_login, Array
+        attribute :force_authorization_with_any_method, Boolean
+        translatable_attribute :force_authorization_help_text, String
         attribute :scoped_admins, Hash
         attribute :menu, [MenuForm]
         attribute :intergram_for_admins, Boolean
@@ -33,12 +36,11 @@ module Decidim
         attribute :validate_body_start_with_caps, Boolean, default: true
         attribute :additional_proposal_sortings, Array, default: Decidim::DecidimAwesome.possible_additional_proposal_sortings
 
-        # collect all keys anything not specified in the params (UpdateConfig command ignores it)
+        # collect all keys specified in the params (UpdateConfig command ignores everything else)
         attr_accessor :valid_keys
 
         validate :css_syntax, if: ->(form) { form.scoped_styles.present? }
         validate :json_syntax
-        # validate :authorization_handlers_are_registered, if: ->(form) { form.force_authorization_after_login.present? }
 
         validates :validate_title_min_length, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 100 }
         validates :validate_title_max_caps_percent, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
@@ -54,9 +56,21 @@ module Decidim
         def self.from_params(params, additional_params = {})
           instance = super(params, additional_params)
           instance.force_authorization_after_login = instance.force_authorization_after_login.compact_blank if instance.force_authorization_after_login.present?
-          instance.valid_keys = params.keys.map(&:to_sym) || []
+          instance.valid_keys = extract_valid_keys_from_params(params)
           instance.sanitize_labels!
           instance
+        end
+
+        def self.extract_valid_keys_from_params(params)
+          keys = []
+          params.each do |key, _value|
+            keys << if key.to_s.starts_with?("force_authorization_help_text_")
+                      :force_authorization_help_text if keys.exclude?(:force_authorization_help_text)
+                    else
+                      key.to_sym
+                    end
+          end
+          keys
         end
 
         def additional_proposal_sorting_labels
@@ -89,8 +103,6 @@ module Decidim
             errors.add(key.to_sym, e.message)
           end
         end
-
-        def authorization_handlers_are_registered; end
 
         # formBuilder has a bug and do not sanitize text if users copy/paste text with format in the label input
         def sanitize_labels!

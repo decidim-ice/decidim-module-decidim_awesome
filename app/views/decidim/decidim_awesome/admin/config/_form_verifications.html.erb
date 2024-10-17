@@ -5,6 +5,11 @@
     <div>
         <%= form.select :force_authorization_after_login, available_authorizations.map {|workflow| [workflow.fullname, workflow.name]}, { include_blank: false }, { multiple: true } %>
         <p class="help-text"><%= t("help.force_authorization_after_login", scope: "decidim.decidim_awesome.admin.config.form") %></p>
-    </div>
+
+        <%= form.check_box :force_authorization_with_any_method %>
+
+        <%= form.translated :editor, :force_authorization_help_text, lines: 10, aria: { label: :force_authorization_help_text } %>
+        <p class="help-text"><%= t("help.force_authorization_help_text", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+      </div>
   <% end %>
 </div>
