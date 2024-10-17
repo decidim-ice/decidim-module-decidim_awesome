@@ -182,6 +182,11 @@ module Decidim
       {}
     end
 
+    # This controllers will be skipped from the authorization check
+    config_accessor :force_authorization_allowed_controller_names do
+      %w(account pages)
+    end
+
     # How old must be the private data to be considered expired and therefore presented to the admins for deletion
     config_accessor :private_data_expiration_time do
       3.months

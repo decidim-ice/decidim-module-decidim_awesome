@@ -14,6 +14,8 @@ module Decidim
 
       def check_required_login_authorizations
         return unless user_signed_in?
+        return unless current_user.confirmed?
+        return unless current_user.blocked?
         return if allowed_controllers.include?(controller_name)
 
         unless user_is_authorized?
@@ -37,7 +39,7 @@ module Decidim
         return unless awesome_config[:force_authorization_after_login].is_a?(Array)
 
         @required_authorizations ||= Decidim::Verifications::Adapter.from_collection(
-          awesome_config[:force_authorization_after_login] & current_organization.available_authorization_handlers
+          awesome_config[:force_authorization_after_login] & current_organization.available_authorizations & Decidim.authorization_workflows.map(&:name)
         )
       end
 
@@ -51,7 +53,7 @@ module Decidim
       end
 
       def allowed_controllers
-        %w(required_authorizations authorizations account pages)
+        %w(required_authorizations authorizations) + awesome_config[:force_authorization_allowed_controller_names].to_a
       end
     end
   end

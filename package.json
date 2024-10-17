@@ -45,7 +45,8 @@
     "@decidim/prettier-config": "0.28.4",
     "@decidim/stylelint-config": "0.28.4",
     "postcss-scss": "^4.0.9",
-    "sass-embedded": "~1.57.1"
+    "sass-embedded": "~1.57.1",
+    "@tarekraafat/autocomplete.js": "10.2.7"
   },
   "dependencies": {
     "@rails/actioncable": "^6.1.7-6",

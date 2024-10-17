@@ -7,7 +7,7 @@
   </p>
 </div>
 
-<div class="space-y-4">
+<div class="space-y-8">
   <div class="verification__container">
       <% granted_authorizations.each do |method| %>
           <div class="verification verification__no_clickable">
@@ -21,17 +21,18 @@
       <% end %>
   </div>
 
-  <ul>
+  <div class="verification__container">
     <% pending_authorizations.each do |method| %>
-      <li>
-        <%= link_to method.root_path(redirect_url:),
-                    class: "button button__lg button__transparent-secondary" do %>
-                    <%= icon "login-circle-line", class: "verification__icon" %>
-                    <%= t("decidim.verifications.authorizations.first_login.actions.#{method.key}") %>
+        <%= link_to method.root_path(redirect_url:), class: "verification" do %>
+          <%= icon "login-circle-line", class: "verification__icon" %>
+          <div class="verification__text">
+            <h2 class="h5 text-secondary">
+              <%= t("decidim.verifications.authorizations.first_login.actions.#{method.key}") %>
+            </h2>
+          </div>
         <% end %>
-      </li>
     <% end %>
-  </ul>
+  </div>
 </div>
 
 <div class="space-y-8 prose-a:text-secondary mt-8">

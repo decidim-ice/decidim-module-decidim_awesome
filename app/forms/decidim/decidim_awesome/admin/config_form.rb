@@ -49,7 +49,7 @@ module Decidim
         validates :validate_body_max_caps_percent, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
         validates :validate_body_max_marks_together, presence: true, numericality: { greater_than_or_equal_to: 1 }
         validates :force_authorization_after_login, inclusion: { in: lambda { |form|
-                                                                       form.current_organization.available_authorization_handlers
+                                                                       form.current_organization.available_authorizations & Decidim.authorization_workflows.map(&:name)
                                                                      } }
         # TODO: validate non general admins are here
 

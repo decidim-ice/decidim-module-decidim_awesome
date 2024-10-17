@@ -89,8 +89,26 @@ describe "Forced verifications" do
     context "when user is not confirmed" do
       let(:user) { create(:user, organization:) }
 
-      it "is redirected as normal" do
+      it "acts as normal" do
+        expect(page).to have_content("Log in")
         expect(page).to have_current_path("/users/sign_in")
+      end
+    end
+
+    context "when user is blocked" do
+      let(:user) { create(:user, :confirmed, :blocked, organization:) }
+
+      it "acts as normal" do
+        expect(page).to have_content("This account has been blocked")
+        expect(page).to have_current_path("/")
+      end
+    end
+
+    context "when the verification method does not exist" do
+      let!(:force_authorization_after_login) { create(:awesome_config, organization:, var: :force_authorization_after_login, value: %w(non_existent_authorization_handler)) }
+
+      it "acts as normal" do
+        expect(page).to have_current_path(restricted_path, ignore_query: true)
       end
     end
   end
