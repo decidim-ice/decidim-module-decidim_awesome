@@ -11,6 +11,7 @@ Decidim::DecidimAwesome.configure do |config|
       :intergram_for_admins,
       :intergram_for_public,
       :scoped_styles,
+      :scoped_admin_styles,
       :proposal_custom_fields,
       :proposal_private_custom_fields,
       :menu,
