@@ -24,7 +24,7 @@
   <ul>
     <% pending_authorizations.each do |method| %>
       <li>
-        <%= link_to method.root_path,
+        <%= link_to method.root_path(redirect_url:),
                     class: "button button__lg button__transparent-secondary" do %>
                     <%= icon "login-circle-line", class: "verification__icon" %>
                     <%= t("decidim.verifications.authorizations.first_login.actions.#{method.key}") %>
@@ -37,8 +37,7 @@
 <div class="space-y-8 prose-a:text-secondary mt-8">
   <%= translated_attribute(awesome_config[:force_authorization_help_text]).html_safe %>
 
-  <p class="prose-a:text-secondary">
-    <%= icon "logout-box-r-line", class: "inline-block" %>
-    <%= t(".cancel", link: link_to(t(".logout"), decidim.destroy_user_session_path, method: :delete).html_safe).html_safe %>
+  <p class="prose-a:text-secondary italic">
+    <%= t(".cancel", link: link_to("#{icon("logout-box-r-line", class: "inline-block").html_safe} #{t(".logout")}".html_safe, decidim.destroy_user_session_path, method: :delete).html_safe).html_safe %>
   </p>
 </div>

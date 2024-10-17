@@ -39,6 +39,10 @@ module Decidim::DecidimAwesome
       end
       let(:user_timezone) { true }
       let(:force_authorization_after_login) { ["", "dummy_authorization_handler", "another_dummy_authorization_handler"] }
+      let(:force_authorization_with_any_method) { true }
+      let(:force_authorization_help_text) do
+        { en: "Help text" }
+      end
       let(:valid_fields) { '[{"foo":"bar"}]' }
       let(:invalid_fields) { '[{"foo":"bar"}]{"baz":"zet"}' }
 
@@ -53,6 +57,19 @@ module Decidim::DecidimAwesome
 
       context "when everything is OK" do
         it { is_expected.to be_valid }
+      end
+
+      describe "valid_keys" do
+        let(:attributes) do
+          {
+            force_authorization_after_login:,
+            force_authorization_help_text_en: "Help text"
+          }
+        end
+
+        it "extracts valid keys from params" do
+          expect(subject.valid_keys).to eq([:force_authorization_after_login, :force_authorization_help_text])
+        end
       end
 
       describe "custom styles" do
@@ -144,7 +161,9 @@ module Decidim::DecidimAwesome
       describe "force authorization after login" do
         let(:attributes) do
           {
-            force_authorization_after_login:
+            force_authorization_after_login:,
+            force_authorization_with_any_method:,
+            force_authorization_help_text:
           }
         end
 

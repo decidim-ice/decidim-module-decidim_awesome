@@ -51,7 +51,7 @@ module Decidim
       end
 
       def allowed_controllers
-        %w(required_authorizations authorizations account)
+        %w(required_authorizations authorizations account pages)
       end
     end
   end
