@@ -3,7 +3,7 @@
 import TomSelect from "tom-select/dist/cjs/tom-select.popular";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const selectContainer = document.getElementById("config_additional_proposal_sortings");
+  const selectContainer = document.getElementById("config_force_authorization_after_login");
 
   if (!selectContainer) {
     return;
@@ -17,10 +17,5 @@ document.addEventListener("DOMContentLoaded", () => {
         return `<div>${escape(data.text)}</div>`;
       }
     }
-  });
-  
-  document.getElementById("additional_proposal_sortings-enable-all").addEventListener("click", (evt) => {
-    evt.preventDefault();
-    selectContainer.tomselect.setValue(Array.from(document.getElementById("config_additional_proposal_sortings").children).map((el) => el.value))
   });
 });

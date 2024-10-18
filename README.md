@@ -385,6 +385,25 @@ If your organization spans across multiple timezones, you can enable this featur
 
 ![User time zone select](examples/user_timezone.png)
 
+#### 20. Mandatory verifications
+
+This feature allows admins to enforce mandatory verifications for users before they can access the platform. Admins can configure which verifications are required.
+
+Admins can manage these settings in the Awesome admin panel under the "Verifications" section.
+
+![Forced verifications admin side](examples/forced_verifications_admin.png)
+![Forced verifications public side](examples/forced_verifications_public.png)
+
+Note that some pages are allowed, you can even configure which controller are allowed by creating an initializer ("required_authorizations" and "authorizations" are always allowed):
+
+```ruby
+# config/initializers/decidim_awesome.rb
+
+Decidim::DecidimAwesome.configure do |config|
+  # default controllers are "account" and "pages"
+  config.force_authorization_allowed_controller_names = %w(account pages homepage)
+```
+
 #### To be continued...
 
 We're not done! Please check the [issues](/decidim-ice/decidim-module-decidim_awesome/issues) (and participate) to see what's on our mind

@@ -34,12 +34,14 @@ module Decidim
                           icon_name: "brush",
                           if: menus[:styles]
 
-            menu.add_item :proposal_custom_fields,
+            menu.add_item :custom_fields,
                           I18n.t("menu.proposal_custom_fields", scope: "decidim.decidim_awesome.admin"),
-                          decidim_admin_decidim_awesome.config_path(:proposal_custom_fields),
+                          decidim_admin_decidim_awesome.config_path(menus[:proposal_custom_fields] ? :proposal_custom_fields : :proposal_private_custom_fields),
                           position: 5,
                           icon_name: "layers",
-                          if: menus[:proposal_custom_fields],
+                          active: is_active_link?(decidim_admin_decidim_awesome.config_path(:proposal_custom_fields)) ||
+                                  is_active_link?(decidim_admin_decidim_awesome.config_path(:proposal_private_custom_fields)),
+                          if: menus[:custom_fields],
                           submenu: { target_menu: :custom_fields_submenu }
 
             menu.add_item :admins,
@@ -55,6 +57,8 @@ module Decidim
                           position: 7,
                           icon_name: "menu-line",
                           if: menus[:menu_hacks],
+                          active: is_active_link?(decidim_admin_decidim_awesome.menu_hacks_path(:menu)) ||
+                                  is_active_link?(decidim_admin_decidim_awesome.menu_hacks_path(:home_content_block_menu)),
                           submenu: { target_menu: :menu_hacks_submenu }
 
             menu.add_item :custom_redirects,
@@ -71,11 +75,20 @@ module Decidim
                           icon_name: "chat-1-line",
                           if: menus[:livechat]
 
+            menu.add_item :verifications,
+                          I18n.t("menu.verifications", scope: "decidim.decidim_awesome.admin"),
+                          decidim_admin_decidim_awesome.config_path(:verifications),
+                          position: 10,
+                          icon_name: "fingerprint-line",
+                          if: menus[:verifications]
+
             menu.add_item :maintenance,
                           I18n.t("maintenance", scope: "decidim.decidim_awesome.admin.menu.maintenance"),
                           decidim_admin_decidim_awesome.maintenance_path(:private_data),
-                          position: 10,
+                          position: 11,
                           icon_name: "tools-line",
+                          active: is_active_link?(decidim_admin_decidim_awesome.maintenance_path(:private_data)) ||
+                                  is_active_link?(decidim_admin_decidim_awesome.checks_maintenance_index_path),
                           submenu: { target_menu: :maintenance_submenu }
           end
         end
@@ -144,6 +157,7 @@ module Decidim
             ),
             surveys: config_enabled?(:auto_save_forms, :user_timezone),
             styles: config_enabled?(:scoped_styles),
+            custom_fields: config_enabled?(:proposal_custom_fields, :proposal_private_custom_fields),
             proposal_custom_fields: config_enabled?(:proposal_custom_fields),
             proposal_private_custom_fields: config_enabled?(:proposal_private_custom_fields),
             admins: config_enabled?(:scoped_admins),
@@ -151,7 +165,8 @@ module Decidim
             menu_hacks_menu: config_enabled?(:menu),
             menu_hacks_home_content_block_menu: config_enabled?(:home_content_block_menu),
             custom_redirects: config_enabled?(:custom_redirects),
-            livechat: config_enabled?(:intergram_for_admins, :intergram_for_public)
+            livechat: config_enabled?(:intergram_for_admins, :intergram_for_public),
+            verifications: config_enabled?(:force_authorization_after_login)
           }
         end
 

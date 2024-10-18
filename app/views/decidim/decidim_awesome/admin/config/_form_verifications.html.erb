@@ -1,0 +1,15 @@
+<div class="form__wrapper row column decidim_awesome-form">
+  <div class="callout warning"><%= t("help.verifications_html", scope: "decidim.decidim_awesome.admin.config.form") %></div>
+
+  <% if config_enabled? :force_authorization_after_login %>
+    <div>
+        <%= form.select :force_authorization_after_login, available_authorizations.map {|workflow| [workflow.fullname, workflow.name]}, { include_blank: false }, { multiple: true } %>
+        <p class="help-text"><%= t("help.force_authorization_after_login", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+
+        <%= form.check_box :force_authorization_with_any_method %>
+
+        <%= form.translated :editor, :force_authorization_help_text, lines: 10, aria: { label: :force_authorization_help_text } %>
+        <p class="help-text"><%= t("help.force_authorization_help_text", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+      </div>
+  <% end %>
+</div>

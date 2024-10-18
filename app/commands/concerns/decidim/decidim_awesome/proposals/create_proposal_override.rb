@@ -15,10 +15,10 @@ module Decidim
           alias_method :decidim_original_create_proposal, :create_proposal
 
           def create_proposal
-            created_proposal = decidim_original_create_proposal
+            decidim_original_create_proposal
             # Update the proposal with the private body, to
             # avoid tracebility on private fields.
-            created_proposal.update_private_body!(form.private_body) if form.private_body.present?
+            @proposal.update_private_body!(form.private_body) if form.private_body.present?
           end
         end
       end
