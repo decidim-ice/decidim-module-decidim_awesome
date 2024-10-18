@@ -41,7 +41,7 @@ export function destroyQuillEditor(container) {
 export function createQuillEditor(container) {
   const toolbar = $(container).data("toolbar");
   const disabled = $(container).data("disabled");
-  const allowedEmptyContentSelector = "iframe";
+  const allowedEmptyContentSelector = "iframe,img";
 
   let quillToolbar = [
     ["bold", "italic", "underline", "linebreak"],
@@ -144,11 +144,6 @@ export function createQuillEditor(container) {
     });
     container.dispatchEvent(event);
 
-    if (text === "\n" || text === "\n\n") {
-      $input.val("");
-    } else {
-      $input.val(quill.root.innerHTML);
-    }
     if ((text === "\n" || text === "\n\n") && quill.root.querySelectorAll(allowedEmptyContentSelector).length === 0) {
       $input.val("");
     } else {
