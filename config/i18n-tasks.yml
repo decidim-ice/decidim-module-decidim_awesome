@@ -33,6 +33,8 @@ ignore_unused:
   - "decidim.decidim_awesome.voting.voting_cards.*"
   - "decidim.decidim_awesome.content_blocks.*"
   - "decidim.decidim_awesome.admin_log.*"
+  - "decidim.decidim_awesome.required_authorizations.index.verify_with_all_these_options"
+  - "decidim.decidim_awesome.required_authorizations.index.verify_with_any_of_these_options"
   - "layouts.decidim.decidim_awesome.admin.maintenance.titles.*"
   - "decidim.proposals.*"
   - "decidim.meetings.*"

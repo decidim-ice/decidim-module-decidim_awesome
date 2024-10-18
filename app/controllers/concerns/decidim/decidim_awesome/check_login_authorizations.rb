@@ -15,7 +15,7 @@ module Decidim
       def check_required_login_authorizations
         return unless user_signed_in?
         return unless current_user.confirmed?
-        return unless current_user.blocked?
+        return if current_user.blocked?
         return if allowed_controllers.include?(controller_name)
 
         unless user_is_authorized?
@@ -53,7 +53,7 @@ module Decidim
       end
 
       def allowed_controllers
-        %w(required_authorizations authorizations) + awesome_config[:force_authorization_allowed_controller_names].to_a
+        %w(required_authorizations authorizations upload_validations timeouts editor_images) + awesome_config[:force_authorization_allowed_controller_names].to_a
       end
     end
   end

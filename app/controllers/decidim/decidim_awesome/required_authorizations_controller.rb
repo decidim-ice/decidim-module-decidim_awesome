@@ -5,7 +5,7 @@ module Decidim
     # This controller handles image uploads for the Tiptap editor
     class RequiredAuthorizationsController < DecidimAwesome::ApplicationController
       layout "layouts/decidim/authorizations"
-      helper_method :granted_authorizations, :pending_authorizations, :redirect_url
+      helper_method :granted_authorizations, :pending_authorizations, :missing_authorizations, :redirect_url
 
       before_action do
         redirect_to redirect_url unless user_signed_in?
@@ -29,8 +29,25 @@ module Decidim
 
       private
 
+      def missing_authorizations
+        @missing_authorizations ||= required_authorizations.filter do |manifest|
+          Decidim::Verifications::Authorizations.new(
+            organization: current_organization,
+            user: current_user,
+            name: required_authorizations.map(&:name)
+          ).pluck(:name).exclude?(manifest.name)
+        end
+      end
+
       def pending_authorizations
-        @pending_authorizations ||= required_authorizations.filter { |manifest| current_authorizations.pluck(:name).exclude?(manifest.name) }
+        @pending_authorizations ||= required_authorizations.filter do |manifest|
+          Decidim::Verifications::Authorizations.new(
+            organization: current_organization,
+            user: current_user,
+            name: required_authorizations.map(&:name),
+            granted: false
+          ).pluck(:name).include?(manifest.name)
+        end
       end
 
       def granted_authorizations

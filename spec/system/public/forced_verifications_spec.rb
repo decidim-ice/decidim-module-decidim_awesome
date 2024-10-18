@@ -33,17 +33,17 @@ describe "Forced verifications" do
       expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(redirect_url: restricted_path))
       expect(page).to have_content("you need to authorize your account with a valid authorization")
       expect(page).to have_content("lease verify yourself with all these methods before being able to access the platform")
-      expect(page).to have_content("Verify against the example authorization handler")
-      expect(page).to have_content("Verify against another example of authorization handler")
+      expect(page).to have_content("Verify with Example authorization")
+      expect(page).to have_content("Verify with Another example authorization")
       expect(page).to have_content("Help text with HTML")
-      expect(page).to have_link("let me logout", href: "/users/sign_out")
+      expect(page).to have_link("let me logout")
 
-      click_link "Verify against the example authorization handler"
+      click_link "Verify with Example authorization"
 
       fill_in "Document number", with: "12345678X"
       click_on "Send"
-      expect(page).not_to have_content("Verify against the example authorization handler")
-      click_link "Verify against another example of authorization handler"
+      expect(page).not_to have_content("Verify with Example authorization")
+      click_link "Verify with Another example authorization"
       fill_in "Passport number", with: "A12345678"
       click_on "Send"
       expect(page).to have_current_path(restricted_path, ignore_query: true)
@@ -69,7 +69,7 @@ describe "Forced verifications" do
       let(:any_method) { true }
 
       it "user is redirected to the required authorizations page" do
-        click_link "Verify against the example authorization handler"
+        click_link "Verify with Example authorization"
 
         fill_in "Document number", with: "12345678X"
         click_on "Send"
