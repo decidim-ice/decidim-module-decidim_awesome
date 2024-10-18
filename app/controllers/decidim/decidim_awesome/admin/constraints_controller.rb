@@ -128,6 +128,8 @@ module Decidim
           case key
           when /^scoped_style_/
             :scoped_styles
+          when /^scoped_admin_style_/
+            :scoped_admin_styles
           when /^scoped_admin_/
             :scoped_admins
           when /^proposal_custom_field_/
