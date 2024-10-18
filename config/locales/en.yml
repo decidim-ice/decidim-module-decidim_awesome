@@ -351,7 +351,7 @@ en:
               verifications_html: |
                 Here you can make some tweaks to the verification process.<br>
                 <b>NOTE:</b> Be aware that changing these settings might prevent some users from accessing the platform. Use it with caution!<br><br>
-                Also note that these settings are only applied to normal users. Admins will always have access to the platform.
+                Also note that these settings are applied to all users. Admins will always have access to the admin backend though.
             validators:
               body: User input validations for the "body" field
               title: User input validations for the "title" field
