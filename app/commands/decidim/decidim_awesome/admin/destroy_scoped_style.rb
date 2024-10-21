@@ -28,6 +28,7 @@ module Decidim
           styles.value.except!(@key)
           styles.save!
           # remove constrains associated (a new config var is generated automatically, by removing it, it will trigger destroy on dependents)
+          constraint = @config_var == :scoped_style ? :scoped_style : :scoped_admin_style
           constraint = AwesomeConfig.find_by(var: "#{constraint}_#{@key}", organization: @organization)
           constraint.destroy! if constraint.present?
 

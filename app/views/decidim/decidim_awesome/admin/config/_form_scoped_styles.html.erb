@@ -1,6 +1,6 @@
 <%
   admin_styles = (config_var == "scoped_admin_styles")
-  style = admin_styles ? "scoped_admin_styles" : "scoped_styles"
+  style = admin_styles ? "scoped_admin_style" : "scoped_style"
 %>
 <div class="form__wrapper row column decidim_awesome-form">
   <% if config_enabled? config_var %>
