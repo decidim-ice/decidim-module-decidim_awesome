@@ -14,6 +14,7 @@ module Decidim
         attribute :allow_images_in_proposals, Boolean
         attribute :auto_save_forms, Boolean
         attribute :scoped_styles, Hash
+        attribute :scoped_admin_styles, Hash
         attribute :proposal_custom_fields, Hash
         attribute :proposal_private_custom_fields, Hash
         attribute :user_timezone, Boolean
@@ -39,7 +40,7 @@ module Decidim
         # collect all keys specified in the params (UpdateConfig command ignores everything else)
         attr_accessor :valid_keys
 
-        validate :css_syntax, if: ->(form) { form.scoped_styles.present? }
+        validate :css_syntax
         validate :json_syntax
 
         validates :validate_title_min_length, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 100 }
@@ -80,12 +81,15 @@ module Decidim
         end
 
         def css_syntax
-          scoped_styles.each do |key, code|
-            next unless code
+          styles = {}
+          styles.merge!(scoped_styles: scoped_styles.values) if scoped_styles.present?
+          styles.merge!(scoped_admin_styles: scoped_admin_styles.values) if scoped_admin_styles.present?
+          styles.each do |key, values|
+            next if values.blank?
 
-            SassC::Engine.new(code).render
+            values.each { |code| SassC::Engine.new(code).render }
           rescue SassC::SyntaxError => e
-            errors.add(:scoped_styles, I18n.t("config.form.errors.incorrect_css", key:, scope: "decidim.decidim_awesome.admin"))
+            errors.add(key, I18n.t("config.form.errors.incorrect_css", key:, scope: "decidim.decidim_awesome.admin"))
             errors.add(key.to_sym, e.message)
           end
         end

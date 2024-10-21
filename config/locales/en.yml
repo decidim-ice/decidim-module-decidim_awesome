@@ -28,6 +28,7 @@ en:
           instead of a text
         proposal_custom_fields: Custom fields %{id}
         proposal_private_custom_fields: Private Custom fields %{id}
+        scoped_admin_styles: Custom styles %{id}
         scoped_admins: Scoped admins group %{id}
         scoped_styles: Custom styles %{id}
         user_timezone: Allow users to set their timezone in their profile
@@ -323,6 +324,12 @@ en:
                 %{warning}
                 This text can be customized with a custom translation by using the key:
                 %{key}
+              scoped_admin_styles: Be aware that hidding things here might left the
+                admin unusable. Please act with caution.
+              scoped_admin_styles_variables: 'You can use the following CSS variables
+                for organization customized color:'
+              scoped_admin_styles_warning: "<strong>Warning</strong>: In here add
+                custom CSS that applies only in this admin."
               scoped_admins: Promote regular user to admins that can only administrate
                 certain parts of the public web (use the restrictions editor for that).
                 Note that users who already have regular admin permissions will be
@@ -365,6 +372,11 @@ en:
             new: Add a new "private custom fields" box
             remove: Remove this "private custom fields" box
             sure_to_remove: Are you sure you want to destroy this private fields box?
+          form_scoped_admin_styles:
+            delete: Delete
+            new: Add a new "admin panel" CSS box
+            remove: Remove this CSS box
+            sure_to_remove: Are you sure you want to destroy this CSS box?
           form_scoped_admins:
             delete: Delete
             new: Add a new "Scoped Admins" group
@@ -373,7 +385,7 @@ en:
               group?
           form_scoped_styles:
             delete: Delete
-            new: Add a new CSS box
+            new: Add a new "public frontend" CSS box
             remove: Remove this CSS box
             sure_to_remove: Are you sure you want to destroy this CSS box?
           none: "⛔ Never! - Deactivate any other constraint"
@@ -389,6 +401,8 @@ en:
             proposal_custom_fields: 'Proposals Custom Fields: Public fields'
             proposal_private_custom_fields: 'Proposals Custom Fields: Private fields'
             proposals: Proposals Hacks
+            scoped_admin_styles: 'Custom Styles: Admin panel'
+            scoped_styles: 'Custom Styles: Public frontend'
             styles: Custom Styles
             surveys: Surveys & Forms
             verifications: Verifications / Authorization Hacks
@@ -548,6 +562,12 @@ en:
           private_data_last_update: This data was last updated %{time_ago} ago.
           proposal_private_custom_fields: Private fields
           remove_private_data: "👉 You might want to remove it"
+        scoped_admin_styles:
+          menu:
+            title: Admin panel
+        scoped_styles:
+          menu:
+            title: Public frontend
       admin_log:
         component:
           destroy_private_data: "%{user_name} destroyed %{count} items of private
