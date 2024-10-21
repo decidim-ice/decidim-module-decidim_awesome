@@ -109,7 +109,7 @@ describe "Admin manages scoped styles" do
       end
 
       it "adds a new config helper var" do
-        find("#new-scoped_styles_bar").click
+        click_on 'Add a new "public frontend" CSS box'
 
         expect(page).to have_content("Processes")
 
@@ -128,9 +128,15 @@ describe "Admin manages scoped styles" do
 
         before do
           visit decidim_admin_decidim_awesome.config_path(:scoped_styles)
+          click_on "Add case", id: "new-scoped_style_bar"
         end
 
         it "removes the helper config var" do
+          within "#constraint-form-" do
+            select "Processes", from: "Apply to participatory spaces of type"
+          end
+          click_on "Save"
+
           within ".scoped_styles_container[data-key=\"bar\"] .constraints-editor" do
             expect(page).to have_content("Processes")
           end
@@ -150,7 +156,7 @@ describe "Admin manages scoped styles" do
           end
 
           expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_styles_bar)).to be_present
-          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_styles_bar).constraints).not_to be_present
+          expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :scoped_style_bar).constraints).not_to be_present
         end
       end
     end
