@@ -9,6 +9,7 @@ Decidim::DecidimAwesome.configure do |config|
       :use_markdown_editor,
       :allow_images_in_markdown_editor,
       :auto_save_forms,
+      :force_authorization_after_login,
       :intergram_for_admins,
       :intergram_for_public,
       :scoped_styles,

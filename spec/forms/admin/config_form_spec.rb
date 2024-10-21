@@ -5,8 +5,14 @@ require "spec_helper"
 module Decidim::DecidimAwesome
   module Admin
     describe ConfigForm do
-      subject { described_class.from_params(attributes) }
+      subject { described_class.from_params(attributes).with_context(context) }
 
+      let(:context) do
+        {
+          current_organization: organization
+        }
+      end
+      let(:organization) { create(:organization, available_authorizations: [:dummy_authorization_handler, :another_dummy_authorization_handler]) }
       let(:attributes) do
         {
           allow_images_in_full_editor: true,
@@ -31,6 +37,15 @@ module Decidim::DecidimAwesome
           foo: valid_fields
         }
       end
+<<<<<<< HEAD
+=======
+      let(:user_timezone) { true }
+      let(:force_authorization_after_login) { ["", "dummy_authorization_handler", "another_dummy_authorization_handler"] }
+      let(:force_authorization_with_any_method) { true }
+      let(:force_authorization_help_text) do
+        { en: "Help text" }
+      end
+>>>>>>> a8d21e4 (Add verification tweaks (#334))
       let(:valid_fields) { '[{"foo":"bar"}]' }
       let(:invalid_fields) { '[{"foo":"bar"}]{"baz":"zet"}' }
 
@@ -45,6 +60,19 @@ module Decidim::DecidimAwesome
 
       context "when everything is OK" do
         it { is_expected.to be_valid }
+      end
+
+      describe "valid_keys" do
+        let(:attributes) do
+          {
+            force_authorization_after_login:,
+            force_authorization_help_text_en: "Help text"
+          }
+        end
+
+        it "extracts valid keys from params" do
+          expect(subject.valid_keys).to eq([:force_authorization_after_login, :force_authorization_help_text])
+        end
       end
 
       describe "custom styles" do
@@ -117,6 +145,49 @@ module Decidim::DecidimAwesome
         end
       end
 
+<<<<<<< HEAD
+=======
+      describe "user timezone" do
+        let(:attributes) do
+          {
+            user_timezone:
+          }
+        end
+
+        it { is_expected.to be_valid }
+
+        context "and user timezone is false" do
+          let(:user_timezone) { false }
+
+          it { is_expected.to be_valid }
+        end
+      end
+
+      describe "force authorization after login" do
+        let(:attributes) do
+          {
+            force_authorization_after_login:,
+            force_authorization_with_any_method:,
+            force_authorization_help_text:
+          }
+        end
+
+        it { is_expected.to be_valid }
+
+        context "and force authorization after login is empty" do
+          let(:force_authorization_after_login) { [] }
+
+          it { is_expected.to be_valid }
+        end
+
+        context "and force authorization after login is not a valid handler" do
+          let(:force_authorization_after_login) { %w(invalid_handler another_dummy_authorization_handler) }
+
+          it { is_expected.not_to be_valid }
+        end
+      end
+
+>>>>>>> a8d21e4 (Add verification tweaks (#334))
       describe "validators" do
         let(:attributes) do
           {

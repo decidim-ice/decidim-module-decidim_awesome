@@ -9,7 +9,7 @@ module Decidim
         include ConfigConstraintsHelpers
         helper ConfigConstraintsHelpers
 
-        helper_method :constraints_for, :users_for, :config_var
+        helper_method :constraints_for, :users_for, :config_var, :available_authorizations
         before_action do
           enforce_permission_to :edit_config, configs
         end
@@ -99,6 +99,12 @@ module Decidim
 
         def format_user_name(user)
           "<span class='#{"is-admin" if user.read_attribute("admin")}'>#{user.name} (@#{user.nickname} - #{user.email})</span>"
+        end
+
+        def available_authorizations
+          @available_authorizations ||= Decidim::Verifications::Adapter.from_collection(
+            current_organization.available_authorizations & Decidim.authorization_workflows.map(&:name)
+          )
         end
       end
     end

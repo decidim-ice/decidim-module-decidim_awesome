@@ -176,6 +176,30 @@ module Decidim
       {}
     end
 
+    # Forces the user to authorize using some registered verification flow in order to access the platform
+    # if set to an empty array, the user will be able to access the platform without any verification but admins can still enforce it
+    # if set to :disabled the feature will be completly removed
+    # You can initialize some default verification workflow manifests
+    config_accessor :force_authorization_after_login do
+      []
+    end
+
+    # By default all methods specified in force_authorization_after_login must be granted in order to access the platform
+    # if set to true, the user will be able to access the platform if any of the methods is granted
+    config_accessor :force_authorization_with_any_method do
+      false
+    end
+
+    # When force_authorization_after_login is enabled, this text will be shown to the user as a help text (ie: add a contact information)
+    config_accessor :force_authorization_help_text do
+      {}
+    end
+
+    # This controllers will be skipped from the authorization check
+    config_accessor :force_authorization_allowed_controller_names do
+      %w(account pages)
+    end
+
     # How old must be the private data to be considered expired and therefore presented to the admins for deletion
     config_accessor :private_data_expiration_time do
       3.months
