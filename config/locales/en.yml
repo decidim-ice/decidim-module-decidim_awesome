@@ -8,6 +8,10 @@ en:
         allow_images_in_proposals: Allow images in the proposals editor
         allow_videos_in_editors: Allow videos in the HTML editor
         auto_save_forms: Auto save forms in local storage
+        force_authorization_after_login: Force authorization after login/registering
+        force_authorization_help_text: Help text for the authorization page
+        force_authorization_with_any_method: Allow access if any of the authorizations
+          is granted (by default, all are required)
         intergram_auto_no_response: A message that is sent one minute after the user
           sends its first message and no response was received
         intergram_auto_response: A message that is sent immediately after the user
@@ -282,6 +286,14 @@ en:
               drag_and_drop_supported: When uploading images, Drag & Drop is supported.
                 Images will be uploaded to the server and inserted as external resources
                 (it doesn't use base64 inline encoding).
+              force_authorization_after_login: 'If enabled, users will be redirected
+                to the authorization page after login or registration if some of the
+                specified authorizations are not granted. This is useful if you want
+                to force users to be verified with a specific authorization before
+                they can login at all (ie: to prevent spam).'
+              force_authorization_help_text: Add a custom text to explain why authorization
+                is required. Also make sure you add a contact method in case users
+                need help.
               intergram_about: Intergram uses Telegram messenger to handle a live
                 support chat widget embedded in the bottom of the page.
               intergram_config: Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram
@@ -343,6 +355,10 @@ en:
                 ''!!!'' won''t be allowed in the text'
               validate_title_min_length: Title is always mandatory and this number
                 cannot be zero
+              verifications_html: |
+                Here you can make some tweaks to the verification process.<br>
+                <b>NOTE:</b> Be aware that changing these settings might prevent some users from accessing the platform. Use it with caution!<br><br>
+                Also note that these settings are applied to all users. Admins will always have access to the admin backend though.
             validators:
               body: User input validations for the "body" field
               title: User input validations for the "title" field
@@ -389,6 +405,7 @@ en:
             scoped_styles: 'Custom Styles: Public frontend'
             styles: Custom Styles
             surveys: Surveys & Forms
+            verifications: Verifications / Authorization Hacks
           update:
             error: Error updating configuration! %{error}
             success: Configuration updated successfully
@@ -496,6 +513,7 @@ en:
           proposals: Proposals Hacks
           styles: Custom Styles
           surveys: Surveys & Forms
+          verifications: Verifications
         menu_hacks:
           create:
             error: Error creating menu item! %{error}
@@ -626,6 +644,23 @@ en:
             view_meeting: View meeting
             view_proposal: View proposal
       proposal_private_custom_fields_disclosure: This information won't be published
+      required_authorizations:
+        index:
+          cancel: I'll do this in another moment, %{link}.
+          granted_title: Granted verifications
+          logout: let me logout
+          missing_title: Not verified yet
+          resume_title: Pending verifications
+          resume_with_method: Resume verification with %{name}
+          title: Verify your identity
+          verify_with_all_these_options: 'Please verify yourself with all these methods
+            before being able to access the platform:'
+          verify_with_any_of_these_options: 'Please verify yourself with at least
+            one of these options before being able to access the platform:'
+          verify_with_method: Verify with %{name}
+      session:
+        authorization_is_required: In order to participate in this platform, you need
+          to authorize your account with a valid authorization (%{authorizations}).
       validators:
         too_much_caps: Is using too many capital letters (over %{percent}% of the
           text)
