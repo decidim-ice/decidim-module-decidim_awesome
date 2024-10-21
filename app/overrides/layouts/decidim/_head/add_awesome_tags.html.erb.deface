@@ -1,7 +1,7 @@
 <!-- insert_after "erb[loud]:contains('append_stylesheet_pack_tag')" -->
 
 <% append_stylesheet_pack_tag "decidim_decidim_awesome", media: "all" %>
-<%= render(partial: "layouts/decidim/decidim_awesome/custom_styles") if awesome_custom_styles.present? %>
+<%= render(partial: "layouts/decidim/decidim_awesome/custom_styles") if awesome_scoped_styles.present? %>
 
 <% append_javascript_pack_tag "decidim_decidim_awesome", defer: false %>
 <% append_javascript_pack_tag("decidim_decidim_awesome_custom_fields") if Decidim::DecidimAwesome.enabled?(:proposal_custom_fields) %>

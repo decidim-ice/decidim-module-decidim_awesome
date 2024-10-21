@@ -47,8 +47,13 @@ module Decidim
       end
 
       # Collects all CSS that is applied in the current URL context
-      def awesome_custom_styles
-        @awesome_custom_styles ||= awesome_config_instance.collect_sub_configs_values("scoped_style")
+      def awesome_scoped_styles
+        @awesome_scoped_styles ||= awesome_config_instance.collect_sub_configs_values("scoped_style")
+      end
+
+      # Collects all CSS that is applied in the current URL context
+      def awesome_scoped_admin_styles
+        @awesome_scoped_admin_styles ||= awesome_config_instance.collect_sub_configs_values("scoped_admin_style")
       end
 
       # Collects all proposal custom fields that is applied in the current URL context
