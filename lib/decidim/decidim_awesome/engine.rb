@@ -67,6 +67,13 @@ module Decidim
           Decidim::Proposals::ProposalType.include(Decidim::DecidimAwesome::AddProposalTypeCustomFields)
         end
 
+        if DecidimAwesome.enabled?(:admins_available_authorizations)
+          Decidim::System::RegisterOrganizationForm.include(Decidim::DecidimAwesome::System::OrganizationFormOverride)
+          Decidim::System::UpdateOrganizationForm.include(Decidim::DecidimAwesome::System::OrganizationFormOverride)
+          Decidim::System::UpdateOrganization.include(Decidim::DecidimAwesome::System::UpdateOrganizationOverride)
+          Decidim::System::RegisterOrganization.include(Decidim::DecidimAwesome::System::RegisterOrganizationOverride)
+        end
+
         if DecidimAwesome.enabled?(:proposal_custom_fields, :proposal_private_custom_fields, :weighted_proposal_voting)
           # add vote weight/private_body to proposals
           Decidim::Proposals::Proposal.include(Decidim::DecidimAwesome::HasProposalExtraFields)

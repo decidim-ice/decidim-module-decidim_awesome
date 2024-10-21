@@ -1,0 +1,9 @@
+<!-- insert_top '#advanced-settings-panel' -->
+
+<% if Decidim::DecidimAwesome.enabled?(:admins_available_authorizations) %>
+  <div class="border-2 rounded border-background p-4 form__wrapper mt-8 first:mt-0 last:pb-4">
+    <h3 class="h4"><%= t "decidim.decidim_awesome.system.organizations.awesome_tweaks" %></h3>
+
+    <%= render partial: "decidim/decidim_awesome/system/organizations/admin_allowed_authorizations", locals: { f: f } %>
+  </div>
+<% end %>
