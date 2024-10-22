@@ -13,7 +13,7 @@ module Decidim
 
           def save_organization
             decidim_original_save_organization
-            add_awesome_configs!
+            add_awesome_configs! if form.clean_awesome_admins_available_authorizations.present?
           end
 
           def add_awesome_configs!

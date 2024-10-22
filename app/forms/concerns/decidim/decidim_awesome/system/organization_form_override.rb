@@ -16,16 +16,16 @@ module Decidim
             map_awesome_configs(model)
           end
 
-          private
-
-          def map_awesome_configs(organization)
-            self.awesome_admins_available_authorizations = Decidim::DecidimAwesome::AwesomeConfig.find_by(var: :admins_available_authorizations, organization:)&.value
-          end
-
           def clean_awesome_admins_available_authorizations
             return unless awesome_admins_available_authorizations
 
             awesome_admins_available_authorizations.select(&:present?)
+          end
+
+          private
+
+          def map_awesome_configs(organization)
+            self.awesome_admins_available_authorizations = Decidim::DecidimAwesome::AwesomeConfig.find_by(var: :admins_available_authorizations, organization:)&.value
           end
         end
       end
