@@ -7,6 +7,8 @@ ja:
         allow_images_in_proposals: 提案エディターでの画像を許可する
         allow_videos_in_editors: HTMLエディターで動画を許可する
         auto_save_forms: ローカルストレージにフォームを自動保存する
+        force_authorization_after_login: ログイン/登録後に本人確認を行わせる
+        force_authorization_help_text: 認証ページのヘルプテキスト
         intergram_auto_no_response: ユーザーが最初のメッセージを送信し、応答が受信されなかった後1分後に送信されたメッセージ
         intergram_auto_response: ユーザーが最初のメッセージを送信した直後に送信されるメッセージ
         intergram_chat_id: チャットID
@@ -46,6 +48,8 @@ ja:
         target: リンク先
         url: URL
         visibility: 表示・非表示
+      user:
+        user_time_zone: 個人のタイムゾーン
   decidim:
     admin:
       actions:
@@ -394,6 +398,7 @@ ja:
           proposals: 提案の設定
           styles: 独自スタイル
           surveys: 調査＆フォーム
+          verifications: 本人認証
         menu_hacks:
           create:
             error: メニュー項目作成エラー %{error}
@@ -505,6 +510,18 @@ ja:
             view_meeting: ミーティングを表示
             view_proposal: 提案を表示
       proposal_private_custom_fields_disclosure: この情報は公開されません
+      required_authorizations:
+        index:
+          cancel: あとで %{link} を行う
+          granted_title: 許可された本人確認
+          logout: ログアウトする
+          missing_title: 未検証
+          resume_title: 本人確認処理中
+          resume_with_method: '%{name} で本人確認を再開'
+          title: 本人確認を行う
+          verify_with_all_these_options: 'プラットフォームにアクセスできるようにするには、以下すべての方法で本人確認を行ってください：'
+          verify_with_any_of_these_options: 'プラットフォームにアクセスする前に、これらの選択肢のうちいずれかを用いて本人確認を行ってください'
+          verify_with_method: '%{name} で本人確認する'
       validators:
         too_much_caps: 大文字が多すぎます（テキストの %{percent}%以上）
       voting:
