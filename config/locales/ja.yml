@@ -138,6 +138,9 @@ ja:
               supported_last: 最後にサポートした順
               za: Z-A (アルファベット逆順)
     decidim_awesome:
+      account:
+        timezone_select:
+          time_zone_helper: ログインしている地域の時間帯の日付を表示するために個人のタイムゾーンを使用します。
       admin:
         actions: アクション
         admin_accountability:
@@ -236,6 +239,7 @@ ja:
               allow_videos_in_editors: すべてのWYSIWYGエディタに動画リンクアイコンを追加します
               auto_save_forms: 調査などのフォームにユーザーが入力したデータを、LocalStorageを使って自動的に保存します。フォームを送信されていない場合、同じブラウザーで次回アクセスした時に復元されます。フォームを送信すると、データは削除されます。ユーザーがLocalStrorageのデータを削除した場合にも、データは復元されなくなります。
               drag_and_drop_supported: 画像アップロード時にドラッグ&ドロップが利用できます。画像はサーバーにアップロードされ、外部リソースとして挿入されます(base64インラインエンコーディングは使用しません).
+              force_authorization_after_login: '有効にした場合、指定された認証が行われていなければ、ユーザーはログインまたは登録後に認証ページにリダイレクトされます。これはユーザーがログインする前に、特定の認証を使用してユーザーを強制的に本人確認させる場合(スパムを防ぐためなど) に便利です。'
               force_authorization_help_text: 認証が必要な理由を説明するカスタムテキストを追加します。また、ユーザーがヘルプが必要な場合に備えて連絡方法を追加してください。
               intergram_about: IntergramはTelegramメッセンジャーを使用してページの下部に埋め込まれたライブサポートチャットウィジェットを処理します。
               intergram_config: '<a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> をグループに招待するか、直接チャットを開始します。 <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
@@ -259,6 +263,10 @@ ja:
               validate_title_max_caps_percent: ゼロの場合大文字を許可しません。100の場合すべてを大文字で書くことを強制します。
               validate_title_max_marks_together: '並べて入力できる「?」と「!」の数を制限します。 すなわち、それが2の場合、「!!!」はテキストに記入できません'
               validate_title_min_length: タイトルは常に必須です。この数字はゼロにはできません
+              verifications_html: |
+                認証プロセスにいくつかの調整を加えることができます。<br>
+                <b>注意：</b> これらの設定を変更すると、一部のユーザーがプラットフォームにアクセスできなくなる可能性があります。慎重に使用してください！<br><br>
+                また、これらの設定は全ユーザーに適用されますが、管理者は常に管理者バックエンドにアクセス可能です。
             validators:
               body: '「body」フィールドのユーザー入力検証'
               title: '「タイトル」フィールドのユーザー入力検証'
@@ -527,6 +535,8 @@ ja:
           verify_with_all_these_options: 'プラットフォームにアクセスできるようにするには、以下すべての方法で本人確認を行ってください：'
           verify_with_any_of_these_options: 'プラットフォームにアクセスする前に、これらの選択肢のうちいずれかを用いて本人確認を行ってください'
           verify_with_method: '%{name} で本人確認する'
+      session:
+        authorization_is_required: このプラットフォームに参加するには、有効な認証 (%{authorizations}) でアカウントを承認する必要があります。
       validators:
         too_much_caps: 大文字が多すぎます（テキストの %{percent}%以上）
       voting:
