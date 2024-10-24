@@ -7,6 +7,9 @@ ca:
         allow_images_in_proposals: Permet imatges a l'editor de propostes
         allow_videos_in_editors: Permet vídeos a l'editor HTML
         auto_save_forms: Desa automàticament els formularis a l'emmagatzematge local
+        force_authorization_after_login: Forçar autorització després d'iniciat sessió/registre
+        force_authorization_help_text: Text d'ajuda per la pàgina d'autorització
+        force_authorization_with_any_method: Permetre l'accés si es concedeix alguna de les autoritzacions (per defecte, totes són necessàries)
         intergram_auto_no_response: Un missatge que s'envia un minut després que la usuària hagi enviat el seu primer missatge i no s'hagi rebut cap resposta
         intergram_auto_response: Un missatge que s'envia immediatament després que la usuària enviï el seu primer missatge
         intergram_chat_id: ID de xat
@@ -236,6 +239,8 @@ ca:
               allow_videos_in_editors: Això afegirà una icona per enllaçar vídeos a l'editor HTML
               auto_save_forms: Això farà servir l'emmagatzematge local del navegador per desar automàticament les dades introduïdes pels usuaris a les enquestes i altres formularis mentre les omplen. Les dades es restauraran en una futura visita amb el mateix navegador en cas que no s'enviï el formulari. Si s’envia el formulari, s’eliminaran les dades locals. Si els usuaris eliminen les seves dades del navegador, tampoc es restauraran.
               drag_and_drop_supported: Quan es pugin imatges, es pot fer a través del mètode de "arrossegar i deixar anar". Les imatges seran pujades al servidor i inserides com recursos externs (no es fa servir codificació en línia base64).
+              force_authorization_after_login: 'Si està habilitat, les usuàries seran redireccionades a la pàgina d''autorització després de l''inici de sessió o registre si algunes de les autoritzacions especificades no són concedides. Això és útil si voleu forçar les usuàries a que es verifiquin a través d''una autorització específica abans que puguin iniciar sessió en qualsevol moment (per exemple: per prevenir spam).'
+              force_authorization_help_text: Afegeix un text personalitzat per explicar per què cal l'autorització. Assegureu-vos també d'afegir un mode de contacte en cas que les usuàries necessitin ajuda.
               intergram_about: Intergram utilitza el Telegram Messenger per gestionar un widget de xat en viu de suport incrustat a la part inferior de la pàgina.
               intergram_config: 'Convida a la <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> al teu grup o comença un xat amb ella directament. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               original_editor_override: Desde la versió 0.26, és possible (per administradors només) pujar imatges als editors de text enriquit. Per tant, les opcions d'imatges disponibles en aquesta pàgina només afecten a la part pública de la web (les administradores sempre ho tenen activat).
@@ -296,6 +301,7 @@ ca:
             proposals: Modificacions a propostes
             styles: Estils personalitzats
             surveys: Formularis i enquestes
+            verifications: Verificacions / Hacks d'autorització
           update:
             error: Error actualitzant la configuració! %{error}
             success: Configuració actualitzada correctament
@@ -400,6 +406,7 @@ ca:
           proposals: Modificacions a propostes
           styles: Estils personalitzats
           surveys: Formularis i enquestes
+          verifications: Verificacions
         menu_hacks:
           create:
             error: 'Error en crear un nou ítem de menú: %{error}'
@@ -513,6 +520,19 @@ ca:
             view_meeting: Veure trobada
             view_proposal: Veure proposta
       proposal_private_custom_fields_disclosure: Aquesta informació no es publicarà
+      required_authorizations:
+        index:
+          cancel: Això ho faré en un altre moment, %{link}.
+          logout: deixa'm tancar la sessió
+          missing_title: No verificada encara
+          resume_title: Verificacions pendents
+          resume_with_method: Reprendre la verificació amb %{name}
+          title: Verifica la teva identitat
+          verify_with_all_these_options: 'Si us plau, verifica''t amb tots aquests mètodes abans de poder accedir a la plataforma:'
+          verify_with_any_of_these_options: 'Si us plau, verifica''t com a mínim amb un d''aquests mètodes abans de poder accedir a la plataforma:'
+          verify_with_method: Verificar amb %{name}
+      session:
+        authorization_is_required: Per participar en aquesta plataforma, cal que autoritzeu el vostre compte amb una autorització vàlida (%{authorizations}).
       validators:
         too_much_caps: Fa servir massa lletres majúscules (més %{percent}% del text)
       voting:
