@@ -2,6 +2,9 @@
 en:
   activemodel:
     attributes:
+      organization:
+        awesome_admins_available_authorizations: Allow admins to manually verify
+          users with these authorizations
       config:
         additional_proposal_sortings: Additional sorting options enabled
         allow_images_in_editors: Allow images in the HTML editor
@@ -159,6 +162,12 @@ en:
               supported_last: Supported last
               za: Z-A (Reverse alphabetical)
     decidim_awesome:
+      system:
+        organizations:
+          awesome_tweaks: Decidim Awesome Tweaks
+          admin_allowed_authoritzations_help_html: |
+            Admins will be able to manually verify users with these authorizations.
+            <br>Use this feature with caution, as it can lead to security issues.
       account:
         timezone_select:
           time_zone_helper: Use your personal time zone to display dates in your local

@@ -182,6 +182,13 @@ module Decidim
       {}
     end
 
+    # Allows admins to manually authorize users with the specified methods
+    # if set to an empty array, the admins will not be able to authorize users but the system admin can still configure it
+    # if set to :disabled the feature will be completly removed
+    config_accessor :admins_available_authorizations do
+      []
+    end
+
     # This controllers will be skipped from the authorization check
     config_accessor :force_authorization_allowed_controller_names do
       %w(account pages)
