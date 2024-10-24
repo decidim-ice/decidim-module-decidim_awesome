@@ -263,6 +263,10 @@ es:
               validate_title_max_caps_percent: Cero no permitirá ninguna letra mayúscula, 100 forzará a escribir todo en mayúsculas
               validate_title_max_marks_together: 'Limitar el número de símbolos de preguntas y exclamaciones que se pueden escribir juntos. Es decir, si es 2, entonces ''!!!'' no estará permitido en el texto'
               validate_title_min_length: El título siempre es obligatorio y este número no puede ser cero
+              verifications_html: |
+                Aquí puedes realizar algunos ajustes en el proceso de verificación.<br>
+                <b>NOTA:</b> Ten en cuenta que cambiar estos ajustes puede impedir que algunas usuarias accedan a la plataforma. ¡Utilízalo con precaución!<br><br>
+                Ten en cuenta también, que estos ajustes se aplican a todas las usuarias. Las administradoras siempre tendrán acceso al tablero de administración.
             validators:
               body: Validaciones de entrada de usuario para el campo "cuerpo"
               title: Validaciones de entrada de usuario para el campo "título"
@@ -523,6 +527,7 @@ es:
       required_authorizations:
         index:
           cancel: Haré esto en otro momento, %{link}.
+          granted_title: Verificaciones concedidas
           logout: déjame cerrar la sesión
           missing_title: No verificada aún
           resume_title: Verificaciones pendientes
