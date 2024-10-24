@@ -7,6 +7,9 @@ cs:
         allow_images_in_proposals: Povolit obrázky v editoru návrhů
         allow_videos_in_editors: Povolit videa v HTML editoru
         auto_save_forms: Automaticky ukládat formuláře v místním úložišti
+        force_authorization_after_login: Vynutit autorizaci po přihlášení/registraci
+        force_authorization_help_text: Text nápovědy pro autorizační stránku
+        force_authorization_with_any_method: Povolit přístup, pokud je udělen některou z autorizací (ve výchozím nastavení jsou vyžadovány vše)
         intergram_auto_no_response: Zpráva, která je odeslána jednu minutu poté, co uživatel odešle svou první zprávu a nebyla obdržena odpověď
         intergram_auto_response: Zpráva, která je odeslána okamžitě poté, co uživatel odešle svou první zprávu
         intergram_chat_id: ID Chatu
@@ -21,6 +24,7 @@ cs:
         proposal_private_custom_fields: Soukromá vlastní pole %{id}
         scoped_admins: 'Skupina Škálovaní administrátoři #%{id}'
         scoped_styles: Vlastní styly číslo %{id}
+        user_timezone: Umožnit uživatelům nastavit časové pásmo v profilu
         validate_body_max_caps_percent: Maximální povolený procentní podíl velkých písmen pro tělo zprávy
         validate_body_max_marks_together: Maximální počet po sobě jdoucích značek povolených v těle zprávy
         validate_body_min_length: Minimální požadované znaky pro tělo zprávy
@@ -46,6 +50,8 @@ cs:
         target: Otevře se v
         url: URL
         visibility: Viditelnost
+      user:
+        user_time_zone: Osobní časové pásmo
   decidim:
     admin:
       actions:
@@ -132,6 +138,9 @@ cs:
               supported_last: Naposledy podporováno
               za: Z-A (obrácená abeceda)
     decidim_awesome:
+      account:
+        timezone_select:
+          time_zone_helper: Použijte vaše osobní časové pásmo pro zobrazení dat v místním čase, když jste přihlášeni.
       admin:
         actions: Akce
         admin_accountability:
@@ -230,6 +239,7 @@ cs:
               allow_videos_in_editors: Toto přidá ikonu video odkazu ve všech WYSIWYG editorech
               auto_save_forms: Toto bude používat místní úložiště pro automatické ukládání dat zavedených uživateli do průzkumů a jiných formulářů během vyplňování. Data budou obnovena v budoucí návštěvě stejného prohlížeče v případě, že formulář nebude odeslán. Pokud je formulář odeslán, data budou odstraněna. Pokud uživatelé odstraní svá data z místního úložiště, data nebudou obnovena.
               drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
+              force_authorization_help_text: Přidejte vlastní text, který vysvětlí proč je potřeba autorizace. Také se ujistěte, že přidáte kontaktní metodu pro případ, že uživatelé potřebují pomoc.
               intergram_about: Intergram používá Telegram messenger pro zpracování widgetu live podpory v dolní části stránky.
               intergram_config: 'Pozvěte <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bota</a> do vaší skupiny nebo začněte chatovat přímo. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               original_editor_override: Od verze 0.26 je možné nahrávat obrázky do editorů (pouze pro administrátory). Proto zde nastavení obrázků ovlivňuje pouze veřejné editory (správce je bude mít vždy k dispozici).
@@ -289,6 +299,7 @@ cs:
             proposals: Návrhy hacků
             styles: Vlastní styly
             surveys: Průzkumy a formuláře
+            verifications: Ověřovací / Schvalovací hacky
           update:
             error: Chyba při aktualizaci konfigurace! %{error}
             success: Konfigurace byla úspěšně aktualizována
@@ -393,6 +404,7 @@ cs:
           proposals: Návrhy hacků
           styles: Vlastní styly
           surveys: Průzkumy a formuláře
+          verifications: Ověření
         menu_hacks:
           create:
             error: Chyba při vytváření položky menu! %{error}
@@ -506,6 +518,15 @@ cs:
             view_meeting: Zobrazit schůzku
             view_proposal: Zobrazit návrh
       proposal_private_custom_fields_disclosure: Tyto informace nebudou publikovány
+      required_authorizations:
+        index:
+          cancel: Udělám to za chvíli, %{link}.
+          granted_title: Udělená ověření
+          logout: dovolte mi odhlásit se
+          missing_title: Zatím neověřeno
+          resume_title: Čeká se na ověření
+          resume_with_method: Pokračovat v ověřování pomocí %{name}
+          title: Ověřte svou totožnost
       validators:
         too_much_caps: Používá příliš mnoho velkých písmen (více než %{percent}% textu)
       voting:
