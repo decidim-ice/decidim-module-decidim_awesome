@@ -7,6 +7,9 @@ es:
         allow_images_in_proposals: Permitir imágenes en el editor de propuestas
         allow_videos_in_editors: Permitir vídeos en el editor HTML
         auto_save_forms: Guardar automáticamente los formularios en el almacenamiento local
+        force_authorization_after_login: Forzar autorización después de iniciar sesión/registro
+        force_authorization_help_text: Texto de ayuda para la página de autorización
+        force_authorization_with_any_method: Permitir el acceso si se concede alguna de las autorizaciones (por defecto, todas son necesarias)
         intergram_auto_no_response: Un mensaje que se envía un minuto después de que la usuaria haya enviado su primer mensaje y no se haya recibido respuesta
         intergram_auto_response: Un mensaje que se envía inmediatamente después de que la usuaria envíe su primer mensaje
         intergram_chat_id: ID de chat
@@ -236,6 +239,8 @@ es:
               allow_videos_in_editors: Esto añadirá un icono para enlazar videos en el editor HTML
               auto_save_forms: Esto usará el almacenamiento local del navegador para guardar automáticamente los datos introducidos por las usuarias en las encuestas y otros formularios mientras los rellenen. Si no se ha mandado el formulario, los datos se restaurarán en la siguiente visita con el mismo navegador. Los datos se eliminarán una vez se envíe el formulario. Si las usuarias eliminan sus datos del navegador, estos tampoco se restaurarán.
               drag_and_drop_supported: Cuando se suban imágenes, se puede hacer a través del método "arrastrar & soltar". Las imágenes se subirán en el servidor y se insertarán como recursos externos (no se utiliza codificación en línea base64).
+              force_authorization_after_login: 'Si está habilitado, las usuarias serán redireccionados a la página de autorización después del inicio de sesión o registro si algunas de las autorizaciones especificadas no son concedidas. Esto es útil si desea forzar a las usuarias a que se verifiquen a través de una autorización específica antes de que puedan iniciar sesión en cualquier momento (por ejemplo: para prevenir spam).'
+              force_authorization_help_text: Añade un texto personalizado para explicar por qué es necesaria la autorización. Asegúrate también de añadir un modo de contacto en caso de que las usuarias necesiten ayuda.
               intergram_about: Intergram utiliza el Telegram Messenger para gestionar un widget de chat de soporte incrustado en la parte inferior de la página.
               intergram_config: 'Invita a la <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> a tu grupo o inicia un chat con ella directamente. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               original_editor_override: Desde la versión 0.26, es posible (sólo para administradoras) subir imágenes en los editores. Por lo tanto, las opciones de configuración para imágenes aquí sólo afecta a los editores públicos (las administradoras siempre lo tendrán activado).
@@ -296,6 +301,7 @@ es:
             proposals: Modificaciones a las propuestas
             styles: Estilos personalizados
             surveys: Encuestas y formularios
+            verifications: Verificaciones / Hacks de autorización
           update:
             error: '¡Error actualizando la configuración! %{error}'
             success: Configuración actualizada correctamente
@@ -400,6 +406,7 @@ es:
           proposals: Modificaciones a las propuestas
           styles: Estilos personalizados
           surveys: Encuestas y formularios
+          verifications: Verificaciones
         menu_hacks:
           create:
             error: 'Error al crear nuevo ítem de menú: %{error}'
@@ -513,6 +520,19 @@ es:
             view_meeting: Ver encuentro
             view_proposal: Ver propuesta
       proposal_private_custom_fields_disclosure: Esta información no será publicada
+      required_authorizations:
+        index:
+          cancel: Haré esto en otro momento, %{link}.
+          logout: déjame cerrar la sesión
+          missing_title: No verificada aún
+          resume_title: Verificaciones pendientes
+          resume_with_method: Reanudar la verificación con %{name}
+          title: Verifica tu identidad
+          verify_with_all_these_options: 'Por favor, verifícate con todos estos métodos antes de poder acceder a la plataforma:'
+          verify_with_any_of_these_options: 'Por favor, verifícate por lo menos con uno de estos métodos antes de poder acceder a la plataforma:'
+          verify_with_method: Verificar con %{name}
+      session:
+        authorization_is_required: Para participar en esta plataforma, necesitas autorizar tu cuenta con una autorización válida (%{authorizations}).
       validators:
         too_much_caps: Contiene demasiadas letras mayúsculas (más del %{percent}% del texto)
       voting:
