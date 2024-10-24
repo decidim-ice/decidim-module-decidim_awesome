@@ -13,13 +13,20 @@ module Decidim
 
           def save_organization
             decidim_original_save_organization
-            add_awesome_configs! if form.clean_awesome_admins_available_authorizations.present?
+            if form.clean_awesome_admins_available_authorizations.present?
+              add_awesome_configs!
+            elsif awesome_config&.persisted?
+              awesome_config.destroy!
+            end
           end
 
           def add_awesome_configs!
-            allowed = AwesomeConfig.find_or_initialize_by(var: :admins_available_authorizations, organization: @organization)
-            allowed.value = form.clean_awesome_admins_available_authorizations
-            allowed.save!
+            awesome_config.value = form.clean_awesome_admins_available_authorizations
+            awesome_config.save!
+          end
+
+          def awesome_config
+            @awesome_config ||= AwesomeConfig.find_or_initialize_by(var: :admins_available_authorizations, organization: @organization)
           end
         end
       end

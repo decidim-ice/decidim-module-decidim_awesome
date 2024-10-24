@@ -52,6 +52,20 @@ module Decidim
           expect(Decidim::DecidimAwesome::AwesomeConfig.last.value).to eq(["example_authorization"])
         end
       end
+
+      context "when authorizations are defined" do
+        let!(:awesome_config) { create(:awesome_config, organization:, var: :admins_available_authorizations, value: ["example_authorization"]) }
+        let(:awesome_admins_available_authorizations) do
+          []
+        end
+
+        it "can be removed" do
+          expect { command.call }.to broadcast(:ok)
+          organization = Decidim::Organization.last
+          expect(organization.host).to eq("decide.example.org")
+          expect(Decidim::DecidimAwesome::AwesomeConfig.count).to eq(0)
+        end
+      end
     end
   end
 end
