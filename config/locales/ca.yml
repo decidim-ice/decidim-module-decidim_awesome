@@ -2,7 +2,7 @@ ca:
   activemodel:
     attributes:
       config:
-        additional_proposal_sortings: Activa opcions d'ordenació addicionals
+        additional_proposal_sortings: Activar opcions d'ordenació addicionals
         allow_images_in_editors: Permet imatges a l'editor HTML
         allow_images_in_proposals: Permet imatges a l'editor de propostes
         allow_videos_in_editors: Permet vídeos a l'editor HTML
@@ -263,6 +263,10 @@ ca:
               validate_title_max_caps_percent: Zero no permetrà cap majúscula, 100 obligarà a escriure-ho tot en majúscules
               validate_title_max_marks_together: 'Limiteu el nombre de signes d''interrogació i d''exclamació que es poden escriure junts. És a dir: si és 2, aleshores ''!!!'' no es permetrà al text'
               validate_title_min_length: El títol sempre és obligatori i aquest número no pot ser zero
+              verifications_html: |
+                Aquí pots fer alguns ajustaments en el procés de verificació.<br>
+                <b>NOTA:</b> Tingues en compte que canviar aquests paràmetres pot impedir que algunes usuàries accedeixin a la plataforma. Fes-ho servir amb precaució!<br><br>
+                Tingues en compte també, que aquests paràmetres s'apliquen a totes les usuàries. Les administradores sempre tindran accés al tauler dadministració.
             validators:
               body: Validacions d'entrada per l'usuari en el camp cos de la proposta
               title: Validacions d'entrada per l'usuari en el camp títol de la proposta
@@ -523,6 +527,7 @@ ca:
       required_authorizations:
         index:
           cancel: Això ho faré en un altre moment, %{link}.
+          granted_title: Verificacions concedides
           logout: deixa'm tancar la sessió
           missing_title: No verificada encara
           resume_title: Verificacions pendents
