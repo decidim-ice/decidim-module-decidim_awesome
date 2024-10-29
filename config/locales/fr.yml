@@ -249,6 +249,7 @@ fr:
                 %{warning}
                 Ce texte peut être personnalisé avec une traduction personnalisée en utilisant la clé:
                 %{key}
+              scoped_admin_styles_variables: 'Vous pouvez utiliser les variables CSS suivantes pour les couleurs personnalisées de l''organisation :'
               scoped_admins: Promouvoir les utilisateurs réguliers en administrateurs qui ne peuvent administrer que certaines parties de la plateforme (utilisez l'éditeur de restrictions pour cela). Notez que les utilisateurs qui ont déjà les permissions d'administration habituelles seront ignorés.
               scoped_styles: Créer un CSS personnalisé qui s'applique uniquement à certaines parties du site web public (front-end) (utilisez l'éditeur de restrictions pour cela)
               scoped_styles_variables: 'Vous pouvez utiliser les variables CSS suivantes pour les couleurs personnalisées de l''organisation :'
@@ -274,6 +275,9 @@ fr:
             sure_to_remove: Êtes-vous sûr de vouloir supprimer ce champ ?
           form_scoped_admin_styles:
             delete: Supprimer
+            new: Ajouter un nouveau bloc CSS "tableau de bord admin"
+            remove: Supprimer ce bloc CSS
+            sure_to_remove: Êtes-vous sûr de vouloir supprimer ce bloc CSS ?
           form_scoped_admins:
             delete: Supprimer
             new: Ajouter un nouveau groupe "Administrateurs de secteur"
@@ -281,6 +285,7 @@ fr:
             sure_to_remove: Êtes-vous sûr de vouloir détruire ce groupe « Administrateurs de secteur »?
           form_scoped_styles:
             delete: Supprimer
+            new: Ajouter un nouveau bloc CSS "interface publique"
             remove: Supprimer cette boîte CSS
             sure_to_remove: Etes-vous sûr de vouloir supprimer cette boîte CSS ?
           none: "⛔ Jamais! - Désactive toute autre contrainte"
@@ -296,7 +301,8 @@ fr:
             proposal_custom_fields: 'Champs personnalisés de propositions : champs publics'
             proposal_private_custom_fields: 'Champs personnalisés de propositions : champs privés'
             proposals: Hacks pour les propositions
-            scoped_admin_styles: 'Styles personnalisés : tableau de bord admin'
+            scoped_admin_styles: 'Styles personnalisés : Tableau de bord admin'
+            scoped_styles: 'Styles personnalisés : Interface publique'
             styles: Styles personnalisés
             surveys: Enquêtes et formulaires
           update:
@@ -452,6 +458,9 @@ fr:
         scoped_admin_styles:
           menu:
             title: Tableau de bord admin
+        scoped_styles:
+          menu:
+            title: Interface publique
       admin_log:
         component:
           destroy_private_data: "%{user_name} a détruit les objets %{count} de données privées pour %{resource_name} dans %{space_name}"
