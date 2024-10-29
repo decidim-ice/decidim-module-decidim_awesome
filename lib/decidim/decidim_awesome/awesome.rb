@@ -126,7 +126,7 @@ module Decidim
       false
     end
 
-    # allows admins to created specific CSS snippets affecting only some specific parts
+    # allows admins to created specific CSS snippets affecting only some public frontend specific parts
     # Valid values differ a little from the previous convention:
     #   :disabled => false and non available, hidden from admins
     #   Hash => hash of different css text, each key will be used for the contraints
@@ -135,6 +135,18 @@ module Decidim
     #      some_identifier: ".wrapper { background: red; }"
     #   }
     config_accessor :scoped_styles do
+      {}
+    end
+
+    # allows admins to created specific CSS snippets affecting only some admin specific parts
+    # Valid values differ a little from the previous convention:
+    #   :disabled => false and non available, hidden from admins
+    #   Hash => hash of different css text, each key will be used for the contraints
+    # Admins create this hash dynamically but some pre-defined css boxes can be created here as:
+    #   {
+    #      some_identifier: ".wrapper { background: red; }"
+    #   }
+    config_accessor :scoped_admin_styles do
       {}
     end
 

@@ -29,10 +29,11 @@ module Decidim
 
             menu.add_item :styles,
                           I18n.t("menu.styles", scope: "decidim.decidim_awesome.admin"),
-                          decidim_admin_decidim_awesome.config_path(:styles),
+                          decidim_admin_decidim_awesome.config_path(:scoped_styles),
                           position: 4,
                           icon_name: "brush",
-                          if: menus[:styles]
+                          if: menus[:styles],
+                          submenu: { target_menu: :custom_styles_submenu }
 
             menu.add_item :custom_fields,
                           I18n.t("menu.proposal_custom_fields", scope: "decidim.decidim_awesome.admin"),
@@ -111,6 +112,24 @@ module Decidim
           end
         end
 
+        def register_custom__styles_submenu!
+          Decidim.menu :custom_styles_submenu do |menu|
+            menu.add_item :scoped_styles,
+                          I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.scoped_styles"),
+                          decidim_admin_decidim_awesome.config_path(:scoped_styles),
+                          position: 4.1,
+                          icon_name: "computer-line",
+                          if: config_enabled?(:scoped_styles)
+
+            menu.add_item :scoped_admin_styles,
+                          I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.scoped_admin_styles"),
+                          decidim_admin_decidim_awesome.config_path(:scoped_admin_styles),
+                          position: 4.2,
+                          icon_name: "file-settings-line",
+                          if: config_enabled?(:scoped_admin_styles)
+          end
+        end
+
         def register_menu_hacks_submenu!
           Decidim.menu :menu_hacks_submenu do |menu|
             menu.add_item :main_menu,
@@ -156,7 +175,9 @@ module Decidim
               :validate_body_max_marks_together, :validate_body_start_with_caps
             ),
             surveys: config_enabled?(:auto_save_forms, :user_timezone),
-            styles: config_enabled?(:scoped_styles),
+            styles: config_enabled?(:scoped_styles, :scoped_admin_styles),
+            scoped_styles: config_enabled?(:scoped_styles),
+            scoped_admin_styles: config_enabled?(:scoped_admin_styles),
             custom_fields: config_enabled?(:proposal_custom_fields, :proposal_private_custom_fields),
             proposal_custom_fields: config_enabled?(:proposal_custom_fields),
             proposal_private_custom_fields: config_enabled?(:proposal_private_custom_fields),

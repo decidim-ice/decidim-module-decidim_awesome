@@ -25,7 +25,7 @@ describe "User uses custom time zones" do
 
   it "allows to change the time zone" do
     within ".card__list-metadata" do
-      expect(page).to have_content("05:00 AM +00")
+      expect(page).to have_content("04:00 AM -01")
     end
     visit decidim.account_path
     expect(page).to have_select("user_user_time_zone", selected: "(GMT-01:00) Azores")
@@ -49,7 +49,7 @@ describe "User uses custom time zones" do
 
     it "does not allow to change the time zone" do
       within ".card__list-metadata" do
-        expect(page).to have_content("05:00 AM +00")
+        expect(page).to have_content("04:00 AM -01")
       end
       visit decidim.account_path
       expect(page).not_to have_select("user_user_time_zone")

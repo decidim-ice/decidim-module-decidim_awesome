@@ -231,7 +231,7 @@ shared_examples "basic rendering" do |enabled|
         "config/editors",
         "config/proposals",
         "config/surveys",
-        "config/styles",
+        "config/scoped_styles",
         "config/proposal_custom_fields",
         "config/admins",
         "menus/menu/hacks",
