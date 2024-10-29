@@ -278,7 +278,6 @@ fr:
             sure_to_remove: Êtes-vous sûr de vouloir détruire ce groupe « Administrateurs de secteur »?
           form_scoped_styles:
             delete: Supprimer
-            new: Ajouter une nouvelle boîte CSS
             remove: Supprimer cette boîte CSS
             sure_to_remove: Etes-vous sûr de vouloir supprimer cette boîte CSS ?
           none: "⛔ Jamais! - Désactive toute autre contrainte"
