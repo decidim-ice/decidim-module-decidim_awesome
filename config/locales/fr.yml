@@ -19,6 +19,7 @@ fr:
         intergram_use_floating_button: Si coché, la conversation fermée est toujours un bouton au lieu d'un texte
         proposal_custom_fields: Champs personnalisés %{id}
         proposal_private_custom_fields: Champs privés personnalisés %{id}
+        scoped_admin_styles: Style personnalisés %{id}
         scoped_admins: Groupe d'administrateurs restreints %{id}
         scoped_styles: Style personnalisés %{id}
         user_timezone: Autoriser les utilisateurs à définir leur fuseau horaire dans leur profil
@@ -271,6 +272,8 @@ fr:
             new: Ajouter une nouvelle section de champs personnalisés
             remove: Supprimer cette boîte de champs personnalisés
             sure_to_remove: Êtes-vous sûr de vouloir supprimer ce champ ?
+          form_scoped_admin_styles:
+            delete: Supprimer
           form_scoped_admins:
             delete: Supprimer
             new: Ajouter un nouveau groupe "Administrateurs de secteur"
@@ -293,6 +296,7 @@ fr:
             proposal_custom_fields: 'Champs personnalisés de propositions : champs publics'
             proposal_private_custom_fields: 'Champs personnalisés de propositions : champs privés'
             proposals: Hacks pour les propositions
+            scoped_admin_styles: 'Styles personnalisés : tableau de bord admin'
             styles: Styles personnalisés
             surveys: Enquêtes et formulaires
           update:
@@ -445,6 +449,9 @@ fr:
           private_data_last_update: Ces données ont été mises à jour il y a %{time_ago}.
           proposal_private_custom_fields: Champs privés
           remove_private_data: "👉 Vous pouvez le supprimer"
+        scoped_admin_styles:
+          menu:
+            title: Tableau de bord admin
       admin_log:
         component:
           destroy_private_data: "%{user_name} a détruit les objets %{count} de données privées pour %{resource_name} dans %{space_name}"
