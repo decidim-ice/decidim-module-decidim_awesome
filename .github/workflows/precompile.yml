@@ -12,7 +12,7 @@ env:
 
 jobs:
   lint-report:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     services:
       postgres:
