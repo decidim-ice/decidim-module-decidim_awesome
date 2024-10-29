@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    decidim-decidim_awesome (0.11.2)
+    decidim-decidim_awesome (0.11.3)
       decidim-admin (>= 0.28.0, < 0.29)
       decidim-core (>= 0.28.0, < 0.29)
       deface (>= 1.5)
@@ -365,7 +365,7 @@ GEM
       logger
     faraday-net_http (3.1.1)
       net-http
-    ffi (1.17.0)
+    ffi (1.17.0-x86_64-linux-gnu)
     file_validators (3.0.0)
       activemodel (>= 3.2)
       mime-types (>= 1.0)
