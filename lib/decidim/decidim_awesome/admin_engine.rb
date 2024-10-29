@@ -62,6 +62,7 @@ module Decidim
         end
         # submenus
         Decidim::DecidimAwesome::Menu.register_custom_fields_submenu!
+        Decidim::DecidimAwesome::Menu.register_custom__styles_submenu!
         Decidim::DecidimAwesome::Menu.register_maintenance_admin_menu!
         Decidim::DecidimAwesome::Menu.register_awesome_admin_menu!
 

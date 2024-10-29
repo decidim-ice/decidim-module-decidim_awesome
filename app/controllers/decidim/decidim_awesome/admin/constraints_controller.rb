@@ -9,8 +9,10 @@ module Decidim
         helper ConfigConstraintsHelpers
 
         layout false
+        helper_method :constraint_key
+
         before_action do
-          render plain: "no permissions for #{constraint_key}" unless allowed_to? :edit_config, constraint_key
+          render :no_permissions unless allowed_to? :edit_config, constraint_key
         end
 
         def new
@@ -127,6 +129,8 @@ module Decidim
           case key
           when /^scoped_style_/
             :scoped_styles
+          when /^scoped_admin_style_/
+            :scoped_admin_styles
           when /^scoped_admin_/
             :scoped_admins
           when /^proposal_custom_field_/

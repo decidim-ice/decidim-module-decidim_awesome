@@ -23,6 +23,8 @@ ignore_unused:
   - "decidim.components.proposals.settings.step.*"
   - "decidim.decidim_awesome.admin.config.*"
   - "decidim.decidim_awesome.admin.admin_accountability.*"
+  - "decidim.decidim_awesome.admin.scoped_admin_styles.*"
+  - "decidim.decidim_awesome.admin.scoped_styles.*"
   - "decidim.decidim_awesome.admin.menu.*"
   - "decidim.decidim_awesome.admin.menu_hacks.*"
   - "decidim.decidim_awesome.admin.proposal_custom_fields.*"

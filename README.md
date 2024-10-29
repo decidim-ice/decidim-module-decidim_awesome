@@ -89,9 +89,15 @@ With this feature you can have a support chat in Decidim. It is linked to a [Tel
 
 #### 9. Custom CSS applied only according scoped restrictions
 
-With this feature you can create directly in the admin a CSS snipped that is only applied globally, in a particular assembly or even a single proposal!
+##### 8.1 Public styles
+With this feature you can create directly in the admin a CSS snipped that is only applied in the public frontend, in a particular assembly or even a single proposal!
 
-![CSS screenshot](examples/custom_styles.png)
+![CSS screenshot](examples/custom_styles_public.png)
+
+##### 8.2 Admin styles
+With this feature you can create directly in the admin a CSS snipped that is only applied in the admin panel, in a particular assembly or even a single proposal!
+
+![CSS screenshot](examples/custom_styles_admin.png)
 
 #### 10. Change the main menu of Decidim entirely!
 
