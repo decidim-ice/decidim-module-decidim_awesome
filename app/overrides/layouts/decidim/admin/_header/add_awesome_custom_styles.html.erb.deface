@@ -1,0 +1,3 @@
+<!-- insert_after "erb[loud]:contains('stylesheet_pack_tag("decidim_core", "decidim_admin")')" -->
+
+<%= render(partial: "layouts/decidim/decidim_awesome/admin/custom_styles") if awesome_scoped_admin_styles.present? %>
