@@ -209,7 +209,7 @@ describe "Visit the admin page" do
         click_link_or_button "Custom Styles"
       end
 
-      it_behaves_like "has menu link", "styles"
+      it_behaves_like "has menu link", "scoped_styles"
 
       it "renders the page" do
         expect(page).to have_content(/Tweaks for Custom Styles/i)

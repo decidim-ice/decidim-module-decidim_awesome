@@ -364,16 +364,16 @@ de:
               <strong> Was sind private Daten?</strong>
               <br>
               Private Daten sind alle Informationen, die nicht öffentlich verfügbar sind und nur für Administratoren zugänglich sind. Dazu gehören derzeit auch Informationen aus privaten benutzerdefinierten Feldern.
-              <br><br> 
-              <strong>Was passiert, wenn ich private Daten lösche?</strong> 
+              <br><br>
+              <strong>Was passiert, wenn ich private Daten lösche?</strong>
               <br>
-              Wenn Sie private Daten löschen, werden alle privaten Informationen für den ausgewählten Mitwirkungsbereich oder die ausgewählte Komponente dauerhaft aus der Datenbank entfernt. Zu Prüfzwecken wird ein Protokoll dieser Aktion im System gespeichert. 
-              <br><br> 
+              Wenn Sie private Daten löschen, werden alle privaten Informationen für den ausgewählten Mitwirkungsbereich oder die ausgewählte Komponente dauerhaft aus der Datenbank entfernt. Zu Prüfzwecken wird ein Protokoll dieser Aktion im System gespeichert.
+              <br><br>
               <strong>Was geschieht mit öffentlichen Daten?</strong>
               <br> Öffentliche Daten sind von dieser Aktion nicht betroffen. Es werden nur private Daten gelöscht.
-               <br><br> 
-              <strong>Gibt es eine Mindestwartezeit vor dem Löschen privater Daten?</strong> 
-              <br> 
+               <br><br>
+              <strong>Gibt es eine Mindestwartezeit vor dem Löschen privater Daten?</strong>
+              <br>
               Ja, Sie können keine privaten Daten löschen, wenn die letzte Aktualisierung weniger als %{time_ago} zurückliegt. Sie können diese Konfiguration in der Initialisierungsdatei ändern.
             items_count: Betroffene Gesamtmenge
             last_date: Letzte Aktualisierung
@@ -548,6 +548,7 @@ de:
             title: 'Wartungswerkzeuge: %{title}'
             titles:
               checks: Systemkompatibilitätsprüfungen
+              private_data: Bereinigung personenbezogener Daten
         awesome_config:
           amendments: Änderungsvorschläge
           autosaved_error: Automatisches Speichern fehlgeschlagen
