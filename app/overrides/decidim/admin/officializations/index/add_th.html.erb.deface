@@ -1,0 +1,5 @@
+<!-- insert_before "th:last" -->
+
+<% if awesome_config[:admins_available_authorizations] %>
+  <th style="text-align:left;padding-left:0.75rem"><%= t("decidim.decidim_awesome.admin.officializations.authorizations") %></th>
+<% end %>

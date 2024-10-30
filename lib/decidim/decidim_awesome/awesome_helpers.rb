@@ -77,6 +77,13 @@ module Decidim
         DecidimAwesome.voting_registry.find(component.settings.awesome_voting_manifest)
       end
 
+      # Retrives all the "admins_available_authorizations" for the user along with other possible authorizations
+      # returns an instance of Decidim::DecidimAwesome::Authorizator
+      def awesome_authorizations_for(user)
+        @awesome_authorizations_for ||= {}
+        @awesome_authorizations_for[user.id] ||= Authorizator.new(user, awesome_config[:admins_available_authorizations])
+      end
+
       def version_prefix
         "v#{Decidim.version[0..3]}"
       end
