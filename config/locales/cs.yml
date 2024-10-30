@@ -239,6 +239,7 @@ cs:
               allow_videos_in_editors: Toto přidá ikonu video odkazu ve všech WYSIWYG editorech
               auto_save_forms: Toto bude používat místní úložiště pro automatické ukládání dat zavedených uživateli do průzkumů a jiných formulářů během vyplňování. Data budou obnovena v budoucí návštěvě stejného prohlížeče v případě, že formulář nebude odeslán. Pokud je formulář odeslán, data budou odstraněna. Pokud uživatelé odstraní svá data z místního úložiště, data nebudou obnovena.
               drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
+              force_authorization_after_login: 'Pokud je povoleno, uživatelé budou po přihlášení nebo registraci přesměrováni na autorizační stránku, pokud nejsou uděleny některé z zadaných autorizací. To je užitečné, pokud chcete donutit uživatele k ověření pomocí specifické autorizace, než se budou moci vůbec přihlásit (např.: zabránit spamu).'
               force_authorization_help_text: Přidejte vlastní text, který vysvětlí proč je potřeba autorizace. Také se ujistěte, že přidáte kontaktní metodu pro případ, že uživatelé potřebují pomoc.
               intergram_about: Intergram používá Telegram messenger pro zpracování widgetu live podpory v dolní části stránky.
               intergram_config: 'Pozvěte <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bota</a> do vaší skupiny nebo začněte chatovat přímo. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
@@ -252,6 +253,7 @@ cs:
                 %{warning}
                 Tento text lze přizpůsobit vlastním překladem pomocí klíče:
                 %{key}
+              scoped_admin_styles_warning: "<strong>Varování</strong>: Zde přidejte vlastní CSS které platí pouze v tomto administrátoru."
               scoped_admins: Povýšení běžného uživatele na administrátora, který může spravovat pouze určité části veřejného webu (k tomu použijte editor omezení). Všimněte si, že uživatelé, kteří již mají oprávnění běžného správce, budou ignorováni.
               scoped_styles: Vytvořte vlastní CSS aplikovaný pouze na určitých částech veřejného webu (použijte pro to editor omezení)
               scoped_styles_variables: 'Můžete použít následující CSS proměnné pro nastavené barvy organizace:'
