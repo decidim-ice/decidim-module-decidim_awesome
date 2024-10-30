@@ -22,6 +22,7 @@ ja:
         intergram_use_floating_button: チェックした場合、閉じたチャットは常にテキストの代わりにボタンになります
         proposal_custom_fields: 'カスタム項目 #%{id}'
         proposal_private_custom_fields: 非公開カスタムフィールド %{id}
+        scoped_admin_styles: カスタムスタイル %{id}
         scoped_admins: 'スコープ付き管理者グループ #%{id}'
         scoped_styles: 'カスタムスタイル #%{id}'
         user_timezone: ユーザーが自分のプロフィールでタイムゾーンを設定できるようにします
@@ -253,6 +254,7 @@ ja:
                 %{warning}
                 このテキストは、下記のキーを使用してカスタム翻訳でカスタマイズできます：
                 %{key}
+              scoped_admin_styles: ここを隠すと管理者が使用できなくなる可能性があります。ご注意ください。
               scoped_admins: 一般ユーザーを公開ウェブの特定の部分だけを管理できる管理者に昇格させます(制限エディターを使用してください)。 すでに通常の管理者権限を持つユーザーは無視されることに注意してください。
               scoped_styles: 公開ウェブの特定の部分にのみ適用されるカスタムCSSを作成します (制限されたエディタを使用してください)
               scoped_styles_variables: '組織の色のカスタマイズには、以下のCSS変数が使用できます。'
@@ -280,6 +282,10 @@ ja:
             new: 新しい「非公開カスタムフィールド」を追加
             remove: '「非公開カスタムフィールド」を削除'
             sure_to_remove: この非公開フィールドボックスを破棄してもよろしいですか？
+          form_scoped_admin_styles:
+            delete: 削除
+            new: 新しい「管理画面」CSSボックスを追加
+            remove: このCSSボックスを削除
           form_scoped_admins:
             delete: 削除
             new: 新しい「スコープ付き管理者」グループを追加
@@ -303,6 +309,8 @@ ja:
             proposal_custom_fields: '提案カスタムフィールド: 公開フィールド'
             proposal_private_custom_fields: '提案カスタムフィールド: 非公開フィールド'
             proposals: 提案の設定
+            scoped_admin_styles: 'カスタムスタイル: 管理画面'
+            scoped_styles: 'カスタムスタイル: 公開フロントエンド'
             styles: 独自スタイル
             surveys: 調査＆フォーム
             verifications: 本人確認 / 認証の設定
@@ -458,6 +466,12 @@ ja:
           private_data_last_update: このデータは最後に更新されたのは %{time_ago} 前です。
           proposal_private_custom_fields: 非公開フィールド
           remove_private_data: "👉 削除することを検討してもよいでしょう"
+        scoped_admin_styles:
+          menu:
+            title: 管理画面
+        scoped_styles:
+          menu:
+            title: 公開フロントエンド
       admin_log:
         component:
           destroy_private_data: "%{user_name} は %{space_name} 内のプライベートデータの項目 %{resource_name} を%{count} 件破棄しました"
