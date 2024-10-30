@@ -255,6 +255,8 @@ ja:
                 このテキストは、下記のキーを使用してカスタム翻訳でカスタマイズできます：
                 %{key}
               scoped_admin_styles: ここを隠すと管理者が使用できなくなる可能性があります。ご注意ください。
+              scoped_admin_styles_variables: '組織のカスタマイズ色には、以下の CSS 変数を使用できます。'
+              scoped_admin_styles_warning: "<strong>警告</strong>: ここでは、この管理者にのみ適用されるカスタム CSS を追加します。"
               scoped_admins: 一般ユーザーを公開ウェブの特定の部分だけを管理できる管理者に昇格させます(制限エディターを使用してください)。 すでに通常の管理者権限を持つユーザーは無視されることに注意してください。
               scoped_styles: 公開ウェブの特定の部分にのみ適用されるカスタムCSSを作成します (制限されたエディタを使用してください)
               scoped_styles_variables: '組織の色のカスタマイズには、以下のCSS変数が使用できます。'
@@ -286,6 +288,7 @@ ja:
             delete: 削除
             new: 新しい「管理画面」CSSボックスを追加
             remove: このCSSボックスを削除
+            sure_to_remove: このCSSボックスを削除してもよろしいですか？
           form_scoped_admins:
             delete: 削除
             new: 新しい「スコープ付き管理者」グループを追加
