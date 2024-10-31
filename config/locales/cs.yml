@@ -22,6 +22,7 @@ cs:
         intergram_use_floating_button: Je-li zaškrtnuto, uzavřený chat je vždy tlačítko místo textu
         proposal_custom_fields: 'Uživatelská pole #%{id}'
         proposal_private_custom_fields: Soukromá vlastní pole %{id}
+        scoped_admin_styles: Vlastní styly číslo %{id}
         scoped_admins: 'Skupina Škálovaní administrátoři #%{id}'
         scoped_styles: Vlastní styly číslo %{id}
         user_timezone: Umožnit uživatelům nastavit časové pásmo v profilu
@@ -263,6 +264,10 @@ cs:
               validate_title_max_caps_percent: Nula nedovolí žádné velké písmeno, 100 bude nutit psát vše velkými písmeny
               validate_title_max_marks_together: 'Omezit počet otazníků a vykřičníků, které lze psát dohromada. Např: Pokud je 2, pak ''!!!'' nebude v textu povoleno'
               validate_title_min_length: Název je vždy povinný a toto číslo nemůže být nulové
+              verifications_html: |
+                Zde můžete vylepšit proces ověřování.<br>
+                <b>POZNÁMKA:</b> Uvědomte si, že změna těchto nastavení může zabránit některým uživatelům v přístupu k platformě. Používejte to s opatrností!<br><br>
+                Také berte na vědomí, že tato nastavení jsou aplikována na všechny uživatele. Administrátoři však budou mít vždy přístup k administraci.
             validators:
               body: Ověření vstupu uživatele pro pole "tělo"
               title: Ověření uživatelem pro pole "Název"
@@ -276,6 +281,8 @@ cs:
             new: Přidat nové "soukromé vlastní pole"
             remove: Odstranit toto "ssoukromé vlastní pole"
             sure_to_remove: Opravdu chcete zničit toto soukromé pole?
+          form_scoped_admin_styles:
+            delete: Smazat
           form_scoped_admins:
             delete: Smazat
             new: Přidání nové skupiny "Škálovaní administrátoři"
@@ -453,6 +460,9 @@ cs:
           private_data_last_update: Tato data byla naposledy aktualizována před %{time_ago}.
           proposal_private_custom_fields: Soukromá pole
           remove_private_data: "👉 Možná jej chcete odstranit"
+        scoped_styles:
+          menu:
+            title: Veřejný frontend
       admin_log:
         component:
           destroy_private_data: "%{user_name} zničil %{count} položky soukromých dat pro %{resource_name} v %{space_name}"
@@ -529,6 +539,9 @@ cs:
           resume_title: Čeká se na ověření
           resume_with_method: Pokračovat v ověřování pomocí %{name}
           title: Ověřte svou totožnost
+          verify_with_method: Ověřit pomocí %{name}
+      session:
+        authorization_is_required: Chcete-li se zúčastnit této platformy, musíte svůj účet autorizovat s platnou autorizací (%{authorizations}).
       validators:
         too_much_caps: Používá příliš mnoho velkých písmen (více než %{percent}% textu)
       voting:
