@@ -1,16 +1,5 @@
 <!-- insert_before "td.table-list__actions" -->
 
 <% if awesome_config[:admins_available_authorizations] %>
-  <td style="text-align:left">
-    <% awesome_authorizations_for(user).authorizations.each do |auth| %>
-      <div class="<%= "text-gray" unless auth[:managed] %>">
-        <% if auth[:verified] %>
-          <%= icon "check-line", class: "text-success" %>
-        <% else %>
-          <%= icon "close-line", class: auth[:managed] ? "text-alert" : "" %>
-        <% end %>
-        <%= auth[:fullname] %>
-        </div>
-    <% end %>
-  </td>
+  <%= render "decidim/decidim_awesome/admin/officializations/participants_td", user: %>
 <% end %>

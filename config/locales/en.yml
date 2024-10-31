@@ -559,6 +559,8 @@ en:
             of creating it again.
         officializations:
           authorizations: Authorizations
+          verification_modal:
+            authorizations_for: Authorizations for %{user}
         proposal_custom_fields:
           menu:
             title: Public fields

@@ -1,0 +1,36 @@
+.table-list .awesome_participants {
+  &-th:not(:first-child) {
+    @apply text-left pl-3;
+  }
+  &-td:not(:first-child) {
+    @apply text-left;
+
+    button {
+      &:hover {
+        @apply text-secondary underline;
+      }
+    }
+
+    >* {
+      @apply text-gray;
+      
+      &.managed {
+        @apply text-gray-2;
+      }
+      .checked {
+        @apply hidden;
+      }
+      .unchecked {
+        @apply text-alert;
+      }
+      &.verified {
+        .checked {
+          @apply text-success inline;
+        }
+        .unchecked {
+          @apply hidden;
+        }
+      }
+    }
+  }
+}
