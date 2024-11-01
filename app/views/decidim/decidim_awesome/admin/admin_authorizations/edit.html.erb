@@ -1,1 +1,25 @@
-Create the authorization!
+<div class="form-defaults">
+  <%= decidim_form_for(handler,
+                      builder: Decidim::AuthorizationFormBuilder,
+                      as: "authorization_handler",
+                      url: decidim_admin_decidim_awesome.admin_authorization_path(id: user.id, handler: params[:handler]),
+                      method: :patch,
+                      remote: true) do |form| %>
+    <% if lookup_context.exists?(handler.to_partial_path, [], true) %>
+      <%= render partial: handler.to_partial_path, locals: { handler:, form: } %>
+    <% else %>
+      <div class="form__wrapper">
+        <%= form.all_fields %>
+      </div>
+    <% end %>
+
+    <%= cell("decidim/announcement", { title: t(".warning"), body: t(".do_it_if_sure") }, callout_class: "warning") %>
+
+    <div class="text-center">
+      <button type="submit" class="button button__lg button__primary">
+          <%= icon "alert-line", class: "fill-current" %>
+          <span><%= t(".authorize", name: workflow.fullname) %></span>
+      </button>
+    </div>
+  <% end %>
+</div>

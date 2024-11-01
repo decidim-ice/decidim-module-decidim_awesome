@@ -2,14 +2,14 @@
   <div data-dialog-container>
     <%= icon "lock-line" %>
     <h3 tabindex="-1" data-dialog-title>
-      <%= t(".authorizations_for", user: "{{user}}")%>
+      <%= t(".authorizations_for", user: "{{user}}") %>
     </h3>
-    <div data-dialog-content class="mt-4">
+    <div data-dialog-content>
     </div>
   </div>
   <div data-dialog-actions>
-    <button data-dialog-close="example">
-       Close modal
+    <button data-dialog-close="awesome-verification-modal" class="button button__lg button__transparent-secondary">
+       <%= t(".close") %>
     </button>
   </div>
 <% end %>

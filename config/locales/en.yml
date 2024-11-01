@@ -212,6 +212,20 @@ en:
             collaborator: Collaborator
             moderator: Moderator
             valuator: Valuator
+        admin_authorizations:
+          authorization:
+            confirm_destroy: Are you sure you want to destroy this authorization?
+              This might affect the user's access to the platform.
+            destroy: Destroy
+          authorization_destroyed: Authorization successfully destroyed.
+          authorization_not_destroyed: Authorization could not be destroyed!
+          edit:
+            authorize: Authorize the user with %{name}
+            do_it_if_sure: Do this only if you are sure that the user has this authorization.
+            warning: 'Warning: By forcing this authorization, you are overriding the
+              user''s current authorization status.'
+          user_authorized: User successfully authorized with %{name}
+          user_not_authorized: User could not be authorized with %{name}
         checks:
           index:
             admin_head_tags: Awesome tags included in the admin application header
@@ -561,6 +575,7 @@ en:
           authorizations: Authorizations
           verification_modal:
             authorizations_for: Authorizations for %{user}
+            close: Close
         proposal_custom_fields:
           menu:
             title: Public fields

@@ -1,1 +1,18 @@
-allow to delete the authorization <%= authorization.name %>
+<h4><%= t("decidim.decidim_awesome.required_authorizations.index.granted_title") %></h4>
+
+<div class="verification__container">
+  <div class="verification">
+    <%= icon "checkbox-circle-line", class: "verification__icon is-granted" %>
+
+    <div class="verification__text">
+      <h2 class="h5 text-secondary"><%= workflow.fullname %></h2>
+    </div>
+
+    <div class="verification__actions">
+      <%= link_to decidim_admin_decidim_awesome.admin_authorization_path(id: user.id, handler: authorization.name), method: :delete, remote: true, class: "button button__lg button__primary", data: { confirm: t(".confirm_destroy") }  do %>
+        <%= icon "delete-bin-line", class: "icon" %>
+        <%= t(".destroy") %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -12,7 +12,9 @@ module Decidim
       attr_reader :user, :organization, :admin_authorizations
 
       def authorizations
-        @authorizations ||= organization.available_authorizations.filter_map do |name|
+        return @authorizations if defined?(@authorizations)
+
+        @authorizations = organization.available_authorizations.filter_map do |name|
           workflow = Decidim::Verifications.find_workflow_manifest(name)
           next unless workflow
 
@@ -22,7 +24,8 @@ module Decidim
             verified: Decidim::Authorization.exists?(user:, name:),
             managed: admin_authorizations.include?(name.to_s)
           }
-        end.sort_by { |i| i[:managed] ? 0 : 1 }
+        end
+        @authorizations = @authorizations.sort_by { |i| i[:managed] ? 0 : 1 }
       end
     end
   end
