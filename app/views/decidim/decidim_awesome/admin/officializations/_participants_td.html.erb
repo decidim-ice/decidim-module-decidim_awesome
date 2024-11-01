@@ -1,11 +1,20 @@
 <td class="awesome_participants-td">
   <% awesome_authorizations_for(user).authorizations.each do |auth| %>
     <%
+      data = {
+        verification_user: user.name,
+        verification_user_id: user.id,
+        verification_handler: auth[:name],
+        verification_url: decidim_admin_decidim_awesome.edit_admin_authorization_path(id: user.id, handler: auth[:name])
+      }
       classes = []
-      classes << "managed" if auth[:managed]
       classes << "verified" if auth[:verified]
+      if auth[:managed]
+        classes << "managed"
+        data[:dialog_open] = "awesome-verification-modal"
+      end
     %>
-    <%= content_tag(auth[:managed] ? "button" : "div", class: classes, data: { verification_user: user.name, verification_user_id: user.id, verification_handler: auth[:name], verification_url: decidim_admin_decidim_awesome.edit_admin_authorization_path(id: user.id, handler: auth[:name]), dialog_open: "awesome-verification-modal" }) do %>
+    <%= content_tag(auth[:managed] ? "button" : "div", class: classes, data:) do %>
       <%= icon "check-line", class: "checked" %>
       <%= icon "close-line", class: "unchecked" %>
       <%= auth[:fullname] %>

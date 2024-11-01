@@ -18,7 +18,7 @@
     <div class="text-center">
       <button type="submit" class="button button__lg button__primary">
           <%= icon "alert-line", class: "fill-current" %>
-          <span><%= t(".authorize", name: workflow.fullname) %></span>
+          <span><%= t(".authorize", name: workflow.fullname, user: user.name) %></span>
       </button>
     </div>
   <% end %>

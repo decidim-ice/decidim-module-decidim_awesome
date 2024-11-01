@@ -219,13 +219,15 @@ en:
             destroy: Destroy
           authorization_destroyed: Authorization successfully destroyed.
           authorization_not_destroyed: Authorization could not be destroyed!
+          authorization_transferred: 'Warning: There was verification conflict and
+            the verification has been transferred to %{user}'
           edit:
-            authorize: Authorize the user with %{name}
+            authorize: Authorize %{user} with %{name}
             do_it_if_sure: Do this only if you are sure that the user has this authorization.
             warning: 'Warning: By forcing this authorization, you are overriding the
               user''s current authorization status.'
-          user_authorized: User successfully authorized with %{name}
-          user_not_authorized: User could not be authorized with %{name}
+          user_authorized: "%{user} successfully authorized with %{name}"
+          user_not_authorized: "%{user} could not be authorized with %{name}"
         checks:
           index:
             admin_head_tags: Awesome tags included in the admin application header

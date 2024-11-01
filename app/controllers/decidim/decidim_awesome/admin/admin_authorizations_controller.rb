@@ -19,12 +19,17 @@ module Decidim
         end
 
         def update
-          # TODO: authorization.update!(handler_params)
-          message = if rand(2) == 1
-                      render_to_string(partial: "callout", locals: { i18n_key: "user_authorized", klass: "success" })
-                    else
-                      render_to_string(partial: "callout", locals: { i18n_key: "user_not_authorized", klass: "alert" })
-                    end
+          message = render_to_string(partial: "callout", locals: { i18n_key: "user_authorized", klass: "success" })
+          Decidim::Verifications::AuthorizeUser.call(handler, current_organization) do
+            on(:transferred) do |transfer|
+              message += render_to_string(partial: "callout", locals: { i18n_key: "authorization_transferred", klass: "success" }) if transfer.records.any?
+            end
+            on(:invalid) do
+              message = render_to_string(partial: "callout", locals: { i18n_key: "user_not_authorized", klass: "alert" })
+              message += render_to_string("edit")
+            end
+          end
+
           render json: {
             message:,
             verified: authorization&.reload.present?,
@@ -34,11 +39,10 @@ module Decidim
         end
 
         def destroy
-          # TODO: authorization.destroy!
-          message = if rand(2) == 1
-                      render_to_string(partial: "callout", locals: { i18n_key: "authorization_not_destroyed", klass: "alert" })
-                    else
+          message = if authorization&.destroy
                       render_to_string(partial: "callout", locals: { i18n_key: "authorization_destroyed", klass: "success" })
+                    else
+                      render_to_string(partial: "callout", locals: { i18n_key: "authorization_not_destroyed", klass: "alert" })
                     end
           render json: {
             message:,
