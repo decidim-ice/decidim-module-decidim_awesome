@@ -221,9 +221,18 @@ en:
           authorization_not_destroyed: Authorization could not be destroyed!
           authorization_transferred: 'Warning: There was verification conflict and
             the verification has been transferred to %{user}'
+          conflict: There is a conflict with an existing authorization
+          conflict_help_html: "You must solve the conflict with the user %{user} before
+            you can authorize the user with this authorization.\n<br><br>\nA verfication
+            conflict happens when another user has the same data as the user you are
+            trying to authorize. \nYou can solve this conflict by removing the conflicting
+            authorization from the other user or using different data for this user.\n"
           edit:
             authorize: Authorize %{user} with %{name}
             do_it_if_sure: Do this only if you are sure that the user has this authorization.
+            force_verification: Force verification with the current data
+            force_verification_help: Verification has failed, but you can force it
+              if you are sure the user has this authorization.
             warning: 'Warning: By forcing this authorization, you are overriding the
               user''s current authorization status.'
           user_authorized: "%{user} successfully authorized with %{name}"

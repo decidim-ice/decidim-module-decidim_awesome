@@ -7,11 +7,13 @@ module Decidim
         include NeedsAwesomeConfig
 
         layout false
-        helper_method :user, :authorization, :workflow, :handler
+        helper_method :user, :authorization, :workflow, :handler, :conflict
 
         before_action do
           # TODO: ensure authorization is allowed to be managed by the current admin
           # TODO ensure allow_admins_authorization is enabled
+          # TODO generate an action log entry after each succesful action
+          # TODO allow to override invalid form validation
         end
 
         def edit
@@ -19,14 +21,22 @@ module Decidim
         end
 
         def update
-          message = render_to_string(partial: "callout", locals: { i18n_key: "user_authorized", klass: "success" })
-          Decidim::Verifications::AuthorizeUser.call(handler, current_organization) do
-            on(:transferred) do |transfer|
-              message += render_to_string(partial: "callout", locals: { i18n_key: "authorization_transferred", klass: "success" }) if transfer.records.any?
-            end
-            on(:invalid) do
-              message = render_to_string(partial: "callout", locals: { i18n_key: "user_not_authorized", klass: "alert" })
-              message += render_to_string("edit")
+          if conflict
+            message = render_to_string("conflict")
+          else
+            message = render_to_string(partial: "callout", locals: { i18n_key: "user_authorized", klass: "success" })
+            Decidim::Verifications::AuthorizeUser.call(handler, current_organization) do
+              on(:transferred) do |transfer|
+                message += render_to_string(partial: "callout", locals: { i18n_key: "authorization_transferred", klass: "success" }) if transfer.records.any?
+              end
+              on(:invalid) do
+                if params[:force_verification]
+                  Decidim::Authorization.create_or_update_from(handler)
+                else
+                  message = render_to_string(partial: "callout", locals: { i18n_key: "user_not_authorized", klass: "alert" })
+                  message += render_to_string("edit", locals: { with_override: true })
+                end
+              end
             end
           end
 
@@ -68,6 +78,10 @@ module Decidim
 
         def handler
           @handler ||= Decidim::AuthorizationHandler.handler_for(params[:handler], handler_params)
+        end
+
+        def conflict
+          @conflict ||= Decidim::Authorization.find_by(unique_id: handler.unique_id)
         end
 
         def handler_params

@@ -13,9 +13,19 @@
       </div>
     <% end %>
 
-    <%= cell("decidim/announcement", { title: t(".warning"), body: t(".do_it_if_sure") }, callout_class: "warning") %>
+    <% if defined?(with_override) %>
+      <label class="flash flex-col alert">
+        <div class="flash__title">
+          <%= check_box_tag "force_verification" %>
+          <%= t(".force_verification") %>
+        </div>
+        <p><%= t(".force_verification_help") %></p>
+      </label>
+    <% else %>
+      <%= cell("decidim/announcement", { title: t(".warning"), body: t(".do_it_if_sure") }, callout_class: "warning") %>
+    <% end %>
 
-    <div class="text-center">
+    <div class="text-center mt-8">
       <button type="submit" class="button button__lg button__primary">
           <%= icon "alert-line", class: "fill-current" %>
           <span><%= t(".authorize", name: workflow.fullname, user: user.name) %></span>
