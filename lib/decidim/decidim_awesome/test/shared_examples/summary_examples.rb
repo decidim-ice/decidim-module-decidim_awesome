@@ -60,6 +60,10 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::ApplicationController.included_modules).to include(Decidim::DecidimAwesome::UseUserTimeZone)
       expect(Decidim::AccountForm.included_modules).to include(Decidim::DecidimAwesome::AccountFormOverride)
       expect(Decidim::UpdateAccount.included_modules).to include(Decidim::DecidimAwesome::UpdateAccountOverride)
+      expect(Decidim::System::RegisterOrganizationForm.included_modules).to include(Decidim::DecidimAwesome::System::OrganizationFormOverride)
+      expect(Decidim::System::UpdateOrganizationForm.included_modules).to include(Decidim::DecidimAwesome::System::OrganizationFormOverride)
+      expect(Decidim::System::UpdateOrganization.included_modules).to include(Decidim::DecidimAwesome::System::UpdateOrganizationOverride)
+      expect(Decidim::System::RegisterOrganization.included_modules).to include(Decidim::DecidimAwesome::System::RegisterOrganizationOverride)
     end
 
   else
@@ -92,6 +96,11 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::ApplicationController.included_modules).not_to include(Decidim::DecidimAwesome::UseUserTimeZone)
       expect(Decidim::AccountForm.included_modules).not_to include(Decidim::DecidimAwesome::AccountFormOverride)
       expect(Decidim::UpdateAccount.included_modules).not_to include(Decidim::DecidimAwesome::UpdateAccountOverride)
+      expect(Decidim::System::RegisterOrganizationForm.included_modules).not_to include(Decidim::DecidimAwesome::System::OrganizationFormOverride)
+      expect(Decidim::System::UpdateOrganizationForm.included_modules).not_to include(Decidim::DecidimAwesome::System::OrganizationFormOverride)
+      expect(Decidim::System::UpdateOrganization.included_modules).not_to include(Decidim::DecidimAwesome::System::UpdateOrganizationOverride)
+      expect(Decidim::DecidimAwesome::AwesomeHelpers.included_modules).not_to include(Decidim::DecidimAwesome::AwesomeHelpers)
+      expect(Decidim::DecidimAwesome::ContentSecurityPolicy.included_modules).not_to include(Decidim::DecidimAwesome::ContentSecurityPolicy)
     end
   end
 end

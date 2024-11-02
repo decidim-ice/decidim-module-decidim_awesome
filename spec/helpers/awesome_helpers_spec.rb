@@ -4,10 +4,12 @@ require "spec_helper"
 
 module Decidim::DecidimAwesome
   describe AwesomeHelpers do
-    let!(:organization) { create(:organization) }
+    let!(:organization) { create(:organization, available_authorizations:) }
+    let(:available_authorizations) { [] }
     let!(:another_organization) { create(:organization) }
     let(:component) { create(:proposal_component, organization:, settings: { awesome_voting_manifest: manifest }) }
     let(:another_component) { create(:proposal_component, manifest_name: :another_component, organization:, settings: { awesome_voting_manifest: manifest }) }
+    let(:user) { create(:user, organization:) }
     let(:manifest) { :voting_cards }
     let(:request) { double(env:, url: "/") }
     let(:env) do
@@ -19,6 +21,7 @@ module Decidim::DecidimAwesome
 
     before do
       allow(helper).to receive(:request).and_return(request)
+      helper.instance_variable_set(:@awesome_config_instance, nil)
     end
 
     it "return a config instance" do
@@ -60,6 +63,59 @@ module Decidim::DecidimAwesome
     context "when no voting components" do
       it "returns nil" do
         expect(helper.awesome_voting_manifest_for(another_component)).to be_nil
+      end
+    end
+
+    it "returns authorizations for user" do
+      expect(helper.awesome_authorizations_for(user)).to be_a(Decidim::DecidimAwesome::Authorizator)
+      expect(helper.awesome_authorizations_for(user).authorizations).to eq([])
+    end
+
+    context "when organization has authorizations" do
+      let(:available_authorizations) { [:dummy_authorization_handler] }
+
+      it "returns the authorization" do
+        expect(helper.awesome_authorizations_for(user).authorizations).to eq([
+                                                                               {
+                                                                                 name: "dummy_authorization_handler",
+                                                                                 fullname: "Example authorization",
+                                                                                 granted: nil,
+                                                                                 pending: false,
+                                                                                 managed: false
+                                                                               }
+                                                                             ])
+      end
+
+      context "when an authorization exists" do
+        let!(:authorization) { create(:authorization, :granted, user:, name: "dummy_authorization_handler") }
+
+        it "returns the authorization" do
+          expect(helper.awesome_authorizations_for(user).authorizations).to eq([
+                                                                                 {
+                                                                                   name: "dummy_authorization_handler",
+                                                                                   fullname: "Example authorization",
+                                                                                   granted: true,
+                                                                                   pending: false,
+                                                                                   managed: false
+                                                                                 }
+                                                                               ])
+        end
+      end
+
+      context "when the authorization is managed" do
+        let!(:admins_available_authorizations) { create(:awesome_config, organization:, var: :admins_available_authorizations, value: [:dummy_authorization_handler]) }
+
+        it "returns the authorization" do
+          expect(helper.awesome_authorizations_for(user).authorizations).to eq([
+                                                                                 {
+                                                                                   name: "dummy_authorization_handler",
+                                                                                   fullname: "Example authorization",
+                                                                                   granted: nil,
+                                                                                   pending: false,
+                                                                                   managed: true
+                                                                                 }
+                                                                               ])
+        end
       end
     end
   end

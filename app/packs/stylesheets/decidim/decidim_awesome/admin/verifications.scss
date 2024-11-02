@@ -23,13 +23,35 @@
         @apply hidden;
       }
 
+      .undeterminated {
+        @apply hidden;
+      }
+
       .unchecked {
         @apply text-alert;
       }
 
-      &.verified {
+      &.granted {
         .checked {
           @apply text-success inline;
+        }
+
+        .undeterminated {
+          @apply hidden;
+        }
+
+        .unchecked {
+          @apply hidden;
+        }
+      }
+
+      &.pending {
+        .checked {
+          @apply hidden;
+        }
+
+        .undeterminated {
+          @apply text-warning inline;
         }
 
         .unchecked {
