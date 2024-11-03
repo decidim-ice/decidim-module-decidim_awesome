@@ -116,5 +116,27 @@ module Decidim::DecidimAwesome::Admin
         end
       end
     end
+
+    context "when accessing admins_available_authorizations" do
+      let(:feature) { :admins_available_authorizations }
+      let(:handler) { "some_handler" }
+      let(:awesome_admin_authorizations) { [handler] }
+
+      before do
+        allow(Decidim::DecidimAwesome.config).to receive(feature).and_return(awesome_admin_authorizations)
+      end
+
+      context "when handler is included in awesome_admin_authorizations" do
+        let(:context) { { handler: } }
+
+        it { is_expected.to be true }
+      end
+
+      context "when handler is not included in awesome_admin_authorizations" do
+        let(:context) { { handler: "another_handler" } }
+
+        it_behaves_like "permission is not set"
+      end
+    end
   end
 end

@@ -2,10 +2,12 @@
 
 <div class="verification__container">
   <div class="verification">
-    <%= icon "checkbox-circle-line", class: "verification__icon is-granted" %>
+    <%= icon "checkbox-circle-line", class: "verification__icon is-granted self-start" %>
 
     <div class="verification__text">
       <h2 class="h5 text-secondary"><%= workflow.fullname %></h2>
+      <p><%= t(".granted_at", date: l(authorization.granted_at), format: :decidim_short) %></p>
+      <p><%= t(".metadata", metadata: content_tag("strong", t("booleans.#{authorization.metadata.present?}"))).html_safe %></p>
     </div>
 
     <div class="verification__actions">

@@ -22,10 +22,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const button = document.querySelector(`[data-verification-handler="${response.handler}"][data-verification-user-id="${response.userId}"]`);
     // console.log("ajax:complete", responseText, "response", response, "button", button);
     content.innerHTML = response.message;
-    if (response.verified) {
-      button.classList.add("verified");
+    if (response.granted) {
+      button.classList.add("granted");
     } else {
-      button.classList.remove("verified");
+      button.classList.remove("granted");
     }
   });
 });

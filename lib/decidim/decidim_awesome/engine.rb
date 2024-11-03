@@ -138,6 +138,8 @@ module Decidim
             Decidim::Proposals::ProposalVotesController.include(Decidim::DecidimAwesome::Proposals::ProposalVotesControllerOverride)
           end
 
+          Decidim::AdminLog::UserPresenter.include(Decidim::DecidimAwesome::AdminLog::UserPresenterOverride) if DecidimAwesome.enabled?(:admins_available_authorizations)
+
           Decidim::AmendmentsController.include(Decidim::DecidimAwesome::LimitPendingAmendments) if DecidimAwesome.enabled?(:allow_limiting_amendments)
 
           Decidim::Proposals::ProposalsController.include(Decidim::DecidimAwesome::Proposals::OrderableOverride) if DecidimAwesome.enabled?(:additional_proposal_sortings)

@@ -217,6 +217,8 @@ en:
             confirm_destroy: Are you sure you want to destroy this authorization?
               This might affect the user's access to the platform.
             destroy: Destroy
+            granted_at: Granted at %{date}
+            metadata: Contains metadata? %{metadata}
           authorization_destroyed: Authorization successfully destroyed.
           authorization_not_destroyed: Authorization could not be destroyed!
           authorization_transferred: 'Warning: There was verification conflict and
@@ -605,6 +607,13 @@ en:
         component:
           destroy_private_data: "%{user_name} destroyed %{count} items of private
             data for %{resource_name} in %{space_name}"
+        user:
+          admin_creates_authorization: "%{user_name} verified user %{resource_name}
+            with %{handler_name}"
+          admin_destroys_authorization: "%{user_name} destroyed a verification on
+            user %{resource_name} with %{handler_name}"
+          admin_forces_authorization: "%{user_name} forced a verification on user
+            %{resource_name} with %{handler_name}"
       amendments:
         modal:
           amendment_exists: An amendment already exists
