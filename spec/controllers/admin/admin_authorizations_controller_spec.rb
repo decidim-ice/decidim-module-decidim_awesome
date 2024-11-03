@@ -14,7 +14,7 @@ module Decidim::DecidimAwesome
       let(:handler) { "dummy_authorization_handler" }
       let(:awesome_handler) { "dummy_authorization_handler" }
       let(:admins_available_authorizations) { [] }
-      let(:body) { JSON.parse(response.body) }
+      let(:body) { response.parsed_body }
 
       before do
         request.env["decidim.current_organization"] = user.organization
