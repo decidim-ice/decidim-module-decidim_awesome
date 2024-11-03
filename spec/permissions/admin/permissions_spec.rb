@@ -12,9 +12,11 @@ module Decidim::DecidimAwesome::Admin
       {
         current_organization: organization,
         private_data:,
-        global:
+        global:,
+        handler:
       }
     end
+    let(:handler) { nil }
     let(:global) { nil }
     let(:private_data) { nil }
     let(:feature) { :allow_images_in_editors }
@@ -56,7 +58,7 @@ module Decidim::DecidimAwesome::Admin
             allow(Decidim::DecidimAwesome.config).to receive(key).and_return(:disabled)
           end
 
-          it { is_expected.to be false }
+          it_behaves_like "permission is not set"
         end
       end
     end
@@ -73,7 +75,7 @@ module Decidim::DecidimAwesome::Admin
 
     context "when accessing admin_accountability" do
       let(:feature) { :admin_accountability }
-      let(:status) { true }
+      let(:status) { [:participatory_space_roles, :admin_roles] }
 
       before do
         allow(Decidim::DecidimAwesome.config).to receive(feature).and_return(status)
@@ -81,10 +83,28 @@ module Decidim::DecidimAwesome::Admin
 
       it { is_expected.to be true }
 
+      context "when admin_accountability does not include participatory_space_roles" do
+        let(:status) { [:admin_roles] }
+
+        it_behaves_like "permission is not set"
+      end
+
+      context "when admin_accountability is global" do
+        let(:global) { true }
+
+        it { is_expected.to be true }
+
+        context "when admin_accountability does not include admin_roles" do
+          let(:status) { [:participatory_space_roles] }
+
+          it_behaves_like "permission is not set"
+        end
+      end
+
       context "when admin_accountability is disabled" do
         let(:status) { :disabled }
 
-        it { is_expected.to be false }
+        it_behaves_like "permission is not set"
       end
     end
 
@@ -96,12 +116,12 @@ module Decidim::DecidimAwesome::Admin
         allow(Decidim::DecidimAwesome.config).to receive(:proposal_private_custom_fields).and_return(status)
       end
 
-      it { is_expected.to be true }
+      it { expect(subject).to be true }
 
       context "when proposal private fields is disabled" do
         let(:status) { :disabled }
 
-        it { is_expected.to be false }
+        it_behaves_like "permission is not set"
       end
 
       context "when private_data is present" do
@@ -119,23 +139,36 @@ module Decidim::DecidimAwesome::Admin
 
     context "when accessing admins_available_authorizations" do
       let(:feature) { :admins_available_authorizations }
-      let(:handler) { "some_handler" }
-      let(:awesome_admin_authorizations) { [handler] }
+      let(:handler) { "dummy_authorization_handler" }
+      let(:awesome_handler) { "dummy_authorization_handler" }
+      let!(:awesome_config) { create(:awesome_config, organization:, var: :admins_available_authorizations, value: [awesome_handler]) }
 
-      before do
-        allow(Decidim::DecidimAwesome.config).to receive(feature).and_return(awesome_admin_authorizations)
+      context "when organization has no handlers" do
+        it_behaves_like "permission is not set"
       end
 
-      context "when handler is included in awesome_admin_authorizations" do
-        let(:context) { { handler: } }
+      context "when organization has handlers" do
+        let(:organization) { create(:organization, available_authorizations: [handler]) }
 
         it { is_expected.to be true }
-      end
 
-      context "when handler is not included in awesome_admin_authorizations" do
-        let(:context) { { handler: "another_handler" } }
+        context "and awesome_config does not exist" do
+          let(:awesome_config) { nil }
 
-        it_behaves_like "permission is not set"
+          it_behaves_like "permission is not set"
+
+          context "and feature is disabled" do
+            let(:status) { :disabled }
+
+            it_behaves_like "permission is not set"
+          end
+        end
+
+        context "and awesome_config is not registered" do
+          let(:awesome_handler) { "another_dummy_authorization_handler" }
+
+          it_behaves_like "permission is not set"
+        end
       end
     end
   end

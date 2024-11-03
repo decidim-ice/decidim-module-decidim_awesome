@@ -608,11 +608,11 @@ en:
           destroy_private_data: "%{user_name} destroyed %{count} items of private
             data for %{resource_name} in %{space_name}"
         user:
-          admin_creates_authorization: "%{user_name} verified user %{resource_name}
+          admin_creates_authorization: "%{user_name} verified the participant %{resource_name}
             with %{handler_name}"
           admin_destroys_authorization: "%{user_name} destroyed a verification on
-            user %{resource_name} with %{handler_name}"
-          admin_forces_authorization: "%{user_name} forced a verification on user
+            participant %{resource_name} with %{handler_name}"
+          admin_forces_authorization: "%{user_name} forced a verification on participant
             %{resource_name} with %{handler_name}"
       amendments:
         modal:

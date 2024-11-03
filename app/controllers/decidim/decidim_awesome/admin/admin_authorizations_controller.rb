@@ -29,7 +29,7 @@ module Decidim
                 message += render_to_string(partial: "callout", locals: { i18n_key: "authorization_transferred", klass: "success" }) if transfer.records.any?
               end
               on(:invalid) do
-                if params[:force_verification]
+                if params[:force_verification].present?
                   create_forced_authorization
                 else
                   message = render_to_string(partial: "callout", locals: { i18n_key: "user_not_authorized", klass: "alert" })
@@ -44,7 +44,7 @@ module Decidim
 
           render json: {
             message:,
-            granted: authorization&.reload.present?,
+            granted: granted?,
             userId: user.id,
             handler: workflow.name
           }
@@ -59,12 +59,7 @@ module Decidim
 
           render json: {
             message:,
-            granted: begin
-              authorization.reload.present?
-              true
-            rescue ActiveRecord::RecordNotFound
-              false
-            end,
+            granted: granted?,
             userId: user.id,
             handler: workflow.name
           }
@@ -93,6 +88,12 @@ module Decidim
 
         def authorization
           @authorization ||= Decidim::Authorization.where.not(granted_at: nil).find_by(user:, name: workflow.name)
+        end
+
+        def granted?
+          authorization&.reload.present?
+        rescue ActiveRecord::RecordNotFound
+          false
         end
 
         def workflow

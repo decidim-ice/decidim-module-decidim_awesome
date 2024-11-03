@@ -16,7 +16,7 @@
     <% if defined?(with_override) %>
       <label class="flash flex-col alert">
         <div class="flash__title">
-          <%= check_box_tag "force_verification" %>
+          <%= check_box_tag "force_verification", value: true %>
           <%= t(".force_verification") %>
         </div>
         <p><%= t(".force_verification_help") %></p>
