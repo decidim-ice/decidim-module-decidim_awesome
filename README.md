@@ -416,6 +416,8 @@ The admin will be allowed to manually authorize users using the methods specifie
 Currently, only form based handlers are supported (Direct methods). 
 Admins can manually override or verify users in the participants list but they still have to fulfill the requirements of the verifier (although they will be allowed to force the authorization even if some of them fails).
 
+Admin logs are also created in each action for accountability.
+
 System configuration:
 
 ![System manual authorization config](examples/manual_verifications_system.png)
