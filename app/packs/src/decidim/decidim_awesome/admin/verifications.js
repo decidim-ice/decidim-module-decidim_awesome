@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   const dialog = document.getElementById("awesome-verification-modal");
+  if (!dialog) {
+    return;
+  }
   const title = dialog.querySelector("[data-dialog-title]");
   const content = dialog.querySelector("[data-dialog-content]");
 

@@ -179,11 +179,7 @@ shared_examples "basic rendering" do |enabled|
         :allow_images_in_proposals,
         :allow_videos_in_editors,
         :allow_images_in_editors,
-        :allow_images_in_proposals,
-        :auto_save_forms,
-        :user_timezone,
-        :intergram_for_admins,
-        :intergram_for_public
+        :auto_save_forms
       ]
     end
 
