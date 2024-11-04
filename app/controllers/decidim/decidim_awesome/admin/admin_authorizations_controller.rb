@@ -29,7 +29,7 @@ module Decidim
                 message += render_to_string(partial: "callout", locals: { i18n_key: "authorization_transferred", klass: "success" }) if transfer.records.any?
               end
               on(:invalid) do
-                if params[:force_verification].present?
+                if force_verification.present?
                   create_forced_authorization
                 else
                   message = render_to_string(partial: "callout", locals: { i18n_key: "user_not_authorized", klass: "alert" })
@@ -69,7 +69,8 @@ module Decidim
 
         def create_forced_authorization
           Decidim::Authorization.create_or_update_from(handler)
-          Decidim::ActionLogger.log("admin_forces_authorization", current_user, user, nil, handler: workflow.name, user_id: user.id, handler_name: workflow.fullname)
+          Decidim::ActionLogger.log("admin_forces_authorization", current_user, user, nil, handler: workflow.name, user_id: user.id, handler_name: workflow.fullname,
+                                                                                           reason: force_verification)
         end
 
         def destroy_authorization
@@ -110,6 +111,10 @@ module Decidim
 
         def handler_params
           (params[:authorization_handler] || {}).merge(user:)
+        end
+
+        def force_verification
+          @force_verification ||= params[:force_verification].to_s.strip.presence
         end
       end
     end

@@ -22,10 +22,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const button = document.querySelector(`[data-verification-handler="${response.handler}"][data-verification-user-id="${response.userId}"]`);
     // console.log("ajax:complete", responseText, "response", response, "button", button);
     content.innerHTML = response.message;
+
     if (response.granted) {
       button.classList.add("granted");
     } else {
       button.classList.remove("granted");
+      const forceVerificationCheck = content.querySelector("#force_verification_check");
+      const forceVerification = content.querySelector("#force_verification");
+    
+      if(forceVerificationCheck) {
+        console.log(forceVerificationCheck);
+        forceVerificationCheck.addEventListener("change", function() {
+          forceVerification.disabled = !forceVerification.disabled;
+          if(forceVerificationCheck.checked) {
+            forceVerification.focus()
+          }
+        });
+      }
     }
   });
 });

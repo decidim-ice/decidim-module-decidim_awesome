@@ -24,7 +24,7 @@ module Decidim
       end
 
       def javascript_config_vars
-        awesome_config.except(:scoped_styles, :scoped_admin_styles, :proposal_custom_fields, :proposal_private_custom_fields, :scoped_admins).to_json.html_safe
+        awesome_config.slice(:allow_images_in_proposals, :allow_images_in_editors, :allow_videos_in_editors, :auto_save_forms).to_json.html_safe
       end
 
       def show_public_intergram?

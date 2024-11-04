@@ -8,7 +8,7 @@ module Decidim::AdminLog
 
     let(:organization) { create(:organization) }
     let(:user) { create(:user, organization:) }
-    let(:extra_data) { { handler_name: "Example authorization", user_id: resource.id } }
+    let(:extra_data) { { handler_name: "Example authorization", user_id: resource.id, reason: "Because I can" } }
     let(:action_log) do
       create(
         :action_log,
@@ -36,7 +36,7 @@ module Decidim::AdminLog
 
       it "returns the explanation" do
         expect(subject).to include("class=\"logs__log__explanation\"")
-        expect(subject).to include("verified the participant")
+        expect(subject).to include("verified")
         expect(subject).to include("/profiles/#{user.nickname}")
         expect(subject).to include("/profiles/#{resource.nickname}")
         expect(subject).to include("Example authorization")
@@ -47,10 +47,11 @@ module Decidim::AdminLog
 
         it "returns the explanation" do
           expect(subject).to include("class=\"logs__log__explanation\"")
-          expect(subject).to include("forced a verification on participant")
+          expect(subject).to include("forced the verification")
           expect(subject).to include("/profiles/#{user.nickname}")
           expect(subject).to include("/profiles/#{resource.nickname}")
           expect(subject).to include("Example authorization")
+          expect(subject).to include("Because I can")
         end
       end
 
@@ -59,7 +60,7 @@ module Decidim::AdminLog
 
         it "returns the explanation" do
           expect(subject).to include("class=\"logs__log__explanation\"")
-          expect(subject).to include("destroyed a verification on participant")
+          expect(subject).to include("destroyed the verification")
           expect(subject).to include("/profiles/#{user.nickname}")
           expect(subject).to include("/profiles/#{resource.nickname}")
           expect(subject).to include("Example authorization")

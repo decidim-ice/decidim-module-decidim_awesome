@@ -235,6 +235,7 @@ en:
             force_verification: Force verification with the current data
             force_verification_help: Verification has failed, but you can force it
               if you are sure the user has this authorization.
+            force_verification_reason: 'Give a reason to force the verification:'
             warning: 'Warning: By forcing this authorization, you are overriding the
               user''s current authorization status.'
           user_authorized: "%{user} successfully authorized with %{name}"
@@ -608,12 +609,12 @@ en:
           destroy_private_data: "%{user_name} destroyed %{count} items of private
             data for %{resource_name} in %{space_name}"
         user:
-          admin_creates_authorization: "%{user_name} verified the participant %{resource_name}
-            with %{handler_name}"
-          admin_destroys_authorization: "%{user_name} destroyed a verification on
-            participant %{resource_name} with %{handler_name}"
-          admin_forces_authorization: "%{user_name} forced a verification on participant
-            %{resource_name} with %{handler_name}"
+          admin_creates_authorization: "%{user_name} verified %{resource_name} with
+            %{handler_name}"
+          admin_destroys_authorization: "%{user_name} destroyed the verification %{handler_name}
+            on %{resource_name}"
+          admin_forces_authorization: "%{user_name} forced the verification %{handler_name}
+            on %{resource_name}. Reason: %{reason}"
       amendments:
         modal:
           amendment_exists: An amendment already exists

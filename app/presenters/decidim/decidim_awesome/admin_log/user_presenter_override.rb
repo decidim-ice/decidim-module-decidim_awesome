@@ -20,7 +20,10 @@ module Decidim
           def i18n_params
             return decidim_original_i18n_params unless authorization_action?
 
-            decidim_original_i18n_params.merge({ handler_name: h.content_tag(:span, action_log.extra["handler_name"], class: "logs__log__resource") })
+            decidim_original_i18n_params.merge({
+                                                 handler_name: h.content_tag(:span, action_log.extra["handler_name"], class: "logs__log__resource"),
+                                                 reason: h.content_tag(:em, action_log.extra["reason"])
+                                               })
           end
 
           def resource_presenter

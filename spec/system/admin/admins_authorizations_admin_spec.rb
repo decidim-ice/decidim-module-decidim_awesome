@@ -14,6 +14,7 @@ describe "Managing the participants" do
   let!(:ghost_authorization) { create(:authorization, user: participant2, name: :another_dummy_authorization_handler, organization:) }
   let!(:awesome_config) { create(:awesome_config, var: :admins_available_authorizations, value: [awesome_handler], organization:) }
   let(:last_authorization) { Decidim::Authorization.last }
+  let(:last_action_log) { Decidim::ActionLog.last }
 
   before do
     switch_to_host(organization.host)
@@ -73,6 +74,7 @@ describe "Managing the participants" do
 
       expect(last_authorization.name).to eq("dummy_authorization_handler")
       expect(last_authorization.unique_id).to eq("12345678X")
+      expect(last_action_log.action).to eq("admin_creates_authorization")
     end
 
     it "can revoke an authorization" do
@@ -95,6 +97,7 @@ describe "Managing the participants" do
           expect(page).to have_css("svg.unchecked")
         end
       end
+      expect(last_action_log.action).to eq("admin_destroys_authorization")
     end
 
     it "can force an authorization" do
@@ -109,6 +112,7 @@ describe "Managing the participants" do
         fill_in "Document number", with: "12345678"
         click_button "Authorize #{participant2.name} with Example authorization"
         check "Force verification with the current data"
+        fill_in "Give a reason to force the verification:", with: "Because I can"
         click_button "Authorize #{participant2.name} with Example authorization"
         expect(page).to have_content("#{participant2.name} successfully authorized with Example authorization")
         click_on "Close"
@@ -123,6 +127,8 @@ describe "Managing the participants" do
 
       expect(last_authorization.name).to eq("dummy_authorization_handler")
       expect(last_authorization.unique_id).to eq("12345678")
+      expect(last_action_log.action).to eq("admin_forces_authorization")
+      expect(last_action_log.extra["reason"]).to eq("Because I can")
     end
 
     context "when there's a conflict of data" do
@@ -150,6 +156,7 @@ describe "Managing the participants" do
             expect(page).to have_css("svg.unchecked")
           end
         end
+        expect(last_action_log).to be_nil
       end
     end
   end

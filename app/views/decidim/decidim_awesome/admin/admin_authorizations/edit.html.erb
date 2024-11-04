@@ -14,13 +14,19 @@
     <% end %>
 
     <% if defined?(with_override) %>
-      <label class="flash flex-col alert">
-        <div class="flash__title">
-          <%= check_box_tag "force_verification", value: true %>
-          <%= t(".force_verification") %>
-        </div>
-        <p><%= t(".force_verification_help") %></p>
-      </label>
+      <div class="form__wrapper flash alert">
+        <label class="flex-col">
+          <div class="flash__title">
+            <%= check_box_tag "force_verification_check", true %>
+            <%= t(".force_verification") %>
+          </div>
+          <p class="help-text"><%= t(".force_verification_help") %></p>
+        </label>
+        <label>
+          <%= t(".force_verification_reason") %>
+          <%= text_area_tag "force_verification", nil, disabled: true %>
+        </label>
+      </div>
     <% else %>
       <%= cell("decidim/announcement", { title: t(".warning"), body: t(".do_it_if_sure") }, callout_class: "warning") %>
     <% end %>
