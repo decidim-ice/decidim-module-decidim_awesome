@@ -30,11 +30,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const forceVerificationCheck = content.querySelector("#force_verification_check");
       const forceVerification = content.querySelector("#force_verification");
     
-      if(forceVerificationCheck) {
+      if (forceVerificationCheck) {
         console.log(forceVerificationCheck);
         forceVerificationCheck.addEventListener("change", function() {
           forceVerification.disabled = !forceVerification.disabled;
-          if(forceVerificationCheck.checked) {
+          if (forceVerificationCheck.checked) {
             forceVerification.focus()
           }
         });

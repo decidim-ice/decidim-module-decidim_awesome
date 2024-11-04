@@ -419,6 +419,9 @@ Admins can manually override or verify users in the participants list but they s
 System configuration:
 
 ![System manual authorization config](examples/manual_verifications_system.png)
+![List of authorizations](examples/manual_verifications_1.png)
+![Removing an authorization](examples/manual_verifications_2.png)
+![Creating an authorization](examples/manual_verifications_3.png)
 
 #### To be continued...
 
