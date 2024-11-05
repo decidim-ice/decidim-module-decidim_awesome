@@ -65,7 +65,7 @@
     border-bottom: none;
 
     .vote-card {
-      margin-top: 0.5rem;
+      margin-top: .5rem;
 
       .vote-label {
         margin-bottom: 1rem;
@@ -80,7 +80,7 @@
   }
 
   &.loading {
-    opacity: 0.3;
+    opacity: .3;
     pointer-events: none;
     position: relative;
 
@@ -102,7 +102,7 @@
   }
 
   .votes_counter {
-    letter-spacing: 0.2rem;
+    letter-spacing: .2rem;
     font-size: 1rem;
   }
 
@@ -123,7 +123,7 @@
       width: $rectangle-width;
       height: calc($rectangle-width * 2);
       vertical-align: middle;
-      margin: -0.5rem 0 0 0.5rem;
+      margin: -.5rem 0 0 .5rem;
       max-width: 100%;
       transition: transform 150ms ease-in-out;
 
@@ -171,7 +171,7 @@
   }
 
   .dim {
-    opacity: 0.3;
+    opacity: .3;
     pointer-events: none;
   }
 
@@ -199,8 +199,8 @@
 
     &:hover {
       text-decoration: none;
-      font-size: 0.9rem;
-      margin-top: 0.1rem;
+      font-size: .9rem;
+      margin-top: .1rem;
     }
   }
 

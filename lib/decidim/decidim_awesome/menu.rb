@@ -153,7 +153,7 @@ module Decidim
               :validate_body_min_length, :validate_body_max_caps_percent,
               :validate_body_max_marks_together, :validate_body_start_with_caps
             ),
-            surveys: config_enabled?(:auto_save_forms, :user_timezone),
+            surveys: config_enabled?(:auto_save_forms),
             styles: config_enabled?(:scoped_styles),
             custom_fields: config_enabled?(:proposal_custom_fields, :proposal_private_custom_fields),
             proposal_custom_fields: config_enabled?(:proposal_custom_fields),
