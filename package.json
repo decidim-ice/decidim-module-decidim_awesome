@@ -1,6 +1,6 @@
 {
   "name": "decidim-module-decidim_awesome",
-  "version": "0.10.3",
+  "version": "0.10.2",
   "description": "Mods and tweaks for Decidim",
   "main": "index.js",
   "directories": {
@@ -50,7 +50,7 @@
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-standard": "^3.1.0",
-    "sass-embedded": "~1.57.1"
+    "sass-embedded": "^1.79.3"
   },
   "dependencies": {
     "@rails/actioncable": "^6.1.7-6",
