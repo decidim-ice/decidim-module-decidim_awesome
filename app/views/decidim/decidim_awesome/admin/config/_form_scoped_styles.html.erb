@@ -5,33 +5,21 @@
 <div class="form__wrapper row column decidim_awesome-form">
   <% if config_enabled? config_var %>
     <% if admin_styles %>
-      <div class="colors-help">
-        <p><%= t("help.scoped_admin_styles_warning", scope: "decidim.decidim_awesome.admin.config.form").html_safe %></p>
-        <p><%= t("help.scoped_admin_styles", scope: "decidim.decidim_awesome.admin.config.form") %>
-          <%= t("help.scoped_admin_styles_variables", scope: "decidim.decidim_awesome.admin.config.form") %>
-        </p>
-        <p class="colors">
-          <% ["primary", "secondary", "tertiary", "success", "warning", "alert"].each do |color| %>
-          <span class="color-box <%= color %>" style="background-color: <%= current_organization.colors[color] %>"></span>
-          <code>var(--<%= color %>)</code>
-        <% end %>
-        </p>
-      </div>
+      <p><%= t("help.scoped_admin_styles_warning", scope: "decidim.decidim_awesome.admin.config.form").html_safe %></p>
+      <p class="help-text"><%= t("help.scoped_admin_styles", scope: "decidim.decidim_awesome.admin.config.form") %>
+      </p>
     <% else %>
-      <div class="colors-help">
-        <p><%= t("help.scoped_styles", scope: "decidim.decidim_awesome.admin.config.form") %>
-          <%= t("help.scoped_styles_variables", scope: "decidim.decidim_awesome.admin.config.form") %>
-        </p>
-        <p class="colors">
-          <% ["primary", "secondary", "tertiary", "success", "warning", "alert"].each do |color| %>
-          <span class="color-box <%= color %>" style="background-color: <%= current_organization.colors[color] %>"></span>
-          <code>var(--<%= color %>)</code>
+      <p class="help-text"><%= t("help.scoped_styles", scope: "decidim.decidim_awesome.admin.config.form") %>
+        <%= t("help.scoped_styles_variables", scope: "decidim.decidim_awesome.admin.config.form") %>
+      </p>
+      <p class="help-text" style="white-space: unset">
+        <% ["primary", "secondary", "success", "warning", "alert", "highlight", "highlight_alternative"].each do |color| %>
+          <span class="color-box <%= color %>" style="background-color: <%= current_organization.colors[color] %>"></span> var(--<%= color %>)
         <% end %>
-        </p>
-      </div>
+      </p>
     <% end %>
     <% form.object.send(config_var)&.each do |key, value| %>
-      <div class="card p-4 scoped_styles_container<%= " private" if admin_styles %> js-box-container" data-key="<%= key %>" data-var="<%= config_var %>">
+      <div class="scoped_styles_container p-4 js-box-container<%= " private" if admin_styles %> js-box-container" data-key="<%= key %>" data-var="<%= config_var %>">
         <%= render("decidim/decidim_awesome/admin/config/autoedit_box_label", var: config_var, key: key, scope: "#{style}_#{key}", delete_path: decidim_admin_decidim_awesome.scoped_style_path(key: key, admin_panel: admin_styles)) %>
         <p class="form-error is-visible" id="custom-style-error-<%= key %>"><%= errors[key.to_sym].join("<br>") if errors %></p>
         <%= text_area_tag key, value, name: "config[#{config_var}][#{key}]", rows: 5 %>
@@ -39,10 +27,9 @@
       </div>
     <% end %>
 
-    <%= link_to decidim_admin_decidim_awesome.scoped_styles_path(admin_panel: admin_styles), method: :post, class: "button button__sm button__text-secondary mr-auto" do %>
-      <%= icon("add-box-line") %>
+    <%= link_to decidim_admin_decidim_awesome.scoped_styles_path(admin_panel: admin_styles), method: :post, class: "add-field button small hollow mr-auto" do %>
+      <%= icon "plus", class: "small" %>
       <%= t("new", scope: "decidim.decidim_awesome.admin.config.form_#{config_var}") %>
     <% end %>
-
   <% end %>
 </div>

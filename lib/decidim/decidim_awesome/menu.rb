@@ -33,7 +33,7 @@ module Decidim
                           position: 4,
                           icon_name: "brush",
                           if: menus[:styles],
-                          submenu: { target_menu: :custom_styles_submenu }
+                          submenu: { target_menu: :scoped_styles_submenu }
 
             menu.add_item :custom_fields,
                           I18n.t("menu.proposal_custom_fields", scope: "decidim.decidim_awesome.admin"),
@@ -56,8 +56,8 @@ module Decidim
                           I18n.t("menu.menu_hacks", scope: "decidim.decidim_awesome.admin"),
                           decidim_admin_decidim_awesome.menu_hacks_path,
                           position: 7,
-                          if: menus[:styles],
-                          submenu: { target_menu: :custom_styles_submenu }
+                          icon_name: "menu",
+                          if: menus[:menu_hacks]
 
             menu.add_item :custom_redirects,
                           I18n.t("menu.custom_redirects", scope: "decidim.decidim_awesome.admin"),
@@ -77,7 +77,7 @@ module Decidim
                           I18n.t("menu.verifications", scope: "decidim.decidim_awesome.admin"),
                           decidim_admin_decidim_awesome.config_path(:verifications),
                           position: 10,
-                          icon_name: "fingerprint-line",
+                          icon_name: "badge",
                           if: menus[:verifications]
 
             menu.add_item :maintenance,
@@ -110,19 +110,19 @@ module Decidim
         end
 
         def register_custom__styles_submenu!
-          Decidim.menu :custom_styles_submenu do |menu|
+          Decidim.menu :scoped_styles_submenu do |menu|
             menu.add_item :scoped_styles,
                           I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.scoped_styles"),
                           decidim_admin_decidim_awesome.config_path(:scoped_styles),
                           position: 4.1,
-                          icon_name: "computer-line",
+                          icon_name: "browser",
                           if: config_enabled?(:scoped_styles)
 
             menu.add_item :scoped_admin_styles,
                           I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.scoped_admin_styles"),
                           decidim_admin_decidim_awesome.config_path(:scoped_admin_styles),
                           position: 4.2,
-                          icon_name: "file-settings-line",
+                          icon_name: "cog",
                           if: config_enabled?(:scoped_admin_styles)
           end
         end
@@ -154,7 +154,9 @@ module Decidim
               :validate_body_max_marks_together, :validate_body_start_with_caps
             ),
             surveys: config_enabled?(:auto_save_forms),
-            styles: config_enabled?(:scoped_styles),
+            styles: config_enabled?(:scoped_styles, :scoped_admin_styles),
+            scoped_styles: config_enabled?(:scoped_styles),
+            scoped_admin_styles: config_enabled?(:scoped_admin_styles),
             custom_fields: config_enabled?(:proposal_custom_fields, :proposal_private_custom_fields),
             proposal_custom_fields: config_enabled?(:proposal_custom_fields),
             proposal_private_custom_fields: config_enabled?(:proposal_private_custom_fields),
