@@ -73,7 +73,7 @@ module Decidim
 
             values.each { |code| SassC::Engine.new(code).render }
           rescue SassC::SyntaxError => e
-            errors.add(key, I18n.t("config.form.errors.incorrect_css", key:, scope: "decidim.decidim_awesome.admin"))
+            errors.add(key, I18n.t("config.form.errors.incorrect_css", key: key, scope: "decidim.decidim_awesome.admin"))
             errors.add(key.to_sym, e.message)
           end
         end

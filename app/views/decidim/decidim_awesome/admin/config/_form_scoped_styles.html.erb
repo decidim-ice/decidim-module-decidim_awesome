@@ -39,7 +39,7 @@
       </div>
     <% end %>
 
-    <%= link_to decidim_admin_decidim_awesome.scoped_styles_path(admin_panel: admin_styles), method: :post, class: "button button__sm button__text-secondary mr-auto" do %>
+    <%= link_to decidim_admin_decidim_awesome.scoped_styles_path(admin_panel: admin_styles), method: :post, class: "button small hollow mr-auto" do %>
       <%= icon("add-box-line") %>
       <%= t("new", scope: "decidim.decidim_awesome.admin.config.form_#{config_var}") %>
     <% end %>
