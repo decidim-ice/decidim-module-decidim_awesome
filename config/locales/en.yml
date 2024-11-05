@@ -561,7 +561,7 @@ en:
           private_data_last_remove: This data was destroyed %{time_ago} ago.
           private_data_last_update: This data was last updated %{time_ago} ago.
           proposal_private_custom_fields: Private fields
-          remove_private_data: "👉 You might want to remove it"
+          remove_private_data: "\U0001F449 You might want to remove it"
         scoped_admin_styles:
           menu:
             title: Admin panel

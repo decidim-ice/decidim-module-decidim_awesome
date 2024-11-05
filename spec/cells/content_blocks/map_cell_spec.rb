@@ -49,10 +49,10 @@ module Decidim::DecidimAwesome
     end
 
     it "uses all components" do
-      components = JSON.parse(subject.to_s.match(/data-components='(.*)'/)[1])
+      components = subject.to_s.match(/data-components="([^"]+)"/)[1]
 
-      expect(components.pluck("id")).to include(meeting_component.id)
-      expect(components.pluck("id")).to include(proposal_component.id)
+      expect(components).to include("&quot;:#{meeting_component.id},")
+      expect(components).to include("&quot;:#{proposal_component.id},")
     end
 
     it "uses all categories" do
@@ -130,11 +130,11 @@ module Decidim::DecidimAwesome
       end
 
       it "uses its own components" do
-        components = JSON.parse(subject.to_s.match(/data-components='(.*)'/)[1])
+        components = subject.to_s.match(/data-components="([^"]+)"/)[1]
 
-        expect(components.pluck("id")).not_to include(meeting_component.id)
-        expect(components.pluck("id")).not_to include(proposal_component.id)
-        expect(components.pluck("id")).to include(another_meeting_component.id)
+        expect(components).not_to include("&quot;:#{meeting_component.id},")
+        expect(components).not_to include("&quot;:#{proposal_component.id},")
+        expect(components).to include("&quot;:#{another_meeting_component.id},")
       end
     end
   end
