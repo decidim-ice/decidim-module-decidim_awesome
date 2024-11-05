@@ -2,13 +2,13 @@
 
 require "spec_helper"
 
-describe "Forced verifications" do
+describe "Forced verifications", type: :system do
   let(:organization) { create(:organization, available_authorizations: [:dummy_authorization_handler, :another_dummy_authorization_handler]) }
-  let!(:user) { create(:user, :confirmed, organization:) }
+  let!(:user) { create(:user, :confirmed, organization: organization) }
   let(:restricted_path) { "/" }
-  let!(:force_authorization_after_login) { create(:awesome_config, organization:, var: :force_authorization_after_login, value: %w(dummy_authorization_handler another_dummy_authorization_handler)) }
-  let!(:force_authorization_with_any_method) { create(:awesome_config, organization:, var: :force_authorization_with_any_method, value: any_method) }
-  let!(:force_authorization_help_text) { create(:awesome_config, organization:, var: :force_authorization_help_text, value: { en: "Help text <strong>with HTML</strong>" }) }
+  let!(:force_authorization_after_login) { create(:awesome_config, organization: organization, var: :force_authorization_after_login, value: %w(dummy_authorization_handler another_dummy_authorization_handler)) }
+  let!(:force_authorization_with_any_method) { create(:awesome_config, organization: organization, var: :force_authorization_with_any_method, value: any_method) }
+  let!(:force_authorization_help_text) { create(:awesome_config, organization: organization, var: :force_authorization_help_text, value: { en: "Help text <strong>with HTML</strong>" }) }
   let(:any_method) { false }
 
   context "when the user is not logged in" do
@@ -82,7 +82,7 @@ describe "Forced verifications" do
     end
 
     context "when is an admin" do
-      let(:user) { create(:user, :confirmed, :admin, organization:) }
+      let(:user) { create(:user, :confirmed, :admin, organization: organization) }
 
       it "requrires verification" do
         expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(redirect_url: restricted_path))
@@ -99,10 +99,10 @@ describe "Forced verifications" do
 
     context "when there are pending verifications" do
       let(:organization) { create(:organization, available_authorizations: [:dummy_authorization_handler, :id_documents]) }
-      let!(:force_authorization_after_login) { create(:awesome_config, organization:, var: :force_authorization_after_login, value: %w(dummy_authorization_handler id_documents)) }
+      let!(:force_authorization_after_login) { create(:awesome_config, organization: organization, var: :force_authorization_after_login, value: %w(dummy_authorization_handler id_documents)) }
 
       before do
-        create(:authorization, granted_at: nil, user:, name: "id_documents")
+        create(:authorization, granted_at: nil, user: user, name: "id_documents")
         visit restricted_path
       end
 
@@ -119,7 +119,7 @@ describe "Forced verifications" do
 
     context "when there are granted verifications" do
       before do
-        create(:authorization, :granted, user:, name: "dummy_authorization_handler")
+        create(:authorization, :granted, user: user, name: "dummy_authorization_handler")
         visit restricted_path
       end
 
@@ -133,8 +133,8 @@ describe "Forced verifications" do
 
     context "when the user is authorized" do
       before do
-        create(:authorization, :granted, user:, name: "dummy_authorization_handler")
-        create(:authorization, :granted, user:, name: "another_dummy_authorization_handler")
+        create(:authorization, :granted, user: user, name: "dummy_authorization_handler")
+        create(:authorization, :granted, user: user, name: "another_dummy_authorization_handler")
         visit restricted_path
       end
 
@@ -144,7 +144,7 @@ describe "Forced verifications" do
     end
 
     context "when user is not confirmed" do
-      let(:user) { create(:user, organization:) }
+      let(:user) { create(:user, organization: organization) }
 
       it "acts as normal" do
         sleep 0.5
@@ -154,7 +154,7 @@ describe "Forced verifications" do
     end
 
     context "when user is blocked" do
-      let(:user) { create(:user, :confirmed, :blocked, organization:) }
+      let(:user) { create(:user, :confirmed, :blocked, organization: organization) }
 
       it "acts as normal" do
         expect(page).to have_content("This account has been blocked")
@@ -163,7 +163,7 @@ describe "Forced verifications" do
     end
 
     context "when the verification method does not exist" do
-      let!(:force_authorization_after_login) { create(:awesome_config, organization:, var: :force_authorization_after_login, value: %w(non_existent_authorization_handler)) }
+      let!(:force_authorization_after_login) { create(:awesome_config, organization: organization, var: :force_authorization_after_login, value: %w(non_existent_authorization_handler)) }
 
       it "acts as normal" do
         expect(page).to have_current_path(restricted_path, ignore_query: true)

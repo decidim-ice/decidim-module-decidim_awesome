@@ -2,9 +2,9 @@
 
 require "spec_helper"
 
-describe "Admin manages verification tweaks" do
+describe "Admin manages verification tweaks", type: :system do
   let(:organization) { create(:organization, available_authorizations: [:dummy_authorization_handler, :another_dummy_authorization_handler, :id_documents]) }
-  let!(:admin) { create(:user, :admin, :confirmed, organization:) }
+  let!(:admin) { create(:user, :admin, :confirmed, organization: organization) }
   let(:last_force_authorization_after_login) { Decidim::DecidimAwesome::AwesomeConfig.find_by(var: :force_authorization_after_login) }
   let(:last_force_authorization_with_any_method) { Decidim::DecidimAwesome::AwesomeConfig.find_by(var: :force_authorization_with_any_method) }
   let(:last_force_authorization_help_text) { Decidim::DecidimAwesome::AwesomeConfig.find_by(var: :force_authorization_help_text) }
@@ -35,7 +35,7 @@ describe "Admin manages verification tweaks" do
 
   context "when a configuration exists" do
     let(:organization) { create(:organization, available_authorizations: [:dummy_authorization_handler, :another_dummy_authorization_handler]) }
-    let!(:force_authorization_after_login) { create(:awesome_config, organization:, var: :force_authorization_after_login, value: %w(dummy_authorization_handler another_dummy_authorization_handler id_documents)) }
+    let!(:force_authorization_after_login) { create(:awesome_config, organization: organization, var: :force_authorization_after_login, value: %w(dummy_authorization_handler another_dummy_authorization_handler id_documents)) }
 
     it "allows to select all existing workflows" do
       page.execute_script("document.getElementById('config_force_authorization_after_login').tomselect.setValue(['dummy_authorization_handler', 'id_documents'])")

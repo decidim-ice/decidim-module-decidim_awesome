@@ -37,15 +37,11 @@ module Decidim::DecidimAwesome
           foo: valid_fields
         }
       end
-<<<<<<< HEAD
-=======
-      let(:user_timezone) { true }
       let(:force_authorization_after_login) { ["", "dummy_authorization_handler", "another_dummy_authorization_handler"] }
       let(:force_authorization_with_any_method) { true }
       let(:force_authorization_help_text) do
         { en: "Help text" }
       end
->>>>>>> a8d21e4 (Add verification tweaks (#334))
       let(:valid_fields) { '[{"foo":"bar"}]' }
       let(:invalid_fields) { '[{"foo":"bar"}]{"baz":"zet"}' }
 
@@ -65,7 +61,7 @@ module Decidim::DecidimAwesome
       describe "valid_keys" do
         let(:attributes) do
           {
-            force_authorization_after_login:,
+            force_authorization_after_login: force_authorization_after_login,
             force_authorization_help_text_en: "Help text"
           }
         end
@@ -145,30 +141,12 @@ module Decidim::DecidimAwesome
         end
       end
 
-<<<<<<< HEAD
-=======
-      describe "user timezone" do
-        let(:attributes) do
-          {
-            user_timezone:
-          }
-        end
-
-        it { is_expected.to be_valid }
-
-        context "and user timezone is false" do
-          let(:user_timezone) { false }
-
-          it { is_expected.to be_valid }
-        end
-      end
-
       describe "force authorization after login" do
         let(:attributes) do
           {
-            force_authorization_after_login:,
-            force_authorization_with_any_method:,
-            force_authorization_help_text:
+            force_authorization_after_login: force_authorization_after_login,
+            force_authorization_with_any_method: force_authorization_with_any_method,
+            force_authorization_help_text: force_authorization_help_text
           }
         end
 
@@ -187,7 +165,6 @@ module Decidim::DecidimAwesome
         end
       end
 
->>>>>>> a8d21e4 (Add verification tweaks (#334))
       describe "validators" do
         let(:attributes) do
           {

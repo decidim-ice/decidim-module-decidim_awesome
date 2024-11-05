@@ -11,8 +11,8 @@ describe "Admin manages scoped styles", type: :system do
     {}
   end
   let(:var_name) { :scoped_style }
-  let!(:config) { create(:awesome_config, organization:, var: "#{var_name}s", value: styles) }
-  let(:config_helper) { create(:awesome_config, organization:, var: "#{var_name}_bar") }
+  let!(:config) { create(:awesome_config, organization: organization, var: "#{var_name}s", value: styles) }
+  let(:config_helper) { create(:awesome_config, organization: organization, var: "#{var_name}_bar") }
   let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes" }) }
 
   before do
@@ -43,7 +43,7 @@ describe "Admin manages scoped styles", type: :system do
     end
   end
 
-
+  describe "admin custom styles" do
     before do
       visit decidim_admin_decidim_awesome.config_path(:scoped_admin_styles)
     end

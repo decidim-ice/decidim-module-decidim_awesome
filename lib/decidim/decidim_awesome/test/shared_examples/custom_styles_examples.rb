@@ -69,8 +69,8 @@ shared_examples "removes a box" do
     expect(page).to have_admin_callout("removed successfully")
     expect(page).to have_content("body {background: blue;}")
     expect(page).not_to have_content("body {background: red;}")
-    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: "#{var_name}_foo")).not_to be_present
-    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: "#{var_name}_bar")).to be_present
+    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: "#{var_name}_foo")).not_to be_present
+    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: "#{var_name}_bar")).to be_present
   end
 end
 
@@ -87,8 +87,8 @@ shared_examples "adds a constraint" do |name|
 
     expect(page).to have_content("Processes")
 
-    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: "#{var_name}_bar")).to be_present
-    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:,
+    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: "#{var_name}_bar")).to be_present
+    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization,
                                                           var: "#{var_name}_bar").constraints.first.settings).to eq("participatory_space_manifest" => "participatory_processes")
   end
 end
@@ -130,7 +130,7 @@ shared_examples "removes a constraint" do
       expect(page).not_to have_content("Processes")
     end
 
-    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: "#{var_name}_bar")).to be_present
-    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: "#{var_name}_bar").constraints).not_to be_present
+    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: "#{var_name}_bar")).to be_present
+    expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: "#{var_name}_bar").constraints).not_to be_present
   end
 end
