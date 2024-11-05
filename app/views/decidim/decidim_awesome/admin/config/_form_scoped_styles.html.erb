@@ -6,8 +6,8 @@
   <% if config_enabled? config_var %>
     <% if admin_styles %>
       <div class="colors-help">
-        <p><%= t("help.scoped_admin_styles_warning", scope: "decidim.decidim_awesome.admin.config.form").html_safe %></p>
-        <p><%= t("help.scoped_admin_styles", scope: "decidim.decidim_awesome.admin.config.form") %>
+        <p class="help-text"><%= t("help.scoped_admin_styles_warning", scope: "decidim.decidim_awesome.admin.config.form").html_safe %></p>
+        <p class="help-text"><%= t("help.scoped_admin_styles", scope: "decidim.decidim_awesome.admin.config.form") %>
           <%= t("help.scoped_admin_styles_variables", scope: "decidim.decidim_awesome.admin.config.form") %>
         </p>
         <p class="colors">
@@ -19,7 +19,7 @@
       </div>
     <% else %>
       <div class="colors-help">
-        <p><%= t("help.scoped_styles", scope: "decidim.decidim_awesome.admin.config.form") %>
+        <p class="help-text"><%= t("help.scoped_styles", scope: "decidim.decidim_awesome.admin.config.form") %>
           <%= t("help.scoped_styles_variables", scope: "decidim.decidim_awesome.admin.config.form") %>
         </p>
         <p class="colors">
