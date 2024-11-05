@@ -2,11 +2,11 @@
 
 require "spec_helper"
 
-describe "User uses custom time zones" do
-  let(:organization) { create(:organization, time_zone:) }
-  let(:user) { create(:user, :confirmed, organization:, extended_data:) }
-  let(:component) { create(:meeting_component, :published, organization:) }
-  let!(:meeting) { create(:meeting, :published, component:, start_time:) }
+describe "User uses custom time zones", type: :system do
+  let(:organization) { create(:organization, time_zone: time_zone) }
+  let(:user) { create(:user, :confirmed, organization: organization, extended_data: extended_data) }
+  let(:component) { create(:meeting_component, :published, organization: organization) }
+  let!(:meeting) { create(:meeting, :published, component: component, start_time: start_time) }
   let(:time_zone) { "Azores" }
   let(:extended_data) { { "some_variable" => "Some value" } }
   let(:enable_user_time_zone) { true }

@@ -2,12 +2,12 @@
 
 require "spec_helper"
 
-describe "Custom styles" do
+describe "Custom styles", type: :system do
   let(:organization) { create(:organization) }
-  let!(:admin) { create(:user, :admin, :confirmed, organization:) }
-  let!(:participatory_process) { create(:participatory_process, organization:) }
-  let!(:config) { create(:awesome_config, organization:, var: :scoped_admin_styles, value: styles) }
-  let(:config_helper) { create(:awesome_config, organization:, var: :scoped_admin_style_bar) }
+  let!(:admin) { create(:user, :admin, :confirmed, organization: organization) }
+  let!(:participatory_process) { create(:participatory_process, organization: organization) }
+  let!(:config) { create(:awesome_config, organization: organization, var: :scoped_admin_styles, value: styles) }
+  let(:config_helper) { create(:awesome_config, organization: organization, var: :scoped_admin_style_bar) }
   let(:styles) do
     {
       "bar" => "body {background: red;}"
@@ -53,7 +53,7 @@ describe "Custom styles" do
   end
 
   context "when constraints are present" do
-    let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings:) }
+    let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: settings) }
     let!(:other_constraint) { create(:config_constraint, awesome_config: config_helper, settings: other_settings) }
     let(:settings) do
       {}
