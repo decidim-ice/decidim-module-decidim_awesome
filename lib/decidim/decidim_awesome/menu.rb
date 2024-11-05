@@ -56,7 +56,8 @@ module Decidim
                           I18n.t("menu.menu_hacks", scope: "decidim.decidim_awesome.admin"),
                           decidim_admin_decidim_awesome.menu_hacks_path,
                           position: 7,
-
+                          if: menus[:styles],
+                          submenu: { target_menu: :custom_styles_submenu }
 
             menu.add_item :custom_redirects,
                           I18n.t("menu.custom_redirects", scope: "decidim.decidim_awesome.admin"),
