@@ -59,7 +59,9 @@ module Decidim
 
         def self.from_params(params, additional_params = {})
           instance = super(params, additional_params)
-          instance.force_authorization_after_login = instance.force_authorization_after_login.compact_blank if instance.force_authorization_after_login.present?
+          # rubocop:disable Rails/CompactBlank
+          instance.force_authorization_after_login = instance.force_authorization_after_login.reject(&:blank?) if instance.force_authorization_after_login.present?
+          # rubocop:enable Rails/CompactBlank
           instance.valid_keys = extract_valid_keys_from_params(params)
           instance.sanitize_labels!
           instance
