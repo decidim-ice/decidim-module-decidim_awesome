@@ -1,66 +1,74 @@
-<div class="text-center py-10">
-  <h1 class="title-decorator inline-block text-left mb-12">
-    <%= t(".title") %>
-  </h1>
-  <p class="text-lg text-gray-2 text-left">
-    <%= t(awesome_config[:force_authorization_with_any_method] ? ".verify_with_any_of_these_options" : ".verify_with_all_these_options") %>
-  </p>
-</div>
+<div class="wrapper">
+  <div class="row collapse">
+    <div class="columns large-8 large-centered text-center">
+      <h1 class="heading1 page-title"><%= t(".title") %></h1>
+      <p class="heading5">
+        <%= t(awesome_config[:force_authorization_with_any_method] ? ".verify_with_any_of_these_options" : ".verify_with_all_these_options") %>
+      </p>
+    </div>
+  </div>
 
-<div class="space-y-8">
-  <% if granted_authorizations.any? %>
-    <div class="verification__container-title"><%= t(".granted_title") %></div>
-    <div class="verification__container">
-        <% granted_authorizations.each do |method| %>
-            <div class="verification verification__no_clickable">
-                <%= icon "checkbox-circle-line", class: "verification__icon is-granted" %>
-                <div class="verification__text">
-                    <h2 class="h5 text-secondary">
-                    <%= method.fullname %>
-                    </h2>
+  <div class="row column authorizations-list">
+    <section class="section medium-10 large-8 medium-centered" style="padding-top:2rem">
+      <% if granted_authorizations.any? %>
+        <h3 class="h4"><%= t(".granted_title") %></h3>
+        <div class="card card--list">
+          <% granted_authorizations.each do |method| %>
+            <div class="card--list__item">
+              <div class="card--list__text">
+                <%= icon "lock-locked", class: "card--list__icon", role: "img", "aria-hidden": true %>
+                  <div>
+                    <h5 class="card--list__heading"><%= method.fullname %></h5>
+                  </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if pending_authorizations.any? %>
+        <h3 class="h4"><%= t(".resume_title") %></h3>
+        <div class="card card--list">
+          <% pending_authorizations.each do |method| %>
+              <%= link_to method.resume_authorization_path(redirect_url: redirect_url) do %>
+                <div class="card--list__item" style="padding:0.5rem 0;">
+                  <div class="card--list__text">
+                    <%= icon "reload", class: "card--list__icon", role: "img" %>
+                    <div>
+                      <h5 class="card--list__heading"><%= t(".resume_with_method", name: method.fullname) %></h5>
+                    </div>
+                  </div>
                 </div>
-            </div>
-        <% end %>
-    </div>
-  <% end %>
-
-  <% if pending_authorizations.any? %>
-    <div class="verification__container-title"><%= t(".resume_title") %></div>
-    <div class="verification__container">
-      <% pending_authorizations.each do |method| %>
-          <%= link_to method.resume_authorization_path(redirect_url:), class: "verification" do %>
-            <%= icon "time-line", class: "verification__icon" %>
-            <div class="verification__text">
-              <h2 class="h5 text-secondary">
-                <%= t(".resume_with_method", name: method.fullname) %>
-              </h2>
-            </div>
+              <% end %>
           <% end %>
+        </div>
       <% end %>
-    </div>
-  <% end %>
 
-  <% if missing_authorizations.any? %>
-    <div class="verification__container-title"><%= t(".missing_title") %></div>
-    <div class="verification__container">
-      <% missing_authorizations.each do |method| %>
-          <%= link_to method.root_path(redirect_url:), class: "verification" do %>
-            <%= icon(method.icon || "login-circle-line", class: "verification__icon") %>
-            <div class="verification__text">
-              <h2 class="h5 text-secondary">
-                <%= t(".verify_with_method", name: method.fullname) %>
-              </h2>
-            </div>
+      <% if missing_authorizations.any? %>
+        <h3 class="h4"><%= t(".missing_title") %></h3>
+        <div class="card card--list">
+          <% missing_authorizations.each do |method| %>
+              <%= link_to method.root_path(redirect_url: redirect_url) do %>
+                <div class="card--list__item" style="padding:0.5rem 0;">
+                  <div class="card--list__text">
+                    <%= icon "lock-unlocked", class: "card--list__icon", role: "img" %>
+                    <div>
+                      <h5 class="card--list__heading"><%= t(".verify_with_method", name: method.fullname) %></h5>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
           <% end %>
+        </div>
       <% end %>
-    </div>
-  <% end %>
-</div>
+    </section>
+  </div>
 
-<div class="space-y-8 prose-a:text-secondary mt-8">
-  <%= translated_attribute(awesome_config[:force_authorization_help_text]).html_safe %>
+  <div class="row">
+    <%= translated_attribute(awesome_config[:force_authorization_help_text]).html_safe %>
 
-  <p class="prose-a:text-secondary italic">
-    <%= t(".cancel", link: link_to("#{icon("logout-box-r-line", class: "inline-block").html_safe} #{t(".logout")}".html_safe, decidim.destroy_user_session_path(redirect_url:), method: :delete).html_safe).html_safe %>
-  </p>
+    <p class="text-center skip">
+      <%= t(".cancel", link: link_to(t(".logout"), decidim.destroy_user_session_path(redirect_url: redirect_url), method: :delete).html_safe).html_safe %>
+    </p>
+  </div>
 </div>

@@ -4,7 +4,7 @@ module Decidim
   module DecidimAwesome
     # This controller handles image uploads for the Tiptap editor
     class RequiredAuthorizationsController < DecidimAwesome::ApplicationController
-      layout "layouts/decidim/authorizations"
+      # layout "layouts/decidim/authorizations"
       helper_method :granted_authorizations, :pending_authorizations, :missing_authorizations, :redirect_url
 
       before_action do
