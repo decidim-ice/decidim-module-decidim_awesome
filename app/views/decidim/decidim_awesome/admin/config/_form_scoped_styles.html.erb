@@ -19,7 +19,7 @@
       </p>
     <% end %>
     <% form.object.send(config_var)&.each do |key, value| %>
-      <div class="scoped_styles_container p-4 js-box-container<%= " private" if admin_styles %> js-box-container" data-key="<%= key %>" data-var="<%= config_var %>">
+      <div class="card scoped_styles_container js-box-container<%= " private" if admin_styles %>" data-key="<%= key %>" data-var="<%= config_var %>">
         <%= render("decidim/decidim_awesome/admin/config/autoedit_box_label", var: config_var, key: key, scope: "#{style}_#{key}", delete_path: decidim_admin_decidim_awesome.scoped_style_path(key: key, admin_panel: admin_styles)) %>
         <p class="form-error is-visible" id="custom-style-error-<%= key %>"><%= errors[key.to_sym].join("<br>") if errors %></p>
         <%= text_area_tag key, value, name: "config[#{config_var}][#{key}]", rows: 5 %>

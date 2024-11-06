@@ -44,6 +44,14 @@ describe "Admin manages scoped styles", type: :system do
   end
 
   describe "admin custom styles" do
+    let(:var_name) { :scoped_admin_style }
+    let(:styles) do
+      {
+        "foo" => "body {background: red;}",
+        "bar" => "body {background: blue;}"
+      }
+    end
+
     before do
       visit decidim_admin_decidim_awesome.config_path(:scoped_admin_styles)
     end
@@ -51,13 +59,6 @@ describe "Admin manages scoped styles", type: :system do
     it_behaves_like "creates a new box", "admin panel"
 
     context "when updating new box" do
-      let(:styles) do
-        {
-          "foo" => "body {background: red;}",
-          "bar" => "body {background: blue;}"
-        }
-      end
-
       it_behaves_like "saves content", "foo"
       it_behaves_like "edits box label inline", :css, :foo
       it_behaves_like "removes a box"
