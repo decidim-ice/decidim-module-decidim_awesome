@@ -162,7 +162,6 @@ pt-BR:
             sure_to_remove: Deseja mesmo destruir esse grupo de "Administradores com Escopos"?
           form_scoped_styles:
             delete: Deletar
-            new: Adicionar uma nova caixa CSS
             remove: Remover esta caixa CSS
             sure_to_remove: Deseja mesmo destruir essa caixa de CSS?
           none: "⛔ Nunca! - Desativar qualquer outra restrição"
