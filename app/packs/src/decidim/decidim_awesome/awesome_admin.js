@@ -9,6 +9,7 @@ import "src/decidim/decidim_awesome/admin/proposal_sortings"
 import "src/decidim/decidim_awesome/editors/tabs_focus"
 import "src/decidim/decidim_awesome/admin/codemirror"
 import "src/decidim/decidim_awesome/admin/check_redirections"
+import "src/decidim/decidim_awesome/admin/verification_selects"
 
 import {destroyQuillEditor, createQuillEditor, createMarkdownEditor} from "src/decidim/decidim_awesome/editors/editor"
 

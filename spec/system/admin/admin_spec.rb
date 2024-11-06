@@ -96,6 +96,26 @@ describe "Visit the admin page", type: :system do
     end
   end
 
+  context "when visiting verification hacks" do
+    context "when verification hacks are enabled" do
+      before do
+        click_link_or_button "Verifications"
+      end
+
+      it_behaves_like "has menu link", "verifications"
+
+      it "renders the page" do
+        expect(page).to have_content("Tweaks for Verifications / Authorization Hacks")
+      end
+    end
+
+    context "when verification hacks are disabled" do
+      let(:disabled_features) { [:force_authorization_after_login] }
+
+      it_behaves_like "do not have menu link", "verifications"
+    end
+  end
+
   context "when visiting proposal hacks" do
     context "when proposal hacks are enabled" do
       before do
@@ -189,7 +209,7 @@ describe "Visit the admin page", type: :system do
         click_link "Custom Styles"
       end
 
-      it_behaves_like "has menu link", "styles"
+      it_behaves_like "has menu link", "scoped_styles"
 
       it "renders the page" do
         expect(page).to have_content(/Tweaks for Custom Styles/i)

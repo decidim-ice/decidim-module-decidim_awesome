@@ -15,6 +15,7 @@ module Decidim
       isolate_namespace Decidim::DecidimAwesome
 
       routes do
+        get :required_authorizations, to: "required_authorizations#index"
         post :editor_images, to: "editor_images#create"
       end
 
@@ -99,6 +100,8 @@ module Decidim
 
       initializer "decidim_decidim_awesome.overrides", after: "decidim.action_controller" do
         config.to_prepare do
+          Decidim::ApplicationController.include(Decidim::DecidimAwesome::CheckLoginAuthorizations) if DecidimAwesome.enabled?(:force_authorization_after_login)
+
           # redirect unauthorized scoped admins to allowed places or custom redirects if configured
           Decidim::ErrorsController.include(Decidim::DecidimAwesome::NotFoundRedirect) if DecidimAwesome.enabled?(:scoped_admins, :custom_redirects)
 

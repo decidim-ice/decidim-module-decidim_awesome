@@ -3,12 +3,13 @@
 require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/custom_styles_examples"
 
-describe "Custom styles", type: :system do
-  let(:organization) { create :organization }
-  let!(:participatory_process) { create :participatory_process, organization: organization }
-  let!(:config) { create :awesome_config, organization: organization, var: :scoped_styles, value: styles }
-  let(:config_helper) { create :awesome_config, organization: organization, var: :scoped_style_bar }
-  let(:default_background_color) { "rgb(250, 250, 250)" }
+describe "Admin custom styles", type: :system do
+  let(:organization) { create(:organization) }
+  let!(:admin) { create(:user, :admin, :confirmed, organization: organization) }
+  let!(:participatory_process) { create(:participatory_process, organization: organization) }
+  let!(:config) { create(:awesome_config, organization: organization, var: :scoped_admin_styles, value: styles) }
+  let(:config_helper) { create(:awesome_config, organization: organization, var: :scoped_admin_style_bar) }
+  let(:default_background_color) { "rgb(246, 246, 246)" }
   let(:styles) do
     {
       "bar" => "body {background: red;}"
@@ -17,7 +18,8 @@ describe "Custom styles", type: :system do
 
   before do
     switch_to_host(organization.host)
-    visit decidim.root_path
+    login_as admin, scope: :user
+    visit decidim_admin.root_path
   end
 
   context "when there are custom styles" do
@@ -44,7 +46,7 @@ describe "Custom styles", type: :system do
     end
 
     before do
-      visit decidim.root_path
+      visit decidim_admin.root_path
     end
 
     context "when there are custom styles" do
@@ -70,7 +72,7 @@ describe "Custom styles", type: :system do
 
       context "and page matches the scope" do
         before do
-          click_link "Processes"
+          click_link_or_button "Processes"
         end
 
         it_behaves_like "extra css is added"

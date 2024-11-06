@@ -89,9 +89,15 @@ With this feature you can have a support chat in Decidim. It is linked to a [Tel
 
 #### 9. Custom CSS applied only according scoped restrictions
 
-With this feature you can create directly in the admin a CSS snipped that is only applied globally, in a particular assembly or even a single proposal!
+##### 8.1 Public styles
+With this feature you can create directly in the admin a CSS snipped that is only applied in the public frontend, in a particular assembly or even a single proposal!
 
-![CSS screenshot](examples/custom_styles.png)
+![CSS screenshot](examples/custom_styles_public.png)
+
+##### 8.2 Admin styles
+With this feature you can create directly in the admin a CSS snipped that is only applied in the admin panel, in a particular assembly or even a single proposal!
+
+![CSS screenshot](examples/custom_styles_admin.png)
 
 #### 10. Change the main menu of Decidim entirely!
 
@@ -382,6 +388,25 @@ These tools are designed to help remove old data as required by laws such as GDP
 This menu will show if there's any data older than 6 months (configurable) and will let admins remove it component by component.
 
 ![Private data](examples/private_data.png)
+
+#### 19. Mandatory verifications
+
+This feature allows admins to enforce mandatory verifications for users before they can access the platform. Admins can configure which verifications are required.
+
+Admins can manage these settings in the Awesome admin panel under the "Verifications" section.
+
+![Forced verifications admin side](examples/forced_verifications_admin.png)
+![Forced verifications public side](examples/forced_verifications_public.png)
+
+Note that some pages are allowed, you can even configure which controller are allowed by creating an initializer ("required_authorizations" and "authorizations" are always allowed):
+
+```ruby
+# config/initializers/decidim_awesome.rb
+
+Decidim::DecidimAwesome.configure do |config|
+  # default controllers are "account" and "pages"
+  config.force_authorization_allowed_controller_names = %w(account pages homepage)
+```
 
 #### To be continued...
 

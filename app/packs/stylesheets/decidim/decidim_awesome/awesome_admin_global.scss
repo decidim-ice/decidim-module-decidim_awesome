@@ -10,12 +10,12 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
       margin: 1rem 0;
-      padding: 0.5rem;
+      padding: .5rem;
 
       .date_info {
         font-style: italic;
         color: $medium-gray;
-        font-size: 0.875rem;
+        font-size: .875rem;
         margin-top: 1rem;
 
         a {

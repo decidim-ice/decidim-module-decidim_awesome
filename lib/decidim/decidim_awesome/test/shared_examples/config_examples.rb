@@ -40,7 +40,7 @@ shared_examples "forbids disabled feature without redirect" do
   it "fails with error" do
     action
 
-    expect(response.body).to eq("no permissions for #{feature}")
+    expect(response.body).to have_content("No permissions for #{feature}")
   end
 end
 

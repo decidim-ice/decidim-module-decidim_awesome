@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = "0.27.6"
+DECIDIM_VERSION = "0.27.9"
 
 gem "decidim", DECIDIM_VERSION
 # this causes failures if not enabled (check if still necessary in the future)
@@ -15,20 +15,17 @@ gem "bootsnap", "~> 1.4"
 
 gem "puma", ">= 5.5.1"
 
-gem "faker", "~> 2.14"
-
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
-
   gem "decidim-dev", DECIDIM_VERSION
+  gem "rubocop-faker"
 end
 
 group :development do
   gem "letter_opener_web", "~> 1.3"
   gem "listen", "~> 3.1"
-  gem "rubocop-faker"
   gem "spring", "~> 2.0"
-  gem "spring-watcher-listen", "~> 2.0.0"
+  gem "spring-watcher-listen", "~> 2.0"
   gem "web-console"
 end
 

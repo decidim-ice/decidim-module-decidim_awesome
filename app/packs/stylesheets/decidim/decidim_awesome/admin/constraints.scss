@@ -1,7 +1,7 @@
 .constraints-editor {
   background: #f6f6f6;
   padding: 1rem;
-  margin: 0.5rem 0 2rem;
+  margin: .5rem 0 2rem;
   border-radius: 5px;
 
   h5 {
@@ -13,8 +13,8 @@
 
   .label {
     font-weight: normal;
-    font-size: 0.8rem;
-    padding: 0.3rem 0.5rem;
+    font-size: .8rem;
+    padding: .3rem .5rem;
 
     &.participatory_space_manifest {
       background-color: #f7b230;
@@ -88,6 +88,6 @@
   .add-condition .icon {
     width: 11px;
     height: 11px;
-    margin-right: 0.3rem;
+    margin-right: .3rem;
   }
 }

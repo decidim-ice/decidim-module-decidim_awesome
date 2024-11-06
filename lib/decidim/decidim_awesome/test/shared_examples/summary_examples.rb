@@ -50,6 +50,7 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::AmendmentsController.included_modules).to include(Decidim::DecidimAwesome::LimitPendingAmendments)
       expect(Decidim::Proposals::ProposalsController.included_modules).to include(Decidim::DecidimAwesome::Proposals::OrderableOverride)
       expect(Decidim::AdminLog::ComponentPresenter.included_modules).to include(Decidim::DecidimAwesome::AdminLog::ComponentPresenterOverride)
+      expect(Decidim::ApplicationController.included_modules).to include(Decidim::DecidimAwesome::CheckLoginAuthorizations)
     end
 
   else
@@ -74,6 +75,7 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::AmendmentsController.included_modules).not_to include(Decidim::DecidimAwesome::LimitPendingAmendments)
       expect(Decidim::Proposals::ProposalsController.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::OrderableOverride)
       expect(Decidim::AdminLog::ComponentPresenter.included_modules).not_to include(Decidim::DecidimAwesome::AdminLog::ComponentPresenterOverride)
+      expect(Decidim::ApplicationController.included_modules).not_to include(Decidim::DecidimAwesome::CheckLoginAuthorizations)
     end
   end
 end
@@ -147,15 +149,12 @@ shared_examples "basic rendering" do |enabled|
   describe "shows public pages", type: :system do
     let(:image_vars) do
       [
-        :allow_images_in_proposals,
         :allow_images_in_small_editor,
         :allow_images_in_full_editor,
         :allow_images_in_proposals,
         :use_markdown_editor,
         :allow_images_in_markdown_editor,
-        :auto_save_forms,
-        :intergram_for_admins,
-        :intergram_for_public
+        :auto_save_forms
       ]
     end
 
@@ -214,7 +213,7 @@ shared_examples "basic rendering" do |enabled|
         "config/editors",
         "config/proposals",
         "config/surveys",
-        "config/styles",
+        "config/scoped_styles",
         "config/proposal_custom_fields",
         "config/admins",
         "menu_hacks",
