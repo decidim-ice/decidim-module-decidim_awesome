@@ -20,32 +20,34 @@ module Decidim
         end
 
         html_options = {
-          "class" => "awesome-map",
-          "id" => "awesome-map",
-          "data-components" => components.map do |component|
-                                 {
-                                   id: component.id,
-                                   type: component.manifest.name,
-                                   name: translated_attribute(component.name),
-                                   url: Decidim::EngineRouter.main_proxy(component).root_path,
-                                   amendments: component.manifest.name == :proposals ? Decidim::Proposals::Proposal.where(component:).only_emendations.count : 0
-                                 }
-                               end.to_json,
-          "data-hide-controls" => settings_source.try(:hide_controls),
-          "data-collapsed" => global_settings.collapse,
-          "data-truncate" => global_settings.truncate || 255,
-          "data-map-center" => global_settings.map_center,
-          "data-map-zoom" => global_settings.map_zoom || 8,
-          "data-menu-merge-components" => global_settings.menu_merge_components,
-          "data-menu-amendments" => global_settings.menu_amendments,
-          "data-menu-meetings" => global_settings.menu_meetings,
-          "data-menu-categories" => global_settings.menu_categories,
-          "data-menu-hashtags" => global_settings.menu_hashtags,
-          "data-show-not-answered" => step_settings&.show_not_answered,
-          "data-show-accepted" => step_settings&.show_accepted,
-          "data-show-withdrawn" => step_settings&.show_withdrawn,
-          "data-show-evaluating" => step_settings&.show_evaluating,
-          "data-show-rejected" => step_settings&.show_rejected
+          class: "awesome-map",
+          id: "awesome-map",
+          data: {
+            "components" => components.map do |component|
+                              {
+                                id: component.id,
+                                type: component.manifest.name,
+                                name: translated_attribute(component.name),
+                                url: Decidim::EngineRouter.main_proxy(component).root_path,
+                                amendments: component.manifest.name == :proposals ? Decidim::Proposals::Proposal.where(component:).only_emendations.count : 0
+                              }
+                            end.to_json,
+            "hide-controls" => settings_source.try(:hide_controls),
+            "collapsed" => global_settings.collapse,
+            "truncate" => global_settings.truncate || 255,
+            "map-center" => global_settings.map_center,
+            "map-zoom" => global_settings.map_zoom || 8,
+            "menu-merge-components" => global_settings.menu_merge_components,
+            "menu-amendments" => global_settings.menu_amendments,
+            "menu-meetings" => global_settings.menu_meetings,
+            "menu-categories" => global_settings.menu_categories,
+            "menu-hashtags" => global_settings.menu_hashtags,
+            "show-not-answered" => step_settings&.show_not_answered,
+            "show-accepted" => step_settings&.show_accepted,
+            "show-withdrawn" => step_settings&.show_withdrawn,
+            "show-evaluating" => step_settings&.show_evaluating,
+            "show-rejected" => step_settings&.show_rejected
+          }
         }
 
         content_tag(:div, html_options) do

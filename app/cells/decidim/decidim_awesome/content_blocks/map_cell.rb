@@ -46,11 +46,7 @@ module Decidim
                 true
               when :proposals
                 component.settings.geocoding_enabled
-              else
-                false
               end
-            else
-              false
             end
           end
         end
