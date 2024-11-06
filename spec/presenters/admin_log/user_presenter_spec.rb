@@ -7,19 +7,19 @@ module Decidim::AdminLog
     subject(:presenter) { described_class.new(action_log, helper) }
 
     let(:organization) { create(:organization) }
-    let(:user) { create(:user, organization:) }
+    let(:user) { create(:user, organization: organization) }
     let(:extra_data) { { handler_name: "Example authorization", user_id: resource.id, reason: "Because I can" } }
     let(:action_log) do
       create(
         :action_log,
-        user:,
-        action:,
-        resource:,
-        extra_data:
+        user: user,
+        action: action,
+        resource: resource,
+        extra_data: extra_data
       )
     end
     let(:action) { "admin_creates_authorization" }
-    let(:resource) { create(:user, organization:) }
+    let(:resource) { create(:user, organization: organization) }
 
     before do
       helper.extend(Decidim::ApplicationHelper)

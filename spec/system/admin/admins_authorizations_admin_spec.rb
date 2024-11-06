@@ -2,17 +2,17 @@
 
 require "spec_helper"
 
-describe "Managing the participants" do
-  let(:organization) { create(:organization, available_authorizations:) }
-  let(:user) { create(:user, :admin, :confirmed, organization:) }
-  let!(:participant1) { create(:user, :confirmed, organization:) }
-  let!(:participant2) { create(:user, :confirmed, organization:) }
+describe "Managing the participants", type: :system do
+  let(:organization) { create(:organization, available_authorizations: available_authorizations) }
+  let(:user) { create(:user, :admin, :confirmed, organization: organization) }
+  let!(:participant1) { create(:user, :confirmed, organization: organization) }
+  let!(:participant2) { create(:user, :confirmed, organization: organization) }
   let(:available_authorizations) { [handler] }
   let(:handler) { "dummy_authorization_handler" }
   let(:awesome_handler) { "another_dummy_authorization_handler" }
-  let!(:authorization) { create(:authorization, user: participant1, name: handler, organization:) }
-  let!(:ghost_authorization) { create(:authorization, user: participant2, name: :another_dummy_authorization_handler, organization:) }
-  let!(:awesome_config) { create(:awesome_config, var: :admins_available_authorizations, value: [awesome_handler], organization:) }
+  let!(:authorization) { create(:authorization, user: participant1, name: handler, organization: organization) }
+  let!(:ghost_authorization) { create(:authorization, user: participant2, name: :another_dummy_authorization_handler, organization: organization) }
+  let!(:awesome_config) { create(:awesome_config, var: :admins_available_authorizations, value: [awesome_handler], organization: organization) }
   let(:last_authorization) { Decidim::Authorization.last }
   let(:last_action_log) { Decidim::ActionLog.last }
 
@@ -132,7 +132,7 @@ describe "Managing the participants" do
     end
 
     context "when there's a conflict of data" do
-      let!(:authorization) { create(:authorization, user: participant1, name: handler, unique_id: "12345678", organization:) }
+      let!(:authorization) { create(:authorization, user: participant1, name: handler, unique_id: "12345678", organization: organization) }
 
       it "cannot force an authorization" do
         within "tr", text: participant2.name do

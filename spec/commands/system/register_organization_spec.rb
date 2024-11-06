@@ -30,8 +30,8 @@ module Decidim::System
           default_locale: "en",
           users_registration_mode: "enabled",
           force_users_to_authenticate_before_access_organization: "false",
-          available_authorizations:,
-          awesome_admins_available_authorizations:,
+          available_authorizations: available_authorizations,
+          awesome_admins_available_authorizations: awesome_admins_available_authorizations,
           file_upload_settings: {}
         }
       end

@@ -7,10 +7,10 @@ module Decidim::DecidimAwesome
     describe AdminAuthorizationsController do
       routes { Decidim::DecidimAwesome::AdminEngine.routes }
 
-      let(:user) { create(:user, :confirmed, :admin, organization:) }
+      let(:user) { create(:user, :confirmed, :admin, organization: organization) }
       let(:organization) { create(:organization, available_authorizations: [handler]) }
-      let!(:awesome_config) { create(:awesome_config, organization:, var: :admins_available_authorizations, value: [awesome_handler]) }
-      let(:params) { { id: user.id, handler: } }
+      let!(:awesome_config) { create(:awesome_config, organization: organization, var: :admins_available_authorizations, value: [awesome_handler]) }
+      let(:params) { { id: user.id, handler: handler } }
       let(:handler) { "dummy_authorization_handler" }
       let(:awesome_handler) { "dummy_authorization_handler" }
       let(:admins_available_authorizations) { [] }
@@ -25,16 +25,16 @@ module Decidim::DecidimAwesome
 
       describe "GET #edit" do
         it "renders edit template" do
-          get(:edit, params:)
+          get(:edit, params: params)
           expect(response).to have_http_status(:success)
           expect(subject).to render_template(:edit)
         end
 
         context "when authorization exists" do
-          let!(:authorization) { create(:authorization, user:, name: handler) }
+          let!(:authorization) { create(:authorization, user: user, name: handler) }
 
           it "renders authorization template" do
-            get(:edit, params:)
+            get(:edit, params: params)
             expect(response).to have_http_status(:success)
             expect(subject).to render_template(:authorization)
           end
@@ -44,7 +44,7 @@ module Decidim::DecidimAwesome
           let(:awesome_handler) { "another_dummy_authorization_handler" }
 
           it "returns http redirect" do
-            get(:edit, params:)
+            get(:edit, params: params)
             expect(response).to have_http_status(:unprocessable_entity)
           end
         end
@@ -53,33 +53,32 @@ module Decidim::DecidimAwesome
           let(:admins_available_authorizations) { :disabled }
 
           it "returns http redirect" do
-            get(:edit, params:)
+            get(:edit, params: params)
             expect(response).to have_http_status(:unprocessable_entity)
           end
         end
       end
 
       describe "PATCH #update" do
-        # let(:authorization) { create(:authorization, user:, name: handler) }
         let(:params) do
           {
             id: user.id,
-            handler:,
-            force_verification:,
-            authorization_handler:
+            handler: handler,
+            force_verification: force_verification,
+            authorization_handler: authorization_handler
           }
         end
         let(:authorization_handler) do
           {
-            document_number:
+            document_number: document_number
           }
         end
         let(:document_number) { "12345678X" }
         let(:force_verification) { "" }
 
         it "verifies the user" do
-          expect { patch(:update, params:) }.to change(Decidim::Authorization, :count).by(1)
-                                                                                      .and change(Decidim::ActionLog, :count).by(1)
+          expect { patch(:update, params: params) }.to change(Decidim::Authorization, :count).by(1)
+                                                                                             .and change(Decidim::ActionLog, :count).by(1)
           expect(response).to have_http_status(:success)
           expect(body).to eq({ "message" => "", "granted" => true, "userId" => user.id, "handler" => "dummy_authorization_handler" })
         end
@@ -88,7 +87,7 @@ module Decidim::DecidimAwesome
           let(:document_number) { "12345678Y" }
 
           it "does not verify the user" do
-            expect { patch(:update, params:) }.not_to change(Decidim::Authorization, :count)
+            expect { patch(:update, params: params) }.not_to change(Decidim::Authorization, :count)
             expect(response).to have_http_status(:success)
             expect(body).to eq({ "message" => "", "granted" => false, "userId" => user.id, "handler" => "dummy_authorization_handler" })
           end
@@ -99,8 +98,8 @@ module Decidim::DecidimAwesome
           let(:document_number) { "12345678Y" }
 
           it "forces the verification" do
-            expect { patch(:update, params:) }.to change(Decidim::Authorization, :count).by(1)
-                                                                                        .and change(Decidim::ActionLog, :count).by(1)
+            expect { patch(:update, params: params) }.to change(Decidim::Authorization, :count).by(1)
+                                                                                               .and change(Decidim::ActionLog, :count).by(1)
 
             expect(response).to have_http_status(:success)
             expect(body).to eq({ "message" => "", "granted" => true, "userId" => user.id, "handler" => "dummy_authorization_handler" })
@@ -109,7 +108,7 @@ module Decidim::DecidimAwesome
 
         # Note: this situation is impossible to happen as conflicts are handled in the controller, this is here to ensure covering the broadcast(:transferred) case
         context "when verification is transferred" do
-          let!(:authorization) { create(:authorization, user: create(:user, organization:), name: handler, unique_id: document_number) }
+          let!(:authorization) { create(:authorization, user: create(:user, organization: organization), name: handler, unique_id: document_number) }
 
           before do
             allow_any_instance_of(Decidim::AuthorizationHandler).to receive(:unique?).and_return(false) # rubocop:disable RSpec/AnyInstance
@@ -118,7 +117,7 @@ module Decidim::DecidimAwesome
           end
 
           it "transfers the verification" do
-            expect { patch(:update, params:) }.not_to change(Decidim::Authorization, :count)
+            expect { patch(:update, params: params) }.not_to change(Decidim::Authorization, :count)
 
             expect(response).to have_http_status(:success)
             expect(body).to eq({ "message" => "", "granted" => true, "userId" => user.id, "handler" => "dummy_authorization_handler" })
@@ -127,10 +126,10 @@ module Decidim::DecidimAwesome
         end
 
         context "when a conflict exists" do
-          let!(:authorization) { create(:authorization, user: create(:user, organization:), name: handler, unique_id: document_number) }
+          let!(:authorization) { create(:authorization, user: create(:user, organization: organization), name: handler, unique_id: document_number) }
 
           it "renders conflict template" do
-            expect { patch(:update, params:) }.not_to change(Decidim::Authorization, :count)
+            expect { patch(:update, params: params) }.not_to change(Decidim::Authorization, :count)
 
             expect(response).to have_http_status(:success)
             expect(body).to eq({ "message" => "", "granted" => false, "userId" => user.id, "handler" => "dummy_authorization_handler" })
@@ -138,21 +137,21 @@ module Decidim::DecidimAwesome
         end
 
         context "when the authorization already exists" do
-          let!(:authorization) { create(:authorization, user:, name: handler) }
+          let!(:authorization) { create(:authorization, user: user, name: handler) }
 
           it "does not create a new authorization" do
-            expect { patch(:update, params:) }.to change(Decidim::ActionLog, :count).by(1)
+            expect { patch(:update, params: params) }.to change(Decidim::ActionLog, :count).by(1)
             expect(authorization.reload.unique_id).to eq(document_number)
           end
         end
       end
 
       describe "DELETE #destroy" do
-        let!(:authorization) { create(:authorization, user:, name: handler) }
+        let!(:authorization) { create(:authorization, user: user, name: handler) }
 
         it "destroys the authorization" do
-          expect { delete(:destroy, params:) }.to change(Decidim::Authorization, :count).by(-1)
-                                                                                        .and change(Decidim::ActionLog, :count).by(1)
+          expect { delete(:destroy, params: params) }.to change(Decidim::Authorization, :count).by(-1)
+                                                                                               .and change(Decidim::ActionLog, :count).by(1)
           expect(response).to have_http_status(:success)
           expect(body).to eq({ "message" => "", "granted" => false, "userId" => user.id, "handler" => "dummy_authorization_handler" })
         end
@@ -161,7 +160,7 @@ module Decidim::DecidimAwesome
           let(:authorization) { nil }
 
           it "does not destroy the authorization" do
-            expect { delete(:destroy, params:) }.not_to change(Decidim::Authorization, :count)
+            expect { delete(:destroy, params: params) }.not_to change(Decidim::Authorization, :count)
             expect(response).to have_http_status(:success)
             expect(body).to eq({ "message" => "", "granted" => false, "userId" => user.id, "handler" => "dummy_authorization_handler" })
           end

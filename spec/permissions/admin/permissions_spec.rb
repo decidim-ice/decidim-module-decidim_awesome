@@ -11,9 +11,9 @@ module Decidim::DecidimAwesome::Admin
     let(:context) do
       {
         current_organization: organization,
-        private_data:,
-        global:,
-        handler:
+        private_data: private_data,
+        global: global,
+        handler: handler
       }
     end
     let(:handler) { nil }
@@ -141,7 +141,7 @@ module Decidim::DecidimAwesome::Admin
       let(:feature) { :admins_available_authorizations }
       let(:handler) { "dummy_authorization_handler" }
       let(:awesome_handler) { "dummy_authorization_handler" }
-      let!(:awesome_config) { create(:awesome_config, organization:, var: :admins_available_authorizations, value: [awesome_handler]) }
+      let!(:awesome_config) { create(:awesome_config, organization: organization, var: :admins_available_authorizations, value: [awesome_handler]) }
 
       context "when organization has no handlers" do
         it_behaves_like "permission is not set"

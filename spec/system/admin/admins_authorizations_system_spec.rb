@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "System admin manages awesome verifications" do
+describe "System admin manages awesome verifications", type: :system do
   let(:admin) { create(:admin) }
   let(:last_awesome_config) { Decidim::DecidimAwesome::AwesomeConfig.last }
 

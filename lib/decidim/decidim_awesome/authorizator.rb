@@ -18,9 +18,9 @@ module Decidim
           workflow = Decidim::Verifications.find_workflow_manifest(name)
           next unless workflow
 
-          authorization = Decidim::Authorization.find_by(user:, name:)
+          authorization = Decidim::Authorization.find_by(user: user, name: name)
           {
-            name:,
+            name: name,
             fullname: workflow.fullname,
             granted: authorization&.granted?,
             pending: authorization.present? && !authorization.granted?,

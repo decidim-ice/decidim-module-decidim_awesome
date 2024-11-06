@@ -26,8 +26,8 @@ module Decidim
           secondary_hosts: "foo.example.org\r\n\r\nbar.example.org",
           force_users_to_authenticate_before_access_organization: false,
           users_registration_mode: "existing",
-          available_authorizations:,
-          awesome_admins_available_authorizations:,
+          available_authorizations: available_authorizations,
+          awesome_admins_available_authorizations: awesome_admins_available_authorizations,
           file_upload_settings: {}
         }
       end
@@ -54,7 +54,7 @@ module Decidim
       end
 
       context "when authorizations are defined" do
-        let!(:awesome_config) { create(:awesome_config, organization:, var: :admins_available_authorizations, value: ["example_authorization"]) }
+        let!(:awesome_config) { create(:awesome_config, organization: organization, var: :admins_available_authorizations, value: ["example_authorization"]) }
         let(:awesome_admins_available_authorizations) do
           []
         end

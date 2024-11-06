@@ -5,11 +5,11 @@ require "spec_helper"
 module Decidim::DecidimAwesome
   describe Authorizator do
     subject { described_class.new(user, admin_authorizations) }
-    let(:organization) { create(:organization, available_authorizations:) }
+    let(:organization) { create(:organization, available_authorizations: available_authorizations) }
     let(:available_authorizations) { [:dummy_authorization_handler, :another_dummy_authorization_handler, :id_documents] }
-    let(:user) { create(:user, organization:) }
+    let(:user) { create(:user, organization: organization) }
     let(:admin_authorizations) { %w(dummy_authorization_handler another_dummy_authorization_handler) }
-    let!(:exising_authorization) { create(:authorization, :pending, user:, name: "id_documents") }
+    let!(:exising_authorization) { create(:authorization, :pending, user: user, name: "id_documents") }
 
     shared_examples "an authorization's hash" do |granted, pending|
       it "returns the authorization's hash" do
@@ -17,8 +17,8 @@ module Decidim::DecidimAwesome
                                                {
                                                  name: "dummy_authorization_handler",
                                                  fullname: "Example authorization",
-                                                 granted:,
-                                                 pending:,
+                                                 granted: granted,
+                                                 pending: pending,
                                                  managed: true
                                                },
                                                {
@@ -42,13 +42,13 @@ module Decidim::DecidimAwesome
     it_behaves_like "an authorization's hash", nil, false
 
     context "when authorizations exist" do
-      let!(:authorization) { create(:authorization, user:, name: "dummy_authorization_handler") }
+      let!(:authorization) { create(:authorization, user: user, name: "dummy_authorization_handler") }
 
       it_behaves_like "an authorization's hash", true, false
     end
 
     context "when authorization is pending" do
-      let!(:authorization) { create(:authorization, :pending, user:, name: "dummy_authorization_handler") }
+      let!(:authorization) { create(:authorization, :pending, user: user, name: "dummy_authorization_handler") }
 
       it_behaves_like "an authorization's hash", false, true
     end

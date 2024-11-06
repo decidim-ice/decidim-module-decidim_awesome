@@ -43,7 +43,7 @@ module Decidim
           end
 
           render json: {
-            message:,
+            message: message,
             granted: granted?,
             userId: user.id,
             handler: workflow.name
@@ -58,7 +58,7 @@ module Decidim
                     end
 
           render json: {
-            message:,
+            message: message,
             granted: granted?,
             userId: user.id,
             handler: workflow.name
@@ -88,7 +88,7 @@ module Decidim
         end
 
         def authorization
-          @authorization ||= Decidim::Authorization.where.not(granted_at: nil).find_by(user:, name: workflow.name)
+          @authorization ||= Decidim::Authorization.where.not(granted_at: nil).find_by(user: user, name: workflow.name)
         end
 
         def granted?
@@ -110,7 +110,7 @@ module Decidim
         end
 
         def handler_params
-          (params[:authorization_handler] || {}).merge(user:)
+          (params[:authorization_handler] || {}).merge(user: USER)
         end
 
         def force_verification

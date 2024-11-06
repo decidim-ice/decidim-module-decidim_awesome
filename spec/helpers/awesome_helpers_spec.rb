@@ -4,12 +4,12 @@ require "spec_helper"
 
 module Decidim::DecidimAwesome
   describe AwesomeHelpers do
-    let!(:organization) { create(:organization, available_authorizations:) }
+    let!(:organization) { create(:organization, available_authorizations: available_authorizations) }
     let(:available_authorizations) { [] }
     let!(:another_organization) { create(:organization) }
-    let(:component) { create(:proposal_component, organization:, settings: { awesome_voting_manifest: manifest }) }
-    let(:another_component) { create(:proposal_component, manifest_name: :another_component, organization:, settings: { awesome_voting_manifest: manifest }) }
-    let(:user) { create(:user, organization:) }
+    let(:component) { create(:proposal_component, organization: organization, settings: { awesome_voting_manifest: manifest }) }
+    let(:another_component) { create(:proposal_component, manifest_name: :another_component, organization: organization, settings: { awesome_voting_manifest: manifest }) }
+    let(:user) { create(:user, organization: organization) }
     let(:manifest) { :voting_cards }
     let(:request) { double(env: env, url: "/") }
     let(:env) do
@@ -87,7 +87,7 @@ module Decidim::DecidimAwesome
       end
 
       context "when an authorization exists" do
-        let!(:authorization) { create(:authorization, :granted, user:, name: "dummy_authorization_handler") }
+        let!(:authorization) { create(:authorization, :granted, user: user, name: "dummy_authorization_handler") }
 
         it "returns the authorization" do
           expect(helper.awesome_authorizations_for(user).authorizations).to eq([
@@ -103,7 +103,7 @@ module Decidim::DecidimAwesome
       end
 
       context "when the authorization is managed" do
-        let!(:admins_available_authorizations) { create(:awesome_config, organization:, var: :admins_available_authorizations, value: [:dummy_authorization_handler]) }
+        let!(:admins_available_authorizations) { create(:awesome_config, organization: organization, var: :admins_available_authorizations, value: [:dummy_authorization_handler]) }
 
         it "returns the authorization" do
           expect(helper.awesome_authorizations_for(user).authorizations).to eq([

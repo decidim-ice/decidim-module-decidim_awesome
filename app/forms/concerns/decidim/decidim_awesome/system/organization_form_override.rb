@@ -25,7 +25,7 @@ module Decidim
           private
 
           def map_awesome_configs(organization)
-            self.awesome_admins_available_authorizations = Decidim::DecidimAwesome::AwesomeConfig.find_by(var: :admins_available_authorizations, organization:)&.value
+            self.awesome_admins_available_authorizations = Decidim::DecidimAwesome::AwesomeConfig.find_by(var: :admins_available_authorizations, organization: organization)&.value
           end
         end
       end
