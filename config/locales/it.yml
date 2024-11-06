@@ -258,7 +258,6 @@ it:
             sure_to_remove: Sei sicuro di voler eliminare questo gruppo "Amministratori con ambito"?
           form_scoped_styles:
             delete: Elimina
-            new: Aggiungi un nuovo box CSS
             remove: Rimuovi questo box CSS
             sure_to_remove: Sei sicura di voler distruggere questo box CSS?
           none: "⛔ Mai! - Disattiva ogni altro vincolo"
