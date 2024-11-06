@@ -53,7 +53,7 @@ module Decidim
       end
 
       def allowed_controllers
-        %w(required_authorizations authorizations upload_validations timeouts editor_images) + awesome_config[:force_authorization_allowed_controller_names].to_a
+        %w(required_authorizations authorizations upload_validations timeouts editor_images locales) + awesome_config[:force_authorization_allowed_controller_names].to_a
       end
     end
   end

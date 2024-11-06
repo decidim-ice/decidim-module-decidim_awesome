@@ -13,6 +13,7 @@ module Decidim
     autoload :Lock, "decidim/decidim_awesome/lock"
     autoload :TranslatedCustomFieldsType, "decidim/decidim_awesome/api/types/translated_custom_fields_type"
     autoload :LocalizedCustomFieldsType, "decidim/decidim_awesome/api/types/localized_custom_fields_type"
+    autoload :Authorizator, "decidim/decidim_awesome/authorizator"
 
     # Awesome comes with some components for participatory spaces
     # Currently :awesome_map and :awesome_iframe, list them here
@@ -192,6 +193,13 @@ module Decidim
     # When force_authorization_after_login is enabled, this text will be shown to the user as a help text (ie: add a contact information)
     config_accessor :force_authorization_help_text do
       {}
+    end
+
+    # Allows admins to manually authorize users with the specified methods
+    # if set to an empty array, the admins will not be able to authorize users but the system admin can still configure it
+    # if set to :disabled the feature will be completly removed
+    config_accessor :admins_available_authorizations do
+      []
     end
 
     # This controllers will be skipped from the authorization check

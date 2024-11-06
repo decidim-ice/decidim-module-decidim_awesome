@@ -17,11 +17,9 @@ module Decidim
           end
 
           def i18n_params
-            if action == "destroy_private_data"
-              decidim_original_i18n_params.merge({ count: action_log.extra["count"] })
-            else
-              decidim_original_i18n_params
-            end
+            return decidim_original_i18n_params unless action == "destroy_private_data"
+
+            decidim_original_i18n_params.merge({ count: action_log.extra["count"] })
           end
         end
       end

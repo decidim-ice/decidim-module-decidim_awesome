@@ -1,0 +1,41 @@
+<div class="form-defaults">
+  <%= decidim_form_for(handler,
+                      builder: Decidim::AuthorizationFormBuilder,
+                      as: "authorization_handler",
+                      url: decidim_admin_decidim_awesome.admin_authorization_path(id: user.id, handler: params[:handler]),
+                      method: :patch,
+                      remote: true) do |form| %>
+    <% if lookup_context.exists?(handler.to_partial_path, [], true) %>
+      <%= render partial: handler.to_partial_path, locals: { handler:, form: } %>
+    <% else %>
+      <div class="form__wrapper">
+        <%= form.all_fields %>
+      </div>
+    <% end %>
+
+    <% if defined?(with_override) %>
+      <div class="form__wrapper flash alert">
+        <label class="flex-col">
+          <div class="flash__title">
+            <%= check_box_tag "force_verification_check", true %>
+            <%= t(".force_verification") %>
+          </div>
+          <p class="help-text"><%= t(".force_verification_help") %></p>
+        </label>
+        <label>
+          <%= t(".force_verification_reason") %>
+          <%= text_area_tag "force_verification", nil, disabled: true %>
+        </label>
+      </div>
+    <% else %>
+      <%= cell("decidim/announcement", { title: t(".warning"), body: t(".do_it_if_sure") }, callout_class: "warning") %>
+    <% end %>
+
+    <div class="text-center mt-8">
+      <button type="submit" class="button button__lg button__primary">
+          <%= icon "alert-line", class: "fill-current" %>
+          <span><%= t(".authorize", name: workflow.fullname, user: user.name) %></span>
+      </button>
+    </div>
+  <% end %>
+</div>
