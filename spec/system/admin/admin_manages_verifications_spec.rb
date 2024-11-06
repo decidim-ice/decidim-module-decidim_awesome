@@ -16,7 +16,7 @@ describe "Admin manages verification tweaks", type: :system do
   end
 
   it "saves the configuration" do
-    page.execute_script("document.getElementById('config_force_authorization_after_login').tomselect.setValue(['dummy_authorization_handler', 'id_documents'])")
+    page.execute_script("$('#config_force_authorization_after_login').val(['dummy_authorization_handler', 'id_documents'])")
 
     check "Allow access if any of the authorizations is granted (by default, all are required)"
 
@@ -30,7 +30,7 @@ describe "Admin manages verification tweaks", type: :system do
     expect(page).to have_content("updated successfully")
     expect(last_force_authorization_after_login.reload.value).to eq(%w(dummy_authorization_handler id_documents))
     expect(last_force_authorization_with_any_method.reload.value).to be(true)
-    expect(last_force_authorization_help_text.reload.value).to eq("en" => "<p>Help text <strong>with HTML</strong></p>", "ca" => "<p>Text d'ajuda <strong>amb HTML</strong></p>", "es" => "<p>Texto de ayuda <strong>con HTML</strong></p>")
+    expect(last_force_authorization_help_text.reload.value).to eq("en" => "<p>Help text </p><p><strong>with HTML</strong></p>", "ca" => "<p>Text d'ajuda </p><p><strong>amb HTML</strong></p>", "es" => "<p>Texto de ayuda </p><p><strong>con HTML</strong></p>")
   end
 
   context "when a configuration exists" do
@@ -38,12 +38,12 @@ describe "Admin manages verification tweaks", type: :system do
     let!(:force_authorization_after_login) { create(:awesome_config, organization: organization, var: :force_authorization_after_login, value: %w(dummy_authorization_handler another_dummy_authorization_handler id_documents)) }
 
     it "allows to select all existing workflows" do
-      page.execute_script("document.getElementById('config_force_authorization_after_login').tomselect.setValue(['dummy_authorization_handler', 'id_documents'])")
+      page.execute_script("$('#config_force_authorization_after_login').val(['dummy_authorization_handler', 'id_documents'])")
 
       click_button "Update configuration"
 
       expect(page).to have_content("updated successfully")
-      expect(last_force_authorization_after_login.reload.value).to be_blank
+      expect(last_force_authorization_after_login.reload.value).to eq(%w(dummy_authorization_handler))
     end
   end
 end

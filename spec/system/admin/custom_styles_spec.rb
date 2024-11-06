@@ -9,7 +9,7 @@ describe "Admin custom styles", type: :system do
   let!(:participatory_process) { create(:participatory_process, organization: organization) }
   let!(:config) { create(:awesome_config, organization: organization, var: :scoped_admin_styles, value: styles) }
   let(:config_helper) { create(:awesome_config, organization: organization, var: :scoped_admin_style_bar) }
-  let(:default_background_color) { "rgb(246, 246, 246)"}
+  let(:default_background_color) { "rgb(246, 246, 246)" }
   let(:styles) do
     {
       "bar" => "body {background: red;}"

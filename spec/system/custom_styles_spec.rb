@@ -8,7 +8,7 @@ describe "Custom styles", type: :system do
   let!(:participatory_process) { create :participatory_process, organization: organization }
   let!(:config) { create :awesome_config, organization: organization, var: :scoped_styles, value: styles }
   let(:config_helper) { create :awesome_config, organization: organization, var: :scoped_style_bar }
-  let(:default_background_color) { "rgb(250, 250, 250)"}
+  let(:default_background_color) { "rgb(250, 250, 250)" }
   let(:styles) do
     {
       "bar" => "body {background: red;}"
