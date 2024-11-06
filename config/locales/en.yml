@@ -65,8 +65,6 @@ en:
       organization:
         awesome_admins_available_authorizations: Allow admins to manually verify users
           with these authorizations
-      user:
-        user_time_zone: Personal timezone
   decidim:
     admin:
       filters:

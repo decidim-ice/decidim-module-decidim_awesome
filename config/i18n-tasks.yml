@@ -16,7 +16,6 @@ ignore_unused:
   - "decidim.admin.filters.search_placeholder.*"
   - "activemodel.attributes.constraint.*"
   - "activemodel.attributes.custom_redirect.*"
-  - "activemodel.attributes.user.*"
   -  activemodel.attributes.organization.awesome_admins_available_authorizations
   - "decidim.components.decidim_awesome.name"
   - "decidim.components.awesome_iframe.settings.*"

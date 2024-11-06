@@ -24,7 +24,7 @@ module Decidim
       end
 
       def javascript_config_vars
-        awesome_config.slice(:allow_images_in_proposals, :allow_images_in_editors, :allow_videos_in_editors, :auto_save_forms).to_json.html_safe
+        awesome_config.slice(:allow_images_in_proposals, :allow_images_in_small_editor, :allow_images_in_full_editor, :allow_images_in_markdown_editor, :use_markdown_editor, :auto_save_forms).to_json.html_safe
       end
 
       def show_public_intergram?
