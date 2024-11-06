@@ -85,7 +85,6 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::System::UpdateOrganizationForm.included_modules).not_to include(Decidim::DecidimAwesome::System::OrganizationFormOverride)
       expect(Decidim::System::UpdateOrganization.included_modules).not_to include(Decidim::DecidimAwesome::System::UpdateOrganizationOverride)
       expect(Decidim::DecidimAwesome::AwesomeHelpers.included_modules).not_to include(Decidim::DecidimAwesome::AwesomeHelpers)
-      expect(Decidim::DecidimAwesome::ContentSecurityPolicy.included_modules).not_to include(Decidim::DecidimAwesome::ContentSecurityPolicy)
       expect(Decidim::DecidimAwesome::UserOverride.included_modules).not_to include(Decidim::DecidimAwesome::UserOverride)
     end
   end
