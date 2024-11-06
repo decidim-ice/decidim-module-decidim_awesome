@@ -38,7 +38,7 @@ describe "Admin manages verification tweaks" do
     let!(:force_authorization_after_login) { create(:awesome_config, organization:, var: :force_authorization_after_login, value: %w(dummy_authorization_handler another_dummy_authorization_handler id_documents)) }
 
     it "allows to select all existing workflows" do
-      page.execute_script("document.getElementById('config_force_authorization_after_login').tomselect.setValue(['dummy_authorization_handler', 'id_documents'])")
+      page.execute_script("document.getElementById('config_force_authorization_after_login').tomselect.setValue(['dummy_authorization_handler'])")
 
       click_button "Update configuration"
 
