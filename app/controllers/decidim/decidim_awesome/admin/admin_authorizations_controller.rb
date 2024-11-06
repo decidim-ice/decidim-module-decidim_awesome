@@ -110,7 +110,7 @@ module Decidim
         end
 
         def handler_params
-          (params[:authorization_handler] || {}).merge(user: USER)
+          (params[:authorization_handler] || {}).merge(user: user)
         end
 
         def force_verification

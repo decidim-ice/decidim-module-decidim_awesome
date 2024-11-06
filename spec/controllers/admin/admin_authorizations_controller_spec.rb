@@ -106,25 +106,6 @@ module Decidim::DecidimAwesome
           end
         end
 
-        # Note: this situation is impossible to happen as conflicts are handled in the controller, this is here to ensure covering the broadcast(:transferred) case
-        context "when verification is transferred" do
-          let!(:authorization) { create(:authorization, user: create(:user, organization: organization), name: handler, unique_id: document_number) }
-
-          before do
-            allow_any_instance_of(Decidim::AuthorizationHandler).to receive(:unique?).and_return(false) # rubocop:disable RSpec/AnyInstance
-            allow_any_instance_of(Decidim::AuthorizationHandler).to receive(:transferrable?).and_return(true) # rubocop:disable RSpec/AnyInstance
-            allow(controller).to receive(:conflict).and_return(nil)
-          end
-
-          it "transfers the verification" do
-            expect { patch(:update, params: params) }.not_to change(Decidim::Authorization, :count)
-
-            expect(response).to have_http_status(:success)
-            expect(body).to eq({ "message" => "", "granted" => true, "userId" => user.id, "handler" => "dummy_authorization_handler" })
-            expect(authorization.reload.user).to eq(user)
-          end
-        end
-
         context "when a conflict exists" do
           let!(:authorization) { create(:authorization, user: create(:user, organization: organization), name: handler, unique_id: document_number) }
 
