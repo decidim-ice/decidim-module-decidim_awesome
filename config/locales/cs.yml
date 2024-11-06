@@ -9,6 +9,9 @@ cs:
         allow_images_in_proposals: Povolit obrázky v editoru návrhů
         allow_images_in_small_editor: Povolit obrázky v minimálním HTML editoru
         auto_save_forms: Automaticky ukládat formuláře v místním úložišti
+        force_authorization_after_login: Vynutit autorizaci po přihlášení/registraci
+        force_authorization_help_text: Text nápovědy pro autorizační stránku
+        force_authorization_with_any_method: Povolit přístup, pokud je udělen některou z autorizací (ve výchozím nastavení jsou vyžadovány vše)
         intergram_auto_no_response: Zpráva, která je odeslána jednu minutu poté, co uživatel odešle svou první zprávu a nebyla obdržena odpověď
         intergram_auto_response: Zpráva, která je odeslána okamžitě poté, co uživatel odešle svou první zprávu
         intergram_chat_id: ID Chatu
@@ -21,6 +24,7 @@ cs:
         intergram_use_floating_button: Je-li zaškrtnuto, uzavřený chat je vždy tlačítko místo textu
         proposal_custom_fields: 'Uživatelská pole #%{id}'
         proposal_private_custom_fields: Soukromá vlastní pole %{id}
+        scoped_admin_styles: Vlastní styly číslo %{id}
         scoped_admins: 'Skupina Škálovaní administrátoři #%{id}'
         scoped_styles: Vlastní styly číslo %{id}
         use_markdown_editor: Použít Markdown editor namísto HTML editoru
@@ -234,6 +238,8 @@ cs:
               allow_images_in_small_editor: Tímto se přidá ikona pro nahrávání obrázků ve všech editorech WYSIWYG s minimálními možnostmi v panelu nástrojů.
               auto_save_forms: Toto bude používat místní úložiště pro automatické ukládání dat zavedených uživateli do průzkumů a jiných formulářů během vyplňování. Data budou obnovena v budoucí návštěvě stejného prohlížeče v případě, že formulář nebude odeslán. Pokud je formulář odeslán, data budou odstraněna. Pokud uživatelé odstraní svá data z místního úložiště, data nebudou obnovena.
               drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
+              force_authorization_after_login: 'Pokud je povoleno, uživatelé budou po přihlášení nebo registraci přesměrováni na autorizační stránku, pokud nejsou uděleny některé z zadaných autorizací. To je užitečné, pokud chcete donutit uživatele k ověření pomocí specifické autorizace, než se budou moci vůbec přihlásit (např.: zabránit spamu).'
+              force_authorization_help_text: Přidejte vlastní text, který vysvětlí proč je potřeba autorizace. Také se ujistěte, že přidáte kontaktní metodu pro případ, že uživatelé potřebují pomoc.
               intergram_about: Intergram používá Telegram messenger pro zpracování widgetu live podpory v dolní části stránky.
               intergram_config: 'Pozvěte <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bota</a> do vaší skupiny nebo začněte chatovat přímo. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               original_editor_override: Od verze 0.26 je možné nahrávat obrázky do editorů (pouze pro administrátory). Proto zde nastavení obrázků ovlivňuje pouze veřejné editory (správce je bude mít vždy k dispozici).
@@ -246,6 +252,7 @@ cs:
                 %{warning}
                 Tento text lze přizpůsobit vlastním překladem pomocí klíče:
                 %{key}
+              scoped_admin_styles_warning: "<strong>Varování</strong>: Zde přidejte vlastní CSS které platí pouze v tomto administrátoru."
               scoped_admins: Povýšení běžného uživatele na administrátora, který může spravovat pouze určité části veřejného webu (k tomu použijte editor omezení). Všimněte si, že uživatelé, kteří již mají oprávnění běžného správce, budou ignorováni.
               scoped_styles: Vytvořte vlastní CSS aplikovaný pouze na určitých částech veřejného webu (použijte pro to editor omezení)
               scoped_styles_variables: 'Můžete použít následující CSS proměnné pro nastavené barvy organizace:'
@@ -256,6 +263,10 @@ cs:
               validate_title_max_caps_percent: Nula nedovolí žádné velké písmeno, 100 bude nutit psát vše velkými písmeny
               validate_title_max_marks_together: 'Omezit počet otazníků a vykřičníků, které lze psát dohromada. Např: Pokud je 2, pak ''!!!'' nebude v textu povoleno'
               validate_title_min_length: Název je vždy povinný a toto číslo nemůže být nulové
+              verifications_html: |
+                Zde můžete vylepšit proces ověřování.<br>
+                <b>POZNÁMKA:</b> Uvědomte si, že změna těchto nastavení může zabránit některým uživatelům v přístupu k platformě. Používejte to s opatrností!<br><br>
+                Také berte na vědomí, že tato nastavení jsou aplikována na všechny uživatele. Administrátoři však budou mít vždy přístup k administraci.
             validators:
               body: Ověření vstupu uživatele pro pole "tělo"
               title: Ověření uživatelem pro pole "Název"
@@ -269,6 +280,8 @@ cs:
             new: Přidat nové "soukromé vlastní pole"
             remove: Odstranit toto "ssoukromé vlastní pole"
             sure_to_remove: Opravdu chcete zničit toto soukromé pole?
+          form_scoped_admin_styles:
+            delete: Smazat
           form_scoped_admins:
             delete: Smazat
             new: Přidání nové skupiny "Škálovaní administrátoři"
@@ -295,6 +308,7 @@ cs:
             proposals: Návrhy hacků
             styles: Vlastní styly
             surveys: Průzkumy a formuláře
+            verifications: Ověřovací / Schvalovací hacky
           update:
             error: Chyba při aktualizaci konfigurace! %{error}
             success: Konfigurace byla úspěšně aktualizována
@@ -399,6 +413,7 @@ cs:
           proposals: Návrhy hacků
           styles: Vlastní styly
           surveys: Průzkumy a formuláře
+          verifications: Ověření
         menu_hacks:
           create:
             error: Chyba při vytváření položky menu! %{error}
@@ -446,6 +461,9 @@ cs:
           private_data_last_update: Tato data byla naposledy aktualizována před %{time_ago}.
           proposal_private_custom_fields: Soukromá pole
           remove_private_data: "👉 Možná je chcete odstranit"
+        scoped_styles:
+          menu:
+            title: Veřejný frontend
       admin_log:
         component:
           destroy_private_data: "%{user_name} zničil %{count} položky soukromých dat pro %{resource_name} v %{space_name}"
@@ -512,6 +530,18 @@ cs:
             view_meeting: Zobrazit schůzku
             view_proposal: Zobrazit návrh
       proposal_private_custom_fields_disclosure: Tyto informace nebudou publikovány
+      required_authorizations:
+        index:
+          cancel: Udělám to za chvíli, %{link}.
+          granted_title: Udělená ověření
+          logout: dovolte mi odhlásit se
+          missing_title: Zatím neověřeno
+          resume_title: Čeká se na ověření
+          resume_with_method: Pokračovat v ověřování pomocí %{name}
+          title: Ověřte svou totožnost
+          verify_with_method: Ověřit pomocí %{name}
+      session:
+        authorization_is_required: Chcete-li se zúčastnit této platformy, musíte svůj účet autorizovat s platnou autorizací (%{authorizations}).
       validators:
         too_much_caps: Používá příliš mnoho velkých písmen (více než %{percent}% textu)
       voting:
