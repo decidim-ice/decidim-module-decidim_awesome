@@ -15,7 +15,7 @@
         data[:dialog_open] = "awesome-verification-modal"
       end
     %>
-    <%= content_tag(auth[:managed] ? "button" : "div", class: classes, data:) do %>
+    <%= content_tag(auth[:managed] ? "button" : "div", class: classes, data: data) do %>
       <%= icon "check-line", class: "checked" %>
       <%= icon "time-line", class: "undeterminated" %>
       <%= icon "close-line", class: "unchecked" %>
