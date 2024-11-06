@@ -9,6 +9,9 @@ ja:
         allow_images_in_proposals: 提案エディターでの画像を許可する
         allow_images_in_small_editor: ミニマルHTMLエディターでの画像を許可する
         auto_save_forms: ローカルストレージにフォームを自動保存する
+        force_authorization_after_login: ログイン/登録後に本人確認を行わせる
+        force_authorization_help_text: 認証ページのヘルプテキスト
+        force_authorization_with_any_method: いずれかの認証が行われている場合、アクセスできます (デフォルトでは、すべてが必要です)
         intergram_auto_no_response: ユーザーが最初のメッセージを送信し、応答が受信されなかった後1分後に送信されたメッセージ
         intergram_auto_response: ユーザーが最初のメッセージを送信した直後に送信されるメッセージ
         intergram_chat_id: チャットID
@@ -21,6 +24,7 @@ ja:
         intergram_use_floating_button: チェックした場合、閉じたチャットは常にテキストの代わりにボタンになります
         proposal_custom_fields: 'カスタム項目 #%{id}'
         proposal_private_custom_fields: 非公開カスタムフィールド %{id}
+        scoped_admin_styles: カスタムスタイル %{id}
         scoped_admins: 'スコープ付き管理者グループ #%{id}'
         scoped_styles: 'カスタムスタイル #%{id}'
         use_markdown_editor: HTMLエディターの代わりにMarkdownエディターを使用する
@@ -234,6 +238,8 @@ ja:
               allow_images_in_small_editor: 最小オプションのWYSIWYGエディターに画像アップロードアイコンを追加します。
               auto_save_forms: 調査などのフォームにユーザーが入力したデータを、LocalStorageを使って自動的に保存します。フォームを送信されていない場合、同じブラウザーで次回アクセスした時に復元されます。フォームを送信すると、データは削除されます。ユーザーがLocalStrorageのデータを削除した場合にも、データは復元されなくなります。
               drag_and_drop_supported: 画像アップロード時にドラッグ&ドロップが利用できます。画像はサーバーにアップロードされ、外部リソースとして挿入されます(base64インラインエンコーディングは使用しません).
+              force_authorization_after_login: '有効にした場合、指定された認証が行われていなければ、ユーザーはログインまたは登録後に認証ページにリダイレクトされます。これはユーザーがログインする前に、特定の認証を使用してユーザーを強制的に本人確認させる場合(スパムを防ぐためなど) に便利です。'
+              force_authorization_help_text: 認証が必要な理由を説明するカスタムテキストを追加します。また、ユーザーがヘルプが必要な場合に備えて連絡方法を追加してください。
               intergram_about: IntergramはTelegramメッセンジャーを使用してページの下部に埋め込まれたライブサポートチャットウィジェットを処理します。
               intergram_config: '<a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> をグループに招待するか、直接チャットを開始します。 <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               original_editor_override: バージョン 0.26 以降、エディタに画像をアップロードすることが可能になりました(管理者専用)。 そのため、ここでの画像設定はパブリックエディタにのみ影響を与えます(管理者は常に利用可能です)。
@@ -246,6 +252,9 @@ ja:
                 %{warning}
                 このテキストは、下記のキーを使用してカスタム翻訳でカスタマイズできます：
                 %{key}
+              scoped_admin_styles: ここを隠すと管理者が使用できなくなる可能性があります。ご注意ください。
+              scoped_admin_styles_variables: '組織のカスタマイズ色には、以下の CSS 変数を使用できます。'
+              scoped_admin_styles_warning: "<strong>警告</strong>: ここでは、この管理者にのみ適用されるカスタム CSS を追加します。"
               scoped_admins: 一般ユーザーを公開ウェブの特定の部分だけを管理できる管理者に昇格させます(制限エディターを使用してください)。 すでに通常の管理者権限を持つユーザーは無視されることに注意してください。
               scoped_styles: 公開ウェブの特定の部分にのみ適用されるカスタムCSSを作成します (制限されたエディタを使用してください)
               scoped_styles_variables: '組織の色のカスタマイズには、以下のCSS変数が使用できます。'
@@ -256,6 +265,10 @@ ja:
               validate_title_max_caps_percent: ゼロの場合大文字を許可しません。100の場合すべてを大文字で書くことを強制します。
               validate_title_max_marks_together: '並べて入力できる「?」と「!」の数を制限します。 すなわち、それが2の場合、「!!!」はテキストに記入できません'
               validate_title_min_length: タイトルは常に必須です。この数字はゼロにはできません
+              verifications_html: |
+                認証プロセスにいくつかの調整を加えることができます。<br>
+                <b>注意：</b> これらの設定を変更すると、一部のユーザーがプラットフォームにアクセスできなくなる可能性があります。慎重に使用してください！<br><br>
+                また、これらの設定は全ユーザーに適用されますが、管理者は常に管理者バックエンドにアクセス可能です。
             validators:
               body: '「body」フィールドのユーザー入力検証'
               title: '「タイトル」フィールドのユーザー入力検証'
@@ -269,6 +282,11 @@ ja:
             new: 新しい「非公開カスタムフィールド」を追加
             remove: '「非公開カスタムフィールド」を削除'
             sure_to_remove: この非公開フィールドボックスを破棄してもよろしいですか？
+          form_scoped_admin_styles:
+            delete: 削除
+            new: 新しい「管理画面」CSSボックスを追加
+            remove: このCSSボックスを削除
+            sure_to_remove: このCSSボックスを削除してもよろしいですか？
           form_scoped_admins:
             delete: 削除
             new: 新しい「スコープ付き管理者」グループを追加
@@ -293,8 +311,11 @@ ja:
             proposal_custom_fields: '提案カスタムフィールド: 公開フィールド'
             proposal_private_custom_fields: '提案カスタムフィールド: 非公開フィールド'
             proposals: 提案の設定
+            scoped_admin_styles: 'カスタムスタイル: 管理画面'
+            scoped_styles: 'カスタムスタイル: 公開フロントエンド'
             styles: 独自スタイル
             surveys: 調査＆フォーム
+            verifications: 本人確認 / 認証の設定
           update:
             error: 設定更新エラー %{error}
             success: 設定は正常に更新されました
@@ -400,6 +421,7 @@ ja:
           proposals: 提案の設定
           styles: 独自スタイル
           surveys: 調査＆フォーム
+          verifications: 本人認証
         menu_hacks:
           create:
             error: メニュー項目作成エラー %{error}
@@ -447,6 +469,12 @@ ja:
           private_data_last_update: このデータは最後に更新されたのは %{time_ago} 前です。
           proposal_private_custom_fields: 非公開フィールド
           remove_private_data: "\U0001F449 削除することを検討してもよいでしょう"
+        scoped_admin_styles:
+          menu:
+            title: 管理画面
+        scoped_styles:
+          menu:
+            title: 公開フロントエンド
       admin_log:
         component:
           destroy_private_data: "%{user_name} は %{space_name} 内のプライベートデータの項目 %{resource_name} を%{count} 件破棄しました"
@@ -511,6 +539,20 @@ ja:
             view_meeting: ミーティングを表示
             view_proposal: 提案を表示
       proposal_private_custom_fields_disclosure: この情報は公開されません
+      required_authorizations:
+        index:
+          cancel: あとで %{link} を行う
+          granted_title: 許可された本人確認
+          logout: ログアウトする
+          missing_title: 未検証
+          resume_title: 本人確認処理中
+          resume_with_method: '%{name} で本人確認を再開'
+          title: 本人確認を行う
+          verify_with_all_these_options: 'プラットフォームにアクセスできるようにするには、以下すべての方法で本人確認を行ってください：'
+          verify_with_any_of_these_options: 'プラットフォームにアクセスする前に、これらの選択肢のうちいずれかを用いて本人確認を行ってください'
+          verify_with_method: '%{name} で本人確認する'
+      session:
+        authorization_is_required: このプラットフォームに参加するには、有効な認証 (%{authorizations}) でアカウントを承認する必要があります。
       validators:
         too_much_caps: 大文字が多すぎます（テキストの %{percent}%以上）
       voting:
