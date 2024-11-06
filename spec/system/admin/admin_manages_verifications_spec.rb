@@ -43,7 +43,7 @@ describe "Admin manages verification tweaks" do
       click_button "Update configuration"
 
       expect(page).to have_content("updated successfully")
-      expect(last_force_authorization_after_login.reload.value).to be_blank
+      expect(last_force_authorization_after_login.reload.value).to eq(%w(dummy_authorization_handler))
     end
   end
 end
