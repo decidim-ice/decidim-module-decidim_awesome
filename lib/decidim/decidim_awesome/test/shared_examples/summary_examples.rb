@@ -51,6 +51,14 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::Proposals::ProposalsController.included_modules).to include(Decidim::DecidimAwesome::Proposals::OrderableOverride)
       expect(Decidim::AdminLog::ComponentPresenter.included_modules).to include(Decidim::DecidimAwesome::AdminLog::ComponentPresenterOverride)
       expect(Decidim::ApplicationController.included_modules).to include(Decidim::DecidimAwesome::CheckLoginAuthorizations)
+      expect(Decidim::ApplicationController.included_modules).to include(Decidim::DecidimAwesome::UseUserTimeZone)
+      expect(Decidim::AccountForm.included_modules).to include(Decidim::DecidimAwesome::AccountFormOverride)
+      expect(Decidim::UpdateAccount.included_modules).to include(Decidim::DecidimAwesome::UpdateAccountOverride)
+      expect(Decidim::System::RegisterOrganizationForm.included_modules).to include(Decidim::DecidimAwesome::System::OrganizationFormOverride)
+      expect(Decidim::System::UpdateOrganizationForm.included_modules).to include(Decidim::DecidimAwesome::System::OrganizationFormOverride)
+      expect(Decidim::System::UpdateOrganization.included_modules).to include(Decidim::DecidimAwesome::System::UpdateOrganizationOverride)
+      expect(Decidim::System::RegisterOrganization.included_modules).to include(Decidim::DecidimAwesome::System::RegisterOrganizationOverride)
+      expect(Decidim::AdminLog::UserPresenter.included_modules).to include(Decidim::DecidimAwesome::AdminLog::UserPresenterOverride)
     end
 
   else
@@ -76,6 +84,15 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::Proposals::ProposalsController.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::OrderableOverride)
       expect(Decidim::AdminLog::ComponentPresenter.included_modules).not_to include(Decidim::DecidimAwesome::AdminLog::ComponentPresenterOverride)
       expect(Decidim::ApplicationController.included_modules).not_to include(Decidim::DecidimAwesome::CheckLoginAuthorizations)
+      expect(Decidim::ApplicationController.included_modules).not_to include(Decidim::DecidimAwesome::UseUserTimeZone)
+      expect(Decidim::AccountForm.included_modules).not_to include(Decidim::DecidimAwesome::AccountFormOverride)
+      expect(Decidim::UpdateAccount.included_modules).not_to include(Decidim::DecidimAwesome::UpdateAccountOverride)
+      expect(Decidim::System::RegisterOrganizationForm.included_modules).not_to include(Decidim::DecidimAwesome::System::OrganizationFormOverride)
+      expect(Decidim::System::UpdateOrganizationForm.included_modules).not_to include(Decidim::DecidimAwesome::System::OrganizationFormOverride)
+      expect(Decidim::System::UpdateOrganization.included_modules).not_to include(Decidim::DecidimAwesome::System::UpdateOrganizationOverride)
+      expect(Decidim::DecidimAwesome::AwesomeHelpers.included_modules).not_to include(Decidim::DecidimAwesome::AwesomeHelpers)
+      expect(Decidim::DecidimAwesome::ContentSecurityPolicy.included_modules).not_to include(Decidim::DecidimAwesome::ContentSecurityPolicy)
+      expect(Decidim::DecidimAwesome::UserOverride.included_modules).not_to include(Decidim::DecidimAwesome::UserOverride)
     end
   end
 end

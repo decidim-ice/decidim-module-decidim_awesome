@@ -22,7 +22,7 @@ describe "Admin accountability", type: :system do
   let(:external_moderator) { create(:user, organization: external_organization, created_at: user_creation_date) }
   let(:external_participatory_process) { create(:participatory_process, organization: external_organization) }
 
-  let(:status) { true }
+  let(:status) { [:admin_roles, :participatory_space_roles] }
 
   before do
     # rubocop:disable Rails/SkipsModelValidations:

@@ -24,7 +24,7 @@ module Decidim
       end
 
       def javascript_config_vars
-        awesome_config.except(:scoped_styles, :scoped_admin_styles, :proposal_custom_fields, :proposal_private_custom_fields, :scoped_admins).to_json.html_safe
+        awesome_config.slice(:allow_images_in_proposals, :allow_images_in_editors, :allow_videos_in_editors, :auto_save_forms).to_json.html_safe
       end
 
       def show_public_intergram?
@@ -75,6 +75,13 @@ module Decidim
         return nil unless component.settings.respond_to? :awesome_voting_manifest
 
         DecidimAwesome.voting_registry.find(component.settings.awesome_voting_manifest)
+      end
+
+      # Retrives all the "admins_available_authorizations" for the user along with other possible authorizations
+      # returns an instance of Decidim::DecidimAwesome::Authorizator
+      def awesome_authorizations_for(user)
+        @awesome_authorizations_for ||= {}
+        @awesome_authorizations_for[user.id] ||= Authorizator.new(user, awesome_config[:admins_available_authorizations])
       end
 
       def version_prefix
