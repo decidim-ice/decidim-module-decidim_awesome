@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "decidim/decidim_awesome/test/shared_examples/custom_styles_examples"
 
 describe "Custom styles", type: :system do
   let(:organization) { create :organization }
   let!(:participatory_process) { create :participatory_process, organization: organization }
   let!(:config) { create :awesome_config, organization: organization, var: :scoped_styles, value: styles }
   let(:config_helper) { create :awesome_config, organization: organization, var: :scoped_style_bar }
+  let(:default_background_color) { "rgb(250, 250, 250)"}
   let(:styles) do
     {
       "bar" => "body {background: red;}"
@@ -16,26 +18,6 @@ describe "Custom styles", type: :system do
   before do
     switch_to_host(organization.host)
     visit decidim.root_path
-  end
-
-  shared_examples "extra css is added" do
-    it "css is present" do
-      expect(page.body).to have_content("body {background: red;}")
-    end
-
-    it "css is applied" do
-      expect(page.execute_script("return window.getComputedStyle($('body')[0]).backgroundColor")).to eq("rgb(255, 0, 0)")
-    end
-  end
-
-  shared_examples "no extra css is added" do
-    it "css is no present" do
-      expect(page.body).not_to have_content("body {background: red;}")
-    end
-
-    it "css is not applyied" do
-      expect(page.execute_script("return window.getComputedStyle($('body')[0]).backgroundColor")).to eq("rgb(250, 250, 250)")
-    end
   end
 
   context "when there are custom styles" do

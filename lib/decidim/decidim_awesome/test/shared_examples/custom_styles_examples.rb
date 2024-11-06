@@ -134,3 +134,23 @@ shared_examples "removes a constraint" do
     expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: organization, var: "#{var_name}_bar").constraints).not_to be_present
   end
 end
+
+shared_examples "extra css is added" do
+  it "css is present" do
+    expect(page.body).to have_content("body {background: red;}")
+  end
+
+  it "css is applied" do
+    expect(page.execute_script("return window.getComputedStyle($('body')[0]).backgroundColor")).to eq("rgb(255, 0, 0)")
+  end
+end
+
+shared_examples "no extra css is added" do
+  it "css is no present" do
+    expect(page.body).not_to have_content("body {background: red;}")
+  end
+
+  it "css is not applyied" do
+    expect(page.execute_script("return window.getComputedStyle($('body')[0]).backgroundColor")).to eq(default_background_color)
+  end
+end
