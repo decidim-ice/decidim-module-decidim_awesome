@@ -8,6 +8,7 @@
 
     a {
       @apply text-sm font-normal;
+
       &:hover {
         @apply text-secondary underline;
       }
