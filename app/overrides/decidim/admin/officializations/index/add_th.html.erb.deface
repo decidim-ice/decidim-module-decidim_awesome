@@ -1,0 +1,5 @@
+<!-- insert_before "th:last" -->
+
+<% if awesome_config[:admins_available_authorizations] %>
+  <%= render "decidim/decidim_awesome/admin/officializations/participants_th" %>
+<% end %>

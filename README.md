@@ -410,6 +410,21 @@ Decidim::DecidimAwesome.configure do |config|
   config.force_authorization_allowed_controller_names = %w(account pages homepage)
 ```
 
+#### 21. Manual verifications
+
+The admin will be allowed to manually authorize users using the methods specified in the `/system` admin section.
+Currently, only form based handlers are supported (Direct methods). 
+Admins can manually override or verify users in the participants list but they still have to fulfill the requirements of the verifier (although they will be allowed to force the authorization even if some of them fails).
+
+Admin logs are also created in each action for accountability.
+
+System configuration:
+
+![System manual authorization config](examples/manual_verifications_system.png)
+![List of authorizations](examples/manual_verifications_1.png)
+![Removing an authorization](examples/manual_verifications_2.png)
+![Creating an authorization](examples/manual_verifications_3.png)
+
 #### To be continued...
 
 We're not done! Please check the [issues](/decidim-ice/decidim-module-decidim_awesome/issues) (and participate) to see what's on our mind

@@ -1,0 +1,5 @@
+<!-- insert_before "td.table-list__actions" -->
+
+<% if awesome_config[:admins_available_authorizations] %>
+  <%= render "decidim/decidim_awesome/admin/officializations/participants_td", user: %>
+<% end %>
