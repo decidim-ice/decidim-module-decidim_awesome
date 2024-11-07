@@ -20,10 +20,11 @@ ca:
         intergram_title_closed: Títol del xat quan està tancat
         intergram_title_open: Títol del xat quan està obert
         intergram_use_floating_button: Si està marcat, el xat tancat és sempre un botó en lloc d'un text
-        proposal_custom_fields: 'Camps personalitzats #%{id}'
-        proposal_private_custom_fields: 'Camps personalitzats #%{id}'
-        scoped_admins: 'Grup d''administradores acotades #%{id}'
-        scoped_styles: 'Personalització d''estils #%{id}'
+        proposal_custom_fields: Camps personalitzats %{id}
+        proposal_private_custom_fields: Camps personalitzats %{id}
+        scoped_admin_styles: Personalització d'estils %{id}
+        scoped_admins: Grup d'administradores acotades %{id}
+        scoped_styles: Personalització d'estils %{id}
         user_timezone: Permet als usuaris definir la seva zona horària en el seu perfil
         validate_body_max_caps_percent: Percentatge màxim de majúscules en el cos de la proposta
         validate_body_max_marks_together: Nombre màxim de símbols consecutius permesos al cos de la proposta
@@ -179,6 +180,10 @@ ca:
             collaborator: Col·laboradora
             moderator: Moderadora
             valuator: Avaluadora
+        admin_authorizations:
+          authorization:
+            destroy: Eliminar
+          authorization_destroyed: L'autorització s'ha eliminat correctament.
         checks:
           index:
             admin_head_tags: Etiquetes Awesome incloses a la capçalera de l'aplicació d'administració
@@ -253,6 +258,7 @@ ca:
                 %{warning}
                 Aquest text es pot personalitzar amb una traducció personalitzada utilitzant la clau:
                 %{key}
+              scoped_admin_styles_variables: 'Pots fer servir les següents variables CSS pels colors personalitzats de l''organització:'
               scoped_admins: Promou usuaries normals a administradores amb accés limitat a certes parts de la web pública (feu servir l'editor de restriccions per això). Noteu que afegir usuaries que ja tenen permisos d'administració no té cap efecte.
               scoped_styles: Crea CSS personalitzats que només s'apliquin a determinades parts de la web pública (per fer-ho, utilitza l'editor de restriccions)
               scoped_styles_variables: 'Pots fer servir les següents variables CSS pels colors personalitzats de l''organització:'
@@ -279,6 +285,10 @@ ca:
             delete: Esborra
             new: Afegiu una nova caixa de "camps personalitzats privats"
             remove: Elimina aquesta caixa de "camps personalitzats"
+            sure_to_remove: Segur que vols eliminar aquesta caixa de camps personalitzats?
+          form_scoped_admin_styles:
+            delete: Esborra
+            remove: Elimina aquesta caixa CSS
             sure_to_remove: Segur que vols eliminar aquesta caixa de camps personalitzats?
           form_scoped_admins:
             delete: Esborra
@@ -449,6 +459,10 @@ ca:
             error: 'Error en actualitzar l''ítem de menú: %{error}'
             success: Ítem de menú actualitzat correctament
           url_exists: Aquesta URL ha estat configurada en un altre ítem de menú, si us plau edita'l en comptes de crear-ne un de nou.
+        officializations:
+          authorizations: Autoritzacions
+          verification_modal:
+            close: Tanca
         proposal_custom_fields:
           menu:
             title: Camps públics
@@ -457,6 +471,12 @@ ca:
           private_data_last_update: Aquestes dades es van actualitzar per última vegada fa %{time_ago}.
           proposal_private_custom_fields: Camps privats
           remove_private_data: "👉 És possible que vulgueu eliminar-lo"
+        scoped_admin_styles:
+          menu:
+            title: Panell admin
+        scoped_styles:
+          menu:
+            title: Interfície pública
       admin_log:
         component:
           destroy_private_data: "%{user_name} ha destruït %{count} elements de dades privades per a %{resource_name} a %{space_name}"
