@@ -10,6 +10,7 @@ Features:
   - Added user time zones in account settings
   - Added custom styles for the admin panel
   - Added Verification tweaks
+  - Added Admin manual verifications
 
 v0.11.2
 -------
