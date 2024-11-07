@@ -49,24 +49,24 @@ describe "Managing the participants", type: :system do
 
     it "can authorize a participant" do
       within "tr", text: participant2.name do
-        within "button[data-verification-user-id=\"#{participant2.id}\"]" do
+        within "a[data-verification-user-id=\"#{participant2.id}\"]" do
           expect(page).to have_css("svg.unchecked")
         end
         click_on "Example authorization"
       end
 
-      within "#awesome-verification-modal-content" do
+      within "#awesome-verification-modal" do
         fill_in "Document number", with: "12345678"
         click_button "Authorize #{participant2.name} with Example authorization"
         expect(page).to have_content("#{participant2.name} could not be authorized with Example authorization")
         fill_in "Document number", with: "12345678X"
         click_button "Authorize #{participant2.name} with Example authorization"
         expect(page).to have_content("#{participant2.name} successfully authorized with Example authorization")
-        click_on "Close"
+        find(".close-button").click
       end
 
       within "tr", text: participant2.name do
-        within "button[data-verification-user-id=\"#{participant2.id}\"]" do
+        within "a[data-verification-user-id=\"#{participant2.id}\"]" do
           expect(page).to have_content("Example authorization")
           expect(page).to have_css("svg.checked")
         end
@@ -79,20 +79,20 @@ describe "Managing the participants", type: :system do
 
     it "can revoke an authorization" do
       within "tr", text: participant1.name do
-        within "button[data-verification-user-id=\"#{participant1.id}\"]" do
+        within "a[data-verification-user-id=\"#{participant1.id}\"]" do
           expect(page).to have_content("Example authorization")
           expect(page).to have_css("svg.checked")
         end
         click_on "Example authorization"
       end
 
-      within "#awesome-verification-modal-content" do
+      within "#awesome-verification-modal" do
         accept_confirm { click_on "Destroy" }
         expect(page).to have_content("Authorization successfully destroyed")
       end
 
       within "tr", text: participant1.name do
-        within "button[data-verification-user-id=\"#{participant1.id}\"]" do
+        within "a[data-verification-user-id=\"#{participant1.id}\"]" do
           expect(page).to have_content("Example authorization")
           expect(page).to have_css("svg.unchecked")
         end
@@ -102,24 +102,24 @@ describe "Managing the participants", type: :system do
 
     it "can force an authorization" do
       within "tr", text: participant2.name do
-        within "button[data-verification-user-id=\"#{participant2.id}\"]" do
+        within "a[data-verification-user-id=\"#{participant2.id}\"]" do
           expect(page).to have_css("svg.unchecked")
         end
         click_on "Example authorization"
       end
 
-      within "#awesome-verification-modal-content" do
+      within "#awesome-verification-modal" do
         fill_in "Document number", with: "12345678"
         click_button "Authorize #{participant2.name} with Example authorization"
         check "Force verification with the current data"
         fill_in "Give a reason to force the verification:", with: "Because I can"
         click_button "Authorize #{participant2.name} with Example authorization"
         expect(page).to have_content("#{participant2.name} successfully authorized with Example authorization")
-        click_on "Close"
+        find(".close-button").click
       end
 
       within "tr", text: participant2.name do
-        within "button[data-verification-user-id=\"#{participant2.id}\"]" do
+        within "a[data-verification-user-id=\"#{participant2.id}\"]" do
           expect(page).to have_content("Example authorization")
           expect(page).to have_css("svg.checked")
         end
@@ -136,22 +136,22 @@ describe "Managing the participants", type: :system do
 
       it "cannot force an authorization" do
         within "tr", text: participant2.name do
-          within "button[data-verification-user-id=\"#{participant2.id}\"]" do
+          within "a[data-verification-user-id=\"#{participant2.id}\"]" do
             expect(page).to have_css("svg.unchecked")
           end
           click_on "Example authorization"
         end
 
-        within "#awesome-verification-modal-content" do
+        within "#awesome-verification-modal" do
           fill_in "Document number", with: "12345678"
           click_button "Authorize #{participant2.name} with Example authorization"
           expect(page).to have_content("There is a conflict with an existing authorization")
           expect(page).not_to have_content("Authorize")
-          click_on "Close"
+          find(".close-button").click
         end
 
         within "tr", text: participant2.name do
-          within "button[data-verification-user-id=\"#{participant2.id}\"]" do
+          within "a[data-verification-user-id=\"#{participant2.id}\"]" do
             expect(page).to have_content("Example authorization")
             expect(page).to have_css("svg.unchecked")
           end
