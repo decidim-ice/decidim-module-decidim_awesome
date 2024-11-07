@@ -28,7 +28,7 @@ describe "System admin manages awesome verifications", type: :system do
     end
     click_on "Create organization & invite admin"
 
-    within ".flash__message" do
+    within ".flash" do
       expect(page).to have_content("Organization successfully created.")
       expect(page).to have_content("mayor@example.org")
     end
@@ -55,7 +55,7 @@ describe "System admin manages awesome verifications", type: :system do
       end
       click_on "Save"
 
-      within ".flash__message" do
+      within ".flash" do
         expect(page).to have_content("Organization successfully updated.")
       end
       expect(page).to have_content("Citizen Corp")
