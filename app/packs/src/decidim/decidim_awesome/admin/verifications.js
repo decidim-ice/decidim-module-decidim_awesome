@@ -3,15 +3,12 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!dialog) {
     return;
   }
-  const title = dialog.querySelector("[data-dialog-title]");
   const content = dialog.querySelector("[data-dialog-content]");
 
   dialog.addEventListener("open.dialog", async (el) => {
     const modal = window.Decidim.currentDialogs[el.target.id];
     const button = modal.openingTrigger;
     const url = button.dataset.verificationUrl;
-    const user = button.dataset.verificationUser;
-    title.innerText = title.innerText.replace("{{user}}", user);
     content.innerHTML = '<br><br><span class="loading-spinner"></span>';
     // console.log("open.dialog", el, "content", content, "button", button, "url", url);
     fetch(url).then((res) => res.text()).then((html) => {
@@ -34,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const forceVerification = content.querySelector("#force_verification");
     
       if (forceVerificationCheck) {
-        console.log(forceVerificationCheck);
         forceVerificationCheck.addEventListener("change", function() {
           forceVerification.disabled = !forceVerification.disabled;
           if (forceVerificationCheck.checked) {
