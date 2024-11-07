@@ -22,10 +22,11 @@ es:
         intergram_title_closed: Título del chat cerrado
         intergram_title_open: Título del chat abierto
         intergram_use_floating_button: Si está marcado, el chat cerrado siempre es un botón en lugar de un texto
-        proposal_custom_fields: 'Campos personalizados #%{id}'
-        proposal_private_custom_fields: 'Campos personalizados #%{id}'
+        proposal_custom_fields: Campos personalizados %{id}
+        proposal_private_custom_fields: Campos personalizados %{id}
+        scoped_admin_styles: Estilos personalizados %{id}
         scoped_admins: 'Grupo de administradoras acotadas #%{id}'
-        scoped_styles: 'Estilos personalizados #%{id}'
+        scoped_styles: Estilos personalizados %{id}
         use_markdown_editor: Utilizar el editor Markdown en lugar del editor HTML
         validate_body_max_caps_percent: Porcentaje máximo permitido de letras mayúsculas para el cuerpo
         validate_body_max_marks_together: Máximo número de símbolos consecutivos permitidos en el cuerpo
@@ -175,6 +176,9 @@ es:
             collaborator: Colaborador/a
             moderator: Moderadora
             valuator: Evaluador/a
+        admin_authorizations:
+          authorization:
+            destroy: Eliminar
         checks:
           index:
             admin_head_tags: Etiquetas Awesome incluidas en el encabezado de la aplicación de administración
@@ -278,6 +282,10 @@ es:
             new: Añadir una nueva caja de "campos personalizados"
             remove: Eliminar esta caja de "campos personalizados"
             sure_to_remove: '¿Seguro de que quieres eliminar esta caja de campos personalizados?'
+          form_scoped_admin_styles:
+            delete: Eliminar
+            remove: Eliminar esta caja CSS
+            sure_to_remove: '¿Estás segura de que quieres eliminar esta caja CSS?'
           form_scoped_admins:
             delete: Eliminar
             new: Añadir un nuevo grupo de "Administradoras acotadas"
@@ -302,6 +310,7 @@ es:
             proposal_custom_fields: 'Campos personalizados de propuestas: campos públicos'
             proposal_private_custom_fields: 'Campos personalizados de propuestas: Campos privados'
             proposals: Modificaciones a las propuestas
+            scoped_admin_styles: 'Estilos personalizados: Panel de administración'
             styles: Estilos personalizados
             surveys: Encuestas y formularios
             verifications: Verificaciones / Hacks de autorización
@@ -449,6 +458,10 @@ es:
             error: 'Error al actualizar el ítem de menú: %{error}'
             success: Ítem de menú actualizado correctamente
           url_exists: Esta URL ya ha sido configurada en otro ítem de menú, por favor edítalo en lugar de crear uno nuevo.
+        officializations:
+          authorizations: Autorizaciones
+          verification_modal:
+            close: Cerrar
         proposal_custom_fields:
           menu:
             title: Campos públicos
@@ -457,6 +470,12 @@ es:
           private_data_last_update: Estos datos fueron actualizados hace %{time_ago}.
           proposal_private_custom_fields: Campos privados
           remove_private_data: "👉 Es posible que quieras eliminarlo"
+        scoped_admin_styles:
+          menu:
+            title: Panel admin
+        scoped_styles:
+          menu:
+            title: Interfaz pública
       admin_log:
         component:
           destroy_private_data: "%{user_name} ha destruido %{count} elementos de datos privados para %{resource_name} en %{space_name}"
