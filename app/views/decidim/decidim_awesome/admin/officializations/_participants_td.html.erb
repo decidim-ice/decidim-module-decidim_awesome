@@ -1,0 +1,25 @@
+<td class="awesome_participants-td">
+  <% awesome_authorizations_for(user).authorizations.each do |auth| %>
+    <%
+      data = {
+        verification_user: user.name,
+        verification_user_id: user.id,
+        verification_handler: auth[:name],
+        verification_url: decidim_admin_decidim_awesome.edit_admin_authorization_path(id: user.id, handler: auth[:name])
+      }
+      classes = []
+      classes << "granted" if auth[:granted]
+      classes << "pending" if auth[:pending]
+      if auth[:managed]
+        classes << "managed"
+        # data[:open] = "awesome-verification-modal"
+      end
+    %>
+    <%= content_tag(auth[:managed] ? "a" : "div", class: classes, href: "#", data: data) do %>
+      <%= icon "lock-locked", class: "checked" %>
+      <%= icon "reload", class: "undeterminated" %>
+      <%= icon "lock-unlocked", class: "unchecked" %>
+      <%= auth[:fullname] %>
+    <% end %>
+  <% end %>
+</td>

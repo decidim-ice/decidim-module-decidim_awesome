@@ -4,7 +4,8 @@
   <% if config_enabled? :force_authorization_after_login %>
     <div>
         <%= form.select :force_authorization_after_login, available_authorizations.map {|workflow| [workflow.fullname, workflow.name]}, { include_blank: false }, { multiple: true } %>
-        <p class="help-text"><%= t("help.force_authorization_after_login", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+
+        <p class="help-text" style="margin-top:1rem"><%= t("help.force_authorization_after_login", scope: "decidim.decidim_awesome.admin.config.form") %></p>
 
         <%= form.check_box :force_authorization_with_any_method %>
 

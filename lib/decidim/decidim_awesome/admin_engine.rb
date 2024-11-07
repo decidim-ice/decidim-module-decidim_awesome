@@ -30,6 +30,7 @@ module Decidim
           delete :destroy_private_data, on: :member
           get :checks, on: :collection, to: "checks#index"
         end
+        resources :admin_authorizations, only: [:edit, :update, :destroy]
         post :migrate_images, to: "checks#migrate_images"
         root to: "config#show"
       end

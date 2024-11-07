@@ -1,0 +1,91 @@
+.table-list .awesome_participants {
+  &-th:not(:first-child) {
+    @apply text-left pl-3;
+  }
+
+  &-td:not(:first-child) {
+    text-align: left;
+
+    a {
+      line-height: 1;
+      margin-bottom: .25em;
+      display: block;
+
+      &:hover {
+        color: $secondary;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+
+    > * {
+      color: #aaa;
+
+      &.managed {
+        color: #202734;
+      }
+
+      .checked {
+        display: none;
+      }
+
+      .undeterminated {
+        display: none;
+      }
+
+      .unchecked {
+        // color: $alert;
+      }
+
+      &.granted {
+        .checked {
+          color: $success;
+          display: inline;
+        }
+
+        .undeterminated {
+          display: none;
+        }
+
+        .unchecked {
+          display: none;
+        }
+      }
+
+      &.pending {
+        .checked {
+          display: none;
+        }
+
+        .undeterminated {
+          display: inline;
+          color: $warning;
+        }
+
+        .unchecked {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.awesome_participants-modal {
+  background-color: #fff;
+
+  .card--list__item {
+    .button {
+      margin-right: 1rem;
+      margin-top: 1rem;
+    }
+  }
+
+  .card--list__small {
+    margin: 0 1rem 1rem;
+    font-size: 80%;
+
+    p {
+      margin: 0;
+    }
+  }
+}

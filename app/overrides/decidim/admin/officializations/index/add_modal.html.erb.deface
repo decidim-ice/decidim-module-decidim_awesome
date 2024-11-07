@@ -1,0 +1,3 @@
+<!-- insert_after "erb[loud]:contains('show_email_modal')" -->
+
+<%= render "decidim/decidim_awesome/admin/officializations/verification_modal" %>

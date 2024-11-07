@@ -1,0 +1,21 @@
+<h4><%= t("decidim.decidim_awesome.required_authorizations.index.granted_title") %></h4>
+
+<div class="card card--list">
+  <div class="card--list__item">
+    <%= icon "lock-locked", class: "card--list__icon" %>
+
+    <div class="card--list__text">
+      <h5 class="card--list__heading"><%= workflow.fullname %></h5>
+    </div>
+
+    <%= link_to decidim_admin_decidim_awesome.admin_authorization_path(id: user.id, handler: authorization.name), method: :delete, remote: true, class: "button button__lg button__primary", data: { confirm: t(".confirm_destroy") }  do %>
+      <%= icon "trash" %>
+      <%= t(".destroy") %>
+    <% end %>
+  </div>
+
+  <div class="card--list__small">
+    <p><%= t(".granted_at", date: l(authorization.granted_at, format: :long)) %></p>
+    <p><%= t(".metadata", metadata: content_tag("strong", t("booleans.#{authorization.metadata.present?}"))).html_safe %></p>
+  </div>
+</div>

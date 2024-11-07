@@ -1,0 +1,14 @@
+  <div class="reveal__header">
+    <h3 class="reveal__title">
+      <%= t("decidim.decidim_awesome.admin.officializations.verification_modal.authorizations_for", user: user.name) %>
+    </h3>
+
+    <button class="close-button" data-close aria-label="<%= t("decidim.decidim_awesome.admin.officializations.verification_modal.close") %>"
+      type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="row reveal__content">
+    <%= yield %>
+  </div>

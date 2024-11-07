@@ -1,6 +1,17 @@
 CHANGELOG
 =========
 
+v0.10.4
+------
+
+Compatibility:
+  - Decidim >= v0.27.4
+
+Features:
+  - Added custom styles for the admin panel
+  - Added Verification tweaks
+  - Added Admin manual verifications
+
 v0.10.3
 ------
 

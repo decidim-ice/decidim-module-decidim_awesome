@@ -1,0 +1,5 @@
+<%= field_set_tag f.label(:awesome_admins_available_authorizations, nil, for: nil), class: "border-2 border-background p-4"  do %>
+  <%= f.collection_check_boxes :awesome_admins_available_authorizations, Decidim.authorization_handlers, :name, :description, help_text: t("decidim.decidim_awesome.system.organizations.admin_allowed_authoritzations_help_html") do |builder|
+    builder.label(for: nil, class: "form__wrapper-checkbox-label") { builder.check_box(id: nil) + builder.text }
+  end %>
+<% end %>

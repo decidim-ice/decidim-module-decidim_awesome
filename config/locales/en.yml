@@ -62,6 +62,9 @@ en:
         target: Opens in
         url: URL
         visibility: Visibility
+      organization:
+        awesome_admins_available_authorizations: Allow admins to manually verify users
+          with these authorizations
   decidim:
     admin:
       filters:
@@ -203,6 +206,34 @@ en:
             collaborator: Collaborator
             moderator: Moderator
             valuator: Valuator
+        admin_authorizations:
+          authorization:
+            confirm_destroy: Are you sure you want to destroy this authorization?
+              This might affect the user's access to the platform.
+            destroy: Destroy
+            granted_at: Granted at %{date}
+            metadata: Contains metadata? %{metadata}
+          authorization_destroyed: Authorization successfully destroyed.
+          authorization_not_destroyed: Authorization could not be destroyed!
+          authorization_transferred: 'Warning: There was verification conflict and
+            the verification has been transferred to %{user}'
+          conflict: There is a conflict with an existing authorization
+          conflict_help_html: "You must solve the conflict with the user %{user} before
+            you can authorize the user with this authorization.\n<br><br>\nA verfication
+            conflict happens when another user has the same data as the user you are
+            trying to authorize. \nYou can solve this conflict by removing the conflicting
+            authorization from the other user or using different data for this user.\n"
+          edit:
+            authorize: Authorize %{user} with %{name}
+            do_it_if_sure: Do this only if you are sure that the user has this authorization.
+            force_verification: Force verification with the current data
+            force_verification_help: Verification has failed, but you can force it
+              if you are sure the user has this authorization.
+            force_verification_reason: 'Give a reason to force the verification:'
+            warning: 'Warning: By forcing this authorization, you are overriding the
+              user''s current authorization status.'
+          user_authorized: "%{user} successfully authorized with %{name}"
+          user_not_authorized: "%{user} could not be authorized with %{name}"
         checks:
           index:
             admin_head_tags: Awesome tags included in the admin application header
@@ -554,6 +585,11 @@ en:
             success: Menu item updated successfully
           url_exists: The same URL is already configured, please edit that instead
             of creating it again.
+        officializations:
+          authorizations: Authorizations
+          verification_modal:
+            authorizations_for: Authorizations for %{user}
+            close: Close
         proposal_custom_fields:
           menu:
             title: Public fields
@@ -572,6 +608,13 @@ en:
         component:
           destroy_private_data: "%{user_name} destroyed %{count} items of private
             data for %{resource_name} in %{space_name}"
+        user:
+          admin_creates_authorization: "%{user_name} verified %{resource_name} with
+            %{handler_name}"
+          admin_destroys_authorization: "%{user_name} destroyed the verification %{handler_name}
+            on %{resource_name}"
+          admin_forces_authorization: "%{user_name} forced the verification %{handler_name}
+            on %{resource_name}. Reason: %{reason}"
       amendments:
         modal:
           current_amendment_html: <p>You can <a href="%{amendment_link}">access the
@@ -660,6 +703,12 @@ en:
       session:
         authorization_is_required: In order to participate in this platform, you need
           to authorize your account with a valid authorization (%{authorizations}).
+      system:
+        organizations:
+          admin_allowed_authoritzations_help_html: |
+            Admins will be able to manually verify users with these authorizations.
+            <br>Use this feature with caution, as it can lead to security issues.
+          awesome_tweaks: Decidim Awesome Tweaks
       validators:
         too_much_caps: Is using too many capital letters (over %{percent}% of the
           text)

@@ -33,6 +33,7 @@ describe Decidim::DecidimAwesome do
   let!(:allow_images_in_markdown_editor) { create(:awesome_config, organization: organization, var: :allow_images_in_markdown_editor, value: true) }
   let!(:auto_save_forms) { create(:awesome_config, organization: organization, var: :auto_save_forms, value: true) }
   let!(:force_authorization_after_login) { create(:awesome_config, organization: organization, var: :force_authorization_after_login, value: [:dummy_authorization_handler]) }
+  let!(:admins_available_authorizations) { create(:awesome_config, organization: organization, var: :admins_available_authorizations, value: [:dummy_authorization_handler]) }
   let!(:intergram_for_admins) { create(:awesome_config, organization: organization, var: :intergram_for_admins, value: true) }
   let!(:intergram_for_public) { create(:awesome_config, organization: organization, var: :intergram_for_public, value: true) }
   let!(:intergram_public_settings) { create(:awesome_config, organization: organization, var: :intergram_for_public_settings, value: intergram) }

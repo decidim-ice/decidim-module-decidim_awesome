@@ -19,7 +19,7 @@
               <span class="label <%= k %> constraint-<%= val %>"><%= translate_constraint_value constraint, k %></span>
             <% end %>
           <% end %>
-          <button id="<%= "edit-#{key}-#{constraint.id}" %>" type="button" name="button" class="edit-condition" data-dialog-open="<%= "edit-modal-#{key}" %>" data-constraints-url="<%= constraint_path(id: constraint.id, key: key) %>">
+          <button id="<%= "edit-#{key}-#{constraint.id}" %>" type="button" name="button" class="edit-condition" data-open="<%= "edit-modal-#{key}" %>" data-constraints-url="<%= constraint_path(id: constraint.id, key: key) %>">
             <%= t ".edit" %>
           </button>
 

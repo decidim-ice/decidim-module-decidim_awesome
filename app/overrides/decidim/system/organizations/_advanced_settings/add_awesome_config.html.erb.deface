@@ -1,0 +1,9 @@
+<!-- insert_top '.collapsible.hide' -->
+
+<% if Decidim::DecidimAwesome.enabled?(:admins_available_authorizations) %>
+  <div class="awesome_available_authorizations fieldset">
+    <h3><%= t "decidim.decidim_awesome.system.organizations.awesome_tweaks" %></h3>
+
+    <%= render partial: "decidim/decidim_awesome/system/organizations/admin_allowed_authorizations", locals: { f: f } %>
+  </div>
+<% end %>
