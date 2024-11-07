@@ -80,7 +80,7 @@ module Decidim
         end
 
         def json_error(exception)
-          render json: render_to_string("callout", locals: { message: exception.message, klass: "alert" }), status: :unprocessable_entity
+          render plain: render_to_string("callout", locals: { message: exception.message, klass: "alert" }), status: :unprocessable_entity
         end
 
         def user
