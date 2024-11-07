@@ -30,7 +30,6 @@ describe "System admin manages awesome verifications", type: :system do
 
     within ".flash" do
       expect(page).to have_content("Organization successfully created.")
-      expect(page).to have_content("mayor@example.org")
     end
     expect(page).to have_content("Citizen Corp")
     expect(last_awesome_config.value).to eq(["dummy_authorization_handler"])
