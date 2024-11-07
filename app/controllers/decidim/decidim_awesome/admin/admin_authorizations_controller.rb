@@ -6,7 +6,7 @@ module Decidim
       class AdminAuthorizationsController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
 
-        layout false
+        layout "layouts/decidim/decidim_awesome/admin/admin_authorizations"
         helper_method :user, :authorization, :workflow, :handler, :conflict
         # overwrite original rescue_from to ensure we print messages from ajax methods
         rescue_from Decidim::ActionForbidden, with: :json_error
@@ -23,16 +23,16 @@ module Decidim
           if conflict
             message = render_to_string("conflict")
           else
-            message = render_to_string(partial: "callout", locals: { i18n_key: "user_authorized", klass: "success" })
+            message = render_to_string("callout", locals: { i18n_key: "user_authorized", klass: "success" })
             Decidim::Verifications::AuthorizeUser.call(handler, current_organization) do
               on(:transferred) do |transfer|
-                message += render_to_string(partial: "callout", locals: { i18n_key: "authorization_transferred", klass: "success" }) if transfer.records.any?
+                message += render_to_string("callout", locals: { i18n_key: "authorization_transferred", klass: "success" }) if transfer.records.any?
               end
               on(:invalid) do
                 if force_verification.present?
                   create_forced_authorization
                 else
-                  message = render_to_string(partial: "callout", locals: { i18n_key: "user_not_authorized", klass: "alert" })
+                  message = render_to_string("callout", locals: { i18n_key: "user_not_authorized", klass: "alert" })
                   message += render_to_string("edit", locals: { with_override: true })
                 end
               end
@@ -52,9 +52,9 @@ module Decidim
 
         def destroy
           message = if destroy_authorization
-                      render_to_string(partial: "callout", locals: { i18n_key: "authorization_destroyed", klass: "success" })
+                      render_to_string("callout", locals: { i18n_key: "authorization_destroyed", klass: "success" })
                     else
-                      render_to_string(partial: "callout", locals: { i18n_key: "authorization_not_destroyed", klass: "alert" })
+                      render_to_string("callout", locals: { i18n_key: "authorization_not_destroyed", klass: "alert" })
                     end
 
           render json: {

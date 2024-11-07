@@ -1,44 +1,38 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const dialog = document.getElementById("awesome-verification-modal");
-  if (!dialog) {
-    return;
-  }
-  const title = dialog.querySelector("[data-dialog-title]");
-  const content = dialog.querySelector("[data-dialog-content]");
+import DataPicker from "src/decidim/data_picker"
 
-  dialog.addEventListener("open.dialog", async (el) => {
-    const modal = window.Decidim.currentDialogs[el.target.id];
-    const button = modal.openingTrigger;
-    const url = button.dataset.verificationUrl;
-    const user = button.dataset.verificationUser;
-    title.innerText = title.innerText.replace("{{user}}", user);
-    content.innerHTML = '<br><br><span class="loading-spinner"></span>';
-    // console.log("open.dialog", el, "content", content, "button", button, "url", url);
+$(() => {
+  const $modal = $("#awesome-verification-modal");
+  $(".awesome_participants-td a.managed[data-verification-handler]").on("click", function(evt) {
+    evt.preventDefault();
+    $("#awesome-verification-modal").foundation("open");
+    
+    const $button = $(evt.target);
+    const url = $button.data("verificationUrl");
+    // console.log("button", $button, "modal", $modal, "url", url, "user", user);
     fetch(url).then((res) => res.text()).then((html) => {
-      content.innerHTML = html;
+      $modal.html(html);  
+      $modal.data("datapicker", new DataPicker($modal.find(".data-picker")));
     });
   });
-  
-  
-  document.body.addEventListener("ajax:complete", (responseText) => {
+
+  $(document).on("ajax:complete", (responseText) => {
     const response = JSON.parse(responseText.detail[0].response)
-    const button = document.querySelector(`[data-verification-handler="${response.handler}"][data-verification-user-id="${response.userId}"]`);
-    // console.log("ajax:complete", responseText, "response", response, "button", button);
-    content.innerHTML = response.message;
+    const $button = $(`[data-verification-handler="${response.handler}"][data-verification-user-id="${response.userId}"]`);
+    console.log("ajax:complete", responseText, "response", response, "button", $button);
+    $modal.html(response.message);
 
     if (response.granted) {
-      button.classList.add("granted");
+      $button.addClass("granted");
     } else {
-      button.classList.remove("granted");
-      const forceVerificationCheck = content.querySelector("#force_verification_check");
-      const forceVerification = content.querySelector("#force_verification");
-    
-      if (forceVerificationCheck) {
-        console.log(forceVerificationCheck);
-        forceVerificationCheck.addEventListener("change", function() {
-          forceVerification.disabled = !forceVerification.disabled;
-          if (forceVerificationCheck.checked) {
-            forceVerification.focus()
+      $button.removeClass("granted");
+      const $forceVerificationCheck = $modal.find("#force_verification_check");
+      const $forceVerification = $modal.find("#force_verification");
+
+      if ($forceVerificationCheck.length) {
+        $forceVerificationCheck.on("change", function() {
+          $forceVerification.prop("disabled", !$forceVerification.prop("disabled"));
+          if ($forceVerificationCheck.is(":checked")) {
+            $forceVerification.focus();
           }
         });
       }

@@ -10,6 +10,7 @@ import "src/decidim/decidim_awesome/editors/tabs_focus"
 import "src/decidim/decidim_awesome/admin/codemirror"
 import "src/decidim/decidim_awesome/admin/check_redirections"
 import "src/decidim/decidim_awesome/admin/verification_selects"
+import "src/decidim/decidim_awesome/admin/verifications"
 
 import {destroyQuillEditor, createQuillEditor, createMarkdownEditor} from "src/decidim/decidim_awesome/editors/editor"
 

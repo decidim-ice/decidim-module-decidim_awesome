@@ -4,58 +4,66 @@
   }
 
   &-td:not(:first-child) {
-    @apply text-left;
+    text-align: left;
 
-    button {
+    a {
+      line-height: 1;
+      margin-bottom: .25em;
+      display: block;
+
       &:hover {
-        @apply text-secondary underline;
+        color: $secondary;
+        text-decoration: underline;
+        cursor: pointer;
       }
     }
 
     > * {
-      @apply text-gray;
+      color: #aaa;
 
       &.managed {
-        @apply text-gray-2;
+        color: #202734;
       }
 
       .checked {
-        @apply hidden;
+        display: none;
       }
 
       .undeterminated {
-        @apply hidden;
+        display: none;
       }
 
       .unchecked {
-        @apply text-alert;
+        // color: $alert;
       }
 
       &.granted {
         .checked {
-          @apply text-success inline;
+          color: $success;
+          display: inline;
         }
 
         .undeterminated {
-          @apply hidden;
+          display: none;
         }
 
         .unchecked {
-          @apply hidden;
+          display: none;
         }
       }
 
       &.pending {
         .checked {
-          @apply hidden;
+          display: none;
         }
 
         .undeterminated {
-          @apply text-warning inline;
+          display: inline;
+          color: $warning;
         }
 
         .unchecked {
-          @apply hidden;
+          display: none;
         }
       }
     }
@@ -63,35 +71,21 @@
 }
 
 .awesome_participants-modal {
-  h4 {
-    @apply text-xl block my-8;
+  background-color: #fff;
+
+  .card--list__item {
+    .button {
+      margin-right: 1rem;
+      margin-top: 1rem;
+    }
   }
 
-  .verification {
-    @apply flex items-center justify-between gap-4 border-[3px] border-background rounded px-4 py-4 mt-4;
+  .card--list__small {
+    margin: 0 1rem 1rem;
+    font-size: 80%;
 
-    &__container {
-      @apply space-y-8;
-
-      &-title {
-        @apply uppercase font-semibold text-gray-2 mb-8 mt-16 first:mt-0;
-      }
-    }
-
-    &__icon {
-      @apply flex-none w-8 h-8 text-gray fill-current;
-
-      &.is-granted {
-        @apply text-success;
-      }
-    }
-
-    &__text {
-      @apply grow space-y-2.5;
-
-      span {
-        @apply inline-block text-sm text-gray-2;
-      }
+    p {
+      margin: 0;
     }
   }
 }

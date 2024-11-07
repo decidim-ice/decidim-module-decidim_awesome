@@ -1,4 +1,4 @@
-<div class="form-defaults">
+<div class="form">
   <%= decidim_form_for(handler,
                       builder: Decidim::AuthorizationFormBuilder,
                       as: "authorization_handler",
@@ -6,7 +6,7 @@
                       method: :patch,
                       remote: true) do |form| %>
     <% if lookup_context.exists?(handler.to_partial_path, [], true) %>
-      <%= render partial: handler.to_partial_path, locals: { handler:, form: } %>
+      <%= render partial: handler.to_partial_path, locals: { handler: handler, form: form } %>
     <% else %>
       <div class="form__wrapper">
         <%= form.all_fields %>
@@ -31,9 +31,9 @@
       <%= cell("decidim/announcement", { title: t(".warning"), body: t(".do_it_if_sure") }, callout_class: "warning") %>
     <% end %>
 
-    <div class="text-center mt-8">
+    <div class="text-center">
       <button type="submit" class="button button__lg button__primary">
-          <%= icon "alert-line", class: "fill-current" %>
+          <%= icon "warning", class: "fill-current" %>
           <span><%= t(".authorize", name: workflow.fullname, user: user.name) %></span>
       </button>
     </div>
