@@ -7,7 +7,7 @@
     @apply text-left;
 
     a {
-      @apply text-sm font-normal;
+      @apply text-sm font-normal block;
 
       &:hover {
         @apply text-secondary underline;
