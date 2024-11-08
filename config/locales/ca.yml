@@ -256,7 +256,9 @@ ca:
                 %{warning}
                 Aquest text es pot personalitzar amb una traducció personalitzada utilitzant la clau:
                 %{key}
+              scoped_admin_styles: Tingues en compte que amagar contingut aquí pot deixar l'administrador inservible. Si us plau, actueu amb cautela.
               scoped_admin_styles_variables: 'Pots fer servir les següents variables CSS pels colors personalitzats de l''organització:'
+              scoped_admin_styles_warning: "<strong>Atenció</strong>: Aquí podeu afegir CSS que s'aplica només en aquest administrador."
               scoped_admins: Promou usuaries normals a administradores amb accés limitat a certes parts de la web pública (feu servir l'editor de restriccions per això). Noteu que afegir usuaries que ja tenen permisos d'administració no té cap efecte.
               scoped_styles: Crea CSS personalitzats que només s'apliquin a determinades parts de la web pública (per fer-ho, utilitza l'editor de restriccions)
               scoped_styles_variables: 'Pots fer servir les següents variables CSS pels colors personalitzats de l''organització:'
@@ -286,6 +288,7 @@ ca:
             sure_to_remove: Segur que vols eliminar aquesta caixa de camps personalitzats?
           form_scoped_admin_styles:
             delete: Esborra
+            new: Afegeix una nova caixa CSS
             remove: Elimina aquesta caixa CSS
             sure_to_remove: Segur que vols eliminar aquesta caixa de camps personalitzats?
           form_scoped_admins:
@@ -312,6 +315,8 @@ ca:
             proposal_custom_fields: 'Camps personalitzats per propostes: Camps públics'
             proposal_private_custom_fields: 'Camps personalitzats per propostes: Camps privats'
             proposals: Modificacions a propostes
+            scoped_admin_styles: 'Estils personalitzats: Panell d''administració'
+            scoped_styles: 'Estils personalitzats: Interfície pública'
             styles: Estils personalitzats
             surveys: Formularis i enquestes
             verifications: Verificacions / Hacks d'autorització
@@ -462,6 +467,7 @@ ca:
         officializations:
           authorizations: Autoritzacions
           verification_modal:
+            authorizations_for: Autoritzacions per a %{user}
             close: Tanca
         proposal_custom_fields:
           menu:
@@ -557,6 +563,9 @@ ca:
           verify_with_method: Verificar amb %{name}
       session:
         authorization_is_required: Per participar en aquesta plataforma, cal que autoritzeu el vostre compte amb una autorització vàlida (%{authorizations}).
+      system:
+        organizations:
+          awesome_tweaks: Configuracions del Decidim Awesome
       validators:
         too_much_caps: Fa servir massa lletres majúscules (més %{percent}% del text)
       voting:
