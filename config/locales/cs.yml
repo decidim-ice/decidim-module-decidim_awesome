@@ -178,6 +178,23 @@ cs:
             collaborator: Spolupracovník
             moderator: Moderátor
             valuator: Hodnotitel
+        admin_authorizations:
+          authorization:
+            confirm_destroy: Opravdu chcete zničit tuto autorizaci? To může ovlivnit přístup uživatele k platformě.
+            destroy: Zničit
+            granted_at: Uděleno v %{date}
+            metadata: Obsahuje metadata? %{metadata}
+          authorization_destroyed: Autorizace byla úspěšně zničena.
+          authorization_not_destroyed: Autorizaci nelze zničit!
+          authorization_transferred: 'Varování: Došlo k ověřovacímu konfliktu a ověření bylo převedeno na %{user}'
+          conflict: Existuje konflikt s existující autorizací
+          conflict_help_html: "Musíte vyřešit konflikt s uživatelem %{user} předtím, než budete moci autorizovat uživatele s touto autorizací.\n<br><br>\nKonflikt ověření se stane, když jiný uživatel má stejná data jako uživatel, který se pokoušíte autorizovat \nTento konflikt můžete vyřešit odstraněním konfliktní autorizace od jiného uživatele nebo použitím jiných dat tohoto uživatele.\n"
+          edit:
+            authorize: Autorizovat %{user} s %{name}
+            do_it_if_sure: Udělejte to pouze v případě, že jste si jisti, že uživatel má tuto autorizaci.
+            force_verification: Vynutit ověření s aktuálními údaji
+            force_verification_help: Ověření se nezdařilo, ale pokud jste si jisti, že uživatel má tuto autorizaci, můžete ho vynutit.
+            force_verification_reason: 'Uveďte důvod pro vynucení ověření:'
         checks:
           index:
             admin_head_tags: Úžasné tagy zahrnuté v hlavičce administrace aplikace
@@ -284,6 +301,8 @@ cs:
             sure_to_remove: Opravdu chcete zničit toto soukromé pole?
           form_scoped_admin_styles:
             delete: Smazat
+            remove: Odstranit tento CSS box
+            sure_to_remove: Opravdu chcete zničit tento CSS box?
           form_scoped_admins:
             delete: Smazat
             new: Přidání nové skupiny "Škálovaní administrátoři"
@@ -308,6 +327,8 @@ cs:
             proposal_custom_fields: 'Vlastní pole návrhů: veřejná pole'
             proposal_private_custom_fields: 'Vlastní pole návrhů: Soukromá pole'
             proposals: Návrhy hacků
+            scoped_admin_styles: 'Vlastní styly: Panel administrace'
+            scoped_styles: 'Vlastní styly: Veřejné strany'
             styles: Vlastní styly
             surveys: Průzkumy a formuláře
             verifications: Ověřovací / Schvalovací hacky
@@ -455,6 +476,11 @@ cs:
             error: Chyba při aktualizaci položky menu! %{error}
             success: Položka menu byla úspěšne aktualizována
           url_exists: Stejná adresa URL je již nakonfigurována, prosím upravte ji místo jejího vytvoření.
+        officializations:
+          authorizations: Autorizace
+          verification_modal:
+            authorizations_for: Autorizace pro %{user}
+            close: Zavřít
         proposal_custom_fields:
           menu:
             title: Veřejná pole
@@ -463,6 +489,9 @@ cs:
           private_data_last_update: Tato data byla naposledy aktualizována před %{time_ago}.
           proposal_private_custom_fields: Soukromá pole
           remove_private_data: "👉 Možná je chcete odstranit"
+        scoped_admin_styles:
+          menu:
+            title: Panel administrace
         scoped_styles:
           menu:
             title: Veřejný frontend
