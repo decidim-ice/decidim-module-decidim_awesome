@@ -51,6 +51,8 @@ cs:
         target: Otevře se v
         url: URL
         visibility: Viditelnost
+      organization:
+        awesome_admins_available_authorizations: Povolit správcům ručně ověřit uživatele s těmito autorizacemi
       user:
         user_time_zone: Osobní časové pásmo
   decidim:
