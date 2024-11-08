@@ -192,6 +192,16 @@ ja:
           authorization_not_destroyed: 認証を破壊できませんでした
           authorization_transferred: '警告：検証が競合していたため、検証は %{user} に転送されました'
           conflict: 既存の認証との競合があります
+          conflict_help_html: "この認証を行う前に、ユーザー%{user} との競合を解決する必要があります。\n <br><br>\n検証の競合は、別のユーザーが認証しようとしているユーザーと同じデータを持っている場合に発生します。\nこの競合は、他のユーザーから競合している認証を削除するか、このユーザーに対して異なるデータを使用することで解決できます。\n"
+          edit:
+            authorize: '%{user} を %{name} で本人確認'
+            do_it_if_sure: ユーザーがこの権限を持っていると確認されている場合のみこれを行ってください
+            force_verification: 現在のデータで強制的に検証する
+            force_verification_help: 検証に失敗しましたが、ユーザーがこの認証を取得していることを確認している場合は強制できます。
+            force_verification_reason: '検証を強制する理由を教えてください:'
+            warning: '警告: この認証を強制することで、ユーザーの現在の認証ステータスを上書きします。'
+          user_authorized: "%{user} が %{name} で本人確認されました"
+          user_not_authorized: "%{user} は %{name} で本人確認されていません"
         checks:
           index:
             admin_head_tags: 管理者向けアプリケーションヘッダーに含まれる Awesome tags
@@ -474,7 +484,9 @@ ja:
             success: メニュー項目は正常に更新されました
           url_exists: 同じURLがすでに設定されています。もう一度作成し直す前に、内容を修正してください。
         officializations:
+          authorizations: 認証
           verification_modal:
+            authorizations_for: '%{user} の本人確認'
             close: 閉じる
         proposal_custom_fields:
           menu:
@@ -493,6 +505,10 @@ ja:
       admin_log:
         component:
           destroy_private_data: "%{user_name} は %{space_name} 内のプライベートデータの項目 %{resource_name} を%{count} 件破棄しました"
+        user:
+          admin_creates_authorization: "%{user_name} が %{resource_name} を %{handler_name} で検証しました"
+          admin_destroys_authorization: "%{user_name} が %{handler_name} の検証 %{resource_name} を破棄しました"
+          admin_forces_authorization: "%{user_name} は、 %{resource_name} について %{handler_name} による検証を強制しました。理由: %{reason}"
       amendments:
         modal:
           amendment_exists: 修正は既に存在します
@@ -571,6 +587,9 @@ ja:
         authorization_is_required: このプラットフォームに参加するには、有効な認証 (%{authorizations}) でアカウントを承認する必要があります。
       system:
         organizations:
+          admin_allowed_authoritzations_help_html: |
+            管理者はこれらの認証を使用してユーザーを手動で検証できます。
+            <br>セキュリティ上の問題につながる可能性があるため、この機能は注意して使用してください。
           awesome_tweaks: Decidim Awesome Tweaks
       validators:
         too_much_caps: 大文字が多すぎます（テキストの %{percent}%以上）
