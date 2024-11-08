@@ -109,7 +109,6 @@ nl:
               scoped_styles_variables: 'Je kunt de volgende CSS variabelen gebruiken voor de organisatie op maat gemaakte kleuren:'
               use_markdown_editor: Dit vervangt de Quill WYSIWYG editor, gebruik in plaats daarvan een Markdown editor. Tekst zal worden weergegeven als HTML in de openbare pagina's (tekst in de database zal worden opgeslagen als markdown tekst)
           form_scoped_styles:
-            new: Voeg een nieuwe CSS-box toe
             remove: Verwijder dit CSS-vak
             sure_to_remove: Weet je zeker dat je dit CSS-vak wilt verwijderen?
           rich_text_editor_in_public_views: 'Let op: "rich text editor voor deelnemers" is ingeschakeld, deze optie is niet van toepassing. Gebruik de editors hacks om afbeeldingen in voorstellen in te schakelen.'

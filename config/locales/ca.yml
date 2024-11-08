@@ -3,12 +3,15 @@ ca:
   activemodel:
     attributes:
       config:
-        additional_proposal_sortings: Activa opcions d'ordenació addicionals
+        additional_proposal_sortings: Activar opcions d'ordenació addicionals
         allow_images_in_full_editor: Permet imatges a l'editor HTML complet
         allow_images_in_markdown_editor: Permet imatges a l'editor Markdown
         allow_images_in_proposals: Permet imatges a l'editor de propostes
         allow_images_in_small_editor: Permet imatge a l'editor HTML reduït
         auto_save_forms: Desa automàticament els formularis a l'emmagatzematge local
+        force_authorization_after_login: Forçar autorització després d'iniciat sessió/registre
+        force_authorization_help_text: Text d'ajuda per la pàgina d'autorització
+        force_authorization_with_any_method: Permetre l'accés si es concedeix alguna de les autoritzacions (per defecte, totes són necessàries)
         intergram_auto_no_response: Un missatge que s'envia un minut després que la usuària hagi enviat el seu primer missatge i no s'hagi rebut cap resposta
         intergram_auto_response: Un missatge que s'envia immediatament després que la usuària enviï el seu primer missatge
         intergram_chat_id: ID de xat
@@ -19,10 +22,11 @@ ca:
         intergram_title_closed: Títol del xat quan està tancat
         intergram_title_open: Títol del xat quan està obert
         intergram_use_floating_button: Si està marcat, el xat tancat és sempre un botó en lloc d'un text
-        proposal_custom_fields: 'Camps personalitzats #%{id}'
-        proposal_private_custom_fields: 'Camps personalitzats #%{id}'
-        scoped_admins: 'Grup d''administradores acotades #%{id}'
-        scoped_styles: 'Personalització d''estils #%{id}'
+        proposal_custom_fields: Camps personalitzats %{id}
+        proposal_private_custom_fields: Camps personalitzats %{id}
+        scoped_admin_styles: Personalització d'estils %{id}
+        scoped_admins: Grup d'administradores acotades %{id}
+        scoped_styles: Personalització d'estils %{id}
         use_markdown_editor: Fes servir l'editor Markdown en comptes de l'editor HTML
         validate_body_max_caps_percent: Percentatge màxim de majúscules en el cos de la proposta
         validate_body_max_marks_together: Nombre màxim de símbols consecutius permesos al cos de la proposta
@@ -172,6 +176,10 @@ ca:
             collaborator: Col·laboradora
             moderator: Moderadora
             valuator: Avaluadora
+        admin_authorizations:
+          authorization:
+            destroy: Eliminar
+          authorization_destroyed: L'autorització s'ha eliminat correctament.
         checks:
           index:
             admin_head_tags: Etiquetes Awesome incloses a la capçalera de l'aplicació d'administració
@@ -234,6 +242,8 @@ ca:
               allow_images_in_small_editor: Això afegirà un botó per pujar imatges a l'editor HTML mínim.
               auto_save_forms: Això farà servir l'emmagatzematge local del navegador per desar automàticament les dades introduïdes pels usuaris a les enquestes i altres formularis mentre les omplen. Les dades es restauraran en una futura visita amb el mateix navegador en cas que no s'enviï el formulari. Si s’envia el formulari, s’eliminaran les dades locals. Si els usuaris eliminen les seves dades del navegador, tampoc es restauraran.
               drag_and_drop_supported: Quan es pugin imatges, es pot fer a través del mètode de "arrossegar i deixar anar". Les imatges seran pujades al servidor i inserides com recursos externs (no es fa servir codificació en línia base64).
+              force_authorization_after_login: 'Si està habilitat, les usuàries seran redireccionades a la pàgina d''autorització després de l''inici de sessió o registre si algunes de les autoritzacions especificades no són concedides. Això és útil si voleu forçar les usuàries a que es verifiquin a través d''una autorització específica abans que puguin iniciar sessió en qualsevol moment (per exemple: per prevenir spam).'
+              force_authorization_help_text: Afegeix un text personalitzat per explicar per què cal l'autorització. Assegureu-vos també d'afegir un mode de contacte en cas que les usuàries necessitin ajuda.
               intergram_about: Intergram utilitza el Telegram Messenger per gestionar un widget de xat en viu de suport incrustat a la part inferior de la pàgina.
               intergram_config: 'Convida a la <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> al teu grup o comença un xat amb ella directament. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               original_editor_override: Desde la versió 0.26, és possible (per administradors només) pujar imatges als editors de text enriquit. Per tant, les opcions d'imatges disponibles en aquesta pàgina només afecten a la part pública de la web (les administradores sempre ho tenen activat).
@@ -246,6 +256,7 @@ ca:
                 %{warning}
                 Aquest text es pot personalitzar amb una traducció personalitzada utilitzant la clau:
                 %{key}
+              scoped_admin_styles_variables: 'Pots fer servir les següents variables CSS pels colors personalitzats de l''organització:'
               scoped_admins: Promou usuaries normals a administradores amb accés limitat a certes parts de la web pública (feu servir l'editor de restriccions per això). Noteu que afegir usuaries que ja tenen permisos d'administració no té cap efecte.
               scoped_styles: Crea CSS personalitzats que només s'apliquin a determinades parts de la web pública (per fer-ho, utilitza l'editor de restriccions)
               scoped_styles_variables: 'Pots fer servir les següents variables CSS pels colors personalitzats de l''organització:'
@@ -256,6 +267,10 @@ ca:
               validate_title_max_caps_percent: Zero no permetrà cap majúscula, 100 obligarà a escriure-ho tot en majúscules
               validate_title_max_marks_together: 'Limiteu el nombre de signes d''interrogació i d''exclamació que es poden escriure junts. És a dir: si és 2, aleshores ''!!!'' no es permetrà al text'
               validate_title_min_length: El títol sempre és obligatori i aquest número no pot ser zero
+              verifications_html: |
+                Aquí pots fer alguns ajustaments en el procés de verificació.<br>
+                <b>NOTA:</b> Tingues en compte que canviar aquests paràmetres pot impedir que algunes usuàries accedeixin a la plataforma. Fes-ho servir amb precaució!<br><br>
+                Tingues en compte també, que aquests paràmetres s'apliquen a totes les usuàries. Les administradores sempre tindran accés al tauler dadministració.
             validators:
               body: Validacions d'entrada per l'usuari en el camp cos de la proposta
               title: Validacions d'entrada per l'usuari en el camp títol de la proposta
@@ -268,6 +283,10 @@ ca:
             delete: Esborra
             new: Afegiu una nova caixa de "camps personalitzats privats"
             remove: Elimina aquesta caixa de "camps personalitzats"
+            sure_to_remove: Segur que vols eliminar aquesta caixa de camps personalitzats?
+          form_scoped_admin_styles:
+            delete: Esborra
+            remove: Elimina aquesta caixa CSS
             sure_to_remove: Segur que vols eliminar aquesta caixa de camps personalitzats?
           form_scoped_admins:
             delete: Esborra
@@ -295,6 +314,7 @@ ca:
             proposals: Modificacions a propostes
             styles: Estils personalitzats
             surveys: Formularis i enquestes
+            verifications: Verificacions / Hacks d'autorització
           update:
             error: Error actualitzant la configuració! %{error}
             success: Configuració actualitzada correctament
@@ -399,6 +419,7 @@ ca:
           proposals: Modificacions a propostes
           styles: Estils personalitzats
           surveys: Formularis i enquestes
+          verifications: Verificacions
         menu_hacks:
           create:
             error: 'Error en crear un nou ítem de menú: %{error}'
@@ -438,6 +459,10 @@ ca:
             error: 'Error en actualitzar l''ítem de menú: %{error}'
             success: Ítem de menú actualitzat correctament
           url_exists: Aquesta URL ha estat configurada en un altre ítem de menú, si us plau edita'l en comptes de crear-ne un de nou.
+        officializations:
+          authorizations: Autoritzacions
+          verification_modal:
+            close: Tanca
         proposal_custom_fields:
           menu:
             title: Camps públics
@@ -446,6 +471,12 @@ ca:
           private_data_last_update: Aquestes dades es van actualitzar per última vegada fa %{time_ago}.
           proposal_private_custom_fields: Camps privats
           remove_private_data: "👉 És possible que vulgueu eliminar-lo"
+        scoped_admin_styles:
+          menu:
+            title: Panell admin
+        scoped_styles:
+          menu:
+            title: Interfície pública
       admin_log:
         component:
           destroy_private_data: "%{user_name} ha destruït %{count} elements de dades privades per a %{resource_name} a %{space_name}"
@@ -512,6 +543,20 @@ ca:
             view_meeting: Veure trobada
             view_proposal: Veure proposta
       proposal_private_custom_fields_disclosure: Aquesta informació no es publicarà
+      required_authorizations:
+        index:
+          cancel: Això ho faré en un altre moment, %{link}.
+          granted_title: Verificacions concedides
+          logout: deixa'm tancar la sessió
+          missing_title: No verificada encara
+          resume_title: Verificacions pendents
+          resume_with_method: Reprendre la verificació amb %{name}
+          title: Verifica la teva identitat
+          verify_with_all_these_options: 'Si us plau, verifica''t amb tots aquests mètodes abans de poder accedir a la plataforma:'
+          verify_with_any_of_these_options: 'Si us plau, verifica''t com a mínim amb un d''aquests mètodes abans de poder accedir a la plataforma:'
+          verify_with_method: Verificar amb %{name}
+      session:
+        authorization_is_required: Per participar en aquesta plataforma, cal que autoritzeu el vostre compte amb una autorització vàlida (%{authorizations}).
       validators:
         too_much_caps: Fa servir massa lletres majúscules (més %{percent}% del text)
       voting:

@@ -21,6 +21,7 @@ fr:
         intergram_use_floating_button: Si coché, la conversation fermée est toujours un bouton au lieu d'un texte
         proposal_custom_fields: Champs personnalisés %{id}
         proposal_private_custom_fields: Champs privés personnalisés %{id}
+        scoped_admin_styles: Style personnalisés %{id}
         scoped_admins: Groupe d'administrateurs restreints %{id}
         scoped_styles: Style personnalisés %{id}
         use_markdown_editor: Utiliser un éditeur Markdown au lieu de l'éditeur HTML
@@ -246,6 +247,7 @@ fr:
                 %{warning}
                 Ce texte peut être personnalisé avec une traduction personnalisée en utilisant la clé:
                 %{key}
+              scoped_admin_styles_variables: 'Vous pouvez utiliser les variables CSS suivantes pour les couleurs personnalisées de l''organisation :'
               scoped_admins: Promouvoir les utilisateurs réguliers en administrateurs qui ne peuvent administrer que certaines parties de la plateforme (utilisez l'éditeur de restrictions pour cela). Notez que les utilisateurs qui ont déjà les permissions d'administration habituelles seront ignorés.
               scoped_styles: Créer un CSS personnalisé qui s'applique uniquement à certaines parties du site web public (front-end) (utilisez l'éditeur de restrictions pour cela)
               scoped_styles_variables: 'Vous pouvez utiliser les variables CSS suivantes pour les couleurs personnalisées de l''organisation :'
@@ -269,6 +271,11 @@ fr:
             new: Ajouter une nouvelle section de champs personnalisés
             remove: Supprimer cette boîte de champs personnalisés
             sure_to_remove: Êtes-vous sûr de vouloir supprimer ce champ ?
+          form_scoped_admin_styles:
+            delete: Supprimer
+            new: Ajouter un nouveau bloc CSS "tableau de bord admin"
+            remove: Supprimer ce bloc CSS
+            sure_to_remove: Êtes-vous sûr de vouloir supprimer ce bloc CSS ?
           form_scoped_admins:
             delete: Supprimer
             new: Ajouter un nouveau groupe "Administrateurs de secteur"
@@ -276,7 +283,7 @@ fr:
             sure_to_remove: Êtes-vous sûr de vouloir détruire ce groupe « Administrateurs de secteur »?
           form_scoped_styles:
             delete: Supprimer
-            new: Ajouter une nouvelle boîte CSS
+            new: Ajouter un nouveau bloc CSS "interface publique"
             remove: Supprimer cette boîte CSS
             sure_to_remove: Etes-vous sûr de vouloir supprimer cette boîte CSS ?
           none: "⛔ Jamais! - Désactive toute autre contrainte"
@@ -293,6 +300,8 @@ fr:
             proposal_custom_fields: 'Champs personnalisés de propositions : champs publics'
             proposal_private_custom_fields: 'Champs personnalisés de propositions : champs privés'
             proposals: Hacks pour les propositions
+            scoped_admin_styles: 'Styles personnalisés : Tableau de bord admin'
+            scoped_styles: 'Styles personnalisés : Interface publique'
             styles: Styles personnalisés
             surveys: Enquêtes et formulaires
           update:
@@ -446,6 +455,12 @@ fr:
           private_data_last_update: Ces données ont été mises à jour il y a %{time_ago}.
           proposal_private_custom_fields: Champs privés
           remove_private_data: "👉 Vous pouvez le supprimer"
+        scoped_admin_styles:
+          menu:
+            title: Tableau de bord admin
+        scoped_styles:
+          menu:
+            title: Interface publique
       admin_log:
         component:
           destroy_private_data: "%{user_name} a détruit les objets %{count} de données privées pour %{resource_name} dans %{space_name}"

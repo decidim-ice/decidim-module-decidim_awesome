@@ -9,6 +9,9 @@ es:
         allow_images_in_proposals: Permitir imágenes en el editor de propuestas
         allow_images_in_small_editor: Permitir imágenes en el editor HTML reducido
         auto_save_forms: Guardar automáticamente los formularios en el almacenamiento local
+        force_authorization_after_login: Forzar autorización después de iniciar sesión/registro
+        force_authorization_help_text: Texto de ayuda para la página de autorización
+        force_authorization_with_any_method: Permitir el acceso si se concede alguna de las autorizaciones (por defecto, todas son necesarias)
         intergram_auto_no_response: Un mensaje que se envía un minuto después de que la usuaria haya enviado su primer mensaje y no se haya recibido respuesta
         intergram_auto_response: Un mensaje que se envía inmediatamente después de que la usuaria envíe su primer mensaje
         intergram_chat_id: ID de chat
@@ -19,10 +22,11 @@ es:
         intergram_title_closed: Título del chat cerrado
         intergram_title_open: Título del chat abierto
         intergram_use_floating_button: Si está marcado, el chat cerrado siempre es un botón en lugar de un texto
-        proposal_custom_fields: 'Campos personalizados #%{id}'
-        proposal_private_custom_fields: 'Campos personalizados #%{id}'
+        proposal_custom_fields: Campos personalizados %{id}
+        proposal_private_custom_fields: Campos personalizados %{id}
+        scoped_admin_styles: Estilos personalizados %{id}
         scoped_admins: 'Grupo de administradoras acotadas #%{id}'
-        scoped_styles: 'Estilos personalizados #%{id}'
+        scoped_styles: Estilos personalizados %{id}
         use_markdown_editor: Utilizar el editor Markdown en lugar del editor HTML
         validate_body_max_caps_percent: Porcentaje máximo permitido de letras mayúsculas para el cuerpo
         validate_body_max_marks_together: Máximo número de símbolos consecutivos permitidos en el cuerpo
@@ -172,6 +176,9 @@ es:
             collaborator: Colaborador/a
             moderator: Moderadora
             valuator: Evaluador/a
+        admin_authorizations:
+          authorization:
+            destroy: Eliminar
         checks:
           index:
             admin_head_tags: Etiquetas Awesome incluidas en el encabezado de la aplicación de administración
@@ -234,6 +241,8 @@ es:
               allow_images_in_small_editor: Esto añadirá un botón para subir imágenes en el editor HTML mínimo.
               auto_save_forms: Esto usará el almacenamiento local del navegador para guardar automáticamente los datos introducidos por las usuarias en las encuestas y otros formularios mientras los rellenen. Si no se ha mandado el formulario, los datos se restaurarán en la siguiente visita con el mismo navegador. Los datos se eliminarán una vez se envíe el formulario. Si las usuarias eliminan sus datos del navegador, estos tampoco se restaurarán.
               drag_and_drop_supported: Cuando se suban imágenes, se puede hacer a través del método "arrastrar & soltar". Las imágenes se subirán en el servidor y se insertarán como recursos externos (no se utiliza codificación en línea base64).
+              force_authorization_after_login: 'Si está habilitado, las usuarias serán redireccionados a la página de autorización después del inicio de sesión o registro si algunas de las autorizaciones especificadas no son concedidas. Esto es útil si desea forzar a las usuarias a que se verifiquen a través de una autorización específica antes de que puedan iniciar sesión en cualquier momento (por ejemplo: para prevenir spam).'
+              force_authorization_help_text: Añade un texto personalizado para explicar por qué es necesaria la autorización. Asegúrate también de añadir un modo de contacto en caso de que las usuarias necesiten ayuda.
               intergram_about: Intergram utiliza el Telegram Messenger para gestionar un widget de chat de soporte incrustado en la parte inferior de la página.
               intergram_config: 'Invita a la <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> a tu grupo o inicia un chat con ella directamente. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               original_editor_override: Desde la versión 0.26, es posible (sólo para administradoras) subir imágenes en los editores. Por lo tanto, las opciones de configuración para imágenes aquí sólo afecta a los editores públicos (las administradoras siempre lo tendrán activado).
@@ -256,6 +265,10 @@ es:
               validate_title_max_caps_percent: Cero no permitirá ninguna letra mayúscula, 100 forzará a escribir todo en mayúsculas
               validate_title_max_marks_together: 'Limitar el número de símbolos de preguntas y exclamaciones que se pueden escribir juntos. Es decir, si es 2, entonces ''!!!'' no estará permitido en el texto'
               validate_title_min_length: El título siempre es obligatorio y este número no puede ser cero
+              verifications_html: |
+                Aquí puedes realizar algunos ajustes en el proceso de verificación.<br>
+                <b>NOTA:</b> Ten en cuenta que cambiar estos ajustes puede impedir que algunas usuarias accedan a la plataforma. ¡Utilízalo con precaución!<br><br>
+                Ten en cuenta también, que estos ajustes se aplican a todas las usuarias. Las administradoras siempre tendrán acceso al tablero de administración.
             validators:
               body: Validaciones de entrada de usuario para el campo "cuerpo"
               title: Validaciones de entrada de usuario para el campo "título"
@@ -269,6 +282,10 @@ es:
             new: Añadir una nueva caja de "campos personalizados"
             remove: Eliminar esta caja de "campos personalizados"
             sure_to_remove: '¿Seguro de que quieres eliminar esta caja de campos personalizados?'
+          form_scoped_admin_styles:
+            delete: Eliminar
+            remove: Eliminar esta caja CSS
+            sure_to_remove: '¿Estás segura de que quieres eliminar esta caja CSS?'
           form_scoped_admins:
             delete: Eliminar
             new: Añadir un nuevo grupo de "Administradoras acotadas"
@@ -293,8 +310,10 @@ es:
             proposal_custom_fields: 'Campos personalizados de propuestas: campos públicos'
             proposal_private_custom_fields: 'Campos personalizados de propuestas: Campos privados'
             proposals: Modificaciones a las propuestas
+            scoped_admin_styles: 'Estilos personalizados: Panel de administración'
             styles: Estilos personalizados
             surveys: Encuestas y formularios
+            verifications: Verificaciones / Hacks de autorización
           update:
             error: '¡Error actualizando la configuración! %{error}'
             success: Configuración actualizada correctamente
@@ -399,6 +418,7 @@ es:
           proposals: Modificaciones a las propuestas
           styles: Estilos personalizados
           surveys: Encuestas y formularios
+          verifications: Verificaciones
         menu_hacks:
           create:
             error: 'Error al crear nuevo ítem de menú: %{error}'
@@ -438,6 +458,10 @@ es:
             error: 'Error al actualizar el ítem de menú: %{error}'
             success: Ítem de menú actualizado correctamente
           url_exists: Esta URL ya ha sido configurada en otro ítem de menú, por favor edítalo en lugar de crear uno nuevo.
+        officializations:
+          authorizations: Autorizaciones
+          verification_modal:
+            close: Cerrar
         proposal_custom_fields:
           menu:
             title: Campos públicos
@@ -446,6 +470,12 @@ es:
           private_data_last_update: Estos datos fueron actualizados hace %{time_ago}.
           proposal_private_custom_fields: Campos privados
           remove_private_data: "👉 Es posible que quieras eliminarlo"
+        scoped_admin_styles:
+          menu:
+            title: Panel admin
+        scoped_styles:
+          menu:
+            title: Interfaz pública
       admin_log:
         component:
           destroy_private_data: "%{user_name} ha destruido %{count} elementos de datos privados para %{resource_name} en %{space_name}"
@@ -512,6 +542,20 @@ es:
             view_meeting: Ver encuentro
             view_proposal: Ver propuesta
       proposal_private_custom_fields_disclosure: Esta información no será publicada
+      required_authorizations:
+        index:
+          cancel: Haré esto en otro momento, %{link}.
+          granted_title: Verificaciones concedidas
+          logout: déjame cerrar la sesión
+          missing_title: No verificada aún
+          resume_title: Verificaciones pendientes
+          resume_with_method: Reanudar la verificación con %{name}
+          title: Verifica tu identidad
+          verify_with_all_these_options: 'Por favor, verifícate con todos estos métodos antes de poder acceder a la plataforma:'
+          verify_with_any_of_these_options: 'Por favor, verifícate por lo menos con uno de estos métodos antes de poder acceder a la plataforma:'
+          verify_with_method: Verificar con %{name}
+      session:
+        authorization_is_required: Para participar en esta plataforma, necesitas autorizar tu cuenta con una autorización válida (%{authorizations}).
       validators:
         too_much_caps: Contiene demasiadas letras mayúsculas (más del %{percent}% del texto)
       voting:
