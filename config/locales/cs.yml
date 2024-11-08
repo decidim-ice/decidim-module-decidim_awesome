@@ -199,6 +199,9 @@ cs:
             force_verification: Vynutit ověření s aktuálními údaji
             force_verification_help: Ověření se nezdařilo, ale pokud jste si jisti, že uživatel má tuto autorizaci, můžete ho vynutit.
             force_verification_reason: 'Uveďte důvod pro vynucení ověření:'
+            warning: 'Upozornění: Vynucením této autorizace přepíšete aktuální stav autorizace uživatele.'
+          user_authorized: "%{user} úspěšně autorizován s %{name}"
+          user_not_authorized: "%{user} nemohl být autorizován s %{name}"
         checks:
           index:
             admin_head_tags: Úžasné tagy zahrnuté v hlavičce administrace aplikace
@@ -273,10 +276,13 @@ cs:
                 %{warning}
                 Tento text lze přizpůsobit vlastním překladem pomocí klíče:
                 %{key}
+              scoped_admin_styles: Uvědomte si, že skrývání věcí zde může zanechat administrátorské prostředí nepoužitelné. Postupujte prosím opatrně.
+              scoped_admin_styles_variables: 'Můžete použít následující CSS proměnné pro nastavené barvy organizace:'
               scoped_admin_styles_warning: "<strong>Varování</strong>: Zde přidejte vlastní CSS které platí pouze v tomto administrátoru."
               scoped_admins: Povýšení běžného uživatele na administrátora, který může spravovat pouze určité části veřejného webu (k tomu použijte editor omezení). Všimněte si, že uživatelé, kteří již mají oprávnění běžného správce, budou ignorováni.
               scoped_styles: Vytvořte vlastní CSS aplikovaný pouze na určitých částech veřejného webu (použijte pro to editor omezení)
               scoped_styles_variables: 'Můžete použít následující CSS proměnné pro nastavené barvy organizace:'
+              user_timezone: Toto přidá vybrané pole do uživatelského profilu pro nastavení časového pásma. Toto bude použito k zobrazení dat a časů v místním čase uživatele.
               validate_body_max_caps_percent: Nula nedovolí žádné velké písmeno, 100 bude nutit psát vše velkými písmeny
               validate_body_max_marks_together: 'Omezit počet otazníků a vykřičníků, které lze psát dohromada. Např: Pokud je 2, pak ''!!!'' nebude v textu povoleno'
               validate_body_min_length: Toto číslo může být nulové, toto pole bude ve skutečnosti nepovinné
@@ -302,6 +308,7 @@ cs:
             sure_to_remove: Opravdu chcete zničit toto soukromé pole?
           form_scoped_admin_styles:
             delete: Smazat
+            new: Přidat nový "admin panel" CSS box
             remove: Odstranit tento CSS box
             sure_to_remove: Opravdu chcete zničit tento CSS box?
           form_scoped_admins:
@@ -497,6 +504,10 @@ cs:
       admin_log:
         component:
           destroy_private_data: "%{user_name} zničil %{count} položky soukromých dat pro %{resource_name} v %{space_name}"
+        user:
+          admin_creates_authorization: "%{user_name} ověřil %{resource_name} s %{handler_name}"
+          admin_destroys_authorization: "%{user_name} zničil ověření %{handler_name} na %{resource_name}"
+          admin_forces_authorization: "%{user_name} vynutil ověření %{handler_name} na %{resource_name}. Důvod: %{reason}"
       amendments:
         modal:
           amendment_exists: Pozměňovací návrh již existuje
@@ -570,9 +581,17 @@ cs:
           resume_title: Čeká se na ověření
           resume_with_method: Pokračovat v ověřování pomocí %{name}
           title: Ověřte svou totožnost
+          verify_with_all_these_options: 'Před přístupem k platformě se prosím ověřte všemi těmito metodami:'
+          verify_with_any_of_these_options: 'Před přístupem k platformě si prosím ověřte alespoň jednu z těchto možností:'
           verify_with_method: Ověřit pomocí %{name}
       session:
         authorization_is_required: Chcete-li se zúčastnit této platformy, musíte svůj účet autorizovat s platnou autorizací (%{authorizations}).
+      system:
+        organizations:
+          admin_allowed_authoritzations_help_html: |
+            Správci budou moci uživatele s těmito oprávněními ručně ověřovat.
+            <br>Používejte tuto funkci opatrně, protože může vést k bezpečnostním problémům.
+          awesome_tweaks: Decidim Awesome Tweaks
       validators:
         too_much_caps: Používá příliš mnoho velkých písmen (více než %{percent}% textu)
       voting:
