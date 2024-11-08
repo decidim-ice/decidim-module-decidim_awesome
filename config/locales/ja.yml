@@ -51,6 +51,8 @@ ja:
         target: リンク先
         url: URL
         visibility: 表示・非表示
+      organization:
+        awesome_admins_available_authorizations: 管理者がこれらの認証を持つユーザーを手動で検証できるようにします
       user:
         user_time_zone: 個人のタイムゾーン
   decidim:
@@ -180,6 +182,16 @@ ja:
             collaborator: コラボレーター
             moderator: モデレーター
             valuator: 評価者
+        admin_authorizations:
+          authorization:
+            confirm_destroy: この認証を破棄してもよろしいですか？ユーザーのプラットフォームへのアクセスに影響する可能性があります。
+            destroy: 破棄
+            granted_at: '許可日時: %{date}'
+            metadata: メタデータを含みますか？ %{metadata}
+          authorization_destroyed: 認証を破棄しました。
+          authorization_not_destroyed: 認証を破壊できませんでした
+          authorization_transferred: '警告：検証が競合していたため、検証は %{user} に転送されました'
+          conflict: 既存の認証との競合があります
         checks:
           index:
             admin_head_tags: 管理者向けアプリケーションヘッダーに含まれる Awesome tags
@@ -461,6 +473,9 @@ ja:
             error: メニュー項目更新エラー %{error}
             success: メニュー項目は正常に更新されました
           url_exists: 同じURLがすでに設定されています。もう一度作成し直す前に、内容を修正してください。
+        officializations:
+          verification_modal:
+            close: 閉じる
         proposal_custom_fields:
           menu:
             title: 公開フィールド
@@ -554,6 +569,9 @@ ja:
           verify_with_method: '%{name} で本人確認する'
       session:
         authorization_is_required: このプラットフォームに参加するには、有効な認証 (%{authorizations}) でアカウントを承認する必要があります。
+      system:
+        organizations:
+          awesome_tweaks: Decidim Awesome Tweaks
       validators:
         too_much_caps: 大文字が多すぎます（テキストの %{percent}%以上）
       voting:
