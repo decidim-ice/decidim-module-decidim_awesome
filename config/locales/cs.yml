@@ -53,6 +53,8 @@ cs:
         target: Otevře se v
         url: URL
         visibility: Viditelnost
+      organization:
+        awesome_admins_available_authorizations: Povolit správcům ručně ověřit uživatele s těmito autorizacemi
   decidim:
     admin:
       filters:
