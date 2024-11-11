@@ -53,6 +53,8 @@ ca:
         target: Obre a
         url: URL
         visibility: Visibilitat
+      organization:
+        awesome_admins_available_authorizations: Permet a les administradores verificar manualment a les participants amb aquests verificadors
   decidim:
     admin:
       filters:
@@ -178,8 +180,22 @@ ca:
             valuator: Avaluadora
         admin_authorizations:
           authorization:
+            confirm_destroy: Estàs segur que vols eliminar aquesta verificació? Aquesta actuació pot afectar a l'accés de la participant en la plataforma.
             destroy: Eliminar
+            granted_at: Concedit a %{date}
+            metadata: Conté metadades? %{metadata}
           authorization_destroyed: L'autorització s'ha eliminat correctament.
+          authorization_not_destroyed: La verificació no s'ha pogut eliminar!
+          authorization_transferred: 'Avís: hi ha hagut un conflicte de verificació i la verificació s''ha transferit a %{user}'
+          conflict: Hi ha un conflicte amb una autorització existent
+          conflict_help_html: "Heu de resoldre el conflicte amb la participant %{user} abans de poder autoritzar la participant amb aquesta autorització.\n<br><br>\nEs produeix un conflicte de verificació quan un altre usuari té les mateixes dades que la participant que esteu intentant autoritzar.\nPodeu resoldre aquest conflicte eliminant l'autorització conflictiva de l'altre participant o utilitzant dades diferents per a aquest participant.\n"
+          edit:
+            authorize: Autoritza %{user} amb %{name}
+            do_it_if_sure: Feu-ho només si esteu segur que la participant té aquesta autorització.
+            force_verification: Força la verificació amb les dades actuals
+            force_verification_help: La verificació ha fallat, però podeu forçar-la si esteu segur que la participant té aquesta autorització.
+            force_verification_reason: 'Doneu un motiu per forçar la verificació:'
+            warning: 'Avís: en forçar aquesta autorització, esteu forçant l''estat d''autorització actual del participant.'
         checks:
           index:
             admin_head_tags: Etiquetes Awesome incloses a la capçalera de l'aplicació d'administració
