@@ -257,6 +257,9 @@ es:
                 %{warning}
                 Este texto se puede personalizar con una traducción personalizada usando la clave:
                 %{key}
+              scoped_admin_styles: Ten en cuenta que ocultar las cosas aquí puede dejar el administrador inutilizable. Por favor actúa con precaución.
+              scoped_admin_styles_variables: 'Puedes utilizar las siguientes variables CSS para los colores personalizados de la organización:'
+              scoped_admin_styles_warning: "<strong>Atención</strong>: Aquí se puede añadir CSS personalizado que solo aplica en este administrador."
               scoped_admins: Promueve usuarias normales a administradoras con acceso limitado a ciertas partes de la web pública (utilizar el editor de restricciones para eso). Tener en cuenta que las usuarias que ya tienen permisos regulares de administración serán ignorados.
               scoped_styles: Crea CSS personalizados que solo se apliquen en ciertas partes de la web pública (para ello, utiliza el editor de restricciones)
               scoped_styles_variables: 'Puedes utilizar las siguientes variables CSS para los colores personalizados de la organización:'
@@ -286,6 +289,7 @@ es:
             sure_to_remove: '¿Seguro de que quieres eliminar esta caja de campos personalizados?'
           form_scoped_admin_styles:
             delete: Eliminar
+            new: Añadir un nuevo cuadro CSS
             remove: Eliminar esta caja CSS
             sure_to_remove: '¿Estás segura de que quieres eliminar esta caja CSS?'
           form_scoped_admins:
@@ -312,6 +316,7 @@ es:
             proposal_private_custom_fields: 'Campos personalizados de propuestas: Campos privados'
             proposals: Modificaciones a las propuestas
             scoped_admin_styles: 'Estilos personalizados: Panel de administración'
+            scoped_styles: 'Estilos personalizados: Interficie pública'
             styles: Estilos personalizados
             surveys: Encuestas y formularios
             verifications: Verificaciones / Hacks de autorización
@@ -557,6 +562,9 @@ es:
           verify_with_method: Verificar con %{name}
       session:
         authorization_is_required: Para participar en esta plataforma, necesitas autorizar tu cuenta con una autorización válida (%{authorizations}).
+      system:
+        organizations:
+          awesome_tweaks: Configuraciones para Decidim Awesome
       validators:
         too_much_caps: Contiene demasiadas letras mayúsculas (más del %{percent}% del texto)
       voting:
