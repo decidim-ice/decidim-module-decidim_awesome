@@ -199,6 +199,9 @@ ca:
             force_verification: Força la verificació amb les dades actuals
             force_verification_help: La verificació ha fallat, però podeu forçar-la si esteu segur que la participant té aquesta autorització.
             force_verification_reason: 'Doneu un motiu per forçar la verificació:'
+            warning: 'Avís: en forçar aquesta autorització, esteu forçant l''estat d''autorització actual del participant.'
+          user_authorized: "%{user} s'ha autoritzat correctament amb %{name}"
+          user_not_authorized: "%{user} no s'ha pogut autoritzar amb %{name}"
         checks:
           index:
             admin_head_tags: Etiquetes Awesome incloses a la capçalera de l'aplicació d'administració
@@ -501,6 +504,10 @@ ca:
       admin_log:
         component:
           destroy_private_data: "%{user_name} ha destruït %{count} elements de dades privades per a %{resource_name} a %{space_name}"
+        user:
+          admin_creates_authorization: "%{user_name} s'ha verificat %{resource_name} amb %{handler_name}"
+          admin_destroys_authorization: "%{user_name} ha destruït la verificació %{handler_name} a %{resource_name}"
+          admin_forces_authorization: "%{user_name} ha forçat la verificació %{handler_name} a %{resource_name}. Motiu: %{reason}"
       amendments:
         modal:
           amendment_exists: Una esmena ja existeix
@@ -581,6 +588,9 @@ ca:
         authorization_is_required: Per participar en aquesta plataforma, cal que autoritzeu el vostre compte amb una autorització vàlida (%{authorizations}).
       system:
         organizations:
+          admin_allowed_authoritzations_help_html: |
+            Les administradores podran verificar manualment els participants amb aquests verificadors.
+            <br>Utilitzeu aquesta funció amb precaució, ja que pot provocar problemes de seguretat.
           awesome_tweaks: Configuracions del Decidim Awesome
       validators:
         too_much_caps: Fa servir massa lletres majúscules (més %{percent}% del text)
