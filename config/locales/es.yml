@@ -20,10 +20,11 @@ es:
         intergram_title_closed: Título del chat cerrado
         intergram_title_open: Título del chat abierto
         intergram_use_floating_button: Si está marcado, el chat cerrado siempre es un botón en lugar de un texto
-        proposal_custom_fields: 'Campos personalizados #%{id}'
-        proposal_private_custom_fields: 'Campos personalizados #%{id}'
+        proposal_custom_fields: Campos personalizados %{id}
+        proposal_private_custom_fields: Campos personalizados %{id}
+        scoped_admin_styles: Estilos personalizados %{id}
         scoped_admins: 'Grupo de administradoras acotadas #%{id}'
-        scoped_styles: 'Estilos personalizados #%{id}'
+        scoped_styles: Estilos personalizados %{id}
         user_timezone: Permitir a los usuarios establecer su zona horaria en su perfil
         validate_body_max_caps_percent: Porcentaje máximo permitido de letras mayúsculas para el cuerpo
         validate_body_max_marks_together: Máximo número de símbolos consecutivos permitidos en el cuerpo
@@ -50,6 +51,8 @@ es:
         target: Abrir en
         url: URL
         visibility: Visibilidad
+      organization:
+        awesome_admins_available_authorizations: Permitir a las administradoras verificar manualmente los participantes con estos verificadores
       user:
         user_time_zone: Zona horaria personal
   decidim:
@@ -179,6 +182,26 @@ es:
             collaborator: Colaborador/a
             moderator: Moderadora
             valuator: Evaluador/a
+        admin_authorizations:
+          authorization:
+            confirm_destroy: '¿Seguro de que desea destruir esta autorización? Esto podría afectar al acceso del participante a la plataforma.'
+            destroy: Eliminar
+            granted_at: Concedido a %{date}
+            metadata: '¿Contiene metadatos? %{metadata}'
+          authorization_destroyed: Autorización destruida con éxito.
+          authorization_not_destroyed: '¡No se pudo eliminar la autorización!'
+          authorization_transferred: 'Advertencia: Hubo un conflicto de verificación y la verificación ha sido transferida a %{user}'
+          conflict: Hay un conflicto con una autorización existente
+          conflict_help_html: "Debe resolver el conflicto con el participante %{user} antes de poder verificar al participante con esta autorización. \n<br><br> \nEl conflicto de verificación se produce cuando otro participante tiene los mismos datos que el participante que está intentando autorizar. \nPuede resolver este conflicto eliminando el conflicto de verificación del otro participante o utilizando datos diferentes para este participante.\n"
+          edit:
+            authorize: Autorizar a %{user} con %{name}
+            do_it_if_sure: Haga esto solo si está seguro de que el participante tiene esta autorización.
+            force_verification: Forzar verificación con los datos actuales
+            force_verification_help: La verificación ha fallado, pero puedes forzar si está seguro de que el participante tiene esta autorización.
+            force_verification_reason: 'Dar una razón para forzar la verificación:'
+            warning: 'Advertencia: Al forzar esta autorización, está forzando el estado actual de autorización del participante.'
+          user_authorized: "%{user} autorizado con éxito con %{name}"
+          user_not_authorized: "%{user} autorizado con éxito con %{name}"
         checks:
           index:
             admin_head_tags: Etiquetas Awesome incluidas en el encabezado de la aplicación de administración
@@ -253,6 +276,9 @@ es:
                 %{warning}
                 Este texto se puede personalizar con una traducción personalizada usando la clave:
                 %{key}
+              scoped_admin_styles: Ten en cuenta que ocultar las cosas aquí puede dejar el administrador inutilizable. Por favor actúa con precaución.
+              scoped_admin_styles_variables: 'Puedes utilizar las siguientes variables CSS para los colores personalizados de la organización:'
+              scoped_admin_styles_warning: "<strong>Atención</strong>: Aquí se puede añadir CSS personalizado que solo aplica en este administrador."
               scoped_admins: Promueve usuarias normales a administradoras con acceso limitado a ciertas partes de la web pública (utilizar el editor de restricciones para eso). Tener en cuenta que las usuarias que ya tienen permisos regulares de administración serán ignorados.
               scoped_styles: Crea CSS personalizados que solo se apliquen en ciertas partes de la web pública (para ello, utiliza el editor de restricciones)
               scoped_styles_variables: 'Puedes utilizar las siguientes variables CSS para los colores personalizados de la organización:'
@@ -280,6 +306,11 @@ es:
             new: Añadir una nueva caja de "campos personalizados"
             remove: Eliminar esta caja de "campos personalizados"
             sure_to_remove: '¿Seguro de que quieres eliminar esta caja de campos personalizados?'
+          form_scoped_admin_styles:
+            delete: Eliminar
+            new: Añadir un nuevo cuadro CSS
+            remove: Eliminar esta caja CSS
+            sure_to_remove: '¿Estás segura de que quieres eliminar esta caja CSS?'
           form_scoped_admins:
             delete: Eliminar
             new: Añadir un nuevo grupo de "Administradoras acotadas"
@@ -303,6 +334,8 @@ es:
             proposal_custom_fields: 'Campos personalizados de propuestas: campos públicos'
             proposal_private_custom_fields: 'Campos personalizados de propuestas: Campos privados'
             proposals: Modificaciones a las propuestas
+            scoped_admin_styles: 'Estilos personalizados: Panel de administración'
+            scoped_styles: 'Estilos personalizados: Interficie pública'
             styles: Estilos personalizados
             surveys: Encuestas y formularios
             verifications: Verificaciones / Hacks de autorización
@@ -449,6 +482,11 @@ es:
             error: 'Error al actualizar el ítem de menú: %{error}'
             success: Ítem de menú actualizado correctamente
           url_exists: Esta URL ya ha sido configurada en otro ítem de menú, por favor edítalo en lugar de crear uno nuevo.
+        officializations:
+          authorizations: Autorizaciones
+          verification_modal:
+            authorizations_for: Autorizaciones para %{user}
+            close: Cerrar
         proposal_custom_fields:
           menu:
             title: Campos públicos
@@ -457,9 +495,19 @@ es:
           private_data_last_update: Estos datos fueron actualizados hace %{time_ago}.
           proposal_private_custom_fields: Campos privados
           remove_private_data: "👉 Es posible que quieras eliminarlo"
+        scoped_admin_styles:
+          menu:
+            title: Panel admin
+        scoped_styles:
+          menu:
+            title: Interfaz pública
       admin_log:
         component:
           destroy_private_data: "%{user_name} ha destruido %{count} elementos de datos privados para %{resource_name} en %{space_name}"
+        user:
+          admin_creates_authorization: "%{user_name} verificó %{resource_name} con %{handler_name}"
+          admin_destroys_authorization: "%{user_name} destruyó la verificación %{handler_name} en %{resource_name}"
+          admin_forces_authorization: "%{user_name} forzó la verificación %{handler_name} en %{resource_name}. Razón: %{reason}"
       amendments:
         modal:
           amendment_exists: Ya existe una enmienda
@@ -538,6 +586,12 @@ es:
           verify_with_method: Verificar con %{name}
       session:
         authorization_is_required: Para participar en esta plataforma, necesitas autorizar tu cuenta con una autorización válida (%{authorizations}).
+      system:
+        organizations:
+          admin_allowed_authoritzations_help_html: |
+            Las administradoras podrán verificar manualmente a los participantes con estos verificadores.
+            <br>Utilice esta función con precaución, ya que puede dar lugar a problemas de seguridad.
+          awesome_tweaks: Configuraciones para Decidim Awesome
       validators:
         too_much_caps: Contiene demasiadas letras mayúsculas (más del %{percent}% del texto)
       voting:

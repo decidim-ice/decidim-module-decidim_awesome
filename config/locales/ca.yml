@@ -20,10 +20,11 @@ ca:
         intergram_title_closed: Títol del xat quan està tancat
         intergram_title_open: Títol del xat quan està obert
         intergram_use_floating_button: Si està marcat, el xat tancat és sempre un botó en lloc d'un text
-        proposal_custom_fields: 'Camps personalitzats #%{id}'
-        proposal_private_custom_fields: 'Camps personalitzats #%{id}'
-        scoped_admins: 'Grup d''administradores acotades #%{id}'
-        scoped_styles: 'Personalització d''estils #%{id}'
+        proposal_custom_fields: Camps personalitzats %{id}
+        proposal_private_custom_fields: Camps personalitzats %{id}
+        scoped_admin_styles: Personalització d'estils %{id}
+        scoped_admins: Grup d'administradores acotades %{id}
+        scoped_styles: Personalització d'estils %{id}
         user_timezone: Permet als usuaris definir la seva zona horària en el seu perfil
         validate_body_max_caps_percent: Percentatge màxim de majúscules en el cos de la proposta
         validate_body_max_marks_together: Nombre màxim de símbols consecutius permesos al cos de la proposta
@@ -50,6 +51,8 @@ ca:
         target: Obre a
         url: URL
         visibility: Visibilitat
+      organization:
+        awesome_admins_available_authorizations: Permet a les administradores verificar manualment a les participants amb aquests verificadors
       user:
         user_time_zone: Zona horària personal
   decidim:
@@ -179,6 +182,26 @@ ca:
             collaborator: Col·laboradora
             moderator: Moderadora
             valuator: Avaluadora
+        admin_authorizations:
+          authorization:
+            confirm_destroy: Estàs segur que vols eliminar aquesta verificació? Aquesta actuació pot afectar a l'accés de la participant en la plataforma.
+            destroy: Eliminar
+            granted_at: Concedit a %{date}
+            metadata: Conté metadades? %{metadata}
+          authorization_destroyed: L'autorització s'ha eliminat correctament.
+          authorization_not_destroyed: La verificació no s'ha pogut eliminar!
+          authorization_transferred: 'Avís: hi ha hagut un conflicte de verificació i la verificació s''ha transferit a %{user}'
+          conflict: Hi ha un conflicte amb una autorització existent
+          conflict_help_html: "Heu de resoldre el conflicte amb la participant %{user} abans de poder autoritzar la participant amb aquesta autorització.\n<br><br>\nEs produeix un conflicte de verificació quan un altre usuari té les mateixes dades que la participant que esteu intentant autoritzar.\nPodeu resoldre aquest conflicte eliminant l'autorització conflictiva de l'altre participant o utilitzant dades diferents per a aquest participant.\n"
+          edit:
+            authorize: Autoritza %{user} amb %{name}
+            do_it_if_sure: Feu-ho només si esteu segur que la participant té aquesta autorització.
+            force_verification: Força la verificació amb les dades actuals
+            force_verification_help: La verificació ha fallat, però podeu forçar-la si esteu segur que la participant té aquesta autorització.
+            force_verification_reason: 'Doneu un motiu per forçar la verificació:'
+            warning: 'Avís: en forçar aquesta autorització, esteu forçant l''estat d''autorització actual del participant.'
+          user_authorized: "%{user} s'ha autoritzat correctament amb %{name}"
+          user_not_authorized: "%{user} no s'ha pogut autoritzar amb %{name}"
         checks:
           index:
             admin_head_tags: Etiquetes Awesome incloses a la capçalera de l'aplicació d'administració
@@ -253,6 +276,9 @@ ca:
                 %{warning}
                 Aquest text es pot personalitzar amb una traducció personalitzada utilitzant la clau:
                 %{key}
+              scoped_admin_styles: Tingues en compte que amagar contingut aquí pot deixar l'administrador inservible. Si us plau, actueu amb cautela.
+              scoped_admin_styles_variables: 'Pots fer servir les següents variables CSS pels colors personalitzats de l''organització:'
+              scoped_admin_styles_warning: "<strong>Atenció</strong>: Aquí podeu afegir CSS que s'aplica només en aquest administrador."
               scoped_admins: Promou usuaries normals a administradores amb accés limitat a certes parts de la web pública (feu servir l'editor de restriccions per això). Noteu que afegir usuaries que ja tenen permisos d'administració no té cap efecte.
               scoped_styles: Crea CSS personalitzats que només s'apliquin a determinades parts de la web pública (per fer-ho, utilitza l'editor de restriccions)
               scoped_styles_variables: 'Pots fer servir les següents variables CSS pels colors personalitzats de l''organització:'
@@ -280,6 +306,11 @@ ca:
             new: Afegiu una nova caixa de "camps personalitzats privats"
             remove: Elimina aquesta caixa de "camps personalitzats"
             sure_to_remove: Segur que vols eliminar aquesta caixa de camps personalitzats?
+          form_scoped_admin_styles:
+            delete: Esborra
+            new: Afegeix una nova caixa CSS
+            remove: Elimina aquesta caixa CSS
+            sure_to_remove: Segur que vols eliminar aquesta caixa de camps personalitzats?
           form_scoped_admins:
             delete: Esborra
             new: Afegir un nou grup "d'Administradores acotades"
@@ -303,6 +334,8 @@ ca:
             proposal_custom_fields: 'Camps personalitzats per propostes: Camps públics'
             proposal_private_custom_fields: 'Camps personalitzats per propostes: Camps privats'
             proposals: Modificacions a propostes
+            scoped_admin_styles: 'Estils personalitzats: Panell d''administració'
+            scoped_styles: 'Estils personalitzats: Interfície pública'
             styles: Estils personalitzats
             surveys: Formularis i enquestes
             verifications: Verificacions / Hacks d'autorització
@@ -449,6 +482,11 @@ ca:
             error: 'Error en actualitzar l''ítem de menú: %{error}'
             success: Ítem de menú actualitzat correctament
           url_exists: Aquesta URL ha estat configurada en un altre ítem de menú, si us plau edita'l en comptes de crear-ne un de nou.
+        officializations:
+          authorizations: Autoritzacions
+          verification_modal:
+            authorizations_for: Autoritzacions per a %{user}
+            close: Tanca
         proposal_custom_fields:
           menu:
             title: Camps públics
@@ -457,9 +495,19 @@ ca:
           private_data_last_update: Aquestes dades es van actualitzar per última vegada fa %{time_ago}.
           proposal_private_custom_fields: Camps privats
           remove_private_data: "👉 És possible que vulgueu eliminar-lo"
+        scoped_admin_styles:
+          menu:
+            title: Panell admin
+        scoped_styles:
+          menu:
+            title: Interfície pública
       admin_log:
         component:
           destroy_private_data: "%{user_name} ha destruït %{count} elements de dades privades per a %{resource_name} a %{space_name}"
+        user:
+          admin_creates_authorization: "%{user_name} s'ha verificat %{resource_name} amb %{handler_name}"
+          admin_destroys_authorization: "%{user_name} ha destruït la verificació %{handler_name} a %{resource_name}"
+          admin_forces_authorization: "%{user_name} ha forçat la verificació %{handler_name} a %{resource_name}. Motiu: %{reason}"
       amendments:
         modal:
           amendment_exists: Una esmena ja existeix
@@ -538,6 +586,12 @@ ca:
           verify_with_method: Verificar amb %{name}
       session:
         authorization_is_required: Per participar en aquesta plataforma, cal que autoritzeu el vostre compte amb una autorització vàlida (%{authorizations}).
+      system:
+        organizations:
+          admin_allowed_authoritzations_help_html: |
+            Les administradores podran verificar manualment els participants amb aquests verificadors.
+            <br>Utilitzeu aquesta funció amb precaució, ja que pot provocar problemes de seguretat.
+          awesome_tweaks: Configuracions del Decidim Awesome
       validators:
         too_much_caps: Fa servir massa lletres majúscules (més %{percent}% del text)
       voting:

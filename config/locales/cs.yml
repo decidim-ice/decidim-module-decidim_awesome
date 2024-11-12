@@ -22,6 +22,7 @@ cs:
         intergram_use_floating_button: Je-li zaškrtnuto, uzavřený chat je vždy tlačítko místo textu
         proposal_custom_fields: 'Uživatelská pole #%{id}'
         proposal_private_custom_fields: Soukromá vlastní pole %{id}
+        scoped_admin_styles: Vlastní styly číslo %{id}
         scoped_admins: 'Skupina Škálovaní administrátoři #%{id}'
         scoped_styles: Vlastní styly číslo %{id}
         user_timezone: Umožnit uživatelům nastavit časové pásmo v profilu
@@ -50,6 +51,8 @@ cs:
         target: Otevře se v
         url: URL
         visibility: Viditelnost
+      organization:
+        awesome_admins_available_authorizations: Povolit správcům ručně ověřit uživatele s těmito autorizacemi
       user:
         user_time_zone: Osobní časové pásmo
   decidim:
@@ -179,6 +182,26 @@ cs:
             collaborator: Spolupracovník
             moderator: Moderátor
             valuator: Hodnotitel
+        admin_authorizations:
+          authorization:
+            confirm_destroy: Opravdu chcete zničit tuto autorizaci? To může ovlivnit přístup uživatele k platformě.
+            destroy: Zničit
+            granted_at: Uděleno v %{date}
+            metadata: Obsahuje metadata? %{metadata}
+          authorization_destroyed: Autorizace byla úspěšně zničena.
+          authorization_not_destroyed: Autorizaci nelze zničit!
+          authorization_transferred: 'Varování: Došlo k ověřovacímu konfliktu a ověření bylo převedeno na %{user}'
+          conflict: Existuje konflikt s existující autorizací
+          conflict_help_html: "Musíte vyřešit konflikt s uživatelem %{user} předtím, než budete moci autorizovat uživatele s touto autorizací.\n<br><br>\nKonflikt ověření se stane, když jiný uživatel má stejná data jako uživatel, který se pokoušíte autorizovat \nTento konflikt můžete vyřešit odstraněním konfliktní autorizace od jiného uživatele nebo použitím jiných dat tohoto uživatele.\n"
+          edit:
+            authorize: Autorizovat %{user} s %{name}
+            do_it_if_sure: Udělejte to pouze v případě, že jste si jisti, že uživatel má tuto autorizaci.
+            force_verification: Vynutit ověření s aktuálními údaji
+            force_verification_help: Ověření se nezdařilo, ale pokud jste si jisti, že uživatel má tuto autorizaci, můžete ho vynutit.
+            force_verification_reason: 'Uveďte důvod pro vynucení ověření:'
+            warning: 'Upozornění: Vynucením této autorizace přepíšete aktuální stav autorizace uživatele.'
+          user_authorized: "%{user} úspěšně autorizován s %{name}"
+          user_not_authorized: "%{user} nemohl být autorizován s %{name}"
         checks:
           index:
             admin_head_tags: Úžasné tagy zahrnuté v hlavičce administrace aplikace
@@ -239,6 +262,7 @@ cs:
               allow_videos_in_editors: Toto přidá ikonu video odkazu ve všech WYSIWYG editorech
               auto_save_forms: Toto bude používat místní úložiště pro automatické ukládání dat zavedených uživateli do průzkumů a jiných formulářů během vyplňování. Data budou obnovena v budoucí návštěvě stejného prohlížeče v případě, že formulář nebude odeslán. Pokud je formulář odeslán, data budou odstraněna. Pokud uživatelé odstraní svá data z místního úložiště, data nebudou obnovena.
               drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
+              force_authorization_after_login: 'Pokud je povoleno, uživatelé budou po přihlášení nebo registraci přesměrováni na autorizační stránku, pokud nejsou uděleny některé z zadaných autorizací. To je užitečné, pokud chcete donutit uživatele k ověření pomocí specifické autorizace, než se budou moci vůbec přihlásit (např.: zabránit spamu).'
               force_authorization_help_text: Přidejte vlastní text, který vysvětlí proč je potřeba autorizace. Také se ujistěte, že přidáte kontaktní metodu pro případ, že uživatelé potřebují pomoc.
               intergram_about: Intergram používá Telegram messenger pro zpracování widgetu live podpory v dolní části stránky.
               intergram_config: 'Pozvěte <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bota</a> do vaší skupiny nebo začněte chatovat přímo. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
@@ -252,15 +276,23 @@ cs:
                 %{warning}
                 Tento text lze přizpůsobit vlastním překladem pomocí klíče:
                 %{key}
+              scoped_admin_styles: Uvědomte si, že skrývání věcí zde může zanechat administrátorské prostředí nepoužitelné. Postupujte prosím opatrně.
+              scoped_admin_styles_variables: 'Můžete použít následující CSS proměnné pro nastavené barvy organizace:'
+              scoped_admin_styles_warning: "<strong>Varování</strong>: Zde přidejte vlastní CSS které platí pouze v tomto administrátoru."
               scoped_admins: Povýšení běžného uživatele na administrátora, který může spravovat pouze určité části veřejného webu (k tomu použijte editor omezení). Všimněte si, že uživatelé, kteří již mají oprávnění běžného správce, budou ignorováni.
               scoped_styles: Vytvořte vlastní CSS aplikovaný pouze na určitých částech veřejného webu (použijte pro to editor omezení)
               scoped_styles_variables: 'Můžete použít následující CSS proměnné pro nastavené barvy organizace:'
+              user_timezone: Toto přidá vybrané pole do uživatelského profilu pro nastavení časového pásma. Toto bude použito k zobrazení dat a časů v místním čase uživatele.
               validate_body_max_caps_percent: Nula nedovolí žádné velké písmeno, 100 bude nutit psát vše velkými písmeny
               validate_body_max_marks_together: 'Omezit počet otazníků a vykřičníků, které lze psát dohromada. Např: Pokud je 2, pak ''!!!'' nebude v textu povoleno'
               validate_body_min_length: Toto číslo může být nulové, toto pole bude ve skutečnosti nepovinné
               validate_title_max_caps_percent: Nula nedovolí žádné velké písmeno, 100 bude nutit psát vše velkými písmeny
               validate_title_max_marks_together: 'Omezit počet otazníků a vykřičníků, které lze psát dohromada. Např: Pokud je 2, pak ''!!!'' nebude v textu povoleno'
               validate_title_min_length: Název je vždy povinný a toto číslo nemůže být nulové
+              verifications_html: |
+                Zde můžete vylepšit proces ověřování.<br>
+                <b>POZNÁMKA:</b> Uvědomte si, že změna těchto nastavení může zabránit některým uživatelům v přístupu k platformě. Používejte to s opatrností!<br><br>
+                Také berte na vědomí, že tato nastavení jsou aplikována na všechny uživatele. Administrátoři však budou mít vždy přístup k administraci.
             validators:
               body: Ověření vstupu uživatele pro pole "tělo"
               title: Ověření uživatelem pro pole "Název"
@@ -274,6 +306,11 @@ cs:
             new: Přidat nové "soukromé vlastní pole"
             remove: Odstranit toto "ssoukromé vlastní pole"
             sure_to_remove: Opravdu chcete zničit toto soukromé pole?
+          form_scoped_admin_styles:
+            delete: Smazat
+            new: Přidat nový "admin panel" CSS box
+            remove: Odstranit tento CSS box
+            sure_to_remove: Opravdu chcete zničit tento CSS box?
           form_scoped_admins:
             delete: Smazat
             new: Přidání nové skupiny "Škálovaní administrátoři"
@@ -297,6 +334,8 @@ cs:
             proposal_custom_fields: 'Vlastní pole návrhů: veřejná pole'
             proposal_private_custom_fields: 'Vlastní pole návrhů: Soukromá pole'
             proposals: Návrhy hacků
+            scoped_admin_styles: 'Vlastní styly: Panel administrace'
+            scoped_styles: 'Vlastní styly: Veřejné strany'
             styles: Vlastní styly
             surveys: Průzkumy a formuláře
             verifications: Ověřovací / Schvalovací hacky
@@ -443,6 +482,11 @@ cs:
             error: Chyba při aktualizaci položky menu! %{error}
             success: Položka menu byla úspěšne aktualizována
           url_exists: Stejná adresa URL je již nakonfigurována, prosím upravte ji místo jejího vytvoření.
+        officializations:
+          authorizations: Autorizace
+          verification_modal:
+            authorizations_for: Autorizace pro %{user}
+            close: Zavřít
         proposal_custom_fields:
           menu:
             title: Veřejná pole
@@ -451,9 +495,19 @@ cs:
           private_data_last_update: Tato data byla naposledy aktualizována před %{time_ago}.
           proposal_private_custom_fields: Soukromá pole
           remove_private_data: "👉 Možná jej chcete odstranit"
+        scoped_admin_styles:
+          menu:
+            title: Panel administrace
+        scoped_styles:
+          menu:
+            title: Veřejný frontend
       admin_log:
         component:
           destroy_private_data: "%{user_name} zničil %{count} položky soukromých dat pro %{resource_name} v %{space_name}"
+        user:
+          admin_creates_authorization: "%{user_name} ověřil %{resource_name} s %{handler_name}"
+          admin_destroys_authorization: "%{user_name} zničil ověření %{handler_name} na %{resource_name}"
+          admin_forces_authorization: "%{user_name} vynutil ověření %{handler_name} na %{resource_name}. Důvod: %{reason}"
       amendments:
         modal:
           amendment_exists: Pozměňovací návrh již existuje
@@ -527,6 +581,17 @@ cs:
           resume_title: Čeká se na ověření
           resume_with_method: Pokračovat v ověřování pomocí %{name}
           title: Ověřte svou totožnost
+          verify_with_all_these_options: 'Před přístupem k platformě se prosím ověřte všemi těmito metodami:'
+          verify_with_any_of_these_options: 'Před přístupem k platformě si prosím ověřte alespoň jednu z těchto možností:'
+          verify_with_method: Ověřit pomocí %{name}
+      session:
+        authorization_is_required: Chcete-li se zúčastnit této platformy, musíte svůj účet autorizovat s platnou autorizací (%{authorizations}).
+      system:
+        organizations:
+          admin_allowed_authoritzations_help_html: |
+            Správci budou moci uživatele s těmito oprávněními ručně ověřovat.
+            <br>Používejte tuto funkci opatrně, protože může vést k bezpečnostním problémům.
+          awesome_tweaks: Decidim Awesome Tweaks
       validators:
         too_much_caps: Používá příliš mnoho velkých písmen (více než %{percent}% textu)
       voting:
