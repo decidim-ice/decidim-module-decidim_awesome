@@ -53,6 +53,8 @@ es:
         target: Abrir en
         url: URL
         visibility: Visibilidad
+      organization:
+        awesome_admins_available_authorizations: Permitir a las administradoras verificar manualmente los participantes con estos verificadores
   decidim:
     admin:
       filters:
@@ -178,7 +180,24 @@ es:
             valuator: Evaluador/a
         admin_authorizations:
           authorization:
+            confirm_destroy: '¿Seguro de que desea destruir esta autorización? Esto podría afectar al acceso del participante a la plataforma.'
             destroy: Eliminar
+            granted_at: Concedido a %{date}
+            metadata: '¿Contiene metadatos? %{metadata}'
+          authorization_destroyed: Autorización destruida con éxito.
+          authorization_not_destroyed: '¡No se pudo eliminar la autorización!'
+          authorization_transferred: 'Advertencia: Hubo un conflicto de verificación y la verificación ha sido transferida a %{user}'
+          conflict: Hay un conflicto con una autorización existente
+          conflict_help_html: "Debe resolver el conflicto con el participante %{user} antes de poder verificar al participante con esta autorización. \n<br><br> \nEl conflicto de verificación se produce cuando otro participante tiene los mismos datos que el participante que está intentando autorizar. \nPuede resolver este conflicto eliminando el conflicto de verificación del otro participante o utilizando datos diferentes para este participante.\n"
+          edit:
+            authorize: Autorizar a %{user} con %{name}
+            do_it_if_sure: Haga esto solo si está seguro de que el participante tiene esta autorización.
+            force_verification: Forzar verificación con los datos actuales
+            force_verification_help: La verificación ha fallado, pero puedes forzar si está seguro de que el participante tiene esta autorización.
+            force_verification_reason: 'Dar una razón para forzar la verificación:'
+            warning: 'Advertencia: Al forzar esta autorización, está forzando el estado actual de autorización del participante.'
+          user_authorized: "%{user} autorizado con éxito con %{name}"
+          user_not_authorized: "%{user} autorizado con éxito con %{name}"
         checks:
           index:
             admin_head_tags: Etiquetas Awesome incluidas en el encabezado de la aplicación de administración
@@ -466,6 +485,7 @@ es:
         officializations:
           authorizations: Autorizaciones
           verification_modal:
+            authorizations_for: Autorizaciones para %{user}
             close: Cerrar
         proposal_custom_fields:
           menu:
@@ -484,6 +504,10 @@ es:
       admin_log:
         component:
           destroy_private_data: "%{user_name} ha destruido %{count} elementos de datos privados para %{resource_name} en %{space_name}"
+        user:
+          admin_creates_authorization: "%{user_name} verificó %{resource_name} con %{handler_name}"
+          admin_destroys_authorization: "%{user_name} destruyó la verificación %{handler_name} en %{resource_name}"
+          admin_forces_authorization: "%{user_name} forzó la verificación %{handler_name} en %{resource_name}. Razón: %{reason}"
       amendments:
         modal:
           current_amendment_html: <p>Puedes <a href="%{amendment_link}">acceder a la enmienda actual aquí</a>.</p>
@@ -563,6 +587,9 @@ es:
         authorization_is_required: Para participar en esta plataforma, necesitas autorizar tu cuenta con una autorización válida (%{authorizations}).
       system:
         organizations:
+          admin_allowed_authoritzations_help_html: |
+            Las administradoras podrán verificar manualmente a los participantes con estos verificadores.
+            <br>Utilice esta función con precaución, ya que puede dar lugar a problemas de seguridad.
           awesome_tweaks: Configuraciones para Decidim Awesome
       validators:
         too_much_caps: Contiene demasiadas letras mayúsculas (más del %{percent}% del texto)
