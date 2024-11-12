@@ -13,10 +13,11 @@ module Decidim
           end
 
           def applied_filters_tags(i18n_ctx)
-            if global? && params[:admin_role_type].present?
+            admin_role_type = PaperTrailVersion.safe_admin_role_type(params[:admin_role_type])
+            if global? && admin_role_type.present?
               content_tag(:span, class: "label secondary") do
                 concat "#{i18n_filter_label(:admin_role_type, filterable_i18n_scope_from_ctx(i18n_ctx))}: "
-                concat t("decidim.decidim_awesome.admin.admin_accountability.admin_roles.#{params[:admin_role_type]}", default: params[:admin_role_type])
+                concat t("decidim.decidim_awesome.admin.admin_accountability.admin_roles.#{admin_role_type}", default: admin_role_type)
                 concat icon_link_to(
                   "circle-x",
                   url_for(export_params.except(:admin_role_type)),

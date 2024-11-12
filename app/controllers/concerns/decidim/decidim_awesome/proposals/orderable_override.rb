@@ -14,6 +14,8 @@ module Decidim
 
           private
 
+          alias_method :decidim_original_reorder, :reorder
+
           # read order from session if available
           def order
             @order ||= detect_order(session[:order]) || default_order
@@ -31,38 +33,23 @@ module Decidim
             end
           end
 
-          # rubocop:disable Metrics/CyclomaticComplexity
           def reorder(proposals)
+            title_by_locale = Arel.sql(proposals.sanitize_sql(["decidim_proposals_proposals.title->>? #{collation}", locale]))
+            title_by_machine_translation = Arel.sql(proposals.sanitize_sql(["decidim_proposals_proposals.title->'machine_translations'->>? #{collation}", locale]))
+            title_by_default_locale = Arel.sql(proposals.sanitize_sql(["decidim_proposals_proposals.title->>? #{collation}", default_locale]))
             case order
             when "az"
-              proposals.order(Arel.sql("CONCAT(decidim_proposals_proposals.title->>'#{locale}',
-                                        decidim_proposals_proposals.title->'machine_translations'->>'#{locale}',
-                                        decidim_proposals_proposals.title->>'#{default_locale}') #{collation} ASC"))
+              proposals.order(title_by_locale => :asc, title_by_machine_translation => :asc, title_by_default_locale => :asc)
             when "za"
-              proposals.order(Arel.sql("CONCAT(decidim_proposals_proposals.title->>'#{locale}',
-                                        decidim_proposals_proposals.title->'machine_translations'->>'#{locale}',
-                                        decidim_proposals_proposals.title->>'#{default_locale}') #{collation} DESC"))
+              proposals.order(title_by_locale => :desc, title_by_machine_translation => :desc, title_by_default_locale => :desc)
             when "supported_first"
               proposals.joins(my_votes_join).group(:id).order(Arel.sql("COUNT(decidim_proposals_proposal_votes.id) DESC"))
             when "supported_last"
               proposals.joins(my_votes_join).group(:id).order(Arel.sql("COUNT(decidim_proposals_proposal_votes.id) ASC"))
-            when "most_commented"
-              proposals.left_joins(:comments).group(:id).order(Arel.sql("COUNT(decidim_comments_comments.id) DESC"))
-            when "most_endorsed"
-              proposals.order(endorsements_count: :desc)
-            when "most_followed"
-              proposals.left_joins(:follows).group(:id).order(Arel.sql("COUNT(decidim_follows.id) DESC"))
-            when "most_voted"
-              proposals.order(proposal_votes_count: :desc)
-            when "random"
-              proposals.order_randomly(random_seed)
-            when "recent"
-              proposals.order(published_at: :desc)
-            when "with_more_authors"
-              proposals.order(coauthorships_count: :desc)
+            else
+              decidim_original_reorder(proposals)
             end
           end
-          # rubocop:enable Metrics/CyclomaticComplexity
 
           def collation
             @collation ||= begin
