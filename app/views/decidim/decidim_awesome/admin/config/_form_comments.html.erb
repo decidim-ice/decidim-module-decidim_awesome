@@ -1,0 +1,8 @@
+<div class="form__wrapper decidim_awesome-form gap-0">
+  <% if config_enabled?(:allow_attachments_in_comments) %>
+    <div class="row column">
+      <%= form.check_box :allow_attachments_in_comments, help_text: t("help.allow_attachments_in_comments", scope: "decidim.decidim_awesome.admin.config.form") %>
+      <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :allow_attachments_in_comments, constraints: constraints_for(:allow_attachments_in_comments) }) %>
+    </div>
+  <% end %>
+</div>
