@@ -249,6 +249,7 @@ fr:
                 %{warning}
                 Ce texte peut être personnalisé avec une traduction personnalisée en utilisant la clé:
                 %{key}
+              scoped_admin_styles: Soyez conscient que cacher des éléments pourrait rendre l'interface administrateur inutilisable. Agissez avec prudence.
               scoped_admin_styles_variables: 'Vous pouvez utiliser les variables CSS suivantes pour les couleurs personnalisées de l''organisation :'
               scoped_admins: Promouvoir les utilisateurs réguliers en administrateurs qui ne peuvent administrer que certaines parties de la plateforme (utilisez l'éditeur de restrictions pour cela). Notez que les utilisateurs qui ont déjà les permissions d'administration habituelles seront ignorés.
               scoped_styles: Créer un CSS personnalisé qui s'applique uniquement à certaines parties du site web public (front-end) (utilisez l'éditeur de restrictions pour cela)
@@ -409,6 +410,7 @@ fr:
           proposals: Hacks pour les propositions
           styles: Styles personnalisés
           surveys: Enquêtes et formulaires
+          verifications: Vérifications
         menu_hacks:
           create:
             error: Erreur lors de la création de l'élément de menu ! %{error}
@@ -447,6 +449,11 @@ fr:
             error: Erreur lors de la mise à jour de l'élément de menu ! %{error}
             success: Élément de menu mis à jour avec succès
           url_exists: La même URL est déjà configurée, veuillez la modifier au lieu de la créer à nouveau.
+        officializations:
+          authorizations: Autorisations
+          verification_modal:
+            authorizations_for: Autorisations pour %{user}
+            close: Fermer
         proposal_custom_fields:
           menu:
             title: Champs publiques
@@ -528,6 +535,13 @@ fr:
             view_meeting: Voir la rencontre
             view_proposal: Voir la proposition
       proposal_private_custom_fields_disclosure: Cette information ne sera pas publiée
+      required_authorizations:
+        index:
+          cancel: Je vais le faire ultérieurement, %{link}.
+          granted_title: Vérifications accordées
+          missing_title: Pas encore vérifié
+          resume_title: Vérifications en attente
+          title: Vérifiez votre identité
       validators:
         too_much_caps: Utilise trop de majuscule (plus de %{percent} du texte)
       voting:
