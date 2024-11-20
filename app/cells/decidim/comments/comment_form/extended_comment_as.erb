@@ -1,0 +1,5 @@
+<%= decidim_original_comment_as_for(form) %>
+
+<% if attachments_allowed? %>
+  <%= form.upload :add_documents, multiple: true, button_class: "button button__lg button__transparent-secondary w-full" %>
+<% end %>

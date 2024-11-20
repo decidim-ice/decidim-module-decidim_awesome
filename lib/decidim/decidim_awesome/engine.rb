@@ -92,6 +92,14 @@ module Decidim
           Decidim::Proposals::ProposalLCell.include(Decidim::DecidimAwesome::ProposalLCellOverride)
         end
 
+        if DecidimAwesome.enabled?(:allow_attachments_in_comments)
+          Decidim::Comments::Comment.include(Decidim::HasAttachments)
+          Decidim::Comments::CommentForm.include(Decidim::DecidimAwesome::Comments::CommentFormOverride)
+          Decidim::Comments::CreateComment.include(Decidim::DecidimAwesome::Comments::CreateCommentOverride)
+          Decidim::Comments::CommentFormCell.include(Decidim::DecidimAwesome::Comments::CommentFormCellOverride)
+          Decidim::Comments::CommentCell.include(Decidim::DecidimAwesome::Comments::CommentCellOverride)
+        end
+
         # override user's admin property
         Decidim::User.include(Decidim::DecidimAwesome::UserOverride) if DecidimAwesome.enabled?(:scoped_admins)
 
