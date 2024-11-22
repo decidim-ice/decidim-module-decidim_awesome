@@ -9,12 +9,21 @@ module Decidim
         included do
           include Decidim::AttachmentsHelper
 
-          alias_method :decidim_original_votes, :votes
+          alias_method :decidim_original_comment_body, :comment_body
 
-          def votes
-            return render :votes_with_attachments if current_user.present?
+          def comment_body
+            return render :body_with_attachments if current_user.present?
 
-            decidim_original_votes
+            decidim_original_comment_body
+          end
+
+          private
+
+          def tab_panel_items
+            attachments_tab_panel_items(model).map do |panel|
+              panel[:id] = "#{panel[:id]}-comment-#{model.id}"
+              panel
+            end
           end
         end
       end
