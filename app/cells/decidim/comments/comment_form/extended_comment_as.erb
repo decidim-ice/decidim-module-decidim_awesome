@@ -1,19 +1,19 @@
 <%= decidim_original_comment_as_for(form) %>
 
 <% if attachments_allowed? %>
-  <% if !reply? %>
-    <%= form.attachment(
-          :add_documents,
-          multiple: true,
-          modal_id: "#{form_id}-documents",
-          # label: t("decidim.proposals.collaborative_drafts.new.add_file"),
-          # button_label: t("decidim.proposals.collaborative_drafts.new.add_file"),
-          # button_edit_label: t("decidim.proposals.collaborative_drafts.new.edit_file"),
-          button_class: "button button__lg button__transparent-secondary w-full",
-          # help_text: t("attachment_legend", scope: "decidim.proposals.collaborative_drafts.edit"),
-          help_i18n_scope: "decidim.forms.file_help.file"
-        ) %>
-  <% else %>
-    <%= form.file_field(:add_documents, multiple:true) %>
-  <% end %>
+  <%# <% if !reply? %1> %>
+    <%# <%= form.attachment( %>
+    <%#       :add_documents, %>
+    <%#       multiple: true, %>
+    <%#       modal_id: "#{form_id}-documents", %>
+    <%#       # label: t("decidim.proposals.collaborative_drafts.new.add_file"), %>
+    <%#       # button_label: t("decidim.proposals.collaborative_drafts.new.add_file"), %>
+    <%#       # button_edit_label: t("decidim.proposals.collaborative_drafts.new.edit_file"), %>
+    <%#       button_class: "button button__lg button__transparent-secondary w-full", %>
+    <%#       # help_text: t("attachment_legend", scope: "decidim.proposals.collaborative_drafts.edit"), %>
+    <%#       help_i18n_scope: "decidim.forms.file_help.file" %>
+    <%#     ) %1> %>
+  <%# <% else %1> %>
+    <%= form.file_field(:add_documents, multiple:true, direct_upload: true) %>
+  <%# <% end %1> %>
 <% end %>
