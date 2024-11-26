@@ -35,6 +35,12 @@ module Decidim
             create_attachments
           end
 
+          def title_for(attachment)
+            return { I18n.locale => attachment[:title] } if attachment.is_a?(Hash) && attachment.has_key?(:title)
+
+            { I18n.locale => attachment.original_filename }
+          end
+
           def attachments_allowed?
             @attachments_allowed ||= begin
               root_commentable = root_commentable(form.commentable)
