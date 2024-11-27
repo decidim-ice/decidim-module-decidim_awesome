@@ -8,6 +8,7 @@ module Decidim
 
         included do
           include Decidim::AttachmentsHelper
+          include CommentCellAttachments
 
           alias_method :decidim_original_comment_body, :comment_body
 
