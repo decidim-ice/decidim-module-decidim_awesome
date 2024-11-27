@@ -1,0 +1,7 @@
+<%= decidim_original_comment_as_for(form) %>
+
+<% if attachments_allowed? %>
+  <div class="mt-4 mb-4">
+    <%= form.file_field(:add_documents, multiple:true, direct_upload: true) %>
+  </div>
+<% end %>

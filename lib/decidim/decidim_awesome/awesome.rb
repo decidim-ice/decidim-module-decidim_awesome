@@ -48,6 +48,10 @@ module Decidim
       false
     end
 
+    config_accessor :allow_attachments_in_comments do
+      false
+    end
+
     # used to save forms in localstorage
     config_accessor :auto_save_forms do
       true
