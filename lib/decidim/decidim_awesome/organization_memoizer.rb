@@ -12,7 +12,7 @@ module Decidim
       # memoize a piece of code in the class instead of the instance (helper are initialized for each view)
       # only works if request.env["decidim.current_organization"] is defined
       def memoize(key, &)
-        return yield unless request.env["decidim.current_organization"]&.id
+        return yield unless defined?(request) && request.env["decidim.current_organization"]&.id
 
         OrganizationMemoizer.memoize("#{request.env["decidim.current_organization"].id}-#{key}", &)
       end
