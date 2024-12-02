@@ -6,6 +6,8 @@ module Decidim
   # add a global helper with awesome configuration
   module DecidimAwesome
     module AwesomeHelpers
+      include OrganizationMemoizer
+
       # Returns the normalized config for an Organization and the current url
       def awesome_config_instance
         return @awesome_config_instance if @awesome_config_instance
@@ -20,11 +22,15 @@ module Decidim
       end
 
       def awesome_config
-        @awesome_config ||= awesome_config_instance.config
+        memoize("awesome_config") do
+          awesome_config_instance.config
+        end
       end
 
       def javascript_config_vars
-        awesome_config.slice(:allow_images_in_proposals, :allow_images_in_editors, :allow_videos_in_editors, :auto_save_forms).to_json.html_safe
+        memoize("javascript_config_vars") do
+          awesome_config.slice(:allow_images_in_proposals, :allow_images_in_editors, :allow_videos_in_editors, :auto_save_forms).to_json.html_safe
+        end
       end
 
       def show_public_intergram?
@@ -35,11 +41,15 @@ module Decidim
       end
 
       def unfiltered_awesome_config
-        @unfiltered_awesome_config ||= awesome_config_instance.unfiltered_config
+        memoize("unfiltered_awesome_config") do
+          awesome_config_instance.unfiltered_config
+        end
       end
 
       def organization_awesome_config
-        @organization_awesome_config ||= awesome_config_instance.organization_config
+        memoize("organization_awesome_config") do
+          awesome_config_instance.organization_config
+        end
       end
 
       def awesome_version
@@ -48,33 +58,43 @@ module Decidim
 
       # Collects all CSS that is applied in the current URL context
       def awesome_scoped_styles
-        @awesome_scoped_styles ||= awesome_config_instance.collect_sub_configs_values("scoped_style")
+        memoize("awesome_scoped_styles") do
+          awesome_config_instance.collect_sub_configs_values("scoped_style")
+        end
       end
 
       # Collects all CSS that is applied in the current URL context
       def awesome_scoped_admin_styles
-        @awesome_scoped_admin_styles ||= awesome_config_instance.collect_sub_configs_values("scoped_admin_style")
+        memoize("awesome_scoped_admin_styles") do
+          awesome_config_instance.collect_sub_configs_values("scoped_admin_style")
+        end
       end
 
       # Collects all proposal custom fields that is applied in the current URL context
       def awesome_scoped_admins
-        @awesome_scoped_admins ||= awesome_config_instance.collect_sub_configs_values("scoped_admin")
+        memoize("awesome_scoped_admins") do
+          awesome_config_instance.collect_sub_configs_values("scoped_admin")
+        end
       end
 
       # Collects all proposal custom fields that is applied in the current URL context
       def awesome_proposal_custom_fields
-        @awesome_proposal_custom_fields ||= awesome_config_instance.collect_sub_configs_values("proposal_custom_field")
+        memoize("awesome_proposal_custom_fields") do
+          awesome_config_instance.collect_sub_configs_values("proposal_custom_field")
+        end
       end
 
       def awesome_proposal_private_custom_fields
-        @awesome_proposal_private_custom_fields ||= awesome_config_instance.collect_sub_configs_values("proposal_private_custom_field")
+        memoize("awesome_proposal_private_custom_fields") do
+          awesome_config_instance.collect_sub_configs_values("proposal_private_custom_field")
+        end
       end
 
       # this will check if the current component has been configured to use a custom voting manifest
       def awesome_voting_manifest_for(component)
-        return nil unless component.settings.respond_to? :awesome_voting_manifest
-
-        DecidimAwesome.voting_registry.find(component.settings.awesome_voting_manifest)
+        memoize("awesome_voting_manifest_for_#{component.id}") do
+          DecidimAwesome.voting_registry.find(component.settings.try(:awesome_voting_manifest))
+        end
       end
 
       # Retrives all the "admins_available_authorizations" for the user along with other possible authorizations
