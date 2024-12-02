@@ -106,7 +106,7 @@ module Decidim
         end
 
         def calculate_scores
-          @config_form = form(UsersAutoblocksConfigForm).from_model(current_config)
+          @config_form = form(UsersAutoblocksConfigForm).from_params(params)
 
           AutoblockUsers.call(@config_form, perform_block: false) do
             on(:ok) do |count|
