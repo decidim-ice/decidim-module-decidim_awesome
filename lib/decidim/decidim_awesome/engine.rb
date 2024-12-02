@@ -23,11 +23,9 @@ module Decidim
       # https://edgeguides.rubyonrails.org/engines.html#overriding-models-and-controllers
       # overrides
       config.to_prepare do
-        # activate Decidim LayoutHelper for the overriden views
-        ActiveSupport.on_load :action_controller do
-          helper Decidim::DecidimAwesome::AwesomeHelpers
-        end
-        # # Also for cells
+        # Include additional helpers globally
+        ActiveSupport.on_load(:action_view) { include Decidim::DecidimAwesome::AwesomeHelpers }
+        # Also for cells
         Decidim::ViewModel.include(Decidim::DecidimAwesome::AwesomeHelpers)
 
         # Override EtiquetteValidator

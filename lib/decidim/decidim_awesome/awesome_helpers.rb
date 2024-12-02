@@ -6,19 +6,15 @@ module Decidim
   # add a global helper with awesome configuration
   module DecidimAwesome
     module AwesomeHelpers
-      include OrganizationMemoizer
+      include RequestMemoizer
 
       # Returns the normalized config for an Organization and the current url
       def awesome_config_instance
-        return @awesome_config_instance if @awesome_config_instance
-
-        # if already created in the middleware, reuse it as it might have additional constraints
-        @awesome_config_instance = request.env["decidim_awesome.current_config"]
-        unless @awesome_config_instance.is_a? Config
-          @awesome_config_instance = Config.new request.env["decidim.current_organization"]
-          @awesome_config_instance.context_from_request request
+        memoize("current_config") do
+          config = Config.new(request.env["decidim.current_organization"])
+          config.context_from_request(request)
+          config
         end
-        @awesome_config_instance
       end
 
       def awesome_config
@@ -101,8 +97,9 @@ module Decidim
       # Retrives all the "admins_available_authorizations" for the user along with other possible authorizations
       # returns an instance of Decidim::DecidimAwesome::Authorizator
       def awesome_authorizations_for(user)
-        @awesome_authorizations_for ||= {}
-        @awesome_authorizations_for[user.id] ||= Authorizator.new(user, awesome_config[:admins_available_authorizations])
+        memoize("awesome_authorizations_for_#{user.id}") do
+          Authorizator.new(user, awesome_config[:admins_available_authorizations])
+        end
       end
 
       def version_prefix
