@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const messages = JSON.parse(submitButton.dataset.performBlockMessage);
     const justificationMessage = form.querySelector("[data-justification-message]");
 
+    submitButton.textContent = messages[event.target.checked];
+
     if (event.target.checked) {
       submitButton.setAttribute("data-confirm", submitButton.dataset.confirmMessage);
       justificationMessage.classList.remove("hidden");
