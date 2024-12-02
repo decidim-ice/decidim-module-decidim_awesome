@@ -125,7 +125,7 @@ module Decidim
 
         def types_options
           Decidim::DecidimAwesome::UserAutoblockScoresPresenter::USERS_AUTOBLOCKS_TYPES.keys.index_by do |key|
-            I18n.t(key, scope: "decidim.decidim_awesome.admin.users_autoblocks.form.types")
+            I18n.t(key, scope: "decidim.decidim_awesome.admin.users_autoblocks.form.types_long")
           end
         end
 
