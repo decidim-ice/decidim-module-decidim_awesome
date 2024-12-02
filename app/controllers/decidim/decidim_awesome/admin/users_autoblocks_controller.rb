@@ -97,8 +97,8 @@ module Decidim
                                end
             end
 
-            on(:invalid) do |message|
-              flash[:alert] = I18n.t("error", error: message, scope: "decidim.decidim_awesome.admin.users_autoblocks.detect_and_run")
+            on(:invalid) do |messages|
+              flash[:alert] = I18n.t("error", error: messages.join("<br/>"), scope: "decidim.decidim_awesome.admin.users_autoblocks.detect_and_run")
             end
           end
 

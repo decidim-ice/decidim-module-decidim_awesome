@@ -701,8 +701,8 @@ en:
             error: Error removing rule! %{error}
             success: Rule removed successfully
           detect_and_run:
-            error: There has been an error trying to block users! %{error}
-            success_html:
+            error: There has been an error trying to block users!<br/>%{error}
+            success_block_html:
               one: 1 user blocked successfully. You can check at <a href="%{url}">blocked
                 users</a>
               other: '%{count} users blocked succesfully. You can check at <a href="%{url}">blocked
