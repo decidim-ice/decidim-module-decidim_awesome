@@ -12,8 +12,10 @@ module Decidim
       let!(:component) { create(:proposal_component, :with_votes_enabled, organization:, settings: { awesome_voting_manifest: manifest }) }
       let!(:extra_fields) { create(:awesome_proposal_extra_fields, proposal:) }
       let(:proposal) { create(:proposal, component:) }
+      let(:request) { double(host: "example.org", env: {}) }
 
       before do
+        allow(subject).to receive(:request).and_return(request)
         Decidim::DecidimAwesome.voting_registry.register(:another_voting_system) do |voting|
           voting.show_vote_button_view = ""
           voting.show_votes_count_view = ""
@@ -41,6 +43,7 @@ module Decidim
         extra_fields.update_column(:vote_weight_totals, 100)
         # rubocop:enable Rails/SkipsModelValidations
         proposal.reload
+        subject.instance_variable_set(:@cache_hash, nil)
         expect(cache1).not_to eq(subject.send(:cache_hash))
       end
     end
