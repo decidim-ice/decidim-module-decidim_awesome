@@ -15,7 +15,7 @@ module Decidim
         end
 
         def cache_hash
-          @cache_hash ||= "#{decidim_original_cache_hash}#{Decidim.cache_key_separator}#{model.extra_fields&.reload&.vote_weight_totals}"
+          @cache_hash ||= "#{decidim_original_cache_hash}#{Decidim.cache_key_separator}#{model.extra_fields&.vote_weight_totals}"
         end
       end
     end
