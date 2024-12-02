@@ -160,7 +160,7 @@ module Decidim
 
         def load_calculations
           @scores_counts = {}
-          return unless File.exist?(calculations_path)
+          return unless File.exist?(calculations_path) && current_config.threshold.present?
 
           calculations = CSV.read(calculations_path, headers: true, col_sep: ";")
           rules_headers = calculations.headers.grep(/ - \d+/)
