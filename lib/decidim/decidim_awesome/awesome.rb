@@ -4,6 +4,8 @@ module Decidim
   module DecidimAwesome
     include ActiveSupport::Configurable
 
+    autoload :AwesomeHelpers, "decidim/decidim_awesome/awesome_helpers"
+    autoload :OrganizationMemoizer, "decidim/decidim_awesome/organization_memoizer"
     autoload :Config, "decidim/decidim_awesome/config"
     autoload :SystemChecker, "decidim/decidim_awesome/system_checker"
     autoload :ContextAnalyzers, "decidim/decidim_awesome/context_analyzers"
