@@ -712,6 +712,12 @@ en:
               email_domain: Email domain included in list
               email_unconfirmed: User email is not confirmed
               links_in_comments_or_about: Comments or about section contains links
+            types_long:
+              about_blank: About user section is blank (allow and block lists applies to the user email domain)
+              activities_blank: User has not created contents (allow and block lists applies to the user email domain)
+              email_domain: Email domain included in list (allow and block lists applies to the user email domain)
+              email_unconfirmed: User email is not confirmed (allow and block lists applies to the user email domain)
+              links_in_comments_or_about: Comments or about section contains links (allow and block lists are applied to the links found)
             variables_help:
               allow_domains_list: The rule does NOT apply to this list of domains
                 (separated by spaces)
