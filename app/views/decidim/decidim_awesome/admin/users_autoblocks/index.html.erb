@@ -40,7 +40,12 @@
       </table>
     </div>
 
-    <%= decidim_form_for(@config_form, method: :post, url: decidim_admin_decidim_awesome.detect_and_run_users_autoblocks_path, html: { class: "form-defaults awesome-edit-config" }) do |f| %>
+    <%= decidim_form_for(
+          @config_form,
+          method: :post,
+          url: decidim_admin_decidim_awesome.detect_and_run_users_autoblocks_path,
+          html: { class: "form-defaults", id: "users_autoblocks_config"}
+        ) do |f| %>
       <div class="card pt-4">
         <div class="card-section">
           <%= render partial: "config_form", locals: { form: f } %>
@@ -49,8 +54,7 @@
 
       <div class="item__edit-sticky">
         <div class="item__edit-sticky-container">
-          <%= link_to t(".calculate_scores"), decidim_admin_decidim_awesome.calculate_scores_users_autoblocks_path, method: :post, class: "button button__sm button__secondary" %>
-          <%= f.submit t(".detect_and_run"), class: "button button__sm button__secondary", data: { confirm: t(".confirm_block") } %>
+          <%= f.submit t(".calculate_scores"), class: "button button__sm button__secondary", data: { confirm_message: t(".confirm_block"), perform_block_message: { "true": t(".detect_and_run"), "false": t(".calculate_scores") } } %>
         </div>
       </div>
     <% end %>
