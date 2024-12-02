@@ -79,13 +79,22 @@ module Decidim
           @config_form = form(UsersAutoblocksConfigForm).from_params(params)
 
           AutoblockUsers.call(@config_form) do
-            on(:ok) do |count|
-              flash[:notice] = I18n.t(
-                "success_html",
-                count:,
-                url: decidim_admin.moderated_users_path(blocked: true),
-                scope: "decidim.decidim_awesome.admin.users_autoblocks.detect_and_run"
-              )
+            on(:ok) do |count, block_performed|
+              flash[:notice] = if block_performed
+                                 I18n.t(
+                                   "success_block_html",
+                                   count:,
+                                   url: decidim_admin.moderated_users_path(blocked: true),
+                                   scope: "decidim.decidim_awesome.admin.users_autoblocks.detect_and_run"
+                                 )
+                               else
+                                 I18n.t(
+                                   "success_scores_calculation",
+                                   count:,
+                                   scope: "decidim.decidim_awesome.admin.users_autoblocks.detect_and_run"
+                                 )
+
+                               end
             end
 
             on(:invalid) do |message|

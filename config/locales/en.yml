@@ -78,6 +78,10 @@ en:
         blocklist: Block list
         type: Rule
         weight: Apply weight
+      users_autoblocks_config:
+        block_justification_message: Block justification message
+        perform_block: Perform users blocking
+        threshold: Threshold
   decidim:
     admin:
       actions:
@@ -685,6 +689,7 @@ en:
           config_form:
             block_justification_message_help: Justification that will receive the
               detected users in their block notification
+            perform_block_message_help: Automatically block users who exceed the threshold
             threshold_config_detected_cases: 'Number of cases that reach the threshold:
               %{count}'
             threshold_config_help: Define the numerical threshold (equal or greater
@@ -702,6 +707,11 @@ en:
                 users</a>
               other: '%{count} users blocked succesfully. You can check at <a href="%{url}">blocked
                 users</a>'
+              zero: No users have been found who have a sufficient score to be blocked
+                automatically
+            success_scores_calculation:
+              one: 1 user found with enough score to be blocked
+              other: '%{count} users found with enough score to be blocked'
               zero: No users have been found who have a sufficient score to be blocked
                 automatically
           edit:
