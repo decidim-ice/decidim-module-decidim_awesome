@@ -23,10 +23,6 @@ module Decidim
       # https://edgeguides.rubyonrails.org/engines.html#overriding-models-and-controllers
       # overrides
       config.to_prepare do
-        # activate Decidim LayoutHelper for the overriden views
-        ActiveSupport.on_load :action_controller do
-          helper Decidim::LayoutHelper if respond_to?(:helper)
-        end
         # Include additional helpers globally
         ActiveSupport.on_load(:action_view) { include Decidim::DecidimAwesome::AwesomeHelpers }
         # Also for cells
