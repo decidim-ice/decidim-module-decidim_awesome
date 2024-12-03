@@ -23,11 +23,11 @@ module Decidim
       end
 
       def about_blank_detection_method(allowlist:, blocklist:)
-        email_domain_detection_method(allowlist:, blocklist:) && about.blank?
+        email_domain_detection_method(allowlist:, blocklist:, skip_with_blank_lists: false) && about.blank?
       end
 
       def activities_blank_detection_method(allowlist:, blocklist:)
-        email_domain_detection_method(allowlist:, blocklist:) && UserActivities.new(__getobj__).blank?
+        email_domain_detection_method(allowlist:, blocklist:, skip_with_blank_lists: false) && UserActivities.new(__getobj__).blank?
       end
 
       def links_in_comments_or_about_detection_method(allowlist:, blocklist:)
@@ -36,10 +36,12 @@ module Decidim
       end
 
       def email_unconfirmed_detection_method(allowlist:, blocklist:)
-        email_domain_detection_method(allowlist:, blocklist:) && !confirmed?
+        email_domain_detection_method(allowlist:, blocklist:, skip_with_blank_lists: false) && !confirmed?
       end
 
-      def email_domain_detection_method(allowlist:, blocklist:)
+      def email_domain_detection_method(allowlist:, blocklist:, skip_with_blank_lists: true)
+        return if skip_with_blank_lists && allowlist.blank? && blocklist.blank?
+
         email_domain = email.split("@").last
         email_domain.blank? ||
           (
