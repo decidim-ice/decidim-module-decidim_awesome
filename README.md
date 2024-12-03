@@ -425,6 +425,31 @@ Note this feature is **disabled by default**, admins can enabled it under the "S
 ![Hashcash admin config](examples/haschcash_admin.png)
 ![Hashcash public rendering](examples/hashcash_public.png)
 
+#### 23. Users Automatic Blocks
+Automatically block users based on activities or suspicious data using customizable rules. 
+![treshold_actions](https://github.com/user-attachments/assets/6138226b-e33e-4e15-838b-452e80853b40)
+
+##### 1) Add Rules
+Define how and when each rule applies:
+- About user section is blank
+- User has not created content
+- Comments or about section contains links
+- User email is not confirmed
+- Email domain included in the list (can also act as an allow/block list)
+![new_rule](https://github.com/user-attachments/assets/cfd5c2fe-6ae8-4680-8683-35c7d5546f52)
+
+##### 2) Define the Threshold
+Each rule contributes weight to the "spam risk index," and users who exceed the defined threshold can be blocked.
+For example, if the threshold is set to "6" and each of the two defined rules has a weight of 5, both conditions must be met for a user to be flagged, as shown in the example screenshot.
+
+##### 3) Possible Actions
+- If "Perform users blocking" is unchecked: Calculates scores and generates a CSV with flagged users for review. If checked: Prompts for confirmation, blocks flagged users, and generates a CSV with blocked users.
+- "Allow to perform the configured users block from a task". Check this option to allow a cron scheduler to run an automatic blocking task for the organization with this configuration. The configuration will be saved when calculating scores or performing the users block. The execution to be scheduled is `bundle exec rake decidim_decidim_awesome:autoblock_users:run_scheduled_block`. All organizations without a configuration or with this option unchecked will be ignored by the task.
+- "Notify blocked users". Check this option to send a notification to each blocked user. Note that if there are many users to block this can consume a lot of resources. If this option is set a mandatory field with the justification message to send to the blocked users will be displayed.
+
+##### Recommendation:
+Review the CSV of flagged users before confirming to block them. However, blocked users can still be reviewed and unblocked later through Global Moderation > Blocked Users (/admin/moderated_users?blocked=true).
+
 #### To be continued...
 
 We're not done! Please check the [issues](/decidim-ice/decidim-module-decidim_awesome/issues) (and participate) to see what's on our mind
