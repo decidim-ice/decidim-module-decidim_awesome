@@ -49,7 +49,7 @@ describe "Managing the participants" do
 
     it "can authorize a participant" do
       within "tr", text: participant2.name do
-        within "button[data-verification-user-id=\"#{participant2.id}\"]" do
+        within "a[data-verification-user-id=\"#{participant2.id}\"]" do
           expect(page).to have_css("svg.unchecked")
         end
         click_on "Example authorization"
@@ -66,7 +66,7 @@ describe "Managing the participants" do
       end
 
       within "tr", text: participant2.name do
-        within "button[data-verification-user-id=\"#{participant2.id}\"]" do
+        within "a[data-verification-user-id=\"#{participant2.id}\"]" do
           expect(page).to have_content("Example authorization")
           expect(page).to have_css("svg.checked")
         end
@@ -79,7 +79,7 @@ describe "Managing the participants" do
 
     it "can revoke an authorization" do
       within "tr", text: participant1.name do
-        within "button[data-verification-user-id=\"#{participant1.id}\"]" do
+        within "a[data-verification-user-id=\"#{participant1.id}\"]" do
           expect(page).to have_content("Example authorization")
           expect(page).to have_css("svg.checked")
         end
@@ -92,7 +92,7 @@ describe "Managing the participants" do
       end
 
       within "tr", text: participant1.name do
-        within "button[data-verification-user-id=\"#{participant1.id}\"]" do
+        within "a[data-verification-user-id=\"#{participant1.id}\"]" do
           expect(page).to have_content("Example authorization")
           expect(page).to have_css("svg.unchecked")
         end
@@ -102,7 +102,7 @@ describe "Managing the participants" do
 
     it "can force an authorization" do
       within "tr", text: participant2.name do
-        within "button[data-verification-user-id=\"#{participant2.id}\"]" do
+        within "a[data-verification-user-id=\"#{participant2.id}\"]" do
           expect(page).to have_css("svg.unchecked")
         end
         click_on "Example authorization"
@@ -119,7 +119,7 @@ describe "Managing the participants" do
       end
 
       within "tr", text: participant2.name do
-        within "button[data-verification-user-id=\"#{participant2.id}\"]" do
+        within "a[data-verification-user-id=\"#{participant2.id}\"]" do
           expect(page).to have_content("Example authorization")
           expect(page).to have_css("svg.checked")
         end
@@ -136,7 +136,7 @@ describe "Managing the participants" do
 
       it "cannot force an authorization" do
         within "tr", text: participant2.name do
-          within "button[data-verification-user-id=\"#{participant2.id}\"]" do
+          within "a[data-verification-user-id=\"#{participant2.id}\"]" do
             expect(page).to have_css("svg.unchecked")
           end
           click_on "Example authorization"
@@ -151,7 +151,7 @@ describe "Managing the participants" do
         end
 
         within "tr", text: participant2.name do
-          within "button[data-verification-user-id=\"#{participant2.id}\"]" do
+          within "a[data-verification-user-id=\"#{participant2.id}\"]" do
             expect(page).to have_content("Example authorization")
             expect(page).to have_css("svg.unchecked")
           end

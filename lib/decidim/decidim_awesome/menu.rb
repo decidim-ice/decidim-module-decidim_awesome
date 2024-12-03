@@ -112,7 +112,7 @@ module Decidim
           end
         end
 
-        def register_custom__styles_submenu!
+        def register_custom_styles_submenu!
           Decidim.menu :custom_styles_submenu do |menu|
             menu.add_item :scoped_styles,
                           I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.scoped_styles"),
