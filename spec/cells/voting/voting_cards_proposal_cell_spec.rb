@@ -22,11 +22,11 @@ module Decidim
           ]
         end
 
-        describe "#proposal_votes" do
+        describe "#weight_count_for" do
           it "returns the correct number of votes for a given weight" do
-            expect(subject.proposal_votes(1)).to eq(3)
-            expect(subject.proposal_votes(2)).to eq(2)
-            expect(subject.proposal_votes(3)).to eq(1)
+            expect(subject.weight_count_for(1)).to eq(3)
+            expect(subject.weight_count_for(2)).to eq(2)
+            expect(subject.weight_count_for(3)).to eq(1)
           end
         end
 

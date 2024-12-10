@@ -17,10 +17,6 @@ module Decidim
           }
         end
 
-        def proposal_votes(weight)
-          model.weight_count(weight)
-        end
-
         def voted_for?(option)
           user_voted_weight == option
         end
