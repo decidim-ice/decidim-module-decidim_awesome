@@ -28,11 +28,26 @@ module Decidim
         end
 
         def current_vote
-          @current_vote ||= Decidim::Proposals::ProposalVote.find_by(author: current_user, proposal: model)
+          @current_vote ||= vote_for(current_user) if current_user
         end
 
         def user_voted_weight
           current_vote&.weight
+        end
+
+        def vote_for(user)
+          user_votes = memoize("user_votes")
+          return user_votes[model.id] if user_votes
+
+          model.votes.find_by(author: user)
+        end
+
+        def weight_count_for(weight)
+          all_extra_fields = memoize("extra_fields")
+          extra_fields = all_extra_fields ? all_extra_fields[model.id] : model.extra_fields
+          return 0 unless extra_fields
+
+          extra_fields.vote_weight_totals[weight.to_s] || 0
         end
       end
     end
