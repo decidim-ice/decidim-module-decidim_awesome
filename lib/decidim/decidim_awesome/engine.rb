@@ -131,6 +131,7 @@ module Decidim
           end
 
           if DecidimAwesome.enabled?(:weighted_proposal_voting)
+            Decidim::Proposals::ProposalsController.include(Decidim::DecidimAwesome::Proposals::MemoizeExtraFields)
             Decidim::Proposals::ProposalVotesController.include(Decidim::DecidimAwesome::Proposals::ProposalVotesControllerOverride)
           end
 
