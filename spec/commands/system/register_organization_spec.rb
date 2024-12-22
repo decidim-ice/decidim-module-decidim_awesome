@@ -3,7 +3,7 @@
 require "spec_helper"
 
 module Decidim::System
-  describe RegisterOrganization do
+  describe CreateOrganization do
     describe "call" do
       let(:form) do
         RegisterOrganizationForm.new(params)

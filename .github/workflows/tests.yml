@@ -10,7 +10,7 @@ env:
   CI: 1
   SIMPLECOV: 1
   NODE_VERSION: 18.17.1
-  RUBY_VERSION: 3.1.1
+  RUBY_VERSION: 3.2.2
   BUNDLE_GEMFILE: Gemfile
   DISPLAY: ":99"
   PARALLEL_TEST_PROCESSORS: 2
@@ -143,7 +143,7 @@ jobs:
         with:
           name: workspace
           path: /tmp
-      
+
       - run: tar -zxf /tmp/testapp-env.tar.gz
         name: Restore application
 

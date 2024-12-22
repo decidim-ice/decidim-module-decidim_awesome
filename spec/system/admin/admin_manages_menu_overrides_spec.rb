@@ -50,7 +50,7 @@ describe "Admin manages hacked menus" do
 
         within "table tbody" do
           expect(page).to have_content("A new beggining")
-          expect(page).not_to have_content("Home")
+          expect(page).to have_no_content("Home")
         end
       end
 
@@ -84,7 +84,7 @@ describe "Admin manages hacked menus" do
           within "table tbody" do
             expect(page).to have_content("Native edited")
             expect(page).to have_content("/some-path")
-            expect(page).not_to have_content("/some-path?locale=ca")
+            expect(page).to have_no_content("/some-path?locale=ca")
           end
         end
       end
@@ -100,7 +100,7 @@ describe "Admin manages hacked menus" do
         it "shows default and overrides menu items" do
           within "table tbody" do
             expect(page).to have_content("A new beggining")
-            expect(page).not_to have_content(default_menu_item[:label])
+            expect(page).to have_no_content(default_menu_item[:label])
             (default_menu_labels - [default_menu_item[:label]]).each do |label|
               expect(page).to have_content(label)
             end
@@ -117,8 +117,8 @@ describe "Admin manages hacked menus" do
 
           within "table tbody" do
             expect(page).to have_content("Another thing")
-            expect(page).not_to have_content("A new beggining")
-            expect(page).not_to have_content("Home")
+            expect(page).to have_no_content("A new beggining")
+            expect(page).to have_no_content("Home")
           end
         end
 
@@ -129,7 +129,7 @@ describe "Admin manages hacked menus" do
 
           within "table tbody" do
             expect(page).to have_content(default_menu_item[:label])
-            expect(page).not_to have_content("A new beggining")
+            expect(page).to have_no_content("A new beggining")
           end
         end
       end
@@ -161,7 +161,7 @@ describe "Admin manages hacked menus" do
 
           within "table tbody" do
             expect(page).to have_content("Another thing")
-            expect(page).not_to have_content("A new link")
+            expect(page).to have_no_content("A new link")
           end
         end
 
@@ -171,7 +171,7 @@ describe "Admin manages hacked menus" do
           end
 
           within "table tbody" do
-            expect(page).not_to have_content("A new link")
+            expect(page).to have_no_content("A new link")
           end
         end
       end
@@ -180,7 +180,7 @@ describe "Admin manages hacked menus" do
 
   context "with main menu" do
     let!(:menu_name) { "menu" }
-    let(:default_menu_labels) { %w(Home Processes Help) }
+    let(:default_menu_labels) { %w(Home Processes) }
     let(:default_menu_item) { { label: "Home", path: "/" } }
 
     it_behaves_like "admin manages menu overrides"

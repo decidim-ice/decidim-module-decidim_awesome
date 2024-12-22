@@ -26,7 +26,7 @@ shared_examples "saves content" do |key|
     click_link_or_button "Update configuration"
 
     expect(page).to have_admin_callout("updated successfully")
-    expect(page).not_to have_content("body {background: red;}")
+    expect(page).to have_no_content("body {background: red;}")
     expect(page).to have_content("body {background: green;}")
     expect(page).to have_content("body {background: blue;}")
   end
@@ -37,7 +37,7 @@ shared_examples "saves content" do |key|
     click_link_or_button "Update configuration"
 
     expect(page).to have_admin_callout("Error updating configuration!")
-    expect(page).not_to have_content("body {background: red;}")
+    expect(page).to have_no_content("body {background: red;}")
     expect(page).to have_content("body {background: blue;}")
     expect(page).to have_content("I am invalid CSS")
   end
@@ -68,7 +68,7 @@ shared_examples "removes a box" do
 
     expect(page).to have_admin_callout("removed successfully")
     expect(page).to have_content("body {background: blue;}")
-    expect(page).not_to have_content("body {background: red;}")
+    expect(page).to have_no_content("body {background: red;}")
     expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: "#{var_name}_foo")).not_to be_present
     expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: "#{var_name}_bar")).to be_present
   end
@@ -121,13 +121,13 @@ shared_examples "removes a constraint" do
     end
 
     within ".scoped_styles_container[data-key=\"bar\"] .constraints-editor" do
-      expect(page).not_to have_content("Processes")
+      expect(page).to have_no_content("Processes")
     end
 
     visit decidim_admin_decidim_awesome.config_path("#{var_name}s")
 
     within ".scoped_styles_container[data-key=\"bar\"] .constraints-editor" do
-      expect(page).not_to have_content("Processes")
+      expect(page).to have_no_content("Processes")
     end
 
     expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: "#{var_name}_bar")).to be_present
@@ -147,7 +147,7 @@ end
 
 shared_examples "no extra css is added" do
   it "css is no present" do
-    expect(page.body).not_to have_content("body {background: red;}")
+    expect(page.body).to have_no_content("body {background: red;}")
   end
 
   it "css is not applyied" do

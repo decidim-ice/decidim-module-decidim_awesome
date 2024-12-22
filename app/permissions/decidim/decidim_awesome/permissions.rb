@@ -22,13 +22,14 @@ module Decidim
         return allow! if user.admin?
         return allow! if config[:allow_images_in_proposals]
         return allow! if config[:allow_images_in_editors]
-        return allow! if config[:allow_videos_in_editors]
+
+        allow! if config[:allow_videos_in_editors]
       end
 
       def required_authorizations_action?
         return false unless permission_action.subject == :required_authorizations
 
-        return allow! unless context[:user_is_authorized]
+        allow! unless context[:user_is_authorized]
       end
     end
   end

@@ -49,7 +49,7 @@ describe "Admin accountability" do
     it "does not show the admin accountability link" do
       click_link_or_button "Participants"
 
-      expect(page).not_to have_content("Admin accountability")
+      expect(page).to have_no_content("Admin accountability")
     end
   end
 
@@ -68,7 +68,7 @@ describe "Admin accountability" do
     it "shows the correct information for each user", :versioning do
       click_link_or_button "Admin accountability"
 
-      expect(page).not_to have_content("NOTE: This list might not include users created/removed before")
+      expect(page).to have_no_content("NOTE: This list might not include users created/removed before")
 
       expect(page).to have_link("Processes > #{participatory_process.title["en"]}",
                                 href: "/admin/participatory_processes/#{participatory_process.slug}/user_roles", count: 4)
@@ -79,9 +79,9 @@ describe "Admin accountability" do
         expect(page).to have_content(moderator.email)
         expect(page).to have_content(1.day.ago.strftime("%d/%m/%Y %H:%M"))
         expect(page).to have_content("Currently active")
-        expect(page).not_to have_content(login_date.strftime("%d/%m/%Y %H:%M"))
+        expect(page).to have_no_content(login_date.strftime("%d/%m/%Y %H:%M"))
         expect(page).to have_content("Never logged yet")
-        expect(page).not_to have_content(Time.current.strftime("%d/%m/%Y %H:%M"))
+        expect(page).to have_no_content(Time.current.strftime("%d/%m/%Y %H:%M"))
       end
 
       within all("table tr")[2] do
@@ -89,10 +89,10 @@ describe "Admin accountability" do
         expect(page).to have_content(collaborator.name)
         expect(page).to have_content(collaborator.email)
         expect(page).to have_content(2.days.ago.strftime("%d/%m/%Y %H:%M"))
-        expect(page).not_to have_content(login_date.strftime("%d/%m/%Y %H:%M"))
+        expect(page).to have_no_content(login_date.strftime("%d/%m/%Y %H:%M"))
         expect(page).to have_content("Never logged yet")
         expect(page).to have_content(Time.current.strftime("%d/%m/%Y %H:%M"))
-        expect(page).not_to have_content("Currently active")
+        expect(page).to have_no_content("Currently active")
       end
 
       within all("table tr")[3] do
@@ -101,9 +101,9 @@ describe "Admin accountability" do
         expect(page).to have_content(valuator.email)
         expect(page).to have_content(3.days.ago.strftime("%d/%m/%Y %H:%M"))
         expect(page).to have_content("Currently active")
-        expect(page).not_to have_content(login_date.strftime("%d/%m/%Y %H:%M"))
+        expect(page).to have_no_content(login_date.strftime("%d/%m/%Y %H:%M"))
         expect(page).to have_content("Never logged yet")
-        expect(page).not_to have_content(Time.current.strftime("%d/%m/%Y %H:%M"))
+        expect(page).to have_no_content(Time.current.strftime("%d/%m/%Y %H:%M"))
       end
 
       within all("table tr")[4] do
@@ -113,8 +113,8 @@ describe "Admin accountability" do
         expect(page).to have_content(4.days.ago.strftime("%d/%m/%Y %H:%M"))
         expect(page).to have_content("Currently active")
         expect(page).to have_content(login_date.strftime("%d/%m/%Y %H:%M"))
-        expect(page).not_to have_content("Never logged yet")
-        expect(page).not_to have_content(Time.current.strftime("%d/%m/%Y %H:%M"))
+        expect(page).to have_no_content("Never logged yet")
+        expect(page).to have_no_content(Time.current.strftime("%d/%m/%Y %H:%M"))
       end
     end
 
@@ -131,17 +131,17 @@ describe "Admin accountability" do
 
         expect(page).to have_link("Processes > #{participatory_process.title["en"]}",
                                   href: "/admin/participatory_processes/#{participatory_process.slug}/user_roles", count: 4)
-        expect(page).not_to have_link("Processes > #{external_participatory_process.title["en"]}",
-                                      href: "/admin/participatory_processes/#{external_participatory_process.slug}/user_roles")
+        expect(page).to have_no_link("Processes > #{external_participatory_process.title["en"]}",
+                                     href: "/admin/participatory_processes/#{external_participatory_process.slug}/user_roles")
 
         expect(page).to have_content(administrator.email)
         expect(page).to have_content(moderator.email)
         expect(page).to have_content(collaborator.email)
         expect(page).to have_content(valuator.email)
-        expect(page).not_to have_content(external_administrator.email)
-        expect(page).not_to have_content(external_moderator.email)
-        expect(page).not_to have_content(external_collaborator.email)
-        expect(page).not_to have_content(external_valuator.email)
+        expect(page).to have_no_content(external_administrator.email)
+        expect(page).to have_no_content(external_moderator.email)
+        expect(page).to have_no_content(external_collaborator.email)
+        expect(page).to have_no_content(external_valuator.email)
       end
 
       context "when visiting the external organization" do
@@ -157,14 +157,14 @@ describe "Admin accountability" do
         end
 
         it "shows data only for external_organization", :versioning do
-          expect(page).not_to have_link("Processes > #{participatory_process.title["en"]}",
-                                        href: "/admin/participatory_processes/#{participatory_process.slug}/user_roles")
+          expect(page).to have_no_link("Processes > #{participatory_process.title["en"]}",
+                                       href: "/admin/participatory_processes/#{participatory_process.slug}/user_roles")
           expect(page).to have_link("Processes > #{external_participatory_process.title["en"]}",
                                     href: "/admin/participatory_processes/#{external_participatory_process.slug}/user_roles")
-          expect(page).not_to have_content(administrator.name)
-          expect(page).not_to have_content(valuator.name)
-          expect(page).not_to have_content(collaborator.name)
-          expect(page).not_to have_content(moderator.name)
+          expect(page).to have_no_content(administrator.name)
+          expect(page).to have_no_content(valuator.name)
+          expect(page).to have_no_content(collaborator.name)
+          expect(page).to have_no_content(moderator.name)
           expect(page).to have_content(external_administrator.name)
           expect(page).to have_content(external_valuator.name)
           expect(page).to have_content(external_collaborator.name)
@@ -196,7 +196,7 @@ describe "Admin accountability" do
         expect(page).to have_content(collaborator.name)
         expect(page).to have_content(collaborator.email)
         expect(page).to have_content(1.day.ago.strftime("%d/%m/%Y %H:%M"))
-        expect(page).not_to have_content(Time.current.strftime("%d/%m/%Y %H:%M"))
+        expect(page).to have_no_content(Time.current.strftime("%d/%m/%Y %H:%M"))
         expect(page).to have_content("Currently active")
       end
 
@@ -206,7 +206,7 @@ describe "Admin accountability" do
         expect(page).to have_content(collaborator.email)
         expect(page).to have_content(2.days.ago.strftime("%d/%m/%Y %H:%M"))
         expect(page).to have_content(Time.current.strftime("%d/%m/%Y %H:%M"))
-        expect(page).not_to have_content("Currently active")
+        expect(page).to have_no_content("Currently active")
       end
 
       within all("table tr")[3] do
@@ -215,7 +215,7 @@ describe "Admin accountability" do
         expect(page).to have_content(collaborator.email)
         expect(page).to have_content(3.days.ago.strftime("%d/%m/%Y %H:%M"))
         expect(page).to have_content(Time.current.strftime("%d/%m/%Y %H:%M"))
-        expect(page).not_to have_content("Currently active")
+        expect(page).to have_no_content("Currently active")
       end
     end
   end
@@ -237,7 +237,7 @@ describe "Admin accountability" do
         expect(page).to have_content("Valuator")
         expect(page).to have_content("Deleted user")
         expect(page).to have_content(2.days.ago.strftime("%d/%m/%Y %H:%M"))
-        expect(page).not_to have_content(Time.current.strftime("%d/%m/%Y %H:%M"))
+        expect(page).to have_no_content(Time.current.strftime("%d/%m/%Y %H:%M"))
         expect(page).to have_content("Currently active")
       end
 
@@ -245,7 +245,7 @@ describe "Admin accountability" do
         expect(page).to have_content("Collaborator")
         expect(page).to have_content("User not in the database")
         expect(page).to have_content(3.days.ago.strftime("%d/%m/%Y %H:%M"))
-        expect(page).not_to have_content(Time.current.strftime("%d/%m/%Y %H:%M"))
+        expect(page).to have_no_content(Time.current.strftime("%d/%m/%Y %H:%M"))
         expect(page).to have_content("Currently active")
       end
     end
@@ -262,10 +262,10 @@ describe "Admin accountability" do
     it "shows the current admins", :versioning do
       click_link_or_button "List global admins"
 
-      expect(page).not_to have_content("NOTE: This list might not include users created/removed before")
+      expect(page).to have_no_content("NOTE: This list might not include users created/removed before")
 
-      expect(page).not_to have_content(external_admin.name)
-      expect(page).not_to have_content(external_admin.email)
+      expect(page).to have_no_content(external_admin.name)
+      expect(page).to have_no_content(external_admin.email)
 
       within all("table tr")[1] do
         expect(page).to have_content("Super admin")
@@ -280,7 +280,7 @@ describe "Admin accountability" do
         expect(page).to have_content("Super admin")
         expect(page).to have_content(admin.name)
         expect(page).to have_content(admin.email)
-        expect(page).not_to have_content("Never logged yet")
+        expect(page).to have_no_content("Never logged yet")
         expect(page).to have_content(admin.created_at.strftime("%d/%m/%Y %H:%M"))
         expect(page).to have_content("Currently active")
       end

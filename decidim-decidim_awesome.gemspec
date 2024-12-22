@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email = ["ivan@pokecode.net"]
   s.license = "AGPL-3.0"
   s.homepage = "https://github.com/decidim-ice/decidim-module-decidim_awesome"
-  s.required_ruby_version = ">= 3.1"
+  s.required_ruby_version = ">= 3.2"
   s.name = "decidim-decidim_awesome"
   s.summary = "A decidim decidim_awesome module"
   s.description = "Some usability and UX tweaks for Decidim."

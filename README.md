@@ -413,7 +413,7 @@ Decidim::DecidimAwesome.configure do |config|
 #### 21. Manual verifications
 
 The admin will be allowed to manually authorize users using the methods specified in the `/system` admin section.
-Currently, only form based handlers are supported (Direct methods). 
+Currently, only form based handlers are supported (Direct methods).
 Admins can manually override or verify users in the participants list but they still have to fulfill the requirements of the verifier (although they will be allowed to force the authorization even if some of them fails).
 
 Admin logs are also created in each action for accountability.
@@ -618,9 +618,9 @@ You can run run tests against the legacy Decidim versions by using:
 ```bash
 export DATABASE_USERNAME=<username>
 export DATABASE_PASSWORD=<password>
-RBENV_VERSION=3.1.1 BUNDLE_GEMFILE=Gemfile.legacy bundle
-RBENV_VERSION=3.1.1 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rake test_app
-RBENV_VERSION=3.1.1 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rspec
+RBENV_VERSION=3.2.2 BUNDLE_GEMFILE=Gemfile.legacy bundle
+RBENV_VERSION=3.2.2 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rake test_app
+RBENV_VERSION=3.2.2 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rspec
 ```
 
 For convenience, you can use the scripts `bin/test` and `bin/test-legacy` to run tests against one or the other version:

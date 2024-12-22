@@ -1,0 +1,67 @@
+.filters__section {
+  @apply flex gap-4 items-start;
+
+  input {
+    @apply h-9;
+  }
+
+  .form-label {
+    @apply block;
+  }
+
+  .dropdown__container {
+    @apply flex flex-col items-start gap-0 py-0;
+
+    .form-label {
+      @apply block text-sm p-0;
+    }
+
+    .dropdown {
+      @apply flex items-center h-9;
+    }
+  }
+
+  .grid {
+    @apply flex gap-4 items-start;
+  }
+
+  .datepicker_field {
+    @apply flex flex-col;
+
+    .datepicker__datepicker-row {
+      @apply flex items-center gap-2 order-1;
+    }
+
+    .datepicker__help-text-container {
+      @apply order-2 w-full;
+    }
+
+    .help-text.datepicker__help-date {
+      @apply w-full;
+    }
+
+    .input-group-field {
+      @apply h-9 px-2;
+    }
+
+    button {
+      @apply h-9 w-9 flex items-center justify-center;
+    }
+  }
+
+  .row.column:last-child {
+    @apply flex items-center justify-center;
+  }
+
+  .search-button-container {
+    @apply flex flex-col items-start;
+
+    button {
+      @apply h-9 px-4 flex items-center justify-center;
+    }
+  }
+
+  .row.column.search-field {
+    @apply flex-grow;
+  }
+}

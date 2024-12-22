@@ -20,7 +20,7 @@ describe "System admin manages awesome verifications" do
     fill_in "Organization admin email", with: "mayor@example.org"
     check "organization_available_locales_en"
     choose "organization_default_locale_en"
-    choose "Allow participants to register and login"
+    choose "Allow participants to create an account and log in"
     check "Example authorization (Direct)"
     click_on "Show advanced settings"
     within ".awesome_available_authorizations" do
@@ -47,7 +47,16 @@ describe "System admin manages awesome verifications" do
     end
 
     it "updates an organization" do
-      fill_in "Name", with: "Citizen Corp"
+      new_name = {
+        en: "Citizen Corp",
+        es: "Corporación Ciudadana",
+        ca: "Corporació Ciutadana"
+      }
+      fill_in_i18n(
+        :update_organization_name,
+        "#update_organization-name-tabs",
+        new_name
+      )
       check "Example authorization (Direct)"
       click_on "Show advanced settings"
       within ".awesome_available_authorizations" do
@@ -61,7 +70,7 @@ describe "System admin manages awesome verifications" do
       expect(page).to have_content("Citizen Corp")
       expect(last_awesome_config.value).to eq(["dummy_authorization_handler"])
       expect(last_awesome_config.var).to eq("admins_available_authorizations")
-      expect(last_awesome_config.organization.name).to eq("Citizen Corp")
+      expect(last_awesome_config.organization.name).to eq("ca" => "Corporació Ciutadana", "en" => "Citizen Corp", "es" => "Corporación Ciudadana")
       expect(last_awesome_config.organization.host).to eq(organization.host)
     end
   end
@@ -77,8 +86,8 @@ describe "System admin manages awesome verifications" do
     it "does not show the awesome configuration" do
       click_on "Show advanced settings"
 
-      expect(page).not_to have_content("Decidim Awesome Tweaks")
-      expect(page).not_to have_content("Allow admins to manually verify users with these authorizations")
+      expect(page).to have_no_content("Decidim Awesome Tweaks")
+      expect(page).to have_no_content("Allow admins to manually verify users with these authorizations")
     end
   end
 end

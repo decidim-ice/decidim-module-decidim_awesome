@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim
   describe UpdateAccount do
-    let(:command) { described_class.new(user, form) }
+    let(:command) { described_class.new(form) }
     let(:user) { create(:user, :confirmed, extended_data:) }
     let(:extended_data) { { "time_zone" => "UTC", "another_value" => "Something" } }
     let(:data) do
@@ -23,7 +23,7 @@ module Decidim
       }
     end
 
-    let(:form) do
+    let!(:form) do
       AccountForm.from_params(
         name: data[:name],
         nickname: data[:nickname],

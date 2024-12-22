@@ -31,7 +31,7 @@ describe "User uses custom time zones" do
     expect(page).to have_select("user_user_time_zone", selected: "(GMT-01:00) Azores")
     fill_in "Your name", with: "John Willson"
     select "(GMT-10:00) Hawaii", from: "user_user_time_zone"
-    click_button "Update account"
+    click_on "Update account"
     expect(page).to have_content("Your account was successfully updated.")
     expect(page).to have_select("user_user_time_zone", selected: "(GMT-10:00) Hawaii")
     visit decidim.meetings_directory_path
@@ -52,9 +52,9 @@ describe "User uses custom time zones" do
         expect(page).to have_content("04:00 AM -01")
       end
       visit decidim.account_path
-      expect(page).not_to have_select("user_user_time_zone")
+      expect(page).to have_no_select("user_user_time_zone")
       fill_in "Your name", with: "John Willson"
-      click_button "Update account"
+      click_on "Update account"
       expect(user.reload.name).to eq("John Willson")
     end
   end

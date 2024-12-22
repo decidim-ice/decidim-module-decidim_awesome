@@ -42,8 +42,8 @@ describe "Filter Admin actions" do
     it "shows filters" do
       expect(page).to have_content("Filter")
       expect(page).to have_css("#q_user_name_or_user_email_cont")
-      expect(page).to have_css("#q_created_at_gteq")
-      expect(page).to have_css("#q_created_at_lteq")
+      expect(page).to have_css("#q_created_at_gteq_date")
+      expect(page).to have_css("#q_created_at_lteq_date")
     end
 
     it "displays the filter labels" do

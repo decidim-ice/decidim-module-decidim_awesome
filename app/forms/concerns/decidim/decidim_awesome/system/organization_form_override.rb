@@ -9,7 +9,7 @@ module Decidim
         included do
           alias_method :decidim_original_map_model, :map_model
 
-          attribute :awesome_admins_available_authorizations, Array[String]
+          attribute :awesome_admins_available_authorizations, [String]
 
           def map_model(model)
             decidim_original_map_model(model)
@@ -19,7 +19,7 @@ module Decidim
           def clean_awesome_admins_available_authorizations
             return unless awesome_admins_available_authorizations
 
-            awesome_admins_available_authorizations.select(&:present?)
+            awesome_admins_available_authorizations.compact_blank
           end
 
           private
