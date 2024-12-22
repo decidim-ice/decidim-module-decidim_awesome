@@ -795,7 +795,7 @@ GEM
     zeitwerk (2.7.1)
 
 PLATFORMS
- x86_64-linux
+  x86_64-linux
 
 DEPENDENCIES
   bootsnap (~> 1.4)
