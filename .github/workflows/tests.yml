@@ -39,6 +39,9 @@ jobs:
           --health-retries 5
         env:
           POSTGRES_PASSWORD: postgres
+      redis:
+        image: redis:3.2-alpine
+        ports: [ "6379:6379" ]
 
     steps:
       - uses: actions/checkout@v4
@@ -85,7 +88,7 @@ jobs:
 
   tests-latest:
     name: Tests latest
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: build
 
     strategy:
@@ -114,6 +117,9 @@ jobs:
           --health-retries 5
         env:
           POSTGRES_PASSWORD: postgres
+      redis:
+        image: redis:3.2-alpine
+        ports: [ "6379:6379" ]
 
     steps:
       - uses: actions/checkout@v4
