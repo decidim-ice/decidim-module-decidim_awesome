@@ -317,7 +317,7 @@ When building a new view for the vote button ([see the original](https://github.
 - If votes are blocked `if current_settings.votes_blocked?`
 - If the user has already voted `if @voted_proposals ? @voted_proposals.include?(proposal.id) : proposal.voted_by?(current_user)`
 - If maximum votes have already reached `if proposal.maximum_votes_reached?`
-- If the proposal can accumulate supports beyond maximum `if proposal.can_accumulate_supports_beyond_threshold`
+- If the proposal can accumulate supports beyond maximum `if proposal.can_accumulate_votes_beyond_threshold`
 - If the current component allows the user to participate `if current_component.participatory_space.can_participate?(current_user)`
 - Note that the [original view](https://github.com/decidim/decidim/blob/release/0.28-stable/decidim-proposals/app/views/decidim/proposals/proposals/_vote_button.html.erb) is overridden only inside the tag  `<div id="proposal-<%= proposal.id %>-vote-button" class="button--vote-button">`. You only need to substitute the part inside.
 

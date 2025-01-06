@@ -15,6 +15,7 @@
 
   <div class="fcell search">
     <%= search_form_for(query, url: url_for, html: { class: "form form-defaults" }) do |form| %>
+      <%= hidden_field_tag :admins, params[:admins] %>
       <div class="form__wrapper">
         <div class="card">
           <div class="card-section">
@@ -54,4 +55,7 @@
       </div>
     <% end %>
   </div>
+</div>
+<div class="fcell grid-x" data-applied-filters-tags>
+  <%= applied_filters_tags(i18n_ctx) %>
 </div>

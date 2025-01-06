@@ -55,7 +55,6 @@ describe "Hacked menus" do
     within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
       expect(page).to have_no_content("Home")
       expect(page).to have_content("Processes")
-      expect(page).to have_content("Help")
       expect(page).to have_content("A new beggining")
       expect(page).to have_content("Blog")
     end
@@ -66,9 +65,6 @@ describe "Hacked menus" do
       expect(page).to have_content("Processes")
     end
     within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:nth-child(2)" do
-      expect(page).to have_content("Help")
-    end
-    within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:nth-child(3)" do
       expect(page).to have_content("Blog")
     end
     within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:last-child" do
@@ -89,8 +85,8 @@ describe "Hacked menus" do
     end
 
     it "has target blank" do
-      expect(find("#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:nth-child(3) a")["data-remote"]).to eq("true")
-      expect(find("#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:nth-child(3) a")[:target]).to eq("_blank")
+      expect(find("#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:nth-child(2) a")["data-remote"]).to eq("true")
+      expect(find("#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:nth-child(2) a")[:target]).to eq("_blank")
       expect(find("#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:last-child a")["data-remote"]).not_to eq("true")
     end
   end
@@ -302,22 +298,12 @@ describe "Hacked menus" do
           within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
             expect(page).to have_content("Home")
             expect(page).to have_content("Processes")
-            expect(page).to have_content("Help")
             expect(page).to have_no_content("A new beggining")
             expect(page).to have_no_content("Blog")
           end
         end
 
         it_behaves_like "has active link", "Processes"
-
-        context "when visiting another page" do
-          before do
-            visit decidim.pages_path
-            find_by_id("main-dropdown-summary").hover
-          end
-
-          it_behaves_like "has active link", "Help"
-        end
       end
     end
   end

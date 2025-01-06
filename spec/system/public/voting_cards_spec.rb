@@ -10,7 +10,7 @@ describe "Voting weights with cards" do
     {
       vote_limit:,
       threshold_per_proposal:,
-      can_accumulate_supports_beyond_threshold:,
+      can_accumulate_votes_beyond_threshold:,
       minimum_votes_per_user:,
       awesome_voting_manifest: voting_manifest,
       voting_cards_show_abstain: abstain,
@@ -30,7 +30,7 @@ describe "Voting weights with cards" do
   let!(:vote_weights) { nil }
   let(:vote_limit) { 0 }
   let(:threshold_per_proposal) { 0 }
-  let(:can_accumulate_supports_beyond_threshold) { false }
+  let(:can_accumulate_votes_beyond_threshold) { false }
   let(:minimum_votes_per_user) { 0 }
 
   context "when the user is logged in" do
@@ -54,7 +54,7 @@ describe "Voting weights with cards" do
       click_link_or_button "Abstain"
       within ".vote_proposal_modal" do
         expect(page).to have_content("My vote on \"#{strip_tags(proposal_title)}\" is \"Abstain\"")
-        expect(page).to have_content("Please read the election rules carefully to understand how your vote will be used by #{organization.name}")
+        expect(page).to have_content("Please read the election rules carefully to understand how your vote will be used by #{translated(organization.name)}")
         click_link_or_button "Cancel"
       end
       %w(Green Yellow Red).each do |color|
@@ -293,7 +293,7 @@ describe "Voting weights with cards" do
           expect(page).to have_css(".vote-action.weight_3.disabled")
           expect(page).to have_css(".vote-action.weight_0.disabled")
           expect(page).to have_no_content("Change my vote")
-          expect(page).to have_content("No supports remaining")
+          expect(page).to have_content("No votes remaining")
         end
       end
     end
@@ -322,11 +322,11 @@ describe "Voting weights with cards" do
         expect(page).to have_css(".vote-action.weight_2.disabled")
         expect(page).to have_css(".vote-action.weight_3.disabled")
         expect(page).to have_css(".vote-action.weight_0.disabled")
-        expect(page).to have_content("Support limit reached")
+        expect(page).to have_content("Vote limit reached")
       end
 
       context "and can accumulate more votes" do
-        let(:can_accumulate_supports_beyond_threshold) { true }
+        let(:can_accumulate_votes_beyond_threshold) { true }
 
         it "shows the vote count and can vote" do
           within "#proposals__proposal_#{proposal.id}" do

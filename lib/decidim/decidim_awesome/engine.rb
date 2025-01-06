@@ -233,7 +233,7 @@ module Decidim
             component.settings(:global) do |settings|
               DecidimAwesome.hash_append!(
                 settings.attributes,
-                :can_accumulate_supports_beyond_threshold,
+                :can_accumulate_votes_beyond_threshold,
                 :awesome_voting_manifest,
                 Decidim::SettingsManifest::Attribute.new(
                   type: :select,

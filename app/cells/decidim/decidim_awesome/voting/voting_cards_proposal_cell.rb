@@ -18,8 +18,8 @@ module Decidim
         end
 
         def vote_instructions
-          translated_attribute(current_component.settings.voting_cards_instructions).presence || t("decidim.decidim_awesome.voting.voting_cards.default_instructions_html",
-                                                                                                   organization: current_organization.name)
+          translated_attribute(current_component.settings.voting_cards_instructions).presence ||
+            t("decidim.decidim_awesome.voting.voting_cards.default_instructions_html", organization: translated_attribute(current_organization.name))
         end
 
         def proposal_votes(weight)
@@ -69,7 +69,7 @@ module Decidim
         def disabled?
           return true if voted_for_any? || current_settings.votes_blocked?
 
-          if proposal.maximum_votes_reached? && !proposal.can_accumulate_supports_beyond_threshold && current_component.participatory_space.can_participate?(current_user)
+          if proposal.maximum_votes_reached? && !proposal.can_accumulate_votes_beyond_threshold && current_component.participatory_space.can_participate?(current_user)
             return true
           end
 

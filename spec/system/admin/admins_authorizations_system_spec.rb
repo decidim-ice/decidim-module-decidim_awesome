@@ -5,6 +5,7 @@ require "spec_helper"
 describe "System admin manages awesome verifications" do
   let(:admin) { create(:admin) }
   let(:last_awesome_config) { Decidim::DecidimAwesome::AwesomeConfig.last }
+  let(:default_locale) { Decidim.available_locales.first }
 
   before do
     login_as admin, scope: :admin
@@ -35,7 +36,7 @@ describe "System admin manages awesome verifications" do
     expect(page).to have_content("Citizen Corp")
     expect(last_awesome_config.value).to eq(["dummy_authorization_handler"])
     expect(last_awesome_config.var).to eq("admins_available_authorizations")
-    expect(last_awesome_config.organization.name).to eq("Citizen Corp")
+    expect(last_awesome_config.organization.name[default_locale]).to eq("Citizen Corp")
     expect(last_awesome_config.organization.host).to eq("www.example.org")
   end
 

@@ -64,6 +64,14 @@ jobs:
           key: app-${{ github.sha }}
           restore-keys: app-${{ github.sha }}
 
+      - run: bin/spring stop || true
+        name: Stop Spring
+        shell: "bash"
+
+      - run: rm -f tmp/spring/*.pid
+        name: Cleanup Spring
+        shell: "bash"
+
       - run: bundle exec rake test_app
         name: Create test app
         shell: "bash"
