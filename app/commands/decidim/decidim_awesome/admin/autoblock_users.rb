@@ -99,7 +99,7 @@ module Decidim
         end
 
         def calculate_scores
-          exporter = Decidim::DecidimAwesome::UsersAutoblocksScoresExporter.new(users_base_relation)
+          exporter = Decidim::DecidimAwesome::UsersAutoblocksScoresExporter.new(current_organization, users_base_relation)
 
           @export_path = exporter.export
           @block_data = exporter.data

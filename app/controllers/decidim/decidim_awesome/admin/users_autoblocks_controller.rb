@@ -149,26 +149,29 @@ module Decidim
           OpenStruct.new(rule)
         end
 
-        def calculations_path
-          @calculations_path ||= File.join(Rails.application.root, Decidim::DecidimAwesome::UsersAutoblocksScoresExporter::DATA_FILE_PATH)
+        def calculations_blob
+          @calculations_blob ||= ActiveStorage::Blob.where(filename: "#{current_organization.id}-#{Decidim::DecidimAwesome::UsersAutoblocksScoresExporter::DATA_FILE_KEY}").last
         end
 
         def remove_calculations_file
-          return unless File.exist?(calculations_path)
+          return if calculations_blob.blank?
 
-          File.delete(calculations_path)
+          calculations_blob.purge
         end
 
         def load_calculations
           @scores_counts = {}
-          return unless File.exist?(calculations_path) && current_config.threshold.present?
+          return if calculations_blob.blank?
 
-          calculations = CSV.read(calculations_path, headers: true, col_sep: ";")
-          rules_headers = calculations.headers.grep(/ - \d+/)
-          counts = rules_headers.index_with { |rule_header| calculations.count { |row| row[rule_header].to_i.positive? } }
+          calculations_blob.open do |file|
+            calculations = CSV.read(file.path, headers: true, col_sep: ";")
 
-          @threshold_detected_cases = calculations.count { |row| row["total_score"].to_i >= current_config.threshold }
-          @scores_counts = counts.transform_keys { |k| k.split(" - ").last.to_i }
+            rules_headers = calculations.headers.grep(/ - \d+/)
+            counts = rules_headers.index_with { |rule_header| calculations.count { |row| row[rule_header].to_i.positive? } }
+
+            @threshold_detected_cases = calculations.count { |row| row["total_score"].to_i >= current_config.threshold }
+            @scores_counts = counts.transform_keys { |k| k.split(" - ").last.to_i }
+          end
         end
       end
     end

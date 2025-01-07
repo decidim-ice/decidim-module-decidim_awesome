@@ -28,16 +28,21 @@ module Decidim
       end
 
       def add_report_attachment
-        calculations_path = File.join(Rails.application.root, Decidim::DecidimAwesome::UsersAutoblocksScoresExporter::DATA_FILE_PATH)
-        return unless File.exist?(calculations_path)
+        filename = "#{@organization.id}-#{Decidim::DecidimAwesome::UsersAutoblocksScoresExporter::DATA_FILE_KEY}"
 
-        calculations = CSV.read(calculations_path, headers: true, col_sep: ";")
+        blob = ActiveStorage::Blob.where(filename:).last
 
-        filtered_calculations = calculations.select { |row| @detected_user_ids.include?(row["id"]) }
-        data = Decidim::Exporters::CSV.new(filtered_calculations).export
+        return if blob.blank?
 
-        filename = @block_performed ? "blocked_users.csv" : "detected_users.csv"
-        attachments[filename] = data.read
+        blob.open do |file|
+          calculations = CSV.read(file.path, headers: true, col_sep: ";")
+
+          filtered_calculations = calculations.select { |row| @detected_user_ids.include?(row["id"]) }
+          data = Decidim::Exporters::CSV.new(filtered_calculations).export
+
+          filename = @block_performed ? "blocked_users.csv" : "detected_users.csv"
+          attachments[filename] = data.read
+        end
       end
     end
   end
