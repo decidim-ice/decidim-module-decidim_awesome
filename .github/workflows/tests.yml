@@ -73,12 +73,12 @@ jobs:
       - run: mkdir -p ./spec/decidim_dummy_app/tmp/screenshots
         name: Create the screenshots folder
         shell: "bash"
-      - run: RAILS_ENV=test bundle exec rails shakapacker:compile
+      - run: bundle exec rails shakapacker:compile
         name: Precompile assets
         working-directory: ./spec/decidim_dummy_app/
         shell: "bash"
         env:
-          NODE_ENV: "test"
+          BUNDLE_GEMFILE: ../../Gemfile
 
   tests-latest:
     name: Tests latest
@@ -129,19 +129,22 @@ jobs:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
-          name: app-cache
-          path: ./spec/decidim_dummy_app/
+          name: workspace
+          path: /tmp
+
+      - run: tar -zxf /tmp/testapp-env.tar.gz
+        name: Restore application
 
       - run: bundle exec rake parallel:create parallel:load_schema
-        name: Setup database in test app
+        name: Parallel tests
         shell: "bash"
         working-directory: ./spec/decidim_dummy_app/
         env:
           BUNDLE_GEMFILE: ../../Gemfile
 
-      - name: Run RSpec tests with matrix
+      - name: General RSpec with config vars ${{ matrix.features }}
         run: |
           sudo Xvfb -ac $DISPLAY -screen 0 1920x1084x24 > /dev/null 2>&1 &
           ln -s spec/decidim_dummy_app spec/decidim_dummy_app_last
