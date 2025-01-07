@@ -4,11 +4,12 @@ module Decidim
   module DecidimAwesome
     class UsersAutoblocksScoresExporter
       BASIC_ATTRIBUTES = [:id, :name, :nickname, :about].freeze
-      DATA_FILE_PATH = "tmp/block_users_scores.csv"
+      DATA_FILE_KEY = "decidim-awesome/block_users_scores.csv"
 
-      attr_reader :users
+      attr_reader :users, :organization
 
-      def initialize(users)
+      def initialize(organization, users)
+        @organization = organization
         @users = users
       end
 
@@ -16,10 +17,12 @@ module Decidim
         exporter = Decidim::Exporters::CSV.new(data)
         exported = exporter.export
 
-        data_file_path = File.join(Rails.application.root, DATA_FILE_PATH)
-        File.write(data_file_path, exported.read)
+        filename = "#{organization.id}-#{DATA_FILE_KEY}"
 
-        data_file_path
+        if (previous_files = ActiveStorage::Blob.where(filename:)).exists?
+          previous_files.each(&:purge_later)
+        end
+        ActiveStorage::Blob.create_and_upload!(io: StringIO.new(exported.read), filename:)
       end
 
       def data
