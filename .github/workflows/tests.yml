@@ -32,7 +32,7 @@ jobs:
     services:
       postgres:
         image: postgres:14
-        ports: [ "5432:5432" ]
+        ports: ["5432:5432"]
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -160,3 +160,5 @@ jobs:
         with:
           name: screenshots
           path: ./spec/decidim_dummy_app/tmp/screenshots
+          if-no-files-found: ignore
+          overwrite: true
