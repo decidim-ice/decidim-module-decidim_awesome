@@ -82,6 +82,8 @@ module Decidim
       end
 
       class LinksParser
+        UNWISE_REGEXP = /[{}|\\^\[\]`]/
+
         attr_reader :allowlist, :blocklist
 
         def initialize(text, allowlist: [], blocklist: [])
@@ -93,7 +95,8 @@ module Decidim
 
         def filtered_links
           @filtered_links ||= links.reject do |link|
-            hostname = URI.parse(link).hostname
+            hostname = URI.parse(clean_link(link)).hostname
+
             hostname.blank? ||
               (allowlist.present? && allowlist.any? { |name| name == hostname }) ||
               (blocklist.present? && blocklist.all? { |name| name != hostname })
@@ -106,6 +109,14 @@ module Decidim
 
         def has_blocked_links?
           filtered_links.present?
+        end
+
+        # This method removes characters from link producing errors trying
+        # to parse them
+        def clean_link(link)
+          return link unless UNWISE_REGEXP.match?(link)
+
+          link.split(UNWISE_REGEXP).first
         end
       end
 
