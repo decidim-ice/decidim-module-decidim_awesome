@@ -6,6 +6,8 @@ module Decidim
     # Decorator for users
     #
     class UserAutoblockScoresPresenter < SimpleDelegator
+      class SkipItem < StandardError; end
+
       USERS_AUTOBLOCKS_TYPES = {
         "about_blank" => { has_variable: false, default_blocklist: true },
         "activities_blank" => { has_variable: false, default_blocklist: true },
@@ -40,17 +42,21 @@ module Decidim
       end
 
       def email_domain_detection_method(allowlist:, blocklist:, skip_with_blank_lists: true)
-        return if skip_with_blank_lists && allowlist.blank? && blocklist.blank?
+        return !skip_with_blank_lists if allowlist.blank? && blocklist.blank?
 
         email_domain = email.split("@").last
-        email_domain.blank? ||
-          (
-            (allowlist.all? { |name| name != email_domain }) &&
-            (blocklist.blank? || blocklist.any? { |name| name == email_domain })
-          )
+
+        raise SkipItem if blocklist.present? && !included_in_list?(email_domain, blocklist)
+        raise SkipItem if allowlist.present? && included_in_list?(email_domain, allowlist)
+
+        !included_in_list?(email_domain, allowlist) && (blocklist.blank? || included_in_list?(email_domain, blocklist))
       end
 
       private
+
+      def included_in_list?(domain, list)
+        list.any? { |name| name == domain }
+      end
 
       def current_rules
         @current_rules ||= (AwesomeConfig.find_by(var: :users_autoblocks, organization:)&.value || [])
@@ -68,6 +74,8 @@ module Decidim
 
         return rule["weight"] if (rule["application_type"] == "positive" && positive) || (rule["application_type"] == "negative" && !positive)
 
+        0
+      rescue SkipItem
         0
       end
 
