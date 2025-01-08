@@ -72,7 +72,7 @@ module Decidim
           Decidim::System::RegisterOrganizationForm.include(Decidim::DecidimAwesome::System::OrganizationFormOverride)
           Decidim::System::UpdateOrganizationForm.include(Decidim::DecidimAwesome::System::OrganizationFormOverride)
           Decidim::System::UpdateOrganization.include(Decidim::DecidimAwesome::System::UpdateOrganizationOverride)
-          Decidim::System::CreateOrganization.include(Decidim::DecidimAwesome::System::RegisterOrganizationOverride)
+          Decidim::System::CreateOrganization.include(Decidim::DecidimAwesome::System::CreateOrganizationOverride)
         end
 
         if DecidimAwesome.enabled?(:proposal_custom_fields, :proposal_private_custom_fields, :weighted_proposal_voting)
