@@ -73,8 +73,21 @@ module Decidim
       def rule_key(rule)
         [
           I18n.t(rule["type"], scope: "decidim.decidim_awesome.admin.users_autoblocks.form.types"),
+          rule_lists(rule),
           rule["id"]
-        ].join(" - ")
+        ].compact_blank.join(" - ")
+      end
+
+      def rule_lists(rule)
+        return if rule["allowlist"].blank? && rule["blocklist"].blank?
+
+        scope = "decidim.decidim_awesome.admin.users_autoblocks.index.headers"
+        lists = []
+        lists << "#{I18n.t("allowlist", scope:)}: #{rule["allowlist"].split(/\s/).compact_blank.join(", ")}" if rule["allowlist"].present?
+        lists << "#{I18n.t("blocklist", scope:)}: #{rule["blocklist"].split(/\s/).compact_blank.join(", ")}" if rule["blocklist"].present?
+        return if lists.blank?
+
+        lists.join(" | ")
       end
 
       def rule_value(rule)
