@@ -98,24 +98,19 @@ jobs:
     needs: build
 
     strategy:
-      fail-fast: false
       matrix:
         include:
-          - command: bundle exec parallel_test --type rspec --pattern spec/awesome_summary_spec.rb
-            name: "Awesome summary tests"
+          - rspec: spec/awesome_summary_spec.rb
             features: disabled
-          - command: bundle exec parallel_test --type rspec --pattern spec/ --exclude-pattern spec/system
-            name: "Unit tests"
+          - rspec: spec\/(?!system)
             features: enabled
-          - command: bundle exec parallel_test --type rspec --pattern spec/system/admin
-            name: "Admin system tests"
+          - rspec: spec/system/admin
             features: enabled
-          - command: bundle exec parallel_test --type rspec --pattern spec/system/public
-            name: "Public system tests"
+          - rspec: spec/system/public
             features: enabled
-          - command: bundle exec parallel_test --type rspec --pattern spec/system/awesome_map
-            name: "Awesome map tests"
+          - rspec: spec/system/awesome_map
             features: enabled
+      fail-fast: false
 
     services:
       postgres:
