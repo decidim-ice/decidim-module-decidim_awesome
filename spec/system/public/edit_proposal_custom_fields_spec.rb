@@ -66,31 +66,28 @@ describe "Custom proposals fields" do
     end
   end
 
-  shared_examples "saves custom fields" do |title_field, button, xpath|
+  shared_examples "saves custom fields" do |title_field, button, amended = false|
     it "saves the proposal in XML" do
       fill_in title_field, with: "A far west character"
       fill_in :"text-1476748004559", with: "Lucky Luke"
       fill_in :"textarea-1476748007461", with: "I shot everything"
       fill_in :"text-1476748004579", with: "555-555-555"
 
-      click_link_or_button button
+      click_on button
       sleep 1
+      # Preview
       expect(page).to have_content("Full Name")
-      if xpath
-        # expect(page).to have_xpath("//input[@class='form-control'][@id='text-1476748004559'][@user-data='Lucky Luke']")
-        expect(page).to have_xpath("//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot everything']")
-        expect(page).to have_xpath("//input[@class='form-control'][@id='text-1476748004579'][@user-data='555-555-555']")
-      else
-        expect(page).to have_css("dd#text-1476748004559", text: "Lucky Luke")
-        expect(page).to have_css("dd#textarea-1476748007461", text: "I shot everything")
-        expect(page).to have_no_css("dd#text-1476748004579", text: "555-555-555")
-        expect(page).to have_no_content("Phone Number")
-        expect(model.reload.private_body).to include('<dd id="text-1476748004579" name="text"><div>555-555-555</div></dd>')
-      end
+      expect(page).to have_content("Lucky Luke")
       expect(page).to have_content("Occupation")
       expect(page).to have_content("Moth Man")
       expect(page).to have_content("Short Bio")
-      expect(page).to have_no_css(".form-error.is-visible")
+      expect(page).to have_content("I shot everything")
+      expect(page).to have_no_content("Phone Number") # private field
+      expect(page).to have_no_content("555-555-555")
+
+      expect(model.reload.body["en"]).to include("I shot everything") unless amended
+      expect(Decidim::Proposals::Proposal.last.body["en"]).to include("I shot everything") if amended
+      expect(model.reload.body["en"]).to include("I shot the sheriff") if amended
     end
   end
 
@@ -118,7 +115,7 @@ describe "Custom proposals fields" do
     end
 
     it_behaves_like "has custom fields", "//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the sheriff']"
-    it_behaves_like "saves custom fields", :proposal_title, "Send", false
+    it_behaves_like "saves custom fields", :proposal_title, "Send"
 
     context "and has i18n keys" do
       let(:data3) { '{"type":"textarea","label":"activemodel.attributes.user.nickname","rows":"5","className":"form-control","name":"textarea-1476748007461"}' }
@@ -134,7 +131,7 @@ describe "Custom proposals fields" do
       let(:rte_enabled) { true }
 
       it_behaves_like "has custom fields", "//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the sheriff']"
-      it_behaves_like "saves custom fields", :proposal_title, "Send", false
+      it_behaves_like "saves custom fields", :proposal_title, "Send"
     end
 
     context "and custom fields are out of scope" do

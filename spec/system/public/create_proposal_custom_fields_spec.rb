@@ -124,21 +124,19 @@ describe "Custom proposals fields" do
       fill_in :"textarea-1476748007461", with: "I shot everything"
       fill_in :"text-1476748004579", with: "123456789"
 
-      click_link_or_button "Continue"
+      click_on "Continue"
       sleep 1
+      # Preview
       expect(page).to have_content("Full Name")
-      expect(page).to have_xpath("//input[@class='form-control'][@id='text-1476748004559'][@user-data='Lucky Luke']")
       expect(page).to have_content("Occupation")
       expect(page).to have_content("Street Sweeper")
       expect(page).to have_content("Short Bio")
-      expect(page).to have_content("Phone Number")
-      expect(page).to have_xpath("//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot everything']")
-      expect(page).to have_no_xpath("//textarea[@class='form-control'][@id='text-1476748004579'][@user-data='123456789']")
-      expect(page).to have_no_css(".form-error.is-visible")
+      expect(page).to have_no_content("Phone Number") # private field
+
       expect(Decidim::Proposals::Proposal.last.body["en"]).to include('<dd id="text-1476748004559" name="text"><div>Lucky Luke</div>')
       expect(Decidim::Proposals::Proposal.last.body["en"]).to include('<dd id="textarea-1476748007461" name="textarea"><div>I shot everything</div></dd>')
       expect(Decidim::Proposals::Proposal.last.private_body).to include('<dd id="text-1476748004579" name="text"><div>123456789</div></dd>')
-      click_on "Send"
+
       expect(page).to have_content("Publish your proposal")
       click_on "Publish"
       expect(page).to have_content("A far west character")
