@@ -13,7 +13,8 @@ module Decidim
         "activities_blank" => { has_variable: false, default_blocklist: true },
         "links_in_comments_or_about" => { has_variable: true, default_blocklist: true },
         "email_unconfirmed" => { has_variable: true, default_blocklist: true },
-        "email_domain" => { has_variable: true, default_blocklist: true }
+        "email_domain" => { has_variable: true, default_blocklist: true },
+        "links_in_comments_or_about_with_domains" => { has_variable: true, default_blocklist: true }
       }.freeze
 
       def scores
@@ -33,6 +34,13 @@ module Decidim
       end
 
       def links_in_comments_or_about_detection_method(allowlist:, blocklist:)
+        email_domain_detection_method(allowlist:, blocklist:, skip_with_blank_lists: false) && (
+          LinksParser.new(about).has_blocked_links? ||
+          Decidim::Comments::Comment.where(author: self).any? { |comment| LinksParser.new(comment.translated_body).has_blocked_links? }
+        )
+      end
+
+      def links_in_comments_or_about_with_domains_detection_method(allowlist:, blocklist:)
         LinksParser.new(about, allowlist:, blocklist:).has_blocked_links? ||
           Decidim::Comments::Comment.where(author: self).any? { |comment| LinksParser.new(comment.translated_body, allowlist:, blocklist:).has_blocked_links? }
       end

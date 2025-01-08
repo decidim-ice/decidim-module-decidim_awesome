@@ -8,9 +8,9 @@ describe "Admin manages users autoblocks feature" do
   let!(:user) { create(:user, :confirmed, organization:) }
   let!(:user_with_unconfirmed_email) { create(:user, organization:) }
   let!(:spam_user) { create(:user, :confirmed, organization:, email: "user@spam.org") }
-  let!(:user_with_spam_links) { create(:user, :confirmed, organization:, about: "Visit www.try-spam.org") }
+  let!(:user_with_spam_links) { create(:user, :confirmed, organization:, email: "user@spamlinks.com", about: "Visit www.try-spam.org") }
 
-  let!(:user_with_spam_links_in_comments) { create(:user, :confirmed, organization:) }
+  let!(:user_with_spam_links_in_comments) { create(:user, :confirmed, organization:, email: "user@spamcomments.org") }
   let(:body) { { en: "Visit www.spam-bot.org, you won't regret!" } }
   let(:participatory_process) { create(:participatory_process, organization:) }
   let(:component) { create(:component, participatory_space: participatory_process) }
@@ -167,6 +167,38 @@ describe "Admin manages users autoblocks feature" do
         end
 
         context "with allowlist" do
+          let(:allowlist) { "spamlinks.com" }
+
+          it "does not block users with links inclunding domains affected by the allowlist" do
+            expect(Decidim::User.blocked.count).to eq(1)
+
+            expect(user_with_spam_links.reload).not_to be_blocked
+          end
+        end
+
+        context "with blocklist" do
+          let(:blocklist) { "spamlinks.com" }
+
+          it "blocks only users with links incluing domains affected by the blocklist" do
+            expect(Decidim::User.blocked.count).to eq(1)
+
+            expect(user_with_spam_links.reload).to be_blocked
+          end
+        end
+      end
+
+      context "with links included in lists in comments or about rule" do
+        let(:type) { "links_in_comments_or_about_with_domains" }
+
+        it "detects and blocks the users" do
+          expect(Decidim::User.blocked.count).to eq(2)
+
+          [user_with_spam_links, user_with_spam_links_in_comments].each do |us|
+            expect(us.reload).to be_blocked
+          end
+        end
+
+        context "with allowlist" do
           let(:allowlist) { "www.try-spam.org" }
 
           it "does not block users with links inclunding domains affected by the allowlist" do
@@ -250,7 +282,7 @@ describe "Admin manages users autoblocks feature" do
             application_type:
           }, {
             id: 1,
-            type: "links_in_comments_or_about",
+            type: "links_in_comments_or_about_with_domains",
             weight: 3,
             allowlist:,
             blocklist:,
