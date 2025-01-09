@@ -99,7 +99,7 @@ describe "Show awesome map" do
       expect(page.body).to have_css("div[title='#{accepted_proposal.title["en"]}']")
       expect(page.body).to have_css("div[title='#{evaluating_proposal.title["en"]}']")
       expect(page.body).to have_css("div[title='#{rejected_proposal.title["en"]}']")
-      expect(page.body).to have_css("div[title='#{withdrawn_proposal.title["en"]}']")
+      expect(page.body).to have_css("div[title='#{not_answered_proposal.title["en"]}']")
     end
   end
 
