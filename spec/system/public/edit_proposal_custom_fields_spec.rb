@@ -85,9 +85,12 @@ describe "Custom proposals fields" do
       expect(page).to have_no_content("Phone Number") # private field
       expect(page).to have_no_content("555-555-555")
 
-      expect(model.reload.body["en"]).to include("I shot everything") unless amended
-      expect(Decidim::Proposals::Proposal.last.body["en"]).to include("I shot everything") if amended
-      expect(model.reload.body["en"]).to include("I shot the sheriff") if amended
+      if amended
+        expect(Decidim::Proposals::Proposal.last.body["en"]).to include("I shot everything")
+        expect(Decidim::Proposals::Proposal.last.private_body).to include('<dd id="text-1476748004579" name="text"><div>555-555-555</div></dd>')
+      else
+        expect(model.reload.private_body).to include('<dd id="text-1476748004579" name="text"><div>555-555-555</div></dd>')
+      end
     end
   end
 
