@@ -447,6 +447,12 @@ bin/rails decidim:upgrade
 bin/rails db:migrate
 ```
 
+> In production mode you must also precompile the assets:
+>
+> ```
+> bin/rails assets:precompile
+> ```
+
 Go to `yourdomain/admin/decidim_awesome` and start tweaking things!
 
 > **EXPERTS ONLY**
