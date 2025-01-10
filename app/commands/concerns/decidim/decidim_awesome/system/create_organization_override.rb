@@ -3,7 +3,7 @@
 module Decidim
   module DecidimAwesome
     module System
-      module RegisterOrganizationOverride
+      module CreateOrganizationOverride
         extend ActiveSupport::Concern
 
         included do

@@ -31,14 +31,14 @@ describe "Managing the participants" do
         within "div[data-verification-user-id=\"#{participant1.id}\"]" do
           expect(page).to have_content("Example authorization")
           expect(page).to have_css("svg.checked")
-          expect(page).not_to have_content("Another example authorization")
+          expect(page).to have_no_content("Another example authorization")
         end
       end
       within "tr", text: participant2.name do
         within "div[data-verification-user-id=\"#{participant2.id}\"]" do
           expect(page).to have_content("Example authorization")
           expect(page).to have_css("svg.unchecked")
-          expect(page).not_to have_content("Another example authorization")
+          expect(page).to have_no_content("Another example authorization")
         end
       end
     end
@@ -57,10 +57,10 @@ describe "Managing the participants" do
 
       within "#awesome-verification-modal-content" do
         fill_in "Document number", with: "12345678"
-        click_button "Authorize #{participant2.name} with Example authorization"
+        click_on "Authorize #{participant2.name} with Example authorization"
         expect(page).to have_content("#{participant2.name} could not be authorized with Example authorization")
         fill_in "Document number", with: "12345678X"
-        click_button "Authorize #{participant2.name} with Example authorization"
+        click_on "Authorize #{participant2.name} with Example authorization"
         expect(page).to have_content("#{participant2.name} successfully authorized with Example authorization")
         click_on "Close"
       end
@@ -110,10 +110,10 @@ describe "Managing the participants" do
 
       within "#awesome-verification-modal-content" do
         fill_in "Document number", with: "12345678"
-        click_button "Authorize #{participant2.name} with Example authorization"
+        click_on "Authorize #{participant2.name} with Example authorization"
         check "Force verification with the current data"
         fill_in "Give a reason to force the verification:", with: "Because I can"
-        click_button "Authorize #{participant2.name} with Example authorization"
+        click_on "Authorize #{participant2.name} with Example authorization"
         expect(page).to have_content("#{participant2.name} successfully authorized with Example authorization")
         click_on "Close"
       end
@@ -144,9 +144,9 @@ describe "Managing the participants" do
 
         within "#awesome-verification-modal-content" do
           fill_in "Document number", with: "12345678"
-          click_button "Authorize #{participant2.name} with Example authorization"
+          click_on "Authorize #{participant2.name} with Example authorization"
           expect(page).to have_content("There is a conflict with an existing authorization")
-          expect(page).not_to have_content("Authorize")
+          expect(page).to have_no_content("Authorize")
           click_on "Close"
         end
 

@@ -2,7 +2,7 @@
 
 module Decidim
   module DecidimAwesome
-    class CreateEditorImage < Command
+    class CreateEditorImage < Decidim::Command
       # Creates a blueprint.
       #
       # form - The form with the data.
@@ -13,7 +13,7 @@ module Decidim
       # Executes the command. Broadcasts these events:
       #
       # - :ok when everything is valid
-      # - :invalid if the form wasn't valid and we couldn't proceed.
+      # - :invalid if the form wasn't valid, and we couldn't proceed.
       #
       # Returns nothing.
       def call

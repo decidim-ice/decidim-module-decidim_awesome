@@ -13,11 +13,11 @@ module Decidim
           decidim_update_personal_data
           return if @form.user_time_zone.blank?
 
-          @user.extended_data ||= {}
-          if @form.user_time_zone == @user.organization.time_zone
-            @user.extended_data.delete("time_zone")
+          current_user.extended_data ||= {}
+          if @form.user_time_zone == current_user.organization.time_zone
+            current_user.extended_data.delete("time_zone")
           else
-            @user.extended_data["time_zone"] = @form.user_time_zone
+            current_user.extended_data["time_zone"] = @form.user_time_zone
           end
         end
 

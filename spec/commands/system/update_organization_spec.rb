@@ -21,7 +21,7 @@ module Decidim
       let(:from_label) { "Decide Gotham" }
       let(:params) do
         {
-          name: "Gotham City",
+          name: { en: "Gotham City" },
           host: "decide.example.org",
           secondary_hosts: "foo.example.org\r\n\r\nbar.example.org",
           force_users_to_authenticate_before_access_organization: false,

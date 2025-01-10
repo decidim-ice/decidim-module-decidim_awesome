@@ -64,7 +64,7 @@ describe "Show awesome map" do
 
   it "shows the map" do
     within "[data-content]" do
-      expect(page).not_to have_content("maximum complexity")
+      expect(page).to have_no_content("maximum complexity")
       expect(page).to have_css(".awesome-map")
       expect(page).to have_css("#awesome-map")
       errors = page.driver.browser.logs.get(:browser)
@@ -99,7 +99,7 @@ describe "Show awesome map" do
       expect(page.body).to have_css("div[title='#{accepted_proposal.title["en"]}']")
       expect(page.body).to have_css("div[title='#{evaluating_proposal.title["en"]}']")
       expect(page.body).to have_css("div[title='#{rejected_proposal.title["en"]}']")
-      expect(page.body).to have_css("div[title='#{withdrawn_proposal.title["en"]}']")
+      expect(page.body).to have_css("div[title='#{not_answered_proposal.title["en"]}']")
     end
   end
 
@@ -112,10 +112,10 @@ describe "Show awesome map" do
 
     it "does not show any proposal" do
       sleep(3)
-      expect(page.body).not_to have_css("div[title='#{accepted_proposal.title["en"]}']")
-      expect(page.body).not_to have_css("div[title='#{evaluating_proposal.title["en"]}']")
-      expect(page.body).not_to have_css("div[title='#{rejected_proposal.title["en"]}']")
-      expect(page.body).not_to have_css("div[title='#{withdrawn_proposal.title["en"]}']")
+      expect(page.body).to have_no_css("div[title='#{accepted_proposal.title["en"]}']")
+      expect(page.body).to have_no_css("div[title='#{evaluating_proposal.title["en"]}']")
+      expect(page.body).to have_no_css("div[title='#{rejected_proposal.title["en"]}']")
+      expect(page.body).to have_no_css("div[title='#{withdrawn_proposal.title["en"]}']")
     end
   end
 
@@ -128,10 +128,10 @@ describe "Show awesome map" do
 
     it "only shows proposal without state" do
       sleep(3)
-      expect(page.body).not_to have_css("div[title='#{accepted_proposal.title["en"]}']")
-      expect(page.body).not_to have_css("div[title='#{evaluating_proposal.title["en"]}']")
-      expect(page.body).not_to have_css("div[title='#{rejected_proposal.title["en"]}']")
-      expect(page.body).not_to have_css("div[title='#{withdrawn_proposal.title["en"]}']")
+      expect(page.body).to have_no_css("div[title='#{accepted_proposal.title["en"]}']")
+      expect(page.body).to have_no_css("div[title='#{evaluating_proposal.title["en"]}']")
+      expect(page.body).to have_no_css("div[title='#{rejected_proposal.title["en"]}']")
+      expect(page.body).to have_no_css("div[title='#{withdrawn_proposal.title["en"]}']")
     end
   end
 

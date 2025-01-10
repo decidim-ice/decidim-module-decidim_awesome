@@ -37,8 +37,8 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::MenuItemPresenter.included_modules).to include(Decidim::DecidimAwesome::MenuItemPresenterOverride)
       expect(Decidim::ErrorsController.included_modules).to include(Decidim::DecidimAwesome::NotFoundRedirect)
       expect(Decidim::Proposals::ApplicationHelper.included_modules).to include(Decidim::DecidimAwesome::Proposals::ApplicationHelperOverride)
-      expect(Decidim::Proposals::ProposalWizardCreateStepForm.included_modules).to include(Decidim::DecidimAwesome::Proposals::ProposalWizardCreateStepFormOverride)
-      expect(Decidim::Proposals::ProposalWizardCreateStepForm.included_modules).to include(Decidim::DecidimAwesome::Proposals::ProposalFormOverride)
+      expect(Decidim::Proposals::ProposalForm.included_modules).to include(Decidim::DecidimAwesome::Proposals::ProposalFormCustomizations)
+      expect(Decidim::Proposals::ProposalForm.included_modules).to include(Decidim::DecidimAwesome::Proposals::ProposalFormOverride)
       expect(Decidim::Proposals::Admin::ProposalForm.included_modules).to include(Decidim::DecidimAwesome::Proposals::ProposalFormOverride)
       expect(Decidim::AmendmentsHelper.included_modules).to include(Decidim::DecidimAwesome::AmendmentsHelperOverride)
       expect(EtiquetteValidator.included_modules).to include(Decidim::DecidimAwesome::EtiquetteValidatorOverride)
@@ -63,7 +63,7 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::System::RegisterOrganizationForm.included_modules).to include(Decidim::DecidimAwesome::System::OrganizationFormOverride)
       expect(Decidim::System::UpdateOrganizationForm.included_modules).to include(Decidim::DecidimAwesome::System::OrganizationFormOverride)
       expect(Decidim::System::UpdateOrganization.included_modules).to include(Decidim::DecidimAwesome::System::UpdateOrganizationOverride)
-      expect(Decidim::System::RegisterOrganization.included_modules).to include(Decidim::DecidimAwesome::System::RegisterOrganizationOverride)
+      expect(Decidim::System::CreateOrganization.included_modules).to include(Decidim::DecidimAwesome::System::CreateOrganizationOverride)
       expect(Decidim::AdminLog::UserPresenter.included_modules).to include(Decidim::DecidimAwesome::AdminLog::UserPresenterOverride)
     end
 
@@ -74,8 +74,8 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::MenuItemPresenter.included_modules).not_to include(Decidim::DecidimAwesome::MenuItemPresenterOverride)
       expect(Decidim::ErrorsController.included_modules).not_to include(Decidim::DecidimAwesome::NotFoundRedirect)
       expect(Decidim::Proposals::ApplicationHelper.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ApplicationHelperOverride)
-      expect(Decidim::Proposals::ProposalWizardCreateStepForm.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ProposalWizardCreateStepFormOverride)
-      expect(Decidim::Proposals::ProposalWizardCreateStepForm.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ProposalFormOverride)
+      expect(Decidim::Proposals::ProposalForm.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ProposalFormCustomizations)
+      expect(Decidim::Proposals::ProposalForm.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ProposalFormOverride)
       expect(Decidim::Proposals::Admin::ProposalForm.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ProposalFormOverride)
       expect(Decidim::AmendmentsHelper.included_modules).not_to include(Decidim::DecidimAwesome::AmendmentsHelperOverride)
       expect(EtiquetteValidator.included_modules).not_to include(Decidim::DecidimAwesome::EtiquetteValidatorOverride)
@@ -223,11 +223,11 @@ shared_examples "basic rendering" do |enabled|
       end
 
       it "do not have custom fields javascript" do
-        expect(page).not_to have_xpath("//script[contains(@src,'decidim_decidim_awesome_custom_fields')]", visible: :all)
+        expect(page).to have_no_xpath("//script[contains(@src,'decidim_decidim_awesome_custom_fields')]", visible: :all)
       end
 
       it "do not have custom styles CSS" do
-        expect(page.body).not_to have_content(styles)
+        expect(page.body).to have_no_content(styles)
       end
     end
   end
@@ -284,7 +284,7 @@ shared_examples "basic rendering" do |enabled|
       it "has no admin menus" do
         menus.each do |menu|
           within ".sidebar-menu" do
-            expect(page).not_to have_link(href: "/admin/decidim_awesome/#{menu}")
+            expect(page).to have_no_link(href: "/admin/decidim_awesome/#{menu}")
           end
         end
       end

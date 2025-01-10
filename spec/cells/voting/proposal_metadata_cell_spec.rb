@@ -6,6 +6,8 @@ module Decidim
   module DecidimAwesome
     module Voting
       describe ProposalMetadataCell, type: :cell do
+        controller Decidim::Proposals::ProposalsController
+
         subject { cell("decidim/decidim_awesome/voting/proposal_metadata", proposal, context: { current_user: user }) }
 
         let(:manifest) { :voting_cards }

@@ -78,7 +78,7 @@
 <script>
   window.AwesomeMap = window.AwesomeMap || {};
   window.AwesomeMap.categories = <%= current_categories(categories).to_json.html_safe %>;
-  window.AwesomeMapProposalTexts = <%= Decidim::Proposals::Proposal::STATES.to_h { |state, _| [state, t("decidim.proposals.answers.#{state}")] }.to_json.html_safe %>;
+  window.AwesomeMapProposalTexts = <%= Decidim::Proposals::ProposalState.pluck(:token).index_with { |state| t("decidim.proposals.answers.#{state}") }.to_json.html_safe %>;
   window.AwesomeMapMeetingTypes = <%= Decidim::Meetings::Meeting::TYPE_OF_MEETING.to_h { |type, _| [type, Decidim.icons.all[type.to_s]["icon"]] }.to_json.html_safe %>;
   window.AwesomeMapMeetingTexts = <%= Decidim::Meetings::Meeting::TYPE_OF_MEETING.to_h { |type, _| [type, t("decidim.meetings.meetings.filters.type_values.#{type}")] }.to_json.html_safe %>;
 </script>

@@ -27,7 +27,7 @@
                                     id: "change-vote",
                                     class: "change-vote-button vote-action font-semibold" %>
     </p>
-  <% elsif proposal.maximum_votes_reached? && !proposal.can_accumulate_supports_beyond_threshold && current_component.participatory_space.can_participate?(current_user) %>
+  <% elsif proposal.maximum_votes_reached? && !proposal.can_accumulate_votes_beyond_threshold && current_component.participatory_space.can_participate?(current_user) %>
     <p class="text-center"><%= t("decidim.proposals.proposals.vote_button.maximum_votes_reached") %></p>
   <% elsif vote_limit_enabled? && remaining_votes_count_for(current_user) <= 0 %>
     <p class="text-center"><%= t("decidim.proposals.proposals.vote_button.no_votes_remaining") %></p>

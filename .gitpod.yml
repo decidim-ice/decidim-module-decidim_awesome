@@ -3,7 +3,7 @@ image:
 
 tasks:
   - name: dev
-    before: rvm --default use "ruby-3.0.5"
+    before: rvm --default use "ruby-3.2.2"
     init: bundle install && yarn install && bundle exec rake test_app
     command: bundle exec rspec
   #- name: webpacker
