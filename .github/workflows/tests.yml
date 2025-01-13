@@ -66,6 +66,11 @@ jobs:
         with:
           chrome-version: 119.0.6045.105
 
+      - name: Install packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y imagemagick 7zip
+
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
