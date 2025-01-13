@@ -5,19 +5,13 @@ on:
     branches:
       - main
   pull_request:
-  workflow_call:
-    inputs:
-      chrome_version:
-        description: 'Chrome & Chromedriver version'
-        required: false
-        default: "126.0.6478.182"
-        type: string
 
 env:
   CI: 1
   SIMPLECOV: 1
   NODE_VERSION: 18.17.1
   RUBY_VERSION: 3.1.1
+  CHROME_VERSION: "126.0.6478.182"
   BUNDLE_GEMFILE: Gemfile
   DISPLAY: ":99"
   PARALLEL_TEST_PROCESSORS: 2
@@ -135,13 +129,13 @@ jobs:
       - run: |
           sudo apt update
           sudo apt install libu2f-udev
-          wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${{inputs.chrome_version}}-1_amd64.deb
+          wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${{ env.CHROME_VERSION }}-1_amd64.deb
           sudo dpkg -i /tmp/chrome.deb
           rm /tmp/chrome.deb
       - uses: nanasess/setup-chromedriver@v2
-        name: Install Chrome version ${{inputs.chrome_version}}
+        name: Install Chrome version ${{ env.CHROME_VERSION }}
         with:
-          chromedriver-version: ${{inputs.chrome_version}}
+          chromedriver-version: ${{ env.CHROME_VERSION }}
       - run: |
           sudo apt install wkhtmltopdf imagemagick 7zip
 
