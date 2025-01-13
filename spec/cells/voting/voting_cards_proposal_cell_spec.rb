@@ -6,7 +6,7 @@ module Decidim
   module DecidimAwesome
     module Voting
       describe VotingCardsProposalCell, type: :cell do
-        subject { cell("decidim/decidim_awesome/voting/voting_cards_proposal", proposal, context: { current_user: user }) }
+        subject { cell("decidim/decidim_awesome/voting/voting_cards_proposal", proposal, context: { current_user: user, controller: controller }) }
 
         let(:manifest) { :voting_cards }
         let!(:organization) { create :organization }
@@ -21,6 +21,8 @@ module Decidim
             create_list(:awesome_vote_weight, 1, vote: create(:proposal_vote, proposal: proposal), weight: 3)
           ]
         end
+        let(:controller) { double("controller", request: request) }
+        let(:request) { double("request", env: { "decidim.current_organization" => organization }) }
 
         describe "#weight_count_for" do
           it "returns the correct number of votes for a given weight" do
