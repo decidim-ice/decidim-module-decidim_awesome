@@ -5,15 +5,15 @@ eu:
       awesome_iframe:
         settings:
           global:
-            announcement: Oharra
+            announcement: Iragarkia
           step:
-            announcement: Oharra
+            announcement: Iragarkia
       awesome_map:
         settings:
           global:
-            announcement: Oharra
+            announcement: Iragarkia
           step:
-            announcement: Oharra
+            announcement: Iragarkia
     decidim_awesome:
       admin:
         config:
@@ -32,40 +32,40 @@ eu:
           form_scoped_styles:
             delete: Ezabatu
           title:
-            editors: Editor hacks
-            proposals: Proposals hacks
-            styles: Custom styles
-            surveys: Surveys & forms
+            editors: Editorearen hackak
+            proposals: Proposamenen hackak
+            styles: Estilo pertsonalizatuak
+            surveys: Inkestak eta formularioak
         constraints:
           new:
-            cancel: Ezeztatu
+            cancel: Utzi
           show:
-            cancel: Ezeztatu
+            cancel: Utzi
         menu:
-          editors: Editor hacks
+          editors: Editorearen hackak
           maintenance:
-            checks: System compatibility
-          menu_hacks: Menu tweaks
-          proposals: Proposals hacks
-          styles: Custom styles
-          surveys: Surveys & forms
+            checks: Sistemaren bateragarritasuna
+          menu_hacks: Menuaren doikuntzak
+          proposals: Proposamenen hackak
+          styles: Estilo pertsonalizatuak
+          surveys: Inkestak eta formularioak
       map_component:
         map:
           show:
-            view_meeting: Ikusi bilera
-            view_proposal: Ikusi proposamena
+            view_meeting: Bilera ikusi
+            view_proposal: Proposamena ikusi
       voting:
         voting_cards:
           modal:
-            cancel: Ezeztatu
+            cancel: Utzi
   layouts:
     decidim:
       decidim_awesome:
         awesome_config:
-          amendments: Zuzenketak
-          autosaved_error: LocalStorage ez da onartzen zure arakatzailean, inprimakia ezin da automatikoki gorde.
-          autosaved_success: Tokiko biltegian gordetako datuak
+          amendments: Aldaketak
+          autosaved_error: LocalStorage zure arakatzailean ez da onartzen, formularioa automatikoki ezin da gorde.
+          autosaved_success: Datuak tokiko biltegian gordeta
           categories: Kategoriak
-          drag_and_drop_image: Gehitu irudiak arrastatuz, jareginez edo itsatsita.
-          meetings: Topaketa-zerrenda
+          drag_and_drop_image: Irudiak arrastatuz eta askatuz edo itsatsiz gehitu
+          meetings: Bilerak
           proposals: Proposamenak
