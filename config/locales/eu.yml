@@ -49,6 +49,7 @@ eu:
         position: Kokapena
         raw_label: Etiketa
         target: Irekiko da
+        url: URL-a
         visibility: Ikusgarritasuna
       organization:
         awesome_admins_available_authorizations: Administratzaileei parte-hartzaileak eskuz egiaztatzen uztea baimen hauekin
@@ -116,6 +117,7 @@ eu:
         settings:
           global:
             awesome_voting_manifest: Babes mota
+            awesome_voting_manifest_help_html: <span class="text-alert">Kontuan izan behar da hautesaldi baten erdian eszenatoki hori aldatzeak emaitza sortzetikoak edo ustekabekoak ekar ditzakeela.</span><br>.
             awesome_voting_manifest_options:
               default: Bozketa sinplea (berezkoa)
               voting_cards: Bozketa koloretako txartelak erabiliz
@@ -127,8 +129,11 @@ eu:
             limit_pending_amendments: Proposamen bakoitzean zuzenketa bakarra onartzen du.
             sort_orders_enabled: Sailkatze mota gaituak
             voting_cards_box_title: Boto-kutxarako titulua
+            voting_cards_box_title_help: '"Proposamen honi babesa eman" da akatsa. Erabili "-" ezkutatzeko.'
             voting_cards_instructions: Laguntza-jarraibideak/-laguntza (leiho modal dismisgarria)
             voting_cards_instructions_help: 'Akatsa da: "Mesedez, irakurri arretaz hauteskunde-arauak ulertzeko zure botoa nola erabiliko duen %{organization}"'
+            voting_cards_show_abstain: Abstentzioaren aukera bat gehitu
+            voting_cards_show_modal_help: Erakutsi jarraibideak/laguntza modala babesean klik egiten denean
           step:
             default_sort_order_options:
               az: A-Z (Alfabetikoa)
@@ -136,6 +141,9 @@ eu:
               supported_last: Babes gehien jaso dutenak azkekik
               za: Z-A (Alderantzizko alfabetikoa)
     decidim_awesome:
+      account:
+        timezone_select:
+          time_zone_helper: Erabili zure ordutegi-eremu pertsonala zure denbora lokaleko datak erakusteko.
       admin:
         actions: Ekintzak
         admin_accountability:
@@ -148,10 +156,18 @@ eu:
           email: Posta elektronikoa
           exports:
             button: Esportatu bilaketa hau.
+            export_as: Esportatu %{export_format} formatuan
+            export_format:
+              csv: CSV
+              json: JSON
+              xlsx: XLSX
             notice: Esportazio lana ikertu da. Mezu elektroniko bat jasoko duzu prest dagoenean.
           index:
             description: Hemen aurkituko dituzu parte hartzeko espazio baten administrazioan zereginen bat izan duten erabiltzaile guztiak. Administrari normalak ez daude zerrendan.
             global_description: Hemen aurkituko dituzu erakunde hau administratzeko paper globalen bat izan duten erabiltzaile guztiak. Parte hartzeko guneak ez daude zerrendan.
+            missing_users: 'OHARRA: Zerrenda honetan ez dira sartuko %{date} baino lehen sortutako/kendutako erabiltzaileak. Izan ere, "erabiltzailearen trazabilitatea" Decidim v0.24n sartu zen eta instalazio hau, ziurrenik, zaharragoa da.'
+            see_global: Zerrenda itzazu administrazio globalak
+            see_spaces: Espazio parte-hartzaileen zerrenda
             title: Administratzailearen erantzukizuna
           last_login: Azken seinalea datan.
           missing_info: "(informazioa falta da)"
@@ -162,6 +178,7 @@ eu:
           removal_date: Papera ezabatuta dago.
           role: Rola
           roles:
+            admin: Administratzailea
             collaborator: Kolaboratzailea
             moderator: Moderatzailea
             valuator: Baloratzailea.
@@ -175,6 +192,7 @@ eu:
           authorization_not_destroyed: Baimena ezin da suntsitu!
           conflict: Gatazka dago indarrean dagoen baimen batekin.
           edit:
+            authorize: Baimendu %{user} %{name}} izenarekin
             do_it_if_sure: Egin hau bakarrik ziur bazaude erabiltzaileak baimen hau duela.
             force_verification: Indar-egiaztapena egungo datuekin
             force_verification_help: Egiaztapenak huts egin du, baina behartu dezakezu erabiltzaileak baimen hau duela ziur bazaude.
@@ -195,6 +213,10 @@ eu:
             head_tags: Aplikazioaren goiburua zoragarri etiketa sartuta
             image_migrations_started: Irudiak migratzeko prozesua arrakastaz hasi da
             images_migrated: Irudiak ActiveStorage-ra migratu dira
+            pending_image_migrations: |
+              0.25 bertsiotik, Decidim-ek teknologia berri bat erabiltzen du artxiboak igotzeko.<br>
+              Badirudi instalazio honek irudi zaharren <strong>%{total}</strong> migratu behar duela sistema berrira.<br>
+              Orain has dezakezu prozesua eta bigarren mailan egingo da.
             start_image_migrations: "👉 Migrazio-prozesua orain hasi"
         config:
           caution: 'OHARRA: Funtzio honek jokabide lehenetsi batzuk asko aldatzen ditu eta emaitza ustekabekoak sor ditzake. Erabili arretaz!'
@@ -237,6 +259,7 @@ eu:
               allow_images_in_proposals: Proposamen editorean irudiak igotzea baimendu du edozein parte-hartzailek. Irudiak lotura gisa aurkeztuko dira proposamen publikoaren ikuspegian.
               allow_videos_in_editors: Ikono bideo esteka WYSIWYG editore guztietan gehituko da
               auto_save_forms: LocalStorage erabiliko du parte-hartzaileek inkestetan eta beste formularioetan sartzen duten datuak automatikoki gordetzeko betetzen ari diren bitartean. Bisita batean berreskuratuko da, baina soilik formala bidali ez bada. Bidaltzen bada, datuak ezabatuko dira.
+              drag_and_drop_supported: Irudiak igotzean, Drag & Drop onartzen da. Irudiak zerbitzarira igoko dira eta kanpoko baliabide gisa sartuko dira (ez du base64 inline kodetzea erabiltzen).
               force_authorization_after_login: 'Gaituta badago, parte-hartzaileak autentifikazio orrira birbideratuko dira saioa hastean edo erregistratzean, zehaztutako baimen batzuk ematen ez badira.'
               force_authorization_help_text: Testu pertsonalizatua gehitu azaltzeko zergatik den beharrezkoa baimena. Gehitu laguntza eskatzeko kontaktu-metodo bat.
               intergram_about: Intergram-ek Telegram mezularia erabiltzen du behealdean txertatutako zuzeneko txat laguntza widget-a kudeatzeko.
@@ -244,6 +267,8 @@ eu:
               original_editor_override: 0.26 bertsioaz geroztik, administratzaileentzat soilik da posible irudiak editoreetan igotzea.
               proposal_custom_fields: Proposamenen eremu pertsonalizatuak sortu sare publikoaren atal batzuetan bakarrik aplikatzen direnak (errestrikzioen editorea erabili horretarako).
               proposal_custom_fields_example: Datuak XML objektu batean gordetzen dira atributu HTML bateragarriak erabiliz ('dl,dt,dd' elementuak) 'body' normalean ordezkatuz.
+              proposal_custom_fields_translations: "Etiketak, testu lagungarriak, plazentak eta balio akatsak zure aplikazioaren itzulpen pertsonalizatuak erabil ditzakete.\nHorretarako, harizko literal bat erabili beharrean, i18n giltza erabili behar da (gutxienez puntu bat izan behar du).\nAdibidez:\n- \"activemodel.attributes.proposal.title\" ordez \"Izenburua\".\n- \"activemodel.attributes.proposal.address\" ordez \"Helbidea\".\nEdo erabili zure gakoak beste tresna batzuekin batera itzulpenak definitzeko (eg: Term Customizer modulua erabiliz):\n- \"myapp.custom_fields.bio\" beharrean \"Biografia\""
+              proposal_private_custom_fields: Eremu publikoen antzekoak, baina informazio hori ez da jendaurrean emango (administratuek bakarrik izango dute sarbidea).
               scoped_admin_styles: Jakin ezazu hemen ezkutatzeak ez duela ezertarako balio. Kontuz ibili, mesedez.
               scoped_admin_styles_variables: 'CSS aldagai hauek erabil ditzakezu kolore pertsonalizatua antolatzeko:'
               scoped_admin_styles_warning: "<strong>Hemen</strong>gehitu CSS pertsonalizatua, admin honetan bakarrik aplikatzen dena."
@@ -277,6 +302,9 @@ eu:
             sure_to_remove: Ziur zaude CSS koadro hau suntsitu nahi duzula?
           form_scoped_admins:
             delete: Ezabatu
+            new: '"Adminstratzaile esparrua" talde berri bat gehitu'
+            remove: Kendu "Adminstratzaile esparru" talde hau
+            sure_to_remove: Ziur zaude "Adminstratzaile esparrtu" talde hau suntsitu nahi duzula?
           form_scoped_styles:
             delete: Ezabatu
             new: Gehitu "public frontend" CSS koadro berria
@@ -477,6 +505,7 @@ eu:
           text_settings: Testuaren ezarpenak
           title: Izenburua
           truncate: Popup deskribapenetarako gehienezko karaktereak
+      credits: Decidim zoragarria %{version} · %{company} erakundak ♥ mantenduta
       custom_fields:
         errors:
           invalid_fields: Edukiak ezin izan dira analizatu baina '%{field}' eremura esleitu dira
@@ -487,6 +516,16 @@ eu:
           success: Irudia ongi igo da
       map_component:
         map:
+          api_not_ready: |
+            <b>Oharra:</b> Decidim instalazio honek APIa  <b>%{current_complexity}</b>ko konplexutasun maximora konfiguratuta dago.
+            Osagai honek ez du funtzionatuko konfigurazio honekin. Inizializadore bat jartzea gomendatzen dizugu.
+            (adibidez, <code>onfig/initializers/decidim.rb</code>amaieran) honako lerro hauek:<br>
+            <br>
+            <pre># Api configuration
+            Rails.application.config.to_prepare do
+              Decidim::Api::Schema.max_complexity = 5000
+              Decidim::Api::Schema.max_depth = 50
+            end</pre>
           error:
             unavailable: Mapa erabilgarri ez dago. Mesedez, geokodeketa konfiguratzea aktibatu osagai hau.
           show:
@@ -528,9 +567,13 @@ eu:
           voting_for: Nire botoa "%{proposal}"-ri "%{type}" da
           weights:
             weight_0: Abstentzioa
+            weight_0_short: 'A:'
             weight_1: Gorria
+            weight_1_short: 'R:'
             weight_2: Horia
+            weight_2_short: 'Y:'
             weight_3: Berdea
+            weight_3_short: 'G:'
     meetings:
       meetings_map:
         view_meeting: Bilera ikusi
