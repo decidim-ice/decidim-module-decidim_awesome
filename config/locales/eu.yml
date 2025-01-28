@@ -1,74 +1,569 @@
 eu:
+  activemodel:
+    attributes:
+      config:
+        additional_proposal_sortings: Hautaketa-aukerak gehigarriak gaituta
+        allow_images_in_editors: Irudiak HTML editorean baimendu
+        allow_images_in_proposals: Irudiak proposamenen editorean baimendu
+        allow_videos_in_editors: Bideoak HTML editorean baimendu
+        auto_save_forms: Inprimakiak automatikoki gordetzea tokiko biltegian
+        force_authorization_after_login: Saioa hasi edo erregistratu ondoren baimena behartu
+        force_authorization_help_text: Baimen orrirako laguntza-testua
+        force_authorization_with_any_method: Sarbidea baimendu edozein baimen emanez gero (berez, guztiak beharrezkoak dira)
+        intergram_auto_no_response: Parte-hartzaileak bere lehen mezua bidali eta minutu bat igaro ondoren, erantzunik jaso ez bada, bidalitako mezua
+        intergram_auto_response: Parte-hartzaileak bere lehen mezua bidali eta berehala bidalitako mezua
+        intergram_chat_id: Txat IDa
+        intergram_color: Widgetaren kolorea
+        intergram_for_admins: Intergram Txata administratzailearen backend-en gaitzea
+        intergram_intro_message: Txata lehen aldiz irekitzean parte-hartzailearen lehen mezua
+        intergram_require_login: Saioa hasitako parte-hartzaileentzat soilik
+        intergram_title_closed: Itxitako txataren izenburua
+        intergram_title_open: Irekitako txataren izenburua
+        intergram_use_floating_button: Markatuta badago, itxitako txata beti botoi bat izango da, testu baten ordez
+        proposal_custom_fields: Pertsonalizatutako eremuak %{id}
+        proposal_private_custom_fields: Pribatu pertsonalizatutako eremuak %{id}
+        scoped_admin_styles: Pertsonalizatutako estiloak %{id}
+        scoped_admins: Esparruaren administratzail-taldea %{id}
+        scoped_styles: Pertsonalizatutako estiloak %{id}
+        user_timezone: Parte-hartzaileei beren ordu-eremua profilean ezartzea baimendu
+        validate_body_max_caps_percent: Gorputzerako maiuskulen gehienezko ehunekoa
+        validate_body_max_marks_together: Gorputzerako jarraian ikur gehienezko kopurua
+        validate_body_min_length: Gorputzerako beharrezko gutxieneko karaktereak
+        validate_body_start_with_caps: Gorputza maiuskula batekin hastea behartu
+        validate_title_max_caps_percent: Izenbururako maiuskulen gehienezko ehunekoa
+        validate_title_max_marks_together: Izenbururako jarraian ikur gehienezko kopurua
+        validate_title_min_length: Izenbururako beharrezko gutxieneko karaktereak
+        validate_title_start_with_caps: Izenburua maiuskula batekin hastea behartu
+      constraint:
+        component_id: Edo zehazki honetan
+        component_manifest: Komponentetako mota hauetan bakarrik
+        participatory_space_manifest: Parte-hartze espazio mota hauetan aplikatu
+        participatory_space_slug: Hauetan bakarrik
+      custom_redirect:
+        active: Aktibo
+        destination: Helmuga
+        origin: Jatorria
+        pass_query: Galdera-katea helmugara pasatu
+        status: Egoera
+      menu:
+        position: Kokapena
+        raw_label: Etiketa
+        target: Irekiko da
+        visibility: Ikusgarritasuna
+      organization:
+        awesome_admins_available_authorizations: Administratzaileei parte-hartzaileak eskuz egiaztatzen uztea baimen hauekin
+      user:
+        user_time_zone: Pertsonako ordu-eremua
   decidim:
+    admin:
+      actions:
+        manage: Kudeatu
+      filters:
+        admin_accountability:
+          admin_role_type:
+            label: Rolen mota
+          participatory_space_type_eq:
+            label: Parte-hartze espazio mota
+          role:
+            label: Rola
+          role_type_eq:
+            label: Rolen mota
+        label:
+          search_field_end_date: 'Honaino:'
+          search_field_start_date: 'Honetatik:'
+        search_placeholder:
+          user_name_or_user_email_cont: Bilatu parte-hartzaile izenaren edo emailaren arabera
+      menu:
+        admin_accountability: Administratzailearen erantzukizuna
+        decidim_awesome: Decidim zoragarria
     components:
       awesome_iframe:
+        name: Pantaila osoko iframe-a
         settings:
           global:
             announcement: Iragarkia
+            iframe: Iframe kodea
+            iframe_help: 'Jarri zure kodea HTML gisa: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Edukia HTML etiketa guztietatik garbituko da. Ziurtatu %100 erabiltzen duzula pantaila betetzeko.'
+            viewport_width: Mugatu gehienezko zabalera aplikazioaren ikus-eremura
           step:
             announcement: Iragarkia
+            iframe: Iframe kodea
       awesome_map:
+        name: Mapa zoragarria
         settings:
           global:
             announcement: Iragarkia
+            collapse: Menu tolestutik hasi
+            map_center: Maparen erdigunea (Latitudea, Longitudea)
+            map_center_help: 'Erabili hamartarrak (adibidez: 41.38879, 2.15899). Utzi hutsik markatzaile guztiak automatikoki egokitzeko'
+            map_height: Maparen altuera (px)
+            map_zoom: Zooma (0 eta 18 arteko edozein zenbaki)
+            map_zoom_help: Maparen erdigunea definitzen bada soilik aplikatzen da
+            menu_amendments: Erakutsi zuzenketak
+            menu_categories: Erakutsi Kategoria bilaketa-menua
+            menu_hashtags: Erakutsi Hashtag bilaketa-menua
+            menu_meetings: Erakutsi bilerak
+            menu_merge_components: Batu mota bereko osagai guztiak menuan
+            truncate: Popup deskribapenetarako gehienezko karaktereak
           step:
             announcement: Iragarkia
+            show_accepted: Erakutsi onartutako proposamenak
+            show_evaluating: Erakutsi ebaluatzen ari diren proposamenak
+            show_not_answered: Erakutsi erantzun gabeko proposamenak
+            show_rejected: Erakutsi baztertutako proposamenak
+            show_withdrawn: Erakutsi erretiratutako proposamenak
+      proposals:
+        settings:
+          global:
+            awesome_voting_manifest: Babes mota
+            awesome_voting_manifest_options:
+              default: Bozketa sinplea (berezkoa)
+              voting_cards: Bozketa koloretako txartelak erabiliz
+            default_sort_order_options:
+              az: A-Z (Alfabetikoa)
+              supported_first: Babes gehien jaso dutenak lehenengo
+              supported_last: Babes gehien jaso dutenak azkekik
+              za: Z-A (Alderantzizko alfabetikoa)
+            limit_pending_amendments: Proposamen bakoitzean zuzenketa bakarra onartzen du.
+            sort_orders_enabled: Sailkatze mota gaituak
+            voting_cards_box_title: Boto-kutxarako titulua
+            voting_cards_instructions: Laguntza-jarraibideak/-laguntza (leiho modal dismisgarria)
+            voting_cards_instructions_help: 'Akatsa da: "Mesedez, irakurri arretaz hauteskunde-arauak ulertzeko zure botoa nola erabiliko duen %{organization}"'
+          step:
+            default_sort_order_options:
+              az: A-Z (Alfabetikoa)
+              supported_first: Babes gehien jaso dutenak lehenengo
+              supported_last: Babes gehien jaso dutenak azkekik
+              za: Z-A (Alderantzizko alfabetikoa)
     decidim_awesome:
       admin:
+        actions: Ekintzak
+        admin_accountability:
+          admin_roles:
+            admin: Super admin.
+            user_manager: Erabiltzaile-kudeatzailea
+          created_at: Rol bat da.
+          currently_active: Gaur egun aktibo dago.
+          deleted_user: Parte -hartzailea ezabatua
+          email: Posta elektronikoa
+          exports:
+            button: Esportatu bilaketa hau.
+            notice: Esportazio lana ikertu da. Mezu elektroniko bat jasoko duzu prest dagoenean.
+          index:
+            description: Hemen aurkituko dituzu parte hartzeko espazio baten administrazioan zereginen bat izan duten erabiltzaile guztiak. Administrari normalak ez daude zerrendan.
+            global_description: Hemen aurkituko dituzu erakunde hau administratzeko paper globalen bat izan duten erabiltzaile guztiak. Parte hartzeko guneak ez daude zerrendan.
+            title: Administratzailearen erantzukizuna
+          last_login: Azken seinalea datan.
+          missing_info: "(informazioa falta da)"
+          missing_user: Erabiltzailea ez dago datu-basean.
+          name: Izena
+          never_logged: Oraindik ez da egosi.
+          participatory_space: Espazio parte-hartzailea
+          removal_date: Papera ezabatuta dago.
+          role: Rola
+          roles:
+            collaborator: Kolaboratzailea
+            moderator: Moderatzailea
+            valuator: Baloratzailea.
+        admin_authorizations:
+          authorization:
+            confirm_destroy: Ziur zaude baimen hau suntsitu nahi duzula? Horrek eragina izan dezake erabiltzaileak plataformarako duen sarbidean.
+            destroy: Suntsitu.
+            granted_at: '%{date}-ean emana'
+            metadata: Metadatuak ditu? %{metadata}
+          authorization_destroyed: Baimena suntsituta dago.
+          authorization_not_destroyed: Baimena ezin da suntsitu!
+          conflict: Gatazka dago indarrean dagoen baimen batekin.
+          edit:
+            do_it_if_sure: Egin hau bakarrik ziur bazaude erabiltzaileak baimen hau duela.
+            force_verification: Indar-egiaztapena egungo datuekin
+            force_verification_help: Egiaztapenak huts egin du, baina behartu dezakezu erabiltzaileak baimen hau duela ziur bazaude.
+            force_verification_reason: 'Eman arrazoi bat egiaztapena behartzeko:'
+            warning: 'Baimen hau behartuz, erabiltzailearen egungo baimen-egoera gainditzen ari zara.'
+          user_authorized: "%{user} %{name}rekin ongi baimendua"
+          user_not_authorized: "%{user} ezin izan da %{name}rekin baimendu"
+        checks:
+          index:
+            admin_head_tags: Administratzailearen aplikazioaren goiburuan etiketa zoragarrietan sartuta
+            decidim-admin: Administrazio moduluatik
+            decidim-core: Core moduluatik
+            decidim-proposals: Proposamen moduluatik
+            decidim_version: Decidim bertsioa %{version}
+            errors:
+              CSS: Burukoak beharrezko <link> stylesheet sarrerarik ez du. Hori konpontzeko, zure custom _head.html.erb fitxategira eskuz gehi dezakezu
+              JavaScript: Burukoak beharrezko <script> Javascript sarrerarik ez du. Hori konpontzeko, zure admin/_header.html.erb fitxategira eskuz gehi dezakezu
+            head_tags: Aplikazioaren goiburua zoragarri etiketa sartuta
+            image_migrations_started: Irudiak migratzeko prozesua arrakastaz hasi da
+            images_migrated: Irudiak ActiveStorage-ra migratu dira
+            start_image_migrations: "👉 Migrazio-prozesua orain hasi"
         config:
+          caution: 'OHARRA: Funtzio honek jokabide lehenetsi batzuk asko aldatzen ditu eta emaitza ustekabekoak sor ditzake. Erabili arretaz!'
           constraints:
+            add_condition: Kasua gehitu
+            always: Beti
+            cannot_be_destroyed: Barkatu, hau ezin da ezabatu. Konfigurazio honek gutxienez murrizketa bat behar du.
             delete: Ezabatu
             edit: Editatu
+            title: 'Aplikagarria kasu hauetan bakarrik:'
+          create_proposal_custom_field:
+            error: Errorea 'custom field' koadro berria sortzean! %{error}
+            success: '''Custom field'' %{key} koadroa arrakastaz sortu da'
+          create_scoped_admin:
+            error: Errorea Administratzaile talde berria sortzean! %{error}
+            success: Administratzaile taldea %{key} arrakastaz sortu da
+          create_scoped_style:
+            error: Errorea CSS koadro berria sortzean! %{error}
+            success: CSS %{key} koadroa arrakastaz sortu da
+          destroy_proposal_custom_field:
+            error: Errorea 'custom field' koadroa ezabatzean! %{error}
+            success: '''Custom field'' %{key} koadroa arrakastaz ezabatu da'
+          destroy_scoped_admin:
+            error: Errorea Administratzaile taldea ezabatzean! %{error}
+            success: Administratzaile taldea %{key} arrakastaz ezabatu da
+          destroy_scoped_style:
+            error: Errorea CSS koadroa ezabatzean! %{error}
+            success: CSS %{key} koadroa arrakastaz ezabatu da
+          form:
+            additional_proposal_sortings:
+              enable_all: Hautaketa-aukerak gehigarriak gaitu
+              help: Hautaketa-aukerak lehenetsien gehigarriak dira. Gogoratu proposamen osagaien ezarpenetan ordena lehenetsia hauta dezakezula.
+              title: Proposamen zerrendarako ordenatzeko aukerak pertsonalizatu
+            edit_label: Etiketa izendatu
+            errors:
+              incorrect_css: 'CSS #%{key} koadroan baliogabea da'
+              incorrect_json: 'JSON #%{key} koadroan definizio baliogabea'
+            help:
+              allow_images_in_editors: Ikono irudi kargatzailea WYSIWYG editore guztietan gehituko da
+              allow_images_in_proposals: Proposamen editorean irudiak igotzea baimendu du edozein parte-hartzailek. Irudiak lotura gisa aurkeztuko dira proposamen publikoaren ikuspegian.
+              allow_videos_in_editors: Ikono bideo esteka WYSIWYG editore guztietan gehituko da
+              auto_save_forms: LocalStorage erabiliko du parte-hartzaileek inkestetan eta beste formularioetan sartzen duten datuak automatikoki gordetzeko betetzen ari diren bitartean. Bisita batean berreskuratuko da, baina soilik formala bidali ez bada. Bidaltzen bada, datuak ezabatuko dira.
+              force_authorization_after_login: 'Gaituta badago, parte-hartzaileak autentifikazio orrira birbideratuko dira saioa hastean edo erregistratzean, zehaztutako baimen batzuk ematen ez badira.'
+              force_authorization_help_text: Testu pertsonalizatua gehitu azaltzeko zergatik den beharrezkoa baimena. Gehitu laguntza eskatzeko kontaktu-metodo bat.
+              intergram_about: Intergram-ek Telegram mezularia erabiltzen du behealdean txertatutako zuzeneko txat laguntza widget-a kudeatzeko.
+              intergram_config: '<a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> zure taldean gonbidatu edo zuzenean harekin txata hasi.'
+              original_editor_override: 0.26 bertsioaz geroztik, administratzaileentzat soilik da posible irudiak editoreetan igotzea.
+              proposal_custom_fields: Proposamenen eremu pertsonalizatuak sortu sare publikoaren atal batzuetan bakarrik aplikatzen direnak (errestrikzioen editorea erabili horretarako).
+              proposal_custom_fields_example: Datuak XML objektu batean gordetzen dira atributu HTML bateragarriak erabiliz ('dl,dt,dd' elementuak) 'body' normalean ordezkatuz.
+              scoped_admin_styles: Jakin ezazu hemen ezkutatzeak ez duela ezertarako balio. Kontuz ibili, mesedez.
+              scoped_admin_styles_variables: 'CSS aldagai hauek erabil ditzakezu kolore pertsonalizatua antolatzeko:'
+              scoped_admin_styles_warning: "<strong>Hemen</strong>gehitu CSS pertsonalizatua, admin honetan bakarrik aplikatzen dena."
+              scoped_admins: Ohiko erabiltzailea web publikoaren zati jakin batzuk bakarrik administra ditzakeen administraziora bultzatzea (horretarako, editore murriztua erabili). Kontuan izan dagoeneko admin baimenak dituzten erabiltzaileei ez zaiela kasurik egingo.
+              scoped_styles: Sortu CSS pertsonalizatua, soilik webgune publikoko zenbait lekutan aplikatzen dena (erabili horretarako mugatutako editorea)
+              scoped_styles_variables: 'CSS aldagai hauek erabil ditzakezu kolore pertsonalizatuak antolatzeko:'
+              user_timezone: Honek lauki bat gehituko du erabiltzailearen profilean timezona ezartzeko. Hau erabiliko da data eta ordutegiak erakusteko erabiltzailearen tokian tokiko ordutegian.
+              validate_body_max_caps_percent: Zerok ez du letra larririk onartuko, 100ek dena letra larriz idaztera behartuko dute.
+              validate_body_max_marks_together: 'Mugatu galdera eta oihu marka guztiak batera idatz daitezkeenak. Bi badira, ez da onartuko testuan.'
+              validate_body_min_length: Zenbaki hau zero izan daiteke. Horrela, eremu hau ez da derrigorrezkoa izango.
+              validate_title_max_caps_percent: Zerok ez du letra larririk onartuko, 100ek dena letra larriz idaztera behartuko dute.
+              validate_title_max_marks_together: 'Mugatu galdera eta oihu marka guztiak batera idatz daitezkeenak. Bi badira, ez da onartuko testuan.'
+              validate_title_min_length: Titulua beti da derrigorrezkoa eta zenbaki hau ezin da zero izan.
+            validators:
+              body: Parte-hartzailearen sarreraren balidazioak "body" eremurako
+              title: Parte-hartzailearen sarreraren balidazioak "title" eremurako
           form_proposal_custom_fields:
             delete: Ezabatu
+            new: Gehitu "custom fields" koadro berria
+            remove: Kendu "custom fields" koadro hau
+            sure_to_remove: Ziur zaude koadro hau suntsitu nahi duzula?
           form_proposal_private_custom_fields:
             delete: Ezabatu
+            new: Gehitu "private custom fields" koadro berria
+            remove: Kendu "private custom fields" koadro hau
+            sure_to_remove: Ziur zaude "private fields" koadro hau suntsitu nahi duzula?
+          form_scoped_admin_styles:
+            delete: Ezabatu
+            new: Gehitu "admin panel" CSS koadro berria
+            remove: Kendu CSS koadro hau
+            sure_to_remove: Ziur zaude CSS koadro hau suntsitu nahi duzula?
           form_scoped_admins:
             delete: Ezabatu
           form_scoped_styles:
             delete: Ezabatu
+            new: Gehitu "public frontend" CSS koadro berria
+            remove: Kendu CSS koadro hau
+            sure_to_remove: Ziur zaude CSS koadro hau suntsitu nahi duzula?
+          none: "⛔ Inoiz ez! - Desaktibatu beste murrizketa guztiak"
+          process_groups: Prozesu taldeak
+          show:
+            title: '%{setting}-rako doikuntzak'
+            update: Konfigurazioa eguneratu
+          system: Partaidetza espazioak izan ezik edonon
           title:
+            admins: Esparruaren administrataileak
             editors: Editorearen hackak
+            livechat: Zuzeneko Txata
+            proposal_custom_fields: 'Proposamenen Eremu Pertsonalizatuak: Eremu publikoak'
+            proposal_private_custom_fields: 'Proposamenen Eremu Pertsonalizatuak: Eremu pribatuak'
             proposals: Proposamenen hackak
+            scoped_admin_styles: 'Estilo pertsonalizatuak: Admin panel'
+            scoped_styles: 'Estilo pertsonalizatuak: Azalera publikoa'
             styles: Estilo pertsonalizatuak
             surveys: Inkestak eta formularioak
+            verifications: Egiaztapenak / Baimentze-hackak
+          update:
+            error: Konfigurazioa eguneratzean errorea! %{error}
+            success: Konfigurazioa ongi eguneratu da
         constraints:
+          create:
+            error: Baldintza kasua sortzean errorea
+            success: Baldintza kasua ongi sortu da
+          destroy:
+            error: Baldintza kasua ezabatzean errorea
+            success: Baldintza kasua ongi ezabatu da
+          errors:
+            not_unique: Baldintza bera dagoeneko existitzen da
           new:
             cancel: Utzi
+            constraint: Baldintza kasu berria
+            save: Gorde
           show:
             cancel: Utzi
+            constraint: Baldintza kasua editatu
+            save: Gorde
+          update:
+            error: Baldintza kasua eguneratzean errorea
+            success: Baldintza kasua ongi eguneratu da
+        custom_redirects:
+          create:
+            error: Birbideratze bat sortzean errorea! %{error}
+            success: Birbideratzea ongi sortu da
+          destroy:
+            error: Birbideratze bat ezabatzean errorea! %{error}
+            success: Birbideratzea ongi ezabatu da
+          edit:
+            save: Gorde
+            title: Birbideratzea editatu
+          form:
+            destination_help: Ibilbide absolutuak ("/"-rekin hasi) edo URL kanpokoak (http://..)
+            origin_help: Ibilbide absolutuak bakarrik, "/"-rekin hasi
+          index:
+            check_redirections: "✔ Birbideratzeak egiaztatu"
+            confirm_destroy: Ziur zaude birbideratze hau ezabatu nahi duzula?
+            edit: Birbideratzea editatu
+            new: Birbideratze berria
+            remove: Birbideratzea kendu
+            title: Birbideratze pertsonalizatuak
+          new:
+            save: Gorde
+            title: Birbideratze berria
+          origin_exists: Jatorri bera dagoeneko konfiguratu da, editatu mesedez berriro sortu beharrean.
+          origin_missing: Jatorri hau ez da zerrendan aurkitu
+          update:
+            error: Birbideratzea eguneratzean errorea! %{error}
+            success: Birbideratzea ongi eguneratu da
+        maintenance:
+          private_data:
+            component: Espazioa / Osagaia
+            confirm_delete: Ziur zaude baliabide honen datu pribatu guztiak ezabatu nahi dituzula? Honek ezin da desegin.
+            delete: Dena ezabatu
+            destroying_private_data: Baliabiderako %{title} datu pribatuak suntsitzeko prestatuta daude. Mesedez, egiaztatu berriro minutu batzuetan.
+            done: Eginda
+            items_count: Erlazionatutako guztira
+            last_date: Azken eguneraketa
+            no_data: Ez da aurkitu %{time_ago} baino zaharragoak diren datu pribaturik
+            not_destroyable: Baliabide hau ezin da oraindik suntsitu
+            removing: Ezabatzen...
+            time_ago: "%{time} lehenago"
         menu:
+          admins: Esparruaren administrataileak
+          custom_redirects: Birbideratze pertsonalizatuak
           editors: Editorearen hackak
+          livechat: Zuzeneko Txata
           maintenance:
             checks: Sistemaren bateragarritasuna
+            maintenance: Mantentzea
+            private_data: Datu pribatuak
           menu_hacks: Menuaren doikuntzak
+          proposal_custom_fields: Proposamenen Eremu Pertsonalizatuak
           proposals: Proposamenen hackak
           styles: Estilo pertsonalizatuak
           surveys: Inkestak eta formularioak
+          verifications: Egiaztapenak
+        menu_hacks:
+          create:
+            error: Menu elementua sortzean errorea! %{error}
+            success: Menu elementua ongi sortu da
+          destroy:
+            error: Menu elementua ezabatzean errorea! %{error}
+            success: Menu elementua ongi ezabatu da
+          edit:
+            save: Gorde
+            title: Menu elementua editatu
+          form:
+            label_help: Itzulpenak ez dira automatikoki detektatzen, bete mesedez eremu guztiak!
+            target:
+              blank: Leiho berria
+              self: Leiho bera
+            visibility:
+              default: Ikusgai
+              hidden: Beti ezkutatuta
+              logged: Parte-hartzaile hasitakoentzat bakarrik ikusgai
+              non_logged: Parte-hartzaile hasigabeentzat bakarrik ikusgai
+              verified_user: Baimen baliozkoa duten parte-hartzaileentzat bakarrik ikusgai
+          index:
+            confirm_destroy: Ziur zaude pertsonalizazio hau kendu nahi duzula?
+            edit: Editatu
+            home_content_block_menu:
+              title: Menu nagusiaren hasiera bloke globala
+            menu:
+              title: Menu nagusia
+            new: Elementu berria
+            remove: Gehigarria kendu
+            remove_hack: Pertsonalizazioa kendu
+          new:
+            save: Gorde
+            title: Menu elementu berria
+          update:
+            error: Menu elementua eguneratzean errorea! %{error}
+            success: Menu elementua ongi eguneratu da
+          url_exists: URL bera dagoeneko konfiguratu da, editatu mesedez berriro sortu beharrean.
+        officializations:
+          authorizations: Baimenak
+          verification_modal:
+            authorizations_for: '%{user}-rako baimenak'
+            close: Itxi
+        proposal_custom_fields:
+          menu:
+            title: Eremu publikoak
+          private_body: Gorputz pribatua
+          private_data_last_remove: Datu hauek %{time_ago} lehenago suntsitu ziren.
+          private_data_last_update: Datu hauek azkenekoz %{time_ago} lehenago eguneratu ziren.
+          proposal_private_custom_fields: Eremu pribatuak
+          remove_private_data: "👉 Agian kendu nahi duzu"
+        scoped_admin_styles:
+          menu:
+            title: Admin panela
+        scoped_styles:
+          menu:
+            title: Azalera publikoa
+      admin_log:
+        component:
+          destroy_private_data: "%{user_name}-ek %{space_name}-en %{resource_name}-rako %{count} datu pribatu elementu suntsitu zituen."
+        user:
+          admin_creates_authorization: "%{user_name}-ek %{handler_name} erabiliz %{resource_name} egiaztatu zuen"
+          admin_destroys_authorization: "%{user_name}-ek %{resource_name}-en %{handler_name} egiaztapena suntsitu zuen"
+          admin_forces_authorization: "%{user_name}-ek %{resource_name}-en %{handler_name} egiaztapena behartu zuen. Arrazoia: %{reason}"
+      amendments:
+        modal:
+          amendment_exists: Zuzenketa bat dagoeneko existitzen da
+          current_amendment_html: <p>Zuzenketa egungoa <a href="%{amendment_link}">hemen ikus dezakezu</a>.</p>
+          dismiss: Ados, ulertuta
+        pending_limit_reached: Barkatu, aldi berean zuzenketa bakarra izan daiteke zain. Mesedez, itxaron "%{emendation}" onartua edo baztertua izan arte.
+      config:
+        intergram:
+          auto_no_response: Badirudi inor ez dagoela une honetan erantzuteko. Mesedez, esan nola har dezakegun zurekin harremanetan, eta ahalik eta azkarren erantzungo dizugu.
+          auto_response: Lehenengo administratzaile eskuragarria bilatzen (minutu bat behar izan dezake)
+          intro_message: Kaixo! Nola lagun zaitzakegu?
+          title_closed: Klikatu txateatzeko!
+          title_open: Txateatzen hasi!
+      content_blocks:
+        map:
+          collapse: Menu tolestutik hasi
+          map_center: Maparen erdigunea (Latitudea, Longitudea)
+          map_center_help: 'Erabili hamartarrak (adibidez: 41.38879, 2.15899). Utzi hutsik markatzaile guztiak automatikoki egokitzeko'
+          map_height: Maparen altuera (px)
+          map_settings: Maparen ezarpenak
+          map_zoom: Zooma (0 eta 18 arteko edozein zenbaki)
+          map_zoom_help: Maparen erdigunea definitzen bada soilik aplikatzen da
+          menu_amendments: Erakutsi zuzenketak
+          menu_meetings: Erakutsi bilerak
+          menu_merge_components: Batu mota bereko osagai guztiak menuan
+          name: Mapa zoragarria
+          show_accepted: Erakutsi onartutako proposamenak
+          show_evaluating: Erakutsi ebaluatzen ari diren proposamenak
+          show_not_answered: Erakutsi erantzun gabeko proposamenak
+          show_rejected: Erakutsi baztertutako proposamenak
+          show_withdrawn: Erakutsi erretiratutako proposamenak
+          text_settings: Testuaren ezarpenak
+          title: Izenburua
+          truncate: Popup deskribapenetarako gehienezko karaktereak
+      custom_fields:
+        errors:
+          invalid_fields: Edukiak ezin izan dira analizatu baina '%{field}' eremura esleitu dira
+          invalid_xml: 'Edukiak ezin izan dira analizatu: DL/DD elementuak XMLan aurkitu ez dira'
+      editor_images:
+        create:
+          error: Irudia igotzean errorea!
+          success: Irudia ongi igo da
       map_component:
         map:
+          error:
+            unavailable: Mapa erabilgarri ez dago. Mesedez, geokodeketa konfiguratzea aktibatu osagai hau.
           show:
             view_meeting: Bilera ikusi
             view_proposal: Proposamena ikusi
+      proposal_private_custom_fields_disclosure: Informazio hau ez da argitaratuko
+      required_authorizations:
+        index:
+          cancel: Beste une batean egingo dut hau, %{link}.
+          granted_title: Egiaztapen onartuak
+          logout: Utzi hasieratik
+          missing_title: Oraindik ez da egiaztatu
+          resume_title: Egiaztapen zain
+          resume_with_method: Egiaztapena berrartu %{name} erabiliz
+          title: Zure identitatea egiaztatu
+          verify_with_all_these_options: 'Mesedez, egiaztatu zure burua metodo guzti hauekin plataformara sartu aurretik:'
+          verify_with_any_of_these_options: 'Mesedez, egiaztatu zure burua aukera hauetako batekin plataformara sartu aurretik:'
+          verify_with_method: '%{name}-rekin egiaztatu'
+      session:
+        authorization_is_required: Plataforma honetan parte hartzeko, zure kontua baliozko baimenarekin (%{authorizations}) egiaztatu behar duzu.
+      system:
+        organizations:
+          awesome_tweaks: Decidim  Doikuntza zoragarriak
+      validators:
+        too_much_caps: Letra larriegi erabiltzen ari da (%{percent}% baino gehiago testuan)
       voting:
         voting_cards:
+          abstained: "✔ Abstentzioa"
+          change_vote: Nire botoa aldatu
+          default_box_title: Proposamen honi botoa eman
+          default_instructions_html: "<p>Mesedez, irakurri arretaz hauteskunde arauak zure botoa nola erabiliko den ulertzeko %{organization}-ek</p>"
           modal:
             cancel: Utzi
+            message: Zure botoa %{date}-ean azkena hartuko da. Aldatu dezakezu orduan arte
+            proceed: Jarraitu
+            skip: Egin klik leiho hau etorkizunean saltatzeko
+          vote_button: Egin klik botoa emateko
+          voted: Bozkatu da
+          voting_for: Nire botoa "%{proposal}"-ri "%{type}" da
+          weights:
+            weight_0: Abstentzioa
+            weight_1: Gorria
+            weight_2: Horia
+            weight_3: Berdea
     meetings:
       meetings_map:
         view_meeting: Bilera ikusi
     proposals:
+      admin:
+        exports:
+          awesome_private_proposals: Datu pribatuak dituzten proposamenak
       proposals:
+        orders:
+          az: A-Z (Alfabetikoa)
+          supported_first: Babes gehien jaso dutenak lehenengo
+          supported_last: Babes gehien jaso dutenak azkekik
+          za: Z-A (Alderantzizko alfabetikoa)
         proposal:
           view_proposal: Proposamena ikusi
   layouts:
     decidim:
       decidim_awesome:
+        admin:
+          maintenance:
+            title: 'Mantentze tresnak: %{title}'
+            titles:
+              checks: Sistemaren bateragarritasun egiaztapenak
+              private_data: Datu pribatuen garbiketa
         awesome_config:
           amendments: Aldaketak
           autosaved_error: LocalStorage zure arakatzailean ez da onartzen, formularioa automatikoki ezin da gorde.
+          autosaved_retrieved: Formulario honen datuak aurreko saio batetik berreskuratu dira
           autosaved_success: Datuak tokiko biltegian gordeta
           categories: Kategoriak
           drag_and_drop_image: Irudiak arrastatuz eta askatuz edo itsatsiz gehitu
+          hashtags: Hashtagak
+          items: elementuak
           meetings: Bilerak
           proposals: Proposamenak
+          select_deselect_all: Denak hautatu/deshautatu
