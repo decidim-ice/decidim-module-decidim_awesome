@@ -190,7 +190,9 @@ eu:
             metadata: Metadatuak ditu? %{metadata}
           authorization_destroyed: Baimena suntsituta dago.
           authorization_not_destroyed: Baimena ezin da suntsitu!
+          authorization_transferred: 'Egiaztatze gatazka egon zen eta egiaztapena %{user} parte-hartzailera pasatu da'
           conflict: Gatazka dago indarrean dagoen baimen batekin.
+          conflict_help_html: "%{user} erabiltzailearekin dagoen gatazka konpondu behar duzu baimen honekin erabiltzaileari baimena eman aurretik.\n<br><br>\nEgiaztatze-gatazka bat gertatzen da beste erabiltzaile batek baimendu nahi duzun erabiltzailearen datu berberak dituenean.\nGatazka hau konpon dezakezu beste erabiltzaileari baimen gatazkatsua kenduz edo erabiltzaile horrentzako datu ezberdinak erabiliz.\n"
           edit:
             authorize: Baimendu %{user} %{name}} izenarekin
             do_it_if_sure: Egin hau bakarrik ziur bazaude erabiltzaileak baimen hau duela.
@@ -269,6 +271,11 @@ eu:
               proposal_custom_fields_example: Datuak XML objektu batean gordetzen dira atributu HTML bateragarriak erabiliz ('dl,dt,dd' elementuak) 'body' normalean ordezkatuz.
               proposal_custom_fields_translations: "Etiketak, testu lagungarriak, plazentak eta balio akatsak zure aplikazioaren itzulpen pertsonalizatuak erabil ditzakete.\nHorretarako, harizko literal bat erabili beharrean, i18n giltza erabili behar da (gutxienez puntu bat izan behar du).\nAdibidez:\n- \"activemodel.attributes.proposal.title\" ordez \"Izenburua\".\n- \"activemodel.attributes.proposal.address\" ordez \"Helbidea\".\nEdo erabili zure gakoak beste tresna batzuekin batera itzulpenak definitzeko (eg: Term Customizer modulua erabiliz):\n- \"myapp.custom_fields.bio\" beharrean \"Biografia\""
               proposal_private_custom_fields: Eremu publikoen antzekoak, baina informazio hori ez da jendaurrean emango (administratuek bakarrik izango dute sarbidea).
+              proposal_private_custom_fields_translations: |
+                Eremu pribatu pertsonalizatuak lauki bereizian agertzen dira informazio-testu honekin:
+                %{warning}
+                Testu hau itzulpen pertsonalizatu batekin pertsonalizatu daiteke gakoa erabiliz:
+                %{key}
               scoped_admin_styles: Jakin ezazu hemen ezkutatzeak ez duela ezertarako balio. Kontuz ibili, mesedez.
               scoped_admin_styles_variables: 'CSS aldagai hauek erabil ditzakezu kolore pertsonalizatua antolatzeko:'
               scoped_admin_styles_warning: "<strong>Hemen</strong>gehitu CSS pertsonalizatua, admin honetan bakarrik aplikatzen dena."
@@ -282,6 +289,10 @@ eu:
               validate_title_max_caps_percent: Zerok ez du letra larririk onartuko, 100ek dena letra larriz idaztera behartuko dute.
               validate_title_max_marks_together: 'Mugatu galdera eta oihu marka guztiak batera idatz daitezkeenak. Bi badira, ez da onartuko testuan.'
               validate_title_min_length: Titulua beti da derrigorrezkoa eta zenbaki hau ezin da zero izan.
+              verifications_html: |
+                Hemen txio batzuk egin daitezke egiaztatze prozesurako.<br>
+                <b>OHARRA:</b> Jakin ezazu konfigurazio hau aldatzeak erabiltzaile batzuk plataformara sartzea eragotz dezakeela.<br><br>
+                Kontuan izan konfigurazio hau erabiltzaile guztiei aplikatzen zaiela. Administratuek beti izango dute sarbidea admin backend-era.
             validators:
               body: Parte-hartzailearen sarreraren balidazioak "body" eremurako
               title: Parte-hartzailearen sarreraren balidazioak "title" eremurako
@@ -364,9 +375,17 @@ eu:
           form:
             destination_help: Ibilbide absolutuak ("/"-rekin hasi) edo URL kanpokoak (http://..)
             origin_help: Ibilbide absolutuak bakarrik, "/"-rekin hasi
+            pass_query_help: |
+              Aktibatu aukera hau kontsulta-katea helburura kopiatzea nahi baduzu.<br>
+              Adibidez,/my-origin = >/my-destination konfiguratu baduzu, /my-origin? locale = es eskaera bat "/ my-destination? locale = es" -ra bideratuko da.
           index:
             check_redirections: "✔ Birbideratzeak egiaztatu"
             confirm_destroy: Ziur zaude birbideratze hau ezabatu nahi duzula?
+            description: |
+              Edozein ibilbide defini dezakezu (hasieratik) edozein bisitari helmugako URL batera birbideratzeko. <code></code><br>
+              Helmuga erabateko bidea izan daiteke (ie: <code>/processes/some-process</code>) edo <code>https://</code> (ie: <code>http://decidim.org</code>). <br><br>
+              Kontuan izan birbideratze batek beste bide bat ez badator bakarrik funtzionatzen duela. Ezin dira jatorrizko ibilbideak gainditu (hau diseinuz da).<br>
+              Ziur ez bazaude, egiaztatze-birbideratzeak botoia erabili bateraezintasunak egiaztatzeko.
             edit: Birbideratzea editatu
             new: Birbideratze berria
             remove: Birbideratzea kendu
@@ -386,6 +405,24 @@ eu:
             delete: Dena ezabatu
             destroying_private_data: Baliabiderako %{title} datu pribatuak suntsitzeko prestatuta daude. Mesedez, egiaztatu berriro minutu batzuetan.
             done: Eginda
+            help_html: |
+              Tresna honen bidez, datu pribatu guztiak ezaba daitezke parte hartzeko gune edo osagai jakin baterako. Ekintza hau atzeraezina da eta datu pribatu guztiak datu-basetik ezabatuko ditu.
+              <br><br>
+              <strong>Zer jotzen da datu pribatutzat?</strong>
+              <br>
+              Datu pribatuak informazio publikoa ez den eta administratzaileentzat bakarrik den informazioa dira. Honek, oraingoz, eremu pribatuetako informazioa barne hartzen du.
+              <br><br>
+              <strong>Zer gertatzen da datu pribatuak ezabatzen ditudanean?</strong>
+              <br>
+              Datu pribatuak ezabatzen direnean, hautatutako espazio edo osagai parte-hartzailerako informazio pribatu guztia datu-basetik kenduko da behin betiko. Ekintza horren erregistro bat sisteman gordeko da, ikuskapen-helburuetarako.
+              <br><br>
+              <strong>Zer gertatzen da datu publikoekin?</strong>
+              <br>
+              Ekintza honek ez du datu publikoetan eraginik izango. Datu pribatuak bakarrik ezabatuko dira.
+              <br><br>
+              <strong>Itxaron behar duzu datu pribatuak ezabatu aurretik?</strong>
+              <br>
+              Bai, ezin dira datu pribatuak ezabatu azken eguneratzea %{time_ago} baino txikiagoa bada. Konfigurazio hau alda dezakezu inizializatzaileen fitxategian.
             items_count: Erlazionatutako guztira
             last_date: Azken eguneraketa
             no_data: Ez da aurkitu %{time_ago} baino zaharragoak diren datu pribaturik
@@ -476,6 +513,9 @@ eu:
           amendment_exists: Zuzenketa bat dagoeneko existitzen da
           current_amendment_html: <p>Zuzenketa egungoa <a href="%{amendment_link}">hemen ikus dezakezu</a>.</p>
           dismiss: Ados, ulertuta
+          explanation_html: |
+            <p>Gaur egun, proposamen honetarako beste zuzenketa bat aztertzen ari dira. Berria sortzeko, oraingoa onartu edo baztertu arte itxaron behar da.</p>
+            <p>proposamen honen egilearengana ere irits zaitezke <a href="%{proposal_link}">iruzkin bat utziz</a> eta oraingo aldaketaren ebazpena arintzen saiatuz.</p>
         pending_limit_reached: Barkatu, aldi berean zuzenketa bakarra izan daiteke zain. Mesedez, itxaron "%{emendation}" onartua edo baztertua izan arte.
       config:
         intergram:
@@ -548,6 +588,9 @@ eu:
         authorization_is_required: Plataforma honetan parte hartzeko, zure kontua baliozko baimenarekin (%{authorizations}) egiaztatu behar duzu.
       system:
         organizations:
+          admin_allowed_authoritzations_help_html: |
+            Administrazioak eskuz egiaztatu ahal izango ditu baimen horiek dituzten erabiltzaileak.
+            Erabili ezaugarri hau tentuz, segurtasun arazoak sor baititzake.<br>.
           awesome_tweaks: Decidim  Doikuntza zoragarriak
       validators:
         too_much_caps: Letra larriegi erabiltzen ari da (%{percent}% baino gehiago testuan)
