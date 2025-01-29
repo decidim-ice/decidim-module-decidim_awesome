@@ -5,3 +5,4 @@
 
 <% append_javascript_pack_tag "decidim_decidim_awesome", defer: false %>
 <% append_javascript_pack_tag("decidim_decidim_awesome_custom_fields") if Decidim::DecidimAwesome.enabled?(:proposal_custom_fields) %>
+<% append_javascript_pack_tag("decidim_decidim_awesome_comments") if Decidim::DecidimAwesome.enabled?(:allow_attachments_in_comments) %>
