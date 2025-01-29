@@ -1,13 +1,16 @@
 CHANGELOG
 =========
 
-Current
+v0.11.3
 -------
 Compatibility:
   - Decidim v0.28.x
 
 Features:
   - Added user time zones in account settings
+  - Added custom styles for the admin panel
+  - Added Verification tweaks
+  - Added Admin manual verifications
 
 v0.11.2
 -------
