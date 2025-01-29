@@ -12,7 +12,7 @@ module Decidim
         end
 
         def current_vote
-          @current_vote ||= Decidim::Proposals::ProposalVote.find_by(author: current_user, proposal: resource)
+          @current_vote ||= vote_for(current_user) if current_user
         end
 
         def user_voted_weight
@@ -24,7 +24,7 @@ module Decidim
             weights = [3, 2, 1]
             weights << 0 if resource.component.settings.voting_cards_show_abstain
             weights.index_with do |weight|
-              resource.weight_count(weight)
+              weight_count_for(weight)
             end
           end
         end
@@ -38,7 +38,7 @@ module Decidim
         end
 
         def weight_count_item
-          return unless resource.respond_to?(:weight_count)
+          # return unless resource.respond_to?(:weight_count)
           return if resource.component.current_settings.votes_hidden?
           return if resource&.rejected? || resource&.withdrawn?
 
@@ -47,6 +47,21 @@ module Decidim
             icon: "#{user_voted_weight ? "checkbox" : "close"}-circle-line",
             data_attributes: all_weights.transform_keys { |num| "weight-#{num}" }
           }
+        end
+
+        def vote_for(user)
+          user_votes = memoize("user_votes")
+          return user_votes[resource.id] if user_votes
+
+          resource.votes.find_by(author: user)
+        end
+
+        def weight_count_for(weight)
+          all_extra_fields = memoize("extra_fields")
+          extra_fields = all_extra_fields ? all_extra_fields[resource.id] : resource.extra_fields
+          return 0 unless extra_fields
+
+          extra_fields.vote_weight_totals[weight.to_s] || 0
         end
       end
     end
