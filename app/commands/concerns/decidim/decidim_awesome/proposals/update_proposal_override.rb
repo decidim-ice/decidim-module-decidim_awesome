@@ -8,7 +8,7 @@ module Decidim
       # to avoid private field to be logged in PaperTrail.
       module UpdateProposalOverride
         extend ActiveSupport::Concern
-        include Admin::UpdateProposalOverride
+        include ::Decidim::DecidimAwesome::Proposals::Admin::UpdateProposalOverride
 
         included do
           private
