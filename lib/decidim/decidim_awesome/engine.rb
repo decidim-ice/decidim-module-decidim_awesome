@@ -24,10 +24,6 @@ module Decidim
       # https://edgeguides.rubyonrails.org/engines.html#overriding-models-and-controllers
       # overrides
       config.to_prepare do
-        # activate Decidim LayoutHelper for the overriden views
-        ActiveSupport.on_load :action_controller do
-          helper Decidim::LayoutHelper if respond_to?(:helper)
-        end
         # Include additional helpers globally
         ActiveSupport.on_load(:action_view) { include Decidim::DecidimAwesome::AwesomeHelpers }
         # Also for cells
@@ -136,6 +132,7 @@ module Decidim
           end
 
           if DecidimAwesome.enabled?(:weighted_proposal_voting)
+            Decidim::Proposals::ProposalsController.include(Decidim::DecidimAwesome::Proposals::MemoizeExtraFields)
             Decidim::Proposals::ProposalVotesController.include(Decidim::DecidimAwesome::Proposals::ProposalVotesControllerOverride)
           end
 
