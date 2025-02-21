@@ -1,10 +1,15 @@
 CHANGELOG
 =========
 
+v0.12.0
+-------
+Compatibility:
+- Decidim v0.29.x
+
 v0.11.3
 -------
 Compatibility:
-  - Decidim v0.29.x
+  - Decidim v0.28.x
 
 Features:
   - Added user time zones in account settings
@@ -21,7 +26,6 @@ Compatibility:
 Features:
   - SQL vulnerability fix for admin accountability
   - Private fields proposal draft update fix
-  - Added user time zones in account settings
 
 v0.11.1
 ------
