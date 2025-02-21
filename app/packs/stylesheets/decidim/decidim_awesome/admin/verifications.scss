@@ -6,7 +6,9 @@
   &-td:not(:first-child) {
     @apply text-left;
 
-    button {
+    a {
+      @apply text-sm font-normal block;
+
       &:hover {
         @apply text-secondary underline;
       }
