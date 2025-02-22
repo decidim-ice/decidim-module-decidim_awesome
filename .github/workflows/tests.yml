@@ -15,7 +15,7 @@ env:
 
 jobs:
   tests-latest:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         include:
@@ -86,7 +86,7 @@ jobs:
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: screenshots
