@@ -205,8 +205,9 @@ module Decidim
     end
 
     # This controllers will be skipped from the authorization check
+    # Included automatically: required_authorizations authorizations upload_validations timeouts editor_images locales pages tos
     config_accessor :force_authorization_allowed_controller_names do
-      %w(account pages)
+      %w(account)
     end
 
     # How old must be the private data to be considered expired and therefore presented to the admins for deletion
