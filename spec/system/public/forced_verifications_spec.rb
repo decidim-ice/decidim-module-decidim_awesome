@@ -82,7 +82,7 @@ describe "Forced verifications", type: :system do
     end
 
     context "when the user has not accepted the terms an conditions" do
-      let(:user) { create(:user, :confirmed, organization:, accepted_tos_version: nil) }
+      let(:user) { create(:user, :confirmed, organization: organization, accepted_tos_version: nil) }
 
       it "user can accept the terms and conditions" do
         expect(page).to have_current_path("/pages/terms-of-service")
