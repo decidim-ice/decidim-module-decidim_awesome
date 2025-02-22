@@ -79,7 +79,7 @@ jobs:
 
       - run: tar -zcf /tmp/testapp-env.tar.gz ./spec/decidim_dummy_app
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: workspace
           path: /tmp/testapp-env.tar.gz
@@ -139,7 +139,7 @@ jobs:
       - run: |
           sudo apt install wkhtmltopdf imagemagick 7zip
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: workspace
           path: /tmp
@@ -165,7 +165,7 @@ jobs:
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: screenshots
