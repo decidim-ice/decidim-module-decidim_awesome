@@ -81,6 +81,18 @@ describe "Forced verifications" do
       end
     end
 
+    context "when the user has not accepted the terms an conditions" do
+      let(:user) { create(:user, :confirmed, organization:, accepted_tos_version: nil) }
+
+      it "user can accept the terms and conditions" do
+        expect(page).to have_current_path("/pages/terms-of-service")
+        click_on "I agree with these terms"
+        expect(user.reload.accepted_tos_version).not_to be_nil
+        expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(redirect_url: restricted_path))
+        expect(page).to have_content("you need to authorize your account with a valid authorization")
+      end
+    end
+
     context "when is an admin" do
       let(:user) { create(:user, :confirmed, :admin, organization:) }
 

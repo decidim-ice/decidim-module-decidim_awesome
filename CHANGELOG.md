@@ -1,10 +1,13 @@
 CHANGELOG
 =========
 
-v0.12.0
+Unreleased
 -------
 Compatibility:
-- Decidim v0.29.x
+  - Decidim 0.29.x
+
+Features:
+  - Fix allowing to accept terms and conditions when forced verifications enabled
 
 v0.11.3
 -------
