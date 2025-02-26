@@ -9,6 +9,9 @@ de:
         allow_images_in_proposals: Bilder im Vorschlags-Editor erlauben
         allow_images_in_small_editor: Bilder im minimalen HTML-Editor erlauben
         auto_save_forms: Formulare automatisch lokal speichern
+        force_authorization_after_login: Autorisierung nach Anmelden/Registrierung erzwingen
+        force_authorization_help_text: Hilfetext für die Autorisierungsseite
+        force_authorization_with_any_method: Erlaube Zugriff, wenn eine der Genehmigungen erteilt wird (standardmäßig sind alle erforderlich)
         intergram_auto_no_response: Diese Nachricht wird verschickt, sobald eine Minute seit der letzten vom Benutzer verfasste Nachricht verschickt wurde und keine Antwort eingetroffen ist
         intergram_auto_response: Eine Nachricht, die unmittelbar nach dem Senden der ersten Nachricht des Benutzers gesendet wird
         intergram_chat_id: Chat ID
@@ -21,6 +24,7 @@ de:
         intergram_use_floating_button: Wenn aktiviert, ist der geschlossene Chat immer ein Button statt eines Textes
         proposal_custom_fields: 'Eingabefeld #%{id}'
         proposal_private_custom_fields: 'Privates Eingabefeld #%{id}'
+        scoped_admin_styles: Eigene Styles %{id}
         scoped_admins: Eingeschränkte Admin-Gruppe %{id}
         scoped_styles: Eigene Eingabefelder %{id}
         use_markdown_editor: Markdown Editor anstelle des HTML-Editors verwenden
@@ -49,6 +53,8 @@ de:
         target: Öffnet in
         url: URL
         visibility: Sichtbarkeit
+      organization:
+        awesome_admins_available_authorizations: Administratoren erlauben, Benutzer mit diesen Berechtigungen manuell zu verifizieren
   decidim:
     admin:
       filters:
@@ -172,6 +178,26 @@ de:
             collaborator: Mitarbeiter
             moderator: Moderator
             valuator: Schätzer
+        admin_authorizations:
+          authorization:
+            confirm_destroy: Sind Sie sicher, dass Sie diese Berechtigung löschen möchten? Dies kann den Zugriff des Benutzers auf die Plattform beeinflussen.
+            destroy: Löschen
+            granted_at: Bewilligt am %{date}
+            metadata: Enthält Metadaten? %{metadata}
+          authorization_destroyed: Autorisierung erfolgreich gelöscht.
+          authorization_not_destroyed: Autorisierung konnte nicht gelöscht werden!
+          authorization_transferred: 'Warnung: Es gab einen Verifizierungskonflikt und die Verifizierung wurde an %{user} übertragen'
+          conflict: Es gibt einen Konflikt mit einer bestehenden Autorisierung
+          conflict_help_html: "Sie müssen den Konflikt mit dem Benutzer %{user} lösen, bevor Sie den Benutzer mit dieser Berechtigung autorisieren können.\n<br><br>\nEin Verifizierungskonflikt tritt auf, wenn ein anderer Benutzer die gleichen Daten hat wie der Benutzer, den Sie autorisieren möchten. \nSie können diesen Konflikt lösen, indem Sie die widersprüchliche Autorisierung des anderen Benutzers entfernen oder andere Daten für diesen Benutzer verwenden.\n"
+          edit:
+            authorize: '%{user} mit %{name} autorisieren'
+            do_it_if_sure: Tun Sie dies nur, wenn Sie sicher sind, dass der Benutzer diese Berechtigung hat.
+            force_verification: Verifizierung mit den aktuellen Daten erzwingen
+            force_verification_help: Überprüfung ist fehlgeschlagen, aber Sie können sie erzwingen, wenn Sie sicher sind, dass der Benutzer diese Berechtigung hat.
+            force_verification_reason: 'Geben Sie einen Grund an, um die Überprüfung zu erzwingen:'
+            warning: 'Warnung: Indem Sie diese Autorisierung erzwingen, überschreiben Sie den aktuellen Autorisierungsstatus des Benutzers.'
+          user_authorized: "%{user} erfolgreich autorisiert mit %{name}"
+          user_not_authorized: "%{user} konnte nicht mit %{name} autorisiert werden"
         checks:
           index:
             admin_head_tags: Angezeigte Awesome Tags im Admin Application Header
