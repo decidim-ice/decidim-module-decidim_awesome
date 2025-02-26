@@ -7,6 +7,9 @@ de:
         allow_images_in_proposals: Bilder im Vorschlags-Editor erlauben
         allow_videos_in_editors: Videos im HTML-Editor erlauben
         auto_save_forms: Formulare automatisch lokal speichern
+        force_authorization_after_login: Autorisierung nach Anmelden/Registrierung erzwingen
+        force_authorization_help_text: Hilfetext für die Autorisierungsseite
+        force_authorization_with_any_method: Erlaube Zugriff, wenn eine der Genehmigungen erteilt wird (standardmäßig sind alle erforderlich)
         intergram_auto_no_response: Diese Nachricht wird verschickt, sobald eine Minute seit der letzten vom Benutzer verfasste Nachricht verschickt wurde und keine Antwort eingetroffen ist
         intergram_auto_response: Eine Nachricht, die unmittelbar nach dem Senden der ersten Nachricht des Benutzers gesendet wird
         intergram_chat_id: Chat ID
@@ -19,6 +22,7 @@ de:
         intergram_use_floating_button: Wenn aktiviert, ist der geschlossene Chat immer ein Button statt eines Textes
         proposal_custom_fields: 'Eingabefeld #%{id}'
         proposal_private_custom_fields: 'Privates Eingabefeld #%{id}'
+        scoped_admin_styles: Eigene Styles %{id}
         scoped_admins: Eingeschränkte Admin-Gruppe %{id}
         scoped_styles: Eigene Eingabefelder %{id}
         user_timezone: Erlauben Sie Benutzern, ihre Zeitzone in ihrem Profil einzustellen
@@ -47,6 +51,8 @@ de:
         target: Öffnet in
         url: URL
         visibility: Sichtbarkeit
+      organization:
+        awesome_admins_available_authorizations: Administratoren erlauben, Benutzer mit diesen Berechtigungen manuell zu verifizieren
       user:
         user_time_zone: Eigene Zeitzone
   decidim:
@@ -176,6 +182,26 @@ de:
             collaborator: Mitarbeiter
             moderator: Moderator
             valuator: Schätzer
+        admin_authorizations:
+          authorization:
+            confirm_destroy: Sind Sie sicher, dass Sie diese Berechtigung löschen möchten? Dies kann den Zugriff des Benutzers auf die Plattform beeinflussen.
+            destroy: Löschen
+            granted_at: Bewilligt am %{date}
+            metadata: Enthält Metadaten? %{metadata}
+          authorization_destroyed: Autorisierung erfolgreich gelöscht.
+          authorization_not_destroyed: Autorisierung konnte nicht gelöscht werden!
+          authorization_transferred: 'Warnung: Es gab einen Verifizierungskonflikt und die Verifizierung wurde an %{user} übertragen'
+          conflict: Es gibt einen Konflikt mit einer bestehenden Autorisierung
+          conflict_help_html: "Sie müssen den Konflikt mit dem Benutzer %{user} lösen, bevor Sie den Benutzer mit dieser Berechtigung autorisieren können.\n<br><br>\nEin Verifizierungskonflikt tritt auf, wenn ein anderer Benutzer die gleichen Daten hat wie der Benutzer, den Sie autorisieren möchten. \nSie können diesen Konflikt lösen, indem Sie die widersprüchliche Autorisierung des anderen Benutzers entfernen oder andere Daten für diesen Benutzer verwenden.\n"
+          edit:
+            authorize: '%{user} mit %{name} autorisieren'
+            do_it_if_sure: Tun Sie dies nur, wenn Sie sicher sind, dass der Benutzer diese Berechtigung hat.
+            force_verification: Verifizierung mit den aktuellen Daten erzwingen
+            force_verification_help: Überprüfung ist fehlgeschlagen, aber Sie können sie erzwingen, wenn Sie sicher sind, dass der Benutzer diese Berechtigung hat.
+            force_verification_reason: 'Geben Sie einen Grund an, um die Überprüfung zu erzwingen:'
+            warning: 'Warnung: Indem Sie diese Autorisierung erzwingen, überschreiben Sie den aktuellen Autorisierungsstatus des Benutzers.'
+          user_authorized: "%{user} erfolgreich autorisiert mit %{name}"
+          user_not_authorized: "%{user} konnte nicht mit %{name} autorisiert werden"
         checks:
           index:
             admin_head_tags: Angezeigte Awesome Tags im Admin Application Header
@@ -236,6 +262,8 @@ de:
               allow_videos_in_editors: Dies fügt ein Video-Upload-Symbol in allen WYSIWYG-Editoren hinzu
               auto_save_forms: Formulare automatisch speichern
               drag_and_drop_supported: Drag and Drop unterstützen
+              force_authorization_after_login: 'Wenn aktiviert, werden Benutzer nach Login oder Registrierung auf die Autorisierungsseite weitergeleitet, wenn einige der angegebenen Autorisierungen nicht gewährt werden. Dies ist nützlich, wenn Sie Benutzer mit einer bestimmten Berechtigung verifizieren wollen, bevor sie sich überhaupt einloggen können (z. B. um Spam zu verhindern).'
+              force_authorization_help_text: Fügen Sie einen benutzerdefinierten Text hinzu, um zu erklären, warum eine Autorisierung erforderlich ist. Stellen Sie auch sicher, dass Sie eine Kontaktmethode hinzufügen, falls Benutzer Hilfe benötigen.
               intergram_about: Über Intergram
               intergram_config: Intergram Konfiguration
               original_editor_override: Seit Version 0.26 ist es für Administratoren möglich Bilder in die Editoren hochzuladen. Daher betreffen die Bildeinstellungen hier nur die öffentlich sichtbaren Editoren. Administratoren steht diese Funktion immer zur Verfügung.
@@ -248,6 +276,9 @@ de:
                 %{warning}
                 Dieser Text kann mit einer benutzerdefinierten Übersetzung durch Verwendung des Schlüssels angepasst werden:
                 %{key}
+              scoped_admin_styles: Seien Sie sich bewusst, dass das Verstecken von Dingen den Administrator unbrauchbar machen könnte. Bitte handeln Sie mit Vorsicht.
+              scoped_admin_styles_variables: 'Sie können die folgenden CSS-Variablen für die benutzerdefinierter Farben der Organisation verwenden:'
+              scoped_admin_styles_warning: "<strong>Warnung</strong>: Fügen Sie hier benutzerdefiniertes CSS hinzu, das nur in diesem Admin-Backend gilt."
               scoped_admins: Befördern Sie normale Benutzer zu Administratoren, die nur bestimmte Teile der öffentlichen Seite verwalten können (verwenden Sie dazu den Editor für Einschränkungen). Beachten Sie, dass Benutzer, die bereits reguläre Administratorrechte haben, ignoriert werden. For instance, if having configured /my-origin => /my-destination, a request to /my-origin?locale=ca  will be redirected to "/my-destination?locale=ca".
               scoped_styles: Erstellen Sie benutzerdefinierte CSS, die nur in bestimmten Bereichen der öffentlichen Seite gelten (vewenden Sie dazu die Einschränkungen)
               scoped_styles_variables: 'Sie können die folgenden CSS-Variablen für die benutzerdefinierter Farben der Organisation verwenden:'
@@ -258,6 +289,10 @@ de:
               validate_title_max_caps_percent: 0 lässt keinen Großbuchstaben zu, 100 lässt ausschliesslich Großbuchstaben zu
               validate_title_max_marks_together: 'Begrenzt die Anzahl der Frage- und Ausrufezeichen, die zusammen geschrieben werden können. Zum Beispiel: Der Wert 2 führt dazu, dass ''!!!'' im Text nicht erlaubt ist'
               validate_title_min_length: Der Titel ist immer obligatorisch und diese Zahl kann nicht Null sein
+              verifications_html: |
+                Hier können Sie einige Änderungen am Verifizierungsprozess vornehmen.<br>
+                <b>HINWEIS:</b> Beachten Sie, dass das Ändern dieser Einstellungen einige Benutzer am Zugriff auf die Plattform hindern könnte. Verwenden Sie es mit Vorsicht!<br><br>
+                Beachten Sie auch, dass diese Einstellungen auf alle Benutzer angewendet werden. Administratoren haben jedoch immer Zugriff auf das Admin-Backend.
             validators:
               body: Eingabevalidierungen für das Feld "Textkörper"
               title: Eingabevalidierungen für das Feld "Titel"
@@ -271,6 +306,11 @@ de:
             new: Neues privates Eingabefeld hinzufügen
             remove: Privates Eingabefeld entfernen
             sure_to_remove: Bist du sicher, dass du dieses private Eingabefeld entfernen möchtest?
+          form_scoped_admin_styles:
+            delete: Löschen
+            new: Füge ein neues "Admin-Panel" CSS-Feld hinzu
+            remove: CSS Box entfernen
+            sure_to_remove: Sind Sie sicher, dass Sie diese CSS-Box entfernen möchten?
           form_scoped_admins:
             delete: Löschen
             new: Hinzufügen einer neuen "Eingeschränkte Admins"-Gruppe
@@ -294,8 +334,11 @@ de:
             proposal_custom_fields: 'Benutzerdefinierte Felder: Öffentliche Felder'
             proposal_private_custom_fields: 'Benutzerdefinierte Felder: Private Felder'
             proposals: Vorschläge
+            scoped_admin_styles: 'Benutzerdefinierte Stile: Admin-Panel'
+            scoped_styles: 'Benutzerdefinierte Stile: Öffentliches Frontend'
             styles: Eigene Styles
             surveys: Umfragen
+            verifications: Überprüfungen / Autorisierungshacks
           update:
             error: Fehler beim Aktualisieren der Konfiguration! %{error}
             success: Konfiguration erfolgreich aktualisiert
@@ -395,6 +438,7 @@ de:
           proposals: Vorschläge
           styles: Eigene Styles
           surveys: Umfragen
+          verifications: Verifizierungen
         menu_hacks:
           create:
             error: Fehler beim Erstellen des Menüpunkts! %{error}
@@ -433,6 +477,11 @@ de:
             error: Fehler beim Aktualisieren des Menüpunkts! %{error}
             success: Menüpunkt erfolgreich aktualisiert
           url_exists: Die gleiche URL ist bereits konfiguriert. bitte bearbeiten Sie diese, anstatt sie neu zu erstellen.
+        officializations:
+          authorizations: Autorisierungen
+          verification_modal:
+            authorizations_for: Autorisierungen für %{user}
+            close: Schliessen
         proposal_custom_fields:
           menu:
             title: Öffentlich sichtbare Felder
@@ -441,9 +490,19 @@ de:
           private_data_last_update: Diese Daten wurden vor %{time_ago} gelöscht.
           proposal_private_custom_fields: Private Felder
           remove_private_data: "👉 Sie können es entfernen"
+        scoped_admin_styles:
+          menu:
+            title: Admin Panel
+        scoped_styles:
+          menu:
+            title: Öffentliches Frontend
       admin_log:
         component:
           destroy_private_data: "%{user_name} hat %{count} private Daten für %{resource_name} in %{space_name} gelöscht"
+        user:
+          admin_creates_authorization: "%{user_name} verifizierte %{resource_name} mit %{handler_name}"
+          admin_destroys_authorization: "%{user_name} hat die Verifizierung %{handler_name} auf %{resource_name} gelöscht"
+          admin_forces_authorization: "%{user_name} erzwang die Verifizierung %{handler_name} auf %{resource_name}. Grund: %{reason}"
       amendments:
         modal:
           amendment_exists: Eine Änderung existiert bereits
@@ -500,6 +559,26 @@ de:
             view_meeting: Sitzung ansehen
             view_proposal: Vorschlag ansehen
       proposal_private_custom_fields_disclosure: Diese Informationen werden nicht veröffentlicht
+      required_authorizations:
+        index:
+          cancel: Ich werde das in einem anderen Moment tun, %{link}.
+          granted_title: Gewährte Verifizierungen
+          logout: abmelden lassen
+          missing_title: Noch nicht verifiziert
+          resume_title: Ausstehende Verifizierungen
+          resume_with_method: Verifizierung mit %{name} fortsetzen
+          title: Verifizieren Sie Ihre Identität
+          verify_with_all_these_options: 'Bitte verifizieren Sie sich mit all diesen Methoden, bevor Sie auf die Plattform zugreifen können:'
+          verify_with_any_of_these_options: 'Bitte verifizieren Sie sich mit mindestens einer dieser Optionen, bevor Sie auf die Plattform zugreifen können:'
+          verify_with_method: Mit %{name} verifizieren
+      session:
+        authorization_is_required: Um an dieser Plattform teilzunehmen, müssen Sie Ihr Konto mit einer gültigen Berechtigung autorisieren (%{authorizations}).
+      system:
+        organizations:
+          admin_allowed_authoritzations_help_html: |
+            Admins können Benutzer mit diesen Berechtigungen manuell verifizieren.
+            <br>Diese Funktion mit Vorsicht nutzen, da dies zu Sicherheitsproblemen führen kann.
+          awesome_tweaks: Decidim Awesome Optimierungen
       validators:
         too_much_caps: Es werden zu viele Großbuchstaben verwendet (über %{percent}% des Textes)
       voting:
