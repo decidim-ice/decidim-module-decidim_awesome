@@ -28,7 +28,7 @@ module Decidim::Proposals
     let(:body) { "A valid proposal body" }
     let(:private_body) { "A valid private proposal body" }
     let(:form) do
-      Decidim::Proposals::ProposalWizardCreateStepForm.from_params(params).with_context(context)
+      Decidim::Proposals::ProposalForm.from_params(params).with_context(context)
     end
     let(:proposal) { Decidim::Proposals::Proposal.last }
 

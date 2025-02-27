@@ -4,7 +4,7 @@ CHANGELOG
 Unreleased
 -------
 Compatibility:
-  - Decidim 0.28.x
+  - Decidim 0.29.x
 
 Features:
   - Fix allowing to accept terms and conditions when forced verifications enabled
@@ -109,7 +109,7 @@ Compatibility:
 
 Features:
   - Fixes for the menu hacker
- 
+
 v0.9.1
 ------
 

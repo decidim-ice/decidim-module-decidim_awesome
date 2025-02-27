@@ -45,12 +45,17 @@ module Decidim::DecidimAwesome
         end
       end
 
-      context "when there's no file" do
-        let(:image) { upload_test_file(Decidim::Dev.test_file("invalid.jpeg", "image/jpeg")) }
+      context "when file is not valid" do
+        let(:invalid_params) { { image: invalid_image } }
+        let(:invalid_image) { upload_test_file(Decidim::Dev.test_file("Exampledocument.pdf", "application/pdf")) }
 
-        it "returns failure" do
-          post(:create, params:)
+        it "does not create an editor image and returns an error message" do
+          expect do
+            post :create, params: invalid_params
+          end.not_to(change(Decidim::EditorImage, :count))
+
           expect(response).to have_http_status(:unprocessable_entity)
+          expect(response.body).to include("Error uploading image")
         end
       end
     end

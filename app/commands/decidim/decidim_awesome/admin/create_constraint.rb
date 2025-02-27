@@ -39,7 +39,7 @@ module Decidim
         attr_reader :form, :constraint
 
         def attributes
-          form.attributes.filter { |_i, v| v.present? }
+          form.attributes.compact_blank
         end
       end
     end

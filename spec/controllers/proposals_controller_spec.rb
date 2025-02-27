@@ -9,9 +9,9 @@ module Decidim::Proposals
     let(:organization) { participatory_space.organization }
     let(:participatory_space) { component.participatory_space }
     let(:component) { create(:proposal_component, :with_votes_enabled, settings:) }
-    let!(:proposal1) { create(:proposal, title: { en: "m middle", ca: "à 3", "machine_translations" => { es: "a primero" } }, component:) }
-    let!(:proposal2) { create(:proposal, title: { en: "z last", ca: "A 2", "machine_translations" => { es: "z último" } }, component:) }
-    let!(:proposal3) { create(:proposal, title: { en: "a first", ca: "a 1", "machine_translations" => { es: "m medio" } }, component:) }
+    let!(:proposal1) { create(:proposal, title: { :en => "m middle", :ca => "à 3", "machine_translations" => { es: "a primero" } }, component:) }
+    let!(:proposal2) { create(:proposal, title: { :en => "z last", :ca => "A 2", "machine_translations" => { es: "z último" } }, component:) }
+    let!(:proposal3) { create(:proposal, title: { :en => "a first", :ca => "a 1", "machine_translations" => { es: "m medio" } }, component:) }
     let(:user) { create(:user, :confirmed, organization: component.organization) }
     let!(:vote1) { create(:proposal_vote, proposal: proposal2, author: user) }
     let!(:vote2) { create(:proposal_vote, proposal: proposal3, author: user) }

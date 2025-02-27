@@ -317,7 +317,7 @@ When building a new view for the vote button ([see the original](https://github.
 - If votes are blocked `if current_settings.votes_blocked?`
 - If the user has already voted `if @voted_proposals ? @voted_proposals.include?(proposal.id) : proposal.voted_by?(current_user)`
 - If maximum votes have already reached `if proposal.maximum_votes_reached?`
-- If the proposal can accumulate supports beyond maximum `if proposal.can_accumulate_supports_beyond_threshold`
+- If the proposal can accumulate supports beyond maximum `if proposal.can_accumulate_votes_beyond_threshold`
 - If the current component allows the user to participate `if current_component.participatory_space.can_participate?(current_user)`
 - Note that the [original view](https://github.com/decidim/decidim/blob/release/0.28-stable/decidim-proposals/app/views/decidim/proposals/proposals/_vote_button.html.erb) is overridden only inside the tag  `<div id="proposal-<%= proposal.id %>-vote-button" class="button--vote-button">`. You only need to substitute the part inside.
 
@@ -413,7 +413,7 @@ Decidim::DecidimAwesome.configure do |config|
 #### 21. Manual verifications
 
 The admin will be allowed to manually authorize users using the methods specified in the `/system` admin section.
-Currently, only form based handlers are supported (Direct methods). 
+Currently, only form based handlers are supported (Direct methods).
 Admins can manually override or verify users in the participants list but they still have to fulfill the requirements of the verifier (although they will be allowed to force the authorization even if some of them fails).
 
 Admin logs are also created in each action for accountability.
@@ -624,9 +624,9 @@ You can run run tests against the legacy Decidim versions by using:
 ```bash
 export DATABASE_USERNAME=<username>
 export DATABASE_PASSWORD=<password>
-RBENV_VERSION=3.1.1 BUNDLE_GEMFILE=Gemfile.legacy bundle
-RBENV_VERSION=3.1.1 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rake test_app
-RBENV_VERSION=3.1.1 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rspec
+RBENV_VERSION=3.2.2 BUNDLE_GEMFILE=Gemfile.legacy bundle
+RBENV_VERSION=3.2.2 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rake test_app
+RBENV_VERSION=3.2.2 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rspec
 ```
 
 For convenience, you can use the scripts `bin/test` and `bin/test-legacy` to run tests against one or the other version:

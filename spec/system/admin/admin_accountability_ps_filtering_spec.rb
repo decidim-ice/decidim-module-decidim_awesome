@@ -42,8 +42,8 @@ describe "Filter Admin actions" do
     it "shows filters" do
       expect(page).to have_content("Filter")
       expect(page).to have_css("#q_user_name_or_user_email_cont")
-      expect(page).to have_css("#q_created_at_gteq")
-      expect(page).to have_css("#q_created_at_lteq")
+      expect(page).to have_css("#q_created_at_gteq_date")
+      expect(page).to have_css("#q_created_at_lteq_date")
     end
 
     it "displays the filter labels" do
@@ -152,8 +152,8 @@ describe "Filter Admin actions" do
     context "when searching by date" do
       def search_by_date(start_date, end_date)
         within(".filters__section") do
-          fill_in(:q_created_at_gteq, with: start_date) if start_date.present?
-          fill_in(:q_created_at_lteq, with: end_date) if end_date.present?
+          fill_in(:q_created_at_gteq_date, with: start_date.strftime("%d/%m/%Y")) if start_date.present?
+          fill_in(:q_created_at_lteq_date, with: end_date.strftime("%d/%m/%Y")) if end_date.present?
 
           find("*[type=submit]").click
         end

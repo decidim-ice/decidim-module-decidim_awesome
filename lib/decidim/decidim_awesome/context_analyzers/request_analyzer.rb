@@ -14,8 +14,8 @@ module Decidim
 
           # In the frontend there's no a 100% correspondence between url and manifest name
           def participatory_spaces_routes
-            spaces = Decidim.participatory_space_manifests \
-                            .filter { |space| !DecidimAwesome.config.participatory_spaces_routes_context.has_key?(space.name) } \
+            spaces = Decidim.participatory_space_manifests
+                            .filter { |space| !DecidimAwesome.config.participatory_spaces_routes_context.has_key?(space.name) }
                             .to_h { |space| [space.name.to_s, space.name.to_s] }
             DecidimAwesome.config.participatory_spaces_routes_context.each do |manifest, routes|
               routes.each do |route|

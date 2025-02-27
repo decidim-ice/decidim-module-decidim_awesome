@@ -39,13 +39,13 @@ describe "Filter Admin actions" do
     it "shows filters" do
       expect(page).to have_content("Filter")
       expect(page).to have_css("#q_user_name_or_user_email_cont")
-      expect(page).to have_css("#q_created_at_gteq")
-      expect(page).to have_css("#q_created_at_lteq")
+      expect(page).to have_css("#q_created_at_gteq_date")
+      expect(page).to have_css("#q_created_at_lteq_date")
     end
 
     it "displays the filter labels" do
       find("a.dropdown").hover
-      expect(page).not_to have_content("Participatory space type")
+      expect(page).to have_no_content("Participatory space type")
       expect(page).to have_content("Role type")
 
       find("a", text: "Role type").hover
@@ -63,7 +63,7 @@ describe "Filter Admin actions" do
       expect(page).to have_content(admin2.name, count: 1)
       expect(page).to have_content(manager.name, count: 1)
       expect(page).to have_content(manager2.name, count: 1)
-      expect(page).not_to have_content(user.name, count: 1)
+      expect(page).to have_no_content(user.name, count: 1)
 
       expect(page).to have_content(login_date.strftime("%d/%m/%Y %H:%M"))
       expect(page).to have_content("Currently active", count: 4)
@@ -108,9 +108,8 @@ describe "Filter Admin actions" do
     context "when searching by date" do
       def search_by_date(start_date, end_date)
         within(".filters__section") do
-          fill_in(:q_created_at_gteq, with: start_date) if start_date.present?
-          fill_in(:q_created_at_lteq, with: end_date) if end_date.present?
-
+          fill_in_datepicker :q_created_at_gteq_date, with: start_date.strftime("%d/%m/%Y") if start_date.present?
+          fill_in_datepicker :q_created_at_lteq_date, with: end_date.strftime("%d/%m/%Y") if end_date.present?
           find("*[type=submit]").click
         end
       end

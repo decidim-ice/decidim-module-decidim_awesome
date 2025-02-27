@@ -25,7 +25,7 @@ describe "Questionnaires" do
   it "does not have current_questionnaire" do
     login_as user, scope: :user
     visit meeting_live_event_path
-    expect(page.body).not_to have_content("window.DecidimAwesome.current_questionnaire")
+    expect(page.body).to have_no_content("window.DecidimAwesome.current_questionnaire")
   end
 
   context "when questionnaire exist" do

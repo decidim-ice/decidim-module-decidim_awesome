@@ -3,7 +3,7 @@
 require "spec_helper"
 
 module Decidim::Proposals
-  describe ProposalWizardCreateStepForm do
+  describe ProposalForm do
     subject { form }
 
     let(:params) do

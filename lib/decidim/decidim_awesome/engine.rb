@@ -5,6 +5,7 @@ require "deface"
 require "decidim/core"
 require "decidim/decidim_awesome/awesome_helpers"
 require "decidim/decidim_awesome/menu"
+require "decidim/decidim_awesome/middleware/current_config"
 
 module Decidim
   module DecidimAwesome
@@ -47,11 +48,11 @@ module Decidim
                                    :validate_body_max_caps_percent,
                                    :validate_body_max_marks_together,
                                    :validate_body_start_with_caps)
-          Decidim::Proposals::ProposalWizardCreateStepForm.include(Decidim::DecidimAwesome::Proposals::ProposalWizardCreateStepFormOverride)
+          Decidim::Proposals::ProposalForm.include(Decidim::DecidimAwesome::Proposals::ProposalFormCustomizations)
         end
 
         if DecidimAwesome.enabled?(:proposal_custom_fields, :proposal_private_custom_fields)
-          Decidim::Proposals::ProposalWizardCreateStepForm.include(Decidim::DecidimAwesome::Proposals::ProposalFormOverride)
+          Decidim::Proposals::ProposalForm.include(Decidim::DecidimAwesome::Proposals::ProposalFormOverride)
           Decidim::Proposals::Admin::ProposalForm.include(Decidim::DecidimAwesome::Proposals::ProposalFormOverride)
           Decidim::Proposals::ProposalPresenter.include(Decidim::DecidimAwesome::Proposals::ProposalPresenterOverride)
           Decidim::Proposals::CreateProposal.include(Decidim::DecidimAwesome::Proposals::CreateProposalOverride)
@@ -67,7 +68,7 @@ module Decidim
           Decidim::System::RegisterOrganizationForm.include(Decidim::DecidimAwesome::System::OrganizationFormOverride)
           Decidim::System::UpdateOrganizationForm.include(Decidim::DecidimAwesome::System::OrganizationFormOverride)
           Decidim::System::UpdateOrganization.include(Decidim::DecidimAwesome::System::UpdateOrganizationOverride)
-          Decidim::System::RegisterOrganization.include(Decidim::DecidimAwesome::System::RegisterOrganizationOverride)
+          Decidim::System::CreateOrganization.include(Decidim::DecidimAwesome::System::CreateOrganizationOverride)
         end
 
         if DecidimAwesome.enabled?(:proposal_custom_fields, :proposal_private_custom_fields, :weighted_proposal_voting)
@@ -229,7 +230,7 @@ module Decidim
             component.settings(:global) do |settings|
               DecidimAwesome.hash_append!(
                 settings.attributes,
-                :can_accumulate_supports_beyond_threshold,
+                :can_accumulate_votes_beyond_threshold,
                 :awesome_voting_manifest,
                 Decidim::SettingsManifest::Attribute.new(
                   type: :select,
