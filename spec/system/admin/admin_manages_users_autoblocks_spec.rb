@@ -95,6 +95,28 @@ describe "Admin manages users autoblocks feature" do
       end
     end
 
+    context "when user has blank nickname" do
+      before do
+        # rubocop:disable Rails/SkipsModelValidations
+        user_with_blank_about.update_attribute(:nickname, "")
+        # rubocop:enable Rails/SkipsModelValidations
+
+        fill_in "Threshold", with: "5"
+        check "Perform users blocking"
+        fill_in "Block justification message", with: "Your account has been blocked due to suspicious activity"
+        accept_confirm { click_button "Detect and block users" }
+      end
+
+      context "with about user blank rule" do
+        it "detects and blocks the user" do
+          expect(page).not_to have_content "Validation failed"
+
+          expect(Decidim::User.blocked.count).to eq(1)
+          expect(user_with_blank_about.reload).to be_blocked
+        end
+      end
+    end
+
     context "when performing the block" do
       before do
         fill_in "Threshold", with: "5"
