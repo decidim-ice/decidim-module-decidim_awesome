@@ -50,6 +50,7 @@ module Decidim
         def block_users!
           detected_users.each do |user|
             create_report!(user)
+            check_user_validation!(user)
 
             block_form = Decidim::Admin::BlockUserForm.from_model(user).with_context(current_organization:, current_user:)
             I18n.with_locale(user.locale || current_organization.default_locale || "en") do
@@ -76,6 +77,14 @@ module Decidim
           )
 
           moderation.update!(report_count: moderation.report_count + 1)
+        end
+
+        def check_user_validation!(user)
+          return if user.valid?
+
+          user.nickname = Decidim::User.nicknamize("user_blocked")
+
+          user.save!
         end
 
         def send_notification_to_admins!
