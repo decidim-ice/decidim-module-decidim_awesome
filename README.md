@@ -461,24 +461,8 @@ Go to `yourdomain/admin/decidim_awesome` and start tweaking things!
 >
 > ```bash
 > bin/rails decidim_decidim_awesome:install:migrations
-> bin/rails decidim_decidim_awesome:webpacker:install
+> bin/rails decidim_decidim_awesome:shackapacker:install
 > ```
-
-
-If you are upgrading from a version prior to 0.8, make sure to visit the URL `/admin/decidim_awesome/checks` and run image migrations for the old images:
-
-![Check image migrations](examples/check_image_migrations.png)
-
-If you are a system admin, you can also perform this task by executing this rake task in the console:
-
-```
-RAILS_ENV=production bin/rails decidim_awesome:active_storage_migrations:migrate_from_carrierwave
-```
-
-Or check your migration status with:
-```
-RAILS_ENV=production bin/rails decidim_awesome:active_storage_migrations:check_migration_from_carrierwave
-```
 
 The correct version of Decidim Awesome should resolved automatically by the Bundler.
 However you can force some specific version using `gem "decidim-decidim_awesome", "~> 0.12.0"` in the Gemfile.

@@ -132,7 +132,7 @@ module Decidim
     # allows admins to created specific CSS snippets affecting only some public frontend specific parts
     # Valid values differ a little from the previous convention:
     #   :disabled => false and non available, hidden from admins
-    #   Hash => hash of different css text, each key will be used for the contraints
+    #   Hash => hash of different css text, each key will be used for the constraints
     # Admins create this hash dynamically but some pre-defined css boxes can be created here as:
     #   {
     #      some_identifier: ".wrapper { background: red; }"
@@ -144,7 +144,7 @@ module Decidim
     # allows admins to created specific CSS snippets affecting only some admin specific parts
     # Valid values differ a little from the previous convention:
     #   :disabled => false and non available, hidden from admins
-    #   Hash => hash of different css text, each key will be used for the contraints
+    #   Hash => hash of different css text, each key will be used for the constraints
     # Admins create this hash dynamically but some pre-defined css boxes can be created here as:
     #   {
     #      some_identifier: ".wrapper { background: red; }"
@@ -157,7 +157,7 @@ module Decidim
     # https://github.com/jsonform/jsonform/wiki
     # Valid values uses the same structure as :scoped_styles
     #   :disabled => false and non available, hidden from admins
-    #   Hash => hash of different JSON texts, each key will be used for the contraints
+    #   Hash => hash of different JSON texts, each key will be used for the constraints
     # Admins can create this hash dynamically but some pre-defined css boxes can be created here as:
     #   {
     #      some_identifier: "{ ... some definition... }"
@@ -173,14 +173,14 @@ module Decidim
 
     # whether to add a select to user's profile to allow them to select their preferred time zone
     # if set to false, the select won't be shown but it can still be configured by the admins
-    # if set to :disabled the feature will be completly removed
+    # if set to :disabled the feature will be completely removed
     config_accessor :user_timezone do
       false
     end
 
     # Forces the user to authorize using some registered verification flow in order to access the platform
     # if set to an empty array, the user will be able to access the platform without any verification but admins can still enforce it
-    # if set to :disabled the feature will be completly removed
+    # if set to :disabled the feature will be completely removed
     # You can initialize some default verification workflow manifests
     config_accessor :force_authorization_after_login do
       []
@@ -199,7 +199,7 @@ module Decidim
 
     # Allows admins to manually authorize users with the specified methods
     # if set to an empty array, the admins will not be able to authorize users but the system admin can still configure it
-    # if set to :disabled the feature will be completly removed
+    # if set to :disabled the feature will be completely removed
     config_accessor :admins_available_authorizations do
       []
     end
@@ -221,7 +221,7 @@ module Decidim
     end
 
     # allows to keep modifications for the main menu
-    # can return :disabled to completly remove this feature
+    # can return :disabled to completely remove this feature
     # otherwise it should be an array (some overrides can be specified by default):
     # [
     #    {
@@ -238,16 +238,16 @@ module Decidim
       []
     end
 
-    # Allows admins to assignate "fake" admins scoped to some admin zones using the
+    # Allows admins to assign "fake" admins scoped to some admin zones using the
     # same scope editor as :scoped_styles, valid values uses the same convention:
     #   :disabled => false and non available, hidden from admins
-    #   Hash => hash of different admin ids, each key will be used for the contraints
+    #   Hash => hash of different admin ids, each key will be used for the constraints
     # Admins create this hash dynamically but some pre-defined admin boxes can be created here as:
     #   {
     #      some_identifier: [1234, 5678, 90123]
     #   }
     #
-    # To test this feature in development, ensure that config/environmnets/development.rb is configured as:
+    # To test this feature in development, ensure that config/environments/development.rb is configured as:
     #   config.action_dispatch.show_exceptions = true
     #   config.action_dispatch.show_detailed_exceptions = false
     #   config.consider_all_requests_local = false
@@ -256,13 +256,13 @@ module Decidim
     end
 
     # Allow to configure custom redirections
-    # can return :disabled to completly remove this feature
+    # can return :disabled to completely remove this feature
     # You can initialize some default redirection if desired as follows:
     #  {
     #    "/decidim-docs" => { destination: "http://docs.decidim.org", active: true }
     #  }
     #
-    # To test this feature in development, ensure that config/environmnets/development.rb is configured as:
+    # To test this feature in development, ensure that config/environments/development.rb is configured as:
     #   config.action_dispatch.show_exceptions = true
     #   config.action_dispatch.show_detailed_exceptions = false
     #   config.consider_all_requests_local = false
@@ -308,20 +308,20 @@ module Decidim
     # additional correspondences between participatory spaces manifests and routes
     # ie: /admin/assemblies and /admin/assemblies_types are both treated as a "assembly" participatory space in terms of permission scoping
     # This can be tuned in a initialized if some other hacks over routes are applied
-    # if a registered participatory space is not listed here then the name manifest will be used as a default route /manifest_name /admin/manifes_name
+    # if a registered participatory space is not listed here then the name manifest will be used as a default route /manifest_name /admin/manifest_name
     config_accessor :participatory_spaces_routes_context do
       {
-        # route in admin is diferent than in the frontend: /processes, /admin/participatory_processes
+        # route in admin is different than in the frontend: /processes, /admin/participatory_processes
         participatory_processes: [:participatory_processes, :processes],
         # both /admin/assemblies and /admin/assemblies_types are considered assemblies
         assemblies: [:assemblies, :assemblies_types],
-        # route in admin is diferent than in the frontend: /process_groups, /admin/participatory_process_groups
+        # route in admin is different than in the frontend: /process_groups, /admin/participatory_process_groups
         process_groups: [:processes_groups, :participatory_process_groups]
       }
     end
 
     # If true, enables a new section in "Participants" where to audit all the admin roles that have been enabled/disabled historically in Decidim
-    # Set to :disabled to completly remove this feature
+    # Set to :disabled to completely remove this feature
     config_accessor :admin_accountability do
       [:participatory_space_roles, :admin_roles]
     end
@@ -337,7 +337,7 @@ module Decidim
 
     # Which components will be tampered to add the voting registry override
     config_accessor :voting_components do
-      [:proposals, :reporting_propposals]
+      [:proposals, :reporting_proposals]
     end
 
     # A URL where to obtain the translations for the FormBuilder component
@@ -378,7 +378,7 @@ module Decidim
 
     # prepends to a hash a new value in a specified position so that the hash becomes:
     # { a: 1, b: 2, c: 3 } => prepend_hash(hash, :b, :d, 4) => { a: 1, d: 4, b: 2, c: 3 }
-    # if key is not found then it will be inserted at the beggining
+    # if key is not found then it will be inserted at the beginning
     def self.hash_prepend!(hash, before_key, key, value)
       insert_at = hash.to_a.index(hash.assoc(before_key))
       insert_at = 0 if insert_at.nil?
