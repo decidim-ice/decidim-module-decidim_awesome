@@ -412,9 +412,9 @@ module Decidim
       registered_components << [manifest, block]
     end
 
-    # version 0.11 is compatible only with decidim 0.28
+    # version 0.12 is compatible only with decidim 0.29
     def self.legacy_version?
-      # Decidim.version[0..3] == "0.28"
+      # Decidim.version[0..3] == "0.29"
       false
     end
   end

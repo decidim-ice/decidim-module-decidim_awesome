@@ -481,12 +481,13 @@ RAILS_ENV=production bin/rails decidim_awesome:active_storage_migrations:check_m
 ```
 
 The correct version of Decidim Awesome should resolved automatically by the Bundler.
-However you can force some specific version using `gem "decidim-decidim_awesome", "~> 0.11.0"` in the Gemfile.
+However you can force some specific version using `gem "decidim-decidim_awesome", "~> 0.12.0"` in the Gemfile.
 
 Depending on your Decidim version, choose the corresponding Awesome version to ensure compatibility:
 
 | Awesome version | Compatible Decidim versions |
 |---|---|
+| 0.12.x | 0.29.x |
 | 0.11.x | 0.28.x |
 | 0.10.x | >= 0.26.7, >= 0.27.x |
 | 0.9.2 | >= 0.26.7, >= 0.27.3 |
@@ -600,7 +601,6 @@ bundle exec rubocop
 To ease up following the style guide, you should install the plugin to your
 favorite editor, such as:
 
-- Atom - [linter-rubocop](https://atom.io/packages/linter-rubocop)
 - Sublime Text - [Sublime RuboCop](https://github.com/pderichs/sublime_rubocop)
 - Visual Studio Code - [Rubocop for Visual Studio Code](https://github.com/misogi/vscode-ruby-rubocop)
 
@@ -614,8 +614,8 @@ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rake test_
 DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rspec
 ```
 
-> Note: the following is not currently applicable as version v0.11 is only compatible with version Decidim v0.28
-> Is left here for future reference
+> Note: the following is not currently applicable as from version v0.11 this plugin is compatible one version at the time.
+> This is left here for future reference.
 
 However, this project works with different versions of Decidim. In order to test them all, we maintain two different Gemfiles: `Gemfile` and `Gemfile.legacy`. The first one is used for development and testing the latest Decidim version supported, the second one is used for testing against the old Decidim version.
 
