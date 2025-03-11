@@ -461,7 +461,7 @@ Go to `yourdomain/admin/decidim_awesome` and start tweaking things!
 >
 > ```bash
 > bin/rails decidim_decidim_awesome:install:migrations
-> bin/rails decidim_decidim_awesome:shackapacker:install
+> bin/rails decidim_decidim_awesome:webpacker:install
 > ```
 
 The correct version of Decidim Awesome should resolved automatically by the Bundler.
