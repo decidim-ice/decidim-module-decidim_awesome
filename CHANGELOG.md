@@ -1,10 +1,18 @@
 CHANGELOG
 =========
 
-v0.11.4
+v0.12.0
 -------
 Compatibility:
   - Decidim 0.29.x
+
+Features:
+  - Upgrade to Decidim v0.29
+
+v0.11.4
+-------
+Compatibility:
+  - Decidim 0.28.x
 
 Features:
   - Fix allowing to accept terms and conditions when forced verifications enabled
