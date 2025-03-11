@@ -4,7 +4,7 @@
 module Decidim
   module DecidimAwesome
     module Proposals
-      module ProposalWizardCreateStepFormOverride
+      module ProposalFormCustomizations
         extend ActiveSupport::Concern
 
         included do

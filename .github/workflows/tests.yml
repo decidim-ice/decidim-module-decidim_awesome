@@ -1,4 +1,4 @@
-name: "[CI] Tests 0.28"
+name: "[CI] Tests 0.29"
 
 on:
   push:
@@ -10,9 +10,10 @@ env:
   CI: 1
   SIMPLECOV: 1
   NODE_VERSION: 18.17.1
-  RUBY_VERSION: 3.1.6
+  RUBY_VERSION: 3.2.6
   CHROME_VERSION: "126.0.6478.182"
   BUNDLE_GEMFILE: Gemfile
+  DISABLE_SPRING: 1
   DISPLAY: ":99"
   PARALLEL_TEST_PROCESSORS: 2
   SHAKAPACKER_RUNTIME_COMPILE: "false"
@@ -31,7 +32,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:11
+        image: postgres:14
         ports: ["5432:5432"]
         options: >-
           --health-cmd pg_isready
@@ -40,22 +41,30 @@ jobs:
           --health-retries 5
         env:
           POSTGRES_PASSWORD: postgres
+      redis:
+        image: redis
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
-
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
-      - uses: actions/setup-node@master
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: ./package-lock.json
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         id: app-cache
         with:
           path: ./spec/decidim_dummy_app/
@@ -70,7 +79,7 @@ jobs:
         name: Create the screenshots folder
         shell: "bash"
 
-      - run: bundle exec rails assets:precompile
+      - run: bundle exec rails shakapacker:compile
         name: Precompile assets
         working-directory: ./spec/decidim_dummy_app/
         shell: "bash"
@@ -106,7 +115,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:11
+        image: postgres:14
         ports: ["5432:5432"]
         options: >-
           --health-cmd pg_isready
@@ -115,6 +124,13 @@ jobs:
           --health-retries 5
         env:
           POSTGRES_PASSWORD: postgres
+      redis:
+        image: redis
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - uses: actions/checkout@v4
@@ -143,7 +159,7 @@ jobs:
         with:
           name: workspace
           path: /tmp
-      
+
       - run: tar -zxf /tmp/testapp-env.tar.gz
         name: Restore application
 
@@ -156,17 +172,21 @@ jobs:
 
       - name: General RSpec with config vars ${{ matrix.features }}
         run: |
-          sudo Xvfb -ac $DISPLAY -screen 0 1920x1084x24 > /dev/null 2>&1 & # optional
+          sudo Xvfb -ac $DISPLAY -screen 0 1920x1084x24 > /dev/null 2>&1 &
           ln -s spec/decidim_dummy_app spec/decidim_dummy_app_last
           bundle exec rake parallel:spec['${{ matrix.rspec }}']
         env:
           FEATURES: ${{ matrix.features }}
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: screenshots
           path: ./spec/decidim_dummy_app/tmp/screenshots
+          if-no-files-found: ignore
+          overwrite: true

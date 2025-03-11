@@ -6,7 +6,7 @@ require "decidim/decidim_awesome/test/shared_examples/current_config_examples"
 module Decidim::DecidimAwesome
   describe CurrentConfig do
     let(:app) { ->(env) { [200, env, "app"] } }
-    let(:env) { Rack::MockRequest.env_for("https://#{host}/#{path}?foo=bar", "decidim.current_organization" => organization, method:) }
+    let(:env) { Rack::MockRequest.env_for("https://#{host}/#{path}?foo=bar", "decidim.current_organization" => organization, :method => method) }
     let(:host) { "city.domain.org" }
     let(:method) { "GET" }
     let(:middleware) { described_class.new(app) }

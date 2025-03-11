@@ -13,7 +13,7 @@ describe "Admin manages custom proposal fields" do
   let(:var_name) { :proposal_custom_field }
   let!(:config) { create(:awesome_config, organization:, var: "#{var_name}s", value: custom_fields) }
   let(:config_helper) { create(:awesome_config, organization:, var: "#{var_name}_bar") }
-  let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes", component_manifest: "proposals" }) }
+  let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes", :component_manifest => "proposals" }) }
   let!(:another_constraint) { create(:config_constraint, awesome_config: config_helper, settings: { "participatory_space_manifest" => "participatory_processes" }) }
 
   let(:data) { "[#{data1},#{data2},#{data3}]" }

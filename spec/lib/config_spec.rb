@@ -106,7 +106,7 @@ module Decidim::DecidimAwesome
           {
             "chat_id" => "-1234",
             :color => "red",
-            use_floating_button: true
+            :use_floating_button => true
           }
         end
         let!(:awesome_config) { create(:awesome_config, organization:, var: :intergram_for_public_settings, value: settings) }

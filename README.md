@@ -317,7 +317,7 @@ When building a new view for the vote button ([see the original](https://github.
 - If votes are blocked `if current_settings.votes_blocked?`
 - If the user has already voted `if @voted_proposals ? @voted_proposals.include?(proposal.id) : proposal.voted_by?(current_user)`
 - If maximum votes have already reached `if proposal.maximum_votes_reached?`
-- If the proposal can accumulate supports beyond maximum `if proposal.can_accumulate_supports_beyond_threshold`
+- If the proposal can accumulate supports beyond maximum `if proposal.can_accumulate_votes_beyond_threshold`
 - If the current component allows the user to participate `if current_component.participatory_space.can_participate?(current_user)`
 - Note that the [original view](https://github.com/decidim/decidim/blob/release/0.28-stable/decidim-proposals/app/views/decidim/proposals/proposals/_vote_button.html.erb) is overridden only inside the tag  `<div id="proposal-<%= proposal.id %>-vote-button" class="button--vote-button">`. You only need to substitute the part inside.
 
@@ -413,7 +413,7 @@ Decidim::DecidimAwesome.configure do |config|
 #### 21. Manual verifications
 
 The admin will be allowed to manually authorize users using the methods specified in the `/system` admin section.
-Currently, only form based handlers are supported (Direct methods). 
+Currently, only form based handlers are supported (Direct methods).
 Admins can manually override or verify users in the participants list but they still have to fulfill the requirements of the verifier (although they will be allowed to force the authorization even if some of them fails).
 
 Admin logs are also created in each action for accountability.
@@ -464,29 +464,14 @@ Go to `yourdomain/admin/decidim_awesome` and start tweaking things!
 > bin/rails decidim_decidim_awesome:webpacker:install
 > ```
 
-
-If you are upgrading from a version prior to 0.8, make sure to visit the URL `/admin/decidim_awesome/checks` and run image migrations for the old images:
-
-![Check image migrations](examples/check_image_migrations.png)
-
-If you are a system admin, you can also perform this task by executing this rake task in the console:
-
-```
-RAILS_ENV=production bin/rails decidim_awesome:active_storage_migrations:migrate_from_carrierwave
-```
-
-Or check your migration status with:
-```
-RAILS_ENV=production bin/rails decidim_awesome:active_storage_migrations:check_migration_from_carrierwave
-```
-
 The correct version of Decidim Awesome should resolved automatically by the Bundler.
-However you can force some specific version using `gem "decidim-decidim_awesome", "~> 0.11.0"` in the Gemfile.
+However you can force some specific version using `gem "decidim-decidim_awesome", "~> 0.12.0"` in the Gemfile.
 
 Depending on your Decidim version, choose the corresponding Awesome version to ensure compatibility:
 
 | Awesome version | Compatible Decidim versions |
 |---|---|
+| 0.12.x | 0.29.x |
 | 0.11.x | 0.28.x |
 | 0.10.x | >= 0.26.7, >= 0.27.x |
 | 0.9.2 | >= 0.26.7, >= 0.27.3 |
@@ -600,7 +585,6 @@ bundle exec rubocop
 To ease up following the style guide, you should install the plugin to your
 favorite editor, such as:
 
-- Atom - [linter-rubocop](https://atom.io/packages/linter-rubocop)
 - Sublime Text - [Sublime RuboCop](https://github.com/pderichs/sublime_rubocop)
 - Visual Studio Code - [Rubocop for Visual Studio Code](https://github.com/misogi/vscode-ruby-rubocop)
 
@@ -614,8 +598,8 @@ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rake test_
 DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rspec
 ```
 
-> Note: the following is not currently applicable as version v0.11 is only compatible with version Decidim v0.28
-> Is left here for future reference
+> Note: the following is not currently applicable as from version v0.11 this plugin is compatible one version at the time.
+> This is left here for future reference.
 
 However, this project works with different versions of Decidim. In order to test them all, we maintain two different Gemfiles: `Gemfile` and `Gemfile.legacy`. The first one is used for development and testing the latest Decidim version supported, the second one is used for testing against the old Decidim version.
 
@@ -624,9 +608,9 @@ You can run run tests against the legacy Decidim versions by using:
 ```bash
 export DATABASE_USERNAME=<username>
 export DATABASE_PASSWORD=<password>
-RBENV_VERSION=3.1.1 BUNDLE_GEMFILE=Gemfile.legacy bundle
-RBENV_VERSION=3.1.1 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rake test_app
-RBENV_VERSION=3.1.1 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rspec
+RBENV_VERSION=3.2.2 BUNDLE_GEMFILE=Gemfile.legacy bundle
+RBENV_VERSION=3.2.2 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rake test_app
+RBENV_VERSION=3.2.2 BUNDLE_GEMFILE=Gemfile.legacy bundle exec rspec
 ```
 
 For convenience, you can use the scripts `bin/test` and `bin/test-legacy` to run tests against one or the other version:

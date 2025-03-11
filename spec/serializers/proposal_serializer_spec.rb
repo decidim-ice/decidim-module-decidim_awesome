@@ -61,10 +61,6 @@ module Decidim::Proposals
         expect(serialized).to include(id: proposal.id)
       end
 
-      it "serializes the amount of supports" do
-        expect(serialized).to include(supports: proposal.proposal_votes_count)
-      end
-
       it "serializes the weights" do
         expect(serialized).to include(votes: labeled_weights)
       end
