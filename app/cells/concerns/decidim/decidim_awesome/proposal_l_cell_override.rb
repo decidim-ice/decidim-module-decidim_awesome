@@ -15,10 +15,11 @@ module Decidim
         end
 
         def cache_hash
-          all_extra_fields = memoize("extra_fields")
-          extra_fields = all_extra_fields ? all_extra_fields[resource.id] : resource.extra_fields
-
-          @cache_hash ||= "#{decidim_original_cache_hash}#{Decidim.cache_key_separator}#{extra_fields&.vote_weight_totals}"
+          @decidim_awesome_cache_hash ||= begin
+            all_extra_fields = memoize("extra_fields")
+            extra_fields = all_extra_fields ? all_extra_fields[resource.id] : resource.extra_fields
+            "#{decidim_original_cache_hash}#{Decidim.cache_key_separator}#{extra_fields&.vote_weight_totals}"
+          end
         end
       end
     end
