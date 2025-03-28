@@ -1,3 +1,4 @@
+---
 fr:
   activemodel:
     attributes:
@@ -7,6 +8,9 @@ fr:
         allow_images_in_proposals: Autoriser les images dans l'éditeur de propositions
         allow_videos_in_editors: Autoriser les vidéos dans l'éditeur HTML
         auto_save_forms: Sauvegarde automatique des formulaires dans le stockage local du navigateur
+        force_authorization_after_login: Forcer la vérification après la connexion/inscription
+        force_authorization_help_text: Texte d'aide sur la page d'autorisation
+        force_authorization_with_any_method: Permettre l'accès si l'une des autorisations est accordée (par défaut, toutes sont requises)
         intergram_auto_no_response: Un message qui est envoyé une minute après que l'utilisateur envoie son premier message et qu'aucune réponse n'a été reçue
         intergram_auto_response: Un message qui est envoyé immédiatement après que l'utilisateur envoie son premier message
         intergram_chat_id: ID de la conversation
@@ -48,6 +52,8 @@ fr:
         target: Ouvrir dans
         url: URL
         visibility: Visibilité
+      organization:
+        awesome_admins_available_authorizations: Autoriser les administrateurs à vérifier manuellement les utilisateurs avec ces autorisations
       user:
         user_time_zone: Fuseau horaire personnel
   decidim:
@@ -177,6 +183,26 @@ fr:
             collaborator: Collaborateur
             moderator: Modérateur
             valuator: Evaluateur
+        admin_authorizations:
+          authorization:
+            confirm_destroy: Êtes-vous sûr de vouloir détruire cette autorisation ? Cela pourrait affecter l'accès des utilisateurs à la plateforme.
+            destroy: Supprimer
+            granted_at: Accordé à %{date}
+            metadata: Contient des métadonnées ? %{metadata}
+          authorization_destroyed: L'autorisation a été supprimée avec succès.
+          authorization_not_destroyed: L'autorisation n'a pas pu être supprimée !
+          authorization_transferred: 'Avertissement : Il y a eu un conflit de vérification et la vérification a été transférée à %{user}'
+          conflict: Il y a un conflit avec une autorisation existante
+          conflict_help_html: "Vous devez résoudre le conflit de vérification avec l'utilisateur %{user} avant de vérifier l'utilisateur avec cette autorisation. \n<br><br>\nUn conflit de vérification se produit lorsqu'un autre utilisateur utilise les mêmes données que l'utilisateur que vous essayez de vérifier. \nVous pouvez résoudre ce conflit en supprimant l'autorisation conflictuelle de l'autre utilisateur ou en utilisant d'autres données pour cet utilisateur.\n"
+          edit:
+            authorize: Vérifier %{user} avec %{name}
+            do_it_if_sure: Ne le faites que si vous êtes sûr que cet utilisateur a cette autorisation.
+            force_verification: Forcer la vérification avec les données actuelles
+            force_verification_help: La vérification a échoué, mais vous pouvez la forcer si vous êtes sûr que l'utilisateur a cette autorisation.
+            force_verification_reason: 'Veuillez donner une raison pour forcer la vérification :'
+            warning: 'Avertissement : En forçant cette autorisation, vous remplacez le statut actuel d''autorisation de l''utilisateur.'
+          user_authorized: "%{user} autorisé avec succès avec %{name}"
+          user_not_authorized: "%{user} n’a pas pu être autorisé avec %{name}"
         checks:
           index:
             admin_head_tags: '"Awesome tags" (balises) inclus dans l''en-tête de l''application d''administration'
@@ -237,6 +263,8 @@ fr:
               allow_videos_in_editors: Ceci ajoutera une icône de lien vidéo dans tous les éditeurs WYSIWYG
               auto_save_forms: Ceci utilisera LocalStorage ( cache navigateur) pour enregistrer automatiquement les données introduites par les utilisateurs dans les enquêtes et autres formulaires pendant qu'ils le remplissent. Les données seront restaurées lors d'une prochaine visite avec le même navigateur au cas où le formulaire ne serait pas soumis. Si le formulaire est soumis, les données seront supprimées. Si les utilisateurs suppriment leurs données LocalStorage ne seront pas non plus restaurées.
               drag_and_drop_supported: Lorsque vous ajoutez des images, le glisser-déposer est pris en charge. Les images seront envoyées sur le serveur et insérées en tant que ressources externes (il n'utilise pas l'encodage en base64).
+              force_authorization_after_login: 'Si cette option est activée, les utilisateurs seront redirigés vers la page d''autorisation après la connexion ou l''inscription si certaines des autorisations spécifiées ne sont pas autorisées. Ceci est utile si vous voulez forcer les utilisateurs à être vérifiés avec une autorisation spécifique avant qu''ils ne puissent se connecter du tout (c''est à dire pour prévenir le spam).'
+              force_authorization_help_text: Ajoutez un texte personnalisé pour expliquer pourquoi une autorisation est nécessaire. Assurez-vous également d'ajouter une méthode de contact au cas où les utilisateurs auraient besoin d'aide.
               intergram_about: Intergram utilise la messagerie Telegram pour gérer un widget de chat en direct intégré dans le bas de la page.
               intergram_config: 'Invitez le bot <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram</a> dans votre groupe ou commencez une conversation avec lui directement. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               original_editor_override: Depuis la version 0.26, il est possible (pour les administrateurs seulement) de charger des images dans les éditeurs. Par conséquent, les paramètres d'image activés ici n'affectent que les éditeurs publics (ce sera toujours disponible pour l'admin).
@@ -251,6 +279,7 @@ fr:
                 %{key}
               scoped_admin_styles: Soyez conscient que cacher des éléments pourrait rendre l'interface administrateur inutilisable. Agissez avec prudence.
               scoped_admin_styles_variables: 'Vous pouvez utiliser les variables CSS suivantes pour les couleurs personnalisées de l''organisation :'
+              scoped_admin_styles_warning: "<strong>Avertissement</strong>: Ajoutez ici un CSS personnalisé qui s'applique seulement à cet administrateur."
               scoped_admins: Promouvoir les utilisateurs réguliers en administrateurs qui ne peuvent administrer que certaines parties de la plateforme (utilisez l'éditeur de restrictions pour cela). Notez que les utilisateurs qui ont déjà les permissions d'administration habituelles seront ignorés.
               scoped_styles: Créer un CSS personnalisé qui s'applique uniquement à certaines parties du site web public (front-end) (utilisez l'éditeur de restrictions pour cela)
               scoped_styles_variables: 'Vous pouvez utiliser les variables CSS suivantes pour les couleurs personnalisées de l''organisation :'
@@ -261,6 +290,10 @@ fr:
               validate_title_max_caps_percent: Zéro n'autorisera aucune lettre majuscule, 100 forcera à tout écrire en majuscule
               validate_title_max_marks_together: 'Limiter le nombre de points d''interrogation et d''exclamation qui peuvent être écrits ensemble. Par exemple : si c''est 2, alors ''!!!'' ne sera pas autorisé dans le texte'
               validate_title_min_length: Le titre est toujours obligatoire et ce nombre ne peut être égal à zéro
+              verifications_html: |
+                Vous pouvez ici apporter quelques améliorations au processus de vérification.<br>
+                <b>NOTE :</b> Sachez que modifier ces paramètres peut empêcher certains utilisateurs d'accéder à la plateforme. Utilisez-le avec précaution !<br><br>
+                Notez aussi que ces paramètres sont appliqués à tous les utilisateurs. Les administrateurs auront cependant toujours accès à l'administration.
             validators:
               body: Validations d'entrée de l'utilisateur pour le champ "body"
               title: Validations d'entrée de l'utilisateur pour le champ "body"
@@ -306,6 +339,7 @@ fr:
             scoped_styles: 'Styles personnalisés : Interface publique'
             styles: Styles personnalisés
             surveys: Enquêtes et formulaires
+            verifications: Vérifications / Hacks d'autorisation
           update:
             error: Erreur lors de la mise à jour de la configuration ! %{error}
             success: La configuration a bien été mise à jour
@@ -471,6 +505,10 @@ fr:
       admin_log:
         component:
           destroy_private_data: "%{user_name} a détruit les objets %{count} de données privées pour %{resource_name} dans %{space_name}"
+        user:
+          admin_creates_authorization: "%{user_name} vérifié %{resource_name} avec %{handler_name}"
+          admin_destroys_authorization: "%{user_name} a supprimé la vérification %{handler_name} sur %{resource_name}"
+          admin_forces_authorization: "%{user_name} a forcé la vérification %{handler_name} sur %{resource_name}. Raison : %{reason}"
       amendments:
         modal:
           amendment_exists: Un amendement existe déjà
@@ -539,9 +577,21 @@ fr:
         index:
           cancel: Je vais le faire ultérieurement, %{link}.
           granted_title: Vérifications accordées
+          logout: me déconnecter
           missing_title: Pas encore vérifié
           resume_title: Vérifications en attente
+          resume_with_method: Reprendre la vérification via %{name}
           title: Vérifiez votre identité
+          verify_with_all_these_options: 'Veuillez vous vérifier avec toutes ces méthodes avant de pouvoir accéder à la plateforme :'
+          verify_with_any_of_these_options: 'Veuillez vous vérifier avec au moins l''une de ces options avant de pouvoir accéder à la plateforme :'
+          verify_with_method: Vérifier avec %{name}
+      session:
+        authorization_is_required: Pour participer sur cette plateforme, vous devez autoriser votre compte avec une autorisation valide (%{authorizations}).
+      system:
+        organizations:
+          admin_allowed_authoritzations_help_html: |
+            Les administrateurs seront en mesure de vérifier manuellement les utilisateurs avec ces autorisations.
+            <br>Utilisez cette fonctionnalité avec précaution, car elle peut entraîner des problèmes de sécurité.
       validators:
         too_much_caps: Utilise trop de majuscule (plus de %{percent} du texte)
       voting:
