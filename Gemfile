@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = "0.29.1"
+DECIDIM_VERSION = "0.29.2"
 
 gem "decidim", DECIDIM_VERSION
 # this causes failures if not enabled (check if still necessary in the future)
