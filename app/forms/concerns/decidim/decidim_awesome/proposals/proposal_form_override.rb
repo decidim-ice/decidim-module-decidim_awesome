@@ -12,7 +12,7 @@ module Decidim
 
           if name == "Decidim::Proposals::ProposalForm"
             # the original decidim uses CleanString, as no images are allowed for non admins
-            # The RichText attribute tranforms signed_id blobs to ObjectIDs
+            # The RichText attribute transforms signed_id blobs to ObjectIDs
             attribute :body, Decidim::Attributes::RichText
           end
 
