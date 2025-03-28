@@ -14,9 +14,9 @@ module Decidim
           return unless Decidim::User.respond_to? :awesome_admins_for_current_scope
           return unless Decidim::User.respond_to? :awesome_potential_admins
           return unless defined? current_user
-          return unless Decidim::User.awesome_potential_admins.include? current_user.id
+          return unless Decidim::User.awesome_potential_admins.include? current_user&.id
 
-          # assiging a flash message here does not work after redirection due the order of middleware in Rails
+          # assigning a flash message here does not work after redirection due the order of middleware in Rails
           # as a workaround, send a message through a get parameter
           path = "/admin/?unauthorized"
           referer = request.headers["Referer"]
