@@ -47,7 +47,7 @@ shared_examples "has drag and drop" do
     last_image = Decidim::DecidimAwesome::EditorImage.last
     expect(last_image).to be_present
     content = page.execute_script("return document.querySelector('#{editor_selector}').value")
-    expect(content).to include(last_image.attached_uploader(:file).path)
+    expect(content).to include(last_image.file.blog.to_gid.to_s)
     within "form.edit_proposal" do
       # ensures valid body validations
       fill_in :proposal_body, with: "This is a super test with lots of downcases characters to be sure that the image name does not mess with percentage of caps.\n#{content}"

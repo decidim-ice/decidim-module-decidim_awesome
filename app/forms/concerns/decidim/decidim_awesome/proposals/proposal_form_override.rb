@@ -8,7 +8,7 @@ module Decidim
 
         included do
           alias_method :decidim_original_map_model, :map_model
-          attribute :private_body, String
+          attribute :private_body, Decidim::Attributes::RichText
 
           def map_model(model)
             decidim_original_map_model(model)

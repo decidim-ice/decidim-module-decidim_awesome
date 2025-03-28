@@ -24,11 +24,11 @@ module Decidim
       end
 
       describe "#metadata_cell" do
-        it "returns the overriden metadata" do
+        it "returns the overridden metadata" do
           expect(subject.send(:metadata_cell)).to eq("decidim/decidim_awesome/voting/proposal_metadata")
         end
 
-        context "when no overriden metadata" do
+        context "when no overridden metadata" do
           let(:manifest) { :another_voting_system }
 
           it "returns the original metadata" do
@@ -43,7 +43,7 @@ module Decidim
         extra_fields.update_column(:vote_weight_totals, 100)
         # rubocop:enable Rails/SkipsModelValidations
         proposal.reload
-        subject.instance_variable_set(:@cache_hash, nil)
+        subject.instance_variable_set(:@decidim_awesome_cache_hash, nil)
         expect(cache1).not_to eq(subject.send(:cache_hash))
       end
     end
