@@ -27,6 +27,8 @@ decidim-core:
     decidim-0.29.1: d24090fdd9358c38e6e15c4607a78e18
   /app/views/decidim/account/show.html.erb:
     decidim-0.29.1: f13218e2358a2d611996c2a197c0de25
+  /app/cells/decidim/content_blocks/global_menu_cell.rb:
+    decidim-0.28.0: d224370c364a9cf4b2e244063274e5ef
 decidim-proposals:
   /lib/decidim/proposals/proposal_serializer.rb:
     decidim-0.29.1: 58915ff3a7528463587d3762a93ff51b

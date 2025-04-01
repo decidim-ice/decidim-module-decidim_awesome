@@ -6,8 +6,8 @@ describe "Hacked home content block menu" do
   let(:organization) { create(:organization) }
   let!(:participatory_process) { create(:participatory_process, organization:) }
   let!(:config) { create(:awesome_config, organization:, var: :home_content_block_menu, value: menu) }
-  let(:menu) { [overriden, added] }
-  let(:overriden) do
+  let(:menu) { [overridden, added] }
+  let(:overridden) do
     {
       url: "/processes",
       label: {
