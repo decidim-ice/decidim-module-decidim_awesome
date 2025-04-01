@@ -1,6 +1,5 @@
 import "formBuilder/dist/form-builder.min.js";
 import "src/decidim/decidim_awesome/forms/rich_text_plugin"
-import getCustomFieldsLang from "src/decidim/decidim_awesome/forms/custom_fields_langs";
 
 // formBuilder uses jquery-ui-sortable which is a very dirty npm package with no neat source code available, and causes problems with the webpacker configuration of Decidim.
 // For the moment, we'll remove the sortable functionality with a dummy jQuery plugin until we find another sortable plugin (or keep it disabled for good)
@@ -12,7 +11,7 @@ $(() => {
   $(".awesome-edit-config .proposal_custom_fields_editor").each((_idx, el) => {
     const key = $(el).closest(".proposal_custom_fields_container").data("key");
     const configVar = $(el).closest(".proposal_custom_fields_container").data("var");
-    const lang = getCustomFieldsLang(window.DecidimAwesome.currentLocale);
+
     // DOCS: https://formbuilder.online/docs
     window.CustomFieldsBuilders.push({
       el: el,
@@ -20,7 +19,7 @@ $(() => {
       var: configVar,
       config: {
         i18n: {
-          locale: lang,
+          locale: window.DecidimAwesome.currentLocale,
           location: window.DecidimAwesome.formBuilderLangsLocation
         },
         formData: $(`input[name="config[${configVar}][${key}]"]`).val(),

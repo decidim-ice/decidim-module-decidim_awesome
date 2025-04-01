@@ -1,12 +1,7 @@
 import "formBuilder/dist/form-render.min.js";
 import "src/decidim/decidim_awesome/forms/rich_text_plugin"
-import getCustomFieldsLang from "src/decidim/decidim_awesome/forms/custom_fields_langs";
 
 export default class CustomFieldsRenderer { // eslint-disable-line no-unused-vars
-  constructor() {
-    this.lang = getCustomFieldsLang(window.DecidimAwesome.currentLocale);
-  }
-
   /*
   * Creates an XML document with a subset of html-compatible dl/dd/dt elements
   * to store the custom fields answers
@@ -161,7 +156,7 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
     // in case of multilang tabs we only render one form due a limitation in the library for handling several instances
     this.instance = $element.formRender({
       i18n: {
-        locale: this.lang,
+        locale: window.DecidimAwesome.currentLocale,
         location: window.DecidimAwesome.formBuilderLangsLocation
       },
       formData: this.spec,

@@ -5,7 +5,7 @@ shared_examples "javascript config vars" do
     expect(page.body).to have_content("window.DecidimAwesome")
     expect(page.body).to have_content("window.DecidimAwesome.version")
     expect(page.body).to have_content("window.DecidimAwesome.editorUploaderPath")
-    expect(page.body).to have_content("window.DecidimAwesome.texts")
+    expect(page.body).to have_content("window.DecidimAwesome.i18n")
   end
 end
 

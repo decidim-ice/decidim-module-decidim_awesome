@@ -18,6 +18,7 @@ module Decidim
       routes do
         get :required_authorizations, to: "required_authorizations#index"
         post :editor_images, to: "editor_images#create"
+        get :form_builder_i18n, to: "utils#form_builder_i18n"
       end
 
       # Prepare a zone to create overrides
