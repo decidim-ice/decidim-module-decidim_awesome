@@ -78,7 +78,6 @@ $(() => {
 
   $("form.awesome-edit-config").on("submit", () => {
     window.CustomFieldsBuilders.forEach((builder) => {
-      console.log("builder", builder);
       $(`input[name="config[${builder.var}][${builder.key}]"]`).val(builder.instance.actions.getData("json"));
     });
   });

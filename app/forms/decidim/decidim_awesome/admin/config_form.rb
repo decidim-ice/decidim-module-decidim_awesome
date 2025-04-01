@@ -137,9 +137,9 @@ module Decidim
         end
 
         def sanitize_arrays!
-          # scoped_admins.transform_values! do |code|
-          #   code.is_a?(Array) ? code.compact_blank : code
-          # end
+          scoped_admins.transform_values! do |code|
+            code.is_a?(Array) ? code.compact_blank : code
+          end
         end
 
         private
