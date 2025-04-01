@@ -56,7 +56,7 @@ describe "Hacked home content block menu" do
 
   describe "visibility" do
     let(:visibility) { "default" }
-    let(:overriden) do
+    let(:overridden) do
       {
         url: "/processes",
         label: {
