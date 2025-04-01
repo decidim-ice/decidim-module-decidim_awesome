@@ -6,15 +6,18 @@ module Decidim::DecidimAwesome
   describe UtilsController do
     routes { Decidim::DecidimAwesome::Engine.routes }
 
-    let(:organization) { create(:organization) }
+    let(:available_locales) { %w(en ca pt-BR) }
+    let(:organization) { create(:organization, available_locales:) }
 
     before do
+      allow(Decidim).to receive(:available_locales).and_return available_locales
+      allow(I18n.config).to receive(:enforce_available_locales).and_return(false)
       request.env["decidim.current_organization"] = organization
     end
 
     describe "#form_builder_i18n" do
-      let(:lang) { "ca-ES" }
-      let(:file_path) { Decidim::DecidimAwesome::Engine.root.join("app/packs/src/vendor/form_builder_langs/ca-ES.lang") }
+      let(:lang) { "pt-BR" }
+      let(:file_path) { Decidim::DecidimAwesome::Engine.root.join("app/packs/src/vendor/form_builder_langs/pt-BR.lang") }
 
       it "renders the form builder i18n file" do
         get :form_builder_i18n, params: { locale: lang }
@@ -23,7 +26,8 @@ module Decidim::DecidimAwesome
       end
 
       context "when locale is simple" do
-        let(:lang) { "ca/ca.lang" }
+        let(:file_path) { Decidim::DecidimAwesome::Engine.root.join("app/packs/src/vendor/form_builder_langs/ca-ES.lang") }
+        let(:lang) { "ca" }
 
         it "renders the form builder i18n file" do
           get :form_builder_i18n, params: { locale: lang }
