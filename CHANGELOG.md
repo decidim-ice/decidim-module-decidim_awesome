@@ -10,6 +10,7 @@ Compatibility:
 Feature:
   - Added formBuilder languages controller to avoid external CDN
   - Fix cache hash in the global menu override
+  - Fix crash on updating empty boxes for scoped admins
 
 v0.12.0
 -------
