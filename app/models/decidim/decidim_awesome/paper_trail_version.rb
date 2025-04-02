@@ -20,7 +20,7 @@ module Decidim
         # add users that might have been completly destroyed in any organization
         relevant_user_ids += user_ids_from_object_changes - Decidim::User.select("id").where(id: user_ids_from_object_changes).pluck(:id)
 
-        role_changes.where("object_changes ~ ANY (array[?])", relevant_user_ids.map { |id| "decidim_user_id:\n- ?\n- #{id}" })
+        role_changes.where("object_changes ~ ANY (array[?])", relevant_user_ids.map { |id| "decidim_user_id:\n- ?\n- #{id}(?!\\d)" })
       }
 
       scope :in_organization, lambda { |organization|
