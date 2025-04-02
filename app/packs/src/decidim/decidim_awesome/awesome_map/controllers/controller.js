@@ -16,7 +16,7 @@ export default class Controller {
   getLabel() {
     let text = this.component.name;
     if (!text || this.awesomeMap.config.menu.mergeComponents) {
-      text = window.DecidimAwesome.texts[this.component.type];
+      text = window.DecidimAwesome.i18n[this.component.type];
     }
     return `<span class="awesome_map-component" id="awesome_map-component_${this.component.id}" title="0" data-layer="${this.component.type}">${text}</span>`
   }

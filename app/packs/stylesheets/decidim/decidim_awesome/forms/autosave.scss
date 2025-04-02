@@ -1,17 +1,7 @@
 .awesome_autosave-notice {
-  background-color: rgb(var(--success-rgb) / 90%);
-  position: fixed;
-  top: 90%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 1em 2em;
-  border-radius: 4px;
-  border: 1px solid var(--success);
-  font-weight: 600;
-  color: white;
-  z-index: 1000;
+  @apply bg-success/90 fixed top-[2%] right-[2%] p-4 rounded border border-success font-semibold text-white z-[1000];
 
   &.error {
-    background-color: rgb(var(--alert-rgb) / 90%);
+    @apply bg-alert/90;
   }
 }

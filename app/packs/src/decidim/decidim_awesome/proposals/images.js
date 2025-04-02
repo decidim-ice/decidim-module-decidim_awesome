@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const span = document.createElement("span");
     span.className = "input-character-counter__text";
-    span.innerHTML = window.DecidimAwesome.texts.dragAndDropImage;
+    span.innerHTML = window.DecidimAwesome.i18n.dragAndDropImage;
     textarea.parentNode.appendChild(span);
     attach(textarea, {
       uploadUrl: window.DecidimAwesome.editorUploaderPath,

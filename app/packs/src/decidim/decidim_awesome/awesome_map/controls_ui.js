@@ -82,8 +82,8 @@ export default class ControlsUI {
   addSearchControls() {
     const section = this.main.getContainer().querySelector(".leaflet-control-layers-list");
     if (section) {
-      section.insertAdjacentHTML("beforeend", `<div id="awesome_map-categories-control" class="active"><b class="awesome_map-title-control">${window.DecidimAwesome.texts.categories}</b><div class="categories-container"></div></div>
-    <div id="awesome_map-hashtags-control"><b class="awesome_map-title-control">${window.DecidimAwesome.texts.hashtags}</b><div class="hashtags-container"></div><a href="#" class="awesome_map-toggle_all_tags">${window.DecidimAwesome.texts.selectDeselectAll}</a></div>`);
+      section.insertAdjacentHTML("beforeend", `<div id="awesome_map-categories-control" class="active"><b class="awesome_map-title-control">${window.DecidimAwesome.i18n.categories}</b><div class="categories-container"></div></div>
+    <div id="awesome_map-hashtags-control"><b class="awesome_map-title-control">${window.DecidimAwesome.i18n.hashtags}</b><div class="hashtags-container"></div><a href="#" class="awesome_map-toggle_all_tags">${window.DecidimAwesome.i18n.selectDeselectAll}</a></div>`);
     } else {
       console.error("Can't find the section to insert the controls");
     }
@@ -158,7 +158,7 @@ export default class ControlsUI {
 
         const label = document.querySelector(`label.awesome_map-hashtag-${hashtag.tag}`);
         // update number of items
-        label.setAttribute("title", `${parseInt(label.title || 0, 10) + 1} ${window.DecidimAwesome.texts.items}`);
+        label.setAttribute("title", `${parseInt(label.title || 0, 10) + 1} ${window.DecidimAwesome.i18n.items}`);
       });
     }
   }
@@ -171,12 +171,12 @@ export default class ControlsUI {
     if (label) {      
       label.style.display = "block";
       // update number of items
-      label.setAttribute("title", `${parseInt(label.title || 0, 10) + 1} ${window.DecidimAwesome.texts.items}`);
+      label.setAttribute("title", `${parseInt(label.title || 0, 10) + 1} ${window.DecidimAwesome.i18n.items}`);
     }
     if (parent) {
       // show parent if apply
       parent.style.display = "block"
-      parent.setAttribute("title", `${parseInt(parent.title || 0, 10) + 1} ${window.DecidimAwesome.texts.items}`);
+      parent.setAttribute("title", `${parseInt(parent.title || 0, 10) + 1} ${window.DecidimAwesome.i18n.items}`);
     }
   }
 
@@ -224,7 +224,7 @@ export default class ControlsUI {
   updateStats(uid, total) {
     // update component stats
     const $component = $(`#awesome_map-${uid}`);
-    $component.attr("title", `${total} ${window.DecidimAwesome.texts.items}`);
+    $component.attr("title", `${total} ${window.DecidimAwesome.i18n.items}`);
   }
 
   _indeterminateParentInput(cat) {

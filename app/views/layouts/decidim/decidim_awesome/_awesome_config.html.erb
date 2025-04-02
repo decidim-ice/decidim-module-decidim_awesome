@@ -4,7 +4,7 @@ window.DecidimAwesome.currentLocale = "<%= current_locale %>";
 window.DecidimAwesome.version = "<%= Decidim::DecidimAwesome::VERSION %>";
 window.DecidimAwesome.editorUploaderPath = "<%= decidim_decidim_awesome.editor_images_path %>";
 window.DecidimAwesome.renameScopeLabelPath = "<%= decidim_admin_decidim_awesome.rename_scope_label_path %>";
-window.DecidimAwesome.texts = {
+window.DecidimAwesome.i18n = {
   "dragAndDropImage": "<%= j t(".drag_and_drop_image") %>",
   "autosavedSuccess": "<%= j t(".autosaved_success") %>",
   "autosavedError": "<%= j t(".autosaved_error") %>",
@@ -18,7 +18,7 @@ window.DecidimAwesome.texts = {
   "selectDeselectAll": "<%= j t(".select_deselect_all") %>",
   "officialAuthor": "<%= j t("decidim.blogs.models.post.fields.official_blog_post") %>",
 }
-window.DecidimAwesome.formBuilderLangsLocation = "<%= j Decidim::DecidimAwesome.form_builder_langs_location %>";
+window.DecidimAwesome.formBuilderLangsLocation = "<%= decidim_decidim_awesome.form_builder_i18n_path(locale: nil) %>";
 <% if defined?(questionnaire) && questionnaire&.id %>
   window.DecidimAwesome.current_questionnaire = "edit_questionnaire_<%= questionnaire.id %>";
   <% if defined? visitor_already_answered? %>

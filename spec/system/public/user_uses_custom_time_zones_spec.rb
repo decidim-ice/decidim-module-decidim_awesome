@@ -7,7 +7,7 @@ describe "User uses custom time zones" do
   let(:user) { create(:user, :confirmed, organization:, extended_data:) }
   let(:component) { create(:meeting_component, :published, organization:) }
   let!(:meeting) { create(:meeting, :published, component:, start_time:) }
-  let(:time_zone) { "Azores" }
+  let(:time_zone) { "Mid-Atlantic" }
   let(:extended_data) { { "some_variable" => "Some value" } }
   let(:enable_user_time_zone) { true }
   let(:start_time) { Date.current + 29.hours }
@@ -25,11 +25,11 @@ describe "User uses custom time zones" do
 
   it "allows to change the time zone" do
     within ".card__list-metadata" do
-      expect(page).to have_content("04:00 AM -01")
+      expect(page).to have_content("03:00 AM -02")
     end
     visit decidim.account_path
-    expect(page).to have_select("user_user_time_zone", selected: "(GMT-01:00) Azores")
-    fill_in "Your name", with: "John Willson"
+    expect(page).to have_select("user_user_time_zone", selected: "(GMT-02:00) Mid-Atlantic")
+    fill_in "Your name", with: "John Wilson"
     select "(GMT-10:00) Hawaii", from: "user_user_time_zone"
     click_on "Update account"
     expect(page).to have_content("Your account was successfully updated.")
@@ -38,7 +38,7 @@ describe "User uses custom time zones" do
     within ".card__list-metadata" do
       expect(page).to have_content("19:00 PM HST")
     end
-    expect(user.reload.name).to eq("John Willson")
+    expect(user.reload.name).to eq("John Wilson")
     expect(user.extended_data["some_variable"]).to eq("Some value")
     expect(user.extended_data["time_zone"]).to eq("Hawaii")
   end
@@ -49,13 +49,14 @@ describe "User uses custom time zones" do
 
     it "does not allow to change the time zone" do
       within ".card__list-metadata" do
-        expect(page).to have_content("04:00 AM -01")
+        expect(page).to have_content("03:00 AM -02")
       end
       visit decidim.account_path
       expect(page).to have_no_select("user_user_time_zone")
-      fill_in "Your name", with: "John Willson"
+      fill_in "Your name", with: "John Wilson"
       click_on "Update account"
-      expect(user.reload.name).to eq("John Willson")
+      expect(page).to have_content("Your account was successfully updated.")
+      expect(user.reload.name).to eq("John Wilson")
     end
   end
 end
