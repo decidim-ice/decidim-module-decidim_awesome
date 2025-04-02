@@ -55,3 +55,14 @@ task :development_app do
   override_webpacker_config_files("development_app")
   seed_db("development_app")
 end
+
+desc "Update languages for custom fields"
+task :update_form_builder_i18n do
+  puts "Updating languages for custom fields from formbuilder-languages NPM package..."
+  system("npm install formbuilder-languages")
+  puts "Copying files..."
+
+  Dir.glob("node_modules/formbuilder-languages/*.lang").each do |file_lang|
+    FileUtils.cp(file_lang, "app/packs/src/vendor/form_builder_langs", verbose: true)
+  end
+end

@@ -57,6 +57,7 @@ module Decidim
           instance.force_authorization_after_login = instance.force_authorization_after_login.compact_blank if instance.force_authorization_after_login.present?
           instance.valid_keys = extract_valid_keys_from_params(params)
           instance.sanitize_labels!
+          instance.sanitize_arrays!
           instance
         end
 
@@ -132,6 +133,12 @@ module Decidim
             JSON.generate(json)
           rescue JSON::ParserError
             code
+          end
+        end
+
+        def sanitize_arrays!
+          scoped_admins.transform_values! do |code|
+            code.is_a?(Array) ? code.compact_blank : code
           end
         end
 

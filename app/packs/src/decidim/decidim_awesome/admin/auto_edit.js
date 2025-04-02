@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const key = target.dataset.key;
       const attribute = target.dataset.var;
-      const inputField = document.querySelector(`[name="config[${attribute}][${key}]"]`);
-      const multipleField = document.querySelector(`[name="config[${attribute}][${key}][]"]`);
+      const inputFields = document.querySelectorAll(`[name="config[${attribute}][${key}]"]`);
+      const multipleFields = document.querySelectorAll(`[name="config[${attribute}][${key}][]"]`);
       const container = document.querySelector(`.js-box-container[data-key="${key}"]`);
       const deleteBox = container.querySelector(".awesome-auto-delete");
 
@@ -32,11 +32,15 @@ document.addEventListener("DOMContentLoaded", () => {
       const rebuildHtml = (result) => {
         rebuildLabel(result.key, result.scope);
         constraints.outerHTML = result.html;
-        if (inputField) {
-          inputField.setAttribute("name", `config[${attribute}][${result.key}]`);
+        if (inputFields.length > 0) {
+          inputFields.forEach((inputField) => {
+            inputField.setAttribute("name", `config[${attribute}][${result.key}]`);
+          });
         }
-        if (multipleField) {
-          multipleField.setAttribute("name", `config[${attribute}][${result.key}][]`);
+        if (multipleFields.length > 0) {
+          multipleFields.forEach((multipleField) => {
+            multipleField.setAttribute("name", `config[${attribute}][${result.key}][]`);
+          });
         }
         container.dataset.key = result.key;
         container.setAttribute("data-key", result.key);

@@ -55,12 +55,12 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   if (!window.localStorage) {
-    showMsg(window.DecidimAwesome.texts.autosavedError, true);
+    showMsg(window.DecidimAwesome.i18n.autosavedError, true);
     return;
   }
 
   if (window.localStorage.getItem(storeId)) {
-    showMsg(window.DecidimAwesome.texts.autosavedRetrieved, false, 5000);
+    showMsg(window.DecidimAwesome.i18n.autosavedRetrieved, false, 5000);
   }
 
   // restore if available
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
       checkboxes[el.id] = el.checked;
     });
     window.localStorage.setItem(storeCheckboxesId, JSON.stringify(checkboxes));
-    showMsg(window.DecidimAwesome.texts.autosavedSuccess);
+    showMsg(window.DecidimAwesome.i18n.autosavedSuccess);
   };
 
   // save changes when modifications

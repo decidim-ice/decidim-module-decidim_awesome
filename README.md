@@ -121,21 +121,8 @@ Technically, the content is stored in the database as an XML document compatible
 ![Custom fields screenshot](examples/custom-fields-2.png)
 ![Custom fields screenshot](examples/custom-fields-1.gif)
 
-Note that the custom fields are build using the jQuery library [formBuilder](https://formbuilder.online). This package is included in Decidim Awesome but the i18n translations are not. By default they are dynamically downloaded from the CDN https://cdn.jsdelivr.net/npm/formbuilder-languages@1.1.0/.
-If you wish to provide an alternative place for those files, you can configure the variable `form_builder_langs_location` in an initializer:
 
-```ruby
-# config/initializers/awesome_defaults.rb
-
-# A URL where to obtain the translations for the FormBuilder component
-# you can a custom place if you are worried about the CDN geolocation
-# Download them from https://github.com/kevinchappell/formBuilder-languages
-
-# For instance, copy them to your /public/fb_locales/ directory and set the path here:
-Decidim::DecidimAwesome.configure do |config|
-  config.form_builder_langs_location = "/fb_locales/"
-end
-```
+Translations for this feature are extracted from the [NPM formBuilder-languages](https://github.com/kevinchappell/formBuilder-languages).
 
 ##### 11.1. GraphQL types for custom fields
 
@@ -581,6 +568,16 @@ In case you are using [rbenv](https://github.com/rbenv/rbenv) and have the
 can add the environment variables to the root directory of the project in a file
 named `.rbenv-vars`. If these are defined for the environment, you can omit
 defining these in the commands shown above.
+
+### Updating formBuilder languages
+
+There's a rake task to update the translations of the custom field's form builder interface:
+
+```
+bundle exec rake update_form_builder_i18n
+```
+
+This updates the `app/packs/src/vendor/form_builder_langs` folder.
 
 ### Code Styling
 

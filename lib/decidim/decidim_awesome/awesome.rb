@@ -340,13 +340,6 @@ module Decidim
       [:proposals, :reporting_propposals]
     end
 
-    # A URL where to obtain the translations for the FormBuilder component
-    # you can a custom place if you are worried about the CDN geolocation
-    # Download them from https://github.com/kevinchappell/formBuilder-languages
-    config_accessor :form_builder_langs_location do
-      "https://cdn.jsdelivr.net/npm/formbuilder-languages@1.1.0/"
-    end
-
     # Public: Stores an instance of ContentBlockRegistry
     def self.voting_registry
       @voting_registry ||= Decidim::ManifestRegistry.new("decidim_awesome/voting")

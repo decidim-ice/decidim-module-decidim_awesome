@@ -58,7 +58,7 @@ export default class ProposalsFetcher extends Fetcher {
 
   decorateNode(node) {
     super.decorateNode(node);
-    node.authorName = node.author && node.author.name || window.DecidimAwesome.texts.officialAuthor;
+    node.authorName = node.author && node.author.name || window.DecidimAwesome.i18n.officialAuthor;
     node.humanState = window.AwesomeMapProposalTexts[node.state];
     switch (node.state) {
     case "accepted":

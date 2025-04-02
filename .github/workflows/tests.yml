@@ -23,6 +23,7 @@ env:
   DATABASE_PASSWORD: postgres
   DATABASE_HOST: localhost
   POSTGRES_PASSWORD: postgres
+  BIG_SCREEN_SIZE: 1
 
 jobs:
   build:

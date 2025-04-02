@@ -28,7 +28,11 @@ describe "Admin manages scoped admins" do
 
       expect(page).to have_admin_callout("created successfully")
 
-      expect(page).not_to have_content(user.name.to_s)
+      # can be saved with values
+      click_link_or_button "Update configuration"
+      expect(page).to have_admin_callout("updated successfully")
+
+      expect(page).to have_no_content(user.name.to_s)
       sleep 1
       page.execute_script("$('.multiusers-select:first').append(new Option('#{user.name}', #{user.id}, true, true)).trigger('change');")
 
@@ -36,6 +40,14 @@ describe "Admin manages scoped admins" do
 
       expect(page).to have_admin_callout("updated successfully")
       expect(page).to have_content(user.name.to_s)
+
+      # can be removed
+      within ".scoped_admins_container" do
+        click_link_or_button "Remove"
+      end
+      click_link_or_button "Update configuration"
+      expect(page).to have_admin_callout("updated successfully")
+      expect(page).to have_no_content(user.name.to_s)
     end
   end
 
