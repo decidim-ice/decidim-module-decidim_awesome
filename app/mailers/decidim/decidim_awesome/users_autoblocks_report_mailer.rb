@@ -40,8 +40,8 @@ module Decidim
           filtered_calculations = calculations.select { |row| @detected_user_ids.include?(row["id"]) }
           data = Decidim::Exporters::CSV.new(filtered_calculations).export
 
-          filename = @block_performed ? "blocked_users.csv" : "detected_users.csv"
-          attachments[filename] = data.read
+          base_filename = @block_performed ? "blocked_users" : "detected_users"
+          attachments["#{base_filename}.zip"] = Decidim::FileZipper.new("#{base_filename}.csv", data.read).zip
         end
       end
     end
