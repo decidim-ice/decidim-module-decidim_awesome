@@ -38,7 +38,7 @@
     "@decidim/eslint-config": "0.30.0",
     "@decidim/prettier-config": "0.30.0",
     "@decidim/stylelint-config": "0.30.0",
-    "postcss-scss": "^4.0.9"
+    "@decidim/webpacker": "0.30.0"
   },
   "dependencies": {
     "codemirror": "^5.65.16",
