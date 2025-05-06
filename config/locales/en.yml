@@ -4,6 +4,7 @@ en:
     attributes:
       config:
         additional_proposal_sortings: Additional sorting options enabled
+        allow_attachments_in_comments: Allow attachments in comments
         allow_images_in_editors: Allow images in the HTML editor
         allow_images_in_proposals: Allow images in the proposals editor
         allow_videos_in_editors: Allow videos in the HTML editor
@@ -301,6 +302,7 @@ en:
               incorrect_css: 'CSS in box #%{key} is invalid'
               incorrect_json: 'JSON definition in box #%{key} is invalid'
             help:
+              allow_attachments_in_comments: This will allow users to attach files in comments
               allow_images_in_editors: This will add an image uploader icon in all
                 the WYSIWYG editors
               allow_images_in_proposals: This will allow to upload images in the proposals
@@ -427,6 +429,7 @@ en:
           system: Everywhere except participatory spaces
           title:
             admins: Scoped Admins
+            comments: Comments Hacks
             editors: Editor Hacks
             livechat: Live Chat
             proposal_custom_fields: 'Proposals Custom Fields: Public fields'
@@ -532,6 +535,7 @@ en:
             time_ago: "%{time} ago"
         menu:
           admins: Scoped Admins
+          comments: Comments Hacks
           custom_redirects: Custom Redirections
           editors: Editor Hacks
           livechat: Live Chat
