@@ -49,13 +49,13 @@ module Decidim
         end
 
         def mark_users_for_autoblock!
-          detected_users.each do |user|
+          detected_users.find_each do |user|
             user.update_attribute(:extended_data, (user.extended_data || {}).merge("autoblock" => true)) # rubocop:disable Rails/SkipsModelValidations
           end
         end
 
         def block_users!
-          detected_users.each do |user|
+          detected_users.find_each do |user|
             create_report!(user)
             check_user_validation!(user)
 
