@@ -27,6 +27,7 @@ module Decidim
           transaction do
             save_configuration!
             calculate_scores
+            mark_users_for_autoblock! if detected_users.exists?
             block_users! if perform_block && detected_users.exists?
             send_notification_to_admins! if detected_users.exists?
           end
@@ -47,6 +48,12 @@ module Decidim
           current_config.save
         end
 
+        def mark_users_for_autoblock!
+          detected_users.each do |user|
+            user.update_attribute(:extended_data, (user.extended_data || {}).merge("autoblock" => true)) # rubocop:disable Rails/SkipsModelValidations
+          end
+        end
+
         def block_users!
           detected_users.each do |user|
             create_report!(user)
@@ -57,8 +64,6 @@ module Decidim
               block_form.justification = translated_attribute(current_config.value["block_justification_message"])
             end
             block_form.hide = true
-
-            user.update_attribute(:extended_data, (user.extended_data || {}).merge("autoblock" => true)) # rubocop:disable Rails/SkipsModelValidations
 
             Decidim::Admin::BlockUser.call(block_form) do
               on(:invalid) do
