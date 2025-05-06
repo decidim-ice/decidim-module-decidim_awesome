@@ -58,6 +58,8 @@ module Decidim
             end
             block_form.hide = true
 
+            user.update_attribute(:extended_data, (user.extended_data || {}).merge("autoblock" => true)) # rubocop:disable Rails/SkipsModelValidations
+
             Decidim::Admin::BlockUser.call(block_form) do
               on(:invalid) do
                 raise "User could not be blocked"
