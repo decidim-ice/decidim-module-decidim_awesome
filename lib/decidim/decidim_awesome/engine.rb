@@ -301,6 +301,12 @@ module Decidim
         Decidim.icons.register(name: "hashtag", icon: "hashtag", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "user-unfollow-line", icon: "user-unfollow-line", category: "system", description: "", engine: :decidim_awesome)
       end
+
+      initializer "decidim_decidim_awesome.override_blocked_users_notifications" do
+        config.to_prepare do
+          Decidim::BlockUserMailer.prepend(Decidim::DecidimAwesome::BlockUserMailerOverride)
+        end
+      end
     end
   end
 end
