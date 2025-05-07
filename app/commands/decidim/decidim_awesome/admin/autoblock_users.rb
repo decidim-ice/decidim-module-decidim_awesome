@@ -27,9 +27,13 @@ module Decidim
           transaction do
             save_configuration!
             calculate_scores
-            mark_users_for_autoblock! if detected_users.exists?
-            block_users! if perform_block && detected_users.exists?
-            send_notification_to_admins! if detected_users.exists?
+            detected_users_count = detected_users.length
+
+            if detected_users_count.positive?
+              mark_users_for_autoblock!
+              block_users! if perform_block
+              send_notification_to_admins!
+            end
           end
 
           broadcast(:ok, detected_users.length, perform_block)
