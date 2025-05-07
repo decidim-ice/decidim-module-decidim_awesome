@@ -38,7 +38,7 @@ module Decidim::DecidimAwesome::Proposals
     let(:all_notes) do
       notes.to_h do |note|
         [
-          "notes/#{note.id}".to_sym,
+          :"notes/#{note.id}",
           {
             created_at: note.created_at,
             note: note.body,

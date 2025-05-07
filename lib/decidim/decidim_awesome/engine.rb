@@ -219,7 +219,9 @@ module Decidim
             voting.proposal_metadata_cell = "decidim/decidim_awesome/voting/proposal_metadata"
             voting.weight_validator do |weight, context|
               allowed = [1, 2, 3]
+              # rubocop:disable Style/SafeNavigationChainLength
               allowed << 0 if context[:proposal]&.component&.settings&.voting_cards_show_abstain
+              # rubocop:enable Style/SafeNavigationChainLength
               weight.in? allowed
             end
           end

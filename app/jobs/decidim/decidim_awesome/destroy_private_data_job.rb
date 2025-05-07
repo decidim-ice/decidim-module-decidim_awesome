@@ -9,7 +9,7 @@ module Decidim
       def perform(resource)
         extra_fields = Decidim::DecidimAwesome::ProposalExtraField.where(
           proposal: Decidim::Proposals::Proposal.where(component: resource)
-        ).where("private_body_updated_at < ?", DecidimAwesome.private_data_expiration_time.ago)
+        ).where(private_body_updated_at: ...DecidimAwesome.private_data_expiration_time.ago)
 
         extra_fields.find_each do |extra_field|
           extra_field.update(private_body: nil)
