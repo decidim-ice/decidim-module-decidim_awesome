@@ -60,6 +60,8 @@ module Decidim
               user.update_attribute(:extended_data, (user.extended_data || {}).merge("autoblock" => true)) # rubocop:disable Rails/SkipsModelValidations
             end
           end
+
+          @detected_users = nil
         end
 
         def block_users!
