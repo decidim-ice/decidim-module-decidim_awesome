@@ -40,6 +40,15 @@
       </table>
     </div>
 
+    <% if @scores_counts.present? %>
+      <div class="card-title flex flex-row">
+        <%= link_to decidim_admin_decidim_awesome.download_report_users_autoblocks_path, class: "button button__secondary button__xs tiny button--title text-white" do %>
+        <%= t(".download_report_file") %>
+          <%= icon "download-line", class: "dropdown-filter-icon" %>
+        <% end %>
+      </div>
+    <% end %>
+
     <% if current_rules.present? %>
       <%= decidim_form_for(
             @config_form,

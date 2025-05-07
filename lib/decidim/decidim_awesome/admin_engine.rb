@@ -43,6 +43,7 @@ module Decidim
           collection do
             post :detect_and_run
             post :calculate_scores
+            get :download_report
           end
         end
         root to: "config#show"

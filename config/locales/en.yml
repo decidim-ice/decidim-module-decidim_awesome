@@ -759,6 +759,7 @@ en:
 
               '
             detect_and_run: Detect and block users
+            download_report_file: Download calculations report file
             edit: Edit rule
             headers:
               allowlist: The rule does NOT apply to the domains
@@ -768,6 +769,7 @@ en:
               type: Rule
               weight: Weight
             new: New rule
+            report_file_no_exists: Report file does not exist. Click on Calculate scores to create it.
             title: Users automatic blocks
           new:
             create: Create
