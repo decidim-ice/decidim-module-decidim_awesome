@@ -83,8 +83,8 @@ module Decidim
 
         scope = "decidim.decidim_awesome.admin.users_autoblocks.index.headers"
         lists = []
-        lists << "#{I18n.t("allowlist", scope:)}: #{rule["allowlist"].split(/\s/).compact_blank.join(", ")}" if rule["allowlist"].present?
-        lists << "#{I18n.t("blocklist", scope:)}: #{rule["blocklist"].split(/\s/).compact_blank.join(", ")}" if rule["blocklist"].present?
+        lists << "#{I18n.t("allowlist", scope:)}: #{rule["allowlist"].split(/\s/).compact_blank.join(", ")}".truncate_words(10) if rule["allowlist"].present?
+        lists << "#{I18n.t("blocklist", scope:)}: #{rule["blocklist"].split(/\s/).compact_blank.join(", ")}".truncate_words(10) if rule["blocklist"].present?
         return if lists.blank?
 
         lists.join(" | ")
