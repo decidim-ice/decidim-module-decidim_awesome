@@ -1,14 +1,17 @@
 # frozen_string_literal: true
 
+task("decidim_decidim_awesome:autoblock_users:run_block").clear
+
 namespace :decidim_decidim_awesome do
   namespace :autoblock_users do
     desc "Performs autoblock users task"
-    task :run_block, [:admin_email] => :environment do |_task, args|
+    task :run_block, [:admin_email, :perform_block] => :environment do |_task, args|
       current_user = Decidim::User.where(admin: true).find_by(email: args.admin_email)
+      perform_block = args.perform_block == "true"
 
       raise "A valid admin email is required to run this task" if current_user.blank?
 
-      Decidim::Organization.all.each do |current_organization|
+      Decidim::Organization.find_each do |current_organization|
         if (current_config = organization_config(current_organization)).blank?
           puts "\nSkipping #{current_organization.name}...\n"
           next
@@ -18,7 +21,7 @@ namespace :decidim_decidim_awesome do
 
         config_data = OpenStruct.new(current_config.value || {})
         config_form = Decidim::DecidimAwesome::Admin::UsersAutoblocksConfigForm.from_model(config_data).with_context(current_organization:, current_user:)
-        config_form.perform_block = true
+        config_form.perform_block = perform_block
 
         Decidim::DecidimAwesome::Admin::AutoblockUsers.call(config_form) do
           on(:ok) do |count, block_performed|
