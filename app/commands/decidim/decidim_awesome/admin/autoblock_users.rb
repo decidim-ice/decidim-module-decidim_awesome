@@ -53,25 +53,31 @@ module Decidim
         end
 
         def mark_users_for_autoblock!
-          detected_users.find_each do |user|
-            user.update_attribute(:extended_data, (user.extended_data || {}).merge("autoblock" => true)) # rubocop:disable Rails/SkipsModelValidations
+          detected_users.find_in_batches do |group|
+            group.each do |user|
+              next if user.extended_data["autoblock"]
+
+              user.update_attribute(:extended_data, (user.extended_data || {}).merge("autoblock" => true)) # rubocop:disable Rails/SkipsModelValidations
+            end
           end
         end
 
         def block_users!
-          detected_users.find_each do |user|
-            create_report!(user)
-            check_user_validation!(user)
+          detected_users.find_in_batches do |group|
+            group.each do |user|
+              create_report!(user)
+              check_user_validation!(user)
 
-            block_form = Decidim::Admin::BlockUserForm.from_model(user).with_context(current_organization:, current_user:)
-            I18n.with_locale(user.locale || current_organization.default_locale || "en") do
-              block_form.justification = translated_attribute(current_config.value["block_justification_message"])
-            end
-            block_form.hide = true
+              block_form = Decidim::Admin::BlockUserForm.from_model(user).with_context(current_organization:, current_user:)
+              I18n.with_locale(user.locale || current_organization.default_locale || "en") do
+                block_form.justification = translated_attribute(current_config.value["block_justification_message"])
+              end
+              block_form.hide = true
 
-            Decidim::Admin::BlockUser.call(block_form) do
-              on(:invalid) do
-                raise "User could not be blocked"
+              Decidim::Admin::BlockUser.call(block_form) do
+                on(:invalid) do
+                  raise "User could not be blocked"
+                end
               end
             end
           end

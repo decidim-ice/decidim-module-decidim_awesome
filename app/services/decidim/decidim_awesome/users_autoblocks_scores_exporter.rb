@@ -26,14 +26,32 @@ module Decidim
       end
 
       def data
-        @data ||= users.map do |user|
-          attributes = BASIC_ATTRIBUTES.index_with { |attr| user.send(attr) }
-          attributes.merge!(Decidim::DecidimAwesome::UserAutoblockScoresPresenter.new(user).scores)
+        @data ||= begin
+          accumulated_data = []
+
+          users.find_in_batches do |group|
+            group.each do |user|
+              attributes = BASIC_ATTRIBUTES.index_with { |attr| user.send(attr) }
+              attributes.merge!(Decidim::DecidimAwesome::UserAutoblockScoresPresenter.new(user).scores)
+
+              accumulated_data << attributes
+            end
+          end
+
+          accumulated_data
         end
       end
 
       def scores
-        @scores ||= users.each_with_object({}) { |user, data| data[user.id] = Decidim::DecidimAwesome::UserAutoblockScoresPresenter.new(user).scores }
+        @scores ||= begin
+          accumulated_data = {}
+
+          users.find_in_batches do |group|
+            group.each_with_object(accumulated_data) { |user, data| data[user.id] = Decidim::DecidimAwesome::UserAutoblockScoresPresenter.new(user).scores }
+          end
+
+          accumulated_data
+        end
       end
     end
   end
