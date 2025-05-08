@@ -24,16 +24,14 @@ module Decidim
         def call
           return broadcast(:invalid, @form.errors.full_messages) if form.invalid?
 
-          transaction do
-            save_configuration!
-            calculate_scores
-            detected_users_count = detected_users.length
+          save_configuration!
+          calculate_scores
+          detected_users_count = detected_users.length
 
-            if detected_users_count.positive?
-              mark_users_for_autoblock!
-              block_users! if perform_block
-              send_notification_to_admins!
-            end
+          if detected_users_count.positive?
+            mark_users_for_autoblock!
+            block_users! if perform_block
+            send_notification_to_admins!
           end
 
           broadcast(:ok, detected_users.length, perform_block)
