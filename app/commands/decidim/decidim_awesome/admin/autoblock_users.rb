@@ -34,7 +34,7 @@ module Decidim
             send_notification_to_admins!
           end
 
-          broadcast(:ok, detected_users.length, perform_block)
+          broadcast(:ok, detected_users_count, perform_block)
         rescue StandardError => e
           broadcast(:invalid, e.message)
         end
