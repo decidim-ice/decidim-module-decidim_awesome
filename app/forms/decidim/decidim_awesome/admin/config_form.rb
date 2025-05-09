@@ -53,7 +53,7 @@ module Decidim
         # TODO: validate non general admins are here
 
         def self.from_params(params, additional_params = {})
-          instance = super(params, additional_params)
+          instance = super
           instance.force_authorization_after_login = instance.force_authorization_after_login.compact_blank if instance.force_authorization_after_login.present?
           instance.valid_keys = extract_valid_keys_from_params(params)
           instance.sanitize_labels!

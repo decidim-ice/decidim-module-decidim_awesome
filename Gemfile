@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = "0.29.2"
+DECIDIM_VERSION = "0.30.0"
 
 gem "decidim", DECIDIM_VERSION
 # this causes failures if not enabled (check if still necessary in the future)
@@ -21,9 +21,6 @@ group :development, :test do
   gem "decidim-dev", DECIDIM_VERSION
 
   gem "brakeman", "~> 6.1"
-  gem "net-imap", "~> 0.4.16"
-  gem "net-pop", "~> 0.1.2"
-  gem "net-smtp", "~> 0.3.1"
   gem "parallel_tests", "~> 4.2"
 end
 
