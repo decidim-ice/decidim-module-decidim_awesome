@@ -1,0 +1,29 @@
+<div class="mb-8">
+  <p class="help-text"><%= t(".help_html") %>
+</div>
+
+<%= render "filters" %>
+
+<% if addresses.empty? %>
+  <div class="callout warning"><%= t(".no_data") %></div>
+<% else %>
+  <div class="table-scroll">
+    <table class="table-list">
+      <thead>
+        <tr>
+          <th><%= t(".ip_address") %></th>
+          <th><%= t(".stamps") %></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% addresses.each do |address, count| %>
+          <tr>
+            <td><%= link_to address, hashcashes_path(ip_address_starts_with: address) %></td>
+            <td><%= number_with_delimiter count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

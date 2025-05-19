@@ -2,7 +2,7 @@
   <% if config_enabled? :auto_save_forms %>
     <div class="row column">
       <%= form.check_box :auto_save_forms %>
-      <span class="help-text mb-4" style="margin-top: -1rem;">
+      <span class="help-text mb-4">
         <%= t("help.auto_save_forms", scope: "decidim.decidim_awesome.admin.config.form") %>
       </span>
       <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :auto_save_forms, constraints: constraints_for(:auto_save_forms) }) %>
@@ -11,43 +11,47 @@
   <% if config_enabled? :user_timezone %>
     <div class="row column">
       <%= form.check_box :user_timezone %>
-      <span class="help-text mb-4" style="margin-top: -1rem;">
+      <span class="help-text mb-4">
         <%= t("help.user_timezone", scope: "decidim.decidim_awesome.admin.config.form") %>
       </span>
     </div>
   <% end %>
 
-  <% if config_enabled? :hashcash_signup %>
+  <% if config_enabled?(:hashcash_login, :hashcash_signup) %>
     <div class="row column">
-      <div>
-        <%= form.check_box :hashcash_signup %>
-        <span class="help-text mb-4" style="margin-top: -1rem;">
-          <%= t("help.hashcash_signup", scope: "decidim.decidim_awesome.admin.config.form") %>
-        </span>
-      </div>
-      <div>
-        <%= form.number_field :hashcash_signup_bits %>
-        <span class="help-text mb-4" style="margin-top: -1rem;">
-          <%= t("help.hashcash_signup_bits", scope: "decidim.decidim_awesome.admin.config.form", bits: Decidim::DecidimAwesome.hashcash_signup_bits) %>
-        </span>
-      </div>
-    </div>
-  <% end %>
+      <% if config_enabled? :hashcash_signup %>
+        <div>
+          <%= form.check_box :hashcash_signup %>
+          <span class="help-text mb-4">
+            <%= t("help.hashcash_signup", scope: "decidim.decidim_awesome.admin.config.form") %>
+          </span>
+        </div>
+        <div>
+          <%= form.number_field :hashcash_signup_bits %>
+          <span class="help-text mb-4">
+            <%= t("help.hashcash_signup_bits", scope: "decidim.decidim_awesome.admin.config.form", bits: Decidim::DecidimAwesome.hashcash_signup_bits) %>
+          </span>
+        </div>
+      <% end %>
 
-  <% if config_enabled? :hashcash_login %>
-    <div class="row column">
-      <div>
-        <%= form.check_box :hashcash_login %>
-        <span class="help-text mb-4" style="margin-top: -1rem;">
-          <%= t("help.hashcash_login", scope: "decidim.decidim_awesome.admin.config.form") %>
-        </span>
-      </div>
-      <div>
-        <%= form.number_field :hashcash_login_bits %>
-        <span class="help-text mb-4" style="margin-top: -1rem;">
-          <%= t("help.hashcash_login_bits", scope: "decidim.decidim_awesome.admin.config.form", bits: Decidim::DecidimAwesome.hashcash_login_bits) %>
-        </span>
-      </div>
+      <% if config_enabled? :hashcash_login %>
+        <div>
+          <%= form.check_box :hashcash_login %>
+          <span class="help-text mb-4">
+            <%= t("help.hashcash_login", scope: "decidim.decidim_awesome.admin.config.form") %>
+          </span>
+        </div>
+        <div>
+          <%= form.number_field :hashcash_login_bits %>
+          <span class="help-text mb-4">
+            <%= t("help.hashcash_login_bits", scope: "decidim.decidim_awesome.admin.config.form", bits: Decidim::DecidimAwesome.hashcash_login_bits) %>
+          </span>
+        </div>
+      <% end %>
+
+      <p class="help-text pt-0 pb-4 label">
+        <%= t("help.hashcash_i18n_key", scope: "decidim.decidim_awesome.admin.config.form", key: "<code>active_hashcash.waiting_label</code>").html_safe %>
+      </p>
     </div>
   <% end %>
 </div>

@@ -298,6 +298,7 @@ module Decidim
         Decidim.icons.register(name: "spy", icon: "spy-fill", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "forbid-line", icon: "forbid-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "file-settings-line", icon: "file-settings-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "hashtag", icon: "hashtag", category: "system", description: "", engine: :decidim_awesome)
       end
     end
   end

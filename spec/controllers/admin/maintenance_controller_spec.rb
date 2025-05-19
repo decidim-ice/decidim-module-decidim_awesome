@@ -32,7 +32,7 @@ module Decidim::DecidimAwesome
           expect(response).to have_http_status(:success)
 
           expect(controller.helpers.current_view).to eq("private_data")
-          expect(controller.helpers.available_views.keys).to match_array(%w(private_data checks))
+          expect(controller.helpers.available_views.keys).to match_array(%w(private_data hashcash checks))
         end
 
         context "when format is json" do
