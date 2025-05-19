@@ -13,7 +13,7 @@ module Decidim
 
         helper_method :stamps, :stamp, :addresses
         before_action do
-          # enforce_permission_to :edit_config, :hashcash
+          enforce_permission_to :edit_config, [:hashcash_login, :hashcash_signup]
         end
 
         def ip_addresses
