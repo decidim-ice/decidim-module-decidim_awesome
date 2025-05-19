@@ -23,6 +23,7 @@ decidim-core:
     decidim-0.29.1: 77e80d527727acdf117a0c4517a69a7c
   /app/forms/decidim/account_form.rb:
     decidim-0.29.1: 11a022ae6ae18ad89da168bec4207935
+    decidim-0.29.3: 5872f17965919c0754a453ac4eb614df
   /app/commands/decidim/update_account.rb:
     decidim-0.29.1: d24090fdd9358c38e6e15c4607a78e18
   /app/views/decidim/account/show.html.erb:
@@ -44,10 +45,12 @@ decidim-proposals:
     decidim-0.29.2: ad4ff4bde6ee2e802d394382ef7859a4
   /app/helpers/decidim/proposals/application_helper.rb:
     decidim-0.29.1: 940488938f644b63a2ef6177f3757ca2
+    decidim-0.29.3: e6039a99268845c5038f913309fde432
   /app/controllers/decidim/proposals/proposal_votes_controller.rb:
     decidim-0.29.1: f983e72c1ee8d31222d537533c762cd2
   /app/views/decidim/proposals/admin/proposals/_form.html.erb:
     decidim-0.29.1: 667c2ef6ffbf3369f59bd1e8eb0ba421
+    decidim-0.29.3: 59a7ed11d05a633cd4bf23881254b7f1
   /app/views/decidim/proposals/proposals/_vote_button.html.erb:
     decidim-0.29.1: 06dd4c9bf7fc4953fc330b7ba081b2f6
   /app/views/decidim/proposals/proposals/_votes_count.html.erb:

@@ -12,6 +12,10 @@ en:
         force_authorization_help_text: Help text for the authorization page
         force_authorization_with_any_method: Allow access if any of the authorizations
           is granted (by default, all are required)
+        hashcash_login: Enable the Hashcash bot protection for existing users (login)
+        hashcash_login_bits: Number of bits for the Hashcash algorithm (login)
+        hashcash_signup: Enable the Hashcash bot protection for new users (sign up)
+        hashcash_signup_bits: Number of bits for the Hashcash algorithm (sign up)
         intergram_auto_no_response: A message that is sent one minute after the user
           sends its first message and no response was received
         intergram_auto_response: A message that is sent immediately after the user
@@ -325,6 +329,24 @@ en:
               force_authorization_help_text: Add a custom text to explain why authorization
                 is required. Also make sure you add a contact method in case users
                 need help.
+              hashcash_login: |
+                Protect Rails applications against bots and brute force attacks without annoying humans.
+                Hashcash is a proof-of-work system that requires users to solve a computational puzzle (performed automatically by the browser) before they can sign up.
+              hashcash_login_bits: 'This parameter defines the number of bits that
+                the Hashcash algorithm will use to generate the proof-of-work. It
+                is recommended to use a value between 16 (easy) and 30 (extremely
+                hard) bits. The default value for login forms is %{bits} bits.
+
+                '
+              hashcash_signup: |
+                Protect Rails applications against bots and brute force attacks without annoying humans.
+                Hashcash is a proof-of-work system that requires users to solve a computational puzzle (performed automatically by the browser) before they can sign up.
+              hashcash_signup_bits: 'This parameter defines the number of bits that
+                the Hashcash algorithm will use to generate the proof-of-work. It
+                is recommended to use a value between 16 (easy) and 30 (extremely
+                hard) bits. The default value for sign up forms is %{bits} bits.
+
+                '
               intergram_about: Intergram uses Telegram messenger to handle a live
                 support chat widget embedded in the bottom of the page.
               intergram_config: Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram

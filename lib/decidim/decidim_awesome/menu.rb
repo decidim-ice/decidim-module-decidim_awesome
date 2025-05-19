@@ -174,7 +174,7 @@ module Decidim
               :validate_body_min_length, :validate_body_max_caps_percent,
               :validate_body_max_marks_together, :validate_body_start_with_caps
             ),
-            surveys: config_enabled?(:auto_save_forms, :user_timezone),
+            surveys: config_enabled?(:auto_save_forms, :user_timezone, :hashcash_signup, :hashcash_login),
             styles: config_enabled?(:scoped_styles, :scoped_admin_styles),
             scoped_styles: config_enabled?(:scoped_styles),
             scoped_admin_styles: config_enabled?(:scoped_admin_styles),
