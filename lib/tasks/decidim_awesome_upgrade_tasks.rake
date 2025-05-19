@@ -5,5 +5,8 @@ Rake::Task["decidim:webpacker:install"].enhance do
 end
 
 Rake::Task["decidim:choose_target_plugins"].enhance do
-  ENV["FROM"] = "#{ENV.fetch("FROM", nil)},decidim_decidim_awesome"
+  unless ENV["FROM"].to_s.include?("decidim_decidim_awesome")
+    ENV["FROM"] = "#{ENV.fetch("FROM", nil)},decidim_decidim_awesome"
+    ENV["FROM"] = "#{ENV.fetch("FROM", nil)},active_hashcash" if Decidim::DecidimAwesome.enabled?(:hashcash_signup, :hashcash_login)
+  end
 end

@@ -6,6 +6,7 @@ require "decidim/core"
 require "decidim/decidim_awesome/awesome_helpers"
 require "decidim/decidim_awesome/menu"
 require "decidim/decidim_awesome/middleware/current_config"
+require "active_hashcash" if Decidim::DecidimAwesome.enabled?(:hashcash_signup, :hashcash_login)
 
 module Decidim
   module DecidimAwesome
@@ -25,6 +26,11 @@ module Decidim
       # https://edgeguides.rubyonrails.org/engines.html#overriding-models-and-controllers
       # overrides
       config.to_prepare do
+        if DecidimAwesome.enabled?(:hashcash_signup, :hashcash_login)
+          # Add hashcash to signup and login
+          Decidim::Devise::SessionsController.include(Decidim::DecidimAwesome::NeedsHashcash)
+          Decidim::Devise::RegistrationsController.include(Decidim::DecidimAwesome::NeedsHashcash)
+        end
         # Include additional helpers globally
         ActiveSupport.on_load(:action_view) { include Decidim::DecidimAwesome::AwesomeHelpers }
         # Also for cells
