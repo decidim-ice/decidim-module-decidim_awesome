@@ -25,6 +25,7 @@ env:
   DATABASE_HOST: localhost
   POSTGRES_PASSWORD: postgres
   BIG_SCREEN_SIZE: 1
+  CI_HASHCASH_BITS: 20
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
