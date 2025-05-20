@@ -20,11 +20,7 @@ group :development, :test do
   gem "decidim-dev", DECIDIM_VERSION
 
   gem "brakeman", "~> 6.1"
-  gem "net-imap", "~> 0.4.16"
-  gem "net-pop", "~> 0.1.2"
-  gem "net-smtp", "~> 0.3.1"
   gem "parallel_tests", "~> 4.2"
-  gem "rubocop-rspec", "~> 3.3.0"
 end
 
 group :development do

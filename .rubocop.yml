@@ -7,4 +7,6 @@ AllCops:
     - "development_app/**/*"
 
 RSpec/DescribeClass:
-  Enabled: false
+  Exclude:
+    - spec/i18n_spec.rb
+    - "spec/system/**/*"
