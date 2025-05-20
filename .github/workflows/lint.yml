@@ -9,6 +9,7 @@ on:
 env:
   RUBY_VERSION: 3.2.8
   NODE_VERSION: 18.17.1
+  DISABLE_SPRING: 1
 
 jobs:
   lint-report:
@@ -23,9 +24,11 @@ jobs:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
-      - uses: actions/setup-node@master
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: ./package-lock.json
 
       - run: npm ci
         name: Install JS deps
