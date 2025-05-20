@@ -376,7 +376,14 @@ GEM
       logger
     faraday-net_http (3.4.0)
       net-http (>= 0.5.0)
-    ffi (1.17.2)
+    ffi (1.17.2-aarch64-linux-gnu)
+    ffi (1.17.2-aarch64-linux-musl)
+    ffi (1.17.2-arm-linux-gnu)
+    ffi (1.17.2-arm-linux-musl)
+    ffi (1.17.2-arm64-darwin)
+    ffi (1.17.2-x86_64-darwin)
+    ffi (1.17.2-x86_64-linux-gnu)
+    ffi (1.17.2-x86_64-linux-musl)
     file_validators (3.0.0)
       activemodel (>= 3.2)
       mime-types (>= 1.0)
@@ -490,7 +497,6 @@ GEM
     mime-types-data (3.2025.0514)
     mini_magick (4.13.2)
     mini_mime (1.1.5)
-    mini_portile2 (2.8.9)
     minitest (5.25.5)
     msgpack (1.8.0)
     multi_xml (0.7.2)
@@ -507,8 +513,21 @@ GEM
     net-smtp (0.3.4)
       net-protocol
     nio4r (2.7.4)
-    nokogiri (1.18.8)
-      mini_portile2 (~> 2.8.2)
+    nokogiri (1.18.8-aarch64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.8-aarch64-linux-musl)
+      racc (~> 1.4)
+    nokogiri (1.18.8-arm-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.8-arm-linux-musl)
+      racc (~> 1.4)
+    nokogiri (1.18.8-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.18.8-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.18.8-x86_64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.8-x86_64-linux-musl)
       racc (~> 1.4)
     oauth (1.1.0)
       oauth-tty (~> 1.0, >= 1.0.1)
@@ -707,8 +726,6 @@ GEM
       rack (>= 1.1)
       rubocop (>= 1.52.0, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
-    rubocop-rake (0.6.0)
-      rubocop (~> 1.0)
     rubocop-rspec (3.4.0)
       rubocop (~> 1.61)
     rubocop-rspec_rails (2.30.0)
@@ -810,7 +827,14 @@ GEM
     zeitwerk (2.7.3)
 
 PLATFORMS
-  ruby
+  aarch64-linux-gnu
+  aarch64-linux-musl
+  arm-linux-gnu
+  arm-linux-musl
+  arm64-darwin
+  x86_64-darwin
+  x86_64-linux-gnu
+  x86_64-linux-musl
 
 DEPENDENCIES
   bootsnap (~> 1.4)
@@ -824,11 +848,10 @@ DEPENDENCIES
   listen (~> 3.1)
   parallel_tests (~> 4.2)
   puma (>= 6.3.1)
-  rubocop-rake
   web-console (~> 4.2)
 
 RUBY VERSION
    ruby 3.2.8p263
 
 BUNDLED WITH
-   2.5.17
+   2.6.5

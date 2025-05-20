@@ -11,7 +11,7 @@
           <%= t("help.scoped_admin_styles_variables", scope: "decidim.decidim_awesome.admin.config.form") %>
         </p>
         <p class="colors">
-          <% ["primary", "secondary", "tertiary", "success", "warning", "alert"].each do |color| %>
+          <% %w(primary secondary tertiary success warning alert).each do |color| %>
           <span class="color-box <%= color %>" style="background-color: <%= current_organization.colors[color] %>"></span>
           <code>var(--<%= color %>)</code>
         <% end %>
@@ -23,7 +23,7 @@
           <%= t("help.scoped_styles_variables", scope: "decidim.decidim_awesome.admin.config.form") %>
         </p>
         <p class="colors">
-          <% ["primary", "secondary", "tertiary", "success", "warning", "alert"].each do |color| %>
+          <% %w(primary secondary tertiary success warning alert).each do |color| %>
           <span class="color-box <%= color %>" style="background-color: <%= current_organization.colors[color] %>"></span>
           <code>var(--<%= color %>)</code>
         <% end %>
@@ -32,7 +32,7 @@
     <% end %>
     <% form.object.send(config_var)&.each do |key, value| %>
       <div class="card p-4 scoped_styles_container<%= " private" if admin_styles %> js-box-container" data-key="<%= key %>" data-var="<%= config_var %>">
-        <%= render("decidim/decidim_awesome/admin/config/autoedit_box_label", var: config_var, key: key, scope: "#{style}_#{key}", delete_path: decidim_admin_decidim_awesome.scoped_style_path(key: key, admin_panel: admin_styles)) %>
+        <%= render("decidim/decidim_awesome/admin/config/autoedit_box_label", var: config_var, key:, scope: "#{style}_#{key}", delete_path: decidim_admin_decidim_awesome.scoped_style_path(key:, admin_panel: admin_styles)) %>
         <p class="form-error is-visible" id="custom-style-error-<%= key %>"><%= errors[key.to_sym].join("<br>") if errors %></p>
         <%= text_area_tag key, value, name: "config[#{config_var}][#{key}]", rows: 5 %>
         <%= render("decidim/decidim_awesome/admin/config/constraints", key: "#{style}_#{key}", constraints: constraints_for("#{style}_#{key}")) %>

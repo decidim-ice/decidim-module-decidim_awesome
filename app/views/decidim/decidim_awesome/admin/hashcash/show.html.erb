@@ -30,4 +30,13 @@
       <dd mt-1 class="sm:col-span-2 sm:mt-0"><%= stamp.context %></dd>
     </div>
   </dl>
+
+  <div class="grid grid-cols-4 gap-x-4 mb-[4px]">
+    <button class="button button__sm button__transparent-secondary">
+      <%= link_to t("decidim.decidim_awesome.admin.hashcash.filters.stamps"), hashcashes_path %>
+    </button>
+    <button class="button button__sm button__transparent-secondary">
+      <%= link_to t("decidim.decidim_awesome.admin.hashcash.filters.ip_addresses"), ip_addresses_hashcashes_path %>
+    </button>
+  </div>
 </div>
