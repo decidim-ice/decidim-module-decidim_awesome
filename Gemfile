@@ -7,7 +7,6 @@ ruby RUBY_VERSION
 DECIDIM_VERSION = "0.29.3"
 
 gem "decidim", DECIDIM_VERSION
-# this causes failures if not enabled (check if still necessary in the future)
 gem "decidim-decidim_awesome", path: "."
 gem "decidim-templates", DECIDIM_VERSION
 
