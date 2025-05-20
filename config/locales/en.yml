@@ -609,7 +609,7 @@ en:
             confirm_delete: Are you sure you want to delete all private data for this
               resource? This cannot be undone.
             delete: Delete all
-            destroying_private_data: Private data for %{title} is set to be destroyed.
+            destroying: Private data for %{title} is set to be destroyed.
               Please check again in a few minutes.
             done: Done
             help_html: |

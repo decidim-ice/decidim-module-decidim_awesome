@@ -41,7 +41,7 @@ describe "Admin manages maintenance" do
 
   context "when visiting the maintenance page" do
     before do
-      visit decidim_admin_decidim_awesome.maintenance_path(:private_data)
+      visit decidim_admin_decidim_awesome.private_data_path
     end
 
     it "shows the private data maintenance page" do

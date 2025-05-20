@@ -129,7 +129,7 @@ module Decidim
       false
     end
 
-    # This an anti-spam mechanism that uses the Hashcash algorithm to increase the cost of brute-force attacks
+    # This is an anti-spam mechanism that uses the Hashcash algorithm to increase the cost of brute-force attacks
     # on the login and signup forms. It works by requiring a Hashcash stamp to be sent with the form.
     # See http://www.hashcash.org/docs/hashcash.html
     # This configuration enables Hashcash for the signup forms.

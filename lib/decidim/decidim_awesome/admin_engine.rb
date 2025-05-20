@@ -29,7 +29,6 @@ module Decidim
         get :users, to: "config#users"
         post :rename_scope_label, to: "config#rename_scope_label"
         scope :maintenance do
-          # delete :destroy_private_data, on: :member
           get :checks, to: "checks#index"
           resources :private_data, only: [:index, :destroy]
           resources :hashcash, only: [:index, :show], as: "hashcashes" do
