@@ -9,7 +9,7 @@ describe "Hashcash protector", :perform_enqueued do
   let!(:awesome_hashcash_login_bits) { create(:awesome_config, organization:, var: :hashcash_login_bits, value: hashcash_login_bits) }
   let!(:awesome_hashcash_signup_bits) { create(:awesome_config, organization:, var: :hashcash_signup_bits, value: hashcash_signup_bits) }
   let(:hashcash_login) { true }
-  let(:hashcash_login_bits) { ENV.fetch("CI_HASHCASH_BITS", 22) } # Note, this is potentially flaky, as time passes this number will have to increase
+  let(:hashcash_login_bits) { ENV.fetch("CI_HASHCASH_BITS", 21) } # Note, this is potentially flaky, as time passes this number will have to increase
   let(:hashcash_signup) { true }
   let(:hashcash_signup_bits) { ENV.fetch("CI_HASHCASH_BITS", 22) }
   let!(:user) { create(:user, :confirmed, organization:) }
