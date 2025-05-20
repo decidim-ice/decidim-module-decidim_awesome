@@ -25,6 +25,7 @@ group :development, :test do
   gem "net-pop", "~> 0.1.2"
   gem "net-smtp", "~> 0.3.1"
   gem "parallel_tests", "~> 4.2"
+  gem "rubocop-rake"
 end
 
 group :development do
