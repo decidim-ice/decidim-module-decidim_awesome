@@ -9,7 +9,7 @@ on:
 env:
   CI: "true"
   SIMPLECOV: "true"
-  RUBY_VERSION: 3.2.6
+  RUBY_VERSION: 3.2.8
   NODE_VERSION: 18.17.1
   SHAKAPACKER_RUNTIME_COMPILE: "false"
 
