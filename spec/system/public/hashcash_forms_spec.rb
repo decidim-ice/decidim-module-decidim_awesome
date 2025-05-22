@@ -9,9 +9,9 @@ describe "Hashcash protector", :perform_enqueued do
   let!(:awesome_hashcash_login_bits) { create(:awesome_config, organization:, var: :hashcash_login_bits, value: hashcash_login_bits) }
   let!(:awesome_hashcash_signup_bits) { create(:awesome_config, organization:, var: :hashcash_signup_bits, value: hashcash_signup_bits) }
   let(:hashcash_login) { true }
-  let(:hashcash_login_bits) { ENV.fetch("CI_HASHCASH_BITS", 21) } # Note, this is potentially flaky, as time passes this number will have to increase
+  let(:hashcash_login_bits) { 30 }
   let(:hashcash_signup) { true }
-  let(:hashcash_signup_bits) { ENV.fetch("CI_HASHCASH_BITS", 22) }
+  let(:hashcash_signup_bits) { 30 }
   let!(:user) { create(:user, :confirmed, organization:) }
 
   before do
@@ -20,16 +20,8 @@ describe "Hashcash protector", :perform_enqueued do
   end
 
   it "adds the hidden hashcash field to the login form" do
-    expect(page).to have_button("Waiting for verification ...", disabled: true)
     expect(page).to have_field("hashcash", type: :hidden)
-    sleep 1
-    expect(page).to have_no_button("Waiting for verification ...")
-    within "#session_new_user" do
-      fill_in :session_user_email, with: user.email
-      fill_in :session_user_password, with: "decidim123456789"
-      click_on "Log in"
-    end
-    expect(page).to have_content("Logged in successfully.")
+    expect(page).to have_button("Waiting for verification ...", disabled: true)
   end
 
   it "adds the hidden hashcash field to the signup form" do
@@ -37,19 +29,38 @@ describe "Hashcash protector", :perform_enqueued do
       click_on "Create an account"
     end
 
-    expect(page).to have_button("Waiting for verification ...", disabled: true)
     expect(page).to have_field("hashcash", type: :hidden)
-    sleep 1
-    expect(page).to have_no_button("Waiting for verification ...")
-    within "#register-form" do
-      fill_in :registration_user_name, with: "Bob"
-      fill_in :registration_user_email, with: "bob@example.org"
-      fill_in :registration_user_password, with: "decidim123456789"
-      check :registration_user_tos_agreement
-      check :registration_user_newsletter
-      click_on "Create an account"
+    expect(page).to have_button("Waiting for verification ...", disabled: true)
+  end
+
+  context "when hashcash is resolved" do
+    let(:hashcash_login_bits) { 10 }
+    let(:hashcash_signup_bits) { 10 }
+
+    it "can log in successfully" do
+      within "#session_new_user" do
+        fill_in :session_user_email, with: user.email
+        fill_in :session_user_password, with: "decidim123456789"
+        click_on "Log in"
+      end
+      expect(page).to have_content("Logged in successfully.")
     end
-    expect(page).to have_content("A message with a confirmation link has been sent to your email address.")
+
+    it "adds the hidden hashcash field to the signup form" do
+      within ".login__info" do
+        click_on "Create an account"
+      end
+
+      within "#register-form" do
+        fill_in :registration_user_name, with: "Bob"
+        fill_in :registration_user_email, with: "bob@example.org"
+        fill_in :registration_user_password, with: "decidim123456789"
+        check :registration_user_tos_agreement
+        check :registration_user_newsletter
+        click_on "Create an account"
+      end
+      expect(page).to have_content("A message with a confirmation link has been sent to your email address.")
+    end
   end
 
   context "when hashcash is disabled" do
