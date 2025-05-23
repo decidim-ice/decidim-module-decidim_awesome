@@ -1,5 +1,8 @@
 ---
 en:
+  active_hashcash:
+    submit_filter: Filter
+    waiting_label: Waiting for verification ...
   activemodel:
     attributes:
       config:
@@ -12,6 +15,10 @@ en:
         force_authorization_help_text: Help text for the authorization page
         force_authorization_with_any_method: Allow access if any of the authorizations
           is granted (by default, all are required)
+        hashcash_login: Enable the Hashcash bot protection for existing users (login)
+        hashcash_login_bits: Number of bits for the Hashcash algorithm (login)
+        hashcash_signup: Enable the Hashcash bot protection for new users (sign up)
+        hashcash_signup_bits: Number of bits for the Hashcash algorithm (sign up)
         intergram_auto_no_response: A message that is sent one minute after the user
           sends its first message and no response was received
         intergram_auto_response: A message that is sent immediately after the user
@@ -149,7 +156,7 @@ en:
             voting_cards_box_title: Title for the voting box
             voting_cards_box_title_help: Default is "Vote on this proposal". Use "-"
               to hide it.
-            voting_cards_instructions: Support instructions/help (dissmissable modal
+            voting_cards_instructions: Support instructions/help (dismissible modal
               window)
             voting_cards_instructions_help: Default is "Please read the election rules
               carefully to understand how your vote will be used by %{organization}""
@@ -325,6 +332,22 @@ en:
               force_authorization_help_text: Add a custom text to explain why authorization
                 is required. Also make sure you add a contact method in case users
                 need help.
+              hashcash_i18n_key: 'You can customize the text that is shown to users
+                in the login/sign up submit buttons with the i18n key: %{key}'
+              hashcash_login: |
+                Protect Rails applications against bots and brute force attacks without annoying humans.
+                Hashcash is a proof-of-work system that requires users to solve a computational puzzle (performed automatically by the browser) before they can sign up.
+              hashcash_login_bits: This parameter defines the number of bits that
+                the Hashcash algorithm will use to generate the proof-of-work. It
+                is recommended to use a value between 16 (easy) and 30 (extremely
+                hard) bits. The default value for login forms is %{bits} bits.
+              hashcash_signup: |
+                Protect Rails applications against bots and brute force attacks without annoying humans.
+                Hashcash is a proof-of-work system that requires users to solve a computational puzzle (performed automatically by the browser) before they can sign up.
+              hashcash_signup_bits: This parameter defines the number of bits that
+                the Hashcash algorithm will use to generate the proof-of-work. It
+                is recommended to use a value between 16 (easy) and 30 (extremely
+                hard) bits. The default value for sign up forms is %{bits} bits.
               intergram_about: Intergram uses Telegram messenger to handle a live
                 support chat widget embedded in the bottom of the page.
               intergram_config: Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram
@@ -497,39 +520,28 @@ en:
           update:
             error: Error updating redirection! %{error}
             success: Redirection updated successfully
-        maintenance:
-          private_data:
-            component: Space / Component
-            confirm_delete: Are you sure you want to delete all private data for this
-              resource? This cannot be undone.
-            delete: Delete all
-            destroying_private_data: Private data for %{title} is set to be destroyed.
-              Please check again in a few minutes.
-            done: Done
+        hashcash:
+          filters:
+            ip_addresses: View IP addresses
+            stamps: View Hashcash stamps
+          index:
+            bits: Bits
+            created_at: Created at
             help_html: |
-              This tool allows you to delete all private data for a specific participatory space or component. This action is irreversible and will remove all private data from the database.
+              This page shows the Hashcash stamps that have been detected in the system. Hashcash is a proof-of-work system that requires users to solve a computational puzzle (performed automatically by the browser) before they can sign up.
               <br><br>
-              <strong>What is considered private data?</strong>
-              <br>
-              Private data is any information that is not publicly available and is only accessible to administrators. This, at the moment, includes private custom fields information.
-              <br><br>
-              <strong>What happens when I delete private data?</strong>
-              <br>
-              When you delete private data, all private information for the selected participatory space or component will be permanently removed from the database. A log of this action will be stored in the system for auditing purposes.
-              <br><br>
-              <strong>What happens to public data?</strong>
-              <br>
-              Public data will not be affected by this action. Only private data will be deleted.
-              <br><br>
-              <strong>Is there a minimum time to wait before deleting private data?</strong>
-              <br>
-              Yes, you cannot delete private data if the last update was less than %{time_ago} ago. You can change this configuration in the initializer file.
-            items_count: Total affected
-            last_date: Last update
-            no_data: No private data found older than %{time_ago} ago
-            not_destroyable: This resource cannot be destroyed yet
-            removing: Removing...
-            time_ago: "%{time} ago"
+              Each entry in this list represents a Hashcash stamp that has been generated by a user every time they have signed up or logged in.
+            ip_address: IP address
+            no_data: No Hashcash stamps found
+            request_path: Request path
+          ip_addresses:
+            help_html: This page list all the IP addresses that have been detected
+              in the system ordered by the number of Hashcash stamps they have generated.
+              <br><br> Each stamp is either a login or a sign up action by a user.
+              You can use this information to detect suspicious activity.
+            ip_address: IP address
+            no_data: No IP addresses found
+            stamps: Hashcash stamps
         menu:
           admins: Scoped Admins
           custom_redirects: Custom Redirections
@@ -537,6 +549,7 @@ en:
           livechat: Live Chat
           maintenance:
             checks: System Compatibility
+            hashcash: Hashcash stamps
             maintenance: Maintenance
             private_data: Private data
           menu_hacks: Menu Tweaks
@@ -590,6 +603,39 @@ en:
           verification_modal:
             authorizations_for: Authorizations for %{user}
             close: Close
+        private_data:
+          private_data:
+            component: Space / Component
+            confirm_delete: Are you sure you want to delete all private data for this
+              resource? This cannot be undone.
+            delete: Delete all
+            destroying: Private data for %{title} is set to be destroyed. Please check
+              again in a few minutes.
+            done: Done
+            help_html: |
+              This tool allows you to delete all private data for a specific participatory space or component. This action is irreversible and will remove all private data from the database.
+              <br><br>
+              <strong>What is considered private data?</strong>
+              <br>
+              Private data is any information that is not publicly available and is only accessible to administrators. This, at the moment, includes private custom fields information.
+              <br><br>
+              <strong>What happens when I delete private data?</strong>
+              <br>
+              When you delete private data, all private information for the selected participatory space or component will be permanently removed from the database. A log of this action will be stored in the system for auditing purposes.
+              <br><br>
+              <strong>What happens to public data?</strong>
+              <br>
+              Public data will not be affected by this action. Only private data will be deleted.
+              <br><br>
+              <strong>Is there a minimum time to wait before deleting private data?</strong>
+              <br>
+              Yes, you cannot delete private data if the last update was less than %{time_ago} ago. You can change this configuration in the initializer file.
+            items_count: Total affected
+            last_date: Last update
+            no_data: No private data found older than %{time_ago} ago
+            not_destroyable: This resource cannot be destroyed yet
+            removing: Removing...
+            time_ago: "%{time} ago"
         proposal_custom_fields:
           menu:
             title: Public fields
@@ -761,6 +807,7 @@ en:
             title: 'Maintenance tools: %{title}'
             titles:
               checks: System Compatibility Checks
+              hashcash: Hashcash stamps
               private_data: Private Data Clean-Up
         awesome_config:
           amendments: Amendments

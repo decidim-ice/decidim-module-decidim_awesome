@@ -1,0 +1,3 @@
+<!-- insert_top ".login__links" -->
+
+<%= render partial: "decidim/decidim_awesome/hashcash/hidden_field", locals: { zone: :signup } %>

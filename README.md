@@ -412,6 +412,19 @@ System configuration:
 ![Removing an authorization](examples/manual_verifications_2.png)
 ![Creating an authorization](examples/manual_verifications_3.png)
 
+#### 22. HashCash Anti-Bot login/registration
+
+This feature adds a HashCash-based anti-bot mechanism to the login and registration forms. HashCash is a proof-of-work system originally designed to limit email spam and denial-of-service attacks. When enabled, users must solve a computational puzzle (a "stamp") before submitting the form, making automated attacks significantly harder.
+
+The integration leverages the [ActiveHashcash](https://github.com/BaseSecrete/active_hashcash) gem to generate and verify HashCash stamps (although with some customizations). For more details on the HashCash protocol, see the [official documentation](http://www.hashcash.org/docs/hashcash.html).
+
+When this feature is active, each login or registration attempt requires a valid HashCash stamp, effectively reducing the risk of automated bot submissions.
+
+Note this feature is **disabled by default**, admins can enabled it under the "Surveys & Forms" menu in the Decidim Awesome admin dashboard.
+
+![Hashcash admin config](examples/haschcash_admin.png)
+![Hashcash public rendering](examples/hashcash_public.png)
+
 #### To be continued...
 
 We're not done! Please check the [issues](/decidim-ice/decidim-module-decidim_awesome/issues) (and participate) to see what's on our mind

@@ -7,37 +7,50 @@ on:
   pull_request:
 
 env:
+  CI: "true"
+  SIMPLECOV: "true"
   RUBY_VERSION: 3.2.6
   NODE_VERSION: 18.17.1
+  SHAKAPACKER_RUNTIME_COMPILE: "false"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   lint-report:
+    strategy:
+      fail-fast: false
+      matrix:
+        command:
+          - bundle exec rubocop -P
+          - npm run lint
+          - npm run stylelint
+          - bundle exec erblint app/**/*.erb
+    name: Lint code
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
-
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
-
-      - uses: actions/setup-node@master
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-
-      - run: npm ci
-        name: Install JS deps
-
-      - run: bundle exec rubocop -P
-        name: Lint Ruby files
-
-      - run: npm run lint
-        name: Lint JS files
-
-      - run: npm run stylelint
-        name: Lint SCSS files
-
-      - run: bundle exec erblint app/**/*.erb
-        name: Lint ERB files
+      - name: Get npm cache directory path
+        id: npm-cache-dir-path
+        run: echo "dir=$(npm get cache)-lint" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v4
+        id: npm-cache
+        with:
+          path: ${{ steps.npm-cache-dir-path.outputs.dir }}
+          key: npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            npm-
+      - name: Install JS dependencies
+        run: npm ci
+      - run: ${{ matrix.command }}
+        name: ${{ matrix.command }}
