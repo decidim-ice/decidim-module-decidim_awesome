@@ -1,6 +1,15 @@
 CHANGELOG
 =========
 
+Unreleased
+----------
+
+Compatibility:
+  - Decidim 0.28.x
+
+Feature:
+  - Fixed multi-tenant crossover in admin accountability
+
 v0.11.5
 -------
 
