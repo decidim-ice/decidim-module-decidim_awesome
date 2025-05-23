@@ -8,6 +8,7 @@ Compatibility:
 
 Features:
   - Fix allowing to accept terms and conditions when forced verifications enabled
+  - Fixed multi-tenant crossover in admin accountability
 
 v0.10.4
 ------
