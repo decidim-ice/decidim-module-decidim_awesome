@@ -401,10 +401,34 @@ cs:
             success: Přesměrování úspěšně aktualizováno
         maintenance:
           private_data:
+            component: Prostor / komponenta
+            confirm_delete: Opravdu chcete odstranit všechna soukromá data tohoto zdroje? Tuto akci nelze vrátit zpět.
             delete: Odstranit vše
+            destroying_private_data: Soukromá data pro %{title} jsou nastavena na zničení. Zkontrolujte prosím znovu za několik minut.
             done: Hotovo
+            help_html: |
+              Tento nástroj umožňuje odstranit všechna soukromá data pro konkrétní participační prostor nebo komponentu. Tato akce je nevratná a odstraní všechna soukromá data z databáze.
+              <br><br>
+              <strong>Co je považováno za soukromá data?</strong>
+              <br>
+              Soukromá data jsou jakékoliv informace, které nejsou veřejně dostupné a jsou přístupné pouze správcům. To v současné době zahrnuje informace o soukromých vlastních polích.
+              <br><br>
+              <strong>Co se stane, když smažu soukromá data?</strong>
+              <br>
+              Když smažete soukromá data, všechny soukromé informace pro vybraný participační prostor nebo součást budou trvale odstraněny z databáze. Protokol této akce bude uložen v systému pro účely auditu.
+              <br><br>
+              <strong>Co se stane s veřejnými daty?</strong>
+              <br>
+              Veřejná data nebudou touto akcí dotčena. Budou odstraněna pouze soukromá data.
+              <br><br>
+              <strong>Je minimální čas počkat před odstraněním soukromých dat?</strong>
+              <br>
+              Ano, nemůžete smazat soukromá data, pokud byla poslední aktualizace menší než před %{time_ago}. Tuto konfiguraci můžete změnit v souboru inicializátoru.
+            items_count: Celkový dopad
             last_date: Poslední aktualizace
             no_data: Nejsou nalezena žádná soukromá data starší než před %{time_ago}
+            not_destroyable: Tento zdroj zatím nelze zničit
+            removing: Odstraňování...
         menu:
           admins: Škálovaní administrátoři
           custom_redirects: Vlastní přesměrování
