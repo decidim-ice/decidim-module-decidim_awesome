@@ -429,6 +429,7 @@ cs:
             no_data: Nejsou nalezena žádná soukromá data starší než před %{time_ago}
             not_destroyable: Tento zdroj zatím nelze zničit
             removing: Odstraňování...
+            time_ago: "Před %{time}"
         menu:
           admins: Škálovaní administrátoři
           custom_redirects: Vlastní přesměrování
