@@ -702,10 +702,10 @@ GEM
     rubocop-performance (1.23.1)
       rubocop (>= 1.48.1, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
-    rubocop-rails (2.29.1)
+    rubocop-rails (2.25.1)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
-      rubocop (>= 1.52.0, < 2.0)
+      rubocop (>= 1.33.0, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
     rubocop-rspec (3.0.5)
       rubocop (~> 1.61)
@@ -822,6 +822,7 @@ DEPENDENCIES
   listen (~> 3.1)
   parallel_tests (~> 4.2)
   puma (>= 6.3.1)
+  rubocop-rails (~> 2.25.1)
   web-console (~> 4.2)
 
 RUBY VERSION
