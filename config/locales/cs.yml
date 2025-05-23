@@ -16,6 +16,7 @@ cs:
         hashcash_login: Povolit ochranu Hashcash bota pro existující uživatele (přihlášení)
         hashcash_login_bits: Počet bitů pro hashcash algoritmus (přihlášení)
         hashcash_signup: Povolit ochranu Hashcash bota pro nové uživatele (registrace)
+        hashcash_signup_bits: Počet bitů pro Hashcash algoritmus (přihlášení)
         intergram_auto_no_response: Zpráva, která je odeslána jednu minutu poté, co uživatel odešle svou první zprávu a nebyla obdržena odpověď
         intergram_auto_response: Zpráva, která je odeslána okamžitě poté, co uživatel odešle svou první zprávu
         intergram_chat_id: ID Chatu
@@ -136,6 +137,7 @@ cs:
             sort_orders_enabled: Typy řazeníí povoleny
             voting_cards_box_title: Název hlasovacího pole
             voting_cards_box_title_help: Výchozí hodnota je "Hlasovat pro tento návrh". Použijte "-" pro jeho schování.
+            voting_cards_instructions: Instrukce podpory/nápověda (zrušitelné modální okno)
             voting_cards_instructions_help: Výchozí hodnota je "Přečtěte si pečlivě pravidla voleb, abyste pochopili, jak bude vaše hlasování použito %{organization}""
             voting_cards_show_abstain: Přidat možnost zdržet se hlasování
             voting_cards_show_modal_help: Po kliknutí na podporu zobrazit instrukce/nápovědu
@@ -269,6 +271,15 @@ cs:
               drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
               force_authorization_after_login: 'Pokud je povoleno, uživatelé budou po přihlášení nebo registraci přesměrováni na autorizační stránku, pokud nejsou uděleny některé z zadaných autorizací. To je užitečné, pokud chcete donutit uživatele k ověření pomocí specifické autorizace, než se budou moci vůbec přihlásit (např.: zabránit spamu).'
               force_authorization_help_text: Přidejte vlastní text, který vysvětlí proč je potřeba autorizace. Také se ujistěte, že přidáte kontaktní metodu pro případ, že uživatelé potřebují pomoc.
+              hashcash_i18n_key: 'Text, který je zobrazen uživatelům v tlačítkách pro přihlášení / registraci pomocí klíče i18n: %{key}'
+              hashcash_login: |
+                Chraňte aplikace proti botům a brute force útokům, aniž by to obtěžovalo lidi.
+                Hashcash je proof-of-work systém, který vyžaduje, aby uživatelé vyřešili počítačovou hádanku (kterou provádí prohlížeč) před tím, než se mohou zaregistrovat.
+              hashcash_login_bits: Tento parametr definuje počet bitů, které bude používat algoritmus Hashcash pro generování důkazu práce. Doporučuje se použít hodnotu mezi 16 (jednoduchými) a 30 (extrémně těžkými) bity. Výchozí hodnota pro přihlašovací formuláře je %{bits} bity.
+              hashcash_signup: |
+                Chraňte aplikace proti botům a brute force útokům, aniž by to obtěžovalo lidi.
+                Hashcash je proof-of-work systém, který vyžaduje, aby uživatelé vyřešili počítačovou hádanku (kterou provádí prohlížeč) před tím, než se mohou zaregistrovat.
+              hashcash_signup_bits: Tento parametr definuje počet bitů, které bude používat algoritmus Hashcash pro generování důkazu práce. Doporučuje se použít hodnotu mezi 16 (jednoduchými) a 30 (extrémně těžkými) bity. Výchozí hodnota pro registrační formuláře je %{bits} bity.
               intergram_about: Intergram používá Telegram messenger pro zpracování widgetu live podpory v dolní části stránky.
               intergram_config: 'Pozvěte <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bota</a> do vaší skupiny nebo začněte chatovat přímo. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               original_editor_override: Od verze 0.26 je možné nahrávat obrázky do editorů (pouze pro administrátory). Proto zde nastavení obrázků ovlivňuje pouze veřejné editory (správce je bude mít vždy k dispozici).
@@ -404,6 +415,19 @@ cs:
             error: Chyba aktualizace přesměrování! %{error}
             success: Přesměrování úspěšně aktualizováno
         hashcash:
+          filters:
+            ip_addresses: Zobrazit IP adresy
+            stamps: Zobrazit Hashcash razítka
+          index:
+            bits: Bity
+            created_at: Vytvořeno
+            help_html: |
+              Tato stránka zobrazuje hashcash razítka, která byla zjištěna v systému. Hashcash je systém potvrzující práci, který vyžaduje, aby uživatelé vyřešili počítačovou hádanku (kterou provádí prohlížeč) před tím, než se mohou zaregistrovat.
+              <br><br>
+              Každá položka v tomto seznamu představuje hashcash razítko, které bylo vygenerováno uživatelem pokaždé, když se zaregistroval nebo se přihlásil.
+            ip_address: IP adresa
+            no_data: Nenalezena žádná Hashcash razítka
+            request_path: Cesta požadavku
           ip_addresses:
             no_data: Nebyly nalezeny žádné IP adresy
         menu:
