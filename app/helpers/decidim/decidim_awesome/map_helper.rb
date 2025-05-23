@@ -10,7 +10,7 @@ module Decidim
       end
 
       # rubocop:disable Metrics/CyclomaticComplexity
-      # rubocop:disable Metrics/PerceivedComplexity:
+      # rubocop:disable Metrics/PerceivedComplexity
       def awesome_map_for(components, &)
         return unless map_utility_dynamic
 
@@ -57,7 +57,7 @@ module Decidim
         end
       end
       # rubocop:enable Metrics/CyclomaticComplexity
-      # rubocop:enable Metrics/PerceivedComplexity:
+      # rubocop:enable Metrics/PerceivedComplexity
 
       def step_settings
         settings_source.try(:current_settings)
@@ -71,6 +71,7 @@ module Decidim
         try(:current_component) || self
       end
 
+      # rubocop:disable Rails/HelperInstanceVariable
       def current_categories(categories)
         return @current_categories if @current_categories
 
@@ -114,6 +115,7 @@ module Decidim
           color: format("#%02x%02x%02x", r, g, b)
         )
       end
+      # rubocop:enable Rails/HelperInstanceVariable
 
       # HSV values in [0..1[
       # returns [r, g, b] values from 0 to 255

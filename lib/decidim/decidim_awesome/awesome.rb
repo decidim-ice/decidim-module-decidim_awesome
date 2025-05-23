@@ -129,6 +129,31 @@ module Decidim
       false
     end
 
+    # This is an anti-spam mechanism that uses the Hashcash algorithm to increase the cost of brute-force attacks
+    # on the login and signup forms. It works by requiring a Hashcash stamp to be sent with the form.
+    # See http://www.hashcash.org/docs/hashcash.html
+    # This configuration enables Hashcash for the signup forms.
+    # If set to :disabled, the feature will be completely removed (only on the signup form).
+    config_accessor :hashcash_signup do
+      false
+    end
+
+    # This configuration enables Hashcash for the login forms.
+    # If set to :disabled, the feature will be completely removed (only on the login form).
+    config_accessor :hashcash_login do
+      false
+    end
+
+    # The Hashcash bits are the number of bits of the stamp. The higher the number, the more difficult it is to generate a valid stamp.
+    # The default value is 20 bits for the signup form and 16 bits for the login form.
+    config_accessor :hashcash_signup_bits do
+      20
+    end
+
+    config_accessor :hashcash_login_bits do
+      16
+    end
+
     # allows admins to created specific CSS snippets affecting only some public frontend specific parts
     # Valid values differ a little from the previous convention:
     #   :disabled => false and non available, hidden from admins

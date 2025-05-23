@@ -4,11 +4,11 @@
 
     <% form.object.scoped_admins&.each do |key, value| %>
       <div class="card p-4 scoped_admins_container js-box-container" data-key="<%= key %>">
-        <%= render(partial: "decidim/decidim_awesome/admin/config/autoedit_box_label", locals: { var: "scoped_admins", key: key, scope: "scoped_admin_#{key}", delete_path: decidim_admin_decidim_awesome.scoped_admin_path(key: key) }) %>
-        <p class="form-error is-visible" id="scoped-admin-error-<%= $key %>"><%= errors[key.to_sym].join("<br>") if errors %></p>
+        <%= render(partial: "decidim/decidim_awesome/admin/config/autoedit_box_label", locals: { var: "scoped_admins", key:, scope: "scoped_admin_#{key}", delete_path: decidim_admin_decidim_awesome.scoped_admin_path(key:) }) %>
+        <p class="form-error is-visible" id="scoped-admin-error-<%= key %>"><%= errors[key.to_sym].join("<br>") if errors %></p>
 
         <%= hidden_field_tag("config[scoped_admins][#{key}][]") %>
-        <%= select_tag "config[scoped_admins][#{key}]", options_for_select(users_for(value), value), { include_blank: false,  class: "multiusers-select", multiple: true, data: { url: decidim_admin_decidim_awesome.users_path } } %>
+        <%= select_tag "config[scoped_admins][#{key}]", options_for_select(users_for(value), value), { include_blank: false, class: "multiusers-select", multiple: true, data: { url: decidim_admin_decidim_awesome.users_path } } %>
 
         <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: "scoped_admin_#{key}", constraints: constraints_for("scoped_admin_#{key}") }) %>
       </div>

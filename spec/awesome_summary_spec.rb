@@ -47,6 +47,10 @@ describe Decidim::DecidimAwesome do
   let!(:validate_body_start_with_caps) { create(:awesome_config, organization:, var: :validate_body_start_with_caps, value: true) }
   let!(:weighted_proposal_voting) { create(:awesome_config, organization:, var: :weighted_proposal_voting, value: []) }
   let!(:additional_proposal_sortings) { create(:awesome_config, organization:, var: :additional_proposal_sortings, value: []) }
+  let!(:hashcash_signup) { create(:awesome_config, organization:, var: :hashcash_signup, value: true) }
+  let!(:hashcash_signup_bits) { create(:awesome_config, organization:, var: :hashcash_signup_bits, value: 21) }
+  let!(:hashcash_login) { create(:awesome_config, organization:, var: :hashcash_login, value: true) }
+  let!(:hashcash_login_bits) { create(:awesome_config, organization:, var: :hashcash_login_bits, value: 18) }
 
   let(:styles) { "body {background: red;}" }
   let(:intergram) do

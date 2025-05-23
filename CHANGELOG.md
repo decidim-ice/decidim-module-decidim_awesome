@@ -1,6 +1,15 @@
 CHANGELOG
 =========
 
+v0.12.2
+-------
+
+Compatibility:
+  - Decidim 0.29.x
+
+Feature:
+  - Added HashCash anti-bot mechanism
+
 v0.12.1
 -------
 
