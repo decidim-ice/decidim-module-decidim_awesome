@@ -397,37 +397,6 @@ es:
           update:
             error: '¡Error al actualizar la redirección! %{error}'
             success: Redirección actualizada correctamente
-        maintenance:
-          private_data:
-            component: Espacio / Componente
-            confirm_delete: '¿Está seguro que desea eliminar todos los datos privados de este recurso? Esta acción no se puede deshacer.'
-            delete: Eliminar todo
-            destroying_private_data: Los datos privados para %{title} serán destruidos en breve. Por favor, compruébalo de nuevo en unos minutos.
-            done: Hecho
-            help_html: |
-              Esta herramienta permite eliminar todos los datos privados de un determinado espacio participativo o componente. Esta acción es irreverible y eliminará todos los datos privados de la base de datos.
-              <br><br>
-              <strong>¿Qué se considera información privada?</strong>
-              <br>
-              Los datos privados son cualquier información que no está disponible públicamente y sólo es accesible a los administradores. Esto, en este momento, incluye información privada de los campos personalizados.
-              <br><br>
-              <strong>¿Qué ocurre cuando elimino datos privados?</strong>
-              <br>
-              Al borrar datos privados, toda la información privada del espacio o componente participativo seleccionado será eliminada permanentemente de la base de datos. Un registro de esta acción se almacenará en el sistema para fines de auditoría (pero no los datos en si).
-              <br><br>
-              <strong>¿Qué pasa con los datos públicos?</strong>
-              <br>
-              datos públicos no se verán afectados por esta acción. Sólo los datos privados serán eliminados.
-              <br><br>
-              <strong>¿Hay un tiempo mínimo para esperar antes de eliminar datos privados?</strong>
-              <br>
-              Sí, no puede eliminar datos privados si la última actualización fue menor que la %{time_ago} . Puede cambiar esta configuración en un archivo inicializador.
-            items_count: Total afectados
-            last_date: Última actualización
-            no_data: No se han encontrado datos privados anteriores a %{time_ago}
-            not_destroyable: Este recurso no puede ser destruido todavía
-            removing: Eliminando...
-            time_ago: "Hace %{time}"
         menu:
           admins: Administradoras acotadas
           custom_redirects: Redirecciones personalizadas
