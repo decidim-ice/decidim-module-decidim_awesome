@@ -429,7 +429,10 @@ cs:
             no_data: Nenalezena žádná Hashcash razítka
             request_path: Cesta požadavku
           ip_addresses:
+            help_html: Tato stránka obsahuje všechny IP adresy, které byly v systému zjištěny podle počtu Hashcash razítek, které vygenerovaly. <br><br> Každé razítko je buď přihlášení nebo registrace uživatelem. Tyto informace můžete použít k detekci podezřelé aktivity.
+            ip_address: IP adresa
             no_data: Nebyly nalezeny žádné IP adresy
+            stamps: Hashcash razítka
         menu:
           admins: Škálovaní administrátoři
           custom_redirects: Vlastní přesměrování
@@ -437,6 +440,7 @@ cs:
           livechat: Live Chat
           maintenance:
             checks: Systémová kompatibilita
+            hashcash: Hashcash razítka
             maintenance: Údržba
             private_data: Soukromá data
           menu_hacks: Vylepšení menu
@@ -518,6 +522,7 @@ cs:
             no_data: Nejsou nalezena žádná soukromá data starší než před %{time_ago}
             not_destroyable: Tento zdroj zatím nelze zničit
             removing: Odstraňování...
+            time_ago: "Před %{time}"
         proposal_custom_fields:
           menu:
             title: Veřejná pole
@@ -671,6 +676,7 @@ cs:
             title: 'Nástroj údržby: %{title}'
             titles:
               checks: Kontroly kompatibility systému
+              hashcash: Hashcash razítka
               private_data: Vymazání soukromých údajů
         awesome_config:
           amendments: Pozměňovací návrhy
