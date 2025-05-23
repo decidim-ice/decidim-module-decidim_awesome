@@ -397,37 +397,6 @@ ca:
           update:
             error: 'Error en actualitzar la redirecció: %{error}'
             success: Redirecció actualitzada correctament
-        maintenance:
-          private_data:
-            component: Espai / Component
-            confirm_delete: Segur que voleu suprimir totes les dades privades d'aquest recurs? Aquesta acció no es pot desfer.
-            delete: Esborrar-ho tot
-            destroying_private_data: Les dades privades de %{title} s'han programat per ser destruïdes. Si us plau, torneu a comprovar d'aquí a uns minuts.
-            done: Fet
-            help_html: |
-              Aquesta eina permet esborrar totes les dades privades d'un espai o component participatiu concret. Aquesta acció és irreversible i eliminarà totes les dades privades de la base de dades.
-              <br><br>
-              <strong>Què es consideren dades privades?</strong>
-              <br>
-              Les dades privades són qualsevol informació que no està disponible públicament i només és accessible per als administradors. Això, de moment, inclou la informació del camps personalitzats privats.
-              <br><br>
-              <strong>Què passa quan suprimeixo dades privades?</strong>
-              <br>
-              Quan suprimiu les dades privades, tota la informació privada de l'espai o component participatiu seleccionat s'eliminarà permanentment de la base de dades. Un registre d'aquesta acció s'emmagatzemarà al sistema amb finalitats d'auditoria (pero no les dades en si).
-              <br><br>
-              <strong>Què passa amb les dades públiques?</strong>
-              <br>
-              Les dades públiques no es veuran afectades per aquesta acció. Només s'eliminaran les dades privades.
-              <br><br>
-              <strong>Hi ha un temps mínim d'espera abans de suprimir les dades privades?</strong>
-              <br>
-              Sí, no podeu suprimir dades privades si l'última actualització va ser fa menys de %{time_ago}. Podeu canviar aquesta configuració al fitxer inicialitzador.
-            items_count: Total afectats
-            last_date: Última actualització
-            no_data: No s'han trobat dades privades més antigues que fa %{time_ago}
-            not_destroyable: Aquest recurs encara no es pot destruir
-            removing: Eliminant...
-            time_ago: "fa %{time}"
         menu:
           admins: Administradores acotades
           custom_redirects: Redireccions personalitzades
