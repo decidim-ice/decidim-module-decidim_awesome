@@ -9,6 +9,7 @@ Compatibility:
 
 Feature:
   - Added HashCash anti-bot mechanism
+  - Fixed multi-tenant crossover in admin accountability
 
 v0.12.1
 -------
