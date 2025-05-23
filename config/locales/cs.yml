@@ -1,4 +1,7 @@
 cs:
+  active_hashcash:
+    submit_filter: Filtr
+    waiting_label: Čekání na ověření...
   activemodel:
     attributes:
       config:
@@ -10,6 +13,9 @@ cs:
         force_authorization_after_login: Vynutit autorizaci po přihlášení/registraci
         force_authorization_help_text: Text nápovědy pro autorizační stránku
         force_authorization_with_any_method: Povolit přístup, pokud je udělen některou z autorizací (ve výchozím nastavení jsou vyžadovány vše)
+        hashcash_login: Povolit ochranu Hashcash bota pro existující uživatele (přihlášení)
+        hashcash_login_bits: Počet bitů pro hashcash algoritmus (přihlášení)
+        hashcash_signup: Povolit ochranu Hashcash bota pro nové uživatele (registrace)
         intergram_auto_no_response: Zpráva, která je odeslána jednu minutu poté, co uživatel odešle svou první zprávu a nebyla obdržena odpověď
         intergram_auto_response: Zpráva, která je odeslána okamžitě poté, co uživatel odešle svou první zprávu
         intergram_chat_id: ID Chatu
@@ -130,7 +136,6 @@ cs:
             sort_orders_enabled: Typy řazeníí povoleny
             voting_cards_box_title: Název hlasovacího pole
             voting_cards_box_title_help: Výchozí hodnota je "Hlasovat pro tento návrh". Použijte "-" pro jeho schování.
-            voting_cards_instructions: Instrukce podpory/nápověda (zrušitelné modální okno)
             voting_cards_instructions_help: Výchozí hodnota je "Přečtěte si pečlivě pravidla voleb, abyste pochopili, jak bude vaše hlasování použito %{organization}""
             voting_cards_show_abstain: Přidat možnost zdržet se hlasování
             voting_cards_show_modal_help: Po kliknutí na podporu zobrazit instrukce/nápovědu
@@ -398,37 +403,6 @@ cs:
           update:
             error: Chyba aktualizace přesměrování! %{error}
             success: Přesměrování úspěšně aktualizováno
-        maintenance:
-          private_data:
-            component: Prostor / komponenta
-            confirm_delete: Opravdu chcete odstranit všechna soukromá data tohoto zdroje? Tuto akci nelze vrátit zpět.
-            delete: Odstranit vše
-            destroying_private_data: Soukromá data pro %{title} jsou nastavena na zničení. Zkontrolujte prosím znovu za několik minut.
-            done: Hotovo
-            help_html: |
-              Tento nástroj umožňuje odstranit všechna soukromá data pro konkrétní participační prostor nebo komponentu. Tato akce je nevratná a odstraní všechna soukromá data z databáze.
-              <br><br>
-              <strong>Co je považováno za soukromá data?</strong>
-              <br>
-              Soukromá data jsou jakékoliv informace, které nejsou veřejně dostupné a jsou přístupné pouze správcům. To v současné době zahrnuje informace o soukromých vlastních polích.
-              <br><br>
-              <strong>Co se stane, když smažu soukromá data?</strong>
-              <br>
-              Když smažete soukromá data, všechny soukromé informace pro vybraný participační prostor nebo součást budou trvale odstraněny z databáze. Protokol této akce bude uložen v systému pro účely auditu.
-              <br><br>
-              <strong>Co se stane s veřejnými daty?</strong>
-              <br>
-              Veřejná data nebudou touto akcí dotčena. Budou odstraněna pouze soukromá data.
-              <br><br>
-              <strong>Je minimální čas počkat před odstraněním soukromých dat?</strong>
-              <br>
-              Ano, nemůžete smazat soukromá data, pokud byla poslední aktualizace menší než před %{time_ago}. Tuto konfiguraci můžete změnit v souboru inicializátoru.
-            items_count: Dotčené celkem
-            last_date: Poslední aktualizace
-            no_data: Nejsou nalezena žádná soukromá data starší než před %{time_ago}
-            not_destroyable: Tento zdroj zatím nelze zničit
-            removing: Odstraňování...
-            time_ago: "Před %{time}"
         menu:
           admins: Škálovaní administrátoři
           custom_redirects: Vlastní přesměrování
@@ -487,6 +461,12 @@ cs:
           verification_modal:
             authorizations_for: Autorizace pro %{user}
             close: Zavřít
+        private_data:
+          private_data:
+            delete: Odstranit vše
+            done: Hotovo
+            last_date: Poslední aktualizace
+            no_data: Nejsou nalezena žádná soukromá data starší než před %{time_ago}
         proposal_custom_fields:
           menu:
             title: Veřejná pole
