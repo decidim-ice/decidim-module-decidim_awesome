@@ -46,16 +46,18 @@ module Decidim
         delegate :current_organization, :current_user, to: :form
 
         def save_configuration!
-          current_config.value = form.to_params
+          current_config.value = form.to_params || {}
           current_config.save
         end
 
         def mark_users_for_autoblock!
+          notify_autoblock = notify_blocked_users
+
           detected_users.find_in_batches do |group|
             group.each do |user|
-              next if user.extended_data["autoblock"]
+              next if user.extended_data["autoblock"] && user.extended_data["notify_autoblock"] == notify_autoblock
 
-              user.update_attribute(:extended_data, (user.extended_data || {}).merge("autoblock" => true)) # rubocop:disable Rails/SkipsModelValidations
+              user.update_attribute(:extended_data, (user.extended_data || {}).merge("autoblock" => true, "notify_autoblock" => notify_autoblock)) # rubocop:disable Rails/SkipsModelValidations
             end
           end
 
@@ -63,6 +65,8 @@ module Decidim
         end
 
         def block_users!
+          message = block_justification_message
+
           detected_users.find_in_batches do |group|
             group.each do |user|
               create_report!(user)
@@ -70,7 +74,7 @@ module Decidim
 
               block_form = Decidim::Admin::BlockUserForm.from_model(user).with_context(current_organization:, current_user:)
               I18n.with_locale(user.locale || current_organization.default_locale || "en") do
-                block_form.justification = translated_attribute(current_config.value["block_justification_message"])
+                block_form.justification = message
               end
               block_form.hide = true
 
@@ -81,6 +85,20 @@ module Decidim
               end
             end
           end
+        end
+
+        def block_justification_message
+          if notify_blocked_users
+            translated_attribute(current_config.value&.dig("block_justification_message"))
+          else
+            form.default_block_justification_message
+          end
+        end
+
+        def notify_blocked_users
+          return if current_config.value.blank?
+
+          current_config.value["notify_blocked_users"]
         end
 
         def create_report!(user)
