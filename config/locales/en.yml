@@ -81,6 +81,7 @@ en:
         weight: Apply weight
       users_autoblocks_config:
         block_justification_message: Block justification message
+        notify_blocked_users: Notify blocked users
         perform_block: Perform users blocking
         threshold: Threshold
   decidim:
@@ -674,6 +675,9 @@ en:
           config_form:
             block_justification_message_help: Justification that will receive the
               detected users in their block notification
+            notify_blocked_users_help: Notify each blocked user. Note that if there
+              are many users to block generating a notification for each one can consume
+              a lot of resources
             perform_block_message_help: Automatically block users who exceed the threshold
             threshold_config_detected_cases: 'Number of cases that reach the threshold:
               %{count}'

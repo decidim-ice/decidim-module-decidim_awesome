@@ -8,15 +8,17 @@ module Decidim
 
         attribute :threshold, Integer
         attribute :block_justification_message, String
+        attribute :notify_blocked_users, Boolean, default: false
         attribute :perform_block, Boolean, default: false
 
         validates :threshold, presence: true
-        validates :block_justification_message, presence: true, length: { minimum: UserBlock::MINIMUM_JUSTIFICATION_LENGTH }, if: ->(form) { form.perform_block }
+        validates :block_justification_message, presence: true, length: { minimum: UserBlock::MINIMUM_JUSTIFICATION_LENGTH }, if: ->(form) { form.perform_block && form.notify_blocked_users }
 
         def to_params
           {
             threshold:,
-            block_justification_message:
+            block_justification_message:,
+            notify_blocked_users:
           }
         end
       end
