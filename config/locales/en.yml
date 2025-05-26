@@ -773,11 +773,12 @@ en:
               type: Rule
               weight: Weight
             new: New rule
-            report_file_no_exists: Report file does not exist. Click on Calculate scores to create it.
             title: Users automatic blocks
           new:
             create: Create
             title: New users automatic block
+          report_file_no_exists: Report file does not exist. Click on Calculate scores
+            to create it.
           update:
             error: Error updating rule! %{error}
             success: Rule updated successfully
