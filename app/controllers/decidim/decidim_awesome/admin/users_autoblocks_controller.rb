@@ -151,6 +151,10 @@ module Decidim
           @current_config ||= OpenStruct.new(AwesomeConfig.find_by(var: :users_autoblocks_config, organization: current_organization)&.value || {})
         end
 
+        def config_exists?
+          AwesomeConfig.exists?(var: :users_autoblocks_config, organization: current_organization)
+        end
+
         def users_autoblock_rule
           rule = current_rules.find { |r| md5(r.to_json) == params[:id] }
           raise ActiveRecord::RecordNotFound if rule.blank?
@@ -170,6 +174,7 @@ module Decidim
 
         def load_calculations
           @scores_counts = {}
+          return unless config_exists?
           return if calculations_blob.blank?
 
           calculations_blob.open do |file|
