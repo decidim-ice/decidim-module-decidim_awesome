@@ -30,8 +30,8 @@ module Decidim
 
           if detected_users_count.positive?
             mark_users_for_autoblock!
-            block_users! if perform_block
             send_notification_to_admins!
+            block_users! if perform_block
           end
 
           broadcast(:ok, detected_users_count, perform_block)
