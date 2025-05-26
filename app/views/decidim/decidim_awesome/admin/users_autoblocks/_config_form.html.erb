@@ -1,13 +1,18 @@
 <div class="form__wrapper gap-0">
-  <%= form.number_field :threshold, class: "mb-6", help_text: t(".threshold_config_help") %>
+  <%= form.number_field :threshold, help_text: t(".threshold_config_help") %>
   <% if @threshold_detected_cases.present? %>
     <span class="help-text"><%= t(".threshold_config_detected_cases", count: @threshold_detected_cases) %></span>
   <% end %>
 </div>
-<div class="form__wrapper gap-0 hidden" data-justification-message>
-  <%= form.text_field :block_justification_message, class: "mb-6", required: true, help_text: t(".block_justification_message_help") %>
-</div>
 
 <div class="form__wrapper gap-0">
-  <%= form.check_box :perform_block, class: "mb-6", help_text: t(".perform_block_message_help") %>
+  <%= form.check_box :perform_block, help_text: t(".perform_block_message_help") %>
+</div>
+
+<div class="form__wrapper gap-0 hidden" data-notify-users>
+  <%= form.check_box :notify_blocked_users, help_text: t(".notify_blocked_users_help") %>
+</div>
+
+<div class="form__wrapper gap-0 hidden" data-justification-message>
+  <%= form.text_field :block_justification_message, required: true, help_text: t(".block_justification_message_help") %>
 </div>
