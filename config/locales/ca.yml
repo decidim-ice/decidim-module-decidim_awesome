@@ -1,4 +1,7 @@
 ca:
+  active_hashcash:
+    submit_filter: Filtra
+    waiting_label: Esperant verificació...
   activemodel:
     attributes:
       config:
@@ -10,6 +13,10 @@ ca:
         force_authorization_after_login: Forçar autorització després d'iniciat sessió/registre
         force_authorization_help_text: Text d'ajuda per la pàgina d'autorització
         force_authorization_with_any_method: Permetre l'accés si es concedeix alguna de les autoritzacions (per defecte, totes són necessàries)
+        hashcash_login: Activa la protecció HashCash antibot per usuaris existents (inici sessió)
+        hashcash_login_bits: Nombre de bits per l'algoritme Hashcash (inici sessió)
+        hashcash_signup: Activa la protecció HashCash antibot per usuaris existents (registre)
+        hashcash_signup_bits: Nombre de bits per l'algoritme Hashcash (registre)
         intergram_auto_no_response: Un missatge que s'envia un minut després que la usuària hagi enviat el seu primer missatge i no s'hagi rebut cap resposta
         intergram_auto_response: Un missatge que s'envia immediatament després que la usuària enviï el seu primer missatge
         intergram_chat_id: ID de xat
@@ -130,6 +137,7 @@ ca:
             sort_orders_enabled: Opcions d'ordenació actives
             voting_cards_box_title: Títol per la cabina de votació
             voting_cards_box_title_help: L'opció per defecte és 'Votar a aquesta proposta'. Utilitzeu '-' per amagar-la.
+            voting_cards_instructions: Instruccions d'ajuda en el suport/votació (finestra modal que es pot tancar)
             voting_cards_instructions_help: L'opció per defecte és 'Llegeix les normes de la votació amb atenció per entendre com s'utilitzarà el teu vot per %{organization}"
             voting_cards_show_abstain: Afegeix l'opció d'abstenció
             voting_cards_show_modal_help: Mostra la finestra modal d'instruccions/ajuda quan es faci clic al suport
@@ -263,6 +271,15 @@ ca:
               drag_and_drop_supported: Quan es pugin imatges, es pot fer a través del mètode de "arrossegar i deixar anar". Les imatges seran pujades al servidor i inserides com recursos externs (no es fa servir codificació en línia base64).
               force_authorization_after_login: 'Si està habilitat, les usuàries seran redireccionades a la pàgina d''autorització després de l''inici de sessió o registre si algunes de les autoritzacions especificades no són concedides. Això és útil si voleu forçar les usuàries a que es verifiquin a través d''una autorització específica abans que puguin iniciar sessió en qualsevol moment (per exemple: per prevenir spam).'
               force_authorization_help_text: Afegeix un text personalitzat per explicar per què cal l'autorització. Assegureu-vos també d'afegir un mode de contacte en cas que les usuàries necessitin ajuda.
+              hashcash_i18n_key: 'Podeu personalitzar el text del botó que es mostra als usuaris a les pàgines d''iniciar sessió/registre amb la clau i18n %{key}'
+              hashcash_login: |
+                Protegeix les aplicacions Rails contra bots i atacs de força bruta sense molestar els humans.
+                Hashcash és un sistema de prova de treball que requereix que els usuaris resolguin un trencaclosques computacional (realitzat automàticament pel navegador) abans de poder registrar-se.
+              hashcash_login_bits: Aquest paràmetre defineix el nombre de bits que l'algoritme Hashcash utilitzarà per generar la prova de treball. Es recomana utilitzar un valor entre 16 (fàcil) i 30 (extremadament difícil) bits. El valor per defecte per als formularis d'inici de sessió és %{bits} bits.
+              hashcash_signup: |
+                Protegeix les aplicacions Rails contra bots i atacs de força bruta sense molestar els humans.
+                Hashcash és un sistema de prova de treball que requereix que els usuaris resolguin un trencaclosques computacional (realitzat automàticament pel navegador) abans de poder registrar-se.
+              hashcash_signup_bits: Aquest paràmetre defineix el nombre de bits que l'algoritme Hashcash utilitzarà per generar la prova de treball. Es recomana utilitzar un valor entre 16 (fàcil) i 30 (extremadament difícil) bits. El valor per defecte per als formularis de registre és %{bits} bits.
               intergram_about: Intergram utilitza el Telegram Messenger per gestionar un widget de xat en viu de suport incrustat a la part inferior de la pàgina.
               intergram_config: 'Convida a la <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> al teu grup o comença un xat amb ella directament. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               original_editor_override: Desde la versió 0.26, és possible (per administradors només) pujar imatges als editors de text enriquit. Per tant, les opcions d'imatges disponibles en aquesta pàgina només afecten a la part pública de la web (les administradores sempre ho tenen activat).
@@ -397,6 +414,25 @@ ca:
           update:
             error: 'Error en actualitzar la redirecció: %{error}'
             success: Redirecció actualitzada correctament
+        hashcash:
+          filters:
+            ip_addresses: Veure les adreces IP
+            stamps: Veure els segells de Hashcash
+          index:
+            bits: Bits
+            created_at: Creada el
+            help_html: |
+              Aquesta pàgina mostra els segells Hashcash que s'han detectat al sistema. Hashcash és un sistema de prova de treball que requereix que els usuaris resolguin un trencaclosques computacional (realitzat automàticament pel navegador) abans de poder registrar-se.
+              <br><br>
+              Cada entrada d'aquesta llista representa un segell Hashcash que ha estat generat per un usuari cada vegada que s'ha registrat o ha iniciat la sessió.
+            ip_address: Adreça IP
+            no_data: No s'han trobat segells de Hashcash
+            request_path: Ruta de la sol·licitud
+          ip_addresses:
+            help_html: Aquesta pàgina enumera totes les adreces IP que s'han detectat al sistema, ordenades pel nombre de segells Hashcash que han generat. <br><br> Cada segell és una acció d'inici de sessió o de registre per part d'un usuari. Podeu utilitzar aquesta informació per detectar activitats sospitoses.
+            ip_address: Adreça IP
+            no_data: No s'han trobat adreces IP
+            stamps: Segells hashcash
         menu:
           admins: Administradores acotades
           custom_redirects: Redireccions personalitzades
@@ -404,6 +440,7 @@ ca:
           livechat: Xat en directe
           maintenance:
             checks: Compatibilitat de sistema
+            hashcash: Segells hashcash
             maintenance: Manteniment
             private_data: Dades privades
           menu_hacks: Retocs al menú
@@ -455,6 +492,37 @@ ca:
           verification_modal:
             authorizations_for: Autoritzacions per a %{user}
             close: Tanca
+        private_data:
+          private_data:
+            component: Espai / Component
+            confirm_delete: Segur que voleu suprimir totes les dades privades d'aquest recurs? Aquesta acció no es pot desfer.
+            delete: Esborrar-ho tot
+            destroying: Les dades privades de %{title} s'han programat per ser destruïdes. Si us plau, torneu a comprovar d'aquí a uns minuts.
+            done: Fet
+            help_html: |
+              Aquesta eina permet esborrar totes les dades privades d'un espai o component participatiu concret. Aquesta acció és irreversible i eliminarà totes les dades privades de la base de dades.
+              <br><br>
+              <strong>Què es consideren dades privades?</strong>
+              <br>
+              Les dades privades són qualsevol informació que no està disponible públicament i només és accessible per als administradors. Això, de moment, inclou la informació del camps personalitzats privats.
+              <br><br>
+              <strong>Què passa quan suprimeixo dades privades?</strong>
+              <br>
+              Quan suprimiu les dades privades, tota la informació privada de l'espai o component participatiu seleccionat s'eliminarà permanentment de la base de dades. Un registre d'aquesta acció s'emmagatzemarà al sistema amb finalitats d'auditoria (pero no les dades en si).
+              <br><br>
+              <strong>Què passa amb les dades públiques?</strong>
+              <br>
+              Les dades públiques no es veuran afectades per aquesta acció. Només s'eliminaran les dades privades.
+              <br><br>
+              <strong>Hi ha un temps mínim d'espera abans de suprimir les dades privades?</strong>
+              <br>
+              Sí, no podeu suprimir dades privades si l'última actualització va ser fa menys de %{time_ago}. Podeu canviar aquesta configuració al fitxer inicialitzador.
+            items_count: Total afectats
+            last_date: Última actualització
+            no_data: No s'han trobat dades privades més antigues que fa %{time_ago}
+            not_destroyable: Aquest recurs encara no es pot destruir
+            removing: Eliminant...
+            time_ago: "fa %{time}"
         proposal_custom_fields:
           menu:
             title: Camps públics
@@ -608,6 +676,7 @@ ca:
             title: 'Eines de manteniment: %{title}'
             titles:
               checks: Anàlisi de compatibilitat amb el sistema
+              hashcash: Segells hashcash
               private_data: Neteja de dades privades
         awesome_config:
           amendments: Esmenes
