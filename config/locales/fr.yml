@@ -399,6 +399,37 @@ fr:
           update:
             error: Erreur lors de la mise à jour de la redirection! %{error}
             success: Redirection mise à jour avec succès
+        maintenance:
+          private_data:
+            component: Espace / Fonctionnalité
+            confirm_delete: Êtes-vous sûr de vouloir supprimer toutes les données privées pour cette ressource ? Cette action est irréversible.
+            delete: Tout supprimer
+            destroying_private_data: Les données privées pour %{title} sont sur le point d'être effacées. Veuillez vérifier à nouveau dans quelques minutes.
+            done: Terminé
+            help_html: |
+              Cet outil vous permet de supprimer toutes les données privées d'un espace ou d'une fonctionnalité participatif spécifique. Cette action est irréversible et supprimera toutes les données privées de la base de données.
+              <br><br>
+              <strong>Qu'est-ce qui est considéré comme des données privées ?</strong>
+              <br>
+              Les données privées sont toutes les informations qui ne sont pas accessibles au public et qui sont uniquement accessibles aux administrateurs. Cela inclut, pour le moment, les informations des champs personnalisés privés.
+              <br><br>
+              <strong>Que se passe-t-il lorsque je supprime des données privées ?</strong>
+              <br>
+              Lorsque vous supprimez des données privées, toutes les informations privées de l'espace ou du composant participatif sélectionné seront définitivement supprimées de la base de données. Un journal de cette action sera stocké dans le système à des fins d'audit.
+              <br><br>
+              <strong>Qu'advient-il des données publiques ?</strong>
+              <br>
+              Les données publiques ne seront pas affectées par cette action. Seules les données privées seront supprimées.
+              <br><br>
+              <strong>Y a-t-il un délai minimum à attendre avant de supprimer des données privées ?</strong>
+              <br>
+              Oui, vous ne pouvez pas supprimer des données privées si la dernière mise à jour date de moins de %{time_ago}. Vous pouvez modifier cette configuration dans le fichier d'initialisation.
+            items_count: Total affecté
+            last_date: Dernière mise à jour
+            no_data: Aucune donnée privée plus ancienne que %{time_ago}
+            not_destroyable: Cette ressource ne peut pas encore être supprimée
+            removing: Suppression en cours...
+            time_ago: "Il y a %{time}"
         menu:
           admins: Administrateurs de secteur
           custom_redirects: Redirections personnalisées
