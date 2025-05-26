@@ -451,6 +451,36 @@ de:
           verification_modal:
             authorizations_for: Autorisierungen für %{user}
             close: Schliessen
+        private_data:
+          private_data:
+            component: Bereich / Komponente
+            confirm_delete: Sind Sie sicher, dass Sie alle privaten Daten für diese Ressource löschen möchten? Dies kann nicht rückgängig gemacht werden.
+            delete: Alle löschen
+            destroying: Die privaten Daten für %{title} werden gelöscht. Bitte versuchen Sie es in ein paar Minuten noch einmal.
+            done: Erledigt
+            help_html: |
+              Mit diesem Tool können Sie alle privaten Daten für einen bestimmten Beteiligungsbereich oder eine bestimmte Komponente löschen. Dieser Vorgang ist irreversibel und entfernt alle privaten Daten aus der Datenbank.
+              <br><br>
+              <strong> Was sind private Daten?</strong>
+              <br>
+              Private Daten sind alle Informationen, die nicht öffentlich verfügbar sind und nur für Administratoren zugänglich sind. Dazu gehören derzeit auch Informationen aus privaten benutzerdefinierten Feldern.
+              <br><br>
+              <strong>Was passiert, wenn ich private Daten lösche?</strong>
+              <br>
+              Wenn Sie private Daten löschen, werden alle privaten Informationen für den ausgewählten Mitwirkungsbereich oder die ausgewählte Komponente dauerhaft aus der Datenbank entfernt. Zu Prüfzwecken wird ein Protokoll dieser Aktion im System gespeichert.
+              <br><br>
+              <strong>Was geschieht mit öffentlichen Daten?</strong>
+              <br> Öffentliche Daten sind von dieser Aktion nicht betroffen. Es werden nur private Daten gelöscht.
+               <br><br>
+              <strong>Gibt es eine Mindestwartezeit vor dem Löschen privater Daten?</strong>
+              <br>
+              Ja, Sie können keine privaten Daten löschen, wenn die letzte Aktualisierung weniger als %{time_ago} zurückliegt. Sie können diese Konfiguration in der Initialisierungsdatei ändern.
+            items_count: Betroffene Gesamtmenge
+            last_date: Letzte Aktualisierung
+            no_data: Es wurden keine privaten Daten gefunden, die älter sind als %{time_ago}
+            not_destroyable: Diese Ressource kann nicht gelöscht werden
+            removing: Entfernen...
+            time_ago: "vor %{time}"
         proposal_custom_fields:
           menu:
             title: Öffentlich sichtbare Felder
