@@ -86,12 +86,14 @@ module Decidim
         def create_report!(user)
           moderation = UserModeration.find_or_create_by!(user:)
 
-          UserReport.create!(
-            moderation:,
-            user:,
-            reason: "does_not_belong",
-            details: "Autoblock"
-          )
+          unless UserReport.exists?(moderation:, user:)
+            UserReport.create!(
+              moderation:,
+              user:,
+              reason: "does_not_belong",
+              details: "Autoblock"
+            )
+          end
 
           moderation.update!(report_count: moderation.report_count + 1)
         end
