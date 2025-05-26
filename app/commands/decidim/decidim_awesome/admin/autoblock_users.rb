@@ -101,7 +101,7 @@ module Decidim
         def check_user_validation!(user)
           return if user.valid?
 
-          user.nickname = Decidim::User.nicknamize("user_blocked")
+          user.nickname = Decidim::User.nicknamize("user_blocked_#{SecureRandom.alphanumeric(8)}", current_organization.id)
 
           user.save!
         end
