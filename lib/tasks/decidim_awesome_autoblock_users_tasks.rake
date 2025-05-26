@@ -22,7 +22,7 @@ namespace :decidim_decidim_awesome do
         config_data = OpenStruct.new(current_config.value || {})
         config_form = Decidim::DecidimAwesome::Admin::UsersAutoblocksConfigForm.from_model(config_data).with_context(current_organization:, current_user:)
         config_form.perform_block = perform_block
-        config_form.block_justification_message = "Account blocked automatically" if config_form.block_justification_message.blank?
+        config_form.block_justification_message = config_form.default_block_justification_message if config_form.block_justification_message.blank?
 
         Decidim::DecidimAwesome::Admin::AutoblockUsers.call(config_form) do
           on(:ok) do |count, block_performed|
