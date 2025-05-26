@@ -6,7 +6,7 @@ module Decidim
       extend ActiveSupport::Concern
 
       def notify(user, justification)
-        return if user.extended_data["autoblock"]
+        return if user.extended_data["autoblock"] && !user.extended_data["notify_autoblock"]
 
         with_user(user) do
           @user = user
