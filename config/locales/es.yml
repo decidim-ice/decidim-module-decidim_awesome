@@ -421,6 +421,18 @@ es:
           index:
             bits: Bits
             created_at: Creado el
+            help_html: |
+              Esta página muestra los sellos de Hashcash que han sido detectados en el sistema. Hashcash es un sistema de prueba de trabajo que requiere que los usuarios resuelvan un rompecabezas computacional (realizado automáticamente por el navegador) antes de que puedan registrarse.
+              <br><br>
+              Cada entrada en esta lista representa un sello Hashcash que ha sido generado por un usuario cada vez que se ha registrado o conectado.
+            ip_address: Dirección IP
+            no_data: No se encontraron sellos Hashcash
+            request_path: Ruta solicitud
+          ip_addresses:
+            help_html: This page list all the IP addresses that have been detected in the system ordered by the number of Hashcash stamps they have generated. <br><br> Each stamp is either a login or a sign up action by a user. You can use this information to detect suspicious activity.
+            ip_address: Dirección IP
+            no_data: No se encontraron direcciones IP
+            stamps: Sellos Hashcash
         menu:
           admins: Administradoras acotadas
           custom_redirects: Redirecciones personalizadas
@@ -428,6 +440,7 @@ es:
           livechat: Chat en vivo
           maintenance:
             checks: Compatibilidad del sistema
+            hashcash: Sellos Hashcash
             maintenance: Mantenimiento
             private_data: Datos privados
           menu_hacks: Ajustes en el menú
@@ -479,6 +492,37 @@ es:
           verification_modal:
             authorizations_for: Autorizaciones para %{user}
             close: Cerrar
+        private_data:
+          private_data:
+            component: Espacio / Componente
+            confirm_delete: '¿Está seguro que desea eliminar todos los datos privados de este recurso? Esta acción no se puede deshacer.'
+            delete: Eliminar todo
+            destroying: Los datos privados para %{title} serán destruidos en breve. Por favor, compruébalo de nuevo en unos minutos.
+            done: Hecho
+            help_html: |
+              Esta herramienta permite eliminar todos los datos privados de un determinado espacio participativo o componente. Esta acción es irreverible y eliminará todos los datos privados de la base de datos.
+              <br><br>
+              <strong>¿Qué se considera información privada?</strong>
+              <br>
+              Los datos privados son cualquier información que no está disponible públicamente y sólo es accesible a los administradores. Esto, en este momento, incluye información privada de los campos personalizados.
+              <br><br>
+              <strong>¿Qué ocurre cuando elimino datos privados?</strong>
+              <br>
+              Al borrar datos privados, toda la información privada del espacio o componente participativo seleccionado será eliminada permanentemente de la base de datos. Un registro de esta acción se almacenará en el sistema para fines de auditoría (pero no los datos en si).
+              <br><br>
+              <strong>¿Qué pasa con los datos públicos?</strong>
+              <br>
+              datos públicos no se verán afectados por esta acción. Sólo los datos privados serán eliminados.
+              <br><br>
+              <strong>¿Hay un tiempo mínimo para esperar antes de eliminar datos privados?</strong>
+              <br>
+              Sí, no puede eliminar datos privados si la última actualización fue menor que la %{time_ago}. Puede cambiar esta configuración en un archivo inicializador.
+            items_count: Total afectados
+            last_date: Última actualización
+            no_data: No se han encontrado datos privados anteriores a %{time_ago}
+            not_destroyable: Este recurso no puede ser destruido todavía
+            removing: Eliminando...
+            time_ago: "Hace %{time}"
         proposal_custom_fields:
           menu:
             title: Campos públicos
@@ -632,6 +676,7 @@ es:
             title: 'Herramientas de mantenimiento: %{title}'
             titles:
               checks: Análisis de compatibilidad del sistema
+              hashcash: Sellos Hashcash
               private_data: Limpieza de datos privados
         awesome_config:
           amendments: Enmiendas
