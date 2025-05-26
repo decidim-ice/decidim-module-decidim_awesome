@@ -126,7 +126,7 @@ module Decidim
           if calculations_blob.present?
             redirect_to Rails.application.routes.url_helpers.rails_blob_url(calculations_blob, only_path: true)
           else
-            flash[:error] = t("decidim.decidim.decidim_awesome.admin.users_autoblocks.report_file_no_exists")
+            flash[:error] = t("decidim.decidim_awesome.admin.users_autoblocks.report_file_no_exists")
             redirect_to decidim_admin_decidim_awesome.users_autoblocks_path
           end
         end
