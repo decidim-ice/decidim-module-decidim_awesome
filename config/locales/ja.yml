@@ -429,7 +429,7 @@ ja:
             last_date: 最終更新日
             no_data: '%{time_ago} 前より古いプライベートデータは見つかりませんでした'
             not_destroyable: このリソースはまだ破棄できません
-            removing: 削除中...
+            removing: 削除中…
             time_ago: "%{time} 前"
         menu:
           admins: スコープ付き管理者
