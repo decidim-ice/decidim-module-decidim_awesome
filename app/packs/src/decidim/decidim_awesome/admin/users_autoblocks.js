@@ -1,36 +1,46 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const configPerformBlockCheckBox = document.getElementById("users_autoblocks_config_perform_block");
-  const configNotifyUsersCheckBox = document.getElementById("users_autoblocks_config_notify_blocked_users");
+  const performBlockSection = document.querySelector("[data-perform-block]");
+  const notifyUsersSection = document.querySelector("[data-notify-users]");
+  const justificationMessageSection = document.querySelector("[data-justification-message]");
 
-  document.querySelector("[data-justification-message] input").required = false;
+  const configPerformBlockCheckBox = document.getElementById("users_autoblocks_config_perform_block");
+  const configAllowTaskCheckBox = document.getElementById("users_autoblocks_config_allow_performing_block_from_a_task");
+  const configNotifyUsersCheckBox = document.getElementById("users_autoblocks_config_notify_blocked_users");
+  const submitButton = document.querySelector("[data-perform-block-message]");
+
+  const reviewJustificationMessageSection = () => {
+    if (!notifyUsersSection.classList.contains("hidden") && configNotifyUsersCheckBox.checked) {
+      justificationMessageSection.classList.remove("hidden");
+      justificationMessageSection.querySelector("input").required = true;
+    } else {
+      justificationMessageSection.classList.add("hidden");
+      justificationMessageSection.querySelector("input").required = false;
+    }
+  };
+
+  reviewJustificationMessageSection();
+
+  performBlockSection.addEventListener("change", () => {
+    if (configPerformBlockCheckBox.checked || configAllowTaskCheckBox.checked) {
+      notifyUsersSection.classList.remove("hidden");
+    } else {
+      notifyUsersSection.classList.add("hidden");
+    }
+    reviewJustificationMessageSection();
+  });
 
   configPerformBlockCheckBox.addEventListener("change", (event) => {
-    const form = event.currentTarget.form;
-    const submitButton = form.querySelector("[data-perform-block-message]");
     const messages = JSON.parse(submitButton.dataset.performBlockMessage);
-    const notifyUsers = form.querySelector("[data-notify-users]");
-
     submitButton.textContent = messages[event.target.checked];
 
     if (event.target.checked) {
       submitButton.setAttribute("data-confirm", submitButton.dataset.confirmMessage);
-      notifyUsers.classList.remove("hidden");
     } else {
       submitButton.removeAttribute("data-confirm");
-      notifyUsers.classList.add("hidden");
     }
   });
 
   configNotifyUsersCheckBox.addEventListener("change", (event) => {
-    const form = event.currentTarget.form;
-    const justificationMessage = form.querySelector("[data-justification-message]");
-
-    if (event.target.checked) {
-      justificationMessage.classList.remove("hidden");
-      justificationMessage.querySelector("input").required = true;
-    } else {
-      justificationMessage.classList.add("hidden");
-      justificationMessage.querySelector("input").required = false;
-    }
+    reviewJustificationMessageSection();
   });
 });
