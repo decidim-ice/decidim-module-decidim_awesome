@@ -130,6 +130,7 @@ ja:
             sort_orders_enabled: 有効なソート種別
             voting_cards_box_title: 投票箱のタイトル
             voting_cards_box_title_help: デフォルトは「この提案に投票する」です。非表示にするには「-」を使用してください。
+            voting_cards_instructions: 手順/ヘルプ (解除可能なモーダルウィンドウ) をサポート
             voting_cards_instructions_help: デフォルトは " %{organization} がどのように投票を使用するか理解するため、選挙ルールをよくお読みください" です
             voting_cards_show_abstain: 棄権オプションを追加
             voting_cards_show_modal_help: サポートをクリックしたときに手順/ヘルプ モーダルを表示する
