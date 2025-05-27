@@ -23,11 +23,17 @@ module Decidim
             block_justification_message:,
             notify_blocked_users:,
             allow_performing_block_from_a_task:
-          }
+          }.merge(current_admin_params)
         end
 
         def default_block_justification_message
           DEFAULT_BLOCK_JUSTIFICATION_MESSAGE
+        end
+
+        def current_admin_params
+          return {} unless allow_performing_block_from_a_task
+
+          { admin_id: current_user.id }
         end
       end
     end
