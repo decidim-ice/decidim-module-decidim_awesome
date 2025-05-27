@@ -12,6 +12,7 @@ module Decidim
         attribute :block_justification_message, String
         attribute :notify_blocked_users, Boolean, default: false
         attribute :perform_block, Boolean, default: false
+        attribute :allow_performing_block_from_a_task, Boolean, default: false
 
         validates :threshold, presence: true
         validates :block_justification_message, presence: true, length: { minimum: UserBlock::MINIMUM_JUSTIFICATION_LENGTH }, if: ->(form) { form.perform_block && form.notify_blocked_users }
@@ -20,7 +21,8 @@ module Decidim
           {
             threshold:,
             block_justification_message:,
-            notify_blocked_users:
+            notify_blocked_users:,
+            allow_performing_block_from_a_task:
           }
         end
 

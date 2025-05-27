@@ -80,6 +80,8 @@ en:
         type: Rule
         weight: Apply weight
       users_autoblocks_config:
+        allow_performing_block_from_a_task: Allow to perform the configured users
+          block from a task
         block_justification_message: Block justification message
         notify_blocked_users: Notify blocked users
         perform_block: Perform users blocking
@@ -673,6 +675,9 @@ en:
               zero: Scores calculated successfully. No users have been found who have
                 a sufficient score to be blocked automatically
           config_form:
+            allow_performing_block_from_a_task_help: A line must be added to your
+              server to perform the task. To do this schedule a `bundle exec rake
+              decidim_decidim_awesome:autoblock_users:run_scheduled_block` periodically.
             block_justification_message_help: Justification that will receive the
               detected users in their block notification
             notify_blocked_users_help: Notify each blocked user. Note that if there
