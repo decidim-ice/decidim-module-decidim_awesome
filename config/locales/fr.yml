@@ -130,6 +130,7 @@ fr:
             sort_orders_enabled: Types de tri activés
             voting_cards_box_title: Titre pour le boîtier de vote
             voting_cards_box_title_help: La valeur par défaut est "Vote sur cette proposition". Utilisez "-" pour la masquer.
+            voting_cards_instructions: Instructions de soutien/aide pour le vote (fenêtre modale révocable)
             voting_cards_instructions_help: La valeur par défaut est "Veuillez lire attentivement les règles électorales pour comprendre comment votre vote sera utilisé par %{organization}"
             voting_cards_show_abstain: Ajouter l'option de s'abstenir
             voting_cards_show_modal_help: Afficher une fenêtre modale d'instructions/d'aide lorsque l'on clique sur le support
