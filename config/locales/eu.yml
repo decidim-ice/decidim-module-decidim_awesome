@@ -398,37 +398,6 @@ eu:
           update:
             error: Birbideratzea eguneratzean errorea! %{error}
             success: Birbideratzea ongi eguneratu da
-        maintenance:
-          private_data:
-            component: Espazioa / Osagaia
-            confirm_delete: Ziur zaude baliabide honen datu pribatu guztiak ezabatu nahi dituzula? Honek ezin da desegin.
-            delete: Dena ezabatu
-            destroying_private_data: Baliabiderako %{title} datu pribatuak suntsitzeko prestatuta daude. Mesedez, egiaztatu berriro minutu batzuetan.
-            done: Eginda
-            help_html: |
-              Tresna honen bidez, datu pribatu guztiak ezaba daitezke parte hartzeko gune edo osagai jakin baterako. Ekintza hau atzeraezina da eta datu pribatu guztiak datu-basetik ezabatuko ditu.
-              <br><br>
-              <strong>Zer jotzen da datu pribatutzat?</strong>
-              <br>
-              Datu pribatuak informazio publikoa ez den eta administratzaileentzat bakarrik den informazioa dira. Honek, oraingoz, eremu pribatuetako informazioa barne hartzen du.
-              <br><br>
-              <strong>Zer gertatzen da datu pribatuak ezabatzen ditudanean?</strong>
-              <br>
-              Datu pribatuak ezabatzen direnean, hautatutako espazio edo osagai parte-hartzailerako informazio pribatu guztia datu-basetik kenduko da behin betiko. Ekintza horren erregistro bat sisteman gordeko da, ikuskapen-helburuetarako.
-              <br><br>
-              <strong>Zer gertatzen da datu publikoekin?</strong>
-              <br>
-              Ekintza honek ez du datu publikoetan eraginik izango. Datu pribatuak bakarrik ezabatuko dira.
-              <br><br>
-              <strong>Itxaron behar duzu datu pribatuak ezabatu aurretik?</strong>
-              <br>
-              Bai, ezin dira datu pribatuak ezabatu azken eguneratzea %{time_ago} baino txikiagoa bada. Konfigurazio hau alda dezakezu inizializatzaileen fitxategian.
-            items_count: Erlazionatutako guztira
-            last_date: Azken eguneraketa
-            no_data: Ez da aurkitu %{time_ago} baino zaharragoak diren datu pribaturik
-            not_destroyable: Baliabide hau ezin da oraindik suntsitu
-            removing: Ezabatzen...
-            time_ago: "%{time} lehenago"
         menu:
           admins: Esparruaren administrataileak
           custom_redirects: Birbideratze pertsonalizatuak
@@ -487,6 +456,37 @@ eu:
           verification_modal:
             authorizations_for: '%{user}-rako baimenak'
             close: Itxi
+        private_data:
+          private_data:
+            component: Espazioa / Osagaia
+            confirm_delete: Ziur zaude baliabide honen datu pribatu guztiak ezabatu nahi dituzula? Honek ezin da desegin.
+            delete: Dena ezabatu
+            destroying: Baliabiderako %{title} datu pribatuak suntsitzeko prestatuta daude. Mesedez, egiaztatu berriro minutu batzuetan.
+            done: Eginda
+            help_html: |
+              Tresna honen bidez, datu pribatu guztiak ezaba daitezke parte hartzeko gune edo osagai jakin baterako. Ekintza hau atzeraezina da eta datu pribatu guztiak datu-basetik ezabatuko ditu.
+              <br><br>
+              <strong>Zer jotzen da datu pribatutzat?</strong>
+              <br>
+              Datu pribatuak informazio publikoa ez den eta administratzaileentzat bakarrik den informazioa dira. Honek, oraingoz, eremu pribatuetako informazioa barne hartzen du.
+              <br><br>
+              <strong>Zer gertatzen da datu pribatuak ezabatzen ditudanean?</strong>
+              <br>
+              Datu pribatuak ezabatzen direnean, hautatutako espazio edo osagai parte-hartzailerako informazio pribatu guztia datu-basetik kenduko da behin betiko. Ekintza horren erregistro bat sisteman gordeko da, ikuskapen-helburuetarako.
+              <br><br>
+              <strong>Zer gertatzen da datu publikoekin?</strong>
+              <br>
+              Ekintza honek ez du datu publikoetan eraginik izango. Datu pribatuak bakarrik ezabatuko dira.
+              <br><br>
+              <strong>Itxaron behar duzu datu pribatuak ezabatu aurretik?</strong>
+              <br>
+              Bai, ezin dira datu pribatuak ezabatu azken eguneratzea %{time_ago} baino txikiagoa bada. Konfigurazio hau alda dezakezu inizializatzaileen fitxategian.
+            items_count: Erlazionatutako guztira
+            last_date: Azken eguneraketa
+            no_data: Ez da aurkitu %{time_ago} baino zaharragoak diren datu pribaturik
+            not_destroyable: Baliabide hau ezin da oraindik suntsitu
+            removing: Ezabatzen...
+            time_ago: "%{time} lehenago"
         proposal_custom_fields:
           menu:
             title: Eremu publikoak
