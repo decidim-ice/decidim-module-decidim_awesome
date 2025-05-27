@@ -35,7 +35,7 @@ describe "Admin manages users autoblocks feature" do
   context "when no rules exist" do
     it "hides the scores calculation form" do
       expect(page).to have_content("Users automatic blocks")
-      expect(page).not_to have_content("Calculate scores")
+      expect(page).to have_no_content("Calculate scores")
     end
   end
 
@@ -68,7 +68,7 @@ describe "Admin manages users autoblocks feature" do
     context "when performing the scores calculation" do
       before do
         fill_in "Threshold", with: "5"
-        click_button "Calculate scores"
+        click_on "Calculate scores"
       end
 
       it "displays a message with found users count" do
@@ -88,7 +88,7 @@ describe "Admin manages users autoblocks feature" do
 
       it "displays a mandatory field with block justification message" do
         expect(page).to have_field(name: "users_autoblocks_config[block_justification_message]", visible: :visible)
-        accept_confirm { click_button "Detect and block users" }
+        accept_confirm { click_on "Detect and block users" }
         within "label[for='users_autoblocks_config_block_justification_message']" do
           expect(page).to have_content("There is an error in this field.")
         end
@@ -104,12 +104,12 @@ describe "Admin manages users autoblocks feature" do
         fill_in "Threshold", with: "5"
         check "Perform users blocking"
         fill_in "Block justification message", with: "Your account has been blocked due to suspicious activity"
-        accept_confirm { click_button "Detect and block users" }
+        accept_confirm { click_on "Detect and block users" }
       end
 
       context "with about user blank rule" do
         it "detects and blocks the user" do
-          expect(page).not_to have_content "Validation failed"
+          expect(page).to have_no_content "Validation failed"
 
           expect(Decidim::User.blocked.count).to eq(1)
           expect(user_with_blank_about.reload).to be_blocked
@@ -122,7 +122,7 @@ describe "Admin manages users autoblocks feature" do
         fill_in "Threshold", with: "5"
         check "Perform users blocking"
         fill_in "Block justification message", with: "Your account has been blocked due to suspicious activity"
-        accept_confirm { click_button "Detect and block users" }
+        accept_confirm { click_on "Detect and block users" }
       end
 
       context "with about user blank rule" do
