@@ -5,15 +5,15 @@
   <% end %>
 </div>
 
-<div class="form__wrapper gap-0">
+<div class="form__wrapper gap-0" data-perform-block>
   <%= form.check_box :perform_block, help_text: t(".perform_block_message_help") %>
-</div>
-
-<div class="form__wrapper gap-0 hidden" data-notify-users>
-  <%= form.check_box :notify_blocked_users, help_text: t(".notify_blocked_users_help") %>
   <%= form.check_box :allow_performing_block_from_a_task, help_text: t(".allow_performing_block_from_a_task_help") %>
 </div>
 
-<div class="form__wrapper gap-0 hidden" data-justification-message>
+<div class="form__wrapper gap-0<%= " hidden" unless @config_form.perform_block || @config_form.allow_performing_block_from_a_task %>" data-notify-users>
+  <%= form.check_box :notify_blocked_users, help_text: t(".notify_blocked_users_help") %>
+</div>
+
+<div class="form__wrapper gap-0<%= " hidden" unless @config_form.notify_blocked_users %>" data-justification-message>
   <%= form.text_field :block_justification_message, required: true, help_text: t(".block_justification_message_help") %>
 </div>
