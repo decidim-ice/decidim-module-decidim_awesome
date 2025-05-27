@@ -130,6 +130,7 @@ de:
             sort_orders_enabled: Aktivierte Sortierarten
             voting_cards_box_title: Titel für das Abstimmungsfeld
             voting_cards_box_title_help: Standardmässig "Für diesen Vorschlag abstimmen". Verwenden Sie "-", um den Text auszublenden.
+            voting_cards_instructions: Hilfe/Anleitung zum Unterstützen (schliessbares Pop-Up-Fenster)
             voting_cards_instructions_help: Standardmässig "Bitte lesen Sie die Wahlregeln sorgfältig durch, um zu verstehen, wie Ihre Stimme von %{organization} verwendet wird"
             voting_cards_show_abstain: Enthaltungsmöglichkeit hinzufügen
             voting_cards_show_modal_help: Zeige die Hilfe/Anleitung zum Unterstützen an, wenn "Hilfe" angewählt wird
