@@ -1,4 +1,5 @@
 <div class="form-defaults">
+  <%= callout if defined?(callout) %>
   <%= decidim_form_for(handler,
                        builder: Decidim::AuthorizationFormBuilder,
                        as: "authorization_handler",
