@@ -17,10 +17,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   
   
-  document.body.addEventListener("ajax:complete", (responseText) => {
-    const response = JSON.parse(responseText.detail[0].response)
+  document.body.addEventListener("ajax:error", (responseText) => {
+    container.innerHTML = `<div>${responseText.detail[0]}</div>`;
+  });
+  document.body.addEventListener("ajax:success", (responseText) => {
+    // console.log("ajax:success", responseText);
+    const response = responseText.detail[0];
     const button = document.querySelector(`[data-verification-handler="${response.handler}"][data-verification-user-id="${response.userId}"]`);
-    // console.log("ajax:complete", responseText, "response", response, "button", button);
     container.innerHTML = response.message;
 
     if (response.granted) {
