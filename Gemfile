@@ -21,7 +21,6 @@ group :development, :test do
 
   gem "brakeman", "~> 5.4"
   gem "parallel_tests", "~> 4.2"
-  gem "rubocop-rails", "~> 2.25.1"
 end
 
 group :development do

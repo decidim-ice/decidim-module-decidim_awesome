@@ -848,7 +848,6 @@ DEPENDENCIES
   listen
   parallel_tests (~> 4.2)
   puma (>= 6.3.1)
-  rubocop-rails (~> 2.25.1)
   web-console
 
 RUBY VERSION
