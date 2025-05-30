@@ -228,11 +228,11 @@ shared_examples "basic rendering" do |enabled|
       end
 
       it "do not have custom fields javascript" do
-        expect(page).not_to have_xpath("//script[contains(@src,'decidim_decidim_awesome_custom_fields')]", visible: :all)
+        expect(page).to have_no_xpath("//script[contains(@src,'decidim_decidim_awesome_custom_fields')]", visible: :all)
       end
 
       it "do not have custom styles CSS" do
-        expect(page.body).not_to have_content(styles)
+        expect(page.body).to have_no_content(styles)
       end
     end
   end
@@ -290,7 +290,7 @@ shared_examples "basic rendering" do |enabled|
       it "has no admin menus" do
         menus.each do |menu|
           within ".sidebar-menu" do
-            expect(page).not_to have_link(href: "/admin/decidim_awesome/#{menu}")
+            expect(page).to have_no_link(href: "/admin/decidim_awesome/#{menu}")
           end
         end
       end

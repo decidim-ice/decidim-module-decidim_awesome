@@ -16,6 +16,7 @@ gem "puma", ">= 6.3.1"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
+  gem "rubocop-rspec", "~> 2.20.0"
 
   gem "decidim-dev", DECIDIM_VERSION
 

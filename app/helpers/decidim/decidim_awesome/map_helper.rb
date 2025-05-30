@@ -71,7 +71,6 @@ module Decidim
         try(:current_component) || self
       end
 
-      # rubocop:disable Rails/HelperInstanceVariable
       def current_categories(categories)
         return @current_categories if @current_categories
 

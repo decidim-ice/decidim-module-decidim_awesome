@@ -25,7 +25,7 @@ describe "Admin manages verification tweaks" do
                         en: "Help text <strong>with HTML</strong>",
                         ca: "Text d'ajuda <strong>amb HTML</strong>",
                         es: "Texto de ayuda <strong>con HTML</strong>")
-    click_button "Update configuration"
+    click_on "Update configuration"
 
     expect(page).to have_content("updated successfully")
     expect(last_force_authorization_after_login.reload.value).to eq(%w(dummy_authorization_handler id_documents))
@@ -40,7 +40,7 @@ describe "Admin manages verification tweaks" do
     it "allows to select all existing workflows" do
       page.execute_script("document.getElementById('config_force_authorization_after_login').tomselect.setValue(['dummy_authorization_handler'])")
 
-      click_button "Update configuration"
+      click_on "Update configuration"
 
       expect(page).to have_content("updated successfully")
       expect(last_force_authorization_after_login.reload.value).to eq(%w(dummy_authorization_handler))
