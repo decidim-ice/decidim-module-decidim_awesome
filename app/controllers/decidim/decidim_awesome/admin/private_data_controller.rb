@@ -6,7 +6,7 @@ module Decidim
   module DecidimAwesome
     module Admin
       # System compatibility analyzer
-      class MaintenanceController < DecidimAwesome::Admin::ApplicationController
+      class PrivateDataController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
         include MaintenanceContext
         include Decidim::Admin::Filterable
@@ -19,36 +19,36 @@ module Decidim
           enforce_permission_to :edit_config, :private_data, private_data:
         end
 
-        def show
+        def index
           respond_to do |format|
             format.json do
               render json: private_data_finder.for(params[:resources].to_s.split(",")).map { |resource| present(resource) }
             end
             format.all do
-              render :show
+              render :index
             end
           end
         end
 
-        def destroy_private_data
+        def destroy
           if private_data && private_data.total.to_i.positive?
             Decidim::ActionLogger.log("destroy_private_data", current_user, resource, nil, count: private_data.total)
 
             Lock.new(current_organization).get!(resource)
             DestroyPrivateDataJob.set(wait: 1.second).perform_later(resource)
           end
-          redirect_to decidim_admin_decidim_awesome.maintenance_path("private_data"),
-                      notice: I18n.t("destroying_private_data", scope: "decidim.decidim_awesome.admin.maintenance.private_data", title: present_private_data(resource).name)
+          redirect_to decidim_admin_decidim_awesome.private_data_path,
+                      notice: I18n.t("destroying", scope: "decidim.decidim_awesome.admin.private_data.private_data", title: present(resource).name)
         end
 
         private
 
         def resource
-          @resource ||= Component.find_by(id: params[:resource_id])
+          @resource ||= Component.find_by(id: params[:id])
         end
 
         def private_data
-          @private_data ||= present_private_data(resource) if resource
+          @private_data ||= present(resource) if resource
         end
 
         def collection
@@ -60,7 +60,7 @@ module Decidim
         end
 
         def present(resource)
-          present_private_data(resource)
+          PrivateDataPresenter.new(resource)
         end
 
         def private_data_finder

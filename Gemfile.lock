@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     decidim-decidim_awesome (0.11.5)
+      active_hashcash (~> 0.4.0)
       decidim-admin (>= 0.28.0, < 0.29)
       decidim-core (>= 0.28.0, < 0.29)
       deface (>= 1.5)
@@ -48,6 +49,8 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_hashcash (0.4.0)
+      rails (>= 5.2.0)
     active_link_to (1.0.5)
       actionpack
       addressable
@@ -845,6 +848,7 @@ DEPENDENCIES
   listen
   parallel_tests (~> 4.2)
   puma (>= 6.3.1)
+  rubocop-rails (~> 2.25.1)
   web-console
 
 RUBY VERSION

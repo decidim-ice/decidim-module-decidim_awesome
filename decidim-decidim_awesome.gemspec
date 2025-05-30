@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,lib,vendor,db}/**/*", "LICENSE-AGPLv3.txt", "Rakefile", "package.json", "README.md", "CHANGELOG.md"]
 
+  s.add_dependency "active_hashcash", "~> 0.4.0"
   s.add_dependency "decidim-admin", Decidim::DecidimAwesome::COMPAT_DECIDIM_VERSION
   s.add_dependency "decidim-core", Decidim::DecidimAwesome::COMPAT_DECIDIM_VERSION
   s.add_dependency "deface", ">= 1.5"

@@ -25,9 +25,9 @@ describe "Admin accountability" do
   let(:status) { [:admin_roles, :participatory_space_roles] }
 
   before do
-    # rubocop:disable Rails/SkipsModelValidations:
+    # rubocop:disable Rails/SkipsModelValidations
     Decidim::DecidimAwesome::PaperTrailVersion.find_by(item: admin)&.update_column(:created_at, admin.created_at)
-    # rubocop:enable Rails/SkipsModelValidations:
+    # rubocop:enable Rails/SkipsModelValidations
     allow(Decidim::DecidimAwesome.config).to receive(:admin_accountability).and_return(status)
     switch_to_host(organization.host)
     login_as admin, scope: :user
@@ -290,9 +290,9 @@ describe "Admin accountability" do
       let(:missing_date) { 8.days.ago }
 
       before do
-        # rubocop:disable Rails/SkipsModelValidations:
+        # rubocop:disable Rails/SkipsModelValidations
         Decidim::DecidimAwesome::PaperTrailVersion.where(item_type: "Decidim::UserBaseEntity").last.update_column(:created_at, missing_date)
-        # rubocop:enable Rails/SkipsModelValidations:
+        # rubocop:enable Rails/SkipsModelValidations
       end
 
       it "shows a warning message", :versioning do

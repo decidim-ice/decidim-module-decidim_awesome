@@ -1,5 +1,5 @@
 <%= cell("decidim/announcement", {
-                                  title: t("decidim.decidim_awesome.admin.admin_authorizations.conflict"),
-                                  body: t("decidim.decidim_awesome.admin.admin_authorizations.conflict_help_html", user: link_to(conflict.user.name, decidim_admin.officializations_path(q: { name_or_nickname_or_email_cont: conflict.user.email })))
-                                  },
-                                callout_class: "alert") %>
+           title: t("decidim.decidim_awesome.admin.admin_authorizations.conflict"),
+           body: t("decidim.decidim_awesome.admin.admin_authorizations.conflict_help_html", user: link_to(conflict.user.name, decidim_admin.officializations_path(q: { name_or_nickname_or_email_cont: conflict.user.email })))
+         },
+         callout_class: "alert") %>

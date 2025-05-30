@@ -85,11 +85,12 @@ module Decidim
 
             menu.add_item :maintenance,
                           I18n.t("maintenance", scope: "decidim.decidim_awesome.admin.menu.maintenance"),
-                          decidim_admin_decidim_awesome.maintenance_path(:private_data),
+                          decidim_admin_decidim_awesome.private_data_path,
                           position: 11,
                           icon_name: "tools-line",
-                          active: is_active_link?(decidim_admin_decidim_awesome.maintenance_path(:private_data)) ||
-                                  is_active_link?(decidim_admin_decidim_awesome.checks_maintenance_index_path),
+                          active: is_active_link?(decidim_admin_decidim_awesome.private_data_path) ||
+                                  is_active_link?(decidim_admin_decidim_awesome.hashcashes_path) ||
+                                  is_active_link?(decidim_admin_decidim_awesome.checks_path),
                           submenu: { target_menu: :maintenance_submenu }
           end
         end
@@ -152,13 +153,20 @@ module Decidim
           Decidim.menu :maintenance_submenu do |menu|
             menu.add_item :private_data,
                           I18n.t("private_data", scope: "decidim.decidim_awesome.admin.menu.maintenance"),
-                          decidim_admin_decidim_awesome.maintenance_path(:private_data),
+                          decidim_admin_decidim_awesome.private_data_path,
                           position: 10,
                           icon_name: "spy-line"
 
+            menu.add_item :hashcash,
+                          I18n.t("hashcash", scope: "decidim.decidim_awesome.admin.menu.maintenance"),
+                          decidim_admin_decidim_awesome.hashcashes_path,
+                          position: 10,
+                          icon_name: "hashtag",
+                          if: config_enabled?(:hashcash_signup, :hashcash_login)
+
             menu.add_item :checks,
                           I18n.t("checks", scope: "decidim.decidim_awesome.admin.menu.maintenance"),
-                          decidim_admin_decidim_awesome.checks_maintenance_index_path,
+                          decidim_admin_decidim_awesome.checks_path,
                           position: 10,
                           icon_name: "pulse"
           end
@@ -174,7 +182,7 @@ module Decidim
               :validate_body_min_length, :validate_body_max_caps_percent,
               :validate_body_max_marks_together, :validate_body_start_with_caps
             ),
-            surveys: config_enabled?(:auto_save_forms, :user_timezone),
+            surveys: config_enabled?(:auto_save_forms, :user_timezone, :hashcash_signup, :hashcash_login),
             styles: config_enabled?(:scoped_styles, :scoped_admin_styles),
             scoped_styles: config_enabled?(:scoped_styles),
             scoped_admin_styles: config_enabled?(:scoped_admin_styles),
