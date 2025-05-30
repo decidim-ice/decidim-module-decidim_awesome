@@ -9,7 +9,7 @@
       <span class="vote-label"><%= proposal.manifest.label_for(weight) %></span>
       <%= content_tag :svg, role: "img" do
         content_tag(:title, t("decidim.decidim_awesome.voting.voting_cards.voting_for", proposal: sanitized_title, type: proposal.manifest.label_for(weight))) +
-        content_tag(:use, "", "href" => svg_path(weight))
+          content_tag(:use, "", "href" => svg_path(weight))
       end %>
     <% end %>
   </div>

@@ -25,6 +25,10 @@ env:
   POSTGRES_PASSWORD: postgres
   BIG_SCREEN_SIZE: 1
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     name: Build & Precompile

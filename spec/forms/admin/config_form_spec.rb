@@ -54,6 +54,10 @@ module Decidim::DecidimAwesome
       let(:validate_body_max_caps_percent) { 25 }
       let(:validate_body_max_marks_together) { 2 }
       let(:validate_body_start_with_caps) { true }
+      let(:hashcash_signup) { true }
+      let(:hashcash_signup_bits) { 21 }
+      let(:hashcash_login) { true }
+      let(:hashcash_login_bits) { 18 }
 
       context "when everything is OK" do
         it { is_expected.to be_valid }
@@ -192,7 +196,11 @@ module Decidim::DecidimAwesome
             validate_body_min_length:,
             validate_body_max_caps_percent:,
             validate_body_max_marks_together:,
-            validate_body_start_with_caps:
+            validate_body_start_with_caps:,
+            hashcash_signup:,
+            hashcash_signup_bits:,
+            hashcash_login:,
+            hashcash_login_bits:
           }
         end
 
@@ -296,6 +304,42 @@ module Decidim::DecidimAwesome
 
         context "and body max marks together is zero" do
           let(:validate_body_max_marks_together) { 0 }
+
+          it { is_expected.not_to be_valid }
+        end
+
+        context "and hashcash signup bits is empty" do
+          let(:hashcash_signup_bits) { nil }
+
+          it { is_expected.not_to be_valid }
+        end
+
+        context "and hashcash signup bits is less than 10" do
+          let(:hashcash_signup_bits) { 9 }
+
+          it { is_expected.not_to be_valid }
+        end
+
+        context "and hashcash signup bits is greater than 50" do
+          let(:hashcash_signup_bits) { 51 }
+
+          it { is_expected.not_to be_valid }
+        end
+
+        context "and hashcash login bits is empty" do
+          let(:hashcash_login_bits) { nil }
+
+          it { is_expected.not_to be_valid }
+        end
+
+        context "and hashcash login bits is less than 10" do
+          let(:hashcash_login_bits) { 9 }
+
+          it { is_expected.not_to be_valid }
+        end
+
+        context "and hashcash login bits is greater than 50" do
+          let(:hashcash_login_bits) { 51 }
 
           it { is_expected.not_to be_valid }
         end

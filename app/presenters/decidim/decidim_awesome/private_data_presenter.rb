@@ -31,7 +31,7 @@ module Decidim
       end
 
       def time_ago
-        I18n.t("decidim.decidim_awesome.admin.maintenance.private_data.time_ago", time: time_ago_in_words(last_date)) if last_date
+        I18n.t("decidim.decidim_awesome.admin.private_data.private_data.time_ago", time: time_ago_in_words(last_date)) if last_date
       end
 
       def destroyable?
@@ -63,7 +63,7 @@ module Decidim
         return if destroyable?
         return if last_date
 
-        I18n.t("decidim.decidim_awesome.admin.maintenance.private_data.done")
+        I18n.t("decidim.decidim_awesome.admin.private_data.private_data.done")
       end
     end
   end
