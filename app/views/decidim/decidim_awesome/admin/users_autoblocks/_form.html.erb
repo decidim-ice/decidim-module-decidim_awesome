@@ -1,0 +1,7 @@
+<div class="form__wrapper gap-0">
+  <%= form.select :application_type, application_type_options, {}, class: "mb-8", include_blank: true %>
+  <%= form.select :type, types_options, {}, class: "mb-8", include_blank: true, label: false %>
+  <%= form.number_field :weight, class: "mb-6" %>
+  <%= form.text_field :allowlist, class: "mb-6", help_text: t(".variables_help.allow_domains_list") %>
+  <%= form.text_field :blocklist, class: "mb-6", help_text: t(".variables_help.block_domains_list") %>
+</div>
