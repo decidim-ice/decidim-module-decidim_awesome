@@ -1,4 +1,7 @@
 de:
+  active_hashcash:
+    submit_filter: Filter
+    waiting_label: Warte auf Verifizierung ...
   activemodel:
     attributes:
       config:
@@ -10,6 +13,10 @@ de:
         force_authorization_after_login: Autorisierung nach Anmelden/Registrierung erzwingen
         force_authorization_help_text: Hilfetext für die Autorisierungsseite
         force_authorization_with_any_method: Erlaube Zugriff, wenn eine der Genehmigungen erteilt wird (standardmäßig sind alle erforderlich)
+        hashcash_login: Den Hashcash Bot-Schutz für bestehende Benutzende aktivieren (Anmeldung)
+        hashcash_login_bits: Anzahl der Bits für den Hashcash Algorithmus (Anmeldung)
+        hashcash_signup: Den Hashcash Bot-Schutz für neue Benutzende aktivieren (Registrierung)
+        hashcash_signup_bits: Anzahl der Bits für den Hashcash Algorithmus (Registrierung)
         intergram_auto_no_response: Diese Nachricht wird verschickt, sobald eine Minute seit der letzten vom Benutzer verfasste Nachricht verschickt wurde und keine Antwort eingetroffen ist
         intergram_auto_response: Eine Nachricht, die unmittelbar nach dem Senden der ersten Nachricht des Benutzers gesendet wird
         intergram_chat_id: Chat ID
@@ -264,6 +271,15 @@ de:
               drag_and_drop_supported: Drag and Drop unterstützen
               force_authorization_after_login: 'Wenn aktiviert, werden Benutzer nach Login oder Registrierung auf die Autorisierungsseite weitergeleitet, wenn einige der angegebenen Autorisierungen nicht gewährt werden. Dies ist nützlich, wenn Sie Benutzer mit einer bestimmten Berechtigung verifizieren wollen, bevor sie sich überhaupt einloggen können (z. B. um Spam zu verhindern).'
               force_authorization_help_text: Fügen Sie einen benutzerdefinierten Text hinzu, um zu erklären, warum eine Autorisierung erforderlich ist. Stellen Sie auch sicher, dass Sie eine Kontaktmethode hinzufügen, falls Benutzer Hilfe benötigen.
+              hashcash_i18n_key: 'Sie können den Text, der den Benutzenden in den Anmelde-Buttons angezeigt wird, mit folgendem i18n-Key anpassen: %{key}'
+              hashcash_login: |
+                Schützen Sie Rails-Anwendungen gegen Bots und Brute-Force-Angriffe ohne Menschen zu stören.
+                Hashcash ist ein Arbeitsnachweissystem, das die Benutzer erfordert, ein rechnerisches Rätsel zu lösen (automatisch vom Browser ausgeführt) bevor sie sich anmelden können.
+              hashcash_login_bits: Dieser Parameter legt die Anzahl der Bits fest, die der Hashcash Algorithmus verwenden wird, um den Nachweis zu generieren. Es wird empfohlen, einen Wert zwischen 16 (einfache) und 30 (extrem harte) Bits. Der Standardwert für Login-Formulare ist %{bits} Bit.
+              hashcash_signup: |
+                Schützen Sie Rails-Anwendungen gegen Bots und Brute-Force-Angriffe ohne Menschen zu stören.
+                Hashcash ist ein Arbeitsnachweissystem, das die Benutzer erfordert, ein rechnerisches Rätsel zu lösen (automatisch vom Browser ausgeführt) bevor sie ein Konto erstellen können.
+              hashcash_signup_bits: Dieser Parameter legt die Anzahl der Bits fest, die der Hashcash-Algorithmus verwenden wird, um den Nachweis zu generieren. Es wird empfohlen, einen Wert zwischen 16 (einfache) und 30 (extrem harte) Bits. Der Standardwert für Login-Formulare ist %{bits} Bits.
               intergram_about: Über Intergram
               intergram_config: Intergram Konfiguration
               original_editor_override: Seit Version 0.26 ist es für Administratoren möglich Bilder in die Editoren hochzuladen. Daher betreffen die Bildeinstellungen hier nur die öffentlich sichtbaren Editoren. Administratoren steht diese Funktion immer zur Verfügung.
@@ -394,6 +410,25 @@ de:
           update:
             error: Fehler beim Aktualisieren der Umleitung! %{error}
             success: Umleitung erfolgreich aktualisiert
+        hashcash:
+          filters:
+            ip_addresses: IP-Adressen anzeigen
+            stamps: Hashcash-Stempel anzeigen
+          index:
+            bits: Bits
+            created_at: Erstellt am
+            help_html: |
+              Diese Seite zeigt die im System entdeckten Hashcash Stempel an. Hashcash ist ein System zum Nachweis der Arbeit, das die Benutzenden dazu zwingt, ein rechnerisches Puzzle zu lösen (automatisch vom Browser ausgeführt), bevor sie ein Konto erstellen können.
+              <br><br>
+              Jeder Eintrag in dieser Liste stellt einen Hashcash-Stempel dar, der von einem Benutzer bei jeder Anmeldung oder Anmeldung generiert wurde.
+            ip_address: IP-Adresse
+            no_data: Keine Hashcash-Stempel gefunden
+            request_path: Anforderungspfad
+          ip_addresses:
+            help_html: Diese Seite listet alle im System entdeckten IP-Adressen auf, die durch die Anzahl der Hashcash Stempel, die sie generiert haben, sortiert wurden. <br><br> Jeder Stempel ist entweder ein Login oder eine Anmeldeaktion eines Benutzers. Sie können diese Informationen nutzen, um verdächtige Aktivitäten zu erkennen.
+            ip_address: IP-Adresse
+            no_data: Keine IP-Adressen gefunden
+            stamps: Hashcash-Stempel
         menu:
           admins: Eingeschränkte Admins
           custom_redirects: Benutzerdefinierte Umleitungen
@@ -401,6 +436,7 @@ de:
           livechat: Live-Chat
           maintenance:
             checks: Checks
+            hashcash: Hashcash-Stempel
             maintenance: Wartung
             private_data: Persönliche Daten
           menu_hacks: Menüanpassungen
@@ -627,6 +663,7 @@ de:
             title: 'Wartungswerkzeuge: %{title}'
             titles:
               checks: Systemkompatibilitätsprüfungen
+              hashcash: Hashcash-Stempel
               private_data: Bereinigung personenbezogener Daten
         awesome_config:
           amendments: Änderungsvorschläge
