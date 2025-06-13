@@ -7,7 +7,16 @@ v0.12.2
 Compatibility:
   - Decidim 0.29.x
 
-Feature:
+Features:
+  - Fix custom styles loading order
+
+v0.12.2
+-------
+
+Compatibility:
+  - Decidim 0.29.x
+
+Features:
   - Added HashCash anti-bot mechanism
   - Fixed multi-tenant crossover in admin accountability
 
