@@ -587,6 +587,8 @@ en:
               title: Global menu home block
             menu:
               title: Main menu
+            mobile_menu:
+              title: Mobile menu
             new: New item
             remove: Remove addition
             remove_hack: Remove customization

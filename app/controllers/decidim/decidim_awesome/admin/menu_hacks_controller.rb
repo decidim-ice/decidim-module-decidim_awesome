@@ -12,7 +12,7 @@ module Decidim
         helper_method :current_items, :visibility_options, :target_options
 
         before_action do
-          enforce_permission_to :edit_config, :menu
+          enforce_permission_to :edit_config, [:menu, :mobile_menu, :home_content_block_menu]
         end
 
         def index; end

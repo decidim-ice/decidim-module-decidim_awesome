@@ -264,6 +264,12 @@ module Decidim::DecidimAwesome
         it_behaves_like "menu hacks controller"
       end
 
+      context "with mobile menu" do
+        let!(:menu_name) { "mobile_menu" }
+
+        it_behaves_like "menu hacks controller"
+      end
+
       context "with home content block menu" do
         let!(:menu_name) { "home_content_block_menu" }
 

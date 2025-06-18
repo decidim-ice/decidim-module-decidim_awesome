@@ -29,20 +29,20 @@ module Decidim
 
             menu.add_item :styles,
                           I18n.t("menu.styles", scope: "decidim.decidim_awesome.admin"),
-                          decidim_admin_decidim_awesome.config_path(:scoped_styles),
+                          decidim_admin_decidim_awesome.config_path(menus[:styles]),
                           position: 4,
                           icon_name: "brush",
-                          if: menus[:styles],
+                          if: menus[:styles].present?,
                           submenu: { target_menu: :custom_styles_submenu }
 
             menu.add_item :custom_fields,
                           I18n.t("menu.proposal_custom_fields", scope: "decidim.decidim_awesome.admin"),
-                          decidim_admin_decidim_awesome.config_path(menus[:proposal_custom_fields] ? :proposal_custom_fields : :proposal_private_custom_fields),
+                          decidim_admin_decidim_awesome.config_path(menus[:custom_fields]),
                           position: 5,
                           icon_name: "layers",
                           active: is_active_link?(decidim_admin_decidim_awesome.config_path(:proposal_custom_fields)) ||
                                   is_active_link?(decidim_admin_decidim_awesome.config_path(:proposal_private_custom_fields)),
-                          if: menus[:custom_fields],
+                          if: menus[:custom_fields].present?,
                           submenu: { target_menu: :custom_fields_submenu }
 
             menu.add_item :admins,
@@ -54,11 +54,12 @@ module Decidim
 
             menu.add_item :menu_hacks,
                           I18n.t("menu.menu_hacks", scope: "decidim.decidim_awesome.admin"),
-                          decidim_admin_decidim_awesome.menu_hacks_path(menus[:menu_hacks_menu] ? :menu : :home_content_block_menu),
+                          decidim_admin_decidim_awesome.menu_hacks_path(menus[:menu_hacks]),
                           position: 7,
                           icon_name: "menu-line",
-                          if: menus[:menu_hacks],
+                          if: menus[:menu_hacks].present?,
                           active: is_active_link?(decidim_admin_decidim_awesome.menu_hacks_path(:menu)) ||
+                                  is_active_link?(decidim_admin_decidim_awesome.menu_hacks_path(:mobile_menu)) ||
                                   is_active_link?(decidim_admin_decidim_awesome.menu_hacks_path(:home_content_block_menu)),
                           submenu: { target_menu: :menu_hacks_submenu }
 
@@ -140,10 +141,17 @@ module Decidim
                           icon_name: "global-line",
                           if: menus[:menu_hacks_menu]
 
+            menu.add_item :mobile_menu,
+                          I18n.t("mobile_menu.title", scope: "decidim.decidim_awesome.admin.menu_hacks.index"),
+                          decidim_admin_decidim_awesome.menu_hacks_path(:mobile_menu),
+                          position: 7.2,
+                          icon_name: "smartphone",
+                          if: menus[:menu_hacks_mobile_menu]
+
             menu.add_item :content_block_main_menu,
                           I18n.t("home_content_block_menu.title", scope: "decidim.decidim_awesome.admin.menu_hacks.index"),
                           decidim_admin_decidim_awesome.menu_hacks_path(:home_content_block_menu),
-                          position: 7.2,
+                          position: 7.3,
                           icon_name: "layout-masonry-line",
                           if: menus[:menu_hacks_home_content_block_menu]
           end
@@ -183,20 +191,28 @@ module Decidim
               :validate_body_max_marks_together, :validate_body_start_with_caps
             ),
             surveys: config_enabled?(:auto_save_forms, :user_timezone, :hashcash_signup, :hashcash_login),
-            styles: config_enabled?(:scoped_styles, :scoped_admin_styles),
+            styles: first_enabled(:scoped_styles, :scoped_admin_styles),
             scoped_styles: config_enabled?(:scoped_styles),
             scoped_admin_styles: config_enabled?(:scoped_admin_styles),
-            custom_fields: config_enabled?(:proposal_custom_fields, :proposal_private_custom_fields),
+            custom_fields: first_enabled(:proposal_custom_fields, :proposal_private_custom_fields),
             proposal_custom_fields: config_enabled?(:proposal_custom_fields),
             proposal_private_custom_fields: config_enabled?(:proposal_private_custom_fields),
             admins: config_enabled?(:scoped_admins),
-            menu_hacks: config_enabled?(:menu, :home_content_block_menu),
+            menu_hacks: first_enabled(:menu, :mobile_menu, :home_content_block_menu),
             menu_hacks_menu: config_enabled?(:menu),
+            menu_hacks_mobile_menu: config_enabled?(:mobile_menu),
             menu_hacks_home_content_block_menu: config_enabled?(:home_content_block_menu),
             custom_redirects: config_enabled?(:custom_redirects),
             livechat: config_enabled?(:intergram_for_admins, :intergram_for_public),
             verifications: config_enabled?(:force_authorization_after_login)
           }
+        end
+
+        def first_enabled(*vars)
+          vars.each do |var|
+            return var if config_enabled?(var)
+          end
+          nil
         end
 
         # ensure boolean value
