@@ -239,6 +239,10 @@ describe "Visit the admin page" do
         let(:prefix) { "" }
       end
 
+      it_behaves_like "has menu link", "menus/mobile_menu/hacks" do
+        let(:prefix) { "" }
+      end
+
       it "renders the main menu page" do
         expect(page).to have_content(/Main menu/i)
       end
