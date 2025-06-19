@@ -9,6 +9,9 @@ Compatibility:
 
 Features:
   - Fix custom styles loading order
+  - Fix for awesome map no loading in a component
+  - Fix "other" options in checkbox/radio custom fields
+  - Added Mobile Menu Override
 
 v0.12.2
 -------

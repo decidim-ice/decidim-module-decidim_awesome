@@ -186,6 +186,14 @@ describe "Admin manages hacked menus" do
     it_behaves_like "admin manages menu overrides"
   end
 
+  context "with mobile menu" do
+    let!(:menu_name) { "mobile_menu" }
+    let(:default_menu_labels) { %w(Home Processes) }
+    let(:default_menu_item) { { label: "Home", path: "/" } }
+
+    it_behaves_like "admin manages menu overrides"
+  end
+
   context "with home content block menu" do
     let!(:menu_name) { "home_content_block_menu" }
     let(:default_menu_labels) { %w(Processes) }

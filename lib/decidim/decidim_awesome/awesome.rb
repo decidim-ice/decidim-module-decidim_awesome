@@ -259,6 +259,10 @@ module Decidim
       []
     end
 
+    config_accessor :mobile_menu do
+      []
+    end
+
     config_accessor :home_content_block_menu do
       []
     end

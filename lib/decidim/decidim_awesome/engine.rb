@@ -99,8 +99,8 @@ module Decidim
         # override user's admin property
         Decidim::User.include(Decidim::DecidimAwesome::UserOverride) if DecidimAwesome.enabled?(:scoped_admins)
 
-        if DecidimAwesome.enabled?(:menu, :content_block_main_menu)
-          Decidim::ContentBlocks::GlobalMenuCell.include(Decidim::DecidimAwesome::GlobalMenuCellOverride)
+        if DecidimAwesome.enabled?(:menu, :mobile_menu, :home_content_block_menu)
+          Decidim::ContentBlocks::GlobalMenuCell.include(Decidim::DecidimAwesome::GlobalMenuCellOverride) if DecidimAwesome.enabled?(:home_content_block_menu)
           Decidim::BreadcrumbHelper.include(Decidim::DecidimAwesome::BreadcrumbHelperOverride)
           Decidim::MenuPresenter.include(Decidim::DecidimAwesome::MenuPresenterOverride)
           Decidim::MenuItemPresenter.include(Decidim::DecidimAwesome::MenuItemPresenterOverride)
@@ -299,6 +299,7 @@ module Decidim
         Decidim.icons.register(name: "forbid-line", icon: "forbid-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "file-settings-line", icon: "file-settings-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "hashtag", icon: "hashtag", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "smartphone", icon: "smartphone-line", category: "system", description: "", engine: :decidim_awesome)
       end
     end
   end

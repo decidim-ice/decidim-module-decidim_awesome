@@ -247,6 +247,7 @@ shared_examples "basic rendering" do |enabled|
         "config/proposal_custom_fields",
         "config/admins",
         "menus/menu/hacks",
+        "menus/mobile_menu/hacks",
         "menus/home_content_block_menu/hacks",
         "custom_redirects",
         "config/livechat",
