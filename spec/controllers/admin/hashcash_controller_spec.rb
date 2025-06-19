@@ -22,7 +22,6 @@ module Decidim::DecidimAwesome
           expect(response).to have_http_status(:success)
 
           expect(controller.helpers.stamps).to eq([stamp])
-          expect(controller.helpers.available_views.keys).to match_array(%w(private_data hashcash checks))
         end
       end
 

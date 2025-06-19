@@ -13,6 +13,7 @@ module Decidim::DecidimAwesome
 
       let(:user) { create(:user, :confirmed, :admin, organization:) }
       let(:organization) { create(:organization) }
+      let(:feature) { :custom_redirects }
 
       before do
         request.env["decidim.current_organization"] = user.organization

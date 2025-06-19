@@ -3,13 +3,12 @@
 module Decidim
   module DecidimAwesome
     module Admin
-      # Editing menu items
       class CustomRedirectsController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
         include ConfigConstraintsHelpers
 
         before_action do
-          enforce_permission_to :edit_config, :menu
+          enforce_permission_to :edit_config, :custom_redirects
         end
 
         helper ConfigConstraintsHelpers

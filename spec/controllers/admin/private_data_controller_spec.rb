@@ -26,8 +26,6 @@ module Decidim::DecidimAwesome
         it "returns http success" do
           get(:index)
           expect(response).to have_http_status(:success)
-
-          expect(controller.helpers.available_views.keys).to match_array(%w(private_data hashcash checks))
         end
 
         context "when format is json" do

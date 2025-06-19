@@ -29,7 +29,6 @@ end
 
 shared_examples "forbids disabled feature without redirect" do
   render_views
-  let(:feature) { menu_name }
   let(:features) { [feature] }
   before do
     features.each do |feat|
@@ -46,7 +45,6 @@ end
 
 shared_examples "forbids disabled feature with redirect" do
   render_views
-  let(:feature) { menu_name }
   let(:features) { [feature] }
   before do
     features.each do |feat|

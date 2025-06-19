@@ -259,19 +259,22 @@ module Decidim::DecidimAwesome
       end
 
       context "with main menu" do
-        let!(:menu_name) { "menu" }
+        let(:menu_name) { "menu" }
+        let(:feature) { "menu" }
 
         it_behaves_like "menu hacks controller"
       end
 
       context "with mobile menu" do
-        let!(:menu_name) { "mobile_menu" }
+        let(:menu_name) { "mobile_menu" }
+        let(:feature) { "mobile_menu" }
 
         it_behaves_like "menu hacks controller"
       end
 
       context "with home content block menu" do
-        let!(:menu_name) { "home_content_block_menu" }
+        let(:menu_name) { "home_content_block_menu" }
+        let(:feature) { "home_content_block_menu" }
 
         it_behaves_like "menu hacks controller"
       end
