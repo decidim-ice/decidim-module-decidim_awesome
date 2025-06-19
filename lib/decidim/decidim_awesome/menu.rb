@@ -6,83 +6,93 @@ module Decidim
       class << self
         def register_awesome_admin_menu!
           Decidim.menu :awesome_admin_menu do |menu|
-            menu.add_item :editors,
-                          I18n.t("menu.editors", scope: "decidim.decidim_awesome.admin"),
-                          decidim_admin_decidim_awesome.config_path(:editors),
-                          position: 1,
-                          icon_name: "editors-text",
-                          if: menus[:editors]
+            if menus[:editors].present?
+              menu.add_item :editors,
+                            I18n.t("menu.editors", scope: "decidim.decidim_awesome.admin"),
+                            decidim_admin_decidim_awesome.config_path(:editors),
+                            position: 1,
+                            icon_name: "editors-text"
+            end
 
-            menu.add_item :proposals,
-                          I18n.t("menu.proposals", scope: "decidim.decidim_awesome.admin"),
-                          decidim_admin_decidim_awesome.config_path(:proposals),
-                          position: 2,
-                          icon_name: "documents",
-                          if: menus[:proposals]
+            if menus[:proposals].present?
+              menu.add_item :proposals,
+                            I18n.t("menu.proposals", scope: "decidim.decidim_awesome.admin"),
+                            decidim_admin_decidim_awesome.config_path(:proposals),
+                            position: 2,
+                            icon_name: "documents"
+            end
 
-            menu.add_item :surveys,
-                          I18n.t("menu.surveys", scope: "decidim.decidim_awesome.admin"),
-                          decidim_admin_decidim_awesome.config_path(:surveys),
-                          position: 3,
-                          icon_name: "surveys",
-                          if: menus[:surveys]
+            if menus[:surveys].present?
+              menu.add_item :surveys,
+                            I18n.t("menu.surveys", scope: "decidim.decidim_awesome.admin"),
+                            decidim_admin_decidim_awesome.config_path(:surveys),
+                            position: 3,
+                            icon_name: "surveys"
+            end
 
-            menu.add_item :styles,
-                          I18n.t("menu.styles", scope: "decidim.decidim_awesome.admin"),
-                          decidim_admin_decidim_awesome.config_path(menus[:styles]),
-                          position: 4,
-                          icon_name: "brush",
-                          if: menus[:styles].present?,
-                          submenu: { target_menu: :custom_styles_submenu }
+            if menus[:styles].present?
+              menu.add_item :styles,
+                            I18n.t("menu.styles", scope: "decidim.decidim_awesome.admin"),
+                            decidim_admin_decidim_awesome.config_path(menus[:styles]),
+                            position: 4,
+                            icon_name: "brush",
+                            submenu: { target_menu: :custom_styles_submenu }
+            end
 
-            menu.add_item :custom_fields,
-                          I18n.t("menu.proposal_custom_fields", scope: "decidim.decidim_awesome.admin"),
-                          decidim_admin_decidim_awesome.config_path(menus[:custom_fields]),
-                          position: 5,
-                          icon_name: "layers",
-                          active: is_active_link?(decidim_admin_decidim_awesome.config_path(:proposal_custom_fields)) ||
-                                  is_active_link?(decidim_admin_decidim_awesome.config_path(:proposal_private_custom_fields)),
-                          if: menus[:custom_fields].present?,
-                          submenu: { target_menu: :custom_fields_submenu }
+            if menus[:custom_fields].present?
+              menu.add_item :custom_fields,
+                            I18n.t("menu.proposal_custom_fields", scope: "decidim.decidim_awesome.admin"),
+                            decidim_admin_decidim_awesome.config_path(menus[:custom_fields]),
+                            position: 5,
+                            icon_name: "layers",
+                            active: is_active_link?(decidim_admin_decidim_awesome.config_path(:proposal_custom_fields)) ||
+                                    is_active_link?(decidim_admin_decidim_awesome.config_path(:proposal_private_custom_fields)),
+                            submenu: { target_menu: :custom_fields_submenu }
+            end
 
-            menu.add_item :admins,
-                          I18n.t("menu.admins", scope: "decidim.decidim_awesome.admin"),
-                          decidim_admin_decidim_awesome.config_path(:admins),
-                          position: 6,
-                          icon_name: "group-line",
-                          if: menus[:admins]
+            if menus[:admins].present?
+              menu.add_item :admins,
+                            I18n.t("menu.admins", scope: "decidim.decidim_awesome.admin"),
+                            decidim_admin_decidim_awesome.config_path(:admins),
+                            position: 6,
+                            icon_name: "group-line"
+            end
 
-            menu.add_item :menu_hacks,
-                          I18n.t("menu.menu_hacks", scope: "decidim.decidim_awesome.admin"),
-                          decidim_admin_decidim_awesome.menu_hacks_path(menus[:menu_hacks]),
-                          position: 7,
-                          icon_name: "menu-line",
-                          if: menus[:menu_hacks].present?,
-                          active: is_active_link?(decidim_admin_decidim_awesome.menu_hacks_path(:menu)) ||
-                                  is_active_link?(decidim_admin_decidim_awesome.menu_hacks_path(:mobile_menu)) ||
-                                  is_active_link?(decidim_admin_decidim_awesome.menu_hacks_path(:home_content_block_menu)),
-                          submenu: { target_menu: :menu_hacks_submenu }
+            if menus[:menu_hacks].present?
+              menu.add_item :menu_hacks,
+                            I18n.t("menu.menu_hacks", scope: "decidim.decidim_awesome.admin"),
+                            decidim_admin_decidim_awesome.menu_hacks_path(menus[:menu_hacks]),
+                            position: 7,
+                            icon_name: "menu-line",
+                            active: is_active_link?(decidim_admin_decidim_awesome.menu_hacks_path(:menu)) ||
+                                    is_active_link?(decidim_admin_decidim_awesome.menu_hacks_path(:mobile_menu)) ||
+                                    is_active_link?(decidim_admin_decidim_awesome.menu_hacks_path(:home_content_block_menu)),
+                            submenu: { target_menu: :menu_hacks_submenu }
+            end
 
-            menu.add_item :custom_redirects,
-                          I18n.t("menu.custom_redirects", scope: "decidim.decidim_awesome.admin"),
-                          decidim_admin_decidim_awesome.custom_redirects_path,
-                          position: 8,
-                          icon_name: "external-link-line",
-                          if: menus[:custom_redirects]
+            if menus[:custom_redirects].present?
+              menu.add_item :custom_redirects,
+                            I18n.t("menu.custom_redirects", scope: "decidim.decidim_awesome.admin"),
+                            decidim_admin_decidim_awesome.custom_redirects_path,
+                            position: 8,
+                            icon_name: "external-link-line"
+            end
 
-            menu.add_item :livechat,
-                          I18n.t("menu.livechat", scope: "decidim.decidim_awesome.admin"),
-                          decidim_admin_decidim_awesome.config_path(:livechat),
-                          position: 9,
-                          icon_name: "chat-1-line",
-                          if: menus[:livechat]
+            if menus[:livechat].present?
+              menu.add_item :livechat,
+                            I18n.t("menu.livechat", scope: "decidim.decidim_awesome.admin"),
+                            decidim_admin_decidim_awesome.config_path(:livechat),
+                            position: 9,
+                            icon_name: "chat-1-line"
+            end
 
-            menu.add_item :verifications,
-                          I18n.t("menu.verifications", scope: "decidim.decidim_awesome.admin"),
-                          decidim_admin_decidim_awesome.config_path(:verifications),
-                          position: 10,
-                          icon_name: "fingerprint-line",
-                          if: menus[:verifications]
+            if menus[:verifications].present?
+              menu.add_item :verifications,
+                            I18n.t("menu.verifications", scope: "decidim.decidim_awesome.admin"),
+                            decidim_admin_decidim_awesome.config_path(:verifications),
+                            position: 10,
+                            icon_name: "fingerprint-line"
+            end
 
             menu.add_item :maintenance,
                           I18n.t("maintenance", scope: "decidim.decidim_awesome.admin.menu.maintenance"),
@@ -98,62 +108,69 @@ module Decidim
 
         def register_custom_fields_submenu!
           Decidim.menu :custom_fields_submenu do |menu|
-            menu.add_item :proposal_custom_fields,
-                          I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.proposal_custom_fields"),
-                          decidim_admin_decidim_awesome.config_path(:proposal_custom_fields),
-                          position: 5.1,
-                          icon_name: "draft-line",
-                          if: menus[:proposal_custom_fields]
+            if menus[:proposal_custom_fields].present?
+              menu.add_item :proposal_custom_fields,
+                            I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.proposal_custom_fields"),
+                            decidim_admin_decidim_awesome.config_path(:proposal_custom_fields),
+                            position: 5.1,
+                            icon_name: "draft-line"
+            end
 
-            menu.add_item :proposal_private_custom_fields,
-                          I18n.t("proposal_private_custom_fields", scope: "decidim.decidim_awesome.admin.proposal_custom_fields"),
-                          decidim_admin_decidim_awesome.config_path(:proposal_private_custom_fields),
-                          position: 5.2,
-                          icon_name: "spy",
-                          if: menus[:proposal_private_custom_fields]
+            if menus[:proposal_private_custom_fields].present?
+              menu.add_item :proposal_private_custom_fields,
+                            I18n.t("proposal_private_custom_fields", scope: "decidim.decidim_awesome.admin.proposal_custom_fields"),
+                            decidim_admin_decidim_awesome.config_path(:proposal_private_custom_fields),
+                            position: 5.2,
+                            icon_name: "spy"
+            end
           end
         end
 
         def register_custom_styles_submenu!
           Decidim.menu :custom_styles_submenu do |menu|
-            menu.add_item :scoped_styles,
-                          I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.scoped_styles"),
-                          decidim_admin_decidim_awesome.config_path(:scoped_styles),
-                          position: 4.1,
-                          icon_name: "computer-line",
-                          if: config_enabled?(:scoped_styles)
+            if menus[:scoped_styles].present?
+              menu.add_item :scoped_styles,
+                            I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.scoped_styles"),
+                            decidim_admin_decidim_awesome.config_path(:scoped_styles),
+                            position: 4.1,
+                            icon_name: "computer-line"
+            end
 
-            menu.add_item :scoped_admin_styles,
-                          I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.scoped_admin_styles"),
-                          decidim_admin_decidim_awesome.config_path(:scoped_admin_styles),
-                          position: 4.2,
-                          icon_name: "file-settings-line",
-                          if: config_enabled?(:scoped_admin_styles)
+            if menus[:scoped_admin_styles].present?
+              menu.add_item :scoped_admin_styles,
+                            I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.scoped_admin_styles"),
+                            decidim_admin_decidim_awesome.config_path(:scoped_admin_styles),
+                            position: 4.2,
+                            icon_name: "file-settings-line"
+            end
           end
         end
 
         def register_menu_hacks_submenu!
           Decidim.menu :menu_hacks_submenu do |menu|
-            menu.add_item :main_menu,
-                          I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.menu_hacks.index"),
-                          decidim_admin_decidim_awesome.menu_hacks_path(:menu),
-                          position: 7.1,
-                          icon_name: "global-line",
-                          if: menus[:menu_hacks_menu]
+            if menus[:menu_hacks_menu].present?
+              menu.add_item :main_menu,
+                            I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.menu_hacks.index"),
+                            decidim_admin_decidim_awesome.menu_hacks_path(:menu),
+                            position: 7.1,
+                            icon_name: "global-line"
+            end
 
-            menu.add_item :mobile_menu,
-                          I18n.t("mobile_menu.title", scope: "decidim.decidim_awesome.admin.menu_hacks.index"),
-                          decidim_admin_decidim_awesome.menu_hacks_path(:mobile_menu),
-                          position: 7.2,
-                          icon_name: "smartphone",
-                          if: menus[:menu_hacks_mobile_menu]
+            if menus[:menu_hacks_mobile_menu].present?
+              menu.add_item :mobile_menu,
+                            I18n.t("mobile_menu.title", scope: "decidim.decidim_awesome.admin.menu_hacks.index"),
+                            decidim_admin_decidim_awesome.menu_hacks_path(:mobile_menu),
+                            position: 7.2,
+                            icon_name: "smartphone"
+            end
 
-            menu.add_item :content_block_main_menu,
-                          I18n.t("home_content_block_menu.title", scope: "decidim.decidim_awesome.admin.menu_hacks.index"),
-                          decidim_admin_decidim_awesome.menu_hacks_path(:home_content_block_menu),
-                          position: 7.3,
-                          icon_name: "layout-masonry-line",
-                          if: menus[:menu_hacks_home_content_block_menu]
+            if menus[:menu_hacks_home_content_block_menu].present?
+              menu.add_item :content_block_main_menu,
+                            I18n.t("home_content_block_menu.title", scope: "decidim.decidim_awesome.admin.menu_hacks.index"),
+                            decidim_admin_decidim_awesome.menu_hacks_path(:home_content_block_menu),
+                            position: 7.3,
+                            icon_name: "layout-masonry-line"
+            end
           end
         end
 
@@ -165,12 +182,13 @@ module Decidim
                           position: 10,
                           icon_name: "spy-line"
 
-            menu.add_item :hashcash,
-                          I18n.t("hashcash", scope: "decidim.decidim_awesome.admin.menu.maintenance"),
-                          decidim_admin_decidim_awesome.hashcashes_path,
-                          position: 10,
-                          icon_name: "hashtag",
-                          if: config_enabled?(:hashcash_signup, :hashcash_login)
+            if config_enabled?(:hashcash_signup, :hashcash_login)
+              menu.add_item :hashcash,
+                            I18n.t("hashcash", scope: "decidim.decidim_awesome.admin.menu.maintenance"),
+                            decidim_admin_decidim_awesome.hashcashes_path,
+                            position: 10,
+                            icon_name: "hashtag"
+            end
 
             menu.add_item :checks,
                           I18n.t("checks", scope: "decidim.decidim_awesome.admin.menu.maintenance"),
