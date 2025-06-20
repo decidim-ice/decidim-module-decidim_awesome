@@ -477,6 +477,8 @@ cs:
               title: Blok Globální menu
             menu:
               title: Hlavní menu
+            mobile_menu:
+              title: Mobilní menu
             new: Nová položka
             remove: Odstranit přidání
             remove_hack: Odstranit přizpůsobení
