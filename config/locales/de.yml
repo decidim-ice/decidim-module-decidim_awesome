@@ -473,6 +473,8 @@ de:
               title: Startseiten-Abschnitt für globales Menü
             menu:
               title: Hauptmenü
+            mobile_menu:
+              title: Mobilmenü
             new: Neuer Menüpunkt
             remove: Zusatz entfernen
             remove_hack: Anpassungen entfernen
