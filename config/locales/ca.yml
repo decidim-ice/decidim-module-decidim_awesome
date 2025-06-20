@@ -477,6 +477,8 @@ ca:
               title: Bloc de menú global a la home
             menu:
               title: Menú principal
+            mobile_menu:
+              title: Menú mòbil
             new: Nou ítem
             remove: Eliminar addició
             remove_hack: Eliminar retoc

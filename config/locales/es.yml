@@ -477,6 +477,8 @@ es:
               title: Bloque de menú global en la home
             menu:
               title: Menú principal
+            mobile_menu:
+              title: Menú móvil
             new: Crear nuevo ítem
             remove: Eliminar adición
             remove_hack: Eliminar personalización
