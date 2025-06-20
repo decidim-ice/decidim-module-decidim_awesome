@@ -441,6 +441,8 @@ fr:
               title: Bloc de menu global
             menu:
               title: Menu principal
+            mobile_menu:
+              title: Menu mobile
             new: Nouvel élément de menu
             remove: Supprimer l'ajout
             remove_hack: Supprimer la personnalisation
