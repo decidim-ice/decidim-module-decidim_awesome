@@ -116,6 +116,137 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
     return `<xml>${$dl[0].outerHTML}</xml>`;
   }
 
+  storeData() {
+    if (!this.$element) {
+      return false;
+    }
+    const $form = this.$element.closest("form");
+    const $body = $form.find(`input[name="${this.$element.data("name")}"]`);
+    if ($body.length && this.instance) {
+      this.spec = this.instance.userData;
+
+      this.fixUserDataValues();
+
+      $body.val(this.dataToXML(this.spec));
+      this.$element.data("spec", this.spec);
+    }
+    return this;
+  }
+
+  fixUserDataValues() {
+    if (!this.spec || !this.$element) {
+      return;
+    }
+
+    this.spec.forEach((field) => {
+      if (!field.userData || field.userData.length === 0) {
+        return;
+      }
+
+      const hasOnValues = field.userData.some(value => value === "on");
+      if (!hasOnValues) {
+        return;
+      }
+
+      if (field.type === "checkbox-group") {
+        const selectors = [
+          `input[type="checkbox"][name="${field.name}[]"]:checked`,
+          `input[type="checkbox"][name="${field.name}"]:checked`,
+          `input[name="${field.name}[]"]:checked`,
+          `input[name="${field.name}"]:checked`
+        ];
+
+        let $checkboxes = $();
+        selectors.forEach(selector => {
+          const found = this.$element.find(selector);
+          if (found.length > 0) {
+            $checkboxes = found;
+          }
+        });
+
+        const checkedValues = [];
+        $checkboxes.each(function() {
+          const $checkbox = $(this);
+          let value = $checkbox.val();
+
+          if (!value || value === "on") {
+            const labelText = $checkbox.closest('label').text().trim() ||
+              $checkbox.siblings('label').text().trim() ||
+              $checkbox.parent().text().trim();
+
+            if (field.values && field.values.length > 0) {
+              const matchingOption = field.values.find(option =>
+                option.label === labelText ||
+                labelText.includes(option.label) ||
+                option.label.includes(labelText)
+              );
+
+              if (matchingOption) {
+                value = matchingOption.value || matchingOption.label || `option-${field.values.indexOf(matchingOption) + 1}`;
+              } else {
+                value = labelText || `checkbox-${checkedValues.length + 1}`;
+              }
+            } else {
+              value = labelText || `checkbox-${checkedValues.length + 1}`;
+            }
+          }
+
+          if (value && value !== "on") {
+            checkedValues.push(value);
+          }
+        });
+
+        if (checkedValues.length > 0) {
+          field.userData = checkedValues;
+        }
+      }
+
+      else if (field.type === "radio-group") {
+        const $checkedRadio = this.$element.find(`input[type="radio"][name="${field.name}"]:checked`);
+
+        if ($checkedRadio.length > 0) {
+          let value = $checkedRadio.val();
+
+          if (!value || value === "on") {
+            const labelText = $checkedRadio.closest('label').text().trim() ||
+              $checkedRadio.siblings('label').text().trim();
+
+            if (field.values && field.values.length > 0) {
+              const matchingOption = field.values.find(option =>
+                option.label === labelText ||
+                labelText.includes(option.label)
+              );
+              value = matchingOption ? (matchingOption.value || matchingOption.label) : labelText;
+            } else {
+              value = labelText || "radio-selected";
+            }
+          }
+
+          if (value && value !== "on") {
+            field.userData = [value];
+          }
+        }
+      }
+
+      else if (field.type === "select") {
+        const $select = this.$element.find(`select[name="${field.name}"]`);
+
+        if ($select.length > 0) {
+          let selectedValue = $select.val();
+
+          if (!selectedValue || selectedValue === "on") {
+            const selectedText = $select.find('option:selected').text().trim();
+            selectedValue = selectedText || "select-option";
+          }
+
+          if (selectedValue && selectedValue !== "on") {
+            field.userData = [selectedValue];
+          }
+        }
+      }
+    });
+  }
+
   fixBuggyFields() {
     if (!this.$element) {
       return false;
@@ -129,23 +260,47 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
       const inputs = $(".formbuilder-checkbox input", group);
       const $label = $(group).find("label");
       const data = this.spec.find((obj) => obj.type === "checkbox-group" && obj.name === $label.attr("for"));
-      let values = data.userData;
+      let values = data?.userData;
       if (!inputs.length || !data || !values) {
         return;
       }
 
       inputs.each((_idx, input) => {
+        const $input = $(input);
+        let shouldCheck = false;
+
         let index = values.indexOf(input.value);
         if (index >= 0) {
-          values.splice(index, 1)
-          // setting checked=true do not makes the browser aware that the form is valid if the field is required
-          if (!input.checked)
-          {$(input).click();}
-        } else if (input.checked)
-        {$(input).click();}
+          shouldCheck = true;
+          values.splice(index, 1);
+        } else {
+          const labelText = $input.closest('label').text().trim() ||
+            $input.siblings('label').text().trim() ||
+            $input.parent().text().trim();
+
+          if (labelText) {
+            const matchIndex = values.findIndex(value =>
+              value === labelText ||
+              labelText.includes(value) ||
+              value.includes(labelText)
+            );
+
+            if (matchIndex >= 0) {
+              shouldCheck = true;
+              values.splice(matchIndex, 1);
+            }
+          }
+        }
+
+        if (shouldCheck) {
+          if (!input.checked) {
+            $(input).click();
+          }
+        } else if (input.checked) {
+          $(input).click();
+        }
       });
 
-      // Fill "other" option
       const otherOption = $(".other-option", inputs.parent())[0];
       const otherVal = $(".other-val", inputs.parent())[0];
       const otherText = values.join(" ");
@@ -177,22 +332,7 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
         }
       });
     });
-    return this;
-  }
 
-  // Saves xml to the hidden input
-  storeData() {
-    if (!this.$element) {
-      return false;
-    }
-    const $form = this.$element.closest("form");
-    const $body = $form.find(`input[name="${this.$element.data("name")}"]`);
-    if ($body.length && this.instance) {
-      this.spec = this.instance.userData;
-      $body.val(this.dataToXML(this.spec));
-      this.$element.data("spec", this.spec);
-    }
-    // console.log("storeData spec", this.spec, "$body", $body,"$form",$form,"this",this);
     return this;
   }
 
