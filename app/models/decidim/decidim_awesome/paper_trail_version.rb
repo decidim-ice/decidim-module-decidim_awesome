@@ -70,7 +70,6 @@ module Decidim
           Arel.sql("(#{queries.join(" UNION ")})")
         end
       end
-
       ransacker :participatory_space_type do
         Arel.sql(%{("item_type")::text})
       end
@@ -117,6 +116,14 @@ module Decidim
 
       ransacker :created_at, type: :date do
         Arel.sql("date(versions.created_at)")
+      end
+
+      def self.ransackable_attributes(_auth_object = nil)
+        %w(created_at event id item_id item_type object object_changes participatory_space_type role_type user_email user_name whodunnit)
+      end
+
+      def self.ransackable_associations(_auth_object = nil)
+        ["item"]
       end
     end
   end
