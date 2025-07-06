@@ -35,11 +35,15 @@ module Decidim
         base = where(item_type: "Decidim::UserBaseEntity", event: %w(create update))
         case filter
         when nil
-          base.where("object_changes LIKE '%\nroles:\n- []\n- - %' OR object_changes LIKE '%\nadmin:\n- false\n- true%'")
+          base.where(
+            "object_changes @> ?::jsonb OR object_changes @> ?::jsonb",
+            { "roles" => [[], ["valuator"]] }.to_json,
+            { "admin" => [false, true] }.to_json
+          )
         when "admin"
-          base.where("object_changes LIKE '%\nadmin:\n- false\n- true%'")
+          base.where("object_changes @> ?::jsonb", { "admin" => [false, true] }.to_json)
         else
-          base.where("object_changes LIKE ?", "%\nroles:\n- []\n- - #{filter}\n%")
+          base.where("object_changes @> ?::jsonb", { "roles" => [[], [filter]] }.to_json)
         end
       end
 
