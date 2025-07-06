@@ -32,7 +32,8 @@ describe "Show proposals editor" do
     visit_component
 
     click_link_or_button proposal_title
-    click_link_or_button "Edit proposal"
+    find("#dropdown-trigger-resource-#{proposal.id}").click
+    click_on "Edit"
   end
 
   context "when rich text editor is enabled for participants" do
