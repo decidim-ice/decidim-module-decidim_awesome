@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "decidim/decidim_awesome/test/shared_examples/admin_accountability_contexts"
 
 describe "Filter Admin actions" do
   let(:user_creation_date) { 7.days.ago }
@@ -24,6 +25,7 @@ describe "Filter Admin actions" do
   let!(:assembly_user_role4) { create(:assembly_user_role, user: moderator, role: "moderator", created_at: 1.day.ago) }
 
   include_context "with filterable context"
+  include_context "with admin accountability helpers"
 
   before do
     # ensure papertrail has the same created_at date as the object being mocked
@@ -150,15 +152,6 @@ describe "Filter Admin actions" do
     end
 
     context "when searching by date" do
-      def search_by_date(start_date, end_date)
-        within(".filters__section") do
-          fill_in(:q_created_at_gteq_date, with: start_date.strftime("%d/%m/%Y")) if start_date.present?
-          fill_in(:q_created_at_lteq_date, with: end_date.strftime("%d/%m/%Y")) if end_date.present?
-
-          find("*[type=submit]").click
-        end
-      end
-
       context "when the start date is earlier" do
         it "displays all entries" do
           search_by_date(6.days.ago, "")
