@@ -1,3 +1,0 @@
-<!-- replace "erb[loud]:contains('f.translated :editor, :answer1')" -->
-
-<%= render_proposal_custom_fields_override(awesome_proposal_custom_fields_for(:answer), form, "body_#{locales.first}", locales.first) %>
