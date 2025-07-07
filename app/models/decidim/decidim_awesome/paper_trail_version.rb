@@ -37,7 +37,7 @@ module Decidim
         when nil
           base.where(
             "object_changes @> ?::jsonb OR object_changes @> ?::jsonb",
-            { "roles" => [[], ["valuator"]] }.to_json,
+            { "roles" => [[], []] }.to_json,
             { "admin" => [false, true] }.to_json
           )
         when "admin"
