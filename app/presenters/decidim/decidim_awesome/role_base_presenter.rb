@@ -60,7 +60,7 @@ module Decidim
       end
 
       def created_at
-        DateTime.parse(entry.changeset["created_at"]&.last)
+        Time.zone.parse(entry.changeset["created_at"]&.last)
       rescue StandardError
         entry&.created_at
       end
