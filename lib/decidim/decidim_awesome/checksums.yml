@@ -34,6 +34,8 @@ decidim-core:
     decidim-0.29.1: b30423406afd43bb9af2c98d59d43632
   /app/views/decidim/devise/sessions/new.html.erb:
     decidim-0.29.1: a8fe60cd10c1636822c252d5488a979d
+  /app/views/decidim/shared/_login_modal.html.erb:
+    decidim-0.29.1: 0d615603bb45f7b209032578dda9fc72
 decidim-proposals:
   /lib/decidim/proposals/proposal_serializer.rb:
     decidim-0.29.1: 58915ff3a7528463587d3762a93ff51b
