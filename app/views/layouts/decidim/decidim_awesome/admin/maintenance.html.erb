@@ -1,19 +1,10 @@
 <%= render "layouts/decidim/decidim_awesome/admin/base" do %>
   <div class="item_show__header">
     <h2 class="item_show__header-title">
-      <%= t("layouts.decidim.decidim_awesome.admin.maintenance.title", title: t(current_view, scope: "layouts.decidim.decidim_awesome.admin.maintenance.titles")) %>
-
-      <% available_views.each do |view, parts| %>
-        <% next if view == current_view %>
-
-        <%= link_to parts[:path], class: "button button__secondary button__xs tiny button--title" do %>
-          <%= icon parts[:icon] %>
-          <%= parts[:title] %>
-        <% end %>
-      <% end %>
+      <%= t("layouts.decidim.decidim_awesome.admin.maintenance.title", title: t(controller_name, scope: "layouts.decidim.decidim_awesome.admin.maintenance.titles")) %>
     </h2>
   </div>
-  <div class="card">
+  <div class="card mb-8">
     <%= yield %>
   </div>
 <% end %>

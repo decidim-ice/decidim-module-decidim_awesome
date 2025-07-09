@@ -32,8 +32,8 @@ module Decidim
                 if force_verification.present?
                   create_forced_authorization
                 else
-                  message = render_to_string("callout", locals: { i18n_key: "user_not_authorized", klass: "alert" })
-                  message += render_to_string("edit", locals: { with_override: true })
+                  callout = render_to_string("callout", locals: { i18n_key: "user_not_authorized", klass: "alert" }, layout: false)
+                  message = render_to_string("edit", locals: { with_override: true, callout: })
                 end
               end
               on(:ok) do

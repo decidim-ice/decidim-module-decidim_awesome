@@ -69,70 +69,6 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
     return `<xml>${$dl[0].outerHTML}</xml>`;
   }
 
-  fixBuggyFields() {
-    if (!this.$element) {
-      return false;
-    }
-
-    /**
-    * Hack to fix required checkboxes being reset
-    * Issue: https://github.com/decidim-ice/decidim-module-decidim_awesome/issues/82
-    */
-    this.$element.find(".formbuilder-checkbox-group").each((_key, group) => {
-      const inputs = $(".formbuilder-checkbox input", group);
-      const $label = $(group).find("label");
-      const data = this.spec.find((obj) => obj.type === "checkbox-group" && obj.name === $label.attr("for"));
-      let values = data.userData;
-      if (!inputs.length || !data || !values) {
-        return;
-      }
-
-      inputs.each((_idx, input) => {
-        let index = values.indexOf(input.value);
-        if (index >= 0) {
-          values.splice(index, 1)
-          // setting checked=true do not makes the browser aware that the form is valid if the field is required
-          if (!input.checked)
-          {$(input).click();}
-        } else if (input.checked)
-        {$(input).click();}
-      });
-
-      // Fill "other" option
-      const otherOption = $(".other-option", inputs.parent())[0];
-      const otherVal = $(".other-val", inputs.parent())[0];
-      const otherText = values.join(" ");
-
-      if (otherOption) {
-        if (otherText) {
-          otherOption.checked = true;
-          otherOption.value = otherText;
-          otherVal.value = otherText;
-        } else {
-          otherOption.checked = false;
-          otherOption.value = "";
-          otherVal.value = "";
-        }
-      }
-    });
-
-    /**
-    * Hack to fix required radio buttons "other" value
-    * Issue: https://github.com/decidim-ice/decidim-module-decidim_awesome/issues/133
-    */
-    this.$element.find(".formbuilder-radio input.other-val").on("input", (input) => {
-      const $input = $(input.currentTarget);
-      const $group = $input.closest(".formbuilder-radio-group");
-      $group.find("input").each((_key, radio) => {
-        const name = $(radio).attr("name");
-        if (name && name.endsWith("[]")) {
-          $(radio).attr("name", name.slice(0, -2));
-        }
-      });
-    });
-    return this;
-  }
-
   // Saves xml to the hidden input
   storeData() {
     if (!this.$element) {
@@ -168,6 +104,5 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
         }
       }
     });
-    this.fixBuggyFields();
   }
 }

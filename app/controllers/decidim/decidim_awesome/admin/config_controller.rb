@@ -16,8 +16,9 @@ module Decidim
 
         def show
           @form = form(ConfigForm).from_params(organization_awesome_config)
+          path = main_path_for(config_var)
 
-          redirect_to decidim_admin_decidim_awesome.checks_maintenance_index_path unless config_var
+          redirect_to decidim_admin_decidim_awesome.send(path[0], *path[1]) unless path[0] == :config_path
         end
 
         def update

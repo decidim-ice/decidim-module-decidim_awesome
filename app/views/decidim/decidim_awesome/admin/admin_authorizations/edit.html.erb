@@ -1,10 +1,11 @@
 <div class="form-defaults">
+  <%= callout if defined?(callout) %>
   <%= decidim_form_for(handler,
-                      builder: Decidim::AuthorizationFormBuilder,
-                      as: "authorization_handler",
-                      url: decidim_admin_decidim_awesome.admin_authorization_path(id: user.id, handler: params[:handler]),
-                      method: :patch,
-                      remote: true) do |form| %>
+                       builder: Decidim::AuthorizationFormBuilder,
+                       as: "authorization_handler",
+                       url: decidim_admin_decidim_awesome.admin_authorization_path(id: user.id, handler: params[:handler]),
+                       method: :patch,
+                       remote: true) do |form| %>
     <% if lookup_context.exists?(handler.to_partial_path, [], true) %>
       <%= render partial: handler.to_partial_path, locals: { handler:, form: } %>
     <% else %>

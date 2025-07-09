@@ -5,7 +5,7 @@
 <% if collection.empty? %>
   <div class="callout warning"><%= t(".no_data", time_ago:) %></div>
 <% else %>
-  <div class="table-scroll autorefresh" data-url="<%= maintenance_path(:private_data).split("?").first %>">
+  <div class="table-scroll autorefresh" data-url="<%= private_data_path.split("?").first %>">
     <table class="table-list">
       <thead>
         <tr>
@@ -27,7 +27,7 @@
             <% if item.locked? %>
               <span class="loading-spinner primary" title="<%= t(".removing") %>"></span>
             <% elsif item.destroyable? %>
-              <%= link_to destroy_private_data_maintenance_path(:private_data, resource_id: item), method: :delete, class: "button button__primary button__xs tiny", data: { confirm: t(".confirm_delete") } do %>
+              <%= link_to private_datum_path(item), method: :delete, class: "button button__primary button__xs tiny", data: { confirm: t(".confirm_delete") } do %>
                 <%= icon "delete-bin-line" %>
                 <%= t(".delete") %>
               <% end %>

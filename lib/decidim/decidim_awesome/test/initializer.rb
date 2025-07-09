@@ -17,6 +17,7 @@ Decidim::DecidimAwesome.configure do |config|
       :proposal_custom_fields,
       :proposal_private_custom_fields,
       :menu,
+      :mobile_menu,
       :home_content_block_menu,
       :scoped_admins,
       :custom_redirects,
@@ -31,7 +32,9 @@ Decidim::DecidimAwesome.configure do |config|
       :weighted_proposal_voting,
       :additional_proposal_sortings,
       :allow_limiting_amendments,
-      :proposal_private_custom_fields
+      :proposal_private_custom_fields,
+      :hashcash_signup,
+      :hashcash_login
     ].each do |conf|
       config.send("#{conf}=", :disabled)
     end
