@@ -91,7 +91,7 @@ describe "Visit the admin page" do
     end
 
     context "when survey hacks are disabled" do
-      let(:disabled_features) { [:auto_save_forms, :user_timezone] }
+      let(:disabled_features) { [:auto_save_forms, :user_timezone, :hashcash_signup, :hashcash_login] }
 
       it_behaves_like "do not have menu link", "surveys"
     end
@@ -236,6 +236,10 @@ describe "Visit the admin page" do
       end
 
       it_behaves_like "has menu link", "menus/menu/hacks" do
+        let(:prefix) { "" }
+      end
+
+      it_behaves_like "has menu link", "menus/mobile_menu/hacks" do
         let(:prefix) { "" }
       end
 

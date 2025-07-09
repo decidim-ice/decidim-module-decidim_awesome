@@ -22,9 +22,9 @@ describe "Admin manages verification tweaks" do
 
     fill_in_i18n_editor(:config_force_authorization_help_text,
                         "#config-force_authorization_help_text-tabs",
-                        en: "Help text <strong>with HTML</strong>",
-                        ca: "Text d'ajuda <strong>amb HTML</strong>",
-                        es: "Texto de ayuda <strong>con HTML</strong>")
+                        en: "<p>Help text <strong>with HTML</strong></p>",
+                        ca: "<p>Text d'ajuda <strong>amb HTML</strong></p>",
+                        es: "<p>Texto de ayuda <strong>con HTML</strong></p>")
     click_on "Update configuration"
 
     expect(page).to have_content("updated successfully")

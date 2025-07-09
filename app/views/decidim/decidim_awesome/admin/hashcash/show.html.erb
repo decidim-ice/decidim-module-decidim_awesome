@@ -1,0 +1,42 @@
+<div>
+  <h3 class="h3"><%= stamp %></h3>
+  <dl class="divide-y divide-gray-100">
+    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+      <dt class="font-semibold"><%= stamp.class.human_attribute_name(:created_at) %></dt>
+      <dd mt-1 class="sm:col-span-2 sm:mt-0"><%= l stamp.created_at %></dd>
+    </div>
+
+    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+      <dt class="font-semibold"><%= stamp.class.human_attribute_name(:resource) %></dt>
+      <dd mt-1 class="sm:col-span-2 sm:mt-0"><%= stamp.resource %></dd>
+    </div>
+    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+      <dt class="font-semibold"><%= stamp.class.human_attribute_name(:bits) %></dt>
+      <dd mt-1 class="sm:col-span-2 sm:mt-0"><%= stamp.bits %></dd>
+    </div>
+
+    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+      <dt class="font-semibold"><%= stamp.class.human_attribute_name(:ip_address) %></dt>
+      <dd mt-1 class="sm:col-span-2 sm:mt-0"><%= stamp.ip_address %></dd>
+    </div>
+
+    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+      <dt class="font-semibold"><%= stamp.class.human_attribute_name(:request_path) %></dt>
+      <dd mt-1 class="sm:col-span-2 sm:mt-0"><%= stamp.request_path %></dd>
+    </div>
+
+    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+      <dt class="font-semibold"><%= stamp.class.human_attribute_name(:context) %></dt>
+      <dd mt-1 class="sm:col-span-2 sm:mt-0"><%= stamp.context %></dd>
+    </div>
+  </dl>
+
+  <div class="grid grid-cols-4 gap-x-4 mb-[4px]">
+    <button class="button button__sm button__transparent-secondary">
+      <%= link_to t("decidim.decidim_awesome.admin.hashcash.filters.stamps"), hashcashes_path %>
+    </button>
+    <button class="button button__sm button__transparent-secondary">
+      <%= link_to t("decidim.decidim_awesome.admin.hashcash.filters.ip_addresses"), ip_addresses_hashcashes_path %>
+    </button>
+  </div>
+</div>

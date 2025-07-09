@@ -1,4 +1,7 @@
 cs:
+  active_hashcash:
+    submit_filter: Filtr
+    waiting_label: Čekání na ověření...
   activemodel:
     attributes:
       config:
@@ -10,6 +13,10 @@ cs:
         force_authorization_after_login: Vynutit autorizaci po přihlášení/registraci
         force_authorization_help_text: Text nápovědy pro autorizační stránku
         force_authorization_with_any_method: Povolit přístup, pokud je udělen některou z autorizací (ve výchozím nastavení jsou vyžadovány vše)
+        hashcash_login: Povolit ochranu Hashcash bota pro existující uživatele (přihlášení)
+        hashcash_login_bits: Počet bitů pro hashcash algoritmus (přihlášení)
+        hashcash_signup: Povolit ochranu Hashcash bota pro nové uživatele (registrace)
+        hashcash_signup_bits: Počet bitů pro Hashcash algoritmus (přihlášení)
         intergram_auto_no_response: Zpráva, která je odeslána jednu minutu poté, co uživatel odešle svou první zprávu a nebyla obdržena odpověď
         intergram_auto_response: Zpráva, která je odeslána okamžitě poté, co uživatel odešle svou první zprávu
         intergram_chat_id: ID Chatu
@@ -264,6 +271,15 @@ cs:
               drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
               force_authorization_after_login: 'Pokud je povoleno, uživatelé budou po přihlášení nebo registraci přesměrováni na autorizační stránku, pokud nejsou uděleny některé z zadaných autorizací. To je užitečné, pokud chcete donutit uživatele k ověření pomocí specifické autorizace, než se budou moci vůbec přihlásit (např.: zabránit spamu).'
               force_authorization_help_text: Přidejte vlastní text, který vysvětlí proč je potřeba autorizace. Také se ujistěte, že přidáte kontaktní metodu pro případ, že uživatelé potřebují pomoc.
+              hashcash_i18n_key: 'Text, který je zobrazen uživatelům v tlačítkách pro přihlášení / registraci pomocí klíče i18n: %{key}'
+              hashcash_login: |
+                Chraňte aplikace proti botům a brute force útokům, aniž by to obtěžovalo lidi.
+                Hashcash je proof-of-work systém, který vyžaduje, aby uživatelé vyřešili počítačovou hádanku (kterou provádí prohlížeč) před tím, než se mohou zaregistrovat.
+              hashcash_login_bits: Tento parametr definuje počet bitů, které bude používat algoritmus Hashcash pro generování důkazu práce. Doporučuje se použít hodnotu mezi 16 (jednoduchými) a 30 (extrémně těžkými) bity. Výchozí hodnota pro přihlašovací formuláře je %{bits} bity.
+              hashcash_signup: |
+                Chraňte aplikace proti botům a brute force útokům, aniž by to obtěžovalo lidi.
+                Hashcash je proof-of-work systém, který vyžaduje, aby uživatelé vyřešili počítačovou hádanku (kterou provádí prohlížeč) před tím, než se mohou zaregistrovat.
+              hashcash_signup_bits: Tento parametr definuje počet bitů, které bude používat algoritmus Hashcash pro generování důkazu práce. Doporučuje se použít hodnotu mezi 16 (jednoduchými) a 30 (extrémně těžkými) bity. Výchozí hodnota pro registrační formuláře je %{bits} bity.
               intergram_about: Intergram používá Telegram messenger pro zpracování widgetu live podpory v dolní části stránky.
               intergram_config: 'Pozvěte <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bota</a> do vaší skupiny nebo začněte chatovat přímo. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               original_editor_override: Od verze 0.26 je možné nahrávat obrázky do editorů (pouze pro administrátory). Proto zde nastavení obrázků ovlivňuje pouze veřejné editory (správce je bude mít vždy k dispozici).
@@ -398,37 +414,25 @@ cs:
           update:
             error: Chyba aktualizace přesměrování! %{error}
             success: Přesměrování úspěšně aktualizováno
-        maintenance:
-          private_data:
-            component: Prostor / komponenta
-            confirm_delete: Opravdu chcete odstranit všechna soukromá data tohoto zdroje? Tuto akci nelze vrátit zpět.
-            delete: Odstranit vše
-            destroying_private_data: Soukromá data pro %{title} jsou nastavena na zničení. Zkontrolujte prosím znovu za několik minut.
-            done: Hotovo
+        hashcash:
+          filters:
+            ip_addresses: Zobrazit IP adresy
+            stamps: Zobrazit Hashcash razítka
+          index:
+            bits: Bity
+            created_at: Vytvořeno
             help_html: |
-              Tento nástroj umožňuje odstranit všechna soukromá data pro konkrétní participační prostor nebo komponentu. Tato akce je nevratná a odstraní všechna soukromá data z databáze.
+              Tato stránka zobrazuje hashcash razítka, která byla zjištěna v systému. Hashcash je systém potvrzující práci, který vyžaduje, aby uživatelé vyřešili počítačovou hádanku (kterou provádí prohlížeč) před tím, než se mohou zaregistrovat.
               <br><br>
-              <strong>Co je považováno za soukromá data?</strong>
-              <br>
-              Soukromá data jsou jakékoliv informace, které nejsou veřejně dostupné a jsou přístupné pouze správcům. To v současné době zahrnuje informace o soukromých vlastních polích.
-              <br><br>
-              <strong>Co se stane, když smažu soukromá data?</strong>
-              <br>
-              Když smažete soukromá data, všechny soukromé informace pro vybraný participační prostor nebo součást budou trvale odstraněny z databáze. Protokol této akce bude uložen v systému pro účely auditu.
-              <br><br>
-              <strong>Co se stane s veřejnými daty?</strong>
-              <br>
-              Veřejná data nebudou touto akcí dotčena. Budou odstraněna pouze soukromá data.
-              <br><br>
-              <strong>Je minimální čas počkat před odstraněním soukromých dat?</strong>
-              <br>
-              Ano, nemůžete smazat soukromá data, pokud byla poslední aktualizace menší než před %{time_ago}. Tuto konfiguraci můžete změnit v souboru inicializátoru.
-            items_count: Dotčené celkem
-            last_date: Poslední aktualizace
-            no_data: Nejsou nalezena žádná soukromá data starší než před %{time_ago}
-            not_destroyable: Tento zdroj zatím nelze zničit
-            removing: Odstraňování...
-            time_ago: "Před %{time}"
+              Každá položka v tomto seznamu představuje hashcash razítko, které bylo vygenerováno uživatelem pokaždé, když se zaregistroval nebo se přihlásil.
+            ip_address: IP adresa
+            no_data: Nenalezena žádná Hashcash razítka
+            request_path: Cesta požadavku
+          ip_addresses:
+            help_html: Tato stránka obsahuje všechny IP adresy, které byly v systému zjištěny podle počtu Hashcash razítek, které vygenerovaly. <br><br> Každé razítko je buď přihlášení nebo registrace uživatelem. Tyto informace můžete použít k detekci podezřelé aktivity.
+            ip_address: IP adresa
+            no_data: Nebyly nalezeny žádné IP adresy
+            stamps: Hashcash razítka
         menu:
           admins: Škálovaní administrátoři
           custom_redirects: Vlastní přesměrování
@@ -436,6 +440,7 @@ cs:
           livechat: Live Chat
           maintenance:
             checks: Systémová kompatibilita
+            hashcash: Hashcash razítka
             maintenance: Údržba
             private_data: Soukromá data
           menu_hacks: Vylepšení menu
@@ -472,6 +477,8 @@ cs:
               title: Blok Globální menu
             menu:
               title: Hlavní menu
+            mobile_menu:
+              title: Mobilní menu
             new: Nová položka
             remove: Odstranit přidání
             remove_hack: Odstranit přizpůsobení
@@ -487,6 +494,37 @@ cs:
           verification_modal:
             authorizations_for: Autorizace pro %{user}
             close: Zavřít
+        private_data:
+          private_data:
+            component: Prostor / komponenta
+            confirm_delete: Opravdu chcete odstranit všechna soukromá data tohoto zdroje? Tuto akci nelze vrátit zpět.
+            delete: Odstranit vše
+            destroying: Soukromá data pro %{title} jsou nastavena na zničení. Zkontrolujte prosím znovu za několik minut.
+            done: Hotovo
+            help_html: |
+              Tento nástroj umožňuje odstranit všechna soukromá data pro konkrétní participační prostor nebo komponentu. Tato akce je nevratná a odstraní všechna soukromá data z databáze.
+              <br><br>
+              <strong>Co je považováno za soukromá data?</strong>
+              <br>
+              Soukromá data jsou jakékoliv informace, které nejsou veřejně dostupné a jsou přístupné pouze správcům. To v současné době zahrnuje informace o soukromých vlastních polích.
+              <br><br>
+              <strong>Co se stane, když smažu soukromá data?</strong>
+              <br>
+              Když smažete soukromá data, všechny soukromé informace pro vybraný participační prostor nebo součást budou trvale odstraněny z databáze. Protokol této akce bude uložen v systému pro účely auditu.
+              <br><br>
+              <strong>Co se stane s veřejnými daty?</strong>
+              <br>
+              Veřejná data nebudou touto akcí dotčena. Budou odstraněna pouze soukromá data.
+              <br><br>
+              <strong>Je minimální čas počkat před odstraněním soukromých dat?</strong>
+              <br>
+              Ano, nemůžete smazat soukromá data, pokud byla poslední aktualizace menší než před %{time_ago}. Tuto konfiguraci můžete změnit v souboru inicializátoru.
+            items_count: Celkový dopad
+            last_date: Poslední aktualizace
+            no_data: Nejsou nalezena žádná soukromá data starší než před %{time_ago}
+            not_destroyable: Tento zdroj zatím nelze zničit
+            removing: Odstraňování...
+            time_ago: "Před %{time}"
         proposal_custom_fields:
           menu:
             title: Veřejná pole
@@ -640,6 +678,7 @@ cs:
             title: 'Nástroj údržby: %{title}'
             titles:
               checks: Kontroly kompatibility systému
+              hashcash: Hashcash razítka
               private_data: Vymazání soukromých údajů
         awesome_config:
           amendments: Pozměňovací návrhy

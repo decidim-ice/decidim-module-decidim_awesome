@@ -7,12 +7,12 @@
     <div>
       <div class="instructions">
         <%= t("decidim.decidim_awesome.amendments.modal.explanation_html",
-                                    proposal_link: present(@proposal).proposal_path + "#comments") %>
+              proposal_link: present(@proposal).proposal_path + "#comments") %>
 
         <% emendations = @proposal.emendations.not_hidden.where(decidim_amendments: { state: Decidim::Amendment.states["evaluating"] }) %>
         <% if current_component.current_settings&.amendments_visibility == "all" && emendations %>
           <%= t("decidim.decidim_awesome.amendments.modal.current_amendment_html",
-                                        amendment_link: present(emendations&.first).proposal_path) %>
+                amendment_link: present(emendations&.first).proposal_path) %>
         <% end %>
       </div>
     </div>

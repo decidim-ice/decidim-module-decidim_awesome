@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim::DecidimAwesome
   module Admin
-    describe MaintenanceController do
+    describe PrivateDataController do
       routes { Decidim::DecidimAwesome::AdminEngine.routes }
 
       let(:user) { create(:user, :confirmed, :admin, organization:) }
@@ -12,10 +12,6 @@ module Decidim::DecidimAwesome
       let!(:component) { create(:proposal_component, organization:) }
       let!(:proposal) { create(:proposal, component:) }
       let!(:extra_fields) { create(:awesome_proposal_extra_fields, private_body: "private", proposal:) }
-      let(:params) do
-        { id: }
-      end
-      let(:id) { "private_data" }
       let(:time_ago) { 4.months.ago }
 
       before do
@@ -26,33 +22,31 @@ module Decidim::DecidimAwesome
         sign_in user, scope: :user
       end
 
-      describe "GET #show" do
+      describe "GET #index" do
         it "returns http success" do
-          get(:show, params:)
+          get(:index)
           expect(response).to have_http_status(:success)
-
-          expect(controller.helpers.current_view).to eq("private_data")
-          expect(controller.helpers.available_views.keys).to match_array(%w(private_data checks))
         end
 
         context "when format is json" do
           it "returns json" do
-            get(:show, params:)
+            get(:index)
             expect(response).to have_http_status(:success)
           end
         end
       end
 
-      describe "DELETE #destroy_private_data" do
+      describe "DELETE #destroy" do
         let(:params) do
-          { id:, resource_id: component.id }
+          { id: component.id }
         end
 
         it "returns http success" do
           perform_enqueued_jobs do
-            delete(:destroy_private_data, params:)
+            delete(:destroy, params:)
           end
           expect(response).to have_http_status(:redirect)
+          expect(flash[:notice]).to include("is set to be destroyed")
           expect(Decidim::DecidimAwesome::ProposalExtraField.find(extra_fields.id).private_body).to be_nil
         end
 
@@ -61,7 +55,7 @@ module Decidim::DecidimAwesome
 
           it "returns http success" do
             perform_enqueued_jobs do
-              delete(:destroy_private_data, params:)
+              delete(:destroy, params:)
             end
             expect(response).to have_http_status(:redirect)
             expect(Decidim::DecidimAwesome::ProposalExtraField.find(extra_fields.id).private_body).to eq("private")
@@ -73,7 +67,7 @@ module Decidim::DecidimAwesome
 
           it "returns http success" do
             perform_enqueued_jobs do
-              delete(:destroy_private_data, params:)
+              delete(:destroy, params:)
             end
             expect(response).to have_http_status(:redirect)
             expect(Decidim::DecidimAwesome::ProposalExtraField.find(extra_fields.id).private_body).to eq("private")

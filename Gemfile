@@ -7,7 +7,6 @@ ruby RUBY_VERSION
 DECIDIM_VERSION = "0.30.0"
 
 gem "decidim", DECIDIM_VERSION
-# this causes failures if not enabled (check if still necessary in the future)
 gem "decidim-decidim_awesome", path: "."
 gem "decidim-templates", DECIDIM_VERSION
 
@@ -22,6 +21,7 @@ group :development, :test do
 
   gem "brakeman", "~> 6.1"
   gem "parallel_tests", "~> 4.2"
+  gem "rubocop-rails", "~> 2.25.1"
 end
 
 group :development do
