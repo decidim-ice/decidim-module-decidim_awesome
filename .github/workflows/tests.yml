@@ -1,4 +1,4 @@
-name: "[CI] Tests 0.29"
+name: "[CI] Tests 0.30"
 
 on:
   push:

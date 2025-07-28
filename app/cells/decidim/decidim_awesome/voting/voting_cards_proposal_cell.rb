@@ -71,7 +71,7 @@ module Decidim
 
           return true if proposal.maximum_votes_reached? && !proposal.can_accumulate_votes_beyond_threshold && current_component.participatory_space.can_participate?(current_user)
 
-          true if vote_limit_enabled? && remaining_votes_count_for(current_user) <= 0
+          true if vote_limit_enabled? && remaining_votes_count_for_user <= 0
         end
 
         def voted_for_any?

@@ -17,9 +17,9 @@ module Decidim
       private
 
       def awesome_hashcash_bits(zone)
-        return false unless awesome_config["hashcash_#{zone}".to_sym]
+        return false unless awesome_config[:"hashcash_#{zone}"]
 
-        awesome_config["hashcash_#{zone}_bits".to_sym]
+        awesome_config[:"hashcash_#{zone}_bits"]
       end
 
       def awesome_check_hashcash
