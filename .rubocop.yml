@@ -1,5 +1,5 @@
-inherit_gem:
-  decidim-dev: rubocop-decidim.yml
+inherit_from:
+  - https://raw.githubusercontent.com/decidim/decidim/release/0.30-stable/.rubocop.yml
 
 AllCops:
   Exclude:
