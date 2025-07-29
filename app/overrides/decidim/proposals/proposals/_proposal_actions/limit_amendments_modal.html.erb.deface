@@ -1,0 +1,2 @@
+<!-- insert_before "erb[silent]:contains('@proposal.amendable? && allowed_to?(:edit, :proposal, proposal: @proposal)')" -->
+<%= render "decidim/decidim_awesome/amendments/modal" if @proposal.emendations.not_hidden.where(decidim_amendments: { state: Decidim::Amendment.states["evaluating"] }).exists? && @proposal.amendable? %>
