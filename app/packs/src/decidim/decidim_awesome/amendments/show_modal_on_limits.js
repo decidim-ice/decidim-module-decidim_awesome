@@ -15,10 +15,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("click", (event) => {
     const target = event.target.closest("#amend-button");
-    if (!target) return;
+    if (!target) {
+      return;
+    }
 
     const modal = window.Decidim.currentDialogs[modalId];
-    if (!modal) return;
+    if (!modal) {
+      return;
+    }
 
     event.preventDefault();
     event.stopPropagation();
