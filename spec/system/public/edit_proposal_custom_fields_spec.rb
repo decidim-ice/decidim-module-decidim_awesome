@@ -209,6 +209,30 @@ describe "Custom proposals fields" do
     end
   end
 
+  context "when participatory texts" do
+    let!(:participatory_text) { create(:participatory_text, component:) }
+    let(:component) do
+      create(:proposal_component,
+             :with_creation_enabled,
+             :with_amendments_and_participatory_texts_enabled,
+             manifest:,
+             participatory_space: participatory_process)
+    end
+
+    before do
+      visit_component
+      within "#proposal_#{participatory_text.id}" do
+        click_on "Amend"
+      end
+    end
+
+    it "is amendment editor page" do
+      expect(page).to have_content("Create Amendment Draft")
+    end
+
+    it_behaves_like "has default fields"
+  end
+
   context "when editing collaborative drafts" do
     let(:component) do
       create(:proposal_component,
