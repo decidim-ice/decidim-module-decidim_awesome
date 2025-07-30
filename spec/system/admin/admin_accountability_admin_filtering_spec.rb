@@ -171,9 +171,9 @@ describe "Filter Admin actions" do
             expect(page).to have_content("Export job has been enqueued. You will receive an email when it's ready.")
           end
 
-          expect(last_email.subject).to include("Your export", "csv", "is ready")
-          expect(last_email.attachments.length).to be_positive
-          expect(last_email.attachments.first.filename).to match(/^admin_actions.*\.zip$/)
+          expect(last_email.subject).to eq(%(Your export "admin_actions" is ready))
+          expect(Decidim::PrivateExport.count).to eq(1)
+          expect(Decidim::PrivateExport.last.export_type).to eq("admin_actions")
           expect(current_url).to include(decidim_admin_decidim_awesome.admin_accountability_path)
           expect(current_url).to include("admins=true")
         end
