@@ -221,7 +221,7 @@ describe "Custom proposals fields" do
 
     before do
       visit_component
-      within "#proposal_#{participatory_text.id}" do
+      within "#proposal_#{proposal.id}" do
         click_on "Amend"
       end
     end
