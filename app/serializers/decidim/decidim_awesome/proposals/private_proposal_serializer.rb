@@ -20,7 +20,7 @@ module Decidim
           return payload unless notes.any?
 
           notes.each do |note|
-            payload["notes/#{note.id}".to_sym] = {
+            payload[:"notes/#{note.id}"] = {
               created_at: note.created_at,
               note: note.body,
               author: author_name(note.author)

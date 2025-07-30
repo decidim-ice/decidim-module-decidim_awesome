@@ -43,7 +43,9 @@ module Decidim
             end
 
             def translated_participatory_space_type_eq(item_type)
+              # rubocop:disable Style/SafeNavigationChainLength
               item_type.gsub("UserRole", "").safe_constantize&.model_name&.human&.pluralize || item_type
+              # rubocop:enable Style/SafeNavigationChainLength
             end
 
             def search_field_predicate

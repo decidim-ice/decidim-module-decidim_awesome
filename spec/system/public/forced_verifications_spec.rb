@@ -87,6 +87,7 @@ describe "Forced verifications" do
       it "user can accept the terms and conditions" do
         expect(page).to have_current_path("/pages/terms-of-service")
         click_on "I agree with these terms"
+        sleep 1
         expect(user.reload.accepted_tos_version).not_to be_nil
         expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(redirect_url: restricted_path))
         expect(page).to have_content("you need to authorize your account with a valid authorization")
