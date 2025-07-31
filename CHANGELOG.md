@@ -1,7 +1,15 @@
 CHANGELOG
 =========
 
-v0.12.2
+v0.12.4
+-------
+Compatibility
+  - Decidim 0.29.x
+
+Features:
+  - Fix use of hashcash in loginModals
+
+v0.12.3
 -------
 
 Compatibility:
