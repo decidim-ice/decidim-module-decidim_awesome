@@ -284,6 +284,10 @@ module Decidim
       {}
     end
 
+    config_accessor :authorization_groups do
+      {}
+    end
+
     # Allow to configure custom redirections
     # can return :disabled to completely remove this feature
     # You can initialize some default redirection if desired as follows:

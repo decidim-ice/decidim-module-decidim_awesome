@@ -20,6 +20,8 @@ module Decidim
         attribute :user_timezone, Boolean
         attribute :force_authorization_after_login, Array
         attribute :force_authorization_with_any_method, Boolean
+        attribute :authorization_handlers_options, { String => Object }
+        attribute :authorization_groups, Hash
         attribute :hashcash_signup, Boolean
         attribute :hashcash_signup_bits, Integer, default: Decidim::DecidimAwesome.hashcash_signup_bits
         attribute :hashcash_login, Boolean
@@ -55,7 +57,7 @@ module Decidim
         validates :validate_body_max_marks_together, presence: true, numericality: { greater_than_or_equal_to: 1 }
         validates :hashcash_signup_bits, presence: true, numericality: { greater_than_or_equal_to: 10, less_than_or_equal_to: 50 }
         validates :hashcash_login_bits, presence: true, numericality: { greater_than_or_equal_to: 10, less_than_or_equal_to: 50 }
-        validate :force_authorization_after_login_is_valid
+        # validate :force_authorization_after_login_is_valid
         # TODO: validate non general admins are here
 
         def self.from_params(params, additional_params = {})
@@ -148,6 +150,23 @@ module Decidim
           end
         end
 
+        def options_schema(handler_name)
+          options_manifest(handler_name).schema.new(authorization_handler_options(handler_name))
+        end
+
+        def options_attributes(handler_name)
+          manifest = options_manifest(handler_name)
+          manifest ? manifest.attributes : []
+        end
+
+        def authorization_handler_options(handler_name)
+          authorization_handlers_options&.dig(handler_name.to_s) || {}
+        end
+
+        def manifest(handler_name)
+          Decidim::Verifications.find_workflow_manifest(handler_name)
+        end
+
         private
 
         def force_authorization_after_login_is_valid
@@ -157,6 +176,10 @@ module Decidim
           return if invalid.empty?
 
           errors.add(:force_authorization_after_login, :invalid)
+        end
+
+        def options_manifest(handler_name)
+          manifest(handler_name).options
         end
       end
     end

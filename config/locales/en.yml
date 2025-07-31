@@ -10,6 +10,8 @@ en:
         allow_images_in_editors: Allow images in the HTML editor
         allow_images_in_proposals: Allow images in the proposals editor
         allow_videos_in_editors: Allow videos in the HTML editor
+        authorization_groups: Authorization groups
+        authorization_options_form: Authorization options
         auto_save_forms: Auto save forms in local storage
         force_authorization_after_login: Force authorization after login/registering
         force_authorization_help_text: Help text for the authorization page
@@ -268,6 +270,7 @@ en:
               You can start the process now and it will be performed in the background.
             start_image_migrations: "👉 Start the migration process now"
         config:
+          authorization_groups: Authorization groups
           caution: 'NOTE: This feature heavily modifies some default behaviors that
             might lead to unexpected results. Use it with caution!'
           constraints:
@@ -278,6 +281,9 @@ en:
             delete: Delete
             edit: Edit
             title: 'Applicable only in these cases:'
+          create_authorization_group:
+            error: Error creating a new authorization group! %{error}
+            success: Authorization group %{key} created successfully
           create_proposal_custom_field:
             error: Error creating a new "custom field" box! %{error}
             success: '"custom field" box %{key} created successfully'
@@ -287,6 +293,9 @@ en:
           create_scoped_style:
             error: Error creating a new CSS box! %{error}
             success: CSS box %{key} created successfully
+          destroy_authorization_group:
+            error: Error removing authorization group! %{error}
+            success: Authorization group %{key} removed successfully
           destroy_proposal_custom_field:
             error: Error removing "custom field" box! %{error}
             success: '"custom field" box %{key} removed successfully'
@@ -416,6 +425,17 @@ en:
             validators:
               body: User input validations for the "body" field
               title: User input validations for the "title" field
+          form_authorization_groups:
+            authorization_groups_html: |
+              Define verification groups. Each group can require users to be verified
+              by one or more methods to access specific areas of the platform.
+            delete: Delete
+            help: You can define groups of authorization methods and restrict access
+              based on them.
+            new: Add a new permissions group
+            remove: Remove this "permissions group"
+            sure_to_remove: Are you sure you want to destroy this permissions group?
+            title: Permissions group
           form_proposal_custom_fields:
             delete: Delete
             new: Add a new "custom fields" box
