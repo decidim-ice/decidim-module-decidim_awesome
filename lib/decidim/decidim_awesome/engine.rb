@@ -30,7 +30,7 @@ module Decidim
           # Add hashcash to signup and login
           Decidim::Devise::SessionsController.include(Decidim::DecidimAwesome::NeedsHashcash)
           Decidim::Devise::RegistrationsController.include(Decidim::DecidimAwesome::NeedsHashcash)
-          Decidim::Components::BaseController.include(Decidim::DecidimAwesome::NeedsHashcash)
+          Decidim::ApplicationController.include(Decidim::DecidimAwesome::NeedsHashcash)
         end
         # Include additional helpers globally
         ActiveSupport.on_load(:action_view) { include Decidim::DecidimAwesome::AwesomeHelpers }
