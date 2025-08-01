@@ -1,8 +1,7 @@
-<div class="card">
-  <div class="bg-gray-6 p-4 rounded-t">
-    <h2 class="card-title flex md:flex-row justify-between sm:flex-wrap">
+  <div class="item_show__header">
+    <h1 class="item_show__header-title">
       <%= t(".title") %>
-      <div class="flex gap-4">
+      <div class="gap-4">
         <%= link_to t(global? ? ".see_spaces" : ".see_global"), admin_accountability_path(admins: !global?), class: "button button__sm button__transparent-secondary tiny button--title new" %>
         <span class="exports button button__sm button__secondary tiny button--simple button--title" data-toggle="export-dropdown">
             <%= t "exports.button", scope: "decidim.decidim_awesome.admin.admin_accountability" %>
@@ -21,13 +20,12 @@
           </ul>
         </div>
       </div>
-    </h2>
+    </h1>
   </div>
 
   <%= render partial: "decidim/decidim_awesome/admin/shared/filters_with_date", locals: { i18n_ctx: "admin_accountability" } %>
 
-  <div class="card-section p-4">
-    <p class="help-text"><%= t(global? ? ".global_description" : ".description") %></p>
+    <p class="help-text mt-3 mb-3"><%= t(global? ? ".global_description" : ".description") %></p>
 
     <% if global_users_missing_date %>
       <div class="callout warning"><%= t(".missing_users", date: l(global_users_missing_date, format: :decidim_short)) %></div>
@@ -67,5 +65,4 @@
       <%= paginate admin_actions, theme: "decidim" %>
     </div>
   </div>
-</div>
 <% append_stylesheet_pack_tag "decidim_admin_decidim_awesome_search_form" %>

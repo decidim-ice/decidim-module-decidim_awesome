@@ -41,8 +41,10 @@ module Decidim::DecidimAwesome
         end
 
         email = last_email
-        expect(email.subject).to match(/Your export "admin_actions-#{Time.current.strftime("%Y-%m-%d")}-([0-9]+).#{ext}" is ready/)
-        expect(email.body.encoded).to match("Please find attached a zipped version of your export")
+        expect(email.subject).to match(/Your export "admin_actions" is ready/)
+        expect(email.body.encoded).to match("The file will be available for download until")
+        expect(email.body.encoded).to match("Download")
+        expect(email.body.encoded).to match("#{organization.host}/download_your_data")
       end
     end
 
