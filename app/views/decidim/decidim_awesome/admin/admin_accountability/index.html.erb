@@ -25,7 +25,7 @@
 
   <%= render partial: "decidim/decidim_awesome/admin/shared/filters_with_date", locals: { i18n_ctx: "admin_accountability" } %>
 
-    <p class="help-text -mt-8 mb-4"><%= t(global? ? ".global_description" : ".description") %></p>
+    <p class="help-text mt-3 mb-3"><%= t(global? ? ".global_description" : ".description") %></p>
 
     <% if global_users_missing_date %>
       <div class="callout warning"><%= t(".missing_users", date: l(global_users_missing_date, format: :decidim_short)) %></div>
