@@ -18,15 +18,11 @@ module Decidim
         attribute :proposal_custom_fields, Hash
         attribute :proposal_private_custom_fields, Hash
         attribute :user_timezone, Boolean
-        attribute :force_authorization_after_login, Array
-        attribute :force_authorization_with_any_method, Boolean
-        attribute :authorization_handlers_options, { String => Object }
         attribute :authorization_groups, Hash
         attribute :hashcash_signup, Boolean
         attribute :hashcash_signup_bits, Integer, default: Decidim::DecidimAwesome.hashcash_signup_bits
         attribute :hashcash_login, Boolean
         attribute :hashcash_login_bits, Integer, default: Decidim::DecidimAwesome.hashcash_login_bits
-        translatable_attribute :force_authorization_help_text, String
         attribute :scoped_admins, Hash
         attribute :menu, [MenuForm]
         attribute :intergram_for_admins, Boolean
@@ -62,7 +58,7 @@ module Decidim
 
         def self.from_params(params, additional_params = {})
           instance = super(params, additional_params)
-          instance.force_authorization_after_login = instance.force_authorization_after_login.compact_blank if instance.force_authorization_after_login.present?
+          instance.authorization_groups = build_authorization_groups(instance.authorization_groups)
           instance.valid_keys = extract_valid_keys_from_params(params)
           instance.sanitize_labels!
           instance.sanitize_arrays!
@@ -79,6 +75,20 @@ module Decidim
                     end
           end
           keys
+        end
+
+        def self.build_authorization_groups(raw_groups)
+          return {} unless raw_groups.is_a?(Hash)
+
+          raw_groups.transform_values do |group_data|
+            group_data.is_a?(AuthorizationGroupForm) ? group_data : AuthorizationGroupForm.new(group_data)
+          end
+        end
+
+        def authorization_groups_attributes
+          return {} unless authorization_groups.is_a?(Hash)
+
+          authorization_groups.transform_values(&:to_h)
         end
 
         def additional_proposal_sorting_labels
@@ -150,23 +160,6 @@ module Decidim
           end
         end
 
-        def options_schema(handler_name)
-          options_manifest(handler_name).schema.new(authorization_handler_options(handler_name))
-        end
-
-        def options_attributes(handler_name)
-          manifest = options_manifest(handler_name)
-          manifest ? manifest.attributes : []
-        end
-
-        def authorization_handler_options(handler_name)
-          authorization_handlers_options&.dig(handler_name.to_s) || {}
-        end
-
-        def manifest(handler_name)
-          Decidim::Verifications.find_workflow_manifest(handler_name)
-        end
-
         private
 
         def force_authorization_after_login_is_valid
@@ -176,10 +169,6 @@ module Decidim
           return if invalid.empty?
 
           errors.add(:force_authorization_after_login, :invalid)
-        end
-
-        def options_manifest(handler_name)
-          manifest(handler_name).options
         end
       end
     end

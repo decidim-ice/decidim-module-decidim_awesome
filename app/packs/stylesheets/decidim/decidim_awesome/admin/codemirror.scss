@@ -5,7 +5,8 @@
 
 .awesome-edit-config {
   .scoped_styles_container,
-  .proposal_custom_fields_container {
+  .proposal_custom_fields_container,
+  .authorization_group_container {
     @apply bg-background;
 
     &.private {

@@ -5,18 +5,18 @@ en:
     waiting_label: Waiting for verification ...
   activemodel:
     attributes:
+      authorization_group:
+        force_authorization_help_text: Help text for the authorization page
+        force_authorization_with_any_method: Allow access if any of the authorizations
+          is granted (by default, all are required)
       config:
         additional_proposal_sortings: Additional sorting options enabled
         allow_images_in_editors: Allow images in the HTML editor
         allow_images_in_proposals: Allow images in the proposals editor
         allow_videos_in_editors: Allow videos in the HTML editor
-        authorization_groups: Authorization groups
+        authorization_groups: Permissions group %{id}
         authorization_options_form: Authorization options
         auto_save_forms: Auto save forms in local storage
-        force_authorization_after_login: Force authorization after login/registering
-        force_authorization_help_text: Help text for the authorization page
-        force_authorization_with_any_method: Allow access if any of the authorizations
-          is granted (by default, all are required)
         hashcash_login: Enable the Hashcash bot protection for existing users (login)
         hashcash_login_bits: Number of bits for the Hashcash algorithm (login)
         hashcash_signup: Enable the Hashcash bot protection for new users (sign up)
@@ -38,7 +38,6 @@ en:
         proposal_custom_fields: Custom fields %{id}
         proposal_private_custom_fields: Private Custom fields %{id}
         scoped_admin_styles: Custom styles %{id}
-        scoped_admins: Scoped admins group %{id}
         scoped_styles: Custom styles %{id}
         user_timezone: Allow users to set their timezone in their profile
         validate_body_max_caps_percent: Maximum allowed percentage of capital letters
@@ -435,7 +434,7 @@ en:
             new: Add a new permissions group
             remove: Remove this "permissions group"
             sure_to_remove: Are you sure you want to destroy this permissions group?
-            title: Permissions group
+            title: 'Restrict access with:'
           form_proposal_custom_fields:
             delete: Delete
             new: Add a new "custom fields" box

@@ -5,29 +5,42 @@ module Decidim
     module Admin
       class CreateAuthorizationGroup < Command
         include NeedsConstraintHelpers
-
-        def initialize(organization)
+        # Public: Initializes the command.
+        #
+        def initialize(organization, config_var = :authorization_groups)
           @organization = organization
           @ident = rand(36**8).to_s(36)
+          @config_var = config_var
         end
 
+        # Executes the command. Broadcasts these events:
+        #
+        # - :ok when everything is valid.
+        # - :invalid if we couldn't proceed.
+        #
+        # Returns nothing.
         def call
-          groups = AwesomeConfig.find_or_initialize_by(var: :authorization_groups, organization: @organization)
-          groups.value ||= {}
-          groups.value[@ident] = {
+          groups = AwesomeConfig.find_or_initialize_by(var: @config_var, organization: @organization)
+          groups.value = {} unless groups.value.is_a? Hash
+          groups.value[@ident] = default_definition
+          groups.save!
+
+          create_constraint_never(:authorization_group)
+
+          broadcast(:ok, @ident)
+        rescue StandardError => e
+          broadcast(:invalid, e.message)
+        end
+
+        private
+
+        def default_definition
+          {
             "authorization_handlers" => [],
             "authorization_handlers_options" => {},
             "force_authorization_with_any_method" => false,
             "force_authorization_help_text" => {}
           }
-
-          groups.save!
-
-          create_constraint_never(:authorization_groups)
-
-          broadcast(:ok, @ident)
-        rescue StandardError => e
-          broadcast(:invalid, e.message)
         end
       end
     end

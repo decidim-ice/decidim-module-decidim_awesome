@@ -4,51 +4,88 @@
 %>
 
 <div class="form__wrapper row column decidim_awesome-form">
-  <div class="callout warning">
-    <%= t("help.verifications_html", scope: "decidim.decidim_awesome.admin.config.form") %>
-  </div>
+  <% if config_enabled?(:authorization_groups) %>
+    <div class="callout warning">
+      <%= t("help.verifications_html", scope: "decidim.decidim_awesome.admin.config.form") %>
+    </div>
 
-  <% form.object.authorization_groups&.each do |key, value| %>
-    <div class="card p-4 js-box-container authorization_group_container" data-key="<%= key %>" data-var="<%= config_var %>">
-      <%= render "decidim/decidim_awesome/admin/config/autoedit_box_label",
-                 var: config_var,
-                 key: key,
-                 scope: "#{field}_#{key}",
-                 delete_path: decidim_admin_decidim_awesome.authorization_group_path(id: key) %>
+    <% form.object.authorization_groups&.each do |key, group| %>
+      <% group ||= Decidim::DecidimAwesome::Admin::AuthorizationGroupForm.new %>
 
-      <div>
-        <p class="help-text"><%= t("help.force_authorization_after_login", scope: "decidim.decidim_awesome.admin.config.form") %></p>
-        <%= form.collection_check_boxes :force_authorization_after_login, available_authorizations, :name, :fullname do |builder| %>
-          <div>
-            <%= builder.label { builder.check_box + builder.text } %>
-            <div id="authorization-handler-<%= builder.value %>"
-                 class="authorization-handler ml-6"
-                 style="display: <%= form.object.force_authorization_after_login.include?(builder.value) ? "block" : "none" %>;">
-              <%= render "decidim/decidim_awesome/admin/config/authorization_options_form", form: form, handler_name: builder.value %>
+      <%= form.fields_for "#{config_var}[#{key}]", group do |group_form| %>
+        <div class="card p-4 js-box-container authorization_group_container" data-key="<%= key %>" data-var="<%= config_var %>">
+          <%= render "decidim/decidim_awesome/admin/config/autoedit_box_label", var: config_var, key:, scope: "#{field}_#{key}", delete_path: decidim_admin_decidim_awesome.authorization_group_path(id: key) %>
+          <div class="card-section mt-2">
+            <div class="row column pt-4 pb-4">
+              <h5><%= t("title", scope: "decidim.decidim_awesome.admin.config.form_authorization_groups") %></h5>
+              <p class="help-text">
+                <%= t("help.force_authorization_after_login", scope: "decidim.decidim_awesome.admin.config.form") %>
+              </p>
+              <div class="mt-4 form__wrapper gap-1">
+                <%= group_form.collection_check_boxes :authorization_handlers, available_authorizations, :name, :fullname do |builder| %>
+                  <div>
+                    <%= builder.label do %>
+                      <%= builder.check_box(data: { group_key: key }) + builder.text %>
+                    <% end %>
+
+                    <% options_html = render("decidim/decidim_awesome/admin/config/authorization_options_form", form: group_form, handler_name: builder.value) %>
+
+                    <% if options_html.present? %>
+                      <div id="authorization-handler-<%= key %>-<%= builder.value %>"
+                           class="authorization-handler my-4 ml-6"
+                           style="display: <%= group.authorization_handlers.include?(builder.value) ? "block" : "none" %>;">
+                        <%= options_html %>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
             </div>
           </div>
-        <% end %>
-      </div>
 
-      <div class="mt-4">
-        <%= form.check_box :force_authorization_with_any_method %>
-      </div>
+          <div class="mt-4">
+            <%= group_form.check_box :force_authorization_with_any_method %>
+          </div>
 
-      <div class="mt-4">
-        <%= form.translated :editor, :force_authorization_help_text, lines: 10, aria: { label: :force_authorization_help_text } %>
-        <p class="help-text"><%= t("help.force_authorization_help_text", scope: "decidim.decidim_awesome.admin.config.form") %></p>
-      </div>
+          <div class="mt-4">
+            <%= group_form.translated :editor, :force_authorization_help_text, lines: 10 %>
+            <p class="help-text">
+              <%= t("help.force_authorization_help_text", scope: "decidim.decidim_awesome.admin.config.form") %>
+            </p>
+          </div>
 
-      <div class="mt-4">
-        <%= render "decidim/decidim_awesome/admin/config/constraints", key: "#{field}_#{key}", constraints: constraints_for("#{field}_#{key}") || [] %>
-      </div>
+          <div class="mt-4">
+            <%= render "decidim/decidim_awesome/admin/config/constraints", key: "#{field}_#{key}", constraints: constraints_for("#{field}_#{key}") || [] %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
 
-      <%= hidden_field_tag key, value.to_json, name: "config[#{config_var}][#{key}]" %>
-    </div>
-  <% end %>
-
-  <%= link_to decidim_admin_decidim_awesome.authorization_groups_path, method: :post, class: "button button__sm button__text-secondary mr-auto" do %>
-    <%= icon("add-box-line") %>
-    <%= t("new", scope: "decidim.decidim_awesome.admin.config.form_authorization_groups") %>
+    <%= link_to decidim_admin_decidim_awesome.authorization_groups_path, method: :post, class: "button button__sm button__text-secondary mr-auto" do %>
+      <%= icon("add-box-line") %>
+      <%= t("new", scope: "decidim.decidim_awesome.admin.config.form_authorization_groups") %>
+    <% end %>
   <% end %>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const checkboxes = document.querySelectorAll(
+      "input[type='checkbox'][name*='[authorization_handlers]']"
+    );
+
+    checkboxes.forEach((checkbox) => {
+      checkbox.addEventListener("change", function() {
+        const groupKey = this.dataset.groupKey;
+        const handlerId = `authorization-handler-${groupKey}-${this.value}`;
+        const handlerElement = document.getElementById(handlerId);
+
+        if (!handlerElement) {
+          return;
+        }
+
+        handlerElement.style.display = this.checked ? "block" : "none";
+      });
+    });
+  });
+</script>
