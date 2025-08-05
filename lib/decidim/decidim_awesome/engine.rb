@@ -38,12 +38,16 @@ module Decidim
         Decidim::ViewModel.include(Decidim::DecidimAwesome::AwesomeHelpers)
 
         # Override EtiquetteValidator
-        EtiquetteValidator.include(Decidim::DecidimAwesome::EtiquetteValidatorOverride) if DecidimAwesome.enabled?(:validate_title_max_caps_percent,
-                                                                                                                   :validate_title_max_marks_together,
-                                                                                                                   :validate_title_start_with_caps,
-                                                                                                                   :validate_body_max_caps_percent,
-                                                                                                                   :validate_body_max_marks_together,
-                                                                                                                   :validate_body_start_with_caps)
+        if DecidimAwesome.enabled?(:validate_title_max_caps_percent,
+                                   :validate_title_max_marks_together,
+                                   :validate_title_start_with_caps,
+                                   :validate_body_max_caps_percent,
+                                   :validate_body_max_marks_together,
+                                   :validate_body_start_with_caps)
+          EtiquetteValidator.include(Decidim::DecidimAwesome::EtiquetteValidatorOverride)
+          Decidim::Proposals::ProposalForm.include(Decidim::DecidimAwesome::Proposals::ProposalFormAwesomeConfig)
+          Decidim::Proposals::Admin::ProposalForm.include(Decidim::DecidimAwesome::Proposals::ProposalFormAwesomeConfig)
+        end
 
         # Custom fields need to deal with several places
         if DecidimAwesome.enabled?(:proposal_custom_fields,

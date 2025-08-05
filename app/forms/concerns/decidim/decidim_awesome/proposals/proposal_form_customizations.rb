@@ -8,6 +8,8 @@ module Decidim
         extend ActiveSupport::Concern
 
         included do
+          include ProposalFormAwesomeConfig
+
           clear_validators!
 
           validates :title, presence: true, etiquette: true
@@ -41,14 +43,6 @@ module Decidim
 
           def custom_fields
             @custom_fields ||= awesome_config.collect_sub_configs_values("proposal_custom_field")
-          end
-
-          def awesome_config
-            @awesome_config ||= begin
-              conf = Decidim::DecidimAwesome::Config.new(context.current_organization)
-              conf.context_from_component(context.current_component)
-              conf
-            end
           end
         end
       end
