@@ -1,0 +1,3 @@
+<!-- insert_after "erb[loud]:contains('form.check_box :promoted')" -->
+
+<%= render partial: "decidim/decidim_awesome/admin/participatory_processes/visibility_notice", locals: { form: form, participatory_process: current_participatory_process } %>

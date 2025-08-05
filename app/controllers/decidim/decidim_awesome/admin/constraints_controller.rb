@@ -138,6 +138,8 @@ module Decidim
             :proposal_custom_fields
           when /^proposal_private_custom_field_/
             :proposal_private_custom_fields
+          when /^authorization_group_/
+            :authorization_groups
           else
             key
           end
