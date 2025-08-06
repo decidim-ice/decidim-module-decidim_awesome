@@ -1,11 +1,8 @@
 <% awesome_link = link_to("Decidim Awesome", decidim_admin_decidim_awesome.config_path(:verifications), target: "_blank") %>
-<% has_constraint = Decidim::DecidimAwesome::SpaceConstraintQuery
-  .new(organization: current_organization, space_type: space_type, space: space)
-  .call %>
+<% has_constraint = Decidim::DecidimAwesome::SpaceConstraintQuery.new(organization: current_organization, space_type:, space:).call %>
 
 <div class="row column">
   <div class="callout <%= has_constraint ? "alert" : "info" %> mt-2">
-    <%= t("decidim.decidim_awesome.admin.visibility.#{has_constraint ? "restricted_html" : "info_html"}",
-          awesome_link: awesome_link).html_safe %>
+    <%= t("decidim.decidim_awesome.admin.visibility.#{has_constraint ? "restricted_html" : "info_html"}", awesome_link:) %>
   </div>
 </div>

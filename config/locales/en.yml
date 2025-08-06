@@ -672,10 +672,14 @@ en:
           menu:
             title: Public frontend
         visibility:
-          info_html: |
-            You can manage additional access restrictions using verifications with %{awesome_link}.
-          restricted_html: |
-            This process is using additional access restrictions with %{awesome_link}.
+          info_html: 'You can manage additional access restrictions using verifications
+            with %{awesome_link}.
+
+            '
+          restricted_html: 'This process is using additional access restrictions with
+            %{awesome_link}.
+
+            '
       admin_log:
         component:
           destroy_private_data: "%{user_name} destroyed %{count} items of private

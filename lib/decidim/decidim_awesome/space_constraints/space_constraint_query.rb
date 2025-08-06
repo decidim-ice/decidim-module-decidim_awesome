@@ -38,13 +38,13 @@ module Decidim
         when SPACE_TYPES[:participatory_processes], SPACE_TYPES[:assemblies]
           query.where(
             "(decidim_awesome_config_constraints.settings ->> 'participatory_space_slug' = ? OR " \
-              "decidim_awesome_config_constraints.settings ->> 'participatory_space_slug' IS NULL)",
+            "decidim_awesome_config_constraints.settings ->> 'participatory_space_slug' IS NULL)",
             @space.slug
           )
         when SPACE_TYPES[:participatory_process_groups]
           query.where(
             "(decidim_awesome_config_constraints.settings ->> 'participatory_space_id' = ? OR " \
-              "decidim_awesome_config_constraints.settings ->> 'participatory_space_id' IS NULL)",
+            "decidim_awesome_config_constraints.settings ->> 'participatory_space_id' IS NULL)",
             @space.id.to_s
           )
         else
