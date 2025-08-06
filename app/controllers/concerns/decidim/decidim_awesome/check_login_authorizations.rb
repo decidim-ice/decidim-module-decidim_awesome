@@ -36,11 +36,39 @@ module Decidim
       end
 
       def required_authorizations
-        return unless awesome_config[:force_authorization_after_login].is_a?(Array)
+        return @required_authorizations if defined?(@required_authorizations)
 
-        @required_authorizations ||= Decidim::Verifications::Adapter.from_collection(
-          awesome_config[:force_authorization_after_login] & current_organization.available_authorizations & Decidim.authorization_workflows.map(&:name)
+        handlers = authorization_handlers_without_constraints
+        allowed_handlers = filter_allowed_authorizations(handlers)
+        @required_authorizations = Decidim::Verifications::Adapter.from_collection(allowed_handlers)
+      end
+
+      def authorization_handlers_without_constraints
+        config = Decidim::DecidimAwesome::AwesomeConfig.find_by(
+          var: "authorization_groups",
+          organization: current_organization
         )
+        return [] unless config&.value.is_a?(Hash)
+
+        config.value.flat_map do |group_key, group_data|
+          handlers = Array(group_data["authorization_handlers"]).compact_blank
+          next [] if handlers.empty?
+          next [] if group_has_constraints?(group_key)
+
+          handlers
+        end.uniq
+      end
+
+      def group_has_constraints?(group_key)
+        group_config = Decidim::DecidimAwesome::AwesomeConfig.find_by(
+          var: "authorization_group_#{group_key}",
+          organization: current_organization
+        )
+        Decidim::DecidimAwesome::ConfigConstraint.exists?(decidim_awesome_config_id: group_config&.id)
+      end
+
+      def filter_allowed_authorizations(handlers)
+        handlers & current_organization.available_authorizations & Decidim.authorization_workflows.map(&:name)
       end
 
       def current_authorizations

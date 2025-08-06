@@ -332,7 +332,7 @@ en:
               drag_and_drop_supported: When uploading images, Drag & Drop is supported.
                 Images will be uploaded to the server and inserted as external resources
                 (it doesn't use base64 inline encoding).
-              force_authorization_after_login: 'If enabled, users will be redirected
+              force_authorization_group: 'If enabled, users will be redirected
                 to the authorization page after login or registration if some of the
                 specified authorizations are not granted. This is useful if you want
                 to force users to be verified with a specific authorization before
@@ -418,9 +418,8 @@ en:
               validate_title_min_length: Title is always mandatory and this number
                 cannot be zero
               verifications_html: |
-                Here you can make some tweaks to the verification process.<br>
-                <b>NOTE:</b> Be aware that changing these settings might prevent some users from accessing the platform. Use it with caution!<br><br>
-                Also note that these settings are applied to all users. Admins will always have access to the admin backend though.
+                Here you can put additional access restrictions to participatory spaces or components.<br>
+                <b>NOTE:</b> Be careful applying these restrictions, specially in complex situations.<br>
             validators:
               body: User input validations for the "body" field
               title: User input validations for the "title" field

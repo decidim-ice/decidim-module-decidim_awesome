@@ -19,7 +19,7 @@
             <div class="row column pt-4 pb-4">
               <h5><%= t("title", scope: "decidim.decidim_awesome.admin.config.form_authorization_groups") %></h5>
               <p class="help-text">
-                <%= t("help.force_authorization_after_login", scope: "decidim.decidim_awesome.admin.config.form") %>
+                <%= t("help.force_authorization_group", scope: "decidim.decidim_awesome.admin.config.form") %>
               </p>
               <div class="mt-4 form__wrapper gap-1">
                 <%= group_form.collection_check_boxes :authorization_handlers, available_authorizations, :name, :fullname do |builder| %>
