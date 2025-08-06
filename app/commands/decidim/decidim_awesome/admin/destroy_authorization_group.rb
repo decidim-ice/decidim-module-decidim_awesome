@@ -28,7 +28,7 @@ module Decidim
           groups.value.except!(@key)
           groups.save!
 
-          constraint = @config_var
+          constraint = :authorization_group
           constraint = AwesomeConfig.find_by(var: "#{constraint}_#{@key}", organization: @organization)
           constraint.destroy! if constraint.present?
 

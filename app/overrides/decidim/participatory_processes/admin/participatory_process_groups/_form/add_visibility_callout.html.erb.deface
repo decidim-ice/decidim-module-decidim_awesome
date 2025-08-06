@@ -1,0 +1,3 @@
+<!-- insert_bottom "div#panel-visibility" -->
+
+<%= render partial: "decidim/decidim_awesome/admin/shared/visibility_notice", locals: { space_type: "participatory_process_groups", space: participatory_process_group } %>

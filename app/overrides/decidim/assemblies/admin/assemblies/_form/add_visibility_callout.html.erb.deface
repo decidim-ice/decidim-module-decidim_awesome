@@ -1,0 +1,6 @@
+<!-- insert_bottom "div#panel-visibility" -->
+
+<%= render partial: "decidim/decidim_awesome/admin/shared/visibility_notice",
+           locals: { form: form,
+                     space_type: "assemblies",
+                     space: current_assembly } %>

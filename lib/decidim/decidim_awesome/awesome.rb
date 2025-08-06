@@ -16,6 +16,7 @@ module Decidim
     autoload :TranslatedCustomFieldsType, "decidim/decidim_awesome/api/types/translated_custom_fields_type"
     autoload :LocalizedCustomFieldsType, "decidim/decidim_awesome/api/types/localized_custom_fields_type"
     autoload :Authorizator, "decidim/decidim_awesome/authorizator"
+    autoload :SpaceConstraintQuery, "decidim/decidim_awesome/space_constraints/space_constraint_query"
 
     # Awesome comes with some components for participatory spaces
     # Currently :awesome_map and :awesome_iframe, list them here
