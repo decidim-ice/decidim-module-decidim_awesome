@@ -786,6 +786,9 @@ en:
             weight_2_short: 'Y:'
             weight_3: Green
             weight_3_short: 'G:'
+    download_your_data:
+      show:
+        admin_actions: Admin actions
     meetings:
       meetings_map:
         view_meeting: View meeting

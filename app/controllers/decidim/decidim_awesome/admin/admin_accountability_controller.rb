@@ -43,7 +43,8 @@ module Decidim
         end
 
         def admin_role_actions
-          @admin_role_actions ||= PaperTrailVersion.in_organization(current_organization).admin_role_actions(PaperTrailVersion.safe_admin_role_type(params[:admin_role_type]))
+          @admin_role_actions ||= PaperTrailVersion.in_organization(current_organization)
+                                                   .admin_role_actions(PaperTrailVersion.safe_admin_role_type(params[:admin_role_type]))
         end
 
         def export_params
