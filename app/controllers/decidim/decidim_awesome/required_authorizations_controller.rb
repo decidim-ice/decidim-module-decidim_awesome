@@ -8,8 +8,7 @@ module Decidim
       helper_method :granted_authorizations, :pending_authorizations, :missing_authorizations, :redirect_url
 
       before_action do
-        redirect_to redirect_url unless user_signed_in?
-        redirect_to redirect_url if user_is_authorized?
+        redirect_to redirect_url if user_signed_in? && user_is_authorized? && request.path != redirect_url
       end
 
       def redirect_url
@@ -21,10 +20,6 @@ module Decidim
             path
           end
         end
-      end
-
-      def index
-        enforce_permission_to :read, :required_authorizations, user_is_authorized: user_is_authorized?
       end
 
       private

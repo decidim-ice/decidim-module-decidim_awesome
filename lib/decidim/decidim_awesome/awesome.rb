@@ -17,6 +17,7 @@ module Decidim
     autoload :LocalizedCustomFieldsType, "decidim/decidim_awesome/api/types/localized_custom_fields_type"
     autoload :Authorizator, "decidim/decidim_awesome/authorizator"
     autoload :SpaceConstraintQuery, "decidim/decidim_awesome/space_constraints/space_constraint_query"
+    autoload :AuthorizationGroupService, "decidim/decidim_awesome/space_constraints/authorization_group_service.rb"
 
     # Awesome comes with some components for participatory spaces
     # Currently :awesome_map and :awesome_iframe, list them here
@@ -212,6 +213,10 @@ module Decidim
       []
     end
 
+    config_accessor :authorization_groups do
+      {}
+    end
+
     # By default all methods specified in force_authorization_after_login must be granted in order to access the platform
     # if set to true, the user will be able to access the platform if any of the methods is granted
     config_accessor :force_authorization_with_any_method do
@@ -282,10 +287,6 @@ module Decidim
     #   config.action_dispatch.show_detailed_exceptions = false
     #   config.consider_all_requests_local = false
     config_accessor :scoped_admins do
-      {}
-    end
-
-    config_accessor :authorization_groups do
       {}
     end
 
