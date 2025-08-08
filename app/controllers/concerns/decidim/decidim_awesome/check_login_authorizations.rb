@@ -24,27 +24,16 @@ module Decidim
       end
 
       def check_contextual_login_authorizations
-        return unless login_authorization_required?
-        return if from_required_authorizations_page?
-        return if required_authorizations.present?
+        return if skip_contextual_check?
 
         context = detect_context
         return if context.blank?
 
-        service = Decidim::DecidimAwesome::AuthorizationGroupService.new(current_organization)
-        groups = context.is_a?(Decidim::Component) ? service.groups_for_component(context) : service.groups_for_space(context)
-
-        handlers = filter_allowed_authorizations(groups.flat_map { |g| g[:handlers] }.compact_blank)
+        groups = contextual_groups_for(context)
+        handlers = contextual_handlers_from_groups(groups)
         return if handlers.blank? || user_has_handlers?(handlers)
 
-        required = Decidim::Verifications::Adapter.from_collection(handlers)
-        flash[:alert] = I18n.t("decidim.decidim_awesome.session.authorization_is_required",
-                               authorizations: required.map(&:fullname).join(", "))
-
-        redirect_to decidim_decidim_awesome.required_authorizations_path(
-          redirect_url: request.fullpath,
-          contextual_handlers: handlers.join(",")
-        )
+        redirect_to_required_with_handlers(handlers)
       end
 
       def login_authorization_required?
@@ -53,6 +42,31 @@ module Decidim
           !current_user.blocked? &&
           !allowed_controller? &&
           !from_required_authorizations_page?
+      end
+
+      def skip_contextual_check?
+        !login_authorization_required? ||
+          from_required_authorizations_page? ||
+          required_authorizations.present?
+      end
+
+      def contextual_groups_for(context)
+        service = Decidim::DecidimAwesome::AuthorizationGroupService.new(current_organization)
+        context.is_a?(Decidim::Component) ? service.groups_for_component(context) : service.groups_for_space(context)
+      end
+
+      def contextual_handlers_from_groups(groups)
+        filter_allowed_authorizations(groups.flat_map { |g| g[:handlers] }.compact_blank)
+      end
+
+      def redirect_to_required_with_handlers(handlers)
+        required = Decidim::Verifications::Adapter.from_collection(handlers)
+        flash[:alert] = I18n.t("decidim.decidim_awesome.session.authorization_is_required",
+                               authorizations: required.map(&:fullname).join(", "))
+        redirect_to decidim_decidim_awesome.required_authorizations_path(
+          redirect_url: request.fullpath,
+          contextual_handlers: handlers.join(",")
+        )
       end
 
       def user_is_authorized?
@@ -117,19 +131,45 @@ module Decidim
       end
 
       def detect_from_params
-        return Decidim::Component.find_by(id: params[:component_id]) if params[:component_id].present?
+        detect_component_from_params ||
+          detect_assembly_from_params ||
+          detect_participatory_process_from_params ||
+          detect_process_group_from_params
+      end
+
+      def detect_component_from_params
+        return if params[:component_id].blank?
+
+        Decidim::Component.find_by(id: params[:component_id])
+      end
+
+      def detect_assembly_from_params
         return Decidim::Assembly.find_by(slug: params[:assembly_slug]) if params[:assembly_slug].present?
-        return Decidim::ParticipatoryProcess.find_by(slug: params[:participatory_process_slug]) if params[:participatory_process_slug].present?
-        return Decidim::ParticipatoryProcessGroup.find_by(id: params[:id]) if params[:id].present?
+        return Decidim::Assembly.find_by(slug: params[:assembly_id]) if params[:assembly_id].present?
+        return Decidim::Assembly.find_by(slug: params[:slug]) if controller_name == "assemblies" && params[:slug].present?
+        return Decidim::Assembly.find_by(slug: params[:id]) if controller_name == "assemblies" && params[:id].present?
 
         nil
       end
 
+      def detect_participatory_process_from_params
+        return Decidim::ParticipatoryProcess.find_by(slug: params[:participatory_process_slug]) if params[:participatory_process_slug].present?
+        return Decidim::ParticipatoryProcess.find_by(slug: params[:slug]) if controller_name == "participatory_processes" && params[:slug].present?
+        return Decidim::ParticipatoryProcess.find_by(slug: params[:id]) if controller_name == "participatory_processes" && params[:id].present?
+
+        nil
+      end
+
+      def detect_process_group_from_params
+        return unless controller_name == "participatory_process_groups" && params[:id].present?
+
+        Decidim::ParticipatoryProcessGroup.find_by(id: params[:id])
+      end
+
       def detect_from_controller
-        case controller_name
-        when "assemblies" then Decidim::Assembly.new
-        when "participatory_processes" then Decidim::ParticipatoryProcess.new
-        end
+        # Do not create empty instances which would prevent matching slug-based constraints.
+        # If a specific context cannot be detected from helpers, ivars or params, return nil.
+        nil
       end
 
       def allowed_controller?
