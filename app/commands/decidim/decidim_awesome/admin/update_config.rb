@@ -30,7 +30,14 @@ module Decidim
               next unless form.valid_keys.include?(key.to_sym)
 
               setting = AwesomeConfig.find_or_initialize_by(var: key, organization: form.current_organization)
-              setting.value = val.respond_to?(:attributes) ? val.attributes : val
+
+              value = if [:authorization_groups, :admin_authorization_groups].include?(key.to_sym)
+                        form.public_send("#{key}_attributes")
+                      else
+                        val.respond_to?(:attributes) ? val.attributes : val
+                      end
+
+              setting.value = value
               setting.save!
             end
 

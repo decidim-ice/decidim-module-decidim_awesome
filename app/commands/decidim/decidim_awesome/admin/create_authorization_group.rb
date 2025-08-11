@@ -21,8 +21,8 @@ module Decidim
         # Returns nothing.
         def call
           groups = AwesomeConfig.find_or_initialize_by(var: @config_var, organization: @organization)
-          groups.value = {} unless groups.value.is_a? Hash
-          groups.value[@ident] = default_definition
+          groups.value ||= {}
+          groups.value[@ident] = attributes.deep_dup
           groups.save!
 
           create_constraint_never(:authorization_group)
@@ -34,10 +34,9 @@ module Decidim
 
         private
 
-        def default_definition
+        def attributes
           {
-            "authorization_handlers" => [],
-            "authorization_handlers_options" => {},
+            "authorization_handlers" => {},
             "force_authorization_with_any_method" => false,
             "force_authorization_help_text" => {}
           }

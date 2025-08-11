@@ -90,7 +90,6 @@ module Decidim
                                        allowed = filter_allowed_authorizations(handlers)
                                        Decidim::Verifications::Adapter.from_collection(allowed)
                                      end
-
       end
 
       def current_authorizations

@@ -36,7 +36,8 @@ module Decidim
         raw.map do |key, data|
           {
             key:,
-            handlers: Array(data["authorization_handlers"])
+            handlers: Array(data["authorization_handlers"]),
+            options: (data["authorization_handlers_options"] || {})
           }
         end
       end
@@ -76,29 +77,22 @@ module Decidim
       end
 
       def matches_component_constraint?(component, constraint)
-        # If a component manifest is specified, it must match the component; otherwise, allow space-level matching
-        if constraint["component_manifest"].present? && constraint["component_manifest"].to_s != component.manifest.name.to_s
-          return false
-        end
+        return false if constraint["component_manifest"].present? && constraint["component_manifest"].to_s != component.manifest.name.to_s
 
         space = component.participatory_space
-        # If a component has no participatory space, match only when space-related fields are blank
         return space_fields_blank?(constraint) if space.nil?
 
         matches_space_fields?(constraint, space)
       end
 
       def matches_space_constraint?(space, constraint)
-        # If a component is specified in the constraint, it should not be enforced at the space level.
         return false if constraint["component_manifest"].present?
 
-        # Let matches_space_fields? decide based on id/slug/manifest (including blank manifest which means any)
         matches_space_fields?(constraint, space)
       end
 
       def matches_space_fields?(constraint, space)
         id_match = constraint["participatory_space_id"].blank? || constraint["participatory_space_id"].to_s == space.id.to_s
-        # Some spaces (like ParticipatoryProcessGroup) may not have slug; fallback to to_param for matching ids passed as slug.
         space_slug = resolve_space_slug(space)
         slug_match = constraint["participatory_space_slug"].blank? || constraint["participatory_space_slug"].to_s == space_slug.to_s
         manifest_name = space_manifest_name(space)
@@ -122,8 +116,6 @@ module Decidim
           space.class.participatory_space_manifest.name
         elsif defined?(Decidim::ParticipatoryProcessGroup) && space.is_a?(Decidim::ParticipatoryProcessGroup)
           "process_groups"
-        else
-          nil
         end
       end
 
