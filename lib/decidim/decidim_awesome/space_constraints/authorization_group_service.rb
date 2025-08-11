@@ -34,10 +34,21 @@ module Decidim
 
       def build_groups(raw)
         raw.map do |key, data|
+          handlers_field = data["authorization_handlers"]
+          if handlers_field.is_a?(Hash)
+            handlers = handlers_field.keys
+            options = handlers_field.transform_values { |h| h.is_a?(Hash) ? (h["options"] || {}) : {} }
+          else
+            handlers = Array(handlers_field)
+            options = (data["authorization_handlers_options"] || {})
+          end
+
+          handlers = Array(handlers).map { |h| h.is_a?(Array) ? h.first : h }.map(&:to_s).compact_blank
+
           {
             key:,
-            handlers: Array(data["authorization_handlers"]),
-            options: (data["authorization_handlers_options"] || {})
+            handlers:,
+            options:
           }
         end
       end
@@ -107,10 +118,6 @@ module Decidim
           constraint["participatory_space_manifest"].blank?
       end
 
-      # Returns a consistent manifest name for a given space instance without raising errors.
-      # - For real participatory spaces (e.g., Assembly, ParticipatoryProcess) use their manifest name.
-      # - For ParticipatoryProcessGroup use a synthetic manifest name "process_groups" to allow grouping rules.
-      # - Otherwise return nil.
       def space_manifest_name(space)
         if space.class.respond_to?(:participatory_space_manifest)
           space.class.participatory_space_manifest.name

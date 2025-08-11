@@ -56,7 +56,9 @@ module Decidim
       end
 
       def contextual_handlers_from_groups(groups)
-        filter_allowed_authorizations(groups.flat_map { |g| g[:handlers] }.compact_blank)
+        raw = groups.flat_map { |g| Array(g[:handlers]) }
+        names = raw.map { |h| h.is_a?(Array) ? h.first : h }.compact_blank
+        filter_allowed_authorizations(names)
       end
 
       def redirect_to_required_with_handlers(handlers)

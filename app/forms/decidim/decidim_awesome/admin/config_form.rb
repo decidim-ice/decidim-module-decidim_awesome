@@ -88,7 +88,7 @@ module Decidim
         def authorization_groups_attributes
           return {} unless authorization_groups.is_a?(Hash)
 
-          authorization_groups.transform_values(&:to_h)
+          authorization_groups.transform_values(&:verification_settings)
         end
 
         def additional_proposal_sorting_labels
