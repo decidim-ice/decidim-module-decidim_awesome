@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # lib/decidim/decidim_awesome/authorization_group_service.rb
 module Decidim
   module DecidimAwesome
@@ -34,23 +36,33 @@ module Decidim
 
       def build_groups(raw)
         raw.map do |key, data|
-          handlers_field = data["authorization_handlers"]
-          if handlers_field.is_a?(Hash)
-            handlers = handlers_field.keys
-            options = handlers_field.transform_values { |h| h.is_a?(Hash) ? (h["options"] || {}) : {} }
-          else
-            handlers = Array(handlers_field)
-            options = (data["authorization_handlers_options"] || {})
-          end
+          handlers, options = parse_handlers_and_options(data)
+          handlers = normalize_handlers(handlers)
 
-          handlers = Array(handlers).map { |h| h.is_a?(Array) ? h.first : h }.map(&:to_s).compact_blank
-
-          {
-            key:,
-            handlers:,
-            options:
-          }
+          { key:, handlers:, options: }
         end
+      end
+
+      def parse_handlers_and_options(data)
+        handlers_field = data["authorization_handlers"]
+        if handlers_field.is_a?(Hash)
+          handlers = handlers_field.keys
+          options = extract_options_from_hash_field(handlers_field)
+        else
+          handlers = Array(handlers_field)
+          options = data["authorization_handlers_options"] || {}
+        end
+        [handlers, options]
+      end
+
+      def extract_options_from_hash_field(handlers_field)
+        handlers_field.transform_values do |h|
+          h.is_a?(Hash) ? (h["options"] || {}) : {}
+        end
+      end
+
+      def normalize_handlers(handlers)
+        Array(handlers).map { |h| h.is_a?(Array) ? h.first : h }.map(&:to_s).compact_blank
       end
 
       def load_constraints(raw_groups)

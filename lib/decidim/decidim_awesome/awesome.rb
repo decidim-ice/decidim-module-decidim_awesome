@@ -18,6 +18,7 @@ module Decidim
     autoload :Authorizator, "decidim/decidim_awesome/authorizator"
     autoload :SpaceConstraintQuery, "decidim/decidim_awesome/space_constraints/space_constraint_query"
     autoload :AuthorizationGroupService, "decidim/decidim_awesome/space_constraints/authorization_group_service.rb"
+    autoload :LoginAuthorizationService, "decidim/decidim_awesome/login_authorization_service"
 
     # Awesome comes with some components for participatory spaces
     # Currently :awesome_map and :awesome_iframe, list them here
