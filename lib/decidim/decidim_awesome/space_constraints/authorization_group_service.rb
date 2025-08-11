@@ -27,6 +27,11 @@ module Decidim
         groups.flat_map { |group| Array(group[:handlers]) }.compact.compact_blank
       end
 
+      # Public: returns all defined groups for this organization (both constrained and unconstrained).
+      def all_groups
+        @groups
+      end
+
       private
 
       def load_raw_groups

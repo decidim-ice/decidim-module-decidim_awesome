@@ -58,7 +58,10 @@
 </div>
 
 <div class="space-y-8 prose-a:text-secondary mt-8">
-  <%= translated_attribute(awesome_config[:force_authorization_help_text]).html_safe %>
+  <% help = authorization_help_text %>
+  <% if help.present? %>
+    <%= translated_attribute(help).html_safe %>
+  <% end %>
 
   <p class="prose-a:text-secondary italic">
     <%= t(".cancel", link: link_to("#{icon("logout-box-r-line", class: "inline-block").html_safe} #{t(".logout")}".html_safe, decidim.destroy_user_session_path(redirect_url:), method: :delete).html_safe).html_safe %>

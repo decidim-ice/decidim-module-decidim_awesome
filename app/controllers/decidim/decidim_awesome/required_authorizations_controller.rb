@@ -6,7 +6,7 @@ module Decidim
     # them complete those. Delegates the business logic to LoginAuthorizationService.
     class RequiredAuthorizationsController < DecidimAwesome::ApplicationController
       layout "layouts/decidim/authorizations"
-      helper_method :granted_authorizations, :pending_authorizations, :missing_authorizations, :redirect_url
+      helper_method :granted_authorizations, :pending_authorizations, :missing_authorizations, :redirect_url, :authorization_help_text
 
       before_action do
         # If the user is already authorized for the required handlers, send them
@@ -17,13 +17,13 @@ module Decidim
 
       def redirect_url
         @redirect_url ||= begin
-          path = params[:redirect_url] || request.referer
-          if path.blank? || path.include?(decidim_decidim_awesome.required_authorizations_path.split("?").first)
-            decidim.root_path
-          else
-            path
-          end
-        end
+                            path = params[:redirect_url] || request.referer
+                            if path.blank? || path.include?(decidim_decidim_awesome.required_authorizations_path.split("?").first)
+                              decidim.root_path
+                            else
+                              path
+                            end
+                          end
       end
 
       private
@@ -68,6 +68,16 @@ module Decidim
 
       def login_authorization_service
         @login_authorization_service ||= Decidim::DecidimAwesome::LoginAuthorizationService.new(self)
+      end
+
+      def authorization_help_text
+        groups = (awesome_config[:authorization_groups] || {}).deep_stringify_keys
+        missing = Array(missing_authorizations).map(&:name)
+        matching_key = groups.keys.find do |k|
+          handlers = groups.dig(k, "authorization_handlers").to_h.keys
+          handlers.intersect?(missing)
+        end
+        groups.dig(matching_key, "force_authorization_help_text") if matching_key
       end
     end
   end

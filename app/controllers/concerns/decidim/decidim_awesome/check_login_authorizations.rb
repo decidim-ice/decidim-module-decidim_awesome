@@ -8,8 +8,8 @@ module Decidim
       included do
         include ::Decidim::DecidimAwesome::NeedsAwesomeConfig
 
-        before_action :check_required_login_authorizations
         before_action :check_contextual_login_authorizations
+        before_action :check_required_login_authorizations
       end
 
       private
