@@ -124,7 +124,17 @@ module Decidim
         space_slug = resolve_space_slug(space)
         slug_match = constraint["participatory_space_slug"].blank? || constraint["participatory_space_slug"].to_s == space_slug.to_s
         manifest_name = space_manifest_name(space)
-        manifest_match = constraint["participatory_space_manifest"].blank? || constraint["participatory_space_manifest"].to_s == manifest_name.to_s
+
+        # Special semantic: "system" means "everywhere except participatory processes".
+        # So it should match any space whose manifest is not "participatory_processes".
+        manifest_value = constraint["participatory_space_manifest"].to_s
+        manifest_match = if manifest_value.blank?
+                           true
+                         elsif manifest_value == "system"
+                           manifest_name.to_s != "participatory_processes"
+                         else
+                           manifest_value == manifest_name.to_s
+                         end
 
         id_match && slug_match && manifest_match
       end
