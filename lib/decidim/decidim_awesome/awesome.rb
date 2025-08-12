@@ -19,6 +19,7 @@ module Decidim
     autoload :SpaceConstraintQuery, "decidim/decidim_awesome/space_constraints/space_constraint_query"
     autoload :AuthorizationGroupService, "decidim/decidim_awesome/space_constraints/authorization_group_service.rb"
     autoload :LoginAuthorizationService, "decidim/decidim_awesome/login_authorization_service"
+    autoload :AuthorizationConstraintMatcher, "decidim/decidim_awesome/space_constraints/authorization_constraint_matcher"
 
     # Awesome comes with some components for participatory spaces
     # Currently :awesome_map and :awesome_iframe, list them here
@@ -206,25 +207,20 @@ module Decidim
       false
     end
 
-    # Forces the user to authorize using some registered verification flow in order to access the platform
-    # if set to an empty array, the user will be able to access the platform without any verification but admins can still enforce it
-    # if set to :disabled the feature will be completely removed
-    # You can initialize some default verification workflow manifests
-    config_accessor :force_authorization_after_login do
-      []
-    end
-
+    # Permission groups that require passing specific verification workflows in defined contexts.
+    # Each group lists workflows and optional ConfigConstraints (global, space, or component).
+    # No groups => no mandatory verification (admins may still enforce per action).
     config_accessor :authorization_groups do
       {}
     end
 
-    # By default all methods specified in force_authorization_after_login must be granted in order to access the platform
+    # By default all methods specified in authorization_groups must be granted in order to access the platform
     # if set to true, the user will be able to access the platform if any of the methods is granted
     config_accessor :force_authorization_with_any_method do
       false
     end
 
-    # When force_authorization_after_login is enabled, this text will be shown to the user as a help text (ie: add a contact information)
+    # When authorization_groups is enabled, this text will be shown to the user as a help text (ie: add a contact information)
     config_accessor :force_authorization_help_text do
       {}
     end

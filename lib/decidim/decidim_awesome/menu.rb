@@ -192,7 +192,7 @@ module Decidim
             menu_hacks_home_content_block_menu: config_enabled?(:home_content_block_menu),
             custom_redirects: config_enabled?(:custom_redirects),
             livechat: config_enabled?(:intergram_for_admins, :intergram_for_public),
-            verifications: config_enabled?(:force_authorization_after_login),
+            verifications: config_enabled?(:authorization_groups),
             maintenance: true
           }
         end

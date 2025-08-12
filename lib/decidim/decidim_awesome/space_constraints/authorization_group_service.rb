@@ -84,80 +84,11 @@ module Decidim
       end
 
       def select_groups_matching(context)
+        matcher = Decidim::DecidimAwesome::AuthorizationConstraintMatcher.new
         @groups.select do |group|
           group_constraints = @constraints[group[:key]] || []
-          group_constraints.any? { |c| constraint_matches?(context:, constraint: c) }
+          group_constraints.any? { |c| matcher.matches?(context: context, constraint: c) }
         end
-      end
-
-      def constraint_matches?(context:, constraint:)
-        return matches_component_constraint?(context, constraint) if context.is_a?(Decidim::Component)
-
-        if [
-          Decidim::Assembly,
-          Decidim::ParticipatoryProcess,
-          Decidim::ParticipatoryProcessGroup
-        ].any? { |klass| context.is_a?(klass) }
-          return matches_space_constraint?(context, constraint)
-        end
-
-        false
-      end
-
-      def matches_component_constraint?(component, constraint)
-        return false if constraint["component_manifest"].present? && constraint["component_manifest"].to_s != component.manifest.name.to_s
-
-        space = component.participatory_space
-        return space_fields_blank?(constraint) if space.nil?
-
-        matches_space_fields?(constraint, space)
-      end
-
-      def matches_space_constraint?(space, constraint)
-        return false if constraint["component_manifest"].present?
-
-        matches_space_fields?(constraint, space)
-      end
-
-      def matches_space_fields?(constraint, space)
-        id_match = constraint["participatory_space_id"].blank? || constraint["participatory_space_id"].to_s == space.id.to_s
-        space_slug = resolve_space_slug(space)
-        slug_match = constraint["participatory_space_slug"].blank? || constraint["participatory_space_slug"].to_s == space_slug.to_s
-        manifest_name = space_manifest_name(space)
-
-        # Special semantic: "system" means "everywhere except participatory processes".
-        # So it should match any space whose manifest is not "participatory_processes".
-        manifest_value = constraint["participatory_space_manifest"].to_s
-        manifest_match = if manifest_value.blank?
-                           true
-                         elsif manifest_value == "system"
-                           manifest_name.to_s != "participatory_processes"
-                         else
-                           manifest_value == manifest_name.to_s
-                         end
-
-        id_match && slug_match && manifest_match
-      end
-
-      def space_fields_blank?(constraint)
-        constraint["participatory_space_id"].blank? &&
-          constraint["participatory_space_slug"].blank? &&
-          constraint["participatory_space_manifest"].blank?
-      end
-
-      def space_manifest_name(space)
-        if space.class.respond_to?(:participatory_space_manifest)
-          space.class.participatory_space_manifest.name
-        elsif defined?(Decidim::ParticipatoryProcessGroup) && space.is_a?(Decidim::ParticipatoryProcessGroup)
-          "process_groups"
-        end
-      end
-
-      def resolve_space_slug(space)
-        return space.slug if space.respond_to?(:slug) && space.slug.present?
-        return space.to_param if space.respond_to?(:to_param)
-
-        nil
       end
     end
   end

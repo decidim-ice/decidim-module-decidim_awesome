@@ -20,7 +20,8 @@ module Decidim
           !from_required_authorizations_page?
       end
 
-      def skip_contextual_check?
+      # Primary name for access-based checks; keep legacy aliases below
+      def skip_access_authorization_check?
         !login_authorization_required? ||
           from_required_authorizations_page? ||
           required_authorizations.present?
@@ -29,9 +30,15 @@ module Decidim
       def required_authorizations
         return @required_authorizations if defined?(@required_authorizations)
 
-        allowed = if from_required_authorizations_page? && controller.params[:contextual_handlers].present?
-                    contextual = controller.params[:contextual_handlers].to_s.split(",").map(&:strip).compact_blank
-                    filter_allowed_authorizations(contextual)
+        handlers_param = (
+          controller.params[:access_authorization_handlers].presence ||
+          controller.params[:content_authorization_handlers].presence ||
+          controller.params[:contextual_handlers].presence
+        )
+
+        allowed = if from_required_authorizations_page? && handlers_param.present?
+                    names = handlers_param.to_s.split(",").map(&:strip).compact_blank
+                    filter_allowed_authorizations(names)
                   else
                     service = Decidim::DecidimAwesome::AuthorizationGroupService.new(controller.current_organization)
                     handlers = service.always_groups.flat_map { |g| g[:handlers] }.compact_blank
@@ -52,7 +59,8 @@ module Decidim
         end
       end
 
-      def contextual_handlers
+      # Primary name for access-based handlers; keep legacy aliases below
+      def access_authorization_handlers
         context = detect_context
         return [] if context.blank?
 
@@ -75,7 +83,8 @@ module Decidim
       def redirect_path_with_handlers(handlers)
         controller.decidim_decidim_awesome.required_authorizations_path(
           redirect_url: controller.request.fullpath,
-          contextual_handlers: handlers.join(",")
+          # Prefer the new param, still accept the old ones for existing links
+          access_authorization_handlers: handlers.join(",")
         )
       end
 
@@ -181,6 +190,12 @@ module Decidim
       def filter_allowed_authorizations(handlers)
         Array(handlers) & Array(controller.current_organization.available_authorizations) & Decidim.authorization_workflows.map(&:name)
       end
+
+      # Backwards compatibility for older callers
+      alias_method :skip_contextual_check?, :skip_access_authorization_check?
+      alias_method :contextual_handlers, :access_authorization_handlers
+      alias_method :skip_content_authorization_check?, :skip_access_authorization_check?
+      alias_method :content_authorization_handlers, :access_authorization_handlers
     end
   end
 end
