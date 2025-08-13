@@ -1,7 +1,10 @@
 sv:
+  active_hashcash:
+    submit_filter: Filtrera
   activemodel:
     attributes:
       config:
+        additional_proposal_sortings: Ytterligare sorteringsalternativ aktiva
         allow_images_in_proposals: Tillåt bilder i förslagsfältet
         auto_save_forms: Spara formulär automatiskt i lokal lagring
         intergram_chat_id: Chatt ID
