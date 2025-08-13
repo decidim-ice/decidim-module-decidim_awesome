@@ -3,6 +3,7 @@ sv:
   activemodel:
     attributes:
       config:
+        additional_proposal_sortings: Ytterligare sorteringsalternativ aktiva
         allow_images_in_full_editor: Tillåt bilder i den fullständiga HTML-editorn
         allow_images_in_markdown_editor: Tillåt bilder i den fullständiga Markdown-editorn
         allow_images_in_proposals: Tillåt bilder i förslagsfältet
