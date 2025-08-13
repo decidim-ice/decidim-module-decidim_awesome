@@ -7,55 +7,66 @@ module Decidim
 
       included do
         include ::Decidim::DecidimAwesome::NeedsAwesomeConfig
-
-        before_action :check_access_authorizations
-        before_action :check_required_login_authorizations
+        before_action :enforce_authorizations
       end
 
       private
 
-      def check_required_login_authorizations
-        enforce_authorizations(:required)
+      def enforce_authorizations
+        return if skip_enforcement_for_current_request?
+
+        service = access_authorization_service
+        return if enforce_global_authorizations(service)
+        return unless service.controller_requires_authorization?
+
+        enforce_context_authorizations(service)
       end
 
-      def check_access_authorizations
-        enforce_authorizations(:access)
+      def enforce_global_authorizations(service)
+        return false if service.authorization_groups_global.blank?
+
+        adapters = service.required_authorizations
+        return false if adapters.blank?
+
+        return true if service.user_is_authorized?
+
+        flash_authorization_alert(fullnames(adapters))
+        redirect_to_required(redirect_url: request.fullpath)
+        true
       end
 
-      def check_content_authorizations
-        check_access_authorizations
+      def enforce_context_authorizations(service)
+        adapters = service.required_authorizations_for_current_controller
+        return if adapters.blank?
+        return if user_authorized_for_current_context?(adapters)
+
+        flash_authorization_alert(fullnames(adapters))
+        redirect_to_required(redirect_url: request.fullpath, handlers: adapters.map(&:name))
       end
 
-      def login_authorization_service
-        @login_authorization_service ||= Decidim::DecidimAwesome::LoginAuthorizationService.new(self)
+      def user_authorized_for_current_context?(adapters)
+        names = Array(adapters).map(&:name)
+        return true if names.blank?
+        return false unless user_signed_in?
+
+        Decidim::Authorization
+          .where(user: current_user, name: names)
+          .where.not(granted_at: nil)
+          .exists?
       end
 
-      def enforce_authorizations(kind)
-        service = login_authorization_service
+      def access_authorization_service
+        @access_authorization_service ||= Decidim::DecidimAwesome::AccessAuthorizationService.new(self)
+      end
 
-        case kind
-        when :required
-          return unless service.login_authorization_required?
-          return if service.user_is_authorized?
+      def fullnames(adapters)
+        Array(adapters).map(&:fullname).join(", ")
+      end
 
-          authorizations = service.localized_required_authorizations_fullnames
-          redirect_path = decidim_decidim_awesome.required_authorizations_path(redirect_url: request.fullpath)
-
-        when :access
-          return if service.skip_access_authorization_check?
-
-          handlers = service.access_authorization_handlers
-          return if handlers.blank? || service.user_has_handlers?(handlers)
-
-          authorizations = handlers_fullnames(handlers)
-          redirect_path = service.redirect_path_with_handlers(handlers)
-
-        else
-          return
-        end
-
-        flash_authorization_alert(authorizations)
-        redirect_to redirect_path
+      def redirect_to_required(redirect_url:, handlers: nil)
+        params = { redirect_url: }
+        params[:handlers] = handlers if handlers.present?
+        redirect_to decidim_decidim_awesome.required_authorizations_path(params)
       end
 
       def flash_authorization_alert(authorizations)
@@ -65,8 +76,14 @@ module Decidim
         )
       end
 
-      def handlers_fullnames(handlers)
-        Decidim::Verifications::Adapter.from_collection(handlers).map(&:fullname).join(", ")
+      def skip_enforcement_for_current_request?
+        return true unless user_signed_in? && current_user.confirmed? && !current_user.blocked?
+
+        allowed_controllers.include?(controller_name.to_s)
+      end
+
+      def allowed_controllers
+        %w(required_authorizations authorizations upload_validations timeouts editor_images locales pages tos) + awesome_config[:force_authorization_allowed_controller_names].to_a
       end
     end
   end

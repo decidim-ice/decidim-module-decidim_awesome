@@ -226,7 +226,7 @@ describe "Forced verifications" do
 
     context "with constraints scenarios" do
       let(:organization) { create(:organization, available_authorizations: [:id_documents]) }
-      let!(:user) { create(:user, :confirmed, organization: organization) }
+      let!(:user) { create(:user, :confirmed, organization:) }
       let(:process) { create(:participatory_process, :with_steps, organization:) }
       let(:assembly) { create(:assembly, organization:) }
       let!(:process_component) { create(:component, manifest_name: :proposals, participatory_space: process) }
@@ -263,7 +263,7 @@ describe "Forced verifications" do
       end
 
       it "specific space (participatory process) requires auth on that process only" do
-        create(:config_constraint, awesome_config: group_subconfig, settings: { "participatory_space_id" => process.id })
+        create(:config_constraint, awesome_config: group_subconfig, settings: { "participatory_space_slug" => process.slug, "participatory_space_manifest" => "participatory_processes" })
 
         visit decidim_participatory_processes.participatory_process_path(process)
         expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path, ignore_query: true)
@@ -274,7 +274,7 @@ describe "Forced verifications" do
       end
 
       it "specific assembly requires auth on that assembly only" do
-        create(:config_constraint, awesome_config: group_subconfig, settings: { "participatory_space_id" => assembly.id })
+        create(:config_constraint, awesome_config: group_subconfig, settings: { "participatory_space_slug" => assembly.slug, "participatory_space_manifest" => "assemblies" })
 
         visit decidim_assemblies.assembly_path(assembly)
         expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path, ignore_query: true)
@@ -285,7 +285,7 @@ describe "Forced verifications" do
       end
 
       it "specific component in specific process requires auth only there" do
-        create(:config_constraint, awesome_config: group_subconfig, settings: { "participatory_space_id" => process.id, "component_manifest" => process_component.manifest.name.to_s })
+        create(:config_constraint, awesome_config: group_subconfig, settings: { "component_manifest" => process_component.manifest.name.to_s, "participatory_space_slug" => process.slug, "participatory_space_manifest" => "participatory_processes" })
 
         visit Decidim::EngineRouter.main_proxy(process_component).root_path
         expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path, ignore_query: true)
@@ -295,7 +295,7 @@ describe "Forced verifications" do
       end
 
       it "specific component in specific assembly requires auth only there" do
-        create(:config_constraint, awesome_config: group_subconfig, settings: { "participatory_space_id" => assembly.id, "component_manifest" => assembly_component.manifest.name.to_s })
+        create(:config_constraint, awesome_config: group_subconfig, settings: { "component_manifest" => assembly_component.manifest.name.to_s, "participatory_space_slug" => assembly.slug, "participatory_space_manifest" => "assemblies" })
 
         visit Decidim::EngineRouter.main_proxy(assembly_component).root_path
         expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path, ignore_query: true)

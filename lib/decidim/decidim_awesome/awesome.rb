@@ -16,10 +16,9 @@ module Decidim
     autoload :TranslatedCustomFieldsType, "decidim/decidim_awesome/api/types/translated_custom_fields_type"
     autoload :LocalizedCustomFieldsType, "decidim/decidim_awesome/api/types/localized_custom_fields_type"
     autoload :Authorizator, "decidim/decidim_awesome/authorizator"
-    autoload :SpaceConstraintQuery, "decidim/decidim_awesome/space_constraints/space_constraint_query"
-    autoload :AuthorizationGroupService, "decidim/decidim_awesome/space_constraints/authorization_group_service.rb"
-    autoload :LoginAuthorizationService, "decidim/decidim_awesome/login_authorization_service"
-    autoload :AuthorizationConstraintMatcher, "decidim/decidim_awesome/space_constraints/authorization_constraint_matcher"
+    autoload :SpaceConstraintQuery, "decidim/decidim_awesome/verifications/space_constraint_query"
+    autoload :AuthorizationGroupService, "decidim/decidim_awesome/verifications/authorization_group_service.rb"
+    autoload :AccessAuthorizationService, "decidim/decidim_awesome/verifications/access_authorization_service"
 
     # Awesome comes with some components for participatory spaces
     # Currently :awesome_map and :awesome_iframe, list them here
@@ -212,6 +211,12 @@ module Decidim
     # No groups => no mandatory verification (admins may still enforce per action).
     config_accessor :authorization_groups do
       {}
+    end
+
+    # Legacy: globally required handlers after login (before authorization_groups existed).
+    # Keep for backward compatibility in specs and older setups.
+    config_accessor :force_authorization_after_login do
+      []
     end
 
     # By default all methods specified in authorization_groups must be granted in order to access the platform
