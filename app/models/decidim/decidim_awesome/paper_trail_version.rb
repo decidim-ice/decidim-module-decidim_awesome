@@ -15,12 +15,14 @@ module Decidim
 
       scope :space_role_actions, lambda { |organization|
         role_changes = where(item_type: PaperTrailVersion.safe_user_roles, event: "create")
-        user_ids_from_object_changes = role_changes.pluck(:object_changes).map { |change| change.match(/decidim_user_id:\n- ?\n- (\d+)/)[1].to_i }
-        relevant_user_ids = Decidim::User.select(:id).where(id: user_ids_from_object_changes, organization:).pluck(:id)
-        # add users that might have been completly destroyed in any organization
-        relevant_user_ids += user_ids_from_object_changes - Decidim::User.select("id").where(id: user_ids_from_object_changes).pluck(:id)
 
-        role_changes.where("object_changes ~ ANY (array[?])", relevant_user_ids.map { |id| "decidim_user_id:\n- ?\n- #{id}(?!\\d)" })
+        user_ids_from_object_changes = role_changes.pluck(:object_changes).map { |change| change.fetch("decidim_user_id", []).last.to_i }
+        user_ids_from_object_changes.compact_blank!
+        relevant_user_ids = Decidim::User.where(id: user_ids_from_object_changes, organization:).pluck(:id)
+        # add users that might have been completly destroyed in any organization
+        relevant_user_ids += user_ids_from_object_changes - Decidim::User.where(id: user_ids_from_object_changes).pluck(:id)
+
+        role_changes.where("object_changes @> ANY (array[?]::jsonb[])", relevant_user_ids.map { |id| { "decidim_user_id" => [nil, id] }.to_json })
       }
 
       scope :in_organization, lambda { |organization|
@@ -33,11 +35,15 @@ module Decidim
         base = where(item_type: "Decidim::UserBaseEntity", event: %w(create update))
         case filter
         when nil
-          base.where("object_changes LIKE '%\nroles:\n- []\n- - %' OR object_changes LIKE '%\nadmin:\n- false\n- true%'")
+          base.where(
+            "object_changes @> ?::jsonb OR object_changes @> ?::jsonb",
+            { "roles" => [[], []] }.to_json,
+            { "admin" => [false, true] }.to_json
+          )
         when "admin"
-          base.where("object_changes LIKE '%\nadmin:\n- false\n- true%'")
+          base.where("object_changes @> ?::jsonb", { "admin" => [false, true] }.to_json)
         else
-          base.where("object_changes LIKE ?", "%\nroles:\n- []\n- - #{filter}\n%")
+          base.where("object_changes @> ?::jsonb", { "roles" => [[], [filter]] }.to_json)
         end
       end
 
@@ -64,7 +70,6 @@ module Decidim
           Arel.sql("(#{queries.join(" UNION ")})")
         end
       end
-
       ransacker :participatory_space_type do
         Arel.sql(%{("item_type")::text})
       end
@@ -111,6 +116,14 @@ module Decidim
 
       ransacker :created_at, type: :date do
         Arel.sql("date(versions.created_at)")
+      end
+
+      def self.ransackable_attributes(_auth_object = nil)
+        %w(created_at event id item_id item_type object object_changes participatory_space_type role_type user_email user_name whodunnit)
+      end
+
+      def self.ransackable_associations(_auth_object = nil)
+        ["item"]
       end
     end
   end
