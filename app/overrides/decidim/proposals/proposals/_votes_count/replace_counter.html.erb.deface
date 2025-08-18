@@ -7,4 +7,4 @@
     <%# Hidden placeholder for votes count to avoid update_button_adn_counter.js.erb cause a javascript console error %>
     <span style="display: none" id="proposal-<%= proposal.id %>-votes-count"><%= proposal.proposal_votes_count || 0 %></span>
   <% end %>
-<% elsif !current_settings.votes_hidden? && current_component.participatory_space.can_participate?(current_user) %>
+<% elsif !current_settings.votes_hidden? && (current_component.participatory_space.can_participate?(current_user) || current_user.admin?) %>
