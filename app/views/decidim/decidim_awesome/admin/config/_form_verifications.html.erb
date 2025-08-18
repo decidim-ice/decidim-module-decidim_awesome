@@ -28,7 +28,7 @@
                       <%= safe_join([builder.check_box(data: { group_key: key }), builder.text.to_s], " ") %>
                     <% end %>
                     <div id="authorization-handler-<%= key %>-<%= builder.value %>" class="authorization-handler my-4 ml-6" style="display: <%= group_form.object.authorization_handlers_names.include?(builder.value) ? "block" : "none" %>;">
-                      <%= render "decidim/decidim_awesome/admin/config/authorization_options_form", form: group_form, handler_name: builder.value, key: key %>
+                      <%= render "decidim/decidim_awesome/admin/config/authorization_options_form", form: group_form, handler_name: builder.value, key: %>
                     </div>
                   </div>
                 <% end %>

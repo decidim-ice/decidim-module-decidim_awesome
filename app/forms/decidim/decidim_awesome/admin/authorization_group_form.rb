@@ -56,7 +56,7 @@ module Decidim
           manifest(handler_name).options
         end
 
-        # Helper for the view, at this point, ephemeral authorizations are not supported in the elections module.
+        # Helper for the view, at this point, ephemeral authorizations are not supported
         def available_authorizations
           Decidim.authorization_workflows.filter do |workflow|
             current_organization.available_authorizations.include?(workflow.name) && !workflow.ephemeral?

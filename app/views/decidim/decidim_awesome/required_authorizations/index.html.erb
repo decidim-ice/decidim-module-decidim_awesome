@@ -63,7 +63,9 @@
     <%= translated_attribute(help).html_safe %>
   <% end %>
 
-  <p class="prose-a:text-secondary italic">
-    <%= t(".cancel", link: link_to("#{icon("logout-box-r-line", class: "inline-block").html_safe} #{t(".logout")}".html_safe, decidim.destroy_user_session_path(redirect_url:), method: :delete).html_safe).html_safe %>
-  </p>
+  <% if current_user %>
+    <p class="prose-a:text-secondary italic">
+      <%= t(".cancel", link: link_to("#{icon("logout-box-r-line", class: "inline-block").html_safe} #{t(".logout")}".html_safe, decidim.destroy_user_session_path(redirect_url:), method: :delete).html_safe).html_safe %>
+    </p>
+  <% end %>
 </div>

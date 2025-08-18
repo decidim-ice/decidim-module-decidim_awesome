@@ -53,7 +53,6 @@ module Decidim
         validates :validate_body_max_marks_together, presence: true, numericality: { greater_than_or_equal_to: 1 }
         validates :hashcash_signup_bits, presence: true, numericality: { greater_than_or_equal_to: 10, less_than_or_equal_to: 50 }
         validates :hashcash_login_bits, presence: true, numericality: { greater_than_or_equal_to: 10, less_than_or_equal_to: 50 }
-        # validate :force_authorization_after_login_is_valid
         # TODO: validate non general admins are here
 
         def self.from_params(params, additional_params = {})
@@ -158,17 +157,6 @@ module Decidim
           scoped_admins.transform_values! do |code|
             code.is_a?(Array) ? code.compact_blank : code
           end
-        end
-
-        private
-
-        def force_authorization_after_login_is_valid
-          return if force_authorization_after_login.blank?
-
-          invalid = force_authorization_after_login - (current_organization.available_authorizations & Decidim.authorization_workflows.map(&:name))
-          return if invalid.empty?
-
-          errors.add(:force_authorization_after_login, :invalid)
         end
       end
     end

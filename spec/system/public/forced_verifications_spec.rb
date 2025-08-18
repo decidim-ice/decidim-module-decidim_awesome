@@ -73,11 +73,11 @@ describe "Forced verifications" do
       expect(page).to have_current_path(restricted_path, ignore_query: true)
     end
 
-    # TODO: Check it
-    # it "user can logout" do
-    #   click_on "let me logout"
-    #   expect(page).to have_current_path("/")
-    # end
+    it "user can logout" do
+      click_on "let me logout"
+      expect(page).to have_content("Logged out successfully")
+      expect(page).to have_no_content("let me logout")
+    end
 
     it "can visit allowed controllers" do
       visit "/authorizations"
@@ -118,7 +118,7 @@ describe "Forced verifications" do
     context "when is an admin" do
       let(:user) { create(:user, :confirmed, :admin, organization:) }
 
-      it "requrires verification" do
+      it "requires verification" do
         expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(redirect_url: restricted_path))
       end
 
@@ -192,7 +192,6 @@ describe "Forced verifications" do
       let(:user) { create(:user, organization:) }
 
       it "acts as normal" do
-        sleep 0.5
         expect(page).to have_content("Log in")
         expect(page).to have_current_path("/users/sign_in")
       end

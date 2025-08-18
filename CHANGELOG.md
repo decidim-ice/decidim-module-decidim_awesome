@@ -1,7 +1,16 @@
 CHANGELOG
 =========
 
-v0.12.2
+v0.12.4
+-------
+Compatibility:
+  - Decidim 0.29.x
+
+Features:
+  - Allow to granular permissions to forced verifications.
+    **NOTE** Config var `force_authorization_after_login` has changed to `authorization_groups`
+
+v0.12.3
 -------
 
 Compatibility:

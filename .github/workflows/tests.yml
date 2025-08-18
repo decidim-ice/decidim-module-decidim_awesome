@@ -150,13 +150,12 @@ jobs:
       - run: |
           sudo apt update
           sudo apt install libu2f-udev
-          wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${{ env.CHROME_VERSION }}-1_amd64.deb
+          wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo dpkg -i /tmp/chrome.deb
           rm /tmp/chrome.deb
       - uses: nanasess/setup-chromedriver@v2
-        name: Install Chrome version ${{ env.CHROME_VERSION }}
-        with:
-          chromedriver-version: ${{ env.CHROME_VERSION }}
+        name: Install Chrome version
+
       - run: |
           sudo apt install wkhtmltopdf imagemagick 7zip
 

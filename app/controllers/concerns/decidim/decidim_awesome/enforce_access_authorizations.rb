@@ -30,7 +30,7 @@ module Decidim
 
         return true if service.user_is_authorized?
 
-        flash_authorization_alert(fullnames(adapters))
+        flash_authorization_alert(full_names(adapters))
         redirect_to_required(redirect_url: request.fullpath)
         true
       end
@@ -40,7 +40,7 @@ module Decidim
         return if adapters.blank?
         return if user_authorized_for_current_context?(adapters)
 
-        flash_authorization_alert(fullnames(adapters))
+        flash_authorization_alert(full_names(adapters))
         redirect_to_required(redirect_url: request.fullpath, handlers: adapters.map(&:name))
       end
 
@@ -59,7 +59,7 @@ module Decidim
         @access_authorization_service ||= Decidim::DecidimAwesome::AccessAuthorizationService.new(self)
       end
 
-      def fullnames(adapters)
+      def full_names(adapters)
         Array(adapters).map(&:fullname).join(", ")
       end
 
