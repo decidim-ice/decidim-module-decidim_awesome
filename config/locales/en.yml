@@ -38,6 +38,7 @@ en:
         proposal_custom_fields: Custom fields %{id}
         proposal_private_custom_fields: Private Custom fields %{id}
         scoped_admin_styles: Custom styles %{id}
+        scoped_admins: Scoped admins group %{id}
         scoped_styles: Custom styles %{id}
         user_timezone: Allow users to set their timezone in their profile
         validate_body_max_caps_percent: Maximum allowed percentage of capital letters
@@ -252,10 +253,10 @@ en:
           index:
             admin_head_tags: Awesome tags included in the admin application header
             decidim-admin: From Admin module
-            decidim-core: From Core module
             decidim-assemblies: From Assemblies module
-            decidim-participatory_processes: From Participatory Processes module
             decidim-conferences: From Conferences module
+            decidim-core: From Core module
+            decidim-participatory_processes: From Participatory Processes module
             decidim-proposals: From Proposals module
             decidim_version: Decidim version %{version}
             errors:
@@ -335,8 +336,8 @@ en:
               drag_and_drop_supported: When uploading images, Drag & Drop is supported.
                 Images will be uploaded to the server and inserted as external resources
                 (it doesn't use base64 inline encoding).
-              force_authorization_group: 'If enabled, users will be redirected
-                to the authorization page after login or registration if some of the
+              force_authorization_group: 'If enabled, users will be redirected to
+                the authorization page after login or registration if some of the
                 specified authorizations are not granted. This is useful if you want
                 to force users to be verified with a specific authorization before
                 they can login at all (ie: to prevent spam).'

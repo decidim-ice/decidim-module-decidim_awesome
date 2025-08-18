@@ -20,6 +20,7 @@ ignore_unused:
   - "activemodel.attributes.custom_redirect.*"
   - "activemodel.attributes.user.*"
   -  activemodel.attributes.organization.awesome_admins_available_authorizations
+  -  activemodel.attributes.authorization_group.*
   - "decidim.components.decidim_awesome.name"
   - "decidim.components.awesome_iframe.settings.*"
   - "decidim.components.awesome_map.settings.*"
