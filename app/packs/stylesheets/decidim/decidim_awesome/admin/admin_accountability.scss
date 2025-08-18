@@ -49,10 +49,6 @@
     }
   }
 
-  .row.column:last-child {
-    @apply flex items-center justify-center;
-  }
-
   .search-button-container {
     @apply flex flex-col items-start;
 
@@ -61,7 +57,15 @@
     }
   }
 
-  .row.column.search-field {
-    @apply flex-grow;
+  .row.column {
+    @apply mb-0;
+
+    &:last-child {
+      @apply flex items-center justify-center;
+    }
+
+    &.search-field {
+      @apply flex-grow;
+    }
   }
 }

@@ -27,14 +27,14 @@ module Decidim::DecidimAwesome
           object_changes: {
             "decidim_user_id" => [nil, administrator.id],
             "decidim_participatory_process_id" => [nil, participatory_process.id]
-          }.to_yaml
+          }
         )
 
         external_paper_trail_version.update!(
           object_changes: {
             "decidim_user_id" => [nil, external_valuator.id],
             "decidim_participatory_process_id" => [nil, external_participatory_process.id]
-          }.to_yaml
+          }
         )
       end
 
@@ -73,13 +73,13 @@ module Decidim::DecidimAwesome
         paper_trail_version.update!(
           object_changes: {
             "admin" => [false, true]
-          }.to_yaml
+          }
         )
 
         external_paper_trail_version.update!(
           object_changes: {
             "roles" => [[], ["valuator"]]
-          }.to_yaml
+          }
         )
       end
 
