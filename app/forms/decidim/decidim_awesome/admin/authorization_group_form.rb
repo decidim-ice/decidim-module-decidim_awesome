@@ -15,7 +15,7 @@ module Decidim
         def verification_settings
           {
             authorization_handlers: parsed_authorization_handlers,
-            force_authorization_with_any_method: !force_authorization_with_any_method.nil?,
+            force_authorization_with_any_method: force_authorization_with_any_method.present?,
             force_authorization_help_text: force_authorization_help_text || {}
           }
         end
@@ -56,7 +56,7 @@ module Decidim
           manifest(handler_name).options
         end
 
-        # Helper for the view, at this point, ephemeral authorizations are not supported
+        # Helper for the view, at this point, ephemeral authorizations are not supported yet
         def available_authorizations
           Decidim.authorization_workflows.filter do |workflow|
             current_organization.available_authorizations.include?(workflow.name) && !workflow.ephemeral?
