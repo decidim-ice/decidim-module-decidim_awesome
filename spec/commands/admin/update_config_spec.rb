@@ -24,7 +24,7 @@ module Decidim::DecidimAwesome
         ConfigForm.from_params(params).with_context(context)
       end
 
-      describe "when valid" do
+      context "when valid" do
         before do
           allow(form).to receive(:valid?).and_return(true)
         end
@@ -37,7 +37,7 @@ module Decidim::DecidimAwesome
         end
       end
 
-      describe "when invalid" do
+      context "when invalid" do
         before do
           allow(form).to receive(:valid?).and_return(false)
         end
@@ -53,17 +53,40 @@ module Decidim::DecidimAwesome
         end
       end
 
-      describe "when updating CSS" do
+      context "when updating a hash" do
         let!(:config) { create(:awesome_config, organization:, var: "scoped_styles", value: { test: ".body {background: red;}" }) }
-
-        it "saves the content in the hash" do
-          expect(AwesomeConfig.find_by(organization:, var: "scoped_styles").value).to be_a(Hash)
+        let(:params) do
+          {
+            scoped_styles: { test: ".body {background: blue;}" }
+          }
         end
 
-        # context "and has a constraint" do
-        #   it "creates an associated config constraint var" do
-        #   end
-        # end
+        it "updates the value" do
+          expect { subject.call }.to change { AwesomeConfig.find_by(organization:, var: "scoped_styles").value }.from({ "test" => ".body {background: red;}" }).to({ "test" => ".body {background: blue;}" })
+        end
+      end
+
+      context "when the value is another form" do
+        before do
+          allow(form).to receive(:attributes).and_return({ "allow_images_in_editors" => double(attributes: { "test" => "some value" }) })
+        end
+
+        it "uses the attributes from the form" do
+          expect { subject.call }.to change(AwesomeConfig, :count).by(1)
+          expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_editors).value).to eq({ "test" => "some value" })
+        end
+      end
+
+      context "when a custom attributes method is defined" do
+        before do
+          allow(form).to receive(:allow_images_in_editors_attributes).and_return({ "test" => "some value" })
+        end
+
+        it "uses the custom attributes from the form" do
+          expect { subject.call }.to change(AwesomeConfig, :count).by(2)
+          expect(AwesomeConfig.find_by(organization:, var: :allow_images_in_editors).value).to eq({ "test" => "some value" })
+          expect(AwesomeConfig.find_by(organization:, var: :allow_videos_in_editors).value).to be(true)
+        end
       end
     end
   end

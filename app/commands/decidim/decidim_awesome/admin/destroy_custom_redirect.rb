@@ -4,14 +4,15 @@ module Decidim
   module DecidimAwesome
     module Admin
       class DestroyCustomRedirect < Command
+        include NeedsConstraintHelpers
         # Public: Initializes the command.
         #
-        # item - the redirections item to destroy
+        # item - the redirects item to destroy
         # organization
         def initialize(item, organization)
           @item = item
           @organization = organization
-          @redirections = AwesomeConfig.find_by(var: :custom_redirects, organization:)
+          @config_var = :custom_redirects
         end
 
         # Executes the command. Broadcasts these events:
@@ -23,23 +24,23 @@ module Decidim
         def call
           return broadcast(:invalid) unless url_exists?
 
-          redirections.value&.except!(item.origin)
-          redirections.save!
+          find_var.value&.except!(item.origin)
+          find_var.save!
 
-          broadcast(:ok, @item)
+          broadcast(:ok, item)
         rescue StandardError => e
           broadcast(:invalid, e.message)
         end
 
         private
 
-        attr_reader :organization, :item, :redirections
+        attr_reader :item
 
         def url_exists?
-          return false unless redirections
-          return false unless redirections.value.is_a? Hash
+          return false unless find_var
+          return false unless find_var.value.is_a? Hash
 
-          redirections.value[item.origin].present?
+          find_var.value[item.origin].present?
         end
       end
     end

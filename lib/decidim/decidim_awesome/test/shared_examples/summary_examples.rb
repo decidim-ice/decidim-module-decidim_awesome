@@ -251,6 +251,8 @@ shared_examples "basic rendering" do |enabled|
         "menus/home_content_block_menu/hacks",
         "custom_redirects",
         "config/livechat",
+        "config/verifications",
+        "maintenance/private_data",
         "maintenance/hashcash"
       ]
     end

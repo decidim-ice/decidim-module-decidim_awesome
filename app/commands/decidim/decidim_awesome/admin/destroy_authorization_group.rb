@@ -4,12 +4,13 @@ module Decidim
   module DecidimAwesome
     module Admin
       class DestroyAuthorizationGroup < Command
+        include NeedsConstraintHelpers
         # Public: Initializes the command.
         #
         # key - the key to destroy inside authorization_groups
         # organization - the organization to which the config belongs
         def initialize(key, organization, config_var = :authorization_groups)
-          @key = key
+          @ident = key
           @organization = organization
           @config_var = config_var
         end
@@ -21,18 +22,12 @@ module Decidim
         #
         # Returns nothing.
         def call
-          groups = AwesomeConfig.find_by(var: @config_var, organization: @organization)
-          return broadcast(:invalid, "Not a hash") unless groups&.value.is_a?(Hash)
-          return broadcast(:invalid, "#{@key} key invalid") unless groups.value.has_key?(@key)
+          return broadcast(:invalid, "Not a hash") unless find_var&.value.is_a?(Hash)
+          return broadcast(:invalid, "#{ident} key invalid") unless find_var.value.has_key?(ident)
 
-          groups.value.except!(@key)
-          groups.save!
+          destroy_hash_ident!
 
-          constraint = :authorization_group
-          constraint = AwesomeConfig.find_by(var: "#{constraint}_#{@key}", organization: @organization)
-          constraint.destroy! if constraint.present?
-
-          broadcast(:ok, @key)
+          broadcast(:ok, ident)
         rescue StandardError => e
           broadcast(:invalid, e.message)
         end

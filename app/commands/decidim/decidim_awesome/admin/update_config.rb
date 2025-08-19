@@ -31,10 +31,14 @@ module Decidim
 
               setting = AwesomeConfig.find_or_initialize_by(var: key, organization: form.current_organization)
 
-              value = if [:authorization_groups, :admin_authorization_groups].include?(key.to_sym)
+              value = if form.respond_to?("#{key}_attributes")
+                        # for complex cases
                         form.public_send("#{key}_attributes")
+                      elsif val.respond_to?(:attributes)
+                        # when the value is another form
+                        val.attributes
                       else
-                        val.respond_to?(:attributes) ? val.attributes : val
+                        val
                       end
 
               setting.value = value

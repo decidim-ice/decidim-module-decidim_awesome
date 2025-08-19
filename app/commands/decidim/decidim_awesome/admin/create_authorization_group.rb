@@ -9,7 +9,6 @@ module Decidim
         #
         def initialize(organization, config_var = :authorization_groups)
           @organization = organization
-          @ident = rand(36**8).to_s(36)
           @config_var = config_var
         end
 
@@ -20,14 +19,11 @@ module Decidim
         #
         # Returns nothing.
         def call
-          groups = AwesomeConfig.find_or_initialize_by(var: @config_var, organization: @organization)
-          groups.value ||= {}
-          groups.value[@ident] = attributes.deep_dup
-          groups.save!
+          create_hash_config!(attributes)
 
-          create_constraint_never(:authorization_group)
+          create_constraint_never!
 
-          broadcast(:ok, @ident)
+          broadcast(:ok, ident)
         rescue StandardError => e
           broadcast(:invalid, e.message)
         end

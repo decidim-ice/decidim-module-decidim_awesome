@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim::DecidimAwesome
   module Admin
-    describe CreateProposalCustomField do
+    describe CreateAuthorizationGroup do
       subject { described_class.new(organization) }
 
       let(:organization) { create(:organization) }
@@ -24,24 +24,33 @@ module Decidim::DecidimAwesome
         ConfigForm.from_params(another_params).with_context(context)
       end
       let(:another_config) { UpdateConfig.new(another_form) }
+      let(:authorization_groups) do
+        {
+          "some-group" => {
+            "authorization_handlers" => {
+              "dummy_authorization_handler" => {}
+            }
+          }
+        }
+      end
 
       describe "when valid" do
         it "broadcasts :ok and creates a Hash" do
           expect { subject.call }.to broadcast(:ok)
 
-          expect(AwesomeConfig.find_by(organization:, var: :proposal_custom_fields).value).to be_a(Hash)
-          expect(AwesomeConfig.find_by(organization:, var: :proposal_custom_fields).value.keys.count).to eq(1)
+          expect(AwesomeConfig.find_by(organization:, var: :authorization_groups).value).to be_a(Hash)
+          expect(AwesomeConfig.find_by(organization:, var: :authorization_groups).value.keys.count).to eq(1)
         end
 
         context "and entries already exist" do
-          let!(:config) { create(:awesome_config, organization:, var: :proposal_custom_fields, value: { test: '[{"type":"text","required":true,"label":"Age","name":"age"}]' }) }
+          let!(:config) { create(:awesome_config, organization:, var: :authorization_groups, value: authorization_groups) }
 
           shared_examples "has css boxes content" do
             it "do not removes previous entries" do
               expect { subject.call }.to broadcast(:ok)
 
-              expect(AwesomeConfig.find_by(organization:, var: :proposal_custom_fields).value.keys.count).to eq(2)
-              expect(AwesomeConfig.find_by(organization:, var: :proposal_custom_fields).value.values).to include('[{"type":"text","required":true,"label":"Age","name":"age"}]')
+              expect(AwesomeConfig.find_by(organization:, var: :authorization_groups).value.keys.count).to eq(2)
+              expect(AwesomeConfig.find_by(organization:, var: :authorization_groups).value.values).to include(authorization_groups.values.first)
             end
           end
 
@@ -83,7 +92,7 @@ module Decidim::DecidimAwesome
         it "broadcasts :invalid and does not modify the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
-          expect(AwesomeConfig.find_by(organization:, var: :proposal_custom_fields)).to be_nil
+          expect(AwesomeConfig.find_by(organization:, var: :authorization_groups)).to be_nil
         end
       end
     end

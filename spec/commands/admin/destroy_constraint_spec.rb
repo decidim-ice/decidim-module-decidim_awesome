@@ -8,13 +8,6 @@ module Decidim::DecidimAwesome
       subject { described_class.new(constraint) }
 
       let(:organization) { create(:organization) }
-      # let(:context) do
-      #   {
-      #     current_user: create(:user, organization: organization),
-      #     current_organization: organization,
-      #     setting: config
-      #   }
-      # end
       let(:name) { :some_config_var }
       let(:config) { create(:awesome_config, organization:, var: name) }
       let!(:constraint) { create(:config_constraint, awesome_config: config, settings: { "test" => 1 }) }
@@ -60,13 +53,13 @@ module Decidim::DecidimAwesome
           it_behaves_like "destroys the constraint"
         end
 
-        context "and is a critical scope" do
+        context "and is a proposal custom fields" do
           let(:name) { :proposal_custom_field }
 
           it_behaves_like "do not destroy the constraint"
         end
 
-        context "and is another critical scope" do
+        context "and is proposal private custom fields" do
           let(:name) { :proposal_private_custom_field }
 
           it_behaves_like "do not destroy the constraint"
