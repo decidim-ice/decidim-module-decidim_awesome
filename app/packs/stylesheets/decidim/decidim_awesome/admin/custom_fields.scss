@@ -15,8 +15,7 @@
       @apply bg-background mr-2;
     }
 
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    @apply rounded-tl-[5px] rounded-tr-[5px];
 
     svg {
       @apply fill-black;
