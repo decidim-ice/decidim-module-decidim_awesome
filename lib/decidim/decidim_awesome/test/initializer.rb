@@ -8,7 +8,7 @@ Decidim::DecidimAwesome.configure do |config|
       :allow_images_in_proposals,
       :auto_save_forms,
       :user_timezone,
-      :authorization_groups,
+      :force_authorizations,
       :admins_available_authorizations,
       :intergram_for_admins,
       :intergram_for_public,

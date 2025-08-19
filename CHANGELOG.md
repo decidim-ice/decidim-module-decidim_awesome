@@ -8,7 +8,7 @@ Compatibility:
 
 Features:
   - Allow to granular permissions to forced verifications.
-    **NOTE** Config var `force_authorization_after_login` has changed to `authorization_groups`
+    **NOTE** Config var `force_authorization_after_login` has changed to `force_authorizations`
 
 v0.12.3
 -------

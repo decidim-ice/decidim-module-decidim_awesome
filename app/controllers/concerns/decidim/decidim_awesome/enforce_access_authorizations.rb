@@ -15,69 +15,27 @@ module Decidim
       def enforce_authorizations
         return if skip_enforcement_for_current_request?
 
-        service = access_authorization_service
-        return if enforce_global_authorizations(service)
-        return unless service.controller_requires_authorization?
-
-        enforce_context_authorizations(service)
+        unless service.granted?
+          flash[:alert] = I18n.t("decidim.decidim_awesome.session.authorization_is_required",
+                                 authorizations: service.adapters.map(&:fullname).join(", "))
+          redirect_to decidim_decidim_awesome.required_authorizations_path(redirect_url: request.fullpath)
+        end
       end
 
-      def enforce_global_authorizations(service)
-        return false if service.authorization_groups_global.blank?
-
-        adapters = service.required_authorizations
-        return false if adapters.blank?
-
-        return true if service.user_is_authorized?
-
-        flash_authorization_alert(full_names(adapters))
-        redirect_to_required(redirect_url: request.fullpath)
-        true
+      def service
+        @service ||= Decidim::DecidimAwesome::AccessAuthorizationService.new(current_user, required_authorization_groups)
       end
 
-      def enforce_context_authorizations(service)
-        adapters = service.required_authorizations_for_current_controller
-        return if adapters.blank?
-        return if user_authorized_for_current_context?(adapters)
+      def required_authorization_groups
+        return unless awesome_force_authorizations.is_a?(Array)
 
-        flash_authorization_alert(full_names(adapters))
-        redirect_to_required(redirect_url: request.fullpath, handlers: adapters.map(&:name))
-      end
-
-      def user_authorized_for_current_context?(adapters)
-        names = Array(adapters).map(&:name)
-        return true if names.blank?
-        return false unless user_signed_in?
-
-        Decidim::Authorization
-          .where(user: current_user, name: names)
-          .where.not(granted_at: nil)
-          .exists?
-      end
-
-      def access_authorization_service
-        @access_authorization_service ||= Decidim::DecidimAwesome::AccessAuthorizationService.new(self)
-      end
-
-      def full_names(adapters)
-        Array(adapters).map(&:fullname).join(", ")
-      end
-
-      def redirect_to_required(redirect_url:, handlers: nil)
-        params = { redirect_url: }
-        params[:handlers] = handlers if handlers.present?
-        redirect_to decidim_decidim_awesome.required_authorizations_path(params)
-      end
-
-      def flash_authorization_alert(authorizations)
-        flash[:alert] = I18n.t(
-          "decidim.decidim_awesome.session.authorization_is_required",
-          authorizations:
-        )
+        @required_authorization_groups ||= awesome_force_authorizations.pluck("authorization_handlers").compact_blank
       end
 
       def skip_enforcement_for_current_request?
         return true unless user_signed_in? && current_user.confirmed? && !current_user.blocked?
+        # Only apply it if the context requires it
+        return true if awesome_force_authorizations.blank?
 
         allowed_controllers.include?(controller_name.to_s)
       end

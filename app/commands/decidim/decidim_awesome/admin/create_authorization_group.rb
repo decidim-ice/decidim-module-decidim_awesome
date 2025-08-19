@@ -7,7 +7,7 @@ module Decidim
         include NeedsConstraintHelpers
         # Public: Initializes the command.
         #
-        def initialize(organization, config_var = :authorization_groups)
+        def initialize(organization, config_var = :force_authorizations)
           @organization = organization
           @config_var = config_var
         end
@@ -33,7 +33,6 @@ module Decidim
         def attributes
           {
             "authorization_handlers" => {},
-            "force_authorization_with_any_method" => false,
             "force_authorization_help_text" => {}
           }
         end

@@ -15,9 +15,7 @@ module Decidim
     autoload :Lock, "decidim/decidim_awesome/lock"
     autoload :TranslatedCustomFieldsType, "decidim/decidim_awesome/api/types/translated_custom_fields_type"
     autoload :LocalizedCustomFieldsType, "decidim/decidim_awesome/api/types/localized_custom_fields_type"
-    autoload :Authorizator, "decidim/decidim_awesome/authorizator"
-    autoload :AuthorizationGroupService, "decidim/decidim_awesome/verifications/authorization_group_service.rb"
-    autoload :AccessAuthorizationService, "decidim/decidim_awesome/verifications/access_authorization_service"
+    autoload :Authorizer, "decidim/decidim_awesome/authorizer"
 
     # Awesome comes with some components for participatory spaces
     # Currently :awesome_map and :awesome_iframe, list them here
@@ -205,21 +203,10 @@ module Decidim
       false
     end
 
-    # Permission groups that require passing specific verification workflows in defined contexts.
-    # Each group lists workflows and optional ConfigConstraints (global, space, or component).
-    # No groups => no mandatory verification (admins may still enforce per action).
-    config_accessor :authorization_groups do
-      {}
-    end
-
-    # By default all methods specified in authorization_groups must be granted in order to access the platform
-    # if set to true, the user will be able to access the platform if any of the methods is granted
-    config_accessor :force_authorization_with_any_method do
-      false
-    end
-
-    # When authorization_groups is enabled, this text will be shown to the user as a help text (ie: add a contact information)
-    config_accessor :force_authorization_help_text do
+    # Allows to enforce specific authorizations to access the platform
+    # Constraints can be defined for each group
+    # Set to :disabled to completely remove this feature
+    config_accessor :force_authorizations do
       {}
     end
 

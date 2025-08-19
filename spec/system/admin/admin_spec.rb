@@ -111,7 +111,7 @@ describe "Visit the admin page" do
     end
 
     context "when verification hacks are disabled" do
-      let(:disabled_features) { [:authorization_groups] }
+      let(:disabled_features) { [:force_authorizations] }
 
       it_behaves_like "do not have menu link", "verifications"
     end

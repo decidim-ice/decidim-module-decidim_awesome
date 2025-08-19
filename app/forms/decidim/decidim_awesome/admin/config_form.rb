@@ -18,7 +18,7 @@ module Decidim
         attribute :proposal_custom_fields, Hash
         attribute :proposal_private_custom_fields, Hash
         attribute :user_timezone, Boolean
-        attribute :authorization_groups, Hash, default: {}
+        attribute :force_authorizations, Hash, default: {}
         attribute :hashcash_signup, Boolean
         attribute :hashcash_signup_bits, Integer, default: Decidim::DecidimAwesome.hashcash_signup_bits
         attribute :hashcash_login, Boolean
@@ -57,35 +57,23 @@ module Decidim
 
         def self.from_params(params, additional_params = {})
           instance = super(params, additional_params)
-          instance.authorization_groups = build_authorization_groups(instance.authorization_groups)
-          instance.valid_keys = extract_valid_keys_from_params(params)
+          instance.valid_keys = params.keys.map(&:to_sym) || []
+          instance.force_authorizations = build_force_authorizations(instance.force_authorizations)
           instance.sanitize_labels!
           instance.sanitize_arrays!
           instance
         end
 
-        def self.extract_valid_keys_from_params(params)
-          keys = []
-          params.each do |key, _value|
-            keys << if key.to_s.starts_with?("force_authorization_help_text_")
-                      :force_authorization_help_text if keys.exclude?(:force_authorization_help_text)
-                    else
-                      key.to_sym
-                    end
-          end
-          keys
-        end
-
-        def self.build_authorization_groups(raw_groups)
+        def self.build_force_authorizations(raw_groups)
           raw_groups.transform_values do |group_data|
             group_data.is_a?(AuthorizationGroupForm) ? group_data : AuthorizationGroupForm.new(group_data)
           end
         end
 
-        def authorization_groups_attributes
-          return {} unless authorization_groups.is_a?(Hash)
+        def force_authorizations_attributes
+          return {} unless force_authorizations.is_a?(Hash)
 
-          authorization_groups.transform_values(&:verification_settings)
+          force_authorizations.transform_values(&:verification_settings)
         end
 
         def additional_proposal_sorting_labels

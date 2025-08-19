@@ -22,7 +22,7 @@ module Decidim::DecidimAwesome
 
     let(:organization) { create(:organization, available_authorizations: ["dummy_authorization_handler"]) }
     let(:user) { create(:user, :confirmed, organization:) }
-    let(:authorization_groups) do
+    let(:force_authorizations) do
       {
         "some-group" => {
           "authorization_handlers" => {
@@ -31,7 +31,7 @@ module Decidim::DecidimAwesome
         }
       }
     end
-    let!(:awesome_config) { create(:awesome_config, organization:, var: :authorization_groups, value: authorization_groups) }
+    let!(:awesome_config) { create(:awesome_config, organization:, var: :force_authorizations, value: force_authorizations) }
 
     shared_examples "forbids access" do
       it "redirects to the required authorizations page" do

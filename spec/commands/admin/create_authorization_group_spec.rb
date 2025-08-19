@@ -24,7 +24,7 @@ module Decidim::DecidimAwesome
         ConfigForm.from_params(another_params).with_context(context)
       end
       let(:another_config) { UpdateConfig.new(another_form) }
-      let(:authorization_groups) do
+      let(:force_authorizations) do
         {
           "some-group" => {
             "authorization_handlers" => {
@@ -38,19 +38,19 @@ module Decidim::DecidimAwesome
         it "broadcasts :ok and creates a Hash" do
           expect { subject.call }.to broadcast(:ok)
 
-          expect(AwesomeConfig.find_by(organization:, var: :authorization_groups).value).to be_a(Hash)
-          expect(AwesomeConfig.find_by(organization:, var: :authorization_groups).value.keys.count).to eq(1)
+          expect(AwesomeConfig.find_by(organization:, var: :force_authorizations).value).to be_a(Hash)
+          expect(AwesomeConfig.find_by(organization:, var: :force_authorizations).value.keys.count).to eq(1)
         end
 
         context "and entries already exist" do
-          let!(:config) { create(:awesome_config, organization:, var: :authorization_groups, value: authorization_groups) }
+          let!(:config) { create(:awesome_config, organization:, var: :force_authorizations, value: force_authorizations) }
 
           shared_examples "has css boxes content" do
             it "do not removes previous entries" do
               expect { subject.call }.to broadcast(:ok)
 
-              expect(AwesomeConfig.find_by(organization:, var: :authorization_groups).value.keys.count).to eq(2)
-              expect(AwesomeConfig.find_by(organization:, var: :authorization_groups).value.values).to include(authorization_groups.values.first)
+              expect(AwesomeConfig.find_by(organization:, var: :force_authorizations).value.keys.count).to eq(2)
+              expect(AwesomeConfig.find_by(organization:, var: :force_authorizations).value.values).to include(force_authorizations.values.first)
             end
           end
 
@@ -92,7 +92,7 @@ module Decidim::DecidimAwesome
         it "broadcasts :invalid and does not modify the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
-          expect(AwesomeConfig.find_by(organization:, var: :authorization_groups)).to be_nil
+          expect(AwesomeConfig.find_by(organization:, var: :force_authorizations)).to be_nil
         end
       end
     end

@@ -9,13 +9,11 @@ module Decidim
         attribute :authorization_handlers, { String => Object }
         attribute :authorization_handlers_names, Array[String]
         attribute :authorization_handlers_options, { String => Object }
-        attribute :force_authorization_with_any_method, Boolean, default: false
         translatable_attribute :force_authorization_help_text, String, default: {}
 
         def verification_settings
           {
             authorization_handlers: parsed_authorization_handlers,
-            force_authorization_with_any_method: force_authorization_with_any_method.present?,
             force_authorization_help_text: force_authorization_help_text || {}
           }
         end

@@ -7,9 +7,9 @@ module Decidim
         include NeedsConstraintHelpers
         # Public: Initializes the command.
         #
-        # key - the key to destroy inside authorization_groups
+        # key - the key to destroy inside force_authorizations
         # organization - the organization to which the config belongs
-        def initialize(key, organization, config_var = :authorization_groups)
+        def initialize(key, organization, config_var = :force_authorizations)
           @ident = key
           @organization = organization
           @config_var = config_var

@@ -7,18 +7,17 @@ describe "Forced verifications" do
   let!(:user) { create(:user, :confirmed, organization:) }
   let(:restricted_path) { "/" }
   let(:key) { "default" }
-  let!(:authorization_groups_config) do
+  let!(:force_authorizations_config) do
     create(
       :awesome_config,
       organization:,
-      var: :authorization_groups,
+      var: :force_authorizations,
       value: {
         key => {
           "authorization_handlers" => {
             "dummy_authorization_handler" => { "options" => {} },
             "another_dummy_authorization_handler" => { "options" => {} }
           },
-          "force_authorization_with_any_method" => any_method,
           "force_authorization_help_text" => { en: "Help text <strong>with HTML</strong>" }
         },
         "invalid" => {
@@ -28,7 +27,6 @@ describe "Forced verifications" do
       }
     )
   end
-  let!(:force_authorization_with_any_method) { create(:awesome_config, organization:, var: :force_authorization_with_any_method, value: any_method) }
   let(:any_method) { false }
 
   context "when the user is not logged in" do
@@ -133,8 +131,8 @@ describe "Forced verifications" do
 
     context "when there are pending verifications" do
       let(:organization) { create(:organization, available_authorizations: [:dummy_authorization_handler, :id_documents]) }
-      let!(:authorization_groups_config) { create(:awesome_config, organization:, var: :authorization_groups, value: authorization_groups_value) }
-      let(:authorization_groups_value) do
+      let!(:force_authorizations_config) { create(:awesome_config, organization:, var: :force_authorizations, value: force_authorizations_value) }
+      let(:force_authorizations_value) do
         {
           "default" => {
             "authorization_handlers" => {
@@ -207,8 +205,8 @@ describe "Forced verifications" do
     end
 
     context "when the verification method does not exist" do
-      let!(:authorization_groups_config) { create(:awesome_config, organization:, var: :authorization_groups, value: authorization_groups_value) }
-      let(:authorization_groups_value) do
+      let!(:force_authorizations_config) { create(:awesome_config, organization:, var: :force_authorizations, value: force_authorizations_value) }
+      let(:force_authorizations_value) do
         {
           "default" => {
             "authorization_handlers" => {
@@ -230,13 +228,13 @@ describe "Forced verifications" do
       let(:assembly) { create(:assembly, organization:) }
       let!(:process_component) { create(:component, manifest_name: :proposals, participatory_space: process) }
       let!(:assembly_component) { create(:component, manifest_name: :meetings, participatory_space: assembly) }
-      let(:authorization_groups_value) do
+      let(:force_authorizations_value) do
         { "test" => { "authorization_handlers" => { "id_documents" => { "options" => {} } } } }
       end
-      let!(:group_subconfig) { create(:awesome_config, organization:, var: "authorization_group_test", value: nil) }
+      let!(:group_subconfig) { create(:awesome_config, organization:, var: "force_authorization_test", value: nil) }
 
       before do
-        authorization_groups_config.update!(value: authorization_groups_value)
+        force_authorizations_config.update!(value: force_authorizations_value)
       end
 
       it "applies everywhere when there are no constraints (always)" do

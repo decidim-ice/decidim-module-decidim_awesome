@@ -13,7 +13,6 @@ module Decidim::DecidimAwesome
           authorization_handlers:,
           authorization_handlers_names:,
           authorization_handlers_options:,
-          force_authorization_with_any_method:,
           force_authorization_help_text:
         }
       end
@@ -26,7 +25,6 @@ module Decidim::DecidimAwesome
 
       let(:authorization_handlers_names) { ["dummy_authorization_handler"] }
       let(:authorization_handlers_options) { { "dummy_authorization_handler" => "some values" } }
-      let(:force_authorization_with_any_method) { false }
       let(:force_authorization_help_text) do
         {
           "en" => "Help text in English",
@@ -42,7 +40,6 @@ module Decidim::DecidimAwesome
             authorization_handlers: {
               "dummy_authorization_handler" => { options: "some values" }
             },
-            force_authorization_with_any_method: false,
             force_authorization_help_text: {
               "en" => "Help text in English",
               "ca" => "Text d'ajuda en català"
@@ -51,7 +48,6 @@ module Decidim::DecidimAwesome
         end
 
         context "when other parameters" do
-          let(:force_authorization_with_any_method) { true }
           let(:force_authorization_help_text) do
             {}
           end
@@ -61,7 +57,6 @@ module Decidim::DecidimAwesome
               authorization_handlers: {
                 "dummy_authorization_handler" => { options: "some values" }
               },
-              force_authorization_with_any_method: true,
               force_authorization_help_text: {}
             )
           end
