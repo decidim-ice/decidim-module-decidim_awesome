@@ -756,6 +756,8 @@ en:
       proposal_private_custom_fields_disclosure: This information won't be published
       required_authorizations:
         index:
+          authorization_options_invalid: Unfortunately, although you have this authorization,
+            the data used to verify you is not valid in this context.
           cancel: I'll do this in another moment, %{link}.
           granted_title: Granted verifications
           logout: let me logout

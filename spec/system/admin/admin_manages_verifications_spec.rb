@@ -14,10 +14,8 @@ describe "Admin manages verification tweaks" do
 
   it "saves the configuration" do
     visit decidim_admin_decidim_awesome.config_path(:verifications)
-    click_on "Add a new permissions group"
+    click_on "Add a new authorization group"
     check "Example authorization (Direct)"
-
-    check "Allow access if any of the authorizations is granted (by default, all are required)"
 
     page.execute_script <<~SCRIPT
       document.querySelector(".force_authorization_container .editor-container .ProseMirror:first-child").innerHTML = "<p>Help text <strong>with HTML</strong></p>"

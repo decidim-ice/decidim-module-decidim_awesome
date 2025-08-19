@@ -7,14 +7,13 @@ module Decidim
     class RequiredAuthorizationsController < DecidimAwesome::ApplicationController
       include ActionView::Helpers::SanitizeHelper
       layout "layouts/decidim/authorizations"
-      helper_method :granted_authorizations, :pending_authorizations, :missing_authorizations, :redirect_url, :authorization_help_text
+      helper_method :granted_authorizations, :pending_authorizations, :missing_authorizations, :redirect_url, :authorization_help_text, :service
 
       before_action do
         # If the user is already authorized for the required handlers, send them
         # back to the original destination (or root). This avoids loops because
         # redirect_url defaults to decidim.root_path when it points back here.
-        # redirect_to redirect_url if user_signed_in? && service.granted? && request.path != redirect_url
-        console
+        redirect_to redirect_url if user_signed_in? && service.granted? && request.path != redirect_url
       end
 
       def redirect_url
