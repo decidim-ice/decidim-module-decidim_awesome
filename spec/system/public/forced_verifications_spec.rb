@@ -21,13 +21,14 @@ describe "Forced verifications" do
           "force_authorization_help_text" => { en: "Help text <strong>with HTML</strong>" }
         },
         "invalid" => {
-          "authorization_handlers" => ["non_existent_authorization_handler"],
+          "authorization_handlers" => {
+            "non_existent_handler" => { "options" => {} }
+          },
           "force_authorization_help_text" => { en: "Won't show" }
         }
       }
     )
   end
-  let(:any_method) { false }
 
   context "when the user is not logged in" do
     before do
@@ -35,8 +36,8 @@ describe "Forced verifications" do
       visit restricted_path
     end
 
-    it "page can be visited" do
-      expect(page).to have_current_path(restricted_path, ignore_query: true)
+    it "page cannot be visited" do
+      expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(redirect_url: restricted_path))
     end
   end
 
@@ -86,18 +87,6 @@ describe "Forced verifications" do
 
       visit "/pages"
       expect(page).to have_current_path("/pages")
-    end
-
-    context "when any method is allowed" do
-      let(:any_method) { true }
-
-      it "user is redirected to the required authorizations page" do
-        click_on "Verify with Example authorization"
-
-        fill_in "Document number", with: "12345678X"
-        click_on "Send"
-        expect(page).to have_current_path(restricted_path, ignore_query: true)
-      end
     end
 
     context "when the user has not accepted the terms an conditions" do
@@ -198,9 +187,9 @@ describe "Forced verifications" do
     context "when user is blocked" do
       let(:user) { create(:user, :confirmed, :blocked, organization:) }
 
-      it "acts as normal" do
+      it "blocks access" do
         expect(page).to have_content("This account has been blocked")
-        expect(page).to have_current_path("/")
+        expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(redirect_url: restricted_path))
       end
     end
 
@@ -301,11 +290,11 @@ describe "Forced verifications" do
         expect(page).to have_current_path(decidim_assemblies.assembly_path(assembly))
       end
 
-      it "everywhere except participatory spaces does not trigger on processes" do
+      it "everywhere except participatory spaces does not trigger on processes or assemblies" do
         create(:config_constraint, awesome_config: group_subconfig, settings: { "participatory_space_manifest" => "system" })
 
         visit decidim_assemblies.assembly_path(assembly)
-        expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path, ignore_query: true)
+        expect(page).to have_current_path(decidim_assemblies.assembly_path(assembly))
 
         visit decidim_participatory_processes.participatory_processes_path
         expect(page).to have_current_path(decidim_participatory_processes.participatory_processes_path)

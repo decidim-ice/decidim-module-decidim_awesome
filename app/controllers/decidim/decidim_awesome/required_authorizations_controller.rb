@@ -3,7 +3,6 @@
 module Decidim
   module DecidimAwesome
     # Lists the authorizations required for the current user/context and helps
-    # them complete those. Delegates the business logic to AccessAuthorizationService.
     class RequiredAuthorizationsController < DecidimAwesome::ApplicationController
       include ActionView::Helpers::SanitizeHelper
       layout "layouts/decidim/authorizations"
@@ -66,7 +65,7 @@ module Decidim
       end
 
       def service
-        @service ||= Decidim::DecidimAwesome::AccessAuthorizationService.new(current_user, context_authorizations)
+        @service ||= Decidim::DecidimAwesome::AccessAuthorizationService.new(current_user, current_organization, context_authorizations)
       end
 
       # we need to detect the context from the redirect_url passed

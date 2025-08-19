@@ -3,21 +3,32 @@
 module Decidim
   module DecidimAwesome
     class AccessAuthorizationService
-      def initialize(user, authorization_groups = [])
+      def initialize(user, organization, authorization_groups = [])
         @user = user
-        @organization = user.organization
-        @authorization_groups = authorization_groups
+        @organization = organization
+        @available_handlers = organization.available_authorizations & Decidim.authorization_workflows.map(&:name)
+        @authorization_groups = authorization_groups.filter_map do |group|
+          group.filter_map do |handler, options|
+            next unless @available_handlers.include?(handler)
+
+            [handler, options]
+          end.to_h
+        end.compact_blank
       end
 
       attr_reader :user, :organization, :authorization_groups
 
       def granted?
+        return false unless user
         return true if authorization_groups.blank?
 
         # if one group is authorized that's ok
         # inside a group, all adapters must be authorized
         authorization_groups.detect do |group|
-          authorization_statuses_for(group).all? { |status| status == :ok }
+          statuses = authorization_statuses_for(group)
+          next if statuses.blank?
+
+          statuses.all? { |status| status == :ok }
         end
       end
 

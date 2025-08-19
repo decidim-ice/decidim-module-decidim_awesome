@@ -23,7 +23,7 @@ module Decidim
       end
 
       def service
-        @service ||= Decidim::DecidimAwesome::AccessAuthorizationService.new(current_user, required_authorization_groups)
+        @service ||= Decidim::DecidimAwesome::AccessAuthorizationService.new(current_user, current_organization, required_authorization_groups)
       end
 
       def required_authorization_groups
@@ -33,11 +33,12 @@ module Decidim
       end
 
       def skip_enforcement_for_current_request?
-        return true unless user_signed_in? && current_user.confirmed? && !current_user.blocked?
-        # Only apply it if the context requires it
-        return true if awesome_force_authorizations.blank?
+        # skip unconfirmed and blocked as other decidim mechanisms kick in
+        return true if user_signed_in? && (!current_user.confirmed? || current_user.blocked?)
+        return true if allowed_controllers.include?(controller_name.to_s)
 
-        allowed_controllers.include?(controller_name.to_s)
+        # Only apply it if the context requires it
+        awesome_force_authorizations.blank?
       end
 
       def allowed_controllers
