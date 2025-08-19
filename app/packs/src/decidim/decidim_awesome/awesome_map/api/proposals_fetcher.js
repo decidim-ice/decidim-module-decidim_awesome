@@ -45,7 +45,7 @@ export default class ProposalsFetcher extends Fetcher {
                       id
                     }
                   }
-                  category {
+                  taxonomies {
                     id
                   }
                 }
