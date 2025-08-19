@@ -31,7 +31,7 @@ describe Decidim::DecidimAwesome do
   let!(:allow_videos_in_editors) { create(:awesome_config, organization:, var: :allow_videos_in_editors, value: true) }
   let!(:auto_save_forms) { create(:awesome_config, organization:, var: :auto_save_forms, value: true) }
   let!(:user_timezone) { create(:awesome_config, organization:, var: :user_timezone, value: true) }
-  let!(:authorization_groups) { create(:awesome_config, organization:, var: :authorization_groups, value: [:dummy_authorization_handler]) }
+  let!(:authorization_groups) { create(:awesome_config, organization:, var: :authorization_groups, value: authorization_groups_value) }
   let!(:admins_available_authorizations) { create(:awesome_config, organization:, var: :admins_available_authorizations, value: [:dummy_authorization_handler]) }
   let!(:intergram_for_admins) { create(:awesome_config, organization:, var: :intergram_for_admins, value: true) }
   let!(:intergram_for_public) { create(:awesome_config, organization:, var: :intergram_for_public, value: true) }
@@ -51,6 +51,15 @@ describe Decidim::DecidimAwesome do
   let!(:hashcash_signup_bits) { create(:awesome_config, organization:, var: :hashcash_signup_bits, value: 21) }
   let!(:hashcash_login) { create(:awesome_config, organization:, var: :hashcash_login, value: true) }
   let!(:hashcash_login_bits) { create(:awesome_config, organization:, var: :hashcash_login_bits, value: 18) }
+  let(:authorization_groups_value) do
+    {
+      "some-group" => {
+        "authorization_handlers" => {
+          "dummy_authorization_handler" => {}
+        }
+      }
+    }
+  end
 
   let(:styles) { "body {background: red;}" }
   let(:intergram) do

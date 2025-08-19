@@ -18,7 +18,7 @@ module Decidim
         attribute :proposal_custom_fields, Hash
         attribute :proposal_private_custom_fields, Hash
         attribute :user_timezone, Boolean
-        attribute :authorization_groups, Hash
+        attribute :authorization_groups, Hash, default: {}
         attribute :hashcash_signup, Boolean
         attribute :hashcash_signup_bits, Integer, default: Decidim::DecidimAwesome.hashcash_signup_bits
         attribute :hashcash_login, Boolean
@@ -77,8 +77,6 @@ module Decidim
         end
 
         def self.build_authorization_groups(raw_groups)
-          return {} unless raw_groups.is_a?(Hash)
-
           raw_groups.transform_values do |group_data|
             group_data.is_a?(AuthorizationGroupForm) ? group_data : AuthorizationGroupForm.new(group_data)
           end
