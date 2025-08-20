@@ -9,7 +9,6 @@ eu:
         allow_videos_in_editors: Bideoak HTML editorean baimendu
         auto_save_forms: Inprimakiak automatikoki gordetzea tokiko biltegian
         force_authorization_after_login: Saioa hasi edo erregistratu ondoren baimena behartu
-        force_authorization_help_text: Baimen orrirako laguntza-testua
         force_authorization_with_any_method: Sarbidea baimendu edozein baimen emanez gero (berez, guztiak beharrezkoak dira)
         intergram_auto_no_response: Parte-hartzaileak bere lehen mezua bidali eta minutu bat igaro ondoren, erantzunik jaso ez bada, bidalitako mezua
         intergram_auto_response: Parte-hartzaileak bere lehen mezua bidali eta berehala bidalitako mezua
