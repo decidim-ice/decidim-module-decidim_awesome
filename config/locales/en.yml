@@ -415,7 +415,7 @@ en:
                 cannot be zero
               verifications_html: |
                 Here you can put additional access restrictions to participatory spaces or components that will force users to be verified before accessing certain locations (ie: to prevent spam).<br>
-                <b>NOTE:</b> Be careful applying these restrictions, specially in complex situations.<br>
+                Restrictions apply to all users but administrators will always have access to the /admin panel.
             validators:
               body: User input validations for the "body" field
               title: User input validations for the "title" field

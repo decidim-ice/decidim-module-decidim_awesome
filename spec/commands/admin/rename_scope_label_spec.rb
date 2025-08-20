@@ -57,7 +57,7 @@ module Decidim::DecidimAwesome
       describe "when empty" do
         let(:text) { "  " }
 
-        it "broadcasts :invalid and does not modifiy the config options" do
+        it "broadcasts :invalid and does not modify the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
           expect(AwesomeConfig.find_by(organization:, var: attribute).value).to eq(value)
@@ -69,7 +69,7 @@ module Decidim::DecidimAwesome
       describe "when key repeated" do
         let(:text) { "foo" }
 
-        it "broadcasts :invalid and does not modifiy the config options" do
+        it "broadcasts :invalid and does not modify the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
           expect(AwesomeConfig.find_by(organization:, var: attribute).value).to eq(value)
@@ -81,7 +81,7 @@ module Decidim::DecidimAwesome
         let(:config) { nil }
         let(:constraint) { nil }
 
-        it "broadcasts :invalid and does not modifiy the config options" do
+        it "broadcasts :invalid and does not modify the config options" do
           expect { subject.call }.to broadcast(:invalid)
         end
       end
@@ -89,7 +89,7 @@ module Decidim::DecidimAwesome
       describe "when no scoped_config" do
         let(:scoped_config) { nil }
 
-        it "broadcasts :invalid and does not modifiy the config options" do
+        it "broadcasts :invalid and does not modify the config options" do
           expect { subject.call }.to broadcast(:ok)
         end
       end

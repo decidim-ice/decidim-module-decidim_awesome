@@ -53,13 +53,13 @@ module Decidim::DecidimAwesome
           it_behaves_like "destroys the constraint"
         end
 
-        context "and is a proposal custom fields" do
+        context "and is a proposal custom field" do
           let(:name) { :proposal_custom_field }
 
           it_behaves_like "do not destroy the constraint"
         end
 
-        context "and is proposal private custom fields" do
+        context "and is proposal private custom field" do
           let(:name) { :proposal_private_custom_field }
 
           it_behaves_like "do not destroy the constraint"

@@ -67,13 +67,13 @@ module Decidim::DecidimAwesome
               sign_out user
             end
 
-            it_behaves_like "allows access"
+            it_behaves_like "forbids access"
           end
 
           context "when the user is blocked" do
             let(:user) { create(:user, :confirmed, :blocked, organization:) }
 
-            it_behaves_like "allows access"
+            it_behaves_like "forbids access"
           end
 
           context "when the user is not confirmed" do

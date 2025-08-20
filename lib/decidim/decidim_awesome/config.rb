@@ -93,7 +93,7 @@ module Decidim
         # if no constraints defined, applies to everything
         return true if constraints.blank?
 
-        # if containts the "none" constraints, deactivate everything else
+        # if contains the "none" constraints, deactivate everything else
         return false if constraints.detect { |c| c.settings["participatory_space_manifest"] == "none" }
 
         # check if current context matches some constraint
@@ -117,7 +117,7 @@ module Decidim
         sub_configs_for(singular_key)[subkey.to_sym]&.add_constraints constraints
       end
 
-      # Merges all subconfigs values for custom_styles or any other scoped confs
+      # Merges all sub-configs values for custom_styles or any other scoped configs
       # by default filtered according to the current scope, a block can be passed for custom filtering
       # ie, collect everything:
       #    collect_sub_configs_values("scoped_style") { true }
