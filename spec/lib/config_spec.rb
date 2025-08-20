@@ -88,12 +88,74 @@ module Decidim::DecidimAwesome
       )
     end
 
-    it "can add user context" do
-      expect(subject.context[:context]).to eq("anonymous")
-      subject.application_context!(current_user:)
-      expect(subject.context[:context]).to eq("user_logged_in")
-      subject.application_context!(current_user: nil)
-      expect(subject.context[:context]).to eq("anonymous")
+    describe "#application_context!" do
+      context "when called without parameters" do
+        it "sets context as anonymous" do
+          subject.application_context!
+          expect(subject.context[:application_context]).to eq("anonymous")
+          expect(subject.application_context).to eq({})
+        end
+      end
+
+      context "when called with nil user" do
+        it "sets context as anonymous" do
+          subject.application_context!(current_user: nil)
+          expect(subject.context[:application_context]).to eq("anonymous")
+          expect(subject.application_context[:current_user]).to be_nil
+        end
+      end
+
+      context "when called with a user" do
+        it "sets context as user_logged_in" do
+          subject.application_context!(current_user:)
+          expect(subject.context[:application_context]).to eq("user_logged_in")
+          expect(subject.application_context[:current_user]).to eq(current_user)
+        end
+      end
+
+      context "when called with non-user object" do
+        it "sets context as anonymous" do
+          subject.application_context!(current_user: "not_a_user")
+          expect(subject.context[:application_context]).to eq("anonymous")
+          expect(subject.application_context[:current_user]).to eq("not_a_user")
+        end
+      end
+
+      context "when called with additional context parameters" do
+        it "preserves all context parameters" do
+          extra_context = { custom_param: "value", current_user: }
+          subject.application_context!(extra_context)
+          expect(subject.context[:application_context]).to eq("user_logged_in")
+          expect(subject.application_context[:current_user]).to eq(current_user)
+          expect(subject.application_context[:custom_param]).to eq("value")
+        end
+      end
+
+      context "when called multiple times" do
+        it "overwrites previous application context" do
+          subject.application_context!(current_user:)
+          expect(subject.context[:application_context]).to eq("user_logged_in")
+
+          subject.application_context!(current_user: nil)
+          expect(subject.context[:application_context]).to eq("anonymous")
+          expect(subject.application_context[:current_user]).to be_nil
+        end
+      end
+
+      context "when config evaluation depends on user context" do
+        let!(:awesome_config) { create(:awesome_config, organization:, var: :allow_images_in_editors, value: true) }
+        let!(:constraint) { create(:config_constraint, awesome_config:, settings: { application_context: "user_logged_in" }) }
+
+        it "affects configuration evaluation for logged users" do
+          subject.application_context!(current_user:)
+          expect(subject.config[:allow_images_in_editors]).to be(true)
+        end
+
+        it "affects configuration evaluation for anonymous users" do
+          subject.application_context!(current_user: nil)
+          expect(subject.config[:allow_images_in_editors]).to be(false)
+        end
+      end
     end
 
     context "when some config is customized" do

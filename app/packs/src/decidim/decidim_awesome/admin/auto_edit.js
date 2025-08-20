@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const attribute = target.dataset.var;
       const inputFields = document.querySelectorAll(`[name="config[${attribute}][${key}]"]`);
       const multipleFields = document.querySelectorAll(`[name="config[${attribute}][${key}][]"]`);
+      const subFields = document.querySelectorAll(`[name^="config[${attribute}[${key}]]"]`);
       const container = document.querySelector(`.js-box-container[data-key="${key}"]`);
       const deleteBox = container.querySelector(".awesome-auto-delete");
 
@@ -42,6 +43,14 @@ document.addEventListener("DOMContentLoaded", () => {
             multipleField.setAttribute("name", `config[${attribute}][${result.key}][]`);
           });
         }
+        if (subFields.length > 0) {
+          subFields.forEach((subField) => {
+            subField.setAttribute("name", subField.getAttribute("name").replace(
+              `config[${attribute}[${key}]]`,
+              `config[${attribute}[${result.key}]]`
+            ));
+          });
+        }
         container.dataset.key = result.key;
         container.setAttribute("data-key", result.key);
         deleteBox.setAttribute("href", deleteBox.getAttribute("href").replace(`key=${key}`, `key=${result.key}`));
@@ -57,9 +66,16 @@ document.addEventListener("DOMContentLoaded", () => {
         Reflect.deleteProperty(window.Decidim.currentDialogs, `new-modal-${scope}`);
         const editModal = document.getElementById(`edit-modal-${result.scope}`);
         const newModal = document.getElementById(`new-modal-${result.scope}`);
+        console.log("Rebuilding modals", editModal, newModal);
         if (container) {
           // reloads dialogs (modals)
           document.dispatchEvent(new CustomEvent("ajax:loaded", { detail: container }));
+          // If editor are created, they will be duplicated by the ajax:loaded event, so we remove them
+          document.querySelectorAll(`.editor-toolbar`).forEach((toolbar) => {
+            if(toolbar.nextElementSibling && toolbar.nextElementSibling.classList.contains("editor-toolbar")) {
+              toolbar.nextElementSibling.remove();
+            }
+          });
         }
         // Rebuild the manual handling of remote modals
         document.dispatchEvent(new CustomEvent("ajax:loaded:modals", { detail: [editModal, newModal] }));

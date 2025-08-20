@@ -12,7 +12,7 @@ module Decidim
           participatory_space_slug: nil,
           component_id: nil,
           component_manifest: nil,
-          context: "anonymous"
+          application_context: "anonymous"
         }
         @sub_configs = {}
       end
@@ -49,12 +49,12 @@ module Decidim
 
       def application_context!(ctx = {})
         @application_context = ctx
-        @context[:context] = case ctx[:current_user]
-                             when Decidim::User
-                               "user_logged_in"
-                             else
-                               "anonymous"
-                             end
+        @context[:application_context] = case ctx[:current_user]
+                                         when Decidim::User
+                                           "user_logged_in"
+                                         else
+                                           "anonymous"
+                                         end
       end
 
       # config processed in context

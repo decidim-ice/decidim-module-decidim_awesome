@@ -52,7 +52,7 @@ en:
       constraint:
         component_id: or specifically in
         component_manifest: Only in components of type
-        context: Only for
+        application_context: Only for
         participatory_space_manifest: Apply to participatory spaces of type
         participatory_space_slug: Only in
       custom_redirect:

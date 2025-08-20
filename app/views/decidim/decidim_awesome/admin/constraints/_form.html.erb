@@ -4,6 +4,6 @@
   <%= form.select :participatory_space_slug, participatory_spaces_list(@form.participatory_space_manifest).invert, include_blank: "---" %>
   <%= form.select :component_manifest, component_manifests(@form.participatory_space_manifest).invert, include_blank: "---" %>
   <%= form.select :component_id, components_list(@form.participatory_space_manifest, @form.participatory_space_slug).invert, include_blank: "---" %>
-  <%= form.select :context, contexts_list.invert, include_blank: "---" %>
+  <%= form.select :application_context, contexts_list.invert, include_blank: "---" %>
 
 </div>

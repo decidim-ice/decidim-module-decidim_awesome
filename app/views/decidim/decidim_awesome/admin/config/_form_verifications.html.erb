@@ -14,7 +14,7 @@
 
       <%= form.fields_for "#{config_var}[#{key}]", group do |group_form| %>
         <div class="card p-4 js-box-container force_authorization_container" data-key="<%= key %>" data-var="<%= config_var %>">
-          <%= render "decidim/decidim_awesome/admin/config/autoedit_box_label", var: config_var, key:, scope: "#{field}_#{key}", delete_path: decidim_admin_decidim_awesome.force_authorization_path(id: key) %>
+          <%= render "decidim/decidim_awesome/admin/config/autoedit_box_label", var: config_var, key:, scope: "#{field}_#{key}", delete_path: decidim_admin_decidim_awesome.force_authorization_path(key:) %>
           <div class="card-section mt-2">
             <div class="row column pt-4 pb-4">
               <h5><%= t("title", scope: "decidim.decidim_awesome.admin.config.form_force_authorizations") %></h5>

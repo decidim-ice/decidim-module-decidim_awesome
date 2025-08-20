@@ -5,7 +5,7 @@ module Decidim
     module Admin
       module ConfigConstraintsHelpers
         OTHER_MANIFESTS = [:none, :system, :process_groups].freeze
-        CONTEXTS = [:user_logged_in, :anonymous].freeze
+        APPLICATION_CONTEXTS = [:user_logged_in, :anonymous].freeze
 
         include Decidim::TranslatableAttributes
 
@@ -58,7 +58,7 @@ module Decidim
         end
 
         def contexts_list
-          ConfigConstraintsHelpers::CONTEXTS.index_with { |c| I18n.t("decidim.decidim_awesome.admin.config.#{c}") }
+          ConfigConstraintsHelpers::APPLICATION_CONTEXTS.index_with { |c| I18n.t("decidim.decidim_awesome.admin.config.#{c}") }
         end
 
         def translate_constraint_value(constraint, key)
@@ -73,10 +73,10 @@ module Decidim
                         when :component_id
                           component = Decidim::Component.find_by(id: value)
                           "#{component.id}: #{translated_attribute(component.name)}" if component
-                        when :context
+                        when :application_context
                           I18n.t("decidim.decidim_awesome.admin.config.#{value}")
                         end
-          translation || value
+          translation.presence || value
         end
 
         def md5(text)

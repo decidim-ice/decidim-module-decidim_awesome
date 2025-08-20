@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "decidim/decidim_awesome/test/shared_examples/box_label_editor_examples"
 
 describe "Admin manages verification tweaks" do
   let(:organization) { create(:organization, available_authorizations: [:dummy_authorization_handler, :another_dummy_authorization_handler, :id_documents]) }
@@ -41,7 +42,7 @@ describe "Admin manages verification tweaks" do
     let(:organization) { create(:organization, available_authorizations: [:dummy_authorization_handler, :another_dummy_authorization_handler]) }
     let!(:force_authorizations) do
       create(:awesome_config, organization:, var: :force_authorizations, value: {
-               "some-id" => {
+               "foo" => {
                  "authorization_handlers" => {
                    "dummy_authorization_handler" => {},
                    "another_dummy_authorization_handler" => {}
@@ -50,14 +51,19 @@ describe "Admin manages verification tweaks" do
              })
     end
 
-    it "allows to unselect existing workflows" do
+    before do
       visit decidim_admin_decidim_awesome.config_path(:verifications)
+    end
+
+    it_behaves_like "edits box label inline", :verifications, :foo
+
+    it "allows to unselect existing workflows" do
       uncheck "Another example authorization (Direct)"
 
       click_on "Update configuration"
 
       expect(page).to have_content("updated successfully")
-      expect(last_force_authorizations.reload.value).to eq("some-id" => { "authorization_handlers" => { "dummy_authorization_handler" => { "options" => { "allowed_postal_codes" => "08001", "allowed_scope_id" => "" } } }, "force_authorization_help_text" => { "ca" => "", "en" => "", "es" => "" } })
+      expect(last_force_authorizations.reload.value).to eq("foo" => { "authorization_handlers" => { "dummy_authorization_handler" => { "options" => { "allowed_postal_codes" => "08001", "allowed_scope_id" => "" } } }, "force_authorization_help_text" => { "ca" => "", "en" => "", "es" => "" } })
     end
   end
 end
