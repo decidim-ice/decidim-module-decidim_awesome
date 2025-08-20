@@ -33,6 +33,11 @@
       color: #fff;
     }
 
+    &.context {
+      background-color: #007bff;
+      color: #fff;
+    }
+
     &.constraint {
       &-none {
         background-color: #ff3000;

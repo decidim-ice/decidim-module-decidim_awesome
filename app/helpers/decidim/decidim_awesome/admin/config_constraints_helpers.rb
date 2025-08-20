@@ -5,6 +5,7 @@ module Decidim
     module Admin
       module ConfigConstraintsHelpers
         OTHER_MANIFESTS = [:none, :system, :process_groups].freeze
+        CONTEXTS = [:user_logged_in, :anonymous].freeze
 
         include Decidim::TranslatableAttributes
 
@@ -50,30 +51,32 @@ module Decidim
           space = model_for_manifest(manifest)
           return {} unless space&.column_names&.include? "slug"
 
-          components = Component.where(participatory_space: space.find_by(slug:))
+          components = Decidim::Component.where(participatory_space: space.find_by(slug:))
           components.to_h do |item|
             [item.id, "#{item.id}: #{translated_attribute(item.name)}"]
           end
         end
 
+        def contexts_list
+          ConfigConstraintsHelpers::CONTEXTS.index_with { |c| I18n.t("decidim.decidim_awesome.admin.config.#{c}") }
+        end
+
         def translate_constraint_value(constraint, key)
           value = constraint.settings[key]
-          case key.to_sym
-          when :participatory_space_manifest
-            participatory_space_manifests[value.to_sym] || value
-          when :participatory_space_slug
-            manifest = constraint.settings["participatory_space_manifest"]
-            participatory_spaces_list(manifest)[value] || value
-          when :component_manifest
-            component_manifests[value.to_sym] || value
-          when :component_id
-            component = Component.find_by(id: value)
-            return "#{component.id}: #{translated_attribute(component.name)}" if component
-
-            value
-          else
-            value
-          end
+          translation = case key.to_sym
+                        when :participatory_space_manifest
+                          participatory_space_manifests[value.to_sym]
+                        when :participatory_space_slug
+                          participatory_spaces_list(constraint.settings["participatory_space_manifest"])[value]
+                        when :component_manifest
+                          component_manifests[value.to_sym]
+                        when :component_id
+                          component = Decidim::Component.find_by(id: value)
+                          "#{component.id}: #{translated_attribute(component.name)}" if component
+                        when :context
+                          I18n.t("decidim.decidim_awesome.admin.config.#{value}")
+                        end
+          translation || value
         end
 
         def md5(text)

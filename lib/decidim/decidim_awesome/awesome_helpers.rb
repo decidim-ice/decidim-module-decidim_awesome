@@ -10,11 +10,13 @@ module Decidim
 
       # Returns the normalized config for an Organization and the current url
       def awesome_config_instance
-        memoize("current_config") do
+        @awesome_config_instance ||= memoize("current_config") do
           config = Config.new(request.env["decidim.current_organization"])
-          config.context_from_request(request)
+          config.context_from_request!(request)
           config
         end
+        @awesome_config_instance.application_context!(current_user:) if respond_to?(:current_user)
+        @awesome_config_instance
       end
 
       def awesome_config

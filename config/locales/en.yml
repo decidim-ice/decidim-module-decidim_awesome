@@ -54,6 +54,7 @@ en:
       constraint:
         component_id: or specifically in
         component_manifest: Only in components of type
+        context: Only for
         participatory_space_manifest: Apply to participatory spaces of type
         participatory_space_slug: Only in
       custom_redirect:
@@ -268,6 +269,7 @@ en:
               You can start the process now and it will be performed in the background.
             start_image_migrations: "👉 Start the migration process now"
         config:
+          anonymous: Non-logged users
           caution: 'NOTE: This feature heavily modifies some default behaviors that
             might lead to unexpected results. Use it with caution!'
           constraints:
@@ -463,6 +465,7 @@ en:
           update:
             error: Error updating configuration! %{error}
             success: Configuration updated successfully
+          user_logged_in: Logged in users
         constraints:
           create:
             error: Error creating condition case

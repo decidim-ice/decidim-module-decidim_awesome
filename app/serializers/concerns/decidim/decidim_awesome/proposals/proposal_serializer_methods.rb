@@ -17,7 +17,7 @@ module Decidim
             return @custom_config if @custom_config
 
             @custom_config = Config.new(proposal.organization)
-            @custom_config.context_from_component(proposal.component)
+            @custom_config.context_from_component!(proposal.component)
             @custom_config
           end
 

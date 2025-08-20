@@ -9,6 +9,7 @@ module Decidim::DecidimAwesome
     let(:organization) { create(:organization) }
     let(:participatory_process) { create(:participatory_process, organization:) }
     let(:component) { create(:dummy_component, participatory_space: participatory_process) }
+    let(:current_user) { create(:user, organization:) }
     let(:config) do
       Decidim::DecidimAwesome.config
     end
@@ -20,7 +21,7 @@ module Decidim::DecidimAwesome
     end
 
     it "converts url to context" do
-      subject.context_from_request(request)
+      subject.context_from_request!(request)
       expect(subject.context).to eq(participatory_space_manifest: "participatory_processes", participatory_space_slug: "some-slug", component_id: "12")
     end
 
@@ -28,7 +29,7 @@ module Decidim::DecidimAwesome
       let(:request) { double(url: "/admin/participatory_processes/natus-molestias/edit") }
 
       it "converts url to context" do
-        subject.context_from_request(request)
+        subject.context_from_request!(request)
         expect(subject.context).to eq(participatory_space_manifest: "participatory_processes", participatory_space_slug: "natus-molestias")
       end
 
@@ -36,7 +37,7 @@ module Decidim::DecidimAwesome
         let(:request) { double(url: "/admin/participatory_processes/natus-molestias/components/9/manage/") }
 
         it "converts url to context" do
-          subject.context_from_request(request)
+          subject.context_from_request!(request)
           expect(subject.context).to eq(participatory_space_manifest: "participatory_processes", participatory_space_slug: "natus-molestias", component_id: "9")
         end
       end
@@ -45,7 +46,7 @@ module Decidim::DecidimAwesome
         let(:request) { double(url: "/participatory_process_groups/123") }
 
         it "converts url to context" do
-          subject.context_from_request(request)
+          subject.context_from_request!(request)
           expect(subject.context).to eq(participatory_space_manifest: "process_groups", participatory_space_slug: "123")
         end
       end
@@ -54,7 +55,7 @@ module Decidim::DecidimAwesome
         let(:request) { double(url: "/admin/newsletters/new") }
 
         it "converts url to context" do
-          subject.context_from_request(request)
+          subject.context_from_request!(request)
           expect(subject.context).to eq(participatory_space_manifest: "system")
         end
       end
@@ -64,13 +65,13 @@ module Decidim::DecidimAwesome
       let(:request) { double(url: "/newsletters") }
 
       it "returns empty context" do
-        subject.context_from_request(request)
+        subject.context_from_request!(request)
         expect(subject.context).to be_empty
       end
     end
 
     it "converts component to context" do
-      subject.context_from_component(component)
+      subject.context_from_component!(component)
       expect(subject.context).to eq(
         participatory_space_manifest: participatory_process.manifest.name.to_s,
         participatory_space_slug: participatory_process.slug,
@@ -80,14 +81,22 @@ module Decidim::DecidimAwesome
     end
 
     it "converts participatory_space to context" do
-      subject.context_from_participatory_space(participatory_process)
+      subject.context_from_participatory_space!(participatory_process)
       expect(subject.context).to eq(
         participatory_space_manifest: participatory_process.manifest.name.to_s,
         participatory_space_slug: participatory_process.slug
       )
     end
 
-    context "when some config is personalized" do
+    it "can add user context" do
+      expect(subject.context[:context]).to eq("anonymous")
+      subject.application_context!(current_user:)
+      expect(subject.context[:context]).to eq("user_logged_in")
+      subject.application_context!(current_user: nil)
+      expect(subject.context[:context]).to eq("anonymous")
+    end
+
+    context "when some config is customized" do
       let(:custom_config) do
         config.merge(allow_images_in_editors: true)
       end
@@ -97,7 +106,7 @@ module Decidim::DecidimAwesome
         expect(subject.config).not_to eq(config)
       end
 
-      it "matches personalized config" do
+      it "matches customized config" do
         expect(subject.config).to eq(custom_config)
       end
 
@@ -168,7 +177,7 @@ module Decidim::DecidimAwesome
         expect(subject.config).not_to eq(config)
       end
 
-      it "matches personalized config" do
+      it "matches customized config" do
         expect(subject.config).to eq(custom_config)
       end
 
@@ -179,7 +188,7 @@ module Decidim::DecidimAwesome
           expect(subject.config).to eq(config)
         end
 
-        it "differs from personalized config" do
+        it "differs from customized config" do
           expect(subject.config).not_to eq(custom_config)
         end
       end
@@ -230,12 +239,12 @@ module Decidim::DecidimAwesome
       end
 
       it "filters subconfig values in the current context" do
-        subject.context_from_request(request)
+        subject.context_from_request!(request)
         expect(collected_values).to eq([values["foo"]])
       end
 
       it "can collect all subconfig values" do
-        subject.context_from_request(request)
+        subject.context_from_request!(request)
         expect(unfiltered_collected_values).to match_array(values.values)
       end
 
@@ -253,7 +262,7 @@ module Decidim::DecidimAwesome
         end
 
         before do
-          subject.context_from_request(request)
+          subject.context_from_request!(request)
         end
 
         it "callects all matching values" do

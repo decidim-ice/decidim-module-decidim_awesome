@@ -9,6 +9,7 @@ module Decidim
         attribute :participatory_space_slug, String
         attribute :component_manifest, String
         attribute :component_id, Integer
+        attribute :context, String
 
         validates :component_manifest, absence: true, if: lambda { |form|
           form.component_id.present? || ConfigConstraintsHelpers::OTHER_MANIFESTS.include?(form.participatory_space_manifest&.to_sym)
