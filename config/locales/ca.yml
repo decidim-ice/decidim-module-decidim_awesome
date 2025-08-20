@@ -10,7 +10,6 @@ ca:
         allow_images_in_small_editor: Permet imatge a l'editor HTML reduït
         auto_save_forms: Desa automàticament els formularis a l'emmagatzematge local
         force_authorization_after_login: Forçar autorització després d'iniciat sessió/registre
-        force_authorization_help_text: Text d'ajuda per la pàgina d'autorització
         force_authorization_with_any_method: Permetre l'accés si es concedeix alguna de les autoritzacions (per defecte, totes són necessàries)
         intergram_auto_no_response: Un missatge que s'envia un minut després que la usuària hagi enviat el seu primer missatge i no s'hagi rebut cap resposta
         intergram_auto_response: Un missatge que s'envia immediatament després que la usuària enviï el seu primer missatge
