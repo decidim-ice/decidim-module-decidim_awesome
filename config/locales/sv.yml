@@ -10,7 +10,6 @@ sv:
         allow_images_in_small_editor: Tillåt bilder i den minimala HTML-editorn
         auto_save_forms: Spara formulär automatiskt i lokal lagring
         force_authorization_after_login: Tvinga auktorisering efter inloggning/registrering
-        force_authorization_help_text: Hjälptext för auktoriseringssidan
         force_authorization_with_any_method: Tillåt åtkomst om någon av auktorisationerna beviljas (som standard krävs alla)
         intergram_auto_no_response: Ett meddelande som skickas en minut efter att användaren skickar sitt första meddelande och inget svar tagits emot
         intergram_auto_response: Ett meddelande som skickas omedelbart efter att användaren skickar sitt första meddelande
