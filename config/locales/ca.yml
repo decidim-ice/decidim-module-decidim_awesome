@@ -10,9 +10,6 @@ ca:
         allow_images_in_proposals: Permet imatges a l'editor de propostes
         allow_videos_in_editors: Permet vídeos a l'editor HTML
         auto_save_forms: Desa automàticament els formularis a l'emmagatzematge local
-        force_authorization_after_login: Forçar autorització després d'iniciat sessió/registre
-        force_authorization_help_text: Text d'ajuda per la pàgina d'autorització
-        force_authorization_with_any_method: Permetre l'accés si es concedeix alguna de les autoritzacions (per defecte, totes són necessàries)
         hashcash_login: Activa la protecció HashCash antibot per usuaris existents (inici sessió)
         hashcash_login_bits: Nombre de bits per l'algoritme Hashcash (inici sessió)
         hashcash_signup: Activa la protecció HashCash antibot per usuaris existents (registre)
@@ -269,7 +266,6 @@ ca:
               allow_videos_in_editors: Això afegirà una icona per enllaçar vídeos a l'editor HTML
               auto_save_forms: Això farà servir l'emmagatzematge local del navegador per desar automàticament les dades introduïdes pels usuaris a les enquestes i altres formularis mentre les omplen. Les dades es restauraran en una futura visita amb el mateix navegador en cas que no s'enviï el formulari. Si s’envia el formulari, s’eliminaran les dades locals. Si els usuaris eliminen les seves dades del navegador, tampoc es restauraran.
               drag_and_drop_supported: Quan es pugin imatges, es pot fer a través del mètode de "arrossegar i deixar anar". Les imatges seran pujades al servidor i inserides com recursos externs (no es fa servir codificació en línia base64).
-              force_authorization_after_login: 'Si està habilitat, les usuàries seran redireccionades a la pàgina d''autorització després de l''inici de sessió o registre si algunes de les autoritzacions especificades no són concedides. Això és útil si voleu forçar les usuàries a que es verifiquin a través d''una autorització específica abans que puguin iniciar sessió en qualsevol moment (per exemple: per prevenir spam).'
               force_authorization_help_text: Afegeix un text personalitzat per explicar per què cal l'autorització. Assegureu-vos també d'afegir un mode de contacte en cas que les usuàries necessitin ajuda.
               hashcash_i18n_key: 'Podeu personalitzar el text del botó que es mostra als usuaris a les pàgines d''iniciar sessió/registre amb la clau i18n %{key}'
               hashcash_login: |
@@ -305,10 +301,6 @@ ca:
               validate_title_max_caps_percent: Zero no permetrà cap majúscula, 100 obligarà a escriure-ho tot en majúscules
               validate_title_max_marks_together: 'Limiteu el nombre de signes d''interrogació i d''exclamació que es poden escriure junts. És a dir: si és 2, aleshores ''!!!'' no es permetrà al text'
               validate_title_min_length: El títol sempre és obligatori i aquest número no pot ser zero
-              verifications_html: |
-                Aquí pots fer alguns ajustaments en el procés de verificació.<br>
-                <b>NOTA:</b> Tingues en compte que canviar aquests paràmetres pot impedir que algunes usuàries accedeixin a la plataforma. Fes-ho servir amb precaució!<br><br>
-                Tingues en compte també, que aquests paràmetres s'apliquen a totes les usuàries. Les administradores sempre tindran accés al tauler dadministració.
             validators:
               body: Validacions d'entrada per l'usuari en el camp cos de la proposta
               title: Validacions d'entrada per l'usuari en el camp títol de la proposta
