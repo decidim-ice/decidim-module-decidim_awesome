@@ -17,15 +17,10 @@ module Decidim
       def call(env)
         @request = Rack::Request.new(env)
         if @request.env["decidim.current_organization"] && processable_path?
-          @config = awesome_config_instance
-          env["decidim_awesome.current_config"] = @config
+          # memoize for later
+          @config = env["decidim_awesome.current_config"] = awesome_config_instance
           tamper_user_model
           add_flash_message_from_request(env)
-
-          # puts "requested path: #{env["PATH_INFO"]}"
-          # puts "current_organization: #{@request.env["decidim.current_organization"]&.id}"
-          # puts "potential_admins: #{Decidim::User.awesome_potential_admins}"
-          # puts "scoped admins: #{Decidim::User.awesome_admins_for_current_scope}"
         else
           reset_user_model
         end
@@ -35,7 +30,7 @@ module Decidim
 
       private
 
-      # a workaround to set a flash message if comming from the error controller (route not found)
+      # a workaround to set a flash message if coming from the error controller (route not found)
       def add_flash_message_from_request(env)
         return unless scoped_admins_active?
         return unless @request.params.has_key? "unauthorized"

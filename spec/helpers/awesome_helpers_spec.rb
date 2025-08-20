@@ -67,7 +67,7 @@ module Decidim::DecidimAwesome
     end
 
     it "returns authorizations for user" do
-      expect(helper.awesome_authorizations_for(user)).to be_a(Decidim::DecidimAwesome::Authorizator)
+      expect(helper.awesome_authorizations_for(user)).to be_a(Decidim::DecidimAwesome::Authorizer)
       expect(helper.awesome_authorizations_for(user).authorizations).to eq([])
     end
 

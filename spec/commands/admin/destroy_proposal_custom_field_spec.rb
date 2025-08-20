@@ -33,7 +33,7 @@ module Decidim::DecidimAwesome
       describe "when invalid" do
         let(:key) { "nonsense" }
 
-        it "broadcasts :invalid and does not modifiy the config options" do
+        it "broadcasts :invalid and does not modify the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
           expect(AwesomeConfig.find_by(organization:, var: :proposal_custom_fields).value).to be_a(Hash)

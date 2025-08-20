@@ -119,7 +119,7 @@ module Decidim
 
       initializer "decidim_decidim_awesome.overrides", after: "decidim.action_controller" do
         config.to_prepare do
-          Decidim::ApplicationController.include(Decidim::DecidimAwesome::CheckLoginAuthorizations) if DecidimAwesome.enabled?(:force_authorization_after_login)
+          Decidim::ApplicationController.include(Decidim::DecidimAwesome::EnforceAccessAuthorizations) if DecidimAwesome.enabled?(:force_authorizations)
           Decidim::ApplicationController.include(Decidim::DecidimAwesome::UseUserTimeZone) if Decidim::DecidimAwesome.enabled?(:user_timezone)
 
           # Auto-insert some csp directives

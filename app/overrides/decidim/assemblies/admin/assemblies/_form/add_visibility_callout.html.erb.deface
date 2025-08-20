@@ -1,0 +1,3 @@
+<!-- insert_bottom "div#panel-visibility" -->
+
+<%= render "decidim/decidim_awesome/admin/shared/visibility_notice", participatory_space: current_assembly %>
