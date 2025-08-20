@@ -7,9 +7,6 @@ eu:
         allow_images_in_proposals: Irudiak proposamenen editorean baimendu
         allow_videos_in_editors: Bideoak HTML editorean baimendu
         auto_save_forms: Inprimakiak automatikoki gordetzea tokiko biltegian
-        force_authorization_after_login: Saioa hasi edo erregistratu ondoren baimena behartu
-        force_authorization_help_text: Baimen orrirako laguntza-testua
-        force_authorization_with_any_method: Sarbidea baimendu edozein baimen emanez gero (berez, guztiak beharrezkoak dira)
         intergram_auto_no_response: Parte-hartzaileak bere lehen mezua bidali eta minutu bat igaro ondoren, erantzunik jaso ez bada, bidalitako mezua
         intergram_auto_response: Parte-hartzaileak bere lehen mezua bidali eta berehala bidalitako mezua
         intergram_chat_id: Txat IDa
@@ -262,7 +259,6 @@ eu:
               allow_videos_in_editors: Ikono bideo esteka WYSIWYG editore guztietan gehituko da
               auto_save_forms: LocalStorage erabiliko du parte-hartzaileek inkestetan eta beste formularioetan sartzen duten datuak automatikoki gordetzeko betetzen ari diren bitartean. Bisita batean berreskuratuko da, baina soilik formala bidali ez bada. Bidaltzen bada, datuak ezabatuko dira.
               drag_and_drop_supported: Irudiak igotzean, Drag & Drop onartzen da. Irudiak zerbitzarira igoko dira eta kanpoko baliabide gisa sartuko dira (ez du base64 inline kodetzea erabiltzen).
-              force_authorization_after_login: 'Gaituta badago, parte-hartzaileak autentifikazio orrira birbideratuko dira saioa hastean edo erregistratzean, zehaztutako baimen batzuk ematen ez badira.'
               force_authorization_help_text: Testu pertsonalizatua gehitu azaltzeko zergatik den beharrezkoa baimena. Gehitu laguntza eskatzeko kontaktu-metodo bat.
               intergram_about: Intergram-ek Telegram mezularia erabiltzen du behealdean txertatutako zuzeneko txat laguntza widget-a kudeatzeko.
               intergram_config: '<a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> zure taldean gonbidatu edo zuzenean harekin txata hasi.'
@@ -289,10 +285,6 @@ eu:
               validate_title_max_caps_percent: Zerok ez du letra larririk onartuko, 100ek dena letra larriz idaztera behartuko dute.
               validate_title_max_marks_together: 'Mugatu galdera eta oihu marka guztiak batera idatz daitezkeenak. Bi badira, ez da onartuko testuan.'
               validate_title_min_length: Titulua beti da derrigorrezkoa eta zenbaki hau ezin da zero izan.
-              verifications_html: |
-                Hemen txio batzuk egin daitezke egiaztatze prozesurako.<br>
-                <b>OHARRA:</b> Jakin ezazu konfigurazio hau aldatzeak erabiltzaile batzuk plataformara sartzea eragotz dezakeela.<br><br>
-                Kontuan izan konfigurazio hau erabiltzaile guztiei aplikatzen zaiela. Administratuek beti izango dute sarbidea admin backend-era.
             validators:
               body: Parte-hartzailearen sarreraren balidazioak "body" eremurako
               title: Parte-hartzailearen sarreraren balidazioak "title" eremurako
