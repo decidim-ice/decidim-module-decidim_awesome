@@ -18,6 +18,7 @@ module Decidim
 
             @custom_config = Config.new(proposal.organization)
             @custom_config.context_from_component!(proposal.component)
+            @custom_config.application_context!(current_user: proposal.creator)
             @custom_config
           end
 

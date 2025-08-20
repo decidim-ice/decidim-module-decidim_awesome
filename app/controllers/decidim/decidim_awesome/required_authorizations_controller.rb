@@ -72,7 +72,8 @@ module Decidim
       def context_force_authorizations
         @context_force_authorizations ||= begin
           config = Config.new(current_organization)
-          config.context_from_request(redirect_url)
+          config.context_from_request!(redirect_url)
+          config.application_context!(current_user:)
           config.collect_sub_configs_values("force_authorization")
         end
       end
