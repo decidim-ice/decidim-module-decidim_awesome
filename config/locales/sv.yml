@@ -10,9 +10,6 @@ sv:
         allow_images_in_proposals: Tillåt bilder i förslagsfältet
         allow_videos_in_editors: Tillåt videor i HTML-redigeraren
         auto_save_forms: Spara formulär automatiskt i lokal lagring
-        force_authorization_after_login: Tvinga auktorisering efter inloggning/registrering
-        force_authorization_help_text: Hjälptext för auktoriseringssidan
-        force_authorization_with_any_method: Tillåt åtkomst om någon av auktorisationerna beviljas (som standard krävs alla)
         hashcash_login: Aktivera Hashcash bot-skydd för befintliga användare (inloggning)
         hashcash_login_bits: Antal bitar för Hashcash-algoritmen (inloggning)
         hashcash_signup: Aktivera Hashcash bot-skydd för nya användare (registrering)
