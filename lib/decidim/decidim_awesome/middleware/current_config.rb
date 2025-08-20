@@ -17,7 +17,8 @@ module Decidim
       def call(env)
         @request = Rack::Request.new(env)
         if @request.env["decidim.current_organization"] && processable_path?
-          env["decidim_awesome.current_config"] = awesome_config_instance
+          # memoize for later
+          @config = env["decidim_awesome.current_config"] = awesome_config_instance
           tamper_user_model
           add_flash_message_from_request(env)
         else
@@ -38,8 +39,6 @@ module Decidim
       end
 
       def awesome_config_instance
-        return @awesome_config_instance if @awesome_config_instance
-
         @awesome_config_instance = Config.new @request.env["decidim.current_organization"]
         @awesome_config_instance.context_from_request @request
         @awesome_config_instance
@@ -65,19 +64,19 @@ module Decidim
       end
 
       def potential_admins
-        awesome_config_instance.collect_sub_configs_values("scoped_admin") do |subconfig|
+        @config.collect_sub_configs_values("scoped_admin") do |subconfig|
           subconfig&.constraints&.detect { |c| c.settings["participatory_space_manifest"] == "none" } ? false : true
         end.flatten.uniq.map(&:to_i)
       end
 
       def valid_admins
-        awesome_config_instance.collect_sub_configs_values("scoped_admin") do |subconfig|
+        @config.collect_sub_configs_values("scoped_admin") do |subconfig|
           # allow index controllers if scoped to a subspace/component
           constraints = subconfig&.constraints || []
           additional_constraints = additional_get_constraints(constraints) + additional_post_constraints(constraints)
           # inject additional constraints here for further use
-          awesome_config_instance.inject_sub_config_constraints("scoped_admin", subconfig.var[13..], additional_constraints) if subconfig
-          awesome_config_instance.valid_in_context?(constraints + additional_constraints)
+          @config.inject_sub_config_constraints("scoped_admin", subconfig.var[13..], additional_constraints) if subconfig
+          @config.valid_in_context?(constraints + additional_constraints)
         end.flatten.uniq.map(&:to_i)
       end
 
