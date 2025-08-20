@@ -71,8 +71,8 @@ document.addEventListener("DOMContentLoaded", () => {
           // reloads dialogs (modals)
           document.dispatchEvent(new CustomEvent("ajax:loaded", { detail: container }));
           // If editor are created, they will be duplicated by the ajax:loaded event, so we remove them
-          document.querySelectorAll(`.editor-toolbar`).forEach((toolbar) => {
-            if(toolbar.nextElementSibling && toolbar.nextElementSibling.classList.contains("editor-toolbar")) {
+          document.querySelectorAll(".editor-toolbar").forEach((toolbar) => {
+            if (toolbar.nextElementSibling && toolbar.nextElementSibling.classList.contains("editor-toolbar")) {
               toolbar.nextElementSibling.remove();
             }
           });
