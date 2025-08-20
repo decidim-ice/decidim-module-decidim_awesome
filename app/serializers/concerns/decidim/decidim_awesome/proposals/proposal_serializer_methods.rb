@@ -3,7 +3,7 @@
 module Decidim
   module DecidimAwesome
     module Proposals
-      # Adds one custom field per column in export if custom fields are activted
+      # Adds one custom field per column in export if custom fields are activated
       # Adds vote weights
       module ProposalSerializerMethods
         extend ActiveSupport::Concern

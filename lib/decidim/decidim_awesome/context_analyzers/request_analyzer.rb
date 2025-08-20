@@ -34,7 +34,7 @@ module Decidim
         attr_reader :request, :context
 
         def extract_context!
-          path = URI.parse(@request.url).path
+          path = @request.is_a?(String) ? @request : URI.parse(@request.url).path
           context_from_path path
         end
 

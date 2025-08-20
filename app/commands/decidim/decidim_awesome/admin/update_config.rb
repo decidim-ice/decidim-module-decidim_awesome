@@ -30,7 +30,18 @@ module Decidim
               next unless form.valid_keys.include?(key.to_sym)
 
               setting = AwesomeConfig.find_or_initialize_by(var: key, organization: form.current_organization)
-              setting.value = val.respond_to?(:attributes) ? val.attributes : val
+
+              value = if form.respond_to?("#{key}_attributes")
+                        # for complex cases
+                        form.public_send("#{key}_attributes")
+                      elsif val.respond_to?(:attributes)
+                        # when the value is another form
+                        val.attributes
+                      else
+                        val
+                      end
+
+              setting.value = value
               setting.save!
             end
 

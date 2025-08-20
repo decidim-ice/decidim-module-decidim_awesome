@@ -62,7 +62,7 @@ module Decidim::DecidimAwesome
           create(:awesome_config, organization:)
         end
 
-        it "broadcasts :invalid and does not modifiy the config options" do
+        it "broadcasts :invalid and does not modify the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
           expect(AwesomeConfig.find_by(organization:, var: config.var).constraints).to eq([])
