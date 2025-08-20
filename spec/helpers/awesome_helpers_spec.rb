@@ -21,6 +21,7 @@ module Decidim::DecidimAwesome
 
     before do
       allow(helper).to receive(:request).and_return(request)
+      allow(helper).to receive(:current_user).and_return(user)
       helper.instance_variable_set(:@awesome_config_instance, nil)
     end
 
