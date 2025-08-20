@@ -50,9 +50,9 @@ en:
         validate_title_min_length: Minimum required characters for the title
         validate_title_start_with_caps: Force the title to start with a capital letter
       constraint:
+        application_context: Only for
         component_id: or specifically in
         component_manifest: Only in components of type
-        application_context: Only for
         participatory_space_manifest: Apply to participatory spaces of type
         participatory_space_slug: Only in
       custom_redirect:

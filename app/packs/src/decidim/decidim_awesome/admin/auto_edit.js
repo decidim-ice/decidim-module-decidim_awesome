@@ -66,7 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
         Reflect.deleteProperty(window.Decidim.currentDialogs, `new-modal-${scope}`);
         const editModal = document.getElementById(`edit-modal-${result.scope}`);
         const newModal = document.getElementById(`new-modal-${result.scope}`);
-        console.log("Rebuilding modals", editModal, newModal);
         if (container) {
           // reloads dialogs (modals)
           document.dispatchEvent(new CustomEvent("ajax:loaded", { detail: container }));
