@@ -9,7 +9,9 @@ es:
         allow_images_in_editors: Permitir imágenes en el editor HTML
         allow_images_in_proposals: Permitir imágenes en el editor de propuestas
         allow_videos_in_editors: Permitir vídeos en el editor HTML
+        authorization_options_form: Opciones de autorización
         auto_save_forms: Guardar automáticamente los formularios en el almacenamiento local
+        force_authorizations: Grupo de autorización %{id}
         hashcash_login: Habilitar la protección del bot Hashcash para los usuarios existentes (login)
         hashcash_login_bits: Número de bits para el algoritmo Hashcash (login)
         hashcash_signup: Habilitar la protección del bot Hashcash para nuevos usuarios (registro)
@@ -39,6 +41,7 @@ es:
         validate_title_min_length: Mínimo de caracteres requeridos para el título
         validate_title_start_with_caps: Forzar al título a comenzar con una letra mayúscula
       constraint:
+        application_context: Solo para
         component_id: o específicamente en
         component_manifest: Solo en componentes de tipo
         participatory_space_manifest: Aplicar en los espacios participativos de tipo
@@ -210,7 +213,10 @@ es:
           index:
             admin_head_tags: Etiquetas Awesome incluidas en el encabezado de la aplicación de administración
             decidim-admin: Del módulo Admin
+            decidim-assemblies: Del módulo Assemblies
+            decidim-conferences: Del módulo Conferences
             decidim-core: Del módulo Core
+            decidim-participatory_processes: Del módulo Participatory Processes
             decidim-proposals: Del módulo Propuestas
             decidim_version: Versión de Decidim %{version}
             errors:
@@ -225,6 +231,7 @@ es:
               Puedes iniciar el proceso ahora y se realizará en segundo plano.
             start_image_migrations: "\U0001F449 Iniciar el proceso de migración ahora"
         config:
+          anonymous: Usuarios no identificados
           caution: 'NOTA: Esta función modifica en gran medida algunos comportamientos por defecto que pueden llevar a resultados inesperados. ¡Utilícelo con precaución!'
           constraints:
             add_condition: Añadir restricción
@@ -233,6 +240,9 @@ es:
             delete: Eliminar
             edit: Editar
             title: 'Se aplica solo en estos casos:'
+          create_force_authorization:
+            error: '¡Error al crear un nuevo grupo de autorización! %{error}'
+            success: Grupo de autorización %{key} creado correctamente
           create_proposal_custom_field:
             error: '¡Error al crear una nueva caja de "campo personalizado"! %{error}'
             success: 'La caja "campo personalizado" %{key} se ha creado correctamente'
@@ -242,6 +252,9 @@ es:
           create_scoped_style:
             error: '¡Error al crear una nueva caja CSS! %{error}'
             success: Caja CSS %{key} creada correctamente
+          destroy_force_authorization:
+            error: '¡Error al eliminar el grupo de autorización! %{error}'
+            success: Grupo de autorización %{key} eliminado correctamente
           destroy_proposal_custom_field:
             error: '¡Error al eliminar la caja "campo personalizado"! %{error}'
             success: 'La caja "campo personalizado" %{key} se ha eliminado correctamente'
@@ -251,6 +264,7 @@ es:
           destroy_scoped_style:
             error: '¡Error al eliminar la caja CSS! %{error}'
             success: Caja CSS %{key} eliminada correctamente
+          force_authorizations: Grupos de autorizaciones
           form:
             additional_proposal_sortings:
               enable_all: Habilitar todas las opciones de ordenación adicionales
@@ -260,6 +274,7 @@ es:
             errors:
               incorrect_css: 'El CSS de la caja #%{key} no es válido'
               incorrect_json: 'La definición JSON en la caja #%{key} no es válida'
+            force_authorization_help_text: Texto de ayuda para la página de autorización
             help:
               allow_images_in_editors: Esto añadirá un icono para subir imágenes en el editor HTML
               allow_images_in_proposals: Esto permitirá subir imágenes en el editor de propuestas, disponibles para cualquier usuaria
@@ -301,9 +316,22 @@ es:
               validate_title_max_caps_percent: Cero no permitirá ninguna letra mayúscula, 100 forzará a escribir todo en mayúsculas
               validate_title_max_marks_together: 'Limitar el número de símbolos de preguntas y exclamaciones que se pueden escribir juntos. Es decir, si es 2, entonces ''!!!'' no estará permitido en el texto'
               validate_title_min_length: El título siempre es obligatorio y este número no puede ser cero
+              verifications_html: |
+                Puedes poner restricciones de acceso adicionales a los espacios participativos o componentes que obligarán a los usuarios a ser verificados antes de acceder a ciertas ubicaciones (por ejemplo: para prevenir spam).<br>
+                Restricciones se aplican a todos los usuarios, pero los administradores siempre tendrán acceso al panel /admin.
             validators:
               body: Validaciones de entrada de usuario para el campo "cuerpo"
               title: Validaciones de entrada de usuario para el campo "título"
+          form_force_authorizations:
+            delete: Eliminar
+            force_authorizations_html: |
+              Define grupos de verificación. Cada grupo puede requerir que los usuarios sean verificados
+              por uno o más métodos para acceder a áreas específicas de la plataforma.
+            help: Puedes definir grupos de métodos de autorización y restringir el acceso basado en ellos.
+            new: Añadir nuevo grupo de autorización
+            remove: Eliminar este grupo de autorización
+            sure_to_remove: '¿Estás segura de que quieres eliminar este grupo de autorización?'
+            title: 'Restringir el acceso con:'
           form_proposal_custom_fields:
             delete: Eliminar
             new: Añadir una nueva caja de "campos personalizados"
@@ -350,6 +378,7 @@ es:
           update:
             error: '¡Error actualizando la configuración! %{error}'
             success: Configuración actualizada correctamente
+          user_logged_in: Usuarios con la sesión iniciada
         constraints:
           create:
             error: Error creando una nueva restricción
@@ -531,6 +560,9 @@ es:
         scoped_styles:
           menu:
             title: Interfaz pública
+        visibility:
+          info_html: Puedes administrar restricciones de acceso adicionales usando verificaciones con %{awesome_link}.
+          restricted_html: Este espacio está utilizando restricciones de acceso adicionales con %{awesome_link}.
       admin_log:
         component:
           destroy_private_data: "%{user_name} ha destruido %{count} elementos de datos privados para %{resource_name} en %{space_name}"
@@ -604,6 +636,7 @@ es:
       proposal_private_custom_fields_disclosure: Esta información no será publicada
       required_authorizations:
         index:
+          authorization_options_invalid: Desafortunadamente, aunque tiene esta autorización, los datos utilizados para verificarte que no son válidos en este contexto.
           cancel: Haré esto en otro momento, %{link}.
           granted_title: Verificaciones concedidas
           logout: déjame cerrar la sesión
