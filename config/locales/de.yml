@@ -10,6 +10,7 @@ de:
         allow_images_in_small_editor: Bilder im minimalen HTML-Editor erlauben
         auto_save_forms: Formulare automatisch lokal speichern
         force_authorization_after_login: Autorisierung nach Anmelden/Registrierung erzwingen
+        force_authorization_help_text: Hilfetext für die Autorisierungsseite
         force_authorization_with_any_method: Erlaube Zugriff, wenn eine der Genehmigungen erteilt wird (standardmäßig sind alle erforderlich)
         intergram_auto_no_response: Diese Nachricht wird verschickt, sobald eine Minute seit der letzten vom Benutzer verfasste Nachricht verschickt wurde und keine Antwort eingetroffen ist
         intergram_auto_response: Eine Nachricht, die unmittelbar nach dem Senden der ersten Nachricht des Benutzers gesendet wird
