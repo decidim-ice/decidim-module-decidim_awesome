@@ -1,3 +1,3 @@
-<!-- insert_after "erb[loud]:contains('sign_up')" -->
+<!-- insert_top ".login__modal-links" -->
 
 <%= render partial: "decidim/decidim_awesome/hashcash/hidden_field", locals: { zone: :login } %>

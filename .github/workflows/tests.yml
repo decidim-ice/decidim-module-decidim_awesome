@@ -11,7 +11,6 @@ env:
   SIMPLECOV: 1
   NODE_VERSION: 18.17.1
   RUBY_VERSION: 3.2.8
-  CHROME_VERSION: "126.0.6478.182"
   BUNDLE_GEMFILE: Gemfile
   DISABLE_SPRING: 1
   DISPLAY: ":99"
@@ -153,6 +152,7 @@ jobs:
           wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo dpkg -i /tmp/chrome.deb
           rm /tmp/chrome.deb
+
       - uses: nanasess/setup-chromedriver@v2
         name: Install Chrome version
 
