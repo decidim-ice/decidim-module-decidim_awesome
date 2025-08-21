@@ -24,7 +24,7 @@ module Decidim
         resources :scoped_styles, param: :var, only: [:create, :destroy]
         resources :proposal_custom_fields, param: :var, only: [:create, :destroy]
         resources :scoped_admins, param: :var, only: [:create, :destroy]
-        resources :force_authorizations, only: [:create, :destroy]
+        resources :force_authorizations, param: :var, only: [:create, :destroy]
         get :admin_accountability, to: "admin_accountability#index", as: "admin_accountability"
         post :export_admin_accountability, to: "admin_accountability#export", as: "export_admin_accountability"
         get :users, to: "config#users"

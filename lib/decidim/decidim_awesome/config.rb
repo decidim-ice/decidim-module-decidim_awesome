@@ -11,12 +11,13 @@ module Decidim
           participatory_space_manifest: nil,
           participatory_space_slug: nil,
           component_id: nil,
-          component_manifest: nil
+          component_manifest: nil,
+          application_context: "anonymous"
         }
         @sub_configs = {}
       end
 
-      attr_reader :context, :organization, :vars
+      attr_reader :context, :organization, :vars, :application_context
       attr_writer :defaults
 
       def defaults
@@ -29,21 +30,31 @@ module Decidim
       end
 
       # convert context to manifest, slug and id
-      def context_from_request(request)
+      def context_from_request!(request)
         @config = nil
         @context = Decidim::DecidimAwesome::ContextAnalyzers::RequestAnalyzer.context_for request
       end
 
       # convert component to manifest, slug and id
-      def context_from_component(component)
+      def context_from_component!(component)
         @config = nil
         @context = Decidim::DecidimAwesome::ContextAnalyzers::ComponentAnalyzer.context_for component
       end
 
       # convert participatory space to manifest, slug and id
-      def context_from_participatory_space(space)
+      def context_from_participatory_space!(space)
         @config = nil
         @context = Decidim::DecidimAwesome::ContextAnalyzers::ParticipatorySpaceAnalyzer.context_for space
+      end
+
+      def application_context!(ctx = {})
+        @application_context = ctx
+        @context[:application_context] = case ctx[:current_user]
+                                         when Decidim::User
+                                           "user_logged_in"
+                                         else
+                                           "anonymous"
+                                         end
       end
 
       # config processed in context

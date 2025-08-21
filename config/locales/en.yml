@@ -50,6 +50,7 @@ en:
         validate_title_min_length: Minimum required characters for the title
         validate_title_start_with_caps: Force the title to start with a capital letter
       constraint:
+        application_context: Only for
         component_id: or specifically in
         component_manifest: Only in components of type
         participatory_space_manifest: Apply to participatory spaces of type
@@ -269,6 +270,7 @@ en:
               You can start the process now and it will be performed in the background.
             start_image_migrations: "👉 Start the migration process now"
         config:
+          anonymous: Non-logged users
           caution: 'NOTE: This feature heavily modifies some default behaviors that
             might lead to unexpected results. Use it with caution!'
           constraints:
@@ -477,6 +479,7 @@ en:
           update:
             error: Error updating configuration! %{error}
             success: Configuration updated successfully
+          user_logged_in: Logged in users
         constraints:
           create:
             error: Error creating condition case

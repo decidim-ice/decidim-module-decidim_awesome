@@ -19,7 +19,7 @@ module Decidim
         end
 
         def destroy
-          DestroyAuthorizationGroup.call(params[:id], current_organization, config_var) do
+          DestroyAuthorizationGroup.call(params[:key], current_organization, config_var) do
             on(:ok) do |key|
               flash[:notice] = I18n.t("config.destroy_force_authorization.success", key:, scope: "decidim.decidim_awesome.admin")
             end

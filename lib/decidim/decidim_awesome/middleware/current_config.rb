@@ -40,7 +40,7 @@ module Decidim
 
       def awesome_config_instance
         @awesome_config_instance = Config.new @request.env["decidim.current_organization"]
-        @awesome_config_instance.context_from_request @request
+        @awesome_config_instance.context_from_request! @request
         @awesome_config_instance
       end
 
@@ -122,7 +122,7 @@ module Decidim
       # to access certain deeper routes it requires first to click on a parent route, even without Post permissions in there
       # this adds this additional routes to these cases
       # For instance:
-      #        accessing /admin/participatory_processes/som-procress requires access first to /admin/participatory_processes
+      #        accessing /admin/participatory_processes/some-process requires access first to /admin/participatory_processes
       def additional_get_constraints(constraints)
         return [] unless @request.get?
 

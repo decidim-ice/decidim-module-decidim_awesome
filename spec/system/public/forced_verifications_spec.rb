@@ -308,6 +308,20 @@ describe "Forced verifications" do
         visit decidim_participatory_processes.participatory_process_group_path(group)
         expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path, ignore_query: true)
       end
+
+      context "when application_contexts applies" do
+        it "applies to the context only" do
+          create(:config_constraint, awesome_config: group_subconfig, settings: { "application_context" => "user_logged_in" })
+          visit decidim.root_path
+          expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path, ignore_query: true)
+        end
+
+        it "does not apply to other contexts" do
+          create(:config_constraint, awesome_config: group_subconfig, settings: { "application_context" => "anonymous" })
+          visit decidim.root_path
+          expect(page).to have_current_path(decidim.root_path, ignore_query: true)
+        end
+      end
     end
   end
 end
