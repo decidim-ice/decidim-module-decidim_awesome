@@ -253,6 +253,7 @@ fr:
             errors:
               incorrect_css: 'CSS dans la boîte #%{key} est invalide'
               incorrect_json: 'La définition JSON dans la boite #%{key} n''est pas valide'
+            force_authorization_help_text: Texte d'aide sur la page d'autorisation
             help:
               allow_images_in_editors: Ceci ajoutera une icône de téléchargement d'images dans tous les éditeurs WYSIWYG
               allow_images_in_proposals: Cela permettra de télécharger des images dans l'éditeur de propositions, disponible pour n'importe quel utilisateur
@@ -288,6 +289,8 @@ fr:
             validators:
               body: Validations d'entrée de l'utilisateur pour le champ "body"
               title: Validations d'entrée de l'utilisateur pour le champ "body"
+          form_force_authorizations:
+            delete: Supprimer
           form_proposal_custom_fields:
             delete: Supprimer
             new: Ajouter une nouvelle boîte de champs personnalisés
