@@ -10,9 +10,6 @@ cs:
         allow_images_in_proposals: Povolit obrázky v editoru návrhů
         allow_videos_in_editors: Povolit videa v HTML editoru
         auto_save_forms: Automaticky ukládat formuláře v místním úložišti
-        force_authorization_after_login: Vynutit autorizaci po přihlášení/registraci
-        force_authorization_help_text: Text nápovědy pro autorizační stránku
-        force_authorization_with_any_method: Povolit přístup, pokud je udělen některou z autorizací (ve výchozím nastavení jsou vyžadovány vše)
         hashcash_login: Povolit ochranu Hashcash bota pro existující uživatele (přihlášení)
         hashcash_login_bits: Počet bitů pro hashcash algoritmus (přihlášení)
         hashcash_signup: Povolit ochranu Hashcash bota pro nové uživatele (registrace)
@@ -269,7 +266,6 @@ cs:
               allow_videos_in_editors: Toto přidá ikonu video odkazu ve všech WYSIWYG editorech
               auto_save_forms: Toto bude používat místní úložiště pro automatické ukládání dat zavedených uživateli do průzkumů a jiných formulářů během vyplňování. Data budou obnovena v budoucí návštěvě stejného prohlížeče v případě, že formulář nebude odeslán. Pokud je formulář odeslán, data budou odstraněna. Pokud uživatelé odstraní svá data z místního úložiště, data nebudou obnovena.
               drag_and_drop_supported: Při nahrávání obrázků je podporováno vložení přetažením. Obrázky budou nahrány na server a vloženy jako externí zdroje (nepoužívá base64 inline kódování).
-              force_authorization_after_login: 'Pokud je povoleno, uživatelé budou po přihlášení nebo registraci přesměrováni na autorizační stránku, pokud nejsou uděleny některé z zadaných autorizací. To je užitečné, pokud chcete donutit uživatele k ověření pomocí specifické autorizace, než se budou moci vůbec přihlásit (např.: zabránit spamu).'
               force_authorization_help_text: Přidejte vlastní text, který vysvětlí proč je potřeba autorizace. Také se ujistěte, že přidáte kontaktní metodu pro případ, že uživatelé potřebují pomoc.
               hashcash_i18n_key: 'Text, který je zobrazen uživatelům v tlačítkách pro přihlášení / registraci pomocí klíče i18n: %{key}'
               hashcash_login: |
@@ -305,10 +301,6 @@ cs:
               validate_title_max_caps_percent: Nula nedovolí žádné velké písmeno, 100 bude nutit psát vše velkými písmeny
               validate_title_max_marks_together: 'Omezit počet otazníků a vykřičníků, které lze psát dohromada. Např: Pokud je 2, pak ''!!!'' nebude v textu povoleno'
               validate_title_min_length: Název je vždy povinný a toto číslo nemůže být nulové
-              verifications_html: |
-                Zde můžete vylepšit proces ověřování.<br>
-                <b>POZNÁMKA:</b> Uvědomte si, že změna těchto nastavení může zabránit některým uživatelům v přístupu k platformě. Používejte to s opatrností!<br><br>
-                Také berte na vědomí, že tato nastavení jsou aplikována na všechny uživatele. Administrátoři však budou mít vždy přístup k administraci.
             validators:
               body: Ověření vstupu uživatele pro pole "tělo"
               title: Ověření uživatelem pro pole "Název"

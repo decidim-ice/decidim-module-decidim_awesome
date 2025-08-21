@@ -1,17 +1,43 @@
 sv:
+  active_hashcash:
+    submit_filter: Filtrera
+    waiting_label: Väntar på verifiering ...
   activemodel:
     attributes:
       config:
+        additional_proposal_sortings: Ytterligare sorteringsalternativ aktiva
+        allow_images_in_editors: Tillåt bilder i HTML-redigeraren
         allow_images_in_proposals: Tillåt bilder i förslagsfältet
+        allow_videos_in_editors: Tillåt videor i HTML-redigeraren
         auto_save_forms: Spara formulär automatiskt i lokal lagring
+        hashcash_login: Aktivera Hashcash bot-skydd för befintliga användare (inloggning)
+        hashcash_login_bits: Antal bitar för Hashcash-algoritmen (inloggning)
+        hashcash_signup: Aktivera Hashcash bot-skydd för nya användare (registrering)
+        hashcash_signup_bits: Antal bitar för Hashcash-algoritmen (registrering)
+        intergram_auto_no_response: Ett meddelande som skickas en minut efter att användaren skickar sitt första meddelande och inget svar tagits emot
+        intergram_auto_response: Ett meddelande som skickas omedelbart efter att användaren skickar sitt första meddelande
         intergram_chat_id: Chatt ID
         intergram_color: Huvudfärg för widget
+        intergram_for_admins: Aktivera Intergram-chatt i admin-backend
         intergram_intro_message: Första meddelandet när användaren öppnar chatten för första gången
         intergram_require_login: Endast för inloggade användare
+        intergram_title_closed: Rubrik för stängd chatt
+        intergram_title_open: Rubrik för öppen chatt
+        intergram_use_floating_button: Om markerad är den stängda chatten alltid en knapp istället för en text
         proposal_custom_fields: Tilläggsfält %{id}
         scoped_styles: Tilläggsstilar %{id}
+        user_timezone: Tillåt användare att ställa in tidszon i sin profil
+        validate_body_max_caps_percent: Maximal tillåten procentandel versaler för brödtexten
+        validate_body_max_marks_together: Maximalt antal symboler i rad tillåtna i brödtexten
+        validate_body_min_length: Minst tillåtna antal tecken för brödtexten
+        validate_body_start_with_caps: Tvinga brödtexten att börja med en stor bokstav
+        validate_title_max_caps_percent: Maximal tillåten procentandel versaler för titeln
+        validate_title_max_marks_together: Maximalt antal symboler i rad tillåtna i titeln
+        validate_title_min_length: Minst tillåtna antal tecken för titeln
+        validate_title_start_with_caps: Tvinga titeln att börja med en versal
       constraint:
         component_id: eller specifikt i
+        component_manifest: Endast i komponenter av typ
         participatory_space_slug: Endast i
       custom_redirect:
         active: Aktiv
@@ -24,8 +50,27 @@ sv:
         target: Öppna i
         url: Webbadress
         visibility: Synlighet
+      organization:
+        awesome_admins_available_authorizations: Tillåt administratörer att manuellt verifiera användare med dessa auktoriseringar
+      user:
+        user_time_zone: Personlig tidszon
   decidim:
     admin:
+      actions:
+        manage: Hantera
+      filters:
+        admin_accountability:
+          admin_role_type:
+            label: Rolltyp
+          role:
+            label: Roll
+          role_type_eq:
+            label: Rolltyp
+        label:
+          search_field_end_date: 'Till datum:'
+          search_field_start_date: 'Från datum:'
+        search_placeholder:
+          user_name_or_user_email_cont: Sök på användarnamn, e-post
       menu:
         decidim_awesome: Decidim Awesome
     components:
@@ -35,6 +80,7 @@ sv:
           global:
             announcement: Meddelande
             iframe: Iframe kod
+            iframe_help: 'Ange din kod som html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. Innehållet kommer att saneras från andra HTML-taggar. Se till att använda 100% som bredd för att fylla skärmen.'
           step:
             announcement: Meddelande
             iframe: Iframe kod
@@ -43,7 +89,10 @@ sv:
         settings:
           global:
             announcement: Meddelande
+            collapse: Börja med kollapsad meny
+            map_center: Kartans centrum (Latitud, Longitud)
             map_height: Karthöjd (px)
+            map_zoom: Zoom (valfritt tal mellan 0 och 18)
             menu_amendments: Visa ändringsförslag
             menu_meetings: Visa möten
           step:

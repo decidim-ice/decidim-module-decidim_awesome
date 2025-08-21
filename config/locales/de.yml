@@ -10,9 +10,6 @@ de:
         allow_images_in_proposals: Bilder im Vorschlags-Editor erlauben
         allow_videos_in_editors: Videos im HTML-Editor erlauben
         auto_save_forms: Formulare automatisch lokal speichern
-        force_authorization_after_login: Autorisierung nach Anmelden/Registrierung erzwingen
-        force_authorization_help_text: Hilfetext für die Autorisierungsseite
-        force_authorization_with_any_method: Erlaube Zugriff, wenn eine der Genehmigungen erteilt wird (standardmäßig sind alle erforderlich)
         hashcash_login: Den Hashcash Bot-Schutz für bestehende Benutzende aktivieren (Anmeldung)
         hashcash_login_bits: Anzahl der Bits für den Hashcash Algorithmus (Anmeldung)
         hashcash_signup: Den Hashcash Bot-Schutz für neue Benutzende aktivieren (Registrierung)
@@ -269,7 +266,6 @@ de:
               allow_videos_in_editors: Dies fügt ein Video-Upload-Symbol in allen WYSIWYG-Editoren hinzu
               auto_save_forms: Formulare automatisch speichern
               drag_and_drop_supported: Drag and Drop unterstützen
-              force_authorization_after_login: 'Wenn aktiviert, werden Benutzer nach Login oder Registrierung auf die Autorisierungsseite weitergeleitet, wenn einige der angegebenen Autorisierungen nicht gewährt werden. Dies ist nützlich, wenn Sie Benutzer mit einer bestimmten Berechtigung verifizieren wollen, bevor sie sich überhaupt einloggen können (z. B. um Spam zu verhindern).'
               force_authorization_help_text: Fügen Sie einen benutzerdefinierten Text hinzu, um zu erklären, warum eine Autorisierung erforderlich ist. Stellen Sie auch sicher, dass Sie eine Kontaktmethode hinzufügen, falls Benutzer Hilfe benötigen.
               hashcash_i18n_key: 'Sie können den Text, der den Benutzenden in den Anmelde-Buttons angezeigt wird, mit folgendem i18n-Key anpassen: %{key}'
               hashcash_login: |
@@ -305,10 +301,6 @@ de:
               validate_title_max_caps_percent: 0 lässt keinen Großbuchstaben zu, 100 lässt ausschliesslich Großbuchstaben zu
               validate_title_max_marks_together: 'Begrenzt die Anzahl der Frage- und Ausrufezeichen, die zusammen geschrieben werden können. Zum Beispiel: Der Wert 2 führt dazu, dass ''!!!'' im Text nicht erlaubt ist'
               validate_title_min_length: Der Titel ist immer obligatorisch und diese Zahl kann nicht Null sein
-              verifications_html: |
-                Hier können Sie einige Änderungen am Verifizierungsprozess vornehmen.<br>
-                <b>HINWEIS:</b> Beachten Sie, dass das Ändern dieser Einstellungen einige Benutzer am Zugriff auf die Plattform hindern könnte. Verwenden Sie es mit Vorsicht!<br><br>
-                Beachten Sie auch, dass diese Einstellungen auf alle Benutzer angewendet werden. Administratoren haben jedoch immer Zugriff auf das Admin-Backend.
             validators:
               body: Eingabevalidierungen für das Feld "Textkörper"
               title: Eingabevalidierungen für das Feld "Titel"

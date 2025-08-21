@@ -7,9 +7,6 @@ ja:
         allow_images_in_proposals: 提案エディターでの画像を許可する
         allow_videos_in_editors: HTMLエディターで動画を許可する
         auto_save_forms: ローカルストレージにフォームを自動保存する
-        force_authorization_after_login: ログイン/登録後に本人確認を行わせる
-        force_authorization_help_text: 認証ページのヘルプテキスト
-        force_authorization_with_any_method: いずれかの認証が行われている場合、アクセスできます (デフォルトでは、すべてが必要です)
         intergram_auto_no_response: ユーザーが最初のメッセージを送信し、応答が受信されなかった後1分後に送信されたメッセージ
         intergram_auto_response: ユーザーが最初のメッセージを送信した直後に送信されるメッセージ
         intergram_chat_id: チャットID
@@ -262,7 +259,6 @@ ja:
               allow_videos_in_editors: すべてのWYSIWYGエディタに動画リンクアイコンを追加します
               auto_save_forms: 調査などのフォームにユーザーが入力したデータを、LocalStorageを使って自動的に保存します。フォームを送信されていない場合、同じブラウザーで次回アクセスした時に復元されます。フォームを送信すると、データは削除されます。ユーザーがLocalStrorageのデータを削除した場合にも、データは復元されなくなります。
               drag_and_drop_supported: 画像アップロード時にドラッグ&ドロップが利用できます。画像はサーバーにアップロードされ、外部リソースとして挿入されます(base64インラインエンコーディングは使用しません).
-              force_authorization_after_login: '有効にした場合、指定された認証が行われていなければ、ユーザーはログインまたは登録後に認証ページにリダイレクトされます。これはユーザーがログインする前に、特定の認証を使用してユーザーを強制的に本人確認させる場合(スパムを防ぐためなど) に便利です。'
               force_authorization_help_text: 認証が必要な理由を説明するカスタムテキストを追加します。また、ユーザーがヘルプが必要な場合に備えて連絡方法を追加してください。
               intergram_about: IntergramはTelegramメッセンジャーを使用してページの下部に埋め込まれたライブサポートチャットウィジェットを処理します。
               intergram_config: '<a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> をグループに招待するか、直接チャットを開始します。 <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
@@ -289,10 +285,6 @@ ja:
               validate_title_max_caps_percent: ゼロの場合大文字を許可しません。100の場合すべてを大文字で書くことを強制します。
               validate_title_max_marks_together: '並べて入力できる「?」と「!」の数を制限します。 すなわち、それが2の場合、「!!!」はテキストに記入できません'
               validate_title_min_length: タイトルは常に必須です。この数字はゼロにはできません
-              verifications_html: |
-                認証プロセスにいくつかの調整を加えることができます。<br>
-                <b>注意：</b> これらの設定を変更すると、一部のユーザーがプラットフォームにアクセスできなくなる可能性があります。慎重に使用してください！<br><br>
-                また、これらの設定は全ユーザーに適用されますが、管理者は常に管理者バックエンドにアクセス可能です。
             validators:
               body: '「body」フィールドのユーザー入力検証'
               title: '「タイトル」フィールドのユーザー入力検証'
