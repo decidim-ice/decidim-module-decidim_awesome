@@ -9,7 +9,9 @@ ca:
         allow_images_in_editors: Permet imatges a l'editor HTML
         allow_images_in_proposals: Permet imatges a l'editor de propostes
         allow_videos_in_editors: Permet vídeos a l'editor HTML
+        authorization_options_form: Opcions d'autorització
         auto_save_forms: Desa automàticament els formularis a l'emmagatzematge local
+        force_authorizations: Grup d'autorització %{id}
         hashcash_login: Activa la protecció HashCash antibot per usuaris existents (inici sessió)
         hashcash_login_bits: Nombre de bits per l'algoritme Hashcash (inici sessió)
         hashcash_signup: Activa la protecció HashCash antibot per usuaris existents (registre)
@@ -210,7 +212,10 @@ ca:
           index:
             admin_head_tags: Etiquetes Awesome incloses a la capçalera de l'aplicació d'administració
             decidim-admin: Del mòdul Admin
+            decidim-assemblies: Del mòdul Assemblies
+            decidim-conferences: Del mòdul Conferences
             decidim-core: Del mòdul Core
+            decidim-participatory_processes: Del mòdul de Participatory Processes
             decidim-proposals: Del mòdul Proposals
             decidim_version: Versió de Decidim %{version}
             errors:
@@ -233,6 +238,9 @@ ca:
             delete: Esborra
             edit: Edita
             title: 'S''aplica només en aquests casos:'
+          create_force_authorization:
+            error: Error en crear un nou grup d'autorització! %{error}
+            success: Grup d'autorització %{key} creat correctament
           create_proposal_custom_field:
             error: Error en crear una nova caixa de "camps personalitzats"! %{error}
             success: 'Caixa de "camps personalitzats" %{key} creada correctament'
@@ -242,6 +250,9 @@ ca:
           create_scoped_style:
             error: Error en crear una nova caixa CSS! %{error}
             success: Caixa CSS %{key} creada correctament
+          destroy_force_authorization:
+            error: Error en eliminar el grup d'autorització! %{error}
+            success: Grup d'autorització %{key} eliminat correctament
           destroy_proposal_custom_field:
             error: Error en eliminar la caixa de "camps personalitzats"! %{error}
             success: 'Caixa de "camps personalitzats" %{key} eliminada correctament'
@@ -251,6 +262,7 @@ ca:
           destroy_scoped_style:
             error: Error en eliminar una caixa CSS! %{error}
             success: Caixa CSS %{key} eliminada correctament
+          force_authorizations: Grups d'autoritzacions
           form:
             additional_proposal_sortings:
               enable_all: Activa totes les opcions d'ordenació addicionals
@@ -260,6 +272,7 @@ ca:
             errors:
               incorrect_css: 'El CSS de la caixa #%{key} no és vàlid'
               incorrect_json: 'La sintaxi JSON de la caixa #%{key} és invàlida'
+            force_authorization_help_text: Text d'ajuda per la pàgina d'autorització
             help:
               allow_images_in_editors: Això afegirà una icona per pujar arxius a l'editor HTML
               allow_images_in_proposals: Això permetrà pujar imatges a l'editor de propostes, disponible per qualsevol usuari
