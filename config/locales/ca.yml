@@ -41,6 +41,7 @@ ca:
         validate_title_min_length: Nombre de caràcters mínims requerits pel títol de la proposta
         validate_title_start_with_caps: Força que el text del títol s'inici amb una majúscula
       constraint:
+        application_context: Només per
         component_id: o específicament a
         component_manifest: Només en components de tipus
         participatory_space_manifest: Aplica-ho a espais participatius de tipus
@@ -230,6 +231,7 @@ ca:
               Pots iniciar el procés ara i es durà a terme en segon pla.
             start_image_migrations: "\U0001F449 Iniciar el procés de migració ara"
         config:
+          anonymous: Usuaris no identificats
           caution: 'NOTA: Aquesta funció modifica en gran mesura alguns comportaments predeterminats que podrien provocar resultats inesperats. Utilitzeu-lo amb precaució!'
           constraints:
             add_condition: Afegeix una restricció
@@ -314,9 +316,21 @@ ca:
               validate_title_max_caps_percent: Zero no permetrà cap majúscula, 100 obligarà a escriure-ho tot en majúscules
               validate_title_max_marks_together: 'Limiteu el nombre de signes d''interrogació i d''exclamació que es poden escriure junts. És a dir: si és 2, aleshores ''!!!'' no es permetrà al text'
               validate_title_min_length: El títol sempre és obligatori i aquest número no pot ser zero
+              verifications_html: |
+                Aquí podeu establir restriccions d'accés addicionals a espais o components participatius que obligaran els usuaris a ser verificats abans d'accedir a determinades ubicacions (per exemple: per evitar correu brossa).<br>
+                Les restriccions s'apliquen a tots els usuaris, però els administradors sempre tindran accés al tauler /admin.
             validators:
               body: Validacions d'entrada per l'usuari en el camp cos de la proposta
               title: Validacions d'entrada per l'usuari en el camp títol de la proposta
+          form_force_authorizations:
+            delete: Esborra
+            force_authorizations_html: |
+              Definiu grups de verificació. Cada grup pot requerir que els usuaris siguin verificats per un o més mètodes per accedir a àrees específiques de la plataforma.
+            help: Podeu definir grups de mètodes d'autorització i restringir l'accés en funció d'aquests.
+            new: Afegeix un nou grup d'autorització
+            remove: Elimina aquest grup d'autorització
+            sure_to_remove: Estàs segura que vols eliminar aquest grup d'autoritzacions?
+            title: 'Restringeix l''accés amb:'
           form_proposal_custom_fields:
             delete: Esborra
             new: Afegeix una nova caixa de "camps personalitzats"
@@ -363,6 +377,7 @@ ca:
           update:
             error: Error actualitzant la configuració! %{error}
             success: Configuració actualitzada correctament
+          user_logged_in: Usuaris amb la sessió iniciada
         constraints:
           create:
             error: Error creant una nova restricció
@@ -544,6 +559,9 @@ ca:
         scoped_styles:
           menu:
             title: Interfície pública
+        visibility:
+          info_html: Podeu gestionar restriccions d'accés addicionals mitjançant verificacions amb %{awesome_link}.
+          restricted_html: Aquest espai utilitza restriccions d'accés addicionals amb %{awesome_link}.
       admin_log:
         component:
           destroy_private_data: "%{user_name} ha destruït %{count} elements de dades privades per a %{resource_name} a %{space_name}"
@@ -617,6 +635,7 @@ ca:
       proposal_private_custom_fields_disclosure: Aquesta informació no es publicarà
       required_authorizations:
         index:
+          authorization_options_invalid: Malauradament, tot i que teniu aquesta autorització, les dades utilitzades per verificar-vos no són vàlides en aquest context.
           cancel: Això ho faré en un altre moment, %{link}.
           granted_title: Verificacions concedides
           logout: deixa'm tancar la sessió
