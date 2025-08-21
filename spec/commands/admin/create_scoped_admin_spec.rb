@@ -102,7 +102,7 @@ module Decidim::DecidimAwesome
       describe "when invalid" do
         subject { described_class.new("nonsense") }
 
-        it "broadcasts :invalid and does not modifiy the config options" do
+        it "broadcasts :invalid and does not modify the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
           expect(scoped_admins).to be_nil

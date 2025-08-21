@@ -86,7 +86,7 @@ module Decidim::DecidimAwesome
         let!(:config) { create(:awesome_config, organization:, var: menu_name, value: previous_menu) }
         let(:url) { "/some-path?querystring" }
 
-        it "broadcasts :invalid and does not modifiy the config options" do
+        it "broadcasts :invalid and does not modify the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
           expect(AwesomeConfig.find_by(organization:, var: menu_name).value).to eq(previous_menu)

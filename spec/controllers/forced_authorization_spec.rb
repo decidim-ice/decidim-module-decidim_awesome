@@ -22,8 +22,16 @@ module Decidim::DecidimAwesome
 
     let(:organization) { create(:organization, available_authorizations: ["dummy_authorization_handler"]) }
     let(:user) { create(:user, :confirmed, organization:) }
-    let(:force_authorization_after_login) { %w(dummy_authorization_handler) }
-    let!(:awesome_config) { create(:awesome_config, organization:, var: :force_authorization_after_login, value: force_authorization_after_login) }
+    let(:force_authorizations) do
+      {
+        "some-group" => {
+          "authorization_handlers" => {
+            "dummy_authorization_handler" => {}
+          }
+        }
+      }
+    end
+    let!(:awesome_config) { create(:awesome_config, organization:, var: :force_authorizations, value: force_authorizations) }
 
     shared_examples "forbids access" do
       it "redirects to the required authorizations page" do
@@ -59,13 +67,13 @@ module Decidim::DecidimAwesome
               sign_out user
             end
 
-            it_behaves_like "allows access"
+            it_behaves_like "forbids access"
           end
 
           context "when the user is blocked" do
             let(:user) { create(:user, :confirmed, :blocked, organization:) }
 
-            it_behaves_like "allows access"
+            it_behaves_like "forbids access"
           end
 
           context "when the user is not confirmed" do

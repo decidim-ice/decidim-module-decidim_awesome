@@ -1,15 +1,77 @@
+<%
+  config_var = "force_authorizations"
+  field = "force_authorization"
+%>
+
 <div class="form__wrapper row column decidim_awesome-form">
-  <div class="callout warning"><%= t("help.verifications_html", scope: "decidim.decidim_awesome.admin.config.form") %></div>
+  <% if config_enabled?(config_var) %>
+    <div class="callout warning">
+      <%= t("help.verifications_html", scope: "decidim.decidim_awesome.admin.config.form") %>
+    </div>
 
-  <% if config_enabled? :force_authorization_after_login %>
-    <div>
-        <%= form.select :force_authorization_after_login, available_authorizations.map { |workflow| [workflow.fullname, workflow.name] }, { include_blank: false }, { multiple: true } %>
-        <p class="help-text"><%= t("help.force_authorization_after_login", scope: "decidim.decidim_awesome.admin.config.form") %></p>
+    <% form.object.force_authorizations&.each do |key, group| %>
+      <% group ||= Decidim::DecidimAwesome::Admin::AuthorizationGroupForm.new %>
 
-        <%= form.check_box :force_authorization_with_any_method %>
+      <%= form.fields_for "#{config_var}[#{key}]", group do |group_form| %>
+        <div class="card p-4 js-box-container force_authorization_container" data-key="<%= key %>" data-var="<%= config_var %>">
+          <%= render "decidim/decidim_awesome/admin/config/autoedit_box_label", var: config_var, key:, scope: "#{field}_#{key}", delete_path: decidim_admin_decidim_awesome.force_authorization_path(key:) %>
+          <div class="card-section mt-2">
+            <div class="row column pt-4 pb-4">
+              <h5><%= t("title", scope: "decidim.decidim_awesome.admin.config.form_force_authorizations") %></h5>
+              <div class="mt-4 form__wrapper gap-1">
+                <%= group_form.collection_check_boxes :authorization_handlers_names, available_authorizations, :name, :description do |builder| %>
+                  <div>
+                    <%= builder.label do %>
+                      <%= safe_join([builder.check_box(data: { group_key: key }), builder.text.to_s], " ") %>
+                    <% end %>
+                    <div id="authorization-handler-<%= key %>-<%= builder.value %>" class="authorization-handler my-4 ml-6" style="display: <%= group_form.object.authorization_handlers_names.include?(builder.value) ? "block" : "none" %>;">
+                      <%= render "decidim/decidim_awesome/admin/config/authorization_options_form", form: group_form, handler_name: builder.value, key: %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
 
-        <%= form.translated :editor, :force_authorization_help_text, lines: 10, aria: { label: :force_authorization_help_text } %>
-        <p class="help-text"><%= t("help.force_authorization_help_text", scope: "decidim.decidim_awesome.admin.config.form") %></p>
-      </div>
+          <div class="mt-4">
+            <%= group_form.translated :editor, :force_authorization_help_text, lines: 10, label: t("force_authorization_help_text", scope: "decidim.decidim_awesome.admin.config.form") %>
+            <p class="help-text">
+              <%= t("help.force_authorization_help_text", scope: "decidim.decidim_awesome.admin.config.form") %>
+            </p>
+          </div>
+
+          <div class="mt-4">
+            <%= render "decidim/decidim_awesome/admin/config/constraints", key: "#{field}_#{key}", constraints: constraints_for("#{field}_#{key}") || [] %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+    <%= link_to decidim_admin_decidim_awesome.force_authorizations_path, method: :post, class: "button button__sm button__text-secondary mr-auto" do %>
+      <%= icon("add-box-line") %>
+      <%= t("new", scope: "decidim.decidim_awesome.admin.config.form_force_authorizations") %>
+    <% end %>
   <% end %>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const checkboxes = document.querySelectorAll(
+      "input[type='checkbox'][name*='[authorization_handlers_names]']"
+    );
+
+    checkboxes.forEach((checkbox) => {
+      checkbox.addEventListener("change", function() {
+        const groupKey = this.dataset.groupKey;
+        const handlerId = `authorization-handler-${groupKey}-${this.value}`;
+        const handlerElement = document.getElementById(handlerId);
+
+        if (!handlerElement) {
+          return;
+        }
+
+        handlerElement.style.display = this.checked ? "block" : "none";
+      });
+    });
+  });
+</script>

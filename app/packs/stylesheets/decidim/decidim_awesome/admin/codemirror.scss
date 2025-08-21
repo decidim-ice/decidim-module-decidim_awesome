@@ -5,8 +5,13 @@
 
 .awesome-edit-config {
   .scoped_styles_container,
-  .proposal_custom_fields_container {
+  .proposal_custom_fields_container,
+  .force_authorization_container {
     @apply bg-background;
+
+    .editor-container {
+      @apply bg-white;
+    }
 
     &.private {
       @apply outline-2 outline-[#fca5a5] outline-dotted;

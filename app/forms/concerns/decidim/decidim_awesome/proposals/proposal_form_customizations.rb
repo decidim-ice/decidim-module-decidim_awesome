@@ -46,7 +46,8 @@ module Decidim
           def awesome_config
             @awesome_config ||= begin
               conf = Decidim::DecidimAwesome::Config.new(context.current_organization)
-              conf.context_from_component(context.current_component)
+              conf.context_from_component!(context.current_component)
+              conf.application_context!(current_user: context.current_user)
               conf
             end
           end

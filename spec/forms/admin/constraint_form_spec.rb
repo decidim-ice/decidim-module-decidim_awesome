@@ -69,6 +69,26 @@ module Decidim::DecidimAwesome
           it { is_expected.not_to be_valid }
         end
       end
+
+      context "when context is specified" do
+        let(:attributes) do
+          {
+            application_context: "anonymous"
+          }
+        end
+
+        it { is_expected.to be_valid }
+
+        context "and context is not included" do
+          let(:attributes) do
+            {
+              application_context: "unknown"
+            }
+          end
+
+          it { is_expected.not_to be_valid }
+        end
+      end
     end
   end
 end

@@ -5,6 +5,7 @@ require "decidim/decidim_awesome/test/shared_examples/custom_styles_examples"
 
 describe "Custom styles" do
   let(:organization) { create(:organization) }
+  let(:user) { create(:user, :confirmed, organization:) }
   let!(:participatory_process) { create(:participatory_process, organization:) }
   let!(:config) { create(:awesome_config, organization:, var: :scoped_styles, value: styles) }
   let(:config_helper) { create(:awesome_config, organization:, var: :scoped_style_bar) }
@@ -38,7 +39,6 @@ describe "Custom styles" do
     let(:settings) do
       {}
     end
-
     let(:other_settings) do
       { "participatory_space_manifest" => "other" }
     end
@@ -51,7 +51,7 @@ describe "Custom styles" do
       it_behaves_like "extra css is added"
     end
 
-    context "and there are no custom styles" do
+    context "when there are no custom styles" do
       let(:styles) do
         {}
       end
@@ -59,7 +59,7 @@ describe "Custom styles" do
       it_behaves_like "no extra css is added"
     end
 
-    context "and custom styles are scoped" do
+    context "when custom styles are scoped" do
       let(:settings) do
         { "participatory_space_manifest" => "participatory_processes" }
       end
@@ -70,7 +70,7 @@ describe "Custom styles" do
 
       context "and page matches the scope" do
         before do
-          click_link_or_button "Processes"
+          click_on "Processes"
         end
 
         it_behaves_like "extra css is added"
@@ -81,6 +81,41 @@ describe "Custom styles" do
           end
 
           it_behaves_like "no extra css is added"
+        end
+      end
+    end
+
+    context "when application_contexts applies" do
+      let(:settings) do
+        { "application_context" => "anonymous" }
+      end
+
+      context "when user is not logged in" do
+        it_behaves_like "extra css is added"
+
+        context "when context is for logged in users" do
+          let(:settings) do
+            { "application_context" => "user_logged_in" }
+          end
+
+          it_behaves_like "no extra css is added"
+        end
+      end
+
+      context "when user is logged in" do
+        before do
+          login_as user, scope: :user
+          click_on "Processes"
+        end
+
+        it_behaves_like "no extra css is added"
+
+        context "when context is for logged in users" do
+          let(:settings) do
+            { "application_context" => "user_logged_in" }
+          end
+
+          it_behaves_like "extra css is added"
         end
       end
     end

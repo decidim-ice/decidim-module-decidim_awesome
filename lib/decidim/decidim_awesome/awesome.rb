@@ -15,7 +15,7 @@ module Decidim
     autoload :Lock, "decidim/decidim_awesome/lock"
     autoload :TranslatedCustomFieldsType, "decidim/decidim_awesome/api/types/translated_custom_fields_type"
     autoload :LocalizedCustomFieldsType, "decidim/decidim_awesome/api/types/localized_custom_fields_type"
-    autoload :Authorizator, "decidim/decidim_awesome/authorizator"
+    autoload :Authorizer, "decidim/decidim_awesome/authorizer"
 
     # Awesome comes with some components for participatory spaces
     # Currently :awesome_map and :awesome_iframe, list them here
@@ -203,22 +203,10 @@ module Decidim
       false
     end
 
-    # Forces the user to authorize using some registered verification flow in order to access the platform
-    # if set to an empty array, the user will be able to access the platform without any verification but admins can still enforce it
-    # if set to :disabled the feature will be completely removed
-    # You can initialize some default verification workflow manifests
-    config_accessor :force_authorization_after_login do
-      []
-    end
-
-    # By default all methods specified in force_authorization_after_login must be granted in order to access the platform
-    # if set to true, the user will be able to access the platform if any of the methods is granted
-    config_accessor :force_authorization_with_any_method do
-      false
-    end
-
-    # When force_authorization_after_login is enabled, this text will be shown to the user as a help text (ie: add a contact information)
-    config_accessor :force_authorization_help_text do
+    # Allows to enforce specific authorizations to access the platform
+    # Constraints can be defined for each group
+    # Set to :disabled to completely remove this feature
+    config_accessor :force_authorizations do
       {}
     end
 
