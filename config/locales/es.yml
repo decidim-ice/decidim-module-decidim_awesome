@@ -421,7 +421,7 @@ es:
               <br><br>
               <strong>¿Hay un tiempo mínimo para esperar antes de eliminar datos privados?</strong>
               <br>
-              Sí, no puede eliminar datos privados si la última actualización fue menor que la %{time_ago} . Puede cambiar esta configuración en un archivo inicializador.
+              Sí, no puede eliminar datos privados si la última actualización fue menor que la %{time_ago}. Puede cambiar esta configuración en un archivo inicializador.
             items_count: Total afectados
             last_date: Última actualización
             no_data: No se han encontrado datos privados anteriores a %{time_ago}

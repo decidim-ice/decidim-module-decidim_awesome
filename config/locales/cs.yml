@@ -422,7 +422,7 @@ cs:
               <strong>Je minimální čas počkat před odstraněním soukromých dat?</strong>
               <br>
               Ano, nemůžete smazat soukromá data, pokud byla poslední aktualizace menší než před %{time_ago}. Tuto konfiguraci můžete změnit v souboru inicializátoru.
-            items_count: Dotčené celkem
+            items_count: Celkový dopad
             last_date: Poslední aktualizace
             no_data: Nejsou nalezena žádná soukromá data starší než před %{time_ago}
             not_destroyable: Tento zdroj zatím nelze zničit
