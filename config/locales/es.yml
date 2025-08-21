@@ -9,6 +9,7 @@ es:
         allow_videos_in_editors: Permitir vídeos en el editor HTML
         auto_save_forms: Guardar automáticamente los formularios en el almacenamiento local
         force_authorization_after_login: Forzar autorización después de iniciar sesión/registro
+        force_authorization_help_text: Texto de ayuda para la página de autorización
         force_authorization_with_any_method: Permitir el acceso si se concede alguna de las autorizaciones (por defecto, todas son necesarias)
         intergram_auto_no_response: Un mensaje que se envía un minuto después de que la usuaria haya enviado su primer mensaje y no se haya recibido respuesta
         intergram_auto_response: Un mensaje que se envía inmediatamente después de que la usuaria envíe su primer mensaje
