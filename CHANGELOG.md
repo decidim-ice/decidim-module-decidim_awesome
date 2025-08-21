@@ -1,6 +1,15 @@
 CHANGELOG
 =========
 
+v0.13.0
+-------
+
+Compatibility:
+  - Decidim 0.30.x
+
+Features:
+  - Upgrade to Decidim v0.30
+
 v0.12.4
 -------
 Compatibility:
@@ -39,7 +48,7 @@ v0.12.1
 Compatibility:
   - Decidim 0.29.x
 
-Feature:
+Features:
   - Added formBuilder languages controller to avoid external CDN
   - Fix cache hash in the global menu override
   - Fix crash on updating empty boxes for scoped admins

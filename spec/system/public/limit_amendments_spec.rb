@@ -30,7 +30,7 @@ describe "Custom proposals fields" do
   before do
     login_as user, scope: :user
     visit_component
-    click_link_or_button proposal.title["en"]
+    click_on proposal.title["en"]
   end
 
   def amendment_path
@@ -41,11 +41,16 @@ describe "Custom proposals fields" do
     "#{Decidim::ResourceLocatorPresenter.new(proposal).path}#comments"
   end
 
+  def click_on_amend(resource)
+    find("#dropdown-trigger-resource-#{resource.id}").click
+    find("a#amend-button").click
+  end
+
   context "when there's pending amendments" do
     it "cannot create a new one" do
       expect(page).to have_content(proposal.title["en"])
       expect(page).to have_content(emendation.title["en"])
-      click_link_or_button "Amend"
+      click_on_amend(proposal)
 
       within "#LimitAmendmentsModal" do
         expect(page).to have_link(href: amendment_path)
@@ -60,7 +65,7 @@ describe "Custom proposals fields" do
       it "can create a new one" do
         expect(page).to have_content(proposal.title["en"])
         expect(page).to have_content(emendation.title["en"])
-        click_link_or_button "Amend"
+        click_on_amend(proposal)
 
         expect(page).to have_no_content("Currently, there's another amendment being evaluated for this proposal.")
         expect(page).to have_no_content(proposal.title["en"])
@@ -75,7 +80,7 @@ describe "Custom proposals fields" do
     it "can create a new one" do
       expect(page).to have_content(proposal.title["en"])
       expect(page).to have_no_content(emendation.title["en"])
-      click_link_or_button "Amend"
+      click_on_amend(proposal)
 
       expect(page).to have_no_content("Currently, there's another amendment being evaluated for this proposal.")
       expect(page).to have_no_content(proposal.title["en"])
@@ -89,7 +94,7 @@ describe "Custom proposals fields" do
     it "can create a new one" do
       expect(page).to have_content(proposal.title["en"])
       expect(page).to have_content(emendation.title["en"])
-      click_link_or_button "Amend"
+      click_on_amend(proposal)
 
       expect(page).to have_no_content("Currently, there's another amendment being evaluated for this proposal.")
       expect(page).to have_no_content(proposal.title["en"])
@@ -103,7 +108,7 @@ describe "Custom proposals fields" do
     it "cannot create a new one" do
       expect(page).to have_content(proposal.title["en"])
       expect(page).to have_no_content(emendation.title["en"])
-      click_link_or_button "Amend"
+      click_on_amend(proposal)
 
       within "#LimitAmendmentsModal" do
         expect(page).to have_link(href: proposal_path)

@@ -30,12 +30,12 @@ module Decidim
                 if body.is_a?(Hash)
                   body.each do |translation_locale, value|
                     fields_entries(custom_fields, value) do |field_key, field_value|
-                      payload["body/#{field_key}/#{translation_locale}".to_sym] = field_value if payload["body/#{field_key}/#{translation_locale}".to_sym].blank?
+                      payload[:"body/#{field_key}/#{translation_locale}"] = field_value if payload[:"body/#{field_key}/#{translation_locale}"].blank?
                     end
                   end
                 else
                   fields_entries(custom_fields, body) do |key, value|
-                    payload["body/#{key}/#{locale}".to_sym] = value
+                    payload[:"body/#{key}/#{locale}"] = value
                   end
                 end
               end
@@ -49,7 +49,7 @@ module Decidim
             if private_custom_fields.present?
               fields_entries(private_custom_fields, proposal.private_body) do |key, value|
                 value = value.first if value.is_a? Array
-                payload["private_body/#{key}".to_sym] = value
+                payload[:"private_body/#{key}"] = value
               end
             end
             payload

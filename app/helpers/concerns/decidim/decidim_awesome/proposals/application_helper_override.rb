@@ -78,14 +78,14 @@ module Decidim
 
             body = if name == :private_body
                      if form_presenter.proposal.private_body.is_a?(Hash) && locale.present?
-                       form_presenter.private_body(extras: false, all_locales: locale.present?).with_indifferent_access[locale]
+                       form_presenter.private_body(all_locales: locale.present?).with_indifferent_access[locale]
                      else
-                       form_presenter.private_body(extras: false)
+                       form_presenter.private_body
                      end
                    elsif form_presenter.proposal.body.is_a?(Hash) && locale.present?
-                     form_presenter.body(extras: false, all_locales: locale.present?).with_indifferent_access[locale]
+                     form_presenter.body(all_locales: locale.present?).with_indifferent_access[locale]
                    else
-                     form_presenter.body(extras: false)
+                     form_presenter.body
                    end
 
             custom_fields.apply_xml(body) if body.present?

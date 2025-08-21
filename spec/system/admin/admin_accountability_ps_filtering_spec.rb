@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "decidim/decidim_awesome/test/shared_examples/admin_accountability_contexts"
 
 describe "Filter Admin actions" do
   let(:user_creation_date) { 7.days.ago }
@@ -24,6 +25,7 @@ describe "Filter Admin actions" do
   let!(:assembly_user_role4) { create(:assembly_user_role, user: moderator, role: "moderator", created_at: 1.day.ago) }
 
   include_context "with filterable context"
+  include_context "with admin accountability helpers"
 
   before do
     # ensure papertrail has the same created_at date as the object being mocked
@@ -89,9 +91,9 @@ describe "Filter Admin actions" do
           expect(page).to have_content("Export job has been enqueued. You will receive an email when it's ready.")
         end
 
-        expect(last_email.subject).to include("Your export", "csv", "is ready")
-        expect(last_email.attachments.length).to be_positive
-        expect(last_email.attachments.first.filename).to match(/^admin_actions.*\.zip$/)
+        expect(last_email.subject).to eq(%(Your export "admin_actions" is ready))
+        expect(Decidim::PrivateExport.count).to eq(1)
+        expect(Decidim::PrivateExport.last.export_type).to eq("admin_actions")
         expect(current_url).to include(decidim_admin_decidim_awesome.admin_accountability_path)
         expect(current_url).not_to include("admins=true")
       end
@@ -150,15 +152,6 @@ describe "Filter Admin actions" do
     end
 
     context "when searching by date" do
-      def search_by_date(start_date, end_date)
-        within(".filters__section") do
-          fill_in(:q_created_at_gteq_date, with: start_date.strftime("%d/%m/%Y")) if start_date.present?
-          fill_in(:q_created_at_lteq_date, with: end_date.strftime("%d/%m/%Y")) if end_date.present?
-
-          find("*[type=submit]").click
-        end
-      end
-
       context "when the start date is earlier" do
         it "displays all entries" do
           search_by_date(6.days.ago, "")
