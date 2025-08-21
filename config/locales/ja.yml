@@ -253,6 +253,7 @@ ja:
             errors:
               incorrect_css: 'Box #%{key} のCSSに問題があります'
               incorrect_json: 'ボックス #%{key} 内の JSON 定義は無効です'
+            force_authorization_help_text: 認証ページのヘルプテキスト
             help:
               allow_images_in_editors: すべてのWYSIWYGエディタに画像アップローダーアイコンを追加します
               allow_images_in_proposals: 提案エディターでの画像アップロードをすべてのユーザーができるようにします。
