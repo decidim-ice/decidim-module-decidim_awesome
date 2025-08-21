@@ -4,11 +4,13 @@ module Decidim
   module DecidimAwesome
     module Admin
       class CreateMenuHack < Command
+        include NeedsConstraintHelpers
         # Public: Initializes the command.
         #
         def initialize(form, menu_name)
           @form = form
-          @menu = AwesomeConfig.find_or_initialize_by(var: menu_name, organization: form.current_organization)
+          @config_var = menu_name
+          @organization = form.current_organization
         end
 
         # Executes the command. Broadcasts these events:
@@ -21,22 +23,21 @@ module Decidim
           return broadcast(:invalid) if form.invalid?
           return broadcast(:invalid, I18n.t("menu_hacks.url_exists", scope: "decidim.decidim_awesome.admin")) if url_exists?
 
-          menu.value = [] unless menu.value.is_a? Array
-          menu.value << to_params
-          menu.save!
-          broadcast(:ok, menu)
+          create_array_config!(to_params)
+
+          broadcast(:ok, find_var)
         rescue StandardError => e
           broadcast(:invalid, e.message)
         end
 
         private
 
-        attr_reader :form, :menu
+        attr_reader :form
 
         def url_exists?
-          return false unless menu
+          return false unless find_var
 
-          menu.value&.detect { |i| i["url"] == form.url.gsub(/\?.*/, "") }
+          find_var.value&.detect { |i| i["url"] == form.url.gsub(/\?.*/, "") }
         end
 
         def to_params

@@ -9,6 +9,7 @@ module Decidim::DecidimAwesome
     let(:organization) { create(:organization) }
     let(:participatory_process) { create(:participatory_process, organization:) }
     let(:component) { create(:dummy_component, participatory_space: participatory_process) }
+    let(:current_user) { create(:user, organization:) }
     let(:config) do
       Decidim::DecidimAwesome.config
     end
@@ -20,7 +21,7 @@ module Decidim::DecidimAwesome
     end
 
     it "converts url to context" do
-      subject.context_from_request(request)
+      subject.context_from_request!(request)
       expect(subject.context).to eq(participatory_space_manifest: "participatory_processes", participatory_space_slug: "some-slug", component_id: "12")
     end
 
@@ -28,7 +29,7 @@ module Decidim::DecidimAwesome
       let(:request) { double(url: "/admin/participatory_processes/natus-molestias/edit") }
 
       it "converts url to context" do
-        subject.context_from_request(request)
+        subject.context_from_request!(request)
         expect(subject.context).to eq(participatory_space_manifest: "participatory_processes", participatory_space_slug: "natus-molestias")
       end
 
@@ -36,7 +37,7 @@ module Decidim::DecidimAwesome
         let(:request) { double(url: "/admin/participatory_processes/natus-molestias/components/9/manage/") }
 
         it "converts url to context" do
-          subject.context_from_request(request)
+          subject.context_from_request!(request)
           expect(subject.context).to eq(participatory_space_manifest: "participatory_processes", participatory_space_slug: "natus-molestias", component_id: "9")
         end
       end
@@ -45,7 +46,7 @@ module Decidim::DecidimAwesome
         let(:request) { double(url: "/participatory_process_groups/123") }
 
         it "converts url to context" do
-          subject.context_from_request(request)
+          subject.context_from_request!(request)
           expect(subject.context).to eq(participatory_space_manifest: "process_groups", participatory_space_slug: "123")
         end
       end
@@ -54,7 +55,7 @@ module Decidim::DecidimAwesome
         let(:request) { double(url: "/admin/newsletters/new") }
 
         it "converts url to context" do
-          subject.context_from_request(request)
+          subject.context_from_request!(request)
           expect(subject.context).to eq(participatory_space_manifest: "system")
         end
       end
@@ -64,13 +65,13 @@ module Decidim::DecidimAwesome
       let(:request) { double(url: "/newsletters") }
 
       it "returns empty context" do
-        subject.context_from_request(request)
+        subject.context_from_request!(request)
         expect(subject.context).to be_empty
       end
     end
 
     it "converts component to context" do
-      subject.context_from_component(component)
+      subject.context_from_component!(component)
       expect(subject.context).to eq(
         participatory_space_manifest: participatory_process.manifest.name.to_s,
         participatory_space_slug: participatory_process.slug,
@@ -80,14 +81,84 @@ module Decidim::DecidimAwesome
     end
 
     it "converts participatory_space to context" do
-      subject.context_from_participatory_space(participatory_process)
+      subject.context_from_participatory_space!(participatory_process)
       expect(subject.context).to eq(
         participatory_space_manifest: participatory_process.manifest.name.to_s,
         participatory_space_slug: participatory_process.slug
       )
     end
 
-    context "when some config is personalized" do
+    describe "#application_context!" do
+      context "when called without parameters" do
+        it "sets context as anonymous" do
+          subject.application_context!
+          expect(subject.context[:application_context]).to eq("anonymous")
+          expect(subject.application_context).to eq({})
+        end
+      end
+
+      context "when called with nil user" do
+        it "sets context as anonymous" do
+          subject.application_context!(current_user: nil)
+          expect(subject.context[:application_context]).to eq("anonymous")
+          expect(subject.application_context[:current_user]).to be_nil
+        end
+      end
+
+      context "when called with a user" do
+        it "sets context as user_logged_in" do
+          subject.application_context!(current_user:)
+          expect(subject.context[:application_context]).to eq("user_logged_in")
+          expect(subject.application_context[:current_user]).to eq(current_user)
+        end
+      end
+
+      context "when called with non-user object" do
+        it "sets context as anonymous" do
+          subject.application_context!(current_user: "not_a_user")
+          expect(subject.context[:application_context]).to eq("anonymous")
+          expect(subject.application_context[:current_user]).to eq("not_a_user")
+        end
+      end
+
+      context "when called with additional context parameters" do
+        it "preserves all context parameters" do
+          extra_context = { custom_param: "value", current_user: }
+          subject.application_context!(extra_context)
+          expect(subject.context[:application_context]).to eq("user_logged_in")
+          expect(subject.application_context[:current_user]).to eq(current_user)
+          expect(subject.application_context[:custom_param]).to eq("value")
+        end
+      end
+
+      context "when called multiple times" do
+        it "overwrites previous application context" do
+          subject.application_context!(current_user:)
+          expect(subject.context[:application_context]).to eq("user_logged_in")
+
+          subject.application_context!(current_user: nil)
+          expect(subject.context[:application_context]).to eq("anonymous")
+          expect(subject.application_context[:current_user]).to be_nil
+        end
+      end
+
+      context "when config evaluation depends on user context" do
+        let!(:awesome_config) { create(:awesome_config, organization:, var: :allow_images_in_editors, value: true) }
+        let!(:constraint) { create(:config_constraint, awesome_config:, settings: { application_context: "user_logged_in" }) }
+
+        it "affects configuration evaluation for logged users" do
+          subject.application_context!(current_user:)
+          expect(subject.config[:allow_images_in_editors]).to be(true)
+        end
+
+        it "affects configuration evaluation for anonymous users" do
+          subject.application_context!(current_user: nil)
+          expect(subject.config[:allow_images_in_editors]).to be(false)
+        end
+      end
+    end
+
+    context "when some config is customized" do
       let(:custom_config) do
         config.merge(allow_images_in_editors: true)
       end
@@ -97,7 +168,7 @@ module Decidim::DecidimAwesome
         expect(subject.config).not_to eq(config)
       end
 
-      it "matches personalized config" do
+      it "matches customized config" do
         expect(subject.config).to eq(custom_config)
       end
 
@@ -168,7 +239,7 @@ module Decidim::DecidimAwesome
         expect(subject.config).not_to eq(config)
       end
 
-      it "matches personalized config" do
+      it "matches customized config" do
         expect(subject.config).to eq(custom_config)
       end
 
@@ -179,7 +250,7 @@ module Decidim::DecidimAwesome
           expect(subject.config).to eq(config)
         end
 
-        it "differs from personalized config" do
+        it "differs from customized config" do
           expect(subject.config).not_to eq(custom_config)
         end
       end
@@ -230,12 +301,12 @@ module Decidim::DecidimAwesome
       end
 
       it "filters subconfig values in the current context" do
-        subject.context_from_request(request)
+        subject.context_from_request!(request)
         expect(collected_values).to eq([values["foo"]])
       end
 
       it "can collect all subconfig values" do
-        subject.context_from_request(request)
+        subject.context_from_request!(request)
         expect(unfiltered_collected_values).to match_array(values.values)
       end
 
@@ -253,7 +324,7 @@ module Decidim::DecidimAwesome
         end
 
         before do
-          subject.context_from_request(request)
+          subject.context_from_request!(request)
         end
 
         it "callects all matching values" do

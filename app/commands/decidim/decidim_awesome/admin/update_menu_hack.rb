@@ -4,11 +4,13 @@ module Decidim
   module DecidimAwesome
     module Admin
       class UpdateMenuHack < Command
+        include NeedsConstraintHelpers
         # Public: Initializes the command.
         #
         def initialize(form, menu_name)
           @form = form
-          @menu = AwesomeConfig.find_or_initialize_by(var: menu_name, organization: form.current_organization)
+          @config_var = menu_name
+          @organization = form.current_organization
         end
 
         # Executes the command. Broadcasts these events:
@@ -20,10 +22,10 @@ module Decidim
         def call
           return broadcast(:invalid) if form.invalid?
 
-          menu.value = [] unless menu.value.is_a? Array
-          menu.value = menu.value.filter { |i| i.is_a? Hash }
+          find_var.value = [] unless find_var.value.is_a? Array
+          find_var.value = find_var.value.filter { |i| i.is_a? Hash }
           found = false
-          menu.value.map! do |item|
+          find_var.value.map! do |item|
             if item["url"] == form.url
               found = true
               form.to_params
@@ -31,16 +33,16 @@ module Decidim
               item
             end
           end
-          menu.value << form.to_params unless found
-          menu.save!
-          broadcast(:ok, menu)
+          find_var.value << form.to_params unless found
+          find_var.save!
+          broadcast(:ok, find_var)
         rescue StandardError => e
           broadcast(:invalid, e.message)
         end
 
         private
 
-        attr_reader :form, :menu
+        attr_reader :form
       end
     end
   end

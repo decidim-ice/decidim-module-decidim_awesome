@@ -53,7 +53,8 @@ module Decidim
           return if component.settings.participatory_texts_enabled?
 
           awesome_config = Decidim::DecidimAwesome::Config.new(component.organization)
-          awesome_config.context_from_component(component)
+          awesome_config.context_from_component!(component)
+          awesome_config.application_context!(current_user:)
 
           pub = awesome_config.collect_sub_configs_values("proposal_custom_field")
           priv = awesome_config.collect_sub_configs_values("proposal_private_custom_field")

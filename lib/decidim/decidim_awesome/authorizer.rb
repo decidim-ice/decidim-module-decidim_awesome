@@ -2,7 +2,7 @@
 
 module Decidim
   module DecidimAwesome
-    class Authorizator
+    class Authorizer
       def initialize(user, admin_authorizations)
         @user = user
         @admin_authorizations = admin_authorizations

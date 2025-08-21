@@ -122,7 +122,7 @@ module Decidim::DecidimAwesome
         let!(:config) { create(:awesome_config, organization:, var: :custom_redirects, value: previous_redirection) }
         let(:origin) { "/some-path" }
 
-        it "broadcasts :invalid and does not modifiy the config options" do
+        it "broadcasts :invalid and does not modify the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
           expect(AwesomeConfig.find_by(organization:, var: :custom_redirects).value).to eq(previous_redirection)

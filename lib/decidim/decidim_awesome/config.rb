@@ -11,12 +11,13 @@ module Decidim
           participatory_space_manifest: nil,
           participatory_space_slug: nil,
           component_id: nil,
-          component_manifest: nil
+          component_manifest: nil,
+          application_context: "anonymous"
         }
         @sub_configs = {}
       end
 
-      attr_reader :context, :organization, :vars
+      attr_reader :context, :organization, :vars, :application_context
       attr_writer :defaults
 
       def defaults
@@ -29,21 +30,31 @@ module Decidim
       end
 
       # convert context to manifest, slug and id
-      def context_from_request(request)
+      def context_from_request!(request)
         @config = nil
         @context = Decidim::DecidimAwesome::ContextAnalyzers::RequestAnalyzer.context_for request
       end
 
       # convert component to manifest, slug and id
-      def context_from_component(component)
+      def context_from_component!(component)
         @config = nil
         @context = Decidim::DecidimAwesome::ContextAnalyzers::ComponentAnalyzer.context_for component
       end
 
       # convert participatory space to manifest, slug and id
-      def context_from_participatory_space(space)
+      def context_from_participatory_space!(space)
         @config = nil
         @context = Decidim::DecidimAwesome::ContextAnalyzers::ParticipatorySpaceAnalyzer.context_for space
+      end
+
+      def application_context!(ctx = {})
+        @application_context = ctx
+        @context[:application_context] = case ctx[:current_user]
+                                         when Decidim::User
+                                           "user_logged_in"
+                                         else
+                                           "anonymous"
+                                         end
       end
 
       # config processed in context
@@ -93,7 +104,7 @@ module Decidim
         # if no constraints defined, applies to everything
         return true if constraints.blank?
 
-        # if containts the "none" constraints, deactivate everything else
+        # if contains the "none" constraints, deactivate everything else
         return false if constraints.detect { |c| c.settings["participatory_space_manifest"] == "none" }
 
         # check if current context matches some constraint
@@ -117,7 +128,7 @@ module Decidim
         sub_configs_for(singular_key)[subkey.to_sym]&.add_constraints constraints
       end
 
-      # Merges all subconfigs values for custom_styles or any other scoped confs
+      # Merges all sub-configs values for custom_styles or any other scoped configs
       # by default filtered according to the current scope, a block can be passed for custom filtering
       # ie, collect everything:
       #    collect_sub_configs_values("scoped_style") { true }

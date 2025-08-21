@@ -9,11 +9,23 @@ module Decidim::DecidimAwesome
     subject { described_class }
 
     it "has overrides" do
-      expect(subject.overrides.to_h.length).to eq(3)
+      expect(subject.overrides.to_h.length).to eq(6)
     end
 
     it "has 1 modified files in admin" do
       expect(subject.overrides["decidim-admin"].files.length).to eq(1)
+    end
+
+    it "has 1 modified files in assemblies" do
+      expect(subject.overrides["decidim-assemblies"].files.length).to eq(1)
+    end
+
+    it "has 1 modified files in participatory_processes" do
+      expect(subject.overrides["decidim-participatory_processes"].files.length).to eq(1)
+    end
+
+    it "has 1 modified files in conferences" do
+      expect(subject.overrides["decidim-conferences"].files.length).to eq(1)
     end
 
     it "has 16 modified files in core" do
