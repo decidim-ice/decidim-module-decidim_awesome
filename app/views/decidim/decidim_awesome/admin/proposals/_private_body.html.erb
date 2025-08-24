@@ -12,7 +12,7 @@
         <div class="date_info">
           <%= t("decidim.decidim_awesome.admin.proposal_custom_fields.private_data_last_update", time_ago: time_ago_in_words(proposal.extra_fields.private_body_updated_at)) if proposal.extra_fields.private_body.present? %>
           <%= t("decidim.decidim_awesome.admin.proposal_custom_fields.private_data_last_remove", time_ago: time_ago_in_words(proposal.extra_fields.private_body_updated_at)) if proposal.extra_fields.private_body.blank? %>
-          <%= link_to t("decidim.decidim_awesome.admin.proposal_custom_fields.remove_private_data"), decidim_admin_decidim_awesome.maintenance_path(:private_data) if proposal.extra_fields.private_body_updated_at && proposal.extra_fields.private_body_updated_at < Decidim::DecidimAwesome.private_data_expiration_time.ago %>
+          <%= link_to t("decidim.decidim_awesome.admin.proposal_custom_fields.remove_private_data"), decidim_admin_decidim_awesome.private_data_path if proposal.extra_fields.private_body_updated_at && proposal.extra_fields.private_body_updated_at < Decidim::DecidimAwesome.private_data_expiration_time.ago %>
         </div>
       <% end %>
     </div>

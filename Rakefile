@@ -6,6 +6,7 @@ require "fileutils"
 def install_module(path)
   Dir.chdir(path) do
     system("bundle exec rake decidim_decidim_awesome:install:migrations")
+    system("bundle exec rake active_hashcash:install:migrations")
     system("bundle exec rake db:migrate")
   end
 end

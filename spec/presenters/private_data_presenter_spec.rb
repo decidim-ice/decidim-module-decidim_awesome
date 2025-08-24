@@ -58,7 +58,7 @@ module Decidim::DecidimAwesome
     describe "#time_ago" do
       it "returns the correct time ago string" do
         allow(presenter).to receive(:time_ago_in_words).and_return("2 days")
-        expect(presenter.time_ago).to eq(I18n.t("decidim.decidim_awesome.admin.maintenance.private_data.time_ago", time: "2 days"))
+        expect(presenter.time_ago).to eq(I18n.t("decidim.decidim_awesome.admin.private_data.private_data.time_ago", time: "2 days"))
       end
     end
 

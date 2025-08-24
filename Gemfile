@@ -7,7 +7,6 @@ ruby RUBY_VERSION
 DECIDIM_VERSION = "0.28.5"
 
 gem "decidim", DECIDIM_VERSION
-# this causes failures if not enabled (check if still necessary in the future)
 gem "decidim-decidim_awesome", path: "."
 gem "decidim-templates", DECIDIM_VERSION
 
@@ -17,6 +16,7 @@ gem "puma", ">= 6.3.1"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
+  gem "rubocop-rspec", "~> 2.20.0"
 
   gem "decidim-dev", DECIDIM_VERSION
 

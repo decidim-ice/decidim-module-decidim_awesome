@@ -1,7 +1,7 @@
 <%= label_tag var do %>
     <%= t("config.#{var}",
-        scope: "activemodel.attributes",
-        id: "<span class='awesome-auto-edit' data-var='#{var}' data-scope='#{scope}' data-key='#{key}'>#{key}</span>").html_safe %>
+          scope: "activemodel.attributes",
+          id: "<span class='awesome-auto-edit' data-var='#{var}' data-scope='#{scope}' data-key='#{key}'>#{key}</span>").html_safe %>
 
     <%= icon_link_to "pencil-line", "#", t("edit_label", scope: "decidim.decidim_awesome.admin.config.form"), class: "awesome-auto-edit", data: { "scope" => "#{scope}" } %>
 

@@ -1,0 +1,55 @@
+<div class="fcell search mb-4">
+  <%= form_tag nil, method: :get, class: "form form-defaults" do %>
+    <div class="form__wrapper block bg-gray-5 p-4">
+      <div class="grid grid-cols-3 gap-x-4 pt-4">
+        <div class="content-end">
+          <%= label_tag :created_from do %>
+            <%= t("created_at", scope: "decidim.decidim_awesome.admin.hashcash.index") + " ≥" %>
+            <%= date_field_tag :created_from, params[:created_from], autocomplete: :off %>
+          <% end %>
+          </div>
+        <div class="content-end">
+          <%= label_tag :created_from do %>
+            <%= t("created_at", scope: "decidim.decidim_awesome.admin.hashcash.index") + " ≤" %>
+            <%= date_field_tag :created_to, params[:created_to], autocomplete: :off %>
+          <% end %>
+        </div>
+        <div class="content-end grid grid-cols-2 gap-x-4 pt-8">
+          <div>
+            <%= label_tag :bits_from do %>
+              <%= t("bits", scope: "decidim.decidim_awesome.admin.hashcash.index") + " ≥" %>
+              <%= number_field_tag :bits_from, params[:bits_from], autocomplete: :off %>
+            <% end %>
+          </div>
+          <div>
+            <%= label_tag :bits_to do %>
+              <%= t("bits", scope: "decidim.decidim_awesome.admin.hashcash.index") + " ≤" %>
+              <%= number_field_tag :bits_to, params[:bits_to], autocomplete: :off %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-3 gap-x-4 py-4">
+        <div class="content-end">
+          <%= label_tag :ip_address_starts_with, t("ip_address", scope: "decidim.decidim_awesome.admin.hashcash.index") %>
+          <%= text_field_tag :ip_address_starts_with, params[:ip_address_starts_with], autocomplete: :off %>
+        </div>
+        <div class="content-end">
+          <%= label_tag :request_path_starts_with, t("request_path", scope: "decidim.decidim_awesome.admin.hashcash.index") %>
+          <%= text_field_tag :request_path_starts_with, params[:request_path_starts_with], autocomplete: :off %>
+        </div>
+        <div class="content-end">
+          <div class="grid grid-cols-2 gap-x-4 mb-[4px]">
+            <%= submit_tag t("active_hashcash.submit_filter"), class: "button button__sm button__secondary" %>
+            <% if params[:action] == "index" %>
+              <%= link_to t(".ip_addresses"), ip_addresses_hashcashes_path, class: "button button__sm button__transparent-secondary" %>
+            <% else %>
+              <%= link_to t(".stamps"), hashcashes_path, class: "button button__sm button__transparent-secondary" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
