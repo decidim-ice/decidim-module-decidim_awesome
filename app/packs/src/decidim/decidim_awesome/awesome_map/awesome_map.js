@@ -104,6 +104,27 @@ export default class AwesomeMap {
     return defaultCat;
   }
 
+  getTaxonomy(taxonomy) {
+    let defaultTax = {
+      color: getComputedStyle(document.documentElement).getPropertyValue("--primary"),
+      children: () => {},
+      parent: null,
+      name: null
+    };
+
+    if (taxonomy) {
+      let id = taxonomy.id ? parseInt(taxonomy.id, 10) : parseInt(taxonomy, 10); // eslint-disable-line no-ternary, multiline-ternary
+      let tax = this.categories.find((ct) => ct.id === id); // categories array contains taxonomies now
+      if (tax) {
+        tax.children = () => {
+          return this.categories.filter((ct) => ct.parent === tax.id);
+        }
+        return tax;
+      }
+    }
+    return defaultTax;
+  }
+
   _getController(component) {
     let controller = null;
 

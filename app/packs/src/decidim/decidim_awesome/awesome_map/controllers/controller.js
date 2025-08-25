@@ -50,7 +50,11 @@ export default class Controller {
         // subgroups don't have th addLayers utility
         collectionEdges.forEach((item) => {
           this.awesomeMap.layers[this.component.type].group.addLayer(item.node.marker);
-          this.addMarkerCategory(item.node.marker, item.node.category);
+          if (item.node.taxonomies && item.node.taxonomies.length > 0) {
+            item.node.taxonomies.forEach((taxonomy) => {
+              this.addMarkerTaxonomy(item.node.marker, taxonomy);
+            });
+          }
           this.addMarkerHashtags(item.node.marker, item.node.hashtags);
         });
       }
@@ -112,6 +116,18 @@ export default class Controller {
         this.awesomeMap.controls.showCategory(cat);
       } catch (evt) {
         console.error("Failed category marker assignation. category:", category, "marker:", marker, evt.message);
+      }
+    }
+  }
+
+  addMarkerTaxonomy(marker, taxonomy) {
+    const tax = this.awesomeMap.getTaxonomy(taxonomy);
+    if (this.awesomeMap.layers[tax.id]) {
+      try {
+        this.awesomeMap.layers[tax.id].group.addLayer(marker);
+        this.awesomeMap.controls.showCategory(tax);
+      } catch (evt) {
+        console.error("Failed taxonomy marker assignation. taxonomy:", taxonomy, "marker:", marker, evt.message);
       }
     }
   }
