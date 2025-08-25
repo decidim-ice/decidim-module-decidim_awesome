@@ -324,8 +324,12 @@ ja:
               title: '「タイトル」フィールドのユーザー入力検証'
           form_force_authorizations:
             delete: 削除
+            force_authorizations_html: |
+              認証グループを定義します。各グループでは、ユーザーがプラットフォーム内の特定のエリアにアクセスするために、1つ以上の方法で認証を受けることを必須とできます。
+            help: 認証方式のグループを定義し、それに基づいてアクセスを制限することができます。
             new: 新しい認証グループを追加
             remove: この「認証グループ」を削除
+            sure_to_remove: この認証グループを削除してもよろしいですか？
             title: 'アクセス制限:'
           form_proposal_custom_fields:
             delete: 削除
@@ -446,6 +450,7 @@ ja:
             no_data: ハッシュキャッシュスタンプが見つかりません
             request_path: リクエストパス
           ip_addresses:
+            help_html: このページには、システムで検出されたすべてのIPアドレスが、生成したHashcashスタンプの数順に一覧表示されます。 <br><br>各スタンプは、ユーザーによるログインまたはサインアップのいずれかの操作を表します。この情報を利用して、不審な活動を検出することができます。
             ip_address: IPアドレス
             no_data: IPアドレスが見つかりません
             stamps: Hashcashスタンプ
