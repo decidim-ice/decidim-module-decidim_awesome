@@ -260,6 +260,7 @@ cs:
             errors:
               incorrect_css: 'CSS v poli #%{key} je neplatné'
               incorrect_json: 'Definice JSON v poli #%{key} je neplatná'
+            force_authorization_help_text: Text nápovědy pro autorizační stránku
             help:
               allow_images_in_editors: Toto přidá ikonu pro nahrávání obrázků ve všech WYSIWYG editorech
               allow_images_in_proposals: Toto umožní nahrávat obrázky do editoru návrhů, které jsou k dispozici každému uživateli

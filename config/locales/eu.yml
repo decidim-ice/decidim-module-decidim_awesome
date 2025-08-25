@@ -253,6 +253,7 @@ eu:
             errors:
               incorrect_css: 'CSS #%{key} koadroan baliogabea da'
               incorrect_json: 'JSON #%{key} koadroan definizio baliogabea'
+            force_authorization_help_text: Baimen orrirako laguntza-testua
             help:
               allow_images_in_editors: Ikono irudi kargatzailea WYSIWYG editore guztietan gehituko da
               allow_images_in_proposals: Proposamen editorean irudiak igotzea baimendu du edozein parte-hartzailek. Irudiak lotura gisa aurkeztuko dira proposamen publikoaren ikuspegian.
@@ -288,6 +289,8 @@ eu:
             validators:
               body: Parte-hartzailearen sarreraren balidazioak "body" eremurako
               title: Parte-hartzailearen sarreraren balidazioak "title" eremurako
+          form_force_authorizations:
+            delete: Ezabatu
           form_proposal_custom_fields:
             delete: Ezabatu
             new: Gehitu "custom fields" koadro berria

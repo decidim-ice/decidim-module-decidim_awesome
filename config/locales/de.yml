@@ -260,6 +260,7 @@ de:
             errors:
               incorrect_css: 'CSS in Box #%{key} ist ungültig'
               incorrect_json: 'JSON-Definition in Box #%{key} ist ungültig'
+            force_authorization_help_text: Hilfetext für die Autorisierungsseite
             help:
               allow_images_in_editors: Dies fügt ein Bild-Upload-Symbol in allen WYSIWYG-Editoren hinzu
               allow_images_in_proposals: Bilder in Vorschlägen erlauben
@@ -304,6 +305,8 @@ de:
             validators:
               body: Eingabevalidierungen für das Feld "Textkörper"
               title: Eingabevalidierungen für das Feld "Titel"
+          form_force_authorizations:
+            delete: Löschen
           form_proposal_custom_fields:
             delete: Löschen
             new: Neues Eingabefeld
