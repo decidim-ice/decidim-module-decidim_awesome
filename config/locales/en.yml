@@ -823,7 +823,7 @@ en:
           autosaved_retrieved: Data for this form has been recovered from a previous
             session
           autosaved_success: Data saved in local storage
-          categories: Categories
+          taxonomies: Taxonomies
           drag_and_drop_image: Add images by dragging & dropping or pasting them.
           hashtags: Hashtags
           items: items

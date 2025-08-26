@@ -70,7 +70,7 @@ export default class ProposalsController extends Controller {
           // mimic parent category (amendments doesn't have categories)
           if (parent.category) {
             marker.marker.setIcon(this.createIcon("text-secondary"));
-            this.addMarkerCategory(marker.marker, parent.category)
+            this.addMarkerTaxonomy(marker.marker, parent.category)
           }
         }
       }

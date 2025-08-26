@@ -107,19 +107,6 @@ export default class Controller {
     this.allNodes.push(node);
   }
 
-  addMarkerCategory(marker, category) {
-    // Add to category layer
-    const cat = this.awesomeMap.getCategory(category);
-    if (this.awesomeMap.layers[cat.id]) {
-      try {
-        this.awesomeMap.layers[cat.id].group.addLayer(marker);
-        this.awesomeMap.controls.showCategory(cat);
-      } catch (evt) {
-        console.error("Failed category marker assignation. category:", category, "marker:", marker, evt.message);
-      }
-    }
-  }
-
   addMarkerTaxonomy(marker, taxonomy) {
     const tax = this.awesomeMap.getTaxonomy(taxonomy);
     if (this.awesomeMap.layers[tax.id]) {
