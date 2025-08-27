@@ -201,18 +201,15 @@ export default class ControlsUI {
 
         if (checkedSiblings.length === 0) {
           // No siblings checked - uncheck parent
-          parentInput.checked = false;
-          parentInput.indeterminate = false;
-          this.awesomeMap.map.removeLayer(this.awesomeMap.layers[taxonomy.parent].group);
+          parentInput.checked = true;
+          this.awesomeMap.map.removeLayer(this.awesomeMap.layers[taxonomy].group);
         } else if (checkedSiblings.length === siblings.length) {
           // All siblings checked - check parent
           parentInput.checked = true;
-          parentInput.indeterminate = false;
           this.awesomeMap.map.addLayer(this.awesomeMap.layers[taxonomy.parent].group);
         } else {
-          // Some siblings checked - indeterminate parent
-          parentInput.checked = false;
-          parentInput.indeterminate = true;
+          // Some siblings checked
+          parentInput.checked = true;
           this.awesomeMap.map.addLayer(this.awesomeMap.layers[taxonomy.parent].group);
         }
 
