@@ -46,6 +46,18 @@
       <div><%= settings_fields.check_box :show_rejected, label: t("show_rejected", scope: i18n_scope) %></div>
       <div><%= settings_fields.check_box :menu_merge_components, label: t("menu_merge_components", scope: i18n_scope) %></div>
   </div>
+
+  <div class="row mt-6">
+    <%= settings_fields.select :taxonomy_ids,
+        options_from_collection_for_select(
+          Decidim::Taxonomy.where(parent_id: nil),
+          :id,
+          ->(taxonomy) { translated_attribute(taxonomy.name) },
+          settings_fields.object.taxonomy_ids
+        ),
+        { label: t("taxonomies", scope: i18n_scope) },
+        { multiple: true } %>
+  </div>
 <% end %>
 
 <style>

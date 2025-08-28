@@ -43,6 +43,7 @@ module Decidim
               settings.attribute :show_withdrawn, type: :boolean, default: false
               settings.attribute :show_evaluating, type: :boolean, default: true
               settings.attribute :show_rejected, type: :boolean, default: false
+              settings.attribute :taxonomy_ids, type: :array, default: []
             end
           end
           # === TODO: processes groups map block ===

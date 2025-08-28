@@ -704,6 +704,7 @@ en:
           show_not_answered: Show not answered proposals
           show_rejected: Show rejected proposals
           show_withdrawn: Show withdrawn proposals
+          taxonomies: Taxonomies
           text_settings: Text settings
           title: Title
           truncate: Maximum characters for popup descriptions
