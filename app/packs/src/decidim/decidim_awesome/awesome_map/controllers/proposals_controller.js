@@ -33,7 +33,7 @@ export default class ProposalsController extends Controller {
       });
 
       // Check if it has amendments, add it to a list
-      // also assign parent's proposal categories to it
+      // also assign parent's proposal taxonomies to it
       // console.log("onNode proposal", proposal, "amendment:", proposal.amendments)
       if (proposal.amendments && proposal.amendments.length) {
         proposal.amendments.forEach((amendment) => {
@@ -67,10 +67,10 @@ export default class ProposalsController extends Controller {
         }
         if (this.awesomeMap.config.menu.amendments) {
           marker.marker.addTo(this.awesomeMap.layers.amendments.group);
-          // mimic parent category (amendments doesn't have categories)
-          if (parent.category) {
+          // mimic parent taxonomy (amendments doesn't have taxonomies)
+          if (parent.taxonomy) {
             marker.marker.setIcon(this.createIcon("text-secondary"));
-            this.addMarkerTaxonomy(marker.marker, parent.category)
+            this.addMarkerTaxonomy(marker.marker, parent.taxonomy)
           }
         }
       }

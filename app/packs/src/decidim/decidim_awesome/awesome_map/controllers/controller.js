@@ -112,7 +112,7 @@ export default class Controller {
     if (this.awesomeMap.layers[tax.id]) {
       try {
         this.awesomeMap.layers[tax.id].group.addLayer(marker);
-        this.awesomeMap.controls.showCategory(tax);
+        this.awesomeMap.controls.showTaxonomy(tax);
       } catch (evt) {
         console.error("Failed taxonomy marker assignation. taxonomy:", taxonomy, "marker:", marker, evt.message);
       }

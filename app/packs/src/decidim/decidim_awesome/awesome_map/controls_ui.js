@@ -30,7 +30,7 @@ export default class ControlsUI {
     this.main.addTo(this.awesomeMap.map);
 
     this.addSearchControls();
-    if (this.awesomeMap.config.menu.categories) {
+    if (this.awesomeMap.config.menu.taxonomies) {
       this.addTaxonomiesControls();
     }
 
@@ -38,7 +38,7 @@ export default class ControlsUI {
     $("#awesome-map").on("click", ".awesome_map-title-control", (evt) => {
       evt.preventDefault();
       evt.stopPropagation();
-      const taxonomies = document.getElementById("awesome_map-categories-control");
+      const taxonomies = document.getElementById("awesome_map-taxonomies-control");
       const hashtags = document.getElementById("awesome_map-hashtags-control");
       if (taxonomies) {
         taxonomies.classList.toggle("active");
@@ -82,7 +82,7 @@ export default class ControlsUI {
   addSearchControls() {
     const section = this.main.getContainer().querySelector(".leaflet-control-layers-list");
     if (section) {
-      section.insertAdjacentHTML("beforeend", `<div id="awesome_map-categories-control" class="active"><b class="awesome_map-title-control">${window.DecidimAwesome.i18n.taxonomies}</b><div class="categories-container"></div></div>
+      section.insertAdjacentHTML("beforeend", `<div id="awesome_map-taxonomies-control" class="active"><b class="awesome_map-title-control">${window.DecidimAwesome.i18n.taxonomies}</b><div class="taxonomies-container"></div></div>
     <div id="awesome_map-hashtags-control"><b class="awesome_map-title-control">${window.DecidimAwesome.i18n.hashtags}</b><div class="hashtags-container"></div><a href="#" class="awesome_map-toggle_all_tags">${window.DecidimAwesome.i18n.selectDeselectAll}</a></div>`);
     } else {
       console.error("Can't find the section to insert the controls");
@@ -114,7 +114,7 @@ export default class ControlsUI {
     });
 
     // taxonomy events
-    $("#awesome-map").on("change", ".awesome_map-categories-selector", (evt) => {
+    $("#awesome-map").on("change", ".awesome_map-taxonomies-selector", (evt) => {
       evt.preventDefault();
       evt.stopPropagation();
 
@@ -129,25 +129,25 @@ export default class ControlsUI {
 
   _addTaxonomyToUI(taxonomy, level) {
     // Create control layer for this taxonomy
-    const label = `<i class="awesome_map-category_${taxonomy.id}"></i> ${taxonomy.name}`;
+    const label = `<i class="awesome_map-taxonomy_${taxonomy.id}"></i> ${taxonomy.name}`;
     this.awesomeMap.layers[taxonomy.id] = {
       label: label,
       group: new L.FeatureGroup.SubGroup(this.awesomeMap.cluster)
     };
     this.awesomeMap.layers[taxonomy.id].group.addTo(this.awesomeMap.map);
 
-    const taxonomiesContainer = document.querySelector("#awesome_map-categories-control .categories-container");
+    const taxonomiesContainer = document.querySelector("#awesome_map-taxonomies-control .taxonomies-container");
     if (taxonomiesContainer) {
       const levelClass = level === 0 ? "root-taxonomy" : level === 1 ? "child-taxonomy" : "grandchild-taxonomy";
       const indentStyle = `style="padding-left: ${level * 20}px;"`;
 
       taxonomiesContainer.insertAdjacentHTML("beforeend",
         `<label data-layer="${taxonomy.id}"
-                class="awesome_map-category-${taxonomy.id} ${levelClass}"
+                class="awesome_map-taxonomy-${taxonomy.id} ${levelClass}"
                 data-parent="${taxonomy.parent || ''}"
                 data-level="${level}"
                 ${indentStyle}>
-          <input type="checkbox" class="awesome_map-categories-selector" checked>
+          <input type="checkbox" class="awesome_map-taxonomies-selector" checked>
           <span>${label}</span>
         </label>`
       );
@@ -220,7 +220,7 @@ export default class ControlsUI {
     }
   }
 
-  // Hashtags are collected directly from proposals (this is different than categories)
+  // Hashtags are collected directly from proposals (this is different than taxonomies)
   addHashtagsControls(hashtags, marker) {
     // show hashtag layer
     if (hashtags && hashtags.length) {
@@ -246,11 +246,11 @@ export default class ControlsUI {
     }
   }
 
-  showCategory(cat) {
-    document.getElementById("awesome_map-categories-control").style.display = "block";
+  showTaxonomy(tax) {
+    document.getElementById("awesome_map-taxonomies-control").style.display = "block";
 
-    // Show category if hidden
-    const label = document.querySelector(`label.awesome_map-category-${cat.id}`);
+    // Show taxonomy if hidden
+    const label = document.querySelector(`label.awesome_map-taxonomy-${tax.id}`);
     if (label) {
       label.style.display = "block";
       // update number of items
@@ -259,10 +259,10 @@ export default class ControlsUI {
     }
 
     // Also show all parent taxonomies up the hierarchy
-    if (cat.parent) {
-      const parentTaxonomy = this.awesomeMap.getTaxonomy(cat.parent);
+    if (tax.parent) {
+      const parentTaxonomy = this.awesomeMap.getTaxonomy(tax.parent);
       if (parentTaxonomy) {
-        this.showCategory(parentTaxonomy);
+        this.showTaxonomy(parentTaxonomy);
       }
     }
   }
@@ -279,7 +279,7 @@ export default class ControlsUI {
   }
 
   removeHiddenTaxonomies() {
-    $(".awesome_map-categories-selector:not(:checked)").each((_idx, el) => {
+    $(".awesome_map-taxonomies-selector:not(:checked)").each((_idx, el) => {
       const layer = this.awesomeMap.layers[$(el).closest("label").data("layer")];
       if (layer) {
         this.awesomeMap.map.addLayer(layer.group);
@@ -303,7 +303,7 @@ export default class ControlsUI {
         this.awesomeMap.map.addLayer(layer.group);
       }
     });
-    // hide non-selected categories
+    // hide non-selected taxonomies
     this.removeHiddenComponents();
     this.removeHiddenTaxonomies();
   }

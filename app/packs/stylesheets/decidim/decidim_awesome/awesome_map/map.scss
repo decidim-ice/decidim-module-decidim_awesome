@@ -110,7 +110,7 @@
 }
 
 #awesome_map- {
-  &categories-control {
+  &taxonomies-control {
     display: none;
 
     label {
@@ -163,14 +163,14 @@
       }
     }
 
-    .categories-container {
+    .taxonomies-container {
       display: none;
       max-height: 300px;
       overflow-y: auto;
     }
 
     &.active {
-      .categories-container {
+      .taxonomies-container {
         display: block;
       }
     }

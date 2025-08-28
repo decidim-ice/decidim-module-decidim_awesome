@@ -69,9 +69,9 @@
   #awesome-map .dynamic-map {
     height: <%= map_height %>px;
   }
-  <% current_taxonomies(taxonomies).each do |category| %>
-    .awesome_map-category_<%= category[:id] %> {
-      background-color: <%= category[:color] %> !important;
+  <% current_taxonomies(taxonomies).each do |taxonomy| %>
+    .awesome_map-taxonomy_<%= taxonomy[:id] %> {
+      background-color: <%= taxonomy[:color] %> !important;
     }
   <% end %>
 </style>

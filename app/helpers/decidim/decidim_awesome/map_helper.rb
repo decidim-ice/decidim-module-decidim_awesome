@@ -40,7 +40,7 @@ module Decidim
             "menu-merge-components" => global_settings.menu_merge_components,
             "menu-amendments" => global_settings.menu_amendments,
             "menu-meetings" => global_settings.menu_meetings,
-            "menu-categories" => global_settings.menu_categories,
+            "menu-taxonomies" => global_settings.menu_taxonomies,
             "menu-hashtags" => global_settings.menu_hashtags,
             "show-not-answered" => step_settings&.show_not_answered,
             "show-accepted" => step_settings&.show_accepted,

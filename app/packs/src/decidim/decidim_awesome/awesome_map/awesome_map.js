@@ -23,7 +23,7 @@ export default class AwesomeMap {
       menu: {
         amendments: false,
         meetings: false,
-        categories: true,
+        taxonomies: true,
         hashtags: false,
         mergeComponents: false
       },

@@ -125,7 +125,7 @@ en:
             map_zoom: Zoom (any number betwen 0 and 18)
             map_zoom_help: Only applies if a map center is defined
             menu_amendments: Show amendments
-            menu_categories: Show Category search menu
+            menu_taxonomies: Show Taxonomy search menu
             menu_hashtags: Show Hashtag search menu
             menu_meetings: Show meetings
             menu_merge_components: Merge all components of the same type in the menu
