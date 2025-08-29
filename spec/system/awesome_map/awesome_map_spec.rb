@@ -6,8 +6,10 @@ describe "Show awesome map" do
   include_context "with a component"
   let(:manifest_name) { "awesome_map" }
 
+  let(:root_taxonomy) { create(:taxonomy, organization:) }
+  let!(:taxonomy) { create(:taxonomy, parent: root_taxonomy, organization:) }
   let!(:proposal_component) { create(:proposal_component, :with_amendments_enabled, :with_geocoding_enabled, participatory_space: participatory_process) }
-  let!(:proposal) { create(:proposal, component: proposal_component, latitude: 40, longitude: 2) }
+  let!(:proposal) { create(:proposal, component: proposal_component, latitude: 40, longitude: 2, taxonomies: [taxonomy]) }
   let(:emendation) { build(:proposal, component: proposal_component, latitude: 42, longitude: 4) }
   let!(:proposal_amendment) { create(:proposal_amendment, amendable: proposal, emendation:) }
   let!(:accepted_proposal) { create(:proposal, :accepted, title: { en: "Accepted proposal" }, component: proposal_component, latitude: 40, longitude: -50) }
@@ -15,8 +17,6 @@ describe "Show awesome map" do
   let!(:not_answered_proposal) { create(:proposal, :not_answered, title: { en: "Not answered proposal" }, component: proposal_component, latitude: 70, longitude: 6) }
   let!(:withdrawn_proposal) { create(:proposal, :withdrawn, title: { en: "Withdrawn proposal" }, component: proposal_component, latitude: 60, longitude: -30) }
   let!(:rejected_proposal) { create(:proposal, :rejected, title: { en: "Rejected proposal" }, component: proposal_component, latitude: 10, longitude: 80) }
-  let!(:category) { create(:category, participatory_space: participatory_process) }
-  let!(:subcategory) { create(:subcategory, parent: category, participatory_space: participatory_process) }
   let!(:user) { create(:user, :confirmed, organization:) }
   let(:active_step_id) { component.participatory_space.active_step.id }
   let(:settings) do
@@ -59,6 +59,7 @@ describe "Show awesome map" do
   before do
     allow(Decidim.config).to receive(:maps).and_return(map_config)
     component.update!(step_settings: { active_step_id => step_settings })
+    component.update!(settings: { taxonomy_filters: root_taxonomy.taxonomy_filters.ids })
     visit_component
   end
 
@@ -86,10 +87,12 @@ describe "Show awesome map" do
     end
   end
 
-  it "shows categories and colors" do
+  it "shows taxonomies and colors" do
+    # To ensure the map is loaded
+    sleep(1)
     within ".awesome-map" do
-      expect(page.body).to have_content(".awesome_map-category_#{category.id}")
-      expect(page.body).to have_content(".awesome_map-category_#{subcategory.id}")
+      expect(page.body).to have_content(".awesome_map-taxonomy_#{root_taxonomy.id}")
+      expect(page.body).to have_content(".awesome_map-taxonomy_#{taxonomy.id}")
     end
   end
 
