@@ -15,24 +15,25 @@ module Decidim::DecidimAwesome
         create(:component, participatory_space: current_participatory_space, manifest_name: "proposals")
       ]
     end
-    let!(:category) { create(:category, participatory_space: current_participatory_space) }
-    let!(:subcategory) { create(:category, parent: category) }
-    let(:categories) do
+    let(:organization) { current_participatory_space.organization }
+    let(:root_taxonomy) { create(:taxonomy, organization:) }
+    let!(:taxonomy) { create(:taxonomy, parent: root_taxonomy, organization:) }
+    let(:taxonomies) do
       [{
-        id: category.id,
-        name: category.name["en"],
+        id: root_taxonomy.id,
+        name: root_taxonomy.name["en"],
         parent: nil,
         color: "#ffaa33"
       }, {
-        id: subcategory.id,
-        name: subcategory.name["en"],
-        parent: category.id,
+        id: taxonomy.id,
+        name: taxonomy.name["en"],
+        parent: root_taxonomy.id,
         color: "#ffaa33"
       }]
     end
 
     before do
-      allow(helper).to receive_messages(current_participatory_space:, current_organization: current_participatory_space.organization, current_component:, snippets:)
+      allow(helper).to receive_messages(current_participatory_space:, current_organization: organization, current_component:, snippets:)
       allow(helper).to receive(:translated_attribute) do |string|
         string["en"]
       end
@@ -47,13 +48,13 @@ module Decidim::DecidimAwesome
       end
     end
 
-    describe "current_categories" do
+    describe "current_taxonomies" do
       before do
         allow(helper).to receive(:hsv_to_rgb).and_return([255, 0xAA, 0x33])
       end
 
-      it "return formatted categories" do
-        expect(helper.current_categories(current_participatory_space.categories)).to eq(categories)
+      it "return formatted taxonomies" do
+        expect(helper.current_taxonomies(organization.taxonomies)).to eq(taxonomies)
       end
     end
 
