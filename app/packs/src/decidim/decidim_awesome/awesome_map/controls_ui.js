@@ -129,7 +129,8 @@ export default class ControlsUI {
 
   _addTaxonomyToUI(taxonomy, level) {
     // Create control layer for this taxonomy
-    const label = `<i class="awesome_map-taxonomy_${taxonomy.id}"></i> ${taxonomy.name}`;
+    const circleIcon = taxonomy.parent ? `<i class="awesome_map-taxonomy_${taxonomy.id}"></i> ` : '';
+    const label = `${circleIcon}${taxonomy.name}`;
     this.awesomeMap.layers[taxonomy.id] = {
       label: label,
       group: new L.FeatureGroup.SubGroup(this.awesomeMap.cluster)
