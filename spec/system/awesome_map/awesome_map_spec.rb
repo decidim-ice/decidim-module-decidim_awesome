@@ -138,6 +138,21 @@ describe "Show awesome map" do
     end
   end
 
+  context "when taxonomy is removed from the proposal" do
+    before do
+      proposal.update!(taxonomies: [])
+      visit_component
+    end
+
+    it "doesn't show the taxonomy on the map menu" do
+      sleep(1)
+      within ".awesome-map" do
+        expect(page).to have_no_content(root_taxonomy.name)
+        expect(page).to have_no_content(taxonomy.name)
+      end
+    end
+  end
+
   # TODO: figure out a way to test leaflet without any map provider
   # it "shows the proposal component as a menu" do
   #   expect(page.body).to have_content(".awesome_map-component_#{component.id}")
