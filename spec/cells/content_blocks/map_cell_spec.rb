@@ -57,10 +57,11 @@ module Decidim::DecidimAwesome
       expect(components.pluck("id")).to include(proposal_component.id)
     end
 
-    it "uses all taxonomies" do
+    it "respects taxonomy_ids filter setting" do
       taxonomies = JSON.parse(subject.to_s.match(/window\.AwesomeMap\.taxonomies = (\[.*\])/)[1])
 
       expect(taxonomies.pluck("id")).to include(taxonomy.id)
+      expect(taxonomies.pluck("id")).not_to include(root_taxonomy.id)
     end
 
     context "when the content block has a title" do

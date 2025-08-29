@@ -54,7 +54,8 @@ module Decidim::DecidimAwesome
       end
 
       it "return formatted taxonomies" do
-        expect(helper.current_taxonomies(organization.taxonomies)).to eq(taxonomies)
+        # Only root_taxonomies can be passed to the current_taxonomies method
+        expect(helper.current_taxonomies(organization.taxonomies.filter { |t| t.parent_id.nil? })).to eq(taxonomies)
       end
     end
 
