@@ -48,7 +48,7 @@
   </div>
 
   <div class="row mt-6">
-    <%= settings_fields.select
+    <%= settings_fields.select(
         :taxonomy_ids,
         options_from_collection_for_select(
           Decidim::Taxonomy.where(parent_id: nil, decidim_organization_id: current_organization.id),
@@ -57,7 +57,7 @@
           settings_fields.object.taxonomy_ids
         ),
         { label: t("taxonomies", scope: i18n_scope) },
-        { multiple: true } %>
+        { multiple: true }) %>
   </div>
 <% end %>
 
