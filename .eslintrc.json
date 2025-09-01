@@ -1,3 +1,7 @@
 {
-    "extends": "@decidim"
-}
+    "extends": "@decidim",
+    "rules": {
+      "no-nested-ternary": "off",
+      "max-lines": ["error", { "max": 350 }]
+    }
+  }

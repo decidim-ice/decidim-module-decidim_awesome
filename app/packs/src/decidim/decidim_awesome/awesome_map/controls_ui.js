@@ -91,7 +91,7 @@ export default class ControlsUI {
 
   addTaxonomiesControls() {
     // First, organize taxonomies by levels
-    const rootTaxonomies = this.awesomeMap.taxonomies.filter(tax => !tax.parent);
+    const rootTaxonomies = this.awesomeMap.taxonomies.filter((tax) => !tax.parent);
 
     // Process each root taxonomy independently
     rootTaxonomies.forEach((rootTaxonomy) => {
@@ -99,13 +99,13 @@ export default class ControlsUI {
       this._addTaxonomyToUI(rootTaxonomy, 0);
 
       // Find and add direct children of this root taxonomy
-      const children = this.awesomeMap.taxonomies.filter(tax => tax.parent === rootTaxonomy.id);
+      const children = this.awesomeMap.taxonomies.filter((tax) => tax.parent === rootTaxonomy.id);
 
       children.forEach((child) => {
         this._addTaxonomyToUI(child, 1);
 
         // Find and add grandchildren of this child
-        const grandchildren = this.awesomeMap.taxonomies.filter(tax => tax.parent === child.id);
+        const grandchildren = this.awesomeMap.taxonomies.filter((tax) => tax.parent === child.id);
 
         grandchildren.forEach((grandchild) => {
           this._addTaxonomyToUI(grandchild, 2);
@@ -129,7 +129,7 @@ export default class ControlsUI {
 
   _addTaxonomyToUI(taxonomy, level) {
     // Create control layer for this taxonomy
-    const circleIcon = taxonomy.parent ? `<i class="awesome_map-taxonomy_${taxonomy.id}"></i> ` : '';
+    const circleIcon = taxonomy.parent ? `<i class="awesome_map-taxonomy_${taxonomy.id}"></i> ` : "";
     const label = `${circleIcon}${taxonomy.name}`;
     this.awesomeMap.layers[taxonomy.id] = {
       label: label,
@@ -145,7 +145,7 @@ export default class ControlsUI {
       taxonomiesContainer.insertAdjacentHTML("beforeend",
         `<label data-layer="${taxonomy.id}"
                 class="awesome_map-taxonomy-${taxonomy.id} ${levelClass}"
-                data-parent="${taxonomy.parent || ''}"
+                data-parent="${taxonomy.parent || ""}"
                 data-level="${level}"
                 ${indentStyle}>
           <input type="checkbox" class="awesome_map-taxonomies-selector" checked>
@@ -178,7 +178,7 @@ export default class ControlsUI {
   }
 
   _uncheckChildrenTaxonomies(taxonomyId) {
-    const children = this.awesomeMap.taxonomies.filter(tax => tax.parent === taxonomyId);
+    const children = this.awesomeMap.taxonomies.filter((tax) => tax.parent === taxonomyId);
     children.forEach((child) => {
       const childInput = document.querySelector(`label[data-layer="${child.id}"] input`);
       if (childInput && childInput.checked) {
@@ -194,8 +194,8 @@ export default class ControlsUI {
     if (taxonomy.parent) {
       const parentInput = document.querySelector(`label[data-layer="${taxonomy.parent}"] input`);
       if (parentInput) {
-        const siblings = this.awesomeMap.taxonomies.filter(tax => tax.parent === taxonomy.parent);
-        const checkedSiblings = siblings.filter(sibling => {
+        const siblings = this.awesomeMap.taxonomies.filter((tax) => tax.parent === taxonomy.parent);
+        const checkedSiblings = siblings.filter((sibling) => {
           const siblingInput = document.querySelector(`label[data-layer="${sibling.id}"] input`);
           return siblingInput && siblingInput.checked;
         });

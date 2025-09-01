@@ -30,7 +30,7 @@ export default class Fetcher {
     api.fetchAll((result) => {
       if (result) {
         const collection = result.component[this.collection];
-        collection.edges = collection.edges.filter(e => e.node !== null);
+        collection.edges = collection.edges.filter((edge) => edge.node !== null);
         // console.log("collection", collection)
 
         collection.edges.forEach((element) => {
