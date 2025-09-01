@@ -10,11 +10,13 @@ module Decidim
 
       # Returns the normalized config for an Organization and the current url
       def awesome_config_instance
-        memoize("current_config") do
+        @awesome_config_instance ||= memoize("current_config") do
           config = Config.new(request.env["decidim.current_organization"])
-          config.context_from_request(request)
+          config.context_from_request!(request)
           config
         end
+        @awesome_config_instance.application_context!(current_user:) if respond_to?(:current_user)
+        @awesome_config_instance
       end
 
       def awesome_config
@@ -86,6 +88,13 @@ module Decidim
         end
       end
 
+      # Collects all the force authorizations that is applied in the current URL context
+      def awesome_force_authorizations
+        memoize("awesome_force_authorizations") do
+          awesome_config_instance.collect_sub_configs_values("force_authorization")
+        end
+      end
+
       # this will check if the current component has been configured to use a custom voting manifest
       def awesome_voting_manifest_for(component)
         memoize("awesome_voting_manifest_for_#{component.id}") do
@@ -93,11 +102,11 @@ module Decidim
         end
       end
 
-      # Retrives all the "admins_available_authorizations" for the user along with other possible authorizations
-      # returns an instance of Decidim::DecidimAwesome::Authorizator
+      # Retrieves all the "admins_available_authorizations" for the user along with other possible authorizations
+      # returns an instance of Decidim::DecidimAwesome::Authorizer
       def awesome_authorizations_for(user)
         memoize("awesome_authorizations_for_#{user.id}") do
-          Authorizator.new(user, awesome_config[:admins_available_authorizations])
+          Authorizer.new(user, awesome_config[:admins_available_authorizations])
         end
       end
 

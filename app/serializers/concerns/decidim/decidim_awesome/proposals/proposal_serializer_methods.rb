@@ -3,7 +3,7 @@
 module Decidim
   module DecidimAwesome
     module Proposals
-      # Adds one custom field per column in export if custom fields are activted
+      # Adds one custom field per column in export if custom fields are activated
       # Adds vote weights
       module ProposalSerializerMethods
         extend ActiveSupport::Concern
@@ -17,7 +17,8 @@ module Decidim
             return @custom_config if @custom_config
 
             @custom_config = Config.new(proposal.organization)
-            @custom_config.context_from_component(proposal.component)
+            @custom_config.context_from_component!(proposal.component)
+            @custom_config.application_context!(current_user: proposal.creator)
             @custom_config
           end
 

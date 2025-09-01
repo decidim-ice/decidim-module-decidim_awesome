@@ -4,12 +4,13 @@ module Decidim
   module DecidimAwesome
     module Admin
       class DestroyScopedStyle < Command
+        include NeedsConstraintHelpers
         # Public: Initializes the command.
         #
         # key - the key to destroy inside scoped_styles/scoped_admin_styles
         # organization
         def initialize(key, organization, config_var = :scoped_styles)
-          @key = key
+          @ident = key
           @organization = organization
           @config_var = config_var
         end
@@ -21,18 +22,12 @@ module Decidim
         #
         # Returns nothing.
         def call
-          styles = AwesomeConfig.find_by(var: @config_var, organization: @organization)
-          return broadcast(:invalid, "Not a hash") unless styles&.value.is_a? Hash
-          return broadcast(:invalid, "#{key} key invalid") unless styles.value.has_key?(@key)
+          return broadcast(:invalid, "Not a hash") unless find_var&.value.is_a? Hash
+          return broadcast(:invalid, "#{ident} key invalid") unless find_var.value.has_key?(ident)
 
-          styles.value.except!(@key)
-          styles.save!
-          # remove constrains associated (a new config var is generated automatically, by removing it, it will trigger destroy on dependents)
-          constraint = @config_var == :scoped_styles ? :scoped_style : :scoped_admin_style
-          constraint = AwesomeConfig.find_by(var: "#{constraint}_#{@key}", organization: @organization)
-          constraint.destroy! if constraint.present?
+          destroy_hash_ident!
 
-          broadcast(:ok, @key)
+          broadcast(:ok, ident)
         rescue StandardError => e
           broadcast(:invalid, e.message)
         end

@@ -6,12 +6,12 @@ describe "Hacked menus" do
   let(:organization) { create(:organization) }
   let!(:participatory_process) { create(:participatory_process, organization:) }
   let!(:config) { create(:awesome_config, organization:, var: :menu, value: menu) }
-  let(:menu) { [overriden, added] }
-  let(:overriden) do
+  let(:menu) { [overridden, added] }
+  let(:overridden) do
     {
       url: "/",
       label: {
-        "en" => "A new beggining"
+        "en" => "A new beginning"
       },
       position: 10
     }
@@ -39,36 +39,36 @@ describe "Hacked menus" do
 
   shared_examples "has active link" do |text|
     it "has only one active link" do
-      within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
+      within "#main-dropdown-menu" do
         expect(page).to have_css("li.active", count: 1)
       end
     end
 
     it "active link containts text" do
-      within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu .active" do
+      within "#main-dropdown-menu .active" do
         expect(page).to have_content(text)
       end
     end
   end
 
   it "renders the hacked menu" do
-    within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
+    within "#main-dropdown-menu" do
       expect(page).to have_no_content("Home")
       expect(page).to have_content("Processes")
-      expect(page).to have_content("A new beggining")
+      expect(page).to have_content("A new beginning")
       expect(page).to have_content("Blog")
     end
   end
 
   it "renders in the proper order" do
-    within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:nth-child(1)" do
+    within "#main-dropdown-menu li:nth-child(1)" do
       expect(page).to have_content("Processes")
     end
-    within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:nth-child(2)" do
+    within "#main-dropdown-menu li:nth-child(2)" do
       expect(page).to have_content("Blog")
     end
-    within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:last-child" do
-      expect(page).to have_content("A new beggining")
+    within "#main-dropdown-menu li:last-child" do
+      expect(page).to have_content("A new beginning")
     end
   end
 
@@ -85,19 +85,19 @@ describe "Hacked menus" do
     end
 
     it "has target blank" do
-      expect(find("#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:nth-child(2) a")["data-remote"]).to eq("true")
-      expect(find("#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:nth-child(2) a")[:target]).to eq("_blank")
-      expect(find("#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu li:last-child a")["data-remote"]).not_to eq("true")
+      expect(find("#main-dropdown-menu li:nth-child(2) a")["data-remote"]).to eq("true")
+      expect(find("#main-dropdown-menu li:nth-child(2) a")[:target]).to eq("_blank")
+      expect(find("#main-dropdown-menu li:last-child a")["data-remote"]).not_to eq("true")
     end
   end
 
   describe "visibility" do
     let(:visibility) { "default" }
-    let(:overriden) do
+    let(:overridden) do
       {
         url: "/",
         label: {
-          "en" => "A new beggining"
+          "en" => "A new beginning"
         },
         position: 10,
         visibility:
@@ -105,8 +105,8 @@ describe "Hacked menus" do
     end
 
     it "renders the item" do
-      within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
-        expect(page).to have_content("A new beggining")
+      within "#main-dropdown-menu" do
+        expect(page).to have_content("A new beginning")
       end
     end
 
@@ -114,8 +114,8 @@ describe "Hacked menus" do
       let(:visibility) { "hidden" }
 
       it "do not show the menu item" do
-        within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
-          expect(page).to have_no_content("A new beggining")
+        within "#main-dropdown-menu" do
+          expect(page).to have_no_content("A new beginning")
         end
       end
     end
@@ -124,8 +124,8 @@ describe "Hacked menus" do
       let(:visibility) { "logged" }
 
       it "do not show the menu item" do
-        within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
-          expect(page).to have_no_content("A new beggining")
+        within "#main-dropdown-menu" do
+          expect(page).to have_no_content("A new beginning")
         end
       end
     end
@@ -134,8 +134,8 @@ describe "Hacked menus" do
       let(:visibility) { "non_logged" }
 
       it "do not show the menu item" do
-        within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
-          expect(page).to have_content("A new beggining")
+        within "#main-dropdown-menu" do
+          expect(page).to have_content("A new beginning")
         end
       end
     end
@@ -154,8 +154,8 @@ describe "Hacked menus" do
         let(:visibility) { "hidden" }
 
         it "do not show the menu item" do
-          within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
-            expect(page).to have_no_content("A new beggining")
+          within "#main-dropdown-menu" do
+            expect(page).to have_no_content("A new beginning")
           end
         end
       end
@@ -164,8 +164,8 @@ describe "Hacked menus" do
         let(:visibility) { "logged" }
 
         it "do not show the menu item" do
-          within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
-            expect(page).to have_content("A new beggining")
+          within "#main-dropdown-menu" do
+            expect(page).to have_content("A new beginning")
           end
         end
       end
@@ -174,8 +174,8 @@ describe "Hacked menus" do
         let(:visibility) { "non_logged" }
 
         it "do not show the menu item" do
-          within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
-            expect(page).to have_no_content("A new beggining")
+          within "#main-dropdown-menu" do
+            expect(page).to have_no_content("A new beginning")
           end
         end
       end
@@ -193,8 +193,8 @@ describe "Hacked menus" do
 
         context "when user is verified" do
           it "shows the item" do
-            within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
-              expect(page).to have_content("A new beggining")
+            within "#main-dropdown-menu" do
+              expect(page).to have_content("A new beginning")
             end
           end
         end
@@ -203,8 +203,8 @@ describe "Hacked menus" do
           let(:authorization) { nil }
 
           it "shows the item" do
-            within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
-              expect(page).to have_no_content("A new beggining")
+            within "#main-dropdown-menu" do
+              expect(page).to have_no_content("A new beginning")
             end
           end
         end
@@ -213,8 +213,8 @@ describe "Hacked menus" do
           let!(:authorization) { create(:authorization, granted_at: 3.months.ago, user:, name: "dummy_authorization_handler") }
 
           it "shows the item" do
-            within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
-              expect(page).to have_no_content("A new beggining")
+            within "#main-dropdown-menu" do
+              expect(page).to have_no_content("A new beginning")
             end
           end
         end
@@ -229,7 +229,7 @@ describe "Hacked menus" do
             {
               url: "/processes",
               label: {
-                "en" => "A new beggining"
+                "en" => "A new beginning"
               },
               position: 1
             },
@@ -243,7 +243,7 @@ describe "Hacked menus" do
           ]
         end
 
-        it_behaves_like "has active link", "A new beggining"
+        it_behaves_like "has active link", "A new beginning"
 
         context "when visiting all processes list" do
           before do
@@ -251,7 +251,7 @@ describe "Hacked menus" do
             find_by_id("main-dropdown-summary").hover
           end
 
-          it_behaves_like "has active link", "A new beggining"
+          it_behaves_like "has active link", "A new beginning"
         end
 
         context "when visiting a process in a custom link" do
@@ -278,7 +278,7 @@ describe "Hacked menus" do
             find_by_id("main-dropdown-summary").hover
           end
 
-          it_behaves_like "has active link", "A new beggining"
+          it_behaves_like "has active link", "A new beginning"
         end
 
         context "when visiting a sublink of a process not in a custom link" do
@@ -287,7 +287,7 @@ describe "Hacked menus" do
             find_by_id("main-dropdown-summary").hover
           end
 
-          it_behaves_like "has active link", "A new beggining"
+          it_behaves_like "has active link", "A new beginning"
         end
       end
 
@@ -295,10 +295,10 @@ describe "Hacked menus" do
         let(:disabled_features) { [:menu] }
 
         it "renders the normal menu" do
-          within "#breadcrumb-main-dropdown-desktop .menu-bar__main-dropdown__menu" do
+          within "#main-dropdown-menu" do
             expect(page).to have_content("Home")
             expect(page).to have_content("Processes")
-            expect(page).to have_no_content("A new beggining")
+            expect(page).to have_no_content("A new beginning")
             expect(page).to have_no_content("Blog")
           end
         end

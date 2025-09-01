@@ -10,7 +10,6 @@ module Decidim
         #
         def initialize(organization, config_var = :proposal_custom_fields)
           @organization = organization
-          @ident = rand(36**8).to_s(36)
           @config_var = config_var
         end
 
@@ -21,15 +20,11 @@ module Decidim
         #
         # Returns nothing.
         def call
-          fields = AwesomeConfig.find_or_initialize_by(var: @config_var, organization: @organization)
-          fields.value = {} unless fields.value.is_a? Hash
-          # TODO: prevent (unlikely) colisions with exisiting values
-          fields.value[@ident] = default_definition
-          fields.save!
+          create_hash_config!(default_definition)
 
-          create_constraint_never(@config_var == :proposal_custom_fields ? :proposal_custom_field : :proposal_private_custom_field)
+          create_constraint_never!
 
-          broadcast(:ok, @ident)
+          broadcast(:ok, ident)
         rescue StandardError => e
           broadcast(:invalid, e.message)
         end

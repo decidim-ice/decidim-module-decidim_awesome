@@ -1,0 +1,8 @@
+<% awesome_link = link_to("Decidim Awesome", decidim_admin_decidim_awesome.config_path(:verifications), target: "_blank", data: { external_domain_link: false }) %>
+<% has_constraint = Decidim::DecidimAwesome::SpaceConstraintFinder.new("force_authorization", participatory_space).query.exists? %>
+
+<div class="row column">
+  <div class="callout <%= has_constraint ? "alert" : "info" %> mt-2">
+    <%= t("decidim.decidim_awesome.admin.visibility.#{has_constraint ? "restricted_html" : "info_html"}", awesome_link:) %>
+  </div>
+</div>

@@ -10,7 +10,7 @@ module Decidim
         #
         def initialize(organization)
           @organization = organization
-          @ident = rand(36**8).to_s(36)
+          @config_var = :scoped_admins
         end
 
         # Executes the command. Broadcasts these events:
@@ -20,15 +20,11 @@ module Decidim
         #
         # Returns nothing.
         def call
-          admins = AwesomeConfig.find_or_initialize_by(var: :scoped_admins, organization: @organization)
-          admins.value = {} unless admins.value.is_a? Hash
-          # TODO: prevent (unlikely) colisions with exisiting values
-          admins.value[@ident] = []
-          admins.save!
+          create_hash_config!([])
 
-          create_constraint_never(:scoped_admin)
+          create_constraint_never!
 
-          broadcast(:ok, @ident)
+          broadcast(:ok, ident)
         rescue StandardError => e
           broadcast(:invalid, e.message)
         end

@@ -387,7 +387,7 @@ Admins can manage these settings in the Awesome admin panel under the "Verificat
 ![Forced verifications admin side](examples/forced_verifications_admin.png)
 ![Forced verifications public side](examples/forced_verifications_public.png)
 
-Note that some pages are allowed, you can even configure which controller are allowed by creating an initializer ("required_authorizations" and "authorizations" are always allowed):
+You can configure which controller are allowed by creating an initializer (some controllers like the login, terms and conditions, etc. are always allowed):
 
 ```ruby
 # config/initializers/decidim_awesome.rb

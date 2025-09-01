@@ -4,11 +4,11 @@ module Decidim
   module DecidimAwesome
     module Admin
       class CreateScopedStyle < Command
+        include NeedsConstraintHelpers
         # Public: Initializes the command.
         #
         def initialize(organization, config_var = :scoped_styles)
           @organization = organization
-          @ident = rand(36**8).to_s(36)
           @config_var = config_var
         end
 
@@ -19,13 +19,9 @@ module Decidim
         #
         # Returns nothing.
         def call
-          styles = AwesomeConfig.find_or_initialize_by(var: @config_var, organization: @organization)
-          styles.value = {} unless styles.value.is_a? Hash
-          # TODO: prevent (unlikely) colisions with exisiting values
-          styles.value[@ident] = ""
-          styles.save!
+          create_hash_config!("")
 
-          broadcast(:ok, @ident)
+          broadcast(:ok, ident)
         rescue StandardError => e
           broadcast(:invalid, e.message)
         end

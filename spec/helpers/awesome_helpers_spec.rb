@@ -21,6 +21,7 @@ module Decidim::DecidimAwesome
 
     before do
       allow(helper).to receive(:request).and_return(request)
+      allow(helper).to receive(:current_user).and_return(user)
       helper.instance_variable_set(:@awesome_config_instance, nil)
     end
 
@@ -67,7 +68,7 @@ module Decidim::DecidimAwesome
     end
 
     it "returns authorizations for user" do
-      expect(helper.awesome_authorizations_for(user)).to be_a(Decidim::DecidimAwesome::Authorizator)
+      expect(helper.awesome_authorizations_for(user)).to be_a(Decidim::DecidimAwesome::Authorizer)
       expect(helper.awesome_authorizations_for(user).authorizations).to eq([])
     end
 

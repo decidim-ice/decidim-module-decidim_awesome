@@ -56,7 +56,7 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::AmendmentsController.included_modules).to include(Decidim::DecidimAwesome::LimitPendingAmendments)
       expect(Decidim::Proposals::ProposalsController.included_modules).to include(Decidim::DecidimAwesome::Proposals::OrderableOverride)
       expect(Decidim::AdminLog::ComponentPresenter.included_modules).to include(Decidim::DecidimAwesome::AdminLog::ComponentPresenterOverride)
-      expect(Decidim::ApplicationController.included_modules).to include(Decidim::DecidimAwesome::CheckLoginAuthorizations)
+      expect(Decidim::ApplicationController.included_modules).to include(Decidim::DecidimAwesome::EnforceAccessAuthorizations)
       expect(Decidim::ApplicationController.included_modules).to include(Decidim::DecidimAwesome::UseUserTimeZone)
       expect(Decidim::AccountForm.included_modules).to include(Decidim::DecidimAwesome::AccountFormOverride)
       expect(Decidim::UpdateAccount.included_modules).to include(Decidim::DecidimAwesome::UpdateAccountOverride)
@@ -95,7 +95,7 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::AmendmentsController.included_modules).not_to include(Decidim::DecidimAwesome::LimitPendingAmendments)
       expect(Decidim::Proposals::ProposalsController.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::OrderableOverride)
       expect(Decidim::AdminLog::ComponentPresenter.included_modules).not_to include(Decidim::DecidimAwesome::AdminLog::ComponentPresenterOverride)
-      expect(Decidim::ApplicationController.included_modules).not_to include(Decidim::DecidimAwesome::CheckLoginAuthorizations)
+      expect(Decidim::ApplicationController.included_modules).not_to include(Decidim::DecidimAwesome::EnforceAccessAuthorizations)
       expect(Decidim::ApplicationController.included_modules).not_to include(Decidim::DecidimAwesome::UseUserTimeZone)
       expect(Decidim::AccountForm.included_modules).not_to include(Decidim::DecidimAwesome::AccountFormOverride)
       expect(Decidim::UpdateAccount.included_modules).not_to include(Decidim::DecidimAwesome::UpdateAccountOverride)
@@ -194,7 +194,7 @@ shared_examples "basic rendering" do |enabled|
     end
 
     it "renders the home page" do
-      expect(page).to have_css(".home")
+      expect(page).to have_content("Welcome to")
     end
 
     it "has DecidimAwesome object" do
@@ -251,6 +251,8 @@ shared_examples "basic rendering" do |enabled|
         "menus/home_content_block_menu/hacks",
         "custom_redirects",
         "config/livechat",
+        "config/verifications",
+        "maintenance/private_data",
         "maintenance/hashcash"
       ]
     end
