@@ -48,7 +48,8 @@
   </div>
 
   <div class="row mt-6">
-    <%= settings_fields.select :taxonomy_ids,
+    <%= settings_fields.select
+        :taxonomy_ids,
         options_from_collection_for_select(
           Decidim::Taxonomy.where(parent_id: nil, decidim_organization_id: current_organization.id),
           :id,
