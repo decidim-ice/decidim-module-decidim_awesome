@@ -31,7 +31,7 @@ module Decidim::DecidimAwesome
       describe "when invalid" do
         let(:item) { OpenStruct.new({ origin: "/not-in-the-list" }.merge(attributes[1])) }
 
-        it "broadcasts :invalid and does not modifiy the config options" do
+        it "broadcasts :invalid and does not modify the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
           items = AwesomeConfig.find_by(organization:, var: :custom_redirects).value

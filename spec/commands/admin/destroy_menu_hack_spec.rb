@@ -32,7 +32,7 @@ module Decidim::DecidimAwesome
       describe "when invalid" do
         let(:item) { OpenStruct.new("url" => "/not-in-the-menu") }
 
-        it "broadcasts :invalid and does not modifiy the config options" do
+        it "broadcasts :invalid and does not modify the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
           items = AwesomeConfig.find_by(organization:, var: menu_name).value

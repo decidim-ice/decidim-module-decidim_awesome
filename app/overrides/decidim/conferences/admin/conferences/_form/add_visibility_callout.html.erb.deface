@@ -1,0 +1,3 @@
+<!-- insert_bottom "div#panel-title" -->
+
+<%= render "decidim/decidim_awesome/admin/shared/visibility_notice", participatory_space: current_conference %>

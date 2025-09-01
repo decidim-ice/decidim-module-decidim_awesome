@@ -4,11 +4,14 @@ module Decidim
   module DecidimAwesome
     module Admin
       class CreateCustomRedirect < Command
+        include NeedsConstraintHelpers
         # Public: Initializes the command.
         #
         def initialize(form)
           @form = form
-          @redirections = AwesomeConfig.find_or_initialize_by(var: :custom_redirects, organization: form.current_organization)
+          @ident = form.to_params[0]
+          @organization = form.current_organization
+          @config_var = :custom_redirects
         end
 
         # Executes the command. Broadcasts these events:
@@ -21,7 +24,8 @@ module Decidim
           return broadcast(:invalid) if form.invalid?
           return broadcast(:invalid, I18n.t("custom_redirects.origin_exists", scope: "decidim.decidim_awesome.admin")) if url_exists?
 
-          create_redirection!
+          create_hash_config!(form.to_params[1])
+
           broadcast(:ok)
         rescue StandardError => e
           broadcast(:invalid, e.message)
@@ -29,21 +33,13 @@ module Decidim
 
         private
 
-        attr_reader :form, :redirections
-
-        delegate :to_params, to: :form
-
-        def create_redirection!
-          redirections.value = {} unless redirections.value.is_a? Hash
-          redirections.value[to_params[0]] = to_params[1]
-          redirections.save!
-        end
+        attr_reader :form
 
         def url_exists?
-          return false unless redirections
-          return false unless redirections.value.is_a? Hash
+          return false unless find_var
+          return false unless find_var.value.is_a? Hash
 
-          redirections.value[form.origin].present?
+          find_var.value[form.origin].present?
         end
       end
     end

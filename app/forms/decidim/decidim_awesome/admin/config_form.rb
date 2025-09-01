@@ -18,13 +18,11 @@ module Decidim
         attribute :proposal_custom_fields, Hash
         attribute :proposal_private_custom_fields, Hash
         attribute :user_timezone, Boolean
-        attribute :force_authorization_after_login, Array
-        attribute :force_authorization_with_any_method, Boolean
+        attribute :force_authorizations, Hash, default: {}
         attribute :hashcash_signup, Boolean
         attribute :hashcash_signup_bits, Integer, default: Decidim::DecidimAwesome.hashcash_signup_bits
         attribute :hashcash_login, Boolean
         attribute :hashcash_login_bits, Integer, default: Decidim::DecidimAwesome.hashcash_login_bits
-        translatable_attribute :force_authorization_help_text, String
         attribute :scoped_admins, Hash
         attribute :menu, [MenuForm]
         attribute :intergram_for_admins, Boolean
@@ -55,28 +53,27 @@ module Decidim
         validates :validate_body_max_marks_together, presence: true, numericality: { greater_than_or_equal_to: 1 }
         validates :hashcash_signup_bits, presence: true, numericality: { greater_than_or_equal_to: 10, less_than_or_equal_to: 50 }
         validates :hashcash_login_bits, presence: true, numericality: { greater_than_or_equal_to: 10, less_than_or_equal_to: 50 }
-        validate :force_authorization_after_login_is_valid
         # TODO: validate non general admins are here
 
         def self.from_params(params, additional_params = {})
           instance = super
-          instance.force_authorization_after_login = instance.force_authorization_after_login.compact_blank if instance.force_authorization_after_login.present?
-          instance.valid_keys = extract_valid_keys_from_params(params)
+          instance.valid_keys = params.keys.map(&:to_sym) || []
+          instance.force_authorizations = build_force_authorizations(instance.force_authorizations)
           instance.sanitize_labels!
           instance.sanitize_arrays!
           instance
         end
 
-        def self.extract_valid_keys_from_params(params)
-          keys = []
-          params.each do |key, _value|
-            keys << if key.to_s.starts_with?("force_authorization_help_text_")
-                      :force_authorization_help_text if keys.exclude?(:force_authorization_help_text)
-                    else
-                      key.to_sym
-                    end
+        def self.build_force_authorizations(raw_groups)
+          raw_groups.transform_values do |group_data|
+            group_data.is_a?(AuthorizationGroupForm) ? group_data : AuthorizationGroupForm.new(group_data)
           end
-          keys
+        end
+
+        def force_authorizations_attributes
+          return {} unless force_authorizations.is_a?(Hash)
+
+          force_authorizations.transform_values(&:verification_settings)
         end
 
         def additional_proposal_sorting_labels
@@ -146,17 +143,6 @@ module Decidim
           scoped_admins.transform_values! do |code|
             code.is_a?(Array) ? code.compact_blank : code
           end
-        end
-
-        private
-
-        def force_authorization_after_login_is_valid
-          return if force_authorization_after_login.blank?
-
-          invalid = force_authorization_after_login - (current_organization.available_authorizations & Decidim.authorization_workflows.map(&:name))
-          return if invalid.empty?
-
-          errors.add(:force_authorization_after_login, :invalid)
         end
       end
     end

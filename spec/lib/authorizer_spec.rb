@@ -3,7 +3,7 @@
 require "spec_helper"
 
 module Decidim::DecidimAwesome
-  describe Authorizator do
+  describe Authorizer do
     subject { described_class.new(user, admin_authorizations) }
     let(:organization) { create(:organization, available_authorizations:) }
     let(:available_authorizations) { [:dummy_authorization_handler, :another_dummy_authorization_handler, :id_documents] }

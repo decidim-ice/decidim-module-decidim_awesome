@@ -4,6 +4,7 @@ module Decidim
   module DecidimAwesome
     module Admin
       class DestroyMenuHack < Command
+        include NeedsConstraintHelpers
         # Public: Initializes the command.
         #
         # item - the menu item to destroy
@@ -11,7 +12,7 @@ module Decidim
         def initialize(item, menu_name, organization)
           @item = item
           @organization = organization
-          @menu = AwesomeConfig.find_by(var: menu_name, organization:)
+          @config_var = menu_name
         end
 
         # Executes the command. Broadcasts these events:
@@ -23,8 +24,8 @@ module Decidim
         def call
           return broadcast(:invalid) unless url_exists?
 
-          menu.value&.reject! { |i| i["url"] == item.url }
-          menu.save!
+          find_var.value&.reject! { |i| i["url"] == item.url }
+          find_var.save!
 
           broadcast(:ok, @item)
         rescue StandardError => e
@@ -33,13 +34,13 @@ module Decidim
 
         private
 
-        attr_reader :organization, :item, :menu
+        attr_reader :organization, :item
 
         def url_exists?
-          return false unless menu
-          return false unless menu.value.is_a? Array
+          return false unless find_var
+          return false unless find_var.value.is_a? Array
 
-          menu.value&.detect { |i| i["url"] == item.url }
+          find_var.value&.detect { |i| i["url"] == item.url }
         end
       end
     end

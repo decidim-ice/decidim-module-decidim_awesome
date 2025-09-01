@@ -33,7 +33,7 @@ module Decidim::DecidimAwesome
           allow(form).to receive(:valid?).and_return(false)
         end
 
-        it "broadcasts :invalid and does not modifiy the config options" do
+        it "broadcasts :invalid and does not modify the config options" do
           expect { subject.call }.to broadcast(:invalid)
 
           expect(AwesomeConfig.find_by(organization:, var: menu_name).value).to eq(previous_menu)
@@ -49,7 +49,7 @@ module Decidim::DecidimAwesome
           expect(AwesomeConfig.find_by(organization:, var: :allow_videos_in_editors).value).to be(true)
         end
 
-        it "do not modifiy current config" do
+        it "do not modify current config" do
           expect(AwesomeConfig.find_by(organization:, var: menu_name).value).to eq(attributes)
           expect { another_config.call }.to broadcast(:ok)
           expect(AwesomeConfig.find_by(organization:, var: menu_name).value).to eq(attributes)

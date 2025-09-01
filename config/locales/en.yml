@@ -10,11 +10,9 @@ en:
         allow_images_in_editors: Allow images in the HTML editor
         allow_images_in_proposals: Allow images in the proposals editor
         allow_videos_in_editors: Allow videos in the HTML editor
+        authorization_options_form: Authorization options
         auto_save_forms: Auto save forms in local storage
-        force_authorization_after_login: Force authorization after login/registering
-        force_authorization_help_text: Help text for the authorization page
-        force_authorization_with_any_method: Allow access if any of the authorizations
-          is granted (by default, all are required)
+        force_authorizations: Authorization group %{id}
         hashcash_login: Enable the Hashcash bot protection for existing users (login)
         hashcash_login_bits: Number of bits for the Hashcash algorithm (login)
         hashcash_signup: Enable the Hashcash bot protection for new users (sign up)
@@ -52,6 +50,7 @@ en:
         validate_title_min_length: Minimum required characters for the title
         validate_title_start_with_caps: Force the title to start with a capital letter
       constraint:
+        application_context: Only for
         component_id: or specifically in
         component_manifest: Only in components of type
         participatory_space_manifest: Apply to participatory spaces of type
@@ -253,7 +252,10 @@ en:
           index:
             admin_head_tags: Awesome tags included in the admin application header
             decidim-admin: From Admin module
+            decidim-assemblies: From Assemblies module
+            decidim-conferences: From Conferences module
             decidim-core: From Core module
+            decidim-participatory_processes: From Participatory Processes module
             decidim-proposals: From Proposals module
             decidim_version: Decidim version %{version}
             errors:
@@ -270,6 +272,7 @@ en:
               You can start the process now and it will be performed in the background.
             start_image_migrations: "👉 Start the migration process now"
         config:
+          anonymous: Non-logged users
           caution: 'NOTE: This feature heavily modifies some default behaviors that
             might lead to unexpected results. Use it with caution!'
           constraints:
@@ -280,6 +283,9 @@ en:
             delete: Delete
             edit: Edit
             title: 'Applicable only in these cases:'
+          create_force_authorization:
+            error: Error creating a new authorization group! %{error}
+            success: Authorization group %{key} created successfully
           create_proposal_custom_field:
             error: Error creating a new "custom field" box! %{error}
             success: '"custom field" box %{key} created successfully'
@@ -289,6 +295,9 @@ en:
           create_scoped_style:
             error: Error creating a new CSS box! %{error}
             success: CSS box %{key} created successfully
+          destroy_force_authorization:
+            error: Error removing authorization group! %{error}
+            success: Authorization group %{key} removed successfully
           destroy_proposal_custom_field:
             error: Error removing "custom field" box! %{error}
             success: '"custom field" box %{key} removed successfully'
@@ -298,6 +307,7 @@ en:
           destroy_scoped_style:
             error: Error removing CSS box! %{error}
             success: CSS box %{key} removed successfully
+          force_authorizations: Authorization groups
           form:
             additional_proposal_sortings:
               enable_all: Enable all additional sorting options
@@ -309,6 +319,7 @@ en:
             errors:
               incorrect_css: 'CSS in box #%{key} is invalid'
               incorrect_json: 'JSON definition in box #%{key} is invalid'
+            force_authorization_help_text: Help text for the authorization page
             help:
               allow_images_in_editors: This will add an image uploader icon in all
                 the WYSIWYG editors
@@ -326,11 +337,6 @@ en:
               drag_and_drop_supported: When uploading images, Drag & Drop is supported.
                 Images will be uploaded to the server and inserted as external resources
                 (it doesn't use base64 inline encoding).
-              force_authorization_after_login: 'If enabled, users will be redirected
-                to the authorization page after login or registration if some of the
-                specified authorizations are not granted. This is useful if you want
-                to force users to be verified with a specific authorization before
-                they can login at all (ie: to prevent spam).'
               force_authorization_help_text: Add a custom text to explain why authorization
                 is required. Also make sure you add a contact method in case users
                 need help.
@@ -412,12 +418,22 @@ en:
               validate_title_min_length: Title is always mandatory and this number
                 cannot be zero
               verifications_html: |
-                Here you can make some tweaks to the verification process.<br>
-                <b>NOTE:</b> Be aware that changing these settings might prevent some users from accessing the platform. Use it with caution!<br><br>
-                Also note that these settings are applied to all users. Admins will always have access to the admin backend though.
+                Here you can put additional access restrictions to participatory spaces or components that will force users to be verified before accessing certain locations (ie: to prevent spam).<br>
+                Restrictions apply to all users but administrators will always have access to the /admin panel.
             validators:
               body: User input validations for the "body" field
               title: User input validations for the "title" field
+          form_force_authorizations:
+            delete: Delete
+            force_authorizations_html: |
+              Define verification groups. Each group can require users to be verified
+              by one or more methods to access specific areas of the platform.
+            help: You can define groups of authorization methods and restrict access
+              based on them.
+            new: Add a new authorization group
+            remove: Remove this "authorization group"
+            sure_to_remove: Are you sure you want to destroy this authorization group?
+            title: 'Restrict access with:'
           form_proposal_custom_fields:
             delete: Delete
             new: Add a new "custom fields" box
@@ -465,6 +481,7 @@ en:
           update:
             error: Error updating configuration! %{error}
             success: Configuration updated successfully
+          user_logged_in: Logged in users
         constraints:
           create:
             error: Error creating condition case
@@ -654,6 +671,11 @@ en:
         scoped_styles:
           menu:
             title: Public frontend
+        visibility:
+          info_html: You can manage additional access restrictions using verifications
+            with %{awesome_link}.
+          restricted_html: This space is using additional access restrictions with
+            %{awesome_link}.
       admin_log:
         component:
           destroy_private_data: "%{user_name} destroyed %{count} items of private
@@ -740,6 +762,8 @@ en:
       proposal_private_custom_fields_disclosure: This information won't be published
       required_authorizations:
         index:
+          authorization_options_invalid: Unfortunately, although you have this authorization,
+            the data used to verify you is not valid in this context.
           cancel: I'll do this in another moment, %{link}.
           granted_title: Granted verifications
           logout: let me logout
