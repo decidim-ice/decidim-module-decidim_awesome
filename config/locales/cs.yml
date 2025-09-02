@@ -9,7 +9,9 @@ cs:
         allow_images_in_editors: Povolit obrázky v HTML editoru
         allow_images_in_proposals: Povolit obrázky v editoru návrhů
         allow_videos_in_editors: Povolit videa v HTML editoru
+        authorization_options_form: Možnosti autorizace
         auto_save_forms: Automaticky ukládat formuláře v místním úložišti
+        force_authorizations: Autorizační skupina %{id}
         hashcash_login: Povolit ochranu Hashcash bota pro existující uživatele (přihlášení)
         hashcash_login_bits: Počet bitů pro hashcash algoritmus (přihlášení)
         hashcash_signup: Povolit ochranu Hashcash bota pro nové uživatele (registrace)
@@ -39,6 +41,7 @@ cs:
         validate_title_min_length: Minimální počet znaků pro tělo zprávy
         validate_title_start_with_caps: Vynutit začít tělo textu velkým písmenem
       constraint:
+        application_context: Pouze pro
         component_id: nebo konkrétně v
         component_manifest: Pouze v komponentách typu
         participatory_space_manifest: Použít na participační prostory typu
@@ -210,7 +213,10 @@ cs:
           index:
             admin_head_tags: Úžasné tagy zahrnuté v hlavičce administrace aplikace
             decidim-admin: Z modulu Admin
+            decidim-assemblies: Z modulu Shromáždění
+            decidim-conferences: Z Konferenční modulu
             decidim-core: Z hlavního Core modulu
+            decidim-participatory_processes: Z modulu participačních procesů
             decidim-proposals: Z modulu Návrhy
             decidim_version: Decidim verze %{version}
             errors:
@@ -225,6 +231,7 @@ cs:
               Můžete zahájit proces nyní a bude probíhat na pozadí.
             start_image_migrations: "\U0001F449 Zahájit proces migrace"
         config:
+          anonymous: Nepřihlášení uživatelé
           caution: 'POZNÁMKA: Tato funkce silně mění některé výchozí chování, které by mohlo vést k neočekávaným výsledkům. Používejte ji s opatrností!'
           constraints:
             add_condition: Přidat případ
@@ -233,6 +240,9 @@ cs:
             delete: Smazat
             edit: Upravit
             title: 'Platí pouze v těchto případech:'
+          create_force_authorization:
+            error: Chyba při vytváření nové autorizační skupiny! %{error}
+            success: Autorizační skupina %{key} byla úspěšně vytvořena
           create_proposal_custom_field:
             error: Chyba při vytváření nového pole "vlastní pole"! %{error}
             success: '"vlastní pole" %{key} úspěšně vytvořeno'
@@ -242,6 +252,9 @@ cs:
           create_scoped_style:
             error: Chyba při vytváření nového CSS boxu! %{error}
             success: CSS box %{key} úspěšně vytvořen
+          destroy_force_authorization:
+            error: Chyba při odstraňování autorizační skupiny! %{error}
+            success: Autorizační skupina %{key} byla úspěšně odstraněna
           destroy_proposal_custom_field:
             error: Chyba při odebírání "vlastního pole"! %{error}
             success: '"vlastní pole" %{key} bylo úspěšně odebráno'
@@ -251,6 +264,7 @@ cs:
           destroy_scoped_style:
             error: Chyba při odstraňování CSS boxu! %{error}
             success: CSS box %{key} byl úspěšně odstraněn
+          force_authorizations: Autorizační skupiny
           form:
             additional_proposal_sortings:
               enable_all: Povolit všechny další možnosti řazení
@@ -302,9 +316,22 @@ cs:
               validate_title_max_caps_percent: Nula nedovolí žádné velké písmeno, 100 bude nutit psát vše velkými písmeny
               validate_title_max_marks_together: 'Omezit počet otazníků a vykřičníků, které lze psát dohromada. Např: Pokud je 2, pak ''!!!'' nebude v textu povoleno'
               validate_title_min_length: Název je vždy povinný a toto číslo nemůže být nulové
+              verifications_html: |
+                Zde můžete nastavit další omezení přístupu do participačních prostor nebo součástí, které budou nutit uživatele k ověření před přístupem k určitým místům (např.: aby se zabránilo spamu).<br>
+                Omezení platí pro všechny uživatele, ale administrátoři budou mít vždy přístup do /admin panelu.
             validators:
               body: Ověření vstupu uživatele pro pole "tělo"
               title: Ověření uživatelem pro pole "Název"
+          form_force_authorizations:
+            delete: Smazat
+            force_authorizations_html: |
+              Definujte ověřovací skupiny. Každá skupina může vyžadovat, aby byli uživatelé ověřeni
+              jednou nebo více metodami přístupu k určitým oblastem platformy.
+            help: Můžete definovat skupiny autorizačních metod a omezit přístup na základě nich.
+            new: Přidat novou autorizační skupinu
+            remove: Odstranit tuto "autorizační skupinu"
+            sure_to_remove: Opravdu chcete odstranit tuto autorizační skupinu?
+            title: 'Omezit přístup s:'
           form_proposal_custom_fields:
             delete: Smazat
             new: Přidat nové pole "vlastní pole"
@@ -351,6 +378,7 @@ cs:
           update:
             error: Chyba při aktualizaci konfigurace! %{error}
             success: Konfigurace byla úspěšně aktualizována
+          user_logged_in: Přihlášení uživatelé
         constraints:
           create:
             error: Chyba při vytváření případu stavu
@@ -532,6 +560,9 @@ cs:
         scoped_styles:
           menu:
             title: Veřejný frontend
+        visibility:
+          info_html: Další omezení přístupu můžete spravovat pomocí ověření s %{awesome_link}.
+          restricted_html: Tento prostor používá další omezení přístupu s %{awesome_link}.
       admin_log:
         component:
           destroy_private_data: "%{user_name} zničil %{count} položky soukromých dat pro %{resource_name} v %{space_name}"
@@ -605,6 +636,7 @@ cs:
       proposal_private_custom_fields_disclosure: Tyto informace nebudou publikovány
       required_authorizations:
         index:
+          authorization_options_invalid: Bohužel, i když máte tuto autorizaci, údaje použité k vašemu ověření v tomto kontextu neplatí.
           cancel: Udělám to za chvíli, %{link}.
           granted_title: Udělená ověření
           logout: dovolte mi odhlásit se
