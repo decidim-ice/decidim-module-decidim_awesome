@@ -31,8 +31,8 @@ module Decidim
 
             # remove presence, length and etiquette validators from :title and :body
             def clear_overridden_validators!
-              overridden_validators.each do |attribute, validators|
-                validators.delete(attribute)
+              overridden_validators.keys.each do |attribute|
+                _validators.delete(attribute)
               end
               overridden_validate_callbacks.each do |callback|
                 _validate_callbacks.delete(callback)
