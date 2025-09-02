@@ -12,7 +12,7 @@ module Decidim
 
           class_methods do
             def overridden_validators
-              _validators.filter do |attribute, validators|
+              _validators.filter do |attribute, _validators|
                 attribute.to_s.start_with?("title") || attribute.to_s.start_with?("body")
               end
             end
@@ -32,7 +32,7 @@ module Decidim
             # remove presence, length and etiquette validators from :title and :body
             def clear_overridden_validators!
               overridden_validators.each do |attribute, validators|
-                _validators.delete(attribute)
+                validators.delete(attribute)
               end
               overridden_validate_callbacks.each do |callback|
                 _validate_callbacks.delete(callback)

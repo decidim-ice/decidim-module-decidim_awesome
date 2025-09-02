@@ -14,7 +14,10 @@ module Decidim
             _validate_callbacks.filter do |callback|
               filter = callback.filter
               attributes = filter.try(:attributes)
-              unless filter.is_a?(EtiquetteValidator) || filter.is_a?(ActiveModel::Validations::LengthValidator) || filter.is_a?(ProposalLengthValidator) || filter.is_a?(ActiveModel::Validations::PresenceValidator)
+              unless filter.is_a?(EtiquetteValidator) ||
+                     filter.is_a?(ActiveModel::Validations::LengthValidator) ||
+                     filter.is_a?(ProposalLengthValidator) ||
+                     filter.is_a?(ActiveModel::Validations::PresenceValidator)
                 next
               end
 
