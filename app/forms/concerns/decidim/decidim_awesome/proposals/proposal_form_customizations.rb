@@ -7,8 +7,35 @@ module Decidim
       module ProposalFormCustomizations
         extend ActiveSupport::Concern
 
+        include ProposalFormCustomizationsBase
+
+        class_methods do
+          def overridden_validate_callbacks
+            _validate_callbacks.filter do |callback|
+              filter = callback.filter
+
+              case filter
+              when EtiquetteValidator, ActiveModel::Validations::LengthValidator, ProposalLengthValidator, ActiveModel::Validations::PresenceValidator
+                filter.attributes.include?(:title) || filter.attributes.include?(:body)
+              when :body_is_not_bare_template
+                true
+              end
+            end
+          end
+
+          # remove presence, length and etiquette validators from :title and :body
+          def clear_overridden_validators!
+            _validators.delete(:title)
+            _validators.delete(:body)
+
+            overridden_validate_callbacks.each do |callback|
+              _validate_callbacks.delete(callback)
+            end
+          end
+        end
+
         included do
-          clear_validators!
+          clear_overridden_validators!
 
           validates :title, presence: true, etiquette: true
           validates :title, proposal_length: {
@@ -22,35 +49,7 @@ module Decidim
             minimum: ->(form) { form.minimum_body_length },
             maximum: ->(form) { form.override_validations? ? 0 : form.component.settings.proposal_length }
           }
-
           validate :body_is_not_bare_template, unless: ->(form) { form.override_validations? }
-
-          def override_validations?
-            return false if context.current_component.settings.participatory_texts_enabled
-
-            custom_fields.present?
-          end
-
-          def minimum_title_length
-            awesome_config.config[:validate_title_min_length].to_i
-          end
-
-          def minimum_body_length
-            awesome_config.config[:validate_body_min_length].to_i
-          end
-
-          def custom_fields
-            @custom_fields ||= awesome_config.collect_sub_configs_values("proposal_custom_field")
-          end
-
-          def awesome_config
-            @awesome_config ||= begin
-              conf = Decidim::DecidimAwesome::Config.new(context.current_organization)
-              conf.context_from_component!(context.current_component)
-              conf.application_context!(current_user: context.current_user)
-              conf
-            end
-          end
         end
       end
     end

@@ -10,7 +10,8 @@ Features:
   - Added application context for config constraints (whether the user is logged or not)
   - Allow to granular permissions to forced verifications.
     **NOTE** Config var `force_authorization_after_login` has changed to `force_authorizations`
-  - Fix use of hashcash in loginModals
+  - Fix use of Hashcash in loginModals
+  - Fix validation overrides in the admin for proposals
 
 v0.12.3
 -------
