@@ -20,12 +20,12 @@ module Decidim
             def overridden_validate_callbacks
               _validate_callbacks.filter do |callback|
                 filter = callback.filter
-                attributes = filter.try(:attributes)
-                next unless filter.is_a?(ActiveModel::Validations::LengthValidator) || filter.is_a?(ActiveModel::Validations::PresenceValidator)
+                if filter.is_a?(ActiveModel::Validations::LengthValidator) ||
+                   filter.is_a?(ActiveModel::Validations::PresenceValidator) ||
+                   filter.is_a?(TranslatablePresenceValidator)
 
-                next unless attributes
-
-                attributes.any? { |attr| attr.to_s.start_with?("title") || attr.to_s.start_with?("body") }
+                  filter.attributes.any? { |attr| attr.to_s.start_with?("title") || attr.to_s.start_with?("body") }
+                end
               end
             end
 
@@ -49,6 +49,8 @@ module Decidim
                 maximum: 150
               }, if: proc { |resource| resource.send(field).present? }
             end
+
+            validates :title, :body, translatable_presence: true, unless: ->(form) { form.override_validations? }
           end
         end
       end
