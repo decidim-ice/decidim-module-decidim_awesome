@@ -9,10 +9,9 @@ ca:
         allow_images_in_editors: Permet imatges a l'editor HTML
         allow_images_in_proposals: Permet imatges a l'editor de propostes
         allow_videos_in_editors: Permet vídeos a l'editor HTML
+        authorization_options_form: Opcions d'autorització
         auto_save_forms: Desa automàticament els formularis a l'emmagatzematge local
-        force_authorization_after_login: Forçar autorització després d'iniciat sessió/registre
-        force_authorization_help_text: Text d'ajuda per la pàgina d'autorització
-        force_authorization_with_any_method: Permetre l'accés si es concedeix alguna de les autoritzacions (per defecte, totes són necessàries)
+        force_authorizations: Grup d'autorització %{id}
         hashcash_login: Activa la protecció HashCash antibot per usuaris existents (inici sessió)
         hashcash_login_bits: Nombre de bits per l'algoritme Hashcash (inici sessió)
         hashcash_signup: Activa la protecció HashCash antibot per usuaris existents (registre)
@@ -42,6 +41,7 @@ ca:
         validate_title_min_length: Nombre de caràcters mínims requerits pel títol de la proposta
         validate_title_start_with_caps: Força que el text del títol s'inici amb una majúscula
       constraint:
+        application_context: Només per
         component_id: o específicament a
         component_manifest: Només en components de tipus
         participatory_space_manifest: Aplica-ho a espais participatius de tipus
@@ -213,7 +213,10 @@ ca:
           index:
             admin_head_tags: Etiquetes Awesome incloses a la capçalera de l'aplicació d'administració
             decidim-admin: Del mòdul Admin
+            decidim-assemblies: Del mòdul Assemblies
+            decidim-conferences: Del mòdul Conferences
             decidim-core: Del mòdul Core
+            decidim-participatory_processes: Del mòdul de Participatory Processes
             decidim-proposals: Del mòdul Proposals
             decidim_version: Versió de Decidim %{version}
             errors:
@@ -228,6 +231,7 @@ ca:
               Pots iniciar el procés ara i es durà a terme en segon pla.
             start_image_migrations: "\U0001F449 Iniciar el procés de migració ara"
         config:
+          anonymous: Usuaris no identificats
           caution: 'NOTA: Aquesta funció modifica en gran mesura alguns comportaments predeterminats que podrien provocar resultats inesperats. Utilitzeu-lo amb precaució!'
           constraints:
             add_condition: Afegeix una restricció
@@ -236,6 +240,9 @@ ca:
             delete: Esborra
             edit: Edita
             title: 'S''aplica només en aquests casos:'
+          create_force_authorization:
+            error: Error en crear un nou grup d'autorització! %{error}
+            success: Grup d'autorització %{key} creat correctament
           create_proposal_custom_field:
             error: Error en crear una nova caixa de "camps personalitzats"! %{error}
             success: 'Caixa de "camps personalitzats" %{key} creada correctament'
@@ -245,6 +252,9 @@ ca:
           create_scoped_style:
             error: Error en crear una nova caixa CSS! %{error}
             success: Caixa CSS %{key} creada correctament
+          destroy_force_authorization:
+            error: Error en eliminar el grup d'autorització! %{error}
+            success: Grup d'autorització %{key} eliminat correctament
           destroy_proposal_custom_field:
             error: Error en eliminar la caixa de "camps personalitzats"! %{error}
             success: 'Caixa de "camps personalitzats" %{key} eliminada correctament'
@@ -254,6 +264,7 @@ ca:
           destroy_scoped_style:
             error: Error en eliminar una caixa CSS! %{error}
             success: Caixa CSS %{key} eliminada correctament
+          force_authorizations: Grups d'autoritzacions
           form:
             additional_proposal_sortings:
               enable_all: Activa totes les opcions d'ordenació addicionals
@@ -263,13 +274,13 @@ ca:
             errors:
               incorrect_css: 'El CSS de la caixa #%{key} no és vàlid'
               incorrect_json: 'La sintaxi JSON de la caixa #%{key} és invàlida'
+            force_authorization_help_text: Text d'ajuda per la pàgina d'autorització
             help:
               allow_images_in_editors: Això afegirà una icona per pujar arxius a l'editor HTML
               allow_images_in_proposals: Això permetrà pujar imatges a l'editor de propostes, disponible per qualsevol usuari
               allow_videos_in_editors: Això afegirà una icona per enllaçar vídeos a l'editor HTML
               auto_save_forms: Això farà servir l'emmagatzematge local del navegador per desar automàticament les dades introduïdes pels usuaris a les enquestes i altres formularis mentre les omplen. Les dades es restauraran en una futura visita amb el mateix navegador en cas que no s'enviï el formulari. Si s’envia el formulari, s’eliminaran les dades locals. Si els usuaris eliminen les seves dades del navegador, tampoc es restauraran.
               drag_and_drop_supported: Quan es pugin imatges, es pot fer a través del mètode de "arrossegar i deixar anar". Les imatges seran pujades al servidor i inserides com recursos externs (no es fa servir codificació en línia base64).
-              force_authorization_after_login: 'Si està habilitat, les usuàries seran redireccionades a la pàgina d''autorització després de l''inici de sessió o registre si algunes de les autoritzacions especificades no són concedides. Això és útil si voleu forçar les usuàries a que es verifiquin a través d''una autorització específica abans que puguin iniciar sessió en qualsevol moment (per exemple: per prevenir spam).'
               force_authorization_help_text: Afegeix un text personalitzat per explicar per què cal l'autorització. Assegureu-vos també d'afegir un mode de contacte en cas que les usuàries necessitin ajuda.
               hashcash_i18n_key: 'Podeu personalitzar el text del botó que es mostra als usuaris a les pàgines d''iniciar sessió/registre amb la clau i18n %{key}'
               hashcash_login: |
@@ -306,12 +317,20 @@ ca:
               validate_title_max_marks_together: 'Limiteu el nombre de signes d''interrogació i d''exclamació que es poden escriure junts. És a dir: si és 2, aleshores ''!!!'' no es permetrà al text'
               validate_title_min_length: El títol sempre és obligatori i aquest número no pot ser zero
               verifications_html: |
-                Aquí pots fer alguns ajustaments en el procés de verificació.<br>
-                <b>NOTA:</b> Tingues en compte que canviar aquests paràmetres pot impedir que algunes usuàries accedeixin a la plataforma. Fes-ho servir amb precaució!<br><br>
-                Tingues en compte també, que aquests paràmetres s'apliquen a totes les usuàries. Les administradores sempre tindran accés al tauler dadministració.
+                Aquí podeu establir restriccions d'accés addicionals a espais o components participatius que obligaran els usuaris a ser verificats abans d'accedir a determinades ubicacions (per exemple: per evitar correu brossa).<br>
+                Les restriccions s'apliquen a tots els usuaris, però els administradors sempre tindran accés al tauler /admin.
             validators:
               body: Validacions d'entrada per l'usuari en el camp cos de la proposta
               title: Validacions d'entrada per l'usuari en el camp títol de la proposta
+          form_force_authorizations:
+            delete: Esborra
+            force_authorizations_html: |
+              Definiu grups de verificació. Cada grup pot requerir que els usuaris siguin verificats per un o més mètodes per accedir a àrees específiques de la plataforma.
+            help: Podeu definir grups de mètodes d'autorització i restringir l'accés en funció d'aquests.
+            new: Afegeix un nou grup d'autorització
+            remove: Elimina aquest grup d'autorització
+            sure_to_remove: Estàs segura que vols eliminar aquest grup d'autoritzacions?
+            title: 'Restringeix l''accés amb:'
           form_proposal_custom_fields:
             delete: Esborra
             new: Afegeix una nova caixa de "camps personalitzats"
@@ -358,6 +377,7 @@ ca:
           update:
             error: Error actualitzant la configuració! %{error}
             success: Configuració actualitzada correctament
+          user_logged_in: Usuaris amb la sessió iniciada
         constraints:
           create:
             error: Error creant una nova restricció
@@ -539,6 +559,9 @@ ca:
         scoped_styles:
           menu:
             title: Interfície pública
+        visibility:
+          info_html: Podeu gestionar restriccions d'accés addicionals mitjançant verificacions amb %{awesome_link}.
+          restricted_html: Aquest espai utilitza restriccions d'accés addicionals amb %{awesome_link}.
       admin_log:
         component:
           destroy_private_data: "%{user_name} ha destruït %{count} elements de dades privades per a %{resource_name} a %{space_name}"
@@ -612,6 +635,7 @@ ca:
       proposal_private_custom_fields_disclosure: Aquesta informació no es publicarà
       required_authorizations:
         index:
+          authorization_options_invalid: Malauradament, tot i que teniu aquesta autorització, les dades utilitzades per verificar-vos no són vàlides en aquest context.
           cancel: Això ho faré en un altre moment, %{link}.
           granted_title: Verificacions concedides
           logout: deixa'm tancar la sessió

@@ -1,4 +1,7 @@
 ja:
+  active_hashcash:
+    submit_filter: フィルター
+    waiting_label: 検証を待っています…
   activemodel:
     attributes:
       config:
@@ -6,10 +9,13 @@ ja:
         allow_images_in_editors: HTMLエディターで画像を許可する
         allow_images_in_proposals: 提案エディターでの画像を許可する
         allow_videos_in_editors: HTMLエディターで動画を許可する
+        authorization_options_form: 認証オプション
         auto_save_forms: ローカルストレージにフォームを自動保存する
-        force_authorization_after_login: ログイン/登録後に本人確認を行わせる
-        force_authorization_help_text: 認証ページのヘルプテキスト
-        force_authorization_with_any_method: いずれかの認証が行われている場合、アクセスできます (デフォルトでは、すべてが必要です)
+        force_authorizations: 認証グループ %{id}
+        hashcash_login: 既存ユーザーのハッシュキャッシュボット保護を有効にする (ログイン)
+        hashcash_login_bits: Hashcashアルゴリズムのビット数 (ログイン)
+        hashcash_signup: 新規ユーザーのハッシュキャッシュボット保護を有効にする (新規登録)
+        hashcash_signup_bits: Hashcashアルゴリズムのビット数 (新規登録)
         intergram_auto_no_response: ユーザーが最初のメッセージを送信し、応答が受信されなかった後1分後に送信されたメッセージ
         intergram_auto_response: ユーザーが最初のメッセージを送信した直後に送信されるメッセージ
         intergram_chat_id: チャットID
@@ -35,6 +41,7 @@ ja:
         validate_title_min_length: タイトルに必要な最小文字数
         validate_title_start_with_caps: タイトルを大文字で始めることを強制する
       constraint:
+        application_context: '対象:'
         component_id: 以下のみに適用
         component_manifest: このタイプのコンポーネントのみ有効
         participatory_space_manifest: 以下のタイプの参加型スペースに適用
@@ -206,7 +213,10 @@ ja:
           index:
             admin_head_tags: 管理者向けアプリケーションヘッダーに含まれる Awesome tags
             decidim-admin: Adminモジュールより
+            decidim-assemblies: 参加スペースモジュールから
+            decidim-conferences: カンファレンスモジュールから
             decidim-core: Coreモジュールより
+            decidim-participatory_processes: 参加型プロセスモジュールから
             decidim-proposals: 提案モジュールより
             decidim_version: Decidim version %{version}
             errors:
@@ -221,6 +231,7 @@ ja:
               処理を開始すると、バックグラウンドで実行されます。
             start_image_migrations: "\U0001F449 今すぐ移行プロセスを開始する"
         config:
+          anonymous: 非ログインユーザー
           caution: '注意: この機能は、予期しない結果につながる可能性があるデフォルトの動作を大きく変更します。注意して使用してください！'
           constraints:
             add_condition: 条件を追加
@@ -229,6 +240,9 @@ ja:
             delete: 削除
             edit: 編集
             title: '一部のケースのみ適用する:'
+          create_force_authorization:
+            error: 新しい認証グループの作成中にエラーが発生しました %{error}
+            success: 認証グループ %{key} を作成しました
           create_proposal_custom_field:
             error: 新しい「カスタム項目」ボックスの作成中にエラーが発生しました! %{error}
             success: '「カスタム項目」ボックス %{key} が正常に作成されました'
@@ -238,6 +252,9 @@ ja:
           create_scoped_style:
             error: '新規CSS box作成エラー: %{error}'
             success: CSS box %{key} が正常に作成されました
+          destroy_force_authorization:
+            error: 認証グループの削除中にエラーが発生しました %{error}
+            success: 認証グループ %{key} を削除しました
           destroy_proposal_custom_field:
             error: '「カスタム項目」ボックスの削除中にエラーが発生しました! %{error}'
             success: '「カスタム項目」ボックス %{key} が正常に削除されました'
@@ -247,6 +264,7 @@ ja:
           destroy_scoped_style:
             error: 'CSS box削除エラー: %{error}'
             success: CSS ボックス %{key} は正常に削除されました
+          force_authorizations: 認証グループ
           form:
             additional_proposal_sortings:
               enable_all: すべての追加ソートオプションを有効にする
@@ -256,14 +274,23 @@ ja:
             errors:
               incorrect_css: 'Box #%{key} のCSSに問題があります'
               incorrect_json: 'ボックス #%{key} 内の JSON 定義は無効です'
+            force_authorization_help_text: 認証ページのヘルプテキスト
             help:
               allow_images_in_editors: すべてのWYSIWYGエディタに画像アップローダーアイコンを追加します
               allow_images_in_proposals: 提案エディターでの画像アップロードをすべてのユーザーができるようにします。
               allow_videos_in_editors: すべてのWYSIWYGエディタに動画リンクアイコンを追加します
               auto_save_forms: 調査などのフォームにユーザーが入力したデータを、LocalStorageを使って自動的に保存します。フォームを送信されていない場合、同じブラウザーで次回アクセスした時に復元されます。フォームを送信すると、データは削除されます。ユーザーがLocalStrorageのデータを削除した場合にも、データは復元されなくなります。
               drag_and_drop_supported: 画像アップロード時にドラッグ&ドロップが利用できます。画像はサーバーにアップロードされ、外部リソースとして挿入されます(base64インラインエンコーディングは使用しません).
-              force_authorization_after_login: '有効にした場合、指定された認証が行われていなければ、ユーザーはログインまたは登録後に認証ページにリダイレクトされます。これはユーザーがログインする前に、特定の認証を使用してユーザーを強制的に本人確認させる場合(スパムを防ぐためなど) に便利です。'
               force_authorization_help_text: 認証が必要な理由を説明するカスタムテキストを追加します。また、ユーザーがヘルプが必要な場合に備えて連絡方法を追加してください。
+              hashcash_i18n_key: 'ユーザーに表示されるログイン/登録ボタンのテキストは、i18n キー: %{key} でカスタマイズできます'
+              hashcash_login: |
+                人間を煩わせることなく、Railsアプリケーションをボットや総当たり攻撃から守ります。
+                Hashcashはプルーフ・オブ・ワーク方式の仕組みで、ユーザーがサインアップする前に計算上のパズルを解かせるものです（これはブラウザが自動的に実行します）。
+              hashcash_login_bits: このパラメータは、ハッシュキャッシュアルゴリズムが作業証明書の生成に使用するビット数を定義します。 16 (簡単) から 30 (極めて困難) ビットの間の値を使用することをお勧めします。 ログインフォームのデフォルト値は %{bits} ビットです。
+              hashcash_signup: |
+                人間を煩わせることなく、Railsアプリケーションをボットや総当たり攻撃から守ります。
+                Hashcashはプルーフ・オブ・ワーク方式の仕組みで、ユーザーがサインアップする前に計算上のパズルを解かせるものです（これはブラウザが自動的に実行します）。
+              hashcash_signup_bits: このパラメータは、ハッシュキャッシュアルゴリズムが作業証明書の生成に使用するビット数を定義します。 16 (簡単) から 30 (極めて困難) ビットの間の値を使用することをお勧めします。 登録フォームのデフォルト値は %{bits} ビットです。
               intergram_about: IntergramはTelegramメッセンジャーを使用してページの下部に埋め込まれたライブサポートチャットウィジェットを処理します。
               intergram_config: '<a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> をグループに招待するか、直接チャットを開始します。 <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               original_editor_override: バージョン 0.26 以降、エディタに画像をアップロードすることが可能になりました(管理者専用)。 そのため、ここでの画像設定はパブリックエディタにのみ影響を与えます(管理者は常に利用可能です)。
@@ -290,12 +317,20 @@ ja:
               validate_title_max_marks_together: '並べて入力できる「?」と「!」の数を制限します。 すなわち、それが2の場合、「!!!」はテキストに記入できません'
               validate_title_min_length: タイトルは常に必須です。この数字はゼロにはできません
               verifications_html: |
-                認証プロセスにいくつかの調整を加えることができます。<br>
-                <b>注意：</b> これらの設定を変更すると、一部のユーザーがプラットフォームにアクセスできなくなる可能性があります。慎重に使用してください！<br><br>
-                また、これらの設定は全ユーザーに適用されますが、管理者は常に管理者バックエンドにアクセス可能です。
+                ここでは、参加スペースやコンポーネントに追加のアクセス制限を設けることができ、特定の場所へアクセスする前にユーザーの認証を必須とすることができます（スパム防止など）。
+                制限はすべてのユーザーに適用されますが、管理者は常に /admin パネルにアクセスできます。
             validators:
               body: '「body」フィールドのユーザー入力検証'
               title: '「タイトル」フィールドのユーザー入力検証'
+          form_force_authorizations:
+            delete: 削除
+            force_authorizations_html: |
+              認証グループを定義します。各グループでは、ユーザーがプラットフォーム内の特定のエリアにアクセスするために、1つ以上の方法で認証を受けることを必須とできます。
+            help: 認証方式のグループを定義し、それに基づいてアクセスを制限することができます。
+            new: 新しい認証グループを追加
+            remove: この「認証グループ」を削除
+            sure_to_remove: この認証グループを削除してもよろしいですか？
+            title: 'アクセス制限:'
           form_proposal_custom_fields:
             delete: 削除
             new: 新しい「カスタム項目」ボックスを追加
@@ -342,6 +377,7 @@ ja:
           update:
             error: 設定更新エラー %{error}
             success: 設定は正常に更新されました
+          user_logged_in: ログインしているユーザー
         constraints:
           create:
             error: 条件設定作成エラー
@@ -399,6 +435,25 @@ ja:
           update:
             error: 'リダイレクトの更新中にエラーが発生しました: %{error}'
             success: リダイレクトを更新しました
+        hashcash:
+          filters:
+            ip_addresses: IP アドレスを表示
+            stamps: ハッシュキャッシュスタンプを表示
+          index:
+            bits: ビット数
+            created_at: 作成日時
+            help_html: |
+              このページには、システムで検出されたハッシュキャッシュスタンプが表示されます。 Hashcashは、ユーザーがサインアップする前に計算パズル(ブラウザによって自動的に実行される)を解決する必要がある作業証明システムです。
+              <br><br>
+              このリストの各エントリは、新規登録またはログインするたびにユーザーによって生成されたハッシュキャッシュスタンプを表します。
+            ip_address: IPアドレス
+            no_data: ハッシュキャッシュスタンプが見つかりません
+            request_path: リクエストパス
+          ip_addresses:
+            help_html: このページには、システムで検出されたすべてのIPアドレスが、生成したHashcashスタンプの数順に一覧表示されます。 <br><br>各スタンプは、ユーザーによるログインまたはサインアップのいずれかの操作を表します。この情報を利用して、不審な活動を検出することができます。
+            ip_address: IPアドレス
+            no_data: IPアドレスが見つかりません
+            stamps: Hashcashスタンプ
         menu:
           admins: スコープ付き管理者
           custom_redirects: カスタムリダイレクト
@@ -406,6 +461,7 @@ ja:
           livechat: ライブチャット
           maintenance:
             checks: システム互換性
+            hashcash: Hashcashスタンプ
             maintenance: メンテナンス
             private_data: プライベートデータ
           menu_hacks: メニュー調整
@@ -442,6 +498,8 @@ ja:
               title: グローバルメニューホームブロック
             menu:
               title: メインメニュー
+            mobile_menu:
+              title: モバイルメニュー
             new: 新しい項目
             remove: 追加の削除
             remove_hack: カスタマイズの削除
@@ -502,6 +560,9 @@ ja:
         scoped_styles:
           menu:
             title: 公開フロントエンド
+        visibility:
+          info_html: '%{awesome_link} による検証を使用して、追加のアクセス制限を管理できます。'
+          restricted_html: このスペースは %{awesome_link} による追加のアクセス制限を使用しています。
       admin_log:
         component:
           destroy_private_data: "%{user_name} は %{space_name} 内のプライベートデータの項目 %{resource_name} を%{count} 件破棄しました"
@@ -573,6 +634,7 @@ ja:
       proposal_private_custom_fields_disclosure: この情報は公開されません
       required_authorizations:
         index:
+          authorization_options_invalid: 残念ながら、この権限を持っていますが、あなたを検証するために使用されたデータは、このコンテキストでは無効です。
           cancel: あとで %{link} を行う
           granted_title: 許可された本人確認
           logout: ログアウトする
@@ -639,6 +701,7 @@ ja:
             title: 'メンテナンスツール： %{title}'
             titles:
               checks: システム互換性チェック
+              hashcash: Hashcashスタンプ
               private_data: プライベートデータのクリーンアップ
         awesome_config:
           amendments: 修正

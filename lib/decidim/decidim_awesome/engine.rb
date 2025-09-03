@@ -30,7 +30,7 @@ module Decidim
           # Add hashcash to signup and login
           Decidim::Devise::SessionsController.include(Decidim::DecidimAwesome::NeedsHashcash)
           Decidim::Devise::RegistrationsController.include(Decidim::DecidimAwesome::NeedsHashcash)
-          Decidim::Components::BaseController.include(Decidim::DecidimAwesome::NeedsHashcash)
+          Decidim::ApplicationController.include(Decidim::DecidimAwesome::NeedsHashcash)
         end
         # Include additional helpers globally
         ActiveSupport.on_load(:action_view) { include Decidim::DecidimAwesome::AwesomeHelpers }
@@ -45,8 +45,6 @@ module Decidim
                                    :validate_body_max_marks_together,
                                    :validate_body_start_with_caps)
           EtiquetteValidator.include(Decidim::DecidimAwesome::EtiquetteValidatorOverride)
-          Decidim::Proposals::ProposalForm.include(Decidim::DecidimAwesome::Proposals::ProposalFormAwesomeConfig)
-          Decidim::Proposals::Admin::ProposalForm.include(Decidim::DecidimAwesome::Proposals::ProposalFormAwesomeConfig)
         end
 
         # Custom fields need to deal with several places
@@ -61,6 +59,7 @@ module Decidim
                                    :validate_body_max_marks_together,
                                    :validate_body_start_with_caps)
           Decidim::Proposals::ProposalForm.include(Decidim::DecidimAwesome::Proposals::ProposalFormCustomizations)
+          Decidim::Proposals::Admin::ProposalForm.include(Decidim::DecidimAwesome::Proposals::Admin::ProposalFormCustomizations)
         end
 
         if DecidimAwesome.enabled?(:proposal_custom_fields, :proposal_private_custom_fields)

@@ -4,6 +4,7 @@ require "spec_helper"
 
 describe "Hashcash protector", :perform_enqueued do
   let(:organization) { create(:organization, available_locales: [:en]) }
+  let!(:component) { create(:proposal_component, :with_creation_enabled, organization:) }
   let!(:awesome_hashcash_login) { create(:awesome_config, organization:, var: :hashcash_login, value: hashcash_login) }
   let!(:awesome_hashcash_signup) { create(:awesome_config, organization:, var: :hashcash_signup, value: hashcash_signup) }
   let!(:awesome_hashcash_login_bits) { create(:awesome_config, organization:, var: :hashcash_login_bits, value: hashcash_login_bits) }
@@ -14,23 +15,39 @@ describe "Hashcash protector", :perform_enqueued do
   let(:hashcash_signup_bits) { 30 }
   let!(:user) { create(:user, :confirmed, organization:) }
 
+  shared_examples "checking the form hidden fields" do
+    it "adds the hidden hashcash field to the login form" do
+      expect(page).to have_field("hashcash", type: :hidden)
+      expect(page).to have_button("Waiting for verification ...", disabled: true)
+    end
+
+    it "adds the hidden hashcash field to the signup form" do
+      within ".login__info, .login__modal-links" do
+        click_on "Create an account"
+      end
+
+      expect(page).to have_field("hashcash", type: :hidden)
+      expect(page).to have_button("Waiting for verification ...", disabled: true)
+    end
+  end
+
   before do
     switch_to_host(organization.host)
     visit decidim.new_user_session_path
   end
 
-  it "adds the hidden hashcash field to the login form" do
-    expect(page).to have_field("hashcash", type: :hidden)
-    expect(page).to have_button("Waiting for verification ...", disabled: true)
+  context "when the user logs_in in session controller" do
+    include_examples "checking the form hidden fields"
   end
 
-  it "adds the hidden hashcash field to the signup form" do
-    within ".login__info" do
-      click_on "Create an account"
+  context "when the user logs_in inside a component" do
+    before do
+      switch_to_host(organization.host)
+      visit main_component_path(component)
+      click_on "New proposal"
     end
 
-    expect(page).to have_field("hashcash", type: :hidden)
-    expect(page).to have_button("Waiting for verification ...", disabled: true)
+    include_examples "checking the form hidden fields"
   end
 
   context "when hashcash is resolved" do

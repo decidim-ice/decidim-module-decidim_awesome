@@ -9,10 +9,9 @@ de:
         allow_images_in_editors: Bilder im HTML-Editor erlauben
         allow_images_in_proposals: Bilder im Vorschlags-Editor erlauben
         allow_videos_in_editors: Videos im HTML-Editor erlauben
+        authorization_options_form: Autorisierungsoptionen
         auto_save_forms: Formulare automatisch lokal speichern
-        force_authorization_after_login: Autorisierung nach Anmelden/Registrierung erzwingen
-        force_authorization_help_text: Hilfetext für die Autorisierungsseite
-        force_authorization_with_any_method: Erlaube Zugriff, wenn eine der Genehmigungen erteilt wird (standardmäßig sind alle erforderlich)
+        force_authorizations: Autorisierungsgruppe %{id}
         hashcash_login: Den Hashcash Bot-Schutz für bestehende Benutzende aktivieren (Anmeldung)
         hashcash_login_bits: Anzahl der Bits für den Hashcash Algorithmus (Anmeldung)
         hashcash_signup: Den Hashcash Bot-Schutz für neue Benutzende aktivieren (Registrierung)
@@ -42,6 +41,7 @@ de:
         validate_title_min_length: Minimale zwingend erforderliche Anzahl Zeichen im Titel
         validate_title_start_with_caps: Titel muss zwingend mit einem Großbuchstaben beginnen
       constraint:
+        application_context: Nur für
         component_id: oder spezifisch in
         component_manifest: Nur in Komponenten vom Typ
         participatory_space_manifest: Anwenden auf partizipative Bereiche vom Typ
@@ -213,7 +213,10 @@ de:
           index:
             admin_head_tags: Angezeigte Awesome Tags im Admin Application Header
             decidim-admin: decidim-admin
+            decidim-assemblies: Vom Gremien-Modul
+            decidim-conferences: Von Konferenz-Modul
             decidim-core: Vom Kernmodul
+            decidim-participatory_processes: Vom Beteiligungsprozess-Bereich
             decidim-proposals: Von der Vorschlags-Komponente
             decidim_version: Decidim Version %{version}
             errors:
@@ -228,6 +231,7 @@ de:
               Sie können den Prozess jetzt starten und er wird im Hintergrund ausgeführt.
             start_image_migrations: "\U0001F449 Starten Sie den Migrationsprozess jetzt"
         config:
+          anonymous: Nicht eingeloggte Nutzende
           caution: 'HINWEIS: Mit dieser Funktion werden einige Standardverhaltensweisen stark verändert, was zu unerwarteten Ergebnissen führen kann. Verwenden Sie sie mit Vorsicht!'
           constraints:
             add_condition: Einschränkung hinzufügen
@@ -236,6 +240,9 @@ de:
             delete: Löschen
             edit: Bearbeiten
             title: 'Einschränkungen'
+          create_force_authorization:
+            error: Fehler beim Erstellen einer neuen Autorisierungsgruppe! %{error}
+            success: Autorisierungsgruppe %{key} erfolgreich erstellt
           create_proposal_custom_field:
             error: Beim Erstellen eines neuen Eingabefeldes ist ein Fehler aufgetreten! %{error}
             success: 'Eingabefeld %{key} erfolgreich erstellt!'
@@ -245,6 +252,9 @@ de:
           create_scoped_style:
             error: Fehler beim Erstellen einer neuen CSS-Box! %{error}
             success: CSS-Box %{key} erfolgreich erstellt
+          destroy_force_authorization:
+            error: Fehler beim Entfernen der Autorisierungsgruppe! %{error}
+            success: Autorisierungsgruppe %{key} erfolgreich entfernt
           destroy_proposal_custom_field:
             error: Das Eingabefeld konnte aufgrund eines Fehlers nicht entfernt werden! %{error}
             success: 'Das Eingabefeld %{key} wurde erfolgreich entfernt.'
@@ -254,6 +264,7 @@ de:
           destroy_scoped_style:
             error: Fehler beim Entfernen der CSS-Box! %{error}
             success: CSS-Box %{key} erfolgreich entfernt
+          force_authorizations: Autorisierungsgruppen
           form:
             additional_proposal_sortings:
               enable_all: Alle zusätzlichen Sortieroptionen aktiviert
@@ -263,13 +274,13 @@ de:
             errors:
               incorrect_css: 'CSS in Box #%{key} ist ungültig'
               incorrect_json: 'JSON-Definition in Box #%{key} ist ungültig'
+            force_authorization_help_text: Hilfetext für die Autorisierungsseite
             help:
               allow_images_in_editors: Dies fügt ein Bild-Upload-Symbol in allen WYSIWYG-Editoren hinzu
               allow_images_in_proposals: Bilder in Vorschlägen erlauben
               allow_videos_in_editors: Dies fügt ein Video-Upload-Symbol in allen WYSIWYG-Editoren hinzu
               auto_save_forms: Formulare automatisch speichern
               drag_and_drop_supported: Drag and Drop unterstützen
-              force_authorization_after_login: 'Wenn aktiviert, werden Benutzer nach Login oder Registrierung auf die Autorisierungsseite weitergeleitet, wenn einige der angegebenen Autorisierungen nicht gewährt werden. Dies ist nützlich, wenn Sie Benutzer mit einer bestimmten Berechtigung verifizieren wollen, bevor sie sich überhaupt einloggen können (z. B. um Spam zu verhindern).'
               force_authorization_help_text: Fügen Sie einen benutzerdefinierten Text hinzu, um zu erklären, warum eine Autorisierung erforderlich ist. Stellen Sie auch sicher, dass Sie eine Kontaktmethode hinzufügen, falls Benutzer Hilfe benötigen.
               hashcash_i18n_key: 'Sie können den Text, der den Benutzenden in den Anmelde-Buttons angezeigt wird, mit folgendem i18n-Key anpassen: %{key}'
               hashcash_login: |
@@ -306,12 +317,20 @@ de:
               validate_title_max_marks_together: 'Begrenzt die Anzahl der Frage- und Ausrufezeichen, die zusammen geschrieben werden können. Zum Beispiel: Der Wert 2 führt dazu, dass ''!!!'' im Text nicht erlaubt ist'
               validate_title_min_length: Der Titel ist immer obligatorisch und diese Zahl kann nicht Null sein
               verifications_html: |
-                Hier können Sie einige Änderungen am Verifizierungsprozess vornehmen.<br>
-                <b>HINWEIS:</b> Beachten Sie, dass das Ändern dieser Einstellungen einige Benutzer am Zugriff auf die Plattform hindern könnte. Verwenden Sie es mit Vorsicht!<br><br>
-                Beachten Sie auch, dass diese Einstellungen auf alle Benutzer angewendet werden. Administratoren haben jedoch immer Zugriff auf das Admin-Backend.
+                Hier können Sie zusätzliche Zugriffsbeschränkungen für Partizipationsbereiche oder Komponenten vornehmen, die Nutzende vor dem Zugriff auf bestimmte Standorte auffordert, sich zu verifizieren (z.B. um Spam zu verhindern).<br>
+                Beschränkungen gelten für alle Nutzenden, aber Admins haben immer Zugriff auf das /admin Panel.
             validators:
               body: Eingabevalidierungen für das Feld "Textkörper"
               title: Eingabevalidierungen für das Feld "Titel"
+          form_force_authorizations:
+            delete: Löschen
+            force_authorizations_html: |
+              Verifizierungsgruppen definieren. Jede Gruppe kann Nutzenden eine oder mehrere Verifizierungsarten für bestimmte Bereiche der Plattform vorschreiben.
+            help: Sie können Gruppen von Autorisierungsmethoden definieren und den darauf basierenden Zugriff einschränken.
+            new: Eine neue Autorisierungsgruppe hinzufügen
+            remove: Diese "Autorisierungsgruppe" entfernen
+            sure_to_remove: Sind Sie sicher, dass Sie diese Autorisierungsgruppe löschen möchten?
+            title: 'Zugriff beschränken mit:'
           form_proposal_custom_fields:
             delete: Löschen
             new: Neues Eingabefeld
@@ -358,6 +377,7 @@ de:
           update:
             error: Fehler beim Aktualisieren der Konfiguration! %{error}
             success: Konfiguration erfolgreich aktualisiert
+          user_logged_in: Angemeldete Nutzende
         constraints:
           create:
             error: Es gab einen Fehler beim Erstellen der Einschränkung
@@ -534,6 +554,9 @@ de:
         scoped_styles:
           menu:
             title: Öffentliches Frontend
+        visibility:
+          info_html: Sie können zusätzliche Zugriffsbeschränkungen mit %{awesome_link} verwalten.
+          restricted_html: Dieser Bereich verwendet zusätzliche Zugriffsbeschränkungen mit %{awesome_link}.
       admin_log:
         component:
           destroy_private_data: "%{user_name} hat %{count} private Daten für %{resource_name} in %{space_name} gelöscht"
@@ -599,6 +622,7 @@ de:
       proposal_private_custom_fields_disclosure: Diese Informationen werden nicht veröffentlicht
       required_authorizations:
         index:
+          authorization_options_invalid: Obwohl Sie diese Genehmigung besitzen, sind die zur Überprüfung verwendeten Daten in diesem Zusammenhang leider nicht gültig.
           cancel: Ich werde das in einem anderen Moment tun, %{link}.
           granted_title: Gewährte Verifizierungen
           logout: abmelden lassen
