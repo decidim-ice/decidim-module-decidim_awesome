@@ -13,17 +13,13 @@ module Decidim
           def overridden_validate_callbacks
             _validate_callbacks.filter do |callback|
               filter = callback.filter
-              attributes = filter.try(:attributes)
-              unless filter.is_a?(EtiquetteValidator) ||
-                     filter.is_a?(ActiveModel::Validations::LengthValidator) ||
-                     filter.is_a?(ProposalLengthValidator) ||
-                     filter.is_a?(ActiveModel::Validations::PresenceValidator)
-                next
+
+              case filter
+              when EtiquetteValidator, ActiveModel::Validations::LengthValidator, ProposalLengthValidator, ActiveModel::Validations::PresenceValidator
+                filter.attributes.include?(:title) || filter.attributes.include?(:body)
+              when :body_is_not_bare_template
+                true
               end
-
-              next unless attributes
-
-              attributes.include?(:title) || attributes.include?(:body)
             end
           end
 
@@ -53,6 +49,7 @@ module Decidim
             minimum: ->(form) { form.minimum_body_length },
             maximum: ->(form) { form.override_validations? ? 0 : form.component.settings.proposal_length }
           }
+          validate :body_is_not_bare_template, unless: ->(form) { form.override_validations? }
         end
       end
     end
