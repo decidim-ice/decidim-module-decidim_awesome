@@ -1,6 +1,6 @@
 {
   "name": "decidim-module-decidim_awesome",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "description": "Mods and tweaks for Decidim",
   "main": "index.js",
   "directories": {
@@ -34,11 +34,11 @@
   },
   "prettier": "@decidim/prettier-config",
   "devDependencies": {
-    "@decidim/dev": "0.29.4",
-    "@decidim/eslint-config": "0.29.4",
-    "@decidim/prettier-config": "0.29.4",
-    "@decidim/stylelint-config": "0.29.4",
-    "postcss-scss": "^4.0.9"
+    "@decidim/dev": "0.30.0",
+    "@decidim/eslint-config": "0.30.0",
+    "@decidim/prettier-config": "0.30.0",
+    "@decidim/stylelint-config": "0.30.0",
+    "@decidim/webpacker": "0.30.0"
   },
   "dependencies": {
     "codemirror": "^5.65.16",
@@ -47,7 +47,6 @@
     "formbuilder-languages": "^1.2.0",
     "inline-attacher": "^0.0.7",
     "jsrender": "^1.0.9",
-    "leaflet.featuregroup.subgroup": "^1.0.2",
-    "tom-select": "2.2.2"
+    "leaflet.featuregroup.subgroup": "^1.0.2"
   }
 }

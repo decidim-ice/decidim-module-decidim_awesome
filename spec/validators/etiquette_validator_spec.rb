@@ -50,7 +50,7 @@ describe EtiquetteValidator do
       it { is_expected.not_to be_valid }
 
       context "and is allowed" do
-        let("#{attribute}_max_caps_percent".to_sym) { 100 }
+        let(:"#{attribute}_max_caps_percent") { 100 }
 
         it { is_expected.to be_valid }
       end
@@ -64,7 +64,7 @@ describe EtiquetteValidator do
       it { is_expected.not_to be_valid }
 
       context "and is allowed" do
-        let("#{attribute}_max_marks_together".to_sym) { 3 }
+        let(:"#{attribute}_max_marks_together") { 3 }
 
         it { is_expected.to be_valid }
       end
@@ -78,7 +78,7 @@ describe EtiquetteValidator do
       it { is_expected.not_to be_valid }
 
       context "and is allowed" do
-        let("#{attribute}_start_with_caps".to_sym) { false }
+        let(:"#{attribute}_start_with_caps") { false }
 
         it { is_expected.to be_valid }
       end

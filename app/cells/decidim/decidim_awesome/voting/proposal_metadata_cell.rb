@@ -8,7 +8,7 @@ module Decidim
         private
 
         def proposal_items
-          [coauthors_item, comments_count_item, endorsements_count_item, weight_count_item, state_item, emendation_item]
+          [coauthors_item] + taxonomy_items + [comments_count_item, endorsements_count_item, weight_count_item, state_item, emendation_item]
         end
 
         def current_vote

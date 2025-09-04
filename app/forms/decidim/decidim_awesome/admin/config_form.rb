@@ -56,7 +56,7 @@ module Decidim
         # TODO: validate non general admins are here
 
         def self.from_params(params, additional_params = {})
-          instance = super(params, additional_params)
+          instance = super
           instance.valid_keys = params.keys.map(&:to_sym) || []
           instance.force_authorizations = build_force_authorizations(instance.force_authorizations)
           instance.sanitize_labels!

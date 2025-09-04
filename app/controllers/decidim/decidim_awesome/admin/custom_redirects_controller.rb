@@ -80,7 +80,7 @@ module Decidim
         end
 
         def current_config
-          @current_config ||= (AwesomeConfig.find_by(var: :custom_redirects, organization: current_organization)&.value || {})
+          @current_config ||= AwesomeConfig.find_by(var: :custom_redirects, organization: current_organization)&.value || {}
         end
       end
     end

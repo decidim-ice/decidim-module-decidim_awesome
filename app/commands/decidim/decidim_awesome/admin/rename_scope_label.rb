@@ -8,7 +8,9 @@ module Decidim
         #
         # params - A constraint params
         def initialize(params, organization)
+          # rubocop:disable Style/SafeNavigationChainLength
           @text = params[:text]&.strip&.gsub(" ", "_")&.parameterize&.truncate(64)
+          # rubocop:enable Style/SafeNavigationChainLength
           @scope = params[:scope]
           @key = params[:key]
           @attribute = params[:attribute]

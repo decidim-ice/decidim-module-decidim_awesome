@@ -1,4 +1,4 @@
-<div class="filters__section p-4 flex mb-0">
+<div class="filters__section">
   <div class="fcell filter dropdown__container">
     <!-- Label added to align the button vertically with other inputs -->
     <label class="form-label">&nbsp;</label>
@@ -17,8 +17,6 @@
     <%= search_form_for(query, url: url_for, html: { class: "form form-defaults" }) do |form| %>
       <%= hidden_field_tag :admins, params[:admins] %>
       <div class="form__wrapper">
-        <div class="card">
-          <div class="card-section">
             <div class="grid grid-cols-4 gap-x-4">
               <div class="row column search-field">
                 <%= form.label search_field_predicate, t("decidim.search.term_input_placeholder"), class: "form-label" %>
@@ -50,8 +48,6 @@
                 </button>
               </div>
             </div>
-          </div>
-        </div>
       </div>
     <% end %>
   </div>

@@ -1,10 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const modalId = "LimitAmendmentsModal";
   const modalEl = document.getElementById(modalId);
-  const amendButton = document.getElementById("amend-button");
   const limitAmendments = modalEl && JSON.parse(modalEl.dataset.limitAmendments);
 
-  if (!amendButton || !limitAmendments || document.querySelector('a[href^="/users/sign_in"]')) {
+  if (!limitAmendments || document.querySelector('a[href^="/users/sign_in"]')) {
     return;
   }
 
@@ -14,15 +13,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /**
-   * Determines if the modal should be displayed based on its current state and data attributes.
-   */
-  amendButton.addEventListener("click", (event) => {
-    const modal = window.Decidim.currentDialogs[modalId];
-    if (modal) {
-      event.preventDefault();
-      event.stopPropagation();
-      modal.open();
+  document.addEventListener("click", (event) => {
+    const target = event.target.closest("#amend-button");
+    if (!target) {
+      return;
     }
+
+    const modal = window.Decidim.currentDialogs[modalId];
+    if (!modal) {
+      return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+    modal.open();
   });
 });

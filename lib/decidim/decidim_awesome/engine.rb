@@ -38,12 +38,14 @@ module Decidim
         Decidim::ViewModel.include(Decidim::DecidimAwesome::AwesomeHelpers)
 
         # Override EtiquetteValidator
-        EtiquetteValidator.include(Decidim::DecidimAwesome::EtiquetteValidatorOverride) if DecidimAwesome.enabled?(:validate_title_max_caps_percent,
-                                                                                                                   :validate_title_max_marks_together,
-                                                                                                                   :validate_title_start_with_caps,
-                                                                                                                   :validate_body_max_caps_percent,
-                                                                                                                   :validate_body_max_marks_together,
-                                                                                                                   :validate_body_start_with_caps)
+        if DecidimAwesome.enabled?(:validate_title_max_caps_percent,
+                                   :validate_title_max_marks_together,
+                                   :validate_title_start_with_caps,
+                                   :validate_body_max_caps_percent,
+                                   :validate_body_max_marks_together,
+                                   :validate_body_start_with_caps)
+          EtiquetteValidator.include(Decidim::DecidimAwesome::EtiquetteValidatorOverride)
+        end
 
         # Custom fields need to deal with several places
         if DecidimAwesome.enabled?(:proposal_custom_fields,
@@ -227,7 +229,9 @@ module Decidim
             voting.proposal_metadata_cell = "decidim/decidim_awesome/voting/proposal_metadata"
             voting.weight_validator do |weight, context|
               allowed = [1, 2, 3]
+              # rubocop:disable Style/SafeNavigationChainLength
               allowed << 0 if context[:proposal]&.component&.settings&.voting_cards_show_abstain
+              # rubocop:enable Style/SafeNavigationChainLength
               weight.in? allowed
             end
           end

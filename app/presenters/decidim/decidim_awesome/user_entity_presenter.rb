@@ -9,9 +9,9 @@ module Decidim
           query = PaperTrail::Version.where(item_type:, event: "update", item_id:)
                                      .where("id > ?", entry.id)
           if roles.include? "admin"
-            query.where("object_changes LIKE '%\nadmin:\n- true\n- false%'").first
+            query.where("object_changes @> ?", { "admin" => [true, false] }.to_json).first
           else
-            query.where("object_changes LIKE '%\nroles:\n- - %'").first
+            query.where("object_changes @> ?", { "roles" => [[], []] }.to_json).first
           end
         end
       end
