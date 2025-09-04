@@ -15,6 +15,10 @@ module Decidim
         redirect_to redirect_url if user_signed_in? && service.granted? && request.path != redirect_url
       end
 
+      def index
+        redirect_to decidim.user_session_path(redirect_url:) unless user_signed_in?
+      end
+
       def redirect_url
         @redirect_url ||= begin
           path = params[:redirect_url] || request.referer
