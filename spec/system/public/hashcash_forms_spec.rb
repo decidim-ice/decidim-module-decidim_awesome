@@ -33,82 +33,103 @@ describe "Hashcash protector", :perform_enqueued do
 
   before do
     switch_to_host(organization.host)
-    visit decidim.new_user_session_path
   end
 
-  context "when the user logs_in in session controller" do
-    include_examples "checking the form hidden fields"
-  end
-
-  context "when the user logs_in inside a component" do
+  context "when not logged in" do
     before do
-      switch_to_host(organization.host)
-      visit main_component_path(component)
-      click_on "New proposal"
+      visit decidim.new_user_session_path
     end
 
-    include_examples "checking the form hidden fields"
+    context "when the user logs_in in session controller" do
+      include_examples "checking the form hidden fields"
+    end
+
+    context "when the user logs_in inside a component" do
+      before do
+        switch_to_host(organization.host)
+        visit main_component_path(component)
+        click_on "New proposal"
+      end
+
+      include_examples "checking the form hidden fields"
+    end
+
+    context "when hashcash is resolved" do
+      let(:hashcash_login_bits) { 10 }
+      let(:hashcash_signup_bits) { 10 }
+
+      it "can log in successfully" do
+        within "#session_new_user" do
+          fill_in :session_user_email, with: user.email
+          fill_in :session_user_password, with: "decidim123456789"
+          click_on "Log in"
+        end
+        expect(page).to have_content("Logged in successfully.")
+      end
+
+      it "adds the hidden hashcash field to the signup form" do
+        within ".login__info" do
+          click_on "Create an account"
+        end
+
+        within "#register-form" do
+          fill_in :registration_user_name, with: "Bob"
+          fill_in :registration_user_email, with: "bob@example.org"
+          fill_in :registration_user_password, with: "decidim123456789"
+          check :registration_user_tos_agreement
+          check :registration_user_newsletter
+          click_on "Create an account"
+        end
+        expect(page).to have_content("A message with a confirmation link has been sent to your email address.")
+      end
+    end
+
+    context "when hashcash is disabled" do
+      let(:hashcash_login) { false }
+      let(:hashcash_signup) { false }
+
+      it "does not add the hidden hashcash field to the login form" do
+        expect(page).to have_no_field("hashcash", type: :hidden)
+        within "#session_new_user" do
+          fill_in :session_user_email, with: user.email
+          fill_in :session_user_password, with: "decidim123456789"
+          click_on "Log in"
+        end
+        expect(page).to have_content("Logged in successfully.")
+      end
+
+      it "does not add the hidden hashcash field to the signup form" do
+        within ".login__info" do
+          click_on "Create an account"
+        end
+
+        expect(page).to have_no_field("hashcash", type: :hidden)
+        within "#register-form" do
+          fill_in :registration_user_name, with: "Bob"
+          fill_in :registration_user_email, with: "bob@example.org"
+          fill_in :registration_user_password, with: "decidim123456789"
+          check :registration_user_tos_agreement
+          check :registration_user_newsletter
+          click_on "Create an account"
+        end
+        expect(page).to have_content("A message with a confirmation link has been sent to your email address.")
+      end
+    end
   end
 
-  context "when hashcash is resolved" do
-    let(:hashcash_login_bits) { 10 }
-    let(:hashcash_signup_bits) { 10 }
-
-    it "can log in successfully" do
-      within "#session_new_user" do
-        fill_in :session_user_email, with: user.email
-        fill_in :session_user_password, with: "decidim123456789"
-        click_on "Log in"
-      end
-      expect(page).to have_content("Logged in successfully.")
+  context "when logged in" do
+    before do
+      login_as user, scope: :user
+      visit decidim.account_path
     end
 
-    it "adds the hidden hashcash field to the signup form" do
-      within ".login__info" do
-        click_on "Create an account"
+    it "user can upload a profile image" do
+      dynamically_attach_file(:user_avatar, Decidim::Dev.asset("avatar.jpg"), remove_before: true)
+      within "form.edit_user" do
+        find("*[type=submit]").click
       end
 
-      within "#register-form" do
-        fill_in :registration_user_name, with: "Bob"
-        fill_in :registration_user_email, with: "bob@example.org"
-        fill_in :registration_user_password, with: "decidim123456789"
-        check :registration_user_tos_agreement
-        check :registration_user_newsletter
-        click_on "Create an account"
-      end
-      expect(page).to have_content("A message with a confirmation link has been sent to your email address.")
-    end
-  end
-
-  context "when hashcash is disabled" do
-    let(:hashcash_login) { false }
-    let(:hashcash_signup) { false }
-
-    it "does not add the hidden hashcash field to the login form" do
-      expect(page).to have_no_field("hashcash", type: :hidden)
-      within "#session_new_user" do
-        fill_in :session_user_email, with: user.email
-        fill_in :session_user_password, with: "decidim123456789"
-        click_on "Log in"
-      end
-      expect(page).to have_content("Logged in successfully.")
-    end
-
-    it "does not add the hidden hashcash field to the signup form" do
-      within ".login__info" do
-        click_on "Create an account"
-      end
-
-      expect(page).to have_no_field("hashcash", type: :hidden)
-      within "#register-form" do
-        fill_in :registration_user_name, with: "Bob"
-        fill_in :registration_user_email, with: "bob@example.org"
-        fill_in :registration_user_password, with: "decidim123456789"
-        check :registration_user_tos_agreement
-        check :registration_user_newsletter
-        click_on "Create an account"
-      end
-      expect(page).to have_content("A message with a confirmation link has been sent to your email address.")
+      expect(page).to have_css(".flash.success")
     end
   end
 end
