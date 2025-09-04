@@ -5,15 +5,15 @@ require "fileutils"
 
 def install_module(path)
   Dir.chdir(path) do
-    system("bundle exec rake decidim_decidim_awesome:install:migrations")
-    system("bundle exec rake active_hashcash:install:migrations")
-    system("bundle exec rake db:migrate")
+    system("bundle exec rails decidim_decidim_awesome:install:migrations")
+    system("bundle exec rails active_hashcash:install:migrations")
+    system("bundle exec rails db:migrate")
   end
 end
 
 def seed_db(path)
   Dir.chdir(path) do
-    system("bundle exec rake db:seed")
+    system("bundle exec rails db:seed")
   end
 end
 

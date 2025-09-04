@@ -30,7 +30,7 @@ describe "Admin manages verification tweaks" do
       {
         "authorization_handlers" => {
           "dummy_authorization_handler" => {
-            "options" => { "allowed_postal_codes" => "08001", "allowed_scope_id" => "" }
+            "options" => { "allowed_postal_codes" => "08001" }
           }
         },
         "force_authorization_help_text" => { "ca" => "", "en" => "<p>Help text <strong>with HTML</strong></p>", "es" => "" }
@@ -63,7 +63,7 @@ describe "Admin manages verification tweaks" do
       click_on "Update configuration"
 
       expect(page).to have_content("updated successfully")
-      expect(last_force_authorizations.reload.value).to eq("foo" => { "authorization_handlers" => { "dummy_authorization_handler" => { "options" => { "allowed_postal_codes" => "08001", "allowed_scope_id" => "" } } }, "force_authorization_help_text" => { "ca" => "", "en" => "", "es" => "" } })
+      expect(last_force_authorizations.reload.value).to eq("foo" => { "authorization_handlers" => { "dummy_authorization_handler" => { "options" => { "allowed_postal_codes" => "08001" } } }, "force_authorization_help_text" => { "ca" => "", "en" => "", "es" => "" } })
     end
   end
 end
