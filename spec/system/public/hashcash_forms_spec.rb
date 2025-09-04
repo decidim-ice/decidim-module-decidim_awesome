@@ -17,6 +17,7 @@ describe "Hashcash protector", :perform_enqueued do
 
   shared_examples "checking the form hidden fields" do
     it "adds the hidden hashcash field to the login form" do
+      byebug
       expect(page).to have_field("hashcash", type: :hidden)
       expect(page).to have_button("Waiting for verification ...", disabled: true)
     end
