@@ -51,9 +51,9 @@
     <%= settings_fields.select(
         :taxonomy_ids,
         options_from_collection_for_select(
-          Decidim::Taxonomy.where(parent_id: nil, decidim_organization_id: current_organization.id),
+          Decidim::Taxonomy.roots.for(current_organization),
           :id,
-          ->(taxonomy) { translated_attribute(taxonomy.name) },
+          ->(taxonomy) { taxonomy.translated_name },
           settings_fields.object.taxonomy_ids
         ),
         { label: t("taxonomies", scope: i18n_scope) },
