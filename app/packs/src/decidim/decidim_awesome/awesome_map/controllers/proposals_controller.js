@@ -36,7 +36,9 @@ export default class ProposalsController extends Controller {
       // also assign parent's proposal taxonomies to it
       // console.log("onNode proposal", proposal, "amendment:", proposal.amendments)
       if (proposal.amendments && proposal.amendments.length) {
-        proposal.amendments.forEach((amendment) => {
+        proposal.amendments
+          .filter(amendment => amendment && amendment.emendation)
+          .forEach((amendment) => {
           this.amendments[amendment.emendation.id] = proposal;
         });
       }
