@@ -13,7 +13,7 @@ export default class MeetingsController extends Controller {
     // for each meeting, create a marker with an associated popup
     this.fetcher.onNode = (meeting) => {
       let marker = new L.Marker([meeting.coordinates.latitude, meeting.coordinates.longitude], {
-        icon: this.createIcon(this.awesomeMap.getCategory(meeting.category).color),
+        icon: this.createIcon(this.awesomeMap.getTaxonomy(meeting.taxonomies && meeting.taxonomies[0]).color),
         title: meeting.title.translation
       });
       // console.log("new meeting", meeting, marker)

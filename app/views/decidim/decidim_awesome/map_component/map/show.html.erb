@@ -10,7 +10,9 @@
 
   <section id="map-block" class="awesome-iframe layout-main__section">
     <%= awesome_map_for map_components do %>
-      <%= render partial: "map_template", locals: { categories: current_participatory_space.categories, map_height: current_component.settings.map_height } %>
+      <% tf = Decidim::TaxonomyFilter.where(id: current_component.settings.taxonomy_filters) %>
+      <% taxonomies = tf.map(&:root_taxonomy) %>
+      <%= render partial: "map_template", locals: { taxonomies: taxonomies, map_height: current_component.settings.map_height } %>
     <% end %>
   </section>
 </main>

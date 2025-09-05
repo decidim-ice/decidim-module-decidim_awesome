@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     menu: {
       amendments: parse(dataset.menuAmendments),
       meetings: parse(dataset.menuMeetings),
-      categories: parse(dataset.menuCategories),
+      taxonomies: parse(dataset.menuTaxonomies),
       hashtags: parse(dataset.menuHashtags),
       mergeComponents: parse(dataset.menuMergeComponents)
     },

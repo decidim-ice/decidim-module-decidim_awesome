@@ -2,6 +2,6 @@
   <%= content_tag("h3", section_title) if section_title.present? %>
 
   <%= awesome_map_for global_map_components do %>
-    <%= render partial: "decidim/decidim_awesome/map_component/map/map_template.html", locals: { categories: all_categories, map_height: model.settings.map_height } %>
+    <%= render partial: "decidim/decidim_awesome/map_component/map/map_template.html", locals: { taxonomies: all_taxonomies, map_height: model.settings.map_height } %>
   <% end %>
 </section>

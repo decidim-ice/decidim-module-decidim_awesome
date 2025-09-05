@@ -110,7 +110,7 @@
 }
 
 #awesome_map- {
-  &categories-control {
+  &taxonomies-control {
     display: none;
 
     label {
@@ -123,20 +123,53 @@
         width: 0.8rem;
         height: 0.8rem;
         border-radius: 50%;
-        background-color: var(-- primary);
       }
 
-      &.subcategory {
-        padding-left: 1em;
+      // Hierarchical styling for taxonomies
+      &.root-taxonomy {
+        font-weight: bold;
+        margin-bottom: 0.3em;
+      }
+
+      &.child-taxonomy {
+        font-weight: 500;
+        margin-bottom: 0.2em;
+      }
+
+      &.grandchild-taxonomy {
+        font-weight: normal;
+        margin-bottom: 0.1em;
+
+        i {
+          width: 0.6rem;
+          height: 0.6rem;
+        }
+      }
+
+      // Indeterminate checkbox styling
+      input[type="checkbox"]:indeterminate {
+        background-color: #6c757d;
+        border-color: #6c757d;
+
+        &::before {
+          content: "−";
+          color: white;
+          font-weight: bold;
+          text-align: center;
+          line-height: 1;
+          display: block;
+        }
       }
     }
 
-    .categories-container {
+    .taxonomies-container {
       display: none;
+      max-height: 300px;
+      overflow-y: auto;
     }
 
     &.active {
-      .categories-container {
+      .taxonomies-container {
         display: block;
       }
     }

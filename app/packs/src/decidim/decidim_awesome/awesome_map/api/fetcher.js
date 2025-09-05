@@ -30,14 +30,15 @@ export default class Fetcher {
     api.fetchAll((result) => {
       if (result) {
         const collection = result.component[this.collection];
+        collection.edges = collection.edges.filter((edge) => edge.node !== null);
         // console.log("collection", collection)
-        
+
         collection.edges.forEach((element) => {
           let node = element.node;
           if (!node) {
             return;
           }
-      
+
           if (node.coordinates && node.coordinates.latitude && node.coordinates.longitude) {
             this.decorateNode(node);
             this.onNode(node)
@@ -70,7 +71,7 @@ export default class Fetcher {
   findTranslation(translations) {
     let lang = document.querySelector("html").getAttribute("lang"),
         text = "";
-    
+
     translations.forEach((txt) => {
       if (txt.text) {
         if (!text || txt.locale === lang) {
@@ -127,9 +128,9 @@ export default class Fetcher {
       : tag.html), "");
     if (string) {
       return `${txt}<p>${string}</p>`;
-    } 
+    }
     return txt;
-    
+
   }
 
   truncate(html) {

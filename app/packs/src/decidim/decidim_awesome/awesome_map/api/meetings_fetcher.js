@@ -36,7 +36,7 @@ export default class MeetingsFetcher extends Fetcher {
                   longitude
                 }
                 typeOfMeeting
-                category {
+                taxonomies {
                   id
                 }
               }
