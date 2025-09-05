@@ -1,4 +1,4 @@
-/* eslint-disable no-ternary, multiline-ternary */
+/* eslint-disable no-ternary, multiline-ternary, no-nested-ternary, max-lines */
 
 import * as L from "leaflet";
 
