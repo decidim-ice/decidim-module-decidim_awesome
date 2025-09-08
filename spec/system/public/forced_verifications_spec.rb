@@ -37,7 +37,7 @@ describe "Forced verifications" do
     end
 
     it "page cannot be visited" do
-      expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(redirect_url: restricted_path))
+      expect(page).to have_current_path(decidim.new_user_session_path(redirect_url: restricted_path))
     end
   end
 
@@ -74,7 +74,7 @@ describe "Forced verifications" do
 
     it "user can logout" do
       click_on "let me logout"
-      expect(page).to have_content("Logged out successfully")
+      expect(page).to have_content("Logged out successfully.")
       expect(page).to have_no_content("let me logout")
     end
 
@@ -188,7 +188,8 @@ describe "Forced verifications" do
 
       it "blocks access" do
         expect(page).to have_content("This account has been blocked")
-        expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(redirect_url: restricted_path))
+        # Log out the user
+        expect(page).to have_current_path(decidim.user_session_path(redirect_url: restricted_path))
       end
     end
 

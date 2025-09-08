@@ -3,13 +3,13 @@ decidim-admin:
     decidim-0.29.1: b2ae319d5bcf43954bbe0edb9a4e3ffb
 decidim-assemblies:
   /app/views/decidim/assemblies/admin/assemblies/_form.html.erb:
-    decidim-0.29.4: 020a06e40fd3b8dae4ec63b2afcac9cb
+    decidim-0.29.4: cf28844ddb8416aedb934d526462fbc0
 decidim-participatory_processes:
   /app/views/decidim/participatory_processes/admin/participatory_processes/_form.html.erb:
-    decidim-0.29.4: 41d304c7583bdd51cbd5b6e98b27fded
+    decidim-0.29.4: 3eca01ab87a77deec7443bbecee93a15
 decidim-conferences:
   /app/views/decidim/conferences/admin/conferences/_form.html.erb:
-    decidim-0.29.4: 40c04d3e64936598f2c3acedf8e99372
+    decidim-0.29.4: 068ebba1590111b40f50923b33f57313
 decidim-core:
   /app/packs/entrypoints/decidim_editor.js:
     decidim-0.29.1: beddd77e3893fd0b7cd2679a7ee6e536
