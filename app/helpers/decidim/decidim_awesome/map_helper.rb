@@ -40,7 +40,7 @@ module Decidim
             "menu-merge-components" => global_settings.menu_merge_components,
             "menu-amendments" => global_settings.menu_amendments,
             "menu-meetings" => global_settings.menu_meetings,
-            "menu-categories" => global_settings.menu_categories,
+            "menu-taxonomies" => global_settings.menu_taxonomies,
             "menu-hashtags" => global_settings.menu_hashtags,
             "show-not-answered" => step_settings&.show_not_answered,
             "show-accepted" => step_settings&.show_accepted,
@@ -72,20 +72,23 @@ module Decidim
       end
 
       # rubocop:disable Rails/HelperInstanceVariable
-      def current_categories(categories)
-        return @current_categories if @current_categories
+      def current_taxonomies(taxonomies)
+        return @current_taxonomies if @current_taxonomies
 
         @golden_ratio_conjugate = 0.618033988749895
         # @h = rand # use random start value
         @h = 0.41
-        @current_categories = []
-        categories.first_class.each do |category|
-          append_category category
-          category.subcategories.each do |subcat|
-            append_category subcat
+        @current_taxonomies = []
+        taxonomies.each do |taxonomy|
+          append_taxonomy taxonomy
+          taxonomy&.children&.each do |subtax|
+            append_taxonomy subtax
+            subtax&.children&.each do |subsubtax|
+              append_taxonomy subsubtax
+            end
           end
         end
-        @current_categories
+        @current_taxonomies
       end
 
       private
@@ -103,15 +106,15 @@ module Decidim
         builder
       end
 
-      def append_category(category)
+      def append_taxonomy(taxonomy)
         @h += @golden_ratio_conjugate
         @h %= 1
         # r,g,b = hsv_to_rgb(@h, 0.5, 0.95)
         r, g, b = hsv_to_rgb(@h, 0.99, 0.95)
-        @current_categories.append(
-          id: category.id,
-          name: translated_attribute(category.name),
-          parent: category.parent&.id,
+        @current_taxonomies.append(
+          id: taxonomy.id,
+          name: translated_attribute(taxonomy.name),
+          parent: taxonomy.parent&.id,
           color: format("#%02x%02x%02x", r, g, b)
         )
       end
