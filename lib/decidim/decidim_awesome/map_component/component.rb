@@ -22,9 +22,10 @@ Decidim::DecidimAwesome.register_component(:awesome_map) do |component|
     settings.attribute :collapse, type: :boolean, default: false
     settings.attribute :menu_amendments, type: :boolean, default: true
     settings.attribute :menu_meetings, type: :boolean, default: true
-    settings.attribute :menu_categories, type: :boolean, default: true
+    settings.attribute :menu_taxonomies, type: :boolean, default: true
     settings.attribute :menu_hashtags, type: :boolean, default: true
     settings.attribute :menu_merge_components, type: :boolean, default: false
+    settings.attribute :taxonomy_filters, type: :taxonomy_filters
   end
 
   component.settings(:step) do |settings|

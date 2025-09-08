@@ -35,7 +35,7 @@ module Decidim
               settings.attribute :menu_amendments, type: :boolean, default: true
               settings.attribute :menu_meetings, type: :boolean, default: true
               settings.attribute :menu_hashtags, type: :boolean, default: true
-              settings.attribute :menu_categories, type: :boolean, default: true
+              settings.attribute :menu_taxonomies, type: :boolean, default: true
               settings.attribute :menu_merge_components, type: :boolean, default: true
 
               settings.attribute :show_not_answered, type: :boolean, default: true
@@ -43,6 +43,7 @@ module Decidim
               settings.attribute :show_withdrawn, type: :boolean, default: false
               settings.attribute :show_evaluating, type: :boolean, default: true
               settings.attribute :show_rejected, type: :boolean, default: false
+              settings.attribute :taxonomy_ids, type: :array, default: []
             end
           end
           # === TODO: processes groups map block ===

@@ -28,15 +28,15 @@ export default class ProposalsController extends Controller {
     // for each proposal, create a marker with an associated popup
     this.fetcher.onNode = (proposal) => {
       let marker = new L.Marker([proposal.coordinates.latitude, proposal.coordinates.longitude], {
-        icon: this.createIcon(this.awesomeMap.getCategory(proposal.category).color),
+        icon: this.createIcon(this.awesomeMap.getTaxonomy(proposal.taxonomies && proposal.taxonomies[0]).color),
         title: proposal.title.translation
       });
 
       // Check if it has amendments, add it to a list
-      // also assign parent's proposal categories to it
+      // also assign parent's proposal taxonomies to it
       // console.log("onNode proposal", proposal, "amendment:", proposal.amendments)
       if (proposal.amendments && proposal.amendments.length) {
-        proposal.amendments.forEach((amendment) => {
+        proposal.amendments.filter((amendment) => amendment && amendment.emendation).forEach((amendment) => {
           this.amendments[amendment.emendation.id] = proposal;
         });
       }
@@ -67,10 +67,10 @@ export default class ProposalsController extends Controller {
         }
         if (this.awesomeMap.config.menu.amendments) {
           marker.marker.addTo(this.awesomeMap.layers.amendments.group);
-          // mimic parent category (amendments doesn't have categories)
-          if (parent.category) {
+          // mimic parent taxonomy (amendments doesn't have taxonomies)
+          if (parent.taxonomy) {
             marker.marker.setIcon(this.createIcon("text-secondary"));
-            this.addMarkerCategory(marker.marker, parent.category)
+            this.addMarkerTaxonomy(marker.marker, parent.taxonomy)
           }
         }
       }
