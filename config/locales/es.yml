@@ -108,7 +108,6 @@ es:
             map_zoom: Zoom (cualquier número entre 0 y 18)
             map_zoom_help: Solo aplica si se define el punto central del mapa
             menu_amendments: Mostrar enmiendas
-            menu_categories: Mostrar menú de búsqueda por categorías
             menu_hashtags: Mostrar el menú de búsqueda por hashtag
             menu_meetings: Mostrar encuentros
             menu_merge_components: Combinar todos los componentes del mismo tipo en el menú
@@ -604,7 +603,6 @@ es:
           show_not_answered: Muestra las propuestas pendientes de contestart
           show_rejected: Muestra las propuestas rechazadas
           show_withdrawn: Muestra las propuestas retiradas
-          taxonomies: Taxonomías
           text_settings: Ajustes del texto
           title: Título
           truncate: Número máximo de caracteres para las descripciones emergentes
@@ -711,7 +709,6 @@ es:
           autosaved_error: El almacenamiento local no es compatible con tu navegador, el formulario no se podrá guardar automáticamente.
           autosaved_retrieved: Los datos de este formulario se han recuperado de una sesión anterior
           autosaved_success: Datos guardados en el almacenamiento local
-          categories: Categorías
           drag_and_drop_image: Puedes añadir imágenes arrastrando y soltándolas o también pegándolas.
           hashtags: Hashtags
           items: elementos
