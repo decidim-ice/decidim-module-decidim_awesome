@@ -235,7 +235,6 @@ nl:
           autosaved_error: LocalStorage wordt niet ondersteund in uw browser, formulier kan niet automatisch worden opgeslagen.
           autosaved_retrieved: Gegevens voor dit formulier zijn hersteld van een vorige sessie
           autosaved_success: Data opgeslagen in lokale opslag
-          categories: Categorieën
           drag_and_drop_image: Voeg afbeeldingen toe door ze te slepen, te plaatsen of te plakken.
           hashtags: Hashtags
           items: items
