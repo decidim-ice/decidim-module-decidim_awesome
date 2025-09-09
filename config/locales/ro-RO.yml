@@ -145,8 +145,3 @@ ro:
         voting_cards:
           modal:
             cancel: Anulare
-  layouts:
-    decidim:
-      decidim_awesome:
-        awesome_config:
-          categories: Categorii
