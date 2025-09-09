@@ -111,6 +111,9 @@ ja:
             menu_hashtags: ハッシュタグ検索メニューの表示
             menu_meetings: ミーティングを表示
             menu_merge_components: 同じ種類のすべてのコンポーネントをメニューに統合します
+            menu_taxonomies: タクソノミー検索メニューを表示
+            taxonomy_filters: コンポーネントのフィルタを選択
+            taxonomy_filters_add: フィルターを追加
             truncate: ポップアップの説明のための最大文字数
           step:
             announcement: アナウンス
@@ -603,6 +606,7 @@ ja:
           show_not_answered: 未回答の提案を表示
           show_rejected: 却下された提案を表示
           show_withdrawn: 撤回された提案を表示
+          taxonomies: タクソノミー
           text_settings: テキストの設定
           title: タイトル
           truncate: ポップアップの説明のための最大文字数
@@ -677,6 +681,9 @@ ja:
             weight_2_short: 'Y:'
             weight_3: 緑
             weight_3_short: 'G:'
+    download_your_data:
+      show:
+        admin_actions: 管理者の操作
     meetings:
       meetings_map:
         view_meeting: ミーティングを表示
@@ -713,3 +720,4 @@ ja:
           meetings: ミーティング
           proposals: 提案
           select_deselect_all: まとめて選択・選択解除する
+          taxonomies: タクソノミー
