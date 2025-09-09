@@ -108,7 +108,6 @@ ja:
             map_zoom: ズーム ( 0 と 18 の間の任意の数字)
             map_zoom_help: 地図の中心が定義されている場合にのみ適用されます
             menu_amendments: 修正を表示
-            menu_categories: カテゴリー検索メニューを表示
             menu_hashtags: ハッシュタグ検索メニューの表示
             menu_meetings: ミーティングを表示
             menu_merge_components: 同じ種類のすべてのコンポーネントをメニューに統合します
@@ -708,7 +707,6 @@ ja:
           autosaved_error: お使いのブラウザーではLocalStorageをサポートしていないため、フォームは自動保存されません。
           autosaved_retrieved: このフォームのデータは前回のセッションから復元しました
           autosaved_success: ローカルストレージにデータを保存しました
-          categories: カテゴリー
           drag_and_drop_image: ドラッグ＆ドロップで画像を追加できます
           hashtags: ハッシュタグ
           items: 項目
