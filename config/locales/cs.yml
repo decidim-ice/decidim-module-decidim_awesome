@@ -111,6 +111,9 @@ cs:
             menu_hashtags: Zobrazit nabídku hledání Hashtagu
             menu_meetings: Zobrazit schůzky
             menu_merge_components: Sloučit všechny komponenty stejného typu v menu
+            menu_taxonomies: Zobrazit nabídku vyhledávání taxonomie
+            taxonomy_filters: Vyberte filtry pro komponentu
+            taxonomy_filters_add: Přidat filtr
             truncate: Maximum znaků pro popisy vyskakovacích oken
           step:
             announcement: Oznámení
@@ -603,6 +606,7 @@ cs:
           show_not_answered: Zobrazit nezodpovězené návrhy
           show_rejected: Zobrazit odmítnuté návrhy
           show_withdrawn: Zobrazit stažené návrhy
+          taxonomies: Taxonomie
           text_settings: Nastavení textu
           title: Nadpis
           truncate: Maximum znaků pro popisy vyskakovacích oken
@@ -679,6 +683,9 @@ cs:
             weight_2_short: 'Y:'
             weight_3: Zelená
             weight_3_short: 'G:'
+    download_your_data:
+      show:
+        admin_actions: Akce administrátora
     meetings:
       meetings_map:
         view_meeting: Zobrazit schůzku
@@ -715,3 +722,4 @@ cs:
           meetings: Schůzky
           proposals: Návrhy
           select_deselect_all: Vybrat/odebrat vše
+          taxonomies: Taxonomie
