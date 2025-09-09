@@ -98,7 +98,6 @@ fr:
             map_zoom: Zoom (n'importe quel nombre entre 0 et 18)
             map_zoom_help: Ne s'applique que si un centre de carte est défini
             menu_amendments: Afficher les amendements
-            menu_categories: Afficher le menu de recherche par catégorie
             menu_hashtags: Afficher le menu de recherche des hashtags
             menu_meetings: Montrer les rencontres
             menu_merge_components: Fusionner toutes les fonctionnalités du même type dans le menu
@@ -642,7 +641,6 @@ fr:
           autosaved_error: LocalStorage n'est pas pris en charge dans votre navigateur, le formulaire ne peut pas être enregistré automatiquement.
           autosaved_retrieved: Les données de ce formulaire ont été récupérées à partir d'une session précédente
           autosaved_success: Données enregistrées dans le stockage local de votre navigateur
-          categories: Catégories
           drag_and_drop_image: Ajoutez des images en les glissant - déposant ou en les collant depuis votre presse-papier.
           hashtags: Hashtags
           items: éléments
