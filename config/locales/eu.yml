@@ -402,16 +402,16 @@ eu:
         maintenance:
           private_data:
             component: Espazioa / Osagaia
-            confirm_delete: Ziur zaude baliabide honen datu pribatu guztiak ezabatu nahi dituzula? Honek ezin da desegin.
+            confirm_delete: Ziur zaude baliabide honetarako datu pribatu guztiak ezabatu nahi dituzula? Hau ezin da desegin.
             delete: Dena ezabatu
-            destroying_private_data: Baliabiderako %{title} datu pribatuak suntsitzeko prestatuta daude. Mesedez, egiaztatu berriro minutu batzuetan.
+            destroying_private_data: '%{title} (e) ko datu pribatuak suntsituko dira. Mesedez, berrikusi berriro minutu batzuk barru.'
             done: Eginda
             help_html: |
               Tresna honen bidez, datu pribatu guztiak ezaba daitezke parte hartzeko gune edo osagai jakin baterako. Ekintza hau atzeraezina da eta datu pribatu guztiak datu-basetik ezabatuko ditu.
               <br><br>
               <strong>Zer jotzen da datu pribatutzat?</strong>
               <br>
-              Datu pribatuak informazio publikoa ez den eta administratzaileentzat bakarrik den informazioa dira. Honek, oraingoz, eremu pribatuetako informazioa barne hartzen du.
+              Datu pribatuak informazio publikoa ez den eta administratzaileentzat soilik den informazioa dira. Honek, oraingoz, eremu pribatuetako informazioa barne hartzen du.
               <br><br>
               <strong>Zer gertatzen da datu pribatuak ezabatzen ditudanean?</strong>
               <br>
@@ -424,12 +424,12 @@ eu:
               <strong>Itxaron behar duzu datu pribatuak ezabatu aurretik?</strong>
               <br>
               Bai, ezin dira datu pribatuak ezabatu azken eguneratzea %{time_ago} baino txikiagoa bada. Konfigurazio hau alda dezakezu inizializatzaileen fitxategian.
-            items_count: Erlazionatutako guztira
+            items_count: Eragindakoak, guztira
             last_date: Azken eguneraketa
-            no_data: Ez da aurkitu %{time_ago} baino zaharragoak diren datu pribaturik
-            not_destroyable: Baliabide hau ezin da oraindik suntsitu
+            no_data: Ez da datu pribaturik aurkitu duela %{time_ago} baino zaharragoa
+            not_destroyable: Baliabide hori ezin da oraindik suntsitu
             removing: Ezabatzen...
-            time_ago: "%{time} lehenago"
+            time_ago: "Duela %{time}"
         menu:
           admins: Esparruaren administrataileak
           custom_redirects: Birbideratze pertsonalizatuak
