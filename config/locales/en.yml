@@ -122,10 +122,12 @@ en:
             map_zoom: Zoom (any number betwen 0 and 18)
             map_zoom_help: Only applies if a map center is defined
             menu_amendments: Show amendments
-            menu_categories: Show Category search menu
             menu_hashtags: Show Hashtag search menu
             menu_meetings: Show meetings
             menu_merge_components: Merge all components of the same type in the menu
+            menu_taxonomies: Show Taxonomy search menu
+            taxonomy_filters: Select filters for the component
+            taxonomy_filters_add: Add filter
             truncate: Maximum characters for popup descriptions
           step:
             announcement: Announcement
@@ -724,6 +726,7 @@ en:
           show_not_answered: Show not answered proposals
           show_rejected: Show rejected proposals
           show_withdrawn: Show withdrawn proposals
+          taxonomies: Taxonomies
           text_settings: Text settings
           title: Title
           truncate: Maximum characters for popup descriptions
@@ -810,6 +813,9 @@ en:
             weight_2_short: 'Y:'
             weight_3: Green
             weight_3_short: 'G:'
+    download_your_data:
+      show:
+        admin_actions: Admin actions
     meetings:
       meetings_map:
         view_meeting: View meeting
@@ -842,10 +848,10 @@ en:
           autosaved_retrieved: Data for this form has been recovered from a previous
             session
           autosaved_success: Data saved in local storage
-          categories: Categories
           drag_and_drop_image: Add images by dragging & dropping or pasting them.
           hashtags: Hashtags
           items: items
           meetings: Meetings
           proposals: Proposals
           select_deselect_all: Select/deselect all
+          taxonomies: Taxonomies

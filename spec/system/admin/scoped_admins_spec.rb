@@ -128,7 +128,7 @@ describe "Scoped admin journeys" do
           it_behaves_like "edits allowed components"
         end
 
-        context "and scoped to aany process group" do
+        context "and scoped to any process group" do
           let(:settings) do
             {
               "participatory_space_manifest" => "process_groups"
@@ -139,7 +139,7 @@ describe "Scoped admin journeys" do
           it_behaves_like "allows edit any group process"
         end
 
-        context "and scoped to a specfic processes group" do
+        context "and scoped to a specific processes group" do
           let(:settings) do
             {
               "participatory_space_manifest" => "process_groups",

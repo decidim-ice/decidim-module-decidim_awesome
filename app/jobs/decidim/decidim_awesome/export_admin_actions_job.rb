@@ -3,14 +3,18 @@
 module Decidim
   module DecidimAwesome
     class ExportAdminActionsJob < ApplicationJob
+      include Decidim::PrivateDownloadHelper
+
       queue_as :default
 
       def perform(current_user, format, collection_ids)
         collection = serialized_collection(collection_ids)
 
-        export_data = Exporters.find_exporter(format).new(collection).export
+        export_data = Decidim::Exporters.find_exporter(format).new(collection).export
 
-        ExportMailer.export(current_user, "admin_actions", export_data).deliver_now
+        private_export = attach_archive(export_data, "admin_actions", current_user)
+
+        ExportMailer.export(current_user, private_export).deliver_now
       end
 
       private

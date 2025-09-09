@@ -1,4 +1,4 @@
-name: "[CI] Tests 0.29"
+name: "[CI] Tests 0.30"
 
 on:
   push:
@@ -10,7 +10,7 @@ env:
   CI: 1
   SIMPLECOV: 1
   NODE_VERSION: 18.17.1
-  RUBY_VERSION: 3.2.8
+  RUBY_VERSION: 3.3.4
   BUNDLE_GEMFILE: Gemfile
   DISABLE_SPRING: 1
   DISPLAY: ":99"

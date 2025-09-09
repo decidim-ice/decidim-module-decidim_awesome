@@ -5,21 +5,15 @@ require "fileutils"
 
 def install_module(path)
   Dir.chdir(path) do
-    system("bundle exec rake decidim_decidim_awesome:install:migrations")
-    system("bundle exec rake active_hashcash:install:migrations")
-    system("bundle exec rake db:migrate")
-  end
-end
-
-def override_webpacker_config_files(path)
-  Dir.chdir(path) do
-    system("bundle exec rake decidim_decidim_awesome:webpacker:install")
+    system("bundle exec rails decidim_decidim_awesome:install:migrations")
+    system("bundle exec rails active_hashcash:install:migrations")
+    system("bundle exec rails db:migrate")
   end
 end
 
 def seed_db(path)
   Dir.chdir(path) do
-    system("bundle exec rake db:seed")
+    system("bundle exec rails db:seed")
   end
 end
 
@@ -34,7 +28,6 @@ desc "Generates a dummy app for testing"
 task test_app: "decidim:generate_external_test_app" do
   ENV["RAILS_ENV"] = "test"
   install_module("spec/decidim_dummy_app")
-  override_webpacker_config_files("spec/decidim_dummy_app")
   copy_helpers
 end
 
@@ -53,7 +46,6 @@ task :development_app do
   end
 
   install_module("development_app")
-  override_webpacker_config_files("development_app")
   seed_db("development_app")
 end
 

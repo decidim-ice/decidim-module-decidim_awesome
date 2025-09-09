@@ -1,0 +1,109 @@
+---
+
+linters:
+  ExtraNewline:
+    enabled: true
+
+  FinalNewline:
+    enabled: true
+
+  RequireInputAutocomplete:
+    enabled: false
+
+  SpaceAroundErbTag:
+    enabled: true
+
+  AllowedScriptType:
+    enabled: true
+    allowed_types:
+      - text/javascript
+      - text/template
+      - text/x-jsrender
+
+  Rubocop:
+    enabled: true
+
+    rubocop_config:
+      inherit_from:
+        - .rubocop.yml
+
+      AllCops:
+        DisabledByDefault: true
+
+      Layout/InitialIndentation:
+        Enabled: false
+
+      Lint/SymbolConversion:
+        Enabled: false
+
+      Layout/SpaceInsideParens:
+        Enabled: false
+
+      Layout/SpaceAfterColon:
+        Enabled: false
+
+      Lint/UselessAssignment:
+        Enabled: false
+
+      Layout/ArgumentAlignment:
+        Enabled: true
+
+      Layout/SpaceAfterComma:
+        Enabled: false
+
+      Layout/TrailingWhitespace:
+        Enabled: false
+
+      Layout/LeadingEmptyLines:
+        Enabled: false
+
+      Layout/SpaceBeforeComma:
+        Enabled: false
+
+      Style/Copyright:
+        Enabled: false
+
+      Style/FrozenStringLiteralComment:
+        Enabled: false
+
+      Style/StringLiterals:
+        EnforcedStyle: double_quotes
+
+      Layout/LineLength:
+        Enabled: false
+
+      Layout/FirstArgumentIndentation:
+        Enabled: false
+
+      Layout/SpaceInsideHashLiteralBraces:
+        Enabled: true
+
+      Layout/BlockAlignment:
+        Enabled: false
+
+      Layout/MultilineMethodCallBraceLayout:
+        Enabled: false
+
+      Layout/FirstArrayElementIndentation:
+        Enabled: false
+
+      Layout/TrailingEmptyLines:
+        Enabled: false
+
+      Naming/FileName:
+        Enabled: false
+
+      Rails/LinkToBlank:
+        Enabled: false
+
+      Naming/VariableName:
+        Enabled: false
+
+      Layout/MultilineMethodCallIndentation:
+        Enabled: true
+
+      Layout/IndentationWidth:
+        Enabled: false
+
+      Layout/MultilineAssignmentLayout:
+        Enabled: false

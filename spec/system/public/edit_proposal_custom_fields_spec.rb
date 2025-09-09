@@ -114,7 +114,8 @@ describe "Custom proposals fields" do
 
     before do
       click_link_or_button proposal.title["en"]
-      click_link_or_button "Edit proposal"
+      find("#dropdown-trigger-resource-#{proposal.id}").click
+      click_on "Edit"
     end
 
     it_behaves_like "has custom fields", "//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the sheriff']"
@@ -182,7 +183,8 @@ describe "Custom proposals fields" do
   context "when amending the proposal" do
     before do
       click_link_or_button proposal.title["en"]
-      click_link_or_button "Amend"
+      find("#dropdown-trigger-resource-#{proposal.id}").click
+      find("a#amend-button").click
     end
 
     it "is amendment editor page" do
@@ -218,8 +220,10 @@ describe "Custom proposals fields" do
     end
 
     before do
-      click_link_or_button proposal.title["en"]
-      click_link_or_button "Amend"
+      visit_component
+      within "#proposal_#{proposal.id}" do
+        click_on "Amend"
+      end
     end
 
     it "is amendment editor page" do
@@ -243,7 +247,8 @@ describe "Custom proposals fields" do
     before do
       click_link_or_button "Access collaborative drafts"
       click_link_or_button collaborative_draft.title
-      click_link_or_button "Edit collaborative draft"
+      find("#dropdown-trigger-resource-#{collaborative_draft.id}").click
+      click_on "Edit"
     end
 
     it_behaves_like "has custom fields", "//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the sheriff']"

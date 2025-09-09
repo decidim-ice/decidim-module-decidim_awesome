@@ -43,6 +43,7 @@ ignore_unused:
   - "layouts.decidim.decidim_awesome.admin.maintenance.titles.*"
   - "decidim.proposals.*"
   - "decidim.meetings.*"
+  - "decidim.download_your_data.show.admin_actions"
 
 ignore_missing:
   - decidim.participatory_processes.scopes.global

@@ -65,7 +65,7 @@ Many scopes can be defined for every tweak. If a tweak is not scoped, it will be
 
 This is a component you can add in any participatory space. It retrieves all the geolocated content in that participatory space (meetings or proposals) and displays it in a big map.
 
-It also provides a simple search by category, each category is assigned to a different color.
+It also provides a simple search by taxonomy, each taxonomy is assigned to a different color.
 
 ![Awesome map](examples/awesome-map.png)
 
@@ -471,6 +471,7 @@ Depending on your Decidim version, choose the corresponding Awesome version to e
 
 | Awesome version | Compatible Decidim versions |
 |---|---|
+| 0.13.x | 0.30.x |
 | 0.12.x | 0.29.x |
 | 0.11.x | 0.28.x |
 | 0.10.x | >= 0.26.7, >= 0.27.x |

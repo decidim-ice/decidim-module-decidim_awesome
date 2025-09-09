@@ -15,7 +15,7 @@ import MeetingsController from "src/decidim/decidim_awesome/awesome_map/controll
 export default class AwesomeMap {
   constructor(map, config) {
     this.map = map;
-    this.categories = window.AwesomeMap && window.AwesomeMap.categories || []
+    this.taxonomies = window.AwesomeMap && window.AwesomeMap.taxonomies || []
     this.config = $.extend({
       length: 255,
       center: null,
@@ -23,7 +23,7 @@ export default class AwesomeMap {
       menu: {
         amendments: false,
         meetings: false,
-        categories: true,
+        taxonomies: true,
         hashtags: false,
         mergeComponents: false
       },
@@ -83,25 +83,25 @@ export default class AwesomeMap {
     }
   }
 
-  getCategory(category) {
-    let defaultCat = {
+  getTaxonomy(taxonomy) {
+    let defaultTax = {
       color: getComputedStyle(document.documentElement).getPropertyValue("--primary"),
       children: () => {},
       parent: null,
       name: null
     };
 
-    if (category) {
-      let id = category.id ? parseInt(category.id, 10) : parseInt(category, 10); // eslint-disable-line no-ternary, multiline-ternary
-      let cat = this.categories.find((ct) => ct.id === id);
-      if (cat) {
-        cat.children = () => {
-          return this.categories.filter((ct) => ct.parent === cat.id);
+    if (taxonomy) {
+      let id = taxonomy.id ? parseInt(taxonomy.id, 10) : parseInt(taxonomy, 10); // eslint-disable-line no-ternary, multiline-ternary
+      let tax = this.taxonomies.find((tx) => tx.id === id);
+      if (tax) {
+        tax.children = () => {
+          return this.taxonomies.filter((tx) => tx.parent === tax.id);
         }
-        return cat;
+        return tax;
       }
     }
-    return defaultCat;
+    return defaultTax;
   }
 
   _getController(component) {

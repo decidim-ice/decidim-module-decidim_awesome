@@ -604,6 +604,7 @@ es:
           show_not_answered: Muestra las propuestas pendientes de contestart
           show_rejected: Muestra las propuestas rechazadas
           show_withdrawn: Muestra las propuestas retiradas
+          taxonomies: Taxonomías
           text_settings: Ajustes del texto
           title: Título
           truncate: Número máximo de caracteres para las descripciones emergentes
