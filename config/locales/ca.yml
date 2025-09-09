@@ -111,6 +111,9 @@ ca:
             menu_hashtags: Mostrar el menú de cerca per hashtags
             menu_meetings: Mostrar trobades
             menu_merge_components: Unifica tots els components del mateix tipus al menú
+            menu_taxonomies: Mostrar el menú de cerca per taxonomies
+            taxonomy_filters: Selecciona els filtres pel component
+            taxonomy_filters_add: Afegeix un filtre
             truncate: Nombre màxim de caràcters per les descripcions emergents
           step:
             announcement: Anunci
@@ -602,6 +605,7 @@ ca:
           show_not_answered: Mostra les propostes pendents de contestar
           show_rejected: Mostra les propostes rebutjades
           show_withdrawn: Mostra les propostes retirades
+          taxonomies: Taxonomies
           text_settings: Configuració del text
           title: Títol
           truncate: Nombre màxim de caràcters per les descripcions emergents
@@ -678,6 +682,9 @@ ca:
             weight_2_short: 'G:'
             weight_3: Verd
             weight_3_short: 'V:'
+    download_your_data:
+      show:
+        admin_actions: Accions d'administrador
     meetings:
       meetings_map:
         view_meeting: Veure trobada
@@ -714,3 +721,4 @@ ca:
           meetings: Trobades
           proposals: Propostes
           select_deselect_all: Selecciona/Des-selecciona tot
+          taxonomies: Taxonomies
