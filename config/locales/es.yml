@@ -111,6 +111,9 @@ es:
             menu_hashtags: Mostrar el menú de búsqueda por hashtag
             menu_meetings: Mostrar encuentros
             menu_merge_components: Combinar todos los componentes del mismo tipo en el menú
+            menu_taxonomies: Mostrar menú de búsqueda por taxonomías
+            taxonomy_filters: Seleccionar filtros para el componente
+            taxonomy_filters_add: Añadir filtro
             truncate: Número máximo de caracteres para las descripciones emergentes
           step:
             announcement: Anuncio
@@ -603,6 +606,7 @@ es:
           show_not_answered: Muestra las propuestas pendientes de contestart
           show_rejected: Muestra las propuestas rechazadas
           show_withdrawn: Muestra las propuestas retiradas
+          taxonomies: Taxonomías
           text_settings: Ajustes del texto
           title: Título
           truncate: Número máximo de caracteres para las descripciones emergentes
@@ -679,6 +683,9 @@ es:
             weight_2_short: 'A:'
             weight_3: Verde
             weight_3_short: 'V:'
+    download_your_data:
+      show:
+        admin_actions: Acciones de Administrador
     meetings:
       meetings_map:
         view_meeting: Ver encuentro
@@ -715,3 +722,4 @@ es:
           meetings: Encuentros
           proposals: Propuestas
           select_deselect_all: Seleccionar/deseleccionar todo
+          taxonomies: Taxonomías
