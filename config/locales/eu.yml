@@ -98,7 +98,6 @@ eu:
             map_zoom: Zooma (0 eta 18 arteko edozein zenbaki)
             map_zoom_help: Maparen erdigunea definitzen bada soilik aplikatzen da
             menu_amendments: Erakutsi zuzenketak
-            menu_categories: Erakutsi Kategoria bilaketa-menua
             menu_hashtags: Erakutsi Hashtag bilaketa-menua
             menu_meetings: Erakutsi bilerak
             menu_merge_components: Batu mota bereko osagai guztiak menuan
@@ -641,7 +640,6 @@ eu:
           autosaved_error: LocalStorage zure arakatzailean ez da onartzen, formularioa automatikoki ezin da gorde.
           autosaved_retrieved: Formulario honen datuak aurreko saio batetik berreskuratu dira
           autosaved_success: Datuak tokiko biltegian gordeta
-          categories: Kategoriak
           drag_and_drop_image: Irudiak arrastatuz eta askatuz edo itsatsiz gehitu
           hashtags: Hashtagak
           items: elementuak
