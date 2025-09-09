@@ -86,7 +86,6 @@ it:
             map_zoom: Zoom (qualsiasi numero tra 0 e 18)
             map_zoom_help: Si applica solo se è stato definito il centro della mappa
             menu_amendments: Mostra le correzioni
-            menu_categories: Mostra Categoria nel menu di ricerca
             menu_hashtags: Mostra menu di ricerca Hashtag
             menu_meetings: Mostra meeting
             menu_merge_components: Fondi tutti i componenti dello stesso tipo nel menu
@@ -468,7 +467,6 @@ it:
           autosaved_error: LocalStorage non è supportato nel browser, il modulo non può essere salvato automaticamente.
           autosaved_retrieved: I dati per questo modulo sono stati recuperati da una sessione precedente
           autosaved_success: Dati salvati nella memoria locale
-          categories: Categorie
           drag_and_drop_image: Aggiungi immagini trascinandole o incollandole.
           hashtags: Hashtag
           items: elementi
