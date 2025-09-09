@@ -79,9 +79,11 @@ decidim-proposals:
     decidim-0.29.1: 667c2ef6ffbf3369f59bd1e8eb0ba421
     decidim-0.29.3: 59a7ed11d05a633cd4bf23881254b7f1
     decidim-0.30.0: bbf9f55b307e6ba22a70289712bc019b
+    decidim-0.30.1: 7619190e4de00729893f62bce180a8e5
   /app/views/decidim/proposals/proposals/_vote_button.html.erb:
     decidim-0.29.1: 06dd4c9bf7fc4953fc330b7ba081b2f6
     decidim-0.30.0: 644e8d24ad9571939e150190443b054a
+    decidim-0.30.1: 3cd74a9396d20e19ed3821f08cbe2b06
   /app/views/decidim/proposals/proposals/_votes_count.html.erb:
     decidim-0.29.1: 6e663e5c82c27291b63f29f346df8737
     decidim-0.30.0: 6af6cdeeff0fc0daad028b88ee1c21cb

@@ -672,7 +672,7 @@ GEM
     responders (3.1.1)
       actionpack (>= 5.2)
       railties (>= 5.2)
-    rexml (3.4.3)
+    rexml (3.4.0)
     rspec (3.13.1)
       rspec-core (~> 3.13.0)
       rspec-expectations (~> 3.13.0)
@@ -853,6 +853,7 @@ DEPENDENCIES
   listen (~> 3.1)
   parallel_tests (~> 4.2)
   puma (>= 6.3.1)
+  rexml (= 3.4.0)
   rubocop-rails (~> 2.25.1)
   web-console (~> 4.2)
 
