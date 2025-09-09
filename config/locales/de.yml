@@ -108,7 +108,6 @@ de:
             map_zoom: Zoom (beliebige Zahl zwischen 0 und 18)
             map_zoom_help: Gilt nur, wenn ein Kartenzentrum definiert ist
             menu_amendments: Änderungen anzeigen
-            menu_categories: Kategorie-Suchmenü anzeigen
             menu_hashtags: Hashtag-Suchmenü anzeigen
             menu_meetings: Veranstaltungen anzeigen
             menu_merge_components: Alle Komponenten desselben Typs im Menü zusammenführen
@@ -696,7 +695,6 @@ de:
           autosaved_error: Automatisches Speichern fehlgeschlagen
           autosaved_retrieved: Text automatisch wiederhergestellt
           autosaved_success: Text automatisch gespeichert
-          categories: Kategorien
           drag_and_drop_image: Sie können Bilder per Drag & Drop ins Textfeld ziehen.
           hashtags: Hashtags
           items: Items
