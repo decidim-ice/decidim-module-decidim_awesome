@@ -27,7 +27,7 @@ decidim-core:
     decidim-0.28: 77e80d527727acdf117a0c4517a69a7c
   /app/forms/decidim/account_form.rb:
     decidim-0.28: 11a022ae6ae18ad89da168bec4207935
-    decidim-0.28.6: 490f3d1383d678ee2e16e314d7826937
+    decidim-0.28.6: 5872f17965919c0754a453ac4eb614df
   /app/commands/decidim/update_account.rb:
     decidim-0.28: 363872116fb99372c046b7394d618333
   /app/views/decidim/account/show.html.erb:
