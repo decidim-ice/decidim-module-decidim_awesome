@@ -108,7 +108,6 @@ cs:
             map_zoom: Zvětšení (libovolné číslo mezi 0 a 18)
             map_zoom_help: Použije se pouze v případě, že je definován střed mapy
             menu_amendments: Zobrazit pozměňovací návrhy
-            menu_categories: Zobrazit menu hledání kategorií
             menu_hashtags: Zobrazit nabídku hledání Hashtagu
             menu_meetings: Zobrazit schůzky
             menu_merge_components: Sloučit všechny komponenty stejného typu v menu
@@ -710,7 +709,6 @@ cs:
           autosaved_error: Místní úložiště není ve vašem prohlížeči podporováno, formulář nelze uložit automaticky.
           autosaved_retrieved: Údaje pro tento formulář byly obnoveny z předchozí relace
           autosaved_success: Data uložena v místním úložišti
-          categories: Kategorie
           drag_and_drop_image: Přidejte obrázky přetažením nebo vložením.
           hashtags: Hashtagy
           items: položky
