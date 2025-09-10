@@ -1,4 +1,7 @@
 eu:
+  active_hashcash:
+    submit_filter: Iragazki
+    waiting_label: Egiaztatzearen zain...
   activemodel:
     attributes:
       config:
@@ -6,7 +9,13 @@ eu:
         allow_images_in_editors: Irudiak HTML editorean baimendu
         allow_images_in_proposals: Irudiak proposamenen editorean baimendu
         allow_videos_in_editors: Bideoak HTML editorean baimendu
+        authorization_options_form: Baimen-aukerak
         auto_save_forms: Inprimakiak automatikoki gordetzea tokiko biltegian
+        force_authorizations: '%{id} baimen-taldea'
+        hashcash_login: Gaitu Hashcash bot-en aurkako babesa lehendik dauden erabiltzaileentzat (saioa hasi)
+        hashcash_login_bits: Hashcash algoritmoaren bit kopurua (saioa hasi)
+        hashcash_signup: Aktibatu Hashcash bot-en aurkako babesa erabiltzaile berrientzat (alta ematea)
+        hashcash_signup_bits: Hashcash algoritmoarentzako bit kopurua (alta ematea)
         intergram_auto_no_response: Parte-hartzaileak bere lehen mezua bidali eta minutu bat igaro ondoren, erantzunik jaso ez bada, bidalitako mezua
         intergram_auto_response: Parte-hartzaileak bere lehen mezua bidali eta berehala bidalitako mezua
         intergram_chat_id: Txat IDa
@@ -32,6 +41,7 @@ eu:
         validate_title_min_length: Izenbururako beharrezko gutxieneko karaktereak
         validate_title_start_with_caps: Izenburua maiuskula batekin hastea behartu
       constraint:
+        application_context: Honetarako bakarrik
         component_id: Edo zehazki honetan
         component_manifest: Komponentetako mota hauetan bakarrik
         participatory_space_manifest: Parte-hartze espazio mota hauetan aplikatu
@@ -101,6 +111,9 @@ eu:
             menu_hashtags: Erakutsi Hashtag bilaketa-menua
             menu_meetings: Erakutsi bilerak
             menu_merge_components: Batu mota bereko osagai guztiak menuan
+            menu_taxonomies: Erakutsi Taxonomia bilatzeko menua
+            taxonomy_filters: Hautatu osagaiarentzako iragazkiak
+            taxonomy_filters_add: Iragazkia gehitu
             truncate: Popup deskribapenetarako gehienezko karaktereak
           step:
             announcement: Iragarkia
@@ -160,7 +173,7 @@ eu:
             notice: Esportazio lana ikertu da. Mezu elektroniko bat jasoko duzu prest dagoenean.
           index:
             description: Hemen aurkituko dituzu parte hartzeko espazio baten administrazioan zereginen bat izan duten erabiltzaile guztiak. Administrari normalak ez daude zerrendan.
-            global_description: Hemen aurkituko dituzu erakunde hau administratzeko paper globalen bat izan duten erabiltzaile guztiak. Parte hartzeko guneak ez daude zerrendan.
+            global_description: Hemen aurkituko dituzu erakunde hau administratzeko paper globalen bat izan duten erabiltzaile guztiak. Partaidetza espaziak ez daude zerrendan.
             missing_users: 'OHARRA: Zerrenda honetan ez dira sartuko %{date} baino lehen sortutako/kendutako erabiltzaileak. Izan ere, "erabiltzailearen trazabilitatea" Decidim v0.24n sartu zen eta instalazio hau, ziurrenik, zaharragoa da.'
             see_global: Zerrenda itzazu administrazio globalak
             see_spaces: Espazio parte-hartzaileen zerrenda
@@ -202,7 +215,10 @@ eu:
           index:
             admin_head_tags: Administratzailearen aplikazioaren goiburuan etiketa zoragarrietan sartuta
             decidim-admin: Administrazio moduluatik
+            decidim-assemblies: Batzarrak modulokoa
+            decidim-conferences: Jardunaldiak modulokoa
             decidim-core: Core moduluatik
+            decidim-participatory_processes: Partaidetza Prozesuak modulokoa
             decidim-proposals: Proposamen moduluatik
             decidim_version: Decidim bertsioa %{version}
             errors:
@@ -243,6 +259,7 @@ eu:
           destroy_scoped_style:
             error: Errorea CSS koadroa ezabatzean! %{error}
             success: CSS %{key} koadroa arrakastaz ezabatu da
+          force_authorizations: Baimen-taldeak
           form:
             additional_proposal_sortings:
               enable_all: Hautaketa-aukerak gehigarriak gaitu
@@ -290,6 +307,8 @@ eu:
               title: Parte-hartzailearen sarreraren balidazioak "title" eremurako
           form_force_authorizations:
             delete: Ezabatu
+            new: Gehitu baimen-talde berria
+            title: 'Murriztu sarbidea honekin:'
           form_proposal_custom_fields:
             delete: Ezabatu
             new: Gehitu "custom fields" koadro berria
@@ -392,6 +411,13 @@ eu:
           update:
             error: Birbideratzea eguneratzean errorea! %{error}
             success: Birbideratzea ongi eguneratu da
+        hashcash:
+          index:
+            bits: Bitak
+            ip_address: IP helbidea
+          ip_addresses:
+            ip_address: IP helbidea
+            stamps: Hashcash zigiluak
         menu:
           admins: Esparruaren administrataileak
           custom_redirects: Birbideratze pertsonalizatuak
@@ -399,6 +425,7 @@ eu:
           livechat: Zuzeneko Txata
           maintenance:
             checks: Sistemaren bateragarritasuna
+            hashcash: Hashcash zigiluak
             maintenance: Mantentzea
             private_data: Datu pribatuak
           menu_hacks: Menuaren doikuntzak
@@ -460,23 +487,23 @@ eu:
             destroying: '%{title} (e) ko datu pribatuak suntsituko dira. Mesedez, berrikusi berriro minutu batzuk barru.'
             done: Eginda
             help_html: |
-              Tresna honen bidez, datu pribatu guztiak ezaba daitezke parte hartzeko gune edo osagai jakin baterako. Ekintza hau atzeraezina da eta datu pribatu guztiak datu-basetik ezabatuko ditu.
+              Tresna honek espazio edo partaidetza espazio jakin bateko datu pribatu guztiak ezabatzea ahalbidetzen dizu. Ekintza hau atzeraezina da, eta datu pribatu guztiak datu-basetik kenduko ditu.
               <br><br>
-              <strong>Zer jotzen da datu pribatutzat?</strong>
+              <strong>Zer hartzen da datu pribatutzat?</strong>
               <br>
-              Datu pribatuak informazio publikoa ez den eta administratzaileentzat soilik den informazioa dira. Honek, oraingoz, eremu pribatuetako informazioa barne hartzen du.
+              Datu pribatuak publikoki eskuragarri ez dauden eta administratzaileek soilik eskura ditzaketen informazioak dira. Une honetan, informazio horren barruan sartzen dira eremu pertsonalizatu pribatuen informazioak.
               <br><br>
               <strong>Zer gertatzen da datu pribatuak ezabatzen ditudanean?</strong>
               <br>
-              Datu pribatuak ezabatzen direnean, hautatutako espazio edo osagai parte-hartzailerako informazio pribatu guztia datu-basetik kenduko da behin betiko. Ekintza horren erregistro bat sisteman gordeko da, ikuskapen-helburuetarako.
+              Datu pribatuak ezabatzen dituzunean, hautatutako espazio edo osagai parte-hartzailearen informazio pribatu guztia datu-basetik behin betiko ezabatuko da. Ekintza horren erregistro bat sisteman gordeko da, ikuskaritza-helburuetarako.
               <br><br>
               <strong>Zer gertatzen da datu publikoekin?</strong>
               <br>
-              Ekintza honek ez du datu publikoetan eraginik izango. Datu pribatuak bakarrik ezabatuko dira.
+              Ekintza honek ez die datu publikoei eragingo. Datu pribatuak bakarrik ezabatuko dira.
               <br><br>
-              <strong>Itxaron behar duzu datu pribatuak ezabatu aurretik?</strong>
+              <strong>Ba al dago gutxieneko denborarik datu pribatuak ezabatu aurretik itxaroteko?</strong>
               <br>
-              Bai, ezin dira datu pribatuak ezabatu azken eguneratzea %{time_ago} baino txikiagoa bada. Konfigurazio hau alda dezakezu inizializatzaileen fitxategian.
+              Bai, ezin dituzu datu pribatuak ezabatu, azken eguneratzea duela %{time_ago} baino gutxiago izan bada. Konfigurazio hori hasieratzailearen fitxategian alda dezakezu.
             items_count: Eragindakoak, guztira
             last_date: Azken eguneraketa
             no_data: Ez da datu pribaturik aurkitu duela %{time_ago} baino zaharragoa
@@ -497,6 +524,8 @@ eu:
         scoped_styles:
           menu:
             title: Azalera publikoa
+        visibility:
+          info_html: Sarbide-murrizketa gehigarriak kudea ditzakezu %{awesome_link} erabiltzen duten egiaztapenak erabiliz.
       admin_log:
         component:
           destroy_private_data: "%{user_name}-ek %{space_name}-en %{resource_name}-rako %{count} datu pribatu elementu suntsitu zituen."
@@ -538,6 +567,7 @@ eu:
           show_not_answered: Erakutsi erantzun gabeko proposamenak
           show_rejected: Erakutsi baztertutako proposamenak
           show_withdrawn: Erakutsi erretiratutako proposamenak
+          taxonomies: Taxonomiak
           text_settings: Testuaren ezarpenak
           title: Izenburua
           truncate: Popup deskribapenetarako gehienezko karaktereak
@@ -613,6 +643,9 @@ eu:
             weight_2_short: 'Y:'
             weight_3: Berdea
             weight_3_short: 'G:'
+    download_your_data:
+      show:
+        admin_actions: Administrazio-ekintzak
     meetings:
       meetings_map:
         view_meeting: Bilera ikusi
@@ -648,3 +681,4 @@ eu:
           meetings: Bilerak
           proposals: Proposamenak
           select_deselect_all: Denak hautatu/deshautatu
+          taxonomies: Taxonomiak
