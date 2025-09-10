@@ -437,6 +437,8 @@ eu:
               title: Menu nagusiaren hasiera bloke globala
             menu:
               title: Menu nagusia
+            mobile_menu:
+              title: Mobile menu
             new: Elementu berria
             remove: Gehigarria kendu
             remove_hack: Pertsonalizazioa kendu
