@@ -80,7 +80,6 @@ hu:
             map_zoom: Zoom (bármely szám 0 és 18 között)
             map_zoom_help: Csak akkor érvényes, ha a térkép közepe meghatározott
             menu_amendments: Módosítások mutatása
-            menu_categories: A Kategória kereső menü megjelenítése
             menu_meetings: Találkozók mutatása
             menu_merge_components: Az összes, azonos típusú komponens egyesítése a menüben
             truncate: A felugró ablakban lévő leírások maximális karakterszáma
@@ -259,7 +258,6 @@ hu:
       decidim_awesome:
         awesome_config:
           amendments: Módosítások
-          categories: Kategóriák
           drag_and_drop_image: Képek hozzáadása húzással és ejtéssel vagy beillesztéssel.
           hashtags: Hashtagek
           items: elemek

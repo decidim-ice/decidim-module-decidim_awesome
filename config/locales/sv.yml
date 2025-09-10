@@ -226,7 +226,6 @@ sv:
       decidim_awesome:
         awesome_config:
           amendments: Ändringsförslag
-          categories: Kategorier
           hashtags: Hashtaggar
           items: föremål
           meetings: Möten

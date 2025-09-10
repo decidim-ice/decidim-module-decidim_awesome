@@ -62,7 +62,6 @@ pt-BR:
             map_zoom: Zoom (qualquer número entre 0 e 18)
             map_zoom_help: Só se aplica se um centro de mapa estiver definido
             menu_amendments: Mostrar emendas
-            menu_categories: Mostrar menu de pesquisa de categora
             menu_meetings: Mostrar reuniões
             menu_merge_components: Mesclar todos os componentes do mesmo tipo no menu
             truncate: Máximo de caracteres para descrições em popup
@@ -344,7 +343,6 @@ pt-BR:
           autosaved_error: O armazenamento local não é suportado no seu navegador, o formulário não pode ser salvo automaticamente.
           autosaved_retrieved: Os dados para este formulário foram recuperados de uma sessão anterior
           autosaved_success: Dados salvos no armazenamento local
-          categories: Categorias
           drag_and_drop_image: Adicione imagens arrastando e soltando ou colando-as.
           hashtags: Hashtags
           items: itens

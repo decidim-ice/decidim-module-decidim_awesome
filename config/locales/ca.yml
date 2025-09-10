@@ -108,10 +108,12 @@ ca:
             map_zoom: Zoom (qualsevol nombre entre 0 i 18)
             map_zoom_help: Només s’aplica si es defineix el punt central del mapa
             menu_amendments: Mostrar esmenes
-            menu_categories: Mostrar el menú de cerca per categories
             menu_hashtags: Mostrar el menú de cerca per hashtags
             menu_meetings: Mostrar trobades
             menu_merge_components: Unifica tots els components del mateix tipus al menú
+            menu_taxonomies: Mostrar el menú de cerca per taxonomies
+            taxonomy_filters: Selecciona els filtres pel component
+            taxonomy_filters_add: Afegeix un filtre
             truncate: Nombre màxim de caràcters per les descripcions emergents
           step:
             announcement: Anunci
@@ -603,6 +605,7 @@ ca:
           show_not_answered: Mostra les propostes pendents de contestar
           show_rejected: Mostra les propostes rebutjades
           show_withdrawn: Mostra les propostes retirades
+          taxonomies: Taxonomies
           text_settings: Configuració del text
           title: Títol
           truncate: Nombre màxim de caràcters per les descripcions emergents
@@ -679,6 +682,9 @@ ca:
             weight_2_short: 'G:'
             weight_3: Verd
             weight_3_short: 'V:'
+    download_your_data:
+      show:
+        admin_actions: Accions d'administrador
     meetings:
       meetings_map:
         view_meeting: Veure trobada
@@ -709,10 +715,10 @@ ca:
           autosaved_error: L'emmagatzematge local no està disponible al teu navegador, el formulari no es podrà desar automàticament.
           autosaved_retrieved: Les dades d'aquest formulari s'han recuperat d'una sessió anterior
           autosaved_success: Dades desades a l'emmagatzematge local
-          categories: Categories
           drag_and_drop_image: Afegeix imatges arrossegant-les i deixant-les anar o bé enganxant-les.
           hashtags: Hashtags
           items: elements
           meetings: Trobades
           proposals: Propostes
           select_deselect_all: Selecciona/Des-selecciona tot
+          taxonomies: Taxonomies
