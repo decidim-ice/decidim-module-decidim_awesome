@@ -232,6 +232,7 @@ eu:
               Orain has dezakezu prozesua eta bigarren mailan egingo da.
             start_image_migrations: "👉 Migrazio-prozesua orain hasi"
         config:
+          anonymous: Erregistratu gabeko parte hartzaileak
           caution: 'OHARRA: Funtzio honek jokabide lehenetsi batzuk asko aldatzen ditu eta emaitza ustekabekoak sor ditzake. Erabili arretaz!'
           constraints:
             add_condition: Kasua gehitu
@@ -240,6 +241,9 @@ eu:
             delete: Ezabatu
             edit: Editatu
             title: 'Aplikagarria kasu hauetan bakarrik:'
+          create_force_authorization:
+            error: Akats bat izan da baimen-talde berri bat sortzean! %{error}
+            success: '%{key} baimen-taldea behar bezala sortu da'
           create_proposal_custom_field:
             error: Errorea 'custom field' koadro berria sortzean! %{error}
             success: '''Custom field'' %{key} koadroa arrakastaz sortu da'
@@ -249,6 +253,9 @@ eu:
           create_scoped_style:
             error: Errorea CSS koadro berria sortzean! %{error}
             success: CSS %{key} koadroa arrakastaz sortu da
+          destroy_force_authorization:
+            error: Akats bat izan da baimen-taldea ezabatzean! %{error}
+            success: '%{key} baimen-taldea behar bezala ezabatu da'
           destroy_proposal_custom_field:
             error: Errorea 'custom field' koadroa ezabatzean! %{error}
             success: '''Custom field'' %{key} koadroa arrakastaz ezabatu da'
