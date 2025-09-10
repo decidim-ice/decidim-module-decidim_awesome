@@ -165,7 +165,7 @@ eu:
             notice: Esportazio lana ikertu da. Mezu elektroniko bat jasoko duzu prest dagoenean.
           index:
             description: Hemen aurkituko dituzu parte hartzeko espazio baten administrazioan zereginen bat izan duten erabiltzaile guztiak. Administrari normalak ez daude zerrendan.
-            global_description: Hemen aurkituko dituzu erakunde hau administratzeko paper globalen bat izan duten erabiltzaile guztiak. Parte hartzeko guneak ez daude zerrendan.
+            global_description: Hemen aurkituko dituzu erakunde hau administratzeko paper globalen bat izan duten erabiltzaile guztiak. Partaidetza espaziak ez daude zerrendan.
             missing_users: 'OHARRA: Zerrenda honetan ez dira sartuko %{date} baino lehen sortutako/kendutako erabiltzaileak. Izan ere, "erabiltzailearen trazabilitatea" Decidim v0.24n sartu zen eta instalazio hau, ziurrenik, zaharragoa da.'
             see_global: Zerrenda itzazu administrazio globalak
             see_spaces: Espazio parte-hartzaileen zerrenda
@@ -402,34 +402,34 @@ eu:
         maintenance:
           private_data:
             component: Espazioa / Osagaia
-            confirm_delete: Ziur zaude baliabide honen datu pribatu guztiak ezabatu nahi dituzula? Honek ezin da desegin.
+            confirm_delete: Ziur zaude baliabide honetarako datu pribatu guztiak ezabatu nahi dituzula? Hau ezin da desegin.
             delete: Dena ezabatu
-            destroying_private_data: Baliabiderako %{title} datu pribatuak suntsitzeko prestatuta daude. Mesedez, egiaztatu berriro minutu batzuetan.
+            destroying_private_data: '%{title} (e) ko datu pribatuak suntsituko dira. Mesedez, berrikusi berriro minutu batzuk barru.'
             done: Eginda
             help_html: |
-              Tresna honen bidez, datu pribatu guztiak ezaba daitezke parte hartzeko gune edo osagai jakin baterako. Ekintza hau atzeraezina da eta datu pribatu guztiak datu-basetik ezabatuko ditu.
+              Tresna honek espazio edo partaidetza espazio jakin bateko datu pribatu guztiak ezabatzea ahalbidetzen dizu. Ekintza hau atzeraezina da, eta datu pribatu guztiak datu-basetik kenduko ditu.
               <br><br>
-              <strong>Zer jotzen da datu pribatutzat?</strong>
+              <strong>Zer hartzen da datu pribatutzat?</strong>
               <br>
-              Datu pribatuak informazio publikoa ez den eta administratzaileentzat bakarrik den informazioa dira. Honek, oraingoz, eremu pribatuetako informazioa barne hartzen du.
+              Datu pribatuak publikoki eskuragarri ez dauden eta administratzaileek soilik eskura ditzaketen informazioak dira. Une honetan, informazio horren barruan sartzen dira eremu pertsonalizatu pribatuen informazioak.
               <br><br>
               <strong>Zer gertatzen da datu pribatuak ezabatzen ditudanean?</strong>
               <br>
-              Datu pribatuak ezabatzen direnean, hautatutako espazio edo osagai parte-hartzailerako informazio pribatu guztia datu-basetik kenduko da behin betiko. Ekintza horren erregistro bat sisteman gordeko da, ikuskapen-helburuetarako.
+              Datu pribatuak ezabatzen dituzunean, hautatutako espazio edo osagai parte-hartzailearen informazio pribatu guztia datu-basetik behin betiko ezabatuko da. Ekintza horren erregistro bat sisteman gordeko da, ikuskaritza-helburuetarako.
               <br><br>
               <strong>Zer gertatzen da datu publikoekin?</strong>
               <br>
-              Ekintza honek ez du datu publikoetan eraginik izango. Datu pribatuak bakarrik ezabatuko dira.
+              Ekintza honek ez die datu publikoei eragingo. Datu pribatuak bakarrik ezabatuko dira.
               <br><br>
-              <strong>Itxaron behar duzu datu pribatuak ezabatu aurretik?</strong>
+              <strong>Ba al dago gutxieneko denborarik datu pribatuak ezabatu aurretik itxaroteko?</strong>
               <br>
-              Bai, ezin dira datu pribatuak ezabatu azken eguneratzea %{time_ago} baino txikiagoa bada. Konfigurazio hau alda dezakezu inizializatzaileen fitxategian.
-            items_count: Erlazionatutako guztira
+              Bai, ezin dituzu datu pribatuak ezabatu, azken eguneratzea duela %{time_ago} baino gutxiago izan bada. Konfigurazio hori hasieratzailearen fitxategian alda dezakezu.
+            items_count: Eragindakoak, guztira
             last_date: Azken eguneraketa
-            no_data: Ez da aurkitu %{time_ago} baino zaharragoak diren datu pribaturik
-            not_destroyable: Baliabide hau ezin da oraindik suntsitu
+            no_data: Ez da datu pribaturik aurkitu duela %{time_ago} baino zaharragoa
+            not_destroyable: Baliabide hori ezin da oraindik suntsitu
             removing: Ezabatzen...
-            time_ago: "%{time} lehenago"
+            time_ago: "Duela %{time}"
         menu:
           admins: Esparruaren administrataileak
           custom_redirects: Birbideratze pertsonalizatuak
