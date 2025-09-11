@@ -12,9 +12,9 @@ eu:
         authorization_options_form: Baimen-aukerak
         auto_save_forms: Inprimakiak automatikoki gordetzea tokiko biltegian
         force_authorizations: '%{id} baimen-taldea'
-        hashcash_login: Gaitu Hashcash bot-en aurkako babesa lehendik dauden erabiltzaileentzat (saioa hasi)
+        hashcash_login: Gaitu Hashcash bot-en aurkako babesa lehendik dauden parte-hartzailentzat (saioa hasi)
         hashcash_login_bits: Hashcash algoritmoaren bit kopurua (saioa hasi)
-        hashcash_signup: Aktibatu Hashcash bot-en aurkako babesa erabiltzaile berrientzat (alta ematea)
+        hashcash_signup: Aktibatu Hashcash bot-en aurkako babesa parte-hartzaile berrientzat (alta ematea)
         hashcash_signup_bits: Hashcash algoritmoarentzako bit kopurua (alta ematea)
         intergram_auto_no_response: Parte-hartzaileak bere lehen mezua bidali eta minutu bat igaro ondoren, erantzunik jaso ez bada, bidalitako mezua
         intergram_auto_response: Parte-hartzaileak bere lehen mezua bidali eta berehala bidalitako mezua
@@ -158,7 +158,7 @@ eu:
         admin_accountability:
           admin_roles:
             admin: Super admin.
-            user_manager: Erabiltzaile-kudeatzailea
+            user_manager: Parte-hartzaileen kudeatzailea
           created_at: Rol bat da.
           currently_active: Gaur egun aktibo dago.
           deleted_user: Parte -hartzailea ezabatua
@@ -172,15 +172,15 @@ eu:
               xlsx: XLSX
             notice: Esportazio lana ikertu da. Mezu elektroniko bat jasoko duzu prest dagoenean.
           index:
-            description: Hemen aurkituko dituzu parte hartzeko espazio baten administrazioan zereginen bat izan duten erabiltzaile guztiak. Administrari normalak ez daude zerrendan.
-            global_description: Hemen aurkituko dituzu erakunde hau administratzeko paper globalen bat izan duten erabiltzaile guztiak. Partaidetza espaziak ez daude zerrendan.
-            missing_users: 'OHARRA: Zerrenda honetan ez dira sartuko %{date} baino lehen sortutako/kendutako erabiltzaileak. Izan ere, "erabiltzailearen trazabilitatea" Decidim v0.24n sartu zen eta instalazio hau, ziurrenik, zaharragoa da.'
+            description: Hemen aurkituko dituzu parte hartzeko espazio baten administrazioan zereginen bat izan duten parte-hartzaile guztiak. Administrari normalak ez daude zerrendan.
+            global_description: Hemen aurkituko dituzu erakunde hau administratzeko paper globalen bat izan duten parte-hartzaile guztiak. Partaidetza espazioak ez daude zerrendan.
+            missing_users: 'OHARRA: Zerrenda honetan ez dira sartuko %{date} baino lehen sortutako/kendutako parte-hartzaileak. Izan ere, "parte-hartzailearen trazabilitatea" Decidim v0.24n sartu zen eta instalazio hau, ziurrenik, zaharragoa da.'
             see_global: Zerrenda itzazu administrazio globalak
             see_spaces: Espazio parte-hartzaileen zerrenda
             title: Administratzailearen erantzukizuna
           last_login: Azken seinalea datan.
           missing_info: "(informazioa falta da)"
-          missing_user: Erabiltzailea ez dago datu-basean.
+          missing_user: Parte-hartzailea ez dago datu-basean
           name: Izena
           never_logged: Oraindik ez da egosi.
           participatory_space: Espazio parte-hartzailea
@@ -193,7 +193,7 @@ eu:
             valuator: Baloratzailea.
         admin_authorizations:
           authorization:
-            confirm_destroy: Ziur zaude baimen hau suntsitu nahi duzula? Horrek eragina izan dezake erabiltzaileak plataformarako duen sarbidean.
+            confirm_destroy: Ziur zaude baimen hau suntsitu nahi duzula? Horrek eragina izan dezake parte-hartzaileak plataformarako duen sarbidean.
             destroy: Suntsitu.
             granted_at: '%{date}-ean emana'
             metadata: Metadatuak ditu? %{metadata}
@@ -201,14 +201,14 @@ eu:
           authorization_not_destroyed: Baimena ezin da suntsitu!
           authorization_transferred: 'Egiaztatze gatazka egon zen eta egiaztapena %{user} parte-hartzailera pasatu da'
           conflict: Gatazka dago indarrean dagoen baimen batekin.
-          conflict_help_html: "%{user} erabiltzailearekin dagoen gatazka konpondu behar duzu baimen honekin erabiltzaileari baimena eman aurretik.\n<br><br>\nEgiaztatze-gatazka bat gertatzen da beste erabiltzaile batek baimendu nahi duzun erabiltzailearen datu berberak dituenean.\nGatazka hau konpon dezakezu beste erabiltzaileari baimen gatazkatsua kenduz edo erabiltzaile horrentzako datu ezberdinak erabiliz.\n"
+          conflict_help_html: "%{user} parte-hartzailearekin dagoen gatazka konpondu behar duzu baimen honekin parte-hartzaileari baimena eman aurretik.\n<br><br>\nEgiaztatze-gatazka bat gertatzen da beste parte-hartzaile batek baimendu nahi duzun parte-hartzailearen datu berberak dituenean.\nGatazka hau konpon dezakezu beste parte-hartzaileari baimen gatazkatsua kenduz edo parte-hartzaile horrentzako datu ezberdinak erabiliz.\n"
           edit:
             authorize: Baimendu %{user} %{name}} izenarekin
-            do_it_if_sure: Egin hau bakarrik ziur bazaude erabiltzaileak baimen hau duela.
+            do_it_if_sure: Egin hau bakarrik ziur bazaude parte-hartzaileak baimen hau duela.
             force_verification: Indar-egiaztapena egungo datuekin
-            force_verification_help: Egiaztapenak huts egin du, baina behartu dezakezu erabiltzaileak baimen hau duela ziur bazaude.
+            force_verification_help: Egiaztapenak huts egin du, baina behartu dezakezu parte-hartzaileak baimen hau duela ziur bazaude.
             force_verification_reason: 'Eman arrazoi bat egiaztapena behartzeko:'
-            warning: 'Baimen hau behartuz, erabiltzailearen egungo baimen-egoera gainditzen ari zara.'
+            warning: 'Baimen hau behartuz, parte-hartzailearen egungo baimen-egoera gainditzen ari zara.'
           user_authorized: "%{user} %{name}rekin ongi baimendua"
           user_not_authorized: "%{user} ezin izan da %{name}rekin baimendu"
         checks:
@@ -233,7 +233,7 @@ eu:
               Orain has dezakezu prozesua eta bigarren mailan egingo da.
             start_image_migrations: "👉 Migrazio-prozesua orain hasi"
         config:
-          anonymous: Erregistratu gabeko parte hartzaileak
+          anonymous: Erregistratu gabeko parte-hartzaileak
           caution: 'OHARRA: Funtzio honek jokabide lehenetsi batzuk asko aldatzen ditu eta emaitza ustekabekoak sor ditzake. Erabili arretaz!'
           constraints:
             add_condition: Kasua gehitu
@@ -284,6 +284,15 @@ eu:
               auto_save_forms: LocalStorage erabiliko du parte-hartzaileek inkestetan eta beste formularioetan sartzen duten datuak automatikoki gordetzeko betetzen ari diren bitartean. Bisita batean berreskuratuko da, baina soilik formala bidali ez bada. Bidaltzen bada, datuak ezabatuko dira.
               drag_and_drop_supported: Irudiak igotzean, Drag & Drop onartzen da. Irudiak zerbitzarira igoko dira eta kanpoko baliabide gisa sartuko dira (ez du base64 inline kodetzea erabiltzen).
               force_authorization_help_text: Testu pertsonalizatua gehitu azaltzeko zergatik den beharrezkoa baimena. Gehitu laguntza eskatzeko kontaktu-metodo bat.
+              hashcash_i18n_key: 'Saioa hasteko/izena emateko botoietan parte-hartzaileei erakusten zaien testua pertsonaliza dezakezu i18n gakoarekin: %{key}'
+              hashcash_login: |
+                Rails aplikazioak babesten ditu bot-en eta indar gordineko erasoen aurka, parte-hartzaileei enbarazu egin gabe.
+                Hashcash lan-probako sistema bat da, eta parte-hartzaileek buru-hausgarri konputazional bat (nabigatzaileak automatikoki egina) ebatzi behar dute izena eman aurretik.
+              hashcash_login_bits: Parametro honek Hashcash algoritmoak lan-proba sortzeko erabiliko duen bit kopurua definitzen du. 16 bit (erraz) eta 30 bit (izugarri gogor) arteko balioa erabiltzea gomendatzen da. Saio-hasierako inprimakien balio lehenetsia %{bits} bit da.
+              hashcash_signup: |
+                Rails aplikazioak babesten ditu bot-en eta indar gordineko erasoen aurka, erabiltzaileei enbarazu egin gabe.
+                Hashcash lan-probako sistema bat da, eta erabiltzaileek buru-hausgarri konputazional bat (nabigatzaileak automatikoki egina) ebatzi behar dute izena eman aurretik.
+              hashcash_signup_bits: Hashcash algoritmoak lan-proba sortzeko erabiliko duen bit kopurua definitzen du parametro horrek. 16 (erraza) eta 30 (oso zaila) biten arteko balioa erabiltzea gomendatzen da. Alta emateko galdetegirako balio lehenetsia %{bits} bit da.
               intergram_about: Intergram-ek Telegram mezularia erabiltzen du behealdean txertatutako zuzeneko txat laguntza widget-a kudeatzeko.
               intergram_config: '<a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> zure taldean gonbidatu edo zuzenean harekin txata hasi.'
               original_editor_override: 0.26 bertsioaz geroztik, administratzaileentzat soilik da posible irudiak editoreetan igotzea.
@@ -299,22 +308,31 @@ eu:
               scoped_admin_styles: Jakin ezazu hemen ezkutatzeak ez duela ezertarako balio. Kontuz ibili, mesedez.
               scoped_admin_styles_variables: 'CSS aldagai hauek erabil ditzakezu kolore pertsonalizatua antolatzeko:'
               scoped_admin_styles_warning: "<strong>Hemen</strong>gehitu CSS pertsonalizatua, admin honetan bakarrik aplikatzen dena."
-              scoped_admins: Ohiko erabiltzailea web publikoaren zati jakin batzuk bakarrik administra ditzakeen administraziora bultzatzea (horretarako, editore murriztua erabili). Kontuan izan dagoeneko admin baimenak dituzten erabiltzaileei ez zaiela kasurik egingo.
+              scoped_admins: Ohiko parte-hartzailea web publikoaren zati jakin batzuk bakarrik administra ditzakeen administraziora bultzatzea (horretarako, editore murriztua erabili). Kontuan izan dagoeneko admin baimenak dituzten parte-hartzailei ez zaiela kasurik egingo.
               scoped_styles: Sortu CSS pertsonalizatua, soilik webgune publikoko zenbait lekutan aplikatzen dena (erabili horretarako mugatutako editorea)
               scoped_styles_variables: 'CSS aldagai hauek erabil ditzakezu kolore pertsonalizatuak antolatzeko:'
-              user_timezone: Honek lauki bat gehituko du erabiltzailearen profilean timezona ezartzeko. Hau erabiliko da data eta ordutegiak erakusteko erabiltzailearen tokian tokiko ordutegian.
+              user_timezone: Honek lauki bat gehituko du parte-hartzailearen profilean timezona ezartzeko. Hau erabiliko da data eta ordutegiak erakusteko parte-hartzailearen tokian tokiko ordutegian.
               validate_body_max_caps_percent: Zerok ez du letra larririk onartuko, 100ek dena letra larriz idaztera behartuko dute.
               validate_body_max_marks_together: 'Mugatu galdera eta oihu marka guztiak batera idatz daitezkeenak. Bi badira, ez da onartuko testuan.'
               validate_body_min_length: Zenbaki hau zero izan daiteke. Horrela, eremu hau ez da derrigorrezkoa izango.
               validate_title_max_caps_percent: Zerok ez du letra larririk onartuko, 100ek dena letra larriz idaztera behartuko dute.
               validate_title_max_marks_together: 'Mugatu galdera eta oihu marka guztiak batera idatz daitezkeenak. Bi badira, ez da onartuko testuan.'
               validate_title_min_length: Titulua beti da derrigorrezkoa eta zenbaki hau ezin da zero izan.
+              verifications_html: |
+                Espazio edo osagai parte-hartzaileetara sartzeko muga gehigarriak ezar ditzakezu, eta, horien ondorioz, parte-hartzaileakhainbat leku batzuetara sartu aurretik egiaztatu beharko dute (adibidez, spama saihesteko).<br>
+                Murriztapenak parte-hartzaile guztiei aplikatzen zaizkie, baina administratzaileek beti izango dute sarbidea /administrazio panelera.
             validators:
               body: Parte-hartzailearen sarreraren balidazioak "body" eremurako
               title: Parte-hartzailearen sarreraren balidazioak "title" eremurako
           form_force_authorizations:
             delete: Ezabatu
+            force_authorizations_html: |
+              Egiaztapen-taldeak definitzea. Talde bakoitzak eska dezake parte-hartzaileak egiaztatzea
+              plataformaren eremu jakin batzuetara sartzeko metodo baten edo batzuen bidez.
+            help: Baimentze-metodoen taldeak defini ditzakezu, eta horietara jotzea murritz dezakezu.
             new: Gehitu baimen-talde berria
+            remove: '"baimen-talde" hau kendu'
+            sure_to_remove: Ziur zaude baimen-talde hau suntsitu nahi duzula?
             title: 'Murriztu sarbidea honekin:'
           form_proposal_custom_fields:
             delete: Ezabatu
@@ -362,6 +380,7 @@ eu:
           update:
             error: Konfigurazioa eguneratzean errorea! %{error}
             success: Konfigurazioa ongi eguneratu da
+          user_logged_in: Konektatutako parte-hartzaileak
         constraints:
           create:
             error: Baldintza kasua sortzean errorea
@@ -419,11 +438,23 @@ eu:
             error: Birbideratzea eguneratzean errorea! %{error}
             success: Birbideratzea ongi eguneratu da
         hashcash:
+          filters:
+            ip_addresses: IP helbideak ikusi
+            stamps: Hashcashen zigiluak ikusi
           index:
             bits: Bitak
+            created_at: Noiz sortua
+            help_html: |
+              Orri honek sisteman detektatu diren Hashcash zigiluak erakusten ditu. Hashcash probako sistema bat da, eta parte-hartzaileek buru-hausgarri konputazional bat (nabigatzaileak automatikoki egina) ebatzi behar dute erregistratu aurretik.
+              <br><br>
+              Zerrenda horretako sarrera bakoitzak Hashcash zigilu bat adierazten du, eta zigilu hori parte-hartzaile batek sortu du alta eman den edo saioa hasi den bakoitzean.
             ip_address: IP helbidea
+            no_data: Ez da Hashcash zigilurik aurkitu
+            request_path: Eskaeraren bidea
           ip_addresses:
+            help_html: Orrialde honek sisteman detektatu diren IP helbide guztiak erakusten ditu, sortu dituzten Hashcash zigilu kopuruaren arabera ordenatuta. <br><br> Zigilu bakoitza parte-hartzaile batek saioa hasteko edo alta emateko egindako ekintza bati dagokio. Informazio hori jarduera susmagarriak detektatzeko erabil dezakezu.
             ip_address: IP helbidea
+            no_data: Ez da IP helbiderik aurkitu
             stamps: Hashcash zigiluak
         menu:
           admins: Esparruaren administrataileak
@@ -533,6 +564,7 @@ eu:
             title: Azalera publikoa
         visibility:
           info_html: Sarbide-murrizketa gehigarriak kudea ditzakezu %{awesome_link} erabiltzen duten egiaztapenak erabiliz.
+          restricted_html: Espazio honek %{awesome_link} duten sarbide-murrizketa osagarriak erabiltzen ditu.
       admin_log:
         component:
           destroy_private_data: "%{user_name}-ek %{space_name}-en %{resource_name}-rako %{count} datu pribatu elementu suntsitu zituen."
@@ -607,6 +639,7 @@ eu:
       proposal_private_custom_fields_disclosure: Informazio hau ez da argitaratuko
       required_authorizations:
         index:
+          authorization_options_invalid: Zoritxarrez, baimen hori duzun arren, egiaztatzeko erabiltzen diren datuek ez dute balio testuinguru horretan.
           cancel: Beste une batean egingo dut hau, %{link}.
           granted_title: Egiaztapen onartuak
           logout: Utzi hasieratik
@@ -622,7 +655,7 @@ eu:
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |
-            Administrazioak eskuz egiaztatu ahal izango ditu baimen horiek dituzten erabiltzaileak.
+            Administrazioak eskuz egiaztatu ahal izango ditu baimen horiek dituzten parte-hartzaileak.
             Erabili ezaugarri hau tentuz, segurtasun arazoak sor baititzake.<br>.
           awesome_tweaks: Decidim  Doikuntza zoragarriak
       validators:
@@ -676,6 +709,7 @@ eu:
             title: 'Mantentze tresnak: %{title}'
             titles:
               checks: Sistemaren bateragarritasun egiaztapenak
+              hashcash: Hashcash zigiluak
               private_data: Datu pribatuen garbiketa
         awesome_config:
           amendments: Aldaketak
