@@ -111,6 +111,7 @@ fr:
             menu_hashtags: Afficher le menu de recherche des hashtags
             menu_meetings: Montrer les rencontres
             menu_merge_components: Fusionner toutes les fonctionnalités du même type dans le menu
+            menu_taxonomies: Afficher le menu de recherche par taxonomie
             taxonomy_filters: Sélectionner les filtres pour le composant
             taxonomy_filters_add: Ajouter un filtre
             truncate: Caractères maximum pour les descriptions des popups
