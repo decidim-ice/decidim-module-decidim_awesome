@@ -9,7 +9,13 @@ fr:
         allow_images_in_editors: Autoriser les images dans l'éditeur HTML
         allow_images_in_proposals: Autoriser les images dans l'éditeur de propositions
         allow_videos_in_editors: Autoriser les vidéos dans l'éditeur HTML
+        authorization_options_form: Options d'autorisation
         auto_save_forms: Sauvegarde automatique des formulaires dans le stockage local du navigateur
+        force_authorizations: Groupe d'autorisation %{id}
+        hashcash_login: Activer la protection par bot Hashcash pour les utilisateurs existants (connexion)
+        hashcash_login_bits: Nombre de bits pour l'algorithme de Hashcash (connexion)
+        hashcash_signup: Activer la protection par bot Hashcash pour les nouveaux utilisateurs (inscription)
+        hashcash_signup_bits: Nombre de bits pour l'algorithme Hashcash (inscription)
         intergram_auto_no_response: Un message qui est envoyé une minute après que l'utilisateur envoie son premier message et qu'aucune réponse n'a été reçue
         intergram_auto_response: Un message qui est envoyé immédiatement après que l'utilisateur envoie son premier message
         intergram_chat_id: ID de la conversation
@@ -105,6 +111,7 @@ fr:
             menu_hashtags: Afficher le menu de recherche des hashtags
             menu_meetings: Montrer les rencontres
             menu_merge_components: Fusionner toutes les fonctionnalités du même type dans le menu
+            taxonomy_filters: Sélectionner les filtres pour le composant
             taxonomy_filters_add: Ajouter un filtre
             truncate: Caractères maximum pour les descriptions des popups
           step:
@@ -207,7 +214,10 @@ fr:
           index:
             admin_head_tags: '"Awesome tags" (balises) inclus dans l''en-tête de l''application d''administration'
             decidim-admin: Depuis le module Admin
+            decidim-assemblies: Depuis le module Assemblées
+            decidim-conferences: Depuis le module Conférences
             decidim-core: Depuis le module coeur
+            decidim-participatory_processes: Depuis le module Processus participatifs
             decidim-proposals: Depuis le module Propositions
             decidim_version: Version %{version} de Decidim
             errors:
@@ -222,6 +232,7 @@ fr:
               Vous pouvez démarrer le processus maintenant et il sera effectué en arrière-plan.
             start_image_migrations: "\U0001F449 Démarrez le processus de migration maintenant"
         config:
+          anonymous: Utilisateurs non connectés
           caution: 'REMARQUE : Cette fonctionnalité modifie fortement certains comportements par défaut qui peuvent conduire à des résultats inattendus. Utilisez-la avec précaution !'
           constraints:
             add_condition: Ajouter une contrainte d'application
@@ -230,6 +241,9 @@ fr:
             delete: Supprimer
             edit: Modifier
             title: 'Applicable uniquement dans ces cas:'
+          create_force_authorization:
+            error: Erreur lors de la création d'un nouveau groupe d'autorisations ! %{error}
+            success: Groupe d'autorisations %{key} créé avec succès
           create_proposal_custom_field:
             error: Erreur lors de la création d'un nouveau "champ personnalisé" ! %{error}
             success: 'le champ personnalisé %{key} a été créé avec succès'
@@ -239,6 +253,9 @@ fr:
           create_scoped_style:
             error: Erreur lors de la création d'une nouvelle boîte CSS ! %{error}
             success: La boîte CSS %{key} a été créée avec succès
+          destroy_force_authorization:
+            error: Erreur lors de la suppression du groupe d'autorisation! %{error}
+            success: Groupe d'autorisations %{key} supprimé avec succès
           destroy_proposal_custom_field:
             error: Erreur lors de la suppression du "champ personnalisé" ! %{error}
             success: '"champ personnalisé" %{key} supprimé avec succès'
@@ -248,6 +265,7 @@ fr:
           destroy_scoped_style:
             error: Erreur lors de la suppression de la boîte CSS! %{error}
             success: Boîte CSS %{key} supprimée avec succès
+          force_authorizations: Groupes d’autorisation
           form:
             additional_proposal_sortings:
               enable_all: Activer toutes les options de tri supplémentaires
@@ -265,6 +283,15 @@ fr:
               auto_save_forms: Ceci utilisera LocalStorage ( cache navigateur) pour enregistrer automatiquement les données introduites par les utilisateurs dans les enquêtes et autres formulaires pendant qu'ils le remplissent. Les données seront restaurées lors d'une prochaine visite avec le même navigateur au cas où le formulaire ne serait pas soumis. Si le formulaire est soumis, les données seront supprimées. Si les utilisateurs suppriment leurs données LocalStorage ne seront pas non plus restaurées.
               drag_and_drop_supported: Lorsque vous ajoutez des images, le glisser-déposer est pris en charge. Les images seront envoyées sur le serveur et insérées en tant que ressources externes (il n'utilise pas l'encodage en base64).
               force_authorization_help_text: Ajoutez un texte personnalisé pour expliquer pourquoi une autorisation est nécessaire. Assurez-vous également d'ajouter une méthode de contact au cas où les utilisateurs auraient besoin d'aide.
+              hashcash_i18n_key: 'Vous pouvez personnaliser le texte affiché aux utilisateurs dans les boutons de soumission des formulaires de connexion/inscription avec la clé i18n: %{key}'
+              hashcash_login: |
+                Protégez les applications Rails contre les robots et les attaques de force brute sans gêner les humains.
+                Hashcash est un système de preuve de travail qui demande aux utilisateurs de résoudre un puzzle informatique (effectué automatiquement par le navigateur) avant de pouvoir s'inscrire.
+              hashcash_login_bits: Ce paramètre définit le nombre de bits que l'algorithme Hashcash utilisera pour générer la preuve de travail. Il est recommandé d'utiliser une valeur comprise entre 16 (facile) et 30 bits (extrêmement difficile). La valeur par défaut des formulaires d'inscription est %{bits} bits.
+              hashcash_signup: |
+                Protégez les applications Rails contre les robots et les attaques de force brute sans gêner les humains.
+                Hashcash est un système de preuve de travail qui demande aux utilisateurs de résoudre un puzzle informatique (effectué automatiquement par le navigateur) avant de pouvoir s'inscrire.
+              hashcash_signup_bits: Ce paramètre définit le nombre de bits que l'algorithme Hashcash utilisera pour générer la preuve de travail. Il est recommandé d'utiliser une valeur comprise entre 16 (facile) et 30 bits (extrêmement difficile). La valeur par défaut des formulaires d'inscription est %{bits} bits.
               intergram_about: Intergram utilise la messagerie Telegram pour gérer un widget de chat en direct intégré dans le bas de la page.
               intergram_config: 'Invitez le bot <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram</a> dans votre groupe ou commencez une conversation avec lui directement. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               original_editor_override: Depuis la version 0.26, il est possible (pour les administrateurs seulement) de charger des images dans les éditeurs. Par conséquent, les paramètres d'image activés ici n'affectent que les éditeurs publics (ce sera toujours disponible pour l'admin).
@@ -290,11 +317,21 @@ fr:
               validate_title_max_caps_percent: Zéro n'autorisera aucune lettre majuscule, 100 forcera à tout écrire en majuscule
               validate_title_max_marks_together: 'Limiter le nombre de points d''interrogation et d''exclamation qui peuvent être écrits ensemble. Par exemple : si c''est 2, alors ''!!!'' ne sera pas autorisé dans le texte'
               validate_title_min_length: Le titre est toujours obligatoire et ce nombre ne peut être égal à zéro
+              verifications_html: |
+                Ici, vous pouvez ajouter des restrictions d'accès supplémentaires aux espaces participatifs ou aux composants qui forceront les utilisateurs à être vérifiés avant d'accéder à certains emplacements (afin d'empêcher le spam par exemple).<br>
+                Les restrictions s'appliquent à tous les utilisateurs mais les administrateurs auront toujours accès au panneau /admin.
             validators:
               body: Validations d'entrée de l'utilisateur pour le champ "body"
               title: Validations d'entrée de l'utilisateur pour le champ "body"
           form_force_authorizations:
             delete: Supprimer
+            force_authorizations_html: |
+              Définissez des groupes de vérification. Chaque groupe peut exiger que les utilisateurs soient vérifiés
+              par une ou plusieurs méthodes pour accéder à des zones spécifiques de la plateforme.
+            help: Vous pouvez définir des méthodes pour les groupes d'autorisation et restreindre l'accès en fonction d'elles.
+            new: Ajouter un nouveau groupe d'autorisation
+            remove: Supprimer ce "groupe d'autorisation"
+            sure_to_remove: Êtes-vous sûr(e) de vouloir détruire ce groupe d'autorisations?
             title: 'Restreindre l''accès avec :'
           form_proposal_custom_fields:
             delete: Supprimer
@@ -404,11 +441,17 @@ fr:
             ip_addresses: Voir les adresses IP
             stamps: Voir les tampons de hashcash
           index:
+            bits: Bits
             created_at: Créé le
+            help_html: |
+              Cette page montre les tampons de Hashcash qui ont été détectés dans le système. Hashcash est un système de preuve de travail qui demande aux utilisateurs de résoudre un puzzle informatique (effectué automatiquement par le navigateur) avant de pouvoir s'inscrire.
+              <br><br>
+              Chaque entrée de cette liste représente un tampon de Hashcash qui a été généré par un utilisateur chaque fois qu'il s'est inscrit ou s'est connecté.
             ip_address: Adresse IP
             no_data: Aucun tampon de Hashcash trouvé
             request_path: Chemin de la requête
           ip_addresses:
+            help_html: Cette page répertorie toutes les adresses IP qui ont été détectées dans le système trié par le nombre de tampons de hashcash qu'elles ont générés. <br><br> Chaque tampon est soit une connexion soit une action d'inscription par un utilisateur. Vous pouvez utiliser ces informations pour détecter les activités suspectes.
             ip_address: Adresse IP
             no_data: Aucune adresse IP trouvée
             stamps: Tampons de hashcash
@@ -518,6 +561,9 @@ fr:
         scoped_styles:
           menu:
             title: Interface publique
+        visibility:
+          info_html: Vous pouvez gérer des restrictions d'accès supplémentaires utilisant des vérifications avec %{awesome_link}.
+          restricted_html: Cet espace utilise des restrictions d'accès supplémentaires avec %{awesome_link}.
       admin_log:
         component:
           destroy_private_data: "%{user_name} a détruit les objets %{count} de données privées pour %{resource_name} dans %{space_name}"
@@ -592,6 +638,7 @@ fr:
       proposal_private_custom_fields_disclosure: Cette information ne sera pas publiée
       required_authorizations:
         index:
+          authorization_options_invalid: Malheureusement, bien que vous ayez cette autorisation, les données utilisées pour vérifier votre identité ne sont pas valides dans ce contexte.
           cancel: Je vais le faire ultérieurement, %{link}.
           granted_title: Vérifications accordées
           logout: me déconnecter
