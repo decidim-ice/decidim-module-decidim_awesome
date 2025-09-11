@@ -1,4 +1,7 @@
 fr:
+  active_hashcash:
+    submit_filter: Filtrer
+    waiting_label: En attente de vérification...
   activemodel:
     attributes:
       config:
@@ -32,6 +35,7 @@ fr:
         validate_title_min_length: Nombre de caractères minimum pour le titre
         validate_title_start_with_caps: Forcer le titre à commencer par une lettre majuscule
       constraint:
+        application_context: Uniquement pour
         component_id: ou spécifiquement dans
         component_manifest: Uniquement dans les composants de type
         participatory_space_manifest: Appliquer aux espaces participatifs de type
@@ -101,6 +105,7 @@ fr:
             menu_hashtags: Afficher le menu de recherche des hashtags
             menu_meetings: Montrer les rencontres
             menu_merge_components: Fusionner toutes les fonctionnalités du même type dans le menu
+            taxonomy_filters_add: Ajouter un filtre
             truncate: Caractères maximum pour les descriptions des popups
           step:
             announcement: Annonce
@@ -290,6 +295,7 @@ fr:
               title: Validations d'entrée de l'utilisateur pour le champ "body"
           form_force_authorizations:
             delete: Supprimer
+            title: 'Restreindre l''accès avec :'
           form_proposal_custom_fields:
             delete: Supprimer
             new: Ajouter une nouvelle boîte de champs personnalisés
@@ -336,6 +342,7 @@ fr:
           update:
             error: Erreur lors de la mise à jour de la configuration ! %{error}
             success: La configuration a bien été mise à jour
+          user_logged_in: Utilisateurs connectés
         constraints:
           create:
             error: Erreur lors de la création de la contrainte
@@ -392,6 +399,19 @@ fr:
           update:
             error: Erreur lors de la mise à jour de la redirection! %{error}
             success: Redirection mise à jour avec succès
+        hashcash:
+          filters:
+            ip_addresses: Voir les adresses IP
+            stamps: Voir les tampons de hashcash
+          index:
+            created_at: Créé le
+            ip_address: Adresse IP
+            no_data: Aucun tampon de Hashcash trouvé
+            request_path: Chemin de la requête
+          ip_addresses:
+            ip_address: Adresse IP
+            no_data: Aucune adresse IP trouvée
+            stamps: Tampons de hashcash
         menu:
           admins: Administrateurs de secteur
           custom_redirects: Redirections personnalisées
@@ -399,6 +419,7 @@ fr:
           livechat: Chat en direct
           maintenance:
             checks: Compatibilité système
+            hashcash: Tampons de hashcash
             maintenance: Maintenance
             private_data: Données privées
           menu_hacks: Tweaks de menu
@@ -538,6 +559,7 @@ fr:
           show_not_answered: Afficher les propositions n'ayant pas reçu de réponses
           show_rejected: Afficher les propositions rejetées
           show_withdrawn: Afficher les propositions retirées
+          taxonomies: Taxonomies
           text_settings: Paramètres de texte
           title: Titre
           truncate: Caractères maximum pour les descriptions des popups
@@ -635,6 +657,7 @@ fr:
             title: 'Outils de maintenance: %{title}'
             titles:
               checks: Vérifications de compatibilité système
+              hashcash: Tampons de hashcash
               private_data: Nettoyage des données privées
         awesome_config:
           amendments: Amendements
@@ -647,3 +670,4 @@ fr:
           meetings: Rencontres
           proposals: Propositions
           select_deselect_all: Sélectionner/Désélectionner tout
+          taxonomies: Taxonomies
