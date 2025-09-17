@@ -111,6 +111,9 @@ de:
             menu_hashtags: Hashtag-Suchmenü anzeigen
             menu_meetings: Veranstaltungen anzeigen
             menu_merge_components: Alle Komponenten desselben Typs im Menü zusammenführen
+            menu_taxonomies: Suchmenü für Klassifizierungen anzeigen
+            taxonomy_filters: Filter für die Komponente suchen
+            taxonomy_filters_add: Filter hinzufügen
             truncate: Maximale Zeichenanzahl für Popup-Beschreibungen
           step:
             announcement: Ankündigung
@@ -597,6 +600,7 @@ de:
           show_not_answered: Nicht beantwortete Vorschläge anzeigen
           show_rejected: Abgelehnte Vorschläge anzeigen
           show_withdrawn: Zurückgezogene Vorschläge anzeigen
+          taxonomies: Klassifizierungen
           text_settings: Text-Einstellungen
           title: Titel
           truncate: Maximale Zeichenanzahl für Popup-Beschreibungen
@@ -665,6 +669,9 @@ de:
             weight_2_short: 'Y:'
             weight_3: Grün
             weight_3_short: 'G:'
+    download_your_data:
+      show:
+        admin_actions: Admin-Aktionen
     meetings:
       meetings_map:
         view_meeting: Sitzung ansehen
@@ -701,3 +708,4 @@ de:
           meetings: Veranstaltungen
           proposals: Vorschläge
           select_deselect_all: Alles auswählen / Auswahl aufheben
+          taxonomies: Klassifizierungen
