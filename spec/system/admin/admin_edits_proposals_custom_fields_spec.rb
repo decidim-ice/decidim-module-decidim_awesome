@@ -56,13 +56,13 @@ describe "Admin edits proposals" do
 
     it "displays custom fields" do
       expect(page).to have_content("Title")
-      expect(page).not_to have_content("Body")
+      expect(page).to have_no_content("Body")
       expect(page).to have_content("Full Name")
       expect(page).to have_content("Occupation")
       expect(page).to have_content("Street Sweeper")
       expect(page).to have_content("Short Bio")
       expect(page).to have_xpath("//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the sheriff']")
-      expect(page).not_to have_css(".form-error.is-visible")
+      expect(page).to have_no_css(".form-error.is-visible")
       expect(page).to have_content("This information won't be published")
       within "#proposal-custom-field-private_body" do
         expect(page).to have_content("Phone Number")
@@ -87,10 +87,10 @@ describe "Admin edits proposals" do
       it "displays normal proposal editor" do
         expect(page).to have_content("Title")
         expect(page).to have_content("Body")
-        expect(page).not_to have_content("Full Name")
-        expect(page).not_to have_content("Occupation")
-        expect(page).not_to have_content("Street Sweeper")
-        expect(page).not_to have_content("Short Bio")
+        expect(page).to have_no_content("Full Name")
+        expect(page).to have_no_content("Occupation")
+        expect(page).to have_no_content("Street Sweeper")
+        expect(page).to have_no_content("Short Bio")
         expect(page).to have_content("This information won't be published")
         within "#proposal-custom-field-private_body" do
           expect(page).to have_content("Phone Number")
@@ -103,12 +103,12 @@ describe "Admin edits proposals" do
 
       it "displays the scoped fields" do
         expect(page).to have_content("Title")
-        expect(page).not_to have_content("Body")
+        expect(page).to have_no_content("Body")
         expect(page).to have_content("Full Name")
         expect(page).to have_content("Occupation")
         expect(page).to have_content("Street Sweeper")
-        expect(page).not_to have_content("Short Bio")
-        expect(page).not_to have_css(".form-error.is-visible")
+        expect(page).to have_no_content("Short Bio")
+        expect(page).to have_no_css(".form-error.is-visible")
         expect(page).to have_content("This information won't be published")
         within "#proposal-custom-field-private_body" do
           expect(page).to have_content("Phone Number")
@@ -121,15 +121,15 @@ describe "Admin edits proposals" do
 
       it "displays the scoped fields" do
         expect(page).to have_content("Title")
-        expect(page).not_to have_content("Body")
+        expect(page).to have_no_content("Body")
         expect(page).to have_content("Full Name")
         expect(page).to have_content("Occupation")
         expect(page).to have_content("Street Sweeper")
         expect(page).to have_content("Short Bio")
-        expect(page).not_to have_css(".form-error.is-visible")
-        expect(page).not_to have_content("This information won't be published")
-        expect(page).not_to have_css("#proposal-custom-field-private_body")
-        expect(page).not_to have_content("Phone Number")
+        expect(page).to have_no_css(".form-error.is-visible")
+        expect(page).to have_no_content("This information won't be published")
+        expect(page).to have_no_css("#proposal-custom-field-private_body")
+        expect(page).to have_no_content("Phone Number")
       end
     end
 
@@ -181,7 +181,7 @@ describe "Admin edits proposals" do
         expect(page).to have_content("555-555-555")
       end
       expect(page).to have_content("This data was last updated less than a minute ago.")
-      expect(page).not_to have_content("You might want to remove it")
+      expect(page).to have_no_content("You might want to remove it")
     end
 
     context "when private data is required to be removed" do
@@ -208,10 +208,10 @@ describe "Admin edits proposals" do
 
       it "shows destroyed date" do
         click_link_or_button "Private body"
-        expect(page).not_to have_content("Phone Number")
+        expect(page).to have_no_content("Phone Number")
         expect(page).to have_content("This data was destroyed less than a minute ago.")
-        expect(page).not_to have_content("555-555-555")
-        expect(page).not_to have_content("You might want to remove it")
+        expect(page).to have_no_content("555-555-555")
+        expect(page).to have_no_content("You might want to remove it")
       end
     end
 
@@ -226,10 +226,10 @@ describe "Admin edits proposals" do
 
       it "does not display the private data" do
         click_link_or_button "Private body"
-        expect(page).not_to have_content("Phone Number")
-        expect(page).not_to have_content("This data was last updated")
-        expect(page).not_to have_content("This data was last destroyed")
-        expect(page).not_to have_content("You might want to remove it")
+        expect(page).to have_no_content("Phone Number")
+        expect(page).to have_no_content("This data was last updated")
+        expect(page).to have_no_content("This data was last destroyed")
+        expect(page).to have_no_content("You might want to remove it")
       end
     end
 
@@ -242,9 +242,9 @@ describe "Admin edits proposals" do
         within "#textarea-1476748007461" do
           expect(page).to have_content("I shot the sheriff")
         end
-        expect(page).not_to have_content("Private body")
-        expect(page).not_to have_content("Phone Number")
-        expect(page).not_to have_content("555-555-555")
+        expect(page).to have_no_content("Private body")
+        expect(page).to have_no_content("Phone Number")
+        expect(page).to have_no_content("555-555-555")
       end
     end
   end
