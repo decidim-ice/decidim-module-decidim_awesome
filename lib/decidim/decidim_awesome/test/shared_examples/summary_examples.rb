@@ -65,6 +65,8 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::System::UpdateOrganization.included_modules).to include(Decidim::DecidimAwesome::System::UpdateOrganizationOverride)
       expect(Decidim::System::RegisterOrganization.included_modules).to include(Decidim::DecidimAwesome::System::RegisterOrganizationOverride)
       expect(Decidim::AdminLog::UserPresenter.included_modules).to include(Decidim::DecidimAwesome::AdminLog::UserPresenterOverride)
+      expect(Decidim::Devise::SessionsController.included_modules).to include(Decidim::DecidimAwesome::NeedsHashcash)
+      expect(Decidim::Devise::RegistrationsController.included_modules).to include(Decidim::DecidimAwesome::NeedsHashcash)
     end
 
   else
@@ -103,6 +105,9 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::DecidimAwesome::AwesomeHelpers.included_modules).not_to include(Decidim::DecidimAwesome::AwesomeHelpers)
       expect(Decidim::DecidimAwesome::ContentSecurityPolicy.included_modules).not_to include(Decidim::DecidimAwesome::ContentSecurityPolicy)
       expect(Decidim::DecidimAwesome::UserOverride.included_modules).not_to include(Decidim::DecidimAwesome::UserOverride)
+      expect(Decidim::AdminLog::UserPresenter.included_modules).not_to include(Decidim::DecidimAwesome::AdminLog::UserPresenterOverride)
+      expect(Decidim::Devise::SessionsController.included_modules).not_to include(Decidim::DecidimAwesome::NeedsHashcash)
+      expect(Decidim::Devise::RegistrationsController.included_modules).not_to include(Decidim::DecidimAwesome::NeedsHashcash)
     end
   end
 end
@@ -223,11 +228,11 @@ shared_examples "basic rendering" do |enabled|
       end
 
       it "do not have custom fields javascript" do
-        expect(page).not_to have_xpath("//script[contains(@src,'decidim_decidim_awesome_custom_fields')]", visible: :all)
+        expect(page).to have_no_xpath("//script[contains(@src,'decidim_decidim_awesome_custom_fields')]", visible: :all)
       end
 
       it "do not have custom styles CSS" do
-        expect(page.body).not_to have_content(styles)
+        expect(page.body).to have_no_content(styles)
       end
     end
   end
@@ -244,7 +249,8 @@ shared_examples "basic rendering" do |enabled|
         "menus/menu/hacks",
         "menus/home_content_block_menu/hacks",
         "custom_redirects",
-        "config/livechat"
+        "config/livechat",
+        "maintenance/hashcash"
       ]
     end
 
@@ -284,7 +290,7 @@ shared_examples "basic rendering" do |enabled|
       it "has no admin menus" do
         menus.each do |menu|
           within ".sidebar-menu" do
-            expect(page).not_to have_link(href: "/admin/decidim_awesome/#{menu}")
+            expect(page).to have_no_link(href: "/admin/decidim_awesome/#{menu}")
           end
         end
       end

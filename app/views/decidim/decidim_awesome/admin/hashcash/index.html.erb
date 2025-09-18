@@ -1,0 +1,33 @@
+<div class="mb-8">
+  <p class="help-text"><%= t(".help_html") %>
+</div>
+
+<%= render "filters" %>
+
+<% if stamps.empty? %>
+  <div class="callout warning"><%= t(".no_data") %></div>
+<% else %>
+  <div class="table-scroll">
+    <table class="table-list">
+      <thead>
+        <tr>
+          <th><%= t(".created_at") %></th>
+          <th><%= t(".ip_address") %></th>
+          <th><%= t(".request_path") %></th>
+          <th><%= t(".bits") %></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% stamps.each do |stamp| %>
+          <tr>
+            <td><%= link_to stamp.created_at, hashcash_path(stamp) %></td>
+            <td><%= stamp.ip_address %></td>
+            <td><%= stamp.request_path %></td>
+            <td><%= stamp.bits %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

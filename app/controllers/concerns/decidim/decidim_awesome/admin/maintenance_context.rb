@@ -8,31 +8,26 @@ module Decidim
 
         included do
           layout "decidim/decidim_awesome/admin/maintenance"
-          helper_method :current_view, :available_views, :present_private_data
+          helper_method :available_views
 
           private
-
-          def present_private_data(model)
-            PrivateDataPresenter.new(model)
-          end
-
-          def current_view
-            return params[:id] if available_views.include?(params[:id])
-
-            available_views.keys.first
-          end
 
           def available_views
             {
               "private_data" => {
                 title: I18n.t("private_data", scope: "decidim.decidim_awesome.admin.menu.maintenance"),
                 icon: "spy-line",
-                path: decidim_admin_decidim_awesome.maintenance_path("private_data")
+                path: decidim_admin_decidim_awesome.private_data_path
+              },
+              "hashcash" => {
+                title: I18n.t("hashcash", scope: "decidim.decidim_awesome.admin.menu.maintenance"),
+                icon: "hashtag",
+                path: decidim_admin_decidim_awesome.hashcashes_path
               },
               "checks" => {
                 title: I18n.t("checks", scope: "decidim.decidim_awesome.admin.menu.maintenance"),
                 icon: "pulse",
-                path: decidim_admin_decidim_awesome.checks_maintenance_index_path
+                path: decidim_admin_decidim_awesome.checks_path
               }
             }
           end

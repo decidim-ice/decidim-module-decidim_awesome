@@ -12,6 +12,7 @@ data:
     - "<%= %x[bundle info decidim-blogs --path].chomp %>/config/locales/%{locale}.yml"
 
 ignore_unused:
+  - "active_hashcash.*"
   - "decidim.admin.actions.manage"
   - "decidim.admin.filters.admin_accountability.*"
   - "decidim.admin.filters.search_placeholder.*"

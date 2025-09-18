@@ -28,9 +28,12 @@ module Decidim
         post :export_admin_accountability, to: "admin_accountability#export", as: "export_admin_accountability"
         get :users, to: "config#users"
         post :rename_scope_label, to: "config#rename_scope_label"
-        resources :maintenance, only: [:show] do
-          delete :destroy_private_data, on: :member
-          get :checks, on: :collection, to: "checks#index"
+        scope :maintenance do
+          get :checks, to: "checks#index"
+          resources :private_data, only: [:index, :destroy]
+          resources :hashcash, only: [:index, :show], as: "hashcashes" do
+            get :ip_addresses, on: :collection
+          end
         end
         resources :admin_authorizations, only: [:edit, :update, :destroy]
         post :migrate_images, to: "checks#migrate_images"
@@ -52,14 +55,14 @@ module Decidim
                         if first_available
                           decidim_admin_decidim_awesome.config_path(first_available)
                         else
-                          decidim_admin_decidim_awesome.checks_maintenance_index_path
+                          decidim_admin_decidim_awesome.checks_path
                         end,
                         icon_name: "fire",
                         position: 7.5,
                         active: if first_available
                                   is_active_link?(decidim_admin_decidim_awesome.config_path(first_available), :inclusive)
                                 else
-                                  is_active_link?(decidim_admin_decidim_awesome.checks_maintenance_index_path)
+                                  is_active_link?(decidim_admin_decidim_awesome.checks_path)
                                 end,
                         if: defined?(current_user) && current_user&.read_attribute("admin")
         end
