@@ -518,7 +518,7 @@ Decidim::DecidimAwesome.configure do |config|
 end
 ```
 
-For a complete list of options take a look at the [module defaults](lib/decidim/decidim_awesome.rb).
+For a complete list of options take a look at the [module defaults](lib/decidim/decidim_awesome/awesome.rb).
 
 ## Missing something?
 
