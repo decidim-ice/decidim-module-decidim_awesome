@@ -11,6 +11,8 @@ module Decidim
       attr_reader :participatory_space, :config_var
 
       def query
+        return Decidim::DecidimAwesome::AwesomeConfig.none if participatory_space.nil?
+
         set_base_query
         add_space_specific_conditions
       end
