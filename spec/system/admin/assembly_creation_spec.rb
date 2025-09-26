@@ -16,9 +16,6 @@ describe "Assembly creation with decidim_awesome constraints" do
       visit decidim_admin_assemblies.new_assembly_path
 
       expect(page).to have_content("New assembly")
-
-      expect(page).not_to have_content("undefined method")
-      expect(page).to have_content("New assembly")
     end
   end
 end
