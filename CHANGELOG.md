@@ -1,6 +1,14 @@
 CHANGELOG
 =========
 
+v0.12.5
+-------
+Compatibility:
+  - Decidim 0.29.x
+
+Fixes:
+  - Fix nil participatory_space error in SpaceConstraintFinder [#464](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/464)
+
 v0.12.4
 -------
 Compatibility:
