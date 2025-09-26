@@ -1,6 +1,17 @@
 CHANGELOG
 =========
 
+v0.13.1
+-------
+
+Compatibility:
+  - Decidim 0.30.x
+
+Fixes:
+  - Fix access to surveys admin controller ([#460](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/460))
+  - Fix nil participatory_space error in SpaceConstraintFinder [#463](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/463)
+  - Correct module defaults link in README [#461](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/461)
+
 v0.13.0
 -------
 
