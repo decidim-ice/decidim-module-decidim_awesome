@@ -11,10 +11,9 @@ module Decidim
 
           # rubocop:disable Rails/DynamicFindBy
           checksums = YAML.load_file("#{__dir__}/checksums.yml")
-          loaded_specs = Gem.loaded_specs.keys
 
           @overrides = checksums.filter_map do |package, files|
-            next unless loaded_specs.grep(/#{package}/).any?
+            next unless Decidim::DependencyResolver.instance.needed?(package)
 
             props = {
               spec: ::Gem::Specification.find_by_name(package),
