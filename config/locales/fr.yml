@@ -590,6 +590,7 @@ fr:
           admin_allowed_authoritzations_help_html: |
             Les administrateurs seront en mesure de vérifier manuellement les utilisateurs avec ces autorisations.
             <br>Utilisez cette fonctionnalité avec précaution, car elle peut entraîner des problèmes de sécurité.
+          awesome_tweaks: Réglages Decidim Awesome
       validators:
         too_much_caps: Utilise trop de majuscule (plus de %{percent} du texte)
       voting:
