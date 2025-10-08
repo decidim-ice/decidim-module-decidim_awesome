@@ -657,6 +657,7 @@ fr:
           admin_allowed_authoritzations_help_html: |
             Les administrateurs seront en mesure de vérifier manuellement les utilisateurs avec ces autorisations.
             <br>Utilisez cette fonctionnalité avec précaution, car elle peut entraîner des problèmes de sécurité.
+          awesome_tweaks: Réglages Decidim Awesome
       validators:
         too_much_caps: Utilise trop de majuscule (plus de %{percent} du texte)
       voting:
@@ -682,6 +683,9 @@ fr:
             weight_2_short: 'J:'
             weight_3: Verte
             weight_3_short: 'V:'
+    download_your_data:
+      show:
+        admin_actions: Actions administrateur
     meetings:
       meetings_map:
         view_meeting: Voir la rencontre
