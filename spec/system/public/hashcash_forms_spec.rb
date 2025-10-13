@@ -3,7 +3,7 @@
 require "spec_helper"
 
 describe "Hashcash protector", :perform_enqueued do
-  let(:organization) { create(:organization, available_locales: [:en]) }
+  let(:organization) { create(:organization, available_locales: [:en, :ca]) }
   let!(:component) { create(:proposal_component, :with_creation_enabled, organization:) }
   let!(:awesome_hashcash_login) { create(:awesome_config, organization:, var: :hashcash_login, value: hashcash_login) }
   let!(:awesome_hashcash_signup) { create(:awesome_config, organization:, var: :hashcash_signup, value: hashcash_signup) }
@@ -38,6 +38,14 @@ describe "Hashcash protector", :perform_enqueued do
   context "when not logged in" do
     before do
       visit decidim.new_user_session_path
+    end
+
+    it "can change language" do
+      within_language_menu do
+        click_on "Català"
+      end
+      expect(page).to have_content("Entra")
+      expect(page).to have_content("El meu compte")
     end
 
     context "when the user logs_in in session controller" do

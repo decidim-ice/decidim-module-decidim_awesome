@@ -1,6 +1,15 @@
 CHANGELOG
 =========
 
+v0.13.2
+-------
+
+Compatibility:
+  - Decidim 0.30.x
+
+Fixes:
+  - Fix changing locale when Hashcash is active
+
 v0.13.1
 -------
 
