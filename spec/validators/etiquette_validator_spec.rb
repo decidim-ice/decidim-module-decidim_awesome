@@ -46,6 +46,7 @@ describe EtiquetteValidator do
 
   shared_examples "attribute caps validation" do |attribute|
     context "when #{attribute} has too much caps" do
+      let(:config_helper) { send("validate_#{attribute}_max_caps_percent") }
       let(attribute) { "A SCREAMING PIECE of text" }
 
       it { is_expected.not_to be_valid }
