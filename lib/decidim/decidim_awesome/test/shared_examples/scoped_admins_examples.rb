@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-welcome_text = "Dashboard"
-
 shared_examples "redirects to index" do |_link|
   it "display index page" do
     expect(page).to have_content("You are not authorized to perform this action")
-    expect(page).to have_content(welcome_text)
+    expect(page).to have_content("Dashboard")
     expect(page).to have_current_path(decidim_admin.root_path, ignore_query: true)
   end
 end
@@ -111,12 +109,12 @@ shared_examples "allows all admin routes" do
     visit decidim_admin.root_path
     # this is a workaround to wait for the page to load
     # it seems that the test might fail randomly otherwise
-    # underlaying issue is unknown, maybe capybara is faster clicking than ruby is at storing class variables?
+    # underlying issue is unknown, maybe capybara is faster clicking than ruby is at storing class variables?
     sleep 0.1
   end
 
   it "allows the admin root page" do
-    expect(page).to have_content(welcome_text)
+    expect(page).to have_content("Dashboard")
   end
 
   it "allows the assemblies page" do
@@ -138,7 +136,7 @@ shared_examples "allows scoped admin routes" do
   end
 
   it "allows the admin root page" do
-    expect(page).to have_content(welcome_text)
+    expect(page).to have_content("Dashboard")
   end
 
   it "allows the assemblies page" do
