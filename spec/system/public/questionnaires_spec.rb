@@ -4,7 +4,6 @@ require "spec_helper"
 require "decidim/decidim_awesome/test/shared_examples/config_examples"
 
 describe "Questionnaires" do
-  # rubocop:disable Capybara/SpecificFinders
   include_context "with a component"
   let(:manifest_name) { "meetings" }
 
@@ -49,15 +48,19 @@ describe "Questionnaires" do
       visit questionnaire_path
       expect(page.body).to have_content("window.DecidimAwesome.current_questionnaire")
 
-      fill_in "questionnaire_responses_1", with: "My answer"
-      choose "questionnaire_responses_0_choices_1_body"
+      within ".answer-questionnaire__step" do
+        find('input[type="text"]', match: :first).fill_in(with: "My answer")
+        find('input[type="radio"]', match: :first).click
+      end
       sleep 0.1
 
       visit questionnaire_path
       sleep 0.1
 
-      expect(find("#questionnaire_responses_1").value).to eq("My answer")
-      expect(find("#questionnaire_responses_0_choices_1_body")).to be_checked
+      within ".answer-questionnaire__step" do
+        expect(find('input[type="radio"]', match: :first)).to be_checked
+        expect(find('input[type="text"]', match: :first).value).to eq("My answer")
+      end
     end
 
     context "when awesome config is disabled" do
@@ -67,15 +70,19 @@ describe "Questionnaires" do
         visit questionnaire_path
         expect(page.body).to have_content("window.DecidimAwesome.current_questionnaire")
 
-        fill_in "questionnaire_responses_1", with: "My answer"
-        choose "questionnaire_responses_0_choices_1_body"
+        within ".answer-questionnaire__step" do
+          find('input[type="text"]', match: :first).fill_in(with: "My answer")
+          find('input[type="radio"]', match: :first).click
+        end
         sleep 0.1
 
         visit questionnaire_path
         sleep 0.1
 
-        expect(find("#questionnaire_responses_1").value).to eq("")
-        expect(find("#questionnaire_responses_0_choices_1_body")).not_to be_checked
+        within ".answer-questionnaire__step" do
+          expect(find('input[type="radio"]', match: :first)).not_to be_checked
+          expect(find('input[type="text"]', match: :first).value).to eq("")
+        end
       end
     end
 
@@ -87,15 +94,19 @@ describe "Questionnaires" do
         visit questionnaire_path
         expect(page.body).to have_content("window.DecidimAwesome.current_questionnaire")
 
-        fill_in "questionnaire_responses_1", with: "My answer"
-        choose "questionnaire_responses_0_choices_1_body"
+        within ".answer-questionnaire__step" do
+          find('input[type="text"]', match: :first).fill_in(with: "My answer")
+          find('input[type="radio"]', match: :first).click
+        end
         sleep 0.1
 
         visit questionnaire_path
         sleep 0.1
 
-        expect(find("#questionnaire_responses_1").value).to eq("My answer")
-        expect(find("#questionnaire_responses_0_choices_1_body")).to be_checked
+        within ".answer-questionnaire__step" do
+          expect(find('input[type="radio"]', match: :first)).to be_checked
+          expect(find('input[type="text"]', match: :first).value).to eq("My answer")
+        end
       end
     end
 
@@ -107,17 +118,20 @@ describe "Questionnaires" do
         visit questionnaire_path
         expect(page.body).to have_content("window.DecidimAwesome.current_questionnaire")
 
-        fill_in "questionnaire_responses_1", with: "My answer"
-        choose "questionnaire_responses_0_choices_1_body"
+        within ".answer-questionnaire__step" do
+          find('input[type="text"]', match: :first).fill_in(with: "My answer")
+          find('input[type="radio"]', match: :first).click
+        end
         sleep 0.1
 
         visit questionnaire_path
         sleep 0.1
 
-        expect(find("#questionnaire_responses_1").value).to eq("")
-        expect(find("#questionnaire_responses_0_choices_1_body")).not_to be_checked
+        within ".answer-questionnaire__step" do
+          expect(find('input[type="radio"]', match: :first)).not_to be_checked
+          expect(find('input[type="text"]', match: :first).value).to eq("")
+        end
       end
     end
   end
-  # rubocop:enable Capybara/SpecificFinders
 end
