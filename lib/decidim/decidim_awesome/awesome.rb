@@ -154,12 +154,6 @@ module Decidim
       16
     end
 
-    # Controllers that will be ignored when setting hashcash bits
-    # By default, the locales controller is ignored to avoid issues when changing the locale in the
-    config_accessor :hashcash_ignored_controllers do
-      ["locales"]
-    end
-
     # allows admins to created specific CSS snippets affecting only some public frontend specific parts
     # Valid values differ a little from the previous convention:
     #   :disabled => false and non available, hidden from admins

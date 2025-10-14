@@ -30,7 +30,7 @@ module Decidim
 
       # Dynamically configures the gem https://github.com/BaseSecrete/active_hashcash
       def set_hashcash_bits
-        return if Decidim::DecidimAwesome.hashcash_ignored_controllers.include?(controller_name)
+        return unless %w(registrations sessions).include?(controller_name)
         return if user_signed_in?
 
         ActiveHashcash.bits = if controller_name == "registrations"

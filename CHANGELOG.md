@@ -8,7 +8,7 @@ Compatibility:
   - Decidim 0.30.x
 
 Fixes:
-  - Fix changing locale when Hashcash is active
+  - Fix changing locale when Hashcash is active. Make Hashcash respond only to session & registration controllers.
 
 v0.13.1
 -------
