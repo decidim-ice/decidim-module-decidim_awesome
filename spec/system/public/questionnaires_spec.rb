@@ -38,7 +38,7 @@ describe "Questionnaires" do
 
   context "when surveys" do
     let(:manifest_name) { "surveys" }
-    let(:survey) { create(:survey, :published, allow_answers: true, component:, questionnaire:) }
+    let(:survey) { create(:survey, allow_answers: true, component:, questionnaire:) }
     let(:questionnaire_path) { Decidim::EngineRouter.main_proxy(component).survey_path(survey) }
     let(:questionnaire) { create(:questionnaire) }
     let!(:question_single_option) { create(:questionnaire_question, :with_answer_options, question_type: "single_option", questionnaire:) }
