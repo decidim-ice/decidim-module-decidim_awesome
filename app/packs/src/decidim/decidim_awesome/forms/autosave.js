@@ -32,9 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // '[type="hidden"]',
       '[name="utf8"]',
       '[name="authenticity_token"]',
-      "[disabled]",
-      // there are problems with matrix questions
-      // '[type="checkbox"]'
+      "[disabled]"
     ]
   });
 

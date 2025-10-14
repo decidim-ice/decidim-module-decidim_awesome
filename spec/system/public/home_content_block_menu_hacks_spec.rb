@@ -3,7 +3,8 @@
 require "spec_helper"
 
 describe "Hacked home content block menu" do
-  let(:organization) { create(:organization) }
+  let(:organization) { create(:organization, available_authorizations:) }
+  let(:available_authorizations) { [] }
   let!(:participatory_process) { create(:participatory_process, organization:) }
   let!(:config) { create(:awesome_config, organization:, var: :home_content_block_menu, value: menu) }
   let(:menu) { [overridden, added] }
@@ -142,7 +143,8 @@ describe "Hacked home content block menu" do
         end
       end
 
-      context "when only verified user", with_authorization_workflows: ["dummy_authorization_handler"] do
+      context "when only verified user" do
+        let!(:available_authorizations) { ["dummy_authorization_handler"] }
         let!(:authorization) { create(:authorization, granted_at: Time.zone.now, user:, name: "dummy_authorization_handler") }
         let(:visibility) { "verified_user" }
 

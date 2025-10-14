@@ -14,9 +14,15 @@ module Decidim
 
         def validate_caps(record, attribute, value)
           awesome_config = awesome_config(record, "validate_#{attribute_without_locale(attribute)}_max_caps_percent")
-          return original_validate_caps(record, attribute, value) unless record_awesome_config(record)&.saved?("validate_#{attribute_without_locale(attribute)}_max_caps_percent")
 
-          percent = awesome_config.to_f
+          # original method does not take into account accents or anything else than A-Z
+          # return original_validate_caps_first(record, attribute, value) if awesome_config.nil?
+          percent = if awesome_config.nil?
+                      50
+                    else
+                      awesome_config.to_f
+                    end
+
           return if value.scan(/[[:upper:]]/).length < value.length * percent / 100
 
           record.errors.add(attribute, options[:message] || I18n.t("too_much_caps", scope: "decidim.decidim_awesome.validators", percent: percent.round))
@@ -24,12 +30,12 @@ module Decidim
 
         def validate_marks(record, attribute, value)
           awesome_config = awesome_config(record, "validate_#{attribute_without_locale(attribute)}_max_marks_together")
-          unless record_awesome_config(record)&.saved?("validate_#{attribute_without_locale(attribute)}_max_marks_together")
-            return original_validate_marks(record, attribute,
-                                           value)
-          end
 
-          marks = awesome_config.to_i + 1
+          marks = if awesome_config.nil?
+                    2
+                  else
+                    awesome_config.to_i + 1
+                  end
           return if value.scan(/[!?¡¿]{#{marks},}/).empty?
 
           record.errors.add(attribute, options[:message] || :too_many_marks)
@@ -37,10 +43,10 @@ module Decidim
 
         def validate_caps_first(record, attribute, value)
           awesome_config = awesome_config(record, "validate_#{attribute_without_locale(attribute)}_start_with_caps")
-          unless record_awesome_config(record)&.saved?("validate_#{attribute_without_locale(attribute)}_start_with_caps")
-            return original_validate_caps_first(record, attribute, value)
-          end
-          return unless awesome_config
+
+          # original method does not take into account accents or anything else than A-Z
+          # return original_validate_caps_first(record, attribute, value) if awesome_config.nil?
+          return unless awesome_config || awesome_config.nil?
           return if value.scan(/\A[[:lower:]]{1}/).empty?
 
           record.errors.add(attribute, options[:message] || :must_start_with_caps)
