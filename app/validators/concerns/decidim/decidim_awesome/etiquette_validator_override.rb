@@ -14,7 +14,7 @@ module Decidim
 
         def validate_caps(record, attribute, value)
           awesome_config = awesome_config(record, "validate_#{attribute_without_locale(attribute)}_max_caps_percent")
-          return original_validate_caps(record, attribute, value) if awesome_config.nil?
+          return original_validate_caps(record, attribute, value) unless record_awesome_config(record)&.saved?("validate_#{attribute_without_locale(attribute)}_max_caps_percent")
 
           percent = awesome_config.to_f
           return if value.scan(/[[:upper:]]/).length < value.length * percent / 100
@@ -24,7 +24,10 @@ module Decidim
 
         def validate_marks(record, attribute, value)
           awesome_config = awesome_config(record, "validate_#{attribute_without_locale(attribute)}_max_marks_together")
-          return original_validate_marks(record, attribute, value) if awesome_config.nil?
+          unless record_awesome_config(record)&.saved?("validate_#{attribute_without_locale(attribute)}_max_marks_together")
+            return original_validate_marks(record, attribute,
+                                           value)
+          end
 
           marks = awesome_config.to_i + 1
           return if value.scan(/[!?¡¿]{#{marks},}/).empty?
@@ -34,18 +37,21 @@ module Decidim
 
         def validate_caps_first(record, attribute, value)
           awesome_config = awesome_config(record, "validate_#{attribute_without_locale(attribute)}_start_with_caps")
-          return original_validate_caps_first(record, attribute, value) if awesome_config.nil?
+          unless record_awesome_config(record)&.saved?("validate_#{attribute_without_locale(attribute)}_start_with_caps")
+            return original_validate_caps_first(record, attribute, value)
+          end
           return unless awesome_config
           return if value.scan(/\A[[:lower:]]{1}/).empty?
 
           record.errors.add(attribute, options[:message] || :must_start_with_caps)
         end
 
-        def awesome_config(record, var)
-          config = record.try(:awesome_config)&.config
-          return unless config.is_a?(Hash)
+        def record_awesome_config(record)
+          record.try(:awesome_config)
+        end
 
-          config[var.to_sym]
+        def awesome_config(record, var)
+          record_awesome_config(record)&.config&.[](var.to_sym)
         end
 
         def attribute_without_locale(attribute)

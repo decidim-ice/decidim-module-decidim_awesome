@@ -9,6 +9,7 @@ Compatibility:
 
 Fixes:
   - Fix changing locale when Hashcash is active. Make Hashcash respond only to session & registration controllers.
+  - Fix crash when non-installed modules in system checker.
 
 v0.13.1
 -------
