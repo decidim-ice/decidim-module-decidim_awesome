@@ -3,25 +3,23 @@
 require "spec_helper"
 
 describe EtiquetteValidator do
-  subject { validatable.new(title:, body:) }
+  subject { Validatable.new(title:, body:) }
 
-  let(:validatable) do
-    Class.new do
-      def self.model_name
-        ActiveModel::Name.new(self, nil, "Validatable")
-      end
+  class Validatable
+    def self.model_name
+      ActiveModel::Name.new(self, nil, "Validatable")
+    end
 
-      include Decidim::AttributeObject::Model
-      include ActiveModel::Validations
+    include Decidim::AttributeObject::Model
+    include ActiveModel::Validations
 
-      attribute :title
-      attribute :body
+    attribute :title
+    attribute :body
 
-      validates :title, :body, etiquette: true
+    validates :title, :body, etiquette: true
 
-      def awesome_config
-        Decidim::DecidimAwesome::Config.new(Decidim::Organization.first)
-      end
+    def awesome_config
+      @awesome_config ||= Decidim::DecidimAwesome::Config.new(Decidim::Organization.first)
     end
   end
 
@@ -40,11 +38,15 @@ describe EtiquetteValidator do
   let!(:validate_body_max_caps_percent) { create(:awesome_config, organization:, var: :validate_body_max_caps_percent, value: body_max_caps_percent) }
   let!(:validate_body_max_marks_together) { create(:awesome_config, organization:, var: :validate_body_max_marks_together, value: body_max_marks_together) }
   let!(:validate_body_start_with_caps) { create(:awesome_config, organization:, var: :validate_body_start_with_caps, value: body_start_with_caps) }
+  let!(:constraint) { create(:config_constraint, awesome_config: config_helper, settings:) }
+  let(:config_helper) { validate_title_max_caps_percent }
+  let(:settings) { {} }
 
   it { is_expected.to be_valid }
 
   shared_examples "attribute caps validation" do |attribute|
     context "when #{attribute} has too much caps" do
+      let(:config_helper) { send("validate_#{attribute}_max_caps_percent") }
       let(attribute) { "A SCREAMING PIECE of text" }
 
       it { is_expected.not_to be_valid }
@@ -53,6 +55,12 @@ describe EtiquetteValidator do
         let(:"#{attribute}_max_caps_percent") { 100 }
 
         it { is_expected.to be_valid }
+
+        context "and context is not valid" do
+          let(:settings) { { participatory_space_slug: "other-slug" } }
+
+          it { is_expected.not_to be_valid }
+        end
       end
     end
   end

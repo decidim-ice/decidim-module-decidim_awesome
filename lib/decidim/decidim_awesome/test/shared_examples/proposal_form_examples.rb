@@ -40,6 +40,7 @@ shared_context "with a custom fields enabled" do
   let!(:private_constraint) { create(:config_constraint, awesome_config: private_config_helper, settings: { "participatory_space_manifest" => "participatory_processes" }) }
   let(:slug) { participatory_space.slug }
 end
+
 shared_examples "starts with caps" do |prop|
   let!(:config) { create(:awesome_config, organization:, var: "validate_#{prop}_start_with_caps", value: enabled) }
   let!(:constraint) do
@@ -138,7 +139,7 @@ shared_examples "max caps percent" do |prop|
   context "when scoped under different context" do
     let(:slug) { "another-slug" }
 
-    it_behaves_like "invalid percentage", 25
+    it_behaves_like "invalid percentage", 50
 
     context "when has less than 25% caps" do
       let(prop.to_sym) { "Í only have some CÁPS" }

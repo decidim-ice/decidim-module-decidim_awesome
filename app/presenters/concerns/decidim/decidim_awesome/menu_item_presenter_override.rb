@@ -25,7 +25,7 @@ module Decidim
         end
 
         def hacked_not_overriding?
-          !(@menu_item.is_a?(Decidim::MenuItem) || @menu_item.overrided?)
+          !(@menu_item.is_a?(Decidim::MenuItem) || @menu_item.overridden?)
         end
       end
     end

@@ -1,6 +1,17 @@
 CHANGELOG
 =========
 
+v0.13.2
+-------
+
+Compatibility:
+  - Decidim 0.30.x
+
+Fixes:
+  - Fix changing locale when Hashcash is active. Make Hashcash respond only to session & registration controllers.
+  - Fix crash when non-installed modules in system checker.
+  - Fix some variables not respecting the context where configured (auto_save_forms, validate_caps, etc)
+
 v0.13.1
 -------
 

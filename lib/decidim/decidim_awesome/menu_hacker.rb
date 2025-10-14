@@ -20,7 +20,7 @@ module Decidim
         menu_overrides.each do |item|
           default = default_items.find { |i| i.url.gsub(/\?.*/, "") == item.url }
           if default
-            item.send("overrided?=", true)
+            item.send("overridden?=", true)
             item[:original_active] = default.active
             @items.reject! { |i| i.url.gsub(/\?.*/, "") == item.url }
           end
@@ -58,7 +58,7 @@ module Decidim
             visibility: item["visibility"],
             visible?: visible?(item),
             target: item["target"],
-            overrided?: false
+            overridden?: false
           )
         end
       end
