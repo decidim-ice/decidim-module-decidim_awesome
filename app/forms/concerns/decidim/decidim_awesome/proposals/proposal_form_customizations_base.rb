@@ -11,11 +11,11 @@ module Decidim
         end
 
         def minimum_title_length
-          awesome_config.config[:validate_title_min_length].to_i
+          awesome_config.config[:validate_title_min_length].nil? ? awesome_config.defaults[:validate_title_min_length].to_i : awesome_config.config[:validate_title_min_length].to_i
         end
 
         def minimum_body_length
-          awesome_config.config[:validate_body_min_length].to_i
+          awesome_config.config[:validate_body_min_length].nil? ? awesome_config.defaults[:validate_body_min_length].to_i : awesome_config.config[:validate_body_min_length].to_i
         end
 
         def custom_fields

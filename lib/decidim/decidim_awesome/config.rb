@@ -7,6 +7,7 @@ module Decidim
       def initialize(organization)
         @organization = organization
         @vars = AwesomeConfig.for_organization(organization).includes(:constraints)
+        @saved_vars = @vars.map(&:var).map(&:to_sym)
         @context = {
           participatory_space_manifest: nil,
           participatory_space_slug: nil,
@@ -17,7 +18,7 @@ module Decidim
         @sub_configs = {}
       end
 
-      attr_reader :context, :organization, :vars, :application_context
+      attr_reader :context, :organization, :vars, :application_context, :saved_vars
       attr_writer :defaults
 
       def defaults
@@ -75,7 +76,7 @@ module Decidim
         valid = @vars.to_h { |v| [v.var.to_sym, v.value] }
 
         map_defaults do |key, val|
-          valid.has_key?(key) ? valid[key] : val
+          valid[key].nil? ? val : valid[key]
         end
       end
 
@@ -84,6 +85,11 @@ module Decidim
           organization: @organization,
           var:
         )
+      end
+
+      # Checks if some var has been configured for the organization (not using defaults)
+      def saved?(var)
+        @saved_vars.include?(var.to_sym)
       end
 
       # Checks if some config setting is enabled in a certain context
@@ -172,10 +178,18 @@ module Decidim
         end
       end
 
+      # calculates the config according to the current context
+      # - if some var is not valid in the current context, it will be nil
+      # Certain keys may want to know if this is a legit value or it is simply not valid in the current context
+      # Fot that, use the saved?(var) method
       def calculate_config
-        # filter vars compliant with current context
-        valid = @vars.filter { |item| enabled_for_organization?(item.var) && valid_in_context?(item.all_constraints) }
-                     .to_h { |v| [v.var.to_sym, v.value] }
+        # set values to vars according to the current context
+        valid = @vars.to_h do |item|
+          [
+            item.var.to_sym,
+            enabled_for_organization?(item.var) && valid_in_context?(item.all_constraints) ? item.value : nil
+          ]
+        end
 
         map_defaults do |key, val|
           valid.has_key?(key) ? valid[key] : val

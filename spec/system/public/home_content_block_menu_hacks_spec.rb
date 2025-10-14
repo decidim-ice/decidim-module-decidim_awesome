@@ -3,7 +3,8 @@
 require "spec_helper"
 
 describe "Hacked home content block menu" do
-  let(:organization) { create(:organization) }
+  let(:organization) { create(:organization, available_authorizations:) }
+  let(:available_authorizations) { [] }
   let!(:participatory_process) { create(:participatory_process, organization:) }
   let!(:config) { create(:awesome_config, organization:, var: :home_content_block_menu, value: menu) }
   let(:menu) { [overridden, added] }
@@ -32,84 +33,103 @@ describe "Hacked home content block menu" do
     disabled_features.each do |feature|
       allow(Decidim::DecidimAwesome.config).to receive(feature).and_return(:disabled)
     end
-
-    switch_to_host(organization.host)
-    visit decidim.root_path
   end
 
-  it "renders the hacked menu" do
-    within "#home__menu" do
-      expect(page).to have_no_content("Processes")
-      expect(page).to have_content("Mastering projects")
-      expect(page).to have_content("Blog")
-    end
-  end
-
-  it "renders in the proper order" do
-    within "#home__menu div.home__menu-element:nth-child(1)" do
-      expect(page).to have_content("Blog")
-    end
-    within "#home__menu div.home__menu-element:last-child" do
-      expect(page).to have_content("Mastering projects")
-    end
-  end
-
-  describe "visibility" do
-    let(:visibility) { "default" }
-    let(:overridden) do
-      {
-        url: "/processes",
-        label: {
-          "en" => "Mastering projects"
-        },
-        position: 10,
-        visibility:
-      }
+  context "when not logged in" do
+    before do
+      switch_to_host(organization.host)
+      visit decidim.root_path
     end
 
-    it "renders the item" do
+    it "renders the hacked menu" do
       within "#home__menu" do
+        expect(page).to have_no_content("Processes")
+        expect(page).to have_content("Mastering projects")
+        expect(page).to have_content("Blog")
+      end
+    end
+
+    it "renders in the proper order" do
+      within "#home__menu div.home__menu-element:nth-child(1)" do
+        expect(page).to have_content("Blog")
+      end
+      within "#home__menu div.home__menu-element:last-child" do
         expect(page).to have_content("Mastering projects")
       end
     end
 
-    context "when hidden" do
-      let(:visibility) { "hidden" }
-
-      it "do not show the menu item" do
-        within "#home__menu" do
-          expect(page).to have_no_content("Mastering projects")
-        end
+    describe "visibility" do
+      let(:visibility) { "default" }
+      let(:overridden) do
+        {
+          url: "/processes",
+          label: {
+            "en" => "Mastering projects"
+          },
+          position: 10,
+          visibility:
+        }
       end
-    end
 
-    context "when logged" do
-      let(:visibility) { "logged" }
-
-      it "do not show the menu item" do
-        within "#home__menu" do
-          expect(page).to have_no_content("Mastering projects")
-        end
-      end
-    end
-
-    context "when non logged" do
-      let(:visibility) { "non_logged" }
-
-      it "do not show the menu item" do
+      it "renders the item" do
         within "#home__menu" do
           expect(page).to have_content("Mastering projects")
         end
       end
+
+      context "when hidden" do
+        let(:visibility) { "hidden" }
+
+        it "do not show the menu item" do
+          within "#home__menu" do
+            expect(page).to have_no_content("Mastering projects")
+          end
+        end
+      end
+
+      context "when logged" do
+        let(:visibility) { "logged" }
+
+        it "do not show the menu item" do
+          within "#home__menu" do
+            expect(page).to have_no_content("Mastering projects")
+          end
+        end
+      end
+
+      context "when non logged" do
+        let(:visibility) { "non_logged" }
+
+        it "do not show the menu item" do
+          within "#home__menu" do
+            expect(page).to have_content("Mastering projects")
+          end
+        end
+      end
+    end
+  end
+
+  context "when user is logged" do
+    let!(:user) { create(:user, :confirmed, organization:) }
+    let!(:authorization) { create(:authorization, granted_at: Time.zone.now, user:, name: "dummy_authorization_handler") }
+
+    before do
+      switch_to_host(organization.host)
+      login_as user, scope: :user
+      visit decidim.root_path
     end
 
-    context "when user is logged" do
-      let!(:user) { create(:user, :confirmed, organization:) }
-
-      before do
-        switch_to_host(organization.host)
-        login_as user, scope: :user
-        visit decidim.root_path
+    describe "visibility" do
+      let(:visibility) { "default" }
+      let(:overridden) do
+        {
+          url: "/processes",
+          label: {
+            "en" => "Mastering projects"
+          },
+          position: 10,
+          visibility:
+        }
       end
 
       context "when hidden" do
@@ -142,15 +162,9 @@ describe "Hacked home content block menu" do
         end
       end
 
-      context "when only verified user", with_authorization_workflows: ["dummy_authorization_handler"] do
-        let!(:authorization) { create(:authorization, granted_at: Time.zone.now, user:, name: "dummy_authorization_handler") }
+      context "when only verified user" do
+        let!(:available_authorizations) { ["dummy_authorization_handler"] }
         let(:visibility) { "verified_user" }
-
-        before do
-          switch_to_host(organization.host)
-          login_as user, scope: :user
-          visit decidim.root_path
-        end
 
         context "when user is verified" do
           it "shows the item" do

@@ -111,7 +111,7 @@ module Decidim
 
         # Late registering of components to take into account initializer values
         DecidimAwesome.registered_components.each do |manifest, block|
-          next if DecidimAwesome.disabled_components.include?(manifest)
+          next if DecidimAwesome.disabled_components&.include?(manifest)
           next if Decidim.find_component_manifest(manifest)
 
           Decidim.register_component(manifest, &block)
