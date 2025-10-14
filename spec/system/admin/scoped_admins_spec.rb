@@ -6,9 +6,9 @@ require "decidim/decidim_awesome/test/shared_examples/scoped_admins_examples"
 describe "Scoped admin journeys" do
   let(:organization) { create(:organization) }
   let!(:assembly) { create(:assembly, organization:) }
-  let!(:component) { create(:proposal_component, participatory_space: assembly) }
+  let!(:component) { create(:proposal_component, participatory_space: assembly, default_step_settings: { creation_enabled: true }) }
   let!(:proposal) { create(:proposal, :official, component:) }
-  let!(:another_component) { create(:meeting_component, participatory_space: assembly) }
+  let!(:another_component) { create(:meeting_component, participatory_space: assembly, default_step_settings: { creation_enabled: true }) }
   let!(:another_assembly) { create(:assembly, organization:) }
   let!(:participatory_process) { create(:participatory_process, organization:) }
   let!(:process_group) { create(:participatory_process_group, organization:) }
@@ -40,8 +40,8 @@ describe "Scoped admin journeys" do
         end
     end
 
-    component.update!(default_step_settings: { creation_enabled: true })
-    another_component.update!(default_step_settings: { creation_enabled: true })
+    Decidim::User.awesome_potential_admins = []
+    Decidim::User.awesome_admins_for_current_scope = []
     switch_to_host(organization.host)
     login_as user, scope: :user
   end
@@ -73,14 +73,13 @@ describe "Scoped admin journeys" do
 
     context "and admin terms not accepted" do
       it "allows admin terms to be accepted" do
-        welcome_text = "Dashboard"
         visit decidim_admin.root_path
 
         expect(page).to have_content("Please take a moment to review the admin terms of service.")
 
         click_link_or_button "I agree with the terms"
 
-        expect(page).to have_content(welcome_text)
+        expect(page).to have_content("Dashboard")
         expect(page).to have_no_content("Please take a moment to review the admin terms of service.")
       end
     end
