@@ -39,10 +39,22 @@ describe "Questionnaires" do
   context "when surveys" do
     let(:manifest_name) { "surveys" }
     let(:survey) { create(:survey, component:, questionnaire:) }
+
     let(:questionnaire_path) { Decidim::EngineRouter.main_proxy(component).survey_path(survey) }
     let(:questionnaire) { create(:questionnaire) }
     let!(:question_single_option) { create(:questionnaire_question, :with_answer_options, question_type: "single_option", questionnaire:) }
     let!(:question_text) { create(:questionnaire_question, question_type: "short_answer", questionnaire:) }
+
+    before do
+      component.update!(
+        step_settings: {
+          component.participatory_space.active_step.id => {
+            allow_answers: true
+          }
+        },
+        settings: { starts_at: 1.day.ago, ends_at: 1.day.from_now }
+      )
+    end
 
     it "saves answers in local storage" do
       visit questionnaire_path
