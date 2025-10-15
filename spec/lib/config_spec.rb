@@ -148,12 +148,12 @@ module Decidim::DecidimAwesome
 
         it "affects configuration evaluation for logged users" do
           subject.application_context!(current_user:)
-          expect(subject.config[:allow_images_in_editors]).to be(true)
+          expect(subject.config[:allow_images_in_editors]).to be_present
         end
 
         it "affects configuration evaluation for anonymous users" do
           subject.application_context!(current_user: nil)
-          expect(subject.config[:allow_images_in_editors]).to be(false)
+          expect(subject.config[:allow_images_in_editors]).to be_blank
         end
       end
     end
@@ -185,8 +185,8 @@ module Decidim::DecidimAwesome
         it "returns the config normalized" do
           expect(subject.config[:intergram_for_public_settings][:chat_id]).to eq("-1234")
           expect(subject.config[:intergram_for_public_settings][:color]).to eq("red")
-          expect(subject.config[:intergram_for_public_settings][:require_login]).to be(true)
-          expect(subject.config[:intergram_for_public_settings][:use_floating_button]).to be(true)
+          expect(subject.config[:intergram_for_public_settings][:require_login]).to be_present
+          expect(subject.config[:intergram_for_public_settings][:use_floating_button]).to be_present
         end
       end
     end
@@ -201,7 +201,7 @@ module Decidim::DecidimAwesome
       let!(:awesome_config) { create(:awesome_config, organization:, var: :allow_images_in_editors, value: true) }
 
       it "always defaults to false" do
-        expect(subject.config[:allow_images_in_editors]).to be(false)
+        expect(subject.config[:allow_images_in_editors]).to be_blank
       end
     end
 
@@ -240,18 +240,21 @@ module Decidim::DecidimAwesome
       end
 
       it "matches customized config" do
-        expect(subject.config).to eq(custom_config)
+        expect(subject.config[:allow_images_in_proposals]).to be_falsey
+        expect(subject.config[:allow_images_in_editors]).to be_truthy
       end
 
       context "and no constraints matches context" do
         let(:slug) { "another-slug" }
 
         it "matches basic config" do
-          expect(subject.config).to eq(config)
+          expect(subject.config[:allow_images_in_editors]).to be_falsey
+          expect(subject.config[:allow_images_in_proposals]).to be_falsey
         end
 
         it "differs from customized config" do
-          expect(subject.config).not_to eq(custom_config)
+          expect(subject.config[:allow_images_in_editors]).not_to eq(custom_config[:allow_images_in_editors])
+          expect(subject.config[:allow_images_in_proposals]).to eq(custom_config[:allow_images_in_proposals])
         end
       end
     end

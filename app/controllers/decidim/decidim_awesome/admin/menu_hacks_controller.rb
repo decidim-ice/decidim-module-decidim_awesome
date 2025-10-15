@@ -79,7 +79,7 @@ module Decidim
             position: item.position,
             target: item.try(:target),
             visibility: item.try(:visibility),
-            native?: !item.respond_to?(:overrided?)
+            native?: !item.respond_to?(:overridden?)
           )
         end
 
