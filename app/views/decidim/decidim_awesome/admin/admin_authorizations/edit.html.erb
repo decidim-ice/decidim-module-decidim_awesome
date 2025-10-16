@@ -1,3 +1,4 @@
+<% with_override = defined?(with_override) && with_override %>
 <div class="form-defaults">
   <%= callout if defined?(callout) %>
   <%= decidim_form_for(handler,
@@ -7,14 +8,14 @@
                        method: :patch,
                        remote: true) do |form| %>
     <% if lookup_context.exists?(handler.to_partial_path, [], true) %>
-      <%= render partial: handler.to_partial_path, locals: { handler:, form: } %>
+      <%= render partial: handler.to_partial_path, locals: { handler:, form:, with_override: } %>
     <% else %>
       <div class="form__wrapper">
         <%= form.all_fields %>
       </div>
     <% end %>
 
-    <% if defined?(with_override) %>
+    <% if with_override %>
       <div class="form__wrapper flash alert">
         <label class="flex-col">
           <div class="flash__title">
