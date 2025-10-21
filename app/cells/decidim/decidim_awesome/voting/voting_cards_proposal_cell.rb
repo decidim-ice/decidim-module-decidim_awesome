@@ -40,7 +40,8 @@ module Decidim
 
         def link_options(weight)
           ops = {
-            class: "vote-action vote-card #{classes_for(weight)}"
+            class: "vote-action vote-card #{classes_for(weight)}",
+            resource: proposal
           }
           if current_user
             ops.merge!({

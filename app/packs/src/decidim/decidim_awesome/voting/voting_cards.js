@@ -34,6 +34,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const bindVoteActions = () => {
     document.querySelectorAll(".awesome-voting-card .vote-action").forEach((el) => {
       el.addEventListener("click", (evt) => {
+        if (evt.currentTarget.hasAttribute("data-dialog-open")) {
+          return;
+        }
+
         if (showModal()) {
           evt.stopPropagation();
           evt.preventDefault();

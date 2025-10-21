@@ -548,4 +548,69 @@ describe "Voting weights with cards" do
       expect(page).to have_css("#loginModal", visible: :visible)
     end
   end
+
+  context "when voting requires authorization" do
+    let(:organization) { create(:organization, available_authorizations: [:dummy_authorization_handler]) }
+
+    before do
+      Decidim::ResourcePermission.create!(
+        resource: proposal,
+        permissions: {
+          "vote" => {
+            "authorization_handlers" => {
+              "dummy_authorization_handler" => { "options" => {} }
+            }
+          }
+        }
+      )
+
+      visit_component
+      find(".card__list#proposals__proposal_#{proposal.id}").click
+    end
+
+    context "when the user is not logged in" do
+      it "shows the login modal when trying to vote" do
+        click_on "Green"
+
+        expect(page).to have_content("Please log in")
+      end
+    end
+
+    context "when the user is logged in without authorization" do
+      before do
+        login_as user, scope: :user
+        visit current_path
+      end
+
+      it "shows the authorization modal when trying to vote" do
+        click_on "Green"
+        click_on "Proceed"
+
+        expect(page).to have_content("We need to verify your identity")
+      end
+    end
+
+    context "when the user is logged in with authorization" do
+      let!(:authorization) do
+        create(
+          :authorization,
+          user:,
+          name: "dummy_authorization_handler",
+          granted_at: Time.current
+        )
+      end
+
+      before do
+        login_as user, scope: :user
+        visit current_path
+      end
+
+      it "allows voting and shows the vote is counted" do
+        click_on "Green"
+        click_on "Proceed"
+
+        expect(page).to have_content("Change my vote")
+      end
+    end
+  end
 end

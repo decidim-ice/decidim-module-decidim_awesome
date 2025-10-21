@@ -22,6 +22,7 @@
       <%= action_authorized_link_to :unvote,
                                     t("decidim.decidim_awesome.voting.voting_cards.change_vote"),
                                     proposal_vote_path(current_vote&.weight),
+                                    resource: proposal,
                                     remote: true,
                                     method: :delete,
                                     id: "change-vote",
