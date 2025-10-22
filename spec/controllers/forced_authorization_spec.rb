@@ -4,6 +4,8 @@ require "spec_helper"
 
 module Decidim::DecidimAwesome
   class TestController < Decidim::ApplicationController
+    include Decidim::DecidimAwesome::EnforceAccessAuthorizations
+
     def index
       render plain: "OK"
     end
