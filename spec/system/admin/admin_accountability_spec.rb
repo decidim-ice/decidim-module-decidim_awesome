@@ -11,13 +11,13 @@ describe "Admin accountability" do
   let!(:external_admin) { create(:user, :admin, :confirmed, organization: external_organization) }
 
   let(:administrator) { create(:user, organization:, last_sign_in_at: login_date, created_at: user_creation_date) }
-  let(:valuator) { create(:user, organization:, created_at: user_creation_date) }
+  let(:evaluator) { create(:user, organization:, created_at: user_creation_date) }
   let(:collaborator) { create(:user, organization:, created_at: user_creation_date) }
   let(:moderator) { create(:user, organization:, created_at: user_creation_date) }
   let(:participatory_process) { create(:participatory_process, organization:) }
 
   let(:external_administrator) { create(:user, organization: external_organization, last_sign_in_at: login_date, created_at: user_creation_date) }
-  let(:external_valuator) { create(:user, organization: external_organization, created_at: user_creation_date) }
+  let(:external_evaluator) { create(:user, organization: external_organization, created_at: user_creation_date) }
   let(:external_collaborator) { create(:user, organization: external_organization, created_at: user_creation_date) }
   let(:external_moderator) { create(:user, organization: external_organization, created_at: user_creation_date) }
   let(:external_participatory_process) { create(:participatory_process, organization: external_organization) }
@@ -56,7 +56,7 @@ describe "Admin accountability" do
   context "when there are admin role actions" do
     before do
       create(:participatory_process_user_role, user: administrator, participatory_process:, role: "admin", created_at: 4.days.ago)
-      create(:participatory_process_user_role, user: valuator, participatory_process:, role: "valuator", created_at: 3.days.ago)
+      create(:participatory_process_user_role, user: evaluator, participatory_process:, role: "evaluator", created_at: 3.days.ago)
       create(:participatory_process_user_role, user: collaborator, participatory_process:, role: "collaborator", created_at: 2.days.ago)
       create(:participatory_process_user_role, user: moderator, participatory_process:, role: "moderator", created_at: 1.day.ago)
 
@@ -96,9 +96,9 @@ describe "Admin accountability" do
       end
 
       within all("table tr")[3] do
-        expect(page).to have_content("Valuator")
-        expect(page).to have_content(valuator.name)
-        expect(page).to have_content(valuator.email)
+        expect(page).to have_content("Evaluator")
+        expect(page).to have_content(evaluator.name)
+        expect(page).to have_content(evaluator.email)
         expect(page).to have_content(3.days.ago.strftime("%d/%m/%Y %H:%M"))
         expect(page).to have_content("Currently active")
         expect(page).to have_no_content(login_date.strftime("%d/%m/%Y %H:%M"))
@@ -121,7 +121,7 @@ describe "Admin accountability" do
     context "when external organization data is present" do
       before do
         create(:participatory_process_user_role, user: external_administrator, participatory_process: external_participatory_process, role: "admin", created_at: 4.days.ago)
-        create(:participatory_process_user_role, user: external_valuator, participatory_process: external_participatory_process, role: "valuator", created_at: 3.days.ago)
+        create(:participatory_process_user_role, user: external_evaluator, participatory_process: external_participatory_process, role: "evaluator", created_at: 3.days.ago)
         create(:participatory_process_user_role, user: external_collaborator, participatory_process: external_participatory_process, role: "collaborator", created_at: 2.days.ago)
         create(:participatory_process_user_role, user: external_moderator, participatory_process: external_participatory_process, role: "moderator", created_at: 1.day.ago)
       end
@@ -137,11 +137,11 @@ describe "Admin accountability" do
         expect(page).to have_content(administrator.email)
         expect(page).to have_content(moderator.email)
         expect(page).to have_content(collaborator.email)
-        expect(page).to have_content(valuator.email)
+        expect(page).to have_content(evaluator.email)
         expect(page).to have_no_content(external_administrator.email)
         expect(page).to have_no_content(external_moderator.email)
         expect(page).to have_no_content(external_collaborator.email)
-        expect(page).to have_no_content(external_valuator.email)
+        expect(page).to have_no_content(external_evaluator.email)
       end
 
       context "when visiting the external organization" do
@@ -166,7 +166,7 @@ describe "Admin accountability" do
           expect(page).to have_no_content(collaborator.name)
           expect(page).to have_no_content(moderator.name)
           expect(page).to have_content(external_administrator.name)
-          expect(page).to have_content(external_valuator.name)
+          expect(page).to have_content(external_evaluator.name)
           expect(page).to have_content(external_collaborator.name)
           expect(page).to have_content(external_moderator.name)
         end
@@ -180,7 +180,7 @@ describe "Admin accountability" do
 
       Decidim::ParticipatoryProcessUserRole.find_by(user: collaborator).destroy
 
-      create(:participatory_process_user_role, user: collaborator, participatory_process:, role: "valuator", created_at: 2.days.ago)
+      create(:participatory_process_user_role, user: collaborator, participatory_process:, role: "evaluator", created_at: 2.days.ago)
 
       Decidim::ParticipatoryProcessUserRole.find_by(user: collaborator).destroy
 
@@ -201,7 +201,7 @@ describe "Admin accountability" do
       end
 
       within all("table tr")[2] do
-        expect(page).to have_content("Valuator")
+        expect(page).to have_content("Evaluator")
         expect(page).to have_content(collaborator.name)
         expect(page).to have_content(collaborator.email)
         expect(page).to have_content(2.days.ago.strftime("%d/%m/%Y %H:%M"))
@@ -221,12 +221,12 @@ describe "Admin accountability" do
   end
 
   context "when user listed has been removed" do
-    let(:valuator) { create(:user, :deleted, organization:, created_at: user_creation_date) }
+    let(:evaluator) { create(:user, :deleted, organization:, created_at: user_creation_date) }
 
     before do
       create(:participatory_process_user_role, user: collaborator, participatory_process:, role: "collaborator", created_at: 3.days.ago)
       collaborator.destroy
-      create(:participatory_process_user_role, user: valuator, participatory_process:, role: "valuator", created_at: 2.days.ago)
+      create(:participatory_process_user_role, user: evaluator, participatory_process:, role: "evaluator", created_at: 2.days.ago)
 
       click_link_or_button "Participants"
       click_link_or_button "Admin accountability"
@@ -234,7 +234,7 @@ describe "Admin accountability" do
 
     it "shows the user as removed", :versioning do
       within all("table tr")[1] do
-        expect(page).to have_content("Valuator")
+        expect(page).to have_content("Evaluator")
         expect(page).to have_content("Deleted user")
         expect(page).to have_content(2.days.ago.strftime("%d/%m/%Y %H:%M"))
         expect(page).to have_no_content(Time.current.strftime("%d/%m/%Y %H:%M"))

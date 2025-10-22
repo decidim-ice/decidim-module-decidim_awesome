@@ -9,18 +9,18 @@ describe "Filter Admin actions" do
   let!(:organization) { create(:organization) }
   let!(:admin) { create(:user, :admin, :confirmed, organization:) }
   let(:administrator) { create(:user, organization:, last_sign_in_at: login_date, created_at: user_creation_date) }
-  let(:valuator) { create(:user, name: "Lorry", email: "test@example.org", organization:, created_at: user_creation_date) }
+  let(:evaluator) { create(:user, name: "Lorry", email: "test@example.org", organization:, created_at: user_creation_date) }
   let(:collaborator) { create(:user, organization:, created_at: user_creation_date) }
   let(:moderator) { create(:user, organization:, created_at: user_creation_date) }
 
   let(:resource_controller) { Decidim::DecidimAwesome::Admin::AdminAccountabilityController }
 
   let!(:participatory_process_user_role1) { create(:participatory_process_user_role, user: administrator, role: "admin", created_at: 4.days.ago) }
-  let!(:participatory_process_user_role2) { create(:participatory_process_user_role, user: valuator, role: "valuator", created_at: 3.days.ago) }
+  let!(:participatory_process_user_role2) { create(:participatory_process_user_role, user: evaluator, role: "evaluator", created_at: 3.days.ago) }
   let!(:participatory_process_user_role3) { create(:participatory_process_user_role, user: collaborator, role: "collaborator", created_at: 2.days.ago) }
   let!(:participatory_process_user_role4) { create(:participatory_process_user_role, user: moderator, role: "moderator", created_at: 1.day.ago) }
   let!(:assembly_user_role1) { create(:assembly_user_role, user: administrator, role: "admin", created_at: 4.days.ago) }
-  let!(:assembly_user_role2) { create(:assembly_user_role, user: valuator, role: "valuator", created_at: 3.days.ago) }
+  let!(:assembly_user_role2) { create(:assembly_user_role, user: evaluator, role: "evaluator", created_at: 3.days.ago) }
   let!(:assembly_user_role3) { create(:assembly_user_role, user: collaborator, role: "collaborator", created_at: 2.days.ago) }
   let!(:assembly_user_role4) { create(:assembly_user_role, user: moderator, role: "moderator", created_at: 1.day.ago) }
 
@@ -61,7 +61,7 @@ describe "Filter Admin actions" do
       expect(page).to have_content("Admin")
       expect(page).to have_content("Collaborator")
       expect(page).to have_content("Moderator")
-      expect(page).to have_content("Valuator")
+      expect(page).to have_content("Evaluator")
     end
 
     context "when filtering admin_actions by PARTICIPATORY SPACE" do
@@ -124,11 +124,11 @@ describe "Filter Admin actions" do
         end
       end
 
-      it "Valuator role type" do
-        apply_filter("Role type", "Valuator")
+      it "Evaluator role type" do
+        apply_filter("Role type", "Evaluator")
 
         within "tbody" do
-          expect(page).to have_content("Valuator", count: 2)
+          expect(page).to have_content("Evaluator", count: 2)
         end
       end
     end
@@ -199,9 +199,9 @@ describe "Filter Admin actions" do
           within "tbody" do
             expect(page).to have_css("tr", count: 4)
             expect(page).to have_content("Collaborator", count: 2)
-            expect(page).to have_content("Valuator", count: 2)
+            expect(page).to have_content("Evaluator", count: 2)
             expect(page).to have_content(collaborator.name, count: 2)
-            expect(page).to have_content(valuator.name, count: 2)
+            expect(page).to have_content(evaluator.name, count: 2)
             expect(page).to have_content(participatory_process_user_role2.participatory_space.title["en"])
             expect(page).to have_content(participatory_process_user_role3.participatory_space.title["en"])
             expect(page).to have_content(assembly_user_role2.participatory_space.title["en"])

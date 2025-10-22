@@ -218,8 +218,8 @@ en:
           roles:
             admin: Administrator
             collaborator: Collaborator
+            evaluator: Evaluator
             moderator: Moderator
-            valuator: Valuator
         admin_authorizations:
           authorization:
             confirm_destroy: Are you sure you want to destroy this authorization?
