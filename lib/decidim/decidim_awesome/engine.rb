@@ -167,7 +167,7 @@ module Decidim
                 :default_sort_order,
                 type: :select,
                 default: "default",
-                choices: -> { (POSSIBLE_SORT_ORDERS + DecidimAwesome.possible_additional_proposal_sortings).uniq }
+                choices: ->(_context) { (POSSIBLE_SORT_ORDERS + DecidimAwesome.possible_additional_proposal_sortings).uniq }
               )
             end
             if DecidimAwesome.enabled?(:allow_limiting_amendments)
@@ -186,7 +186,7 @@ module Decidim
                 :default_sort_order,
                 type: :select,
                 include_blank: true,
-                choices: -> { (POSSIBLE_SORT_ORDERS + DecidimAwesome.possible_additional_proposal_sortings).uniq }
+                choices: ->(_context) { (POSSIBLE_SORT_ORDERS + DecidimAwesome.possible_additional_proposal_sortings).uniq }
               )
             end
           end
@@ -248,7 +248,7 @@ module Decidim
                 Decidim::SettingsManifest::Attribute.new(
                   type: :select,
                   default: "",
-                  choices: -> { ["default"] + Decidim::DecidimAwesome.voting_registry.manifests.map(&:name) },
+                  choices: ->(_context) { ["default"] + Decidim::DecidimAwesome.voting_registry.manifests.map(&:name) },
                   readonly: lambda { |context|
                     Decidim::Proposals::Proposal.where(component: context[:component]).where.not(proposal_votes_count: -Float::INFINITY..0).any?
                   }
