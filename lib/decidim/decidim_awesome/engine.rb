@@ -206,7 +206,7 @@ module Decidim
                              .includes(:scope, :category, :component)
 
                 if space.user_roles(:evaluator).where(user:).any?
-                  collection.with_valuation_assigned_to(user, space)
+                  collection.with_evaluation_assigned_to(user, space)
                 else
                   collection
                 end
