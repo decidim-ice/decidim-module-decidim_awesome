@@ -98,31 +98,26 @@ jobs:
           path: /tmp/testapp-env.tar.gz
 
   tests-latest:
-    name: ${{ matrix.name }} (${{ matrix.features }})
+    name: Tests latest
     runs-on: ubuntu-latest
     needs: build
 
     strategy:
       matrix:
         include:
-          - name: spec/awesome_summary_spec.rb
-            pattern: spec/awesome_summary_spec.rb
+          - pattern: spec/awesome_summary_spec.rb
             exclude_pattern: ""
             features: disabled
-          - name: "spec (non-system)"
-            pattern: spec/
+          - pattern: spec/
             exclude_pattern: spec/system
             features: enabled
-          - name: spec/system/admin
-            pattern: spec/system/admin
+          - pattern: spec/system/admin
             exclude_pattern: ""
             features: enabled
-          - name: spec/system/public
-            pattern: spec/system/public
+          - pattern: spec/system/public
             exclude_pattern: ""
             features: enabled
-          - name: spec/system/awesome_map
-            pattern: spec/system/awesome_map
+          - pattern: spec/system/awesome_map
             exclude_pattern: ""
             features: enabled
       fail-fast: false
