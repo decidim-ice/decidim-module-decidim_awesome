@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-shared_examples "a blank component" do |engine|
+shared_examples "a blank component" do
   describe "GET settings" do
     it "redirects to settings" do
       get :settings, params: { component_id: component }

@@ -266,7 +266,11 @@ shared_examples "can manage component" do
     expect(page).to have_content("Title")
     expect(page).to have_content(proposal.title["en"])
 
-    click_link_or_button "Edit proposal"
+    within "tr[data-id='#{proposal.id}']" do
+      find("button[data-controller='dropdown']").click
+      click_on "Edit proposal"
+    end
+
     expect(page).to have_content("Update proposal")
     fill_in_i18n(
       :proposal_title,
@@ -310,6 +314,7 @@ shared_examples "edits allowed components" do
   end
 
   it_behaves_like "can manage component"
+
   it "can edit component" do
     visit Decidim::EngineRouter.admin_proxy(component.participatory_space).edit_component_path(component.id)
     expect(page).to have_content("Edit component")
