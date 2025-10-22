@@ -155,7 +155,7 @@ module Decidim
         end
       end
 
-      initializer "decidim_decidim_awesome.middleware" do |app|
+      initializer "decidim_decidim_awesome.middleware", after: "decidim_core.middleware" do |app|
         app.config.middleware.insert_after Decidim::Middleware::CurrentOrganization, Decidim::DecidimAwesome::CurrentConfig
       end
 
