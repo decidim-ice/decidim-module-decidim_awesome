@@ -32,12 +32,16 @@ module Decidim
         end
 
         def link_options(weight)
+          css_classes = ["vote-action"]
+          css_classes << "vote-card" unless from_proposals_list
+          css_classes << classes_for(weight)
+
           ops = {
-            class: "vote-action vote-card #{classes_for(weight)}",
-            resource: proposal
+            class: css_classes.join(" ")
           }
           if current_user
             ops.merge!({
+                         resource: proposal,
                          remote: true,
                          method: :post
                        })
