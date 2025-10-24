@@ -54,7 +54,10 @@ document.addEventListener("DOMContentLoaded", () => {
           }
           window.Decidim.currentDialogs[modal.id].open();
         } else {
-          evt.currentTarget.closest(".voting-voting_cards").classList.add("loading");
+          const container = evt.currentTarget.closest(".voting-voting_cards") || evt.currentTarget.closest(".awesome-voting-card");
+          if (container) {
+            container.classList.add("loading");
+          }
         }
       });
     });

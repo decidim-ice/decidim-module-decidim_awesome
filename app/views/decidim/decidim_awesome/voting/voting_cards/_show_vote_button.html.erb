@@ -1,3 +1,3 @@
 <div class="voting-voting_cards">
-  <%= cell("decidim/decidim_awesome/voting/voting_cards_proposal", proposal, from_proposals_list: true) %>
+  <%= cell("decidim/decidim_awesome/voting/voting_cards_proposal", proposal, from_proposals_list: local_assigns.fetch(:from_proposals_list, false)) %>
 </div>

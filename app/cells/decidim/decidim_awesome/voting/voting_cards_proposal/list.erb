@@ -1,0 +1,53 @@
+<div class="awesome-voting-card from-list">
+  <div class="vote-cards-container">
+    <% [3, 2, 1].each do |weight| %>
+      <div class="vote-block">
+        <% unless current_settings.votes_hidden? %>
+          <p class="vote-count" data-weight="<%= weight %>"><%= proposal_votes(weight) %></p>
+        <% end %>
+        <%= action_authorized_link_to :vote,
+                                      proposal_vote_path(weight),
+                                      **link_options(weight) do %>
+          <span class="vote-label"><%= proposal.manifest.label_for(weight) %></span>
+          <%= content_tag :svg, role: "img" do
+            content_tag(:title, t("decidim.decidim_awesome.voting.voting_cards.voting_for", proposal: sanitized_title, type: proposal.manifest.label_for(weight))) +
+              content_tag(:use, "", "href" => svg_path(weight))
+          end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="vote-actions-container">
+    <% if component_settings.voting_cards_show_abstain? %>
+      <%= action_authorized_link_to :vote,
+                                    proposal_vote_path(0),
+                                    link_options(0).merge({
+                                                            title: t("decidim.decidim_awesome.voting.voting_cards.voting_for", proposal: sanitized_title, type: proposal.manifest.label_for(0)),
+                                                            class: "button button__xs button__transparent-secondary vote-action abstain-button #{classes_for(0)}"
+                                                          }) do %>
+        <%= voted_for?(0) ? t("decidim.decidim_awesome.voting.voting_cards.abstained") : proposal.manifest.label_for(0) %>
+        <% if proposal_votes(0) > 0 %>
+          <span class="abstain-count"><%= proposal_votes(0) %></span>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% if voted_for_any? && !current_settings.votes_blocked? %>
+      <%= action_authorized_link_to :unvote,
+                                    t("decidim.decidim_awesome.voting.voting_cards.change_vote"),
+                                    proposal_vote_path(current_vote&.weight),
+                                    resource: proposal,
+                                    remote: true,
+                                    method: :delete,
+                                    id: "change-vote",
+                                    class: "change-vote-button vote-action" %>
+    <% elsif proposal.maximum_votes_reached? && !proposal.can_accumulate_votes_beyond_threshold && current_component.participatory_space.can_participate?(current_user) %>
+      <p class="vote-message"><%= t("decidim.proposals.proposals.vote_button.maximum_votes_reached") %></p>
+    <% elsif vote_limit_enabled? && remaining_votes_count_for_user <= 0 %>
+      <p class="vote-message"><%= t("decidim.proposals.proposals.vote_button.no_votes_remaining") %></p>
+    <% elsif current_settings.votes_blocked? || !current_component.participatory_space.can_participate?(current_user) %>
+      <p class="vote-message"><%= t("decidim.proposals.proposals.vote_button.votes_blocked") %></p>
+    <% end %>
+  </div>
+</div>

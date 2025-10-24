@@ -5,172 +5,136 @@
   --voting-cards-weight-3: #4caf50;
 }
 
-.voting-voting_cards {
-  $rectangle-width: 3rem;
+.voting {
+  &-voting_cards {
+    $rectangle-width: 3rem;
+    $rectangle-width-compact: 1.5rem;
 
-  margin-bottom: 1.5rem;
-  border-bottom: 2px solid #d9d9d9;
+    @apply mb-6 border-b-2;
 
-  &.current-choice {
-    text-align: center;
-    margin-bottom: 0;
-    border-bottom: none;
+    border-color: #d9d9d9;
 
-    .vote-card {
-      margin-top: 0.5rem;
+    &.current-choice {
+      @apply text-center mb-0 border-b-0;
 
-      .vote-label {
-        margin-bottom: 1rem;
+      .vote-card {
+        @apply mt-2;
 
-        @apply text-black;
+        .vote-label {
+          @apply mb-4 text-black;
+        }
+      }
+
+      .change-vote-button:hover {
+        @apply mt-0;
+
+        font-size: 1rem;
       }
     }
 
-    .change-vote-button:hover {
+    &.loading {
+      @apply opacity-30 pointer-events-none relative cursor-wait;
+
+      &::before {
+        @apply content-[""] block w-6 h-6 rounded-full animate-spin absolute border-4 border-l-background border-y-background border-r-secondary;
+
+        z-index: 1000;
+        top: calc(50% - 12.5px);
+        left: calc(50% - 12.5px);
+      }
+    }
+
+    .vote {
+      &-title {
+        @apply text-center;
+
+        font-size: 1.5rem;
+      }
+
+      &-card {
+        @apply inline-block;
+
+        .vote-label {
+          @apply mb-0;
+
+          font-size: 1rem;
+        }
+
+        > svg {
+          @apply inline-block align-middle max-w-full;
+
+          width: $rectangle-width;
+          height: calc($rectangle-width * 2);
+          margin: -0.5rem 0 0 0.5rem;
+          transition: transform 150ms ease-in-out;
+
+          &:hover {
+            transform: scale(1.15) rotate(-5deg);
+          }
+        }
+      }
+
+      &-block {
+        @apply flex flex-col items-center justify-center relative text-center;
+
+        .vote-count {
+          @apply mb-2;
+
+          font-size: 2rem;
+          font-weight: bolder;
+        }
+      }
+    }
+
+    .votes_counter {
+      letter-spacing: 0.2rem;
       font-size: 1rem;
-      margin-top: 0;
-    }
-  }
-
-  &.loading {
-    opacity: 0.3;
-    pointer-events: none;
-    position: relative;
-
-    @apply relative cursor-wait;
-
-    &::before {
-      @apply content-[""] block w-6 h-6 rounded-full animate-spin border-4 border-l-background border-y-background border-r-secondary;
-
-      z-index: 1000;
-      vertical-align: middle;
-      position: absolute;
-      top: calc(50% - 12.5px);
-      left: calc(50% - 12.5px);
-    }
-  }
-
-  .vote-title {
-    text-align: center;
-    font-size: 1.5rem;
-  }
-
-  .votes_counter {
-    letter-spacing: 0.2rem;
-    font-size: 1rem;
-  }
-
-  .vote-link.hidden {
-    display: none;
-  }
-
-  .vote-card {
-    display: inline-block;
-
-    .vote-label {
-      font-size: 1rem;
-      margin-bottom: 0;
     }
 
-    > svg {
-      display: inline-block;
-      width: $rectangle-width;
-      height: calc($rectangle-width * 2);
-      vertical-align: middle;
-      margin: -0.5rem 0 0 0.5rem;
-      max-width: 100%;
-      transition: transform 150ms ease-in-out;
+    .voting-button {
+      @apply bg-transparent border-0 text-white font-bold;
+    }
+
+    .change-vote-button {
+      transition: all 150ms ease-in-out;
 
       &:hover {
-        transform: scale(1.15) rotate(-5deg);
+        @apply mt-0 no-underline;
+
+        font-size: 0.9rem;
       }
     }
 
-    &.weight_3 {
-      color: var(--voting-cards-weight-3);
+    .button.abstain-button {
+      @apply uppercase bg-transparent;
 
-      & > svg {
-        fill: var(--voting-cards-weight-3);
+      color: var(--voting-cards-weight-0);
+      border-color: var(--voting-cards-weight-0);
+
+      .abstain-count {
+        @apply inline-flex items-center justify-center rounded-full ml-2 font-bold leading-none;
+
+        min-width: 1.5rem;
+        height: 1.5rem;
+        padding: 0 0.375rem;
+        background-color: var(--voting-cards-weight-0);
+        color: white;
+        font-size: 0.75rem;
       }
-    }
 
-    &.weight_2 {
-      color: var(--voting-cards-weight-2);
+      &.voted {
+        @apply text-white border-transparent;
 
-      & > svg {
-        fill: var(--voting-cards-weight-2);
-      }
-    }
+        background-color: var(--voting-cards-weight-0);
 
-    &.weight_1 {
-      color: var(--voting-cards-weight-1);
+        .abstain-count {
+          background-color: white;
+          color: var(--voting-cards-weight-0);
+        }
 
-      & > svg {
-        fill: var(--voting-cards-weight-1);
-      }
-    }
-
-    &.voted {
-      & > svg {
-        transform: scale(1.15) rotate(-5deg);
-      }
-    }
-  }
-
-  .voting-button {
-    background: none;
-    border: none;
-    color: #fff;
-    font-weight: bold;
-  }
-
-  .dim {
-    opacity: 0.3;
-    pointer-events: none;
-  }
-
-  .disabled {
-    pointer-events: none;
-  }
-
-  .vote-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    text-align: center;
-
-    .vote-count {
-      font-size: 2rem;
-      font-weight: bolder;
-      margin-bottom: 0.5rem;
-    }
-  }
-
-  .change-vote-button {
-    transition: all 150ms ease-in-out;
-
-    &:hover {
-      text-decoration: none;
-      font-size: 0.9rem;
-      margin-top: 0.1rem;
-    }
-  }
-
-  .button.abstain-button {
-    text-transform: uppercase;
-    color: var(--voting-cards-weight-0);
-    border-color: var(--voting-cards-weight-0);
-    background-color: transparent;
-
-    &.voted {
-      background-color: var(--voting-cards-weight-0);
-      color: #fff;
-      border-color: transparent;
-
-      &.disabled {
-        opacity: 1;
+        &.disabled {
+          @apply opacity-100;
+        }
       }
     }
   }
@@ -178,7 +142,7 @@
 
 .vote_proposal_modal {
   div.button__sm {
-    display: inline-block;
+    @apply inline-block;
   }
 
   .vote-label {
@@ -186,20 +150,159 @@
   }
 }
 
-.card__list-metadata {
-  .voting-weight_3 {
+.proposal {
+  &__aside-vote.layout-aside__ctas-buttons:has(.voting-voting_cards) {
+    @apply max-md:h-auto;
+  }
+}
+
+.card {
+  &__proposals-votes {
+    .card__proposals-votes-container {
+      .voting-voting_cards {
+        @apply mb-0 border-b-0;
+      }
+
+      .awesome-voting-card.from-list {
+        $rectangle-width-compact: 1.25rem;
+
+        @apply flex items-center justify-center m-0 p-0 gap-12 md:flex-col md:gap-2 lg:flex-row lg:gap-12;
+
+        .vote {
+          &-cards-container {
+            @apply flex items-center gap-2;
+          }
+
+          &-block {
+            @apply flex flex-col items-center gap-0.5;
+
+            .vote-count {
+              @apply m-0 font-bold leading-none;
+
+              font-size: 0.75rem;
+              order: 1;
+            }
+
+            .vote-action {
+              @apply flex flex-col items-center gap-0.5 no-underline;
+
+              order: 2;
+
+              .vote-label {
+                @apply m-0 leading-none;
+
+                font-size: 0.625rem;
+                order: 1;
+              }
+
+              > svg {
+                @apply m-0;
+
+                width: $rectangle-width-compact;
+                height: calc($rectangle-width-compact * 2);
+                order: 2;
+                transition: transform 150ms ease-in-out;
+              }
+
+              &:hover > svg {
+                transform: scale(1.15) rotate(-5deg);
+              }
+            }
+          }
+
+          &-actions-container {
+            @apply flex flex-col items-center;
+
+            .abstain-button {
+              @apply m-0 flex items-center gap-2 whitespace-nowrap;
+
+              font-size: 10px;
+              padding: 0.125rem 0.375rem;
+
+              .abstain-count {
+                @apply inline-flex items-center justify-center rounded-full font-bold leading-none;
+
+                min-width: 1.25rem;
+                height: 1.25rem;
+                padding: 0 0.25rem;
+                background-color: var(--voting-cards-weight-0);
+                color: white;
+                font-size: 0.625rem;
+              }
+            }
+
+            .change-vote-button {
+              @apply m-0 whitespace-nowrap no-underline;
+
+              font-size: 0.625rem;
+              padding: 0.125rem 0.375rem;
+
+              &:hover {
+                @apply underline;
+              }
+            }
+
+            .vote-message {
+              @apply text-center m-0 whitespace-nowrap;
+
+              font-size: 0.625rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.voting-voting_cards .vote-card,
+.awesome-voting-card.from-list .vote-block .vote-action,
+.awesome-voting-card.from-list .vote-actions-container .vote-action {
+  &.weight_3 {
     color: var(--voting-cards-weight-3);
+
+    & > svg {
+      fill: var(--voting-cards-weight-3);
+    }
+
+    .vote-label {
+      color: var(--voting-cards-weight-3);
+    }
   }
 
-  .voting-weight_2 {
+  &.weight_2 {
     color: var(--voting-cards-weight-2);
+
+    & > svg {
+      fill: var(--voting-cards-weight-2);
+    }
+
+    .vote-label {
+      color: var(--voting-cards-weight-2);
+    }
   }
 
-  .voting-weight_1 {
+  &.weight_1 {
     color: var(--voting-cards-weight-1);
+
+    & > svg {
+      fill: var(--voting-cards-weight-1);
+    }
+
+    .vote-label {
+      color: var(--voting-cards-weight-1);
+    }
   }
 
-  .voting-weight_0 {
-    color: var(--voting-cards-weight-0);
+  &.voted > svg {
+    transform: scale(1.15) rotate(-5deg);
   }
+
+  &.dim {
+    @apply opacity-30 pointer-events-none;
+  }
+}
+
+.voting-voting_cards .disabled,
+.awesome-voting-card .disabled {
+  @apply pointer-events-none cursor-not-allowed;
 }

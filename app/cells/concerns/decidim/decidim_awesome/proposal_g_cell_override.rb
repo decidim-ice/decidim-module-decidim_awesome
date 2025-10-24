@@ -2,8 +2,9 @@
 
 module Decidim
   module DecidimAwesome
-    module ProposalLCellOverride
+    module ProposalGCellOverride
       extend ActiveSupport::Concern
+      include Decidim::DecidimAwesome::AwesomeHelpers
 
       included do
         private

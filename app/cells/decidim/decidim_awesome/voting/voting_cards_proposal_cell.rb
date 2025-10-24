@@ -7,7 +7,7 @@ module Decidim
         VOTE_WEIGHTS = [0, 1, 2, 3].freeze
 
         def show
-          render :show
+          from_proposals_list ? render(:list) : render(:show)
         end
 
         def vote_block_for(proposal, weight)
