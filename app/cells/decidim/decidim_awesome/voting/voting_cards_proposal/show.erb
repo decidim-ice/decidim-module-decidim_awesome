@@ -1,17 +1,36 @@
-<div class="flex flex-col justify-center awesome-voting-card <%= 'from-list' if from_proposals_list %>">
-  <h4 class="heading4 vote-title mb-2" style="font-size:1.375rem;"><%= title %></h4>
+<div class="<%= container_classes %>">
+  <% if show_title? %>
+    <h4 class="heading4 vote-title mb-2" style="font-size:1.375rem;"><%= title %></h4>
+  <% end %>
 
-  <div class="flex flex-row justify-center gap-1.5 mt-4">
-    <%= vote_block_for(proposal, 3) %>
-    <%= vote_block_for(proposal, 2) %>
-    <%= vote_block_for(proposal, 1) %>
+  <div class="<%= from_proposals_list ? 'vote-cards-container' : 'flex flex-row justify-center gap-1.5 mt-4' %>">
+    <% [3, 2, 1].each do |weight| %>
+      <div class="vote-block">
+        <% unless current_settings.votes_hidden? %>
+          <p class="vote-count" data-weight="<%= weight %>"><%= proposal_votes(weight) %></p>
+        <% end %>
+        <%= action_authorized_link_to :vote,
+                                      proposal_vote_path(weight),
+                                      **link_options(weight) do %>
+          <span class="vote-label"><%= proposal.manifest.label_for(weight) %></span>
+          <%= content_tag :svg, role: "img" do
+            content_tag(:title, t("decidim.decidim_awesome.voting.voting_cards.voting_for", proposal: sanitized_title, type: proposal.manifest.label_for(weight))) +
+              content_tag(:use, "", "href" => svg_path(weight))
+          end %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
+
+  <% if from_proposals_list %>
+    <div class="vote-actions-container">
+  <% end %>
 
   <% if component_settings.voting_cards_show_abstain? %>
     <%= action_authorized_link_to :vote, proposal_vote_path(0), link_options(0).merge({
-                                                          title: t("decidim.decidim_awesome.voting.voting_cards.voting_for", proposal: sanitized_title, type: proposal.manifest.label_for(0)),
-                                                          class: "button button__sm button__transparent-secondary mb-4 vote-action abstain-button #{classes_for(0)}"
-                                                        }) do %>
+                                                        title: t("decidim.decidim_awesome.voting.voting_cards.voting_for", proposal: sanitized_title, type: proposal.manifest.label_for(0)),
+                                                        class: "button button__#{from_proposals_list ? 'xs' : 'sm'} button__transparent-secondary #{from_proposals_list ? '' : 'mb-4'} vote-action abstain-button #{classes_for(0)}"
+                                                      }) do %>
       <%= voted_for?(0) ? t("decidim.decidim_awesome.voting.voting_cards.abstained") : proposal.manifest.label_for(0) %>
       <% if proposal_votes(0) > 0 %>
         <span class="abstain-count"><%= proposal_votes(0) %></span>
@@ -20,24 +39,34 @@
   <% end %>
 
   <% if voted_for_any? && !current_settings.votes_blocked? %>
-    <p class="text-center" style="margin-bottom:1rem;">
-      <%= action_authorized_link_to :unvote,
-                                    t("decidim.decidim_awesome.voting.voting_cards.change_vote"),
-                                    proposal_vote_path(current_vote&.weight),
-                                    resource: proposal,
-                                    remote: true,
-                                    method: :delete,
-                                    id: "change-vote",
-                                    class: "change-vote-button vote-action font-semibold" %>
-    </p>
+    <% if wrap_change_vote? %>
+      <p class="text-center" style="margin-bottom:1rem;">
+    <% end %>
+        <%= action_authorized_link_to :unvote,
+                                      t("decidim.decidim_awesome.voting.voting_cards.change_vote"),
+                                      proposal_vote_path(current_vote&.weight),
+                                      resource: proposal,
+                                      remote: true,
+                                      method: :delete,
+                                      id: "change-vote",
+                                      class: "change-vote-button vote-action font-semibold" %>
+    <% if wrap_change_vote? %>
+      </p>
+    <% end %>
   <% elsif proposal.maximum_votes_reached? && !proposal.can_accumulate_votes_beyond_threshold && current_component.participatory_space.can_participate?(current_user) %>
-    <p class="text-center"><%= t("decidim.proposals.proposals.vote_button.maximum_votes_reached") %></p>
+    <p class="<%= from_proposals_list ? 'vote-message' : 'text-center' %>"><%= t("decidim.proposals.proposals.vote_button.maximum_votes_reached") %></p>
   <% elsif vote_limit_enabled? && remaining_votes_count_for_user <= 0 %>
-    <p class="text-center"><%= t("decidim.proposals.proposals.vote_button.no_votes_remaining") %></p>
+    <p class="<%= from_proposals_list ? 'vote-message' : 'text-center' %>"><%= t("decidim.proposals.proposals.vote_button.no_votes_remaining") %></p>
   <% elsif current_settings.votes_blocked? || !current_component.participatory_space.can_participate?(current_user) %>
-    <p class="text-center"><%= t("decidim.proposals.proposals.vote_button.votes_blocked") %></p>
+    <p class="<%= from_proposals_list ? 'vote-message' : 'text-center' %>"><%= t("decidim.proposals.proposals.vote_button.votes_blocked") %></p>
+  <% end %>
+
+  <% if from_proposals_list %>
+    </div>
   <% end %>
 
 </div>
 
-<%= render :modal if current_component.settings.voting_cards_show_modal_help %>
+<% unless from_proposals_list %>
+  <%= render :modal if current_component.settings.voting_cards_show_modal_help %>
+<% end %>

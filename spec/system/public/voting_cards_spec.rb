@@ -161,6 +161,7 @@ describe "Voting weights with cards" do
         click_on "Change my vote"
         click_on "Abstain"
         expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "1")
+        expect(page).to have_css(".abstain-count", text: "1")
       end
     end
   end
@@ -191,6 +192,7 @@ describe "Voting weights with cards" do
         expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "1")
         expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "2")
         expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "3")
+        expect(page).to have_css(".abstain-count", text: "4")
       end
     end
 

@@ -7,14 +7,7 @@ module Decidim
         VOTE_WEIGHTS = [0, 1, 2, 3].freeze
 
         def show
-          from_proposals_list ? render(:list) : render(:show)
-        end
-
-        def vote_block_for(proposal, weight)
-          render partial: "vote_block", locals: {
-            proposal:,
-            weight:
-          }
+          render(:show)
         end
 
         def vote_instructions
@@ -84,6 +77,24 @@ module Decidim
           return "" if txt == "-"
 
           txt.presence || t("decidim.decidim_awesome.voting.voting_cards.default_box_title")
+        end
+
+        def container_classes
+          classes = ["awesome-voting-card"]
+          if from_proposals_list
+            classes << "from-list"
+          else
+            classes << "flex flex-col justify-center"
+          end
+          classes.join(" ")
+        end
+
+        def show_title?
+          !from_proposals_list
+        end
+
+        def wrap_change_vote?
+          !from_proposals_list
         end
       end
     end
