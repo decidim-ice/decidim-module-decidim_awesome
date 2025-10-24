@@ -81,11 +81,11 @@ module Decidim
 
         def container_classes
           classes = ["awesome-voting-card"]
-          if from_proposals_list
-            classes << "from-list"
-          else
-            classes << "flex flex-col justify-center"
-          end
+          classes << if from_proposals_list
+                       "from-list"
+                     else
+                       "flex flex-col justify-center"
+                     end
           classes.join(" ")
         end
 
