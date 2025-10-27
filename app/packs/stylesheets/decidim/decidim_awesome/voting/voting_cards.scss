@@ -18,10 +18,18 @@
       @apply text-center mb-0 border-b-0;
 
       .vote-card {
-        @apply mt-2;
+        @apply mt-2 inline-flex flex-col items-center;
+
+        visibility: visible;
 
         .vote-label {
           @apply mb-4 text-black;
+        }
+
+        > svg {
+          width: 3rem;
+          height: 6rem;
+          visibility: visible;
         }
       }
 
@@ -52,21 +60,25 @@
       }
 
       &-card {
-        @apply inline-block;
+        @apply inline-flex flex-col items-center lg:inline-block;
 
         .vote-label {
-          @apply mb-0;
+          @apply mb-2 lg:mb-0;
 
           font-size: 1rem;
         }
 
         > svg {
-          @apply inline-block align-middle max-w-full;
+          @apply max-w-full;
 
           width: $rectangle-width;
           height: calc($rectangle-width * 2);
-          margin: -0.5rem 0 0 0.5rem;
           transition: transform 150ms ease-in-out;
+
+          @media (min-width: 1024px) {
+            @apply inline-block align-middle;
+            margin: -0.5rem 0 0 0.5rem;
+          }
 
           &:hover {
             transform: scale(1.15) rotate(-5deg);
@@ -75,7 +87,7 @@
       }
 
       &-block {
-        @apply flex items-center justify-center relative text-center;
+        @apply flex flex-col items-center justify-center relative text-center;
 
         .vote-count {
           @apply mb-2;
@@ -147,6 +159,16 @@
 
   .vote-label {
     @apply ml-2;
+  }
+
+  .vote-card {
+    @apply inline-flex flex-col items-center;
+
+    .vote-label {
+      @apply mb-2 ml-0;
+
+      font-size: 1rem;
+    }
   }
 }
 
