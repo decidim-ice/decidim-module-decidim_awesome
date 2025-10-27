@@ -75,7 +75,7 @@
       }
 
       &-block {
-        @apply flex flex-col items-center justify-center relative text-center;
+        @apply flex items-center justify-center relative text-center;
 
         .vote-count {
           @apply mb-2;
@@ -166,7 +166,7 @@
       .awesome-voting-card.from-list {
         $rectangle-width-compact: 1.25rem;
 
-        @apply flex items-center justify-center m-0 p-0 gap-12 md:flex-col md:gap-2 lg:flex-row lg:gap-12;
+        @apply flex items-center justify-center m-0 p-0 gap-12 md:gap-2 lg:gap-12;
 
         .vote {
           &-cards-container {

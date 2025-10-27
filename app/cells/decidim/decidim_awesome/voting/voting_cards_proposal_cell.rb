@@ -100,6 +100,12 @@ module Decidim
         def wrap_change_vote?
           !from_proposals_list
         end
+
+        def vote_block_for(proposal, weight)
+          @proposal = proposal
+          @weight = weight
+          render
+        end
       end
     end
   end
