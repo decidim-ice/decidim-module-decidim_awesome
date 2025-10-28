@@ -922,4 +922,142 @@ describe "Voting weights with cards" do
       end
     end
   end
+
+  context "when testing modal help window" do
+    let(:modal_help) { true }
+
+    shared_examples "modal window behavior" do
+      it "shows modal when voting for yellow card and proceeds" do
+        within vote_button_scope do
+          expect(page).to have_no_content("Change my vote")
+          click_on "Yellow"
+        end
+
+        within ".vote_proposal_modal" do
+          expect(page).to have_content("My vote on \"#{strip_tags(proposal_title)}\" is \"Yellow\"")
+          click_on "Proceed"
+        end
+
+        within vote_button_scope do
+          expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "1")
+          expect(page).to have_content("Change my vote")
+          expect(page).to have_css("a.vote-action.weight_2.voted.disabled")
+        end
+
+        expect(page).to have_no_css(".vote_proposal_modal", visible: :visible)
+      end
+
+      it "shows modal when changing vote and cancels the vote" do
+        within vote_button_scope do
+          click_on "Yellow"
+        end
+
+        within ".vote_proposal_modal" do
+          click_on "Proceed"
+        end
+
+        within vote_button_scope do
+          expect(page).to have_content("Change my vote")
+          expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "1")
+          click_on "Change my vote"
+        end
+
+        within ".vote_proposal_modal" do
+          expect(page).to have_content("Change my vote")
+          click_on "Proceed"
+        end
+
+        within vote_button_scope do
+          expect(page).to have_no_content("Change my vote")
+          expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "0")
+        end
+      end
+
+      it "shows modal when voting for abstain card and proceeds" do
+        within vote_button_scope do
+          expect(page).to have_no_content("Change my vote")
+          click_on "Abstain"
+        end
+
+        within ".vote_proposal_modal" do
+          expect(page).to have_content("My vote on \"#{strip_tags(proposal_title)}\" is \"Abstain\"")
+          click_on "Proceed"
+        end
+
+        within vote_button_scope do
+          expect(page).to have_content("Change my vote")
+          expect(page).to have_css(".abstain-button.voted.disabled")
+        end
+
+        expect(page).to have_no_css(".vote_proposal_modal", visible: :visible)
+      end
+
+      it "maintains vote state after page reload and allows canceling vote" do
+        within vote_button_scope do
+          click_on "Green"
+        end
+
+        within ".vote_proposal_modal" do
+          click_on "Proceed"
+        end
+
+        within vote_button_scope do
+          expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "1")
+          expect(page).to have_content("Change my vote")
+        end
+
+        visit current_path
+
+        within vote_button_scope do
+          expect(page).to have_content("Change my vote")
+          expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "1")
+          click_on "Change my vote"
+        end
+
+        within ".vote_proposal_modal" do
+          expect(page).to have_content("Change my vote")
+          click_on "Proceed"
+        end
+
+        within vote_button_scope do
+          expect(page).to have_no_content("Change my vote")
+          expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "0")
+          click_on "Yellow"
+        end
+
+        within ".vote_proposal_modal" do
+          expect(page).to have_content("My vote on \"#{strip_tags(proposal_title)}\" is \"Yellow\"")
+          click_on "Proceed"
+        end
+
+        within vote_button_scope do
+          expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "1")
+          expect(page).to have_content("Change my vote")
+        end
+      end
+    end
+
+    context "when on show page" do
+      let(:vote_button_scope) { ".voting-voting_cards" }
+
+      before do
+        login_as user, scope: :user
+        visit_component
+        find(".card__list#proposals__proposal_#{proposal.id}").click
+      end
+
+      it_behaves_like "modal window behavior"
+    end
+
+    context "when on index page" do
+      let(:vote_button_scope) { "#proposal-#{proposal.id}-vote-button" }
+
+      before do
+        login_as user, scope: :user
+        visit_component
+      end
+
+      it_behaves_like "modal window behavior"
+    end
+  end
 end

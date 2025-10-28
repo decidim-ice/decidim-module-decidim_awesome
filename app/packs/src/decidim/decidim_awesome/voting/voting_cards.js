@@ -5,120 +5,144 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const storage = () => {
-    return JSON.parse(localStorage.getItem("awesome_voting_cards_hide_modal") || "{}");
+  // Constants
+  const STORAGE_KEY = "awesome_voting_cards_hide_modal";
+  const SELECTORS = {
+    voteAction: ".awesome-voting-card .vote-action",
+    containers: [".awesome-voting-card[data-proposal-id]", ".voting-voting_cards[data-proposal-id]"],
+    modal: '[data-dialog^="voting-cards-modal-help-"]',
+    voteCard: ".current-choice .vote-card",
+    checkbox: '[id^="voting_cards-skip_help"]',
+    proceedButton: ".vote-action"
   };
 
-  const saveState = (checkboxValue, val) => {
-    const show = storage();
-    show[checkboxValue] = val;
-    localStorage.setItem("awesome_voting_cards_hide_modal", JSON.stringify(show));
+  // Storage helpers
+  const getStorage = () => JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+
+  const saveToStorage = (key, value) => {
+    const storage = getStorage();
+    storage[key] = value;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(storage));
   };
 
-  // Use event delegation to avoid duplicate handlers after AJAX updates
-  document.body.addEventListener("click", (evt) => {
-    const voteAction = evt.target.closest(".awesome-voting-card .vote-action");
+  // Find modal elements for a proposal
+  const findModalElements = (proposalId) => {
+    const modalId = `voting-cards-modal-help-${proposalId}`;
+    // Find ALL modals (AJAX may create duplicates)
+    const allModals = document.querySelectorAll(`[data-dialog="${modalId}"]`);
+    // Use the LAST one (most recent from AJAX)
+    const modal = allModals[allModals.length - 1];
 
-    if (!voteAction) {
-      return;
+    if (!modal) {
+      return null;
     }
 
+    const card = modal.querySelector(SELECTORS.voteCard);
+    const checkbox = modal.querySelector(SELECTORS.checkbox);
+
+    return (card && checkbox)
+      ? { modal, card, checkbox }
+      : null;
+  };
+
+  // Update vote card content
+  const updateVoteCardContent = (card, action) => {
+    // Clear previous content first but keep vote-card class
+    card.className = "vote-card";
+    card.innerHTML = "";
+
+    action.classList.forEach((cls) => card.classList.add(cls));
+
+    let content = "";
+    if (action.children.length > 1) {
+      const child = action.children[1];
+      content = `${child.outerHTML}<span class="vote-label">${child.children[0].textContent}</span>`;
+    } else if (card.classList.contains("button")) {
+      card.classList.remove("button");
+      content = `<span class="vote-label">${action.title}</span>`;
+    } else {
+      content = `<span class="vote-label">${action.textContent}</span>`;
+    }
+
+    card.innerHTML = content;
+  };
+
+  // Check if modal should be shown
+  const shouldShowModal = (checkbox, modalId) => {
+    const isChecked = getStorage()[checkbox.value];
+    const isOpen = window.Decidim.currentDialogs[modalId]?.isOpen;
+    return !isChecked && !isOpen;
+  };
+
+  // Handle vote action click
+  const handleVoteAction = (evt, voteAction) => {
     // If element already has data-dialog-open, let Decidim handle it
     if (voteAction.hasAttribute("data-dialog-open")) {
       return;
     }
 
-    const clickedContainer = voteAction.closest(".awesome-voting-card[data-proposal-id]") || voteAction.closest(".voting-voting_cards[data-proposal-id]");
-
-    if (!clickedContainer) {
+    const container = SELECTORS.containers.map((sel) => voteAction.closest(sel)).find(Boolean);
+    if (!container) {
       return;
     }
 
-    const clickedProposalId = clickedContainer.dataset.proposalId;
-    const clickedModalId = `voting-cards-modal-help-${clickedProposalId}`;
-    // Find ALL modals (AJAX may create duplicates)
-    const allClickedModals = document.querySelectorAll(`[data-dialog="${clickedModalId}"]`);
-    // Use the LAST one (most recent from AJAX)
-    const clickedModal = allClickedModals[allClickedModals.length - 1];
+    const proposalId = container.dataset.proposalId;
+    const elements = findModalElements(proposalId);
 
-    if (!clickedModal) {
+    if (!elements) {
       return;
     }
 
-    const clickedCard = clickedModal.querySelector(".current-choice .vote-card");
-    const clickedCheck = clickedModal.querySelector('[id^="voting_cards-skip_help"]');
-
-    if (!clickedCard || !clickedCheck) {
-      return;
-    }
-
-    const isChecked = storage()[clickedCheck.value];
-    const isOpen = window.Decidim.currentDialogs[clickedModal.id]?.isOpen;
-    const shouldShowModal = !isChecked && !isOpen;
+    const { modal, card, checkbox } = elements;
 
     // If modal already open, don't intercept - let the AJAX request go through
-    if (isOpen) {
+    if (window.Decidim.currentDialogs[modal.id]?.isOpen) {
       return;
     }
 
-    if (shouldShowModal) {
+    if (shouldShowModal(checkbox, modal.id)) {
       evt.stopPropagation();
       evt.preventDefault();
 
-      clickedModal.storedAction = voteAction;
-
-      clickedCheck.checked = isChecked || false;
-
-      // Clear previous content first but keep vote-card class
-      clickedCard.className = "vote-card";
-      clickedCard.innerHTML = "";
-
-      voteAction.classList.forEach(cls => clickedCard.classList.add(cls));
-      if (voteAction.children.length > 1) {
-        const content = `${voteAction.children[1].outerHTML}<span class="vote-label">${voteAction.children[1].children[0].textContent}</span>`;
-        clickedCard.innerHTML = content;
-      } else if (clickedCard.classList.contains("button")) {
-        clickedCard.classList.remove("button");
-        const content = `<span class="vote-label">${voteAction.title}</span>`;
-        clickedCard.innerHTML = content;
-      } else {
-        const content = `<span class="vote-label">${voteAction.textContent}</span>`;
-        clickedCard.innerHTML = content;
-      }
-
-      if (shouldShowModal) {
-        window.Decidim.currentDialogs[clickedModal.id].open();
-      }
+      modal.storedAction = voteAction;
+      checkbox.checked = false;
+      updateVoteCardContent(card, voteAction);
+      window.Decidim.currentDialogs[modal.id].open();
     } else {
-      if (clickedContainer) {
-        clickedContainer.classList.add("loading");
-      }
+      container.classList.add("loading");
     }
-  });
+  };
 
-  // Initialize all modals on the page (use data-dialog selector to avoid -content wrappers)
-  const allModals = document.querySelectorAll('[data-dialog^="voting-cards-modal-help-"]');
-
-  allModals.forEach((modalEl) => {
-    const check = modalEl.querySelector('[id^="voting_cards-skip_help"]');
-    if (check) {
-      check.addEventListener("change", () => {
-        saveState(check.value, check.checked);
+  // Initialize modal handlers
+  const initModalHandlers = (modal) => {
+    const checkbox = modal.querySelector(SELECTORS.checkbox);
+    if (checkbox) {
+      checkbox.addEventListener("change", () => {
+        saveToStorage(checkbox.value, checkbox.checked);
       });
     }
 
-    const proceedButton = modalEl.querySelector(".vote-action");
+    const proceedButton = modal.querySelector(SELECTORS.proceedButton);
     if (proceedButton) {
       proceedButton.addEventListener("click", () => {
-        if (modalEl.storedAction) {
-          modalEl.storedAction.click();
+        if (modal.storedAction) {
+          modal.storedAction.click();
           setTimeout(() => {
-            if (window.Decidim.currentDialogs[modalEl.id]) {
-              window.Decidim.currentDialogs[modalEl.id].close();
-            }
+            window.Decidim.currentDialogs[modal.id]?.close();
           });
         }
       });
     }
+  };
+
+  // Use event delegation to avoid duplicate handlers after AJAX updates
+  document.body.addEventListener("click", (evt) => {
+    const voteAction = evt.target.closest(SELECTORS.voteAction);
+    if (voteAction) {
+      handleVoteAction(evt, voteAction);
+    }
   });
+
+  // Initialize all modals on the page (use data-dialog selector to avoid -content wrappers)
+  document.querySelectorAll(SELECTORS.modal).forEach(initModalHandlers);
 });
