@@ -1,4 +1,4 @@
-<%= decidim_modal id: "voting-cards-modal-help", class:"reveal vote_proposal_modal voting-voting_cards" do %>
+<%= decidim_modal id: modal_id, class:"reveal vote_proposal_modal voting-voting_cards" do %>
   <div data-dialog-container>
     <div class="reveal__content">
       <div class="instructions mb-4"><%= vote_instructions %></div>
@@ -13,6 +13,6 @@
   </div>
   <div data-dialog-actions>
     <button type="button" class="button button__lg button__primary hover:bg-secondary vote-action" style="background-color: #e02d2d;"><%= t("decidim.decidim_awesome.voting.voting_cards.modal.proceed") %></button>
-    <button type="button" class="button button__lg button__transparent-secondary cancel-action hollow secondary" data-dialog-close="voting-cards-modal-help"><%= t("decidim.decidim_awesome.voting.voting_cards.modal.cancel") %></button>
+    <button type="button" class="button button__lg button__transparent-secondary cancel-action hollow secondary" data-dialog-close="<%= modal_id %>"><%= t("decidim.decidim_awesome.voting.voting_cards.modal.cancel") %></button>
   </div>
 <% end %>

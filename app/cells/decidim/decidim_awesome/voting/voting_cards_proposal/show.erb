@@ -1,9 +1,9 @@
-<div class="<%= container_classes %>">
+<div class="<%= container_classes %>" data-proposal-id="<%= proposal.id %>">
   <% if show_title? %>
     <h4 class="heading4 vote-title mb-2" style="font-size:1.375rem;"><%= title %></h4>
   <% end %>
 
-  <div class="<%= from_proposals_list ? "vote-cards-container" : "flex flex-row justify-center gap-1.5 mt-4" %>">
+  <div class="<%= from_proposals_list ? "vote-cards-container" : "flex flex-row justify-center gap-6 lg:gap-1.5 mt-4" %>">
     <% [3, 2, 1].each do |weight| %>
       <%= vote_block_for(proposal, weight) %>
     <% end %>
@@ -57,9 +57,6 @@
   <% if from_proposals_list %>
     </div>
   <% end %>
-
 </div>
 
-<% unless from_proposals_list %>
-  <%= render :modal if current_component.settings.voting_cards_show_modal_help %>
-<% end %>
+<%= render :modal if current_component.settings.voting_cards_show_modal_help %>
