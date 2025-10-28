@@ -643,6 +643,8 @@ describe "Voting weights with cards" do
               click_on "Green"
             end
 
+            click_on "Proceed"
+
             within "#proposal-#{proposal.id}-vote-button" do
               expect(page).to have_content("Change my vote")
               expect(page).to have_css("a.vote-action.weight_3.voted.disabled")
@@ -655,8 +657,13 @@ describe "Voting weights with cards" do
               click_on "Yellow"
             end
 
+            click_on "Proceed"
+
             within "#proposal-#{proposal.id}-vote-button" do
               expect(page).to have_content("Change my vote")
+            end
+
+            within "#proposal-#{proposal.id}-vote-button" do
               expect(page).to have_css("a.vote-action.weight_2.voted.disabled")
               expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "1")
             end
@@ -666,6 +673,8 @@ describe "Voting weights with cards" do
             within "#proposal-#{proposal.id}-vote-button" do
               click_on "Red"
             end
+
+            click_on "Proceed"
 
             within "#proposal-#{proposal.id}-vote-button" do
               expect(page).to have_content("Change my vote")
@@ -679,6 +688,8 @@ describe "Voting weights with cards" do
               click_on "Abstain"
             end
 
+            click_on "Proceed"
+
             within "#proposal-#{proposal.id}-vote-button" do
               expect(page).to have_content("Change my vote")
               expect(page).to have_css(".abstain-button.voted.disabled")
@@ -690,14 +701,20 @@ describe "Voting weights with cards" do
               click_on "Green"
             end
 
+            click_on "Proceed"
+
             within "#proposal-#{proposal.id}-vote-button" do
               expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "1")
               click_on "Change my vote"
             end
 
+            click_on "Proceed"
+
             within "#proposal-#{proposal.id}-vote-button" do
               click_on "Yellow"
             end
+
+            click_on "Proceed"
 
             within "#proposal-#{proposal.id}-vote-button" do
               expect(page).to have_css("a.vote-action.weight_2.voted.disabled")
@@ -711,14 +728,20 @@ describe "Voting weights with cards" do
               click_on "Abstain"
             end
 
+            click_on "Proceed"
+
             within "#proposal-#{proposal.id}-vote-button" do
               expect(page).to have_css(".abstain-button.voted.disabled")
               click_on "Change my vote"
             end
 
+            click_on "Proceed"
+
             within "#proposal-#{proposal.id}-vote-button" do
               click_on "Red"
             end
+
+            click_on "Proceed"
 
             within "#proposal-#{proposal.id}-vote-button" do
               expect(page).to have_css("a.vote-action.weight_1.voted.disabled")
@@ -731,6 +754,8 @@ describe "Voting weights with cards" do
             within "#proposal-#{proposal.id}-vote-button" do
               click_on "Green"
             end
+
+            click_on "Proceed"
 
             within "#proposal-#{proposal.id}-vote-button" do
               expect(page).to have_css("a.vote-action.weight_3.voted.disabled")
@@ -770,6 +795,8 @@ describe "Voting weights with cards" do
               click_on "Green"
             end
 
+            click_on "Proceed"
+
             within "#proposal-#{proposal.id}-vote-button" do
               expect(page).to have_content("Change my vote")
               expect(page).to have_css("a.vote-action.weight_3.voted.disabled")
@@ -782,14 +809,20 @@ describe "Voting weights with cards" do
               click_on "Yellow"
             end
 
+            click_on "Proceed"
+
             within "#proposal-#{proposal.id}-vote-button" do
               expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "1")
               click_on "Change my vote"
             end
 
+            click_on "Proceed"
+
             within "#proposal-#{proposal.id}-vote-button" do
               click_on "Red"
             end
+
+            click_on "Proceed"
 
             within "#proposal-#{proposal.id}-vote-button" do
               expect(page).to have_css("a.vote-action.weight_1.voted.disabled")
@@ -810,6 +843,8 @@ describe "Voting weights with cards" do
           within "#proposal-#{proposal.id}-vote-button" do
             click_on "Green"
           end
+
+          click_on "Proceed"
 
           within "#proposal-#{proposal.id}-vote-button" do
             expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "1")
@@ -834,6 +869,8 @@ describe "Voting weights with cards" do
           within "#proposal-#{proposal.id}-vote-button" do
             click_on "Yellow"
           end
+
+          click_on "Proceed"
 
           within "#proposal-#{proposal.id}-vote-button" do
             expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "1")
@@ -890,6 +927,8 @@ describe "Voting weights with cards" do
               click_on "Green"
             end
 
+            click_on "Proceed"
+
             expect(page).to have_content("We need to verify your identity")
           end
         end
@@ -913,6 +952,8 @@ describe "Voting weights with cards" do
             within "#proposal-#{proposal.id}-vote-button" do
               click_on "Green"
             end
+
+            click_on "Proceed"
 
             within "#proposal-#{proposal.id}-vote-button" do
               expect(page).to have_content("Change my vote")
@@ -1058,6 +1099,72 @@ describe "Voting weights with cards" do
       end
 
       it_behaves_like "modal window behavior"
+    end
+
+    context "when skipping modal in the future" do
+      let(:vote_button_scope) { ".voting-voting_cards" }
+
+      before do
+        login_as user, scope: :user
+        visit_component
+        find(".card__list#proposals__proposal_#{proposal.id}").click
+      end
+
+      it "does not show modal after checking skip checkbox" do
+        within vote_button_scope do
+          click_on "Yellow"
+        end
+
+        within ".vote_proposal_modal" do
+          expect(page).to have_content("My vote on \"#{strip_tags(proposal_title)}\" is \"Yellow\"")
+          check "Check here to skip this window in the future"
+          click_on "Proceed"
+        end
+
+        within vote_button_scope do
+          expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "1")
+          expect(page).to have_content("Change my vote")
+          click_on "Change my vote"
+        end
+
+        expect(page).to have_no_css(".vote_proposal_modal", visible: :visible)
+
+        within vote_button_scope do
+          expect(page).to have_no_content("Change my vote")
+          expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "0")
+        end
+      end
+
+      it "does not show modal for new votes after checking skip checkbox" do
+        within vote_button_scope do
+          click_on "Green"
+        end
+
+        within ".vote_proposal_modal" do
+          check "Check here to skip this window in the future"
+          click_on "Proceed"
+        end
+
+        within vote_button_scope do
+          expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "1")
+          click_on "Change my vote"
+        end
+
+        expect(page).to have_no_css(".vote_proposal_modal", visible: :visible)
+
+        within vote_button_scope do
+          expect(page).to have_no_content("Change my vote")
+          click_on "Red"
+        end
+
+        expect(page).to have_no_css(".vote_proposal_modal", visible: :visible)
+
+        within vote_button_scope do
+          expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "1")
+          expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "0")
+          expect(page).to have_content("Change my vote")
+        end
+      end
     end
   end
 end
