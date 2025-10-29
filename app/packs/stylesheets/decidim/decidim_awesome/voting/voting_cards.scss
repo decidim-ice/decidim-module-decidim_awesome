@@ -35,8 +35,6 @@
 
       .change-vote-button:hover {
         @apply mt-0;
-
-        font-size: 1rem;
       }
     }
 
@@ -55,8 +53,6 @@
     .vote {
       &-title {
         @apply text-center;
-
-        font-size: 1.5rem;
       }
 
       &-card {
@@ -64,8 +60,6 @@
 
         .vote-label {
           @apply mb-2 lg:mb-0;
-
-          font-size: 1rem;
         }
 
         > svg {
@@ -93,7 +87,7 @@
         .vote-count {
           @apply mb-2;
 
-          font-size: 2rem;
+          font-size: 1.4rem;
           font-weight: bolder;
         }
       }
@@ -101,7 +95,6 @@
 
     .votes_counter {
       letter-spacing: 0.2rem;
-      font-size: 1rem;
     }
 
     .voting-button {
@@ -109,12 +102,8 @@
     }
 
     .change-vote-button {
-      transition: all 150ms ease-in-out;
-
       &:hover {
-        @apply mt-0 no-underline;
-
-        font-size: 0.9rem;
+        @apply underline;
       }
     }
 
@@ -132,7 +121,6 @@
         padding: 0 0.375rem;
         background-color: var(--voting-cards-weight-0);
         color: white;
-        font-size: 0.75rem;
       }
 
       &.voted {
@@ -167,8 +155,6 @@
 
     .vote-label {
       @apply mb-2 ml-0;
-
-      font-size: 1rem;
     }
   }
 }
@@ -197,12 +183,11 @@
           }
 
           &-block {
-            @apply flex flex-col items-center gap-0.5;
+            @apply flex items-center gap-0.5;
 
             .vote-count {
               @apply m-0 font-bold leading-none;
 
-              font-size: 0.75rem;
               order: 1;
             }
 
@@ -214,7 +199,6 @@
               .vote-label {
                 @apply m-0 leading-none;
 
-                font-size: 0.625rem;
                 order: 1;
               }
 
@@ -239,7 +223,6 @@
             .abstain-button {
               @apply m-0 flex items-center gap-2 whitespace-nowrap;
 
-              font-size: 10px;
               padding: 0.125rem 0.375rem;
 
               .abstain-count {
@@ -250,14 +233,13 @@
                 padding: 0 0.25rem;
                 background-color: var(--voting-cards-weight-0);
                 color: white;
-                font-size: 0.625rem;
               }
             }
 
             .change-vote-button {
               @apply m-0 whitespace-nowrap no-underline;
 
-              font-size: 0.625rem;
+              font-size: 0.875rem;
               padding: 0.125rem 0.375rem;
 
               &:hover {
@@ -267,8 +249,6 @@
 
             .vote-message {
               @apply text-center m-0 whitespace-nowrap;
-
-              font-size: 0.625rem;
             }
           }
         }
