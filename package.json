@@ -34,11 +34,11 @@
   },
   "prettier": "@decidim/prettier-config",
   "devDependencies": {
-    "@decidim/dev": "0.31.0-rc1",
-    "@decidim/eslint-config": "0.31.0-rc1",
-    "@decidim/prettier-config": "0.31.0-rc1",
-    "@decidim/stylelint-config": "0.31.0-rc1",
-    "@decidim/webpacker": "0.31.0-rc1"
+    "@decidim/dev": "0.31.0-rc2",
+    "@decidim/eslint-config": "0.31.0-rc2",
+    "@decidim/prettier-config": "0.31.0-rc2",
+    "@decidim/stylelint-config": "0.31.0-rc2",
+    "@decidim/webpacker": "0.31.0-rc2"
   },
   "dependencies": {
     "codemirror": "^5.65.16",
