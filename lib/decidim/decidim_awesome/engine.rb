@@ -26,6 +26,8 @@ module Decidim
       # https://edgeguides.rubyonrails.org/engines.html#overriding-models-and-controllers
       # overrides
       config.to_prepare do
+        Decidim::LastActivity.include(Decidim::DecidimAwesome::LastActivityOverride) if DecidimAwesome.enabled?(:force_authorizations)
+
         if DecidimAwesome.enabled?(:hashcash_signup, :hashcash_login)
           # Add hashcash to signup and login
           Decidim::Devise::SessionsController.include(Decidim::DecidimAwesome::NeedsHashcash)
