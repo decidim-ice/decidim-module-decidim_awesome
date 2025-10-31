@@ -104,6 +104,12 @@ describe "Forced verifications on public resources" do
         it_behaves_like "some resources are not visible in last activities"
       end
 
+      context "and includes component id restriction" do
+        let!(:constraint) { create(:config_constraint, awesome_config: sub_config, settings: { "participatory_space_slug" => assembly.slug, "participatory_space_manifest" => "assemblies", "component_id" => assembly_component.id }) }
+
+        it_behaves_like "some resources are not visible in last activities"
+      end
+
       context "when user has granted the required authorizations" do
         let!(:authorization) { create(:authorization, :granted, user:, name: :dummy_authorization_handler, organization:) }
 

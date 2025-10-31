@@ -55,10 +55,9 @@ module Decidim
         constraints_with_invisible_resources.filter_map do |constraint|
           component_manifest = constraint.settings["component_manifest"]
           component_id = constraint.settings["component_id"]
-          manifest = Decidim.component_manifests.find { |m| m.name.to_s == component_manifest }
-          next unless manifest
 
-          where = { manifest_name: component_manifest }
+          where = {}
+          where[:manifest_name] = component_manifest if component_manifest.present?
           where[:id] = component_id if component_id.present?
 
           space_manifest = constraint.settings["participatory_space_manifest"]
@@ -102,12 +101,12 @@ module Decidim
       def constraints_with_invisible_components
         @constraints_with_invisible_components ||= ConfigConstraint.where(awesome_config: awesome_sub_configs)
                                                                    .where("settings ? 'participatory_space_manifest'")
-                                                                   .where.not("settings ? 'component_manifest'")
+                                                                   .where.not("settings ? 'component_manifest' OR settings ? 'component_id'")
       end
 
       def constraints_with_invisible_resources
         @constraints_with_invisible_resources ||= ConfigConstraint.where(awesome_config: awesome_sub_configs)
-                                                                  .where("settings ? 'component_manifest'")
+                                                                  .where("settings ? 'component_manifest' OR settings ? 'component_id'")
       end
 
       def awesome_sub_configs
