@@ -52,7 +52,7 @@ module Decidim
 
       # Returns a list of components ids which resources are invisible because authorization is not granted in that context
       def component_with_invisible_resources
-        constraints_with_invisible_resources.filter_map do |constraint|
+        @components_with_invisible_resources ||= constraints_with_invisible_resources.filter_map do |constraint|
           component_manifest = constraint.settings["component_manifest"]
           component_id = constraint.settings["component_id"]
 
@@ -72,7 +72,7 @@ module Decidim
 
       # Returns a list of components that are invisible because authorization is not granted in that context
       def spaces_with_invisible_components
-        constraints_with_invisible_components.filter_map do |constraint|
+        @spaces_with_invisible_components ||= constraints_with_invisible_components.filter_map do |constraint|
           space_manifest = constraint.settings["participatory_space_manifest"]
           space_slug = constraint.settings["participatory_space_slug"]
 
@@ -125,10 +125,6 @@ module Decidim
 
       def sub_configs
         @sub_configs ||= non_granted_handlers.keys.map { |key| "force_authorization_#{key}" }
-      end
-
-      def service
-        @service ||= AccessAuthorizationService.new(user, organization)
       end
     end
   end

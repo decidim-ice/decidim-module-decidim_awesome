@@ -68,6 +68,7 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::AdminLog::UserPresenter.included_modules).to include(Decidim::DecidimAwesome::AdminLog::UserPresenterOverride)
       expect(Decidim::Devise::SessionsController.included_modules).to include(Decidim::DecidimAwesome::NeedsHashcash)
       expect(Decidim::Devise::RegistrationsController.included_modules).to include(Decidim::DecidimAwesome::NeedsHashcash)
+      expect(Decidim::LastActivity.included_modules).to include(Decidim::DecidimAwesome::LastActivityOverride)
     end
 
   else
@@ -110,6 +111,7 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::AdminLog::UserPresenter.included_modules).not_to include(Decidim::DecidimAwesome::AdminLog::UserPresenterOverride)
       expect(Decidim::Devise::SessionsController.included_modules).not_to include(Decidim::DecidimAwesome::NeedsHashcash)
       expect(Decidim::Devise::RegistrationsController.included_modules).not_to include(Decidim::DecidimAwesome::NeedsHashcash)
+      expect(Decidim::LastActivity.included_modules).not_to include(Decidim::DecidimAwesome::LastActivityOverride)
     end
   end
 end
