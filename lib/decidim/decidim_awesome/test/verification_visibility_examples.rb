@@ -12,8 +12,8 @@ shared_context "verification visibility examples setup" do
   let!(:process_comment) { create(:comment, commentable: process_proposal, author: user, body: "Process comment") }
   let!(:assembly_comment) { create(:comment, commentable: assembly_proposal, author: user, body: "Assembly comment") }
 
-  let!(:publish_assembly_action_log) { create(:action_log, organization:, resource: assembly, action: "publish", visibility: "all") }
-  let!(:publish_process_action_log) { create(:action_log, organization:, resource: process, action: "publish", visibility: "all") }
+  let!(:publish_assembly_action_log) { create(:action_log, organization:, component: nil, participatory_space: nil, resource: assembly, action: "publish", visibility: "all") }
+  let!(:publish_process_action_log) { create(:action_log, organization:, component: nil, participatory_space: nil, resource: process, action: "publish", visibility: "all") }
   let!(:publish_process_proposal_action_log) do
     create(:action_log, organization:, resource: process_proposal, component: process_component, participatory_space: process, action: "publish", visibility: "all")
   end

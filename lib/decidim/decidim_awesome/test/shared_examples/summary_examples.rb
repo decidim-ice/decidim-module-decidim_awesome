@@ -70,6 +70,8 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::Devise::RegistrationsController.included_modules).to include(Decidim::DecidimAwesome::NeedsHashcash)
       expect(Decidim::LastActivity.included_modules).to include(Decidim::DecidimAwesome::LastActivityOverride)
       expect(Decidim::OpenDataExporter.included_modules).to include(Decidim::DecidimAwesome::OpenDataExporterOverride)
+      expect(Decidim::Core::ParticipatorySpaceListBase.included_modules).to include(Decidim::DecidimAwesome::ParticipatorySpaceListBaseOverride)
+      expect(Decidim::Core::ComponentList.included_modules).to include(Decidim::DecidimAwesome::ComponentListOverride)
     end
 
   else
@@ -114,6 +116,8 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::Devise::RegistrationsController.included_modules).not_to include(Decidim::DecidimAwesome::NeedsHashcash)
       expect(Decidim::LastActivity.included_modules).not_to include(Decidim::DecidimAwesome::LastActivityOverride)
       expect(Decidim::OpenDataExporter.included_modules).not_to include(Decidim::DecidimAwesome::OpenDataExporterOverride)
+      expect(Decidim::Core::ParticipatorySpaceListBase.included_modules).not_to include(Decidim::DecidimAwesome::ParticipatorySpaceListBaseOverride)
+      expect(Decidim::Core::ComponentList.included_modules).not_to include(Decidim::DecidimAwesome::ComponentListOverride)
     end
   end
 end

@@ -29,6 +29,8 @@ module Decidim
         if DecidimAwesome.enabled?(:force_authorizations)
           Decidim::LastActivity.include(Decidim::DecidimAwesome::LastActivityOverride)
           Decidim::OpenDataExporter.include(Decidim::DecidimAwesome::OpenDataExporterOverride)
+          Decidim::Core::ParticipatorySpaceListBase.include(Decidim::DecidimAwesome::ParticipatorySpaceListBaseOverride)
+          Decidim::Core::ComponentList.include(Decidim::DecidimAwesome::ComponentListOverride)
         end
 
         if DecidimAwesome.enabled?(:hashcash_signup, :hashcash_login)

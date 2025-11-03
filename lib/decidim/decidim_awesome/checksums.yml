@@ -49,6 +49,10 @@ decidim-core:
     decidim-0.30.0: adc4334ee17bd8a894357813b9e29654
   /app/services/decidim/open_data_exporter.rb:
     decidim-0.30.0: 804b322706e98b1538709f0f183bd073
+  /lib/decidim/api/functions/participatory_space_list_base.rb:
+    decidim-0.30.0: 327d8f8b1ed1bcb08500aaabf5536ac1
+  /lib/decidim/api/functions/component_list.rb:
+    decidim-0.30.0: ad71401b4006bbb200ad7de064f59d1b
 decidim-proposals:
   /lib/decidim/proposals/proposal_serializer.rb:
     decidim-0.30.0: 7e42fe689432706c6abbd832b9e3d3c3
