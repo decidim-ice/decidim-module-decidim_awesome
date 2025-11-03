@@ -45,6 +45,10 @@ decidim-core:
     decidim-0.30.0: da0d18178c8dcead2774956e989527c5
   /app/views/decidim/shared/_login_modal.html.erb:
     decidim-0.30.0: 98bd2832be207d7abcd48d2a0ba40bd0
+  /app/queries/decidim/last_activity.rb:
+    decidim-0.30.0: adc4334ee17bd8a894357813b9e29654
+  /app/services/decidim/open_data_exporter.rb:
+    decidim-0.30.0: 804b322706e98b1538709f0f183bd073
 decidim-proposals:
   /lib/decidim/proposals/proposal_serializer.rb:
     decidim-0.30.0: 7e42fe689432706c6abbd832b9e3d3c3
