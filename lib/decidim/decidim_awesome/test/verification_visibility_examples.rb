@@ -3,8 +3,8 @@
 shared_context "verification visibility examples setup" do
   let(:organization) { create(:organization, available_authorizations: [:dummy_authorization_handler]) }
   let!(:user) { create(:user, :confirmed, organization:) }
-  let(:process) { create(:participatory_process, :with_steps, title: { en: "Visible process" }, organization:) }
-  let(:assembly) { create(:assembly, title: { en: "Invisible assembly" }, organization:) }
+  let!(:process) { create(:participatory_process, :with_steps, title: { en: "Visible process" }, organization:) }
+  let!(:assembly) { create(:assembly, title: { en: "Invisible assembly" }, organization:) }
   let!(:process_component) { create(:proposal_component, name: { en: "Process component" }, participatory_space: process) }
   let!(:assembly_component) { create(:proposal_component, name: { en: "Assembly component" }, participatory_space: assembly) }
   let!(:process_proposal) { create(:proposal, component: process_component, title: { en: "Process proposal" }) }
@@ -12,19 +12,24 @@ shared_context "verification visibility examples setup" do
   let!(:process_comment) { create(:comment, commentable: process_proposal, author: user, body: "Process comment") }
   let!(:assembly_comment) { create(:comment, commentable: assembly_proposal, author: user, body: "Assembly comment") }
 
-  let!(:publish_assembly_action_log) { create(:action_log, organization:, component: nil, participatory_space: nil, resource: assembly, action: "publish", visibility: "all") }
-  let!(:publish_process_action_log) { create(:action_log, organization:, component: nil, participatory_space: nil, resource: process, action: "publish", visibility: "all") }
+  let!(:publish_assembly_action_log) do
+    create(:action_log, user:, organization:, component: nil, participatory_space: nil, resource: assembly, action: "publish", visibility: "all")
+  end
+  let!(:publish_process_action_log) do
+    create(:action_log, user:, organization:, component: nil, participatory_space: nil, resource: process, action: "publish", visibility: "all")
+  end
   let!(:publish_process_proposal_action_log) do
-    create(:action_log, organization:, resource: process_proposal, component: process_component, participatory_space: process, action: "publish", visibility: "all")
+    create(:action_log, user:, organization:, resource: process_proposal, component: process_component, participatory_space: process, action: "publish", visibility: "all")
   end
   let!(:publish_assembly_proposal_action_log) do
-    create(:action_log, organization:, resource: assembly_proposal, component: assembly_component, participatory_space: assembly, action: "publish", visibility: "all")
+    create(:action_log, user:, organization:, resource: assembly_proposal, component: assembly_component, participatory_space: assembly, action: "publish", visibility: "all")
   end
   let!(:create_process_comment_action_log) do
-    create(:action_log, organization:, resource: process_comment, component: process_comment.component, participatory_space: process, action: "create", visibility: "public-only")
+    create(:action_log, user:, organization:, resource: process_comment, component: process_component, participatory_space: process, action: "create",
+                        visibility: "public-only")
   end
   let!(:create_assembly_comment_action_log) do
-    create(:action_log, organization:, resource: assembly_comment, component: assembly_comment.component, participatory_space: assembly, action: "create",
+    create(:action_log, user:, organization:, resource: assembly_comment, component: assembly_component, participatory_space: assembly, action: "create",
                         visibility: "public-only")
   end
 

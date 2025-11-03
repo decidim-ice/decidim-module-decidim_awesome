@@ -11,7 +11,6 @@ module Decidim::DecidimAwesome
     let(:current_organization) { organization }
 
     let(:schema) { Decidim::Api::Schema }
-    # let(:type_class) { Decidim::Api::QueryType }
     let(:query) do
       %({
         assembly(id: "#{assembly.id}") {

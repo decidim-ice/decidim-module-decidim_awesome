@@ -17,12 +17,12 @@ module Decidim
 
         def filter_invisible_spaces(query)
           spaces_with_restrictions = awesome_service.spaces_with_invisible_components
-          query.where.not(participatory_space: spaces_with_restrictions)
+          query.where(participatory_space: nil).or(query.where.not(participatory_space: spaces_with_restrictions))
         end
 
         def filter_invisible_components(query)
           components_with_restrictions = awesome_service.component_with_invisible_resources
-          query.where.not(component: components_with_restrictions)
+          query.where(component: nil).or(query.where.not(component: components_with_restrictions))
         end
 
         private
