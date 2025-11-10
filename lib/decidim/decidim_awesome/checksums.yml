@@ -28,7 +28,7 @@ decidim-core:
     decidim-0.29.1: f04f0f5112499a86079119d5f9ae8487
   /app/helpers/decidim/amendments_helper.rb:
     decidim-0.30.0: 30791e6637dedd413cdc037206726c2f
-    decidim-0.30.3: 72d550111269a0f2bd25e8a4ec5c9b51
+    decidim-0.30.2: 72d550111269a0f2bd25e8a4ec5c9b51
   /app/presenters/decidim/admin_log/component_presenter.rb:
     decidim-0.30.0: 0bfbd6771f52884a224f8e947ab15839
   /app/forms/decidim/account_form.rb:
@@ -80,7 +80,7 @@ decidim-proposals:
     decidim-0.30.0: 04239cfbbd8defc21f85bbd533e2d1a6
   /app/commands/decidim/proposals/create_proposal.rb:
     decidim-0.30.0: e754afeca5167e04e40b856999667706
-    decidim-0.30.3: d400d275916e32be303b2f9ef6956ca9
+    decidim-0.30.2: d400d275916e32be303b2f9ef6956ca9
   /app/commands/decidim/proposals/create_collaborative_draft.rb:
     decidim-0.30.0: 64fb896383da98334648ce607dde0a27
   /app/commands/decidim/proposals/admin/create_proposal.rb:
