@@ -816,6 +816,7 @@ en:
     download_your_data:
       show:
         admin_actions: Admin actions
+        awesome_private_proposals: Proposals with private data
     meetings:
       meetings_map:
         view_meeting: View meeting

@@ -26,7 +26,7 @@ module Decidim
             payload = {}
             custom_fields = CustomFields.new(awesome_proposal_custom_fields)
             if custom_fields.present?
-              @proposal.body.each do |locale, body|
+              proposal.body.each do |locale, body|
                 if body.is_a?(Hash)
                   body.each do |translation_locale, value|
                     fields_entries(custom_fields, value) do |field_key, field_value|

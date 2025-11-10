@@ -39,7 +39,7 @@ module Decidim::DecidimAwesome
       it "redirects to the required authorizations page" do
         get :index
         expect(response).to have_http_status(:found)
-        expect(response).to redirect_to("/decidim_awesome#{required_authorizations_path(redirect_url: "/index")}")
+        expect(response).to redirect_to(required_authorizations_path(redirect_url: "/decidim_awesome/index"))
       end
     end
 
