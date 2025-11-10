@@ -125,6 +125,8 @@ module Decidim
           Decidim::ApplicationController.include(Decidim::DecidimAwesome::EnforceAccessAuthorizations) if DecidimAwesome.enabled?(:force_authorizations)
           Decidim::ApplicationController.include(Decidim::DecidimAwesome::UseUserTimeZone) if Decidim::DecidimAwesome.enabled?(:user_timezone)
 
+          Decidim::OpenDataExporter.include(Decidim::DecidimAwesome::OpenDataExporterOverride)
+
           # Auto-insert some csp directives
           Decidim::ApplicationController.include(Decidim::DecidimAwesome::ContentSecurityPolicy)
           Decidim::Admin::ApplicationController.include(Decidim::DecidimAwesome::ContentSecurityPolicy)
