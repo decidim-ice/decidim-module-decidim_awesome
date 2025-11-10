@@ -20,7 +20,10 @@ describe "Admin edits proposal title" do
   before do
     visit_component_admin
 
-    find("a.action-icon--edit-proposal").click
+    within "tr[data-id='#{proposal.id}']" do
+      find("button[data-controller='dropdown']").click
+      click_on "Edit proposal"
+    end
   end
 
   shared_examples "title validation" do |type, context_text, value, validation_value, error_message|

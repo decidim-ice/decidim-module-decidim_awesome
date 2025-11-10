@@ -23,7 +23,10 @@ describe "Admin edits proposals" do
     organization.update(rich_text_editor_in_public_views: rte_enabled)
     visit_component_admin
 
-    find("a.action-icon--edit-proposal").click
+    within "tr[data-id='#{proposal.id}']" do
+      find("button[data-controller='dropdown']").click
+      click_on "Edit proposal"
+    end
   end
 
   context "when rich text editor is enabled for participants" do
