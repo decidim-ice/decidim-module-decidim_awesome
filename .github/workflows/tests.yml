@@ -178,7 +178,7 @@ jobs:
         run: |
           sudo Xvfb -ac $DISPLAY -screen 0 1920x1084x24 > /dev/null 2>&1 &
           ln -s spec/decidim_dummy_app spec/decidim_dummy_app_last
-          bundle exec rake parallel:spec['${{ matrix.rspec }}']
+          bundle exec rake parallel_test --type rspec --pattern '${{ matrix.rspec }}'
         env:
           FEATURES: ${{ matrix.features }}
 
