@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const storeId = `awesome_autosave:${questionnaireId}`;
   const storeCheckboxesId = `awesome_autosave:checkboxes:${questionnaireId}`;
-  const form = document.querySelector("form.answer-questionnaire");
+  const form = document.querySelector("form.response-questionnaire");
 
   if (!form) {
     if (window.DecidimAwesome.questionnaire_answered) {
@@ -89,4 +89,3 @@ document.addEventListener("DOMContentLoaded", () => {
   // save changes when modifications
   form.addEventListener("change", save);
 });
-
