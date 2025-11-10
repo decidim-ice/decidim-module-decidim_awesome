@@ -28,6 +28,7 @@ decidim-core:
     decidim-0.29.1: f04f0f5112499a86079119d5f9ae8487
   /app/helpers/decidim/amendments_helper.rb:
     decidim-0.29.1: 36072334cba7a58841a6b2fb007d24a6
+    decidim-0.29.6: 3cab6a4df40449d985366f46c94db57a
   /app/presenters/decidim/admin_log/component_presenter.rb:
     decidim-0.29.1: 77e80d527727acdf117a0c4517a69a7c
   /app/forms/decidim/account_form.rb:

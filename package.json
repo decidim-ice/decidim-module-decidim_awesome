@@ -34,10 +34,10 @@
   },
   "prettier": "@decidim/prettier-config",
   "devDependencies": {
-    "@decidim/dev": "0.29.4",
-    "@decidim/eslint-config": "0.29.4",
-    "@decidim/prettier-config": "0.29.4",
-    "@decidim/stylelint-config": "0.29.4",
+    "@decidim/dev": "0.29.5",
+    "@decidim/eslint-config": "0.29.5",
+    "@decidim/prettier-config": "0.29.5",
+    "@decidim/stylelint-config": "0.29.5",
     "postcss-scss": "^4.0.9"
   },
   "dependencies": {
