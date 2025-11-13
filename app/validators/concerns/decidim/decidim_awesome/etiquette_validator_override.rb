@@ -6,9 +6,9 @@ module Decidim
       extend ActiveSupport::Concern
 
       included do
-        alias_method :original_validate_caps, :validate_caps
-        alias_method :original_validate_marks, :validate_marks
-        alias_method :original_validate_caps_first, :validate_caps_first
+        alias_method :decidim_validate_caps, :validate_caps
+        alias_method :decidim_validate_marks, :validate_marks
+        alias_method :decidim_validate_caps_first, :validate_caps_first
 
         private
 
@@ -16,7 +16,7 @@ module Decidim
           awesome_config = awesome_config(record, "validate_#{attribute_without_locale(attribute)}_max_caps_percent")
 
           # original method does not take into account accents or anything else than A-Z
-          # return original_validate_caps_first(record, attribute, value) if awesome_config.nil?
+          # return decidim_validate_caps_first(record, attribute, value) if awesome_config.nil?
           percent = if awesome_config.nil?
                       50
                     else
@@ -44,7 +44,7 @@ module Decidim
           awesome_config = awesome_config(record, "validate_#{attribute_without_locale(attribute)}_start_with_caps")
 
           # original method does not take into account accents or anything else than A-Z
-          # return original_validate_caps_first(record, attribute, value) if awesome_config.nil?
+          # return decidim_validate_caps_first(record, attribute, value) if awesome_config.nil?
           return unless awesome_config || awesome_config.nil?
           return if value.scan(/\A[[:lower:]]{1}/).empty?
 

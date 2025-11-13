@@ -16,7 +16,8 @@ module Decidim
         end.compact_blank
       end
 
-      attr_reader :user, :organization, :authorization_groups
+      attr_reader :user, :organization
+      attr_accessor :authorization_groups
 
       def granted?
         return false unless user

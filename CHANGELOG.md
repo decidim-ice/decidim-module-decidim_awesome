@@ -1,6 +1,15 @@
 CHANGELOG
 =========
 
+v0.13.3
+-------
+
+Compatibility:
+  - Decidim 0.30.x
+
+Fixes:
+  - Hide components and resources protected with an authorization from the last_activities feed, api and open data.
+
 v0.13.2
 -------
 
