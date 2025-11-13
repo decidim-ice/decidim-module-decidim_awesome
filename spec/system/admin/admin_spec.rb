@@ -33,6 +33,46 @@ describe "Visit the admin page" do
     end
   end
 
+  context "when login into /system" do
+    let!(:system_admin) { create(:admin, email: admin.email) }
+
+    before do
+      click_link_or_button "System Compatibility"
+    end
+
+    context "when link_admin_to_system_admins is enabled" do
+      it "logs in the admin as system admin and redirects to /system" do
+        system_window = window_opened_by do
+          click_on "Login into /system panel"
+        end
+        within_window system_window do
+          expect(page).to have_current_path(decidim_system.root_path)
+        end
+        visit decidim_system.root_path
+        expect(page).to have_content("Dashboard")
+        expect(page).to have_link("New organization")
+      end
+
+      context "when admin is not a system admin" do
+        let!(:system_admin) { create(:admin) }
+
+        it "does not show the link to login into /system" do
+          expect(page).to have_no_link("Login into /system panel")
+        end
+      end
+    end
+
+    context "when link_admin_to_system_admins is disabled" do
+      let(:disabled_features) do
+        [:link_admin_to_system_admins]
+      end
+
+      it "does not show the link to login into /system" do
+        expect(page).to have_no_link("Login into /system panel")
+      end
+    end
+  end
+
   context "when visiting system compatibility" do
     before do
       click_link_or_button "System Compatibility"

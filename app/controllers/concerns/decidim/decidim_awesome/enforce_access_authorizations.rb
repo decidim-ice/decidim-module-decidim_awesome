@@ -16,8 +16,9 @@ module Decidim
         return if skip_enforcement_for_current_request?
 
         unless service.granted?
-          flash[:alert] = I18n.t("decidim.decidim_awesome.session.authorization_is_required",
-                                 authorizations: service.adapters.map(&:fullname).join(", "))
+          key = user_signed_in? ? "authorization_is_required" : "login_and_authorization_is_required"
+          flash[:alert] = I18n.t(key, scope: "decidim.decidim_awesome.session",
+                                      authorizations: service.adapters.map(&:fullname).join(", "))
           redirect_to decidim_decidim_awesome.required_authorizations_path(redirect_url: request.fullpath)
         end
       end

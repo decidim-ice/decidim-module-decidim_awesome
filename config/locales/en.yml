@@ -264,13 +264,7 @@ en:
               JavaScript: Head does not contain the required <script> Javascript entries.
                 To solve it, you can manually add it to your custom admin/_header.html.erb
             head_tags: Awesome tags included in the application header
-            image_migrations_started: Images migration process has been started successfully
-            images_migrated: Images migrated to ActiveStorage
-            pending_image_migrations: |
-              Since version 0.25, Decidim uses a new technology to upload files.<br>
-              It looks that this installation needs to migrate <strong>%{total}</strong> of the old images to the new system.<br>
-              You can start the process now and it will be performed in the background.
-            start_image_migrations: "👉 Start the migration process now"
+            link_admins: Login into /system panel
         config:
           anonymous: Non-logged users
           caution: 'NOTE: This feature heavily modifies some default behaviors that
@@ -777,8 +771,10 @@ en:
             one of these options before being able to access the platform:'
           verify_with_method: Verify with %{name}
       session:
-        authorization_is_required: In order to participate in this platform, you need
-          to authorize your account with a valid authorization (%{authorizations}).
+        authorization_is_required: In order to access this part of the platform, you
+          need to authorize your account with a valid authorization (%{authorizations}).
+        login_and_authorization_is_required: In order to access this part of the platform,
+          you need to log in and authorize your account.
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |
