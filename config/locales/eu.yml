@@ -145,7 +145,7 @@ eu:
         admin_accountability:
           admin_roles:
             admin: Super admin.
-            user_manager: Erabiltzaile-kudeatzailea
+            user_manager: Parte-hartzaileen kudeatzailea
           created_at: Rol bat da.
           currently_active: Gaur egun aktibo dago.
           deleted_user: Parte -hartzailea ezabatua
@@ -159,15 +159,15 @@ eu:
               xlsx: XLSX
             notice: Esportazio lana ikertu da. Mezu elektroniko bat jasoko duzu prest dagoenean.
           index:
-            description: Hemen aurkituko dituzu parte hartzeko espazio baten administrazioan zereginen bat izan duten erabiltzaile guztiak. Administrari normalak ez daude zerrendan.
-            global_description: Hemen aurkituko dituzu erakunde hau administratzeko paper globalen bat izan duten erabiltzaile guztiak. Partaidetza espaziak ez daude zerrendan.
-            missing_users: 'OHARRA: Zerrenda honetan ez dira sartuko %{date} baino lehen sortutako/kendutako erabiltzaileak. Izan ere, "erabiltzailearen trazabilitatea" Decidim v0.24n sartu zen eta instalazio hau, ziurrenik, zaharragoa da.'
+            description: Hemen aurkituko dituzu parte hartzeko espazio baten administrazioan zereginen bat izan duten parte-hartzaile guztiak. Administrari normalak ez daude zerrendan.
+            global_description: Hemen aurkituko dituzu erakunde hau administratzeko paper globalen bat izan duten parte-hartzaile guztiak. Partaidetza espazioak ez daude zerrendan.
+            missing_users: 'OHARRA: Zerrenda honetan ez dira sartuko %{date} baino lehen sortutako/kendutako parte-hartzaileak. Izan ere, "parte-hartzailearen trazabilitatea" Decidim v0.24n sartu zen eta instalazio hau, ziurrenik, zaharragoa da.'
             see_global: Zerrenda itzazu administrazio globalak
             see_spaces: Espazio parte-hartzaileen zerrenda
             title: Administratzailearen erantzukizuna
           last_login: Azken seinalea datan.
           missing_info: "(informazioa falta da)"
-          missing_user: Erabiltzailea ez dago datu-basean.
+          missing_user: Parte-hartzailea ez dago datu-basean
           name: Izena
           never_logged: Oraindik ez da egosi.
           participatory_space: Espazio parte-hartzailea
@@ -180,7 +180,7 @@ eu:
             valuator: Baloratzailea.
         admin_authorizations:
           authorization:
-            confirm_destroy: Ziur zaude baimen hau suntsitu nahi duzula? Horrek eragina izan dezake erabiltzaileak plataformarako duen sarbidean.
+            confirm_destroy: Ziur zaude baimen hau suntsitu nahi duzula? Horrek eragina izan dezake parte-hartzaileak plataformarako duen sarbidean.
             destroy: Suntsitu.
             granted_at: '%{date}-ean emana'
             metadata: Metadatuak ditu? %{metadata}
@@ -188,14 +188,14 @@ eu:
           authorization_not_destroyed: Baimena ezin da suntsitu!
           authorization_transferred: 'Egiaztatze gatazka egon zen eta egiaztapena %{user} parte-hartzailera pasatu da'
           conflict: Gatazka dago indarrean dagoen baimen batekin.
-          conflict_help_html: "%{user} erabiltzailearekin dagoen gatazka konpondu behar duzu baimen honekin erabiltzaileari baimena eman aurretik.\n<br><br>\nEgiaztatze-gatazka bat gertatzen da beste erabiltzaile batek baimendu nahi duzun erabiltzailearen datu berberak dituenean.\nGatazka hau konpon dezakezu beste erabiltzaileari baimen gatazkatsua kenduz edo erabiltzaile horrentzako datu ezberdinak erabiliz.\n"
+          conflict_help_html: "%{user} parte-hartzailearekin dagoen gatazka konpondu behar duzu baimen honekin parte-hartzaileari baimena eman aurretik.\n<br><br>\nEgiaztatze-gatazka bat gertatzen da beste parte-hartzaile batek baimendu nahi duzun parte-hartzailearen datu berberak dituenean.\nGatazka hau konpon dezakezu beste parte-hartzaileari baimen gatazkatsua kenduz edo parte-hartzaile horrentzako datu ezberdinak erabiliz.\n"
           edit:
             authorize: Baimendu %{user} %{name}} izenarekin
-            do_it_if_sure: Egin hau bakarrik ziur bazaude erabiltzaileak baimen hau duela.
+            do_it_if_sure: Egin hau bakarrik ziur bazaude parte-hartzaileak baimen hau duela.
             force_verification: Indar-egiaztapena egungo datuekin
-            force_verification_help: Egiaztapenak huts egin du, baina behartu dezakezu erabiltzaileak baimen hau duela ziur bazaude.
+            force_verification_help: Egiaztapenak huts egin du, baina behartu dezakezu parte-hartzaileak baimen hau duela ziur bazaude.
             force_verification_reason: 'Eman arrazoi bat egiaztapena behartzeko:'
-            warning: 'Baimen hau behartuz, erabiltzailearen egungo baimen-egoera gainditzen ari zara.'
+            warning: 'Baimen hau behartuz, parte-hartzailearen egungo baimen-egoera gainditzen ari zara.'
           user_authorized: "%{user} %{name}rekin ongi baimendua"
           user_not_authorized: "%{user} ezin izan da %{name}rekin baimendu"
         checks:
@@ -277,7 +277,7 @@ eu:
               scoped_admin_styles: Jakin ezazu hemen ezkutatzeak ez duela ezertarako balio. Kontuz ibili, mesedez.
               scoped_admin_styles_variables: 'CSS aldagai hauek erabil ditzakezu kolore pertsonalizatua antolatzeko:'
               scoped_admin_styles_warning: "<strong>Hemen</strong>gehitu CSS pertsonalizatua, admin honetan bakarrik aplikatzen dena."
-              scoped_admins: Ohiko erabiltzailea web publikoaren zati jakin batzuk bakarrik administra ditzakeen administraziora bultzatzea (horretarako, editore murriztua erabili). Kontuan izan dagoeneko admin baimenak dituzten erabiltzaileei ez zaiela kasurik egingo.
+              scoped_admins: Ohiko parte-hartzailea web publikoaren zati jakin batzuk bakarrik administra ditzakeen administraziora bultzatzea (horretarako, editore murriztua erabili). Kontuan izan dagoeneko admin baimenak dituzten parte-hartzailei ez zaiela kasurik egingo.
               scoped_styles: Sortu CSS pertsonalizatua, soilik webgune publikoko zenbait lekutan aplikatzen dena (erabili horretarako mugatutako editorea)
               scoped_styles_variables: 'CSS aldagai hauek erabil ditzakezu kolore pertsonalizatuak antolatzeko:'
               use_markdown_editor: Quill WYSIWYG editorearen ordez Markdown editorea erabiliko da. Testua datu-basean HTML moduan bihurtu eta gordeko da.
@@ -588,7 +588,7 @@ eu:
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |
-            Administrazioak eskuz egiaztatu ahal izango ditu baimen horiek dituzten erabiltzaileak.
+            Administrazioak eskuz egiaztatu ahal izango ditu baimen horiek dituzten parte-hartzaileak.
             Erabili ezaugarri hau tentuz, segurtasun arazoak sor baititzake.<br>.
           awesome_tweaks: Decidim  Doikuntza zoragarriak
       validators:
