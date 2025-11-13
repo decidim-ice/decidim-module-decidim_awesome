@@ -85,13 +85,6 @@ pt-BR:
               CSS: O cabeçalho não contém as entradas de folha de estilo <link> necessárias. Para resolvê-lo, você pode adicioná-lo manualmente ao seu _head.html.erb
               JavaScript: O cabeçalho não contém as entradas Javascript <script> necessárias. Para resolvê-lo, você pode adicioná-las manualmente ao seu custom admin/_header.html.erb
             head_tags: Tags incríveis incluídas no cabeçalho do aplicativo
-            image_migrations_started: O processo de migração de imagens foi iniciado com sucesso
-            images_migrated: Imagens migradas para o ActiveStorage
-            pending_image_migrations: |
-              Desde a versão 0.25, o Decidim utiliza uma nova tecnologia para fazer o upload de arquivos.<br>
-              Parece que essa instalação precisa migrar <strong>%{total}</strong> das imagens antigas para o novo sistema.<br>
-              Você pode iniciar o processo agora e ele será realizado em segundo plano.
-            start_image_migrations: "\U0001F449 Inicie o processo de migração agora"
         config:
           constraints:
             add_condition: Adicionar Caso

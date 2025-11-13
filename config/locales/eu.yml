@@ -225,13 +225,6 @@ eu:
               CSS: Burukoak beharrezko <link> stylesheet sarrerarik ez du. Hori konpontzeko, zure custom _head.html.erb fitxategira eskuz gehi dezakezu
               JavaScript: Burukoak beharrezko <script> Javascript sarrerarik ez du. Hori konpontzeko, zure admin/_header.html.erb fitxategira eskuz gehi dezakezu
             head_tags: Aplikazioaren goiburua zoragarri etiketa sartuta
-            image_migrations_started: Irudiak migratzeko prozesua arrakastaz hasi da
-            images_migrated: Irudiak ActiveStorage-ra migratu dira
-            pending_image_migrations: |
-              0.25 bertsiotik, Decidim-ek teknologia berri bat erabiltzen du artxiboak igotzeko.<br>
-              Badirudi instalazio honek irudi zaharren <strong>%{total}</strong> migratu behar duela sistema berrira.<br>
-              Orain has dezakezu prozesua eta bigarren mailan egingo da.
-            start_image_migrations: "👉 Migrazio-prozesua orain hasi"
         config:
           anonymous: Erregistratu gabeko parte-hartzaileak
           caution: 'OHARRA: Funtzio honek jokabide lehenetsi batzuk asko aldatzen ditu eta emaitza ustekabekoak sor ditzake. Erabili arretaz!'
@@ -650,8 +643,6 @@ eu:
           verify_with_all_these_options: 'Mesedez, egiaztatu zure burua metodo guzti hauekin plataformara sartu aurretik:'
           verify_with_any_of_these_options: 'Mesedez, egiaztatu zure burua aukera hauetako batekin plataformara sartu aurretik:'
           verify_with_method: '%{name}-rekin egiaztatu'
-      session:
-        authorization_is_required: Plataforma honetan parte hartzeko, zure kontua baliozko baimenarekin (%{authorizations}) egiaztatu behar duzu.
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |

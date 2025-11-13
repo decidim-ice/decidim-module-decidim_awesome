@@ -225,13 +225,6 @@ ja:
               CSS: 必要な <link> スタイルシートエントリがヘッドに含まれていません。この問題を解決するために、独自の _head.html.erbに手動で追加することもできます。
               JavaScript: 必要な <script> JavaScriptエントリがヘッドに含まれていません。この問題を解決するために、独自の admin/_head.html.erbに手動で追加することもできます。
             head_tags: アプリケーションヘッダーに含まれる Awesome tags
-            image_migrations_started: 画像移行プロセスが正常に開始されました
-            images_migrated: 画像はActiveStorageに移行されました
-            pending_image_migrations: |
-              バージョン0.25から, Decidimはファイルアップロードに新技術を使用するようになりました.<br>
-              このインストールでは、古いイメージ<strong>%{total}</strong>件を新システムに移行する必要があるようです。<br>
-              処理を開始すると、バックグラウンドで実行されます。
-            start_image_migrations: "\U0001F449 今すぐ移行プロセスを開始する"
         config:
           anonymous: 非ログインユーザー
           caution: '注意: この機能は、予期しない結果につながる可能性があるデフォルトの動作を大きく変更します。注意して使用してください！'
@@ -648,8 +641,6 @@ ja:
           verify_with_all_these_options: 'プラットフォームにアクセスできるようにするには、以下すべての方法で本人確認を行ってください：'
           verify_with_any_of_these_options: 'プラットフォームにアクセスする前に、これらの選択肢のうちいずれかを用いて本人確認を行ってください'
           verify_with_method: '%{name} で本人確認する'
-      session:
-        authorization_is_required: このプラットフォームに参加するには、有効な認証 (%{authorizations}) でアカウントを承認する必要があります。
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |
