@@ -771,8 +771,10 @@ en:
             one of these options before being able to access the platform:'
           verify_with_method: Verify with %{name}
       session:
-        authorization_is_required: In order to participate in this platform, you need
-          to authorize your account with a valid authorization (%{authorizations}).
+        authorization_is_required: In order to access this part of the platform, you
+          need to authorize your account with a valid authorization (%{authorizations}).
+        login_and_authorization_is_required: In order to access this part of the platform,
+          you need to log in and authorize your account.
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |
