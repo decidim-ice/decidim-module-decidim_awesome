@@ -225,6 +225,7 @@ es:
               CSS: El encabezado no contiene las entradas requeridas <link> a la hoja de estilo. Para resolverlo, se pueden añadir manualmente al fichero personalizado _head.html.erb
               JavaScript: El encabezado no contiene las entradas requeridas de Javascript <script>. Para resolverlo, se pueden añadir manualmente al fichero personalizado admin/_header.html.erb
             head_tags: Etiquetas Awesome incluidas en el encabezado de la aplicación
+            link_admins: Iniciar sesión en el panel /system
         config:
           anonymous: Usuarios no identificados
           caution: 'NOTA: Esta función modifica en gran medida algunos comportamientos por defecto que pueden llevar a resultados inesperados. ¡Utilícelo con precaución!'
@@ -643,6 +644,9 @@ es:
           verify_with_all_these_options: 'Por favor, verifícate con todos estos métodos antes de poder acceder a la plataforma:'
           verify_with_any_of_these_options: 'Por favor, verifícate por lo menos con uno de estos métodos antes de poder acceder a la plataforma:'
           verify_with_method: Verificar con %{name}
+      session:
+        authorization_is_required: Para acceder a esta parte de la plataforma, necesitas autorizar tu cuenta con una autorización válida (%{authorizations}).
+        login_and_authorization_is_required: Para acceder a esta parte de la plataforma, necesitas iniciar sesión y autorizar tu cuenta.
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |
