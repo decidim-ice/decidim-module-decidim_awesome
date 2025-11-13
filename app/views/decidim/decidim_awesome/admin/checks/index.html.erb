@@ -10,18 +10,13 @@
   </p>
 </div>
 
+<% if system_admin? %>
 <div class="card-section">
-  <p><%= t(".images_migrated") %>
-  <% if images_migrated? %>
-    <%= check true %></p>
-  <% else %>
-    <%= check false %></p>
-    <div class="callout alert">
-      <p><%= t(".pending_image_migrations", total: pending_image_migrations).html_safe %></p>
-      <%= link_to t(".start_image_migrations"), migrate_images_path, method: :post, class: "button" %>
-    </div>
-  <% end %>
+  <p>
+    <%= link_to t(".link_admins"), decidim_admin_decidim_awesome.checks_path, method: :post, target: "_blank", class: "button button__primary button__xs", data: { "external-domain-link" => false } %>
+  </p>
 </div>
+<% end %>
 
 <div class="card-section">
   <ul class="vertical menu">

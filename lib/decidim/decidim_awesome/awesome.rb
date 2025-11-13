@@ -223,6 +223,14 @@ module Decidim
       %w(account)
     end
 
+    # If true, admins can automatically login into the /system admin accounts without needing their password
+    # Note that a system admin MUST be a site admin too (emails must match).
+    # Otherwise, the login will be denied.
+    # Set to :disabled to completely remove this feature
+    config_accessor :link_admin_to_system_admins do
+      true
+    end
+
     # How old must be the private data to be considered expired and therefore presented to the admins for deletion
     config_accessor :private_data_expiration_time do
       3.months

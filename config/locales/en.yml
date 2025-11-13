@@ -264,13 +264,7 @@ en:
               JavaScript: Head does not contain the required <script> Javascript entries.
                 To solve it, you can manually add it to your custom admin/_header.html.erb
             head_tags: Awesome tags included in the application header
-            image_migrations_started: Images migration process has been started successfully
-            images_migrated: Images migrated to ActiveStorage
-            pending_image_migrations: |
-              Since version 0.25, Decidim uses a new technology to upload files.<br>
-              It looks that this installation needs to migrate <strong>%{total}</strong> of the old images to the new system.<br>
-              You can start the process now and it will be performed in the background.
-            start_image_migrations: "👉 Start the migration process now"
+            link_admins: Login into /system panel
         config:
           anonymous: Non-logged users
           caution: 'NOTE: This feature heavily modifies some default behaviors that
