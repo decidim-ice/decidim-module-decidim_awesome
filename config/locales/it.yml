@@ -171,13 +171,6 @@ it:
               CSS: Lo Head non contiene le voci <link> del foglio di stile richieste. Per risolverlo, puoi aggiungerlo manualmente al tuo _head.html.erb personalizzato
               JavaScript: Lo Head non contiene le voci <script> delle librerie Javascript richieste. Per risolverlo, puoi aggiungerlo manualmente al tuo admin/_head.html.erb personalizzato
             head_tags: Tag Awesome visualizzate nel header dell'applicazione
-            image_migrations_started: Processo di migrazione delle immagini avviato con successo
-            images_migrated: Immagini migrate in ActiveStorage
-            pending_image_migrations: |
-              Poiché la versione 0.25, Decidim utilizza una nuova tecnologia per caricare file.<br>
-              Sembra che questa installazione debba migrare <strong>%{total}</strong> delle vecchie immagini nel nuovo sistema.<br>
-              È possibile iniziare il processo ora e verrà eseguito in background.
-            start_image_migrations: "\U0001F449 Inizia il processo di migrazione"
         config:
           caution: 'NOTA: Questa funzione modifica pesantemente alcuni comportamenti predefiniti che potrebbero portare a risultati inattesi. Usalo con cautela!'
           constraints:
