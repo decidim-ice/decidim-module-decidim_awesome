@@ -35,7 +35,7 @@ module Decidim
           end
           serializer = export_manifest.open_data_serializer.nil? ? export_manifest.serializer : export_manifest.open_data_serializer
           exporter = Decidim::Exporters::CSV.new(collection, serializer)
-          get_help_definition(:spaces, exporter, export_manifest) unless collection.empty?
+          get_help_definition(:spaces, exporter, export_manifest, collection.count) unless collection.empty?
 
           exporter.export
         end

@@ -162,7 +162,7 @@ describe "Admin accountability" do
           expect(page).to have_link("Processes > #{external_participatory_process.title["en"]}",
                                     href: "/admin/participatory_processes/#{external_participatory_process.slug}/user_roles")
           expect(page).to have_no_content(administrator.name)
-          expect(page).to have_no_content(valuator.name)
+          expect(page).to have_no_content(evaluator.name)
           expect(page).to have_no_content(collaborator.name)
           expect(page).to have_no_content(moderator.name)
           expect(page).to have_content(external_administrator.name)

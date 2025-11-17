@@ -36,8 +36,8 @@ describe "Filter Admin actions" do
 
     visit decidim_admin.root_path
 
-    click_link_or_button "Participants"
-    click_link_or_button "Admin accountability"
+    click_on "Participants"
+    click_on "Admin accountability"
   end
 
   with_versioning do
@@ -49,15 +49,15 @@ describe "Filter Admin actions" do
     end
 
     it "displays the filter labels" do
-      find("a.dropdown").hover
+      click_on "Filter"
       expect(page).to have_content("Participatory space type")
       expect(page).to have_content("Role type")
 
-      find("a", text: "Participatory space type").hover
+      click_on "Participatory space type"
       expect(page).to have_content("Participatory processes")
       expect(page).to have_content("Assemblies")
 
-      find("a", text: "Role type").hover
+      click_on "Role type"
       expect(page).to have_content("Admin")
       expect(page).to have_content("Collaborator")
       expect(page).to have_content("Moderator")
@@ -84,12 +84,20 @@ describe "Filter Admin actions" do
       it "exports the result" do
         apply_filter("Participatory space type", "Participatory processes")
 
-        find(".exports.button.tiny").click
-        perform_enqueued_jobs { click_link_or_button "Export as CSV" }
+        # Ensure there are results before exporting
+        expect(page).to have_content("Processes >")
+
+        click_on "Export this search"
+
+        perform_enqueued_jobs do
+          click_on "Export as CSV"
+        end
 
         within ".flash.success" do
           expect(page).to have_content("Export job has been enqueued. You will receive an email when it's ready.")
         end
+
+        sleep 3
 
         expect(last_email.subject).to eq(%(Your export "admin_actions" is ready))
         expect(Decidim::PrivateExport.count).to eq(1)
