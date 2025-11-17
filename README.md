@@ -482,14 +482,6 @@ Depending on your Decidim version, choose the corresponding Awesome version to e
 | 0.6.x | 0.22.x, 0.23.x |
 | 0.5.x | 0.21.x, 0.22.x |
 
-> *Heads up!*
-> * version 0.11.0 is only compatible with Decidim v0.28 as a major redesign makes backward compatibility impractical.
-> * version 0.10.0 requires database migrations! Don't forget the migrations step when updating.
-> * version 0.8.0 removes CSS Themes for tenants. If you have been using them you will have to manually migrate them to custom styles.
-> * version 0.8.0 uses ActiveStorage, same as Decidim 0.25. 2 new rake task have been introduced to facilitate the migration: `bin/rails decidim_awesome:active_storage_migrations:check_migration_from_carrierwave` and
-`bin/rails decidim_awesome:active_storage_migrations:migrate_from_carrierwave`
-> * version 0.7.1 requires database migrations! Don't forget the migrations step when updating.
-
 ## Configuration
 
 Each tweak can be enabled or disabled by default. It also can be deactivated so

@@ -225,13 +225,6 @@ cs:
               CSS: Hlavička neobsahuje požadované položky <link> stylu. Chcete-li to vyřešit, můžete je ručně přidat do vlastního _head.html.erb
               JavaScript: Hlavička neobsahuje požadované <script> položky javascriptu. Pro vyřešení je můžete ručně přidat do vlastního admin/_header.html.erb
             head_tags: Úžasné tagy zahrnuté v hlavičce aplikace
-            image_migrations_started: Proces migrace obrázků byl úspěšně spuštěn
-            images_migrated: Obrázky migrovány do ActiveStorage
-            pending_image_migrations: |
-              Od verze 0.25, Decidim používá novou technologii pro nahrávání souborů.<br>
-              Zdá se, že tato instalace potřebuje přesunout <strong>%{total}</strong> starých obrázků do nového systému.<br>
-              Můžete zahájit proces nyní a bude probíhat na pozadí.
-            start_image_migrations: "\U0001F449 Zahájit proces migrace"
         config:
           anonymous: Nepřihlášení uživatelé
           caution: 'POZNÁMKA: Tato funkce silně mění některé výchozí chování, které by mohlo vést k neočekávaným výsledkům. Používejte ji s opatrností!'
@@ -650,8 +643,6 @@ cs:
           verify_with_all_these_options: 'Před přístupem k platformě se prosím ověřte všemi těmito metodami:'
           verify_with_any_of_these_options: 'Před přístupem k platformě si prosím ověřte alespoň jednu z těchto možností:'
           verify_with_method: Ověřit pomocí %{name}
-      session:
-        authorization_is_required: Chcete-li se zúčastnit této platformy, musíte svůj účet autorizovat s platnou autorizací (%{authorizations}).
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |

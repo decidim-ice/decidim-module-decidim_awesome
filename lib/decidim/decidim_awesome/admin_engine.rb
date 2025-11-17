@@ -31,6 +31,7 @@ module Decidim
         post :rename_scope_label, to: "config#rename_scope_label"
         scope :maintenance do
           get :checks, to: "checks#index"
+          post :checks, to: "checks#system_login"
           resources :private_data, only: [:index, :destroy]
           resources :hashcash, only: [:index, :show], as: "hashcashes" do
             get :ip_addresses, on: :collection

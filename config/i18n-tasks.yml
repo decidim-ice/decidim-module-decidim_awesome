@@ -40,6 +40,8 @@ ignore_unused:
   - "decidim.decidim_awesome.admin_log.*"
   - "decidim.decidim_awesome.required_authorizations.index.verify_with_all_these_options"
   - "decidim.decidim_awesome.required_authorizations.index.verify_with_any_of_these_options"
+  - "decidim.decidim_awesome.session.login_and_authorization_is_required"
+  - "decidim.decidim_awesome.session.authorization_is_required"
   - "layouts.decidim.decidim_awesome.admin.maintenance.titles.*"
   - "decidim.proposals.*"
   - "decidim.meetings.*"

@@ -9,11 +9,19 @@ module Decidim
       class ChecksController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
         include MaintenanceContext
+        include SystemCheckerHelpers
 
         helper ConfigConstraintsHelpers
         helper SystemCheckerHelpers
 
         helper_method :head, :admin_head, :head_addons, :admin_addons
+
+        def index; end
+
+        def system_login
+          sign_in(:admin, system_admin) unless admin_signed_in?
+          redirect_to decidim_system.root_path
+        end
 
         private
 

@@ -24,15 +24,12 @@ module Decidim
           SystemChecker.valid?(spec, file)
         end
 
-        def images_migrated?
-          pending_image_migrations.zero?
+        def system_admin?
+          DecidimAwesome.enabled?(:link_admin_to_system_admins) && current_user && current_user.admin? && system_admin.present?
         end
 
-        def pending_image_migrations
-          @pending_image_migrations ||= begin
-            images = Decidim::DecidimAwesome::EditorImage.where(organization: current_organization)
-            images.count - images.joins(:file_attachment).count
-          end
+        def system_admin
+          @system_admin ||= Decidim::System::Admin.find_by(email: current_user&.email)
         end
       end
     end
