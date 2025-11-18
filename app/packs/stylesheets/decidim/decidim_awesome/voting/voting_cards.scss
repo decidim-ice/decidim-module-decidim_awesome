@@ -165,8 +165,12 @@
   }
 }
 
-.card__list-list .card__proposals-item .card__proposals-votes:has(.awesome-voting-card.from-list),
-.card__grid-grid .card__proposals-item .card__proposals-votes:has(.awesome-voting-card.from-list) {
+.card__list-list
+  .card__proposals-item
+  .card__proposals-votes:has(.awesome-voting-card.from-list),
+.card__grid-grid
+  .card__proposals-item
+  .card__proposals-votes:has(.awesome-voting-card.from-list) {
   @apply md:flex-1 lg:flex-1;
 }
 

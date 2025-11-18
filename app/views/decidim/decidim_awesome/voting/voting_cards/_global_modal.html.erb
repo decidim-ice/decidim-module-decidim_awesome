@@ -1,7 +1,7 @@
 <% if current_component&.settings&.voting_cards_show_modal_help %>
   <%
     vote_instructions = translated_attribute(current_component.settings.voting_cards_instructions).presence ||
-      t("decidim.decidim_awesome.voting.voting_cards.default_instructions_html", organization: translated_attribute(current_organization.name))
+                        t("decidim.decidim_awesome.voting.voting_cards.default_instructions_html", organization: translated_attribute(current_organization.name))
   %>
   <%= decidim_modal id: "voting-cards-help-modal", class:"reveal vote_proposal_modal voting-voting_cards" do %>
     <div data-dialog-container>
