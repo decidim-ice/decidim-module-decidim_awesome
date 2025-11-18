@@ -322,11 +322,14 @@ This view must implement the number of votes already cast. It requires an HTML t
 
 You can also completely hide this view (using `voting.show_votes_count_view = ""` in the manifest declaration). This is useful if you are using the same `show_vote_button_view` to also display the total counters (or your implementation does not use that).
 
-**Notes for cell `voting.proposal_metadata_cell`**
+**Notes for `ProposalGCell` and `ProposalLCell` overrides**
 
-This is the Decidim cell used to provide the metadata that is rendered at the bottom of a proposal card. If empty, defaults to [ProposalMetadataCell](https://github.com/decidim/decidim/blob/release/0.28-stable/decidim-proposals/app/cells/decidim/proposals/proposal_metadata_cell.rb), **wich does not renders the votes**.
+When voting cards are enabled in the component settings, the module overrides the proposal card cells to display voting cards instead of the default vote button:
 
-What this cell must do is to provide an array of items to render as part of the cell footer. Check the example used at the [voting cards implementation](app/cells/decidim/decidim_awesome/voting/proposal_metadata_cell.rb) for reference.
+- `ProposalGCell` - for grid view of proposals
+- `ProposalLCell` - for list view of proposals
+
+When voting cards are not enabled, the default Decidim behavior is used.
 
 ##### 16.1 GraphQL Types for weighted voting
 
