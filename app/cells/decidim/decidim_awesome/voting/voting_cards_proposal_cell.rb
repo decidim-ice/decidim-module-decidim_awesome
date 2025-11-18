@@ -10,11 +10,6 @@ module Decidim
           render(:show)
         end
 
-        def vote_instructions
-          translated_attribute(current_component.settings.voting_cards_instructions).presence ||
-            t("decidim.decidim_awesome.voting.voting_cards.default_instructions_html", organization: translated_attribute(current_organization.name))
-        end
-
         def proposal_votes(weight)
           model.weight_count(weight)
         end
