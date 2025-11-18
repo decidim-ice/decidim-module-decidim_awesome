@@ -165,6 +165,11 @@
   }
 }
 
+.card__list-list .card__proposals-item .card__proposals-votes:has(.awesome-voting-card.from-list),
+.card__grid-grid .card__proposals-item .card__proposals-votes:has(.awesome-voting-card.from-list) {
+  @apply md:flex-1 lg:flex-1;
+}
+
 .card {
   &__proposals-votes {
     .card__proposals-votes-container {
@@ -175,7 +180,7 @@
       .awesome-voting-card.from-list {
         $rectangle-width-compact: 1.25rem;
 
-        @apply flex items-center justify-center m-0 p-0 gap-12 md:gap-2 lg:gap-12;
+        @apply flex items-center justify-center m-0 p-0 gap-12 md:gap-2;
 
         .vote {
           &-cards-container {

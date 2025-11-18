@@ -6,6 +6,10 @@ module Decidim
       extend ActiveSupport::Concern
 
       included do
+        def initialize(model = nil, options = {})
+          super(model, options.merge(from_proposals_list: true))
+        end
+
         private
 
         alias_method :decidim_original_cache_hash, :cache_hash

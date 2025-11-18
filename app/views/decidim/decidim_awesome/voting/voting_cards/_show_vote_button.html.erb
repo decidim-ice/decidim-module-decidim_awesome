@@ -1,3 +1,11 @@
-<div class="voting-voting_cards blabla">
-  <%= cell("decidim/decidim_awesome/voting/voting_cards_proposal", proposal, from_proposals_list: local_assigns.fetch(:from_proposals_list, false)) %>
-</div>
+<%
+  from_list = local_assigns.fetch(:from_proposals_list, false)
+  cell_name = from_list ? "decidim/decidim_awesome/voting/voting_cards_proposal_list" : "decidim/decidim_awesome/voting/voting_cards_proposal_show"
+%>
+<% if from_list %>
+  <%= cell(cell_name, proposal) %>
+<% else %>
+  <div class="voting-voting_cards">
+    <%= cell(cell_name, proposal) %>
+  </div>
+<% end %>

@@ -1,0 +1,5 @@
+<!-- insert_bottom ".layout-main__section.layout-main__heading" -->
+
+<% if awesome_voting_manifest_for(current_component)&.show_vote_button_view.present? %>
+  <%= render "decidim/decidim_awesome/voting/voting_cards/global_modal" %>
+<% end %>

@@ -31,10 +31,6 @@ module Decidim
           proposal_proposal_vote_path(proposal_id: proposal.id, from_proposals_list:, weight:)
         end
 
-        def modal_id
-          "voting-cards-modal-help-#{proposal.id}"
-        end
-
         def link_options(weight)
           css_classes = ["vote-action"]
           css_classes << "vote-card" unless from_proposals_list

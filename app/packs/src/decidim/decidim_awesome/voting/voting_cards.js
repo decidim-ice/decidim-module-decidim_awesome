@@ -7,10 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Constants
   const STORAGE_KEY = "awesome_voting_cards_hide_modal";
+  const VOTING_MODAL_ID = "voting-cards-help-modal";
   const SELECTORS = {
     voteAction: ".awesome-voting-card .vote-action",
     containers: [".awesome-voting-card[data-proposal-id]", ".voting-voting_cards[data-proposal-id]"],
-    modal: '[data-dialog^="voting-cards-modal-help-"]',
+    globalModal: `[data-dialog="${VOTING_MODAL_ID}"]`,
     voteCard: ".current-choice .vote-card",
     checkbox: '[id^="voting_cards-skip_help"]',
     proceedButton: ".vote-action"
@@ -25,13 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(storage));
   };
 
-  // Find modal elements for a proposal
-  const findModalElements = (proposalId) => {
-    const modalId = `voting-cards-modal-help-${proposalId}`;
-    // Find ALL modals (AJAX may create duplicates)
-    const allModals = document.querySelectorAll(`[data-dialog="${modalId}"]`);
-    // Use the LAST one (most recent from AJAX)
-    const modal = allModals[allModals.length - 1];
+  // Find global modal elements
+  const findModalElements = () => {
+    const modal = document.querySelector(SELECTORS.globalModal);
 
     if (!modal) {
       return null;
@@ -68,9 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // Check if modal should be shown
-  const shouldShowModal = (checkbox, modalId) => {
+  const shouldShowModal = (checkbox) => {
     const isChecked = getStorage()[checkbox.value];
-    const isOpen = window.Decidim.currentDialogs[modalId]?.isOpen;
+    const isOpen = window.Decidim.currentDialogs[VOTING_MODAL_ID]?.isOpen;
     return !isChecked && !isOpen;
   };
 
@@ -86,8 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const proposalId = container.dataset.proposalId;
-    const elements = findModalElements(proposalId);
+    const elements = findModalElements();
 
     if (!elements) {
       return;
@@ -96,25 +92,30 @@ document.addEventListener("DOMContentLoaded", () => {
     const { modal, card, checkbox } = elements;
 
     // If modal already open, don't intercept - let the AJAX request go through
-    if (window.Decidim.currentDialogs[modal.id]?.isOpen) {
+    if (window.Decidim.currentDialogs[VOTING_MODAL_ID]?.isOpen) {
       return;
     }
 
-    if (shouldShowModal(checkbox, modal.id)) {
+    if (shouldShowModal(checkbox)) {
       evt.stopPropagation();
       evt.preventDefault();
 
       modal.storedAction = voteAction;
       checkbox.checked = false;
       updateVoteCardContent(card, voteAction);
-      window.Decidim.currentDialogs[modal.id].open();
+      window.Decidim.currentDialogs[VOTING_MODAL_ID].open();
     } else {
       container.classList.add("loading");
     }
   };
 
   // Initialize modal handlers
-  const initModalHandlers = (modal) => {
+  const initModalHandlers = () => {
+    const modal = document.querySelector(SELECTORS.globalModal);
+    if (!modal) {
+      return;
+    }
+
     const checkbox = modal.querySelector(SELECTORS.checkbox);
     if (checkbox) {
       checkbox.addEventListener("change", () => {
@@ -128,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (modal.storedAction) {
           modal.storedAction.click();
           setTimeout(() => {
-            window.Decidim.currentDialogs[modal.id]?.close();
+            window.Decidim.currentDialogs[VOTING_MODAL_ID]?.close();
           });
         }
       });
@@ -143,6 +144,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Initialize all modals on the page (use data-dialog selector to avoid -content wrappers)
-  document.querySelectorAll(SELECTORS.modal).forEach(initModalHandlers);
+  // Initialize global modal
+  initModalHandlers();
 });
