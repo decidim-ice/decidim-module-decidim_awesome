@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // Constants
   const STORAGE_KEY = "awesome_voting_cards_hide_modal";
   const VOTING_MODAL_ID = "voting-cards-help-modal";
   const SELECTORS = {
@@ -17,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
     proceedButton: ".vote-action"
   };
 
-  // Storage helpers
   const getStorage = () => JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
 
   const saveToStorage = (key, value) => {
@@ -26,7 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(storage));
   };
 
-  // Find global modal elements
   const findModalElements = () => {
     const modal = document.querySelector(SELECTORS.globalModal);
 
@@ -42,9 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
       : null;
   };
 
-  // Update vote card content
   const updateVoteCardContent = (card, action) => {
-    // Clear previous content first but keep vote-card class
     card.className = "vote-card";
     card.innerHTML = "";
 
@@ -64,16 +59,13 @@ document.addEventListener("DOMContentLoaded", () => {
     card.innerHTML = content;
   };
 
-  // Check if modal should be shown
   const shouldShowModal = (checkbox) => {
     const isChecked = getStorage()[checkbox.value];
     const isOpen = window.Decidim.currentDialogs[VOTING_MODAL_ID]?.isOpen;
     return !isChecked && !isOpen;
   };
 
-  // Handle vote action click
   const handleVoteAction = (evt, voteAction) => {
-    // If element already has data-dialog-open, let Decidim handle it
     if (voteAction.hasAttribute("data-dialog-open")) {
       return;
     }
@@ -91,7 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const { modal, card, checkbox } = elements;
 
-    // If modal already open, don't intercept - let the AJAX request go through
     if (window.Decidim.currentDialogs[VOTING_MODAL_ID]?.isOpen) {
       return;
     }
@@ -109,7 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Initialize modal handlers
   const initModalHandlers = () => {
     const modal = document.querySelector(SELECTORS.globalModal);
     if (!modal) {
@@ -127,6 +117,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (proceedButton) {
       proceedButton.addEventListener("click", () => {
         if (modal.storedAction) {
+          const container = SELECTORS.containers.map((sel) => modal.storedAction.closest(sel)).find(Boolean);
+          if (container) {
+            container.classList.add("loading");
+          }
+
           modal.storedAction.click();
           setTimeout(() => {
             window.Decidim.currentDialogs[VOTING_MODAL_ID]?.close();
@@ -136,7 +131,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Use event delegation to avoid duplicate handlers after AJAX updates
   document.body.addEventListener("click", (evt) => {
     const voteAction = evt.target.closest(SELECTORS.voteAction);
     if (voteAction) {
@@ -144,6 +138,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Initialize global modal
   initModalHandlers();
 });
