@@ -126,7 +126,6 @@ hu:
             decidim-proposals: A javaslatok modulból
             decidim_version: Decidim verzió%{version}
             head_tags: Awesome címkék az admin applikáció headerben
-            image_migrations_started: A képek migrációs folyamata elkezdődött
         config:
           constraints:
             add_condition: Eset hozzáadása

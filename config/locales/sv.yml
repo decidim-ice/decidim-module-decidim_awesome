@@ -107,7 +107,6 @@ sv:
             decidim-core: Från Core modul
             decidim-proposals: Från Proposals modul
             decidim_version: Decidim version %{version}
-            images_migrated: Bilder migrerade till ActiveStorage
         config:
           constraints:
             add_condition: Lägg till begränsning

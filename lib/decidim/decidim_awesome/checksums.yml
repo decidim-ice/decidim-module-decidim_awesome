@@ -17,6 +17,7 @@ decidim-core:
     decidim-0.29.1: 90dfac3acae97202dec083955e2249e4
   /app/validators/etiquette_validator.rb:
     decidim-0.30.0: 7a1d9f32067ca169610d4c03b97d7b0d
+    decidim-0.30.3: 54f12abecc86eb793f66f5901459db53
   /app/views/layouts/decidim/_head.html.erb:
     decidim-0.29.2: 59abccd8b1c5315d5c0b772be0c26d45
   /app/views/layouts/decidim/_decidim_javascript.html.erb:
@@ -27,6 +28,7 @@ decidim-core:
     decidim-0.29.1: f04f0f5112499a86079119d5f9ae8487
   /app/helpers/decidim/amendments_helper.rb:
     decidim-0.30.0: 30791e6637dedd413cdc037206726c2f
+    decidim-0.30.2: 72d550111269a0f2bd25e8a4ec5c9b51
   /app/presenters/decidim/admin_log/component_presenter.rb:
     decidim-0.30.0: 0bfbd6771f52884a224f8e947ab15839
   /app/forms/decidim/account_form.rb:
@@ -43,6 +45,14 @@ decidim-core:
     decidim-0.30.0: da0d18178c8dcead2774956e989527c5
   /app/views/decidim/shared/_login_modal.html.erb:
     decidim-0.30.0: 98bd2832be207d7abcd48d2a0ba40bd0
+  /app/queries/decidim/last_activity.rb:
+    decidim-0.30.0: adc4334ee17bd8a894357813b9e29654
+  /app/services/decidim/open_data_exporter.rb:
+    decidim-0.30.0: 804b322706e98b1538709f0f183bd073
+  /lib/decidim/api/functions/participatory_space_list_base.rb:
+    decidim-0.30.0: 327d8f8b1ed1bcb08500aaabf5536ac1
+  /lib/decidim/api/functions/component_list.rb:
+    decidim-0.30.0: ad71401b4006bbb200ad7de064f59d1b
 decidim-proposals:
   /lib/decidim/proposals/proposal_serializer.rb:
     decidim-0.30.0: 7e42fe689432706c6abbd832b9e3d3c3
@@ -68,8 +78,11 @@ decidim-proposals:
     decidim-0.30.0: 682349209dad2f878f4d996a6c2b0bab
   /app/cells/decidim/proposals/proposal_vote_cell.rb:
     decidim-0.30.0: 6ba332640d22d433d39a96c422153435
+  /app/cells/decidim/proposals/proposal_metadata_cell.rb:
+    decidim-0.30.0: 04239cfbbd8defc21f85bbd533e2d1a6
   /app/commands/decidim/proposals/create_proposal.rb:
     decidim-0.30.0: e754afeca5167e04e40b856999667706
+    decidim-0.30.2: d400d275916e32be303b2f9ef6956ca9
   /app/commands/decidim/proposals/create_collaborative_draft.rb:
     decidim-0.30.0: 64fb896383da98334648ce607dde0a27
   /app/commands/decidim/proposals/admin/create_proposal.rb:

@@ -225,13 +225,7 @@ ca:
               CSS: La capçalera no conté les entrades necessàries <link> al full d'estil. Per resoldre-ho, es poden afegir manualment al fitxer personalitzat _head.html.erb
               JavaScript: La capçalera no conté les entrades necessàries <script> de Javascript. Per resoldre-ho, es poden afegir manualment al fitxer personalitzat admin/_header.html.erb
             head_tags: Etiquetes Awesome incloses a la capçalera de l'aplicació
-            image_migrations_started: El procés de migració de les imatges ha iniciat correctament
-            images_migrated: Imatges migrades a ActiveStorage
-            pending_image_migrations: |
-              Des de la versió 0.25, Decidim utilitza una nova tecnologia per pujar fitxers.<br>
-              Sembla que aquesta instal·lació requereix migrar <strong>%{total}</strong> imatges al nou sistema.<br>
-              Pots iniciar el procés ara i es durà a terme en segon pla.
-            start_image_migrations: "\U0001F449 Iniciar el procés de migració ara"
+            link_admins: Entra al panell /system
         config:
           anonymous: Usuaris no identificats
           caution: 'NOTA: Aquesta funció modifica en gran mesura alguns comportaments predeterminats que podrien provocar resultats inesperats. Utilitzeu-lo amb precaució!'
@@ -650,7 +644,8 @@ ca:
           verify_with_any_of_these_options: 'Si us plau, verifica''t com a mínim amb un d''aquests mètodes abans de poder accedir a la plataforma:'
           verify_with_method: Verificar amb %{name}
       session:
-        authorization_is_required: Per participar en aquesta plataforma, cal que autoritzeu el vostre compte amb una autorització vàlida (%{authorizations}).
+        authorization_is_required: Per participar en aquesta part de la plataforma, cal que autoritzeu el vostre compte amb una autorització vàlida (%{authorizations}).
+        login_and_authorization_is_required: Per participar en aquesta part de la plataforma, cal que feu login i autoritzeu el vostre compte.
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |

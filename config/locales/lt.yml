@@ -85,10 +85,3 @@ lt:
               CSS: "Head dalyje nėra reikalingų <link> stilių aprašymų. Norėdami tai išspręsti, galite rankiniu būdu pridėti juos prie savo individualizuoto _head.html.erb\n\n\n\n\n"
               JavaScript: Head dalyje nėra reikalingų <script> Javascript įrašų. Norėdami tai išspręsti, galite rankiniu būdu pridėti juos prie savo individualizuoto admin/_header.html.erb
             head_tags: Awesome žymės įtrauktos į aplikacijos head
-            image_migrations_started: Paveikslėlių perkėlimo procesas sėkmingai pradėtas
-            images_migrated: Paveikslėliai migruoti į aktyviąją atmintį (Active Storage)
-            pending_image_migrations: |
-              Nuo 0.25 versijos, Decidim naudoja naują technologiją failų įkėlimui.<br>
-              Atrodo, kad šiam diegimui reikia perkelti <strong>%{total}</strong> senųjų paveikslėlių į naująją sistemą.<br>
-              Galite pradėti procesą dabar, ir jis bus atliekamas fone.
-            start_image_migrations: "\U0001F449 Pradėti migracijos procesą dabar"

@@ -1,6 +1,16 @@
 CHANGELOG
 =========
 
+v0.13.3
+-------
+
+Compatibility:
+  - Decidim 0.30.x
+
+Fixes:
+  - Hide components and resources protected with an authorization from the last_activities feed, api and open data.
+  - Allow to log in directly into /system if the administrator is also a System administrator
+
 v0.13.2
 -------
 

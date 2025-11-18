@@ -77,8 +77,6 @@ ro:
         checks:
           index:
             decidim_version: Versiune Decidim %{version}
-            images_migrated: Imagini migrate în ActiveStorage
-            start_image_migrations: "\U0001F449 Începe procesul de migrare acum"
         config:
           constraints:
             always: Întotdeauna

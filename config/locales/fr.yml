@@ -225,13 +225,6 @@ fr:
               CSS: La balise <head> ne contient pas les entrées de la feuille de style <link> requises. Pour la résoudre, vous pouvez l'ajouter manuellement à votre _head.html.erb personnalisé
               JavaScript: La balise <head> ne contient pas les entrées  javascript nécessaire <script>  Pour la résoudre, vous pouvez l'ajouter manuellement à votre _head.html.erb personnalisé
             head_tags: '"Awesome tags" (balises) inclus entre les balises <head>'
-            image_migrations_started: Le processus de migration des images a été démarré avec succès
-            images_migrated: Images migrées vers ActiveStorage
-            pending_image_migrations: |
-              Depuis la version 0.25, Decidim utilise une nouvelle technologie pour télécharger des fichiers.<br>
-              Il semble que cette installation a besoin de migrer <strong>%{total}</strong> des anciennes images vers le nouveau système.<br>
-              Vous pouvez démarrer le processus maintenant et il sera effectué en arrière-plan.
-            start_image_migrations: "\U0001F449 Démarrez le processus de migration maintenant"
         config:
           anonymous: Utilisateurs non connectés
           caution: 'REMARQUE : Cette fonctionnalité modifie fortement certains comportements par défaut qui peuvent conduire à des résultats inattendus. Utilisez-la avec précaution !'
@@ -650,13 +643,12 @@ fr:
           verify_with_all_these_options: 'Veuillez vous vérifier avec toutes ces méthodes avant de pouvoir accéder à la plateforme :'
           verify_with_any_of_these_options: 'Veuillez vous vérifier avec au moins l''une de ces options avant de pouvoir accéder à la plateforme :'
           verify_with_method: Vérifier avec %{name}
-      session:
-        authorization_is_required: Pour participer sur cette plateforme, vous devez autoriser votre compte avec une autorisation valide (%{authorizations}).
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |
             Les administrateurs seront en mesure de vérifier manuellement les utilisateurs avec ces autorisations.
             <br>Utilisez cette fonctionnalité avec précaution, car elle peut entraîner des problèmes de sécurité.
+          awesome_tweaks: Réglages Decidim Awesome
       validators:
         too_much_caps: Utilise trop de majuscule (plus de %{percent} du texte)
       voting:
@@ -682,6 +674,9 @@ fr:
             weight_2_short: 'J:'
             weight_3: Verte
             weight_3_short: 'V:'
+    download_your_data:
+      show:
+        admin_actions: Actions administrateur
     meetings:
       meetings_map:
         view_meeting: Voir la rencontre
