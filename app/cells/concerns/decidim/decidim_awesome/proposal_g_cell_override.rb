@@ -2,14 +2,11 @@
 
 module Decidim
   module DecidimAwesome
-    module ProposalLCellOverride
+    module ProposalGCellOverride
       extend ActiveSupport::Concern
+      include Decidim::DecidimAwesome::AwesomeHelpers
 
       included do
-        def initialize(model = nil, options = {})
-          super(model, options.merge(from_proposals_list: true))
-        end
-
         private
 
         alias_method :decidim_original_cache_hash, :cache_hash

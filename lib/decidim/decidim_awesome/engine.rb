@@ -105,6 +105,7 @@ module Decidim
           Decidim::Proposals::ProposalVote.include(Decidim::DecidimAwesome::HasVoteWeight)
           Decidim::Proposals::ProposalType.include(Decidim::DecidimAwesome::AddProposalTypeVoteWeights)
           Decidim::Proposals::ProposalLCell.include(Decidim::DecidimAwesome::ProposalLCellOverride)
+          Decidim::Proposals::ProposalGCell.include(Decidim::DecidimAwesome::ProposalGCellOverride)
         end
 
         # override user's admin property
@@ -233,7 +234,7 @@ module Decidim
             voting.show_vote_button_view = "decidim/decidim_awesome/voting/voting_cards/show_vote_button"
             # voting.show_votes_count_view = "decidim/decidim_awesome/voting/voting_cards/show_votes_count"
             voting.show_votes_count_view = "" # hide votes count if not needed (in this case is integrated in the show_vote_button_view)
-            voting.proposal_metadata_cell = "decidim/decidim_awesome/voting/proposal_metadata"
+            voting.proposal_vote_cell = "decidim/decidim_awesome/voting/voting_cards_proposal_vote"
             voting.weight_validator do |weight, context|
               allowed = [1, 2, 3]
               # rubocop:disable Style/SafeNavigationChainLength

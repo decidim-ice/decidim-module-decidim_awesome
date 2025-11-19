@@ -7,19 +7,7 @@ module Decidim
         VOTE_WEIGHTS = [0, 1, 2, 3].freeze
 
         def show
-          render :show
-        end
-
-        def vote_block_for(proposal, weight)
-          render partial: "vote_block", locals: {
-            proposal:,
-            weight:
-          }
-        end
-
-        def vote_instructions
-          translated_attribute(current_component.settings.voting_cards_instructions).presence ||
-            t("decidim.decidim_awesome.voting.voting_cards.default_instructions_html", organization: translated_attribute(current_organization.name))
+          render(:show)
         end
 
         def proposal_votes(weight)
@@ -39,11 +27,16 @@ module Decidim
         end
 
         def link_options(weight)
+          css_classes = ["vote-action"]
+          css_classes << "vote-card" unless from_proposals_list
+          css_classes << classes_for(weight)
+
           ops = {
-            class: "vote-action vote-card #{classes_for(weight)}"
+            class: css_classes.join(" ")
           }
           if current_user
             ops.merge!({
+                         resource: proposal,
                          remote: true,
                          method: :post
                        })
@@ -83,6 +76,30 @@ module Decidim
           return "" if txt == "-"
 
           txt.presence || t("decidim.decidim_awesome.voting.voting_cards.default_box_title")
+        end
+
+        def container_classes
+          classes = ["awesome-voting-card"]
+          classes << if from_proposals_list
+                       "from-list"
+                     else
+                       "flex flex-col justify-center"
+                     end
+          classes.join(" ")
+        end
+
+        def show_title?
+          !from_proposals_list
+        end
+
+        def wrap_change_vote?
+          !from_proposals_list
+        end
+
+        def vote_block_for(proposal, weight)
+          @proposal = proposal
+          @weight = weight
+          render :vote_block_for
         end
       end
     end

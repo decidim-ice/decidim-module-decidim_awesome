@@ -16,8 +16,8 @@ module Decidim
       attribute :show_vote_button_view, String
       # original is decidim-proposals/app/views/decidim/proposals/proposals/_votes_count.html.erb
       attribute :show_votes_count_view, String
-      # original is from decidim-proposals/app/cells/decidim/proposals/proposal_metadata_cell.rb
-      attribute :proposal_metadata_cell, String
+      # original is from decidim-proposals/app/cells/decidim/proposals/proposal_vote_cell.rb
+      attribute :proposal_vote_cell, String
 
       # a callback that will be called by the method valid_weight?
       # Do not access this parameter directly, use the weight_validator method to register a block

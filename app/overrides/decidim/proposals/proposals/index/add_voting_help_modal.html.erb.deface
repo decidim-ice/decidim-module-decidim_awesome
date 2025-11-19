@@ -1,0 +1,5 @@
+<!-- insert_bottom "section#proposals" -->
+
+<% if awesome_voting_manifest_for(current_component)&.show_vote_button_view.present? %>
+  <%= cell("decidim/decidim_awesome/voting/voting_cards_modal", nil) %>
+<% end %>

@@ -1,72 +1,82 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const votingCards = document.querySelector(".voting-voting_cards");
-  const modal = document.getElementById("voting-cards-modal-help");
-  const signOutLink = document.querySelector('[href="/users/sign_out"]');
-
-  if (!votingCards || !modal || !signOutLink) {
+  if (!document.querySelector('[href="/users/sign_out"]')) {
     return;
   }
 
-  const card = modal.querySelector(".current-choice .vote-card");
-  const check = document.getElementById("voting_cards-skip_help");
+  const STORAGE_KEY = "awesome_voting_cards_hide_modal";
+  const MODAL_ID = "voting-cards-help-modal";
 
-  const storage = () => {
-    return JSON.parse(localStorage.getItem("awesome_voting_cards_hide_modal") || "{}");
-  };
+  const getStorage = () => JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+  const saveStorage = (key, val) => localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...getStorage(), [key]: val }));
+  const findContainer = (el) => el.closest(".awesome-voting-card[data-proposal-id], .voting-voting_cards[data-proposal-id]");
+  const isModalOpen = () => window.Decidim.currentDialogs[MODAL_ID]?.isOpen;
 
-  const isChecked = () => {
-    return storage()[check.value];
-  };
+  const modal = document.querySelector(`[data-dialog="${MODAL_ID}"]`);
+  if (!modal) {
+    return;
+  }
 
-  const saveState = (val) => {
-    const show = storage();
-    show[check.value] = val;
-    localStorage.setItem("awesome_voting_cards_hide_modal", JSON.stringify(show));
-  };
+  const voteCard = modal.querySelector(".current-choice .vote-card");
+  const checkbox = modal.querySelector('[id^="voting_cards-skip_help"]');
+  if (!voteCard || !checkbox) {
+    return;
+  }
 
-  const showModal = () => {
-    if (isChecked() || window.Decidim.currentDialogs[modal.id].isOpen) {
-      return false;
+  const updateCard = (action) => {
+    voteCard.className = "vote-card";
+    action.classList.forEach((cls) => voteCard.classList.add(cls));
+
+    let content = "";
+    if (action.children.length > 1) {
+      const child = action.children[1];
+      content = `${child.outerHTML}<span class="vote-label">${child.children[0].textContent}</span>`;
+    } else if (voteCard.classList.contains("button")) {
+      voteCard.classList.remove("button");
+      content = `<span class="vote-label">${action.title}</span>`;
+    } else {
+      content = `<span class="vote-label">${action.textContent}</span>`;
     }
-    return true;
+    voteCard.innerHTML = content;
   };
 
-  const bindVoteActions = () => {
-    document.querySelectorAll(".awesome-voting-card .vote-action").forEach((el) => {
-      el.addEventListener("click", (evt) => {
-        if (showModal()) {
-          evt.stopPropagation();
-          evt.preventDefault();
-          check.checked = isChecked();
-          modal.action = evt.currentTarget;
-          card.classList = evt.currentTarget.classList;
-          if (evt.currentTarget.children.length > 1) {
-            card.innerHTML = `${evt.currentTarget.children[1].outerHTML}<span class="vote-label">${evt.currentTarget.children[1].children[0].textContent}</span>`;
-          } else if (card.classList.contains("button")) {
-            card.classList.remove("button");
-            card.innerHTML = `<span class="vote-label">${evt.currentTarget.title}</span>`;
-          } else {
-            card.innerHTML = `<span class="vote-label">${evt.currentTarget.textContent}</span>`;
-          }
-          window.Decidim.currentDialogs[modal.id].open();
-        } else {
-          evt.currentTarget.closest(".voting-voting_cards").classList.add("loading");
-        }
-      });
-    });
-  };
-
-  check.addEventListener("change", () => {
-    saveState(check.checked);
-  });
+  checkbox.addEventListener("change", () => saveStorage(checkbox.value, checkbox.checked));
 
   modal.querySelector(".vote-action").addEventListener("click", () => {
-    modal.action.click();
-    setTimeout(() => window.Decidim.currentDialogs[modal.id].close());
+    if (!modal.storedAction) {
+      return;
+    }
+
+    const container = findContainer(modal.storedAction);
+    if (container) {
+      container.classList.add("loading");
+    }
+
+    modal.storedAction.click();
+    setTimeout(() => window.Decidim.currentDialogs[MODAL_ID]?.close());
   });
 
-  bindVoteActions();
+  document.body.addEventListener("click", (evt) => {
+    const voteAction = evt.target.closest(".awesome-voting-card .vote-action");
+    if (!voteAction || voteAction.hasAttribute("data-dialog-open")) {
+      return;
+    }
 
-  // re-bind vote actions after AJAX events (due the use of Rails helper remote=treu)
-  document.body.addEventListener("ajax:success", () => bindVoteActions());
+    const container = findContainer(voteAction);
+    if (!container) {
+      return;
+    }
+
+    const shouldShow = !getStorage()[checkbox.value] && !isModalOpen();
+
+    if (shouldShow) {
+      evt.stopPropagation();
+      evt.preventDefault();
+      modal.storedAction = voteAction;
+      checkbox.checked = false;
+      updateCard(voteAction);
+      window.Decidim.currentDialogs[MODAL_ID].open();
+    } else {
+      container.classList.add("loading");
+    }
+  });
 });
