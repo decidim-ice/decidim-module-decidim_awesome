@@ -5,172 +5,125 @@
   --voting-cards-weight-3: #4caf50;
 }
 
-.voting-voting_cards {
-  $rectangle-width: 3rem;
+.voting {
+  &-voting_cards {
+    $rectangle-width: 3rem;
+    $rectangle-width-compact: 1.5rem;
 
-  margin-bottom: 1.5rem;
-  border-bottom: 2px solid #d9d9d9;
+    @apply mb-6 border-b-2;
 
-  &.current-choice {
-    text-align: center;
-    margin-bottom: 0;
-    border-bottom: none;
+    border-color: #d9d9d9;
 
-    .vote-card {
-      margin-top: 0.5rem;
+    &.current-choice {
+      @apply text-center mb-0 border-b-0;
 
-      .vote-label {
-        margin-bottom: 1rem;
+      .vote-card {
+        @apply mt-2 inline-flex flex-col items-center;
 
-        @apply text-black;
+        visibility: visible;
+
+        .vote-label {
+          @apply mb-4 text-black;
+        }
+
+        > svg {
+          width: 3rem;
+          height: 6rem;
+          visibility: visible;
+        }
+      }
+
+      .change-vote-button:hover {
+        @apply mt-0;
       }
     }
 
-    .change-vote-button:hover {
-      font-size: 1rem;
-      margin-top: 0;
-    }
-  }
+    .vote {
+      &-title {
+        @apply text-center;
+      }
 
-  &.loading {
-    opacity: 0.3;
-    pointer-events: none;
-    position: relative;
+      &-card {
+        @apply inline-flex flex-col items-center lg:inline-block;
 
-    @apply relative cursor-wait;
+        .vote-label {
+          @apply mb-2 lg:mb-0;
+        }
 
-    &::before {
-      @apply content-[""] block w-6 h-6 rounded-full animate-spin border-4 border-l-background border-y-background border-r-secondary;
+        > svg {
+          @apply max-w-full;
 
-      z-index: 1000;
-      vertical-align: middle;
-      position: absolute;
-      top: calc(50% - 12.5px);
-      left: calc(50% - 12.5px);
-    }
-  }
+          width: $rectangle-width;
+          height: calc($rectangle-width * 2);
+          transition: transform 150ms ease-in-out;
 
-  .vote-title {
-    text-align: center;
-    font-size: 1.5rem;
-  }
+          @media (min-width: 1024px) {
+            @apply inline-block align-middle;
 
-  .votes_counter {
-    letter-spacing: 0.2rem;
-    font-size: 1rem;
-  }
+            margin: -0.5rem 0 0 0.5rem;
+          }
 
-  .vote-link.hidden {
-    display: none;
-  }
+          &:hover {
+            transform: scale(1.15) rotate(-5deg);
+          }
+        }
+      }
 
-  .vote-card {
-    display: inline-block;
+      &-block {
+        @apply flex flex-col items-center justify-center relative text-center;
 
-    .vote-label {
-      font-size: 1rem;
-      margin-bottom: 0;
+        .vote-count {
+          @apply mb-2;
+
+          font-size: 1.4rem;
+          font-weight: bolder;
+        }
+      }
     }
 
-    > svg {
-      display: inline-block;
-      width: $rectangle-width;
-      height: calc($rectangle-width * 2);
-      vertical-align: middle;
-      margin: -0.5rem 0 0 0.5rem;
-      max-width: 100%;
-      transition: transform 150ms ease-in-out;
+    .votes_counter {
+      letter-spacing: 0.2rem;
+    }
 
+    .voting-button {
+      @apply bg-transparent border-0 text-white font-bold;
+    }
+
+    .change-vote-button {
       &:hover {
-        transform: scale(1.15) rotate(-5deg);
+        @apply underline;
       }
     }
 
-    &.weight_3 {
-      color: var(--voting-cards-weight-3);
+    .button.abstain-button {
+      @apply uppercase bg-transparent;
 
-      & > svg {
-        fill: var(--voting-cards-weight-3);
+      color: var(--voting-cards-weight-0);
+      border-color: var(--voting-cards-weight-0);
+
+      .abstain-count {
+        @apply inline-flex items-center justify-center rounded-full ml-2 font-bold leading-none;
+
+        min-width: 1.5rem;
+        height: 1.5rem;
+        padding: 0 0.375rem;
+        background-color: var(--voting-cards-weight-0);
+        color: white;
       }
-    }
 
-    &.weight_2 {
-      color: var(--voting-cards-weight-2);
+      &.voted {
+        @apply text-white border-transparent;
 
-      & > svg {
-        fill: var(--voting-cards-weight-2);
-      }
-    }
+        background-color: var(--voting-cards-weight-0);
 
-    &.weight_1 {
-      color: var(--voting-cards-weight-1);
+        .abstain-count {
+          background-color: white;
+          color: var(--voting-cards-weight-0);
+        }
 
-      & > svg {
-        fill: var(--voting-cards-weight-1);
-      }
-    }
-
-    &.voted {
-      & > svg {
-        transform: scale(1.15) rotate(-5deg);
-      }
-    }
-  }
-
-  .voting-button {
-    background: none;
-    border: none;
-    color: #fff;
-    font-weight: bold;
-  }
-
-  .dim {
-    opacity: 0.3;
-    pointer-events: none;
-  }
-
-  .disabled {
-    pointer-events: none;
-  }
-
-  .vote-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    text-align: center;
-
-    .vote-count {
-      font-size: 2rem;
-      font-weight: bolder;
-      margin-bottom: 0.5rem;
-    }
-  }
-
-  .change-vote-button {
-    transition: all 150ms ease-in-out;
-
-    &:hover {
-      text-decoration: none;
-      font-size: 0.9rem;
-      margin-top: 0.1rem;
-    }
-  }
-
-  .button.abstain-button {
-    text-transform: uppercase;
-    color: var(--voting-cards-weight-0);
-    border-color: var(--voting-cards-weight-0);
-    background-color: transparent;
-
-    &.voted {
-      background-color: var(--voting-cards-weight-0);
-      color: #fff;
-      border-color: transparent;
-
-      &.disabled {
-        opacity: 1;
+        &.disabled {
+          @apply opacity-100;
+        }
       }
     }
   }
@@ -178,28 +131,205 @@
 
 .vote_proposal_modal {
   div.button__sm {
-    display: inline-block;
+    @apply inline-block;
   }
 
   .vote-label {
     @apply ml-2;
   }
+
+  .vote-card {
+    @apply inline-flex flex-col items-center;
+
+    .vote-label {
+      @apply mb-2 ml-0;
+    }
+  }
 }
 
-.card__list-metadata {
-  .voting-weight_3 {
+.proposal {
+  &__aside-vote.layout-aside__ctas-buttons:has(.voting-voting_cards) {
+    @apply max-md:h-auto;
+  }
+}
+
+.card__list-list
+  .card__proposals-item
+  .card__proposals-votes:has(.awesome-voting-card.from-list),
+.card__grid-grid
+  .card__proposals-item
+  .card__proposals-votes:has(.awesome-voting-card.from-list) {
+  @apply md:flex-1 lg:flex-1;
+}
+
+.card__grid-grid
+  .card__proposals-item
+  .card__proposals-votes:has(.awesome-voting-card.from-list) {
+  @apply md:py-4;
+}
+
+.card__grid-grid
+  .card__proposals-item
+  .card__proposals-votes-container
+  .awesome-voting-card.from-list {
+  @apply md:flex-col md:gap-2 lg:flex-row lg:gap-2;
+}
+
+.card {
+  &__proposals-votes {
+    .card__proposals-votes-container {
+      .voting-voting_cards {
+        @apply mb-0 border-b-0;
+      }
+
+      .awesome-voting-card.from-list {
+        $rectangle-width-compact: 1.25rem;
+
+        @apply flex items-center justify-center m-0 p-0 gap-12 md:gap-2;
+
+        .vote {
+          &-cards-container {
+            @apply flex items-center gap-2;
+          }
+
+          &-block {
+            @apply flex items-center gap-0.5;
+
+            .vote-count {
+              @apply m-0 font-bold leading-none;
+
+              order: 1;
+            }
+
+            .vote-action {
+              @apply flex flex-col items-center gap-0.5 no-underline;
+
+              order: 2;
+
+              .vote-label {
+                @apply m-0 leading-none;
+
+                order: 1;
+              }
+
+              > svg {
+                @apply m-0;
+
+                width: $rectangle-width-compact;
+                height: calc($rectangle-width-compact * 2);
+                order: 2;
+                transition: transform 150ms ease-in-out;
+              }
+
+              &:hover > svg {
+                transform: scale(1.15) rotate(-5deg);
+              }
+            }
+          }
+
+          &-actions-container {
+            @apply flex flex-col items-center;
+
+            .abstain-button {
+              @apply m-0 flex items-center gap-2 whitespace-nowrap;
+
+              padding: 0.125rem 0.375rem;
+
+              .abstain-count {
+                @apply inline-flex items-center justify-center rounded-full font-bold leading-none;
+
+                min-width: 1.25rem;
+                height: 1.25rem;
+                padding: 0 0.25rem;
+                background-color: var(--voting-cards-weight-0);
+                color: white;
+              }
+            }
+
+            .change-vote-button {
+              @apply m-0 whitespace-nowrap no-underline;
+
+              font-size: 0.875rem;
+              padding: 0.125rem 0.375rem;
+
+              &:hover {
+                @apply underline;
+              }
+            }
+
+            .vote-message {
+              @apply text-center m-0 whitespace-nowrap;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.awesome-voting-card {
+  &.loading {
+    @apply opacity-30 pointer-events-none relative cursor-wait;
+
+    &::before {
+      @apply content-[""] block w-6 h-6 rounded-full animate-spin absolute border-4 border-l-background border-y-background border-r-secondary;
+
+      z-index: 1000;
+      top: calc(50% - 12.5px);
+      left: calc(50% - 12.5px);
+    }
+  }
+}
+
+.voting-voting_cards .vote-card,
+.awesome-voting-card.from-list .vote-block .vote-action,
+.awesome-voting-card.from-list .vote-actions-container .vote-action {
+  &.weight_3 {
     color: var(--voting-cards-weight-3);
+
+    & > svg {
+      fill: var(--voting-cards-weight-3);
+    }
+
+    .vote-label {
+      color: var(--voting-cards-weight-3);
+    }
   }
 
-  .voting-weight_2 {
+  &.weight_2 {
     color: var(--voting-cards-weight-2);
+
+    & > svg {
+      fill: var(--voting-cards-weight-2);
+    }
+
+    .vote-label {
+      color: var(--voting-cards-weight-2);
+    }
   }
 
-  .voting-weight_1 {
+  &.weight_1 {
     color: var(--voting-cards-weight-1);
+
+    & > svg {
+      fill: var(--voting-cards-weight-1);
+    }
+
+    .vote-label {
+      color: var(--voting-cards-weight-1);
+    }
   }
 
-  .voting-weight_0 {
-    color: var(--voting-cards-weight-0);
+  &.voted > svg {
+    transform: scale(1.15) rotate(-5deg);
   }
+
+  &.dim {
+    @apply opacity-30 pointer-events-none;
+  }
+}
+
+.voting-voting_cards .disabled,
+.awesome-voting-card .disabled {
+  @apply pointer-events-none cursor-not-allowed;
 }

@@ -19,21 +19,6 @@ module Decidim
         Decidim::DecidimAwesome.voting_registry.register(:another_voting_system) do |voting|
           voting.show_vote_button_view = ""
           voting.show_votes_count_view = ""
-          voting.proposal_metadata_cell = ""
-        end
-      end
-
-      describe "#metadata_cell" do
-        it "returns the overridden metadata" do
-          expect(subject.send(:metadata_cell)).to eq("decidim/decidim_awesome/voting/proposal_metadata")
-        end
-
-        context "when no overridden metadata" do
-          let(:manifest) { :another_voting_system }
-
-          it "returns the original metadata" do
-            expect(subject.send(:metadata_cell)).to eq("decidim/proposals/proposal_metadata")
-          end
         end
       end
 

@@ -225,6 +225,7 @@ cs:
               CSS: Hlavička neobsahuje požadované položky <link> stylu. Chcete-li to vyřešit, můžete je ručně přidat do vlastního _head.html.erb
               JavaScript: Hlavička neobsahuje požadované <script> položky javascriptu. Pro vyřešení je můžete ručně přidat do vlastního admin/_header.html.erb
             head_tags: Úžasné tagy zahrnuté v hlavičce aplikace
+            link_admins: Přihlásit se do /system panelu
         config:
           anonymous: Nepřihlášení uživatelé
           caution: 'POZNÁMKA: Tato funkce silně mění některé výchozí chování, které by mohlo vést k neočekávaným výsledkům. Používejte ji s opatrností!'
