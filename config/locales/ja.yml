@@ -225,6 +225,7 @@ ja:
               CSS: 必要な <link> スタイルシートエントリがヘッドに含まれていません。この問題を解決するために、独自の _head.html.erbに手動で追加することもできます。
               JavaScript: 必要な <script> JavaScriptエントリがヘッドに含まれていません。この問題を解決するために、独自の admin/_head.html.erbに手動で追加することもできます。
             head_tags: アプリケーションヘッダーに含まれる Awesome tags
+            link_admins: /system パネルにログイン
         config:
           anonymous: 非ログインユーザー
           caution: '注意: この機能は、予期しない結果につながる可能性があるデフォルトの動作を大きく変更します。注意して使用してください！'
@@ -641,6 +642,9 @@ ja:
           verify_with_all_these_options: 'プラットフォームにアクセスできるようにするには、以下すべての方法で本人確認を行ってください：'
           verify_with_any_of_these_options: 'プラットフォームにアクセスする前に、これらの選択肢のうちいずれかを用いて本人確認を行ってください'
           verify_with_method: '%{name} で本人確認する'
+      session:
+        authorization_is_required: プラットフォームのこの部分にアクセスするには、有効な認証 (%{authorizations}) でアカウントを承認する必要があります。
+        login_and_authorization_is_required: プラットフォームのこの部分にアクセスするには、ログインしてアカウントを認証する必要があります。
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |
