@@ -16,6 +16,7 @@ import { uniqueId } from "src/decidim/editor/common/helpers";
 
 export default function createEditor(container) {
   const DecidimAwesome = window.DecidimAwesome || {};
+  console.log("Using DecidimAwesome createEditor")
   const input = container.parentElement.querySelector("input[type=hidden]");
   const label = container.parentElement.querySelector("label");
   const editorContainer = container.querySelector(".editor-input");

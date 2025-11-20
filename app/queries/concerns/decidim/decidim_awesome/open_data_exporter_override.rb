@@ -37,10 +37,8 @@ module Decidim
           manifest_help[:collection_count] ||= 0
 
           exporter.headers_without_locales.each do |header|
-            manifest_help[:headers][header] = I18n.t(
-              "decidim.open_data.help.#{export_manifest.name}.#{header}",
-              default: header
-            )
+            translation_key = "decidim.open_data.help.#{export_manifest.name}.#{header}"
+            manifest_help[:headers][header] = I18n.exists?(translation_key) ? I18n.t(translation_key) : header
           end
 
           manifest_help[:collection_count] += collection_count
