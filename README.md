@@ -474,6 +474,7 @@ Depending on your Decidim version, choose the corresponding Awesome version to e
 
 | Awesome version | Compatible Decidim versions |
 |---|---|
+| 0.14.x | 0.31.x |
 | 0.13.x | 0.30.x |
 | 0.12.x | 0.29.x |
 | 0.11.x | 0.28.x |
