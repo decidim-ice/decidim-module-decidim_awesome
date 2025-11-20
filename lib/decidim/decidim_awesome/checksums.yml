@@ -1,6 +1,5 @@
 decidim-admin:
   /app/views/layouts/decidim/admin/_header.html.erb:
-    decidim-0.29.1: b2ae319d5bcf43954bbe0edb9a4e3ffb
     decidim-0.31.0: 6e5893f735d2097f0e55e8b6666cb201
 decidim-assemblies:
   /app/views/decidim/assemblies/admin/assemblies/_form.html.erb:
@@ -8,27 +7,20 @@ decidim-assemblies:
     decidim-0.31.0: cc06bd20baa7f130e34d04a3c925e2f7
 decidim-participatory_processes:
   /app/views/decidim/participatory_processes/admin/participatory_processes/_form.html.erb:
-    decidim-0.29.4: 3eca01ab87a77deec7443bbecee93a15
     decidim-0.31.0: 21e305516207996c88cb69eae1ca1bdd
 decidim-conferences:
   /app/views/decidim/conferences/admin/conferences/_form.html.erb:
-    decidim-0.29.4: 068ebba1590111b40f50923b33f57313
     decidim-0.31.0: c8890c67fb9cb4e6602bb5e156982a2e
 decidim-core:
   /app/packs/entrypoints/decidim_editor.js:
-    decidim-0.29.1: beddd77e3893fd0b7cd2679a7ee6e536
     decidim-0.31.0: e690b09ebd83d76a9dbdaefe02812333
   /app/packs/src/decidim/editor/index.js:
-    decidim-0.29.1: 90dfac3acae97202dec083955e2249e4
     decidim-0.31.0: 927371e028f6768524df5b7bafa1bd5f
   /app/validators/etiquette_validator.rb:
-    decidim-0.30.0: 7a1d9f32067ca169610d4c03b97d7b0d
     decidim-0.31.0: a3d19c75c77c3933937cd50aa66bc01d
   /app/views/layouts/decidim/_head.html.erb:
-    decidim-0.29.2: 59abccd8b1c5315d5c0b772be0c26d45
     decidim-0.31.0: 0faa190f7a4b3db401ffcdfc3d063802
   /app/views/layouts/decidim/_decidim_javascript.html.erb:
-    decidim-0.29.1: 8d51790de859ee66f305d9111cdfb324
     decidim-0.31.0: 8d51790de859ee66f305d9111cdfb324
   /app/presenters/decidim/menu_presenter.rb:
     decidim-0.29.1: 220c8865a43bd8b7b12a7f926f7f4324
@@ -37,10 +29,8 @@ decidim-core:
     decidim-0.29.1: f04f0f5112499a86079119d5f9ae8487
     decidim-0.31.0: 16b2c5f5de23afb67276d8fcacbe5e88
   /app/helpers/decidim/amendments_helper.rb:
-    decidim-0.30.0: 30791e6637dedd413cdc037206726c2f
     decidim-0.31.0: db42be326ff225c422e2c126d784b477
   /app/presenters/decidim/admin_log/component_presenter.rb:
-    decidim-0.30.0: 0bfbd6771f52884a224f8e947ab15839
     decidim-0.31.0: 0bfbd6771f52884a224f8e947ab15839
   /app/forms/decidim/account_form.rb:
     decidim-0.29.3: 5872f17965919c0754a453ac4eb614df
