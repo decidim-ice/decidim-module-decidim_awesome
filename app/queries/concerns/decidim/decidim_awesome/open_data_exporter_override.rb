@@ -2,8 +2,6 @@
 
 module Decidim
   module DecidimAwesome
-    # Overrides get_help_definition to handle missing translations for dynamic custom field headers.
-    # Custom fields like "body/full-name/en" don't have translations, so we add default: "" to I18n.t
     module OpenDataExporterOverride
       extend ActiveSupport::Concern
 
@@ -30,6 +28,8 @@ module Decidim
           @service ||= Decidim::DecidimAwesome::UserGrantedAuthorizationsService.new(organization, nil)
         end
 
+        # Overrides the parent method to handle missing translations for custom field headers.
+        # Custom fields (e.g., "body/full-name/en") don't have translation keys in locale files.
         def get_help_definition(manifest_type, exporter, export_manifest, collection_count)
           help_definition[manifest_type] ||= {}
           manifest_help = help_definition[manifest_type][export_manifest.name] ||= {}
@@ -39,7 +39,7 @@ module Decidim
           exporter.headers_without_locales.each do |header|
             manifest_help[:headers][header] = I18n.t(
               "decidim.open_data.help.#{export_manifest.name}.#{header}",
-              default: ""
+              default: header
             )
           end
 
