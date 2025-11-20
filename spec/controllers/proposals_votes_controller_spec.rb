@@ -4,8 +4,6 @@ require "spec_helper"
 
 module Decidim::Proposals
   describe ProposalVotesController do
-    routes { Decidim::Proposals::Engine.routes }
-
     let(:proposal) { create(:proposal, component:) }
     let(:user) { create(:user, :confirmed, organization: component.organization) }
 

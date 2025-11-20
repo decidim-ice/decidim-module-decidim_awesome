@@ -46,7 +46,8 @@ module Decidim
             return if custom_fields.empty?
 
             locales = form.send(:locales)
-            return render_proposal_custom_fields_override(custom_fields, form, "body_#{locales.first}", locales.first) if locales.length == 1
+            field_name = name_with_locale("body", locales.first)
+            return render_proposal_custom_fields_override(custom_fields, form, field_name, locales.first) if locales.length == 1
 
             tabs_id = form.send(:sanitize_tabs_selector, form.options[:tabs_id] || "#{form.object_name}-body-tabs")
 
@@ -61,7 +62,8 @@ module Decidim
               locales.each_with_index.inject("".html_safe) do |string, (locale, index)|
                 tab_content_id = "#{tabs_id}-body-panel-#{index}"
                 string + content_tag(:div, class: form.send(:tab_element_class_for, "panel", index), id: tab_content_id, "aria-hidden": index.zero? ? "false" : "true") do
-                  render_proposal_custom_fields_override(custom_fields, form, "body_#{locale}", locale)
+                  field_name = name_with_locale("body", locale)
+                  render_proposal_custom_fields_override(custom_fields, form, field_name, locale)
                 end
               end
             end

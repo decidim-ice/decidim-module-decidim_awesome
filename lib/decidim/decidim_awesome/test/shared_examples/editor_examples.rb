@@ -55,6 +55,7 @@ shared_examples "has drag and drop" do
       fill_in :proposal_title, with: "This is a test proposal"
       click_on "Send"
     end
-    expect(proposal.reload.body["en"]).to include(last_image.file.blob.to_gid.to_s)
+    # For textarea (allow_images_in_proposals), images are saved as URLs
+    expect(proposal.reload.body["en"]).to include(last_image.file.filename.to_s)
   end
 end

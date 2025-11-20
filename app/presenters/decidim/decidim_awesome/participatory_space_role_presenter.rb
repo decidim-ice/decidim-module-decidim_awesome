@@ -36,7 +36,7 @@ module Decidim
         case role
         when "admin"
           "text-alert"
-        when "valuator"
+        when "evaluator"
           "text-secondary"
         end
       end

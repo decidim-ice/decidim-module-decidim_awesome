@@ -210,7 +210,7 @@ Rules available:
 
 #### 14. Admin accountability
 
-This feature allows you to list all the users that are, or have been at any point in time, admins, valuators, user managers or any other role in Decidim. Including global admin roles or private admins of a particular participatory space.
+This feature allows you to list all the users that are, or have been at any point in time, admins, evaluators, user managers or any other role in Decidim. Including global admin roles or private admins of a particular participatory space.
 
 Results can be filtered by role and by time range and also exported as CSV or other formats.
 
@@ -474,6 +474,7 @@ Depending on your Decidim version, choose the corresponding Awesome version to e
 
 | Awesome version | Compatible Decidim versions |
 |---|---|
+| 0.14.x | 0.31.x |
 | 0.13.x | 0.30.x |
 | 0.12.x | 0.29.x |
 | 0.11.x | 0.28.x |

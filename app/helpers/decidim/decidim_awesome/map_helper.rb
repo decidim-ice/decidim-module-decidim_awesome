@@ -71,7 +71,6 @@ module Decidim
         try(:current_component) || self
       end
 
-      # rubocop:disable Rails/HelperInstanceVariable
       def current_taxonomies(taxonomies)
         return @current_taxonomies if @current_taxonomies
 

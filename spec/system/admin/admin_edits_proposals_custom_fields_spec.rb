@@ -51,7 +51,10 @@ describe "Admin edits proposals" do
 
   context "when editing the proposal" do
     before do
-      find("a.action-icon--edit-proposal").click
+      within "tr[data-id='#{proposal.id}']" do
+        find("button[data-controller='dropdown']").click
+        click_on "Edit proposal"
+      end
     end
 
     it "displays custom fields" do
@@ -170,7 +173,10 @@ describe "Admin edits proposals" do
 
   context "when answering the proposal" do
     it "displays custom fields" do
-      find("a.action-icon--show-proposal").click
+      within "tr", text: translated(proposal.title) do
+        find("button[data-controller='dropdown']").click
+        click_on "Answer proposal"
+      end
       expect(page).to have_content("Bio")
       within "#textarea-1476748007461" do
         expect(page).to have_content("I shot the sheriff")
@@ -189,7 +195,10 @@ describe "Admin edits proposals" do
         # rubocop:disable Rails/SkipsModelValidations
         proposal.extra_fields.update_column(:private_body_updated_at, 4.months.ago)
         # rubocop:enable Rails/SkipsModelValidations
-        find("a.action-icon--show-proposal").click
+        within "tr", text: translated(proposal.title) do
+          find("button[data-controller='dropdown']").click
+          click_on "Answer proposal"
+        end
       end
 
       it "displays a warning" do
@@ -203,7 +212,10 @@ describe "Admin edits proposals" do
     context "when private data is removed" do
       before do
         proposal.extra_fields.update(private_body: nil)
-        find("a.action-icon--show-proposal").click
+        within "tr", text: translated(proposal.title) do
+          find("button[data-controller='dropdown']").click
+          click_on "Answer proposal"
+        end
       end
 
       it "shows destroyed date" do
@@ -221,7 +233,10 @@ describe "Admin edits proposals" do
         proposal.extra_fields.update_column(:private_body, nil)
         proposal.extra_fields.update_column(:private_body_updated_at, nil)
         # rubocop:enable Rails/SkipsModelValidations
-        find("a.action-icon--show-proposal").click
+        within "tr", text: translated(proposal.title) do
+          find("button[data-controller='dropdown']").click
+          click_on "Answer proposal"
+        end
       end
 
       it "does not display the private data" do
@@ -237,7 +252,10 @@ describe "Admin edits proposals" do
       let!(:private_constraint) { create(:config_constraint, awesome_config: private_config_helper, settings: { "participatory_space_manifest" => "assemblies" }) }
 
       it "does not display private custom fields" do
-        find("a.action-icon--show-proposal").click
+        within "tr", text: translated(proposal.title) do
+          find("button[data-controller='dropdown']").click
+          click_on "Answer proposal"
+        end
         expect(page).to have_content("Bio")
         within "#textarea-1476748007461" do
           expect(page).to have_content("I shot the sheriff")

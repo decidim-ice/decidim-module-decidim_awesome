@@ -30,10 +30,10 @@ describe "Filter Admin actions" do
   end
 
   def apply_admin_filter(options, filter)
-    within(".filters__section") do
-      find_link("Filter").hover
-      find_link(options).hover
-      click_link_or_button(filter)
+    within(".admin-accountability-filters") do
+      click_on "Filter"
+      click_on options
+      click_on filter
     end
   end
 
@@ -46,16 +46,14 @@ describe "Filter Admin actions" do
     end
 
     it "displays the filter labels" do
-      find("a.dropdown").hover
+      click_on "Filter"
       expect(page).to have_no_content("Participatory space type")
       expect(page).to have_content("Role type")
 
-      find("a", text: "Role type").hover
+      find("a", text: "Role type").click
 
-      within ".filters__section" do
-        expect(page).to have_content("Super admin")
-        expect(page).to have_content("User manager")
-      end
+      expect(page).to have_content("Super admin")
+      expect(page).to have_content("User manager")
     end
 
     it "displays all the admins" do
@@ -164,12 +162,17 @@ describe "Filter Admin actions" do
         it "exports the result" do
           search_by_date(6.days.ago, 5.days.ago)
 
-          find(".exports.button.tiny").click
-          perform_enqueued_jobs { click_link_or_button "Export as CSV" }
+          click_on "Export this search"
+
+          perform_enqueued_jobs do
+            click_link_or_button "Export as CSV"
+          end
 
           within ".flash.success" do
             expect(page).to have_content("Export job has been enqueued. You will receive an email when it's ready.")
           end
+
+          sleep 1
 
           expect(last_email.subject).to eq(%(Your export "admin_actions" is ready))
           expect(Decidim::PrivateExport.count).to eq(1)

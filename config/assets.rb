@@ -2,9 +2,9 @@
 
 base_path = File.expand_path("..", __dir__)
 
-Decidim::Webpacker.register_path("#{base_path}/app/packs")
+Decidim::Shakapacker.register_path("#{base_path}/app/packs")
 
-Decidim::Webpacker.register_entrypoints(
+Decidim::Shakapacker.register_entrypoints(
   # override the Decidim entry point for decidim so we can define a custom createEditor method
   decidim_editor: "#{base_path}/app/packs/entrypoints/decidim_editor.js",
   decidim_decidim_awesome: "#{base_path}/app/packs/entrypoints/decidim_decidim_awesome.js",

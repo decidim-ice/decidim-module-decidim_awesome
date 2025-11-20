@@ -38,17 +38,17 @@ describe "Questionnaires" do
 
   context "when surveys" do
     let(:manifest_name) { "surveys" }
-    let(:survey) { create(:survey, :published, allow_answers: true, component:, questionnaire:) }
+    let(:survey) { create(:survey, :published, allow_responses: true, component:, questionnaire:) }
     let(:questionnaire_path) { Decidim::EngineRouter.main_proxy(component).survey_path(survey) }
     let(:questionnaire) { create(:questionnaire) }
-    let!(:question_single_option) { create(:questionnaire_question, :with_answer_options, question_type: "single_option", questionnaire:) }
-    let!(:question_text) { create(:questionnaire_question, question_type: "short_answer", questionnaire:) }
+    let!(:question_single_option) { create(:questionnaire_question, :with_response_options, question_type: "single_option", questionnaire:) }
+    let!(:question_text) { create(:questionnaire_question, question_type: "short_response", questionnaire:) }
 
     it "saves answers in local storage" do
       visit questionnaire_path
       expect(page.body).to have_content("window.DecidimAwesome.current_questionnaire")
 
-      within ".answer-questionnaire__step" do
+      within ".response-questionnaire__step" do
         find('input[type="text"]', match: :first).fill_in(with: "My answer")
         find('input[type="radio"]', match: :first).click
       end
@@ -57,7 +57,7 @@ describe "Questionnaires" do
       visit questionnaire_path
       sleep 0.1
 
-      within ".answer-questionnaire__step" do
+      within ".response-questionnaire__step" do
         expect(find('input[type="radio"]', match: :first)).to be_checked
         expect(find('input[type="text"]', match: :first).value).to eq("My answer")
       end
@@ -70,7 +70,7 @@ describe "Questionnaires" do
         visit questionnaire_path
         expect(page.body).to have_content("window.DecidimAwesome.current_questionnaire")
 
-        within ".answer-questionnaire__step" do
+        within ".response-questionnaire__step" do
           find('input[type="text"]', match: :first).fill_in(with: "My answer")
           find('input[type="radio"]', match: :first).click
         end
@@ -79,7 +79,7 @@ describe "Questionnaires" do
         visit questionnaire_path
         sleep 0.1
 
-        within ".answer-questionnaire__step" do
+        within ".response-questionnaire__step" do
           expect(find('input[type="radio"]', match: :first)).not_to be_checked
           expect(find('input[type="text"]', match: :first).value).to eq("")
         end
@@ -94,7 +94,7 @@ describe "Questionnaires" do
         visit questionnaire_path
         expect(page.body).to have_content("window.DecidimAwesome.current_questionnaire")
 
-        within ".answer-questionnaire__step" do
+        within ".response-questionnaire__step" do
           find('input[type="text"]', match: :first).fill_in(with: "My answer")
           find('input[type="radio"]', match: :first).click
         end
@@ -103,7 +103,7 @@ describe "Questionnaires" do
         visit questionnaire_path
         sleep 0.1
 
-        within ".answer-questionnaire__step" do
+        within ".response-questionnaire__step" do
           expect(find('input[type="radio"]', match: :first)).to be_checked
           expect(find('input[type="text"]', match: :first).value).to eq("My answer")
         end
@@ -118,7 +118,7 @@ describe "Questionnaires" do
         visit questionnaire_path
         expect(page.body).to have_content("window.DecidimAwesome.current_questionnaire")
 
-        within ".answer-questionnaire__step" do
+        within ".response-questionnaire__step" do
           find('input[type="text"]', match: :first).fill_in(with: "My answer")
           find('input[type="radio"]', match: :first).click
         end
@@ -127,7 +127,7 @@ describe "Questionnaires" do
         visit questionnaire_path
         sleep 0.1
 
-        within ".answer-questionnaire__step" do
+        within ".response-questionnaire__step" do
           expect(find('input[type="radio"]', match: :first)).not_to be_checked
           expect(find('input[type="text"]', match: :first).value).to eq("")
         end

@@ -80,7 +80,7 @@ describe "Hashcash protector", :perform_enqueued do
           click_on "Create an account"
         end
 
-        within "#register-form" do
+        within "#registration_new_user" do
           fill_in :registration_user_name, with: "Bob"
           fill_in :registration_user_email, with: "bob@example.org"
           fill_in :registration_user_password, with: "decidim123456789"
@@ -112,7 +112,7 @@ describe "Hashcash protector", :perform_enqueued do
         end
 
         expect(page).to have_no_field("hashcash", type: :hidden)
-        within "#register-form" do
+        within "#registration_new_user" do
           fill_in :registration_user_name, with: "Bob"
           fill_in :registration_user_email, with: "bob@example.org"
           fill_in :registration_user_password, with: "decidim123456789"

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Rake::Task["decidim:webpacker:install"].enhance do
+Rake::Task["decidim:shakapacker:install"].enhance do
   Rake::Task["decidim_decidim_awesome:webpacker:install"].invoke
 end
 

@@ -163,7 +163,7 @@ module Decidim
         end
       end
 
-      initializer "decidim_decidim_awesome.middleware" do |app|
+      initializer "decidim_decidim_awesome.middleware", after: "decidim_core.middleware" do |app|
         app.config.middleware.insert_after Decidim::Middleware::CurrentOrganization, Decidim::DecidimAwesome::CurrentConfig
       end
 
@@ -175,7 +175,7 @@ module Decidim
                 :default_sort_order,
                 type: :select,
                 default: "default",
-                choices: -> { (POSSIBLE_SORT_ORDERS + DecidimAwesome.possible_additional_proposal_sortings).uniq }
+                choices: ->(_context) { (POSSIBLE_SORT_ORDERS + DecidimAwesome.possible_additional_proposal_sortings).uniq }
               )
             end
             if DecidimAwesome.enabled?(:allow_limiting_amendments)
@@ -194,7 +194,7 @@ module Decidim
                 :default_sort_order,
                 type: :select,
                 include_blank: true,
-                choices: -> { (POSSIBLE_SORT_ORDERS + DecidimAwesome.possible_additional_proposal_sortings).uniq }
+                choices: ->(_context) { (POSSIBLE_SORT_ORDERS + DecidimAwesome.possible_additional_proposal_sortings).uniq }
               )
             end
           end
@@ -213,8 +213,8 @@ module Decidim
                              .where(component: component_instance)
                              .includes(:scope, :category, :component)
 
-                if space.user_roles(:valuator).where(user:).any?
-                  collection.with_valuation_assigned_to(user, space)
+                if space.user_roles(:evaluator).where(user:).any?
+                  collection.with_evaluation_assigned_to(user, space)
                 else
                   collection
                 end
@@ -256,7 +256,7 @@ module Decidim
                 Decidim::SettingsManifest::Attribute.new(
                   type: :select,
                   default: "",
-                  choices: -> { ["default"] + Decidim::DecidimAwesome.voting_registry.manifests.map(&:name) },
+                  choices: ->(_context) { ["default"] + Decidim::DecidimAwesome.voting_registry.manifests.map(&:name) },
                   readonly: lambda { |context|
                     Decidim::Proposals::Proposal.where(component: context[:component]).where.not(proposal_votes_count: -Float::INFINITY..0).any?
                   }
@@ -310,7 +310,6 @@ module Decidim
         Decidim.icons.register(name: "fire", icon: "fire-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "line-chart-line", icon: "line-chart-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "spy", icon: "spy-fill", category: "system", description: "", engine: :decidim_awesome)
-        Decidim.icons.register(name: "forbid-line", icon: "forbid-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "file-settings-line", icon: "file-settings-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "hashtag", icon: "hashtag", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "smartphone", icon: "smartphone-line", category: "system", description: "", engine: :decidim_awesome)

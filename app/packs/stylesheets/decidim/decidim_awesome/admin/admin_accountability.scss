@@ -1,71 +1,49 @@
-.filters__section {
-  @apply flex gap-4 items-start;
+.admin-accountability-filters {
+  &__grid {
+    @apply grid gap-3 items-start xl:grid-cols-[auto_1fr_auto_auto_auto];
 
-  input {
-    @apply h-9;
+    grid-template-columns: auto 1fr 1fr 1fr auto;
   }
 
-  .form-label {
-    @apply block;
+  label {
+    @apply block w-full;
   }
 
-  .dropdown__container {
-    @apply flex flex-col items-start gap-0 py-0;
-
-    .form-label {
-      @apply block text-sm p-0;
-    }
-
-    .dropdown {
-      @apply flex items-center h-9;
-    }
+  .relative button[type="button"],
+  .flex-shrink-0 button[type="submit"] {
+    margin-top: 1.5rem;
   }
 
-  .grid {
-    @apply flex gap-4 items-start;
+  input[type="search"],
+  input[type="date"],
+  .datepicker__date-column > input {
+    @apply w-full;
+
+    height: 2.5rem;
   }
 
-  .datepicker_field {
+  .datepicker__calendar-button {
+    @apply top-0;
+
+    right: 0.5rem;
+  }
+
+  label:has(input[type="date"]),
+  div:has(> label input[type="date"]) {
     @apply flex flex-col;
-
-    .datepicker__datepicker-row {
-      @apply flex items-center gap-2 order-1;
-    }
-
-    .datepicker__help-text-container {
-      @apply order-2 w-full;
-    }
-
-    .help-text.datepicker__help-date {
-      @apply w-full;
-    }
-
-    .input-group-field {
-      @apply h-9 px-2;
-    }
-
-    .search-button-container button {
-      @apply h-9 w-9 flex items-center justify-center;
-    }
   }
 
-  .search-button-container {
-    @apply flex flex-col items-start;
-
-    button {
-      @apply h-9 px-4 flex items-center justify-center;
-    }
+  label:has(input[type="date"]) + .datepicker__help-text-container {
+    order: 3;
   }
 
-  .row.column {
-    @apply mb-0;
+  label:has(input[type="date"])
+    + .datepicker__help-text-container
+    + .datepicker__datepicker-row {
+    order: 2;
+  }
 
-    &:last-child {
-      @apply flex items-center justify-center;
-    }
-
-    &.search-field {
-      @apply flex-grow;
-    }
+  .datepicker__help-date {
+    @apply w-full;
   }
 }

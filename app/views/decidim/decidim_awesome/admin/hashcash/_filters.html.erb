@@ -5,13 +5,13 @@
         <div class="content-end">
           <%= label_tag :created_from do %>
             <%= t("created_at", scope: "decidim.decidim_awesome.admin.hashcash.index") + " ≥" %>
-            <%= date_field_tag :created_from, params[:created_from], autocomplete: :off %>
+            <%= date_field_tag :created_from, params[:created_from], autocomplete: :off, data: { controller: "date-picker" } %>
           <% end %>
           </div>
         <div class="content-end">
           <%= label_tag :created_from do %>
             <%= t("created_at", scope: "decidim.decidim_awesome.admin.hashcash.index") + " ≤" %>
-            <%= date_field_tag :created_to, params[:created_to], autocomplete: :off %>
+            <%= date_field_tag :created_to, params[:created_to], autocomplete: :off, data: { controller: "date-picker" } %>
           <% end %>
         </div>
         <div class="content-end grid grid-cols-2 gap-x-4 pt-8">
