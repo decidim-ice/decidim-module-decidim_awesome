@@ -68,7 +68,7 @@ decidim-core:
     decidim-0.31.0: adc4334ee17bd8a894357813b9e29654
   /app/services/decidim/open_data_exporter.rb:
     decidim-0.30.0: 804b322706e98b1538709f0f183bd073
-    decidim-0.31.0: 42111b74726af14cb7b2e2085a44a4a3
+    decidim-0.31.0: 3093e8c74ea1a6fb838ec192c782c90b
   /lib/decidim/api/functions/participatory_space_list_base.rb:
     decidim-0.30.0: 327d8f8b1ed1bcb08500aaabf5536ac1
     decidim-0.31.0: 327d8f8b1ed1bcb08500aaabf5536ac1
