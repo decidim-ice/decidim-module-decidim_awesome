@@ -38,15 +38,15 @@ describe "Forced verifications" do
       expect(page).to have_content("Verify with Another example authorization")
       expect(page).to have_content("Help text with HTML")
       expect(page).to have_link("let me logout")
-      expect(page).not_to have_content("GRANTED VERIFICATIONS")
-      expect(page).not_to have_content("PENDING VERIFICATIONS")
+      expect(page).to have_no_content("GRANTED VERIFICATIONS")
+      expect(page).to have_no_content("PENDING VERIFICATIONS")
       expect(page).to have_content("NOT VERIFIED YET")
 
       click_link "Verify with Example authorization"
 
       fill_in "Document number", with: "12345678X"
       click_on "Send"
-      expect(page).not_to have_content("Verify with Example authorization")
+      expect(page).to have_no_content("Verify with Example authorization")
       click_link "Verify with Another example authorization"
       fill_in "Passport number", with: "A12345678"
       click_on "Send"
@@ -120,12 +120,12 @@ describe "Forced verifications" do
 
       it "user is redirected and shows the pending" do
         expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(redirect_url: restricted_path))
-        expect(page).not_to have_content("Verify with Identity documents")
+        expect(page).to have_no_content("Verify with Identity documents")
         expect(page).to have_content("Identity documents")
         expect(page).to have_content("Verify with Example authorization")
         expect(page).to have_content("PENDING VERIFICATIONS")
         expect(page).to have_content("NOT VERIFIED YET")
-        expect(page).not_to have_content("GRANTED VERIFICATIONS")
+        expect(page).to have_no_content("GRANTED VERIFICATIONS")
       end
     end
 
@@ -139,7 +139,7 @@ describe "Forced verifications" do
         expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(redirect_url: restricted_path))
         expect(page).to have_content("GRANTED VERIFICATIONS")
         expect(page).to have_content("NOT VERIFIED YET")
-        expect(page).not_to have_content("PENDING VERIFICATIONS")
+        expect(page).to have_no_content("PENDING VERIFICATIONS")
       end
     end
 

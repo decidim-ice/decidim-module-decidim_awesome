@@ -31,14 +31,14 @@ describe "Managing the participants" do
         within "div[data-verification-user-id=\"#{participant1.id}\"]" do
           expect(page).to have_content("Example authorization")
           expect(page).to have_css("svg.checked")
-          expect(page).not_to have_content("Another example authorization")
+          expect(page).to have_no_content("Another example authorization")
         end
       end
       within "tr", text: participant2.name do
         within "div[data-verification-user-id=\"#{participant2.id}\"]" do
           expect(page).to have_content("Example authorization")
           expect(page).to have_css("svg.unchecked")
-          expect(page).not_to have_content("Another example authorization")
+          expect(page).to have_no_content("Another example authorization")
         end
       end
     end
@@ -146,7 +146,7 @@ describe "Managing the participants" do
           fill_in "Document number", with: "12345678"
           click_button "Authorize #{participant2.name} with Example authorization"
           expect(page).to have_content("There is a conflict with an existing authorization")
-          expect(page).not_to have_content("Authorize")
+          expect(page).to have_no_content("Authorize")
           click_on "Close"
         end
 
