@@ -13,8 +13,8 @@ decidim-conferences:
 decidim-core:
   /app/packs/entrypoints/decidim_editor.js:
     decidim-0.31.0: e690b09ebd83d76a9dbdaefe02812333
-  /app/packs/src/decidim/editor/index.js:
-    decidim-0.31.0: 927371e028f6768524df5b7bafa1bd5f
+  /app/packs/src/decidim/controllers/editor/controller.js:
+    decidim-0.31.0: 7a697e8782b83f2d28e1626adc50997e
   /app/validators/etiquette_validator.rb:
     decidim-0.31.0: a3d19c75c77c3933937cd50aa66bc01d
   /app/views/layouts/decidim/_head.html.erb:
