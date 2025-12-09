@@ -189,6 +189,7 @@ ca:
           roles:
             admin: Administradora
             collaborator: Col·laboradora
+            evaluator: Avaluador
             moderator: Moderadora
         admin_authorizations:
           authorization:
@@ -679,6 +680,7 @@ ca:
     download_your_data:
       show:
         admin_actions: Accions d'administrador
+        awesome_private_proposals: Exportació de propostes amb camps privats
     meetings:
       meetings_map:
         view_meeting: Veure trobada
