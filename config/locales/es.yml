@@ -189,6 +189,7 @@ es:
           roles:
             admin: Administradora
             collaborator: Colaborador/a
+            evaluator: Evaluador
             moderator: Moderadora
         admin_authorizations:
           authorization:
@@ -680,6 +681,7 @@ es:
     download_your_data:
       show:
         admin_actions: Acciones de Administrador
+        awesome_private_proposals: Exportación de propuestas con campos privados
     meetings:
       meetings_map:
         view_meeting: Ver encuentro
