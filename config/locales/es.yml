@@ -190,7 +190,6 @@ es:
             admin: Administradora
             collaborator: Colaborador/a
             moderator: Moderadora
-            valuator: Evaluador/a
         admin_authorizations:
           authorization:
             confirm_destroy: '¿Seguro de que desea destruir esta autorización? Esto podría afectar al acceso del participante a la plataforma.'
