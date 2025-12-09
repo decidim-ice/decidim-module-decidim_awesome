@@ -190,7 +190,6 @@ cs:
             admin: Administrátor
             collaborator: Spolupracovník
             moderator: Moderátor
-            valuator: Hodnotitel
         admin_authorizations:
           authorization:
             confirm_destroy: Opravdu chcete zničit tuto autorizaci? To může ovlivnit přístup uživatele k platformě.
