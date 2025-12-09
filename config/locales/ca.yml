@@ -190,7 +190,6 @@ ca:
             admin: Administradora
             collaborator: Col·laboradora
             moderator: Moderadora
-            valuator: Avaluadora
         admin_authorizations:
           authorization:
             confirm_destroy: Estàs segur que vols eliminar aquesta verificació? Aquesta actuació pot afectar a l'accés de la participant en la plataforma.
