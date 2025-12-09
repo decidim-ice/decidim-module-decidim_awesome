@@ -43,18 +43,18 @@ module Decidim::DecidimAwesome
           end
         end
 
-        context "when role is a valuator" do
-          let(:role) { "valuator" }
+        context "when role is an evaluator" do
+          let(:role) { "evaluator" }
 
           it "returns the role name in html" do
-            expect(subject.role_name).to eq("<span class=\"text-secondary\">Valuator</span>")
+            expect(subject.role_name).to eq("<span class=\"text-secondary\">Evaluator</span>")
           end
 
           context "when html is disabled" do
             let(:html) { false }
 
             it "returns without classes" do
-              expect(subject.role_name).to eq("Valuator")
+              expect(subject.role_name).to eq("Evaluator")
             end
           end
         end

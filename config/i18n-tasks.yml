@@ -5,11 +5,11 @@ locales: [en]
 
 data:
   external:
-    - "<%= %x[bundle info decidim-core --path].chomp %>/config/locales/%{locale}.yml"
-    - "<%= %x[bundle info decidim-admin --path].chomp %>/config/locales/%{locale}.yml"
-    - "<%= %x[bundle info decidim-proposals --path].chomp %>/config/locales/%{locale}.yml"
-    - "<%= %x[bundle info decidim-meetings --path].chomp %>/config/locales/%{locale}.yml"
-    - "<%= %x[bundle info decidim-blogs --path].chomp %>/config/locales/%{locale}.yml"
+    - "<%= Bundler.rubygems.find_name('decidim-core').first.full_gem_path %>/config/locales/%{locale}.yml"
+    - "<%= Bundler.rubygems.find_name('decidim-admin').first.full_gem_path %>/config/locales/%{locale}.yml"
+    - "<%= Bundler.rubygems.find_name('decidim-proposals').first.full_gem_path %>/config/locales/%{locale}.yml"
+    - "<%= Bundler.rubygems.find_name('decidim-meetings').first.full_gem_path %>/config/locales/%{locale}.yml"
+    - "<%= Bundler.rubygems.find_name('decidim-blogs').first.full_gem_path %>/config/locales/%{locale}.yml"
 
 ignore_unused:
   - "active_hashcash.*"
@@ -46,6 +46,7 @@ ignore_unused:
   - "decidim.proposals.*"
   - "decidim.meetings.*"
   - "decidim.download_your_data.show.admin_actions"
+  - "decidim.download_your_data.show.awesome_private_proposals"
 
 ignore_missing:
   - decidim.participatory_processes.scopes.global

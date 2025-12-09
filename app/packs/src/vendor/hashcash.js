@@ -18,8 +18,8 @@ export default class Hashcash {
 
     this.mint((stamp) => {
       this.input.value = stamp.toString()
-      console.log("Hashcash stamp: ", stamp)
-      console.log("Hashcash input: ", this.input.value)
+      // console.log("Hashcash stamp: ", stamp)
+      // console.log("Hashcash input: ", this.input.value)
       this.enableParentForm()
       this.input.dispatchEvent(new CustomEvent("hashcash:minted", {bubbles: true, detail: {stamp: stamp}}))
     })

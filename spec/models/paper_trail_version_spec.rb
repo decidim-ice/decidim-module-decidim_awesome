@@ -17,8 +17,8 @@ module Decidim::DecidimAwesome
       let(:participatory_process) { create(:participatory_process, organization:) }
       let!(:paper_trail_version) { create(:paper_trail_version, item_type: "Decidim::ParticipatoryProcessUserRole", item_id: participatory_process_user_role.id, whodunnit: user.id, event: "create") }
 
-      let(:external_participatory_process_user_role) { create(:participatory_process_user_role, participatory_process: external_participatory_process, user: external_valuator, role: "valuator", created_at: 1.day.ago) }
-      let(:external_valuator) { create(:user, id: 1111, organization: external_organization, last_sign_in_at: 1.day.ago) }
+      let(:external_participatory_process_user_role) { create(:participatory_process_user_role, participatory_process: external_participatory_process, user: external_evaluator, role: "evaluator", created_at: 1.day.ago) }
+      let(:external_evaluator) { create(:user, id: 1111, organization: external_organization, last_sign_in_at: 1.day.ago) }
       let(:external_participatory_process) { create(:participatory_process, organization: external_organization) }
       let!(:external_paper_trail_version) { create(:paper_trail_version, item_type: "Decidim::ParticipatoryProcessUserRole", item_id: external_participatory_process_user_role.id, whodunnit: external_user.id, event: "create") }
 
@@ -32,7 +32,7 @@ module Decidim::DecidimAwesome
 
         external_paper_trail_version.update!(
           object_changes: {
-            "decidim_user_id" => [nil, external_valuator.id],
+            "decidim_user_id" => [nil, external_evaluator.id],
             "decidim_participatory_process_id" => [nil, external_participatory_process.id]
           }
         )
@@ -78,7 +78,7 @@ module Decidim::DecidimAwesome
 
         external_paper_trail_version.update!(
           object_changes: {
-            "roles" => [[], ["valuator"]]
+            "roles" => [[], ["evaluator"]]
           }
         )
       end
@@ -102,8 +102,8 @@ module Decidim::DecidimAwesome
 
       it "filters correctly by role" do
         expect(PaperTrailVersion.in_organization(organization).admin_role_actions("admin")).to include(paper_trail_version)
-        expect(PaperTrailVersion.in_organization(organization).admin_role_actions("valuator")).to eq([])
-        expect(PaperTrailVersion.in_organization(external_organization).admin_role_actions("valuator")).to include(external_paper_trail_version)
+        expect(PaperTrailVersion.in_organization(organization).admin_role_actions("evaluator")).to eq([])
+        expect(PaperTrailVersion.in_organization(external_organization).admin_role_actions("evaluator")).to include(external_paper_trail_version)
         expect(PaperTrailVersion.in_organization(external_organization).admin_role_actions("admin")).to eq([])
       end
 

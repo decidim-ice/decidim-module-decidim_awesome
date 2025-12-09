@@ -34,7 +34,7 @@ export default class ProposalsFetcher extends Fetcher {
                     }
                   }
                   totalCommentsCount
-                  endorsementsCount
+                  likesCount
                   address
                   coordinates {
                     latitude

@@ -6,8 +6,6 @@ require "decidim/decidim_awesome/test/shared_examples/controller_examples"
 module Decidim::DecidimAwesome
   module MapComponent
     describe MapController do
-      routes { Decidim::DecidimAwesome::MapComponent::Engine.routes }
-
       let(:user) { create(:user, :confirmed, organization: component.organization) }
       let(:component) { create(:map_component) }
 
@@ -17,7 +15,7 @@ module Decidim::DecidimAwesome
         request.env["decidim.current_component"] = component
       end
 
-      it_behaves_like "a blank component", Decidim::DecidimAwesome::MapComponent::AdminEngine
+      it_behaves_like "a blank component"
 
       describe "GET show" do
         context "when everything is ok" do

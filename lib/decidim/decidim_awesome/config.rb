@@ -168,7 +168,8 @@ module Decidim
       private
 
       def map_defaults
-        defaults.to_h do |key, val|
+        # First to_h converts InheritableOptions to Hash, second to_h applies the block (Rails 7.2+)
+        defaults.to_h.to_h do |key, val|
           value = false
           unless val == :disabled
             value = yield(key, val)
