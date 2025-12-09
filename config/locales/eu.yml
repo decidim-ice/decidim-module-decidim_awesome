@@ -190,7 +190,6 @@ eu:
             admin: Administratzailea
             collaborator: Kolaboratzailea
             moderator: Moderatzailea
-            valuator: Baloratzailea.
         admin_authorizations:
           authorization:
             confirm_destroy: Ziur zaude baimen hau suntsitu nahi duzula? Horrek eragina izan dezake parte-hartzaileak plataformarako duen sarbidean.
