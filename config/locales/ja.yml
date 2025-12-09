@@ -190,7 +190,6 @@ ja:
             admin: 管理者
             collaborator: コラボレーター
             moderator: モデレーター
-            valuator: 評価者
         admin_authorizations:
           authorization:
             confirm_destroy: この認証を破棄してもよろしいですか？ユーザーのプラットフォームへのアクセスに影響する可能性があります。
