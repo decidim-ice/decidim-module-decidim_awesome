@@ -190,7 +190,6 @@ de:
             admin: Admin
             collaborator: Mitarbeiter
             moderator: Moderator
-            valuator: Schätzer
         admin_authorizations:
           authorization:
             confirm_destroy: Sind Sie sicher, dass Sie diese Berechtigung löschen möchten? Dies kann den Zugriff des Benutzers auf die Plattform beeinflussen.
