@@ -10,7 +10,7 @@ module Decidim
         attribute :allowlist, String
         attribute :blocklist, String
 
-        validates :type, inclusion: { in: Decidim::DecidimAwesome::UserAutoblockScoresPresenter::USERS_AUTOBLOCKS_TYPES.keys }
+        validates :type, inclusion: { in: -> { Decidim::DecidimAwesome.users_autoblocks_types } }
         validates :application_type, :type, :weight, presence: true
 
         def to_params

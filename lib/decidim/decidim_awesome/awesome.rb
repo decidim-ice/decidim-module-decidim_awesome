@@ -70,6 +70,19 @@ module Decidim
       true
     end
 
+    # Configuration for available user autoblock detection types
+    # Array of strings representing the available detection type identifiers
+    config_accessor :users_autoblocks_types do
+      %w(
+        about_blank
+        activities_blank
+        links_in_comments_or_about
+        email_unconfirmed
+        email_domain
+        links_in_comments_or_about_with_domains
+      )
+    end
+
     # Configuration options to handle different validations in proposals
     # (maybe in the future will apply to other places)
     # Set it to :disabled if you don't want to use this feature

@@ -8,15 +8,6 @@ module Decidim
     class UserAutoblockScoresPresenter < SimpleDelegator
       class SkipItem < StandardError; end
 
-      USERS_AUTOBLOCKS_TYPES = {
-        "about_blank" => { has_variable: false, default_blocklist: true },
-        "activities_blank" => { has_variable: false, default_blocklist: true },
-        "links_in_comments_or_about" => { has_variable: true, default_blocklist: true },
-        "email_unconfirmed" => { has_variable: true, default_blocklist: true },
-        "email_domain" => { has_variable: true, default_blocklist: true },
-        "links_in_comments_or_about_with_domains" => { has_variable: true, default_blocklist: true }
-      }.freeze
-
       def scores
         @scores ||= current_rules.each_with_object({ total_score: 0 }) do |rule, calculations|
           val = rule_value(rule)
@@ -67,7 +58,7 @@ module Decidim
       end
 
       def current_rules
-        @current_rules ||= (AwesomeConfig.find_by(var: :users_autoblocks, organization:)&.value || [])
+        @current_rules ||= AwesomeConfig.find_by(var: :users_autoblocks, organization:)&.value || []
       end
 
       def rule_key(rule)
@@ -101,7 +92,7 @@ module Decidim
       end
 
       def calculate_positive(rule)
-        return if USERS_AUTOBLOCKS_TYPES.keys.exclude?(rule["type"])
+        return if Decidim::DecidimAwesome.users_autoblocks_types.exclude?(rule["type"])
         return unless respond_to?("#{rule["type"]}_detection_method")
 
         allowlist = rule["allowlist"].split(/\s/).compact_blank
