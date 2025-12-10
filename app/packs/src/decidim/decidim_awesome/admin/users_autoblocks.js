@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  configNotifyUsersCheckBox.addEventListener("change", (event) => {
+  configNotifyUsersCheckBox.addEventListener("change", () => {
     reviewJustificationMessageSection();
   });
 });
