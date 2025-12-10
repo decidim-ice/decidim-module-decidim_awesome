@@ -397,7 +397,7 @@ module Decidim
 
       initializer "decidim_decidim_awesome.override_blocked_users_notifications" do
         config.to_prepare do
-          Decidim::BlockUserMailer.prepend(Decidim::DecidimAwesome::BlockUserMailerOverride)
+          Decidim::BlockUserMailer.prepend(Decidim::DecidimAwesome::BlockUserMailerOverride) if DecidimAwesome.enabled?(:users_autoblock)
         end
       end
     end
