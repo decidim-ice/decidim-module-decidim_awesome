@@ -337,8 +337,8 @@ module Decidim
             Decidim::DecidimAwesome.user_activities_registry.register(:meetings) do |user_activity|
               user_activity.counter = ->(user) { Decidim::Meetings::Meeting.where(author: user).count }
             end
-            Decidim::DecidimAwesome.user_activities_registry.register(:meetings_answers) do |user_activity|
-              user_activity.counter = ->(user) { Decidim::Meetings::Answer.where(user:).count }
+            Decidim::DecidimAwesome.user_activities_registry.register(:meetings_responses) do |user_activity|
+              user_activity.counter = ->(user) { Decidim::Meetings::Response.where(user:).count }
             end
           end
 
@@ -348,8 +348,8 @@ module Decidim
             end
           end
 
-          Decidim::DecidimAwesome.user_activities_registry.register(:forms_answers) do |user_activity|
-            user_activity.counter = ->(user) { Decidim::Forms::Answer.where(user:).count }
+          Decidim::DecidimAwesome.user_activities_registry.register(:forms_responses) do |user_activity|
+            user_activity.counter = ->(user) { Decidim::Forms::Response.where(user:).count }
           end
 
           if Decidim.module_installed?(:blogs)
