@@ -34,7 +34,8 @@ Decidim::DecidimAwesome.configure do |config|
       :allow_limiting_amendments,
       :proposal_private_custom_fields,
       :hashcash_signup,
-      :hashcash_login
+      :hashcash_login,
+      :users_autoblocks
     ].each do |conf|
       config.send("#{conf}=", :disabled)
     end
