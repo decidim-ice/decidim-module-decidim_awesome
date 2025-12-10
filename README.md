@@ -514,6 +514,32 @@ Decidim::DecidimAwesome.configure do |config|
 end
 ```
 
+#### Configuring User Autoblock Types
+
+You can customize the available user autoblock detection types by configuring `users_autoblocks_types`. This is an array of strings representing the available detection type identifiers.
+
+Example configuration:
+
+```ruby
+# config/initializers/awesome_defaults.rb
+
+Decidim::DecidimAwesome.configure do |config|
+  # Customize available autoblock detection types
+  config.users_autoblocks_types = [
+    "about_blank",
+    "activities_blank",
+    "links_in_comments_or_about",
+    "email_unconfirmed",
+    "email_domain",
+    "links_in_comments_or_about_with_domains",
+    # Add your custom type here
+    "custom_type"
+  ]
+end
+```
+
+> **NOTE**: When adding custom types, you must also implement the corresponding detection method in `UserAutoblockScoresPresenter` following the pattern `{type}_detection_method`.
+
 For a complete list of options take a look at the [module defaults](lib/decidim/decidim_awesome/awesome.rb).
 
 ## Missing something?
