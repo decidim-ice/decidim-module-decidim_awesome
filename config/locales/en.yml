@@ -714,7 +714,7 @@ en:
             success_block_html:
               one: 1 user blocked successfully. You can check at <a href="%{url}">blocked
                 users</a>
-              other: '%{count} users blocked succesfully. You can check at <a href="%{url}">blocked
+              other: '%{count} users blocked successfully. You can check at <a href="%{url}">blocked
                 users</a>'
               zero: No users have been found who have a sufficient score to be blocked
                 automatically
