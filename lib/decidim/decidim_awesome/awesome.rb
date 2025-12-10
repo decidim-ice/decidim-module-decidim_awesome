@@ -12,6 +12,7 @@ module Decidim
     autoload :MenuHacker, "decidim/decidim_awesome/menu_hacker"
     autoload :CustomFields, "decidim/decidim_awesome/custom_fields"
     autoload :VotingManifest, "decidim/decidim_awesome/voting_manifest"
+    autoload :UserActivityManifest, "decidim/decidim_awesome/user_activity_manifest"
     autoload :Lock, "decidim/decidim_awesome/lock"
     autoload :TranslatedCustomFieldsType, "decidim/decidim_awesome/api/types/translated_custom_fields_type"
     autoload :LocalizedCustomFieldsType, "decidim/decidim_awesome/api/types/localized_custom_fields_type"
@@ -388,6 +389,11 @@ module Decidim
     # Public: Stores an instance of ContentBlockRegistry
     def self.voting_registry
       @voting_registry ||= Decidim::ManifestRegistry.new("decidim_awesome/voting")
+    end
+
+    # Public: Stores a manifest registry of user activities
+    def self.user_activities_registry
+      @user_activities_registry ||= Decidim::ManifestRegistry.new("decidim_awesome/user_activities")
     end
 
     #

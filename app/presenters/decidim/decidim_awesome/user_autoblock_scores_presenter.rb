@@ -141,49 +141,20 @@ module Decidim
       end
 
       class UserActivities
-        DEFAULT_ACTIVITIES = {
-          comments: ->(user) { Decidim::Comments::Comment.where(author: user).count },
-          comment_votes: ->(user) { Decidim::Comments::CommentVote.where(author: user).count },
-          proposals: ->(user) { Decidim::Proposals::Proposal.coauthored_by(user).count },
-          proposals_votes: ->(user) { Decidim::Proposals::ProposalVote.where(author: user).where(author: user).count },
-          collaborative_drafts: ->(user) { Decidim::Proposals::CollaborativeDraft.coauthored_by(user).count },
-          amendments: ->(user) { Decidim::Amendment.where(amender: user).count },
-          debates: ->(user) { Decidim::Debates::Debate.where(author: user).count },
-          initiatives: ->(user) { Decidim::Initiative.where(author: user).count },
-          initiatives_votes: ->(user) { Decidim::InitiativesVote.where(author: user).count },
-          meetings: ->(user) { Decidim::Meetings::Meeting.where(author: user).count },
-          meetings_answers: ->(user) { Decidim::Meetings::Answer.where(user:).count },
-          budgets_orders: ->(user) { Decidim::Budgets::Order.where(user:).count },
-          forms_answers: ->(user) { Decidim::Forms::Answer.where(user:).count },
-          blog_posts: ->(user) { Decidim::Blogs::Post.where(author: user).count },
-          follows: ->(user) { Decidim::Follow.where(user:).count },
-          endorsements: ->(user) { Decidim::Endorsement.where(author: user).count },
-          reports: ->(user) { Decidim::Report.where(user:).count }
-        }.freeze
-
-        attr_reader :user, :included_activities
-
-        def self.available_keys
-          @available_keys ||= begin
-            keys = [:reports, :endorsements, :follows, :forms_answers, :amendments]
-            keys += [:comments, :comments_votes] if Decidim.module_installed?(:comments)
-            keys += [:proposals, :proposals_votes, :collaborative_drafts] if Decidim.module_installed?(:proposals)
-            keys += [:debates] if Decidim.module_installed?(:debates)
-            keys += [:initiatives, :initiatives_votes] if Decidim.module_installed?(:initiatives)
-            keys += [:meetings, :meetings_answers] if Decidim.module_installed?(:meetings)
-            keys += [:budgets_orders] if Decidim.module_installed?(:budgets)
-            keys += [:blog_posts] if Decidim.module_installed?(:blogs)
-            keys
-          end
-        end
+        attr_reader :user, :included_activities, :registry
 
         def initialize(user, included_activities: [])
           @user = user
-          @included_activities = included_activities.blank? ? self.class.available_keys : self.class.available_keys & included_activities
+          @registry = Decidim::DecidimAwesome.user_activities_registry
+          registry_keys = registry.manifests.map(&:name)
+          @included_activities = included_activities.blank? ? registry_keys : registry_keys & included_activities.map(&:to_sym)
         end
 
         def activities
-          @activities = DEFAULT_ACTIVITIES.slice(*included_activities).transform_values { |method| method.call(user) }
+          @activities ||= included_activities.each_with_object({}) do |key, result|
+            counter = registry.find(key)&.counter
+            result[key] = counter.call(user) if counter
+          end
         end
 
         def blank?
