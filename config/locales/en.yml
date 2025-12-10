@@ -695,6 +695,7 @@ en:
               decidim_decidim_awesome:autoblock_users:run_scheduled_block` periodically.
             block_justification_message_help: Justification that will receive the
               detected users in their block notification
+            default_block_justification_message: Account blocked automatically
             notify_blocked_users_help: Notify each blocked user. Note that if there
               are many users to block generating a notification for each one can consume
               a lot of resources

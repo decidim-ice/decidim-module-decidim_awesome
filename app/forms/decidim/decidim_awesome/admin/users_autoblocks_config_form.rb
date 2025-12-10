@@ -6,8 +6,6 @@ module Decidim
       class UsersAutoblocksConfigForm < Decidim::Form
         include Decidim::TranslatableAttributes
 
-        DEFAULT_BLOCK_JUSTIFICATION_MESSAGE = "Account blocked automatically"
-
         attribute :threshold, Integer
         attribute :block_justification_message, String
         attribute :notify_blocked_users, Boolean, default: false
@@ -32,7 +30,7 @@ module Decidim
         end
 
         def default_block_justification_message
-          DEFAULT_BLOCK_JUSTIFICATION_MESSAGE
+          I18n.t("decidim.decidim_awesome.admin.config.users_autoblocks.config_form.default_block_justification_message")
         end
 
         def current_admin_params
