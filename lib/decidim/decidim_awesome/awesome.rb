@@ -66,6 +66,9 @@ module Decidim
       true
     end
 
+    # Enables the user autoblock feature that allows admins to automatically block users
+    # based on configurable detection rules and scoring thresholds.
+    # Set to :disabled to completely remove this feature
     config_accessor :users_autoblocks do
       true
     end
