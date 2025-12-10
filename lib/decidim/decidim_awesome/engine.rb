@@ -361,8 +361,8 @@ module Decidim
           Decidim::DecidimAwesome.user_activities_registry.register(:follows) do |user_activity|
             user_activity.counter = ->(user) { Decidim::Follow.where(user:).count }
           end
-          Decidim::DecidimAwesome.user_activities_registry.register(:endorsements) do |user_activity|
-            user_activity.counter = ->(user) { Decidim::Endorsement.where(author: user).count }
+          Decidim::DecidimAwesome.user_activities_registry.register(:likes) do |user_activity|
+            user_activity.counter = ->(user) { Decidim::Like.where(author: user).count }
           end
           Decidim::DecidimAwesome.user_activities_registry.register(:reports) do |user_activity|
             user_activity.counter = ->(user) { Decidim::Report.where(user:).count }
