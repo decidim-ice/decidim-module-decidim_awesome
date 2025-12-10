@@ -30,7 +30,7 @@ module Decidim
         end
 
         def default_block_justification_message
-          I18n.t("decidim.decidim_awesome.admin.config.users_autoblocks.config_form.default_block_justification_message")
+          I18n.t("decidim.decidim_awesome.admin.users_autoblocks.config_form.default_block_justification_message")
         end
 
         def current_admin_params
