@@ -189,8 +189,8 @@ ja:
           roles:
             admin: 管理者
             collaborator: コラボレーター
+            evaluator: 評価者
             moderator: モデレーター
-            valuator: 評価者
         admin_authorizations:
           authorization:
             confirm_destroy: この認証を破棄してもよろしいですか？ユーザーのプラットフォームへのアクセスに影響する可能性があります。
@@ -679,6 +679,7 @@ ja:
     download_your_data:
       show:
         admin_actions: 管理者の操作
+        awesome_private_proposals: 非公開フィールドを含めて提案をエクスポート
     meetings:
       meetings_map:
         view_meeting: ミーティングを表示

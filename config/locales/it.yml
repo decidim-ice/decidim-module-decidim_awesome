@@ -159,7 +159,6 @@ it:
             admin: Amministratore
             collaborator: Collaboratore
             moderator: Moderatore
-            valuator: Valutatore
         checks:
           index:
             admin_head_tags: Tag Awesome visualizzate nel header della sezione amministrativa

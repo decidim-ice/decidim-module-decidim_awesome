@@ -73,7 +73,6 @@ lt:
             admin: Administratorius
             collaborator: Pagalbininkas
             moderator: Moderatorius
-            valuator: Vertintojas
         checks:
           index:
             admin_head_tags: Awesome žymės įtrauktos į administratoriaus aplikaciją

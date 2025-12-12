@@ -190,7 +190,6 @@ fr:
             admin: Administrateur
             collaborator: Collaborateur
             moderator: Modérateur
-            valuator: Evaluateur
         admin_authorizations:
           authorization:
             confirm_destroy: Êtes-vous sûr de vouloir détruire cette autorisation ? Cela pourrait affecter l'accès des utilisateurs à la plateforme.
