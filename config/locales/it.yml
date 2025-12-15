@@ -158,6 +158,7 @@ it:
           roles:
             admin: Amministratore
             collaborator: Collaboratore
+            evaluator: Valutatore
             moderator: Moderatore
         checks:
           index:
