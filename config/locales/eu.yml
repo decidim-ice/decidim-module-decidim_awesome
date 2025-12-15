@@ -189,6 +189,7 @@ eu:
           roles:
             admin: Administratzailea
             collaborator: Kolaboratzailea
+            evaluator: Baloratzailea
             moderator: Moderatzailea
         admin_authorizations:
           authorization:
