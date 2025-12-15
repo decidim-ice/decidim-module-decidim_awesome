@@ -1,4 +1,6 @@
 hu:
+  active_hashcash:
+    submit_filter: Értékelő
   activemodel:
     attributes:
       config:
