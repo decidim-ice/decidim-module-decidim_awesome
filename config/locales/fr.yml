@@ -226,6 +226,7 @@ fr:
               CSS: La balise <head> ne contient pas les entrées de la feuille de style <link> requises. Pour la résoudre, vous pouvez l'ajouter manuellement à votre _head.html.erb personnalisé
               JavaScript: La balise <head> ne contient pas les entrées  javascript nécessaire <script>  Pour la résoudre, vous pouvez l'ajouter manuellement à votre _head.html.erb personnalisé
             head_tags: '"Awesome tags" (balises) inclus entre les balises <head>'
+            link_admins: Evaluateur
         config:
           anonymous: Utilisateurs non connectés
           caution: 'REMARQUE : Cette fonctionnalité modifie fortement certains comportements par défaut qui peuvent conduire à des résultats inattendus. Utilisez-la avec précaution !'
