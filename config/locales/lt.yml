@@ -72,6 +72,7 @@ lt:
           roles:
             admin: Administratorius
             collaborator: Pagalbininkas
+            evaluator: Vertintojas
             moderator: Moderatorius
         checks:
           index:
