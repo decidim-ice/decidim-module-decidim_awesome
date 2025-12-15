@@ -189,7 +189,7 @@ es:
           roles:
             admin: Administradora
             collaborator: Colaborador/a
-            evaluator: Evaluador
+            evaluator: Evaluador/a
             moderator: Moderadora
         admin_authorizations:
           authorization:
