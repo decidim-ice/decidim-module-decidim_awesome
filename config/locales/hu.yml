@@ -1,7 +1,7 @@
 ---
 hu:
   active_hashcash:
-    submit_filter: Értékelő
+    submit_filter: Szűrő
   activemodel:
     attributes:
       config:
