@@ -189,8 +189,8 @@ ca:
           roles:
             admin: Administradora
             collaborator: Col·laboradora
+            evaluator: Avaluadora
             moderator: Moderadora
-            valuator: Avaluadora
         admin_authorizations:
           authorization:
             confirm_destroy: Estàs segur que vols eliminar aquesta verificació? Aquesta actuació pot afectar a l'accés de la participant en la plataforma.
@@ -680,6 +680,7 @@ ca:
     download_your_data:
       show:
         admin_actions: Accions d'administrador
+        awesome_private_proposals: Exportació de propostes amb camps privats
     meetings:
       meetings_map:
         view_meeting: Veure trobada

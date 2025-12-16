@@ -189,8 +189,8 @@ fr:
           roles:
             admin: Administrateur
             collaborator: Collaborateur
+            evaluator: Valutatore
             moderator: Modérateur
-            valuator: Evaluateur
         admin_authorizations:
           authorization:
             confirm_destroy: Êtes-vous sûr de vouloir détruire cette autorisation ? Cela pourrait affecter l'accès des utilisateurs à la plateforme.
@@ -225,6 +225,7 @@ fr:
               CSS: La balise <head> ne contient pas les entrées de la feuille de style <link> requises. Pour la résoudre, vous pouvez l'ajouter manuellement à votre _head.html.erb personnalisé
               JavaScript: La balise <head> ne contient pas les entrées  javascript nécessaire <script>  Pour la résoudre, vous pouvez l'ajouter manuellement à votre _head.html.erb personnalisé
             head_tags: '"Awesome tags" (balises) inclus entre les balises <head>'
+            link_admins: Se connecter au panneau /system
         config:
           anonymous: Utilisateurs non connectés
           caution: 'REMARQUE : Cette fonctionnalité modifie fortement certains comportements par défaut qui peuvent conduire à des résultats inattendus. Utilisez-la avec précaution !'

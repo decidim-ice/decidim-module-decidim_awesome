@@ -189,8 +189,8 @@ es:
           roles:
             admin: Administradora
             collaborator: Colaborador/a
+            evaluator: Evaluador/a
             moderator: Moderadora
-            valuator: Evaluador/a
         admin_authorizations:
           authorization:
             confirm_destroy: '¿Seguro de que desea destruir esta autorización? Esto podría afectar al acceso del participante a la plataforma.'
@@ -681,6 +681,7 @@ es:
     download_your_data:
       show:
         admin_actions: Acciones de Administrador
+        awesome_private_proposals: Exportación de propuestas con campos privados
     meetings:
       meetings_map:
         view_meeting: Ver encuentro

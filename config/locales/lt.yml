@@ -72,8 +72,8 @@ lt:
           roles:
             admin: Administratorius
             collaborator: Pagalbininkas
+            evaluator: Vertintojas
             moderator: Moderatorius
-            valuator: Vertintojas
         checks:
           index:
             admin_head_tags: Awesome žymės įtrauktos į administratoriaus aplikaciją

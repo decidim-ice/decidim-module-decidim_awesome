@@ -189,8 +189,8 @@ de:
           roles:
             admin: Admin
             collaborator: Mitarbeiter
+            evaluator: Schätzer
             moderator: Moderator
-            valuator: Schätzer
         admin_authorizations:
           authorization:
             confirm_destroy: Sind Sie sicher, dass Sie diese Berechtigung löschen möchten? Dies kann den Zugriff des Benutzers auf die Plattform beeinflussen.
@@ -225,6 +225,7 @@ de:
               CSS: Der "Head" enthält nicht die erforderlichen <link> Stylesheet-Einträge. Zur Lösung können Sie sie manuell zu Ihrer benutzerdefinierten _head.html.erb-Datei hinzufügen
               JavaScript: Der "Head" enthält nicht die erforderlichen <script> Javascript-Einträge. Zur Lösung können Sie sie manuell zu Ihrer benutzerdefinierten admin/_header.html.erb-Datei hinzufügen
             head_tags: Angezeigte Awesome Tags im Application Header
+            link_admins: Ins System-Backend anmelden
         config:
           anonymous: Nicht eingeloggte Nutzende
           caution: 'HINWEIS: Mit dieser Funktion werden einige Standardverhaltensweisen stark verändert, was zu unerwarteten Ergebnissen führen kann. Verwenden Sie sie mit Vorsicht!'
@@ -629,6 +630,9 @@ de:
           verify_with_all_these_options: 'Bitte verifizieren Sie sich mit all diesen Methoden, bevor Sie auf die Plattform zugreifen können:'
           verify_with_any_of_these_options: 'Bitte verifizieren Sie sich mit mindestens einer dieser Optionen, bevor Sie auf die Plattform zugreifen können:'
           verify_with_method: Mit %{name} verifizieren
+      session:
+        authorization_is_required: Um auf diesen Teil der Plattform zugreifen zu können, müssen Sie Ihr Konto mit einer gültigen Berechtigung austatten (%{authorizations}).
+        login_and_authorization_is_required: Um auf diesen Teil der Plattform zugreifen zu können, müssen Sie sich einloggen und Ihr Konto autorisieren.
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |

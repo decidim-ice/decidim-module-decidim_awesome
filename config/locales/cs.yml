@@ -189,8 +189,8 @@ cs:
           roles:
             admin: Administrátor
             collaborator: Spolupracovník
+            evaluator: Hodnotitel
             moderator: Moderátor
-            valuator: Hodnotitel
         admin_authorizations:
           authorization:
             confirm_destroy: Opravdu chcete zničit tuto autorizaci? To může ovlivnit přístup uživatele k platformě.
@@ -644,6 +644,9 @@ cs:
           verify_with_all_these_options: 'Před přístupem k platformě se prosím ověřte všemi těmito metodami:'
           verify_with_any_of_these_options: 'Před přístupem k platformě si prosím ověřte alespoň jednu z těchto možností:'
           verify_with_method: Ověřit pomocí %{name}
+      session:
+        authorization_is_required: Chcete-li získat přístup k této části platformy, musíte svůj účet autorizovat pomocí platné autorizace (%{authorizations}).
+        login_and_authorization_is_required: Chcete-li získat přístup k této části platformy, musíte se přihlásit a autorizovat svůj účet.
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |
