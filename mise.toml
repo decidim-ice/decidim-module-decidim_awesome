@@ -1,7 +1,0 @@
-[env]
-DATABASE_USERNAME="decidim_app"
-DATABASE_PASSWORD="decidim123456789"
-CENSUS_URL="http://webapps01.getxo.org/WSConsultaPadron/WSConsultaPadron.asmx"
-
-[tools]
-node = "22"
