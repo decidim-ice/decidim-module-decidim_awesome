@@ -189,6 +189,7 @@ de:
           roles:
             admin: Admin
             collaborator: Mitarbeiter
+            evaluator: Schätzer
             moderator: Moderator
         admin_authorizations:
           authorization:
