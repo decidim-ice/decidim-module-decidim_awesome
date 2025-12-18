@@ -1,4 +1,5 @@
 <!-- insert_bottom "div#panel-visibility" -->
-<% if controller.action_name == "edit" %>
-  <%= render "decidim/decidim_awesome/admin/shared/visibility_notice", participatory_space: participatory_process_group %>
-<% end %>
+<% participatory_space = params[:id].nil? ? nil : participatory_process_group %>
+
+<%= render "decidim/decidim_awesome/admin/shared/visibility_notice", participatory_space: participatory_space %>
+
