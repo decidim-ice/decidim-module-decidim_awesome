@@ -291,6 +291,85 @@ module Decidim
         end
       end
 
+      initializer "decidim_decidim_awesome.autoblock_users" do |_app|
+        if DecidimAwesome.enabled?(:users_autoblocks)
+          if Decidim.module_installed?(:comments)
+            Decidim::DecidimAwesome.user_activities_registry.register(:comments) do |user_activity|
+              user_activity.counter = ->(user) { Decidim::Comments::Comment.where(author: user).count }
+            end
+            Decidim::DecidimAwesome.user_activities_registry.register(:comment_votes) do |user_activity|
+              user_activity.counter = ->(user) { Decidim::Comments::CommentVote.where(author: user).count }
+            end
+          end
+
+          if Decidim.module_installed?(:proposals)
+            Decidim::DecidimAwesome.user_activities_registry.register(:proposals) do |user_activity|
+              user_activity.counter = ->(user) { Decidim::Proposals::Proposal.coauthored_by(user).count }
+            end
+            Decidim::DecidimAwesome.user_activities_registry.register(:proposals_votes) do |user_activity|
+              user_activity.counter = ->(user) { Decidim::Proposals::ProposalVote.where(author: user).count }
+            end
+            Decidim::DecidimAwesome.user_activities_registry.register(:collaborative_drafts) do |user_activity|
+              user_activity.counter = ->(user) { Decidim::Proposals::CollaborativeDraft.coauthored_by(user).count }
+            end
+          end
+
+          Decidim::DecidimAwesome.user_activities_registry.register(:amendments) do |user_activity|
+            user_activity.counter = ->(user) { Decidim::Amendment.where(amender: user).count }
+          end
+
+          if Decidim.module_installed?(:debates)
+            Decidim::DecidimAwesome.user_activities_registry.register(:debates) do |user_activity|
+              user_activity.counter = ->(user) { Decidim::Debates::Debate.where(author: user).count }
+            end
+          end
+
+          if Decidim.module_installed?(:initiatives)
+            Decidim::DecidimAwesome.user_activities_registry.register(:initiatives) do |user_activity|
+              user_activity.counter = ->(user) { Decidim::Initiative.where(author: user).count }
+            end
+            Decidim::DecidimAwesome.user_activities_registry.register(:initiatives_votes) do |user_activity|
+              user_activity.counter = ->(user) { Decidim::InitiativesVote.where(author: user).count }
+            end
+          end
+
+          if Decidim.module_installed?(:meetings)
+            Decidim::DecidimAwesome.user_activities_registry.register(:meetings) do |user_activity|
+              user_activity.counter = ->(user) { Decidim::Meetings::Meeting.where(author: user).count }
+            end
+            Decidim::DecidimAwesome.user_activities_registry.register(:meetings_responses) do |user_activity|
+              user_activity.counter = ->(user) { Decidim::Meetings::Response.where(user:).count }
+            end
+          end
+
+          if Decidim.module_installed?(:budgets)
+            Decidim::DecidimAwesome.user_activities_registry.register(:budgets_orders) do |user_activity|
+              user_activity.counter = ->(user) { Decidim::Budgets::Order.where(user:).count }
+            end
+          end
+
+          Decidim::DecidimAwesome.user_activities_registry.register(:forms_responses) do |user_activity|
+            user_activity.counter = ->(user) { Decidim::Forms::Response.where(user:).count }
+          end
+
+          if Decidim.module_installed?(:blogs)
+            Decidim::DecidimAwesome.user_activities_registry.register(:blog_posts) do |user_activity|
+              user_activity.counter = ->(user) { Decidim::Blogs::Post.where(author: user).count }
+            end
+          end
+
+          Decidim::DecidimAwesome.user_activities_registry.register(:follows) do |user_activity|
+            user_activity.counter = ->(user) { Decidim::Follow.where(user:).count }
+          end
+          Decidim::DecidimAwesome.user_activities_registry.register(:likes) do |user_activity|
+            user_activity.counter = ->(user) { Decidim::Like.where(author: user).count }
+          end
+          Decidim::DecidimAwesome.user_activities_registry.register(:reports) do |user_activity|
+            user_activity.counter = ->(user) { Decidim::Report.where(user:).count }
+          end
+        end
+      end
+
       initializer "decidim_decidim_awesome.webpacker.assets_path" do
         Decidim.register_assets_path File.expand_path("app/packs", root)
       end
@@ -313,6 +392,13 @@ module Decidim
         Decidim.icons.register(name: "file-settings-line", icon: "file-settings-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "hashtag", icon: "hashtag", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "smartphone", icon: "smartphone-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "user-unfollow-line", icon: "user-unfollow-line", category: "system", description: "", engine: :decidim_awesome)
+      end
+
+      initializer "decidim_decidim_awesome.override_blocked_users_notifications" do
+        config.to_prepare do
+          Decidim::BlockUserMailer.prepend(Decidim::DecidimAwesome::BlockUserMailerOverride) if DecidimAwesome.enabled?(:users_autoblock)
+        end
       end
     end
   end

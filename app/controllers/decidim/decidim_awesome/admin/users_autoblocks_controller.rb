@@ -1,0 +1,193 @@
+# frozen_string_literal: true
+
+module Decidim
+  module DecidimAwesome
+    module Admin
+      # Autoblock users admin controller
+      class UsersAutoblocksController < DecidimAwesome::Admin::ConfigController
+        include ConfigConstraintsHelpers
+
+        helper_method :application_type_options, :types_options, :current_rules
+
+        layout "decidim/decidim_awesome/admin/application"
+
+        def index
+          load_calculations
+
+          @config_form = form(UsersAutoblocksConfigForm).from_model(current_config)
+        end
+
+        def new
+          @form = form(UsersAutoblocksForm).instance
+        end
+
+        def edit
+          @form = form(UsersAutoblocksForm).from_model(users_autoblock_rule)
+        end
+
+        def create
+          @form = form(UsersAutoblocksForm).from_params(params)
+
+          CreateUsersAutoblockRule.call(@form) do
+            on(:ok) do
+              flash[:notice] = I18n.t("success", scope: "decidim.decidim_awesome.admin.users_autoblocks.create")
+              remove_calculations_file
+
+              redirect_to decidim_admin_decidim_awesome.users_autoblocks_path
+            end
+
+            on(:invalid) do |message|
+              flash.now[:alert] = I18n.t("error", error: message, scope: "decidim.decidim_awesome.admin.users_autoblocks.create")
+              render :new
+            end
+          end
+        end
+
+        def update
+          @form = form(UsersAutoblocksForm).from_params(params)
+          UpdateUsersAutoblockRule.call(@form, users_autoblock_rule) do
+            on(:ok) do
+              flash[:notice] = I18n.t("success", scope: "decidim.decidim_awesome.admin.users_autoblocks.update")
+              remove_calculations_file
+
+              redirect_to decidim_admin_decidim_awesome.users_autoblocks_path
+            end
+
+            on(:invalid) do |message|
+              flash.now[:alert] = I18n.t("error", error: message, scope: "decidim.decidim_awesome.admin.users_autoblocks.update")
+              render :new
+            end
+          end
+        end
+
+        def destroy
+          DestroyUsersAutoblockRule.call(users_autoblock_rule, current_organization) do
+            on(:ok) do
+              flash[:notice] = I18n.t("success", scope: "decidim.decidim_awesome.admin.users_autoblocks.destroy")
+              remove_calculations_file
+            end
+
+            on(:invalid) do |message|
+              flash[:alert] = I18n.t("error", error: message, scope: "decidim.decidim_awesome.admin.users_autoblocks.destroy")
+            end
+          end
+
+          redirect_to decidim_admin_decidim_awesome.users_autoblocks_path
+        end
+
+        def detect_and_run
+          @config_form = form(UsersAutoblocksConfigForm).from_params(params)
+
+          AutoblockUsers.call(@config_form) do
+            on(:ok) do |count, block_performed|
+              flash[:notice] = if block_performed
+                                 I18n.t(
+                                   "success_block_html",
+                                   count:,
+                                   url: decidim_admin.moderated_users_path(blocked: true),
+                                   scope: "decidim.decidim_awesome.admin.users_autoblocks.detect_and_run"
+                                 )
+                               else
+                                 I18n.t(
+                                   "success_scores_calculation",
+                                   count:,
+                                   scope: "decidim.decidim_awesome.admin.users_autoblocks.detect_and_run"
+                                 )
+
+                               end
+            end
+
+            on(:invalid) do |messages|
+              error_msg = messages.is_a?(Enumerable) ? messages.join("<br/>") : messages.to_s
+              flash[:alert] = I18n.t("error", error: error_msg, scope: "decidim.decidim_awesome.admin.users_autoblocks.detect_and_run")
+            end
+          end
+
+          redirect_to decidim_admin_decidim_awesome.users_autoblocks_path
+        end
+
+        def calculate_scores
+          @config_form = form(UsersAutoblocksConfigForm).from_params(params)
+
+          AutoblockUsers.call(@config_form, perform_block: false) do
+            on(:ok) do |count|
+              flash[:notice] = I18n.t("success", count:, scope: "decidim.decidim_awesome.admin.users_autoblocks.calculate_scores")
+            end
+
+            on(:invalid) do |message|
+              flash[:alert] = I18n.t("error", error: message, scope: "decidim.decidim_awesome.admin.users_autoblocks.calculate_scores")
+            end
+          end
+
+          redirect_to decidim_admin_decidim_awesome.users_autoblocks_path
+        end
+
+        def download_report
+          if calculations_blob.present?
+            redirect_to Rails.application.routes.url_helpers.rails_blob_url(calculations_blob, only_path: true)
+          else
+            flash[:error] = t("decidim.decidim_awesome.admin.users_autoblocks.report_file_no_exists")
+            redirect_to decidim_admin_decidim_awesome.users_autoblocks_path
+          end
+        end
+
+        private
+
+        def types_options
+          Decidim::DecidimAwesome.users_autoblocks_types.index_by do |type|
+            I18n.t(type, scope: "decidim.decidim_awesome.admin.users_autoblocks.form.types_long")
+          end
+        end
+
+        def application_type_options
+          [:positive, :negative].index_by { |key| I18n.t(key, scope: "decidim.decidim_awesome.admin.users_autoblocks.form.application_types") }
+        end
+
+        def current_rules
+          @current_rules ||= (AwesomeConfig.find_by(var: :users_autoblocks, organization: current_organization)&.value || [])
+        end
+
+        def current_config
+          @current_config ||= OpenStruct.new(AwesomeConfig.find_by(var: :users_autoblocks_config, organization: current_organization)&.value || {})
+        end
+
+        def config_exists?
+          AwesomeConfig.exists?(var: :users_autoblocks_config, organization: current_organization)
+        end
+
+        def users_autoblock_rule
+          rule = current_rules.find { |r| md5(r.to_json) == params[:id] }
+          raise ActiveRecord::RecordNotFound if rule.blank?
+
+          OpenStruct.new(rule)
+        end
+
+        def calculations_blob
+          @calculations_blob ||= ActiveStorage::Blob.where(filename: "#{current_organization.id}-#{Decidim::DecidimAwesome::UsersAutoblocksScoresExporter::DATA_FILE_KEY}").last
+        end
+
+        def remove_calculations_file
+          return if calculations_blob.blank?
+
+          calculations_blob.purge
+        end
+
+        def load_calculations
+          @scores_counts = {}
+          return unless config_exists?
+          return if calculations_blob.blank?
+
+          calculations_blob.open do |file|
+            calculations = CSV.read(file.path, headers: true, col_sep: ";")
+
+            rules_headers = calculations.headers.grep(/ - \d+/)
+            counts = rules_headers.index_with { |rule_header| calculations.count { |row| row[rule_header].to_i.positive? } }
+
+            @threshold_detected_cases = calculations.count { |row| row["total_score"].to_i >= current_config.threshold }
+            @scores_counts = counts.transform_keys { |k| k.split(" - ").last.to_i }
+          end
+        end
+      end
+    end
+  end
+end

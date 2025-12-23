@@ -72,6 +72,19 @@ en:
           with these authorizations
       user:
         user_time_zone: Personal timezone
+      users_autoblocks:
+        allowlist: Allow list
+        application_type: Select application
+        blocklist: Block list
+        type: Rule
+        weight: Apply weight
+      users_autoblocks_config:
+        allow_performing_block_from_a_task: Allow to perform the configured users
+          block from a task
+        block_justification_message: Block justification message
+        notify_blocked_users: Notify blocked users
+        perform_block: Perform users blocking
+        threshold: Threshold
   decidim:
     admin:
       actions:
@@ -570,6 +583,7 @@ en:
           proposals: Proposals Hacks
           styles: Custom Styles
           surveys: Surveys & Forms
+          users_autoblocks: Users Automatic Blocks
           verifications: Verifications
         menu_hacks:
           create:
@@ -665,6 +679,115 @@ en:
         scoped_styles:
           menu:
             title: Public frontend
+        users_autoblocks:
+          calculate_scores:
+            error: There has been an error trying to calculate scores! %{error}
+            success:
+              one: Scores calculated successfully, 1 user detected. A detailed CSV
+                has been sent to admins by email
+              other: Scores calculated successfully, %{count} users detected. A detailed
+                CSV has been sent to admins by email
+              zero: Scores calculated successfully. No users have been found who have
+                a sufficient score to be blocked automatically
+          config_form:
+            allow_performing_block_from_a_task_help: A line must be added to your
+              server to perform the task. To do this schedule a `bundle exec rake
+              decidim_decidim_awesome:autoblock_users:run_scheduled_block` periodically.
+            block_justification_message_help: Justification that will receive the
+              detected users in their block notification
+            default_block_justification_message: Account blocked automatically
+            notify_blocked_users_help: Notify each blocked user. Note that if there
+              are many users to block generating a notification for each one can consume
+              a lot of resources
+            perform_block_message_help: Automatically block users who exceed the threshold
+            threshold_config_detected_cases: 'Number of cases that reach the threshold:
+              %{count}'
+            threshold_config_help: Define the numerical threshold (equal or greater
+              than) of the "spam risk index score" for automatic blocking of users
+          create:
+            error: Error creating rule! %{error}
+            success: Rule created successfully
+          destroy:
+            error: Error removing rule! %{error}
+            success: Rule removed successfully
+          detect_and_run:
+            error: There has been an error trying to block users!<br/>%{error}
+            success_block_html:
+              one: 1 user blocked successfully. You can check at <a href="%{url}">blocked
+                users</a>
+              other: '%{count} users blocked successfully. You can check at <a href="%{url}">blocked
+                users</a>'
+              zero: No users have been found who have a sufficient score to be blocked
+                automatically
+            success_scores_calculation:
+              one: 1 user found with enough score to be blocked
+              other: "%{count} users found with enough score to be blocked"
+              zero: No users have been found who have a sufficient score to be blocked
+                automatically
+          edit:
+            title: Edit users automatic block
+            update: Update
+          form:
+            application_types:
+              negative: When the rule condition is not met
+              positive: When the rule condition is met
+            types:
+              about_blank: About user section is blank
+              activities_blank: User has not created contents
+              email_domain: Email domain included in list
+              email_unconfirmed: User email is not confirmed
+              links_in_comments_or_about: Comments or about section contains links
+              links_in_comments_or_about_with_domains: Comments or about section contains
+                links with domains in allowlists or blocklists
+            types_long:
+              about_blank: About user section is blank (allow and block lists applies
+                to the user email domain)
+              activities_blank: User has not created contents (allow and block lists
+                applies to the user email domain)
+              email_domain: Email domain included in list (allow and block lists applies
+                to the user email domain)
+              email_unconfirmed: User email is not confirmed (allow and block lists
+                applies to the user email domain)
+              links_in_comments_or_about: Comments or about section contains links
+                (allow and block lists applies to the user email domain)
+              links_in_comments_or_about_with_domains: Comments or about section contains
+                links (allow and block lists are applied to the links found)
+            variables_help:
+              allow_domains_list: The rule does NOT apply to this list of domains
+                (separated by spaces)
+              block_domains_list: The rule only applies to this list of domains (separated
+                by spaces)
+          index:
+            allow: Allow
+            block: Block
+            calculate_scores: Calculate scores
+            confirm_block: Are you sure to block users automatically?
+            confirm_destroy: Are you sure to remove this users autoblock rule?
+            delete: Delete rule
+            description: 'Block users automatically based on their activities or suspicious
+              data
+
+              '
+            detect_and_run: Detect and block users
+            download_report_file: Download calculations report file
+            edit: Edit rule
+            headers:
+              allowlist: The rule does NOT apply to the domains
+              application_type: Application type
+              blocklist: The rule applies to the domains
+              count: Detected cases
+              type: Rule
+              weight: Weight
+            new: New rule
+            title: Users automatic blocks
+          new:
+            create: Create
+            title: New users automatic block
+          report_file_no_exists: Report file does not exist. Click on Calculate scores
+            to create it.
+          update:
+            error: Error updating rule! %{error}
+            success: Rule updated successfully
         visibility:
           info_html: You can manage additional access restrictions using verifications
             with %{awesome_link}.
@@ -781,6 +904,17 @@ en:
             Admins will be able to manually verify users with these authorizations.
             <br>Use this feature with caution, as it can lead to security issues.
           awesome_tweaks: Decidim Awesome Tweaks
+      users_autoblocks_report_mailer:
+        notify:
+          body_calculated: There are %{count} users who have been detected to block.
+            The automatic block has not been performed yet.
+          body_check_html: You can check at <a href="%{url}">blocked users</a>.
+          body_performed: There are %{count} users who have been automatically blocked.
+          details: Justification sent to blocked users
+          greetings: Greetings,<br/>%{organization_name}<br/><a href="%{organization_url}">%{organization_url}</a>
+          hello: Hello %{admin},
+          subject_calculated: Users detected to be blocked in %{organization_name}
+          subject_performed: Users blocked automatically in %{organization_name}
       validators:
         too_much_caps: Is using too many capital letters (over %{percent}% of the
           text)

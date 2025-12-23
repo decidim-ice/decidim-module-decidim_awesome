@@ -12,6 +12,7 @@ module Decidim
     autoload :MenuHacker, "decidim/decidim_awesome/menu_hacker"
     autoload :CustomFields, "decidim/decidim_awesome/custom_fields"
     autoload :VotingManifest, "decidim/decidim_awesome/voting_manifest"
+    autoload :UserActivityManifest, "decidim/decidim_awesome/user_activity_manifest"
     autoload :Lock, "decidim/decidim_awesome/lock"
     autoload :TranslatedCustomFieldsType, "decidim/decidim_awesome/api/types/translated_custom_fields_type"
     autoload :LocalizedCustomFieldsType, "decidim/decidim_awesome/api/types/localized_custom_fields_type"
@@ -64,6 +65,26 @@ module Decidim
     # In the public side only
     config_accessor :intergram_for_public do
       true
+    end
+
+    # Enables the user autoblock feature that allows admins to automatically block users
+    # based on configurable detection rules and scoring thresholds.
+    # Set to :disabled to completely remove this feature
+    config_accessor :users_autoblocks do
+      true
+    end
+
+    # Configuration for available user autoblock detection types
+    # Array of strings representing the available detection type identifiers
+    config_accessor :users_autoblocks_types do
+      %w(
+        about_blank
+        activities_blank
+        links_in_comments_or_about
+        email_unconfirmed
+        email_domain
+        links_in_comments_or_about_with_domains
+      )
     end
 
     # Configuration options to handle different validations in proposals
@@ -368,6 +389,11 @@ module Decidim
     # Public: Stores an instance of ContentBlockRegistry
     def self.voting_registry
       @voting_registry ||= Decidim::ManifestRegistry.new("decidim_awesome/voting")
+    end
+
+    # Public: Stores a manifest registry of user activities
+    def self.user_activities_registry
+      @user_activities_registry ||= Decidim::ManifestRegistry.new("decidim_awesome/user_activities")
     end
 
     #

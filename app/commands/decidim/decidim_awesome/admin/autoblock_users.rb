@@ -1,0 +1,166 @@
+# frozen_string_literal: true
+
+module Decidim
+  module DecidimAwesome
+    module Admin
+      class AutoblockUsers < Command
+        include Decidim::TranslatableAttributes
+
+        # Public: Initializes the command.
+        #
+        def initialize(form)
+          @form = form
+          @users_autoblocks = AwesomeConfig.find_or_initialize_by(var: :users_autoblocks, organization: current_organization)
+          @current_config = AwesomeConfig.find_or_initialize_by(var: :users_autoblocks_config, organization: current_organization)
+          @perform_block = @form.perform_block
+        end
+
+        # Executes the command. Broadcasts these events:
+        #
+        # - :ok when everything is valid.
+        # - :invalid if we couldn't proceed.
+        #
+        # Returns nothing.
+        def call
+          return broadcast(:invalid, @form.errors.full_messages) if form.invalid?
+
+          save_configuration!
+          calculate_scores
+          detected_users_count = detected_users.length
+
+          if detected_users_count.positive?
+            mark_users_for_autoblock!
+            send_notification_to_admins!
+            block_users! if perform_block
+          end
+
+          broadcast(:ok, detected_users_count, perform_block)
+        rescue StandardError => e
+          broadcast(:invalid, e.message)
+        end
+
+        private
+
+        attr_reader :form, :users_autoblocks, :current_config, :perform_block
+
+        delegate :current_organization, :current_user, to: :form
+
+        def save_configuration!
+          current_config.value = form.to_params || {}
+          current_config.save
+        end
+
+        def mark_users_for_autoblock!
+          notify_autoblock = notify_blocked_users
+
+          detected_users.find_in_batches do |group|
+            group.each do |user|
+              next if user.extended_data["autoblock"] && user.extended_data["notify_autoblock"] == notify_autoblock
+
+              user.update_attribute(:extended_data, (user.extended_data || {}).merge("autoblock" => true, "notify_autoblock" => notify_autoblock)) # rubocop:disable Rails/SkipsModelValidations
+            end
+          end
+
+          @detected_users = nil
+        end
+
+        def block_users!
+          message = block_justification_message
+
+          detected_users.find_in_batches do |group|
+            group.each do |user|
+              create_report!(user)
+              check_user_validation!(user)
+
+              block_form = Decidim::Admin::BlockUserForm.from_model(user).with_context(current_organization:, current_user:)
+              I18n.with_locale(user.locale || current_organization.default_locale || "en") do
+                block_form.justification = message
+              end
+              block_form.hide = true
+
+              Decidim::Admin::BlockUser.call(block_form) do
+                on(:invalid) do
+                  raise "User could not be blocked"
+                end
+              end
+            end
+          end
+        end
+
+        def block_justification_message
+          if notify_blocked_users
+            translated_attribute(current_config.value&.dig("block_justification_message"))
+          else
+            form.default_block_justification_message
+          end
+        end
+
+        def notify_blocked_users
+          return if current_config.value.blank?
+
+          current_config.value["notify_blocked_users"]
+        end
+
+        def create_report!(user)
+          moderation = UserModeration.find_or_create_by!(user:)
+
+          unless UserReport.exists?(moderation:, user:)
+            UserReport.create!(
+              moderation:,
+              user:,
+              reason: "does_not_belong",
+              details: "Autoblock"
+            )
+          end
+
+          moderation.update!(report_count: moderation.report_count + 1)
+        end
+
+        def check_user_validation!(user)
+          return if user.valid?
+
+          user.nickname = Decidim::User.nicknamize("user_blocked_#{SecureRandom.alphanumeric(8)}", current_organization.id)
+
+          user.save!
+        end
+
+        def send_notification_to_admins!
+          current_organization.admins.each do |admin|
+            next unless admin.email_on_moderations
+
+            Decidim::DecidimAwesome::UsersAutoblocksReportJob.perform_later(admin, detected_users.map { |user| user.id.to_s }, block_performed: perform_block)
+          end
+        end
+
+        def detected_users
+          @detected_users ||= begin
+            threshold = current_config.value&.dig("threshold")
+            if threshold.present?
+              user_ids = @block_data.select { |item| item[:total_score] >= threshold }.map { |item| item[:id] }
+              users_base_relation.where(organization: current_organization, id: user_ids)
+            else
+              Decidim::User.none
+            end
+          end
+        end
+
+        def calculate_scores
+          exporter = Decidim::DecidimAwesome::UsersAutoblocksScoresExporter.new(current_organization, users_base_relation)
+
+          @export_path = exporter.export
+          @block_data = exporter.data
+        end
+
+        def users_base_relation
+          @users_base_relation ||= Decidim::User
+                                   .where(organization: current_organization)
+                                   .joins("LEFT JOIN decidim_authorizations ON decidim_authorizations.decidim_user_id = decidim_users.id")
+                                   .where(decidim_authorizations: { granted_at: nil })
+                                   .where.not(admin: true)
+                                   .not_deleted
+                                   .not_blocked
+        end
+      end
+    end
+  end
+end
