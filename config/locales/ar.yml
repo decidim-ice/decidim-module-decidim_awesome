@@ -10,3 +10,29 @@ ar:
         allow_images_in_proposals: السماح بالصور في محرر الاقتراحات
         allow_videos_in_editors: السماح بالفيديوهات في محرر HTML
         authorization_options_form: خيارات الصلاحيات
+        auto_save_forms: تفعيل الحفظ التلقائي للنماذج محليًا
+        force_authorizations: مجموعة الصلاحيات %{id}
+        hashcash_login: تفعيل حماية تسجيل الدخول للمستخدمين الحاليين (Hashcash bot)
+        hashcash_login_bits: عدد بتات حماية تسجيل الدخول (Hashcash bot)
+        hashcash_signup: تفعيل حماية إنشاء الحساب للمستخدمين الجدد (Hashcash bot)
+        hashcash_signup_bits: عدد بتات حماية إنشاء الحساب (Hashcash bot)
+        intergram_auto_no_response: رسالة تُرسل بعد دقيقة واحدة من إرسال المستخدم لرسالته الأولى وعدم تلقي أي رد
+        intergram_auto_response: رسالة تُرسل فوراً بعد إرسال المستخدم لرسالته الأولى
+        intergram_chat_id: رَقْم الدردشة
+        intergram_color: لون القطعة
+        intergram_for_admins: تفعيل دردشة Intergram في لوحة الإدارة
+        intergram_intro_message: رسالة الترحيب عندما يفتح المستخدم الدردشة للمرة الأولى
+        intergram_require_login: فقط للمستخدمين المسجلين
+        intergram_title_closed: عنوان الدردشة المغلقة
+        intergram_title_open: عنوان الدردشة المفتوحة
+        intergram_use_floating_button: إذا تم تحديده، المحادثة المغلقة هي دائماً زر بدلاً من النص
+        proposal_custom_fields: حقول مخصصة %{id}
+        proposal_private_custom_fields: حقول مخصصة خاصة %{id}
+        scoped_admin_styles: أنماط مخصصة %{id}
+        scoped_admins: مجموعة المشرفين المحدودة الصلاحيات %{id}
+        scoped_styles: أنماط مخصصة %{id}
+        user_timezone: السماح للمستخدمين بتعيين المنطقة الزمنية في ملفهم الشخصي
+        validate_body_max_marks_together: الحد الأقصى للرموز المتتالية في النص
+        validate_body_min_length: الحد الأدنى للأحرف المطلوبة في النص
+        validate_title_max_marks_together: الحد الأقصى للرموز المتتالية في العنوان
+        validate_title_min_length: الحد الأدنى للأحرف المطلوبة في العنوان
