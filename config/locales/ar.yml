@@ -1,0 +1,7 @@
+---
+ar:
+  activemodel:
+    attributes:
+      config:
+        additional_proposal_sortings: تم تفعيل خيارات فرز إضافية
+        allow_images_in_proposals: السماح بالصور في محرر الاقتراحات
