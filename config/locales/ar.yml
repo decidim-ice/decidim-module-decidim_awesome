@@ -24,7 +24,81 @@ ar:
         scoped_admins: مجموعة المشرفين المحدودة الصلاحيات %{id}
         scoped_styles: أنماط مخصصة %{id}
         user_timezone: السماح للمستخدمين بتعيين المنطقة الزمنية في ملفهم الشخصي
+        validate_body_max_caps_percent: Maximum allowed percentage of capital letters for the body
         validate_body_max_marks_together: الحد الأقصى للرموز المتتالية في النص
         validate_body_min_length: الحد الأدنى للأحرف المطلوبة في النص
+        validate_body_start_with_caps: Force the body to start with a capital letter
+        validate_title_max_caps_percent: Maximum allowed percentage of capital letters for the title
         validate_title_max_marks_together: الحد الأقصى للرموز المتتالية في العنوان
         validate_title_min_length: الحد الأدنى للأحرف المطلوبة في العنوان
+        validate_title_start_with_caps: Force the title to start with a capital letter
+      constraint:
+        component_id: أو تحديداً في
+        component_manifest: فقط في المكونات من نوع
+        participatory_space_manifest: تطبيق على المساحات التشاركية من نوع
+        participatory_space_slug: فقط في
+      custom_redirect:
+        active: مُفعّل
+        destination: الوجهة
+        origin: المصدر
+        pass_query: تمرير سلسلة الاستعلام (Query String) إلى الوجهة
+        status: الحالة
+      menu:
+        position: الموضع
+        raw_label: الملصق
+        target: يفتح في
+        url: الرابط
+        visibility: الظهور
+      organization:
+        awesome_admins_available_authorizations: السماح للمشرفين بالتحقق من المستخدمين يدوياً بهذه التراخيص
+      user:
+        user_time_zone: المنطقة الزمنية الشخصية
+  decidim:
+    admin:
+      actions:
+        manage: إدارة
+      filters:
+        admin_accountability:
+          admin_role_type:
+            label: نوع الدور
+          participatory_space_type_eq:
+            label: نوع المساحة التشاركية
+          role:
+            label: الدور
+          role_type_eq:
+            label: نوع الدور
+        label:
+          search_field_end_date: 'حتى تاريخ:'
+          search_field_start_date: 'من تاريخ:'
+        search_placeholder:
+          user_name_or_user_email_cont: البحث حسب اسم المستخدم ، البريد الإلكتروني
+      menu:
+        admin_accountability: مساءلة المشرف
+        decidim_awesome: Decidim Awesome
+    components:
+      awesome_iframe:
+        name: إطار ملء الشاشة
+        settings:
+          global:
+            announcement: إشعار
+            iframe: رمز الإطار
+            iframe_help: '"ضع الكود الخاص بك كملف html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. سيتم تنقية المحتوى من وسوم HTML الأخرى. تأكد من استخدام 100% كعرض (width) لملء الشاشة."'
+            viewport_width: تحديد الحد الأقصى لعرض التطبيق
+          step:
+            announcement: إشعار
+            iframe: رمز الإطار
+      awesome_map:
+        name: Awesome Map
+        settings:
+          global:
+            announcement: إشعار
+            collapse: ابدأ بقائمة مصغرة
+            map_center: مركز الخريطة (خط العرض، خط الطول)
+            map_center_help: 'استخدم النقاط العشرية (مثال: 41.38879، 2.15899). اترك الحقل فارغاً لملاءمة جميع العلامات تلقائياً'
+            map_height: ارتفاع الخريطة (بكسل)
+            map_zoom: مستوى التكبير (أي رقم بين 0 و 18)
+            map_zoom_help: ينطبق فقط إذا تم تعريف مركز الخريطة
+            menu_amendments: إظهار التعديلات
+            menu_hashtags: إظهار قائمة بحث Hashtag
+            menu_meetings: عرض الاجتماعات
+            menu_merge_components: دمج جميع المكونات من نفس النوع في القائمة
