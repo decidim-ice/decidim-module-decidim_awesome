@@ -1,0 +1,12 @@
+ar:
+  active_hashcash:
+    submit_filter: تصفية
+    waiting_label: قيد التحقق ...
+  activemodel:
+    attributes:
+      config:
+        additional_proposal_sortings: تم تفعيل خيارات فرز إضافية
+        allow_images_in_editors: السماح بالصور في محرر HTML
+        allow_images_in_proposals: السماح بالصور في محرر الاقتراحات
+        allow_videos_in_editors: السماح بالفيديوهات في محرر HTML
+        authorization_options_form: خيارات الصلاحيات
