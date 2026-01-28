@@ -681,6 +681,7 @@ cs:
     download_your_data:
       show:
         admin_actions: Akce administrátora
+        awesome_private_proposals: Návrhy exportovány se soukromými poli
     meetings:
       meetings_map:
         view_meeting: Zobrazit schůzku
