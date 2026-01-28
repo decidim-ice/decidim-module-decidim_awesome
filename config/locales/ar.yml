@@ -112,6 +112,21 @@ ar:
             menu_hashtags: إظهار قائمة بحث Hashtag
             menu_meetings: عرض الاجتماعات
             menu_merge_components: دمج جميع المكونات من نفس النوع في القائمة
+            truncate: الحد الأقصى لعدد الحروف لوصف النوافذ المنبثقة
+          step:
+            announcement: إشعار
+            show_accepted: إظهار المقترحات المقبولة
+            show_evaluating: إظهار المقترحات قيد التقييم
+            show_not_answered: إظهار المقترحات التي لم تتم الإجابة عليها
+            show_rejected: إظهار المقترحات المرفوضة
+            show_withdrawn: إظهار المقترحات المسحوبة
+      proposals:
+        settings:
+          global:
+            awesome_voting_manifest: نوع الدعم
+            awesome_voting_manifest_help_html: <span class="text-alert">يرجى الانتباه إلى أن تغيير هذا الإعداد في منتصف فترة التصويت قد يؤدي إلى نتائج غير دقيقة أو غير متوقعة.</span><br>لاحظ أيضاً أنه لا يمكن تعديل هذا الإعداد إلا إذا كان المكوّن لا يحتوي على أي تأييدات بعد.
+            awesome_voting_manifest_options:
+              default: تصويت بسيط (الافتراضي)
     decidim_awesome:
       admin:
         hashcash:
