@@ -127,6 +127,19 @@ ar:
             awesome_voting_manifest_help_html: <span class="text-alert">يرجى الانتباه إلى أن تغيير هذا الإعداد في منتصف فترة التصويت قد يؤدي إلى نتائج غير دقيقة أو غير متوقعة.</span><br>لاحظ أيضاً أنه لا يمكن تعديل هذا الإعداد إلا إذا كان المكوّن لا يحتوي على أي تأييدات بعد.
             awesome_voting_manifest_options:
               default: تصويت بسيط (الافتراضي)
+              voting_cards: التصويت باستخدام البطاقات الملونة
+            default_sort_order_options:
+              az: أبجدياً (من أ إلى ي)
+              supported_first: الأكثر تأييداً في البداية
+              supported_last: الأكثر تأييداً في الآخر
+              za: عكسياً (من ي إلى أ)
+            limit_pending_amendments: السماح بتعديل معلق واحد فقط لكل مقترح.
+            sort_orders_enabled: أنواع الترتيب المفعّلة
+            voting_cards_box_title: عنوان صندوق التصويت
+            voting_cards_box_title_help: الافتراضي هو "صوّت على هذا المقترح". ضع "-" للإخفاء.
+            voting_cards_instructions: تعليمات/مساعدة الدعم (نافذة منبثقة قابلة للإغلاق)
+            voting_cards_instructions_help: القيمة الافتراضية هي "يرجى قراءة قواعد الانتخابات بعناية لفهم كيفية استخدام صوتك من قبل %{organization}"
+            voting_cards_show_abstain: أضف خيار الامتناع عن التصويت
     decidim_awesome:
       admin:
         hashcash:
