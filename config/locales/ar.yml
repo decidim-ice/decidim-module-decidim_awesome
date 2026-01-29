@@ -125,3 +125,6 @@ ar:
           step:
             default_sort_order_options:
               az: أبجدياً (من أ إلى ي)
+              supported_first: الأكثر تأييداً في البداية
+              supported_last: الأكثر تأييداً في الآخر
+              za: عكسياً (من ي إلى أ)
