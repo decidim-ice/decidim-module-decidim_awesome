@@ -146,7 +146,11 @@ ar:
               az: أبجدياً (من أ إلى ي)
               supported_first: الأكثر تأييداً في البداية
               supported_last: الأكثر تأييداً في الآخر
+              za: عكسياً (من ي إلى أ)
     decidim_awesome:
+      account:
+        timezone_select:
+          time_zone_helper: استخدم منطقتك الزمنية الشخصية لعرض التواريخ بتوقيتك المحلي عند تسجيل الدخول.
       admin:
         hashcash:
           filters:
