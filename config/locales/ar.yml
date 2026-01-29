@@ -143,6 +143,12 @@ ar:
             voting_cards_instructions: تعليمات/مساعدة الدعم (نافذة منبثقة قابلة للإغلاق)
             voting_cards_instructions_help: القيمة الافتراضية هي "يرجى قراءة قواعد الانتخابات بعناية لفهم كيفية استخدام صوتك من قبل %{organization}"
             voting_cards_show_abstain: أضف خيار الامتناع عن التصويت
+            voting_cards_show_modal_help: إظهار نافذة التعليمات/المساعدة عند النقر على زر الدعم
+          step:
+            default_sort_order_options:
+              az: أبجدياً (من أ إلى ي)
+              supported_first: الأكثر تأييداً في البداية
+              supported_last: الأكثر تأييداً في الآخر
     decidim_awesome:
       admin:
         hashcash:
