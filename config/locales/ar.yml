@@ -128,3 +128,21 @@ ar:
               supported_first: الأكثر تأييداً في البداية
               supported_last: الأكثر تأييداً في الآخر
               za: عكسياً (من ي إلى أ)
+    decidim_awesome:
+      admin:
+        actions: الإجراءات
+        admin_accountability:
+          admin_roles:
+            admin: المشرف العام
+            user_manager: مدير المستخدمين
+          created_at: تاريخ إنشاء الدور
+          currently_active: ناشط حاليا
+          deleted_user: مستخدم محذوف
+          email: البريد الإلكتروني
+          exports:
+            button: تصدير هذا البحث
+            export_as: تصدير بصيغة %{export_format}
+            export_format:
+              csv: CSV
+              json: JSON
+              xlsx: XLSX
