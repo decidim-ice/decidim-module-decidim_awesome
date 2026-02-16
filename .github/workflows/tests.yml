@@ -70,6 +70,14 @@ jobs:
         name: Create the screenshots folder
         shell: "bash"
 
+      - name: Force graphql v15 in Dummy App
+        run: |
+          cd spec/decidim_dummy_app
+          npm install graphql@15.8.0 --save-exact
+          # Opcional: netejar la cache de webpack si existeix
+          rm -rf tmp/cache/webpacker
+        shell: bash
+
       - run: bundle exec rails assets:precompile
         name: Precompile assets
         working-directory: ./spec/decidim_dummy_app/
