@@ -711,8 +711,8 @@ en:
           process_group: Restrict to process group
           process_type: Type of processes
           process_type_mixed_hint: In mixed mode, processes and groups are interleaved
-            up to the maximum amount. Processes are sorted by weight (ascending). If
-            one type runs out, the remaining slots are filled with the other.
+            up to the maximum amount. Processes are sorted by weight (ascending).
+            If one type runs out, the remaining slots are filled with the other.
           process_types:
             all: All processes and groups mixed
             groups: Only process groups

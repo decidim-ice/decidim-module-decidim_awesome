@@ -1,6 +1,6 @@
 import TomSelect from "tom-select/dist/cjs/tom-select.popular";
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("turbo:load", () => {
   const criteriaContainer = document.querySelector("[data-awesome-processes-criteria]");
   if (!criteriaContainer) {
     return;

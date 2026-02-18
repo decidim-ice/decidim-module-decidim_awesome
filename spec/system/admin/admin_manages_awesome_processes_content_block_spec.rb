@@ -92,43 +92,61 @@ describe "Admin manages Awesome Processes content block" do
     describe "dynamic form behavior" do
       it "hides processes multiselect when selection_criteria is 'Active'" do
         expect(page).to have_select("content_block_settings_selection_criteria", selected: "Active")
-        expect(page).to have_css("[data-awesome-processes-manual]", visible: :hidden)
+        within "form" do
+          expect(page).to have_no_css("[data-awesome-processes-manual]", text: "Processes")
+        end
       end
 
       it "shows processes multiselect when switching to 'Manual'" do
         select "Manual", from: "content_block_settings_selection_criteria"
-        expect(page).to have_css("[data-awesome-processes-manual]", visible: :visible)
+        within "[data-awesome-processes-manual]" do
+          expect(page).to have_content("Processes")
+        end
       end
 
       it "hides multiselect again when switching back to 'Active'" do
         select "Manual", from: "content_block_settings_selection_criteria"
-        expect(page).to have_css("[data-awesome-processes-manual]", visible: :visible)
+        within "[data-awesome-processes-manual]" do
+          expect(page).to have_content("Processes")
+        end
 
         select "Active", from: "content_block_settings_selection_criteria"
-        expect(page).to have_css("[data-awesome-processes-manual]", visible: :hidden)
+        within "form" do
+          expect(page).to have_no_css("[data-awesome-processes-manual]", text: "Processes")
+        end
       end
 
       it "shows mixed hint when process_type is 'All processes and groups mixed'" do
         expect(page).to have_select("content_block_settings_process_type", selected: "All processes and groups mixed")
-        expect(page).to have_css("[data-awesome-processes-mixed-hint]", visible: :visible)
+        within "[data-awesome-processes-type]" do
+          expect(page).to have_content("In mixed mode")
+        end
       end
 
       it "hides mixed hint when switching to 'Only processes'" do
         select "Only processes", from: "content_block_settings_process_type"
-        expect(page).to have_css("[data-awesome-processes-mixed-hint]", visible: :hidden)
+        within "[data-awesome-processes-type]" do
+          expect(page).to have_no_content("In mixed mode")
+        end
       end
 
       it "hides mixed hint when switching to 'Only process groups'" do
         select "Only process groups", from: "content_block_settings_process_type"
-        expect(page).to have_css("[data-awesome-processes-mixed-hint]", visible: :hidden)
+        within "[data-awesome-processes-type]" do
+          expect(page).to have_no_content("In mixed mode")
+        end
       end
 
       it "shows mixed hint again when switching back to 'All'" do
         select "Only processes", from: "content_block_settings_process_type"
-        expect(page).to have_css("[data-awesome-processes-mixed-hint]", visible: :hidden)
+        within "[data-awesome-processes-type]" do
+          expect(page).to have_no_content("In mixed mode")
+        end
 
         select "All processes and groups mixed", from: "content_block_settings_process_type"
-        expect(page).to have_css("[data-awesome-processes-mixed-hint]", visible: :visible)
+        within "[data-awesome-processes-type]" do
+          expect(page).to have_content("In mixed mode")
+        end
       end
     end
 

@@ -13,10 +13,12 @@
     <%= settings_fields.select :process_type,
                                process_type_options,
                                label: t("process_type", scope: i18n_scope) %>
-    <span class="help-text" data-awesome-processes-mixed-hint
-          <%= "hidden" unless settings_fields.object.process_type == "all" %>>
-      <%= t("process_type_mixed_hint", scope: i18n_scope) %>
-    </span>
+    <div data-awesome-processes-mixed-hint
+         <%= "hidden" unless settings_fields.object.process_type == "all" %>>
+      <span class="help-text">
+        <%= t("process_type_mixed_hint", scope: i18n_scope) %>
+      </span>
+    </div>
   </div>
 
   <div class="row column">
