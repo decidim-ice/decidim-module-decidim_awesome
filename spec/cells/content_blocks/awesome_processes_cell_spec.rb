@@ -129,6 +129,15 @@ module Decidim::DecidimAwesome
       expect(subject).to have_link("See all processes")
     end
 
+    describe "#max_results" do
+      let(:settings) { { max_results: 3 } }
+
+      it "returns the configured max_results from settings" do
+        cell_instance = cell(content_block.cell, content_block)
+        expect(cell_instance.max_results).to eq(3)
+      end
+    end
+
     context "when no processes match" do
       it "does not render content" do
         org_without_processes = create(:organization)
