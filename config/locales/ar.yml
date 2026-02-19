@@ -1,0 +1,185 @@
+---
+ar:
+  activemodel:
+    attributes:
+      config:
+        additional_proposal_sortings: تم تفعيل خيارات فرز إضافية
+        allow_images_in_editors: السماح بالصور في محرر HTML
+        allow_images_in_proposals: السماح بالصور في محرر الاقتراحات
+        allow_videos_in_editors: السماح بالفيديوهات في محرر HTML
+        auto_save_forms: تفعيل الحفظ التلقائي للنماذج محليًا
+        intergram_auto_no_response: رسالة تُرسل بعد دقيقة واحدة من إرسال المستخدم لرسالته الأولى وعدم تلقي أي رد
+        intergram_auto_response: رسالة تُرسل فوراً بعد إرسال المستخدم لرسالته الأولى
+        intergram_chat_id: رَقْم الدردشة
+        intergram_color: لون القطعة
+        intergram_for_admins: تفعيل دردشة Intergram في لوحة الإدارة
+        intergram_intro_message: رسالة الترحيب عندما يفتح المستخدم الدردشة للمرة الأولى
+        intergram_require_login: فقط للمستخدمين المسجلين
+        intergram_title_closed: عنوان الدردشة المغلقة
+        intergram_title_open: عنوان الدردشة المفتوحة
+        intergram_use_floating_button: إذا تم تحديده، المحادثة المغلقة هي دائماً زر بدلاً من النص
+        proposal_custom_fields: حقول مخصصة %{id}
+        proposal_private_custom_fields: حقول مخصصة خاصة %{id}
+        scoped_admin_styles: أنماط مخصصة %{id}
+        scoped_admins: مجموعة المشرفين المحدودة الصلاحيات %{id}
+        scoped_styles: أنماط مخصصة %{id}
+        user_timezone: السماح للمستخدمين بتعيين المنطقة الزمنية في ملفهم الشخصي
+        validate_body_max_caps_percent: Maximum allowed percentage of capital letters for the body
+        validate_body_max_marks_together: الحد الأقصى للرموز المتتالية في النص
+        validate_body_min_length: الحد الأدنى للأحرف المطلوبة في النص
+        validate_body_start_with_caps: Force the body to start with a capital letter
+        validate_title_max_caps_percent: Maximum allowed percentage of capital letters for the title
+        validate_title_max_marks_together: الحد الأقصى للرموز المتتالية في العنوان
+        validate_title_min_length: الحد الأدنى للأحرف المطلوبة في العنوان
+        validate_title_start_with_caps: Force the title to start with a capital letter
+      constraint:
+        component_id: أو تحديداً في
+        component_manifest: فقط في المكونات من نوع
+        participatory_space_manifest: تطبيق على المساحات التشاركية من نوع
+        participatory_space_slug: فقط في
+      custom_redirect:
+        active: مُفعّل
+        destination: الوجهة
+        origin: المصدر
+        pass_query: تمرير سلسلة الاستعلام (Query String) إلى الوجهة
+        status: الحالة
+      menu:
+        position: الموضع
+        raw_label: الملصق
+        target: يفتح في
+        url: الرابط
+        visibility: الظهور
+      organization:
+        awesome_admins_available_authorizations: السماح للمشرفين بالتحقق من المستخدمين يدوياً بهذه التراخيص
+      user:
+        user_time_zone: المنطقة الزمنية الشخصية
+  decidim:
+    admin:
+      actions:
+        manage: إدارة
+      filters:
+        admin_accountability:
+          admin_role_type:
+            label: نوع الدور
+          participatory_space_type_eq:
+            label: نوع المساحة التشاركية
+          role:
+            label: الدور
+          role_type_eq:
+            label: نوع الدور
+        label:
+          search_field_end_date: 'حتى تاريخ:'
+          search_field_start_date: 'من تاريخ:'
+        search_placeholder:
+          user_name_or_user_email_cont: البحث حسب اسم المستخدم ، البريد الإلكتروني
+      menu:
+        admin_accountability: مساءلة المشرف
+        decidim_awesome: Decidim Awesome
+    components:
+      awesome_iframe:
+        name: إطار ملء الشاشة
+        settings:
+          global:
+            announcement: إشعار
+            iframe: رمز الإطار
+            iframe_help: '"ضع الكود الخاص بك كملف html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. سيتم تنقية المحتوى من وسوم HTML الأخرى. تأكد من استخدام 100% كعرض (width) لملء الشاشة."'
+            viewport_width: تحديد الحد الأقصى لعرض التطبيق
+          step:
+            announcement: إشعار
+            iframe: رمز الإطار
+      awesome_map:
+        name: Awesome Map
+        settings:
+          global:
+            announcement: إشعار
+            collapse: ابدأ بقائمة مصغرة
+            map_center: مركز الخريطة (خط العرض، خط الطول)
+            map_center_help: 'استخدم النقاط العشرية (مثال: 41.38879، 2.15899). اترك الحقل فارغاً لملاءمة جميع العلامات تلقائياً'
+            map_height: ارتفاع الخريطة (بكسل)
+            map_zoom: مستوى التكبير (أي رقم بين 0 و 18)
+            map_zoom_help: ينطبق فقط إذا تم تعريف مركز الخريطة
+            menu_amendments: إظهار التعديلات
+            menu_hashtags: إظهار قائمة بحث Hashtag
+            menu_meetings: عرض الاجتماعات
+            menu_merge_components: دمج جميع المكونات من نفس النوع في القائمة
+            truncate: الحد الأقصى لعدد الحروف لوصف النوافذ المنبثقة
+          step:
+            announcement: إشعار
+            show_accepted: إظهار المقترحات المقبولة
+            show_evaluating: إظهار المقترحات قيد التقييم
+            show_not_answered: إظهار المقترحات التي لم تتم الإجابة عليها
+            show_rejected: إظهار المقترحات المرفوضة
+            show_withdrawn: إظهار المقترحات المسحوبة
+      proposals:
+        settings:
+          global:
+            awesome_voting_manifest: نوع الدعم
+            awesome_voting_manifest_help_html: <span class="text-alert">يرجى الانتباه إلى أن تغيير هذا الإعداد في منتصف فترة التصويت قد يؤدي إلى نتائج غير دقيقة أو غير متوقعة.</span><br>لاحظ أيضاً أنه لا يمكن تعديل هذا الإعداد إلا إذا كان المكوّن لا يحتوي على أي تأييدات بعد.
+            awesome_voting_manifest_options:
+              default: تصويت بسيط (الافتراضي)
+              voting_cards: التصويت باستخدام البطاقات الملونة
+            default_sort_order_options:
+              az: أبجدياً (من أ إلى ي)
+              supported_first: الأكثر تأييداً في البداية
+              supported_last: الأكثر تأييداً في الآخر
+              za: عكسياً (من ي إلى أ)
+            limit_pending_amendments: السماح بتعديل معلق واحد فقط لكل مقترح.
+            sort_orders_enabled: أنواع الترتيب المفعّلة
+            voting_cards_box_title: عنوان صندوق التصويت
+            voting_cards_box_title_help: الافتراضي هو "صوّت على هذا المقترح". ضع "-" للإخفاء.
+            voting_cards_instructions_help: القيمة الافتراضية هي "يرجى قراءة قواعد الانتخابات بعناية لفهم كيفية استخدام صوتك من قبل %{organization}"
+            voting_cards_show_abstain: أضف خيار الامتناع عن التصويت
+            voting_cards_show_modal_help: إظهار نافذة التعليمات/المساعدة عند النقر على زر الدعم
+          step:
+            default_sort_order_options:
+              az: أبجدياً (من أ إلى ي)
+              supported_first: الأكثر تأييداً في البداية
+              supported_last: الأكثر تأييداً في الآخر
+              za: عكسياً (من ي إلى أ)
+    decidim_awesome:
+      account:
+        timezone_select:
+          time_zone_helper: استخدم منطقتك الزمنية الشخصية لعرض التواريخ بتوقيتك المحلي عند تسجيل الدخول.
+      admin:
+        actions: الإجراءات
+        admin_accountability:
+          admin_roles:
+            admin: المشرف العام
+            user_manager: مدير المستخدمين
+          created_at: تاريخ إنشاء الدور
+          currently_active: ناشط حاليا
+          deleted_user: مستخدم محذوف
+          email: البريد الإلكتروني
+          exports:
+            button: تصدير هذا البحث
+            export_as: تصدير بصيغة %{export_format}
+            export_format:
+              csv: CSV
+              json: JSON
+              xlsx: XLSX
+            notice: تم إدراج مهمة التصدير في قائمة الانتظار. ستتلقى رسالة بريد إلكتروني عندما تصبح جاهزة.
+          index:
+            description: ستجد هنا قائمة بجميع المستخدمين الذين لديهم دور في إدارة مساحة تشاركية. لا يتم إدراج المشرفين العاديين هنا.
+            global_description: ستجد هنا قائمة بجميع المستخدمين الذين لديهم دور عام في إدارة هذه المنصة. لا يتم إدراج مشرفي المساحات التشاركية هنا.
+            missing_users: 'ملاحظة: قد لا تشمل هذه القائمة المستخدمين الذين تم إنشاؤهم أو إزالتهم قبل %{date}. وذلك لأن ''تتبع المستخدمين'' تم تقديمه في إصدار Decidim v0.24 ومن المحتمل أن يكون هذا التثبيت أقدم.'
+            see_global: عرض قائمة المشرفين العامين
+            see_spaces: عرض قائمة مشرفي المساحات التشاركية
+            title: مساءلة المشرفين
+          last_login: تاريخ آخر تسجيل دخول
+          missing_info: "(معلومات ناقصة)"
+          missing_user: المستخدم غير موجود في قاعدة البيانات
+          name: الاسم
+          never_logged: لم يتم تسجيل الدخول بعد
+          participatory_space: مساحة تشاركية
+          removal_date: تاريخ إزالة الدور
+          role: الدور
+          roles:
+            admin: مشرف
+            collaborator: مساهم
+            moderator: منسق
+        admin_authorizations:
+          authorization:
+            confirm_destroy: هل أنت متأكد من رغبتك في حذف هذا التصريح؟ قد يؤثر ذلك على قدرة المستخدم على الوصول إلى المنصة.
+            destroy: إتلاف
+            granted_at: مُنِح بتاريخ %{date}
+            metadata: هل يحتوي على بيانات وصفية؟ %{metadata}
