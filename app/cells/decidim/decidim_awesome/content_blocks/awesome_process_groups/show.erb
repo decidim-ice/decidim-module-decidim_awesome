@@ -16,15 +16,17 @@
       <% taxonomy_filter_groups.each do |group| %>
         <div class="pg-filter-dropdown">
           <button type="button"
+                  id="pg-trigger-<%= group[:root_id] %>"
                   class="pg-filter-dropdown__trigger"
-                  data-pg-dropdown="pg-panel-<%= group[:root_id] %>"
-                  aria-expanded="false">
+                  data-controller="dropdown"
+                  data-target="pg-panel-<%= group[:root_id] %>"
+                  aria-controls="pg-panel-<%= group[:root_id] %>">
             <span><%= group[:name] %></span>
             <%= icon "arrow-down-s-line", class: "pg-filter-dropdown__arrow" %>
           </button>
           <div id="pg-panel-<%= group[:root_id] %>"
                class="pg-filter-dropdown__panel"
-               hidden>
+               aria-hidden="true">
             <% group[:items].each do |item| %>
               <label class="pg-filter-dropdown__item">
                 <input type="checkbox"

@@ -63,18 +63,6 @@ document.addEventListener("turbo:load", () => {
     });
 
     tagsContainer.hidden = !hasActive;
-
-    tagsContainer.querySelectorAll("[data-remove-tag]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const targetId = btn.dataset.removeTag;
-        checkboxes.forEach((checkbox) => {
-          if (checkbox.value === targetId) {
-            checkbox.checked = false;
-            checkbox.dispatchEvent(new Event("change"));
-          }
-        });
-      });
-    });
   };
 
   const applyFilters = () => {
@@ -117,58 +105,20 @@ document.addEventListener("turbo:load", () => {
     checkbox.addEventListener("change", applyFilters);
   });
 
-  // Dropdown toggle
-  container.querySelectorAll("[data-pg-dropdown]").forEach((trigger) => {
-    trigger.addEventListener("click", (event) => {
-      event.stopPropagation();
-      const panelId = trigger.dataset.pgDropdown;
-      const panel = document.getElementById(panelId);
-      if (!panel) {
+  // Remove tag via event delegation
+  if (tagsContainer) {
+    tagsContainer.addEventListener("click", (event) => {
+      const removeBtn = event.target.closest("[data-remove-tag]");
+      if (!removeBtn) {
         return;
       }
-
-      const isHidden = panel.hidden;
-      // Close all other panels first
-      container.querySelectorAll(".pg-filter-dropdown__panel").forEach((panelEl) => {
-        panelEl.hidden = true;
-        panelEl.previousElementSibling?.setAttribute("aria-expanded", "false");
+      const targetId = removeBtn.dataset.removeTag;
+      checkboxes.forEach((checkbox) => {
+        if (checkbox.value === targetId) {
+          checkbox.checked = false;
+          checkbox.dispatchEvent(new Event("change"));
+        }
       });
-
-      panel.hidden = !isHidden;
-      trigger.setAttribute(
-        "aria-expanded",
-        isHidden
-          ? "true"
-          : "false"
-      );
     });
-  });
-
-  // Close dropdowns when clicking outside
-  const closeDropdowns = (event) => {
-    if (!event.target.closest(".pg-filter-dropdown")) {
-      container.querySelectorAll(".pg-filter-dropdown__panel").forEach((panelEl) => {
-        panelEl.hidden = true;
-      });
-      container.querySelectorAll("[data-pg-dropdown]").forEach((triggerEl) => {
-        triggerEl.setAttribute("aria-expanded", "false");
-      });
-    }
-  };
-
-  document.addEventListener("click", closeDropdowns);
-
-  // Store reference for cleanup
-  container._pgCloseDropdowns = closeDropdowns;
-});
-
-document.addEventListener("turbo:before-cache", () => {
-  const container = document.querySelector("[data-process-groups-filter]");
-  if (container) {
-    if (container._pgCloseDropdowns) {
-      document.removeEventListener("click", container._pgCloseDropdowns);
-      container._pgCloseDropdowns = null;
-    }
-    Reflect.deleteProperty(container.dataset, "initialized");
   }
 });

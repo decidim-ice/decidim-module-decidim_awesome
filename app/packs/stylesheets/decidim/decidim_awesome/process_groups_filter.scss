@@ -56,7 +56,11 @@
   &__panel {
     @apply absolute top-full left-0 mt-1 bg-white border border-gray-3 rounded shadow-md z-10 min-w-max p-2;
 
-    &:not([hidden]) {
+    &[aria-hidden="true"] {
+      @apply hidden;
+    }
+
+    &[aria-hidden="false"] {
       @apply flex flex-col gap-1;
     }
   }
