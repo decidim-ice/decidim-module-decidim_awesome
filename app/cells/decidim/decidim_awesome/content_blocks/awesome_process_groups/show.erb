@@ -1,0 +1,10 @@
+<section id="awesome-process-groups" class="home__section">
+  <div class="home__section-header">
+    <h2 class="home__section-title"><%= title %></h2>
+  </div>
+  <div class="card__grid-home">
+    <% processes.each do |process| %>
+      <%= card_for process, size: :g %>
+    <% end %>
+  </div>
+</section>

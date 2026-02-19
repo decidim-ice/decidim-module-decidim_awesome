@@ -702,6 +702,9 @@ en:
           title_closed: Click to chat!
           title_open: Let's chat!
       content_blocks:
+        awesome_process_groups:
+          name: Process Groups Extended
+          title: Block title
         map:
           collapse: Start with collapsed menu
           map_center: Map center (Latitude, Longitude)

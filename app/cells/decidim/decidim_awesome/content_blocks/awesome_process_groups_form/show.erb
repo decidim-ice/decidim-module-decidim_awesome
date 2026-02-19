@@ -1,0 +1,6 @@
+<% form.fields_for :settings, form.object.settings do |settings_fields| %>
+  <div class="row column">
+    <%= settings_fields.translated :text_field, :title,
+                                   label: t("title", scope: i18n_scope) %>
+  </div>
+<% end %>

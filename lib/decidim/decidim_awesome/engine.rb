@@ -291,6 +291,18 @@ module Decidim
         end
       end
 
+      initializer "decidim_decidim_awesome.awesome_process_groups_content_block" do
+        Decidim.content_blocks.register(:homepage, :awesome_process_groups) do |content_block|
+          content_block.cell = "decidim/decidim_awesome/content_blocks/awesome_process_groups"
+          content_block.settings_form_cell = "decidim/decidim_awesome/content_blocks/awesome_process_groups_form"
+          content_block.public_name_key = "decidim.decidim_awesome.content_blocks.awesome_process_groups.name"
+
+          content_block.settings do |settings|
+            settings.attribute :title, type: :text, translated: true
+          end
+        end
+      end
+
       initializer "decidim_decidim_awesome.webpacker.assets_path" do
         Decidim.register_assets_path File.expand_path("app/packs", root)
       end
