@@ -275,17 +275,17 @@ describe "Awesome Process Groups content block on homepage" do
     end
 
     context "with multiple taxonomy groups" do
-      let(:root_scope) { create(:taxonomy, organization:, name: { en: "Scope" }) }
-      let(:child_urban) { create(:taxonomy, organization:, parent: root_scope, name: { en: "Urban" }) }
-      let(:scope_filter) { create(:taxonomy_filter, root_taxonomy: root_scope) }
-      let!(:scope_filter_item) { create(:taxonomy_filter_item, taxonomy_filter: scope_filter, taxonomy_item: child_urban) }
-      let!(:scope_taxonomization) { create(:taxonomization, taxonomy: child_urban, taxonomizable: active_process) }
+      let(:root_area) { create(:taxonomy, organization:, name: { en: "Area" }) }
+      let(:child_area) { create(:taxonomy, organization:, parent: root_area, name: { en: "District A" }) }
+      let(:area_filter) { create(:taxonomy_filter, root_taxonomy: root_area) }
+      let!(:area_filter_item) { create(:taxonomy_filter_item, taxonomy_filter: area_filter, taxonomy_item: child_area) }
+      let!(:area_taxonomization) { create(:taxonomization, taxonomy: child_area, taxonomizable: active_process) }
 
       it "renders both taxonomy group dropdowns" do
         visit_homepage
         within "#awesome-process-groups" do
           expect(page).to have_content("Topics")
-          expect(page).to have_content("Scope")
+          expect(page).to have_content("Area")
         end
       end
 
@@ -295,24 +295,20 @@ describe "Awesome Process Groups content block on homepage" do
           click_on "Topics"
           expect(page).to have_content("Environment")
 
-          click_on "Scope"
-          expect(page).to have_content("Urban")
+          click_on "Area"
+          expect(page).to have_content("District A")
         end
       end
 
       it "applies AND between taxonomy groups" do
         visit_homepage
         within "#awesome-process-groups" do
-          # Select Transport in Topics group: past_process matches (has Transport)
           click_on "Topics"
           check "Transport"
           expect(page).to have_content("Test Past Process")
 
-          # Now also select Urban in Scope group: AND between groups requires BOTH
-          # past_process has Transport (Topics ✓) but NOT Urban (Scope ✗) → hidden
-          # active_process has Environment not Transport (Topics ✗) → also hidden
-          click_on "Scope"
-          check "Urban"
+          click_on "Area"
+          check "District A"
           expect(page).to have_no_content("Test Past Process")
           expect(page).to have_no_content("Test Active Process")
         end
