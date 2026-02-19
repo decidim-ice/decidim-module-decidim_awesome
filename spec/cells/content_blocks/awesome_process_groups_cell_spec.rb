@@ -39,6 +39,10 @@ module Decidim::DecidimAwesome
         expect(subject).to have_content("Past")
         expect(subject).to have_content("All")
       end
+
+      it "renders the status label" do
+        expect(subject).to have_content("Status:")
+      end
     end
 
     context "when processes do not belong to any group" do
@@ -99,6 +103,116 @@ module Decidim::DecidimAwesome
 
       it "does not show unpublished processes" do
         expect(subject).to have_no_content("Draft Process")
+      end
+    end
+
+    context "when taxonomy filters are available" do
+      let!(:grouped_process) { create(:participatory_process, :published, organization:, participatory_process_group: process_group, title: { en: "Filtered Process" }) }
+      let(:root_taxonomy) { create(:taxonomy, organization:, name: { en: "Topics" }) }
+      let(:child_taxonomy) { create(:taxonomy, organization:, parent: root_taxonomy, name: { en: "Environment" }) }
+      let(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy:) }
+      let!(:taxonomy_filter_item) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: child_taxonomy) }
+      let!(:taxonomization) { create(:taxonomization, taxonomy: child_taxonomy, taxonomizable: grouped_process) }
+
+      it "renders the filter by label" do
+        expect(subject).to have_content("Filter by:")
+      end
+
+      it "renders the taxonomy group name" do
+        expect(subject).to have_content("Topics")
+      end
+
+      it "renders the taxonomy item name" do
+        expect(subject).to have_content("Environment")
+      end
+
+      it "reports taxonomy filters as available" do
+        cell_instance = cell(content_block.cell, content_block)
+        cell_instance.call
+        expect(cell_instance.taxonomy_filters_available?).to be(true)
+      end
+
+      it "builds correct taxonomy filter groups structure" do
+        cell_instance = cell(content_block.cell, content_block)
+        cell_instance.call
+        groups = cell_instance.taxonomy_filter_groups
+        expect(groups.length).to eq(1)
+        expect(groups.first[:name]).to eq("Topics")
+        expect(groups.first[:root_id]).to eq(root_taxonomy.id)
+        expect(groups.first[:items].first[:name]).to eq("Environment")
+        expect(groups.first[:items].first[:id]).to eq(child_taxonomy.id)
+      end
+
+      it "includes taxonomy_ids in process items" do
+        cell_instance = cell(content_block.cell, content_block)
+        cell_instance.call
+        item = cell_instance.process_items.find { |i| i[:process] == grouped_process }
+        expect(item[:taxonomy_ids]).to include(child_taxonomy.id)
+      end
+    end
+
+    context "when taxonomy filters have multiple groups" do
+      let!(:grouped_process) { create(:participatory_process, :published, organization:, participatory_process_group: process_group, title: { en: "Multi Tax Process" }) }
+      let(:root_taxonomy_a) { create(:taxonomy, organization:, name: { en: "Scope" }) }
+      let(:root_taxonomy_b) { create(:taxonomy, organization:, name: { en: "Category" }) }
+      let(:child_a) { create(:taxonomy, organization:, parent: root_taxonomy_a, name: { en: "Urban" }) }
+      let(:child_b) { create(:taxonomy, organization:, parent: root_taxonomy_b, name: { en: "Health" }) }
+      let(:filter_a) { create(:taxonomy_filter, root_taxonomy: root_taxonomy_a) }
+      let(:filter_b) { create(:taxonomy_filter, root_taxonomy: root_taxonomy_b) }
+      let!(:filter_item_a) { create(:taxonomy_filter_item, taxonomy_filter: filter_a, taxonomy_item: child_a) }
+      let!(:filter_item_b) { create(:taxonomy_filter_item, taxonomy_filter: filter_b, taxonomy_item: child_b) }
+
+      it "renders both taxonomy group names" do
+        expect(subject).to have_content("Scope")
+        expect(subject).to have_content("Category")
+      end
+
+      it "renders taxonomy items from both groups" do
+        expect(subject).to have_content("Urban")
+        expect(subject).to have_content("Health")
+      end
+    end
+
+    context "when no taxonomy filters exist" do
+      let!(:grouped_process) { create(:participatory_process, :published, organization:, participatory_process_group: process_group, title: { en: "No Tax Process" }) }
+
+      it "does not render the filter by label" do
+        expect(subject).to have_no_content("Filter by:")
+      end
+
+      it "reports taxonomy filters as not available" do
+        cell_instance = cell(content_block.cell, content_block)
+        cell_instance.call
+        expect(cell_instance.taxonomy_filters_available?).to be(false)
+      end
+    end
+
+    context "when taxonomy filter exists but has no items" do
+      let!(:grouped_process) { create(:participatory_process, :published, organization:, participatory_process_group: process_group, title: { en: "Empty Filter Process" }) }
+      let(:root_taxonomy) { create(:taxonomy, organization:, name: { en: "Empty Root" }) }
+      let!(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy:) }
+
+      it "does not render the filter by label" do
+        expect(subject).to have_no_content("Filter by:")
+      end
+
+      it "reports taxonomy filters as not available" do
+        cell_instance = cell(content_block.cell, content_block)
+        cell_instance.call
+        expect(cell_instance.taxonomy_filters_available?).to be(false)
+      end
+    end
+
+    context "when taxonomy filter is for a different manifest" do
+      let!(:grouped_process) { create(:participatory_process, :published, organization:, participatory_process_group: process_group, title: { en: "Wrong Manifest Process" }) }
+      let(:root_taxonomy) { create(:taxonomy, organization:, name: { en: "Assembly Topics" }) }
+      let(:child_taxonomy) { create(:taxonomy, organization:, parent: root_taxonomy, name: { en: "Governance" }) }
+      let!(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy:, participatory_space_manifests: ["assemblies"]) }
+      let!(:taxonomy_filter_item) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: child_taxonomy) }
+
+      it "does not render taxonomy filters for other manifests" do
+        expect(subject).to have_no_content("Filter by:")
+        expect(subject).to have_no_content("Assembly Topics")
       end
     end
   end

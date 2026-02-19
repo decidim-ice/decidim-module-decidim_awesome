@@ -36,11 +36,25 @@ module Decidim::DecidimAwesome
         ongoing_item = subject.results.find { |item| item[:process] == no_end_date_process }
         expect(ongoing_item[:status]).to eq("active")
       end
+
+      it "includes taxonomy_ids for each process" do
+        root_taxonomy = create(:taxonomy, organization:)
+        child_taxonomy = create(:taxonomy, organization:, parent: root_taxonomy)
+        create(:taxonomization, taxonomy: child_taxonomy, taxonomizable: active_process)
+
+        active_item = subject.results.find { |item| item[:process] == active_process }
+        expect(active_item[:taxonomy_ids]).to include(child_taxonomy.id)
+      end
+
+      it "returns empty taxonomy_ids when process has no taxonomies" do
+        item = subject.results.find { |i| i[:process] == past_process }
+        expect(item[:taxonomy_ids]).to be_empty
+      end
     end
 
     describe "#active" do
       it "returns only active processes" do
-        titles = subject.active.map { |p| p.title["en"] }
+        titles = subject.active.map { |process| process.title["en"] }
         expect(titles).to include("Active Process", "Ongoing Process")
         expect(titles).not_to include("Past Process")
       end
@@ -48,9 +62,57 @@ module Decidim::DecidimAwesome
 
     describe "#past" do
       it "returns only past processes" do
-        titles = subject.past.map { |p| p.title["en"] }
+        titles = subject.past.map { |process| process.title["en"] }
         expect(titles).to include("Past Process")
         expect(titles).not_to include("Active Process", "Ongoing Process")
+      end
+    end
+
+    describe "#taxonomy_filters" do
+      let(:root_taxonomy) { create(:taxonomy, organization:, name: { en: "Topics" }) }
+      let(:child_taxonomy) { create(:taxonomy, organization:, parent: root_taxonomy, name: { en: "Environment" }) }
+
+      context "when filters exist for participatory_processes" do
+        let!(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy:) }
+        let!(:taxonomy_filter_item) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: child_taxonomy) }
+
+        it "returns the taxonomy filters" do
+          expect(subject.taxonomy_filters).to include(taxonomy_filter)
+        end
+
+        it "includes filter items with taxonomy items" do
+          filter = subject.taxonomy_filters.first
+          expect(filter.filter_items.first.taxonomy_item).to eq(child_taxonomy)
+        end
+
+        it "includes the root taxonomy" do
+          filter = subject.taxonomy_filters.first
+          expect(filter.root_taxonomy).to eq(root_taxonomy)
+        end
+      end
+
+      context "when filters exist for a different manifest" do
+        let!(:assembly_filter) { create(:taxonomy_filter, root_taxonomy:, participatory_space_manifests: ["assemblies"]) }
+
+        it "does not return filters for other manifests" do
+          expect(subject.taxonomy_filters).not_to include(assembly_filter)
+        end
+      end
+
+      context "when no taxonomy filters exist" do
+        it "returns an empty collection" do
+          expect(subject.taxonomy_filters).to be_empty
+        end
+      end
+
+      context "when filters belong to another organization" do
+        let(:another_organization) { create(:organization) }
+        let(:another_root) { create(:taxonomy, organization: another_organization) }
+        let!(:another_filter) { create(:taxonomy_filter, root_taxonomy: another_root) }
+
+        it "does not return filters from other organizations" do
+          expect(subject.taxonomy_filters).not_to include(another_filter)
+        end
       end
     end
 
