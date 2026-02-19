@@ -37,10 +37,35 @@ module Decidim
           end
         end
 
+        def taxonomy_filter_groups
+          @taxonomy_filter_groups ||= build_taxonomy_filter_groups
+        end
+
+        def taxonomy_filters_available?
+          taxonomy_filter_groups.any?
+        end
+
         private
 
         def query
           @query ||= AwesomeProcessGroupsQuery.new(current_organization)
+        end
+
+        def build_taxonomy_filter_groups
+          query.taxonomy_filters.map do |tf|
+            items = tf.filter_items.map do |fi|
+              taxonomy = fi.taxonomy_item
+              { id: taxonomy.id, name: translated_attribute(taxonomy.name) }
+            end
+            next if items.empty?
+
+            {
+              id: tf.id,
+              root_id: tf.root_taxonomy.id,
+              name: translated_attribute(tf.root_taxonomy.name),
+              items: items
+            }
+          end.compact
         end
       end
     end

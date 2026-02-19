@@ -705,8 +705,11 @@ en:
         awesome_process_groups:
           active: Active
           all: All
+          all_taxonomies: All categories
+          filter_by_label: 'Filter by:'
           name: Process Groups Extended
           past: Past
+          status_label: 'Status:'
           title: Block title
         map:
           collapse: Start with collapsed menu

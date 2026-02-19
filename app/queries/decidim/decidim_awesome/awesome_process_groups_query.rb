@@ -8,8 +8,12 @@ module Decidim
       end
 
       def results
-        grouped_processes.map do |process|
-          { process: process, status: status_for(process) }
+        grouped_processes.includes(:taxonomies).map do |process|
+          {
+            process: process,
+            status: status_for(process),
+            taxonomy_ids: process.taxonomy_ids
+          }
         end
       end
 
@@ -19,6 +23,13 @@ module Decidim
 
       def past
         grouped_processes.past
+      end
+
+      def taxonomy_filters
+        @taxonomy_filters ||= Decidim::TaxonomyFilter
+                              .for(organization)
+                              .for_manifest(:participatory_processes)
+                              .includes(:root_taxonomy, filter_items: :taxonomy_item)
       end
 
       private

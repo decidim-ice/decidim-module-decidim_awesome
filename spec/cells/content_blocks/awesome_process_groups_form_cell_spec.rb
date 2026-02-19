@@ -17,7 +17,6 @@ module Decidim::DecidimAwesome
 
     controller Decidim::Admin::OrganizationHomepageContentBlocksController
 
-
     subject { cell(content_block.settings_form_cell, form, content_block:).call }
 
     it "renders the title field" do

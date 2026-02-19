@@ -1,5 +1,25 @@
+.pg-filter-label {
+  @apply text-sm font-semibold text-gray-2;
+}
+
+.pg-status-bar {
+  @apply flex items-center gap-4 mt-4;
+}
+
+.pg-taxonomy-bar {
+  @apply flex flex-wrap items-center gap-2 mt-4 mb-6;
+}
+
+.pg-active-tags {
+  @apply flex flex-wrap items-center gap-2 mb-6;
+}
+
+.pg-spacer {
+  @apply mb-6;
+}
+
 .process-groups-filter-tab {
-  @apply text-sm text-gray-2 bg-transparent border-0 border-b-2 border-transparent cursor-pointer px-2 py-1;
+  @apply text-sm text-gray-2 bg-transparent border-0 border-b-2 border-transparent cursor-pointer px-0 py-1;
 
   &:hover {
     @apply text-secondary;
@@ -7,5 +27,60 @@
 
   &.is-active {
     @apply text-secondary border-secondary font-semibold;
+  }
+}
+
+.pg-filter-dropdown {
+  @apply relative;
+
+  &__trigger {
+    @apply flex items-center gap-1 text-sm font-semibold text-secondary bg-transparent border border-gray-3 rounded px-3 py-1.5 cursor-pointer;
+
+    &:hover {
+      @apply border-secondary;
+    }
+
+    &[aria-expanded="true"] {
+      @apply border-secondary;
+
+      .pg-filter-dropdown__arrow {
+        @apply rotate-180;
+      }
+    }
+  }
+
+  &__arrow {
+    @apply w-4 h-4 transition-transform;
+  }
+
+  &__panel {
+    @apply absolute top-full left-0 mt-1 bg-white border border-gray-3 rounded shadow-md z-10 min-w-max p-2;
+
+    &:not([hidden]) {
+      @apply flex flex-col gap-1;
+    }
+  }
+
+  &__item {
+    @apply flex items-center gap-2 px-2 py-1 text-sm cursor-pointer rounded;
+
+    &:hover {
+      @apply bg-background;
+    }
+
+    input[type="checkbox"] {
+      @apply accent-secondary;
+    }
+  }
+}
+
+.pg-tag-remove {
+  @apply bg-transparent border-0 cursor-pointer text-gray-2 ml-1 p-0;
+
+  font-size: 1rem;
+  line-height: 1;
+
+  &:hover {
+    @apply text-secondary;
   }
 }
