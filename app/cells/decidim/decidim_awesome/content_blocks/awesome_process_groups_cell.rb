@@ -7,15 +7,11 @@ module Decidim
         include Decidim::CardHelper
 
         def show
-          render if processes.any?
+          render if process_items.any?
         end
 
-        def processes
-          @processes ||= Decidim::ParticipatoryProcess
-                         .where(organization: current_organization)
-                         .published
-                         .where.not(decidim_participatory_process_group_id: nil)
-                         .order(weight: :asc, start_date: :desc)
+        def process_items
+          @process_items ||= query.results
         end
 
         def title
@@ -24,6 +20,27 @@ module Decidim
 
         def i18n_scope
           "decidim.decidim_awesome.content_blocks.awesome_process_groups"
+        end
+
+        def status_filters
+          %w(active past all)
+        end
+
+        def count_for(filter)
+          case filter
+          when "active"
+            process_items.count { |item| item[:status] == "active" }
+          when "past"
+            process_items.count { |item| item[:status] == "past" }
+          else
+            process_items.size
+          end
+        end
+
+        private
+
+        def query
+          @query ||= AwesomeProcessGroupsQuery.new(current_organization)
         end
       end
     end

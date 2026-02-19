@@ -1,0 +1,11 @@
+.process-groups-filter-tab {
+  @apply text-sm text-gray-2 bg-transparent border-0 border-b-2 border-transparent cursor-pointer px-2 py-1;
+
+  &:hover {
+    @apply text-secondary;
+  }
+
+  &.is-active {
+    @apply text-secondary border-secondary font-semibold;
+  }
+}

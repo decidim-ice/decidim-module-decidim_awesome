@@ -1,10 +1,19 @@
-<section id="awesome-process-groups" class="home__section">
-  <div class="home__section-header">
-    <h2 class="home__section-title"><%= title %></h2>
+<section id="awesome-process-groups" class="home__section" data-process-groups-filter>
+  <h2 class="home__section-title"><%= title %></h2>
+  <div class="flex gap-4 mt-4 mb-6" data-filter-tabs>
+    <% status_filters.each do |filter| %>
+      <button type="button"
+              data-filter="<%= filter %>"
+              class="process-groups-filter-tab <%= "is-active" if filter == "all" %>">
+        <%= t(filter, scope: i18n_scope) %> (<%= count_for(filter) %>)
+      </button>
+    <% end %>
   </div>
-  <div class="card__grid-home">
-    <% processes.each do |process| %>
-      <%= card_for process, size: :g %>
+  <div class="card__grid-home" data-filter-results>
+    <% process_items.each do |item| %>
+      <div data-status="<%= item[:status] %>">
+        <%= card_for item[:process], size: :g %>
+      </div>
     <% end %>
   </div>
 </section>

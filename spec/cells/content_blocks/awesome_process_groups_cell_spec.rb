@@ -33,6 +33,12 @@ module Decidim::DecidimAwesome
       it "renders the process card" do
         expect(subject).to have_content("Climate Action Plan")
       end
+
+      it "renders the status filter buttons" do
+        expect(subject).to have_content("Active")
+        expect(subject).to have_content("Past")
+        expect(subject).to have_content("All")
+      end
     end
 
     context "when processes do not belong to any group" do
@@ -53,6 +59,26 @@ module Decidim::DecidimAwesome
 
       it "does not render the default title" do
         expect(subject).to have_no_content("Process Groups Extended")
+      end
+    end
+
+    context "with active and past processes" do
+      let!(:active_process) { create(:participatory_process, :published, organization:, participatory_process_group: process_group, title: { en: "Current Project" }, start_date: 1.month.ago, end_date: 1.month.from_now) }
+      let!(:past_process) { create(:participatory_process, :published, organization:, participatory_process_group: process_group, title: { en: "Finished Project" }, start_date: 3.months.ago, end_date: 1.month.ago) }
+
+      it "renders both processes" do
+        expect(subject).to have_content("Current Project")
+        expect(subject).to have_content("Finished Project")
+      end
+
+      it "shows counts in filter buttons" do
+        expect(subject.text).to include("Active")
+        expect(subject.text).to include("Past")
+        expect(subject.text).to include("All")
+        cell_instance = cell(content_block.cell, content_block)
+        expect(cell_instance.count_for("active")).to eq(1)
+        expect(cell_instance.count_for("past")).to eq(1)
+        expect(cell_instance.count_for("all")).to eq(2)
       end
     end
 

@@ -703,7 +703,10 @@ en:
           title_open: Let's chat!
       content_blocks:
         awesome_process_groups:
+          active: Active
+          all: All
           name: Process Groups Extended
+          past: Past
           title: Block title
         map:
           collapse: Start with collapsed menu
