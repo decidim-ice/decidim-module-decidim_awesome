@@ -4,7 +4,9 @@ require "spec_helper"
 
 module Decidim::DecidimAwesome
   describe AwesomeProcessGroupsQuery do
-    subject { described_class.new(organization) }
+    subject { described_class.new(organization, user) }
+
+    let(:user) { nil }
 
     let(:organization) { create(:organization) }
     let(:process_group) { create(:participatory_process_group, organization:) }
@@ -49,22 +51,6 @@ module Decidim::DecidimAwesome
       it "returns empty taxonomy_ids when process has no taxonomies" do
         item = subject.results.find { |i| i[:process] == past_process }
         expect(item[:taxonomy_ids]).to be_empty
-      end
-    end
-
-    describe "#active" do
-      it "returns only active processes" do
-        titles = subject.active.map { |process| process.title["en"] }
-        expect(titles).to include("Active Process", "Ongoing Process")
-        expect(titles).not_to include("Past Process")
-      end
-    end
-
-    describe "#past" do
-      it "returns only past processes" do
-        titles = subject.past.map { |process| process.title["en"] }
-        expect(titles).to include("Past Process")
-        expect(titles).not_to include("Active Process", "Ongoing Process")
       end
     end
 

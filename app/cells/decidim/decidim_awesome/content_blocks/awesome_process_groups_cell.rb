@@ -48,7 +48,7 @@ module Decidim
         private
 
         def query
-          @query ||= AwesomeProcessGroupsQuery.new(current_organization)
+          @query ||= AwesomeProcessGroupsQuery.new(current_organization, current_user)
         end
 
         def build_taxonomy_filter_groups

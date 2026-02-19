@@ -1,8 +1,9 @@
 document.addEventListener("turbo:load", () => {
   const container = document.querySelector("[data-process-groups-filter]");
-  if (!container) {
+  if (!container || container.dataset.initialized) {
     return;
   }
+  container.dataset.initialized = "true";
 
   const tabs = container.querySelectorAll("[data-filter]");
   const checkboxes = container.querySelectorAll("[data-taxonomy-checkbox]");
@@ -11,14 +12,18 @@ document.addEventListener("turbo:load", () => {
 
   let currentStatus = "all";
 
-  const getSelectedTaxonomies = () => {
-    const selected = [];
+  const getSelectedByGroup = () => {
+    const groups = {};
     checkboxes.forEach((checkbox) => {
       if (checkbox.checked) {
-        selected.push(checkbox.value);
+        const rootId = checkbox.dataset.rootId;
+        if (!groups[rootId]) {
+          groups[rootId] = [];
+        }
+        groups[rootId].push(checkbox.value);
       }
     });
-    return selected;
+    return groups;
   };
 
   const updateTags = () => {
@@ -44,7 +49,16 @@ document.addEventListener("turbo:load", () => {
         ? parentLabel.textContent.trim()
         : checkbox.value;
 
-      tag.innerHTML = `${name} <button type="button" class="pg-tag-remove" data-remove-tag="${checkbox.value}" aria-label="Remove">&times;</button>`;
+      tag.appendChild(document.createTextNode(`${name} `));
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "pg-tag-remove";
+      btn.dataset.removeTag = checkbox.value;
+      btn.setAttribute("aria-label", "Remove");
+      btn.textContent = "\u00d7";
+      tag.appendChild(btn);
+
       tagsContainer.appendChild(tag);
     });
 
@@ -64,17 +78,21 @@ document.addEventListener("turbo:load", () => {
   };
 
   const applyFilters = () => {
-    const selectedTaxonomies = getSelectedTaxonomies();
+    const selectedByGroup = getSelectedByGroup();
+    const groupKeys = Object.keys(selectedByGroup);
 
     items.forEach((item) => {
       const statusMatch = currentStatus === "all" || item.dataset.status === currentStatus;
 
       let taxonomyMatch = true;
-      if (selectedTaxonomies.length > 0) {
+      if (groupKeys.length > 0) {
         const itemTaxonomies = item.dataset.taxonomyIds
           ? item.dataset.taxonomyIds.split(",")
           : [];
-        taxonomyMatch = selectedTaxonomies.some((id) => itemTaxonomies.includes(id));
+        // AND between groups, OR within each group
+        taxonomyMatch = groupKeys.every((rootId) => {
+          return selectedByGroup[rootId].some((id) => itemTaxonomies.includes(id));
+        });
       }
 
       item.style.display = statusMatch && taxonomyMatch
@@ -127,7 +145,7 @@ document.addEventListener("turbo:load", () => {
   });
 
   // Close dropdowns when clicking outside
-  document.addEventListener("click", (event) => {
+  const closeDropdowns = (event) => {
     if (!event.target.closest(".pg-filter-dropdown")) {
       container.querySelectorAll(".pg-filter-dropdown__panel").forEach((panelEl) => {
         panelEl.hidden = true;
@@ -136,5 +154,21 @@ document.addEventListener("turbo:load", () => {
         triggerEl.setAttribute("aria-expanded", "false");
       });
     }
-  });
+  };
+
+  document.addEventListener("click", closeDropdowns);
+
+  // Store reference for cleanup
+  container._pgCloseDropdowns = closeDropdowns;
+});
+
+document.addEventListener("turbo:before-cache", () => {
+  const container = document.querySelector("[data-process-groups-filter]");
+  if (container) {
+    if (container._pgCloseDropdowns) {
+      document.removeEventListener("click", container._pgCloseDropdowns);
+      container._pgCloseDropdowns = null;
+    }
+    Reflect.deleteProperty(container.dataset, "initialized");
+  }
 });

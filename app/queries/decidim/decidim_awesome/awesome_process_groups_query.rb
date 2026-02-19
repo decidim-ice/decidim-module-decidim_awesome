@@ -3,26 +3,19 @@
 module Decidim
   module DecidimAwesome
     class AwesomeProcessGroupsQuery
-      def initialize(organization)
+      def initialize(organization, user = nil)
         @organization = organization
+        @user = user
       end
 
       def results
-        grouped_processes.includes(:taxonomies).map do |process|
+        @results ||= base_relation.map do |process|
           {
             process: process,
             status: status_for(process),
             taxonomy_ids: process.taxonomy_ids
           }
         end
-      end
-
-      def active
-        grouped_processes.active
-      end
-
-      def past
-        grouped_processes.past
       end
 
       def taxonomy_filters
@@ -34,16 +27,21 @@ module Decidim
 
       private
 
-      attr_reader :organization
+      attr_reader :organization, :user
 
-      def grouped_processes
-        @grouped_processes ||= Decidim::ParticipatoryProcess
-                               .where(organization: organization)
-                               .published
-                               .where.not(decidim_participatory_process_group_id: nil)
-                               .order(weight: :asc, start_date: :desc)
+      def base_relation
+        @base_relation ||=
+          Decidim::ParticipatoryProcesses::OrganizationPublishedParticipatoryProcesses
+          .new(organization, user).query
+          .grouped
+          .includes(:organization, :taxonomies)
+          .with_attached_hero_image
+          .order(weight: :asc, start_date: :desc)
       end
 
+      # Upcoming and undated processes fall through to "active" by design:
+      # the UI only has Active/Past filters, and non-past processes are
+      # shown under "Active" as the expected default.
       def status_for(process)
         return "active" if process.active?
         return "past" if process.past?
