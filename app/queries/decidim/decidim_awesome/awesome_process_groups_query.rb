@@ -39,12 +39,12 @@ module Decidim
           .order(weight: :asc, start_date: :desc)
       end
 
-      # Upcoming and undated processes fall through to "active" by design:
-      # the UI only has Active/Past filters, and non-past processes are
-      # shown under "Active" as the expected default.
+      # Maps Decidim's native process state to a status string.
+      # Fallback "active" covers edge cases like inconsistent dates.
       def status_for(process)
         return "active" if process.active?
         return "past" if process.past?
+        return "upcoming" if process.upcoming?
 
         "active"
       end

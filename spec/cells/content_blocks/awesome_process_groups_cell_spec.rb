@@ -37,6 +37,7 @@ module Decidim::DecidimAwesome
       it "renders the status filter buttons" do
         expect(subject).to have_content("Active")
         expect(subject).to have_content("Past")
+        expect(subject).to have_content("Upcoming")
         expect(subject).to have_content("All")
       end
 
@@ -82,7 +83,22 @@ module Decidim::DecidimAwesome
         cell_instance = cell(content_block.cell, content_block)
         expect(cell_instance.count_for("active")).to eq(1)
         expect(cell_instance.count_for("past")).to eq(1)
+        expect(cell_instance.count_for("upcoming")).to eq(0)
         expect(cell_instance.count_for("all")).to eq(2)
+      end
+    end
+
+    context "with an upcoming process" do
+      let!(:upcoming_process) { create(:participatory_process, :published, organization:, participatory_process_group: process_group, title: { en: "Future Project" }, start_date: 1.month.from_now, end_date: 2.months.from_now) }
+
+      it "renders the upcoming process card" do
+        expect(subject).to have_content("Future Project")
+      end
+
+      it "counts upcoming correctly" do
+        cell_instance = cell(content_block.cell, content_block)
+        expect(cell_instance.count_for("upcoming")).to eq(1)
+        expect(cell_instance.count_for("active")).to eq(0)
       end
     end
 

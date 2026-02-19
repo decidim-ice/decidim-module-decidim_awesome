@@ -711,6 +711,7 @@ en:
           past: Past
           status_label: 'Status:'
           title: Block title
+          upcoming: Upcoming
         map:
           collapse: Start with collapsed menu
           map_center: Map center (Latitude, Longitude)

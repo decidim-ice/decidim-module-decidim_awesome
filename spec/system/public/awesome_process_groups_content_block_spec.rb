@@ -9,6 +9,7 @@ describe "Awesome Process Groups content block on homepage" do
 
   let!(:active_process) { create(:participatory_process, :published, organization:, participatory_process_group: process_group, title: { en: "Test Active Process" }, start_date: 1.month.ago, end_date: 1.month.from_now) }
   let!(:past_process) { create(:participatory_process, :published, organization:, participatory_process_group: process_group, title: { en: "Test Past Process" }, start_date: 3.months.ago, end_date: 1.month.ago) }
+  let!(:upcoming_process) { create(:participatory_process, :published, organization:, participatory_process_group: process_group, title: { en: "Test Upcoming Process" }, start_date: 1.month.from_now, end_date: 2.months.from_now) }
 
   before do
     switch_to_host(organization.host)
@@ -25,11 +26,12 @@ describe "Awesome Process Groups content block on homepage" do
     end
   end
 
-  it "renders both process cards" do
+  it "renders all process cards" do
     visit_homepage
     within "#awesome-process-groups" do
       expect(page).to have_content("Test Active Process")
       expect(page).to have_content("Test Past Process")
+      expect(page).to have_content("Test Upcoming Process")
     end
   end
 
@@ -39,6 +41,7 @@ describe "Awesome Process Groups content block on homepage" do
       expect(page).to have_content("Status:")
       expect(page).to have_content("Active")
       expect(page).to have_content("Past")
+      expect(page).to have_content("Upcoming")
       expect(page).to have_content("All")
     end
   end
@@ -50,6 +53,7 @@ describe "Awesome Process Groups content block on homepage" do
         click_on "Active (1)"
         expect(page).to have_content("Test Active Process")
         expect(page).to have_no_content("Test Past Process")
+        expect(page).to have_no_content("Test Upcoming Process")
       end
     end
 
@@ -59,6 +63,17 @@ describe "Awesome Process Groups content block on homepage" do
         click_on "Past (1)"
         expect(page).to have_content("Test Past Process")
         expect(page).to have_no_content("Test Active Process")
+        expect(page).to have_no_content("Test Upcoming Process")
+      end
+    end
+
+    it "shows only upcoming processes when clicking Upcoming" do
+      visit_homepage
+      within "#awesome-process-groups" do
+        click_on "Upcoming (1)"
+        expect(page).to have_content("Test Upcoming Process")
+        expect(page).to have_no_content("Test Active Process")
+        expect(page).to have_no_content("Test Past Process")
       end
     end
 
@@ -67,9 +82,10 @@ describe "Awesome Process Groups content block on homepage" do
       within "#awesome-process-groups" do
         click_on "Active (1)"
         expect(page).to have_no_content("Test Past Process")
-        click_on "All (2)"
+        click_on "All (3)"
         expect(page).to have_content("Test Active Process")
         expect(page).to have_content("Test Past Process")
+        expect(page).to have_content("Test Upcoming Process")
       end
     end
   end
@@ -107,6 +123,33 @@ describe "Awesome Process Groups content block on homepage" do
         click_on "Topics"
         expect(page).to have_content("Environment")
         expect(page).to have_content("Transport")
+      end
+    end
+
+    it "sets aria-hidden to false when dropdown is opened" do
+      visit_homepage
+      within "#awesome-process-groups" do
+        panel = find(".pg-filter-dropdown__panel", visible: :all, match: :first)
+        expect(panel["aria-hidden"]).to eq("true")
+
+        click_on "Topics"
+        expect(panel["aria-hidden"]).to eq("false")
+      end
+    end
+
+    it "closes dropdown when clicking outside" do
+      visit_homepage
+      within "#awesome-process-groups" do
+        click_on "Topics"
+        panel = find(".pg-filter-dropdown__panel", match: :first)
+        expect(panel["aria-hidden"]).to eq("false")
+      end
+
+      find("h2", text: "Process Groups Extended").click
+
+      within "#awesome-process-groups" do
+        panel = find(".pg-filter-dropdown__panel", visible: :all, match: :first)
+        expect(panel["aria-hidden"]).to eq("true")
       end
     end
 
@@ -156,13 +199,13 @@ describe "Awesome Process Groups content block on homepage" do
         expect(page).to have_no_content("Test Past Process")
         expect(page).to have_no_content("Test Active Process")
 
-        click_on "All (2)"
+        click_on "All (3)"
         expect(page).to have_content("Test Past Process")
         expect(page).to have_no_content("Test Active Process")
       end
     end
 
-    it "allows selecting multiple taxonomy items" do
+    it "applies OR within same taxonomy group when selecting multiple items" do
       visit_homepage
       within "#awesome-process-groups" do
         click_on "Topics"
@@ -170,6 +213,64 @@ describe "Awesome Process Groups content block on homepage" do
         check "Transport"
         expect(page).to have_content("Test Active Process")
         expect(page).to have_content("Test Past Process")
+      end
+    end
+
+    it "removes one tag while preserving other taxonomy filters" do
+      visit_homepage
+      within "#awesome-process-groups" do
+        click_on "Topics"
+        check "Environment"
+        check "Transport"
+        expect(page).to have_content("Test Active Process")
+        expect(page).to have_content("Test Past Process")
+
+        # Close dropdown so it does not intercept the remove-tag click
+        find(".pg-taxonomy-bar .pg-filter-label", match: :first).click
+        find("[data-remove-tag='#{child_environment.id}']").click
+        expect(page).to have_no_content("Test Active Process")
+        expect(page).to have_content("Test Past Process")
+      end
+    end
+
+    it "preserves taxonomy filter when switching status tabs" do
+      visit_homepage
+      within "#awesome-process-groups" do
+        click_on "Topics"
+        check "Environment"
+        expect(page).to have_content("Test Active Process")
+        expect(page).to have_no_content("Test Past Process")
+
+        click_on "Past (1)"
+        expect(page).to have_no_content("Test Active Process")
+        expect(page).to have_no_content("Test Past Process")
+
+        click_on "All (3)"
+        expect(page).to have_content("Test Active Process")
+        expect(page).to have_no_content("Test Past Process")
+      end
+    end
+
+    it "shows no process cards when filters match nothing" do
+      visit_homepage
+      within "#awesome-process-groups" do
+        click_on "Topics"
+        check "Transport"
+        click_on "Active (1)"
+        expect(page).to have_no_content("Test Active Process")
+        expect(page).to have_no_content("Test Past Process")
+      end
+    end
+
+    it "combines upcoming status with taxonomy filter" do
+      visit_homepage
+      within "#awesome-process-groups" do
+        click_on "Upcoming (1)"
+        expect(page).to have_content("Test Upcoming Process")
+
+        click_on "Topics"
+        check "Environment"
+        expect(page).to have_no_content("Test Upcoming Process")
       end
     end
 
@@ -198,6 +299,24 @@ describe "Awesome Process Groups content block on homepage" do
           expect(page).to have_content("Urban")
         end
       end
+
+      it "applies AND between taxonomy groups" do
+        visit_homepage
+        within "#awesome-process-groups" do
+          # Select Transport in Topics group: past_process matches (has Transport)
+          click_on "Topics"
+          check "Transport"
+          expect(page).to have_content("Test Past Process")
+
+          # Now also select Urban in Scope group: AND between groups requires BOTH
+          # past_process has Transport (Topics ✓) but NOT Urban (Scope ✗) → hidden
+          # active_process has Environment not Transport (Topics ✗) → also hidden
+          click_on "Scope"
+          check "Urban"
+          expect(page).to have_no_content("Test Past Process")
+          expect(page).to have_no_content("Test Active Process")
+        end
+      end
     end
   end
 
@@ -216,6 +335,7 @@ describe "Awesome Process Groups content block on homepage" do
   context "when there are no grouped processes" do
     let!(:active_process) { nil }
     let!(:past_process) { nil }
+    let!(:upcoming_process) { nil }
 
     it "does not render the content block" do
       visit_homepage

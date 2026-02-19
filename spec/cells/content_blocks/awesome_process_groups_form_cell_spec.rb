@@ -22,5 +22,10 @@ module Decidim::DecidimAwesome
     it "renders the title field" do
       expect(subject).to have_content("Block title")
     end
+
+    it "exposes the content_block" do
+      cell_instance = cell(content_block.settings_form_cell, form, content_block:)
+      expect(cell_instance.content_block).to eq(content_block)
+    end
   end
 end

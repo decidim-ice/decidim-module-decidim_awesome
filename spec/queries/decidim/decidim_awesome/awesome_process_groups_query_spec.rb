@@ -39,6 +39,12 @@ module Decidim::DecidimAwesome
         expect(ongoing_item[:status]).to eq("active")
       end
 
+      it "assigns correct status to upcoming processes" do
+        upcoming = create(:participatory_process, :published, organization:, participatory_process_group: process_group, title: { en: "Future Process" }, start_date: 1.month.from_now, end_date: 2.months.from_now)
+        item = subject.results.find { |i| i[:process] == upcoming }
+        expect(item[:status]).to eq("upcoming")
+      end
+
       it "includes taxonomy_ids for each process" do
         root_taxonomy = create(:taxonomy, organization:)
         child_taxonomy = create(:taxonomy, organization:, parent: root_taxonomy)

@@ -23,17 +23,15 @@ module Decidim
         end
 
         def status_filters
-          %w(active past all)
+          %w(active past upcoming all)
         end
 
         def count_for(filter)
           case filter
-          when "active"
-            process_items.count { |item| item[:status] == "active" }
-          when "past"
-            process_items.count { |item| item[:status] == "past" }
-          else
+          when "all"
             process_items.size
+          else
+            process_items.count { |item| item[:status] == filter }
           end
         end
 
