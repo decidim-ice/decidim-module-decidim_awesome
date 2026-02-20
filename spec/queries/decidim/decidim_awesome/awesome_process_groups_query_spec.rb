@@ -58,6 +58,12 @@ module Decidim::DecidimAwesome
         item = subject.results.find { |i| i[:process] == past_process }
         expect(item[:taxonomy_ids]).to be_empty
       end
+
+      it "falls back to active status when process has no dates" do
+        no_dates = create(:participatory_process, :published, organization:, participatory_process_group: process_group, title: { en: "No Dates Process" }, start_date: nil, end_date: nil)
+        item = subject.results.find { |i| i[:process] == no_dates }
+        expect(item[:status]).to eq("active")
+      end
     end
 
     describe "#taxonomy_filters" do
