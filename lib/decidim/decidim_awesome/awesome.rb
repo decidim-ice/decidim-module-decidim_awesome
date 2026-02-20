@@ -210,6 +210,10 @@ module Decidim
       {}
     end
 
+    config_accessor :cookie_management do
+      true
+    end
+
     # Allows admins to manually authorize users with the specified methods
     # if set to an empty array, the admins will not be able to authorize users but the system admin can still configure it
     # if set to :disabled the feature will be completely removed

@@ -38,6 +38,8 @@ module Decidim
             [:menu_hacks_path, [menus[:menu_hacks]]]
           when :custom_redirects
             [:custom_redirects_path, []]
+          when :cookie_management
+            [:cookie_management_path, []]
           when :maintenance
             [:checks_path, []]
           else

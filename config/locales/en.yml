@@ -462,6 +462,7 @@ en:
           system: Everywhere except participatory spaces
           title:
             admins: Scoped Admins
+            cookie_management: Cookie Management
             editors: Editor Hacks
             livechat: Live Chat
             proposal_custom_fields: 'Proposals Custom Fields: Public fields'
@@ -557,6 +558,7 @@ en:
             stamps: Hashcash stamps
         menu:
           admins: Scoped Admins
+          cookie_management: Cookie management
           custom_redirects: Custom Redirections
           editors: Editor Hacks
           livechat: Live Chat
