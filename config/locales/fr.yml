@@ -678,6 +678,7 @@ fr:
     download_your_data:
       show:
         admin_actions: Actions administrateur
+        awesome_private_proposals: Export des propositions avec champs privés
     meetings:
       meetings_map:
         view_meeting: Voir la rencontre
