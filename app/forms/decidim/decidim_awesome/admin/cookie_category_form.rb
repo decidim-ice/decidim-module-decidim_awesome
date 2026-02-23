@@ -19,7 +19,7 @@ module Decidim
         def to_params
           {
             "slug" => slug,
-            "mandatory" => !!mandatory,
+            "mandatory" => !mandatory.nil?,
             "title" => title,
             "description" => description,
             "items" => []

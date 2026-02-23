@@ -29,7 +29,7 @@ module Decidim
             slug: slug,
             title: translated(category["title"], fallback: i18n_category_text(slug, :title)),
             description: translated(category["description"], fallback: i18n_category_text(slug, :description)),
-            mandatory: !!category["mandatory"],
+            mandatory: !category["mandatory"].nil?,
             items: normalize_items(category["items"])
           }
         end
