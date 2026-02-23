@@ -18,8 +18,18 @@
   @apply mb-6;
 }
 
+.pg-remove-tag {
+  @apply cursor-pointer;
+}
+
+.pg-pagination {
+  @apply pt-8 flex justify-end;
+}
+
 .process-groups-filter-tab {
   @apply text-sm text-gray-2 bg-transparent border-0 border-b-2 border-transparent cursor-pointer px-0 py-1;
+
+  text-decoration: none;
 
   &:hover {
     @apply text-secondary;
@@ -75,16 +85,5 @@
     input[type="checkbox"] {
       @apply accent-secondary;
     }
-  }
-}
-
-.pg-tag-remove {
-  @apply bg-transparent border-0 cursor-pointer text-gray-2 ml-1 p-0;
-
-  font-size: 1rem;
-  line-height: 1;
-
-  &:hover {
-    @apply text-secondary;
   }
 }

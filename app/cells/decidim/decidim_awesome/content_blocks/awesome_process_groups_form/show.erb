@@ -3,4 +3,9 @@
     <%= settings_fields.translated :text_field, :title,
                                    label: t("title", scope: i18n_scope) %>
   </div>
+  <div class="row column">
+    <%= settings_fields.number_field :max_count,
+                                     label: t("max_count", scope: i18n_scope),
+                                     min: 1 %>
+  </div>
 <% end %>
