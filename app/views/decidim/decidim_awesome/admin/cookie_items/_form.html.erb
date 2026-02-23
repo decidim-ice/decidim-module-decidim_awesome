@@ -1,0 +1,18 @@
+<div class="form__wrapper">
+  <div class="card pt-4">
+    <div class="card-section">
+      <div class="row column">
+        <%= form.text_field :name, class: "h-12 w-full" %>
+      </div>
+      <div class="row column">
+        <%= form.select :type, [["cookie", "cookie"]], {}, class: "w-full" %>
+      </div>
+      <div class="row column">
+        <%= form.translated :text_field, :service, class: "h-12 w-full" %>
+      </div>
+      <div class="row column">
+        <%= form.translated :text_area, :description, rows: 3, class: "w-full" %>
+      </div>
+    </div>
+  </div>
+</div>

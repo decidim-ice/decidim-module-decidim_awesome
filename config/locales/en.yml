@@ -5,6 +5,14 @@ en:
     waiting_label: Waiting for verification ...
   activemodel:
     attributes:
+      cookie_category:
+        mandatory: Mandatory
+        slug: Slug
+        title: Title
+      cookie_item:
+        type: Type
+        name: Name
+        service: Service
       config:
         additional_proposal_sortings: Additional sorting options enabled
         allow_images_in_editors: Allow images in the HTML editor
@@ -497,6 +505,39 @@ en:
           update:
             error: Error updating condition case
             success: Condition case updated successfully
+        cookie_categories:
+          index:
+            title: Cookie Management
+            new: New category
+            items: Items
+            edit: Edit category
+            remove: Remove category
+            confirm_destroy: Are you sure to remove this cookie category? This will also remove all the items in this category.
+          new:
+            save: Save
+            title: New cookie category
+          create:
+            error: Error creating cookie category! %{error}
+            success: Cookie category created successfully
+        cookie_items:
+          index:
+            title: Cookie items
+            new: New item
+            edit: Edit item
+            remove: Remove item
+            confirm_destroy: Are you sure to remove this cookie item?
+          new:
+            save: Save
+            title: New cookie item
+          create:
+            error: Error creating cookie item! %{error}
+            success: Cookie item created successfully
+          edit:
+            save: Save
+            title: Edit cookie item
+          update:
+            error: Error updating cookie item! %{error}
+            success: Cookie item updated successfully
         custom_redirects:
           create:
             error: Error creating redirection! %{error}

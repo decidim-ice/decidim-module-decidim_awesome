@@ -7,6 +7,8 @@ module Decidim
         def register_simple_entry(menu_registry, name, position, icon, options = {})
           return if menus[name].blank?
 
+          path = main_path_for(name)
+
           Decidim.menu menu_registry do |menu|
             i18n_key = options[:i18n_key].presence || "menu.#{name}"
             extra = {}.tap do |hash|
@@ -18,7 +20,6 @@ module Decidim
                 end
               end
             end
-            path = main_path_for(name)
             menu.add_item name,
                           I18n.t(i18n_key, scope: "decidim.decidim_awesome.admin"),
                           decidim_admin_decidim_awesome.send(path[0], path[1]),
@@ -39,7 +40,7 @@ module Decidim
           when :custom_redirects
             [:custom_redirects_path, []]
           when :cookie_management
-            [:cookie_management_path, []]
+            [:cookie_categories_path, []]
           when :maintenance
             [:checks_path, []]
           else

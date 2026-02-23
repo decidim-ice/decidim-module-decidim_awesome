@@ -20,7 +20,9 @@ module Decidim
           resources :hacks, except: [:show], controller: "menu_hacks"
         end
         resources :custom_redirects, except: [:show]
-        get :cookie_management, to: "cookie_management#index", as: "cookie_management"
+        resources :cookie_categories, except: [:show], param: :slug do
+          resources :cookie_items, except: [:show], param: :name
+        end
         resources :config, param: :var, only: [:show, :update]
         resources :scoped_styles, param: :var, only: [:create, :destroy]
         resources :proposal_custom_fields, param: :var, only: [:create, :destroy]

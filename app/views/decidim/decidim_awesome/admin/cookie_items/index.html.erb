@@ -1,0 +1,36 @@
+<div class="item_show__header">
+  <h2 class="item_show__header-title">
+    <%= t(".title", category: category["slug"]) %>
+    <%= link_to t(".new"), decidim_admin_decidim_awesome.new_cookie_category_cookie_item_path(params[:cookie_category_slug]), class: "button button__secondary button__xs tiny button--title text-white" %>
+  </h2>
+</div>
+
+<div class="card">
+  <div class="card-section p-4">
+    <div class="table-scroll decidim_awesome-form">
+      <table class="table-list">
+        <thead>
+          <tr>
+            <th><%= t("cookie_item.type", scope: "activemodel.attributes") %></th>
+            <th><%= t("cookie_item.name", scope: "activemodel.attributes") %></th>
+            <th><%= t("cookie_item.service", scope: "activemodel.attributes") %></th>
+            <th class="actions"><%= t("decidim.decidim_awesome.admin.actions") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% (category["items"] || []).each do |item| %>
+            <tr>
+              <td><%= item["type"] %></td>
+              <td><%= item["name"] %></td>
+              <td><%= translated_attribute(item["service"]) %></td>
+              <td class="table-list__actions">
+                <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_cookie_category_cookie_item_path(params[:cookie_category_slug], item["name"]), t(".edit"), class: "action-icon--edit" %>
+                <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.cookie_category_cookie_item_path(params[:cookie_category_slug], item["name"]), t(".remove"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
