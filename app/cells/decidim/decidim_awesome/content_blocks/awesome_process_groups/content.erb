@@ -1,8 +1,8 @@
 <div class="content-block__title">
   <h2 class="h2 decorator"><%= title %></h2>
 </div>
-<div class="pg-status-bar">
-  <span class="pg-filter-label"><%= t("status_label", scope: i18n_scope) %></span>
+<div class="process-groups-status-bar">
+  <span class="process-groups-filter-label"><%= t("status_label", scope: i18n_scope) %></span>
   <% status_filters.each do |filter| %>
     <a href="<%= filter_url(status: filter) %>"
        class="process-groups-filter-tab <%= "is-active" if filter == current_status %>"
@@ -12,25 +12,25 @@
   <% end %>
 </div>
 <% if taxonomy_filters_available? %>
-  <form method="get" action="<%= participatory_process_group_path(resource) %>" class="pg-taxonomy-bar" data-auto-submit-form>
+  <form method="get" action="<%= participatory_process_group_path(resource) %>" class="process-groups-taxonomy-bar" data-auto-submit-form>
     <input type="hidden" name="status" value="<%= current_status %>">
-    <span class="pg-filter-label"><%= t("filter_by_label", scope: i18n_scope) %></span>
+    <span class="process-groups-filter-label"><%= t("filter_by_label", scope: i18n_scope) %></span>
     <% taxonomy_filter_groups.each do |group| %>
-      <div class="pg-filter-dropdown">
+      <div class="process-groups-filter-dropdown">
         <button type="button"
-                id="pg-trigger-<%= block_id %>-<%= group[:root_id] %>"
-                class="pg-filter-dropdown__trigger"
+                id="process-groups-trigger-<%= block_id %>-<%= group[:root_id] %>"
+                class="process-groups-filter-dropdown__trigger"
                 data-controller="dropdown"
-                data-target="pg-panel-<%= block_id %>-<%= group[:root_id] %>"
-                aria-controls="pg-panel-<%= block_id %>-<%= group[:root_id] %>">
+                data-target="process-groups-panel-<%= block_id %>-<%= group[:root_id] %>"
+                aria-controls="process-groups-panel-<%= block_id %>-<%= group[:root_id] %>">
           <span><%= group[:name] %></span>
-          <%= icon "arrow-down-s-line", class: "pg-filter-dropdown__arrow" %>
+          <%= icon "arrow-down-s-line", class: "process-groups-filter-dropdown__arrow" %>
         </button>
-        <div id="pg-panel-<%= block_id %>-<%= group[:root_id] %>"
-             class="pg-filter-dropdown__panel"
+        <div id="process-groups-panel-<%= block_id %>-<%= group[:root_id] %>"
+             class="process-groups-filter-dropdown__panel"
              aria-hidden="true">
           <% group[:items].each do |item| %>
-            <label class="pg-filter-dropdown__item">
+            <label class="process-groups-filter-dropdown__item">
               <input type="checkbox" name="taxonomy_ids[]"
                      value="<%= item[:id] %>"
                      <%= "checked" if taxonomy_selected?(item[:id]) %>>
@@ -42,11 +42,11 @@
     <% end %>
   </form>
   <% if selected_taxonomy_tags.any? %>
-    <div class="pg-active-tags" data-active-taxonomy-tags>
+    <div class="process-groups-active-tags" data-active-taxonomy-tags>
       <% selected_taxonomy_tags.each do |tag| %>
         <span class="label" data-tag-for="<%= tag[:id] %>">
           <%= tag[:name] %>
-          <button type="button" class="pg-remove-tag"
+          <button type="button" class="process-groups-remove-tag"
                   data-remove-tag="<%= tag[:id] %>"
                   aria-label="<%= t("remove_filter", scope: i18n_scope) %>">
             <span aria-hidden="true">&times;</span>
@@ -55,14 +55,12 @@
       <% end %>
     </div>
   <% end %>
-<% else %>
-  <div class="pg-spacer"></div>
 <% end %>
 <div class="participatory-space__block-grid">
   <% paginated_items.each do |process| %>
     <div><%= card_for process, size: :g %></div>
   <% end %>
 </div>
-<div class="pg-pagination">
+<div class="process-groups-pagination">
   <%= paginate paginated_items, theme: "decidim", params: pagination_params %>
 </div>

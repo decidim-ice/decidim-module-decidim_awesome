@@ -1,28 +1,28 @@
-.pg-filter-label {
+.process-groups-filter-label {
   @apply text-sm font-semibold text-gray-2;
 }
 
-.pg-status-bar {
+.process-groups-status-bar {
   @apply flex items-center gap-4 mt-4;
 }
 
-.pg-taxonomy-bar {
+.process-groups-taxonomy-bar {
   @apply flex flex-wrap items-center gap-2 mt-4 mb-6;
 }
 
-.pg-active-tags {
+.process-groups-active-tags {
   @apply flex flex-wrap items-center gap-2 mb-6;
 }
 
-.pg-spacer {
-  @apply mb-6;
+.process-groups-status-bar + .participatory-space__block-grid {
+  @apply mt-6;
 }
 
-.pg-remove-tag {
+.process-groups-remove-tag {
   @apply cursor-pointer;
 }
 
-.pg-pagination {
+.process-groups-pagination {
   @apply pt-8 flex justify-end;
 }
 
@@ -40,7 +40,7 @@
   }
 }
 
-.pg-filter-dropdown {
+.process-groups-filter-dropdown {
   @apply relative;
 
   &__trigger {
@@ -53,7 +53,7 @@
     &[aria-expanded="true"] {
       @apply border-secondary;
 
-      .pg-filter-dropdown__arrow {
+      .process-groups-filter-dropdown__arrow {
         @apply rotate-180;
       }
     }
