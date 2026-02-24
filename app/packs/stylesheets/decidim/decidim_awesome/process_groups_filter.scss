@@ -18,6 +18,16 @@
   @apply mt-6;
 }
 
+[data-process-groups-filter] .participatory-space__block-grid {
+  > div {
+    @apply flex;
+
+    .card__grid {
+      @apply w-full;
+    }
+  }
+}
+
 .process-groups-remove-tag {
   @apply cursor-pointer;
 }
