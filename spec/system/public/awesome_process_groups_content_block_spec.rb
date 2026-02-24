@@ -126,6 +126,23 @@ describe "Awesome Process Groups content block on group landing page" do
     end
   end
 
+  it "displays the results count" do
+    visit_group_page
+    within "[data-process-groups-filter]" do
+      expect(page).to have_content("3 processes found")
+    end
+  end
+
+  it "updates the results count when filtering by status" do
+    visit_group_page
+    within "[data-process-groups-filter]" do
+      click_on "Active (1)"
+    end
+    within "[data-process-groups-filter]" do
+      expect(page).to have_content("1 process found")
+    end
+  end
+
   context "when no taxonomy filters exist" do
     it "does not render the filter by label" do
       visit_group_page

@@ -243,6 +243,23 @@ module Decidim::DecidimAwesome
       end
     end
 
+    describe "results count" do
+      let!(:process1) { create(:participatory_process, :published, organization:, participatory_process_group: process_group, title: { en: "Process One" }) }
+      let!(:process2) { create(:participatory_process, :published, organization:, participatory_process_group: process_group, title: { en: "Process Two" }) }
+
+      it "displays the total count of filtered processes" do
+        expect(subject).to have_content("2 processes found")
+      end
+
+      context "with a single process" do
+        let!(:process2) { nil }
+
+        it "uses singular form" do
+          expect(subject).to have_content("1 process found")
+        end
+      end
+    end
+
     describe "taxonomy filters" do
       context "when taxonomy filters are available" do
         let!(:grouped_process) { create(:participatory_process, :published, organization:, participatory_process_group: process_group, title: { en: "Filtered Process" }) }
@@ -334,6 +351,59 @@ module Decidim::DecidimAwesome
         it "reports taxonomy filters as not available" do
           block_cell.call
           expect(block_cell.taxonomy_filters_available?).to be(false)
+        end
+      end
+
+      context "when taxonomy items have hierarchy (parent-child)" do
+        let!(:grouped_process) { create(:participatory_process, :published, organization:, participatory_process_group: process_group) }
+        let(:root_taxonomy) { create(:taxonomy, organization:, name: { en: "Topics" }) }
+        let(:parent_taxonomy) { create(:taxonomy, organization:, parent: root_taxonomy, name: { en: "Environment" }) }
+        let(:child_water) { create(:taxonomy, organization:, parent: parent_taxonomy, name: { en: "Water" }) }
+        let(:child_air) { create(:taxonomy, organization:, parent: parent_taxonomy, name: { en: "Air" }) }
+        let(:sibling_taxonomy) { create(:taxonomy, organization:, parent: root_taxonomy, name: { en: "Transport" }) }
+        let(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy:) }
+        let!(:fi_parent) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: parent_taxonomy) }
+        let!(:fi_water) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: child_water) }
+        let!(:fi_air) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: child_air) }
+        let!(:fi_transport) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: sibling_taxonomy) }
+
+        it "assigns depth 0 to direct children of root and depth 1 to grandchildren" do
+          block_cell.call
+          groups = block_cell.taxonomy_filter_groups
+          items = groups.first[:items]
+          env_item = items.find { |it| it[:id] == parent_taxonomy.id }
+          water_item = items.find { |it| it[:id] == child_water.id }
+          air_item = items.find { |it| it[:id] == child_air.id }
+          transport_item = items.find { |it| it[:id] == sibling_taxonomy.id }
+
+          expect(env_item[:depth]).to eq(0)
+          expect(water_item[:depth]).to eq(1)
+          expect(air_item[:depth]).to eq(1)
+          expect(transport_item[:depth]).to eq(0)
+        end
+
+        it "sorts children immediately after their parent" do
+          block_cell.call
+          groups = block_cell.taxonomy_filter_groups
+          items = groups.first[:items]
+          names = items.map { |it| it[:name] }
+          env_idx = names.index("Environment")
+          water_idx = names.index("Water")
+          air_idx = names.index("Air")
+          transport_idx = names.index("Transport")
+
+          expect(water_idx).to be > env_idx
+          expect(air_idx).to be > env_idx
+          expect(transport_idx).to be > water_idx
+        end
+
+        it "renders child items with is-child CSS class" do
+          expect(subject).to have_css(".process-groups-filter-dropdown__item.is-child", count: 2)
+        end
+
+        it "renders parent items without is-child CSS class" do
+          parent_items = subject.native.css(".process-groups-filter-dropdown__item").reject { |el| el["class"].include?("is-child") }
+          expect(parent_items.size).to eq(2)
         end
       end
 
