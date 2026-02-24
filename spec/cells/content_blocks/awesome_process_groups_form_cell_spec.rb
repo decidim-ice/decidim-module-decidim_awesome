@@ -25,7 +25,7 @@ module Decidim::DecidimAwesome
     end
 
     it "renders the max_count field" do
-      expect(subject).to have_content("Items per page")
+      expect(subject).to have_content("Maximum amount of elements to show")
     end
 
     it "exposes the content_block" do

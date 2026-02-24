@@ -707,7 +707,7 @@ en:
           all: All
           all_taxonomies: All categories
           filter_by_label: 'Filter by:'
-          max_count: Items per page
+          max_count: Maximum amount of elements to show
           name: Process Groups Extended
           past: Past
           remove_filter: Remove filter
