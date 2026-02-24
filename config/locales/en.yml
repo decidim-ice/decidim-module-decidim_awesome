@@ -509,6 +509,12 @@ en:
           create:
             error: Error creating cookie category! %{error}
             success: Cookie category created successfully
+          update:
+            error: Error updating cookie category! %{error}
+            success: Cookie category updated successfully
+          destroy:
+            error: Error removing cookie category! %{error}
+            success: Cookie category removed successfully
           index:
             confirm_destroy: Are you sure to remove this cookie category? This will
               also remove all the items in this category.
@@ -524,6 +530,9 @@ en:
           create:
             error: Error creating cookie item! %{error}
             success: Cookie item created successfully
+          destroy:
+            error: Error removing cookie item! %{error}
+            success: Cookie item removed successfully
           edit:
             save: Save
             title: Edit cookie item
