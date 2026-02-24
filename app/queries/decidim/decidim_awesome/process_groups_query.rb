@@ -13,8 +13,7 @@ module Decidim
         @base_relation ||=
           Decidim::ParticipatoryProcesses::GroupPublishedParticipatoryProcesses
           .new(group, user).query
-          .includes(:organization, :taxonomies, :active_step)
-          .with_attached_hero_image
+          .includes(:organization, :taxonomies, :active_step, :hero_image_attachment)
           .order(weight: :asc, start_date: :desc)
       end
 
