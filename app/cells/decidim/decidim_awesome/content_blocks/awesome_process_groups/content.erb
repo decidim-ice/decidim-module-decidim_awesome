@@ -30,7 +30,7 @@
              class="process-groups-filter-dropdown__panel"
              aria-hidden="true">
           <% group[:items].each do |item| %>
-            <label class="process-groups-filter-dropdown__item">
+            <label class="process-groups-filter-dropdown__item<%= " is-child" if item[:depth]&.positive? %>">
               <input type="checkbox" name="taxonomy_ids[]"
                      value="<%= item[:id] %>"
                      <%= "checked" if taxonomy_selected?(item[:id]) %>>

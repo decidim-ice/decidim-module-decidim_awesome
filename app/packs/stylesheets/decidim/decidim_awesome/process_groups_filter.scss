@@ -68,22 +68,26 @@
   }
 
   &__panel {
-    @apply absolute top-full left-0 mt-1 bg-white border border-gray-3 rounded shadow-md z-10 min-w-max p-2;
+    @apply absolute top-full left-0 mt-1 bg-white border border-gray-3 rounded shadow-md z-10 min-w-max p-1.5;
 
     &[aria-hidden="true"] {
       @apply hidden;
     }
 
     &[aria-hidden="false"] {
-      @apply flex flex-col gap-1;
+      @apply flex flex-col gap-0.5;
     }
   }
 
   &__item {
-    @apply flex items-center gap-2 px-2 py-1 text-sm cursor-pointer rounded;
+    @apply flex items-center gap-1.5 px-1.5 py-0.5 text-sm cursor-pointer rounded;
 
     &:hover {
       @apply bg-background;
+    }
+
+    &.is-child {
+      @apply pl-4;
     }
 
     input[type="checkbox"] {
