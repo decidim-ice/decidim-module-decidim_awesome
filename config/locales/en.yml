@@ -702,6 +702,34 @@ en:
           title_closed: Click to chat!
           title_open: Let's chat!
       content_blocks:
+        awesome_processes:
+          active_spaces: Last processes
+          any_group: Any group
+          group_label: Group
+          max_results: Maximum amount of elements to show
+          name: Awesome Processes
+          process_group: Restrict to process group
+          process_status: Process status filter
+          process_statuses:
+            active: Only active processes
+            all: All processes
+            past: Only past processes
+            upcoming: Only future processes
+          process_type: Type of processes
+          process_type_mixed_hint: In mixed mode, processes and groups are interleaved
+            up to the maximum amount. Processes are sorted by weight (ascending).
+            If one type runs out, the remaining slots are filled with the other.
+          process_types:
+            all: All processes and groups mixed
+            groups: Only process groups
+            processes: Only processes
+          processes: Processes
+          see_all_spaces: See all processes
+          selection_criteria: Selection criteria
+          selection_criteria_options:
+            automatic: Automatic
+            manual: Manual
+          title: Block title
         map:
           collapse: Start with collapsed menu
           map_center: Map center (Latitude, Longitude)

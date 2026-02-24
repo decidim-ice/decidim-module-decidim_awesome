@@ -1,0 +1,49 @@
+<% form.fields_for :settings, form.object.settings do |settings_fields| %>
+  <div class="row column">
+    <%= settings_fields.translated :text_field, :title,
+                                   label: t("title", scope: i18n_scope) %>
+  </div>
+
+  <div class="row column">
+    <%= settings_fields.number_field :max_results,
+                                     label: t("max_results", scope: i18n_scope) %>
+  </div>
+
+  <div class="row column" data-awesome-processes-type>
+    <%= settings_fields.select :process_type,
+                               process_type_options,
+                               label: t("process_type", scope: i18n_scope) %>
+    <div data-awesome-processes-mixed-hint
+         <%= "hidden" unless settings_fields.object.process_type == "all" %>>
+      <span class="help-text">
+        <%= t("process_type_mixed_hint", scope: i18n_scope) %>
+      </span>
+    </div>
+  </div>
+
+  <div class="row column">
+    <%= settings_fields.select :process_group_id,
+                               process_group_options,
+                               label: t("process_group", scope: i18n_scope) %>
+  </div>
+
+  <div class="row column">
+    <%= settings_fields.select :process_status,
+                               process_status_options,
+                               label: t("process_status", scope: i18n_scope) %>
+  </div>
+
+  <div class="row column" data-awesome-processes-criteria>
+    <%= settings_fields.select :selection_criteria,
+                               selection_criteria_options,
+                               label: t("selection_criteria", scope: i18n_scope) %>
+  </div>
+
+  <div class="row column" data-awesome-processes-manual
+       <%= "hidden" unless settings_fields.object.selection_criteria == "manual" %>>
+    <%= settings_fields.select :selected_ids,
+                               processes_for_select,
+                               { label: t("processes", scope: i18n_scope) },
+                               { multiple: true, class: "awesome-processes-tom-select" } %>
+  </div>
+<% end %>
