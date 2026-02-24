@@ -26,64 +26,50 @@ module Decidim
 
         def create
           @form = form(CookieItemForm).from_params(params)
-          return render(:new) if @form.invalid?
 
-          data = cookie_management_setting.value
-          data = {} unless data.is_a?(Hash)
-          data["categories"] = [] unless data["categories"].is_a?(Array)
+          CreateCookieItem.call(@form, params[:cookie_category_slug]) do
+            on(:ok) do
+              flash[:notice] = I18n.t("cookie_items.create.success", scope: "decidim.decidim_awesome.admin")
+              redirect_to decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
+            end
 
-          cat = data["categories"].find { |c| c["slug"].to_s == params[:cookie_category_slug].to_s }
-          raise ActiveRecord::RecordNotFound unless cat
-
-          cat["items"] = [] unless cat["items"].is_a?(Array)
-          if cat["items"].any? { |i| i["name"].to_s == @form.name }
-            flash.now[:alert] = I18n.t("cookie_items.create.error", scope: "decidim.decidim_awesome.admin")
-            return render :new
+            on(:invalid) do |error_message|
+              error = error_message.presence || @form.errors.full_messages.join(", ")
+              flash.now[:alert] = I18n.t("cookie_items.create.error", scope: "decidim.decidim_awesome.admin", error: error)
+              render :new
+            end
           end
-
-          cat["items"] << @form.to_params
-          cookie_management_setting.value = data
-          cookie_management_setting.save!
-
-          flash[:notice] = I18n.t("cookie_items.create.success", scope: "decidim.decidim_awesome.admin")
-          redirect_to decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
         end
 
         def update
           @form = form(CookieItemForm).from_params(params)
-          return render(:edit) if @form.invalid?
 
-          data = cookie_management_setting.value
-          data = {} unless data.is_a?(Hash)
-          cat = data["categories"].find { |c| c["slug"].to_s == params[:cookie_category_slug].to_s }
-          raise ActiveRecord::RecordNotFound unless cat
+          UpdateCookieItem.call(@form, params[:cookie_category_slug], params[:name]) do
+            on(:ok) do
+              flash[:notice] = I18n.t("cookie_items.update.success", scope: "decidim.decidim_awesome.admin")
+              redirect_to decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
+            end
 
-          cat["items"] = [] unless cat["items"].is_a?(Array)
-          idx = cat["items"].index { |i| i["name"].to_s == params[:name].to_s }
-          raise ActiveRecord::RecordNotFound if idx.nil?
-
-          cat["items"][idx] = @form.to_params
-          cookie_management_setting.value = data
-          cookie_management_setting.save!
-
-          flash[:notice] = I18n.t("cookie_items.update.success", scope: "decidim.decidim_awesome.admin")
-          redirect_to decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
+            on(:invalid) do |error_message|
+              error = error_message.presence || @form.errors.full_messages.join(", ")
+              flash.now[:alert] = I18n.t("cookie_items.update.error", scope: "decidim.decidim_awesome.admin", error: error)
+              render :edit
+            end
+          end
         end
 
         def destroy
-          data = cookie_management_setting.value
-          data = {} unless data.is_a?(Hash)
-          cat = data["categories"].find { |c| c["slug"].to_s == params[:cookie_category_slug].to_s }
-          raise ActiveRecord::RecordNotFound unless cat
+          DestroyCookieItem.call(params[:cookie_category_slug], params[:name], current_organization) do
+            on(:ok) do
+              flash[:notice] = I18n.t("cookie_items.destroy.success", scope: "decidim.decidim_awesome.admin")
+              redirect_to decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
+            end
 
-          cat["items"] = [] unless cat["items"].is_a?(Array)
-          cat["items"].reject! { |i| i["name"].to_s == params[:name].to_s }
-
-          cookie_management_setting.value = data
-          cookie_management_setting.save!
-
-          flash[:notice] = I18n.t("cookie_items.destroy.success", scope: "decidim.decidim_awesome.admin")
-          redirect_to decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
+            on(:invalid) do |error_message|
+              flash[:alert] = I18n.t("cookie_items.destroy.error", scope: "decidim.decidim_awesome.admin", error: error_message)
+              redirect_to decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
+            end
+          end
         end
 
         private
@@ -92,11 +78,21 @@ module Decidim
           @cookie_management_setting ||= AwesomeConfig.find_or_initialize_by(var: :cookie_management, organization: current_organization)
         end
 
+        def categories_data
+          @categories_data ||= begin
+            data = cookie_management_setting.value
+            data = {} unless data.is_a?(Hash)
+            data["categories"] = [] unless data["categories"].is_a?(Array)
+            data
+          end
+        end
+
+        def current_categories
+          categories_data["categories"]
+        end
+
         def category
-          raw = cookie_management_setting.value
-          categories = raw.is_a?(Hash) ? raw["categories"] : nil
-          categories = [] unless categories.is_a?(Array)
-          categories.find { |c| c["slug"].to_s == params[:cookie_category_slug].to_s }
+          current_categories.find { |c| c["slug"].to_s == params[:cookie_category_slug].to_s }
         end
 
         def item_for_form

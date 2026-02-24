@@ -190,8 +190,11 @@ module Decidim::DecidimAwesome
             }
           end
 
-          it "raises RecordNotFound" do
-            expect { patch :update, params: }.to raise_error(ActiveRecord::RecordNotFound)
+          it "renders edit with error" do
+            patch :update, params: params
+            expect(response).to have_http_status(:success)
+            expect(response).to render_template(:edit)
+            expect(flash[:alert]).to be_present
           end
         end
       end

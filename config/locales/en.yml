@@ -515,11 +515,14 @@ en:
           destroy:
             error: Error removing cookie category! %{error}
             success: Cookie category removed successfully
+          edit:
+            save: Save
+            title: Edit cookie category
           index:
             confirm_destroy: Are you sure to remove this cookie category? This will
               also remove all the items in this category.
             edit: Edit category
-            items: Items
+            items: Category items
             new: New category
             remove: Remove category
             title: Cookie Management
@@ -537,6 +540,7 @@ en:
             save: Save
             title: Edit cookie item
           index:
+            back_to_categories: Back to categories
             confirm_destroy: Are you sure to remove this cookie item?
             edit: Edit item
             new: New item
