@@ -709,6 +709,12 @@ en:
           max_results: Maximum amount of elements to show
           name: Awesome Processes
           process_group: Restrict to process group
+          process_status: Process status filter
+          process_statuses:
+            active: Only active processes
+            all: All processes
+            past: Only past processes
+            upcoming: Only future processes
           process_type: Type of processes
           process_type_mixed_hint: In mixed mode, processes and groups are interleaved
             up to the maximum amount. Processes are sorted by weight (ascending).
@@ -721,7 +727,7 @@ en:
           see_all_spaces: See all processes
           selection_criteria: Selection criteria
           selection_criteria_options:
-            active: Active
+            automatic: Automatic
             manual: Manual
           title: Block title
         map:

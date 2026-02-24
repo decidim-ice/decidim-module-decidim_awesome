@@ -61,6 +61,26 @@ describe "Public homepage shows Awesome Processes block" do
     end
   end
 
+  context "when process_status is 'all'" do
+    let(:settings) { { process_type: "processes", process_status: "all" } }
+
+    it "shows both active and past processes" do
+      visit decidim.root_path
+      expect(page).to have_content(translated(active_process.title))
+      expect(page).to have_content(translated(past_process.title))
+    end
+  end
+
+  context "when process_status is 'past'" do
+    let(:settings) { { process_type: "processes", process_status: "past" } }
+
+    it "shows only past processes" do
+      visit decidim.root_path
+      expect(page).to have_content(translated(past_process.title))
+      expect(page).to have_no_content(translated(active_process.title))
+    end
+  end
+
   context "when max_results is 1" do
     let(:settings) { { max_results: 1 } }
     let!(:another_active_process) { create(:participatory_process, :active, :published, organization:) }

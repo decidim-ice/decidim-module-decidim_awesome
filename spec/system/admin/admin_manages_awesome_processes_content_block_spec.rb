@@ -46,6 +46,7 @@ describe "Admin manages Awesome Processes content block" do
       expect(page).to have_field("content_block_settings_max_results")
       expect(page).to have_select("content_block_settings_process_type")
       expect(page).to have_select("content_block_settings_process_group_id")
+      expect(page).to have_select("content_block_settings_process_status")
       expect(page).to have_select("content_block_settings_selection_criteria")
     end
 
@@ -81,6 +82,14 @@ describe "Admin manages Awesome Processes content block" do
       expect(page).to have_select("content_block_settings_process_group_id", selected: translated(process_group.title))
     end
 
+    it "saves and persists process_status selection" do
+      select "Only past processes", from: "content_block_settings_process_status"
+      click_link_or_button "Update"
+
+      visit decidim_admin.edit_organization_homepage_content_block_path(content_block)
+      expect(page).to have_select("content_block_settings_process_status", selected: "Only past processes")
+    end
+
     it "saves and persists selection_criteria" do
       select "Manual", from: "content_block_settings_selection_criteria"
       click_link_or_button "Update"
@@ -90,8 +99,8 @@ describe "Admin manages Awesome Processes content block" do
     end
 
     describe "dynamic form behavior" do
-      it "hides processes multiselect when selection_criteria is 'Active'" do
-        expect(page).to have_select("content_block_settings_selection_criteria", selected: "Active")
+      it "hides processes multiselect when selection_criteria is 'Automatic'" do
+        expect(page).to have_select("content_block_settings_selection_criteria", selected: "Automatic")
         within "form" do
           expect(page).to have_no_css("[data-awesome-processes-manual]", text: "Processes")
         end
@@ -104,13 +113,13 @@ describe "Admin manages Awesome Processes content block" do
         end
       end
 
-      it "hides multiselect again when switching back to 'Active'" do
+      it "hides multiselect again when switching back to 'Automatic'" do
         select "Manual", from: "content_block_settings_selection_criteria"
         within "[data-awesome-processes-manual]" do
           expect(page).to have_content("Processes")
         end
 
-        select "Active", from: "content_block_settings_selection_criteria"
+        select "Automatic", from: "content_block_settings_selection_criteria"
         within "form" do
           expect(page).to have_no_css("[data-awesome-processes-manual]", text: "Processes")
         end

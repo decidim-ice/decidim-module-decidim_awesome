@@ -12,7 +12,7 @@ module Decidim
       let(:settings) { OpenStruct.new(settings_hash) }
       let(:settings_hash) do
         {
-          selection_criteria: "active",
+          selection_criteria: "automatic",
           process_type: "all",
           process_group_id: 0,
           max_results: 6,
@@ -65,6 +65,52 @@ module Decidim
             results = subject.results
             expect(results).to include(process_group)
             expect(results).not_to include(active_process)
+          end
+        end
+
+        context "when process_status is 'all'" do
+          let(:settings_hash) { super().merge(process_type: "processes", process_status: "all") }
+
+          it "returns both active and past processes" do
+            results = subject.results
+            expect(results).to include(active_process)
+            expect(results).to include(past_process)
+          end
+
+          it "does not return unpublished processes" do
+            expect(subject.results).not_to include(unpublished_process)
+          end
+        end
+
+        context "when process_status is 'upcoming'" do
+          let!(:upcoming_process) { create(:participatory_process, :upcoming, :published, organization:) }
+          let(:settings_hash) { super().merge(process_type: "processes", process_status: "upcoming") }
+
+          it "returns only upcoming processes" do
+            results = subject.results
+            expect(results).to include(upcoming_process)
+            expect(results).not_to include(active_process)
+            expect(results).not_to include(past_process)
+          end
+        end
+
+        context "when process_status is 'past'" do
+          let(:settings_hash) { super().merge(process_type: "processes", process_status: "past") }
+
+          it "returns only past processes" do
+            results = subject.results
+            expect(results).to include(past_process)
+            expect(results).not_to include(active_process)
+          end
+        end
+
+        context "when process_status is 'active' (default)" do
+          let(:settings_hash) { super().merge(process_type: "processes", process_status: "active") }
+
+          it "returns only active processes" do
+            results = subject.results
+            expect(results).to include(active_process)
+            expect(results).not_to include(past_process)
           end
         end
 

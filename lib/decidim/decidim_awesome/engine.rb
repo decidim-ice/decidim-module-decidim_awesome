@@ -302,7 +302,8 @@ module Decidim
             settings.attribute :max_results, type: :integer, default: 6
             settings.attribute :process_type, type: :enum, default: "all", choices: %w(all processes groups)
             settings.attribute :process_group_id, type: :integer, default: 0
-            settings.attribute :selection_criteria, type: :enum, default: "active", choices: %w(active manual)
+            settings.attribute :process_status, type: :enum, default: "active", choices: %w(active all upcoming past)
+            settings.attribute :selection_criteria, type: :enum, default: "automatic", choices: %w(automatic manual)
             settings.attribute :selected_ids, type: :array, default: []
           end
         end

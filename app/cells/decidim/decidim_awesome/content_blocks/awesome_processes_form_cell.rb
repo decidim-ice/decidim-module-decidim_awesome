@@ -31,9 +31,18 @@ module Decidim
           opts
         end
 
+        def process_status_options
+          [
+            [t("process_statuses.active", scope: i18n_scope), "active"],
+            [t("process_statuses.all", scope: i18n_scope), "all"],
+            [t("process_statuses.upcoming", scope: i18n_scope), "upcoming"],
+            [t("process_statuses.past", scope: i18n_scope), "past"]
+          ]
+        end
+
         def selection_criteria_options
           [
-            [t("selection_criteria_options.active", scope: i18n_scope), "active"],
+            [t("selection_criteria_options.automatic", scope: i18n_scope), "automatic"],
             [t("selection_criteria_options.manual", scope: i18n_scope), "manual"]
           ]
         end

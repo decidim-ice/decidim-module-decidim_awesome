@@ -27,6 +27,12 @@
                                label: t("process_group", scope: i18n_scope) %>
   </div>
 
+  <div class="row column">
+    <%= settings_fields.select :process_status,
+                               process_status_options,
+                               label: t("process_status", scope: i18n_scope) %>
+  </div>
+
   <div class="row column" data-awesome-processes-criteria>
     <%= settings_fields.select :selection_criteria,
                                selection_criteria_options,

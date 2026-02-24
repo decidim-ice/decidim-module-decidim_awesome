@@ -61,6 +61,24 @@ module Decidim::DecidimAwesome
       end
     end
 
+    context "when process_status is 'all'" do
+      let(:settings) { { process_type: "processes", process_status: "all" } }
+
+      it "shows both active and past processes" do
+        expect(subject).to have_content(translated(active_process.title))
+        expect(subject).to have_content(translated(past_process.title))
+      end
+    end
+
+    context "when process_status is 'past'" do
+      let(:settings) { { process_type: "processes", process_status: "past" } }
+
+      it "shows only past processes" do
+        expect(subject).to have_content(translated(past_process.title))
+        expect(subject).to have_no_content(translated(active_process.title))
+      end
+    end
+
     context "when max_results limits output" do
       let(:settings) { { max_results: 1 } }
 

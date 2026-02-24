@@ -74,6 +74,26 @@ module Decidim::DecidimAwesome
       end
     end
 
+    describe "#process_status_options" do
+      it "returns 4 options" do
+        options = cell_instance.process_status_options
+        expect(options.size).to eq(4)
+      end
+
+      it "includes active, all, upcoming, and past values" do
+        values = cell_instance.process_status_options.map(&:last)
+        expect(values).to eq(%w(active all upcoming past))
+      end
+
+      it "has translated labels" do
+        labels = cell_instance.process_status_options.map(&:first)
+        expect(labels).to include("Only active processes")
+        expect(labels).to include("All processes")
+        expect(labels).to include("Only future processes")
+        expect(labels).to include("Only past processes")
+      end
+    end
+
     describe "#selection_criteria_options" do
       it "returns 2 options" do
         options = cell_instance.selection_criteria_options
@@ -82,12 +102,12 @@ module Decidim::DecidimAwesome
 
       it "includes active and manual values" do
         values = cell_instance.selection_criteria_options.map(&:last)
-        expect(values).to eq(%w(active manual))
+        expect(values).to eq(%w(automatic manual))
       end
 
       it "has translated labels" do
         labels = cell_instance.selection_criteria_options.map(&:first)
-        expect(labels).to include("Active")
+        expect(labels).to include("Automatic")
         expect(labels).to include("Manual")
       end
     end

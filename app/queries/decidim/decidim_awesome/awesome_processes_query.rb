@@ -24,6 +24,10 @@ module Decidim
 
       attr_reader :organization, :current_user, :settings
 
+      def process_status
+        settings.respond_to?(:process_status) ? settings.process_status : "active"
+      end
+
       def automatic_selection
         return fetch_processes.first(max_results) if settings.process_type == "processes"
         return fetch_groups.first(max_results) if settings.process_type == "groups"
@@ -51,12 +55,22 @@ module Decidim
       end
 
       def fetch_processes
-        scope = published_processes.active
+        scope = published_processes
+        scope = apply_status_filter(scope)
         scope = scope.where(decidim_participatory_process_group_id: settings.process_group_id) if group_filter_active?
         scope.reorder(weight: :asc, id: :asc)
              .includes(:organization, :hero_image_attachment)
              .limit(max_results)
              .to_a
+      end
+
+      def apply_status_filter(scope)
+        case process_status
+        when "all" then scope
+        when "upcoming" then scope.upcoming
+        when "past" then scope.past
+        else scope.active
+        end
       end
 
       def fetch_groups
