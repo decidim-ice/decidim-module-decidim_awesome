@@ -53,11 +53,18 @@ module Decidim
         expect(attr.default).to eq(0)
       end
 
+      it "defines :process_status setting as enum" do
+        attr = settings_schema.attributes[:process_status]
+        expect(attr).to be_present
+        expect(attr.type).to eq(:enum)
+        expect(attr.build_choices).to match_array(%w(active all upcoming past))
+      end
+
       it "defines :selection_criteria setting as enum" do
         attr = settings_schema.attributes[:selection_criteria]
         expect(attr).to be_present
         expect(attr.type).to eq(:enum)
-        expect(attr.build_choices).to match_array(%w(active manual))
+        expect(attr.build_choices).to match_array(%w(automatic manual))
       end
 
       it "defines :selected_ids setting as array with default []" do
