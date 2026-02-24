@@ -711,6 +711,9 @@ en:
           name: Process Groups Extended
           past: Past
           remove_filter: Remove filter
+          results_count:
+            one: "%{count} process found"
+            other: "%{count} processes found"
           status_label: 'Status:'
           title: Block title
           upcoming: Upcoming

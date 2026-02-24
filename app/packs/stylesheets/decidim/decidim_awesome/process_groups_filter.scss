@@ -23,7 +23,11 @@
 }
 
 .process-groups-pagination {
-  @apply pt-8 flex justify-end;
+  @apply pt-8 flex items-center justify-between;
+}
+
+.process-groups-results-count {
+  @apply text-sm text-gray-2;
 }
 
 .process-groups-filter-tab {
