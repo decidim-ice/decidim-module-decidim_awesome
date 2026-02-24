@@ -428,6 +428,21 @@ Note this feature is **disabled by default**, admins can enabled it under the "S
 ![Hashcash admin config](examples/haschcash_admin.png)
 ![Hashcash public rendering](examples/hashcash_public.png)
 
+#### 23. Awesome Processes content block
+
+A homepage content block that displays participatory processes and/or process groups with flexible filtering options. Administrators can configure the block through the following settings:
+
+- **Process type**: Show only processes, only process groups, or both interleaved.
+- **Process group filter**: Restrict displayed processes to a specific process group.
+- **Process status filter**: Show only active processes (default), all processes, only future processes or only past processes.
+- **Selection criteria**: Choose between automatic filtering or manual selection of specific processes and groups.
+- **Max results**: Limit the number of items displayed.
+- **Custom title**: Override the default block title.
+
+When using automatic mode with "All processes and groups mixed", items are interleaved (alternating between processes and groups) up to the configured maximum. In manual mode, administrators can hand-pick specific processes and groups using a searchable multiselect.
+
+![Awesome Processes admin settings](examples/awesome_processes_admin.png)
+
 #### To be continued...
 
 We're not done! Please check the [issues](/decidim-ice/decidim-module-decidim_awesome/issues) (and participate) to see what's on our mind

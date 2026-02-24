@@ -304,6 +304,24 @@ module Decidim
         end
       end
 
+      initializer "decidim_decidim_awesome.awesome_processes_content_block" do
+        Decidim.content_blocks.register(:homepage, :awesome_processes) do |content_block|
+          content_block.cell = "decidim/decidim_awesome/content_blocks/awesome_processes"
+          content_block.settings_form_cell = "decidim/decidim_awesome/content_blocks/awesome_processes_form"
+          content_block.public_name_key = "decidim.decidim_awesome.content_blocks.awesome_processes.name"
+
+          content_block.settings do |settings|
+            settings.attribute :title, type: :text, translated: true
+            settings.attribute :max_results, type: :integer, default: 6
+            settings.attribute :process_type, type: :enum, default: "all", choices: %w(all processes groups)
+            settings.attribute :process_group_id, type: :integer, default: 0
+            settings.attribute :process_status, type: :enum, default: "active", choices: %w(active all upcoming past)
+            settings.attribute :selection_criteria, type: :enum, default: "automatic", choices: %w(automatic manual)
+            settings.attribute :selected_ids, type: :array, default: []
+          end
+        end
+      end
+
       initializer "decidim_decidim_awesome.webpacker.assets_path" do
         Decidim.register_assets_path File.expand_path("app/packs", root)
       end
