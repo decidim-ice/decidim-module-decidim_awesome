@@ -54,7 +54,6 @@ module Decidim
         scope = published_processes.active
         scope = scope.where(decidim_participatory_process_group_id: settings.process_group_id) if group_filter_active?
         scope.reorder(weight: :asc, id: :asc)
-             .with_attached_hero_image
              .includes(:organization, :hero_image_attachment)
              .limit(max_results)
              .to_a
