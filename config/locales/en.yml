@@ -63,6 +63,14 @@ en:
         name: Name
         service: Service
         type: Type
+    errors:
+      models:
+        cookie_item:
+          attributes:
+            base:
+              category_not_found: Category not found
+            name:
+              taken: has already been taken
       custom_redirect:
         active: Active
         destination: Destination
