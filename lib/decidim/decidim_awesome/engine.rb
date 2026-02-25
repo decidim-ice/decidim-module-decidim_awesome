@@ -301,8 +301,8 @@ module Decidim
 
       # Votings may override proposals cells, let's be sure to add these paths after the proposal component initializer
       initializer "decidim_decidim_awesome.add_cells_view_paths", before: "decidim_proposals.add_cells_view_paths" do
-        Cell::ViewModel.view_paths << File.expand_path("#{Decidim::DecidimAwesome::Engine.root}/app/cells")
-        Cell::ViewModel.view_paths << File.expand_path("#{Decidim::DecidimAwesome::Engine.root}/app/views")
+        Cell::ViewModel.view_paths.unshift File.expand_path("#{Decidim::DecidimAwesome::Engine.root}/app/cells")
+        Cell::ViewModel.view_paths.unshift File.expand_path("#{Decidim::DecidimAwesome::Engine.root}/app/views")
       end
 
       initializer "decidim_decidim_awesome.register_icons" do
