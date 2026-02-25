@@ -77,7 +77,7 @@ module Decidim::DecidimAwesome
             post :create, params: params
             expect(flash[:notice]).not_to be_empty
             expect(response).to have_http_status(:redirect)
-            expect(response).to redirect_to(decidim_admin_decidim_awesome.cookie_category_cookie_items_path(category_slug))
+            expect(response).to redirect_to(cookie_category_cookie_items_path(category_slug))
           end
         end
 
@@ -141,7 +141,7 @@ module Decidim::DecidimAwesome
           patch :update, params: params
           expect(flash[:notice]).not_to be_empty
           expect(response).to have_http_status(:redirect)
-          expect(response).to redirect_to(decidim_admin_decidim_awesome.cookie_category_cookie_items_path(category_slug))
+          expect(response).to redirect_to(cookie_category_cookie_items_path(category_slug))
         end
       end
 
@@ -163,7 +163,7 @@ module Decidim::DecidimAwesome
           delete :destroy, params: params
           expect(flash[:notice]).not_to be_empty
           expect(response).to have_http_status(:redirect)
-          expect(response).to redirect_to(decidim_admin_decidim_awesome.cookie_category_cookie_items_path(category_slug))
+          expect(response).to redirect_to(cookie_category_cookie_items_path(category_slug))
         end
       end
     end
