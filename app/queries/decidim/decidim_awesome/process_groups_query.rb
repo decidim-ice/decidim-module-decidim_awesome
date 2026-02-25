@@ -40,8 +40,9 @@ module Decidim
       end
 
       def used_taxonomy_ids
+        ids_relation = base_relation.reselect(:id).unscope(:includes).reorder(nil)
         @used_taxonomy_ids ||= Decidim::Taxonomization
-                               .where(taxonomizable_type: "Decidim::ParticipatoryProcess", taxonomizable_id: base_relation.select(:id))
+                               .where(taxonomizable_type: "Decidim::ParticipatoryProcess", taxonomizable_id: ids_relation)
                                .distinct
                                .pluck(:taxonomy_id)
                                .to_set
@@ -139,9 +140,11 @@ module Decidim
         children_by_parent = items.select { |it| it[:depth].positive? }.group_by { |it| it[:taxonomy].parent_id }
         top_level = items.select { |it| it[:depth].zero? }
 
-        items.replace(
-          top_level.flat_map { |parent| [parent, *children_by_parent.fetch(parent[:taxonomy].id, [])] }
-        )
+        ordered = top_level.flat_map { |parent| [parent, *children_by_parent.fetch(parent[:taxonomy].id, [])] }
+        ordered_ids = ordered.to_set { |it| it[:taxonomy].id }
+        orphans = items.reject { |it| ordered_ids.include?(it[:taxonomy].id) }
+
+        items.replace(ordered + orphans)
       end
     end
   end

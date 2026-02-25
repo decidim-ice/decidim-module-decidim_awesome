@@ -22,7 +22,7 @@ describe "Awesome Process Groups content block on group landing page" do
   it "renders the content block with default title" do
     visit_group_page
     within "[data-process-groups-filter]" do
-      expect(page).to have_content("Process Groups Extended")
+      expect(page).to have_content("Participatory processes")
     end
   end
 
@@ -427,7 +427,7 @@ describe "Awesome Process Groups content block on group landing page" do
       visit_group_page
       within "[data-process-groups-filter]" do
         expect(page).to have_content("Our Group Processes")
-        expect(page).to have_no_content("Process Groups Extended")
+        expect(page).to have_no_content("Participatory processes")
       end
     end
   end
@@ -439,7 +439,7 @@ describe "Awesome Process Groups content block on group landing page" do
 
     it "does not render the content block" do
       visit_group_page
-      expect(page).to have_no_content("Process Groups Extended")
+      expect(page).to have_no_content("Participatory processes")
     end
   end
 

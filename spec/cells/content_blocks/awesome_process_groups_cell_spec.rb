@@ -20,7 +20,7 @@ module Decidim::DecidimAwesome
 
     context "when there are no processes belonging to the group" do
       it "does not render content" do
-        expect(subject).to have_no_content("Process Groups Extended")
+        expect(subject).to have_no_content("Participatory processes")
       end
     end
 
@@ -28,7 +28,7 @@ module Decidim::DecidimAwesome
       let!(:grouped_process) { create(:participatory_process, :published, organization:, participatory_process_group: process_group, title: { en: "Climate Action Plan" }) }
 
       it "renders the default title" do
-        expect(subject).to have_content("Process Groups Extended")
+        expect(subject).to have_content("Participatory processes")
       end
 
       it "renders the process card" do
@@ -79,7 +79,7 @@ module Decidim::DecidimAwesome
       end
 
       it "does not render the default title" do
-        expect(subject).to have_no_content("Process Groups Extended")
+        expect(subject).to have_no_content("Participatory processes")
       end
     end
 

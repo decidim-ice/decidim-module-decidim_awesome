@@ -34,7 +34,12 @@
               <label class="process-groups-filter-dropdown__item<%= " is-child" if item[:depth]&.positive? %>">
                 <input type="checkbox" name="taxonomy_ids[]"
                        value="<%= item[:id] %>"
-                       <%= "checked" if taxonomy_selected?(item[:id]) %>>
+                       <%= "checked" if taxonomy_selected?(item[:id]) %>
+                       <% if item[:depth]&.positive? %>
+                         data-parent-taxonomy="<%= item[:parent_id] %>"
+                       <% else %>
+                         data-parent-checkbox="<%= item[:id] %>"
+                       <% end %>>
                 <span><%= item[:name] %></span>
               </label>
             <% end %>

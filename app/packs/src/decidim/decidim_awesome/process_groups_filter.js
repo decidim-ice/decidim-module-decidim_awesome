@@ -6,9 +6,22 @@ document.addEventListener("change", (event) => {
   }
 
   const form = event.target.closest("[data-auto-submit-form]");
-  if (form) {
-    form.requestSubmit();
+  if (!form) {
+    return;
   }
+
+  // When a parent checkbox is toggled, select/deselect all its children
+  const parentId = event.target.dataset.parentCheckbox;
+  if (parentId) {
+    const children = form.querySelectorAll(
+      `input[data-parent-taxonomy="${parentId}"]`
+    );
+    children.forEach((child) => {
+      child.checked = event.target.checked;
+    });
+  }
+
+  form.requestSubmit();
 });
 
 document.addEventListener("click", (event) => {
