@@ -2,20 +2,24 @@
   @apply text-sm font-semibold text-gray-2;
 }
 
+.process-groups-filters {
+  @apply flex flex-wrap items-center gap-x-10 gap-y-2 mt-3 mb-3;
+}
+
 .process-groups-status-bar {
-  @apply flex items-center gap-4 mt-4;
+  @apply flex items-center gap-3;
 }
 
 .process-groups-taxonomy-bar {
-  @apply flex flex-wrap items-center gap-2 mt-4 mb-6;
+  @apply flex flex-wrap items-center gap-2;
 }
 
 .process-groups-active-tags {
-  @apply flex flex-wrap items-center gap-2 mb-6;
+  @apply flex flex-wrap items-center gap-2 mb-3;
 }
 
-.process-groups-status-bar + .participatory-space__block-grid {
-  @apply mt-6;
+.process-groups-filters + .participatory-space__block-grid {
+  @apply mt-3;
 }
 
 [data-process-groups-filter] .participatory-space__block-grid {
