@@ -205,6 +205,111 @@ module Decidim::DecidimAwesome
       end
     end
 
+    describe "#used_taxonomy_ids" do
+      let(:root_taxonomy) { create(:taxonomy, organization:) }
+      let(:child_a) { create(:taxonomy, organization:, parent: root_taxonomy) }
+      let(:child_b) { create(:taxonomy, organization:, parent: root_taxonomy) }
+      let(:child_unused) { create(:taxonomy, organization:, parent: root_taxonomy) }
+
+      before do
+        create(:taxonomization, taxonomy: child_a, taxonomizable: active_process)
+        create(:taxonomization, taxonomy: child_b, taxonomizable: past_process)
+      end
+
+      it "returns taxonomy IDs used by processes in the group" do
+        expect(subject.used_taxonomy_ids).to include(child_a.id, child_b.id)
+      end
+
+      it "does not include unused taxonomy IDs" do
+        expect(subject.used_taxonomy_ids).not_to include(child_unused.id)
+      end
+
+      it "does not include taxonomies from ungrouped processes" do
+        external_taxonomy = create(:taxonomy, organization:, parent: root_taxonomy)
+        create(:taxonomization, taxonomy: external_taxonomy, taxonomizable: ungrouped_process)
+        expect(subject.used_taxonomy_ids).not_to include(external_taxonomy.id)
+      end
+
+      it "does not include taxonomies from unpublished processes" do
+        draft_taxonomy = create(:taxonomy, organization:, parent: root_taxonomy)
+        create(:taxonomization, taxonomy: draft_taxonomy, taxonomizable: unpublished_process)
+        expect(subject.used_taxonomy_ids).not_to include(draft_taxonomy.id)
+      end
+
+      it "returns a Set" do
+        expect(subject.used_taxonomy_ids).to be_a(Set)
+      end
+    end
+
+    describe "#available_taxonomy_groups" do
+      let(:root_taxonomy) { create(:taxonomy, organization:, name: { en: "Topics" }) }
+      let(:child_env) { create(:taxonomy, organization:, parent: root_taxonomy, name: { en: "Environment" }) }
+      let(:child_transport) { create(:taxonomy, organization:, parent: root_taxonomy, name: { en: "Transport" }) }
+      let(:child_unused) { create(:taxonomy, organization:, parent: root_taxonomy, name: { en: "Unused" }) }
+      let(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy:) }
+      let!(:fi_env) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: child_env) }
+      let!(:fi_transport) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: child_transport) }
+      let!(:fi_unused) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: child_unused) }
+
+      before do
+        create(:taxonomization, taxonomy: child_env, taxonomizable: active_process)
+        create(:taxonomization, taxonomy: child_transport, taxonomizable: past_process)
+      end
+
+      it "returns groups with root taxonomy objects" do
+        groups = subject.available_taxonomy_groups
+        expect(groups.length).to eq(1)
+        expect(groups.first[:root_taxonomy]).to eq(root_taxonomy)
+      end
+
+      it "includes only taxonomy items used by processes" do
+        items = subject.available_taxonomy_groups.first[:items]
+        taxonomy_ids = items.map { |it| it[:taxonomy].id }
+        expect(taxonomy_ids).to contain_exactly(child_env.id, child_transport.id)
+      end
+
+      it "excludes taxonomy items not used by any process" do
+        items = subject.available_taxonomy_groups.first[:items]
+        taxonomy_ids = items.map { |it| it[:taxonomy].id }
+        expect(taxonomy_ids).not_to include(child_unused.id)
+      end
+
+      it "excludes groups where no items are used" do
+        unused_root = create(:taxonomy, organization:, name: { en: "Empty" })
+        unused_child = create(:taxonomy, organization:, parent: unused_root)
+        unused_filter = create(:taxonomy_filter, root_taxonomy: unused_root)
+        create(:taxonomy_filter_item, taxonomy_filter: unused_filter, taxonomy_item: unused_child)
+
+        group_roots = subject.available_taxonomy_groups.map { |gr| gr[:root_taxonomy] }
+        expect(group_roots).to include(root_taxonomy)
+        expect(group_roots).not_to include(unused_root)
+      end
+
+      context "with hierarchical taxonomies" do
+        let(:parent_tax) { create(:taxonomy, organization:, parent: root_taxonomy, name: { en: "Parent" }) }
+        let(:child_deep) { create(:taxonomy, organization:, parent: parent_tax, name: { en: "Deep Child" }) }
+        let!(:fi_parent) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: parent_tax) }
+        let!(:fi_deep) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: child_deep) }
+
+        before do
+          create(:taxonomization, taxonomy: child_deep, taxonomizable: no_end_date_process)
+        end
+
+        it "keeps parent items when their children have processes" do
+          items = subject.available_taxonomy_groups.first[:items]
+          taxonomy_ids = items.map { |it| it[:taxonomy].id }
+          expect(taxonomy_ids).to include(parent_tax.id, child_deep.id)
+        end
+
+        it "sorts children immediately after their parent" do
+          items = subject.available_taxonomy_groups.first[:items]
+          parent_idx = items.index { |it| it[:taxonomy].id == parent_tax.id }
+          child_idx = items.index { |it| it[:taxonomy].id == child_deep.id }
+          expect(child_idx).to eq(parent_idx + 1)
+        end
+      end
+    end
+
     context "with another organization" do
       let(:another_organization) { create(:organization) }
       let(:another_group) { create(:participatory_process_group, organization: another_organization) }

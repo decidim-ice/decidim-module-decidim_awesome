@@ -329,6 +329,8 @@ module Decidim::DecidimAwesome
         let(:filter_b) { create(:taxonomy_filter, root_taxonomy: root_taxonomy_b) }
         let!(:filter_item_a) { create(:taxonomy_filter_item, taxonomy_filter: filter_a, taxonomy_item: child_a) }
         let!(:filter_item_b) { create(:taxonomy_filter_item, taxonomy_filter: filter_b, taxonomy_item: child_b) }
+        let!(:taxonomization_a) { create(:taxonomization, taxonomy: child_a, taxonomizable: grouped_process) }
+        let!(:taxonomization_b) { create(:taxonomization, taxonomy: child_b, taxonomizable: grouped_process) }
 
         it "renders both taxonomy group names" do
           expect(subject).to have_content("Scope")
@@ -356,6 +358,7 @@ module Decidim::DecidimAwesome
 
       context "when taxonomy items have hierarchy (parent-child)" do
         let!(:grouped_process) { create(:participatory_process, :published, organization:, participatory_process_group: process_group) }
+        let!(:second_process) { create(:participatory_process, :published, organization:, participatory_process_group: process_group) }
         let(:root_taxonomy) { create(:taxonomy, organization:, name: { en: "Topics" }) }
         let(:parent_taxonomy) { create(:taxonomy, organization:, parent: root_taxonomy, name: { en: "Environment" }) }
         let(:child_water) { create(:taxonomy, organization:, parent: parent_taxonomy, name: { en: "Water" }) }
@@ -366,6 +369,9 @@ module Decidim::DecidimAwesome
         let!(:fi_water) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: child_water) }
         let!(:fi_air) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: child_air) }
         let!(:fi_transport) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: sibling_taxonomy) }
+        let!(:taxonomization_water) { create(:taxonomization, taxonomy: child_water, taxonomizable: grouped_process) }
+        let!(:taxonomization_air) { create(:taxonomization, taxonomy: child_air, taxonomizable: grouped_process) }
+        let!(:taxonomization_transport) { create(:taxonomization, taxonomy: sibling_taxonomy, taxonomizable: second_process) }
 
         it "assigns depth 0 to direct children of root and depth 1 to grandchildren" do
           block_cell.call
@@ -432,6 +438,8 @@ module Decidim::DecidimAwesome
         let!(:item_a) { create(:taxonomy_filter_item, taxonomy_filter: filter_one, taxonomy_item: child_a) }
         let!(:item_b) { create(:taxonomy_filter_item, taxonomy_filter: filter_two, taxonomy_item: child_b) }
         let!(:item_dup) { create(:taxonomy_filter_item, taxonomy_filter: filter_two, taxonomy_item: child_a) }
+        let!(:taxonomization_a) { create(:taxonomization, taxonomy: child_a, taxonomizable: grouped_process) }
+        let!(:taxonomization_b) { create(:taxonomization, taxonomy: child_b, taxonomizable: grouped_process) }
 
         it "merges items into a single group and deduplicates" do
           block_cell.call
@@ -440,6 +448,64 @@ module Decidim::DecidimAwesome
           expect(groups.first[:name]).to eq("Scope")
           item_ids = groups.first[:items].map { |item| item[:id] }
           expect(item_ids).to contain_exactly(child_a.id, child_b.id)
+        end
+      end
+
+      context "when taxonomy item has no processes in the group" do
+        let!(:grouped_process) { create(:participatory_process, :published, organization:, participatory_process_group: process_group) }
+        let(:root_taxonomy) { create(:taxonomy, organization:, name: { en: "Topics" }) }
+        let(:child_used) { create(:taxonomy, organization:, parent: root_taxonomy, name: { en: "Environment" }) }
+        let(:child_unused) { create(:taxonomy, organization:, parent: root_taxonomy, name: { en: "Unused Topic" }) }
+        let(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy:) }
+        let!(:fi_used) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: child_used) }
+        let!(:fi_unused) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: child_unused) }
+        let!(:taxonomization) { create(:taxonomization, taxonomy: child_used, taxonomizable: grouped_process) }
+
+        it "shows only taxonomy items used by processes" do
+          block_cell.call
+          groups = block_cell.taxonomy_filter_groups
+          item_names = groups.first[:items].map { |it| it[:name] }
+          expect(item_names).to include("Environment")
+          expect(item_names).not_to include("Unused Topic")
+        end
+      end
+
+      context "when no process in the group uses any taxonomy from a root" do
+        let!(:grouped_process) { create(:participatory_process, :published, organization:, participatory_process_group: process_group) }
+        let(:root_used) { create(:taxonomy, organization:, name: { en: "Used Root" }) }
+        let(:root_unused) { create(:taxonomy, organization:, name: { en: "Unused Root" }) }
+        let(:child_used) { create(:taxonomy, organization:, parent: root_used, name: { en: "Active Item" }) }
+        let(:child_unused) { create(:taxonomy, organization:, parent: root_unused, name: { en: "Orphan Item" }) }
+        let(:filter_used) { create(:taxonomy_filter, root_taxonomy: root_used) }
+        let(:filter_unused) { create(:taxonomy_filter, root_taxonomy: root_unused) }
+        let!(:fi_used) { create(:taxonomy_filter_item, taxonomy_filter: filter_used, taxonomy_item: child_used) }
+        let!(:fi_unused) { create(:taxonomy_filter_item, taxonomy_filter: filter_unused, taxonomy_item: child_unused) }
+        let!(:taxonomization) { create(:taxonomization, taxonomy: child_used, taxonomizable: grouped_process) }
+
+        it "hides the entire root taxonomy group with no processes" do
+          block_cell.call
+          groups = block_cell.taxonomy_filter_groups
+          group_names = groups.map { |gr| gr[:name] }
+          expect(group_names).to include("Used Root")
+          expect(group_names).not_to include("Unused Root")
+        end
+      end
+
+      context "when a child taxonomy has processes but its parent does not" do
+        let!(:grouped_process) { create(:participatory_process, :published, organization:, participatory_process_group: process_group) }
+        let(:root_taxonomy) { create(:taxonomy, organization:, name: { en: "Topics" }) }
+        let(:parent_taxonomy) { create(:taxonomy, organization:, parent: root_taxonomy, name: { en: "Environment" }) }
+        let(:child_taxonomy) { create(:taxonomy, organization:, parent: parent_taxonomy, name: { en: "Water" }) }
+        let(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy:) }
+        let!(:fi_parent) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: parent_taxonomy) }
+        let!(:fi_child) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: child_taxonomy) }
+        let!(:taxonomization) { create(:taxonomization, taxonomy: child_taxonomy, taxonomizable: grouped_process) }
+
+        it "keeps the parent item for hierarchy display" do
+          block_cell.call
+          groups = block_cell.taxonomy_filter_groups
+          item_names = groups.first[:items].map { |it| it[:name] }
+          expect(item_names).to include("Environment", "Water")
         end
       end
 

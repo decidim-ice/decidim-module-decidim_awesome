@@ -381,6 +381,45 @@ describe "Awesome Process Groups content block on group landing page" do
     end
   end
 
+  context "when taxonomy items have no processes in the group" do
+    let(:root_taxonomy) { create(:taxonomy, organization:, name: { en: "Topics" }) }
+    let(:child_used) { create(:taxonomy, organization:, parent: root_taxonomy, name: { en: "Environment" }) }
+    let(:child_unused) { create(:taxonomy, organization:, parent: root_taxonomy, name: { en: "Unused Topic" }) }
+    let(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy:) }
+    let!(:filter_item_used) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: child_used) }
+    let!(:filter_item_unused) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: child_unused) }
+    let!(:taxonomization) { create(:taxonomization, taxonomy: child_used, taxonomizable: active_process) }
+
+    it "shows only taxonomy items used by processes and hides unused ones" do
+      visit_group_page
+      within "[data-process-groups-filter]" do
+        click_on "Topics"
+        expect(page).to have_content("Environment")
+        expect(page).to have_no_content("Unused Topic")
+      end
+    end
+  end
+
+  context "when no process uses any taxonomy from a root group" do
+    let(:root_used) { create(:taxonomy, organization:, name: { en: "Topics" }) }
+    let(:root_unused) { create(:taxonomy, organization:, name: { en: "Empty Category" }) }
+    let(:child_used) { create(:taxonomy, organization:, parent: root_used, name: { en: "Environment" }) }
+    let(:child_unused) { create(:taxonomy, organization:, parent: root_unused, name: { en: "Orphan Item" }) }
+    let(:filter_used) { create(:taxonomy_filter, root_taxonomy: root_used) }
+    let(:filter_unused) { create(:taxonomy_filter, root_taxonomy: root_unused) }
+    let!(:fi_used) { create(:taxonomy_filter_item, taxonomy_filter: filter_used, taxonomy_item: child_used) }
+    let!(:fi_unused) { create(:taxonomy_filter_item, taxonomy_filter: filter_unused, taxonomy_item: child_unused) }
+    let!(:taxonomization) { create(:taxonomization, taxonomy: child_used, taxonomizable: active_process) }
+
+    it "hides the entire taxonomy group dropdown" do
+      visit_group_page
+      within "[data-process-groups-filter]" do
+        expect(page).to have_content("Topics")
+        expect(page).to have_no_content("Empty Category")
+      end
+    end
+  end
+
   context "when a custom title is set" do
     let!(:content_block) { create(:content_block, organization:, manifest_name: :awesome_process_groups, scope_name: :participatory_process_group_homepage, scoped_resource_id: process_group.id, settings: { "title" => { "en" => "Our Group Processes" } }) }
 

@@ -39,9 +39,26 @@ module Decidim
                               .includes(:root_taxonomy, filter_items: :taxonomy_item)
       end
 
+      def used_taxonomy_ids
+        @used_taxonomy_ids ||= Decidim::Taxonomization
+                               .where(taxonomizable_type: "Decidim::ParticipatoryProcess", taxonomizable_id: base_relation.select(:id))
+                               .distinct
+                               .pluck(:taxonomy_id)
+                               .to_set
+      end
+
+      # Returns taxonomy groups with raw taxonomy objects, filtered to only
+      # include items used by processes in the group, and sorted hierarchically.
+      # Each group: { root_taxonomy:, items: [{ taxonomy:, depth: }] }
+      def available_taxonomy_groups
+        @available_taxonomy_groups ||= build_taxonomy_groups
+      end
+
       private
 
       attr_reader :group, :user
+
+      # -- Process filtering --
 
       def filter_by_status(scope, status)
         case status
@@ -58,37 +75,73 @@ module Decidim
         return scope if taxonomy_ids.empty?
 
         group_taxonomy_ids_by_root(taxonomy_ids).each_value do |ids|
-          scope = scope.where(id: process_ids_with_taxonomies(ids))
+          scope = scope.where(id: taxonomizable_ids_for(ids))
         end
 
         scope
       end
 
-      def process_ids_with_taxonomies(taxonomy_ids)
+      def taxonomizable_ids_for(taxonomy_ids)
         Decidim::Taxonomization
           .where(taxonomizable_type: "Decidim::ParticipatoryProcess", taxonomy_id: taxonomy_ids)
           .select(:taxonomizable_id)
       end
 
-      # Groups selected taxonomy IDs by their root taxonomy.
-      # Example: { root_1_id => [child_a, child_b], root_2_id => [child_c] }
+      # Groups selected IDs by root taxonomy using eager-loaded filter data.
       def group_taxonomy_ids_by_root(taxonomy_ids)
-        mapping = build_taxonomy_to_root_mapping
-
-        taxonomy_ids.each_with_object({}) do |taxonomy_id, groups|
-          root_id = mapping[taxonomy_id]
-          next unless root_id
-
-          (groups[root_id] ||= []) << taxonomy_id
+        id_set = taxonomy_ids.to_set
+        taxonomy_filters.each_with_object({}) do |filter, groups|
+          filter.filter_items.each do |item|
+            (groups[filter.root_taxonomy_id] ||= []) << item.taxonomy_item_id if id_set.include?(item.taxonomy_item_id)
+          end
         end
       end
 
-      # Builds { taxonomy_item_id => root_taxonomy_id } from available filters.
-      def build_taxonomy_to_root_mapping
-        taxonomy_filters.each_with_object({}) do |filter, mapping|
-          root_id = filter.root_taxonomy_id
-          filter.filter_items.each { |item| mapping[item.taxonomy_item_id] = root_id }
+      # -- Taxonomy group building --
+
+      def build_taxonomy_groups
+        grouped = {}
+
+        taxonomy_filters.each do |tf|
+          root = tf.root_taxonomy
+          grouped[root.id] ||= { root_taxonomy: root, items: [] }
+
+          tf.filter_items.each do |fi|
+            taxonomy = fi.taxonomy_item
+            depth = taxonomy.parent_id == root.id ? 0 : 1
+            grouped[root.id][:items] << { taxonomy: taxonomy, depth: depth }
+          end
         end
+
+        grouped.values
+               .each { |gr| gr[:items].uniq! { |it| it[:taxonomy].id } }
+               .each { |gr| filter_unused_items!(gr[:items]) }
+               .each { |gr| sort_items_hierarchically!(gr[:items]) }
+               .reject { |gr| gr[:items].empty? }
+      end
+
+      # Keeps items used by processes + parent items needed for hierarchy.
+      def filter_unused_items!(items)
+        used_children = items.select { |it| it[:depth].positive? && used_taxonomy_ids.include?(it[:taxonomy].id) }
+        kept_parent_ids = used_children.to_set { |it| it[:taxonomy].parent_id }
+
+        items.select! do |item|
+          tid = item[:taxonomy].id
+          if item[:depth].positive?
+            used_taxonomy_ids.include?(tid)
+          else
+            used_taxonomy_ids.include?(tid) || kept_parent_ids.include?(tid)
+          end
+        end
+      end
+
+      def sort_items_hierarchically!(items)
+        children_by_parent = items.select { |it| it[:depth].positive? }.group_by { |it| it[:taxonomy].parent_id }
+        top_level = items.select { |it| it[:depth].zero? }
+
+        items.replace(
+          top_level.flat_map { |parent| [parent, *children_by_parent.fetch(parent[:taxonomy].id, [])] }
+        )
       end
     end
   end

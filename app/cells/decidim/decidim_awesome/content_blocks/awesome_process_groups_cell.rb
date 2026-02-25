@@ -104,36 +104,17 @@ module Decidim
         end
 
         def build_taxonomy_filter_groups
-          grouped = {}
-
-          query.taxonomy_filters.each do |taxonomy_filter|
-            root_id = taxonomy_filter.root_taxonomy.id
-            grouped[root_id] ||= {
-              root_id: root_id,
-              name: translated_attribute(taxonomy_filter.root_taxonomy.name),
-              items: []
+          query.available_taxonomy_groups.map do |group|
+            root = group[:root_taxonomy]
+            {
+              root_id: root.id,
+              name: translated_attribute(root.name),
+              items: group[:items].map do |item|
+                tx = item[:taxonomy]
+                { id: tx.id, name: translated_attribute(tx.name), parent_id: tx.parent_id, depth: item[:depth] }
+              end
             }
-
-            taxonomy_filter.filter_items.each do |filter_item|
-              taxonomy = filter_item.taxonomy_item
-              depth = taxonomy.parent_id == root_id ? 0 : 1
-              grouped[root_id][:items] << { id: taxonomy.id, name: translated_attribute(taxonomy.name), parent_id: taxonomy.parent_id, depth: depth }
-            end
           end
-
-          grouped.values
-                 .each { |group| group[:items].uniq! { |item| item[:id] } }
-                 .each { |group| sort_items_hierarchically!(group[:items]) }
-                 .reject { |group| group[:items].empty? }
-        end
-
-        def sort_items_hierarchically!(items)
-          children_by_parent = items.select { |it| it[:depth].positive? }.group_by { |it| it[:parent_id] }
-          top_level = items.select { |it| it[:depth].zero? }
-
-          items.replace(
-            top_level.flat_map { |parent| [parent, *children_by_parent.fetch(parent[:id], [])] }
-          )
         end
       end
     end
