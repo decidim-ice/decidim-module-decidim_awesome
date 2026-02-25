@@ -257,6 +257,8 @@ describe "Awesome Process Groups content block on group landing page" do
         check "Environment"
       end
       within "[data-process-groups-filter]" do
+        expect(page).to have_content("Test Active Process")
+        expect(page).to have_no_content("Test Past Process")
         click_on "Topics"
         check "Transport"
       end
@@ -273,6 +275,8 @@ describe "Awesome Process Groups content block on group landing page" do
         check "Environment"
       end
       within "[data-process-groups-filter]" do
+        expect(page).to have_content("Test Active Process")
+        expect(page).to have_no_content("Test Past Process")
         click_on "Topics"
         check "Transport"
       end
@@ -313,6 +317,8 @@ describe "Awesome Process Groups content block on group landing page" do
         check "Transport"
       end
       within "[data-process-groups-filter]" do
+        expect(page).to have_content("Test Past Process")
+        expect(page).to have_no_content("Test Active Process")
         click_on "Active (1)"
       end
       within "[data-process-groups-filter]" do
@@ -328,6 +334,7 @@ describe "Awesome Process Groups content block on group landing page" do
       end
       within "[data-process-groups-filter]" do
         expect(page).to have_content("Test Upcoming Process")
+        expect(page).to have_no_content("Test Active Process")
         click_on "Topics"
         check "Environment"
       end
