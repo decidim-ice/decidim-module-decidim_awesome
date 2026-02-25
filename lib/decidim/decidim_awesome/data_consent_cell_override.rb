@@ -4,72 +4,77 @@ module Decidim
   module DecidimAwesome
     module DataConsentCellOverride
       def categories
-        awesome_categories = cookie_management_categories
-        return awesome_categories if awesome_categories.present?
+        return @categories if defined?(@categories)
 
-        super
+        default_categories = super
+        awesome = awesome_categories
+
+        @categories = if awesome.any?
+                        merge_categories(default_categories, awesome)
+                      else
+                        default_categories
+                      end
       end
 
       private
 
-      def cookie_management_categories
+      def merge_categories(default_categories, awesome_categories)
+        awesome_by_slug = awesome_categories.index_by { |cat| cat[:slug] }
+
+        merged = default_categories.map do |default_cat|
+          awesome_by_slug.delete(default_cat[:slug]) || default_cat
+        end
+
+        merged + awesome_by_slug.values
+      end
+
+      def awesome_categories
         return [] unless model.is_a?(::Decidim::Organization)
 
-        raw = Decidim::DecidimAwesome::AwesomeConfig.find_by(var: "cookie_management", organization: model)&.value
-        categories = raw.is_a?(Hash) ? raw["categories"] : nil
-        return [] unless categories.is_a?(Array)
+        config = AwesomeConfig.find_by(var: "cookie_management", organization: model)
+        return [] unless config&.value.is_a?(Hash)
 
-        categories.filter_map do |category|
-          next unless category.is_a?(Hash)
-
-          slug = category["slug"].to_s
-          next if slug.blank?
-
+        config.value["categories"]&.map do |category|
           {
-            slug: slug,
-            title: translated(category["title"], fallback: i18n_category_text(slug, :title)),
-            description: translated(category["description"], fallback: i18n_category_text(slug, :description)),
-            mandatory: !category["mandatory"].nil?,
-            items: normalize_items(category["items"])
+            slug: category["slug"],
+            title: translate_attribute(category["title"], category["slug"], :title),
+            description: translate_attribute(category["description"], category["slug"], :description),
+            mandatory: category["mandatory"] || false,
+            items: normalize_items(category["items"] || [])
           }
-        end
+        end || []
       end
 
-      def normalize_items(raw_items)
-        return [] unless raw_items.is_a?(Array)
+      def normalize_items(items)
+        return [] unless items.is_a?(Array)
 
-        raw_items.filter_map do |item|
-          next unless item.is_a?(Hash)
-
-          name = item["name"].to_s
-          next if name.blank?
-
+        items.map do |item|
           {
             type: item["type"].presence || "cookie",
-            name:,
-            service: translated(item["service"], fallback: i18n_item_text(name, :service)),
-            description: translated(item["description"], fallback: i18n_item_text(name, :description))
+            name: item["name"],
+            service: translate_item_attribute(item["service"]),
+            description: translate_item_attribute(item["description"])
           }
         end
       end
 
-      def translated(value, fallback: "")
-        return fallback if value.blank?
+      def translate_attribute(value, slug, kind)
         return value if value.is_a?(String)
+        return t("layouts.decidim.data_consent.modal.#{slug}.#{kind}") if value.blank?
 
-        if value.is_a?(Hash)
-          (value[I18n.locale.to_s].presence || value[model.default_locale.to_s].presence || value.values.compact_blank.first).to_s.presence || fallback
-        else
-          fallback
-        end
+        value[I18n.locale.to_s] ||
+          value[model.default_locale.to_s] ||
+          value.values.compact_blank.first ||
+          t("layouts.decidim.data_consent.modal.#{slug}.#{kind}")
       end
 
-      def i18n_category_text(slug, kind)
-        t("layouts.decidim.data_consent.modal.#{slug}.#{kind}")
-      end
+      def translate_item_attribute(value)
+        return value if value.is_a?(String)
+        return nil if value.blank?
 
-      def i18n_item_text(name, kind)
-        t("layouts.decidim.data_consent.details.items.#{name}.#{kind}")
+        value[I18n.locale.to_s].presence ||
+          value[model.default_locale.to_s].presence ||
+          value.values.compact_blank.first.presence
       end
     end
   end

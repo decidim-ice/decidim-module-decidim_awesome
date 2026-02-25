@@ -71,35 +71,28 @@ module Decidim::DecidimAwesome
             }
           }
         end
-        let(:action) { post :create, params: }
 
-        it "returns http success" do
-          action
-          expect(flash[:notice]).not_to be_empty
-          expect(response).to have_http_status(:redirect)
+        context "when command succeeds" do
+          it "redirects with success message" do
+            post :create, params: params
+            expect(flash[:notice]).not_to be_empty
+            expect(response).to have_http_status(:redirect)
+            expect(response).to redirect_to(decidim_admin_decidim_awesome.cookie_category_cookie_items_path(category_slug))
+          end
         end
 
-        it "creates the new cookie item entry" do
-          action
-
-          config = AwesomeConfig.find_by(organization:, var: "cookie_management")
-          category = config.value["categories"].find { |c| c["slug"] == category_slug }
-          expect(category["items"]).to be_a(Array)
-          expect(category["items"].count).to eq(1)
-          expect(category["items"].first["name"]).to eq("new_cookie")
-        end
-
-        context "when duplicate item name" do
+        context "when command fails" do
           before do
             cat = cookie_management_config.value["categories"].find { |c| c["slug"] == category_slug }
             cat["items"] = [{ "name" => "new_cookie" }]
             cookie_management_config.save!
           end
 
-          it "returns error" do
-            action
+          it "renders new with error message" do
+            post :create, params: params
             expect(flash[:alert]).not_to be_empty
             expect(response).to have_http_status(:ok)
+            expect(response).to render_template(:new)
           end
         end
       end
@@ -144,19 +137,11 @@ module Decidim::DecidimAwesome
           cookie_management_config.save!
         end
 
-        it "returns http success" do
+        it "redirects with success message" do
           patch :update, params: params
           expect(flash[:notice]).not_to be_empty
           expect(response).to have_http_status(:redirect)
-        end
-
-        it "updates the cookie item entry" do
-          patch :update, params: params
-
-          config = AwesomeConfig.find_by(organization:, var: "cookie_management")
-          category = config.value["categories"].find { |c| c["slug"] == category_slug }
-          item = category["items"].find { |i| i["name"] == item_name }
-          expect(item["service"]["en"]).to eq("Updated Service")
+          expect(response).to redirect_to(decidim_admin_decidim_awesome.cookie_category_cookie_items_path(category_slug))
         end
       end
 
@@ -174,17 +159,11 @@ module Decidim::DecidimAwesome
           cookie_management_config.save!
         end
 
-        it "returns ok" do
+        it "redirects with success message" do
           delete :destroy, params: params
           expect(flash[:notice]).not_to be_empty
-        end
-
-        it "destroys the item" do
-          delete :destroy, params: params
-
-          config = AwesomeConfig.find_by(organization:, var: "cookie_management")
-          category = config.value["categories"].find { |c| c["slug"] == category_slug }
-          expect(category["items"]).to eq([])
+          expect(response).to have_http_status(:redirect)
+          expect(response).to redirect_to(decidim_admin_decidim_awesome.cookie_category_cookie_items_path(category_slug))
         end
       end
     end

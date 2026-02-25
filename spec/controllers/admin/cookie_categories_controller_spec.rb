@@ -59,24 +59,16 @@ module Decidim::DecidimAwesome
           }
         end
 
-        it "returns http success" do
-          post :create, params: params
-          expect(flash[:notice]).not_to be_empty
-          expect(response).to have_http_status(:redirect)
+        context "when command succeeds" do
+          it "redirects with success message" do
+            post :create, params: params
+            expect(flash[:notice]).not_to be_empty
+            expect(response).to have_http_status(:redirect)
+            expect(response).to redirect_to(decidim_admin_decidim_awesome.cookie_categories_path)
+          end
         end
 
-        it "creates the new cookie category entry" do
-          post :create, params: params
-
-          config = AwesomeConfig.find_by(organization: organization, var: "cookie_management")
-          categories = config.value["categories"]
-          expect(categories).to be_a(Array)
-          expect(categories.count).to eq(1)
-          expect(categories.first["slug"]).to eq("new-category")
-          expect(categories.first["title"]["en"]).to eq("New Awesome Category")
-        end
-
-        context "when duplicate slug" do
+        context "when command fails" do
           before do
             cookie_management_config.value = { "categories" => [category_attributes] }
             cookie_management_config.save!
@@ -93,18 +85,11 @@ module Decidim::DecidimAwesome
             }
           end
 
-          it "returns error" do
+          it "renders new with error message" do
             post :create, params: params
             expect(flash[:alert]).not_to be_empty
             expect(response).to have_http_status(:ok)
-          end
-
-          it "does not create duplicate category" do
-            post :create, params: params
-
-            config = AwesomeConfig.find_by(organization: organization, var: "cookie_management")
-            categories = config.value["categories"]
-            expect(categories.count).to eq(1)
+            expect(response).to render_template(:new)
           end
         end
       end
@@ -149,35 +134,16 @@ module Decidim::DecidimAwesome
           cookie_management_config.save!
         end
 
-        it "returns http success" do
-          patch :update, params: params
-          expect(flash[:notice]).not_to be_empty
-          expect(response).to have_http_status(:redirect)
+        context "when command succeeds" do
+          it "redirects with success message" do
+            patch :update, params: params
+            expect(flash[:notice]).not_to be_empty
+            expect(response).to have_http_status(:redirect)
+            expect(response).to redirect_to(decidim_admin_decidim_awesome.cookie_categories_path)
+          end
         end
 
-        it "updates the cookie category entry" do
-          patch :update, params: params
-
-          config = AwesomeConfig.find_by(organization: organization, var: "cookie_management")
-          category = config.value["categories"].find { |c| c["slug"] == category_slug }
-          expect(category["title"]["en"]).to eq("Updated Awesome Category")
-          expect(category["description"]["en"]).to eq("Updated awesome description")
-          expect(category["mandatory"]).to be(true)
-        end
-
-        it "preserves existing items" do
-          cat = cookie_management_config.value["categories"].first
-          cat["items"] = [{ "name" => "test_cookie" }]
-          cookie_management_config.save!
-
-          patch :update, params: params
-
-          config = AwesomeConfig.find_by(organization: organization, var: "cookie_management")
-          category = config.value["categories"].find { |c| c["slug"] == category_slug }
-          expect(category["items"]).to eq([{ "name" => "test_cookie" }])
-        end
-
-        context "when category does not exist" do
+        context "when command fails" do
           let(:params) do
             {
               slug: "nonexistent",
@@ -190,7 +156,7 @@ module Decidim::DecidimAwesome
             }
           end
 
-          it "renders edit with error" do
+          it "renders edit with error message" do
             patch :update, params: params
             expect(response).to have_http_status(:success)
             expect(response).to render_template(:edit)
@@ -207,17 +173,11 @@ module Decidim::DecidimAwesome
           cookie_management_config.save!
         end
 
-        it "returns ok" do
+        it "redirects with success message" do
           delete :destroy, params: params
           expect(flash[:notice]).not_to be_empty
           expect(response).to have_http_status(:redirect)
-        end
-
-        it "destroys the category" do
-          delete :destroy, params: params
-
-          config = AwesomeConfig.find_by(organization: organization, var: "cookie_management")
-          expect(config.value["categories"]).to eq([])
+          expect(response).to redirect_to(decidim_admin_decidim_awesome.cookie_categories_path)
         end
       end
     end

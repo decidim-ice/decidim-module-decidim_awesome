@@ -1,0 +1,3 @@
+<!-- replace "erb[loud]:contains('t(\"layouts.decidim.data_consent.details.items.#{item[:name]}.description')" -->
+
+<%= item[:description].presence || t("layouts.decidim.data_consent.details.items.#{item[:name]}.description") %>
