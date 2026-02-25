@@ -15,7 +15,7 @@ module Decidim
         end
 
         def title
-          translated_attribute(model.settings.title).presence || t("name", scope: i18n_scope)
+          translated_attribute(model.settings.title).presence || t("default_title", scope: i18n_scope)
         end
 
         def i18n_scope

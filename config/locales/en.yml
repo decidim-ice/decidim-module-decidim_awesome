@@ -708,7 +708,8 @@ en:
           all_taxonomies: All categories
           filter_by_label: 'Filter by:'
           max_count: Maximum amount of elements to show
-          name: Participatory processes
+          default_title: Participatory processes
+          name: Awesome group processes
           past: Past
           remove_filter: Remove filter
           results_count:
