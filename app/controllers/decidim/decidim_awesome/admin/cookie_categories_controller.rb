@@ -5,16 +5,19 @@ module Decidim
     module Admin
       class CookieCategoriesController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
-        include ConfigConstraintsHelpers
+        include Admin::ConfigConstraintsHelpers
+        include HasCookieCategories
 
-        helper ConfigConstraintsHelpers
+        helper Admin::ConfigConstraintsHelpers
         helper_method :current_categories
 
         before_action do
           enforce_permission_to :edit_config, :cookie_management
         end
 
-        def index; end
+        def index
+          ensure_categories_initialized!
+        end
 
         def new
           @form = form(CookieCategoryForm).instance
@@ -91,9 +94,22 @@ module Decidim
           categories_data["categories"]
         end
 
+        def ensure_categories_initialized!
+          return unless categories_data["categories"].empty?
+
+          initialize_default_categories!
+        end
+
+        def initialize_default_categories!
+          default_categories = default_decidim_categories
+          save_categories!(default_categories)
+          default_categories
+        end
+
         def save_categories!(categories)
           cookie_management_setting.value = { "categories" => categories }
           cookie_management_setting.save!
+          @categories_data = nil
         end
 
         def category_for_form

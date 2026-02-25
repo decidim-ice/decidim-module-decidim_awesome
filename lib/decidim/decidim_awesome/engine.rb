@@ -6,6 +6,7 @@ require "decidim/core"
 require "decidim/decidim_awesome/awesome_helpers"
 require "decidim/decidim_awesome/menu"
 require "decidim/decidim_awesome/middleware/current_config"
+require "decidim/decidim_awesome/has_cookie_categories"
 require "decidim/decidim_awesome/data_consent_cell_override"
 require "active_hashcash" if Decidim::DecidimAwesome.enabled?(:hashcash_signup, :hashcash_login)
 

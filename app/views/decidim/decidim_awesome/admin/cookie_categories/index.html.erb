@@ -19,10 +19,17 @@
         </thead>
         <tbody>
           <% current_categories.each do |category| %>
+            <% is_default = category["title"].blank? || category["title"].values.all?(&:blank?) %>
             <tr>
               <td><%= check category["mandatory"] %></td>
               <td><%= category["slug"] %></td>
-              <td><%= translated_attribute(category["title"]) %></td>
+              <td>
+                <% if is_default %>
+                  <%= t("layouts.decidim.data_consent.modal.#{category["slug"]}.title") %>
+                <% else %>
+                  <%= translated_attribute(category["title"]) %>
+                <% end %>
+              </td>
               <td class="table-list__actions">
                 <%= icon_link_to "list-check", decidim_admin_decidim_awesome.cookie_category_cookie_items_path(category["slug"]), t(".items"), class: "action-icon--preview" %>
                 <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_cookie_category_path(category["slug"]), t(".edit"), class: "action-icon--edit" %>
