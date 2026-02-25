@@ -189,7 +189,7 @@ eu:
           roles:
             admin: Administratzailea
             collaborator: Kolaboratzailea
-            evaluator: Baloratzailea
+            evaluator: Ebaluatzilea
             moderator: Moderatzailea
         admin_authorizations:
           authorization:
@@ -225,6 +225,7 @@ eu:
               CSS: Burukoak beharrezko <link> stylesheet sarrerarik ez du. Hori konpontzeko, zure custom _head.html.erb fitxategira eskuz gehi dezakezu
               JavaScript: Burukoak beharrezko <script> Javascript sarrerarik ez du. Hori konpontzeko, zure admin/_header.html.erb fitxategira eskuz gehi dezakezu
             head_tags: Aplikazioaren goiburua zoragarri etiketa sartuta
+            link_admins: Hasi saioa /system panelean
         config:
           anonymous: Erregistratu gabeko parte-hartzaileak
           caution: 'OHARRA: Funtzio honek jokabide lehenetsi batzuk asko aldatzen ditu eta emaitza ustekabekoak sor ditzake. Erabili arretaz!'
@@ -582,6 +583,32 @@ eu:
           title_closed: Klikatu txateatzeko!
           title_open: Txateatzen hasi!
       content_blocks:
+        awesome_processes:
+          active_spaces: Azken prozesuak
+          any_group: Edozein talde
+          group_label: Taldea
+          max_results: Erakutsi beharreko elementuen gehienezko kopurua
+          name: Prozesu zoragarriak
+          process_group: Murriztu prozesu-taldera
+          process_status: Prozesuaren egoeraren iragazkia
+          process_statuses:
+            active: Prozesu aktiboak bakarrik
+            all: Prozesu guztiak
+            past: Iraganeko prozesuak soilik
+            upcoming: Etorkizuneko prozesuak soikik
+          process_type: Prozesu-motak
+          process_type_mixed_hint: Modu mistoan, prozesuak eta taldeak tartekatzen dira, gehienezko kopururaino. Prozesuak pisuaren arabera ordenatzen dira (goranzkoa). Mota bat agortzen bada, gainerako tarteak bestearekin betetzen dira.
+          process_types:
+            all: Prozesu eta talde guztiak nahastuta
+            groups: Prozesu-taldeak bakarrik
+            processes: Prozesuak soilik
+          processes: Prozesuak
+          see_all_spaces: Ikusi prozesu guztiak
+          selection_criteria: Hautatzeko irizpideak
+          selection_criteria_options:
+            automatic: Automatikoa
+            manual: Eskuzkoa
+          title: Bloke-izenburua
         map:
           collapse: Menu tolestutik hasi
           map_center: Maparen erdigunea (Latitudea, Longitudea)
@@ -643,6 +670,9 @@ eu:
           verify_with_all_these_options: 'Mesedez, egiaztatu zure burua metodo guzti hauekin plataformara sartu aurretik:'
           verify_with_any_of_these_options: 'Mesedez, egiaztatu zure burua aukera hauetako batekin plataformara sartu aurretik:'
           verify_with_method: '%{name}-rekin egiaztatu'
+      session:
+        authorization_is_required: Plataformaren gune honetara sartzeko, zure kontua baimendu behar duzu baliozko baimen erabiliz (%{authorizations}).
+        login_and_authorization_is_required: Plataformaren gune honetara sartzeko, saioa hasi eta zure kontua baimendu behar duzu.
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |
@@ -677,6 +707,7 @@ eu:
     download_your_data:
       show:
         admin_actions: Administrazio-ekintzak
+        awesome_private_proposals: Proposamenak eremu pribatuetara esportatu
     meetings:
       meetings_map:
         view_meeting: Bilera ikusi
