@@ -5,13 +5,24 @@ module Decidim
     module HasCookieCategories
       def default_decidim_categories
         Decidim.consent_categories.map do |cat|
+          slug = cat[:slug].to_s
           {
-            "slug" => cat[:slug].to_s,
+            "slug" => slug,
             "mandatory" => cat[:mandatory] || false,
-            "title" => {},
-            "description" => {},
+            "title" => default_translations_for(slug, "title"),
+            "description" => default_translations_for(slug, "description"),
             "items" => (cat[:items] || []).map { |item| { "name" => item[:name].to_s, "type" => item[:type].to_s } }
           }
+        end
+      end
+
+      def default_translations_for(slug, attribute)
+        I18n.available_locales.each_with_object({}) do |locale, hash|
+          hash[locale.to_s] = I18n.t(
+            "layouts.decidim.data_consent.modal.#{slug}.#{attribute}",
+            locale: locale,
+            default: ""
+          )
         end
       end
 
@@ -85,6 +96,50 @@ module Decidim
           mandatory: category["mandatory"] || false,
           items: (category["items"] || []).map { |item| normalize_cookie_item(item) }
         }
+      end
+
+      def default_category_slugs
+        @default_category_slugs ||= Decidim.consent_categories.map { |cat| cat[:slug].to_s }
+      end
+
+      def default_category?(category)
+        slug = category.is_a?(Hash) ? category["slug"] : category
+        default_category_slugs.include?(slug.to_s)
+      end
+
+      def category_modified?(category)
+        return false unless default_category?(category)
+
+        default_cat = default_decidim_categories.find { |c| c["slug"] == category["slug"] }
+        return false unless default_cat
+
+        category["title"] != default_cat["title"] ||
+          category["description"] != default_cat["description"] ||
+          category["mandatory"] != default_cat["mandatory"] ||
+          category["items"] != default_cat["items"]
+      end
+
+      def reset_category_to_default(slug)
+        default_decidim_categories.find { |c| c["slug"] == slug.to_s }
+      end
+
+      def category_visible?(category, user = nil)
+        visibility = category.is_a?(Hash) ? category["visibility"] : category[:visibility]
+
+        case visibility
+        when "hidden"
+          false
+        when "logged"
+          user.present?
+        when "non_logged"
+          user.blank?
+        when "verified_user"
+          return false unless user
+
+          Decidim::Authorization.where(user: user).any? { |auth| auth.granted? && !auth.expired? }
+        else
+          true
+        end
       end
     end
   end

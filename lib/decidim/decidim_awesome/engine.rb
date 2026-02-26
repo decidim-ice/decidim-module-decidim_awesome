@@ -7,7 +7,6 @@ require "decidim/decidim_awesome/awesome_helpers"
 require "decidim/decidim_awesome/menu"
 require "decidim/decidim_awesome/middleware/current_config"
 require "decidim/decidim_awesome/has_cookie_categories"
-require "decidim/decidim_awesome/data_consent_cell_override"
 require "active_hashcash" if Decidim::DecidimAwesome.enabled?(:hashcash_signup, :hashcash_login)
 
 module Decidim
@@ -112,9 +111,6 @@ module Decidim
 
         # override user's admin property
         Decidim::User.include(Decidim::DecidimAwesome::UserOverride) if DecidimAwesome.enabled?(:scoped_admins)
-
-        # Override DataConsentCell for cookie management
-        Decidim::DataConsentCell.prepend(Decidim::DecidimAwesome::DataConsentCellOverride) if DecidimAwesome.enabled?(:cookie_management)
 
         if DecidimAwesome.enabled?(:menu, :mobile_menu, :home_content_block_menu)
           Decidim::ContentBlocks::GlobalMenuCell.include(Decidim::DecidimAwesome::GlobalMenuCellOverride) if DecidimAwesome.enabled?(:home_content_block_menu)
@@ -302,8 +298,8 @@ module Decidim
 
       # Votings may override proposals cells, let's be sure to add these paths after the proposal component initializer
       initializer "decidim_decidim_awesome.add_cells_view_paths", before: "decidim_proposals.add_cells_view_paths" do
-        Cell::ViewModel.view_paths.unshift File.expand_path("#{Decidim::DecidimAwesome::Engine.root}/app/cells")
-        Cell::ViewModel.view_paths.unshift File.expand_path("#{Decidim::DecidimAwesome::Engine.root}/app/views")
+        Cell::ViewModel.view_paths << File.expand_path("#{Decidim::DecidimAwesome::Engine.root}/app/cells")
+        Cell::ViewModel.view_paths << File.expand_path("#{Decidim::DecidimAwesome::Engine.root}/app/views")
       end
 
       initializer "decidim_decidim_awesome.register_icons" do
@@ -318,6 +314,7 @@ module Decidim
         Decidim.icons.register(name: "file-settings-line", icon: "file-settings-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "hashtag", icon: "hashtag", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "smartphone", icon: "smartphone-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "cookie", icon: "cookie-line", category: "system", description: "cookie management icon", engine: :decidim_awesome)
       end
     end
   end

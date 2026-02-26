@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class DestroyCookieCategory < Decidim::Command
         include NeedsAwesomeConfig
+        include HasCookieCategories
 
         # Public: Initializes the command.
         #
@@ -22,7 +23,12 @@ module Decidim
         #
         # Returns nothing.
         def call
-          remove_category
+          if default_category?(category_slug)
+            reset_to_default
+          else
+            remove_category
+          end
+
           save_categories!
 
           broadcast(:ok)
@@ -58,6 +64,13 @@ module Decidim
 
         def remove_category
           current_categories.reject! { |c| c["slug"].to_s == category_slug.to_s }
+        end
+
+        def reset_to_default
+          current_categories.reject! { |c| c["slug"].to_s == category_slug.to_s }
+
+          default_cat = reset_category_to_default(category_slug)
+          current_categories << default_cat if default_cat
         end
 
         def save_categories!

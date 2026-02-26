@@ -13,6 +13,9 @@
       <div class="row column">
         <%= form.translated :text_area, :description, rows: 3, class: "w-full" %>
       </div>
+      <div class="row column">
+        <%= form.select :visibility, visibility_options, {}, class: "mb-8" %>
+      </div>
     </div>
   </div>
 </div>

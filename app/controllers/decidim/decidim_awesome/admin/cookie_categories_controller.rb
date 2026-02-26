@@ -9,7 +9,7 @@ module Decidim
         include HasCookieCategories
 
         helper Admin::ConfigConstraintsHelpers
-        helper_method :current_categories
+        helper_method :current_categories, :visibility_options, :default_category?, :category_modified?
 
         before_action do
           enforce_permission_to :edit_config, :cookie_management
@@ -109,7 +109,6 @@ module Decidim
         def save_categories!(categories)
           cookie_management_setting.value = { "categories" => categories }
           cookie_management_setting.save!
-          @categories_data = nil
         end
 
         def category_for_form
@@ -120,8 +119,13 @@ module Decidim
             slug: category["slug"],
             mandatory: category["mandatory"],
             title: category["title"],
-            description: category["description"]
+            description: category["description"],
+            visibility: category["visibility"]
           }
+        end
+
+        def visibility_options
+          MenuForm::VISIBILITY_STATES.index_by { |key| I18n.t(".menu_hacks.form.visibility.#{key}", scope: "decidim.decidim_awesome.admin") }
         end
       end
     end

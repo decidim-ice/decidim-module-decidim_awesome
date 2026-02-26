@@ -4,6 +4,14 @@ en:
     submit_filter: Filter
     waiting_label: Waiting for verification ...
   activemodel:
+    errors:
+      models:
+        cookie_item:
+          attributes:
+            base:
+              category_not_found: Category not found
+            name:
+              taken: has already been taken
     attributes:
       config:
         additional_proposal_sortings: Additional sorting options enabled
@@ -59,18 +67,11 @@ en:
         mandatory: Mandatory
         slug: Slug
         title: Title
+        visibility: Visibility
       cookie_item:
         name: Name
         service: Service
         type: Type
-    errors:
-      models:
-        cookie_item:
-          attributes:
-            base:
-              category_not_found: Category not found
-            name:
-              taken: has already been taken
       custom_redirect:
         active: Active
         destination: Destination
@@ -527,12 +528,16 @@ en:
             save: Save
             title: Edit cookie category
           index:
+            cannot_remove_default: Default categories cannot be removed
             confirm_destroy: Are you sure to remove this cookie category? This will
               also remove all the items in this category.
+            confirm_reset: Are you sure to reset this category to its default values? This will
+              remove all customizations you made.
             edit: Edit category
             items: Category items
             new: New category
             remove: Remove category
+            reset: Reset to default
             title: Cookie Management
           new:
             save: Save

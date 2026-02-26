@@ -11,29 +11,36 @@
       <table class="table-list">
         <thead>
           <tr>
-            <th><%= t("cookie_category.mandatory", scope: "activemodel.attributes") %></th>
             <th><%= t("cookie_category.slug", scope: "activemodel.attributes") %></th>
+            <th><%= t("cookie_category.mandatory", scope: "activemodel.attributes") %></th>
             <th><%= t("cookie_category.title", scope: "activemodel.attributes") %></th>
+            <th><%= t("cookie_category.visibility", scope: "activemodel.attributes") %></th>
             <th class="actions"><%= t("decidim.decidim_awesome.admin.actions") %></th>
           </tr>
         </thead>
         <tbody>
           <% current_categories.each do |category| %>
-            <% is_default = category["title"].blank? || category["title"].values.all?(&:blank?) %>
-            <tr>
-              <td><%= check category["mandatory"] %></td>
+            <% is_default = default_category?(category) %>
+            <% is_modified = category_modified?(category) %>
+            <tr<%= " class=cookie_category-addition" unless is_default %>>
               <td><%= category["slug"] %></td>
-              <td>
-                <% if is_default %>
-                  <%= t("layouts.decidim.data_consent.modal.#{category["slug"]}.title") %>
-                <% else %>
-                  <%= translated_attribute(category["title"]) %>
-                <% end %>
-              </td>
+              <td><%= check category["mandatory"] %></td>
+              <td><%= translated_attribute(category["title"]) %></td>
+              <td><%= visibility_options.invert[category["visibility"]] %></td>
               <td class="table-list__actions">
                 <%= icon_link_to "list-check", decidim_admin_decidim_awesome.cookie_category_cookie_items_path(category["slug"]), t(".items"), class: "action-icon--preview" %>
                 <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_cookie_category_path(category["slug"]), t(".edit"), class: "action-icon--edit" %>
-                <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.cookie_category_path(category["slug"]), t(".remove"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
+                <% if is_default %>
+                  <% if is_modified %>
+                    <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.cookie_category_path(category["slug"]), t(".reset"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_reset") } %>
+                  <% else %>
+                    <span class="action-icon">
+                      <%= icon "close-circle-line", class: "action-icon action-icon--disabled", role: "img", "aria-label": t(".cannot_remove_default") %>
+                    </span>
+                  <% end %>
+                <% else %>
+                  <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.cookie_category_path(category["slug"]), t(".remove"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
+                <% end %>
               </td>
             </tr>
           <% end %>
