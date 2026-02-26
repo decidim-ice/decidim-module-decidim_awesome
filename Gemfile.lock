@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    decidim-decidim_awesome (0.14.0)
+    decidim-decidim_awesome (0.14.1)
       active_hashcash (~> 0.4.0)
       decidim-admin (>= 0.31.0, < 0.32)
       decidim-core (>= 0.31.0, < 0.32)
