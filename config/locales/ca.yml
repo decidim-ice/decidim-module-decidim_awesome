@@ -263,6 +263,8 @@ ca:
           index:
             admin_head_tags: Etiquetes Awesome incloses a la capçalera de l'aplicació
               d'administració
+            awesome_update_available: "Hi ha una nova versió disponible: %{latest_version}"
+            awesome_version: Versió de Decidim Awesome %{version}
             decidim-admin: Del mòdul Admin
             decidim-assemblies: Del mòdul Assemblies
             decidim-conferences: Del mòdul Conferences
@@ -279,6 +281,7 @@ ca:
                 personalitzat admin/_header.html.erb
             head_tags: Etiquetes Awesome incloses a la capçalera de l'aplicació
             link_admins: Entra al panell /system
+            view_release: Veure les notes de la versió
         config:
           anonymous: Usuaris no identificats
           caution: 'NOTA: Aquesta funció modifica en gran mesura alguns comportaments

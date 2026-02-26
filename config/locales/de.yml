@@ -214,6 +214,8 @@ de:
         checks:
           index:
             admin_head_tags: Angezeigte Awesome Tags im Admin Application Header
+            awesome_update_available: "Eine neue Version ist verfügbar: %{latest_version}"
+            awesome_version: Decidim Awesome Version %{version}
             decidim-admin: decidim-admin
             decidim-assemblies: Vom Gremien-Modul
             decidim-conferences: Von Konferenz-Modul
@@ -226,6 +228,7 @@ de:
               JavaScript: Der "Head" enthält nicht die erforderlichen <script> Javascript-Einträge. Zur Lösung können Sie sie manuell zu Ihrer benutzerdefinierten admin/_header.html.erb-Datei hinzufügen
             head_tags: Angezeigte Awesome Tags im Application Header
             link_admins: Ins System-Backend anmelden
+            view_release: Versionshinweise anzeigen
         config:
           anonymous: Nicht eingeloggte Nutzende
           caution: 'HINWEIS: Mit dieser Funktion werden einige Standardverhaltensweisen stark verändert, was zu unerwarteten Ergebnissen führen kann. Verwenden Sie sie mit Vorsicht!'

@@ -215,6 +215,8 @@ it:
         checks:
           index:
             admin_head_tags: Tag Awesome visualizzate nel header della sezione amministrativa
+            awesome_update_available: "È disponibile una nuova versione: %{latest_version}"
+            awesome_version: Decidim Awesome versione %{version}
             decidim-admin: Dal modulo di amministrazione
             decidim-assemblies: Dal modulo Assemblee
             decidim-conferences: Dal modulo Conferenze
@@ -227,6 +229,7 @@ it:
               JavaScript: Lo Head non contiene le voci <script> delle librerie Javascript richieste. Per risolverlo, puoi aggiungerlo manualmente al tuo admin/_head.html.erb personalizzato
             head_tags: Tag Awesome visualizzate nel header dell'applicazione
             link_admins: Accedi al pannello /system
+            view_release: Visualizza le note di rilascio
         config:
           anonymous: Utenti non autenticati
           caution: 'NOTA: Questa funzione modifica pesantemente alcuni comportamenti predefiniti che potrebbero portare a risultati inattesi. Usalo con cautela!'

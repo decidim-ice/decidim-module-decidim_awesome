@@ -10,6 +10,25 @@
   </p>
 </div>
 
+<div class="card-section awesome-version">
+  <p>
+    <span class="label <%= awesome_version_outdated? ? "alert" : "success" %>">
+      <%= t ".awesome_version", version: awesome_version %>
+    </span>
+    <%= check !awesome_version_outdated? %>
+  </p>
+  <% if awesome_version_outdated? %>
+    <div class="callout warning">
+      <p>
+        <strong><%= t ".awesome_update_available", latest_version: awesome_latest_version %></strong>
+      </p>
+      <p>
+        <%= link_to t(".view_release"), "https://github.com/decidim-ice/decidim-module-decidim_awesome/releases/tag/v#{awesome_latest_version}", target: "_blank", rel: "noopener" %>
+      </p>
+    </div>
+  <% end %>
+</div>
+
 <% if system_admin? %>
 <div class="card-section">
   <p>

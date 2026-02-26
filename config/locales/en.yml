@@ -251,6 +251,8 @@ en:
         checks:
           index:
             admin_head_tags: Awesome tags included in the admin application header
+            awesome_update_available: "A new version is available: %{latest_version}"
+            awesome_version: Decidim Awesome version %{version}
             decidim-admin: From Admin module
             decidim-assemblies: From Assemblies module
             decidim-conferences: From Conferences module
@@ -265,6 +267,7 @@ en:
                 To solve it, you can manually add it to your custom admin/_header.html.erb
             head_tags: Awesome tags included in the application header
             link_admins: Login into /system panel
+            view_release: View release notes
         config:
           anonymous: Non-logged users
           caution: 'NOTE: This feature heavily modifies some default behaviors that

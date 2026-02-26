@@ -214,6 +214,8 @@ pt:
         checks:
           index:
             admin_head_tags: Tags incriveis incluidas no cabecalho do aplicativo admin
+            awesome_update_available: "Ha uma nova versao disponivel: %{latest_version}"
+            awesome_version: Decidim Awesome versao %{version}
             decidim-admin: Do modulo Admin
             decidim-assemblies: Do modulo Assemblies
             decidim-conferences: Do modulo Conferences
@@ -226,6 +228,7 @@ pt:
               JavaScript: O cabecalho nao contem as entradas <script> necessarias. Para resolver, voce pode adicionar manualmente no seu admin/_header.html.erb personalizado
             head_tags: Tags incriveis incluidas no cabecalho do aplicativo
             link_admins: Aceder painel /system
+            view_release: Ver notas da versao
         config:
           anonymous: Utilizadores nao autenticados
           caution: 'NOTA: Esta funcao modifica fortemente alguns comportamentos padrao que podem levar a resultados inesperados. Use com cautela!'
