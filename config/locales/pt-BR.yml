@@ -222,6 +222,7 @@ pt-BR:
             decidim-core: Do modulo Core
             decidim-participatory_processes: Do modulo Processos Participativos
             decidim-proposals: Do modulo Propostas
+            decidim_update_available: "Ha uma nova versao disponivel: %{latest_version}"
             decidim_version: Decidim versao %{version}
             errors:
               CSS: O cabecalho nao contem as entradas <link> necessarias. Para resolver, voce pode adicionar manualmente no seu _head.html.erb personalizado

@@ -222,6 +222,7 @@ es:
             decidim-core: Del módulo Core
             decidim-participatory_processes: Del módulo Participatory Processes
             decidim-proposals: Del módulo Propuestas
+            decidim_update_available: "Hay una nueva versión disponible: %{latest_version}"
             decidim_version: Versión de Decidim %{version}
             errors:
               CSS: El encabezado no contiene las entradas requeridas <link> a la hoja de estilo. Para resolverlo, se pueden añadir manualmente al fichero personalizado _head.html.erb

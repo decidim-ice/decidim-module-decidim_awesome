@@ -222,6 +222,7 @@ de:
             decidim-core: Vom Kernmodul
             decidim-participatory_processes: Vom Beteiligungsprozess-Bereich
             decidim-proposals: Von der Vorschlags-Komponente
+            decidim_update_available: "Eine neue Version ist verfügbar: %{latest_version}"
             decidim_version: Decidim Version %{version}
             errors:
               CSS: Der "Head" enthält nicht die erforderlichen <link> Stylesheet-Einträge. Zur Lösung können Sie sie manuell zu Ihrer benutzerdefinierten _head.html.erb-Datei hinzufügen

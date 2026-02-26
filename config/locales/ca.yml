@@ -271,6 +271,7 @@ ca:
             decidim-core: Del mòdul Core
             decidim-participatory_processes: Del mòdul de Participatory Processes
             decidim-proposals: Del mòdul Proposals
+            decidim_update_available: "Hi ha una nova versió disponible: %{latest_version}"
             decidim_version: Versió de Decidim %{version}
             errors:
               CSS: La capçalera no conté les entrades necessàries <link> al full d'estil.

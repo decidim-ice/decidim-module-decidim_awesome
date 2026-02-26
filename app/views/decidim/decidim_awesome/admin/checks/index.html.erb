@@ -8,6 +8,16 @@
     <span class="label <%= decidim_version_valid? ? "success" : "alert" %>"><%= t ".decidim_version", version: decidim_version %></span>
     <%= check decidim_version_valid? %>
   </p>
+  <% if decidim_version_outdated? %>
+    <div class="callout warning mt-4">
+      <p>
+        <strong><%= t ".decidim_update_available", latest_version: decidim_latest_version %></strong>
+      </p>
+      <p>
+        <%= link_to t(".view_release"), "https://github.com/decidim/decidim/releases/tag/v#{decidim_latest_version}", target: "_blank", rel: "noopener" %>
+      </p>
+    </div>
+  <% end %>
 </div>
 
 <div class="card-section awesome-version">
@@ -18,7 +28,7 @@
     <%= check !awesome_version_outdated? %>
   </p>
   <% if awesome_version_outdated? %>
-    <div class="callout warning">
+    <div class="callout warning mt-4">
       <p>
         <strong><%= t ".awesome_update_available", latest_version: awesome_latest_version %></strong>
       </p>

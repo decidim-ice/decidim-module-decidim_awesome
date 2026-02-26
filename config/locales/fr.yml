@@ -222,6 +222,7 @@ fr:
             decidim-core: Depuis le module coeur
             decidim-participatory_processes: Depuis le module Processus participatifs
             decidim-proposals: Depuis le module Propositions
+            decidim_update_available: "Une nouvelle version est disponible : %{latest_version}"
             decidim_version: Version %{version} de Decidim
             errors:
               CSS: La balise <head> ne contient pas les entrées de la feuille de style <link> requises. Pour la résoudre, vous pouvez l'ajouter manuellement à votre _head.html.erb personnalisé
