@@ -119,7 +119,7 @@ es:
             announcement: Anuncio
             show_accepted: Muestra las propuestas aceptadas
             show_evaluating: Muestra las propuestas en evaluación
-            show_not_answered: Muestra las propuestas pendientes de contestart
+            show_not_answered: Muestra las propuestas pendientes de contestar
             show_rejected: Muestra las propuestas rechazadas
             show_withdrawn: Muestra las propuestas retiradas
       proposals:
@@ -140,7 +140,7 @@ es:
             voting_cards_box_title: Título de la cabina de votación
             voting_cards_box_title_help: Por defecto es "Votar en esta propuesta". Use "-" para ocultarla.
             voting_cards_instructions: Instrucciones/ayuda de soporte (ventana modal descartable)
-            voting_cards_instructions_help: Por defecto es "Por favor lee las reglas de votación cuidadosamente para entender cómo se usará tu voto por %{organization}""
+            voting_cards_instructions_help: Por defecto es "Por favor lee las reglas de votación cuidadosamente para entender cómo se usará tu voto por %{organization}"
             voting_cards_show_abstain: Añadir una opción de abstención
             voting_cards_show_modal_help: Mostrar instrucciones/ayuda modal cuando se haga clic en el soporte
           step:
@@ -597,13 +597,55 @@ es:
           name: Mapa Global
           show_accepted: Muestra las propuestas aceptadas
           show_evaluating: Muestra las propuestas en evaluación
-          show_not_answered: Muestra las propuestas pendientes de contestart
+          show_not_answered: Muestra las propuestas pendientes de contestar
           show_rejected: Muestra las propuestas rechazadas
           show_withdrawn: Muestra las propuestas retiradas
           taxonomies: Taxonomías
           text_settings: Ajustes del texto
           title: Título
           truncate: Número máximo de caracteres para las descripciones emergentes
+        awesome_process_groups:
+          active: Activos
+          all: Todos
+          all_taxonomies: Todas las categorías
+          default_title: Procesos participativos
+          filter_by_label: 'Filtrar por:'
+          max_count: Cantidad máxima de elementos a mostrar
+          name: Grupos de procesos Awesome
+          past: Pasados
+          remove_filter: Eliminar filtro
+          results_count:
+            one: "%{count} proceso encontrado"
+            other: "%{count} procesos encontrados"
+          status_label: 'Estado:'
+          title: Título del bloque
+          upcoming: Próximos
+        awesome_processes:
+          active_spaces: Procesos participativos
+          any_group: Cualquier grupo
+          group_label: Grupo
+          max_results: Cantidad máxima de elementos a mostrar
+          name: Procesos Awesome
+          process_group: Restringir al grupo de procesos
+          process_status: Filtro de estado del proceso
+          process_statuses:
+            active: Solo procesos activos
+            all: Todos los procesos
+            past: Solo procesos pasados
+            upcoming: Solo procesos futuros
+          process_type: Tipo de procesos
+          process_type_mixed_hint: En modo mixto, los procesos y grupos se intercalan hasta la cantidad máxima. Los procesos se ordenan por peso (ascendente). Si un tipo se agota, los espacios restantes se llenan con el otro.
+          process_types:
+            all: Todos los procesos y grupos mezclados
+            groups: Solo grupos de procesos
+            processes: Solo procesos
+          processes: Procesos
+          see_all_spaces: Ver todos los procesos
+          selection_criteria: Criterios de selección
+          selection_criteria_options:
+            automatic: Automático
+            manual: Manual
+          title: Título del bloque
       credits: Decidim Awesome %{version} · Mantenida con ♥ por %{company}
       custom_fields:
         errors:
@@ -618,11 +660,11 @@ es:
           api_not_ready: |
             <b>Advertencia:</b> Esta instalación de Decidim tiene la API configurada a una complejidad máxima de <b>%{current_complexity}</b>.
             Este componente probablemente no funcione correctament bajo esta configuración. Es recomendado configurar en un inicializador
-            (por ejemplo al final de <code>config/initializers/decidim. b</code>) añadir las siguientes líneas:<br>
+            (por ejemplo al final de <code>config/initializers/decidim.rb</code>) añadir las siguientes líneas:<br>
             <br>
             <pre># Configuración de Api
             Rails.application.config.to_prepare do
-              Decidim::Api::Schema. ax_complexity = 5000
+              Decidim::Api::Schema.max_complexity = 5000
               Decidim::Api::Schema.max_depth = 50
             end</pre>
           error:
@@ -660,7 +702,7 @@ es:
           abstained: "✔️ Abstenido"
           change_vote: Cambiar mi voto
           default_box_title: Votar esta propuesta
-          default_instructions_html: "<p>Por defecto es \"Por favor lee las reglas de votación cuidadosamente para entender cómo se usará tu voto por %{organization}\"\"</p>"
+          default_instructions_html: "<p>Por defecto es \"Por favor lee las reglas de votación cuidadosamente para entender cómo se usará tu voto por %{organization}\"</p>"
           modal:
             cancel: Cancelar
             message: Tu voto se considerará final el %{date}. Puedes cambiarlo hasta entonces

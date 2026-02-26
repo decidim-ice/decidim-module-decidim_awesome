@@ -598,6 +598,48 @@ de:
           text_settings: Text-Einstellungen
           title: Titel
           truncate: Maximale Zeichenanzahl für Popup-Beschreibungen
+        awesome_process_groups:
+          active: Aktiv
+          all: Alle
+          all_taxonomies: Alle Kategorien
+          default_title: Beteiligungsprozesse
+          filter_by_label: 'Filtern nach:'
+          max_count: Maximale Anzahl der anzuzeigenden Elemente
+          name: Awesome-Prozessgruppen
+          past: Vergangene
+          remove_filter: Filter entfernen
+          results_count:
+            one: "%{count} Prozess gefunden"
+            other: "%{count} Prozesse gefunden"
+          status_label: 'Status:'
+          title: Blocktitel
+          upcoming: Kommende
+        awesome_processes:
+          active_spaces: Beteiligungsprozesse
+          any_group: Beliebige Gruppe
+          group_label: Gruppe
+          max_results: Maximale Anzahl der anzuzeigenden Elemente
+          name: Awesome Prozesse
+          process_group: Auf Prozessgruppe beschränken
+          process_status: Prozessstatus-Filter
+          process_statuses:
+            active: Nur aktive Prozesse
+            all: Alle Prozesse
+            past: Nur vergangene Prozesse
+            upcoming: Nur zukünftige Prozesse
+          process_type: Art der Prozesse
+          process_type_mixed_hint: Im gemischten Modus werden Prozesse und Gruppen bis zur maximalen Anzahl verschachtelt. Prozesse werden nach Gewicht sortiert (aufsteigend). Wenn ein Typ aufgebraucht ist, werden die verbleibenden Plätze mit dem anderen gefüllt.
+          process_types:
+            all: Alle Prozesse und Gruppen gemischt
+            groups: Nur Prozessgruppen
+            processes: Nur Prozesse
+          processes: Prozesse
+          see_all_spaces: Alle Prozesse anzeigen
+          selection_criteria: Auswahlkriterien
+          selection_criteria_options:
+            automatic: Automatisch
+            manual: Manuell
+          title: Blocktitel
       credits: Decidim awesome %{version} · Gepflegt mit ❤️ durch %{company}
       custom_fields:
         errors:
@@ -606,11 +648,18 @@ de:
       editor_images:
         create:
           error: Fehler beim Hochladen des Bildes!
-          success: "Bild erfolgreich hochgeladen\nThis component probably won't work under this configuration. We recommend you to set up in a initializer\n(for instance at the end of the <code>config/initializers/decidim: rb</code>) the following lines:<br>\n<br>\n<pre># Api configuration\nDecidim::Api::Schema.max_complexity = 5000\nDecidim::Api::Schema.max_depth = 50</pre> "
+          success: Bild erfolgreich hochgeladen
       map_component:
         map:
           api_not_ready: |
-            <b>Warnung:</b>Bei dieser Decidim-Installation ist die API mit einer maximalen Komplexität von <b>%{current_complexity}</b> eingestellt. Diese Komponente wird unter dieser Konfiguration wahrscheinlich nicht funktionieren. Wir empfehlen, dass Sie einen Initializer mit folgendem Code einrichten (z.B. am Ende von <code>config/initializers/decidim: rb</code>):<br> <br> <pre># Api configuration Decidim::Api::Schema.max_complexity = 5000 Decidim::Api::Schema.max_depth = 50</pre>
+            <b>Warnung:</b> Diese Decidim-Installation hat die API mit einer maximalen Komplexität von <b>%{current_complexity}</b> konfiguriert.
+            Diese Komponente wird unter dieser Konfiguration wahrscheinlich nicht funktionieren. Wir empfehlen, in einem Initializer (z.B. am Ende von <code>config/initializers/decidim.rb</code>) die folgenden Zeilen zu setzen:<br>
+            <br>
+            <pre># Api configuration
+            Rails.application.config.to_prepare do
+              Decidim::Api::Schema.max_complexity = 5000
+              Decidim::Api::Schema.max_depth = 50
+            end</pre>
           error:
             unavailable: Die Karte ist nicht verfügbar. Bitte konfigurieren Sie die Geokodierung, um diese Komponente zu aktivieren.
           show:
@@ -667,6 +716,7 @@ de:
     download_your_data:
       show:
         admin_actions: Admin-Aktionen
+        awesome_private_proposals: Vorschläge exportieren mit privaten Feldern
     meetings:
       meetings_map:
         view_meeting: Sitzung ansehen
