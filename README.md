@@ -443,6 +443,20 @@ When using automatic mode with "All processes and groups mixed", items are inter
 
 ![Awesome Processes admin settings](examples/awesome_processes_admin.png)
 
+#### 24. Process Groups content block
+
+A content block for process group landing pages that displays the participatory processes belonging to that group. It can be configured in the admin panel under **Participatory processes > Groups > (select a group) > Landing page layout**.
+
+Features:
+
+- **Status filter tabs**: Active, Past, Upcoming, All — with process counts for each.
+- **Taxonomy filters**: Optional dropdown filters based on the organization's configured taxonomies (e.g. Topics, Areas). Multiple selections within a group use OR logic, different groups use AND logic.
+- **Pagination**: Configurable number of items per page.
+- **Custom title**: Override the default block title.
+
+![Process Groups content block settings](examples/awesome_process_groups_admin.png)
+![Process Groups public view](examples/awesome_process_groups_public.png)
+
 #### To be continued...
 
 We're not done! Please check the [issues](/decidim-ice/decidim-module-decidim_awesome/issues) (and participate) to see what's on our mind

@@ -1,0 +1,111 @@
+.process-groups-filter-label {
+  @apply text-sm font-semibold text-gray-2;
+}
+
+.process-groups-filters {
+  @apply flex flex-wrap items-center gap-x-10 gap-y-2 mt-3 mb-3;
+}
+
+.process-groups-status-bar {
+  @apply flex items-center gap-3;
+}
+
+.process-groups-taxonomy-bar {
+  @apply flex flex-wrap items-center gap-2;
+}
+
+.process-groups-active-tags {
+  @apply flex flex-wrap items-center gap-2 mb-3;
+}
+
+.process-groups-filters + .participatory-space__block-grid {
+  @apply mt-3;
+}
+
+[data-process-groups-filter] .participatory-space__block-grid {
+  > div {
+    @apply flex;
+
+    .card__grid {
+      @apply w-full;
+    }
+  }
+}
+
+.process-groups-remove-tag {
+  @apply cursor-pointer;
+}
+
+.process-groups-pagination {
+  @apply pt-8 flex items-center justify-between;
+}
+
+.process-groups-results-count {
+  @apply text-sm text-gray-2;
+}
+
+.process-groups-filter-tab {
+  @apply text-sm text-gray-2 bg-transparent border-0 border-b-2 border-transparent cursor-pointer px-0 py-1;
+
+  text-decoration: none;
+
+  &:hover {
+    @apply text-secondary;
+  }
+
+  &.is-active {
+    @apply text-secondary border-secondary font-semibold;
+  }
+}
+
+.process-groups-filter-dropdown {
+  @apply relative;
+
+  &__trigger {
+    @apply flex items-center gap-1 text-sm font-semibold text-secondary bg-transparent border border-gray-3 rounded px-3 py-1.5 cursor-pointer;
+
+    &:hover {
+      @apply border-secondary;
+    }
+
+    &[aria-expanded="true"] {
+      @apply border-secondary;
+
+      .process-groups-filter-dropdown__arrow {
+        @apply rotate-180;
+      }
+    }
+  }
+
+  &__arrow {
+    @apply w-4 h-4 transition-transform;
+  }
+
+  &__panel {
+    @apply absolute top-full left-0 mt-1 bg-white border border-gray-3 rounded shadow-md z-10 min-w-max p-1.5;
+
+    &[aria-hidden="true"] {
+      @apply hidden;
+    }
+
+    &[aria-hidden="false"] {
+      @apply flex flex-col gap-0.5;
+    }
+  }
+
+  &__item {
+    @apply flex items-center gap-1.5 px-1.5 py-0.5 text-sm cursor-pointer rounded;
+
+    &:hover {
+      @apply bg-background;
+    }
+
+    &.is-child {
+      @apply pl-4;
+    }
+
+    input[type="checkbox"] {
+      @apply accent-secondary;
+    }
+  }
+}
