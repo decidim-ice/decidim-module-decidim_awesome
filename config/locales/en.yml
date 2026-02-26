@@ -702,6 +702,22 @@ en:
           title_closed: Click to chat!
           title_open: Let's chat!
       content_blocks:
+        awesome_process_groups:
+          active: Active
+          all: All
+          all_taxonomies: All categories
+          default_title: Participatory processes
+          filter_by_label: 'Filter by:'
+          max_count: Maximum amount of elements to show
+          name: Awesome group processes
+          past: Past
+          remove_filter: Remove filter
+          results_count:
+            one: "%{count} process found"
+            other: "%{count} processes found"
+          status_label: 'Status:'
+          title: Block title
+          upcoming: Upcoming
         awesome_processes:
           active_spaces: Last processes
           any_group: Any group
