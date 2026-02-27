@@ -74,7 +74,10 @@ module Decidim
         end
 
         def fetch_decidim_from_github
-          response = Faraday.get("https://api.github.com/repos/decidim/decidim/releases")
+          response = Faraday.get("https://api.github.com/repos/decidim/decidim/releases") do |req|
+            req.options.timeout = 5
+            req.options.open_timeout = 3
+          end
 
           return nil unless response.success?
 
@@ -100,7 +103,10 @@ module Decidim
         end
 
         def fetch_from_github
-          response = Faraday.get("https://api.github.com/repos/decidim-ice/decidim-module-decidim_awesome/releases")
+          response = Faraday.get("https://api.github.com/repos/decidim-ice/decidim-module-decidim_awesome/releases") do |req|
+            req.options.timeout = 5
+            req.options.open_timeout = 3
+          end
 
           return nil unless response.success?
 
