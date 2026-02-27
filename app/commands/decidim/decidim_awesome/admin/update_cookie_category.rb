@@ -73,18 +73,13 @@ module Decidim
         end
 
         def duplicate_slug?
-          return false if form.slug == category_slug
-
-          if current_categories.any? { |c| c["slug"].to_s == form.slug }
-            form.errors.add(:slug, :taken)
-            return true
-          end
           false
         end
 
         def update_category
           items = @category["items"].is_a?(Array) ? @category["items"] : []
           updated = form.to_params
+          updated["slug"] = category_slug
           updated["items"] = items
 
           current_categories[@category_index] = updated

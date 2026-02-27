@@ -6,9 +6,10 @@ module Decidim
       class CookieItemsController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
         include ConfigConstraintsHelpers
+        include HasCookieCategories
 
         helper ConfigConstraintsHelpers
-        helper_method :category
+        helper_method :category, :default_cookie_item?, :cookie_item_modified?, :item_type_options
 
         before_action do
           enforce_permission_to :edit_config, :cookie_management
@@ -109,6 +110,12 @@ module Decidim
             service: item["service"],
             description: item["description"]
           }
+        end
+
+        def item_type_options
+          CookieItemForm::ITEM_TYPES.index_by do |type|
+            I18n.t("cookie_item.types.#{type}", scope: "activemodel.attributes")
+          end
         end
       end
     end

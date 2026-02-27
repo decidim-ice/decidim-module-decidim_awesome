@@ -11,10 +11,10 @@ module Decidim::DecidimAwesome
       let(:user) { create(:user, :admin, :confirmed, organization: organization) }
       let(:form_params) do
         {
-          slug: "awesome-analytics",
           title: { en: "Awesome Analytics" },
           description: { en: "Awesome analytics cookies" },
-          mandatory: false
+          mandatory: false,
+          visibility: "default"
         }
       end
       let(:form) do
@@ -48,10 +48,11 @@ module Decidim::DecidimAwesome
           subject.call
           category = cookie_management_config.reload.value["categories"].first
 
-          expect(category["slug"]).to eq("awesome-analytics")
+          expect(category["slug"]).to match(/^awesome-analytics-[a-f0-9]{8}$/)
           expect(category["title"]["en"]).to eq("Awesome Analytics")
           expect(category["description"]["en"]).to eq("Awesome analytics cookies")
           expect(category["mandatory"]).to be(false)
+          expect(category["visibility"]).to eq("default")
           expect(category["items"]).to eq([])
         end
       end
@@ -60,10 +61,10 @@ module Decidim::DecidimAwesome
         context "when form is invalid" do
           let(:form_params) do
             {
-              slug: "",
-              title: { en: "Awesome Analytics" },
+              title: { en: "" },
               description: { en: "Awesome analytics cookies" },
-              mandatory: false
+              mandatory: false,
+              visibility: "default"
             }
           end
 
@@ -79,19 +80,24 @@ module Decidim::DecidimAwesome
         end
 
         context "when slug already exists" do
+          let!(:existing_slug) { "awesome-analytics-12345678" }
+
           before do
             cookie_management_config.value = {
               "categories" => [
                 {
-                  "slug" => "awesome-analytics",
+                  "slug" => existing_slug,
                   "title" => { "en" => "Existing Awesome Analytics" },
                   "description" => { "en" => "Existing description" },
                   "mandatory" => false,
+                  "visibility" => "default",
                   "items" => []
                 }
               ]
             }
             cookie_management_config.save!
+
+            allow_any_instance_of(CookieCategoryForm).to receive(:generate_slug_from_title).and_return(existing_slug) # rubocop:disable RSpec/AnyInstance
           end
 
           it "broadcasts :invalid" do

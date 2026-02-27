@@ -19,6 +19,16 @@ module Decidim
         validates :description, translatable_presence: true
         validates :visibility, inclusion: { in: VISIBILITY_STATES }
 
+        def map_model(model)
+          self.slug = model[:slug]
+        end
+
+        def generate_slug_from_title
+          base_slug = title.values.compact.first.to_s.parameterize
+          base_slug = "category" if base_slug.blank?
+          "#{base_slug}-#{SecureRandom.hex(4)}"
+        end
+
         def to_params
           {
             "slug" => slug,

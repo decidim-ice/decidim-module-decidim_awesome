@@ -70,7 +70,7 @@ module Decidim
           register_simple_entry(:awesome_admin_menu, :custom_redirects, 8, "external-link-line")
           register_simple_entry(:awesome_admin_menu, :livechat, 9, "chat-1-line")
           register_simple_entry(:awesome_admin_menu, :verifications, 10, "fingerprint-line")
-          register_simple_entry(:awesome_admin_menu, :cookie_management, 11, "cookie")
+          register_simple_entry(:awesome_admin_menu, :cookie_management, 11, "shield-check-line")
 
           register_simple_entry(:awesome_admin_menu, :maintenance, 12, "tools-line",
                                 i18n_key: "menu.maintenance.maintenance",

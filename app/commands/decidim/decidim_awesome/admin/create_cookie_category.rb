@@ -20,6 +20,7 @@ module Decidim
         #
         # Returns nothing.
         def call
+          generate_slug_if_needed
           return broadcast(:invalid) if form.invalid?
           return broadcast(:invalid) if duplicate_slug?
 
@@ -36,6 +37,10 @@ module Decidim
         private
 
         attr_reader :form
+
+        def generate_slug_if_needed
+          form.slug = form.generate_slug_from_title if form.slug.blank?
+        end
 
         def cookie_management_setting
           @cookie_management_setting ||= AwesomeConfig.find_or_initialize_by(

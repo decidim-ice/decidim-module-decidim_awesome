@@ -23,13 +23,25 @@
         </thead>
         <tbody>
           <% (category["items"] || []).each do |item| %>
-            <tr>
-              <td><%= item["type"] %></td>
+            <% is_default = default_cookie_item?(params[:cookie_category_slug], item["name"]) %>
+            <% is_modified = cookie_item_modified?(params[:cookie_category_slug], item) %>
+            <tr<%= " class=cookie_item-addition" unless is_default %>>
+              <td><%= t("cookie_item.types.#{item["type"]}", scope: "activemodel.attributes", default: item["type"]) %></td>
               <td><%= item["name"] %></td>
               <td><%= translated_attribute(item["service"]) %></td>
               <td class="table-list__actions">
                 <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_cookie_category_cookie_item_path(params[:cookie_category_slug], item["name"]), t(".edit"), class: "action-icon--edit" %>
-                <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.cookie_category_cookie_item_path(params[:cookie_category_slug], item["name"]), t(".remove"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
+                <% if is_default %>
+                  <% if is_modified %>
+                    <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.cookie_category_cookie_item_path(params[:cookie_category_slug], item["name"]), t(".reset"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_reset") } %>
+                  <% else %>
+                    <span class="action-icon">
+                      <%= icon "close-circle-line", class: "action-icon action-icon--disabled", role: "img", "aria-label": t(".cannot_remove_default") %>
+                    </span>
+                  <% end %>
+                <% else %>
+                  <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.cookie_category_cookie_item_path(params[:cookie_category_slug], item["name"]), t(".remove"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
+                <% end %>
               </td>
             </tr>
           <% end %>

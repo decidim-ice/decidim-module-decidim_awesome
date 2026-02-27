@@ -15,6 +15,7 @@ module Decidim::DecidimAwesome
           "title" => { "en" => "Awesome Category" },
           "description" => { "en" => "Awesome description" },
           "mandatory" => false,
+          "visibility" => "default",
           "items" => []
         }
       end
@@ -51,10 +52,10 @@ module Decidim::DecidimAwesome
         let(:params) do
           {
             cookie_category: {
-              slug: "new-category",
               title: { en: "New Awesome Category" },
               description: { en: "New Awesome description" },
-              mandatory: false
+              mandatory: false,
+              visibility: "default"
             }
           }
         end
@@ -69,18 +70,13 @@ module Decidim::DecidimAwesome
         end
 
         context "when command fails" do
-          before do
-            cookie_management_config.value = { "categories" => [category_attributes] }
-            cookie_management_config.save!
-          end
-
           let(:params) do
             {
               cookie_category: {
-                slug: category_slug,
-                title: { en: "Duplicate" },
-                description: { en: "Duplicate awesome description" },
-                mandatory: false
+                title: { en: "" },
+                description: { en: "Description without title" },
+                mandatory: false,
+                visibility: "default"
               }
             }
           end
@@ -124,7 +120,8 @@ module Decidim::DecidimAwesome
               slug: category_slug,
               title: { en: "Updated Awesome Category" },
               description: { en: "Updated awesome description" },
-              mandatory: true
+              mandatory: true,
+              visibility: "default"
             }
           }
         end
@@ -151,7 +148,8 @@ module Decidim::DecidimAwesome
                 slug: "nonexistent",
                 title: { en: "Test" },
                 description: { en: "Test" },
-                mandatory: false
+                mandatory: false,
+                visibility: "default"
               }
             }
           end

@@ -12,10 +12,11 @@ module Decidim::DecidimAwesome
       let(:category_slug) { "awesome-analytics" }
       let(:form_params) do
         {
-          slug: "updated-analytics",
+          slug: "awesome-analytics",
           title: { en: "Updated Analytics" },
           description: { en: "Updated description" },
-          mandatory: true
+          mandatory: true,
+          visibility: "default"
         }
       end
       let(:form) do
@@ -33,6 +34,7 @@ module Decidim::DecidimAwesome
                 "title" => { "en" => "Awesome Analytics" },
                 "description" => { "en" => "Old description" },
                 "mandatory" => false,
+                "visibility" => "default",
                 "items" => [{ "name" => "Decidim Analytics", "type" => "cookie" }]
               }
             ]
@@ -50,9 +52,10 @@ module Decidim::DecidimAwesome
         it "updates the category attributes" do
           subject.call
           category = cookie_management_config.reload.value["categories"].first
-          expect(category["slug"]).to eq("updated-analytics")
+          expect(category["slug"]).to eq("awesome-analytics")
           expect(category["title"]["en"]).to eq("Updated Analytics")
           expect(category["mandatory"]).to be(true)
+          expect(category["visibility"]).to eq("default")
         end
 
         it "preserves existing items" do
@@ -64,7 +67,7 @@ module Decidim::DecidimAwesome
       end
 
       describe "when invalid" do
-        let(:form_params) { { slug: "", title: { en: "Updated Analytics" } } }
+        let(:form_params) { { slug: "awesome-analytics", title: { en: "" }, description: { en: "" }, visibility: "default" } }
 
         it "broadcasts :invalid" do
           expect { subject.call }.to broadcast(:invalid)

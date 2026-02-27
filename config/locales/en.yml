@@ -72,6 +72,9 @@ en:
         name: Name
         service: Service
         type: Type
+        types:
+          cookie: Cookie
+          local_storage: Local Storage
       custom_redirect:
         active: Active
         destination: Destination
@@ -554,10 +557,14 @@ en:
             title: Edit cookie item
           index:
             back_to_categories: Back to categories
+            cannot_remove_default: Default items cannot be removed
             confirm_destroy: Are you sure to remove this cookie item?
+            confirm_reset: Are you sure to reset this item to its default values? This will
+              remove all customizations you made.
             edit: Edit item
             new: New item
             remove: Remove item
+            reset: Reset to default
             title: Cookie items
           new:
             save: Save

@@ -11,8 +11,28 @@ module Decidim
             "mandatory" => cat[:mandatory] || false,
             "title" => default_translations_for(slug, "title"),
             "description" => default_translations_for(slug, "description"),
-            "items" => (cat[:items] || []).map { |item| { "name" => item[:name].to_s, "type" => item[:type].to_s } }
+            "items" => (cat[:items] || []).map { |item| default_cookie_item(item) }
           }
+        end
+      end
+
+      def default_cookie_item(item)
+        item_name = item[:name].to_s
+        {
+          "name" => item_name,
+          "type" => item[:type].to_s,
+          "service" => default_item_translations_for(item_name, "service"),
+          "description" => default_item_translations_for(item_name, "description")
+        }
+      end
+
+      def default_item_translations_for(item_name, attribute)
+        I18n.available_locales.each_with_object({}) do |locale, hash|
+          hash[locale.to_s] = I18n.t(
+            "layouts.decidim.data_consent.details.items.#{item_name}.#{attribute}",
+            locale: locale,
+            default: ""
+          )
         end
       end
 
@@ -140,6 +160,32 @@ module Decidim
         else
           true
         end
+      end
+
+      def default_cookie_item?(category_slug, item_name)
+        default_cat = default_decidim_categories.find { |c| c["slug"] == category_slug.to_s }
+        return false unless default_cat
+
+        default_cat["items"].any? { |item| item["name"] == item_name.to_s }
+      end
+
+      def cookie_item_modified?(category_slug, item)
+        return false unless default_cookie_item?(category_slug, item["name"])
+
+        default_cat = default_decidim_categories.find { |c| c["slug"] == category_slug.to_s }
+        default_item = default_cat["items"].find { |i| i["name"] == item["name"] }
+        return false unless default_item
+
+        item["type"] != default_item["type"] ||
+          item["service"] != default_item["service"] ||
+          item["description"] != default_item["description"]
+      end
+
+      def reset_cookie_item_to_default(category_slug, item_name)
+        default_cat = default_decidim_categories.find { |c| c["slug"] == category_slug.to_s }
+        return nil unless default_cat
+
+        default_cat["items"].find { |i| i["name"] == item_name.to_s }
       end
     end
   end
