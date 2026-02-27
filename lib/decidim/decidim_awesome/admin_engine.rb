@@ -66,7 +66,7 @@ module Decidim
                                 else
                                   is_active_link?(decidim_admin_decidim_awesome.checks_path)
                                 end,
-                        if: defined?(current_user) && current_user&.read_attribute("admin")
+                        if: defined?(current_user) && current_user&.read_attribute("admin") && current_user.admin_terms_accepted?
         end
         # submenus
         Decidim::DecidimAwesome::Menu.register_custom_fields_submenu!

@@ -18,6 +18,33 @@ describe "Filter Admin actions" do
   include_context "with admin accountability helpers"
 
   before do
+    # Mock GitHub API calls for system checker helpers
+    stub_request(:get, "https://api.github.com/repos/decidim/decidim/releases")
+      .to_return(
+        status: 200,
+        body: [
+          {
+            "tag_name" => "v0.31.2",
+            "prerelease" => false,
+            "draft" => false
+          }
+        ].to_json,
+        headers: { "Content-Type" => "application/json" }
+      )
+
+    stub_request(:get, "https://api.github.com/repos/decidim-ice/decidim-module-decidim_awesome/releases")
+      .to_return(
+        status: 200,
+        body: [
+          {
+            "tag_name" => "v0.14.1",
+            "prerelease" => false,
+            "draft" => false
+          }
+        ].to_json,
+        headers: { "Content-Type" => "application/json" }
+      )
+
     # ensure papertrail has the same created_at date as the object being mocked
     Decidim::DecidimAwesome::PaperTrailVersion.admin_role_actions.map { |v| v.update(created_at: v.item.created_at) }
 
@@ -164,15 +191,13 @@ describe "Filter Admin actions" do
 
           click_on "Export this search"
 
-          perform_enqueued_jobs do
-            click_link_or_button "Export as CSV"
-          end
+          click_link_or_button "Export as CSV"
 
           within ".flash.success" do
             expect(page).to have_content("Export job has been enqueued. You will receive an email when it's ready.")
           end
 
-          sleep 1
+          perform_enqueued_jobs
 
           expect(last_email.subject).to eq(%(Your export "admin_actions" is ready))
           expect(Decidim::PrivateExport.count).to eq(1)
