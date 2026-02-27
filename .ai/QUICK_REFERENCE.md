@@ -10,7 +10,7 @@
 | **Decidim Compat** | 0.31.x (>= 0.31.0, < 0.32) |
 | **Min Ruby** | 3.3 |
 | **Testing** | RSpec |
-| **Locales** | 8 languages (en, es, ca, fr, it, pt, pt-BR, de) |
+| **Locales** | 17 languages (ar, ca, cs, de, en, es, eu, fr, hu, it, ja, lt, nl, pt, pt-BR, ro, sv) |
 
 ## Critical Files
 
@@ -18,7 +18,7 @@
 |------|---------|
 | `lib/decidim/decidim_awesome/version.rb` | Version info, update here for releases |
 | `CHANGELOG.md` | Keep updated with PR references |
-| `config/locales/*.yml` | User-facing strings (8 files required) |
+| `config/locales/*.yml` | User-facing strings (17 locale files, Crowdin-managed) |
 | `spec/` | All tests go here following rails structure |
 | `app/` | Application code (models, views, controllers, etc.) |
 | `decidim-decidim_awesome.gemspec` | Gem definition |
@@ -33,7 +33,7 @@ bundle exec rspec
 bundle exec rspec spec/controllers/admin/checks_controller_spec.rb
 
 # Validate locales
-ruby -ryaml -e "Dir['config/locales/*.yml'].each { |f| YAML.load_file(f); puts \"✓ #{f}\" }"
+ruby -Ku -ryaml -e "Dir['config/locales/*.yml'].each { |f| YAML.load_file(f); puts \"✓ #{f}\" }"
 
 # Security check
 bundle audit
@@ -47,7 +47,7 @@ bundle exec rails console
 **Always verify:**
 1. ✅ Tests pass: `bundle exec rspec`
 2. ✅ YAML valid: Check all locale files
-3. ✅ All 8 locales have the key
+3. ✅ Base locale (en.yml) updated (other locales managed via Crowdin)
 4. ✅ CHANGELOG updated with PR reference
 5. ✅ No security vulnerabilities
 
@@ -55,15 +55,11 @@ bundle exec rails console
 
 When adding new strings:
 
-1. Add to `config/locales/en.yml`
-2. Add to **all **remaining files**:
-   - es.yml (Spanish)
-   - ca.yml (Catalan)  
-   - fr.yml (French)
-   - it.yml (Italian)
-   - pt.yml (Portuguese)
-   - pt-BR.yml (Portuguese Brazilian)
-   - de.yml (German)
+1. Add to `config/locales/en.yml` (base language)
+2. Other languages are translated via [Crowdin](https://crowdin.com/translate/decidim-awesome)
+3. For urgent fixes, you can manually update specific locale files, but Crowdin is preferred
+
+**All 17 supported locales**: ar, ca, cs, de, en, es, eu, fr, hu, it, ja, lt, nl, pt, pt-BR, ro, sv
 
 Format in views: `<%= t(".key_name") %>`
 
@@ -114,7 +110,7 @@ expect(object).to have_received(:method).with(args)
 DON'T do these:
 
 - ❌ Modify code without tests
-- ❌ Add strings without translations in all 8 locales
+- ❌ Add strings without adding to en.yml (translations managed via Crowdin)
 - ❌ Forget to validate YAML syntax
 - ❌ Forget PR references in CHANGELOG
 - ❌ Skip error handling in external API calls

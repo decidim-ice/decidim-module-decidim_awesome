@@ -80,8 +80,17 @@ ruby -Ku -ryaml -e "Dir['config/locales/*.yml'].each { |f| YAML.load_file(f); pu
 # Check for security vulnerabilities
 bundle audit
 
-# Lint Ruby code (optional, if rubocop configured)
-bundle exec rubocop
+# Lint and auto-fix Ruby code
+bundle exec rubocop -A
+
+# Lint and auto-fix ERB templates
+bundle exec erb_lint app/**/*.erb --autocorrect
+
+# Lint and auto-fix JavaScript
+npm run lint-fix
+
+# Lint and auto-fix CSS/SCSS
+npm run stylelint-fix
 
 # Check test coverage
 SIMPLECOV=1 bundle exec rspec
@@ -90,13 +99,14 @@ SIMPLECOV=1 bundle exec rspec
 ### 5. Before Commit
 
 Checklist:
+- [ ] All linters passing (run auto-fix): `bundle exec rubocop -A && bundle exec erb_lint app/**/*.erb --autocorrect && npm run lint-fix && npm run stylelint-fix`
 - [ ] All tests passing: `bundle exec rspec`
 - [ ] Locale files valid: `ruby -Ku -ryaml -e "YAML.load_file('config/locales/en.yml')" && echo "Valid"`
 - [ ] Code follows conventions (see CONVENTIONS.md)
 - [ ] Comments added for complex logic
 - [ ] CHANGELOG updated with feature description + PR reference
 - [ ] README updated if user-facing change
-- [ ] All 8 locale files updated with translations
+- [ ] Base locale (en.yml) updated (other locales via Crowdin)
 
 ### 6. Commit Messages
 
@@ -118,7 +128,7 @@ Example:
 - Added decidim_version_outdated? helper method
 - Fetches latest version from GitHub API (cached 1 hour)
 - Shows warning callout when update available
-- Includes translations for all 8 languages
+- Updated base locale (en.yml), other translations via Crowdin
 - Added comprehensive RSpec tests
 
 Closes #456
@@ -169,7 +179,7 @@ Pull Request template should include:
    </div>
    ```
 
-4. **Add locale strings to all 8 languages**
+4. **Add locale strings to base language (en.yml)**
    ```yaml
    # config/locales/en.yml
    en:
@@ -179,6 +189,7 @@ Pull Request template should include:
            my_view:
              my_key: "Translation here"
    ```
+   Other languages will be translated via Crowdin.
 
 5. **Update CHANGELOG**
    ```markdown
@@ -203,16 +214,12 @@ When adding new user-facing strings:
 
 1. Add to `config/locales/en.yml` (base language)
 2. Use in view: `<%= t(".key") %>`
-3. Add to remaining 7 locale files:
-   - es.yml (Spanish)
-   - ca.yml (Catalan)
-   - fr.yml (French)
-   - it.yml (Italian)
-   - pt.yml (Portuguese/European)
-   - pt-BR.yml (Portuguese/Brazilian)
-   - de.yml (German)
+3. Other languages are managed via [Crowdin](https://crowdin.com/translate/decidim-awesome)
+   - Community translators will handle the 16 other languages
+   - For urgent needs, you can manually update specific locale files
+4. Validate YAML syntax: `ruby -Ku -ryaml -e "Dir['config/locales/*.yml'].each { |f| YAML.load_file(f); puts \"✓ #{f}\" }"`
 
-4. Validate YAML syntax for all files
+**All 17 supported locales**: ar, ca, cs, de, en, es, eu, fr, hu, it, ja, lt, nl, pt, pt-BR, ro, sv
 
 ### Updating Database Schema
 
@@ -242,6 +249,7 @@ When reviewing code, check:
 
 3. **Code Quality**
    - Does it follow conventions?
+   - Do all linters pass (RuboCop, ERB Lint, ESLint, Stylelint)?
    - Is code readable and well-commented?
    - Are methods appropriately sized?
 
@@ -251,8 +259,8 @@ When reviewing code, check:
    - Are gem dependencies reasonable?
 
 5. **Localization**
-   - Are all user-facing strings translated?
-   - Are translations in all 8 locale files?
+   - Are all user-facing strings in en.yml?
+   - Are other translations managed via Crowdin?
    - YAML syntax valid?
 
 6. **Documentation**

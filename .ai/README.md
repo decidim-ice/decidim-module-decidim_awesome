@@ -23,8 +23,8 @@ When reviewing code in this repository:
 
 1. **Check compatibility**: Always verify Decidim version compatibility in `lib/decidim/decidim_awesome/version.rb`
 2. **Test coverage**: All new features should include specs in the `spec/` directory
-3. **Translations**: New user-facing strings must be added to all locale files in `config/locales/`
-4. **Locale files**: Validate YAML syntax using `ruby -ryaml -e "YAML.load_file('config/locales/xx.yml')"`
+3. **Translations**: New user-facing strings must be added to `config/locales/en.yml` (base language). Other languages managed via Crowdin.
+4. **Locale files**: Validate YAML syntax using `ruby -Ku -ryaml -e "Dir['config/locales/*.yml'].each { |f| YAML.load_file(f); puts \"✓ #{f}\" }"`
 5. **Documentation**: Update `CHANGELOG.md` and `README.md` where applicable
 
 ## Helpful Resources
@@ -42,7 +42,7 @@ bundle exec rspec spec/
 
 ### Validate YAML Locales
 ```bash
-ruby -e "Dir['config/locales/*.yml'].each { |f| YAML.load_file(f); puts \"✓ #{f}\" }"
+ruby -Ku -ryaml -e "Dir['config/locales/*.yml'].each { |f| YAML.load_file(f); puts \"✓ #{f}\" }"
 ```
 
 ### Fetch Latest Version Info

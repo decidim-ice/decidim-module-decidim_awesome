@@ -26,6 +26,62 @@ This project follows standard Rails conventions:
    - Comment complex algorithms or non-obvious logic
    - Use `# frozen_string_literal: true` at top of files
 
+## Code Quality & Linting
+
+All code should pass linting checks before committing. Run these commands to automatically fix most issues:
+
+1. **Ruby (RuboCop)**
+   ```bash
+   # Auto-fix Ruby style issues
+   bundle exec rubocop -A
+   ```
+   - Checks Ruby code style and common mistakes
+   - `-A` flag auto-corrects safe violations
+   - Configuration in `.rubocop.yml`
+
+2. **ERB Templates (ERB Lint)**
+   ```bash
+   # Auto-fix ERB template issues
+   bundle exec erb_lint app/**/*.erb --autocorrect
+   ```
+   - Validates ERB template syntax and style
+   - Checks for accessibility issues
+   - Configuration in `.erb-lint.yml`
+
+3. **JavaScript (ESLint)**
+   ```bash
+   # Auto-fix JavaScript style and errors
+   npm run lint-fix
+   ```
+   - Checks JavaScript code style
+   - Enforces consistent patterns
+   - Configuration in `.eslintrc.js` or `package.json`
+
+4. **CSS/SCSS (Stylelint)**
+   ```bash
+   # Auto-fix CSS/SCSS style issues
+   npm run stylelint-fix
+   ```
+   - Validates CSS/SCSS syntax and conventions
+   - Enforces consistent formatting
+   - Configuration in `.stylelintrc.json` or `package.json`
+
+**Pre-commit workflow:**
+```bash
+# Run all linters before committing
+bundle exec rubocop -A
+bundle exec erb_lint app/**/*.erb --autocorrect
+npm run lint-fix
+npm run stylelint-fix
+
+# Then run tests
+bundle exec rspec
+
+# If all pass, commit
+git add .
+git commit -m "[Feature] Your commit message"
+```
+
 ## Module Structure
 
 All code should be within the `Decidim::DecidimAwesome` namespace:
@@ -53,19 +109,30 @@ end
          interpolated: "Value is %{variable}"
    ```
 
-2. **Required Languages** (8 total)
+2. **Supported Languages** (17 total)
+   - ar.yml (Arabic)
+   - ca.yml (Catalan)
+   - cs.yml (Czech)
+   - de.yml (German)
    - en.yml (English) - Base language
    - es.yml (Spanish)
-   - ca.yml (Catalan)
+   - eu.yml (Basque)
    - fr.yml (French)
+   - hu.yml (Hungarian)
    - it.yml (Italian)
-   - pt.yml (Portuguese/European)
+   - ja.yml (Japanese)
+   - lt.yml (Lithuanian)
+   - nl.yml (Dutch)
+   - pt.yml (Portuguese)
    - pt-BR.yml (Portuguese/Brazilian)
-   - de.yml (German)
+   - ro.yml (Romanian)
+   - sv.yml (Swedish)
+
+   **Note**: Translations are managed via [Crowdin](https://crowdin.com/translate/decidim-awesome). When adding new strings, add them to `en.yml` first, then they will be translated by the community.
 
 3. **Validation**
    ```bash
-   ruby -ryaml -e "YAML.load_file('config/locales/en.yml')"
+   ruby -Ku -ryaml -e "Dir['config/locales/*.yml'].each { |f| YAML.load_file(f); puts \"✓ #{f}\" }"
    ```
 
 4. **Key Naming**
@@ -144,7 +211,7 @@ end
    Fetches latest version from GitHub API and displays
    warning on System Compatibility page.
    
-   Includes specs and translations for all 8 languages.
+   Includes specs and updated base locale (en.yml).
    
    PR #519, #518
    ```

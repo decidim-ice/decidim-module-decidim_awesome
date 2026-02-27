@@ -4,7 +4,7 @@
 
 ```
 decidim-module-decidim_awesome/
-├── app/                        # Rails application code
+├── app/                       # Rails application code
 │   ├── api/                   # GraphQL API overrides
 │   ├── cells/                 # Cell components (view objects)
 │   ├── commands/              # Service objects for business logic
@@ -21,23 +21,70 @@ decidim-module-decidim_awesome/
 │   ├── serializers/           # API serializers
 │   ├── services/              # Service classes
 │   ├── types/                 # GraphQL types
-│   ├── uploaders/             # CarrierWave uploaders
+│   ├── uploaders/             # Custom validations for ActiveStorage
 │   ├── validators/            # Custom validators
 │   └── views/                 # View templates
 ├── config/
-│   ├── locales/              # i18n translation files (8 languages)
+│   ├── locales/              # i18n translation files
 │   └── i18n-tasks.yml        # i18n configuration
 ├── lib/
 │   ├── decidim/
 │   │   └── decidim_awesome/
-│   │       ├── version.rb    # Module version and Decidim compatibility
-│   │       └── engine.rb     # Rails engine definition
+│   │       ├── version.rb          # Module version and Decidim compatibility
+│   │       ├── engine.rb           # Main Rails engine (public routes, migrations, assets and global initializers)
+│   │       ├── admin_engine.rb     # Admin-specific engine (admin routes and initializers)
+│   │       ├── config.rb           # Configuration singleton
+│   │       ├── awesome_helpers.rb  # Core helper methods
+│   │       ├── menu.rb             # Menu management
+│   │       ├── custom_fields.rb    # Custom fields functionality
+│   │       └── system_checker.rb   # System compatibility checks
 │   └── tasks/                # Rake tasks
-├── spec/                      # Test files (RSpec)
+├── spec/                     # Test files (RSpec)
 ├── db/
 │   └── migrate/              # Database migrations
 └── CHANGELOG.md              # Version history with PRs
 ```
+
+## Rails Engines
+
+### Main Engine (`lib/decidim/decidim_awesome/engine.rb`)
+
+The main engine handles:
+- **Routes**: Public-facing routes and API endpoints
+- **Database**: Migrations loaded via `paths["db/migrate"]`
+- **Assets**: JavaScript/CSS packed via Webpacker
+- **Initializers**: Core configuration and monkey patches
+- **Auto-loading**: All `app/` directories are auto-loaded
+
+Key responsibilities:
+- Include Decidim::Core::VersionChecker for compatibility validation
+- Define isolated namespace `Decidim::DecidimAwesome`
+- Mount API engine for GraphQL endpoints
+- Setup i18n locale files
+- Initialize global configurations
+
+### Admin Engine (`lib/decidim/decidim_awesome/admin_engine.rb`)
+
+Separate engine for admin functionality:
+- **Routes**: Admin-only routes mounted at `/admin/decidim_awesome`
+- **Isolation**: Separate namespace `Decidim::DecidimAwesome::Admin`
+- **Controllers**: Admin controllers accessed via `Decidim::DecidimAwesome::Admin::<ControllerName>`
+
+Routes managed in admin engine:
+- `constraints` - Spam/abuse constraint management
+- `menus` - Menu item customization
+- `custom_redirects` - Custom URL redirects
+- `config` - System configuration
+- `scoped_styles` - Custom CSS per space
+- `proposal_custom_fields` - Proposal custom fields
+- `scoped_admins` - Space-specific admins
+- `force_authorizations` - Authorization requirements
+- `checks` - System health checks (maintenance)
+- `private_data` - Private data export/delete
+- `hashcash` - Spam prevention settings
+- `admin_authorizations` - Authorization overrides
+
+**Why separate?** By isolating admin routes, the main engine stays lean and focused on public functionality.
 
 ## Key Modules & Classes
 
@@ -73,6 +120,8 @@ Used to extend model behavior for views:
 - Wrap models to add presentation logic without polluting models
 
 ## Override Strategy
+
+**Important**: All overrides must be tracked in `config/checksums.yml` for maintenance and upgrade compatibility. See [Checksum Tracking](#checksum-tracking) section below.
 
 When extending Decidim functionality, follow this priority order:
 
@@ -211,37 +260,213 @@ end
 
 ### 3. Complete File Overrides (Last Resort)
 
-**Only when Deface and concerns won't work.** This is rare and requires checksum tracking.
+**Only when Deface and concerns won't work.**
 
 **Requirements:**
 - Document why in code comments
 - Track in `checksums.yml`
 - Create issue if Decidim could be patched instead
 
-**Checksum Tracking**:
+## Checksum Tracking for All Overrides
 
-Create at `config/checksums.yml` to track all overridden files:
+All overrides (Deface, concerns, and complete file overrides) must be tracked in `lib/decidim/decidim_awesome/checksums.yml` for maintenance and Decidim upgrade compatibility. This file stores MD5 checksums of overridden files to detect when Decidim updates change the original.
+
+### Tracking Format
+
+The `checksums.yml` file is organized by Decidim component/gem, then file path, then version with its MD5 checksum:
 
 ```yaml
-# config/checksums.yml
-# Track of all complete file overrides and their original checksums
-# This helps detect when Decidim updates require merging our changes
+# lib/decidim/decidim_awesome/checksums.yml
+# Tracks checksums of Decidim files that are overridden/decorated
+# Uses to detect changes during Decidim upgrades
 
-overrides:
-  "app/views/decidim/my_component/override.html.erb":
-    decidim_version: "0.31.0"
-    original_checksum: "abc123def456"
-    reason: "Added custom field that couldn't be done via Deface"
-    pr_link: "https://github.com/decidim/decidim/pull/12345"
-    status: "pending_merge"  # pending_merge, merged, obsolete
-    notes: "Waiting for Decidim v0.32 to add native support"
+decidim-core:
+  /app/views/layouts/decidim/_head.html.erb:
+    decidim-0.31.0: 0faa190f7a4b3db401ffcdfc3d063802
+  /app/views/layouts/decidim/_decidim_javascript.html.erb:
+    decidim-0.31.0: 8d51790de859ee66f305d9111cdfb324
+  /app/services/decidim/open_data_exporter.rb:
+    decidim-0.31.0: 3093e8c74ea1a6fb838ec192c782c90b
+    decidim-0.31.2: 231a2009ebed95bdfbf3e6d44dfe5e94
+
+decidim-proposals:
+  /app/forms/decidim/proposals/proposal_form.rb:
+    decidim-0.31.0: ffa0fa0d38a9c77d73d173727bc87cd2
+  /app/views/decidim/proposals/proposals/_vote_button.html.erb:
+    decidim-0.31.0: 3cd74a9396d20e19ed3821f08cbe2b06
+    decidim-0.31.1: f5247f762666de9cf09635fce3a13ce7
+  /app/views/decidim/proposals/proposals/show.html.erb:
+    decidim-0.31.0: e2c0adf5c283f7396d93207e1b7ab740
+
+decidim-admin:
+  /app/views/layouts/decidim/admin/_header.html.erb:
+    decidim-0.31.0: 6e5893f735d2097f0e55e8b6666cb201
+
+decidim-assemblies:
+  /app/views/decidim/assemblies/admin/assemblies/_form.html.erb:
+    decidim-0.31.0: cc06bd20baa7f130e34d04a3c925e2f7
 ```
 
-**After Decidim Updates**:
-- Compare checksums to detect changes
-- Merge changes carefully
-- Update status and notes
-- Remove if code was merged upstream
+### How It Works
+
+1. **When installing Decidim Awesome**: Checksums recorded for current Decidim version
+2. **When upgrading Decidim**: Compare old vs new checksums to detect changes
+3. **If checksum differs**: File changed in Decidim, may need to update overrides
+4. **If checksum matches**: No changes in Decidim file, overrides still compatible
+
+### Generating Checksums
+
+Calculate MD5 checksum for a Decidim file:
+
+```bash
+# For a file from installed gem
+md5sum $(bundle show decidim-core)/app/views/layouts/decidim/_head.html.erb
+
+# Result: 0faa190f7a4b3db401ffcdfc3d063802  /path/to/file.erb
+```
+
+### Checking Checksums
+
+**Quick way to validate all checksums at once**:
+
+```bash
+# Run the system checker spec that validates all checksums in checksums.yml
+bundle exec rspec spec/lib/system_checker_spec.rb
+```
+
+This test automatically:
+- Compares every file checksum in `checksums.yml` against the installed Decidim gems
+- Reports which files have changed between versions
+- Identifies which files need attention after Decidim upgrade
+- Much faster than checking manually with MD5 commands
+
+**Manual method** (only needed if test isn't sufficient):
+
+```bash
+# Check individual checksum
+md5sum $(bundle show decidim-core)/app/views/layouts/decidim/_head.html.erb
+```
+
+### Updating on Decidim Upgrade
+
+**When Decidim version changes**:
+
+1. **Check checksum changes** for each file in `checksums.yml`:
+   - Get current checksum: `md5sum $(bundle show <gem>)/<path>`
+   - Compare with recorded version in checksums.yml
+   - If checksum is identical: no changes needed, override still compatible
+   - If checksum differs: Decidim file was modified, review changes
+
+2. **For each file with changed checksum**:
+   - **Compare versions**: Use git diff or online tool to see what changed in Decidim between versions
+     ```bash
+     # Example: see what changed in _head.html.erb between 0.31.0 and 0.31.1
+     git diff v0.31.0..v0.31.1 -- app/views/layouts/decidim/_head.html.erb
+     ```
+   - **Analyze impact**: Does the Deface override still make sense?
+   - **Three scenarios**:
+
+     **A) Override still needed, structure unchanged**
+     - Keep override and partial as-is
+     - Update checksum in checksums.yml
+     - Test that Deface selector still matches (may have minor spacing changes)
+     - Run tests to verify behavior
+
+     **B) Override needs updates due to structural changes**
+     - File structure changed significantly
+     - Deface selector may no longer match
+     - May need to update `.erb.deface` selector (e.g., element classes/IDs changed)
+     - May need to update partial if surrounding HTML structure changed
+     - Move override `.erb.deface` file to new location if Decidim reorganized views
+     - Example: If `_header.html.erb` moved from `layouts/` to `shared/`, move override location too
+
+     **C) Override no longer needed (removed or obsolete)**
+     - Decidim implemented the feature natively
+     - Or change made override irrelevant
+     - **Delete the override** `.erb.deface` file completely
+     - Remove Deface-related features from partials if they're no longer used
+     - Update checksums.yml to mark as obsolete/removed
+     - Example: If Decidim added native support for custom editor, remove proposals editor override
+
+3. **Update checksums.yml** with new version entry:
+   
+   **For minor/patch version updates** (e.g., 0.31.0 → 0.31.1):
+   ```yaml
+   decidim-core:
+     /app/views/layouts/decidim/_head.html.erb:
+       decidim-0.31.0: 0faa190f7a4b3db401ffcdfc3d063802
+       decidim-0.31.1: abc1234567890def1234567890abcdef  # Add new version
+   ```
+   Keep both versions for reference as you may need to track changes across versions.
+
+   **For major version updates** (e.g., 0.31 → 0.32):
+   
+   - **If file checksum CHANGED** in new version:
+     ```yaml
+     decidim-core:
+       /app/views/layouts/decidim/_head.html.erb:
+         decidim-0.32.0: xyz9876543210fedcba9876543210abc  # Only keep new version
+     ```
+     Remove old version checksums - you only need the current major version.
+   
+   - **If file checksum UNCHANGED** in new version (same checksum):
+     ```yaml
+     decidim-core:
+       /app/views/layouts/decidim/_head.html.erb:
+         decidim-0.31.0: 0faa190f7a4b3db401ffcdfc3d063802  # Keep old - still valid
+     ```
+     **Keep the old version entry** - it shows the file has been stable across major versions.
+
+4. **Test thoroughly**:
+   - Run full test suite: `bundle exec rspec`
+   - Test in development_app UI: verify visual appearance and functionality
+   - Check browser console for JavaScript errors
+   - Test admin panel features if override touches admin code
+
+### Maintenance Workflow
+
+**When Decidim updates**:
+```bash
+# 1. After updating Decidim in Gemfile
+bundle update decidim
+
+# 2. Recreate the test application with new Decidim version
+# IMPORTANT: This is required as the test app needs to match the Decidim version
+bundle exec rake test_app
+
+# 3. Check which checksums have changed
+# This test validates all checksums and shows you which files were modified
+bundle exec rspec spec/lib/system_checker_spec.rb
+
+# 4. For each changed checksum reported by the test:
+#    - Compare Decidim versions using git or GitHub
+#    - Update override .erb.deface file if selector changed
+#    - Update/refactor partials if structure changed
+#    - Remove override if no longer needed
+#    - Move override file if Decidim reorganized views
+
+# 5. Update checksums.yml with new values and clean up obsolete entries
+#    For MAJOR version updates (Decidim Awesome 0.14→0.15, Decidim 0.31→0.32):
+#    - If checksum CHANGED: Remove old version, add new version checksum
+#    - If checksum UNCHANGED: Keep old version entry (shows stability across versions)
+#    Example: File changed in 0.32? Replace decidim-0.31.x with decidim-0.32.x
+#             File same in 0.32? Keep decidim-0.31.x entry as-is
+
+# 6. Test all Deface overrides and concerns work correctly
+bundle exec rspec
+
+# 7. Optionally recreate development_app and test manually
+bundle exec rake development_app
+cd development_app && bundle exec rails s
+```
+
+### Why This Matters
+
+- **Upgrade Safety**: Know which files are affected when upgrading Decidim
+- **Conflict Detection**: MD5 changes indicate potential overrides issues
+- **Documentation**: Audit trail of what Decidim versions we've tested with
+- **Lazy Upgrade**: Don't re-test if checksums haven't changed
+- **Maintenance**: Easy to identify obsolete overrides (when native support added)
 
 ## Technology Stack
 
@@ -275,6 +500,8 @@ Main configuration stored in:
 
 All user-facing strings are i18n compliant:
 - Base language: English (`en.yml`)
-- 7 additional languages: Spanish, Catalan, French, Italian, Portuguese, German, Czech
+- 16 additional languages: Arabic, Catalan, Czech, German, Spanish, Basque, French, Hungarian, Italian, Japanese, Lithuanian, Dutch, Portuguese, Portuguese (Brazilian), Romanian, Swedish
+- All 17 locales: ar, ca, cs, de, en, es, eu, fr, hu, it, ja, lt, nl, pt, pt-BR, ro, sv
 - Located in `config/locales/`
+- Managed via [Crowdin](https://crowdin.com/translate/decidim-awesome) for community translations
 - Use `t(".key")` syntax in views/controllers
