@@ -128,7 +128,7 @@ describe "Public homepage shows Awesome Processes block" do
 
     it "does not show the block on homepage" do
       visit decidim.root_path
-      expect(page).to have_no_content("Last processes")
+      expect(page).to have_no_content("Participatory processes")
     end
   end
 

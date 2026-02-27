@@ -606,7 +606,7 @@ fr:
           show_withdrawn: Afficher les propositions retirées
           taxonomies: Taxonomies
           text_settings: Paramètres de texte
-          titre: Titre
+          title: Titre
           truncate: Caractères maximum pour les descriptions des popups
         awesome_process_groups:
           active: Actifs
