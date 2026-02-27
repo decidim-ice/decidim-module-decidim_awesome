@@ -258,6 +258,43 @@ end
 - Easy to track what was changed
 - Less likely to break on updates
 
+**Testing Concerns in Summary Specs**:
+
+After creating a concern override, you **must add a validation** in `lib/decidim/decidim_awesome/test/shared_examples/summary_examples.rb` to ensure the concern is properly included/excluded based on the feature flag status.
+
+Add your concern check in both the `enabled` and `disabled` sections of the `"activated concerns"` shared example:
+
+```ruby
+# lib/decidim/decidim_awesome/test/shared_examples/summary_examples.rb
+
+shared_examples "activated concerns" do |enabled|
+  # ... other checks ...
+
+  if enabled
+    it "concerns are registered" do
+      # ... existing checks ...
+      expect(Decidim::YourClass.included_modules).to include(Decidim::DecidimAwesome::YourConcernName)
+    end
+  else
+    it "concerns are not registered" do
+      # ... existing checks ...
+      expect(Decidim::YourClass.included_modules).not_to include(Decidim::DecidimAwesome::YourConcernName)
+    end
+  end
+end
+```
+
+Then validate both states work:
+```bash
+FEATURES=enabled bundle exec rspec spec/awesome_summary_spec.rb
+FEATURES=disabled bundle exec rspec spec/awesome_summary_spec.rb
+```
+
+This ensures:
+- Concern is **included** when the feature is enabled (matches `enabled: true` check)
+- Concern is **not included** when the feature is disabled (matches `enabled: false` check)
+- Feature toggle properly controls concern injection
+
 ### 3. Complete File Overrides (Last Resort)
 
 **Only when Deface and concerns won't work.**

@@ -32,6 +32,10 @@ bundle exec rspec
 # Test a file
 bundle exec rspec spec/controllers/admin/checks_controller_spec.rb
 
+# Special: Awesome summary spec (requires FEATURES env var)
+FEATURES=enabled bundle exec rspec spec/awesome_summary_spec.rb
+FEATURES=disabled bundle exec rspec spec/awesome_summary_spec.rb
+
 # Validate locales
 ruby -Ku -ryaml -e "Dir['config/locales/*.yml'].each { |f| YAML.load_file(f); puts \"✓ #{f}\" }"
 
@@ -117,6 +121,8 @@ DON'T do these:
 - ❌ Use hardcoded values (i18n instead)
 - ❌ Forget to update version in `version.rb` for releases
 - ❌ Create commits without clear messages
+- ❌ Forget to update README.md with feature description
+- ❌ Skip screenshots for UI features
 
 ## Release Checklist
 
@@ -125,11 +131,14 @@ When preparing a release:
 1. ✅ Version updated in `lib/decidim/decidim_awesome/version.rb`
 2. ✅ CHANGELOG.md has version section with:
    - Decidim compatibility  
-   - Features with [#PR](link) format
+   - Features with [#PR](link) format (with descriptions)
    - Fixes with [#PR](link) format
-3. ✅ All tests passing
-4. ✅ All locale files valid
-5. ✅ README updated if needed
+3. ✅ README.md updated:
+   - All features described with examples
+   - Screenshots included for UI features (in `examples/` folder)
+   - Usage/configuration documented
+4. ✅ All tests passing
+5. ✅ All locale files valid
 6. ✅ Git tag created: `git tag v0.14.1`
 7. ✅ Gem built: `gem build`
 8. ✅ Gem pushed: `gem push`

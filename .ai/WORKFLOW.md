@@ -199,6 +199,38 @@ Pull Request template should include:
    Features:
      - Description of feature ([#PR](link))
    ```
+   **Important**: Always include a clear description and PR reference.
+
+6. **Update README.md with feature description**
+   - Add section describing the new feature
+   - Include usage/configuration examples if applicable
+   - **Add screenshot if it's a UI feature** - place in `examples/` folder
+   - Update feature list if applicable
+   - Link to relevant documentation sections
+
+7. **If your feature uses concerns or override initializers**:
+   Add validation in `lib/decidim/decidim_awesome/test/shared_examples/summary_examples.rb`:
+   
+   In the `"activated concerns"` shared example, add your concern check in both `enabled` and `disabled` sections:
+   ```ruby
+   if enabled
+     it "concerns are registered" do
+       # ... existing checks ...
+       expect(YourClass.included_modules).to include(Decidim::DecidimAwesome::YourConcern)
+     end
+   else
+     it "concerns are not registered" do
+       # ... existing checks ...
+       expect(YourClass.included_modules).not_to include(Decidim::DecidimAwesome::YourConcern)
+     end
+   end
+   ```
+   
+   Then test both states:
+   ```bash
+   FEATURES=enabled bundle exec rspec spec/awesome_summary_spec.rb
+   FEATURES=disabled bundle exec rspec spec/awesome_summary_spec.rb
+   ```
 
 ### Fixing a Bug
 
@@ -264,9 +296,11 @@ When reviewing code, check:
    - YAML syntax valid?
 
 6. **Documentation**
-   - Is CHANGELOG updated?
-   - Is README updated if needed?
+   - Is CHANGELOG updated with PR reference?
+   - Is README.md updated with feature description?
+   - For UI features: is there a screenshot in `examples/` folder?
    - Are complex algorithms commented?
+   - Are feature usage/configuration examples provided?
 
 7. **Security**
    - Is user input sanitized?

@@ -27,6 +27,34 @@ bundle exec rspec --format documentation
 bundle exec rspec --format coverage
 ```
 
+## Special Test Cases
+
+### Awesome Summary Spec
+
+The `awesome_summary_spec.rb` is a comprehensive test that validates all Decidim Awesome features work correctly in both enabled and disabled states. This test **requires** the `FEATURES` environment variable:
+
+```bash
+# Test with features enabled
+FEATURES=enabled bundle exec rspec spec/awesome_summary_spec.rb
+
+# Test with features disabled
+FEATURES=disabled bundle exec rspec spec/awesome_summary_spec.rb
+```
+
+**Important**: Running this spec without the `FEATURES` env var will skip the test with a reminder message.
+
+**What it tests**:
+- Registered components (enabled/disabled state)
+- Activated concerns (enabled/disabled state)
+- Basic rendering with features on/off
+- Custom menus functionality
+- CSP directives configuration
+
+**When to run**:
+- After making changes to feature toggles
+- Before releases to validate both states work
+- When modifying core awesome configuration
+
 ## Test Structure
 
 ```ruby
