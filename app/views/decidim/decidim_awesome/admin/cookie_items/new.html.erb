@@ -1,6 +1,7 @@
-<div class="item_show__header bg-gray-6 p-4 rounded-t">
+<div class="item_show__header">
   <h2 class="item_show__header-title">
     <%= t ".title" %>
+      <%= link_to t(".cancel"), decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug]), class: "button button__sm button__secondary" %>
   </h2>
 </div>
 

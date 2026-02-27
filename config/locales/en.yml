@@ -4,14 +4,6 @@ en:
     submit_filter: Filter
     waiting_label: Waiting for verification ...
   activemodel:
-    errors:
-      models:
-        cookie_item:
-          attributes:
-            base:
-              category_not_found: Category not found
-            name:
-              taken: has already been taken
     attributes:
       config:
         additional_proposal_sortings: Additional sorting options enabled
@@ -92,10 +84,27 @@ en:
           with these authorizations
       user:
         user_time_zone: Personal timezone
+    errors:
+      models:
+        cookie_item:
+          attributes:
+            base:
+              category_not_found: Category not found
+            name:
+              taken: has already been taken
   decidim:
     admin:
       actions:
         manage: Manage
+      menu:
+        decidim_awesome: Decidim Awesome
+    decidim_awesome:
+      admin:
+        breadcrumb:
+          cookie_management: Cookie Management
+          cookie_items: Cookie Items
+          new: New
+          edit: Edit
       filters:
         admin_accountability:
           admin_role_type:
@@ -521,21 +530,21 @@ en:
           create:
             error: Error creating cookie category! %{error}
             success: Cookie category created successfully
-          update:
-            error: Error updating cookie category! %{error}
-            success: Cookie category updated successfully
           destroy:
             error: Error removing cookie category! %{error}
             success: Cookie category removed successfully
           edit:
+            cancel: Cancel
+            cannot_edit_mandatory: Mandatory default categories cannot be edited
             save: Save
             title: Edit cookie category
           index:
+            cannot_edit_mandatory: Mandatory categories cannot be edited
             cannot_remove_default: Default categories cannot be removed
             confirm_destroy: Are you sure to remove this cookie category? This will
               also remove all the items in this category.
-            confirm_reset: Are you sure to reset this category to its default values? This will
-              remove all customizations you made.
+            confirm_reset: Are you sure to reset this category to its default values?
+              This will remove all customizations you made.
             edit: Edit category
             items: Category items
             new: New category
@@ -543,8 +552,12 @@ en:
             reset: Reset to default
             title: Cookie Management
           new:
+            cancel: Cancel
             save: Save
             title: New cookie category
+          update:
+            error: Error updating cookie category! %{error}
+            success: Cookie category updated successfully
         cookie_items:
           create:
             error: Error creating cookie item! %{error}
@@ -553,20 +566,25 @@ en:
             error: Error removing cookie item! %{error}
             success: Cookie item removed successfully
           edit:
+            cancel: Cancel
+            cannot_edit_mandatory_category: Items from mandatory categories cannot be edited
             save: Save
             title: Edit cookie item
           index:
             back_to_categories: Back to categories
+            cannot_edit_mandatory_category: Items from mandatory categories cannot be edited
             cannot_remove_default: Default items cannot be removed
+            cannot_remove_mandatory_category: Items from mandatory categories cannot be removed
             confirm_destroy: Are you sure to remove this cookie item?
-            confirm_reset: Are you sure to reset this item to its default values? This will
-              remove all customizations you made.
+            confirm_reset: Are you sure to reset this item to its default values?
+              This will remove all customizations you made.
             edit: Edit item
             new: New item
             remove: Remove item
             reset: Reset to default
             title: Cookie items
           new:
+            cancel: Cancel
             save: Save
             title: New cookie item
           update:

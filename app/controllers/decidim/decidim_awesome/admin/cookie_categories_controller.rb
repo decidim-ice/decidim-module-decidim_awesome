@@ -4,13 +4,12 @@ module Decidim
   module DecidimAwesome
     module Admin
       class CookieCategoriesController < DecidimAwesome::Admin::ApplicationController
-        include NeedsAwesomeConfig
-        include Admin::ConfigConstraintsHelpers
-        include HasCookieCategories
+        include CookieManagementHelpers
 
-        helper Admin::ConfigConstraintsHelpers
         helper_method :current_categories, :visibility_options, :default_category?, :category_modified?
 
+        before_action :set_cookie_management_breadcrumb
+        before_action :prevent_mandatory_category_edit, only: [:edit, :update]
         before_action do
           enforce_permission_to :edit_config, :cookie_management
         end
@@ -20,10 +19,12 @@ module Decidim
         end
 
         def new
+          add_breadcrumb_item :new, decidim_admin_decidim_awesome.cookie_categories_path
           @form = form(CookieCategoryForm).instance
         end
 
         def edit
+          add_breadcrumb_item current_category_title, decidim_admin_decidim_awesome.cookie_categories_path
           @form = form(CookieCategoryForm).from_params(category_for_form)
         end
 
@@ -77,23 +78,6 @@ module Decidim
 
         private
 
-        def cookie_management_setting
-          @cookie_management_setting ||= AwesomeConfig.find_or_initialize_by(var: :cookie_management, organization: current_organization)
-        end
-
-        def categories_data
-          @categories_data ||= begin
-            data = cookie_management_setting.value
-            data = {} unless data.is_a?(Hash)
-            data["categories"] = [] unless data["categories"].is_a?(Array)
-            data
-          end
-        end
-
-        def current_categories
-          categories_data["categories"]
-        end
-
         def ensure_categories_initialized!
           return unless categories_data["categories"].empty?
 
@@ -104,11 +88,6 @@ module Decidim
           default_categories = default_decidim_categories
           save_categories!(default_categories)
           default_categories
-        end
-
-        def save_categories!(categories)
-          cookie_management_setting.value = { "categories" => categories }
-          cookie_management_setting.save!
         end
 
         def category_for_form
@@ -124,8 +103,25 @@ module Decidim
           }
         end
 
-        def visibility_options
-          MenuForm::VISIBILITY_STATES.index_by { |key| I18n.t(".menu_hacks.form.visibility.#{key}", scope: "decidim.decidim_awesome.admin") }
+        def current_category_title
+          category = current_categories.find { |c| c["slug"].to_s == params[:slug].to_s }
+          return params[:slug] unless category
+
+          translated_attribute(category["title"]) || params[:slug]
+        end
+
+        def set_cookie_management_breadcrumb
+          add_breadcrumb_item :cookie_management, decidim_admin_decidim_awesome.cookie_categories_path
+        end
+
+        def prevent_mandatory_category_edit
+          category = current_categories.find { |c| c["slug"].to_s == params[:slug].to_s }
+          return unless category
+          return unless default_category?(params[:slug])
+          return unless category["mandatory"]
+
+          flash[:alert] = I18n.t("cookie_categories.edit.cannot_edit_mandatory", scope: "decidim.decidim_awesome.admin")
+          redirect_to decidim_admin_decidim_awesome.cookie_categories_path
         end
       end
     end
