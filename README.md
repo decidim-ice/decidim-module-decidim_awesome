@@ -593,6 +593,20 @@ can add the environment variables to the root directory of the project in a file
 named `.rbenv-vars`. If these are defined for the environment, you can omit
 defining these in the commands shown above.
 
+### Developer Documentation
+
+This project includes comprehensive documentation in the [`.ai/`](.ai/) folder, designed to help both human developers and AI agents understand the project structure, conventions, and workflows:
+
+- [**README.md**](.ai/README.md) - Overview and quick reference guide
+- [**ARCHITECTURE.md**](.ai/ARCHITECTURE.md) - Project structure, Rails engines, and override strategies
+- [**CONVENTIONS.md**](.ai/CONVENTIONS.md) - Code style, linting requirements, and best practices
+- [**WORKFLOW.md**](.ai/WORKFLOW.md) - Development workflow from setup to deployment
+- [**TESTING.md**](.ai/TESTING.md) - RSpec patterns and testing guidelines
+- [**QUICK_REFERENCE.md**](.ai/QUICK_REFERENCE.md) - Quick lookup cheat sheet
+- [**DEFACE_ANALYSIS.md**](.ai/DEFACE_ANALYSIS.md) - Analysis of Deface overrides
+
+Start with the [.ai/README.md](.ai/README.md) for an overview of the project's architecture, development practices, and override strategies.
+
 ### Updating formBuilder languages
 
 There's a rake task to update the translations of the custom field's form builder interface:
@@ -614,8 +628,12 @@ project is set to follow the same rules that Decidim itself follows.
 You can run the code styling checks by running the following commands from the
 console:
 
-```
+```bash
+# Check for issues
 bundle exec rubocop
+
+# Auto-fix issues
+bundle exec rubocop -A
 ```
 
 To ease up following the style guide, you should install the plugin to your

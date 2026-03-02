@@ -2,7 +2,7 @@
   priv = (config_var == "proposal_private_custom_fields")
   field = priv ? "proposal_private_custom_field" : "proposal_custom_field"
 %>
-<div class="form__wrapper row column decidim_awesome-form">
+<div class="form__wrapper column decidim_awesome-form">
   <% if config_enabled? config_var %>
     <% if priv %>
       <div>

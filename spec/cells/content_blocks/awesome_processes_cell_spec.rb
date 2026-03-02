@@ -30,7 +30,7 @@ module Decidim::DecidimAwesome
     end
 
     it "shows the default title" do
-      expect(subject).to have_css("h2", text: "Last processes")
+      expect(subject).to have_css("h2", text: "Participatory processes")
     end
 
     context "when a custom title is set" do
