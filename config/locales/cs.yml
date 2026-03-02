@@ -602,7 +602,6 @@ cs:
           title: Název bloku
           upcoming: Nadcházející
         awesome_processes:
-          active_spaces: Poslední procesy
           any_group: Jakákoli skupina
           group_label: Skupina
           max_results: Maximální počet prvků k zobrazení
