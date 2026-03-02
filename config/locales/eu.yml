@@ -584,7 +584,6 @@ eu:
           title_open: Txateatzen hasi!
       content_blocks:
         awesome_processes:
-          active_spaces: Azken prozesuak
           any_group: Edozein talde
           group_label: Taldea
           max_results: Erakutsi beharreko elementuen gehienezko kopurua
