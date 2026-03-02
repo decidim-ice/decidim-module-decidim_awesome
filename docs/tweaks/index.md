@@ -14,3 +14,4 @@ This section organizes Decidim Awesome tweaks by functional categories with per-
 - [UI, theming and navigation](ui-theming-navigation.md) - Tweaks 4.x
 - [Forms, surveys and verifications](forms-surveys-verifications.md) - Tweaks 5.x
 - [Components and integrations](components-integrations.md) - Tweaks 6.x
+- [Content blocks](content-blocks.md) - Tweaks 7.x

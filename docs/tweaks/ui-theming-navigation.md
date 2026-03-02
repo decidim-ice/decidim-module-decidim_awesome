@@ -30,11 +30,10 @@ end
 ```
 
 - **Storage:** Custom CSS stored in database; injected into page `<head>` at runtime
-- **Scope:** Can be global or per-space/component using the global scope restrictions mechanism
+- **Scope:** Can be global or per-space/component using scope restrictions (see [Global mechanisms](global-mechanisms.md))
 - **Performance:** No performance impact; CSS parsed and cached by browser
 - **Security:** No script injection via CSS; styles are syntax-validated server-side (CSS/Sass); no automatic filtering of unsafe selectors
 - **Specificity:** Custom CSS injected after theme CSS; can override with `!important` if needed
-- **Browser support:** CSS3 only; IE11 not supported for modern syntax
 
 #### 4.1.1 Public styles
 
@@ -99,10 +98,9 @@ end
 - **Customization:** Admin UI to add/edit/reorder/hide menu items; conditional visibility (e.g., "show only if logged in")
 - **Link types:** Internal routes (processes, components) or external URLs
 - **Icon support:** Can add icon classes from default Decidim icon set
-- **Scope:** Menu customization can be partially scoped using the global scope restrictions mechanism
+- **Scope:** Menu customization can be partially scoped using scope restrictions (see [Global mechanisms](global-mechanisms.md))
 - **Performance:** Menu rendered server-side; minimal query overhead
 - **Mobile:** Responsive menu collapses; custom items included in hamburger menu
-- **Conflict:** Overriding top-level navigation structure may conflict with participant expectations; A/B test changes
 
 ![Menu customization 1](../../examples/menu-1.png)
 ![Menu customization 2](../../examples/menu-2.png)

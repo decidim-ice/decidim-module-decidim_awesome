@@ -21,15 +21,15 @@ Recommend enabling image upload size limits in administration settings to preven
 # config/initializers/awesome_defaults.rb
 Decidim::DecidimAwesome.configure do |config|
   # true = enabled by default globally (admins can restrict to specific scopes)
-  # false = disabled by default (admins CAN enable per-scope)
+  # false = disabled by default (admins CAN enable using scope restrictions)
   # :disabled = completely removed, hidden from admins
   config.allow_images_in_editors = false  # default: false
 end
 ```
 
 - **Admin visibility:** Enabled (admins see Settings → Ckeditor options toggle)
-- **Default behavior:** Disabled by default; admins can enable per-space/component
-- **Admin control:** Yes; can toggle on/off and restrict by scope
+- **Default behavior:** Disabled by default; admins can enable using scope restrictions (see [Global mechanisms](global-mechanisms.md))
+- **Admin control:** Yes; toggle on/off and apply scope restrictions (see [Global mechanisms](global-mechanisms.md))
 - **Performance:** Minimal impact; images stored as URLs, not base64. Monitor file storage quotas periodically.
 - **Prerequisites:** Valid file storage backend configured (local, S3, etc.)
 - **Moderation:** Images are subject to standard content moderation policies; no special review needed
@@ -55,15 +55,15 @@ Recommend clear guidelines for image size and format in help text.
 # config/initializers/awesome_defaults.rb
 Decidim::DecidimAwesome.configure do |config|
   # true = enabled by default globally (admins can restrict to specific scopes)
-  # false = disabled by default (admins CAN enable per-scope)
+  # false = disabled by default (admins CAN enable using scope restrictions)
   # :disabled = completely removed, hidden from admins
   config.allow_images_in_proposals = false  # default: false
 end
 ```
 
 - **Admin visibility:** Enabled (admins see Settings → Components toggle per proposal component)
-- **Default behavior:** Disabled by default; admins can enable per-space/component
-- **Admin control:** Yes; can toggle on/off and restrict by scope
+- **Default behavior:** Disabled by default; admins can enable using scope restrictions (see [Global mechanisms](global-mechanisms.md))
+- **Admin control:** Yes; toggle on/off and apply scope restrictions (see [Global mechanisms](global-mechanisms.md))
 - **Storage:** Same backend as editor images; validate combined quota limits if both tweaks enabled
 - **Performance:** Negligible impact; images indexed alongside proposals for search
 - **Moderation:** Follows standard proposal moderation workflow; images included in admin review

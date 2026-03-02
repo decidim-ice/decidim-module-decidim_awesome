@@ -12,7 +12,6 @@ Delegates limited admin powers to selected users and restricts actions outside a
 
 Distributes moderation and community management across team members without granting system-wide admin access.
 Concerns: permissions can be accidentally too broad; regularly audit who has admin roles. Clear job descriptions prevent scope creep.
-Recommend role templates for common tasks (moderator, space manager, component reviewer).
 
 #### Technical area
 
@@ -32,8 +31,6 @@ end
 - **Audit trail:** Scoped admin actions logged in accountability system (Tweak 3.2)
 - **Revocation:** Removing scoped admin access is immediate; no stale permission caches
 - **Security:** Similar security model to standard Decidim roles; no privilege escalation vector
-- **Conflict:** Incompatible with certain global admin powers (system backups, user deletion); clearly marked in role setup
-- **Dependency:** Complements global scope restrictions for operational separation of concerns
 
 ![Scoped admins authorized](../../examples/scoped_admins_authorized.png)
 ![Scoped admins unauthorized](../../examples/scoped_admins_unauthorized.png)
@@ -46,18 +43,14 @@ Provides role/activity visibility for admin-like users over time, with filtering
 #### Admin description
 
 Tracks who did what and when for compliance, internal governance, and dispute resolution.
-Concerns: logs can grow large; implement retention policies to prevent database bloat. Sensitive data in logs should be treated as confidential.
-Recommend periodic audit exports for legal/governance review; archive older logs if performance concerns arise.
 
 #### Technical area
 
 - **Admin visibility:** Enabled (admins see accountability views in admin UI)
 - **Default behavior:** Enabled by default, auditing both participatory space roles and admin roles
 - **Admin control:** Cannot be toggled per-scope; either enabled globally or completely disabled with `:disabled`
-
 - **Data retention:** Logs stored indefinitely; configure retention/archival policies per deployment needs
 - **Access:** Admin UI provides filtered accountability views under "Participants" section
-- **Logging:** All admin actions automatically captured when enabled
 
 ```ruby
 # config/initializers/awesome_defaults.rb
@@ -93,8 +86,6 @@ Includes admin utilities for data maintenance tasks (e.g. old private data clean
 #### Admin description
 
 Provides operational helpers for data hygiene and compliance (e.g., GDPR right-to-be-forgotten, archival purging).
-Concerns: dangerous operations can corrupt data if misconfigured; test on staging first. Backups mandatory before running.
-Recommend running during low-traffic windows; some operations are slow and block other admin tasks.
 
 #### Technical area
 
@@ -115,10 +106,8 @@ end
 - **Operations:** Private data cleanup, old user data removal (after data export), soft-delete restoration, cache invalidation
 - **Safety:** Dry-run mode available for most operations; review affected record count before committing
 - **Automation:** Can schedule recurring cleanups (e.g., "delete data older than 90 days") if desired
-- **Performance:** Long operations run as background jobs; admin UI shows progress
-- **Backups:** Essential before running; no undo available; recovery requires restore from backup
-- **Logging:** Maintenance operations logged in Tweak 3.2 (accountability) with record count
-- **Validation:** Pre-flight checks prevent accidental misuse (e.g., won't allow deletion of active proposals)
+- **Performance:** Long operations run as background jobs
+- **Validation:** Pre-flight checks prevent accidental misuse (e.g., won't allow deletion of recent proposals)
 
 ![Private data maintenance](../../examples/private_data.png)
 

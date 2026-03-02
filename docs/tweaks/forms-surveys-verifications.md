@@ -44,7 +44,6 @@ Lets users set their own timezone to view dates/times according to personal loca
 
 Improves experience for distributed participants across regions without forcing admin timezone conversion.
 Concerns: timezone selection can confuse users if poorly labeled; some UI elements may still show server timezone.
-Recommend prominently showing participants their selected timezone in account settings; test that event deadlines display correctly.
 
 #### Technical area
 
@@ -62,15 +61,9 @@ end
 
 - **Admin visibility:** Enabled (admins see user timezone option in Settings)
 - **Default behavior:** Disabled by default (timezone selector hidden from user account settings)
-- **Admin control:** Yes; can enable/disable globally or per-user
-
-- **User setting:** Stored in user profile; applied globally across all pages and emails
+- **Admin control:** No
+- **User setting:** Stored in user profile; applied globally across all pages and emails when user is logged in or receives emails
 - **Defaults:** Falls back to browser timezone detection or organization default if not explicitly set
-- **Display:** All datetime UI elements converted to user timezone in JavaScript (no server rendering needed)
-- **Emails:** User timezone applied to event notifications and deadlines in email format
-- **API:** User timezone available in GraphQL/REST API for external integrations
-- **Performance:** Minimal; lookup is cached in session
-- **Compatibility:** Requires JavaScript; works across browsers and edge cases (e.g., DST transitions)
 
 ![User custom timezone](../../examples/user_timezone.png)
 
@@ -82,7 +75,6 @@ Allows admins to enforce required authorization methods before users can access 
 
 Restricts participation to verified users without custom code. Supports multi-method verification (passport, postal mail, etc.).
 Concerns: mandatory verification reduces participation; clearly communicate why before users register.
-Recommend pairing with Tweak 5.4 (manual verifications) to provide exception handling for edge cases.
 
 #### Technical area
 
@@ -101,16 +93,11 @@ Decidim::DecidimAwesome.configure do |config|
 end
 ```
 
-- **Admin visibility:** Enabled (admins see mandatory verification toggles per component)
+- **Admin visibility:** Enabled
 - **Default behavior:** Disabled by default (no mandatory verification unless admin configures)
-- **Admin control:** Yes; admins can set requirements per component or scope
-
-- **Methods:** Supports all installed Decidim authorization backends (Postal, OIDC, Saml, etc.)
-- **Configuration:** Admin panel per component; define which authorization method(s) are required
+- **Admin control:** Yes; admins can set requirements using scope restrictions (see [Global mechanisms](global-mechanisms.md))
 - **Enforcement:** Checked at access time; unverified users see "Verify account" prompt with clear next steps
-- **Exemptions:** Scoped admins and staff can bypass checks (logged in Tweak 3.2 accountability)
-- **Performance:** Verification status cached in session; no per-page queries after login
-- **User experience:** Unverified users can browse but not participate; clear call-to-action to verify
+- **Exemptions:** Scoped admins and staff can bypass checks only in the admin panel.
 - **Compatibility:** Works with all participation types (proposals, surveys, comments)
 
 ![Mandatory verifications admin](../../examples/forced_verifications_admin.png)
@@ -145,11 +132,9 @@ Decidim::DecidimAwesome.configure do |config|
 end
 ```
 
-- **Admin UI:** Search user, select authorization method, grant/revoke with mandatory note
-- **Logging:** All grants/revokes logged with timestamp, granter, reason; visible in Tweak 3.2 accountability
-- **Expiry:** Can set expiration date on manual grants (default: no expiry unless configured)
+- **Admin UI:** Search user, select authorization method, grant/revoke with mandatory note (use the participants to manage it)
 - **Validation:** Duplicate grants prevented; revocation immediate
-- **Audit:** Manual grants marked distinctly from automated verifications for reporting
+- **Audit:** Manual grants marked distinctly (in the admin log) from automated verifications for reporting
 - **Dependency:** Complements Tweak 5.3 (mandatory verifications) for exception handling
 
 ![Manual verifications system](../../examples/manual_verifications_system.png)
@@ -165,7 +150,6 @@ Adds proof-of-work challenge validation to login/registration flows to reduce au
 
 Lightweight spam/bot defense without third-party services (reCAPTCHA, etc.) or additional friction beyond CPU cost.
 Concerns: proof-of-work takes 1-5 seconds on participant device; some users may abandon if impatient. Difficulty configurable.
-Recommend setting difficulty low initially; monitor spam rates and increase if abuse persists. Educational institutions may need exemptions.
 
 #### Technical area
 

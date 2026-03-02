@@ -30,3 +30,5 @@ Commonly reused by:
 - Components/integrations tweaks (6.x)
 
 See detailed behavior per tweak in each category page.
+
+![Tweak scopes configuration](../../examples/tweak-scopes.png)

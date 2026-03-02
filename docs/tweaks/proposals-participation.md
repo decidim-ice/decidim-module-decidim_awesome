@@ -137,13 +137,12 @@ end
 ```
 
 - **Admin visibility:** Enabled (admins see Settings → Proposals → Content rules)
-- **Default behavior:** Disabled by default (no validation unless explicitly configured)
-- **Admin control:** Yes; admins can enable/disable rules per component
+- **Default behavior:** Same as Decidim defaults.
+- **Admin control:** Yes; admins can enable/disable rules using scope restrictions (see [Global mechanisms](global-mechanisms.md)).
 - **Rules available:** Min/max length, capitalization percentage, punctuation limits, uppercase requirement
 - **Client-side:** Validation happens on form submission; browser error messages guide users
 - **Server-side:** Rules enforced server-side to prevent bypass; tampering with frontend data is rejected
 - **Performance:** Negligible; regex validation at submission time
-- **Localization:** Rules can be localized if minimum lengths vary per language
 
 ![Custom validations](../../examples/custom_validations.png)
 
@@ -175,14 +174,11 @@ Decidim::DecidimAwesome.configure do |config|
 end
 ```
 
-- **Admin visibility:** Enabled (admins see sorting options per component)
+- **Admin visibility:** Enabled (admins see sorting options in component settings)
 - **Default behavior:** Enabled by default (all sorting options available)
 - **Admin control:** Yes; can enable/disable sorting options per component
 - **Session persistence:** Selected sort preference stored in browser session; survives page reload
-- **Custom sorts:** Can base sorts on custom fields (Tweak 2.1) for data-driven ordering
 - **Performance:** Sorting is database-indexed; minimal query overhead even for large proposal counts
-- **API support:** Sorting options available via GraphQL if API consumption required
-- **Conflict:** Incompatible with Tweak 2.4 if weighted voting is sorting dimension alone; recommend both enabled
 
 ![Proposal sorting](../../examples/proposal_sorting.png)
 ![Proposal sorting admin](../../examples/proposal_sorting-admin.png)
@@ -195,7 +191,6 @@ Enables configurable weighted vote systems for proposals, with support for custo
 
 Supports non-standard voting models (e.g., votes with point allocations, ranked choice, multi-vote pools).
 Concerns: participants must understand voting rules clearly; complex voting can reduce participation. Provide strong help text and examples.
-Recommend A/B testing against standard voting if unsure about user comprehension.
 
 #### Technical area
 
@@ -212,14 +207,11 @@ end
 ```
 
 - **Admin visibility:** Enabled (admins see weighted voting options per component)
-- **Default behavior:** Enabled by default globally; admins can disable per-component
 - **Admin control:** Yes; admins set voting model per component
 - **Voting models:** Supports distributed-vote pools, ranked choice, Borda counting, custom algorithms
-- **Data export:** Vote distribution available in component reports for analysis
+- **Data export:** Vote distribution available in component exports for analysis
 - **Performance:** Vote aggregation queries are indexed; reporting scales well to large proposal counts
 - **Recount:** After model changes, votes are recalculated; no historical data loss
-- **Accessibility:** Ensure weighted voting UI works with screenreaders; test with participants using AT
-- **Dependency:** Works well with Tweak 2.3 (sorting) to surface weighted-vote leaders; conflicts with simple vote-count sorting
 
 ![Weighted voting](../../examples/weighted_voting.png)
 
@@ -247,11 +239,10 @@ Decidim::DecidimAwesome.configure do |config|
 end
 ```
 
-- **Admin visibility:** Disabled by default (checkbox hidden from admins)
+- **Admin visibility:** Disabled by default
 - **Default behavior:** Disabled by default; setting `allow_limiting_amendments = true` shows the amendment limit option in admin UI
-- **Admin control:** Yes (if allow_limiting_amendments = true); admins can toggle limit per component
+- **Admin control:** Yes admins can toggle limit per component
 - **Scope:** Applies to proposals in evaluating/answering state only; completed amendments unaffected
-- **Lock mechanism:** Only one amendment allowed in-flight; proposer must wait for decision before resubmitting
 - **Configurable limit:** Can adjust max concurrent amendments per component (default 1)
 - **Performance:** Amendment locking adds minimal overhead; database constraint prevents race conditions
 - **Notifications:** Proposers notified when amendment decision made; can resubmit immediately
