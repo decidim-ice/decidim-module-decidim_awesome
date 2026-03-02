@@ -3,8 +3,12 @@ it:
   activemodel:
     attributes:
       config:
+        additional_proposal_sortings: Opzioni di ordinamento aggiuntive abilitate
+        allow_images_in_editors: Consenti immagini nell'editor HTML
         allow_images_in_proposals: Consenti l'uso d'immagini nell'editor di proposte
+        allow_videos_in_editors: Consenti video nell'editor HTML
         auto_save_forms: Salva automaticamente i moduli nel LocalStorage
+        force_authorization_help_text: Testo di aiuto per la pagina di autorizzazione
         intergram_auto_no_response: Un messaggio che viene inviato un minuto dopo che l'utente invia il suo primo messaggio e che non è stata ricevuta risposta
         intergram_auto_response: Un messaggio che viene inviato immediatamente dopo che l'utente invia il primo messaggio
         intergram_chat_id: Chat ID
@@ -16,8 +20,11 @@ it:
         intergram_title_open: Titolo della chat aperta
         intergram_use_floating_button: Se selezionato, la chat chiusa è sempre un pulsante invece di un testo
         proposal_custom_fields: Campi personalizzati %{id}
+        proposal_private_custom_fields: Campi personalizzati privati %{id}
+        scoped_admin_styles: Stili personalizzati %{id}
         scoped_admins: Gruppo di amministratori con ambito %{id}
         scoped_styles: Stili personalizzati %{id}
+        user_timezone: Consenti agli utenti di impostare il loro fuso orario nel profilo
         validate_body_max_caps_percent: Percentuale massima consentita di lettere maiuscole per il corpo
         validate_body_max_marks_together: Numero massimo di simboli consecutivi ammessi nel corpo
         validate_body_min_length: Caratteri minimi necessari per il corpo
@@ -43,8 +50,14 @@ it:
         target: Apri in
         url: URL
         visibility: Visibilità
+      organization:
+        awesome_admins_available_authorizations: Consenti agli amministratori di verificare manualmente gli utenti con queste autorizzazioni
+      user:
+        user_time_zone: Fuso orario personale
   decidim:
     admin:
+      actions:
+        manage: Gestisci
       filters:
         admin_accountability:
           admin_role_type:
@@ -112,10 +125,12 @@ it:
               supported_first: Prima i sostegni
               supported_last: Sostegni al fondo
               za: Z-A (Alfabetico inverso)
+            limit_pending_amendments: Consenti solo un emendamento in sospeso per ogni proposta.
+            sort_orders_enabled: Tipi di ordinamento abilitati
             voting_cards_box_title: Titolo del riquadro di voto
             voting_cards_box_title_help: Il valore predefinito è "Votare su questa proposta". Usa "-" per nasconderla.
             voting_cards_instructions: Istruzioni di supporto/aiuto (finestra modale dissmissibile)
-            voting_cards_instructions_help: Il valore predefinito è "Si prega di leggere attentamente le regole elettorali per capire come il tuo voto sarà utilizzato da %{organization}""
+            voting_cards_instructions_help: Il valore predefinito è "Si prega di leggere attentamente le regole elettorali per capire come il tuo voto sarà utilizzato da %{organization}"
             voting_cards_show_abstain: Aggiungi un'opzione di astensione
             voting_cards_show_modal_help: Mostra le istruzioni/modalità di aiuto quando si fa clic sul supporto
           step:
@@ -125,7 +140,11 @@ it:
               supported_last: Sostegni al fondo
               za: Z-A (Alfabetico inverso)
     decidim_awesome:
+      account:
+        timezone_select:
+          time_zone_helper: Usa il tuo fuso orario personale per visualizzare le date nell'ora locale quando hai effettuato l'accesso.
       admin:
+        actions: Azioni
         admin_accountability:
           admin_roles:
             admin: Super admin
@@ -162,6 +181,26 @@ it:
             collaborator: Collaboratore
             moderator: Moderatore
             valuator: Valutatore
+        admin_authorizations:
+          authorization:
+            confirm_destroy: Sei sicuro di voler eliminare questa autorizzazione? Ciò potrebbe influire sull'accesso dell'utente alla piattaforma.
+            destroy: Elimina
+            granted_at: Concesso a %{date}
+            metadata: Contiene metadati? %{metadata}
+          authorization_destroyed: Autorizzazione eliminata con successo.
+          authorization_not_destroyed: L'autorizzazione non può essere eliminata!
+          authorization_transferred: 'Attenzione: C''è stato un conflitto di verifica e la verifica è stata trasferita a %{user}'
+          conflict: C'è un conflitto con un'autorizzazione esistente
+          conflict_help_html: "Devi risolvere il conflitto con l'utente %{user} prima di poter autorizzare l'utente con questa autorizzazione.\n<br><br>\nSi verifica un conflitto di verifica quando un altro utente ha gli stessi dati dell'utente che stai cercando di autorizzare.\nPuoi risolvere questo conflitto rimuovendo l'autorizzazione in conflitto dall'altro utente o utilizzando dati diversi per questo utente.\n"
+          edit:
+            authorize: Autorizza %{user} con %{name}
+            do_it_if_sure: Fai questo solo se sei sicuro che l'utente abbia questa autorizzazione.
+            force_verification: Forza la verifica con i dati attuali
+            force_verification_help: La verifica è fallita, ma puoi forzarla se sei sicuro che l'utente abbia questa autorizzazione.
+            force_verification_reason: 'Fornisci un motivo per forzare la verifica:'
+            warning: 'Attenzione: Forzando questa autorizzazione, stai sovrascrivendo lo stato di autorizzazione corrente dell''utente.'
+          user_authorized: "%{user} autorizzato con successo con %{name}"
+          user_not_authorized: "%{user} non può essere autorizzato con %{name}"
         checks:
           index:
             admin_head_tags: Tag Awesome visualizzate nel header della sezione amministrativa
@@ -208,23 +247,40 @@ it:
             error: Errore nella rimozione del box CSS! %{error}
             success: Box CSS %{key} rimosso correttamente
           form:
+            additional_proposal_sortings:
+              enable_all: Abilita tutte le opzioni di ordinamento aggiuntive
+              help: Queste opzioni di ordinamento sono aggiuntive a quelle predefinite. Inoltre, ricorda che puoi scegliere l'ordine predefinito nelle impostazioni del componente proposte.
+              title: Personalizza le opzioni di ordinamento per l'elenco delle proposte
             edit_label: Rinomina Etichetta
             errors:
               incorrect_css: 'Il box CSS #%{key} non è valido'
               incorrect_json: 'La definizione JSON nella casella #%{key} non è valida'
             help:
+              allow_images_in_editors: Ciò aggiungerà un'icona per il caricamento di immagini in tutti gli editor WYSIWYG
               allow_images_in_proposals: Questo permetterà di caricare le immagini nell'editor delle proposte, disponibile per qualsiasi utente
+              allow_videos_in_editors: Ciò aggiungerà un'icona per i link video in tutti gli editor WYSIWYG
               auto_save_forms: Questo utilizzerà LocalStorage per salvare automaticamente i dati introdotti dagli utenti nei sondaggi e in altri moduli durante il riempimento. I dati verranno ripristinati in una visita futura con lo stesso browser nel caso in cui il modulo non venga inviato. Se il modulo viene inviato, i dati verranno rimossi. Se gli utenti rimuoveranno i dati di LocalStorage, i dati non verranno ripristinati.
               drag_and_drop_supported: Quando si caricano le immagini, è supportato il Drag & Drop. Le immagini verranno caricate sul server e inserite come risorse esterne (non utilizza la codifica base64).
+              force_authorization_help_text: Aggiungi un testo personalizzato per spiegare perché è richiesta l'autorizzazione. Assicurati anche di aggiungere un metodo di contatto nel caso in cui gli utenti abbiano bisogno di aiuto.
               intergram_about: Intergram utilizza Telegram messenger per gestire un widget di chat di supporto live incorporato nella parte inferiore della pagina.
               intergram_config: 'Invita il bot <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram</a> al tuo gruppo o avvia una chat direttamente con esso. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
               original_editor_override: Poiché dalla versione 0.26 di decidim, è gi§à possibile (solo per gli amministratori) caricare le immagini negli editor. Pertanto, le impostazioni delle immagini si applicano solo agli editor pubblici (per gli admin sono sempre disponibili).
               proposal_custom_fields: Crea campi di proposta personalizzati che si applicano solo in alcune parti del sito (usa l'editor delle restrizioni per quello)
               proposal_custom_fields_example: I dati sono memorizzati in un oggetto XML utilizzando attributi HTML compatibili (dl,dt,dd elementi) sostituendo il "corpo" in una proposta normale.
-              proposal_custom_fields_translations: "Label, testo di aiuto, segnaposti e valori predefiniti possono utilizzare le traduzioni personalizzate della tua applicazione. \nPer questo, invece di usare delle string literal, utilizzare il tasto i18n (deve contenere almeno un punto).\nPer esempio:\n- \"activemodel.attributes.proposal itle\" al posto di \"Titolo\"\n- \"activemodel.attributes.proposal ddress\" invece di \"Indirizzo\"\nO utilizzare le proprie chiavi in combinazione con altri strumenti per definire le traduzioni (ad esempio: utilizzando il modulo Term Customizer):\n - \"myapp.custom_fields.bio\" invece di \"Biografia\""
+              proposal_custom_fields_translations: "Label, testo di aiuto, segnaposti e valori predefiniti possono utilizzare le traduzioni personalizzate della tua applicazione. \nPer questo, invece di usare delle string literal, utilizzare il tasto i18n (deve contenere almeno un punto).\nPer esempio:\n- \"activemodel.attributes.proposal.title\" al posto di \"Titolo\"\n- \"activemodel.attributes.proposal.address\" invece di \"Indirizzo\"\nO utilizzare le proprie chiavi in combinazione con altri strumenti per definire le traduzioni (ad esempio: utilizzando il modulo Term Customizer):\n - \"myapp.custom_fields.bio\" invece di \"Biografia\""
+              proposal_private_custom_fields: Simile ai campi pubblici, ma questa informazione non sarà rivelata pubblicamente (solo gli amministratori avranno accesso ad essa).
+              proposal_private_custom_fields_translations: |
+                I campi personalizzati privati vengono visualizzati in una casella distinta con questo testo informativo:
+                %{warning}
+                Questo testo può essere personalizzato con una traduzione personalizzata utilizzando la chiave:
+                %{key}
+              scoped_admin_styles: Tieni presente che nascondere le cose qui potrebbe rendere l'amministratore inutilizzabile. Si prega di agire con cautela.
+              scoped_admin_styles_variables: 'È possibile utilizzare le seguenti variabili CSS per i colori personalizzati dell''organizzazione:'
+              scoped_admin_styles_warning: "<strong>Attenzione</strong>: Aggiungi qui CSS personalizzato che si applica solo in questo amministratore."
               scoped_admins: Promuovi l'utente ad admin che può amministrare solo alcune parti pubbliche (usa l'editor delle restrizioni). Gli utenti che hanno già i permessi di amministrazione verranno ignorati.
               scoped_styles: Crea CSS personalizzato che si applica solo in alcune parti del web pubblico (usa l'apposito editor delle restrizioni)
               scoped_styles_variables: 'È possibile utilizzare le seguenti variabili CSS per i colori personalizzati dell''organizzazione:'
+              user_timezone: Ciò aggiungerà un campo di selezione nel profilo utente per impostare il fuso orario. Questo sarà utilizzato per mostrare date e orari nell'ora locale dell'utente.
               validate_body_max_caps_percent: Zero non permetterà a nessuna lettera maiuscola, 100 forzerà a scrivere tutto in lettere maiuscole
               validate_body_max_marks_together: 'Limita il numero di punti interrogativi e esclamativi che possono essere scritti insieme. Es.: se è 2, allora ''!!!'' non sarà permesso nel testo'
               validate_body_min_length: Questo numero può essere zero, questo renderà effettivamente questo campo non obbligatorio
@@ -241,6 +297,14 @@ it:
             sure_to_remove: Sei sicuro di voler eliminare questo campo?
           form_proposal_private_custom_fields:
             delete: Elimina
+            new: Aggiungi una nuova casella "campi personalizzati privati"
+            remove: Rimuovi questa casella "campi personalizzati privati"
+            sure_to_remove: Sei sicuro di voler eliminare questo campo privato?
+          form_scoped_admin_styles:
+            delete: Elimina
+            new: Aggiungi una nuova casella CSS "pannello admin"
+            remove: Rimuovi questo box CSS
+            sure_to_remove: Sei sicuro di voler eliminare questo box CSS?
           form_scoped_admins:
             delete: Elimina
             new: Aggiungi un nuovo gruppo "Amministratori con ambito"
@@ -248,6 +312,7 @@ it:
             sure_to_remove: Sei sicuro di voler eliminare questo gruppo "Amministratori con ambito"?
           form_scoped_styles:
             delete: Elimina
+            new: Aggiungi una nuova casella CSS "frontend pubblico"
             remove: Rimuovi questo box CSS
             sure_to_remove: Sei sicura di voler distruggere questo box CSS?
           none: "⛔ Mai! - Disattiva ogni altro vincolo"
@@ -260,9 +325,14 @@ it:
             admins: Amministratori con ambito
             editors: Editor hacks
             livechat: Chat in tempo reale
+            proposal_custom_fields: 'Campi personalizzati per proposte: Campi pubblici'
+            proposal_private_custom_fields: 'Campi personalizzati per proposte: Campi privati'
             proposals: Proposals hacks
+            scoped_admin_styles: 'Stili personalizzati: Pannello admin'
+            scoped_styles: 'Stili personalizzati: Frontend pubblico'
             styles: Custom styles
             surveys: Surveys & forms
+            verifications: Verifiche / Hack di autorizzazione
           update:
             error: Errore nell'aggiornamento della configurazione! %{error}
             success: Configurazione aggiornata correttamente
@@ -322,13 +392,46 @@ it:
           update:
             error: Errore nell'aggiornamento del reindirizzamento! %{error}
             success: Reindirizzamento aggiornato correttamente
+        maintenance:
+          private_data:
+            component: Spazio / Componente
+            confirm_delete: Sei sicuro di voler eliminare tutti i dati privati per questa risorsa? Questa azione non può essere annullata.
+            delete: Elimina tutto
+            destroying_private_data: I dati privati per %{title} sono impostati per essere distrutti. Si prega di controllare di nuovo tra qualche minuto.
+            done: Fatto
+            help_html: |
+              Questo strumento consente di eliminare tutti i dati privati per uno spazio o componente partecipativo specifico. Questa azione è irreversibile e rimuoverà tutti i dati privati dal database.
+              <br><br>
+              <strong>Cosa si considera dati privati?</strong>
+              <br>
+              I dati privati sono qualsiasi informazione che non è disponibile pubblicamente e è accessibile solo agli amministratori. Questo, al momento, include informazioni sui campi personalizzati privati.
+              <br><br>
+              <strong>Cosa succede quando elimino i dati privati?</strong>
+              <br>
+              Quando si eliminano i dati privati, tutte le informazioni private per lo spazio o componente partecipativo selezionato verranno rimosse definitivamente dal database. Un registro di questa azione sarà memorizzato nel sistema a scopo di audit.
+              <br><br>
+              <strong>Cosa succede ai dati pubblici?</strong>
+              <br>
+              I dati pubblici non saranno influenzati da questa azione. Saranno eliminati solo i dati privati.
+              <br><br>
+              <strong>C'è un tempo minimo da attendere prima di eliminare i dati privati?</strong>
+              <br>
+              Sì, non è possibile eliminare i dati privati se l'ultimo aggiornamento è stato meno di %{time_ago} fa. Puoi modificare questa configurazione nel file inizializzatore.
+            items_count: Totale interessato
+            last_date: Ultimo aggiornamento
+            no_data: Nessun dato privato trovato più vecchio di %{time_ago} fa
+            not_destroyable: Questa risorsa non può ancora essere eliminata
+            removing: Rimozione in corso...
+            time_ago: "%{time} fa"
         menu:
           admins: Amministratori con ambito
           custom_redirects: Reindirizzamenti Personalizzati
           editors: Editor hacks
           livechat: Chat in tempo reale
           maintenance:
-            checks: System compatibility
+            checks: Compatibilità del  sistema
+            maintenance: Manutenzione
+            private_data: Dati privati
           menu_hacks: Menu tweaks
           proposal_custom_fields: Campi Personalizzati Proposte
           proposals: Proposals hacks
@@ -370,6 +473,41 @@ it:
             error: Errore nell'aggiornamento della voce di menu! %{error}
             success: Voce di menu aggiornata con successo
           url_exists: Lo stesso URL è già configurato, per favore modificalo invece di crearlo nuovamente.
+        officializations:
+          authorizations: Autorizzazioni
+          verification_modal:
+            authorizations_for: Autorizzazioni per %{user}
+            close: Chiudi
+        proposal_custom_fields:
+          menu:
+            title: Campi pubblici
+          private_body: Corpo privato
+          private_data_last_remove: Questi dati sono stati distrutti %{time_ago} fa.
+          private_data_last_update: Questi dati sono stati aggiornati l'ultima volta %{time_ago} fa.
+          proposal_private_custom_fields: Campi privati
+          remove_private_data: "👉 Potresti volerlo rimuovere"
+        scoped_admin_styles:
+          menu:
+            title: Pannello admin
+        scoped_styles:
+          menu:
+            title: Frontend pubblico
+      admin_log:
+        component:
+          destroy_private_data: "%{user_name} ha distrutto %{count} elementi di dati privati per %{resource_name} in %{space_name}"
+        user:
+          admin_creates_authorization: "%{user_name} ha verificato %{resource_name} con %{handler_name}"
+          admin_destroys_authorization: "%{user_name} ha distrutto la verifica %{handler_name} su %{resource_name}"
+          admin_forces_authorization: "%{user_name} ha forzato la verifica %{handler_name} su %{resource_name}. Motivo: %{reason}"
+      amendments:
+        modal:
+          amendment_exists: Esiste già un emendamento
+          current_amendment_html: <p>Puoi <a href="%{amendment_link}">accedere all'emendamento corrente qui</a>.</p>
+          dismiss: Ok, capito
+          explanation_html: |
+            <p>Attualmente, c'è un altro emendamento in fase di valutazione per questa proposta. Per crearne uno nuovo, devi attendere fino all'accettazione o al rifiuto dell'attuale.</p>
+            <p>Puoi anche contattare l'autore di questa proposta <a href="%{proposal_link}">lasciando un commento</a> e cercare di accelerare la risoluzione dell'emendamento corrente.</p>
+        pending_limit_reached: Spiacenti, può esserci solo un emendamento in sospeso alla volta. Si prega di attendere fino a quando "%{emendation}" viene accettato o rifiutato.
       config:
         intergram:
           auto_no_response: Sembra che nessuno sia a disposizione per rispondere in questo momento. Vi prego di dirci come possiamo contattarvi e torneremo a voi il prima possibile.
@@ -424,6 +562,25 @@ it:
           show:
             view_meeting: Visualizza meeting
             view_proposal: Visualizza proposta
+      proposal_private_custom_fields_disclosure: Questa informazione non sarà pubblicata
+      required_authorizations:
+        index:
+          cancel: Farò questo in un altro momento, %{link}.
+          granted_title: Verifiche concesse
+          logout: fammi disconnettere
+          missing_title: Non ancora verificato
+          resume_title: Verifiche in sospeso
+          resume_with_method: Riprendi la verifica con %{name}
+          title: Verifica la tua identità
+          verify_with_all_these_options: 'Per favore verificati con tutti questi metodi prima di poter accedere alla piattaforma:'
+          verify_with_any_of_these_options: 'Si prega di verificarsi con almeno una di queste opzioni prima di poter accedere alla piattaforma:'
+          verify_with_method: Verifica con %{name}
+      system:
+        organizations:
+          admin_allowed_authoritzations_help_html: |
+            Gli amministratori saranno in grado di verificare manualmente gli utenti con queste autorizzazioni.
+            <br>Usa questa funzione con cautela, in quanto può portare a problemi di sicurezza.
+          awesome_tweaks: Tweaks Decidim Awesome
       validators:
         too_much_caps: Sta usando troppe lettere maiuscole (oltre %{percent}% del testo)
       voting:
@@ -431,7 +588,7 @@ it:
           abstained: "✔️ Astenuti"
           change_vote: Cambia il mio voto
           default_box_title: Vota la proposta
-          default_instructions_html: "<p>Si prega di leggere attentamente le regole elettorali per capire come il tuo voto sarà utilizzato da %{organization}\"</p>"
+          default_instructions_html: "<p>Si prega di leggere attentamente le regole elettorali per capire come il tuo voto sarà utilizzato da %{organization}</p>"
           modal:
             cancel: Annulla
             message: Il tuo voto sarà considerato definitivo il %{date}. Fino ad allora puoi cambiarlo
@@ -453,6 +610,9 @@ it:
       meetings_map:
         view_meeting: Visualizza meeting
     proposals:
+      admin:
+        exports:
+          awesome_private_proposals: Proposte con dati privati
       proposals:
         orders:
           az: A-Z (alfabetico)
@@ -464,6 +624,12 @@ it:
   layouts:
     decidim:
       decidim_awesome:
+        admin:
+          maintenance:
+            title: 'Strumenti di manutenzione: %{title}'
+            titles:
+              checks: Controlli di compatibilità del sistema
+              private_data: Pulizia dati privati
         awesome_config:
           amendments: Emendamenti
           autosaved_error: LocalStorage non è supportato nel browser, il modulo non può essere salvato automaticamente.
