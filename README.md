@@ -18,10 +18,6 @@ Decidim is an awesome platform, but it has some limitations that can be annoying
 
 ## Usage
 
-Read the [CHANGELOG](CHANGELOG.md) for Decidim compatibility.
-
-> **TL;DR people**: Jump to the [installation part](#installation)
-
 DecidimAwesome is a module that hacks Decidim in order to provide more features or improve some aspects of it.
 
 It generates and admin module that allows to choose what hacks to apply.
@@ -38,7 +34,6 @@ For easier navigation, tweaks are also grouped by category in dedicated docs pag
 - [UI, theming and navigation](docs/tweaks/ui-theming-navigation.md)
 - [Forms, surveys and verifications](docs/tweaks/forms-surveys-verifications.md)
 - [Components and integrations](docs/tweaks/components-integrations.md)
-
 
 ## Installation
 
@@ -91,6 +86,8 @@ Depending on your Decidim version, choose the corresponding Awesome version to e
 | 0.7.x | 0.23.x, 0.24.x |
 | 0.6.x | 0.22.x, 0.23.x |
 | 0.5.x | 0.21.x, 0.22.x |
+
+Read the [CHANGELOG](CHANGELOG.md) for further details on changes and Decidim compatibility.
 
 ## Configuration
 

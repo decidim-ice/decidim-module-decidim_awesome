@@ -201,11 +201,20 @@ Pull Request template should include:
    ```
    **Important**: Always include a clear description and PR reference.
 
-6. **Update README.md with feature description**
-   - Add section describing the new feature
+6. **Update documentation for the new feature**
+   - **For new tweaks**: Add detailed documentation to appropriate category file in `docs/tweaks/`:
+     - `editor-content.md` (Section 1.x) - Editor and content tweaks
+     - `proposals-participation.md` (Section 2.x) - Proposals and participation
+     - `admin-governance.md` (Section 3.x) - Admin governance and accountability
+     - `ui-theming-navigation.md` (Section 4.x) - UI, theming and navigation
+     - `forms-surveys-verifications.md` (Section 5.x) - Forms, surveys and verifications
+     - `components-integrations.md` (Section 6.x) - Components and integrations
+     - Follow the template structure in `.github/instructions/copilot.instructions.md`
+     - Include admin description, technical area, configuration examples (true/false/:disabled)
+     - Use next available section number (X.Y format)
+   - **For other features**: Update `README.md` with feature description
    - Include usage/configuration examples if applicable
    - **Add screenshot if it's a UI feature** - place in `examples/` folder
-   - Update feature list if applicable
    - Link to relevant documentation sections
 
 7. **If your feature uses concerns or override initializers**:
@@ -297,10 +306,12 @@ When reviewing code, check:
 
 6. **Documentation**
    - Is CHANGELOG updated with PR reference?
-   - Is README.md updated with feature description?
+   - For new tweaks: is `docs/tweaks/[category].md` updated with detailed documentation?
+   - For other features: is README.md updated with feature description?
    - For UI features: is there a screenshot in `examples/` folder?
    - Are complex algorithms commented?
-   - Are feature usage/configuration examples provided?
+   - Are feature usage/configuration examples provided (including initializer code)?
+   - Does documentation follow the three-state pattern (true/false/:disabled)?
 
 7. **Security**
    - Is user input sanitized?
