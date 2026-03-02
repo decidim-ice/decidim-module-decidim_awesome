@@ -48,7 +48,7 @@ module Decidim::DecidimAwesome
           subject.call
           category = cookie_management_config.reload.value["categories"].first
 
-          expect(category["slug"]).to match(/^awesome-analytics-[a-f0-9]{8}$/)
+          expect(category["slug"]).to match(/^analytics-[a-f0-9]{8}$/)
           expect(category["title"]["en"]).to eq("Awesome Analytics")
           expect(category["description"]["en"]).to eq("Awesome analytics cookies")
           expect(category["mandatory"]).to be(false)

@@ -93,6 +93,7 @@ en:
           search_field_end_date: End date
           search_field_start_date: Start date
       menu:
+        admin_accountability: Admin accountability
         decidim_awesome: Decidim awesome
     components:
       awesome_iframe:
