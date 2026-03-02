@@ -6,7 +6,8 @@ module Decidim
       class CookieItemsController < DecidimAwesome::Admin::ApplicationController
         include CookieManagementHelpers
 
-        helper_method :category, :default_category?, :default_cookie_item?, :cookie_item_modified?, :item_type_options
+        helper_method :category_from_params, :default_category?, :default_cookie_item?, :cookie_item_modified?, :item_type_options
+        alias category category_from_params
 
         before_action :set_cookie_items_breadcrumb
         before_action :prevent_mandatory_category_items_edit, only: [:edit, :update, :destroy]
@@ -23,7 +24,7 @@ module Decidim
 
         def edit
           add_breadcrumb_item :edit, decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
-          @form = form(CookieItemForm).from_params(item_for_form)
+          @form = form(CookieItemForm).from_params(item_for_form(params[:cookie_category_slug], params[:name]))
         end
 
         def create
@@ -76,49 +77,10 @@ module Decidim
 
         private
 
-        def category
-          current_categories.find { |c| c["slug"].to_s == params[:cookie_category_slug].to_s }
-        end
-
-        def item_for_form
-          raise ActiveRecord::RecordNotFound unless category
-
-          items = category["items"].is_a?(Array) ? category["items"] : []
-          item = items.find { |i| i["name"].to_s == params[:name].to_s }
-          raise ActiveRecord::RecordNotFound unless item
-
-          {
-            name: item["name"],
-            type: item["type"],
-            service: item["service"],
-            description: item["description"]
-          }
-        end
-
-        def item_type_options
-          CookieItemForm::ITEM_TYPES.index_by do |type|
-            I18n.t("cookie_item.types.#{type}", scope: "activemodel.attributes")
-          end
-        end
-
-        def category_title
-          return params[:cookie_category_slug] unless category
-
-          translated_attribute(category["title"]) || params[:cookie_category_slug]
-        end
-
         def set_cookie_items_breadcrumb
           add_breadcrumb_item :cookie_management, decidim_admin_decidim_awesome.cookie_categories_path
-          add_breadcrumb_item category_title, decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
-        end
-
-        def prevent_mandatory_category_items_edit
-          return unless category
-          return unless default_category?(params[:cookie_category_slug])
-          return unless category["mandatory"]
-
-          flash[:alert] = I18n.t("cookie_items.edit.cannot_edit_mandatory_category", scope: "decidim.decidim_awesome.admin")
-          redirect_to decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
+          add_breadcrumb_item category_title_for_breadcrumb(params[:cookie_category_slug]),
+                              decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
         end
       end
     end

@@ -1,21 +1,21 @@
-<div class="cookies__category" data-id="<%= category[:slug] %>">
+<div class="cookies__category" data-id="<%= category["slug"] %>">
   <div class="cookies__category-trigger">
-    <label for="dc-<%= category[:slug] %>" class="cookies__category-toggle">
+    <label for="dc-<%= category["slug"] %>" class="cookies__category-toggle">
       <input
-        <%== %(checked="checked") if category[:mandatory] %>
-        id="dc-<%= category[:slug] %>"
+        <%== %(checked="checked") if category["mandatory"] %>
+        id="dc-<%= category["slug"] %>"
         type="checkbox"
-        name="<%= category[:slug] %>"
-        <%= "disabled" if category[:mandatory] %>>
-      <span class="sr-only"><%= t("layouts.decidim.data_consent.modal.toggle", consent_category: category[:title]) %></span>
+        name="<%= category["slug"] %>"
+        <%= "disabled" if category["mandatory"] %>>
+      <span class="sr-only"><%= t("layouts.decidim.data_consent.modal.toggle", consent_category: category["title"]) %></span>
       <span class="cookies__category-toggle-content"></span>
       <%= icon "check-line", class: "cookies__category-toggle-icon" %>
       <%= icon "close-line", class: "cookies__category-toggle-icon" %>
     </label>
 
-    <div id="accordion-trigger-<%= category[:slug] %>" data-controls="accordion-panel-<%= category[:slug] %>" aria-labelledby="accordion-title-<%= category[:slug] %>">
-      <h3 id="accordion-title-<%= category[:slug] %>" class="cookies__category-trigger-title">
-        <%= category[:title] %>
+    <div id="accordion-trigger-<%= category["slug"] %>" data-controls="accordion-panel-<%= category["slug"] %>" aria-labelledby="accordion-title-<%= category["slug"] %>">
+      <h3 id="accordion-title-<%= category["slug"] %>" class="cookies__category-trigger-title">
+        <%= category["title"] %>
       </h3>
 
       <span>
@@ -26,10 +26,10 @@
 
   </div>
 
-  <div id="accordion-panel-<%= category[:slug] %>" class="cookies__category-panel" aria-hidden="true">
-    <p><%= category[:description] %></p>
+  <div id="accordion-panel-<%= category["slug"] %>" class="cookies__category-panel" aria-hidden="true">
+    <p><%= category["description"] %></p>
 
-    <% if category[:items].present? %>
+    <% if category["items"].present? %>
     <div>
       <div class="cookies__category-panel__tr">
         <div class="cookies__category-panel__th">
@@ -46,19 +46,19 @@
         </div>
       </div>
 
-      <% category[:items].each do |item| %>
+      <% category["items"].each do |item| %>
         <div class="cookies__category-panel__tr">
           <div class="cookies__category-panel__td">
-            <%= t("layouts.decidim.data_consent.details.types.#{item[:type]}") %>
+            <%= t("layouts.decidim.data_consent.details.types.#{item["type"]}") %>
           </div>
           <div class="cookies__category-panel__td">
-            <%= item[:name] %>
+            <%= item["name"] %>
           </div>
           <div class="cookies__category-panel__td">
-            <%= item[:service].presence || t("layouts.decidim.data_consent.details.items.#{item[:name]}.service") %>
+            <%= item["service"].presence || t("layouts.decidim.data_consent.details.items.#{item["name"]}.service") %>
           </div>
           <div class="cookies__category-panel__td">
-            <%= item[:description].presence || t("layouts.decidim.data_consent.details.items.#{item[:name]}.description") %>
+            <%= item["description"].presence || t("layouts.decidim.data_consent.details.items.#{item["name"]}.description") %>
           </div>
         </div>
       <% end %>

@@ -24,8 +24,8 @@ module Decidim
         end
 
         def edit
-          add_breadcrumb_item current_category_title, decidim_admin_decidim_awesome.cookie_categories_path
-          @form = form(CookieCategoryForm).from_params(category_for_form)
+          add_breadcrumb_item current_category_title(params[:slug]), decidim_admin_decidim_awesome.cookie_categories_path
+          @form = form(CookieCategoryForm).from_params(category_for_form(params[:slug]))
         end
 
         def create
@@ -78,50 +78,8 @@ module Decidim
 
         private
 
-        def ensure_categories_initialized!
-          return unless categories_data["categories"].empty?
-
-          initialize_default_categories!
-        end
-
-        def initialize_default_categories!
-          default_categories = default_decidim_categories
-          save_categories!(default_categories)
-          default_categories
-        end
-
-        def category_for_form
-          category = current_categories.find { |c| c["slug"].to_s == params[:slug].to_s }
-          raise ActiveRecord::RecordNotFound unless category
-
-          {
-            slug: category["slug"],
-            mandatory: category["mandatory"],
-            title: category["title"],
-            description: category["description"],
-            visibility: category["visibility"]
-          }
-        end
-
-        def current_category_title
-          category = current_categories.find { |c| c["slug"].to_s == params[:slug].to_s }
-          return params[:slug] unless category
-
-          translated_attribute(category["title"]) || params[:slug]
-        end
-
         def set_cookie_management_breadcrumb
           add_breadcrumb_item :cookie_management, decidim_admin_decidim_awesome.cookie_categories_path
-        end
-
-        def prevent_mandatory_category_edit
-          category = current_categories.find { |c| c["slug"].to_s == params[:slug].to_s }
-          return unless category
-          return unless default_category?(params[:slug])
-          return unless category["mandatory"]
-
-          flash[:alert] = I18n.t("cookie_categories.edit.cannot_edit_mandatory", scope: "decidim.decidim_awesome.admin")
-          redirect_to decidim_admin_decidim_awesome.cookie_categories_path
         end
       end
     end

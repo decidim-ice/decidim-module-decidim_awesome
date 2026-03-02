@@ -1,5 +1,0 @@
-<% if Decidim::DecidimAwesome.enabled?(:cookie_management) %>
-  <%= cell("decidim/decidim_awesome/data_consent", current_organization) %>
-<% else %>
-  <%= cell("decidim/data_consent", current_organization) %>
-<% end %>

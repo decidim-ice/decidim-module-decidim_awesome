@@ -101,20 +101,20 @@ module Decidim
 
       def normalize_cookie_item(item)
         {
-          type: item["type"].presence || "cookie",
-          name: item["name"],
-          service: translate_item_attribute(item, "service"),
-          description: translate_item_attribute(item, "description")
+          "type" => item["type"].presence || "cookie",
+          "name" => item["name"],
+          "service" => translate_item_attribute(item, "service"),
+          "description" => translate_item_attribute(item, "description")
         }
       end
 
       def normalize_category_with_i18n(category, organization = nil)
         {
-          slug: category["slug"],
-          title: translate_category_attribute(category, "title", category["slug"], organization),
-          description: translate_category_attribute(category, "description", category["slug"], organization),
-          mandatory: category["mandatory"] || false,
-          items: (category["items"] || []).map { |item| normalize_cookie_item(item) }
+          "slug" => category["slug"],
+          "title" => translate_category_attribute(category, "title", category["slug"], organization),
+          "description" => translate_category_attribute(category, "description", category["slug"], organization),
+          "mandatory" => category["mandatory"] || false,
+          "items" => (category["items"] || []).map { |item| normalize_cookie_item(item) }
         }
       end
 
