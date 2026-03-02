@@ -1,6 +1,6 @@
 # Development Workflow & Best Practices
 
-## Important: This is a Module, Not an Standalone Application
+## Important: This is a Module, Not a Standalone Application
 
 **Decidim Awesome** is a module that extends the Decidim platform. You cannot run this code directly as a standalone app. Instead:
 
