@@ -78,8 +78,8 @@ end
 ```
 
 - **Querying:** Admin UI allows filter by date range, user, action type, scope; exports to CSV
-- **Retention:** Default 1-year retention; configurable per deployment
-- **Performance:** Logging is async; no impact on admin action response time. Queries indexed for fast filtering.
+- **Retention:** No built-in retention period; managed via your audit/versioning store (e.g., PaperTrail) and external DB/maintenance cleanup policies per deployment
+- **Performance:** Audit entries are written as part of the normal request/transaction with minimal overhead; exporting runs as a background job. Queries are indexed for fast filtering.
 - **GDPR:** User deletion removes logs containing that user's data; consider archival vs. deletion per policy
 - **Encrypted fields:** Logs reference (not include) sensitive data; Tweak 2.1.2 (private fields) logged as "value changed" only
 - **Export format:** CSV includes timestamp, user, action, affected resource ID, scope for analysis

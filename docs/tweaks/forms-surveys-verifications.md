@@ -28,7 +28,7 @@ end
 
 - **Storage:** Browser localStorage (same-origin, persistent across browser sessions)
 - **Scope:** Form-specific (each form has its own save key); doesn't interfere across pages
-- **Clearing:** Users can manually delete localStorage via browser settings; automatic cleanup after 30 days of inactivity (configurable)
+- **Clearing:** Users can manually delete localStorage via browser settings; autosaved entries are cleared when the corresponding questionnaire is answered/submitted
 - **Security:** Data not encrypted; only use for non-sensitive form fields. Do not auto-save passwords or tokens.
 - **Performance:** Negligible impact; localStorage operations are synchronous and fast
 - **Compatibility:** Works on all modern browsers; gracefully degrades on private browsing mode (no persistence)

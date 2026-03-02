@@ -32,7 +32,7 @@ end
 - **Storage:** Custom CSS stored in database; injected into page `<head>` at runtime
 - **Scope:** Can be global or per-space/component using the global scope restrictions mechanism
 - **Performance:** No performance impact; CSS parsed and cached by browser
-- **Security:** No script injection allowed; CSS validated server-side; malicious selectors rejected
+- **Security:** No script injection via CSS; styles are syntax-validated server-side (CSS/Sass); no automatic filtering of unsafe selectors
 - **Specificity:** Custom CSS injected after theme CSS; can override with `!important` if needed
 - **Browser support:** CSS3 only; IE11 not supported for modern syntax
 

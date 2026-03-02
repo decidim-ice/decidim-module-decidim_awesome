@@ -30,7 +30,7 @@ end
 - **Admin control:** Yes; admins can create map components per space
 - **Data source:** Pulls from components with geographic coordinates (proposals, meetings); custom fields (Tweak 2.1) can add location
 - **Map display:** Leaflet-based map with marker clustering for large datasets
-- **Filtering:** Taxonomy taxonomies auto-derived from space categories; participants filter by topic and location together
+- **Filtering:** Taxonomy filters auto-derived from space categories; participants filter by topic and location together
 - **Performance:** Markers lazy-loaded as viewport pans; supports 10k+ locations efficiently
 - **Mobile:** Responsive; touch-friendly controls
 - **Privacy:** Coordinates publicly visible; no IP-based tracking
@@ -131,7 +131,6 @@ Recommend rotating featured processes; pair with clear status labels so particip
 # config/initializers/awesome_defaults.rb
 # No explicit configuration; this is a content-block add-on
 # Admins can choose whether to add this block to homepage in Settings → Content blocks
-end
 ```
 
 - **Content block:** Appears on homepage; configurable title and description
@@ -163,7 +162,6 @@ Recommend limiting visible filters to 2-3 most relevant; archive old process gro
 # config/initializers/awesome_defaults.rb
 # No explicit configuration; this is a content-block add-on
 # Admins can choose whether to add this block to pages in Settings → Content blocks
-end
 ```
 
 - **Content block:** Landing page block dedicated to process groups
