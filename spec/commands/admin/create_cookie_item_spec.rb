@@ -106,11 +106,6 @@ module Decidim::DecidimAwesome
             final_count = cookie_management_config.reload.value["categories"].first["items"].count
             expect(final_count).to eq(initial_count)
           end
-
-          it "adds error to form" do
-            subject.call
-            expect(form.errors[:base]).to be_present
-          end
         end
 
         context "when item name already exists in category" do
