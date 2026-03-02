@@ -2,29 +2,9 @@
 
 ## Tweaks
 
-### 3.1 Restrict scope for tweaks
+Global scoping behavior is documented in [Global mechanisms](global-mechanisms.md).
 
-Allows applying tweaks globally or by specific participatory spaces, space types, components, or individual component instances.
-
-#### Admin description
-
-Enables piecemeal rollout and A/B testing of new tweaks without organization-wide impact.
-Concerns: scope combinations can become complex; document which tweaks are scoped in deployment guides.
-Recommend using scoped tweaks for risky or experimental features; graduate to global once validated.
-
-#### Technical area
-
-- **Scope levels:** Global, space type, participatory space, component, component instance
-- **Precedence:** More specific scopes override broader ones
-- **Configuration:** Admin UI allows bulk scoping; set default then override selectively
-- **Performance:** Scope lookups cached; minimal query overhead even with many scopes
-- **Migration:** Changing scope rules applies only to new operations; existing data unaffected
-- **Dependency:** Pairs with Tweak 3.2 (Scoped admins) to delegate scope-specific configuration
-- **Note:** Tweak 3.1 itself (scope restriction) is a built-in feature; no configuration option needed
-
-![Tweak scopes](../../examples/tweak-scopes.png)
-
-### 3.2 Scoped admins
+### 3.1 Scoped admins
 
 Delegates limited admin powers to selected users and restricts actions outside allowed scopes.
 
@@ -49,17 +29,17 @@ end
 
 - **Roles:** Define custom admin roles with scoped permissions (e.g., "Community Manager — Budget 2025")
 - **Scope enforcement:** Scoped admins cannot view/edit outside their assigned scopes; enforced server-side
-- **Audit trail:** Scoped admin actions logged in accountability system (Tweak 3.3)
+- **Audit trail:** Scoped admin actions logged in accountability system (Tweak 3.2)
 - **Revocation:** Removing scoped admin access is immediate; no stale permission caches
 - **Security:** Similar security model to standard Decidim roles; no privilege escalation vector
 - **Conflict:** Incompatible with certain global admin powers (system backups, user deletion); clearly marked in role setup
-- **Dependency:** Complements Tweak 3.1 (scope restriction) for operational separation of concerns
+- **Dependency:** Complements global scope restrictions for operational separation of concerns
 
 ![Scoped admins authorized](../../examples/scoped_admins_authorized.png)
 ![Scoped admins unauthorized](../../examples/scoped_admins_unauthorized.png)
 ![Scoped admins configuration](../../examples/scoped_admins_config.png)
 
-### 3.3 Admin accountability
+### 3.2 Admin accountability
 
 Provides role/activity visibility for admin-like users over time, with filtering and export capabilities.
 
@@ -106,7 +86,7 @@ end
 
 ![Admin accountability](../../examples/admin_accountability.png)
 
-### 3.4 Maintenance tools
+### 3.3 Maintenance tools
 
 Includes admin utilities for data maintenance tasks (e.g. old private data cleanup).
 
@@ -137,7 +117,7 @@ end
 - **Automation:** Can schedule recurring cleanups (e.g., "delete data older than 90 days") if desired
 - **Performance:** Long operations run as background jobs; admin UI shows progress
 - **Backups:** Essential before running; no undo available; recovery requires restore from backup
-- **Logging:** Maintenance operations logged in Tweak 3.3 (accountability) with record count
+- **Logging:** Maintenance operations logged in Tweak 3.2 (accountability) with record count
 - **Validation:** Pre-flight checks prevent accidental misuse (e.g., won't allow deletion of active proposals)
 
 ![Private data maintenance](../../examples/private_data.png)

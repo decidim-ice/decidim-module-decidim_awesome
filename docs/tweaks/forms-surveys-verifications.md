@@ -108,7 +108,7 @@ end
 - **Methods:** Supports all installed Decidim authorization backends (Postal, OIDC, Saml, etc.)
 - **Configuration:** Admin panel per component; define which authorization method(s) are required
 - **Enforcement:** Checked at access time; unverified users see "Verify account" prompt with clear next steps
-- **Exemptions:** Scoped admins and staff can bypass checks (logged in Tweak 3.3 accountability)
+- **Exemptions:** Scoped admins and staff can bypass checks (logged in Tweak 3.2 accountability)
 - **Performance:** Verification status cached in session; no per-page queries after login
 - **User experience:** Unverified users can browse but not participate; clear call-to-action to verify
 - **Compatibility:** Works with all participation types (proposals, surveys, comments)
@@ -146,7 +146,7 @@ end
 ```
 
 - **Admin UI:** Search user, select authorization method, grant/revoke with mandatory note
-- **Logging:** All grants/revokes logged with timestamp, granter, reason; visible in Tweak 3.3 accountability
+- **Logging:** All grants/revokes logged with timestamp, granter, reason; visible in Tweak 3.2 accountability
 - **Expiry:** Can set expiration date on manual grants (default: no expiry unless configured)
 - **Validation:** Duplicate grants prevented; revocation immediate
 - **Audit:** Manual grants marked distinctly from automated verifications for reporting

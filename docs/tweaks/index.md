@@ -2,6 +2,10 @@
 
 This section organizes Decidim Awesome tweaks by functional categories with per-section numbering.
 
+## Global mechanisms
+
+- [Global mechanisms](global-mechanisms.md) - Cross-cutting behavior shared by multiple tweak families (including transversal scope restrictions)
+
 ## Categories
 
 - [Editor and content creation](editor-content.md) - Tweaks 1.x

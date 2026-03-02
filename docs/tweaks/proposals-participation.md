@@ -99,10 +99,10 @@ end
 - **Admin control:** Yes; admins define private fields per component
 - **Visibility:** Private fields hidden from API, frontend, and proposals themselves; admin-only access
 - **Encryption:** Values encrypted at-rest in database
-- **Audit:** Changes to private fields logged in accountability trail (Tweak 3.3)
+- **Audit:** Changes to private fields logged in accountability trail (Tweak 3.2)
 - **Performance:** Encrypted fields require decryption on admin view; negligible impact
 - **Backup:** Ensure backup procedures preserve encryption keys; decryption loss = data loss
-- **Dependency:** Pairs with Tweak 3.3 (Admin accountability) for audit compliance
+- **Dependency:** Pairs with Tweak 3.2 (Admin accountability) for audit compliance
 
 ![Private custom fields](../../examples/private_custom_fields.png)
 

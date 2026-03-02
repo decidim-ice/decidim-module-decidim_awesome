@@ -30,7 +30,7 @@ end
 ```
 
 - **Storage:** Custom CSS stored in database; injected into page `<head>` at runtime
-- **Scope:** Can be global or per-space/component using Tweak 3.1 (scope restrictions)
+- **Scope:** Can be global or per-space/component using the global scope restrictions mechanism
 - **Performance:** No performance impact; CSS parsed and cached by browser
 - **Security:** No script injection allowed; CSS validated server-side; malicious selectors rejected
 - **Specificity:** Custom CSS injected after theme CSS; can override with `!important` if needed
@@ -99,7 +99,7 @@ end
 - **Customization:** Admin UI to add/edit/reorder/hide menu items; conditional visibility (e.g., "show only if logged in")
 - **Link types:** Internal routes (processes, components) or external URLs
 - **Icon support:** Can add icon classes from default Decidim icon set
-- **Scope:** Menu customization can be partially scoped (Tweak 3.1) for different space configurations
+- **Scope:** Menu customization can be partially scoped using the global scope restrictions mechanism
 - **Performance:** Menu rendered server-side; minimal query overhead
 - **Mobile:** Responsive menu collapses; custom items included in hamburger menu
 - **Conflict:** Overriding top-level navigation structure may conflict with participant expectations; A/B test changes
