@@ -120,7 +120,7 @@ es:
             announcement: Anuncio
             show_accepted: Muestra las propuestas aceptadas
             show_evaluating: Muestra las propuestas en evaluación
-            show_not_answered: Muestra las propuestas pendientes de contestart
+            show_not_answered: Muestra las propuestas pendientes de contestar
             show_rejected: Muestra las propuestas rechazadas
             show_withdrawn: Muestra las propuestas retiradas
       proposals:
@@ -141,7 +141,7 @@ es:
             voting_cards_box_title: Título de la cabina de votación
             voting_cards_box_title_help: Por defecto es "Votar en esta propuesta". Use "-" para ocultarla.
             voting_cards_instructions: Instrucciones/ayuda de soporte (ventana modal descartable)
-            voting_cards_instructions_help: Por defecto es "Por favor lee las reglas de votación cuidadosamente para entender cómo se usará tu voto por %{organization}""
+            voting_cards_instructions_help: Por defecto es "Por favor lee las reglas de votación cuidadosamente para entender cómo se usará tu voto por %{organization}"
             voting_cards_show_abstain: Añadir una opción de abstención
             voting_cards_show_modal_help: Mostrar instrucciones/ayuda modal cuando se haga clic en el soporte
           step:
@@ -598,7 +598,7 @@ es:
           name: Mapa Global
           show_accepted: Muestra las propuestas aceptadas
           show_evaluating: Muestra las propuestas en evaluación
-          show_not_answered: Muestra las propuestas pendientes de contestart
+          show_not_answered: Muestra las propuestas pendientes de contestar
           show_rejected: Muestra las propuestas rechazadas
           show_withdrawn: Muestra las propuestas retiradas
           taxonomies: Taxonomías
@@ -619,11 +619,11 @@ es:
           api_not_ready: |
             <b>Advertencia:</b> Esta instalación de Decidim tiene la API configurada a una complejidad máxima de <b>%{current_complexity}</b>.
             Este componente probablemente no funcione correctament bajo esta configuración. Es recomendado configurar en un inicializador
-            (por ejemplo al final de <code>config/initializers/decidim. b</code>) añadir las siguientes líneas:<br>
+            (por ejemplo al final de <code>config/initializers/decidim.rb</code>) añadir las siguientes líneas:<br>
             <br>
             <pre># Configuración de Api
             Rails.application.config.to_prepare do
-              Decidim::Api::Schema. ax_complexity = 5000
+              Decidim::Api::Schema.max_complexity = 5000
               Decidim::Api::Schema.max_depth = 50
             end</pre>
           error:
@@ -661,7 +661,7 @@ es:
           abstained: "✔️ Abstenido"
           change_vote: Cambiar mi voto
           default_box_title: Votar esta propuesta
-          default_instructions_html: "<p>Por defecto es \"Por favor lee las reglas de votación cuidadosamente para entender cómo se usará tu voto por %{organization}\"\"</p>"
+          default_instructions_html: "<p>Por defecto es \"Por favor lee las reglas de votación cuidadosamente para entender cómo se usará tu voto por %{organization}\"</p>"
           modal:
             cancel: Cancelar
             message: Tu voto se considerará final el %{date}. Puedes cambiarlo hasta entonces
