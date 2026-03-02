@@ -214,18 +214,22 @@ fr:
         checks:
           index:
             admin_head_tags: '"Awesome tags" (balises) inclus dans l''en-tête de l''application d''administration'
+            awesome_update_available: 'Une nouvelle version est disponible : %{latest_version}'
+            awesome_version: Version %{version} de Decidim Awesome
             decidim-admin: Depuis le module Admin
             decidim-assemblies: Depuis le module Assemblées
             decidim-conferences: Depuis le module Conférences
             decidim-core: Depuis le module coeur
             decidim-participatory_processes: Depuis le module Processus participatifs
             decidim-proposals: Depuis le module Propositions
+            decidim_update_available: 'Une nouvelle version est disponible : %{latest_version}'
             decidim_version: Version %{version} de Decidim
             errors:
               CSS: La balise <head> ne contient pas les entrées de la feuille de style <link> requises. Pour la résoudre, vous pouvez l'ajouter manuellement à votre _head.html.erb personnalisé
               JavaScript: La balise <head> ne contient pas les entrées  javascript nécessaire <script>  Pour la résoudre, vous pouvez l'ajouter manuellement à votre _head.html.erb personnalisé
             head_tags: '"Awesome tags" (balises) inclus entre les balises <head>'
             link_admins: Se connecter au panneau /system
+            view_release: Voir les notes de version
         config:
           anonymous: Utilisateurs non connectés
           caution: 'REMARQUE : Cette fonctionnalité modifie fortement certains comportements par défaut qui peuvent conduire à des résultats inattendus. Utilisez-la avec précaution !'
@@ -574,7 +578,7 @@ fr:
           explanation_html: |
             <p>Actuellement, il y a un autre amendement est en cours d'analyse pour cette proposition. Pour en créer un nouveau, vous devez attendre que l'amendement actuel soit accepté ou rejeté.</p>
             <p>Vous pouvez également contacter l'auteur de la présente proposition à l'adresse suivante <a href="%{proposal_link}">en laissant un commentaire</a> et tenter d'accélérer la résolution de l'amendement actuel.</p>
-        pending_limit_reached: Désolé, il ne peut y avoir qu'un seul amendement en attente à la fois. Veuillez patienter jusqu'à ce que "%{emendation}"" soit accepté ou rejeté.
+        pending_limit_reached: Désolé, il ne peut y avoir qu'un seul amendement en attente à la fois. Veuillez patienter jusqu'à ce que "%{emendation}" soit accepté ou rejeté.
       config:
         intergram:
           auto_no_response: Il semble que personne ne soit disponible pour répondre à l'heure actuelle. Dites-nous comment nous pouvons vous contacter, et nous vous contacterons dès que possible.
@@ -583,6 +587,48 @@ fr:
           title_closed: Cliquez pour ouvrir une conversation !
           title_open: Ouvrez une conversation !
       content_blocks:
+        awesome_process_groups:
+          active: Actifs
+          all: Tous
+          all_taxonomies: Toutes les catégories
+          default_title: Processus participatifs
+          filter_by_label: 'Filtrer par :'
+          max_count: Quantité maximale d'éléments à afficher
+          name: Groupes de processus Awesome
+          past: Passés
+          remove_filter: Supprimer le filtre
+          results_count:
+            one: "%{count} processus trouvé"
+            other: "%{count} processus trouvés"
+          status_label: 'Statut :'
+          title: Titre du bloc
+          upcoming: À venir
+        awesome_processes:
+          active_spaces: Processus participatifs
+          any_group: N'importe quel groupe
+          group_label: Groupe
+          max_results: Quantité maximale d'éléments à afficher
+          name: Processus Awesome
+          process_group: Restreindre au groupe de processus
+          process_status: Filtre de statut du processus
+          process_statuses:
+            active: Seulement les processus actifs
+            all: Tous les processus
+            past: Seulement les processus passés
+            upcoming: Seulement les processus futurs
+          process_type: Type de processus
+          process_type_mixed_hint: En mode mixte, les processus et les groupes sont entrelacés jusqu'à la quantité maximale. Les processus sont triés par poids (croissant). Si un type s'épuise, les emplacements restants sont remplis avec l'autre.
+          process_types:
+            all: Tous les processus et groupes mélangés
+            groups: Seulement les groupes de processus
+            processes: Seulement les processus
+          processes: Processus
+          see_all_spaces: Voir tous les processus
+          selection_criteria: Critères de sélection
+          selection_criteria_options:
+            automatic: Automatique
+            manual: Manuel
+          title: Titre du bloc
         map:
           collapse: Démarrer avec le menu réduit
           map_center: Centre de la carte (Latitude, Longitude)
@@ -644,6 +690,9 @@ fr:
           verify_with_all_these_options: 'Veuillez vous vérifier avec toutes ces méthodes avant de pouvoir accéder à la plateforme :'
           verify_with_any_of_these_options: 'Veuillez vous vérifier avec au moins l''une de ces options avant de pouvoir accéder à la plateforme :'
           verify_with_method: Vérifier avec %{name}
+      session:
+        authorization_is_required: Pour accéder à cette partie de la plateforme, vous devez autoriser votre compte avec une autorisation valide (%{authorizations}).
+        login_and_authorization_is_required: Pour accéder à cette partie de la plateforme, vous devez vous connecter et autoriser votre compte.
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |
@@ -657,7 +706,7 @@ fr:
           abstained: "✔ Abstenu.e"
           change_vote: Modifier mon vote
           default_box_title: Votez sur la proposition
-          default_instructions_html: "<p>Veuillez lire attentivement les règles électorales pour comprendre comment votre vote sera utilisé par %{organization}\"</p>"
+          default_instructions_html: "<p>Veuillez lire attentivement les règles électorales pour comprendre comment votre vote sera utilisé par %{organization}</p>"
           modal:
             cancel: Annuler
             message: Votre vote sera considéré comme définitif le %{date}. Vous pouvez le modifier jusque-là
@@ -678,7 +727,7 @@ fr:
     download_your_data:
       show:
         admin_actions: Actions administrateur
-        awesome_private_proposals: Export des propositions avec champs privés
+        awesome_private_proposals: Exportation des propositions avec champs privés
     meetings:
       meetings_map:
         view_meeting: Voir la rencontre
