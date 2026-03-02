@@ -13,7 +13,8 @@ module Decidim::DecidimAwesome
           slug:,
           title:,
           description:,
-          mandatory:
+          mandatory:,
+          visibility:
         }
       end
 
@@ -21,6 +22,7 @@ module Decidim::DecidimAwesome
       let(:title) { { "en" => "Awesome Category" } }
       let(:description) { { "en" => "Awesome description" } }
       let(:mandatory) { false }
+      let(:visibility) { "default" }
 
       context "when everything is OK" do
         it { is_expected.to be_valid }
@@ -54,6 +56,16 @@ module Decidim::DecidimAwesome
         let(:description) { { "en" => "" } }
 
         it { is_expected.not_to be_valid }
+      end
+
+      context "when visibility is valid" do
+        CookieCategoryForm::VISIBILITY_STATES.each do |visibility_state|
+          context "when visibility is #{visibility_state}" do
+            let(:visibility) { visibility_state }
+
+            it { is_expected.to be_valid }
+          end
+        end
       end
     end
   end

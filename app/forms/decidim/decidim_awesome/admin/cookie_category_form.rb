@@ -24,7 +24,10 @@ module Decidim
         end
 
         def generate_slug_from_title
-          base_slug = title.values.compact.first.to_s.parameterize
+          title_text = title.values.compact.first.to_s
+          words = title_text.split(/\s+/)
+          longest_word = words.max_by(&:length) || ""
+          base_slug = longest_word.parameterize
           base_slug = "category" if base_slug.blank?
           "#{base_slug}-#{SecureRandom.hex(4)}"
         end

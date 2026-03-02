@@ -25,7 +25,13 @@
             <% is_mandatory = category["mandatory"] %>
             <tr<%= " class=cookie_category-addition" unless is_default %>>
               <td><%= category["slug"] %></td>
-              <td><%= check is_mandatory %></td>
+              <td>
+                <% if is_mandatory %>
+                  <%= icon "check-line", class: "text-success" %>
+                <% else %>
+                  <%= icon "close-line", class: "text-alert" %>
+                <% end %>
+              </td>
               <td><%= translated_attribute(category["title"]) %></td>
               <td><%= visibility_options.invert[category["visibility"]] %></td>
               <td class="table-list__actions">
