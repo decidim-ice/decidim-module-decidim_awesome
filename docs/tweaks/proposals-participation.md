@@ -31,7 +31,7 @@ end
 - **Admin control:** Yes; admins define fields per component
 - **Configuration:** Admin UI to add/edit/reorder fields with types (text, dropdown, checkbox, etc.)
 - **GraphQL:** Exposed via GraphQL API (Tweak 2.1.1) for external integrations
-- **Performance:** Minimal impact; fields are indexed for filtering and search
+- **Performance:** Minimal impact; fields are stored in the proposal body and parsed at read time (no separate DB indexing/filtering for these fields)
 - **Dependencies:** Works with Tweak 2.3 (sorting) and Tweak 2.4 (weighted voting); custom fields can be sorting dimensions
 - **Data privacy:** Consider GDPR implications if collecting sensitive personal data; use Tweak 2.1.2 for admin-only fields
 
@@ -99,10 +99,7 @@ end
 - **Admin control:** Yes; admins define private fields per component
 - **Visibility:** Private fields hidden from API, frontend, and proposals themselves; admin-only access
 - **Encryption:** Values encrypted at-rest in database
-- **Audit:** Changes to private fields logged in accountability trail (Tweak 3.2)
 - **Performance:** Encrypted fields require decryption on admin view; negligible impact
-- **Backup:** Ensure backup procedures preserve encryption keys; decryption loss = data loss
-- **Dependency:** Pairs with Tweak 3.2 (Admin accountability) for audit compliance
 
 ![Private custom fields](../../examples/private_custom_fields.png)
 
@@ -137,12 +134,12 @@ end
 ```
 
 - **Admin visibility:** Enabled (admins see Settings → Proposals → Content rules)
-- **Default behavior:** Same as Decidim defaults.
+- **Default behavior:** Enabled by default with the values shown above (min 15 chars, max 25% caps, max 1 mark in a row, start with uppercase).
 - **Admin control:** Yes; admins can enable/disable rules using scope restrictions (see [Global mechanisms](global-mechanisms.md)).
 - **Rules available:** Min/max length, capitalization percentage, punctuation limits, uppercase requirement
-- **Client-side:** Validation happens on form submission; browser error messages guide users
-- **Server-side:** Rules enforced server-side to prevent bypass; tampering with frontend data is rejected
-- **Performance:** Negligible; regex validation at submission time
+- **Client-side:** Same client-side validation as Decidim is implemented in this tweak.
+- **Server-side:** Validation rules are enforced by the Decidim form/model validations when the proposal is submitted; if the data is invalid, the request is rejected and validation error messages are shown in the UI next to the relevant fields or in the standard error area.
+- **Performance:** Negligible; validations are simple server-side checks (including regex) executed on submission
 
 ![Custom validations](../../examples/custom_validations.png)
 
@@ -163,7 +160,7 @@ Recommend combining with Tweak 2.4 (weighted voting) or Tweak 2.1 (custom fields
 ```ruby
 # config/initializers/awesome_defaults.rb
 Decidim::DecidimAwesome.configure do |config|
-  # Array of sorting options (true by default, all available)
+  # Array of sorting options (default: an Array; any non-Array value disables additional sortings)
   # :disabled = completely removed, hidden from admins
   config.additional_proposal_sortings = [
     :supported_first,  # most supported first
@@ -243,9 +240,8 @@ end
 - **Default behavior:** Disabled by default; setting `allow_limiting_amendments = true` shows the amendment limit option in admin UI
 - **Admin control:** Yes admins can toggle limit per component
 - **Scope:** Applies to proposals in evaluating/answering state only; completed amendments unaffected
-- **Configurable limit:** Can adjust max concurrent amendments per component (default 1)
-- **Performance:** Amendment locking adds minimal overhead; database constraint prevents race conditions
-- **Notifications:** Proposers notified when amendment decision made; can resubmit immediately
+- **Limit:** Fixed at 1 concurrent amendment per proposal in evaluating state; the admin toggles this on/off per component (not a configurable number)
+- **Performance:** Minimal overhead; the check is done on amendment creation
 - **Compatibility:** Works with all proposal types and voting models
 
 ![Limiting amendments](../../examples/limit_amendments.png)

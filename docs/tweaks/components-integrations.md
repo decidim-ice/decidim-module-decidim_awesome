@@ -63,7 +63,7 @@ end
 - **Communication:** No cross-iframe communication (Decidim ↔ embedded app isolated)
 - **Mobile:** Fullscreen on desktop; constrained height on mobile for scrollable layout
 - **Analytics:** External tool sees its own traffic; Decidim doesn't track internal navigation
-- **Security:** Embedded content runs in sandboxed iframe; no access to Decidim cookies or session
+- **Security:** It is recommended to load embedded content in a sandboxed iframe and/or restrict allowed `src` origins to limit access to Decidim cookies or session; admins must configure these protections according to their security requirements.
 - **Performance:** Iframe content loads asynchronously; doesn't block Decidim page rendering
 - **Limitation:** Users cannot access Decidim context from embedded tool (no single sign-on bridge)
 

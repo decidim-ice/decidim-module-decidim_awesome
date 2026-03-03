@@ -31,7 +31,7 @@ end
 - **Clearing:** Users can manually delete localStorage via browser settings; autosaved entries are cleared when the corresponding questionnaire is answered/submitted
 - **Security:** Data not encrypted; only use for non-sensitive form fields. Do not auto-save passwords or tokens.
 - **Performance:** Negligible impact; localStorage operations are synchronous and fast
-- **Compatibility:** Works on all modern browsers; gracefully degrades on private browsing mode (no persistence)
+- **Compatibility:** Works on all modern browsers. In private/incognito browsing modes, localStorage may be restricted or non-persistent, so auto-save may be unavailable or may not retain data between sessions depending on the browser.
 - **GDPR:** LocalStorage is participant device data; consider privacy policy implications
 
 ![Auto save in forms](../../examples/auto-save.gif)
@@ -63,7 +63,12 @@ end
 - **Default behavior:** Disabled by default (timezone selector hidden from user account settings)
 - **Admin control:** No
 - **User setting:** Stored in user profile; applied globally across all pages and emails when user is logged in or receives emails
-- **Defaults:** Falls back to browser timezone detection or organization default if not explicitly set
+- **Defaults:** Falls back to the organization default timezone if not explicitly set
+- **Display:** All dates and times are rendered on the server in the user's timezone (using the configured Rails timezone)
+- **Emails:** User timezone is applied when rendering event notifications and deadlines in emails
+- **API:** User timezone is available in GraphQL/REST API for external integrations
+- **Performance:** Minimal; timezone lookup is cached in the session and applied server-side
+- **Compatibility:** Works across browsers and email clients; daylight saving time transitions are handled by the server-side timezone library
 
 ![User custom timezone](../../examples/user_timezone.png)
 
@@ -97,7 +102,7 @@ end
 - **Default behavior:** Disabled by default (no mandatory verification unless admin configures)
 - **Admin control:** Yes; admins can set requirements using scope restrictions (see [Global mechanisms](global-mechanisms.md))
 - **Enforcement:** Checked at access time; unverified users see "Verify account" prompt with clear next steps
-- **Exemptions:** Scoped admins and staff can bypass checks only in the admin panel.
+- **Exemptions:** Mandatory checks are only skipped for controllers/components explicitly allowed by configuration or when no requirements are configured; admins and staff are subject to the same checks.
 - **Compatibility:** Works with all participation types (proposals, surveys, comments)
 
 ![Mandatory verifications admin](../../examples/forced_verifications_admin.png)
@@ -174,10 +179,10 @@ end
 
 - **Mechanism:** Browser performs proof-of-work computation (adjustable difficulty) before form submission
 - **Difficulty:** Configurable admin setting; higher = more spam resistance but slower registration (test 2-5 second target)
-- **Performance:** CPU-bound on client; zero server overhead. Modern browsers can solve in <5 seconds.
+- **Performance:** Primarily CPU-bound on the client; server performs lightweight verification and stamp storage/query, so overhead is modest but not zero. Modern browsers can solve in <5 seconds.
 - **Accessibility:** May impact users on older devices or mobile networks; clear progress indicator recommended
 - **Requirements:** JavaScript required; graceful degradation if disabled (show explanation and manual verification option)
-- **Exemptions:** Can whitelist certain IPs or email domains for low-friction registration
+- **Exemptions:** Whitelisting IPs or email domains is not supported in the current implementation; when enabled, all users must complete the proof-of-work.
 - **Limitations:** Ineffective against coordinated high-resource attackers; pairs well with rate limiting
 
 ![Hashcash admin config](../../examples/haschcash_admin.png)

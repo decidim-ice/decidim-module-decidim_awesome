@@ -103,9 +103,9 @@ Decidim::DecidimAwesome.configure do |config|
 end
 ```
 
-- **Operations:** Private data cleanup, old user data removal (after data export), soft-delete restoration, cache invalidation
-- **Safety:** Dry-run mode available for most operations; review affected record count before committing
-- **Automation:** Can schedule recurring cleanups (e.g., "delete data older than 90 days") if desired
+- **Operations:** Private body data cleanup for proposal extra fields (private custom fields from Tweak 2.1.2); items older than the configured expiration time are listed and can be deleted
+- **Safety:** Items are only shown for deletion after the configured expiration time (`private_data_expiration_time`); the `lock_time` config prevents immediate re-scheduling of an already-in-progress deletion
+- **Automation:** No built-in recurring scheduling; deletion is triggered manually by admins on demand
 - **Performance:** Long operations run as background jobs
 - **Validation:** Pre-flight checks prevent accidental misuse (e.g., won't allow deletion of recent proposals)
 

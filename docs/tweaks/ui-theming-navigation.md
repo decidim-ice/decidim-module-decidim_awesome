@@ -9,12 +9,12 @@ Adds configurable CSS snippets with scope control.
 #### Admin description
 
 Enables rapid branding/UX tweaks without requiring frontend developer time or redeployment.
-Concerns: CSS can break layouts if poorly tested; invalid CSS logs warnings but doesn't crash site.
+Concerns: CSS can break layouts if poorly tested. Invalid CSS/Sass entered via the admin UI is blocked by server-side syntax validation, while invalid CSS provided via an initializer will be sent to the browser as written.
 Recommend maintaining a shared CSS style guide and testing across browsers before deploying site-wide.
 
 #### Technical area
 
-- **Enabling/Disabling:** Use a Hash/default snippets to keep it available; use `:disabled` to completely remove/hide from admins
+- **Enabling/Disabling:** Use a Hash of default snippets to keep it available; use `:disabled` to completely remove/hide from admins
 
 ```ruby
 # config/initializers/awesome_defaults.rb
@@ -139,10 +139,9 @@ end
 - **Configuration:** Admin UI to define source path and target URL
 - **Types:** Internal routes (to processes, components) or external URLs
 - **Query strings:** Can strip/preserve query parameters for cleaner external links
-- **Performance:** Redirects cached; one database lookup per unique source path
-- **HTTP status:** Uses 301 (permanent) or 302 (temporary) configurable per redirect
-- **Analytics:** Target URL receives full referrer; source path not logged to external sites
-- **Conflicts:** Redirect paths cannot conflict with existing routes; admin UI prevents creation
+- **Performance:** Each 404 triggers a lookup for a matching redirect; no additional in-application caching is currently applied
+- **HTTP status:** Uses 302 (temporary redirect); not configurable per redirect
+- **Conflicts:** Redirects are only applied on 404s, so they don't override existing routes, but admins should avoid defining redirects whose source matches a working route.
 
 ![Custom redirections](../../examples/custom-redirections.png)
 
