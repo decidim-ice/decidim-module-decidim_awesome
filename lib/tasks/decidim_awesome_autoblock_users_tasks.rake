@@ -14,16 +14,17 @@ namespace :decidim_decidim_awesome do
 
       Decidim::Organization.find_each do |current_organization|
         if (current_config = organization_config(current_organization)).blank?
-          puts "\nSkipping #{current_organization.name}...\n"
+          puts "\nSkipping Organization: #{current_organization.id} - #{translated_attribute(current_organization.name)}...\n"
           next
         end
 
-        puts "\nRunning on #{current_organization.name}...\n"
+        puts "\nRunning on Organization: #{current_organization.id} - #{translated_attribute(current_organization.name)}...\n"
 
         config_data = OpenStruct.new(current_config.value || {})
         config_form = Decidim::DecidimAwesome::Admin::UsersAutoblocksConfigForm.from_model(config_data).with_context(current_organization:, current_user:)
         config_form.perform_block = perform_block
-        config_form.block_justification_message = config_form.default_block_justification_message if config_form.block_justification_message.blank?
+        block_justification_message = config_form.default_block_justification_message if config_form.block_justification_message.blank?
+        config_form.block_justification_message = translated_attribute(block_justification_message)
 
         run_command(config_form)
       end
@@ -44,15 +45,16 @@ namespace :decidim_decidim_awesome do
         end
 
         if skip_organization
-          puts "\nSkipping #{current_organization.name}...\n"
+          puts "\nSkipping Organization: #{current_organization.id} - #{translated_attribute(current_organization.name)}...\n"
           next
         end
 
-        puts "\nRunning on #{current_organization.name}...\n"
+        puts "\nRunning on Organization: #{current_organization.id} - #{translated_attribute(current_organization.name)}...\n"
 
         config_data = OpenStruct.new(current_config.value || {})
         config_form = Decidim::DecidimAwesome::Admin::UsersAutoblocksConfigForm.from_model(config_data).with_context(current_organization:, current_user:)
         config_form.perform_block = true
+        block_justification_message = config_form.default_block_justification_message if config_form.block_justification_message.blank?
         config_form.block_justification_message = config_form.default_block_justification_message if config_form.block_justification_message.blank?
 
         run_command(config_form)
