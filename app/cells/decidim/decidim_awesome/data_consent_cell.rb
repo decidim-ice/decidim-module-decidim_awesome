@@ -12,13 +12,19 @@ module Decidim
       def categories
         return @categories if defined?(@categories)
 
-        awesome = awesome_categories
+        unless valid_organization?
+          @categories = super
+          return @categories
+        end
 
-        @categories = if awesome.any?
-                        awesome
-                      else
-                        super
-                      end
+        config_categories = categories_from_config
+        awesome = awesome_categories
+        @categories =
+          if config_categories.blank?
+            super
+          else
+            awesome
+          end
       end
 
       private

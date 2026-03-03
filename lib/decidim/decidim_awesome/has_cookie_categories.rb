@@ -9,6 +9,7 @@ module Decidim
           {
             "slug" => slug,
             "mandatory" => cat[:mandatory] || false,
+            "visibility" => "default",
             "title" => default_translations_for(slug, "title"),
             "description" => default_translations_for(slug, "description"),
             "items" => (cat[:items] || []).map { |item| default_cookie_item(item) }
@@ -136,6 +137,7 @@ module Decidim
         category["title"] != default_cat["title"] ||
           category["description"] != default_cat["description"] ||
           category["mandatory"] != default_cat["mandatory"] ||
+          category["visibility"] != default_cat["visibility"] ||
           category["items"] != default_cat["items"]
       end
 

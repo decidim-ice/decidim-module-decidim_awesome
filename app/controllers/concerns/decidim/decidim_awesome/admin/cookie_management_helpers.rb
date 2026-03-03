@@ -85,7 +85,10 @@ module Decidim
         end
 
         def category_from_params
-          find_category(params[:cookie_category_slug])
+          category = find_category(params[:cookie_category_slug])
+          raise ActiveRecord::RecordNotFound unless category
+
+          category
         end
 
         def item_for_form(category_slug, item_name)

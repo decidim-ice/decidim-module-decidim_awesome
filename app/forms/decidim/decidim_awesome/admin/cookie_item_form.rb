@@ -13,6 +13,7 @@ module Decidim
         translatable_attribute :description, String
 
         validates :name, presence: true
+        validates :name, format: { with: /\A[a-zA-Z0-9_-]+\z/ }
         validates :type, inclusion: { in: ITEM_TYPES }
         validates :service, translatable_presence: true
         validates :description, translatable_presence: true
