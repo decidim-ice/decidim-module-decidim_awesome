@@ -10,10 +10,10 @@ module Decidim::DecidimAwesome
       let(:organization) { create(:organization) }
       let(:user) { create(:user, :admin, :confirmed, organization: organization) }
       let(:category_slug) { "awesome-analytics" }
-      let(:item_name) { "Decidim Analytics" }
+      let(:item_name) { "decidim_analytics" }
       let(:form_params) do
         {
-          name: "Updated Decidim Analytics",
+          name: "decidim_analytics_updated",
           type: "cookie",
           service: { en: "Updated Decidim" },
           description: { en: "Updated tracking" }
@@ -32,8 +32,9 @@ module Decidim::DecidimAwesome
               {
                 "slug" => "awesome-analytics",
                 "title" => { "en" => "Analytics" },
+                "visibility" => "default",
                 "items" => [
-                  { "name" => "Decidim Analytics", "type" => "cookie", "service" => { "en" => "Decidim" } }
+                  { "name" => "decidim_analytics", "type" => "cookie", "service" => { "en" => "Decidim" } }
                 ]
               }
             ]
@@ -51,7 +52,7 @@ module Decidim::DecidimAwesome
         it "updates the item attributes" do
           subject.call
           item = cookie_management_config.reload.value["categories"].first["items"].first
-          expect(item["name"]).to eq("Updated Decidim Analytics")
+          expect(item["name"]).to eq("decidim_analytics_updated")
           expect(item["service"]["en"]).to eq("Updated Decidim")
         end
       end

@@ -21,7 +21,7 @@ module Decidim
         awesome = awesome_categories
         @categories =
           if config_categories.blank?
-            super
+            default_decidim_categories.map { |category| normalize_category_with_i18n(category, model) }
           else
             awesome
           end

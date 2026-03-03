@@ -12,7 +12,7 @@ module Decidim::DecidimAwesome
       let(:category_slug) { "awesome-analytics" }
       let(:form_params) do
         {
-          name: "Google Awesome Analytics",
+          name: "google_awesome_analytics",
           type: "cookie",
           service: { en: "Google" },
           description: { en: "Awesome analytics tracking" }
@@ -33,6 +33,7 @@ module Decidim::DecidimAwesome
                 "title" => { "en" => "Awesome Analytics" },
                 "description" => { "en" => "Awesome analytics cookies" },
                 "mandatory" => false,
+                "visibility" => "default",
                 "items" => []
               }
             ]
@@ -62,7 +63,7 @@ module Decidim::DecidimAwesome
           category = cookie_management_config.reload.value["categories"].first
           item = category["items"].first
 
-          expect(item["name"]).to eq("Google Awesome Analytics")
+          expect(item["name"]).to eq("google_awesome_analytics")
           expect(item["type"]).to eq("cookie")
           expect(item["service"]["en"]).to eq("Google")
           expect(item["description"]["en"]).to eq("Awesome analytics tracking")
@@ -113,7 +114,7 @@ module Decidim::DecidimAwesome
             category = cookie_management_config.value["categories"].first
             category["items"] = [
               {
-                "name" => "Google Awesome Analytics",
+                "name" => "google_awesome_analytics",
                 "type" => "cookie",
                 "service" => { "en" => "Google" },
                 "description" => { "en" => "Existing awesome analytics item" }
