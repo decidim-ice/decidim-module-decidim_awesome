@@ -8,13 +8,13 @@ decidim-module-decidim_awesome/
 │   ├── api/                   # GraphQL API overrides
 │   ├── cells/                 # Cell components (view objects)
 │   ├── commands/              # Service objects for business logic
-│   ├── controllers/           # Controller overrides via Deface
+│   ├── controllers/           # Controller classes (concerns in controllers/concerns/)
 │   ├── forms/                 # Form objects
 │   ├── helpers/               # View helpers
 │   ├── jobs/                  # Background jobs
 │   ├── models/                # Model overrides
 │   ├── overrides/             # Deface template overrides
-│   ├── packs/                 # Webpacker assets (JS, CSS)
+│   ├── packs/                 # Shakapacker assets (JS, CSS)
 │   ├── permissions/           # Permission classes
 │   ├── presenters/            # Presenter/Decorator classes
 │   ├── queries/               # Query objects
@@ -31,13 +31,23 @@ decidim-module-decidim_awesome/
 │   ├── decidim/
 │   │   └── decidim_awesome/
 │   │       ├── version.rb          # Module version and Decidim compatibility
-│   │       ├── engine.rb           # Main Rails engine (public routes, migrations, assets and global initializers)
+│   │       ├── awesome.rb          # Main module file: config_accessors and autoloads
+│   │       ├── engine.rb           # Main Rails engine (public routes, assets and global initializers)
 │   │       ├── admin_engine.rb     # Admin-specific engine (admin routes and initializers)
-│   │       ├── config.rb           # Configuration singleton
+│   │       ├── config.rb           # Config class: per-organization config from DB
 │   │       ├── awesome_helpers.rb  # Core helper methods
 │   │       ├── menu.rb             # Menu management
 │   │       ├── custom_fields.rb    # Custom fields functionality
-│   │       └── system_checker.rb   # System compatibility checks
+│   │       ├── system_checker.rb   # System compatibility checks
+│   │       ├── voting_manifest.rb  # Voting manifest registry
+│   │       ├── authorizer.rb       # Authorization logic
+│   │       ├── lock.rb             # Locking mechanism
+│   │       ├── request_memoizer.rb # Per-request memoization
+│   │       ├── context_analyzers.rb # Context analyzer registry
+│   │       ├── context_analyzers/  # Individual context analyzer classes
+│   │       ├── middleware/         # Rack middleware (CurrentConfig)
+│   │       ├── api/                # GraphQL type definitions
+│   │       └── test/               # Shared examples and test helpers
 │   └── tasks/                # Rake tasks
 ├── spec/                     # Test files (RSpec)
 ├── db/
@@ -50,18 +60,19 @@ decidim-module-decidim_awesome/
 ### Main Engine (`lib/decidim/decidim_awesome/engine.rb`)
 
 The main engine handles:
-- **Routes**: Public-facing routes and API endpoints
-- **Database**: Migrations loaded via `paths["db/migrate"]`
-- **Assets**: JavaScript/CSS packed via Webpacker
-- **Initializers**: Core configuration and monkey patches
+- **Routes**: Public-facing routes (required_authorizations, editor_images, form_builder_i18n)
+- **Assets**: JavaScript/CSS packed via Shakapacker (`register_assets_path`)
+- **Initializers**: Core configuration and monkey patches (concerns included via `config.to_prepare`)
+- **Middleware**: Injects `CurrentConfig` middleware for per-request config
+- **Cell view paths**: Registers cell view paths for voting components
 - **Auto-loading**: All `app/` directories are auto-loaded
 
 Key responsibilities:
-- Include Decidim::Core::VersionChecker for compatibility validation
 - Define isolated namespace `Decidim::DecidimAwesome`
-- Mount API engine for GraphQL endpoints
-- Setup i18n locale files
-- Initialize global configurations
+- Register feature-gated concerns into Decidim core classes
+- Register custom proposal component settings and exporters
+- Register voting manifests and content blocks
+- Register icons
 
 ### Admin Engine (`lib/decidim/decidim_awesome/admin_engine.rb`)
 
@@ -529,9 +540,9 @@ cd development_app && bundle exec rails s
 ## Configuration
 
 Main configuration stored in:
-- `Decidim::DecidimAwesome::Config` class
-- Stored in database via `config` model
-- Accessible throughout views/controllers
+- `Decidim::DecidimAwesome` module (`awesome.rb`) — `config_accessor` definitions with defaults
+- `Decidim::DecidimAwesome::Config` class — per-organization config resolved from DB (`AwesomeConfig` model)
+- Accessible throughout views/controllers via `awesome_config` helper
 
 ## Localization
 

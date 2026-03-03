@@ -209,7 +209,7 @@ Pull Request template should include:
      - `ui-theming-navigation.md` (Section 4.x) - UI, theming and navigation
      - `forms-surveys-verifications.md` (Section 5.x) - Forms, surveys and verifications
      - `components-integrations.md` (Section 6.x) - Components and integrations
-     - Follow the template structure in `.github/instructions/copilot.instructions.md`
+     - Follow the template structure in `.github/copilot-instructions.md`
      - Include admin description, technical area, configuration examples (true/false/:disabled)
      - Use next available section number (X.Y format)
    - **For other features**: Update `README.md` with feature description
