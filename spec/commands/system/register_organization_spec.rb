@@ -21,6 +21,7 @@ module Decidim::System
       let(:params) do
         {
           name: "Gotham City",
+          short_name: "Gotham",
           host: "decide.example.org",
           secondary_hosts: "foo.example.org\r\n\r\nbar.example.org",
           reference_prefix: "JKR",

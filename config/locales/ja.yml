@@ -583,6 +583,20 @@ ja:
           title_closed: クリックしてチャット
           title_open: チャットしてみましょう
       content_blocks:
+        awesome_process_groups:
+          active: 有効
+          all: 全て
+          all_taxonomies: 全カテゴリ
+          default_title: 参加型プロセス
+          filter_by_label: 'フィルター：'
+          max_count: 表示する要素の最大数
+          name: おすすめプロセスグループ
+          past: 過去
+          remove_filter: フィルター解除
+          results_count:
+            other: "%{count} 件のプロセスがあります"
+          status_label: 'ステータス：'
+          title: ブロックタイトル
         map:
           collapse: メニューは折りたたまれた状態で開始
           map_center: マップの中央 (緯度、経度)

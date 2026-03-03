@@ -263,12 +263,15 @@ en:
         checks:
           index:
             admin_head_tags: Awesome tags included in the admin application header
+            awesome_update_available: 'A new version is available: %{latest_version}'
+            awesome_version: Decidim Awesome version %{version}
             decidim-admin: From Admin module
             decidim-assemblies: From Assemblies module
             decidim-conferences: From Conferences module
             decidim-core: From Core module
             decidim-participatory_processes: From Participatory Processes module
             decidim-proposals: From Proposals module
+            decidim_update_available: 'A new version is available: %{latest_version}'
             decidim_version: Decidim version %{version}
             errors:
               CSS: Head does not contain the required <link> stylesheet entries. To
@@ -277,6 +280,7 @@ en:
                 To solve it, you can manually add it to your custom admin/_header.html.erb
             head_tags: Awesome tags included in the application header
             link_admins: Login into /system panel
+            view_release: View release notes
         config:
           anonymous: Non-logged users
           caution: 'NOTE: This feature heavily modifies some default behaviors that
@@ -783,6 +787,50 @@ en:
           title_closed: Click to chat!
           title_open: Let's chat!
       content_blocks:
+        awesome_process_groups:
+          active: Active
+          all: All
+          all_taxonomies: All categories
+          default_title: Participatory processes
+          filter_by_label: 'Filter by:'
+          max_count: Maximum amount of elements to show
+          name: Awesome group processes
+          past: Past
+          remove_filter: Remove filter
+          results_count:
+            one: "%{count} process found"
+            other: "%{count} processes found"
+          status_label: 'Status:'
+          title: Block title
+          upcoming: Upcoming
+        awesome_processes:
+          active_spaces: Participatory processes
+          any_group: Any group
+          group_label: Group
+          max_results: Maximum amount of elements to show
+          name: Awesome Processes
+          process_group: Restrict to process group
+          process_status: Process status filter
+          process_statuses:
+            active: Only active processes
+            all: All processes
+            past: Only past processes
+            upcoming: Only future processes
+          process_type: Type of processes
+          process_type_mixed_hint: In mixed mode, processes and groups are interleaved
+            up to the maximum amount. Processes are sorted by weight (ascending).
+            If one type runs out, the remaining slots are filled with the other.
+          process_types:
+            all: All processes and groups mixed
+            groups: Only process groups
+            processes: Only processes
+          processes: Processes
+          see_all_spaces: See all processes
+          selection_criteria: Selection criteria
+          selection_criteria_options:
+            automatic: Automatic
+            manual: Manual
+          title: Block title
         map:
           collapse: Start with collapsed menu
           map_center: Map center (Latitude, Longitude)
