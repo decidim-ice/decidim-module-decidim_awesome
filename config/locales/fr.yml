@@ -214,7 +214,7 @@ fr:
         checks:
           index:
             admin_head_tags: '"Awesome tags" (balises) inclus dans l''en-tête de l''application d''administration'
-            awesome_update_available: 'Une nouvelle version est disponible : %{latest_version}'
+            awesome_update_available: "Une nouvelle version est disponible : %{latest_version}"
             awesome_version: Version %{version} de Decidim Awesome
             decidim-admin: Depuis le module Admin
             decidim-assemblies: Depuis le module Assemblées
@@ -222,7 +222,7 @@ fr:
             decidim-core: Depuis le module coeur
             decidim-participatory_processes: Depuis le module Processus participatifs
             decidim-proposals: Depuis le module Propositions
-            decidim_update_available: 'Une nouvelle version est disponible : %{latest_version}'
+            decidim_update_available: "Une nouvelle version est disponible : %{latest_version}"
             decidim_version: Version %{version} de Decidim
             errors:
               CSS: La balise <head> ne contient pas les entrées de la feuille de style <link> requises. Pour la résoudre, vous pouvez l'ajouter manuellement à votre _head.html.erb personnalisé
@@ -296,7 +296,7 @@ fr:
               original_editor_override: Depuis la version 0.26, il est possible (pour les administrateurs seulement) de charger des images dans les éditeurs. Par conséquent, les paramètres d'image activés ici n'affectent que les éditeurs publics (ce sera toujours disponible pour l'admin).
               proposal_custom_fields: Créer des champs personnalisés pour la création de proposition qui s'appliquent uniquement à certaines parties du web public (utilisez les restrictions pour cela)
               proposal_custom_fields_example: Les données sont stockées dans un objet XML en utilisant des attributs HTML compatibles (dl,dt,dd éléments) en remplaçant le "body" dans une proposition standard.
-              proposal_custom_fields_translations: "Les libellés, le texte d’aide, les espaces réservés et les valeurs par défaut peuvent utiliser les traductions personnalisées de votre application. \nPour cela, au lieu d'utiliser une chaîne de caractères littérale, utilisez la clé i18n (elle doit contenir au moins un point).\nPar exemple :\n- \"activemodel.attributes.proposal.title au lieu de \"Titre\"\n- \"activemodel.attributes.proposition.address\" au lieu de \"Adresse\"\nOu utilisez vos propres clés en combinaison avec d'autres outils pour définir des traductions (par exemple: utiliser le module de personnalisation des termes) :\n- \"myapp.custom_fields.bio\" à la place de \"Biography\""
+              proposal_custom_fields_translations: "Les libellés, le texte d'aide, les espaces réservés et les valeurs par défaut peuvent utiliser les traductions personnalisées de votre application. \nPour cela, au lieu d'utiliser une chaîne de caractères littérale, utilisez la clé i18n (elle doit contenir au moins un point).\nPar exemple :\n- \"activemodel.attributes.proposal.title\" au lieu de \"Titre\"\n- \"activemodel.attributes.proposal.address\" au lieu de \"Adresse\"\nOu utilisez vos propres clés en combinaison avec d'autres outils pour définir des traductions (par exemple: utiliser le module de personnalisation des termes) :\n- \"myapp.custom_fields.bio\" à la place de \"Biographie\""
               proposal_private_custom_fields: Similaire aux champs publics, mais cette information ne sera pas visible publiquement (seuls les administrateurs y auront accès).
               proposal_private_custom_fields_translations: |
                 Les champs privés personnalisés sont affichés dans une section distincte avec ce texte d'information :
@@ -587,6 +587,27 @@ fr:
           title_closed: Cliquez pour ouvrir une conversation !
           title_open: Ouvrez une conversation !
       content_blocks:
+        map:
+          collapse: Démarrer avec le menu réduit
+          map_center: Centre de la carte (Latitude, Longitude)
+          map_center_help: 'Utilisez des points décimaux (c.-à-d. 41.38879, 2.15899). Laissez vide pour correspondre automatiquement à tous les marqueurs'
+          map_height: Hauteur max (px)
+          map_settings: Paramètres de la carte
+          map_zoom: Zoom (n'importe quel nombre entre 0 et 18)
+          map_zoom_help: Ne s'applique que si un centre de carte est défini
+          menu_amendments: Afficher les amendements
+          menu_meetings: Montrer les rencontres
+          menu_merge_components: Fusionner toutes les fonctionnalités du même type dans le menu
+          name: Awesome Map (Cartographie interactive)
+          show_accepted: Propositions acceptées
+          show_evaluating: Afficher les propositions en cours d'évaluation
+          show_not_answered: Afficher les propositions n'ayant pas reçu de réponses
+          show_rejected: Afficher les propositions rejetées
+          show_withdrawn: Afficher les propositions retirées
+          taxonomies: Taxonomies
+          text_settings: Paramètres de texte
+          title: Titre
+          truncate: Caractères maximum pour les descriptions des popups
         awesome_process_groups:
           active: Actifs
           all: Tous
@@ -629,27 +650,6 @@ fr:
             automatic: Automatique
             manual: Manuel
           title: Titre du bloc
-        map:
-          collapse: Démarrer avec le menu réduit
-          map_center: Centre de la carte (Latitude, Longitude)
-          map_center_help: 'Utilisez des points décimaux (c.-à-d. 41.38879, 2.15899). Laissez vide pour correspondre automatiquement à tous les marqueurs'
-          map_height: Hauteur max (px)
-          map_settings: Paramètres de la carte
-          map_zoom: Zoom (n'importe quel nombre entre 0 et 18)
-          map_zoom_help: Ne s'applique que si un centre de carte est défini
-          menu_amendments: Afficher les amendements
-          menu_meetings: Montrer les rencontres
-          menu_merge_components: Fusionner toutes les fonctionnalités du même type dans le menu
-          name: Awesome Map (Cartographie interactive)
-          show_accepted: Propositions acceptées
-          show_evaluating: Afficher les propositions en cours d'évaluation
-          show_not_answered: Afficher les propositions n'ayant pas reçu de réponses
-          show_rejected: Afficher les propositions rejetées
-          show_withdrawn: Afficher les propositions retirées
-          taxonomies: Taxonomies
-          text_settings: Paramètres de texte
-          title: Titre
-          truncate: Caractères maximum pour les descriptions des popups
       credits: Décidim Awesome %{version} · Fait avec ♥ par %{company}
       custom_fields:
         errors:

@@ -157,13 +157,19 @@ pt-BR:
         actions: Acoes
         admin_accountability:
           admin_roles:
+            admin: Super admin
             user_manager: Gerente de usuarios
           created_at: Funcao criada em
           currently_active: Atualmente ativo
           deleted_user: Usuario excluido
+          email: Email
           exports:
             button: Exportar esta busca
             export_as: Exportar como %{export_format}
+            export_format:
+              csv: CSV
+              json: JSON
+              xlsx: XLSX
             notice: O trabalho de exportacao foi colocado na fila. Voce recebera um email quando estiver pronto.
           index:
             description: Aqui voce encontrara todos os usuarios que tiveram alguma funcao na administracao de um espaco participativo. Administradores normais nao sao listados.
@@ -208,7 +214,7 @@ pt-BR:
         checks:
           index:
             admin_head_tags: Tags incriveis incluidas no cabecalho do aplicativo admin
-            awesome_update_available: 'Ha uma nova versao disponivel: %{latest_version}'
+            awesome_update_available: "Ha uma nova versao disponivel: %{latest_version}"
             awesome_version: Decidim Awesome versao %{version}
             decidim-admin: Do modulo Admin
             decidim-assemblies: Do modulo Assemblies
@@ -216,7 +222,7 @@ pt-BR:
             decidim-core: Do modulo Core
             decidim-participatory_processes: Do modulo Processos Participativos
             decidim-proposals: Do modulo Propostas
-            decidim_update_available: 'Ha uma nova versao disponivel: %{latest_version}'
+            decidim_update_available: "Ha uma nova versao disponivel: %{latest_version}"
             decidim_version: Decidim versao %{version}
             errors:
               CSS: O cabecalho nao contem as entradas <link> necessarias. Para resolver, voce pode adicionar manualmente no seu _head.html.erb personalizado
@@ -434,6 +440,7 @@ pt-BR:
             ip_addresses: Ver enderecos IP
             stamps: Ver selos Hashcash
           index:
+            bits: Bits
             created_at: Criado em
             help_html: |
               Esta pagina mostra os selos Hashcash detectados no sistema. Hashcash e um sistema de prova de trabalho que exige que os usuarios resolvam um quebra-cabeca computacional (realizado automaticamente pelo navegador) antes de poderem se cadastrar.
@@ -593,6 +600,7 @@ pt-BR:
           results_count:
             one: "%{count} processo encontrado"
             other: "%{count} processos encontrados"
+          status_label: 'Status:'
           title: Titulo do bloco
           upcoming: Proximos
         awesome_processes:
@@ -619,6 +627,7 @@ pt-BR:
           selection_criteria: Criterios de selecao
           selection_criteria_options:
             automatic: Automatico
+            manual: Manual
           title: Titulo do bloco
         map:
           collapse: Iniciar com o menu recolhido
@@ -708,6 +717,7 @@ pt-BR:
           voting_for: Meu voto em "%{proposal}" e "%{type}"
           weights:
             weight_0: Abstencao
+            weight_0_short: 'A:'
             weight_1: Vermelho
             weight_1_short: 'V:'
             weight_2: Amarelo

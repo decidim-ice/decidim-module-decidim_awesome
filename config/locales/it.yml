@@ -1,3 +1,4 @@
+---
 it:
   active_hashcash:
     submit_filter: Filtro
@@ -214,7 +215,7 @@ it:
         checks:
           index:
             admin_head_tags: Tag Awesome visualizzate nel header della sezione amministrativa
-            awesome_update_available: 'È disponibile una nuova versione: %{latest_version}'
+            awesome_update_available: "È disponibile una nuova versione: %{latest_version}"
             awesome_version: Decidim Awesome versione %{version}
             decidim-admin: Dal modulo di amministrazione
             decidim-assemblies: Dal modulo Assemblee
@@ -222,7 +223,7 @@ it:
             decidim-core: Dal modulo Core
             decidim-participatory_processes: Dal modulo Processi Partecipativi
             decidim-proposals: Da modulo Proposte
-            decidim_update_available: 'È disponibile una nuova versione: %{latest_version}'
+            decidim_update_available: "È disponibile una nuova versione: %{latest_version}"
             decidim_version: Decidim versione %{version}
             errors:
               CSS: Lo Head non contiene le voci <link> del foglio di stile richieste. Per risolverlo, puoi aggiungerlo manualmente al tuo _head.html.erb personalizzato

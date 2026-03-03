@@ -1,7 +1,0 @@
-pt:
-  activemodel:
-    attributes:
-      config:
-        intergram_chat_id: ID do Chat
-      menu:
-        url: URL

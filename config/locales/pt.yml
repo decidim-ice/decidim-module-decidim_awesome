@@ -51,6 +51,7 @@ pt:
         destination: Destino
         origin: Origem
         pass_query: Passar a string de consulta ao destino
+        status: Status
       menu:
         position: Posicao
         raw_label: Rotulo
@@ -156,13 +157,19 @@ pt:
         actions: Acoes
         admin_accountability:
           admin_roles:
+            admin: Super admin
             user_manager: Gestor de utilizadores
           created_at: Funcao criada em
           currently_active: Atualmente ativo
           deleted_user: Utilizador eliminado
+          email: Email
           exports:
             button: Exportar esta busca
             export_as: Exportar como %{export_format}
+            export_format:
+              csv: CSV
+              json: JSON
+              xlsx: XLSX
             notice: O trabalho de exportacao foi colocado na fila. Voce recebera um email quando estiver pronto.
           index:
             description: Aqui voce encontrara todos os utilizadores que tiveram alguma funcao na administracao de um espaco participativo. Administradores normais nao sao listados.
@@ -207,7 +214,7 @@ pt:
         checks:
           index:
             admin_head_tags: Tags incriveis incluidas no cabecalho do aplicativo admin
-            awesome_update_available: 'Ha uma nova versao disponivel: %{latest_version}'
+            awesome_update_available: "Ha uma nova versao disponivel: %{latest_version}"
             awesome_version: Decidim Awesome versao %{version}
             decidim-admin: Do modulo Admin
             decidim-assemblies: Do modulo Assemblies
@@ -215,7 +222,7 @@ pt:
             decidim-core: Do modulo Core
             decidim-participatory_processes: Do modulo Processos Participativos
             decidim-proposals: Do modulo Propostas
-            decidim_update_available: 'Ha uma nova versao disponivel: %{latest_version}'
+            decidim_update_available: "Ha uma nova versao disponivel: %{latest_version}"
             decidim_version: Decidim versao %{version}
             errors:
               CSS: O cabecalho nao contem as entradas <link> necessarias. Para resolver, voce pode adicionar manualmente no seu _head.html.erb personalizado
@@ -433,6 +440,7 @@ pt:
             ip_addresses: Ver enderecos IP
             stamps: Ver selos Hashcash
           index:
+            bits: Bits
             created_at: Criado em
             help_html: |
               Esta pagina mostra os selos Hashcash detectados no sistema. Hashcash e um sistema de prova de trabalho que exige que os utilizadores resolvam um quebra-cabeca computacional (realizado automaticamente pelo navegador) antes de poderem se registar.
@@ -592,6 +600,7 @@ pt:
           results_count:
             one: "%{count} processo encontrado"
             other: "%{count} processos encontrados"
+          status_label: 'Status:'
           title: Titulo do bloco
           upcoming: Proximos
         awesome_processes:
@@ -618,6 +627,7 @@ pt:
           selection_criteria: Criterios de selecao
           selection_criteria_options:
             automatic: Automatico
+            manual: Manual
           title: Titulo do bloco
         map:
           collapse: Iniciar com o menu recolhido
@@ -707,6 +717,7 @@ pt:
           voting_for: Meu voto em "%{proposal}" e "%{type}"
           weights:
             weight_0: Abstencao
+            weight_0_short: 'A:'
             weight_1: Vermelho
             weight_1_short: 'V:'
             weight_2: Amarelo
@@ -748,6 +759,7 @@ pt:
           autosaved_retrieved: Os dados deste formulario foram recuperados de uma sessao anterior
           autosaved_success: Dados salvos no armazenamento local
           drag_and_drop_image: Adicione imagens arrastando e soltando ou colando.
+          hashtags: Hashtags
           items: itens
           meetings: Reunioes
           proposals: Propostas
