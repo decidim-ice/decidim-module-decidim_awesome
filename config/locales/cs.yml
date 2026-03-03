@@ -583,6 +583,49 @@ cs:
           title_closed: Kliknutím chatujte!
           title_open: Pojďme chatovat!
       content_blocks:
+        awesome_process_groups:
+          active: Aktivní
+          all: Vše
+          all_taxonomies: Všechny kategorie
+          default_title: Participační procesy
+          filter_by_label: 'Filtrovat podle:'
+          max_count: Maximální počet prvků k zobrazení
+          name: Úžasné skupinové procesy
+          past: Uplynulé
+          remove_filter: Odstranit filtr
+          results_count:
+            one: "%{count} proces nalezen"
+            few: "%{count} procesy nalezeny"
+            many: "%{count} procesů nalezeno"
+            other: "%{count} nalezených procesů"
+          status_label: 'Stav:'
+          title: Název bloku
+          upcoming: Nadcházející
+        awesome_processes:
+          any_group: Jakákoli skupina
+          group_label: Skupina
+          max_results: Maximální počet prvků k zobrazení
+          name: Úžasné procesy
+          process_group: Omezit na skupinu procesu
+          process_status: Filtr stavu procesu
+          process_statuses:
+            active: Pouze aktivní procesy
+            all: Všechny procesy
+            past: Pouze minulé procesy
+            upcoming: Pouze budoucí procesy
+          process_type: Typ procesů
+          process_type_mixed_hint: Ve smíšeném režimu se procesy a skupiny prokládají až do maximální výše. Procesy jsou seřazeny podle hmotnosti (vzestupně). Pokud dojde k jednomu typu, zbývající sloty jsou vyplněny druhým.
+          process_types:
+            all: Všechny procesy a skupiny kombinované
+            groups: Pouze skupiny procesu
+            processes: Pouze procesy
+          processes: Procesy
+          see_all_spaces: Zobrazit všechny procesy
+          selection_criteria: Kritéria výběru
+          selection_criteria_options:
+            automatic: Automaticky
+            manual: Ručně
+          title: Název bloku
         map:
           collapse: Začít se sbaleným menu
           map_center: Střed mapy (zeměpisná šířka, zeměpisná délka)
