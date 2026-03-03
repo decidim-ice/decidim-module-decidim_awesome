@@ -16,6 +16,7 @@ This directory contains guidelines and documentation to help AI agents understan
 - [CONVENTIONS.md](./CONVENTIONS.md) - Code style and conventions
 - [TESTING.md](./TESTING.md) - Testing guidelines and practices
 - [WORKFLOW.md](./WORKFLOW.md) - Development workflow and best practices
+- [../.github/copilot-instructions.md](../.github/copilot-instructions.md) - GitHub Copilot PR review requirements (especially for documentation)
 
 ## For Code Reviews
 
@@ -25,7 +26,10 @@ When reviewing code in this repository:
 2. **Test coverage**: All new features should include specs in the `spec/` directory
 3. **Translations**: New user-facing strings must be added to `config/locales/en.yml` (base language). Other languages managed via Crowdin.
 4. **Locale files**: Validate YAML syntax using `ruby -Ku -ryaml -e "Dir['config/locales/*.yml'].each { |f| YAML.load_file(f); puts \"✓ #{f}\" }"`
-5. **Documentation**: Update `CHANGELOG.md` and `README.md` where applicable
+5. **Documentation**: 
+   - For new tweaks: Update appropriate category file in `docs/tweaks/` (see `.github/copilot-instructions.md` for template)
+   - For other features: Update `README.md`
+   - Always update `CHANGELOG.md` with PR reference
 
 ## Helpful Resources
 

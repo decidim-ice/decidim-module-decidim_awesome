@@ -121,7 +121,7 @@ DON'T do these:
 - ❌ Use hardcoded values (i18n instead)
 - ❌ Forget to update version in `version.rb` for releases
 - ❌ Create commits without clear messages
-- ❌ Forget to update README.md with feature description
+- ❌ Forget to update `docs/tweaks/` documentation for new tweaks
 - ❌ Skip screenshots for UI features
 
 ## Release Checklist
@@ -133,10 +133,12 @@ When preparing a release:
    - Decidim compatibility  
    - Features with [#PR](link) format (with descriptions)
    - Fixes with [#PR](link) format
-3. ✅ README.md updated:
+3. ✅ Documentation updated:
+   - README.md overview current
+   - For new tweaks: detailed docs in `docs/tweaks/[category].md` with admin/technical sections
    - All features described with examples
    - Screenshots included for UI features (in `examples/` folder)
-   - Usage/configuration documented
+   - Usage/configuration documented with initializer examples
 4. ✅ All tests passing
 5. ✅ All locale files valid
 6. ✅ Git tag created: `git tag v0.14.1`
