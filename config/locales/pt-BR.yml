@@ -3,11 +3,13 @@ pt-BR:
   activemodel:
     attributes:
       config:
+        additional_proposal_sortings: Opções adicionais de ordenação ativadas
         allow_images_in_full_editor: Permitir imagens no editor completo HTML
         allow_images_in_markdown_editor: Permitir imagens no editor de markdown
         allow_images_in_proposals: Permitir imagens no editor de propostas
         allow_images_in_small_editor: Permitir imagens no editor mínimo HTML
         auto_save_forms: Salvar formulários automaticamente no armazenamento local
+        force_authorization_help_text: Texto de ajuda para a pagina de autorizacao
         intergram_auto_no_response: Uma mensagem que é enviada um minuto após o usuário enviar sua primeira mensagem e nenhuma resposta foi recebida
         intergram_auto_response: Uma mensagem que é enviada imediatamente após o usuário enviar sua primeira mensagem
         intergram_chat_id: ID do Chat
@@ -19,9 +21,19 @@ pt-BR:
         intergram_title_open: Título do chat aberto
         intergram_use_floating_button: Se marcado, o bate-papo sempre é um botão em vez de um texto
         proposal_custom_fields: Campos personalizados %{id}
+        proposal_private_custom_fields: Campos personalizados privados %{id}
+        scoped_admin_styles: Estilos personalizados %{id}
         scoped_admins: Escopos de grupo de administração %{id}
         scoped_styles: Estilos personalizados %{id}
         use_markdown_editor: Usar um editor Markdown em vez do editor HTML
+        validate_body_max_caps_percent: Percentual máximo de letras maiusculas permitido no corpo
+        validate_body_max_marks_together: Número máximo de sinais consecutivos permitido no corpo
+        validate_body_min_length: Mínimo de caracteres obrigatorios no corpo
+        validate_body_start_with_caps: Forçar o corpo a começar com letra maiuscula
+        validate_title_max_caps_percent: Percentual máximo de letras maiusculas permitido no titulo
+        validate_title_max_marks_together: Número máximo de sinais consecutivos permitido no titulo
+        validate_title_min_length: Mínimo de caracteres obrigatorios no titulo
+        validate_title_start_with_caps: Forçar o titulo a começar com letra maiuscula
       constraint:
         component_id: ou especificamente em
         component_manifest: Apenas em componentes do tipo
@@ -36,62 +48,156 @@ pt-BR:
       menu:
         position: Posição
         raw_label: Rótulo
-        target: Aberto em
+        target: Abrir em
         url: URL
         visibility: Visibilidade
+      organization:
+        awesome_admins_available_authorizations: Permitir que administradores verifiquem usuarios manualmente com estas autorizações
   decidim:
     admin:
+      filters:
+        admin_accountability:
+          admin_role_type:
+            label: Tipo de funcao
+          participatory_space_type_eq:
+            label: Tipo de espaco participativo
+          role:
+            label: Funcao
+          role_type_eq:
+            label: Tipo de funcao
+        label:
+          search_field_end_date: 'Ate a data:'
+          search_field_start_date: 'Da data:'
+        search_placeholder:
+          user_name_or_user_email_cont: Buscar por nome de usuario, email
       menu:
-        decidim_awesome: Decidim incrível
+        admin_accountability: Responsabilidade administrativa
+        decidim_awesome: Decidim incrivel
     components:
       awesome_iframe:
         name: Iframe de Tela Cheia
         settings:
           global:
-            announcement: Anúncio
-            iframe: Código do iframe
-            iframe_help: 'Coloque seu código como html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. O conteúdo será sanitizado de outras tags HTML. Certifique-se de usar 100% como largura para preencher a tela.'
+            announcement: Anuncio
+            iframe: Codigo do iframe
+            iframe_help: 'Coloque seu codigo como html: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. O conteudo sera sanitizado de outras tags HTML. Certifique-se de usar 100% como largura para preencher a tela.'
             no_margins: Nenhuma margem entre o iframe e o resto da página
-            viewport_width: Limitar a largura máxima à viewport da aplicação
+            viewport_width: Limitar a largura maxima a viewport da aplicacao
           step:
-            announcement: Anúncio
-            iframe: Código do iframe
+            announcement: Anuncio
+            iframe: Codigo do iframe
       awesome_map:
-        name: Mapa Incrível
+        name: Mapa Incrivel
         settings:
           global:
-            announcement: Anúncio
+            announcement: Anuncio
             collapse: Iniciar com o menu recolhido
             map_center: Centro do Mapa (Latitude, Longitude)
             map_center_help: 'Use pontos decimais (ex: 41.38879, 2.15899). Deixe em branco para caber automaticamente em todos os marcadores'
             map_height: Altura do mapa (px)
-            map_zoom: Zoom (qualquer número entre 0 e 18)
-            map_zoom_help: Só se aplica se um centro de mapa estiver definido
+            map_zoom: Zoom (qualquer numero entre 0 e 18)
+            map_zoom_help: So se aplica se um centro de mapa estiver definido
             menu_amendments: Mostrar emendas
             menu_categories: Mostrar menu de pesquisa de categora
-            menu_meetings: Mostrar reuniões
+            menu_hashtags: Mostrar menu de busca por hashtags
+            menu_meetings: Mostrar reunioes
             menu_merge_components: Mesclar todos os componentes do mesmo tipo no menu
-            truncate: Máximo de caracteres para descrições em popup
+            truncate: Maximo de caracteres para descricoes em popup
           step:
-            announcement: Anúncio
+            announcement: Anuncio
             show_accepted: Mostrar propostas aceitas
-            show_evaluating: Mostrar propostas de avaliação
-            show_not_answered: Mostrar propostas não respondidas
+            show_evaluating: Mostrar propostas em avaliacao
+            show_not_answered: Mostrar propostas nao respondidas
             show_rejected: Mostrar propostas rejeitadas
             show_withdrawn: Mostrar propostas retiradas
+      proposals:
+        settings:
+          global:
+            awesome_voting_manifest: Tipo de apoio
+            awesome_voting_manifest_options:
+              default: Voto simples (padrao)
+              voting_cards: Votacao usando cartas coloridas
+            default_sort_order_options:
+              az: A-Z (Alfabetico)
+              supported_first: Apoiadas primeiro
+              supported_last: Apoiadas por ultimo
+              za: Z-A (Alfabetico inverso)
+            limit_pending_amendments: Permitir apenas uma emenda pendente em cada proposta.
+            sort_orders_enabled: Tipos de ordenacao ativados
+            voting_cards_box_title: Titulo para a caixa de votacao
+            voting_cards_box_title_help: O padrao e "Votar nesta proposta". Use "-" para ocultar.
+            voting_cards_instructions_help: O padrao e "Por favor, leia as regras de votacao cuidadosamente para entender como seu voto sera usado por %{organization}"
+            voting_cards_show_abstain: Adicionar opcao de abstencao
+            voting_cards_show_modal_help: Mostrar modal de instrucoes/ajuda quando o apoio for clicado
+          step:
+            default_sort_order_options:
+              az: A-Z (Alfabetico)
+              supported_first: Apoiadas primeiro
+              supported_last: Apoiadas por ultimo
+              za: Z-A (Alfabetico inverso)
     decidim_awesome:
       admin:
+        actions: Acoes
+        admin_accountability:
+          admin_roles:
+            user_manager: Gerente de usuarios
+          created_at: Funcao criada em
+          currently_active: Atualmente ativo
+          deleted_user: Usuario excluido
+          exports:
+            button: Exportar esta busca
+            export_as: Exportar como %{export_format}
+            notice: O trabalho de exportacao foi colocado na fila. Voce recebera um email quando estiver pronto.
+          index:
+            description: Aqui voce encontrara todos os usuarios que tiveram alguma funcao na administracao de um espaco participativo. Administradores normais nao sao listados.
+            global_description: Aqui voce encontrara todos os usuarios que tiveram alguma funcao global na administracao desta organizacao. Administradores de espacos participativos nao sao listados.
+            missing_users: 'NOTA: Esta lista pode nao incluir usuarios criados/removidos antes de %{date}. Isso ocorre porque a "rastreabilidade do usuario" foi introduzida no Decidim v0.24 e esta instalacao provavelmente e mais antiga.'
+            see_global: Listar administradores globais
+            see_spaces: Listar administradores de espacos participativos
+            title: Responsabilidade administrativa
+          last_login: Data do ultimo login
+          missing_info: "(informacao ausente)"
+          missing_user: Usuario nao esta no banco de dados
+          name: Nome
+          never_logged: Nunca fez login
+          participatory_space: Espaco participativo
+          removal_date: Funcao removida em
+          role: Funcao
+          roles:
+            admin: Administrador
+            collaborator: Colaborador
+            moderator: Moderador
+        admin_authorizations:
+          authorization:
+            confirm_destroy: Tem certeza de que deseja destruir esta autorizacao? Isto pode afetar o acesso do usuario a plataforma.
+            destroy: Excluir
+            granted_at: Concedido em %{date}
+            metadata: Contem metadados? %{metadata}
+          authorization_destroyed: Autorizacao excluida com sucesso.
+          authorization_not_destroyed: Nao foi possivel excluir a autorizacao!
+          authorization_transferred: 'Aviso: Houve um conflito de verificacao e a verificacao foi transferida para %{user}'
+          conflict: Ha um conflito com uma autorizacao existente
+          conflict_help_html: "Voce deve resolver o conflito com o usuario %{user} antes de poder autorizar o usuario com esta autorizacao.\n<br><br>\nUm conflito de verificacao acontece quando outro usuario tem os mesmos dados que o usuario que voce esta tentando autorizar.\nVoce pode resolver este conflito removendo a autorizacao conflitante do outro usuario ou usando dados diferentes para este usuario.\n"
+          edit:
+            authorize: Autorizar %{user} com %{name}
+            do_it_if_sure: Faca isso apenas se tiver certeza de que o usuario possui esta autorizacao.
+            force_verification: Forcar verificacao com os dados atuais
+            force_verification_help: A verificacao falhou, mas voce pode forcar se tiver certeza de que o usuario possui esta autorizacao.
+            force_verification_reason: 'Informe um motivo para forcar a verificacao:'
+            warning: 'Aviso: Ao forcar esta autorizacao, voce esta sobrescrevendo o status atual de autorizacao do usuario.'
+          user_authorized: "%{user} autorizado com sucesso com %{name}"
+          user_not_authorized: "%{user} nao pode ser autorizado com %{name}"
         checks:
           index:
-            admin_head_tags: Tags incríveis incluídas no cabeçalho do aplicativo admin
-            decidim-admin: Do módulo Admin
-            decidim-core: Do módulo Core
-            decidim-proposals: Do módulo de propostas
-            decidim_version: Decidim versão %{version}
+            admin_head_tags: Tags incriveis incluidas no cabecalho do aplicativo admin
+            decidim-admin: Do modulo Admin
+            decidim-core: Do modulo Core
+            decidim-proposals: Do modulo Propostas
+            decidim_version: Decidim versao %{version}
             errors:
-              CSS: O cabeçalho não contém as entradas de folha de estilo <link> necessárias. Para resolvê-lo, você pode adicioná-lo manualmente ao seu _head.html.erb
-              JavaScript: O cabeçalho não contém as entradas Javascript <script> necessárias. Para resolvê-lo, você pode adicioná-las manualmente ao seu custom admin/_header.html.erb
-            head_tags: Tags incríveis incluídas no cabeçalho do aplicativo
+              CSS: O cabecalho nao contem as entradas <link> necessarias. Para resolver, voce pode adicionar manualmente no seu _head.html.erb personalizado
+              JavaScript: O cabecalho nao contem as entradas <script> necessarias. Para resolver, voce pode adicionar manualmente no seu admin/_header.html.erb personalizado
+            head_tags: Tags incriveis incluidas no cabecalho do aplicativo
             image_migrations_started: O processo de migração de imagens foi iniciado com sucesso
             images_migrated: Imagens migradas para o ActiveStorage
             pending_image_migrations: |
@@ -101,24 +207,25 @@ pt-BR:
             start_image_migrations: "\U0001F449 Inicie o processo de migração agora"
             title: Checar compatibilidade do sistema
         config:
+          caution: 'NOTA: Esta funcao modifica fortemente alguns comportamentos padrao que podem levar a resultados inesperados. Use com cautela!'
           constraints:
-            add_condition: Adicionar Caso
+            add_condition: Adicionar caso
             always: Sempre
-            cannot_be_destroyed: Desculpe, isso não pode ser excluído. Essa configuração precisa de pelo menos uma restrição.
-            delete: Deletar
+            cannot_be_destroyed: Desculpe, isso nao pode ser excluido. Esta configuracao precisa de pelo menos uma restricao.
+            delete: Excluir
             edit: Editar
-            title: 'Aplicável somente nestes casos:'
+            title: 'Aplicavel somente nestes casos:'
           create_proposal_custom_field:
             error: Erro ao criar uma nova caixa de "campo personalizado"! %{error}
-            success: 'Caixa "campo personalizado" %{key} criado com sucesso'
+            success: 'Caixa "campo personalizado" %{key} criada com sucesso'
           create_scoped_admin:
-            error: Erro ao criar um novo grupo Administrador! %{error}
+            error: Erro ao criar um novo grupo de administrador! %{error}
             success: Grupo de administrador %{key} criado com sucesso
           create_scoped_style:
-            error: Erro criando uma nova caixa CSS!%{error}
+            error: Erro ao criar uma nova caixa CSS! %{error}
             success: Caixa CSS %{key} criada com sucesso
           destroy_proposal_custom_field:
-            error: Erro ao remover caixa de "campo personalizado"! %{error}
+            error: Erro ao remover a caixa de "campo personalizado"! %{error}
             success: 'Caixa "campo personalizado" %{key} removida com sucesso'
           destroy_scoped_admin:
             error: Erro ao remover grupo de administrador! %{error}
@@ -127,80 +234,117 @@ pt-BR:
             error: Erro ao remover caixa CSS! %{error}
             success: Caixa CSS %{key} removida com sucesso
           form:
-            edit_label: Renomear Título
+            additional_proposal_sortings:
+              enable_all: Habilitar todas as opcoes adicionais de ordenacao
+              help: Estas opcoes de ordenacao sao adicionais as opcoes padrao. Lembre-se de que voce pode escolher a ordem padrao nas configuracoes do componente de propostas.
+              title: Personalizar opcoes de ordenacao para a lista de propostas
+            edit_label: Renomear rotulo
             errors:
-              incorrect_css: 'CSS na caixa #%{key} é inválido'
-              incorrect_json: 'Definição JSON na caixa #%{key} é inválida'
+              incorrect_css: 'CSS na caixa #%{key} e invalido'
+              incorrect_json: 'Definicao JSON na caixa #%{key} e invalida'
             help:
               allow_images_in_full_editor: Isto adicionará um ícone para carregar imagens em todos os editores WYSIWYG com a barra de ferramentas completa habilitada.
               allow_images_in_markdown_editor: Isso permitirá que o editor de markdown carregue imagens copiando e colando ou arrastando e soltando.
               allow_images_in_proposals: Isso permitirá fazer upload de imagens no editor de propostas, disponível para qualquer usuário
               allow_images_in_small_editor: Isto adicionará um ícone para carregar imagens em todos os editores WYSIWYG com a barra de ferramentas mínima habilitada.
-              auto_save_forms: Isto usará o LocalStorage para salvar automaticamente dados introduzidos pelos usuários em pesquisas e outros formulários enquanto eles o preenchem. Os dados serão restaurados em uma visita futura com o mesmo navegador, caso o formulário não seja enviado. Se o formulário for enviado, os dados serão removidos. Se os usuários removerem seus dados de LocalStorage os dados também não serão restaurados.
-              drag_and_drop_supported: Ao carregar imagens, arraste e solte é suportado. As imagens serão enviadas para o servidor e inseridas como recursos externos (não usa codificação base64 inline).
-              intergram_about: O Intergram usa o Telegram messenger para lidar com uma widget de chat de suporte embutida no final da página.
-              intergram_config: 'Convide o <a href="https://web.telegram.org/#/im?p=@IntergramBot">bot @Intergram</a> para seu grupo ou inicie um chat diretamente com ele. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ informações</a>'
-              original_editor_override: Desde a versão 0.26, é possível (somente para administradores) enviar imagens para os editores. Portanto, as configurações de imagem aqui só afetam os editores públicos (administrador sempre terá as disponíveis).
-              proposal_custom_fields: Crie campos personalizados de proposta que se aplicam somente em certas partes da web pública (use o editor de restrições para isso)
-              proposal_custom_fields_example: Os dados são armazenados em um objeto XML usando atributos HTML compatíveis (dl, dt, dd) substituindo o "corpo" em uma proposta normal.
-              proposal_custom_fields_translations: "Titulos, texto de ajuda, espaços reservados e valores padrão podem usar traduções personalizadas de sua aplicação. \nPara isso, ao invés de usar uma string literal, use a chave i18n (ela deve conter pelo menos um ponto).\nPor exemplo:\n- \"activemodel.attributes.proposal.title\" em vez de \"Título\"\n- \"activemodel.attributes.proposal.address\" em vez de \"Endereço\"\nou use suas próprias chaves em combinação com outras ferramentas para definir traduções (por exemplo: usando o módulo Term Customizer):\n - \"meuapp.custom_fields.bio\" em vez de \"Biografia\""
-              scoped_admins: Promover o usuário regular para administradores que só podem administrar certas partes da web pública (use o editor de restrições para isso). Note que usuários que já possuem permissões de administrador regulares serão ignorados.
-              scoped_styles: Crie CSS personalizado que se aplica somente em certas partes da web pública (use o editor de restrições para isso)
-              scoped_styles_variables: 'Você pode usar as seguintes variáveis CSS para cores personalizadas da organização:'
+              auto_save_forms: Isto usara o LocalStorage para salvar automaticamente dados introduzidos pelos usuarios em pesquisas e outros formularios enquanto eles o preenchem. Os dados serao restaurados em uma visita futura com o mesmo navegador, caso o formulario nao seja enviado. Se o formulario for enviado, os dados serao removidos. Se os usuarios removerem seus dados de LocalStorage, os dados tambem nao serao restaurados.
+              drag_and_drop_supported: Ao carregar imagens, arrastar e soltar e suportado. As imagens serao enviadas para o servidor e inseridas como recursos externos (nao usa codificacao base64 inline).
+              force_authorization_help_text: Adicione um texto personalizado para explicar por que a autorizacao e necessaria. Certifique-se tambem de adicionar um metodo de contato caso os usuarios precisem de ajuda.
+              intergram_about: O Intergram usa o Telegram messenger para lidar com um widget de chat de suporte ao vivo incorporado na parte inferior da pagina.
+              intergram_config: 'Convide o <a href="https://web.telegram.org/#/im?p=@IntergramBot">bot @Intergram</a> para seu grupo ou inicie um chat diretamente com ele. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ informacoes</a>'
+              original_editor_override: Desde a versao 0.26, e possivel (somente para administradores) enviar imagens para os editores. Portanto, as configuracoes de imagem aqui so afetam os editores publicos (administrador sempre tera as disponiveis).
+              proposal_custom_fields: Crie campos personalizados de proposta que se aplicam somente em certas partes da web publica (use o editor de restricoes para isso)
+              proposal_custom_fields_example: Os dados sao armazenados em um objeto XML usando atributos HTML compativeis (dl, dt, dd) substituindo o "corpo" em uma proposta normal.
+              proposal_custom_fields_translations: "Titulos, texto de ajuda, espacos reservados e valores padrao podem usar traducoes personalizadas de sua aplicacao. \nPara isso, ao inves de usar uma string literal, use a chave i18n (ela deve conter pelo menos um ponto).\nPor exemplo:\n- \"activemodel.attributes.proposal.title\" em vez de \"Titulo\"\n- \"activemodel.attributes.proposal.address\" em vez de \"Endereco\"\nOu use suas proprias chaves em combinacao com outras ferramentas para definir traducoes (por exemplo: usando o modulo Term Customizer):\n - \"meuapp.custom_fields.bio\" em vez de \"Biografia\""
+              proposal_private_custom_fields: Semelhante aos campos publicos, mas esta informacao nao sera divulgada publicamente (apenas administradores terao acesso).
+              proposal_private_custom_fields_translations: |
+                Campos personalizados privados sao exibidos em uma caixa distinta com este texto de informacao:
+                %{warning}
+                Este texto pode ser personalizado com uma traducao personalizada usando a chave:
+                %{key}
+              scoped_admin_styles: Esteja ciente de que ocultar coisas aqui pode tornar o administrador inutilizavel. Por favor, aja com cautela.
+              scoped_admin_styles_variables: 'Voce pode usar as seguintes variaveis CSS para cores personalizadas da organizacao:'
+              scoped_admin_styles_warning: "<strong>Aviso</strong>: Adicione aqui CSS personalizado que se aplica apenas neste administrador."
+              scoped_admins: Promova usuarios regulares a administradores que podem administrar apenas certas partes da web publica (use o editor de restricoes para isso). Note que usuarios que ja possuem permissoes de administrador regulares serao ignorados.
+              scoped_styles: Crie CSS personalizado que se aplica somente em certas partes da web publica (use o editor de restricoes para isso)
+              scoped_styles_variables: 'Voce pode usar as seguintes variaveis CSS para cores personalizadas da organizacao:'
               use_markdown_editor: Isto irá substituir o editor do Quill WYSIWYG, para usar um editor de Markdown. O texto será convertido e salvo como HTML no banco de dados.
+              validate_body_max_caps_percent: Zero nao permitira nenhuma letra maiuscula, 100 forcara a escrever tudo em maiusculas
+              validate_body_max_marks_together: 'Limitar o numero de pontos de interrogacao e exclamacao que podem ser escritos juntos. Por exemplo: se for 2, entao ''!!!'' nao sera permitido no texto'
+              validate_body_min_length: Este numero pode ser zero, o que tornara este campo efetivamente nao obrigatorio
+              validate_title_max_caps_percent: Zero nao permitira nenhuma letra maiuscula, 100 forcara a escrever tudo em maiusculas
+              validate_title_max_marks_together: 'Limitar o numero de pontos de interrogacao e exclamacao que podem ser escritos juntos. Por exemplo: se for 2, entao ''!!!'' nao sera permitido no texto'
+              validate_title_min_length: O titulo e sempre obrigatorio e este numero nao pode ser zero
+            validators:
+              body: Validacoes de entrada do usuario para o campo "corpo"
+              title: Validacoes de entrada do usuario para o campo "titulo"
           form_proposal_custom_fields:
-            delete: Deletar
+            delete: Excluir
             new: Adicionar uma nova caixa "campos personalizados"
             remove: Remover esta caixa "campos personalizados"
-            sure_to_remove: Deseja mesmo destruir essa caixa de campos?
+            sure_to_remove: Tem certeza de que deseja excluir esta caixa de campos?
           form_proposal_private_custom_fields:
-            delete: Deletar
-          form_scoped_admins:
-            delete: Deletar
-            new: Adicionar um novo grupo "Administradores com Escopos"
-            remove: Remover este grupo "Administradores com Escopos"
-            sure_to_remove: Deseja mesmo destruir esse grupo de "Administradores com Escopos"?
-          form_scoped_styles:
-            delete: Deletar
+            delete: Excluir
+            new: Adicionar uma nova caixa "campos personalizados privados"
+            remove: Remover esta caixa "campos personalizados privados"
+            sure_to_remove: Tem certeza de que deseja excluir esta caixa de campos privados?
+          form_scoped_admin_styles:
+            delete: Excluir
+            new: Adicionar uma nova caixa CSS "painel admin"
             remove: Remover esta caixa CSS
-            sure_to_remove: Deseja mesmo destruir essa caixa de CSS?
-          none: "⛔ Nunca! - Desativar qualquer outra restrição"
+            sure_to_remove: Tem certeza de que deseja remover esta caixa CSS?
+          form_scoped_admins:
+            delete: Excluir
+            new: Adicionar um novo grupo "Administradores com Escopo"
+            remove: Remover este grupo "Administradores com Escopo"
+            sure_to_remove: Tem certeza de que deseja excluir este grupo "Administradores com Escopo"?
+          form_scoped_styles:
+            delete: Excluir
+            new: Adicionar uma nova caixa CSS "frontend publico"
+            remove: Remover esta caixa CSS
+            sure_to_remove: Tem certeza de que deseja remover esta caixa CSS?
+          none: "⛔ Nunca! - Desativar qualquer outra restricao"
           process_groups: Grupos de processo
           rich_text_editor_in_public_views: 'OBSERVAÇÃO: "Editor de texto rico para os participantes" está habilitado, esta opção não será aplicada. Use os hacks dos editores ao invés disso habilite as imagens em propostas.'
           show:
             title: Ajustes para %{setting}
-            update: Configuração atualizada
-          system: Qualquer lugar exceto salas participativas
+            update: Atualizar configuracao
+          system: Em todo lugar, exceto espacos participativos
           title:
             admins: Administradores com escopo
             editors: Hacks do editor
-            livechat: Chat Ao Vivo
-            proposals: Pacotes de Propostas
-            styles: Estilos Personalizados
-            surveys: Pesquisas e Formulários
+            livechat: Chat ao vivo
+            proposal_custom_fields: 'Campos personalizados de propostas: campos publicos'
+            proposal_private_custom_fields: 'Campos personalizados de propostas: campos privados'
+            proposals: Hacks de propostas
+            scoped_admin_styles: 'Estilos personalizados: Painel admin'
+            scoped_styles: 'Estilos personalizados: Frontend publico'
+            styles: Estilos personalizados
+            surveys: Pesquisas e formularios
+            verifications: Verificacoes / Hacks de autorizacao
           update:
-            error: Erro ao atualizar configuração!%{error}
-            success: Configuração atualizada com sucesso
+            error: Erro ao atualizar configuracao! %{error}
+            success: Configuracao atualizada com sucesso
         constraints:
           create:
-            error: Erro ao criar condição de caso
-            success: Condição de caso criada com sucesso
+            error: Erro ao criar caso de condicao
+            success: Caso de condicao criado com sucesso
           destroy:
-            error: Erro removendo caso de condição
-            success: Caso de condição removido com sucesso
+            error: Erro ao remover caso de condicao
+            success: Caso de condicao removido com sucesso
           errors:
-            not_unique: A mesma condição já existe
+            not_unique: A mesma condicao ja existe
           new:
             cancel: Cancelar
-            constraint: Novo caso de condição
+            constraint: Novo caso de condicao
             save: Salvar
           show:
             cancel: Cancelar
-            constraint: Editar casos de condição
+            constraint: Editar caso de condicao
             save: Salvar
           update:
-            error: Erro ao atualizar condição de caso
-            success: Condição de caso aplicadas com sucesso
+            error: Erro ao atualizar caso de condicao
+            success: Caso de condicao atualizado com sucesso
         custom_redirects:
           create:
             error: Erro ao criar redirecionamento! %{error}
@@ -212,19 +356,19 @@ pt-BR:
             save: Salvar
             title: Editar redirecionamento
           form:
-            destination_help: Rotas absolutas (começam com "/") ou URLs externas (http://..)
-            origin_help: Apenas rotas absolutas, comece com "/"
+            destination_help: Rotas absolutas (comecam com "/") ou URLs externas (http://..)
+            origin_help: Apenas rotas absolutas, comecam com "/"
             pass_query_help: |
-              Ative esta opção se você quiser que a string de consulta seja copiada para o destino.<br>
-              Por exemplo, se você tiver configurado /my-origin => /my-destination, uma solicitação para /my-origin?locale=ca será redirecionada para "/my-destination?locale=ca".
+              Ative esta opcao se voce quiser que a string de consulta seja copiada para o destino.<br>
+              Por exemplo, se voce tiver configurado /my-origin => /my-destination, uma solicitacao para /my-origin?locale=ca sera redirecionada para "/my-destination?locale=ca".
           index:
             check_redirections: "✔ Verificar redirecionamentos"
-            confirm_destroy: Tem certeza que deseja remover este redirecionamento?
+            confirm_destroy: Tem certeza de que deseja remover este redirecionamento?
             description: |
-              Você pode definir qualquer rota (começando com <code>/</code>) para redirecionar qualquer visitante para uma URL de destino. Destino de<br>
-              pode ser um caminho absoluto (ex: <code>/processes/some-process</code>) ou comece com <code>https://</code> (ex: <code>http://decidim. rg</code>)<br><br>
-              Leve em conta que um redirecionamento só funciona se nenhuma outra rota o corresponder exatamente. Não é possível substituir as rotas originais (esta configuração é by design).<br>
-              Se não tiver certeza, use o botão de verificar redirecionamentos para testar incompatibilidades.
+              Voce pode definir qualquer rota (comecando com <code>/</code>) para redirecionar qualquer visitante para uma URL de destino.<br>
+              O destino pode ser um caminho absoluto (ex: <code>/processes/some-process</code>) ou comecar com <code>https://</code> (ex: <code>http://decidim.org</code>)<br><br>
+              Leve em conta que um redirecionamento so funciona se nenhuma outra rota corresponder. Nao e possivel substituir rotas originais (isso e por design).<br>
+              Se nao tiver certeza, use o botao de verificar redirecionamentos para testar incompatibilidades.
             edit: Editar redirecionamento
             new: Novo redirecionamento
             remove: Remover redirecionamento
@@ -232,64 +376,134 @@ pt-BR:
           new:
             save: Salvar
             title: Novo redirecionamento
-          origin_exists: A mesma origem já está configurada, por favor edite-a ao invés de criá-la novamente.
-          origin_missing: Esta origem não foi encontrada na lista
+          origin_exists: A mesma origem ja esta configurada, por favor edite-a em vez de cria-la novamente.
+          origin_missing: Esta origem nao foi encontrada na lista
           update:
             error: Erro ao atualizar redirecionamento! %{error}
             success: Redirecionamento atualizado com sucesso
+        maintenance:
+          private_data:
+            component: Espaco / Componente
+            confirm_delete: Tem certeza de que deseja excluir todos os dados privados deste recurso? Esta acao nao pode ser desfeita.
+            delete: Excluir tudo
+            destroying_private_data: Os dados privados para %{title} estao programados para serem destruídos. Verifique novamente em alguns minutos.
+            done: Concluido
+            help_html: |
+              Esta ferramenta permite excluir todos os dados privados de um determinado espaco participativo ou componente. Esta acao e irreversivel e removera todos os dados privados do banco de dados.
+              <br><br>
+              <strong>O que e considerado dado privado?</strong>
+              <br>
+              Dados privados sao quaisquer informacoes nao publicas e acessiveis apenas por administradores. Isso, no momento, inclui informacoes de campos personalizados privados.
+              <br><br>
+              <strong>O que acontece quando excluo dados privados?</strong>
+              <br>
+              Ao excluir dados privados, todas as informacoes privadas do espaco ou componente participativo selecionado serao removidas permanentemente do banco de dados. Um registro desta acao sera armazenado no sistema para fins de auditoria.
+              <br><br>
+              <strong>O que acontece com os dados publicos?</strong>
+              <br>
+              Dados publicos nao sao afetados por esta acao. Apenas dados privados serao excluidos.
+              <br><br>
+              <strong>Existe um tempo minimo de espera antes de excluir dados privados?</strong>
+              <br>
+              Sim, voce nao pode excluir dados privados se a ultima atualizacao foi ha menos de %{time_ago}. Voce pode alterar esta configuracao no arquivo inicializador.
+            items_count: Total afetado
+            last_date: Ultima atualizacao
+            no_data: Nenhum dado privado encontrado mais antigo que %{time_ago}
+            not_destroyable: Este recurso ainda nao pode ser destruido
+            removing: Removendo...
+            time_ago: "%{time} atras"
         menu:
           admins: Administradores com escopo
           custom_redirects: Redirecionamentos personalizados
           editors: Hacks do editor
-          livechat: Chat Ao Vivo
+          livechat: Chat ao vivo
           maintenance:
-            checks: Compatibilidade de sistema
+            checks: Compatibilidade do sistema
+            maintenance: Manutencao
+            private_data: Dados privados
           menu_hacks: Ajustes do menu
-          proposal_custom_fields: Campos Personalizados de Propostas
-          proposals: Pacotes de Propostas
-          styles: Estilos Personalizados
-          surveys: Pesquisas e Formulários
+          proposal_custom_fields: Campos personalizados de propostas
+          proposals: Hacks de propostas
+          styles: Estilos personalizados
+          surveys: Pesquisas e formularios
+          verifications: Verificacoes
         menu_hacks:
           create:
             error: Erro ao criar item de menu! %{error}
             success: Item de menu criado com sucesso
           destroy:
-            error: Erro ao remover item do menu! %{error}
-            success: Item de menu excluído com sucesso
+            error: Erro ao remover item de menu! %{error}
+            success: Item de menu removido com sucesso
           edit:
             save: Salvar
             title: Editar item de menu
           form:
-            label_help: Traduções não são detectadas automaticamente, certifique-se de preencher todos os campos!
+            label_help: As traducoes nao sao detectadas automaticamente, certifique-se de preencher todos os campos!
             target:
               blank: Nova janela
-              self: Na mesma janela
+              self: Mesma janela
             visibility:
-              default: Visível
+              default: Visivel
               hidden: Sempre oculto
-              logged: Visível somente para usuários logados
-              non_logged: Visível somente para usuários deslogados
+              logged: Visivel apenas para usuarios logados
+              non_logged: Visivel apenas para usuarios nao logados
+              verified_user: Visivel apenas para usuarios com autorizacao valida
           index:
-            confirm_destroy: Tem certeza que deseja remover esta customização?
+            confirm_destroy: Tem certeza de que deseja remover esta personalizacao?
             edit: Editar
+            home_content_block_menu:
+              title: Bloco de menu global na home
             menu:
-              title: Menu Principal
+              title: Menu principal
             new: Novo item
-            remove: Remover adição
-            remove_hack: Remover personalização
-            title: Menu Principal
+            remove: Remover adicao
+            remove_hack: Remover personalizacao
+            title: Menu principal
           new:
             save: Salvar
             title: Novo item de menu
           update:
             error: Erro ao atualizar item de menu! %{error}
             success: Item de menu atualizado com sucesso
-          url_exists: O mesmo URL já está configurado, por favor edite-o em vez de criá-lo novamente.
+          url_exists: O mesmo URL ja esta configurado, por favor edite-o em vez de cria-lo novamente.
+        officializations:
+          authorizations: Autorizacoes
+          verification_modal:
+            authorizations_for: Autorizacoes para %{user}
+            close: Fechar
+        proposal_custom_fields:
+          menu:
+            title: Campos publicos
+          private_body: Corpo privado
+          private_data_last_remove: Estes dados foram destruídos %{time_ago} atras.
+          private_data_last_update: Estes dados foram atualizados %{time_ago} atras.
+          proposal_private_custom_fields: Campos privados
+        scoped_admin_styles:
+          menu:
+            title: Painel admin
+        scoped_styles:
+          menu:
+            title: Frontend publico
+      admin_log:
+        component:
+          destroy_private_data: "%{user_name} destruiu %{count} itens de dados privados para %{resource_name} em %{space_name}"
+        user:
+          admin_creates_authorization: "%{user_name} verificou %{resource_name} com %{handler_name}"
+          admin_destroys_authorization: "%{user_name} destruiu a verificacao %{handler_name} em %{resource_name}"
+          admin_forces_authorization: "%{user_name} forçou a verificacao %{handler_name} em %{resource_name}. Motivo: %{reason}"
+      amendments:
+        modal:
+          current_amendment_html: <p>Voce pode <a href="%{amendment_link}">acessar a emenda atual aqui</a>.</p>
+          dismiss: Ok, entendi
+          explanation_html: |
+            <p>Atualmente, ha outra emenda sendo avaliada para esta proposta. Para criar uma nova, voce deve esperar ate que a atual seja aceita ou rejeitada.</p>
+            <p>Voce tambem pode entrar em contato com o autor desta proposta <a href="%{proposal_link}">deixando um comentario</a> e tentar acelerar a resolucao da emenda atual.</p>
+        pending_limit_reached: Desculpe, so pode haver uma emenda pendente por vez. Aguarde ate que "%{emendation}" seja aceita ou rejeitada.
       config:
         intergram:
-          auto_no_response: Parece que ninguém está disponível para responder agora. Por favor, diga-nos como podemos entrar em contato com você, e entraremos em contato assim que pudermos.
-          auto_response: Procurando o primeiro administrador disponível (Pode demorar um minuto)
-          intro_message: Olá! Como posso te ajudar?
+          auto_no_response: Parece que ninguem esta disponivel para responder agora. Por favor, diga-nos como podemos entrar em contato com voce e retornaremos assim que possivel.
+          auto_response: Procurando o primeiro admin disponivel (pode levar um minuto)
+          intro_message: Ola! Como podemos ajudar?
           title_closed: Clique para conversar!
           title_open: Vamos conversar!
       content_blocks:
@@ -298,25 +512,26 @@ pt-BR:
           map_center: Centro do Mapa (Latitude, Longitude)
           map_center_help: 'Use pontos decimais (ex: 41.38879, 2.15899). Deixe em branco para caber automaticamente em todos os marcadores'
           map_height: Altura do mapa (px)
-          map_settings: Configurações do mapa
-          map_zoom: Zoom (qualquer número entre 0 e 18)
-          map_zoom_help: Só se aplica se um centro de mapa estiver definido
+          map_settings: Configuracoes do mapa
+          map_zoom: Zoom (qualquer numero entre 0 e 18)
+          map_zoom_help: So se aplica se um centro de mapa estiver definido
           menu_amendments: Mostrar emendas
-          menu_meetings: Mostrar reuniões
+          menu_meetings: Mostrar reunioes
           menu_merge_components: Mesclar todos os componentes do mesmo tipo no menu
-          name: Mapa Incrível
+          name: Mapa Incrivel
           show_accepted: Mostrar propostas aceitas
-          show_evaluating: Mostrar propostas de avaliação
-          show_not_answered: Mostrar propostas não respondidas
+          show_evaluating: Mostrar propostas em avaliacao
+          show_not_answered: Mostrar propostas nao respondidas
           show_rejected: Mostrar propostas rejeitadas
           show_withdrawn: Mostrar propostas retiradas
-          text_settings: Configurações de texto
-          title: Título
-          truncate: Máximo de caracteres para descrições em popup
+          text_settings: Configuracoes de texto
+          title: Titulo
+          truncate: Maximo de caracteres para descricoes em popup
+      credits: Decidim Awesome %{version} · Mantido com ♥ por %{company}
       custom_fields:
         errors:
-          invalid_fields: O conteúdo não pode ser analisado, mas foi atribuído ao campo '%{field}'
-          invalid_xml: 'O conteúdo não pode ser analisado: elementos DL/DD não encontrados no XML'
+          invalid_fields: O conteudo nao pode ser analisado, mas foi atribuido ao campo '%{field}'
+          invalid_xml: 'O conteudo nao pode ser analisado: elementos DL/DD nao encontrados no XML'
       editor_images:
         create:
           error: Erro ao enviar a imagem!
@@ -324,36 +539,90 @@ pt-BR:
       map_component:
         map:
           api_not_ready: |
-            <b>Aviso:</b> Esta instalação Decidim tem a API configurada para uma complexidade máxima de <b>%{current_complexity}</b>.
-            Este componente provavelmente não funcionará sob esta configuração. Recomendamos que você configure em um inicializador
-            (por exemplo, no final do <code>config/initializers/decidim. b</code>) as seguintes linhas:<br>
+            <b>Aviso:</b> Esta instalacao Decidim tem a API configurada para uma complexidade maxima de <b>%{current_complexity}</b>.
+            Este componente provavelmente nao funcionara sob esta configuracao. Recomendamos que voce configure em um inicializador
+            (por exemplo, no final do <code>config/initializers/decidim.rb</code>) as seguintes linhas:<br>
             <br>
-            <pre># Configuração de Api
+            <pre># Configuracao da API
             Rails.application.config.to_prepare do
-              Decidim::Api::Schema. ax_complexidade = 5000
+              Decidim::Api::Schema.max_complexity = 5000
               Decidim::Api::Schema.max_depth = 50
             end</pre>
           error:
-            unavailable: O mapa está indisponível. Por favor configure a geocodificação para habilitar este componente.
+            unavailable: O mapa esta indisponivel. Configure a geocodificacao para habilitar este componente.
           show:
-            view_meeting: Ver reunião
+            view_meeting: Ver reuniao
             view_proposal: Ver proposta
+      proposal_private_custom_fields_disclosure: Esta informacao nao sera publicada
+      required_authorizations:
+        index:
+          cancel: Vou fazer isso em outro momento, %{link}.
+          granted_title: Verificacoes concedidas
+          logout: quero sair
+          missing_title: Ainda nao verificado
+          resume_title: Verificacoes pendentes
+          resume_with_method: Retomar verificacao com %{name}
+          title: Verifique sua identidade
+          verify_with_all_these_options: 'Por favor, verifique-se com todos estes metodos antes de poder acessar a plataforma:'
+          verify_with_any_of_these_options: 'Por favor, verifique-se com pelo menos uma dessas opcoes antes de poder acessar a plataforma:'
+          verify_with_method: Verificar com %{name}
+      system:
+        organizations:
+          admin_allowed_authoritzations_help_html: |
+            Administradores poderao verificar usuarios manualmente com estas autorizacoes.
+            <br>Use este recurso com cautela, pois pode levar a problemas de seguranca.
+          awesome_tweaks: Ajustes do Decidim Awesome
+      validators:
+        too_much_caps: Esta usando letras maiusculas demais (acima de %{percent}% do texto)
       voting:
         voting_cards:
+          abstained: "✔ Abstencao"
+          change_vote: Mudar meu voto
+          default_box_title: Votar nesta proposta
           modal:
             cancel: Cancelar
+            message: Seu voto sera considerado final em %{date}. Voce pode muda-lo ate la
+            proceed: Prosseguir
+            skip: Marque aqui para pular esta janela no futuro
+          vote_button: Clique para votar
+          voted: Votado
+          voting_for: Meu voto em "%{proposal}" e "%{type}"
+          weights:
+            weight_0: Abstencao
+            weight_1: Vermelho
+            weight_1_short: 'V:'
+            weight_2: Amarelo
+            weight_2_short: 'A:'
+            weight_3: Verde
+            weight_3_short: 'V:'
+    proposals:
+      admin:
+        exports:
+          awesome_private_proposals: Propostas com dados privados
+      proposals:
+        orders:
+          az: A-Z (Alfabetico)
+          supported_first: Apoiadas primeiro
+          supported_last: Apoiadas por ultimo
+          za: Z-A (Alfabetico inverso)
   layouts:
     decidim:
       decidim_awesome:
+        admin:
+          maintenance:
+            title: 'Ferramentas de manutencao: %{title}'
+            titles:
+              checks: Verificacoes de compatibilidade do sistema
+              private_data: Limpeza de dados privados
         awesome_config:
           amendments: Emendas
-          autosaved_error: O armazenamento local não é suportado no seu navegador, o formulário não pode ser salvo automaticamente.
-          autosaved_retrieved: Os dados para este formulário foram recuperados de uma sessão anterior
+          autosaved_error: O armazenamento local nao e suportado no seu navegador, o formulario nao pode ser salvo automaticamente.
+          autosaved_retrieved: Os dados deste formulario foram recuperados de uma sessao anterior
           autosaved_success: Dados salvos no armazenamento local
           categories: Categorias
-          drag_and_drop_image: Adicione imagens arrastando e soltando ou colando-as.
+          drag_and_drop_image: Adicione imagens arrastando e soltando ou colando.
           hashtags: Hashtags
           items: itens
-          meetings: Reuniões
+          meetings: Reunioes
           proposals: Propostas
-          select_deselect_all: Marcar/Desmarcar todos
+          select_deselect_all: Selecionar/deselecionar tudo

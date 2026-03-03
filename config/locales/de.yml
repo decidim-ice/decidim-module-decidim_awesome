@@ -547,11 +547,18 @@ de:
       editor_images:
         create:
           error: Fehler beim Hochladen des Bildes!
-          success: "Bild erfolgreich hochgeladen\nThis component probably won't work under this configuration. We recommend you to set up in a initializer\n(for instance at the end of the <code>config/initializers/decidim: rb</code>) the following lines:<br>\n<br>\n<pre># Api configuration\nDecidim::Api::Schema.max_complexity = 5000\nDecidim::Api::Schema.max_depth = 50</pre> "
+          success: Bild erfolgreich hochgeladen
       map_component:
         map:
           api_not_ready: |
-            <b>Warnung:</b>Bei dieser Decidim-Installation ist die API mit einer maximalen Komplexität von <b>%{current_complexity}</b> eingestellt. Diese Komponente wird unter dieser Konfiguration wahrscheinlich nicht funktionieren. Wir empfehlen, dass Sie einen Initializer mit folgendem Code einrichten (z.B. am Ende von <code>config/initializers/decidim: rb</code>):<br> <br> <pre># Api configuration Decidim::Api::Schema.max_complexity = 5000 Decidim::Api::Schema.max_depth = 50</pre>
+            <b>Warnung:</b> Diese Decidim-Installation hat die API mit einer maximalen Komplexität von <b>%{current_complexity}</b> konfiguriert.
+            Diese Komponente wird unter dieser Konfiguration wahrscheinlich nicht funktionieren. Wir empfehlen, in einem Initializer (z.B. am Ende von <code>config/initializers/decidim.rb</code>) die folgenden Zeilen zu setzen:<br>
+            <br>
+            <pre># Api configuration
+            Rails.application.config.to_prepare do
+              Decidim::Api::Schema.max_complexity = 5000
+              Decidim::Api::Schema.max_depth = 50
+            end</pre>
           error:
             unavailable: Die Karte ist nicht verfügbar. Bitte konfigurieren Sie die Geokodierung, um diese Komponente zu aktivieren.
           show:
