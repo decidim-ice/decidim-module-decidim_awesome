@@ -1,7 +1,21 @@
-<div class="form__wrapper gap-0">
-    <%= form.translated :text_field, :raw_label, class: "mb-6", help_text: t(".label_help") %>
-    <%= form.text_field :url , class: "mb-6", readonly: form.object.url.present? %>
-    <%= form.text_field :position, class: "mb-6" %>
-    <%= form.select :target, target_options, {}, class: "mb-6" %>
-    <%= form.select :visibility, visibility_options, {}, class: "mb-8" %>
+<div class="form__wrapper">
+  <div class="card pt-4">
+    <div class="card-section">
+      <div class="row column">
+        <%= form.translated :text_field, :raw_label, help_text: t(".label_help") %>
+      </div>
+      <div class="row column">
+        <%= form.text_field :url , readonly: form.object.url.present? %>
+      </div>
+      <div class="row column">
+        <%= form.text_field :position %>
+      </div>
+      <div class="row column">
+        <%= form.select :target, target_options, {} %>
+      </div>
+      <div class="row column">
+        <%= form.select :visibility, visibility_options, {} %>
+      </div>
+    </div>
+  </div>
 </div>

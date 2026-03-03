@@ -1,6 +1,26 @@
 CHANGELOG
 =========
 
+v0.14.1
+-------
+
+Compatibility:
+  - Decidim 0.31.x
+
+Features:
+  - Added version update checking from GitHub on System Compatibility page
+  - Add Process Groups Extended content block with status and taxonomy filters ([#519](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/519))
+  - Configurable Awesome Processes homepage content block ([#518](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/518))
+
+v0.14.0
+-------
+
+Compatibility:
+  - Decidim 0.31.x
+
+Features:
+  - Upgrade to Decidim v0.31
+
 v0.13.3
 -------
 
