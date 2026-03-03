@@ -12,6 +12,33 @@ describe "Visit the admin page" do
   let(:version) { version_original }
 
   before do
+    # Mock GitHub API calls for system checker helpers
+    stub_request(:get, "https://api.github.com/repos/decidim/decidim/releases")
+      .to_return(
+        status: 200,
+        body: [
+          {
+            "tag_name" => "v0.31.2",
+            "prerelease" => false,
+            "draft" => false
+          }
+        ].to_json,
+        headers: { "Content-Type" => "application/json" }
+      )
+
+    stub_request(:get, "https://api.github.com/repos/decidim-ice/decidim-module-decidim_awesome/releases")
+      .to_return(
+        status: 200,
+        body: [
+          {
+            "tag_name" => "v0.14.1",
+            "prerelease" => false,
+            "draft" => false
+          }
+        ].to_json,
+        headers: { "Content-Type" => "application/json" }
+      )
+
     allow(Decidim).to receive(:version).and_return(version)
     disabled_features.each do |feature|
       allow(Decidim::DecidimAwesome.config).to receive(feature).and_return(:disabled)
