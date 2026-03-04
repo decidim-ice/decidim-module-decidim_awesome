@@ -21,6 +21,7 @@ ignore_unused:
   - "activemodel.attributes.user.*"
   -  activemodel.attributes.organization.awesome_admins_available_authorizations
   -  activemodel.attributes.force_authorization.*
+  - activemodel.errors.models.cookie_item.attributes.name.invalid_format
   - "decidim.components.decidim_awesome.name"
   - "decidim.components.awesome_iframe.settings.*"
   - "decidim.components.awesome_map.settings.*"
@@ -33,6 +34,7 @@ ignore_unused:
   - "decidim.decidim_awesome.admin.menu.*"
   - "decidim.decidim_awesome.admin.menu_hacks.*"
   - "decidim.decidim_awesome.admin.proposal_custom_fields.*"
+  - "decidim.decidim_awesome.admin.cookie_categories.form.visibility.*"
   - "decidim.decidim_awesome.custom_fields.*"
   - "decidim.decidim_awesome.map_component.map.show.*"
   - "decidim.decidim_awesome.voting.voting_cards.*"

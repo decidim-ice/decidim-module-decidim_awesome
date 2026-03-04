@@ -210,6 +210,11 @@ module Decidim
       {}
     end
 
+    # Enables cookie consent management with customizable categories and items
+    # Admins can configure cookie categories with different visibility levels (default/hidden)
+    # and manage individual cookie items within each category
+    # Set to false to disable by default (admins can still enable it)
+    # Set to :disabled to completely remove this feature
     config_accessor :cookie_management do
       true
     end

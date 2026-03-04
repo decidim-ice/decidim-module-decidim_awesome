@@ -19,10 +19,6 @@ module Decidim
         validates :description, translatable_presence: true
         validates :visibility, inclusion: { in: VISIBILITY_STATES }
 
-        def map_model(model)
-          self.slug = model[:slug]
-        end
-
         def generate_slug_from_title
           title_text = title.values.compact.first.to_s
           words = title_text.split(/\s+/)

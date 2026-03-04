@@ -57,8 +57,8 @@ en:
         participatory_space_slug: Only in
       cookie_category:
         mandatory: Mandatory
-        total_cookies: Total cookies
         title: Category
+        total_cookies: Total cookies
         visibility: Visibility
       cookie_item:
         name: Name
@@ -89,7 +89,8 @@ en:
         cookie_item:
           attributes:
             name:
-              invalid_format: "Name can only contain letters, numbers, hyphens and underscores (no spaces)"
+              invalid_format: Name can only contain letters, numbers, hyphens and
+                underscores (no spaces)
   decidim:
     admin:
       actions:
@@ -531,6 +532,10 @@ en:
             cannot_edit_mandatory: Mandatory default categories cannot be edited
             save: Save
             title: Edit cookie category
+          form:
+            visibility:
+              default: Visible
+              hidden: Hidden
           index:
             cannot_edit_mandatory: Mandatory categories cannot be edited
             cannot_remove_default: Default categories cannot be removed
@@ -551,10 +556,6 @@ en:
           update:
             error: Error updating cookie category! %{error}
             success: Cookie category updated successfully
-          form:
-            visibility:
-              default: Visible
-              hidden: Hidden
         cookie_items:
           create:
             error: Error creating cookie item! %{error}
@@ -568,6 +569,14 @@ en:
               be edited
             save: Save
             title: Edit cookie item
+          form:
+            description_item_help: Indicates the purpose of this cookie and the information
+              it stores
+            service_item_help: This is a short description indicating where this is
+              used (for instance "This website", "Youtube embeds", "Jitsi meets",
+              etc)
+            title_item_help: You can find the cookies by using the inspector (storage
+              section). It should contain no spaces.
           index:
             back_to_categories: Back to categories
             cannot_edit_mandatory_category: Items from mandatory categories cannot
@@ -590,10 +599,6 @@ en:
           update:
             error: Error updating cookie item! %{error}
             success: Cookie item updated successfully
-          form:
-            title_item_help: "You can find the cookies by using the inspector (storage section). It should contain no spaces."
-            service_item_help: "This is a short description indicating where this is used (for instance \"This website\", \"Youtube embeds\", \"Jitsi meets\", etc)"
-            description_item_help: "Indicates the purpose of this cookie and the information it stores"
         custom_redirects:
           create:
             error: Error creating redirection! %{error}
