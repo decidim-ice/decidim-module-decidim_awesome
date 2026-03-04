@@ -276,6 +276,7 @@ en:
             decidim-assemblies: From Assemblies module
             decidim-conferences: From Conferences module
             decidim-core: From Core module
+            decidim-meetings: From Meetings module
             decidim-participatory_processes: From Participatory Processes module
             decidim-proposals: From Proposals module
             decidim_update_available: 'A new version is available: %{latest_version}'
