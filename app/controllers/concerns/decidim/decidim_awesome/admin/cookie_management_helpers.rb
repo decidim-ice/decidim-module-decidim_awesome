@@ -43,8 +43,8 @@ module Decidim
         end
 
         def visibility_options
-          MenuForm::VISIBILITY_STATES.index_by do |key|
-            I18n.t(".menu_hacks.form.visibility.#{key}", scope: "decidim.decidim_awesome.admin")
+          CookieCategoryForm::VISIBILITY_STATES.index_by do |key|
+            I18n.t(".cookie_categories.form.visibility.#{key}", scope: "decidim.decidim_awesome.admin")
           end
         end
 

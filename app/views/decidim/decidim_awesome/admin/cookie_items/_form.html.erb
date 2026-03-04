@@ -3,15 +3,18 @@
     <div class="card-section">
       <div class="row column">
         <%= form.text_field :name, class: "h-12 w-full" %>
+        <p class="help-text"><%= t(".title_item_help") %></p>
       </div>
       <div class="row column">
         <%= form.select :type, item_type_options, {}, class: "w-full" %>
       </div>
       <div class="row column">
         <%= form.translated :text_field, :service, class: "h-12 w-full" %>
+        <p class="help-text"><%= t(".service_item_help") %></p>
       </div>
       <div class="row column">
         <%= form.translated :text_area, :description, rows: 3, class: "w-full" %>
+        <p class="help-text"><%= t(".description_item_help") %></p>
       </div>
     </div>
   </div>

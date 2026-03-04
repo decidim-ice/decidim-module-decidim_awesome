@@ -57,8 +57,8 @@ en:
         participatory_space_slug: Only in
       cookie_category:
         mandatory: Mandatory
-        slug: Slug
-        title: Title
+        total_cookies: Total cookies
+        title: Category
         visibility: Visibility
       cookie_item:
         name: Name
@@ -84,6 +84,12 @@ en:
           with these authorizations
       user:
         user_time_zone: Personal timezone
+    errors:
+      models:
+        cookie_item:
+          attributes:
+            name:
+              invalid_format: "Name can only contain letters, numbers, hyphens and underscores (no spaces)"
   decidim:
     admin:
       actions:
@@ -545,6 +551,10 @@ en:
           update:
             error: Error updating cookie category! %{error}
             success: Cookie category updated successfully
+          form:
+            visibility:
+              default: Visible
+              hidden: Hidden
         cookie_items:
           create:
             error: Error creating cookie item! %{error}
@@ -572,7 +582,7 @@ en:
             new: New item
             remove: Remove item
             reset: Reset to default
-            title: Cookie items
+            title: "%{category}: Cookie items"
           new:
             cancel: Cancel
             save: Save
@@ -580,6 +590,10 @@ en:
           update:
             error: Error updating cookie item! %{error}
             success: Cookie item updated successfully
+          form:
+            title_item_help: "You can find the cookies by using the inspector (storage section). It should contain no spaces."
+            service_item_help: "This is a short description indicating where this is used (for instance \"This website\", \"Youtube embeds\", \"Jitsi meets\", etc)"
+            description_item_help: "Indicates the purpose of this cookie and the information it stores"
         custom_redirects:
           create:
             error: Error creating redirection! %{error}

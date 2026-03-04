@@ -6,15 +6,15 @@
 </div>
 
 <div class="card">
-  <div class="card-section p-4">
+  <div class="card-section">
     <div class="table-scroll decidim_awesome-form">
       <table class="table-list">
         <thead>
           <tr>
-            <th><%= t("cookie_category.slug", scope: "activemodel.attributes") %></th>
-            <th><%= t("cookie_category.mandatory", scope: "activemodel.attributes") %></th>
             <th><%= t("cookie_category.title", scope: "activemodel.attributes") %></th>
+            <th><%= t("cookie_category.mandatory", scope: "activemodel.attributes") %></th>
             <th><%= t("cookie_category.visibility", scope: "activemodel.attributes") %></th>
+            <th><%= t("cookie_category.total_cookies", scope: "activemodel.attributes") %></th>
             <th class="actions"><%= t("decidim.decidim_awesome.admin.actions") %></th>
           </tr>
         </thead>
@@ -24,7 +24,7 @@
             <% is_modified = category_modified?(category) %>
             <% is_mandatory = category["mandatory"] %>
             <tr<%= " class=cookie_category-addition" unless is_default %>>
-              <td><%= category["slug"] %></td>
+              <td><%= translated_attribute(category["title"]) %></td>
               <td>
                 <% if is_mandatory %>
                   <%= icon "check-line", class: "text-success" %>
@@ -32,8 +32,8 @@
                   <%= icon "close-line", class: "text-alert" %>
                 <% end %>
               </td>
-              <td><%= translated_attribute(category["title"]) %></td>
               <td><%= visibility_options.invert[category["visibility"]] %></td>
+              <td><%= (category["items"] || []).count %></td>
               <td class="table-list__actions">
                 <%= icon_link_to "list-check", decidim_admin_decidim_awesome.cookie_category_cookie_items_path(category["slug"]), t(".items"), class: "action-icon--preview" %>
                 <% if is_default && is_mandatory %>

@@ -145,23 +145,10 @@ module Decidim
         default_decidim_categories.find { |c| c["slug"] == slug.to_s }
       end
 
-      def category_visible?(category, user = nil)
+      def category_visible?(category, _user = nil)
         visibility = category.is_a?(Hash) ? category["visibility"] : category[:visibility]
 
-        case visibility
-        when "hidden"
-          false
-        when "logged"
-          user.present?
-        when "non_logged"
-          user.blank?
-        when "verified_user"
-          return false unless user
-
-          Decidim::Authorization.where(user: user).any? { |auth| auth.granted? && !auth.expired? }
-        else
-          true
-        end
+        visibility != "hidden"
       end
 
       def default_cookie_item?(category_slug, item_name)

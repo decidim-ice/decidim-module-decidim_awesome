@@ -6,7 +6,7 @@ module Decidim
       class CookieItemsController < DecidimAwesome::Admin::ApplicationController
         include CookieManagementHelpers
 
-        helper_method :category_from_params, :default_category?, :default_cookie_item?, :cookie_item_modified?, :item_type_options
+        helper_method :category_from_params, :default_category?, :default_cookie_item?, :cookie_item_modified?, :item_type_options, :category_title_for_breadcrumb
         alias category category_from_params
 
         before_action :set_cookie_items_breadcrumb
