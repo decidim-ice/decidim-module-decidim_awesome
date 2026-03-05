@@ -17,7 +17,6 @@ module Decidim
         CreateEditorImage.call(@form) do
           on(:ok) do |image|
             url = image.attached_uploader(:file).path
-            url = "#{request.base_url}#{url}" unless url&.start_with?("http")
             render json: { url:, message: I18n.t("decidim_awesome.editor_images.create.success", scope: "decidim") }
           end
 
