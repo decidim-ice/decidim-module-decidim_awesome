@@ -1,14 +1,14 @@
+<div class="item_show__header">
+  <h2 class="item_show__header-title">
+    <%= t(".title") %>
+    <%= link_to t(".new"), decidim_admin_decidim_awesome.new_users_autoblock_path, class: "button button__sm button__secondary ml-auto" %>
+  </h2>
+</div>
 <div class="card">
-  <div class="bg-gray-6 p-4 rounded-t">
-    <h2 class="card-title flex flex-row">
-      <%= t(".title") %>
-      <%= link_to t(".new"), decidim_admin_decidim_awesome.new_users_autoblock_path, class: "button button__secondary button__xs tiny button--title text-white" %>
-    </h2>
-  </div>
   <div class="card-section p-4">
     <p class="help-text -mt-2 mb-4"><%= t(".description").html_safe %></p>
 
-    <div class="table-scroll decidim_awesome-form">
+    <div class="table-scroll">
       <table class="table-list">
         <thead>
           <tr>
@@ -40,33 +40,34 @@
       </table>
     </div>
 
-    <% if @scores_counts.present? %>
-      <div class="card-title flex flex-row">
-        <%= link_to decidim_admin_decidim_awesome.download_report_users_autoblocks_path, class: "button button__secondary button__xs tiny button--title text-white" do %>
-        <%= t(".download_report_file") %>
+    <div class="row">
+      <% if current_rules.any? %>
+        <%= button_to t(".calculate_scores"), { action: "calculate_scores" }, form_class: "button button__secondary button__xs" %>
+      <% end %>
+
+      <% if @scores_counts.present? %>
+        <%= link_to decidim_admin_decidim_awesome.download_report_users_autoblocks_path, class: "button button__secondary button__xs m-2" do %>
+          <%= t(".download_report_file") %>
           <%= icon "download-line", class: "dropdown-filter-icon" %>
         <% end %>
-      </div>
-    <% end %>
-
-    <% if current_rules.present? %>
-      <%= decidim_form_for(
-            @config_form,
-            method: :post,
-            url: decidim_admin_decidim_awesome.detect_and_run_users_autoblocks_path,
-            html: { class: "form-defaults", id: "users_autoblocks_config" }
-          ) do |f| %>
-        <div class="card pt-4">
-          <div class="card-section">
-            <%= render partial: "config_form", locals: { form: f } %>
-          </div>
-        </div>
-
-        <div class="item__edit-sticky">
-          <div class="item__edit-sticky-container">
-            <%= f.submit t(".calculate_scores"), class: "button button__sm button__secondary", data: { confirm_message: t(".confirm_block"), perform_block_message: { "true": t(".detect_and_run"), "false": t(".calculate_scores") } } %>
-          </div>
-        </div>
       <% end %>
-    <% end %>
+    </div>
+
+    <%= decidim_form_for(
+      @config_form,
+      method: :post,
+      url: decidim_admin_decidim_awesome.detect_and_run_users_autoblocks_path,
+      html: { class: "form-defaults", id: "users_autoblocks_config" }
+    ) do |f| %>
+    <div class="card pt-4">
+      <div class="card-section">
+        <%= render partial: "config_form", locals: { form: f } %>
+      </div>
+    </div>
+  <% end %>
+
+    <div class="card">
+      <%= button_to t(".detect_and_run"), { action: "detect_and_run" }, form_class: "button button__secondary button__xs", data: { "confirm" => t(".confirm_block") } %>
+    </div>
   </div>
+</div>
