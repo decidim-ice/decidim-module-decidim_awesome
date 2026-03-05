@@ -77,6 +77,7 @@ module Decidim
 
         def detect_and_run
           @config_form = form(UsersAutoblocksConfigForm).from_params(params)
+          @config_form.perform_block = true
 
           AutoblockUsers.call(@config_form) do
             on(:ok) do |count, block_performed|
@@ -107,17 +108,7 @@ module Decidim
         end
 
         def calculate_scores
-          @config_form = form(UsersAutoblocksConfigForm).from_params(params)
-
-          AutoblockUsers.call(@config_form, perform_block: false) do
-            on(:ok) do |count|
-              flash[:notice] = I18n.t("success", count:, scope: "decidim.decidim_awesome.admin.users_autoblocks.calculate_scores")
-            end
-
-            on(:invalid) do |message|
-              flash[:alert] = I18n.t("error", error: message, scope: "decidim.decidim_awesome.admin.users_autoblocks.calculate_scores")
-            end
-          end
+          UsersAutoblockCalculateJob.perform_later(current_user)
 
           redirect_to decidim_admin_decidim_awesome.users_autoblocks_path
         end
