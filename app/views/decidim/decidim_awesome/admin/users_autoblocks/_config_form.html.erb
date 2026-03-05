@@ -1,17 +1,13 @@
-<div class="form__wrapper decidim_awesome-form">
-  <div class="card">
-    <div class="card-section gap-0">
+<div class="form__wrapper">
+  <div class="item__edit-form">
+    <div class="card">
       <div class="row column">
         <%= form.number_field :threshold, help_text: t(".threshold_config_help") %>
-  <% if @threshold_detected_cases.present? %>
-    <span class="help-text"><%= t(".threshold_config_detected_cases", count: @threshold_detected_cases) %></span>
-  <% end %>
+        <% if @threshold_detected_cases.present? %>
+          <span class="help-text"><%= t(".threshold_config_detected_cases", count: @threshold_detected_cases) %></span>
+        <% end %>
       </div>
-    </div>
-  </div>
 
-  <div class="card">
-    <div class="card-section">
       <div class="row column gap-0" data-perform-block>
         <%= form.check_box :allow_performing_block_from_a_task, help_text: t(".allow_performing_block_from_a_task_help") %>
       </div>

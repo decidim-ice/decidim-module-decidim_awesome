@@ -5,7 +5,7 @@
   </h2>
 </div>
 <div class="card">
-  <div class="card-section p-4">
+  <div class="card-section">
     <p class="help-text -mt-2 mb-4"><%= t(".description").html_safe %></p>
 
     <div class="table-scroll">
@@ -40,13 +40,13 @@
       </table>
     </div>
 
-    <div class="row">
+    <div class="row mt-4 mb-4">
       <% if current_rules.any? %>
         <%= button_to t(".calculate_scores"), { action: "calculate_scores" }, form_class: "button button__secondary button__xs" %>
       <% end %>
 
       <% if @scores_counts.present? %>
-        <%= link_to decidim_admin_decidim_awesome.download_report_users_autoblocks_path, class: "button button__secondary button__xs m-2" do %>
+        <%= link_to decidim_admin_decidim_awesome.download_report_users_autoblocks_path, class: "button button__secondary button__xs" do %>
           <%= t(".download_report_file") %>
           <%= icon "download-line", class: "dropdown-filter-icon" %>
         <% end %>
@@ -59,7 +59,7 @@
       url: decidim_admin_decidim_awesome.detect_and_run_users_autoblocks_path,
       html: { class: "form-defaults", id: "users_autoblocks_config" }
     ) do |f| %>
-    <div class="card pt-4">
+    <div class="card">
       <div class="card-section">
         <%= render partial: "config_form", locals: { form: f } %>
       </div>
