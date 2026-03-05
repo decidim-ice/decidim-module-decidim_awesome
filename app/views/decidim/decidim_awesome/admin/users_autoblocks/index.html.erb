@@ -29,7 +29,7 @@
               <td><%= item["allowlist"] %></td>
               <td><%= item["blocklist"] %></td>
               <td><%= item["weight"] %></td>
-              <td><%= @scores_counts[item["id"]] %></td>
+              <td><%= @scores_counts[item["id"]] unless @scores_counts.nil? %></td>
               <td class="table-list__actions">
                 <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_users_autoblock_path(md5(item.to_json)), t(".edit"), class: "action-icon--edit" %>
                 <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.users_autoblock_path(md5(item.to_json)), t(".delete"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
@@ -55,8 +55,8 @@
 
     <%= decidim_form_for(
       @config_form,
-      method: :post,
-      url: decidim_admin_decidim_awesome.detect_and_run_users_autoblocks_path,
+      method: :patch,
+      url: update_config_users_autoblocks_path,
       html: { class: "form-defaults", id: "users_autoblocks_config" }
     ) do |f| %>
     <div class="card">

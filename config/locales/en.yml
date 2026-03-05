@@ -86,6 +86,8 @@ en:
         perform_block: Perform users blocking
         threshold: Threshold
         detect_and_run: Detect and block users
+        success: Configuration successfully updated
+        error: Configuration could not be updated corectly.
   decidim:
     admin:
       actions:
@@ -685,7 +687,11 @@ en:
           menu:
             title: Public frontend
         users_autoblocks:
+          config:
+            success: Configuration successfully updated
+            error: Configuration could not be updated corectly.
           calculate_scores:
+            job_enqueued: Scores are being calculated right now. Come back to see the result in some minutes. You'll be able to download the calculations report file.
             error: There has been an error trying to calculate scores! %{error}
             success:
               one: Scores calculated successfully, 1 user detected. A detailed CSV

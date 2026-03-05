@@ -41,6 +41,7 @@ module Decidim
         post :migrate_images, to: "checks#migrate_images"
         resources :users_autoblocks, except: [:show] do
           collection do
+            patch :update_config
             post :detect_and_run
             post :calculate_scores
             get :download_report
