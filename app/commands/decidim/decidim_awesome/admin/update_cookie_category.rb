@@ -63,7 +63,7 @@ module Decidim
         def find_category
           @category_index = current_categories.index { |c| c["slug"].to_s == category_slug.to_s }
 
-          unless @category_index
+          if @category_index.nil?
             form.errors.add(:base, :not_found)
             return false
           end

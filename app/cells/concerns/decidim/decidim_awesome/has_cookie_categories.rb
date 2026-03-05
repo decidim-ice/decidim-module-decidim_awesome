@@ -116,12 +116,6 @@ module Decidim
         default_decidim_categories.find { |c| c["slug"] == slug.to_s }
       end
 
-      def category_visible?(category, _user = nil)
-        visibility = category.is_a?(Hash) ? category["visibility"] : category[:visibility]
-
-        visibility != "hidden"
-      end
-
       def default_cookie_item?(category_slug, item_name)
         default_cat = default_decidim_categories.find { |c| c["slug"] == category_slug.to_s }
         return false unless default_cat

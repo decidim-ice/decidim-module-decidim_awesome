@@ -49,9 +49,12 @@ module Decidim
         end
 
         def ensure_categories_initialized!
-          return unless categories_data["categories"].empty?
+          existing_slugs = current_categories.map { |c| c["slug"].to_s }
+          missing_defaults = default_decidim_categories.reject { |c| existing_slugs.include?(c["slug"].to_s) }
 
-          initialize_default_categories!
+          return if missing_defaults.empty?
+
+          save_categories!(current_categories + missing_defaults)
         end
 
         def initialize_default_categories!

@@ -27,10 +27,9 @@ module Decidim
         def call
           return broadcast(:invalid) unless find_category
 
-          if default_cookie_item?(category_slug, item_name)
-            reset_to_default
-          else
-            remove_item
+          unless remove_item
+            broadcast(:invalid)
+            return
           end
 
           save_cookie_management!
@@ -72,14 +71,9 @@ module Decidim
         end
 
         def remove_item
+          original_size = @category["items"].size
           @category["items"].reject! { |i| i["name"].to_s == item_name.to_s }
-        end
-
-        def reset_to_default
-          @category["items"].reject! { |i| i["name"].to_s == item_name.to_s }
-
-          default_item = reset_cookie_item_to_default(category_slug, item_name)
-          @category["items"] << default_item if default_item
+          @category["items"].size < original_size
         end
 
         def save_cookie_management!

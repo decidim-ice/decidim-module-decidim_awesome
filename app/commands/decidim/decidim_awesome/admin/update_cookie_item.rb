@@ -74,7 +74,7 @@ module Decidim
         def find_item
           @item_index = @category["items"].index { |i| i["name"].to_s == item_name.to_s }
 
-          unless @item_index
+          if @item_index.nil?
             form.errors.add(:base, :not_found)
             return false
           end

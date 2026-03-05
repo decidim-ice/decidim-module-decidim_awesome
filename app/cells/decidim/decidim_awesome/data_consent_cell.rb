@@ -26,7 +26,7 @@ module Decidim
 
       def awesome_categories
         all_categories = categories_from_config || []
-        visible_categories = all_categories.select { |category| category_visible?(category, current_user) }
+        visible_categories = all_categories.reject { |category| category["visibility"] == "hidden" }
         visible_categories.map { |category| normalize_category_with_i18n(category, model) }
       end
 

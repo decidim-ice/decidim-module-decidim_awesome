@@ -23,10 +23,9 @@ module Decidim
         #
         # Returns nothing.
         def call
-          if default_category?(category_slug)
-            reset_to_default
-          else
-            remove_category
+          unless remove_category
+            broadcast(:invalid)
+            return
           end
 
           save_categories!
@@ -63,14 +62,9 @@ module Decidim
         end
 
         def remove_category
+          original_size = current_categories.size
           current_categories.reject! { |c| c["slug"].to_s == category_slug.to_s }
-        end
-
-        def reset_to_default
-          current_categories.reject! { |c| c["slug"].to_s == category_slug.to_s }
-
-          default_cat = reset_category_to_default(category_slug)
-          current_categories << default_cat if default_cat
+          current_categories.size < original_size
         end
 
         def save_categories!
