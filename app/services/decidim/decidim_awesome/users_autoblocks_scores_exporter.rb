@@ -31,6 +31,9 @@ module Decidim
 
           users.find_in_batches do |group|
             group.each do |user|
+              scores = Decidim::DecidimAwesome::UserAutoblockScoresPresenter.new(user).scores
+              next if scores[:total_score].zero?
+
               attributes = BASIC_ATTRIBUTES.index_with { |attr| user.send(attr) }
               attributes.merge!(Decidim::DecidimAwesome::UserAutoblockScoresPresenter.new(user).scores)
 
