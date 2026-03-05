@@ -2,12 +2,8 @@
 
 module Decidim
   module DecidimAwesome
-    class DataConsentCell < Decidim::DataConsentCell
+    module DataConsentCellOverride
       include HasCookieCategories
-
-      def category
-        render
-      end
 
       def categories
         return @categories if defined?(@categories)

@@ -9,7 +9,7 @@ module Decidim::DecidimAwesome
     subject { described_class }
 
     it "has overrides" do
-      expect(subject.overrides.to_h.length).to eq(7)
+      expect(subject.overrides.to_h.length).to eq(6)
     end
 
     it "has 1 modified files in admin" do
@@ -29,11 +29,7 @@ module Decidim::DecidimAwesome
     end
 
     it "has 20 modified files in core" do
-      expect(subject.overrides["decidim-core"].files.length).to eq(23)
-    end
-
-    it "has 1 modified files in meetings" do
-      expect(subject.overrides["decidim-meetings"].files.length).to eq(1)
+      expect(subject.overrides["decidim-core"].files.length).to eq(22)
     end
 
     it "has 23 modified files in proposals" do

@@ -11,8 +11,6 @@ decidim-conferences:
   /app/views/decidim/conferences/admin/conferences/_form.html.erb:
     decidim-0.31.0: c8890c67fb9cb4e6602bb5e156982a2e
 decidim-core:
-  /app/views/layouts/decidim/_application.html.erb:
-    decidim-0.31.0: 854db5d20e74be86dca403b1f2815d89
   /app/cells/decidim/data_consent_cell.rb:
     decidim-0.31.0: 2ca0e1db427894a6c1ffff9de27b458e
   /app/cells/decidim/data_consent/category.erb:
@@ -58,9 +56,6 @@ decidim-core:
     decidim-0.31.0: 327d8f8b1ed1bcb08500aaabf5536ac1
   /lib/decidim/api/functions/component_list.rb:
     decidim-0.31.0: ad71401b4006bbb200ad7de064f59d1b
-decidim-meetings:
-  /app/views/decidim/meetings/layouts/live_event.html.erb:
-    decidim-0.31.0: e3f18afbc2579a2e578fcf9c38690b7d
 decidim-proposals:
   /lib/decidim/proposals/proposal_serializer.rb:
     decidim-0.31.0: eadfc45fe2e1388d579a7ffa2f87c478
