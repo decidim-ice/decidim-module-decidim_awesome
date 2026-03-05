@@ -204,7 +204,7 @@ Organize cookies into logical groups with configurable visibility and mandatory 
 
 **Default categories:** Decidim provides default categories (essential, analytics, preferences). Default categories that are marked as mandatory (typically "essential") are protected from editing and deletion to preserve core functionality. Default non-mandatory categories (e.g., analytics, preferences) can be edited. Use "Reset to default" to restore original settings. Custom categories (regardless of mandatory flag) can be fully edited or deleted.
 
-![Cookie categories management](../../examples/cookie_categories.png)
+![Cookie categories management](../../examples/cookie_category.gif)
 
 #### 4.4.2 Cookie items
 

@@ -14,7 +14,7 @@ module Decidim
 
         validates :name, presence: true
         validates :name, format: {
-          with: /\A[a-zA-Z0-9_-]+\z/,
+          with: %r{\A[a-zA-Z0-9_.:\-/]+\z},
           message: :invalid_format
         }
         validates :type, inclusion: { in: ITEM_TYPES }

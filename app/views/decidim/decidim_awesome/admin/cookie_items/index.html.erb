@@ -5,6 +5,24 @@
       <%= icon "arrow-left-line" %>
       <%= t(".back_to_categories") %>
     <% end %>
+    <div class="relative">
+      <button class="button button__sm button__transparent-secondary" data-controller="dropdown" data-target="cookie-items-dropdown">
+        <%= t "cookie_item_dropdown.button", scope: "decidim.decidim_awesome.admin.cookie_items" %>
+        <%= icon "arrow-down-s-line" %>
+        <%= icon "arrow-down-s-line" %>
+      </button>
+
+      <ul id="cookie-items-dropdown" class="dropdown dropdown__bottom" aria-hidden="true">
+        <% cookie_item_presets.each do |group, _items| %>
+          <li class="dropdown__item">
+            <%= button_to group[:label],
+                          decidim_admin_decidim_awesome.create_preset_cookie_category_cookie_items_path(params[:cookie_category_slug]),
+                          params: { preset_name: group[:key] },
+                          class: "dropdown__button" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
     <% is_default_mandatory = default_category?(params[:cookie_category_slug]) && category_from_params["mandatory"] %>
     <% unless is_default_mandatory %>
       <%= link_to t(".new"), decidim_admin_decidim_awesome.new_cookie_category_cookie_item_path(params[:cookie_category_slug]), class: "button button__sm button__secondary" %>

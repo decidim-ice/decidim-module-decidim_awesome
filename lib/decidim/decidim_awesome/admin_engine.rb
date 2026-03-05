@@ -21,7 +21,9 @@ module Decidim
         end
         resources :custom_redirects, except: [:show]
         resources :cookie_categories, except: [:show], param: :slug do
-          resources :cookie_items, except: [:show], param: :name
+          resources :cookie_items, except: [:show], param: :name do
+            post :create_preset, on: :collection
+          end
         end
         resources :config, param: :var, only: [:show, :update]
         resources :scoped_styles, param: :var, only: [:create, :destroy]
