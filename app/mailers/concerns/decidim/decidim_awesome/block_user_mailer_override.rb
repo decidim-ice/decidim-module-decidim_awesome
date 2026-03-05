@@ -11,7 +11,7 @@ module Decidim
         with_user(user) do
           @user = user
           @organization = user.organization
-          @justification = justification
+          @justification = translated_attribute(justification)
           subject = I18n.t(
             "decidim.block_user_mailer.notify.subject",
             organization_name: @organization.name,

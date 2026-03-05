@@ -9,7 +9,7 @@ module Decidim
         @admin = admin
         @detected_user_ids = detected_user_ids
         @organization = admin.organization
-        @justification = current_config["block_justification_message"]
+        @justification = translated_attribute(current_config["block_justification_message"])
         @block_performed = block_performed
         add_report_attachment
         with_user(admin) do
