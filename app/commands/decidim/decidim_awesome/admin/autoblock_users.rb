@@ -7,7 +7,6 @@ module Decidim
         include Decidim::TranslatableAttributes
 
         # Public: Initializes the command.
-        #
         def initialize(form)
           @form = form
           @users_autoblocks = AwesomeConfig.find_or_initialize_by(var: :users_autoblocks, organization: current_organization)
@@ -26,15 +25,14 @@ module Decidim
 
           save_configuration!
           calculate_scores
-          detected_users_count = detected_users.length
 
-          if detected_users_count.positive?
+          if detected_users.any?
             mark_users_for_autoblock!
             send_notification_to_admins!
             block_users! if perform_block
           end
 
-          broadcast(:ok, detected_users_count, perform_block)
+          broadcast(:ok, detected_users.count, perform_block)
         rescue StandardError => e
           broadcast(:invalid, e.message)
         end
@@ -47,17 +45,18 @@ module Decidim
 
         def save_configuration!
           current_config.value = form.to_params || {}
-          current_config.save
+          current_config.save!
         end
 
         def mark_users_for_autoblock!
-          notify_autoblock = notify_blocked_users
+          notify_autoblock = notify_blocked_users?
 
           detected_users.find_in_batches do |group|
             group.each do |user|
-              next if user.extended_data["autoblock"] && user.extended_data["notify_autoblock"] == notify_autoblock
+              extended_data = user.extended_data || {}
+              next if extended_data && user.extended_data["notify_autoblock"] == notify_autoblock
 
-              user.update_attribute(:extended_data, (user.extended_data || {}).merge("autoblock" => true, "notify_autoblock" => notify_autoblock)) # rubocop:disable Rails/SkipsModelValidations
+              user.update_attribute(:extended_data, extended_data.merge("autoblock" => true, "notify_autoblock" => notify_autoblock)) # rubocop:disable Rails/SkipsModelValidations
             end
           end
 
@@ -73,7 +72,7 @@ module Decidim
               check_user_validation!(user)
 
               block_form = Decidim::Admin::BlockUserForm.from_model(user).with_context(current_organization:, current_user:)
-              I18n.with_locale(user.locale || current_organization.default_locale || "en") do
+              I18n.with_locale(user.locale || current_organization.default_locale ) do
                 block_form.justification = message
               end
               block_form.hide = true
@@ -88,14 +87,14 @@ module Decidim
         end
 
         def block_justification_message
-          if notify_blocked_users
+          if notify_blocked_users?
             translated_attribute(current_config.value&.dig("block_justification_message"))
           else
             form.default_block_justification_message
           end
         end
 
-        def notify_blocked_users
+        def notify_blocked_users?
           return if current_config.value.blank?
 
           current_config.value["notify_blocked_users"]
@@ -111,9 +110,9 @@ module Decidim
               reason: "does_not_belong",
               details: "Autoblock"
             )
-          end
 
-          moderation.update!(report_count: moderation.report_count + 1)
+            moderation.increment!(:report_count)
+          end
         end
 
         def check_user_validation!(user)
@@ -136,8 +135,9 @@ module Decidim
           @detected_users ||= begin
             threshold = current_config.value&.dig("threshold")
             if threshold.present?
+              threshold = threshold.to_f
               user_ids = @block_data.select { |item| item[:total_score] >= threshold }.map { |item| item[:id] }
-              users_base_relation.where(organization: current_organization, id: user_ids)
+              users_base_relation.where(id: user_ids)
             else
               Decidim::User.none
             end
