@@ -557,6 +557,60 @@ en:
             error: Error updating cookie category! %{error}
             success: Cookie category updated successfully
         cookie_items:
+          cookie_item_dropdown:
+            button: Common cookie services
+          cookie_item_presets:
+            descriptions:
+              consent: Used for functionality. Lasts for 2 years, Google uses it to
+                store a user's state regarding their cookies choices. Read more at
+                How Google uses cookies
+              emoji_picker_recent: Stores your most recently selected emojis
+              graphiql_doc_explorer_open: Saves wheter you have the documentation
+                panel open when using the GraphQL API
+              graphiql_editor_flex: Saves your tab preference when using the GraphQL
+                API
+              graphiql_history_pane_open: Saves wheter you have the history panel
+                open when using the GraphQL API
+              graphiql_queries: Saves the history of your queries when using the GraphQL
+                API
+              graphiql_query: Saves your last query when using the GraphQL API
+              graphiql_tab_state: Saves your tab configuration when using the GraphQL
+                API
+              jitsi_amp: Used for Amplitude Analytics
+              jitsi_amplitude_unsent_identify: Used for Amplitude Analytics
+              jitsi_amplitude_unset: Used for Amplitude Analytics
+              jitsi_calendar_sync: Used for the calendar sync feature.
+              jitsi_callstats_username: Used to save the user session on Jitsi.
+              jitsi_dropbox: Used for the dropbox integration feature.
+              jitsi_endpoint_id: Used for communication purposes with the Jitsi server.
+              jitsi_known_domains: Save a list of known domains
+              jitsi_language: Save your language preference
+              jitsi_prejoin: Used for the prejoin screen feature.
+              jitsi_recent_list: Used for the recent list feature.
+              jitsi_settings: Used your save your Jtisi settings.
+              jitsi_video_quality: Used for the video quality persistent storage feature.
+              jitsi_virtual_background: Used for the video background feature.
+              pref: Used for functionality. YouTube uses this cookie to store information
+                such as your preferred page configuration and playback preferences
+                like explicit autoplay choices, shuffle content, and player size.
+                Read more at How Google uses cookies
+              visitor_info1_live: Used for functionality, analytics, advertising,
+                and personalization. Read more at How Google uses cookies
+              ysc: Used for security. Lasts for the duration of a user's browsing
+                session. Used to ensure that requests within a browsing session are
+                made by the user, and not by other sites. This cookie prevents malicious
+                sites from acting on behalf of a user without that user's knowledge.
+                Read more at How Google uses cookies
+            labels:
+              emoji_picker: Emoji Picker (%{count} cookie)
+              graphiql: GraphiQL API Explorer (%{count} cookie)
+              jitsi_meet: Jitsi Meet (%{count} cookie)
+              youtube_embeds: YouTube embeds (%{count} cookie)
+            services:
+              emoji_picker: This website
+              graphiql: This website
+              jitsi_meet: Jitsi Meet
+              youtube_embeds: YouTube
           create:
             error: Error creating cookie item! %{error}
             success: Cookie item created successfully
@@ -564,45 +618,6 @@ en:
             error: Error adding preset cookie item! %{error}
             not_found: Preset not found
             success: Preset cookie item added successfully
-          cookie_item_dropdown:
-            button: Common cookie services
-          cookie_item_presets:
-            labels:
-              youtube_embeds: YouTube embeds
-              jitsi_meet: Jitsi Meet
-              graphiql: GraphiQL API Explorer
-              emoji_picker: Emoji Picker
-            services:
-              youtube_embeds: YouTube
-              jitsi_meet: Jitsi Meet
-              graphiql: This website
-              emoji_picker: This website
-            descriptions:
-              visitor_info1_live: Used for functionality, analytics, advertising, and personalization. Read more at How Google uses cookies
-              ysc: "Used for security. Lasts for the duration of a user's browsing session. Used to ensure that requests within a browsing session are made by the user, and not by other sites. This cookie prevents malicious sites from acting on behalf of a user without that user's knowledge. Read more at How Google uses cookies"
-              pref: Used for functionality. YouTube uses this cookie to store information such as your preferred page configuration and playback preferences like explicit autoplay choices, shuffle content, and player size. Read more at How Google uses cookies
-              consent: "Used for functionality. Lasts for 2 years, Google uses it to store a user's state regarding their cookies choices. Read more at How Google uses cookies"
-              jitsi_amp: Used for Amplitude Analytics
-              jitsi_amplitude_unset: Used for Amplitude Analytics
-              jitsi_amplitude_unsent_identify: Used for Amplitude Analytics
-              jitsi_language: Save your language preference
-              jitsi_known_domains: Save a list of known domains
-              jitsi_settings: Used your save your Jtisi settings.
-              jitsi_calendar_sync: Used for the calendar sync feature.
-              jitsi_dropbox: Used for the dropbox integration feature.
-              jitsi_prejoin: Used for the prejoin screen feature.
-              jitsi_recent_list: Used for the recent list feature.
-              jitsi_video_quality: Used for the video quality persistent storage feature.
-              jitsi_virtual_background: Used for the video background feature.
-              jitsi_endpoint_id: Used for communication purposes with the Jitsi server.
-              jitsi_callstats_username: Used to save the user session on Jitsi.
-              graphiql_doc_explorer_open: Saves wheter you have the documentation panel open when using the GraphQL API
-              graphiql_editor_flex: Saves your tab preference when using the GraphQL API
-              graphiql_history_pane_open: Saves wheter you have the history panel open when using the GraphQL API
-              graphiql_queries: Saves the history of your queries when using the GraphQL API
-              graphiql_query: Saves your last query when using the GraphQL API
-              graphiql_tab_state: Saves your tab configuration when using the GraphQL API
-              emoji_picker_recent: Stores your most recently selected emojis
           destroy:
             error: Error removing cookie item! %{error}
             success: Cookie item removed successfully

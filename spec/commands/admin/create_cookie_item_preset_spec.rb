@@ -58,6 +58,22 @@ module Decidim::DecidimAwesome
       end
 
       describe "when invalid" do
+        context "when the preset is added twice" do
+          before { subject.call }
+
+          it "broadcasts :invalid on the second call" do
+            expect { subject.call }.to broadcast(:invalid)
+          end
+
+          it "does not create duplicate items" do
+            expect do
+              subject.call
+            end.not_to(change do
+              cookie_management_config.reload.value["categories"].first["items"].count
+            end)
+          end
+        end
+
         context "when one form is invalid" do
           let(:form_params) do
             [

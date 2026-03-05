@@ -43,10 +43,10 @@ module Decidim
         }.freeze
 
         def cookie_item_presets
-          COOKIE_ITEM_PRESETS.transform_keys do |group_key|
+          COOKIE_ITEM_PRESETS.map do |group_key, items|
             {
               key: group_key,
-              label: t("cookie_item_presets.labels.#{group_key}", scope: "decidim.decidim_awesome.admin.cookie_items")
+              label: t("cookie_item_presets.labels.#{group_key}", scope: "decidim.decidim_awesome.admin.cookie_items", count: items.count)
             }
           end
         end
