@@ -4,8 +4,8 @@ require "spec_helper"
 
 module Decidim
   module DecidimAwesome
-    describe DataConsentCell, type: :cell do
-      subject { cell("decidim/decidim_awesome/data_consent", organization, context: { current_user: user }).call }
+    describe DataConsentCellOverride, type: :cell do
+      subject { cell("decidim/data_consent", organization, context: { current_user: user }).call }
 
       let(:organization) { create(:organization) }
       let(:user) { create(:user, organization:) }

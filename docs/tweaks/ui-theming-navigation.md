@@ -222,5 +222,5 @@ Document individual cookies or localStorage items within each category.
 
 **Edit restrictions:** Items in default mandatory categories (typically "essential") are protected from editing and deletion to preserve core functionality. Items in default non-mandatory categories (e.g., analytics, preferences) and all custom categories (regardless of mandatory flag) can be fully edited or deleted.
 
-![Cookie items management](../../examples/cookie_items.png)
+![Cookie items management](../../examples/cookie_items.gif)
 
