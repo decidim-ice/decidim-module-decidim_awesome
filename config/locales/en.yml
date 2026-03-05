@@ -85,6 +85,7 @@ en:
         notify_blocked_users: Notify blocked users
         perform_block: Perform users blocking
         threshold: Threshold
+        detect_and_run: Detect and block users
   decidim:
     admin:
       actions:
@@ -694,6 +695,10 @@ en:
               zero: Scores calculated successfully. No users have been found who have
                 a sufficient score to be blocked automatically
           config_form:
+            update: Update
+            calculate_scores: Calculate scores
+            confirm_block: Are you sure to block users automatically?
+            detect_and_run: Detect and block users
             allow_performing_block_from_a_task_help: A line must be added to your
               server to perform the task. To do this schedule a `bundle exec rake
               decidim_decidim_awesome:autoblock_users:run_scheduled_block` periodically.
@@ -762,17 +767,16 @@ en:
               block_domains_list: The rule only applies to this list of domains (separated
                 by spaces)
           index:
+            update: Update configuration
             allow: Allow
             block: Block
+            detect_and_run: Detect and block users
             calculate_scores: Calculate scores
             confirm_block: Are you sure to block users automatically?
             confirm_destroy: Are you sure to remove this users autoblock rule?
             delete: Delete rule
             description: 'Block users automatically based on their activities or suspicious
-              data
-
-              '
-            detect_and_run: Detect and block users
+              data'
             download_report_file: Download calculations report file
             edit: Edit rule
             headers:
