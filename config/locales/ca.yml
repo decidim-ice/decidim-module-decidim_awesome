@@ -807,10 +807,6 @@ ca:
             al camp '%{field}'
           invalid_xml: 'No s''ha pogut analitzar el contingut: no s''han trobat els
             elements DL/DD a l''XML'
-      editor_images:
-        create:
-          error: Error en pujar la imatge!
-          success: Imatge pujada correctament
       map_component:
         map:
           api_not_ready: |

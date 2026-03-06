@@ -655,10 +655,6 @@ pt:
         errors:
           invalid_fields: O conteudo nao pode ser analisado, mas foi atribuido ao campo '%{field}'
           invalid_xml: 'O conteudo nao pode ser analisado: elementos DL/DD nao encontrados no XML'
-      editor_images:
-        create:
-          error: Erro ao enviar a imagem!
-          success: Imagem enviada com sucesso
       map_component:
         map:
           api_not_ready: |

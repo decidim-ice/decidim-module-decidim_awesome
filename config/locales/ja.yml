@@ -623,10 +623,6 @@ ja:
         errors:
           invalid_fields: コンテンツは解析できませんでしたが、フィールド '%{field}' に割り当てられました
           invalid_xml: 'コンテンツを解析できませんでした: DL/DD要素がXMLに見つかりません'
-      editor_images:
-        create:
-          error: 画像アップロードエラー
-          success: 画像は正常にアップロードされました
       map_component:
         map:
           api_not_ready: |
