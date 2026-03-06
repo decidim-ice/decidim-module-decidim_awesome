@@ -818,12 +818,14 @@ describe "Voting weights with cards" do
 
             click_on "Proceed"
 
+            expect(page).to have_css("#proposal-#{proposal.id}-vote-button")
             within "#proposal-#{proposal.id}-vote-button" do
               click_on "Red"
             end
 
             click_on "Proceed"
 
+            expect(page).to have_css("#proposal-#{proposal.id}-vote-button")
             within "#proposal-#{proposal.id}-vote-button" do
               expect(page).to have_css("a.vote-action.weight_1.voted.disabled")
               expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "1")

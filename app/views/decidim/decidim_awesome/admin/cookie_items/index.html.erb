@@ -1,0 +1,70 @@
+<div class="item_show__header">
+  <h2 class="item_show__header-title">
+    <%= t(".title", category: category_title_for_breadcrumb(params[:cookie_category_slug])) %>
+    <%= link_to decidim_admin_decidim_awesome.cookie_categories_path, class: "button button__sm button__transparent-secondary" do %>
+      <%= icon "arrow-left-line" %>
+      <%= t(".back_to_categories") %>
+    <% end %>
+    <div class="relative">
+      <button class="button button__sm button__transparent-secondary" data-controller="dropdown" data-target="cookie-items-dropdown">
+        <%= t "cookie_item_dropdown.button", scope: "decidim.decidim_awesome.admin.cookie_items" %>
+        <%= icon "arrow-down-s-line" %>
+        <%= icon "arrow-down-s-line" %>
+      </button>
+
+      <ul id="cookie-items-dropdown" class="dropdown dropdown__bottom" aria-hidden="true">
+        <% cookie_item_presets.each do |group| %>
+          <li class="dropdown__item">
+            <%= link_to decidim_admin_decidim_awesome.create_preset_cookie_category_cookie_items_path(params[:cookie_category_slug], preset_name: group[:key]), class: "dropdown__button", method: :post, data: { confirm: t("decidim.decidim_awesome.admin.cookie_items.cookie_item_presets.explanations.#{group[:key]}") } do %>
+              <%= group[:label] %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+      <%= link_to t(".new"), decidim_admin_decidim_awesome.new_cookie_category_cookie_item_path(params[:cookie_category_slug]), class: "button button__sm button__secondary" %>
+  </h2>
+</div>
+
+<div class="card">
+  <div class="card-section">
+    <div class="table-scroll decidim_awesome-form">
+      <table class="table-list">
+        <thead>
+          <tr>
+            <th><%= t("cookie_item.type", scope: "activemodel.attributes") %></th>
+            <th><%= t("cookie_item.name", scope: "activemodel.attributes") %></th>
+            <th><%= t("cookie_item.service", scope: "activemodel.attributes") %></th>
+            <th class="actions"><%= t("decidim.decidim_awesome.admin.actions") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% (category_from_params["items"] || []).each do |item| %>
+            <% is_default = default_cookie_item?(params[:cookie_category_slug], item["name"]) %>
+            <% is_modified = cookie_item_modified?(params[:cookie_category_slug], item) %>
+            <tr<%= " class=cookie_item-addition" unless is_default %>>
+              <td><%= t("cookie_item.types.#{item["type"]}", scope: "activemodel.attributes", default: item["type"]) %></td>
+              <td><%= item["name"] %></td>
+              <td><%= translated_attribute(item["service"]) %></td>
+              <td class="table-list__actions">
+                  <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_cookie_category_cookie_item_path(params[:cookie_category_slug], item["name"]), t(".edit"), class: "action-icon--edit" %>
+                  <% if is_default %>
+                    <% if is_modified %>
+                      <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.cookie_category_cookie_item_path(params[:cookie_category_slug], item["name"]), t(".reset"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_reset") } %>
+                    <% else %>
+                      <span class="action-icon">
+                        <%= icon "close-circle-line", class: "action-icon action-icon--disabled", role: "img", "aria-label": t(".cannot_remove_default") %>
+                      </span>
+                    <% end %>
+                  <% else %>
+                    <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.cookie_category_cookie_item_path(params[:cookie_category_slug], item["name"]), t(".remove"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
+                  <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <%= render "decidim/decidim_awesome/admin/cookie_categories/script_config", category: params[:cookie_category_slug] %>
+  </div>
+</div>

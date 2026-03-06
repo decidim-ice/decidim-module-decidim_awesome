@@ -1,0 +1,27 @@
+<% slug_editable = local_assigns.fetch(:slug_editable, true) %>
+<div class="form__wrapper">
+  <div class="card pt-4">
+    <div class="card-section">
+      <% if slug_editable %>
+        <%= form.hidden_field :slug %>
+      <% else %>
+        <div class="row column">
+          <%= form.text_field :slug, class: "h-12 w-full bg-gray-100 cursor-not-allowed", readonly: true %>
+          <p class="help-text"><%= t(".slug_help") %></p>
+        </div>
+      <% end %>
+      <div class="row column">
+        <%= form.check_box :mandatory %>
+      </div>
+      <div class="row column">
+        <%= form.translated :text_field, :title, class: "h-12 w-full" %>
+      </div>
+      <div class="row column">
+        <%= form.translated :text_area, :description, rows: 3, class: "w-full" %>
+      </div>
+      <div class="row column">
+        <%= form.select :visibility, visibility_options, {}, class: "mb-8" %>
+      </div>
+    </div>
+  </div>
+</div>
