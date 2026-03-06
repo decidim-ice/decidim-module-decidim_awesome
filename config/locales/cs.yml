@@ -652,10 +652,6 @@ cs:
         errors:
           invalid_fields: Obsah nemohl být analyzován, ale byl přiřazen do pole '%{field}'
           invalid_xml: 'Obsah se nepodařilo analyzovat: DL/DD prvky nebyly v XML nalezeny'
-      editor_images:
-        create:
-          error: Chyba při nahrávání obrázku!
-          success: Obrázek byl úspěšně nahrán
       map_component:
         map:
           api_not_ready: |

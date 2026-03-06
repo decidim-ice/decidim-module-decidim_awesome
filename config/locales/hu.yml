@@ -238,9 +238,6 @@ hu:
           text_settings: Szöveg beállítások
           title: Cím
           truncate: A felugró ablakban lévő leírások maximális karakterszáma
-      editor_images:
-        create:
-          error: Hiba történt a kép feltöltése közben!
       voting:
         voting_cards:
           change_vote: Szavazatom megváltoztatása

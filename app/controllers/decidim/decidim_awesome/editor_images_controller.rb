@@ -4,11 +4,8 @@ module Decidim
   module DecidimAwesome
     # This controller handles image uploads for the Tiptap editor
     class EditorImagesController < DecidimAwesome::ApplicationController
-      include FormFactory
-      include NeedsAwesomeConfig
-
-      # overwrite original rescue_from to ensure we print messages from ajax methods (update)
-      rescue_from Decidim::ActionForbidden, with: :ajax_user_has_no_permission
+      include Decidim::FormFactory
+      include Decidim::AjaxPermissionHandler
 
       def create
         enforce_permission_to(:create, :editor_image, awesome_config:)
@@ -17,22 +14,16 @@ module Decidim
         CreateEditorImage.call(@form) do
           on(:ok) do |image|
             url = image.attached_uploader(:file).path
-            render json: { url:, message: I18n.t("decidim_awesome.editor_images.create.success", scope: "decidim") }
+            render json: { url:, message: I18n.t("success", scope: "decidim.editor_images.create") }
           end
 
           on(:invalid) do |_message|
-            render json: { message: I18n.t("decidim_awesome.editor_images.create.error", scope: "decidim") }, status: :unprocessable_entity
+            render json: { message: I18n.t("error", scope: "decidim.editor_images.create") }, status: :unprocessable_entity
           end
         end
       end
 
       private
-
-      # Rescue ajax calls and print the update.js view which prints the info on the message ajax form
-      # Only if the request is AJAX, otherwise behave as Decidim standards
-      def ajax_user_has_no_permission
-        render json: { message: I18n.t("actions.unauthorized", scope: "decidim.core") }, status: :unprocessable_entity
-      end
 
       def form_values
         {
