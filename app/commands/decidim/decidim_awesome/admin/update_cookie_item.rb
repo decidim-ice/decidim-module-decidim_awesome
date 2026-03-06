@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class UpdateCookieItem < Decidim::Command
         include NeedsAwesomeConfig
+        include HasCookieCategories
 
         # Public: Initializes the command.
         #
@@ -27,6 +28,7 @@ module Decidim
           return broadcast(:invalid) if form.invalid?
           return broadcast(:invalid) unless find_category
           return broadcast(:invalid) unless find_item
+          return broadcast(:invalid) if default_item_name_changed?
           return broadcast(:invalid) if duplicate_item_name?
 
           update_item
@@ -79,6 +81,14 @@ module Decidim
             return false
           end
 
+          true
+        end
+
+        def default_item_name_changed?
+          return false if form.name == item_name
+          return false unless default_cookie_item?(category_slug, item_name)
+
+          form.errors.add(:name, :cannot_change_default_item_name)
           true
         end
 

@@ -122,26 +122,6 @@ module Decidim
 
           translated_attribute(category["title"]) || slug
         end
-
-        def prevent_mandatory_category_edit
-          category = find_category(params[:slug])
-          return unless category
-          return unless default_category?(params[:slug])
-          return unless category["mandatory"]
-
-          flash[:alert] = I18n.t("cookie_categories.edit.cannot_edit_mandatory", scope: "decidim.decidim_awesome.admin")
-          redirect_to decidim_admin_decidim_awesome.cookie_categories_path
-        end
-
-        def prevent_mandatory_category_items_edit
-          category = category_from_params
-          return unless category
-          return unless default_category?(params[:cookie_category_slug])
-          return unless category["mandatory"]
-
-          flash[:alert] = I18n.t("cookie_items.edit.cannot_edit_mandatory_category", scope: "decidim.decidim_awesome.admin")
-          redirect_to decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
-        end
       end
     end
   end

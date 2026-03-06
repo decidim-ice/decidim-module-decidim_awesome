@@ -63,8 +63,19 @@ module Decidim
 
         def remove_category
           original_size = current_categories.size
-          current_categories.reject! { |c| c["slug"].to_s == category_slug.to_s }
-          current_categories.size < original_size
+          default_cat = reset_category_to_default(category_slug)
+
+          if default_cat
+            index = current_categories.find_index { |c| c["slug"].to_s == category_slug.to_s }
+            return false unless index
+
+            current_categories[index] = default_cat
+          else
+            current_categories.reject! { |c| c["slug"].to_s == category_slug.to_s }
+            return current_categories.size < original_size
+          end
+
+          true
         end
 
         def save_categories!

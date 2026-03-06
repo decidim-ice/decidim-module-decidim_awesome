@@ -72,8 +72,19 @@ module Decidim
 
         def remove_item
           original_size = @category["items"].size
-          @category["items"].reject! { |i| i["name"].to_s == item_name.to_s }
-          @category["items"].size < original_size
+          default_item = reset_cookie_item_to_default(category_slug, item_name)
+
+          if default_item
+            index = @category["items"].find_index { |i| i["name"].to_s == item_name.to_s }
+            return false unless index
+
+            @category["items"][index] = default_item
+          else
+            @category["items"].reject! { |i| i["name"].to_s == item_name.to_s }
+            return @category["items"].size < original_size
+          end
+
+          true
         end
 
         def save_cookie_management!

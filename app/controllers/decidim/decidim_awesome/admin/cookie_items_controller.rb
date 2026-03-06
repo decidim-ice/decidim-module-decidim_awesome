@@ -11,8 +11,6 @@ module Decidim
                       :cookie_item_presets
         alias category category_from_params
 
-        before_action :set_cookie_items_breadcrumb
-        before_action :prevent_mandatory_category_items_edit, only: [:edit, :update, :destroy, :new, :create, :create_preset]
         before_action do
           enforce_permission_to :edit_config, :cookie_management
         end

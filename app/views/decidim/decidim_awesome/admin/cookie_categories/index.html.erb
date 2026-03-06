@@ -36,13 +36,7 @@
               <td><%= (category["items"] || []).count %></td>
               <td class="table-list__actions">
                 <%= icon_link_to "list-check", decidim_admin_decidim_awesome.cookie_category_cookie_items_path(category["slug"]), t(".items"), class: "action-icon--preview" %>
-                <% if is_default && is_mandatory %>
-                  <span class="action-icon">
-                    <%= icon "pencil-line", class: "action-icon action-icon--disabled", role: "img", "aria-label": t(".cannot_edit_mandatory") %>
-                  </span>
-                <% else %>
-                  <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_cookie_category_path(category["slug"]), t(".edit"), class: "action-icon--edit" %>
-                <% end %>
+                <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_cookie_category_path(category["slug"]), t(".edit"), class: "action-icon--edit" %>
                 <% if is_default %>
                   <% if is_modified %>
                     <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.cookie_category_path(category["slug"]), t(".reset"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_reset") } %>

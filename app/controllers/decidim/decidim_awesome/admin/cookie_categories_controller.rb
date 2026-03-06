@@ -9,7 +9,6 @@ module Decidim
         helper_method :current_categories, :visibility_options, :default_category?, :category_modified?
 
         before_action :set_cookie_management_breadcrumb
-        before_action :prevent_mandatory_category_edit, only: [:edit, :update]
         before_action do
           enforce_permission_to :edit_config, :cookie_management
         end
