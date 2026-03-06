@@ -397,6 +397,20 @@ it:
           update:
             error: Errore nell'aggiornamento della condizione
             success: Condizione aggiornata con successo
+        cookie_items:
+          cookie_item_presets:
+            explanations:
+              cloudflare_turnstile: "Aggiungi questi cookie quando Cloudflare Turnstile e abilitato per proteggere i moduli da abusi e traffico automatizzato. Supportano il rilevamento dei bot, la validazione della sessione e la continuita della challenge.\n\nCategoria consigliata: Essenziale"
+            descriptions:
+              turnstile_cf_bm: Aiuta Cloudflare a rilevare e mitigare il traffico automatizzato.
+              turnstile_cfuvid: Aiuta Cloudflare a distinguere i singoli utenti che condividono lo stesso indirizzo IP.
+              turnstile_cf_clearance: Memorizza la prova che un visitatore ha superato una precedente challenge di sicurezza.
+            labels:
+              cloudflare_turnstile:
+                one: "Cloudflare Turnstile (%{count} cookie)"
+                other: "Cloudflare Turnstile (%{count} cookie)"
+            services:
+              cloudflare_turnstile: Cloudflare Turnstile
         custom_redirects:
           create:
             error: Errore nella creazione del reindirizzamento! %{error}

@@ -399,6 +399,20 @@ fr:
           update:
             error: Erreur lors de la mise à jour de la contrainte
             success: Contrainte mise à jour avec succès
+        cookie_items:
+          cookie_item_presets:
+            explanations:
+              cloudflare_turnstile: "Ajoutez ces cookies lorsque Cloudflare Turnstile est active pour proteger les formulaires contre les abus et le trafic automatise. Ils prennent en charge la detection de bots, la validation de session et la continuite du challenge.\n\nCategorie recommandee: Essentielle"
+            descriptions:
+              turnstile_cf_bm: Aide Cloudflare a detecter et attenuer le trafic automatise.
+              turnstile_cfuvid: Aide Cloudflare a distinguer les utilisateurs individuels partageant la meme adresse IP.
+              turnstile_cf_clearance: Conserve la preuve qu'un visiteur a reussi un challenge de securite precedent.
+            labels:
+              cloudflare_turnstile:
+                one: "Cloudflare Turnstile (%{count} cookie)"
+                other: "Cloudflare Turnstile (%{count} cookies)"
+            services:
+              cloudflare_turnstile: Cloudflare Turnstile
         custom_redirects:
           create:
             error: Erreur lors de la création de la redirection! %{error}

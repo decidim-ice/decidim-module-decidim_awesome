@@ -564,7 +564,17 @@ en:
               consent: Used for functionality. Lasts for 2 years, Google uses it to
                 store a user's state regarding their cookies choices. Read more at
                 How Google uses cookies
+              decidim_consent: Stores information about the cookies allowed by the
+                user on this website.
               emoji_picker_recent: Stores your most recently selected emojis
+              facebook_fr: Used by Meta to deliver, measure and improve ad relevance.
+              fbp: Identifies browser sessions for Facebook Pixel tracking.
+              ga_gat: Used to throttle the request rate sent to Google Analytics.
+              ga_gid: Used to distinguish users for analytics purposes. Expires after
+                24 hours.
+              ga_main: Used to distinguish users by assigning a unique identifier.
+              ga_property: Used in GA4 to persist session state and counters for a
+                specific property.
               graphiql_doc_explorer_open: Saves wheter you have the documentation
                 panel open when using the GraphQL API
               graphiql_editor_flex: Saves your tab preference when using the GraphQL
@@ -576,6 +586,13 @@ en:
               graphiql_query: Saves your last query when using the GraphQL API
               graphiql_tab_state: Saves your tab configuration when using the GraphQL
                 API
+              gtm_dc: Used by Google Tag Manager for tag loading and diagnostics.
+              gtm_debug: Stores Google Tag Manager debug mode state.
+              gtm_gcl_au: Used by Google services to experiment with advertising efficiency.
+              hcaptcha_accessibility: Stores accessibility-related preferences for
+                hCaptcha challenges.
+              hcaptcha_session: Stores temporary hCaptcha session state to validate
+                challenges.
               jitsi_amp: Used for Amplitude Analytics
               jitsi_amplitude_unsent_identify: Used for Amplitude Analytics
               jitsi_amplitude_unset: Used for Amplitude Analytics
@@ -590,10 +607,48 @@ en:
               jitsi_settings: Used your save your Jtisi settings.
               jitsi_video_quality: Used for the video quality persistent storage feature.
               jitsi_virtual_background: Used for the video background feature.
+              linkedin_li_gc: Stores consent state for LinkedIn services.
+              linkedin_lidc: Used by LinkedIn for routing and load balancing.
+              linkedin_user_match_history: Tracks ad interaction timing and conversion
+                attribution for LinkedIn campaigns.
+              maps_1p_jar: Stores Google Maps usage/preferences and ad personalization
+                signals.
+              maps_consent: Stores user consent state for Google services when using
+                maps embeds.
+              maps_nid: Stores Google Maps preferences and security-related browser
+                information.
+              matomo_mtm_consent: Stores the user's consent status for Matomo tracking.
+              matomo_pk_id: Used to store a unique visitor ID and identify returning
+                visitors.
+              matomo_pk_ref: Used to store attribution information (the referrer that
+                brought the user to the website).
+              matomo_pk_ses: Used to store temporary session data for the current
+                visit.
+              osm_location: Stores map location/zoom defaults for OpenStreetMap interactions.
+              osm_session: Stores temporary session data for OpenStreetMap user interactions.
+              osm_totp_token: Stores temporary 2FA-related token data for OpenStreetMap
+                account workflows.
               pref: Used for functionality. YouTube uses this cookie to store information
                 such as your preferred page configuration and playback preferences
                 like explicit autoplay choices, shuffle content, and player size.
                 Read more at How Google uses cookies
+              recaptcha_grecaptcha: Used by reCAPTCHA to provide spam protection and
+                risk analysis.
+              recaptcha_rc_a: Stores reCAPTCHA risk analysis metadata in browser storage.
+              recaptcha_rc_c: Stores reCAPTCHA challenge/session metadata in browser
+                storage.
+              remember_user_token: Allows to keep your session open if you click on
+                "Remember me" when logging in.
+              session_id: Allows websites to remember user within a website when they
+                move between web pages.
+              turnstile_cf_bm: Helps Cloudflare detect and mitigate automated traffic.
+              turnstile_cf_clearance: Stores proof that a visitor passed a previous
+                security challenge.
+              turnstile_cfuvid: Helps Cloudflare distinguish individual users sharing
+                the same IP address.
+              vimeo_player: Stores Vimeo player preferences such as volume, quality,
+                or autoplay behavior.
+              vimeo_vuid: Stores a unique Vimeo visitor identifier used for analytics.
               visitor_info1_live: Used for functionality, analytics, advertising,
                 and personalization. Read more at How Google uses cookies
               ysc: Used for security. Lasts for the duration of a user's browsing
@@ -601,16 +656,151 @@ en:
                 made by the user, and not by other sites. This cookie prevents malicious
                 sites from acting on behalf of a user without that user's knowledge.
                 Read more at How Google uses cookies
+              yt_remote_connected_devices: Stores list of connected devices for YouTube
+                player controls.
+              yt_remote_device_id: Stores a device identifier for YouTube player remote
+                interactions.
+              ytidb_last_result_entry_key: Stores the latest YouTube player result
+                metadata in local storage.
+            explanations:
+              cloudflare_turnstile: |-
+                Add these cookies when Cloudflare Turnstile is enabled to protect forms against abuse and automated traffic. They support bot detection, session validation, and challenge continuity.
+
+                Recommended category: Essential
+              decidim_essential: |-
+                Add these essential cookies that are required for the core functionality of your Decidim platform. These cookies enable user authentication, session management, and consent tracking.
+
+                Recommended category: Essential
+              emoji_picker: |-
+                Add this cookie when you enable the emoji picker feature in text editors. It stores recently used emojis to personalize the user experience.
+
+                Recommended category: Preferences
+              facebook_pixel: |-
+                Add these cookies when you use Meta (Facebook) Pixel for conversion tracking or ad attribution. They help identify browser sessions and measure campaign performance.
+
+                Recommended category: Marketing
+              google_analytics: |-
+                Add these cookies when you use Google Analytics (GA4/gtag.js) to measure traffic and user behavior. They identify visitors, distinguish sessions, and help generate usage statistics.
+
+                Recommended category: Analytics
+              google_maps_embeds: |-
+                Add these cookies when embedding Google Maps on your pages (for example, map widgets or location blocks). They help with map preferences, consent state, and usage metrics.
+
+                Recommended category: Preferences or Analytics
+              google_tag_manager: |-
+                Add these cookies when your analytics or marketing tags are delivered through Google Tag Manager. Some tags can set additional tracking cookies based on your GTM configuration.
+
+                Recommended category: Analytics or Marketing
+              graphiql: |-
+                Add these cookies when you enable the GraphQL API explorer (/api/graphiql) for developers. They store the explorer's interface preferences, query history, and tab configurations.
+
+                Recommended category: Preferences
+              hcaptcha: |-
+                Add these cookies/storage entries when hCaptcha is enabled in forms. They are used for bot detection, accessibility options, and challenge/session handling.
+
+                Recommended category: Essential
+              jitsi_meet: |-
+                Add these cookies when you integrate Jitsi Meet video conferencing meetings in your platform. They store user settings, language preferences, video quality options, and session data for the video conferencing service.
+
+                Recommended category: Preferences
+              linkedin_insight: |-
+                Add these cookies when using the LinkedIn Insight Tag to measure campaign performance and visitor conversions from LinkedIn ads.
+
+                Recommended category: Marketing
+              matomo: |-
+                Add these cookies when you use Matomo analytics to collect website statistics. They identify returning visitors, track sessions, and store referral information used for aggregated reports.
+
+                Recommended category: Analytics
+              openstreetmap_tiles: |-
+                Add these cookies when your map experience depends on OpenStreetMap-hosted resources that may set cookies (for example embedded maps or OSM account-aware features).
+
+                Recommended category: Preferences
+              recaptcha: |-
+                Add these cookies/storage entries when Google reCAPTCHA protects forms against abuse and bots. They help evaluate user interactions and security signals.
+
+                Recommended category: Essential
+              vimeo_embeds: |-
+                Add these cookies when you embed Vimeo videos in pages, proposals, or comments. Vimeo can use them to remember player settings and measure playback interactions.
+
+                Recommended category: Preferences or Analytics
+              youtube_embeds: |-
+                Add these cookies when you allow YouTube video embeds in content (proposals, comments, etc.). YouTube sets analytics and tracking cookies that collect information about video playback and user behavior.
+
+                Recommended category: Preferences (if the videos are an integral part of the content), Analytics (for tracking/statistics) or Marketing (if used for advertising purposes)
+              youtube_nocookie: |-
+                Add these storage keys when you use YouTube's privacy-enhanced mode (youtube-nocookie.com). They are used to persist player state and device/session preferences.
+
+                Recommended category: Preferences
             labels:
-              emoji_picker: Emoji Picker (%{count} cookie)
-              graphiql: GraphiQL API Explorer (%{count} cookie)
-              jitsi_meet: Jitsi Meet (%{count} cookie)
-              youtube_embeds: YouTube embeds (%{count} cookie)
+              cloudflare_turnstile:
+                one: Cloudflare Turnstile (%{count} cookie)
+                other: Cloudflare Turnstile (%{count} cookies)
+              decidim_essential:
+                one: Decidim Essential (%{count} cookie)
+                other: Decidim Essential (%{count} cookies)
+              emoji_picker:
+                one: Emoji Picker (%{count} cookie)
+                other: Emoji Picker (%{count} cookies)
+              facebook_pixel:
+                one: Facebook Pixel (%{count} cookie)
+                other: Facebook Pixel (%{count} cookies)
+              google_analytics:
+                one: Google Analytics (%{count} cookie)
+                other: Google Analytics (%{count} cookies)
+              google_maps_embeds:
+                one: Google Maps embeds (%{count} cookie)
+                other: Google Maps embeds (%{count} cookies)
+              google_tag_manager:
+                one: Google Tag Manager (%{count} cookie)
+                other: Google Tag Manager (%{count} cookies)
+              graphiql:
+                one: GraphiQL API Explorer (%{count} cookie)
+                other: GraphiQL API Explorer (%{count} cookies)
+              hcaptcha:
+                one: hCaptcha (%{count} cookie)
+                other: hCaptcha (%{count} cookies)
+              jitsi_meet:
+                one: Jitsi Meet (%{count} cookie)
+                other: Jitsi Meet (%{count} cookies)
+              linkedin_insight:
+                one: LinkedIn Insight (%{count} cookie)
+                other: LinkedIn Insight (%{count} cookies)
+              matomo:
+                one: Matomo (%{count} cookie)
+                other: Matomo (%{count} cookies)
+              openstreetmap_tiles:
+                one: OpenStreetMap tiles (%{count} cookie)
+                other: OpenStreetMap tiles (%{count} cookies)
+              recaptcha:
+                one: reCAPTCHA (%{count} cookie)
+                other: reCAPTCHA (%{count} cookies)
+              vimeo_embeds:
+                one: Vimeo embeds (%{count} cookie)
+                other: Vimeo embeds (%{count} cookies)
+              youtube_embeds:
+                one: YouTube embeds (%{count} cookie)
+                other: YouTube embeds (%{count} cookies)
+              youtube_nocookie:
+                one: YouTube no-cookie (%{count} cookie)
+                other: YouTube no-cookie (%{count} cookies)
             services:
+              cloudflare_turnstile: Cloudflare Turnstile
+              decidim_essential: This website
               emoji_picker: This website
+              facebook_pixel: Meta (Facebook)
+              google_analytics: Google Analytics
+              google_maps_embeds: Google Maps
+              google_tag_manager: Google Tag Manager
               graphiql: This website
+              hcaptcha: hCaptcha
               jitsi_meet: Jitsi Meet
+              linkedin_insight: LinkedIn
+              matomo: Matomo
+              openstreetmap_tiles: OpenStreetMap
+              recaptcha: Google reCAPTCHA
+              vimeo_embeds: Vimeo
               youtube_embeds: YouTube
+              youtube_nocookie: YouTube (privacy-enhanced mode)
           create:
             error: Error creating cookie item! %{error}
             success: Cookie item created successfully

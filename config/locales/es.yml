@@ -399,6 +399,20 @@ es:
           update:
             error: Error actualizando la restricción
             success: Restricción actualizada correctamente
+        cookie_items:
+          cookie_item_presets:
+            explanations:
+              cloudflare_turnstile: "Añade estas cookies cuando Cloudflare Turnstile está habilitado para proteger formularios contra abuso y tráfico automatizado. Sirven para la detección de bots, la validación de sesión y la continuidad del desafío.\n\nCategoría recomendada: Esencial"
+            descriptions:
+              turnstile_cf_bm: Ayuda a Cloudflare a detectar y mitigar tráfico automatizado.
+              turnstile_cfuvid: Ayuda a Cloudflare a distinguir usuarios individuales que comparten la misma dirección IP.
+              turnstile_cf_clearance: Almacena la prueba de que una visitante superó un desafío de seguridad previo.
+            labels:
+              cloudflare_turnstile:
+                one: "Cloudflare Turnstile (%{count} cookie)"
+                other: "Cloudflare Turnstile (%{count} cookies)"
+            services:
+              cloudflare_turnstile: Cloudflare Turnstile
         custom_redirects:
           create:
             error: '¡Error al crear la redirección! %{error}'

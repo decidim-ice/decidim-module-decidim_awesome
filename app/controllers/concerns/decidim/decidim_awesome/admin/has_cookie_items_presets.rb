@@ -7,6 +7,70 @@ module Decidim
         extend ActiveSupport::Concern
 
         COOKIE_ITEM_PRESETS = {
+          decidim_essential: [
+            { name: "_session_id", type: "cookie", service: "decidim_essential", description: "session_id" },
+            { name: Decidim.consent_cookie_name, type: "cookie", service: "decidim_essential", description: "decidim_consent" },
+            { name: "remember_user_token", type: "cookie", service: "decidim_essential", description: "remember_user_token" }
+          ],
+          matomo: [
+            { name: "_pk_id", type: "cookie", service: "matomo", description: "matomo_pk_id" },
+            { name: "_pk_ses", type: "cookie", service: "matomo", description: "matomo_pk_ses" },
+            { name: "_pk_ref", type: "cookie", service: "matomo", description: "matomo_pk_ref" },
+            { name: "mtm_consent", type: "cookie", service: "matomo", description: "matomo_mtm_consent" }
+          ],
+          google_analytics: [
+            { name: "_ga", type: "cookie", service: "google_analytics", description: "ga_main" },
+            { name: "_gid", type: "cookie", service: "google_analytics", description: "ga_gid" },
+            { name: "_gat", type: "cookie", service: "google_analytics", description: "ga_gat" },
+            { name: "_ga_", type: "cookie", service: "google_analytics", description: "ga_property" }
+          ],
+          google_tag_manager: [
+            { name: "_gcl_au", type: "cookie", service: "google_tag_manager", description: "gtm_gcl_au" },
+            { name: "_gtm_debug", type: "cookie", service: "google_tag_manager", description: "gtm_debug" },
+            { name: "_dc_gtm_", type: "cookie", service: "google_tag_manager", description: "gtm_dc" }
+          ],
+          google_maps_embeds: [
+            { name: "NID", type: "cookie", service: "google_maps_embeds", description: "maps_nid" },
+            { name: "1P_JAR", type: "cookie", service: "google_maps_embeds", description: "maps_1p_jar" },
+            { name: "CONSENT", type: "cookie", service: "google_maps_embeds", description: "maps_consent" }
+          ],
+          openstreetmap_tiles: [
+            { name: "_osm_location", type: "cookie", service: "openstreetmap_tiles", description: "osm_location" },
+            { name: "_osm_session", type: "cookie", service: "openstreetmap_tiles", description: "osm_session" },
+            { name: "_osm_totp_token", type: "cookie", service: "openstreetmap_tiles", description: "osm_totp_token" }
+          ],
+          vimeo_embeds: [
+            { name: "vuid", type: "cookie", service: "vimeo_embeds", description: "vimeo_vuid" },
+            { name: "player", type: "cookie", service: "vimeo_embeds", description: "vimeo_player" }
+          ],
+          youtube_nocookie: [
+            { name: "yt-remote-device-id", type: "local_storage", service: "youtube_nocookie", description: "yt_remote_device_id" },
+            { name: "yt-remote-connected-devices", type: "local_storage", service: "youtube_nocookie", description: "yt_remote_connected_devices" },
+            { name: "ytidb::LAST_RESULT_ENTRY_KEY", type: "local_storage", service: "youtube_nocookie", description: "ytidb_last_result_entry_key" }
+          ],
+          facebook_pixel: [
+            { name: "_fbp", type: "cookie", service: "facebook_pixel", description: "fbp" },
+            { name: "fr", type: "cookie", service: "facebook_pixel", description: "facebook_fr" }
+          ],
+          linkedin_insight: [
+            { name: "li_gc", type: "cookie", service: "linkedin_insight", description: "linkedin_li_gc" },
+            { name: "lidc", type: "cookie", service: "linkedin_insight", description: "linkedin_lidc" },
+            { name: "UserMatchHistory", type: "cookie", service: "linkedin_insight", description: "linkedin_user_match_history" }
+          ],
+          recaptcha: [
+            { name: "_GRECAPTCHA", type: "cookie", service: "recaptcha", description: "recaptcha_grecaptcha" },
+            { name: "rc::a", type: "local_storage", service: "recaptcha", description: "recaptcha_rc_a" },
+            { name: "rc::c", type: "local_storage", service: "recaptcha", description: "recaptcha_rc_c" }
+          ],
+          hcaptcha: [
+            { name: "hcaptcha_session", type: "cookie", service: "hcaptcha", description: "hcaptcha_session" },
+            { name: "hc_accessibility", type: "local_storage", service: "hcaptcha", description: "hcaptcha_accessibility" }
+          ],
+          cloudflare_turnstile: [
+            { name: "__cf_bm", type: "cookie", service: "cloudflare_turnstile", description: "turnstile_cf_bm" },
+            { name: "_cfuvid", type: "cookie", service: "cloudflare_turnstile", description: "turnstile_cfuvid" },
+            { name: "cf_clearance", type: "cookie", service: "cloudflare_turnstile", description: "turnstile_cf_clearance" }
+          ],
           youtube_embeds: [
             { name: "VISITOR_INFO1_LIVE", type: "cookie", service: "youtube_embeds", description: "visitor_info1_live" },
             { name: "YSC", type: "cookie", service: "youtube_embeds", description: "ysc" },

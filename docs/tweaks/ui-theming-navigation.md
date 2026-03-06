@@ -212,6 +212,8 @@ Document individual cookies or localStorage items within each category.
 
 **Admin guidance:** List all cookies/storage items used by your platform, including third-party services. Provide clear service names and descriptions for transparency.
 
+**Common cookie services dropdown:** Use the `Common cookie services` dropdown to quickly populate cookie items for popular integrations (analytics, embeds, bot protection, etc.). Selecting one preset creates multiple cookie/localStorage entries at once, with prefilled service and description labels that you can still edit afterwards.
+
 **Item fields:**
 - **Name:** Technical cookie/localStorage key (alphanumeric, underscores, hyphens only)
 - **Type:** `cookie` or `localStorage`
@@ -221,6 +223,13 @@ Document individual cookies or localStorage items within each category.
 **Validation:** Cookie names cannot contain spaces or special characters. Invalid names will show error: "Name format is invalid. Only letters, numbers, underscores and hyphens are allowed."
 
 **Edit restrictions:** Items in default mandatory categories (typically "essential") are protected from editing and deletion to preserve core functionality. Items in default non-mandatory categories (e.g., analytics, preferences) and all custom categories (regardless of mandatory flag) can be fully edited or deleted.
+
+**Contributing new preset services:**
+- Add the preset group and items to `app/controllers/concerns/decidim/decidim_awesome/admin/has_cookie_items_presets.rb` under `COOKIE_ITEM_PRESETS`.
+- Add all i18n keys in `config/locales/en.yml` under `decidim.decidim_awesome.admin.cookie_items.cookie_item_presets`:
+  `explanations`, `labels`, `services`, and `descriptions`.
+- Keep cookie names realistic and widely recognized, and prefer short neutral descriptions (what the cookie stores or why it exists).
+- Verify each preset entry resolves to valid translation keys and appears correctly in the admin dropdown.
 
 ![Cookie items management](../../examples/cookie_items.gif)
 

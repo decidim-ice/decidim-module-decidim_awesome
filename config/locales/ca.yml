@@ -524,6 +524,20 @@ ca:
           update:
             error: Error actualitzant la restricció
             success: Restricció actualitzada correctament
+        cookie_items:
+          cookie_item_presets:
+            explanations:
+              cloudflare_turnstile: "Afegeix aquestes galetes quan Cloudflare Turnstile està habilitat per protegir els formularis davant d'abusos i trànsit automatitzat. Donen suport a la detecció de bots, la validació de sessió i la continuïtat del repte.\n\nCategoria recomanada: Essencial"
+            descriptions:
+              turnstile_cf_bm: Ajuda Cloudflare a detectar i mitigar el trànsit automatitzat.
+              turnstile_cfuvid: Ajuda Cloudflare a distingir usuaris individuals que comparteixen la mateixa adreça IP.
+              turnstile_cf_clearance: Desa la prova que una visitant ha superat un repte de seguretat previ.
+            labels:
+              cloudflare_turnstile:
+                one: "Cloudflare Turnstile (%{count} galeta)"
+                other: "Cloudflare Turnstile (%{count} galetes)"
+            services:
+              cloudflare_turnstile: Cloudflare Turnstile
         custom_redirects:
           create:
             error: 'Error en crear la redirecció: %{error}'
