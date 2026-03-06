@@ -90,6 +90,8 @@ en:
         cookie_item:
           attributes:
             name:
+              cannot_change_default_item_name: The name of a predefined item cannot
+                be changed
               invalid_format: Name can only contain letters, numbers, hyphens and
                 underscores (no spaces)
   decidim:
@@ -530,7 +532,6 @@ en:
             success: Cookie category removed successfully
           edit:
             cancel: Cancel
-            cannot_edit_mandatory: Mandatory default categories cannot be edited
             save: Save
             title: Edit cookie category
           form:
@@ -538,7 +539,6 @@ en:
               default: Visible
               hidden: Hidden
           index:
-            cannot_edit_mandatory: Mandatory categories cannot be edited
             cannot_remove_default: Default categories cannot be removed
             confirm_destroy: Are you sure to remove this cookie category? This will
               also remove all the items in this category.
@@ -825,8 +825,6 @@ en:
             success: Cookie item removed successfully
           edit:
             cancel: Cancel
-            cannot_edit_mandatory_category: Items from mandatory categories cannot
-              be edited
             save: Save
             title: Edit cookie item
           form:
@@ -839,11 +837,7 @@ en:
               section). It should contain no spaces.
           index:
             back_to_categories: Back to categories
-            cannot_edit_mandatory_category: Items from mandatory categories cannot
-              be edited
             cannot_remove_default: Default items cannot be removed
-            cannot_remove_mandatory_category: Items from mandatory categories cannot
-              be removed
             confirm_destroy: Are you sure to remove this cookie item?
             confirm_reset: Are you sure to reset this item to its default values?
               This will remove all customizations you made.

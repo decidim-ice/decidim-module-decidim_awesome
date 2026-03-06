@@ -1,8 +1,9 @@
+<% is_default_item = local_assigns.fetch(:is_default_item, false) %>
 <div class="form__wrapper">
   <div class="card pt-4">
     <div class="card-section">
       <div class="row column">
-        <%= form.text_field :name, class: "h-12 w-full" %>
+        <%= form.text_field :name, class: "h-12 w-full", disabled: is_default_item %>
         <p class="help-text"><%= t(".title_item_help") %></p>
       </div>
       <div class="row column">
