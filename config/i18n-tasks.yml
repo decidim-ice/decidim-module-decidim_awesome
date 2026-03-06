@@ -19,15 +19,16 @@ ignore_unused:
   - "activemodel.attributes.constraint.*"
   - "activemodel.attributes.custom_redirect.*"
   - "activemodel.attributes.user.*"
-  -  activemodel.attributes.organization.awesome_admins_available_authorizations
-  -  activemodel.attributes.force_authorization.*
-  - activemodel.errors.models.cookie_item.attributes.name.invalid_format
+  - "activemodel.attributes.organization.awesome_admins_available_authorizations"
+  - "activemodel.attributes.force_authorization.*"
+  - "activemodel.errors.models.cookie_item.attributes.name.*"
   - "decidim.components.decidim_awesome.name"
   - "decidim.components.awesome_iframe.settings.*"
   - "decidim.components.awesome_map.settings.*"
   - "decidim.components.proposals.settings.global.*"
   - "decidim.components.proposals.settings.step.*"
   - "decidim.decidim_awesome.admin.config.*"
+  - "decidim.decidim_awesome.admin.cookie_items.cookie_item_presets.labels.*"
   - "decidim.decidim_awesome.admin.admin_accountability.*"
   - "decidim.decidim_awesome.admin.scoped_admin_styles.*"
   - "decidim.decidim_awesome.admin.scoped_styles.*"

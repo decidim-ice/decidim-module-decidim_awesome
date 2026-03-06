@@ -15,7 +15,7 @@
       <ul id="cookie-items-dropdown" class="dropdown dropdown__bottom" aria-hidden="true">
         <% cookie_item_presets.each do |group| %>
           <li class="dropdown__item">
-            <%= link_to decidim_admin_decidim_awesome.create_preset_cookie_category_cookie_items_path(params[:cookie_category_slug], preset_name: group[:key]), class: "dropdown__button", method: :post, data: { confirm: t("decidim.decidim_awesome.admin.cookie_items.cookie_item_presets.explanations.#{group[:key]}")} do %>
+            <%= link_to decidim_admin_decidim_awesome.create_preset_cookie_category_cookie_items_path(params[:cookie_category_slug], preset_name: group[:key]), class: "dropdown__button", method: :post, data: { confirm: t("decidim.decidim_awesome.admin.cookie_items.cookie_item_presets.explanations.#{group[:key]}") } do %>
               <%= group[:label] %>
             <% end %>
           </li>

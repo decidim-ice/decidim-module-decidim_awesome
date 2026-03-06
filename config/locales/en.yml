@@ -532,9 +532,11 @@ en:
             success: Cookie category removed successfully
           edit:
             cancel: Cancel
+            items: Edit category items
             save: Save
             title: Edit cookie category
           form:
+            slug_help: Unique identifier used in scripts to reference this category.
             visibility:
               default: Visible
               hidden: Hidden
