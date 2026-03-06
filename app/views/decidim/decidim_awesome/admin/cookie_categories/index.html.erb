@@ -7,10 +7,12 @@
 
 <div class="card">
   <div class="card-section">
+    <div class="help-text mb-4"><%= t(".description_html") %></div>
     <div class="table-scroll decidim_awesome-form">
       <table class="table-list">
         <thead>
           <tr>
+            <th><%= t("cookie_category.id", scope: "activemodel.attributes") %></th>
             <th><%= t("cookie_category.title", scope: "activemodel.attributes") %></th>
             <th><%= t("cookie_category.mandatory", scope: "activemodel.attributes") %></th>
             <th><%= t("cookie_category.visibility", scope: "activemodel.attributes") %></th>
@@ -24,6 +26,7 @@
             <% is_modified = category_modified?(category) %>
             <% is_mandatory = category["mandatory"] %>
             <tr<%= " class=cookie_category-addition" unless is_default %>>
+              <td><%= category["slug"] %></td>
               <td><%= translated_attribute(category["title"]) %></td>
               <td>
                 <% if is_mandatory %>

@@ -56,6 +56,7 @@ en:
         participatory_space_manifest: Apply to participatory spaces of type
         participatory_space_slug: Only in
       cookie_category:
+        id: ID
         mandatory: Mandatory
         title: Category
         total_cookies: Total cookies
@@ -543,6 +544,11 @@ en:
               also remove all the items in this category.
             confirm_reset: Are you sure to reset this category to its default values?
               This will remove all customizations you made.
+            description_html: |
+              Cookie categories and items only control the consent UI and documentation.<br>
+              To make preferences effective, third-party scripts and services must be configured to load only after consent is granted.<br>
+              This extra script configuration is not necessary for video iframe embeds, as Decidim already includes built-in consent handling for those embeds.<br>
+              Follow the official guide: <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Adding scripts which require data consent</a>.
             edit: Edit category
             items: Category items
             new: New category
@@ -553,6 +559,12 @@ en:
             cancel: Cancel
             save: Save
             title: New cookie category
+          script_config:
+            script_consent_help_html: |
+              <p>Scripts tied to this category only respect consent when they are added inside a script with the attribute <span class="label">data-consent="%{category}"</span>.</p>
+              <p>Recommended place to add them are in <span class="label">app/views/layouts/decidim/_head_extra.html.erb</span> or in the header snippers (if enabled).</p>
+              <p>Example:</p><br><pre>%{example}</pre><br>
+              <p>Without <span class="label">type="text/plain"</span>, the user's data consent setting has no effect.<br>Read more at <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Adding scripts which require data consent</a>.</p>
           update:
             error: Error updating cookie category! %{error}
             success: Cookie category updated successfully
