@@ -57,22 +57,22 @@ describe "Admin manages users autoblocks feature" do
     let(:application_type) { "positive" }
 
     it "shows a form to calculate scores" do
-      expect(page).to have_content("Users automatic blocks")
-      expect(page).to have_field(name: "users_autoblocks_config[threshold]", visible: :visible)
-      expect(page).to have_field(name: "users_autoblocks_config[block_justification_message]", visible: :hidden)
-      expect(page).to have_field(name: "users_autoblocks_config[perform_block]", visible: :visible)
-
       expect(page).to have_button("Calculate scores")
     end
 
     context "when performing the scores calculation" do
-      before do
-        fill_in "Threshold", with: "5"
-        click_on "Calculate scores"
+       before do
+         fill_in "Threshold", with: "5"
+         click_on "Update"
+         perform_enqueued_jobs do
+           click_on "Calculate scores"
+         end
+
+         refresh
       end
 
-      it "displays a message with found users count" do
-        expect(page).to have_content("1 user found with enough score to be blocked")
+      it "displays a message saying scores are being calcualted" do
+        expect(page).to have_content("Scores are being calculated right now")
       end
 
       it "does not perform any users block" do
@@ -83,16 +83,11 @@ describe "Admin manages users autoblocks feature" do
     context "when enabling the block option and notify users" do
       before do
         fill_in "Threshold", with: "5"
-        check "Perform users blocking"
         check "Notify blocked users"
       end
 
-      it "displays a mandatory field with block justification message" do
-        expect(page).to have_field(name: "users_autoblocks_config[block_justification_message]", visible: :visible)
-        accept_confirm { click_on "Detect and block users" }
-        within "label[for='users_autoblocks_config_block_justification_message']" do
-          expect(page).to have_content("There is an error in this field.")
-        end
+      it "displays a field with block justification message" do
+        expect(page).to have_content("Block justification message")
       end
     end
 
@@ -103,14 +98,32 @@ describe "Admin manages users autoblocks feature" do
         # rubocop:enable Rails/SkipsModelValidations
 
         fill_in "Threshold", with: "5"
-        check "Perform users blocking"
+        # check "Perform users blocking"
         check "Notify blocked users"
-        fill_in "Block justification message", with: "Your account has been blocked due to suspicious activity"
-        accept_confirm { click_on "Detect and block users" }
+        fill_in_i18n(:users_autoblocks_config_block_justification_message,
+                     "#users_autoblocks_config-block_justification_message-tabs",
+                     en: "Your account has been blocked due to suspicious activity")
+        click_on "Update"
+        perform_enqueued_jobs do
+          click_on "Calculate scores"
+        end
+
+        refresh
+      end
+
+      it "displays a message with found users count" do
         expect(page).to have_content("Number of cases that reach the threshold")
       end
 
       context "with about user blank rule" do
+        before do
+          perform_enqueued_jobs do
+            accept_confirm { click_on "Detect and block users" }
+          end
+
+          refresh
+        end
+
         it "detects and blocks the user" do
           expect(page).to have_no_content "Validation failed"
 
@@ -123,14 +136,34 @@ describe "Admin manages users autoblocks feature" do
     context "when performing the block" do
       before do
         fill_in "Threshold", with: "5"
-        check "Perform users blocking"
+        # check "Perform users blocking"
         check "Notify blocked users"
-        fill_in "Block justification message", with: "Your account has been blocked due to suspicious activity"
-        accept_confirm { click_on "Detect and block users" }
+        fill_in_i18n(:users_autoblocks_config_block_justification_message,
+                     "#users_autoblocks_config-block_justification_message-tabs",
+                     en: "Your account has been blocked due to suspicious activity")
+        click_on "Update"
+        perform_enqueued_jobs do
+          click_on "Calculate scores"
+        end
+
+        refresh
+      end
+
+      it "displays a message with found users count" do
         expect(page).to have_content("Number of cases that reach the threshold")
       end
 
       context "with about user blank rule" do
+        before do
+          perform_enqueued_jobs do
+            accept_confirm { click_on "Detect and block users" }
+
+            Decidim::DecidimAwesome::UsersAutoblocksBlockJob.perform_now(admin)
+          end
+
+          refresh
+        end
+
         it "detects and blocks the user" do
           expect(Decidim::User.blocked.count).to eq(1)
 

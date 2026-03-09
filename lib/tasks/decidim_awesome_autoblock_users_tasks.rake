@@ -20,13 +20,13 @@ namespace :decidim_decidim_awesome do
 
         puts "\nRunning on Organization: #{current_organization.id} - #{translated_attribute(current_organization.name)}...\n"
 
-        config_data = OpenStruct.new(current_config.value || {})
-        config_form = Decidim::DecidimAwesome::Admin::UsersAutoblocksConfigForm.from_model(config_data).with_context(current_organization:, current_user:)
-        config_form.perform_block = perform_block
-        block_justification_message = config_form.default_block_justification_message if config_form.block_justification_message.blank?
-        config_form.block_justification_message = translated_attribute(block_justification_message)
+        admin_for_org = Decidim::User.where(admin: true, organization: current_organization).first
+        if admin_for_org.blank?
+          puts "\n✗ No admin found for organization.\n"
+          next
+        end
 
-        run_command(config_form)
+        run_job(admin_for_org, perform_block)
       end
     end
 
@@ -51,32 +51,19 @@ namespace :decidim_decidim_awesome do
 
         puts "\nRunning on Organization: #{current_organization.id} - #{translated_attribute(current_organization.name)}...\n"
 
-        config_data = OpenStruct.new(current_config.value || {})
-        config_form = Decidim::DecidimAwesome::Admin::UsersAutoblocksConfigForm.from_model(config_data).with_context(current_organization:, current_user:)
-        config_form.perform_block = true
-        block_justification_message = config_form.default_block_justification_message if config_form.block_justification_message.blank?
-        config_form.block_justification_message = config_form.default_block_justification_message if config_form.block_justification_message.blank?
-
-        run_command(config_form)
+        run_job(current_user, true)
       end
     end
 
-    def run_command(config_form)
-      Decidim::DecidimAwesome::Admin::AutoblockUsers.call(config_form) do
-        on(:ok) do |count, block_performed|
-          if block_performed
-            puts "\n✓ Process finished. Total users detected and blocked: #{count}.\n"
-          else
-            puts "\n✓ Process finished. Total users detected: #{count}. Block not performed.\n"
-          end
-        end
+    def run_job(admin, perform_block)
+      result = Decidim::DecidimAwesome::UsersAutoblocksBlockJob.perform_now(admin, perform_block:)
 
-        on(:invalid) do |messages|
-          puts "\n✗ Something has failed. Messages:\n"
-          messages.each do |message|
-            puts "* #{message}\n"
-          end
-        end
+      if result[:error]
+        puts "\n✗ Something has failed. Error: #{result[:error]}\n"
+      elsif result[:block_performed]
+        puts "\n✓ Process finished. Total users detected and blocked: #{result[:count]}.\n"
+      else
+        puts "\n✓ Process finished. Total users detected: #{result[:count]}. Block not performed.\n"
       end
     end
 

@@ -6,25 +6,25 @@ module Decidim
       class AutoblockUsers < Command
         include Decidim::TranslatableAttributes
 
-        # Public: Initializes the command.
-        def initialize(form)
-          @form = form
-          @users_autoblocks = AwesomeConfig.find_or_initialize_by(var: :users_autoblocks, organization: current_organization)
-          @current_config = AwesomeConfig.find_or_initialize_by(var: :users_autoblocks_config, organization: current_organization)
-          @perform_block = @form.perform_block
+        def initialize(organization, current_user, perform_block: true)
+          @organization = organization
+          @current_user = current_user
+          @perform_block = perform_block
+          @current_config = AwesomeConfig.find_or_initialize_by(var: :users_autoblocks_config, organization:)
+          @users_autoblocks = AwesomeConfig.find_or_initialize_by(var: :users_autoblocks, organization:)
         end
 
         # Executes the command. Broadcasts these events:
         #
-        # - :ok when everything is valid.
-        # - :invalid if we couldn't proceed.
+        # - `:ok` when everything is valid
+        # - `:invalid` if we couldn't proceed
         #
-        # Returns nothing.
+        # Returns nothing
         def call
-          return broadcast(:invalid, @form.errors.full_messages) if form.invalid?
+          return broadcast(:invalid, "No threshold configured") if threshold.blank?
 
-          save_configuration!
-          calculate_scores
+          scores_data
+          return broadcast(:invalid, "No scores file found") if @scores_counts.blank?
 
           if detected_users.any?
             mark_users_for_autoblock!
@@ -39,14 +39,7 @@ module Decidim
 
         private
 
-        attr_reader :form, :users_autoblocks, :current_config, :perform_block
-
-        delegate :current_organization, :current_user, to: :form
-
-        def save_configuration!
-          current_config.value = form.to_params || {}
-          current_config.save!
-        end
+        attr_reader :organization, :current_user, :perform_block, :current_config, :result
 
         def mark_users_for_autoblock!
           notify_autoblock = notify_blocked_users?
@@ -71,9 +64,9 @@ module Decidim
               create_report!(user)
               check_user_validation!(user)
 
-              block_form = Decidim::Admin::BlockUserForm.from_model(user).with_context(current_organization:, current_user:)
-              I18n.with_locale(user.locale || current_organization.default_locale ) do
-                block_form.justification = message
+              block_form = Decidim::Admin::BlockUserForm.from_model(user).with_context(current_organization: @organization, current_user:)
+              I18n.with_locale(user.locale || @organization.default_locale) do
+                block_form.justification = translated_attribute(message)
               end
               block_form.hide = true
 
@@ -88,10 +81,14 @@ module Decidim
 
         def block_justification_message
           if notify_blocked_users?
-            translated_attribute(current_config.value&.dig("block_justification_message"))
+            current_config.value&.dig("block_justification_message")
           else
-            form.default_block_justification_message
+            default_block_justification_message
           end
+        end
+
+        def default_block_justification_message
+          I18n.t("decidim.decidim_awesome.admin.users_autoblocks.config_form.default_block_justification_message")
         end
 
         def notify_blocked_users?
@@ -118,13 +115,13 @@ module Decidim
         def check_user_validation!(user)
           return if user.valid?
 
-          user.nickname = Decidim::User.nicknamize("user_blocked_#{SecureRandom.alphanumeric(8)}", current_organization.id)
+          user.nickname = Decidim::User.nicknamize("user_blocked_#{SecureRandom.alphanumeric(8)}", @organization.id)
 
           user.save!
         end
 
         def send_notification_to_admins!
-          current_organization.admins.each do |admin|
+          @organization.admins.each do |admin|
             next unless admin.email_on_moderations
 
             Decidim::DecidimAwesome::UsersAutoblocksReportJob.perform_later(admin, detected_users.map { |user| user.id.to_s }, block_performed: perform_block)
@@ -133,10 +130,8 @@ module Decidim
 
         def detected_users
           @detected_users ||= begin
-            threshold = current_config.value&.dig("threshold")
             if threshold.present?
-              threshold = threshold.to_f
-              user_ids = @block_data.select { |item| item[:total_score] >= threshold }.map { |item| item[:id] }
+              user_ids = @data.select { |row| row["total_score"].to_f >= threshold }.map { |row| row["id"] }
               users_base_relation.where(id: user_ids)
             else
               Decidim::User.none
@@ -144,16 +139,42 @@ module Decidim
           end
         end
 
-        def calculate_scores
-          exporter = Decidim::DecidimAwesome::UsersAutoblocksScoresExporter.new(current_organization, users_base_relation)
+        def scores_data
+          load_calculations
+        end
 
-          @export_path = exporter.export
-          @block_data = exporter.data
+        def config_exists?
+          AwesomeConfig.exists?(var: :users_autoblocks_config, organization: @organization)
+        end
+
+        def load_calculations
+          @scores_counts = {}
+          return unless config_exists?
+          return if calculations_blob.blank?
+
+          calculations_blob.open do |file|
+            calculations = CSV.read(file.path, headers: true, col_sep: ";")
+
+            rules_headers = calculations.headers.grep(/ - \d+/)
+            counts = rules_headers.index_with { |rule_header| calculations.count { |row| row[rule_header].to_i.positive? } }
+
+            @threshold_detected_cases = calculations.count { |row| row["total_score"].to_i >= threshold }
+            @scores_counts = counts.transform_keys { |k| k.split(" - ").last.to_i }
+            @data = calculations
+          end
+        end
+
+        def calculations_blob
+          @calculations_blob ||= ActiveStorage::Blob.where(filename: "#{@organization.id}-#{Decidim::DecidimAwesome::UsersAutoblocksScoresExporter::DATA_FILE_KEY}").last
+        end
+
+        def threshold
+          @threshold ||= current_config.value&.dig("threshold")&.to_f
         end
 
         def users_base_relation
           @users_base_relation ||= Decidim::User
-                                   .where(organization: current_organization)
+                                   .where(organization:)
                                    .joins("LEFT JOIN decidim_authorizations ON decidim_authorizations.decidim_user_id = decidim_users.id")
                                    .where(decidim_authorizations: { granted_at: nil })
                                    .where.not(admin: true)
