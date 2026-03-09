@@ -214,7 +214,7 @@ de:
         checks:
           index:
             admin_head_tags: Angezeigte Awesome Tags im Admin Application Header
-            awesome_update_available: "Eine neue Version ist verfügbar: %{latest_version}"
+            awesome_update_available: 'Eine neue Version ist verfügbar: %{latest_version}'
             awesome_version: Decidim Awesome Version %{version}
             decidim-admin: decidim-admin
             decidim-assemblies: Vom Gremien-Modul
@@ -222,7 +222,7 @@ de:
             decidim-core: Vom Kernmodul
             decidim-participatory_processes: Vom Beteiligungsprozess-Bereich
             decidim-proposals: Von der Vorschlags-Komponente
-            decidim_update_available: "Eine neue Version ist verfügbar: %{latest_version}"
+            decidim_update_available: 'Eine neue Version ist verfügbar: %{latest_version}'
             decidim_version: Decidim Version %{version}
             errors:
               CSS: Der "Head" enthält nicht die erforderlichen <link> Stylesheet-Einträge. Zur Lösung können Sie sie manuell zu Ihrer benutzerdefinierten _head.html.erb-Datei hinzufügen
@@ -581,27 +581,6 @@ de:
           title_closed: Klicken um zu chatten!
           title_open: Lassen Sie uns chatten!
       content_blocks:
-        map:
-          collapse: Start mit eingeklapptem Menü
-          map_center: Kartenmitte (Breitengrad, Längengrad)
-          map_center_help: 'Verwenden Sie Dezimalpunkte (z. B. 41.38879, 2.15899). Lassen Sie das Feld leer, um alle Markierungen automatisch einzupassen.'
-          map_height: Höhe der Karte (px)
-          map_settings: Karteneinstellungen
-          map_zoom: Zoom (beliebige Zahl zwischen 0 und 18)
-          map_zoom_help: Gilt nur, wenn ein Kartenzentrum definiert ist
-          menu_amendments: Änderungen anzeigen
-          menu_meetings: Veranstaltungen anzeigen
-          menu_merge_components: Alle Komponenten desselben Typs im Menü zusammenführen
-          name: Awesome Karte
-          show_accepted: Angenommene Vorschläge anzeigen
-          show_evaluating: Bewertung der Vorschläge anzeigen
-          show_not_answered: Nicht beantwortete Vorschläge anzeigen
-          show_rejected: Abgelehnte Vorschläge anzeigen
-          show_withdrawn: Zurückgezogene Vorschläge anzeigen
-          taxonomies: Klassifizierungen
-          text_settings: Text-Einstellungen
-          title: Titel
-          truncate: Maximale Zeichenanzahl für Popup-Beschreibungen
         awesome_process_groups:
           active: Aktiv
           all: Alle
@@ -615,7 +594,6 @@ de:
           results_count:
             one: "%{count} Prozess gefunden"
             other: "%{count} Prozesse gefunden"
-          status_label: 'Status:'
           title: Blocktitel
           upcoming: Kommende
         awesome_processes:
@@ -644,6 +622,27 @@ de:
             automatic: Automatisch
             manual: Manuell
           title: Blocktitel
+        map:
+          collapse: Start mit eingeklapptem Menü
+          map_center: Kartenmitte (Breitengrad, Längengrad)
+          map_center_help: 'Verwenden Sie Dezimalpunkte (z. B. 41.38879, 2.15899). Lassen Sie das Feld leer, um alle Markierungen automatisch einzupassen.'
+          map_height: Höhe der Karte (px)
+          map_settings: Karteneinstellungen
+          map_zoom: Zoom (beliebige Zahl zwischen 0 und 18)
+          map_zoom_help: Gilt nur, wenn ein Kartenzentrum definiert ist
+          menu_amendments: Änderungen anzeigen
+          menu_meetings: Veranstaltungen anzeigen
+          menu_merge_components: Alle Komponenten desselben Typs im Menü zusammenführen
+          name: Awesome Karte
+          show_accepted: Angenommene Vorschläge anzeigen
+          show_evaluating: Bewertung der Vorschläge anzeigen
+          show_not_answered: Nicht beantwortete Vorschläge anzeigen
+          show_rejected: Abgelehnte Vorschläge anzeigen
+          show_withdrawn: Zurückgezogene Vorschläge anzeigen
+          taxonomies: Klassifizierungen
+          text_settings: Text-Einstellungen
+          title: Titel
+          truncate: Maximale Zeichenanzahl für Popup-Beschreibungen
       credits: Decidim awesome %{version} · Gepflegt mit ❤️ durch %{company}
       custom_fields:
         errors:
