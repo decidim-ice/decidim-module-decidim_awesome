@@ -1,0 +1,11 @@
+<% form.fields_for :settings, form.object.settings do |settings_fields| %>
+  <div class="row column">
+    <%= settings_fields.check_box :sticky,
+                                  label: t("sticky", scope: i18n_scope) %>
+  </div>
+  <div class="row column">
+    <%= settings_fields.select :alignment,
+                               [["Left", "left"], ["Center", "center"], ["Right", "right"]],
+                               label: t("alignment", scope: i18n_scope) %>
+  </div>
+<% end %>

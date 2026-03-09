@@ -706,6 +706,10 @@ en:
           title_closed: Click to chat!
           title_open: Let's chat!
       content_blocks:
+        landing_menu:
+          name: "Landing menu"
+          sticky: "Sticky (always visible on scrolling)"
+          alignment: "Menu alignment"
         awesome_process_groups:
           active: Active
           all: All

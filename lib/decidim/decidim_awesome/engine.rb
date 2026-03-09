@@ -322,6 +322,24 @@ module Decidim
         end
       end
 
+      initializer "decidim_decidim_awesome.awesome_landing_menu_content_block" do
+        next unless DecidimAwesome.enabled?(:landing_menu)
+
+        [:homepage, :participatory_process_group_homepage, :participatory_process_homepage, :assembly_homepage].each do |scope|
+          Decidim.content_blocks.register(scope, :awesome_landing_menu) do |content_block|
+            content_block.cell = "decidim/decidim_awesome/content_blocks/landing_menu"
+            content_block.settings_form_cell = "decidim/decidim_awesome/content_blocks/landing_menu_form"
+            content_block.public_name_key = "decidim.decidim_awesome.content_blocks.landing_menu.name"
+
+            content_block.settings do |settings|
+              settings.attribute :sticky, type: :boolean, default: false
+              settings.attribute :alignment, type: :enum, default: "center", choices: %w(left center right)
+              settings.attribute :menu_items, type: :text, default: "[]"
+            end
+          end
+        end
+      end
+
       initializer "decidim_decidim_awesome.webpacker.assets_path" do
         Decidim.register_assets_path File.expand_path("app/packs", root)
       end
