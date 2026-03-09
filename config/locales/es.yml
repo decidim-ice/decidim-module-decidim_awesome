@@ -214,7 +214,7 @@ es:
         checks:
           index:
             admin_head_tags: Etiquetas Awesome incluidas en el encabezado de la aplicación de administración
-            awesome_update_available: "Hay una nueva versión disponible: %{latest_version}"
+            awesome_update_available: 'Hay una nueva versión disponible: %{latest_version}'
             awesome_version: Versión de Decidim Awesome %{version}
             decidim-admin: Del módulo Admin
             decidim-assemblies: Del módulo Assemblies
@@ -222,7 +222,7 @@ es:
             decidim-core: Del módulo Core
             decidim-participatory_processes: Del módulo Participatory Processes
             decidim-proposals: Del módulo Propuestas
-            decidim_update_available: "Hay una nueva versión disponible: %{latest_version}"
+            decidim_update_available: 'Hay una nueva versión disponible: %{latest_version}'
             decidim_version: Versión de Decidim %{version}
             errors:
               CSS: El encabezado no contiene las entradas requeridas <link> a la hoja de estilo. Para resolverlo, se pueden añadir manualmente al fichero personalizado _head.html.erb
@@ -587,27 +587,6 @@ es:
           title_closed: '¡Haz clic para chatear!'
           title_open: '¡Hablemos!'
       content_blocks:
-        map:
-          collapse: Iniciar con el menú contraído
-          map_center: Centro del mapa (Latitud, Longitud)
-          map_center_help: 'Utiliza un punto para marcar los decimales (pe: 41.38879, 2.15899). Deja este campo vacío para incluir automáticamente todos los marcadores'
-          map_height: Altura del mapa (px)
-          map_settings: Ajustes del mapa
-          map_zoom: Zoom (cualquier número entre 0 y 18)
-          map_zoom_help: Solo aplica si se define el punto central del mapa
-          menu_amendments: Mostrar enmiendas
-          menu_meetings: Mostrar encuentros
-          menu_merge_components: Combinar todos los componentes del mismo tipo en el menú
-          name: Mapa Global
-          show_accepted: Muestra las propuestas aceptadas
-          show_evaluating: Muestra las propuestas en evaluación
-          show_not_answered: Muestra las propuestas pendientes de contestar
-          show_rejected: Muestra las propuestas rechazadas
-          show_withdrawn: Muestra las propuestas retiradas
-          taxonomies: Taxonomías
-          text_settings: Ajustes del texto
-          title: Título
-          truncate: Número máximo de caracteres para las descripciones emergentes
         awesome_process_groups:
           active: Activos
           all: Todos
@@ -648,8 +627,28 @@ es:
           selection_criteria: Criterios de selección
           selection_criteria_options:
             automatic: Automático
-            manual: Manual
           title: Título del bloque
+        map:
+          collapse: Iniciar con el menú contraído
+          map_center: Centro del mapa (Latitud, Longitud)
+          map_center_help: 'Utiliza un punto para marcar los decimales (pe: 41.38879, 2.15899). Deja este campo vacío para incluir automáticamente todos los marcadores'
+          map_height: Altura del mapa (px)
+          map_settings: Ajustes del mapa
+          map_zoom: Zoom (cualquier número entre 0 y 18)
+          map_zoom_help: Solo aplica si se define el punto central del mapa
+          menu_amendments: Mostrar enmiendas
+          menu_meetings: Mostrar encuentros
+          menu_merge_components: Combinar todos los componentes del mismo tipo en el menú
+          name: Mapa Global
+          show_accepted: Muestra las propuestas aceptadas
+          show_evaluating: Muestra las propuestas en evaluación
+          show_not_answered: Muestra las propuestas pendientes de contestar
+          show_rejected: Muestra las propuestas rechazadas
+          show_withdrawn: Muestra las propuestas retiradas
+          taxonomies: Taxonomías
+          text_settings: Ajustes del texto
+          title: Título
+          truncate: Número máximo de caracteres para las descripciones emergentes
       credits: Decidim Awesome %{version} · Mantenida con ♥ por %{company}
       custom_fields:
         errors:
