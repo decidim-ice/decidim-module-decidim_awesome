@@ -648,10 +648,6 @@ it:
         errors:
           invalid_fields: Il contenuto non può essere analizzato ma è stato assegnato al campo '%{field}'
           invalid_xml: 'Impossibile analizzare il contenuto: elementi DL/DD non trovati nell''XML'
-      editor_images:
-        create:
-          error: Errore nel caricamento dell'immagine!
-          success: Immagine caricata correttamente
       map_component:
         map:
           api_not_ready: |

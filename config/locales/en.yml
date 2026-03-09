@@ -779,10 +779,6 @@ en:
             field '%{field}'
           invalid_xml: 'Content couldn''t be parsed: DL/DD elements not found in the
             XML'
-      editor_images:
-        create:
-          error: Error uploading image!
-          success: Image uploaded successfully
       map_component:
         map:
           api_not_ready: |

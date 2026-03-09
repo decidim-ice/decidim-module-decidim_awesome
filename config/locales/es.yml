@@ -655,10 +655,6 @@ es:
         errors:
           invalid_fields: No se ha podido analizar el contenido pero se ha asignado al campo '%{field}'
           invalid_xml: 'No se pudo analizar el contenido: no se encontraron los elementos DL/DD en el XML'
-      editor_images:
-        create:
-          error: '¡Error cargando imagen!'
-          success: Imagen subida correctamente
       map_component:
         map:
           api_not_ready: |

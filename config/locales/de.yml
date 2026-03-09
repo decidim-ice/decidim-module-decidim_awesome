@@ -649,10 +649,6 @@ de:
         errors:
           invalid_fields: Der Inhalt konnte nicht geparst werden, wurde aber dem Feld '%{field}' zugewiesen.
           invalid_xml: 'Der Inhalt konnte nicht geparst werden: DL/DD-Elemente nicht in der XML-Datei gefunden'
-      editor_images:
-        create:
-          error: Fehler beim Hochladen des Bildes!
-          success: Bild erfolgreich hochgeladen
       map_component:
         map:
           api_not_ready: |
