@@ -27,6 +27,5 @@ module Decidim::DecidimAwesome
 
       expect(exporter).to have_received(:export)
     end
-
   end
 end

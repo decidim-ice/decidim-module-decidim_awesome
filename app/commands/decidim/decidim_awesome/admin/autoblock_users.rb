@@ -100,16 +100,16 @@ module Decidim
         def create_report!(user)
           moderation = UserModeration.find_or_create_by!(user:)
 
-          unless UserReport.exists?(moderation:, user:)
-            UserReport.create!(
-              moderation:,
-              user:,
-              reason: "does_not_belong",
-              details: "Autoblock"
-            )
+          return if UserReport.exists?(moderation:, user:)
 
-            moderation.increment!(:report_count)
-          end
+          UserReport.create!(
+            moderation:,
+            user:,
+            reason: "does_not_belong",
+            details: "Autoblock"
+          )
+
+          moderation.increment!(:report_count)
         end
 
         def check_user_validation!(user)
@@ -129,14 +129,12 @@ module Decidim
         end
 
         def detected_users
-          @detected_users ||= begin
-            if threshold.present?
-              user_ids = @data.select { |row| row["total_score"].to_f >= threshold }.map { |row| row["id"] }
-              users_base_relation.where(id: user_ids)
-            else
-              Decidim::User.none
+          @detected_users ||= if threshold.present?
+                                user_ids = @data.select { |row| row["total_score"].to_f >= threshold }.map { |row| row["id"] }
+                                users_base_relation.where(id: user_ids)
+                              else
+                                Decidim::User.none
             end
-          end
         end
 
         def scores_data

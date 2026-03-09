@@ -6,16 +6,12 @@ module Decidim
       queue_as :default
 
       def perform(admin, perform_block: nil)
-        config = AwesomeConfig.find_or_initialize_by(
+        AwesomeConfig.find_or_initialize_by(
           var: :users_autoblocks_config,
           organization: admin.organization
         )
 
-        perform_block = if perform_block.nil?
-                          true
-                        else
-                          perform_block
-                        end
+        perform_block = true if perform_block.nil?
 
         command = Decidim::DecidimAwesome::Admin::AutoblockUsers.new(
           admin.organization,

@@ -13,7 +13,7 @@ namespace :decidim_decidim_awesome do
       raise "A valid admin email is required to run this task" if current_user.blank?
 
       Decidim::Organization.find_each do |current_organization|
-        if (current_config = organization_config(current_organization)).blank?
+        if (organization_config(current_organization)).blank?
           puts "\nSkipping Organization: #{current_organization.id} - #{translated_attribute(current_organization.name)}...\n"
           next
         end

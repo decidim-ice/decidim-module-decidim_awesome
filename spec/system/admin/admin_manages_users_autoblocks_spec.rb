@@ -61,14 +61,14 @@ describe "Admin manages users autoblocks feature" do
     end
 
     context "when performing the scores calculation" do
-       before do
-         fill_in "Threshold", with: "5"
-         click_on "Update"
-         perform_enqueued_jobs do
-           click_on "Calculate scores"
-         end
+      before do
+        fill_in "Threshold", with: "5"
+        click_on "Update"
+        perform_enqueued_jobs do
+          click_on "Calculate scores"
+        end
 
-         refresh
+        refresh
       end
 
       it "displays a message saying scores are being calcualted" do

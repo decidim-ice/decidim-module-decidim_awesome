@@ -88,7 +88,6 @@ module Decidim
               render :index
             end
           end
-
         end
 
         def detect_and_run
@@ -106,9 +105,10 @@ module Decidim
           UsersAutoblockCalculateJob.perform_later(current_user)
 
           flash[:notice] = I18n.t(
-                               "job_enqueued",
-                               count: 1 ,
-                               scope: "decidim.decidim_awesome.admin.users_autoblocks.calculate_scores")
+            "job_enqueued",
+            count: 1,
+            scope: "decidim.decidim_awesome.admin.users_autoblocks.calculate_scores"
+          )
 
           redirect_to decidim_admin_decidim_awesome.users_autoblocks_path
         end
