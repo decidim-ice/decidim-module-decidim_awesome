@@ -15,7 +15,7 @@ module Decidim
         with_user(admin) do
           mail(to: admin.email, subject: I18n.t(
             block_performed ? "subject_performed" : "subject_calculated",
-            organization_name: @organization.name,
+            organization_name: translated_attribute(@organization.name),
             scope: "decidim.decidim_awesome.users_autoblocks_report_mailer.notify"
           ))
         end

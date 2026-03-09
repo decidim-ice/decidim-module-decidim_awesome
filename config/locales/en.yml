@@ -726,6 +726,7 @@ en:
             error: Error removing rule! %{error}
             success: Rule removed successfully
           detect_and_run:
+            job_enqueued: Users are being blocked right now. You'll be able to see them in the moderation module
             error: There has been an error trying to block users!<br/>%{error}
             success_block_html:
               one: 1 user blocked successfully. You can check at <a href="%{url}">blocked

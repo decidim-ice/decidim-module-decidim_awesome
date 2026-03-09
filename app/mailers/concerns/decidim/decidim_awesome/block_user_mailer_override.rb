@@ -14,7 +14,7 @@ module Decidim
           @justification = translated_attribute(justification)
           subject = I18n.t(
             "decidim.block_user_mailer.notify.subject",
-            organization_name: @organization.name,
+            organization_name: translated_attribute(@organization.name),
             justification: @justification
           )
 

@@ -7,8 +7,8 @@
 
   <p class="email-instructions"><%= t(".details") %></p>
   <blockquote>
-    <%= @justification %>
+    <%= h(@justification) %>
   </blockquote>
 <% end %>
 
-<p class="email-closing"><%= t(".greetings", organization_name: h(@organization.name), organization_url: decidim.root_url(host: @organization.host)).html_safe %></p>
+<p class="email-closing"><%= t(".greetings", organization_name: h(translated_attribute(@organization.name)), organization_url: decidim.root_url(host: @organization.host)).html_safe %></p>
