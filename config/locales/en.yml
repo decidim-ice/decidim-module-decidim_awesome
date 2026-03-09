@@ -709,7 +709,13 @@ en:
         landing_menu:
           name: "Landing menu"
           sticky: "Sticky (always visible on scrolling)"
-          alignment: "Menu alignment"
+          alignment: "Menu position"
+          alignment_help: "Align menu items to the left, center, or right of the page"
+          alignment_left: "Left"
+          alignment_center: "Center"
+          alignment_right: "Right"
+          menu_items: "Menu items"
+          menu_items_help_html: "Enter one menu item per line. Format: Label | URL<br><br>Examples:<br>About us | #hero<br>Processes | #participatory_processes<br>External site | https://example.com | _blank<br><br>Use # for anchors on this page. Add | _blank to open in a new tab."
         awesome_process_groups:
           active: Active
           all: All

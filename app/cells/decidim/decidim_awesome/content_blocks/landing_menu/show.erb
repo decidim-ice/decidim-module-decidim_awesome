@@ -1,2 +1,16 @@
-<div id="<%= block_id %>">
-</div>
+<nav id="<%= block_id %>"
+     class="landing-menu bg-white z-40<%= " sticky top-0 shadow-sm" if sticky? %>"
+     aria-label="<%= t("name", scope: i18n_scope) %>">
+  <div class="flex items-center gap-3 py-2 <%= justify_class %>">
+    <% menu_items.each do |item| %>
+      <a href="<%= item[:url] %>"
+         class="landing-menu__link"
+         <% if item[:target] == "_blank" %>
+           target="_blank"
+           rel="noopener noreferrer"
+         <% end %>>
+        <%= item[:label] %>
+      </a>
+    <% end %>
+  </div>
+</nav>

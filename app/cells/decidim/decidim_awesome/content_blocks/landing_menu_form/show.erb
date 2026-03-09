@@ -5,7 +5,14 @@
   </div>
   <div class="row column">
     <%= settings_fields.select :alignment,
-                               [["Left", "left"], ["Center", "center"], ["Right", "right"]],
-                               label: t("alignment", scope: i18n_scope) %>
+                               alignment_options,
+                               label: t("alignment", scope: i18n_scope),
+                               help_text: t("alignment_help", scope: i18n_scope) %>
+  </div>
+  <div class="row column">
+    <%= settings_fields.translated :text_area, :menu_items,
+                                   label: t("menu_items", scope: i18n_scope),
+                                   help_text: t("menu_items_help_html", scope: i18n_scope),
+                                   rows: 8 %>
   </div>
 <% end %>

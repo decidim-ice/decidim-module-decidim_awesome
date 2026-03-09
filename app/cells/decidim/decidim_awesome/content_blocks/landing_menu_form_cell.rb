@@ -13,6 +13,12 @@ module Decidim
         def i18n_scope
           "decidim.decidim_awesome.content_blocks.landing_menu"
         end
+
+        def alignment_options
+          %w(left center right).map do |value|
+            [t("alignment_#{value}", scope: i18n_scope), value]
+          end
+        end
       end
     end
   end

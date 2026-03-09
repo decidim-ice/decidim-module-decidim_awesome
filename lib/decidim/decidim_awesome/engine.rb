@@ -334,7 +334,7 @@ module Decidim
             content_block.settings do |settings|
               settings.attribute :sticky, type: :boolean, default: false
               settings.attribute :alignment, type: :enum, default: "center", choices: %w(left center right)
-              settings.attribute :menu_items, type: :text, default: "[]"
+              settings.attribute :menu_items, type: :text, translated: true
             end
           end
         end
