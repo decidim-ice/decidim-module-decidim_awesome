@@ -49,8 +49,6 @@ module Decidim
             on(:ok) do
               flash[:notice] = I18n.t("success", scope: "decidim.decidim_awesome.admin.users_autoblocks.update")
               remove_calculations_file
-
-              redirect_to decidim_admin_decidim_awesome.users_autoblocks_path
             end
 
             on(:invalid) do |message|
@@ -75,40 +73,42 @@ module Decidim
           redirect_to decidim_admin_decidim_awesome.users_autoblocks_path
         end
 
-        def detect_and_run
+        def update_config
           @config_form = form(UsersAutoblocksConfigForm).from_params(params)
-          @config_form.perform_block = true
 
-          AutoblockUsers.call(@config_form) do
-            on(:ok) do |count, block_performed|
-              flash[:notice] = if block_performed
-                                 I18n.t(
-                                   "success_block_html",
-                                   count:,
-                                   url: decidim_admin.moderated_users_path(blocked: true),
-                                   scope: "decidim.decidim_awesome.admin.users_autoblocks.detect_and_run"
-                                 )
-                               else
-                                 I18n.t(
-                                   "success_scores_calculation",
-                                   count:,
-                                   scope: "decidim.decidim_awesome.admin.users_autoblocks.detect_and_run"
-                                 )
+          UpdateUsersAutoblockConfig.call(@config_form) do
+            on(:ok) do
+              flash[:notice] = I18n.t("success", scope: "decidim.decidim_awesome.admin.users_autoblocks.config")
 
-                               end
+              redirect_to decidim_admin_decidim_awesome.users_autoblocks_path
             end
 
-            on(:invalid) do |messages|
-              error_msg = messages.is_a?(Enumerable) ? messages.join("<br/>") : messages.to_s
-              flash[:alert] = I18n.t("error", error: error_msg, scope: "decidim.decidim_awesome.admin.users_autoblocks.detect_and_run")
+            on(:invalid) do |message|
+              flash.now[:alert] = I18n.t("error", error: message, scope: "decidim.decidim_awesome.admin.users_autoblocks.config")
+              render :index
             end
           end
+
+        end
+
+        def detect_and_run
+          UsersAutoblocksBlockJob.perform_later(current_user)
+
+          flash[:notice] = I18n.t(
+            "job_enqueued",
+            scope: "decidim.decidim_awesome.admin.users_autoblocks.detect_and_run"
+          )
 
           redirect_to decidim_admin_decidim_awesome.users_autoblocks_path
         end
 
         def calculate_scores
           UsersAutoblockCalculateJob.perform_later(current_user)
+
+          flash[:notice] = I18n.t(
+                               "job_enqueued",
+                               count: 1 ,
+                               scope: "decidim.decidim_awesome.admin.users_autoblocks.calculate_scores")
 
           redirect_to decidim_admin_decidim_awesome.users_autoblocks_path
         end
