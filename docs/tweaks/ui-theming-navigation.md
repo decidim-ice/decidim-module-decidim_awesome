@@ -182,11 +182,9 @@ end
 - **Categories:** Each category has title, description, mandatory flag, and visibility setting
 - **Visibility states:** `default` (visible to all users) or `hidden` (not shown in consent modal)
 - **Cookie items:** Each item has name, type (cookie/localStorage), service name, and description
-- **Default categories:** Extends Decidim's default consent categories (essential, analytics, preferences); default categories that are marked as mandatory are protected from editing/deletion to preserve essential functionality
+- **Default categories:** Extends Decidim's default consent categories (essential, analytics, preferences); default categories that are marked as mandatory are protected from deletion to preserve essential functionality
 - **Custom categories:** Admins can create additional categories (mandatory or optional) that are fully editable
-- **Edit restrictions:** Only default categories that are BOTH from Decidim AND marked as mandatory cannot be edited; default non-mandatory categories and all custom categories (regardless of mandatory flag) are editable
 - **Validation:** Cookie item names must be alphanumeric with underscores/hyphens only (no spaces)
-- **Mandatory flag:** Mandatory categories cannot be disabled by users in the consent modal; both default and custom categories can be marked as mandatory
 - **Performance:** Modal rendered on first visit; consent stored in browser localStorage
 - **Compliance:** Supports GDPR/ePrivacy requirements; admin responsible for accurate cookie documentation
 
@@ -199,10 +197,8 @@ Organize cookies into logical groups with configurable visibility and mandatory 
 **Category fields:**
 - **Title:** Translatable category name shown to users
 - **Description:** Translatable explanation of category purpose
-- **Mandatory:** If checked, users cannot disable this category
+- **Mandatory:** If checked, users can disable this category
 - **Visibility:** `default` (shown in modal) or `hidden` (not displayed to users)
-
-**Default categories:** Decidim provides default categories (essential, analytics, preferences). Default categories that are marked as mandatory (typically "essential") are protected from editing and deletion to preserve core functionality. Default non-mandatory categories (e.g., analytics, preferences) can be edited. Use "Reset to default" to restore original settings. Custom categories (regardless of mandatory flag) can be fully edited or deleted.
 
 ![Cookie categories management](../../examples/cookie_category.gif)
 
@@ -222,7 +218,7 @@ Document individual cookies or localStorage items within each category.
 
 **Validation:** Cookie names cannot contain spaces or special characters. Invalid names will show error: "Name format is invalid. Only letters, numbers, underscores and hyphens are allowed."
 
-**Edit restrictions:** Items in default mandatory categories (typically "essential") are protected from editing and deletion to preserve core functionality. Items in default non-mandatory categories (e.g., analytics, preferences) and all custom categories (regardless of mandatory flag) can be fully edited or deleted.
+**Edit restrictions:** Items in default mandatory categories (typically "essential") are protected from deletion to preserve core functionality. Items in default categories (e.g., analytics, preferences) can be edited or restart to default and all custom categories (regardless of mandatory flag) can be fully edited or deleted.
 
 **Contributing new preset services:**
 - Add the preset group and items to `app/controllers/concerns/decidim/decidim_awesome/admin/has_cookie_items_presets.rb` under `COOKIE_ITEM_PRESETS`.
