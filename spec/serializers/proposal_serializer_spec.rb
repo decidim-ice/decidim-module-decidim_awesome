@@ -100,6 +100,34 @@ module Decidim::Proposals
             expect(serialized).not_to include("body/name/ca")
           end
         end
+
+        context "when custom fields contain a checkbox-group with multiple selections" do
+          let(:checkbox_xml) do
+            "<xml><dl>" \
+              "<dt name=\"colors\">Colors</dt>" \
+              "<dd id=\"colors\" name=\"colors\"><div>red</div><div>blue</div><div>green</div></dd>" \
+              "</dl></xml>"
+          end
+          let(:custom_fields) do
+            {
+              foo: "[{\"type\":\"checkbox-group\",\"required\":false,\"label\":\"Colors\",\"name\":\"colors\"," \
+                   "\"values\":[{\"label\":\"red\",\"value\":\"red\"},{\"label\":\"blue\",\"value\":\"blue\"},{\"label\":\"green\",\"value\":\"green\"}]}]"
+            }
+          end
+          let(:body) do
+            {
+              "en" => checkbox_xml,
+              "machine_translations" => {
+                "ca" => checkbox_xml
+              }
+            }
+          end
+
+          it "serializes all selected checkbox values joined by comma" do
+            expect(serialized[:"body/colors/en"]).to eq("red, blue, green")
+            expect(serialized[:"body/colors/ca"]).to eq("red, blue, green")
+          end
+        end
       end
 
       context "when vote_cache is outdated" do

@@ -62,7 +62,7 @@ module Decidim
             custom_fields.fields.each do |field|
               next unless field["label"].present? && field.has_key?("name")
 
-              value = field["userData"].is_a?(Array) ? field["userData"].first : field["userData"]
+              value = field["userData"].is_a?(Array) ? field["userData"].join(", ") : field["userData"]
               yield field["label"].parameterize, value
             end
           end
