@@ -20,8 +20,6 @@ module Decidim
         )
 
         command.call do
-          on(:ok) do |count, block_performed|
-          end
           on(:invalid) do |error|
             @result = { error: }
             handle_result(result)

@@ -66,7 +66,7 @@ describe "Admin manages users autoblocks feature" do
         click_on "Update"
       end
 
-      context "enqueues the calculation job" do
+      context "when enqueues the calculation job" do
         before do
           clear_enqueued_jobs
           click_on "Calculate scores"
@@ -141,7 +141,6 @@ describe "Admin manages users autoblocks feature" do
 
           expect(Decidim::User.blocked.count).to eq(1)
           expect(user_with_blank_about.reload).to be_blocked
-
         end
       end
     end
@@ -174,9 +173,6 @@ describe "Admin manages users autoblocks feature" do
       end
 
       context "with about user blank rule" do
-        before do
-              end
-
         it "detects and blocks the user" do
           expect(Decidim::User.blocked.count).to eq(1)
 

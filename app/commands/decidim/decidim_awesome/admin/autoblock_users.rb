@@ -109,7 +109,7 @@ module Decidim
             details: "Autoblock"
           )
 
-          moderation.increment!(:report_count)
+          moderation.update!(report_count: moderation.report_count + 1)
         end
 
         def check_user_validation!(user)
@@ -134,7 +134,7 @@ module Decidim
                                 users_base_relation.where(id: user_ids)
                               else
                                 Decidim::User.none
-            end
+                              end
         end
 
         def scores_data
