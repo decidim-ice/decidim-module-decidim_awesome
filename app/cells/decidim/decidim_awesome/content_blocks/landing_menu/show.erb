@@ -1,7 +1,7 @@
 <nav id="<%= block_id %>"
-     class="landing-menu bg-white z-40<%= " sticky top-0 shadow-sm" if sticky? %>"
+     class="landing-menu hidden bg-white<%= " sticky top-0" if sticky? %>"
      aria-label="<%= t("name", scope: i18n_scope) %>">
-  <div class="flex items-center gap-3 py-2 <%= justify_class %>">
+  <div class="flex items-center gap-4 py-2 <%= justify_class %>">
     <% menu_items.each do |item| %>
       <a href="<%= item[:url] %>"
          class="landing-menu__link"
@@ -14,3 +14,18 @@
     <% end %>
   </div>
 </nav>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const nav = document.getElementById("<%= block_id %>");
+    if (!nav) return;
+
+    nav.querySelectorAll(".landing-menu__link").forEach(function(link) {
+      const href = link.getAttribute("href");
+      if (href && href.startsWith("#") && !document.querySelector(href)) {
+        link.remove();
+      }
+    });
+
+    nav.classList.remove("hidden");
+  });
+</script>

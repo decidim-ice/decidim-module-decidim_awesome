@@ -39,6 +39,9 @@ module Decidim
         end
 
         def anchor_for(block)
+          cell_instance = cell(block.cell, block)
+          cell_instance.block_id
+        rescue StandardError
           "awesome-content-block-#{block.manifest_name}-#{block.id}"
         end
       end
