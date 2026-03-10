@@ -64,30 +64,38 @@ describe "Admin manages users autoblocks feature" do
       before do
         fill_in "Threshold", with: "5"
         click_on "Update"
-        perform_enqueued_jobs do
+      end
+
+      context "enqueues the calculation job" do
+        before do
+          clear_enqueued_jobs
           click_on "Calculate scores"
+
+          sleep 1
         end
 
-        refresh
+        it "enqueues the users autoblock calculate job" do
+          # Assert the job is enqueued
+          enqueued_jobs = ActiveJob::Base.queue_adapter.enqueued_jobs.map { |j| j[:job] }
+          expect(enqueued_jobs).to include(Decidim::DecidimAwesome::UsersAutoblockCalculateJob)
+
+          expect(page).to have_content("Scores are being calculated right now")
+        end
+
+        it "does not perform any users block" do
+          expect(Decidim::User.blocked.count).to be_zero
+        end
       end
 
-      it "displays a message saying scores are being calcualted" do
-        expect(page).to have_content("Scores are being calculated right now")
-      end
+      context "when enabling the block option and notify users" do
+        before do
+          fill_in "Threshold", with: "5"
+          check "Notify blocked users"
+        end
 
-      it "does not perform any users block" do
-        expect(Decidim::User.blocked.count).to be_zero
-      end
-    end
-
-    context "when enabling the block option and notify users" do
-      before do
-        fill_in "Threshold", with: "5"
-        check "Notify blocked users"
-      end
-
-      it "displays a field with block justification message" do
-        expect(page).to have_content("Block justification message")
+        it "displays a field with block justification message" do
+          expect(page).to have_content("Block justification message")
+        end
       end
     end
 
@@ -104,9 +112,10 @@ describe "Admin manages users autoblocks feature" do
                      "#users_autoblocks_config-block_justification_message-tabs",
                      en: "Your account has been blocked due to suspicious activity")
         click_on "Update"
-        perform_enqueued_jobs do
-          click_on "Calculate scores"
-        end
+        click_on "Calculate scores"
+
+        sleep 1
+        perform_enqueued_jobs
 
         refresh
       end
@@ -117,18 +126,22 @@ describe "Admin manages users autoblocks feature" do
 
       context "with about user blank rule" do
         before do
-          perform_enqueued_jobs do
-            accept_confirm { click_on "Detect and block users" }
-          end
+          accept_confirm { click_on "Detect and block users" }
 
-          refresh
+          sleep 1
         end
 
-        it "detects and blocks the user" do
+        it "enqueues the users autoblock block job and blocks the user" do
+          enqueued_jobs = ActiveJob::Base.queue_adapter.enqueued_jobs.map { |j| j[:job] }
+          expect(enqueued_jobs).to include(Decidim::DecidimAwesome::UsersAutoblocksBlockJob)
+
+          perform_enqueued_jobs
+
           expect(page).to have_no_content "Validation failed"
 
           expect(Decidim::User.blocked.count).to eq(1)
           expect(user_with_blank_about.reload).to be_blocked
+
         end
       end
     end
@@ -142,11 +155,18 @@ describe "Admin manages users autoblocks feature" do
                      "#users_autoblocks_config-block_justification_message-tabs",
                      en: "Your account has been blocked due to suspicious activity")
         click_on "Update"
-        perform_enqueued_jobs do
-          click_on "Calculate scores"
-        end
+        sleep 1
+
+        click_on "Calculate scores"
+
+        sleep 1
+        perform_enqueued_jobs
 
         refresh
+
+        accept_confirm { click_on "Detect and block users" }
+        sleep 1
+        perform_enqueued_jobs
       end
 
       it "displays a message with found users count" do
@@ -155,14 +175,7 @@ describe "Admin manages users autoblocks feature" do
 
       context "with about user blank rule" do
         before do
-          perform_enqueued_jobs do
-            accept_confirm { click_on "Detect and block users" }
-
-            Decidim::DecidimAwesome::UsersAutoblocksBlockJob.perform_now(admin)
-          end
-
-          refresh
-        end
+              end
 
         it "detects and blocks the user" do
           expect(Decidim::User.blocked.count).to eq(1)
@@ -181,6 +194,12 @@ describe "Admin manages users autoblocks feature" do
 
       context "with user with no contents activities rule" do
         let(:type) { "activities_blank" }
+
+        before do
+          accept_confirm { click_on "Detect and block users" }
+          sleep 1
+          perform_enqueued_jobs
+        end
 
         it "detects and blocks the regular users affected by the rule" do
           expect(Decidim::User.blocked.count).to eq(6)
