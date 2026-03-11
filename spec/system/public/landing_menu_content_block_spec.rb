@@ -30,6 +30,17 @@ describe "Public homepage shows Landing Menu block" do
     end
   end
 
+  context "with relative path link" do
+    let(:menu_items_text) { "About | /about-us" }
+
+    it "displays the internal link" do
+      visit decidim.root_path
+      within(".landing-menu") do
+        expect(page).to have_link("About", href: "/about-us")
+      end
+    end
+  end
+
   context "with anchor to an existing content block" do
     let!(:sibling_block) { create(:content_block, organization:, manifest_name: :awesome_landing_menu, scope_name: :homepage, settings: sibling_settings) }
     let(:sibling_settings) { { "menu_items" => { "en" => "Home | #hero" } } }

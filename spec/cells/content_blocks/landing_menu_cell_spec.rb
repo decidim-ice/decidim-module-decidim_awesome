@@ -94,12 +94,29 @@ module Decidim::DecidimAwesome
       end
     end
 
+    context "when item has _self target" do
+      let(:menu_items_text) { "About | #section | _self" }
+
+      it "renders without target attribute since _self is the default" do
+        expect(subject).to have_link("About", href: "#section")
+        expect(subject).to have_no_css("a[target]")
+      end
+    end
+
     context "when target is not a valid value" do
       let(:menu_items_text) { "Link | #section | _parent" }
 
       it "ignores invalid target" do
         expect(subject).to have_link("Link", href: "#section")
         expect(subject).to have_no_css("a[target]")
+      end
+    end
+
+    context "when URL is a relative path" do
+      let(:menu_items_text) { "About | /about-us" }
+
+      it "renders the link" do
+        expect(subject).to have_link("About", href: "/about-us")
       end
     end
 
@@ -120,6 +137,14 @@ module Decidim::DecidimAwesome
         it "includes target in hash" do
           items = cell_instance.menu_items
           expect(items).to eq([{ label: "Site", url: "https://example.com", target: "_blank" }])
+        end
+      end
+
+      context "with _self target" do
+        let(:menu_items_text) { "About | #section | _self" }
+
+        it "includes target in hash" do
+          expect(cell_instance.menu_items).to eq([{ label: "About", url: "#section", target: "_self" }])
         end
       end
 
@@ -160,7 +185,27 @@ module Decidim::DecidimAwesome
       end
     end
 
-    describe "#alignment and #justify_class" do
+    describe "#alignment" do
+      let(:cell_instance) { cell(content_block.cell, content_block) }
+
+      context "when alignment is set" do
+        let(:settings) { { "menu_items" => menu_items_hash, "alignment" => "left" } }
+
+        it "returns the setting value" do
+          expect(cell_instance.alignment).to eq("left")
+        end
+      end
+
+      context "when alignment is not set" do
+        let(:settings) { { "menu_items" => menu_items_hash } }
+
+        it "defaults to center" do
+          expect(cell_instance.alignment).to eq("center")
+        end
+      end
+    end
+
+    describe "#justify_class" do
       let(:cell_instance) { cell(content_block.cell, content_block) }
 
       context "when alignment is left" do
@@ -186,13 +231,13 @@ module Decidim::DecidimAwesome
           expect(cell_instance.justify_class).to eq("justify-center")
         end
       end
+    end
 
-      context "when alignment is not set" do
-        let(:settings) { { "menu_items" => menu_items_hash } }
+    describe "#i18n_scope" do
+      let(:cell_instance) { cell(content_block.cell, content_block) }
 
-        it "defaults to justify-center" do
-          expect(cell_instance.justify_class).to eq("justify-center")
-        end
+      it "returns the landing menu scope" do
+        expect(cell_instance.i18n_scope).to eq("decidim.decidim_awesome.content_blocks.landing_menu")
       end
     end
 

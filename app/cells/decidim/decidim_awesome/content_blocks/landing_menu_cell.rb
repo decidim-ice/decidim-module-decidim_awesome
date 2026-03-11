@@ -54,7 +54,7 @@ module Decidim
           target = parts[2]&.strip
           target = nil unless %w(_blank _self).include?(target)
 
-          { label: parts[0], url: parts[1], target: }
+          { label: parts[0], url: parts[1], target: target }
         end
 
         def safe_url?(url)

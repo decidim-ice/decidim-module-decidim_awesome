@@ -1,6 +1,7 @@
 <nav id="<%= block_id %>"
-     class="landing-menu hidden bg-white<%= " sticky top-0" if sticky? %>"
-     aria-label="<%= t("name", scope: i18n_scope) %>">
+     class="landing-menu hidden<%= " sticky top-0" if sticky? %>"
+     aria-label="<%= t("name", scope: i18n_scope) %>"
+     data-landing-menu>
   <%# Desktop: horizontal menu %>
   <div class="hidden lg:flex items-center gap-4 py-2 <%= justify_class %>">
     <% menu_items.each do |item| %>
@@ -46,28 +47,3 @@
     </ul>
   </div>
 </nav>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const nav = document.getElementById("<%= block_id %>");
-    if (!nav) return;
-
-    nav.querySelectorAll(".landing-menu__link").forEach(function(link) {
-      const href = link.getAttribute("href");
-      if (href && href.startsWith("#") && !document.querySelector(href)) {
-        link.remove();
-      }
-    });
-
-    nav.querySelectorAll(".landing-menu__mobile-dropdown li").forEach(function(li) {
-      const link = li.querySelector("a");
-      if (link) {
-        const href = link.getAttribute("href");
-        if (href && href.startsWith("#") && !document.querySelector(href)) {
-          li.remove();
-        }
-      }
-    });
-
-    nav.classList.remove("hidden");
-  });
-</script>

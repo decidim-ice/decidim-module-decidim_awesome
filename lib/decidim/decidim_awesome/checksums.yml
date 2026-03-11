@@ -35,6 +35,8 @@ decidim-core:
     decidim-0.31.0: 2c4f0e5a693b4b46a8e39e12dd9ecb2a
   /app/views/decidim/account/show.html.erb:
     decidim-0.31.0: 1c230c5c6bc02e0bb22e1ea92b0da96c
+  /app/cells/decidim/content_blocks/base_cell.rb:
+    decidim-0.31.2: 58c56a4544a8ab4ecb00056f29d80376
   /app/cells/decidim/content_blocks/global_menu_cell.rb:
     decidim-0.31.0: d224370c364a9cf4b2e244063274e5ef
   /app/views/decidim/devise/registrations/new.html.erb:
