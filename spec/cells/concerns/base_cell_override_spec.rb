@@ -22,6 +22,18 @@ module Decidim::DecidimAwesome
         end
       end
 
+      context "when cell does not define its own block_id" do
+        let(:content_block) { create(:content_block, organization:, manifest_name: :awesome_landing_menu, scope_name: :homepage) }
+
+        it "returns the fallback format" do
+          cell_instance = cell(content_block.cell, content_block)
+          # BaseCellOverride#block_id: super.presence || fallback
+          # Call the override directly, bypassing LandingMenuCell's own block_id
+          result = Decidim::DecidimAwesome::BaseCellOverride.instance_method(:block_id).bind_call(cell_instance)
+          expect(result).to eq("awesome-content-block-awesome_landing_menu-#{content_block.id}")
+        end
+      end
+
       context "with two blocks of the same manifest" do
         let(:block_a) { create(:content_block, organization:, manifest_name: :awesome_landing_menu, scope_name: :homepage) }
         let(:block_b) { create(:content_block, organization:, manifest_name: :awesome_landing_menu, scope_name: :homepage) }

@@ -14,6 +14,19 @@ describe "Public homepage shows Landing Menu block" do
     switch_to_host(organization.host)
   end
 
+  context "with multiple menu items" do
+    let(:menu_items_text) { "About | /about\nContact | /contact\nFAQ | /faq" }
+
+    it "displays all items in order" do
+      visit decidim.root_path
+      within(".landing-menu") do
+        expect(page).to have_content("About")
+        expect(page).to have_content("Contact")
+        expect(page).to have_content("FAQ")
+      end
+    end
+  end
+
   context "with external link" do
     it "displays the link text" do
       visit decidim.root_path
@@ -60,6 +73,18 @@ describe "Public homepage shows Landing Menu block" do
     it "hides the link via JavaScript" do
       visit decidim.root_path
       expect(page).to have_no_content("Missing")
+    end
+  end
+
+  context "when URL is unsafe" do
+    let(:menu_items_text) { "XSS | javascript:alert(1)\nSafe | /about" }
+
+    it "does not render the unsafe link" do
+      visit decidim.root_path
+      within(".landing-menu") do
+        expect(page).to have_no_content("XSS")
+        expect(page).to have_content("Safe")
+      end
     end
   end
 

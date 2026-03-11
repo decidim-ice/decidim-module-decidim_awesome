@@ -58,6 +58,18 @@ describe "Admin manages Landing Menu content block" do
       expect(page).to have_field("content_block_settings_menu_items_en", with: "About | #hero\nContact | https://example.com | _blank")
     end
 
+    it "saves all settings together" do
+      check "content_block_settings_sticky"
+      select "Right", from: "content_block_settings_alignment"
+      fill_in "content_block_settings_menu_items_en", with: "Home | #hero\nAbout | /about | _blank"
+      click_link_or_button "Update"
+
+      visit decidim_admin.edit_organization_homepage_content_block_path(content_block)
+      expect(page).to have_checked_field("content_block_settings_sticky")
+      expect(page).to have_select("content_block_settings_alignment", selected: "Right")
+      expect(page).to have_field("content_block_settings_menu_items_en", with: "Home | #hero\nAbout | /about | _blank")
+    end
+
     describe "anchor chips" do
       let!(:html_block) { create(:content_block, organization:, manifest_name: :html, scope_name: :homepage) }
 
@@ -72,9 +84,12 @@ describe "Admin manages Landing Menu content block" do
       end
 
       it "adds anchor line to textarea when chip is clicked" do
-        first("[data-anchor-label]").click
+        chip = first("[data-anchor-label]")
+        label = chip["data-anchor-label"]
+        url = chip["data-anchor-url"]
+        chip.click
         textarea = find_by_id("content_block_settings_menu_items_en", visible: :all)
-        expect(textarea.value).to match(/\| #/)
+        expect(textarea.value).to include("#{label} | #{url}")
       end
 
       it "removes anchor line when active chip is clicked again" do

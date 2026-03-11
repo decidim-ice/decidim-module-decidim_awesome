@@ -30,6 +30,22 @@ module Decidim::DecidimAwesome
       allow(controller).to receive(:current_organization).and_return(organization)
     end
 
+    describe "rendering" do
+      subject { cell_instance.call }
+
+      it "renders the sticky checkbox" do
+        expect(subject).to have_content("Sticky")
+      end
+
+      it "renders the alignment select" do
+        expect(subject).to have_content("Menu position")
+      end
+
+      it "renders the menu items textarea" do
+        expect(subject).to have_content("Menu items")
+      end
+    end
+
     describe "#alignment_options" do
       it "returns 3 options" do
         expect(cell_instance.alignment_options.size).to eq(3)
@@ -74,6 +90,13 @@ module Decidim::DecidimAwesome
         anchors = cell_instance.available_anchors
         anchor_values = anchors.map { |a| a[:anchor] }
         expect(anchor_values).not_to include(a_string_matching(/#{unpublished.id}/))
+      end
+
+      it "excludes blocks from another organization" do
+        other_org = create(:organization)
+        create(:content_block, organization: other_org, manifest_name: :html, scope_name: :homepage)
+        anchor_values = cell_instance.available_anchors.map { |a| a[:anchor] }
+        expect(anchor_values).not_to include(a_string_matching(/#{other_org.id}/))
       end
 
       context "when no sibling blocks exist" do

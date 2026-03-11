@@ -19,10 +19,20 @@ module Decidim::DecidimAwesome
     end
 
     it "renders navigation links" do
-      expect(subject).to have_content("About us")
-      expect(subject).to have_content("Processes")
       expect(subject).to have_link("About us", href: "#hero")
       expect(subject).to have_link("Processes", href: "#participatory_processes")
+    end
+
+    it "renders nav with aria-label" do
+      expect(subject).to have_css("nav[aria-label]")
+    end
+
+    it "renders links in the mobile dropdown" do
+      expect(subject).to have_css("ul[role='menu']")
+      within("ul[role='menu']") do
+        expect(subject).to have_content("About us")
+        expect(subject).to have_content("Processes")
+      end
     end
 
     context "when menu_items is empty" do
@@ -117,6 +127,15 @@ module Decidim::DecidimAwesome
 
       it "renders the link" do
         expect(subject).to have_link("About", href: "/about-us")
+      end
+    end
+
+    context "when URL is https" do
+      let(:menu_items_text) { "Site | https://example.com" }
+
+      it "renders the link without target attribute" do
+        expect(subject).to have_link("Site", href: "https://example.com")
+        expect(subject).to have_no_css("a[target]")
       end
     end
 
