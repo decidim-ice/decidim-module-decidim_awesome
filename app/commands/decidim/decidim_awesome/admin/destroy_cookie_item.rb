@@ -16,6 +16,7 @@ module Decidim
           @category_slug = category_slug
           @item_name = item_name
           @organization = organization
+          @store = CookieManagementStore.new(organization)
         end
 
         # Executes the command. Broadcasts these events:
@@ -32,7 +33,7 @@ module Decidim
             return
           end
 
-          save_cookie_management!
+          @store.save!(@store.stored_categories)
 
           broadcast(:ok)
         rescue ActiveRecord::RecordInvalid => e
@@ -45,27 +46,12 @@ module Decidim
 
         attr_reader :category_slug, :item_name, :organization
 
-        def cookie_management_setting
-          @cookie_management_setting ||= AwesomeConfig.find_or_initialize_by(
-            var: :cookie_management,
-            organization: organization
-          )
-        end
-
-        def categories_data
-          @categories_data ||= begin
-            data = cookie_management_setting.value
-            data = {} unless data.is_a?(Hash)
-            data["categories"] = [] unless data["categories"].is_a?(Array)
-            data
-          end
-        end
-
         def find_category
-          @category = categories_data["categories"].find { |c| c["slug"].to_s == category_slug.to_s }
-
-          return false unless @category
-
+          @category = @store.stored_categories.find { |c| c["slug"].to_s == category_slug.to_s }
+          unless @category
+            form.errors.add(:base, :category_not_found)
+            return false
+          end
           @category["items"] = [] unless @category["items"].is_a?(Array)
           true
         end
@@ -85,11 +71,6 @@ module Decidim
           end
 
           true
-        end
-
-        def save_cookie_management!
-          cookie_management_setting.value = categories_data
-          cookie_management_setting.save!
         end
       end
     end

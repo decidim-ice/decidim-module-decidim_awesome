@@ -3,10 +3,8 @@
 module Decidim
   module DecidimAwesome
     module Admin
-      module HasCookieItemsPresets
-        extend ActiveSupport::Concern
-
-        COOKIE_ITEM_PRESETS = {
+      class CookieItemPresetBuilder
+        PRESETS = {
           decidim_essential: [
             { name: "_session_id", type: "cookie", service: "decidim_essential", description: "session_id" },
             { name: Decidim.consent_cookie_name, type: "cookie", service: "decidim_essential", description: "decidim_consent" },
@@ -106,29 +104,40 @@ module Decidim
           ]
         }.freeze
 
-        def cookie_item_presets
-          COOKIE_ITEM_PRESETS.map do |group_key, items|
+        def initialize(form_builder, organization)
+          @form_builder = form_builder
+          @organization = organization
+        end
+
+        def presets
+          PRESETS.map do |group_key, items|
             {
               key: group_key,
-              label: t("cookie_item_presets.labels.#{group_key}", scope: "decidim.decidim_awesome.admin.cookie_items", count: items.count)
+              label: I18n.t("cookie_item_presets.labels.#{group_key}",
+                            scope: "decidim.decidim_awesome.admin.cookie_items",
+                            count: items.count)
             }
           end
         end
 
-        def find_preset_items(group_key)
-          COOKIE_ITEM_PRESETS[group_key&.to_sym]
+        def find(group_key)
+          PRESETS[group_key&.to_sym]
         end
 
-        def build_preset_forms(items)
-          locales = current_organization.available_locales
-          items.map { |preset| build_preset_form(preset, locales) }
+        def build_forms(items)
+          locales = @organization.available_locales
+          items.map { |preset| build_form(preset, locales) }
         end
 
-        def build_preset_form(preset, locales)
-          service_label = t("cookie_item_presets.services.#{preset[:service]}", scope: "decidim.decidim_awesome.admin.cookie_items")
-          description_label = t("cookie_item_presets.descriptions.#{preset[:description]}", scope: "decidim.decidim_awesome.admin.cookie_items")
+        private
 
-          form(CookieItemForm).from_params(
+        def build_form(preset, locales)
+          service_label = I18n.t("cookie_item_presets.services.#{preset[:service]}",
+                                 scope: "decidim.decidim_awesome.admin.cookie_items")
+          description_label = I18n.t("cookie_item_presets.descriptions.#{preset[:description]}",
+                                     scope: "decidim.decidim_awesome.admin.cookie_items")
+
+          @form_builder.from_params(
             name: preset[:name],
             type: preset[:type],
             service: locales.index_with { |_| service_label },

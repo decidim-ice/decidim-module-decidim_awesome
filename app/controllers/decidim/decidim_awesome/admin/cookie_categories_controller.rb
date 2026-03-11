@@ -14,7 +14,7 @@ module Decidim
         end
 
         def index
-          ensure_categories_initialized!
+          store.ensure_initialized!
         end
 
         def new
@@ -77,8 +77,20 @@ module Decidim
 
         private
 
+        def current_categories
+          store.current_categories
+        end
+
         def set_cookie_management_breadcrumb
           add_breadcrumb_item :cookie_management, decidim_admin_decidim_awesome.cookie_categories_path
+        end
+
+        def default_category?(category)
+          CookieCategory.new(category).default?
+        end
+
+        def category_modified?(category)
+          CookieCategory.new(category).modified?
         end
       end
     end

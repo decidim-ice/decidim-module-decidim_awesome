@@ -5,7 +5,6 @@ module Decidim
     module Admin
       class UpdateCookieItem < Decidim::Command
         include NeedsAwesomeConfig
-        include HasCookieCategories
 
         # Public: Initializes the command.
         #
@@ -16,6 +15,7 @@ module Decidim
           @form = form
           @category_slug = category_slug
           @item_name = item_name
+          @store = CookieManagementStore.new(form.current_organization)
         end
 
         # Executes the command. Broadcasts these events:
@@ -32,7 +32,7 @@ module Decidim
           return broadcast(:invalid) if duplicate_item_name?
 
           update_item
-          save_cookie_management!
+          @store.save!(@store.stored_categories)
 
           broadcast(:ok)
         rescue ActiveRecord::RecordInvalid => e
@@ -45,30 +45,12 @@ module Decidim
 
         attr_reader :form, :category_slug, :item_name
 
-        def cookie_management_setting
-          @cookie_management_setting ||= AwesomeConfig.find_or_initialize_by(
-            var: :cookie_management,
-            organization: form.current_organization
-          )
-        end
-
-        def categories_data
-          @categories_data ||= begin
-            data = cookie_management_setting.value
-            data = {} unless data.is_a?(Hash)
-            data["categories"] = [] unless data["categories"].is_a?(Array)
-            data
-          end
-        end
-
         def find_category
-          @category = categories_data["categories"].find { |c| c["slug"].to_s == category_slug.to_s }
-
+          @category = @store.stored_categories.find { |c| c["slug"].to_s == category_slug.to_s }
           unless @category
             form.errors.add(:base, :category_not_found)
             return false
           end
-
           @category["items"] = [] unless @category["items"].is_a?(Array)
           true
         end
@@ -86,7 +68,7 @@ module Decidim
 
         def default_item_name_changed?
           return false if form.name == item_name
-          return false unless default_cookie_item?(category_slug, item_name)
+          return false unless CookieItem.new("name" => item_name).default?(category_slug)
 
           form.errors.add(:name, :cannot_change_default_item_name)
           true
@@ -104,11 +86,6 @@ module Decidim
 
         def update_item
           @category["items"][@item_index] = form.to_params
-        end
-
-        def save_cookie_management!
-          cookie_management_setting.value = categories_data
-          cookie_management_setting.save!
         end
       end
     end

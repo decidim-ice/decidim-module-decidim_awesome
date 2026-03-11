@@ -5,7 +5,6 @@ module Decidim
     module Admin
       class CookieItemsController < DecidimAwesome::Admin::ApplicationController
         include CookieManagementHelpers
-        include HasCookieItemsPresets
 
         helper_method :category_from_params, :default_category?, :default_cookie_item?, :cookie_item_modified?, :item_type_options, :category_title_for_breadcrumb,
                       :cookie_item_presets
@@ -45,13 +44,13 @@ module Decidim
         end
 
         def create_preset
-          items = find_preset_items(params[:preset_name])
+          items = preset_builder.find(params[:preset_name])
           unless items
             return redirect_to(decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug]),
                                alert: I18n.t("cookie_items.create_preset.not_found", scope: "decidim.decidim_awesome.admin"))
           end
 
-          @forms = build_preset_forms(items)
+          @forms = preset_builder.build_forms(items)
 
           CreateCookieItemPreset.call(@forms, params[:cookie_category_slug]) do
             on(:ok) do
@@ -103,6 +102,22 @@ module Decidim
           add_breadcrumb_item :cookie_management, decidim_admin_decidim_awesome.cookie_categories_path
           add_breadcrumb_item category_title_for_breadcrumb(params[:cookie_category_slug]),
                               decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
+        end
+
+        def preset_builder
+          @preset_builder ||= CookieItemPresetBuilder.new(form(CookieItemForm), current_organization)
+        end
+
+        def cookie_item_presets
+          preset_builder.presets
+        end
+
+        def cookie_item_modified?(category_slug, item)
+          CookieItem.new(item).modified?(category_slug)
+        end
+
+        def default_cookie_item?(category_slug, item_name)
+          CookieItem.new("name" => item_name).default?(category_slug)
         end
       end
     end

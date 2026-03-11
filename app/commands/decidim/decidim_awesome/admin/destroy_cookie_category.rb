@@ -14,6 +14,7 @@ module Decidim
         def initialize(category_slug, organization)
           @category_slug = category_slug
           @organization = organization
+          @store = CookieManagementStore.new(organization)
         end
 
         # Executes the command. Broadcasts these events:
@@ -28,7 +29,7 @@ module Decidim
             return
           end
 
-          save_categories!
+          @store.save!(@store.stored_categories)
 
           broadcast(:ok)
         rescue ActiveRecord::RecordInvalid => e
@@ -41,46 +42,21 @@ module Decidim
 
         attr_reader :category_slug, :organization
 
-        def cookie_management_setting
-          @cookie_management_setting ||= AwesomeConfig.find_or_initialize_by(
-            var: :cookie_management,
-            organization: organization
-          )
-        end
-
-        def categories_data
-          @categories_data ||= begin
-            data = cookie_management_setting.value
-            data = {} unless data.is_a?(Hash)
-            data["categories"] = [] unless data["categories"].is_a?(Array)
-            data
-          end
-        end
-
-        def current_categories
-          categories_data["categories"]
-        end
-
         def remove_category
-          original_size = current_categories.size
+          original_size = @store.stored_categories.size
           default_cat = reset_category_to_default(category_slug)
 
           if default_cat
-            index = current_categories.find_index { |c| c["slug"].to_s == category_slug.to_s }
+            index = @store.stored_categories.find_index { |c| c["slug"].to_s == category_slug.to_s }
             return false unless index
 
-            current_categories[index] = default_cat
+            @store.stored_categories[index] = default_cat
           else
-            current_categories.reject! { |c| c["slug"].to_s == category_slug.to_s }
-            return current_categories.size < original_size
+            @store.stored_categories.reject! { |c| c["slug"].to_s == category_slug.to_s }
+            return @store.stored_categories.size < original_size
           end
 
           true
-        end
-
-        def save_categories!
-          cookie_management_setting.value = categories_data
-          cookie_management_setting.save!
         end
       end
     end

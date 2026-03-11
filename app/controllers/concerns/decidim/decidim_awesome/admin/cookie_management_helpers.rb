@@ -9,7 +9,6 @@ module Decidim
         included do
           include NeedsAwesomeConfig
           include ConfigConstraintsHelpers
-          include HasCookieCategories
           include CookieBreadcrumbHelper
 
           helper ConfigConstraintsHelpers
@@ -17,29 +16,8 @@ module Decidim
 
         private
 
-        def cookie_management_setting
-          @cookie_management_setting ||= AwesomeConfig.find_or_initialize_by(
-            var: :cookie_management,
-            organization: current_organization
-          )
-        end
-
-        def categories_data
-          @categories_data ||= begin
-            data = cookie_management_setting.value
-            data = {} unless data.is_a?(Hash)
-            data["categories"] = [] unless data["categories"].is_a?(Array)
-            data
-          end
-        end
-
-        def current_categories
-          categories_data["categories"]
-        end
-
-        def save_categories!(categories)
-          cookie_management_setting.value = { "categories" => categories }
-          cookie_management_setting.save!
+        def store
+          @store ||= CookieManagementStore.new(current_organization)
         end
 
         def visibility_options
@@ -48,65 +26,46 @@ module Decidim
           end
         end
 
-        def ensure_categories_initialized!
-          existing_slugs = current_categories.map { |c| c["slug"].to_s }
-          missing_defaults = default_decidim_categories.reject { |c| existing_slugs.include?(c["slug"].to_s) }
-
-          return if missing_defaults.empty?
-
-          save_categories!(current_categories + missing_defaults)
-        end
-
-        def initialize_default_categories!
-          default_categories = default_decidim_categories
-          save_categories!(default_categories)
-          default_categories
-        end
-
-        def find_category(slug)
-          current_categories.find { |c| c["slug"].to_s == slug.to_s }
-        end
-
         def category_for_form(slug)
-          category = find_category(slug)
+          category = store.find_category(slug)
           raise ActiveRecord::RecordNotFound unless category
 
           {
-            slug: category["slug"],
-            mandatory: category["mandatory"],
-            title: category["title"],
-            description: category["description"],
-            visibility: category["visibility"]
+            slug: category.slug,
+            mandatory: category.mandatory?,
+            title: category.title,
+            description: category.description,
+            visibility: category.visibility
           }
         end
 
         def current_category_title(slug)
-          category = find_category(slug)
+          category = store.find_category(slug)
           return slug unless category
 
-          translated_attribute(category["title"]) || slug
+          translated_attribute(category.title) || slug
         end
 
         def category_from_params
-          category = find_category(params[:cookie_category_slug])
+          category = store.find_category(params[:cookie_category_slug])
           raise ActiveRecord::RecordNotFound unless category
 
           category
         end
 
         def item_for_form(category_slug, item_name)
-          category = find_category(category_slug)
+          category = store.find_category(category_slug)
           raise ActiveRecord::RecordNotFound unless category
 
-          items = category["items"].is_a?(Array) ? category["items"] : []
-          item = items.find { |i| i["name"].to_s == item_name.to_s }
+          items = category.items
+          item = items.find { |i| i.name.to_s == item_name.to_s }
           raise ActiveRecord::RecordNotFound unless item
 
           {
-            name: item["name"],
-            type: item["type"],
-            service: item["service"],
-            description: item["description"]
+            name: item.name,
+            type: item.type,
+            service: item.service,
+            description: item.description
           }
         end
 
@@ -117,10 +76,10 @@ module Decidim
         end
 
         def category_title_for_breadcrumb(slug)
-          category = find_category(slug)
+          category = store.find_category(slug)
           return slug unless category
 
-          translated_attribute(category["title"]) || slug
+          translated_attribute(category.title) || slug
         end
       end
     end

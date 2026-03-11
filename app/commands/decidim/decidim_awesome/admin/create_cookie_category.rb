@@ -11,6 +11,7 @@ module Decidim
         # form - A form object with the params.
         def initialize(form)
           @form = form
+          @store = CookieManagementStore.new(form.current_organization)
         end
 
         # Executes the command. Broadcasts these events:
@@ -25,7 +26,7 @@ module Decidim
           return broadcast(:invalid) if duplicate_slug?
 
           add_category
-          save_categories!
+          @store.save!(@store.stored_categories)
 
           broadcast(:ok)
         rescue ActiveRecord::RecordInvalid => e
@@ -42,28 +43,8 @@ module Decidim
           form.slug = form.generate_slug_from_title if form.slug.blank?
         end
 
-        def cookie_management_setting
-          @cookie_management_setting ||= AwesomeConfig.find_or_initialize_by(
-            var: :cookie_management,
-            organization: form.current_organization
-          )
-        end
-
-        def categories_data
-          @categories_data ||= begin
-            data = cookie_management_setting.value
-            data = {} unless data.is_a?(Hash)
-            data["categories"] = [] unless data["categories"].is_a?(Array)
-            data
-          end
-        end
-
-        def current_categories
-          categories_data["categories"]
-        end
-
         def duplicate_slug?
-          if current_categories.any? { |c| c["slug"].to_s == form.slug }
+          if @store.stored_categories.any? { |c| c["slug"].to_s == form.slug }
             form.errors.add(:slug, :taken)
             return true
           end
@@ -71,12 +52,7 @@ module Decidim
         end
 
         def add_category
-          current_categories << form.to_params
-        end
-
-        def save_categories!
-          cookie_management_setting.value = categories_data
-          cookie_management_setting.save!
+          @store.stored_categories << form.to_params
         end
       end
     end
