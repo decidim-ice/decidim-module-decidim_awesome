@@ -62,7 +62,12 @@ module Decidim
             custom_fields.fields.each do |field|
               next unless field["label"].present? && field.has_key?("name")
 
-              value = field["userData"].is_a?(Array) ? field["userData"].join("\n") : field["userData"]
+              value = if custom_fields.data.present?
+                        nodes = custom_fields.data.search("##{field["name"]} div")
+                        nodes.map { |v| v.inner_html(encoding: "UTF-8").presence || v.attribute("alt")&.value }.join("\n") if nodes.present?
+                      end
+              value ||= field["userData"].is_a?(Array) ? field["userData"].join("\n") : field["userData"]
+
               yield field["label"].parameterize, value
             end
           end
