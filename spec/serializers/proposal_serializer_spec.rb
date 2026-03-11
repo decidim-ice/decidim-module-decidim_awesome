@@ -123,9 +123,9 @@ module Decidim::Proposals
             }
           end
 
-          it "serializes all selected checkbox values joined by comma" do
-            expect(serialized[:"body/colors/en"]).to eq("red, blue, green")
-            expect(serialized[:"body/colors/ca"]).to eq("red, blue, green")
+          it "serializes all selected checkbox values joined by newline" do
+            expect(serialized[:"body/colors/en"]).to eq("red\nblue\ngreen")
+            expect(serialized[:"body/colors/ca"]).to eq("red\nblue\ngreen")
           end
         end
       end
