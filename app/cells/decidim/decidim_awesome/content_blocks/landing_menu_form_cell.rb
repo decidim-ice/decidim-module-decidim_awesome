@@ -22,8 +22,10 @@ module Decidim
 
         def available_anchors
           @available_anchors ||= sibling_blocks.filter_map do |block|
-            label = I18n.t(block.manifest.public_name_key, default: block.manifest_name.humanize)
             anchor = anchor_for(block)
+            next if anchor.blank?
+
+            label = I18n.t(block.manifest.public_name_key, default: block.manifest_name.humanize)
             { label:, anchor: }
           end
         end
@@ -40,7 +42,9 @@ module Decidim
 
         def anchor_for(block)
           cell_instance = cell(block.cell, block)
-          cell_instance.block_id
+          cell_instance.send(:block_id)
+        rescue NoMethodError
+          nil
         rescue StandardError
           "awesome-content-block-#{block.manifest_name}-#{block.id}"
         end

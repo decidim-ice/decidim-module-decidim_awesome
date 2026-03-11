@@ -16,7 +16,7 @@
                                    rows: 8 %>
     <% if available_anchors.any? %>
       <p class="help-text mb-2"><%= t("available_anchors", scope: i18n_scope) %></p>
-      <div class="landing-menu-anchors flex flex-wrap gap-2" data-landing-menu-anchors>
+      <div class="landing-menu-anchors flex flex-wrap gap-2 mb-2" data-landing-menu-anchors>
         <% available_anchors.each do |item| %>
           <button type="button"
                   class="label landing-menu-anchors__chip"
@@ -27,6 +27,7 @@
           </button>
         <% end %>
       </div>
+      <p class="help-text"><%= t("anchor_hint_html", scope: i18n_scope) %></p>
     <% end %>
   </div>
 <% end %>

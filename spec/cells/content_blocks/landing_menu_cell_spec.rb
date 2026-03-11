@@ -68,6 +68,41 @@ module Decidim::DecidimAwesome
       end
     end
 
+    context "when URL has javascript: scheme" do
+      let(:menu_items_text) { "XSS | javascript:alert(1)\nSafe | #anchor" }
+
+      it "filters out unsafe URLs" do
+        expect(subject).to have_no_content("XSS")
+        expect(subject).to have_content("Safe")
+      end
+    end
+
+    context "when URL has data: scheme" do
+      let(:menu_items_text) { "Unsafe | data:text/html,<script>alert(1)</script>" }
+
+      it "filters out unsafe URLs" do
+        expect(subject).to have_no_css("nav")
+      end
+    end
+
+    context "when URL is protocol-relative" do
+      let(:menu_items_text) { "Phish | //evil.com/page\nSafe | /about" }
+
+      it "filters out protocol-relative URLs" do
+        expect(subject).to have_no_content("Phish")
+        expect(subject).to have_content("Safe")
+      end
+    end
+
+    context "when target is not a valid value" do
+      let(:menu_items_text) { "Link | #section | _parent" }
+
+      it "ignores invalid target" do
+        expect(subject).to have_link("Link", href: "#section")
+        expect(subject).to have_no_css("a[target]")
+      end
+    end
+
     describe "#menu_items" do
       let(:cell_instance) { cell(content_block.cell, content_block) }
 

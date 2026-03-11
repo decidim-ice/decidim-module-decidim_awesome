@@ -43,12 +43,22 @@ module Decidim
         def parse_menu_items(text)
           return [] if text.blank?
 
-          text.lines.filter_map do |line|
-            parts = line.strip.split("|").map(&:strip)
-            next if parts.length < 2 || parts[0].blank? || parts[1].blank?
+          text.lines.filter_map { |line| parse_menu_line(line) }
+        end
 
-            { label: parts[0], url: parts[1], target: parts[2].presence }
-          end
+        def parse_menu_line(line)
+          parts = line.strip.split("|").map(&:strip)
+          return if parts.length < 2 || parts[0].blank? || parts[1].blank?
+          return unless safe_url?(parts[1])
+
+          target = parts[2]&.strip
+          target = nil unless %w(_blank _self).include?(target)
+
+          { label: parts[0], url: parts[1], target: }
+        end
+
+        def safe_url?(url)
+          url.match?(%r{\A(#|/(?!/)|https?://)}i)
         end
       end
     end

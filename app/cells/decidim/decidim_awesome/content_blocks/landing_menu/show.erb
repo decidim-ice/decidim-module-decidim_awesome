@@ -3,14 +3,10 @@
      aria-label="<%= t("name", scope: i18n_scope) %>">
   <div class="flex items-center gap-4 py-2 <%= justify_class %>">
     <% menu_items.each do |item| %>
-      <a href="<%= item[:url] %>"
-         class="landing-menu__link"
-         <% if item[:target] == "_blank" %>
-           target="_blank"
-           rel="noopener noreferrer"
-         <% end %>>
+      <%= link_to item[:url], class: "landing-menu__link",
+          **(item[:target] == "_blank" ? { target: "_blank", rel: "noopener noreferrer" } : {}) do %>
         <%= item[:label] %>
-      </a>
+      <% end %>
     <% end %>
   </div>
 </nav>
