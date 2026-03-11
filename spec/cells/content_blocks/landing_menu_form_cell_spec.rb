@@ -47,7 +47,7 @@ module Decidim::DecidimAwesome
     end
 
     describe "#available_anchors" do
-      let!(:sibling_block) { create(:content_block, organization:, manifest_name: :hero, scope_name: :homepage) }
+      let!(:sibling_block) { create(:content_block, organization:, manifest_name: :html, scope_name: :homepage) }
 
       it "returns published sibling blocks" do
         anchors = cell_instance.available_anchors

@@ -31,7 +31,7 @@ describe "Admin manages Landing Menu content block" do
     end
 
     it "displays help text for menu items" do
-      expect(page).to have_content("Enter one menu item per line")
+      expect(page).to have_content("One item per line.")
     end
 
     it "saves sticky setting" do
@@ -59,14 +59,14 @@ describe "Admin manages Landing Menu content block" do
     end
 
     describe "anchor chips" do
-      let!(:hero_block) { create(:content_block, organization:, manifest_name: :hero, scope_name: :homepage) }
+      let!(:html_block) { create(:content_block, organization:, manifest_name: :html, scope_name: :homepage) }
 
       before do
         visit decidim_admin.edit_organization_homepage_content_block_path(content_block)
       end
 
       it "displays chips for existing published content blocks" do
-        expect(page).to have_content("Available page blocks")
+        expect(page).to have_content("Click to add or remove:")
         expect(page).to have_css("[data-landing-menu-anchors]")
         expect(page).to have_css("[data-anchor-label]")
       end
