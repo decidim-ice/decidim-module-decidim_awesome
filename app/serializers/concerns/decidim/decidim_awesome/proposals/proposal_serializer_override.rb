@@ -12,6 +12,7 @@ module Decidim
           include ProposalSerializerMethods
 
           alias_method :decidim_original_serialize, :serialize
+          alias_method :decidim_original_convert_to_text, :convert_to_text
 
           def serialize
             # serialize first the custom fields,
@@ -19,6 +20,16 @@ module Decidim
             serialization = decidim_original_serialize
             serialization.merge!(proposal_vote_weights)
             serialization.merge!(serialize_custom_fields)
+          end
+
+          # The original convert to text does not parses dt/dd items
+          def convert_to_text(text)
+            text.gsub!(%r{(</dt>)}i, "\n\\1")
+            text.gsub!(%r{[\s]*<dd[^>]*>[\s]*(.*)[\s]*</dd+>}i) do |s|
+              s.gsub!(%r{(</div>)}i, "\n\\1")
+            end
+
+            decidim_original_convert_to_text(text)
           end
 
           protected
