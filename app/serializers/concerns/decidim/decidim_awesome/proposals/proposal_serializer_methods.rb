@@ -70,13 +70,12 @@ module Decidim
           private
 
           def extract_field_value(custom_fields, field)
-            if custom_fields.data.present?
-              nodes = custom_fields.data.search("##{field["name"]} div")
-              return nodes.map { |v| v.inner_html(encoding: "UTF-8").presence || v.attribute("alt")&.value }.join("\n") if nodes.present?
-            end
+            return if custom_fields.data.blank?
 
-            user_data = field["userData"]
-            user_data.is_a?(Array) ? user_data.join("\n") : user_data
+            nodes = custom_fields.data.search("##{field["name"]} div")
+            return if nodes.blank?
+
+            nodes.map { |v| v.inner_html(encoding: "UTF-8").presence || v.attribute("alt")&.value }.join("\n")
           end
         end
       end
