@@ -1,0 +1,33 @@
+<% form.fields_for :settings, form.object.settings do |settings_fields| %>
+  <div class="row column">
+    <%= settings_fields.check_box :sticky,
+                                  label: t("sticky", scope: i18n_scope) %>
+  </div>
+  <div class="row column">
+    <%= settings_fields.select :alignment,
+                               alignment_options,
+                               label: t("alignment", scope: i18n_scope),
+                               help_text: t("alignment_help", scope: i18n_scope) %>
+  </div>
+  <div class="row column">
+    <%= settings_fields.translated :text_area, :menu_items,
+                                   label: t("menu_items", scope: i18n_scope),
+                                   help_text: t("menu_items_help_html", scope: i18n_scope),
+                                   rows: 8 %>
+    <% if available_anchors.any? %>
+      <p class="help-text mb-2"><%= t("available_anchors", scope: i18n_scope) %></p>
+      <div class="landing-menu-anchors flex flex-wrap gap-2 mb-2" data-landing-menu-anchors>
+        <% available_anchors.each do |item| %>
+          <button type="button"
+                  class="label landing-menu-anchors__chip"
+                  style="cursor: pointer;"
+                  data-anchor-label="<%= item[:label] %>"
+                  data-anchor-url="#<%= item[:anchor] %>">
+            <%= item[:label] %>
+          </button>
+        <% end %>
+      </div>
+      <p class="help-text"><%= t("anchor_hint_html", scope: i18n_scope) %></p>
+    <% end %>
+  </div>
+<% end %>

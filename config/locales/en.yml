@@ -750,6 +750,24 @@ en:
             automatic: Automatic
             manual: Manual
           title: Block title
+        landing_menu:
+          alignment: Menu position
+          alignment_center: Center
+          alignment_help: Align menu items to the left, center, or right of the page
+          alignment_left: Left
+          alignment_right: Right
+          anchor_hint_html: 'To add a section not listed above, open the public page,
+            right-click the desired section, choose "Inspect" and find its <b>id</b>
+            value. Then add it as a menu item like this: <br>My section | #the-id-value'
+          available_anchors: 'Click to add or remove:'
+          menu_items: Menu items
+          menu_items_help_html: 'One item per line. <br><br><b>Format:</b><br>Label
+            | link address<br>Label | link address | _blank — to open in a new tab
+            <br><br><b>Examples:</b><br>About us | #about — scrolls to a section on
+            this page<br>Our website | https://example.com | _blank — opens an external
+            link in a new tab'
+          name: Landing menu
+          sticky: Sticky (always visible on scrolling)
         map:
           collapse: Start with collapsed menu
           map_center: Map center (Latitude, Longitude)

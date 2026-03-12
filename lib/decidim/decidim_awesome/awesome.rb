@@ -263,6 +263,12 @@ module Decidim
       []
     end
 
+    # Configurable anchor-based menu navigator for landing pages.
+    # Supports sticky positioning and configurable alignment.
+    config_accessor :landing_menu do
+      true
+    end
+
     # Allows admins to assign "fake" admins scoped to some admin zones using the
     # same scope editor as :scoped_styles, valid values uses the same convention:
     #   :disabled => false and non available, hidden from admins

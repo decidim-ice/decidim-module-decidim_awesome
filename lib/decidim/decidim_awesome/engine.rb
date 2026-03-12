@@ -111,6 +111,8 @@ module Decidim
         # override user's admin property
         Decidim::User.include(Decidim::DecidimAwesome::UserOverride) if DecidimAwesome.enabled?(:scoped_admins)
 
+        Decidim::ContentBlocks::BaseCell.prepend(Decidim::DecidimAwesome::BaseCellOverride) if DecidimAwesome.enabled?(:landing_menu)
+
         if DecidimAwesome.enabled?(:menu, :mobile_menu, :home_content_block_menu)
           Decidim::ContentBlocks::GlobalMenuCell.include(Decidim::DecidimAwesome::GlobalMenuCellOverride) if DecidimAwesome.enabled?(:home_content_block_menu)
           Decidim::BreadcrumbHelper.include(Decidim::DecidimAwesome::BreadcrumbHelperOverride)
@@ -318,6 +320,24 @@ module Decidim
             settings.attribute :process_status, type: :enum, default: "active", choices: %w(active all upcoming past)
             settings.attribute :selection_criteria, type: :enum, default: "automatic", choices: %w(automatic manual)
             settings.attribute :selected_ids, type: :array, default: []
+          end
+        end
+      end
+
+      initializer "decidim_decidim_awesome.awesome_landing_menu_content_block" do
+        next unless DecidimAwesome.enabled?(:landing_menu)
+
+        [:homepage, :participatory_process_group_homepage, :participatory_process_homepage, :assembly_homepage].each do |scope|
+          Decidim.content_blocks.register(scope, :awesome_landing_menu) do |content_block|
+            content_block.cell = "decidim/decidim_awesome/content_blocks/landing_menu"
+            content_block.settings_form_cell = "decidim/decidim_awesome/content_blocks/landing_menu_form"
+            content_block.public_name_key = "decidim.decidim_awesome.content_blocks.landing_menu.name"
+
+            content_block.settings do |settings|
+              settings.attribute :sticky, type: :boolean, default: false
+              settings.attribute :alignment, type: :enum, default: "center", choices: %w(left center right)
+              settings.attribute :menu_items, type: :text, translated: true
+            end
           end
         end
       end

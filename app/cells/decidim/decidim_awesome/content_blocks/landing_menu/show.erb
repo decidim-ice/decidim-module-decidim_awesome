@@ -1,0 +1,49 @@
+<nav id="<%= block_id %>"
+     class="landing-menu hidden<%= " sticky top-0" if sticky? %>"
+     aria-label="<%= t("name", scope: i18n_scope) %>"
+     data-landing-menu>
+  <%# Desktop: horizontal menu %>
+  <div class="hidden lg:flex items-center gap-4 py-2 <%= justify_class %>">
+    <% menu_items.each do |item| %>
+      <%= link_to item[:url],
+                  class: "landing-menu__link",
+                  **(item[:target] == "_blank" ? { target: "_blank", rel: "noopener noreferrer" } : {}) do %>
+        <%= item[:label] %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%# Mobile: dropdown %>
+  <div class="lg:hidden landing-menu__mobile">
+    <button id="landing-menu-trigger-<%= model.id %>"
+            class="flex items-center gap-2 w-full px-4 py-3 text-sm font-semibold"
+            data-controller="dropdown"
+            data-target="landing-menu-panel-<%= model.id %>"
+            data-auto-close="true"
+            aria-haspopup="true"
+            aria-controls="landing-menu-panel-<%= model.id %>">
+      <span><%= t("name", scope: i18n_scope) %></span>
+      <%= icon "arrow-down-s-line" %>
+      <%= icon "arrow-up-s-line" %>
+    </button>
+
+    <ul id="landing-menu-panel-<%= model.id %>"
+        class="landing-menu__mobile-dropdown"
+        aria-hidden="true"
+        role="menu"
+        aria-labelledby="landing-menu-trigger-<%= model.id %>"
+        tabindex="-1">
+      <% menu_items.each do |item| %>
+        <li role="presentation" class="py-3">
+          <%= link_to item[:url],
+                      class: "flex items-center gap-1 font-semibold text-sm",
+                      role: "menuitem",
+                      **(item[:target] == "_blank" ? { target: "_blank", rel: "noopener noreferrer" } : {}) do %>
+            <span><%= item[:label] %></span>
+            <%= icon("arrow-right-s-line", class: "w-4 h-4 flex-none fill-current") unless item[:target] == "_blank" %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
