@@ -634,10 +634,6 @@ eu:
         errors:
           invalid_fields: Edukiak ezin izan dira analizatu baina '%{field}' eremura esleitu dira
           invalid_xml: 'Edukiak ezin izan dira analizatu: DL/DD elementuak XMLan aurkitu ez dira'
-      editor_images:
-        create:
-          error: Irudia igotzean errorea!
-          success: Irudia ongi igo da
       map_component:
         map:
           api_not_ready: |
