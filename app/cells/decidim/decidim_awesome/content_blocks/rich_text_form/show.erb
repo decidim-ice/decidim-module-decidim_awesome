@@ -1,0 +1,98 @@
+<%# General settings — rendered inside the parent card > card-section from admin layout %>
+<% form.fields_for :settings, form.object.settings do |settings_fields| %>
+  <div class="row column">
+    <%= settings_fields.text_field :block_id, label: t("block_id", scope: i18n_scope), placeholder: t("block_id_placeholder", scope: i18n_scope), help_text: t("block_id_help", scope: i18n_scope), value: default_block_id %>
+  </div>
+
+  <div class="row column">
+    <%= settings_fields.translated :text_field, :title, label: t("title", scope: i18n_scope) %>
+  </div>
+
+  <div class="row column">
+    <%= settings_fields.text_field :background_color, type: "color", class: "mb-4 block w-full p-1", label: t("background_color", scope: i18n_scope), help_text: t("background_color_help", scope: i18n_scope) %>
+  </div>
+<% end %>
+
+<% form.fields_for :images, content_block.images_container do |images_fields| %>
+  <div class="row column">
+    <%= images_fields.upload :background_image, label: t("background_image", scope: i18n_scope), button_class: "button button__sm button__transparent-secondary" %>
+  </div>
+<% end %>
+
+<% form.fields_for :settings, form.object.settings do |settings_fields| %>
+  <div class="row column">
+    <%= settings_fields.select :background_image_placement, placement_options, label: t("background_image_placement", scope: i18n_scope), help_text: t("background_image_placement_help", scope: i18n_scope) %>
+  </div>
+<% end %>
+
+<%# Close parent card-section and card from admin layout to start columns in their own cards %>
+</div></div>
+
+<div class="rich-text-columns-wrapper" data-max-columns="<%= max_columns %>">
+  <%# Template for createDynamicFields — cloned when "Add column" is clicked %>
+  <% form.fields_for :settings, form.object.settings do |settings_fields| %>
+    <% settings_fields.fields_for "columns[rich-text-column-id]", blank_column do |col_fields| %>
+      <script type="text/template" class="decidim-template">
+        <div class="rich-text-column card pt-4 mb-4" id="rich-text-column-id-field">
+          <div class="card-divider flex items-center justify-between">
+            <h2 class="card-title"><span class="rich-text-column-title"><%= t("column_title", scope: i18n_scope, number: "") %></span></h2>
+            <button type="button" class="button button__xs button__transparent-secondary remove-rich-text-column">
+              <%= icon("delete-bin-line") %>
+              <span><%= t("remove_column", scope: i18n_scope) %></span>
+            </button>
+          </div>
+          <div class="card-section">
+            <div class="row column">
+              <%= col_fields.translated :editor, :body, toolbar: :full, lines: 10, aria: { label: :body } %>
+            </div>
+            <div class="row column">
+              <%= col_fields.check_box :restrict_videos, label: t("restrict_videos", scope: i18n_scope) %>
+            </div>
+            <div class="row column">
+              <%= col_fields.check_box :restrict_links, label: t("restrict_links", scope: i18n_scope) %>
+            </div>
+          </div>
+        </div>
+      </script>
+    <% end %>
+  <% end %>
+
+  <%# Existing columns %>
+  <div class="rich-text-columns-list">
+    <% form.fields_for :settings, form.object.settings do |settings_fields| %>
+      <% column_objects.each_with_index do |col, idx| %>
+        <% settings_fields.fields_for "columns[#{idx}]", col do |col_fields| %>
+          <div class="rich-text-column card pt-4 mb-4" id="<%= idx %>-field">
+            <div class="card-divider flex items-center justify-between">
+              <h2 class="card-title"><span class="rich-text-column-title"><%= t("column_title", scope: i18n_scope, number: "") %></span></h2>
+              <% if idx > 0 %>
+                <button type="button" class="button button__xs button__transparent-secondary remove-rich-text-column">
+                  <%= icon("delete-bin-line") %>
+                  <span><%= t("remove_column", scope: i18n_scope) %></span>
+                </button>
+              <% end %>
+            </div>
+            <div class="card-section">
+              <div class="row column">
+                <%= col_fields.translated :editor, :body, toolbar: :full, lines: 10, aria: { label: :body } %>
+              </div>
+              <div class="row column">
+                <%= col_fields.check_box :restrict_videos, label: t("restrict_videos", scope: i18n_scope) %>
+              </div>
+              <div class="row column">
+                <%= col_fields.check_box :restrict_links, label: t("restrict_links", scope: i18n_scope) %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <button type="button" class="button button__sm button__secondary add-rich-text-column mt-4">
+    + <%= t("add_column", scope: i18n_scope) %>
+  </button>
+</div>
+
+<%# Re-open card and card-section to match closing tags in admin layout %>
+<div class="card pt-4 hidden"><div class="card-section">
