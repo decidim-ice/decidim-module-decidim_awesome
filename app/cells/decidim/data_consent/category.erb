@@ -53,6 +53,7 @@
           </div>
           <div class="cookies__category-panel__td">
             <%= item["service"].presence || t("layouts.decidim.data_consent.details.items.#{item["name"]}.service") %>
+            <span class="cookies__category-panel__type">(<%= t("layouts.decidim.data_consent.details.types.#{item["type"]}") %>)</span>
           </div>
           <div class="cookies__category-panel__td">
             <%= translated_attribute(item["expiration"]) %>
