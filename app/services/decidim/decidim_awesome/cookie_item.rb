@@ -3,7 +3,6 @@
 module Decidim
   module DecidimAwesome
     class CookieItem
-      include HasCookieCategories
       include Decidim::TranslatableAttributes
 
       def initialize(hash, organization = nil)
@@ -32,7 +31,7 @@ module Decidim
       end
 
       def default?(category_slug)
-        default_category = decidim_defaults.find { |c| c["slug"] == category_slug.to_s }
+        default_category = CookieManagementStore.decidim_defaults.find { |c| c["slug"] == category_slug.to_s }
         return false unless default_category
 
         default_category["items"].any? { |i| i["name"] == name }
@@ -41,7 +40,7 @@ module Decidim
       def modified?(category_slug)
         return false unless default?(category_slug)
 
-        default_category = decidim_defaults.find { |c| c["slug"] == category_slug.to_s }
+        default_category = CookieManagementStore.decidim_defaults.find { |c| c["slug"] == category_slug.to_s }
         default_item = default_category["items"].find { |i| i["name"] == name }
         return false unless default_item
 

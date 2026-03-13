@@ -11,6 +11,7 @@ module Decidim
         # form - A form object with the params.
         # category_slug - The slug of the category where the item belongs.
         # item_name - The original name of the item to update.
+        # store - An instance of CookieManagementStore to access the categories and items.
         def initialize(form, category_slug, item_name)
           @form = form
           @category_slug = category_slug

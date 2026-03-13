@@ -5,13 +5,13 @@ module Decidim
     module Admin
       class DestroyCookieItem < Decidim::Command
         include NeedsAwesomeConfig
-        include HasCookieCategories
 
         # Public: Initializes the command.
         #
         # category_slug - The slug of the category where the item belongs.
         # item_name - The name of the item to destroy.
         # organization - The organization where the item belongs.
+        # store - An instance of CookieManagementStore to access the categories and items.
         def initialize(category_slug, item_name, organization)
           @category_slug = category_slug
           @item_name = item_name
@@ -23,7 +23,7 @@ module Decidim
         # Executes the command. Broadcasts these events:
         #
         # - :ok when everything is valid.
-        # - :invalid if the category is not found.
+        # - :invalid if the category is not found or the item is not found.
         #
         # Returns nothing.
         def call
@@ -57,7 +57,7 @@ module Decidim
 
         def remove_item
           original_size = @category["items"].size
-          default_item = reset_cookie_item_to_default(category_slug, item_name)
+          default_item = reset_to_default(category_slug, item_name)
 
           if default_item
             index = @category["items"].find_index { |i| i["name"].to_s == item_name.to_s }
@@ -70,6 +70,13 @@ module Decidim
           end
 
           true
+        end
+
+        def reset_to_default(category_slug, item_name)
+          default_category = CookieManagementStore.decidim_defaults.find { |c| c["slug"] == category_slug.to_s }
+          return nil unless default_category
+
+          default_category["items"].find { |i| i["name"] == item_name.to_s }
         end
       end
     end

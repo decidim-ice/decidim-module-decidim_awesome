@@ -5,12 +5,12 @@ module Decidim
     module Admin
       class DestroyCookieCategory < Decidim::Command
         include NeedsAwesomeConfig
-        include HasCookieCategories
 
         # Public: Initializes the command.
         #
         # category_slug - The slug of the category to destroy.
         # organization - The organization where the category belongs.
+        # store - An instance of CookieManagementStore to access the categories.
         def initialize(category_slug, organization)
           @category_slug = category_slug
           @organization = organization
@@ -45,7 +45,7 @@ module Decidim
 
         def remove_category
           original_size = @store.stored_categories.size
-          default_cat = reset_category_to_default(category_slug)
+          default_cat = reset_to_default(category_slug)
 
           if default_cat
             index = @store.stored_categories.find_index { |c| c["slug"].to_s == category_slug.to_s }
@@ -58,6 +58,10 @@ module Decidim
           end
 
           true
+        end
+
+        def reset_to_default(slug)
+          CookieManagementStore.decidim_defaults.find { |c| c["slug"] == slug.to_s }
         end
       end
     end

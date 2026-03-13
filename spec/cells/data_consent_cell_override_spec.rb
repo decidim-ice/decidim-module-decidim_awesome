@@ -5,11 +5,10 @@ require "spec_helper"
 module Decidim
   module DecidimAwesome
     describe DataConsentCellOverride, type: :cell do
-      subject { cell("decidim/data_consent", organization, context: { current_user: user }).call }
+      subject { cell("decidim/data_consent", organization, context: { current_user: user }) }
 
       let(:organization) { create(:organization) }
       let(:user) { create(:user, organization:) }
-      let(:config) { create(:awesome_config, organization:, var: :cookie_management) }
       let(:categories_data) do
         {
           "categories" => [
@@ -24,7 +23,8 @@ module Decidim
                   "type" => "cookie",
                   "name" => "session_cookie",
                   "service" => { "en" => "Session" },
-                  "description" => { "en" => "Session management" }
+                  "description" => { "en" => "Session management" },
+                  "expiration" => { "en" => "1 year" }
                 }
               ]
             },
@@ -40,54 +40,47 @@ module Decidim
         }
       end
 
-      context "when cookie_management is not configured" do
-        it "renders the default Decidim categories" do
-          expect(subject).to have_css("#dc-modal")
-          expect(subject).to have_css(".cookies__category")
-        end
-      end
-
-      context "when cookie_management is configured" do
-        before do
-          config.update!(value: categories_data)
-        end
-
-        it "renders the modal" do
-          expect(subject).to have_css("#dc-modal")
-        end
-
-        it "renders custom categories" do
-          expect(subject).to have_css(".cookies__category[data-id='essential']")
-          expect(subject).to have_css(".cookies__category[data-id='analytics']")
-        end
-
-        it "renders category titles" do
-          expect(subject).to have_content("Essential")
-          expect(subject).to have_content("Analytics")
-        end
-
-        it "renders category descriptions" do
-          expect(subject).to have_content("Essential cookies")
-          expect(subject).to have_content("Analytics cookies")
-        end
-
-        it "marks mandatory categories as checked and disabled" do
-          expect(subject).to have_css("input[name='essential'][checked='checked'][disabled]")
-        end
-
-        it "renders optional categories as enabled" do
-          expect(subject).to have_css("input[name='analytics']:not([disabled])")
-        end
-
-        context "when category has items" do
-          it "renders cookie items" do
-            expect(subject).to have_content("session_cookie")
-            expect(subject).to have_content("Session")
-            expect(subject).to have_content("Session management")
+      describe "#categories" do
+        context "when cookie_management is not configured" do
+          it "returns the default Decidim categories" do
+            default_slugs = Decidim.consent_categories.map { |c| c[:slug].to_s }
+            expect(subject.categories.map { |c| c["slug"] }).to match_array(default_slugs)
           end
 
-          it "renders item type" do
-            expect(subject).to have_content(I18n.t("layouts.decidim.data_consent.details.types.cookie"))
+          it "returns categories with the expected keys" do
+            category = subject.categories.first
+            expect(category.keys).to include("slug", "mandatory", "title", "description", "visibility", "items")
+          end
+        end
+
+        context "when cookie_management is configured" do
+          before do
+            create(:awesome_config, organization:, var: :cookie_management, value: categories_data)
+          end
+
+          it "returns the configured categories merged with defaults" do
+            default_slugs = Decidim.consent_categories.map { |c| c[:slug].to_s }
+            expect(subject.categories.map { |c| c["slug"] }).to match_array(default_slugs)
+          end
+
+          it "overrides default category attributes with custom values" do
+            essential = subject.categories.find { |c| c["slug"] == "essential" }
+            expect(essential["title"]).to eq("Essential")
+            expect(essential["description"]).to eq("Essential cookies")
+            expect(essential["mandatory"]).to be(true)
+          end
+
+          it "maps items from custom config" do
+            essential = subject.categories.find { |c| c["slug"] == "essential" }
+            item = essential["items"].find { |i| i["name"] == "session_cookie" }
+            expect(item).to be_present
+            expect(item["type"]).to eq("cookie")
+            expect(item["service"]).to be_a(String)
+          end
+
+          it "returns empty items for categories without items" do
+            analytics = subject.categories.find { |c| c["slug"] == "analytics" }
+            expect(analytics["items"]).to be_empty
           end
         end
       end

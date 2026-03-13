@@ -9,6 +9,7 @@ module Decidim
         # Public: Initializes the command.
         #
         # form - A form object with the params.
+        # store - An instance of CookieManagementStore to access the categories.
         def initialize(form)
           @form = form
           config = AwesomeConfig.find_by(organization: form.current_organization, var: :cookie_management)

@@ -3,7 +3,6 @@
 module Decidim
   module DecidimAwesome
     class CookieCategory
-      include HasCookieCategories
       include Decidim::TranslatableAttributes
 
       def initialize(hash, organization = nil)
@@ -32,13 +31,13 @@ module Decidim
       end
 
       def default?
-        default_category_slugs.include?(slug)
+        Decidim.consent_categories.map { |cat| cat[:slug].to_s }.include?(slug)
       end
 
       def modified?
         return false unless default?
 
-        default_category = decidim_defaults.find { |c| c["slug"] == slug }
+        default_category = CookieManagementStore.decidim_defaults.find { |c| c["slug"] == slug }
         return false unless default_category
 
         @data["title"] != default_category["title"] ||
