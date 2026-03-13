@@ -1,0 +1,26 @@
+<% is_default_item = local_assigns.fetch(:is_default_item, false) %>
+<div class="form__wrapper">
+  <div class="card pt-4">
+    <div class="card-section">
+      <div class="row column">
+        <%= form.text_field :name, class: "h-12 w-full #{"bg-gray-100 cursor-not-allowed" if is_default_item}", readonly: is_default_item %>
+        <p class="help-text"><%= t(".title_item_help") %></p>
+      </div>
+      <div class="row column">
+          <%= form.translated :text_field, :expiration, class: "h-12 w-full" %>
+          <p class="help-text"><%= t(".expiration_item_help") %></p>
+      </div>
+      <div class="row column">
+        <%= form.select :type, item_type_options, {}, class: "w-full" %>
+      </div>
+      <div class="row column">
+        <%= form.translated :text_field, :service, class: "h-12 w-full" %>
+        <p class="help-text"><%= t(".service_item_help") %></p>
+      </div>
+      <div class="row column">
+        <%= form.translated :text_area, :description, rows: 3, class: "w-full" %>
+        <p class="help-text"><%= t(".description_item_help") %></p>
+      </div>
+    </div>
+  </div>
+</div>

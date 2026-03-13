@@ -29,7 +29,7 @@ module Decidim::DecidimAwesome
     end
 
     it "has 20 modified files in core" do
-      expect(subject.overrides["decidim-core"].files.length).to eq(20)
+      expect(subject.overrides["decidim-core"].files.length).to eq(22)
     end
 
     it "has 23 modified files in proposals" do

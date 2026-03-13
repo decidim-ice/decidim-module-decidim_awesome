@@ -11,6 +11,10 @@ decidim-conferences:
   /app/views/decidim/conferences/admin/conferences/_form.html.erb:
     decidim-0.31.0: c8890c67fb9cb4e6602bb5e156982a2e
 decidim-core:
+  /app/cells/decidim/data_consent_cell.rb:
+    decidim-0.31.0: 2ca0e1db427894a6c1ffff9de27b458e
+  /app/cells/decidim/data_consent/category.erb:
+    decidim-0.31.0: c60bd96bf4d63892fa3f0e077e5bc821
   /app/packs/entrypoints/decidim_editor.js:
     decidim-0.31.0: e690b09ebd83d76a9dbdaefe02812333
   /app/packs/src/decidim/controllers/editor/controller.js:

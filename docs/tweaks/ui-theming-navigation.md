@@ -149,3 +149,83 @@ end
 
 - Prefer minimal scoped style changes to reduce unintended side effects.
 - Validate custom redirects to avoid collisions with existing routes.
+
+### 4.4 Cookie management
+
+Enables customizable cookie consent management with configurable categories and individual cookie items.
+
+#### Admin description
+
+Provides GDPR/privacy-compliant cookie consent with granular control over cookie categories and items. Extends Decidim's default consent modal with customizable categories, visibility controls, and detailed cookie documentation.
+Concerns: misconfigured mandatory categories may block essential functionality; hidden categories won't appear in consent modal. 
+Recommend documenting all cookies used by custom modules; review cookie categories quarterly to ensure compliance with privacy regulations.
+
+#### Technical area
+
+- **Enabling/Disabling:** Enabled by default (`true`); use `false` to disable by default (admins can still enable it); use `:disabled` to completely remove/hide from admins
+
+```ruby
+# config/initializers/awesome_defaults.rb
+Decidim::DecidimAwesome.configure do |config|
+  # Completely remove/hide cookie management
+  config.cookie_management = :disabled
+  
+  # OR disable by default (admins can enable via UI):
+  config.cookie_management = false
+  
+  # OR keep enabled (default):
+  config.cookie_management = true
+end
+```
+
+- **Storage:** Cookie categories and items stored in database; rendered in Decidim's data consent modal
+- **Categories:** Each category has title, description, mandatory flag, and visibility setting
+- **Visibility states:** `default` (visible to all users) or `hidden` (not shown in consent modal)
+- **Cookie items:** Each item has name, type (cookie/localStorage), service name, and description
+- **Default categories:** Extends Decidim's default consent categories (essential, analytics, preferences); default categories that are marked as mandatory are protected from deletion to preserve essential functionality
+- **Custom categories:** Admins can create additional categories (mandatory or optional) that are fully editable
+- **Validation:** Cookie item names must be alphanumeric with underscores/hyphens only (no spaces)
+- **Performance:** Modal rendered on first visit; consent stored in browser localStorage
+- **Compliance:** Supports GDPR/ePrivacy requirements; admin responsible for accurate cookie documentation
+
+#### 4.4.1 Cookie categories
+
+Organize cookies into logical groups with configurable visibility and mandatory settings.
+
+**Admin guidance:** Use categories to group related cookies (e.g., "Analytics", "Social Media", "Advertising"). Mark essential cookies as mandatory. Hide categories for internal/technical cookies that don't require user consent.
+
+**Category fields:**
+- **Title:** Translatable category name shown to users
+- **Description:** Translatable explanation of category purpose
+- **Mandatory:** If checked, users can disable this category
+- **Visibility:** `default` (shown in modal) or `hidden` (not displayed to users)
+
+![Cookie categories management](../../examples/cookie_category.gif)
+
+#### 4.4.2 Cookie items
+
+Document individual cookies or localStorage items within each category.
+
+**Admin guidance:** List all cookies/storage items used by your platform, including third-party services. Provide clear service names and descriptions for transparency.
+
+**Common cookie services dropdown:** Use the `Common cookie services` dropdown to quickly populate cookie items for popular integrations (analytics, embeds, bot protection, etc.). Selecting one preset creates multiple cookie/localStorage entries at once, with prefilled service and description labels that you can still edit afterwards.
+
+**Item fields:**
+- **Name:** Technical cookie/localStorage key (alphanumeric, underscores, hyphens only)
+- **Type:** `cookie` or `localStorage`
+- **Service:** Translatable name of service providing the cookie (e.g., "Google Analytics", "Session Management")
+- **Description:** Translatable explanation of cookie purpose and data collected
+
+**Validation:** Cookie names cannot contain spaces or special characters. Invalid names will show error: "Name format is invalid. Only letters, numbers, underscores and hyphens are allowed."
+
+**Edit restrictions:** Items in default mandatory categories (typically "essential") are protected from deletion to preserve core functionality. Items in default categories (e.g., analytics, preferences) can be edited or restart to default and all custom categories (regardless of mandatory flag) can be fully edited or deleted.
+
+**Contributing new preset services:**
+- Add the preset group and items to `app/controllers/concerns/decidim/decidim_awesome/admin/has_cookie_items_presets.rb` under `COOKIE_ITEM_PRESETS`.
+- Add all i18n keys in `config/locales/en.yml` under `decidim.decidim_awesome.admin.cookie_items.cookie_item_presets`:
+  `explanations`, `labels`, `services`, and `descriptions`.
+- Keep cookie names realistic and widely recognized, and prefer short neutral descriptions (what the cookie stores or why it exists).
+- Verify each preset entry resolves to valid translation keys and appears correctly in the admin dropdown.
+
+![Cookie items management](../../examples/cookie_items.gif)
+
