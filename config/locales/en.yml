@@ -62,6 +62,7 @@ en:
         total_cookies: Total cookies
         visibility: Visibility
       cookie_item:
+        expiration: Expiration
         name: Cookie name
         service: Service
         type: Type
@@ -832,6 +833,8 @@ en:
           form:
             description_item_help: Indicates the purpose of this cookie and the information
               it stores
+            expiration_item_help: Expiration time of the cookie. This is only informative,
+              it won't affect the actual cookie expiration time.
             service_item_help: This is a short description indicating where this is
               used (for instance "This website", "Youtube embeds", "Jitsi meets",
               etc)
@@ -1230,6 +1233,17 @@ en:
           view_proposal: View proposal
   layouts:
     decidim:
+      data_consent:
+        details:
+          columns:
+            expiration: Expiration
+          items:
+            _session_id:
+              expiration: "session"
+            decidim-consent:
+              expiration: "1 year"
+            pwaInstallPromptSeen:
+              expiration: "persistent"
       decidim_awesome:
         admin:
           maintenance:

@@ -6,10 +6,9 @@ module Decidim
       class CookieItemsController < DecidimAwesome::Admin::ApplicationController
         include CookieManagementHelpers
 
-        helper_method :category_from_params, :default_category?, :default_cookie_item?, :cookie_item_modified?, :item_type_options, :category_title_for_breadcrumb,
-                      :cookie_item_presets
-        alias category category_from_params
+        helper_method :category_from_params, :item_type_options, :category_title_for_breadcrumb, :default_cookie_item?, :cookie_item_presets
 
+        before_action :set_cookie_items_breadcrumb
         before_action do
           enforce_permission_to :edit_config, :cookie_management
         end
@@ -23,7 +22,9 @@ module Decidim
 
         def edit
           add_breadcrumb_item :edit, decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
-          @form = form(CookieItemForm).from_params(item_for_form(params[:cookie_category_slug], params[:name]))
+          category = find_category!(params[:cookie_category_slug])
+          item = category.items.find { |i| i.name == params[:name] } || raise(ActiveRecord::RecordNotFound)
+          @form = form(CookieItemForm).from_params(item.to_form_params)
         end
 
         def create
@@ -112,12 +113,12 @@ module Decidim
           preset_builder.presets
         end
 
-        def cookie_item_modified?(category_slug, item)
-          CookieItem.new(item).modified?(category_slug)
-        end
-
         def default_cookie_item?(category_slug, item_name)
           CookieItem.new("name" => item_name).default?(category_slug)
+        end
+
+        def category_from_params
+          find_category!(params[:cookie_category_slug])
         end
       end
     end

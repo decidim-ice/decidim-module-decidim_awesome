@@ -32,9 +32,9 @@
       <table class="table-list">
         <thead>
           <tr>
-            <th><%= t("cookie_item.type", scope: "activemodel.attributes") %></th>
             <th><%= t("cookie_item.name", scope: "activemodel.attributes") %></th>
             <th><%= t("cookie_item.service", scope: "activemodel.attributes") %></th>
+            <th><%= t("cookie_item.expiration", scope: "activemodel.attributes") %></th>
             <th class="actions"><%= t("decidim.decidim_awesome.admin.actions") %></th>
           </tr>
         </thead>
@@ -43,9 +43,9 @@
             <% is_default = item.default?(params[:cookie_category_slug]) %>
             <% is_modified = item.modified?(params[:cookie_category_slug]) %>
             <tr<%= " class=cookie_item-addition" unless is_default %>>
-              <td><%= t("cookie_item.types.#{item.type}", scope: "activemodel.attributes", default: item.type) %></td>
               <td><%= item.name %></td>
               <td><%= item.service %></td>
+              <td><%= translated_attribute(item.expiration) %></td>
               <td class="table-list__actions">
                   <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_cookie_category_cookie_item_path(params[:cookie_category_slug], item.name), t(".edit"), class: "action-icon--edit" %>
                   <% if is_default %>

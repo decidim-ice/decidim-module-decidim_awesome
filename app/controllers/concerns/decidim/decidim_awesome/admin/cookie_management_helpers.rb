@@ -17,7 +17,11 @@ module Decidim
         private
 
         def store
-          @store ||= CookieManagementStore.new(current_organization)
+          @store ||= CookieManagementStore.new(current_organization, awesome_categories)
+        end
+
+        def awesome_categories
+          Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: current_organization, var: :cookie_management)&.value
         end
 
         def visibility_options
@@ -26,47 +30,8 @@ module Decidim
           end
         end
 
-        def category_for_form(slug)
-          category = store.find_category(slug)
-          raise ActiveRecord::RecordNotFound unless category
-
-          {
-            slug: category.slug,
-            mandatory: category.mandatory?,
-            title: category.title,
-            description: category.description,
-            visibility: category.visibility
-          }
-        end
-
-        def current_category_title(slug)
-          category = store.find_category(slug)
-          return slug unless category
-
-          translated_attribute(category.title) || slug
-        end
-
-        def category_from_params
-          category = store.find_category(params[:cookie_category_slug])
-          raise ActiveRecord::RecordNotFound unless category
-
-          category
-        end
-
-        def item_for_form(category_slug, item_name)
-          category = store.find_category(category_slug)
-          raise ActiveRecord::RecordNotFound unless category
-
-          items = category.items
-          item = items.find { |i| i.name.to_s == item_name.to_s }
-          raise ActiveRecord::RecordNotFound unless item
-
-          {
-            name: item.name,
-            type: item.type,
-            service: item.service,
-            description: item.description
-          }
+        def find_category!(slug)
+          store.find_category(slug) || raise(ActiveRecord::RecordNotFound)
         end
 
         def item_type_options

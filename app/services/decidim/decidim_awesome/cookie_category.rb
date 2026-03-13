@@ -38,18 +38,28 @@ module Decidim
       def modified?
         return false unless default?
 
-        default_cat = default_decidim_categories.find { |c| c["slug"] == slug }
-        return false unless default_cat
+        default_category = decidim_defaults.find { |c| c["slug"] == slug }
+        return false unless default_category
 
-        @data["title"] != default_cat["title"] ||
-          @data["description"] != default_cat["description"] ||
-          @data["mandatory"] != default_cat["mandatory"] ||
-          @data["visibility"] != default_cat["visibility"] ||
-          @data["items"] != default_cat["items"]
+        @data["title"] != default_category["title"] ||
+          @data["description"] != default_category["description"] ||
+          @data["mandatory"] != default_category["mandatory"] ||
+          @data["visibility"] != default_category["visibility"] ||
+          @data["items"] != default_category["items"]
       end
 
       def items
         @items ||= (@data["items"] || []).map { |item| CookieItem.new(item, @organization) }
+      end
+
+      def to_form_params
+        {
+          slug: slug,
+          mandatory: mandatory?,
+          title: title,
+          description: description,
+          visibility: visibility
+        }
       end
 
       def to_params

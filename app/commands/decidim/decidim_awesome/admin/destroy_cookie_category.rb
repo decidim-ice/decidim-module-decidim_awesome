@@ -14,7 +14,8 @@ module Decidim
         def initialize(category_slug, organization)
           @category_slug = category_slug
           @organization = organization
-          @store = CookieManagementStore.new(organization)
+          config = AwesomeConfig.find_by(organization: organization, var: :cookie_management)
+          @store = CookieManagementStore.new(organization, config&.value)
         end
 
         # Executes the command. Broadcasts these events:

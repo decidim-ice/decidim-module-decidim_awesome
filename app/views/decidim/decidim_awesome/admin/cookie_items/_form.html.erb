@@ -7,6 +7,10 @@
         <p class="help-text"><%= t(".title_item_help") %></p>
       </div>
       <div class="row column">
+          <%= form.translated :text_field, :expiration, class: "h-12 w-full" %>
+          <p class="help-text"><%= t(".expiration_item_help") %></p>
+      </div>
+      <div class="row column">
         <%= form.select :type, item_type_options, {}, class: "w-full" %>
       </div>
       <div class="row column">

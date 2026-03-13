@@ -15,7 +15,8 @@ module Decidim
           @form = form
           @category_slug = category_slug
           @item_name = item_name
-          @store = CookieManagementStore.new(form.current_organization)
+          config = AwesomeConfig.find_by(organization: form.current_organization, var: :cookie_management)
+          @store = CookieManagementStore.new(form.current_organization, config&.value)
         end
 
         # Executes the command. Broadcasts these events:

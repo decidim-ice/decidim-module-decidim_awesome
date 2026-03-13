@@ -10,10 +10,12 @@ module Decidim
         #
         # form - A form object with the params.
         # category_slug - The original slug of the category to update.
+        # store - An instance of CookieManagementStore to access the categories.
         def initialize(form, category_slug)
           @form = form
           @category_slug = category_slug
-          @store = CookieManagementStore.new(form.current_organization)
+          config = AwesomeConfig.find_by(organization: form.current_organization, var: :cookie_management)
+          @store = CookieManagementStore.new(form.current_organization, config&.value)
         end
 
         # Executes the command. Broadcasts these events:
@@ -25,7 +27,6 @@ module Decidim
         def call
           return broadcast(:invalid) if form.invalid?
           return broadcast(:invalid) unless find_category
-          return broadcast(:invalid) if duplicate_slug?
 
           update_category
           @store.save!(@store.stored_categories)
@@ -53,18 +54,19 @@ module Decidim
           true
         end
 
-        def duplicate_slug?
-          false
-        end
-
         def update_category
-          stored = @store.stored_categories[@category_index]
-          items = stored["items"].is_a?(Array) ? stored["items"] : []
           updated = form.to_params
           updated["slug"] = category_slug
-          updated["items"] = items
 
-          @store.stored_categories[@category_index] = updated
+          if @category_index.nil?
+            updated["items"] = []
+            @store.stored_categories << updated
+          else
+            stored = @store.stored_categories[@category_index]
+            items = stored["items"].is_a?(Array) ? stored["items"] : []
+            updated["items"] = items
+            @store.stored_categories[@category_index] = updated
+          end
         end
       end
     end

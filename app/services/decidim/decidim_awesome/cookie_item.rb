@@ -27,18 +27,22 @@ module Decidim
         translated_attribute(@data["description"], @organization)
       end
 
-      def default?(category_slug)
-        default_cat = default_decidim_categories.find { |c| c["slug"] == category_slug.to_s }
-        return false unless default_cat
+      def expiration
+        @data["expiration"] || CookieManagementStore.localized_translation("layouts.decidim.data_consent.details.items.#{name}.expiration")
+      end
 
-        default_cat["items"].any? { |i| i["name"] == name }
+      def default?(category_slug)
+        default_category = decidim_defaults.find { |c| c["slug"] == category_slug.to_s }
+        return false unless default_category
+
+        default_category["items"].any? { |i| i["name"] == name }
       end
 
       def modified?(category_slug)
         return false unless default?(category_slug)
 
-        default_cat = default_decidim_categories.find { |c| c["slug"] == category_slug.to_s }
-        default_item = default_cat["items"].find { |i| i["name"] == name }
+        default_category = decidim_defaults.find { |c| c["slug"] == category_slug.to_s }
+        default_item = default_category["items"].find { |i| i["name"] == name }
         return false unless default_item
 
         type != default_item["type"] ||
@@ -46,16 +50,27 @@ module Decidim
           @data["description"] != default_item["description"]
       end
 
+      def to_form_params
+        {
+          name: name,
+          type: type,
+          service: service,
+          description: description,
+          expiration: expiration
+        }
+      end
+
       def to_params
         @data
       end
 
-      def to_frontend_hash(organization = nil)
+      def sanitize_item(organization = nil)
         {
           "type" => type,
           "name" => name,
           "service" => translated_attribute(@data["service"], organization),
-          "description" => translated_attribute(@data["description"], organization)
+          "description" => translated_attribute(@data["description"], organization),
+          "expiration" => expiration
         }
       end
     end

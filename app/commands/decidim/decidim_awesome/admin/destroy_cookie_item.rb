@@ -16,7 +16,8 @@ module Decidim
           @category_slug = category_slug
           @item_name = item_name
           @organization = organization
-          @store = CookieManagementStore.new(organization)
+          config = AwesomeConfig.find_by(organization: organization, var: :cookie_management)
+          @store = CookieManagementStore.new(organization, config&.value)
         end
 
         # Executes the command. Broadcasts these events:
@@ -48,10 +49,8 @@ module Decidim
 
         def find_category
           @category = @store.stored_categories.find { |c| c["slug"].to_s == category_slug.to_s }
-          unless @category
-            form.errors.add(:base, :category_not_found)
-            return false
-          end
+          return false unless @category
+
           @category["items"] = [] unless @category["items"].is_a?(Array)
           true
         end

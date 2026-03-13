@@ -21,7 +21,7 @@
           </tr>
         </thead>
         <tbody>
-          <% current_categories.each do |category| %>
+          <% categories.each do |category| %>
             <% is_default = category.default? %>
             <% is_modified = category.modified? %>
             <% is_mandatory = category.mandatory? %>

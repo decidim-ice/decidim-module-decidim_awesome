@@ -33,13 +33,13 @@
     <div>
       <div class="cookies__category-panel__tr">
         <div class="cookies__category-panel__th">
-          <%= t("layouts.decidim.data_consent.details.columns.type") %>
-        </div>
-        <div class="cookies__category-panel__th">
           <%= t("layouts.decidim.data_consent.details.columns.name") %>
         </div>
         <div class="cookies__category-panel__th">
           <%= t("layouts.decidim.data_consent.details.columns.service") %>
+        </div>
+        <div class="cookies__category-panel__th">
+          <%= t("layouts.decidim.data_consent.details.columns.expiration") %>
         </div>
         <div class="cookies__category-panel__th">
           <%= t("layouts.decidim.data_consent.details.columns.description") %>
@@ -49,13 +49,13 @@
       <% category["items"].each do |item| %>
         <div class="cookies__category-panel__tr">
           <div class="cookies__category-panel__td">
-            <%= t("layouts.decidim.data_consent.details.types.#{item["type"]}") %>
-          </div>
-          <div class="cookies__category-panel__td">
             <%= item["name"] %>
           </div>
           <div class="cookies__category-panel__td">
             <%= item["service"].presence || t("layouts.decidim.data_consent.details.items.#{item["name"]}.service") %>
+          </div>
+          <div class="cookies__category-panel__td">
+            <%= translated_attribute(item["expiration"]) %>
           </div>
           <div class="cookies__category-panel__td">
             <%= item["description"].presence || t("layouts.decidim.data_consent.details.items.#{item["name"]}.description") %>

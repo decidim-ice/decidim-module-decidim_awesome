@@ -11,6 +11,7 @@ module Decidim
         attribute :type, String, default: "cookie"
         translatable_attribute :service, String
         translatable_attribute :description, String
+        translatable_attribute :expiration, String
 
         validates :name, presence: true
         validates :name, format: {
@@ -20,13 +21,13 @@ module Decidim
         validates :type, inclusion: { in: ITEM_TYPES }
         validates :service, translatable_presence: true
         validates :description, translatable_presence: true
-
         def to_params
           {
             "name" => name,
             "type" => type.presence || "cookie",
             "service" => service,
-            "description" => description
+            "description" => description,
+            "expiration" => expiration.presence || {}
           }
         end
       end

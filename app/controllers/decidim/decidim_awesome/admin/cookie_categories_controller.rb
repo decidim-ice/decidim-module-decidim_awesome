@@ -6,16 +6,14 @@ module Decidim
       class CookieCategoriesController < DecidimAwesome::Admin::ApplicationController
         include CookieManagementHelpers
 
-        helper_method :current_categories, :visibility_options, :default_category?, :category_modified?
+        helper_method :categories, :visibility_options
 
         before_action :set_cookie_management_breadcrumb
         before_action do
           enforce_permission_to :edit_config, :cookie_management
         end
 
-        def index
-          store.ensure_initialized!
-        end
+        def index; end
 
         def new
           add_breadcrumb_item :new, decidim_admin_decidim_awesome.cookie_categories_path
@@ -23,8 +21,9 @@ module Decidim
         end
 
         def edit
-          add_breadcrumb_item current_category_title(params[:slug]), decidim_admin_decidim_awesome.cookie_categories_path
-          @form = form(CookieCategoryForm).from_params(category_for_form(params[:slug]))
+          add_breadcrumb_item category_title_for_breadcrumb(params[:slug]), decidim_admin_decidim_awesome.cookie_categories_path
+          category = find_category!(params[:slug])
+          @form = form(CookieCategoryForm).from_params(category.to_form_params)
         end
 
         def create
@@ -77,20 +76,12 @@ module Decidim
 
         private
 
-        def current_categories
-          store.current_categories
+        def categories
+          store.categories
         end
 
         def set_cookie_management_breadcrumb
           add_breadcrumb_item :cookie_management, decidim_admin_decidim_awesome.cookie_categories_path
-        end
-
-        def default_category?(category)
-          CookieCategory.new(category).default?
-        end
-
-        def category_modified?(category)
-          CookieCategory.new(category).modified?
         end
       end
     end

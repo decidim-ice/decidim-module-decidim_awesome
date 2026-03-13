@@ -13,7 +13,8 @@ module Decidim
         def initialize(form, category_slug)
           @form = form
           @category_slug = category_slug
-          @store = CookieManagementStore.new(form.current_organization)
+          config = AwesomeConfig.find_by(organization: form.current_organization, var: :cookie_management)
+          @store = CookieManagementStore.new(form.current_organization, config&.value)
         end
 
         # Executes the command. Broadcasts these events:
