@@ -772,6 +772,36 @@ en:
           text_settings: Text settings
           title: Title
           truncate: Maximum characters for popup descriptions
+        rich_text:
+          add_column: Add a new column
+          background_color: Background color
+          background_color_help: Select a color for the full-width background. Leave
+            empty for transparent.
+          background_image: Background image
+          background_image_help: Optional image displayed behind the section content.
+            Recommended minimum width 1920px.
+          background_image_placement: Image placement
+          background_image_placement_help: How the background image is displayed within
+            the section.
+          background_image_placements:
+            contain_center: Contain (centered)
+            cover_bottom: Cover (bottom-aligned)
+            cover_center: Cover (centered)
+            cover_top: Cover (top-aligned)
+            repeat: Repeat (tiled)
+          block_id: Internal label
+          block_id_help: This value will be used as the section anchor in the URL.
+            It must be unique per page (e.g. "our-team").
+          block_id_placeholder: internal reference name (not publicly used)
+          column_title: 'Column #%{number}'
+          name: Awesome Rich Text block
+          remove_column: Remove
+          restrict_links: Prevent links in the text to be displayed unless the user
+            is logged-in
+          restrict_videos: Prevent embed videos in the text to be displayed unless
+            the user is logged-in
+          sign_in_to_watch: Sign in to watch this video
+          title: Block title
       credits: Decidim Awesome %{version} · Maintained with ♥ by %{company}
       custom_fields:
         errors:

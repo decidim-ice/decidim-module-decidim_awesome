@@ -360,6 +360,11 @@ module Decidim
       ]
     end
 
+    # Maximum number of columns allowed per RichText content block
+    config_accessor :max_rich_text_columns do
+      6
+    end
+
     # Which components will be tampered to add the voting registry override
     config_accessor :voting_components do
       [:proposals, :reporting_proposals]

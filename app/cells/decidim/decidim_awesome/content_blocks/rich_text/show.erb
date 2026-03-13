@@ -1,0 +1,17 @@
+<section id="<%= block_id %>" class="awesome-rich-text <%= background_placement_class %>" style="<%= section_styles %>">
+  <div class="content-block">
+    <% if title %>
+      <div class="home__section-header">
+        <h2 class="home__section-title"><%= title %></h2>
+      </div>
+    <% end %>
+
+    <div class="<%= columns.size > 1 ? "grid grid-cols-1 #{grid_class} gap-6 md:gap-12" : "" %>">
+      <% columns.each do |col| %>
+        <div class="editor-content">
+          <%= rendered_body(col) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

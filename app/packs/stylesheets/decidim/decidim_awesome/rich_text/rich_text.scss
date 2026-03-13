@@ -1,0 +1,43 @@
+.awesome-rich-text {
+  background-color: var(--awesome-rich-text-bg, transparent);
+  background-image: var(--awesome-rich-text-bg-image, none);
+}
+
+// Background image placement modifiers
+.awesome-rich-text--bg-cover-center {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.awesome-rich-text--bg-cover-top {
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+}
+
+.awesome-rich-text--bg-cover-bottom {
+  background-size: cover;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+}
+
+.awesome-rich-text--bg-contain-center {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.awesome-rich-text--bg-repeat {
+  background-size: auto;
+  background-position: top left;
+  background-repeat: repeat;
+}
+
+.awesome-rich-text__video-placeholder {
+  @apply w-full aspect-video bg-background flex items-center justify-center cursor-pointer text-gray-2 text-lg border-0 rounded;
+
+  &:hover {
+    @apply bg-background-3;
+  }
+}
