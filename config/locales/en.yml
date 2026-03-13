@@ -1239,11 +1239,11 @@ en:
             expiration: Expiration
           items:
             _session_id:
-              expiration: "session"
+              expiration: session
             decidim-consent:
-              expiration: "1 year"
+              expiration: 1 year
             pwaInstallPromptSeen:
-              expiration: "persistent"
+              expiration: persistent
       decidim_awesome:
         admin:
           maintenance:
