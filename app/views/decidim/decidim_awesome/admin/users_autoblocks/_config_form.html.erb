@@ -1,0 +1,31 @@
+<div class="form__wrapper">
+  <div class="item__edit-form">
+    <div class="card">
+      <div class="row column">
+        <%= form.number_field :threshold, help_text: t(".threshold_config_help") %>
+        <% if @threshold_detected_cases.present? %>
+          <span class="help-text"><%= t(".threshold_config_detected_cases", count: @threshold_detected_cases) %></span>
+        <% end %>
+      </div>
+
+      <div class="row column gap-0" data-perform-block>
+        <%= form.check_box :allow_performing_block_from_a_task, help_text: t(".allow_performing_block_from_a_task_help") %>
+      </div>
+
+      <div class="row column gap-0" data-notify-users>
+        <%= form.check_box :notify_blocked_users, help_text: t(".notify_blocked_users_help") %>
+      </div>
+
+      <div class="row column gap-0" data-justification-message>
+        <%= form.translated :text_field, :block_justification_message, help_text: t(".block_justification_message_help") %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="item__edit-sticky">
+  <div class="item__edit-sticky-container">
+    <%= form.submit t(".update"), class: "button button__sm button__secondary" %>
+  </div>
+</div>
+

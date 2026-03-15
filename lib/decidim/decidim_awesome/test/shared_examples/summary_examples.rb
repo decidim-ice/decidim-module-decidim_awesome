@@ -72,6 +72,7 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::OpenDataExporter.included_modules).to include(Decidim::DecidimAwesome::OpenDataExporterOverride)
       expect(Decidim::Core::ParticipatorySpaceListBase.included_modules).to include(Decidim::DecidimAwesome::ParticipatorySpaceListBaseOverride)
       expect(Decidim::Core::ComponentList.included_modules).to include(Decidim::DecidimAwesome::ComponentListOverride)
+      expect(Decidim::BlockUserMailer.included_modules).to include(Decidim::DecidimAwesome::BlockUserMailerOverride)
     end
 
   else
@@ -118,6 +119,7 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::OpenDataExporter.included_modules).not_to include(Decidim::DecidimAwesome::OpenDataExporterOverride)
       expect(Decidim::Core::ParticipatorySpaceListBase.included_modules).not_to include(Decidim::DecidimAwesome::ParticipatorySpaceListBaseOverride)
       expect(Decidim::Core::ComponentList.included_modules).not_to include(Decidim::DecidimAwesome::ComponentListOverride)
+      expect(Decidim::BlockUserMailer.included_modules).not_to include(Decidim::DecidimAwesome::BlockUserMailerOverride)
     end
   end
 end
