@@ -45,6 +45,26 @@ document.addEventListener("turbo:load", () => {
     }
   });
 
+  // Override the default remove behavior: createDynamicFields hides fields
+  // instead of removing them when inputs match /id/ in their name attribute.
+  // Since our columns are not backed by ActiveRecord, we need actual DOM removal.
+  wrapper.addEventListener("click", (event) => {
+    const button = event.target.closest(".remove-rich-text-column");
+    if (!button) {
+      return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const field = button.closest(".rich-text-column");
+    if (field) {
+      field.remove();
+      autoLabelByPosition.run();
+      toggleAddButton();
+    }
+  }, true);
+
   autoLabelByPosition.run();
   toggleAddButton();
 });
