@@ -45,10 +45,17 @@ module Decidim
 
         def find_category
           @category = @store.stored_categories.find { |c| c["slug"].to_s == category_slug.to_s }
+
           unless @category
-            form.errors.add(:base, :category_not_found)
-            return false
+            default_category = @store.find_category(category_slug)
+            unless default_category
+              form.errors.add(:base, :category_not_found)
+              return false
+            end
+            @category = default_category.to_params
+            @store.stored_categories << @category
           end
+
           @category["items"] = [] unless @category["items"].is_a?(Array)
           true
         end

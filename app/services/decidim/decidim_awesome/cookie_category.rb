@@ -55,14 +55,22 @@ module Decidim
         {
           slug: slug,
           mandatory: mandatory?,
-          title: title,
-          description: description,
+          title: @data["title"],
+          description: @data["description"],
           visibility: visibility
         }
       end
 
       def to_params
         @data
+      end
+
+      def sanitize_category
+        to_form_params.transform_keys(&:to_s).merge(
+          "title" => title,
+          "description" => description,
+          "items" => items.map(&:sanitize_item)
+        )
       end
     end
   end

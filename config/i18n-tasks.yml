@@ -21,7 +21,7 @@ ignore_unused:
   - "activemodel.attributes.user.*"
   - "activemodel.attributes.organization.awesome_admins_available_authorizations"
   - "activemodel.attributes.force_authorization.*"
-  - "activemodel.errors.models.cookie_item.attributes.name.*"
+  - "activemodel.errors.models.cookie_item.attributes.*"
   - "activemodel.attributes.cookie_item.type"
   - "decidim.components.decidim_awesome.name"
   - "decidim.components.awesome_iframe.settings.*"

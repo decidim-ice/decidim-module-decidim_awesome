@@ -31,17 +31,13 @@ module Decidim
       end
 
       def default?(category_slug)
-        default_category = CookieManagementStore.decidim_defaults.find { |c| c["slug"] == category_slug.to_s }
-        return false unless default_category
-
-        default_category["items"].any? { |i| i["name"] == name }
+        find_default_item(category_slug).present?
       end
 
       def modified?(category_slug)
         return false unless default?(category_slug)
 
-        default_category = CookieManagementStore.decidim_defaults.find { |c| c["slug"] == category_slug.to_s }
-        default_item = default_category["items"].find { |i| i["name"] == name }
+        default_item = find_default_item(category_slug)
         return false unless default_item
 
         type != default_item["type"] ||
@@ -53,24 +49,21 @@ module Decidim
         {
           name: name,
           type: type,
-          service: service,
-          description: description,
-          expiration: expiration
+          service: @data["service"],
+          description: @data["description"],
+          expiration: @data["expiration"]
         }
       end
 
-      def to_params
-        @data
+      def sanitize_item
+        to_form_params.transform_keys(&:to_s)
       end
 
-      def sanitize_item(organization = nil)
-        {
-          "type" => type,
-          "name" => name,
-          "service" => translated_attribute(@data["service"], organization),
-          "description" => translated_attribute(@data["description"], organization),
-          "expiration" => expiration
-        }
+      private
+
+      def find_default_item(category_slug)
+        default_category = CookieManagementStore.decidim_defaults.find { |c| c["slug"] == category_slug.to_s }
+        default_category&.dig("items")&.find { |i| i["name"] == name }
       end
     end
   end

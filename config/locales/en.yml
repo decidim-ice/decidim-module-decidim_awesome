@@ -90,6 +90,8 @@ en:
       models:
         cookie_item:
           attributes:
+            base:
+              category_not_found: Category not found
             name:
               cannot_change_default_item_name: The name of a predefined item cannot
                 be changed

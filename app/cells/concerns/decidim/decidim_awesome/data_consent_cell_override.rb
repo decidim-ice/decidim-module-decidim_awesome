@@ -17,18 +17,7 @@ module Decidim
       #  }, etc... ]
 
       def categories
-        @categories ||= CookieManagementStore.new(model, awesome_categories).categories.map do |category|
-          {
-            "slug" => category.slug,
-            "mandatory" => category.mandatory?,
-            "title" => category.title,
-            "description" => category.description,
-            "visibility" => category.visibility,
-            "items" => category.items.map do |item|
-              { "type" => item.type, "name" => item.name, "service" => item.service, "description" => item.description, "expiration" => item.expiration }
-            end
-          }
-        end
+        @categories ||= CookieManagementStore.new(model, awesome_categories).categories.map(&:sanitize_category)
       end
 
       private
