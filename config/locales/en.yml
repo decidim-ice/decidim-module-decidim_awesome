@@ -793,7 +793,7 @@ en:
           block_id_help: This value will be used as the section anchor in the URL.
             It must be unique per page (e.g. "our-team").
           block_id_placeholder: internal reference name (not publicly used)
-          column_title: 'Column #%{number}'
+          column_title: Column
           name: Awesome Rich Text block
           remove_column: Remove
           restrict_links: Prevent links in the text to be displayed unless the user

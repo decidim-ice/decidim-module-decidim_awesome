@@ -35,7 +35,7 @@
       <script type="text/template" class="decidim-template">
         <div class="rich-text-column card pt-4 mb-4" id="rich-text-column-id-field">
           <div class="card-divider flex items-center justify-between">
-            <h2 class="card-title"><span class="rich-text-column-title"><%= t("column_title", scope: i18n_scope, number: "") %></span></h2>
+            <h2 class="card-title"><span class="rich-text-column-title"><%= t("column_title", scope: i18n_scope) %></span></h2>
             <button type="button" class="button button__xs button__transparent-secondary remove-rich-text-column">
               <%= icon("delete-bin-line") %>
               <span><%= t("remove_column", scope: i18n_scope) %></span>
@@ -64,7 +64,7 @@
         <% settings_fields.fields_for "columns[#{idx}]", col do |col_fields| %>
           <div class="rich-text-column card pt-4 mb-4" id="<%= idx %>-field">
             <div class="card-divider flex items-center justify-between">
-              <h2 class="card-title"><span class="rich-text-column-title"><%= t("column_title", scope: i18n_scope, number: "") %></span></h2>
+              <h2 class="card-title"><span class="rich-text-column-title"><%= t("column_title", scope: i18n_scope) %></span></h2>
               <% if idx > 0 %>
                 <button type="button" class="button button__xs button__transparent-secondary remove-rich-text-column">
                   <%= icon("delete-bin-line") %>
