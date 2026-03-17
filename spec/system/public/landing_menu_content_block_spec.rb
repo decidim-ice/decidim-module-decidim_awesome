@@ -5,8 +5,8 @@ require "spec_helper"
 describe "Public homepage shows Landing Menu block" do
   let(:organization) { create(:organization) }
   let!(:content_block) { create(:content_block, organization:, manifest_name: :awesome_landing_menu, scope_name: :homepage, settings:) }
-  let(:settings) { { "menu_items" => { "en" => menu_items_text }, "sticky" => sticky, "alignment" => alignment } }
-  let(:menu_items_text) { "Contact | https://example.com | _blank" }
+  let(:settings) { { "menu_items" => menu_items_json, "sticky" => sticky, "alignment" => alignment } }
+  let(:menu_items_json) { [{ "name" => { "en" => "Contact" }, "url" => "https://example.com", "visible" => true }].to_json }
   let(:sticky) { false }
   let(:alignment) { "center" }
 
@@ -15,11 +15,17 @@ describe "Public homepage shows Landing Menu block" do
   end
 
   context "with multiple menu items" do
-    let(:menu_items_text) { "About | /about\nContact | /contact\nFAQ | /faq" }
+    let(:menu_items_json) do
+      [
+        { "name" => { "en" => "About" }, "url" => "/about", "visible" => true },
+        { "name" => { "en" => "Contact" }, "url" => "/contact", "visible" => true },
+        { "name" => { "en" => "FAQ" }, "url" => "/faq", "visible" => true }
+      ].to_json
+    end
 
     it "displays all items in order" do
       visit decidim.root_path
-      within(".landing-menu") do
+      within(".awesome-landing-menu") do
         expect(page).to have_content("About")
         expect(page).to have_content("Contact")
         expect(page).to have_content("FAQ")
@@ -30,25 +36,25 @@ describe "Public homepage shows Landing Menu block" do
   context "with external link" do
     it "displays the link text" do
       visit decidim.root_path
-      within(".landing-menu") do
+      within(".awesome-landing-menu") do
         expect(page).to have_content("Contact")
       end
     end
 
     it "opens external link in new tab" do
       visit decidim.root_path
-      within(".landing-menu") do
+      within(".awesome-landing-menu") do
         expect(page).to have_css("a[target='_blank'][rel='noopener noreferrer']", text: "Contact")
       end
     end
   end
 
   context "with relative path link" do
-    let(:menu_items_text) { "About | /about-us" }
+    let(:menu_items_json) { [{ "name" => { "en" => "About" }, "url" => "/about-us", "visible" => true }].to_json }
 
     it "displays the internal link" do
       visit decidim.root_path
-      within(".landing-menu") do
+      within(".awesome-landing-menu") do
         expect(page).to have_link("About", href: "/about-us")
       end
     end
@@ -56,8 +62,8 @@ describe "Public homepage shows Landing Menu block" do
 
   context "with anchor to an existing content block" do
     let!(:sibling_block) { create(:content_block, organization:, manifest_name: :awesome_landing_menu, scope_name: :homepage, settings: sibling_settings) }
-    let(:sibling_settings) { { "menu_items" => { "en" => "Home | #hero" } } }
-    let(:menu_items_text) { "Go to sibling | #awesome-landing-menu-#{sibling_block.id}" }
+    let(:sibling_settings) { { "menu_items" => [{ "name" => { "en" => "Home" }, "url" => "#hero", "visible" => true }].to_json } }
+    let(:menu_items_json) { [{ "name" => { "en" => "Go to sibling" }, "url" => "#awesome-landing-menu-#{sibling_block.id}", "visible" => true }].to_json }
 
     it "displays the anchor link" do
       visit decidim.root_path
@@ -68,7 +74,7 @@ describe "Public homepage shows Landing Menu block" do
   end
 
   context "when anchor points to a non-existent element" do
-    let(:menu_items_text) { "Missing | #nonexistent-block" }
+    let(:menu_items_json) { [{ "name" => { "en" => "Missing" }, "url" => "#nonexistent-block", "visible" => true }].to_json }
 
     it "hides the link via JavaScript" do
       visit decidim.root_path
@@ -77,11 +83,16 @@ describe "Public homepage shows Landing Menu block" do
   end
 
   context "when URL is unsafe" do
-    let(:menu_items_text) { "XSS | javascript:alert(1)\nSafe | /about" }
+    let(:menu_items_json) do
+      [
+        { "name" => { "en" => "XSS" }, "url" => "javascript:alert(1)", "visible" => true },
+        { "name" => { "en" => "Safe" }, "url" => "/about", "visible" => true }
+      ].to_json
+    end
 
     it "does not render the unsafe link" do
       visit decidim.root_path
-      within(".landing-menu") do
+      within(".awesome-landing-menu") do
         expect(page).to have_no_content("XSS")
         expect(page).to have_content("Safe")
       end
@@ -89,11 +100,11 @@ describe "Public homepage shows Landing Menu block" do
   end
 
   context "when menu_items is empty" do
-    let(:menu_items_text) { "" }
+    let(:menu_items_json) { "[]" }
 
     it "does not render the menu" do
       visit decidim.root_path
-      expect(page).to have_no_css(".landing-menu")
+      expect(page).to have_no_css(".awesome-landing-menu")
     end
   end
 
@@ -102,7 +113,7 @@ describe "Public homepage shows Landing Menu block" do
 
     it "renders nav with sticky class" do
       visit decidim.root_path
-      expect(page).to have_css("nav.sticky")
+      expect(page).to have_css("section.awesome-landing-menu--sticky")
     end
   end
 
@@ -111,8 +122,8 @@ describe "Public homepage shows Landing Menu block" do
 
     it "renders nav without sticky class" do
       visit decidim.root_path
-      within(".landing-menu") do
-        expect(page).to have_no_css("nav.sticky")
+      within(".awesome-landing-menu") do
+        expect(page).to have_no_css("section.awesome-landing-menu--sticky")
       end
     end
   end
@@ -122,7 +133,7 @@ describe "Public homepage shows Landing Menu block" do
 
     it "renders with justify-start class" do
       visit decidim.root_path
-      expect(page).to have_css(".landing-menu .justify-start")
+      expect(page).to have_css(".awesome-landing-menu .awesome-landing-menu__container--left")
     end
   end
 
@@ -131,7 +142,7 @@ describe "Public homepage shows Landing Menu block" do
 
     it "renders with justify-end class" do
       visit decidim.root_path
-      expect(page).to have_css(".landing-menu .justify-end")
+      expect(page).to have_css(".awesome-landing-menu .awesome-landing-menu__container--right")
     end
   end
 
@@ -140,7 +151,7 @@ describe "Public homepage shows Landing Menu block" do
 
     it "renders with justify-center class" do
       visit decidim.root_path
-      expect(page).to have_css(".landing-menu .justify-center")
+      expect(page).to have_css(".awesome-landing-menu .awesome-landing-menu__container--center")
     end
   end
 end
