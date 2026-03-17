@@ -5,9 +5,10 @@ module Decidim
     module Admin
       class CookieCategoryForm < Decidim::Form
         include Decidim::TranslatableAttributes
-        VISIBILITY_STATES = %w(default hidden).freeze
+        VISIBILITY_STATES = %w(visible hidden).freeze
 
         attribute :slug, String
+        attribute :editable, Boolean, default: true
         attribute :mandatory, Boolean
         translatable_attribute :title, String
         translatable_attribute :description, String
@@ -17,26 +18,37 @@ module Decidim
         validates :slug, format: { with: /\A[a-z0-9-]+\z/ }
         validates :title, translatable_presence: true
         validates :description, translatable_presence: true
-        validates :visibility, inclusion: { in: VISIBILITY_STATES }
+        validates :visibility, inclusion: { in: VISIBILITY_STATES }, if: -> { visibility.present? }
 
-        def generate_slug_from_title
-          title_text = title.values.compact.first.to_s
-          words = title_text.split(/\s+/)
-          longest_word = words.max_by(&:length) || ""
-          base_slug = longest_word.parameterize
-          base_slug = "category" if base_slug.blank?
-          "#{base_slug}-#{SecureRandom.hex(4)}"
+        validate :non_editable_fields_unchanged, unless: :editable?
+        validate :validate_uniqueness, if: -> { categories.present? }
+
+        def non_editable_fields_unchanged
+          # todo
+        end
+
+        def validate_uniqueness
+          return if categories[slug].nil?
+
+          errors.add(:slug, :taken)
+        end
+
+        def visibility_options
+          VISIBILITY_STATES.index_by { |state| I18n.t(".cookie_categories.form.visibility.#{state}", scope: "decidim.decidim_awesome.admin") }
         end
 
         def to_params
           {
-            "slug" => slug,
-            "mandatory" => mandatory || false,
             "title" => title,
+            "edited" => true,
             "description" => description,
-            "items" => [],
-            "visibility" => visibility
+            "visibility" => visibility || "visible",
+            "mandatory" => mandatory
           }
+        end
+
+        def categories
+          context[:categories] || {}
         end
       end
     end

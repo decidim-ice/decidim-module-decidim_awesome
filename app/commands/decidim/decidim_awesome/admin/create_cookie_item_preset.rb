@@ -23,7 +23,7 @@ module Decidim
           errors = []
 
           forms.each do |form|
-            CreateCookieItem.call(form, category_slug) do
+            UpdateCookieItem.call(form, category_slug) do
               on(:invalid) do |error_message|
                 errors << "#{form.name}: #{error_message.presence || form.errors.full_messages.join(", ")}"
               end

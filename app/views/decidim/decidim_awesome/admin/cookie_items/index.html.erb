@@ -1,6 +1,6 @@
 <div class="item_show__header">
   <h2 class="item_show__header-title">
-    <%= t(".title", category: category_title_for_breadcrumb(params[:cookie_category_slug])) %>
+    <%= t(".title", category: params[:cookie_category_slug]) %>
     <%= link_to decidim_admin_decidim_awesome.cookie_categories_path, class: "button button__sm button__transparent-secondary" do %>
       <%= icon "arrow-left-line" %>
       <%= t(".back_to_categories") %>
@@ -39,26 +39,20 @@
           </tr>
         </thead>
         <tbody>
-          <% (category_from_params.items || []).each do |item| %>
-            <% is_default = item.default?(params[:cookie_category_slug]) %>
-            <% is_modified = item.modified?(params[:cookie_category_slug]) %>
-            <tr<%= " class=cookie_item-addition" unless is_default %>>
-              <td><%= item.name %></td>
-              <td><%= item.service %></td>
-              <td><%= translated_attribute(item.expiration) %></td>
+          <% category_items.each do |slug, item| %>
+            <tr<%= " class=cookie_item-addition" unless item["editable"] %>>
+              <td><%= item["name"] %></td>
+              <td><%= translated_attribute(item["service"]) %></td>
+              <td><%= translated_attribute(item["expiration"]) %></td>
               <td class="table-list__actions">
-                  <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_cookie_category_cookie_item_path(params[:cookie_category_slug], item.name), t(".edit"), class: "action-icon--edit" %>
-                  <% if is_default %>
-                    <% if is_modified %>
-                      <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.cookie_category_cookie_item_path(params[:cookie_category_slug], item.name), t(".reset"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_reset") } %>
-                    <% else %>
-                      <span class="action-icon">
-                        <%= icon "close-circle-line", class: "action-icon action-icon--disabled", role: "img", "aria-label": t(".cannot_remove_default") %>
-                      </span>
-                    <% end %>
-                  <% else %>
-                    <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.cookie_category_cookie_item_path(params[:cookie_category_slug], item.name), t(".remove"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
-                  <% end %>
+                <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_cookie_category_cookie_item_path(params[:cookie_category_slug], item["name"]), t(".edit"), class: "action-icon--edit" %>
+                <% if item["edited"] %>
+                  <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.cookie_category_cookie_item_path(params[:cookie_category_slug], item["name"]), t(".reset"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_reset") } %>
+                <% else %>
+                  <span class="action-icon">
+                    <%= icon "close-circle-line", class: "action-icon action-icon--disabled", role: "img", "aria-label": t(".cannot_remove_default") %>
+                  </span>
+                <% end %>
               </td>
             </tr>
           <% end %>

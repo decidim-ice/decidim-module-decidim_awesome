@@ -5,8 +5,9 @@ module Decidim
     module Admin
       class CookieItemsController < DecidimAwesome::Admin::ApplicationController
         include CookieManagementHelpers
+        helper ConfigConstraintsHelpers
 
-        helper_method :category_from_params, :item_type_options, :category_title_for_breadcrumb, :default_cookie_item?, :cookie_item_presets
+        helper_method :category_items, :item, :cookie_item_presets
 
         before_action :set_cookie_items_breadcrumb
         before_action do
@@ -21,16 +22,14 @@ module Decidim
         end
 
         def edit
-          add_breadcrumb_item :edit, decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
-          category = find_category!(params[:cookie_category_slug])
-          item = category.items.find { |i| i.name == params[:name] } || raise(ActiveRecord::RecordNotFound)
-          @form = form(CookieItemForm).from_params(item.to_form_params)
+          # add_breadcrumb_item :edit, decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
+          @form = form(CookieItemForm).from_params(item)
         end
 
         def create
-          @form = form(CookieItemForm).from_params(params)
+          @form = form(CookieItemForm).from_params(params, category_items:)
 
-          CreateCookieItem.call(@form, params[:cookie_category_slug]) do
+          UpdateCookieItem.call(@form, params[:cookie_category_slug]) do
             on(:ok) do
               flash[:notice] = I18n.t("cookie_items.create.success", scope: "decidim.decidim_awesome.admin")
               redirect_to decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
@@ -69,7 +68,7 @@ module Decidim
         def update
           @form = form(CookieItemForm).from_params(params)
 
-          UpdateCookieItem.call(@form, params[:cookie_category_slug], params[:name]) do
+          UpdateCookieItem.call(@form, params[:cookie_category_slug]) do
             on(:ok) do
               flash[:notice] = I18n.t("cookie_items.update.success", scope: "decidim.decidim_awesome.admin")
               redirect_to decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
@@ -99,10 +98,22 @@ module Decidim
 
         private
 
+        def category
+          store.categories[params[:cookie_category_slug]] || raise(ActiveRecord::RecordNotFound)
+        end
+
+        def category_items
+          category&.dig("items") || {}
+        end
+
+        def item
+          category_items[params[:name]] || raise(ActiveRecord::RecordNotFound)
+        end
+
         def set_cookie_items_breadcrumb
           add_breadcrumb_item :cookie_management, decidim_admin_decidim_awesome.cookie_categories_path
-          add_breadcrumb_item category_title_for_breadcrumb(params[:cookie_category_slug]),
-                              decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
+          # add_breadcrumb_item category_title_for_breadcrumb(params[:cookie_category_slug]),
+          #                     decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
         end
 
         def preset_builder
@@ -111,14 +122,6 @@ module Decidim
 
         def cookie_item_presets
           preset_builder.presets
-        end
-
-        def default_cookie_item?(category_slug, item_name)
-          CookieItem.new("name" => item_name).default?(category_slug)
-        end
-
-        def category_from_params
-          find_category!(params[:cookie_category_slug])
         end
       end
     end

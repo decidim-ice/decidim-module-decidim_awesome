@@ -56,9 +56,9 @@ en:
         participatory_space_manifest: Apply to participatory spaces of type
         participatory_space_slug: Only in
       cookie_category:
-        id: ID
+        slug: ID
         mandatory: Mandatory
-        title: Category
+        title: Category title
         total_cookies: Total cookies
         visibility: Visibility
       cookie_item:
@@ -541,7 +541,7 @@ en:
           form:
             slug_help: Unique identifier used in scripts to reference this category.
             visibility:
-              default: Visible
+              visible: Visible
               hidden: Hidden
           index:
             cannot_remove_default: Default categories cannot be removed

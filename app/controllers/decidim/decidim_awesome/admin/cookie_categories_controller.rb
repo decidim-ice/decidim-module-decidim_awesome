@@ -5,10 +5,11 @@ module Decidim
     module Admin
       class CookieCategoriesController < DecidimAwesome::Admin::ApplicationController
         include CookieManagementHelpers
+        helper ConfigConstraintsHelpers
 
-        helper_method :categories, :visibility_options
+        helper_method :categories
 
-        before_action :set_cookie_management_breadcrumb
+        # before_action :set_cookie_management_breadcrumb
         before_action do
           enforce_permission_to :edit_config, :cookie_management
         end
@@ -21,15 +22,14 @@ module Decidim
         end
 
         def edit
-          add_breadcrumb_item category_title_for_breadcrumb(params[:slug]), decidim_admin_decidim_awesome.cookie_categories_path
-          category = find_category!(params[:slug])
-          @form = form(CookieCategoryForm).from_params(category.to_form_params)
+          # add_breadcrumb_item category_title_for_breadcrumb(params[:slug]), decidim_admin_decidim_awesome.cookie_categories_path
+          @form = form(CookieCategoryForm).from_params(store.categories[params[:slug]])
         end
 
         def create
-          @form = form(CookieCategoryForm).from_params(params)
+          @form = form(CookieCategoryForm).from_params(params, categories:)
 
-          CreateCookieCategory.call(@form) do
+          UpdateCookieCategory.call(@form) do
             on(:ok) do
               flash[:notice] = I18n.t("cookie_categories.create.success", scope: "decidim.decidim_awesome.admin")
               redirect_to decidim_admin_decidim_awesome.cookie_categories_path
@@ -46,7 +46,7 @@ module Decidim
         def update
           @form = form(CookieCategoryForm).from_params(params)
 
-          UpdateCookieCategory.call(@form, params[:slug]) do
+          UpdateCookieCategory.call(@form) do
             on(:ok) do
               flash[:notice] = I18n.t("cookie_categories.update.success", scope: "decidim.decidim_awesome.admin")
               redirect_to decidim_admin_decidim_awesome.cookie_categories_path
