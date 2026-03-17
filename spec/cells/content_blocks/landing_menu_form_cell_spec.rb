@@ -5,7 +5,8 @@ require "spec_helper"
 module Decidim::DecidimAwesome
   describe ContentBlocks::LandingMenuFormCell, type: :cell do
     let(:organization) { create(:organization) }
-    let(:content_block) { create(:content_block, organization:, manifest_name: :awesome_landing_menu, scope_name: :homepage, settings: {}) }
+    let(:content_block) { create(:content_block, organization:, manifest_name: :awesome_landing_menu, scope_name: :homepage, settings:) }
+    let(:settings) { {} }
 
     let(:form) do
       Decidim::FormBuilder.new(
@@ -41,8 +42,45 @@ module Decidim::DecidimAwesome
         expect(subject).to have_content("Menu position")
       end
 
-      it "renders the menu items textarea" do
-        expect(subject).to have_content("Menu items")
+      it "renders the add button" do
+        expect(subject).to have_content("Add new item")
+      end
+
+      it "renders the show on mobile checkbox" do
+        expect(subject).to have_content("Show on mobile screens")
+      end
+
+      it "renders the CSS help text" do
+        expect(subject).to have_content("custom style")
+      end
+    end
+
+    describe "#table" do
+      subject { cell_instance.call(:table) }
+
+      context "without items" do
+        it "renders the add button" do
+          expect(subject).to have_content("Add new item")
+        end
+
+        it "does not render table" do
+          expect(subject).to have_no_table
+        end
+      end
+
+      context "with items" do
+        let(:settings) { { "menu_items" => [{ "name" => { "en" => "About" }, "url" => "#about", "visible" => true }].to_json } }
+
+        it "renders table with items" do
+          expect(subject).to have_content("About")
+          expect(subject).to have_content("#about")
+        end
+
+        it "renders column headers" do
+          expect(subject).to have_content("Name")
+          expect(subject).to have_content("URL")
+          expect(subject).to have_content("Actions")
+        end
       end
     end
 
@@ -62,6 +100,16 @@ module Decidim::DecidimAwesome
       end
     end
 
+    describe "#json_menu_items" do
+      let(:settings) { { "menu_items" => [{ "name" => { "en" => "Test" }, "url" => "#test" }].to_json } }
+
+      it "returns parsed items" do
+        items = cell_instance.json_menu_items
+        expect(items.length).to eq(1)
+        expect(items.first["url"]).to eq("#test")
+      end
+    end
+
     describe "#available_anchors" do
       let!(:sibling_block) { create(:content_block, organization:, manifest_name: :html, scope_name: :homepage) }
 
@@ -74,28 +122,28 @@ module Decidim::DecidimAwesome
 
       it "excludes the landing menu block itself" do
         anchors = cell_instance.available_anchors
-        anchor_values = anchors.map { |a| a[:anchor] }
+        anchor_values = anchors.map { |an| an[:anchor] }
         expect(anchor_values).not_to include(a_string_matching(/awesome_landing_menu/))
       end
 
       it "excludes other awesome_landing_menu blocks" do
         create(:content_block, organization:, manifest_name: :awesome_landing_menu, scope_name: :homepage)
         anchors = cell_instance.available_anchors
-        anchor_values = anchors.map { |a| a[:anchor] }
+        anchor_values = anchors.map { |an| an[:anchor] }
         expect(anchor_values).not_to include(a_string_matching(/awesome_landing_menu/))
       end
 
       it "excludes unpublished blocks" do
         unpublished = create(:content_block, organization:, manifest_name: :html, scope_name: :homepage, published_at: nil)
         anchors = cell_instance.available_anchors
-        anchor_values = anchors.map { |a| a[:anchor] }
+        anchor_values = anchors.map { |an| an[:anchor] }
         expect(anchor_values).not_to include(a_string_matching(/#{unpublished.id}/))
       end
 
       it "excludes blocks from another organization" do
         other_org = create(:organization)
         create(:content_block, organization: other_org, manifest_name: :html, scope_name: :homepage)
-        anchor_values = cell_instance.available_anchors.map { |a| a[:anchor] }
+        anchor_values = cell_instance.available_anchors.map { |an| an[:anchor] }
         expect(anchor_values).not_to include(a_string_matching(/#{other_org.id}/))
       end
 

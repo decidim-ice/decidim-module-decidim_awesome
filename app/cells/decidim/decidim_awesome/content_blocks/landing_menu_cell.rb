@@ -11,7 +11,7 @@ module Decidim
         end
 
         def menu_items
-          @menu_items ||= parse_menu_items(translated_attribute(model.settings.menu_items))
+          @menu_items ||= parse_menu_items(model.settings.menu_items).select { |item| item[:visible] }
         end
 
         def sticky?
@@ -22,12 +22,8 @@ module Decidim
           model.settings.alignment.presence || "center"
         end
 
-        def justify_class
-          case alignment
-          when "left" then "justify-start"
-          when "right" then "justify-end"
-          else "justify-center"
-          end
+        def show_on_mobile?
+          model.settings.show_on_mobile
         end
 
         def block_id
@@ -40,25 +36,23 @@ module Decidim
 
         private
 
-        def parse_menu_items(text)
-          return [] if text.blank?
-
-          text.lines.filter_map { |line| parse_menu_line(line) }
+        def parse_menu_items(raw)
+          MenuItemsParser.parse_json(raw).filter_map { |item| build_menu_item(item) }
         end
 
-        def parse_menu_line(line)
-          parts = line.strip.split("|").map(&:strip)
-          return if parts.length < 2 || parts[0].blank? || parts[1].blank?
-          return unless safe_url?(parts[1])
+        def build_menu_item(item)
+          return unless item.is_a?(Hash) && item["url"].present?
 
-          target = parts[2]&.strip
-          target = nil unless %w(_blank _self).include?(target)
+          label = translated_attribute(item["name"])
+          return if label.blank?
 
-          { label: parts[0], url: parts[1], target: target }
-        end
+          url = item["url"]
+          return unless url.match?(MenuItemsParser::SAFE_URL_PATTERN)
 
-        def safe_url?(url)
-          url.match?(%r{\A(#|/(?!/)|https?://)}i)
+          target = url.match?(%r{\Ahttps://}i) ? "_blank" : nil
+          visible = item.fetch("visible", true) != false
+
+          { label:, url:, target:, visible: }
         end
       end
     end

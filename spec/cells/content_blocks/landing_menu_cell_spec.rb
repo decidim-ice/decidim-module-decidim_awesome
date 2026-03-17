@@ -8,9 +8,11 @@ module Decidim::DecidimAwesome
 
     let(:organization) { create(:organization) }
     let(:content_block) { create(:content_block, organization:, manifest_name: :awesome_landing_menu, scope_name: :homepage, settings:) }
-    let(:settings) { { "menu_items" => menu_items_hash } }
-    let(:menu_items_hash) { { "en" => menu_items_text } }
-    let(:menu_items_text) { "About us | #hero\nProcesses | #participatory_processes" }
+    let(:settings) { { "menu_items" => menu_items_json } }
+    let(:menu_items_json) do
+      [{ "name" => { "en" => "About us" }, "url" => "#hero", "visible" => true },
+       { "name" => { "en" => "Processes" }, "url" => "#participatory_processes", "visible" => true }].to_json
+    end
 
     controller Decidim::PagesController
 
@@ -23,63 +25,69 @@ module Decidim::DecidimAwesome
       expect(subject).to have_link("Processes", href: "#participatory_processes")
     end
 
-    it "renders nav with aria-label" do
-      expect(subject).to have_css("nav[aria-label]")
-    end
-
-    it "renders links in the mobile dropdown" do
-      expect(subject).to have_css("ul[role='menu']")
-      within("ul[role='menu']") do
-        expect(subject).to have_content("About us")
-        expect(subject).to have_content("Processes")
-      end
+    it "renders section with aria-label" do
+      expect(subject).to have_css("section[aria-label]")
     end
 
     context "when menu_items is empty" do
-      let(:menu_items_text) { "" }
+      let(:menu_items_json) { "[]" }
 
-      it "does not render the nav" do
-        expect(subject).to have_no_css("nav")
+      it "renders nothing" do
+        expect(subject.text).to be_empty
       end
     end
 
-    context "when menu_items has only whitespace" do
-      let(:menu_items_text) { "  \n  \n  " }
+    context "when menu_items is blank" do
+      let(:menu_items_json) { "" }
 
-      it "does not render the nav" do
-        expect(subject).to have_no_css("nav")
+      it "renders nothing" do
+        expect(subject.text).to be_empty
       end
     end
 
-    context "when item has _blank target" do
-      let(:menu_items_text) { "External | https://example.com | _blank" }
+    context "with invisible items" do
+      let(:menu_items_json) do
+        [{ "name" => { "en" => "Visible" }, "url" => "#visible", "visible" => true },
+         { "name" => { "en" => "Hidden" }, "url" => "#hidden", "visible" => false }].to_json
+      end
 
-      it "renders with target and rel attributes" do
-        expect(subject).to have_content("External")
+      it "filters out invisible items" do
+        expect(subject).to have_content("Visible")
+        expect(subject).to have_no_content("Hidden")
+      end
+    end
+
+    context "with external https URL" do
+      let(:menu_items_json) { [{ "name" => { "en" => "External" }, "url" => "https://example.com", "visible" => true }].to_json }
+
+      it "renders with target _blank" do
         expect(subject).to have_css("a[target='_blank'][rel='noopener noreferrer']", text: "External")
       end
     end
 
-    context "when item has no target" do
-      let(:menu_items_text) { "About | #hero" }
+    context "with anchor URL" do
+      let(:menu_items_json) { [{ "name" => { "en" => "Section" }, "url" => "#section", "visible" => true }].to_json }
 
       it "renders without target attribute" do
-        expect(subject).to have_link("About", href: "#hero")
-        expect(subject).to have_no_css("a[target]")
+        expect(subject).to have_link("Section", href: "#section")
+        expect(subject).to have_no_css("a[target]", text: "Section")
       end
     end
 
-    context "when lines are malformed" do
-      let(:menu_items_text) { "No URL\n | #missing-label\nValid | #anchor\n | " }
+    context "with internal path URL" do
+      let(:menu_items_json) { [{ "name" => { "en" => "About" }, "url" => "/about", "visible" => true }].to_json }
 
-      it "skips invalid lines and renders valid ones" do
-        expect(subject).to have_content("Valid")
-        expect(subject).to have_no_content("No URL")
+      it "renders without target attribute" do
+        expect(subject).to have_link("About", href: "/about")
+        expect(subject).to have_no_css("a[target]", text: "About")
       end
     end
 
-    context "when URL has javascript: scheme" do
-      let(:menu_items_text) { "XSS | javascript:alert(1)\nSafe | #anchor" }
+    context "with unsafe javascript URL" do
+      let(:menu_items_json) do
+        [{ "name" => { "en" => "XSS" }, "url" => "javascript:alert(1)", "visible" => true },
+         { "name" => { "en" => "Safe" }, "url" => "#anchor", "visible" => true }].to_json
+      end
 
       it "filters out unsafe URLs" do
         expect(subject).to have_no_content("XSS")
@@ -87,92 +95,11 @@ module Decidim::DecidimAwesome
       end
     end
 
-    context "when URL has data: scheme" do
-      let(:menu_items_text) { "Unsafe | data:text/html,<script>alert(1)</script>" }
+    context "with blank name" do
+      let(:menu_items_json) { [{ "name" => { "en" => "" }, "url" => "#test", "visible" => true }].to_json }
 
-      it "filters out unsafe URLs" do
-        expect(subject).to have_no_css("nav")
-      end
-    end
-
-    context "when URL is protocol-relative" do
-      let(:menu_items_text) { "Phish | //evil.com/page\nSafe | /about" }
-
-      it "filters out protocol-relative URLs" do
-        expect(subject).to have_no_content("Phish")
-        expect(subject).to have_content("Safe")
-      end
-    end
-
-    context "when item has _self target" do
-      let(:menu_items_text) { "About | #section | _self" }
-
-      it "renders without target attribute since _self is the default" do
-        expect(subject).to have_link("About", href: "#section")
-        expect(subject).to have_no_css("a[target]")
-      end
-    end
-
-    context "when target is not a valid value" do
-      let(:menu_items_text) { "Link | #section | _parent" }
-
-      it "ignores invalid target" do
-        expect(subject).to have_link("Link", href: "#section")
-        expect(subject).to have_no_css("a[target]")
-      end
-    end
-
-    context "when URL is a relative path" do
-      let(:menu_items_text) { "About | /about-us" }
-
-      it "renders the link" do
-        expect(subject).to have_link("About", href: "/about-us")
-      end
-    end
-
-    context "when URL is https" do
-      let(:menu_items_text) { "Site | https://example.com" }
-
-      it "renders the link without target attribute" do
-        expect(subject).to have_link("Site", href: "https://example.com")
-        expect(subject).to have_no_css("a[target]")
-      end
-    end
-
-    describe "#menu_items" do
-      let(:cell_instance) { cell(content_block.cell, content_block) }
-
-      it "parses lines into hashes" do
-        items = cell_instance.menu_items
-        expect(items).to eq([
-                              { label: "About us", url: "#hero", target: nil },
-                              { label: "Processes", url: "#participatory_processes", target: nil }
-                            ])
-      end
-
-      context "with _blank target" do
-        let(:menu_items_text) { "Site | https://example.com | _blank" }
-
-        it "includes target in hash" do
-          items = cell_instance.menu_items
-          expect(items).to eq([{ label: "Site", url: "https://example.com", target: "_blank" }])
-        end
-      end
-
-      context "with _self target" do
-        let(:menu_items_text) { "About | #section | _self" }
-
-        it "includes target in hash" do
-          expect(cell_instance.menu_items).to eq([{ label: "About", url: "#section", target: "_self" }])
-        end
-      end
-
-      context "when text is blank" do
-        let(:menu_items_text) { "" }
-
-        it "returns empty array" do
-          expect(cell_instance.menu_items).to eq([])
-        end
+      it "filters out items with blank name" do
+        expect(subject.text).to be_empty
       end
     end
 
@@ -180,26 +107,18 @@ module Decidim::DecidimAwesome
       let(:cell_instance) { cell(content_block.cell, content_block) }
 
       context "when sticky is true" do
-        let(:settings) { { "menu_items" => menu_items_hash, "sticky" => true } }
+        let(:settings) { { "menu_items" => menu_items_json, "sticky" => true } }
 
         it "returns true" do
           expect(cell_instance.sticky?).to be(true)
         end
-
-        it "renders nav with sticky class" do
-          expect(subject).to have_css("nav.sticky")
-        end
       end
 
       context "when sticky is false" do
-        let(:settings) { { "menu_items" => menu_items_hash, "sticky" => false } }
+        let(:settings) { { "menu_items" => menu_items_json, "sticky" => false } }
 
         it "returns false" do
           expect(cell_instance.sticky?).to be(false)
-        end
-
-        it "renders nav without sticky class" do
-          expect(subject).to have_no_css("nav.sticky")
         end
       end
     end
@@ -208,7 +127,7 @@ module Decidim::DecidimAwesome
       let(:cell_instance) { cell(content_block.cell, content_block) }
 
       context "when alignment is set" do
-        let(:settings) { { "menu_items" => menu_items_hash, "alignment" => "left" } }
+        let(:settings) { { "menu_items" => menu_items_json, "alignment" => "left" } }
 
         it "returns the setting value" do
           expect(cell_instance.alignment).to eq("left")
@@ -216,47 +135,21 @@ module Decidim::DecidimAwesome
       end
 
       context "when alignment is not set" do
-        let(:settings) { { "menu_items" => menu_items_hash } }
-
         it "defaults to center" do
           expect(cell_instance.alignment).to eq("center")
         end
       end
     end
 
-    describe "#justify_class" do
+    describe "#show_on_mobile?" do
       let(:cell_instance) { cell(content_block.cell, content_block) }
 
-      context "when alignment is left" do
-        let(:settings) { { "menu_items" => menu_items_hash, "alignment" => "left" } }
+      context "when show_on_mobile is true" do
+        let(:settings) { { "menu_items" => menu_items_json, "show_on_mobile" => true } }
 
-        it "returns justify-start" do
-          expect(cell_instance.justify_class).to eq("justify-start")
+        it "returns true" do
+          expect(cell_instance.show_on_mobile?).to be(true)
         end
-      end
-
-      context "when alignment is right" do
-        let(:settings) { { "menu_items" => menu_items_hash, "alignment" => "right" } }
-
-        it "returns justify-end" do
-          expect(cell_instance.justify_class).to eq("justify-end")
-        end
-      end
-
-      context "when alignment is center" do
-        let(:settings) { { "menu_items" => menu_items_hash, "alignment" => "center" } }
-
-        it "returns justify-center" do
-          expect(cell_instance.justify_class).to eq("justify-center")
-        end
-      end
-    end
-
-    describe "#i18n_scope" do
-      let(:cell_instance) { cell(content_block.cell, content_block) }
-
-      it "returns the landing menu scope" do
-        expect(cell_instance.i18n_scope).to eq("decidim.decidim_awesome.content_blocks.landing_menu")
       end
     end
 
@@ -265,6 +158,14 @@ module Decidim::DecidimAwesome
 
       it "returns awesome-landing-menu-{id}" do
         expect(cell_instance.block_id).to eq("awesome-landing-menu-#{content_block.id}")
+      end
+    end
+
+    describe "#i18n_scope" do
+      let(:cell_instance) { cell(content_block.cell, content_block) }
+
+      it "returns the landing menu scope" do
+        expect(cell_instance.i18n_scope).to eq("decidim.decidim_awesome.content_blocks.landing_menu")
       end
     end
   end

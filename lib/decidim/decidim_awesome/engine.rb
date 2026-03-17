@@ -336,7 +336,8 @@ module Decidim
             content_block.settings do |settings|
               settings.attribute :sticky, type: :boolean, default: false
               settings.attribute :alignment, type: :enum, default: "center", choices: %w(left center right)
-              settings.attribute :menu_items, type: :text, translated: true
+              settings.attribute :show_on_mobile, type: :boolean, default: false
+              settings.attribute :menu_items, type: :text
             end
           end
         end
@@ -364,6 +365,7 @@ module Decidim
         Decidim.icons.register(name: "file-settings-line", icon: "file-settings-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "hashtag", icon: "hashtag", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "smartphone", icon: "smartphone-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "eye-off-line", icon: "eye-off-line", category: "system", description: "", engine: :decidim_awesome)
       end
     end
   end

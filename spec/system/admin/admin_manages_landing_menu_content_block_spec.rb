@@ -19,19 +19,17 @@ describe "Admin manages Landing Menu content block" do
       visit decidim_admin.edit_organization_homepage_content_block_path(content_block)
     end
 
-    it "displays the settings form with all fields" do
-      expect(page).to have_content("Landing menu")
+    it "displays the settings form" do
+      expect(page).to have_content("Awesome global menu")
       expect(page).to have_content("Sticky")
+      expect(page).to have_content("Show on mobile screens")
       expect(page).to have_content("Menu position")
-      expect(page).to have_content("Menu items")
+      expect(page).to have_content("Add new item")
     end
 
-    it "displays help text for alignment" do
-      expect(page).to have_content("Align menu items to the left, center, or right of the page")
-    end
-
-    it "displays help text for menu items" do
-      expect(page).to have_content("One item per line.")
+    it "displays CSS help text with link" do
+      expect(page).to have_content("custom style")
+      expect(page).to have_content(".awesome-landing-menu")
     end
 
     it "saves sticky setting" do
@@ -50,54 +48,41 @@ describe "Admin manages Landing Menu content block" do
       expect(page).to have_select("content_block_settings_alignment", selected: "Left")
     end
 
-    it "saves menu items" do
-      fill_in "content_block_settings_menu_items_en", with: "About | #hero\nContact | https://example.com | _blank"
-      click_link_or_button "Update"
+    context "with existing menu items" do
+      let(:menu_items) do
+        [{ "name" => { "en" => "About" }, "url" => "#about", "visible" => true },
+         { "name" => { "en" => "Contact" }, "url" => "https://example.com", "visible" => false }].to_json
+      end
+      let(:settings) { { "menu_items" => menu_items } }
 
-      visit decidim_admin.edit_organization_homepage_content_block_path(content_block)
-      expect(page).to have_field("content_block_settings_menu_items_en", with: "About | #hero\nContact | https://example.com | _blank")
-    end
-
-    it "saves all settings together" do
-      check "content_block_settings_sticky"
-      select "Right", from: "content_block_settings_alignment"
-      fill_in "content_block_settings_menu_items_en", with: "Home | #hero\nAbout | /about | _blank"
-      click_link_or_button "Update"
-
-      visit decidim_admin.edit_organization_homepage_content_block_path(content_block)
-      expect(page).to have_checked_field("content_block_settings_sticky")
-      expect(page).to have_select("content_block_settings_alignment", selected: "Right")
-      expect(page).to have_field("content_block_settings_menu_items_en", with: "Home | #hero\nAbout | /about | _blank")
-    end
-
-    describe "anchor chips" do
-      let!(:html_block) { create(:content_block, organization:, manifest_name: :html, scope_name: :homepage) }
-
-      before do
-        visit decidim_admin.edit_organization_homepage_content_block_path(content_block)
+      it "displays items in the table" do
+        expect(page).to have_content("About")
+        expect(page).to have_content("#about")
+        expect(page).to have_content("Contact")
+        expect(page).to have_content("https://example.com")
       end
 
-      it "displays chips for existing published content blocks" do
-        expect(page).to have_content("Click to add or remove:")
-        expect(page).to have_css("[data-landing-menu-anchors]")
-        expect(page).to have_css("[data-anchor-label]")
+      it "toggles item visibility" do
+        within "tr[data-record-id='0']" do
+          find("a[href*='toggle_visible']").click
+        end
+
+        content_block.reload
+        items = Decidim::DecidimAwesome::MenuItemsParser.parse_json(content_block.settings.menu_items)
+        expect(items.first["visible"]).to be(false)
       end
 
-      it "adds anchor line to textarea when chip is clicked" do
-        chip = first("[data-anchor-label]")
-        label = chip["data-anchor-label"]
-        url = chip["data-anchor-url"]
-        chip.click
-        textarea = find_by_id("content_block_settings_menu_items_en", visible: :all)
-        expect(textarea.value).to include("#{label} | #{url}")
-      end
+      it "deletes an item" do
+        accept_confirm do
+          within "tr[data-record-id='1']" do
+            find("a[data-method='delete']").click
+          end
+        end
 
-      it "removes anchor line when active chip is clicked again" do
-        chip = first("[data-anchor-label]")
-        chip.click
-        chip.click
-        textarea = find_by_id("content_block_settings_menu_items_en", visible: :all)
-        expect(textarea.value.strip).to eq("")
+        expect(page).to have_no_content("Contact")
+        content_block.reload
+        items = Decidim::DecidimAwesome::MenuItemsParser.parse_json(content_block.settings.menu_items)
+        expect(items.length).to eq(1)
       end
     end
   end

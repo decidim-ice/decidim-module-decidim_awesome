@@ -1,3 +1,4 @@
+// Full-width override for content block container
 [id^="awesome-landing-menu"] {
   max-width: none !important;
   margin-left: 0 !important;
@@ -6,28 +7,53 @@
   padding-right: 0 !important;
 }
 
-.landing-menu {
+// Desktop menu — mirrors Decidim's home__menu
+.awesome-landing-menu {
+  @apply hidden md:block bg-primary py-4;
   z-index: 1;
 }
 
-.landing-menu__link {
-  @apply text-sm font-semibold text-secondary no-underline hover:underline;
+.awesome-landing-menu--sticky {
+  @apply sticky top-0;
+  z-index: 10;
 }
 
-.landing-menu__mobile {
-  @apply relative;
+.awesome-landing-menu__container {
+  @apply flex flex-row flex-wrap items-center;
 }
 
-.landing-menu__mobile-dropdown {
-  @apply absolute top-full left-0 w-full shadow-lg rounded-b z-20
-         px-4 divide-y;
+.awesome-landing-menu__container--center {
+  @apply justify-center;
+}
 
-  &[aria-hidden="true"] {
-    @apply hidden;
+.awesome-landing-menu__container--left {
+  @apply justify-start pl-8;
+}
+
+.awesome-landing-menu__container--right {
+  @apply justify-end pr-8;
+}
+
+// Dividers between items — same pattern as home__menu-element
+.awesome-landing-menu-element {
+  @apply flex items-center;
+
+  &:not(:first-child)::before {
+    content: "";
+    @apply block w-px bg-white opacity-30 mx-2;
+    height: 1.2em;
   }
 }
 
-[id*="landing-menu-trigger"] {
+
+// Mobile menu
+.awesome-landing-menu__mobile {
+  @apply md:hidden relative bg-primary;
+}
+
+.awesome-landing-menu__mobile-trigger {
+  @apply flex items-center gap-2 w-full px-4 py-3 text-sm font-semibold text-white;
+
   > svg:last-of-type {
     @apply hidden;
   }
@@ -39,4 +65,22 @@
   &[aria-expanded="true"] > svg:last-of-type {
     @apply block;
   }
+}
+
+.awesome-landing-menu__mobile-link {
+  @apply flex items-center gap-1 font-semibold text-sm;
+}
+
+.awesome-landing-menu__mobile-dropdown {
+  @apply absolute top-full left-0 w-full shadow-lg rounded-b
+         px-4 divide-y bg-white z-20;
+
+  &[aria-hidden="true"] {
+    @apply hidden;
+  }
+}
+
+// Admin drawer — narrower than default
+#landing-menu-item-drawer[aria-hidden="false"] > * {
+  width: 400px;
 }
