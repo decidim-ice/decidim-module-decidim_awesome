@@ -10,11 +10,13 @@
 // Desktop menu — mirrors Decidim's home__menu
 .awesome-landing-menu {
   @apply hidden md:block bg-primary py-4;
+
   z-index: 1;
 }
 
 .awesome-landing-menu--sticky {
   @apply sticky top-0;
+
   z-index: 10;
 }
 
@@ -40,11 +42,12 @@
 
   &:not(:first-child)::before {
     content: "";
+
     @apply block w-px bg-white opacity-30 mx-2;
+
     height: 1.2em;
   }
 }
-
 
 // Mobile menu
 .awesome-landing-menu__mobile {

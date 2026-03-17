@@ -1,6 +1,4 @@
-<%= content_tag :div,
-               class: "awesome-landing-menu-editor",
-               data: { content_block_id: content_block.id } do %>
+<div class="awesome-landing-menu-editor" data-content-block-id="<%= content_block.id %>">
   <% if json_menu_items.any? %>
   <div class="table-stacked mb-4">
     <table class="table-list">
@@ -58,4 +56,4 @@
       <%= t("new_item", scope: i18n_scope) %>
     </button>
   </div>
-<% end %>
+</div>

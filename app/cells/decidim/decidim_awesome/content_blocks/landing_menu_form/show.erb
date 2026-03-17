@@ -21,11 +21,10 @@
   </div>
 
   <div class="row column mt-4">
-    <p><%= t("css_help_html",
-              scope: i18n_scope,
-              link: link_to(t("css_help_link", scope: i18n_scope),
-                            decidim_admin_decidim_awesome.config_path(:scoped_styles),
-                            class: "text-secondary underline")).html_safe %></p>
+    <% css_link = link_to(t("css_help_link", scope: i18n_scope),
+                          decidim_admin_decidim_awesome.config_path(:scoped_styles),
+                          class: "text-secondary underline") %>
+    <p><%= t("css_help_html", scope: i18n_scope, link: css_link).html_safe %></p>
     <code class="code-block mt-4">/* <%= t("css_comment_menu", scope: i18n_scope) %> */
 .awesome-landing-menu {
   background: var(--primary);
