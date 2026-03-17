@@ -561,8 +561,8 @@ en:
             stamps: Hashcash stamps
         landing_menu_items:
           form:
-            preset: Link to content block
-            preset_blank: "— Select a content block —"
+            preset: Autofill presets
+            preset_blank: "— Select a preset —"
             url_help_html: "<b>#section-id</b> — scrolls to a section on this page<br><b>/path</b>
               — internal page (e.g. /processes)<br><b>https://example.com</b> — external
               link (opens in a new tab automatically)"

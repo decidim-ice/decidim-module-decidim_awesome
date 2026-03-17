@@ -1,4 +1,4 @@
-const DRAWER_ID = "landing-menu-item-drawer";
+const DRAWER_ID = "item-form";
 
 const initEditor = (editor) => {
   const drawer = window.Decidim.currentDialogs[DRAWER_ID];

@@ -82,8 +82,3 @@
     @apply hidden;
   }
 }
-
-// Admin drawer — narrower than default
-#landing-menu-item-drawer[aria-hidden="false"] > * {
-  width: 400px;
-}

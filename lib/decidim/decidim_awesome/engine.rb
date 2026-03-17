@@ -111,7 +111,7 @@ module Decidim
         # override user's admin property
         Decidim::User.include(Decidim::DecidimAwesome::UserOverride) if DecidimAwesome.enabled?(:scoped_admins)
 
-        Decidim::ContentBlocks::BaseCell.prepend(Decidim::DecidimAwesome::BaseCellOverride) if DecidimAwesome.enabled?(:landing_menu)
+        Decidim::ContentBlocks::BaseCell.prepend(Decidim::DecidimAwesome::BaseCellOverride) if DecidimAwesome.enabled?(:landing_menu_block)
 
         if DecidimAwesome.enabled?(:menu, :mobile_menu, :home_content_block_menu)
           Decidim::ContentBlocks::GlobalMenuCell.include(Decidim::DecidimAwesome::GlobalMenuCellOverride) if DecidimAwesome.enabled?(:home_content_block_menu)
@@ -325,7 +325,7 @@ module Decidim
       end
 
       initializer "decidim_decidim_awesome.awesome_landing_menu_content_block" do
-        next unless DecidimAwesome.enabled?(:landing_menu)
+        next unless DecidimAwesome.enabled?(:landing_menu_block)
 
         [:homepage, :participatory_process_group_homepage, :participatory_process_homepage, :assembly_homepage].each do |scope|
           Decidim.content_blocks.register(scope, :awesome_landing_menu) do |content_block|

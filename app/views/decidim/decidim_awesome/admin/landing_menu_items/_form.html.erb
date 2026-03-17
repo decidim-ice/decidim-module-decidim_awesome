@@ -1,27 +1,19 @@
-<div class="form__wrapper">
-  <div class="item__edit-form">
-    <div class="card pt-4">
-      <div class="card-section">
-        <% if local_assigns[:available_anchors]&.any? %>
-          <div class="row column">
-            <label><%= t("decidim.decidim_awesome.admin.landing_menu_items.form.preset") %></label>
-            <select id="landing-menu-anchor-preset">
-              <option value=""><%= t("decidim.decidim_awesome.admin.landing_menu_items.form.preset_blank") %></option>
-              <% available_anchors.each do |anchor| %>
-                <option value="<%= anchor[:anchor] %>" data-label="<%= anchor[:label] %>"><%= anchor[:label] %></option>
-              <% end %>
-            </select>
-          </div>
-        <% end %>
-
-        <div class="row column">
-          <%= form.translated :text_field, :name %>
-        </div>
-        <div class="row column">
-          <%= form.text_field :url,
-                              help_text: t("decidim.decidim_awesome.admin.landing_menu_items.form.url_help_html") %>
-        </div>
-      </div>
-    </div>
+<% if local_assigns[:available_anchors]&.any? %>
+  <div class="mb-4 p-3 bg-background rounded text-sm">
+    <label class="text-muted"><%= t("decidim.decidim_awesome.admin.landing_menu_items.form.preset") %></label>
+    <select id="landing-menu-anchor-preset" class="mt-1">
+      <option value=""><%= t("decidim.decidim_awesome.admin.landing_menu_items.form.preset_blank") %></option>
+      <% available_anchors.each do |anchor| %>
+        <option value="<%= anchor[:anchor] %>" data-label="<%= anchor[:label] %>"><%= anchor[:label] %></option>
+      <% end %>
+    </select>
   </div>
+<% end %>
+
+<div class="row column">
+  <%= form.translated :text_field, :name %>
+</div>
+<div class="row column">
+  <%= form.text_field :url,
+                      help_text: t("decidim.decidim_awesome.admin.landing_menu_items.form.url_help_html") %>
 </div>

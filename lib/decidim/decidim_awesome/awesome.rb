@@ -265,7 +265,7 @@ module Decidim
 
     # Configurable anchor-based menu navigator for landing pages.
     # Supports sticky positioning and configurable alignment.
-    config_accessor :landing_menu do
+    config_accessor :landing_menu_block do
       true
     end
 
