@@ -11,33 +11,35 @@ module Decidim
       let(:user) { create(:user, organization:) }
       let(:categories_data) do
         {
-          "categories" => [
-            {
-              "slug" => "essential",
-              "title" => { "en" => "Essential" },
-              "description" => { "en" => "Essential cookies" },
-              "mandatory" => true,
-              "visibility" => "default",
-              "items" => [
-                {
-                  "type" => "cookie",
-                  "name" => "session_cookie",
-                  "service" => { "en" => "Session" },
-                  "description" => { "en" => "Session management" },
-                  "expiration" => { "en" => "1 year" }
-                }
-              ]
-            },
-            {
-              "slug" => "analytics",
-              "title" => { "en" => "Analytics" },
-              "description" => { "en" => "Analytics cookies" },
-              "mandatory" => false,
-              "visibility" => "default",
-              "items" => []
+          "essential" => {
+            "slug" => "essential",
+            "title" => { "en" => "Essential" },
+            "description" => { "en" => "Essential cookies" },
+            "mandatory" => true,
+            "visibility" => "visible",
+            "items" => {
+              "session_cookie" => {
+                "type" => "cookie",
+                "name" => "session_cookie",
+                "service" => { "en" => "Session" },
+                "description" => { "en" => "Session management" },
+                "expiration" => { "en" => "1 year" }
+              }
             }
-          ]
+          },
+          "analytics" => {
+            "slug" => "analytics",
+            "title" => { "en" => "Analytics" },
+            "description" => { "en" => "Analytics cookies" },
+            "mandatory" => false,
+            "visibility" => "visible",
+            "items" => {}
+          }
         }
+      end
+
+      before do
+        allow(subject).to receive(:current_organization).and_return(organization)
       end
 
       describe "#categories" do

@@ -13,10 +13,11 @@ module Decidim::DecidimAwesome
         {
           "slug" => category_slug,
           "title" => { "en" => "Awesome Category" },
+          "edited" => true,
           "description" => { "en" => "Awesome description" },
           "mandatory" => false,
-          "visibility" => "default",
-          "items" => []
+          "visibility" => "visible",
+          "items" => {}
         }
       end
 
@@ -24,7 +25,7 @@ module Decidim::DecidimAwesome
 
       let(:cookie_management_config) do
         AwesomeConfig.find_or_create_by!(organization: organization, var: "cookie_management") do |config|
-          config.value = { "categories" => [] }
+          config.value = { category_slug => category_attributes }
         end
       end
 
@@ -52,10 +53,11 @@ module Decidim::DecidimAwesome
         let(:params) do
           {
             cookie_category: {
+              slug: "new-awesome-category",
               title: { en: "New Awesome Category" },
               description: { en: "New Awesome description" },
               mandatory: false,
-              visibility: "default"
+              visibility: "visible"
             }
           }
         end
@@ -73,10 +75,11 @@ module Decidim::DecidimAwesome
           let(:params) do
             {
               cookie_category: {
+                slug: "new-awesome-category",
                 title: { en: "" },
                 description: { en: "Description without title" },
                 mandatory: false,
-                visibility: "default"
+                visibility: "visible"
               }
             }
           end
@@ -94,21 +97,13 @@ module Decidim::DecidimAwesome
         let(:params) { { slug: category_slug } }
 
         before do
-          cookie_management_config.value = { "categories" => [category_attributes] }
+          cookie_management_config.value = { category_slug => category_attributes }
           cookie_management_config.save!
         end
 
         it "returns http success" do
           get :edit, params: params
           expect(response).to have_http_status(:success)
-        end
-
-        context "when category does not exist" do
-          let(:params) { { slug: "nonexistent" } }
-
-          it "raises RecordNotFound" do
-            expect { get :edit, params: params }.to raise_error(ActiveRecord::RecordNotFound)
-          end
         end
       end
 
@@ -121,13 +116,13 @@ module Decidim::DecidimAwesome
               title: { en: "Updated Awesome Category" },
               description: { en: "Updated awesome description" },
               mandatory: true,
-              visibility: "default"
+              visibility: "visible"
             }
           }
         end
 
         before do
-          cookie_management_config.value = { "categories" => [category_attributes] }
+          cookie_management_config.value = { category_slug => category_attributes }
           cookie_management_config.save!
         end
 
@@ -143,13 +138,13 @@ module Decidim::DecidimAwesome
         context "when command fails" do
           let(:params) do
             {
-              slug: "nonexistent",
+              slug: category_slug,
               cookie_category: {
-                slug: "nonexistent",
-                title: { en: "Test" },
+                slug: category_slug,
+                title: { en: "" },
                 description: { en: "Test" },
                 mandatory: false,
-                visibility: "default"
+                visibility: "visible"
               }
             }
           end
@@ -167,7 +162,7 @@ module Decidim::DecidimAwesome
         let(:params) { { slug: category_slug } }
 
         before do
-          cookie_management_config.value = { "categories" => [category_attributes] }
+          cookie_management_config.value = { category_slug => category_attributes }
           cookie_management_config.save!
         end
 

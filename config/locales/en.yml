@@ -545,8 +545,7 @@ en:
               visible: Visible
           index:
             cannot_remove_default: Default categories cannot be removed
-            confirm_reset: Are you sure to reset this category to its default values?
-              This will remove all customizations you made.
+            confirm_reset: Are you sure to remove this customization?
             description_html: |
               Cookie categories and items only control the consent UI and documentation.<br>
               To make preferences effective, third-party scripts and services must be configured to load only after consent is granted.<br>
@@ -555,7 +554,7 @@ en:
             edit: Edit category
             items: Category items
             new: New category
-            reset: Reset to default
+            reset: Remove customization
             title: Cookie Management
           new:
             cancel: Cancel
@@ -842,11 +841,10 @@ en:
           index:
             back_to_categories: Back to categories
             cannot_remove_default: Default items cannot be removed
-            confirm_reset: Are you sure to reset this item to its default values?
-              This will remove all customizations you made.
+            confirm_reset: Are you sure to remove this customization?
             edit: Edit item
             new: New item
-            reset: Reset to default
+            reset: Remove customization
             title: "%{category}: Cookie items"
           new:
             cancel: Cancel

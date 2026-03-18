@@ -40,6 +40,7 @@ module Decidim
         def to_params
           {
             "title" => title,
+            "slug" => slug,
             "edited" => true,
             "description" => description,
             "visibility" => visibility || "visible",

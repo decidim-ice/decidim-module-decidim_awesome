@@ -5,18 +5,19 @@ require "spec_helper"
 module Decidim::DecidimAwesome
   module Admin
     describe UpdateCookieItem do
-      subject { described_class.new(form, category_slug, item_name) }
+      subject { described_class.new(form, category_slug) }
 
       let(:organization) { create(:organization) }
       let(:user) { create(:user, :admin, :confirmed, organization: organization) }
       let(:category_slug) { "awesome-analytics" }
-      let(:item_name) { "decidim_analytics" }
       let(:form_params) do
         {
           name: "decidim_analytics_updated",
+          editted: true,
           type: "cookie",
           service: { en: "Updated Decidim" },
-          description: { en: "Updated tracking" }
+          description: { en: "Updated tracking" },
+          expiration: { en: "2 years" }
         }
       end
       let(:form) do
@@ -32,9 +33,11 @@ module Decidim::DecidimAwesome
               {
                 "slug" => "awesome-analytics",
                 "title" => { "en" => "Analytics" },
-                "visibility" => "default",
+                "visibility" => "visible",
+                "mandatory" => false,
+                "editable" => true,
                 "items" => [
-                  { "name" => "decidim_analytics", "type" => "cookie", "service" => { "en" => "Decidim" } }
+                  { "name" => "decidim_analytics", "type" => "cookie", "service" => { "en" => "Decidim" }, "expiration" => { "en" => "1 year" }, "description" => { "en" => "Tracking for analytics" } }
                 ]
               }
             ]
@@ -51,9 +54,11 @@ module Decidim::DecidimAwesome
 
         it "updates the item attributes" do
           subject.call
-          item = cookie_management_config.reload.value["categories"].first["items"].first
+          item = cookie_management_config.reload.value[category_slug]["items"][form.name]
           expect(item["name"]).to eq("decidim_analytics_updated")
           expect(item["service"]["en"]).to eq("Updated Decidim")
+          expect(item["description"]["en"]).to eq("Updated tracking")
+          expect(item["expiration"]["en"]).to eq("2 years")
         end
       end
 

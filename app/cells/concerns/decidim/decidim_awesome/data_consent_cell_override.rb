@@ -35,13 +35,7 @@ module Decidim
       private
 
       def awesome_categories
-        value = Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: model, var: :cookie_management)&.value
-        return {} unless value.is_a?(Hash)
-
-        categories = value["categories"]
-        return value unless categories.is_a?(Array)
-
-        categories.each_with_object({}) { |category, h| h[category["slug"]] = category if category["slug"].present? }
+        Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: model, var: :cookie_management)&.value
       end
     end
   end

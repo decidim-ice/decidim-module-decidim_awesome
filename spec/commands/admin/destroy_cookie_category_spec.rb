@@ -12,22 +12,24 @@ module Decidim::DecidimAwesome
       let(:cookie_management_config) do
         AwesomeConfig.find_or_create_by!(organization: organization, var: "cookie_management") do |config|
           config.value = {
-            "categories" => [
-              {
-                "slug" => "awesome-analytics",
-                "title" => { "en" => "Awesome Analytics" },
-                "description" => { "en" => "Awesome analytics cookies" },
-                "mandatory" => false,
-                "items" => [{ "name" => "Google Analytics", "type" => "cookie" }]
-              },
-              {
-                "slug" => "marketing",
-                "title" => { "en" => "Marketing" },
-                "description" => { "en" => "Marketing cookies" },
-                "mandatory" => false,
-                "items" => []
-              }
-            ]
+            "awesome-analytics" => {
+              "slug" => "awesome-analytics",
+              "title" => { "en" => "Awesome Analytics" },
+              "edited" => true,
+              "description" => { "en" => "Awesome analytics cookies" },
+              "mandatory" => false,
+              "visibility" => "visible",
+              "items" => {}
+            },
+            "marketing" => {
+              "slug" => "marketing",
+              "title" => { "en" => "Marketing" },
+              "edited" => true,
+              "description" => { "en" => "Marketing cookies" },
+              "mandatory" => false,
+              "visibility" => "visible",
+              "items" => {}
+            }
           }
         end
       end
@@ -42,14 +44,14 @@ module Decidim::DecidimAwesome
         it "removes the category" do
           expect do
             subject.call
-          end.to change { cookie_management_config.reload.value["categories"].count }.by(-1)
+          end.to change { cookie_management_config.reload.value.keys.count }.by(-1)
         end
 
         it "removes the category and its items" do
           subject.call
-          categories = cookie_management_config.reload.value["categories"]
-          expect(categories.any? { |c| c["slug"] == "awesome-analytics" }).to be(false)
-          expect(categories.any? { |c| c["slug"] == "marketing" }).to be(true)
+          categories = cookie_management_config.reload.value
+          expect(categories).not_to have_key("awesome-analytics")
+          expect(categories).to have_key("marketing")
         end
       end
     end
