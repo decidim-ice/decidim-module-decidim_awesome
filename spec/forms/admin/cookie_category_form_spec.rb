@@ -12,6 +12,7 @@ module Decidim::DecidimAwesome
         {
           slug:,
           title:,
+          edited: true,
           description:,
           mandatory:,
           visibility:
@@ -22,7 +23,7 @@ module Decidim::DecidimAwesome
       let(:title) { { "en" => "Awesome Category" } }
       let(:description) { { "en" => "Awesome description" } }
       let(:mandatory) { false }
-      let(:visibility) { "default" }
+      let(:visibility) { "visible" }
 
       context "when everything is OK" do
         it { is_expected.to be_valid }

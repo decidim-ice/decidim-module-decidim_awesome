@@ -13,16 +13,18 @@ module Decidim::DecidimAwesome
       let(:cookie_management_config) do
         AwesomeConfig.find_or_create_by!(organization: organization, var: "cookie_management") do |config|
           config.value = {
-            "categories" => [
-              {
-                "slug" => "awesome-analytics",
-                "title" => { "en" => "Awesome Analytics" },
-                "items" => [
-                  { "name" => "Decidim Awesome Analytics", "type" => "cookie" },
-                  { "name" => "Awesome Facebook Analytics", "type" => "cookie" }
-                ]
+            category_slug => {
+              "slug" => category_slug,
+              "title" => { "en" => "Awesome Analytics" },
+              "edited" => true,
+              "description" => { "en" => "Awesome analytics cookies" },
+              "mandatory" => false,
+              "visibility" => "visible",
+              "items" => {
+                "Decidim Awesome Analytics" => { "name" => "Decidim Awesome Analytics", "type" => "cookie" },
+                "Awesome Facebook Analytics" => { "name" => "Awesome Facebook Analytics", "type" => "cookie" }
               }
-            ]
+            }
           }
         end
       end
@@ -37,16 +39,14 @@ module Decidim::DecidimAwesome
         it "removes the item from category" do
           expect do
             subject.call
-          end.to change {
-            cookie_management_config.reload.value["categories"].first["items"].count
-          }.by(-1)
+          end.to change { cookie_management_config.reload.value[category_slug]["items"].keys.count }.by(-1)
         end
 
         it "removes only the specified item" do
           subject.call
-          items = cookie_management_config.reload.value["categories"].first["items"]
-          expect(items.any? { |i| i["name"] == "Decidim Awesome Analytics" }).to be(false)
-          expect(items.any? { |i| i["name"] == "Awesome Facebook Analytics" }).to be(true)
+          items = cookie_management_config.reload.value[category_slug]["items"]
+          expect(items).not_to have_key("Decidim Awesome Analytics")
+          expect(items).to have_key("Awesome Facebook Analytics")
         end
       end
     end
