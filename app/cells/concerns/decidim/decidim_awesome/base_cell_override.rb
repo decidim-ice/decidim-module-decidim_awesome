@@ -4,7 +4,7 @@ module Decidim
   module DecidimAwesome
     module BaseCellOverride
       def block_id
-        super.presence || "awesome-content-block-#{model.manifest_name}-#{model.id}"
+        super.presence || "block-#{model.manifest_name}-#{model.id}"
       end
     end
   end

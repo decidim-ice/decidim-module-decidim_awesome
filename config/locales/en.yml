@@ -567,6 +567,7 @@ en:
             url_help_html: "<b>#section-id</b> — scrolls to a section on this page<br><b>/path</b>
               — internal page (e.g. /processes)<br><b>https://example.com</b> — external
               link (opens in a new tab automatically)"
+            select_a_preset: — Select a common menu item —
           new:
             save: Save
             title: New menu item

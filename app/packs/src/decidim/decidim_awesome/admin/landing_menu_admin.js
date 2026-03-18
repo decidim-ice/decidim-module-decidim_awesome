@@ -16,12 +16,11 @@ const initEditor = (editor) => {
       return;
     }
 
-    const preset = container.querySelector("#landing-menu-anchor-preset");
+    const preset = container.querySelector("#landing-menu-anchor-presets");
     if (preset) {
       preset.addEventListener("change", () => {
         const option = preset.options[preset.selectedIndex];
         const url = preset.value;
-        const label = option.dataset.label || "";
 
         if (!url) {
           return;
@@ -33,9 +32,8 @@ const initEditor = (editor) => {
         }
 
         form.querySelectorAll("input[name*='[name_']").forEach((input) => {
-          if (!input.value) {
-            input.value = label;
-          }
+          const locale = input.id.substr(input.id.lastIndexOf("_") + 1);
+          input.value = option.attributes[`data-label-${locale}`]?.value;
         });
       });
     }

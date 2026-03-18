@@ -4,11 +4,12 @@ module Decidim
   module DecidimAwesome
     module Admin
       class LandingMenuItemsController < DecidimAwesome::Admin::ApplicationController
+        include LandingMenuItemPresetBuilder
         layout false
 
         before_action :validate_content_block_id
 
-        helper_method :available_anchors, :global_menu_items
+        helper_method :content_block
 
         def new
           @form = form(LandingMenuItemForm).from_params(default_params)
@@ -127,20 +128,6 @@ module Decidim
             params_hash["name_#{locale}"] = ""
           end
           params_hash
-        end
-
-        def available_anchors
-          @available_anchors ||= ContentBlocks::LandingMenuFormCell.available_anchors_for(content_block)
-        end
-
-        def global_menu_items
-          @global_menu_items ||= build_global_menu.items.sort_by(&:position).map { |item| { label: item.label, url: item.url } }
-        end
-
-        def build_global_menu
-          menu = Decidim::Menu.new(:menu)
-          menu.build_for(self)
-          menu
         end
       end
     end
