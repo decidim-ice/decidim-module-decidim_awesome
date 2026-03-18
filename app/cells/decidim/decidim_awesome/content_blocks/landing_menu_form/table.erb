@@ -4,7 +4,7 @@
     <table class="table-list">
       <thead>
         <tr>
-          <th class="w-8"></th>
+          <th class="w-8"><span class="sr-only"><%= t("drag", scope: i18n_scope) %></span></th>
           <th class="!text-left"><%= t("table.name", scope: i18n_scope) %></th>
           <th><%= t("table.url", scope: i18n_scope) %></th>
           <th><%= t("table.actions", scope: i18n_scope) %></th>
@@ -23,7 +23,8 @@
             <td><%= item["url"] %></td>
             <td class="table-list__actions">
               <%= link_to decidim_admin_decidim_awesome.toggle_visible_landing_menu_item_path(id: idx, content_block_id: content_block.id),
-                          method: :patch do %>
+                          method: :patch,
+                          aria: { label: item.fetch("visible", true) ? t("table.visible", scope: i18n_scope) : t("table.hidden", scope: i18n_scope) } do %>
                 <% if item.fetch("visible", true) %>
                   <%= icon "eye-line", role: "img", aria_label: t("table.visible", scope: i18n_scope) %>
                 <% else %>
@@ -32,12 +33,14 @@
               <% end %>
               <%= link_to "#",
                           class: "js-drawer-editor",
+                          aria: { label: t("edit_item", scope: i18n_scope) },
                           data: { drawer_url: decidim_admin_decidim_awesome.landing_menu_item_path(id: idx, content_block_id: content_block.id) } do %>
                 <%= icon "pencil-line", role: "img", aria_label: t("edit_item", scope: i18n_scope) %>
               <% end %>
               <%= link_to decidim_admin_decidim_awesome.landing_menu_item_path(id: idx, content_block_id: content_block.id),
                           method: :delete,
                           class: "action-icon--remove",
+                          aria: { label: t("delete_confirm", scope: i18n_scope) },
                           data: { confirm: t("delete_confirm", scope: i18n_scope) } do %>
                 <%= icon "delete-bin-line", role: "img", aria_label: t("delete_confirm", scope: i18n_scope) %>
               <% end %>
