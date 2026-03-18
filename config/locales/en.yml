@@ -562,7 +562,8 @@ en:
         landing_menu_items:
           form:
             preset: Autofill presets
-            preset_blank: "— Select a preset —"
+            preset_content_blocks: Existing content blocks
+            preset_global_menu: Decidim usual suspects
             url_help_html: "<b>#section-id</b> — scrolls to a section on this page<br><b>/path</b>
               — internal page (e.g. /processes)<br><b>https://example.com</b> — external
               link (opens in a new tab automatically)"

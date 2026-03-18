@@ -20,16 +20,16 @@ const initEditor = (editor) => {
     if (preset) {
       preset.addEventListener("change", () => {
         const option = preset.options[preset.selectedIndex];
-        const anchor = preset.value;
+        const url = preset.value;
         const label = option.dataset.label || "";
 
-        if (!anchor) {
+        if (!url) {
           return;
         }
 
         const urlInput = form.querySelector("input[name$='[url]']");
         if (urlInput) {
-          urlInput.value = `#${anchor}`;
+          urlInput.value = url;
         }
 
         form.querySelectorAll("input[name*='[name_']").forEach((input) => {

@@ -8,18 +8,16 @@ module Decidim
 
         before_action :validate_content_block_id
 
+        helper_method :available_anchors, :global_menu_items
+
         def new
           @form = form(LandingMenuItemForm).from_params(default_params)
-          @available_anchors = ContentBlocks::LandingMenuFormCell.available_anchors_for(content_block)
         end
 
         def create
           @form = form(LandingMenuItemForm).from_params(params)
 
-          unless @form.valid?
-            @available_anchors = ContentBlocks::LandingMenuFormCell.available_anchors_for(content_block)
-            return render :new, status: :unprocessable_entity
-          end
+          return render :new, status: :unprocessable_entity unless @form.valid?
 
           items = current_items
           items << form_to_hash(@form)
@@ -129,6 +127,20 @@ module Decidim
             params_hash["name_#{locale}"] = ""
           end
           params_hash
+        end
+
+        def available_anchors
+          @available_anchors ||= ContentBlocks::LandingMenuFormCell.available_anchors_for(content_block)
+        end
+
+        def global_menu_items
+          @global_menu_items ||= build_global_menu.items.sort_by(&:position).map { |item| { label: item.label, url: item.url } }
+        end
+
+        def build_global_menu
+          menu = Decidim::Menu.new(:menu)
+          menu.build_for(self)
+          menu
         end
       end
     end

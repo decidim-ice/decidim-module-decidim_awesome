@@ -48,6 +48,44 @@ describe "Admin manages Landing Menu content block" do
       expect(page).to have_select("content_block_settings_alignment", selected: "Left")
     end
 
+    describe "adding a new menu item" do
+      it "shows global menu links in presets" do
+        click_link_or_button "Add new item"
+
+        within "#item-form" do
+          expect(page).to have_content("Autofill presets")
+          expect(page).to have_css("optgroup[label='Decidim usual suspects']")
+          expect(page).to have_css("option", text: "Home")
+        end
+      end
+
+      context "with participatory processes" do
+        let!(:participatory_process) { create(:participatory_process, organization:) }
+
+        it "shows processes in global menu presets" do
+          click_link_or_button "Add new item"
+
+          within "#item-form" do
+            within "optgroup[label='Decidim usual suspects']" do
+              expect(page).to have_css("option", text: "Processes")
+            end
+          end
+        end
+      end
+
+      context "with sibling content blocks" do
+        let!(:sibling_block) { create(:content_block, organization:, manifest_name: :html, scope_name: :homepage) }
+
+        it "shows content block anchors in presets" do
+          click_link_or_button "Add new item"
+
+          within "#item-form" do
+            expect(page).to have_css("optgroup[label='Existing content blocks']")
+          end
+        end
+      end
+    end
+
     context "with existing menu items" do
       let(:menu_items) do
         [{ "name" => { "en" => "About" }, "url" => "#about", "visible" => true },

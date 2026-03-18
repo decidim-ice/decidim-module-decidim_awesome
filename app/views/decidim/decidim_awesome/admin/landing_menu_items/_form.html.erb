@@ -1,10 +1,20 @@
-<% if local_assigns[:available_anchors]&.any? %>
+<% if global_menu_items.any? || available_anchors.any? %>
   <div class="mb-4 p-3 bg-background rounded text-sm">
     <label class="text-muted"><%= t("decidim.decidim_awesome.admin.landing_menu_items.form.preset") %></label>
     <select id="landing-menu-anchor-preset" class="mt-1">
-      <option value=""><%= t("decidim.decidim_awesome.admin.landing_menu_items.form.preset_blank") %></option>
-      <% available_anchors.each do |anchor| %>
-        <option value="<%= anchor[:anchor] %>" data-label="<%= anchor[:label] %>"><%= anchor[:label] %></option>
+      <% if global_menu_items.any? %>
+        <optgroup label="<%= t("decidim.decidim_awesome.admin.landing_menu_items.form.preset_global_menu") %>">
+          <% global_menu_items.each do |item| %>
+            <option value="<%= item[:url] %>" data-label="<%= item[:label] %>"><%= item[:label] %></option>
+          <% end %>
+        </optgroup>
+      <% end %>
+      <% if available_anchors.any? %>
+        <optgroup label="<%= t("decidim.decidim_awesome.admin.landing_menu_items.form.preset_content_blocks") %>">
+          <% available_anchors.each do |anchor| %>
+            <option value="#<%= anchor[:anchor] %>" data-label="<%= anchor[:label] %>"><%= anchor[:label] %></option>
+          <% end %>
+        </optgroup>
       <% end %>
     </select>
   </div>

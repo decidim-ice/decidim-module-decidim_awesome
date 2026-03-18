@@ -10,7 +10,7 @@
         <%= t(".title") %>
         <%= f.submit t(".save"), class: "button button__sm button__secondary" %>
       </h1>
-      <%= render partial: "form", locals: { form: f, available_anchors: @available_anchors } %>
+      <%= render partial: "form", locals: { form: f } %>
     <% end %>
   </div>
 </div>
