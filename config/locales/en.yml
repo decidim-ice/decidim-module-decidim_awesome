@@ -56,8 +56,8 @@ en:
         participatory_space_manifest: Apply to participatory spaces of type
         participatory_space_slug: Only in
       cookie_category:
-        slug: ID
         mandatory: Mandatory
+        slug: ID
         title: Category title
         total_cookies: Total cookies
         visibility: Visibility
@@ -541,12 +541,10 @@ en:
           form:
             slug_help: Unique identifier used in scripts to reference this category.
             visibility:
-              visible: Visible
               hidden: Hidden
+              visible: Visible
           index:
             cannot_remove_default: Default categories cannot be removed
-            confirm_destroy: Are you sure to remove this cookie category? This will
-              also remove all the items in this category.
             confirm_reset: Are you sure to reset this category to its default values?
               This will remove all customizations you made.
             description_html: |
@@ -557,7 +555,6 @@ en:
             edit: Edit category
             items: Category items
             new: New category
-            remove: Remove category
             reset: Reset to default
             title: Cookie Management
           new:
@@ -845,12 +842,10 @@ en:
           index:
             back_to_categories: Back to categories
             cannot_remove_default: Default items cannot be removed
-            confirm_destroy: Are you sure to remove this cookie item?
             confirm_reset: Are you sure to reset this item to its default values?
               This will remove all customizations you made.
             edit: Edit item
             new: New item
-            remove: Remove item
             reset: Reset to default
             title: "%{category}: Cookie items"
           new:

@@ -7,7 +7,7 @@
       </div>
       <div class="row column">
         <%= form.hidden_field :type %>
-        <%= form.select :type, @form.item_type_options, {}, disabled: !@form.editable?%>
+        <%= form.select :type, @form.item_type_options, {}, disabled: !@form.editable? %>
       </div>
       <div class="row column">
         <%= form.translated :text_field, :service, help_text: t(".service_item_help") %>

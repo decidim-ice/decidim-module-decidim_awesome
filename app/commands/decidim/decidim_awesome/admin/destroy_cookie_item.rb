@@ -30,7 +30,7 @@ module Decidim
 
           category = config.value[category_slug]
           return broadcast(:invalid) unless category
-          return broadcast(:invalid) unless category["items"]&.key?(item_name)
+          return broadcast(:invalid) unless category["items"]&.has_key?(item_name)
 
           category["items"].delete(item_name)
           config.save!

@@ -32,7 +32,7 @@
                   <%= icon "close-line", class: "text-alert" %>
                 <% end %>
               </td>
-              <td><%= t("cookie_categories.form.visibility.#{category['visibility']}", scope: "decidim.decidim_awesome.admin") %></td>
+              <td><%= t("cookie_categories.form.visibility.#{category["visibility"]}", scope: "decidim.decidim_awesome.admin") %></td>
               <td><%= category["items"].count %></td>
               <td class="table-list__actions">
                 <%= icon_link_to "list-check", decidim_admin_decidim_awesome.cookie_category_cookie_items_path(slug), t(".items"), class: "action-icon--preview" %>

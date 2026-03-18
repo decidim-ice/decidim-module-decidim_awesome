@@ -32,7 +32,6 @@ module Decidim
         end
 
         def validate_uniqueness
-          byebug
           return if category_items[name].nil?
 
           errors.add(:name, :taken)
