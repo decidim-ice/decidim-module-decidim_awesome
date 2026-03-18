@@ -12,11 +12,16 @@ module Decidim
       translatable_attribute :body, Decidim::Attributes::RichText
       attribute :restrict_videos, Boolean, default: false
       attribute :restrict_links, Boolean, default: false
+      attribute :background_color, String
+      attribute :background_image_placement, String, default: "cover_center"
 
-      def self.from_settings(array)
-        return [new] if array.blank?
+      PLACEMENT_OPTIONS = %w(cover_center cover_top cover_bottom contain_center repeat).freeze
 
-        Array(array).first(Decidim::DecidimAwesome.max_rich_text_columns).map { |hash| new(hash) }
+      def self.from_settings(data)
+        return [new] if data.blank?
+
+        items = data.is_a?(Hash) ? data.values : Array(data)
+        items.first(Decidim::DecidimAwesome.max_rich_text_columns).map { |attrs| new(attrs) }
       end
     end
   end

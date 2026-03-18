@@ -7,11 +7,15 @@ module Decidim
         def show
           return if columns.empty?
 
-          render
+          super
         end
 
         def block_id
           sanitize_id(model.settings.block_id).presence || "awesome-rich-text-#{model.id}"
+        end
+
+        def extra_classes
+          "awesome-rich-text"
         end
 
         def i18n_scope
@@ -28,31 +32,35 @@ module Decidim
           end
         end
 
-        def background_color
-          color = model.settings.background_color.presence
+        def column_background_color(column)
+          color = column.background_color.presence
           return unless color&.match?(/\A#(?:[0-9a-fA-F]{3}){1,2}\z/)
 
           color
         end
 
-        def background_image
-          @background_image ||= model.images_container.attached_uploader(:background_image).url
+        def column_background_image(index)
+          @column_background_images ||= {}
+          @column_background_images[index] ||= model.images_container.attached_uploader(:"background_image_#{index}").url
         end
 
-        def section_styles
+        def column_styles(column, index)
+          color = column_background_color(column)
+          image_url = column_background_image(index)
+
           styles = []
-          styles << "--awesome-rich-text-bg: #{background_color}" if background_color
-          if background_image.present?
-            escaped_url = background_image.gsub("'", "%27").gsub(")", "%29")
+          styles << "--awesome-rich-text-bg: #{color}" if color
+          if image_url.present?
+            escaped_url = image_url.gsub("'", "%27").gsub(")", "%29")
             styles << "--awesome-rich-text-bg-image: url('#{escaped_url}')"
           end
           styles.join("; ")
         end
 
-        def background_placement_class
-          return if background_image.blank?
+        def column_placement_class(column, index)
+          return if column_background_image(index).blank?
 
-          PLACEMENT_CLASSES[model.settings.background_image_placement] || PLACEMENT_CLASSES["cover_center"]
+          PLACEMENT_CLASSES[column.background_image_placement] || PLACEMENT_CLASSES["cover_center"]
         end
 
         def grid_class
@@ -70,14 +78,11 @@ module Decidim
           html
         end
 
-        private
-
         GRID_CLASSES = {
           2 => "md:grid-cols-2",
           3 => "md:grid-cols-3",
           4 => "md:grid-cols-4",
-          5 => "md:grid-cols-5",
-          6 => "md:grid-cols-6"
+          5 => "md:grid-cols-5"
         }.freeze
 
         PLACEMENT_CLASSES = {
@@ -87,6 +92,8 @@ module Decidim
           "contain_center" => "awesome-rich-text--bg-contain-center",
           "repeat" => "awesome-rich-text--bg-repeat"
         }.freeze
+
+        private
 
         def sanitize_id(value)
           return if value.blank?

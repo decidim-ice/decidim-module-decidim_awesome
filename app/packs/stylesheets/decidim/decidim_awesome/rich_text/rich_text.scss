@@ -1,9 +1,10 @@
-.awesome-rich-text {
+// Per-column background support
+.awesome-rich-text__column {
   background-color: var(--awesome-rich-text-bg, transparent);
   background-image: var(--awesome-rich-text-bg-image, none);
 }
 
-// Background image placement modifiers
+// Background image placement modifiers (applied per column)
 .awesome-rich-text--bg-cover-center {
   background-size: cover;
   background-position: center;

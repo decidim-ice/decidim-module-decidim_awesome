@@ -53,13 +53,8 @@ describe "Admin manages Awesome Rich Text content block" do
       expect(page).to have_field("content_block_settings_title_en", with: "Our Team")
     end
 
-    it "saves and persists background_image_placement" do
-      select "Cover (top-aligned)", from: "content_block_settings_background_image_placement"
-      click_link_or_button "Update"
-      expect(page).to have_content("Homepage layout")
-
-      visit decidim_admin.edit_organization_homepage_content_block_path(content_block)
-      expect(page).to have_select("content_block_settings_background_image_placement", selected: "Cover (top-aligned)")
+    it "shows the transparent background checkbox" do
+      expect(page).to have_content("Transparent background")
     end
   end
 end

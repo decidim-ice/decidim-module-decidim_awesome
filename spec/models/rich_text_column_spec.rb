@@ -31,6 +31,24 @@ module Decidim::DecidimAwesome
         column = described_class.new(restrict_links: true)
         expect(column.restrict_links).to be(true)
       end
+
+      it "defaults background_color to nil" do
+        expect(subject.background_color).to be_nil
+      end
+
+      it "accepts a background_color" do
+        column = described_class.new(background_color: "#ff0000")
+        expect(column.background_color).to eq("#ff0000")
+      end
+
+      it "defaults background_image_placement to cover_center" do
+        expect(subject.background_image_placement).to eq("cover_center")
+      end
+
+      it "accepts a background_image_placement" do
+        column = described_class.new(background_image_placement: "repeat")
+        expect(column.background_image_placement).to eq("repeat")
+      end
     end
 
     describe ".from_settings" do

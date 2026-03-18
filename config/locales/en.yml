@@ -55,6 +55,12 @@ en:
         component_manifest: Only in components of type
         participatory_space_manifest: Apply to participatory spaces of type
         participatory_space_slug: Only in
+      content_block_attachment:
+        background_image_0: Background image
+        background_image_1: Background image
+        background_image_2: Background image
+        background_image_3: Background image
+        background_image_4: Background image
       custom_redirect:
         active: Active
         destination: Destination
@@ -775,14 +781,12 @@ en:
         rich_text:
           add_column: Add a new column
           background_color: Background color
-          background_color_help: Select a color for the full-width background. Leave
-            empty for transparent.
           background_image: Background image
-          background_image_help: Optional image displayed behind the section content.
+          background_image_help: Optional image displayed behind the column content.
             Recommended minimum width 1920px.
           background_image_placement: Image placement
           background_image_placement_help: How the background image is displayed within
-            the section.
+            the column. Applies only when a background image is uploaded.
           background_image_placements:
             contain_center: Contain (centered)
             cover_bottom: Cover (bottom-aligned)
@@ -802,6 +806,7 @@ en:
             the user is logged-in
           sign_in_to_watch: Sign in to watch this video
           title: Block title
+          transparent_background: Transparent background
       credits: Decidim Awesome %{version} · Maintained with ♥ by %{company}
       custom_fields:
         errors:

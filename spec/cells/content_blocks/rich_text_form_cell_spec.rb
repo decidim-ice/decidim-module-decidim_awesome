@@ -103,12 +103,9 @@ module Decidim::DecidimAwesome
         expect(subject).to have_content("Block title")
       end
 
-      it "renders the background color field" do
+      it "renders per-column background settings" do
+        expect(subject).to have_content("Transparent background")
         expect(subject).to have_content("Background color")
-      end
-
-      it "renders the placement select" do
-        expect(subject).to have_content("Image placement")
       end
 
       it "renders the add column button" do

@@ -26,8 +26,15 @@ module Decidim
           Decidim::DecidimAwesome.max_rich_text_columns
         end
 
+        def column_fields(col_fields, column, column_id)
+          @col_fields = col_fields
+          @column = column
+          @column_id = column_id
+          render :column_fields
+        end
+
         def placement_options
-          %w(cover_center cover_top cover_bottom contain_center repeat).map do |key|
+          RichTextColumn::PLACEMENT_OPTIONS.map do |key|
             [t("background_image_placements.#{key}", scope: i18n_scope), key]
           end
         end

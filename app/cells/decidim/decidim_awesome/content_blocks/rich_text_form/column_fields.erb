@@ -1,0 +1,25 @@
+<div class="row column">
+  <%= @col_fields.translated :editor, :body, toolbar: :full, lines: 10, aria: { label: :body } %>
+</div>
+<div class="row column">
+  <%= @col_fields.check_box :restrict_videos, label: t("restrict_videos", scope: i18n_scope) %>
+</div>
+<div class="row column">
+  <%= @col_fields.check_box :restrict_links, label: t("restrict_links", scope: i18n_scope) %>
+</div>
+
+<%# Background color %>
+<div class="row column">
+  <label>
+    <input type="checkbox" class="awesome-rich-text-transparent-bg" data-target="<%= @column_id %>" <%= "checked" if @column.background_color.blank? %> />
+    <span><%= t("transparent_background", scope: i18n_scope) %></span>
+  </label>
+</div>
+<div class="row column awesome-rich-text-color-picker <%= "hidden" if @column.background_color.blank? %>" id="color-picker-<%= @column_id %>">
+  <%= @col_fields.text_field :background_color, type: "color", label: t("background_color", scope: i18n_scope), value: @column.background_color.presence || "#000000", disabled: @column.background_color.blank? %>
+</div>
+
+<%# Image placement %>
+<div class="row column">
+  <%= @col_fields.select :background_image_placement, placement_options, label: t("background_image_placement", scope: i18n_scope), help_text: t("background_image_placement_help", scope: i18n_scope) %>
+</div>

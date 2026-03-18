@@ -132,167 +132,176 @@ module Decidim::DecidimAwesome
       end
     end
 
-    describe "#background_color" do
+    describe "#column_background_color" do
+      let(:column) { RichTextColumn.new(body: { "en" => "text" }, background_color: color) }
+
       context "when nil" do
-        let(:settings) { { "background_color" => nil, "columns" => columns_data } }
+        let(:color) { nil }
 
         it "returns nil" do
-          expect(block_cell.background_color).to be_nil
+          expect(block_cell.column_background_color(column)).to be_nil
         end
       end
 
       context "when blank" do
-        let(:settings) { { "background_color" => "", "columns" => columns_data } }
+        let(:color) { "" }
 
         it "returns nil" do
-          expect(block_cell.background_color).to be_nil
+          expect(block_cell.column_background_color(column)).to be_nil
         end
       end
 
       context "with valid 3-digit hex" do
-        let(:settings) { { "background_color" => "#f00", "columns" => columns_data } }
+        let(:color) { "#f00" }
 
         it "returns the color" do
-          expect(block_cell.background_color).to eq("#f00")
+          expect(block_cell.column_background_color(column)).to eq("#f00")
         end
       end
 
       context "with valid 6-digit hex" do
-        let(:settings) { { "background_color" => "#ff0000", "columns" => columns_data } }
+        let(:color) { "#ff0000" }
 
         it "returns the color" do
-          expect(block_cell.background_color).to eq("#ff0000")
+          expect(block_cell.column_background_color(column)).to eq("#ff0000")
         end
       end
 
       context "with uppercase hex" do
-        let(:settings) { { "background_color" => "#FF0000", "columns" => columns_data } }
+        let(:color) { "#FF0000" }
 
         it "returns the color" do
-          expect(block_cell.background_color).to eq("#FF0000")
+          expect(block_cell.column_background_color(column)).to eq("#FF0000")
         end
       end
 
       context "without hash prefix" do
-        let(:settings) { { "background_color" => "ff0000", "columns" => columns_data } }
+        let(:color) { "ff0000" }
 
         it "returns nil" do
-          expect(block_cell.background_color).to be_nil
+          expect(block_cell.column_background_color(column)).to be_nil
         end
       end
 
       context "with wrong length" do
-        let(:settings) { { "background_color" => "#ff00", "columns" => columns_data } }
+        let(:color) { "#ff00" }
 
         it "returns nil" do
-          expect(block_cell.background_color).to be_nil
+          expect(block_cell.column_background_color(column)).to be_nil
         end
       end
 
       context "with non-hex characters" do
-        let(:settings) { { "background_color" => "#gggggg", "columns" => columns_data } }
+        let(:color) { "#gggggg" }
 
         it "returns nil" do
-          expect(block_cell.background_color).to be_nil
+          expect(block_cell.column_background_color(column)).to be_nil
         end
       end
     end
 
-    describe "#background_image" do
+    describe "#column_background_image" do
       context "without an image" do
         it "returns blank" do
-          expect(block_cell.background_image).to be_blank
+          expect(block_cell.column_background_image(0)).to be_blank
         end
       end
 
       context "with an image" do
         before do
-          allow(block_cell).to receive(:background_image).and_return("http://example.com/bg.jpg")
+          allow(block_cell).to receive(:column_background_image).with(0).and_return("http://example.com/bg.jpg")
         end
 
         it "returns the URL" do
-          expect(block_cell.background_image).to be_present
+          expect(block_cell.column_background_image(0)).to be_present
         end
       end
     end
 
-    describe "#section_styles" do
+    describe "#column_styles" do
+      let(:column) { RichTextColumn.new(body: { "en" => "text" }, background_color: color) }
+      let(:color) { nil }
+
       context "with no color and no image" do
         it "returns empty string" do
-          expect(block_cell.section_styles).to eq("")
+          expect(block_cell.column_styles(column, 0)).to eq("")
         end
       end
 
       context "with only color" do
-        let(:settings) { { "background_color" => "#ff0000", "columns" => columns_data } }
+        let(:color) { "#ff0000" }
 
         it "includes the CSS variable for color" do
-          expect(block_cell.section_styles).to include("--awesome-rich-text-bg: #ff0000")
+          expect(block_cell.column_styles(column, 0)).to include("--awesome-rich-text-bg: #ff0000")
         end
       end
 
       context "with only image" do
         before do
-          allow(block_cell).to receive(:background_image).and_return("http://example.com/bg.jpg")
+          allow(block_cell).to receive(:column_background_image).with(0).and_return("http://example.com/bg.jpg")
         end
 
         it "includes the CSS variable for image" do
-          expect(block_cell.section_styles).to include("--awesome-rich-text-bg-image: url('http://example.com/bg.jpg')")
+          expect(block_cell.column_styles(column, 0)).to include("--awesome-rich-text-bg-image: url('http://example.com/bg.jpg')")
         end
       end
 
       context "with both color and image" do
-        let(:settings) { { "background_color" => "#ff0000", "columns" => columns_data } }
+        let(:color) { "#ff0000" }
 
         before do
-          allow(block_cell).to receive(:background_image).and_return("http://example.com/bg.jpg")
+          allow(block_cell).to receive(:column_background_image).with(0).and_return("http://example.com/bg.jpg")
         end
 
         it "includes both CSS variables" do
-          expect(block_cell.section_styles).to include("--awesome-rich-text-bg: #ff0000")
-          expect(block_cell.section_styles).to include("--awesome-rich-text-bg-image:")
+          expect(block_cell.column_styles(column, 0)).to include("--awesome-rich-text-bg: #ff0000")
+          expect(block_cell.column_styles(column, 0)).to include("--awesome-rich-text-bg-image:")
         end
       end
 
       context "when URL contains special characters" do
         before do
-          allow(block_cell).to receive(:background_image).and_return("http://example.com/bg'image).jpg")
+          allow(block_cell).to receive(:column_background_image).with(0).and_return("http://example.com/bg'image).jpg")
         end
 
         it "escapes single quotes and parentheses" do
-          expect(block_cell.section_styles).to include("%27")
-          expect(block_cell.section_styles).to include("%29")
+          result = block_cell.column_styles(column, 0)
+          expect(result).to include("%27")
+          expect(result).to include("%29")
         end
       end
     end
 
-    describe "#background_placement_class" do
+    describe "#column_placement_class" do
+      let(:column) { RichTextColumn.new(body: { "en" => "text" }, background_image_placement: placement) }
+      let(:placement) { "cover_center" }
+
       context "without background image" do
         it "returns nil" do
-          expect(block_cell.background_placement_class).to be_nil
+          expect(block_cell.column_placement_class(column, 0)).to be_nil
         end
       end
 
       context "with background image" do
         before do
-          allow(block_cell).to receive(:background_image).and_return("http://example.com/bg.jpg")
+          allow(block_cell).to receive(:column_background_image).with(0).and_return("http://example.com/bg.jpg")
         end
 
-        %w(cover_center cover_top cover_bottom contain_center repeat).each do |placement|
-          context "when placement is #{placement}" do
-            let(:settings) { { "background_image_placement" => placement, "columns" => columns_data } }
+        %w(cover_center cover_top cover_bottom contain_center repeat).each do |pl|
+          context "when placement is #{pl}" do
+            let(:placement) { pl }
 
             it "returns the correct class" do
-              expect(block_cell.background_placement_class).to eq("awesome-rich-text--bg-#{placement.tr("_", "-")}")
+              expect(block_cell.column_placement_class(column, 0)).to eq("awesome-rich-text--bg-#{pl.tr("_", "-")}")
             end
           end
         end
 
         context "when placement is unknown" do
-          let(:settings) { { "background_image_placement" => "unknown", "columns" => columns_data } }
+          let(:placement) { "unknown" }
 
           it "defaults to cover_center" do
-            expect(block_cell.background_placement_class).to eq("awesome-rich-text--bg-cover-center")
+            expect(block_cell.column_placement_class(column, 0)).to eq("awesome-rich-text--bg-cover-center")
           end
         end
       end
@@ -305,7 +314,7 @@ module Decidim::DecidimAwesome
         end
       end
 
-      (2..6).each do |count|
+      (2..5).each do |count|
         context "with #{count} columns" do
           let(:columns_data) { Array.new(count) { |i| { "body" => { "en" => "<p>Col #{i}</p>" } } } }
 
@@ -440,6 +449,14 @@ module Decidim::DecidimAwesome
           expect(subject).to have_css(".grid")
           expect(subject).to have_content("First")
           expect(subject).to have_content("Second")
+        end
+      end
+
+      context "with per-column background color" do
+        let(:columns_data) { [{ "body" => { "en" => "<p>Colored</p>" }, "background_color" => "#ff0000" }] }
+
+        it "applies background style to the column" do
+          expect(subject).to have_css("[style*='--awesome-rich-text-bg: #ff0000']")
         end
       end
     end

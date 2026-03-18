@@ -323,25 +323,22 @@ module Decidim
       end
 
       initializer "decidim_decidim_awesome.awesome_rich_text_content_block" do
+        max = Decidim::DecidimAwesome.max_rich_text_columns
+
         [:homepage, :participatory_process_group_homepage, :participatory_process_homepage, :assembly_homepage].each do |scope|
           Decidim.content_blocks.register(scope, :awesome_rich_text) do |content_block|
             content_block.cell = "decidim/decidim_awesome/content_blocks/rich_text"
             content_block.settings_form_cell = "decidim/decidim_awesome/content_blocks/rich_text_form"
             content_block.public_name_key = "decidim.decidim_awesome.content_blocks.rich_text.name"
 
-            content_block.images = [
-              {
-                name: :background_image,
-                uploader: "Decidim::HomepageImageUploader"
-              }
-            ]
+            content_block.images = max.times.map do |idx|
+              { name: :"background_image_#{idx}", uploader: "Decidim::HomepageImageUploader" }
+            end
 
             content_block.settings do |settings|
               settings.attribute :block_id, type: :string
               settings.attribute :title, type: :text, translated: true
               settings.attribute :columns, type: :array, default: []
-              settings.attribute :background_color, type: :string
-              settings.attribute :background_image_placement, type: :string, default: "cover_center"
             end
           end
         end
