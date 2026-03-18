@@ -564,10 +564,10 @@ en:
             preset: Autofill presets
             preset_content_blocks: Existing content blocks
             preset_global_menu: Decidim usual suspects
+            select_a_preset: "— Select a common menu item —"
             url_help_html: "<b>#section-id</b> — scrolls to a section on this page<br><b>/path</b>
               — internal page (e.g. /processes)<br><b>https://example.com</b> — external
               link (opens in a new tab automatically)"
-            select_a_preset: — Select a common menu item —
           new:
             save: Save
             title: New menu item
@@ -781,7 +781,7 @@ en:
           drag: Drag to reorder
           edit_item: Edit item
           empty_item: New empty item
-          name: Awesome global menu
+          name: Jump to...
           new_item: Add new item
           presets: Presets
           show_on_mobile: Show on mobile screens

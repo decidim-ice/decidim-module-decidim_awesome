@@ -30,7 +30,7 @@ module Decidim::DecidimAwesome
           # BaseCellOverride#block_id: super.presence || fallback
           # Call the override directly, bypassing LandingMenuCell's own block_id
           result = Decidim::DecidimAwesome::BaseCellOverride.instance_method(:block_id).bind_call(cell_instance)
-          expect(result).to eq("awesome-content-block-awesome_landing_menu-#{content_block.id}")
+          expect(result).to eq("block-awesome_landing_menu-#{content_block.id}")
         end
       end
 

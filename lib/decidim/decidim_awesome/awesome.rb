@@ -16,6 +16,7 @@ module Decidim
     autoload :TranslatedCustomFieldsType, "decidim/decidim_awesome/api/types/translated_custom_fields_type"
     autoload :LocalizedCustomFieldsType, "decidim/decidim_awesome/api/types/localized_custom_fields_type"
     autoload :Authorizer, "decidim/decidim_awesome/authorizer"
+    autoload :MenuItemsParser, "decidim/decidim_awesome/menu_items_parser"
     autoload :ParseContentBlock, "decidim/decidim_awesome/parse_content_block"
 
     # Awesome comes with some components for participatory spaces

@@ -10,14 +10,14 @@
         <%= t(".title") %>
         <%= f.submit t(".save"), class: "button button__sm button__secondary" %>
       </h1>
-      
+
       <div class="mb-4 bg-background p-4 rounded">
         <label class="text-muted"><%= t("decidim.decidim_awesome.admin.landing_menu_items.form.preset") %>
-        <%= select_tag "landing_menu_item_presets", 
-                      grouped_options_for_select(landing_menu_item_presets_options(block_scope: content_block.scope_name)), 
-                      id: "landing-menu-anchor-presets", 
-                      class: "mt-1", 
-                      include_blank: t("decidim.decidim_awesome.admin.landing_menu_items.form.select_a_preset") %>
+        <%= select_tag "landing_menu_item_presets",
+                       grouped_options_for_select(landing_menu_item_presets_options(block_scope: content_block.scope_name)),
+                       id: "landing-menu-anchor-presets",
+                       class: "mt-1",
+                       include_blank: t("decidim.decidim_awesome.admin.landing_menu_items.form.select_a_preset") %>
         </label>
       </div>
 

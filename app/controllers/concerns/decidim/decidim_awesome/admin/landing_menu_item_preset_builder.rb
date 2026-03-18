@@ -10,19 +10,19 @@ module Decidim
           helper_method :landing_menu_item_presets_options
         end
 
+        def landing_menu_item_presets_options(block_scope:)
+          @landing_menu_item_presets_options ||= [
+            [I18n.t("decidim.decidim_awesome.admin.landing_menu_items.form.preset_global_menu"), global_menu_presets],
+            [I18n.t("decidim.decidim_awesome.admin.landing_menu_items.form.preset_content_blocks"), content_block_presets(block_scope)]
+          ]
+        end
+
         private
 
         def with_available_locales
           ([current_organization.default_locale] + current_organization.available_locales).uniq.each do |locale|
             I18n.with_locale(locale) { yield locale }
           end
-        end
-
-        def landing_menu_item_presets_options(block_scope:)
-          @landing_menu_item_presets_options ||= [
-            [I18n.t("decidim.decidim_awesome.admin.landing_menu_items.form.preset_global_menu"), global_menu_presets],
-            [I18n.t("decidim.decidim_awesome.admin.landing_menu_items.form.preset_content_blocks"), content_block_presets(block_scope)]
-          ]
         end
 
         def content_block_presets(block_scope)

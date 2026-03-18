@@ -1,7 +1,6 @@
 <section id="<%= block_id %>"
          class="awesome-landing-menu<%= " awesome-landing-menu--sticky" if sticky? %>"
-         aria-label="<%= t("name", scope: i18n_scope) %>"
-         data-landing-menu>
+         aria-label="<%= t("name", scope: i18n_scope) %>">
   <%# Desktop: horizontal menu %>
   <div class="awesome-landing-menu__container awesome-landing-menu__container--<%= alignment %>">
     <% menu_items.each do |item| %>
@@ -17,7 +16,7 @@
 
   <% if show_on_mobile? %>
     <%# Mobile: dropdown %>
-    <div class="awesome-landing-menu__mobile" data-landing-menu>
+    <div class="awesome-landing-menu__mobile">
       <button id="landing-menu-trigger-<%= model.id %>"
               class="awesome-landing-menu__mobile-trigger"
               data-controller="dropdown"

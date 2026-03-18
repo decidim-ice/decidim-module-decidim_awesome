@@ -35,6 +35,7 @@ describe "Admin manages Landing Menu content block" do
     it "saves sticky setting" do
       check "content_block_settings_sticky"
       click_link_or_button "Update"
+      sleep 0.1
 
       visit decidim_admin.edit_organization_homepage_content_block_path(content_block)
       expect(page).to have_checked_field("content_block_settings_sticky")
@@ -43,6 +44,7 @@ describe "Admin manages Landing Menu content block" do
     it "saves alignment setting" do
       select "Left", from: "content_block_settings_alignment"
       click_link_or_button "Update"
+      sleep 0.1
 
       visit decidim_admin.edit_organization_homepage_content_block_path(content_block)
       expect(page).to have_select("content_block_settings_alignment", selected: "Left")

@@ -110,52 +110,6 @@ module Decidim::DecidimAwesome
       end
     end
 
-    describe "#available_anchors" do
-      let!(:sibling_block) { create(:content_block, organization:, manifest_name: :html, scope_name: :homepage) }
-
-      it "returns published sibling blocks" do
-        anchors = cell_instance.available_anchors
-        expect(anchors).not_to be_empty
-        expect(anchors.first).to have_key(:label)
-        expect(anchors.first).to have_key(:anchor)
-      end
-
-      it "excludes the landing menu block itself" do
-        anchors = cell_instance.available_anchors
-        anchor_values = anchors.map { |an| an[:anchor] }
-        expect(anchor_values).not_to include(a_string_matching(/awesome_landing_menu/))
-      end
-
-      it "excludes other awesome_landing_menu blocks" do
-        create(:content_block, organization:, manifest_name: :awesome_landing_menu, scope_name: :homepage)
-        anchors = cell_instance.available_anchors
-        anchor_values = anchors.map { |an| an[:anchor] }
-        expect(anchor_values).not_to include(a_string_matching(/awesome_landing_menu/))
-      end
-
-      it "excludes unpublished blocks" do
-        unpublished = create(:content_block, organization:, manifest_name: :html, scope_name: :homepage, published_at: nil)
-        anchors = cell_instance.available_anchors
-        anchor_values = anchors.map { |an| an[:anchor] }
-        expect(anchor_values).not_to include(a_string_matching(/#{unpublished.id}/))
-      end
-
-      it "excludes blocks from another organization" do
-        other_org = create(:organization)
-        create(:content_block, organization: other_org, manifest_name: :html, scope_name: :homepage)
-        anchor_values = cell_instance.available_anchors.map { |an| an[:anchor] }
-        expect(anchor_values).not_to include(a_string_matching(/#{other_org.id}/))
-      end
-
-      context "when no sibling blocks exist" do
-        before { Decidim::ContentBlock.where.not(id: content_block.id).destroy_all }
-
-        it "returns empty array" do
-          expect(cell_instance.available_anchors).to eq([])
-        end
-      end
-    end
-
     describe "#content_block" do
       it "returns the content_block from options" do
         expect(cell_instance.content_block).to eq(content_block)

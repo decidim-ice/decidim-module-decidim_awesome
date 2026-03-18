@@ -9,7 +9,7 @@
 
 // Desktop menu — mirrors Decidim's home__menu
 .awesome-landing-menu {
-  @apply hidden md:block bg-primary py-4;
+  @apply bg-primary py-4;
 
   z-index: 1;
 }
@@ -21,7 +21,7 @@
 }
 
 .awesome-landing-menu__container {
-  @apply flex flex-row flex-wrap items-center;
+  @apply hidden md:flex flex-row flex-wrap items-center;
 }
 
 .awesome-landing-menu__container--center {
@@ -55,7 +55,11 @@
 }
 
 .awesome-landing-menu__mobile-trigger {
-  @apply flex items-center gap-2 w-full px-4 py-3 text-sm font-semibold text-white;
+  @apply flex items-center gap-2 w-full px-4 font-semibold text-white;
+
+  > svg {
+    fill: currentColor;
+  }
 
   > svg:last-of-type {
     @apply hidden;
@@ -75,8 +79,7 @@
 }
 
 .awesome-landing-menu__mobile-dropdown {
-  @apply absolute top-full left-0 w-full shadow-lg rounded-b
-         px-4 divide-y bg-white z-20;
+  @apply absolute top-full left-0 w-full my-4 shadow-lg divide-y px-4 bg-white z-20;
 
   &[aria-hidden="true"] {
     @apply hidden;

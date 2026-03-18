@@ -73,15 +73,6 @@ describe "Public homepage shows Landing Menu block" do
     end
   end
 
-  context "when anchor points to a non-existent element" do
-    let(:menu_items_json) { [{ "name" => { "en" => "Missing" }, "url" => "#nonexistent-block", "visible" => true }].to_json }
-
-    it "hides the link via JavaScript" do
-      visit decidim.root_path
-      expect(page).to have_no_content("Missing")
-    end
-  end
-
   context "when URL is unsafe" do
     let(:menu_items_json) do
       [
