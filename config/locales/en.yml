@@ -781,7 +781,7 @@ en:
           drag: Drag to reorder
           edit_item: Edit item
           empty_item: New empty item
-          name: Jump to...
+          name: Awesome global menu
           new_item: Add new item
           presets: Presets
           show_on_mobile: Show on mobile screens
@@ -792,6 +792,7 @@ en:
             name: Name
             url: URL
             visible: Visible
+          title: Jump to ...
         map:
           collapse: Start with collapsed menu
           map_center: Map center (Latitude, Longitude)
