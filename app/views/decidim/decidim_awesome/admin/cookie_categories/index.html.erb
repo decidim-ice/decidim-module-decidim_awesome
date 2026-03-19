@@ -22,7 +22,7 @@
         </thead>
         <tbody>
           <% categories.each do |slug, category| %>
-            <tr<%= " class=cookie_category-addition" unless category["editable"] %>>
+            <tr<%= " class=cookie_category-addition" unless category["blocked"] %>>
               <td><%= slug %></td>
               <td><%= translated_attribute(category["title"]) %></td>
               <td>

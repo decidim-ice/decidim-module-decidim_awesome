@@ -25,8 +25,7 @@ module Decidim
             slug,
             {
               "slug" => slug,
-              "default" => true,
-              "editable" => !category[:mandatory],
+              "blocked" => category[:mandatory],
               "mandatory" => category[:mandatory] || false,
               "visibility" => "visible",
               "title" => localized_translation("layouts.decidim.data_consent.modal.#{slug}.title"),
@@ -38,6 +37,7 @@ module Decidim
                   {
                     "name" => name,
                     "type" => item[:type].to_s,
+                    "blocked" => category[:mandatory],
                     "service" => localized_translation("layouts.decidim.data_consent.details.items.#{name}.service"),
                     "description" => localized_translation("layouts.decidim.data_consent.details.items.#{name}.description"),
                     "expiration" => localized_translation("layouts.decidim.data_consent.details.items.#{name}.expiration")

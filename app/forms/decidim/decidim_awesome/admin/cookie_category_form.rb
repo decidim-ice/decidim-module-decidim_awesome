@@ -8,11 +8,11 @@ module Decidim
         VISIBILITY_STATES = %w(visible hidden).freeze
 
         attribute :slug, String
-        attribute :editable, Boolean, default: true
+        attribute :blocked, Boolean, default: false
         attribute :mandatory, Boolean
         translatable_attribute :title, String
         translatable_attribute :description, String
-        attribute :visibility, String
+        attribute :visibility, String, default: "visible"
 
         validates :slug, presence: true
         validates :slug, format: { with: /\A[a-z0-9-]+\z/ }
@@ -20,12 +20,12 @@ module Decidim
         validates :description, translatable_presence: true
         validates :visibility, inclusion: { in: VISIBILITY_STATES }, if: -> { visibility.present? }
 
-        validate :non_editable_fields_unchanged, unless: :editable?
+        validate :non_editable_fields_unchanged, if: :blocked?
         validate :validate_uniqueness, if: -> { categories.present? }
 
         def non_editable_fields_unchanged
           errors.add(:mandatory, :readonly) unless mandatory
-          errors.add(:visibility, :readonly) if visibility.present? && visibility != "visible"
+          errors.add(:visibility, :readonly) unless visibility == "visible"
         end
 
         def validate_uniqueness
@@ -42,9 +42,9 @@ module Decidim
           {
             "title" => title,
             "slug" => slug,
-            "editable" => editable,
+            "edited" => true,
             "description" => description,
-            "visibility" => visibility || "visible",
+            "visibility" => visibility,
             "mandatory" => mandatory
           }
         end

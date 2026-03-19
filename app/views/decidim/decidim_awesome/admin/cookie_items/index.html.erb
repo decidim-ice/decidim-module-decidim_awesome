@@ -40,7 +40,7 @@
         </thead>
         <tbody>
           <% category_items.each do |slug, item| %>
-            <tr<%= " class=cookie_item-addition" unless item["editable"] %>>
+            <tr<%= " class=cookie_item-addition" unless item["blocked"] %>>
               <td><%= item["name"] %></td>
               <td><%= translated_attribute(item["service"]) %></td>
               <td><%= translated_attribute(item["expiration"]) %></td>

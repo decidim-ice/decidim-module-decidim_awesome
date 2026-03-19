@@ -8,7 +8,7 @@ module Decidim
         ITEM_TYPES = %w(cookie local_storage).freeze
 
         attribute :name, String
-        attribute :editable, Boolean, default: true
+        attribute :blocked, Boolean, default: false
         attribute :type, String
         translatable_attribute :service, String
         translatable_attribute :description, String
@@ -24,11 +24,13 @@ module Decidim
         validates :description, translatable_presence: true
         validates :expiration, translatable_presence: true
 
-        validate :non_editable_fields_unchanged, unless: :editable?
+        validate :non_editable_fields_unchanged, if: :blocked?
         validate :validate_uniqueness, if: -> { category_items.present? }
 
         def non_editable_fields_unchanged
-          # todo
+          errors.add(:type, :readonly) unless type == "cookie"
+          errors.add(:name, :readonly) unless name == context[:item]["name"]
+          errors.add(:expiration, :readonly) unless expiration == context[:item]["expiration"]
         end
 
         def validate_uniqueness
@@ -46,8 +48,8 @@ module Decidim
         def to_params
           {
             "name" => name,
-            "edited" => true,
             "type" => type.presence || "cookie",
+            "edited" => true,
             "service" => service,
             "description" => description,
             "expiration" => expiration

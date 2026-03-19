@@ -2,7 +2,7 @@
   <div class="card pt-4">
     <div class="card-section">
       <div class="row column">
-        <%= form.text_field :slug, readonly: !@form.editable?, help_text: t(".slug_help") %>
+        <%= form.text_field :slug, readonly: @form.blocked?, help_text: t(".slug_help") %>
       </div>
       <div class="row column">
         <%= form.check_box :mandatory %>
@@ -14,7 +14,7 @@
         <%= form.translated :text_area, :description, rows: 3, class: "w-full" %>
       </div>
       <div class="row column">
-        <%= form.select :visibility, @form.visibility_options, {}, class: "mb-8", disabled: !@form.editable? %>
+        <%= form.select :visibility, @form.visibility_options, {}, class: "mb-8", disabled: @form.blocked? %>
       </div>
     </div>
   </div>
