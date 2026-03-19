@@ -100,6 +100,82 @@ module Decidim::Proposals
             expect(serialized).not_to include("body/name/ca")
           end
         end
+
+        context "when custom fields contain a checkbox-group with multiple selections" do
+          let(:checkbox_xml) do
+            "<xml><dl>" \
+              "<dt name=\"colors\">Colors</dt>" \
+              "<dd id=\"colors\" name=\"colors\"><div>red</div><div>blue</div><div>green</div></dd>" \
+              "</dl></xml>"
+          end
+          let(:custom_fields) do
+            {
+              foo: "[{\"type\":\"checkbox-group\",\"required\":false,\"label\":\"Colors\",\"name\":\"colors\"," \
+                   "\"values\":[{\"label\":\"red\",\"value\":\"red\"},{\"label\":\"blue\",\"value\":\"blue\"},{\"label\":\"green\",\"value\":\"green\"}]}]"
+            }
+          end
+          let(:body) do
+            {
+              "en" => checkbox_xml,
+              "machine_translations" => {
+                "ca" => checkbox_xml
+              }
+            }
+          end
+
+          it "serializes all selected checkbox values joined by newline" do
+            expect(serialized[:"body/colors/en"]).to eq("red\nblue\ngreen")
+            expect(serialized[:"body/colors/ca"]).to eq("red\nblue\ngreen")
+          end
+
+          context "when translations differ per locale" do
+            let(:ca_xml) do
+              "<xml><dl>" \
+                "<dt name=\"colors\">Colors</dt>" \
+                "<dd id=\"colors\" name=\"colors\"><div>vermell</div><div>blau</div></dd>" \
+                "</dl></xml>"
+            end
+            let(:body) do
+              {
+                "en" => checkbox_xml,
+                "machine_translations" => {
+                  "ca" => ca_xml
+                }
+              }
+            end
+
+            it "serializes each locale independently" do
+              expect(serialized[:"body/colors/en"]).to eq("red\nblue\ngreen")
+              expect(serialized[:"body/colors/ca"]).to eq("vermell\nblau")
+            end
+          end
+
+          context "when body has only one locale (no machine_translations)" do
+            let(:body) { { "en" => checkbox_xml } }
+
+            it "only serializes the available locale" do
+              expect(serialized[:"body/colors/en"]).to eq("red\nblue\ngreen")
+              expect(serialized).not_to have_key(:"body/colors/ca")
+            end
+          end
+
+          context "when one locale has no matching checkbox data" do
+            let(:empty_xml) { "<xml><dl></dl></xml>" }
+            let(:body) do
+              {
+                "en" => checkbox_xml,
+                "machine_translations" => {
+                  "ca" => empty_xml
+                }
+              }
+            end
+
+            it "serializes en with values and ca with nil" do
+              expect(serialized[:"body/colors/en"]).to eq("red\nblue\ngreen")
+              expect(serialized[:"body/colors/ca"]).to be_nil
+            end
+          end
+        end
       end
 
       context "when vote_cache is outdated" do

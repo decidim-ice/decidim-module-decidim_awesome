@@ -1,0 +1,62 @@
+<div class="awesome-landing-menu-editor" data-content-block-id="<%= content_block.id %>">
+  <% if json_menu_items.any? %>
+  <div class="table-stacked mb-4">
+    <table class="table-list">
+      <thead>
+        <tr>
+          <th class="w-8"><span class="sr-only"><%= t("drag", scope: i18n_scope) %></span></th>
+          <th class="!text-left"><%= t("table.name", scope: i18n_scope) %></th>
+          <th><%= t("table.url", scope: i18n_scope) %></th>
+          <th><%= t("table.actions", scope: i18n_scope) %></th>
+        </tr>
+      </thead>
+      <tbody class="draggable-table" data-draggable-table
+             data-sort-url="<%= decidim_admin_decidim_awesome.reorder_landing_menu_items_path(content_block_id: content_block.id) %>">
+        <% json_menu_items.each_with_index do |item, idx| %>
+          <tr class="draggable-content" draggable="true" data-record-id="<%= idx %>">
+            <td class="text-center dragging-handle">
+              <%= icon "draggable", class: "dragger", role: "img", aria_label: t("drag", scope: i18n_scope) %>
+            </td>
+            <td class="!text-left">
+              <%= translated_attribute(item["name"]) %>
+            </td>
+            <td><%= item["url"] %></td>
+            <td class="table-list__actions">
+              <%= link_to decidim_admin_decidim_awesome.toggle_visible_landing_menu_item_path(id: idx, content_block_id: content_block.id),
+                          method: :patch,
+                          aria: { label: item.fetch("visible", true) ? t("table.visible", scope: i18n_scope) : t("table.hidden", scope: i18n_scope) } do %>
+                <% if item.fetch("visible", true) %>
+                  <%= icon "eye-line", role: "img", aria_label: t("table.visible", scope: i18n_scope) %>
+                <% else %>
+                  <%= icon "eye-off-line", role: "img", aria_label: t("table.hidden", scope: i18n_scope) %>
+                <% end %>
+              <% end %>
+              <%= link_to "#",
+                          class: "js-drawer-editor",
+                          aria: { label: t("edit_item", scope: i18n_scope) },
+                          data: { drawer_url: decidim_admin_decidim_awesome.landing_menu_item_path(id: idx, content_block_id: content_block.id) } do %>
+                <%= icon "pencil-line", role: "img", aria_label: t("edit_item", scope: i18n_scope) %>
+              <% end %>
+              <%= link_to decidim_admin_decidim_awesome.landing_menu_item_path(id: idx, content_block_id: content_block.id),
+                          method: :delete,
+                          class: "action-icon--remove",
+                          aria: { label: t("delete_confirm", scope: i18n_scope) },
+                          data: { confirm: t("delete_confirm", scope: i18n_scope) } do %>
+                <%= icon "delete-bin-line", role: "img", aria_label: t("delete_confirm", scope: i18n_scope) %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <% end %>
+
+  <div class="flex items-center gap-4 mb-6">
+    <button type="button"
+            class="button button__sm button__secondary js-drawer-editor"
+            data-drawer-url="<%= decidim_admin_decidim_awesome.new_landing_menu_item_path(content_block_id: content_block.id) %>">
+      <%= t("new_item", scope: i18n_scope) %>
+    </button>
+  </div>
+</div>

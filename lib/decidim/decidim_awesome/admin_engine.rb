@@ -37,6 +37,10 @@ module Decidim
             get :ip_addresses, on: :collection
           end
         end
+        resources :landing_menu_items, only: [:new, :show, :create, :update, :destroy] do
+          patch :toggle_visible, on: :member
+          put :reorder, on: :collection
+        end
         resources :admin_authorizations, only: [:edit, :update, :destroy]
         post :migrate_images, to: "checks#migrate_images"
         resources :users_autoblocks, except: [:show] do

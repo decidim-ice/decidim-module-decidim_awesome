@@ -62,9 +62,20 @@ module Decidim
             custom_fields.fields.each do |field|
               next unless field["label"].present? && field.has_key?("name")
 
-              value = field["userData"].is_a?(Array) ? field["userData"].first : field["userData"]
+              value = extract_field_value(custom_fields, field)
               yield field["label"].parameterize, value
             end
+          end
+
+          private
+
+          def extract_field_value(custom_fields, field)
+            return if custom_fields.data.blank?
+
+            nodes = custom_fields.data.search("##{field["name"]} div")
+            return if nodes.blank?
+
+            nodes.map { |v| v.inner_html(encoding: "UTF-8").presence || v.attribute("alt")&.value }.join("\n")
           end
         end
       end

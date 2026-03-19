@@ -575,6 +575,21 @@ en:
             ip_address: IP address
             no_data: No IP addresses found
             stamps: Hashcash stamps
+        landing_menu_items:
+          form:
+            preset: Autofill presets
+            preset_content_blocks: Existing content blocks
+            preset_global_menu: Decidim usual suspects
+            select_a_preset: "— Select a common menu item —"
+            url_help_html: "<b>#section-id</b> — scrolls to a section on this page<br><b>/path</b>
+              — internal page (e.g. /processes)<br><b>https://example.com</b> — external
+              link (opens in a new tab automatically)"
+          new:
+            save: Save
+            title: New menu item
+          show:
+            save: Save
+            title: Edit menu item
         menu:
           admins: Scoped Admins
           custom_redirects: Custom Redirections
@@ -884,6 +899,34 @@ en:
             automatic: Automatic
             manual: Manual
           title: Block title
+        landing_menu:
+          alignment: Menu position
+          alignment_center: Center
+          alignment_help: Align menu items to the left, center, or right of the page
+          alignment_left: Left
+          alignment_right: Right
+          css_comment_hover: Style for menu link on hover
+          css_comment_link: Style for individual menu link
+          css_comment_menu: Style for the whole menu block
+          css_help_html: 'You can further customize this menu by creating a %{link}
+            for it, use this code to reference different elements in it:'
+          css_help_link: custom style
+          delete_confirm: Are you sure you want to delete this item?
+          drag: Drag to reorder
+          edit_item: Edit item
+          empty_item: New empty item
+          name: Awesome global menu
+          new_item: Add new item
+          presets: Presets
+          show_on_mobile: Show on mobile screens
+          sticky: Sticky (always visible on scrolling)
+          table:
+            actions: Actions
+            hidden: Hidden
+            name: Name
+            url: URL
+            visible: Visible
+          title: Jump to ...
         map:
           collapse: Start with collapsed menu
           map_center: Map center (Latitude, Longitude)
@@ -913,10 +956,6 @@ en:
             field '%{field}'
           invalid_xml: 'Content couldn''t be parsed: DL/DD elements not found in the
             XML'
-      editor_images:
-        create:
-          error: Error uploading image!
-          success: Image uploaded successfully
       map_component:
         map:
           api_not_ready: |
