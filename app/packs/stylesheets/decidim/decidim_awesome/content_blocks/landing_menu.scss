@@ -57,8 +57,16 @@
 .awesome-landing-menu__mobile-trigger {
   @apply flex items-center gap-2 w-full px-4 font-semibold text-white;
 
-  > svg {
+  svg {
     fill: currentColor;
+  }
+
+  > span {
+    @apply flex items-center gap-2 leading-4;
+
+    svg {
+      @apply w-6 h-6;
+    }
   }
 
   > svg:last-of-type {
