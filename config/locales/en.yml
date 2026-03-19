@@ -82,12 +82,12 @@ en:
         allow_performing_block_from_a_task: Allow to perform the configured users
           block from a task
         block_justification_message: Block justification message
+        detect_and_run: Detect and block users
+        error: Configuration could not be updated corectly.
         notify_blocked_users: Notify blocked users
         perform_block: Perform users blocking
-        threshold: Threshold
-        detect_and_run: Detect and block users
         success: Configuration successfully updated
-        error: Configuration could not be updated corectly.
+        threshold: Threshold
   decidim:
     admin:
       actions:
@@ -702,12 +702,11 @@ en:
           menu:
             title: Public frontend
         users_autoblocks:
-          config:
-            success: Configuration successfully updated
-            error: Configuration could not be updated corectly.
           calculate_scores:
-            job_enqueued: Scores are being calculated right now. Come back to see the result in some minutes. You'll be able to download the calculations report file.
             error: There has been an error trying to calculate scores! %{error}
+            job_enqueued: Scores are being calculated right now. Come back to see
+              the result in some minutes. You'll be able to download the calculations
+              report file.
             success:
               one: Scores calculated successfully, 1 user detected. A detailed CSV
                 has been sent to admins by email
@@ -715,17 +714,19 @@ en:
                 CSV has been sent to admins by email
               zero: Scores calculated successfully. No users have been found who have
                 a sufficient score to be blocked automatically
+          config:
+            error: Configuration could not be updated corectly.
+            success: Configuration successfully updated
           config_form:
-            update: Update
-            calculate_scores: Calculate scores
-            confirm_block: Are you sure to block users automatically?
-            detect_and_run: Detect and block users
             allow_performing_block_from_a_task_help: A line must be added to your
               server to perform the task. To do this schedule a `bundle exec rake
               decidim_decidim_awesome:autoblock_users:run_scheduled_block` periodically.
             block_justification_message_help: Justification that will receive the
               detected users in their block notification
+            calculate_scores: Calculate scores
+            confirm_block: Are you sure to block users automatically?
             default_block_justification_message: Account blocked automatically
+            detect_and_run: Detect and block users
             notify_blocked_users_help: Notify each blocked user. Note that if there
               are many users to block generating a notification for each one can consume
               a lot of resources
@@ -734,6 +735,7 @@ en:
               %{count}'
             threshold_config_help: Define the numerical threshold (equal or greater
               than) of the "spam risk index score" for automatic blocking of users
+            update: Update
           create:
             error: Error creating rule! %{error}
             success: Rule created successfully
@@ -741,8 +743,9 @@ en:
             error: Error removing rule! %{error}
             success: Rule removed successfully
           detect_and_run:
-            job_enqueued: Users are being blocked right now. You'll be able to see them in the moderation module
             error: There has been an error trying to block users!<br/>%{error}
+            job_enqueued: Users are being blocked right now. You'll be able to see
+              them in the moderation module
             success_block_html:
               one: 1 user blocked successfully. You can check at <a href="%{url}">blocked
                 users</a>
@@ -789,16 +792,15 @@ en:
               block_domains_list: The rule only applies to this list of domains (separated
                 by spaces)
           index:
-            update: Update configuration
             allow: Allow
             block: Block
-            detect_and_run: Detect and block users
             calculate_scores: Calculate scores
             confirm_block: Are you sure to block users automatically?
             confirm_destroy: Are you sure to remove this users autoblock rule?
             delete: Delete rule
-            description: 'Block users automatically based on their activities or suspicious
-              data'
+            description: Block users automatically based on their activities or suspicious
+              data
+            detect_and_run: Detect and block users
             download_report_file: Download calculations report file
             edit: Edit rule
             headers:
@@ -810,6 +812,7 @@ en:
               weight: Weight
             new: New rule
             title: Users automatic blocks
+            update: Update configuration
           new:
             create: Create
             title: New users automatic block
