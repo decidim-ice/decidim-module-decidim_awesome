@@ -10,6 +10,10 @@ module Decidim
           options[:content_block]
         end
 
+        def decidim_admin_decidim_awesome
+          Decidim::DecidimAwesome::AdminEngine.routes.url_helpers
+        end
+
         def i18n_scope
           "decidim.decidim_awesome.content_blocks.rich_text"
         end
@@ -31,6 +35,18 @@ module Decidim
           @column = column
           @column_id = column_id
           render :column_fields
+        end
+
+        def column_extra_fields(col_fields, column_id, images_fields, image_field_name)
+          @col_fields = col_fields
+          @column_id = column_id
+          @images_fields = images_fields
+          @image_field_name = image_field_name
+          render :column_extra_fields
+        end
+
+        def block_id_for_css
+          content_block&.settings&.block_id.presence || "your-block-id"
         end
 
         def placement_options

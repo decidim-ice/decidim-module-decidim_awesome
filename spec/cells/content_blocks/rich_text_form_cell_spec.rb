@@ -27,6 +27,12 @@ module Decidim::DecidimAwesome
       end
     end
 
+    describe "#i18n_scope" do
+      it "returns the correct scope" do
+        expect(cell_instance.i18n_scope).to eq("decidim.decidim_awesome.content_blocks.rich_text")
+      end
+    end
+
     describe "#content_block" do
       it "returns the content block from options" do
         expect(cell_instance.content_block).to eq(content_block)
@@ -53,6 +59,14 @@ module Decidim::DecidimAwesome
     describe "#blank_column" do
       it "returns a RichTextColumn" do
         expect(cell_instance.blank_column).to be_a(RichTextColumn)
+      end
+
+      it "has expected defaults" do
+        blank = cell_instance.blank_column
+        expect(blank.restrict_videos).to be(false)
+        expect(blank.restrict_links).to be(false)
+        expect(blank.background_color).to be_nil
+        expect(blank.background_image_placement).to eq("cover_center")
       end
     end
 
@@ -115,6 +129,20 @@ module Decidim::DecidimAwesome
       it "renders restrict checkboxes" do
         expect(subject).to have_content("Prevent embed videos")
         expect(subject).to have_content("Prevent links")
+      end
+
+      it "renders placement select" do
+        expect(subject).to have_content("Image placement")
+      end
+
+      it "renders background image upload" do
+        expect(subject).to have_content("Background image")
+      end
+
+      it "renders CSS customization hint with column-specific selectors" do
+        expect(subject).to have_content("custom style")
+        expect(subject).to have_content("awesome-rich-text__column:nth-child(1)")
+        expect(subject).to have_content("Style for column 1")
       end
     end
   end

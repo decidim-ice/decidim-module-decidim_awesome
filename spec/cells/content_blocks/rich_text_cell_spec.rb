@@ -18,6 +18,18 @@ module Decidim::DecidimAwesome
       allow(controller).to receive(:current_organization).and_return(organization)
     end
 
+    describe "#extra_classes" do
+      it "returns awesome-rich-text" do
+        expect(block_cell.extra_classes).to eq("awesome-rich-text")
+      end
+    end
+
+    describe "#i18n_scope" do
+      it "returns the correct scope" do
+        expect(block_cell.i18n_scope).to eq("decidim.decidim_awesome.content_blocks.rich_text")
+      end
+    end
+
     describe "#show" do
       context "when columns are empty" do
         let(:columns_data) { [] }
@@ -83,6 +95,14 @@ module Decidim::DecidimAwesome
         end
       end
 
+      context "when block_id has whitespace" do
+        let(:settings) { { "block_id" => "  our team  ", "columns" => columns_data } }
+
+        it "strips whitespace and sanitizes" do
+          expect(block_cell.block_id).to eq("our-team")
+        end
+      end
+
       context "when block_id sanitizes to empty" do
         let(:settings) { { "block_id" => "@&%!", "columns" => columns_data } }
 
@@ -117,6 +137,14 @@ module Decidim::DecidimAwesome
     end
 
     describe "#columns" do
+      context "with Hash input (form params format)" do
+        let(:settings) { { "columns" => { "0" => { "body" => { "en" => "<p>From hash</p>" } } } } }
+
+        it "parses hash values as columns" do
+          expect(block_cell.columns.size).to eq(1)
+        end
+      end
+
       context "with mixed empty and non-empty columns" do
         let(:columns_data) do
           [
@@ -457,6 +485,14 @@ module Decidim::DecidimAwesome
 
         it "applies background style to the column" do
           expect(subject).to have_css("[style*='--awesome-rich-text-bg: #ff0000']")
+        end
+      end
+
+      context "when block_id is set" do
+        let(:settings) { { "block_id" => "our-team", "columns" => columns_data } }
+
+        it "renders the section with the custom id" do
+          expect(subject).to have_css("section#our-team")
         end
       end
     end

@@ -54,6 +54,31 @@ describe "Rich Text content block on homepage" do
     end
   end
 
+  context "with custom block_id" do
+    let(:settings) { { "block_id" => "our-team", "title" => { "en" => "Team" }, "columns" => columns_data } }
+
+    it "renders the section with the custom anchor id" do
+      visit decidim.root_path
+      expect(page).to have_css("section#our-team")
+    end
+  end
+
+  context "with default block_id" do
+    it "renders the section with the default id" do
+      visit decidim.root_path
+      expect(page).to have_css("section#awesome-rich-text-#{content_block.id}")
+    end
+  end
+
+  context "with background color" do
+    let(:columns_data) { [{ "body" => { "en" => "<p>Colored section</p>" }, "background_color" => "#ff5500" }] }
+
+    it "renders the CSS variable for the background" do
+      visit decidim.root_path
+      expect(page).to have_css("[style*='--awesome-rich-text-bg: #ff5500']")
+    end
+  end
+
   context "with restrict_videos" do
     let(:columns_data) { [{ "body" => { "en" => '<p>Watch:</p><iframe src="http://example.com/video"></iframe>' }, "restrict_videos" => true }] }
 
@@ -95,6 +120,23 @@ describe "Rich Text content block on homepage" do
         visit decidim.root_path
         expect(page).to have_link("here", href: "http://example.com")
       end
+    end
+  end
+
+  context "with both restrictions when not logged in" do
+    let(:columns_data) do
+      [{
+        "body" => { "en" => '<p>Watch:</p><iframe src="http://example.com/video"></iframe><p>Click <a href="http://example.com">here</a></p>' },
+        "restrict_videos" => true,
+        "restrict_links" => true
+      }]
+    end
+
+    it "applies both restrictions simultaneously" do
+      visit decidim.root_path
+      expect(page).to have_no_css("iframe")
+      expect(page).to have_content("Sign in to watch this video")
+      expect(page).to have_no_link("here", href: "http://example.com")
     end
   end
 end

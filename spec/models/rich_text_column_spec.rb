@@ -49,6 +49,22 @@ module Decidim::DecidimAwesome
         column = described_class.new(background_image_placement: "repeat")
         expect(column.background_image_placement).to eq("repeat")
       end
+
+      it "coerces restrict_videos from string '1' to true" do
+        column = described_class.new(restrict_videos: "1")
+        expect(column.restrict_videos).to be(true)
+      end
+
+      it "coerces restrict_links from string '0' to false" do
+        column = described_class.new(restrict_links: "0")
+        expect(column.restrict_links).to be(false)
+      end
+    end
+
+    describe "PLACEMENT_OPTIONS" do
+      it "contains the expected values" do
+        expect(described_class::PLACEMENT_OPTIONS).to eq(%w(cover_center cover_top cover_bottom contain_center repeat))
+      end
     end
 
     describe ".from_settings" do
@@ -80,6 +96,12 @@ module Decidim::DecidimAwesome
         oversized = Array.new(max + 3) { |i| { "body" => { "en" => "Col #{i}" } } }
         result = described_class.from_settings(oversized)
         expect(result.size).to eq(max)
+      end
+
+      it "handles Hash input (form params format)" do
+        result = described_class.from_settings({ "0" => { "body" => { "en" => "First" } }, "1" => { "body" => { "en" => "Second" } } })
+        expect(result.size).to eq(2)
+        expect(result.first.body).to eq("en" => "First")
       end
     end
   end

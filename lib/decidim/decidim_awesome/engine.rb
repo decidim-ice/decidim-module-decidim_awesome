@@ -325,6 +325,8 @@ module Decidim
       end
 
       initializer "decidim_decidim_awesome.awesome_rich_text_content_block" do
+        next unless DecidimAwesome.enabled?(:rich_text_block)
+
         max = Decidim::DecidimAwesome.max_rich_text_columns
 
         [:homepage, :participatory_process_group_homepage, :participatory_process_homepage, :assembly_homepage].each do |scope|

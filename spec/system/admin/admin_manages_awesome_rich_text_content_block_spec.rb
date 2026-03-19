@@ -56,5 +56,40 @@ describe "Admin manages Awesome Rich Text content block" do
     it "shows the transparent background checkbox" do
       expect(page).to have_content("Transparent background")
     end
+
+    it "shows restrict checkboxes" do
+      expect(page).to have_content("Prevent embed videos")
+      expect(page).to have_content("Prevent links")
+    end
+
+    it "shows background image placement select" do
+      expect(page).to have_content("Image placement")
+    end
+
+    it "shows the add column button" do
+      expect(page).to have_content("Add a new column")
+    end
+
+    it "does not show remove button for the first column" do
+      expect(page).to have_no_button("Remove")
+    end
+
+    context "with multiple columns" do
+      let!(:content_block) do
+        create(:content_block, organization:, manifest_name: :awesome_rich_text, scope_name: :homepage,
+                               settings: { "columns" => [{ "body" => { "en" => "Col 1" } }, { "body" => { "en" => "Col 2" } }] })
+      end
+
+      it "displays all columns on the edit page" do
+        expect(page).to have_content("Column")
+        expect(all(".awesome-rich-text-column").count).to eq(2)
+      end
+
+      it "shows remove button for columns after the first" do
+        within all(".awesome-rich-text-column").last do
+          expect(page).to have_button("Remove")
+        end
+      end
+    end
   end
 end

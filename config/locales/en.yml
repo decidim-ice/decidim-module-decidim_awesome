@@ -841,6 +841,11 @@ en:
             It must be unique per page (e.g. "our-team").
           block_id_placeholder: internal reference name (not publicly used)
           column_title: Column
+          css_comment_this_column: Style for column %{number}
+          css_comment_title: Style for the block title
+          css_help_html: 'You can further customize this block by creating a %{link}
+            for it, use this code to reference different elements in it:'
+          css_help_link: custom style
           name: Awesome Rich Text block
           remove_column: Remove
           restrict_links: Prevent links in the text to be displayed unless the user

@@ -265,6 +265,12 @@ module Decidim
       []
     end
 
+    # Configurable rich text content block for landing pages.
+    # Supports multi-column layouts, backgrounds, and access restrictions.
+    config_accessor :rich_text_block do
+      true
+    end
+
     # Configurable anchor-based menu navigator for landing pages.
     # Supports sticky positioning and configurable alignment.
     config_accessor :landing_menu_block do
