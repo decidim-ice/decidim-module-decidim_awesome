@@ -214,18 +214,22 @@ ja:
         checks:
           index:
             admin_head_tags: 管理者向けアプリケーションヘッダーに含まれる Awesome tags
+            awesome_update_available: '新しいバージョンが利用可能です: %{latest_version}'
+            awesome_version: Decidim Awesome version %{version}
             decidim-admin: Adminモジュールより
             decidim-assemblies: 参加スペースモジュールから
             decidim-conferences: カンファレンスモジュールから
             decidim-core: Coreモジュールより
             decidim-participatory_processes: 参加型プロセスモジュールから
             decidim-proposals: 提案モジュールより
+            decidim_update_available: '新しいバージョンが利用可能です: %{latest_version}'
             decidim_version: Decidim version %{version}
             errors:
               CSS: 必要な <link> スタイルシートエントリがヘッドに含まれていません。この問題を解決するために、独自の _head.html.erbに手動で追加することもできます。
               JavaScript: 必要な <script> JavaScriptエントリがヘッドに含まれていません。この問題を解決するために、独自の admin/_head.html.erbに手動で追加することもできます。
             head_tags: アプリケーションヘッダーに含まれる Awesome tags
             link_admins: /system パネルにログイン
+            view_release: リリースノートを表示
         config:
           anonymous: 非ログインユーザー
           caution: '注意: この機能は、予期しない結果につながる可能性があるデフォルトの動作を大きく変更します。注意して使用してください！'
@@ -596,6 +600,33 @@ ja:
           results_count:
             other: "%{count} 件のプロセスがあります"
           status_label: 'ステータス：'
+          title: ブロックタイトル
+          upcoming: 今後
+        awesome_processes:
+          active_spaces: 参加型プロセス
+          any_group: 任意のグループ
+          group_label: グループ
+          max_results: 最大表示要素数
+          name: Awesome プロセス
+          process_group: プロセスグループを制限する
+          process_status: プロセス状態フィルター
+          process_statuses:
+            active: アクティブなプロセスのみ
+            all: 全てのプロセス
+            past: 過去のプロセスのみ
+            upcoming: 未来のプロセスのみ
+          process_type: プロセスの種別
+          process_type_mixed_hint: 混合モードでは、プロセスとグループが最大許容量まで交互に配置されます。プロセスは重み付け（昇順）でソートされます。片方のタイプが終了すると、残りのスロットはもう片方のタイプで埋められます。
+          process_types:
+            all: すべてのプロセスとグループを混在
+            groups: プロセスグループのみ
+            processes: プロセスのみ
+          processes: プロセス
+          see_all_spaces: 全プロセスを見る
+          selection_criteria: 選択基準
+          selection_criteria_options:
+            automatic: 自動
+            manual: 手動
           title: ブロックタイトル
         map:
           collapse: メニューは折りたたまれた状態で開始

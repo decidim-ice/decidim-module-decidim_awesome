@@ -112,6 +112,8 @@ module Decidim
         # override user's admin property
         Decidim::User.include(Decidim::DecidimAwesome::UserOverride) if DecidimAwesome.enabled?(:scoped_admins)
 
+        Decidim::ContentBlocks::BaseCell.prepend(Decidim::DecidimAwesome::BaseCellOverride) if DecidimAwesome.enabled?(:landing_menu_block)
+
         if DecidimAwesome.enabled?(:menu, :mobile_menu, :home_content_block_menu)
           Decidim::ContentBlocks::GlobalMenuCell.include(Decidim::DecidimAwesome::GlobalMenuCellOverride) if DecidimAwesome.enabled?(:home_content_block_menu)
           Decidim::BreadcrumbHelper.include(Decidim::DecidimAwesome::BreadcrumbHelperOverride)
@@ -323,6 +325,25 @@ module Decidim
         end
       end
 
+      initializer "decidim_decidim_awesome.awesome_landing_menu_content_block" do
+        next unless DecidimAwesome.enabled?(:landing_menu_block)
+
+        [:homepage, :participatory_process_group_homepage, :participatory_process_homepage, :assembly_homepage].each do |scope|
+          Decidim.content_blocks.register(scope, :awesome_landing_menu) do |content_block|
+            content_block.cell = "decidim/decidim_awesome/content_blocks/landing_menu"
+            content_block.settings_form_cell = "decidim/decidim_awesome/content_blocks/landing_menu_form"
+            content_block.public_name_key = "decidim.decidim_awesome.content_blocks.landing_menu.name"
+
+            content_block.settings do |settings|
+              settings.attribute :sticky, type: :boolean, default: false
+              settings.attribute :alignment, type: :enum, default: "center", choices: %w(left center right)
+              settings.attribute :show_on_mobile, type: :boolean, default: false
+              settings.attribute :menu_items, type: :text
+            end
+          end
+        end
+      end
+
       initializer "decidim_decidim_awesome.webpacker.assets_path" do
         Decidim.register_assets_path File.expand_path("app/packs", root)
       end
@@ -346,7 +367,7 @@ module Decidim
         Decidim.icons.register(name: "file-settings-line", icon: "file-settings-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "hashtag", icon: "hashtag", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "smartphone", icon: "smartphone-line", category: "system", description: "", engine: :decidim_awesome)
-        Decidim.icons.register(name: "shield-check-line", icon: "shield-check-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "eye-off-line", icon: "eye-off-line", category: "system", description: "", engine: :decidim_awesome)
       end
     end
   end
