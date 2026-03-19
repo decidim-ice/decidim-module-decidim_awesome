@@ -1,0 +1,52 @@
+<section id="<%= block_id %>"
+         class="awesome-landing-menu<%= " awesome-landing-menu--sticky" if sticky? %>"
+         aria-label="<%= t("title", scope: i18n_scope) %>">
+  <%# Desktop: horizontal menu %>
+  <div class="awesome-landing-menu__container awesome-landing-menu__container--<%= alignment %>">
+    <% menu_items.each do |item| %>
+      <div class="awesome-landing-menu-element">
+        <%= link_to item[:url],
+                    class: "button button__text text-white font-semibold awesome-landing-menu-element--link",
+                    **(item[:target] == "_blank" ? { target: "_blank", rel: "noopener noreferrer" } : {}) do %>
+          <%= item[:label] %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <% if show_on_mobile? %>
+    <%# Mobile: dropdown %>
+    <div class="awesome-landing-menu__mobile">
+      <button id="landing-menu-trigger-<%= model.id %>"
+              class="awesome-landing-menu__mobile-trigger"
+              data-controller="dropdown"
+              data-target="landing-menu-panel-<%= model.id %>"
+              data-auto-close="true"
+              aria-haspopup="true"
+              aria-controls="landing-menu-panel-<%= model.id %>">
+        <span class="flex"><%= icon "menu-line" %> <%= t("title", scope: i18n_scope) %></span>
+        <%= icon "arrow-down-s-line" %>
+        <%= icon "arrow-up-s-line" %>
+      </button>
+
+      <ul id="landing-menu-panel-<%= model.id %>"
+          class="awesome-landing-menu__mobile-dropdown"
+          aria-hidden="true"
+          role="menu"
+          aria-labelledby="landing-menu-trigger-<%= model.id %>"
+          tabindex="-1">
+        <% menu_items.each do |item| %>
+          <li role="presentation" class="py-3">
+            <%= link_to item[:url],
+                        class: "awesome-landing-menu__mobile-link",
+                        role: "menuitem",
+                        **(item[:target] == "_blank" ? { target: "_blank", rel: "noopener noreferrer" } : {}) do %>
+              <span><%= item[:label] %></span>
+              <%= icon("arrow-right-s-line", class: "w-4 h-4 flex-none fill-current") unless item[:target] == "_blank" %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</section>

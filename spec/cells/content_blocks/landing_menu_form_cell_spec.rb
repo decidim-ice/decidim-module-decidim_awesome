@@ -1,0 +1,125 @@
+# frozen_string_literal: true
+
+require "spec_helper"
+
+module Decidim::DecidimAwesome
+  describe ContentBlocks::LandingMenuFormCell, type: :cell do
+    let(:organization) { create(:organization) }
+    let(:content_block) { create(:content_block, organization:, manifest_name: :awesome_landing_menu, scope_name: :homepage, settings:) }
+    let(:settings) { {} }
+
+    let(:form) do
+      Decidim::FormBuilder.new(
+        "content_block",
+        content_block,
+        ActionView::Base.new(ActionView::LookupContext.new(ActionController::Base.view_paths), {}, ActionController::Base.new),
+        {}
+      )
+    end
+
+    let(:cell_instance) do
+      cell(
+        "decidim/decidim_awesome/content_blocks/landing_menu_form",
+        form,
+        content_block: content_block
+      )
+    end
+
+    controller Decidim::PagesController
+
+    before do
+      allow(controller).to receive(:current_organization).and_return(organization)
+    end
+
+    describe "rendering" do
+      subject { cell_instance.call }
+
+      it "renders the sticky checkbox" do
+        expect(subject).to have_content("Sticky")
+      end
+
+      it "renders the alignment select" do
+        expect(subject).to have_content("Menu position")
+      end
+
+      it "renders the add button" do
+        expect(subject).to have_content("Add new item")
+      end
+
+      it "renders the show on mobile checkbox" do
+        expect(subject).to have_content("Show on mobile screens")
+      end
+
+      it "renders the CSS help text" do
+        expect(subject).to have_content("custom style")
+      end
+    end
+
+    describe "#table" do
+      subject { cell_instance.call(:table) }
+
+      context "without items" do
+        it "renders the add button" do
+          expect(subject).to have_content("Add new item")
+        end
+
+        it "does not render table" do
+          expect(subject).to have_no_table
+        end
+      end
+
+      context "with items" do
+        let(:settings) { { "menu_items" => [{ "name" => { "en" => "About" }, "url" => "#about", "visible" => true }].to_json } }
+
+        it "renders table with items" do
+          expect(subject).to have_content("About")
+          expect(subject).to have_content("#about")
+        end
+
+        it "renders column headers" do
+          expect(subject).to have_content("Name")
+          expect(subject).to have_content("URL")
+          expect(subject).to have_content("Actions")
+        end
+      end
+    end
+
+    describe "#alignment_options" do
+      it "returns 3 options" do
+        expect(cell_instance.alignment_options.size).to eq(3)
+      end
+
+      it "includes left, center, and right values" do
+        values = cell_instance.alignment_options.map(&:last)
+        expect(values).to eq(%w(left center right))
+      end
+
+      it "has translated labels" do
+        labels = cell_instance.alignment_options.map(&:first)
+        expect(labels).to include("Left", "Center", "Right")
+      end
+    end
+
+    describe "#json_menu_items" do
+      let(:settings) { { "menu_items" => [{ "name" => { "en" => "Test" }, "url" => "#test" }].to_json } }
+
+      it "returns parsed items" do
+        items = cell_instance.json_menu_items
+        expect(items.length).to eq(1)
+        expect(items.first["url"]).to eq("#test")
+      end
+    end
+
+    describe "#content_block" do
+      it "returns the content_block from options" do
+        expect(cell_instance.content_block).to eq(content_block)
+      end
+    end
+
+    describe "#i18n_scope" do
+      it "returns correct scope" do
+        expect(cell_instance.i18n_scope).to eq("decidim.decidim_awesome.content_blocks.landing_menu")
+      end
+    end
+  end
+end
