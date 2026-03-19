@@ -1,6 +1,21 @@
 CHANGELOG
 =========
 
+v0.14.2
+-------
+
+Compatibility:
+  - Decidim 0.31.x
+
+Features:
+  - Fix exports of checkbox groups for custom fields
+  - Add Sticky Awesome Global Menu content block ([#540](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/540))
+  - Add Rich Text content block for landing pages ([#543](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/543))
+  - Add a new cookie policy/category manager ([#521](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/521))
+  - Users autoblock management with customizable rules ([#305](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/305))
+
+Features:
+
 v0.14.1
 -------
 
