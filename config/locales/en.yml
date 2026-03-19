@@ -527,6 +527,10 @@ en:
             error: Error updating condition case
             success: Condition case updated successfully
         cookie_categories:
+          cookie_management_warning_html: Note that Decidim will force the user to
+            accept ALL cookies in order to display iframes. In order to be GDPR compliant,
+            ensure you add all the cookies that will be used in iframes in their proper
+            cookie categories.
           create:
             error: Error creating cookie category! %{error}
             success: Cookie category created successfully
