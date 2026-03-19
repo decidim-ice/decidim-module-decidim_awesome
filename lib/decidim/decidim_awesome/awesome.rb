@@ -16,6 +16,8 @@ module Decidim
     autoload :TranslatedCustomFieldsType, "decidim/decidim_awesome/api/types/translated_custom_fields_type"
     autoload :LocalizedCustomFieldsType, "decidim/decidim_awesome/api/types/localized_custom_fields_type"
     autoload :Authorizer, "decidim/decidim_awesome/authorizer"
+    autoload :MenuItemsParser, "decidim/decidim_awesome/menu_items_parser"
+    autoload :ParseContentBlock, "decidim/decidim_awesome/parse_content_block"
 
     # Awesome comes with some components for participatory spaces
     # Currently :awesome_map and :awesome_iframe, list them here
@@ -261,6 +263,12 @@ module Decidim
 
     config_accessor :home_content_block_menu do
       []
+    end
+
+    # Configurable anchor-based menu navigator for landing pages.
+    # Supports sticky positioning and configurable alignment.
+    config_accessor :landing_menu_block do
+      true
     end
 
     # Allows admins to assign "fake" admins scoped to some admin zones using the
