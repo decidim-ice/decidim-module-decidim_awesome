@@ -24,7 +24,7 @@
           <div class="card-section">
             <%= column_fields(col_fields, blank_column, "awesome-rich-text-column-id") %>
             <% form.fields_for :images, content_block.images_container do |images_fields| %>
-              <%= column_extra_fields(col_fields, "awesome-rich-text-column-id", images_fields, :background_image_0) %>
+              <%= column_extra_fields(col_fields, "awesome-rich-text-column-id", images_fields, "background_image_0") %>
             <% end %>
           </div>
         </div>
@@ -51,7 +51,7 @@
             <% settings_fields.fields_for "columns[#{idx}]", col do |col_fields| %>
               <%= column_fields(col_fields, col, idx) %>
               <% form.fields_for :images, content_block.images_container do |images_fields| %>
-                <%= column_extra_fields(col_fields, idx, images_fields, :"background_image_#{idx}") %>
+                <%= column_extra_fields(col_fields, idx, images_fields, "background_image_#{idx}") %>
               <% end %>
             <% end %>
           <% end %>

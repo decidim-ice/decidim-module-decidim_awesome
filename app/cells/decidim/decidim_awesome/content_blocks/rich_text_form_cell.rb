@@ -41,7 +41,7 @@ module Decidim
           @col_fields = col_fields
           @column_id = column_id
           @images_fields = images_fields
-          @image_field_name = image_field_name
+          @image_field_name = image_field_name.to_sym
           render :column_extra_fields
         end
 

@@ -11,7 +11,7 @@
 <%# Background color %>
 <div class="row column">
   <label>
-    <input type="checkbox" class="awesome-rich-text-transparent-bg" data-target="<%= @column_id %>" <%= "checked" if @column.background_color.blank? %> />
+    <input type="checkbox" class="awesome-rich-text-transparent-bg" data-target="<%= @column_id %>" <%= "checked" if @column.background_color.blank? %>>
     <span><%= t("transparent_background", scope: i18n_scope) %></span>
   </label>
 </div>
