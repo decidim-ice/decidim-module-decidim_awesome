@@ -10,6 +10,7 @@ module Decidim
         #
         # category_slug - The slug of the category to destroy.
         # organization - The organization where the category belongs.
+        # config - The AwesomeConfig instance for cookie management.
         def initialize(category_slug, organization)
           @category_slug = category_slug
           @organization = organization

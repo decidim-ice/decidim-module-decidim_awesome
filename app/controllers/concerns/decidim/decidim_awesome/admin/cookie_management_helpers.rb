@@ -14,13 +14,6 @@ module Decidim
           Decidim::DecidimAwesome::AwesomeConfig.find_by(organization: current_organization, var: :cookie_management)&.value
         end
 
-        def category_title_for_breadcrumb(slug)
-          category = store.categories[slug]
-          return slug unless category
-
-          translated_attribute(category["title"]) || slug
-        end
-
         def add_breadcrumb_item(key, url = nil)
           controller_breadcrumb_items << {
             label: translate_breadcrumb(key),

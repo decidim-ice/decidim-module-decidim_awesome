@@ -24,7 +24,8 @@ module Decidim
         validate :validate_uniqueness, if: -> { categories.present? }
 
         def non_editable_fields_unchanged
-          # todo
+          errors.add(:mandatory, :readonly) unless mandatory
+          errors.add(:visibility, :readonly) if visibility.present? && visibility != "visible"
         end
 
         def validate_uniqueness
@@ -41,7 +42,7 @@ module Decidim
           {
             "title" => title,
             "slug" => slug,
-            "edited" => true,
+            "editable" => editable,
             "description" => description,
             "visibility" => visibility || "visible",
             "mandatory" => mandatory

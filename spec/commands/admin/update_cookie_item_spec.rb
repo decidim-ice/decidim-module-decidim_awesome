@@ -13,7 +13,7 @@ module Decidim::DecidimAwesome
       let(:form_params) do
         {
           name: "decidim_analytics_updated",
-          editted: true,
+          edited: true,
           type: "cookie",
           service: { en: "Updated Decidim" },
           description: { en: "Updated tracking" },

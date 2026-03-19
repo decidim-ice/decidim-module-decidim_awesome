@@ -22,7 +22,7 @@ module Decidim
         end
 
         def edit
-          # add_breadcrumb_item category_title_for_breadcrumb(params[:slug]), decidim_admin_decidim_awesome.cookie_categories_path
+          add_breadcrumb_item store.categories[params[:slug]]["title"], decidim_admin_decidim_awesome.cookie_categories_path
           @form = form(CookieCategoryForm).from_params(store.categories[params[:slug]])
         end
 

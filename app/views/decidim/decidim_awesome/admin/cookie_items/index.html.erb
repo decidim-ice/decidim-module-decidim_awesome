@@ -1,6 +1,6 @@
 <div class="item_show__header">
   <h2 class="item_show__header-title">
-    <%= t(".title", category: params[:cookie_category_slug]) %>
+    <%= t(".title", category: translated_attribute(category["title"])) %>
     <%= link_to decidim_admin_decidim_awesome.cookie_categories_path, class: "button button__sm button__transparent-secondary" do %>
       <%= icon "arrow-left-line" %>
       <%= t(".back_to_categories") %>

@@ -13,9 +13,11 @@ module Decidim::DecidimAwesome
         {
           "slug" => category_slug,
           "title" => { "en" => "My Awesome Category" },
+          "editable" => true,
           "description" => { "en" => "Awesome description" },
           "mandatory" => false,
-          "items" => []
+          "visibility" => "visible",
+          "items" => {}
         }
       end
 
@@ -26,18 +28,20 @@ module Decidim::DecidimAwesome
         {
           "name" => item_name,
           "type" => "cookie",
+          "edited" => true,
           "service" => { "en" => "Awesome Service" },
-          "description" => { "en" => "Awesome cookie description" }
+          "description" => { "en" => "Awesome cookie description" },
+          "expiration" => { "en" => "1 year" }
         }
       end
 
       let(:cookie_management_config) do
         AwesomeConfig.find_or_create_by!(organization:, var: "cookie_management") do |config|
-          config.value = { "categories" => [category_data] }
+          config.value = { category_slug => category_data }
         end
       end
 
-      let(:previous_value) { { "categories" => [category_data] } }
+      let(:previous_value) { { category_slug => category_data } }
 
       before do
         request.env["decidim.current_organization"] = user.organization
@@ -66,8 +70,10 @@ module Decidim::DecidimAwesome
             cookie_item: {
               name: "new_cookie",
               type: "cookie",
+              edited: true,
               service: { en: "New Service" },
-              description: { en: "New cookie description" }
+              description: { en: "New cookie description" },
+              expiration: { en: "6 months" }
             }
           }
         end
@@ -83,8 +89,8 @@ module Decidim::DecidimAwesome
 
         context "when command fails" do
           before do
-            cat = cookie_management_config.value["categories"].find { |c| c["slug"] == category_slug }
-            cat["items"] = [{ "name" => "new_cookie" }]
+            cat = cookie_management_config.value[category_slug]
+            cat["items"] = { "new_cookie" => { "name" => "new_cookie" } }
             cookie_management_config.save!
           end
 
@@ -106,8 +112,9 @@ module Decidim::DecidimAwesome
         end
 
         before do
-          cat = cookie_management_config.value["categories"].find { |c| c["slug"] == category_slug }
-          cat["items"] = [item_attributes]
+          cookie_management_config.value = {
+            category_slug => category_data.merge("items" => { item_name => item_attributes })
+          }
           cookie_management_config.save!
         end
 
@@ -125,15 +132,18 @@ module Decidim::DecidimAwesome
             cookie_item: {
               name: item_name,
               type: "cookie",
+              edited: true,
               service: { en: "Updated Service" },
-              description: { en: "Updated description" }
+              description: { en: "Updated description" },
+              expiration: { en: "1 year" }
             }
           }
         end
 
         before do
-          cat = cookie_management_config.value["categories"].find { |c| c["slug"] == category_slug }
-          cat["items"] = [item_attributes]
+          cookie_management_config.value = {
+            category_slug => category_data.merge("items" => { item_name => item_attributes })
+          }
           cookie_management_config.save!
         end
 
@@ -154,8 +164,9 @@ module Decidim::DecidimAwesome
         end
 
         before do
-          cat = cookie_management_config.value["categories"].find { |c| c["slug"] == category_slug }
-          cat["items"] = [item_attributes]
+          cookie_management_config.value = {
+            category_slug => category_data.merge("items" => { item_name => item_attributes })
+          }
           cookie_management_config.save!
         end
 

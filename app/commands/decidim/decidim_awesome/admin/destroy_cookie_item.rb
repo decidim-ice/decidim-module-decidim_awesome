@@ -9,7 +9,7 @@ module Decidim
         # category_slug - The slug of the category where the item belongs.
         # item_name - The name of the item to destroy.
         # organization - The organization where the item belongs.
-        # store - An instance of CookieManagementStore to access the categories and items.
+        # config - The AwesomeConfig instance for cookie management.
         def initialize(category_slug, item_name, organization)
           @category_slug = category_slug.to_s
           @item_name = item_name.to_s

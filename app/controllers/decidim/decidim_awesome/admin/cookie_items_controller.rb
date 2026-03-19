@@ -7,7 +7,7 @@ module Decidim
         include CookieManagementHelpers
         helper ConfigConstraintsHelpers
 
-        helper_method :category_items, :item, :cookie_item_presets
+        helper_method :category_items, :item, :cookie_item_presets, :category
 
         before_action :set_cookie_items_breadcrumb
         before_action do
@@ -22,7 +22,7 @@ module Decidim
         end
 
         def edit
-          # add_breadcrumb_item :edit, decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
+          add_breadcrumb_item :edit, decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
           @form = form(CookieItemForm).from_params(item)
         end
 
@@ -112,8 +112,6 @@ module Decidim
 
         def set_cookie_items_breadcrumb
           add_breadcrumb_item :cookie_management, decidim_admin_decidim_awesome.cookie_categories_path
-          # add_breadcrumb_item category_title_for_breadcrumb(params[:cookie_category_slug]),
-          #                     decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
         end
 
         def preset_builder

@@ -12,8 +12,8 @@ module Decidim::DecidimAwesome
       let(:category_slug) { "awesome-analytics" }
       let(:form_params) do
         [
-          { name: "YSC", type: "cookie", service: { en: "YouTube" }, description: { en: "YouTube session cookie" } },
-          { name: "PREF", type: "cookie", service: { en: "YouTube" }, description: { en: "YouTube preferences" } }
+          { name: "YSC", type: "cookie", service: { en: "YouTube" }, description: { en: "YouTube session cookie" }, expiration: { en: "session" } },
+          { name: "PREF", type: "cookie", service: { en: "YouTube" }, description: { en: "YouTube preferences" }, expiration: { en: "1 year" } }
         ]
       end
       let(:forms) do
@@ -27,16 +27,15 @@ module Decidim::DecidimAwesome
       let(:cookie_management_config) do
         AwesomeConfig.find_or_create_by!(organization: organization, var: "cookie_management") do |config|
           config.value = {
-            "categories" => [
-              {
-                "slug" => "awesome-analytics",
-                "title" => { "en" => "Awesome Analytics" },
-                "description" => { "en" => "Awesome analytics cookies" },
-                "mandatory" => false,
-                "visibility" => "visible",
-                "items" => []
-              }
-            ]
+            category_slug => {
+              "slug" => category_slug,
+              "title" => { "en" => "Awesome Analytics" },
+              "editable" => true,
+              "description" => { "en" => "Awesome analytics cookies" },
+              "mandatory" => false,
+              "visibility" => "visible",
+              "items" => {}
+            }
           }
         end
       end
@@ -52,7 +51,7 @@ module Decidim::DecidimAwesome
           expect do
             subject.call
           end.to change {
-            cookie_management_config.reload.value["categories"].first["items"].count
+            cookie_management_config.reload.value[category_slug]["items"].count
           }.by(2)
         end
       end
@@ -69,7 +68,7 @@ module Decidim::DecidimAwesome
             expect do
               subject.call
             end.not_to(change do
-              cookie_management_config.reload.value["categories"].first["items"].count
+              cookie_management_config.reload.value[category_slug]["items"].count
             end)
           end
         end
@@ -77,8 +76,8 @@ module Decidim::DecidimAwesome
         context "when one form is invalid" do
           let(:form_params) do
             [
-              { name: "", type: "cookie", service: { en: "YouTube" }, description: { en: "YouTube session cookie" } },
-              { name: "PREF", type: "cookie", service: { en: "YouTube" }, description: { en: "YouTube preferences" } }
+              { name: "", type: "cookie", service: { en: "YouTube" }, description: { en: "YouTube session cookie" }, expiration: { en: "session" } },
+              { name: "PREF", type: "cookie", service: { en: "YouTube" }, description: { en: "YouTube preferences" }, expiration: { en: "1 year" } }
             ]
           end
 
@@ -88,7 +87,7 @@ module Decidim::DecidimAwesome
 
           it "does not create the invalid item" do
             subject.call
-            count = cookie_management_config.reload.value["categories"].first["items"].count
+            count = cookie_management_config.reload.value[category_slug]["items"].count
             expect(count).to eq(1)
           end
         end

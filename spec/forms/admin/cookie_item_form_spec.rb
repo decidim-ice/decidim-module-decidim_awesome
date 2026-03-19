@@ -12,8 +12,10 @@ module Decidim::DecidimAwesome
         {
           name:,
           type:,
+          edited: true,
           service:,
-          description:
+          description:,
+          expiration: "1 year"
         }
       end
 

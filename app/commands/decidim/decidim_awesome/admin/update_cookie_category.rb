@@ -7,6 +7,7 @@ module Decidim
         # Public: Initializes the command.
         #
         # form - A form object with the params.
+        # config - The AwesomeConfig instance for cookie management.
         def initialize(form)
           @form = form
           @config = AwesomeConfig.find_or_initialize_by(organization: form.current_organization, var: :cookie_management)

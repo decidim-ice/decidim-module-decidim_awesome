@@ -17,7 +17,9 @@ module Decidim
       #  }, etc... ]
 
       def categories
-        @categories ||= CookieManagementStore.new(model, awesome_categories).categories.values.map do |category|
+        @categories ||= CookieManagementStore.new(model, awesome_categories).categories.values
+                                             .reject { |category| category["visibility"] == "hidden" }
+                                             .map do |category|
           items = category["items"].is_a?(Hash) ? category["items"].values : Array(category["items"])
           category.merge(
             "title" => translated_attribute(category["title"]),
