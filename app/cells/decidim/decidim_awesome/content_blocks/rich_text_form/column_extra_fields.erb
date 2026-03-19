@@ -16,8 +16,12 @@
   <code class="code-block mt-4 text-xs">/* <%= t("css_comment_this_column", scope: i18n_scope, number: col_num) %> */
 #<%= block_id_for_css %> .awesome-rich-text__column:nth-child(<%= col_num %>) {
   padding: 2rem;
+  min-height: 400px;
   border-radius: 0.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --awesome-rich-text-bg: #f5f5f5;
+  background-position: center top;
+  background-size: cover;
 }
 
 /* <%= t("css_comment_title", scope: i18n_scope) %> */

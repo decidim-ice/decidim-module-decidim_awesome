@@ -823,7 +823,6 @@ en:
           truncate: Maximum characters for popup descriptions
         rich_text:
           add_column: Add a new column
-          background_color: Background color
           background_image: Background image
           background_image_help: Optional image displayed behind the column content.
             Recommended minimum width 1920px.
@@ -854,7 +853,6 @@ en:
             the user is logged-in
           sign_in_to_watch: Sign in to watch this video
           title: Block title
-          transparent_background: Transparent background
       credits: Decidim Awesome %{version} · Maintained with ♥ by %{company}
       custom_fields:
         errors:

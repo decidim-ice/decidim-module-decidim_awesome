@@ -53,10 +53,6 @@ describe "Admin manages Awesome Rich Text content block" do
       expect(page).to have_field("content_block_settings_title_en", with: "Our Team")
     end
 
-    it "shows the transparent background checkbox" do
-      expect(page).to have_content("Transparent background")
-    end
-
     it "shows restrict checkboxes" do
       expect(page).to have_content("Prevent embed videos")
       expect(page).to have_content("Prevent links")

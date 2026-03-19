@@ -1,33 +1,6 @@
 import createDynamicFields from "src/decidim/admin/dynamic_fields.component";
 import AutoLabelByPositionComponent from "src/decidim/admin/auto_label_by_position.component";
 
-const initColorPickerToggles = (container) => {
-  container.querySelectorAll(".awesome-rich-text-transparent-bg").forEach((checkbox) => {
-    if (checkbox.dataset.initialized) {
-      return;
-    }
-    checkbox.dataset.initialized = "true";
-
-    const checkboxWrapper = checkbox.closest(".row");
-    const picker = checkboxWrapper && checkboxWrapper.nextElementSibling;
-    if (!picker || !picker.classList.contains("awesome-rich-text-color-picker")) {
-      return;
-    }
-
-    const colorInput = picker.querySelector("input[type='color']");
-
-    const toggle = () => {
-      picker.classList.toggle("hidden", checkbox.checked);
-      if (colorInput) {
-        colorInput.disabled = checkbox.checked;
-      }
-    };
-
-    toggle();
-    checkbox.addEventListener("change", toggle);
-  });
-};
-
 document.addEventListener("turbo:load", () => {
   const wrapper = document.querySelector(".awesome-rich-text-columns-wrapper");
   if (!wrapper) {
@@ -67,8 +40,6 @@ document.addEventListener("turbo:load", () => {
       toggleAddButton();
 
       document.dispatchEvent(new CustomEvent("ajax:loaded", { detail: $field[0] }));
-
-      initColorPickerToggles(wrapper);
     },
     onRemoveField: () => {
       autoLabelByPosition.run();
@@ -98,5 +69,4 @@ document.addEventListener("turbo:load", () => {
 
   autoLabelByPosition.run();
   toggleAddButton();
-  initColorPickerToggles(wrapper);
 });
