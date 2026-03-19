@@ -16,7 +16,7 @@
   </label>
 </div>
 <div class="row column awesome-rich-text-color-picker <%= "hidden" if @column.background_color.blank? %>" id="color-picker-<%= @column_id %>">
-  <%= @col_fields.text_field :background_color, type: "color", label: t("background_color", scope: i18n_scope), value: @column.background_color.presence || "#000000", disabled: @column.background_color.blank? %>
+  <%= @col_fields.color_field :background_color, label: t("background_color", scope: i18n_scope), value: @column.background_color.presence || "#000000", disabled: @column.background_color.blank? %>
 </div>
 
 <%# Image placement %>

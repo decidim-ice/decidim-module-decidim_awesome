@@ -1,6 +1,5 @@
 import createDynamicFields from "src/decidim/admin/dynamic_fields.component";
 import AutoLabelByPositionComponent from "src/decidim/admin/auto_label_by_position.component";
-import { initializeUploadFields } from "src/decidim/direct_uploads/upload_field";
 
 const initColorPickerToggles = (container) => {
   container.querySelectorAll(".awesome-rich-text-transparent-bg").forEach((checkbox) => {
@@ -9,9 +8,9 @@ const initColorPickerToggles = (container) => {
     }
     checkbox.dataset.initialized = "true";
 
-    const targetId = checkbox.dataset.target;
-    const picker = container.querySelector(`#color-picker-${targetId}`);
-    if (!picker) {
+    const checkboxWrapper = checkbox.closest(".row");
+    const picker = checkboxWrapper && checkboxWrapper.nextElementSibling;
+    if (!picker || !picker.classList.contains("awesome-rich-text-color-picker")) {
       return;
     }
 
@@ -63,16 +62,13 @@ document.addEventListener("turbo:load", () => {
     fieldSelector: ".awesome-rich-text-column",
     addFieldButtonSelector: ".add-awesome-rich-text-column",
     removeFieldButtonSelector: ".remove-awesome-rich-text-column",
-    onAddField: () => {
+    onAddField: ($field) => {
       autoLabelByPosition.run();
       toggleAddButton();
-      initColorPickerToggles(wrapper);
 
-      const columns = wrapper.querySelectorAll(".awesome-rich-text-columns-list .awesome-rich-text-column");
-      const lastColumn = columns[columns.length - 1];
-      if (lastColumn) {
-        initializeUploadFields(lastColumn.querySelectorAll("button[data-upload]"));
-      }
+      document.dispatchEvent(new CustomEvent("ajax:loaded", { detail: $field[0] }));
+
+      initColorPickerToggles(wrapper);
     },
     onRemoveField: () => {
       autoLabelByPosition.run();
