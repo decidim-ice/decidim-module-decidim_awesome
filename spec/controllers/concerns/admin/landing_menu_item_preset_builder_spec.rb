@@ -7,12 +7,8 @@ module Decidim::DecidimAwesome
     describe LandingMenuItemsController do
       routes { Decidim::DecidimAwesome::AdminEngine.routes }
 
-      subject { controller.landing_menu_item_presets_options(block_scope: :homepage) }
-
       let(:organization) { create(:organization) }
       let(:user) { create(:user, :confirmed, :admin, organization:) }
-      let(:first_preset) { subject[0] }
-      let(:second_preset) { subject[1] }
 
       before do
         request.env["decidim.current_organization"] = organization
@@ -20,6 +16,10 @@ module Decidim::DecidimAwesome
       end
 
       describe "#landing_menu_item_presets_options" do
+        let(:options) { controller.landing_menu_item_presets_options(block_scope: :homepage) }
+        let(:first_preset) { options[0] }
+        let(:second_preset) { options[1] }
+
         it "returns empty presets when no content blocks exist" do
           expect(first_preset).to be_an(Array)
           expect(second_preset).to be_an(Array)
