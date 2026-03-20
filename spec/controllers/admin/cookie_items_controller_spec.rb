@@ -16,7 +16,7 @@ module Decidim::DecidimAwesome
           "editable" => true,
           "description" => { "en" => "Awesome description" },
           "mandatory" => false,
-          "visibility" => "visible",
+          "visibility" => "default",
           "items" => {}
         }
       end

@@ -180,11 +180,11 @@ end
 
 - **Storage:** Cookie categories and items stored in database; rendered in Decidim's data consent modal
 - **Categories:** Each category has title, description, mandatory flag, and visibility setting
-- **Visibility states:** `default` (visible to all users) or `hidden` (not shown in consent modal)
+- **Visibility states:** `default` (shown in admin as "Visible"; included in the consent modal) or `hidden` (shown in admin as "Hidden"; not displayed in the consent modal)
 - **Cookie items:** Each item has name, type (cookie/localStorage), service name, and description
 - **Default categories:** Extends Decidim's default consent categories (essential, analytics, preferences); default categories that are marked as mandatory are protected from deletion to preserve essential functionality
 - **Custom categories:** Admins can create additional categories (mandatory or optional) that are fully editable
-- **Validation:** Cookie item names must be alphanumeric with underscores/hyphens only (no spaces)
+- **Validation:** Cookie item names may contain letters, numbers, underscores (`_`), hyphens (`-`), dots (`.`), colons (`:`), and forward slashes (`/`); spaces and other special characters are not allowed
 - **Performance:** Modal rendered on first visit; consent stored in browser localStorage
 - **Compliance:** Supports GDPR/ePrivacy requirements; admin responsible for accurate cookie documentation
 
@@ -197,8 +197,8 @@ Organize cookies into logical groups with configurable visibility and mandatory 
 **Category fields:**
 - **Title:** Translatable category name shown to users
 - **Description:** Translatable explanation of category purpose
-- **Mandatory:** If checked, users can disable this category
-- **Visibility:** `default` (shown in modal) or `hidden` (not displayed to users)
+- **Mandatory:** If checked, users cannot disable this category (it is always active in the consent modal)
+- **Visibility:** "Visible" (stored as `default`) — included in the consent modal; or "Hidden" (stored as `hidden`) — not displayed to users
 
 ![Cookie categories management](../../examples/cookie_category.gif)
 

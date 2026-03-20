@@ -16,7 +16,7 @@ module Decidim
             "title" => { "en" => "Essential" },
             "description" => { "en" => "Essential cookies" },
             "mandatory" => true,
-            "visibility" => "visible",
+            "visibility" => "default",
             "items" => {
               "session_cookie" => {
                 "type" => "cookie",
@@ -32,7 +32,7 @@ module Decidim
             "title" => { "en" => "Analytics" },
             "description" => { "en" => "Analytics cookies" },
             "mandatory" => false,
-            "visibility" => "visible",
+            "visibility" => "default",
             "items" => {}
           }
         }

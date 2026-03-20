@@ -16,7 +16,7 @@ module Decidim::DecidimAwesome
           "edited" => true,
           "description" => { "en" => "Awesome description" },
           "mandatory" => false,
-          "visibility" => "visible",
+          "visibility" => "default",
           "items" => {}
         }
       end
@@ -57,7 +57,7 @@ module Decidim::DecidimAwesome
               title: { en: "New Awesome Category" },
               description: { en: "New Awesome description" },
               mandatory: false,
-              visibility: "visible"
+              visibility: "default"
             }
           }
         end
@@ -79,7 +79,7 @@ module Decidim::DecidimAwesome
                 title: { en: "" },
                 description: { en: "Description without title" },
                 mandatory: false,
-                visibility: "visible"
+                visibility: "default"
               }
             }
           end
@@ -144,7 +144,7 @@ module Decidim::DecidimAwesome
                 title: { en: "" },
                 description: { en: "Test" },
                 mandatory: false,
-                visibility: "visible"
+                visibility: "default"
               }
             }
           end

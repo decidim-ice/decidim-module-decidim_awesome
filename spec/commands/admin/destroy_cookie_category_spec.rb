@@ -18,7 +18,7 @@ module Decidim::DecidimAwesome
               "edited" => true,
               "description" => { "en" => "Awesome analytics cookies" },
               "mandatory" => false,
-              "visibility" => "visible",
+              "visibility" => "default",
               "items" => {}
             },
             "marketing" => {
@@ -27,7 +27,7 @@ module Decidim::DecidimAwesome
               "edited" => true,
               "description" => { "en" => "Marketing cookies" },
               "mandatory" => false,
-              "visibility" => "visible",
+              "visibility" => "default",
               "items" => {}
             }
           }

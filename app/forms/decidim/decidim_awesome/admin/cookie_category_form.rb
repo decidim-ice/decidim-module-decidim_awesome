@@ -5,14 +5,14 @@ module Decidim
     module Admin
       class CookieCategoryForm < Decidim::Form
         include Decidim::TranslatableAttributes
-        VISIBILITY_STATES = %w(visible hidden).freeze
+        VISIBILITY_STATES = %w(default hidden).freeze
 
         attribute :slug, String
         attribute :blocked, Boolean, default: false
         attribute :mandatory, Boolean
         translatable_attribute :title, String
         translatable_attribute :description, String
-        attribute :visibility, String, default: "visible"
+        attribute :visibility, String, default: "default"
 
         validates :slug, presence: true
         validates :slug, format: { with: /\A[a-z0-9-]+\z/ }
@@ -25,7 +25,7 @@ module Decidim
 
         def non_editable_fields_unchanged
           errors.add(:mandatory, :readonly) unless mandatory
-          errors.add(:visibility, :readonly) unless visibility == "visible"
+          errors.add(:visibility, :readonly) unless visibility == "default"
         end
 
         def validate_uniqueness
@@ -35,7 +35,7 @@ module Decidim
         end
 
         def visibility_options
-          VISIBILITY_STATES.index_by { |state| I18n.t(".cookie_categories.form.visibility.#{state}", scope: "decidim.decidim_awesome.admin") }
+          VISIBILITY_STATES.index_by { |state| I18n.t("cookie_categories.form.visibility.#{state}", scope: "decidim.decidim_awesome.admin") }
         end
 
         def to_params

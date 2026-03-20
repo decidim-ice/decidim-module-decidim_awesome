@@ -19,7 +19,7 @@ module Decidim::DecidimAwesome
               "edited" => true,
               "description" => { "en" => "Awesome analytics cookies" },
               "mandatory" => false,
-              "visibility" => "visible",
+              "visibility" => "default",
               "items" => {
                 "Decidim Awesome Analytics" => { "name" => "Decidim Awesome Analytics", "type" => "cookie" },
                 "Awesome Facebook Analytics" => { "name" => "Awesome Facebook Analytics", "type" => "cookie" }

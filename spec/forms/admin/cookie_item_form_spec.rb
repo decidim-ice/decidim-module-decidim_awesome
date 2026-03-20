@@ -15,7 +15,7 @@ module Decidim::DecidimAwesome
           edited: true,
           service:,
           description:,
-          expiration: "1 year"
+          expiration: { "en" => "1 year" }
         }
       end
 

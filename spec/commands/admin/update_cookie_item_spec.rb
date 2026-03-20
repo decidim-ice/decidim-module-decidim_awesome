@@ -33,12 +33,12 @@ module Decidim::DecidimAwesome
               {
                 "slug" => "awesome-analytics",
                 "title" => { "en" => "Analytics" },
-                "visibility" => "visible",
+                "visibility" => "default",
                 "mandatory" => false,
                 "editable" => true,
-                "items" => [
-                  { "name" => "decidim_analytics", "type" => "cookie", "service" => { "en" => "Decidim" }, "expiration" => { "en" => "1 year" }, "description" => { "en" => "Tracking for analytics" } }
-                ]
+                "items" => {
+                  "decidim_analytics" => { "name" => "decidim_analytics", "type" => "cookie", "service" => { "en" => "Decidim" }, "expiration" => { "en" => "1 year" }, "description" => { "en" => "Tracking for analytics" } }
+                }
               }
             ]
           }

@@ -33,7 +33,7 @@ module Decidim::DecidimAwesome
               "editable" => true,
               "description" => { "en" => "Awesome analytics cookies" },
               "mandatory" => false,
-              "visibility" => "visible",
+              "visibility" => "default",
               "items" => {}
             }
           }

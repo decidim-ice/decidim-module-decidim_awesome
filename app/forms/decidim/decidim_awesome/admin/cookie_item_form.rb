@@ -28,7 +28,9 @@ module Decidim
         validate :validate_uniqueness, if: -> { category_items.present? }
 
         def non_editable_fields_unchanged
-          errors.add(:type, :readonly) unless type == "cookie"
+          return if context[:item].nil?
+
+          errors.add(:type, :readonly) unless type == (context[:item]["type"].presence || "cookie")
           errors.add(:name, :readonly) unless name == context[:item]["name"]
           errors.add(:expiration, :readonly) unless expiration == context[:item]["expiration"]
         end
