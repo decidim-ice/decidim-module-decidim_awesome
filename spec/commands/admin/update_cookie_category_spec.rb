@@ -17,7 +17,7 @@ module Decidim::DecidimAwesome
           editable: true,
           description: { en: "Updated description" },
           mandatory: true,
-          visibility: "visible"
+          visibility: "default"
         }
       end
       let(:form) do
@@ -34,7 +34,6 @@ module Decidim::DecidimAwesome
               "title" => { "en" => "Awesome Analytics" },
               "description" => { "en" => "Old description" },
               "mandatory" => false,
-              "editable" => true,
               "visibility" => "default",
               "items" => [{ "name" => "decidim_analytics_updated", "type" => "cookie", "service" => { "en" => "Updated Decidim" }, "expiration" => { "en" => "2 years" }, "description" => { "en" => "Updated tracking" } }]
             }

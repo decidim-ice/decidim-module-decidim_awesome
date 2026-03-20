@@ -35,7 +35,6 @@ module Decidim::DecidimAwesome
                 "title" => { "en" => "Analytics" },
                 "visibility" => "default",
                 "mandatory" => false,
-                "editable" => true,
                 "items" => {
                   "decidim_analytics" => { "name" => "decidim_analytics", "type" => "cookie", "service" => { "en" => "Decidim" }, "expiration" => { "en" => "1 year" }, "description" => { "en" => "Tracking for analytics" } }
                 }

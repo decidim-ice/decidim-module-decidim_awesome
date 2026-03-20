@@ -116,7 +116,7 @@ module Decidim::DecidimAwesome
               title: { en: "Updated Awesome Category" },
               description: { en: "Updated awesome description" },
               mandatory: true,
-              visibility: "visible"
+              visibility: "default"
             }
           }
         end
@@ -132,6 +132,25 @@ module Decidim::DecidimAwesome
             expect(flash[:notice]).not_to be_empty
             expect(response).to have_http_status(:redirect)
             expect(response).to redirect_to(cookie_categories_path)
+          end
+        end
+
+        context "when the category is blocked" do
+          before do
+            blocked_category = category_attributes.merge("blocked" => true, "mandatory" => true, "visibility" => "default")
+            cookie_management_config.value = { category_slug => blocked_category }
+            cookie_management_config.save!
+          end
+
+          context "when attempting to change a protected field (mandatory)" do
+            let(:params_with_mandatory_false) do
+              params.deep_merge(cookie_category: { mandatory: false })
+            end
+
+            it "renders edit with an error when blocked flag is submitted" do
+              patch :update, params: params_with_mandatory_false.deep_merge(cookie_category: { blocked: true })
+              expect(response).to render_template(:edit)
+            end
           end
         end
 

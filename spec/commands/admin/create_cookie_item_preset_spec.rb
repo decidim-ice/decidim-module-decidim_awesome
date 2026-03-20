@@ -30,7 +30,6 @@ module Decidim::DecidimAwesome
             category_slug => {
               "slug" => category_slug,
               "title" => { "en" => "Awesome Analytics" },
-              "editable" => true,
               "description" => { "en" => "Awesome analytics cookies" },
               "mandatory" => false,
               "visibility" => "default",

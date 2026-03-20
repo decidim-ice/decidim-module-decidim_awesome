@@ -95,9 +95,8 @@ en:
             name:
               cannot_change_default_item_name: The name of a predefined item cannot
                 be changed
-              invalid_format: Name can only contain alphanumeric characters, underscores
-                (_), hyphens (-), dots (.), colons (:) and forward slashes (/) - no
-                spaces allowed
+              invalid_format: Name can only contain letters, numbers, underscores
+                (_) and hyphens (-) - no spaces or special characters allowed
   decidim:
     admin:
       actions:

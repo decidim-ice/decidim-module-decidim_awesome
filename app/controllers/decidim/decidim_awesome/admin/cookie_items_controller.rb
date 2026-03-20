@@ -66,7 +66,7 @@ module Decidim
         end
 
         def update
-          @form = form(CookieItemForm).from_params(params, item:, category_items:)
+          @form = form(CookieItemForm).from_params(params, category_items:, current_name: params[:name])
 
           UpdateCookieItem.call(@form, params[:cookie_category_slug]) do
             on(:ok) do

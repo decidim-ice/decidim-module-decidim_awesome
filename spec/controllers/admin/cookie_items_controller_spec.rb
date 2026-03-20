@@ -13,7 +13,6 @@ module Decidim::DecidimAwesome
         {
           "slug" => category_slug,
           "title" => { "en" => "My Awesome Category" },
-          "editable" => true,
           "description" => { "en" => "Awesome description" },
           "mandatory" => false,
           "visibility" => "default",
@@ -152,6 +151,28 @@ module Decidim::DecidimAwesome
           expect(flash[:notice]).not_to be_empty
           expect(response).to have_http_status(:redirect)
           expect(response).to redirect_to(cookie_category_cookie_items_path(category_slug))
+        end
+
+        context "when the item is blocked" do
+          before do
+            blocked_item = item_attributes.merge("blocked" => true)
+            cookie_management_config.value = {
+              category_slug => category_data.merge("items" => { item_name => blocked_item })
+            }
+            cookie_management_config.save!
+          end
+
+          context "when attempting to change a protected field (type)" do
+            let(:params_with_mandatory_false) do
+              params.deep_merge(cookie_item: { type: "local_storage" })
+            end
+
+            it "renders edit with an error when blocked flag is submitted" do
+              patch :update, params: params_with_mandatory_false.deep_merge(cookie_item: { blocked: true })
+              expect(flash[:alert]).not_to be_empty
+              expect(response).to render_template(:edit)
+            end
+          end
         end
       end
 

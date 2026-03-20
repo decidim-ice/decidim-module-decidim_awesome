@@ -16,7 +16,7 @@ module Decidim
 
         validates :name, presence: true
         validates :name, format: {
-          with: %r{\A[a-zA-Z0-9_.:\-/]+\z},
+          with: /\A[a-zA-Z0-9_\-]+\z/,
           message: :invalid_format
         }
         validates :type, inclusion: { in: ITEM_TYPES }
@@ -24,19 +24,20 @@ module Decidim
         validates :description, translatable_presence: true
         validates :expiration, translatable_presence: true
 
-        validate :non_editable_fields_unchanged, if: :blocked?
+        validate :non_editable_fields_unchanged, if: :stored_item_blocked?
         validate :validate_uniqueness, if: -> { category_items.present? }
 
         def non_editable_fields_unchanged
-          return if context[:item].nil?
+          return if category_items[name].nil?
 
-          errors.add(:type, :readonly) unless type == (context[:item]["type"].presence || "cookie")
-          errors.add(:name, :readonly) unless name == context[:item]["name"]
-          errors.add(:expiration, :readonly) unless expiration == context[:item]["expiration"]
+          errors.add(:type, :readonly) unless type == (category_items[name]["type"].presence || "cookie")
+          errors.add(:name, :readonly) unless name == category_items[name]["name"]
+          errors.add(:expiration, :readonly) unless expiration == category_items[name]["expiration"]
         end
 
         def validate_uniqueness
           return if category_items[name].nil?
+          return if name == context[:current_name]
 
           errors.add(:name, :taken)
         end
@@ -60,6 +61,10 @@ module Decidim
 
         def category_items
           context[:category_items] || {}
+        end
+
+        def stored_item_blocked?
+          category_items[name]&.fetch("blocked", false)
         end
       end
     end
