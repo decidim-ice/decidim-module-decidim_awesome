@@ -265,6 +265,12 @@ module Decidim
       []
     end
 
+    # Configurable rich text content block for landing pages.
+    # Supports multi-column layouts, backgrounds, and access restrictions.
+    config_accessor :rich_text_block do
+      true
+    end
+
     # Configurable anchor-based menu navigator for landing pages.
     # Supports sticky positioning and configurable alignment.
     config_accessor :landing_menu_block do
@@ -366,6 +372,11 @@ module Decidim
         "Decidim::ParticipatoryProcessUserRole",
         "Decidim::ConferenceUserRole"
       ]
+    end
+
+    # Maximum number of columns allowed per RichText content block
+    config_accessor :max_rich_text_columns do
+      5
     end
 
     # Which components will be tampered to add the voting registry override

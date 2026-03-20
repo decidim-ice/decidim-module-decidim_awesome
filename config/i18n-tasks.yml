@@ -17,6 +17,7 @@ ignore_unused:
   - "decidim.admin.filters.admin_accountability.*"
   - "decidim.admin.filters.search_placeholder.*"
   - "activemodel.attributes.constraint.*"
+  - "activemodel.attributes.content_block_attachment.*"
   - "activemodel.attributes.custom_redirect.*"
   - "activemodel.attributes.user.*"
   -  activemodel.attributes.organization.awesome_admins_available_authorizations
