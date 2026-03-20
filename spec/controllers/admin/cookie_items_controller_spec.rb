@@ -15,7 +15,7 @@ module Decidim::DecidimAwesome
           "title" => { "en" => "My Awesome Category" },
           "description" => { "en" => "Awesome description" },
           "mandatory" => false,
-          "visibility" => "default",
+          "visibility" => "visible",
           "items" => {}
         }
       end

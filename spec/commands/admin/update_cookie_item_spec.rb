@@ -33,7 +33,7 @@ module Decidim::DecidimAwesome
               {
                 "slug" => "awesome-analytics",
                 "title" => { "en" => "Analytics" },
-                "visibility" => "default",
+                "visibility" => "visible",
                 "mandatory" => false,
                 "items" => {
                   "decidim_analytics" => { "name" => "decidim_analytics", "type" => "cookie", "service" => { "en" => "Decidim" }, "expiration" => { "en" => "1 year" }, "description" => { "en" => "Tracking for analytics" } }

@@ -27,7 +27,7 @@ module Decidim
               "slug" => slug,
               "blocked" => category[:mandatory],
               "mandatory" => category[:mandatory] || false,
-              "visibility" => "default",
+              "visibility" => "visible",
               "title" => localized_translation("layouts.decidim.data_consent.modal.#{slug}.title"),
               "description" => localized_translation("layouts.decidim.data_consent.modal.#{slug}.description"),
               "items" => (category[:items] || []).to_h do |item|

@@ -180,7 +180,7 @@ end
 
 - **Storage:** Cookie categories and items stored in database; rendered in Decidim's data consent modal
 - **Categories:** Each category has title, description, mandatory flag, and visibility setting
-- **Visibility states:** `default` (shown in admin as "Visible"; included in the consent modal) or `hidden` (shown in admin as "Hidden"; not displayed in the consent modal)
+- **Visibility states:** `visible` (shown in admin as "Visible"; included in the consent modal) or `hidden` (shown in admin as "Hidden"; not displayed in the consent modal)
 - **Cookie items:** Each item has name, type (cookie/localStorage), service name, and description
 - **Default categories:** Extends Decidim's default consent categories (essential, analytics, preferences); default categories that are marked as mandatory are protected from deletion to preserve essential functionality
 - **Custom categories:** Admins can create additional categories (mandatory or optional) that are fully editable
@@ -198,7 +198,7 @@ Organize cookies into logical groups with configurable visibility and mandatory 
 - **Title:** Translatable category name shown to users
 - **Description:** Translatable explanation of category purpose
 - **Mandatory:** If checked, users cannot disable this category (it is always active in the consent modal)
-- **Visibility:** "Visible" (stored as `default`) — included in the consent modal; or "Hidden" (stored as `hidden`) — not displayed to users
+- **Visibility:** "Visible" (stored as `visible`) — included in the consent modal; or "Hidden" (stored as `hidden`) — not displayed to users
 
 ![Cookie categories management](../../examples/cookie_category.gif)
 

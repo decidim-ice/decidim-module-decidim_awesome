@@ -16,7 +16,7 @@ module Decidim::DecidimAwesome
           "edited" => true,
           "description" => { "en" => "Awesome description" },
           "mandatory" => false,
-          "visibility" => "default",
+          "visibility" => "visible",
           "items" => {}
         }
       end
@@ -57,7 +57,7 @@ module Decidim::DecidimAwesome
               title: { en: "New Awesome Category" },
               description: { en: "New Awesome description" },
               mandatory: false,
-              visibility: "default"
+              visibility: "visible"
             }
           }
         end
@@ -79,7 +79,7 @@ module Decidim::DecidimAwesome
                 title: { en: "" },
                 description: { en: "Description without title" },
                 mandatory: false,
-                visibility: "default"
+                visibility: "visible"
               }
             }
           end
@@ -116,7 +116,7 @@ module Decidim::DecidimAwesome
               title: { en: "Updated Awesome Category" },
               description: { en: "Updated awesome description" },
               mandatory: true,
-              visibility: "default"
+              visibility: "visible"
             }
           }
         end
@@ -137,7 +137,7 @@ module Decidim::DecidimAwesome
 
         context "when the category is blocked" do
           before do
-            blocked_category = category_attributes.merge("blocked" => true, "mandatory" => true, "visibility" => "default")
+            blocked_category = category_attributes.merge("blocked" => true, "mandatory" => true, "visibility" => "visible")
             cookie_management_config.value = { category_slug => blocked_category }
             cookie_management_config.save!
           end
@@ -163,7 +163,7 @@ module Decidim::DecidimAwesome
                 title: { en: "" },
                 description: { en: "Test" },
                 mandatory: false,
-                visibility: "default"
+                visibility: "visible"
               }
             }
           end

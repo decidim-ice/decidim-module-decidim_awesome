@@ -17,7 +17,7 @@ module Decidim::DecidimAwesome
           editable: true,
           description: { en: "Updated description" },
           mandatory: true,
-          visibility: "default"
+          visibility: "visible"
         }
       end
       let(:form) do
@@ -34,7 +34,7 @@ module Decidim::DecidimAwesome
               "title" => { "en" => "Awesome Analytics" },
               "description" => { "en" => "Old description" },
               "mandatory" => false,
-              "visibility" => "default",
+              "visibility" => "visible",
               "items" => [{ "name" => "decidim_analytics_updated", "type" => "cookie", "service" => { "en" => "Updated Decidim" }, "expiration" => { "en" => "2 years" }, "description" => { "en" => "Updated tracking" } }]
             }
           }
@@ -54,7 +54,7 @@ module Decidim::DecidimAwesome
           expect(category["slug"]).to eq(category_slug)
           expect(category["title"]["en"]).to eq("Updated Analytics")
           expect(category["mandatory"]).to be(true)
-          expect(category["visibility"]).to eq("default")
+          expect(category["visibility"]).to eq("visible")
         end
 
         it "preserves existing items" do
@@ -66,7 +66,7 @@ module Decidim::DecidimAwesome
       end
 
       describe "when invalid" do
-        let(:form_params) { { slug: category_slug, title: { en: "" }, description: { en: "" }, visibility: "default" } }
+        let(:form_params) { { slug: category_slug, title: { en: "" }, description: { en: "" }, visibility: "visible" } }
 
         it "broadcasts :invalid" do
           expect { subject.call }.to broadcast(:invalid)
