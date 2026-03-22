@@ -46,6 +46,12 @@ ja:
         component_manifest: このタイプのコンポーネントのみ有効
         participatory_space_manifest: 以下のタイプの参加型スペースに適用
         participatory_space_slug: あるいは、以下の参加スペースに適用
+      content_block_attachment:
+        background_image_0: 背景画像
+        background_image_1: 背景画像
+        background_image_2: 背景画像
+        background_image_3: 背景画像
+        background_image_4: 背景画像
       custom_redirect:
         active: 有効
         destination: リダイレクト先
@@ -656,6 +662,17 @@ ja:
           drag: ドラッグして並び替え
           edit_item: 項目を編集
           empty_item: 新しい空の項目
+          name: 素晴らしいグローバルメニュー
+          new_item: 新しい項目を追加
+          presets: プリセット
+          show_on_mobile: モバイル画面で表示
+          sticky: Sticky (常にスクロールで表示)
+          table:
+            actions: アクション
+            hidden: 非表示
+            name: 名前
+            url: URL
+            visible: 表示
           title: '移動先:'
         map:
           collapse: メニューは折りたたまれた状態で開始
@@ -678,6 +695,32 @@ ja:
           text_settings: テキストの設定
           title: タイトル
           truncate: ポップアップの説明のための最大文字数
+        rich_text:
+          add_column: カラムの追加
+          background_image: 背景画像
+          background_image_help: カラムの内容の背後に表示されるオプションの画像。最小幅1920pxを推奨します。
+          background_image_placement: 画像の配置
+          background_image_placement_help: カラム内で背景画像がどのように表示されるかを指定します。背景画像がアップロードされている場合にのみ適用されます。
+          background_image_placements:
+            contain_center: 包含（中央）
+            cover_bottom: カバー (下揃え)
+            cover_center: カバー（中央）
+            cover_top: カバー (上揃え)
+            repeat: 繰り返し（タイル表示）
+          block_id: 内部ラベル
+          block_id_help: この値は URL のセクションアンカーとして使用されます。ページごとに一意である必要があります（例："our-team"）。
+          block_id_placeholder: 内部参照名（非公開）
+          column_title: カラム
+          css_comment_this_column: '%{number} カラムのスタイル'
+          css_comment_title: ブロックタイトルのスタイル
+          css_help_html: '%{link}を作成すると、このブロックをさらにカスタマイズできます。以下のコードでブロック内の各要素を参照できます：'
+          css_help_link: カスタムスタイル
+          name: Awesomeリッチテキストブロック
+          remove_column: 削除
+          restrict_links: ユーザーがログインしていない限り、テキスト内のリンクを表示しないようにする
+          restrict_videos: ユーザーがログインしていない限り、テキスト内の埋め込み動画を表示しないようにする
+          sign_in_to_watch: ログインしてこの動画を見る
+          title: ブロックタイトル
       credits: Decidim Awesome %{version} · Maintained with ♥ by %{company}
       custom_fields:
         errors:
