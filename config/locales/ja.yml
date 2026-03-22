@@ -454,6 +454,19 @@ ja:
             ip_address: IPアドレス
             no_data: IPアドレスが見つかりません
             stamps: Hashcashスタンプ
+        landing_menu_items:
+          form:
+            preset: 自動入力プリセット
+            preset_content_blocks: 既存のコンテンツブロック
+            preset_global_menu: Decidimのいつものメンバー
+            select_a_preset: "— 一般的なメニュー項目を選択 —"
+            url_help_html: "<b>#section-id</b> — このページ内のセクションにスクロールします<br><b>/path</b> — 内部ページへのリンク（例：/processes）<br><b>https://example.com</b> — 外部リンク（自動的に新規タブで開きます）"
+          new:
+            save: 保存
+            title: 新規メニュー項目
+          show:
+            save: 保存
+            title: メニュー項目を編集
         menu:
           admins: スコープ付き管理者
           custom_redirects: カスタムリダイレクト
@@ -628,6 +641,22 @@ ja:
             automatic: 自動
             manual: 手動
           title: ブロックタイトル
+        landing_menu:
+          alignment: メニュー位置
+          alignment_center: 中央
+          alignment_help: ページの左、中央、または右にメニューアイテムを配置
+          alignment_left: 左
+          alignment_right: 右
+          css_comment_hover: マウスオーバー時のメニューリンクのスタイル
+          css_comment_link: 個別メニューリンクのスタイル
+          css_comment_menu: メニューブロック全体のスタイル
+          css_help_html: '%{link}を作成すると、このメニューをさらにカスタマイズできます。以下のコードでメニュー内の各要素を参照できます：'
+          css_help_link: カスタムスタイル
+          delete_confirm: この項目を削除してもよろしいですか？
+          drag: ドラッグして並び替え
+          edit_item: 項目を編集
+          empty_item: 新しい空の項目
+          title: '移動先:'
         map:
           collapse: メニューは折りたたまれた状態で開始
           map_center: マップの中央 (緯度、経度)
