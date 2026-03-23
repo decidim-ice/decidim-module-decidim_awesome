@@ -8,7 +8,7 @@ module Decidim::DecidimAwesome
       subject { described_class.new(forms, category_slug) }
 
       let(:organization) { create(:organization) }
-      let(:user) { create(:user, :admin, :confirmed, organization: organization) }
+      let(:user) { create(:user, :admin, :confirmed, organization:) }
       let(:category_slug) { "awesome-analytics" }
       let(:form_params) do
         [
@@ -24,22 +24,19 @@ module Decidim::DecidimAwesome
           )
         end
       end
-      let(:cookie_management_config) do
-        AwesomeConfig.find_or_create_by!(organization: organization, var: "cookie_management") do |config|
-          config.value = {
-            category_slug => {
-              "slug" => category_slug,
-              "title" => { "en" => "Awesome Analytics" },
-              "description" => { "en" => "Awesome analytics cookies" },
-              "mandatory" => false,
-              "visibility" => "visible",
-              "items" => {}
-            }
+      let!(:cookie_management_config) { create(:awesome_config, organization:, var: :cookie_management, value: existing_categories) }
+      let(:existing_categories) do
+        {
+          category_slug => {
+            "slug" => category_slug,
+            "title" => { "en" => "Awesome Analytics" },
+            "description" => { "en" => "Awesome analytics cookies" },
+            "mandatory" => false,
+            "visibility" => "visible",
+            "items" => {}
           }
-        end
+        }
       end
-
-      before { cookie_management_config }
 
       describe "when valid" do
         it "broadcasts :ok" do
