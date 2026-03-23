@@ -20,8 +20,8 @@ module Decidim
           resources :hacks, except: [:show], controller: "menu_hacks"
         end
         resources :custom_redirects, except: [:show]
-        resources :cookie_categories, except: [:show], param: :slug do
-          resources :cookie_items, except: [:show], param: :name do
+        resources :cookie_categories, except: [:show] do
+          resources :cookie_items, except: [:show] do
             post :create_preset, on: :collection
           end
         end

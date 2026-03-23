@@ -9,6 +9,7 @@ module Decidim::DecidimAwesome
 
       let(:user) { create(:user, :confirmed, :admin, organization:) }
       let(:organization) { create(:organization) }
+      let!(:cookie_management_config) { create(:awesome_config, organization:, var: :cookie_management, value: existing_categories) }
       let(:category_data) do
         {
           "slug" => category_slug,
@@ -19,10 +20,12 @@ module Decidim::DecidimAwesome
           "items" => {}
         }
       end
+      let(:existing_categories) do
+        { category_slug => category_data }
+      end
 
       let(:category_slug) { "test-category" }
       let(:item_name) { "test_cookie" }
-
       let(:item_attributes) do
         {
           "name" => item_name,
@@ -34,30 +37,21 @@ module Decidim::DecidimAwesome
         }
       end
 
-      let(:cookie_management_config) do
-        AwesomeConfig.find_or_create_by!(organization:, var: "cookie_management") do |config|
-          config.value = { category_slug => category_data }
-        end
-      end
-
-      let(:previous_value) { { category_slug => category_data } }
-
       before do
         request.env["decidim.current_organization"] = user.organization
         sign_in user, scope: :user
-        cookie_management_config
       end
 
       describe "GET #index" do
         it "returns http success" do
-          get :index, params: { cookie_category_slug: category_slug }
+          get :index, params: { cookie_category_id: category_slug }
           expect(response).to have_http_status(:success)
         end
       end
 
       describe "GET #new" do
         it "returns http success" do
-          get :new, params: { cookie_category_slug: category_slug }
+          get :new, params: { cookie_category_id: category_slug }
           expect(response).to have_http_status(:success)
         end
       end
@@ -65,7 +59,7 @@ module Decidim::DecidimAwesome
       describe "POST #create" do
         let(:params) do
           {
-            cookie_category_slug: category_slug,
+            cookie_category_id: category_slug,
             cookie_item: {
               name: "new_cookie",
               type: "cookie",
@@ -105,16 +99,19 @@ module Decidim::DecidimAwesome
       describe "GET #edit" do
         let(:params) do
           {
-            cookie_category_slug: category_slug,
-            name: item_name
+            cookie_category_id: category_slug,
+            id: item_name
           }
         end
-
-        before do
-          cookie_management_config.value = {
-            category_slug => category_data.merge("items" => { item_name => item_attributes })
+        let(:category_data) do
+          {
+            "slug" => category_slug,
+            "title" => { "en" => "My Awesome Category" },
+            "description" => { "en" => "Awesome description" },
+            "mandatory" => false,
+            "visibility" => "visible",
+            "items" => { item_name => item_attributes }
           }
-          cookie_management_config.save!
         end
 
         it "returns http success" do
@@ -126,8 +123,8 @@ module Decidim::DecidimAwesome
       describe "PATCH #update" do
         let(:params) do
           {
-            cookie_category_slug: category_slug,
-            name: item_name,
+            cookie_category_id: category_slug,
+            id: item_name,
             cookie_item: {
               name: item_name,
               type: "cookie",
@@ -138,12 +135,15 @@ module Decidim::DecidimAwesome
             }
           }
         end
-
-        before do
-          cookie_management_config.value = {
-            category_slug => category_data.merge("items" => { item_name => item_attributes })
+        let(:category_data) do
+          {
+            "slug" => category_slug,
+            "title" => { "en" => "My Awesome Category" },
+            "description" => { "en" => "Awesome description" },
+            "mandatory" => false,
+            "visibility" => "visible",
+            "items" => { item_name => item_attributes }
           }
-          cookie_management_config.save!
         end
 
         it "redirects with success message" do
@@ -154,13 +154,8 @@ module Decidim::DecidimAwesome
         end
 
         context "when the item is blocked" do
-          before do
-            blocked_item = item_attributes.merge("blocked" => true)
-            cookie_management_config.value = {
-              category_slug => category_data.merge("items" => { item_name => blocked_item })
-            }
-            cookie_management_config.save!
-          end
+          let(:category_slug) { "essential" }
+          let(:item_name) { "_session_id" }
 
           context "when attempting to change a protected field (type)" do
             let(:params_with_mandatory_false) do
@@ -168,7 +163,7 @@ module Decidim::DecidimAwesome
             end
 
             it "renders edit with an error when blocked flag is submitted" do
-              patch :update, params: params_with_mandatory_false.deep_merge(cookie_item: { blocked: true })
+              patch :update, params: params_with_mandatory_false
               expect(flash[:alert]).not_to be_empty
               expect(response).to render_template(:edit)
             end
@@ -179,16 +174,19 @@ module Decidim::DecidimAwesome
       describe "DELETE #destroy" do
         let(:params) do
           {
-            cookie_category_slug: category_slug,
-            name: item_name
+            cookie_category_id: category_slug,
+            id: item_name
           }
         end
-
-        before do
-          cookie_management_config.value = {
-            category_slug => category_data.merge("items" => { item_name => item_attributes })
+        let(:category_data) do
+          {
+            "slug" => category_slug,
+            "title" => { "en" => "My Awesome Category" },
+            "description" => { "en" => "Awesome description" },
+            "mandatory" => false,
+            "visibility" => "visible",
+            "items" => { item_name => item_attributes }
           }
-          cookie_management_config.save!
         end
 
         it "redirects with success message" do

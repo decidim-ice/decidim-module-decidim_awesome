@@ -8,7 +8,7 @@ module Decidim
       #    mandatory: true,
       #    title: "Essential cookies",
       #    description: "These cookies are necessary for the website to function and cannot be switched"
-      #    visibility: default
+      #    visibility: visible
       #    items: [
       #      { type: "cookie", name: "_session_id", service: "this page", description: "Session ID cookie", expiration: ... },
       #      { type: "cookie", name: "decidim-consent", service: "this page", description: "Consent cookie", expiration: ... },
@@ -17,21 +17,21 @@ module Decidim
       #  }, etc... ]
 
       def categories
-        @categories ||= CookieManagementStore.new(model, awesome_categories).categories.values
-                                             .reject { |category| category["visibility"] == "hidden" }
-                                             .map do |category|
-          items = category["items"].is_a?(Hash) ? category["items"].values : Array(category["items"])
-          category.merge(
-            "title" => translated_attribute(category["title"]),
-            "description" => translated_attribute(category["description"]),
-            "items" => items.map do |item|
-              item.merge(
-                "service" => translated_attribute(item["service"]),
-                "description" => translated_attribute(item["description"])
-              )
-            end
-          )
-        end
+        @categories ||= CookieManagementStore.new(model, awesome_categories).categories.values.map do |category|
+          next if category["visibility"] == "hidden"
+
+          category.tap do |cat|
+            cat["title"] = translated_attribute(category["title"])
+            cat["description"] = translated_attribute(category["description"])
+            cat["items"] = cat["items"].values.map do |item|
+              item.tap do |i|
+                i["service"] = translated_attribute(i["service"])
+                i["description"] = translated_attribute(i["description"])
+                i["expiration"] = translated_attribute(i["expiration"])
+              end
+            end.compact
+          end
+        end.compact
       end
 
       private

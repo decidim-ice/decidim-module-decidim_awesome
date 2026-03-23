@@ -25,6 +25,8 @@ module Decidim
           return broadcast(:invalid) if form.invalid?
 
           config.value ||= {}
+          # Handle slug change by deleting old key
+          config.value[form.slug] = config.value.delete(form.id) if form.id && form.slug != form.id
           config.value[form.slug] = form.to_params.merge("items" => items)
           config.save!
 

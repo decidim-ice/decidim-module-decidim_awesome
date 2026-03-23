@@ -8,7 +8,6 @@ module Decidim
         ITEM_TYPES = %w(cookie local_storage).freeze
 
         attribute :name, String
-        attribute :blocked, Boolean, default: false
         attribute :type, String
         translatable_attribute :service, String
         translatable_attribute :description, String
@@ -24,22 +23,19 @@ module Decidim
         validates :description, translatable_presence: true
         validates :expiration, translatable_presence: true
 
-        validate :non_editable_fields_unchanged, if: :stored_item_blocked?
+        validate :non_editable_fields_unchanged, if: :blocked?
         validate :validate_uniqueness, if: -> { category_items.present? }
-
-        def non_editable_fields_unchanged
-          return if category_items[name].nil?
-
-          errors.add(:type, :readonly) unless type == (category_items[name]["type"].presence || "cookie")
-          errors.add(:name, :readonly) unless name == category_items[name]["name"]
-          errors.add(:expiration, :readonly) unless expiration == category_items[name]["expiration"]
-        end
 
         def validate_uniqueness
           return if category_items[name].nil?
-          return if name == context[:current_name]
 
-          errors.add(:name, :taken)
+          errors.add(:name, :taken) if name != id
+        end
+
+        def non_editable_fields_unchanged
+          errors.add(:type, :invalid) unless type == current_item["type"]
+          errors.add(:name, :invalid) unless name == current_item["name"]
+          errors.add(:expiration, :invalid) unless expiration == current_item["expiration"]
         end
 
         def item_type_options
@@ -59,12 +55,24 @@ module Decidim
           }
         end
 
-        def category_items
-          context[:category_items] || {}
+        def category
+          context[:category] || {}
         end
 
-        def stored_item_blocked?
-          category_items[name]&.fetch("blocked", false)
+        def id
+          context[:id]
+        end
+
+        def category_items
+          category["items"] || {}
+        end
+
+        def current_item
+          category_items[id]
+        end
+
+        def blocked?
+          current_item && category["default"] && current_item["default"]
         end
       end
     end

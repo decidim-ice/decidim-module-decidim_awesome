@@ -13,7 +13,6 @@ module Decidim::DecidimAwesome
         {
           "slug" => category_slug,
           "title" => { "en" => "Awesome Category" },
-          "edited" => true,
           "description" => { "en" => "Awesome description" },
           "mandatory" => false,
           "visibility" => "visible",
@@ -22,17 +21,16 @@ module Decidim::DecidimAwesome
       end
 
       let(:category_slug) { "awesome-category" }
-
-      let(:cookie_management_config) do
-        AwesomeConfig.find_or_create_by!(organization: organization, var: "cookie_management") do |config|
-          config.value = { category_slug => category_attributes }
-        end
+      let!(:cookie_management_config) { create(:awesome_config, organization:, var: :cookie_management, value: existing_categories) }
+      let(:existing_categories) do
+        {
+          category_slug => category_attributes
+        }
       end
 
       before do
         request.env["decidim.current_organization"] = user.organization
         sign_in user, scope: :user
-        cookie_management_config
       end
 
       describe "GET #index" do
@@ -94,12 +92,7 @@ module Decidim::DecidimAwesome
       end
 
       describe "GET #edit" do
-        let(:params) { { slug: category_slug } }
-
-        before do
-          cookie_management_config.value = { category_slug => category_attributes }
-          cookie_management_config.save!
-        end
+        let(:params) { { id: category_slug } }
 
         it "returns http success" do
           get :edit, params: params
@@ -110,7 +103,7 @@ module Decidim::DecidimAwesome
       describe "PATCH #update" do
         let(:params) do
           {
-            slug: category_slug,
+            id: category_slug,
             cookie_category: {
               slug: category_slug,
               title: { en: "Updated Awesome Category" },
@@ -119,11 +112,6 @@ module Decidim::DecidimAwesome
               visibility: "visible"
             }
           }
-        end
-
-        before do
-          cookie_management_config.value = { category_slug => category_attributes }
-          cookie_management_config.save!
         end
 
         context "when command succeeds" do
@@ -136,10 +124,16 @@ module Decidim::DecidimAwesome
         end
 
         context "when the category is blocked" do
-          before do
-            blocked_category = category_attributes.merge("blocked" => true, "mandatory" => true, "visibility" => "visible")
-            cookie_management_config.value = { category_slug => blocked_category }
-            cookie_management_config.save!
+          let(:category_slug) { "essential" }
+          let(:category_attributes) do
+            {
+              "slug" => category_slug,
+              "title" => { "en" => "Awesome Category" },
+              "description" => { "en" => "Awesome description" },
+              "mandatory" => false,
+              "visibility" => "visible",
+              "items" => {}
+            }
           end
 
           context "when attempting to change a protected field (mandatory)" do
@@ -148,7 +142,7 @@ module Decidim::DecidimAwesome
             end
 
             it "renders edit with an error when blocked flag is submitted" do
-              patch :update, params: params_with_mandatory_false.deep_merge(cookie_category: { blocked: true })
+              patch :update, params: params_with_mandatory_false
               expect(response).to render_template(:edit)
             end
           end
@@ -157,7 +151,7 @@ module Decidim::DecidimAwesome
         context "when command fails" do
           let(:params) do
             {
-              slug: category_slug,
+              id: category_slug,
               cookie_category: {
                 slug: category_slug,
                 title: { en: "" },
@@ -178,12 +172,7 @@ module Decidim::DecidimAwesome
       end
 
       describe "DELETE #destroy" do
-        let(:params) { { slug: category_slug } }
-
-        before do
-          cookie_management_config.value = { category_slug => category_attributes }
-          cookie_management_config.save!
-        end
+        let(:params) { { id: category_slug } }
 
         it "redirects with success message" do
           delete :destroy, params: params

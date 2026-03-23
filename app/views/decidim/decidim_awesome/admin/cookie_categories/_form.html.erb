@@ -2,10 +2,10 @@
   <div class="card pt-4">
     <div class="card-section">
       <div class="row column">
-        <%= form.text_field :slug, readonly: @form.blocked?, help_text: t(".slug_help") %>
+        <%= form.text_field :slug, readonly: @form.slug_blocked?, help_text: t(".slug_help") %>
       </div>
       <div class="row column">
-        <%= form.check_box :mandatory %>
+        <%= form.check_box :mandatory, disabled: @form.blocked? %>
       </div>
       <div class="row column">
         <%= form.translated :text_field, :title, class: "h-12 w-full" %>

@@ -9,7 +9,7 @@ module Decidim
 
         helper_method :categories
 
-        # before_action :set_cookie_management_breadcrumb
+        before_action :set_cookie_management_breadcrumb
         before_action do
           enforce_permission_to :edit_config, :cookie_management
         end
@@ -22,8 +22,8 @@ module Decidim
         end
 
         def edit
-          add_breadcrumb_item store.categories[params[:slug]]["title"], decidim_admin_decidim_awesome.cookie_categories_path
-          @form = form(CookieCategoryForm).from_params(store.categories[params[:slug]])
+          add_breadcrumb_item current_category["title"], decidim_admin_decidim_awesome.cookie_categories_path
+          @form = form(CookieCategoryForm).from_params(current_category, id: current_category["slug"], categories:)
         end
 
         def create
@@ -44,7 +44,7 @@ module Decidim
         end
 
         def update
-          @form = form(CookieCategoryForm).from_params(params)
+          @form = form(CookieCategoryForm).from_params(params, id: current_category["slug"], categories:)
 
           UpdateCookieCategory.call(@form) do
             on(:ok) do
@@ -61,7 +61,7 @@ module Decidim
         end
 
         def destroy
-          DestroyCookieCategory.call(params[:slug], current_organization) do
+          DestroyCookieCategory.call(current_category["slug"], current_organization) do
             on(:ok) do
               flash[:notice] = I18n.t("cookie_categories.destroy.success", scope: "decidim.decidim_awesome.admin")
               redirect_to decidim_admin_decidim_awesome.cookie_categories_path
@@ -78,6 +78,10 @@ module Decidim
 
         def categories
           store.categories
+        end
+
+        def current_category
+          categories[params[:id]] || raise(ActiveRecord::RecordNotFound)
         end
 
         def set_cookie_management_breadcrumb

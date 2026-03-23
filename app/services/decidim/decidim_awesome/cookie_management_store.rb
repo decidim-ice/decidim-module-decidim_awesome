@@ -10,7 +10,7 @@ module Decidim
 
       attr_reader :organization, :config
 
-      # TODO: merge from config
+      #  merge from config
       def categories
         @categories ||= decidim_defaults.deep_merge(config)
       end
@@ -25,8 +25,9 @@ module Decidim
             slug,
             {
               "slug" => slug,
+              "default" => true,
               "blocked" => category[:mandatory],
-              "mandatory" => category[:mandatory] || false,
+              "mandatory" => category[:mandatory],
               "visibility" => "visible",
               "title" => localized_translation("layouts.decidim.data_consent.modal.#{slug}.title"),
               "description" => localized_translation("layouts.decidim.data_consent.modal.#{slug}.description"),
@@ -36,8 +37,8 @@ module Decidim
                   name,
                   {
                     "name" => name,
+                    "default" => true,
                     "type" => item[:type].to_s,
-                    "blocked" => category[:mandatory],
                     "service" => localized_translation("layouts.decidim.data_consent.details.items.#{name}.service"),
                     "description" => localized_translation("layouts.decidim.data_consent.details.items.#{name}.description"),
                     "expiration" => localized_translation("layouts.decidim.data_consent.details.items.#{name}.expiration")

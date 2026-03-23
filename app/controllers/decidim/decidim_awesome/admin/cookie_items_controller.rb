@@ -17,22 +17,22 @@ module Decidim
         def index; end
 
         def new
-          add_breadcrumb_item :new, decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
+          add_breadcrumb_item :new, decidim_admin_decidim_awesome.cookie_category_cookie_items_path
           @form = form(CookieItemForm).instance
         end
 
         def edit
-          add_breadcrumb_item :edit, decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
-          @form = form(CookieItemForm).from_params(item)
+          add_breadcrumb_item :edit, decidim_admin_decidim_awesome.cookie_category_cookie_items_path
+          @form = form(CookieItemForm).from_params(item, id: item["name"], category:)
         end
 
         def create
-          @form = form(CookieItemForm).from_params(params, category_items:)
+          @form = form(CookieItemForm).from_params(params, category:)
 
-          UpdateCookieItem.call(@form, params[:cookie_category_slug]) do
+          UpdateCookieItem.call(@form, category["slug"]) do
             on(:ok) do
               flash[:notice] = I18n.t("cookie_items.create.success", scope: "decidim.decidim_awesome.admin")
-              redirect_to decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
+              redirect_to decidim_admin_decidim_awesome.cookie_category_cookie_items_path
             end
 
             on(:invalid) do |error_message|
@@ -46,32 +46,32 @@ module Decidim
         def create_preset
           items = preset_builder.find(params[:preset_name])
           unless items
-            return redirect_to(decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug]),
+            return redirect_to(decidim_admin_decidim_awesome.cookie_category_cookie_items_path,
                                alert: I18n.t("cookie_items.create_preset.not_found", scope: "decidim.decidim_awesome.admin"))
           end
 
           @forms = preset_builder.build_forms(items)
 
-          CreateCookieItemPreset.call(@forms, params[:cookie_category_slug]) do
+          CreateCookieItemPreset.call(@forms, category["slug"]) do
             on(:ok) do
               flash[:notice] = I18n.t("cookie_items.create_preset.success", scope: "decidim.decidim_awesome.admin")
-              redirect_to decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
+              redirect_to decidim_admin_decidim_awesome.cookie_category_cookie_items_path
             end
 
             on(:invalid) do |error_message|
               flash[:alert] = I18n.t("cookie_items.create_preset.error", scope: "decidim.decidim_awesome.admin", error: error_message)
-              redirect_to decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
+              redirect_to decidim_admin_decidim_awesome.cookie_category_cookie_items_path
             end
           end
         end
 
         def update
-          @form = form(CookieItemForm).from_params(params, category_items:, current_name: params[:name])
+          @form = form(CookieItemForm).from_params(params, id: item["name"], category:)
 
-          UpdateCookieItem.call(@form, params[:cookie_category_slug]) do
+          UpdateCookieItem.call(@form, category["slug"]) do
             on(:ok) do
               flash[:notice] = I18n.t("cookie_items.update.success", scope: "decidim.decidim_awesome.admin")
-              redirect_to decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
+              redirect_to decidim_admin_decidim_awesome.cookie_category_cookie_items_path
             end
 
             on(:invalid) do |error_message|
@@ -83,15 +83,15 @@ module Decidim
         end
 
         def destroy
-          DestroyCookieItem.call(params[:cookie_category_slug], params[:name], current_organization) do
+          DestroyCookieItem.call(category["slug"], item["name"], current_organization) do
             on(:ok) do
               flash[:notice] = I18n.t("cookie_items.destroy.success", scope: "decidim.decidim_awesome.admin")
-              redirect_to decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
+              redirect_to decidim_admin_decidim_awesome.cookie_category_cookie_items_path
             end
 
             on(:invalid) do |error_message|
               flash[:alert] = I18n.t("cookie_items.destroy.error", scope: "decidim.decidim_awesome.admin", error: error_message)
-              redirect_to decidim_admin_decidim_awesome.cookie_category_cookie_items_path(params[:cookie_category_slug])
+              redirect_to decidim_admin_decidim_awesome.cookie_category_cookie_items_path
             end
           end
         end
@@ -99,7 +99,7 @@ module Decidim
         private
 
         def category
-          store.categories[params[:cookie_category_slug]] || raise(ActiveRecord::RecordNotFound)
+          store.categories[params[:cookie_category_id]] || raise(ActiveRecord::RecordNotFound)
         end
 
         def category_items
@@ -107,7 +107,7 @@ module Decidim
         end
 
         def item
-          category_items[params[:name]] || raise(ActiveRecord::RecordNotFound)
+          category_items[params[:id]] || raise(ActiveRecord::RecordNotFound)
         end
 
         def set_cookie_items_breadcrumb

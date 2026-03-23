@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim
   module DecidimAwesome
-    describe DataConsentCellOverride, type: :cell do
+    describe DataConsentCell, type: :cell do
       subject { cell("decidim/data_consent", organization, context: { current_user: user }) }
 
       let(:organization) { create(:organization) }
@@ -34,6 +34,22 @@ module Decidim
             "mandatory" => false,
             "visibility" => "visible",
             "items" => {}
+          },
+          "custom" => {
+            "slug" => "custom",
+            "title" => { "en" => "Custom" },
+            "description" => { "en" => "Custom cookies" },
+            "mandatory" => false,
+            "visibility" => "visible",
+            "items" => {}
+          },
+          "hidden_category" => {
+            "slug" => "hidden_category",
+            "title" => { "en" => "Hidden" },
+            "description" => { "en" => "Hidden category" },
+            "mandatory" => false,
+            "visibility" => "hidden",
+            "items" => {}
           }
         }
       end
@@ -45,8 +61,9 @@ module Decidim
       describe "#categories" do
         context "when cookie_management is not configured" do
           it "returns the default Decidim categories" do
-            default_slugs = Decidim.consent_categories.map { |c| c[:slug].to_s }
-            expect(subject.categories.map { |c| c["slug"] }).to match_array(default_slugs)
+            default_slugs = Decidim.consent_categories.pluck(:slug).map(&:to_s)
+
+            expect(subject.categories.pluck("slug")).to match_array(default_slugs)
           end
 
           it "returns categories with the expected keys" do
@@ -62,7 +79,7 @@ module Decidim
 
           it "returns the configured categories merged with defaults" do
             default_slugs = Decidim.consent_categories.map { |c| c[:slug].to_s }
-            expect(subject.categories.map { |c| c["slug"] }).to match_array(default_slugs)
+            expect(subject.categories.pluck("slug")).to match_array(default_slugs + %w(custom))
           end
 
           it "overrides default category attributes with custom values" do
