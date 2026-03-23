@@ -46,6 +46,12 @@ de:
         component_manifest: Nur in Komponenten vom Typ
         participatory_space_manifest: Anwenden auf partizipative Bereiche vom Typ
         participatory_space_slug: Nur in
+      content_block_attachment:
+        background_image_0: Hintergrundbild
+        background_image_1: Hintergrundbild
+        background_image_2: Hintergrundbild
+        background_image_3: Hintergrundbild
+        background_image_4: Hintergrundbild
       custom_redirect:
         active: Aktiv
         destination: Ziel
@@ -449,6 +455,19 @@ de:
             ip_address: IP-Adresse
             no_data: Keine IP-Adressen gefunden
             stamps: Hashcash-Stempel
+        landing_menu_items:
+          form:
+            preset: Voreinstellungen zum automatischen Ausfüllen
+            preset_content_blocks: Vorhandene Inhaltsblöcke
+            preset_global_menu: '"Übliche Verdächtige" bei Decidim'
+            select_a_preset: "— Gemeinsamer Menüpunkt auswählen —"
+            url_help_html: "<b>#section-id</b> — scrollt in einen Abschnitt auf dieser Seite<br><b>/path</b> — interne Seite (e.. /processes)<br><b>https://example.com</b> — externer Link (öffnet sich in einem neuen Tab automatisch)"
+          new:
+            save: Sichern
+            title: Neuer Menüpunkt
+          show:
+            save: Sichern
+            title: Menüpunkt bearbeiten
         menu:
           admins: Eingeschränkte Admins
           custom_redirects: Benutzerdefinierte Umleitungen
@@ -594,6 +613,7 @@ de:
           results_count:
             one: "%{count} Prozess gefunden"
             other: "%{count} Prozesse gefunden"
+          status_label: 'Status:'
           title: Blocktitel
           upcoming: Kommende
         awesome_processes:
@@ -622,6 +642,33 @@ de:
             automatic: Automatisch
             manual: Manuell
           title: Blocktitel
+        landing_menu:
+          alignment: Menüposition
+          alignment_center: Mittig
+          alignment_help: Menüpunkte an die linke, mittlere oder rechte Seite ausrichten
+          alignment_left: Links
+          alignment_right: Rechts
+          css_comment_hover: Stil für Menülink beim Hover
+          css_comment_link: Stil für den individuellen Menülink
+          css_comment_menu: Stil für den gesamten Menüblock
+          css_help_html: 'Sie können dieses Menü weiter anpassen, indem Sie einen %{link} dafür erstellen, verwenden Sie diesen Code, um verschiedene Elemente zu referenzieren:'
+          css_help_link: eigenen Stil
+          delete_confirm: Sind Sie sicher, dass Sie dieses Element löschen möchten?
+          drag: Ziehen, um neu anzuordnen
+          edit_item: Element bearbeiten
+          empty_item: Neues, leeres Element
+          name: Globales Menü aus Awesome
+          new_item: Neues Element hinzufügen
+          presets: Voreinstellungen
+          show_on_mobile: Auf mobilen Bildschirmen anzeigen
+          sticky: Fixiert (beim Scrollen immer sichtbar)
+          table:
+            actions: Aktionen
+            hidden: Versteckt
+            name: Name
+            url: URL
+            visible: Sichtbar
+          title: Springe zu ...
         map:
           collapse: Start mit eingeklapptem Menü
           map_center: Kartenmitte (Breitengrad, Längengrad)
@@ -643,6 +690,32 @@ de:
           text_settings: Text-Einstellungen
           title: Titel
           truncate: Maximale Zeichenanzahl für Popup-Beschreibungen
+        rich_text:
+          add_column: Neue Spalte hinzufügen
+          background_image: Hintergrundbild
+          background_image_help: Optionales Bild, das hinter dem Spalteninhalt angezeigt wird. Empfohlene Mindestbreite 1920px.
+          background_image_placement: Bildplatzierung
+          background_image_placement_help: Wie das Hintergrundbild innerhalb der Spalte angezeigt wird. Gilt nur, wenn ein Hintergrundbild hochgeladen wird.
+          background_image_placements:
+            contain_center: Enthalten (zentriert)
+            cover_bottom: Cover (unten ausgerichtet)
+            cover_center: Cover (zentriert)
+            cover_top: Cover (oben ausgerichtet)
+            repeat: Wiederholung (gekachelt)
+          block_id: Interne Bezeichnung
+          block_id_help: Dieser Wert wird als Anker der Sektion in der URL verwendet. Er muss pro Seite eindeutig sein (z.B. "unser-team").
+          block_id_placeholder: interner Referenzname (nicht öffentlich verwendet)
+          column_title: Spalte
+          css_comment_this_column: Stil für Spalte %{number}
+          css_comment_title: Stil für den Blocktitel
+          css_help_html: 'Sie können diesen Block weiter anpassen, indem Sie einen %{link} dafür erstellen, verwenden Sie diesen Code, um verschiedene Elemente zu referenzieren:'
+          css_help_link: eigenen Stil
+          name: Awesome Rich-Text-Block
+          remove_column: Entfernen
+          restrict_links: Verhindern Sie die Anzeige von Links im Text für nicht angemeldete Benutzende
+          restrict_videos: Verhindern Sie die Anzeige von Videos im Text für nicht angemeldete Benutzende
+          sign_in_to_watch: Melden Sie sich an, um dieses Video anzusehen
+          title: Blocktitel
       credits: Decidim awesome %{version} · Gepflegt mit ❤️ durch %{company}
       custom_fields:
         errors:
