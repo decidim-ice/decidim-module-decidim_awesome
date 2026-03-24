@@ -185,7 +185,7 @@ fr:
             valuator: Evaluateur
         admin_authorizations:
           authorization:
-            confirm_destroy: Êtes-vous sûr de vouloir détruire cette autorisation ? Cela pourrait affecter l'accès des utilisateurs à la plateforme.
+            confirm_destroy: Êtes-vous sûr de vouloir détruire cette autorisation
             destroy: Supprimer
             granted_at: Accordé à %{date}
             metadata: Contient des métadonnées ? %{metadata}
@@ -495,7 +495,7 @@ fr:
           private_data_last_remove: Ces données ont été détruites il y a %{time_ago}.
           private_data_last_update: Ces données ont été mises à jour il y a %{time_ago}.
           proposal_private_custom_fields: Champs privés
-          remove_private_data: "👉 Vous pouvez le supprimer"
+          remove_private_data: "\U0001F449 Vous pouvez le supprimer"
         scoped_admin_styles:
           menu:
             title: Tableau de bord admin
