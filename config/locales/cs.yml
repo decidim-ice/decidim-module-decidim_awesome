@@ -46,6 +46,26 @@ cs:
         component_manifest: Pouze v komponentách typu
         participatory_space_manifest: Použít na participační prostory typu
         participatory_space_slug: Pouze v
+      content_block_attachment:
+        background_image_0: Obrázek pozadí
+        background_image_1: Obrázek pozadí
+        background_image_2: Obrázek pozadí
+        background_image_3: Obrázek pozadí
+        background_image_4: Obrázek pozadí
+      cookie_category:
+        mandatory: Vyžadováno
+        slug: ID
+        title: Název kategorie
+        total_cookies: Celkem cookies
+        visibility: Viditelnost
+      cookie_item:
+        expiration: Vypršení platnosti
+        name: Název souboru cookie
+        service: Služba
+        type: Typ
+        types:
+          cookie: Cookie
+          local_storage: Místní úložiště
       custom_redirect:
         active: Aktivní
         destination: Cíl
@@ -62,6 +82,15 @@ cs:
         awesome_admins_available_authorizations: Povolit správcům ručně ověřit uživatele s těmito autorizacemi
       user:
         user_time_zone: Osobní časové pásmo
+    errors:
+      models:
+        cookie_item:
+          attributes:
+            base:
+              category_not_found: Kategorie nebyla nalezena
+            name:
+              cannot_change_default_item_name: Název předdefinované položky nelze změnit
+              invalid_format: Název může obsahovat pouze písmena, čísla, podtržítka (_) a pomlčky (-) - nejsou povoleny mezery ani speciální znaky
   decidim:
     admin:
       actions:
@@ -214,18 +243,22 @@ cs:
         checks:
           index:
             admin_head_tags: Úžasné tagy zahrnuté v hlavičce administrace aplikace
+            awesome_update_available: 'Je dostupná nová verze: %{latest_version}'
+            awesome_version: Decidim Awesome verze %{version}
             decidim-admin: Z modulu Admin
             decidim-assemblies: Z modulu Shromáždění
             decidim-conferences: Z Konferenční modulu
             decidim-core: Z hlavního Core modulu
             decidim-participatory_processes: Z modulu participačních procesů
             decidim-proposals: Z modulu Návrhy
+            decidim_update_available: 'Je dostupná nová verze: %{latest_version}'
             decidim_version: Decidim verze %{version}
             errors:
               CSS: Hlavička neobsahuje požadované položky <link> stylu. Chcete-li to vyřešit, můžete je ručně přidat do vlastního _head.html.erb
               JavaScript: Hlavička neobsahuje požadované <script> položky javascriptu. Pro vyřešení je můžete ručně přidat do vlastního admin/_header.html.erb
             head_tags: Úžasné tagy zahrnuté v hlavičce aplikace
             link_admins: Přihlásit se do /system panelu
+            view_release: Zobrazit poznámky k vydání
         config:
           anonymous: Nepřihlášení uživatelé
           caution: 'POZNÁMKA: Tato funkce silně mění některé výchozí chování, které by mohlo vést k neočekávaným výsledkům. Používejte ji s opatrností!'
@@ -361,6 +394,7 @@ cs:
           system: Všude kromě participačních prostor
           title:
             admins: Škálovaní administrátoři
+            cookie_management: Správa souborů cookies
             editors: Hack editoru
             livechat: Živý chat
             proposal_custom_fields: 'Vlastní pole návrhů: veřejná pole'
@@ -395,6 +429,14 @@ cs:
           update:
             error: Chyba při aktualizaci případu podmínky
             success: Případ stavu byl úspěšně aktualizován
+        cookie_categories:
+          cookie_management_warning_html: Upozorňujeme, že Decidim přinutí uživatele přijmout všechny cookies pro zobrazení iframe Aby odpovídaly GDPR, ujistěte se, že přidáte do svých řádných kategorií cookies, které budou použity v iframe.
+          create:
+            error: Chyba při vytváření kategorie cookie! %{error}
+            success: Kategorie Cookie byla úspěšně vytvořena
+          destroy:
+            error: Chyba při odstraňování kategorie cookie! %{error}
+            success: Kategorie cookie byla úspěšně odstraněna
         custom_redirects:
           create:
             error: Chyba při vytváření přesměrování! %{error}
