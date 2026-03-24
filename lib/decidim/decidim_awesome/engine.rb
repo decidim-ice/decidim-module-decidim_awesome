@@ -107,6 +107,7 @@ module Decidim
           Decidim::Proposals::ProposalLCell.include(Decidim::DecidimAwesome::ProposalLCellOverride)
           Decidim::Proposals::ProposalGCell.include(Decidim::DecidimAwesome::ProposalGCellOverride)
         end
+        Decidim::DataConsentCell.prepend(Decidim::DecidimAwesome::DataConsentCellOverride) if DecidimAwesome.enabled?(:cookie_management)
 
         # override user's admin property
         Decidim::User.include(Decidim::DecidimAwesome::UserOverride) if DecidimAwesome.enabled?(:scoped_admins)
@@ -324,6 +325,30 @@ module Decidim
         end
       end
 
+      initializer "decidim_decidim_awesome.awesome_rich_text_content_block" do
+        next unless DecidimAwesome.enabled?(:rich_text_block)
+
+        max = Decidim::DecidimAwesome.max_rich_text_columns
+
+        [:homepage, :participatory_process_group_homepage, :participatory_process_homepage, :assembly_homepage].each do |scope|
+          Decidim.content_blocks.register(scope, :awesome_rich_text) do |content_block|
+            content_block.cell = "decidim/decidim_awesome/content_blocks/rich_text"
+            content_block.settings_form_cell = "decidim/decidim_awesome/content_blocks/rich_text_form"
+            content_block.public_name_key = "decidim.decidim_awesome.content_blocks.rich_text.name"
+
+            content_block.images = max.times.map do |idx|
+              { name: :"background_image_#{idx}", uploader: "Decidim::HomepageImageUploader" }
+            end
+
+            content_block.settings do |settings|
+              settings.attribute :block_id, type: :string
+              settings.attribute :title, type: :text, translated: true
+              settings.attribute :columns, type: :array, default: []
+            end
+          end
+        end
+      end
+
       initializer "decidim_decidim_awesome.awesome_landing_menu_content_block" do
         next unless DecidimAwesome.enabled?(:landing_menu_block)
 
@@ -349,7 +374,8 @@ module Decidim
 
       # Votings may override proposals cells, let's be sure to add these paths after the proposal component initializer
       initializer "decidim_decidim_awesome.add_cells_view_paths", before: "decidim_proposals.add_cells_view_paths" do
-        Cell::ViewModel.view_paths << File.expand_path("#{Decidim::DecidimAwesome::Engine.root}/app/cells")
+        # We use unshift to ensure we can override existing view cells
+        Cell::ViewModel.view_paths.unshift File.expand_path("#{Decidim::DecidimAwesome::Engine.root}/app/cells")
         Cell::ViewModel.view_paths << File.expand_path("#{Decidim::DecidimAwesome::Engine.root}/app/views")
       end
 
@@ -365,6 +391,7 @@ module Decidim
         Decidim.icons.register(name: "file-settings-line", icon: "file-settings-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "hashtag", icon: "hashtag", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "smartphone", icon: "smartphone-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "shield-check-line", icon: "shield-check-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "eye-off-line", icon: "eye-off-line", category: "system", description: "", engine: :decidim_awesome)
       end
     end
