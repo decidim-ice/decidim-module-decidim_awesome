@@ -495,7 +495,7 @@ es:
           private_data_last_remove: Estos datos fueron destruidos hace %{time_ago}.
           private_data_last_update: Estos datos fueron actualizados hace %{time_ago}.
           proposal_private_custom_fields: Campos privados
-          remove_private_data: "👉 Es posible que quieras eliminarlo"
+          remove_private_data: "\U0001F449 Es posible que quieras eliminarlo"
         scoped_admin_styles:
           menu:
             title: Panel admin
