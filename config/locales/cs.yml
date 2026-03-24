@@ -437,6 +437,24 @@ cs:
           destroy:
             error: Chyba při odstraňování kategorie cookie! %{error}
             success: Kategorie cookie byla úspěšně odstraněna
+          edit:
+            cancel: Zrušit
+            items: Upravit položky kategorie
+            save: Uložit
+            title: Upravit kategorii cookie
+          form:
+            slug_help: Jedinečný identifikátor použitý ve skriptech k odkazu na tuto kategorii.
+            visibility:
+              hidden: Skrytý
+              visible: Viditelný
+          index:
+            cannot_remove_default: Výchozí kategorie nelze odstranit
+            confirm_reset: Opravdu chcete odstranit toto přizpůsobení?
+            description_html: |
+              Kategorie a položky cookie kontrolují pouze rozhraní souhlasu a dokumentace.<br>
+              Aby nastavení byla účinná, musí být skripty a služby třetích stran nakonfigurovány, aby se načetly až po udělení souhlasu.<br>
+              Tato konfigurace extra skriptu není nutná pro vložení videa iframu, protože Decidim již obsahuje vestavěný souhlas pro tyto vložení.<br>
+              Postupujte podle oficiálního průvodce: <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Přidání skriptů, které vyžadují souhlas s daty</a>.
         custom_redirects:
           create:
             error: Chyba při vytváření přesměrování! %{error}
