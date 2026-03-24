@@ -7,6 +7,8 @@ module Decidim
         def register_simple_entry(menu_registry, name, position, icon, options = {})
           return if menus[name].blank?
 
+          path = main_path_for(name)
+
           Decidim.menu menu_registry do |menu|
             i18n_key = options[:i18n_key].presence || "menu.#{name}"
             extra = {}.tap do |hash|
@@ -18,7 +20,6 @@ module Decidim
                 end
               end
             end
-            path = main_path_for(name)
             menu.add_item name,
                           I18n.t(i18n_key, scope: "decidim.decidim_awesome.admin"),
                           decidim_admin_decidim_awesome.send(path[0], path[1]),
@@ -38,6 +39,8 @@ module Decidim
             [:menu_hacks_path, [menus[:menu_hacks]]]
           when :custom_redirects
             [:custom_redirects_path, []]
+          when :cookie_management
+            [:cookie_categories_path, []]
           when :maintenance
             [:checks_path, []]
           else
@@ -67,8 +70,9 @@ module Decidim
           register_simple_entry(:awesome_admin_menu, :custom_redirects, 8, "external-link-line")
           register_simple_entry(:awesome_admin_menu, :livechat, 9, "chat-1-line")
           register_simple_entry(:awesome_admin_menu, :verifications, 10, "fingerprint-line")
+          register_simple_entry(:awesome_admin_menu, :cookie_management, 11, "shield-check-line")
 
-          register_simple_entry(:awesome_admin_menu, :maintenance, 11, "tools-line",
+          register_simple_entry(:awesome_admin_menu, :maintenance, 12, "tools-line",
                                 i18n_key: "menu.maintenance.maintenance",
                                 submenu: { target_menu: :maintenance_submenu },
                                 active: [[:private_data_path], [:hashcashes_path], [:checks_path]])
@@ -193,6 +197,7 @@ module Decidim
             custom_redirects: config_enabled?(:custom_redirects),
             livechat: config_enabled?(:intergram_for_admins, :intergram_for_public),
             verifications: config_enabled?(:force_authorizations),
+            cookie_management: config_enabled?(:cookie_management),
             maintenance: true
           }
         end
