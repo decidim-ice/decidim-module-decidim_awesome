@@ -455,6 +455,30 @@ cs:
               Aby nastavení byla účinná, musí být skripty a služby třetích stran nakonfigurovány, aby se načetly až po udělení souhlasu.<br>
               Tato konfigurace extra skriptu není nutná pro vložení videa iframu, protože Decidim již obsahuje vestavěný souhlas pro tyto vložení.<br>
               Postupujte podle oficiálního průvodce: <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Přidání skriptů, které vyžadují souhlas s daty</a>.
+            edit: Upravit kategorii
+            items: Položky kategorie
+            new: Nová kategorie
+            reset: Odstranit přizpůsobení
+            title: Správa souborů cookies
+          new:
+            cancel: Zrušit
+            save: Uložit
+            title: Nová kategorie cookie
+          script_config:
+            script_consent_help_html: |
+              <p>Skripty vázané na tuto kategorii respektují pouze souhlas, pokud jsou přidány uvnitř skriptu s atributem <span class="label">data-consent="%{category}"</span>.</p>
+              <p>Doporučené místo pro jejich přidání je v <span class="label">app/views/layouts/decidim/_head_extra.html.erb</span> nebo v záhlaví textových bloků (pokud je povoleno).</p>
+              <p>Příklad:</p><br><pre>%{example}</pre><br>
+              <p>Bez <span class="label">type="text/plain"</span>nastavení souhlasu uživatele nemá žádný účinek.<br>Přečtěte si více na <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Přidávání skriptů, které vyžadují datový souhlas</a>.</p>
+          update:
+            error: Chyba při aktualizaci kategorie cookie! %{error}
+            success: Kategorie cookie byla úspěšně aktualizována
+        cookie_items:
+          cookie_item_presets:
+            services:
+              cloudflare_turnstile: Cloudflare Turnstile
+              decidim_essential: Tento web
+              google_analytics: Google Analytics
         custom_redirects:
           create:
             error: Chyba při vytváření přesměrování! %{error}
