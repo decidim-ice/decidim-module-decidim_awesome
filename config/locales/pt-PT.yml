@@ -170,7 +170,7 @@ pt:
           authorization_not_destroyed: Nao foi possivel eliminar a autorizacao!
           authorization_transferred: 'Aviso: Houve um conflito de verificacao e a verificacao foi transferida para %{user}'
           conflict: Ha um conflito com uma autorizacao existente
-          conflict_help_html: "Voce deve resolver o conflito com o utilizador %{user} antes de poder autorizar o utilizador com esta autorizacao.\n<br><br>\nUm conflito de verificacao acontece quando outro utilizador tem os mesmos dados que o utilizador que voce esta tentando autorizar.\nVoce pode resolver este conflito removendo a autorizacao conflitante do outro utilizador ou usando dados diferentes para este utilizador.\n"
+          conflict_help_html: "Voce deve resolver o conflito com o utilizador %{user} antes de poder autorizar o utilizador com esta autorizacao.\n<br><br>\nUm conflito de verificacao acontece quando outro utilizador tem os mesmos dados que o utilizador que voce esta tentando autorizar.\nVoce pode resolver este conflito removendo a autorizacao conflitante do outro utilizador ou usando dados diferentes para este utilizador."
           edit:
             authorize: Autorizar %{user} com %{name}
             do_it_if_sure: Faca isso apenas se tiver certeza de que o utilizador possui esta autorizacao.
