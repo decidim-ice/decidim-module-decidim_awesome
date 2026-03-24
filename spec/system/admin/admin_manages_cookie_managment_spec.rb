@@ -64,7 +64,7 @@ describe "Admin manages cookie managment" do
         click_button "Save"
 
         expect(page).to have_content("Cookie Management")
-        within ".decidim_a66wesome-form" do
+        within ".decidim_awesome-form" do
           expect(page).to have_content("galleta-updated")
           expect(page).to have_content("Galleta Updated")
         end
