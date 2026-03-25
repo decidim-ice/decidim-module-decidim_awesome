@@ -474,11 +474,35 @@ cs:
             error: Chyba při aktualizaci kategorie cookie! %{error}
             success: Kategorie cookie byla úspěšně aktualizována
         cookie_items:
+          cookie_item_dropdown:
+            button: Běžné služby cookie
           cookie_item_presets:
+            descriptions:
+              emoji_picker_recent: Uloží vaše naposledy vybrané emoji
+              facebook_fr: Využívá společnost Meta k realizaci, měření a zlepšení relevance reklamy.
+              fbp: Identifikuje relace prohlížeče pro sledování Facebook Pixel.
+              ga_gat: Používá se ke snížení míry požadavku odeslané Google Analytics.
+              ga_gid: Používá se k rozlišení uživatelů pro analytické účely. Platí po 24 hodin.
+              ga_main: Slouží k rozlišení uživatelů přiřazením jedinečného identifikátoru.
+              ga_property: Používá se v GA4 k přetrvávání stavu relace a počitadel pro určitou vlastnost.
+              jitsi_known_domains: Uloží seznam známých domén
+              jitsi_language: Uloží vaši předvolbu jazyka
+              pref: Používá se pro funkčnost. YouTube používá tuto cookie k ukládání informací, jako je vaše preferovaná konfigurace stránek a nastavení přehrávání, jako jsou explicitní možnosti automatického přehrávání, náhodný obsah a velikost přehrávače. Přečtěte si více o tom, jak Google používá cookies
+              recaptcha_grecaptcha: Používá se pro reCAPTCHA k zajištění ochrany proti spamu a analýzy rizik.
             services:
               cloudflare_turnstile: Cloudflare Turnstile
               decidim_essential: Tento web
+              emoji_picker: Tento web
+              facebook_pixel: Meta (Facebook)
               google_analytics: Google Analytics
+              google_maps_embeds: Google mapy
+              google_tag_manager: Google Tag Manager
+              graphiql: Tento web
+              hcaptcha: hCaptcha
+              jitsi_meet: Jitsi Meet
+              linkedin_insight: LinkedIn
+              matomo: Matomo
+              openstreetmap_tiles: OpenStreetMap
         custom_redirects:
           create:
             error: Chyba při vytváření přesměrování! %{error}
