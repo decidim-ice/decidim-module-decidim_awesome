@@ -478,6 +478,8 @@ cs:
             button: Běžné služby cookie
           cookie_item_presets:
             descriptions:
+              consent: Používá se pro funkčnost. Trvá 2 roky, Google ji používá k ukládání stavu uživatelů podle jejich volby cookies. Přečtěte si více o tom, jak Google používá cookies
+              decidim_consent: Uloží informace o cookies povolených uživatelem na této stránce.
               emoji_picker_recent: Uloží vaše naposledy vybrané emoji
               facebook_fr: Využívá společnost Meta k realizaci, měření a zlepšení relevance reklamy.
               fbp: Identifikuje relace prohlížeče pro sledování Facebook Pixel.
@@ -519,6 +521,9 @@ cs:
             title: Upravit položku cookie
           form:
             description_item_help: Označuje účel této cookie a informace, které ukládá
+            expiration_item_help: Doba vypršení platnosti cookie. Toto je pouze informativní, nebude mít vliv na aktuální dobu vypršení platnosti cookie.
+            service_item_help: Toto je stručný popis označující, kde se toto používá (například "Tato stránka", "Vloženo do YouTube", "Jitsi meets", atd.)
+            title_item_help: Soubory cookie najdete pomocí inspektora (sekce úložiště). Nemělo by obsahovat žádné mezery.
           index:
             back_to_categories: Zpět do kategorií
             cannot_remove_default: Výchozí položky nelze odstranit
@@ -594,6 +599,7 @@ cs:
             preset: Přednastavení automatického vyplnění
             preset_content_blocks: Existující bloky obsahu
             select_a_preset: "— Vyberte společnou položku nabídky —"
+            url_help_html: "<b>#section-id</b> — posune se do sekce na této stránce<br><b>/path</b> — vnitřní stránka (např.. /processes)<br><b>https://example.com</b> – externí odkaz (automaticky se otevře v nové kartě)"
           new:
             save: Uložit
             title: Nová položka menu
@@ -787,6 +793,7 @@ cs:
           css_comment_hover: Styl odkazu menu při přejetí myší
           css_comment_link: Styl pro jednotlivé odkazy v menu
           css_comment_menu: Styl pro celý blok menu
+          css_help_html: 'Toto menu můžete dále přizpůsobit vytvořením %{link} pro něj pomocí tohoto kódu odkazovat na různé prvky v něm:'
           css_help_link: vlastní styly
           delete_confirm: Opravdu chcete tuto položku odstranit?
           drag: Přetažením přeskupíte
@@ -828,6 +835,9 @@ cs:
         rich_text:
           add_column: Přidat nový sloupec
           background_image: Obrázek pozadí
+          background_image_help: Volitelný obrázek zobrazený za obsahem sloupce. Doporučená minimální šířka 1920px.
+          background_image_placement: Umístění obrázku
+          background_image_placement_help: Jak je obrázek pozadí zobrazen ve sloupci. Použije se pouze při nahrání obrázku na pozadí.
           title: Název bloku
       credits: Decidim Awesome %{version} · Udržováno s ♥ od %{company}
       custom_fields:
