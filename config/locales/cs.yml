@@ -507,6 +507,18 @@ cs:
               vimeo_embeds: Vimeo
               youtube_embeds: YouTube
               youtube_nocookie: YouTube (rozšířený režim pro ochranu soukromí)
+          create_preset:
+            not_found: Předvolba nebyla nalezena
+            success: Položka předvolby cookie byla úspěšně přidána
+          destroy:
+            error: Chyba při odstraňování položky cookie! %{error}
+            success: Položka cookie byla úspěšně odstraněna
+          edit:
+            cancel: Zrušit
+            save: Uložit
+            title: Upravit položku cookie
+          form:
+            description_item_help: Označuje účel této cookie a informace, které ukládá
           index:
             back_to_categories: Zpět do kategorií
             cannot_remove_default: Výchozí položky nelze odstranit
