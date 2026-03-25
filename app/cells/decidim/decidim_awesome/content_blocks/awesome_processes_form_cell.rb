@@ -24,11 +24,8 @@ module Decidim
 
         def process_group_options
           groups = Decidim::ParticipatoryProcessGroup.where(organization: current_organization)
-          opts = [[t("any_group", scope: i18n_scope), 0]]
-          groups.find_each do |group|
-            opts << [translated_attribute(group.title), group.id]
-          end
-          opts
+          [[t("any_group", scope: i18n_scope), 0]] +
+            groups.map { |group| [translated_attribute(group.title), group.id] }
         end
 
         def process_status_options
@@ -48,21 +45,48 @@ module Decidim
         end
 
         def processes_for_select
-          processes = published_processes.map do |process|
-            ["##{process.id} - #{translated_attribute(process.title)}", "process_#{process.id}"]
-          end
-
-          groups = Decidim::ParticipatoryProcessGroup.where(organization: current_organization).map do |group|
-            ["[#{t("group_label", scope: i18n_scope)}] #{translated_attribute(group.title)}", "group_#{group.id}"]
-          end
-
-          processes + groups
+          reorder_by_saved_selection(build_process_options)
         end
 
         private
 
+        def build_process_options
+          published_processes.map do |process|
+            label = translated_attribute(process.title)
+            attrs = {
+              "data-group-id" => process.decidim_participatory_process_group_id.to_i,
+              "data-status" => process_status_for(process)
+            }
+            [label, process.id.to_s, attrs]
+          end
+        end
+
+        # Puts selected items first in saved order so TomSelect initializes with correct ordering
+        def reorder_by_saved_selection(all_options)
+          saved_ids = Array(content_block&.settings&.selected_ids).compact_blank
+          return all_options if saved_ids.empty?
+
+          options_by_value = all_options.index_by { |_, val| val }
+          saved_set = saved_ids.to_set
+          selected = saved_ids.filter_map { |id| options_by_value[id] }
+          unselected = all_options.reject { |_, val| saved_set.include?(val) }
+          selected + unselected
+        end
+
+        def process_status_for(process)
+          if process.upcoming?
+            "upcoming"
+          elsif process.past?
+            "past"
+          else
+            "active"
+          end
+        end
+
         def published_processes
-          Decidim::ParticipatoryProcess.where(organization: current_organization).published
+          Decidim::ParticipatoryProcesses::OrganizationPublishedParticipatoryProcesses
+            .new(current_organization, current_user)
+            .query
         end
       end
     end

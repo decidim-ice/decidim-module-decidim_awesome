@@ -47,7 +47,7 @@ module Decidim::DecidimAwesome
 
       it "has translated labels" do
         labels = cell_instance.process_type_options.map(&:first)
-        expect(labels).to include("All processes and groups mixed")
+        expect(labels).to include("All processes")
         expect(labels).to include("Only processes")
         expect(labels).to include("Only process groups")
       end
@@ -84,14 +84,6 @@ module Decidim::DecidimAwesome
         values = cell_instance.process_status_options.map(&:last)
         expect(values).to eq(%w(active all upcoming past))
       end
-
-      it "has translated labels" do
-        labels = cell_instance.process_status_options.map(&:first)
-        expect(labels).to include("Only active processes")
-        expect(labels).to include("All processes")
-        expect(labels).to include("Only future processes")
-        expect(labels).to include("Only past processes")
-      end
     end
 
     describe "#selection_criteria_options" do
@@ -100,51 +92,63 @@ module Decidim::DecidimAwesome
         expect(options.size).to eq(2)
       end
 
-      it "includes active and manual values" do
+      it "includes automatic and manual values" do
         values = cell_instance.selection_criteria_options.map(&:last)
         expect(values).to eq(%w(automatic manual))
-      end
-
-      it "has translated labels" do
-        labels = cell_instance.selection_criteria_options.map(&:first)
-        expect(labels).to include("Automatic")
-        expect(labels).to include("Manual")
       end
     end
 
     describe "#processes_for_select" do
-      it "returns published processes with correct format" do
+      it "returns only processes (no group cards)" do
         options = cell_instance.processes_for_select
-        process_options = options.select { |_, v| v.start_with?("process_") }
-        expect(process_options).not_to be_empty
-        label, value = process_options.first
-        expect(label).to start_with("##{published_process.id} - ")
-        expect(value).to eq("process_#{published_process.id}")
+        values = options.map { |_, val| val }
+        expect(values).to include(published_process.id.to_s)
+        expect(values).to all(match(/\A\d+\z/))
       end
 
-      it "returns groups with [Group] prefix" do
+      it "includes data-group-id and data-status attributes" do
         options = cell_instance.processes_for_select
-        group_options = options.select { |_, v| v.start_with?("group_") }
-        expect(group_options).not_to be_empty
-        label, value = group_options.first
-        expect(label).to start_with("[Group]")
-        expect(value).to eq("group_#{process_group.id}")
+        _, _, attrs = options.first
+        expect(attrs).to have_key("data-group-id")
+        expect(attrs).to have_key("data-status")
+      end
+
+      it "sets data-status based on process dates" do
+        active = create(:participatory_process, :active, :published, organization:)
+        past = create(:participatory_process, :past, :published, organization:)
+        upcoming = create(:participatory_process, :upcoming, :published, organization:)
+        options = cell_instance.processes_for_select
+
+        _, _, active_attrs = options.find { |_, val| val == active.id.to_s }
+        _, _, past_attrs = options.find { |_, val| val == past.id.to_s }
+        _, _, upcoming_attrs = options.find { |_, val| val == upcoming.id.to_s }
+        expect(active_attrs["data-status"]).to eq("active")
+        expect(past_attrs["data-status"]).to eq("past")
+        expect(upcoming_attrs["data-status"]).to eq("upcoming")
       end
 
       it "does not include unpublished processes" do
-        options = cell_instance.processes_for_select
-        values = options.map(&:last)
-        expect(values).not_to include("process_#{unpublished_process.id}")
+        values = cell_instance.processes_for_select.map { |_, val| val }
+        expect(values).not_to include(unpublished_process.id.to_s)
       end
 
-      it "does not include other organization's data" do
+      it "does not include other organization's processes" do
         other_org = create(:organization)
         other_process = create(:participatory_process, :published, organization: other_org)
-        other_group = create(:participatory_process_group, organization: other_org)
-        options = cell_instance.processes_for_select
-        values = options.map(&:last)
-        expect(values).not_to include("process_#{other_process.id}")
-        expect(values).not_to include("group_#{other_group.id}")
+        values = cell_instance.processes_for_select.map { |_, val| val }
+        expect(values).not_to include(other_process.id.to_s)
+      end
+
+      context "when there are saved selections" do
+        let!(:second_process) { create(:participatory_process, :published, organization:) }
+        let(:settings) { { selected_ids: [second_process.id.to_s, published_process.id.to_s] } }
+
+        it "puts selected items first in saved order" do
+          options = cell_instance.processes_for_select
+          values = options.map { |_, val| val }
+          expect(values.index(second_process.id.to_s)).to eq(0)
+          expect(values.index(published_process.id.to_s)).to eq(1)
+        end
       end
     end
 

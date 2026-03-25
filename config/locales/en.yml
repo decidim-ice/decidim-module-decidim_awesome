@@ -748,6 +748,8 @@ en:
           any_group: Any group
           group_label: Group
           max_results: Maximum amount of elements to show
+          move_down: Move down
+          move_up: Move up
           name: Awesome Processes
           process_group: Restrict to process group
           process_status: Process status filter
@@ -757,11 +759,9 @@ en:
             past: Only past processes
             upcoming: Only future processes
           process_type: Type of processes
-          process_type_mixed_hint: In mixed mode, processes and groups are interleaved
-            up to the maximum amount. Processes are sorted by weight (ascending).
-            If one type runs out, the remaining slots are filled with the other.
+          process_type_mixed_hint: Shows all processes up to the maximum amount.
           process_types:
-            all: All processes and groups mixed
+            all: All processes
             groups: Only process groups
             processes: Only processes
           processes: Processes
