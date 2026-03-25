@@ -176,9 +176,9 @@ module Decidim
         context "when max_results is negative" do
           let(:settings_hash) { super().merge(max_results: -1) }
 
-          it "does not raise an error and returns an empty array" do
+          it "treats it as 1 and returns a single result" do
             expect { subject.results }.not_to raise_error
-            expect(subject.results).to eq([])
+            expect(subject.results.size).to eq(1)
           end
         end
 

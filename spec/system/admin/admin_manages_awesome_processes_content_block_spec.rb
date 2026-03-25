@@ -128,14 +128,14 @@ describe "Admin manages Awesome Processes content block" do
       it "shows mixed hint when process_type is 'All processes'" do
         expect(page).to have_select("content_block_settings_process_type", selected: "All processes")
         within "[data-awesome-processes-type]" do
-          expect(page).to have_content("Shows all processes sorted")
+          expect(page).to have_content("Shows all processes up to the maximum amount")
         end
       end
 
       it "hides mixed hint when switching to 'Only processes'" do
         select "Only processes", from: "content_block_settings_process_type"
         within "[data-awesome-processes-type]" do
-          expect(page).to have_no_content("Shows all processes sorted")
+          expect(page).to have_no_content("Shows all processes up to the maximum amount")
         end
       end
 
@@ -168,7 +168,8 @@ describe "Admin manages Awesome Processes content block" do
         find("[data-awesome-processes-manual] .ts-control input").click
       end
 
-      it "filters processes by group when a group is selected" do
+      it "filters processes by group when type is 'groups' and a group is selected" do
+        select "Only process groups", from: "content_block_settings_process_type"
         select "Group Alpha", from: "content_block_settings_process_group_id"
         open_tom_select
 
@@ -227,7 +228,13 @@ describe "Admin manages Awesome Processes content block" do
       it "reorders items with arrow buttons and persists order after save" do
         open_tom_select
         find(".ts-dropdown .option", text: "Process In Alpha").click
-        open_tom_select
+
+        within "[data-awesome-processes-manual] .ts-control" do
+          expect(page).to have_content("Process In Alpha")
+        end
+
+        # Type in the search to re-open dropdown and find the second process
+        find("[data-awesome-processes-manual] .ts-control input").fill_in with: "Outside"
         find(".ts-dropdown .option", text: "Process Outside").click
 
         # Move second item up
