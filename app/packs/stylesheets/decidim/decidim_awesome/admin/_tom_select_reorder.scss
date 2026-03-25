@@ -1,6 +1,5 @@
 [data-awesome-processes-manual] .ts-control {
-  flex-direction: column !important;
-  flex-wrap: nowrap !important;
+  flex-flow: column nowrap !important;
   gap: 0.25rem;
 
   > .item {
