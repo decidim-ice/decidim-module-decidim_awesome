@@ -503,6 +503,25 @@ cs:
               linkedin_insight: LinkedIn
               matomo: Matomo
               openstreetmap_tiles: OpenStreetMap
+              recaptcha: Google reCAPTCHA
+              vimeo_embeds: Vimeo
+              youtube_embeds: YouTube
+              youtube_nocookie: YouTube (rozšířený režim pro ochranu soukromí)
+          index:
+            back_to_categories: Zpět do kategorií
+            cannot_remove_default: Výchozí položky nelze odstranit
+            confirm_reset: Opravdu chcete odstranit toto přizpůsobení?
+            edit: Upravit položku
+            new: Nová položka
+            reset: Odstranit přizpůsobení
+            title: "%{category}: Položky cookie"
+          new:
+            cancel: Zrušit
+            save: Uložit
+            title: Nová položka cookie
+          update:
+            error: Chyba při aktualizaci položky cookie! %{error}
+            success: Položka cookie byla úspěšně aktualizována
         custom_redirects:
           create:
             error: Chyba při vytváření přesměrování! %{error}
@@ -558,8 +577,20 @@ cs:
             ip_address: IP adresa
             no_data: Nebyly nalezeny žádné IP adresy
             stamps: Hashcash razítka
+        landing_menu_items:
+          form:
+            preset: Přednastavení automatického vyplnění
+            preset_content_blocks: Existující bloky obsahu
+            select_a_preset: "— Vyberte společnou položku nabídky —"
+          new:
+            save: Uložit
+            title: Nová položka menu
+          show:
+            save: Uložit
+            title: Upravit položku menu
         menu:
           admins: Škálovaní administrátoři
+          cookie_management: Správa souborů cookie
           custom_redirects: Vlastní přesměrování
           editors: Hack editoru
           livechat: Live Chat
@@ -710,6 +741,7 @@ cs:
           title: Název bloku
           upcoming: Nadcházející
         awesome_processes:
+          active_spaces: Participační procesy
           any_group: Jakákoli skupina
           group_label: Skupina
           max_results: Maximální počet prvků k zobrazení
@@ -734,6 +766,32 @@ cs:
             automatic: Automaticky
             manual: Ručně
           title: Název bloku
+        landing_menu:
+          alignment: Pozice menu
+          alignment_center: Uprostřed
+          alignment_help: Zarovnejte položky nabídky vlevo, na střed nebo vpravo na stránce
+          alignment_left: Vlevo
+          alignment_right: Vpravo
+          css_comment_hover: Styl odkazu menu při přejetí myší
+          css_comment_link: Styl pro jednotlivé odkazy v menu
+          css_comment_menu: Styl pro celý blok menu
+          css_help_link: vlastní styly
+          delete_confirm: Opravdu chcete tuto položku odstranit?
+          drag: Přetažením přeskupíte
+          edit_item: Upravit položku
+          empty_item: Nová prázdná položka
+          name: Globální menu Awesome
+          new_item: Přidat novou položku
+          presets: Předvolby
+          show_on_mobile: Zobrazit na mobilních obrazovkách
+          sticky: Připnutý (při posouvání vždy viditelný)
+          table:
+            actions: Akce
+            hidden: Skrytý
+            name: Název
+            url: URL
+            visible: Viditelný
+          title: Přejít na ...
         map:
           collapse: Začít se sbaleným menu
           map_center: Střed mapy (zeměpisná šířka, zeměpisná délka)
@@ -755,6 +813,10 @@ cs:
           text_settings: Nastavení textu
           title: Nadpis
           truncate: Maximum znaků pro popisy vyskakovacích oken
+        rich_text:
+          add_column: Přidat nový sloupec
+          background_image: Obrázek pozadí
+          title: Název bloku
       credits: Decidim Awesome %{version} · Udržováno s ♥ od %{company}
       custom_fields:
         errors:
@@ -846,6 +908,17 @@ cs:
           view_proposal: Zobrazit návrh
   layouts:
     decidim:
+      data_consent:
+        details:
+          columns:
+            expiration: Vypršení platnosti
+          items:
+            _session_id:
+              expiration: relace
+            decidim-consent:
+              expiration: 1 rok
+            pwaInstallPromptSeen:
+              expiration: trvalé
       decidim_awesome:
         admin:
           maintenance:
