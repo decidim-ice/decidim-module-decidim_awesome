@@ -10,9 +10,10 @@ module Decidim::DecidimAwesome
     let(:content_block) { create(:content_block, organization:, manifest_name: :awesome_processes, scope_name: :homepage, settings:) }
     let(:settings) { {} }
 
-    let!(:active_process) { create(:participatory_process, :active, :published, organization:) }
-    let!(:past_process) { create(:participatory_process, :past, :published, organization:) }
     let!(:process_group) { create(:participatory_process_group, organization:) }
+    let!(:active_process) { create(:participatory_process, :active, :published, organization:) }
+    let!(:grouped_process) { create(:participatory_process, :active, :published, organization:, participatory_process_group: process_group) }
+    let!(:past_process) { create(:participatory_process, :past, :published, organization:) }
 
     controller Decidim::PagesController
 
@@ -23,6 +24,7 @@ module Decidim::DecidimAwesome
     it "renders active processes" do
       expect(subject).to have_css(".card__grid-home")
       expect(subject).to have_content(translated(active_process.title))
+      expect(subject).to have_content(translated(grouped_process.title))
     end
 
     it "does not show past processes with default settings" do
@@ -34,9 +36,7 @@ module Decidim::DecidimAwesome
     end
 
     context "when a custom title is set" do
-      let(:settings) do
-        { "title" => { "en" => "Featured Projects" } }
-      end
+      let(:settings) { { "title" => { "en" => "Featured Projects" } } }
 
       it "shows the custom title" do
         expect(subject).to have_css("h2", text: "Featured Projects")
@@ -46,23 +46,34 @@ module Decidim::DecidimAwesome
     context "when process_type is 'processes'" do
       let(:settings) { { process_type: "processes" } }
 
-      it "shows only processes" do
+      it "shows only processes without a group" do
         expect(subject).to have_content(translated(active_process.title))
-        expect(subject).to have_no_content(translated(process_group.title))
+        expect(subject).to have_no_content(translated(grouped_process.title))
       end
     end
 
     context "when process_type is 'groups'" do
       let(:settings) { { process_type: "groups" } }
 
-      it "shows only process groups" do
-        expect(subject).to have_content(translated(process_group.title))
+      it "shows only processes with a group" do
+        expect(subject).to have_content(translated(grouped_process.title))
         expect(subject).to have_no_content(translated(active_process.title))
+      end
+
+      context "when restricted to a specific group" do
+        let!(:other_group) { create(:participatory_process_group, organization:) }
+        let!(:other_grouped) { create(:participatory_process, :active, :published, organization:, participatory_process_group: other_group) }
+        let(:settings) { { process_type: "groups", process_group_id: process_group.id } }
+
+        it "shows only processes from that group" do
+          expect(subject).to have_content(translated(grouped_process.title))
+          expect(subject).to have_no_content(translated(other_grouped.title))
+        end
       end
     end
 
     context "when process_status is 'all'" do
-      let(:settings) { { process_type: "processes", process_status: "all" } }
+      let(:settings) { { process_status: "all" } }
 
       it "shows both active and past processes" do
         expect(subject).to have_content(translated(active_process.title))
@@ -71,7 +82,7 @@ module Decidim::DecidimAwesome
     end
 
     context "when process_status is 'past'" do
-      let(:settings) { { process_type: "processes", process_status: "past" } }
+      let(:settings) { { process_status: "past" } }
 
       it "shows only past processes" do
         expect(subject).to have_content(translated(past_process.title))
@@ -82,21 +93,26 @@ module Decidim::DecidimAwesome
     context "when max_results limits output" do
       let(:settings) { { max_results: 1 } }
 
-      let!(:another_active_process) { create(:participatory_process, :active, :published, organization:) }
-
       it "limits the number of displayed items" do
         expect(subject.all(".card__grid-home > *").count).to be <= 1
       end
     end
 
-    context "when filtering by process group" do
-      let!(:grouped_process) { create(:participatory_process, :active, :published, organization:, participatory_process_group: process_group) }
-      let!(:ungrouped_process) { create(:participatory_process, :active, :published, organization:) }
-      let(:settings) { { process_type: "processes", process_group_id: process_group.id } }
+    context "when filtering by process group (type: all)" do
+      let(:settings) { { process_group_id: process_group.id } }
+
+      it "shows grouped processes from that group and ungrouped processes" do
+        expect(subject).to have_content(translated(grouped_process.title))
+        expect(subject).to have_content(translated(active_process.title))
+      end
+    end
+
+    context "when filtering by process group (type: groups)" do
+      let(:settings) { { process_type: "groups", process_group_id: process_group.id } }
 
       it "shows only processes from the specified group" do
         expect(subject).to have_content(translated(grouped_process.title))
-        expect(subject).to have_no_content(translated(ungrouped_process.title))
+        expect(subject).to have_no_content(translated(active_process.title))
       end
     end
 
@@ -104,26 +120,13 @@ module Decidim::DecidimAwesome
       let(:settings) do
         {
           selection_criteria: "manual",
-          selected_ids: ["process_#{active_process.id}", "process_#{past_process.id}"]
+          selected_ids: [active_process.id.to_s, past_process.id.to_s]
         }
       end
 
       it "shows the manually selected processes" do
         expect(subject).to have_content(translated(active_process.title))
         expect(subject).to have_content(translated(past_process.title))
-      end
-    end
-
-    context "when manual selection includes groups" do
-      let(:settings) do
-        {
-          selection_criteria: "manual",
-          selected_ids: ["group_#{process_group.id}"]
-        }
-      end
-
-      it "shows the selected groups" do
-        expect(subject).to have_content(translated(process_group.title))
       end
     end
 
