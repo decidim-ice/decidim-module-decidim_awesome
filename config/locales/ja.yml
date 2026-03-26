@@ -635,9 +635,7 @@ ja:
             past: 過去のプロセスのみ
             upcoming: 未来のプロセスのみ
           process_type: プロセスの種別
-          process_type_mixed_hint: 混合モードでは、プロセスとグループが最大許容量まで交互に配置されます。プロセスは重み付け（昇順）でソートされます。片方のタイプが終了すると、残りのスロットはもう片方のタイプで埋められます。
           process_types:
-            all: すべてのプロセスとグループを混在
             groups: プロセスグループのみ
             processes: プロセスのみ
           processes: プロセス
