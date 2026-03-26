@@ -772,9 +772,7 @@ cs:
             past: Pouze minulé procesy
             upcoming: Pouze budoucí procesy
           process_type: Typ procesů
-          process_type_mixed_hint: Ve smíšeném režimu se procesy a skupiny prokládají až do maximální výše. Procesy jsou seřazeny podle hmotnosti (vzestupně). Pokud dojde k jednomu typu, zbývající sloty jsou vyplněny druhým.
           process_types:
-            all: Všechny procesy a skupiny kombinované
             groups: Pouze skupiny procesu
             processes: Pouze procesy
           processes: Procesy
