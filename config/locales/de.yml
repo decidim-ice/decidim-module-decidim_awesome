@@ -916,9 +916,7 @@ de:
             past: Nur vergangene Prozesse
             upcoming: Nur zukünftige Prozesse
           process_type: Art der Prozesse
-          process_type_mixed_hint: Im gemischten Modus werden Prozesse und Gruppen bis zur maximalen Anzahl verschachtelt. Prozesse werden nach Gewicht sortiert (aufsteigend). Wenn ein Typ aufgebraucht ist, werden die verbleibenden Plätze mit dem anderen gefüllt.
           process_types:
-            all: Alle Prozesse und Gruppen gemischt
             groups: Nur Prozessgruppen
             processes: Nur Prozesse
           processes: Prozesse
