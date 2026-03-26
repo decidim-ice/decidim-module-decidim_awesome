@@ -1,4 +1,3 @@
----
 pt:
   active_hashcash:
     submit_filter: Filtrar
@@ -47,6 +46,17 @@ pt:
         component_manifest: Apenas em componentes do tipo
         participatory_space_manifest: Aplicar a espacos participativos do tipo
         participatory_space_slug: Somente em
+      cookie_category:
+        mandatory: Obrigatória
+        title: Categoria
+        total_cookies: Total de cookies
+        visibility: Visibilidade
+      cookie_item:
+        name: Nome do cookie
+        service: Serviço
+        type: Tipo
+        types:
+          local_storage: Armazenamento local
       custom_redirect:
         active: Ativo
         destination: Destino
@@ -62,19 +72,6 @@ pt:
         awesome_admins_available_authorizations: Permitir que administradores verifiquem utilizadores manualmente com estas autorizacoes
       user:
         user_time_zone: Fuso horario pessoal
-      cookie_category:
-        id: ID
-        mandatory: Obrigatória
-        title: Categoria
-        total_cookies: Total de cookies
-        visibility: Visibilidade
-      cookie_item:
-        name: Nome do cookie
-        service: Serviço
-        type: Tipo
-        types:
-          cookie: Cookie
-          local_storage: Armazenamento local
     errors:
       models:
         cookie_item:
@@ -214,11 +211,7 @@ pt:
           authorization_not_destroyed: Nao foi possivel eliminar a autorizacao!
           authorization_transferred: 'Aviso: Houve um conflito de verificacao e a verificacao foi transferida para %{user}'
           conflict: Ha um conflito com uma autorizacao existente
-          conflict_help_html: |
-            Voce deve resolver o conflito com o utilizador %{user} antes de poder autorizar o utilizador com esta autorizacao.
-            <br><br>
-            Um conflito de verificacao acontece quando outro utilizador tem os mesmos dados que o utilizador que voce esta tentando autorizar.
-            Voce pode resolver este conflito removendo a autorizacao conflitante do outro utilizador ou usando dados diferentes para este utilizador.
+          conflict_help_html: "Voce deve resolver o conflito com o utilizador %{user} antes de poder autorizar o utilizador com esta autorizacao.\n<br><br>\nUm conflito de verificacao acontece quando outro utilizador tem os mesmos dados que o utilizador que voce esta tentando autorizar.\nVoce pode resolver este conflito removendo a autorizacao conflitante do outro utilizador ou usando dados diferentes para este utilizador."
           edit:
             authorize: Autorizar %{user} com %{name}
             do_it_if_sure: Faca isso apenas se tiver certeza de que o utilizador possui esta autorizacao.
@@ -262,7 +255,7 @@ pt:
             success: Grupo de autorizacoes %{key} criado com sucesso
           create_proposal_custom_field:
             error: Erro ao criar uma nova caixa de "campo personalizado"! %{error}
-            success: Caixa "campo personalizado" %{key} criada com sucesso
+            success: 'Caixa "campo personalizado" %{key} criada com sucesso'
           create_scoped_admin:
             error: Erro ao criar um novo grupo de administrador! %{error}
             success: Grupo de administrador %{key} criado com sucesso
@@ -274,7 +267,7 @@ pt:
             success: Grupo de autorizacoes %{key} removido com sucesso
           destroy_proposal_custom_field:
             error: Erro ao remover a caixa de "campo personalizado"! %{error}
-            success: Caixa "campo personalizado" %{key} removida com sucesso
+            success: 'Caixa "campo personalizado" %{key} removida com sucesso'
           destroy_scoped_admin:
             error: Erro ao remover grupo de administrador! %{error}
             success: Grupo de administrador %{key} removido com sucesso
@@ -309,7 +302,7 @@ pt:
                 Hashcash e um sistema de prova de trabalho que exige que os utilizadores resolvam um quebra-cabeca computacional (realizado automaticamente pelo navegador) antes de poderem se registar.
               hashcash_signup_bits: Este parametro define o numero de bits que o algoritmo Hashcash usara para gerar a prova de trabalho. E recomendado usar um valor entre 16 (facil) e 30 (extremamente dificil) bits. O valor padrao para formularios de registo e %{bits} bits.
               intergram_about: O Intergram usa o Telegram messenger para lidar com um widget de chat de suporte ao vivo incorporado na parte inferior da pagina.
-              intergram_config: Convide o <a href="https://web.telegram.org/#/im?p=@IntergramBot">bot @Intergram</a> para seu grupo ou inicie um chat diretamente com ele. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ informacoes</a>
+              intergram_config: 'Convide o <a href="https://web.telegram.org/#/im?p=@IntergramBot">bot @Intergram</a> para seu grupo ou inicie um chat diretamente com ele. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ informacoes</a>'
               original_editor_override: Desde a versao 0.26, e possivel (somente para administradores) enviar imagens para os editores. Portanto, as configuracoes de imagem aqui so afetam os editores publicos (administrador sempre tera as disponiveis).
               proposal_custom_fields: Crie campos personalizados de proposta que se aplicam somente em certas partes da web publica (use o editor de restricoes para isso)
               proposal_custom_fields_example: Os dados sao armazenados em um objeto XML usando atributos HTML compativeis (dl, dt, dd) substituindo o "corpo" em uma proposta normal.
@@ -382,6 +375,7 @@ pt:
           system: Em todo lugar, exceto espacos participativos
           title:
             admins: Administradores com escopo
+            cookie_management: Gestão de cookies
             editors: Hacks do editor
             livechat: Chat ao vivo
             proposal_custom_fields: 'Campos personalizados de propostas: campos publicos'
@@ -392,7 +386,6 @@ pt:
             styles: Estilos personalizados
             surveys: Pesquisas e formularios
             verifications: Verificacoes / Hacks de autorizacao
-            cookie_management: Gestão de cookies
           update:
             error: Erro ao atualizar configuracao! %{error}
             success: Configuracao atualizada com sucesso
@@ -418,12 +411,6 @@ pt:
             error: Erro ao atualizar caso de condicao
             success: Caso de condicao atualizado com sucesso
         cookie_categories:
-          script_config:
-            script_consent_help_html: |
-              <p>Os scripts associados a esta categoria só respeitam o consentimento quando são adicionados dentro de um script com o atributo <span class="label">data-consent="%{category}"</span>.</p>
-              <p>O local recomendado para os adicionar é <span class="label">app/views/layouts/decidim/_head_extra.html.erb</span> ou nos snippets de cabeçalho (se estiverem ativados).</p>
-              <p>Exemplo:</p><br><pre>%{example}</pre><br>
-              <p>Sem <code>type="text/plain"</code>, a configuração de consentimento de dados do utilizador não tem efeito.<br>Leia mais em <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Adding scripts which require data consent</a>.</p>
           create:
             error: Erro ao criar a categoria de cookies! %{error}
             success: Categoria de cookies criada com sucesso
@@ -432,17 +419,13 @@ pt:
             success: Categoria de cookies removida com sucesso
           edit:
             cancel: Cancelar
-            cannot_edit_mandatory: As categorias predefinidas obrigatórias não podem ser editadas
             save: Guardar
             title: Editar categoria de cookies
           form:
             visibility:
-              default: Visível
               hidden: Oculta
           index:
-            cannot_edit_mandatory: As categorias obrigatórias não podem ser editadas
             cannot_remove_default: As categorias predefinidas não podem ser removidas
-            confirm_destroy: Tem a certeza de que pretende remover esta categoria de cookies? Todos os itens desta categoria também serão removidos.
             confirm_reset: Tem a certeza de que pretende repor os valores predefinidos desta categoria? Todas as personalizações realizadas serão removidas.
             description_html: |
               As categorias e itens de cookies controlam apenas a interface de consentimento e a documentação.<br>
@@ -452,18 +435,89 @@ pt:
             edit: Editar categoria
             items: Itens da categoria
             new: Nova categoria
-            remove: Remover categoria
             reset: Repor valores predefinidos
             title: Gestão de cookies
           new:
             cancel: Cancelar
             save: Guardar
             title: Nova categoria de cookies
+          script_config:
+            script_consent_help_html: |
+              <p>Os scripts associados a esta categoria só respeitam o consentimento quando são adicionados dentro de um script com o atributo <span class="label">data-consent="%{category}"</span>.</p>
+              <p>O local recomendado para os adicionar é <span class="label">app/views/layouts/decidim/_head_extra.html.erb</span> ou nos snippets de cabeçalho (se estiverem ativados).</p>
+              <p>Exemplo:</p><br><pre>%{example}</pre><br>
+              <p>Sem <code>type="text/plain"</code>, a configuração de consentimento de dados do utilizador não tem efeito.<br>Leia mais em <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Adding scripts which require data consent</a>.</p>
           update:
             error: Erro ao atualizar a categoria de cookies! %{error}
             success: Categoria de cookies atualizada com sucesso
         cookie_items:
+          cookie_item_dropdown:
+            button: Serviços de cookies comuns
           cookie_item_presets:
+            descriptions:
+              consent: Utilizado para funcionalidade. Válido durante 2 anos. O Google utiliza-o para armazenar o estado de consentimento de um utilizador relativamente às suas escolhas de cookies. Mais informações em Como o Google utiliza cookies
+              decidim_consent: Armazena informação sobre os cookies permitidos pelo utilizador neste site.
+              emoji_picker_recent: Armazena os emojis selecionados mais recentemente
+              facebook_fr: Utilizado pela Meta para publicar, medir e melhorar a relevância dos anúncios.
+              fbp: Identifica sessões do navegador para rastreamento do Facebook Pixel.
+              ga_gat: Utilizado para limitar a taxa de pedidos enviados ao Google Analytics.
+              ga_gid: Utilizado para distinguir utilizadores para fins analíticos. Expira após 24 horas.
+              ga_main: Utilizado para distinguir utilizadores através da atribuição de um identificador único.
+              ga_property: Utilizado no GA4 para manter o estado da sessão e contadores para uma propriedade específica.
+              graphiql_doc_explorer_open: Guarda se o painel de documentação está aberto ao utilizar a API GraphQL
+              graphiql_editor_flex: Guarda a preferência de separadores ao utilizar a API GraphQL
+              graphiql_history_pane_open: Guarda se o painel de histórico está aberto ao utilizar a API GraphQL
+              graphiql_queries: Guarda o histórico de consultas ao utilizar a API GraphQL
+              graphiql_query: Guarda a última consulta ao utilizar a API GraphQL
+              graphiql_tab_state: Guarda a configuração dos separadores ao utilizar a API GraphQL
+              gtm_dc: Utilizado pelo Google Tag Manager para carregamento de tags e diagnósticos.
+              gtm_debug: Armazena o estado do modo de depuração do Google Tag Manager.
+              gtm_gcl_au: Utilizado pelos serviços Google para testar a eficiência publicitária.
+              hcaptcha_accessibility: Armazena preferências de acessibilidade para os desafios do hCaptcha.
+              hcaptcha_session: Armazena o estado de sessão temporário do hCaptcha para validar os desafios.
+              jitsi_amp: Utilizado para o Amplitude Analytics
+              jitsi_amplitude_unsent_identify: Utilizado para o Amplitude Analytics
+              jitsi_amplitude_unset: Utilizado para o Amplitude Analytics
+              jitsi_calendar_sync: Utilizado para a funcionalidade de sincronização de calendário.
+              jitsi_callstats_username: Utilizado para guardar a sessão do utilizador no Jitsi.
+              jitsi_dropbox: Utilizado para a funcionalidade de integração com o Dropbox.
+              jitsi_endpoint_id: Utilizado para comunicação com o servidor Jitsi.
+              jitsi_known_domains: Guarda uma lista de domínios conhecidos
+              jitsi_language: Guarda a preferência de idioma
+              jitsi_prejoin: Utilizado para a funcionalidade de ecrã de pré-entrada.
+              jitsi_recent_list: Utilizado para a funcionalidade de lista recente.
+              jitsi_settings: Guarda as configurações do Jitsi.
+              jitsi_video_quality: Utilizado para a funcionalidade de armazenamento persistente de qualidade de vídeo.
+              jitsi_virtual_background: Utilizado para a funcionalidade de fundo de vídeo.
+              linkedin_li_gc: Armazena o estado de consentimento para os serviços do LinkedIn.
+              linkedin_lidc: Utilizado pelo LinkedIn para encaminhamento e balanceamento de carga.
+              linkedin_user_match_history: Regista o tempo de interação com anúncios e a atribuição de conversões para campanhas do LinkedIn.
+              maps_1p_jar: Armazena preferências de utilização do Google Maps e sinais de personalização de anúncios.
+              maps_consent: Armazena o estado de consentimento do utilizador para os serviços Google ao utilizar mapas incorporados.
+              maps_nid: Armazena preferências do Google Maps e informações de segurança do navegador.
+              matomo_mtm_consent: Armazena o estado de consentimento do utilizador para o rastreamento do Matomo.
+              matomo_pk_id: Utilizado para armazenar um ID único de visitante e identificar visitantes recorrentes.
+              matomo_pk_ref: Utilizado para armazenar informações de atribuição (a fonte que trouxe o utilizador ao site).
+              matomo_pk_ses: Utilizado para armazenar dados temporários de sessão da visita atual.
+              osm_location: Armazena valores predefinidos de localização/zoom do mapa para interações com o OpenStreetMap.
+              osm_session: Armazena dados temporários de sessão para interações de utilizadores com o OpenStreetMap.
+              osm_totp_token: Armazena dados temporários de token 2FA para fluxos de trabalho de contas OpenStreetMap.
+              pref: Utilizado para funcionalidade. O YouTube utiliza este cookie para armazenar informações como a configuração de página preferida e preferências de reprodução. Mais informações em Como o Google utiliza cookies
+              recaptcha_grecaptcha: Utilizado pelo reCAPTCHA para proteção contra spam e análise de riscos.
+              recaptcha_rc_a: Armazena metadados de análise de riscos do reCAPTCHA no armazenamento do navegador.
+              recaptcha_rc_c: Armazena metadados de desafio/sessão do reCAPTCHA no armazenamento do navegador.
+              remember_user_token: Permite manter a sessão aberta ao clicar em "Lembrar-me" ao iniciar sessão.
+              session_id: Permite que os sites reconheçam o utilizador ao navegar entre páginas.
+              turnstile_cf_bm: Ajuda o Cloudflare a detetar e mitigar trafego automatizado.
+              turnstile_cf_clearance: Armazena a prova de que um visitante passou um desafio de seguranca anterior.
+              turnstile_cfuvid: Ajuda o Cloudflare a distinguir utilizadores individuais que partilham o mesmo endereco IP.
+              vimeo_player: Armazena preferências do leitor Vimeo, como volume, qualidade ou comportamento de reprodução automática.
+              vimeo_vuid: Armazena um identificador único de visitante do Vimeo utilizado para análise.
+              visitor_info1_live: Utilizado para funcionalidade, análise, publicidade e personalização. Mais informações em Como o Google utiliza cookies
+              ysc: Utilizado por segurança. Válido durante a sessão de navegação do utilizador. Impede que sites maliciosos ajam em nome de um utilizador sem o seu conhecimento. Mais informações em Como o Google utiliza cookies
+              yt_remote_connected_devices: Armazena a lista de dispositivos ligados para controles remotos do leitor YouTube.
+              yt_remote_device_id: Armazena um identificador de dispositivo para interações remotas do leitor YouTube.
+              ytidb_last_result_entry_key: Armazena os metadados de resultado mais recentes do leitor YouTube no armazenamento local.
             explanations:
               cloudflare_turnstile: |-
                 Adicione estes cookies quando o Cloudflare Turnstile estiver ativado para proteger formularios contra abuso e trafego automatizado. Eles suportam deteccao de bots, validacao de sessao e continuidade do desafio.
@@ -525,121 +579,24 @@ pt:
                 Adicione estes cookies quando incorporar vídeos do Vimeo em páginas, propostas ou comentários. O Vimeo pode utilizá-los para memorizar as configurações do leitor e medir interações de reprodução.
 
                 Categoria recomendada: Preferências ou Analítica
-              youtube_nocookie: |-
-                Adicione estas chaves de armazenamento quando utilizar o modo de privacidade melhorada do YouTube (youtube-nocookie.com). São utilizadas para manter o estado do leitor e as preferências de dispositivo/sessão.
-
-                Categoria recomendada: Preferências
               youtube_embeds: |-
                 Adicione estes cookies quando permitir a incorporação de vídeos do YouTube em conteúdos (propostas, comentários, etc.). O YouTube define cookies de análise e rastreamento que recolhem informações sobre a reprodução de vídeos e o comportamento dos utilizadores.
 
                 Categoria recomendada: Preferências (se os vídeos forem parte integrante do conteúdo), Analítica (para rastreamento/estatísticas) ou Marketing (se utilizado para fins publicitários)
-            descriptions:
-              turnstile_cf_bm: Ajuda o Cloudflare a detetar e mitigar trafego automatizado.
-              turnstile_cf_clearance: Armazena a prova de que um visitante passou um desafio de seguranca anterior.
-              turnstile_cfuvid: Ajuda o Cloudflare a distinguir utilizadores individuais que partilham o mesmo endereco IP.
-              consent: Utilizado para funcionalidade. Válido durante 2 anos. O Google utiliza-o para armazenar o estado de consentimento de um utilizador relativamente às suas escolhas de cookies. Mais informações em Como o Google utiliza cookies
-              decidim_consent: Armazena informação sobre os cookies permitidos pelo utilizador neste site.
-              emoji_picker_recent: Armazena os emojis selecionados mais recentemente
-              facebook_fr: Utilizado pela Meta para publicar, medir e melhorar a relevância dos anúncios.
-              fbp: Identifica sessões do navegador para rastreamento do Facebook Pixel.
-              ga_gat: Utilizado para limitar a taxa de pedidos enviados ao Google Analytics.
-              ga_gid: Utilizado para distinguir utilizadores para fins analíticos. Expira após 24 horas.
-              ga_main: Utilizado para distinguir utilizadores através da atribuição de um identificador único.
-              ga_property: Utilizado no GA4 para manter o estado da sessão e contadores para uma propriedade específica.
-              graphiql_doc_explorer_open: Guarda se o painel de documentação está aberto ao utilizar a API GraphQL
-              graphiql_editor_flex: Guarda a preferência de separadores ao utilizar a API GraphQL
-              graphiql_history_pane_open: Guarda se o painel de histórico está aberto ao utilizar a API GraphQL
-              graphiql_queries: Guarda o histórico de consultas ao utilizar a API GraphQL
-              graphiql_query: Guarda a última consulta ao utilizar a API GraphQL
-              graphiql_tab_state: Guarda a configuração dos separadores ao utilizar a API GraphQL
-              gtm_dc: Utilizado pelo Google Tag Manager para carregamento de tags e diagnósticos.
-              gtm_debug: Armazena o estado do modo de depuração do Google Tag Manager.
-              gtm_gcl_au: Utilizado pelos serviços Google para testar a eficiência publicitária.
-              hcaptcha_accessibility: Armazena preferências de acessibilidade para os desafios do hCaptcha.
-              hcaptcha_session: Armazena o estado de sessão temporário do hCaptcha para validar os desafios.
-              jitsi_amp: Utilizado para o Amplitude Analytics
-              jitsi_amplitude_unsent_identify: Utilizado para o Amplitude Analytics
-              jitsi_amplitude_unset: Utilizado para o Amplitude Analytics
-              jitsi_calendar_sync: Utilizado para a funcionalidade de sincronização de calendário.
-              jitsi_callstats_username: Utilizado para guardar a sessão do utilizador no Jitsi.
-              jitsi_dropbox: Utilizado para a funcionalidade de integração com o Dropbox.
-              jitsi_endpoint_id: Utilizado para comunicação com o servidor Jitsi.
-              jitsi_known_domains: Guarda uma lista de domínios conhecidos
-              jitsi_language: Guarda a preferência de idioma
-              jitsi_prejoin: Utilizado para a funcionalidade de ecrã de pré-entrada.
-              jitsi_recent_list: Utilizado para a funcionalidade de lista recente.
-              jitsi_settings: Guarda as configurações do Jitsi.
-              jitsi_video_quality: Utilizado para a funcionalidade de armazenamento persistente de qualidade de vídeo.
-              jitsi_virtual_background: Utilizado para a funcionalidade de fundo de vídeo.
-              linkedin_li_gc: Armazena o estado de consentimento para os serviços do LinkedIn.
-              linkedin_lidc: Utilizado pelo LinkedIn para encaminhamento e balanceamento de carga.
-              linkedin_user_match_history: Regista o tempo de interação com anúncios e a atribuição de conversões para campanhas do LinkedIn.
-              maps_1p_jar: Armazena preferências de utilização do Google Maps e sinais de personalização de anúncios.
-              maps_consent: Armazena o estado de consentimento do utilizador para os serviços Google ao utilizar mapas incorporados.
-              maps_nid: Armazena preferências do Google Maps e informações de segurança do navegador.
-              matomo_mtm_consent: Armazena o estado de consentimento do utilizador para o rastreamento do Matomo.
-              matomo_pk_id: Utilizado para armazenar um ID único de visitante e identificar visitantes recorrentes.
-              matomo_pk_ref: Utilizado para armazenar informações de atribuição (a fonte que trouxe o utilizador ao site).
-              matomo_pk_ses: Utilizado para armazenar dados temporários de sessão da visita atual.
-              osm_location: Armazena valores predefinidos de localização/zoom do mapa para interações com o OpenStreetMap.
-              osm_session: Armazena dados temporários de sessão para interações de utilizadores com o OpenStreetMap.
-              osm_totp_token: Armazena dados temporários de token 2FA para fluxos de trabalho de contas OpenStreetMap.
-              pref: Utilizado para funcionalidade. O YouTube utiliza este cookie para armazenar informações como a configuração de página preferida e preferências de reprodução. Mais informações em Como o Google utiliza cookies
-              recaptcha_grecaptcha: Utilizado pelo reCAPTCHA para proteção contra spam e análise de riscos.
-              recaptcha_rc_a: Armazena metadados de análise de riscos do reCAPTCHA no armazenamento do navegador.
-              recaptcha_rc_c: Armazena metadados de desafio/sessão do reCAPTCHA no armazenamento do navegador.
-              remember_user_token: Permite manter a sessão aberta ao clicar em "Lembrar-me" ao iniciar sessão.
-              session_id: Permite que os sites reconheçam o utilizador ao navegar entre páginas.
-              vimeo_player: Armazena preferências do leitor Vimeo, como volume, qualidade ou comportamento de reprodução automática.
-              vimeo_vuid: Armazena um identificador único de visitante do Vimeo utilizado para análise.
-              visitor_info1_live: Utilizado para funcionalidade, análise, publicidade e personalização. Mais informações em Como o Google utiliza cookies
-              ysc: Utilizado por segurança. Válido durante a sessão de navegação do utilizador. Impede que sites maliciosos ajam em nome de um utilizador sem o seu conhecimento. Mais informações em Como o Google utiliza cookies
-              yt_remote_connected_devices: Armazena a lista de dispositivos ligados para controles remotos do leitor YouTube.
-              yt_remote_device_id: Armazena um identificador de dispositivo para interações remotas do leitor YouTube.
-              ytidb_last_result_entry_key: Armazena os metadados de resultado mais recentes do leitor YouTube no armazenamento local.
+              youtube_nocookie: |-
+                Adicione estas chaves de armazenamento quando utilizar o modo de privacidade melhorada do YouTube (youtube-nocookie.com). São utilizadas para manter o estado do leitor e as preferências de dispositivo/sessão.
+
+                Categoria recomendada: Preferências
             labels:
-              cloudflare_turnstile:
-                one: Cloudflare Turnstile (%{count} cookie)
-                other: Cloudflare Turnstile (%{count} cookies)
               decidim_essential:
                 one: Decidim Essencial (%{count} cookie)
                 other: Decidim Essencial (%{count} cookies)
               emoji_picker:
                 one: Seletor de emojis (%{count} cookie)
                 other: Seletor de emojis (%{count} cookies)
-              facebook_pixel:
-                one: Facebook Pixel (%{count} cookie)
-                other: Facebook Pixel (%{count} cookies)
-              google_analytics:
-                one: Google Analytics (%{count} cookie)
-                other: Google Analytics (%{count} cookies)
               google_maps_embeds:
                 one: Google Maps incorporado (%{count} cookie)
                 other: Google Maps incorporado (%{count} cookies)
-              google_tag_manager:
-                one: Google Tag Manager (%{count} cookie)
-                other: Google Tag Manager (%{count} cookies)
-              graphiql:
-                one: GraphiQL API Explorer (%{count} cookie)
-                other: GraphiQL API Explorer (%{count} cookies)
-              hcaptcha:
-                one: hCaptcha (%{count} cookie)
-                other: hCaptcha (%{count} cookies)
-              jitsi_meet:
-                one: Jitsi Meet (%{count} cookie)
-                other: Jitsi Meet (%{count} cookies)
-              linkedin_insight:
-                one: LinkedIn Insight (%{count} cookie)
-                other: LinkedIn Insight (%{count} cookies)
-              matomo:
-                one: Matomo (%{count} cookie)
-                other: Matomo (%{count} cookies)
-              openstreetmap_tiles:
-                one: OpenStreetMap tiles (%{count} cookie)
-                other: OpenStreetMap tiles (%{count} cookies)
-              recaptcha:
-                one: reCAPTCHA (%{count} cookie)
-                other: reCAPTCHA (%{count} cookies)
               vimeo_embeds:
                 one: Vimeo incorporado (%{count} cookie)
                 other: Vimeo incorporado (%{count} cookies)
@@ -650,25 +607,10 @@ pt:
                 one: YouTube (privacidade melhorada) (%{count} cookie)
                 other: YouTube (privacidade melhorada) (%{count} cookies)
             services:
-              cloudflare_turnstile: Cloudflare Turnstile
               decidim_essential: Este site
               emoji_picker: Este site
-              facebook_pixel: Meta (Facebook)
-              google_analytics: Google Analytics
-              google_maps_embeds: Google Maps
-              google_tag_manager: Google Tag Manager
               graphiql: Este site
-              hcaptcha: hCaptcha
-              jitsi_meet: Jitsi Meet
-              linkedin_insight: LinkedIn
-              matomo: Matomo
-              openstreetmap_tiles: OpenStreetMap
-              recaptcha: Google reCAPTCHA
-              vimeo_embeds: Vimeo
-              youtube_embeds: YouTube
               youtube_nocookie: YouTube (modo de privacidade melhorada)
-          cookie_item_dropdown:
-            button: Serviços de cookies comuns
           create:
             error: Erro ao criar o item de cookie! %{error}
             success: Item de cookie criado com sucesso
@@ -681,7 +623,6 @@ pt:
             success: Item de cookie removido com sucesso
           edit:
             cancel: Cancelar
-            cannot_edit_mandatory_category: Os itens de categorias obrigatórias não podem ser editados
             save: Guardar
             title: Editar item de cookie
           form:
@@ -690,14 +631,10 @@ pt:
             title_item_help: Pode encontrar os cookies utilizando o inspetor do navegador (secção de armazenamento). Não deve conter espaços.
           index:
             back_to_categories: Voltar às categorias
-            cannot_edit_mandatory_category: Os itens de categorias obrigatórias não podem ser editados
             cannot_remove_default: Os itens predefinidos não podem ser removidos
-            cannot_remove_mandatory_category: Os itens de categorias obrigatórias não podem ser removidos
-            confirm_destroy: Tem a certeza de que pretende remover este item de cookie?
             confirm_reset: Tem a certeza de que pretende repor os valores predefinidos deste item? Todas as personalizações realizadas serão removidas.
             edit: Editar item
             new: Novo item
-            remove: Remover item
             reset: Repor valores predefinidos
             title: "%{category}: Itens de cookie"
           new:
@@ -763,6 +700,7 @@ pt:
             stamps: Selos Hashcash
         menu:
           admins: Administradores com escopo
+          cookie_management: Gestão de cookies
           custom_redirects: Redirecionamentos personalizados
           editors: Hacks do editor
           livechat: Chat ao vivo
@@ -777,7 +715,6 @@ pt:
           styles: Estilos personalizados
           surveys: Pesquisas e formularios
           verifications: Verificacoes
-          cookie_management: Gestão de cookies
         menu_hacks:
           create:
             error: Erro ao criar item de menu! %{error}

@@ -1,4 +1,3 @@
----
 de:
   active_hashcash:
     submit_filter: Filter
@@ -53,6 +52,17 @@ de:
         background_image_2: Hintergrundbild
         background_image_3: Hintergrundbild
         background_image_4: Hintergrundbild
+      cookie_category:
+        mandatory: Pflicht
+        title: Kategorie
+        total_cookies: Cookies gesamt
+        visibility: Sichtbarkeit
+      cookie_item:
+        name: Cookie-Name
+        service: Dienst
+        type: Typ
+        types:
+          local_storage: Lokaler Speicher
       custom_redirect:
         active: Aktiv
         destination: Ziel
@@ -69,19 +79,6 @@ de:
         awesome_admins_available_authorizations: Administratoren erlauben, Benutzer mit diesen Berechtigungen manuell zu verifizieren
       user:
         user_time_zone: Eigene Zeitzone
-      cookie_category:
-        id: ID
-        mandatory: Pflicht
-        title: Kategorie
-        total_cookies: Cookies gesamt
-        visibility: Sichtbarkeit
-      cookie_item:
-        name: Cookie-Name
-        service: Dienst
-        type: Typ
-        types:
-          cookie: Cookie
-          local_storage: Lokaler Speicher
     errors:
       models:
         cookie_item:
@@ -129,7 +126,7 @@ de:
             announcement: Ankündigung
             collapse: Start mit eingeklapptem Menü
             map_center: Kartenmitte (Breitengrad, Längengrad)
-            map_center_help: Verwenden Sie Dezimalpunkte (z. B. 41.38879, 2.15899). Lassen Sie das Feld leer, um alle Markierungen automatisch einzupassen
+            map_center_help: 'Verwenden Sie Dezimalpunkte (z. B. 41.38879, 2.15899). Lassen Sie das Feld leer, um alle Markierungen automatisch einzupassen'
             map_height: Höhe der Karte (px)
             map_zoom: Zoom (beliebige Zahl zwischen 0 und 18)
             map_zoom_help: Gilt nur, wenn ein Kartenzentrum definiert ist
@@ -229,7 +226,7 @@ de:
           conflict: Es gibt einen Konflikt mit einer bestehenden Autorisierung
           conflict_help_html: "Sie müssen den Konflikt mit dem Benutzer %{user} lösen, bevor Sie den Benutzer mit dieser Berechtigung autorisieren können.\n<br><br>\nEin Verifizierungskonflikt tritt auf, wenn ein anderer Benutzer die gleichen Daten hat wie der Benutzer, den Sie autorisieren möchten. \nSie können diesen Konflikt lösen, indem Sie die widersprüchliche Autorisierung des anderen Benutzers entfernen oder andere Daten für diesen Benutzer verwenden.\n"
           edit:
-            authorize: "%{user} mit %{name} autorisieren"
+            authorize: '%{user} mit %{name} autorisieren'
             do_it_if_sure: Tun Sie dies nur, wenn Sie sicher sind, dass der Benutzer diese Berechtigung hat.
             force_verification: Verifizierung mit den aktuellen Daten erzwingen
             force_verification_help: Überprüfung ist fehlgeschlagen, aber Sie können sie erzwingen, wenn Sie sicher sind, dass der Benutzer diese Berechtigung hat.
@@ -265,13 +262,13 @@ de:
             cannot_be_destroyed: Dies kann leider nicht gelöscht werden. Diese Konfiguration benötigt mindestens eine Einschränkung.
             delete: Löschen
             edit: Bearbeiten
-            title: Einschränkungen
+            title: 'Einschränkungen'
           create_force_authorization:
             error: Fehler beim Erstellen einer neuen Autorisierungsgruppe! %{error}
             success: Autorisierungsgruppe %{key} erfolgreich erstellt
           create_proposal_custom_field:
             error: Beim Erstellen eines neuen Eingabefeldes ist ein Fehler aufgetreten! %{error}
-            success: Eingabefeld %{key} erfolgreich erstellt!
+            success: 'Eingabefeld %{key} erfolgreich erstellt!'
           create_scoped_admin:
             error: Fehler beim Erstellen einer neuen Admin-Gruppe! %{error}
             success: Admin-Gruppe %{key} erfolgreich erstellt
@@ -283,7 +280,7 @@ de:
             success: Autorisierungsgruppe %{key} erfolgreich entfernt
           destroy_proposal_custom_field:
             error: Das Eingabefeld konnte aufgrund eines Fehlers nicht entfernt werden! %{error}
-            success: Das Eingabefeld %{key} wurde erfolgreich entfernt.
+            success: 'Das Eingabefeld %{key} wurde erfolgreich entfernt.'
           destroy_scoped_admin:
             error: Fehler beim Entfernen der Admin-Gruppe! %{error}
             success: Admin-Gruppe %{key} erfolgreich erstellt
@@ -350,9 +347,8 @@ de:
               title: Eingabevalidierungen für das Feld "Titel"
           form_force_authorizations:
             delete: Löschen
-            force_authorizations_html: 'Verifizierungsgruppen definieren. Jede Gruppe kann Nutzenden eine oder mehrere Verifizierungsarten für bestimmte Bereiche der Plattform vorschreiben.
-
-              '
+            force_authorizations_html: |
+              Verifizierungsgruppen definieren. Jede Gruppe kann Nutzenden eine oder mehrere Verifizierungsarten für bestimmte Bereiche der Plattform vorschreiben. 
             help: Sie können Gruppen von Autorisierungsmethoden definieren und den darauf basierenden Zugriff einschränken.
             new: Eine neue Autorisierungsgruppe hinzufügen
             remove: Diese "Autorisierungsgruppe" entfernen
@@ -391,6 +387,7 @@ de:
           system: Überall ausser...
           title:
             admins: Eingeschränkte Admins
+            cookie_management: Cookie-Verwaltung
             editors: Editoren
             livechat: Live-Chat
             proposal_custom_fields: 'Benutzerdefinierte Felder: Öffentliche Felder'
@@ -401,7 +398,6 @@ de:
             styles: Eigene Styles
             surveys: Umfragen
             verifications: Überprüfungen / Autorisierungshacks
-            cookie_management: Cookie-Verwaltung
           update:
             error: Fehler beim Aktualisieren der Konfiguration! %{error}
             success: Konfiguration erfolgreich aktualisiert
@@ -427,12 +423,6 @@ de:
             error: Es gab einen Fehler beim Aktualisieren der Einschränkung
             success: Einschränkung erfolgreich aktualisiert
         cookie_categories:
-          script_config:
-            script_consent_help_html: |
-              <p>Skripte, die dieser Kategorie zugeordnet sind, respektieren die Einwilligung nur, wenn sie innerhalb eines Skripts mit dem Attribut <span class="label">data-consent="%{category}"</span> hinzugefügt werden.</p>
-              <p>Der empfohlene Ort zum Hinzufügen ist <span class="label">app/views/layouts/decidim/_head_extra.html.erb</span> oder in Header-Snippets (falls aktiviert).</p>
-              <p>Beispiel:</p><br><pre>%{example}</pre><br>
-              <p>Ohne <code>type="text/plain"</code> hat die Daten-Einwilligungseinstellung des Benutzers keine Wirkung.<br>Mehr dazu: <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Adding scripts which require data consent</a>.</p>
           create:
             error: Fehler beim Erstellen der Cookie-Kategorie! %{error}
             success: Cookie-Kategorie erfolgreich erstellt
@@ -441,17 +431,13 @@ de:
             success: Cookie-Kategorie erfolgreich entfernt
           edit:
             cancel: Abbrechen
-            cannot_edit_mandatory: Obligatorische Standardkategorien können nicht bearbeitet werden
             save: Speichern
             title: Cookie-Kategorie bearbeiten
           form:
             visibility:
-              default: Sichtbar
               hidden: Ausgeblendet
           index:
-            cannot_edit_mandatory: Obligatorische Kategorien können nicht bearbeitet werden
             cannot_remove_default: Standardkategorien können nicht entfernt werden
-            confirm_destroy: Soll diese Cookie-Kategorie wirklich entfernt werden? Dabei werden auch alle Einträge dieser Kategorie gelöscht.
             confirm_reset: Soll diese Kategorie wirklich auf die Standardwerte zurückgesetzt werden? Alle vorgenommenen Anpassungen werden dabei entfernt.
             description_html: |
               Cookie-Kategorien und -Einträge steuern ausschließlich die Einwilligungsoberfläche und die Dokumentation.<br>
@@ -461,18 +447,89 @@ de:
             edit: Kategorie bearbeiten
             items: Kategorie-Einträge
             new: Neue Kategorie
-            remove: Kategorie entfernen
             reset: Auf Standard zurücksetzen
             title: Cookie-Verwaltung
           new:
             cancel: Abbrechen
             save: Speichern
             title: Neue Cookie-Kategorie
+          script_config:
+            script_consent_help_html: |
+              <p>Skripte, die dieser Kategorie zugeordnet sind, respektieren die Einwilligung nur, wenn sie innerhalb eines Skripts mit dem Attribut <span class="label">data-consent="%{category}"</span> hinzugefügt werden.</p>
+              <p>Der empfohlene Ort zum Hinzufügen ist <span class="label">app/views/layouts/decidim/_head_extra.html.erb</span> oder in Header-Snippets (falls aktiviert).</p>
+              <p>Beispiel:</p><br><pre>%{example}</pre><br>
+              <p>Ohne <code>type="text/plain"</code> hat die Daten-Einwilligungseinstellung des Benutzers keine Wirkung.<br>Mehr dazu: <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Adding scripts which require data consent</a>.</p>
           update:
             error: Fehler beim Aktualisieren der Cookie-Kategorie! %{error}
             success: Cookie-Kategorie erfolgreich aktualisiert
         cookie_items:
+          cookie_item_dropdown:
+            button: Gängige Cookie-Dienste
           cookie_item_presets:
+            descriptions:
+              consent: 'Dient der Funktionalität. Läuft nach 2 Jahren ab. Google nutzt dieses Cookie, um den Einwilligungsstatus eines Nutzers zu speichern. Weitere Informationen unter: Wie Google Cookies verwendet'
+              decidim_consent: Speichert Informationen über die vom Nutzer auf dieser Website erlaubten Cookies.
+              emoji_picker_recent: Speichert die zuletzt ausgewählten Emojis
+              facebook_fr: Wird von Meta verwendet, um Werbeanzeigen auszuliefern, zu messen und deren Relevanz zu verbessern.
+              fbp: Identifiziert Browser-Sitzungen für das Facebook-Pixel-Tracking.
+              ga_gat: Wird verwendet, um die Anfragerate an Google Analytics zu drosseln.
+              ga_gid: Wird verwendet, um Nutzer zu unterscheiden. Läuft nach 24 Stunden ab.
+              ga_main: Wird verwendet, um Nutzer durch Zuweisung einer eindeutigen Kennung zu unterscheiden.
+              ga_property: Wird in GA4 verwendet, um den Sitzungsstatus und Zähler für eine bestimmte Property beizubehalten.
+              graphiql_doc_explorer_open: Speichert, ob das Dokumentationspanel bei der Nutzung der GraphQL-API geöffnet ist
+              graphiql_editor_flex: Speichert die Tab-Präferenz bei der Nutzung der GraphQL-API
+              graphiql_history_pane_open: Speichert, ob das Verlaufspanel bei der Nutzung der GraphQL-API geöffnet ist
+              graphiql_queries: Speichert den Abfrageverlauf bei der Nutzung der GraphQL-API
+              graphiql_query: Speichert die letzte Abfrage bei der Nutzung der GraphQL-API
+              graphiql_tab_state: Speichert die Tab-Konfiguration bei der Nutzung der GraphQL-API
+              gtm_dc: Wird von Google Tag Manager für das Tag-Laden und die Diagnose verwendet.
+              gtm_debug: Speichert den Debug-Modus-Status von Google Tag Manager.
+              gtm_gcl_au: Wird von Google-Diensten verwendet, um die Werbeeffizienz zu testen.
+              hcaptcha_accessibility: Speichert Barrierefreiheits-Einstellungen für hCaptcha-Challenges.
+              hcaptcha_session: Speichert den temporären hCaptcha-Sitzungsstatus zur Validierung von Challenges.
+              jitsi_amp: Wird für Amplitude Analytics verwendet
+              jitsi_amplitude_unsent_identify: Wird für Amplitude Analytics verwendet
+              jitsi_amplitude_unset: Wird für Amplitude Analytics verwendet
+              jitsi_calendar_sync: Wird für die Kalender-Synchronisationsfunktion verwendet.
+              jitsi_callstats_username: Wird zum Speichern der Nutzersitzung in Jitsi verwendet.
+              jitsi_dropbox: Wird für die Dropbox-Integrationsfunktion verwendet.
+              jitsi_endpoint_id: Wird für die Kommunikation mit dem Jitsi-Server verwendet.
+              jitsi_known_domains: Speichert eine Liste bekannter Domains
+              jitsi_language: Speichert die Spracheinstellung
+              jitsi_prejoin: Wird für die Vorab-Beitrittsbildschirm-Funktion verwendet.
+              jitsi_recent_list: Wird für die Zuletzt-verwendet-Listenfunktion verwendet.
+              jitsi_settings: Speichert die Jitsi-Einstellungen.
+              jitsi_video_quality: Wird für die persistente Videoquali-Speicherfunktion verwendet.
+              jitsi_virtual_background: Wird für die virtuelle Hintergrundfunktion verwendet.
+              linkedin_li_gc: Speichert den Einwilligungsstatus für LinkedIn-Dienste.
+              linkedin_lidc: Wird von LinkedIn für Routing und Lastverteilung verwendet.
+              linkedin_user_match_history: Verfolgt Anzeigeninteraktionszeitpunkte und Konversionszuordnung für LinkedIn-Kampagnen.
+              maps_1p_jar: Speichert Google-Maps-Nutzungspräferenzen und Signale zur Anzeigenpersonalisierung.
+              maps_consent: Speichert den Einwilligungsstatus des Nutzers für Google-Dienste bei der Verwendung von eingebetteten Karten.
+              maps_nid: Speichert Google-Maps-Präferenzen und sicherheitsrelevante Browser-Informationen.
+              matomo_mtm_consent: Speichert den Einwilligungsstatus des Nutzers für das Matomo-Tracking.
+              matomo_pk_id: Wird verwendet, um eine eindeutige Besucher-ID zu speichern und wiederkehrende Besucher zu identifizieren.
+              matomo_pk_ref: Wird verwendet, um Attributionsdaten zu speichern (die Quelle, die den Nutzer auf die Website geführt hat).
+              matomo_pk_ses: Wird verwendet, um temporäre Sitzungsdaten des aktuellen Besuchs zu speichern.
+              osm_location: Speichert Standard-Orts- und Zoomwerte für OpenStreetMap-Interaktionen.
+              osm_session: Speichert temporäre Sitzungsdaten für OpenStreetMap-Nutzerinteraktionen.
+              osm_totp_token: Speichert temporäre 2FA-Token-Daten für OpenStreetMap-Konto-Workflows.
+              pref: 'Dient der Funktionalität. YouTube verwendet dieses Cookie, um Informationen wie bevorzugte Seiteneinstellungen und Wiedergabepräferenzen zu speichern. Weitere Informationen unter: Wie Google Cookies verwendet'
+              recaptcha_grecaptcha: Wird von reCAPTCHA zum Spam-Schutz und zur Risikoanalyse verwendet.
+              recaptcha_rc_a: Speichert reCAPTCHA-Risikoanalyse-Metadaten im Browser-Speicher.
+              recaptcha_rc_c: Speichert reCAPTCHA-Challenge/Sitzungs-Metadaten im Browser-Speicher.
+              remember_user_token: Ermöglicht das Offenhalten der Sitzung, wenn beim Anmelden auf "Angemeldet bleiben" geklickt wird.
+              session_id: Ermöglicht es Websites, den Nutzer beim Navigieren zwischen Seiten zu erkennen.
+              turnstile_cf_bm: Hilft Cloudflare, automatisierten Datenverkehr zu erkennen und zu mindern.
+              turnstile_cf_clearance: Speichert den Nachweis, dass ein Besucher eine vorherige Sicherheits-Challenge bestanden hat.
+              turnstile_cfuvid: Hilft Cloudflare, einzelne Benutzer zu unterscheiden, die dieselbe IP-Adresse verwenden.
+              vimeo_player: Speichert Vimeo-Player-Einstellungen wie Lautstärke, Qualität oder Autoplay-Verhalten.
+              vimeo_vuid: Speichert eine eindeutige Vimeo-Besucher-Kennung für Analysezwecke.
+              visitor_info1_live: 'Wird für Funktionalität, Analysen, Werbung und Personalisierung verwendet. Weitere Informationen unter: Wie Google Cookies verwendet'
+              ysc: 'Dient der Sicherheit. Gilt für die Dauer der Browser-Sitzung. Verhindert, dass bösartige Websites im Namen eines Nutzers handeln. Weitere Informationen unter: Wie Google Cookies verwendet'
+              yt_remote_connected_devices: Speichert die Liste verbundener Geräte für YouTube-Player-Fernsteuerungen.
+              yt_remote_device_id: Speichert eine Gerätekennung für YouTube-Player-Fernbedienungsinteraktionen.
+              ytidb_last_result_entry_key: Speichert die neuesten YouTube-Player-Ergebnismetadaten im lokalen Speicher.
             explanations:
               cloudflare_turnstile: |-
                 Fügen Sie diese Cookies hinzu, wenn Cloudflare Turnstile aktiviert ist, um Formulare vor Missbrauch und automatisiertem Verkehr zu schützen. Sie unterstützen die Bot-Erkennung, Sitzungsvalidierung und die Kontinuität der Challenge.
@@ -534,78 +591,14 @@ de:
                 Fügen Sie diese Cookies hinzu, wenn Sie Vimeo-Videos in Seiten, Vorschläge oder Kommentare einbetten. Vimeo kann sie verwenden, um Player-Einstellungen zu speichern und Wiedergabe-Interaktionen zu messen.
 
                 Empfohlene Kategorie: Präferenzen oder Analyse
-              youtube_nocookie: |-
-                Fügen Sie diese Speicherschlüssel hinzu, wenn Sie den datenschutzoptimierten Modus von YouTube (youtube-nocookie.com) verwenden. Sie werden verwendet, um den Player-Status und Geräte-/Sitzungseinstellungen beizubehalten.
-
-                Empfohlene Kategorie: Präferenzen
               youtube_embeds: |-
                 Fügen Sie diese Cookies hinzu, wenn Sie YouTube-Video-Einbettungen in Inhalten (Vorschläge, Kommentare usw.) erlauben. YouTube setzt Analyse- und Tracking-Cookies, die Informationen über die Videowiedergabe und das Nutzerverhalten erfassen.
 
                 Empfohlene Kategorie: Präferenzen (wenn Videos integraler Bestandteil des Inhalts sind), Analyse (für Tracking/Statistiken) oder Marketing (für Werbezwecke)
-            descriptions:
-              turnstile_cf_bm: Hilft Cloudflare, automatisierten Datenverkehr zu erkennen und zu mindern.
-              turnstile_cfuvid: Hilft Cloudflare, einzelne Benutzer zu unterscheiden, die dieselbe IP-Adresse verwenden.
-              turnstile_cf_clearance: Speichert den Nachweis, dass ein Besucher eine vorherige Sicherheits-Challenge bestanden hat.
-              consent: 'Dient der Funktionalität. Läuft nach 2 Jahren ab. Google nutzt dieses Cookie, um den Einwilligungsstatus eines Nutzers zu speichern. Weitere Informationen unter: Wie Google Cookies verwendet'
-              decidim_consent: Speichert Informationen über die vom Nutzer auf dieser Website erlaubten Cookies.
-              emoji_picker_recent: Speichert die zuletzt ausgewählten Emojis
-              facebook_fr: Wird von Meta verwendet, um Werbeanzeigen auszuliefern, zu messen und deren Relevanz zu verbessern.
-              fbp: Identifiziert Browser-Sitzungen für das Facebook-Pixel-Tracking.
-              ga_gat: Wird verwendet, um die Anfragerate an Google Analytics zu drosseln.
-              ga_gid: Wird verwendet, um Nutzer zu unterscheiden. Läuft nach 24 Stunden ab.
-              ga_main: Wird verwendet, um Nutzer durch Zuweisung einer eindeutigen Kennung zu unterscheiden.
-              ga_property: Wird in GA4 verwendet, um den Sitzungsstatus und Zähler für eine bestimmte Property beizubehalten.
-              graphiql_doc_explorer_open: Speichert, ob das Dokumentationspanel bei der Nutzung der GraphQL-API geöffnet ist
-              graphiql_editor_flex: Speichert die Tab-Präferenz bei der Nutzung der GraphQL-API
-              graphiql_history_pane_open: Speichert, ob das Verlaufspanel bei der Nutzung der GraphQL-API geöffnet ist
-              graphiql_queries: Speichert den Abfrageverlauf bei der Nutzung der GraphQL-API
-              graphiql_query: Speichert die letzte Abfrage bei der Nutzung der GraphQL-API
-              graphiql_tab_state: Speichert die Tab-Konfiguration bei der Nutzung der GraphQL-API
-              gtm_dc: Wird von Google Tag Manager für das Tag-Laden und die Diagnose verwendet.
-              gtm_debug: Speichert den Debug-Modus-Status von Google Tag Manager.
-              gtm_gcl_au: Wird von Google-Diensten verwendet, um die Werbeeffizienz zu testen.
-              hcaptcha_accessibility: Speichert Barrierefreiheits-Einstellungen für hCaptcha-Challenges.
-              hcaptcha_session: Speichert den temporären hCaptcha-Sitzungsstatus zur Validierung von Challenges.
-              jitsi_amp: Wird für Amplitude Analytics verwendet
-              jitsi_amplitude_unsent_identify: Wird für Amplitude Analytics verwendet
-              jitsi_amplitude_unset: Wird für Amplitude Analytics verwendet
-              jitsi_calendar_sync: Wird für die Kalender-Synchronisationsfunktion verwendet.
-              jitsi_callstats_username: Wird zum Speichern der Nutzersitzung in Jitsi verwendet.
-              jitsi_dropbox: Wird für die Dropbox-Integrationsfunktion verwendet.
-              jitsi_endpoint_id: Wird für die Kommunikation mit dem Jitsi-Server verwendet.
-              jitsi_known_domains: Speichert eine Liste bekannter Domains
-              jitsi_language: Speichert die Spracheinstellung
-              jitsi_prejoin: Wird für die Vorab-Beitrittsbildschirm-Funktion verwendet.
-              jitsi_recent_list: Wird für die Zuletzt-verwendet-Listenfunktion verwendet.
-              jitsi_settings: Speichert die Jitsi-Einstellungen.
-              jitsi_video_quality: Wird für die persistente Videoquali-Speicherfunktion verwendet.
-              jitsi_virtual_background: Wird für die virtuelle Hintergrundfunktion verwendet.
-              linkedin_li_gc: Speichert den Einwilligungsstatus für LinkedIn-Dienste.
-              linkedin_lidc: Wird von LinkedIn für Routing und Lastverteilung verwendet.
-              linkedin_user_match_history: Verfolgt Anzeigeninteraktionszeitpunkte und Konversionszuordnung für LinkedIn-Kampagnen.
-              maps_1p_jar: Speichert Google-Maps-Nutzungspräferenzen und Signale zur Anzeigenpersonalisierung.
-              maps_consent: Speichert den Einwilligungsstatus des Nutzers für Google-Dienste bei der Verwendung von eingebetteten Karten.
-              maps_nid: Speichert Google-Maps-Präferenzen und sicherheitsrelevante Browser-Informationen.
-              matomo_mtm_consent: Speichert den Einwilligungsstatus des Nutzers für das Matomo-Tracking.
-              matomo_pk_id: Wird verwendet, um eine eindeutige Besucher-ID zu speichern und wiederkehrende Besucher zu identifizieren.
-              matomo_pk_ref: Wird verwendet, um Attributionsdaten zu speichern (die Quelle, die den Nutzer auf die Website geführt hat).
-              matomo_pk_ses: Wird verwendet, um temporäre Sitzungsdaten des aktuellen Besuchs zu speichern.
-              osm_location: Speichert Standard-Orts- und Zoomwerte für OpenStreetMap-Interaktionen.
-              osm_session: Speichert temporäre Sitzungsdaten für OpenStreetMap-Nutzerinteraktionen.
-              osm_totp_token: Speichert temporäre 2FA-Token-Daten für OpenStreetMap-Konto-Workflows.
-              pref: 'Dient der Funktionalität. YouTube verwendet dieses Cookie, um Informationen wie bevorzugte Seiteneinstellungen und Wiedergabepräferenzen zu speichern. Weitere Informationen unter: Wie Google Cookies verwendet'
-              recaptcha_grecaptcha: Wird von reCAPTCHA zum Spam-Schutz und zur Risikoanalyse verwendet.
-              recaptcha_rc_a: Speichert reCAPTCHA-Risikoanalyse-Metadaten im Browser-Speicher.
-              recaptcha_rc_c: Speichert reCAPTCHA-Challenge/Sitzungs-Metadaten im Browser-Speicher.
-              remember_user_token: Ermöglicht das Offenhalten der Sitzung, wenn beim Anmelden auf "Angemeldet bleiben" geklickt wird.
-              session_id: Ermöglicht es Websites, den Nutzer beim Navigieren zwischen Seiten zu erkennen.
-              vimeo_player: Speichert Vimeo-Player-Einstellungen wie Lautstärke, Qualität oder Autoplay-Verhalten.
-              vimeo_vuid: Speichert eine eindeutige Vimeo-Besucher-Kennung für Analysezwecke.
-              visitor_info1_live: 'Wird für Funktionalität, Analysen, Werbung und Personalisierung verwendet. Weitere Informationen unter: Wie Google Cookies verwendet'
-              ysc: 'Dient der Sicherheit. Gilt für die Dauer der Browser-Sitzung. Verhindert, dass bösartige Websites im Namen eines Nutzers handeln. Weitere Informationen unter: Wie Google Cookies verwendet'
-              yt_remote_connected_devices: Speichert die Liste verbundener Geräte für YouTube-Player-Fernsteuerungen.
-              yt_remote_device_id: Speichert eine Gerätekennung für YouTube-Player-Fernbedienungsinteraktionen.
-              ytidb_last_result_entry_key: Speichert die neuesten YouTube-Player-Ergebnismetadaten im lokalen Speicher.
+              youtube_nocookie: |-
+                Fügen Sie diese Speicherschlüssel hinzu, wenn Sie den datenschutzoptimierten Modus von YouTube (youtube-nocookie.com) verwenden. Sie werden verwendet, um den Player-Status und Geräte-/Sitzungseinstellungen beizubehalten.
+
+                Empfohlene Kategorie: Präferenzen
             labels:
               cloudflare_turnstile:
                 one: Cloudflare Turnstile (%{count} Cookie)
@@ -659,25 +652,10 @@ de:
                 one: YouTube (datenschutzoptimiert) (%{count} Cookie)
                 other: YouTube (datenschutzoptimiert) (%{count} Cookies)
             services:
-              cloudflare_turnstile: Cloudflare Turnstile
               decidim_essential: Diese Website
               emoji_picker: Diese Website
-              facebook_pixel: Meta (Facebook)
-              google_analytics: Google Analytics
-              google_maps_embeds: Google Maps
-              google_tag_manager: Google Tag Manager
               graphiql: Diese Website
-              hcaptcha: hCaptcha
-              jitsi_meet: Jitsi Meet
-              linkedin_insight: LinkedIn
-              matomo: Matomo
-              openstreetmap_tiles: OpenStreetMap
-              recaptcha: Google reCAPTCHA
-              vimeo_embeds: Vimeo
-              youtube_embeds: YouTube
               youtube_nocookie: YouTube (datenschutzoptimierter Modus)
-          cookie_item_dropdown:
-            button: Gängige Cookie-Dienste
           create:
             error: Fehler beim Erstellen des Cookie-Eintrags! %{error}
             success: Cookie-Eintrag erfolgreich erstellt
@@ -690,7 +668,6 @@ de:
             success: Cookie-Eintrag erfolgreich entfernt
           edit:
             cancel: Abbrechen
-            cannot_edit_mandatory_category: Einträge aus obligatorischen Kategorien können nicht bearbeitet werden
             save: Speichern
             title: Cookie-Eintrag bearbeiten
           form:
@@ -699,14 +676,10 @@ de:
             title_item_help: Cookies können mit dem Browser-Inspektor (Speicher-Bereich) gefunden werden. Darf keine Leerzeichen enthalten.
           index:
             back_to_categories: Zurück zu den Kategorien
-            cannot_edit_mandatory_category: Einträge aus obligatorischen Kategorien können nicht bearbeitet werden
             cannot_remove_default: Standardeinträge können nicht entfernt werden
-            cannot_remove_mandatory_category: Einträge aus obligatorischen Kategorien können nicht entfernt werden
-            confirm_destroy: Soll dieser Cookie-Eintrag wirklich entfernt werden?
             confirm_reset: Soll dieser Eintrag wirklich auf die Standardwerte zurückgesetzt werden? Alle vorgenommenen Anpassungen werden dabei entfernt.
             edit: Eintrag bearbeiten
             new: Neuer Eintrag
-            remove: Eintrag entfernen
             reset: Auf Standard zurücksetzen
             title: "%{category}: Cookie-Einträge"
           new:
@@ -729,15 +702,13 @@ de:
           form:
             destination_help: Absolute Pfade (beginnen mit "/") oder externe URLs (http://..)
             origin_help: Nur absolute Pfade, beginnen mit "/"
-            pass_query_help: 'Aktivieren Sie diese Option, wenn Sie möchten, dass der Abfrage-String an das Ziel kopiert wird.<br> Wenn Sie zum Beispiel "/my-origin" => "/my-destination" konfiguriert haben, wird eine Anfrage an "/my-origin?locale=ca" an "/my-destination?locale=ca" weitergeleitet.
-
-              '
+            pass_query_help: |
+              Aktivieren Sie diese Option, wenn Sie möchten, dass der Abfrage-String an das Ziel kopiert wird.<br> Wenn Sie zum Beispiel "/my-origin" => "/my-destination" konfiguriert haben, wird eine Anfrage an "/my-origin?locale=ca" an "/my-destination?locale=ca" weitergeleitet. 
           index:
             check_redirections: "✔ Umleitungen prüfen"
             confirm_destroy: Sind Sie sicher, dass Sie diese Umleitung entfernen möchten?
-            description: 'Sie können eine beliebige Route (beginnend mit <code>/</code>) definieren, um jeden Besucher zu einer Ziel-URL umzuleiten. <br> Ziel kann ein absoluter Pfad sein (z.B.: <code>/processes/ein-prozess</code>) oder mit <code>https://</code> (z.B.: <code>http://decidim: org</code>) beginnen.<br><br> Berücksichtigen Sie, dass eine Umleitung nur funktioniert, wenn keine andere Route passt. Es ist nicht möglich, ursprüngliche Routen außer Kraft zu setzen (dies ist beabsichtigt).<br> Wenn Sie sich nicht sicher sind, verwenden Sie die Funktion «Umleitungen prüfen», um die Umleitung zu testen.
-
-              '
+            description: |
+              Sie können eine beliebige Route (beginnend mit <code>/</code>) definieren, um jeden Besucher zu einer Ziel-URL umzuleiten. <br> Ziel kann ein absoluter Pfad sein (z.B.: <code>/processes/ein-prozess</code>) oder mit <code>https://</code> (z.B.: <code>http://decidim: org</code>) beginnen.<br><br> Berücksichtigen Sie, dass eine Umleitung nur funktioniert, wenn keine andere Route passt. Es ist nicht möglich, ursprüngliche Routen außer Kraft zu setzen (dies ist beabsichtigt).<br> Wenn Sie sich nicht sicher sind, verwenden Sie die Funktion «Umleitungen prüfen», um die Umleitung zu testen. 
             edit: Umleitung bearbeiten
             new: Neue Umleitung
             remove: Umleitung entfernen
@@ -784,6 +755,7 @@ de:
             title: Menüpunkt bearbeiten
         menu:
           admins: Eingeschränkte Admins
+          cookie_management: Cookie-Verwaltung
           custom_redirects: Benutzerdefinierte Umleitungen
           editors: Editoren
           livechat: Live-Chat
@@ -798,7 +770,6 @@ de:
           styles: Eigene Styles
           surveys: Umfragen
           verifications: Verifizierungen
-          cookie_management: Cookie-Verwaltung
         menu_hacks:
           create:
             error: Fehler beim Erstellen des Menüpunkts! %{error}
@@ -873,7 +844,7 @@ de:
             no_data: Es wurden keine privaten Daten gefunden, die älter sind als %{time_ago}
             not_destroyable: Diese Ressource kann nicht gelöscht werden
             removing: Entfernen...
-            time_ago: vor %{time}
+            time_ago: "vor %{time}"
         proposal_custom_fields:
           menu:
             title: Öffentlich sichtbare Felder
@@ -915,27 +886,6 @@ de:
           title_closed: Klicken um zu chatten!
           title_open: Lassen Sie uns chatten!
       content_blocks:
-        map:
-          collapse: Start mit eingeklapptem Menü
-          map_center: Kartenmitte (Breitengrad, Längengrad)
-          map_center_help: Verwenden Sie Dezimalpunkte (z. B. 41.38879, 2.15899). Lassen Sie das Feld leer, um alle Markierungen automatisch einzupassen.
-          map_height: Höhe der Karte (px)
-          map_settings: Karteneinstellungen
-          map_zoom: Zoom (beliebige Zahl zwischen 0 und 18)
-          map_zoom_help: Gilt nur, wenn ein Kartenzentrum definiert ist
-          menu_amendments: Änderungen anzeigen
-          menu_meetings: Veranstaltungen anzeigen
-          menu_merge_components: Alle Komponenten desselben Typs im Menü zusammenführen
-          name: Awesome Karte
-          show_accepted: Angenommene Vorschläge anzeigen
-          show_evaluating: Bewertung der Vorschläge anzeigen
-          show_not_answered: Nicht beantwortete Vorschläge anzeigen
-          show_rejected: Abgelehnte Vorschläge anzeigen
-          show_withdrawn: Zurückgezogene Vorschläge anzeigen
-          taxonomies: Klassifizierungen
-          text_settings: Text-Einstellungen
-          title: Titel
-          truncate: Maximale Zeichenanzahl für Popup-Beschreibungen
         awesome_process_groups:
           active: Aktiv
           all: Alle
@@ -1103,7 +1053,7 @@ de:
           abstained: "✔ Enthalten"
           change_vote: Meine Stimme ändern
           default_box_title: Über diesen Vorschlag abstimmen
-          default_instructions_html: <p>Bitte lesen Sie die Wahlregeln sorgfältig durch, um zu verstehen, wie Ihre Stimme von %{organization}" verwendet wird</p>
+          default_instructions_html: "<p>Bitte lesen Sie die Wahlregeln sorgfältig durch, um zu verstehen, wie Ihre Stimme von %{organization}\" verwendet wird</p>"
           modal:
             cancel: Abbrechen
             message: Ihre Stimme wird am %{date} als endgültig betrachtet. Sie können sie bis dahin ändern
