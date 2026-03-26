@@ -861,9 +861,7 @@ pt:
             past: Somente processos passados
             upcoming: Somente processos futuros
           process_type: Tipo de processos
-          process_type_mixed_hint: No modo misto, processos e grupos se alternam ate a quantidade maxima. Processos sao ordenados por peso (ascendente). Se um tipo se esgotar, os espacos restantes sao preenchidos com o outro.
           process_types:
-            all: Todos os processos e grupos misturados
             groups: Somente grupos de processos
             processes: Somente processos
           processes: Processos
