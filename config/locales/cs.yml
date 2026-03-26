@@ -46,6 +46,26 @@ cs:
         component_manifest: Pouze v komponentách typu
         participatory_space_manifest: Použít na participační prostory typu
         participatory_space_slug: Pouze v
+      content_block_attachment:
+        background_image_0: Obrázek pozadí
+        background_image_1: Obrázek pozadí
+        background_image_2: Obrázek pozadí
+        background_image_3: Obrázek pozadí
+        background_image_4: Obrázek pozadí
+      cookie_category:
+        mandatory: Vyžadováno
+        slug: ID
+        title: Název kategorie
+        total_cookies: Celkem cookies
+        visibility: Viditelnost
+      cookie_item:
+        expiration: Vypršení platnosti
+        name: Název souboru cookie
+        service: Služba
+        type: Typ
+        types:
+          cookie: Cookie
+          local_storage: Místní úložiště
       custom_redirect:
         active: Aktivní
         destination: Cíl
@@ -62,6 +82,15 @@ cs:
         awesome_admins_available_authorizations: Povolit správcům ručně ověřit uživatele s těmito autorizacemi
       user:
         user_time_zone: Osobní časové pásmo
+    errors:
+      models:
+        cookie_item:
+          attributes:
+            base:
+              category_not_found: Kategorie nebyla nalezena
+            name:
+              cannot_change_default_item_name: Název předdefinované položky nelze změnit
+              invalid_format: Název může obsahovat pouze písmena, čísla, podtržítka (_) a pomlčky (-) - nejsou povoleny mezery ani speciální znaky
   decidim:
     admin:
       actions:
@@ -214,18 +243,22 @@ cs:
         checks:
           index:
             admin_head_tags: Úžasné tagy zahrnuté v hlavičce administrace aplikace
+            awesome_update_available: 'Je dostupná nová verze: %{latest_version}'
+            awesome_version: Decidim Awesome verze %{version}
             decidim-admin: Z modulu Admin
             decidim-assemblies: Z modulu Shromáždění
             decidim-conferences: Z Konferenční modulu
             decidim-core: Z hlavního Core modulu
             decidim-participatory_processes: Z modulu participačních procesů
             decidim-proposals: Z modulu Návrhy
+            decidim_update_available: 'Je dostupná nová verze: %{latest_version}'
             decidim_version: Decidim verze %{version}
             errors:
               CSS: Hlavička neobsahuje požadované položky <link> stylu. Chcete-li to vyřešit, můžete je ručně přidat do vlastního _head.html.erb
               JavaScript: Hlavička neobsahuje požadované <script> položky javascriptu. Pro vyřešení je můžete ručně přidat do vlastního admin/_header.html.erb
             head_tags: Úžasné tagy zahrnuté v hlavičce aplikace
             link_admins: Přihlásit se do /system panelu
+            view_release: Zobrazit poznámky k vydání
         config:
           anonymous: Nepřihlášení uživatelé
           caution: 'POZNÁMKA: Tato funkce silně mění některé výchozí chování, které by mohlo vést k neočekávaným výsledkům. Používejte ji s opatrností!'
@@ -361,6 +394,7 @@ cs:
           system: Všude kromě participačních prostor
           title:
             admins: Škálovaní administrátoři
+            cookie_management: Správa souborů cookies
             editors: Hack editoru
             livechat: Živý chat
             proposal_custom_fields: 'Vlastní pole návrhů: veřejná pole'
@@ -395,6 +429,116 @@ cs:
           update:
             error: Chyba při aktualizaci případu podmínky
             success: Případ stavu byl úspěšně aktualizován
+        cookie_categories:
+          cookie_management_warning_html: Upozorňujeme, že Decidim přinutí uživatele přijmout všechny cookies pro zobrazení iframe Aby odpovídaly GDPR, ujistěte se, že přidáte do svých řádných kategorií cookies, které budou použity v iframe.
+          create:
+            error: Chyba při vytváření kategorie cookie! %{error}
+            success: Kategorie Cookie byla úspěšně vytvořena
+          destroy:
+            error: Chyba při odstraňování kategorie cookie! %{error}
+            success: Kategorie cookie byla úspěšně odstraněna
+          edit:
+            cancel: Zrušit
+            items: Upravit položky kategorie
+            save: Uložit
+            title: Upravit kategorii cookie
+          form:
+            slug_help: Jedinečný identifikátor použitý ve skriptech k odkazu na tuto kategorii.
+            visibility:
+              hidden: Skrytý
+              visible: Viditelný
+          index:
+            cannot_remove_default: Výchozí kategorie nelze odstranit
+            confirm_reset: Opravdu chcete odstranit toto přizpůsobení?
+            description_html: |
+              Kategorie a položky cookie kontrolují pouze rozhraní souhlasu a dokumentace.<br>
+              Aby nastavení byla účinná, musí být skripty a služby třetích stran nakonfigurovány, aby se načetly až po udělení souhlasu.<br>
+              Tato konfigurace extra skriptu není nutná pro vložení videa iframu, protože Decidim již obsahuje vestavěný souhlas pro tyto vložení.<br>
+              Postupujte podle oficiálního průvodce: <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Přidání skriptů, které vyžadují souhlas s daty</a>.
+            edit: Upravit kategorii
+            items: Položky kategorie
+            new: Nová kategorie
+            reset: Odstranit přizpůsobení
+            title: Správa souborů cookies
+          new:
+            cancel: Zrušit
+            save: Uložit
+            title: Nová kategorie cookie
+          script_config:
+            script_consent_help_html: |
+              <p>Skripty vázané na tuto kategorii respektují pouze souhlas, pokud jsou přidány uvnitř skriptu s atributem <span class="label">data-consent="%{category}"</span>.</p>
+              <p>Doporučené místo pro jejich přidání je v <span class="label">app/views/layouts/decidim/_head_extra.html.erb</span> nebo v záhlaví textových bloků (pokud je povoleno).</p>
+              <p>Příklad:</p><br><pre>%{example}</pre><br>
+              <p>Bez <span class="label">type="text/plain"</span>nastavení souhlasu uživatele nemá žádný účinek.<br>Přečtěte si více na <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Přidávání skriptů, které vyžadují datový souhlas</a>.</p>
+          update:
+            error: Chyba při aktualizaci kategorie cookie! %{error}
+            success: Kategorie cookie byla úspěšně aktualizována
+        cookie_items:
+          cookie_item_dropdown:
+            button: Běžné služby cookie
+          cookie_item_presets:
+            descriptions:
+              consent: Používá se pro funkčnost. Trvá 2 roky, Google ji používá k ukládání stavu uživatelů podle jejich volby cookies. Přečtěte si více o tom, jak Google používá cookies
+              decidim_consent: Uloží informace o cookies povolených uživatelem na této stránce.
+              emoji_picker_recent: Uloží vaše naposledy vybrané emoji
+              facebook_fr: Využívá společnost Meta k realizaci, měření a zlepšení relevance reklamy.
+              fbp: Identifikuje relace prohlížeče pro sledování Facebook Pixel.
+              ga_gat: Používá se ke snížení míry požadavku odeslané Google Analytics.
+              ga_gid: Používá se k rozlišení uživatelů pro analytické účely. Platí po 24 hodin.
+              ga_main: Slouží k rozlišení uživatelů přiřazením jedinečného identifikátoru.
+              ga_property: Používá se v GA4 k přetrvávání stavu relace a počitadel pro určitou vlastnost.
+              jitsi_known_domains: Uloží seznam známých domén
+              jitsi_language: Uloží vaši předvolbu jazyka
+              pref: Používá se pro funkčnost. YouTube používá tuto cookie k ukládání informací, jako je vaše preferovaná konfigurace stránek a nastavení přehrávání, jako jsou explicitní možnosti automatického přehrávání, náhodný obsah a velikost přehrávače. Přečtěte si více o tom, jak Google používá cookies
+              recaptcha_grecaptcha: Používá se pro reCAPTCHA k zajištění ochrany proti spamu a analýzy rizik.
+            services:
+              cloudflare_turnstile: Cloudflare Turnstile
+              decidim_essential: Tento web
+              emoji_picker: Tento web
+              facebook_pixel: Meta (Facebook)
+              google_analytics: Google Analytics
+              google_maps_embeds: Google mapy
+              google_tag_manager: Google Tag Manager
+              graphiql: Tento web
+              hcaptcha: hCaptcha
+              jitsi_meet: Jitsi Meet
+              linkedin_insight: LinkedIn
+              matomo: Matomo
+              openstreetmap_tiles: OpenStreetMap
+              recaptcha: Google reCAPTCHA
+              vimeo_embeds: Vimeo
+              youtube_embeds: YouTube
+              youtube_nocookie: YouTube (rozšířený režim pro ochranu soukromí)
+          create_preset:
+            not_found: Předvolba nebyla nalezena
+            success: Položka předvolby cookie byla úspěšně přidána
+          destroy:
+            error: Chyba při odstraňování položky cookie! %{error}
+            success: Položka cookie byla úspěšně odstraněna
+          edit:
+            cancel: Zrušit
+            save: Uložit
+            title: Upravit položku cookie
+          form:
+            description_item_help: Označuje účel této cookie a informace, které ukládá
+            expiration_item_help: Doba vypršení platnosti cookie. Toto je pouze informativní, nebude mít vliv na aktuální dobu vypršení platnosti cookie.
+            service_item_help: Toto je stručný popis označující, kde se toto používá (například "Tato stránka", "Vloženo do YouTube", "Jitsi meets", atd.)
+            title_item_help: Soubory cookie najdete pomocí inspektora (sekce úložiště). Nemělo by obsahovat žádné mezery.
+          index:
+            back_to_categories: Zpět do kategorií
+            cannot_remove_default: Výchozí položky nelze odstranit
+            confirm_reset: Opravdu chcete odstranit toto přizpůsobení?
+            edit: Upravit položku
+            new: Nová položka
+            reset: Odstranit přizpůsobení
+            title: "%{category}: Položky cookie"
+          new:
+            cancel: Zrušit
+            save: Uložit
+            title: Nová položka cookie
+          update:
+            error: Chyba při aktualizaci položky cookie! %{error}
+            success: Položka cookie byla úspěšně aktualizována
         custom_redirects:
           create:
             error: Chyba při vytváření přesměrování! %{error}
@@ -450,8 +594,21 @@ cs:
             ip_address: IP adresa
             no_data: Nebyly nalezeny žádné IP adresy
             stamps: Hashcash razítka
+        landing_menu_items:
+          form:
+            preset: Přednastavení automatického vyplnění
+            preset_content_blocks: Existující bloky obsahu
+            select_a_preset: "— Vyberte společnou položku nabídky —"
+            url_help_html: "<b>#section-id</b> — posune se do sekce na této stránce<br><b>/path</b> — vnitřní stránka (např.. /processes)<br><b>https://example.com</b> – externí odkaz (automaticky se otevře v nové kartě)"
+          new:
+            save: Uložit
+            title: Nová položka menu
+          show:
+            save: Uložit
+            title: Upravit položku menu
         menu:
           admins: Škálovaní administrátoři
+          cookie_management: Správa souborů cookie
           custom_redirects: Vlastní přesměrování
           editors: Hack editoru
           livechat: Live Chat
@@ -602,6 +759,7 @@ cs:
           title: Název bloku
           upcoming: Nadcházející
         awesome_processes:
+          active_spaces: Participační procesy
           any_group: Jakákoli skupina
           group_label: Skupina
           max_results: Maximální počet prvků k zobrazení
@@ -626,6 +784,33 @@ cs:
             automatic: Automaticky
             manual: Ručně
           title: Název bloku
+        landing_menu:
+          alignment: Pozice menu
+          alignment_center: Uprostřed
+          alignment_help: Zarovnejte položky nabídky vlevo, na střed nebo vpravo na stránce
+          alignment_left: Vlevo
+          alignment_right: Vpravo
+          css_comment_hover: Styl odkazu menu při přejetí myší
+          css_comment_link: Styl pro jednotlivé odkazy v menu
+          css_comment_menu: Styl pro celý blok menu
+          css_help_html: 'Toto menu můžete dále přizpůsobit vytvořením %{link} pro něj pomocí tohoto kódu odkazovat na různé prvky v něm:'
+          css_help_link: vlastní styly
+          delete_confirm: Opravdu chcete tuto položku odstranit?
+          drag: Přetažením přeskupíte
+          edit_item: Upravit položku
+          empty_item: Nová prázdná položka
+          name: Globální menu Awesome
+          new_item: Přidat novou položku
+          presets: Předvolby
+          show_on_mobile: Zobrazit na mobilních obrazovkách
+          sticky: Připnutý (při posouvání vždy viditelný)
+          table:
+            actions: Akce
+            hidden: Skrytý
+            name: Název
+            url: URL
+            visible: Viditelný
+          title: Přejít na ...
         map:
           collapse: Začít se sbaleným menu
           map_center: Střed mapy (zeměpisná šířka, zeměpisná délka)
@@ -647,6 +832,13 @@ cs:
           text_settings: Nastavení textu
           title: Nadpis
           truncate: Maximum znaků pro popisy vyskakovacích oken
+        rich_text:
+          add_column: Přidat nový sloupec
+          background_image: Obrázek pozadí
+          background_image_help: Volitelný obrázek zobrazený za obsahem sloupce. Doporučená minimální šířka 1920px.
+          background_image_placement: Umístění obrázku
+          background_image_placement_help: Jak je obrázek pozadí zobrazen ve sloupci. Použije se pouze při nahrání obrázku na pozadí.
+          title: Název bloku
       credits: Decidim Awesome %{version} · Udržováno s ♥ od %{company}
       custom_fields:
         errors:
@@ -738,6 +930,17 @@ cs:
           view_proposal: Zobrazit návrh
   layouts:
     decidim:
+      data_consent:
+        details:
+          columns:
+            expiration: Vypršení platnosti
+          items:
+            _session_id:
+              expiration: relace
+            decidim-consent:
+              expiration: 1 rok
+            pwaInstallPromptSeen:
+              expiration: trvalé
       decidim_awesome:
         admin:
           maintenance:

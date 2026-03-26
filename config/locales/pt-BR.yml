@@ -402,21 +402,15 @@ pt-BR:
               <p>Sem <code>type="text/plain"</code>, a configuração de consentimento de dados do usuário não tem efeito.<br>Leia mais em <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Adding scripts which require data consent</a>.</p>
         cookie_items:
           cookie_item_presets:
+            descriptions:
+              turnstile_cf_bm: Ajuda o Cloudflare a detectar e mitigar trafego automatizado.
+              turnstile_cf_clearance: Armazena a prova de que um visitante passou por um desafio de seguranca anterior.
+              turnstile_cfuvid: Ajuda o Cloudflare a distinguir usuarios individuais que compartilham o mesmo endereco IP.
             explanations:
               cloudflare_turnstile: |-
                 Adicione estes cookies quando o Cloudflare Turnstile estiver ativado para proteger formularios contra abuso e trafego automatizado. Eles suportam deteccao de bots, validacao de sessao e continuidade do desafio.
 
                 Categoria recomendada: Essencial
-            descriptions:
-              turnstile_cf_bm: Ajuda o Cloudflare a detectar e mitigar trafego automatizado.
-              turnstile_cf_clearance: Armazena a prova de que um visitante passou por um desafio de seguranca anterior.
-              turnstile_cfuvid: Ajuda o Cloudflare a distinguir usuarios individuais que compartilham o mesmo endereco IP.
-            labels:
-              cloudflare_turnstile:
-                one: Cloudflare Turnstile (%{count} cookie)
-                other: Cloudflare Turnstile (%{count} cookies)
-            services:
-              cloudflare_turnstile: Cloudflare Turnstile
         custom_redirects:
           create:
             error: Erro ao criar redirecionamento! %{error}

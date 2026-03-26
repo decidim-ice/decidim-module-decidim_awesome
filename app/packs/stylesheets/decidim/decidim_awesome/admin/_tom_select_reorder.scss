@@ -1,0 +1,28 @@
+[data-awesome-processes-manual] .ts-control {
+  flex-flow: column nowrap !important;
+  gap: 0.25rem;
+
+  > .item {
+    display: flex !important;
+    align-items: center;
+    gap: 0.25rem;
+    width: fit-content;
+    margin: 0 !important;
+  }
+
+  .reorder-btn {
+    flex-shrink: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0.1rem 0.25rem;
+    font-size: 0.75rem;
+    line-height: 1;
+    color: inherit;
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
