@@ -322,7 +322,7 @@ de:
           form_force_authorizations:
             delete: Löschen
             force_authorizations_html: |
-              Verifizierungsgruppen definieren. Jede Gruppe kann Nutzenden eine oder mehrere Verifizierungsarten für bestimmte Bereiche der Plattform vorschreiben.
+              Verifizierungsgruppen definieren. Jede Gruppe kann Nutzenden eine oder mehrere Verifizierungsarten für bestimmte Bereiche der Plattform vorschreiben. 
             help: Sie können Gruppen von Autorisierungsmethoden definieren und den darauf basierenden Zugriff einschränken.
             new: Eine neue Autorisierungsgruppe hinzufügen
             remove: Diese "Autorisierungsgruppe" entfernen
@@ -409,12 +409,12 @@ de:
             destination_help: Absolute Pfade (beginnen mit "/") oder externe URLs (http://..)
             origin_help: Nur absolute Pfade, beginnen mit "/"
             pass_query_help: |
-              Aktivieren Sie diese Option, wenn Sie möchten, dass der Abfrage-String an das Ziel kopiert wird.<br> Wenn Sie zum Beispiel "/my-origin" => "/my-destination" konfiguriert haben, wird eine Anfrage an "/my-origin?locale=ca" an "/my-destination?locale=ca" weitergeleitet.
+              Aktivieren Sie diese Option, wenn Sie möchten, dass der Abfrage-String an das Ziel kopiert wird.<br> Wenn Sie zum Beispiel "/my-origin" => "/my-destination" konfiguriert haben, wird eine Anfrage an "/my-origin?locale=ca" an "/my-destination?locale=ca" weitergeleitet. 
           index:
             check_redirections: "✔ Umleitungen prüfen"
             confirm_destroy: Sind Sie sicher, dass Sie diese Umleitung entfernen möchten?
             description: |
-              Sie können eine beliebige Route (beginnend mit <code>/</code>) definieren, um jeden Besucher zu einer Ziel-URL umzuleiten. <br> Ziel kann ein absoluter Pfad sein (z.B.: <code>/processes/ein-prozess</code>) oder mit <code>https://</code> (z.B.: <code>http://decidim: org</code>) beginnen.<br><br> Berücksichtigen Sie, dass eine Umleitung nur funktioniert, wenn keine andere Route passt. Es ist nicht möglich, ursprüngliche Routen außer Kraft zu setzen (dies ist beabsichtigt).<br> Wenn Sie sich nicht sicher sind, verwenden Sie die Funktion «Umleitungen prüfen», um die Umleitung zu testen.
+              Sie können eine beliebige Route (beginnend mit <code>/</code>) definieren, um jeden Besucher zu einer Ziel-URL umzuleiten. <br> Ziel kann ein absoluter Pfad sein (z.B.: <code>/processes/ein-prozess</code>) oder mit <code>https://</code> (z.B.: <code>http://decidim: org</code>) beginnen.<br><br> Berücksichtigen Sie, dass eine Umleitung nur funktioniert, wenn keine andere Route passt. Es ist nicht möglich, ursprüngliche Routen außer Kraft zu setzen (dies ist beabsichtigt).<br> Wenn Sie sich nicht sicher sind, verwenden Sie die Funktion «Umleitungen prüfen», um die Umleitung zu testen. 
             edit: Umleitung bearbeiten
             new: Neue Umleitung
             remove: Umleitung entfernen
@@ -544,7 +544,7 @@ de:
           private_data_last_remove: Diese Daten wurden vor %{time_ago} gelöscht.
           private_data_last_update: Diese Daten wurden vor %{time_ago} gelöscht.
           proposal_private_custom_fields: Private Felder
-          remove_private_data: "👉 Sie können es entfernen"
+          remove_private_data: "\U0001F449 Sie können es entfernen"
         scoped_admin_styles:
           menu:
             title: Admin Panel
