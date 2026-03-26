@@ -495,7 +495,7 @@ ca:
           private_data_last_remove: Aquestes dades es van destruir fa %{time_ago}.
           private_data_last_update: Aquestes dades es van actualitzar per última vegada fa %{time_ago}.
           proposal_private_custom_fields: Camps privats
-          remove_private_data: "👉 És possible que vulgueu eliminar-lo"
+          remove_private_data: "\U0001F449 És possible que vulgueu eliminar-lo"
         scoped_admin_styles:
           menu:
             title: Panell admin
