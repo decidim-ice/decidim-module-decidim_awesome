@@ -627,9 +627,7 @@ it:
             past: Solo processi passati
             upcoming: Solo processi futuri
           process_type: Tipo di processi
-          process_type_mixed_hint: In modalità mista, processi e gruppi sono intercalati fino alla quantità massima. I processi sono ordinati per peso (crescente). Se un tipo si esaurisce, i posti rimanenti vengono riempiti con l'altro.
           process_types:
-            all: Tutti i processi e gruppi misti
             groups: Solo gruppi di processi
             processes: Solo processi
           processes: Processi
