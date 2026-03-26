@@ -9,6 +9,7 @@ Compatibility:
 
 Features:
   - Fix exports of checkbox groups for custom fields
+  - Allow to reorder processes when "manual" mode is selected in awesome processes groups
   - Add Sticky Awesome Global Menu content block ([#540](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/540))
   - Add Rich Text content block for landing pages ([#543](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/543))
   - Add a new cookie policy/category manager ([#521](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/521))
