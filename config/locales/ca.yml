@@ -901,9 +901,7 @@ ca:
             past: Només processos passats
             upcoming: Només processos futurs
           process_type: Tipus de processos
-          process_type_mixed_hint: En mode mixt, els processos i grups s'intercalen fins la quantitat màxima. Els processos s'ordenen per pes (ascendent). Si un tipus s'esgota, els espais restants s'omplen amb l'altre.
           process_types:
-            all: Tots els processos i grups barrejats
             groups: Només grups de processos
             processes: Només processos
           processes: Processos
