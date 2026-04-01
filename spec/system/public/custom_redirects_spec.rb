@@ -90,6 +90,16 @@ describe "Custom Redirections" do
           end
         end
       end
+
+      context "when destination is an external URL" do
+        let(:destination) { "https://www.example.com" }
+
+        it "redirects to destination" do
+          visit goto
+
+          expect(page).to have_current_path("#{destination}?#{query}")
+        end
+      end
     end
 
     context "when origin is malformed" do

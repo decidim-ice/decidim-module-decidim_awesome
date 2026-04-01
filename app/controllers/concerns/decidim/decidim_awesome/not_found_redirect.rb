@@ -34,7 +34,7 @@ module Decidim
 
         def redirect_to_custom_paths
           destination = custom_redirects_destination(request.original_fullpath)
-          redirect_to destination if destination.present?
+          redirect_to(destination, allow_other_host: true) if destination.present?
         end
 
         def custom_redirects_destination(fullpath)
