@@ -2,8 +2,13 @@
 
 module Decidim
   module DecidimAwesome
-    # Query class responsible for fetching participatory processes and/or groups
-    # based on content block settings. Supports automatic (active) and manual selection.
+    # Query class responsible for fetching participatory processes
+    # based on content block settings.
+    #
+    # Process types:
+    #   - "processes": only processes WITHOUT a group
+    #   - "groups": only processes WITH a group (optionally restricted to a specific group)
+    #   - "all": all processes regardless of group membership
     class AwesomeProcessesQuery
       def initialize(organization, current_user, settings)
         @organization = organization
@@ -29,35 +34,26 @@ module Decidim
       end
 
       def automatic_selection
-        return fetch_processes.first(max_results) if settings.process_type == "processes"
-        return fetch_groups.first(max_results) if settings.process_type == "groups"
-
-        interleave(fetch_processes, fetch_groups).first(max_results)
+        fetch_processes
       end
 
       def manual_selection
-        process_ids = []
-        group_ids = []
+        ids = selected_process_ids
+        return [] if ids.empty?
 
-        selected_ids.each do |id_str|
-          type, id = id_str.split("_", 2)
-          case type
-          when "process" then process_ids << id.to_i
-          when "group" then group_ids << id.to_i
-          end
-        end
+        scope = published_processes.where(id: ids).includes(:organization, :hero_image_attachment)
+        scope = apply_type_filter(scope)
+        scope = apply_group_filter(scope)
 
-        items_by_key = {}
-        published_processes.where(id: process_ids).each { |p| items_by_key["process_#{p.id}"] = p } if process_ids.any?
-        organization_groups.where(id: group_ids).each { |g| items_by_key["group_#{g.id}"] = g } if group_ids.any?
-
-        selected_ids.filter_map { |id_str| items_by_key[id_str] }.first(max_results)
+        items_by_id = scope.index_by(&:id)
+        ids.filter_map { |id| items_by_id[id] }.first(max_results)
       end
 
       def fetch_processes
         scope = published_processes
         scope = apply_status_filter(scope)
-        scope = scope.where(decidim_participatory_process_group_id: settings.process_group_id) if group_filter_active?
+        scope = apply_type_filter(scope)
+        scope = apply_group_filter(scope)
         scope.reorder(weight: :asc, id: :asc)
              .includes(:organization, :hero_image_attachment)
              .limit(max_results)
@@ -73,12 +69,28 @@ module Decidim
         end
       end
 
-      def fetch_groups
-        scope = organization_groups
-        scope = scope.where(id: settings.process_group_id) if group_filter_active?
-        scope.order(promoted: :desc, id: :asc)
-             .limit(max_results)
-             .to_a
+      def apply_type_filter(scope)
+        case settings.process_type
+        when "processes"
+          scope.where(decidim_participatory_process_group_id: nil)
+        when "groups"
+          scope.where.not(decidim_participatory_process_group_id: nil)
+        else
+          scope
+        end
+      end
+
+      # When type = "all", restrict applies only to grouped processes — ungrouped always pass
+      # When type = "processes", group filter is irrelevant (ungrouped processes have no group)
+      def apply_group_filter(scope)
+        return scope unless group_filter_active?
+        return scope if settings.process_type == "processes"
+
+        if settings.process_type == "all"
+          scope.where(decidim_participatory_process_group_id: [settings.process_group_id, nil])
+        else
+          scope.where(decidim_participatory_process_group_id: settings.process_group_id)
+        end
       end
 
       def published_processes
@@ -87,32 +99,16 @@ module Decidim
           .query
       end
 
-      def organization_groups
-        Decidim::ParticipatoryProcessGroup.where(organization: organization)
-      end
-
       def group_filter_active?
         settings.process_group_id.to_i.positive?
       end
 
-      def selected_ids
-        settings.selected_ids.compact_blank
+      def selected_process_ids
+        settings.selected_ids.compact_blank.map(&:to_i).reject(&:zero?)
       end
 
       def max_results
-        [settings.max_results.to_i, 0].max
-      end
-
-      # Alternates items from two arrays: [a1, b1, a2, b2, ...].
-      # When one array is exhausted, appends remaining items from the other.
-      def interleave(arr_a, arr_b)
-        result = []
-        max_len = [arr_a.size, arr_b.size].max
-        max_len.times do |i|
-          result << arr_a[i] if i < arr_a.size
-          result << arr_b[i] if i < arr_b.size
-        end
-        result
+        [settings.max_results.to_i, 1].max
       end
     end
   end

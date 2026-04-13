@@ -21,6 +21,7 @@ Decidim::DecidimAwesome.configure do |config|
       :home_content_block_menu,
       :scoped_admins,
       :custom_redirects,
+      :cookie_management,
       :validate_title_min_length,
       :validate_title_max_caps_percent,
       :validate_title_max_marks_together,

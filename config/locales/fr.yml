@@ -46,6 +46,15 @@ fr:
         component_manifest: Uniquement dans les composants de type
         participatory_space_manifest: Appliquer aux espaces participatifs de type
         participatory_space_slug: Seulement dans
+      cookie_category:
+        mandatory: Obligatoire
+        title: Catégorie
+        total_cookies: Total des cookies
+        visibility: Visibilité
+      cookie_item:
+        name: Nom du cookie
+        types:
+          local_storage: Stockage local
       custom_redirect:
         active: Actif
         destination: Destination
@@ -62,6 +71,12 @@ fr:
         awesome_admins_available_authorizations: Autoriser les administrateurs à vérifier manuellement les utilisateurs avec ces autorisations
       user:
         user_time_zone: Fuseau horaire personnel
+    errors:
+      models:
+        cookie_item:
+          attributes:
+            name:
+              invalid_format: Le nom ne peut contenir que des lettres, des chiffres, des traits d'union et des tirets bas (pas d'espaces)
   decidim:
     admin:
       actions:
@@ -193,7 +208,7 @@ fr:
             moderator: Modérateur
         admin_authorizations:
           authorization:
-            confirm_destroy: Êtes-vous sûr de vouloir détruire cette autorisation ? Cela pourrait affecter l'accès des utilisateurs à la plateforme.
+            confirm_destroy: Êtes-vous sûr de vouloir détruire cette autorisation
             destroy: Supprimer
             granted_at: Accordé à %{date}
             metadata: Contient des métadonnées ? %{metadata}
@@ -365,6 +380,7 @@ fr:
           system: Partout sauf les espaces participatifs
           title:
             admins: Administrateurs de secteur
+            cookie_management: Gestion des cookies
             editors: Hacks de l'éditeur
             livechat: Chat en direct
             proposal_custom_fields: 'Champs personnalisés de propositions : champs publics'
@@ -399,6 +415,246 @@ fr:
           update:
             error: Erreur lors de la mise à jour de la contrainte
             success: Contrainte mise à jour avec succès
+        cookie_categories:
+          create:
+            error: Erreur lors de la création de la catégorie de cookie ! %{error}
+            success: Catégorie de cookie créée avec succès
+          destroy:
+            error: Erreur lors de la suppression de la catégorie de cookie ! %{error}
+            success: Catégorie de cookie supprimée avec succès
+          edit:
+            cancel: Annuler
+            save: Enregistrer
+            title: Modifier la catégorie de cookie
+          form:
+            visibility:
+              hidden: Masqué
+          index:
+            cannot_remove_default: Les catégories par défaut ne peuvent pas être supprimées
+            confirm_reset: Êtes-vous sûr de vouloir réinitialiser cette catégorie à ses valeurs par défaut ? Cela supprimera toutes les personnalisations que vous avez effectuées.
+            description_html: |
+              Les catégories et éléments de cookies ne contrôlent que l'interface utilisateur de consentement et la documentation.<br>Pour rendre les préférences effectives, les scripts et services tiers doivent être configurés pour ne se charger qu'une fois le consentement accordé.<br>Cette configuration supplémentaire de script n'est pas nécessaire pour les intégrations d'iframe vidéo, car Decidim inclut déjà une gestion intégrée du consentement pour ces intégrations.<br>Suivez le guide officiel : <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Ajouter des scripts qui nécessitent le consentement aux données</a>.
+            edit: Modifier la catégorie
+            items: Éléments de la catégorie
+            new: Nouvelle catégorie
+            reset: Réinitialiser aux valeurs par défaut
+            title: Gestion des cookies
+          new:
+            cancel: Annuler
+            save: Enregistrer
+            title: Nouvelle catégorie de cookies
+          script_config:
+            script_consent_help_html: |
+              <p>Les scripts lies a cette catégorie ne respectent le consentement que lorsqu'ils sont ajoutés dans un script avec l'attribut <span class="label">data-consent="%{category}"</span>.</p>
+              <p>L'emplacement recommandé pour les ajouter est <span class="label">app/views/layouts/decidim/_head_extra.html.erb</span> ou dans les snippets d'en-tête (s'ils sont activés).</p>
+              <p>Exemple :</p><br><pre>%{example}</pre><br>
+              <p>Sans <code>type="text/plain"</code>, le paramètre de consentement aux données de l'utilisateur n'a aucun effet.<br>Plus d'informations : <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Adding scripts which require data consent</a>.</p>
+          update:
+            error: Erreur lors de la mise à jour de la catégorie de cookie ! %{error}
+            success: Catégorie de cookie mise à jour avec succès
+        cookie_items:
+          cookie_item_dropdown:
+            button: Services de cookies courants
+          cookie_item_presets:
+            descriptions:
+              consent: Utilisé pour la fonctionnalité. Dure 2 ans, Google l'utilise pour stocker l'état d'un utilisateur concernant ses choix de cookies. En savoir plus sur la façon dont Google utilise les cookies.
+              decidim_consent: Stocke des informations sur les cookies autorisés par l'utilisateur sur ce site web.
+              emoji_picker_recent: Stocke vos emojis les plus récemment sélectionnés
+              facebook_fr: Utilisé par Meta pour diffuser, mesurer et améliorer la pertinence des publicités.
+              fbp: Identifie les sessions du navigateur pour le suivi du Pixel Facebook.
+              ga_gat: Utilisé pour limiter le taux de requêtes envoyées à Google Analytics.
+              ga_gid: Utilisé pour distinguer les utilisateurs à des fins d'analyse. Expire après 24 heures.
+              ga_main: Utilisé pour distinguer les utilisateurs en leur attribuant un identifiant unique.
+              ga_property: Utilisé dans GA4 pour conserver l'état de la session et les compteurs pour une propriété spécifique.
+              graphiql_doc_explorer_open: Enregistre si vous avez le panneau de documentation ouvert lors de l'utilisation de l'API GraphQL
+              graphiql_editor_flex: Enregistre votre préférence d'onglet lors de l'utilisation de l'API GraphQL
+              graphiql_history_pane_open: Enregistre si vous avez le panneau d'historique ouvert lors de l'utilisation de l'API GraphQL
+              graphiql_queries: Enregistre l'historique de vos requêtes lors de l'utilisation de l'API GraphQL
+              graphiql_query: Enregistre votre dernière requête lors de l'utilisation de l'API GraphQL
+              graphiql_tab_state: Enregistre votre configuration d'onglets lors de l'utilisation de l'API GraphQL
+              gtm_dc: Utilisé par Google Tag Manager pour le chargement des balises et le diagnostic.
+              gtm_debug: Stocke l'état du mode de débogage de Google Tag Manager.
+              gtm_gcl_au: Utilisé par les services Google pour expérimenter l'efficacité publicitaire.
+              hcaptcha_accessibility: Stocke les préférences liées à l'accessibilité pour les défis hCaptcha.
+              hcaptcha_session: Stocke l'état de session temporaire hCaptcha pour valider les défis.
+              jitsi_amp: Utilisé pour Amplitude Analytics
+              jitsi_amplitude_unsent_identify: Utilisé pour Amplitude Analytics
+              jitsi_amplitude_unset: Utilisé pour Amplitude Analytics
+              jitsi_calendar_sync: Utilisé pour la fonction de synchronisation de calendrier.
+              jitsi_callstats_username: Utilisé pour enregistrer la session utilisateur sur Jitsi.
+              jitsi_dropbox: Utilisé pour la fonction d'intégration Dropbox.
+              jitsi_endpoint_id: Utilisé à des fins de communication avec le serveur Jitsi.
+              jitsi_known_domains: Enregistrer une liste de domaines connus
+              jitsi_language: Enregistrer votre préférence de langue
+              jitsi_prejoin: Utilisé pour la fonction d'écran de pré-connexion.
+              jitsi_recent_list: Utilisé pour la fonction de liste récente.
+              jitsi_settings: Utilisé pour enregistrer vos paramètres Jitsi.
+              jitsi_video_quality: Utilisé pour la fonction de stockage persistant de la qualité vidéo.
+              jitsi_virtual_background: Utilisé pour la fonction de fond vidéo.
+              linkedin_li_gc: Stocke l'état du consentement pour les services LinkedIn.
+              linkedin_lidc: Utilisé par LinkedIn pour le routage et l'équilibrage de charge.
+              linkedin_user_match_history: Suit le moment de l'interaction publicitaire et l'attribution des conversions pour les campagnes LinkedIn.
+              maps_1p_jar: Stocke l'utilisation/les préférences de Google Maps et les signaux de personnalisation des publicités.
+              maps_consent: Stocke l'état du consentement de l'utilisateur pour les services Google lors de l'utilisation d'intégrations de cartes.
+              maps_nid: Stocke les préférences de Google Maps et les informations du navigateur liées à la sécurité.
+              matomo_mtm_consent: Stocke le statut de consentement de l'utilisateur pour le suivi Matomo.
+              matomo_pk_id: Utilisé pour stocker un identifiant de visiteur unique et identifier les visiteurs de retour.
+              matomo_pk_ref: Utilisé pour stocker des informations d'attribution (le référent qui a amené l'utilisateur sur le site web).
+              matomo_pk_ses: Utilisé pour stocker des données de session temporaires pour la visite actuelle.
+              osm_location: Stocke les valeurs par défaut de l'emplacement/du zoom de la carte pour les interactions OpenStreetMap.
+              osm_session: Stocke les données de session temporaires pour les interactions des utilisateurs d'OpenStreetMap.
+              osm_totp_token: Stocke les données de jeton temporaires liées à la 2FA pour les flux de travail du compte OpenStreetMap.
+              pref: Utilisé pour la fonctionnalité. YouTube utilise ce cookie pour stocker des informations telles que votre configuration de page préférée et vos préférences de lecture comme les choix d'lecture automatique explicites, le contenu aléatoire et la taille du lecteur. En savoir plus sur la façon dont Google utilise les cookies.
+              recaptcha_grecaptcha: Utilisé par reCAPTCHA pour fournir une protection contre le spam et une analyse des risques.
+              recaptcha_rc_a: Stocke les métadonnées d'analyse des risques reCAPTCHA dans le stockage du navigateur.
+              recaptcha_rc_c: Stocke les métadonnées de défi/session reCAPTCHA dans le stockage du navigateur.
+              remember_user_token: Permet de garder votre session ouverte si vous cliquez sur "Se souvenir de moi" lors de la connexion.
+              session_id: Permet aux sites web de se souvenir de l'utilisateur au sein d'un site web lorsqu'il passe d'une page web à l'autre.
+              turnstile_cf_bm: Aide Cloudflare a detecter et attenuer le trafic automatise.
+              turnstile_cf_clearance: Conserve la preuve qu'un visiteur a reussi un challenge de securite precedent.
+              turnstile_cfuvid: Aide Cloudflare a distinguer les utilisateurs individuels partageant la meme adresse IP.
+              vimeo_player: Stocke les préférences du lecteur Vimeo telles que le volume, la qualité ou le comportement de lecture automatique.
+              vimeo_vuid: Stocke un identifiant de visiteur Vimeo unique utilisé pour l'analyse.
+              visitor_info1_live: Utilisé pour la fonctionnalité, l'analyse, la publicité et la personnalisation. En savoir plus sur la façon dont Google utilise les cookies.
+              ysc: Utilisé pour la sécurité. Dure le temps d'une session de navigation d'un utilisateur. Utilisé pour s'assurer que les requêtes au sein d'une session de navigation sont faites par l'utilisateur, et non par d'autres sites. Ce cookie empêche les sites malveillants d'agir au nom d'un utilisateur à son insu. En savoir plus sur la façon dont Google utilise les cookies.
+              yt_remote_connected_devices: Stocke la liste des appareils connectés pour les commandes du lecteur YouTube.
+              yt_remote_device_id: Stocke un identifiant d'appareil pour les interactions à distance du lecteur YouTube.
+              ytidb_last_result_entry_key: Stocke les dernières métadonnées de résultat du lecteur YouTube dans le stockage local.
+            explanations:
+              cloudflare_turnstile: |-
+                Ajoutez ces cookies lorsque Cloudflare Turnstile est active pour proteger les formulaires contre les abus et le trafic automatise. Ils prennent en charge la detection de bots, la validation de session et la continuite du challenge.
+
+                Categorie recommandee: Essentielle
+              decidim_essential: |-
+                Ajoutez ces cookies essentiels qui sont requis pour les fonctionnalités de base de votre plateforme Decidim. Ces cookies permettent l'authentification des utilisateurs, la gestion des sessions et le suivi du consentement.
+
+                Catégorie recommandée : Essentiel
+              emoji_picker: |-
+                Ajoutez ce cookie lorsque vous activez la fonction de sélecteur d'emojis dans les éditeurs de texte. Il stocke les emojis récemment utilisés pour personnaliser l'expérience utilisateur.
+
+                Catégorie recommandée : Préférences
+              facebook_pixel: |-
+                Ajoutez ces cookies lorsque vous utilisez le Pixel de Meta (Facebook) pour le suivi des conversions ou l'attribution publicitaire. Ils aident à identifier les sessions du navigateur et à mesurer les performances de la campagne.
+
+                Catégorie recommandée : Marketing
+              google_analytics: |-
+                Ajoutez ces cookies lorsque vous utilisez Google Analytics (GA4/gtag.js) pour mesurer le trafic et le comportement des utilisateurs. Ils identifient les visiteurs, distinguent les sessions et aident à générer des statistiques d'utilisation.
+
+                Catégorie recommandée : Analytique
+              google_maps_embeds: |-
+                Ajoutez ces cookies lors de l'intégration de Google Maps sur vos pages (par exemple, widgets de carte ou blocs de localisation). Ils aident aux préférences de carte, à l'état du consentement et aux mesures d'utilisation.
+
+                Catégorie recommandée : Préférences ou Analytique
+              google_tag_manager: |-
+                Ajoutez ces cookies lorsque vos balises d'analyse ou de marketing sont diffusées via Google Tag Manager. Certaines balises peuvent définir des cookies de suivi supplémentaires en fonction de votre configuration GTM.
+
+                Catégorie recommandée : Analytique ou Marketing
+              graphiql: |-
+                Ajoutez ces cookies lorsque vous activez l'explorateur d'API GraphQL (/api/graphiql) pour les développeurs. Ils stockent les préférences d'interface de l'explorateur, l'historique des requêtes et les configurations d'onglets.
+
+                Catégorie recommandée : Préférences
+              hcaptcha: |-
+                Ajoutez ces cookies/entrées de stockage lorsque hCaptcha est activé dans les formulaires. Ils sont utilisés pour la détection de bots, les options d'accessibilité et la gestion des défis/sessions.
+
+                Catégorie recommandée : Essentiel
+              jitsi_meet: |-
+                Ajoutez ces cookies lorsque vous intégrez les réunions de visioconférence Jitsi Meet dans votre plateforme. Ils stockent les paramètres utilisateur, les préférences de langue, les options de qualité vidéo et les données de session pour le service de visioconférence.
+
+                Catégorie recommandée : Préférences
+              linkedin_insight: |-
+                Ajoutez ces cookies lorsque vous utilisez la balise LinkedIn Insight pour mesurer les performances de la campagne et les conversions de visiteurs à partir des publicités LinkedIn.
+
+                Catégorie recommandée : Marketing
+              matomo: |-
+                Ajoutez ces cookies lorsque vous utilisez l'analyse Matomo pour collecter des statistiques sur le site web. Ils identifient les visiteurs de retour, suivent les sessions et stockent les informations de référencement utilisées pour les rapports agrégés.
+
+                Catégorie recommandée : Analytique
+              openstreetmap_tiles: |-
+                Ajoutez ces cookies lorsque votre expérience de carte dépend de ressources hébergées par OpenStreetMap qui peuvent définir des cookies (par exemple, des cartes intégrées ou des fonctionnalités liées au compte OSM).
+
+                Catégorie recommandée : Préférences
+              recaptcha: |-
+                Ajoutez ces cookies/entrées de stockage lorsque Google reCAPTCHA protège les formulaires contre les abus et les bots. Ils aident à évaluer les interactions des utilisateurs et les signaux de sécurité.
+
+                Catégorie recommandée : Essentiel
+              vimeo_embeds: |-
+                Ajoutez ces cookies lorsque vous intégrez des vidéos Vimeo dans des pages, des propositions ou des commentaires. Vimeo les peut utiliser pour mémoriser les paramètres du lecteur et mesurer les interactions de lecture.
+
+                Catégorie recommandée : Préférences ou Analytique
+              youtube_embeds: |-
+                Ajoutez ces cookies lorsque vous autorisez les intégrations de vidéos YouTube dans le contenu (propositions, commentaires, etc.). YouTube définit des cookies d'analyse et de suivi qui collectent des informations sur la lecture vidéo et le comportement des utilisateurs.
+
+                Catégorie recommandée : Préférences (si les vidéos sont part intégral du contenu), Analytique (pour le suivi/statistiques) ou Marketing (si utilisé à des fins publicitaires)
+              youtube_nocookie: |-
+                Ajoutez ces clés de stockage lorsque vous utilisez le mode de confidentialité renforcée de YouTube (youtube-nocookie.com). Elles sont utilisées pour conserver l'état du lecteur et les préférences de l'appareil/session.
+
+                Catégorie recommandée : Préférences
+            labels:
+              decidim_essential:
+                one: Essentiel Decidim (%{count} cookie)
+                other: Essentiel Decidim (%{count} cookies)
+              emoji_picker:
+                one: Sélecteur d'émojis (%{count} cookie)
+                other: Sélecteur d'émojis (%{count} cookies)
+              facebook_pixel:
+                one: Pixel Facebook (%{count} cookie)
+                other: Pixel Facebook (%{count} cookies)
+              google_maps_embeds:
+                one: Intégrations Google Maps (%{count} cookie)
+                other: Intégrations Google Maps (%{count} cookies)
+              graphiql:
+                one: Explorateur d'API GraphiQL (%{count} cookie)
+                other: Explorateur d'API GraphiQL (%{count} cookies)
+              openstreetmap_tiles:
+                one: Tuiles OpenStreetMap (%{count} cookie)
+                other: Tuiles OpenStreetMap (%{count} cookies)
+              vimeo_embeds:
+                one: Intégrations Vimeo (%{count} cookie)
+                other: Intégrations Vimeo (%{count} cookies)
+              youtube_embeds:
+                one: Intégrations YouTube (%{count} cookie)
+                other: Intégrations YouTube (%{count} cookies)
+              youtube_nocookie:
+                one: YouTube sans cookies (%{count} cookie)
+                other: YouTube sans cookies (%{count} cookies)
+            services:
+              decidim_essential: Ce site web
+              emoji_picker: Ce site web
+              graphiql: Ce site web
+              youtube_nocookie: YouTube (mode de confidentialité renforcée)
+          create:
+            error: Erreur lors de la création de l'élément de cookie ! %{error}
+            success: Élément de cookie créé avec succès
+          create_preset:
+            error: Erreur lors de l'ajout de l'élément de cookie préréglé ! %{error}
+            not_found: Préréglage non trouvé
+            success: Élément de cookie préréglé ajouté avec succès
+          destroy:
+            error: Erreur lors de la suppression de l'élément de cookie ! %{error}
+            success: Élément de cookie supprimé avec succès
+          edit:
+            cancel: Annuler
+            save: Enregistrer
+            title: Modifier l'élément de cookie
+          form:
+            description_item_help: Indique le but de ce cookie et les informations qu'il stocke
+            service_item_help: Il s'agit d'une courte description indiquant où cela est utilisé (par exemple "Ce site web", "Intégrations Youtube", "Réunions Jitsi", etc.)
+            title_item_help: Vous pouvez trouver les cookies en utilisant l'inspecteur (section stockage). Il ne doit pas contenir d'espaces.
+          index:
+            back_to_categories: Retour aux catégories
+            cannot_remove_default: Les éléments par défaut ne peuvent pas être supprimés
+            confirm_reset: Êtes-vous sûr de vouloir réinitialiser cet élément à ses valeurs par défaut ? Cela supprimera toutes les personnalisations que vous avez effectuées.
+            edit: Modifier l'élément
+            new: Nouvel élément
+            reset: Réinitialiser aux valeurs par défaut
+            title: "%{category} : Éléments de cookie"
+          new:
+            cancel: Annuler
+            save: Enregistrer
+            title: Nouvel élément de cookie
+          update:
+            error: Erreur lors de la mise à jour de l'élément de cookie ! %{error}
+            success: Élément de cookie mis à jour avec succès
         custom_redirects:
           create:
             error: Erreur lors de la création de la redirection! %{error}
@@ -456,6 +712,7 @@ fr:
             stamps: Tampons de hashcash
         menu:
           admins: Administrateurs de secteur
+          cookie_management: Gestion des cookies
           custom_redirects: Redirections personnalisées
           editors: Hacks de l'éditeur
           livechat: Chat en direct
@@ -553,7 +810,7 @@ fr:
           private_data_last_remove: Ces données ont été détruites il y a %{time_ago}.
           private_data_last_update: Ces données ont été mises à jour il y a %{time_ago}.
           proposal_private_custom_fields: Champs privés
-          remove_private_data: "👉 Vous pouvez le supprimer"
+          remove_private_data: "\U0001F449 Vous pouvez le supprimer"
         scoped_admin_styles:
           menu:
             title: Tableau de bord admin
