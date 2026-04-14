@@ -12,6 +12,8 @@ module Decidim
     autoload :MenuHacker, "decidim/decidim_awesome/menu_hacker"
     autoload :CustomFields, "decidim/decidim_awesome/custom_fields"
     autoload :VotingManifest, "decidim/decidim_awesome/voting_manifest"
+    autoload :ModerationRuleManifest, "decidim/decidim_awesome/moderation_rule_manifest"
+    autoload :ModerationActionManifest, "decidim/decidim_awesome/moderation_action_manifest"
     autoload :Lock, "decidim/decidim_awesome/lock"
     autoload :TranslatedCustomFieldsType, "decidim/decidim_awesome/api/types/translated_custom_fields_type"
     autoload :LocalizedCustomFieldsType, "decidim/decidim_awesome/api/types/localized_custom_fields_type"
@@ -392,9 +394,46 @@ module Decidim
       [:proposals, :reporting_proposals]
     end
 
+    # Enables the automatic moderation rules feature.
+    # When enabled, admins can configure moderation entries with rules, object targets,
+    # and actions that run automatically when content is created or updated.
+    # Set to :disabled to completely remove this feature.
+    config_accessor :auto_moderation_rules do
+      true
+    end
+
     # Public: Stores an instance of ContentBlockRegistry
     def self.voting_registry
       @voting_registry ||= Decidim::ManifestRegistry.new("decidim_awesome/voting")
+    end
+
+    # Public: Registry for moderation rule manifests.
+    def self.moderation_rules_registry
+      @moderation_rules_registry ||= Decidim::ManifestRegistry.new("decidim_awesome/moderation_rules")
+    end
+
+    # Public: Registry for moderation action manifests.
+    def self.moderation_actions_registry
+      @moderation_actions_registry ||= Decidim::ManifestRegistry.new("decidim_awesome/moderation_actions")
+    end
+
+    # Public: Returns action manifests compatible with both a given rule and object type.
+    # Compatibility is determined by the intersection of supported_object_types.
+    #
+    # rule_name   - Symbol or String name of the registered rule (e.g. :word_filter)
+    # object_type - Symbol or String of the target object type (e.g. :proposals)
+    #
+    # Returns an Array of ModerationActionManifest instances.
+    def self.compatible_moderation_actions(rule_name, object_type)
+      rule_manifest = moderation_rules_registry.find(rule_name&.to_sym)
+      return [] unless rule_manifest
+
+      object_type = object_type.to_sym
+      return [] unless Array(rule_manifest.supported_object_types).map(&:to_sym).include?(object_type)
+
+      moderation_actions_registry.manifests.select do |action|
+        Array(action.supported_object_types).map(&:to_sym).include?(object_type)
+      end
     end
 
     #
