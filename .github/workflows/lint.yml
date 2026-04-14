@@ -7,7 +7,7 @@ on:
   pull_request:
 
 env:
-  RUBY_VERSION: 3.3.4
+  RUBY_VERSION: 3.3.10
   NODE_VERSION: 22.14.0
   SHAKAPACKER_RUNTIME_COMPILE: "false"
 
@@ -24,7 +24,7 @@ jobs:
           - bundle exec rubocop -P
           - npm run lint
           - npm run stylelint
-          - bundle exec erblint app/**/*.erb
+          - bundle exec erb_lint app/**/*.erb
     name: Lint code
     runs-on: ubuntu-latest
     steps:

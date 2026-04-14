@@ -1,5 +1,5 @@
 <section class="map-block home__section content-block">
-  <%= section_title if section_title.present? %>
+  <%= section_title.presence %>
 
   <%= awesome_map_for global_map_components do %>
     <%= render partial: "decidim/decidim_awesome/map_component/map/map_template.html", locals: { taxonomies: all_taxonomies, map_height: model.settings.map_height } %>
