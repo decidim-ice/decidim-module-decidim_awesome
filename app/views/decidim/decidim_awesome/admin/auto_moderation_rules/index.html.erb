@@ -1,0 +1,46 @@
+<div class="item_show__header">
+  <h2 class="item_show__header-title">
+    Auto moderation rules
+  </h2>
+  <%= link_to "New", decidim_admin_decidim_awesome.new_auto_moderation_rule_path, class: "button button__sm button__secondary ml-auto" %>
+</div>
+<div class="card">
+  <div class="card-section">
+    <div class="table-scroll">
+      <table class="table-list">
+        <thead>
+          <tr>
+            <th><%= t("auto_moderation_rule.id", scope: "activemodel.attributes") %></th>
+            <th><%= t("auto_moderation_rule.description", scope: "activemodel.attributes") %></th>
+            <th><%= t("auto_moderation_rule.rule", scope: "activemodel.attributes") %></th>
+            <th><%= t("auto_moderation_rule.objects", scope: "activemodel.attributes") %></th>
+            <th><%= t("auto_moderation_rule.action", scope: "activemodel.attributes") %></th>
+            <th><%= t("auto_moderation_rule.constraints", scope: "activemodel.attributes") %></th>
+            <th><%= t("auto_moderation_rule.active", scope: "activemodel.attributes") %></th>
+            <th><%= t("auto_moderation_rule.counter", scope: "activemodel.attributes") %></th>
+            <th class="actions"><%= t("decidim.decidim_awesome.admin.actions") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @rules.each do |id, rule| %>
+            <tr>
+              <td><%= id %></td>
+              <td><%= translated_attribute(rule["description"]) %></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td><%= rule["enabled"] ? "Yes" : "No" %></td>
+              <td></td>
+              <td class="actions">
+                <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_auto_moderation_rule_path(id), "edit", class: "action-icon--edit" %>
+                <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.auto_moderation_rule_path(id), "remove", method: :delete, class: "action-icon--remove", data: { confirm: "Confirm destroy?" } %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
