@@ -5,6 +5,15 @@ en:
     waiting_label: Waiting for verification ...
   activemodel:
     attributes:
+      auto_moderation_rule:
+        id: Id
+        action: Action
+        active: Active
+        constraints: Constraints
+        counter: Counter
+        description: Description
+        objects: Objects
+        rule: Rule
       config:
         additional_proposal_sortings: Additional sorting options enabled
         allow_images_in_editors: Allow images in the HTML editor
@@ -279,6 +288,16 @@ en:
               user''s current authorization status.'
           user_authorized: "%{user} successfully authorized with %{name}"
           user_not_authorized: "%{user} could not be authorized with %{name}"
+        auto_moderation_rules:
+          create:
+            error: Error creating moderation rule! %{error}
+            success: Moderation rule created successfully
+          destroy:
+            error: Error removing moderation rule! %{error}
+            success: Moderation rule successfully removed
+          update:
+            error: Error updating moderation rule! %{error}
+            success: Moderation rule successfully updated
         checks:
           index:
             admin_head_tags: Awesome tags included in the admin application header
@@ -939,6 +958,7 @@ en:
             title: Edit menu item
         menu:
           admins: Scoped Admins
+          auto_moderation_rules: Auto moderation
           cookie_management: Cookie management
           custom_redirects: Custom Redirections
           editors: Editor Hacks
