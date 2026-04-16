@@ -8,13 +8,13 @@ module Decidim
       included do
         private
 
+        alias_method :decidim_original_cache_hash, :cache_hash
+
         def cache_hash
-          @decidim_awesome_cache_hash ||= [
-            "decidim/content_blocks/global_menu",
-            current_organization.cache_key_with_version,
-            I18n.locale,
-            *extra_cache_keys
-          ].join(Decidim.cache_key_separator)
+          original_cache_hash = decidim_original_cache_hash
+          return nil if original_cache_hash.blank?
+
+          @decidim_awesome_cache_hash ||= [original_cache_hash, *extra_cache_keys].join(Decidim.cache_key_separator)
         end
 
         def extra_cache_keys
