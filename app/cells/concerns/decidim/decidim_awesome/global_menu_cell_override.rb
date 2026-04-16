@@ -13,7 +13,10 @@ module Decidim
         def cache_hash
           return nil if decidim_original_cache_hash.blank?
 
-          @decidim_awesome_cache_hash ||= "#{decidim_original_cache_hash}#{Decidim.cache_key_separator}#{extra_cache_keys.join(Decidim.cache_key_separator)}"
+          @decidim_awesome_cache_hash ||= begin
+            filtered_extra_cache_keys = extra_cache_keys.reject(&:blank?)
+            [decidim_original_cache_hash, *filtered_extra_cache_keys].join(Decidim.cache_key_separator)
+          end
         end
 
         def extra_cache_keys
