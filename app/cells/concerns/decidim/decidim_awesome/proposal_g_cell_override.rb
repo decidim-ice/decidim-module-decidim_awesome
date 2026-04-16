@@ -16,6 +16,8 @@ module Decidim
         end
 
         def cache_hash
+          return nil if decidim_original_cache_hash.blank?
+
           @decidim_awesome_cache_hash ||= begin
             all_extra_fields = memoize("extra_fields")
             extra_fields = all_extra_fields ? all_extra_fields[resource.id] : resource.extra_fields
