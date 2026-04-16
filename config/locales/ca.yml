@@ -46,12 +46,20 @@ ca:
         component_manifest: Només en components de tipus
         participatory_space_manifest: Aplica-ho a espais participatius de tipus
         participatory_space_slug: Només a
+      content_block_attachment:
+        background_image_0: Imatge de fons
+        background_image_1: Imatge de fons
+        background_image_2: Imatge de fons
+        background_image_3: Imatge de fons
+        background_image_4: Imatge de fons
       cookie_category:
         mandatory: Obligatòria
+        slug: ID
         title: Categoria
         total_cookies: Galetes totals
         visibility: Visibilitat
       cookie_item:
+        expiration: Venciment
         name: Nom de la galeta
         service: Servei
         type: Tipus
@@ -78,6 +86,8 @@ ca:
       models:
         cookie_item:
           attributes:
+            base:
+              category_not_found: No s'ha trobat la categoria
             name:
               invalid_format: El nom només pot contenir lletres, números, guions i guions baixos (sense espais)
   decidim:
@@ -432,6 +442,7 @@ ca:
           form:
             visibility:
               hidden: Ocult
+              visible: Visible
           index:
             cannot_remove_default: Les categories per defecte no es poden eliminar
             confirm_reset: Esteu segur que voleu restablir aquesta categoria als seus valors per defecte? Això eliminarà totes les personalitzacions que hagueu fet.
@@ -737,6 +748,13 @@ ca:
             ip_address: Adreça IP
             no_data: No s'han trobat adreces IP
             stamps: Segells hashcash
+        landing_menu_items:
+          new:
+            save: Desa
+            title: Nou ítem de menú
+          show:
+            save: Desa
+            title: Editar ítem de menú
         menu:
           admins: Administradores acotades
           cookie_management: Gestió de galetes
@@ -892,6 +910,8 @@ ca:
           any_group: Qualsevol grup
           group_label: Grup
           max_results: Quantitat màxima d'elements a mostrar
+          move_down: Mou avall
+          move_up: Mou amunt
           name: Processos Awesome
           process_group: Restringir al grup de processos
           process_status: Filtre d'estat del procés
@@ -902,6 +922,7 @@ ca:
             upcoming: Només processos futurs
           process_type: Tipus de processos
           process_types:
+            all: Tots els processos
             groups: Només grups de processos
             processes: Només processos
           processes: Processos
@@ -909,7 +930,26 @@ ca:
           selection_criteria: Criteris de selecció
           selection_criteria_options:
             automatic: Automàtic
+            manual: Manual
           title: Títol del bloc
+        landing_menu:
+          alignment: Posició del menú
+          alignment_center: Centrat
+          alignment_left: Esquerra
+          alignment_right: Dreta
+          css_help_link: estil personalitzat
+          delete_confirm: Estàs segur/a que vols eliminar aquest ítem?
+          drag: Arrossega per reorganitzar
+          edit_item: Edita l'ítem
+          empty_item: Nou ítem de menú
+          presets: Valors predefinits
+          table:
+            actions: Accions
+            hidden: Ocult
+            name: Nom
+            url: URL
+            visible: Visible
+          title: Salta a ...
         map:
           collapse: Inicia amb el menú col·lapsat
           map_center: Punt central del mapa (Latitud, Longitud)
@@ -931,6 +971,13 @@ ca:
           text_settings: Configuració del text
           title: Títol
           truncate: Nombre màxim de caràcters per les descripcions emergents
+        rich_text:
+          add_column: Afegeix una nova columna
+          background_image: Imatge de fons
+          column_title: Columna
+          css_help_link: estil personalitzat
+          remove_column: Elimina
+          title: Títol del bloc
       credits: Decidim Awesome %{version} · Mantingut amb ♥ per %{company}
       custom_fields:
         errors:
@@ -1022,6 +1069,17 @@ ca:
           view_proposal: Veure proposta
   layouts:
     decidim:
+      data_consent:
+        details:
+          columns:
+            expiration: Expiració
+          items:
+            _session_id:
+              expiration: sessió
+            decidim-consent:
+              expiration: 1 any
+            pwaInstallPromptSeen:
+              expiration: persistent
       decidim_awesome:
         admin:
           maintenance:
