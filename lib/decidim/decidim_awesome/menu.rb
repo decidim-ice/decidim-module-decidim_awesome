@@ -43,6 +43,8 @@ module Decidim
             [:cookie_categories_path, []]
           when :maintenance
             [:checks_path, []]
+          when :users_autoblocks
+            [:users_autoblocks_path, []]
           else
             [:config_path, [config_var]]
           end
@@ -70,6 +72,7 @@ module Decidim
           register_simple_entry(:awesome_admin_menu, :custom_redirects, 8, "external-link-line")
           register_simple_entry(:awesome_admin_menu, :livechat, 9, "chat-1-line")
           register_simple_entry(:awesome_admin_menu, :verifications, 10, "fingerprint-line")
+          register_simple_entry(:awesome_admin_menu, :users_autoblocks, 11, "user-unfollow-line")
           register_simple_entry(:awesome_admin_menu, :cookie_management, 11, "shield-check-line")
 
           register_simple_entry(:awesome_admin_menu, :maintenance, 12, "tools-line",
@@ -198,6 +201,7 @@ module Decidim
             livechat: config_enabled?(:intergram_for_admins, :intergram_for_public),
             verifications: config_enabled?(:force_authorizations),
             cookie_management: config_enabled?(:cookie_management),
+            users_autoblocks: config_enabled?(:users_autoblocks),
             maintenance: true
           }
         end
