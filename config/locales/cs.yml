@@ -510,6 +510,14 @@ cs:
               jitsi_prejoin: Používá se pro funkci před připojením obrazovky.
               jitsi_recent_list: Používá se pro funkci nedávného seznamu.
               jitsi_settings: Používá se pro uložení nastavení Jitsi.
+              jitsi_video_quality: Používá se pro kvalitu videa a trvalé uložení.
+              jitsi_virtual_background: Používá se pro funkci videa na pozadí.
+              linkedin_li_gc: Ukládá stav souhlasu s LinkedIn službami.
+              linkedin_lidc: Používá LinkedIn pro směrování a vyrovnávání zátěže.
+              linkedin_user_match_history: Trasuje načasování a přiřazení konverze reklam pro kampaně LinkedIn.
+              maps_1p_jar: Ukládá použití/nastavení Google Mapy a signály přizpůsobení reklam.
+              maps_consent: Ukládá souhlas uživatele se službami Google, když používáte vložené mapy.
+              maps_nid: Ukládá nastavení Google Maps a informace o prohlížeči související s bezpečností.
               pref: Používá se pro funkčnost. YouTube používá tuto cookie k ukládání informací, jako je vaše preferovaná konfigurace stránek a nastavení přehrávání, jako jsou explicitní možnosti automatického přehrávání, náhodný obsah a velikost přehrávače. Přečtěte si více o tom, jak Google používá cookies
               recaptcha_grecaptcha: Používá se pro reCAPTCHA k zajištění ochrany proti spamu a analýzy rizik.
             services:
@@ -864,6 +872,22 @@ cs:
           background_image_placements:
             contain_center: Obsahuje (vycentrováno)
             cover_bottom: Cover (zarovnaný dole)
+            cover_center: Cover (vycentrováno)
+            cover_top: Cover (zarovnaný nahoru)
+            repeat: Opakovat (dlaždice)
+          block_id: Interní štítek
+          block_id_help: Tato hodnota bude použita jako kotvy sekcí v URL. Musí být unikátní na stránce (např. "Náš tým").
+          block_id_placeholder: interní referenční název (není veřejně použit)
+          column_title: Sloupec
+          css_comment_this_column: Styl pro sloupec %{number}
+          css_comment_title: Styl názvu bloku
+          css_help_html: 'Tento blok můžete dále přizpůsobit vytvořením %{link} pro něj pomocí tohoto kódu odkazovat na různé prvky v něm:'
+          css_help_link: vlastní styl
+          name: Awesome Rich Text blok
+          remove_column: Odebrat
+          restrict_links: Zabránit zobrazování odkazů v textu, pokud není uživatel přihlášen
+          restrict_videos: Zabránit zobrazování vložených videí v textu, pokud není uživatel přihlášen
+          sign_in_to_watch: Pro sledování tohoto videa se přihlaste
           title: Název bloku
       credits: Decidim Awesome %{version} · Udržováno s ♥ od %{company}
       custom_fields:
