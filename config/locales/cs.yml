@@ -487,8 +487,29 @@ cs:
               ga_gid: Používá se k rozlišení uživatelů pro analytické účely. Platí po 24 hodin.
               ga_main: Slouží k rozlišení uživatelů přiřazením jedinečného identifikátoru.
               ga_property: Používá se v GA4 k přetrvávání stavu relace a počitadel pro určitou vlastnost.
+              graphiql_doc_explorer_open: Uloží, zda máte panel s dokumentací otevřený při použití grafického API
+              graphiql_editor_flex: Uloží předvolbu záložky při používání grafického API
+              graphiql_history_pane_open: Uloží, zda máte panel historie otevřený při použití GraphQL API
+              graphiql_queries: Uloží historii dotazů při použití GraphQL API
+              graphiql_query: Uloží váš poslední dotaz při použití GraphQL API
+              graphiql_tab_state: Uloží konfiguraci záložky při použití GraphQL API
+              gtm_dc: Používá Google Tag Manager pro načítání a diagnostiku štítků.
+              gtm_debug: Uloží režim ladění Google Tag Manager.
+              gtm_gcl_au: Využívané službami Google k experimentování s efektivitou reklamy.
+              hcaptcha_accessibility: Uloží preference související s přístupností pro hCaptcha výzvy.
+              hcaptcha_session: Uloží stav dočasné relace hCaptcha pro potvrzení výzev.
+              jitsi_amp: Používá se pro analytiku Amplitude Analytics
+              jitsi_amplitude_unsent_identify: Používá se pro analytiku Amplitude Analytics
+              jitsi_amplitude_unset: Používá se pro analytiku Amplitude Analytics
+              jitsi_calendar_sync: Používá se pro funkci synchronizace kalendáře.
+              jitsi_callstats_username: Používá se k uložení relace uživatele na Jitsi.
+              jitsi_dropbox: Používá se pro integraci do dropboxu.
+              jitsi_endpoint_id: Používá se pro komunikační účely se serverem Jitsi.
               jitsi_known_domains: Uloží seznam známých domén
               jitsi_language: Uloží vaši předvolbu jazyka
+              jitsi_prejoin: Používá se pro funkci před připojením obrazovky.
+              jitsi_recent_list: Používá se pro funkci nedávného seznamu.
+              jitsi_settings: Používá se pro uložení nastavení Jitsi.
               pref: Používá se pro funkčnost. YouTube používá tuto cookie k ukládání informací, jako je vaše preferovaná konfigurace stránek a nastavení přehrávání, jako jsou explicitní možnosti automatického přehrávání, náhodný obsah a velikost přehrávače. Přečtěte si více o tom, jak Google používá cookies
               recaptcha_grecaptcha: Používá se pro reCAPTCHA k zajištění ochrany proti spamu a analýzy rizik.
             services:
@@ -763,6 +784,8 @@ cs:
           any_group: Jakákoli skupina
           group_label: Skupina
           max_results: Maximální počet prvků k zobrazení
+          move_down: Posunout dolů
+          move_up: Posunout nahoru
           name: Úžasné procesy
           process_group: Omezit na skupinu procesu
           process_status: Filtr stavu procesu
@@ -772,7 +795,9 @@ cs:
             past: Pouze minulé procesy
             upcoming: Pouze budoucí procesy
           process_type: Typ procesů
+          process_type_mixed_hint: Zobrazí všechny procesy až do maximálního množství.
           process_types:
+            all: Všechny procesy
             groups: Pouze skupiny procesu
             processes: Pouze procesy
           processes: Procesy
@@ -836,6 +861,9 @@ cs:
           background_image_help: Volitelný obrázek zobrazený za obsahem sloupce. Doporučená minimální šířka 1920px.
           background_image_placement: Umístění obrázku
           background_image_placement_help: Jak je obrázek pozadí zobrazen ve sloupci. Použije se pouze při nahrání obrázku na pozadí.
+          background_image_placements:
+            contain_center: Obsahuje (vycentrováno)
+            cover_bottom: Cover (zarovnaný dole)
           title: Název bloku
       credits: Decidim Awesome %{version} · Udržováno s ♥ od %{company}
       custom_fields:
