@@ -7,7 +7,12 @@
       <div class="row column">
         <%= form.check_box :enabled %>
       </div>
+      <div class="row column">
+        <%= form.select :rule_type, rule_type_options %>
+      </div>
+      <div class="row column">
+        <%= form.text_field :rule_options, label: t(".rule_options") %>
+      </div>
     </div>
   </div>
 </div>
-

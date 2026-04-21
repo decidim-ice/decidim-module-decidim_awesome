@@ -21,7 +21,6 @@ module Decidim
 
         def create
           @form = form(AutoModerationRulesForm).from_params(params)
-          byebug
           CreateAutoModerationRule.call(@form, current_organization) do
             on(:ok) do
               #flash[:notice] = I18n.t("auto_moderation_rules.create.success", scope: "decidim.decidim_awesome.admin.config")
@@ -38,19 +37,37 @@ module Decidim
         end
 
         def edit
-          byebug
           @form = form(AutoModerationRulesForm).from_model(model_entry)
         end
 
-        def destroy
-          DestroyAutoModerationRule.call(entry_params, current_organization) do
+        def update
+          @form = form(AutoModerationRulesForm).from_params(params)
+          rule_id = params[:id]
+          UpdateAutoModerationRule.call(@form, rule_id, current_organization) do
             on(:ok) do
-              flash[:notice] = I18n.t("auto_moderation.destroy.success", scope: "decidim.decidim_awesome.admin.config")
+              #flash[:notice] = I18n.t("auto_moderation.update.success", scope: "decidim.decidim_awesome.admin.config")
+              flash[:notice] = "Success"
               redirect_to auto_moderation_rules_path
             end
 
             on(:invalid) do |message|
-              flash.now[:alert] = I18n.t("auto_moderation.destroy.error", error: message, scope: "decidim.decidim_awesome.admin.config")
+              #flash.now[:alert] = I18n.t("auto_moderation.update.error", error: message, scope: "decidim.decidim_awesome.admin.config")
+              flash.now[:alert] = message
+              render :edit
+            end
+          end
+        end
+
+        def destroy
+          rule_id = params[:id]
+          DestroyAutoModerationRule.call(rule_id, current_organization) do
+            on(:ok) do
+              flash[:notice] = I18n.t("auto_moderation_rules.destroy.success", scope: "decidim.decidim_awesome.admin")
+              redirect_to auto_moderation_rules_path
+            end
+
+            on(:invalid) do |message|
+              flash.now[:alert] = I18n.t("auto_moderation_rules.destroy.error", error: message, scope: "decidim.decidim_awesome.admin")
               redirect_to auto_moderation_rules_path
             end
           end
@@ -72,12 +89,19 @@ module Decidim
 
           OpenStruct.new(
             description: entry["description"],
+            rule_type: entry["rule_type"],
             enabled: entry["enabled"]
           )
         end
 
+        def rule_type_options
+          Decidim::DecidimAwesome.moderation_rules_registry.manifests.map do |rule|
+            name = I18n.t("decidim.decidim_awesome.admin.auto_moderation_rules.rule_types.#{rule.name}", default: rule.name.to_s.humanize)
+            [name, rule.name]
+          end
+        end
 
-        helper_method :entries
+        helper_method :entries, :rule_type_options
       end
     end
   end
