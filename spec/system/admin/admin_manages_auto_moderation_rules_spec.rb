@@ -44,7 +44,7 @@ module Decidim::DecidimAwesome
                         
                         click_link_or_button 'Save'
 
-                        expect(page).to have_admin_callout("Success")
+                        expect(page).to have_admin_callout("created successfully")
                     end
                 end
             end
@@ -74,7 +74,7 @@ module Decidim::DecidimAwesome
                 end
 
                 it "updates the content" do
-                    expect(page).to have_admin_callout("Success")
+                    expect(page).to have_admin_callout("successfully updated")
                     expect(page).to have_content("Updated bad word rule")
                 end
             end

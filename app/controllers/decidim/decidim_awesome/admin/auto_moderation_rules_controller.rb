@@ -23,14 +23,12 @@ module Decidim
           @form = form(AutoModerationRulesForm).from_params(params)
           CreateAutoModerationRule.call(@form, current_organization) do
             on(:ok) do
-              #flash[:notice] = I18n.t("auto_moderation_rules.create.success", scope: "decidim.decidim_awesome.admin.config")
-              flash[:notice] = "Success"
+              flash[:notice] = I18n.t("auto_moderation_rules.create.success", scope: "decidim.decidim_awesome.admin")
               redirect_to auto_moderation_rules_path
             end
 
             on(:invalid) do |message|
-              #flash.now[:alert] = I18n.t("auto_moderation.create.error", error: message, scope: "decidim.decidim_awesome.admin.config")
-              flash.now[:alert] = message
+              flash.now[:alert] = I18n.t("auto_moderation_rules.create.error", error: message, scope: "decidim.decidim_awesome.admin")
               render :new
             end
           end
@@ -45,13 +43,12 @@ module Decidim
           rule_id = params[:id]
           UpdateAutoModerationRule.call(@form, rule_id, current_organization) do
             on(:ok) do
-              #flash[:notice] = I18n.t("auto_moderation.update.success", scope: "decidim.decidim_awesome.admin.config")
-              flash[:notice] = "Success"
+              flash[:notice] = I18n.t("auto_moderation_rules.update.success", scope: "decidim.decidim_awesome.admin")
               redirect_to auto_moderation_rules_path
             end
 
             on(:invalid) do |message|
-              #flash.now[:alert] = I18n.t("auto_moderation.update.error", error: message, scope: "decidim.decidim_awesome.admin.config")
+              flash.now[:alert] = I18n.t("auto_moderation_rules.update.error", error: message, scope: "decidim.decidim_awesome.admin")
               flash.now[:alert] = message
               render :edit
             end
