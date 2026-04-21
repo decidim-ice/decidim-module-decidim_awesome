@@ -289,6 +289,10 @@ en:
           user_authorized: "%{user} successfully authorized with %{name}"
           user_not_authorized: "%{user} could not be authorized with %{name}"
         auto_moderation_rules:
+          form:
+            rule_type:
+              word_filter: Word filter
+            rule_options: Options
           create:
             error: Error creating moderation rule! %{error}
             success: Moderation rule created successfully
