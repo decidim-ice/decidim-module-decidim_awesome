@@ -6,6 +6,7 @@ import "src/decidim/decidim_awesome/admin/proposal_sortings"
 import "src/decidim/decidim_awesome/admin/codemirror"
 import "src/decidim/decidim_awesome/admin/check_redirections"
 import "src/decidim/decidim_awesome/admin/form_exit_warn"
+import "src/decidim/decidim_awesome/admin/auto_moderation_rules_form"
 
 import "src/decidim/decidim_awesome/proposals/custom_fields"
 import "src/decidim/decidim_awesome/admin/custom_fields_builder"
