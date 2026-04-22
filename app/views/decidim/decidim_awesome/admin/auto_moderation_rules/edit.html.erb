@@ -54,3 +54,5 @@
     </div>
   </div>
 </div>
+
+<%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: "auto_moderation_rules_#{params[:id]}", constraints: constraints_for("auto_moderation_rules_#{params[:id]}") }) %>

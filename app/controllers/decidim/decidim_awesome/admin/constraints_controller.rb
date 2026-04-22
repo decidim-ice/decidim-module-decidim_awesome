@@ -140,6 +140,8 @@ module Decidim
             :proposal_private_custom_fields
           when /^force_authorization_/
             :force_authorizations
+          when /^auto_moderation_rules_/
+            :auto_moderation_rules
           else
             key
           end

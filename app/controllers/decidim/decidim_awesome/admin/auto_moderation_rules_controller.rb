@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class AutoModerationRulesController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
+        include ConfigConstraintsHelpers
         helper ConfigConstraintsHelpers
 
         before_action do
@@ -107,7 +108,11 @@ module Decidim
           @targets = entry["targets"] || {}
         end
 
-        helper_method :entries, :rule_type_options, :targets
+        def constraints_for(key)
+          awesome_config_instance.setting_for(key)&.constraints
+        end
+
+        helper_method :entries, :rule_type_options, :targets, :constraints_for
       end
     end
   end
