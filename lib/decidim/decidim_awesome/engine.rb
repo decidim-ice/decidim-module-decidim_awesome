@@ -402,6 +402,13 @@ module Decidim
             rule.form_class = "Decidim::DecidimAwesome::Admin::WordFilterRuleForm"
             rule.supported_object_types = [:proposals, :comments]
           end
+
+          Decidim::DecidimAwesome.moderation_actions_registry.register(:moderate_and_hide) do |action|
+            action.name = "moderate_and_hide"
+            action.form_class = "Decidim::DecidimAwesome::Admin::ModerateAndHideActionForm"
+            action.handler_class = "Decidim::DecidimAwesome::ModerationActions::ModerateAndHideAction"
+            action.supported_object_types = [:proposals, :comments]
+          end
         end
       end
     end
