@@ -1242,6 +1242,9 @@ en:
             view_meeting: View meeting
             view_proposal: View proposal
       proposal_private_custom_fields_disclosure: This information won't be published
+      proposals:
+        votes:
+          blocked_by_status: Not accepted for voting
       required_authorizations:
         index:
           authorization_options_invalid: Unfortunately, although you have this authorization,

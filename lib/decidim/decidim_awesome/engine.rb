@@ -107,6 +107,9 @@ module Decidim
           Decidim::Proposals::ProposalLCell.include(Decidim::DecidimAwesome::ProposalLCellOverride)
           Decidim::Proposals::ProposalGCell.include(Decidim::DecidimAwesome::ProposalGCellOverride)
         end
+
+        Decidim::Proposals::ProposalVoteCell.include(Decidim::DecidimAwesome::Proposals::ProposalVoteCellOverride) if DecidimAwesome.votes_by_proposal_status
+
         Decidim::DataConsentCell.prepend(Decidim::DecidimAwesome::DataConsentCellOverride) if DecidimAwesome.enabled?(:cookie_management)
 
         # override user's admin property
@@ -164,7 +167,10 @@ module Decidim
 
           Decidim::Proposals::ProposalsController.include(Decidim::DecidimAwesome::Proposals::OrderableOverride) if DecidimAwesome.enabled?(:additional_proposal_sortings)
 
-          Decidim::Admin::SettingsHelper.include(Decidim::DecidimAwesome::Admin::SettingsHelperOverride) if DecidimAwesome.votes_by_proposal_status
+          if DecidimAwesome.votes_by_proposal_status
+            Decidim::Admin::SettingsHelper.include(Decidim::DecidimAwesome::Admin::SettingsHelperOverride)
+            Decidim::Proposals::Permissions.include(Decidim::DecidimAwesome::Proposals::PermissionsOverride)
+          end
         end
       end
 

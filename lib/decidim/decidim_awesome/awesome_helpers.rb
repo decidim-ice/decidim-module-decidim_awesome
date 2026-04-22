@@ -102,6 +102,21 @@ module Decidim
         end
       end
 
+      # True when voting is restricted for this proposal because its state is not in the allowed list.
+      # Returns false if the filter is inactive or if Decidim already blocks voting via votes_blocked.
+      def awesome_voting_restricted_by_status?(proposal)
+        return false unless Decidim::DecidimAwesome.votes_by_proposal_status
+
+        settings = proposal.component.current_settings
+        return false if settings.try(:votes_blocked)
+        return false unless settings.try(:awesome_votes_enabled_by_status)
+
+        allowed_ids = Array(settings.awesome_votes_enabled_states).compact_blank.map(&:to_i)
+        return false if allowed_ids.empty?
+
+        allowed_ids.exclude?(proposal.decidim_proposals_proposal_state_id.to_i)
+      end
+
       # Retrieves all the "admins_available_authorizations" for the user along with other possible authorizations
       # returns an instance of Decidim::DecidimAwesome::Authorizer
       def awesome_authorizations_for(user)

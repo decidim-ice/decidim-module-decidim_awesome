@@ -1,6 +1,8 @@
 <!-- surround_contents "div[data-erb-id^=proposal-]" -->
 
-<% if view = awesome_voting_manifest_for(current_component)&.show_vote_button_view %>
+<% if awesome_voting_restricted_by_status?(proposal) %>
+  <%= render partial: "decidim/decidim_awesome/proposals/votes/not_allowed", locals: { proposal: } %>
+<% elsif (view = awesome_voting_manifest_for(current_component)&.show_vote_button_view) %>
   <%= render view, local_assigns if view.present? %>
 <% else %>
   <%= render_original %>
