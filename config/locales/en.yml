@@ -5,23 +5,23 @@ en:
     waiting_label: Waiting for verification ...
   activemodel:
     attributes:
-      auto_moderation_target:
-        object_type: Object
-        action_type: Action
-        action_type_options:
-          moderate_and_hide: Moderate and Hide
-        object_type_options:
-          proposal: Proposal
-          comment: Comment
       auto_moderation_rule:
-        id: Id
         action: Action
         active: Active
         constraints: Constraints
         counter: Counter
         description: Description
+        id: Id
         objects: Objects
         rule: Rule
+      auto_moderation_target:
+        action_type: Action
+        action_type_options:
+          moderate_and_hide: Moderate and Hide
+        object_type: Object
+        object_type_options:
+          comment: Comment
+          proposal: Proposal
       config:
         additional_proposal_sortings: Additional sorting options enabled
         allow_images_in_editors: Allow images in the HTML editor
@@ -296,39 +296,67 @@ en:
               user''s current authorization status.'
           user_authorized: "%{user} successfully authorized with %{name}"
           user_not_authorized: "%{user} could not be authorized with %{name}"
-        auto_moderation_targets:
-          form:
-            object_type:
-              comment: Comment
-              proposal: Proposal
-            action_type_options:
-              moderate_and_hide: Moderate and Hide
-            object_type_options:
-              proposal: Proposal
-              comment: Comment
-          create:
-            error: Error creating moderation target! %{error}
-            success: Moderation target created successfully
-          destroy:
-            error: Error removing moderation target! %{error}
-            success: Moderation target successfully removed
-          update:
-            error: Error updating moderation target! %{error}
-            success: Moderation target successfully updated
         auto_moderation_rules:
-          form:
-            rule_type:
-              word_filter: Word filter
-            rule_options: Options
           create:
             error: Error creating moderation rule! %{error}
             success: Moderation rule created successfully
           destroy:
             error: Error removing moderation rule! %{error}
             success: Moderation rule successfully removed
+          edit:
+            cancel: Cancel
+            save: Save
+            targets:
+              add_target: Add target
+              confirm_destroy: Are you sure you want to remove this target?
+              destroy: Remove
+              edit: Edit
+              title: Objects & actions
+            title: Edit auto-moderation rule
+          form:
+            rule_options: Options
+            rule_type:
+              word_filter: Word filter
+          index:
+            confirm_destroy: Are you sure you want to remove this moderation rule?
+            destroy: Remove
+            edit: Edit
+            new: New
+            title: Auto-moderation rules
+          new:
+            cancel: Cancel
+            save: Save
+            title: New auto-moderation rule
           update:
             error: Error updating moderation rule! %{error}
             success: Moderation rule successfully updated
+        auto_moderation_targets:
+          create:
+            error: Error creating moderation target! %{error}
+            success: Moderation target created successfully
+          destroy:
+            error: Error removing moderation target! %{error}
+            success: Moderation target successfully removed
+          edit:
+            cancel: Cancel
+            save: Save
+            title: Edit auto-moderation target
+          form:
+            action_type_options:
+              moderate_and_hide: Moderate and Hide
+            object_type:
+              comment: Comment
+              proposal: Proposal
+            object_type_options:
+              comment: Comment
+              proposal: Proposal
+          new:
+            cancel: Cancel
+            save: Save
+            title: New auto-moderation target
+          update:
+            error: Error updating moderation target! %{error}
+            success: Moderation target successfully updated
         checks:
           index:
             admin_head_tags: Awesome tags included in the admin application header

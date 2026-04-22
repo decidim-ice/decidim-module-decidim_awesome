@@ -1,8 +1,8 @@
 <div class="item_show__header">
   <h2 class="item_show__header-title">
-    Auto moderation rules
+    <%= t(".title") %>
   </h2>
-  <%= link_to "New", decidim_admin_decidim_awesome.new_auto_moderation_rule_path, class: "button button__sm button__secondary ml-auto" %>
+  <%= link_to t(".new"), decidim_admin_decidim_awesome.new_auto_moderation_rule_path, class: "button button__sm button__secondary ml-auto" %>
 </div>
 <div class="card">
   <div class="card-section">
@@ -24,15 +24,15 @@
           <% @rules.each do |id, rule| %>
             <tr>
               <td><%= translated_attribute(rule["description"]) %></td>
-              <td><%= I18n.t("auto_moderation_rules.form.rule_type.#{rule['rule_type']}", scope: "decidim.decidim_awesome.admin") %></td>
+              <td><%= t("auto_moderation_rules.form.rule_type.#{rule['rule_type']}", scope: "decidim.decidim_awesome.admin") %></td>
               <td></td>
               <td></td>
               <td></td>
               <td><%= rule["enabled"] ? "Yes" : "No" %></td>
               <td><%= rule["counter"] || 0 %></td>
               <td class="actions">
-                <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_auto_moderation_rule_path(id), "Edit", class: "action-icon--edit" %>
-                <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.auto_moderation_rule_path(id), "Remove", method: :delete, class: "action-icon--remove", data: { confirm: "Confirm destroy?" } %>
+                <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_auto_moderation_rule_path(id), t(".edit"), class: "action-icon--edit" %>
+                <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.auto_moderation_rule_path(id), t(".destroy"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
               </td>
             </tr>
           <% end %>

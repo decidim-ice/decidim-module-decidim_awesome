@@ -1,8 +1,8 @@
 <div class="item_show__header">
   <h2 class="item_show__header-title">
-    Rule
+    <%= t(".title") %>
   </h2>
-  <%= link_to "Cancel", decidim_admin_decidim_awesome.auto_moderation_rules_path, class: "button button__sm button__secondary" %>
+  <%= link_to t(".cancel"), decidim_admin_decidim_awesome.auto_moderation_rules_path, class: "button button__sm button__secondary" %>
 </div>
 
 <div class="item__edit item__edit-1col">
@@ -12,7 +12,7 @@
 
       <div class="item__edit-sticky">
         <div class="item__edit-sticky-container">
-          <%= f.submit "Save", class: "button button__sm button__secondary" %>
+          <%= f.submit t(".save"), class: "button button__sm button__secondary" %>
         </div>
       </div>
     <% end %>
@@ -21,38 +21,36 @@
 
 <div class="item__edit item__edit-1col">
   <div class="item__edit-form">
-
-  <div class="card p-4">
-    <div class="row column">
-      <h2 class="card-title">Objects & actions</h2>
-    </div>
-    <div class="card-section">
-      <div class="table-scroll">
-        <table class="table-list">
-          <thead>
-            <tr>
-              <th><%= t("auto_moderation_target.object_type", scope: "activemodel.attributes") %></th>
-              <th><%= t("auto_moderation_target.action_type", scope: "activemodel.attributes") %></th>
-              <th class="actions"><%= t("decidim.decidim_awesome.admin.actions") %></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% targets.each do |target_id, target| %>
+    <div class="card p-4">
+      <div class="row column">
+        <h2 class="card-title"><%= t(".targets.title") %></h2>
+      </div>
+      <div class="card-section">
+        <div class="table-scroll">
+          <table class="table-list">
+            <thead>
               <tr>
-                <td><%= t("auto_moderation_target.object_type_options.#{target['object_type']}", scope: "activemodel.attributes") %></td>
-                <td><%= t("auto_moderation_target.action_type_options.#{target['action_type']}", scope: "activemodel.attributes") %></td>
-                <td class="actions">
-                  <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_auto_moderation_rule_target_path(params[:id], target_id), "Edit", class: "action-icon--edit" %>
-                  <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.auto_moderation_rule_target_path(params[:id], target_id), "Remove", method: :delete, class: "action-icon--remove", data: { confirm: "Confirm destroy?" } %>
-                </td>
+                <th><%= t("auto_moderation_target.object_type", scope: "activemodel.attributes") %></th>
+                <th><%= t("auto_moderation_target.action_type", scope: "activemodel.attributes") %></th>
+                <th class="actions"><%= t("decidim.decidim_awesome.admin.actions") %></th>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
-
-        <%= link_to "Add target", decidim_admin_decidim_awesome.new_auto_moderation_rule_target_path(auto_moderation_rule_id: params[:id]), class: "button button__sm button__secondary mt-4" %>
+            </thead>
+            <tbody>
+              <% targets.each do |target_id, target| %>
+                <tr>
+                  <td><%= t("auto_moderation_target.object_type_options.#{target['object_type']}", scope: "activemodel.attributes") %></td>
+                  <td><%= t("auto_moderation_target.action_type_options.#{target['action_type']}", scope: "activemodel.attributes") %></td>
+                  <td class="actions">
+                    <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_auto_moderation_rule_target_path(params[:id], target_id), t(".targets.edit"), class: "action-icon--edit" %>
+                    <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.auto_moderation_rule_target_path(params[:id], target_id), t(".targets.destroy"), method: :delete, class: "action-icon--remove", data: { confirm: t(".targets.confirm_destroy") } %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <%= link_to t(".targets.add_target"), decidim_admin_decidim_awesome.new_auto_moderation_rule_target_path(auto_moderation_rule_id: params[:id]), class: "button button__sm button__secondary mt-4" %>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </div>
