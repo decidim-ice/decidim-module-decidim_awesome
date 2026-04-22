@@ -5,6 +5,14 @@ en:
     waiting_label: Waiting for verification ...
   activemodel:
     attributes:
+      auto_moderation_target:
+        object_type: Object
+        action_type: Action
+        action_type_options:
+          moderate_and_hide: Moderate and Hide
+        object_type_options:
+          proposal: Proposal
+          comment: Comment
       auto_moderation_rule:
         id: Id
         action: Action
@@ -288,6 +296,25 @@ en:
               user''s current authorization status.'
           user_authorized: "%{user} successfully authorized with %{name}"
           user_not_authorized: "%{user} could not be authorized with %{name}"
+        auto_moderation_targets:
+          form:
+            object_type:
+              comment: Comment
+              proposal: Proposal
+            action_type_options:
+              moderate_and_hide: Moderate and Hide
+            object_type_options:
+              proposal: Proposal
+              comment: Comment
+          create:
+            error: Error creating moderation target! %{error}
+            success: Moderation target created successfully
+          destroy:
+            error: Error removing moderation target! %{error}
+            success: Moderation target successfully removed
+          update:
+            error: Error updating moderation target! %{error}
+            success: Moderation target successfully updated
         auto_moderation_rules:
           form:
             rule_type:

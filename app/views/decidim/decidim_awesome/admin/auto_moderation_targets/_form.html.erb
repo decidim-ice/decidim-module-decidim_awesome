@@ -1,0 +1,15 @@
+<div class="form__wrapper">
+  <div class="card pt-4">
+    <div class="card-section">
+      <div class="row column">
+        <%= form.select :object_type, object_type_options %>
+      </div>
+      <div class="row column">
+        <%= form.select :action_type, action_type_options %>
+      </div>
+      <div class="row column">
+        <%= form.text_field :action_options %>
+      </div>
+    </div>
+  </div>
+</div>

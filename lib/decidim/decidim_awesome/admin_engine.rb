@@ -34,7 +34,7 @@ module Decidim
           collection do
             patch :toggle_enabled
           end
-          resources :targets, except: [:show], controller: "auto_moderation"
+          resources :targets, except: [:show], controller: "auto_moderation_targets"
         end
         get :admin_accountability, to: "admin_accountability#index", as: "admin_accountability"
         post :export_admin_accountability, to: "admin_accountability#export", as: "export_admin_accountability"
