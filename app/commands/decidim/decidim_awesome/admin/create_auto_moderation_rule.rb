@@ -22,7 +22,7 @@ module Decidim
         def call
           return broadcast(:invalid) if form.invalid?
 
-          config = create_hash_config!()
+          config = create_hash_config!
           entry = form.to_params
 
           config.value[ident] = entry
