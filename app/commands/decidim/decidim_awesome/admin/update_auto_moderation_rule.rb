@@ -24,11 +24,14 @@ module Decidim
             return broadcast(:invalid) if form.invalid?
     
             config = create_hash_config!()
+            old_entry = config.value[@rule_id]
+            target = old_entry["targets"] || {}
+
             entry = form.to_params
             rule_options = entry.delete("rule_options")
-
             entry["rule_options"] = rule_options.split(",").map(&:strip).reject(&:empty?)    
-            
+            entry["targets"] = target
+
             config.value[@rule_id] = entry
             config.save!
             broadcast(:ok, entry)

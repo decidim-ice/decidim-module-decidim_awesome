@@ -87,7 +87,9 @@ module Decidim
           OpenStruct.new(
             description: entry["description"],
             rule_type: entry["rule_type"],
-            enabled: entry["enabled"]
+            enabled: entry["enabled"],
+            rule_options: entry["rule_options"].join(", "),
+            targets: entry["targets"] || {}
           )
         end
 
@@ -98,7 +100,14 @@ module Decidim
           end
         end
 
-        helper_method :entries, :rule_type_options
+        def targets
+          entry = find_entry
+          raise ActiveRecord::RecordNotFound unless entry
+
+          @targets = entry["targets"] || {}
+        end
+
+        helper_method :entries, :rule_type_options, :targets
       end
     end
   end

@@ -9,7 +9,7 @@ module Decidim
         translatable_attribute :description, String
         attribute :rule_type, String
         attribute :rule_options, String, default: ""
-        attribute :targets, Array, default: []
+        attribute :targets, Hash, default: []
         attribute :enabled, Boolean, default: true
         attribute :counter, Integer, default: 0
 
@@ -22,7 +22,7 @@ module Decidim
             "description" => description,
             "rule_type" => rule_type,
             "rule_options" => rule_options,
-            # "targets" => targets,
+            "targets" => targets,
             "enabled" => enabled,
             "counter" => counter
           }
