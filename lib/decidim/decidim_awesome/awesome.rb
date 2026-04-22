@@ -121,6 +121,15 @@ module Decidim
       ]
     end
 
+    # Allows admins to restrict supports (votes) to proposals in selected states only.
+    # When true, the proposals component admin gets two new settings:
+    #   - awesome_votes_enabled_by_status (boolean)
+    #   - awesome_votes_enabled_states (array of ProposalState ids)
+    # When false, the feature is completely hidden and no override is loaded.
+    config_accessor :votes_by_proposal_status do
+      true
+    end
+
     # Allows admins to limit the amount of pending amendments to (currently) one per proposal before it's accepted.
     # Once a pending amendment is accepted, a new on can be created.
     # Note that this does not limit the number of amendment per se, the admin has to set the limit in the proposal's component configuration.

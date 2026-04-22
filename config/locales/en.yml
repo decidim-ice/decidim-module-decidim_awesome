@@ -196,6 +196,11 @@ en:
             voting_cards_show_modal_help: Show instructions/help modal when support
               is clicked
           step:
+            awesome_votes_enabled_by_status: Votes enabled by status
+            awesome_votes_enabled_by_status_help: When enabled, only proposals in
+              the selected statuses will accept votes. Has no effect if no statuses
+              are selected.
+            awesome_votes_enabled_states: Allowed statuses for votes
             default_sort_order_options:
               az: A-Z (Alphabetical)
               supported_first: Supported first
