@@ -32,88 +32,106 @@ describe "Votes by proposal status" do
     "#proposal-#{proposal.id}-votes-count"
   end
 
-  context "when the status filter is inactive" do
-    let(:step_settings) { { votes_enabled: true, awesome_votes_enabled_by_status: false } }
+  def switch_to_grid_mode
+    within ".view-layout__links" do
+      click_on "Grid mode"
+    end
+  end
 
-    it "shows the standard vote button on every proposal" do
-      within vote_area_for(accepted_proposal) do
-        expect(page).to have_button(vote_button_text)
-        expect(page).to have_no_content(not_allowed_text)
+  shared_examples "status filter behaviour" do
+    context "when the status filter is inactive" do
+      let(:step_settings) { { votes_enabled: true, awesome_votes_enabled_by_status: false } }
+
+      it "shows the standard vote button on every proposal" do
+        within vote_area_for(accepted_proposal) do
+          expect(page).to have_button(vote_button_text)
+          expect(page).to have_no_content(not_allowed_text)
+        end
+        within vote_area_for(not_answered_proposal) do
+          expect(page).to have_button(vote_button_text)
+          expect(page).to have_no_content(not_allowed_text)
+        end
       end
-      within vote_area_for(not_answered_proposal) do
-        expect(page).to have_button(vote_button_text)
-        expect(page).to have_no_content(not_allowed_text)
+    end
+
+    context "when the filter is enabled but no statuses are selected" do
+      let(:step_settings) { { votes_enabled: true, awesome_votes_enabled_by_status: true, awesome_votes_enabled_states: [] } }
+
+      it "falls back to standard behaviour (filter is dormant)" do
+        within vote_area_for(accepted_proposal) do
+          expect(page).to have_button(vote_button_text)
+          expect(page).to have_no_content(not_allowed_text)
+        end
+      end
+    end
+
+    context "when the filter is active and only Accepted is allowed" do
+      let(:step_settings) do
+        {
+          votes_enabled: true,
+          awesome_votes_enabled_by_status: true,
+          awesome_votes_enabled_states: [accepted_state.id.to_s]
+        }
+      end
+
+      it "lets the user vote on proposals in the allowed status" do
+        within vote_area_for(accepted_proposal) do
+          expect(page).to have_button(vote_button_text)
+          expect(page).to have_no_content(not_allowed_text)
+        end
+      end
+
+      it "blocks proposals whose status is not in the list" do
+        within vote_area_for(rejected_proposal) do
+          expect(page).to have_content(not_allowed_text)
+          expect(page).to have_no_button(vote_button_text)
+        end
+      end
+
+      it "blocks proposals without an assigned status" do
+        within vote_area_for(not_answered_proposal) do
+          expect(page).to have_content(not_allowed_text)
+          expect(page).to have_no_button(vote_button_text)
+        end
+      end
+
+      it "keeps the votes counter visible for blocked proposals" do
+        within votes_count_for(not_answered_proposal) do
+          expect(page).to have_content("0")
+        end
+      end
+    end
+
+    context "when votes are blocked at the step level" do
+      let(:step_settings) do
+        {
+          votes_enabled: true,
+          votes_blocked: true,
+          awesome_votes_enabled_by_status: true,
+          awesome_votes_enabled_states: [accepted_state.id.to_s]
+        }
+      end
+
+      it "disables the vote button regardless of the status filter" do
+        within vote_area_for(accepted_proposal) do
+          expect(page).to have_button(vote_button_text, disabled: true)
+          expect(page).to have_no_content(not_allowed_text)
+        end
+        within vote_area_for(not_answered_proposal) do
+          expect(page).to have_button(vote_button_text, disabled: true)
+          expect(page).to have_no_content(not_allowed_text)
+        end
       end
     end
   end
 
-  context "when the filter is enabled but no statuses are selected" do
-    let(:step_settings) { { votes_enabled: true, awesome_votes_enabled_by_status: true, awesome_votes_enabled_states: [] } }
-
-    it "falls back to standard behaviour (filter is dormant)" do
-      within vote_area_for(accepted_proposal) do
-        expect(page).to have_button(vote_button_text)
-        expect(page).to have_no_content(not_allowed_text)
-      end
-    end
+  context "when in list view" do
+    it_behaves_like "status filter behaviour"
   end
 
-  context "when the filter is active and only Accepted is allowed" do
-    let(:step_settings) do
-      {
-        votes_enabled: true,
-        awesome_votes_enabled_by_status: true,
-        awesome_votes_enabled_states: [accepted_state.id.to_s]
-      }
-    end
+  context "when in grid view" do
+    before { switch_to_grid_mode }
 
-    it "lets the user vote on proposals in the allowed status" do
-      within vote_area_for(accepted_proposal) do
-        expect(page).to have_button(vote_button_text)
-        expect(page).to have_no_content(not_allowed_text)
-      end
-    end
-
-    it "blocks proposals whose status is not in the list" do
-      within vote_area_for(rejected_proposal) do
-        expect(page).to have_content(not_allowed_text)
-        expect(page).to have_no_button(vote_button_text)
-      end
-    end
-
-    it "blocks proposals without an assigned status" do
-      within vote_area_for(not_answered_proposal) do
-        expect(page).to have_content(not_allowed_text)
-        expect(page).to have_no_button(vote_button_text)
-      end
-    end
-
-    it "keeps the votes counter visible for blocked proposals" do
-      within votes_count_for(not_answered_proposal) do
-        expect(page).to have_content("0")
-      end
-    end
-  end
-
-  context "when votes are blocked at the step level" do
-    let(:step_settings) do
-      {
-        votes_enabled: true,
-        votes_blocked: true,
-        awesome_votes_enabled_by_status: true,
-        awesome_votes_enabled_states: [accepted_state.id.to_s]
-      }
-    end
-
-    it "disables the vote button regardless of the status filter" do
-      within vote_area_for(accepted_proposal) do
-        expect(page).to have_button(vote_button_text, disabled: true)
-        expect(page).to have_no_content(not_allowed_text)
-      end
-      within vote_area_for(not_answered_proposal) do
-        expect(page).to have_button(vote_button_text, disabled: true)
-        expect(page).to have_no_content(not_allowed_text)
-      end
-    end
+    it_behaves_like "status filter behaviour"
   end
 end
