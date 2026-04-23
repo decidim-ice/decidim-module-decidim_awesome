@@ -33,6 +33,7 @@ Decidim::DecidimAwesome.configure do |config|
       :weighted_proposal_voting,
       :additional_proposal_sortings,
       :allow_limiting_amendments,
+      :votes_by_proposal_status,
       :proposal_private_custom_fields,
       :hashcash_signup,
       :hashcash_login

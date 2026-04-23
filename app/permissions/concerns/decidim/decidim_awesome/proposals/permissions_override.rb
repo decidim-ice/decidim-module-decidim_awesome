@@ -27,20 +27,15 @@ module Decidim
           private
 
           def awesome_status_filter_active?
-            return false unless current_settings.respond_to?(:awesome_votes_enabled_by_status)
-            return false unless current_settings.awesome_votes_enabled_by_status
+            return @awesome_status_filter_active if defined?(@awesome_status_filter_active)
 
-            awesome_allowed_state_ids.any?
+            @awesome_status_filter_active = Decidim::DecidimAwesome::Proposals::VotesByProposalStatus.active?(current_settings)
           end
 
           def awesome_proposal_status_allowed?
-            return false unless proposal&.decidim_proposals_proposal_state_id
+            return @awesome_proposal_status_allowed if defined?(@awesome_proposal_status_allowed)
 
-            awesome_allowed_state_ids.include?(proposal.decidim_proposals_proposal_state_id)
-          end
-
-          def awesome_allowed_state_ids
-            Array(current_settings.awesome_votes_enabled_states).compact_blank.map(&:to_i)
+            @awesome_proposal_status_allowed = Decidim::DecidimAwesome::Proposals::VotesByProposalStatus.allowed?(proposal, current_settings)
           end
         end
       end

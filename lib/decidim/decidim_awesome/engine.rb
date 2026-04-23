@@ -108,7 +108,7 @@ module Decidim
           Decidim::Proposals::ProposalGCell.include(Decidim::DecidimAwesome::ProposalGCellOverride)
         end
 
-        Decidim::Proposals::ProposalVoteCell.include(Decidim::DecidimAwesome::Proposals::ProposalVoteCellOverride) if DecidimAwesome.votes_by_proposal_status
+        Decidim::Proposals::ProposalVoteCell.include(Decidim::DecidimAwesome::Proposals::ProposalVoteCellOverride) if DecidimAwesome.enabled?(:votes_by_proposal_status)
 
         Decidim::DataConsentCell.prepend(Decidim::DecidimAwesome::DataConsentCellOverride) if DecidimAwesome.enabled?(:cookie_management)
 
@@ -167,7 +167,7 @@ module Decidim
 
           Decidim::Proposals::ProposalsController.include(Decidim::DecidimAwesome::Proposals::OrderableOverride) if DecidimAwesome.enabled?(:additional_proposal_sortings)
 
-          if DecidimAwesome.votes_by_proposal_status
+          if DecidimAwesome.enabled?(:votes_by_proposal_status)
             Decidim::Admin::SettingsHelper.include(Decidim::DecidimAwesome::Admin::SettingsHelperOverride)
             Decidim::Proposals::Permissions.include(Decidim::DecidimAwesome::Proposals::PermissionsOverride)
           end
@@ -209,7 +209,7 @@ module Decidim
               )
             end
 
-            if DecidimAwesome.votes_by_proposal_status
+            if DecidimAwesome.enabled?(:votes_by_proposal_status)
               DecidimAwesome.hash_append!(
                 settings.attributes,
                 :votes_enabled,

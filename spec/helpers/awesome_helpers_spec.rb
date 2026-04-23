@@ -138,7 +138,7 @@ module Decidim::DecidimAwesome
       context "when the global feature flag is disabled" do
         let(:step_settings) { { awesome_votes_enabled_by_status: true, awesome_votes_enabled_states: [rejected_state.id.to_s] } }
 
-        before { allow(Decidim::DecidimAwesome).to receive(:votes_by_proposal_status).and_return(false) }
+        before { allow(Decidim::DecidimAwesome.config).to receive(:votes_by_proposal_status).and_return(:disabled) }
 
         it { is_expected.to be(false) }
       end

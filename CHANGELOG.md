@@ -1,6 +1,15 @@
 CHANGELOG
 =========
 
+v0.14.2
+-------
+
+Compatibility:
+  - Decidim 0.31.x
+
+Features:
+  - Allow admins to restrict proposal voting to selected proposal states per step ([#572](https://github.com/decidim-ice/decidim-module-decidim_awesome/issues/572))
+
 v0.14.1
 -------
 
