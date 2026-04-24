@@ -53,7 +53,11 @@ module Decidim
 
             error_on_locale = locales.find { |locale| form.send(:error?, name_with_locale("body", locale)) }
 
-            label_tabs = form.send(:translated_labels, "body", form.options, tabs_id, error_on_locale)
+            label_tabs = form.content_tag(:div, class: "label--tabs") do
+              language_selector = "".html_safe
+              language_selector = form.send(:create_language_selector, locales, tabs_id, "body", error_on_locale) if form.options[:label] != false
+              safe_join [content_tag("label"), language_selector]
+            end
 
             tabs_content = form.content_tag(:div, class: "tabs-content", data: { tabs_content: tabs_id }) do
               locales.each_with_index.inject("".html_safe) do |string, (locale, index)|
