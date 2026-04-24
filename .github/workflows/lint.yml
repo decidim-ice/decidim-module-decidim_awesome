@@ -52,7 +52,11 @@ jobs:
         run: npm ci
       - name: Prepare RuboCop config
         run: |
+          # RuboCop resolves remote `inherit_from` via Ruby HTTP/OpenSSL. In GH Actions this
+          # can fail intermittently (`OpenSSL::Buffering::Buffer` errors), so we prefetch the
+          # upstream Decidim config files and point `.rubocop.yml` to a local copy.
           curl -fsSL https://raw.githubusercontent.com/decidim/decidim/release/0.31-stable/.rubocop.yml -o .rubocop.decidim-ci.yml
+          curl -fsSL https://raw.githubusercontent.com/decidim/decidim/release/0.31-stable/.rubocop_todo.yml -o .rubocop_todo.yml
           sed -i 's#https://raw.githubusercontent.com/decidim/decidim/release/0.31-stable/.rubocop.yml#.rubocop.decidim-ci.yml#' .rubocop.yml
       - run: ${{ matrix.command }}
         name: ${{ matrix.command }}
