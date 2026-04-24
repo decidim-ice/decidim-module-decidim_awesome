@@ -12,32 +12,19 @@ describe "Visit the admin page" do
   let(:version) { version_original }
 
   before do
-    # Mock GitHub API calls for system checker helpers
-    stub_request(:get, "https://api.github.com/repos/decidim/decidim/releases")
-      .to_return(
-        status: 200,
-        body: [
-          {
-            "tag_name" => "v0.31.2",
-            "prerelease" => false,
-            "draft" => false
-          }
-        ].to_json,
-        headers: { "Content-Type" => "application/json" }
-      )
+    decidim_response = double(
+      success?: true,
+      body: [{ "tag_name" => "v0.31.2", "prerelease" => false, "draft" => false }].to_json
+    )
+    awesome_response = double(
+      success?: true,
+      body: [{ "tag_name" => "v0.14.1", "prerelease" => false, "draft" => false }].to_json
+    )
 
-    stub_request(:get, "https://api.github.com/repos/decidim-ice/decidim-module-decidim_awesome/releases")
-      .to_return(
-        status: 200,
-        body: [
-          {
-            "tag_name" => "v0.14.1",
-            "prerelease" => false,
-            "draft" => false
-          }
-        ].to_json,
-        headers: { "Content-Type" => "application/json" }
-      )
+    allow(Faraday).to receive(:get).with("https://api.github.com/repos/decidim/decidim/releases")
+                                   .and_return(decidim_response)
+    allow(Faraday).to receive(:get).with("https://api.github.com/repos/decidim-ice/decidim-module-decidim_awesome/releases")
+                                   .and_return(awesome_response)
 
     allow(Decidim).to receive(:version).and_return(version)
     disabled_features.each do |feature|
