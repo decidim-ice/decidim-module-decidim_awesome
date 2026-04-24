@@ -50,5 +50,9 @@ jobs:
             npm-
       - name: Install JS dependencies
         run: npm ci
+      - name: Prepare RuboCop config
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/decidim/decidim/release/0.31-stable/.rubocop.yml -o .rubocop.decidim-ci.yml
+          sed -i 's#https://raw.githubusercontent.com/decidim/decidim/release/0.31-stable/.rubocop.yml#.rubocop.decidim-ci.yml#' .rubocop.yml
       - run: ${{ matrix.command }}
         name: ${{ matrix.command }}
