@@ -22,15 +22,15 @@
         </thead>
         <tbody>
           <% @rules.each do |id, rule| %>
-            <% 
+            <%
               constraints = constraints_for("auto_moderation_rules_#{id}")
               rule_targets = rule["targets"] || []
             %>
             <tr>
               <td><%= translated_attribute(rule["description"]) %></td>
-              <td><%= t("auto_moderation_rules.form.rule_type.#{rule['rule_type']}", scope: "decidim.decidim_awesome.admin") %></td>
-              <td><%= rule_targets.map { |id, target| t("auto_moderation_target.object_type_options.#{target["object_type"]}", scope: "activemodel.attributes") }.join(", ") %></td>
-              <td><%= rule_targets.map { |id, target| t("auto_moderation_target.action_type_options.#{target["action_type"]}", scope: "activemodel.attributes") }.join(", ") %></td>
+              <td><%= t("auto_moderation_rules.form.rule_type.#{rule["rule_type"]}", scope: "decidim.decidim_awesome.admin") %></td>
+              <td><%= rule_targets.map { |_id, target| t("auto_moderation_target.object_type_options.#{target["object_type"]}", scope: "activemodel.attributes") }.join(", ") %></td>
+              <td><%= rule_targets.map { |_id, target| t("auto_moderation_target.action_type_options.#{target["action_type"]}", scope: "activemodel.attributes") }.join(", ") %></td>
               <td>
                 <div class="constraints-editor !mt-0">
                   <ul>
@@ -50,11 +50,10 @@
                 <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_auto_moderation_rule_path(id), t(".edit"), class: "action-icon--edit" %>
                 <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.auto_moderation_rule_path(id), t(".destroy"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
               </td>
-            </tr> 
+            </tr>
           <% end %>
         </tbody>
       </table>
     </div>
   </div>
 </div>
-

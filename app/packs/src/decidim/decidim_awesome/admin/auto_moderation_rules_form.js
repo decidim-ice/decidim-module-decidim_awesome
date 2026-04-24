@@ -1,3 +1,5 @@
+/* eslint-disable no-new */
+
 import TomSelect from "tom-select/dist/cjs/tom-select.popular";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -8,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   new TomSelect(selectContainer, {
-    plugins: ["remove_button",],
+    plugins: ["remove_button"],
     create: true
   });
 });
