@@ -15,8 +15,6 @@ Features:
   - Add a new cookie policy/category manager ([#521](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/521))
   - Fix proposal creation in admin when custom fields are enabled for Decidim >= 0.31.3
 
-Features:
-
 v0.14.1
 -------
 
