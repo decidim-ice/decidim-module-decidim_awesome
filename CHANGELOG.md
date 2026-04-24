@@ -13,6 +13,7 @@ Features:
   - Add Sticky Awesome Global Menu content block ([#540](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/540))
   - Add Rich Text content block for landing pages ([#543](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/543))
   - Add a new cookie policy/category manager ([#521](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/521))
+  - Fix proposal creation in admin when custom fields are enabled for Decidim >= 0.31.3
 
 Features:
 

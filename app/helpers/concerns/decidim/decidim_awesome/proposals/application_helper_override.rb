@@ -40,7 +40,7 @@ module Decidim
           end
 
           # replace admin method to draw the editor (multi lang)
-          def admin_editor_for_proposal_body(form)
+          def admin_editor_for_proposal_body(form) # rubocop:disable Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
             custom_fields = awesome_proposal_custom_fields_for(:body)
 
             return if custom_fields.empty?
