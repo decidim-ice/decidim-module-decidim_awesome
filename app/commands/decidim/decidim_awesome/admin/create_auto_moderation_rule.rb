@@ -25,6 +25,8 @@ module Decidim
           config = create_hash_config!
           entry = form.to_params
 
+          rule_options = entry.delete("rule_options")
+          entry["rule_options"] = rule_options.split(",").map(&:strip).reject(&:empty?)
           config.value[ident] = entry
           config.save!
           broadcast(:ok, entry)
