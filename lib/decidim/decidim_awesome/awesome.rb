@@ -14,6 +14,7 @@ module Decidim
     autoload :VotingManifest, "decidim/decidim_awesome/voting_manifest"
     autoload :ModerationRuleManifest, "decidim/decidim_awesome/moderation_rule_manifest"
     autoload :ModerationActionManifest, "decidim/decidim_awesome/moderation_action_manifest"
+    autoload :ModerationProcessor, "decidim/decidim_awesome/processors/moderation_processor"
     autoload :Lock, "decidim/decidim_awesome/lock"
     autoload :TranslatedCustomFieldsType, "decidim/decidim_awesome/api/types/translated_custom_fields_type"
     autoload :LocalizedCustomFieldsType, "decidim/decidim_awesome/api/types/localized_custom_fields_type"

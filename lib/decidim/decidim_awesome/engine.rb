@@ -398,7 +398,7 @@ module Decidim
       initializer "decidim_decidim_awesome.register_auto_moderation_rules" do
         if DecidimAwesome.enabled?(:auto_moderation_rules)
           Decidim::DecidimAwesome.moderation_rules_registry.register(:word_filter) do |rule|
-            rule.checker_class = "Decidim::DecidimAwesome::ModerationRules::WordFilterRule"
+            rule.checker_class = "Decidim::DecidimAwesome::ModerationRules::WordFilter"
             rule.form_class = "Decidim::DecidimAwesome::Admin::WordFilterRuleForm"
             rule.supported_object_types = [:proposals, :comments]
           end
@@ -406,8 +406,24 @@ module Decidim
           Decidim::DecidimAwesome.moderation_actions_registry.register(:moderate_and_hide) do |action|
             action.name = "moderate_and_hide"
             action.form_class = "Decidim::DecidimAwesome::Admin::ModerateAndHideActionForm"
-            action.handler_class = "Decidim::DecidimAwesome::ModerationActions::ModerateAndHideAction"
+            action.handler_class = "Decidim::DecidimAwesome::ModerationActions::ModerateAndHide"
             action.supported_object_types = [:proposals, :comments]
+          end
+
+          ActiveSupport::Notifications.subscribe("decidim.comments.create_comment:after") do |_event_name, data|
+            Decidim::DecidimAwesome::ModerationProcessorJob.perform_later(data[:resource])
+          end
+
+          ActiveSupport::Notifications.subscribe("decidim.comments.update_comment:after") do |_event_name, data|
+            Decidim::DecidimAwesome::ModerationProcessorJob.perform_later(data[:resource])
+          end
+
+          ActiveSupport::Notifications.subscribe("decidim.proposals.create_proposal:after") do |_event_name, data|
+            Decidim::DecidimAwesome::ModerationProcessorJob.perform_later(data[:resource])
+          end
+
+          ActiveSupport::Notifications.subscribe("decidim.proposals.update_proposal:after") do |_event_name, data|
+            Decidim::DecidimAwesome::ModerationProcessorJob.perform_later(data[:resource])
           end
         end
       end
