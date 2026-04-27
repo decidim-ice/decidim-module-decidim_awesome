@@ -1,6 +1,20 @@
 CHANGELOG
 =========
 
+v0.14.2
+-------
+
+Compatibility:
+  - Decidim 0.31.x
+
+Features:
+  - Fix exports of checkbox groups for custom fields
+  - Allow to reorder processes when "manual" mode is selected in awesome processes groups
+  - Add Sticky Awesome Global Menu content block ([#540](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/540))
+  - Add Rich Text content block for landing pages ([#543](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/543))
+  - Add a new cookie policy/category manager ([#521](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/521))
+  - Fix proposal creation in admin when custom fields are enabled for Decidim >= 0.31.3
+
 v0.14.1
 -------
 
@@ -9,7 +23,6 @@ Compatibility:
 
 Features:
   - Added version update checking from GitHub on System Compatibility page
-  - Add a new cookie policy/category manager ([#521](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/521))
   - Add Process Groups Extended content block with status and taxonomy filters ([#519](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/519))
   - Configurable Awesome Processes homepage content block ([#518](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/518))
 

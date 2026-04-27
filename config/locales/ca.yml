@@ -46,12 +46,20 @@ ca:
         component_manifest: Només en components de tipus
         participatory_space_manifest: Aplica-ho a espais participatius de tipus
         participatory_space_slug: Només a
+      content_block_attachment:
+        background_image_0: Imatge de fons
+        background_image_1: Imatge de fons
+        background_image_2: Imatge de fons
+        background_image_3: Imatge de fons
+        background_image_4: Imatge de fons
       cookie_category:
         mandatory: Obligatòria
+        slug: ID
         title: Categoria
         total_cookies: Galetes totals
         visibility: Visibilitat
       cookie_item:
+        expiration: Caducitat
         name: Nom de la galeta
         service: Servei
         type: Tipus
@@ -78,7 +86,10 @@ ca:
       models:
         cookie_item:
           attributes:
+            base:
+              category_not_found: No s'ha trobat la categoria
             name:
+              cannot_change_default_item_name: El nom d'un element predefinit no es pot canviar
               invalid_format: El nom només pot contenir lletres, números, guions i guions baixos (sense espais)
   decidim:
     admin:
@@ -419,6 +430,7 @@ ca:
             error: Error actualitzant la restricció
             success: Restricció actualitzada correctament
         cookie_categories:
+          cookie_management_warning_html: Tingueu en compte que Decidim obligarà la persona usuària a acceptar totes les galetes per poder mostrar iframes. Per complir amb el RGPD, assegureu-vos d'afegir a les categories corresponents totes les galetes que s'utilitzaran als iframes.
           create:
             error: S'ha produït un error en crear la categoria de galetes! %{error}
             success: Categoria de galetes creada correctament
@@ -427,11 +439,14 @@ ca:
             success: Categoria de galetes eliminada correctament
           edit:
             cancel: Cancel·lar
+            items: Editar elements de la categoria
             save: Desar
             title: Editar la categoria de galetes
           form:
+            slug_help: Identificador únic utilitzat en els scripts per referenciar aquesta categoria.
             visibility:
               hidden: Ocult
+              visible: Visible
           index:
             cannot_remove_default: Les categories per defecte no es poden eliminar
             confirm_reset: Esteu segur que voleu restablir aquesta categoria als seus valors per defecte? Això eliminarà totes les personalitzacions que hagueu fet.
@@ -645,9 +660,22 @@ ca:
                 one: YouTube sense galetes (%{count} galeta)
                 other: YouTube sense galetes (%{count} galetes)
             services:
+              cloudflare_turnstile: Cloudflare Turnstile
               decidim_essential: Aquest lloc web
               emoji_picker: Aquest lloc web
+              facebook_pixel: Meta (Facebook)
+              google_analytics: Google Analytics
+              google_maps_embeds: Google Maps
+              google_tag_manager: Google Tag Manager
               graphiql: Aquest lloc web
+              hcaptcha: hCaptcha
+              jitsi_meet: Jitsi Meet
+              linkedin_insight: LinkedIn
+              matomo: Matomo
+              openstreetmap_tiles: OpenStreetMap
+              recaptcha: Google reCAPTCHA
+              vimeo_embeds: Vimeo
+              youtube_embeds: YouTube
               youtube_nocookie: YouTube (mode de privadesa millorada)
           create:
             error: S'ha produït un error en crear l'element de galeta! %{error}
@@ -665,6 +693,7 @@ ca:
             title: Editar l'element de galeta
           form:
             description_item_help: Indica el propòsit d'aquesta galeta i la informació que emmagatzema
+            expiration_item_help: Temps de caducitat de la galeta. Això és només informatiu i no afectarà el temps real de caducitat de la galeta.
             service_item_help: Aquesta és una descripció breu que indica on s'utilitza (per exemple "Aquest lloc web", "Vídeos d'Youtube", "Reunions de Jitsi", etc.)
             title_item_help: Podeu trobar les galetes utilitzant l'inspector (secció d'emmagatzematge). No ha de contenir espais.
           index:
@@ -737,6 +766,19 @@ ca:
             ip_address: Adreça IP
             no_data: No s'han trobat adreces IP
             stamps: Segells hashcash
+        landing_menu_items:
+          form:
+            preset: Omple amb valors predefinits
+            preset_content_blocks: Blocs de contingut existents
+            preset_global_menu: Elements habituals de Decidim
+            select_a_preset: "— Selecciona un element de menú habitual —"
+            url_help_html: "<b>#section-id</b> — es desplaça fins a una secció d'aquesta pàgina<br><b>/ruta</b> — pàgina interna (p. ex. /processes)<br><b>https://example.com</b> — enllaç extern (s'obre automàticament en una pestanya nova)"
+          new:
+            save: Desa
+            title: Nou element de menú
+          show:
+            save: Desa
+            title: Edita l'element de menú
         menu:
           admins: Administradores acotades
           cookie_management: Gestió de galetes
@@ -892,6 +934,8 @@ ca:
           any_group: Qualsevol grup
           group_label: Grup
           max_results: Quantitat màxima d'elements a mostrar
+          move_down: Mou avall
+          move_up: Mou amunt
           name: Processos Awesome
           process_group: Restringir al grup de processos
           process_status: Filtre d'estat del procés
@@ -911,7 +955,35 @@ ca:
           selection_criteria: Criteris de selecció
           selection_criteria_options:
             automatic: Automàtic
+            manual: Manual
           title: Títol del bloc
+        landing_menu:
+          alignment: Alineació del menú
+          alignment_center: Centre
+          alignment_help: Alinea els elements del menú a l'esquerra, al centre o a la dreta de la pàgina
+          alignment_left: Esquerra
+          alignment_right: Dreta
+          css_comment_hover: Estil per a l'enllaç del menú en passar-hi per sobre
+          css_comment_link: Estil per a cada enllaç del menú
+          css_comment_menu: Estil per a tot el bloc del menú
+          css_help_html: 'Podeu personalitzar encara més aquest menú creant un %{link}; feu servir aquest codi per referenciar-ne els diferents elements:'
+          css_help_link: estil personalitzat
+          delete_confirm: Esteu segur que voleu eliminar aquest element?
+          drag: Arrossegueu per reordenar
+          edit_item: Edita l'element
+          empty_item: Nou element buit
+          name: Menú global Awesome
+          new_item: Afegeix un element nou
+          presets: Valors predefinits
+          show_on_mobile: Mostra en pantalles mòbils
+          sticky: Fixat (sempre visible en desplaçar-se)
+          table:
+            actions: Accions
+            hidden: Ocult
+            name: Nom
+            url: URL
+            visible: Visible
+          title: Ves a ...
         map:
           collapse: Inicia amb el menú col·lapsat
           map_center: Punt central del mapa (Latitud, Longitud)
@@ -933,6 +1005,32 @@ ca:
           text_settings: Configuració del text
           title: Títol
           truncate: Nombre màxim de caràcters per les descripcions emergents
+        rich_text:
+          add_column: Afegeix una columna nova
+          background_image: Imatge de fons
+          background_image_help: "Imatge opcional que es mostra darrere del contingut de la columna. Amplada mínima recomanada: 1920 px."
+          background_image_placement: Col·locació de la imatge de fons
+          background_image_placement_help: Com es mostra la imatge de fons dins de la columna. Només s'aplica si s'ha carregat una imatge de fons.
+          background_image_placements:
+            contain_center: Ajustar (centrada)
+            cover_bottom: Cobrir (alineada a baix)
+            cover_center: Cobrir (centrada)
+            cover_top: Cobrir (alineada a dalt)
+            repeat: Repetir (mosaic)
+          block_id: Identificador intern
+          block_id_help: Aquest valor s'utilitzarà com a àncora de secció a l'URL. Ha de ser únic per pàgina (p. ex. "el-nostre-equip").
+          block_id_placeholder: nom de referència intern (no s'utilitza públicament)
+          column_title: Columna
+          css_comment_this_column: Estil per a la columna %{number}
+          css_comment_title: Estil per al títol del bloc
+          css_help_html: 'Podeu personalitzar encara més aquest bloc creant un %{link}; feu servir aquest codi per referenciar-ne els diferents elements:'
+          css_help_link: estil personalitzat
+          name: Bloc de text enriquit Awesome
+          remove_column: Elimina
+          restrict_links: Evita que els enllaços del text es mostrin si la usuària no ha iniciat sessió
+          restrict_videos: Evita que els vídeos incrustats al text es mostrin si la usuària no ha iniciat sessió
+          sign_in_to_watch: Inicia sessió per veure aquest vídeo
+          title: Títol del bloc
       credits: Decidim Awesome %{version} · Mantingut amb ♥ per %{company}
       custom_fields:
         errors:
@@ -1024,6 +1122,17 @@ ca:
           view_proposal: Veure proposta
   layouts:
     decidim:
+      data_consent:
+        details:
+          columns:
+            expiration: Caducitat
+          items:
+            _session_id:
+              expiration: sessió
+            decidim-consent:
+              expiration: 1 any
+            pwaInstallPromptSeen:
+              expiration: persistent
       decidim_awesome:
         admin:
           maintenance:

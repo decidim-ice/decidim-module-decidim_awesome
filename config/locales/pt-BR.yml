@@ -46,6 +46,26 @@ pt-BR:
         component_manifest: Apenas em componentes do tipo
         participatory_space_manifest: Aplicar a espaços participativos do tipo
         participatory_space_slug: Somente em
+      content_block_attachment:
+        background_image_0: Imagem de fundo
+        background_image_1: Imagem de fundo
+        background_image_2: Imagem de fundo
+        background_image_3: Imagem de fundo
+        background_image_4: Imagem de fundo
+      cookie_category:
+        mandatory: Obrigatoria
+        slug: ID
+        title: Categoria
+        total_cookies: Total de cookies
+        visibility: Visibilidade
+      cookie_item:
+        expiration: Expiracao
+        name: Nome do cookie
+        service: Servico
+        type: Tipo
+        types:
+          cookie: Cookie
+          local_storage: Armazenamento local
       custom_redirect:
         active: Ativo
         destination: Destino
@@ -62,6 +82,15 @@ pt-BR:
         awesome_admins_available_authorizations: Permitir que administradores verifiquem usuarios manualmente com estas autorizações
       user:
         user_time_zone: Fuso horario pessoal
+    errors:
+      models:
+        cookie_item:
+          attributes:
+            base:
+              category_not_found: Categoria nao encontrada
+            name:
+              cannot_change_default_item_name: O nome de um item predefinido nao pode ser alterado
+              invalid_format: O nome so pode conter letras, numeros, hifens e underscores (sem espacos)
   decidim:
     admin:
       actions:
@@ -157,13 +186,19 @@ pt-BR:
         actions: Acoes
         admin_accountability:
           admin_roles:
+            admin: Super administrador
             user_manager: Gerente de usuarios
           created_at: Funcao criada em
           currently_active: Atualmente ativo
           deleted_user: Usuario excluido
+          email: Email
           exports:
             button: Exportar esta busca
             export_as: Exportar como %{export_format}
+            export_format:
+              csv: CSV
+              json: JSON
+              xlsx: XLSX
             notice: O trabalho de exportacao foi colocado na fila. Voce recebera um email quando estiver pronto.
           index:
             description: Aqui voce encontrara todos os usuarios que tiveram alguma funcao na administracao de um espaco participativo. Administradores normais nao sao listados.
@@ -359,6 +394,7 @@ pt-BR:
           system: Em todo lugar, exceto espacos participativos
           title:
             admins: Administradores com escopo
+            cookie_management: Gestao de cookies
             editors: Hacks do editor
             livechat: Chat ao vivo
             proposal_custom_fields: 'Campos personalizados de propostas: campos publicos'
@@ -394,23 +430,290 @@ pt-BR:
             error: Erro ao atualizar caso de condicao
             success: Caso de condicao atualizado com sucesso
         cookie_categories:
+          cookie_management_warning_html: Note que o Decidim obrigara o usuario a aceitar TODOS os cookies para mostrar iframes. Para cumprir a LGPD e o RGPD, certifique-se de que todos os cookies usados em iframes sejam adicionados as categorias corretas.
+          create:
+            error: Erro ao criar a categoria de cookies! %{error}
+            success: Categoria de cookies criada com sucesso
+          destroy:
+            error: Erro ao remover a categoria de cookies! %{error}
+            success: Categoria de cookies removida com sucesso
+          edit:
+            cancel: Cancelar
+            items: Editar itens da categoria
+            save: Salvar
+            title: Editar categoria de cookies
+          form:
+            slug_help: Identificador unico usado em scripts para referenciar esta categoria.
+            visibility:
+              hidden: Oculta
+              visible: Visivel
+          index:
+            cannot_remove_default: As categorias padrao nao podem ser removidas
+            confirm_reset: Tem certeza de que deseja restaurar esta categoria para os valores padrao? Todas as personalizacoes serao removidas.
+            description_html: |
+              As categorias e os itens de cookies controlam apenas a interface de consentimento e a documentacao.<br>
+              Para que as preferencias funcionem, scripts e servicos de terceiros devem ser configurados para carregar somente apos o consentimento.<br>
+              Esta configuracao extra nao e necessaria para iframes de video incorporados, pois o Decidim ja inclui tratamento de consentimento para esses embeds.<br>
+              Consulte o guia oficial: <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Adicionar scripts que exigem consentimento de dados</a>.
+            edit: Editar categoria
+            items: Itens da categoria
+            new: Nova categoria
+            reset: Restaurar personalizacao
+            title: Gestao de cookies
+          new:
+            cancel: Cancelar
+            save: Salvar
+            title: Nova categoria de cookies
           script_config:
             script_consent_help_html: |
               <p>Os scripts associados a esta categoria só respeitam o consentimento quando são adicionados dentro de um script com o atributo <span class="label">data-consent="%{category}"</span>.</p>
               <p>O local recomendado para adicioná-los é <span class="label">app/views/layouts/decidim/_head_extra.html.erb</span> ou nos snippets de cabeçalho (se estiverem habilitados).</p>
               <p>Exemplo:</p><br><pre>%{example}</pre><br>
               <p>Sem <code>type="text/plain"</code>, a configuração de consentimento de dados do usuário não tem efeito.<br>Leia mais em <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Adding scripts which require data consent</a>.</p>
+          update:
+            error: Erro ao atualizar a categoria de cookies! %{error}
+            success: Categoria de cookies atualizada com sucesso
         cookie_items:
+          cookie_item_dropdown:
+            button: Servicos de cookies comuns
           cookie_item_presets:
             descriptions:
+              consent: Utilizado para funcionalidade. Dura 2 anos. O Google o utiliza para armazenar o estado de consentimento do usuario em relacao as escolhas de cookies. Mais informacoes em Como o Google usa cookies
+              decidim_consent: Armazena informacoes sobre os cookies permitidos pelo usuario neste site.
+              emoji_picker_recent: Armazena os emojis selecionados mais recentemente
+              facebook_fr: Utilizado pela Meta para veicular, medir e melhorar a relevancia de anuncios.
+              fbp: Identifica sessoes do navegador para rastreamento do Facebook Pixel.
+              ga_gat: Utilizado para limitar a taxa de requisicoes enviadas ao Google Analytics.
+              ga_gid: Utilizado para distinguir usuarios para fins analiticos. Expira apos 24 horas.
+              ga_main: Utilizado para distinguir usuarios atribuindo um identificador unico.
+              ga_property: Utilizado no GA4 para manter o estado da sessao e contadores de uma propriedade especifica.
+              graphiql_doc_explorer_open: Salva se o painel de documentacao esta aberto ao usar a API GraphQL
+              graphiql_editor_flex: Salva sua preferencia de abas ao usar a API GraphQL
+              graphiql_history_pane_open: Salva se o painel de historico esta aberto ao usar a API GraphQL
+              graphiql_queries: Salva o historico das suas consultas ao usar a API GraphQL
+              graphiql_query: Salva sua ultima consulta ao usar a API GraphQL
+              graphiql_tab_state: Salva a configuracao das suas abas ao usar a API GraphQL
+              gtm_dc: Utilizado pelo Google Tag Manager para carregamento de tags e diagnosticos.
+              gtm_debug: Armazena o estado do modo de depuracao do Google Tag Manager.
+              gtm_gcl_au: Utilizado pelos servicos do Google para testar a eficiencia de publicidade.
+              hcaptcha_accessibility: Armazena preferencias de acessibilidade para desafios do hCaptcha.
+              hcaptcha_session: Armazena o estado temporario da sessao do hCaptcha para validar desafios.
+              jitsi_amp: Utilizado para o Amplitude Analytics
+              jitsi_amplitude_unsent_identify: Utilizado para o Amplitude Analytics
+              jitsi_amplitude_unset: Utilizado para o Amplitude Analytics
+              jitsi_calendar_sync: Utilizado para a funcionalidade de sincronizacao de calendario.
+              jitsi_callstats_username: Utilizado para salvar a sessao do usuario no Jitsi.
+              jitsi_dropbox: Utilizado para a funcionalidade de integracao com Dropbox.
+              jitsi_endpoint_id: Utilizado para comunicacao com o servidor do Jitsi.
+              jitsi_known_domains: Salva uma lista de dominios conhecidos
+              jitsi_language: Salva sua preferencia de idioma
+              jitsi_prejoin: Utilizado para a funcionalidade de tela de pre-entrada.
+              jitsi_recent_list: Utilizado para a funcionalidade de lista recente.
+              jitsi_settings: Utilizado para salvar suas configuracoes do Jitsi.
+              jitsi_video_quality: Utilizado para a funcionalidade de armazenamento persistente da qualidade de video.
+              jitsi_virtual_background: Utilizado para a funcionalidade de fundo de video.
+              linkedin_li_gc: Armazena o estado de consentimento para os servicos do LinkedIn.
+              linkedin_lidc: Utilizado pelo LinkedIn para roteamento e balanceamento de carga.
+              linkedin_user_match_history: Rastreia o tempo de interacao com anuncios e a atribuicao de conversoes em campanhas do LinkedIn.
+              maps_1p_jar: Armazena preferencias de uso do Google Maps e sinais de personalizacao de anuncios.
+              maps_consent: Armazena o estado de consentimento do usuario para os servicos do Google ao usar mapas incorporados.
+              maps_nid: Armazena preferencias do Google Maps e informacoes de seguranca do navegador.
+              matomo_mtm_consent: Armazena o estado de consentimento do usuario para o rastreamento do Matomo.
+              matomo_pk_id: Utilizado para armazenar um identificador unico do visitante e identificar visitantes recorrentes.
+              matomo_pk_ref: Utilizado para armazenar informacoes de atribuicao (a origem que trouxe o usuario ao site).
+              matomo_pk_ses: Utilizado para armazenar dados temporarios da sessao da visita atual.
+              osm_location: Armazena valores padrao de localizacao/zoom para interacoes com o OpenStreetMap.
+              osm_session: Armazena dados temporarios de sessao para interacoes do usuario com o OpenStreetMap.
+              osm_totp_token: Armazena dados temporarios de token relacionados a 2FA para fluxos de conta do OpenStreetMap.
+              pref: Utilizado para funcionalidade. O YouTube usa este cookie para armazenar informacoes como configuracao preferida da pagina e preferencias de reproducao. Mais informacoes em Como o Google usa cookies
+              recaptcha_grecaptcha: Utilizado pelo reCAPTCHA para protecao contra spam e analise de risco.
+              recaptcha_rc_a: Armazena metadados de analise de risco do reCAPTCHA no armazenamento do navegador.
+              recaptcha_rc_c: Armazena metadados de desafio/sessao do reCAPTCHA no armazenamento do navegador.
+              remember_user_token: Permite manter sua sessao aberta ao clicar em "Lembrar-me" ao fazer login.
+              session_id: Permite que sites reconhecam o usuario ao navegar entre paginas.
               turnstile_cf_bm: Ajuda o Cloudflare a detectar e mitigar trafego automatizado.
               turnstile_cf_clearance: Armazena a prova de que um visitante passou por um desafio de seguranca anterior.
               turnstile_cfuvid: Ajuda o Cloudflare a distinguir usuarios individuais que compartilham o mesmo endereco IP.
+              vimeo_player: Armazena preferencias do player do Vimeo, como volume, qualidade ou comportamento de reproducao automatica.
+              vimeo_vuid: Armazena um identificador unico de visitante do Vimeo usado para analise.
+              visitor_info1_live: Utilizado para funcionalidade, analise, publicidade e personalizacao. Mais informacoes em Como o Google usa cookies
+              ysc: Utilizado para seguranca. Dura pela sessao de navegacao do usuario. Impede que sites maliciosos ajam em nome do usuario sem seu conhecimento. Mais informacoes em Como o Google usa cookies
+              yt_remote_connected_devices: Armazena a lista de dispositivos conectados para controles remotos do player do YouTube.
+              yt_remote_device_id: Armazena um identificador de dispositivo para interacoes remotas do player do YouTube.
+              ytidb_last_result_entry_key: Armazena os metadados de resultado mais recentes do player do YouTube no armazenamento local.
             explanations:
               cloudflare_turnstile: |-
                 Adicione estes cookies quando o Cloudflare Turnstile estiver ativado para proteger formularios contra abuso e trafego automatizado. Eles suportam deteccao de bots, validacao de sessao e continuidade do desafio.
 
                 Categoria recomendada: Essencial
+              decidim_essential: |-
+                Adicione estes cookies essenciais necessarios para a funcionalidade principal da sua plataforma Decidim. Esses cookies permitem autenticacao do usuario, gestao de sessoes e rastreamento de consentimento.
+
+                Categoria recomendada: Essencial
+              emoji_picker: |-
+                Adicione este cookie ao ativar o seletor de emojis nos editores de texto. Ele armazena emojis usados recentemente para personalizar a experiencia do usuario.
+
+                Categoria recomendada: Preferencias
+              facebook_pixel: |-
+                Adicione estes cookies ao utilizar o Meta (Facebook) Pixel para rastreamento de conversoes ou atribuicao de anuncios. Eles ajudam a identificar sessoes do navegador e medir o desempenho das campanhas.
+
+                Categoria recomendada: Marketing
+              google_analytics: |-
+                Adicione estes cookies ao utilizar o Google Analytics (GA4/gtag.js) para medir trafego e comportamento dos usuarios. Eles identificam visitantes, distinguem sessoes e ajudam a gerar estatisticas de uso.
+
+                Categoria recomendada: Analitica
+              google_maps_embeds: |-
+                Adicione estes cookies ao incorporar o Google Maps em suas paginas. Eles ajudam com preferencias do mapa, estado de consentimento e metricas de uso.
+
+                Categoria recomendada: Preferencias ou Analitica
+              google_tag_manager: |-
+                Adicione estes cookies quando suas tags de analise ou marketing forem entregues pelo Google Tag Manager. Algumas tags podem definir cookies adicionais de rastreamento dependendo da configuracao do GTM.
+
+                Categoria recomendada: Analitica ou Marketing
+              graphiql: |-
+                Adicione estes cookies ao ativar o explorador da API GraphQL (/api/graphiql) para desenvolvedores. Eles armazenam preferencias da interface, historico de consultas e configuracoes das abas.
+
+                Categoria recomendada: Preferencias
+              hcaptcha: |-
+                Adicione estes cookies/entradas de armazenamento quando o hCaptcha estiver ativado em formularios. Eles sao usados para deteccao de bots, opcoes de acessibilidade e gestao de desafios/sessoes.
+
+                Categoria recomendada: Essencial
+              jitsi_meet: |-
+                Adicione estes cookies ao integrar reunioes de videoconferencia com Jitsi Meet na sua plataforma. Eles armazenam configuracoes do usuario, preferencias de idioma, opcoes de qualidade de video e dados de sessao.
+
+                Categoria recomendada: Preferencias
+              linkedin_insight: |-
+                Adicione estes cookies ao usar a LinkedIn Insight Tag para medir o desempenho de campanhas e conversoes vindas de anuncios do LinkedIn.
+
+                Categoria recomendada: Marketing
+              matomo: |-
+                Adicione estes cookies ao usar o Matomo Analytics para coletar estatisticas do site. Eles identificam visitantes recorrentes, rastreiam sessoes e armazenam informacoes de referencia para relatorios agregados.
+
+                Categoria recomendada: Analitica
+              openstreetmap_tiles: |-
+                Adicione estes cookies quando a experiencia do mapa depender de recursos hospedados pelo OpenStreetMap que possam definir cookies.
+
+                Categoria recomendada: Preferencias
+              recaptcha: |-
+                Adicione estes cookies/entradas de armazenamento quando o Google reCAPTCHA proteger formularios contra abuso e bots. Eles ajudam a avaliar interacoes do usuario e sinais de seguranca.
+
+                Categoria recomendada: Essencial
+              vimeo_embeds: |-
+                Adicione estes cookies ao incorporar videos do Vimeo em paginas, propostas ou comentarios. O Vimeo pode usa-los para lembrar configuracoes do player e medir interacoes de reproducao.
+
+                Categoria recomendada: Preferencias ou Analitica
+              youtube_embeds: |-
+                Adicione estes cookies ao permitir videos incorporados do YouTube em conteudos. O YouTube define cookies de analise e rastreamento que coletam informacoes sobre reproducao de videos e comportamento do usuario.
+
+                Categoria recomendada: Preferencias, Analitica ou Marketing
+              youtube_nocookie: |-
+                Adicione estas chaves de armazenamento quando usar o modo de privacidade aprimorada do YouTube (youtube-nocookie.com). Elas sao usadas para manter o estado do player e preferencias de dispositivo/sessao.
+
+                Categoria recomendada: Preferencias
+            labels:
+              cloudflare_turnstile:
+                one: Cloudflare Turnstile (%{count} cookie)
+                other: Cloudflare Turnstile (%{count} cookies)
+              decidim_essential:
+                one: Decidim Essencial (%{count} cookie)
+                other: Decidim Essencial (%{count} cookies)
+              emoji_picker:
+                one: Seletor de emojis (%{count} cookie)
+                other: Seletor de emojis (%{count} cookies)
+              facebook_pixel:
+                one: Facebook Pixel (%{count} cookie)
+                other: Facebook Pixel (%{count} cookies)
+              google_analytics:
+                one: Google Analytics (%{count} cookie)
+                other: Google Analytics (%{count} cookies)
+              google_maps_embeds:
+                one: Google Maps incorporado (%{count} cookie)
+                other: Google Maps incorporado (%{count} cookies)
+              google_tag_manager:
+                one: Google Tag Manager (%{count} cookie)
+                other: Google Tag Manager (%{count} cookies)
+              graphiql:
+                one: Explorador da API GraphiQL (%{count} cookie)
+                other: Explorador da API GraphiQL (%{count} cookies)
+              hcaptcha:
+                one: hCaptcha (%{count} cookie)
+                other: hCaptcha (%{count} cookies)
+              jitsi_meet:
+                one: Jitsi Meet (%{count} cookie)
+                other: Jitsi Meet (%{count} cookies)
+              linkedin_insight:
+                one: LinkedIn Insight (%{count} cookie)
+                other: LinkedIn Insight (%{count} cookies)
+              matomo:
+                one: Matomo (%{count} cookie)
+                other: Matomo (%{count} cookies)
+              openstreetmap_tiles:
+                one: OpenStreetMap (%{count} cookie)
+                other: OpenStreetMap (%{count} cookies)
+              recaptcha:
+                one: reCAPTCHA (%{count} cookie)
+                other: reCAPTCHA (%{count} cookies)
+              vimeo_embeds:
+                one: Vimeo incorporado (%{count} cookie)
+                other: Vimeo incorporado (%{count} cookies)
+              youtube_embeds:
+                one: YouTube incorporado (%{count} cookie)
+                other: YouTube incorporado (%{count} cookies)
+              youtube_nocookie:
+                one: YouTube (privacidade aprimorada) (%{count} cookie)
+                other: YouTube (privacidade aprimorada) (%{count} cookies)
+            services:
+              cloudflare_turnstile: Cloudflare Turnstile
+              decidim_essential: Este site
+              emoji_picker: Este site
+              facebook_pixel: Meta (Facebook)
+              google_analytics: Google Analytics
+              google_maps_embeds: Google Maps
+              google_tag_manager: Google Tag Manager
+              graphiql: Este site
+              hcaptcha: hCaptcha
+              jitsi_meet: Jitsi Meet
+              linkedin_insight: LinkedIn
+              matomo: Matomo
+              openstreetmap_tiles: OpenStreetMap
+              recaptcha: Google reCAPTCHA
+              vimeo_embeds: Vimeo
+              youtube_embeds: YouTube
+              youtube_nocookie: YouTube (modo de privacidade aprimorada)
+          create:
+            error: Erro ao criar o item de cookie! %{error}
+            success: Item de cookie criado com sucesso
+          create_preset:
+            error: Erro ao adicionar o item de cookie predefinido! %{error}
+            not_found: Predefinicao nao encontrada
+            success: Item de cookie predefinido adicionado com sucesso
+          destroy:
+            error: Erro ao remover o item de cookie! %{error}
+            success: Item de cookie removido com sucesso
+          edit:
+            cancel: Cancelar
+            save: Salvar
+            title: Editar item de cookie
+          form:
+            description_item_help: Indica a finalidade deste cookie e as informacoes que ele armazena
+            expiration_item_help: Indica a duracao do cookie. Esta informacao serve apenas como referencia e nao altera a duracao real do cookie.
+            service_item_help: Uma breve descricao que indica onde ele e utilizado (por exemplo, "Este site", "Videos do YouTube", "Reunioes do Jitsi" etc.)
+            title_item_help: Voce pode encontrar os cookies usando o inspetor do navegador (secao de armazenamento). Nao deve conter espacos.
+          index:
+            back_to_categories: Voltar para as categorias
+            cannot_remove_default: Os itens padrao nao podem ser removidos
+            confirm_reset: Tem certeza de que deseja restaurar este item para os valores padrao? Todas as personalizacoes serao removidas.
+            edit: Editar item
+            new: Novo item
+            reset: Restaurar personalizacao
+            title: "%{category}: Itens de cookie"
+          new:
+            cancel: Cancelar
+            save: Salvar
+            title: Novo item de cookie
+          update:
+            error: Erro ao atualizar o item de cookie! %{error}
+            success: Item de cookie atualizado com sucesso
         custom_redirects:
           create:
             error: Erro ao criar redirecionamento! %{error}
@@ -452,6 +755,7 @@ pt-BR:
             ip_addresses: Ver enderecos IP
             stamps: Ver selos Hashcash
           index:
+            bits: Bits
             created_at: Criado em
             help_html: |
               Esta pagina mostra os selos Hashcash detectados no sistema. Hashcash e um sistema de prova de trabalho que exige que os usuarios resolvam um quebra-cabeca computacional (realizado automaticamente pelo navegador) antes de poderem se cadastrar.
@@ -465,8 +769,22 @@ pt-BR:
             ip_address: Endereco IP
             no_data: Nenhum endereco IP encontrado
             stamps: Selos Hashcash
+        landing_menu_items:
+          form:
+            preset: Predefinicoes para preenchimento automatico
+            preset_content_blocks: Blocos de conteudo existentes
+            preset_global_menu: Itens comuns do Decidim
+            select_a_preset: "— Selecionar item de menu comum —"
+            url_help_html: "<b>#section-id</b> — rola ate uma secao desta pagina<br><b>/caminho</b> — pagina interna (ex. /processes)<br><b>https://example.com</b> — link externo (abre automaticamente em uma nova aba)"
+          new:
+            save: Salvar
+            title: Novo item de menu
+          show:
+            save: Salvar
+            title: Editar item de menu
         menu:
           admins: Administradores com escopo
+          cookie_management: Gestao de cookies
           custom_redirects: Redirecionamentos personalizados
           editors: Hacks do editor
           livechat: Chat ao vivo
@@ -611,6 +929,7 @@ pt-BR:
           results_count:
             one: "%{count} processo encontrado"
             other: "%{count} processos encontrados"
+          status_label: 'Status:'
           title: Titulo do bloco
           upcoming: Proximos
         awesome_processes:
@@ -618,6 +937,8 @@ pt-BR:
           any_group: Qualquer grupo
           group_label: Grupo
           max_results: Quantidade maxima de elementos para mostrar
+          move_down: Mover para baixo
+          move_up: Mover para cima
           name: Processos Awesome
           process_group: Restringir ao grupo de processos
           process_status: Filtro de status do processo
@@ -637,7 +958,35 @@ pt-BR:
           selection_criteria: Criterios de selecao
           selection_criteria_options:
             automatic: Automatico
+            manual: Manual
           title: Titulo do bloco
+        landing_menu:
+          alignment: Posicao do menu
+          alignment_center: Centro
+          alignment_help: Alinhar os itens do menu a esquerda, ao centro ou a direita da pagina
+          alignment_left: Esquerda
+          alignment_right: Direita
+          css_comment_hover: Estilo para o link do menu ao passar o mouse
+          css_comment_link: Estilo para cada link do menu
+          css_comment_menu: Estilo para todo o bloco do menu
+          css_help_html: 'Voce pode personalizar ainda mais este menu criando um %{link} para ele; use este codigo para referenciar os diferentes elementos:'
+          css_help_link: estilo personalizado
+          delete_confirm: Tem certeza de que deseja excluir este item?
+          drag: Arraste para reordenar
+          edit_item: Editar item
+          empty_item: Novo item vazio
+          name: Menu global do Decidim Awesome
+          new_item: Adicionar novo item
+          presets: Predefinicoes
+          show_on_mobile: Mostrar em telas moveis
+          sticky: Fixo (sempre visivel ao rolar)
+          table:
+            actions: Acoes
+            hidden: Oculto
+            name: Nome
+            url: URL
+            visible: Visivel
+          title: Ir para ...
         map:
           collapse: Iniciar com o menu recolhido
           map_center: Centro do Mapa (Latitude, Longitude)
@@ -659,6 +1008,32 @@ pt-BR:
           text_settings: Configuracoes de texto
           title: Titulo
           truncate: Maximo de caracteres para descricoes em popup
+        rich_text:
+          add_column: Adicionar nova coluna
+          background_image: Imagem de fundo
+          background_image_help: 'Imagem opcional exibida atras do conteudo da coluna. Largura minima recomendada: 1920px.'
+          background_image_placement: Posicionamento da imagem
+          background_image_placement_help: Como a imagem de fundo e exibida dentro da coluna. Aplica-se apenas quando uma imagem de fundo e enviada.
+          background_image_placements:
+            contain_center: Conter (centralizada)
+            cover_bottom: Cobrir (alinhada embaixo)
+            cover_center: Cobrir (centralizada)
+            cover_top: Cobrir (alinhada em cima)
+            repeat: Repetir (mosaico)
+          block_id: Rotulo interno
+          block_id_help: Este valor sera usado como ancora da secao na URL. Ele deve ser unico por pagina (por exemplo, "nossa-equipe").
+          block_id_placeholder: nome interno de referencia (nao usado publicamente)
+          column_title: Coluna
+          css_comment_this_column: Estilo para a coluna %{number}
+          css_comment_title: Estilo para o titulo do bloco
+          css_help_html: 'Voce pode personalizar ainda mais este bloco criando um %{link} para ele; use este codigo para referenciar os diferentes elementos:'
+          css_help_link: estilo personalizado
+          name: Bloco de texto rico do Awesome
+          remove_column: Remover
+          restrict_links: Impedir que links no texto sejam exibidos a menos que o usuario esteja logado
+          restrict_videos: Impedir que videos incorporados no texto sejam exibidos a menos que o usuario esteja logado
+          sign_in_to_watch: Faca login para assistir a este video
+          title: Titulo do bloco
       credits: Decidim Awesome %{version} · Mantido com ♥ por %{company}
       custom_fields:
         errors:
@@ -722,6 +1097,7 @@ pt-BR:
           voting_for: Meu voto em "%{proposal}" e "%{type}"
           weights:
             weight_0: Abstencao
+            weight_0_short: 'A:'
             weight_1: Vermelho
             weight_1_short: 'V:'
             weight_2: Amarelo
@@ -749,6 +1125,17 @@ pt-BR:
           view_proposal: Ver proposta
   layouts:
     decidim:
+      data_consent:
+        details:
+          columns:
+            expiration: Expiracao
+          items:
+            _session_id:
+              expiration: sessao
+            decidim-consent:
+              expiration: 1 ano
+            pwaInstallPromptSeen:
+              expiration: persistente
       decidim_awesome:
         admin:
           maintenance:
