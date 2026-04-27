@@ -46,12 +46,19 @@ es:
         component_manifest: Solo en componentes de tipo
         participatory_space_manifest: Aplicar en los espacios participativos de tipo
         participatory_space_slug: Solo en
+      content_block_attachment:
+        background_image_0: Imagen de fondo
+        background_image_1: Imagen de fondo
+        background_image_2: Imagen de fondo
+        background_image_3: Imagen de fondo
+        background_image_4: Imagen de fondo
       cookie_category:
         mandatory: Obligatoria
         title: Categoría
         total_cookies: Total de cookies
         visibility: Visibilidad
       cookie_item:
+        expiration: Caducidad
         name: Nombre de la cookie
         service: Servicio
         type: Tipo
@@ -77,7 +84,10 @@ es:
       models:
         cookie_item:
           attributes:
+            base:
+              category_not_found: Categoría no encontrada
             name:
+              cannot_change_default_item_name: El nombre de un elemento predefinido no se puede cambiar
               invalid_format: El nombre solo puede contener letras, números, guiones y guiones bajos (sin espacios)
   decidim:
     admin:
@@ -418,6 +428,7 @@ es:
             error: Error actualizando la restricción
             success: Restricción actualizada correctamente
         cookie_categories:
+          cookie_management_warning_html: Ten en cuenta que Decidim obligará a la persona usuaria a aceptar todas las cookies para poder mostrar iframes. Para cumplir con el RGPD, asegúrate de añadir a las categorías correspondientes todas las cookies que se usarán en los iframes.
           create:
             error: '¡Error al crear la categoría de cookies! %{error}'
             success: Categoría de cookies creada correctamente
@@ -426,9 +437,11 @@ es:
             success: Categoría de cookies eliminada correctamente
           edit:
             cancel: Cancelar
+            items: Editar elementos de la categoría
             save: Guardar
             title: Editar categoría de cookies
           form:
+            slug_help: Identificador único utilizado en los scripts para hacer referencia a esta categoría.
             visibility:
               hidden: Oculta
           index:
@@ -601,6 +614,24 @@ es:
               emoji_picker:
                 one: Selector de emojis (%{count} cookie)
                 other: Selector de emojis (%{count} cookies)
+              google_maps_embeds:
+                one: Incrustaciones de Google Maps (%{count} cookie)
+                other: Incrustaciones de Google Maps (%{count} cookies)
+              graphiql:
+                one: Explorador de la API GraphiQL (%{count} cookie)
+                other: Explorador de la API GraphiQL (%{count} cookies)
+              openstreetmap_tiles:
+                one: Teselas de OpenStreetMap (%{count} cookie)
+                other: Teselas de OpenStreetMap (%{count} cookies)
+              vimeo_embeds:
+                one: Incrustaciones de Vimeo (%{count} cookie)
+                other: Incrustaciones de Vimeo (%{count} cookies)
+              youtube_embeds:
+                one: Incrustaciones de YouTube (%{count} cookie)
+                other: Incrustaciones de YouTube (%{count} cookies)
+              youtube_nocookie:
+                one: YouTube sin cookies (%{count} cookie)
+                other: YouTube sin cookies (%{count} cookies)
             services:
               decidim_essential: Este sitio web
               emoji_picker: Este sitio web
@@ -622,6 +653,7 @@ es:
             title: Editar elemento de cookie
           form:
             description_item_help: Indica la finalidad de esta cookie y la información que almacena
+            expiration_item_help: Tiempo de caducidad de la cookie. Esto es solo informativo y no afectará al tiempo real de caducidad de la cookie.
             service_item_help: Es una breve descripción que indica dónde se usa (por ejemplo, "Este sitio web", "Vídeos de YouTube", "Reuniones de Jitsi", etc.)
             title_item_help: Puedes encontrar las cookies usando el inspector (sección de almacenamiento). No debe contener espacios.
           index:
@@ -694,6 +726,19 @@ es:
             ip_address: Dirección IP
             no_data: No se encontraron direcciones IP
             stamps: Sellos Hashcash
+        landing_menu_items:
+          form:
+            preset: Autorrellenar con predefinidos
+            preset_content_blocks: Bloques de contenido existentes
+            preset_global_menu: Elementos habituales de Decidim
+            select_a_preset: "— Selecciona un elemento de menú habitual —"
+            url_help_html: "<b>#section-id</b> — desplaza hasta una sección de esta página<br><b>/ruta</b> — página interna (p. ej. /processes)<br><b>https://example.com</b> — enlace externo (se abre automáticamente en una pestaña nueva)"
+          new:
+            save: Guardar
+            title: Nuevo elemento de menú
+          show:
+            save: Guardar
+            title: Editar elemento de menú
         menu:
           admins: Administradoras acotadas
           cookie_management: Gestión de cookies
@@ -849,6 +894,8 @@ es:
           any_group: Cualquier grupo
           group_label: Grupo
           max_results: Cantidad máxima de elementos a mostrar
+          move_down: Mover abajo
+          move_up: Mover arriba
           name: Procesos Awesome
           process_group: Restringir al grupo de procesos
           process_status: Filtro de estado del proceso
@@ -858,7 +905,9 @@ es:
             past: Solo procesos pasados
             upcoming: Solo procesos futuros
           process_type: Tipo de procesos
+          process_type_mixed_hint: En modo mixto, los procesos y grupos se intercalan hasta la cantidad máxima. Los procesos se ordenan por peso (ascendente). Si un tipo se agota, los espacios restantes se llenan con el otro.
           process_types:
+            all: Todos los procesos y grupos mezclados
             groups: Solo grupos de procesos
             processes: Solo procesos
           processes: Procesos
@@ -867,6 +916,31 @@ es:
           selection_criteria_options:
             automatic: Automático
           title: Título del bloque
+        landing_menu:
+          alignment: Alineación del menú
+          alignment_center: Centro
+          alignment_help: Alinea los elementos del menú a la izquierda, en el centro o a la derecha de la página
+          alignment_left: Izquierda
+          alignment_right: Derecha
+          css_comment_hover: Estilo para el enlace del menú al pasar el cursor
+          css_comment_link: Estilo para cada enlace del menú
+          css_comment_menu: Estilo para todo el bloque del menú
+          css_help_html: 'Puedes personalizar aún más este menú creando un %{link}; usa este código para referenciar sus diferentes elementos:'
+          css_help_link: estilo personalizado
+          delete_confirm: '¿Seguro que quieres eliminar este elemento?'
+          drag: Arrastra para reordenar
+          edit_item: Editar elemento
+          empty_item: Nuevo elemento vacío
+          name: Menú global Awesome
+          new_item: Añadir nuevo elemento
+          presets: Predefinidos
+          show_on_mobile: Mostrar en dispositivos móviles
+          sticky: Fijo (siempre visible al desplazarse)
+          table:
+            actions: Acciones
+            hidden: Oculto
+            name: Nombre
+          title: Saltar a ...
         map:
           collapse: Iniciar con el menú contraído
           map_center: Centro del mapa (Latitud, Longitud)
@@ -888,6 +962,32 @@ es:
           text_settings: Ajustes del texto
           title: Título
           truncate: Número máximo de caracteres para las descripciones emergentes
+        rich_text:
+          add_column: Añadir una nueva columna
+          background_image: Imagen de fondo
+          background_image_help: 'Imagen opcional que se muestra detrás del contenido de la columna. Ancho mínimo recomendado: 1920 px.'
+          background_image_placement: Posición de la imagen de fondo
+          background_image_placement_help: Cómo se muestra la imagen de fondo dentro de la columna. Solo se aplica si se ha subido una imagen de fondo.
+          background_image_placements:
+            contain_center: Ajustar (centrada)
+            cover_bottom: Cubrir (alineada abajo)
+            cover_center: Cubrir (centrada)
+            cover_top: Cubrir (alineada arriba)
+            repeat: Repetir (mosaico)
+          block_id: Identificador interno
+          block_id_help: Este valor se usará como ancla de sección en la URL. Debe ser único por página (p. ej. "nuestro-equipo").
+          block_id_placeholder: nombre de referencia interno (no se usa públicamente)
+          column_title: Columna
+          css_comment_this_column: Estilo para la columna %{number}
+          css_comment_title: Estilo para el título del bloque
+          css_help_html: 'Puedes personalizar aún más este bloque creando un %{link}; usa este código para referenciar sus diferentes elementos:'
+          css_help_link: estilo personalizado
+          name: Bloque de texto enriquecido Awesome
+          remove_column: Eliminar
+          restrict_links: Evitar que los enlaces del texto se muestren si la usuaria no ha iniciado sesión
+          restrict_videos: Evitar que los vídeos incrustados en el texto se muestren si la usuaria no ha iniciado sesión
+          sign_in_to_watch: Inicia sesión para ver este vídeo
+          title: Título del bloque
       credits: Decidim Awesome %{version} · Mantenida con ♥ por %{company}
       custom_fields:
         errors:
@@ -979,6 +1079,17 @@ es:
           view_proposal: Ver propuesta
   layouts:
     decidim:
+      data_consent:
+        details:
+          columns:
+            expiration: Caducidad
+          items:
+            _session_id:
+              expiration: sesión
+            decidim-consent:
+              expiration: 1 año
+            pwaInstallPromptSeen:
+              expiration: persistente
       decidim_awesome:
         admin:
           maintenance:
