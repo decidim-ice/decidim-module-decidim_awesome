@@ -58,6 +58,7 @@ de:
         total_cookies: Cookies gesamt
         visibility: Sichtbarkeit
       cookie_item:
+        expiration: Ablauf
         name: Cookie-Name
         service: Dienst
         type: Typ
@@ -83,7 +84,10 @@ de:
       models:
         cookie_item:
           attributes:
+            base:
+              category_not_found: Kategorie nicht gefunden
             name:
+              cannot_change_default_item_name: Der Name eines vordefinierten Eintrags kann nicht geändert werden
               invalid_format: Der Name darf nur Buchstaben, Zahlen, Bindestriche und Unterstriche enthalten (keine Leerzeichen)
   decidim:
     admin:
@@ -423,6 +427,7 @@ de:
             error: Es gab einen Fehler beim Aktualisieren der Einschränkung
             success: Einschränkung erfolgreich aktualisiert
         cookie_categories:
+          cookie_management_warning_html: Beachten Sie, dass Decidim Benutzende dazu zwingt, alle Cookies zu akzeptieren, um iFrames anzeigen zu können. Um die DSGVO einzuhalten, stellen Sie sicher, dass alle in iFrames verwendeten Cookies den entsprechenden Cookie-Kategorien zugeordnet sind.
           create:
             error: Fehler beim Erstellen der Cookie-Kategorie! %{error}
             success: Cookie-Kategorie erfolgreich erstellt
@@ -431,11 +436,14 @@ de:
             success: Cookie-Kategorie erfolgreich entfernt
           edit:
             cancel: Abbrechen
+            items: Kategorie-Einträge bearbeiten
             save: Speichern
             title: Cookie-Kategorie bearbeiten
           form:
+            slug_help: Eindeutige Kennung, die in Skripten verwendet wird, um auf diese Kategorie zu verweisen.
             visibility:
               hidden: Ausgeblendet
+              visible: Sichtbar
           index:
             cannot_remove_default: Standardkategorien können nicht entfernt werden
             confirm_reset: Soll diese Kategorie wirklich auf die Standardwerte zurückgesetzt werden? Alle vorgenommenen Anpassungen werden dabei entfernt.
@@ -672,7 +680,8 @@ de:
             title: Cookie-Eintrag bearbeiten
           form:
             description_item_help: Gibt den Zweck dieses Cookies und die gespeicherten Informationen an
-            service_item_help: Eine kurze Beschreibung, die angibt, wo dieser Cookie verwendet wird (z. B. "Diese Website", "YouTube-Einbettungen", "Jitsi-Meetings" usw.)
+            expiration_item_help: Gibt die Lebensdauer des Cookies an. Diese Angabe dient nur der Information und beeinflusst nicht die tatsächliche Ablaufzeit des Cookies.
+            service_item_help: Eine kurze Beschreibung, die angibt, wo dieser Dienst verwendet wird (z. B. "Diese Website", "YouTube-Einbettungen", "Jitsi-Meetings" usw.)
             title_item_help: Cookies können mit dem Browser-Inspektor (Speicher-Bereich) gefunden werden. Darf keine Leerzeichen enthalten.
           index:
             back_to_categories: Zurück zu den Kategorien
@@ -907,6 +916,8 @@ de:
           any_group: Beliebige Gruppe
           group_label: Gruppe
           max_results: Maximale Anzahl der anzuzeigenden Elemente
+          move_down: Nach unten verschieben
+          move_up: Nach oben verschieben
           name: Awesome Prozesse
           process_group: Auf Prozessgruppe beschränken
           process_status: Prozessstatus-Filter
@@ -916,7 +927,9 @@ de:
             past: Nur vergangene Prozesse
             upcoming: Nur zukünftige Prozesse
           process_type: Art der Prozesse
+          process_type_mixed_hint: Im gemischten Modus werden Prozesse und Gruppen bis zur maximalen Anzahl verschachtelt. Prozesse werden nach Gewicht sortiert (aufsteigend). Wenn ein Typ aufgebraucht ist, werden die verbleibenden Plätze mit dem anderen gefüllt.
           process_types:
+            all: Alle Prozesse und Gruppen gemischt
             groups: Nur Prozessgruppen
             processes: Nur Prozesse
           processes: Prozesse
@@ -1090,6 +1103,17 @@ de:
           view_proposal: Vorschlag ansehen
   layouts:
     decidim:
+      data_consent:
+        details:
+          columns:
+            expiration: Ablauf
+          items:
+            _session_id:
+              expiration: Sitzung
+            decidim-consent:
+              expiration: 1 Jahr
+            pwaInstallPromptSeen:
+              expiration: dauerhaft
       decidim_awesome:
         admin:
           maintenance:
