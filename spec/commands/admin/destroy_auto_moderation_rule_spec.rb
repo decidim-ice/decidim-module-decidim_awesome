@@ -34,7 +34,7 @@ module Decidim::DecidimAwesome
         let(:rule_id) { 0 }
 
         it "does not destroy any rule" do
-          expect { subject }.not_to(change { config.value.count })
+          expect { subject.call }.not_to(change { config.value.count })
         end
       end
     end

@@ -29,7 +29,7 @@ module Decidim
             end
 
             on(:invalid) do |message|
-              flash.now[:alert] = I18n.t("auto_moderation_rules.create.error", error: message, scope: "decidim.decidim_awesome.admin")
+              flash[:alert] = I18n.t("auto_moderation_rules.create.error", error: message, scope: "decidim.decidim_awesome.admin")
               render :new
             end
           end
@@ -49,8 +49,7 @@ module Decidim
             end
 
             on(:invalid) do |message|
-              flash.now[:alert] = I18n.t("auto_moderation_rules.update.error", error: message, scope: "decidim.decidim_awesome.admin")
-              flash.now[:alert] = message
+              flash[:alert] = I18n.t("auto_moderation_rules.update.error", error: message, scope: "decidim.decidim_awesome.admin")
               render :edit
             end
           end
@@ -65,7 +64,7 @@ module Decidim
             end
 
             on(:invalid) do |message|
-              flash.now[:alert] = I18n.t("auto_moderation_rules.destroy.error", error: message, scope: "decidim.decidim_awesome.admin")
+              flash[:alert] = I18n.t("auto_moderation_rules.destroy.error", error: message, scope: "decidim.decidim_awesome.admin")
               redirect_to auto_moderation_rules_path
             end
           end
@@ -85,18 +84,25 @@ module Decidim
           entry = find_entry
           raise ActiveRecord::RecordNotFound unless entry
 
+          rule_options = case entry["rule_type"]
+                          when Array
+                            entry["rule_options"].join(", ")
+                          else
+                            entry["rule_options"]
+                          end
+
           OpenStruct.new(
             description: entry["description"],
             rule_type: entry["rule_type"],
             enabled: entry["enabled"],
-            rule_options: entry["rule_options"].join(", "),
+            rule_options: rule_options,
             targets: entry["targets"] || {}
           )
         end
 
         def rule_type_options
           Decidim::DecidimAwesome.moderation_rules_registry.manifests.map do |rule|
-            name = I18n.t("decidim.decidim_awesome.admin.auto_moderation_rules.rule_types.#{rule.name}", default: rule.name.to_s.humanize)
+            name = I18n.t("decidim.decidim_awesome.admin.auto_moderation_rules.rule_type.#{rule.name}", default: rule.name.to_s.humanize)
             [name, rule.name]
           end
         end
