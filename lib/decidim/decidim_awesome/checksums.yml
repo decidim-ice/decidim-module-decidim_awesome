@@ -69,6 +69,7 @@ decidim-proposals:
     decidim-0.31.0: ffa0fa0d38a9c77d73d173727bc87cd2
   /app/forms/decidim/proposals/admin/proposal_form.rb:
     decidim-0.31.0: 34e42ec6c9911b60c28d2bb49f066a8c
+    decidim-0.31.3: c222792947e0bac2cd4869adb5ce13bb
   /app/helpers/decidim/proposals/application_helper.rb:
     decidim-0.31.0: 6210b3b088bec19e76fda73d42297ccc
   /app/controllers/decidim/proposals/proposal_votes_controller.rb:
