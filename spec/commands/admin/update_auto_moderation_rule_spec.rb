@@ -21,7 +21,7 @@ module Decidim::DecidimAwesome
           "counter" => 0
         }
       end
-      let(:config) { create(:awesome_config, organization:, var: :auto_moderation_rules, value: { rule_id => existing_rule }) }
+      let!(:config) { create(:awesome_config, organization:, var: :auto_moderation_rules, value: { rule_id => existing_rule }) }
       let(:rule_id) { "rule_1" }
       let(:attributes) do
         {
@@ -52,8 +52,7 @@ module Decidim::DecidimAwesome
           expect(rule).not_to be_nil
           expect(rule["description"]).to eq(attributes[:description])
           expect(rule["rule_type"]).to eq(attributes[:rule_type])
-          expect(rule["rule_options"]).to eq(attributes[:rule_options])
-          # expect(rule["targets"]).to eq(attributes[:targets])
+          expect(rule["rule_options"]).to eq(attributes[:rule_options].split(", "))
           expect(rule["enabled"]).to eq(attributes[:enabled])
           expect(rule["counter"]).to eq(attributes[:counter])
         end
@@ -74,7 +73,6 @@ module Decidim::DecidimAwesome
           expect(rule["description"]).to eq(existing_rule["description"])
           expect(rule["rule_type"]).to eq(existing_rule["rule_type"])
           expect(rule["rule_options"]).to eq(existing_rule["rule_options"])
-          # expect(rule["targets"]).to eq(existing_rule["targets"])
           expect(rule["enabled"]).to eq(existing_rule["enabled"])
           expect(rule["counter"]).to eq(existing_rule["counter"])
         end

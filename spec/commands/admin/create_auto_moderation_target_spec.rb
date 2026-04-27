@@ -8,7 +8,7 @@ module Decidim::DecidimAwesome
       subject { described_class.new(form, rule_id, organization) }
 
       let(:organization) { create(:organization) }
-      let(:config) { create(:awesome_config, organization:, var: :auto_moderation_rules, value: { rule_id => rule }) }
+      let!(:config) { create(:awesome_config, organization:, var: :auto_moderation_rules, value: { rule_id => rule }) }
       let(:rule) do
         {
           "description" => {

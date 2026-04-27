@@ -18,7 +18,7 @@ module Decidim::DecidimAwesome
       end
       let(:object_type) { "comment" }
       let(:action_type) { "moderate_and_hide" }
-      let(:action_options) { {} }
+      let(:action_options) { "" }
       let(:hits) { 3 }
 
       context "when everything is OK" do

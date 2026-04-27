@@ -16,7 +16,6 @@ module Decidim::DecidimAwesome
           },
           rule_type: "word_filter",
           rule_options: "badword1, badword2",
-          # targets: ["proposals"],
           enabled: true,
           counter: 0
         }
@@ -36,8 +35,7 @@ module Decidim::DecidimAwesome
           expect(rule).not_to be_nil
           expect(rule["description"]).to eq(attributes[:description])
           expect(rule["rule_type"]).to eq(attributes[:rule_type])
-          expect(rule["rule_options"]).to eq(attributes[:rule_options])
-          # expect(rule["targets"]).to eq(attributes[:targets])
+          expect(rule["rule_options"]).to eq(attributes[:rule_options].split(", "))
           expect(rule["enabled"]).to eq(attributes[:enabled])
           expect(rule["counter"]).to eq(attributes[:counter])
         end

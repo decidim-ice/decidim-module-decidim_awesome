@@ -13,7 +13,6 @@ module Decidim::DecidimAwesome
           description:,
           rule_type:,
           rule_options:,
-          # targets: ["proposals"],
           enabled:,
           counter:
         }
@@ -37,9 +36,9 @@ module Decidim::DecidimAwesome
             "description" => description,
             "rule_type" => rule_type,
             "rule_options" => rule_options,
-            # "targets" => ["proposals"],
             "enabled" => enabled,
-            "counter" => counter
+            "counter" => counter,
+            "targets" => {}
           )
         end
       end
