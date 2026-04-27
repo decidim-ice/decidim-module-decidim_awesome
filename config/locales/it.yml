@@ -437,6 +437,7 @@ it:
           proposals: Proposals hacks
           styles: Custom styles
           surveys: Surveys & forms
+          verifications: Verifiche
         menu_hacks:
           create:
             error: Errore nella creazione della voce di menu! %{error}
@@ -461,6 +462,8 @@ it:
           index:
             confirm_destroy: Sei sicuro di voler rimuovere questa personalizzazione?
             edit: Modifica
+            home_content_block_menu:
+              title: Blocco menu globale nella home
             menu:
               title: Menù principale
             new: Nuova elemento
