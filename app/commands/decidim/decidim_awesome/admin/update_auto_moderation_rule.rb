@@ -24,10 +24,8 @@ module Decidim
           return broadcast(:invalid) if form.invalid?
 
           config = create_hash_config!
-          if config.value[@rule_id].nil?
-            raise ActiveRecord::RecordNotFound
-          end
-          
+          raise ActiveRecord::RecordNotFound if config.value[@rule_id].nil?
+
           old_entry = config.value[@rule_id]
           target = old_entry["targets"] || {}
 

@@ -84,12 +84,13 @@ module Decidim
           entry = find_entry
           raise ActiveRecord::RecordNotFound unless entry
 
-          rule_options = case entry["rule_type"]
-                          when Array
-                            entry["rule_options"].join(", ")
-                          else
-                            entry["rule_options"]
-                          end
+          rule_options =
+            case entry["rule_type"]
+            when Array
+              entry["rule_options"].join(", ")
+            else
+              entry["rule_options"]
+            end
 
           OpenStruct.new(
             description: entry["description"],
