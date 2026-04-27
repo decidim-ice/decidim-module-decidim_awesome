@@ -52,6 +52,7 @@ pt:
         destination: Destino
         origin: Origem
         pass_query: Passar a string de consulta ao destino
+        status: Estado
       menu:
         position: Posicao
         raw_label: Rotulo
@@ -157,6 +158,7 @@ pt:
         actions: Acoes
         admin_accountability:
           admin_roles:
+            admin: Super administrador
             user_manager: Gestor de utilizadores
           created_at: Funcao criada em
           currently_active: Atualmente ativo
