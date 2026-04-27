@@ -42,7 +42,7 @@ module Decidim::DecidimAwesome
 
       context "when object_type is invalid" do
         let(:object_type) { "invalid_object" }
-        
+
         it { is_expected.not_to be_valid }
       end
 
