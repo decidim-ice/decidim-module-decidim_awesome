@@ -11,7 +11,6 @@ en:
         constraints: Constraints
         counter: Counter
         description: Description
-        id: Id
         objects: Objects
         rule: Rule
       auto_moderation_target:

@@ -46,8 +46,7 @@ module Decidim
             end
 
             on(:invalid) do |message|
-              flash.now[:alert] = I18n.t("auto_moderation_targets.update.error
-                                ", error: message, scope: "decidim.decidim_awesome.admin")
+              flash.now[:alert] = I18n.t("auto_moderation_targets.update.error", error: message, scope: "decidim.decidim_awesome.admin")
               render :edit
             end
           end
