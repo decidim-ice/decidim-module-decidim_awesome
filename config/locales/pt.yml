@@ -46,22 +46,32 @@ pt:
         component_manifest: Apenas em componentes do tipo
         participatory_space_manifest: Aplicar a espacos participativos do tipo
         participatory_space_slug: Somente em
+      content_block_attachment:
+        background_image_0: Imagem de fundo
+        background_image_1: Imagem de fundo
+        background_image_2: Imagem de fundo
+        background_image_3: Imagem de fundo
+        background_image_4: Imagem de fundo
       cookie_category:
         mandatory: Obrigatória
+        slug: ID
         title: Categoria
         total_cookies: Total de cookies
         visibility: Visibilidade
       cookie_item:
+        expiration: Expiracao
         name: Nome do cookie
         service: Serviço
         type: Tipo
         types:
+          cookie: Cookie
           local_storage: Armazenamento local
       custom_redirect:
         active: Ativo
         destination: Destino
         origin: Origem
         pass_query: Passar a string de consulta ao destino
+        status: Estado
       menu:
         position: Posicao
         raw_label: Rotulo
@@ -76,7 +86,10 @@ pt:
       models:
         cookie_item:
           attributes:
+            base:
+              category_not_found: Categoria nao encontrada
             name:
+              cannot_change_default_item_name: O nome de um item predefinido nao pode ser alterado
               invalid_format: O nome só pode conter letras, números, hífens e underscores (sem espaços)
   decidim:
     admin:
@@ -173,13 +186,19 @@ pt:
         actions: Acoes
         admin_accountability:
           admin_roles:
+            admin: Super administrador
             user_manager: Gestor de utilizadores
           created_at: Funcao criada em
           currently_active: Atualmente ativo
           deleted_user: Utilizador eliminado
+          email: Email
           exports:
             button: Exportar esta busca
             export_as: Exportar como %{export_format}
+            export_format:
+              csv: CSV
+              json: JSON
+              xlsx: XLSX
             notice: O trabalho de exportacao foi colocado na fila. Voce recebera um email quando estiver pronto.
           index:
             description: Aqui voce encontrara todos os utilizadores que tiveram alguma funcao na administracao de um espaco participativo. Administradores normais nao sao listados.
@@ -411,6 +430,7 @@ pt:
             error: Erro ao atualizar caso de condicao
             success: Caso de condicao atualizado com sucesso
         cookie_categories:
+          cookie_management_warning_html: Note que o Decidim obrigara o utilizador a aceitar TODOS os cookies para mostrar iframes. Para cumprir o RGPD, certifique-se de que todos os cookies usados em iframes sao adicionados as respetivas categorias de cookies.
           create:
             error: Erro ao criar a categoria de cookies! %{error}
             success: Categoria de cookies criada com sucesso
@@ -419,11 +439,14 @@ pt:
             success: Categoria de cookies removida com sucesso
           edit:
             cancel: Cancelar
+            items: Editar itens da categoria
             save: Guardar
             title: Editar categoria de cookies
           form:
+            slug_help: Identificador unico utilizado nos scripts para referenciar esta categoria.
             visibility:
               hidden: Oculta
+              visible: Visivel
           index:
             cannot_remove_default: As categorias predefinidas não podem ser removidas
             confirm_reset: Tem a certeza de que pretende repor os valores predefinidos desta categoria? Todas as personalizações realizadas serão removidas.
@@ -588,15 +611,48 @@ pt:
 
                 Categoria recomendada: Preferências
             labels:
+              cloudflare_turnstile:
+                one: Cloudflare Turnstile (%{count} cookie)
+                other: Cloudflare Turnstile (%{count} cookies)
               decidim_essential:
                 one: Decidim Essencial (%{count} cookie)
                 other: Decidim Essencial (%{count} cookies)
               emoji_picker:
                 one: Seletor de emojis (%{count} cookie)
                 other: Seletor de emojis (%{count} cookies)
+              facebook_pixel:
+                one: Facebook Pixel (%{count} cookie)
+                other: Facebook Pixel (%{count} cookies)
+              google_analytics:
+                one: Google Analytics (%{count} cookie)
+                other: Google Analytics (%{count} cookies)
               google_maps_embeds:
                 one: Google Maps incorporado (%{count} cookie)
                 other: Google Maps incorporado (%{count} cookies)
+              google_tag_manager:
+                one: Google Tag Manager (%{count} cookie)
+                other: Google Tag Manager (%{count} cookies)
+              graphiql:
+                one: Explorador de API GraphiQL (%{count} cookie)
+                other: Explorador de API GraphiQL (%{count} cookies)
+              hcaptcha:
+                one: hCaptcha (%{count} cookie)
+                other: hCaptcha (%{count} cookies)
+              jitsi_meet:
+                one: Jitsi Meet (%{count} cookie)
+                other: Jitsi Meet (%{count} cookies)
+              linkedin_insight:
+                one: LinkedIn Insight (%{count} cookie)
+                other: LinkedIn Insight (%{count} cookies)
+              matomo:
+                one: Matomo (%{count} cookie)
+                other: Matomo (%{count} cookies)
+              openstreetmap_tiles:
+                one: OpenStreetMap (%{count} cookie)
+                other: OpenStreetMap (%{count} cookies)
+              recaptcha:
+                one: reCAPTCHA (%{count} cookie)
+                other: reCAPTCHA (%{count} cookies)
               vimeo_embeds:
                 one: Vimeo incorporado (%{count} cookie)
                 other: Vimeo incorporado (%{count} cookies)
@@ -607,9 +663,22 @@ pt:
                 one: YouTube (privacidade melhorada) (%{count} cookie)
                 other: YouTube (privacidade melhorada) (%{count} cookies)
             services:
+              cloudflare_turnstile: Cloudflare Turnstile
               decidim_essential: Este site
               emoji_picker: Este site
+              facebook_pixel: Meta (Facebook)
+              google_analytics: Google Analytics
+              google_maps_embeds: Google Maps
+              google_tag_manager: Google Tag Manager
               graphiql: Este site
+              hcaptcha: hCaptcha
+              jitsi_meet: Jitsi Meet
+              linkedin_insight: LinkedIn
+              matomo: Matomo
+              openstreetmap_tiles: OpenStreetMap
+              recaptcha: Google reCAPTCHA
+              vimeo_embeds: Vimeo
+              youtube_embeds: YouTube
               youtube_nocookie: YouTube (modo de privacidade melhorada)
           create:
             error: Erro ao criar o item de cookie! %{error}
@@ -627,6 +696,7 @@ pt:
             title: Editar item de cookie
           form:
             description_item_help: Indica a finalidade deste cookie e a informação que armazena
+            expiration_item_help: Indica a duracao do cookie. Esta informacao serve apenas como referencia e nao altera a duracao real do cookie.
             service_item_help: Uma breve descrição que indica onde é utilizado (por exemplo, "Este site", "Vídeos do YouTube", "Reuniões Jitsi", etc.)
             title_item_help: Pode encontrar os cookies utilizando o inspetor do navegador (secção de armazenamento). Não deve conter espaços.
           index:
@@ -685,6 +755,7 @@ pt:
             ip_addresses: Ver enderecos IP
             stamps: Ver selos Hashcash
           index:
+            bits: Bits
             created_at: Criado em
             help_html: |
               Esta pagina mostra os selos Hashcash detectados no sistema. Hashcash e um sistema de prova de trabalho que exige que os utilizadores resolvam um quebra-cabeca computacional (realizado automaticamente pelo navegador) antes de poderem se registar.
@@ -698,6 +769,19 @@ pt:
             ip_address: Endereco IP
             no_data: Nenhum endereco IP encontrado
             stamps: Selos Hashcash
+        landing_menu_items:
+          form:
+            preset: Predefinicoes para preenchimento automatico
+            preset_content_blocks: Blocos de conteudo existentes
+            preset_global_menu: Itens comuns do Decidim
+            select_a_preset: "— Selecionar item de menu comum —"
+            url_help_html: "<b>#section-id</b> — desloca para uma secao desta pagina<br><b>/caminho</b> — pagina interna (ex. /processes)<br><b>https://example.com</b> — ligacao externa (abre automaticamente num novo separador)"
+          new:
+            save: Guardar
+            title: Novo item de menu
+          show:
+            save: Guardar
+            title: Editar item de menu
         menu:
           admins: Administradores com escopo
           cookie_management: Gestão de cookies
@@ -845,6 +929,7 @@ pt:
           results_count:
             one: "%{count} processo encontrado"
             other: "%{count} processos encontrados"
+          status_label: 'Estado:'
           title: Titulo do bloco
           upcoming: Proximos
         awesome_processes:
@@ -852,6 +937,8 @@ pt:
           any_group: Qualquer grupo
           group_label: Grupo
           max_results: Quantidade maxima de elementos para mostrar
+          move_down: Mover para baixo
+          move_up: Mover para cima
           name: Processos Awesome
           process_group: Restringir ao grupo de processos
           process_status: Filtro de status do processo
@@ -871,7 +958,35 @@ pt:
           selection_criteria: Criterios de selecao
           selection_criteria_options:
             automatic: Automatico
+            manual: Manual
           title: Titulo do bloco
+        landing_menu:
+          alignment: Posicao do menu
+          alignment_center: Centro
+          alignment_help: Alinhar os itens do menu a esquerda, ao centro ou a direita da pagina
+          alignment_left: Esquerda
+          alignment_right: Direita
+          css_comment_hover: Estilo para a ligacao do menu ao passar o rato
+          css_comment_link: Estilo para cada ligacao do menu
+          css_comment_menu: Estilo para todo o bloco do menu
+          css_help_html: 'Pode personalizar ainda mais este menu criando um %{link} para ele; use este codigo para referenciar os diferentes elementos:'
+          css_help_link: estilo personalizado
+          delete_confirm: Tem a certeza de que pretende eliminar este item?
+          drag: Arraste para reordenar
+          edit_item: Editar item
+          empty_item: Novo item vazio
+          name: Menu global do Awesome
+          new_item: Adicionar novo item
+          presets: Predefinicoes
+          show_on_mobile: Mostrar em ecras moveis
+          sticky: Fixo (sempre visivel ao deslocar)
+          table:
+            actions: Acoes
+            hidden: Oculto
+            name: Nome
+            url: URL
+            visible: Visivel
+          title: Ir para ...
         map:
           collapse: Iniciar com o menu recolhido
           map_center: Centro do Mapa (Latitude, Longitude)
@@ -893,6 +1008,32 @@ pt:
           text_settings: Configuracoes de texto
           title: Titulo
           truncate: Maximo de caracteres para descricoes em popup
+        rich_text:
+          add_column: Adicionar nova coluna
+          background_image: Imagem de fundo
+          background_image_help: 'Imagem opcional apresentada atras do conteudo da coluna. Largura minima recomendada: 1920px.'
+          background_image_placement: Posicionamento da imagem
+          background_image_placement_help: Como a imagem de fundo e mostrada dentro da coluna. Aplica-se apenas quando uma imagem de fundo e carregada.
+          background_image_placements:
+            contain_center: Conter (centrada)
+            cover_bottom: Cobrir (alinhada em baixo)
+            cover_center: Cobrir (centrada)
+            cover_top: Cobrir (alinhada em cima)
+            repeat: Repetir (mosaico)
+          block_id: Rotulo interno
+          block_id_help: Este valor sera usado como ancora da secao no URL. Tem de ser unico por pagina (por exemplo, "a-nossa-equipa").
+          block_id_placeholder: nome interno de referencia (nao usado publicamente)
+          column_title: Coluna
+          css_comment_this_column: Estilo para a coluna %{number}
+          css_comment_title: Estilo para o titulo do bloco
+          css_help_html: 'Pode personalizar ainda mais este bloco criando um %{link} para ele; use este codigo para referenciar os diferentes elementos:'
+          css_help_link: estilo personalizado
+          name: Bloco Awesome de texto rico
+          remove_column: Remover
+          restrict_links: Impedir que as ligacoes no texto sejam mostradas a utilizadores sem sessao iniciada
+          restrict_videos: Impedir que videos incorporados no texto sejam mostrados a utilizadores sem sessao iniciada
+          sign_in_to_watch: Inicie sessao para ver este video
+          title: Titulo do bloco
       credits: Decidim Awesome %{version} · Mantido com ♥ por %{company}
       custom_fields:
         errors:
@@ -956,6 +1097,7 @@ pt:
           voting_for: Meu voto em "%{proposal}" e "%{type}"
           weights:
             weight_0: Abstencao
+            weight_0_short: 'A:'
             weight_1: Vermelho
             weight_1_short: 'V:'
             weight_2: Amarelo
@@ -983,6 +1125,17 @@ pt:
           view_proposal: Ver proposta
   layouts:
     decidim:
+      data_consent:
+        details:
+          columns:
+            expiration: Expiracao
+          items:
+            _session_id:
+              expiration: sessao
+            decidim-consent:
+              expiration: 1 ano
+            pwaInstallPromptSeen:
+              expiration: persistente
       decidim_awesome:
         admin:
           maintenance:
@@ -997,6 +1150,7 @@ pt:
           autosaved_retrieved: Os dados deste formulario foram recuperados de uma sessao anterior
           autosaved_success: Dados salvos no armazenamento local
           drag_and_drop_image: Adicione imagens arrastando e soltando ou colando.
+          hashtags: Hashtags
           items: itens
           meetings: Reunioes
           proposals: Propostas

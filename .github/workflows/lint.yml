@@ -7,7 +7,7 @@ on:
   pull_request:
 
 env:
-  RUBY_VERSION: 3.3.4
+  RUBY_VERSION: 3.3.11
   NODE_VERSION: 22.14.0
   SHAKAPACKER_RUNTIME_COMPILE: "false"
 
@@ -24,7 +24,7 @@ jobs:
           - bundle exec rubocop -P
           - npm run lint
           - npm run stylelint
-          - bundle exec erblint app/**/*.erb
+          - bundle exec erb_lint app/**/*.erb
     name: Lint code
     runs-on: ubuntu-latest
     steps:
@@ -50,5 +50,13 @@ jobs:
             npm-
       - name: Install JS dependencies
         run: npm ci
+      - name: Prepare RuboCop config
+        run: |
+          # RuboCop resolves remote `inherit_from` via Ruby HTTP/OpenSSL. In GH Actions this
+          # can fail intermittently (`OpenSSL::Buffering::Buffer` errors), so we prefetch the
+          # upstream Decidim config files and point `.rubocop.yml` to a local copy.
+          curl -fsSL https://raw.githubusercontent.com/decidim/decidim/release/0.31-stable/.rubocop.yml -o .rubocop.decidim-ci.yml
+          curl -fsSL https://raw.githubusercontent.com/decidim/decidim/release/0.31-stable/.rubocop_todo.yml -o .rubocop_todo.yml
+          sed -i 's#https://raw.githubusercontent.com/decidim/decidim/release/0.31-stable/.rubocop.yml#.rubocop.decidim-ci.yml#' .rubocop.yml
       - run: ${{ matrix.command }}
         name: ${{ matrix.command }}
