@@ -173,6 +173,9 @@ fr:
             voting_cards_show_abstain: Ajouter l'option de s'abstenir
             voting_cards_show_modal_help: Afficher une fenêtre modale d'instructions/d'aide lorsque l'on clique sur le support
           step:
+            awesome_votes_enabled_by_status: Restreindre le vote selon le statut de la proposition
+            awesome_votes_enabled_by_status_help: Lorsqu'elle est activée, la possibilité de voter n'est accordée qu'aux propositions ayant les statuts sélectionnés. Les propositions avec d'autres statuts n'accepteront pas de votes. Laissez vide pour autoriser le vote sur toutes les propositions, quel que soit leur statut.
+            awesome_votes_enabled_states: Statuts autorisés pour voter
             default_sort_order_options:
               az: A-Z (alphabétique)
               supported_first: Déjà supporté en priorité
@@ -1054,6 +1057,9 @@ fr:
             view_meeting: Voir la rencontre
             view_proposal: Voir la proposition
       proposal_private_custom_fields_disclosure: Cette information ne sera pas publiée
+      proposals:
+        votes:
+          blocked_by_status: Vote indisponible
       required_authorizations:
         index:
           authorization_options_invalid: Malheureusement, bien que vous ayez cette autorisation, les données utilisées pour vérifier votre identité ne sont pas valides dans ce contexte.
@@ -1113,6 +1119,8 @@ fr:
         exports:
           awesome_private_proposals: Les propositions avec des données privées
       proposals:
+        vote_button:
+          votes_blocked: Vote indisponible
         orders:
           az: A-Z (alphabétique)
           supported_first: Déjà supporté en priorité
