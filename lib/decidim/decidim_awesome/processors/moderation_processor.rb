@@ -21,23 +21,31 @@ module Decidim
 
           return unless config.constrained_in_context?(:auto_moderation_rules)
 
-          rules = config.setting_for(:auto_moderation_rules).value.select { |_id, rule| rule["enabled"] }
+          config_moderation = config.setting_for(:auto_moderation_rules)
+          rules = config_moderation.value.select { |_id, rule| rule["enabled"] }
           return if rules.empty?
 
-          # validate agains constraints
-          rules.each do |_rule_id, rule|
+          rules.each do |rule_id, rule|
             rule_manifest = processor.get_rule_manifest(rule["rule_type"])
             checker_class = rule_manifest.checker_class.constantize
             checker = checker_class.new(rule["rule_options"])
             next unless checker.check(object)
+
+            rule["counter"] += 1
 
             targets = rule["targets"]
             targets.each do |_id, target|
               action_manifest = processor.get_action_manifest(target["action_type"])
               handler_class = action_manifest.handler_class.constantize
               handler = handler_class.new(object, target["action_options"])
+              byebug
               handler.execute
+
+              target["hits"] += 1
             end
+
+            config_moderation.value[rule_id] = rule
+            config_moderation.save
           end
         end
 
