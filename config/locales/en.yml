@@ -17,6 +17,7 @@ en:
         action_type: Action
         action_type_options:
           moderate_and_hide: Moderate and Hide
+        hits: Hits
         object_type: Object
         object_type_options:
           comment: Comment
