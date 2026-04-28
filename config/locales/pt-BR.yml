@@ -156,6 +156,7 @@ pt-BR:
         actions: Acoes
         admin_accountability:
           admin_roles:
+            admin: Super administrador
             user_manager: Gerente de usuarios
           created_at: Funcao criada em
           currently_active: Atualmente ativo
