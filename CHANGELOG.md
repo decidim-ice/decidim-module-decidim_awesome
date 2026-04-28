@@ -1,6 +1,15 @@
 CHANGELOG
 =========
 
+unreleased
+-------
+Compatibility:
+  - Decidim 0.31.x
+
+Features:
+  - Fix awesome map css styles
+  - Allow to restrict votes on proposal per status ([#580](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/580))
+
 v0.14.2
 -------
 
