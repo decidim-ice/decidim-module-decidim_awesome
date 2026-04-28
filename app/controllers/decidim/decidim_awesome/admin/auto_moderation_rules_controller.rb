@@ -85,7 +85,7 @@ module Decidim
           raise ActiveRecord::RecordNotFound unless entry
 
           rule_options =
-            case entry["rule_type"]
+            case entry["rule_options"]
             when Array
               entry["rule_options"].join(", ")
             else
