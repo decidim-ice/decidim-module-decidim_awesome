@@ -9,9 +9,15 @@
       </div>
       <div class="row column">
         <%= form.select :rule_type, rule_type_options %>
+        <span class="help-text mb-4">
+          <%= t(".rule_type.help_text") %>
+        </span>
       </div>
       <div class="row column">
-        <%= form.text_field :rule_options, label: t(".rule_options") %>
+        <%= form.text_field :rule_options, label: t(".rule_options.label") %>
+        <span class="help-text mb-4">
+          <%= t(".rule_options.help_text") %>
+        </span>
       </div>
     </div>
   </div>
