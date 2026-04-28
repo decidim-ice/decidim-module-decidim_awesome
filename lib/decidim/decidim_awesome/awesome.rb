@@ -12,6 +12,8 @@ module Decidim
     autoload :MenuHacker, "decidim/decidim_awesome/menu_hacker"
     autoload :CustomFields, "decidim/decidim_awesome/custom_fields"
     autoload :VotingManifest, "decidim/decidim_awesome/voting_manifest"
+    autoload :ModerationRules, "decidim/decidim_awesome/moderation_rules"
+    autoload :ModerationActions, "decidim/decidim_awesome/moderation_actions"
     autoload :ModerationRuleManifest, "decidim/decidim_awesome/moderation_rule_manifest"
     autoload :ModerationActionManifest, "decidim/decidim_awesome/moderation_action_manifest"
     autoload :ModerationProcessor, "decidim/decidim_awesome/processors/moderation_processor"
