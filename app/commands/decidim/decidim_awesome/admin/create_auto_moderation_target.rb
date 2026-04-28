@@ -28,8 +28,9 @@ module Decidim
 
           rule_config = config.value[rule_id] || {}
           targets = rule_config["targets"] || {}
+          target_entry = form.to_params
 
-          targets[ident] = form.to_params
+          targets[ident] = target_entry
           rule_config["targets"] = targets
           config.value[rule_id] = rule_config
           config.save!
