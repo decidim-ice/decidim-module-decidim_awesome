@@ -596,9 +596,7 @@ eu:
             past: Iraganeko prozesuak soilik
             upcoming: Etorkizuneko prozesuak soikik
           process_type: Prozesu-motak
-          process_type_mixed_hint: Modu mistoan, prozesuak eta taldeak tartekatzen dira, gehienezko kopururaino. Prozesuak pisuaren arabera ordenatzen dira (goranzkoa). Mota bat agortzen bada, gainerako tarteak bestearekin betetzen dira.
           process_types:
-            all: Prozesu eta talde guztiak nahastuta
             groups: Prozesu-taldeak bakarrik
             processes: Prozesuak soilik
           processes: Prozesuak

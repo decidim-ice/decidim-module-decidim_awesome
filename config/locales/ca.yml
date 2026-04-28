@@ -1008,7 +1008,7 @@ ca:
         rich_text:
           add_column: Afegeix una columna nova
           background_image: Imatge de fons
-          background_image_help: "Imatge opcional que es mostra darrere del contingut de la columna. Amplada mínima recomanada: 1920 px."
+          background_image_help: 'Imatge opcional que es mostra darrere del contingut de la columna. Amplada mínima recomanada: 1920 px.'
           background_image_placement: Col·locació de la imatge de fons
           background_image_placement_help: Com es mostra la imatge de fons dins de la columna. Només s'aplica si s'ha carregat una imatge de fons.
           background_image_placements:
