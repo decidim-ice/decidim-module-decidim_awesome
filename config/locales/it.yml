@@ -249,6 +249,9 @@ it:
           create_scoped_style:
             error: Errore nella creazione di un nuovo box CSS! %{error}
             success: Box CSS %{key} creato correttamente
+          destroy_force_authorization:
+            error: Errore nella rimozione del gruppo di autorizzazioni! %{error}
+            success: Gruppo autorizzazioni %{key} rimosso con successo
           destroy_proposal_custom_field:
             error: Errore nel rimuovere la casella "campo personalizzato"! %{error}
             success: 'casella "campo personalizzato" %{key} rimossa con successo'
@@ -463,6 +466,7 @@ it:
           proposals: Proposals hacks
           styles: Custom styles
           surveys: Surveys & forms
+          verifications: Verifiche
         menu_hacks:
           create:
             error: Errore nella creazione della voce di menu! %{error}
@@ -487,8 +491,12 @@ it:
           index:
             confirm_destroy: Sei sicuro di voler rimuovere questa personalizzazione?
             edit: Modifica
+            home_content_block_menu:
+              title: Blocco menu globale nella home
             menu:
               title: Menù principale
+            mobile_menu:
+              title: Menu mobile
             new: Nuova elemento
             remove: Rimuovi aggiunta
             remove_hack: Rimuovi personalizzazione
@@ -710,3 +718,4 @@ it:
           meetings: Meetings
           proposals: Proposte
           select_deselect_all: Seleziona/deseleziona tutto
+          taxonomies: Tassonomie
