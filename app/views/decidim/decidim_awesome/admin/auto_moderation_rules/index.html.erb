@@ -21,7 +21,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @rules.each do |id, rule| %>
+          <% @rules&.each do |id, rule| %>
             <%
               constraints = constraints_for("auto_moderation_rules_#{id}")
               rule_targets = rule["targets"] || []
