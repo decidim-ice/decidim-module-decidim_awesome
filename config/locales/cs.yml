@@ -518,6 +518,11 @@ cs:
               maps_1p_jar: Ukládá použití/nastavení Google Mapy a signály přizpůsobení reklam.
               maps_consent: Ukládá souhlas uživatele se službami Google, když používáte vložené mapy.
               maps_nid: Ukládá nastavení Google Maps a informace o prohlížeči související s bezpečností.
+              matomo_mtm_consent: Uloží stav souhlasu uživatele pro sledování Matomo.
+              matomo_pk_id: Používá se k ukládání jedinečného ID návštěvníka a identifikaci vracejících se návštěvníků.
+              matomo_pk_ses: Používá se k ukládání dočasných dat relace pro aktuální návštěvu.
+              osm_location: Uloží výchozí polohu/přiblížení mapy pro interakce OpenStreetMap.
+              osm_session: Uloží dočasná data relace pro uživatelskou interakci OpenStreetMap.
               pref: Používá se pro funkčnost. YouTube používá tuto cookie k ukládání informací, jako je vaše preferovaná konfigurace stránek a nastavení přehrávání, jako jsou explicitní možnosti automatického přehrávání, náhodný obsah a velikost přehrávače. Přečtěte si více o tom, jak Google používá cookies
               recaptcha_grecaptcha: Používá se pro reCAPTCHA k zajištění ochrany proti spamu a analýzy rizik.
             services:
