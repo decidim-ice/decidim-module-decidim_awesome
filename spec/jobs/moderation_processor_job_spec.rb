@@ -21,7 +21,8 @@ module Decidim::DecidimAwesome
           "target_1" => {
             "object_type" => "comment",
             "action_type" => "moderate_and_hide",
-            "action_options" => ""
+            "action_options" => "",
+            "hits" => 0
           }
         },
         "enabled" => true,
@@ -33,6 +34,10 @@ module Decidim::DecidimAwesome
       expect do
         subject.perform_now(comment)
       end.to change { comment.reports.count }.from(0).to(1)
+
+      config.reload
+      expect(config.value["rule_1"]["counter"]).to eq(1)
+      expect(config.value["rule_1"]["targets"]["target_1"]["hits"]).to eq(1)
     end
   end
 end
