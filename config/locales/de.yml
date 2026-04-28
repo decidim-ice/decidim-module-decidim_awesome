@@ -54,6 +54,7 @@ de:
         background_image_4: Hintergrundbild
       cookie_category:
         mandatory: Pflicht
+        slug: ID
         title: Kategorie
         total_cookies: Cookies gesamt
         visibility: Sichtbarkeit
@@ -63,6 +64,7 @@ de:
         service: Dienst
         type: Typ
         types:
+          cookie: Cookie
           local_storage: Lokaler Speicher
       custom_redirect:
         active: Aktiv
@@ -660,9 +662,22 @@ de:
                 one: YouTube (datenschutzoptimiert) (%{count} Cookie)
                 other: YouTube (datenschutzoptimiert) (%{count} Cookies)
             services:
+              cloudflare_turnstile: Cloudflare Turnstile
               decidim_essential: Diese Website
               emoji_picker: Diese Website
+              facebook_pixel: Meta (Facebook)
+              google_analytics: Google Analytics
+              google_maps_embeds: Google Maps
+              google_tag_manager: Google Tag Manager
               graphiql: Diese Website
+              hcaptcha: hCaptcha
+              jitsi_meet: Jitsi Meet
+              linkedin_insight: LinkedIn
+              matomo: Matomo
+              openstreetmap_tiles: OpenStreetMap
+              recaptcha: Google reCAPTCHA
+              vimeo_embeds: Vimeo
+              youtube_embeds: YouTube
               youtube_nocookie: YouTube (datenschutzoptimierter Modus)
           create:
             error: Fehler beim Erstellen des Cookie-Eintrags! %{error}

@@ -54,6 +54,7 @@ it:
         background_image_4: Immagine di sfondo
       cookie_category:
         mandatory: Obbligatoria
+        slug: ID
         title: Titolo categoria
         total_cookies: Cookie totali
         visibility: Visibilità
@@ -63,6 +64,7 @@ it:
         service: Servizio
         type: Tipo
         types:
+          cookie: Cookie
           local_storage: Archiviazione locale
       custom_redirect:
         active: Attivo
@@ -609,21 +611,48 @@ it:
 
                 Categoria consigliata: Preferenze
             labels:
+              cloudflare_turnstile:
+                one: Cloudflare Turnstile (%{count} cookie)
+                other: Cloudflare Turnstile (%{count} cookie)
               decidim_essential:
                 one: Essenziali Decidim (%{count} cookie)
                 other: Essenziali Decidim (%{count} cookie)
               emoji_picker:
                 one: Selettore emoji (%{count} cookie)
                 other: Selettore emoji (%{count} cookie)
+              facebook_pixel:
+                one: Facebook Pixel (%{count} cookie)
+                other: Facebook Pixel (%{count} cookie)
+              google_analytics:
+                one: Google Analytics (%{count} cookie)
+                other: Google Analytics (%{count} cookie)
               google_maps_embeds:
                 one: Integrazioni Google Maps (%{count} cookie)
                 other: Integrazioni Google Maps (%{count} cookie)
+              google_tag_manager:
+                one: Google Tag Manager (%{count} cookie)
+                other: Google Tag Manager (%{count} cookie)
               graphiql:
                 one: Esploratore API GraphiQL (%{count} cookie)
                 other: Esploratore API GraphiQL (%{count} cookie)
+              hcaptcha:
+                one: hCaptcha (%{count} cookie)
+                other: hCaptcha (%{count} cookie)
+              jitsi_meet:
+                one: Jitsi Meet (%{count} cookie)
+                other: Jitsi Meet (%{count} cookie)
+              linkedin_insight:
+                one: LinkedIn Insight (%{count} cookie)
+                other: LinkedIn Insight (%{count} cookie)
+              matomo:
+                one: Matomo (%{count} cookie)
+                other: Matomo (%{count} cookie)
               openstreetmap_tiles:
                 one: Tile OpenStreetMap (%{count} cookie)
                 other: Tile OpenStreetMap (%{count} cookie)
+              recaptcha:
+                one: reCAPTCHA (%{count} cookie)
+                other: reCAPTCHA (%{count} cookie)
               vimeo_embeds:
                 one: Integrazioni Vimeo (%{count} cookie)
                 other: Integrazioni Vimeo (%{count} cookie)
@@ -634,9 +663,22 @@ it:
                 one: YouTube senza cookie (%{count} cookie)
                 other: YouTube senza cookie (%{count} cookie)
             services:
+              cloudflare_turnstile: Cloudflare Turnstile
               decidim_essential: Questo sito web
               emoji_picker: Questo sito web
+              facebook_pixel: Meta (Facebook)
+              google_analytics: Google Analytics
+              google_maps_embeds: Google Maps
+              google_tag_manager: Google Tag Manager
               graphiql: Questo sito web
+              hcaptcha: hCaptcha
+              jitsi_meet: Jitsi Meet
+              linkedin_insight: LinkedIn
+              matomo: Matomo
+              openstreetmap_tiles: OpenStreetMap
+              recaptcha: Google reCAPTCHA
+              vimeo_embeds: Vimeo
+              youtube_embeds: YouTube
               youtube_nocookie: YouTube (modalità privacy avanzata)
           create:
             error: Errore durante la creazione dell'elemento cookie! %{error}
@@ -942,6 +984,7 @@ it:
             actions: Azioni
             hidden: Nascosto
             name: Nome
+            url: URL
             visible: Visibile
           title: Vai a ...
         map:

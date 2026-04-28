@@ -54,12 +54,17 @@ fr:
         background_image_4: Image de fond
       cookie_category:
         mandatory: Obligatoire
+        slug: ID
         title: Catégorie
         total_cookies: Total des cookies
         visibility: Visibilité
       cookie_item:
+        expiration: Expiration
         name: Nom du cookie
+        service: Service
+        type: Type
         types:
+          cookie: Cookie
           local_storage: Stockage local
       custom_redirect:
         active: Actif
@@ -441,6 +446,7 @@ fr:
             slug_help: Identifiant unique utilisé dans les scripts pour faire référence à cette catégorie.
             visibility:
               hidden: Masqué
+              visible: Visible
           index:
             cannot_remove_default: Les catégories par défaut ne peuvent pas être supprimées
             confirm_reset: Êtes-vous sûr de vouloir réinitialiser cette catégorie à ses valeurs par défaut ? Cela supprimera toutes les personnalisations que vous avez effectuées.
@@ -602,6 +608,9 @@ fr:
 
                 Catégorie recommandée : Préférences
             labels:
+              cloudflare_turnstile:
+                one: Cloudflare Turnstile (%{count} cookie)
+                other: Cloudflare Turnstile (%{count} cookies)
               decidim_essential:
                 one: Essentiel Decidim (%{count} cookie)
                 other: Essentiel Decidim (%{count} cookies)
@@ -611,15 +620,36 @@ fr:
               facebook_pixel:
                 one: Pixel Facebook (%{count} cookie)
                 other: Pixel Facebook (%{count} cookies)
+              google_analytics:
+                one: Google Analytics (%{count} cookie)
+                other: Google Analytics (%{count} cookies)
               google_maps_embeds:
                 one: Intégrations Google Maps (%{count} cookie)
                 other: Intégrations Google Maps (%{count} cookies)
+              google_tag_manager:
+                one: Google Tag Manager (%{count} cookie)
+                other: Google Tag Manager (%{count} cookies)
               graphiql:
                 one: Explorateur d'API GraphiQL (%{count} cookie)
                 other: Explorateur d'API GraphiQL (%{count} cookies)
+              hcaptcha:
+                one: hCaptcha (%{count} cookie)
+                other: hCaptcha (%{count} cookies)
+              jitsi_meet:
+                one: Jitsi Meet (%{count} cookie)
+                other: Jitsi Meet (%{count} cookies)
+              linkedin_insight:
+                one: LinkedIn Insight (%{count} cookie)
+                other: LinkedIn Insight (%{count} cookies)
+              matomo:
+                one: Matomo (%{count} cookie)
+                other: Matomo (%{count} cookies)
               openstreetmap_tiles:
                 one: Tuiles OpenStreetMap (%{count} cookie)
                 other: Tuiles OpenStreetMap (%{count} cookies)
+              recaptcha:
+                one: reCAPTCHA (%{count} cookie)
+                other: reCAPTCHA (%{count} cookies)
               vimeo_embeds:
                 one: Intégrations Vimeo (%{count} cookie)
                 other: Intégrations Vimeo (%{count} cookies)
@@ -630,9 +660,22 @@ fr:
                 one: YouTube sans cookies (%{count} cookie)
                 other: YouTube sans cookies (%{count} cookies)
             services:
+              cloudflare_turnstile: Cloudflare Turnstile
               decidim_essential: Ce site web
               emoji_picker: Ce site web
+              facebook_pixel: Meta (Facebook)
+              google_analytics: Google Analytics
+              google_maps_embeds: Google Maps
+              google_tag_manager: Google Tag Manager
               graphiql: Ce site web
+              hcaptcha: hCaptcha
+              jitsi_meet: Jitsi Meet
+              linkedin_insight: LinkedIn
+              matomo: Matomo
+              openstreetmap_tiles: OpenStreetMap
+              recaptcha: Google reCAPTCHA
+              vimeo_embeds: Vimeo
+              youtube_embeds: YouTube
               youtube_nocookie: YouTube (mode de confidentialité renforcée)
           create:
             error: Erreur lors de la création de l'élément de cookie ! %{error}
@@ -935,8 +978,11 @@ fr:
           show_on_mobile: Afficher sur mobile
           sticky: Fixe (toujours visible au défilement)
           table:
+            actions: Actions
             hidden: Masqué
             name: Nom
+            url: URL
+            visible: Visible
           title: Aller à ...
         map:
           collapse: Démarrer avec le menu réduit
@@ -1078,7 +1124,11 @@ fr:
     decidim:
       data_consent:
         details:
+          columns:
+            expiration: Expiration
           items:
+            _session_id:
+              expiration: session
             decidim-consent:
               expiration: 1 an
             pwaInstallPromptSeen:

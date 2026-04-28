@@ -40,7 +40,7 @@ module Decidim
           end
 
           # replace admin method to draw the editor (multi lang)
-          def admin_editor_for_proposal_body(form)
+          def admin_editor_for_proposal_body(form) # rubocop:disable Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
             custom_fields = awesome_proposal_custom_fields_for(:body)
 
             return if custom_fields.empty?
@@ -51,19 +51,26 @@ module Decidim
 
             tabs_id = form.send(:sanitize_tabs_selector, form.options[:tabs_id] || "#{form.object_name}-body-tabs")
 
+            error_on_locale = locales.find { |locale| form.send(:error?, name_with_locale("body", locale)) }
+
             label_tabs = form.content_tag(:div, class: "label--tabs") do
               language_selector = "".html_safe
-              language_selector = form.create_language_selector(locales, tabs_id, "body") if form.options[:label] != false
-
+              language_selector = form.send(:create_language_selector, locales, tabs_id, "body", error_on_locale) if form.options[:label] != false
               safe_join [content_tag("label"), language_selector]
             end
 
             tabs_content = form.content_tag(:div, class: "tabs-content", data: { tabs_content: tabs_id }) do
               locales.each_with_index.inject("".html_safe) do |string, (locale, index)|
                 tab_content_id = "#{tabs_id}-body-panel-#{index}"
-                string + content_tag(:div, class: form.send(:tab_element_class_for, "panel", index), id: tab_content_id, "aria-hidden": index.zero? ? "false" : "true") do
-                  field_name = name_with_locale("body", locale)
-                  render_proposal_custom_fields_override(custom_fields, form, field_name, locale)
+                aria_hidden = (error_on_locale.present? ? !locale.eql?(error_on_locale) : index.positive?).to_s
+                css_class = if error_on_locale.present?
+                              form.send(:tab_element_class_for, "panel", locale.eql?(error_on_locale) ? 0 : 1)
+                            else
+                              form.send(:tab_element_class_for, "panel", index)
+                            end
+
+                string + content_tag(:div, class: css_class, id: tab_content_id, "aria-hidden": aria_hidden) do
+                  render_proposal_custom_fields_override(custom_fields, form, name_with_locale("body", locale), locale)
                 end
               end
             end
@@ -99,10 +106,12 @@ module Decidim
           end
 
           def awesome_proposal_custom_fields_for(name)
-            if name == :private_body
-              Decidim::DecidimAwesome::CustomFields.new(awesome_proposal_private_custom_fields)
-            else
-              Decidim::DecidimAwesome::CustomFields.new(awesome_proposal_custom_fields)
+            memoize("awesome_proposal_custom_fields_for_#{name}") do
+              if name == :private_body
+                Decidim::DecidimAwesome::CustomFields.new(awesome_proposal_private_custom_fields)
+              else
+                Decidim::DecidimAwesome::CustomFields.new(awesome_proposal_custom_fields)
+              end
             end
           end
         end

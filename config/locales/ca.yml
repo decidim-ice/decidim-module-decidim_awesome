@@ -660,9 +660,22 @@ ca:
                 one: YouTube sense galetes (%{count} galeta)
                 other: YouTube sense galetes (%{count} galetes)
             services:
+              cloudflare_turnstile: Cloudflare Turnstile
               decidim_essential: Aquest lloc web
               emoji_picker: Aquest lloc web
+              facebook_pixel: Meta (Facebook)
+              google_analytics: Google Analytics
+              google_maps_embeds: Google Maps
+              google_tag_manager: Google Tag Manager
               graphiql: Aquest lloc web
+              hcaptcha: hCaptcha
+              jitsi_meet: Jitsi Meet
+              linkedin_insight: LinkedIn
+              matomo: Matomo
+              openstreetmap_tiles: OpenStreetMap
+              recaptcha: Google reCAPTCHA
+              vimeo_embeds: Vimeo
+              youtube_embeds: YouTube
               youtube_nocookie: YouTube (mode de privadesa millorada)
           create:
             error: S'ha produït un error en crear l'element de galeta! %{error}

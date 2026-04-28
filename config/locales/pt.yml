@@ -54,6 +54,7 @@ pt:
         background_image_4: Imagem de fundo
       cookie_category:
         mandatory: Obrigatória
+        slug: ID
         title: Categoria
         total_cookies: Total de cookies
         visibility: Visibilidade
@@ -63,6 +64,7 @@ pt:
         service: Serviço
         type: Tipo
         types:
+          cookie: Cookie
           local_storage: Armazenamento local
       custom_redirect:
         active: Ativo
@@ -189,9 +191,14 @@ pt:
           created_at: Funcao criada em
           currently_active: Atualmente ativo
           deleted_user: Utilizador eliminado
+          email: Email
           exports:
             button: Exportar esta busca
             export_as: Exportar como %{export_format}
+            export_format:
+              csv: CSV
+              json: JSON
+              xlsx: XLSX
             notice: O trabalho de exportacao foi colocado na fila. Voce recebera um email quando estiver pronto.
           index:
             description: Aqui voce encontrara todos os utilizadores que tiveram alguma funcao na administracao de um espaco participativo. Administradores normais nao sao listados.
@@ -604,21 +611,48 @@ pt:
 
                 Categoria recomendada: Preferências
             labels:
+              cloudflare_turnstile:
+                one: Cloudflare Turnstile (%{count} cookie)
+                other: Cloudflare Turnstile (%{count} cookies)
               decidim_essential:
                 one: Decidim Essencial (%{count} cookie)
                 other: Decidim Essencial (%{count} cookies)
               emoji_picker:
                 one: Seletor de emojis (%{count} cookie)
                 other: Seletor de emojis (%{count} cookies)
+              facebook_pixel:
+                one: Facebook Pixel (%{count} cookie)
+                other: Facebook Pixel (%{count} cookies)
+              google_analytics:
+                one: Google Analytics (%{count} cookie)
+                other: Google Analytics (%{count} cookies)
               google_maps_embeds:
                 one: Google Maps incorporado (%{count} cookie)
                 other: Google Maps incorporado (%{count} cookies)
+              google_tag_manager:
+                one: Google Tag Manager (%{count} cookie)
+                other: Google Tag Manager (%{count} cookies)
               graphiql:
                 one: Explorador de API GraphiQL (%{count} cookie)
                 other: Explorador de API GraphiQL (%{count} cookies)
+              hcaptcha:
+                one: hCaptcha (%{count} cookie)
+                other: hCaptcha (%{count} cookies)
+              jitsi_meet:
+                one: Jitsi Meet (%{count} cookie)
+                other: Jitsi Meet (%{count} cookies)
+              linkedin_insight:
+                one: LinkedIn Insight (%{count} cookie)
+                other: LinkedIn Insight (%{count} cookies)
+              matomo:
+                one: Matomo (%{count} cookie)
+                other: Matomo (%{count} cookies)
               openstreetmap_tiles:
                 one: OpenStreetMap (%{count} cookie)
                 other: OpenStreetMap (%{count} cookies)
+              recaptcha:
+                one: reCAPTCHA (%{count} cookie)
+                other: reCAPTCHA (%{count} cookies)
               vimeo_embeds:
                 one: Vimeo incorporado (%{count} cookie)
                 other: Vimeo incorporado (%{count} cookies)
@@ -629,9 +663,22 @@ pt:
                 one: YouTube (privacidade melhorada) (%{count} cookie)
                 other: YouTube (privacidade melhorada) (%{count} cookies)
             services:
+              cloudflare_turnstile: Cloudflare Turnstile
               decidim_essential: Este site
               emoji_picker: Este site
+              facebook_pixel: Meta (Facebook)
+              google_analytics: Google Analytics
+              google_maps_embeds: Google Maps
+              google_tag_manager: Google Tag Manager
               graphiql: Este site
+              hcaptcha: hCaptcha
+              jitsi_meet: Jitsi Meet
+              linkedin_insight: LinkedIn
+              matomo: Matomo
+              openstreetmap_tiles: OpenStreetMap
+              recaptcha: Google reCAPTCHA
+              vimeo_embeds: Vimeo
+              youtube_embeds: YouTube
               youtube_nocookie: YouTube (modo de privacidade melhorada)
           create:
             error: Erro ao criar o item de cookie! %{error}
@@ -708,6 +755,7 @@ pt:
             ip_addresses: Ver enderecos IP
             stamps: Ver selos Hashcash
           index:
+            bits: Bits
             created_at: Criado em
             help_html: |
               Esta pagina mostra os selos Hashcash detectados no sistema. Hashcash e um sistema de prova de trabalho que exige que os utilizadores resolvam um quebra-cabeca computacional (realizado automaticamente pelo navegador) antes de poderem se registar.
@@ -910,6 +958,7 @@ pt:
           selection_criteria: Criterios de selecao
           selection_criteria_options:
             automatic: Automatico
+            manual: Manual
           title: Titulo do bloco
         landing_menu:
           alignment: Posicao do menu
@@ -935,6 +984,7 @@ pt:
             actions: Acoes
             hidden: Oculto
             name: Nome
+            url: URL
             visible: Visivel
           title: Ir para ...
         map:
@@ -1047,6 +1097,7 @@ pt:
           voting_for: Meu voto em "%{proposal}" e "%{type}"
           weights:
             weight_0: Abstencao
+            weight_0_short: 'A:'
             weight_1: Vermelho
             weight_1_short: 'V:'
             weight_2: Amarelo
@@ -1099,6 +1150,7 @@ pt:
           autosaved_retrieved: Os dados deste formulario foram recuperados de uma sessao anterior
           autosaved_success: Dados salvos no armazenamento local
           drag_and_drop_image: Adicione imagens arrastando e soltando ou colando.
+          hashtags: Hashtags
           items: itens
           meetings: Reunioes
           proposals: Propostas
