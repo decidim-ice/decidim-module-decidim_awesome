@@ -971,7 +971,7 @@ es:
           css_comment_menu: Estilo para todo el bloque del menú
           css_help_html: 'Puedes personalizar aún más este menú creando un %{link}; usa este código para referenciar sus diferentes elementos:'
           css_help_link: estilo personalizado
-          delete_confirm: ¿Seguro que quieres eliminar este elemento?
+          delete_confirm: '¿Seguro que quieres eliminar este elemento?'
           drag: Arrastra para reordenar
           edit_item: Editar elemento
           empty_item: Nuevo elemento vacío
@@ -1011,7 +1011,7 @@ es:
         rich_text:
           add_column: Añadir una nueva columna
           background_image: Imagen de fondo
-          background_image_help: "Imagen opcional que se muestra detrás del contenido de la columna. Ancho mínimo recomendado: 1920 px."
+          background_image_help: 'Imagen opcional que se muestra detrás del contenido de la columna. Ancho mínimo recomendado: 1920 px.'
           background_image_placement: Posición de la imagen de fondo
           background_image_placement_help: Cómo se muestra la imagen de fondo dentro de la columna. Solo se aplica si se ha subido una imagen de fondo.
           background_image_placements:

@@ -1008,7 +1008,7 @@ fr:
         rich_text:
           add_column: Ajouter une nouvelle colonne
           background_image: Image de fond
-          background_image_help: "Image facultative affichée derrière le contenu de la colonne. Largeur minimale recommandée : 1920 px."
+          background_image_help: 'Image facultative affichée derrière le contenu de la colonne. Largeur minimale recommandée : 1920 px.'
           background_image_placement: Positionnement de l'image de fond
           background_image_placement_help: Définit comment l'image de fond est affichée dans la colonne. Ne s'applique que si une image de fond a été téléversée.
           background_image_placements:
