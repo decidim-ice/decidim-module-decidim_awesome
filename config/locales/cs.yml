@@ -543,7 +543,11 @@ cs:
               vimeo_embeds: Vimeo
               youtube_embeds: YouTube
               youtube_nocookie: YouTube (rozšířený režim pro ochranu soukromí)
+          create:
+            error: Chyba při vytváření položky cookie! %{error}
+            success: Položka cookie byla úspěšně vytvořena
           create_preset:
+            error: Chyba při přidávání přednastavení cookie! %{error}
             not_found: Předvolba nebyla nalezena
             success: Položka předvolby cookie byla úspěšně přidána
           destroy:
