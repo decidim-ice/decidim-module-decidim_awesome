@@ -38,7 +38,6 @@ module Decidim
               action_manifest = processor.get_action_manifest(target["action_type"])
               handler_class = action_manifest.handler_class.constantize
               handler = handler_class.new(object, target["action_options"])
-              byebug
               handler.execute
 
               target["hits"] += 1
