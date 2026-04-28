@@ -252,8 +252,8 @@ Restricts proposal voting to proposals whose state is in an admin-selected list.
 
 #### Admin description
 
-Lets admins limit supports to a curated subset of proposals (e.g. only "Accepted" or "Evaluating") without changing the participatory process phase.
-Concerns: blocked proposals show a "Not accepted for voting" message, so the phase communication must match the allowed states.
+Allows admins to restrict supports to a selected subset of proposal states (for example, only "Accepted" or "Evaluating"). This configuration is available per step configuration in participatory processes.
+Note: proposals outside the allowed states display a "Voting unavailable" message, with no "disabled" button for voting.
 
 #### Technical area
 
@@ -263,7 +263,7 @@ Concerns: blocked proposals show a "Not accepted for voting" message, so the pha
 # config/initializers/awesome_defaults.rb
 Decidim::DecidimAwesome.configure do |config|
   # :disabled = completely removed, hidden from admins
-  config.votes_by_proposal_status = :enabled  # default: :enabled
+  config.votes_by_proposal_status = true  # default: true
 end
 ```
 
