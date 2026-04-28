@@ -24,6 +24,8 @@ module Decidim
           return broadcast(:invalid) if form.invalid?
 
           config = create_hash_config!
+          raise ActiveRecord::RecordNotFound if config.value[rule_id].nil?
+
           rule_config = config.value[rule_id] || {}
           targets = rule_config["targets"] || {}
           target_entry = form.to_params
@@ -35,13 +37,7 @@ module Decidim
           broadcast(:ok, target_entry)
         end
 
-        private
-
         attr_reader :form, :rule_id
-
-        def rule_ident
-          @rule_ident ||= rule_id.to_s
-        end
       end
     end
   end

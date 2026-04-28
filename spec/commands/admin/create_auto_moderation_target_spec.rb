@@ -8,7 +8,7 @@ module Decidim::DecidimAwesome
       subject { described_class.new(form, rule_id, organization) }
 
       let(:organization) { create(:organization) }
-      let(:config) { create(:awesome_config, organization:, var: :auto_moderation_rules, value: { rule_id => rule }) }
+      let!(:config) { create(:awesome_config, organization:, var: :auto_moderation_rules, value: { rule_id => rule }) }
       let(:rule) do
         {
           "description" => {
@@ -44,8 +44,9 @@ module Decidim::DecidimAwesome
 
           target = targets.first.second
           expect(target).not_to be_nil
-          expect(target["target_type"]).to eq(attributes[:target_type])
-          expect(target["target_id"]).to eq(attributes[:target_id])
+          expect(target["object_type"]).to eq(attributes[:object_type])
+          expect(target["action_type"]).to eq(attributes[:action_type])
+          expect(target["action_options"]).to eq(attributes[:action_options])
         end
       end
 

@@ -11,7 +11,6 @@ en:
         constraints: Constraints
         counter: Counter
         description: Description
-        id: Id
         objects: Objects
         rule: Rule
       auto_moderation_target:
@@ -306,16 +305,21 @@ en:
           edit:
             cancel: Cancel
             save: Save
-            targets:
-              add_target: Add target
-              confirm_destroy: Are you sure you want to remove this target?
-              destroy: Remove
-              edit: Edit
-              title: Objects & actions
             title: Edit auto-moderation rule
           form:
-            rule_options: Options
+            help_text: "Define automatic moderation entries by combining a processing
+              rule (for example, a word filter), one or more object targets (for example,
+              proposals or comments), and an action per target (for example, moderate
+              and hide). \nRules run automatically on content lifecycle events and
+              can also be executed manually for existing content."
+            rule_options:
+              help_text: Add words or phrases to block. Press Enter after each item
+                to add it as a tag. Content containing any of these terms will trigger
+                this moderation rule.
+              label: Blocked words or phrases
             rule_type:
+              help_text: Select the type of rule you want to use. They will define
+                the conditions that will trigger the moderation action.
               word_filter: Word filter
           index:
             confirm_destroy: Are you sure you want to remove this moderation rule?
@@ -327,6 +331,15 @@ en:
             cancel: Cancel
             save: Save
             title: New auto-moderation rule
+          target_form:
+            targets:
+              add_target: Add target
+              confirm_destroy: Are you sure you want to remove this target?
+              destroy: Remove
+              edit: Edit
+              help_text: Define the objects and actions that will be automatically
+                moderated when this rule is triggered.
+              title: 'Targets: Objects & actions'
           update:
             error: Error updating moderation rule! %{error}
             success: Moderation rule successfully updated
@@ -344,9 +357,6 @@ en:
           form:
             action_type_options:
               moderate_and_hide: Moderate and Hide
-            object_type:
-              comment: Comment
-              proposal: Proposal
             object_type_options:
               comment: Comment
               proposal: Proposal

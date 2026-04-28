@@ -47,7 +47,7 @@ module Decidim
           return if model.settings.title.blank?
           return if model.settings.title.values.join.blank?
 
-          content_tag :h3, class: "section-heading" do
+          content_tag :h3, class: "h3 section-heading" do
             translated_attribute(model.settings.title)
           end
         end

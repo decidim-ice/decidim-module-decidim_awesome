@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# frozen_string_literal
-
 module Decidim
   module DecidimAwesome
     module Admin

@@ -16,9 +16,9 @@ module Decidim::DecidimAwesome
           hits:
         }
       end
-      let(:object_type) { "comments" }
+      let(:object_type) { "comment" }
       let(:action_type) { "moderate_and_hide" }
-      let(:action_options) { {} }
+      let(:action_options) { "" }
       let(:hits) { 3 }
 
       context "when everything is OK" do
@@ -32,6 +32,30 @@ module Decidim::DecidimAwesome
             "hits" => hits
           )
         end
+      end
+
+      context "when object_type is missing" do
+        let(:object_type) { nil }
+
+        it { is_expected.not_to be_valid }
+      end
+
+      context "when object_type is invalid" do
+        let(:object_type) { "invalid_object" }
+
+        it { is_expected.not_to be_valid }
+      end
+
+      context "when action_type is missing" do
+        let(:action_type) { nil }
+
+        it { is_expected.not_to be_valid }
+      end
+
+      context "when action_type is invalid" do
+        let(:action_type) { "invalid_action" }
+
+        it { is_expected.not_to be_valid }
       end
     end
   end

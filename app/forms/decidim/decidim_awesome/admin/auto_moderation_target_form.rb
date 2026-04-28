@@ -6,7 +6,7 @@ module Decidim
       class AutoModerationTargetForm < Decidim::Form
         attribute :object_type, String
         attribute :action_type, String
-        attribute :action_options, Hash, default: "{}"
+        attribute :action_options, String, default: ""
         attribute :hits, Integer, default: 0
 
         validates :object_type, presence: true

@@ -55,7 +55,7 @@ module Decidim::DecidimAwesome
               "description" => { "en" => "Bad word rule" },
               "enabled" => true,
               "rule_type" => "word_filter",
-              "rule_options" => "badword1, badword2"
+              "rule_options" => %w(badword1 badword2)
             }
           }
         end

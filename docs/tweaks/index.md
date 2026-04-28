@@ -15,3 +15,4 @@ This section organizes Decidim Awesome tweaks by functional categories with per-
 - [Forms, surveys and verifications](forms-surveys-verifications.md) - Tweaks 5.x
 - [Components and integrations](components-integrations.md) - Tweaks 6.x
 - [Content blocks](content-blocks.md) - Tweaks 7.x
+- [Automatic Moderation](automatic-moderation.md) - Tweaks 8.x
