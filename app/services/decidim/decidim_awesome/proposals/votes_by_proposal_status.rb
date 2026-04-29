@@ -13,6 +13,7 @@ module Decidim
 
         def active?
           return false unless Decidim::DecidimAwesome.enabled?(:votes_by_proposal_status)
+          return false unless @settings.try(:votes_enabled)
           return false unless @settings.try(:awesome_votes_enabled_by_status)
 
           allowed_state_ids.any?

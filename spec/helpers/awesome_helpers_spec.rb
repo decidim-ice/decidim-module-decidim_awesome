@@ -136,7 +136,7 @@ module Decidim::DecidimAwesome
       end
 
       context "when the global feature flag is disabled" do
-        let(:step_settings) { { awesome_votes_enabled_by_status: true, awesome_votes_enabled_states: [rejected_state.id.to_s] } }
+        let(:step_settings) { { votes_enabled: true, awesome_votes_enabled_by_status: true, awesome_votes_enabled_states: [rejected_state.id.to_s] } }
 
         before { allow(Decidim::DecidimAwesome.config).to receive(:votes_by_proposal_status).and_return(:disabled) }
 
@@ -145,46 +145,52 @@ module Decidim::DecidimAwesome
 
       context "when votes are blocked at the step level" do
         let(:step_settings) do
-          { votes_blocked: true, awesome_votes_enabled_by_status: true, awesome_votes_enabled_states: [rejected_state.id.to_s] }
+          { votes_enabled: true, votes_blocked: true, awesome_votes_enabled_by_status: true, awesome_votes_enabled_states: [rejected_state.id.to_s] }
         end
 
         it { is_expected.to be(false) }
       end
 
+      context "when votes are not enabled on the step" do
+        let(:step_settings) { { votes_enabled: false, awesome_votes_enabled_by_status: true, awesome_votes_enabled_states: [rejected_state.id.to_s] } }
+
+        it { is_expected.to be(false) }
+      end
+
       context "when the awesome filter is not enabled in the component" do
-        let(:step_settings) { { awesome_votes_enabled_by_status: false } }
+        let(:step_settings) { { votes_enabled: true, awesome_votes_enabled_by_status: false } }
 
         it { is_expected.to be(false) }
       end
 
       context "when the filter is enabled but no statuses are selected" do
-        let(:step_settings) { { awesome_votes_enabled_by_status: true, awesome_votes_enabled_states: [] } }
+        let(:step_settings) { { votes_enabled: true, awesome_votes_enabled_by_status: true, awesome_votes_enabled_states: [] } }
 
         it { is_expected.to be(false) }
       end
 
       context "when the filter is enabled and the proposal status is in the allowed list" do
-        let(:step_settings) { { awesome_votes_enabled_by_status: true, awesome_votes_enabled_states: [accepted_state.id.to_s] } }
+        let(:step_settings) { { votes_enabled: true, awesome_votes_enabled_by_status: true, awesome_votes_enabled_states: [accepted_state.id.to_s] } }
 
         it { is_expected.to be(false) }
       end
 
       context "when the filter is enabled and the proposal status is not in the allowed list" do
-        let(:step_settings) { { awesome_votes_enabled_by_status: true, awesome_votes_enabled_states: [rejected_state.id.to_s] } }
+        let(:step_settings) { { votes_enabled: true, awesome_votes_enabled_by_status: true, awesome_votes_enabled_states: [rejected_state.id.to_s] } }
 
         it { is_expected.to be(true) }
       end
 
       context "when the filter is enabled and the proposal has no assigned status" do
         let(:proposal) { create(:proposal, component: filter_component) }
-        let(:step_settings) { { awesome_votes_enabled_by_status: true, awesome_votes_enabled_states: [accepted_state.id.to_s] } }
+        let(:step_settings) { { votes_enabled: true, awesome_votes_enabled_by_status: true, awesome_votes_enabled_states: [accepted_state.id.to_s] } }
 
         it { is_expected.to be(true) }
       end
 
       context "when the allowed list contains blank entries" do
         let(:step_settings) do
-          { awesome_votes_enabled_by_status: true, awesome_votes_enabled_states: ["", accepted_state.id.to_s] }
+          { votes_enabled: true, awesome_votes_enabled_by_status: true, awesome_votes_enabled_states: ["", accepted_state.id.to_s] }
         end
 
         it { is_expected.to be(false) }

@@ -15,8 +15,8 @@ module Decidim
         let(:rejected_state) { Decidim::Proposals::ProposalState.find_by(component:, token: "rejected") }
         let(:proposal) { create(:proposal, component:, state: "accepted") }
 
-        let(:settings_class) { Struct.new(:awesome_votes_enabled_by_status, :awesome_votes_enabled_states) }
-        let(:settings) { settings_class.new(true, [accepted_state.id.to_s]) }
+        let(:settings_class) { Struct.new(:votes_enabled, :awesome_votes_enabled_by_status, :awesome_votes_enabled_states) }
+        let(:settings) { settings_class.new(true, true, [accepted_state.id.to_s]) }
 
         describe "#active?" do
           context "when the global feature flag is disabled" do
@@ -25,20 +25,26 @@ module Decidim
             it { is_expected.not_to be_active }
           end
 
+          context "when votes are not enabled on the step" do
+            let(:settings) { settings_class.new(false, true, [accepted_state.id.to_s]) }
+
+            it { is_expected.not_to be_active }
+          end
+
           context "when the per-step checkbox is off" do
-            let(:settings) { settings_class.new(false, [accepted_state.id.to_s]) }
+            let(:settings) { settings_class.new(true, false, [accepted_state.id.to_s]) }
 
             it { is_expected.not_to be_active }
           end
 
           context "when no states are selected" do
-            let(:settings) { settings_class.new(true, []) }
+            let(:settings) { settings_class.new(true, true, []) }
 
             it { is_expected.not_to be_active }
           end
 
           context "when only blank states are selected" do
-            let(:settings) { settings_class.new(true, ["", nil]) }
+            let(:settings) { settings_class.new(true, true, ["", nil]) }
 
             it { is_expected.not_to be_active }
           end
@@ -60,7 +66,7 @@ module Decidim
           end
 
           context "when the proposal status is not in the allowed list" do
-            let(:settings) { settings_class.new(true, [rejected_state.id.to_s]) }
+            let(:settings) { settings_class.new(true, true, [rejected_state.id.to_s]) }
 
             it { expect(subject.allowed?(proposal)).to be(false) }
           end
@@ -76,7 +82,7 @@ module Decidim
           end
 
           context "when the allowed list mixes blank entries and valid ids" do
-            let(:settings) { settings_class.new(true, ["", accepted_state.id.to_s]) }
+            let(:settings) { settings_class.new(true, true, ["", accepted_state.id.to_s]) }
 
             it { expect(subject.allowed?(proposal)).to be(true) }
           end
@@ -84,13 +90,13 @@ module Decidim
 
         describe "#allowed_state_ids" do
           context "with string ids" do
-            let(:settings) { settings_class.new(true, %w(1 2 3)) }
+            let(:settings) { settings_class.new(true, true, %w(1 2 3)) }
 
             it { expect(subject.allowed_state_ids).to eq([1, 2, 3]) }
           end
 
           context "with blank entries" do
-            let(:settings) { settings_class.new(true, ["", " ", "5", nil]) }
+            let(:settings) { settings_class.new(true, true, ["", " ", "5", nil]) }
 
             it { expect(subject.allowed_state_ids).to eq([5]) }
           end

@@ -197,7 +197,10 @@ en:
               is clicked
           step:
             awesome_votes_enabled_by_status: Restrict voting by proposal status
-            awesome_votes_enabled_by_status_help: When enabled, voting is only allowed on proposals with the selected statuses. Proposals in other statuses will not accept votes. Leave empty to allow voting on all proposals regardless of status.
+            awesome_votes_enabled_by_status_help: When enabled, voting is only allowed
+              on proposals with the selected statuses. Proposals in other statuses
+              will not accept votes. Leave empty to allow voting on all proposals
+              regardless of status.
             awesome_votes_enabled_states: Allowed statuses for votes
             default_sort_order_options:
               az: A-Z (Alphabetical)
