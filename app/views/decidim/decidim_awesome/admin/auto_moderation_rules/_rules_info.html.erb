@@ -1,0 +1,29 @@
+<section>
+    <div class="item_show__header">
+        <h2 class="item_show__header-title">
+            <%= t(".title") %>
+        </h2>
+    </div>
+    <div class="card-section">
+        <div class="table-scroll">
+            <table class="table-list">
+                <thead>
+                    <tr>
+                        <th><%= t("auto_moderation_rule.rules.name", scope: "activemodel.attributes") %></th>
+                        <th><%= t("auto_moderation_rule.rules.description", scope: "activemodel.attributes") %></th>
+                        <th><%= t("auto_moderation_rule.rules.supported_objects", scope: "activemodel.attributes") %></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% rules_manifests.each do |rule| %>
+                        <td><%= t(rule.name_key) %></td>
+                        <td><%= t(rule.description_key) %></td>
+                        <td>
+                            <%= rule.supported_object_types.map { |type| t("auto_moderation_rules.rules.#{rule.name.to_s}.supported_object_types.#{type.to_s}", scope: "decidim.decidim_awesome.admin")}.join(', ') %>
+                        </td>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

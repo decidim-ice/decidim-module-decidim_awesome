@@ -13,6 +13,10 @@ en:
         description: Description
         objects: Objects
         rule: Rule
+        rules:
+          description: description
+          name: Name
+          supported_objects: Supported objects
       auto_moderation_target:
         action_type: Action
         action_type_options:
@@ -331,6 +335,16 @@ en:
             cancel: Cancel
             save: Save
             title: New auto-moderation rule
+          rules:
+            word_filter:
+              description: The Word Filter rule checks if generated content match
+                the list of words that are added to the option field
+              name: Word Filter
+              supported_object_types:
+                comments: Comments
+                proposals: Proposals
+          rules_info:
+            title: Types of rules
           target_form:
             targets:
               add_target: Add target

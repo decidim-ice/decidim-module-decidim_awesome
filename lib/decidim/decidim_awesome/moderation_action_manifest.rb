@@ -34,6 +34,9 @@ module Decidim
       #   [:proposals, :comments]
       attribute :supported_object_types, Array, default: []
 
+      attribute :name_key, String
+      attribute :description_key, String
+
       validates :name, presence: true
       validates :handler_class, presence: true
     end

@@ -119,7 +119,11 @@ module Decidim
           awesome_config_instance.setting_for(key)&.constraints
         end
 
-        helper_method :entries, :rule_type_options, :targets, :constraints_for
+        def rules_manifests
+          Decidim::DecidimAwesome.moderation_rules_registry.manifests
+        end
+
+        helper_method :entries, :rule_type_options, :targets, :constraints_for, :rules_manifests
       end
     end
   end
