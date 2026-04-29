@@ -13,11 +13,19 @@ en:
         description: Description
         objects: Objects
         rule: Rule
+        rules:
+          description: Description
+          name: Name
+          supported_objects: Supported objects
       auto_moderation_target:
         action_type: Action
         action_type_options:
           moderate_and_hide: Moderate and Hide
         hits: Hits
+        actions:
+          description: Description
+          name: Name
+          supported_objects: Supported_objects
         object_type: Object
         object_type_options:
           comment: Comment
@@ -332,6 +340,16 @@ en:
             cancel: Cancel
             save: Save
             title: New auto-moderation rule
+          rules:
+            word_filter:
+              description: The Word Filter rule checks if generated content match
+                the list of words that are added to the option field
+              name: Word Filter
+              supported_object_types:
+                comments: Comments
+                proposals: Proposals
+          rules_info:
+            title: Types of rules
           target_form:
             targets:
               add_target: Add target
@@ -345,6 +363,16 @@ en:
             error: Error updating moderation rule! %{error}
             success: Moderation rule successfully updated
         auto_moderation_targets:
+          actions:
+            moderate_and_hide:
+              description: This action will create a report to the matched content
+                and will hide it.
+              name: Moderate and Hide
+              supported_object_types:
+                comments: Comments
+                proposals: Proposals
+          actions_info:
+            title: Types of actions
           create:
             error: Error creating moderation target! %{error}
             success: Moderation target created successfully

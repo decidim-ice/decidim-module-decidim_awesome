@@ -44,7 +44,7 @@
                   </ul>
                 </div>
               </td>
-              <td><%= rule["enabled"] ? "Yes" : "No" %></td>
+              <td><%= check rule["enabled"] %></td>
               <td><%= rule["counter"] || 0 %></td>
               <td class="actions">
                 <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_auto_moderation_rule_path(id), t(".edit"), class: "action-icon--edit" %>
