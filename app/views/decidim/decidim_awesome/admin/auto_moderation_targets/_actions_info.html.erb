@@ -19,7 +19,7 @@
                         <td><%= t(action.name_key) %></td>
                         <td><%= t(action.description_key) %></td>
                         <td>
-                            <%= action.supported_object_types.map { |type| t("auto_moderation_targets.actions.#{action.name.to_s}.supported_object_types.#{type.to_s}", scope: "decidim.decidim_awesome.admin")}.join(', ') %>
+                            <%= action.supported_object_types.map { |type| t("auto_moderation_targets.actions.#{action.name.to_s}.supported_object_types.#{type.to_s}", scope: "decidim.decidim_awesome.admin") }.join(", ") %>
                         </td>
                     <% end %>
                 </tbody>
