@@ -30,6 +30,12 @@ module Decidim
         resources :proposal_custom_fields, param: :var, only: [:create, :destroy]
         resources :scoped_admins, param: :var, only: [:create, :destroy]
         resources :force_authorizations, param: :var, only: [:create, :destroy]
+        resources :auto_moderation_rules, except: [:show] do
+          collection do
+            patch :toggle_enabled
+          end
+          resources :targets, except: [:show], controller: "auto_moderation_targets"
+        end
         get :admin_accountability, to: "admin_accountability#index", as: "admin_accountability"
         post :export_admin_accountability, to: "admin_accountability#export", as: "export_admin_accountability"
         get :users, to: "config#users"

@@ -1,0 +1,28 @@
+<div class="item_show__header">
+  <h2 class="item_show__header-title">
+    <%= t(".title") %>
+  </h2>
+  <%= link_to t(".cancel"), decidim_admin_decidim_awesome.auto_moderation_rules_path, class: "button button__sm button__secondary" %>
+</div>
+
+<div class="item__edit item__edit-1col">
+  <div class="item__edit-form">
+    <div class="help-text mb-4">
+      <%= t("help_text", scope: "decidim.decidim_awesome.admin.auto_moderation_rules.form") %>
+    </div>
+
+    <%= decidim_form_for(@form, url: decidim_admin_decidim_awesome.auto_moderation_rule_path(params[:id]), method: :patch, html: { class: "form form-defaults" }) do |f| %>
+      <%= render partial: "form", object: f %>
+
+      <div class="item__edit-sticky">
+        <div class="item__edit-sticky-container">
+          <%= f.submit t(".save"), class: "button button__sm button__secondary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= render partial: "target_form", locals: { targets: targets } %>
+
+<%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: "auto_moderation_rules_#{params[:id]}", constraints: constraints_for("auto_moderation_rules_#{params[:id]}") }) %>

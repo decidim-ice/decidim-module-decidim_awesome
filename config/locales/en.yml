@@ -5,6 +5,30 @@ en:
     waiting_label: Waiting for verification ...
   activemodel:
     attributes:
+      auto_moderation_rule:
+        action: Action
+        active: Active
+        constraints: Constraints
+        counter: Counter
+        description: Description
+        objects: Objects
+        rule: Rule
+        rules:
+          description: Description
+          name: Name
+          supported_objects: Supported objects
+      auto_moderation_target:
+        action_type: Action
+        action_type_options:
+          moderate_and_hide: Moderate and Hide
+        actions:
+          description: Description
+          name: Name
+          supported_objects: Supported_objects
+        object_type: Object
+        object_type_options:
+          comment: Comment
+          proposal: Proposal
       config:
         additional_proposal_sortings: Additional sorting options enabled
         allow_images_in_editors: Allow images in the HTML editor
@@ -279,6 +303,98 @@ en:
               user''s current authorization status.'
           user_authorized: "%{user} successfully authorized with %{name}"
           user_not_authorized: "%{user} could not be authorized with %{name}"
+        auto_moderation_rules:
+          create:
+            error: Error creating moderation rule! %{error}
+            success: Moderation rule created successfully
+          destroy:
+            error: Error removing moderation rule! %{error}
+            success: Moderation rule successfully removed
+          edit:
+            cancel: Cancel
+            save: Save
+            title: Edit auto-moderation rule
+          form:
+            help_text: "Define automatic moderation entries by combining a processing
+              rule (for example, a word filter), one or more object targets (for example,
+              proposals or comments), and an action per target (for example, moderate
+              and hide). \nRules run automatically on content lifecycle events and
+              can also be executed manually for existing content."
+            rule_options:
+              help_text: Add words or phrases to block. Press Enter after each item
+                to add it as a tag. Content containing any of these terms will trigger
+                this moderation rule.
+              label: Blocked words or phrases
+            rule_type:
+              help_text: Select the type of rule you want to use. They will define
+                the conditions that will trigger the moderation action.
+              word_filter: Word filter
+          index:
+            confirm_destroy: Are you sure you want to remove this moderation rule?
+            destroy: Remove
+            edit: Edit
+            new: New
+            title: Auto-moderation rules
+          new:
+            cancel: Cancel
+            save: Save
+            title: New auto-moderation rule
+          rules:
+            word_filter:
+              description: The Word Filter rule checks if generated content match
+                the list of words that are added to the option field
+              name: Word Filter
+              supported_object_types:
+                comments: Comments
+                proposals: Proposals
+          rules_info:
+            title: Types of rules
+          target_form:
+            targets:
+              add_target: Add target
+              confirm_destroy: Are you sure you want to remove this target?
+              destroy: Remove
+              edit: Edit
+              help_text: Define the objects and actions that will be automatically
+                moderated when this rule is triggered.
+              title: 'Targets: Objects & actions'
+          update:
+            error: Error updating moderation rule! %{error}
+            success: Moderation rule successfully updated
+        auto_moderation_targets:
+          actions:
+            moderate_and_hide:
+              description: This action will create a report to the matched content
+                and will hide it.
+              name: Moderate and Hide
+              supported_object_types:
+                comments: Comments
+                proposals: Proposals
+          actions_info:
+            title: Types of actions
+          create:
+            error: Error creating moderation target! %{error}
+            success: Moderation target created successfully
+          destroy:
+            error: Error removing moderation target! %{error}
+            success: Moderation target successfully removed
+          edit:
+            cancel: Cancel
+            save: Save
+            title: Edit auto-moderation target
+          form:
+            action_type_options:
+              moderate_and_hide: Moderate and Hide
+            object_type_options:
+              comment: Comment
+              proposal: Proposal
+          new:
+            cancel: Cancel
+            save: Save
+            title: New auto-moderation target
+          update:
+            error: Error updating moderation target! %{error}
+            success: Moderation target successfully updated
         checks:
           index:
             admin_head_tags: Awesome tags included in the admin application header
@@ -939,6 +1055,7 @@ en:
             title: Edit menu item
         menu:
           admins: Scoped Admins
+          auto_moderation_rules: Auto moderation
           cookie_management: Cookie management
           custom_redirects: Custom Redirections
           editors: Editor Hacks

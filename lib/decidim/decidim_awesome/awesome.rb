@@ -25,7 +25,7 @@ module Decidim
     # Currently :awesome_map and :awesome_iframe, list them here
     # if you wan to disable them
     # NOTE if you have spaces with some of these components already configured
-    # and then they are deactivated, it will break you application as there will be
+    # and then they are deactivated, it will break your application as there will be
     # references in the database
     #
     # use only symbols here

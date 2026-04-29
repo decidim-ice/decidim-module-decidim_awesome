@@ -1,0 +1,18 @@
+<div class="form__wrapper">
+  <div class="card pt-4">
+    <div class="card-section">
+      <div class="row column">
+        <%= form.translated :text_field, :description %>
+      </div>
+      <div class="row column">
+        <%= form.check_box :enabled %>
+      </div>
+      <div class="row column">
+        <%= form.select :rule_type, options_for_select(rule_type_options, selected: rule_type_options.first.second), help_text: t(".rule_type.help_text") %>
+      </div>
+      <div class="row column">
+        <%= form.text_field :rule_options, help_text: t(".rule_options.help_text"), label: t(".rule_options.label") %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -394,6 +394,26 @@ module Decidim
         Decidim.icons.register(name: "shield-check-line", icon: "shield-check-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "eye-off-line", icon: "eye-off-line", category: "system", description: "", engine: :decidim_awesome)
       end
+
+      initializer "decidim_decidim_awesome.register_auto_moderation_rules" do
+        if DecidimAwesome.enabled?(:auto_moderation_rules)
+          Decidim::DecidimAwesome.moderation_rules_registry.register(:word_filter) do |rule|
+            rule.checker_class = "Decidim::DecidimAwesome::ModerationRules::WordFilterRule"
+            rule.form_class = "Decidim::DecidimAwesome::Admin::WordFilterRuleForm"
+            rule.name_key = "decidim.decidim_awesome.admin.auto_moderation_rules.rules.word_filter.name"
+            rule.description_key = "decidim.decidim_awesome.admin.auto_moderation_rules.rules.word_filter.description"
+            rule.supported_object_types = [:proposals, :comments]
+          end
+
+          Decidim::DecidimAwesome.moderation_actions_registry.register(:moderate_and_hide) do |action|
+            action.form_class = "Decidim::DecidimAwesome::Admin::ModerateAndHideActionForm"
+            action.handler_class = "Decidim::DecidimAwesome::ModerationActions::ModerateAndHide"
+            action.name_key = "decidim.decidim_awesome.admin.auto_moderation_targets.actions.moderate_and_hide.name"
+            action.description_key = "decidim.decidim_awesome.admin.auto_moderation_targets.actions.moderate_and_hide.description"
+            action.supported_object_types = [:proposals, :comments]
+          end
+        end
+      end
     end
   end
 end
