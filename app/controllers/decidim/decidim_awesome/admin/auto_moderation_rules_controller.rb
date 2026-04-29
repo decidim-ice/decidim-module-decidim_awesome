@@ -104,7 +104,7 @@ module Decidim
         def rule_type_options
           Decidim::DecidimAwesome.moderation_rules_registry.manifests.map do |rule|
             name = I18n.t("decidim.decidim_awesome.admin.auto_moderation_rules.rule_type.#{rule.name}", default: rule.name.to_s.humanize)
-            [name, rule.name]
+            [name, rule.name.to_s]
           end
         end
 

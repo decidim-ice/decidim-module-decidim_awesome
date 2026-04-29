@@ -14,7 +14,7 @@ en:
         objects: Objects
         rule: Rule
         rules:
-          description: description
+          description: Description
           name: Name
           supported_objects: Supported objects
       auto_moderation_target:
