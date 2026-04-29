@@ -15,7 +15,7 @@ describe "Votes by proposal status" do
   let!(:not_answered_proposal) { create(:proposal, component:) }
 
   let(:user) { create(:user, :confirmed, organization:) }
-  let(:not_allowed_text) { "Not accepted for voting" }
+  let(:not_allowed_text) { "Voting unavailable" }
   let(:vote_button_text) { "Vote" }
 
   before do

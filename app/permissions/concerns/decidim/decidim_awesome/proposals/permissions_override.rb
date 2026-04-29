@@ -29,13 +29,17 @@ module Decidim
           def awesome_status_filter_active?
             return @awesome_status_filter_active if defined?(@awesome_status_filter_active)
 
-            @awesome_status_filter_active = Decidim::DecidimAwesome::Proposals::VotesByProposalStatus.active?(current_settings)
+            @awesome_status_filter_active = awesome_votes_by_proposal_status.active?
           end
 
           def awesome_proposal_status_allowed?
             return @awesome_proposal_status_allowed if defined?(@awesome_proposal_status_allowed)
 
-            @awesome_proposal_status_allowed = Decidim::DecidimAwesome::Proposals::VotesByProposalStatus.allowed?(proposal, current_settings)
+            @awesome_proposal_status_allowed = awesome_votes_by_proposal_status.allowed?(proposal)
+          end
+
+          def awesome_votes_by_proposal_status
+            @awesome_votes_by_proposal_status ||= Decidim::DecidimAwesome::Proposals::VotesByProposalStatus.new(current_settings)
           end
         end
       end

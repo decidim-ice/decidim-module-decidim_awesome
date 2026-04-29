@@ -6,6 +6,8 @@ module Decidim
   module DecidimAwesome
     module Proposals
       describe VotesByProposalStatus do
+        subject { described_class.new(settings) }
+
         let(:organization) { create(:organization) }
         let(:participatory_process) { create(:participatory_process, :with_steps, organization:) }
         let(:component) { create(:proposal_component, participatory_space: participatory_process) }
@@ -16,95 +18,87 @@ module Decidim
         let(:settings_class) { Struct.new(:awesome_votes_enabled_by_status, :awesome_votes_enabled_states) }
         let(:settings) { settings_class.new(true, [accepted_state.id.to_s]) }
 
-        describe ".active?" do
-          subject { described_class.active?(settings) }
-
+        describe "#active?" do
           context "when the global feature flag is disabled" do
             before { allow(Decidim::DecidimAwesome).to receive(:enabled?).with(:votes_by_proposal_status).and_return(false) }
 
-            it { is_expected.to be(false) }
+            it { is_expected.not_to be_active }
           end
 
           context "when the per-step checkbox is off" do
             let(:settings) { settings_class.new(false, [accepted_state.id.to_s]) }
 
-            it { is_expected.to be(false) }
+            it { is_expected.not_to be_active }
           end
 
           context "when no states are selected" do
             let(:settings) { settings_class.new(true, []) }
 
-            it { is_expected.to be(false) }
+            it { is_expected.not_to be_active }
           end
 
           context "when only blank states are selected" do
             let(:settings) { settings_class.new(true, ["", nil]) }
 
-            it { is_expected.to be(false) }
+            it { is_expected.not_to be_active }
           end
 
           context "when the checkbox is on and at least one state is selected" do
-            it { is_expected.to be(true) }
+            it { is_expected.to be_active }
           end
 
           context "when the settings object does not respond to the awesome attributes" do
             let(:settings) { Object.new }
 
-            it { is_expected.to be(false) }
+            it { is_expected.not_to be_active }
           end
         end
 
-        describe ".allowed?" do
-          subject { described_class.allowed?(proposal, settings) }
-
+        describe "#allowed?" do
           context "when the proposal status is in the allowed list" do
-            it { is_expected.to be(true) }
+            it { expect(subject.allowed?(proposal)).to be(true) }
           end
 
           context "when the proposal status is not in the allowed list" do
             let(:settings) { settings_class.new(true, [rejected_state.id.to_s]) }
 
-            it { is_expected.to be(false) }
+            it { expect(subject.allowed?(proposal)).to be(false) }
           end
 
           context "when the proposal has no assigned status" do
             let(:proposal) { create(:proposal, component:) }
 
-            it { is_expected.to be(false) }
+            it { expect(subject.allowed?(proposal)).to be(false) }
           end
 
           context "when the proposal is nil" do
-            let(:proposal) { nil }
-
-            it { is_expected.to be(false) }
+            it { expect(subject.allowed?(nil)).to be(false) }
           end
 
           context "when the allowed list mixes blank entries and valid ids" do
             let(:settings) { settings_class.new(true, ["", accepted_state.id.to_s]) }
 
-            it { is_expected.to be(true) }
+            it { expect(subject.allowed?(proposal)).to be(true) }
           end
         end
 
-        describe ".allowed_state_ids" do
-          subject { described_class.allowed_state_ids(settings) }
-
+        describe "#allowed_state_ids" do
           context "with string ids" do
             let(:settings) { settings_class.new(true, %w(1 2 3)) }
 
-            it { is_expected.to eq([1, 2, 3]) }
+            it { expect(subject.allowed_state_ids).to eq([1, 2, 3]) }
           end
 
           context "with blank entries" do
             let(:settings) { settings_class.new(true, ["", " ", "5", nil]) }
 
-            it { is_expected.to eq([5]) }
+            it { expect(subject.allowed_state_ids).to eq([5]) }
           end
 
           context "when the attribute is missing" do
             let(:settings) { Object.new }
 
-            it { is_expected.to eq([]) }
+            it { expect(subject.allowed_state_ids).to eq([]) }
           end
         end
       end

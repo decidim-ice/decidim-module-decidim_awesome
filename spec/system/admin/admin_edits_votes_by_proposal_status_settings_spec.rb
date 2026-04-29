@@ -19,7 +19,7 @@ describe "Admin edits votes by proposal status settings", :slow do
   context "when votes are not enabled on the step" do
     it "hides the status filter checkbox" do
       within "fieldset.step-settings-#{participatory_process.active_step.id}" do
-        expect(page).to have_no_content("Votes enabled by status")
+        expect(page).to have_no_content("Restrict voting by proposal status")
         expect(page).to have_no_content("Allowed statuses for votes")
       end
     end
@@ -34,7 +34,7 @@ describe "Admin edits votes by proposal status settings", :slow do
 
     it "shows the status filter checkbox unchecked by default" do
       within "fieldset.step-settings-#{participatory_process.active_step.id}" do
-        expect(page).to have_field("Votes enabled by status", checked: false)
+        expect(page).to have_field("Restrict voting by proposal status", checked: false)
       end
     end
 
@@ -42,7 +42,7 @@ describe "Admin edits votes by proposal status settings", :slow do
       within "fieldset.step-settings-#{participatory_process.active_step.id}" do
         expect(page).to have_no_content("Allowed statuses for votes")
 
-        check "Votes enabled by status"
+        check "Restrict voting by proposal status"
 
         expect(page).to have_content("Allowed statuses for votes")
       end
@@ -50,7 +50,7 @@ describe "Admin edits votes by proposal status settings", :slow do
 
     it "lists all component statuses as choices when the multiselect is shown" do
       within "fieldset.step-settings-#{participatory_process.active_step.id}" do
-        check "Votes enabled by status"
+        check "Restrict voting by proposal status"
 
         expect(page).to have_select("Allowed statuses for votes", with_options: %w(Accepted Evaluating))
       end
@@ -61,7 +61,7 @@ describe "Admin edits votes by proposal status settings", :slow do
     before do
       within "fieldset.step-settings-#{participatory_process.active_step.id}" do
         check "Votes enabled"
-        check "Votes enabled by status"
+        check "Restrict voting by proposal status"
         select "Accepted", from: "Allowed statuses for votes"
       end
       click_on "Update"

@@ -122,10 +122,10 @@ module Decidim
     end
 
     # Restricts votes to proposals in admin-selected states.
-    # :enabled = feature available per step (default). :disabled = hide entirely.
+    # true = feature available per step (default). :disabled = hide entirely.
     # Per-step checkbox is always off by default (depends on `votes_enabled`).
     config_accessor :votes_by_proposal_status do
-      :enabled
+      true
     end
 
     # Allows admins to limit the amount of pending amendments to (currently) one per proposal before it's accepted.

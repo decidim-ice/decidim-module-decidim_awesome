@@ -18,7 +18,7 @@ describe "Votes by proposal status with voting cards" do
   let!(:rejected_proposal) { create(:proposal, component:, state: "rejected") }
 
   let(:user) { create(:user, :confirmed, organization:) }
-  let(:not_allowed_text) { "Not accepted for voting" }
+  let(:not_allowed_text) { "Voting unavailable" }
 
   let(:step_settings) do
     {
