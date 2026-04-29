@@ -173,6 +173,9 @@ de:
             voting_cards_show_abstain: Enthaltungsmöglichkeit hinzufügen
             voting_cards_show_modal_help: Zeige die Hilfe/Anleitung zum Unterstützen an, wenn "Hilfe" angewählt wird
           step:
+            awesome_votes_enabled_by_status: Abstimmung nach Vorschlagsstatus einschränken
+            awesome_votes_enabled_by_status_help: Wenn diese Option aktiviert ist, ist die Abstimmung nur für Vorschläge mit den ausgewählten Status erlaubt. Vorschläge in anderen Status akzeptieren keine Stimmen. Leer lassen, um die Abstimmung für alle Vorschläge unabhängig vom Status zu erlauben.
+            awesome_votes_enabled_states: Erlaubte Status für Abstimmungen
             default_sort_order_options:
               az: A-Z (alphabetisch)
               supported_first: Zuerst unterstützt
@@ -1050,6 +1053,9 @@ de:
             view_meeting: Sitzung ansehen
             view_proposal: Vorschlag ansehen
       proposal_private_custom_fields_disclosure: Diese Informationen werden nicht veröffentlicht
+      proposals:
+        votes:
+          blocked_by_status: Abstimmung nicht verfügbar
       required_authorizations:
         index:
           authorization_options_invalid: Obwohl Sie diese Genehmigung besitzen, sind die zur Überprüfung verwendeten Daten in diesem Zusammenhang leider nicht gültig.

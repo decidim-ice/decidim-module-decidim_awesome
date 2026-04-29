@@ -196,6 +196,12 @@ en:
             voting_cards_show_modal_help: Show instructions/help modal when support
               is clicked
           step:
+            awesome_votes_enabled_by_status: Restrict voting by proposal status
+            awesome_votes_enabled_by_status_help: When enabled, voting is only allowed
+              on proposals with the selected statuses. Proposals in other statuses
+              will not accept votes. Leave empty to allow voting on all proposals
+              regardless of status.
+            awesome_votes_enabled_states: Allowed statuses for votes
             default_sort_order_options:
               az: A-Z (Alphabetical)
               supported_first: Supported first
@@ -1237,6 +1243,9 @@ en:
             view_meeting: View meeting
             view_proposal: View proposal
       proposal_private_custom_fields_disclosure: This information won't be published
+      proposals:
+        votes:
+          blocked_by_status: Voting unavailable
       required_authorizations:
         index:
           authorization_options_invalid: Unfortunately, although you have this authorization,
