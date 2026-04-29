@@ -408,8 +408,8 @@ module Decidim
           Decidim::DecidimAwesome.moderation_actions_registry.register(:moderate_and_hide) do |action|
             action.form_class = "Decidim::DecidimAwesome::Admin::ModerateAndHideActionForm"
             action.handler_class = "Decidim::DecidimAwesome::ModerationActions::ModerateAndHide"
-            action.name_key = "decidim.decidim_awesome.auto_moderation_actions.moderate_and_hide.name"
-            action.description_key = "decidim.decidim_awesome.auto_moderation_actions.moderate_and_hide.description"
+            action.name_key = "decidim.decidim_awesome.admin.auto_moderation_targets.actions.moderate_and_hide.name"
+            action.description_key = "decidim.decidim_awesome.admin.auto_moderation_targets.actions.moderate_and_hide.description"
             action.supported_object_types = [:proposals, :comments]
           end
         end

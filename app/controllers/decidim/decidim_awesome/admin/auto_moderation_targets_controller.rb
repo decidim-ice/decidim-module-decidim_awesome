@@ -100,7 +100,11 @@ module Decidim
           end
         end
 
-        helper_method :object_type_options, :action_type_options
+        def actions_manifests
+          Decidim::DecidimAwesome.moderation_actions_registry.manifests
+        end
+
+        helper_method :object_type_options, :action_type_options, :actions_manifests
       end
     end
   end

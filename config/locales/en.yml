@@ -21,6 +21,10 @@ en:
         action_type: Action
         action_type_options:
           moderate_and_hide: Moderate and Hide
+        actions:
+          description: Description
+          name: Name
+          supported_objects: Supported_objects
         object_type: Object
         object_type_options:
           comment: Comment
@@ -358,6 +362,16 @@ en:
             error: Error updating moderation rule! %{error}
             success: Moderation rule successfully updated
         auto_moderation_targets:
+          actions:
+            moderate_and_hide:
+              description: This action will create a report to the matched content
+                and will hide it.
+              name: Moderate and Hide
+              supported_object_types:
+                comments: Comments
+                proposals: Proposals
+          actions_info:
+            title: Types of actions
           create:
             error: Error creating moderation target! %{error}
             success: Moderation target created successfully
