@@ -54,7 +54,6 @@ pt-BR:
         background_image_4: Imagem de fundo
       cookie_category:
         mandatory: Obrigatoria
-        slug: ID
         title: Categoria
         total_cookies: Total de cookies
         visibility: Visibilidade
@@ -64,7 +63,6 @@ pt-BR:
         service: Servico
         type: Tipo
         types:
-          cookie: Cookie
           local_storage: Armazenamento local
       custom_redirect:
         active: Ativo
@@ -173,6 +171,9 @@ pt-BR:
             voting_cards_show_abstain: Adicionar opcao de abstencao
             voting_cards_show_modal_help: Mostrar modal de instrucoes/ajuda quando o apoio for clicado
           step:
+            awesome_votes_enabled_by_status: Restringir votacao por estado da proposta
+            awesome_votes_enabled_by_status_help: Quando ativado, a votacao e permitida apenas em propostas com os estados selecionados. Propostas em outros estados nao aceitam votos. Deixe vazio para permitir votacao em todas as propostas, independentemente do estado.
+            awesome_votes_enabled_states: Estados permitidos para votacao
             default_sort_order_options:
               az: A-Z (Alfabetico)
               supported_first: Apoiadas primeiro
@@ -191,14 +192,9 @@ pt-BR:
           created_at: Funcao criada em
           currently_active: Atualmente ativo
           deleted_user: Usuario excluido
-          email: Email
           exports:
             button: Exportar esta busca
             export_as: Exportar como %{export_format}
-            export_format:
-              csv: CSV
-              json: JSON
-              xlsx: XLSX
             notice: O trabalho de exportacao foi colocado na fila. Voce recebera um email quando estiver pronto.
           index:
             description: Aqui voce encontrara todos os usuarios que tiveram alguma funcao na administracao de um espaco participativo. Administradores normais nao sao listados.
@@ -611,48 +607,21 @@ pt-BR:
 
                 Categoria recomendada: Preferencias
             labels:
-              cloudflare_turnstile:
-                one: Cloudflare Turnstile (%{count} cookie)
-                other: Cloudflare Turnstile (%{count} cookies)
               decidim_essential:
                 one: Decidim Essencial (%{count} cookie)
                 other: Decidim Essencial (%{count} cookies)
               emoji_picker:
                 one: Seletor de emojis (%{count} cookie)
                 other: Seletor de emojis (%{count} cookies)
-              facebook_pixel:
-                one: Facebook Pixel (%{count} cookie)
-                other: Facebook Pixel (%{count} cookies)
-              google_analytics:
-                one: Google Analytics (%{count} cookie)
-                other: Google Analytics (%{count} cookies)
               google_maps_embeds:
                 one: Google Maps incorporado (%{count} cookie)
                 other: Google Maps incorporado (%{count} cookies)
-              google_tag_manager:
-                one: Google Tag Manager (%{count} cookie)
-                other: Google Tag Manager (%{count} cookies)
               graphiql:
                 one: Explorador da API GraphiQL (%{count} cookie)
                 other: Explorador da API GraphiQL (%{count} cookies)
-              hcaptcha:
-                one: hCaptcha (%{count} cookie)
-                other: hCaptcha (%{count} cookies)
-              jitsi_meet:
-                one: Jitsi Meet (%{count} cookie)
-                other: Jitsi Meet (%{count} cookies)
-              linkedin_insight:
-                one: LinkedIn Insight (%{count} cookie)
-                other: LinkedIn Insight (%{count} cookies)
-              matomo:
-                one: Matomo (%{count} cookie)
-                other: Matomo (%{count} cookies)
               openstreetmap_tiles:
                 one: OpenStreetMap (%{count} cookie)
                 other: OpenStreetMap (%{count} cookies)
-              recaptcha:
-                one: reCAPTCHA (%{count} cookie)
-                other: reCAPTCHA (%{count} cookies)
               vimeo_embeds:
                 one: Vimeo incorporado (%{count} cookie)
                 other: Vimeo incorporado (%{count} cookies)
@@ -663,22 +632,9 @@ pt-BR:
                 one: YouTube (privacidade aprimorada) (%{count} cookie)
                 other: YouTube (privacidade aprimorada) (%{count} cookies)
             services:
-              cloudflare_turnstile: Cloudflare Turnstile
               decidim_essential: Este site
               emoji_picker: Este site
-              facebook_pixel: Meta (Facebook)
-              google_analytics: Google Analytics
-              google_maps_embeds: Google Maps
-              google_tag_manager: Google Tag Manager
               graphiql: Este site
-              hcaptcha: hCaptcha
-              jitsi_meet: Jitsi Meet
-              linkedin_insight: LinkedIn
-              matomo: Matomo
-              openstreetmap_tiles: OpenStreetMap
-              recaptcha: Google reCAPTCHA
-              vimeo_embeds: Vimeo
-              youtube_embeds: YouTube
               youtube_nocookie: YouTube (modo de privacidade aprimorada)
           create:
             error: Erro ao criar o item de cookie! %{error}
@@ -755,7 +711,6 @@ pt-BR:
             ip_addresses: Ver enderecos IP
             stamps: Ver selos Hashcash
           index:
-            bits: Bits
             created_at: Criado em
             help_html: |
               Esta pagina mostra os selos Hashcash detectados no sistema. Hashcash e um sistema de prova de trabalho que exige que os usuarios resolvam um quebra-cabeca computacional (realizado automaticamente pelo navegador) antes de poderem se cadastrar.
@@ -929,7 +884,6 @@ pt-BR:
           results_count:
             one: "%{count} processo encontrado"
             other: "%{count} processos encontrados"
-          status_label: 'Status:'
           title: Titulo do bloco
           upcoming: Proximos
         awesome_processes:
@@ -958,7 +912,6 @@ pt-BR:
           selection_criteria: Criterios de selecao
           selection_criteria_options:
             automatic: Automatico
-            manual: Manual
           title: Titulo do bloco
         landing_menu:
           alignment: Posicao do menu
@@ -984,7 +937,6 @@ pt-BR:
             actions: Acoes
             hidden: Oculto
             name: Nome
-            url: URL
             visible: Visivel
           title: Ir para ...
         map:
@@ -1057,6 +1009,9 @@ pt-BR:
             view_meeting: Ver reuniao
             view_proposal: Ver proposta
       proposal_private_custom_fields_disclosure: Esta informacao nao sera publicada
+      proposals:
+        votes:
+          blocked_by_status: Votacao indisponivel
       required_authorizations:
         index:
           authorization_options_invalid: Infelizmente, embora voce tenha esta autorizacao, os dados usados para verifica-lo nao sao validos neste contexto.
@@ -1097,7 +1052,6 @@ pt-BR:
           voting_for: Meu voto em "%{proposal}" e "%{type}"
           weights:
             weight_0: Abstencao
-            weight_0_short: 'A:'
             weight_1: Vermelho
             weight_1_short: 'V:'
             weight_2: Amarelo
