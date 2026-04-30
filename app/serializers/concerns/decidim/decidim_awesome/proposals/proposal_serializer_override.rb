@@ -34,13 +34,17 @@ module Decidim
 
           protected
 
+          # Override the standard `:votes` column with the weighted breakdown
+          # whenever the component currently uses a weighted manifest, OR
+          # weighted votes already exist (e.g. left over from a previous
+          # configuration). When neither is true, return an empty payload so
+          # Decidim core's integer vote count is left in place.
           def proposal_vote_weights
-            payload = {}
-            if proposal.respond_to?(:vote_weights)
-              proposal.update_vote_weights!
-              payload[:votes] = proposal.reload.vote_weights
-            end
-            payload
+            proposal.update_vote_weights!
+            weights = proposal.reload.vote_weights
+            return {} if weights.blank? && !awesome_voting_manifest_for(proposal.component)&.weighted?
+
+            { votes: weights }
           end
         end
       end
