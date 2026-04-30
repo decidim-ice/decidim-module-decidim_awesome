@@ -14,7 +14,7 @@ module Decidim
           return false unless object.respond_to?(:body)
 
           @options.any? do |word|
-            return true if object.body.values.include?(word)
+            return true if object.body.values.any? { |v| v.include?(word) }
           end
 
           false
