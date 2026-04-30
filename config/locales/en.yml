@@ -21,11 +21,11 @@ en:
         action_type: Action
         action_type_options:
           moderate_and_hide: Moderate and Hide
-        hits: Hits
         actions:
           description: Description
           name: Name
           supported_objects: Supported_objects
+        hits: Hits
         object_type: Object
         object_type_options:
           comment: Comment
