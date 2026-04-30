@@ -65,11 +65,25 @@ module Decidim::Proposals
         expect(serialized).to include(votes: labeled_weights)
       end
 
-      context "when no manifest" do
+      context "when the component does not use a weighted voting manifest" do
         let(:manifest) { nil }
 
-        it "serializes the weights" do
+        it "still serializes weighted vote data that exists in the component" do
           expect(serialized).to include(votes: { "0" => 1, "1" => 0, "2" => 0, "3" => 2, "4" => 0, "5" => 0 })
+        end
+
+        context "and no weighted votes exist in the component" do
+          let!(:votes) do
+            3.times do
+              create(:proposal_vote, proposal:, author: create(:user, organization: proposal.organization))
+            end
+          end
+          let!(:another_extra_fields) { nil }
+
+          it "preserves Decidim core's integer vote count and does not overwrite it" do
+            expect(serialized[:votes]).to eq(proposal.reload.proposal_votes_count)
+            expect(serialized[:votes]).to be_a(Integer)
+          end
         end
       end
 

@@ -22,6 +22,17 @@ module Decidim::DecidimAwesome
       expect(subject).to be_valid_weight(-1.5)
     end
 
+    describe "#weighted?" do
+      it "is false when no validator has been registered" do
+        expect(subject.weighted?).to be false
+      end
+
+      it "is true once a validator block is registered" do
+        subject.weight_validator { |weight, _ctx| weight.in?([1, 2, 3]) }
+        expect(subject.weighted?).to be true
+      end
+    end
+
     it "returns automatic labels" do
       expect(subject.label_for(0)).to eq("weight_0")
       expect(subject.label_for(1)).to eq("weight_1")
