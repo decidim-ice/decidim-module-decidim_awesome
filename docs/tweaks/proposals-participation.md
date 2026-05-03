@@ -245,3 +245,32 @@ end
 - **Compatibility:** Works with all proposal types and voting models
 
 ![Limiting amendments](../../examples/limit_amendments.png)
+
+### 2.6 Votes by proposal status
+
+Restricts proposal voting to proposals whose state is in an admin-selected list.
+
+#### Admin description
+
+Allows admins to restrict supports to a selected subset of proposal states (for example, only "Accepted" or "Evaluating"). This configuration is available per step configuration in participatory processes.
+Note: proposals outside the allowed states display a "Voting unavailable" message, with no "disabled" button for voting.
+
+#### Technical area
+
+- **Configuration:** Via initializer (affects whether the setting is visible in admin)
+
+```ruby
+# config/initializers/awesome_defaults.rb
+Decidim::DecidimAwesome.configure do |config|
+  # :disabled = completely removed, hidden from admins
+  config.votes_by_proposal_status = true  # default: true
+end
+```
+
+- **Admin visibility:** Enabled (admins see the checkbox and statuses multiselect under the step settings, shown only when "Votes enabled" is on)
+- **Default behavior:** Disabled per step by default; admins must enable it and select at least one state to activate the filter
+- **Admin control:** Yes; admins toggle the filter and pick allowed states per component step
+- **Compatibility:** Standard `votes_enabled` / `votes_blocked` flags keep precedence; this filter only narrows what is votable
+
+![Votes by proposal status admin](../../examples/votes_by_proposal_status-admin.png)
+![Votes by proposal status](../../examples/votes_by_proposal_status.png)

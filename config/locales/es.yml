@@ -173,6 +173,9 @@ es:
             voting_cards_show_abstain: Añadir una opción de abstención
             voting_cards_show_modal_help: Mostrar instrucciones/ayuda modal cuando se haga clic en el soporte
           step:
+            awesome_votes_enabled_by_status: Restringir la votación por estado de la propuesta
+            awesome_votes_enabled_by_status_help: Cuando está habilitado, la votación solo está permitida en propuestas con los estados seleccionados. Las propuestas en otros estados no aceptarán votos. Déjelo vacío para permitir votar en todas las propuestas, independientemente del estado.
+            awesome_votes_enabled_states: Estados permitidos para votar
             default_sort_order_options:
               az: A-Z (Alfabético)
               supported_first: Mis soportes primero
@@ -1057,6 +1060,9 @@ es:
             view_meeting: Ver encuentro
             view_proposal: Ver propuesta
       proposal_private_custom_fields_disclosure: Esta información no será publicada
+      proposals:
+        votes:
+          blocked_by_status: Votación no disponible
       required_authorizations:
         index:
           authorization_options_invalid: Desafortunadamente, aunque tiene esta autorización, los datos utilizados para verificarte que no son válidos en este contexto.

@@ -106,7 +106,11 @@ module Decidim
           Decidim::Proposals::ProposalType.include(Decidim::DecidimAwesome::AddProposalTypeVoteWeights)
           Decidim::Proposals::ProposalLCell.include(Decidim::DecidimAwesome::ProposalLCellOverride)
           Decidim::Proposals::ProposalGCell.include(Decidim::DecidimAwesome::ProposalGCellOverride)
+          Decidim::DecidimAwesome::Voting::VotingCardsProposalVoteCell.prepend(Decidim::DecidimAwesome::Voting::VotingCardsProposalVoteCellOverride)
         end
+
+        Decidim::Proposals::ProposalVoteCell.include(Decidim::DecidimAwesome::Proposals::ProposalVoteCellOverride) if DecidimAwesome.enabled?(:votes_by_proposal_status)
+
         Decidim::DataConsentCell.prepend(Decidim::DecidimAwesome::DataConsentCellOverride) if DecidimAwesome.enabled?(:cookie_management)
 
         # override user's admin property
@@ -163,6 +167,11 @@ module Decidim
           Decidim::AmendmentsController.include(Decidim::DecidimAwesome::LimitPendingAmendments) if DecidimAwesome.enabled?(:allow_limiting_amendments)
 
           Decidim::Proposals::ProposalsController.include(Decidim::DecidimAwesome::Proposals::OrderableOverride) if DecidimAwesome.enabled?(:additional_proposal_sortings)
+
+          if DecidimAwesome.enabled?(:votes_by_proposal_status)
+            Decidim::Admin::SettingsHelper.include(Decidim::DecidimAwesome::Admin::SettingsHelperOverride)
+            Decidim::Proposals::Permissions.include(Decidim::DecidimAwesome::Proposals::PermissionsOverride)
+          end
         end
       end
 
@@ -191,13 +200,37 @@ module Decidim
             end
           end
 
-          if DecidimAwesome.enabled?(:additional_proposal_sortings)
-            component.settings(:step) do |settings|
+          component.settings(:step) do |settings|
+            if DecidimAwesome.enabled?(:additional_proposal_sortings)
               settings.attribute(
                 :default_sort_order,
                 type: :select,
                 include_blank: true,
                 choices: ->(_context) { (POSSIBLE_SORT_ORDERS + DecidimAwesome.possible_additional_proposal_sortings).uniq }
+              )
+            end
+
+            if DecidimAwesome.enabled?(:votes_by_proposal_status)
+              DecidimAwesome.hash_append!(
+                settings.attributes,
+                :votes_enabled,
+                :awesome_votes_enabled_by_status,
+                Decidim::SettingsManifest::Attribute.new(type: :boolean, default: false)
+              )
+              DecidimAwesome.hash_append!(
+                settings.attributes,
+                :awesome_votes_enabled_by_status,
+                :awesome_votes_enabled_states,
+                Decidim::SettingsManifest::Attribute.new(
+                  type: :array,
+                  default: [],
+                  choices: lambda { |context|
+                    component = context && context[:component]
+                    next [] unless component
+
+                    Decidim::Proposals::ProposalState.where(component:).map { |state| [state.translated_attribute(state.title), state.id.to_s] }
+                  }
+                )
               )
             end
           end

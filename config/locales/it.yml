@@ -92,6 +92,11 @@ it:
               cannot_change_default_item_name: Il nome di un elemento predefinito non può essere modificato
               invalid_format: Il nome può contenere solo lettere, numeri, underscore (_) e trattini (-), senza spazi o caratteri speciali
   decidim:
+    blogs:
+      models:
+        post:
+          fields:
+            official_blog_post: Post del blog ufficiale
     admin:
       actions:
         manage: Gestisci
@@ -173,11 +178,18 @@ it:
             voting_cards_show_abstain: Aggiungi un'opzione di astensione
             voting_cards_show_modal_help: Mostra le istruzioni/modalità di aiuto quando si fa clic sul supporto
           step:
+            awesome_votes_enabled_by_status: Limita il voto in base allo stato della proposta
+            awesome_votes_enabled_by_status_help: Quando è abilitato, il voto è consentito solo per le proposte con gli stati selezionati. Le proposte con altri stati non accetteranno voti. Lascia vuoto per consentire il voto su tutte le proposte, indipendentemente dallo stato.
+            awesome_votes_enabled_states: Stati consentiti per il voto
             default_sort_order_options:
               az: A-Z (alfabetico)
               supported_first: Prima i sostegni
               supported_last: Sostegni al fondo
               za: Z-A (Alfabetico inverso)
+    editor_images:
+      create:
+        error: Impossibile caricare l'immagine.
+        success: Immagine caricata con successo.
     decidim_awesome:
       account:
         timezone_select:
@@ -1057,6 +1069,9 @@ it:
             view_meeting: Visualizza meeting
             view_proposal: Visualizza proposta
       proposal_private_custom_fields_disclosure: Questa informazione non sarà pubblicata
+      proposals:
+        votes:
+          blocked_by_status: Votazione non disponibile
       required_authorizations:
         index:
           authorization_options_invalid: Purtroppo, anche se hai questa autorizzazione, i dati utilizzati per verificarti non sono validi in questo contesto.
@@ -1112,10 +1127,15 @@ it:
       meetings_map:
         view_meeting: Visualizza meeting
     proposals:
+      proposal_votes:
+        create:
+          error: Si è verificato un errore durante la registrazione del voto.
       admin:
         exports:
           awesome_private_proposals: Proposte con dati privati
       proposals:
+        vote_button:
+          votes_blocked: Votazione non disponibile
         orders:
           az: A-Z (alfabetico)
           supported_first: Prima i sostegni
@@ -1128,6 +1148,9 @@ it:
       data_consent:
         details:
           columns:
+            description: Descrizione
+            name: Nome
+            service: Servizio
             expiration: Scadenza
           items:
             _session_id:
@@ -1136,6 +1159,8 @@ it:
               expiration: 1 anno
             pwaInstallPromptSeen:
               expiration: persistente
+        modal:
+          toggle: Mostra o nascondi i dettagli per %{consent_category}
       decidim_awesome:
         admin:
           maintenance:

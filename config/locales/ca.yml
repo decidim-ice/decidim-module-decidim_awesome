@@ -173,6 +173,9 @@ ca:
             voting_cards_show_abstain: Afegeix l'opció d'abstenció
             voting_cards_show_modal_help: Mostra la finestra modal d'instruccions/ajuda quan es faci clic al suport
           step:
+            awesome_votes_enabled_by_status: Restringeix la votació per estat de la proposta
+            awesome_votes_enabled_by_status_help: Quan està activat, la votació només es permet a les propostes amb els estats seleccionats. Les propostes en altres estats no acceptaran vots. Deixeu-ho buit per permetre la votació a totes les propostes, independentment de l'estat.
+            awesome_votes_enabled_states: Estats permesos per als vots
             default_sort_order_options:
               az: A-Z (Alfabètic)
               supported_first: Votades per mi primer
@@ -1054,6 +1057,9 @@ ca:
             view_meeting: Veure trobada
             view_proposal: Veure proposta
       proposal_private_custom_fields_disclosure: Aquesta informació no es publicarà
+      proposals:
+        votes:
+          blocked_by_status: Votació no disponible
       required_authorizations:
         index:
           authorization_options_invalid: Malauradament, tot i que teniu aquesta autorització, les dades utilitzades per verificar-vos no són vàlides en aquest context.

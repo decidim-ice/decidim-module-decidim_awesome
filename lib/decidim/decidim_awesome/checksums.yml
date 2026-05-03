@@ -1,6 +1,9 @@
 decidim-admin:
   /app/views/layouts/decidim/admin/_header.html.erb:
     decidim-0.31.0: 6e5893f735d2097f0e55e8b6666cb201
+  /app/helpers/decidim/admin/settings_helper.rb:
+    decidim-0.31.0: 0e10ec8e7e768e269d774584e381c9cd
+    decidim-0.31.3: 8d47ee0c364ab5c531c9aa01a200ac68
 decidim-assemblies:
   /app/views/decidim/assemblies/admin/assemblies/_form.html.erb:
     decidim-0.31.0: cc06bd20baa7f130e34d04a3c925e2f7
@@ -87,6 +90,10 @@ decidim-proposals:
     decidim-0.31.0: c878184c8c88ee24c5fece2dcffa483c
   /app/cells/decidim/proposals/proposal_vote_cell.rb:
     decidim-0.31.0: 6ba332640d22d433d39a96c422153435
+  /app/cells/decidim/proposals/proposal_vote/show.erb:
+    decidim-0.31.0: b8b19a77296da757ea0e827d6decd596
+  /app/permissions/decidim/proposals/permissions.rb:
+    decidim-0.31.0: a8b29ebc1ac11ac00f90b5848343b9b4
   /app/cells/decidim/proposals/proposal_metadata_cell.rb:
     decidim-0.31.0: f2034b32638869b49ad500abc9724edf
   /app/commands/decidim/proposals/create_proposal.rb:

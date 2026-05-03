@@ -173,11 +173,18 @@ pt:
             voting_cards_show_abstain: Adicionar opcao de abstencao
             voting_cards_show_modal_help: Mostrar modal de instrucoes/ajuda quando o apoio for clicado
           step:
+            awesome_votes_enabled_by_status: Restringir votacao por estado da proposta
+            awesome_votes_enabled_by_status_help: Quando ativado, a votacao e permitida apenas em propostas com os estados selecionados. Propostas em outros estados nao aceitam votos. Deixe vazio para permitir votacao em todas as propostas, independentemente do estado.
+            awesome_votes_enabled_states: Estados permitidos para votacao
             default_sort_order_options:
               az: A-Z (Alfabetico)
               supported_first: Apoiadas primeiro
               supported_last: Apoiadas por ultimo
               za: Z-A (Alfabetico inverso)
+    editor_images:
+      create:
+        error: Nao foi possivel carregar a imagem.
+        success: Imagem carregada com sucesso.
     decidim_awesome:
       account:
         timezone_select:
@@ -1057,6 +1064,9 @@ pt:
             view_meeting: Ver reuniao
             view_proposal: Ver proposta
       proposal_private_custom_fields_disclosure: Esta informacao nao sera publicada
+      proposals:
+        votes:
+          blocked_by_status: Votacao indisponivel
       required_authorizations:
         index:
           authorization_options_invalid: Infelizmente, embora voce tenha esta autorizacao, os dados usados para verifica-lo nao sao validos neste contexto.
@@ -1112,10 +1122,17 @@ pt:
       meetings_map:
         view_meeting: Ver reuniao
     proposals:
+      proposal_votes:
+        create:
+          error: Ocorreu um erro ao registar o voto.
       admin:
         exports:
           awesome_private_proposals: Propostas com dados privados
       proposals:
+        vote_button:
+          maximum_votes_reached: Limite maximo de votos atingido
+          no_votes_remaining: Nao ha votos restantes
+          votes_blocked: Votacao indisponivel
         orders:
           az: A-Z (Alfabetico)
           supported_first: Apoiadas primeiro
@@ -1128,6 +1145,9 @@ pt:
       data_consent:
         details:
           columns:
+            description: Descricao
+            name: Nome
+            service: Servico
             expiration: Expiracao
           items:
             _session_id:
@@ -1136,6 +1156,8 @@ pt:
               expiration: 1 ano
             pwaInstallPromptSeen:
               expiration: persistente
+        modal:
+          toggle: Mostrar ou ocultar detalhes para %{consent_category}
       decidim_awesome:
         admin:
           maintenance:
