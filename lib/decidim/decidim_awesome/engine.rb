@@ -228,7 +228,7 @@ module Decidim
                     component = context && context[:component]
                     next [] unless component
 
-                    Decidim::Proposals::ProposalState.where(component:).map { |state| [state.translated_attribute(state.title), state.id.to_s] }
+                    Decidim::DecidimAwesome::Proposals::VotesByProposalStatus.choices_for(component)
                   }
                 )
               )

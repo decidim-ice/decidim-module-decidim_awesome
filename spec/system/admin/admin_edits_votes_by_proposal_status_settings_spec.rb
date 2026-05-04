@@ -7,8 +7,6 @@ describe "Admin edits votes by proposal status settings", :slow do
   let!(:admin) { create(:user, :admin, :confirmed, organization:) }
   let(:participatory_process) { create(:participatory_process, :with_steps, organization:) }
   let!(:component) { create(:proposal_component, participatory_space: participatory_process) }
-  let(:accepted_state) { Decidim::Proposals::ProposalState.find_by(component:, token: "accepted") }
-  let(:evaluating_state) { Decidim::Proposals::ProposalState.find_by(component:, token: "evaluating") }
 
   before do
     switch_to_host(organization.host)
@@ -48,11 +46,14 @@ describe "Admin edits votes by proposal status settings", :slow do
       end
     end
 
-    it "lists all component statuses as choices when the multiselect is shown" do
+    it "lists all component statuses plus 'Not answered' as choices when the multiselect is shown" do
       within "fieldset.step-settings-#{participatory_process.active_step.id}" do
         check "Restrict voting by proposal status"
 
-        expect(page).to have_select("Allowed statuses for votes", with_options: %w(Accepted Evaluating))
+        expect(page).to have_select(
+          "Allowed statuses for votes",
+          with_options: ["Not answered", "Accepted", "Evaluating", "Rejected"]
+        )
       end
     end
   end
@@ -67,11 +68,28 @@ describe "Admin edits votes by proposal status settings", :slow do
       click_on "Update"
     end
 
-    it "persists the chosen statuses" do
+    it "persists the chosen statuses as tokens" do
       expect(page).to have_admin_callout("successfully")
       step_id = participatory_process.active_step.id.to_s
       expect(component.reload.step_settings[step_id].awesome_votes_enabled_by_status).to be(true)
-      expect(component.step_settings[step_id].awesome_votes_enabled_states).to include(accepted_state.id.to_s)
+      expect(component.step_settings[step_id].awesome_votes_enabled_states).to include("accepted")
+    end
+  end
+
+  context "when saving 'Not answered' as the allowed status" do
+    before do
+      within "fieldset.step-settings-#{participatory_process.active_step.id}" do
+        check "Votes enabled"
+        check "Restrict voting by proposal status"
+        select "Not answered", from: "Allowed statuses for votes"
+      end
+      click_on "Update"
+    end
+
+    it "persists the not_answered token" do
+      expect(page).to have_admin_callout("successfully")
+      step_id = participatory_process.active_step.id.to_s
+      expect(component.reload.step_settings[step_id].awesome_votes_enabled_states).to include("not_answered")
     end
   end
 end
