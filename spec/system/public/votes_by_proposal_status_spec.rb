@@ -7,15 +7,13 @@ describe "Votes by proposal status" do
   let(:manifest_name) { "proposals" }
 
   let!(:component) { create(:proposal_component, participatory_space:) }
-  let(:accepted_state) { Decidim::Proposals::ProposalState.find_by(component:, token: "accepted") }
-  let(:rejected_state) { Decidim::Proposals::ProposalState.find_by(component:, token: "rejected") }
 
   let!(:accepted_proposal) { create(:proposal, component:, state: "accepted") }
   let!(:rejected_proposal) { create(:proposal, component:, state: "rejected") }
   let!(:not_answered_proposal) { create(:proposal, component:) }
 
   let(:user) { create(:user, :confirmed, organization:) }
-  let(:not_allowed_text) { "Voting unavailable" }
+  let(:not_allowed_text) { "Not accepted for voting" }
   let(:vote_button_text) { "Vote" }
 
   before do
@@ -70,7 +68,7 @@ describe "Votes by proposal status" do
         {
           votes_enabled: true,
           awesome_votes_enabled_by_status: true,
-          awesome_votes_enabled_states: [accepted_state.id.to_s]
+          awesome_votes_enabled_states: %w(accepted)
         }
       end
 
@@ -102,13 +100,69 @@ describe "Votes by proposal status" do
       end
     end
 
+    context "when only not_answered is allowed" do
+      let(:step_settings) do
+        {
+          votes_enabled: true,
+          awesome_votes_enabled_by_status: true,
+          awesome_votes_enabled_states: %w(not_answered)
+        }
+      end
+
+      it "lets the user vote on proposals without an assigned status" do
+        within vote_area_for(not_answered_proposal) do
+          expect(page).to have_button(vote_button_text)
+          expect(page).to have_no_content(not_allowed_text)
+        end
+      end
+
+      it "blocks proposals with an assigned status" do
+        within vote_area_for(accepted_proposal) do
+          expect(page).to have_content(not_allowed_text)
+          expect(page).to have_no_button(vote_button_text)
+        end
+        within vote_area_for(rejected_proposal) do
+          expect(page).to have_content(not_allowed_text)
+          expect(page).to have_no_button(vote_button_text)
+        end
+      end
+    end
+
+    context "when not_answered is mixed with a real status" do
+      let(:step_settings) do
+        {
+          votes_enabled: true,
+          awesome_votes_enabled_by_status: true,
+          awesome_votes_enabled_states: %w(accepted not_answered)
+        }
+      end
+
+      it "allows voting on both the accepted and the not-answered proposal" do
+        within vote_area_for(accepted_proposal) do
+          expect(page).to have_button(vote_button_text)
+          expect(page).to have_no_content(not_allowed_text)
+        end
+        within vote_area_for(not_answered_proposal) do
+          expect(page).to have_button(vote_button_text)
+          expect(page).to have_no_content(not_allowed_text)
+        end
+      end
+
+      it "still blocks proposals whose status is not in the list" do
+        within vote_area_for(rejected_proposal) do
+          expect(page).to have_content(not_allowed_text)
+          expect(page).to have_no_button(vote_button_text)
+        end
+      end
+    end
+
     context "when votes are blocked at the step level" do
       let(:step_settings) do
         {
           votes_enabled: true,
           votes_blocked: true,
           awesome_votes_enabled_by_status: true,
-          awesome_votes_enabled_states: [accepted_state.id.to_s]
+          awesome_votes_enabled_states: %w(accepted)
         }
       end
 

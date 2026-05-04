@@ -72,6 +72,37 @@ module Decidim
             html = helper.send(:render_field_form_method, :awesome_multiselect, form, attribute, :awesome_votes_enabled_states, "scope", { label: "Pick" })
             expect(html).to include('data-controller="awesome-votes-by-status"')
           end
+
+          context "with help text on awesome_votes_enabled_states" do
+            let(:options) { { label: "Pick", help_text: "Save first" } }
+
+            context "when the component is not persisted" do
+              before { helper.instance_variable_set(:@component, Decidim::Component.new) }
+
+              it "renders the help text" do
+                html = helper.send(:render_field_form_method, :awesome_multiselect, form, attribute, :awesome_votes_enabled_states, "scope", options)
+                expect(html).to include("Save first")
+              end
+            end
+
+            context "when the component is persisted" do
+              before { helper.instance_variable_set(:@component, instance_double(Decidim::Component, persisted?: true)) }
+
+              it "hides the help text" do
+                html = helper.send(:render_field_form_method, :awesome_multiselect, form, attribute, :awesome_votes_enabled_states, "scope", options)
+                expect(html).not_to include("Save first")
+              end
+            end
+          end
+
+          context "with help text on other attributes" do
+            before { helper.instance_variable_set(:@component, instance_double(Decidim::Component, persisted?: true)) }
+
+            it "always renders the help text regardless of component state" do
+              html = helper.send(:render_field_form_method, :awesome_multiselect, form, attribute, :picks, "scope", { label: "Pick", help_text: "Always shown" })
+              expect(html).to include("Always shown")
+            end
+          end
         end
 
         context "when the form method is anything else" do

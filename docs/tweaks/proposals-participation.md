@@ -252,8 +252,8 @@ Restricts proposal voting to proposals whose state is in an admin-selected list.
 
 #### Admin description
 
-Allows admins to restrict supports to a selected subset of proposal states (for example, only "Accepted" or "Evaluating"). This configuration is available per step configuration in participatory processes.
-Note: proposals outside the allowed states display a "Voting unavailable" message, with no "disabled" button for voting.
+Allows admins to restrict supports to a selected subset of proposal states (for example, only "Accepted" or "Evaluating"). The list also includes "Not answered" so admins can allow (or restrict) votes on proposals that have not received an admin answer yet. This configuration is available per step configuration in participatory processes.
+Note: proposals outside the allowed states display a "Not accepted for voting" message, with no "disabled" button for voting.
 
 #### Technical area
 

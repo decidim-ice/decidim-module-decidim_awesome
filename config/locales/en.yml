@@ -202,6 +202,8 @@ en:
               will not accept votes. Leave empty to allow voting on all proposals
               regardless of status.
             awesome_votes_enabled_states: Allowed statuses for votes
+            awesome_votes_enabled_states_help: Other statuses become available after
+              the component is saved.
             default_sort_order_options:
               az: A-Z (Alphabetical)
               supported_first: Supported first
@@ -1245,7 +1247,7 @@ en:
       proposal_private_custom_fields_disclosure: This information won't be published
       proposals:
         votes:
-          blocked_by_status: Voting unavailable
+          blocked_by_status: Not accepted for voting
       required_authorizations:
         index:
           authorization_options_invalid: Unfortunately, although you have this authorization,
