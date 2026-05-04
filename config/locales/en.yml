@@ -202,7 +202,7 @@ en:
               will not accept votes. Leave empty to allow voting on all proposals
               regardless of status.
             awesome_votes_enabled_states: Allowed statuses for votes
-            awesome_votes_enabled_states_help: Other statuses become available after
+            awesome_votes_enabled_states_help: Other statuses will become available after
               the component is saved.
             default_sort_order_options:
               az: A-Z (Alphabetical)
