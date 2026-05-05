@@ -15,8 +15,10 @@ module Decidim
             return false unless object.respond_to?(:body)
 
             @options.any? do |word|
-              object.body.values.any? { |v| v.mb_chars.downcase.to_s
-  .include?(word.mb_chars.downcase.to_s) }
+              object.body.values.any? do |v|
+                v.mb_chars.downcase.to_s
+                 .include?(word.mb_chars.downcase.to_s)
+              end
             end
           end
         end

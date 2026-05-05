@@ -20,6 +20,7 @@ module Decidim::DecidimAwesome
 
         context "when the wording is phrased" do
           let(:body) { { "en" => "is this a badword1?" } }
+
           it "matches the wording" do
             expect(subject.check(comment)).to be_truthy
           end
@@ -34,7 +35,7 @@ module Decidim::DecidimAwesome
         end
 
         context "when there are multiple words to filter" do
-          let(:options) { ["badword1", "badword2"]}
+          let(:options) { %w(badword1 badword2) }
           let(:body) { { "en" => "It has badword1 and not badword_2" } }
 
           it "detecs the word inside" do
@@ -43,7 +44,7 @@ module Decidim::DecidimAwesome
         end
 
         context "when the word has upper and lower case letters" do
-          let(:body) { { "en " => "it has BaDwoRd1 with upper and lower case letters"}}
+          let(:body) { { "en " => "it has BaDwoRd1 with upper and lower case letters" } }
 
           it "detecs the word correctly" do
             expect(subject.check(comment)).to be_truthy
