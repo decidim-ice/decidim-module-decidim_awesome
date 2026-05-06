@@ -36,7 +36,7 @@ describe "Public homepage shows Landing Menu block" do
       visit decidim.root_path
       within(".awesome-landing-menu") do
         items = all("a").map(&:text)
-        expect(items).to eq(["About", "Contact", "FAQ"])
+        expect(items).to eq(%w(About Contact FAQ))
       end
     end
 
@@ -53,7 +53,7 @@ describe "Public homepage shows Landing Menu block" do
         visit decidim.root_path
         within(".awesome-landing-menu") do
           items = all("a").map(&:text)
-          expect(items).to eq(["FAQ", "About", "Contact"])
+          expect(items).to eq(%w(FAQ About Contact))
         end
       end
     end
