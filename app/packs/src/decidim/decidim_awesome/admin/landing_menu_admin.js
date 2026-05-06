@@ -82,7 +82,7 @@ const initReorder = (editor) => {
     const rows = Array.from(tbody.querySelectorAll("tr[data-record-id]"));
     const newOrder = rows.map((tr) => parseInt(tr.dataset.recordId, 10));
 
-    let items;
+    let items = [];
     try {
       items = JSON.parse(menuItemsField.value || "[]");
     } catch (_e) {
