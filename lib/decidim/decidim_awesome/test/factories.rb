@@ -55,4 +55,14 @@ FactoryBot.define do
       end
     end
   end
+
+  factory :awesome_moderation_execution_log, class: "Decidim::DecidimAwesome::ModerationExecutionLog" do
+    resource { create(:comment) }
+    organization { resource.organization }
+    rule_type { "word_filter" }
+    action_type { "moderate_and_hide" }
+    matched { true }
+    applied { true }
+    status { "success" }
+  end
 end

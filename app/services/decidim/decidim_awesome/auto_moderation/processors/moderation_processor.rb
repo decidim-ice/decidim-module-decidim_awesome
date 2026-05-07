@@ -30,16 +30,26 @@ module Decidim
               rule_manifest = processor.get_rule_manifest(rule["rule_type"])
               checker_class = rule_manifest.checker_class.constantize
               checker = checker_class.new(rule["rule_options"])
-              next unless checker.check(object)
+
+              matched = checker.check(object)
+              processor.create_non_matched_log(object, rule) unless matched
+
+              next unless matched
 
               rule["counter"] += 1
 
               targets = rule["targets"]
               targets.each do |_id, target|
-                action_manifest = processor.get_action_manifest(target["action_type"])
-                handler_class = action_manifest.handler_class.constantize
-                handler = handler_class.new(object, target["action_options"])
-                handler.execute
+                begin
+                  action_manifest = processor.get_action_manifest(target["action_type"])
+                  handler_class = action_manifest.handler_class.constantize
+                  handler = handler_class.new(object, target["action_options"])
+                  handler.execute
+
+                  processor.create_matched_action_log(object, rule, target)
+                rescue StandardError => e
+                  processor.create_failed_action_log(object, rule, target, e.message)
+                end
 
                 target["hits"] += 1
               end
@@ -84,6 +94,40 @@ module Decidim
           def config
             organization = @object.organization
             @config ||= Decidim::DecidimAwesome::Config.new(organization)
+          end
+
+          def create_failed_rule_log(object, rule)
+            log = Decidim::DecidimAwesome::ModerationExecutionLog.new
+            log.organization = object.organization
+            log.resource = object
+            log.rule_type = rule["rule_type"]
+            log.matched = false
+            log.save
+          end
+
+          def create_matched_action_log(object, rule, target)
+            log = Decidim::DecidimAwesome::ModerationExecutionLog.new
+            log.organization = object.organization
+            log.resource = object
+            log.rule_type = rule["rule_type"]
+            log.action_type = target["action_type"]
+            log.matched = true
+            log.applied = true
+            log.status = "success"
+            log.save
+          end
+
+          def create_failed_action_log(object, rule, target, error_message)
+            log = Decidim::DecidimAwesome::ModerationExecutionLog.new
+            log.organization = object.organization
+            log.resource = object
+            log.rule_type = rule["rule_type"]
+            log.action_type = target["action_type"]
+            log.matched = true
+            log.applied = false
+            log.status = "error"
+            log.error_message = error_message
+            log.save
           end
         end
       end
