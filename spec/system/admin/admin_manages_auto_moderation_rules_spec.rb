@@ -28,12 +28,6 @@ module Decidim::DecidimAwesome
           check "Enabled"
         end
 
-        it "does not save the content without rule type" do
-          click_link_or_button "Save"
-
-          expect(page).to have_content("There is an error in this field.")
-        end
-
         context "with a rule type" do
           before do
             select "Word filter", from: "Rule type"

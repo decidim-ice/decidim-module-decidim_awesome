@@ -25,6 +25,7 @@ en:
           description: Description
           name: Name
           supported_objects: Supported_objects
+        hits: Hits
         object_type: Object
         object_type_options:
           comment: Comment
