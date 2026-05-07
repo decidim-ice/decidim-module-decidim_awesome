@@ -5,16 +5,16 @@ require "spec_helper"
 module Decidim
   describe DecidimAwesome do
     let(:auto_moderation_rules_manifest) do
-        Decidim::DecidimAwesome.moderation_rules_registry.manifests
+      Decidim::DecidimAwesome.moderation_rules_registry.manifests
     end
     let(:auto_moderation_actions_manifest) do
-        Decidim::DecidimAwesome.moderation_actions_registry.manifests
+      Decidim::DecidimAwesome.moderation_actions_registry.manifests
     end
     let(:word_filter_manifest) do
-        auto_moderation_rules_manifest.find { |r| r.name == :word_filter }
+      auto_moderation_rules_manifest.find { |r| r.name == :word_filter }
     end
     let(:moderate_and_hide_manifest) do
-        auto_moderation_actions_manifest.find { |a| a.name == :moderate_and_hide }
+      auto_moderation_actions_manifest.find { |a| a.name == :moderate_and_hide }
     end
 
     it "registers the rules and actions for the auto moderation module" do
