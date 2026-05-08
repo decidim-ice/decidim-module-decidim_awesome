@@ -44,7 +44,7 @@ module Decidim
             return {} unless should_serialize_weighted_votes?
 
             proposal.update_vote_weights!
-            weights = proposal.reload.vote_weights
+            weights = proposal.vote_weights
             return {} if weights.blank?
 
             { votes: weights }

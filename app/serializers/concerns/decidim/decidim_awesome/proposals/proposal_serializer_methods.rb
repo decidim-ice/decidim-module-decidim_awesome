@@ -47,9 +47,7 @@ module Decidim
             payload = {}
             private_custom_fields = CustomFields.new(awesome_proposal_private_custom_fields)
             if private_custom_fields.present?
-              private_body = proposal.private_body.presence ||
-                             proposal.extra_fields&.private_body.presence ||
-                             proposal.reload.extra_fields&.private_body
+              private_body = proposal.private_body.presence || proposal.reload_extra_fields&.private_body
               return payload if private_body.blank?
 
               fields_entries(private_custom_fields, private_body) do |key, value|
