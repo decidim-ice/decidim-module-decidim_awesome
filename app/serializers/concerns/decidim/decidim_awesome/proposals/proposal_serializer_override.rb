@@ -40,11 +40,21 @@ module Decidim
           # configuration). When neither is true, return an empty payload so
           # Decidim core's integer vote count is left in place.
           def proposal_vote_weights
+            return {} unless should_serialize_weighted_votes?
+
             proposal.update_vote_weights!
             weights = proposal.reload.vote_weights
-            return {} if weights.blank? && !awesome_voting_manifest_for(proposal.component)&.weighted?
+            return {} if weights.blank?
 
             { votes: weights }
+          end
+
+          def should_serialize_weighted_votes?
+            manifest = awesome_voting_manifest_for(proposal.component)
+            return true if manifest&.weighted?
+
+            proposal_votes = Decidim::Proposals::ProposalVote.where(proposal:)
+            Decidim::DecidimAwesome::VoteWeight.where(proposal_vote_id: proposal_votes.select(:id)).exists?
           end
         end
       end

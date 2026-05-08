@@ -31,6 +31,18 @@ module Decidim::DecidimAwesome
         subject.weight_validator { |weight, _ctx| weight.in?([1, 2, 3]) }
         expect(subject.weighted?).to be true
       end
+
+      it "stores the validator through the public attribute" do
+        subject.weight_validator { |weight, _ctx| weight.in?([1, 2, 3]) }
+
+        expect(subject.on_weight_validation).to be_present
+      end
+
+      it "is true when initialized with on_weight_validation" do
+        manifest = described_class.new(name:, on_weight_validation: proc { |weight, _ctx| weight.in?([1, 2, 3]) })
+
+        expect(manifest.weighted?).to be true
+      end
     end
 
     it "returns automatic labels" do

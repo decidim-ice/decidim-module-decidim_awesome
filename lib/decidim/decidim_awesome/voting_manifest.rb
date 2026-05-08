@@ -27,20 +27,20 @@ module Decidim
 
       # registers a weight validator
       def weight_validator(&block)
-        @on_weight_validation = block
+        self.on_weight_validation = block
       end
 
       # whether a weight validator has been registered for this manifest
       def weighted?
-        @on_weight_validation.present?
+        on_weight_validation.present?
       end
 
       # validates the weight using the Proc defined by weight_validator
       # Receives the weight and a context with the user and the proposal to be voted
       def valid_weight?(weight, context = {})
-        return true unless @on_weight_validation
+        return true unless on_weight_validation
 
-        @on_weight_validation.call(weight, **context)
+        on_weight_validation.call(weight, **context)
       end
 
       # registers an optional label generator block

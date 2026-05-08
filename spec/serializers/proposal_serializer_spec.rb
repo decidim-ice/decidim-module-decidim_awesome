@@ -80,6 +80,11 @@ module Decidim::Proposals
           end
           let!(:another_extra_fields) { nil }
 
+          it "does not update weight cache while exporting" do
+            expect(proposal).not_to receive(:update_vote_weights!)
+            subject.serialize
+          end
+
           it "preserves Decidim core's integer vote count and does not overwrite it" do
             expect(serialized[:votes]).to eq(proposal.reload.proposal_votes_count)
             expect(serialized[:votes]).to be_a(Integer)
