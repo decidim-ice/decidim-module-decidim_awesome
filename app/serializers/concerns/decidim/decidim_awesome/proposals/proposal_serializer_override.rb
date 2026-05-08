@@ -54,7 +54,7 @@ module Decidim
             return true if manifest&.weighted?
 
             proposal_votes = Decidim::Proposals::ProposalVote.where(proposal:)
-            Decidim::DecidimAwesome::VoteWeight.where(proposal_vote_id: proposal_votes.select(:id)).exists?
+            Decidim::DecidimAwesome::VoteWeight.exists?(proposal_vote_id: proposal_votes.select(:id))
           end
         end
       end
