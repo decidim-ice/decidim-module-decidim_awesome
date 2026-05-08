@@ -15,11 +15,12 @@ module Decidim
           alias_method :decidim_original_convert_to_text, :convert_to_text
 
           def serialize
-            # serialize first the custom fields,
-            # as default serialization will strip proposal body's <xml> tags.
+            # Collect custom fields before core serialization because
+            # default serialization strips proposal body's <xml> tags.
+            custom_fields = serialize_custom_fields
             serialization = decidim_original_serialize
             serialization.merge!(proposal_vote_weights)
-            serialization.merge!(serialize_custom_fields)
+            serialization.merge!(custom_fields)
           end
 
           # The original convert to text does not parses dt/dd items
