@@ -70,6 +70,11 @@ module Decidim
           end
         end
 
+        def insights
+          byebug
+          render :insights
+        end
+
         private
 
         def find_entry
@@ -123,7 +128,11 @@ module Decidim
           Decidim::DecidimAwesome.moderation_rules_registry.manifests
         end
 
-        helper_method :entries, :rule_type_options, :targets, :constraints_for, :rules_manifests
+        def moderations
+          Decidim::DecidimAwesome::ModerationExecutionLog.where(organization: current_organization, rule_id: params[:auto_moderation_rule_id])
+        end
+
+        helper_method :entries, :rule_type_options, :targets, :constraints_for, :rules_manifests, :moderations
       end
     end
   end

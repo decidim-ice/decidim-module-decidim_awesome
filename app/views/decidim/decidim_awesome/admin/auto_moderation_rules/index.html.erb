@@ -47,6 +47,7 @@
               <td><%= check rule["enabled"] %></td>
               <td><%= rule["counter"] || 0 %></td>
               <td class="actions">
+                <%= icon_link_to "bar-chart-box-line", decidim_admin_decidim_awesome.auto_moderation_rule_insights_path(id), t(".insights"), class: "action-icon--edit" %>
                 <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_auto_moderation_rule_path(id), t(".edit"), class: "action-icon--edit" %>
                 <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.auto_moderation_rule_path(id), t(".destroy"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
               </td>

@@ -1,0 +1,43 @@
+<div class="item_show__header">
+  <h2 class="item_show__header-title">
+    <%= t(".title") %>
+  </h2>
+</div>
+<div class="card">
+  <div class="card-section">
+    <div class="table-scroll">
+      <table class="table-list">
+        <thead>
+          <tr>
+            <th><%= t("moderation_execution.id", scope: "activemodel.attributes") %></th>
+            <th><%= t("moderation_execution.resource_type", scope: "activemodel.attributes") %></th>
+            <th><%= t("moderation_execution.resource_id", scope: "activemodel.attributes") %></th>
+            <th><%= t("moderation_execution.rule_type", scope: "activemodel.attributes") %></th>
+            <th><%= t("moderation_execution.matched", scope: "activemodel.attributes") %></th>
+            <th><%= t("moderation_execution.action_type", scope: "activemodel.attributes") %></th>
+            <th><%= t("moderation_execution.applied", scope: "activemodel.attributes") %></th>
+            <th><%= t("moderation_execution.status", scope: "activemodel.attributes") %></th>
+            <th><%= t("moderation_execution.error_message", scope: "activemodel.attributes") %></th>
+            <th><%= t("moderation_execution.created_at", scope: "activemodel.attributes") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% moderations&.each do |moderation_log| %>
+            <tr>
+              <td><%= moderation_log.id %></td>
+              <td><%= moderation_log.resource_type %></td>
+              <td><%= moderation_log.resource_id %></td>
+              <td><%= moderation_log.rule_type %></td>
+              <td><%= check moderation_log.matched %></td>
+              <td><%= moderation_log.action_type %></td>
+              <td><%= check moderation_log.applied %></td>
+              <td><%= moderation_log.status %></td>
+              <td><%= moderation_log.error_message %></td>
+              <td><%= moderation_log.created_at %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

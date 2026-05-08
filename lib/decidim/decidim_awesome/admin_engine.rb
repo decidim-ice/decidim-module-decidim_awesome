@@ -31,6 +31,7 @@ module Decidim
         resources :scoped_admins, param: :var, only: [:create, :destroy]
         resources :force_authorizations, param: :var, only: [:create, :destroy]
         resources :auto_moderation_rules, except: [:show] do
+          get :insights, to: "auto_moderation_rules#insights"
           collection do
             patch :toggle_enabled
           end

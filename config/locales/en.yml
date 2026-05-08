@@ -30,6 +30,17 @@ en:
         object_type_options:
           comment: Comment
           proposal: Proposal
+      moderation_execution:
+        id: Id
+        resource_type: Resource type
+        resource_id: Resource Id
+        rule_type: Rule type
+        matched: Matched
+        action_type: Action type
+        applied: Applied
+        status: Status
+        error_message: Error message
+        created_at: Created at
       config:
         additional_proposal_sortings: Additional sorting options enabled
         allow_images_in_editors: Allow images in the HTML editor
@@ -305,6 +316,8 @@ en:
           user_authorized: "%{user} successfully authorized with %{name}"
           user_not_authorized: "%{user} could not be authorized with %{name}"
         auto_moderation_rules:
+          insights:
+            title: Insights
           create:
             error: Error creating moderation rule! %{error}
             success: Moderation rule created successfully
@@ -336,6 +349,7 @@ en:
             edit: Edit
             new: New
             title: Auto-moderation rules
+            insights: Insights
           new:
             cancel: Cancel
             save: Save
