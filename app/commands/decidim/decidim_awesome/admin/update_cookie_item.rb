@@ -25,6 +25,7 @@ module Decidim
         # Returns nothing.
         def call
           return broadcast(:invalid) if form.invalid?
+
           config.value ||= {}
           config.value[category_slug] ||= { "slug" => category_slug, "items" => {} }
 
