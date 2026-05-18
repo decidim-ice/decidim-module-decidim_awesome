@@ -11,7 +11,8 @@ module Decidim
         def initialize(forms, category_slug)
           @forms = forms
           @category_slug = category_slug
-          @config = AwesomeConfig.find_or_initialize_by(organization: forms.first.current_organization, var: :cookie_management)
+          @organization = forms.first.current_organization
+          @config = AwesomeConfig.find_or_initialize_by(organization: @organization, var: :cookie_management)
         end
 
         # Executes the command. Broadcasts these events:
@@ -31,7 +32,8 @@ module Decidim
 
             UpdateCookieItem.call(form_with_context, category_slug) do
               on(:ok) do
-                existing_items.merge!(form.name => form.to_params)
+                category["items"] ||= {}
+                category["items"].merge!(form.name => form.to_params)
               end
               on(:invalid) do |error_message|
                 errors << "#{form.name}: #{error_message.presence || form.errors.full_messages.join(", ")}"
@@ -50,12 +52,12 @@ module Decidim
 
         attr_reader :forms, :category_slug
 
-        def category
-          @category ||= @config.value&.[](category_slug)
+        def store
+          @store ||= CookieManagementStore.new(@organization, @config.value || {})
         end
 
-        def existing_items
-          @existing_items ||= category&.dig("items") || {}
+        def category
+          @category ||= store.categories[category_slug]
         end
       end
     end

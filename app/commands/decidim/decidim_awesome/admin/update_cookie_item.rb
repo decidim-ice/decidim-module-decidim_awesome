@@ -44,6 +44,8 @@ module Decidim
           broadcast(:invalid, e.message)
         end
 
+        private
+
         def store
           @store ||= CookieManagementStore.new(form.current_organization, config.value)
         end
