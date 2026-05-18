@@ -11,7 +11,7 @@ module Decidim
         def initialize(forms, category_slug)
           @forms = forms
           @category_slug = category_slug
-          @config = AwesomeConfig.find_by(organization: forms.first.current_organization, var: :cookie_management)
+          @config = AwesomeConfig.find_or_initialize_by(organization: forms.first.current_organization, var: :cookie_management)
         end
 
         # Executes the command. Broadcasts these events:
@@ -55,7 +55,7 @@ module Decidim
         end
 
         def existing_items
-          @existing_items ||= category["items"] || {}
+          @existing_items ||= category&.dig("items") || {}
         end
       end
     end
