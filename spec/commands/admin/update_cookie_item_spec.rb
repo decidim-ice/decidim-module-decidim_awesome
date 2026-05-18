@@ -103,9 +103,7 @@ module Decidim::DecidimAwesome
         let(:category) { nil }
 
         before do
-          allow(Decidim).to receive(:consent_categories).and_return([
-            { slug: :essential, mandatory: false, items: [] }
-          ])
+          allow(Decidim).to receive(:consent_categories).and_return([{ slug: :essential, mandatory: false, items: [] }])
         end
 
         it "broadcasts :ok and initializes the category in DB" do
