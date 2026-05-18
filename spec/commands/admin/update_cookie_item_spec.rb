@@ -98,6 +98,23 @@ module Decidim::DecidimAwesome
         end
       end
 
+      context "when category exists only as a decidim default (not in DB config)" do
+        let(:category_slug) { "essential" }
+        let(:category) { nil }
+
+        before do
+          allow(Decidim).to receive(:consent_categories).and_return([
+            { slug: :essential, mandatory: false, items: [] }
+          ])
+        end
+
+        it "broadcasts :ok and initializes the category in DB" do
+          expect { subject.call }.to broadcast(:ok)
+          expect(cookie_management_config.reload.value[category_slug]).to be_present
+          expect(cookie_management_config.value[category_slug]["items"]["decidim_analytics_updated"]).to be_present
+        end
+      end
+
       context "when slug already exists" do
         let(:existing_categories) do
           {
