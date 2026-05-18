@@ -28,6 +28,7 @@ module Decidim
 
           config.value ||= {}
           return broadcast(:invalid) unless store.categories[category_slug]
+
           config.value[category_slug] ||= { "slug" => category_slug, "items" => {} }
 
           config.value[category_slug]["items"] ||= {}
