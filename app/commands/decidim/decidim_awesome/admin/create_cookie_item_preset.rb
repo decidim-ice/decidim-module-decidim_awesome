@@ -51,7 +51,7 @@ module Decidim
         attr_reader :forms, :category_slug
 
         def category
-          @category ||= @config.value[category_slug]
+          @category ||= @config.value&.[](category_slug)
         end
 
         def existing_items

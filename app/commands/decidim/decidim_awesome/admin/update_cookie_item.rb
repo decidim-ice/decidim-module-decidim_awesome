@@ -27,6 +27,7 @@ module Decidim
           return broadcast(:invalid) if form.invalid?
 
           config.value ||= {}
+          return broadcast(:invalid) unless store.categories[category_slug]
           config.value[category_slug] ||= { "slug" => category_slug, "items" => {} }
 
           config.value[category_slug]["items"] ||= {}
@@ -40,6 +41,10 @@ module Decidim
           broadcast(:invalid, e.record.errors.full_messages.join(", "))
         rescue StandardError => e
           broadcast(:invalid, e.message)
+        end
+
+        def store
+          @store ||= CookieManagementStore.new(form.current_organization, config.value)
         end
       end
     end
