@@ -12,7 +12,7 @@ module Decidim
         def initialize(form, category_slug)
           @form = form
           @category_slug = category_slug
-          @config = AwesomeConfig.find_by(organization: form.current_organization, var: :cookie_management)
+          @config = AwesomeConfig.find_or_initialize_by(organization: form.current_organization, var: :cookie_management)
         end
 
         attr_reader :form, :category_slug, :config
@@ -25,7 +25,11 @@ module Decidim
         # Returns nothing.
         def call
           return broadcast(:invalid) if form.invalid?
-          return broadcast(:invalid) unless config&.value&.[](category_slug)
+
+          config.value ||= {}
+          return broadcast(:invalid) unless store.categories[category_slug]
+
+          config.value[category_slug] ||= { "slug" => category_slug, "items" => {} }
 
           config.value[category_slug]["items"] ||= {}
           # Handle slug change by deleting old key
@@ -38,6 +42,12 @@ module Decidim
           broadcast(:invalid, e.record.errors.full_messages.join(", "))
         rescue StandardError => e
           broadcast(:invalid, e.message)
+        end
+
+        private
+
+        def store
+          @store ||= CookieManagementStore.new(form.current_organization, config.value)
         end
       end
     end
