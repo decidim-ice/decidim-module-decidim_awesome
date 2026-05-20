@@ -1,6 +1,50 @@
 CHANGELOG
 =========
 
+unreleased
+-------
+Compatibility:
+  - Decidim 0.31.x
+
+Features:
+  - Fix awesome map css styles
+  - Allow to restrict votes on proposal per status ([#580](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/580))
+
+v0.14.2
+-------
+
+Compatibility:
+  - Decidim 0.31.x
+
+Features:
+  - Fix exports of checkbox groups for custom fields
+  - Allow to reorder processes when "manual" mode is selected in awesome processes groups
+  - Add Sticky Awesome Global Menu content block ([#540](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/540))
+  - Add Rich Text content block for landing pages ([#543](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/543))
+  - Add a new cookie policy/category manager ([#521](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/521))
+  - Fix proposal creation in admin when custom fields are enabled for Decidim >= 0.31.3
+  - Allow admins to restrict proposal voting to selected proposal states per step ([#572](https://github.com/decidim-ice/decidim-module-decidim_awesome/issues/572))
+
+v0.14.1
+-------
+
+Compatibility:
+  - Decidim 0.31.x
+
+Features:
+  - Added version update checking from GitHub on System Compatibility page
+  - Add Process Groups Extended content block with status and taxonomy filters ([#519](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/519))
+  - Configurable Awesome Processes homepage content block ([#518](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/518))
+
+v0.14.0
+-------
+
+Compatibility:
+  - Decidim 0.31.x
+
+Features:
+  - Upgrade to Decidim v0.31
+
 v0.13.3
 -------
 

@@ -106,10 +106,17 @@ module Decidim
           Decidim::Proposals::ProposalType.include(Decidim::DecidimAwesome::AddProposalTypeVoteWeights)
           Decidim::Proposals::ProposalLCell.include(Decidim::DecidimAwesome::ProposalLCellOverride)
           Decidim::Proposals::ProposalGCell.include(Decidim::DecidimAwesome::ProposalGCellOverride)
+          Decidim::DecidimAwesome::Voting::VotingCardsProposalVoteCell.prepend(Decidim::DecidimAwesome::Voting::VotingCardsProposalVoteCellOverride)
         end
+
+        Decidim::Proposals::ProposalVoteCell.include(Decidim::DecidimAwesome::Proposals::ProposalVoteCellOverride) if DecidimAwesome.enabled?(:votes_by_proposal_status)
+
+        Decidim::DataConsentCell.prepend(Decidim::DecidimAwesome::DataConsentCellOverride) if DecidimAwesome.enabled?(:cookie_management)
 
         # override user's admin property
         Decidim::User.include(Decidim::DecidimAwesome::UserOverride) if DecidimAwesome.enabled?(:scoped_admins)
+
+        Decidim::ContentBlocks::BaseCell.prepend(Decidim::DecidimAwesome::BaseCellOverride) if DecidimAwesome.enabled?(:landing_menu_block)
 
         if DecidimAwesome.enabled?(:menu, :mobile_menu, :home_content_block_menu)
           Decidim::ContentBlocks::GlobalMenuCell.include(Decidim::DecidimAwesome::GlobalMenuCellOverride) if DecidimAwesome.enabled?(:home_content_block_menu)
@@ -160,6 +167,11 @@ module Decidim
           Decidim::AmendmentsController.include(Decidim::DecidimAwesome::LimitPendingAmendments) if DecidimAwesome.enabled?(:allow_limiting_amendments)
 
           Decidim::Proposals::ProposalsController.include(Decidim::DecidimAwesome::Proposals::OrderableOverride) if DecidimAwesome.enabled?(:additional_proposal_sortings)
+
+          if DecidimAwesome.enabled?(:votes_by_proposal_status)
+            Decidim::Admin::SettingsHelper.include(Decidim::DecidimAwesome::Admin::SettingsHelperOverride)
+            Decidim::Proposals::Permissions.include(Decidim::DecidimAwesome::Proposals::PermissionsOverride)
+          end
         end
       end
 
@@ -188,13 +200,37 @@ module Decidim
             end
           end
 
-          if DecidimAwesome.enabled?(:additional_proposal_sortings)
-            component.settings(:step) do |settings|
+          component.settings(:step) do |settings|
+            if DecidimAwesome.enabled?(:additional_proposal_sortings)
               settings.attribute(
                 :default_sort_order,
                 type: :select,
                 include_blank: true,
                 choices: ->(_context) { (POSSIBLE_SORT_ORDERS + DecidimAwesome.possible_additional_proposal_sortings).uniq }
+              )
+            end
+
+            if DecidimAwesome.enabled?(:votes_by_proposal_status)
+              DecidimAwesome.hash_append!(
+                settings.attributes,
+                :votes_enabled,
+                :awesome_votes_enabled_by_status,
+                Decidim::SettingsManifest::Attribute.new(type: :boolean, default: false)
+              )
+              DecidimAwesome.hash_append!(
+                settings.attributes,
+                :awesome_votes_enabled_by_status,
+                :awesome_votes_enabled_states,
+                Decidim::SettingsManifest::Attribute.new(
+                  type: :array,
+                  default: [],
+                  choices: lambda { |context|
+                    component = context && context[:component]
+                    next [] unless component
+
+                    Decidim::DecidimAwesome::Proposals::VotesByProposalStatus.choices_for(component)
+                  }
+                )
               )
             end
           end
@@ -291,13 +327,88 @@ module Decidim
         end
       end
 
+      initializer "decidim_decidim_awesome.awesome_process_groups_content_block" do
+        Decidim.content_blocks.register(:participatory_process_group_homepage, :awesome_process_groups) do |content_block|
+          content_block.cell = "decidim/decidim_awesome/content_blocks/awesome_process_groups"
+          content_block.settings_form_cell = "decidim/decidim_awesome/content_blocks/awesome_process_groups_form"
+          content_block.public_name_key = "decidim.decidim_awesome.content_blocks.awesome_process_groups.name"
+
+          content_block.settings do |settings|
+            settings.attribute :title, type: :text, translated: true
+            settings.attribute :max_count, type: :integer, default: 6
+          end
+        end
+      end
+
+      initializer "decidim_decidim_awesome.awesome_processes_content_block" do
+        Decidim.content_blocks.register(:homepage, :awesome_processes) do |content_block|
+          content_block.cell = "decidim/decidim_awesome/content_blocks/awesome_processes"
+          content_block.settings_form_cell = "decidim/decidim_awesome/content_blocks/awesome_processes_form"
+          content_block.public_name_key = "decidim.decidim_awesome.content_blocks.awesome_processes.name"
+
+          content_block.settings do |settings|
+            settings.attribute :title, type: :text, translated: true
+            settings.attribute :max_results, type: :integer, default: 6
+            settings.attribute :process_type, type: :enum, default: "all", choices: %w(all processes groups)
+            settings.attribute :process_group_id, type: :integer, default: 0
+            settings.attribute :process_status, type: :enum, default: "active", choices: %w(active all upcoming past)
+            settings.attribute :selection_criteria, type: :enum, default: "automatic", choices: %w(automatic manual)
+            settings.attribute :selected_ids, type: :array, default: []
+          end
+        end
+      end
+
+      initializer "decidim_decidim_awesome.awesome_rich_text_content_block" do
+        next unless DecidimAwesome.enabled?(:rich_text_block)
+
+        max = Decidim::DecidimAwesome.max_rich_text_columns
+
+        [:homepage, :participatory_process_group_homepage, :participatory_process_homepage, :assembly_homepage].each do |scope|
+          Decidim.content_blocks.register(scope, :awesome_rich_text) do |content_block|
+            content_block.cell = "decidim/decidim_awesome/content_blocks/rich_text"
+            content_block.settings_form_cell = "decidim/decidim_awesome/content_blocks/rich_text_form"
+            content_block.public_name_key = "decidim.decidim_awesome.content_blocks.rich_text.name"
+
+            content_block.images = max.times.map do |idx|
+              { name: :"background_image_#{idx}", uploader: "Decidim::HomepageImageUploader" }
+            end
+
+            content_block.settings do |settings|
+              settings.attribute :block_id, type: :string
+              settings.attribute :title, type: :text, translated: true
+              settings.attribute :columns, type: :array, default: []
+            end
+          end
+        end
+      end
+
+      initializer "decidim_decidim_awesome.awesome_landing_menu_content_block" do
+        next unless DecidimAwesome.enabled?(:landing_menu_block)
+
+        [:homepage, :participatory_process_group_homepage, :participatory_process_homepage, :assembly_homepage].each do |scope|
+          Decidim.content_blocks.register(scope, :awesome_landing_menu) do |content_block|
+            content_block.cell = "decidim/decidim_awesome/content_blocks/landing_menu"
+            content_block.settings_form_cell = "decidim/decidim_awesome/content_blocks/landing_menu_form"
+            content_block.public_name_key = "decidim.decidim_awesome.content_blocks.landing_menu.name"
+
+            content_block.settings do |settings|
+              settings.attribute :sticky, type: :boolean, default: false
+              settings.attribute :alignment, type: :enum, default: "center", choices: %w(left center right)
+              settings.attribute :show_on_mobile, type: :boolean, default: false
+              settings.attribute :menu_items, type: :text
+            end
+          end
+        end
+      end
+
       initializer "decidim_decidim_awesome.webpacker.assets_path" do
         Decidim.register_assets_path File.expand_path("app/packs", root)
       end
 
       # Votings may override proposals cells, let's be sure to add these paths after the proposal component initializer
       initializer "decidim_decidim_awesome.add_cells_view_paths", before: "decidim_proposals.add_cells_view_paths" do
-        Cell::ViewModel.view_paths << File.expand_path("#{Decidim::DecidimAwesome::Engine.root}/app/cells")
+        # We use unshift to ensure we can override existing view cells
+        Cell::ViewModel.view_paths.unshift File.expand_path("#{Decidim::DecidimAwesome::Engine.root}/app/cells")
         Cell::ViewModel.view_paths << File.expand_path("#{Decidim::DecidimAwesome::Engine.root}/app/views")
       end
 
@@ -313,6 +424,8 @@ module Decidim
         Decidim.icons.register(name: "file-settings-line", icon: "file-settings-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "hashtag", icon: "hashtag", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "smartphone", icon: "smartphone-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "shield-check-line", icon: "shield-check-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "eye-off-line", icon: "eye-off-line", category: "system", description: "", engine: :decidim_awesome)
       end
     end
   end

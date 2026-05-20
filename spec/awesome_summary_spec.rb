@@ -23,6 +23,22 @@ shared_examples "with features disabled" do
 end
 
 describe Decidim::DecidimAwesome do
+  before do
+    decidim_response = double(
+      success?: true,
+      body: [{ "tag_name" => "v0.31.2", "prerelease" => false, "draft" => false }].to_json
+    )
+    awesome_response = double(
+      success?: true,
+      body: [{ "tag_name" => "v0.14.1", "prerelease" => false, "draft" => false }].to_json
+    )
+
+    allow(Faraday).to receive(:get).with("https://api.github.com/repos/decidim/decidim/releases")
+                                   .and_return(decidim_response)
+    allow(Faraday).to receive(:get).with("https://api.github.com/repos/decidim-ice/decidim-module-decidim_awesome/releases")
+                                   .and_return(awesome_response)
+  end
+
   let(:organization) { create(:organization) }
   let(:user) { create(:user, :admin, :confirmed, organization:) }
   let!(:scoped_styles) { create(:awesome_config, organization:, var: :scoped_styles, value: { bar: styles }) }
@@ -74,8 +90,8 @@ describe Decidim::DecidimAwesome do
   else
     puts 'Please execute this test with the env FEATURES set to "enabled" or "disabled"'
     puts ""
-    puts "FEATURES=disabled bundle exec rspec spec/system/awesome_summary_spec.rb"
-    puts "FEATURES=enabled bundle exec rspec spec/system/awesome_summary_spec.rb"
+    puts "FEATURES=enabled bundle exec rspec spec/awesome_summary_spec.rb"
+    puts "FEATURES=disabled bundle exec rspec spec/awesome_summary_spec.rb"
     puts ""
     puts "TEST SKIPPED!"
   end

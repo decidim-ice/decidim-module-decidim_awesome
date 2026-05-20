@@ -86,7 +86,7 @@ module Decidim::DecidimAwesome
         let(:in_full) { false }
 
         it "returns no permissions" do
-          post(:create, params:)
+          post(:create, params:, xhr: true)
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end

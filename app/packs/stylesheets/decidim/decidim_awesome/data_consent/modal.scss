@@ -1,0 +1,7 @@
+// Force dialog container to display as block to ensure the "Cookie settings"
+// title and all modal content are visible and properly laid out
+#dc-modal {
+  [data-dialog-container] {
+    display: block !important;
+  }
+}

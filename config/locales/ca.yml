@@ -46,6 +46,26 @@ ca:
         component_manifest: Només en components de tipus
         participatory_space_manifest: Aplica-ho a espais participatius de tipus
         participatory_space_slug: Només a
+      content_block_attachment:
+        background_image_0: Imatge de fons
+        background_image_1: Imatge de fons
+        background_image_2: Imatge de fons
+        background_image_3: Imatge de fons
+        background_image_4: Imatge de fons
+      cookie_category:
+        mandatory: Obligatòria
+        slug: ID
+        title: Categoria
+        total_cookies: Galetes totals
+        visibility: Visibilitat
+      cookie_item:
+        expiration: Caducitat
+        name: Nom de la galeta
+        service: Servei
+        type: Tipus
+        types:
+          cookie: Galeta
+          local_storage: Emmagatzematge local
       custom_redirect:
         active: Actiu
         destination: Destí
@@ -62,6 +82,15 @@ ca:
         awesome_admins_available_authorizations: Permet a les administradores verificar manualment a les participants amb aquests verificadors
       user:
         user_time_zone: Zona horària personal
+    errors:
+      models:
+        cookie_item:
+          attributes:
+            base:
+              category_not_found: No s'ha trobat la categoria
+            name:
+              cannot_change_default_item_name: El nom d'un element predefinit no es pot canviar
+              invalid_format: El nom només pot contenir lletres, números, guions i guions baixos (sense espais)
   decidim:
     admin:
       actions:
@@ -144,6 +173,9 @@ ca:
             voting_cards_show_abstain: Afegeix l'opció d'abstenció
             voting_cards_show_modal_help: Mostra la finestra modal d'instruccions/ajuda quan es faci clic al suport
           step:
+            awesome_votes_enabled_by_status: Restringeix la votació per estat de la proposta
+            awesome_votes_enabled_by_status_help: Quan està activat, la votació només es permet a les propostes amb els estats seleccionats. Les propostes en altres estats no acceptaran vots. Deixeu-ho buit per permetre la votació a totes les propostes, independentment de l'estat.
+            awesome_votes_enabled_states: Estats permesos per als vots
             default_sort_order_options:
               az: A-Z (Alfabètic)
               supported_first: Votades per mi primer
@@ -189,8 +221,8 @@ ca:
           roles:
             admin: Administradora
             collaborator: Col·laboradora
+            evaluator: Avaluadora
             moderator: Moderadora
-            valuator: Avaluadora
         admin_authorizations:
           authorization:
             confirm_destroy: Estàs segur que vols eliminar aquesta verificació? Aquesta actuació pot afectar a l'accés de la participant en la plataforma.
@@ -201,7 +233,7 @@ ca:
           authorization_not_destroyed: La verificació no s'ha pogut eliminar!
           authorization_transferred: 'Avís: hi ha hagut un conflicte de verificació i la verificació s''ha transferit a %{user}'
           conflict: Hi ha un conflicte amb una autorització existent
-          conflict_help_html: "Heu de resoldre el conflicte amb la participant %{user} abans de poder autoritzar la participant amb aquesta autorització.\n<br><br>\nEs produeix un conflicte de verificació quan un altre usuari té les mateixes dades que la participant que esteu intentant autoritzar.\nPodeu resoldre aquest conflicte eliminant l'autorització conflictiva de l'altre participant o utilitzant dades diferents per a aquest participant.\n"
+          conflict_help_html: "Heu de resoldre el conflicte amb la participant %{user} abans de poder autoritzar la participant amb aquesta autorització.\n<br><br>\nEs produeix un conflicte de verificació quan un altre usuari té les mateixes dades que la participant que esteu intentant autoritzar.\nPodeu resoldre aquest conflicte eliminant l'autorització conflictiva de l'altre participant o utilitzant dades diferents per a aquest participant."
           edit:
             authorize: Autoritza %{user} amb %{name}
             do_it_if_sure: Feu-ho només si esteu segur que la participant té aquesta autorització.
@@ -214,18 +246,22 @@ ca:
         checks:
           index:
             admin_head_tags: Etiquetes Awesome incloses a la capçalera de l'aplicació d'administració
+            awesome_update_available: 'Hi ha una nova versió disponible: %{latest_version}'
+            awesome_version: Versió de Decidim Awesome %{version}
             decidim-admin: Del mòdul Admin
             decidim-assemblies: Del mòdul Assemblies
             decidim-conferences: Del mòdul Conferences
             decidim-core: Del mòdul Core
             decidim-participatory_processes: Del mòdul de Participatory Processes
             decidim-proposals: Del mòdul Proposals
+            decidim_update_available: 'Hi ha una nova versió disponible: %{latest_version}'
             decidim_version: Versió de Decidim %{version}
             errors:
               CSS: La capçalera no conté les entrades necessàries <link> al full d'estil. Per resoldre-ho, es poden afegir manualment al fitxer personalitzat _head.html.erb
               JavaScript: La capçalera no conté les entrades necessàries <script> de Javascript. Per resoldre-ho, es poden afegir manualment al fitxer personalitzat admin/_header.html.erb
             head_tags: Etiquetes Awesome incloses a la capçalera de l'aplicació
             link_admins: Entra al panell /system
+            view_release: Veure les notes de la versió
         config:
           anonymous: Usuaris no identificats
           caution: 'NOTA: Aquesta funció modifica en gran mesura alguns comportaments predeterminats que podrien provocar resultats inesperats. Utilitzeu-lo amb precaució!'
@@ -292,7 +328,7 @@ ca:
               original_editor_override: Desde la versió 0.26, és possible (per administradors només) pujar imatges als editors de text enriquit. Per tant, les opcions d'imatges disponibles en aquesta pàgina només afecten a la part pública de la web (les administradores sempre ho tenen activat).
               proposal_custom_fields: Crea camps personalitzats per a propostes que només s'apliquin a determinades parts de la web pública (per fer-ho, utilitza l'editor de restriccions)
               proposal_custom_fields_example: Les dades son desades en un objecte XML fent servir atributs compatibles amb HTML (elements DL, DT, DD) que reemplacen el "cos" de la proposat normal.
-              proposal_custom_fields_translations: "Les etiquetes, el text d'ajuda, els \"placeholders\" i els valors predeterminats poden utilitzar les traduccions personalitzades de l'aplicació.\nPer això, en comptes d'utilitzar un text literal, utilitzeu la clau i18n (ha de contenir almenys un punt).\nPer exemple:\n- \"activemodel.attributes.proposal.title\" en lloc de \"Títol\"\n- \"activemodel.attributes.proposal.address\" en lloc de \"Address\"\nO utilitzeu les vostres pròpies claus en combinació amb altres eines per definir traduccions (p. ex.: utilitzant el mòdul Term Customizer):\n - \"myapp.custom_fields.bio\" en lloc de \"Biografia\""
+              proposal_custom_fields_translations: "Les etiquetes, el text d'ajuda, els \"placeholders\" i els valors predeterminats poden utilitzar les traduccions personalitzades de l'aplicació.\nPer això, en comptes d'utilitzar un text literal, utilitzeu la clau i18n (ha de contenir almenys un punt).\nPer exemple:\n- \"activemodel.attributes.proposal.title\" en lloc de \"Títol\"\n- \"activemodel.attributes.proposal.address\" en lloc de \"Address\"\nO utilitzeu les vostres pròpies claus en combinació amb altres eines per definir traduccions (p. ex.: utilitzant el mòdul Term Customizer):\n- \"myapp.custom_fields.bio\" en lloc de \"Biografia\""
               proposal_private_custom_fields: Similar als camps públics, però aquesta informació no es revelarà públicament (només hi tindran accés els administradors).
               proposal_private_custom_fields_translations: |
                 Els camps personalitzats privats es mostren en un quadre diferent amb aquest text d'informació:
@@ -321,7 +357,8 @@ ca:
           form_force_authorizations:
             delete: Esborra
             force_authorizations_html: |
-              Definiu grups de verificació. Cada grup pot requerir que els usuaris siguin verificats per un o més mètodes per accedir a àrees específiques de la plataforma.
+              Definiu grups de verificació. Cada grup pot requerir que els usuaris siguin verificats per un o més mètodes per accedir a àrees específiques de la plataforma. 
+
             help: Podeu definir grups de mètodes d'autorització i restringir l'accés en funció d'aquests.
             new: Afegeix un nou grup d'autorització
             remove: Elimina aquest grup d'autorització
@@ -360,6 +397,7 @@ ca:
           system: A tot arreu excepte espais participatius
           title:
             admins: Administradores acotades
+            cookie_management: Gestió de galetes
             editors: Modificacions als editors
             livechat: Xat en directe
             proposal_custom_fields: 'Camps personalitzats per propostes: Camps públics'
@@ -394,6 +432,275 @@ ca:
           update:
             error: Error actualitzant la restricció
             success: Restricció actualitzada correctament
+        cookie_categories:
+          cookie_management_warning_html: Tingueu en compte que Decidim obligarà la persona usuària a acceptar totes les galetes per poder mostrar iframes. Per complir amb el RGPD, assegureu-vos d'afegir a les categories corresponents totes les galetes que s'utilitzaran als iframes.
+          create:
+            error: S'ha produït un error en crear la categoria de galetes! %{error}
+            success: Categoria de galetes creada correctament
+          destroy:
+            error: S'ha produït un error en eliminar la categoria de galetes! %{error}
+            success: Categoria de galetes eliminada correctament
+          edit:
+            cancel: Cancel·lar
+            items: Editar elements de la categoria
+            save: Desar
+            title: Editar la categoria de galetes
+          form:
+            slug_help: Identificador únic utilitzat en els scripts per referenciar aquesta categoria.
+            visibility:
+              hidden: Ocult
+              visible: Visible
+          index:
+            cannot_remove_default: Les categories per defecte no es poden eliminar
+            confirm_reset: Esteu segur que voleu restablir aquesta categoria als seus valors per defecte? Això eliminarà totes les personalitzacions que hagueu fet.
+            description_html: |
+              Les categories i els elements de galetes només controlen la interfície de consentiment i la documentació.<br>Perquè les preferències siguin efectives, els scripts i serveis de tercers han d'estar configurats per carregar-se només després que s'hagi donat el consentiment.<br>Aquesta configuració addicional d'scripts no és necessària per als vídeos incrustats en iframes, ja que Decidim ja inclou una gestió de consentiment integrada per a aquestes incrustacions.<br>Seguiu la guia oficial: <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Afegir scripts que requereixen el consentiment de dades</a>.
+            edit: Editar categoria
+            items: Elements de la categoria
+            new: Nova categoria
+            reset: Restablir als valors per defecte
+            title: Gestió de galetes
+          new:
+            cancel: Cancel·lar
+            save: Desar
+            title: Nova categoria de galetes
+          script_config:
+            script_consent_help_html: |
+              <p>Els scripts associats a aquesta categoria només respecten el consentiment quan s'afegeixen dins d'un script amb l'atribut <span class="label">data-consent="%{category}"</span>.</p>
+              <p>El lloc recomanat per afegir-los és <span class="label">app/views/layouts/decidim/_head_extra.html.erb</span> o als snippets de capçalera (si estan habilitats).</p>
+              <p>Exemple:</p><br><pre>%{example}</pre><br>
+              <p>Sense <span class="label">type="text/plain"</span>, la configuració de consentiment de dades de l'usuari no té cap efecte.<br>Més informació a <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Adding scripts which require data consent</a>.</p>
+          update:
+            error: S'ha produït un error en actualitzar la categoria de galetes! %{error}
+            success: Categoria de galetes actualitzada correctament
+        cookie_items:
+          cookie_item_dropdown:
+            button: Serveis de galetes comuns
+          cookie_item_presets:
+            descriptions:
+              consent: S'utilitza per a la funcionalitat. Dura 2 anys, Google l'utilitza per emmagatzemar l'estat d'un usuari pel que fa a les seves eleccions de galetes. Llegiu més a Com utilitza Google les galetes
+              decidim_consent: Emmagatzema informació sobre les galetes permeses per l'usuari en aquest lloc web.
+              emoji_picker_recent: Emmagatzema els teus emojis seleccionats més recentment
+              facebook_fr: Utilitzat per Meta per lliurar, mesurar i millorar la rellevància dels anuncis.
+              fbp: Identifica les sessions del navegador per al seguiment de Facebook Pixel.
+              ga_gat: S'utilitza per limitar la taxa de sol·licituds enviades a Google Analytics.
+              ga_gid: S'utilitza per distingir els usuaris amb finalitats analítiques. Caduca després de 24 hores.
+              ga_main: S'utilitza per distingir els usuaris assignant-los un identificador únic.
+              ga_property: S'utilitza a GA4 per persistir l'estat de la sessió i els comptadors d'una propietat específica.
+              graphiql_doc_explorer_open: Desa si teniu obert el panell de documentació quan utilitzeu l'API GraphQL
+              graphiql_editor_flex: Desa la vostra preferència de pestanya quan utilitzeu l'API GraphQL
+              graphiql_history_pane_open: Desa si teniu obert el panell d'historial quan utilitzeu l'API GraphQL
+              graphiql_queries: Desa l'historial de les vostres consultes quan utilitzeu l'API GraphQL
+              graphiql_query: Desa la vostra darrera consulta quan utilitzeu l'API GraphQL
+              graphiql_tab_state: Desa la vostra configuració de pestanyes quan utilitzeu l'API GraphQL
+              gtm_dc: Utilitzat per Google Tag Manager per a la càrrega de l'etiqueta i el diagnòstic.
+              gtm_debug: Emmagatzema l'estat del mode de depuració de Google Tag Manager.
+              gtm_gcl_au: Utilitzat pels serveis de Google per experimentar amb l'eficiència publicitària.
+              hcaptcha_accessibility: Emmagatzema preferències relacionades amb l'accessibilitat per als reptes d'hCaptcha.
+              hcaptcha_session: Emmagatzema l'estat temporal de la sessió d'hCaptcha per validar els reptes.
+              jitsi_amp: Utilitzat per Amplitude Analytics
+              jitsi_amplitude_unsent_identify: Utilitzat per Amplitude Analytics
+              jitsi_amplitude_unset: Utilitzat per Amplitude Analytics
+              jitsi_calendar_sync: S'utilitza per a la funció de sincronització del calendari.
+              jitsi_callstats_username: S'utilitza per desar la sessió de l'usuari a Jitsi.
+              jitsi_dropbox: S'utilitza per a la funció d'integració amb Dropbox.
+              jitsi_endpoint_id: S'utilitza amb finalitats de comunicació amb el servidor Jitsi.
+              jitsi_known_domains: Desa una llista de dominis coneguts
+              jitsi_language: Desa la vostra preferència d'idioma
+              jitsi_prejoin: S'utilitza per a la funció de pantalla prèvia a la unió.
+              jitsi_recent_list: S'utilitza per a la funció de llista recent.
+              jitsi_settings: S'utilitza per desar la vostra configuració de Jitsi.
+              jitsi_video_quality: S'utilitza per a la funció d'emmagatzematge persistent de la qualitat del vídeo.
+              jitsi_virtual_background: S'utilitza per a la funció de fons de vídeo.
+              linkedin_li_gc: Emmagatzema l'estat del consentiment per als serveis de LinkedIn.
+              linkedin_lidc: Utilitzat per LinkedIn per a l'encaminament i l'equilibri de càrrega.
+              linkedin_user_match_history: Fa un seguiment del temps d'interacció amb l'anunci i l'atribució de conversions per a les campanyes de LinkedIn.
+              maps_1p_jar: Emmagatzema l'ús/preferències de Google Maps i els senyals de personalització dels anuncis.
+              maps_consent: Emmagatzema l'estat del consentiment de l'usuari per als serveis de Google quan s'utilitzen mapes incrustats.
+              maps_nid: Emmagatzema les preferències de Google Maps i la informació del navegador relacionada amb la seguretat.
+              matomo_mtm_consent: Emmagatzema l'estat del consentiment de l'usuari per al seguiment de Matomo.
+              matomo_pk_id: S'utilitza per emmagatzemar un identificador de visitant únic i identificar els visitants que tornen.
+              matomo_pk_ref: S'utilitza per emmagatzemar informació d'atribució (el referent que ha portat l'usuari al lloc web).
+              matomo_pk_ses: S'utilitza per emmagatzemar dades temporals de sessió per a la visita actual.
+              osm_location: Emmagatzema els valors per defecte d'ubicació/zoom del mapa per a les interaccions amb OpenStreetMap.
+              osm_session: Emmagatzema dades temporals de sessió per a les interaccions dels usuaris d'OpenStreetMap.
+              osm_totp_token: Emmagatzema dades temporals de testimonis relacionats amb el 2FA per als fluxos de treball del compte d'OpenStreetMap.
+              pref: S'utilitza per a la funcionalitat. YouTube utilitza aquesta galeta per emmagatzemar informació com la vostra configuració de pàgina preferida i les preferències de reproducció com ara eleccions explícites d'autoreproducció, contingut aleatori i mida del reproductor. Llegiu més a Com utilitza Google les galetes
+              recaptcha_grecaptcha: Utilitzat per reCAPTCHA per proporcionar protecció contra el correu brossa i anàlisi de riscos.
+              recaptcha_rc_a: Emmagatzema metadades d'anàlisi de riscos de reCAPTCHA a l'emmagatzematge del navegador.
+              recaptcha_rc_c: Emmagatzema metadades de repte/sessió de reCAPTCHA a l'emmagatzematge del navegador.
+              remember_user_token: Permet mantenir la sessió oberta si feu clic a "Recorda'm" en iniciar la sessió.
+              session_id: Permet que els llocs web recordin l'usuari dins d'un lloc web quan es mouen entre pàgines web.
+              turnstile_cf_bm: Ajuda Cloudflare a detectar i mitigar el trànsit automatitzat.
+              turnstile_cf_clearance: Desa la prova que una visitant ha superat un repte de seguretat previ.
+              turnstile_cfuvid: Ajuda Cloudflare a distingir usuaris individuals que comparteixen la mateixa adreça IP.
+              vimeo_player: Emmagatzema les preferències del reproductor de Vimeo com ara el volum, la qualitat o el comportament d'autoreproducció.
+              vimeo_vuid: Emmagatzema un identificador únic de visitant de Vimeo utilitzat per a analítica.
+              visitor_info1_live: Utilitzat per a funcionalitat, analítica, publicitat i personalització. Llegiu més a Com utilitza Google les galetes
+              ysc: Utilitzat per a la seguretat. Dura la durada de la sessió de navegació d'un usuari. S'utilitza per garantir que les sol·licituds dins d'una sessió de navegació les faci l'usuari, i no altres llocs. Aquesta galeta evita que llocs maliciosos actuïn en nom d'un usuari sense el seu coneixement. Llegiu més a Com utilitza Google les galetes
+              yt_remote_connected_devices: Emmagatzema la llista de dispositius connectats per als controls del reproductor de YouTube.
+              yt_remote_device_id: Emmagatzema un identificador de dispositiu per a les interaccions remotes del reproductor de YouTube.
+              ytidb_last_result_entry_key: Emmagatzema les darreres metadades dels resultats del reproductor de YouTube a l'emmagatzematge local.
+            explanations:
+              cloudflare_turnstile: |-
+                Afegeix aquestes galetes quan Cloudflare Turnstile està habilitat per protegir els formularis davant d'abusos i trànsit automatitzat. Donen suport a la detecció de bots, la validació de sessió i la continuïtat del repte.
+
+                Categoria recomanada: Essencial
+              decidim_essential: |-
+                Afegiu aquestes galetes essencials que són necessàries per a la funcionalitat bàsica de la vostra plataforma Decidim. Aquestes galetes permeten l'autenticació de l'usuari, la gestió de sessions i el seguiment del consentiment.
+
+                Categoria recomanada: Essencial
+              emoji_picker: |-
+                Afegiu aquesta galeta quan habiliteu la funció de selector d'emojis als editors de text. Emmagatzema els emojis utilitzats recentment per personalitzar l'experiència de l'usuari.
+
+                Categoria recomanada: Preferències
+              facebook_pixel: |-
+                Afegiu aquestes galetes quan utilitzeu el Pixel de Meta (Facebook) per al seguiment de conversions o l'atribució d'anuncis. Ajuden a identificar les sessions del navegador i mesurar el rendiment de la campanya.
+
+                Categoria recomanada: Màrqueting
+              google_analytics: |-
+                Afegiu aquestes galetes quan utilitzeu Google Analytics (GA4/gtag.js) per mesurar el trànsit i el comportament dels usuaris. Identifiquen els visitants, distingeixen les sessions i ajuden a generar estadístiques d'ús.
+
+                Categoria recomanada: Analítica
+              google_maps_embeds: |-
+                Afegiu aquestes galetes quan incrusteu Google Maps a les vostres pàgines (per exemple, ginys de mapa o blocs d'ubicació). Ajuden amb les preferències del mapa, l'estat del consentiment i les mètriques d'ús.
+
+                Categoria recomanada: Preferències o Analítica
+              google_tag_manager: |-
+                Afegiu aquestes galetes quan les vostres etiquetes d'analítica o màrqueting s'entreguin a través de Google Tag Manager. Algunes etiquetes poden establir galetes de seguiment addicionals segons la vostra configuració de GTM.
+
+                Categoria recomanada: Analítica o Màrqueting
+              graphiql: |-
+                Afegiu aquestes galetes quan habiliteu l'explorador de l'API GraphQL (/api/graphiql) per als desenvolupadors. Emmagatzemen les preferències de la interfície de l'explorador, l'historial de consultes i les configuracions de les pestanyes.
+
+                Categoria recomanada: Preferències
+              hcaptcha: |-
+                Afegiu aquestes galetes/entrades d'emmagatzematge quan hCaptcha estigui habilitat als formularis. S'utilitzen per a la detecció de bots, opcions d'accessibilitat i gestió de reptes/sessions.
+
+                Categoria recomanada: Essencial
+              jitsi_meet: |-
+                Afegiu aquestes galetes quan integreu les reunions de videoconferència de Jitsi Meet a la vostra plataforma. Emmagatzemen la configuració de l'usuari, les preferències d'idioma, les opcions de qualitat de vídeo i les dades de sessió del servei de videoconferència.
+
+                Categoria recomanada: Preferències
+              linkedin_insight: |-
+                Afegiu aquestes galetes quan utilitzeu la LinkedIn Insight Tag per mesurar el rendiment de la campanya i les conversions de visitants dels anuncis de LinkedIn.
+
+                Categoria recomanada: Màrqueting
+              matomo: |-
+                Afegiu aquestes galetes quan utilitzeu l'analítica de Matomo per recopilar estadístiques del lloc web. Identifiquen els visitants que tornen, fan un seguiment de les sessions i emmagatzemen informació de referència utilitzada per als informes agregats.
+
+                Categoria recomanada: Analítica
+              openstreetmap_tiles: |-
+                Afegiu aquestes galetes quan la vostra experiència de mapa depengui de recursos allotjats a OpenStreetMap que puguin establir galetes (per exemple, mapes incrustats o funcions que depenguin del compte d'OSM).
+
+                Categoria recomanada: Preferències
+              recaptcha: |-
+                Afegiu aquestes galetes/entrades d'emmagatzematge quan Google reCAPTCHA protegeixi els formularis contra l'abús i els bots. Ajuden a avaluar les interaccions dels usuaris i els senyals de seguretat.
+
+                Categoria recomanada: Essencial
+              vimeo_embeds: |-
+                Afegiu aquestes galetes quan incrusteu vídeos de Vimeo en pàgines, propostes o comentaris. Vimeo les pot utilitzar per recordar la configuració del reproductor i mesurar les interaccions de reproducció.
+
+                Categoria recomanada: Preferències o Analítica
+              youtube_embeds: |-
+                Afegiu aquestes galetes quan permeteu incrustacions de vídeos de YouTube al contingut (propostes, comentaris, etc.). YouTube estableix galetes d'analítica i seguiment que recopilen informació sobre la reproducció de vídeo i el comportament dels usuaris.
+
+                Categoria recomanada: Preferències (si els vídeos són part integral del contingut), Analítica (per al seguiment/estadístiques) o Màrqueting (si s'utilitza amb finalitats publicitàries)
+              youtube_nocookie: |-
+                Afegiu aquestes claus d'emmagatzematge quan utilitzeu el mode de privadesa millorada de YouTube (youtube-nocookie.com). S'utilitzen per persistir l'estat del reproductor i les preferències del dispositiu/sessió.
+
+                Categoria recomanada: Preferències
+            labels:
+              cloudflare_turnstile:
+                one: Cloudflare Turnstile (%{count} galeta)
+                other: Cloudflare Turnstile (%{count} galetes)
+              decidim_essential:
+                one: Essencial de Decidim (%{count} galeta)
+                other: Essencial de Decidim (%{count} galetes)
+              emoji_picker:
+                one: Selector d'emojis (%{count} galeta)
+                other: Selector d'emojis (%{count} galetes)
+              facebook_pixel:
+                one: Pixel de Facebook (%{count} galeta)
+                other: Pixel de Facebook (%{count} galetes)
+              google_analytics:
+                one: Google Analytics (%{count} galeta)
+                other: Google Analytics (%{count} galetes)
+              google_maps_embeds:
+                one: Incrustacions de Google Maps (%{count} galeta)
+                other: Incrustacions de Google Maps (%{count} galetes)
+              google_tag_manager:
+                one: Google Tag Manager (%{count} galeta)
+                other: Google Tag Manager (%{count} galetes)
+              graphiql:
+                one: Explorador de l'API GraphiQL (%{count} galeta)
+                other: Explorador de l'API GraphiQL (%{count} galetes)
+              hcaptcha:
+                one: hCaptcha (%{count} galeta)
+                other: hCaptcha (%{count} galetes)
+              jitsi_meet:
+                one: Jitsi Meet (%{count} galeta)
+                other: Jitsi Meet (%{count} galetes)
+              linkedin_insight:
+                one: LinkedIn Insight (%{count} galeta)
+                other: LinkedIn Insight (%{count} galetes)
+              matomo:
+                one: Matomo (%{count} galeta)
+                other: Matomo (%{count} galetes)
+              openstreetmap_tiles:
+                one: Rajoles d'OpenStreetMap (%{count} galeta)
+                other: Rajoles d'OpenStreetMap (%{count} galetes)
+              recaptcha:
+                one: reCAPTCHA (%{count} galeta)
+                other: reCAPTCHA (%{count} galetes)
+              vimeo_embeds:
+                one: Incrustacions de Vimeo (%{count} galeta)
+                other: Incrustacions de Vimeo (%{count} galetes)
+              youtube_embeds:
+                one: Incrustacions de YouTube (%{count} galeta)
+                other: Incrustacions de YouTube (%{count} galetes)
+              youtube_nocookie:
+                one: YouTube sense galetes (%{count} galeta)
+                other: YouTube sense galetes (%{count} galetes)
+            services:
+              decidim_essential: Aquest lloc web
+              emoji_picker: Aquest lloc web
+              graphiql: Aquest lloc web
+              youtube_nocookie: YouTube (mode de privadesa millorada)
+          create:
+            error: S'ha produït un error en crear l'element de galeta! %{error}
+            success: Element de galeta creat correctament
+          create_preset:
+            error: S'ha produït un error en afegir l'element de galeta predefinit! %{error}
+            not_found: No s'ha trobat el valor predefinit
+            success: Element de galeta predefinit afegit correctament
+          destroy:
+            error: S'ha produït un error en eliminar l'element de galeta! %{error}
+            success: Element de galeta eliminat correctament
+          edit:
+            cancel: Cancel·lar
+            save: Desar
+            title: Editar l'element de galeta
+          form:
+            description_item_help: Indica el propòsit d'aquesta galeta i la informació que emmagatzema
+            expiration_item_help: Temps de caducitat de la galeta. Això és només informatiu i no afectarà el temps real de caducitat de la galeta.
+            service_item_help: Aquesta és una descripció breu que indica on s'utilitza (per exemple "Aquest lloc web", "Vídeos d'Youtube", "Reunions de Jitsi", etc.)
+            title_item_help: Podeu trobar les galetes utilitzant l'inspector (secció d'emmagatzematge). No ha de contenir espais.
+          index:
+            back_to_categories: Torna a les categories
+            cannot_remove_default: Els elements per defecte no es poden eliminar
+            confirm_reset: Esteu segur que voleu restablir aquest element als seus valors per defecte? Això eliminarà totes les personalitzacions que hagueu fet.
+            edit: Editar element
+            new: Nou element
+            reset: Restablir als valors per defecte
+            title: "%{category}: Elements de galeta"
+          new:
+            cancel: Cancel·lar
+            save: Desar
+            title: Nou element de galeta
+          update:
+            error: S'ha produït un error en actualitzar l'element de galeta! %{error}
+            success: Element de galeta actualitzat correctament
         custom_redirects:
           create:
             error: 'Error en crear la redirecció: %{error}'
@@ -449,8 +756,22 @@ ca:
             ip_address: Adreça IP
             no_data: No s'han trobat adreces IP
             stamps: Segells hashcash
+        landing_menu_items:
+          form:
+            preset: Omple amb valors predefinits
+            preset_content_blocks: Blocs de contingut existents
+            preset_global_menu: Elements habituals de Decidim
+            select_a_preset: "— Selecciona un element de menú habitual —"
+            url_help_html: "<b>#section-id</b> — es desplaça fins a una secció d'aquesta pàgina<br><b>/ruta</b> — pàgina interna (p. ex. /processes)<br><b>https://example.com</b> — enllaç extern (s'obre automàticament en una pestanya nova)"
+          new:
+            save: Desa
+            title: Nou element de menú
+          show:
+            save: Desa
+            title: Edita l'element de menú
         menu:
           admins: Administradores acotades
+          cookie_management: Gestió de galetes
           custom_redirects: Redireccions personalitzades
           editors: Modificacions als editors
           livechat: Xat en directe
@@ -548,7 +869,7 @@ ca:
           private_data_last_remove: Aquestes dades es van destruir fa %{time_ago}.
           private_data_last_update: Aquestes dades es van actualitzar per última vegada fa %{time_ago}.
           proposal_private_custom_fields: Camps privats
-          remove_private_data: "👉 És possible que vulgueu eliminar-lo"
+          remove_private_data: "\U0001F449 És possible que vulgueu eliminar-lo"
         scoped_admin_styles:
           menu:
             title: Panell admin
@@ -582,6 +903,77 @@ ca:
           title_closed: Fes clic per xatejar!
           title_open: Parlem!
       content_blocks:
+        awesome_process_groups:
+          active: Actius
+          all: Tots
+          all_taxonomies: Totes les categories
+          default_title: Processos participatius
+          filter_by_label: 'Filtra per:'
+          max_count: Quantitat màxima d'elements a mostrar
+          name: Grups de processos Awesome
+          past: Passats
+          remove_filter: Eliminar filtre
+          results_count:
+            one: "%{count} procés trobat"
+            other: "%{count} processos trobats"
+          status_label: 'Estat:'
+          title: Títol del bloc
+          upcoming: Propers
+        awesome_processes:
+          active_spaces: Processos participatius
+          any_group: Qualsevol grup
+          group_label: Grup
+          max_results: Quantitat màxima d'elements a mostrar
+          move_down: Mou avall
+          move_up: Mou amunt
+          name: Processos Awesome
+          process_group: Restringir al grup de processos
+          process_status: Filtre d'estat del procés
+          process_statuses:
+            active: Només processos actius
+            all: Tots els processos
+            past: Només processos passats
+            upcoming: Només processos futurs
+          process_type: Tipus de processos
+          process_type_mixed_hint: En mode mixt, els processos i grups s'intercalen fins la quantitat màxima. Els processos s'ordenen per pes (ascendent). Si un tipus s'esgota, els espais restants s'omplen amb l'altre.
+          process_types:
+            all: Tots els processos i grups barrejats
+            groups: Només grups de processos
+            processes: Només processos
+          processes: Processos
+          see_all_spaces: Veure tots els processos
+          selection_criteria: Criteris de selecció
+          selection_criteria_options:
+            automatic: Automàtic
+            manual: Manual
+          title: Títol del bloc
+        landing_menu:
+          alignment: Alineació del menú
+          alignment_center: Centre
+          alignment_help: Alinea els elements del menú a l'esquerra, al centre o a la dreta de la pàgina
+          alignment_left: Esquerra
+          alignment_right: Dreta
+          css_comment_hover: Estil per a l'enllaç del menú en passar-hi per sobre
+          css_comment_link: Estil per a cada enllaç del menú
+          css_comment_menu: Estil per a tot el bloc del menú
+          css_help_html: 'Podeu personalitzar encara més aquest menú creant un %{link}; feu servir aquest codi per referenciar-ne els diferents elements:'
+          css_help_link: estil personalitzat
+          delete_confirm: Esteu segur que voleu eliminar aquest element?
+          drag: Arrossegueu per reordenar
+          edit_item: Edita l'element
+          empty_item: Nou element buit
+          name: Menú global Awesome
+          new_item: Afegeix un element nou
+          presets: Valors predefinits
+          show_on_mobile: Mostra en pantalles mòbils
+          sticky: Fixat (sempre visible en desplaçar-se)
+          table:
+            actions: Accions
+            hidden: Ocult
+            name: Nom
+            url: URL
+            visible: Visible
+          title: Ves a ...
         map:
           collapse: Inicia amb el menú col·lapsat
           map_center: Punt central del mapa (Latitud, Longitud)
@@ -603,15 +995,37 @@ ca:
           text_settings: Configuració del text
           title: Títol
           truncate: Nombre màxim de caràcters per les descripcions emergents
+        rich_text:
+          add_column: Afegeix una columna nova
+          background_image: Imatge de fons
+          background_image_help: 'Imatge opcional que es mostra darrere del contingut de la columna. Amplada mínima recomanada: 1920 px.'
+          background_image_placement: Col·locació de la imatge de fons
+          background_image_placement_help: Com es mostra la imatge de fons dins de la columna. Només s'aplica si s'ha carregat una imatge de fons.
+          background_image_placements:
+            contain_center: Ajustar (centrada)
+            cover_bottom: Cobrir (alineada a baix)
+            cover_center: Cobrir (centrada)
+            cover_top: Cobrir (alineada a dalt)
+            repeat: Repetir (mosaic)
+          block_id: Identificador intern
+          block_id_help: Aquest valor s'utilitzarà com a àncora de secció a l'URL. Ha de ser únic per pàgina (p. ex. "el-nostre-equip").
+          block_id_placeholder: nom de referència intern (no s'utilitza públicament)
+          column_title: Columna
+          css_comment_this_column: Estil per a la columna %{number}
+          css_comment_title: Estil per al títol del bloc
+          css_help_html: 'Podeu personalitzar encara més aquest bloc creant un %{link}; feu servir aquest codi per referenciar-ne els diferents elements:'
+          css_help_link: estil personalitzat
+          name: Bloc de text enriquit Awesome
+          remove_column: Elimina
+          restrict_links: Evita que els enllaços del text es mostrin si la usuària no ha iniciat sessió
+          restrict_videos: Evita que els vídeos incrustats al text es mostrin si la usuària no ha iniciat sessió
+          sign_in_to_watch: Inicia sessió per veure aquest vídeo
+          title: Títol del bloc
       credits: Decidim Awesome %{version} · Mantingut amb ♥ per %{company}
       custom_fields:
         errors:
           invalid_fields: No s'ha pogut analitzar el contingut però s'ha assignat al camp '%{field}'
           invalid_xml: 'No s''ha pogut analitzar el contingut: no s''han trobat els elements DL/DD a l''XML'
-      editor_images:
-        create:
-          error: Error en pujar la imatge!
-          success: Imatge pujada correctament
       map_component:
         map:
           api_not_ready: |
@@ -630,6 +1044,9 @@ ca:
             view_meeting: Veure trobada
             view_proposal: Veure proposta
       proposal_private_custom_fields_disclosure: Aquesta informació no es publicarà
+      proposals:
+        votes:
+          blocked_by_status: Votació no disponible
       required_authorizations:
         index:
           authorization_options_invalid: Malauradament, tot i que teniu aquesta autorització, les dades utilitzades per verificar-vos no són vàlides en aquest context.
@@ -659,7 +1076,7 @@ ca:
           abstained: "✔ Abstenció"
           change_vote: Canvia el meu vot
           default_box_title: Vota en aquesta proposta
-          default_instructions_html: "<p>Llegeix les normes de la votació amb atenció per entendre com s'utilitzarà el teu vot per %{organization}\"</p>"
+          default_instructions_html: "<p>Llegeix les normes de la votació amb atenció per entendre com s'utilitzarà el teu vot per %{organization}</p>"
           modal:
             cancel: Cancel·la
             message: El teu vot es considerarà definitiu el %{date}. Pots canviar-lo fins a aquest moment
@@ -680,6 +1097,7 @@ ca:
     download_your_data:
       show:
         admin_actions: Accions d'administrador
+        awesome_private_proposals: Exportació de propostes amb camps privats
     meetings:
       meetings_map:
         view_meeting: Veure trobada
@@ -697,6 +1115,17 @@ ca:
           view_proposal: Veure proposta
   layouts:
     decidim:
+      data_consent:
+        details:
+          columns:
+            expiration: Caducitat
+          items:
+            _session_id:
+              expiration: sessió
+            decidim-consent:
+              expiration: 1 any
+            pwaInstallPromptSeen:
+              expiration: persistent
       decidim_awesome:
         admin:
           maintenance:

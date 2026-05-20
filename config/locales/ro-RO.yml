@@ -136,9 +136,6 @@ ro:
           map_settings: Setări pentru hartă
           text_settings: Setări de text
           title: Titlu
-      editor_images:
-        create:
-          error: Eroare la încărcarea imaginii!
       voting:
         voting_cards:
           modal:

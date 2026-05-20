@@ -16,6 +16,8 @@ module Decidim
     autoload :TranslatedCustomFieldsType, "decidim/decidim_awesome/api/types/translated_custom_fields_type"
     autoload :LocalizedCustomFieldsType, "decidim/decidim_awesome/api/types/localized_custom_fields_type"
     autoload :Authorizer, "decidim/decidim_awesome/authorizer"
+    autoload :MenuItemsParser, "decidim/decidim_awesome/menu_items_parser"
+    autoload :ParseContentBlock, "decidim/decidim_awesome/parse_content_block"
 
     # Awesome comes with some components for participatory spaces
     # Currently :awesome_map and :awesome_iframe, list them here
@@ -119,6 +121,13 @@ module Decidim
       ]
     end
 
+    # Restricts votes to proposals in admin-selected states.
+    # true = feature available per step (default). :disabled = hide entirely.
+    # Per-step checkbox is always off by default (depends on `votes_enabled`).
+    config_accessor :votes_by_proposal_status do
+      true
+    end
+
     # Allows admins to limit the amount of pending amendments to (currently) one per proposal before it's accepted.
     # Once a pending amendment is accepted, a new on can be created.
     # Note that this does not limit the number of amendment per se, the admin has to set the limit in the proposal's component configuration.
@@ -210,6 +219,14 @@ module Decidim
       {}
     end
 
+    # Enables cookie consent management with customizable categories and items
+    # Admins can configure cookie categories with different visibility levels (visible/hidden)
+    # and manage individual cookie items within each category
+    # Set to :disabled to completely remove this feature, other values will enable it and allow admins to configure it
+    config_accessor :cookie_management do
+      true
+    end
+
     # Allows admins to manually authorize users with the specified methods
     # if set to an empty array, the admins will not be able to authorize users but the system admin can still configure it
     # if set to :disabled the feature will be completely removed
@@ -261,6 +278,18 @@ module Decidim
 
     config_accessor :home_content_block_menu do
       []
+    end
+
+    # Configurable rich text content block for landing pages.
+    # Supports multi-column layouts, backgrounds, and access restrictions.
+    config_accessor :rich_text_block do
+      true
+    end
+
+    # Configurable anchor-based menu navigator for landing pages.
+    # Supports sticky positioning and configurable alignment.
+    config_accessor :landing_menu_block do
+      true
     end
 
     # Allows admins to assign "fake" admins scoped to some admin zones using the
@@ -358,6 +387,11 @@ module Decidim
         "Decidim::ParticipatoryProcessUserRole",
         "Decidim::ConferenceUserRole"
       ]
+    end
+
+    # Maximum number of columns allowed per RichText content block
+    config_accessor :max_rich_text_columns do
+      5
     end
 
     # Which components will be tampered to add the voting registry override

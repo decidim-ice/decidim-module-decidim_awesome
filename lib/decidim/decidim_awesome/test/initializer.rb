@@ -21,6 +21,7 @@ Decidim::DecidimAwesome.configure do |config|
       :home_content_block_menu,
       :scoped_admins,
       :custom_redirects,
+      :cookie_management,
       :validate_title_min_length,
       :validate_title_max_caps_percent,
       :validate_title_max_marks_together,
@@ -32,6 +33,7 @@ Decidim::DecidimAwesome.configure do |config|
       :weighted_proposal_voting,
       :additional_proposal_sortings,
       :allow_limiting_amendments,
+      :votes_by_proposal_status,
       :proposal_private_custom_fields,
       :hashcash_signup,
       :hashcash_login

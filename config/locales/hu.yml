@@ -1,4 +1,6 @@
 hu:
+  active_hashcash:
+    submit_filter: Szűrő
   activemodel:
     attributes:
       config:
@@ -116,8 +118,8 @@ hu:
           roles:
             admin: Adminisztrátor
             collaborator: Együttműködő
+            evaluator: Értékelő
             moderator: Moderátor
-            valuator: Értékelő
         checks:
           index:
             admin_head_tags: Awesome címkék az admin applikáció headerben
@@ -236,9 +238,6 @@ hu:
           text_settings: Szöveg beállítások
           title: Cím
           truncate: A felugró ablakban lévő leírások maximális karakterszáma
-      editor_images:
-        create:
-          error: Hiba történt a kép feltöltése közben!
       voting:
         voting_cards:
           change_vote: Szavazatom megváltoztatása

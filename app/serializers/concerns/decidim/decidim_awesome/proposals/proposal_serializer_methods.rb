@@ -47,7 +47,10 @@ module Decidim
             payload = {}
             private_custom_fields = CustomFields.new(awesome_proposal_private_custom_fields)
             if private_custom_fields.present?
-              fields_entries(private_custom_fields, proposal.private_body) do |key, value|
+              private_body = proposal.private_body.presence || proposal.reload_extra_fields&.private_body
+              return payload if private_body.blank?
+
+              fields_entries(private_custom_fields, private_body) do |key, value|
                 value = value.first if value.is_a? Array
                 payload[:"private_body/#{key}"] = value
               end
@@ -62,9 +65,20 @@ module Decidim
             custom_fields.fields.each do |field|
               next unless field["label"].present? && field.has_key?("name")
 
-              value = field["userData"].is_a?(Array) ? field["userData"].first : field["userData"]
+              value = extract_field_value(custom_fields, field)
               yield field["label"].parameterize, value
             end
+          end
+
+          private
+
+          def extract_field_value(custom_fields, field)
+            return if custom_fields.data.blank?
+
+            nodes = custom_fields.data.search("##{field["name"]} div")
+            return if nodes.blank?
+
+            nodes.map { |v| v.inner_html(encoding: "UTF-8").presence || v.attribute("alt")&.value }.join("\n")
           end
         end
       end

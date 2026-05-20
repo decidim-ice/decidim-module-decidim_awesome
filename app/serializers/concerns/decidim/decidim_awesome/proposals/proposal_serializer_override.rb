@@ -12,24 +12,50 @@ module Decidim
           include ProposalSerializerMethods
 
           alias_method :decidim_original_serialize, :serialize
+          alias_method :decidim_original_convert_to_text, :convert_to_text
 
           def serialize
-            # serialize first the custom fields,
-            # as default serialization will strip proposal body's <xml> tags.
+            # Collect custom fields before core serialization because
+            # default serialization strips proposal body's <xml> tags.
+            custom_fields = serialize_custom_fields
             serialization = decidim_original_serialize
             serialization.merge!(proposal_vote_weights)
-            serialization.merge!(serialize_custom_fields)
+            serialization.merge!(custom_fields)
+          end
+
+          # The original convert to text does not parses dt/dd items
+          def convert_to_text(text)
+            text.gsub!(%r{(</dt>)}i, "\n\\1")
+            text.gsub!(%r{[\s]*<dd[^>]*>[\s]*(.*)[\s]*</dd+>}i) do |s|
+              s.gsub!(%r{(</div>)}i, "\n\\1")
+            end
+
+            decidim_original_convert_to_text(text)
           end
 
           protected
 
+          # Override the standard `:votes` column with the weighted breakdown
+          # whenever the component currently uses a weighted manifest, OR
+          # weighted votes already exist (e.g. left over from a previous
+          # configuration). When neither is true, return an empty payload so
+          # Decidim core's integer vote count is left in place.
           def proposal_vote_weights
-            payload = {}
-            if proposal.respond_to?(:vote_weights)
-              proposal.update_vote_weights!
-              payload[:votes] = proposal.reload.vote_weights
-            end
-            payload
+            return {} unless should_serialize_weighted_votes?
+
+            proposal.update_vote_weights!
+            weights = proposal.vote_weights
+            return {} if weights.blank?
+
+            { votes: weights }
+          end
+
+          def should_serialize_weighted_votes?
+            manifest = awesome_voting_manifest_for(proposal.component)
+            return true if manifest&.weighted?
+
+            proposal_votes = Decidim::Proposals::ProposalVote.where(proposal:)
+            Decidim::DecidimAwesome::VoteWeight.exists?(proposal_vote_id: proposal_votes.select(:id))
           end
         end
       end

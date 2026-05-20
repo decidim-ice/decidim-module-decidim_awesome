@@ -1,0 +1,65 @@
+# frozen_string_literal: true
+
+module Decidim
+  module DecidimAwesome
+    module Admin
+      class CreateCookieItemPreset < Decidim::Command
+        # Public: Initializes the command.
+        #
+        # forms - An array of CookieItemForm objects to create.
+        # category_slug - The slug of the category where the items will be created.
+        def initialize(forms, category_slug)
+          @forms = forms
+          @category_slug = category_slug
+          @organization = forms.first.current_organization
+          @config = AwesomeConfig.find_or_initialize_by(organization: @organization, var: :cookie_management)
+        end
+
+        # Executes the command. Broadcasts these events:
+        #
+        # - :ok when all items were created (skipping duplicates).
+        # - :invalid if any item fails validation or an unexpected error occurs.
+        #
+        # Returns nothing.
+        def call
+          errors = []
+          forms.each do |form|
+            form_with_context = form.with_context(
+              current_organization: form.current_organization,
+              current_user: form.current_user,
+              category:
+            )
+
+            UpdateCookieItem.call(form_with_context, category_slug) do
+              on(:ok) do
+                category["items"] ||= {}
+                category["items"].merge!(form.name => form.to_params)
+              end
+              on(:invalid) do |error_message|
+                errors << "#{form.name}: #{error_message.presence || form.errors.full_messages.join(", ")}"
+              end
+            end
+          end
+
+          return broadcast(:invalid, errors.join(" | ")) if errors.any?
+
+          broadcast(:ok)
+        rescue StandardError => e
+          broadcast(:invalid, e.message)
+        end
+
+        private
+
+        attr_reader :forms, :category_slug
+
+        def store
+          @store ||= CookieManagementStore.new(@organization, @config.value || {})
+        end
+
+        def category
+          @category ||= store.categories[category_slug]
+        end
+      end
+    end
+  end
+end

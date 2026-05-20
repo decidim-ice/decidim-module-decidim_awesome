@@ -1,0 +1,95 @@
+// Full-width override for content block container
+[id^="awesome-landing-menu"] {
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+// Desktop menu — mirrors Decidim's home__menu
+.awesome-landing-menu {
+  @apply bg-primary py-4;
+
+  z-index: 1;
+}
+
+.awesome-landing-menu--sticky {
+  @apply sticky top-0;
+
+  z-index: 10;
+}
+
+.awesome-landing-menu__container {
+  @apply hidden md:flex flex-row flex-wrap items-center;
+}
+
+.awesome-landing-menu__container--center {
+  @apply justify-center;
+}
+
+.awesome-landing-menu__container--left {
+  @apply justify-start pl-8;
+}
+
+.awesome-landing-menu__container--right {
+  @apply justify-end pr-8;
+}
+
+// Dividers between items — same pattern as home__menu-element
+.awesome-landing-menu-element {
+  @apply flex items-center;
+
+  &:not(:first-child)::before {
+    content: "";
+
+    @apply block w-px bg-white opacity-30 mx-2;
+
+    height: 1.2em;
+  }
+}
+
+// Mobile menu
+.awesome-landing-menu__mobile {
+  @apply md:hidden relative bg-primary;
+}
+
+.awesome-landing-menu__mobile-trigger {
+  @apply flex items-center gap-2 w-full px-4 font-semibold text-white;
+
+  svg {
+    fill: currentColor;
+  }
+
+  > span {
+    @apply flex items-center gap-2 leading-4;
+
+    svg {
+      @apply w-6 h-6;
+    }
+  }
+
+  > svg:last-of-type {
+    @apply hidden;
+  }
+
+  &[aria-expanded="true"] > svg:first-of-type {
+    @apply hidden;
+  }
+
+  &[aria-expanded="true"] > svg:last-of-type {
+    @apply block;
+  }
+}
+
+.awesome-landing-menu__mobile-link {
+  @apply flex items-center gap-1 font-semibold text-sm;
+}
+
+.awesome-landing-menu__mobile-dropdown {
+  @apply absolute top-full left-0 w-full my-4 shadow-lg divide-y px-4 bg-white z-20;
+
+  &[aria-hidden="true"] {
+    @apply hidden;
+  }
+}

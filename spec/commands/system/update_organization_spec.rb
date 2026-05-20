@@ -22,6 +22,7 @@ module Decidim
       let(:params) do
         {
           name: { en: "Gotham City" },
+          short_name: { en: "Gotham" },
           host: "decide.example.org",
           secondary_hosts: "foo.example.org\r\n\r\nbar.example.org",
           force_users_to_authenticate_before_access_organization: false,

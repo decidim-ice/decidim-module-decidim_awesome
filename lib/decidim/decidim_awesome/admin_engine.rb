@@ -20,6 +20,11 @@ module Decidim
           resources :hacks, except: [:show], controller: "menu_hacks"
         end
         resources :custom_redirects, except: [:show]
+        resources :cookie_categories, except: [:show] do
+          resources :cookie_items, except: [:show] do
+            post :create_preset, on: :collection
+          end
+        end
         resources :config, param: :var, only: [:show, :update]
         resources :scoped_styles, param: :var, only: [:create, :destroy]
         resources :proposal_custom_fields, param: :var, only: [:create, :destroy]
@@ -36,6 +41,10 @@ module Decidim
           resources :hashcash, only: [:index, :show], as: "hashcashes" do
             get :ip_addresses, on: :collection
           end
+        end
+        resources :landing_menu_items, only: [:new, :show, :create, :update, :destroy] do
+          patch :toggle_visible, on: :member
+          put :reorder, on: :collection
         end
         resources :admin_authorizations, only: [:edit, :update, :destroy]
         post :migrate_images, to: "checks#migrate_images"
@@ -66,7 +75,7 @@ module Decidim
                                 else
                                   is_active_link?(decidim_admin_decidim_awesome.checks_path)
                                 end,
-                        if: defined?(current_user) && current_user&.read_attribute("admin")
+                        if: defined?(current_user) && current_user&.read_attribute("admin") && current_user.admin_terms_accepted?
         end
         # submenus
         Decidim::DecidimAwesome::Menu.register_custom_fields_submenu!

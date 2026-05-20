@@ -46,6 +46,12 @@ ja:
         component_manifest: このタイプのコンポーネントのみ有効
         participatory_space_manifest: 以下のタイプの参加型スペースに適用
         participatory_space_slug: あるいは、以下の参加スペースに適用
+      content_block_attachment:
+        background_image_0: 背景画像
+        background_image_1: 背景画像
+        background_image_2: 背景画像
+        background_image_3: 背景画像
+        background_image_4: 背景画像
       custom_redirect:
         active: 有効
         destination: リダイレクト先
@@ -189,8 +195,8 @@ ja:
           roles:
             admin: 管理者
             collaborator: コラボレーター
+            evaluator: 評価者
             moderator: モデレーター
-            valuator: 評価者
         admin_authorizations:
           authorization:
             confirm_destroy: この認証を破棄してもよろしいですか？ユーザーのプラットフォームへのアクセスに影響する可能性があります。
@@ -214,18 +220,22 @@ ja:
         checks:
           index:
             admin_head_tags: 管理者向けアプリケーションヘッダーに含まれる Awesome tags
+            awesome_update_available: '新しいバージョンが利用可能です: %{latest_version}'
+            awesome_version: Decidim Awesome version %{version}
             decidim-admin: Adminモジュールより
             decidim-assemblies: 参加スペースモジュールから
             decidim-conferences: カンファレンスモジュールから
             decidim-core: Coreモジュールより
             decidim-participatory_processes: 参加型プロセスモジュールから
             decidim-proposals: 提案モジュールより
+            decidim_update_available: '新しいバージョンが利用可能です: %{latest_version}'
             decidim_version: Decidim version %{version}
             errors:
               CSS: 必要な <link> スタイルシートエントリがヘッドに含まれていません。この問題を解決するために、独自の _head.html.erbに手動で追加することもできます。
               JavaScript: 必要な <script> JavaScriptエントリがヘッドに含まれていません。この問題を解決するために、独自の admin/_head.html.erbに手動で追加することもできます。
             head_tags: アプリケーションヘッダーに含まれる Awesome tags
             link_admins: /system パネルにログイン
+            view_release: リリースノートを表示
         config:
           anonymous: 非ログインユーザー
           caution: '注意: この機能は、予期しない結果につながる可能性があるデフォルトの動作を大きく変更します。注意して使用してください！'
@@ -450,6 +460,19 @@ ja:
             ip_address: IPアドレス
             no_data: IPアドレスが見つかりません
             stamps: Hashcashスタンプ
+        landing_menu_items:
+          form:
+            preset: 自動入力プリセット
+            preset_content_blocks: 既存のコンテンツブロック
+            preset_global_menu: Decidimのいつものメンバー
+            select_a_preset: "— 一般的なメニュー項目を選択 —"
+            url_help_html: "<b>#section-id</b> — このページ内のセクションにスクロールします<br><b>/path</b> — 内部ページへのリンク（例：/processes）<br><b>https://example.com</b> — 外部リンク（自動的に新規タブで開きます）"
+          new:
+            save: 保存
+            title: 新規メニュー項目
+          show:
+            save: 保存
+            title: メニュー項目を編集
         menu:
           admins: スコープ付き管理者
           custom_redirects: カスタムリダイレクト
@@ -583,6 +606,72 @@ ja:
           title_closed: クリックしてチャット
           title_open: チャットしてみましょう
       content_blocks:
+        awesome_process_groups:
+          active: 有効
+          all: 全て
+          all_taxonomies: 全カテゴリ
+          default_title: 参加型プロセス
+          filter_by_label: 'フィルター：'
+          max_count: 表示する要素の最大数
+          name: おすすめプロセスグループ
+          past: 過去
+          remove_filter: フィルター解除
+          results_count:
+            other: "%{count} 件のプロセスがあります"
+          status_label: 'ステータス：'
+          title: ブロックタイトル
+          upcoming: 今後
+        awesome_processes:
+          active_spaces: 参加型プロセス
+          any_group: 任意のグループ
+          group_label: グループ
+          max_results: 最大表示要素数
+          name: Awesome プロセス
+          process_group: プロセスグループを制限する
+          process_status: プロセス状態フィルター
+          process_statuses:
+            active: アクティブなプロセスのみ
+            all: 全てのプロセス
+            past: 過去のプロセスのみ
+            upcoming: 未来のプロセスのみ
+          process_type: プロセスの種別
+          process_types:
+            groups: プロセスグループのみ
+            processes: プロセスのみ
+          processes: プロセス
+          see_all_spaces: 全プロセスを見る
+          selection_criteria: 選択基準
+          selection_criteria_options:
+            automatic: 自動
+            manual: 手動
+          title: ブロックタイトル
+        landing_menu:
+          alignment: メニュー位置
+          alignment_center: 中央
+          alignment_help: ページの左、中央、または右にメニューアイテムを配置
+          alignment_left: 左
+          alignment_right: 右
+          css_comment_hover: マウスオーバー時のメニューリンクのスタイル
+          css_comment_link: 個別メニューリンクのスタイル
+          css_comment_menu: メニューブロック全体のスタイル
+          css_help_html: '%{link}を作成すると、このメニューをさらにカスタマイズできます。以下のコードでメニュー内の各要素を参照できます：'
+          css_help_link: カスタムスタイル
+          delete_confirm: この項目を削除してもよろしいですか？
+          drag: ドラッグして並び替え
+          edit_item: 項目を編集
+          empty_item: 新しい空の項目
+          name: 素晴らしいグローバルメニュー
+          new_item: 新しい項目を追加
+          presets: プリセット
+          show_on_mobile: モバイル画面で表示
+          sticky: Sticky (常にスクロールで表示)
+          table:
+            actions: アクション
+            hidden: 非表示
+            name: 名前
+            url: URL
+            visible: 表示
+          title: '移動先:'
         map:
           collapse: メニューは折りたたまれた状態で開始
           map_center: マップの中央 (緯度、経度)
@@ -604,15 +693,37 @@ ja:
           text_settings: テキストの設定
           title: タイトル
           truncate: ポップアップの説明のための最大文字数
+        rich_text:
+          add_column: カラムの追加
+          background_image: 背景画像
+          background_image_help: カラムの内容の背後に表示されるオプションの画像。最小幅1920pxを推奨します。
+          background_image_placement: 画像の配置
+          background_image_placement_help: カラム内で背景画像がどのように表示されるかを指定します。背景画像がアップロードされている場合にのみ適用されます。
+          background_image_placements:
+            contain_center: 包含（中央）
+            cover_bottom: カバー (下揃え)
+            cover_center: カバー（中央）
+            cover_top: カバー (上揃え)
+            repeat: 繰り返し（タイル表示）
+          block_id: 内部ラベル
+          block_id_help: この値は URL のセクションアンカーとして使用されます。ページごとに一意である必要があります（例："our-team"）。
+          block_id_placeholder: 内部参照名（非公開）
+          column_title: カラム
+          css_comment_this_column: '%{number} カラムのスタイル'
+          css_comment_title: ブロックタイトルのスタイル
+          css_help_html: '%{link}を作成すると、このブロックをさらにカスタマイズできます。以下のコードでブロック内の各要素を参照できます：'
+          css_help_link: カスタムスタイル
+          name: Awesomeリッチテキストブロック
+          remove_column: 削除
+          restrict_links: ユーザーがログインしていない限り、テキスト内のリンクを表示しないようにする
+          restrict_videos: ユーザーがログインしていない限り、テキスト内の埋め込み動画を表示しないようにする
+          sign_in_to_watch: ログインしてこの動画を見る
+          title: ブロックタイトル
       credits: Decidim Awesome %{version} · Maintained with ♥ by %{company}
       custom_fields:
         errors:
           invalid_fields: コンテンツは解析できませんでしたが、フィールド '%{field}' に割り当てられました
           invalid_xml: 'コンテンツを解析できませんでした: DL/DD要素がXMLに見つかりません'
-      editor_images:
-        create:
-          error: 画像アップロードエラー
-          success: 画像は正常にアップロードされました
       map_component:
         map:
           api_not_ready: |
@@ -679,6 +790,7 @@ ja:
     download_your_data:
       show:
         admin_actions: 管理者の操作
+        awesome_private_proposals: 非公開フィールドを含めて提案をエクスポート
     meetings:
       meetings_map:
         view_meeting: ミーティングを表示

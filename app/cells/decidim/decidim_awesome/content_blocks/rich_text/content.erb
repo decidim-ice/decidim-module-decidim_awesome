@@ -1,0 +1,14 @@
+<% if title %>
+  <div class="home__section-header">
+    <h2 class="home__section-title"><%= title %></h2>
+  </div>
+<% end %>
+
+<div class="<%= columns.size > 1 ? "grid grid-cols-1 #{grid_class} gap-6 md:gap-12" : "" %>">
+  <% columns.each_with_index do |col, idx| %>
+    <% styles = column_styles(col, idx) %>
+    <div class="awesome-rich-text__column editor-content <%= column_placement_class(col, idx) %>" <%= "style=\"#{styles}\"".html_safe if styles.present? %>>
+      <%= rendered_body(col) %>
+    </div>
+  <% end %>
+</div>

@@ -89,15 +89,13 @@ describe "Filter Admin actions" do
 
         click_on "Export this search"
 
-        perform_enqueued_jobs do
-          click_on "Export as CSV"
-        end
+        click_on "Export as CSV"
 
         within ".flash.success" do
           expect(page).to have_content("Export job has been enqueued. You will receive an email when it's ready.")
         end
 
-        sleep 3
+        perform_enqueued_jobs
 
         expect(last_email.subject).to eq(%(Your export "admin_actions" is ready))
         expect(Decidim::PrivateExport.count).to eq(1)

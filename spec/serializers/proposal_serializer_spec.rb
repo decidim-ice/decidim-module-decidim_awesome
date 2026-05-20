@@ -65,11 +65,30 @@ module Decidim::Proposals
         expect(serialized).to include(votes: labeled_weights)
       end
 
-      context "when no manifest" do
+      context "when the component does not use a weighted voting manifest" do
         let(:manifest) { nil }
 
-        it "serializes the weights" do
+        it "still serializes weighted vote data that exists in the component" do
           expect(serialized).to include(votes: { "0" => 1, "1" => 0, "2" => 0, "3" => 2, "4" => 0, "5" => 0 })
+        end
+
+        context "and no weighted votes exist in the component" do
+          let!(:votes) do
+            3.times do
+              create(:proposal_vote, proposal:, author: create(:user, organization: proposal.organization))
+            end
+          end
+          let!(:another_extra_fields) { nil }
+
+          it "does not update weight cache while exporting" do
+            expect(proposal).not_to receive(:update_vote_weights!)
+            subject.serialize
+          end
+
+          it "preserves Decidim core's integer vote count and does not overwrite it" do
+            expect(serialized[:votes]).to eq(proposal.reload.proposal_votes_count)
+            expect(serialized[:votes]).to be_a(Integer)
+          end
         end
       end
 
@@ -98,6 +117,82 @@ module Decidim::Proposals
             expect(serialized).not_to include("body/name/en")
             expect(serialized).not_to include("body/age/ca")
             expect(serialized).not_to include("body/name/ca")
+          end
+        end
+
+        context "when custom fields contain a checkbox-group with multiple selections" do
+          let(:checkbox_xml) do
+            "<xml><dl>" \
+              "<dt name=\"colors\">Colors</dt>" \
+              "<dd id=\"colors\" name=\"colors\"><div>red</div><div>blue</div><div>green</div></dd>" \
+              "</dl></xml>"
+          end
+          let(:custom_fields) do
+            {
+              foo: "[{\"type\":\"checkbox-group\",\"required\":false,\"label\":\"Colors\",\"name\":\"colors\"," \
+                   "\"values\":[{\"label\":\"red\",\"value\":\"red\"},{\"label\":\"blue\",\"value\":\"blue\"},{\"label\":\"green\",\"value\":\"green\"}]}]"
+            }
+          end
+          let(:body) do
+            {
+              "en" => checkbox_xml,
+              "machine_translations" => {
+                "ca" => checkbox_xml
+              }
+            }
+          end
+
+          it "serializes all selected checkbox values joined by newline" do
+            expect(serialized[:"body/colors/en"]).to eq("red\nblue\ngreen")
+            expect(serialized[:"body/colors/ca"]).to eq("red\nblue\ngreen")
+          end
+
+          context "when translations differ per locale" do
+            let(:ca_xml) do
+              "<xml><dl>" \
+                "<dt name=\"colors\">Colors</dt>" \
+                "<dd id=\"colors\" name=\"colors\"><div>vermell</div><div>blau</div></dd>" \
+                "</dl></xml>"
+            end
+            let(:body) do
+              {
+                "en" => checkbox_xml,
+                "machine_translations" => {
+                  "ca" => ca_xml
+                }
+              }
+            end
+
+            it "serializes each locale independently" do
+              expect(serialized[:"body/colors/en"]).to eq("red\nblue\ngreen")
+              expect(serialized[:"body/colors/ca"]).to eq("vermell\nblau")
+            end
+          end
+
+          context "when body has only one locale (no machine_translations)" do
+            let(:body) { { "en" => checkbox_xml } }
+
+            it "only serializes the available locale" do
+              expect(serialized[:"body/colors/en"]).to eq("red\nblue\ngreen")
+              expect(serialized).not_to have_key(:"body/colors/ca")
+            end
+          end
+
+          context "when one locale has no matching checkbox data" do
+            let(:empty_xml) { "<xml><dl></dl></xml>" }
+            let(:body) do
+              {
+                "en" => checkbox_xml,
+                "machine_translations" => {
+                  "ca" => empty_xml
+                }
+              }
+            end
+
+            it "serializes en with values and ca with nil" do
+              expect(serialized[:"body/colors/en"]).to eq("red\nblue\ngreen")
+              expect(serialized[:"body/colors/ca"]).to be_nil
+            end
           end
         end
       end
