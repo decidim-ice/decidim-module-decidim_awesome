@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = "0.31.3"
+DECIDIM_VERSION = "0.31.5"
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-conferences", DECIDIM_VERSION
@@ -15,8 +15,6 @@ gem "decidim-templates", DECIDIM_VERSION
 gem "bootsnap", "~> 1.4"
 
 gem "puma", ">= 6.3.1"
-# temporary fix for simplecov
-gem "rexml", "3.4.1"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
