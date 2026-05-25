@@ -4,3 +4,6 @@ inherit_from:
 AllCops:
   Exclude:
     - "spec/decidim_dummy_app*/**/*"
+
+Capybara/ClickLinkOrButtonStyle:
+  Enabled: false

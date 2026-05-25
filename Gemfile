@@ -22,6 +22,8 @@ group :development, :test do
 
   gem "brakeman", "~> 5.4"
   gem "parallel_tests", "~> 4.2"
+  gem "rubocop-factory_bot", "!= 2.26.0", require: false
+  gem "rubocop-rspec_rails", "!= 2.29.0", require: false
 end
 
 group :development do

@@ -77,8 +77,8 @@ describe "System admin manages awesome verifications" do
     it "does not show the awesome configuration" do
       click_on "Show advanced settings"
 
-      expect(page).not_to have_content("Decidim Awesome Tweaks")
-      expect(page).not_to have_content("Allow admins to manually verify users with these authorizations")
+      expect(page).to have_no_content("Decidim Awesome Tweaks")
+      expect(page).to have_no_content("Allow admins to manually verify users with these authorizations")
     end
   end
 end

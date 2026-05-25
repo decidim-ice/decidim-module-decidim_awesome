@@ -58,11 +58,11 @@ describe "Admin manages maintenance" do
         expect(page).to have_content(translated(component.name))
         expect(page).to have_content(translated(another_component.name))
         expect(page).to have_content(translated(modern_component.name))
-        expect(page).not_to have_content(translated(missing_component.name))
+        expect(page).to have_no_content(translated(missing_component.name))
         expect(page).to have_content("Delete all")
         expect(page).to have_content("4 months ago")
         expect(page).to have_content("2 months ago", count: 2)
-        expect(page).not_to have_content("Done")
+        expect(page).to have_no_content("Done")
         expect(page).to have_css("span", class: "not-destroyable", count: 2)
       end
     end
@@ -71,24 +71,24 @@ describe "Admin manages maintenance" do
       within ".table-list tbody tr[data-id=\"#{component.id}\"]" do
         expect(page).to have_content(translated(component.name))
         expect(page).to have_content("4 months ago")
-        expect(page).not_to have_content("Done")
+        expect(page).to have_no_content("Done")
         expect(page).to have_content("Delete all")
-        expect(page).not_to have_css("span", class: "not-destroyable")
+        expect(page).to have_no_css("span", class: "not-destroyable")
       end
 
       within ".table-list tbody tr[data-id=\"#{another_component.id}\"]" do
         expect(page).to have_content(translated(another_component.name))
         expect(page).to have_content("2 months ago")
-        expect(page).not_to have_content("Done")
-        expect(page).not_to have_content("Delete all")
+        expect(page).to have_no_content("Done")
+        expect(page).to have_no_content("Delete all")
         expect(page).to have_css("span", class: "not-destroyable")
       end
 
       within ".table-list tbody tr[data-id=\"#{modern_component.id}\"]" do
         expect(page).to have_content(translated(modern_component.name))
         expect(page).to have_content("2 months ago")
-        expect(page).not_to have_content("Done")
-        expect(page).not_to have_content("Delete all")
+        expect(page).to have_no_content("Done")
+        expect(page).to have_no_content("Delete all")
         expect(page).to have_css("span", class: "not-destroyable")
       end
 
@@ -97,8 +97,8 @@ describe "Admin manages maintenance" do
       end
 
       expect(page).to have_content("Private data for A process / Erasable is set to be destroyed.")
-      expect(page).not_to have_content("Delete all")
-      expect(page).not_to have_content("Done")
+      expect(page).to have_no_content("Delete all")
+      expect(page).to have_no_content("Done")
       expect(page).to have_css(".loading-spinner")
 
       Decidim::DecidimAwesome::DestroyPrivateDataJob.perform_now(component)
@@ -112,8 +112,8 @@ describe "Admin manages maintenance" do
           click_on "Delete all"
         end
         within ".table-list tbody" do
-          expect(page).not_to have_content("Delete all")
-          expect(page).not_to have_content(translated(component.name))
+          expect(page).to have_no_content("Delete all")
+          expect(page).to have_no_content(translated(component.name))
         end
       end
     end

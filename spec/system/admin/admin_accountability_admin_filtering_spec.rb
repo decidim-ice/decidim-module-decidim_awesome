@@ -45,7 +45,7 @@ describe "Filter Admin actions" do
 
     it "displays the filter labels" do
       find("a.dropdown").hover
-      expect(page).not_to have_content("Participatory space type")
+      expect(page).to have_no_content("Participatory space type")
       expect(page).to have_content("Role type")
 
       find("a", text: "Role type").hover
@@ -63,7 +63,7 @@ describe "Filter Admin actions" do
       expect(page).to have_content(admin2.name, count: 1)
       expect(page).to have_content(manager.name, count: 1)
       expect(page).to have_content(manager2.name, count: 1)
-      expect(page).not_to have_content(user.name, count: 1)
+      expect(page).to have_no_content(user.name, count: 1)
 
       expect(page).to have_content(login_date.strftime("%d/%m/%Y %H:%M"))
       expect(page).to have_content("Currently active", count: 4)
