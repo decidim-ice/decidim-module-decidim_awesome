@@ -6,7 +6,7 @@ module Decidim
       queue_as :default
 
       def perform(object)
-        Decidim::DecidimAwesome::Processors::ModerationProcessor.process(object)
+        Decidim::DecidimAwesome::AutoModeration::Processors::ModerationProcessor.process(object)
       end
     end
   end
