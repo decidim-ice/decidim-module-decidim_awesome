@@ -1,6 +1,9 @@
 decidim-admin:
   /app/views/layouts/decidim/admin/_header.html.erb:
     decidim-0.31.0: 6e5893f735d2097f0e55e8b6666cb201
+  /app/helpers/decidim/admin/settings_helper.rb:
+    decidim-0.31.0: 0e10ec8e7e768e269d774584e381c9cd
+    decidim-0.31.3: 8d47ee0c364ab5c531c9aa01a200ac68
 decidim-assemblies:
   /app/views/decidim/assemblies/admin/assemblies/_form.html.erb:
     decidim-0.31.0: cc06bd20baa7f130e34d04a3c925e2f7
@@ -15,6 +18,7 @@ decidim-core:
     decidim-0.31.0: 2ca0e1db427894a6c1ffff9de27b458e
   /app/cells/decidim/data_consent/category.erb:
     decidim-0.31.0: c60bd96bf4d63892fa3f0e077e5bc821
+    decidim-0.31.5: 2ae94e0a35b44657f261ac90e955b305
   /app/packs/entrypoints/decidim_editor.js:
     decidim-0.31.0: e690b09ebd83d76a9dbdaefe02812333
   /app/packs/src/decidim/controllers/editor/controller.js:
@@ -29,6 +33,7 @@ decidim-core:
     decidim-0.31.0: 220c8865a43bd8b7b12a7f926f7f4324
   /app/presenters/decidim/menu_item_presenter.rb:
     decidim-0.31.0: 16b2c5f5de23afb67276d8fcacbe5e88
+    decidim-0.31.5: 87fdd56ff853f05f8ab4499c9f5d1b42
   /app/helpers/decidim/amendments_helper.rb:
     decidim-0.31.0: db42be326ff225c422e2c126d784b477
   /app/presenters/decidim/admin_log/component_presenter.rb:
@@ -45,6 +50,7 @@ decidim-core:
     decidim-0.31.0: d224370c364a9cf4b2e244063274e5ef
   /app/views/decidim/devise/registrations/new.html.erb:
     decidim-0.31.0: 861b8821bbdc05e7b337fcdb921415ba
+    decidim-0.31.5: 4a64a07b83678fa5360ded05e2bfd96c
   /app/views/decidim/devise/sessions/new.html.erb:
     decidim-0.31.0: da0d18178c8dcead2774956e989527c5
   /app/views/decidim/shared/_login_modal.html.erb:
@@ -87,6 +93,10 @@ decidim-proposals:
     decidim-0.31.0: c878184c8c88ee24c5fece2dcffa483c
   /app/cells/decidim/proposals/proposal_vote_cell.rb:
     decidim-0.31.0: 6ba332640d22d433d39a96c422153435
+  /app/cells/decidim/proposals/proposal_vote/show.erb:
+    decidim-0.31.0: b8b19a77296da757ea0e827d6decd596
+  /app/permissions/decidim/proposals/permissions.rb:
+    decidim-0.31.0: a8b29ebc1ac11ac00f90b5848343b9b4
   /app/cells/decidim/proposals/proposal_metadata_cell.rb:
     decidim-0.31.0: f2034b32638869b49ad500abc9724edf
   /app/commands/decidim/proposals/create_proposal.rb:

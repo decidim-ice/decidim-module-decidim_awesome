@@ -12,6 +12,7 @@
               <tr>
                 <th><%= t("auto_moderation_target.object_type", scope: "activemodel.attributes") %></th>
                 <th><%= t("auto_moderation_target.action_type", scope: "activemodel.attributes") %></th>
+                <th><%= t("auto_moderation_target.hits", scope: "activemodel.attributes") %></th>
                 <th class="actions"><%= t("decidim.decidim_awesome.admin.actions") %></th>
               </tr>
             </thead>
@@ -20,6 +21,7 @@
                 <tr>
                   <td><%= t("auto_moderation_target.object_type_options.#{target["object_type"]}", scope: "activemodel.attributes") %></td>
                   <td><%= t("auto_moderation_target.action_type_options.#{target["action_type"]}", scope: "activemodel.attributes") %></td>
+                  <td><%= target["hits"] %></td>
                   <td class="actions">
                     <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_auto_moderation_rule_target_path(params[:id], target_id), t(".targets.edit"), class: "action-icon--edit" %>
                     <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.auto_moderation_rule_target_path(params[:id], target_id), t(".targets.destroy"), method: :delete, class: "action-icon--remove", data: { confirm: t(".targets.confirm_destroy") } %>

@@ -10,7 +10,8 @@ module Decidim
         include ProposalSerializerMethods
 
         def serialize
-          serialization = super.merge!(serialize_private_custom_fields)
+          private_custom_fields = serialize_private_custom_fields
+          serialization = super.merge!(private_custom_fields)
           serialization.merge!(serialize_private_notes)
         end
 

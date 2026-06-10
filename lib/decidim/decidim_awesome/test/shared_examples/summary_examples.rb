@@ -72,6 +72,9 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::OpenDataExporter.included_modules).to include(Decidim::DecidimAwesome::OpenDataExporterOverride)
       expect(Decidim::Core::ParticipatorySpaceListBase.included_modules).to include(Decidim::DecidimAwesome::ParticipatorySpaceListBaseOverride)
       expect(Decidim::Core::ComponentList.included_modules).to include(Decidim::DecidimAwesome::ComponentListOverride)
+      expect(Decidim::Proposals::ProposalVoteCell.included_modules).to include(Decidim::DecidimAwesome::Proposals::ProposalVoteCellOverride)
+      expect(Decidim::Admin::SettingsHelper.included_modules).to include(Decidim::DecidimAwesome::Admin::SettingsHelperOverride)
+      expect(Decidim::Proposals::Permissions.included_modules).to include(Decidim::DecidimAwesome::Proposals::PermissionsOverride)
     end
 
   else
@@ -118,6 +121,9 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::OpenDataExporter.included_modules).not_to include(Decidim::DecidimAwesome::OpenDataExporterOverride)
       expect(Decidim::Core::ParticipatorySpaceListBase.included_modules).not_to include(Decidim::DecidimAwesome::ParticipatorySpaceListBaseOverride)
       expect(Decidim::Core::ComponentList.included_modules).not_to include(Decidim::DecidimAwesome::ComponentListOverride)
+      expect(Decidim::Proposals::ProposalVoteCell.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ProposalVoteCellOverride)
+      expect(Decidim::Admin::SettingsHelper.included_modules).not_to include(Decidim::DecidimAwesome::Admin::SettingsHelperOverride)
+      expect(Decidim::Proposals::Permissions.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::PermissionsOverride)
     end
   end
 end

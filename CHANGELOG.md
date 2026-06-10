@@ -1,6 +1,15 @@
 CHANGELOG
 =========
 
+unreleased
+-------
+Compatibility:
+  - Decidim 0.31.x
+
+Features:
+  - Fix awesome map css styles
+  - Allow to restrict votes on proposal per status ([#580](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/580))
+
 v0.14.2
 -------
 
@@ -14,6 +23,7 @@ Features:
   - Add Rich Text content block for landing pages ([#543](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/543))
   - Add a new cookie policy/category manager ([#521](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/521))
   - Fix proposal creation in admin when custom fields are enabled for Decidim >= 0.31.3
+  - Allow admins to restrict proposal voting to selected proposal states per step ([#572](https://github.com/decidim-ice/decidim-module-decidim_awesome/issues/572))
 
 v0.14.1
 -------

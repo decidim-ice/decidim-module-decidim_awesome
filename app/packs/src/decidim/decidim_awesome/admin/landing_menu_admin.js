@@ -62,9 +62,50 @@ const initEditor = (editor) => {
   });
 };
 
+const initReorder = (editor) => {
+  const tbody = editor.querySelector("[data-draggable-table]");
+  if (!tbody) {
+    return;
+  }
+
+  const form = editor.closest("form");
+  if (!form) {
+    return;
+  }
+
+  const menuItemsField = form.querySelector("input[name$='[menu_items]']");
+  if (!menuItemsField) {
+    return;
+  }
+
+  tbody.addEventListener("sortupdate", () => {
+    const rows = Array.from(tbody.querySelectorAll("tr[data-record-id]"));
+    const newOrder = rows.map((tr) => parseInt(tr.dataset.recordId, 10));
+
+    let items = [];
+    try {
+      items = JSON.parse(menuItemsField.value || "[]");
+    } catch (_e) {
+      return;
+    }
+
+    if (newOrder.length !== items.length) {
+      return;
+    }
+
+    const reordered = newOrder.map((idx) => items[idx]);
+    menuItemsField.value = JSON.stringify(reordered);
+
+    rows.forEach((tr, newIndex) => {
+      tr.dataset.recordId = String(newIndex);
+    });
+  });
+};
+
 document.addEventListener("decidim:loaded", () => {
   const editor = document.querySelector(".awesome-landing-menu-editor");
   if (editor) {
     initEditor(editor);
+    initReorder(editor);
   }
 });
