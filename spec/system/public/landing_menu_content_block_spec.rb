@@ -31,6 +31,32 @@ describe "Public homepage shows Landing Menu block" do
         expect(page).to have_content("FAQ")
       end
     end
+
+    it "displays items in the stored order" do
+      visit decidim.root_path
+      within(".awesome-landing-menu") do
+        items = all("a").map(&:text)
+        expect(items).to eq(%w(About Contact FAQ))
+      end
+    end
+
+    context "when items are stored in a different order" do
+      let(:menu_items_json) do
+        [
+          { "name" => { "en" => "FAQ" }, "url" => "/faq", "visible" => true },
+          { "name" => { "en" => "About" }, "url" => "/about", "visible" => true },
+          { "name" => { "en" => "Contact" }, "url" => "/contact", "visible" => true }
+        ].to_json
+      end
+
+      it "renders items in the reordered sequence" do
+        visit decidim.root_path
+        within(".awesome-landing-menu") do
+          items = all("a").map(&:text)
+          expect(items).to eq(%w(FAQ About Contact))
+        end
+      end
+    end
   end
 
   context "with external link" do

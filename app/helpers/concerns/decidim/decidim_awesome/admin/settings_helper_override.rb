@@ -41,7 +41,10 @@ module Decidim
               { include_blank: false, label: options[:label] },
               html_options
             )
-            select_html << content_tag(:p, options[:help_text], class: "help-text") if options[:help_text]
+            # Help only matters before save (when the list shows just "Not answered"); hide it for persisted components.
+            help_text = options[:help_text]
+            help_text = nil if name.to_sym == :awesome_votes_enabled_states && @component&.persisted?
+            select_html << content_tag(:p, help_text, class: "help-text") if help_text
             select_html
           end
         end

@@ -54,7 +54,6 @@ es:
         background_image_4: Imagen de fondo
       cookie_category:
         mandatory: Obligatoria
-        slug: ID
         title: Categoría
         total_cookies: Total de cookies
         visibility: Visibilidad
@@ -64,7 +63,6 @@ es:
         service: Servicio
         type: Tipo
         types:
-          cookie: Cookie
           local_storage: Almacenamiento local
       custom_redirect:
         active: Activo
@@ -449,7 +447,6 @@ es:
             slug_help: Identificador único utilizado en los scripts para hacer referencia a esta categoría.
             visibility:
               hidden: Oculta
-              visible: Visible
           index:
             cannot_remove_default: Las categorías predeterminadas no se pueden eliminar
             confirm_reset: '¿Seguro que quieres restablecer esta categoría a sus valores predeterminados? Esto eliminará todas las personalizaciones realizadas.'
@@ -614,48 +611,21 @@ es:
 
                 Categoría recomendada: Preferencias
             labels:
-              cloudflare_turnstile:
-                one: Cloudflare Turnstile (%{count} cookie)
-                other: Cloudflare Turnstile (%{count} cookies)
               decidim_essential:
                 one: Decidim Esencial (%{count} cookie)
                 other: Decidim Esencial (%{count} cookies)
               emoji_picker:
                 one: Selector de emojis (%{count} cookie)
                 other: Selector de emojis (%{count} cookies)
-              facebook_pixel:
-                one: Facebook Pixel (%{count} cookie)
-                other: Facebook Pixel (%{count} cookies)
-              google_analytics:
-                one: Google Analytics (%{count} cookie)
-                other: Google Analytics (%{count} cookies)
               google_maps_embeds:
                 one: Incrustaciones de Google Maps (%{count} cookie)
                 other: Incrustaciones de Google Maps (%{count} cookies)
-              google_tag_manager:
-                one: Google Tag Manager (%{count} cookie)
-                other: Google Tag Manager (%{count} cookies)
               graphiql:
                 one: Explorador de la API GraphiQL (%{count} cookie)
                 other: Explorador de la API GraphiQL (%{count} cookies)
-              hcaptcha:
-                one: hCaptcha (%{count} cookie)
-                other: hCaptcha (%{count} cookies)
-              jitsi_meet:
-                one: Jitsi Meet (%{count} cookie)
-                other: Jitsi Meet (%{count} cookies)
-              linkedin_insight:
-                one: LinkedIn Insight (%{count} cookie)
-                other: LinkedIn Insight (%{count} cookies)
-              matomo:
-                one: Matomo (%{count} cookie)
-                other: Matomo (%{count} cookies)
               openstreetmap_tiles:
                 one: Teselas de OpenStreetMap (%{count} cookie)
                 other: Teselas de OpenStreetMap (%{count} cookies)
-              recaptcha:
-                one: reCAPTCHA (%{count} cookie)
-                other: reCAPTCHA (%{count} cookies)
               vimeo_embeds:
                 one: Incrustaciones de Vimeo (%{count} cookie)
                 other: Incrustaciones de Vimeo (%{count} cookies)
@@ -666,22 +636,9 @@ es:
                 one: YouTube sin cookies (%{count} cookie)
                 other: YouTube sin cookies (%{count} cookies)
             services:
-              cloudflare_turnstile: Cloudflare Turnstile
               decidim_essential: Este sitio web
               emoji_picker: Este sitio web
-              facebook_pixel: Meta (Facebook)
-              google_analytics: Google Analytics
-              google_maps_embeds: Google Maps
-              google_tag_manager: Google Tag Manager
               graphiql: Este sitio web
-              hcaptcha: hCaptcha
-              jitsi_meet: Jitsi Meet
-              linkedin_insight: LinkedIn
-              matomo: Matomo
-              openstreetmap_tiles: OpenStreetMap
-              recaptcha: Google reCAPTCHA
-              vimeo_embeds: Vimeo
-              youtube_embeds: YouTube
               youtube_nocookie: YouTube (modo de privacidad mejorada)
           create:
             error: '¡Error al crear el elemento de cookie! %{error}'
@@ -961,7 +918,6 @@ es:
           selection_criteria: Criterios de selección
           selection_criteria_options:
             automatic: Automático
-            manual: Manual
           title: Título del bloque
         landing_menu:
           alignment: Alineación del menú
@@ -987,8 +943,6 @@ es:
             actions: Acciones
             hidden: Oculto
             name: Nombre
-            url: URL
-            visible: Visible
           title: Saltar a ...
         map:
           collapse: Iniciar con el menú contraído

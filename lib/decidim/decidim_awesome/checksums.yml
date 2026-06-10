@@ -18,6 +18,7 @@ decidim-core:
     decidim-0.31.0: 2ca0e1db427894a6c1ffff9de27b458e
   /app/cells/decidim/data_consent/category.erb:
     decidim-0.31.0: c60bd96bf4d63892fa3f0e077e5bc821
+    decidim-0.31.5: 2ae94e0a35b44657f261ac90e955b305
   /app/packs/entrypoints/decidim_editor.js:
     decidim-0.31.0: e690b09ebd83d76a9dbdaefe02812333
   /app/packs/src/decidim/controllers/editor/controller.js:
@@ -32,6 +33,7 @@ decidim-core:
     decidim-0.31.0: 220c8865a43bd8b7b12a7f926f7f4324
   /app/presenters/decidim/menu_item_presenter.rb:
     decidim-0.31.0: 16b2c5f5de23afb67276d8fcacbe5e88
+    decidim-0.31.5: 87fdd56ff853f05f8ab4499c9f5d1b42
   /app/helpers/decidim/amendments_helper.rb:
     decidim-0.31.0: db42be326ff225c422e2c126d784b477
   /app/presenters/decidim/admin_log/component_presenter.rb:
@@ -48,6 +50,7 @@ decidim-core:
     decidim-0.31.0: d224370c364a9cf4b2e244063274e5ef
   /app/views/decidim/devise/registrations/new.html.erb:
     decidim-0.31.0: 861b8821bbdc05e7b337fcdb921415ba
+    decidim-0.31.5: 4a64a07b83678fa5360ded05e2bfd96c
   /app/views/decidim/devise/sessions/new.html.erb:
     decidim-0.31.0: da0d18178c8dcead2774956e989527c5
   /app/views/decidim/shared/_login_modal.html.erb:
