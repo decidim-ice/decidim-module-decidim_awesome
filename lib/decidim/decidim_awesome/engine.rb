@@ -263,6 +263,14 @@ module Decidim
         end
       end
 
+      initializer "decidim_decidim_awesome.awesome_authorization_handler" do
+        if Decidim::DecidimAwesome.enabled?(:awesome_authorization_handler)
+          Decidim::Verifications.register_workflow(:awesome_authorization_handler) do |workflow|
+            workflow.form = "Decidim::DecidimAwesome::AwesomeAuthorizationHandler"
+          end
+        end
+      end
+
       initializer "decidim_decidim_awesome.weighted_proposal_voting" do |_app|
         if DecidimAwesome.enabled?(:weighted_proposal_voting)
           # register available processors

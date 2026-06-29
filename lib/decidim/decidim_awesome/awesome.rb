@@ -234,6 +234,14 @@ module Decidim
       []
     end
 
+    # Registers the awesome authorization workflow.
+    # true = register the workflow automatically.
+    # false/:disabled = do not register it.
+    # if set to :disabled, the feature will be completely removed and the workflow will not be registered.
+    config_accessor :awesome_authorization_handler do
+      false
+    end
+
     # This controllers will be skipped from the authorization check
     # Included automatically: required_authorizations authorizations upload_validations timeouts editor_images locales pages tos
     config_accessor :force_authorization_allowed_controller_names do

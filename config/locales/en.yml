@@ -287,6 +287,18 @@ en:
               user''s current authorization status.'
           user_authorized: "%{user} successfully authorized with %{name}"
           user_not_authorized: "%{user} could not be authorized with %{name}"
+        awesome_verifications:
+          index:
+            description: "Here you can see all the users that have been verified
+              with the awesome authorization workflow. You can also manually verify
+              users with this workflow."
+            title: Awesome verifications
+            not_available: "In order to use this feature, you must enable the awesome authorization workflow in the %{system} admin."
+          show:
+            description: "Here you can see all the users that have been verified
+              with the awesome authorization workflow. You can also manually verify
+              users with this workflow."
+            title: Awesome verifications
         checks:
           index:
             admin_head_tags: Awesome tags included in the admin application header
@@ -961,7 +973,9 @@ en:
           proposals: Proposals Hacks
           styles: Custom Styles
           surveys: Surveys & Forms
-          verifications: Verifications
+          verifications:
+            awesome_verifications: Awesome Verifications
+            verifications: Verifications
         menu_hacks:
           create:
             error: Error creating menu item! %{error}
