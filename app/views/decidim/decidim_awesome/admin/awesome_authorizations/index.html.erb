@@ -4,7 +4,7 @@
 
 <div class="card">
   <div class="card-section">
-    <p><%= t(".description") %></p>
+    <p><%= t(".description_html") %></p>
 
     <% unless available? %>
       <div class="callout alert mt-4">
@@ -13,3 +13,47 @@
     <% end %>
   </div>
 </div>
+
+<% if available? %>
+  <div class="card">
+    <div class="card-section">
+      <div class="table-scroll">
+        <table class="table-list">
+          <thead>
+            <tr>
+              <th><%= t(".group_name") %></th>
+              <th><%= t(".users_count") %></th>
+              <th><%= t(".authorized_count") %></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if authorization_groups.any? %>
+              <% authorization_groups.each do |group| %>
+                <tr>
+                  <td>
+                    <%= translated_attribute(group.name) %>
+                    <div class="text-sm text-gray"><%= translated_attribute(group.purpose) %></div>
+                  </td>
+                  <td><%= group.user_count %></td>
+                  <td><%= group.authorized_count %></td>
+                  <td class="table-list__actions">
+                    <%# TODO: Add edit link when AV-6 is implemented %>
+                  </td>
+                </tr>
+              <% end %>
+            <% else %>
+              <tr>
+                <td colspan="4" class="text-center">
+                  <%= t(".no_groups") %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      
+      <%# TODO: Add create new group link when AV-6 is implemented %>
+    </div>
+  </div>
+<% end %>

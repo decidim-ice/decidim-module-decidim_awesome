@@ -271,11 +271,11 @@ en:
           authorization_transferred: 'Warning: There was verification conflict and
             the verification has been transferred to %{user}'
           conflict: There is a conflict with an existing authorization
-          conflict_help_html: "You must solve the conflict with the user %{user} before
-            you can authorize the user with this authorization.\n<br><br>\nA verfication
-            conflict happens when another user has the same data as the user you are
-            trying to authorize. \nYou can solve this conflict by removing the conflicting
-            authorization from the other user or using different data for this user.\n"
+          conflict_help_html: |
+            You must solve the conflict with the user %{user} before you can authorize the user with this authorization.
+            <br><br>
+            A verfication conflict happens when another user has the same data as the user you are trying to authorize.
+            You can solve this conflict by removing the conflicting authorization from the other user or using different data for this user.
           edit:
             authorize: Authorize %{user} with %{name}
             do_it_if_sure: Do this only if you are sure that the user has this authorization.
@@ -289,13 +289,18 @@ en:
           user_not_authorized: "%{user} could not be authorized with %{name}"
         awesome_authorizations:
           index:
-            description: Here you can see all the users that have been verified with
-              the awesome authorization workflow. You can also manually verify users
-              with this workflow.
+            description_html: Use this section to create groups of people that can
+              be required to have different permissions on the Decidim's permissions
+              system.<br>Users will be automatically authorized on new sign ups or
+              every time this list is updated.
             not_available: In order to use this feature, you must enable the awesome
               authorization workflow in the %{system} admin.
             system_link: System admin
             title: Awesome authorizations
+            group_name: Group name
+            users_count: Users count
+            authorized_count: Authorized count
+            no_groups: No authorization groups created yet
         checks:
           index:
             admin_head_tags: Awesome tags included in the admin application header
@@ -417,14 +422,14 @@ en:
               proposal_custom_fields_example: Data is stored in a XML object using
                 compatible HTML attributes (dl,dt,dd elements) replacing the "body"
                 in a normal proposal.
-              proposal_custom_fields_translations: "Labels, help text, placeholders
-                and default values can use your application custom translations. \nFor
-                that, instead of using a string literal, use the i18n key (it must
-                contain at least one dot).\nFor instance:\n- \"activemodel.attributes.proposal.title\"
-                instead of \"Title\"\n- \"activemodel.attributes.proposal.address\"
-                instead of \"Address\"\nOr use your own keys in combination with other
-                tools to define translations (eg: using the module Term Customizer):\n
-                - \"myapp.custom_fields.bio\" instead of \"Biography\""
+              proposal_custom_fields_translations: |-
+                Labels, help text, placeholders and default values can use your application custom translations.
+                For that, instead of using a string literal, use the i18n key (it must contain at least one dot).
+                For instance:
+                - "activemodel.attributes.proposal.title" instead of "Title"
+                - "activemodel.attributes.proposal.address" instead of "Address"
+                Or use your own keys in combination with other tools to define translations (eg: using the module Term Customizer):
+                 - "myapp.custom_fields.bio" instead of "Biography"
               proposal_private_custom_fields: Similar as public fields, but this information
                 won't be disclosed publicly (only admins will have access to it).
               proposal_private_custom_fields_translations: |
