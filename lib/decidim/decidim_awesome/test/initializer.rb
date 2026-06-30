@@ -9,6 +9,7 @@ Decidim::DecidimAwesome.configure do |config|
       :auto_save_forms,
       :user_timezone,
       :force_authorizations,
+      :awesome_authorization_handler,
       :admins_available_authorizations,
       :intergram_for_admins,
       :intergram_for_public,

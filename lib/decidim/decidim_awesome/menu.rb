@@ -41,6 +41,12 @@ module Decidim
             [:custom_redirects_path, []]
           when :cookie_management
             [:cookie_categories_path, []]
+          when :verifications
+            if menus[:force_authorizations]
+              [:config_path, [config_var]]
+            else
+              [:awesome_authorizations_path, []]
+            end
           when :maintenance
             [:checks_path, []]
           else
@@ -183,14 +189,14 @@ module Decidim
               menu.add_item :verifications,
                             I18n.t("force_authorizations", scope: "decidim.decidim_awesome.admin.menu.verifications"),
                             decidim_admin_decidim_awesome.config_path(:verifications),
-                            position: 2,
+                            position: 1,
                             icon_name: "lock-line"
             end
             if config_enabled?(:awesome_authorization_handler)
               menu.add_item :awesome_authorizations,
                             I18n.t("awesome_authorizations", scope: "decidim.decidim_awesome.admin.menu.verifications"),
                             decidim_admin_decidim_awesome.awesome_authorizations_path,
-                            position: 1,
+                            position: 2,
                             icon_name: "bubble-chart-line"
             end
           end
@@ -221,6 +227,8 @@ module Decidim
             custom_redirects: config_enabled?(:custom_redirects),
             livechat: config_enabled?(:intergram_for_admins, :intergram_for_public),
             verifications: config_enabled?(:force_authorizations, :awesome_authorization_handler),
+            force_authorizations: config_enabled?(:force_authorizations),
+            awesome_authorization_handler: config_enabled?(:awesome_authorization_handler),
             cookie_management: config_enabled?(:cookie_management),
             maintenance: true
           }
