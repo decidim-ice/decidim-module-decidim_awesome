@@ -47,7 +47,7 @@ module Decidim
           put :reorder, on: :collection
         end
         resources :admin_authorizations, only: [:edit, :update, :destroy]
-        resources :awesome_verifications, except: [:show]
+        resources :awesome_authorizations, only: [:index]
         post :migrate_images, to: "checks#migrate_images"
         root to: "config#show"
       end
@@ -83,7 +83,7 @@ module Decidim
         Decidim::DecidimAwesome::Menu.register_custom_styles_submenu!
         Decidim::DecidimAwesome::Menu.register_menu_hacks_submenu!
         Decidim::DecidimAwesome::Menu.register_maintenance_admin_menu!
-        Decidim::DecidimAwesome::Menu.register_awesome_verifications_submenu!
+        Decidim::DecidimAwesome::Menu.register_awesome_authorization_submenu!
         Decidim::DecidimAwesome::Menu.register_awesome_admin_menu!
 
         # user menu

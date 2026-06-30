@@ -69,10 +69,11 @@ module Decidim
 
           register_simple_entry(:awesome_admin_menu, :custom_redirects, 8, "external-link-line")
           register_simple_entry(:awesome_admin_menu, :livechat, 9, "chat-1-line")
+
           register_simple_entry(:awesome_admin_menu, :verifications, 10, "fingerprint-line",
-            i18n_key: "menu.verifications.verifications",
-            submenu: { target_menu: :awesome_verifications_submenu },
-            active: [[:awesome_verifications_path]])
+                                i18n_key: "menu.verifications.verifications",
+                                submenu: { target_menu: :awesome_authorization_submenu },
+                                active: [[:awesome_authorizations_path]])
 
           register_simple_entry(:awesome_admin_menu, :cookie_management, 11, "shield-check-line")
 
@@ -176,19 +177,19 @@ module Decidim
           end
         end
 
-        def register_awesome_verifications_submenu!
-          Decidim.menu :awesome_verifications_submenu do |menu|
+        def register_awesome_authorization_submenu!
+          Decidim.menu :awesome_authorization_submenu do |menu|
             if config_enabled?(:force_authorizations)
               menu.add_item :verifications,
-                I18n.t("verifications", scope: "decidim.decidim_awesome.admin.menu.verifications"),
-                decidim_admin_decidim_awesome.config_path(:verifications),
-                                          position: 2,
-                                          icon_name: "lock-line"
+                            I18n.t("force_authorizations", scope: "decidim.decidim_awesome.admin.menu.verifications"),
+                            decidim_admin_decidim_awesome.config_path(:verifications),
+                            position: 2,
+                            icon_name: "lock-line"
             end
             if config_enabled?(:awesome_authorization_handler)
-              menu.add_item :awesome_verifications,
-                            I18n.t("awesome_verifications", scope: "decidim.decidim_awesome.admin.menu.verifications"),
-                            decidim_admin_decidim_awesome.awesome_verifications_path,
+              menu.add_item :awesome_authorizations,
+                            I18n.t("awesome_authorizations", scope: "decidim.decidim_awesome.admin.menu.verifications"),
+                            decidim_admin_decidim_awesome.awesome_authorizations_path,
                             position: 1,
                             icon_name: "bubble-chart-line"
             end
