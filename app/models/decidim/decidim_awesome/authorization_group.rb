@@ -4,15 +4,15 @@ module Decidim
   module DecidimAwesome
     class AuthorizationGroup < ApplicationRecord
       self.table_name = "decidim_awesome_authorization_groups"
-      
+
       belongs_to :organization, foreign_key: "decidim_organization_id", class_name: "Decidim::Organization"
-      has_many :authorization_users, foreign_key: "authorization_group_id", class_name: "Decidim::DecidimAwesome::AuthorizationUser", dependent: :destroy
+      has_many :authorization_members, class_name: "Decidim::DecidimAwesome::AuthorizationMember", dependent: :destroy
 
       validates :name, presence: true
       validates :purpose, presence: true
 
       def user_count
-        authorization_users.count
+        authorization_members.count
       end
 
       def authorized_count

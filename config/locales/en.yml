@@ -289,18 +289,24 @@ en:
           user_not_authorized: "%{user} could not be authorized with %{name}"
         awesome_authorizations:
           index:
+            authorized_count: Authorized count
+            confirm_destroy: Are you sure you want to destroy this authorization group?
+              All users in this group will lose their authorization.
+            create_group: Create a new authorization group
             description_html: Use this section to create groups of people that can
               be required to have different permissions on the Decidim's permissions
               system.<br>Users will be automatically authorized on new sign ups or
               every time this list is updated.
+            destroy: Destroy group
+            edit: Edit group
+            group_name: Group name
+            manage: Manage members
+            no_groups: No authorization groups created yet
             not_available: In order to use this feature, you must enable the awesome
               authorization workflow in the %{system} admin.
             system_link: System admin
             title: Awesome authorizations
-            group_name: Group name
             users_count: Users count
-            authorized_count: Authorized count
-            no_groups: No authorization groups created yet
         checks:
           index:
             admin_head_tags: Awesome tags included in the admin application header

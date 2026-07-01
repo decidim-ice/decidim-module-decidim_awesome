@@ -26,9 +26,7 @@ module Decidim
       # https://edgeguides.rubyonrails.org/engines.html#overriding-models-and-controllers
       # overrides
       config.to_prepare do
-        if DecidimAwesome.enabled?(:awesome_authorization_handler)
-          Decidim::Organization.include(Decidim::DecidimAwesome::HasAuthorizationGroups)
-        end
+        Decidim::Organization.include(Decidim::DecidimAwesome::HasAuthorizationGroups) if DecidimAwesome.enabled?(:awesome_authorization_handler)
 
         if DecidimAwesome.enabled?(:force_authorizations)
           Decidim::LastActivity.include(Decidim::DecidimAwesome::LastActivityOverride)

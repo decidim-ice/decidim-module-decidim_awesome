@@ -55,4 +55,15 @@ FactoryBot.define do
       end
     end
   end
+
+  factory :awesome_authorization_group, class: "Decidim::DecidimAwesome::AuthorizationGroup" do
+    name { Decidim::Components::Namer.new(organization.available_locales, :proposals).i18n_name }
+    purpose { Decidim::Components::Namer.new(organization.available_locales, :proposals).i18n_description }
+    organization
+  end
+
+  factory :awesome_authorization_member, class: "Decidim::DecidimAwesome::AuthorizationMember" do
+    email { Faker::Internet.email }
+    authorization_group { association(:awesome_authorization_group) }
+  end
 end

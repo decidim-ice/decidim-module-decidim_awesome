@@ -30,6 +30,10 @@ module Decidim
         resources :proposal_custom_fields, param: :var, only: [:create, :destroy]
         resources :scoped_admins, param: :var, only: [:create, :destroy]
         resources :force_authorizations, param: :var, only: [:create, :destroy]
+        resources :admin_authorizations, only: [:edit, :update, :destroy]
+        resources :awesome_authorizations, except: [:show] do
+          resources :users, except: [:show], to: "awesome_authorization_users"
+        end
         get :admin_accountability, to: "admin_accountability#index", as: "admin_accountability"
         post :export_admin_accountability, to: "admin_accountability#export", as: "export_admin_accountability"
         get :users, to: "config#users"
@@ -46,8 +50,6 @@ module Decidim
           patch :toggle_visible, on: :member
           put :reorder, on: :collection
         end
-        resources :admin_authorizations, only: [:edit, :update, :destroy]
-        resources :awesome_authorizations, only: [:index]
         post :migrate_images, to: "checks#migrate_images"
         root to: "config#show"
       end

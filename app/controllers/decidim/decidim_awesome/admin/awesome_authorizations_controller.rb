@@ -11,15 +11,14 @@ module Decidim
           enforce_permission_to :edit_config, :awesome_authorization_handler
         end
 
-        def index
-        end
-        
+        def index; end
+
         private
-        
+
         def available?
           @available ||= current_organization.available_authorizations.include?("awesome_authorization_handler")
         end
-        
+
         def authorization_groups
           @authorization_groups ||= current_organization.awesome_authorization_groups
         end
