@@ -57,12 +57,21 @@ FactoryBot.define do
   end
 
   factory :awesome_authorization_group, class: "Decidim::DecidimAwesome::AuthorizationGroup" do
-    name { Decidim::Components::Namer.new(organization.available_locales, :proposals).i18n_name }
-    purpose { Decidim::Components::Namer.new(organization.available_locales, :proposals).i18n_description }
+    transient do
+      skip_injection { false }
+    end
+
+    name { generate_localized_title(:awesome_authorization_group_name, skip_injection:) }
+    purpose { generate_localized_description(:awesome_authorization_group_purpose, skip_injection:) }
+
     organization
   end
 
   factory :awesome_authorization_member, class: "Decidim::DecidimAwesome::AuthorizationMember" do
+    transient do
+      skip_injection { false }
+    end
+
     email { Faker::Internet.email }
     authorization_group { association(:awesome_authorization_group) }
   end
