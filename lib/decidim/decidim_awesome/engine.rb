@@ -274,6 +274,9 @@ module Decidim
         if Decidim::DecidimAwesome.enabled?(:awesome_authorization_handler)
           Decidim::Verifications.register_workflow(:awesome_authorization_handler) do |workflow|
             workflow.form = "Decidim::DecidimAwesome::AwesomeAuthorizationHandler"
+            # workflow.action_authorizer = "Decidim::DecidimAwesome::AwesomeAuthorizationAuthorizer"
+            workflow.renewable = true
+            workflow.time_between_renewals = 5.minutes
           end
         end
       end

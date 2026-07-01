@@ -125,6 +125,10 @@ en:
       menu:
         admin_accountability: Admin accountability
         decidim_awesome: Decidim awesome
+    authorization_handlers:
+      awesome_authorization_handler:
+        fields:
+          groups: Groups
     components:
       awesome_iframe:
         name: Fullscreen Iframe
@@ -302,15 +306,15 @@ en:
             system_link: System admin
             title: Awesome authorizations
           list_authorization_groups:
-            granted_count: Authorized
             confirm_destroy: Are you sure you want to destroy this authorization group?
               All users in this group will lose their authorization.
             destroy: Destroy group
             edit: Edit group
+            granted_count: Authorized
             group_name: Group name
             manage: Manage members
-            no_groups: No authorization groups created yet
             members_count: Users
+            no_groups: No authorization groups created yet
         checks:
           index:
             admin_head_tags: Awesome tags included in the admin application header
@@ -1111,6 +1115,9 @@ en:
         pending_limit_reached: Sorry, there can only be one pending amendment at a
           time. Please wait until "%{emendation}" is accepted or rejected.
       awesome_authorization_handler:
+        admin_managed_html: This authorization is managed automatically usually. If
+          you think you should verified try to press the button "Send" below.<br>If
+          that does not work, please contact the administrators of the platform.
         explanation: Get verified as a member of an organization group
         name: Organization Group's Authorization
       config:
