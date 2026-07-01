@@ -23,21 +23,21 @@ module Decidim::DecidimAwesome
       expect(authorization_group.purpose).to be_present
     end
 
-    describe "#user_count" do
+    describe "#members_count" do
       it "returns the count of authorization members" do
         create(:awesome_authorization_member, authorization_group:)
         create(:awesome_authorization_member, authorization_group:)
-        expect(authorization_group.user_count).to eq(2)
+        expect(authorization_group.members_count).to eq(2)
       end
 
       it "returns 0 when no members" do
-        expect(authorization_group.user_count).to eq(0)
+        expect(authorization_group.members_count).to eq(0)
       end
     end
 
-    describe "#authorized_count" do
+    describe "#granted_count" do
       it "returns 0 by default" do
-        expect(authorization_group.authorized_count).to eq(0)
+        expect(authorization_group.granted_count).to eq(0)
       end
     end
 

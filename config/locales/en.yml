@@ -1118,6 +1118,9 @@ en:
         admin_managed_html: This authorization is managed automatically usually. If
           you think you should verified try to press the button "Send" below.<br>If
           that does not work, please contact the administrators of the platform.
+        errors:
+          user_not_in_group: According to your email (%{email}), you are not a member
+            of any group that can verify you.
         explanation: Get verified as a member of an organization group
         name: Organization Group's Authorization
       config:

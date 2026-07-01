@@ -10,7 +10,7 @@ module Decidim
           enforce_permission_to :edit_config, :awesome_authorization_handler
         end
 
-        def edit; end
+        def index; end
 
         private
       end

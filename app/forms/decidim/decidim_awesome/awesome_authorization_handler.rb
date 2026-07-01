@@ -11,7 +11,7 @@ module Decidim
 
       def metadata
         {
-          groups: user_groups.to_h { |group| [group.id, group.name] }
+          groups: user_groups.to_h { |group| [group.id.to_s, group.name] }
         }
       end
 
