@@ -302,7 +302,7 @@ en:
             system_link: System admin
             title: Awesome authorizations
           list_authorization_groups:
-            authorized_count: Authorized count
+            granted_count: Authorized
             confirm_destroy: Are you sure you want to destroy this authorization group?
               All users in this group will lose their authorization.
             destroy: Destroy group
@@ -310,7 +310,7 @@ en:
             group_name: Group name
             manage: Manage members
             no_groups: No authorization groups created yet
-            users_count: Users count
+            members_count: Users
         checks:
           index:
             admin_head_tags: Awesome tags included in the admin application header

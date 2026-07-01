@@ -6,18 +6,17 @@ module Decidim
       self.table_name = "decidim_awesome_authorization_groups"
 
       belongs_to :organization, foreign_key: "decidim_organization_id", class_name: "Decidim::Organization"
-      has_many :authorization_members, class_name: "Decidim::DecidimAwesome::AuthorizationMember", dependent: :destroy
+      has_many :members, class_name: "Decidim::DecidimAwesome::AuthorizationMember", dependent: :destroy
 
       validates :name, presence: true
       validates :purpose, presence: true
 
-      def user_count
-        authorization_members.count
+      def members_count
+        @members_count ||= members.count
       end
 
-      def authorized_count
-        # TODO: Implement when authorization tracking is added
-        0
+      def granted_count
+        @granted_count ||= Decidim::Verifications::Authorizations.new(organization: organization, name: :awesome_authorization_handler, granted: true).query.count
       end
     end
   end

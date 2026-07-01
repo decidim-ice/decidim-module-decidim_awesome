@@ -4,8 +4,8 @@
     <thead>
       <tr>
         <th><%= t(".group_name") %></th>
-        <th><%= t(".users_count") %></th>
-        <th><%= t(".authorized_count") %></th>
+        <th><%= t(".members_count") %></th>
+        <th><%= t(".granted_count") %></th>
         <th></th>
       </tr>
     </thead>
@@ -16,8 +16,8 @@
             <%= translated_attribute(group.name) %>
             <div class="text-sm text-gray"><%= translated_attribute(group.purpose) %></div>
           </td>
-          <td><%= group.user_count %></td>
-          <td><%= group.authorized_count %></td>
+          <td><%= group.members_count %></td>
+          <td><%= group.granted_count %></td>
           <td class="table-list__actions">
             <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_awesome_authorization_path(group), t(".edit"), class: "action-icon--preview" %>
             <%= icon_link_to "group-line", decidim_admin_decidim_awesome.awesome_authorization_users_path(group), t(".manage"), class: "action-icon--preview" %>
