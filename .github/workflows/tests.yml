@@ -191,6 +191,9 @@ jobs:
         env:
           FEATURES: ${{ matrix.features }}
 
+      - name: Wipe Zero-Byte XML Files
+        run: find . -name "*.xml" -size 0 -delete
+
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4
         with:
