@@ -289,23 +289,27 @@ en:
           user_not_authorized: "%{user} could not be authorized with %{name}"
         awesome_authorizations:
           index:
-            authorized_count: Authorized count
-            confirm_destroy: Are you sure you want to destroy this authorization group?
-              All users in this group will lose their authorization.
+            authorization_groups: Authorization groups
+            authorization_properties: Authorization properties
             create_group: Create a new authorization group
             description_html: Use this section to create groups of people that can
               be required to have different permissions on the Decidim's permissions
               system.<br>Users will be automatically authorized on new sign ups or
               every time this list is updated.
+            edit_properties: Edit authorization properties
+            not_available: In order to use this feature, you must enable the awesome
+              authorization workflow in the %{system} admin.
+            system_link: System admin
+            title: Awesome authorizations
+          list_authorization_groups:
+            authorized_count: Authorized count
+            confirm_destroy: Are you sure you want to destroy this authorization group?
+              All users in this group will lose their authorization.
             destroy: Destroy group
             edit: Edit group
             group_name: Group name
             manage: Manage members
             no_groups: No authorization groups created yet
-            not_available: In order to use this feature, you must enable the awesome
-              authorization workflow in the %{system} admin.
-            system_link: System admin
-            title: Awesome authorizations
             users_count: Users count
         checks:
           index:
@@ -1106,6 +1110,9 @@ en:
             <p>You can also reach the author of this proposal by <a href="%{proposal_link}">leaving a comment</a> and try to speed up the resolution of the current amendment.</p>
         pending_limit_reached: Sorry, there can only be one pending amendment at a
           time. Please wait until "%{emendation}" is accepted or rejected.
+      awesome_authorization_handler:
+        explanation: Get verified as a member of an organization group
+        name: Organization Group's Authorization
       config:
         intergram:
           auto_no_response: It seems that no one is available to answer right now.

@@ -142,6 +142,11 @@ module Decidim
           Decidim::ApplicationController.include(Decidim::DecidimAwesome::EnforceAccessAuthorizations) if DecidimAwesome.enabled?(:force_authorizations)
           Decidim::ApplicationController.include(Decidim::DecidimAwesome::UseUserTimeZone) if Decidim::DecidimAwesome.enabled?(:user_timezone)
 
+          if DecidimAwesome.enabled?(:awesome_authorization_handler)
+            # Saves current organization in the current thread for use in isolated contexts
+            Decidim::ApplicationController.include(Decidim::DecidimAwesome::NeedsThreadVariables)
+            Decidim::Admin::ApplicationController.include(Decidim::DecidimAwesome::NeedsThreadVariables)
+          end
           # Auto-insert some csp directives
           Decidim::ApplicationController.include(Decidim::DecidimAwesome::ContentSecurityPolicy)
           Decidim::Admin::ApplicationController.include(Decidim::DecidimAwesome::ContentSecurityPolicy)

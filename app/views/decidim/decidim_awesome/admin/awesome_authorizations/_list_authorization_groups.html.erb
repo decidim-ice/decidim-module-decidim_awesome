@@ -1,0 +1,35 @@
+<div class="table-scroll">
+  <% if authorization_groups.any? %>
+    <table class="table-list">
+    <thead>
+      <tr>
+        <th><%= t(".group_name") %></th>
+        <th><%= t(".users_count") %></th>
+        <th><%= t(".authorized_count") %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% authorization_groups.each do |group| %>
+        <tr>
+          <td>
+            <%= translated_attribute(group.name) %>
+            <div class="text-sm text-gray"><%= translated_attribute(group.purpose) %></div>
+          </td>
+          <td><%= group.user_count %></td>
+          <td><%= group.authorized_count %></td>
+          <td class="table-list__actions">
+            <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_awesome_authorization_path(group), t(".edit"), class: "action-icon--preview" %>
+            <%= icon_link_to "group-line", decidim_admin_decidim_awesome.awesome_authorization_users_path(group), t(".manage"), class: "action-icon--preview" %>
+            <%= icon_link_to "delete-bin-line", decidim_admin_decidim_awesome.awesome_authorization_path(group), t(".destroy"), method: :delete, class: "action-icon--delete", data: { confirm: t(".confirm_destroy") } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+    </table>
+  <% else %>
+    <div class="callout info">
+      <%= t(".no_groups") %>
+    </div>
+  <% end %>
+</div>
