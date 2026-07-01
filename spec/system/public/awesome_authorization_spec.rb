@@ -47,8 +47,8 @@ describe "Awesome authorization" do
 
         authorization = Decidim::Authorization.find_by(user:, name: "awesome_authorization_handler")
         expect(authorization).to be_present
-        expect(authorization.metadata[:groups]).to be_a(Hash)
-        expect(authorization.metadata[:groups].keys).to include(authorization_group.id.to_s)
+        expect(authorization.metadata["groups"]).to be_a(Hash)
+        expect(authorization.metadata["groups"].keys).to include(authorization_group.id.to_s)
       end
     end
 
