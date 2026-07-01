@@ -47,6 +47,7 @@ ignore_unused:
   - "decidim.decidim_awesome.required_authorizations.index.verify_with_any_of_these_options"
   - "decidim.decidim_awesome.session.login_and_authorization_is_required"
   - "decidim.decidim_awesome.session.authorization_is_required"
+  - "decidim.authorization_handlers.awesome_authorization_handler.fields.*"
   - "layouts.decidim.decidim_awesome.admin.maintenance.titles.*"
   - "layouts.decidim.data_consent.details.items.*"
   - "decidim.proposals.*"
