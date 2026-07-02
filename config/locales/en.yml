@@ -296,13 +296,16 @@ en:
             authorization_groups: Authorization groups
             authorization_properties: Authorization properties
             create_group: Create a new authorization group
-            description_html: Use this section to create groups of people that can
-              be required to have different permissions on the Decidim's permissions
-              system.<br>Users will be automatically authorized on new sign ups or
-              every time this list is updated.
+            description_html: Use this section to create groups of people, each with
+              specific permissions on Decidim's components.<br>These groups will be
+              automatically authorized for new sign-ups and whenever this list is
+              updated.
             edit_properties: Edit authorization properties
             not_available: In order to use this feature, you must enable the awesome
               authorization workflow in the %{system} admin.
+            properties_description_html: Use this authorization on components to restrict
+              access to specific groups of users. When selected, you can choose the
+              groups allowed.
             system_link: System admin
             title: Awesome authorizations
           list_authorization_groups:
