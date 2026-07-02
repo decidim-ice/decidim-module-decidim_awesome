@@ -12,7 +12,8 @@ module Decidim
         delegate :menus, :main_path_for, :config_enabled?, to: "Decidim::DecidimAwesome::Menu"
 
         def check(status)
-          icon(status ? "check-line" : "close-line", class: "inline-block !fill-#{status ? "success" : "alert"}", aria_label: status, role: "img")
+          status_text = status ? I18n.t("decidim.decidim_awesome.admin.config.enabled") : I18n.t("decidim.decidim_awesome.admin.config.disabled")
+          icon(status ? "check-line" : "close-line", class: "inline-block !fill-#{status ? "success" : "alert"}", aria_label: status_text, role: "img")
         end
 
         # returns only non :disabled vars in config

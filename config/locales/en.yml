@@ -278,7 +278,7 @@ en:
           conflict_help_html: |
             You must solve the conflict with the user %{user} before you can authorize the user with this authorization.
             <br><br>
-            A verfication conflict happens when another user has the same data as the user you are trying to authorize.
+            A verification conflict happens when another user has the same data as the user you are trying to authorize.
             You can solve this conflict by removing the conflicting authorization from the other user or using different data for this user.
           edit:
             authorize: Authorize %{user} with %{name}
@@ -1120,7 +1120,7 @@ en:
           time. Please wait until "%{emendation}" is accepted or rejected.
       awesome_authorization_handler:
         admin_managed_html: This authorization is managed automatically usually. If
-          you think you should verified try to press the button "Send" below.<br>If
+          you think you should be verified try to press the button "Send" below.<br>If
           that does not work, please contact the administrators of the platform.
         errors:
           user_not_in_group: According to your email (%{email}), you are not a member
