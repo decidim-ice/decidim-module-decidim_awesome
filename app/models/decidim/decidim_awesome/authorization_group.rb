@@ -15,8 +15,24 @@ module Decidim
         @members_count ||= members.count
       end
 
+      def granted
+        @granted ||= Decidim::Verifications::Authorizations.new(organization: organization, name: :awesome_authorization_handler, granted: true).query
+      end
+
       def granted_count
-        @granted_count ||= Decidim::Verifications::Authorizations.new(organization: organization, name: :awesome_authorization_handler, granted: true).query.count
+        @granted_count ||= granted.count
+      end
+
+      def users
+        @users ||= organization.users.where(email: members.select(:email))
+      end
+
+      def users_count
+        @users_count ||= users.count
+      end
+
+      def synced?
+        granted.where(user: users).count == users_count
       end
     end
   end

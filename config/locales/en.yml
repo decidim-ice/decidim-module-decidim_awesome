@@ -318,6 +318,7 @@ en:
             manage: Manage members
             members_count: Users
             no_groups: No authorization groups created yet
+            sync_status: Sync status
         checks:
           index:
             admin_head_tags: Awesome tags included in the admin application header

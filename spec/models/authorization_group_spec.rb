@@ -39,6 +39,74 @@ module Decidim::DecidimAwesome
       it "returns 0 by default" do
         expect(authorization_group.granted_count).to eq(0)
       end
+
+      context "when users are authorized" do
+        let(:user) { create(:user, :confirmed, organization:, email: "test@example.com") }
+
+        before do
+          create(:awesome_authorization_member, authorization_group:, email: "test@example.com")
+          create(:authorization, user:, name: "awesome_authorization_handler")
+        end
+
+        it "returns the count of authorized users" do
+          expect(authorization_group.granted_count).to eq(1)
+        end
+      end
+    end
+
+    describe "#granted" do
+      it "returns an authorization query" do
+        expect(authorization_group.granted).to be_a(ActiveRecord::Relation)
+      end
+    end
+
+    describe "#users" do
+      let(:user) { create(:user, :confirmed, organization:, email: "test@example.com") }
+
+      before do
+        create(:awesome_authorization_member, authorization_group:, email: user.email)
+      end
+
+      it "returns users matching member emails" do
+        expect(authorization_group.users).to include(user)
+      end
+    end
+
+    describe "#users_count" do
+      let(:user) { create(:user, :confirmed, organization:, email: "test@example.com") }
+
+      before do
+        create(:awesome_authorization_member, authorization_group:, email: user.email)
+      end
+
+      it "returns the count of users matching member emails" do
+        expect(authorization_group.users_count).to eq(1)
+      end
+    end
+
+    describe "#synced?" do
+      let(:user) { create(:user, :confirmed, organization:, email: "test@example.com") }
+
+      context "when no users are authorized" do
+        before do
+          create(:awesome_authorization_member, authorization_group:, email: user.email)
+        end
+
+        it "returns false" do
+          expect(authorization_group.synced?).to be false
+        end
+      end
+
+      context "when all users are authorized" do
+        before do
+          create(:awesome_authorization_member, authorization_group:, email: user.email)
+          create(:authorization, user:, name: "awesome_authorization_handler")
+        end
+
+        it "returns true" do
+          expect(authorization_group.synced?).to be true
+        end
+      end
     end
 
     context "when authorization group is destroyed" do
