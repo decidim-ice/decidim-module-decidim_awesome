@@ -13,11 +13,17 @@ module Decidim
       private
 
       def set_thread_organization
-        Thread.current[:current_organization] = current_organization if respond_to?(:current_organization)
+        return unless respond_to?(:current_organization)
+
+        config = Decidim::DecidimAwesome::AwesomeConfig.find_by(
+          organization: current_organization,
+          var: :awesome_authorization_handler
+        )
+        Thread.current[:awesome_authorization_handler] = config&.value
       end
 
       def clear_thread_organization
-        Thread.current[:current_organization] = nil
+        Thread.current[:awesome_authorization_handler] = nil
       end
     end
   end

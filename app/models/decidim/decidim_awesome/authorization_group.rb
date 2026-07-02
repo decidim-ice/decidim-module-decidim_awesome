@@ -16,7 +16,7 @@ module Decidim
       end
 
       def granted
-        @granted ||= Decidim::Verifications::Authorizations.new(organization: organization, name: :awesome_authorization_handler, granted: true).query
+        @granted ||= Decidim::Verifications::Authorizations.new(organization: organization, name: :awesome_authorization_handler, granted: true).query.where(user: users)
       end
 
       def granted_count
@@ -32,7 +32,7 @@ module Decidim
       end
 
       def synced?
-        granted.where(user: users).count == users_count
+        granted_count == users_count
       end
     end
   end

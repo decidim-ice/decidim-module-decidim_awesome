@@ -52,6 +52,24 @@ module Decidim::DecidimAwesome
           expect(authorization_group.granted_count).to eq(1)
         end
       end
+
+      context "when multiple groups exist" do
+        let(:other_group) { create(:awesome_authorization_group, organization:) }
+        let(:user1) { create(:user, :confirmed, organization:, email: "test1@example.com") }
+        let(:user2) { create(:user, :confirmed, organization:, email: "test2@example.com") }
+
+        before do
+          create(:awesome_authorization_member, authorization_group:, email: user1.email)
+          create(:awesome_authorization_member, authorization_group: other_group, email: user2.email)
+          create(:authorization, user: user1, name: "awesome_authorization_handler")
+          create(:authorization, user: user2, name: "awesome_authorization_handler")
+        end
+
+        it "does not leak counts across groups" do
+          expect(authorization_group.granted_count).to eq(1)
+          expect(other_group.granted_count).to eq(1)
+        end
+      end
     end
 
     describe "#granted" do
