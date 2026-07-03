@@ -26,6 +26,8 @@ module Decidim
       # https://edgeguides.rubyonrails.org/engines.html#overriding-models-and-controllers
       # overrides
       config.to_prepare do
+        Decidim::Organization.include(Decidim::DecidimAwesome::HasAuthorizationGroups) if DecidimAwesome.enabled?(:awesome_authorization_handler)
+
         if DecidimAwesome.enabled?(:force_authorizations)
           Decidim::LastActivity.include(Decidim::DecidimAwesome::LastActivityOverride)
           Decidim::OpenDataExporter.include(Decidim::DecidimAwesome::OpenDataExporterOverride)
@@ -140,6 +142,11 @@ module Decidim
           Decidim::ApplicationController.include(Decidim::DecidimAwesome::EnforceAccessAuthorizations) if DecidimAwesome.enabled?(:force_authorizations)
           Decidim::ApplicationController.include(Decidim::DecidimAwesome::UseUserTimeZone) if Decidim::DecidimAwesome.enabled?(:user_timezone)
 
+          if DecidimAwesome.enabled?(:awesome_authorization_handler)
+            # Saves current organization in the current thread for use in isolated contexts
+            Decidim::ApplicationController.include(Decidim::DecidimAwesome::NeedsThreadVariables)
+            Decidim::Admin::ApplicationController.include(Decidim::DecidimAwesome::NeedsThreadVariables)
+          end
           # Auto-insert some csp directives
           Decidim::ApplicationController.include(Decidim::DecidimAwesome::ContentSecurityPolicy)
           Decidim::Admin::ApplicationController.include(Decidim::DecidimAwesome::ContentSecurityPolicy)
@@ -267,6 +274,9 @@ module Decidim
         if Decidim::DecidimAwesome.enabled?(:awesome_authorization_handler)
           Decidim::Verifications.register_workflow(:awesome_authorization_handler) do |workflow|
             workflow.form = "Decidim::DecidimAwesome::AwesomeAuthorizationHandler"
+            # workflow.action_authorizer = "Decidim::DecidimAwesome::AwesomeAuthorizationAuthorizer"
+            workflow.renewable = true
+            workflow.time_between_renewals = 5.minutes
           end
         end
       end

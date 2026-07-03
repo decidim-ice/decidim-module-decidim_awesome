@@ -1,0 +1,63 @@
+# frozen_string_literal: true
+
+require "spec_helper"
+
+module Decidim::DecidimAwesome
+  describe AuthorizationMember do
+    subject { authorization_member }
+
+    let(:authorization_group) { create(:awesome_authorization_group) }
+    let(:authorization_member) { create(:awesome_authorization_member, authorization_group:) }
+
+    it { is_expected.to be_valid }
+
+    it "has an authorization group associated" do
+      expect(authorization_member.authorization_group).to eq(authorization_group)
+    end
+
+    it "has an email" do
+      expect(authorization_member.email).to be_present
+    end
+
+    it "normalizes email to lowercase" do
+      member = create(:awesome_authorization_member, email: "TEST@EXAMPLE.COM")
+      expect(member.email).to eq("test@example.com")
+    end
+
+    it "normalizes email to strip whitespace" do
+      member = create(:awesome_authorization_member, email: "  test@example.com  ")
+      expect(member.email).to eq("test@example.com")
+    end
+
+    context "when email is invalid" do
+      it "is not valid" do
+        member = build(:awesome_authorization_member, email: "invalid-email")
+        expect(member).not_to be_valid
+      end
+    end
+
+    context "when email is not unique within the same group" do
+      before { create(:awesome_authorization_member, authorization_group:, email: "test@example.com") }
+
+      it "is not valid" do
+        member = build(:awesome_authorization_member, authorization_group:, email: "test@example.com")
+        expect(member).not_to be_valid
+      end
+
+      it "is valid with same email in different group" do
+        other_group = create(:awesome_authorization_group)
+        member = build(:awesome_authorization_member, authorization_group: other_group, email: "test@example.com")
+        expect(member).to be_valid
+      end
+    end
+
+    context "when email uniqueness is case-insensitive" do
+      before { create(:awesome_authorization_member, authorization_group:, email: "test@example.com") }
+
+      it "is not valid with different case" do
+        member = build(:awesome_authorization_member, authorization_group:, email: "TEST@EXAMPLE.COM")
+        expect(member).not_to be_valid
+      end
+    end
+  end
+end

@@ -239,7 +239,7 @@ module Decidim
     # false/:disabled = do not register it.
     # if set to :disabled, the feature will be completely removed and the workflow will not be registered.
     config_accessor :awesome_authorization_handler do
-      false
+      true
     end
 
     # This controllers will be skipped from the authorization check
