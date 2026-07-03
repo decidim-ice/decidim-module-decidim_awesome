@@ -1142,6 +1142,7 @@ en:
           user_not_in_group: According to your email (%{email}), you are not a member
             of any group that can verify you.
         explanation: Get verified as a member of an organization group
+        member_of: Member of %{groups}
         name: Organization Group's Authorization
       config:
         intergram:

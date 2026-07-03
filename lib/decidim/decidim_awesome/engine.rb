@@ -146,6 +146,7 @@ module Decidim
             # Saves current organization in the current thread for use in isolated contexts
             Decidim::ApplicationController.include(Decidim::DecidimAwesome::NeedsThreadVariables)
             Decidim::Admin::ApplicationController.include(Decidim::DecidimAwesome::NeedsThreadVariables)
+            Decidim::Verifications::ApplicationHelper.include(Decidim::DecidimAwesome::Verifications::ApplicationHelperOverride)
           end
           # Auto-insert some csp directives
           Decidim::ApplicationController.include(Decidim::DecidimAwesome::ContentSecurityPolicy)
