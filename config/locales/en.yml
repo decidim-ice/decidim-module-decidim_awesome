@@ -177,7 +177,7 @@ en:
             awesome_voting_manifest: Support type
             awesome_voting_manifest_help_html: <span class="text-alert">Be aware that
               changing this setting in the middle of a votation period can result
-              in innacurate or unexpected results.</span><br>Note also that this setting
+              in inaccurate or unexpected results.</span><br>Note also that this setting
               can only be edited if the component has no supports yet.
             awesome_voting_manifest_options:
               default: Simple vote (default)
@@ -291,6 +291,20 @@ en:
               user''s current authorization status.'
           user_authorized: "%{user} successfully authorized with %{name}"
           user_not_authorized: "%{user} could not be authorized with %{name}"
+        awesome_authorization_properties:
+          create:
+            error: Error updating authorization properties! %{error}
+            success: Authorization properties updated successfully
+          index:
+            cancel: Cancel
+            description: Authorization description
+            description_help: This text is shown below the authorization title in
+              the verification card when users are still not verified. You can use
+              it to explain why this authorization is required.
+            name: Authorization name
+            name_help: This title is shown in the verification card.
+            save: Save
+            title: Edit authorization properties
         awesome_authorizations:
           index:
             authorization_groups: Authorization groups

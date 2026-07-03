@@ -42,6 +42,75 @@ module Decidim
             end
           end
         end
+
+        describe "POST #create" do
+          let(:locale) { organization.default_locale.to_s }
+          let(:params) do
+            {
+              awesome_authorization_properties: {
+                "name_#{locale}" => "Organization groups",
+                "explanation_#{locale}" => "Custom authorization description"
+              }
+            }
+          end
+
+          context "with valid params" do
+            it "redirects to awesome authorizations page" do
+              post :create, params: params
+
+              expect(response).to have_http_status(:found)
+              expect(response).to redirect_to(awesome_authorizations_path)
+            end
+
+            it "stores the properties in awesome config" do
+              post :create, params: params
+
+              expect(AwesomeConfig.find_by(organization:, var: :awesome_authorization_handler)&.value).to include(
+                {
+                  "name" => include(locale => "Organization groups"),
+                  "explanation" => include(locale => "Custom authorization description")
+                }
+              )
+            end
+
+            it "removes blank fields from the stored config" do
+              create(:awesome_config, organization:, var: :awesome_authorization_handler, value: { "name" => { locale => "Existing" } })
+
+              post :create, params: {
+                awesome_authorization_properties: {
+                  "name_#{locale}" => "",
+                  "explanation_#{locale}" => ""
+                }
+              }
+
+              expect(AwesomeConfig.find_by(organization:, var: :awesome_authorization_handler)).to be_nil
+            end
+          end
+
+          context "with invalid params" do
+            let(:params) do
+              {
+                awesome_authorization_properties: {
+                  "name_#{locale}" => "Organization groups",
+                  "explanation_#{locale}" => "a" * 1001
+                }
+              }
+            end
+
+            it "renders index with errors" do
+              post :create, params: params
+
+              expect(response).to have_http_status(:ok)
+              expect(response).to render_template(:index)
+            end
+
+            it "does not store the config" do
+              post :create, params: params
+
+              expect(AwesomeConfig.find_by(organization:, var: :awesome_authorization_handler)).to be_nil
+            end
+          end
+        end
       end
     end
   end
