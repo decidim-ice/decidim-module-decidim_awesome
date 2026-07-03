@@ -1014,7 +1014,6 @@ DEPENDENCIES
   parallel_tests (~> 4.2)
   puma (>= 6.3.1)
   rexml (= 3.4.1)
-  rubocop-rails (~> 2.32.0)
   web-console (~> 4.2)
 
 CHECKSUMS
