@@ -28,6 +28,24 @@ describe "Admin manages awesome authorizations" do
       it "shows the page title" do
         expect(page).to have_content("Awesome authorizations")
       end
+
+      it "allows updating authorization properties" do
+        locale = organization.default_locale
+
+        visit decidim_admin_decidim_awesome.awesome_authorization_properties_path
+
+        fill_in "awesome_authorization_properties_name_#{locale}", with: "Organization groups"
+        fill_in "awesome_authorization_properties_explanation_#{locale}", with: "Custom description for this authorization"
+        click_on "Save"
+
+        expect(page).to have_content("updated successfully")
+        expect(Decidim::DecidimAwesome::AwesomeConfig.find_by(organization:, var: :awesome_authorization_handler)&.value).to include(
+          {
+            "name" => include(locale.to_s => "Organization groups"),
+            "explanation" => include(locale.to_s => "Custom description for this authorization")
+          }
+        )
+      end
     end
 
     context "when authorization is not available in organization" do

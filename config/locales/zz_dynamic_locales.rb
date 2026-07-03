@@ -1,28 +1,26 @@
 # frozen_string_literal: true
 
-handler = {
-  decidim: {
-    authorization_handlers: {
-      awesome_authorization_handler: {
-        name: lambda { |_key, options|
-          config = Thread.current[:awesome_authorization_handler]
-          options.delete(:scope)
-          return I18n.t("decidim.decidim_awesome.awesome_authorization_handler.name", **options) unless config
+Decidim.available_locales.index_with do |locale|
+  {
+    decidim: {
+      authorization_handlers: {
+        awesome_authorization_handler: {
+          name: lambda { |_key, options|
+            config = Thread.current[:awesome_authorization_handler]
+            options.delete(:scope)
+            return I18n.t("decidim.decidim_awesome.awesome_authorization_handler.name", **options) unless config.is_a?(Hash)
 
-          config&.dig("name") || I18n.t("decidim.decidim_awesome.awesome_authorization_handler.name", **options)
-        },
-        explanation: lambda { |_key, options|
-          config = Thread.current[:awesome_authorization_handler]
-          options.delete(:scope)
-          return I18n.t("decidim.decidim_awesome.awesome_authorization_handler.explanation", **options) unless config
+            config.dig("name", locale).presence || I18n.t("decidim.decidim_awesome.awesome_authorization_handler.name", **options)
+          },
+          explanation: lambda { |_key, options|
+            config = Thread.current[:awesome_authorization_handler]
+            options.delete(:scope)
+            return I18n.t("decidim.decidim_awesome.awesome_authorization_handler.explanation", **options) unless config.is_a?(Hash)
 
-          config&.dig("explanation") || I18n.t("decidim.decidim_awesome.awesome_authorization_handler.explanation", **options)
+            config.dig("explanation", locale).presence || I18n.t("decidim.decidim_awesome.awesome_authorization_handler.explanation", **options)
+          }
         }
       }
     }
   }
-}
-
-Decidim.available_locales.index_with do |_locale|
-  handler
 end
