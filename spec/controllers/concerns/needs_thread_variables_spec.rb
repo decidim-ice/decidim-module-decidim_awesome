@@ -23,11 +23,11 @@ module Decidim
       let(:organization) { create(:organization) }
 
       describe "#set_thread_organization" do
-        it "sets Thread.current[:awesome_authorization_handler]" do
+        it "sets Thread.current[:awesome_authorization_handler] to nil when no config exists" do
           controller.organization = organization
           controller.send(:set_thread_organization)
 
-          expect(Thread.current[:awesome_authorization_handler]).to be_a(Hash) if Thread.current[:awesome_authorization_handler]
+          expect(Thread.current[:awesome_authorization_handler]).to be_nil
         end
 
         it "does not set when current_organization is not available" do
