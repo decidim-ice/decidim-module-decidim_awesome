@@ -119,3 +119,6 @@ decidim-proposals:
     decidim-0.31.2: cd4be96ca73de79b0f8d82f0f80f00e7
   /app/views/decidim/proposals/proposals/show.html.erb:
     decidim-0.31.0: e2c0adf5c283f7396d93207e1b7ab740
+decidim-verifications:
+  /app/helpers/decidim/verifications/application_helper.rb:
+    decidim-0.31.0: 9f40fba8f2f7f16d588b8bcad4300376

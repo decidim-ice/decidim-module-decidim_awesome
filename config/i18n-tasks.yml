@@ -57,3 +57,5 @@ ignore_unused:
 
 ignore_missing:
   - decidim.participatory_processes.scopes.global
+  - "decidim.authorization_handlers.awesome_authorization_handler.name"
+  - "decidim.authorization_handlers.awesome_authorization_handler.explanation"

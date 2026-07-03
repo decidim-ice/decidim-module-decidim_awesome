@@ -344,6 +344,7 @@ en:
             decidim-core: From Core module
             decidim-participatory_processes: From Participatory Processes module
             decidim-proposals: From Proposals module
+            decidim-verifications: From Verification module
             decidim_update_available: 'A new version is available: %{latest_version}'
             decidim_version: Decidim version %{version}
             errors:
@@ -1142,6 +1143,7 @@ en:
           user_not_in_group: According to your email (%{email}), you are not a member
             of any group that can verify you.
         explanation: Get verified as a member of an organization group
+        member_of: Member of %{groups}
         name: Organization Group's Authorization
       config:
         intergram:

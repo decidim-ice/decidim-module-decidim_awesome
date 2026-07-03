@@ -55,13 +55,19 @@ describe "Awesome authorization" do
     context "when user is already authorized" do
       before do
         create(:awesome_authorization_member, authorization_group:, email: user.email)
-        create(:authorization, user:, name: "awesome_authorization_handler")
+        create(:authorization, :granted, user:, name: "awesome_authorization_handler", metadata: { "groups" => { authorization_group.id.to_s => authorization_group.name } })
       end
 
       it "shows existing authorization" do
         visit decidim_verifications.authorizations_path
 
         expect(page).to have_content("Organization Group's Authorization")
+      end
+
+      it "has authorization groups associated" do
+        visit decidim_verifications.authorizations_path
+
+        expect(page).to have_content("Member of \"#{authorization_group.name["en"]}\"")
       end
     end
   end
