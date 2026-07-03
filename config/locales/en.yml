@@ -376,6 +376,8 @@ en:
           destroy_scoped_style:
             error: Error removing CSS box! %{error}
             success: CSS box %{key} removed successfully
+          disabled: Disabled
+          enabled: Enabled
           force_authorizations: Authorization groups
           form:
             additional_proposal_sortings:

@@ -6,11 +6,17 @@ module Decidim
       extend ActiveSupport::Concern
 
       included do
-        before_action :set_thread_organization
-        after_action :clear_thread_organization
+        around_action :with_thread_organization
       end
 
       private
+
+      def with_thread_organization
+        set_thread_organization
+        yield
+      ensure
+        clear_thread_organization
+      end
 
       def set_thread_organization
         return unless respond_to?(:current_organization)

@@ -64,9 +64,17 @@ module Decidim
       end
 
       context "when included in a controller" do
-        it "adds before_action and after_action callbacks" do
-          expect(controller_class._process_action_callbacks.map(&:filter)).to include(:set_thread_organization)
-          expect(controller_class._process_action_callbacks.map(&:filter)).to include(:clear_thread_organization)
+        it "adds around_action callback" do
+          expect(controller_class._process_action_callbacks.map(&:filter)).to include(:with_thread_organization)
+        end
+
+        it "clears thread variable even when action raises" do
+          controller.organization = organization
+          Thread.current[:awesome_authorization_handler] = { name: "Test" }
+
+          expect { controller.send(:with_thread_organization) { raise StandardError, "test error" } }.to raise_error(StandardError)
+
+          expect(Thread.current[:awesome_authorization_handler]).to be_nil
         end
       end
     end

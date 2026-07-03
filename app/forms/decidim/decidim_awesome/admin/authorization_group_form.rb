@@ -7,7 +7,7 @@ module Decidim
         include TranslatableAttributes
 
         attribute :authorization_handlers, { String => Object }
-        attribute :authorization_handlers_names, Array[String]
+        attribute :authorization_handlers_names, [String]
         attribute :authorization_handlers_options, { String => Object }
         translatable_attribute :force_authorization_help_text, String, default: {}
 
