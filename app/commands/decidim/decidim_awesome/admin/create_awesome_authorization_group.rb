@@ -32,7 +32,7 @@ module Decidim
         attr_reader :form, :authorization_group
 
         def create_authorization_group!
-          @authorization_group = current_organization.awesome_authorization_groups.create!(
+          @authorization_group = form.current_organization.awesome_authorization_groups.create!(
             name: form.name,
             purpose: form.purpose
           )
