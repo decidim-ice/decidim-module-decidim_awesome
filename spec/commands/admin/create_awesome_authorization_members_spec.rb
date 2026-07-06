@@ -5,10 +5,21 @@ require "spec_helper"
 module Decidim::DecidimAwesome
   module Admin
     describe CreateAwesomeAuthorizationMembers do
-      subject { described_class.new(authorization_group, emails) }
+      subject { described_class.new(form) }
 
       let(:authorization_group) { create(:awesome_authorization_group) }
       let(:emails) { ["alice@example.org", "bob@example.org"] }
+      let(:form_params) do
+        {
+          emails: emails.join("\n"),
+          remove_previous_members: false
+        }
+      end
+      let(:form) do
+        AwesomeAuthorizationMembersForm.from_params(form_params).with_context(
+          authorization_group:
+        )
+      end
 
       describe "when valid" do
         it "broadcasts :ok" do

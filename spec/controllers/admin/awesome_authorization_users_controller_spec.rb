@@ -43,11 +43,17 @@ module Decidim::DecidimAwesome
         end
 
         context "when using csv file" do
-          let(:csv_file) do
-            fixture_file_upload("authorization_members.csv", "text/csv")
+          let(:csv_blob) do
+            csv_path = File.expand_path("../../fixtures/files/authorization_members.csv", __dir__)
+
+            ActiveStorage::Blob.create_and_upload!(
+              io: StringIO.new(File.read(csv_path)),
+              filename: "authorization_members.csv",
+              content_type: "text/csv"
+            )
           end
           let(:params) do
-            base_params.merge(csv_file: csv_file)
+            base_params.merge(file: csv_blob.signed_id)
           end
 
           it "creates members from csv" do
