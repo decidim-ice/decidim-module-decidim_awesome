@@ -12,6 +12,24 @@ module Decidim
 
       before_validation :normalize_email
 
+      delegate :organization, to: :authorization_group
+
+      def user
+        @user ||= organization.users.find_by(email: email)
+      end
+
+      def authorization
+        @authorization ||= Decidim::Authorization.find_by(user:)
+      end
+
+      def self.ransackable_associations(_auth_object = nil)
+        []
+      end
+
+      def self.ransackable_attributes(_auth_object = nil)
+        %w(email)
+      end
+
       private
 
       def normalize_email

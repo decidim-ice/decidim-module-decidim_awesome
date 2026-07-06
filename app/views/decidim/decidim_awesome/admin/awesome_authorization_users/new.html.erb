@@ -1,0 +1,39 @@
+<div class="item_show__header">
+  <h2 class="item_show__header-title">
+    <%= t ".title", group: translated_attribute(authorization_group.name) %>
+  </h2>
+</div>
+
+<div class="item__edit item__edit-1col">
+  <div class="item__edit-form">
+    <%= decidim_form_for(@form, url: awesome_authorization_users_path, multipart: true, html: { class: "form-defaults form" }) do |f| %>
+
+      <div class="form__wrapper">
+        <div class="card pt-4">
+          <div class="card-section">
+            <div class="row column">
+              <%= f.check_box :remove_previous_members, label: t(".remove_previous_members", count: authorization_members.count) %>
+            </div>
+            <div class="row column">
+              <%= f.text_area :emails, help_text: t(".emails_help") %>
+            </div>
+            <div class="row column">
+              <h3 class="h3"><%= t(".or") %></h3>
+            </div>
+            <div class="row column">
+              <div class="font-semibold">
+                <%= f.upload :file, help_i18n_scope: "decidim.admin.forms.file_help.import_csv", button_class: "button button__sm button__transparent-secondary" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item__edit-sticky">
+        <div class="item__edit-sticky-container">
+          <%= f.submit t(".create"), class: "button button__sm button__secondary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

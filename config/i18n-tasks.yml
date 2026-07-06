@@ -21,6 +21,7 @@ ignore_unused:
   - "activemodel.attributes.custom_redirect.*"
   - "activemodel.attributes.user.*"
   - "activemodel.attributes.awesome_authorization_group.*"
+  - "activemodel.attributes.awesome_authorization_members.*"
   - "activemodel.attributes.organization.awesome_admins_available_authorizations"
   - "activemodel.attributes.force_authorization.*"
   - "activemodel.errors.models.cookie_item.attributes.*"
