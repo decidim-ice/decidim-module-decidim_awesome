@@ -323,6 +323,8 @@ en:
             email: Email
             new: Add new members
             no_members: This group has no members yet
+            not_synced: User authorizations are out of sync with this authorization
+              group. Please click on "Sync" to update the list of members.
             remove: Remove member
             title: Manage members for "%{group}"
             user: Decidim user

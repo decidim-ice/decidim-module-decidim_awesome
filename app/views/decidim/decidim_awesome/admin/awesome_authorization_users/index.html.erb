@@ -6,6 +6,12 @@
   </h1>
 </div>
 
+<% unless authorization_group.synced? %>
+  <div class="callout warning">
+    <%= t(".not_synced") %>
+  </div>
+<% end %>
+
 <div class="table-stacked">
   <% if authorization_members.any? %>
     <table class="table-list">
