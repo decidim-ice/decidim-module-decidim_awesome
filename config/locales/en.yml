@@ -306,6 +306,20 @@ en:
             save: Save
             title: Edit authorization properties
         awesome_authorizations:
+          create:
+            error: Error creating authorization group! %{error}
+            success: Authorization group created successfully
+          destroy:
+            success: Authorization group removed successfully
+          edit:
+            save: Save
+            title: Edit authorization group
+          form:
+            name: Authorization name
+            name_help: This title is shown in the verification card.
+            purpose: Authorization purpose
+            purpose_help: This text is shown in the verification card to explain the
+              purpose of the authorization or its intended use.
           index:
             authorization_groups: Authorization groups
             authorization_properties: Authorization properties
@@ -333,6 +347,12 @@ en:
             members_count: Users
             no_groups: No authorization groups created yet
             sync_status: Sync status
+          new:
+            create: Create
+            title: New authorization group
+          update:
+            error: Error updating authorization! %{error}
+            success: Authorization updated successfully
         checks:
           index:
             admin_head_tags: Awesome tags included in the admin application header
