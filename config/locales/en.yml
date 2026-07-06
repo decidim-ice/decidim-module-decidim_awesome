@@ -5,6 +5,9 @@ en:
     waiting_label: Waiting for verification ...
   activemodel:
     attributes:
+      awesome_authorization_group:
+        name: Group name
+        purpose: Group purpose
       config:
         additional_proposal_sortings: Additional sorting options enabled
         allow_images_in_editors: Allow images in the HTML editor
@@ -306,6 +309,18 @@ en:
             save: Save
             title: Edit authorization properties
         awesome_authorizations:
+          create:
+            error: Error creating authorization group! %{error}
+            success: Authorization group created successfully
+          destroy:
+            success: Authorization group removed successfully
+          edit:
+            save: Save
+            title: Edit authorization group
+          form:
+            name_help: This title is shown in the verification card.
+            purpose_help: This text is shown in the verification card to explain the
+              purpose of the authorization or its intended use.
           index:
             authorization_groups: Authorization groups
             authorization_properties: Authorization properties
@@ -333,6 +348,12 @@ en:
             members_count: Users
             no_groups: No authorization groups created yet
             sync_status: Sync status
+          new:
+            create: Create
+            title: New authorization group
+          update:
+            error: Error updating authorization group! %{error}
+            success: Authorization group updated successfully
         checks:
           index:
             admin_head_tags: Awesome tags included in the admin application header

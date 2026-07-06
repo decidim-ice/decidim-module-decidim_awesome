@@ -71,6 +71,139 @@ module Decidim::DecidimAwesome
           end
         end
       end
+
+      describe "GET #new" do
+        it "returns http success" do
+          get :new
+          expect(response).to have_http_status(:success)
+        end
+
+        it "renders the new template" do
+          get :new
+          expect(subject).to render_template(:new)
+        end
+      end
+
+      describe "POST #create" do
+        let(:params) do
+          {
+            awesome_authorization_group: {
+              name: { en: "New Group" },
+              purpose: { en: "New Group Purpose" }
+            }
+          }
+        end
+
+        context "when command succeeds" do
+          it "redirects with a success notice" do
+            post :create, params: params
+            expect(flash[:notice]).not_to be_empty
+            expect(response).to have_http_status(:redirect)
+            expect(response).to redirect_to(awesome_authorizations_path)
+          end
+
+          it "creates the authorization group" do
+            expect { post :create, params: params }.to change(Decidim::DecidimAwesome::AuthorizationGroup, :count).by(1)
+          end
+        end
+
+        context "when command fails" do
+          let(:params) do
+            {
+              awesome_authorization_group: {
+                name: { en: "" },
+                purpose: { en: "New Group Purpose" }
+              }
+            }
+          end
+
+          it "renders new with an alert" do
+            post :create, params: params
+            expect(flash[:alert]).not_to be_empty
+            expect(response).to have_http_status(:ok)
+            expect(response).to render_template(:new)
+          end
+
+          it "does not create the authorization group" do
+            expect { post :create, params: params }.not_to change(Decidim::DecidimAwesome::AuthorizationGroup, :count)
+          end
+        end
+      end
+
+      describe "GET #edit" do
+        let!(:authorization_group) { create(:awesome_authorization_group, organization:) }
+
+        it "returns http success" do
+          get :edit, params: { id: authorization_group.id }
+          expect(response).to have_http_status(:success)
+        end
+
+        it "renders the edit template" do
+          get :edit, params: { id: authorization_group.id }
+          expect(subject).to render_template(:edit)
+        end
+      end
+
+      describe "PATCH #update" do
+        let!(:authorization_group) { create(:awesome_authorization_group, organization:) }
+        let(:params) do
+          {
+            id: authorization_group.id,
+            awesome_authorization_group: {
+              name: { en: "Updated Group Name" },
+              purpose: { en: "Updated Group Purpose" }
+            }
+          }
+        end
+
+        context "when command succeeds" do
+          it "redirects with a success notice" do
+            patch :update, params: params
+            expect(flash[:notice]).not_to be_empty
+            expect(response).to have_http_status(:redirect)
+            expect(response).to redirect_to(awesome_authorizations_path)
+          end
+
+          it "updates the authorization group" do
+            patch :update, params: params
+            expect(authorization_group.reload.name["en"]).to eq("Updated Group Name")
+          end
+        end
+
+        context "when command fails" do
+          let(:params) do
+            {
+              id: authorization_group.id,
+              awesome_authorization_group: {
+                name: { en: "" },
+                purpose: { en: "Updated Group Purpose" }
+              }
+            }
+          end
+
+          it "renders edit with an alert" do
+            patch :update, params: params
+            expect(flash[:alert]).not_to be_empty
+            expect(response).to have_http_status(:ok)
+            expect(response).to render_template(:edit)
+          end
+        end
+      end
+
+      describe "DELETE #destroy" do
+        let!(:authorization_group) { create(:awesome_authorization_group, organization:) }
+
+        it "redirects with a success notice" do
+          delete :destroy, params: { id: authorization_group.id }
+          expect(flash[:notice]).not_to be_empty
+          expect(response).to have_http_status(:redirect)
+          expect(response).to redirect_to(awesome_authorizations_path)
+        end
+
+        it "destroys the authorization group" do
+          expect { delete :destroy, params: { id: authorization_group.id } }.to change(Decidim::DecidimAwesome::AuthorizationGroup, :count).by(-1)
+        end
+      end
     end
   end
 end
