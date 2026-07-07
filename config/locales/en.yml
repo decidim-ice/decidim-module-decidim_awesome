@@ -318,6 +318,7 @@ en:
           destroy:
             success: Member removed successfully
           index:
+            actions: Actions
             authorized_user: Authorized user
             confirm_remove: Are you sure you want to remove this member?
             email: Email
@@ -341,8 +342,6 @@ en:
             empty: No emails were found in the input or CSV file. Please add at least
               one email.
         awesome_authorizations:
-          sync:
-            success: Synchronization has started
           create:
             error: Error creating authorization group! %{error}
             success: Authorization group created successfully
@@ -372,21 +371,23 @@ en:
             system_link: System admin
             title: Awesome authorizations
           list_authorization_groups:
+            actions: Actions
             confirm_destroy: Are you sure you want to destroy this authorization group?
               All users in this group will lose their authorization.
             destroy: Remove group
-            sync: Synchronize authorizations
             edit: Edit group
             granted_count: Authorized
             group_name: Group name
             manage: Manage members
             members_count: Users
             no_groups: No authorization groups created yet
+            sync: Synchronize authorizations
             sync_status: Sync status
-            actions: Actions
           new:
             create: Create
             title: New authorization group
+          sync:
+            success: Synchronization has started
           update:
             error: Error updating authorization group! %{error}
             success: Authorization group updated successfully
