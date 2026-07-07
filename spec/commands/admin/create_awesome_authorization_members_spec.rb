@@ -51,6 +51,23 @@ module Decidim::DecidimAwesome
         it "does not create members" do
           expect { subject.call }.not_to change(Decidim::DecidimAwesome::AuthorizationMember, :count)
         end
+
+        context "when emails are nil" do
+          let(:form_params) do
+            {
+              emails: nil,
+              remove_previous_members: false
+            }
+          end
+
+          it "broadcasts :invalid" do
+            expect { subject.call }.to broadcast(:invalid)
+          end
+
+          it "does not create members" do
+            expect { subject.call }.not_to change(Decidim::DecidimAwesome::AuthorizationMember, :count)
+          end
+        end
       end
     end
   end

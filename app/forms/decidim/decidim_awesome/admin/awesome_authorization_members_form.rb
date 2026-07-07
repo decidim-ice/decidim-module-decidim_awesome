@@ -26,7 +26,7 @@ module Decidim
             end
             yield text
           else
-            yield emails
+            yield emails.to_s
           end
         end
 
@@ -37,7 +37,7 @@ module Decidim
         private
 
         def extract_emails_from_text(text)
-          text.split(/[\s,;]+/).map(&:strip).grep(URI::MailTo::EMAIL_REGEXP)
+          text.split(/[\s,;]+/).map { |email| email.strip.downcase }.grep(URI::MailTo::EMAIL_REGEXP)
         end
       end
     end

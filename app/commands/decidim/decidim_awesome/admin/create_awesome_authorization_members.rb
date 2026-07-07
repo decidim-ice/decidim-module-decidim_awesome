@@ -22,7 +22,7 @@ module Decidim
 
           previous_members_count = authorization_group.members.count
           authorization_group.members.insert_all( # rubocop:disable Rails/SkipsModelValidations
-            form.data.map { |email| { email: email } },
+            form.data.map { |email| { email: email.strip.downcase } },
             unique_by: :index_auth_members_group_email
           )
           created_count = authorization_group.members.count - previous_members_count
