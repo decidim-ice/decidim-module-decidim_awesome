@@ -275,7 +275,12 @@ module Decidim
         if Decidim::DecidimAwesome.enabled?(:awesome_authorization_handler)
           # Update the current user authorization's status after login
           Warden::Manager.after_authentication do |user, _auth, _opts|
-            Decidim::DecidimAwesome::SyncAwesomeAuthorizationUserJob.perform_later(user.id) if user.is_a?(Decidim::User)
+            next unless user.is_a?(Decidim::User)
+
+            handlers = user&.organization&.available_authorization_handlers
+            next unless handlers&.include?("awesome_authorization_handler")
+
+            Decidim::DecidimAwesome::SyncAwesomeAuthorizationUserJob.perform_later(user.id)
           end
 
           # Register the awesome_authorization_handler workflow with Decidim Verifications

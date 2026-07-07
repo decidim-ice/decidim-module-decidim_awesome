@@ -54,7 +54,13 @@ module Decidim
         end
 
         def destroy
+          users_to_sync = authorization_group.granted_in_group.to_a
+
           authorization_group.destroy!
+          users_to_sync.each do |user|
+            Decidim::DecidimAwesome::SyncAwesomeAuthorizationUserJob.perform_later(user.id)
+          end
+
           flash[:notice] = I18n.t("decidim.decidim_awesome.admin.awesome_authorizations.destroy.success")
           redirect_to decidim_admin_decidim_awesome.awesome_authorizations_path
         end

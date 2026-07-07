@@ -216,6 +216,23 @@ module Decidim::DecidimAwesome
         it "destroys the authorization group" do
           expect { delete :destroy, params: { id: authorization_group.id } }.to change(Decidim::DecidimAwesome::AuthorizationGroup, :count).by(-1)
         end
+
+        it "revokes authorizations for users tied to the group" do
+          user = create(:user, :confirmed, organization:, email: "member@example.org")
+          create(:awesome_authorization_member, authorization_group:, email: user.email)
+          create(
+            :authorization,
+            :granted,
+            user:,
+            name: "awesome_authorization_handler",
+            metadata: { "groups" => { authorization_group.id.to_s => authorization_group.name } }
+          )
+
+          expect do
+            delete :destroy, params: { id: authorization_group.id }
+            perform_enqueued_jobs
+          end.to change { Decidim::Authorization.where(user: user, name: "awesome_authorization_handler").count }.from(1).to(0)
+        end
       end
     end
   end
