@@ -8,6 +8,9 @@ en:
       awesome_authorization_group:
         name: Group name
         purpose: Group purpose
+      awesome_authorization_members:
+        emails: Emails
+        file: Upload a CSV file
       config:
         additional_proposal_sortings: Additional sorting options enabled
         allow_images_in_editors: Allow images in the HTML editor
@@ -308,6 +311,34 @@ en:
             name_help: This title is shown in the verification card.
             save: Save
             title: Edit authorization properties
+        awesome_authorization_users:
+          create:
+            error: Error updating members list! %{error}
+            success: Members list updated successfully (%{count} new users added)
+          destroy:
+            success: Member removed successfully
+          index:
+            authorized_user: Authorized user
+            confirm_remove: Are you sure you want to remove this member?
+            email: Email
+            new: Add new members
+            no_members: This group has no members yet
+            not_synced: User authorizations are out of sync with this authorization
+              group. Please click on "Sync" to update the list of members.
+            remove: Remove member
+            title: Manage members for "%{group}"
+            user: Decidim user
+          new:
+            create: Add members
+            emails_help: Drop emails here, only words with an "@" will be considered
+              as emails.
+            or: or
+            remove_previous_members: Remove previous members of the group (%{count}
+              users)
+            title: Add members to "%{group}"
+          update:
+            empty: No emails were found in the input or CSV file. Please add at least
+              one email.
         awesome_authorizations:
           create:
             error: Error creating authorization group! %{error}
