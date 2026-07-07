@@ -59,5 +59,48 @@ module Decidim::DecidimAwesome
         expect(member).not_to be_valid
       end
     end
+
+    describe "#group_authorized?" do
+      let(:organization) { authorization_group.organization }
+      let(:user) { create(:user, :confirmed, organization:, email: authorization_member.email) }
+
+      context "when member has no authorization" do
+        it "returns false" do
+          expect(authorization_member.group_authorized?(authorization_group)).to be(false)
+        end
+      end
+
+      context "when authorization metadata includes the group id as a string" do
+        before do
+          user
+          create(
+            :authorization,
+            user:,
+            name: "awesome_authorization_handler",
+            metadata: { "groups" => [authorization_group.id.to_s] }
+          )
+        end
+
+        it "returns true" do
+          expect(authorization_member.group_authorized?(authorization_group)).to be(true)
+        end
+      end
+
+      context "when authorization metadata does not include the group id" do
+        before do
+          user
+          create(
+            :authorization,
+            user:,
+            name: "awesome_authorization_handler",
+            metadata: { "groups" => ["other-group"] }
+          )
+        end
+
+        it "returns false" do
+          expect(authorization_member.group_authorized?(authorization_group)).to be(false)
+        end
+      end
+    end
   end
 end

@@ -26,6 +26,7 @@ module Decidim
 
           CreateAwesomeAuthorizationMembers.call(@form) do
             on(:ok) do |created_count|
+              Decidim::DecidimAwesome::SyncAwesomeAuthorizationGroupJob.perform_later(authorization_group.id)
               flash[:notice] = I18n.t("decidim.decidim_awesome.admin.awesome_authorization_users.create.success", count: created_count)
               redirect_to decidim_admin_decidim_awesome.awesome_authorization_users_path(authorization_group)
             end
@@ -39,6 +40,7 @@ module Decidim
 
         def destroy
           authorization_group.members.find(params[:id]).destroy!
+          Decidim::DecidimAwesome::SyncAwesomeAuthorizationGroupJob.perform_later(authorization_group.id)
           flash[:notice] = I18n.t("decidim.decidim_awesome.admin.awesome_authorization_users.destroy.success")
           redirect_to decidim_admin_decidim_awesome.awesome_authorization_users_path(authorization_group)
         end

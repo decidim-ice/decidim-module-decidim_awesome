@@ -23,6 +23,14 @@ module Decidim
         @granted_count ||= granted.count
       end
 
+      def granted_in_group
+        @granted_in_group ||= granted.select { |authorization| authorization.metadata["groups"]&.include?(id.to_s) }
+      end
+
+      def granted_in_group_count
+        @granted_in_group_count ||= granted_in_group.count
+      end
+
       def users
         @users ||= organization.users.where(email: members.select(:email))
       end
@@ -31,8 +39,12 @@ module Decidim
         @users_count ||= users.count
       end
 
+      def not_authorized_users
+        @not_authorized_users ||= users - granted.map(&:user)
+      end
+
       def synced?
-        granted_count == users_count
+        granted_in_group_count == users_count
       end
     end
   end

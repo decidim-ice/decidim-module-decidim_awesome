@@ -118,11 +118,27 @@ module Decidim::DecidimAwesome
       context "when all users are authorized" do
         before do
           create(:awesome_authorization_member, authorization_group:, email: user.email)
-          create(:authorization, user:, name: "awesome_authorization_handler")
+          create(
+            :authorization,
+            user:,
+            name: "awesome_authorization_handler",
+            metadata: { "groups" => [authorization_group.id.to_s] }
+          )
         end
 
         it "returns true" do
           expect(authorization_group.synced?).to be true
+        end
+      end
+
+      context "when users are authorized but not for this group" do
+        before do
+          create(:awesome_authorization_member, authorization_group:, email: user.email)
+          create(:authorization, user:, name: "awesome_authorization_handler", metadata: { "groups" => ["9999"] })
+        end
+
+        it "returns false" do
+          expect(authorization_group.synced?).to be false
         end
       end
     end

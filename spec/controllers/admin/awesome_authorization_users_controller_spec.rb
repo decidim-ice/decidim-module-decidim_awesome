@@ -5,6 +5,8 @@ require "spec_helper"
 module Decidim::DecidimAwesome
   module Admin
     describe AwesomeAuthorizationUsersController do
+      include ActiveJob::TestHelper
+
       routes { Decidim::DecidimAwesome::AdminEngine.routes }
 
       let(:organization) { create(:organization, available_authorizations: ["awesome_authorization_handler"]) }
@@ -14,6 +16,7 @@ module Decidim::DecidimAwesome
       before do
         request.env["decidim.current_organization"] = user.organization
         sign_in user, scope: :user
+        clear_enqueued_jobs
       end
 
       describe "GET #index" do
@@ -39,6 +42,11 @@ module Decidim::DecidimAwesome
             post :create, params: params
             expect(response).to have_http_status(:redirect)
             expect(flash[:notice]).to be_present
+          end
+
+          it "enqueues a synchronization job" do
+            expect(Decidim::DecidimAwesome::SyncAwesomeAuthorizationGroupJob).to receive(:perform_later).with(authorization_group.id)
+            post :create, params: params
           end
         end
 
@@ -84,6 +92,22 @@ module Decidim::DecidimAwesome
 
         it "redirects with notice" do
           delete :destroy, params: { awesome_authorization_id: authorization_group.id, id: member.id }
+          expect(response).to have_http_status(:redirect)
+          expect(flash[:notice]).to be_present
+        end
+
+        it "enqueues a synchronization job" do
+          expect(Decidim::DecidimAwesome::SyncAwesomeAuthorizationGroupJob).to receive(:perform_later).with(authorization_group.id)
+          delete :destroy, params: { awesome_authorization_id: authorization_group.id, id: member.id }
+        end
+      end
+
+      describe "POST #sync" do
+        it "enqueues the synchronization job and redirects" do
+          expect(Decidim::DecidimAwesome::SyncAwesomeAuthorizationGroupJob).to receive(:perform_later).with(authorization_group.id)
+
+          post :sync, params: { awesome_authorization_id: authorization_group.id }
+
           expect(response).to have_http_status(:redirect)
           expect(flash[:notice]).to be_present
         end
