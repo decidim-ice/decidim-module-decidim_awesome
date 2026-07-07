@@ -21,8 +21,8 @@ module Decidim
           authorization_group.members.destroy_all if form.remove_previous_members
 
           previous_members_count = authorization_group.members.count
-          authorization_group.members.insert_all(
-            form.data.map { |email| { email: email } }, # rubocop:disable Rails/SkipsModelValidations
+          authorization_group.members.insert_all( # rubocop:disable Rails/SkipsModelValidations
+            form.data.map { |email| { email: email } },
             unique_by: :index_auth_members_group_email
           )
           created_count = authorization_group.members.count - previous_members_count
