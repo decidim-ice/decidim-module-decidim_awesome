@@ -32,6 +32,7 @@ module Decidim
         resources :force_authorizations, param: :var, only: [:create, :destroy]
         resources :admin_authorizations, only: [:edit, :update, :destroy]
         resources :awesome_authorizations, except: [:show] do
+          post :sync, on: :member
           resources :users, except: [:show], controller: "awesome_authorization_users"
         end
         scope :awesome_authorizations do

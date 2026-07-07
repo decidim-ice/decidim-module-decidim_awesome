@@ -11,16 +11,43 @@ module Decidim
       validates :name, presence: true
       validates :purpose, presence: true
 
+      def self.authorizations(organization)
+        Decidim::Verifications::Authorizations.new(organization: organization, name: :awesome_authorization_handler, granted: true).query
+      end
+
+      def self.sync_user_authorization(user)
+        handler = Decidim::AuthorizationHandler.handler_for("awesome_authorization_handler", user: user)
+
+        if handler.valid?
+          Decidim::Authorization.create_or_update_from(handler)
+        else
+          Decidim::Authorization.find_by(user: user, name: "awesome_authorization_handler")&.destroy!
+        end
+      end
+
+      def reset_caches!
+        @members_count = nil
+        @authorizations_in_group = nil
+        @granted_in_group = nil
+        @granted_in_group_count = nil
+        @users = nil
+        @users_count = nil
+      end
+
       def members_count
         @members_count ||= members.count
       end
 
-      def granted
-        @granted ||= Decidim::Verifications::Authorizations.new(organization: organization, name: :awesome_authorization_handler, granted: true).query.where(user: users)
+      def authorizations_in_group
+        @authorizations_in_group ||= AuthorizationGroup.authorizations(organization).select { |authorization| authorization.metadata["groups"]&.include?(id.to_s) }
       end
 
-      def granted_count
-        @granted_count ||= granted.count
+      def granted_in_group
+        @granted_in_group ||= organization.users.where(id: authorizations_in_group.pluck(:decidim_user_id))
+      end
+
+      def granted_in_group_count
+        @granted_in_group_count ||= granted_in_group.count
       end
 
       def users
@@ -32,7 +59,7 @@ module Decidim
       end
 
       def synced?
-        granted_count == users_count
+        users.pluck(:id).sort == granted_in_group.pluck(:id).sort
       end
     end
   end

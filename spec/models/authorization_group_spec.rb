@@ -35,9 +35,9 @@ module Decidim::DecidimAwesome
       end
     end
 
-    describe "#granted_count" do
+    describe "#granted_in_group_count" do
       it "returns 0 by default" do
-        expect(authorization_group.granted_count).to eq(0)
+        expect(authorization_group.granted_in_group_count).to eq(0)
       end
 
       context "when users are authorized" do
@@ -45,11 +45,16 @@ module Decidim::DecidimAwesome
 
         before do
           create(:awesome_authorization_member, authorization_group:, email: "test@example.com")
-          create(:authorization, user:, name: "awesome_authorization_handler")
+          create(
+            :authorization,
+            user:,
+            name: "awesome_authorization_handler",
+            metadata: { "groups" => [authorization_group.id.to_s] }
+          )
         end
 
         it "returns the count of authorized users" do
-          expect(authorization_group.granted_count).to eq(1)
+          expect(authorization_group.granted_in_group_count).to eq(1)
         end
       end
 
@@ -61,20 +66,20 @@ module Decidim::DecidimAwesome
         before do
           create(:awesome_authorization_member, authorization_group:, email: user1.email)
           create(:awesome_authorization_member, authorization_group: other_group, email: user2.email)
-          create(:authorization, user: user1, name: "awesome_authorization_handler")
-          create(:authorization, user: user2, name: "awesome_authorization_handler")
+          create(:authorization, user: user1, name: "awesome_authorization_handler", metadata: { "groups" => [authorization_group.id.to_s] })
+          create(:authorization, user: user2, name: "awesome_authorization_handler", metadata: { "groups" => [other_group.id.to_s] })
         end
 
         it "does not leak counts across groups" do
-          expect(authorization_group.granted_count).to eq(1)
-          expect(other_group.granted_count).to eq(1)
+          expect(authorization_group.granted_in_group_count).to eq(1)
+          expect(other_group.granted_in_group_count).to eq(1)
         end
       end
     end
 
-    describe "#granted" do
-      it "returns an authorization query" do
-        expect(authorization_group.granted).to be_a(ActiveRecord::Relation)
+    describe "#authorizations_in_group" do
+      it "returns authorizations for the current group" do
+        expect(authorization_group.authorizations_in_group).to be_empty
       end
     end
 
@@ -118,11 +123,27 @@ module Decidim::DecidimAwesome
       context "when all users are authorized" do
         before do
           create(:awesome_authorization_member, authorization_group:, email: user.email)
-          create(:authorization, user:, name: "awesome_authorization_handler")
+          create(
+            :authorization,
+            user:,
+            name: "awesome_authorization_handler",
+            metadata: { "groups" => [authorization_group.id.to_s] }
+          )
         end
 
         it "returns true" do
           expect(authorization_group.synced?).to be true
+        end
+      end
+
+      context "when users are authorized but not for this group" do
+        before do
+          create(:awesome_authorization_member, authorization_group:, email: user.email)
+          create(:authorization, user:, name: "awesome_authorization_handler", metadata: { "groups" => ["9999"] })
+        end
+
+        it "returns false" do
+          expect(authorization_group.synced?).to be false
         end
       end
     end

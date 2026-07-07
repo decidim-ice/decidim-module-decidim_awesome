@@ -318,14 +318,16 @@ en:
           destroy:
             success: Member removed successfully
           index:
+            actions: Actions
             authorized_user: Authorized user
             confirm_remove: Are you sure you want to remove this member?
             email: Email
             new: Add new members
             no_members: This group has no members yet
-            not_synced: User authorizations are out of sync with this authorization
-              group. Please click on "Sync" to update the list of members.
+            not_synced_html: User authorizations are out of sync with this authorization
+              group. %{sync} to update the list of members.
             remove: Remove member
+            sync: Synchronize authorizations
             title: Manage members for "%{group}"
             user: Decidim user
           new:
@@ -369,19 +371,25 @@ en:
             system_link: System admin
             title: Awesome authorizations
           list_authorization_groups:
+            actions: Actions
             confirm_destroy: Are you sure you want to destroy this authorization group?
               All users in this group will lose their authorization.
-            destroy: Destroy group
+            destroy: Remove group
             edit: Edit group
             granted_count: Authorized
             group_name: Group name
             manage: Manage members
             members_count: Users
             no_groups: No authorization groups created yet
+            out_of_sync: Out of sync
+            sync: Synchronize authorizations
             sync_status: Sync status
+            synced: Synced
           new:
             create: Create
             title: New authorization group
+          sync:
+            success: Synchronization has started
           update:
             error: Error updating authorization group! %{error}
             success: Authorization group updated successfully
@@ -1063,7 +1071,7 @@ en:
           styles: Custom Styles
           surveys: Surveys & Forms
           verifications:
-            awesome_authorizations: Awesome Authorizations
+            awesome_authorizations: Awesome authorizations
             force_authorizations: Forced authorizations
             verifications: Verifications
         menu_hacks:

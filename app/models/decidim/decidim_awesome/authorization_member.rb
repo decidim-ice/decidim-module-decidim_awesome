@@ -22,6 +22,12 @@ module Decidim
         @authorization ||= Decidim::Authorization.find_by(user:)
       end
 
+      def group_authorized?(authorization_group)
+        return false unless authorization
+
+        authorization.metadata["groups"]&.include?(authorization_group.id.to_s)
+      end
+
       def self.ransackable_associations(_auth_object = nil)
         []
       end
