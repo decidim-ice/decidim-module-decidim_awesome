@@ -164,6 +164,30 @@ describe "Admin manages awesome authorizations" do
 
         expect(page).to have_content("Synchronization has started")
       end
+
+      context "when some users are authorized" do
+        let!(:authorized_user) { create(:user, :confirmed, organization:, email: "authorized@example.org") }
+        let!(:unauthorized_user) { create(:user, :confirmed, organization:, email: "unauthorized@example.org") }
+        let!(:group) { create(:awesome_authorization_group, organization:) }
+        let!(:another_group) { create(:awesome_authorization_group, organization:) }
+        let!(:authorized_member) { create(:awesome_authorization_member, authorization_group: group, email: authorized_user.email) }
+        let!(:unauthorized_member) { create(:awesome_authorization_member, authorization_group: group, email: unauthorized_user.email) }
+        let!(:another_authorized_member) { create(:awesome_authorization_member, authorization_group: another_group, email: authorized_user.email) }
+        let!(:authorization) { create(:authorization, user: authorized_user, name: "awesome_authorization_handler", metadata: metadata) }
+        let(:metadata) { { "groups" => { group.id.to_s => group.name, another_group.id.to_s => another_group.name } } }
+
+        it "shows the sync status correctly" do
+          visit decidim_admin_decidim_awesome.awesome_authorizations_path
+
+          within "tr[data-group-id=\"#{group.id}\"]" do
+            expect(page).to have_css("span[title='Out of sync']")
+          end
+
+          within "tr[data-group-id=\"#{another_group.id}\"]" do
+            expect(page).to have_css("span[title='Synced']")
+          end
+        end
+      end
     end
 
     context "when authorization is not available in organization" do

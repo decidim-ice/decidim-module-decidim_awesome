@@ -19,7 +19,7 @@
             </td>
             <td><%= group.members_count %></td>
             <td><%= group.granted_count %></td>
-            <td><%= check(group.synced?) %></td>
+            <td><span title="<%= group.synced? ? t(".synced") : t(".out_of_sync") %>"><%= check(group.synced?) %></span></td>
             <td class="table-list__actions">
               <%= icon_link_to "group-line", decidim_admin_decidim_awesome.awesome_authorization_users_path(group), t(".manage"), class: "action-icon--preview" %>
               <button type="button" data-controller="dropdown" data-target="actions-group-<%= group.id %>" aria-label="<%= t("decidim.admin.actions.actions_label", resource: translated_attribute(group.name)) %>">

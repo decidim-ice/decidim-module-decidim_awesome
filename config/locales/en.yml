@@ -381,8 +381,10 @@ en:
             manage: Manage members
             members_count: Users
             no_groups: No authorization groups created yet
+            out_of_sync: Out of sync
             sync: Synchronize authorizations
             sync_status: Sync status
+            synced: Synced
           new:
             create: Create
             title: New authorization group

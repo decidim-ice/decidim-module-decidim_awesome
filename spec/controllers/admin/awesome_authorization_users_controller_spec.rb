@@ -101,17 +101,6 @@ module Decidim::DecidimAwesome
           delete :destroy, params: { awesome_authorization_id: authorization_group.id, id: member.id }
         end
       end
-
-      describe "POST #sync" do
-        it "enqueues the synchronization job and redirects" do
-          expect(Decidim::DecidimAwesome::SyncAwesomeAuthorizationGroupJob).to receive(:perform_later).with(authorization_group.id)
-
-          post :sync, params: { awesome_authorization_id: authorization_group.id }
-
-          expect(response).to have_http_status(:redirect)
-          expect(flash[:notice]).to be_present
-        end
-      end
     end
   end
 end
