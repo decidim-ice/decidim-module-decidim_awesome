@@ -12,7 +12,7 @@
       </thead>
       <tbody>
         <% authorization_groups.each do |group| %>
-          <tr>
+          <tr data-group-id="<%= group.id %>">
             <td>
               <%= translated_attribute(group.name) %>
               <div class="text-sm text-gray"><%= translated_attribute(group.purpose) %></div>

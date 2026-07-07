@@ -70,7 +70,11 @@ describe "Admin manages awesome authorizations" do
         group = create(:awesome_authorization_group, organization:)
 
         visit decidim_admin_decidim_awesome.awesome_authorizations_path
-        click_link_or_button "Edit group"
+
+        within "tr[data-group-id=\"#{group.id}\"]" do
+          find("button[data-controller='dropdown']").click
+          click_on "Edit group"
+        end
 
         fill_in_i18n :awesome_authorization_group_name,
                      "#awesome_authorization_group-name-tabs",
@@ -88,12 +92,15 @@ describe "Admin manages awesome authorizations" do
       end
 
       it "allows destroying an authorization group" do
-        create(:awesome_authorization_group, organization:)
+        group = create(:awesome_authorization_group, organization:)
 
         visit decidim_admin_decidim_awesome.awesome_authorizations_path
 
-        accept_confirm do
-          click_link_or_button "Destroy group"
+        within "tr[data-group-id=\"#{group.id}\"]" do
+          find("button[data-controller='dropdown']").click
+          accept_confirm do
+            click_on "Remove group"
+          end
         end
 
         expect(page).to have_content("Authorization group removed successfully")
@@ -115,15 +122,14 @@ describe "Admin manages awesome authorizations" do
         expect(page).to have_content("alice@example.org")
         expect(page).to have_content("bob@example.org")
 
-        expect do
-          within("tr", text: "alice@example.org") do
-            accept_confirm do
-              click_link_or_button "Remove member"
-            end
+        within("tr", text: "alice@example.org") do
+          accept_confirm do
+            click_on "Remove member"
           end
-        end.to change(Decidim::DecidimAwesome::AuthorizationMember, :count).by(-1)
+        end
 
         expect(page).to have_content("Member removed successfully")
+        expect(Decidim::DecidimAwesome::AuthorizationMember.count).to eq(1)
       end
 
       it "shows an out of sync warning when members and granted authorizations mismatch" do
@@ -133,6 +139,30 @@ describe "Admin manages awesome authorizations" do
         visit decidim_admin_decidim_awesome.awesome_authorization_users_path(group)
 
         expect(page).to have_content("out of sync with this authorization group")
+      end
+
+      it "allows triggering synchronization from the members page action button" do
+        group = create(:awesome_authorization_group, organization:)
+        create(:awesome_authorization_member, authorization_group: group, email: admin.email)
+
+        visit decidim_admin_decidim_awesome.awesome_authorization_users_path(group)
+
+        click_on "Synchronize authorizations", match: :first
+
+        expect(page).to have_content("Synchronization has started")
+      end
+
+      it "allows triggering synchronization from the out of sync warning link" do
+        group = create(:awesome_authorization_group, organization:)
+        create(:awesome_authorization_member, authorization_group: group, email: admin.email)
+
+        visit decidim_admin_decidim_awesome.awesome_authorization_users_path(group)
+
+        within ".callout.warning" do
+          click_on "Synchronize authorizations"
+        end
+
+        expect(page).to have_content("Synchronization has started")
       end
     end
 

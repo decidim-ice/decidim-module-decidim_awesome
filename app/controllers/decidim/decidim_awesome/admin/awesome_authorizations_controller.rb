@@ -62,7 +62,7 @@ module Decidim
         def sync
           Decidim::DecidimAwesome::SyncAwesomeAuthorizationGroupJob.perform_later(authorization_group.id)
           flash[:notice] = I18n.t("decidim.decidim_awesome.admin.awesome_authorizations.sync.success")
-          redirect_to decidim_admin_decidim_awesome.awesome_authorization_path
+          redirect_to decidim_admin_decidim_awesome.awesome_authorizations_path
         end
 
         private
