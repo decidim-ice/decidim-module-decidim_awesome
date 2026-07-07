@@ -10,10 +10,7 @@ module Decidim::DecidimAwesome
     describe "#perform" do
       context "when a member user should be granted" do
         let(:user) { create(:user, :confirmed, organization: organization, email: "member@example.org") }
-
-        before do
-          create(:awesome_authorization_member, authorization_group: authorization_group, email: user.email)
-        end
+        let!(:authorization_member) { create(:awesome_authorization_member, authorization_group: authorization_group, email: user.email) }
 
         it "creates or updates the awesome authorization" do
           expect do
@@ -25,10 +22,7 @@ module Decidim::DecidimAwesome
 
       context "when a previously granted user is no longer a member" do
         let(:user) { create(:user, :confirmed, organization: organization, email: "old_member@example.org") }
-
-        before do
-          create(:authorization, :granted, user: user, name: "awesome_authorization_handler", metadata: { "groups" => { authorization_group.id.to_s => authorization_group.name } })
-        end
+        let!(:authorization) { create(:authorization, :granted, user: user, name: "awesome_authorization_handler", metadata: { "groups" => { authorization_group.id.to_s => authorization_group.name } }) }
 
         it "removes the awesome authorization" do
           expect do

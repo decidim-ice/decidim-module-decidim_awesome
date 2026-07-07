@@ -30,12 +30,12 @@ describe "Admin manages awesome authorizations" do
       end
 
       it "allows updating authorization properties" do
-        locale = organization.default_locale
+        locale = organization.default_locale.to_sym
 
         visit decidim_admin_decidim_awesome.awesome_authorization_properties_path
 
-        fill_in "awesome_authorization_properties_name_#{locale}", with: "Organization groups"
-        fill_in "awesome_authorization_properties_explanation_#{locale}", with: "Custom description for this authorization"
+        fill_in_i18n :awesome_authorization_properties_name, "#awesome_authorization_properties-name-tabs", locale => "Organization groups"
+        fill_in_i18n :awesome_authorization_properties_explanation, "#awesome_authorization_properties-explanation-tabs", locale => "Custom description for this authorization"
         click_on "Save"
 
         expect(page).to have_content("updated successfully")
@@ -66,103 +66,97 @@ describe "Admin manages awesome authorizations" do
         expect(group.purpose["en"]).to eq("People registered in the city")
       end
 
-      it "allows editing an authorization group" do
-        group = create(:awesome_authorization_group, organization:)
+      context "when a group exists" do
+        let!(:group) { create(:awesome_authorization_group, organization:) }
 
-        visit decidim_admin_decidim_awesome.awesome_authorizations_path
+        it "allows editing an authorization group" do
+          visit decidim_admin_decidim_awesome.awesome_authorizations_path
 
-        within "tr[data-group-id=\"#{group.id}\"]" do
-          find("button[data-controller='dropdown']").click
-          click_on "Edit group"
-        end
-
-        fill_in_i18n :awesome_authorization_group_name,
-                     "#awesome_authorization_group-name-tabs",
-                     en: "Verified residents"
-        fill_in_i18n :awesome_authorization_group_purpose,
-                     "#awesome_authorization_group-name-tabs",
-                     en: "Residents verified by the city"
-        click_on "Save"
-
-        expect(page).to have_content("Authorization group updated successfully")
-
-        group.reload
-        expect(group.name["en"]).to eq("Verified residents")
-        expect(group.purpose["en"]).to eq("Residents verified by the city")
-      end
-
-      it "allows destroying an authorization group" do
-        group = create(:awesome_authorization_group, organization:)
-
-        visit decidim_admin_decidim_awesome.awesome_authorizations_path
-
-        within "tr[data-group-id=\"#{group.id}\"]" do
-          find("button[data-controller='dropdown']").click
-          accept_confirm do
-            click_on "Remove group"
+          within "tr[data-group-id=\"#{group.id}\"]" do
+            find("button[data-controller='dropdown']").click
+            click_on "Edit group"
           end
+
+          fill_in_i18n :awesome_authorization_group_name,
+                       "#awesome_authorization_group-name-tabs",
+                       en: "Verified residents"
+          fill_in_i18n :awesome_authorization_group_purpose,
+                       "#awesome_authorization_group-name-tabs",
+                       en: "Residents verified by the city"
+          click_on "Save"
+
+          expect(page).to have_content("Authorization group updated successfully")
+
+          group.reload
+          expect(group.name["en"]).to eq("Verified residents")
+          expect(group.purpose["en"]).to eq("Residents verified by the city")
         end
 
-        expect(page).to have_content("Authorization group removed successfully")
-        expect(Decidim::DecidimAwesome::AuthorizationGroup.count).to eq(0)
-      end
+        it "allows destroying an authorization group" do
+          visit decidim_admin_decidim_awesome.awesome_authorizations_path
 
-      it "allows managing members in a group" do
-        group = create(:awesome_authorization_group, organization:)
-
-        visit decidim_admin_decidim_awesome.awesome_authorization_users_path(group)
-
-        expect(page).to have_content("This group has no members yet")
-
-        click_on "Add new members"
-        fill_in "awesome_authorization_members_emails", with: "alice@example.org\nbob@example.org"
-        click_on "Add members"
-
-        expect(page).to have_content("Members list updated successfully")
-        expect(page).to have_content("alice@example.org")
-        expect(page).to have_content("bob@example.org")
-
-        within("tr", text: "alice@example.org") do
-          accept_confirm do
-            click_on "Remove member"
+          within "tr[data-group-id=\"#{group.id}\"]" do
+            find("button[data-controller='dropdown']").click
+            accept_confirm do
+              click_on "Remove group"
+            end
           end
+
+          expect(page).to have_content("Authorization group removed successfully")
+          expect(Decidim::DecidimAwesome::AuthorizationGroup.count).to eq(0)
         end
 
-        expect(page).to have_content("Member removed successfully")
-        expect(Decidim::DecidimAwesome::AuthorizationMember.count).to eq(1)
+        it "allows managing members in a group" do
+          visit decidim_admin_decidim_awesome.awesome_authorization_users_path(group)
+
+          expect(page).to have_content("This group has no members yet")
+
+          click_on "Add new members"
+          fill_in "awesome_authorization_members_emails", with: "alice@example.org\nbob@example.org"
+          click_on "Add members"
+
+          expect(page).to have_content("Members list updated successfully")
+          expect(page).to have_content("alice@example.org")
+          expect(page).to have_content("bob@example.org")
+
+          within("tr", text: "alice@example.org") do
+            accept_confirm do
+              click_on "Remove member"
+            end
+          end
+
+          expect(page).to have_content("Member removed successfully")
+          expect(Decidim::DecidimAwesome::AuthorizationMember.count).to eq(1)
+        end
       end
 
-      it "shows an out of sync warning when members and granted authorizations mismatch" do
-        group = create(:awesome_authorization_group, organization:)
-        create(:awesome_authorization_member, authorization_group: group, email: admin.email)
+      context "when authorization exists" do
+        let!(:authorization) { create(:awesome_authorization_member, authorization_group: group, email: admin.email) }
+        let!(:group) { create(:awesome_authorization_group, organization:) }
 
-        visit decidim_admin_decidim_awesome.awesome_authorization_users_path(group)
+        it "shows an out of sync warning when members and granted authorizations mismatch" do
+          visit decidim_admin_decidim_awesome.awesome_authorization_users_path(group)
 
-        expect(page).to have_content("out of sync with this authorization group")
-      end
-
-      it "allows triggering synchronization from the members page action button" do
-        group = create(:awesome_authorization_group, organization:)
-        create(:awesome_authorization_member, authorization_group: group, email: admin.email)
-
-        visit decidim_admin_decidim_awesome.awesome_authorization_users_path(group)
-
-        click_on "Synchronize authorizations", match: :first
-
-        expect(page).to have_content("Synchronization has started")
-      end
-
-      it "allows triggering synchronization from the out of sync warning link" do
-        group = create(:awesome_authorization_group, organization:)
-        create(:awesome_authorization_member, authorization_group: group, email: admin.email)
-
-        visit decidim_admin_decidim_awesome.awesome_authorization_users_path(group)
-
-        within ".callout.warning" do
-          click_on "Synchronize authorizations"
+          expect(page).to have_content("out of sync with this authorization group")
         end
 
-        expect(page).to have_content("Synchronization has started")
+        it "allows triggering synchronization from the members page action button" do
+          visit decidim_admin_decidim_awesome.awesome_authorization_users_path(group)
+
+          click_on "Synchronize authorizations", match: :first
+
+          expect(page).to have_content("Synchronization has started")
+        end
+
+        it "allows triggering synchronization from the out of sync warning link" do
+          visit decidim_admin_decidim_awesome.awesome_authorization_users_path(group)
+
+          within ".callout.warning" do
+            click_on "Synchronize authorizations"
+          end
+
+          expect(page).to have_content("Synchronization has started")
+        end
       end
 
       context "when some users are authorized" do

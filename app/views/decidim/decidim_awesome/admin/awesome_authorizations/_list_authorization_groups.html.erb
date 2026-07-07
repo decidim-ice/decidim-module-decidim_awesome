@@ -18,7 +18,7 @@
               <div class="text-sm text-gray"><%= translated_attribute(group.purpose) %></div>
             </td>
             <td><%= group.members_count %></td>
-            <td><%= group.granted_count %></td>
+            <td><%= group.granted_in_group_count %></td>
             <td><span title="<%= group.synced? ? t(".synced") : t(".out_of_sync") %>"><%= check(group.synced?) %></span></td>
             <td class="table-list__actions">
               <%= icon_link_to "group-line", decidim_admin_decidim_awesome.awesome_authorization_users_path(group), t(".manage"), class: "action-icon--preview" %>
