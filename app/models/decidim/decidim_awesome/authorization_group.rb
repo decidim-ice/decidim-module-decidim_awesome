@@ -15,6 +15,16 @@ module Decidim
         Decidim::Verifications::Authorizations.new(organization: organization, name: :awesome_authorization_handler, granted: true).query
       end
 
+      def self.sync_user_authorization(user)
+        handler = Decidim::AuthorizationHandler.handler_for("awesome_authorization_handler", user: user)
+
+        if handler.valid?
+          Decidim::Authorization.create_or_update_from(handler)
+        else
+          Decidim::Authorization.find_by(user: user, name: "awesome_authorization_handler")&.destroy!
+        end
+      end
+
       def reset_caches!
         @members_count = nil
         @authorizations_in_group = nil
