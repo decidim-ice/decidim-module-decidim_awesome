@@ -31,6 +31,19 @@ module Decidim
         end
       end
 
+      def awesome_authorization_groups
+        return unless Decidim::DecidimAwesome.enabled?(:awesome_authorization_handler)
+
+        memoize("awesome_authorization_groups") do
+          awesome_config_instance.organization.awesome_authorization_groups.map do |group|
+            {
+              value: group.id,
+              text: translated_attribute(group.name)
+            }
+          end.to_json.html_safe
+        end
+      end
+
       def show_public_intergram?
         return false unless awesome_config[:intergram_for_public]
         return true unless awesome_config[:intergram_for_public_settings][:require_login]

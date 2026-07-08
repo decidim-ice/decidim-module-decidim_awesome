@@ -59,6 +59,9 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::AdminLog::ComponentPresenter.included_modules).to include(Decidim::DecidimAwesome::AdminLog::ComponentPresenterOverride)
       expect(Decidim::ApplicationController.included_modules).to include(Decidim::DecidimAwesome::EnforceAccessAuthorizations)
       expect(Decidim::ApplicationController.included_modules).to include(Decidim::DecidimAwesome::UseUserTimeZone)
+      expect(Decidim::ApplicationController.included_modules).to include(Decidim::DecidimAwesome::NeedsThreadVariables)
+      expect(Decidim::Admin::ApplicationController.included_modules).to include(Decidim::DecidimAwesome::NeedsThreadVariables)
+      expect(Decidim::Verifications::ApplicationHelper.included_modules).to include(Decidim::DecidimAwesome::Verifications::ApplicationHelperOverride)
       expect(Decidim::AccountForm.included_modules).to include(Decidim::DecidimAwesome::AccountFormOverride)
       expect(Decidim::UpdateAccount.included_modules).to include(Decidim::DecidimAwesome::UpdateAccountOverride)
       expect(Decidim::System::RegisterOrganizationForm.included_modules).to include(Decidim::DecidimAwesome::System::OrganizationFormOverride)
@@ -75,6 +78,7 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::Proposals::ProposalVoteCell.included_modules).to include(Decidim::DecidimAwesome::Proposals::ProposalVoteCellOverride)
       expect(Decidim::Admin::SettingsHelper.included_modules).to include(Decidim::DecidimAwesome::Admin::SettingsHelperOverride)
       expect(Decidim::Proposals::Permissions.included_modules).to include(Decidim::DecidimAwesome::Proposals::PermissionsOverride)
+      expect(Decidim::Organization.included_modules).to include(Decidim::DecidimAwesome::HasAuthorizationGroups)
     end
 
   else
@@ -106,6 +110,9 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::AdminLog::ComponentPresenter.included_modules).not_to include(Decidim::DecidimAwesome::AdminLog::ComponentPresenterOverride)
       expect(Decidim::ApplicationController.included_modules).not_to include(Decidim::DecidimAwesome::EnforceAccessAuthorizations)
       expect(Decidim::ApplicationController.included_modules).not_to include(Decidim::DecidimAwesome::UseUserTimeZone)
+      expect(Decidim::ApplicationController.included_modules).not_to include(Decidim::DecidimAwesome::NeedsThreadVariables)
+      expect(Decidim::Admin::ApplicationController.included_modules).not_to include(Decidim::DecidimAwesome::NeedsThreadVariables)
+      expect(Decidim::Verifications::ApplicationHelper.included_modules).not_to include(Decidim::DecidimAwesome::Verifications::ApplicationHelperOverride)
       expect(Decidim::AccountForm.included_modules).not_to include(Decidim::DecidimAwesome::AccountFormOverride)
       expect(Decidim::UpdateAccount.included_modules).not_to include(Decidim::DecidimAwesome::UpdateAccountOverride)
       expect(Decidim::System::RegisterOrganizationForm.included_modules).not_to include(Decidim::DecidimAwesome::System::OrganizationFormOverride)
@@ -123,7 +130,7 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::Core::ComponentList.included_modules).not_to include(Decidim::DecidimAwesome::ComponentListOverride)
       expect(Decidim::Proposals::ProposalVoteCell.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ProposalVoteCellOverride)
       expect(Decidim::Admin::SettingsHelper.included_modules).not_to include(Decidim::DecidimAwesome::Admin::SettingsHelperOverride)
-      expect(Decidim::Proposals::Permissions.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::PermissionsOverride)
+      expect(Decidim::Organization.included_modules).not_to include(Decidim::DecidimAwesome::HasAuthorizationGroups)
     end
   end
 end
