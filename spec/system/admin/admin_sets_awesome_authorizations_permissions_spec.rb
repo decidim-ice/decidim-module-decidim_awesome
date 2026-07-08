@@ -44,8 +44,9 @@ describe "Admin manages awesome authorizations permissions in the admin" do
       expect(page).to have_content("Board members")
       click_on "Submit"
       component_permissions = proposal_component.reload.permissions
-      expect(component_permissions.dig("like", "authorization_handlers", "awesome_authorization_handler", "options", "awesome_authorization_groups")).to include(awesome_authorization_group.id.to_s)
-      expect(component_permissions.dig("like", "authorization_handlers", "awesome_authorization_handler", "options", "awesome_authorization_groups")).not_to include(awesome_authorization_group2.id.to_s)
+      selected_groups = component_permissions.dig("like", "authorization_handlers", "awesome_authorization_handler", "options", "awesome_authorization_groups").to_s.split(",")
+      expect(selected_groups).to include(awesome_authorization_group.id.to_s)
+      expect(selected_groups).not_to include(awesome_authorization_group2.id.to_s)
     end
 
     context "when permissions are already set" do
@@ -87,8 +88,9 @@ describe "Admin manages awesome authorizations permissions in the admin" do
         expect(page).to have_content("Board members")
         click_on "Save and continue"
         settings = election.reload.census_settings
-        expect(settings.dig("authorization_handlers", "awesome_authorization_handler", "options", "awesome_authorization_groups")).to include(awesome_authorization_group.id.to_s)
-        expect(settings.dig("authorization_handlers", "awesome_authorization_handler", "options", "awesome_authorization_groups")).not_to include(awesome_authorization_group2.id.to_s)
+        selected_groups = settings.dig("authorization_handlers", "awesome_authorization_handler", "options", "awesome_authorization_groups").to_s.split(",")
+        expect(selected_groups).to include(awesome_authorization_group.id.to_s)
+        expect(selected_groups).not_to include(awesome_authorization_group2.id.to_s)
       end
     end
   end

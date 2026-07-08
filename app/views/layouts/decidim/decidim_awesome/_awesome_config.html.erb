@@ -1,5 +1,5 @@
 <script>
-window.DecidimAwesome = <%= javascript_config_vars %>;
+window.DecidimAwesome = <%= raw(json_escape(javascript_config_vars)) %>;
 window.DecidimAwesome.currentLocale = "<%= current_locale %>";
 window.DecidimAwesome.version = "<%= Decidim::DecidimAwesome::VERSION %>";
 window.DecidimAwesome.editorUploaderPath = "<%= decidim_decidim_awesome.editor_images_path %>";
@@ -19,7 +19,7 @@ window.DecidimAwesome.i18n = {
   "officialAuthor": "<%= j t("decidim.blogs.models.post.fields.official_blog_post") %>",
 }
 <% if awesome_authorization_groups.present? && current_user&.admin? %>
-window.DecidimAwesome.awesomeAuthorizationGroups = <%= awesome_authorization_groups %>;
+window.DecidimAwesome.awesomeAuthorizationGroups = <%= raw(json_escape(awesome_authorization_groups)) %>;
 window.DecidimAwesome.i18n.awesomeAuthorizationGroupsPlaceholder = "<%= j t(".awesome_authorization_groups_placeholder") %>";
 <% end %>
 window.DecidimAwesome.formBuilderLangsLocation = "<%= decidim_decidim_awesome.form_builder_i18n_path(locale: nil) %>";

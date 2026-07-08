@@ -12,7 +12,7 @@ const initializeTomSelect = () => {
   });
 };
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("turbo:load", () => {
   if (window.DecidimAwesome.awesomeAuthorizationGroups) {
     initializeTomSelect();
   }
