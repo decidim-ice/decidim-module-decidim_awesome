@@ -17,6 +17,8 @@ describe "Admin manages awesome authorizations permissions in the admin" do
   end
   let(:participatory_process) { create(:participatory_process, organization:) }
   let!(:proposal_component) { create(:proposal_component, participatory_space: participatory_process) }
+  let!(:elections_component) { create(:elections_component, participatory_space: participatory_process) }
+  let!(:election) { create(:election, :with_questions, census_manifest: "internal_users", component: elections_component) }
 
   before do
     switch_to_host(organization.host)
@@ -66,6 +68,27 @@ describe "Admin manages awesome authorizations permissions in the admin" do
         expect(page).to have_content("Members of the organization (Direct)")
         expect(page).to have_content("Board members")
         expect(page).to have_content("Staff")
+      end
+    end
+
+    context "when editing the election's census permissions" do
+      it "Groups can be selected in the census permissions" do
+        visit manage_component_path(elections_component)
+        within "tr[data-id='#{election.id}']" do
+          find("button[data-controller='dropdown']").click
+          click_on "Edit election"
+        end
+        click_on "Census"
+        expect(page).to have_content("Members of the organization (Direct)")
+        check "internal_users_authorization_handlers_names_awesome_authorization_handler"
+        expect(page).to have_no_content("Board members")
+        expect(page).to have_no_content("Staff")
+        tom_select("#internal_users_authorization_handlers_options_awesome_authorization_handler_awesome_authorization_groups", option_id: awesome_authorization_group.id)
+        expect(page).to have_content("Board members")
+        click_on "Save and continue"
+        settings = election.reload.census_settings
+        expect(settings.dig("authorization_handlers", "awesome_authorization_handler", "options", "awesome_authorization_groups")).to include(awesome_authorization_group.id.to_s)
+        expect(settings.dig("authorization_handlers", "awesome_authorization_handler", "options", "awesome_authorization_groups")).not_to include(awesome_authorization_group2.id.to_s)
       end
     end
   end
