@@ -201,5 +201,67 @@ module Decidim::DecidimAwesome
         it { is_expected.to be(false) }
       end
     end
+
+    describe "#awesome_authorization_groups" do
+      subject { helper.awesome_authorization_groups }
+
+      context "when awesome_authorization_handler is :disabled" do
+        before do
+          allow(Decidim::DecidimAwesome.config).to receive(:awesome_authorization_handler).and_return(:disabled)
+        end
+
+        it { is_expected.to be_nil }
+      end
+
+      context "when awesome_authorization_handler is enabled" do
+        before do
+          allow(Decidim::DecidimAwesome.config).to receive(:awesome_authorization_handler).and_return(true)
+        end
+
+        context "when there are no groups" do
+          it "returns an empty JSON array" do
+            parsed = JSON.parse(subject)
+            expect(parsed).to eq([])
+          end
+        end
+
+        context "when the organization has authorization groups" do
+          let!(:group1) { create(:awesome_authorization_group, organization:) }
+          let!(:group2) { create(:awesome_authorization_group, organization:) }
+          let!(:other_org_group) { create(:awesome_authorization_group) }
+
+          it "returns JSON with value and text for each group" do
+            parsed = JSON.parse(subject)
+            expect(parsed.length).to eq(2)
+            expect(parsed.map { |g| g["value"] }).to contain_exactly(group1.id, group2.id)
+          end
+
+          it "does not include groups from other organizations" do
+            parsed = JSON.parse(subject)
+            expect(parsed.map { |g| g["value"] }).not_to include(other_org_group.id)
+          end
+
+          it "includes translated group names" do
+            parsed = JSON.parse(subject)
+            names = parsed.map { |g| g["text"] }
+            expect(names).to all(be_present)
+          end
+
+          it "returns html_safe string" do
+            expect(subject).to be_html_safe
+          end
+        end
+      end
+
+      context "when awesome_authorization_handler is false" do
+        before do
+          allow(Decidim::DecidimAwesome.config).to receive(:awesome_authorization_handler).and_return(false)
+        end
+
+        it "still returns groups (feature not :disabled)" do
+          expect(subject).not_to be_nil
+        end
+      end
+    end
   end
 end
