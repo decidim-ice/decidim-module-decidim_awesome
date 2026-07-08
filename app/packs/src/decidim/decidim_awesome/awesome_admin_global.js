@@ -7,3 +7,4 @@ window.Stimulus?.register("awesome-votes-by-status", VotesByStatusController)
 import "src/decidim/decidim_awesome/admin/awesome_processes_form"
 import "src/decidim/decidim_awesome/admin/rich_text_columns_form"
 import "src/decidim/decidim_awesome/admin/landing_menu_admin"
+import "src/decidim/decidim_awesome/admin/awesome_authorizations_multiselect"
