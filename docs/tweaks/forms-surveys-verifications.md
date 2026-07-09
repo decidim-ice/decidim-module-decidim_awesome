@@ -188,7 +188,43 @@ end
 ![Hashcash admin config](../../examples/haschcash_admin.png)
 ![Hashcash public rendering](../../examples/hashcash_public.png)
 
-## Scope and operations
+### 5.6 Awesome authorizations
 
-- Verify privacy expectations for client-side form persistence.
-- Validate mandatory/forced verification paths against allowed controller configuration.
+Adds an organization-level authorization workflow based on membership in admin-managed groups, with optional per-action group restrictions.
+
+#### Admin description
+
+Helps organizations model internal membership checks (for example, board members, staff, or committee participants) without external providers.
+Admins can define groups and members, then use those groups in component permissions and election census restrictions.
+
+#### Technical area
+
+- **Enabling/Disabling:** Enabled by default; configurable via initializer
+
+```ruby
+# config/initializers/awesome_defaults.rb
+Decidim::DecidimAwesome.configure do |config|
+  # true = workflow registered by default globally
+  #        (admins can still configure where it is required and optionally restrict by groups)
+  config.awesome_authorization_handler = true  # default: true
+
+  # false = workflow not registered by default
+  #         (admins can enable it per organization by config)
+  # config.awesome_authorization_handler = false
+
+  # :disabled = completely removed, hidden from admins, workflow not registered
+  # config.awesome_authorization_handler = :disabled
+end
+```
+
+- **Admin visibility:** Enabled when the workflow is available; admins can manage authorization groups and members
+- **Default behavior:** Enabled by default globally (`true`), but only organizations that include `awesome_authorization_handler` in available handlers will use it
+- **Admin control:** Yes; admins can create/update groups, manage members, and select allowed groups in component/census authorization options
+- **Authorization metadata:** Stores granted groups in authorization metadata (`groups` hash keyed by group ID)
+- **Restriction logic:** If specific groups are selected in permission options, users must belong to at least one selected group; if no groups are selected, any group membership that grants the workflow is accepted
+- **Sync behavior:** Membership is synchronized on user login through `SyncAwesomeAuthorizationUserJob`, so authorization reflects current group membership
+- **Dependencies:** Requires organization groups and members configured in the Awesome admin area
+- **Cross-references:** Works with Tweak 5.3 for enforcing access to protected areas; can coexist with Tweak 5.4 for manual verification operations
+
+![Admin config](../../examples/awesome_authorizations.png)
+![Admin permissions setup](../../examples/awesome_authorization_authorizer.png)
