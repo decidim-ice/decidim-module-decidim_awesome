@@ -134,7 +134,7 @@ en:
     authorization_handlers:
       awesome_authorization_handler:
         fields:
-          awesome_authorization_groups: 'Restrict access to the groups:'
+          awesome_authorization_groups: 'Allowed groups:'
           groups: Groups
     components:
       awesome_iframe:
