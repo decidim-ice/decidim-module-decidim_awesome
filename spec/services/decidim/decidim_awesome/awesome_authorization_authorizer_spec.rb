@@ -47,7 +47,7 @@ module Decidim
           status, data = subject
 
           expect(status).to eq(:unauthorized)
-          expect(data[:fields]).to include("awesome_authorization_groups" => %w(99 100))
+          expect(data[:fields]).to include("awesome_authorization_groups" => "Board members, Staff")
         end
       end
     end
