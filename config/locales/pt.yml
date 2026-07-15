@@ -4,6 +4,12 @@ pt:
     waiting_label: A aguardar verificacao ...
   activemodel:
     attributes:
+      awesome_authorization_group:
+        name: Nome do grupo
+        purpose: Propósito do grupo
+      awesome_authorization_members:
+        emails: Emails
+        file: Carregar um ficheiro CSV
       config:
         additional_proposal_sortings: Opcoes adicionais de ordenacao ativadas
         allow_images_in_editors: Permitir imagens no editor HTML
@@ -54,6 +60,7 @@ pt:
         background_image_4: Imagem de fundo
       cookie_category:
         mandatory: Obrigatória
+        slug: ID
         title: Categoria
         total_cookies: Total de cookies
         visibility: Visibilidade
@@ -63,6 +70,7 @@ pt:
         service: Serviço
         type: Tipo
         types:
+          cookie: Cookie
           local_storage: Armazenamento local
       custom_redirect:
         active: Ativo
@@ -111,6 +119,11 @@ pt:
       menu:
         admin_accountability: Responsabilidade administrativa
         decidim_awesome: Decidim incrivel
+    authorization_handlers:
+      awesome_authorization_handler:
+        fields:
+          awesome_authorization_groups: 'Grupos permitidos:'
+          groups: Grupos
     components:
       awesome_iframe:
         name: Iframe em Ecra Completo
@@ -174,15 +187,12 @@ pt:
             awesome_votes_enabled_by_status: Restringir votacao por estado da proposta
             awesome_votes_enabled_by_status_help: Quando ativado, a votacao e permitida apenas em propostas com os estados selecionados. Propostas em outros estados nao aceitam votos. Deixe vazio para permitir votacao em todas as propostas, independentemente do estado.
             awesome_votes_enabled_states: Estados permitidos para votacao
+            awesome_votes_enabled_states_help: Outros estados estarão disponíveis após o componente ser salvo.
             default_sort_order_options:
               az: A-Z (Alfabetico)
               supported_first: Apoiadas primeiro
               supported_last: Apoiadas por ultimo
               za: Z-A (Alfabetico inverso)
-    editor_images:
-      create:
-        error: Nao foi possivel carregar a imagem.
-        success: Imagem carregada com sucesso.
     decidim_awesome:
       account:
         timezone_select:
@@ -196,9 +206,14 @@ pt:
           created_at: Funcao criada em
           currently_active: Atualmente ativo
           deleted_user: Utilizador eliminado
+          email: Email
           exports:
             button: Exportar esta busca
             export_as: Exportar como %{export_format}
+            export_format:
+              csv: CSV
+              json: JSON
+              xlsx: XLSX
             notice: O trabalho de exportacao foi colocado na fila. Voce recebera um email quando estiver pronto.
           index:
             description: Aqui voce encontrara todos os utilizadores que tiveram alguma funcao na administracao de um espaco participativo. Administradores normais nao sao listados.
@@ -240,6 +255,88 @@ pt:
             warning: 'Aviso: Ao forcar esta autorizacao, voce esta sobrescrevendo o status atual de autorizacao do utilizador.'
           user_authorized: "%{user} autorizado com sucesso com %{name}"
           user_not_authorized: "%{user} nao pode ser autorizado com %{name}"
+        awesome_authorization_properties:
+          create:
+            error: Erro ao atualizar as propriedades de autorização! %{error}
+            success: Propriedades de autorização atualizadas com sucesso
+          index:
+            cancel: Cancelar
+            description: Descrição da autorização
+            description_help: Este texto é exibido abaixo do título da autorização no cartão de verificação quando os utilizadores ainda não estão verificados. Pode usá-lo para explicar por que esta autorização é necessária.
+            name: Nome da autorização
+            name_help: Este título é exibido no cartão de verificação.
+            save: Guardar
+            title: Editar propriedades de autorização
+        awesome_authorization_users:
+          create:
+            error: Erro ao atualizar a lista de membros! %{error}
+            success: Lista de membros atualizada com sucesso (%{count} novos utilizadores adicionados)
+          destroy:
+            success: Membro removido com sucesso
+          index:
+            actions: Ações
+            authorized_user: Utilizador autorizado
+            confirm_remove: Tem certeza de que deseja remover este membro?
+            email: Email
+            new: Adicionar novos membros
+            no_members: Este grupo ainda não tem membros
+            not_synced_html: As autorizações de utilizador não estão sincronizadas com este grupo de autorização. %{sync} para atualizar a lista de membros.
+            remove: Remover membro
+            sync: Sincronizar autorizações
+            title: Gerir membros para "%{group}"
+            user: Utilizador Decidim
+          new:
+            create: Adicionar membros
+            emails_help: Largue os emails aqui, apenas palavras com um "@" serão consideradas como emails.
+            or: ou
+            remove_previous_members: Remover os membros anteriores do grupo (%{count} utilizadores)
+            title: Adicionar membros a "%{group}"
+          update:
+            empty: Não foram encontrados emails na entrada ou no ficheiro CSV. Adicione pelo menos um email.
+        awesome_authorizations:
+          create:
+            error: Erro ao criar o grupo de autorização! %{error}
+            success: Grupo de autorização criado com sucesso
+          destroy:
+            success: Grupo de autorização removido com sucesso
+          edit:
+            save: Guardar
+            title: Editar grupo de autorização
+          form:
+            name_help: Este título é exibido no cartão de verificação.
+            purpose_help: Este texto é exibido no cartão de verificação para explicar o propósito da autorização ou a sua utilização pretendida.
+          index:
+            authorization_groups: Grupos de autorização
+            authorization_properties: Propriedades de autorização
+            create_group: Criar um novo grupo de autorização
+            description_html: Utilize esta secção para criar grupos de pessoas, cada um com permissões específicas nos componentes do Decidim.<br>Estes grupos serão automaticamente autorizados para novos registos e sempre que esta lista for atualizada.
+            edit_properties: Editar propriedades de autorização
+            not_available: Para utilizar esta funcionalidade, deve ativar o fluxo de trabalho de autorização awesome no painel %{system} de administração.
+            properties_description_html: Utilize esta autorização nos componentes para restringir o acesso a grupos específicos de utilizadores. Quando selecionado, pode escolher os grupos permitidos.
+            system_link: Administrador do sistema
+            title: Autorizações Awesome
+          list_authorization_groups:
+            actions: Ações
+            confirm_destroy: Tem certeza de que deseja eliminar este grupo de autorização? Todos os utilizadores neste grupo perderão a sua autorização.
+            destroy: Remover grupo
+            edit: Editar grupo
+            granted_count: Autorizados
+            group_name: Nome do grupo
+            manage: Gerir membros
+            members_count: Utilizadores
+            no_groups: Ainda não foram criados grupos de autorização
+            out_of_sync: Não sincronizado
+            sync: Sincronizar autorizações
+            sync_status: Estado de sincronização
+            synced: Sincronizado
+          new:
+            create: Criar
+            title: Novo grupo de autorização
+          sync:
+            success: A sincronização foi iniciada
+          update:
+            error: Erro ao atualizar o grupo de autorização! %{error}
+            success: Grupo de autorização atualizado com sucesso
         checks:
           index:
             admin_head_tags: Tags incriveis incluidas no cabecalho do aplicativo admin
@@ -251,6 +348,7 @@ pt:
             decidim-core: Do modulo Core
             decidim-participatory_processes: Do modulo Processos Participativos
             decidim-proposals: Do modulo Propostas
+            decidim-verifications: Do modulo Verifications
             decidim_update_available: 'Ha uma nova versao disponivel: %{latest_version}'
             decidim_version: Decidim versao %{version}
             errors:
@@ -293,6 +391,8 @@ pt:
           destroy_scoped_style:
             error: Erro ao remover caixa CSS! %{error}
             success: Caixa CSS %{key} removida com sucesso
+          disabled: Desativado
+          enabled: Ativado
           force_authorizations: Grupos de autorizacoes
           form:
             additional_proposal_sortings:
@@ -611,21 +711,48 @@ pt:
 
                 Categoria recomendada: Preferências
             labels:
+              cloudflare_turnstile:
+                one: Cloudflare Turnstile (%{count} cookie)
+                other: Cloudflare Turnstile (%{count} cookies)
               decidim_essential:
                 one: Decidim Essencial (%{count} cookie)
                 other: Decidim Essencial (%{count} cookies)
               emoji_picker:
                 one: Seletor de emojis (%{count} cookie)
                 other: Seletor de emojis (%{count} cookies)
+              facebook_pixel:
+                one: Facebook Pixel (%{count} cookie)
+                other: Facebook Pixel (%{count} cookies)
+              google_analytics:
+                one: Google Analytics (%{count} cookie)
+                other: Google Analytics (%{count} cookies)
               google_maps_embeds:
                 one: Google Maps incorporado (%{count} cookie)
                 other: Google Maps incorporado (%{count} cookies)
+              google_tag_manager:
+                one: Google Tag Manager (%{count} cookie)
+                other: Google Tag Manager (%{count} cookies)
               graphiql:
                 one: Explorador de API GraphiQL (%{count} cookie)
                 other: Explorador de API GraphiQL (%{count} cookies)
+              hcaptcha:
+                one: hCaptcha (%{count} cookie)
+                other: hCaptcha (%{count} cookies)
+              jitsi_meet:
+                one: Jitsi Meet (%{count} cookie)
+                other: Jitsi Meet (%{count} cookies)
+              linkedin_insight:
+                one: LinkedIn Insight (%{count} cookie)
+                other: LinkedIn Insight (%{count} cookies)
+              matomo:
+                one: Matomo (%{count} cookie)
+                other: Matomo (%{count} cookies)
               openstreetmap_tiles:
                 one: OpenStreetMap (%{count} cookie)
                 other: OpenStreetMap (%{count} cookies)
+              recaptcha:
+                one: reCAPTCHA (%{count} cookie)
+                other: reCAPTCHA (%{count} cookies)
               vimeo_embeds:
                 one: Vimeo incorporado (%{count} cookie)
                 other: Vimeo incorporado (%{count} cookies)
@@ -636,9 +763,22 @@ pt:
                 one: YouTube (privacidade melhorada) (%{count} cookie)
                 other: YouTube (privacidade melhorada) (%{count} cookies)
             services:
+              cloudflare_turnstile: Cloudflare Turnstile
               decidim_essential: Este site
               emoji_picker: Este site
+              facebook_pixel: Meta (Facebook)
+              google_analytics: Google Analytics
+              google_maps_embeds: Google Maps
+              google_tag_manager: Google Tag Manager
               graphiql: Este site
+              hcaptcha: hCaptcha
+              jitsi_meet: Jitsi Meet
+              linkedin_insight: LinkedIn
+              matomo: Matomo
+              openstreetmap_tiles: OpenStreetMap
+              recaptcha: Google reCAPTCHA
+              vimeo_embeds: Vimeo
+              youtube_embeds: YouTube
               youtube_nocookie: YouTube (modo de privacidade melhorada)
           create:
             error: Erro ao criar o item de cookie! %{error}
@@ -715,6 +855,7 @@ pt:
             ip_addresses: Ver enderecos IP
             stamps: Ver selos Hashcash
           index:
+            bits: Bits
             created_at: Criado em
             help_html: |
               Esta pagina mostra os selos Hashcash detectados no sistema. Hashcash e um sistema de prova de trabalho que exige que os utilizadores resolvam um quebra-cabeca computacional (realizado automaticamente pelo navegador) antes de poderem se registar.
@@ -757,7 +898,10 @@ pt:
           proposals: Hacks de propostas
           styles: Estilos personalizados
           surveys: Pesquisas e formularios
-          verifications: Verificacoes
+          verifications:
+            awesome_authorizations: Autorizações Awesome
+            force_authorizations: Autorizações forçadas
+            verifications: Verificacoes
         menu_hacks:
           create:
             error: Erro ao criar item de menu! %{error}
@@ -841,7 +985,7 @@ pt:
           private_data_last_remove: Estes dados foram destruídos %{time_ago} atras.
           private_data_last_update: Estes dados foram atualizados %{time_ago} atras.
           proposal_private_custom_fields: Campos privados
-          remove_private_data: "\U0001F449 Talvez voce queira remove-lo"
+          remove_private_data: "👉 Talvez voce queira remove-lo"
         scoped_admin_styles:
           menu:
             title: Painel admin
@@ -867,6 +1011,13 @@ pt:
             <p>Atualmente, ha outra emenda sendo avaliada para esta proposta. Para criar uma nova, voce deve esperar ate que a atual seja aceita ou rejeitada.</p>
             <p>Voce tambem pode entrar em contato com o autor desta proposta <a href="%{proposal_link}">deixando um comentario</a> e tentar acelerar a resolucao da emenda atual.</p>
         pending_limit_reached: Desculpe, so pode haver uma emenda pendente por vez. Aguarde ate que "%{emendation}" seja aceita ou rejeitada.
+      awesome_authorization_handler:
+        admin_managed_html: Esta autorização normalmente é gerida automaticamente. Se acredita que deveria estar verificado, tente pressionar o botão "Enviar" abaixo.<br>Se isso não funcionar, entre em contato com os administradores da plataforma.
+        errors:
+          user_not_in_group: De acordo com o seu email (%{email}), não é membro de nenhum grupo que o possa verificar.
+        explanation: Verifique-se como membro de um grupo organizacional
+        member_of: Membro de %{groups}
+        name: Autorização do Grupo Organizacional
       config:
         intergram:
           auto_no_response: Parece que ninguem esta disponivel para responder agora. Por favor, diga-nos como podemos entrar em contato com voce e retornaremos assim que possivel.
@@ -917,6 +1068,7 @@ pt:
           selection_criteria: Criterios de selecao
           selection_criteria_options:
             automatic: Automatico
+            manual: Manual
           title: Titulo do bloco
         landing_menu:
           alignment: Posicao do menu
@@ -942,6 +1094,7 @@ pt:
             actions: Acoes
             hidden: Oculto
             name: Nome
+            url: URL
             visible: Visivel
           title: Ir para ...
         map:
@@ -1057,6 +1210,7 @@ pt:
           voting_for: Meu voto em "%{proposal}" e "%{type}"
           weights:
             weight_0: Abstencao
+            weight_0_short: 'Ab:'
             weight_1: Vermelho
             weight_1_short: 'V:'
             weight_2: Amarelo
@@ -1071,17 +1225,10 @@ pt:
       meetings_map:
         view_meeting: Ver reuniao
     proposals:
-      proposal_votes:
-        create:
-          error: Ocorreu um erro ao registar o voto.
       admin:
         exports:
           awesome_private_proposals: Propostas com dados privados
       proposals:
-        vote_button:
-          maximum_votes_reached: Limite maximo de votos atingido
-          no_votes_remaining: Nao ha votos restantes
-          votes_blocked: Votacao indisponivel
         orders:
           az: A-Z (Alfabetico)
           supported_first: Apoiadas primeiro
@@ -1094,9 +1241,6 @@ pt:
       data_consent:
         details:
           columns:
-            description: Descricao
-            name: Nome
-            service: Servico
             expiration: Expiracao
           items:
             _session_id:
@@ -1105,8 +1249,6 @@ pt:
               expiration: 1 ano
             pwaInstallPromptSeen:
               expiration: persistente
-        modal:
-          toggle: Mostrar ou ocultar detalhes para %{consent_category}
       decidim_awesome:
         admin:
           maintenance:
@@ -1120,7 +1262,9 @@ pt:
           autosaved_error: O armazenamento local nao e suportado no seu navegador, o formulario nao pode ser salvo automaticamente.
           autosaved_retrieved: Os dados deste formulario foram recuperados de uma sessao anterior
           autosaved_success: Dados salvos no armazenamento local
+          awesome_authorization_groups_placeholder: Todos os grupos permitidos
           drag_and_drop_image: Adicione imagens arrastando e soltando ou colando.
+          hashtags: Hashtags
           items: itens
           meetings: Reunioes
           proposals: Propostas
