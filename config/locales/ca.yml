@@ -187,6 +187,7 @@ ca:
             awesome_votes_enabled_by_status: Restringeix la votació per estat de la proposta
             awesome_votes_enabled_by_status_help: Quan està activat, la votació només es permet a les propostes amb els estats seleccionats. Les propostes en altres estats no acceptaran vots. Deixeu-ho buit per permetre la votació a totes les propostes, independentment de l'estat.
             awesome_votes_enabled_states: Estats permesos per als vots
+            awesome_votes_enabled_states_help: Altres estats estaran disponibles després de guardar el component.
             default_sort_order_options:
               az: A-Z (Alfabètic)
               supported_first: Votades per mi primer
