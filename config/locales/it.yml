@@ -4,6 +4,12 @@ it:
     waiting_label: In attesa di verifica...
   activemodel:
     attributes:
+      awesome_authorization_group:
+        name: Nome del gruppo
+        purpose: Scopo del gruppo
+      awesome_authorization_members:
+        emails: Email
+        file: Carica un file CSV
       config:
         additional_proposal_sortings: Opzioni di ordinamento aggiuntive abilitate
         allow_images_in_editors: Consenti immagini nell'editor HTML
@@ -54,6 +60,7 @@ it:
         background_image_4: Immagine di sfondo
       cookie_category:
         mandatory: Obbligatoria
+        slug: ID
         title: Titolo categoria
         total_cookies: Cookie totali
         visibility: Visibilità
@@ -63,6 +70,7 @@ it:
         service: Servizio
         type: Tipo
         types:
+          cookie: Cookie
           local_storage: Archiviazione locale
       custom_redirect:
         active: Attivo
@@ -90,11 +98,6 @@ it:
               cannot_change_default_item_name: Il nome di un elemento predefinito non può essere modificato
               invalid_format: Il nome può contenere solo lettere, numeri, underscore (_) e trattini (-), senza spazi o caratteri speciali
   decidim:
-    blogs:
-      models:
-        post:
-          fields:
-            official_blog_post: Post del blog ufficiale
     admin:
       actions:
         manage: Gestisci
@@ -116,6 +119,11 @@ it:
       menu:
         admin_accountability: Responsabilità amministrativa
         decidim_awesome: Decidim awesome
+    authorization_handlers:
+      awesome_authorization_handler:
+        fields:
+          awesome_authorization_groups: 'Gruppi consentiti:'
+          groups: Gruppi
     components:
       awesome_iframe:
         name: Iframe a schermo intero
@@ -179,15 +187,12 @@ it:
             awesome_votes_enabled_by_status: Limita il voto in base allo stato della proposta
             awesome_votes_enabled_by_status_help: Quando è abilitato, il voto è consentito solo per le proposte con gli stati selezionati. Le proposte con altri stati non accetteranno voti. Lascia vuoto per consentire il voto su tutte le proposte, indipendentemente dallo stato.
             awesome_votes_enabled_states: Stati consentiti per il voto
+            awesome_votes_enabled_states_help: Altri stati saranno disponibili dopo il salvataggio del componente.
             default_sort_order_options:
               az: A-Z (alfabetico)
               supported_first: Prima i sostegni
               supported_last: Sostegni al fondo
               za: Z-A (Alfabetico inverso)
-    editor_images:
-      create:
-        error: Impossibile caricare l'immagine.
-        success: Immagine caricata con successo.
     decidim_awesome:
       account:
         timezone_select:
@@ -250,6 +255,88 @@ it:
             warning: 'Attenzione: Forzando questa autorizzazione, stai sovrascrivendo lo stato di autorizzazione corrente dell''utente.'
           user_authorized: "%{user} autorizzato con successo con %{name}"
           user_not_authorized: "%{user} non può essere autorizzato con %{name}"
+        awesome_authorization_properties:
+          create:
+            error: Errore nell'aggiornamento delle proprietà di autorizzazione! %{error}
+            success: Proprietà di autorizzazione aggiornate con successo
+          index:
+            cancel: Annulla
+            description: Descrizione dell'autorizzazione
+            description_help: Questo testo viene visualizzato sotto il titolo dell'autorizzazione nella scheda di verifica quando gli utenti non sono ancora verificati. Puoi usarlo per spiegare perché questa autorizzazione è richiesta.
+            name: Nome dell'autorizzazione
+            name_help: Questo titolo viene visualizzato nella scheda di verifica.
+            save: Salva
+            title: Modifica proprietà di autorizzazione
+        awesome_authorization_users:
+          create:
+            error: Errore nell'aggiornamento dell'elenco dei membri! %{error}
+            success: Elenco dei membri aggiornato con successo (%{count} nuovi utenti aggiunti)
+          destroy:
+            success: Membro rimosso con successo
+          index:
+            actions: Azioni
+            authorized_user: Utente autorizzato
+            confirm_remove: Sei sicuro di voler rimuovere questo membro?
+            email: Email
+            new: Aggiungi nuovi membri
+            no_members: Questo gruppo non ha ancora membri
+            not_synced_html: Le autorizzazioni utente non sono sincronizzate con questo gruppo di autorizzazione. %{sync} per aggiornare l'elenco dei membri.
+            remove: Rimuovi membro
+            sync: Sincronizza autorizzazioni
+            title: Gestisci membri per "%{group}"
+            user: Utente Decidim
+          new:
+            create: Aggiungi membri
+            emails_help: Rilascia le email qui, solo le parole con una "@" saranno considerate come email.
+            or: o
+            remove_previous_members: Rimuovi i membri precedenti del gruppo (%{count} utenti)
+            title: Aggiungi membri a "%{group}"
+          update:
+            empty: Nessuna email trovata nell'input o nel file CSV. Aggiungi almeno un'email.
+        awesome_authorizations:
+          create:
+            error: Errore nella creazione del gruppo di autorizzazione! %{error}
+            success: Gruppo di autorizzazione creato con successo
+          destroy:
+            success: Gruppo di autorizzazione rimosso con successo
+          edit:
+            save: Salva
+            title: Modifica gruppo di autorizzazione
+          form:
+            name_help: Questo titolo viene visualizzato nella scheda di verifica.
+            purpose_help: Questo testo viene visualizzato nella scheda di verifica per spiegare lo scopo dell'autorizzazione o il suo utilizzo previsto.
+          index:
+            authorization_groups: Gruppi di autorizzazione
+            authorization_properties: Proprietà di autorizzazione
+            create_group: Crea un nuovo gruppo di autorizzazione
+            description_html: Utilizza questa sezione per creare gruppi di persone, ciascuno con permessi specifici sui componenti di Decidim.<br>Questi gruppi saranno autorizzati automaticamente per le nuove registrazioni e ogni volta che questo elenco viene aggiornato.
+            edit_properties: Modifica proprietà di autorizzazione
+            not_available: Per utilizzare questa funzionalità, devi abilitare il flusso di lavoro di autorizzazione awesome nel pannello %{system} di amministrazione.
+            properties_description_html: Utilizza questa autorizzazione sui componenti per limitare l'accesso a gruppi specifici di utenti. Quando selezionato, puoi scegliere i gruppi consentiti.
+            system_link: Amministratore di sistema
+            title: Autorizzazioni Awesome
+          list_authorization_groups:
+            actions: Azioni
+            confirm_destroy: Sei sicuro di voler eliminare questo gruppo di autorizzazione? Tutti gli utenti in questo gruppo perderanno la loro autorizzazione.
+            destroy: Rimuovi gruppo
+            edit: Modifica gruppo
+            granted_count: Autorizzati
+            group_name: Nome del gruppo
+            manage: Gestisci membri
+            members_count: Utenti
+            no_groups: Nessun gruppo di autorizzazione ancora creato
+            out_of_sync: Non sincronizzato
+            sync: Sincronizza autorizzazioni
+            sync_status: Stato di sincronizzazione
+            synced: Sincronizzato
+          new:
+            create: Crea
+            title: Nuovo gruppo di autorizzazione
+          sync:
+            success: La sincronizzazione è iniziata
+          update:
+            error: Errore nell'aggiornamento del gruppo di autorizzazione! %{error}
+            success: Gruppo di autorizzazione aggiornato con successo
         checks:
           index:
             admin_head_tags: Tag Awesome visualizzate nel header della sezione amministrativa
@@ -261,6 +348,7 @@ it:
             decidim-core: Dal modulo Core
             decidim-participatory_processes: Dal modulo Processi Partecipativi
             decidim-proposals: Da modulo Proposte
+            decidim-verifications: Dal modulo Verifiche
             decidim_update_available: 'È disponibile una nuova versione: %{latest_version}'
             decidim_version: Decidim versione %{version}
             errors:
@@ -303,6 +391,8 @@ it:
           destroy_scoped_style:
             error: Errore nella rimozione del box CSS! %{error}
             success: Box CSS %{key} rimosso correttamente
+          disabled: Disabilitato
+          enabled: Abilitato
           force_authorizations: Gruppi di autorizzazioni
           form:
             additional_proposal_sortings:
@@ -332,7 +422,7 @@ it:
               hashcash_signup_bits: Questo parametro definisce il numero di bit che l'algoritmo Hashcash utilizzerà per generare la proof-of-work. Si raccomanda di utilizzare un valore tra 16 (facile) e 30 (estremamente difficile) bit. Il valore predefinito per i moduli di registrazione è %{bits} bit.
               intergram_about: Intergram utilizza Telegram messenger per gestire un widget di chat di supporto live incorporato nella parte inferiore della pagina.
               intergram_config: 'Invita il bot <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram</a> al tuo gruppo o avvia una chat direttamente con esso. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
-              original_editor_override: Poiché dalla versione 0.26 di decidim, è gi§à possibile (solo per gli amministratori) caricare le immagini negli editor. Pertanto, le impostazioni delle immagini si applicano solo agli editor pubblici (per gli admin sono sempre disponibili).
+              original_editor_override: Poiché dalla versione 0.26 di decidim, è già possibile (solo per gli amministratori) caricare le immagini negli editor. Pertanto, le impostazioni delle immagini si applicano solo agli editor pubblici (per gli admin sono sempre disponibili).
               proposal_custom_fields: Crea campi di proposta personalizzati che si applicano solo in alcune parti del sito (usa l'editor delle restrizioni per quello)
               proposal_custom_fields_example: I dati sono memorizzati in un oggetto XML utilizzando attributi HTML compatibili (dl,dt,dd elementi) sostituendo il "corpo" in una proposta normale.
               proposal_custom_fields_translations: "Label, testo di aiuto, segnaposti e valori predefiniti possono utilizzare le traduzioni personalizzate della tua applicazione. \nPer questo, invece di usare delle string literal, utilizzare il tasto i18n (deve contenere almeno un punto).\nPer esempio:\n- \"activemodel.attributes.proposal.title\" al posto di \"Titolo\"\n- \"activemodel.attributes.proposal.address\" invece di \"Indirizzo\"\nO utilizzare le proprie chiavi in combinazione con altri strumenti per definire le traduzioni (ad esempio: utilizzando il modulo Term Customizer):\n - \"myapp.custom_fields.bio\" invece di \"Biografia\""
@@ -621,21 +711,48 @@ it:
 
                 Categoria consigliata: Preferenze
             labels:
+              cloudflare_turnstile:
+                one: Cloudflare Turnstile (%{count} cookie)
+                other: Cloudflare Turnstile (%{count} cookie)
               decidim_essential:
                 one: Essenziali Decidim (%{count} cookie)
                 other: Essenziali Decidim (%{count} cookie)
               emoji_picker:
                 one: Selettore emoji (%{count} cookie)
                 other: Selettore emoji (%{count} cookie)
+              facebook_pixel:
+                one: Facebook Pixel (%{count} cookie)
+                other: Facebook Pixel (%{count} cookie)
+              google_analytics:
+                one: Google Analytics (%{count} cookie)
+                other: Google Analytics (%{count} cookie)
               google_maps_embeds:
                 one: Integrazioni Google Maps (%{count} cookie)
                 other: Integrazioni Google Maps (%{count} cookie)
+              google_tag_manager:
+                one: Google Tag Manager (%{count} cookie)
+                other: Google Tag Manager (%{count} cookie)
               graphiql:
                 one: Esploratore API GraphiQL (%{count} cookie)
                 other: Esploratore API GraphiQL (%{count} cookie)
+              hcaptcha:
+                one: hCaptcha (%{count} cookie)
+                other: hCaptcha (%{count} cookie)
+              jitsi_meet:
+                one: Jitsi Meet (%{count} cookie)
+                other: Jitsi Meet (%{count} cookie)
+              linkedin_insight:
+                one: LinkedIn Insight (%{count} cookie)
+                other: LinkedIn Insight (%{count} cookie)
+              matomo:
+                one: Matomo (%{count} cookie)
+                other: Matomo (%{count} cookie)
               openstreetmap_tiles:
                 one: Tile OpenStreetMap (%{count} cookie)
                 other: Tile OpenStreetMap (%{count} cookie)
+              recaptcha:
+                one: reCAPTCHA (%{count} cookie)
+                other: reCAPTCHA (%{count} cookie)
               vimeo_embeds:
                 one: Integrazioni Vimeo (%{count} cookie)
                 other: Integrazioni Vimeo (%{count} cookie)
@@ -646,9 +763,22 @@ it:
                 one: YouTube senza cookie (%{count} cookie)
                 other: YouTube senza cookie (%{count} cookie)
             services:
+              cloudflare_turnstile: Cloudflare Turnstile
               decidim_essential: Questo sito web
               emoji_picker: Questo sito web
+              facebook_pixel: Meta (Facebook)
+              google_analytics: Google Analytics
+              google_maps_embeds: Google Maps
+              google_tag_manager: Google Tag Manager
               graphiql: Questo sito web
+              hcaptcha: hCaptcha
+              jitsi_meet: Jitsi Meet
+              linkedin_insight: LinkedIn
+              matomo: Matomo
+              openstreetmap_tiles: OpenStreetMap
+              recaptcha: Google reCAPTCHA
+              vimeo_embeds: Vimeo
+              youtube_embeds: YouTube
               youtube_nocookie: YouTube (modalità privacy avanzata)
           create:
             error: Errore durante la creazione dell'elemento cookie! %{error}
@@ -768,7 +898,10 @@ it:
           proposals: Proposals hacks
           styles: Custom styles
           surveys: Surveys & forms
-          verifications: Verifiche
+          verifications:
+            awesome_authorizations: Autorizzazioni Awesome
+            force_authorizations: Autorizzazioni forzate
+            verifications: Verifiche
         menu_hacks:
           create:
             error: Errore nella creazione della voce di menu! %{error}
@@ -878,6 +1011,13 @@ it:
             <p>Attualmente, c'è un altro emendamento in fase di valutazione per questa proposta. Per crearne uno nuovo, devi attendere fino all'accettazione o al rifiuto dell'attuale.</p>
             <p>Puoi anche contattare l'autore di questa proposta <a href="%{proposal_link}">lasciando un commento</a> e cercare di accelerare la risoluzione dell'emendamento corrente.</p>
         pending_limit_reached: Spiacenti, può esserci solo un emendamento in sospeso alla volta. Si prega di attendere fino a quando "%{emendation}" viene accettato o rifiutato.
+      awesome_authorization_handler:
+        admin_managed_html: Questa autorizzazione normalmente viene gestita automaticamente. Se pensi di dover essere verificato, prova a premere il pulsante "Invia" qui sotto.<br>Se non funziona, contatta gli amministratori della piattaforma.
+        errors:
+          user_not_in_group: Secondo la tua email (%{email}), non sei membro di alcun gruppo che possa verificarti.
+        explanation: Verificati come membro di un gruppo organizzativo
+        member_of: Membro di %{groups}
+        name: Autorizzazione del Gruppo Organizzativo
       config:
         intergram:
           auto_no_response: Sembra che nessuno sia a disposizione per rispondere in questo momento. Vi prego di dirci come possiamo contattarvi e torneremo a voi il prima possibile.
@@ -954,6 +1094,7 @@ it:
             actions: Azioni
             hidden: Nascosto
             name: Nome
+            url: URL
             visible: Visibile
           title: Vai a ...
         map:
@@ -1084,15 +1225,10 @@ it:
       meetings_map:
         view_meeting: Visualizza meeting
     proposals:
-      proposal_votes:
-        create:
-          error: Si è verificato un errore durante la registrazione del voto.
       admin:
         exports:
           awesome_private_proposals: Proposte con dati privati
       proposals:
-        vote_button:
-          votes_blocked: Votazione non disponibile
         orders:
           az: A-Z (alfabetico)
           supported_first: Prima i sostegni
@@ -1105,9 +1241,6 @@ it:
       data_consent:
         details:
           columns:
-            description: Descrizione
-            name: Nome
-            service: Servizio
             expiration: Scadenza
           items:
             _session_id:
@@ -1116,8 +1249,6 @@ it:
               expiration: 1 anno
             pwaInstallPromptSeen:
               expiration: persistente
-        modal:
-          toggle: Mostra o nascondi i dettagli per %{consent_category}
       decidim_awesome:
         admin:
           maintenance:
@@ -1131,6 +1262,7 @@ it:
           autosaved_error: LocalStorage non è supportato nel browser, il modulo non può essere salvato automaticamente.
           autosaved_retrieved: I dati per questo modulo sono stati recuperati da una sessione precedente
           autosaved_success: Dati salvati nella memoria locale
+          awesome_authorization_groups_placeholder: Tutti i gruppi consentiti
           drag_and_drop_image: Aggiungi immagini trascinandole o incollandole.
           hashtags: Hashtag
           items: elementi
