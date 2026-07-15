@@ -72,10 +72,10 @@ module Decidim::DecidimAwesome
         context "when no valid input is provided" do
           let(:params) { base_params.merge(emails: "") }
 
-          it "renders index with alert" do
+          it "renders new with alert" do
             post :create, params: params
             expect(response).to have_http_status(:ok)
-            expect(response).to render_template(:index)
+            expect(response).to render_template(:new)
             expect(flash[:alert]).to be_present
           end
         end
