@@ -405,7 +405,7 @@ en:
             decidim-core: From Core module
             decidim-participatory_processes: From Participatory Processes module
             decidim-proposals: From Proposals module
-            decidim-verifications: From Verification module
+            decidim-verifications: From Verifications module
             decidim_update_available: 'A new version is available: %{latest_version}'
             decidim_version: Decidim version %{version}
             errors:
