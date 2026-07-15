@@ -33,7 +33,7 @@ module Decidim
 
             on(:invalid) do |error|
               flash.now[:alert] = I18n.t("decidim.decidim_awesome.admin.awesome_authorization_users.create.error", error: error)
-              render :index
+              render :new
             end
           end
         end

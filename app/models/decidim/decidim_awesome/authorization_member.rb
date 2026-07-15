@@ -19,7 +19,7 @@ module Decidim
       end
 
       def authorization
-        @authorization ||= Decidim::Authorization.find_by(user:)
+        @authorization ||= Decidim::Authorization.find_by(name: :awesome_authorization_handler, user: user)
       end
 
       def group_authorized?(authorization_group)

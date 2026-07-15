@@ -34,7 +34,7 @@ module Decidim
         attr_reader :form, :authorization_group
 
         def update_authorization_group!
-          authorization_group.update(
+          authorization_group.update!(
             name: form.name,
             purpose: form.purpose
           )
