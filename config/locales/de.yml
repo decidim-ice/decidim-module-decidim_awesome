@@ -4,6 +4,12 @@ de:
     waiting_label: Warte auf Verifizierung ...
   activemodel:
     attributes:
+      awesome_authorization_group:
+        name: Gruppenname
+        purpose: Gruppen Zweck
+      awesome_authorization_members:
+        emails: E-Mails
+        file: CSV-Datei hochladen
       config:
         additional_proposal_sortings: Zusätzliche Sortieroptionen aktiviert
         allow_images_in_editors: Bilder im HTML-Editor erlauben
@@ -54,6 +60,7 @@ de:
         background_image_4: Hintergrundbild
       cookie_category:
         mandatory: Pflicht
+        slug: ID
         title: Kategorie
         total_cookies: Cookies gesamt
         visibility: Sichtbarkeit
@@ -63,6 +70,7 @@ de:
         service: Dienst
         type: Typ
         types:
+          cookie: Cookie
           local_storage: Lokaler Speicher
       custom_redirect:
         active: Aktiv
@@ -111,6 +119,11 @@ de:
       menu:
         admin_accountability: Admin Verantwortlichkeit
         decidim_awesome: Decidim Awesome
+    authorization_handlers:
+      awesome_authorization_handler:
+        fields:
+          awesome_authorization_groups: 'Erlaubte Gruppen:'
+          groups: Gruppen
     components:
       awesome_iframe:
         name: Vollbild-iFrame
@@ -174,6 +187,7 @@ de:
             awesome_votes_enabled_by_status: Abstimmung nach Vorschlagsstatus einschränken
             awesome_votes_enabled_by_status_help: Wenn diese Option aktiviert ist, ist die Abstimmung nur für Vorschläge mit den ausgewählten Status erlaubt. Vorschläge in anderen Status akzeptieren keine Stimmen. Leer lassen, um die Abstimmung für alle Vorschläge unabhängig vom Status zu erlauben.
             awesome_votes_enabled_states: Erlaubte Status für Abstimmungen
+            awesome_votes_enabled_states_help: Weitere Status werden verfügbar, nachdem die Komponente gespeichert wurde.
             default_sort_order_options:
               az: A-Z (alphabetisch)
               supported_first: Zuerst unterstützt
@@ -241,6 +255,88 @@ de:
             warning: 'Warnung: Indem Sie diese Autorisierung erzwingen, überschreiben Sie den aktuellen Autorisierungsstatus des Benutzers.'
           user_authorized: "%{user} erfolgreich autorisiert mit %{name}"
           user_not_authorized: "%{user} konnte nicht mit %{name} autorisiert werden"
+        awesome_authorization_properties:
+          create:
+            error: Fehler beim Aktualisieren der Autorisierungseigenschaften! %{error}
+            success: Autorisierungseigenschaften erfolgreich aktualisiert
+          index:
+            cancel: Abbrechen
+            description: Beschreibung der Autorisierung
+            description_help: Dieser Text wird unterhalb des Autorisierungstitels in der Verifizierungskarte angezeigt, wenn Benutzer noch nicht verifiziert sind. Sie können ihn verwenden, um zu erklären, warum diese Autorisierung erforderlich ist.
+            name: Name der Autorisierung
+            name_help: Dieser Titel wird in der Verifizierungskarte angezeigt.
+            save: Speichern
+            title: Autorisierungseigenschaften bearbeiten
+        awesome_authorization_users:
+          create:
+            error: Fehler beim Aktualisieren der Mitgliederliste! %{error}
+            success: Mitgliederliste erfolgreich aktualisiert (%{count} neue Benutzer hinzugefügt)
+          destroy:
+            success: Mitglied erfolgreich entfernt
+          index:
+            actions: Aktionen
+            authorized_user: Autorisierter Benutzer
+            confirm_remove: Sind Sie sicher, dass Sie dieses Mitglied entfernen möchten?
+            email: E-Mail
+            new: Neue Mitglieder hinzufügen
+            no_members: Diese Gruppe hat noch keine Mitglieder
+            not_synced_html: Benutzerautorisierungen sind mit dieser Autorisierungsgruppe nicht synchronisiert. %{sync} um die Mitgliederliste zu aktualisieren.
+            remove: Mitglied entfernen
+            sync: Autorisierungen synchronisieren
+            title: Mitglieder für "%{group}" verwalten
+            user: Decidim-Benutzer
+          new:
+            create: Mitglieder hinzufügen
+            emails_help: E-Mails hier ablegen, nur Wörter mit einem "@" werden als E-Mails betrachtet.
+            or: oder
+            remove_previous_members: Vorherige Mitglieder der Gruppe entfernen (%{count} Benutzer)
+            title: Mitglieder zu "%{group}" hinzufügen
+          update:
+            empty: In der Eingabe oder der CSV-Datei wurden keine E-Mails gefunden. Bitte fügen Sie mindestens eine E-Mail hinzu.
+        awesome_authorizations:
+          create:
+            error: Fehler beim Erstellen der Autorisierungsgruppe! %{error}
+            success: Autorisierungsgruppe erfolgreich erstellt
+          destroy:
+            success: Autorisierungsgruppe erfolgreich entfernt
+          edit:
+            save: Speichern
+            title: Autorisierungsgruppe bearbeiten
+          form:
+            name_help: Dieser Titel wird in der Verifizierungskarte angezeigt.
+            purpose_help: Dieser Text wird in der Verifizierungskarte angezeigt, um den Zweck der Autorisierung oder ihre beabsichtigte Verwendung zu erklären.
+          index:
+            authorization_groups: Autorisierungsgruppen
+            authorization_properties: Autorisierungseigenschaften
+            create_group: Neue Autorisierungsgruppe erstellen
+            description_html: Verwenden Sie diesen Bereich, um Gruppen von Personen zu erstellen, jede mit spezifischen Berechtigungen für Decidim-Komponenten.<br>Diese Gruppen werden automatisch für neue Registrierungen und bei jeder Aktualisierung dieser Liste autorisiert.
+            edit_properties: Autorisierungseigenschaften bearbeiten
+            not_available: Um diese Funktion nutzen zu können, müssen Sie den awesome Autorisierungs-Workflow in der %{system}-Admin-Oberfläche aktivieren.
+            properties_description_html: Verwenden Sie diese Autorisierung in Komponenten, um den Zugriff auf bestimmte Benutzergruppen zu beschränken. Wenn ausgewählt, können Sie die erlaubten Gruppen auswählen.
+            system_link: System-Admin
+            title: Awesome Autorisierungen
+          list_authorization_groups:
+            actions: Aktionen
+            confirm_destroy: Sind Sie sicher, dass Sie diese Autorisierungsgruppe löschen möchten? Alle Benutzer in dieser Gruppe verlieren ihre Autorisierung.
+            destroy: Gruppe entfernen
+            edit: Gruppe bearbeiten
+            granted_count: Autorisiert
+            group_name: Gruppenname
+            manage: Mitglieder verwalten
+            members_count: Benutzer
+            no_groups: Noch keine Autorisierungsgruppen erstellt
+            out_of_sync: Nicht synchronisiert
+            sync: Autorisierungen synchronisieren
+            sync_status: Synchronisierungsstatus
+            synced: Synchronisiert
+          new:
+            create: Erstellen
+            title: Neue Autorisierungsgruppe
+          sync:
+            success: Synchronisierung wurde gestartet
+          update:
+            error: Fehler beim Aktualisieren der Autorisierungsgruppe! %{error}
+            success: Autorisierungsgruppe erfolgreich aktualisiert
         checks:
           index:
             admin_head_tags: Angezeigte Awesome Tags im Admin Application Header
@@ -252,6 +348,7 @@ de:
             decidim-core: Vom Kernmodul
             decidim-participatory_processes: Vom Beteiligungsprozess-Bereich
             decidim-proposals: Von der Vorschlags-Komponente
+            decidim-verifications: Vom Verifikations-Modul
             decidim_update_available: 'Eine neue Version ist verfügbar: %{latest_version}'
             decidim_version: Decidim Version %{version}
             errors:
@@ -294,6 +391,8 @@ de:
           destroy_scoped_style:
             error: Fehler beim Entfernen der CSS-Box! %{error}
             success: CSS-Box %{key} erfolgreich entfernt
+          disabled: Deaktiviert
+          enabled: Aktiviert
           force_authorizations: Autorisierungsgruppen
           form:
             additional_proposal_sortings:
@@ -663,9 +762,22 @@ de:
                 one: YouTube (datenschutzoptimiert) (%{count} Cookie)
                 other: YouTube (datenschutzoptimiert) (%{count} Cookies)
             services:
+              cloudflare_turnstile: Cloudflare Turnstile
               decidim_essential: Diese Website
               emoji_picker: Diese Website
+              facebook_pixel: Meta (Facebook)
+              google_analytics: Google Analytics
+              google_maps_embeds: Google Maps
+              google_tag_manager: Google Tag Manager
               graphiql: Diese Website
+              hcaptcha: hCaptcha
+              jitsi_meet: Jitsi Meet
+              linkedin_insight: LinkedIn
+              matomo: Matomo
+              openstreetmap_tiles: OpenStreetMap
+              recaptcha: Google reCAPTCHA
+              vimeo_embeds: Vimeo
+              youtube_embeds: YouTube
               youtube_nocookie: YouTube (datenschutzoptimierter Modus)
           create:
             error: Fehler beim Erstellen des Cookie-Eintrags! %{error}
@@ -781,7 +893,10 @@ de:
           proposals: Vorschläge
           styles: Eigene Styles
           surveys: Umfragen
-          verifications: Verifizierungen
+          verifications:
+            awesome_authorizations: Awesome Autorisierungen
+            force_authorizations: Erzwungene Autorisierungen
+            verifications: Verifizierungen
         menu_hacks:
           create:
             error: Fehler beim Erstellen des Menüpunkts! %{error}
@@ -864,7 +979,7 @@ de:
           private_data_last_remove: Diese Daten wurden vor %{time_ago} gelöscht.
           private_data_last_update: Diese Daten wurden vor %{time_ago} gelöscht.
           proposal_private_custom_fields: Private Felder
-          remove_private_data: "\U0001F449 Sie können es entfernen"
+          remove_private_data: "👉 Sie können es entfernen"
         scoped_admin_styles:
           menu:
             title: Admin Panel
@@ -890,6 +1005,13 @@ de:
             <p>Derzeit wird eine weitere Änderung für diesen Vorschlag bewertet. Um eine neue zu erstellen, müssen Sie warten, bis die aktuelle akzeptiert oder abgelehnt wird.</p>
             <p>Sie können auch den Autor dieses Vorschlags durch <a href="%{proposal_link}">erreichen und einen Kommentar</a> hinterlassen und versuchen, die Lösung des aktuellen Änderungsantrags zu beschleunigen.</p>
         pending_limit_reached: Leider kann es immer nur eine ausstehende Änderung geben. Bitte warten Sie, bis "%{emendation}" akzeptiert oder abgelehnt wird.
+      awesome_authorization_handler:
+        admin_managed_html: Diese Autorisierung wird normalerweise automatisch verwaltet. Wenn Sie glauben, dass Sie verifiziert werden sollten, versuchen Sie, unten auf die Schaltfläche "Senden" zu drücken.<br>Wenn das nicht funktioniert, kontaktieren Sie bitte die Administratoren der Plattform.
+        errors:
+          user_not_in_group: Laut Ihrer E-Mail (%{email}) sind Sie kein Mitglied einer Gruppe, die Sie verifizieren kann.
+        explanation: Lassen Sie sich als Mitglied einer Organisationsgruppe verifizieren
+        member_of: Mitglied von %{groups}
+        name: Autorisierung der Organisationsgruppe
       config:
         intergram:
           auto_no_response: Es scheint, dass im Moment niemand verfügbar ist. Bitte sagen Sie uns, wie wir Sie erreichen können und wir melden uns baldmöglichst bei Ihnen.
@@ -1133,6 +1255,7 @@ de:
           autosaved_error: Automatisches Speichern fehlgeschlagen
           autosaved_retrieved: Text automatisch wiederhergestellt
           autosaved_success: Text automatisch gespeichert
+          awesome_authorization_groups_placeholder: Alle Gruppen erlaubt
           drag_and_drop_image: Sie können Bilder per Drag & Drop ins Textfeld ziehen.
           hashtags: Hashtags
           items: Items
