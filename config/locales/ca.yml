@@ -1261,9 +1261,9 @@ ca:
         errors:
           user_not_in_group: Segons el vostre correu electrònic (%{email}), no sou
             membre de cap grup que us pugui verificar.
-        explanation: Verifica't com a membre d'un grup d'organització
+        explanation: Verifica't com a membre d'un grup de l'organització
         member_of: Membre de %{groups}
-        name: Autorització del Grup d'Organització
+        name: Autorització de Grups de l'Organització
       config:
         intergram:
           auto_no_response: Sembla que no hi ha ningú disponible per a respondre en

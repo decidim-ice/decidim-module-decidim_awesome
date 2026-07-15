@@ -1250,7 +1250,7 @@ fr:
           destroy_private_data: "%{user_name} a détruit les objets %{count} de données
             privées pour %{resource_name} dans %{space_name}"
         user:
-          admin_creates_authorization: "%{user_name} vérifié %{resource_name} avec
+          admin_creates_authorization: "%{user_name} a vérifié %{resource_name} avec
             %{handler_name}"
           admin_destroys_authorization: "%{user_name} a supprimé la vérification %{handler_name}
             sur %{resource_name}"
@@ -1276,9 +1276,9 @@ fr:
         errors:
           user_not_in_group: Selon votre adresse email (%{email}), vous n'êtes pas
             membre d'un groupe qui peut vous vérifier.
-        explanation: Vérifiez-vous en tant que membre d'un groupe d'organisation
+        explanation: Vérifiez-vous en tant que membre d'un groupe de l'organisation
         member_of: Membre de %{groups}
-        name: Autorisation du Groupe d'Organisation
+        name: Autorisation des Groupes de l'Organisation
       config:
         intergram:
           auto_no_response: Il semble que personne ne soit disponible pour répondre

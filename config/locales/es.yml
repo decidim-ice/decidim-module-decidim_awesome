@@ -1244,9 +1244,9 @@ es:
         errors:
           user_not_in_group: Según tu correo electrónico (%{email}), no eres miembro
             de ningún grupo que pueda verificarte.
-        explanation: Verifícate como miembro de un grupo de organización
+        explanation: Verifícate como miembro de un grupo de la organización
         member_of: Miembro de %{groups}
-        name: Autorización del Grupo de Organización
+        name: Autorización de Grupos de la Organización
       config:
         intergram:
           auto_no_response: Parece que no hay nadie disponible para responder en este

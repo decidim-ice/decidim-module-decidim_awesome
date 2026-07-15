@@ -1237,9 +1237,9 @@ it:
         errors:
           user_not_in_group: Secondo la tua email (%{email}), non sei membro di alcun
             gruppo che possa verificarti.
-        explanation: Verificati come membro di un gruppo organizzativo
+        explanation: Verificati come membro di un gruppo dell'organizzazione
         member_of: Membro di %{groups}
-        name: Autorizzazione del Gruppo Organizzativo
+        name: Autorizzazione dei Gruppi dell'Organizzazione
       config:
         intergram:
           auto_no_response: Sembra che nessuno sia a disposizione per rispondere in
