@@ -205,13 +205,13 @@ ca:
             limit_pending_amendments: Permetre només una esmena pendent a cada proposta.
             sort_orders_enabled: Opcions d'ordenació actives
             voting_cards_box_title: Títol per la cabina de votació
-            voting_cards_box_title_help: L'opció per defecte és 'Votar a aquesta proposta'.
-              Utilitzeu '-' per amagar-la.
+            voting_cards_box_title_help: L'opció per defecte és "Votar a aquesta proposta".
+              Utilitzeu "-" per amagar-la.
             voting_cards_instructions: Instruccions d'ajuda en el suport/votació (finestra
               modal que es pot tancar)
-            voting_cards_instructions_help: L'opció per defecte és 'Llegeix les normes
+            voting_cards_instructions_help: L'opció per defecte és "Llegeix les normes
               de la votació amb atenció per entendre com s'utilitzarà el teu vot per
-              %{organization}"
+              %{organization}".
             voting_cards_show_abstain: Afegeix l'opció d'abstenció
             voting_cards_show_modal_help: Mostra la finestra modal d'instruccions/ajuda
               quan es faci clic al suport

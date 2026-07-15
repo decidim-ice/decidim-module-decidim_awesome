@@ -205,7 +205,7 @@ it:
             voting_cards_box_title_help: Il valore predefinito è "Votare su questa
               proposta". Usa "-" per nasconderla.
             voting_cards_instructions: Istruzioni di supporto/aiuto (finestra modale
-              dissmissibile)
+              dismissibile)
             voting_cards_instructions_help: Il valore predefinito è "Si prega di leggere
               attentamente le regole elettorali per capire come il tuo voto sarà utilizzato
               da %{organization}"

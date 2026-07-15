@@ -1071,7 +1071,10 @@ en:
           proposals: Proposals Hacks
           styles: Custom Styles
           surveys: Surveys & Forms
-          verifications: Verifiche / Hack di autorizzazione
+          verifications:
+            awesome_authorizations: Awesome Authorizations
+            force_authorizations: Force Authorizations
+            verifications: Verifications
         menu_hacks:
           create:
             error: Error creating menu item! %{error}
