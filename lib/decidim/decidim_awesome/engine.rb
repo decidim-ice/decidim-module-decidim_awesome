@@ -109,6 +109,9 @@ module Decidim
           Decidim::Proposals::ProposalLCell.include(Decidim::DecidimAwesome::ProposalLCellOverride)
           Decidim::Proposals::ProposalGCell.include(Decidim::DecidimAwesome::ProposalGCellOverride)
           Decidim::DecidimAwesome::Voting::VotingCardsProposalVoteCell.prepend(Decidim::DecidimAwesome::Voting::VotingCardsProposalVoteCellOverride)
+          if Decidim::Proposals.const_defined?(:ProposalVotesCountCell)
+            Decidim::Proposals::ProposalVotesCountCell.prepend(Decidim::DecidimAwesome::Proposals::ProposalVotesCountCellOverride)
+          end
         end
 
         Decidim::Proposals::ProposalVoteCell.include(Decidim::DecidimAwesome::Proposals::ProposalVoteCellOverride) if DecidimAwesome.enabled?(:votes_by_proposal_status)

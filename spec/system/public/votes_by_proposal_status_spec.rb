@@ -84,6 +84,7 @@ describe "Votes by proposal status" do
           expect(page).to have_content(not_allowed_text)
           expect(page).to have_no_button(vote_button_text)
         end
+        expect_no_js_errors
       end
 
       it "blocks proposals without an assigned status" do

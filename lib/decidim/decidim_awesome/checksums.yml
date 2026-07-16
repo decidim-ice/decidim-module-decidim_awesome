@@ -89,6 +89,7 @@ decidim-proposals:
   /app/views/decidim/proposals/proposals/_votes_count.html.erb:
     decidim-0.31.0: 6af6cdeeff0fc0daad028b88ee1c21cb
     decidim-0.31.1: f5247f762666de9cf09635fce3a13ce7
+    decidim-0.31.6: removed
   /app/cells/decidim/proposals/proposal_l_cell.rb:
     decidim-0.31.0: b024d45da1361be278a672ebb304f7f5
   /app/views/decidim/proposals/proposals/_proposal_actions.html.erb:
@@ -101,6 +102,13 @@ decidim-proposals:
   /app/cells/decidim/proposals/proposal_vote/show.erb:
     decidim-0.31.0: b8b19a77296da757ea0e827d6decd596
     decidim-0.31.6: 865d302d783b1f0e7353cf440600d972
+  /app/cells/decidim/proposals/proposal_votes_count_cell.rb:
+    decidim-0.31.6: 60539661178d8cb19cd70bd18c8253f4
+  /app/cells/decidim/proposals/proposal_votes_count/show.erb:
+    decidim-0.31.6: 2e08a1fccd2ec84706fbca392cd7bf66
+  /app/views/decidim/proposals/proposal_votes/update_buttons_and_counters.js.erb:
+    decidim-0.31.0: d6aff3371847210fd74673310bf76a86
+    decidim-0.31.6: 96318bac2808ca4af7e53c9bf6015091
   /app/permissions/decidim/proposals/permissions.rb:
     decidim-0.31.0: a8b29ebc1ac11ac00f90b5848343b9b4
   /app/cells/decidim/proposals/proposal_metadata_cell.rb:

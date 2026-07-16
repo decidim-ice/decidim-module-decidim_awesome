@@ -50,6 +50,8 @@ describe "Voting weights with cards" do
       expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "0")
       expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "0")
       expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "0")
+      expect(page).to have_no_css("[data-progress-bar]")
+      expect(page).to have_css("#proposal-#{proposal.id}-votes-count", visible: :hidden)
 
       click_on "Abstain"
       within ".vote_proposal_modal" do
@@ -158,10 +160,12 @@ describe "Voting weights with cards" do
       it "updates vote counts when the user votes" do
         click_on "Green"
         expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "2")
+        expect(page).to have_css("#proposal-#{proposal.id}-votes-count", text: "7", visible: :hidden)
         click_on "Change my vote"
         click_on "Abstain"
         expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "1")
         expect(page).to have_css(".abstain-count", text: "1")
+        expect(page).to have_no_css("[data-progress-bar]")
       end
     end
   end
@@ -232,6 +236,8 @@ describe "Voting weights with cards" do
         expect(page).to have_no_css(".vote-count[data-weight=\"2\"]")
         expect(page).to have_no_css(".vote-count[data-weight=\"3\"]")
         expect(page).to have_no_content("Change my vote")
+        expect(page).to have_no_css("[data-progress-bar]")
+        expect(page).to have_no_css("#proposal-#{proposal.id}-votes-count", visible: :all)
         click_on "Green"
         expect(page).to have_no_css(".vote-count[data-weight=\"3\"]")
         click_on "Change my vote"
@@ -525,6 +531,7 @@ describe "Voting weights with cards" do
         expect(page).to have_no_content("Green")
         expect(page).to have_no_content("Yellow")
         expect(page).to have_no_content("Red")
+        expect(page).to have_css("[data-progress-bar]", text: "10")
       end
     end
 

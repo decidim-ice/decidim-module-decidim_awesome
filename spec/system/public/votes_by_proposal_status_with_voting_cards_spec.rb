@@ -50,6 +50,7 @@ describe "Votes by proposal status with voting cards" do
         expect(page).to have_content(not_allowed_text)
         expect(page).to have_no_content("Green")
       end
+      expect_no_js_errors
     end
 
     it "keeps voting cards UI for proposals in the allowed status" do
