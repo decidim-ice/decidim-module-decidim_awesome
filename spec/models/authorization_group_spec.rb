@@ -148,6 +148,39 @@ module Decidim::DecidimAwesome
       end
     end
 
+    describe ".sync_user_authorization" do
+      let(:user) { create(:user, :confirmed, organization:, email: "test@example.com") }
+
+      context "when the user belongs to a group" do
+        before { create(:awesome_authorization_member, authorization_group:, email: user.email) }
+
+        it "grants the authorization with the group in metadata" do
+          expect { described_class.sync_user_authorization(user) }.to change(Decidim::Authorization, :count).by(1)
+
+          authorization = Decidim::Authorization.find_by(user:, name: "awesome_authorization_handler")
+          expect(authorization.metadata["groups"]).to include(authorization_group.id.to_s)
+        end
+      end
+
+      context "when the user belongs to no group" do
+        let!(:authorization) { create(:authorization, user:, name: "awesome_authorization_handler", metadata: { "groups" => [authorization_group.id.to_s] }) }
+
+        it "revokes the existing authorization" do
+          expect { described_class.sync_user_authorization(user) }.to change(Decidim::Authorization, :count).by(-1)
+          expect(Decidim::Authorization.find_by(user:, name: "awesome_authorization_handler")).to be_nil
+        end
+      end
+    end
+
+    describe "#reset_caches!" do
+      it "recalculates memoized counters" do
+        expect(authorization_group.members_count).to eq(0)
+        create(:awesome_authorization_member, authorization_group:)
+
+        expect { authorization_group.reset_caches! }.to change(authorization_group, :members_count).from(0).to(1)
+      end
+    end
+
     context "when authorization group is destroyed" do
       let!(:member) { create(:awesome_authorization_member, authorization_group:) }
 

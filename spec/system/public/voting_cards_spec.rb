@@ -166,6 +166,7 @@ describe "Voting weights with cards" do
         expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "1")
         expect(page).to have_css(".abstain-count", text: "1")
         expect(page).to have_no_css("[data-progress-bar]")
+        expect_no_js_errors
       end
     end
   end
@@ -533,6 +534,23 @@ describe "Voting weights with cards" do
         expect(page).to have_no_content("Red")
         expect(page).to have_css("[data-progress-bar]", text: "10")
       end
+
+      context "when the user is logged in" do
+        before do
+          login_as user, scope: :user
+          visit current_path
+        end
+
+        it "votes with the standard button and updates the votes count" do
+          find(".card__list#proposals__proposal_#{proposal.id}").click
+
+          expect(page).to have_css("[data-progress-bar]", text: "10")
+          click_on "Vote"
+          expect(page).to have_css("[data-progress-bar]", text: "11")
+          expect(page).to have_button("Voted")
+          expect_no_js_errors
+        end
+      end
     end
 
     it "show the modal window on voting" do
@@ -657,6 +675,7 @@ describe "Voting weights with cards" do
               expect(page).to have_css("a.vote-action.weight_3.voted.disabled")
               expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "1")
             end
+            expect_no_js_errors
           end
 
           it "allows voting with yellow card" do
@@ -779,6 +798,7 @@ describe "Voting weights with cards" do
           within ".view-layout__links" do
             click_on "Grid mode"
           end
+          expect(page).to have_css(".card__grid-grid")
 
           within "#proposal-#{proposal.id}-vote-button" do
             expect(page).to have_content("Green")
@@ -795,6 +815,7 @@ describe "Voting weights with cards" do
             within ".view-layout__links" do
               click_on "Grid mode"
             end
+            expect(page).to have_css(".card__grid-grid")
           end
 
           it "allows voting with green card" do
@@ -862,6 +883,7 @@ describe "Voting weights with cards" do
           within ".view-layout__links" do
             click_on "Grid mode"
           end
+          expect(page).to have_css(".card__grid-grid")
 
           within "#proposal-#{proposal.id}-vote-button" do
             expect(page).to have_content("Change my vote")
@@ -874,6 +896,7 @@ describe "Voting weights with cards" do
           within ".view-layout__links" do
             click_on "Grid mode"
           end
+          expect(page).to have_css(".card__grid-grid")
 
           within "#proposal-#{proposal.id}-vote-button" do
             click_on "Yellow"

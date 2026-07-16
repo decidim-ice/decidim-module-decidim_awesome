@@ -45,6 +45,14 @@ module Decidim::DecidimAwesome
         end
       end
 
+      describe "when saving fails" do
+        before { allow(authorization_group).to receive(:update!).and_raise(ActiveRecord::RecordNotSaved.new("boom")) }
+
+        it "broadcasts :invalid with the error message" do
+          expect { subject.call }.to broadcast(:invalid, "boom")
+        end
+      end
+
       describe "when invalid" do
         context "when name is blank" do
           let(:name) { { "en" => "" } }

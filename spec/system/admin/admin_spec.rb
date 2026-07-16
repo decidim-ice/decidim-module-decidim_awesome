@@ -96,6 +96,7 @@ describe "Visit the admin page" do
       expect(page).to have_content(/System Compatibility Checks/i)
       expect(page).to have_no_css("svg.inline-block.\\!fill-alert")
       expect(page).to have_css("svg.inline-block.\\!fill-success")
+      expect(page).to have_no_content("_votes_count.html.erb")
     end
 
     context "and header is overriden" do

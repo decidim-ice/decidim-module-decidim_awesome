@@ -60,6 +60,19 @@ module Decidim::DecidimAwesome
       end
     end
 
+    describe "ransack search" do
+      let!(:member) { create(:awesome_authorization_member, authorization_group:, email: "findme@example.org") }
+      let!(:other_member) { create(:awesome_authorization_member, authorization_group:, email: "other@example.org") }
+
+      it "allows filtering members by email" do
+        expect(described_class.ransack(email_cont: "findme").result).to contain_exactly(member)
+      end
+
+      it "exposes no associations for filtering" do
+        expect(described_class.ransackable_associations).to be_empty
+      end
+    end
+
     describe "#group_authorized?" do
       let(:organization) { authorization_group.organization }
       let(:user) { create(:user, :confirmed, organization:, email: authorization_member.email) }

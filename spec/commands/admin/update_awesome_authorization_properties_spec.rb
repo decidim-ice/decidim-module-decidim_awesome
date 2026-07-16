@@ -67,6 +67,23 @@ module Decidim::DecidimAwesome
           expect(AwesomeConfig.find_by(organization:, var: :awesome_authorization_handler)).to be_nil
         end
       end
+
+      context "when name is too long" do
+        let(:params) { { name: { locale => "a" * 256 }, explanation: { locale => "Custom authorization description" } } }
+
+        it "broadcasts :invalid and stores nothing" do
+          expect { subject.call }.to broadcast(:invalid)
+          expect(AwesomeConfig.find_by(organization:, var: :awesome_authorization_handler)).to be_nil
+        end
+      end
+
+      context "when the config cannot be saved" do
+        before { allow(AwesomeConfig).to receive(:find_or_initialize_by).and_raise(ActiveRecord::RecordNotSaved.new("boom")) }
+
+        it "broadcasts :invalid with the error message" do
+          expect { subject.call }.to broadcast(:invalid, "boom")
+        end
+      end
     end
   end
 end

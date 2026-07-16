@@ -31,6 +31,22 @@ module Decidim
               get(:index)
               expect(subject).to render_template(:index)
             end
+
+            context "when properties are already stored" do
+              let(:locale) { organization.default_locale.to_s }
+
+              before do
+                create(:awesome_config, organization:, var: :awesome_authorization_handler,
+                                        value: { "name" => { locale => "Existing name" }, "explanation" => { locale => "Existing explanation" }, "extra" => "ignored" })
+              end
+
+              it "prefills the form with the stored values" do
+                get(:index)
+
+                expect(assigns(:form).name[locale]).to eq("Existing name")
+                expect(assigns(:form).explanation[locale]).to eq("Existing explanation")
+              end
+            end
           end
 
           context "when user is not admin" do
