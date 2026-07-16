@@ -1,7 +1,12 @@
 CHANGELOG
 =========
 
-unreleased
+v0.15.0
+-------
+Compatibility:
+  - Decidim 0.32.x
+
+v0.14.3
 -------
 Compatibility:
   - Decidim 0.31.x
