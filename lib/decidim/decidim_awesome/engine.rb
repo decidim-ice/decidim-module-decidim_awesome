@@ -26,6 +26,8 @@ module Decidim
       # https://edgeguides.rubyonrails.org/engines.html#overriding-models-and-controllers
       # overrides
       config.to_prepare do
+        Decidim::Organization.include(Decidim::DecidimAwesome::HasAuthorizationGroups) if DecidimAwesome.enabled?(:awesome_authorization_handler)
+
         if DecidimAwesome.enabled?(:force_authorizations)
           Decidim::LastActivity.include(Decidim::DecidimAwesome::LastActivityOverride)
           Decidim::OpenDataExporter.include(Decidim::DecidimAwesome::OpenDataExporterOverride)
@@ -107,6 +109,9 @@ module Decidim
           Decidim::Proposals::ProposalLCell.include(Decidim::DecidimAwesome::ProposalLCellOverride)
           Decidim::Proposals::ProposalGCell.include(Decidim::DecidimAwesome::ProposalGCellOverride)
           Decidim::DecidimAwesome::Voting::VotingCardsProposalVoteCell.prepend(Decidim::DecidimAwesome::Voting::VotingCardsProposalVoteCellOverride)
+          if Decidim::Proposals.const_defined?(:ProposalVotesCountCell)
+            Decidim::Proposals::ProposalVotesCountCell.prepend(Decidim::DecidimAwesome::Proposals::ProposalVotesCountCellOverride)
+          end
         end
 
         Decidim::Proposals::ProposalVoteCell.include(Decidim::DecidimAwesome::Proposals::ProposalVoteCellOverride) if DecidimAwesome.enabled?(:votes_by_proposal_status)
@@ -140,6 +145,12 @@ module Decidim
           Decidim::ApplicationController.include(Decidim::DecidimAwesome::EnforceAccessAuthorizations) if DecidimAwesome.enabled?(:force_authorizations)
           Decidim::ApplicationController.include(Decidim::DecidimAwesome::UseUserTimeZone) if Decidim::DecidimAwesome.enabled?(:user_timezone)
 
+          if DecidimAwesome.enabled?(:awesome_authorization_handler)
+            # Saves current organization in the current thread for use in isolated contexts
+            Decidim::ApplicationController.include(Decidim::DecidimAwesome::NeedsThreadVariables)
+            Decidim::Admin::ApplicationController.include(Decidim::DecidimAwesome::NeedsThreadVariables)
+            Decidim::Verifications::ApplicationHelper.include(Decidim::DecidimAwesome::Verifications::ApplicationHelperOverride)
+          end
           # Auto-insert some csp directives
           Decidim::ApplicationController.include(Decidim::DecidimAwesome::ContentSecurityPolicy)
           Decidim::Admin::ApplicationController.include(Decidim::DecidimAwesome::ContentSecurityPolicy)
@@ -258,6 +269,31 @@ module Decidim
 
               exports.include_in_open_data = false
               exports.serializer Decidim::DecidimAwesome::Proposals::PrivateProposalSerializer
+            end
+          end
+        end
+      end
+
+      initializer "decidim_decidim_awesome.awesome_authorization_handler" do
+        if Decidim::DecidimAwesome.enabled?(:awesome_authorization_handler)
+          # Update the current user authorization's status after login
+          Warden::Manager.after_authentication do |user, _auth, _opts|
+            next unless user.is_a?(Decidim::User)
+
+            handlers = user&.organization&.available_authorization_handlers
+            next unless handlers&.include?("awesome_authorization_handler")
+
+            Decidim::DecidimAwesome::SyncAwesomeAuthorizationUserJob.perform_later(user.id)
+          end
+
+          # Register the awesome_authorization_handler workflow with Decidim Verifications
+          Decidim::Verifications.register_workflow(:awesome_authorization_handler) do |workflow|
+            workflow.form = "Decidim::DecidimAwesome::AwesomeAuthorizationHandler"
+            workflow.action_authorizer = "Decidim::DecidimAwesome::AwesomeAuthorizationAuthorizer"
+            # workflow.renewable = true
+            # workflow.time_between_renewals = 5.minutes
+            workflow.options do |options|
+              options.attribute :awesome_authorization_groups, type: :string
             end
           end
         end

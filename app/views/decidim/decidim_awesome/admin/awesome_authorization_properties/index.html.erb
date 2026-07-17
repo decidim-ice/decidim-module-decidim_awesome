@@ -1,0 +1,31 @@
+<div class="item_show__header">
+  <h2 class="item_show__header-title">
+    <%= t(".title") %>
+    <%= link_to t(".cancel"), decidim_admin_decidim_awesome.awesome_authorizations_path, class: "button button__sm button__secondary" %>
+  </h2>
+</div>
+
+<div class="item__edit item__edit-1col">
+  <div class="item__edit-form">
+    <%= decidim_form_for(@form, url: decidim_admin_decidim_awesome.awesome_authorization_properties_path, html: { class: "form-defaults form awesome_authorization_properties" }) do |f| %>
+      <div class="form__wrapper">
+        <div class="card pt-4">
+          <div class="card-section">
+            <div class="row column">
+              <%= f.translated :text_field, :name, label: t(".name"), help_text: t(".name_help"), placeholder: t("decidim.decidim_awesome.awesome_authorization_handler.name") %>
+            </div>
+            <div class="row column">
+              <%= f.translated :text_area, :explanation, label: t(".description"), help_text: t(".description_help"), placeholder: t("decidim.decidim_awesome.awesome_authorization_handler.explanation"), data: { controller: "character-counter" } %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item__edit-sticky">
+        <div class="item__edit-sticky-container">
+          <%= f.submit t(".save"), class: "button button__sm button__secondary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

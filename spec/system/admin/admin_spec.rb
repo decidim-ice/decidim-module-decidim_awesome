@@ -94,8 +94,9 @@ describe "Visit the admin page" do
 
     it "renders the page" do
       expect(page).to have_content(/System Compatibility Checks/i)
-      expect(page).to have_no_xpath("//span[@class='fill-alert']")
-      expect(page).to have_xpath("//span[@class='fill-success']")
+      expect(page).to have_no_css("svg.inline-block.\\!fill-alert")
+      expect(page).to have_css("svg.inline-block.\\!fill-success")
+      expect(page).to have_no_content("_votes_count.html.erb")
     end
 
     context "and header is overriden" do
@@ -103,7 +104,7 @@ describe "Visit the admin page" do
 
       it "detects missing css" do
         within ".decidim-version" do
-          expect(page).to have_xpath("//span[@class='fill-alert']", count: 1)
+          expect(page).to have_css("svg.inline-block.\\!fill-alert", count: 1)
         end
       end
     end

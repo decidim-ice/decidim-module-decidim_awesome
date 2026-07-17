@@ -4,11 +4,12 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = "0.31.5"
+DECIDIM_VERSION = "0.31.6"
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-conferences", DECIDIM_VERSION
 gem "decidim-decidim_awesome", path: "."
+gem "decidim-elections", DECIDIM_VERSION
 gem "decidim-initiatives", DECIDIM_VERSION
 gem "decidim-templates", DECIDIM_VERSION
 
@@ -25,7 +26,6 @@ group :development, :test do
 
   gem "brakeman", "~> 7.0"
   gem "parallel_tests", "~> 4.2"
-  gem "rubocop-rails", "~> 2.32.0"
 end
 
 group :development do
