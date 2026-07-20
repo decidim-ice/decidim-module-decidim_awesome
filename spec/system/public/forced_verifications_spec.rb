@@ -6,6 +6,8 @@ describe "Forced verifications" do
   let(:organization) { create(:organization, available_authorizations: [:dummy_authorization_handler, :another_dummy_authorization_handler]) }
   let!(:user) { create(:user, :confirmed, organization:) }
   let(:restricted_path) { "/" }
+  let(:localized_redirect) { restricted_path == "/" ? "/en" : "/en#{restricted_path}" }
+  let(:localized_restricted_path) { restricted_path == "/" ? "/en/" : "/en#{restricted_path}" }
   let(:key) { "default" }
   let!(:force_authorizations_config) do
     create(
@@ -37,7 +39,7 @@ describe "Forced verifications" do
     end
 
     it "page cannot be visited" do
-      expect(page).to have_current_path(decidim.new_user_session_path(redirect_url: restricted_path))
+      expect(page).to have_current_path(decidim.new_user_session_path(redirect_url: localized_redirect))
     end
   end
 
@@ -50,7 +52,7 @@ describe "Forced verifications" do
     end
 
     it "user is redirected to the required authorizations page" do
-      expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(redirect_url: restricted_path))
+      expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(locale: :en, redirect_url: localized_redirect))
       expect(page).to have_content("you need to authorize your account with a valid authorization")
       expect(page).to have_content("lease verify yourself with all these methods before being able to access the platform")
       expect(page).to have_content("Verify with Example authorization")
@@ -69,7 +71,7 @@ describe "Forced verifications" do
       click_on "Verify with Another example authorization"
       fill_in "Passport number", with: "A12345678"
       click_on "Send"
-      expect(page).to have_current_path(restricted_path, ignore_query: true)
+      expect(page).to have_current_path(localized_redirect, ignore_query: true)
     end
 
     it "user can logout" do
@@ -83,19 +85,19 @@ describe "Forced verifications" do
       expect(page).to have_current_path("/authorizations")
 
       visit "/account"
-      expect(page).to have_current_path("/account")
+      expect(page).to have_current_path("/en/account")
 
       visit "/pages"
-      expect(page).to have_current_path("/pages")
+      expect(page).to have_current_path("/en/pages")
     end
 
     context "when the user has not accepted the terms an conditions" do
       let(:user) { create(:user, :confirmed, organization:, accepted_tos_version: nil) }
 
       it "user can accept the terms and conditions" do
-        expect(page).to have_current_path("/pages/terms-of-service")
+        expect(page).to have_current_path("/en/pages/terms-of-service")
         click_on "I agree with these terms"
-        expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(redirect_url: restricted_path))
+        expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(locale: :en, redirect_url: localized_redirect))
         expect(user.reload.accepted_tos_version).not_to be_nil
         expect(page).to have_content("you need to authorize your account with a valid authorization")
       end
@@ -105,14 +107,14 @@ describe "Forced verifications" do
       let(:user) { create(:user, :confirmed, :admin, organization:) }
 
       it "requires verification" do
-        expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(redirect_url: restricted_path))
+        expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(locale: :en, redirect_url: localized_redirect))
       end
 
       context "and visits the admin" do
         let(:restricted_path) { "/admin" }
 
         it "can visit an admin path" do
-          expect(page).to have_current_path(restricted_path, ignore_query: true)
+          expect(page).to have_current_path(localized_restricted_path, ignore_query: true)
         end
       end
     end
@@ -138,7 +140,7 @@ describe "Forced verifications" do
       end
 
       it "user is redirected and shows the pending" do
-        expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(redirect_url: restricted_path))
+        expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(locale: :en, redirect_url: localized_redirect))
         expect(page).to have_no_content("Verify with Identity documents")
         expect(page).to have_content("Identity documents")
         expect(page).to have_content("Verify with Example authorization")
@@ -155,7 +157,7 @@ describe "Forced verifications" do
       end
 
       it "user is redirected and shows the granted" do
-        expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(redirect_url: restricted_path))
+        expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(locale: :en, redirect_url: localized_redirect))
         expect(page).to have_content("GRANTED VERIFICATIONS")
         expect(page).to have_content("NOT VERIFIED YET")
         expect(page).to have_no_content("PENDING VERIFICATIONS")
@@ -170,7 +172,7 @@ describe "Forced verifications" do
       end
 
       it "acts as normal" do
-        expect(page).to have_current_path(restricted_path, ignore_query: true)
+        expect(page).to have_current_path(localized_restricted_path, ignore_query: true)
       end
     end
 
@@ -179,7 +181,7 @@ describe "Forced verifications" do
 
       it "acts as normal" do
         expect(page).to have_content("Log in")
-        expect(page).to have_current_path("/users/sign_in")
+        expect(page).to have_current_path("/en/users/sign_in")
       end
     end
 
@@ -189,7 +191,7 @@ describe "Forced verifications" do
       it "blocks access" do
         expect(page).to have_content("This account has been blocked")
         # Log out the user
-        expect(page).to have_current_path(decidim.user_session_path(redirect_url: restricted_path))
+        expect(page).to have_current_path(decidim.user_session_path(redirect_url: localized_redirect))
       end
     end
 
@@ -206,7 +208,7 @@ describe "Forced verifications" do
       end
 
       it "acts as normal" do
-        expect(page).to have_current_path(restricted_path, ignore_query: true)
+        expect(page).to have_current_path(localized_restricted_path, ignore_query: true)
       end
     end
 
@@ -228,14 +230,14 @@ describe "Forced verifications" do
 
       it "applies everywhere when there are no constraints (always)" do
         visit restricted_path
-        expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(redirect_url: restricted_path))
+        expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(locale: :en, redirect_url: localized_redirect))
       end
 
       it "never applies when a 'none' constraint is present" do
         create(:config_constraint, awesome_config: group_subconfig, settings: { "participatory_space_manifest" => "none" })
 
         visit restricted_path
-        expect(page).to have_current_path(restricted_path, ignore_query: true)
+        expect(page).to have_current_path(localized_restricted_path, ignore_query: true)
       end
 
       it "assemblies manifest requires auth on assembly, not on processes" do
