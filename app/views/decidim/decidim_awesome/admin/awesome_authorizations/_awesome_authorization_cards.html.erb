@@ -1,0 +1,24 @@
+<div class="verification verification__no_clickable">
+  <%= icon "login-circle-line", class: "verification__icon" %>
+  <div class="verification__text">
+    <h2 class="h5 text-secondary">
+      <%= t("decidim.authorization_handlers.awesome_authorization_handler.name") %>
+    </h2>
+    <span>
+      <%= t("decidim.authorization_handlers.awesome_authorization_handler.explanation") %>
+    </span>
+  </div>
+</div>
+
+<div class="verification verification__no_clickable mt-4">
+  <%= icon "checkbox-circle-line", class: "verification__icon is-granted" %>
+  <div class="verification__text">
+    <h2 class="h5 text-secondary">
+      <%= t("decidim.authorization_handlers.awesome_authorization_handler.name") %>
+    </h2>
+    <span>
+      <%= t("decidim.authorization_handlers.granted_at", timestamp: l(Time.current, format: :long_with_particles)) %>.
+      <%= t("decidim.decidim_awesome.awesome_authorization_handler.member_of", groups: "\"#{authorization_groups.pluck(:name).map { |name| translated_attribute(name) }.join('", "')}\"") %>
+    </span>
+  </div>
+</div>

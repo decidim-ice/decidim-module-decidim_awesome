@@ -1,0 +1,61 @@
+<div class="table-stacked">
+  <% if authorization_groups.any? %>
+    <table class="table-list">
+      <thead>
+        <tr>
+          <th><%= t(".group_name") %></th>
+          <th><%= t(".members_count") %></th>
+          <th><%= t(".granted_count") %></th>
+          <th><%= t(".sync_status") %></th>
+          <th><%= t(".actions") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% authorization_groups.each do |group| %>
+          <tr data-group-id="<%= group.id %>">
+            <td>
+              <%= translated_attribute(group.name) %>
+              <div class="text-sm text-gray"><%= translated_attribute(group.purpose) %></div>
+            </td>
+            <td><%= group.members_count %></td>
+            <td><%= group.granted_in_group_count %></td>
+            <td><span title="<%= group.synced? ? t(".synced") : t(".out_of_sync") %>"><%= check(group.synced?) %></span></td>
+            <td class="table-list__actions">
+              <%= icon_link_to "group-line", decidim_admin_decidim_awesome.awesome_authorization_users_path(group), t(".manage"), class: "action-icon--preview" %>
+              <button type="button" data-controller="dropdown" data-target="actions-group-<%= group.id %>" aria-label="<%= t("decidim.admin.actions.actions_label", resource: translated_attribute(group.name)) %>">
+                <%= icon "more-fill", class: "text-secondary" %>
+              </button>
+
+              <div class="inline-block relative">
+                <ul id="actions-group-<%= group.id %>" class="dropdown dropdown__action" aria-hidden="true">
+                  <li class="dropdown__item">
+                    <%= link_to decidim_admin_decidim_awesome.edit_awesome_authorization_path(group), class: "dropdown__button" do %>
+                      <%= icon "pencil-line" %>
+                      <%= t(".edit") %>
+                    <% end %>
+                  </li>
+                  <li class="dropdown__item">
+                    <%= link_to decidim_admin_decidim_awesome.sync_awesome_authorization_path(group), method: :post, class: "dropdown__button" do %>
+                      <%= icon "loader-3-line" %>
+                      <%= t(".sync") %>
+                    <% end %>
+                  </li>
+                  <li class="dropdown__item">
+                    <%= link_to decidim_admin_decidim_awesome.awesome_authorization_path(group), method: :delete, class: "dropdown__button", data: { confirm: t(".confirm_destroy") } do %>
+                      <%= icon "delete-bin-line" %>
+                      <%= t(".destroy") %>
+                    <% end %>
+                  </li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="callout info">
+      <%= t(".no_groups") %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,32 @@
+<% append_stylesheet_pack_tag "decidim_verifications" %>
+
+<div class="item_show__header">
+  <h1 class="item_show__header-title"><%= t(".title") %></h1>
+</div>
+
+<div class="card">
+  <div class="card-section">
+    <p class="my-4 help-text"><%= t(".description_html") %></p>
+    <% if available? %>
+      <h2 class="h5"><%= t(".authorization_properties") %></h2>
+      <p class="help-text my-4"><%= t(".properties_description_html") %></p>
+      <%= render "awesome_authorization_cards" %>
+      <%= link_to decidim_admin_decidim_awesome.awesome_authorization_properties_path, class: "button button__sm button__text-secondary mr-auto mt-4" do %>
+        <%= icon("pencil-line") %>
+        <%= t(".edit_properties") %>
+      <% end %>
+
+      <h2 class="h5 my-4"><%= t(".authorization_groups") %></h2>
+      <%= render "list_authorization_groups" %>
+
+      <%= link_to decidim_admin_decidim_awesome.new_awesome_authorization_path, class: "button button__sm button__text-secondary mr-auto mt-4" do %>
+        <%= icon("add-box-line") %>
+        <%= t(".create_group") %>
+      <% end %>
+    <% else %>
+      <div class="callout alert mt-4">
+        <%= t(".not_available", system: link_to(t(".system_link"), decidim_system.edit_organization_path(current_organization))).html_safe %>
+      </div>
+    <% end %>
+  </div>
+</div>

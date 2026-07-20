@@ -323,6 +323,10 @@ GEM
       w3c_rspec_validators (~> 0.3.0)
       webmock (~> 3.18)
       wisper-rspec (~> 1.0)
+    decidim-elections (0.32.0)
+      decidim-admin (= 0.32.0)
+      decidim-core (= 0.32.0)
+      decidim-forms (= 0.32.0)
     decidim-forms (0.32.0)
       decidim-core (= 0.32.0)
     decidim-generators (0.32.0)
@@ -1031,6 +1035,7 @@ DEPENDENCIES
   decidim-conferences (= 0.32.0)
   decidim-decidim_awesome!
   decidim-dev (= 0.32.0)
+  decidim-elections (= 0.32.0)
   decidim-initiatives (= 0.32.0)
   decidim-templates (= 0.32.0)
   letter_opener_web (~> 2.0)
@@ -1038,7 +1043,6 @@ DEPENDENCIES
   parallel_tests (~> 4.2)
   puma (>= 6.3.1)
   rexml (= 3.4.1)
-  rubocop-rails (~> 2.32.0)
   web-console (~> 4.2)
 
 CHECKSUMS
@@ -1112,6 +1116,7 @@ CHECKSUMS
   decidim-debates (0.32.0) sha256=bdffab24b57706a4d693deb66ce27d18c002a94420a3aa8d5b98efb7fe82352a
   decidim-decidim_awesome (0.15.0)
   decidim-dev (0.32.0) sha256=e21122deb8016342500a2749e2fe1cde33614ff4de56aaf30c8a90095d2ceee7
+  decidim-elections (0.32.0) sha256=a5df3b8275f884303b5f536d188748b12319649ad45b02f431807fcc798598f9
   decidim-forms (0.32.0) sha256=bba47b71cd013e682f8483a7329c484b27cab488c0d901452e33d6a4666df7e2
   decidim-generators (0.32.0) sha256=2a1740b00cf06e7863e43ec43118fb8353c6407af49f25602c6474c296e24ab4
   decidim-initiatives (0.32.0) sha256=f09480fad2b893d38b0ab43fae641670e6c92512e17332b92ca7492cc1a676ff

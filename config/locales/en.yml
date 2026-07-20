@@ -5,6 +5,12 @@ en:
     waiting_label: Waiting for verification ...
   activemodel:
     attributes:
+      awesome_authorization_group:
+        name: Group name
+        purpose: Group purpose
+      awesome_authorization_members:
+        emails: Emails
+        file: Upload a CSV file
       config:
         additional_proposal_sortings: Additional sorting options enabled
         allow_images_in_editors: Allow images in the HTML editor
@@ -125,6 +131,11 @@ en:
       menu:
         admin_accountability: Admin accountability
         decidim_awesome: Decidim awesome
+    authorization_handlers:
+      awesome_authorization_handler:
+        fields:
+          awesome_authorization_groups: 'Allowed groups:'
+          groups: Groups
     components:
       awesome_iframe:
         name: Fullscreen Iframe
@@ -173,7 +184,7 @@ en:
             awesome_voting_manifest: Support type
             awesome_voting_manifest_help_html: <span class="text-alert">Be aware that
               changing this setting in the middle of a votation period can result
-              in innacurate or unexpected results.</span><br>Note also that this setting
+              in inaccurate or unexpected results.</span><br>Note also that this setting
               can only be edited if the component has no supports yet.
             awesome_voting_manifest_options:
               default: Simple vote (default)
@@ -271,11 +282,11 @@ en:
           authorization_transferred: 'Warning: There was verification conflict and
             the verification has been transferred to %{user}'
           conflict: There is a conflict with an existing authorization
-          conflict_help_html: "You must solve the conflict with the user %{user} before
-            you can authorize the user with this authorization.\n<br><br>\nA verfication
-            conflict happens when another user has the same data as the user you are
-            trying to authorize. \nYou can solve this conflict by removing the conflicting
-            authorization from the other user or using different data for this user.\n"
+          conflict_help_html: |
+            You must solve the conflict with the user %{user} before you can authorize the user with this authorization.
+            <br><br>
+            A verification conflict happens when another user has the same data as the user you are trying to authorize.
+            You can solve this conflict by removing the conflicting authorization from the other user or using different data for this user.
           edit:
             authorize: Authorize %{user} with %{name}
             do_it_if_sure: Do this only if you are sure that the user has this authorization.
@@ -287,6 +298,102 @@ en:
               user''s current authorization status.'
           user_authorized: "%{user} successfully authorized with %{name}"
           user_not_authorized: "%{user} could not be authorized with %{name}"
+        awesome_authorization_properties:
+          create:
+            error: Error updating authorization properties! %{error}
+            success: Authorization properties updated successfully
+          index:
+            cancel: Cancel
+            description: Authorization description
+            description_help: This text is shown below the authorization title in
+              the verification card when users are still not verified. You can use
+              it to explain why this authorization is required.
+            name: Authorization name
+            name_help: This title is shown in the verification card.
+            save: Save
+            title: Edit authorization properties
+        awesome_authorization_users:
+          create:
+            error: Error updating members list! %{error}
+            success: Members list updated successfully (%{count} new users added)
+          destroy:
+            success: Member removed successfully
+          index:
+            actions: Actions
+            authorized_user: Authorized user
+            confirm_remove: Are you sure you want to remove this member?
+            email: Email
+            new: Add new members
+            no_members: This group has no members yet
+            not_synced_html: User authorizations are out of sync with this authorization
+              group. %{sync} to update the list of members.
+            remove: Remove member
+            sync: Synchronize authorizations
+            title: Manage members for "%{group}"
+            user: Decidim user
+          new:
+            create: Add members
+            emails_help: Drop emails here, only words with an "@" will be considered
+              as emails.
+            or: or
+            remove_previous_members: Remove previous members of the group (%{count}
+              users)
+            title: Add members to "%{group}"
+          update:
+            empty: No emails were found in the input or CSV file. Please add at least
+              one email.
+        awesome_authorizations:
+          create:
+            error: Error creating authorization group! %{error}
+            success: Authorization group created successfully
+          destroy:
+            success: Authorization group removed successfully
+          edit:
+            save: Save
+            title: Edit authorization group
+          form:
+            name_help: This title is shown in the verification card.
+            purpose_help: This text is shown in the verification card to explain the
+              purpose of the authorization or its intended use.
+          index:
+            authorization_groups: Authorization groups
+            authorization_properties: Authorization properties
+            create_group: Create a new authorization group
+            description_html: Use this section to create groups of people, each with
+              specific permissions on Decidim's components.<br>These groups will be
+              automatically authorized for new sign-ups and whenever this list is
+              updated.
+            edit_properties: Edit authorization properties
+            not_available: In order to use this feature, you must enable the awesome
+              authorization workflow in the %{system} admin.
+            properties_description_html: Use this authorization on components to restrict
+              access to specific groups of users. When selected, you can choose the
+              groups allowed.
+            system_link: System admin
+            title: Awesome authorizations
+          list_authorization_groups:
+            actions: Actions
+            confirm_destroy: Are you sure you want to destroy this authorization group?
+              All users in this group will lose their authorization.
+            destroy: Remove group
+            edit: Edit group
+            granted_count: Authorized
+            group_name: Group name
+            manage: Manage members
+            members_count: Users
+            no_groups: No authorization groups created yet
+            out_of_sync: Out of sync
+            sync: Synchronize authorizations
+            sync_status: Sync status
+            synced: Synced
+          new:
+            create: Create
+            title: New authorization group
+          sync:
+            success: Synchronization has started
+          update:
+            error: Error updating authorization group! %{error}
+            success: Authorization group updated successfully
         checks:
           index:
             admin_head_tags: Awesome tags included in the admin application header
@@ -298,6 +405,7 @@ en:
             decidim-core: From Core module
             decidim-participatory_processes: From Participatory Processes module
             decidim-proposals: From Proposals module
+            decidim-verifications: From Verifications module
             decidim_update_available: 'A new version is available: %{latest_version}'
             decidim_version: Decidim version %{version}
             errors:
@@ -344,6 +452,8 @@ en:
           destroy_scoped_style:
             error: Error removing CSS box! %{error}
             success: CSS box %{key} removed successfully
+          disabled: Disabled
+          enabled: Enabled
           force_authorizations: Authorization groups
           form:
             additional_proposal_sortings:
@@ -408,14 +518,14 @@ en:
               proposal_custom_fields_example: Data is stored in a XML object using
                 compatible HTML attributes (dl,dt,dd elements) replacing the "body"
                 in a normal proposal.
-              proposal_custom_fields_translations: "Labels, help text, placeholders
-                and default values can use your application custom translations. \nFor
-                that, instead of using a string literal, use the i18n key (it must
-                contain at least one dot).\nFor instance:\n- \"activemodel.attributes.proposal.title\"
-                instead of \"Title\"\n- \"activemodel.attributes.proposal.address\"
-                instead of \"Address\"\nOr use your own keys in combination with other
-                tools to define translations (eg: using the module Term Customizer):\n
-                - \"myapp.custom_fields.bio\" instead of \"Biography\""
+              proposal_custom_fields_translations: |-
+                Labels, help text, placeholders and default values can use your application custom translations.
+                For that, instead of using a string literal, use the i18n key (it must contain at least one dot).
+                For instance:
+                - "activemodel.attributes.proposal.title" instead of "Title"
+                - "activemodel.attributes.proposal.address" instead of "Address"
+                Or use your own keys in combination with other tools to define translations (eg: using the module Term Customizer):
+                 - "myapp.custom_fields.bio" instead of "Biography"
               proposal_private_custom_fields: Similar as public fields, but this information
                 won't be disclosed publicly (only admins will have access to it).
               proposal_private_custom_fields_translations: |
@@ -961,7 +1071,10 @@ en:
           proposals: Proposals Hacks
           styles: Custom Styles
           surveys: Surveys & Forms
-          verifications: Verifications
+          verifications:
+            awesome_authorizations: Awesome Authorizations
+            force_authorizations: Force Authorizations
+            verifications: Verifications
         menu_hacks:
           create:
             error: Error creating menu item! %{error}
@@ -1083,6 +1196,16 @@ en:
             <p>You can also reach the author of this proposal by <a href="%{proposal_link}">leaving a comment</a> and try to speed up the resolution of the current amendment.</p>
         pending_limit_reached: Sorry, there can only be one pending amendment at a
           time. Please wait until "%{emendation}" is accepted or rejected.
+      awesome_authorization_handler:
+        admin_managed_html: This authorization is managed automatically usually. If
+          you think you should be verified try to press the button "Send" below.<br>If
+          that does not work, please contact the administrators of the platform.
+        errors:
+          user_not_in_group: According to your email (%{email}), you are not a member
+            of any group that can verify you.
+        explanation: Get verified as a member of an organization group
+        member_of: Member of %{groups}
+        name: Organization Group's Authorization
       config:
         intergram:
           auto_no_response: It seems that no one is available to answer right now.
@@ -1350,6 +1473,7 @@ en:
           autosaved_retrieved: Data for this form has been recovered from a previous
             session
           autosaved_success: Data saved in local storage
+          awesome_authorization_groups_placeholder: All groups allowed
           drag_and_drop_image: Add images by dragging & dropping or pasting them.
           hashtags: Hashtags
           items: items

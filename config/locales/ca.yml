@@ -1,9 +1,16 @@
+---
 ca:
   active_hashcash:
     submit_filter: Filtra
     waiting_label: Esperant verificació...
   activemodel:
     attributes:
+      awesome_authorization_group:
+        name: Nom del grup
+        purpose: Propòsit del grup
+      awesome_authorization_members:
+        emails: Correus electrònics
+        file: Puja un fitxer CSV
       config:
         additional_proposal_sortings: Activar opcions d'ordenació addicionals
         allow_images_in_editors: Permet imatges a l'editor HTML
@@ -12,34 +19,47 @@ ca:
         authorization_options_form: Opcions d'autorització
         auto_save_forms: Desa automàticament els formularis a l'emmagatzematge local
         force_authorizations: Grup d'autorització %{id}
-        hashcash_login: Activa la protecció HashCash antibot per usuaris existents (inici sessió)
+        hashcash_login: Activa la protecció HashCash antibot per usuaris existents
+          (inici sessió)
         hashcash_login_bits: Nombre de bits per l'algoritme Hashcash (inici sessió)
-        hashcash_signup: Activa la protecció HashCash antibot per usuaris existents (registre)
+        hashcash_signup: Activa la protecció HashCash antibot per usuaris existents
+          (registre)
         hashcash_signup_bits: Nombre de bits per l'algoritme Hashcash (registre)
-        intergram_auto_no_response: Un missatge que s'envia un minut després que la usuària hagi enviat el seu primer missatge i no s'hagi rebut cap resposta
-        intergram_auto_response: Un missatge que s'envia immediatament després que la usuària enviï el seu primer missatge
+        intergram_auto_no_response: Un missatge que s'envia un minut després que la
+          usuària hagi enviat el seu primer missatge i no s'hagi rebut cap resposta
+        intergram_auto_response: Un missatge que s'envia immediatament després que
+          la usuària enviï el seu primer missatge
         intergram_chat_id: ID de xat
         intergram_color: Color del widget
         intergram_for_admins: Activar el xat de Intergram al backend d'administració
-        intergram_intro_message: Primer missatge que s'envia quan la usuària obre el xat per primera vegada
+        intergram_intro_message: Primer missatge que s'envia quan la usuària obre
+          el xat per primera vegada
         intergram_require_login: Només per a usuàries registrades
         intergram_title_closed: Títol del xat quan està tancat
         intergram_title_open: Títol del xat quan està obert
-        intergram_use_floating_button: Si està marcat, el xat tancat és sempre un botó en lloc d'un text
+        intergram_use_floating_button: Si està marcat, el xat tancat és sempre un
+          botó en lloc d'un text
         proposal_custom_fields: Camps personalitzats %{id}
         proposal_private_custom_fields: Camps personalitzats %{id}
         scoped_admin_styles: Personalització d'estils %{id}
         scoped_admins: Grup d'administradores acotades %{id}
         scoped_styles: Personalització d'estils %{id}
         user_timezone: Permet als usuaris definir la seva zona horària en el seu perfil
-        validate_body_max_caps_percent: Percentatge màxim de majúscules en el cos de la proposta
-        validate_body_max_marks_together: Nombre màxim de símbols consecutius permesos al cos de la proposta
-        validate_body_min_length: Nombre de caràcters mínims requerits pel cos de la proposta
+        validate_body_max_caps_percent: Percentatge màxim de majúscules en el cos
+          de la proposta
+        validate_body_max_marks_together: Nombre màxim de símbols consecutius permesos
+          al cos de la proposta
+        validate_body_min_length: Nombre de caràcters mínims requerits pel cos de
+          la proposta
         validate_body_start_with_caps: Força que el text del cos s'inici amb una majúscula
-        validate_title_max_caps_percent: Percentatge màxim de majúscules en el títol de la proposta
-        validate_title_max_marks_together: Nombre màxim de símbols consecutius permesos al títol de la proposta
-        validate_title_min_length: Nombre de caràcters mínims requerits pel títol de la proposta
-        validate_title_start_with_caps: Força que el text del títol s'inici amb una majúscula
+        validate_title_max_caps_percent: Percentatge màxim de majúscules en el títol
+          de la proposta
+        validate_title_max_marks_together: Nombre màxim de símbols consecutius permesos
+          al títol de la proposta
+        validate_title_min_length: Nombre de caràcters mínims requerits pel títol
+          de la proposta
+        validate_title_start_with_caps: Força que el text del títol s'inici amb una
+          majúscula
       constraint:
         application_context: Només per
         component_id: o específicament a
@@ -79,7 +99,8 @@ ca:
         url: URL
         visibility: Visibilitat
       organization:
-        awesome_admins_available_authorizations: Permet a les administradores verificar manualment a les participants amb aquests verificadors
+        awesome_admins_available_authorizations: Permet a les administradores verificar
+          manualment a les participants amb aquests verificadors
       user:
         user_time_zone: Zona horària personal
     errors:
@@ -89,8 +110,10 @@ ca:
             base:
               category_not_found: No s'ha trobat la categoria
             name:
-              cannot_change_default_item_name: El nom d'un element predefinit no es pot canviar
-              invalid_format: El nom només pot contenir lletres, números, guions i guions baixos (sense espais)
+              cannot_change_default_item_name: El nom d'un element predefinit no es
+                pot canviar
+              invalid_format: El nom només pot contenir lletres, números, guions i
+                guions baixos (sense espais)
   decidim:
     admin:
       actions:
@@ -113,6 +136,11 @@ ca:
       menu:
         admin_accountability: Històric d'administradores
         decidim_awesome: Decidim Awesome
+    authorization_handlers:
+      awesome_authorization_handler:
+        fields:
+          awesome_authorization_groups: 'Grups permesos:'
+          groups: Grups
     components:
       awesome_iframe:
         name: Iframe en pantalla completa
@@ -120,7 +148,10 @@ ca:
           global:
             announcement: Anunci
             iframe: Codi Iframe
-            iframe_help: 'Posa el teu codi com a HTML: <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe>. S''eliminarà qualsevol altre element HTML que no sigui l''Iframe. Assegureu-vos de fer servir 100% a l''amplada (width="100%") per tal d''omplir la pantalla.'
+            iframe_help: 'Posa el teu codi com a HTML: <iframe width="100%" height="700"
+              frameBorder="0" allowFullscreen src="..."></iframe>. S''eliminarà qualsevol
+              altre element HTML que no sigui l''Iframe. Assegureu-vos de fer servir
+              100% a l''amplada (width="100%") per tal d''omplir la pantalla.'
             viewport_width: Limita l'amplada màxima com a la resta de l'aplicació
           step:
             announcement: Anunci
@@ -132,14 +163,17 @@ ca:
             announcement: Anunci
             collapse: Inicia amb el menú col·lapsat
             map_center: Punt central del mapa (Latitud, Longitud)
-            map_center_help: 'Utilitza un punt per marcar els decimals (pe: 41.38879, 2.15899). Deixa aquest camp buit per incloure automàticament tots els marcadors'
+            map_center_help: 'Utilitza un punt per marcar els decimals (pe: 41.38879,
+              2.15899). Deixa aquest camp buit per incloure automàticament tots els
+              marcadors'
             map_height: Alçada del mapa (px)
             map_zoom: Zoom (qualsevol nombre entre 0 i 18)
-            map_zoom_help: Només s’aplica si es defineix el punt central del mapa
+            map_zoom_help: Només s'aplica si es defineix el punt central del mapa
             menu_amendments: Mostrar esmenes
             menu_hashtags: Mostrar el menú de cerca per hashtags
             menu_meetings: Mostrar trobades
-            menu_merge_components: Unifica tots els components del mateix tipus al menú
+            menu_merge_components: Unifica tots els components del mateix tipus al
+              menú
             menu_taxonomies: Mostrar el menú de cerca per taxonomies
             taxonomy_filters: Selecciona els filtres pel component
             taxonomy_filters_add: Afegeix un filtre
@@ -155,7 +189,11 @@ ca:
         settings:
           global:
             awesome_voting_manifest: Tipus de suport
-            awesome_voting_manifest_help_html: <strong class="text-alert">Sigues conscient que canviar aquesta configuració enmig d'un període de votació pot donar lloc a resultats inexactes o inesperats.</strong><br>També tingueu en compte que aquesta configuració només es pot editar si el component encara no té cap suport.
+            awesome_voting_manifest_help_html: <strong class="text-alert">Sigues conscient
+              que canviar aquesta configuració enmig d'un període de votació pot donar
+              lloc a resultats inexactes o inesperats.</strong><br>També tingueu en
+              compte que aquesta configuració només es pot editar si el component
+              encara no té cap suport.
             awesome_voting_manifest_options:
               default: Vot simple (suports per defecte)
               voting_cards: Votació amb targetes de colors
@@ -167,15 +205,26 @@ ca:
             limit_pending_amendments: Permetre només una esmena pendent a cada proposta.
             sort_orders_enabled: Opcions d'ordenació actives
             voting_cards_box_title: Títol per la cabina de votació
-            voting_cards_box_title_help: L'opció per defecte és 'Votar a aquesta proposta'. Utilitzeu '-' per amagar-la.
-            voting_cards_instructions: Instruccions d'ajuda en el suport/votació (finestra modal que es pot tancar)
-            voting_cards_instructions_help: L'opció per defecte és 'Llegeix les normes de la votació amb atenció per entendre com s'utilitzarà el teu vot per %{organization}"
+            voting_cards_box_title_help: L'opció per defecte és "Votar a aquesta proposta".
+              Utilitzeu "-" per amagar-la.
+            voting_cards_instructions: Instruccions d'ajuda en el suport/votació (finestra
+              modal que es pot tancar)
+            voting_cards_instructions_help: L'opció per defecte és "Llegeix les normes
+              de la votació amb atenció per entendre com s'utilitzarà el teu vot per
+              %{organization}".
             voting_cards_show_abstain: Afegeix l'opció d'abstenció
-            voting_cards_show_modal_help: Mostra la finestra modal d'instruccions/ajuda quan es faci clic al suport
+            voting_cards_show_modal_help: Mostra la finestra modal d'instruccions/ajuda
+              quan es faci clic al suport
           step:
-            awesome_votes_enabled_by_status: Restringeix la votació per estat de la proposta
-            awesome_votes_enabled_by_status_help: Quan està activat, la votació només es permet a les propostes amb els estats seleccionats. Les propostes en altres estats no acceptaran vots. Deixeu-ho buit per permetre la votació a totes les propostes, independentment de l'estat.
+            awesome_votes_enabled_by_status: Restringeix la votació per estat de la
+              proposta
+            awesome_votes_enabled_by_status_help: Quan està activat, la votació només
+              es permet a les propostes amb els estats seleccionats. Les propostes
+              en altres estats no acceptaran vots. Deixeu-ho buit per permetre la
+              votació a totes les propostes, independentment de l'estat.
             awesome_votes_enabled_states: Estats permesos per als vots
+            awesome_votes_enabled_states_help: Altres estats estaran disponibles després
+              de guardar el component.
             default_sort_order_options:
               az: A-Z (Alfabètic)
               supported_first: Votades per mi primer
@@ -184,7 +233,8 @@ ca:
     decidim_awesome:
       account:
         timezone_select:
-          time_zone_helper: Fes servir la teva zona horària personal per mostrar les dates d'acord amb la teva localització quan hagis iniciat sessió.
+          time_zone_helper: Fes servir la teva zona horària personal per mostrar les
+            dates d'acord amb la teva localització quan hagis iniciat sessió.
       admin:
         actions: Accions
         admin_accountability:
@@ -202,11 +252,19 @@ ca:
               csv: CSV
               json: JSON
               xlsx: XLSX
-            notice: L'exportació s'està enviant. Rebràs un correu electrònic quan estigui llest.
+            notice: L'exportació s'està enviant. Rebràs un correu electrònic quan
+              estigui llest.
           index:
-            description: Aquí trobareu totes les participants que han tingut algun paper en l'administració d'un espai participatiu. Les administradores de plataforma no apareixen a la llista.
-            global_description: Aquí trobareu totes les participants que han tingut algun paper en l'administració de la plataforma. Les administradores d'un espai participatiu no apareixen a la llista.
-            missing_users: 'NOTA: És possible que aquesta llista no inclogui usuaris creats/eliminats abans de %{date}. Això es deu al fet que la "traçabilitat dels usuaris" es va introduir a Decidim v0.24 i aquesta instal·lació probablement és més antiga.'
+            description: Aquí trobareu totes les participants que han tingut algun
+              paper en l'administració d'un espai participatiu. Les administradores
+              de plataforma no apareixen a la llista.
+            global_description: Aquí trobareu totes les participants que han tingut
+              algun paper en l'administració de la plataforma. Les administradores
+              d'un espai participatiu no apareixen a la llista.
+            missing_users: 'NOTA: És possible que aquesta llista no inclogui usuaris
+              creats/eliminats abans de %{date}. Això es deu al fet que la "traçabilitat
+              dels usuaris" es va introduir a Decidim v0.24 i aquesta instal·lació
+              probablement és més antiga.'
             see_global: Llista global d'administradores de plataforma
             see_spaces: Llista global d'administradores d'un espai participatiu
             title: Històric d'administradores
@@ -225,27 +283,134 @@ ca:
             moderator: Moderadora
         admin_authorizations:
           authorization:
-            confirm_destroy: Estàs segur que vols eliminar aquesta verificació? Aquesta actuació pot afectar a l'accés de la participant en la plataforma.
+            confirm_destroy: Estàs segur que vols eliminar aquesta verificació? Aquesta
+              actuació pot afectar a l'accés de la participant en la plataforma.
             destroy: Eliminar
             granted_at: Concedit a %{date}
             metadata: Conté metadades? %{metadata}
           authorization_destroyed: L'autorització s'ha eliminat correctament.
           authorization_not_destroyed: La verificació no s'ha pogut eliminar!
-          authorization_transferred: 'Avís: hi ha hagut un conflicte de verificació i la verificació s''ha transferit a %{user}'
+          authorization_transferred: 'Avís: hi ha hagut un conflicte de verificació
+            i la verificació s''ha transferit a %{user}'
           conflict: Hi ha un conflicte amb una autorització existent
-          conflict_help_html: "Heu de resoldre el conflicte amb la participant %{user} abans de poder autoritzar la participant amb aquesta autorització.\n<br><br>\nEs produeix un conflicte de verificació quan un altre usuari té les mateixes dades que la participant que esteu intentant autoritzar.\nPodeu resoldre aquest conflicte eliminant l'autorització conflictiva de l'altre participant o utilitzant dades diferents per a aquest participant."
+          conflict_help_html: |-
+            Heu de resoldre el conflicte amb la participant %{user} abans de poder autoritzar la participant amb aquesta autorització.
+            <br><br>
+            Es produeix un conflicte de verificació quan un altre usuari té les mateixes dades que la participant que esteu intentant autoritzar.
+            Podeu resoldre aquest conflicte eliminant l'autorització conflictiva de l'altre participant o utilitzant dades diferents per a aquest participant.
           edit:
             authorize: Autoritza %{user} amb %{name}
-            do_it_if_sure: Feu-ho només si esteu segur que la participant té aquesta autorització.
+            do_it_if_sure: Feu-ho només si esteu segur que la participant té aquesta
+              autorització.
             force_verification: Força la verificació amb les dades actuals
-            force_verification_help: La verificació ha fallat, però podeu forçar-la si esteu segur que la participant té aquesta autorització.
+            force_verification_help: La verificació ha fallat, però podeu forçar-la
+              si esteu segur que la participant té aquesta autorització.
             force_verification_reason: 'Doneu un motiu per forçar la verificació:'
-            warning: 'Avís: en forçar aquesta autorització, esteu forçant l''estat d''autorització actual del participant.'
+            warning: 'Avís: en forçar aquesta autorització, esteu forçant l''estat
+              d''autorització actual del participant.'
           user_authorized: "%{user} s'ha autoritzat correctament amb %{name}"
           user_not_authorized: "%{user} no s'ha pogut autoritzar amb %{name}"
+        awesome_authorization_properties:
+          create:
+            error: Error en actualitzar les propietats d'autorització! %{error}
+            success: Propietats d'autorització actualitzades correctament
+          index:
+            cancel: Cancel·la
+            description: Descripció de l'autorització
+            description_help: Aquest text es mostra a sota del títol de l'autorització
+              a la targeta de verificació quan els usuaris encara no estan verificats.
+              Podeu utilitzar-lo per explicar per què es requereix aquesta autorització.
+            name: Nom de l'autorització
+            name_help: Aquest títol es mostra a la targeta de verificació.
+            save: Desa
+            title: Edita les propietats de l'autorització
+        awesome_authorization_users:
+          create:
+            error: Error en actualitzar la llista de membres! %{error}
+            success: Llista de membres actualitzada correctament (%{count} nous usuaris
+              afegits)
+          destroy:
+            success: Membre eliminat correctament
+          index:
+            actions: Accions
+            authorized_user: Usuari autoritzat
+            confirm_remove: Esteu segur que voleu eliminar aquest membre?
+            email: Correu electrònic
+            new: Afegeix nous membres
+            no_members: Aquest grup encara no té membres
+            not_synced_html: Les autoritzacions d'usuari no estan sincronitzades amb
+              aquest grup d'autorització. %{sync} per actualitzar la llista de membres.
+            remove: Elimina membre
+            sync: Sincronitza autoritzacions
+            title: Gestiona membres per "%{group}"
+            user: Usuari de Decidim
+          new:
+            create: Afegeix membres
+            emails_help: Deixa anar els correus aquí, només es consideraran com a
+              correus les paraules amb un "@".
+            or: o
+            remove_previous_members: Elimina els membres anteriors del grup (%{count}
+              usuaris)
+            title: Afegeix membres a "%{group}"
+          update:
+            empty: No s'han trobat correus a l'entrada o al fitxer CSV. Si us plau,
+              afegeix almenys un correu.
+        awesome_authorizations:
+          create:
+            error: Error en crear el grup d'autorització! %{error}
+            success: Grup d'autorització creat correctament
+          destroy:
+            success: Grup d'autorització eliminat correctament
+          edit:
+            save: Desa
+            title: Edita el grup d'autorització
+          form:
+            name_help: Aquest títol es mostra a la targeta de verificació.
+            purpose_help: Aquest text es mostra a la targeta de verificació per explicar
+              el propòsit de l'autorització o el seu ús previst.
+          index:
+            authorization_groups: Grups d'autorització
+            authorization_properties: Propietats de l'autorització
+            create_group: Crea un nou grup d'autorització
+            description_html: Utilitza aquesta secció per crear grups de persones,
+              cadascun amb permisos específics als components de Decidim.<br>Aquests
+              grups seran autoritzats automàticament per als nous registres i sempre
+              que es actualitzi aquesta llista.
+            edit_properties: Edita les propietats de l'autorització
+            not_available: Per utilitzar aquesta funció, heu d'activar el flux de
+              treball d'autorització awesome al panell %{system} d'administració.
+            properties_description_html: Utilitza aquesta autorització als components
+              per restringir l'accés a grups específics d'usuaris. Quan estigui seleccionat,
+              pots triar els grups permesos.
+            system_link: Administrador del sistema
+            title: Autoritzacions Awesome
+          list_authorization_groups:
+            actions: Accions
+            confirm_destroy: Esteu segur que voleu eliminar aquest grup d'autorització?
+              Tots els usuaris d'aquest grup perdran la seva autorització.
+            destroy: Elimina el grup
+            edit: Edita el grup
+            granted_count: Autoritzats
+            group_name: Nom del grup
+            manage: Gestiona membres
+            members_count: Usuaris
+            no_groups: Encara no s'han creat grups d'autorització
+            out_of_sync: No sincronitzat
+            sync: Sincronitza autoritzacions
+            sync_status: Estat de sincronització
+            synced: Sincronitzat
+          new:
+            create: Crea
+            title: Nou grup d'autorització
+          sync:
+            success: La sincronització ha començat
+          update:
+            error: Error en actualitzar el grup d'autorització! %{error}
+            success: Grup d'autorització actualitzat correctament
         checks:
           index:
-            admin_head_tags: Etiquetes Awesome incloses a la capçalera de l'aplicació d'administració
+            admin_head_tags: Etiquetes Awesome incloses a la capçalera de l'aplicació
+              d'administració
             awesome_update_available: 'Hi ha una nova versió disponible: %{latest_version}'
             awesome_version: Versió de Decidim Awesome %{version}
             decidim-admin: Del mòdul Admin
@@ -254,21 +419,29 @@ ca:
             decidim-core: Del mòdul Core
             decidim-participatory_processes: Del mòdul de Participatory Processes
             decidim-proposals: Del mòdul Proposals
+            decidim-verifications: Del mòdul Verifications
             decidim_update_available: 'Hi ha una nova versió disponible: %{latest_version}'
             decidim_version: Versió de Decidim %{version}
             errors:
-              CSS: La capçalera no conté les entrades necessàries <link> al full d'estil. Per resoldre-ho, es poden afegir manualment al fitxer personalitzat _head.html.erb
-              JavaScript: La capçalera no conté les entrades necessàries <script> de Javascript. Per resoldre-ho, es poden afegir manualment al fitxer personalitzat admin/_header.html.erb
+              CSS: La capçalera no conté les entrades necessàries <link> al full d'estil.
+                Per resoldre-ho, es poden afegir manualment al fitxer personalitzat
+                _head.html.erb
+              JavaScript: La capçalera no conté les entrades necessàries <script>
+                de Javascript. Per resoldre-ho, es poden afegir manualment al fitxer
+                personalitzat admin/_header.html.erb
             head_tags: Etiquetes Awesome incloses a la capçalera de l'aplicació
             link_admins: Entra al panell /system
             view_release: Veure les notes de la versió
         config:
           anonymous: Usuaris no identificats
-          caution: 'NOTA: Aquesta funció modifica en gran mesura alguns comportaments predeterminats que podrien provocar resultats inesperats. Utilitzeu-lo amb precaució!'
+          caution: 'NOTA: Aquesta funció modifica en gran mesura alguns comportaments
+            predeterminats que podrien provocar resultats inesperats. Utilitzeu-lo
+            amb precaució!'
           constraints:
             add_condition: Afegeix una restricció
             always: Sempre
-            cannot_be_destroyed: Disculpa, però això no es pot eliminar. Aquesta configuració necessita almenys una restricció.
+            cannot_be_destroyed: Disculpa, però això no es pot eliminar. Aquesta configuració
+              necessita almenys una restricció.
             delete: Esborra
             edit: Edita
             title: 'S''aplica només en aquests casos:'
@@ -277,7 +450,7 @@ ca:
             success: Grup d'autorització %{key} creat correctament
           create_proposal_custom_field:
             error: Error en crear una nova caixa de "camps personalitzats"! %{error}
-            success: 'Caixa de "camps personalitzats" %{key} creada correctament'
+            success: Caixa de "camps personalitzats" %{key} creada correctament
           create_scoped_admin:
             error: Error en crear una nou grup d'administradores! %{error}
             success: Grup d'administradores %{key} creat correctament
@@ -289,18 +462,22 @@ ca:
             success: Grup d'autorització %{key} eliminat correctament
           destroy_proposal_custom_field:
             error: Error en eliminar la caixa de "camps personalitzats"! %{error}
-            success: 'Caixa de "camps personalitzats" %{key} eliminada correctament'
+            success: Caixa de "camps personalitzats" %{key} eliminada correctament
           destroy_scoped_admin:
             error: Error en eliminar el grup d'administradores! %{error}
             success: Grup d'administradores %{key} eliminat correctament
           destroy_scoped_style:
             error: Error en eliminar una caixa CSS! %{error}
             success: Caixa CSS %{key} eliminada correctament
+          disabled: Desactivat
+          enabled: Activat
           force_authorizations: Grups d'autoritzacions
           form:
             additional_proposal_sortings:
               enable_all: Activa totes les opcions d'ordenació addicionals
-              help: Aquestes opcions d'ordenació addicionals s'afegiran a les que hi ha per defecte. També recordeu que podeu tria l'ordre per defecte de les propostes a la configuració del component.
+              help: Aquestes opcions d'ordenació addicionals s'afegiran a les que
+                hi ha per defecte. També recordeu que podeu tria l'ordre per defecte
+                de les propostes a la configuració del component.
               title: Personalitza les opcions d'ordenació per la llista de propostes
             edit_label: Canviar el nom de l'etiqueta
             errors:
@@ -308,46 +485,107 @@ ca:
               incorrect_json: 'La sintaxi JSON de la caixa #%{key} és invàlida'
             force_authorization_help_text: Text d'ajuda per la pàgina d'autorització
             help:
-              allow_images_in_editors: Això afegirà una icona per pujar arxius a l'editor HTML
-              allow_images_in_proposals: Això permetrà pujar imatges a l'editor de propostes, disponible per qualsevol usuari
-              allow_videos_in_editors: Això afegirà una icona per enllaçar vídeos a l'editor HTML
-              auto_save_forms: Això farà servir l'emmagatzematge local del navegador per desar automàticament les dades introduïdes pels usuaris a les enquestes i altres formularis mentre les omplen. Les dades es restauraran en una futura visita amb el mateix navegador en cas que no s'enviï el formulari. Si s’envia el formulari, s’eliminaran les dades locals. Si els usuaris eliminen les seves dades del navegador, tampoc es restauraran.
-              drag_and_drop_supported: Quan es pugin imatges, es pot fer a través del mètode de "arrossegar i deixar anar". Les imatges seran pujades al servidor i inserides com recursos externs (no es fa servir codificació en línia base64).
-              force_authorization_help_text: Afegeix un text personalitzat per explicar per què cal l'autorització. Assegureu-vos també d'afegir un mode de contacte en cas que les usuàries necessitin ajuda.
-              hashcash_i18n_key: 'Podeu personalitzar el text del botó que es mostra als usuaris a les pàgines d''iniciar sessió/registre amb la clau i18n %{key}'
+              allow_images_in_editors: Això afegirà una icona per pujar arxius a l'editor
+                HTML
+              allow_images_in_proposals: Això permetrà pujar imatges a l'editor de
+                propostes, disponible per qualsevol usuari
+              allow_videos_in_editors: Això afegirà una icona per enllaçar vídeos
+                a l'editor HTML
+              auto_save_forms: Això farà servir l'emmagatzematge local del navegador
+                per desar automàticament les dades introduïdes pels usuaris a les
+                enquestes i altres formularis mentre les omplen. Les dades es restauraran
+                en una futura visita amb el mateix navegador en cas que no s'enviï
+                el formulari. Si s'envia el formulari, s'eliminaran les dades locals.
+                Si els usuaris eliminen les seves dades del navegador, tampoc es restauraran.
+              drag_and_drop_supported: Quan es pugin imatges, es pot fer a través
+                del mètode de "arrossegar i deixar anar". Les imatges seran pujades
+                al servidor i inserides com recursos externs (no es fa servir codificació
+                en línia base64).
+              force_authorization_help_text: Afegeix un text personalitzat per explicar
+                per què cal l'autorització. Assegureu-vos també d'afegir un mode de
+                contacte en cas que les usuàries necessitin ajuda.
+              hashcash_i18n_key: Podeu personalitzar el text del botó que es mostra
+                als usuaris a les pàgines d'iniciar sessió/registre amb la clau i18n
+                %{key}
               hashcash_login: |
                 Protegeix les aplicacions Rails contra bots i atacs de força bruta sense molestar els humans.
                 Hashcash és un sistema de prova de treball que requereix que els usuaris resolguin un trencaclosques computacional (realitzat automàticament pel navegador) abans de poder registrar-se.
-              hashcash_login_bits: Aquest paràmetre defineix el nombre de bits que l'algoritme Hashcash utilitzarà per generar la prova de treball. Es recomana utilitzar un valor entre 16 (fàcil) i 30 (extremadament difícil) bits. El valor per defecte per als formularis d'inici de sessió és %{bits} bits.
+              hashcash_login_bits: Aquest paràmetre defineix el nombre de bits que
+                l'algoritme Hashcash utilitzarà per generar la prova de treball. Es
+                recomana utilitzar un valor entre 16 (fàcil) i 30 (extremadament difícil)
+                bits. El valor per defecte per als formularis d'inici de sessió és
+                %{bits} bits.
               hashcash_signup: |
                 Protegeix les aplicacions Rails contra bots i atacs de força bruta sense molestar els humans.
                 Hashcash és un sistema de prova de treball que requereix que els usuaris resolguin un trencaclosques computacional (realitzat automàticament pel navegador) abans de poder registrar-se.
-              hashcash_signup_bits: Aquest paràmetre defineix el nombre de bits que l'algoritme Hashcash utilitzarà per generar la prova de treball. Es recomana utilitzar un valor entre 16 (fàcil) i 30 (extremadament difícil) bits. El valor per defecte per als formularis de registre és %{bits} bits.
-              intergram_about: Intergram utilitza el Telegram Messenger per gestionar un widget de xat en viu de suport incrustat a la part inferior de la pàgina.
-              intergram_config: 'Convida a la <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> al teu grup o comença un xat amb ella directament. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
-              original_editor_override: Desde la versió 0.26, és possible (per administradors només) pujar imatges als editors de text enriquit. Per tant, les opcions d'imatges disponibles en aquesta pàgina només afecten a la part pública de la web (les administradores sempre ho tenen activat).
-              proposal_custom_fields: Crea camps personalitzats per a propostes que només s'apliquin a determinades parts de la web pública (per fer-ho, utilitza l'editor de restriccions)
-              proposal_custom_fields_example: Les dades son desades en un objecte XML fent servir atributs compatibles amb HTML (elements DL, DT, DD) que reemplacen el "cos" de la proposat normal.
-              proposal_custom_fields_translations: "Les etiquetes, el text d'ajuda, els \"placeholders\" i els valors predeterminats poden utilitzar les traduccions personalitzades de l'aplicació.\nPer això, en comptes d'utilitzar un text literal, utilitzeu la clau i18n (ha de contenir almenys un punt).\nPer exemple:\n- \"activemodel.attributes.proposal.title\" en lloc de \"Títol\"\n- \"activemodel.attributes.proposal.address\" en lloc de \"Address\"\nO utilitzeu les vostres pròpies claus en combinació amb altres eines per definir traduccions (p. ex.: utilitzant el mòdul Term Customizer):\n- \"myapp.custom_fields.bio\" en lloc de \"Biografia\""
-              proposal_private_custom_fields: Similar als camps públics, però aquesta informació no es revelarà públicament (només hi tindran accés els administradors).
+              hashcash_signup_bits: Aquest paràmetre defineix el nombre de bits que
+                l'algoritme Hashcash utilitzarà per generar la prova de treball. Es
+                recomana utilitzar un valor entre 16 (fàcil) i 30 (extremadament difícil)
+                bits. El valor per defecte per als formularis de registre és %{bits}
+                bits.
+              intergram_about: Intergram utilitza el Telegram Messenger per gestionar
+                un widget de xat en viu de suport incrustat a la part inferior de
+                la pàgina.
+              intergram_config: Convida a la <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram
+                bot</a> al teu grup o comença un xat amb ella directament. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+
+                info</a>
+              original_editor_override: Desde la versió 0.26, és possible (per administradors
+                només) pujar imatges als editors de text enriquit. Per tant, les opcions
+                d'imatges disponibles en aquesta pàgina només afecten a la part pública
+                de la web (les administradores sempre ho tenen activat).
+              proposal_custom_fields: Crea camps personalitzats per a propostes que
+                només s'apliquin a determinades parts de la web pública (per fer-ho,
+                utilitza l'editor de restriccions)
+              proposal_custom_fields_example: Les dades son desades en un objecte
+                XML fent servir atributs compatibles amb HTML (elements DL, DT, DD)
+                que reemplacen el "cos" de la proposat normal.
+              proposal_custom_fields_translations: |-
+                Les etiquetes, el text d'ajuda, els "placeholders" i els valors predeterminats poden utilitzar les traduccions personalitzades de l'aplicació.
+                Per això, en comptes d'utilitzar un text literal, utilitzeu la clau i18n (ha de contenir almenys un punt).
+                Per exemple:
+                - "activemodel.attributes.proposal.title" en lloc de "Títol"
+                - "activemodel.attributes.proposal.address" en lloc de "Address"
+                O utilitzeu les vostres pròpies claus en combinació amb altres eines per definir traduccions (p. ex.: utilitzant el mòdul Term Customizer):
+                - "myapp.custom_fields.bio" en lloc de "Biografia"
+              proposal_private_custom_fields: Similar als camps públics, però aquesta
+                informació no es revelarà públicament (només hi tindran accés els
+                administradors).
               proposal_private_custom_fields_translations: |
                 Els camps personalitzats privats es mostren en un quadre diferent amb aquest text d'informació:
                 %{warning}
                 Aquest text es pot personalitzar amb una traducció personalitzada utilitzant la clau:
                 %{key}
-              scoped_admin_styles: Tingues en compte que amagar contingut aquí pot deixar l'administrador inservible. Si us plau, actueu amb cautela.
-              scoped_admin_styles_variables: 'Pots fer servir les següents variables CSS pels colors personalitzats de l''organització:'
-              scoped_admin_styles_warning: "<strong>Atenció</strong>: Aquí podeu afegir CSS que s'aplica només en aquest administrador."
-              scoped_admins: Promou usuaries normals a administradores amb accés limitat a certes parts de la web pública (feu servir l'editor de restriccions per això). Noteu que afegir usuaries que ja tenen permisos d'administració no té cap efecte.
-              scoped_styles: Crea CSS personalitzats que només s'apliquin a determinades parts de la web pública (per fer-ho, utilitza l'editor de restriccions)
-              scoped_styles_variables: 'Pots fer servir les següents variables CSS pels colors personalitzats de l''organització:'
-              user_timezone: Això afegirà un selector al perfil d'usuari per permetre establir la zona horària. Això farà que l'usuari vegi les dates i hores segons la seva configuració local.
-              validate_body_max_caps_percent: Zero no permetrà cap majúscula, 100 obligarà a escriure-ho tot en majúscules
-              validate_body_max_marks_together: 'Limiteu el nombre de signes d''interrogació i d''exclamació que es poden escriure junts. És a dir: si és 2, aleshores ''!!!'' no es permetrà al text'
-              validate_body_min_length: Aquest nombre pot ser zero, això farà que aquest camp no sigui obligatori
-              validate_title_max_caps_percent: Zero no permetrà cap majúscula, 100 obligarà a escriure-ho tot en majúscules
-              validate_title_max_marks_together: 'Limiteu el nombre de signes d''interrogació i d''exclamació que es poden escriure junts. És a dir: si és 2, aleshores ''!!!'' no es permetrà al text'
-              validate_title_min_length: El títol sempre és obligatori i aquest número no pot ser zero
+              scoped_admin_styles: Tingues en compte que amagar contingut aquí pot
+                deixar l'administrador inservible. Si us plau, actueu amb cautela.
+              scoped_admin_styles_variables: 'Pots fer servir les següents variables
+                CSS pels colors personalitzats de l''organització:'
+              scoped_admin_styles_warning: "<strong>Atenció</strong>: Aquí podeu afegir
+                CSS que s'aplica només en aquest administrador."
+              scoped_admins: Promou usuaries normals a administradores amb accés limitat
+                a certes parts de la web pública (feu servir l'editor de restriccions
+                per això). Noteu que afegir usuaries que ja tenen permisos d'administració
+                no té cap efecte.
+              scoped_styles: Crea CSS personalitzats que només s'apliquin a determinades
+                parts de la web pública (per fer-ho, utilitza l'editor de restriccions)
+              scoped_styles_variables: 'Pots fer servir les següents variables CSS
+                pels colors personalitzats de l''organització:'
+              user_timezone: Això afegirà un selector al perfil d'usuari per permetre
+                establir la zona horària. Això farà que l'usuari vegi les dates i
+                hores segons la seva configuració local.
+              validate_body_max_caps_percent: Zero no permetrà cap majúscula, 100
+                obligarà a escriure-ho tot en majúscules
+              validate_body_max_marks_together: 'Limiteu el nombre de signes d''interrogació
+                i d''exclamació que es poden escriure junts. És a dir: si és 2, aleshores
+                ''!!!'' no es permetrà al text'
+              validate_body_min_length: Aquest nombre pot ser zero, això farà que
+                aquest camp no sigui obligatori
+              validate_title_max_caps_percent: Zero no permetrà cap majúscula, 100
+                obligarà a escriure-ho tot en majúscules
+              validate_title_max_marks_together: 'Limiteu el nombre de signes d''interrogació
+                i d''exclamació que es poden escriure junts. És a dir: si és 2, aleshores
+                ''!!!'' no es permetrà al text'
+              validate_title_min_length: El títol sempre és obligatori i aquest número
+                no pot ser zero
               verifications_html: |
                 Aquí podeu establir restriccions d'accés addicionals a espais o components participatius que obligaran els usuaris a ser verificats abans d'accedir a determinades ubicacions (per exemple: per evitar correu brossa).<br>
                 Les restriccions s'apliquen a tots els usuaris, però els administradors sempre tindran accés al tauler /admin.
@@ -356,10 +594,11 @@ ca:
               title: Validacions d'entrada per l'usuari en el camp títol de la proposta
           form_force_authorizations:
             delete: Esborra
-            force_authorizations_html: |
-              Definiu grups de verificació. Cada grup pot requerir que els usuaris siguin verificats per un o més mètodes per accedir a àrees específiques de la plataforma. 
-
-            help: Podeu definir grups de mètodes d'autorització i restringir l'accés en funció d'aquests.
+            force_authorizations_html: "Definiu grups de verificació. Cada grup pot
+              requerir que els usuaris siguin verificats per un o més mètodes per
+              accedir a àrees específiques de la plataforma. \n"
+            help: Podeu definir grups de mètodes d'autorització i restringir l'accés
+              en funció d'aquests.
             new: Afegeix un nou grup d'autorització
             remove: Elimina aquest grup d'autorització
             sure_to_remove: Estàs segura que vols eliminar aquest grup d'autoritzacions?
@@ -368,7 +607,8 @@ ca:
             delete: Esborra
             new: Afegeix una nova caixa de "camps personalitzats"
             remove: Elimina aquesta caixa de "camps personalitzats"
-            sure_to_remove: Estàs segura que vols eliminar aquesta caixa de camps personalitzats?
+            sure_to_remove: Estàs segura que vols eliminar aquesta caixa de camps
+              personalitzats?
           form_proposal_private_custom_fields:
             delete: Esborra
             new: Afegiu una nova caixa de "camps personalitzats privats"
@@ -383,7 +623,8 @@ ca:
             delete: Esborra
             new: Afegir un nou grup "d'Administradores acotades"
             remove: Elimineu aquest grup "d'Administradores acotades"
-            sure_to_remove: Estàs segura que vols eliminar aquest grup "d'Administradores acotades"?
+            sure_to_remove: Estàs segura que vols eliminar aquest grup "d'Administradores
+              acotades"?
           form_scoped_styles:
             delete: Esborra
             new: Afegeix una nova caixa CSS
@@ -401,7 +642,8 @@ ca:
             editors: Modificacions als editors
             livechat: Xat en directe
             proposal_custom_fields: 'Camps personalitzats per propostes: Camps públics'
-            proposal_private_custom_fields: 'Camps personalitzats per propostes: Camps privats'
+            proposal_private_custom_fields: 'Camps personalitzats per propostes: Camps
+              privats'
             proposals: Modificacions a propostes
             scoped_admin_styles: 'Estils personalitzats: Panell d''administració'
             scoped_styles: 'Estils personalitzats: Interfície pública'
@@ -433,7 +675,10 @@ ca:
             error: Error actualitzant la restricció
             success: Restricció actualitzada correctament
         cookie_categories:
-          cookie_management_warning_html: Tingueu en compte que Decidim obligarà la persona usuària a acceptar totes les galetes per poder mostrar iframes. Per complir amb el RGPD, assegureu-vos d'afegir a les categories corresponents totes les galetes que s'utilitzaran als iframes.
+          cookie_management_warning_html: Tingueu en compte que Decidim obligarà la
+            persona usuària a acceptar totes les galetes per poder mostrar iframes.
+            Per complir amb el RGPD, assegureu-vos d'afegir a les categories corresponents
+            totes les galetes que s'utilitzaran als iframes.
           create:
             error: S'ha produït un error en crear la categoria de galetes! %{error}
             success: Categoria de galetes creada correctament
@@ -446,15 +691,27 @@ ca:
             save: Desar
             title: Editar la categoria de galetes
           form:
-            slug_help: Identificador únic utilitzat en els scripts per referenciar aquesta categoria.
+            slug_help: Identificador únic utilitzat en els scripts per referenciar
+              aquesta categoria.
             visibility:
               hidden: Ocult
               visible: Visible
           index:
             cannot_remove_default: Les categories per defecte no es poden eliminar
-            confirm_reset: Esteu segur que voleu restablir aquesta categoria als seus valors per defecte? Això eliminarà totes les personalitzacions que hagueu fet.
-            description_html: |
-              Les categories i els elements de galetes només controlen la interfície de consentiment i la documentació.<br>Perquè les preferències siguin efectives, els scripts i serveis de tercers han d'estar configurats per carregar-se només després que s'hagi donat el consentiment.<br>Aquesta configuració addicional d'scripts no és necessària per als vídeos incrustats en iframes, ja que Decidim ja inclou una gestió de consentiment integrada per a aquestes incrustacions.<br>Seguiu la guia oficial: <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Afegir scripts que requereixen el consentiment de dades</a>.
+            confirm_reset: Esteu segur que voleu restablir aquesta categoria als seus
+              valors per defecte? Això eliminarà totes les personalitzacions que hagueu
+              fet.
+            description_html: 'Les categories i els elements de galetes només controlen
+              la interfície de consentiment i la documentació.<br>Perquè les preferències
+              siguin efectives, els scripts i serveis de tercers han d''estar configurats
+              per carregar-se només després que s''hagi donat el consentiment.<br>Aquesta
+              configuració addicional d''scripts no és necessària per als vídeos incrustats
+              en iframes, ja que Decidim ja inclou una gestió de consentiment integrada
+              per a aquestes incrustacions.<br>Seguiu la guia oficial: <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent"
+              target="_blank" rel="noopener">Afegir scripts que requereixen el consentiment
+              de dades</a>.
+
+              '
             edit: Editar categoria
             items: Elements de la categoria
             new: Nova categoria
@@ -478,69 +735,126 @@ ca:
             button: Serveis de galetes comuns
           cookie_item_presets:
             descriptions:
-              consent: S'utilitza per a la funcionalitat. Dura 2 anys, Google l'utilitza per emmagatzemar l'estat d'un usuari pel que fa a les seves eleccions de galetes. Llegiu més a Com utilitza Google les galetes
-              decidim_consent: Emmagatzema informació sobre les galetes permeses per l'usuari en aquest lloc web.
+              consent: S'utilitza per a la funcionalitat. Dura 2 anys, Google l'utilitza
+                per emmagatzemar l'estat d'un usuari pel que fa a les seves eleccions
+                de galetes. Llegiu més a Com utilitza Google les galetes
+              decidim_consent: Emmagatzema informació sobre les galetes permeses per
+                l'usuari en aquest lloc web.
               emoji_picker_recent: Emmagatzema els teus emojis seleccionats més recentment
-              facebook_fr: Utilitzat per Meta per lliurar, mesurar i millorar la rellevància dels anuncis.
-              fbp: Identifica les sessions del navegador per al seguiment de Facebook Pixel.
-              ga_gat: S'utilitza per limitar la taxa de sol·licituds enviades a Google Analytics.
-              ga_gid: S'utilitza per distingir els usuaris amb finalitats analítiques. Caduca després de 24 hores.
-              ga_main: S'utilitza per distingir els usuaris assignant-los un identificador únic.
-              ga_property: S'utilitza a GA4 per persistir l'estat de la sessió i els comptadors d'una propietat específica.
-              graphiql_doc_explorer_open: Desa si teniu obert el panell de documentació quan utilitzeu l'API GraphQL
-              graphiql_editor_flex: Desa la vostra preferència de pestanya quan utilitzeu l'API GraphQL
-              graphiql_history_pane_open: Desa si teniu obert el panell d'historial quan utilitzeu l'API GraphQL
-              graphiql_queries: Desa l'historial de les vostres consultes quan utilitzeu l'API GraphQL
-              graphiql_query: Desa la vostra darrera consulta quan utilitzeu l'API GraphQL
-              graphiql_tab_state: Desa la vostra configuració de pestanyes quan utilitzeu l'API GraphQL
-              gtm_dc: Utilitzat per Google Tag Manager per a la càrrega de l'etiqueta i el diagnòstic.
+              facebook_fr: Utilitzat per Meta per lliurar, mesurar i millorar la rellevància
+                dels anuncis.
+              fbp: Identifica les sessions del navegador per al seguiment de Facebook
+                Pixel.
+              ga_gat: S'utilitza per limitar la taxa de sol·licituds enviades a Google
+                Analytics.
+              ga_gid: S'utilitza per distingir els usuaris amb finalitats analítiques.
+                Caduca després de 24 hores.
+              ga_main: S'utilitza per distingir els usuaris assignant-los un identificador
+                únic.
+              ga_property: S'utilitza a GA4 per persistir l'estat de la sessió i els
+                comptadors d'una propietat específica.
+              graphiql_doc_explorer_open: Desa si teniu obert el panell de documentació
+                quan utilitzeu l'API GraphQL
+              graphiql_editor_flex: Desa la vostra preferència de pestanya quan utilitzeu
+                l'API GraphQL
+              graphiql_history_pane_open: Desa si teniu obert el panell d'historial
+                quan utilitzeu l'API GraphQL
+              graphiql_queries: Desa l'historial de les vostres consultes quan utilitzeu
+                l'API GraphQL
+              graphiql_query: Desa la vostra darrera consulta quan utilitzeu l'API
+                GraphQL
+              graphiql_tab_state: Desa la vostra configuració de pestanyes quan utilitzeu
+                l'API GraphQL
+              gtm_dc: Utilitzat per Google Tag Manager per a la càrrega de l'etiqueta
+                i el diagnòstic.
               gtm_debug: Emmagatzema l'estat del mode de depuració de Google Tag Manager.
-              gtm_gcl_au: Utilitzat pels serveis de Google per experimentar amb l'eficiència publicitària.
-              hcaptcha_accessibility: Emmagatzema preferències relacionades amb l'accessibilitat per als reptes d'hCaptcha.
-              hcaptcha_session: Emmagatzema l'estat temporal de la sessió d'hCaptcha per validar els reptes.
+              gtm_gcl_au: Utilitzat pels serveis de Google per experimentar amb l'eficiència
+                publicitària.
+              hcaptcha_accessibility: Emmagatzema preferències relacionades amb l'accessibilitat
+                per als reptes d'hCaptcha.
+              hcaptcha_session: Emmagatzema l'estat temporal de la sessió d'hCaptcha
+                per validar els reptes.
               jitsi_amp: Utilitzat per Amplitude Analytics
               jitsi_amplitude_unsent_identify: Utilitzat per Amplitude Analytics
               jitsi_amplitude_unset: Utilitzat per Amplitude Analytics
-              jitsi_calendar_sync: S'utilitza per a la funció de sincronització del calendari.
-              jitsi_callstats_username: S'utilitza per desar la sessió de l'usuari a Jitsi.
+              jitsi_calendar_sync: S'utilitza per a la funció de sincronització del
+                calendari.
+              jitsi_callstats_username: S'utilitza per desar la sessió de l'usuari
+                a Jitsi.
               jitsi_dropbox: S'utilitza per a la funció d'integració amb Dropbox.
-              jitsi_endpoint_id: S'utilitza amb finalitats de comunicació amb el servidor Jitsi.
+              jitsi_endpoint_id: S'utilitza amb finalitats de comunicació amb el servidor
+                Jitsi.
               jitsi_known_domains: Desa una llista de dominis coneguts
               jitsi_language: Desa la vostra preferència d'idioma
               jitsi_prejoin: S'utilitza per a la funció de pantalla prèvia a la unió.
               jitsi_recent_list: S'utilitza per a la funció de llista recent.
               jitsi_settings: S'utilitza per desar la vostra configuració de Jitsi.
-              jitsi_video_quality: S'utilitza per a la funció d'emmagatzematge persistent de la qualitat del vídeo.
+              jitsi_video_quality: S'utilitza per a la funció d'emmagatzematge persistent
+                de la qualitat del vídeo.
               jitsi_virtual_background: S'utilitza per a la funció de fons de vídeo.
-              linkedin_li_gc: Emmagatzema l'estat del consentiment per als serveis de LinkedIn.
-              linkedin_lidc: Utilitzat per LinkedIn per a l'encaminament i l'equilibri de càrrega.
-              linkedin_user_match_history: Fa un seguiment del temps d'interacció amb l'anunci i l'atribució de conversions per a les campanyes de LinkedIn.
-              maps_1p_jar: Emmagatzema l'ús/preferències de Google Maps i els senyals de personalització dels anuncis.
-              maps_consent: Emmagatzema l'estat del consentiment de l'usuari per als serveis de Google quan s'utilitzen mapes incrustats.
-              maps_nid: Emmagatzema les preferències de Google Maps i la informació del navegador relacionada amb la seguretat.
-              matomo_mtm_consent: Emmagatzema l'estat del consentiment de l'usuari per al seguiment de Matomo.
-              matomo_pk_id: S'utilitza per emmagatzemar un identificador de visitant únic i identificar els visitants que tornen.
-              matomo_pk_ref: S'utilitza per emmagatzemar informació d'atribució (el referent que ha portat l'usuari al lloc web).
-              matomo_pk_ses: S'utilitza per emmagatzemar dades temporals de sessió per a la visita actual.
-              osm_location: Emmagatzema els valors per defecte d'ubicació/zoom del mapa per a les interaccions amb OpenStreetMap.
-              osm_session: Emmagatzema dades temporals de sessió per a les interaccions dels usuaris d'OpenStreetMap.
-              osm_totp_token: Emmagatzema dades temporals de testimonis relacionats amb el 2FA per als fluxos de treball del compte d'OpenStreetMap.
-              pref: S'utilitza per a la funcionalitat. YouTube utilitza aquesta galeta per emmagatzemar informació com la vostra configuració de pàgina preferida i les preferències de reproducció com ara eleccions explícites d'autoreproducció, contingut aleatori i mida del reproductor. Llegiu més a Com utilitza Google les galetes
-              recaptcha_grecaptcha: Utilitzat per reCAPTCHA per proporcionar protecció contra el correu brossa i anàlisi de riscos.
-              recaptcha_rc_a: Emmagatzema metadades d'anàlisi de riscos de reCAPTCHA a l'emmagatzematge del navegador.
-              recaptcha_rc_c: Emmagatzema metadades de repte/sessió de reCAPTCHA a l'emmagatzematge del navegador.
-              remember_user_token: Permet mantenir la sessió oberta si feu clic a "Recorda'm" en iniciar la sessió.
-              session_id: Permet que els llocs web recordin l'usuari dins d'un lloc web quan es mouen entre pàgines web.
+              linkedin_li_gc: Emmagatzema l'estat del consentiment per als serveis
+                de LinkedIn.
+              linkedin_lidc: Utilitzat per LinkedIn per a l'encaminament i l'equilibri
+                de càrrega.
+              linkedin_user_match_history: Fa un seguiment del temps d'interacció
+                amb l'anunci i l'atribució de conversions per a les campanyes de LinkedIn.
+              maps_1p_jar: Emmagatzema l'ús/preferències de Google Maps i els senyals
+                de personalització dels anuncis.
+              maps_consent: Emmagatzema l'estat del consentiment de l'usuari per als
+                serveis de Google quan s'utilitzen mapes incrustats.
+              maps_nid: Emmagatzema les preferències de Google Maps i la informació
+                del navegador relacionada amb la seguretat.
+              matomo_mtm_consent: Emmagatzema l'estat del consentiment de l'usuari
+                per al seguiment de Matomo.
+              matomo_pk_id: S'utilitza per emmagatzemar un identificador de visitant
+                únic i identificar els visitants que tornen.
+              matomo_pk_ref: S'utilitza per emmagatzemar informació d'atribució (el
+                referent que ha portat l'usuari al lloc web).
+              matomo_pk_ses: S'utilitza per emmagatzemar dades temporals de sessió
+                per a la visita actual.
+              osm_location: Emmagatzema els valors per defecte d'ubicació/zoom del
+                mapa per a les interaccions amb OpenStreetMap.
+              osm_session: Emmagatzema dades temporals de sessió per a les interaccions
+                dels usuaris d'OpenStreetMap.
+              osm_totp_token: Emmagatzema dades temporals de testimonis relacionats
+                amb el 2FA per als fluxos de treball del compte d'OpenStreetMap.
+              pref: S'utilitza per a la funcionalitat. YouTube utilitza aquesta galeta
+                per emmagatzemar informació com la vostra configuració de pàgina preferida
+                i les preferències de reproducció com ara eleccions explícites d'autoreproducció,
+                contingut aleatori i mida del reproductor. Llegiu més a Com utilitza
+                Google les galetes
+              recaptcha_grecaptcha: Utilitzat per reCAPTCHA per proporcionar protecció
+                contra el correu brossa i anàlisi de riscos.
+              recaptcha_rc_a: Emmagatzema metadades d'anàlisi de riscos de reCAPTCHA
+                a l'emmagatzematge del navegador.
+              recaptcha_rc_c: Emmagatzema metadades de repte/sessió de reCAPTCHA a
+                l'emmagatzematge del navegador.
+              remember_user_token: Permet mantenir la sessió oberta si feu clic a
+                "Recorda'm" en iniciar la sessió.
+              session_id: Permet que els llocs web recordin l'usuari dins d'un lloc
+                web quan es mouen entre pàgines web.
               turnstile_cf_bm: Ajuda Cloudflare a detectar i mitigar el trànsit automatitzat.
-              turnstile_cf_clearance: Desa la prova que una visitant ha superat un repte de seguretat previ.
-              turnstile_cfuvid: Ajuda Cloudflare a distingir usuaris individuals que comparteixen la mateixa adreça IP.
-              vimeo_player: Emmagatzema les preferències del reproductor de Vimeo com ara el volum, la qualitat o el comportament d'autoreproducció.
-              vimeo_vuid: Emmagatzema un identificador únic de visitant de Vimeo utilitzat per a analítica.
-              visitor_info1_live: Utilitzat per a funcionalitat, analítica, publicitat i personalització. Llegiu més a Com utilitza Google les galetes
-              ysc: Utilitzat per a la seguretat. Dura la durada de la sessió de navegació d'un usuari. S'utilitza per garantir que les sol·licituds dins d'una sessió de navegació les faci l'usuari, i no altres llocs. Aquesta galeta evita que llocs maliciosos actuïn en nom d'un usuari sense el seu coneixement. Llegiu més a Com utilitza Google les galetes
-              yt_remote_connected_devices: Emmagatzema la llista de dispositius connectats per als controls del reproductor de YouTube.
-              yt_remote_device_id: Emmagatzema un identificador de dispositiu per a les interaccions remotes del reproductor de YouTube.
-              ytidb_last_result_entry_key: Emmagatzema les darreres metadades dels resultats del reproductor de YouTube a l'emmagatzematge local.
+              turnstile_cf_clearance: Desa la prova que una visitant ha superat un
+                repte de seguretat previ.
+              turnstile_cfuvid: Ajuda Cloudflare a distingir usuaris individuals que
+                comparteixen la mateixa adreça IP.
+              vimeo_player: Emmagatzema les preferències del reproductor de Vimeo
+                com ara el volum, la qualitat o el comportament d'autoreproducció.
+              vimeo_vuid: Emmagatzema un identificador únic de visitant de Vimeo utilitzat
+                per a analítica.
+              visitor_info1_live: Utilitzat per a funcionalitat, analítica, publicitat
+                i personalització. Llegiu més a Com utilitza Google les galetes
+              ysc: Utilitzat per a la seguretat. Dura la durada de la sessió de navegació
+                d'un usuari. S'utilitza per garantir que les sol·licituds dins d'una
+                sessió de navegació les faci l'usuari, i no altres llocs. Aquesta
+                galeta evita que llocs maliciosos actuïn en nom d'un usuari sense
+                el seu coneixement. Llegiu més a Com utilitza Google les galetes
+              yt_remote_connected_devices: Emmagatzema la llista de dispositius connectats
+                per als controls del reproductor de YouTube.
+              yt_remote_device_id: Emmagatzema un identificador de dispositiu per
+                a les interaccions remotes del reproductor de YouTube.
+              ytidb_last_result_entry_key: Emmagatzema les darreres metadades dels
+                resultats del reproductor de YouTube a l'emmagatzematge local.
             explanations:
               cloudflare_turnstile: |-
                 Afegeix aquestes galetes quan Cloudflare Turnstile està habilitat per protegir els formularis davant d'abusos i trànsit automatitzat. Donen suport a la detecció de bots, la validació de sessió i la continuïtat del repte.
@@ -663,15 +977,29 @@ ca:
                 one: YouTube sense galetes (%{count} galeta)
                 other: YouTube sense galetes (%{count} galetes)
             services:
+              cloudflare_turnstile: Cloudflare Turnstile
               decidim_essential: Aquest lloc web
               emoji_picker: Aquest lloc web
+              facebook_pixel: Meta (Facebook)
+              google_analytics: Google Analytics
+              google_maps_embeds: Google Maps
+              google_tag_manager: Google Tag Manager
               graphiql: Aquest lloc web
+              hcaptcha: hCaptcha
+              jitsi_meet: Jitsi Meet
+              linkedin_insight: LinkedIn
+              matomo: Matomo
+              openstreetmap_tiles: OpenStreetMap
+              recaptcha: Google reCAPTCHA
+              vimeo_embeds: Vimeo
+              youtube_embeds: YouTube
               youtube_nocookie: YouTube (mode de privadesa millorada)
           create:
             error: S'ha produït un error en crear l'element de galeta! %{error}
             success: Element de galeta creat correctament
           create_preset:
-            error: S'ha produït un error en afegir l'element de galeta predefinit! %{error}
+            error: S'ha produït un error en afegir l'element de galeta predefinit!
+              %{error}
             not_found: No s'ha trobat el valor predefinit
             success: Element de galeta predefinit afegit correctament
           destroy:
@@ -682,14 +1010,21 @@ ca:
             save: Desar
             title: Editar l'element de galeta
           form:
-            description_item_help: Indica el propòsit d'aquesta galeta i la informació que emmagatzema
-            expiration_item_help: Temps de caducitat de la galeta. Això és només informatiu i no afectarà el temps real de caducitat de la galeta.
-            service_item_help: Aquesta és una descripció breu que indica on s'utilitza (per exemple "Aquest lloc web", "Vídeos d'Youtube", "Reunions de Jitsi", etc.)
-            title_item_help: Podeu trobar les galetes utilitzant l'inspector (secció d'emmagatzematge). No ha de contenir espais.
+            description_item_help: Indica el propòsit d'aquesta galeta i la informació
+              que emmagatzema
+            expiration_item_help: Temps de caducitat de la galeta. Això és només informatiu
+              i no afectarà el temps real de caducitat de la galeta.
+            service_item_help: Aquesta és una descripció breu que indica on s'utilitza
+              (per exemple "Aquest lloc web", "Vídeos d'Youtube", "Reunions de Jitsi",
+              etc.)
+            title_item_help: Podeu trobar les galetes utilitzant l'inspector (secció
+              d'emmagatzematge). No ha de contenir espais.
           index:
             back_to_categories: Torna a les categories
             cannot_remove_default: Els elements per defecte no es poden eliminar
-            confirm_reset: Esteu segur que voleu restablir aquest element als seus valors per defecte? Això eliminarà totes les personalitzacions que hagueu fet.
+            confirm_reset: Esteu segur que voleu restablir aquest element als seus
+              valors per defecte? Això eliminarà totes les personalitzacions que hagueu
+              fet.
             edit: Editar element
             new: Nou element
             reset: Restablir als valors per defecte
@@ -732,7 +1067,8 @@ ca:
           new:
             save: Desa
             title: Nova redirecció
-          origin_exists: Aquest origen ja existeix, si us plau edita'l en comptes de crear-ne un de nou.
+          origin_exists: Aquest origen ja existeix, si us plau edita'l en comptes
+            de crear-ne un de nou.
           origin_missing: Aquest origen no s'ha trobat a la llista
           update:
             error: 'Error en actualitzar la redirecció: %{error}'
@@ -752,7 +1088,11 @@ ca:
             no_data: No s'han trobat segells de Hashcash
             request_path: Ruta de la sol·licitud
           ip_addresses:
-            help_html: Aquesta pàgina enumera totes les adreces IP que s'han detectat al sistema, ordenades pel nombre de segells Hashcash que han generat. <br><br> Cada segell és una acció d'inici de sessió o de registre per part d'un usuari. Podeu utilitzar aquesta informació per detectar activitats sospitoses.
+            help_html: Aquesta pàgina enumera totes les adreces IP que s'han detectat
+              al sistema, ordenades pel nombre de segells Hashcash que han generat.
+              <br><br> Cada segell és una acció d'inici de sessió o de registre per
+              part d'un usuari. Podeu utilitzar aquesta informació per detectar activitats
+              sospitoses.
             ip_address: Adreça IP
             no_data: No s'han trobat adreces IP
             stamps: Segells hashcash
@@ -762,7 +1102,9 @@ ca:
             preset_content_blocks: Blocs de contingut existents
             preset_global_menu: Elements habituals de Decidim
             select_a_preset: "— Selecciona un element de menú habitual —"
-            url_help_html: "<b>#section-id</b> — es desplaça fins a una secció d'aquesta pàgina<br><b>/ruta</b> — pàgina interna (p. ex. /processes)<br><b>https://example.com</b> — enllaç extern (s'obre automàticament en una pestanya nova)"
+            url_help_html: "<b>#section-id</b> — es desplaça fins a una secció d'aquesta
+              pàgina<br><b>/ruta</b> — pàgina interna (p. ex. /processes)<br><b>https://example.com</b>
+              — enllaç extern (s'obre automàticament en una pestanya nova)"
           new:
             save: Desa
             title: Nou element de menú
@@ -785,7 +1127,10 @@ ca:
           proposals: Modificacions a propostes
           styles: Estils personalitzats
           surveys: Formularis i enquestes
-          verifications: Verificacions
+          verifications:
+            awesome_authorizations: Autoritzacions Awesome
+            force_authorizations: Autoritzacions forçades
+            verifications: Verificacions
         menu_hacks:
           create:
             error: 'Error en crear un nou ítem de menú: %{error}'
@@ -797,7 +1142,8 @@ ca:
             save: Desar
             title: Editar ítem de menú
           form:
-            label_help: Les traduccions no es detecten automàticament, assegura't de completar tots els camps!
+            label_help: Les traduccions no es detecten automàticament, assegura't
+              de completar tots els camps!
             target:
               blank: Nova finestra
               self: La mateixa finestra
@@ -825,7 +1171,8 @@ ca:
           update:
             error: 'Error en actualitzar l''ítem de menú: %{error}'
             success: Ítem de menú actualitzat correctament
-          url_exists: Aquesta URL ha estat configurada en un altre ítem de menú, si us plau edita'l en comptes de crear-ne un de nou.
+          url_exists: Aquesta URL ha estat configurada en un altre ítem de menú, si
+            us plau edita'l en comptes de crear-ne un de nou.
         officializations:
           authorizations: Autoritzacions
           verification_modal:
@@ -834,9 +1181,11 @@ ca:
         private_data:
           private_data:
             component: Espai / Component
-            confirm_delete: Segur que voleu suprimir totes les dades privades d'aquest recurs? Aquesta acció no es pot desfer.
+            confirm_delete: Segur que voleu suprimir totes les dades privades d'aquest
+              recurs? Aquesta acció no es pot desfer.
             delete: Esborrar-ho tot
-            destroying: Les dades privades de %{title} s'han programat per ser destruïdes. Si us plau, torneu a comprovar d'aquí a uns minuts.
+            destroying: Les dades privades de %{title} s'han programat per ser destruïdes.
+              Si us plau, torneu a comprovar d'aquí a uns minuts.
             done: Fet
             help_html: |
               Aquesta eina permet esborrar totes les dades privades d'un espai o component participatiu concret. Aquesta acció és irreversible i eliminarà totes les dades privades de la base de dades.
@@ -861,15 +1210,16 @@ ca:
             no_data: No s'han trobat dades privades més antigues que fa %{time_ago}
             not_destroyable: Aquest recurs encara no es pot destruir
             removing: Eliminant...
-            time_ago: "fa %{time}"
+            time_ago: fa %{time}
         proposal_custom_fields:
           menu:
             title: Camps públics
           private_body: Cos privat
           private_data_last_remove: Aquestes dades es van destruir fa %{time_ago}.
-          private_data_last_update: Aquestes dades es van actualitzar per última vegada fa %{time_ago}.
+          private_data_last_update: Aquestes dades es van actualitzar per última vegada
+            fa %{time_ago}.
           proposal_private_custom_fields: Camps privats
-          remove_private_data: "\U0001F449 És possible que vulgueu eliminar-lo"
+          remove_private_data: "👉 És possible que vulgueu eliminar-lo"
         scoped_admin_styles:
           menu:
             title: Panell admin
@@ -877,28 +1227,50 @@ ca:
           menu:
             title: Interfície pública
         visibility:
-          info_html: Podeu gestionar restriccions d'accés addicionals mitjançant verificacions amb %{awesome_link}.
-          restricted_html: Aquest espai utilitza restriccions d'accés addicionals amb %{awesome_link}.
+          info_html: Podeu gestionar restriccions d'accés addicionals mitjançant verificacions
+            amb %{awesome_link}.
+          restricted_html: Aquest espai utilitza restriccions d'accés addicionals
+            amb %{awesome_link}.
       admin_log:
         component:
-          destroy_private_data: "%{user_name} ha destruït %{count} elements de dades privades per a %{resource_name} a %{space_name}"
+          destroy_private_data: "%{user_name} ha destruït %{count} elements de dades
+            privades per a %{resource_name} a %{space_name}"
         user:
-          admin_creates_authorization: "%{user_name} s'ha verificat %{resource_name} amb %{handler_name}"
-          admin_destroys_authorization: "%{user_name} ha destruït la verificació %{handler_name} a %{resource_name}"
-          admin_forces_authorization: "%{user_name} ha forçat la verificació %{handler_name} a %{resource_name}. Motiu: %{reason}"
+          admin_creates_authorization: "%{user_name} s'ha verificat %{resource_name}
+            amb %{handler_name}"
+          admin_destroys_authorization: "%{user_name} ha destruït la verificació %{handler_name}
+            a %{resource_name}"
+          admin_forces_authorization: "%{user_name} ha forçat la verificació %{handler_name}
+            a %{resource_name}. Motiu: %{reason}"
       amendments:
         modal:
           amendment_exists: Una esmena ja existeix
-          current_amendment_html: <p>Podeu <a href="%{amendment_link}">accedir a l'esmena actual aquí</a>.</p>
+          current_amendment_html: <p>Podeu <a href="%{amendment_link}">accedir a l'esmena
+            actual aquí</a>.</p>
           dismiss: D'acord
           explanation_html: |
             <p>Actualment, s'està avaluant una altra esmena per a aquesta proposta. Per crear-ne una de nova, heu d'esperar fins que l'actual sigui acceptada o rebutjada.</p>
             <p>També podeu posar-vos en contacte amb l'autor d'aquesta proposta <a href="%{proposal_link}">deixant un comentari</a> i intentar accelerar la resolució de l'esmena actual.</p>
-        pending_limit_reached: Ho sentim, només hi pot haver una esmena pendent alhora. Si us plau, espereu fins que "%{emendation}" sigui acceptat o rebutjat.
+        pending_limit_reached: Ho sentim, només hi pot haver una esmena pendent alhora.
+          Si us plau, espereu fins que "%{emendation}" sigui acceptat o rebutjat.
+      awesome_authorization_handler:
+        admin_managed_html: Aquesta autorització normalment es gestiona automàticament.
+          Si creieu que hauríeu de ser verificat, proveu de prémer el botó "Enviar"
+          a continuació.<br>Si això no funciona, poseu-vos en contacte amb els administradors
+          de la plataforma.
+        errors:
+          user_not_in_group: Segons el vostre correu electrònic (%{email}), no sou
+            membre de cap grup que us pugui verificar.
+        explanation: Verifica't com a membre d'un grup de l'organització
+        member_of: Membre de %{groups}
+        name: Autorització de Grups de l'Organització
       config:
         intergram:
-          auto_no_response: Sembla que no hi ha ningú disponible per a respondre en aquest moment. Si us plau, indica'ns com et podem contactar i ens comunicarem amb tu tan aviat com ens sigui possible.
-          auto_response: Buscant la primera administradora disponible (pot tardar un minut)
+          auto_no_response: Sembla que no hi ha ningú disponible per a respondre en
+            aquest moment. Si us plau, indica'ns com et podem contactar i ens comunicarem
+            amb tu tan aviat com ens sigui possible.
+          auto_response: Buscant la primera administradora disponible (pot tardar
+            un minut)
           intro_message: Hola! En què et puc ajudar?
           title_closed: Fes clic per xatejar!
           title_open: Parlem!
@@ -935,7 +1307,9 @@ ca:
             past: Només processos passats
             upcoming: Només processos futurs
           process_type: Tipus de processos
-          process_type_mixed_hint: En mode mixt, els processos i grups s'intercalen fins la quantitat màxima. Els processos s'ordenen per pes (ascendent). Si un tipus s'esgota, els espais restants s'omplen amb l'altre.
+          process_type_mixed_hint: En mode mixt, els processos i grups s'intercalen
+            fins la quantitat màxima. Els processos s'ordenen per pes (ascendent).
+            Si un tipus s'esgota, els espais restants s'omplen amb l'altre.
           process_types:
             all: Tots els processos i grups barrejats
             groups: Només grups de processos
@@ -950,13 +1324,15 @@ ca:
         landing_menu:
           alignment: Alineació del menú
           alignment_center: Centre
-          alignment_help: Alinea els elements del menú a l'esquerra, al centre o a la dreta de la pàgina
+          alignment_help: Alinea els elements del menú a l'esquerra, al centre o a
+            la dreta de la pàgina
           alignment_left: Esquerra
           alignment_right: Dreta
           css_comment_hover: Estil per a l'enllaç del menú en passar-hi per sobre
           css_comment_link: Estil per a cada enllaç del menú
           css_comment_menu: Estil per a tot el bloc del menú
-          css_help_html: 'Podeu personalitzar encara més aquest menú creant un %{link}; feu servir aquest codi per referenciar-ne els diferents elements:'
+          css_help_html: 'Podeu personalitzar encara més aquest menú creant un %{link};
+            feu servir aquest codi per referenciar-ne els diferents elements:'
           css_help_link: estil personalitzat
           delete_confirm: Esteu segur que voleu eliminar aquest element?
           drag: Arrossegueu per reordenar
@@ -977,11 +1353,13 @@ ca:
         map:
           collapse: Inicia amb el menú col·lapsat
           map_center: Punt central del mapa (Latitud, Longitud)
-          map_center_help: 'Utilitza un punt per marcar els decimals (pe: 41.38879, 2.15899). Deixa aquest camp buit per incloure automàticament tots els marcadors'
+          map_center_help: 'Utilitza un punt per marcar els decimals (pe: 41.38879,
+            2.15899). Deixa aquest camp buit per incloure automàticament tots els
+            marcadors'
           map_height: Alçada del mapa (px)
           map_settings: Configuració del mapa
           map_zoom: Zoom (qualsevol nombre entre 0 i 18)
-          map_zoom_help: Només s’aplica si es defineix el punt central del mapa
+          map_zoom_help: Només s'aplica si es defineix el punt central del mapa
           menu_amendments: Mostrar esmenes
           menu_meetings: Mostrar trobades
           menu_merge_components: Unifica tots els components del mateix tipus al menú
@@ -998,9 +1376,11 @@ ca:
         rich_text:
           add_column: Afegeix una columna nova
           background_image: Imatge de fons
-          background_image_help: 'Imatge opcional que es mostra darrere del contingut de la columna. Amplada mínima recomanada: 1920 px.'
+          background_image_help: 'Imatge opcional que es mostra darrere del contingut
+            de la columna. Amplada mínima recomanada: 1920 px.'
           background_image_placement: Col·locació de la imatge de fons
-          background_image_placement_help: Com es mostra la imatge de fons dins de la columna. Només s'aplica si s'ha carregat una imatge de fons.
+          background_image_placement_help: Com es mostra la imatge de fons dins de
+            la columna. Només s'aplica si s'ha carregat una imatge de fons.
           background_image_placements:
             contain_center: Ajustar (centrada)
             cover_bottom: Cobrir (alineada a baix)
@@ -1008,24 +1388,30 @@ ca:
             cover_top: Cobrir (alineada a dalt)
             repeat: Repetir (mosaic)
           block_id: Identificador intern
-          block_id_help: Aquest valor s'utilitzarà com a àncora de secció a l'URL. Ha de ser únic per pàgina (p. ex. "el-nostre-equip").
+          block_id_help: Aquest valor s'utilitzarà com a àncora de secció a l'URL.
+            Ha de ser únic per pàgina (p. ex. "el-nostre-equip").
           block_id_placeholder: nom de referència intern (no s'utilitza públicament)
           column_title: Columna
           css_comment_this_column: Estil per a la columna %{number}
           css_comment_title: Estil per al títol del bloc
-          css_help_html: 'Podeu personalitzar encara més aquest bloc creant un %{link}; feu servir aquest codi per referenciar-ne els diferents elements:'
+          css_help_html: 'Podeu personalitzar encara més aquest bloc creant un %{link};
+            feu servir aquest codi per referenciar-ne els diferents elements:'
           css_help_link: estil personalitzat
           name: Bloc de text enriquit Awesome
           remove_column: Elimina
-          restrict_links: Evita que els enllaços del text es mostrin si la usuària no ha iniciat sessió
-          restrict_videos: Evita que els vídeos incrustats al text es mostrin si la usuària no ha iniciat sessió
+          restrict_links: Evita que els enllaços del text es mostrin si la usuària
+            no ha iniciat sessió
+          restrict_videos: Evita que els vídeos incrustats al text es mostrin si la
+            usuària no ha iniciat sessió
           sign_in_to_watch: Inicia sessió per veure aquest vídeo
           title: Títol del bloc
       credits: Decidim Awesome %{version} · Mantingut amb ♥ per %{company}
       custom_fields:
         errors:
-          invalid_fields: No s'ha pogut analitzar el contingut però s'ha assignat al camp '%{field}'
-          invalid_xml: 'No s''ha pogut analitzar el contingut: no s''han trobat els elements DL/DD a l''XML'
+          invalid_fields: No s'ha pogut analitzar el contingut però s'ha assignat
+            al camp '%{field}'
+          invalid_xml: 'No s''ha pogut analitzar el contingut: no s''han trobat els
+            elements DL/DD a l''XML'
       map_component:
         map:
           api_not_ready: |
@@ -1039,7 +1425,8 @@ ca:
               Decidim::Api::Schema.max_depth = 50
             end</pre>
           error:
-            unavailable: El mapa no està disponible. SI us plau, configureu la geolocalització en aquesta instal·lació per activar aquest component.
+            unavailable: El mapa no està disponible. SI us plau, configureu la geolocalització
+              en aquesta instal·lació per activar aquest component.
           show:
             view_meeting: Veure trobada
             view_proposal: Veure proposta
@@ -1049,7 +1436,8 @@ ca:
           blocked_by_status: Votació no disponible
       required_authorizations:
         index:
-          authorization_options_invalid: Malauradament, tot i que teniu aquesta autorització, les dades utilitzades per verificar-vos no són vàlides en aquest context.
+          authorization_options_invalid: Malauradament, tot i que teniu aquesta autorització,
+            les dades utilitzades per verificar-vos no són vàlides en aquest context.
           cancel: Això ho faré en un altre moment, %{link}.
           granted_title: Verificacions concedides
           logout: deixa'm tancar la sessió
@@ -1057,12 +1445,16 @@ ca:
           resume_title: Verificacions pendents
           resume_with_method: Reprendre la verificació amb %{name}
           title: Verifica la teva identitat
-          verify_with_all_these_options: 'Si us plau, verifica''t amb tots aquests mètodes abans de poder accedir a la plataforma:'
-          verify_with_any_of_these_options: 'Si us plau, verifica''t com a mínim amb un d''aquests mètodes abans de poder accedir a la plataforma:'
+          verify_with_all_these_options: 'Si us plau, verifica''t amb tots aquests
+            mètodes abans de poder accedir a la plataforma:'
+          verify_with_any_of_these_options: 'Si us plau, verifica''t com a mínim amb
+            un d''aquests mètodes abans de poder accedir a la plataforma:'
           verify_with_method: Verificar amb %{name}
       session:
-        authorization_is_required: Per participar en aquesta part de la plataforma, cal que autoritzeu el vostre compte amb una autorització vàlida (%{authorizations}).
-        login_and_authorization_is_required: Per participar en aquesta part de la plataforma, cal que feu login i autoritzeu el vostre compte.
+        authorization_is_required: Per participar en aquesta part de la plataforma,
+          cal que autoritzeu el vostre compte amb una autorització vàlida (%{authorizations}).
+        login_and_authorization_is_required: Per participar en aquesta part de la
+          plataforma, cal que feu login i autoritzeu el vostre compte.
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |
@@ -1076,10 +1468,12 @@ ca:
           abstained: "✔ Abstenció"
           change_vote: Canvia el meu vot
           default_box_title: Vota en aquesta proposta
-          default_instructions_html: "<p>Llegeix les normes de la votació amb atenció per entendre com s'utilitzarà el teu vot per %{organization}</p>"
+          default_instructions_html: "<p>Llegeix les normes de la votació amb atenció
+            per entendre com s'utilitzarà el teu vot per %{organization}</p>"
           modal:
             cancel: Cancel·la
-            message: El teu vot es considerarà definitiu el %{date}. Pots canviar-lo fins a aquest moment
+            message: El teu vot es considerarà definitiu el %{date}. Pots canviar-lo
+              fins a aquest moment
             proceed: Procedeix
             skip: Marca aquí per no mostrar aquesta finestra en el futur
           vote_button: Clica per votar
@@ -1136,10 +1530,14 @@ ca:
               private_data: Neteja de dades privades
         awesome_config:
           amendments: Esmenes
-          autosaved_error: L'emmagatzematge local no està disponible al teu navegador, el formulari no es podrà desar automàticament.
-          autosaved_retrieved: Les dades d'aquest formulari s'han recuperat d'una sessió anterior
+          autosaved_error: L'emmagatzematge local no està disponible al teu navegador,
+            el formulari no es podrà desar automàticament.
+          autosaved_retrieved: Les dades d'aquest formulari s'han recuperat d'una
+            sessió anterior
           autosaved_success: Dades desades a l'emmagatzematge local
-          drag_and_drop_image: Afegeix imatges arrossegant-les i deixant-les anar o bé enganxant-les.
+          awesome_authorization_groups_placeholder: Tots els grups permesos
+          drag_and_drop_image: Afegeix imatges arrossegant-les i deixant-les anar
+            o bé enganxant-les.
           hashtags: Hashtags
           items: elements
           meetings: Trobades

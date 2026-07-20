@@ -6,7 +6,7 @@
 </div>
 
 <div class="item__edit item__edit-1col">
-  <div class="item__edit-form p-4">
+  <div class="item__edit-form">
     <%= decidim_form_for(@form, url: cookie_categories_path, html: { class: "form-defaults form new_cookie_category" }) do |f| %>
       <%= render partial: "form", object: f, locals: { slug_editable: true } %>
       <div class="item__edit-sticky">

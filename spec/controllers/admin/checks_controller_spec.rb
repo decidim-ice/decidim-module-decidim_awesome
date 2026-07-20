@@ -26,7 +26,9 @@ module Decidim::DecidimAwesome
 
         it "all overrides are valid" do
           controller.helpers.overrides.each do |_group, props|
-            props.files.each do |file, _md5|
+            props.files.each do |file, md5|
+              next if [md5].flatten.include?("removed")
+
               expect(controller.helpers.valid?(props.spec, file)).not_to be_nil
             end
           end
@@ -151,7 +153,7 @@ module Decidim::DecidimAwesome
         describe "#awesome_version_outdated?" do
           context "when latest version is available" do
             before do
-              allow(controller.helpers).to receive(:awesome_latest_version).and_return("0.14.3")
+              allow(controller.helpers).to receive(:awesome_latest_version).and_return("0.14.4")
             end
 
             it "returns true when current version is older" do

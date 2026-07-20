@@ -1,0 +1,49 @@
+<div class="item_show__header">
+  <h1 class="item_show__header-title">
+    <%= t(".title", group: translated_attribute(authorization_group.name)) %>
+
+    <%= button_to decidim_admin_decidim_awesome.sync_awesome_authorization_path(authorization_group), method: :post, class: "button button__sm button__transparent-secondary" do %>
+      <%= icon "loader-3-line" %>
+      <%= t(".sync") %>
+    <% end %>
+    <%= link_to t(".new"), [:new, :awesome_authorization_user], class: "button button__sm button__secondary" %>
+  </h1>
+</div>
+
+<% unless authorization_group.synced? %>
+  <div class="callout warning">
+    <%= t(".not_synced_html", sync: link_to(t(".sync"), decidim_admin_decidim_awesome.sync_awesome_authorization_path(authorization_group), method: :post)) %>
+  </div>
+<% end %>
+
+<div class="table-stacked">
+  <% if authorization_members.any? %>
+    <table class="table-list">
+      <thead>
+        <tr>
+          <th><%= t(".email") %></th>
+          <th><%= t(".user") %></th>
+          <th><%= t(".authorized_user") %></th>
+          <th><%= t(".actions") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% authorization_members.each do |member| %>
+          <tr>
+            <td><%= member.email %></td>
+            <td><%= link_to member.user.name, decidim.profile_path(member.user.nickname) if member.user %></td>
+            <td><%= link_to member.authorization.user.name, decidim.profile_path(member.authorization.user.nickname) if member.group_authorized?(authorization_group) %></td>
+            <td class="table-list__actions">
+              <%= icon_link_to "delete-bin-line", decidim_admin_decidim_awesome.awesome_authorization_user_path(authorization_group, member), t(".remove"), method: :delete, class: "action-icon--delete", data: { confirm: t(".confirm_remove") } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="callout info">
+      <%= t(".no_members") %>
+    </div>
+  <% end %>
+</div>
+<%= decidim_paginate authorization_members %>

@@ -20,6 +20,8 @@ ignore_unused:
   - "activemodel.attributes.content_block_attachment.*"
   - "activemodel.attributes.custom_redirect.*"
   - "activemodel.attributes.user.*"
+  - "activemodel.attributes.awesome_authorization_group.*"
+  - "activemodel.attributes.awesome_authorization_members.*"
   - "activemodel.attributes.organization.awesome_admins_available_authorizations"
   - "activemodel.attributes.force_authorization.*"
   - "activemodel.errors.models.cookie_item.attributes.*"
@@ -47,6 +49,7 @@ ignore_unused:
   - "decidim.decidim_awesome.required_authorizations.index.verify_with_any_of_these_options"
   - "decidim.decidim_awesome.session.login_and_authorization_is_required"
   - "decidim.decidim_awesome.session.authorization_is_required"
+  - "decidim.authorization_handlers.awesome_authorization_handler.fields.*"
   - "layouts.decidim.decidim_awesome.admin.maintenance.titles.*"
   - "layouts.decidim.data_consent.details.items.*"
   - "decidim.proposals.*"
@@ -56,3 +59,5 @@ ignore_unused:
 
 ignore_missing:
   - decidim.participatory_processes.scopes.global
+  - "decidim.authorization_handlers.awesome_authorization_handler.name"
+  - "decidim.authorization_handlers.awesome_authorization_handler.explanation"

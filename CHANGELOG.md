@@ -8,12 +8,16 @@ Compatibility:
 
 v0.14.3
 -------
+
+v0.14.3
+-------
 Compatibility:
   - Decidim 0.31.x
 
 Features:
-  - Fix awesome map css styles
-  - Allow to restrict votes on proposal per status ([#580](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/580))
+  - Add the integrated awesome authorization handler ([#612](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/612))
+  - Add the ability to vote by "Non answered" proposals ([#590](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/590))
+  - Some fixes in updating cookies settings the ordering in the awesome global menu
 
 v0.14.2
 -------

@@ -41,6 +41,12 @@ module Decidim
             [:custom_redirects_path, []]
           when :cookie_management
             [:cookie_categories_path, []]
+          when :verifications
+            if menus[:force_authorizations]
+              [:config_path, [config_var]]
+            else
+              [:awesome_authorizations_path, []]
+            end
           when :maintenance
             [:checks_path, []]
           else
@@ -69,7 +75,12 @@ module Decidim
 
           register_simple_entry(:awesome_admin_menu, :custom_redirects, 8, "external-link-line")
           register_simple_entry(:awesome_admin_menu, :livechat, 9, "chat-1-line")
-          register_simple_entry(:awesome_admin_menu, :verifications, 10, "fingerprint-line")
+
+          register_simple_entry(:awesome_admin_menu, :verifications, 10, "fingerprint-line",
+                                i18n_key: "menu.verifications.verifications",
+                                submenu: { target_menu: :awesome_authorization_submenu },
+                                active: [[:awesome_authorizations_path]])
+
           register_simple_entry(:awesome_admin_menu, :cookie_management, 11, "shield-check-line")
 
           register_simple_entry(:awesome_admin_menu, :maintenance, 12, "tools-line",
@@ -172,6 +183,25 @@ module Decidim
           end
         end
 
+        def register_awesome_authorization_submenu!
+          Decidim.menu :awesome_authorization_submenu do |menu|
+            if config_enabled?(:force_authorizations)
+              menu.add_item :verifications,
+                            I18n.t("force_authorizations", scope: "decidim.decidim_awesome.admin.menu.verifications"),
+                            decidim_admin_decidim_awesome.config_path(:verifications),
+                            position: 1,
+                            icon_name: "lock-line"
+            end
+            if config_enabled?(:awesome_authorization_handler)
+              menu.add_item :awesome_authorizations,
+                            I18n.t("awesome_authorizations", scope: "decidim.decidim_awesome.admin.menu.verifications"),
+                            decidim_admin_decidim_awesome.awesome_authorizations_path,
+                            position: 2,
+                            icon_name: "bubble-chart-line"
+            end
+          end
+        end
+
         def menus
           @menus ||= {
             editors: config_enabled?(:allow_images_in_editors, :allow_videos_in_editors),
@@ -196,7 +226,9 @@ module Decidim
             menu_hacks_home_content_block_menu: config_enabled?(:home_content_block_menu),
             custom_redirects: config_enabled?(:custom_redirects),
             livechat: config_enabled?(:intergram_for_admins, :intergram_for_public),
-            verifications: config_enabled?(:force_authorizations),
+            verifications: config_enabled?(:force_authorizations, :awesome_authorization_handler),
+            force_authorizations: config_enabled?(:force_authorizations),
+            awesome_authorization_handler: config_enabled?(:awesome_authorization_handler),
             cookie_management: config_enabled?(:cookie_management),
             maintenance: true
           }
