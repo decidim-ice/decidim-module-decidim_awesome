@@ -76,10 +76,8 @@ module Decidim
           Decidim::Proposals::Admin::ProposalForm.include(Decidim::DecidimAwesome::Proposals::ProposalFormOverride)
           Decidim::Proposals::ProposalPresenter.include(Decidim::DecidimAwesome::Proposals::ProposalPresenterOverride)
           Decidim::Proposals::CreateProposal.include(Decidim::DecidimAwesome::Proposals::CreateProposalOverride)
-          Decidim::Proposals::CreateCollaborativeDraft.include(Decidim::DecidimAwesome::Proposals::CreateCollaborativeDraftOverride)
           Decidim::Proposals::Admin::CreateProposal.include(Decidim::DecidimAwesome::Proposals::CreateProposalOverride)
           Decidim::Proposals::UpdateProposal.include(Decidim::DecidimAwesome::Proposals::UpdateProposalOverride)
-          Decidim::Proposals::UpdateCollaborativeDraft.include(Decidim::DecidimAwesome::Proposals::UpdateCollaborativeDraftOverride)
           Decidim::Proposals::Admin::UpdateProposal.include(Decidim::DecidimAwesome::Proposals::Admin::UpdateProposalOverride)
           Decidim::Proposals::ProposalType.include(Decidim::DecidimAwesome::AddProposalTypeCustomFields)
         end
@@ -94,7 +92,6 @@ module Decidim
         if DecidimAwesome.enabled?(:proposal_custom_fields, :proposal_private_custom_fields, :weighted_proposal_voting)
           # add vote weight/private_body to proposals
           Decidim::Proposals::Proposal.include(Decidim::DecidimAwesome::HasProposalExtraFields)
-          Decidim::Proposals::CollaborativeDraft.include(Decidim::DecidimAwesome::HasProposalExtraFields)
         end
 
         if Decidim::DecidimAwesome.enabled?(:user_timezone)
@@ -124,7 +121,6 @@ module Decidim
         Decidim::ContentBlocks::BaseCell.prepend(Decidim::DecidimAwesome::BaseCellOverride) if DecidimAwesome.enabled?(:landing_menu_block)
 
         if DecidimAwesome.enabled?(:menu, :mobile_menu, :home_content_block_menu)
-          Decidim::ContentBlocks::GlobalMenuCell.include(Decidim::DecidimAwesome::GlobalMenuCellOverride) if DecidimAwesome.enabled?(:home_content_block_menu)
           Decidim::BreadcrumbHelper.include(Decidim::DecidimAwesome::BreadcrumbHelperOverride)
           Decidim::MenuPresenter.include(Decidim::DecidimAwesome::MenuPresenterOverride)
           Decidim::MenuItemPresenter.include(Decidim::DecidimAwesome::MenuItemPresenterOverride)

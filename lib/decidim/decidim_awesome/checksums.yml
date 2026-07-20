@@ -47,8 +47,6 @@ decidim-core:
     decidim-0.31.0: 1c230c5c6bc02e0bb22e1ea92b0da96c
   /app/cells/decidim/content_blocks/base_cell.rb:
     decidim-0.31.2: 58c56a4544a8ab4ecb00056f29d80376
-  /app/cells/decidim/content_blocks/global_menu_cell.rb:
-    decidim-0.31.0: d224370c364a9cf4b2e244063274e5ef
   /app/views/decidim/devise/registrations/new.html.erb:
     decidim-0.31.0: 861b8821bbdc05e7b337fcdb921415ba
     decidim-0.31.5: 4a64a07b83678fa5360ded05e2bfd96c
@@ -116,16 +114,12 @@ decidim-proposals:
   /app/commands/decidim/proposals/create_proposal.rb:
     decidim-0.31.0: f4f306b35fc646a843f2adb5da13f2fc
     decidim-0.31.6: f88c0aa5b5927410707bc356eef8f544
-  /app/commands/decidim/proposals/create_collaborative_draft.rb:
-    decidim-0.31.0: 5f60b52a292527601ebc848d8b46d196
   /app/commands/decidim/proposals/admin/create_proposal.rb:
     decidim-0.31.0: 1e428d1d132ed1d23ff7064f38fdedd9
     decidim-0.31.6: f88c0aa5b5927410707bc356eef8f544
   /app/commands/decidim/proposals/update_proposal.rb:
     decidim-0.31.0: 4faca87c1bc95f5e7d13280a34b46e7f
     decidim-0.31.6: aac67a59183b35341471013407b7da7e
-  /app/commands/decidim/proposals/update_collaborative_draft.rb:
-    decidim-0.31.0: 206f6c2895ac8fd6d8d8d1b9c20c6879
   /app/commands/decidim/proposals/admin/update_proposal.rb:
     decidim-0.31.0: 4f27bff1038958182057280be5a1aa82
     decidim-0.31.6: 4dd5bfe1a8b7f2d0f6bbe7ea1f4e5a6a
