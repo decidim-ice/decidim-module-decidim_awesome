@@ -30,6 +30,11 @@ module Decidim
 
       private
 
+      # request path without the locale prefix, comparable with the route patterns below
+      def request_path
+        @request_path ||= ContextAnalyzers::RequestAnalyzer.strip_locale(@request.path)
+      end
+
       # a workaround to set a flash message if coming from the error controller (route not found)
       def add_flash_message_from_request(env)
         return unless scoped_admins_active?
@@ -86,7 +91,7 @@ module Decidim
         return true if safe_get_route?
 
         spaces = ContextAnalyzers::RequestAnalyzer.participatory_spaces_routes.keys.join("|^(/admin){0,1}/")
-        case @request.path
+        case request_path
         when %r{"|^(/admin){0,1}/#{spaces}}
           true
         when %r{^/admin/}
@@ -97,7 +102,7 @@ module Decidim
       def safe_get_route?
         return false unless @request.get?
 
-        case @request.path
+        case request_path
         when "/"
           true
         when "/admin/"
@@ -112,7 +117,7 @@ module Decidim
       def safe_post_route?
         return false unless @request.post? || @request.put? || @request.patch?
 
-        case @request.path
+        case request_path
         when %r{^/admin/admin_terms}
           true
         end

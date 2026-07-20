@@ -17,7 +17,18 @@ module Decidim::DecidimAwesome
 
       paths = {
         "/" => {},
+        "/en" => {},
         "/processes" => { participatory_space_manifest: "participatory_processes" },
+        "/en/processes" => { participatory_space_manifest: "participatory_processes" },
+        "/ca/assemblies/some-assembly/f/12" => {
+          participatory_space_manifest: "assemblies",
+          participatory_space_slug: "some-assembly",
+          component_id: "12"
+        },
+        "https://www.decidim.barcelona/en/processes/PressupostosParticipatius" => {
+          participatory_space_manifest: "participatory_processes",
+          participatory_space_slug: "PressupostosParticipatius"
+        },
         "/processes_groups" => { participatory_space_manifest: "process_groups" },
         "/processes_groups/123" => { participatory_space_manifest: "process_groups", participatory_space_slug: "123" },
         "https://www.decidim.barcelona/processes/" => { participatory_space_manifest: "participatory_processes" },
@@ -44,7 +55,9 @@ module Decidim::DecidimAwesome
 
       admin_paths = {
         "/admin" => {},
+        "/en/admin" => {},
         "/admin/participatory_processes" => { participatory_space_manifest: "participatory_processes" },
+        "/en/admin/participatory_processes" => { participatory_space_manifest: "participatory_processes" },
         "/admin/participatory_process_groups" => { participatory_space_manifest: "process_groups" },
         "/admin/assemblies" => { participatory_space_manifest: "assemblies" },
         "/admin/assemblies_types" => { participatory_space_manifest: "assemblies" },

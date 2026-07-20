@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class MenuForm < Decidim::Form
         include Decidim::TranslatableAttributes
+
         VISIBILITY_STATES = %w(default hidden logged non_logged verified_user).freeze
 
         translatable_attribute :raw_label, String
@@ -21,14 +22,14 @@ module Decidim
 
         # remove query string from native menu element (to avoid interactions with the locale in the generated url)
         def map_model(model)
-          self.url = Addressable::URI.parse(model.url).path if model.native?
+          self.url = ContextAnalyzers::RequestAnalyzer.strip_locale(Addressable::URI.parse(model.url).path) if model.native?
         end
 
         def to_params
           {
             label: raw_label,
             position:,
-            url:,
+            url: ContextAnalyzers::RequestAnalyzer.strip_locale(url),
             target:,
             visibility:
           }
