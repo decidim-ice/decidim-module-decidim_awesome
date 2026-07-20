@@ -9,7 +9,7 @@ module Decidim
         include ConfigConstraintsHelpers
 
         helper ConfigConstraintsHelpers
-        helper_method :current_items, :visibility_options, :target_options
+        helper_method :current_items, :menu_item_id, :visibility_options, :target_options
 
         before_action do
           enforce_permission_to :edit_config, current_menu_name
@@ -67,15 +67,23 @@ module Decidim
           redirect_to decidim_admin_decidim_awesome.menu_hacks_path
         end
 
+        def menu_item_id(item)
+          md5(raw_url(item))
+        end
+
         private
 
+        def raw_url(item)
+          item.try(:raw_url) || ContextAnalyzers::RequestAnalyzer.strip_locale(item.url)
+        end
+
         def menu_item
-          item = current_items.find { |i| md5(i.url) == params[:id] }
+          item = current_items.find { |i| menu_item_id(i) == params[:id] }
           raise ActiveRecord::RecordNotFound unless item
 
           OpenStruct.new(
             raw_label: item.try(:raw_label) || { current_organization.default_locale => item.label },
-            url: item.url,
+            url: raw_url(item),
             position: item.position,
             target: item.try(:target),
             visibility: item.try(:visibility),

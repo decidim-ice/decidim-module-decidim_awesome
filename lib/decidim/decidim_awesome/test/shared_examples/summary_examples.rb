@@ -182,6 +182,7 @@ shared_examples "custom menus" do |enabled|
     before do
       allow(view).to receive(:current_organization).and_return(organization)
       allow(view).to receive(:current_user).and_return(user)
+      allow(view).to receive(:current_locale).and_return(I18n.locale.to_s)
     end
 
     if enabled
@@ -267,7 +268,6 @@ shared_examples "basic rendering" do |enabled|
         "config/admins",
         "menus/menu/hacks",
         "menus/mobile_menu/hacks",
-        "menus/home_content_block_menu/hacks",
         "custom_redirects",
         "config/livechat",
         "config/verifications",

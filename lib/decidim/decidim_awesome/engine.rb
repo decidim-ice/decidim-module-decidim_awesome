@@ -120,7 +120,7 @@ module Decidim
 
         Decidim::ContentBlocks::BaseCell.prepend(Decidim::DecidimAwesome::BaseCellOverride) if DecidimAwesome.enabled?(:landing_menu_block)
 
-        if DecidimAwesome.enabled?(:menu, :mobile_menu, :home_content_block_menu)
+        if DecidimAwesome.enabled?(:menu, :mobile_menu)
           Decidim::BreadcrumbHelper.include(Decidim::DecidimAwesome::BreadcrumbHelperOverride)
           Decidim::MenuPresenter.include(Decidim::DecidimAwesome::MenuPresenterOverride)
           Decidim::MenuItemPresenter.include(Decidim::DecidimAwesome::MenuItemPresenterOverride)

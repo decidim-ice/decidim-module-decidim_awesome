@@ -4,12 +4,15 @@ decidim-admin:
   /app/helpers/decidim/admin/settings_helper.rb:
     decidim-0.31.0: 0e10ec8e7e768e269d774584e381c9cd
     decidim-0.31.3: 8d47ee0c364ab5c531c9aa01a200ac68
+    decidim-0.32.0: df0d80bd60b42be822b9948909a01f53
 decidim-assemblies:
   /app/views/decidim/assemblies/admin/assemblies/_form.html.erb:
     decidim-0.31.0: cc06bd20baa7f130e34d04a3c925e2f7
+    decidim-0.32.0: cb7c37ed6e27f251863cc2374f9009a7
 decidim-participatory_processes:
   /app/views/decidim/participatory_processes/admin/participatory_processes/_form.html.erb:
     decidim-0.31.0: 21e305516207996c88cb69eae1ca1bdd
+    decidim-0.32.0: b2d2d932f89776eec5e79f2abf25aacd
 decidim-conferences:
   /app/views/decidim/conferences/admin/conferences/_form.html.erb:
     decidim-0.31.0: c8890c67fb9cb4e6602bb5e156982a2e
@@ -27,6 +30,7 @@ decidim-core:
     decidim-0.31.0: a3d19c75c77c3933937cd50aa66bc01d
   /app/views/layouts/decidim/_head.html.erb:
     decidim-0.31.0: 0faa190f7a4b3db401ffcdfc3d063802
+    decidim-0.32.0: 7497bbc152f30dd825de4109afac680a
   /app/views/layouts/decidim/_decidim_javascript.html.erb:
     decidim-0.31.0: 8d51790de859ee66f305d9111cdfb324
   /app/presenters/decidim/menu_presenter.rb:
@@ -56,13 +60,16 @@ decidim-core:
     decidim-0.31.0: 98bd2832be207d7abcd48d2a0ba40bd0
   /app/queries/decidim/last_activity.rb:
     decidim-0.31.0: adc4334ee17bd8a894357813b9e29654
+    decidim-0.32.0: 9e01c3de8d2d79a3a7e9653d36ad2521
   /app/services/decidim/open_data_exporter.rb:
     decidim-0.31.0: 3093e8c74ea1a6fb838ec192c782c90b
     decidim-0.31.2: 231a2009ebed95bdfbf3e6d44dfe5e94
   /lib/decidim/api/functions/participatory_space_list_base.rb:
     decidim-0.31.0: 327d8f8b1ed1bcb08500aaabf5536ac1
+    decidim-0.32.0: 9f4aa93356112cdd56ccaf5e6f2a9183
   /lib/decidim/api/functions/component_list.rb:
     decidim-0.31.0: ad71401b4006bbb200ad7de064f59d1b
+    decidim-0.32.0: e1ada275b0df3724fd42ee2d4d50c11b
 decidim-proposals:
   /lib/decidim/proposals/proposal_serializer.rb:
     decidim-0.31.0: eadfc45fe2e1388d579a7ffa2f87c478
