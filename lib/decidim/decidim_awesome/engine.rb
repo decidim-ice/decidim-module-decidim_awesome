@@ -445,6 +445,7 @@ module Decidim
       end
 
       initializer "decidim_decidim_awesome.register_icons" do
+        Decidim.icons.register(name: "spy-line", icon: "spy-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "editors-text", icon: "text", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "surveys", icon: "survey-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "brush", icon: "brush-line", category: "system", description: "", engine: :decidim_awesome)
