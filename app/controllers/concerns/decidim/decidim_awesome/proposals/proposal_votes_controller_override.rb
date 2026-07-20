@@ -32,7 +32,7 @@ module Decidim
               end
 
               on(:invalid) do
-                render json: { error: I18n.t("proposal_votes.create.error", scope: "decidim.proposals") }, status: :unprocessable_entity
+                render json: { error: I18n.t("proposal_votes.create.error", scope: "decidim.proposals") }, status: :unprocessable_content
               end
             end
           end
@@ -43,7 +43,7 @@ module Decidim
             return unless vote_manifest
             return if vote_manifest.valid_weight? weight, user: current_user, proposal: proposal
 
-            render json: { error: I18n.t("proposal_votes.create.error", scope: "decidim.proposals") }, status: :unprocessable_entity
+            render json: { error: I18n.t("proposal_votes.create.error", scope: "decidim.proposals") }, status: :unprocessable_content
           end
 
           def current_vote
