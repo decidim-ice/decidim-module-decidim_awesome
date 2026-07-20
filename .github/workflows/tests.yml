@@ -1,4 +1,4 @@
-name: "[CI] Tests 0.31"
+name: "[CI] Tests 0.32"
 
 on:
   push:
@@ -74,6 +74,11 @@ jobs:
           path: ./spec/decidim_dummy_app/
           key: app-${{ github.sha }}
           restore-keys: app-${{ github.sha }}
+
+      - run: |
+          sudo apt update
+          sudo apt install -y libvips libvips-tools
+        name: Install libvips
 
       - run: bundle exec rake test_app
         name: Create test app
@@ -162,7 +167,7 @@ jobs:
         name: Install Chrome version
 
       - run: |
-          sudo apt install wkhtmltopdf imagemagick 7zip
+          sudo apt install wkhtmltopdf imagemagick 7zip libvips libvips-tools
 
       - uses: actions/download-artifact@v4
         with:
