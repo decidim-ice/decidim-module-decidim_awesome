@@ -11,7 +11,7 @@ module Decidim
 
         helper_method :awesome_hashcash_bits
         before_action :set_hashcash_bits
-        before_action :awesome_check_hashcash, only: :create # rubocop:disable Rails/LexicallyScopedActionFilter
+        before_action :awesome_check_hashcash, if: -> { action_name == "create" }
       end
 
       private
