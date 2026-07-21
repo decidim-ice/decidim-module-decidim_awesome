@@ -490,8 +490,6 @@ eu:
           index:
             confirm_destroy: Ziur zaude pertsonalizazio hau kendu nahi duzula?
             edit: Editatu
-            home_content_block_menu:
-              title: Menu nagusiaren hasiera bloke globala
             menu:
               title: Menu nagusia
             mobile_menu:

@@ -296,10 +296,6 @@ module Decidim
       []
     end
 
-    config_accessor :home_content_block_menu do
-      []
-    end
-
     # Configurable rich text content block for landing pages.
     # Supports multi-column layouts, backgrounds, and access restrictions.
     config_accessor :rich_text_block do

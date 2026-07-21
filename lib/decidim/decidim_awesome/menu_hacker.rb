@@ -53,6 +53,7 @@ module Decidim
             label: translated_attribute(item["label"], organization),
             raw_label: item["label"],
             url: localized_url(item["url"]),
+            raw_url: item["url"],
             position: item["position"] || 1,
             # see options in https://github.com/comfy/active_link_to
             active: method(:activate?),

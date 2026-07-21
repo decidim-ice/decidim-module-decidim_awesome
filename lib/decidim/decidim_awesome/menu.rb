@@ -71,7 +71,7 @@ module Decidim
 
           register_simple_entry(:awesome_admin_menu, :menu_hacks, 7, "menu-line",
                                 submenu: { target_menu: :menu_hacks_submenu },
-                                active: [[:menu_hacks_path, :menu], [:menu_hacks_path, :mobile_menu], [:menu_hacks_path, :home_content_block_menu]])
+                                active: [[:menu_hacks_path, :menu], [:menu_hacks_path, :mobile_menu]])
 
           register_simple_entry(:awesome_admin_menu, :custom_redirects, 8, "external-link-line")
           register_simple_entry(:awesome_admin_menu, :livechat, 9, "chat-1-line")
@@ -146,14 +146,6 @@ module Decidim
                             position: 7.2,
                             icon_name: "smartphone"
             end
-
-            if menus[:menu_hacks_home_content_block_menu].present?
-              menu.add_item :content_block_main_menu,
-                            I18n.t("home_content_block_menu.title", scope: "decidim.decidim_awesome.admin.menu_hacks.index"),
-                            decidim_admin_decidim_awesome.menu_hacks_path(:home_content_block_menu),
-                            position: 7.3,
-                            icon_name: "layout-masonry-line"
-            end
           end
         end
 
@@ -220,10 +212,9 @@ module Decidim
             proposal_custom_fields: config_enabled?(:proposal_custom_fields),
             proposal_private_custom_fields: config_enabled?(:proposal_private_custom_fields),
             admins: config_enabled?(:scoped_admins),
-            menu_hacks: first_enabled(:menu, :mobile_menu, :home_content_block_menu),
+            menu_hacks: first_enabled(:menu, :mobile_menu),
             menu_hacks_menu: config_enabled?(:menu),
             menu_hacks_mobile_menu: config_enabled?(:mobile_menu),
-            menu_hacks_home_content_block_menu: config_enabled?(:home_content_block_menu),
             custom_redirects: config_enabled?(:custom_redirects),
             livechat: config_enabled?(:intergram_for_admins, :intergram_for_public),
             verifications: config_enabled?(:force_authorizations, :awesome_authorization_handler),

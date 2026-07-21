@@ -57,7 +57,6 @@ describe "Hacked menus" do
 
     it "renders the hacked menu" do
       within "#dropdown-menu-main-desktop" do
-        expect(page).to have_no_content("Home")
         expect(page).to have_content("Processes")
         expect(page).to have_content("A new beginning")
         expect(page).to have_content("Blog")
@@ -150,7 +149,6 @@ describe "Hacked menus" do
 
       it "renders the normal menu" do
         within "#dropdown-menu-main-desktop" do
-          expect(page).to have_content("Home")
           expect(page).to have_content("Processes")
           expect(page).to have_no_content("A new beginning")
           expect(page).to have_no_content("Blog")

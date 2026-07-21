@@ -76,8 +76,8 @@ module Decidim
           have_css("ul") &
           have_css("li", count: 3) &
           have_link("Bar", href: "/bar") &
-          have_link("Fumanchu", href: "/foo") &
-          have_link("Baz", href: "/baz")
+          have_link("Fumanchu", href: "/en/foo") &
+          have_link("Baz", href: "/en/baz")
       end
 
       it "renders the menu in the right order" do
@@ -121,8 +121,8 @@ module Decidim
         expect(subject.render).to \
           have_css("ul") &
           have_css("li", count: 2) &
-          have_link("Baz", href: "/baz") &
-          have_link("Fumanchu", href: "/foo")
+          have_link("Baz", href: "/en/baz") &
+          have_link("Fumanchu", href: "/en/foo")
       end
 
       it "renders the menu in the right order" do

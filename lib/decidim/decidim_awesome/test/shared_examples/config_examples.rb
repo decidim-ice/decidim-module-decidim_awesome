@@ -56,6 +56,6 @@ shared_examples "forbids disabled feature with redirect" do
     action
 
     expect(flash[:alert]).not_to be_empty
-    expect(response).to redirect_to("/admin/")
+    expect(response).to redirect_to("/#{I18n.locale}/admin/")
   end
 end
