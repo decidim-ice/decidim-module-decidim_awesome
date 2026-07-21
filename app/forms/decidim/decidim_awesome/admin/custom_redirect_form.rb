@@ -40,7 +40,7 @@ module Decidim
         private
 
         def different_origin_destination
-          return if normalized_origin != sanitize_url(destination)
+          return if normalized_origin != ContextAnalyzers::RequestAnalyzer.strip_locale(sanitize_url(destination))
 
           errors.add(:destination, :invalid)
         end

@@ -18,7 +18,7 @@ module Decidim
         def create
           @form = form(LandingMenuItemForm).from_params(params)
 
-          return render :new, status: :unprocessable_entity unless @form.valid?
+          return render :new, status: :unprocessable_content unless @form.valid?
 
           items = current_items
           items << form_to_hash(@form)
@@ -39,7 +39,7 @@ module Decidim
 
           items = current_items
           return head(:not_found) unless items[item_index]
-          return render :show, status: :unprocessable_entity unless @form.valid?
+          return render :show, status: :unprocessable_content unless @form.valid?
 
           items[item_index] = form_to_hash(@form)
           save_items!(items)

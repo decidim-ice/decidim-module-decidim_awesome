@@ -69,7 +69,7 @@ module Decidim
             end
 
             on(:invalid) do |message|
-              render json: { error: message }, status: :unprocessable_entity
+              render json: { error: message }, status: :unprocessable_content
             end
           end
         end
