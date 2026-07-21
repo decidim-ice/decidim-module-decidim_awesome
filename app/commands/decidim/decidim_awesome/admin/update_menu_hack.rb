@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class UpdateMenuHack < Command
         include NeedsConstraintHelpers
+
         # Public: Initializes the command.
         #
         def initialize(form, menu_name)
@@ -23,7 +24,7 @@ module Decidim
           return broadcast(:invalid) if form.invalid?
 
           find_var.value = [] unless find_var.value.is_a? Array
-          find_var.value = find_var.value.filter { |i| i.is_a? Hash }
+          find_var.value = find_var.value.grep(Hash)
           found = false
           find_var.value.map! do |item|
             if item["url"] == form.url

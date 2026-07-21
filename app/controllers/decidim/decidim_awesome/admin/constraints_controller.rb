@@ -7,6 +7,7 @@ module Decidim
       class ConstraintsController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
         include Decidim::Headers::HttpCachingDisabler
+
         helper ConfigConstraintsHelpers
 
         layout false

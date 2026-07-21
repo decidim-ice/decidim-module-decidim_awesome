@@ -7,6 +7,7 @@ module Decidim
       # Override Proposal Presenter to access private field.
       module ProposalPresenterOverride
         extend ActiveSupport::Concern
+
         included do
           def private_body(*)
             return unless proposal

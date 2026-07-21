@@ -29,7 +29,7 @@ module Decidim::DecidimAwesome
         let(:params) { { content_block_id: content_block.id, landing_menu_item: { name_en: "Contact", url: "/contact" } } }
 
         it "adds item to content block settings" do
-          post :create, params: params
+          post(:create, params:)
           expect(response).to have_http_status(:success)
 
           content_block.reload
@@ -42,7 +42,7 @@ module Decidim::DecidimAwesome
           let(:params) { { content_block_id: content_block.id, landing_menu_item: { name_en: "Bad", url: "javascript:alert(1)" } } }
 
           it "returns unprocessable entity" do
-            post :create, params: params
+            post(:create, params:)
             expect(response).to have_http_status(:unprocessable_content)
           end
         end
@@ -66,7 +66,7 @@ module Decidim::DecidimAwesome
         let(:params) { { id: 0, content_block_id: content_block.id, landing_menu_item: { name_en: "Updated", url: "#updated" } } }
 
         it "updates the item" do
-          patch :update, params: params
+          patch(:update, params:)
           expect(response).to have_http_status(:success)
 
           content_block.reload
@@ -78,7 +78,7 @@ module Decidim::DecidimAwesome
           let(:params) { { id: 0, content_block_id: content_block.id, landing_menu_item: { name_en: "Bad", url: "javascript:x" } } }
 
           it "returns unprocessable entity" do
-            patch :update, params: params
+            patch(:update, params:)
             expect(response).to have_http_status(:unprocessable_content)
           end
         end

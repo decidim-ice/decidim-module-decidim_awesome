@@ -5,6 +5,7 @@ module Decidim
     # Lists the authorizations required for the current user/context and helps
     class RequiredAuthorizationsController < DecidimAwesome::ApplicationController
       include ActionView::Helpers::SanitizeHelper
+
       layout "layouts/decidim/authorizations"
       helper_method :granted_authorizations, :pending_authorizations, :missing_authorizations, :redirect_url, :authorization_help_text, :service
 

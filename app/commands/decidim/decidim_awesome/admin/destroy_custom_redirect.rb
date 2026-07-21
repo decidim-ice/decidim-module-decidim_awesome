@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class DestroyCustomRedirect < Command
         include NeedsConstraintHelpers
+
         # Public: Initializes the command.
         #
         # item - the redirects item to destroy
