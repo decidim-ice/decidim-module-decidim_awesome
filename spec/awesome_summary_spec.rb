@@ -26,11 +26,11 @@ describe Decidim::DecidimAwesome do
   before do
     decidim_response = double(
       success?: true,
-      body: [{ "tag_name" => "v0.31.2", "prerelease" => false, "draft" => false }].to_json
+      body: [{ "tag_name" => "v0.32.0", "prerelease" => false, "draft" => false }].to_json
     )
     awesome_response = double(
       success?: true,
-      body: [{ "tag_name" => "v0.14.1", "prerelease" => false, "draft" => false }].to_json
+      body: [{ "tag_name" => "v0.15.0", "prerelease" => false, "draft" => false }].to_json
     )
 
     allow(Faraday).to receive(:get).with("https://api.github.com/repos/decidim/decidim/releases")

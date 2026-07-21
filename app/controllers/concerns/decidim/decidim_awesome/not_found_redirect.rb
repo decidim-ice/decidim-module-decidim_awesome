@@ -18,7 +18,7 @@ module Decidim
 
           # assigning a flash message here does not work after redirection due the order of middleware in Rails
           # as a workaround, send a message through a get parameter
-          path = "/admin/?unauthorized"
+          path = "#{decidim_admin.root_path}?unauthorized"
           referer = request.headers["Referer"]
           if referer
             uri = URI(referer)

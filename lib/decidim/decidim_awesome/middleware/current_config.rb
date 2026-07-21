@@ -16,6 +16,10 @@ module Decidim
       # env - A Hash.
       def call(env)
         @request = Rack::Request.new(env)
+        # asset requests never evaluate permissions: resetting the user model here
+        # would wipe the scoped-admin state of a page request served concurrently
+        return @app.call(env) if asset_path?
+
         if @request.env["decidim.current_organization"] && processable_path?
           # memoize for later
           @config = env["decidim_awesome.current_config"] = awesome_config_instance
@@ -32,7 +36,11 @@ module Decidim
 
       # request path without the locale prefix, comparable with the route patterns below
       def request_path
-        @request_path ||= ContextAnalyzers::RequestAnalyzer.strip_locale(@request.path)
+        ContextAnalyzers::RequestAnalyzer.strip_locale(@request.path)
+      end
+
+      def asset_path?
+        @request.path.match?(%r{^/(rails/|packs/|assets/|decidim-packs/|favicon)})
       end
 
       # a workaround to set a flash message if coming from the error controller (route not found)
@@ -105,7 +113,7 @@ module Decidim
         case request_path
         when "/"
           true
-        when "/admin/"
+        when %r{^/admin/?$}
           true
         when %r{^/admin/admin_terms}
           true
