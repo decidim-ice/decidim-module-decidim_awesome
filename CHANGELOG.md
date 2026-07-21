@@ -3,15 +3,20 @@ CHANGELOG
 
 v0.15.0
 -------
+
 Compatibility:
   - Decidim 0.32.x
 
-Breaking changes:
-  - Remove the "home content block menu" feature and its `config.home_content_block_menu` setting: Decidim 0.32 removed the global menu content block it customized. Header menu and mobile menu hacks remain available.
-  - Remove the collaborative drafts overrides: collaborative drafts were removed from Decidim 0.32.
+Features:
+  - Upgrade to Decidim v0.32
+    **NOTE** The "home content block menu" feature and its config var `home_content_block_menu` have been removed together with the global menu content block in Decidim. Header and mobile menu hacks remain available.
+    **NOTE** The collaborative drafts overrides have been removed together with the feature in Decidim.
 
-v0.14.3
--------
+Fixes:
+  - Fix menu hacks and custom redirects with locale-prefixed URLs
+  - Fix a race condition in scoped admins that could deny access to legitimate admin pages
+  - Fix inline renaming of configuration groups in recent Chrome versions
+  - Speed up rendering of the landing menu templates
 
 v0.14.3
 -------
