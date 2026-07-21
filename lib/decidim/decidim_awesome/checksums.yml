@@ -91,10 +91,6 @@ decidim-proposals:
     decidim-0.31.6: 4752eb6a8b403912c9f686999c1860c5
   /app/views/decidim/proposals/proposals/_vote_button.html.erb:
     decidim-0.31.0: 3cd74a9396d20e19ed3821f08cbe2b06
-  /app/views/decidim/proposals/proposals/_votes_count.html.erb:
-    decidim-0.31.0: 6af6cdeeff0fc0daad028b88ee1c21cb
-    decidim-0.31.1: f5247f762666de9cf09635fce3a13ce7
-    decidim-0.31.6: removed
   /app/cells/decidim/proposals/proposal_l_cell.rb:
     decidim-0.31.0: b024d45da1361be278a672ebb304f7f5
   /app/views/decidim/proposals/proposals/_proposal_actions.html.erb:
