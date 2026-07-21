@@ -175,7 +175,7 @@ module Decidim::DecidimAwesome
 
         it "returns invalid" do
           post(:rename_scope_label, params:)
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
 
         context "when data is present" do
@@ -190,7 +190,7 @@ module Decidim::DecidimAwesome
 
           it "returns invalid" do
             post(:rename_scope_label, params:)
-            expect(response).to have_http_status(:unprocessable_entity)
+            expect(response).to have_http_status(:unprocessable_content)
           end
 
           context "and config exists" do
@@ -206,7 +206,7 @@ module Decidim::DecidimAwesome
 
               it "returns invalid" do
                 post(:rename_scope_label, params:)
-                expect(response).to have_http_status(:unprocessable_entity)
+                expect(response).to have_http_status(:unprocessable_content)
               end
             end
           end

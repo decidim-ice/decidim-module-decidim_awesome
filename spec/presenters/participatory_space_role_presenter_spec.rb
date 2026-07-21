@@ -92,14 +92,14 @@ module Decidim::DecidimAwesome
 
       describe "#participatory_space_path" do
         it "returns the path to user roles" do
-          expect(subject.participatory_space_path).to eq("/admin/participatory_processes/#{participatory_space.slug}/user_roles")
+          expect(subject.participatory_space_path).to eq("/#{I18n.locale}/admin/participatory_processes/#{participatory_space.slug}/user_roles")
         end
 
         context "when role is destroyed" do
           include_context "with role destroyed"
 
           it "returns the path to user roles" do
-            expect(subject.participatory_space_path).to eq("/admin/participatory_processes/#{participatory_space.slug}/user_roles")
+            expect(subject.participatory_space_path).to eq("/#{I18n.locale}/admin/participatory_processes/#{participatory_space.slug}/user_roles")
           end
         end
 
@@ -110,7 +110,7 @@ module Decidim::DecidimAwesome
           end
 
           it "returns the path to user roles" do
-            expect(subject.participatory_space_path.split("?").first).to eq("/admin/participatory_processes/#{participatory_space.slug}")
+            expect(subject.participatory_space_path.split("?").first).to eq("/#{I18n.locale}/admin/participatory_processes/#{participatory_space.slug}")
           end
 
           context "when no participatory_space route exist" do

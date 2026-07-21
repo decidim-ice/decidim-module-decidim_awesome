@@ -13,7 +13,7 @@ shared_examples "has menu link" do |item|
   let(:prefix) { "config/" }
   it "shows the feature link" do
     within ".sidebar-menu" do
-      expect(page).to have_link(href: "/admin/decidim_awesome/#{prefix}#{item}")
+      expect(page).to have_link(href: "/#{I18n.locale}/admin/decidim_awesome/#{prefix}#{item}")
     end
   end
 end
@@ -22,7 +22,7 @@ shared_examples "do not have menu link" do |item|
   let(:prefix) { "config/" }
   it "do not show the feature link" do
     within ".sidebar-menu" do
-      expect(page).to have_no_link(href: "/admin/decidim_awesome/#{prefix}#{item}")
+      expect(page).to have_no_link(href: "/#{I18n.locale}/admin/decidim_awesome/#{prefix}#{item}")
     end
   end
 end

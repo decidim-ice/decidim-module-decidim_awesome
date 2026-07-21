@@ -39,7 +39,7 @@ module Decidim::DecidimAwesome
 
     describe "#path" do
       it "returns the correct path" do
-        expect(presenter.path).to eq("/processes/#{participatory_space.slug}/f/#{component.id}/proposals")
+        expect(presenter.path).to eq("/#{I18n.locale}/processes/#{participatory_space.slug}/f/#{component.id}/proposals")
       end
     end
 
@@ -85,7 +85,7 @@ module Decidim::DecidimAwesome
         expected_json = {
           id: component.id,
           name: "#{translated(participatory_space.title)} / #{translated(component.name)}",
-          path: "/processes/#{participatory_space.slug}/f/#{component.id}/proposals",
+          path: "/#{I18n.locale}/processes/#{participatory_space.slug}/f/#{component.id}/proposals",
           total: "3",
           last_date: 4.months.ago.to_date,
           time_ago: "4 months ago",

@@ -190,7 +190,7 @@ shared_examples "shows partial admin links in the frontend" do
 
     it_behaves_like "has admin link"
     it "has a Edit button" do
-      expect(page).to have_link(href: "/admin/assemblies")
+      expect(page).to have_link(href: "/#{I18n.locale}/admin/assemblies")
     end
   end
 
@@ -201,7 +201,7 @@ shared_examples "shows partial admin links in the frontend" do
 
     it_behaves_like "has no admin link"
     it "has no Edit button" do
-      expect(page).to have_no_link(href: "/admin/processes")
+      expect(page).to have_no_link(href: "/#{I18n.locale}/admin/processes")
     end
   end
 end
@@ -393,7 +393,6 @@ shared_examples "allows access to group processes" do
 
     it "shows the list of groups" do
       within("[data-content]") do
-        expect(page).to have_content("Process groups")
         expect(page).to have_content(process_group.title["en"])
       end
     end

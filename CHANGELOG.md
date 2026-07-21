@@ -6,6 +6,10 @@ v0.15.0
 Compatibility:
   - Decidim 0.32.x
 
+Breaking changes:
+  - Remove the "home content block menu" feature and its `config.home_content_block_menu` setting: Decidim 0.32 removed the global menu content block it customized. Header menu and mobile menu hacks remain available.
+  - Remove the collaborative drafts overrides: collaborative drafts were removed from Decidim 0.32.
+
 v0.14.3
 -------
 
