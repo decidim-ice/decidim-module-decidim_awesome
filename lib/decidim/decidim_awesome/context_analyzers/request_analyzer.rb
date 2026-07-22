@@ -32,6 +32,7 @@ module Decidim
             return path if path.blank?
 
             stripped = path.sub(%r{\A/#{Regexp.union(I18n.available_locales.map(&:to_s))}(?=/|\z|\?)}, "")
+            stripped = "/#{stripped}" if stripped.start_with?("?")
             stripped.empty? ? "/" : stripped
           end
         end

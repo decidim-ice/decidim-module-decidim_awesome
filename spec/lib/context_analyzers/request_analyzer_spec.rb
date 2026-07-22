@@ -133,7 +133,7 @@ module Decidim::DecidimAwesome
         end
 
         it "strips the locale before a query string" do
-          expect(described_class.strip_locale("/en?foo=bar")).to eq("?foo=bar")
+          expect(described_class.strip_locale("/en?foo=bar")).to eq("/?foo=bar")
         end
 
         it "leaves non-locale paths untouched" do

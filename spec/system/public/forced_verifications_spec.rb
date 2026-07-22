@@ -54,7 +54,7 @@ describe "Forced verifications" do
     it "user is redirected to the required authorizations page" do
       expect(page).to have_current_path(decidim_decidim_awesome.required_authorizations_path(locale: :en, redirect_url: localized_redirect))
       expect(page).to have_content("you need to authorize your account with a valid authorization")
-      expect(page).to have_content("lease verify yourself with all these methods before being able to access the platform")
+      expect(page).to have_content("Please verify yourself with all these methods before being able to access the platform")
       expect(page).to have_content("Verify with Example authorization")
       expect(page).to have_content("Verify with Another example authorization")
       expect(page).to have_content("Help text with HTML")
