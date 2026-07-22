@@ -10,11 +10,11 @@ module Decidim
       end
 
       def query
-        Component.with_deleted.where(id: proposals.where.not(extra_fields: { private_body: nil }))
+        Component.with_deleted.where(id: proposals.where(id: extra_fields.where.not(private_body: nil).select(:decidim_proposal_id)))
       end
 
       def for(resources)
-        Component.with_deleted.where(id: proposals.where.not(extra_fields: { private_body: nil })).where(id: resources)
+        Component.with_deleted.where(id: proposals.where(id: extra_fields.select(:decidim_proposal_id))).where(id: resources)
       end
 
       private
@@ -22,10 +22,13 @@ module Decidim
       attr_reader :organization
 
       def proposals
-        Decidim::Proposals::Proposal
-          .select(:decidim_component_id)
-          .joins(:extra_fields)
-          .where(decidim_component_id: organization_components)
+        Decidim::Proposals::Proposal.with_deleted
+                                    .select(:decidim_component_id)
+                                    .where(decidim_component_id: organization_components)
+      end
+
+      def extra_fields
+        ProposalExtraField.with_deleted
       end
 
       def organization_components

@@ -74,6 +74,12 @@ module Decidim::DecidimAwesome
           end
         end
 
+        context "when the component does not exist" do
+          it "raises a not found error" do
+            expect { delete(:destroy, params: { id: 0 }) }.to raise_error(ActiveRecord::RecordNotFound)
+          end
+        end
+
         context "when no permissions" do
           let(:user) { create(:user, :confirmed, organization:) }
 

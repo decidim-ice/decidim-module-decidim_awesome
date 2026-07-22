@@ -34,11 +34,9 @@ module Decidim
           expect(subject.for([other_component.id])).not_to include(other_component)
         end
 
-        it "does not return a component that has no private data even when requested by id" do
-          blank_component = create(:proposal_component, organization:)
-          create(:awesome_proposal_extra_fields, proposal: create(:proposal, component: blank_component), private_body: nil)
-
-          expect(subject.for([blank_component.id])).not_to include(blank_component)
+        it "still returns a requested component after its private data was cleared" do
+          extra_fields.update(private_body: nil)
+          expect(subject.for([component.id])).to include(component)
         end
       end
 
@@ -47,6 +45,18 @@ module Decidim
 
         it "still finds it so its private data can be cleaned" do
           expect(subject.query).to include(component)
+        end
+      end
+
+      context "when the proposal holding private data is trashed" do
+        before { proposal.destroy }
+
+        it "still finds its component so the private data can be cleaned" do
+          expect(subject.query).to include(component)
+        end
+
+        it "still returns its component from #for" do
+          expect(subject.for([component.id])).to include(component)
         end
       end
     end

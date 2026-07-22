@@ -47,6 +47,14 @@ module Decidim::DecidimAwesome
       it "returns the correct count of proposals with old private_data" do
         expect(presenter.total).to eq("3")
       end
+
+      context "when a proposal with private data is trashed" do
+        before { proposal.destroy }
+
+        it "still counts its private data" do
+          expect(presenter.total).to eq("3")
+        end
+      end
     end
 
     describe "#last_date" do

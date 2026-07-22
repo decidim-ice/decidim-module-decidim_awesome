@@ -108,6 +108,20 @@ describe "Admin manages maintenance" do
       end
     end
 
+    context "when a component with private data is trashed" do
+      before do
+        component.destroy
+        visit decidim_admin_decidim_awesome.private_data_path
+      end
+
+      it "shows its name without a link" do
+        within ".table-list tbody tr[data-id=\"#{component.id}\"]" do
+          expect(page).to have_content(translated(component.name))
+          expect(page).to have_no_link(translated(component.name))
+        end
+      end
+    end
+
     it "deletes all private data" do
       perform_enqueued_jobs do
         accept_confirm do

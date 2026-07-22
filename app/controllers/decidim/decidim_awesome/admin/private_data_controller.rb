@@ -31,7 +31,9 @@ module Decidim
         end
 
         def destroy
-          if private_data && private_data.total.to_i.positive?
+          raise ActiveRecord::RecordNotFound unless resource
+
+          if private_data.total.to_i.positive?
             Decidim::ActionLogger.log("destroy_private_data", current_user, resource, nil, count: private_data.total)
 
             Lock.new(current_organization).get!(resource)
