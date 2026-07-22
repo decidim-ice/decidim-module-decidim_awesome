@@ -44,7 +44,7 @@ module Decidim
         private
 
         def resource
-          @resource ||= Component.find_by(id: params[:id])
+          @resource ||= Component.where(participatory_space: current_organization.participatory_spaces).find_by(id: params[:id])
         end
 
         def private_data
@@ -64,7 +64,7 @@ module Decidim
         end
 
         def private_data_finder
-          @private_data_finder ||= PrivateDataFinder.new
+          @private_data_finder ||= PrivateDataFinder.new(current_organization)
         end
 
         def time_ago
