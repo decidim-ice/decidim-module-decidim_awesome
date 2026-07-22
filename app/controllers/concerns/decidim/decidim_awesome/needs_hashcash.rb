@@ -36,6 +36,7 @@ module Decidim
         check_hashcash
       end
 
+      # Dynamically configures the gem https://github.com/BaseSecrete/active_hashcash
       def hashcash_zone
         controller_name == "registrations" ? :signup : :login
       end
