@@ -57,6 +57,11 @@ module Decidim
       true
     end
 
+    # This feature allows to create follow up questionnaries
+    config_accessor :follow_up_questionnaries do
+      true
+    end
+
     # Live chat widget linked to Telegram account or group
     # In the admin side only
     config_accessor :intergram_for_admins do

@@ -25,6 +25,7 @@ module Decidim
             post :create_preset, on: :collection
           end
         end
+        resources :follow_up_questionnaries, except: [:show]
         resources :config, param: :var, only: [:show, :update]
         resources :scoped_styles, param: :var, only: [:create, :destroy]
         resources :proposal_custom_fields, param: :var, only: [:create, :destroy]

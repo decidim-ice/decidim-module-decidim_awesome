@@ -29,7 +29,7 @@ module Decidim
           end
         end
 
-        def main_path_for(config_var)
+        def main_path_for(config_var) # rubocop:disable Metrics/CyclomaticComplexity
           case config_var.to_sym
           when :styles
             [:config_path, [menus[:styles]]]
@@ -41,6 +41,8 @@ module Decidim
             [:custom_redirects_path, []]
           when :cookie_management
             [:cookie_categories_path, []]
+          when :follow_up_questionnaries
+            [:follow_up_questionnaries_path, []]
           when :verifications
             if menus[:force_authorizations]
               [:config_path, [config_var]]
@@ -58,32 +60,33 @@ module Decidim
           register_simple_entry(:awesome_admin_menu, :editors, 1, "editors-text")
           register_simple_entry(:awesome_admin_menu, :proposals, 2, "documents")
           register_simple_entry(:awesome_admin_menu, :surveys, 3, "surveys")
-          register_simple_entry(:awesome_admin_menu, :styles, 4, "brush",
+          register_simple_entry(:awesome_admin_menu, :follow_up_questionnaries, 4, "surveys")
+          register_simple_entry(:awesome_admin_menu, :styles, 5, "brush",
                                 submenu: { target_menu: :custom_styles_submenu },
                                 active: [[:config_path, :scoped_styles], [:config_path, :scoped_admin_styles]])
 
-          register_simple_entry(:awesome_admin_menu, :custom_fields, 5, "layers",
+          register_simple_entry(:awesome_admin_menu, :custom_fields, 6, "layers",
                                 i18n_key: "menu.proposal_custom_fields",
                                 submenu: { target_menu: :custom_fields_submenu },
                                 active: [[:config_path, :proposal_custom_fields], [:config_path, :proposal_private_custom_fields]])
 
-          register_simple_entry(:awesome_admin_menu, :admins, 6, "group-line")
+          register_simple_entry(:awesome_admin_menu, :admins, 7, "group-line")
 
-          register_simple_entry(:awesome_admin_menu, :menu_hacks, 7, "menu-line",
+          register_simple_entry(:awesome_admin_menu, :menu_hacks, 8, "menu-line",
                                 submenu: { target_menu: :menu_hacks_submenu },
                                 active: [[:menu_hacks_path, :menu], [:menu_hacks_path, :mobile_menu], [:menu_hacks_path, :home_content_block_menu]])
 
-          register_simple_entry(:awesome_admin_menu, :custom_redirects, 8, "external-link-line")
-          register_simple_entry(:awesome_admin_menu, :livechat, 9, "chat-1-line")
+          register_simple_entry(:awesome_admin_menu, :custom_redirects, 9, "external-link-line")
+          register_simple_entry(:awesome_admin_menu, :livechat, 10, "chat-1-line")
 
-          register_simple_entry(:awesome_admin_menu, :verifications, 10, "fingerprint-line",
+          register_simple_entry(:awesome_admin_menu, :verifications, 11, "fingerprint-line",
                                 i18n_key: "menu.verifications.verifications",
                                 submenu: { target_menu: :awesome_authorization_submenu },
                                 active: [[:awesome_authorizations_path]])
 
-          register_simple_entry(:awesome_admin_menu, :cookie_management, 11, "shield-check-line")
+          register_simple_entry(:awesome_admin_menu, :cookie_management, 12, "shield-check-line")
 
-          register_simple_entry(:awesome_admin_menu, :maintenance, 12, "tools-line",
+          register_simple_entry(:awesome_admin_menu, :maintenance, 14, "tools-line",
                                 i18n_key: "menu.maintenance.maintenance",
                                 submenu: { target_menu: :maintenance_submenu },
                                 active: [[:private_data_path], [:hashcashes_path], [:checks_path]])
@@ -95,7 +98,7 @@ module Decidim
               menu.add_item :proposal_custom_fields,
                             I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.proposal_custom_fields"),
                             decidim_admin_decidim_awesome.config_path(:proposal_custom_fields),
-                            position: 5.1,
+                            position: 6.1,
                             icon_name: "draft-line"
             end
 
@@ -103,7 +106,7 @@ module Decidim
               menu.add_item :proposal_private_custom_fields,
                             I18n.t("proposal_private_custom_fields", scope: "decidim.decidim_awesome.admin.proposal_custom_fields"),
                             decidim_admin_decidim_awesome.config_path(:proposal_private_custom_fields),
-                            position: 5.2,
+                            position: 6.2,
                             icon_name: "spy"
             end
           end
@@ -115,7 +118,7 @@ module Decidim
               menu.add_item :scoped_styles,
                             I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.scoped_styles"),
                             decidim_admin_decidim_awesome.config_path(:scoped_styles),
-                            position: 4.1,
+                            position: 5.1,
                             icon_name: "computer-line"
             end
 
@@ -123,7 +126,7 @@ module Decidim
               menu.add_item :scoped_admin_styles,
                             I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.scoped_admin_styles"),
                             decidim_admin_decidim_awesome.config_path(:scoped_admin_styles),
-                            position: 4.2,
+                            position: 5.2,
                             icon_name: "file-settings-line"
             end
           end
@@ -135,7 +138,7 @@ module Decidim
               menu.add_item :main_menu,
                             I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.menu_hacks.index"),
                             decidim_admin_decidim_awesome.menu_hacks_path(:menu),
-                            position: 7.1,
+                            position: 8.1,
                             icon_name: "global-line"
             end
 
@@ -143,7 +146,7 @@ module Decidim
               menu.add_item :mobile_menu,
                             I18n.t("mobile_menu.title", scope: "decidim.decidim_awesome.admin.menu_hacks.index"),
                             decidim_admin_decidim_awesome.menu_hacks_path(:mobile_menu),
-                            position: 7.2,
+                            position: 8.2,
                             icon_name: "smartphone"
             end
 
@@ -151,7 +154,7 @@ module Decidim
               menu.add_item :content_block_main_menu,
                             I18n.t("home_content_block_menu.title", scope: "decidim.decidim_awesome.admin.menu_hacks.index"),
                             decidim_admin_decidim_awesome.menu_hacks_path(:home_content_block_menu),
-                            position: 7.3,
+                            position: 8.3,
                             icon_name: "layout-masonry-line"
             end
           end
@@ -163,7 +166,7 @@ module Decidim
               menu.add_item :private_data,
                             I18n.t("private_data", scope: "decidim.decidim_awesome.admin.menu.maintenance"),
                             decidim_admin_decidim_awesome.private_data_path,
-                            position: 10.1,
+                            position: 11.1,
                             icon_name: "spy-line"
             end
 
@@ -171,14 +174,14 @@ module Decidim
               menu.add_item :hashcash,
                             I18n.t("hashcash", scope: "decidim.decidim_awesome.admin.menu.maintenance"),
                             decidim_admin_decidim_awesome.hashcashes_path,
-                            position: 10.2,
+                            position: 11.2,
                             icon_name: "hashtag"
             end
 
             menu.add_item :checks,
                           I18n.t("checks", scope: "decidim.decidim_awesome.admin.menu.maintenance"),
                           decidim_admin_decidim_awesome.checks_path,
-                          position: 10.3,
+                          position: 11.3,
                           icon_name: "pulse"
           end
         end
@@ -230,6 +233,7 @@ module Decidim
             force_authorizations: config_enabled?(:force_authorizations),
             awesome_authorization_handler: config_enabled?(:awesome_authorization_handler),
             cookie_management: config_enabled?(:cookie_management),
+            follow_up_questionnaries: config_enabled?(:follow_up_questionnaries),
             maintenance: true
           }
         end
