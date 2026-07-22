@@ -34,6 +34,14 @@ module Decidim
           expect(subject.for([other_component.id])).not_to include(other_component)
         end
       end
+
+      context "when the component holding private data is trashed" do
+        before { component.destroy }
+
+        it "still finds it so its private data can be cleaned" do
+          expect(subject.query).to include(component)
+        end
+      end
     end
   end
 end

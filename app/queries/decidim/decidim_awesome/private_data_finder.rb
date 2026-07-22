@@ -10,11 +10,11 @@ module Decidim
       end
 
       def query
-        Component.where(id: proposals.where.not(extra_fields: { private_body: nil }))
+        Component.with_deleted.where(id: proposals.where.not(extra_fields: { private_body: nil }))
       end
 
       def for(resources)
-        Component.where(id: proposals).where(id: resources)
+        Component.with_deleted.where(id: proposals).where(id: resources)
       end
 
       private
@@ -29,7 +29,7 @@ module Decidim
       end
 
       def organization_components
-        Component.where(participatory_space: organization.participatory_spaces).select(:id)
+        Component.with_deleted.where(participatory_space: organization.participatory_spaces).select(:id)
       end
     end
   end
