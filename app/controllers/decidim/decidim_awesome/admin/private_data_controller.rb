@@ -44,7 +44,7 @@ module Decidim
         private
 
         def resource
-          @resource ||= Component.where(participatory_space: current_organization.participatory_spaces).find_by(id: params[:id])
+          @resource ||= Component.with_deleted.where(participatory_space: current_organization.participatory_spaces).find_by(id: params[:id])
         end
 
         def private_data

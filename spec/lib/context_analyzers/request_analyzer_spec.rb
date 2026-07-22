@@ -122,6 +122,24 @@ module Decidim::DecidimAwesome
           end
         end
       end
+
+      describe ".strip_locale" do
+        it "strips the locale before a slash" do
+          expect(described_class.strip_locale("/en/processes")).to eq("/processes")
+        end
+
+        it "strips the locale at the end of the path" do
+          expect(described_class.strip_locale("/en")).to eq("/")
+        end
+
+        it "strips the locale before a query string" do
+          expect(described_class.strip_locale("/en?foo=bar")).to eq("?foo=bar")
+        end
+
+        it "leaves non-locale paths untouched" do
+          expect(described_class.strip_locale("/processes")).to eq("/processes")
+        end
+      end
     end
   end
 end

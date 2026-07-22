@@ -14,7 +14,7 @@ module Decidim
       end
 
       def for(resources)
-        Component.with_deleted.where(id: proposals).where(id: resources)
+        Component.with_deleted.where(id: proposals.where.not(extra_fields: { private_body: nil })).where(id: resources)
       end
 
       private

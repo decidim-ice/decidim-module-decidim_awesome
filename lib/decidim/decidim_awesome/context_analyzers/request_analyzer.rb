@@ -31,7 +31,7 @@ module Decidim
           def strip_locale(path)
             return path if path.blank?
 
-            stripped = path.sub(%r{\A/#{Regexp.union(I18n.available_locales.map(&:to_s))}(?=/|\z)}, "")
+            stripped = path.sub(%r{\A/#{Regexp.union(I18n.available_locales.map(&:to_s))}(?=/|\z|\?)}, "")
             stripped.empty? ? "/" : stripped
           end
         end

@@ -33,6 +33,13 @@ module Decidim
         it "does not return a component from another organization even when requested by id" do
           expect(subject.for([other_component.id])).not_to include(other_component)
         end
+
+        it "does not return a component that has no private data even when requested by id" do
+          blank_component = create(:proposal_component, organization:)
+          create(:awesome_proposal_extra_fields, proposal: create(:proposal, component: blank_component), private_body: nil)
+
+          expect(subject.for([blank_component.id])).not_to include(blank_component)
+        end
       end
 
       context "when the component holding private data is trashed" do
