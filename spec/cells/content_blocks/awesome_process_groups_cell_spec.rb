@@ -183,6 +183,12 @@ module Decidim::DecidimAwesome
           allow(controller).to receive(:params).and_return(ActionController::Parameters.new(taxonomy_ids: %w(3 3 7)))
           expect(block_cell.selected_taxonomy_ids).to eq([3, 7])
         end
+
+        it "ignores a hash-shaped taxonomy_ids param instead of raising" do
+          allow(controller).to receive(:params).and_return(ActionController::Parameters.new(taxonomy_ids: { foo: "1" }))
+          expect { block_cell.selected_taxonomy_ids }.not_to raise_error
+          expect(block_cell.selected_taxonomy_ids).to eq([])
+        end
       end
 
       describe "#current_page" do

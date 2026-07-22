@@ -95,6 +95,15 @@ module Decidim::DecidimAwesome
       end
     end
 
+    context "when the proposal is trashed (soft-deleted)" do
+      let!(:extra_fields) { create(:awesome_proposal_extra_fields, proposal:, private_body: "secret") }
+
+      it "keeps the private data instead of destroying it physically" do
+        proposal.destroy
+        expect(described_class.unscoped.find_by(id: extra_fields.id)&.private_body).to eq("secret")
+      end
+    end
+
     context "when proposal weight is destroyed" do
       let!(:extra_fields) { create(:awesome_proposal_extra_fields, proposal:) }
 
