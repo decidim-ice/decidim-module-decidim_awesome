@@ -89,11 +89,13 @@ describe Decidim::DecidimAwesome do
   when "disabled"
     it_behaves_like "with features disabled"
   else
+    # rubocop:disable RSpec/Output
     puts 'Please execute this test with the env FEATURES set to "enabled" or "disabled"'
     puts ""
     puts "FEATURES=enabled bundle exec rspec spec/awesome_summary_spec.rb"
     puts "FEATURES=disabled bundle exec rspec spec/awesome_summary_spec.rb"
     puts ""
     puts "TEST SKIPPED!"
+    # rubocop:enable RSpec/Output
   end
 end

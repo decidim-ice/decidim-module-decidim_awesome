@@ -41,7 +41,7 @@ module Decidim::DecidimAwesome
         end
 
         email = last_email
-        expect(email.subject).to match(/Your export "admin_actions" is ready/)
+        expect(email.subject).to include('Your export "admin_actions" is ready')
         expect(email.body.encoded).to match("The file will be available for download until")
         expect(email.body.encoded).to match("Download")
         expect(email.body.encoded).to match("#{organization.host}/#{I18n.locale}/download_your_data")

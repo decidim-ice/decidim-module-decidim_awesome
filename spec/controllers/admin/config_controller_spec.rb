@@ -7,6 +7,7 @@ module Decidim::DecidimAwesome
   module Admin
     describe ConfigController do
       include Decidim::TranslationsHelper
+
       routes { Decidim::DecidimAwesome::AdminEngine.routes }
 
       let(:user) { create(:user, :confirmed, :admin, organization:) }

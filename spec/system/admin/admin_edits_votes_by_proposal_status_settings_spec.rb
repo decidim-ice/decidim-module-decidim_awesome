@@ -69,7 +69,7 @@ describe "Admin edits votes by proposal status settings", :slow do
     end
 
     it "persists the chosen statuses as tokens" do
-      expect(page).to have_admin_callout("successfully")
+      expect(page).to have_admin_callout("The component was updated successfully.")
       step_id = participatory_process.active_step.id.to_s
       expect(component.reload.step_settings[step_id].awesome_votes_enabled_by_status).to be(true)
       expect(component.step_settings[step_id].awesome_votes_enabled_states).to include("accepted")
@@ -87,7 +87,7 @@ describe "Admin edits votes by proposal status settings", :slow do
     end
 
     it "persists the not_answered token" do
-      expect(page).to have_admin_callout("successfully")
+      expect(page).to have_admin_callout("The component was updated successfully.")
       step_id = participatory_process.active_step.id.to_s
       expect(component.reload.step_settings[step_id].awesome_votes_enabled_states).to include("not_answered")
     end

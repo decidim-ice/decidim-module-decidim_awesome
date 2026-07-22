@@ -103,7 +103,9 @@ describe "Admin manages maintenance" do
 
       Decidim::DecidimAwesome::DestroyPrivateDataJob.perform_now(component)
 
-      expect(page).to have_content("Done")
+      within ".table-list tbody tr[data-id=\"#{component.id}\"]" do
+        expect(page).to have_content("Done")
+      end
     end
 
     it "deletes all private data" do

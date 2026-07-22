@@ -62,7 +62,7 @@ module Decidim::DecidimAwesome
 
         context "when command succeeds" do
           it "redirects with success message" do
-            post :create, params: params
+            post(:create, params:)
             expect(flash[:notice]).not_to be_empty
             expect(response).to have_http_status(:redirect)
             expect(response).to redirect_to(cookie_categories_path)
@@ -83,7 +83,7 @@ module Decidim::DecidimAwesome
           end
 
           it "renders new with error message" do
-            post :create, params: params
+            post(:create, params:)
             expect(flash[:alert]).not_to be_empty
             expect(response).to have_http_status(:ok)
             expect(response).to render_template(:new)
@@ -95,7 +95,7 @@ module Decidim::DecidimAwesome
         let(:params) { { id: category_slug } }
 
         it "returns http success" do
-          get :edit, params: params
+          get(:edit, params:)
           expect(response).to have_http_status(:success)
         end
       end
@@ -116,7 +116,7 @@ module Decidim::DecidimAwesome
 
         context "when command succeeds" do
           it "redirects with success message" do
-            patch :update, params: params
+            patch(:update, params:)
             expect(flash[:notice]).not_to be_empty
             expect(response).to have_http_status(:redirect)
             expect(response).to redirect_to(cookie_categories_path)
@@ -163,7 +163,7 @@ module Decidim::DecidimAwesome
           end
 
           it "renders edit with error message" do
-            patch :update, params: params
+            patch(:update, params:)
             expect(response).to have_http_status(:success)
             expect(response).to render_template(:edit)
             expect(flash[:alert]).to be_present
@@ -175,7 +175,7 @@ module Decidim::DecidimAwesome
         let(:params) { { id: category_slug } }
 
         it "redirects with success message" do
-          delete :destroy, params: params
+          delete(:destroy, params:)
           expect(flash[:notice]).not_to be_empty
           expect(response).to have_http_status(:redirect)
           expect(response).to redirect_to(cookie_categories_path)

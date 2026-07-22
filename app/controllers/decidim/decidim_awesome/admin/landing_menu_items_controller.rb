@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class LandingMenuItemsController < DecidimAwesome::Admin::ApplicationController
         include LandingMenuItemPresetBuilder
+
         layout false
 
         before_action :validate_content_block_id
@@ -54,7 +55,7 @@ module Decidim
           items.delete_at(item_index)
           save_items!(items)
 
-          redirect_back fallback_location: decidim_admin.root_path
+          redirect_back_or_to(decidim_admin.root_path)
         end
 
         def toggle_visible
@@ -64,7 +65,7 @@ module Decidim
           items[item_index]["visible"] = !items[item_index].fetch("visible", true)
           save_items!(items)
 
-          redirect_back fallback_location: decidim_admin.root_path
+          redirect_back_or_to(decidim_admin.root_path)
         end
 
         def reorder

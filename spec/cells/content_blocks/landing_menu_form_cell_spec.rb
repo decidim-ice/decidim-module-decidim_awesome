@@ -21,7 +21,7 @@ module Decidim::DecidimAwesome
       cell(
         "decidim/decidim_awesome/content_blocks/landing_menu_form",
         form,
-        content_block: content_block
+        content_block:
       )
     end
 

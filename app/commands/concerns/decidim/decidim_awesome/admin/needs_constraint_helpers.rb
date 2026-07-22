@@ -39,7 +39,7 @@ module Decidim
           find_var.save!
 
           # remove associated sub var (dependents will be destroyed automatically via ActiveRecord triggers)
-          find_sub_var.destroy! if find_sub_var.present?
+          (find_sub_var.presence&.destroy!)
         end
 
         def create_constraint_never!

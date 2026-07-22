@@ -3,7 +3,7 @@
 require "spec_helper"
 
 describe "Admin manages awesome authorizations" do
-  let(:organization) { create(:organization, available_authorizations: available_authorizations) }
+  let(:organization) { create(:organization, available_authorizations:) }
   let!(:admin) { create(:user, :admin, :confirmed, organization:) }
   let(:available_authorizations) { [] }
 
@@ -167,7 +167,7 @@ describe "Admin manages awesome authorizations" do
         let!(:authorized_member) { create(:awesome_authorization_member, authorization_group: group, email: authorized_user.email) }
         let!(:unauthorized_member) { create(:awesome_authorization_member, authorization_group: group, email: unauthorized_user.email) }
         let!(:another_authorized_member) { create(:awesome_authorization_member, authorization_group: another_group, email: authorized_user.email) }
-        let!(:authorization) { create(:authorization, user: authorized_user, name: "awesome_authorization_handler", metadata: metadata) }
+        let!(:authorization) { create(:authorization, user: authorized_user, name: "awesome_authorization_handler", metadata:) }
         let(:metadata) { { "groups" => { group.id.to_s => group.name, another_group.id.to_s => another_group.name } } }
 
         it "shows the sync status correctly" do
