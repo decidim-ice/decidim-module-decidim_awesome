@@ -94,7 +94,7 @@ module Decidim
 
         def register_custom_fields_submenu!
           Decidim.menu :custom_fields_submenu do |menu|
-            if menus[:proposal_custom_fields].present?
+            if Decidim::DecidimAwesome::Menu.menus[:proposal_custom_fields].present?
               menu.add_item :proposal_custom_fields,
                             I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.proposal_custom_fields"),
                             decidim_admin_decidim_awesome.config_path(:proposal_custom_fields),
@@ -102,7 +102,7 @@ module Decidim
                             icon_name: "draft-line"
             end
 
-            if menus[:proposal_private_custom_fields].present?
+            if Decidim::DecidimAwesome::Menu.menus[:proposal_private_custom_fields].present?
               menu.add_item :proposal_private_custom_fields,
                             I18n.t("proposal_private_custom_fields", scope: "decidim.decidim_awesome.admin.proposal_custom_fields"),
                             decidim_admin_decidim_awesome.config_path(:proposal_private_custom_fields),
@@ -114,7 +114,7 @@ module Decidim
 
         def register_custom_styles_submenu!
           Decidim.menu :custom_styles_submenu do |menu|
-            if menus[:scoped_styles].present?
+            if Decidim::DecidimAwesome::Menu.menus[:scoped_styles].present?
               menu.add_item :scoped_styles,
                             I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.scoped_styles"),
                             decidim_admin_decidim_awesome.config_path(:scoped_styles),
@@ -122,7 +122,7 @@ module Decidim
                             icon_name: "computer-line"
             end
 
-            if menus[:scoped_admin_styles].present?
+            if Decidim::DecidimAwesome::Menu.menus[:scoped_admin_styles].present?
               menu.add_item :scoped_admin_styles,
                             I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.scoped_admin_styles"),
                             decidim_admin_decidim_awesome.config_path(:scoped_admin_styles),
@@ -134,7 +134,7 @@ module Decidim
 
         def register_menu_hacks_submenu!
           Decidim.menu :menu_hacks_submenu do |menu|
-            if menus[:menu_hacks_menu].present?
+            if Decidim::DecidimAwesome::Menu.menus[:menu_hacks_menu].present?
               menu.add_item :main_menu,
                             I18n.t("menu.title", scope: "decidim.decidim_awesome.admin.menu_hacks.index"),
                             decidim_admin_decidim_awesome.menu_hacks_path(:menu),
@@ -142,7 +142,7 @@ module Decidim
                             icon_name: "global-line"
             end
 
-            if menus[:menu_hacks_mobile_menu].present?
+            if Decidim::DecidimAwesome::Menu.menus[:menu_hacks_mobile_menu].present?
               menu.add_item :mobile_menu,
                             I18n.t("mobile_menu.title", scope: "decidim.decidim_awesome.admin.menu_hacks.index"),
                             decidim_admin_decidim_awesome.menu_hacks_path(:mobile_menu),
@@ -150,7 +150,7 @@ module Decidim
                             icon_name: "smartphone"
             end
 
-            if menus[:menu_hacks_home_content_block_menu].present?
+            if Decidim::DecidimAwesome::Menu.menus[:menu_hacks_home_content_block_menu].present?
               menu.add_item :content_block_main_menu,
                             I18n.t("home_content_block_menu.title", scope: "decidim.decidim_awesome.admin.menu_hacks.index"),
                             decidim_admin_decidim_awesome.menu_hacks_path(:home_content_block_menu),
@@ -162,7 +162,7 @@ module Decidim
 
         def register_maintenance_admin_menu!
           Decidim.menu :maintenance_submenu do |menu|
-            if config_enabled?(:proposal_private_custom_fields)
+            if Decidim::DecidimAwesome::Menu.config_enabled?(:proposal_private_custom_fields)
               menu.add_item :private_data,
                             I18n.t("private_data", scope: "decidim.decidim_awesome.admin.menu.maintenance"),
                             decidim_admin_decidim_awesome.private_data_path,
@@ -170,7 +170,7 @@ module Decidim
                             icon_name: "spy-line"
             end
 
-            if config_enabled?(:hashcash_signup, :hashcash_login)
+            if Decidim::DecidimAwesome::Menu.config_enabled?(:hashcash_signup, :hashcash_login)
               menu.add_item :hashcash,
                             I18n.t("hashcash", scope: "decidim.decidim_awesome.admin.menu.maintenance"),
                             decidim_admin_decidim_awesome.hashcashes_path,
@@ -188,14 +188,14 @@ module Decidim
 
         def register_awesome_authorization_submenu!
           Decidim.menu :awesome_authorization_submenu do |menu|
-            if config_enabled?(:force_authorizations)
+            if Decidim::DecidimAwesome::Menu.config_enabled?(:force_authorizations)
               menu.add_item :verifications,
                             I18n.t("force_authorizations", scope: "decidim.decidim_awesome.admin.menu.verifications"),
                             decidim_admin_decidim_awesome.config_path(:verifications),
                             position: 1,
                             icon_name: "lock-line"
             end
-            if config_enabled?(:awesome_authorization_handler)
+            if Decidim::DecidimAwesome::Menu.config_enabled?(:awesome_authorization_handler)
               menu.add_item :awesome_authorizations,
                             I18n.t("awesome_authorizations", scope: "decidim.decidim_awesome.admin.menu.verifications"),
                             decidim_admin_decidim_awesome.awesome_authorizations_path,
@@ -207,33 +207,33 @@ module Decidim
 
         def menus
           @menus ||= {
-            editors: config_enabled?(:allow_images_in_editors, :allow_videos_in_editors),
-            proposals: config_enabled?(
+            editors: Decidim::DecidimAwesome::Menu.config_enabled?(:allow_images_in_editors, :allow_videos_in_editors),
+            proposals: Decidim::DecidimAwesome::Menu.config_enabled?(
               :allow_images_in_proposals,
               :validate_title_min_length, :validate_title_max_caps_percent,
               :validate_title_max_marks_together, :validate_title_start_with_caps,
               :validate_body_min_length, :validate_body_max_caps_percent,
               :validate_body_max_marks_together, :validate_body_start_with_caps
             ),
-            surveys: config_enabled?(:auto_save_forms, :user_timezone, :hashcash_signup, :hashcash_login),
-            styles: first_enabled(:scoped_styles, :scoped_admin_styles),
-            scoped_styles: config_enabled?(:scoped_styles),
-            scoped_admin_styles: config_enabled?(:scoped_admin_styles),
-            custom_fields: first_enabled(:proposal_custom_fields, :proposal_private_custom_fields),
-            proposal_custom_fields: config_enabled?(:proposal_custom_fields),
-            proposal_private_custom_fields: config_enabled?(:proposal_private_custom_fields),
-            admins: config_enabled?(:scoped_admins),
-            menu_hacks: first_enabled(:menu, :mobile_menu, :home_content_block_menu),
-            menu_hacks_menu: config_enabled?(:menu),
-            menu_hacks_mobile_menu: config_enabled?(:mobile_menu),
-            menu_hacks_home_content_block_menu: config_enabled?(:home_content_block_menu),
-            custom_redirects: config_enabled?(:custom_redirects),
-            livechat: config_enabled?(:intergram_for_admins, :intergram_for_public),
-            verifications: config_enabled?(:force_authorizations, :awesome_authorization_handler),
-            force_authorizations: config_enabled?(:force_authorizations),
-            awesome_authorization_handler: config_enabled?(:awesome_authorization_handler),
-            cookie_management: config_enabled?(:cookie_management),
-            follow_up_questionnaries: config_enabled?(:follow_up_questionnaries),
+            surveys: Decidim::DecidimAwesome::Menu.config_enabled?(:auto_save_forms, :user_timezone, :hashcash_signup, :hashcash_login),
+            styles: Decidim::DecidimAwesome::Menu.first_enabled(:scoped_styles, :scoped_admin_styles),
+            scoped_styles: Decidim::DecidimAwesome::Menu.config_enabled?(:scoped_styles),
+            scoped_admin_styles: Decidim::DecidimAwesome::Menu.config_enabled?(:scoped_admin_styles),
+            custom_fields: Decidim::DecidimAwesome::Menu.first_enabled(:proposal_custom_fields, :proposal_private_custom_fields),
+            proposal_custom_fields: Decidim::DecidimAwesome::Menu.config_enabled?(:proposal_custom_fields),
+            proposal_private_custom_fields: Decidim::DecidimAwesome::Menu.config_enabled?(:proposal_private_custom_fields),
+            admins: Decidim::DecidimAwesome::Menu.config_enabled?(:scoped_admins),
+            menu_hacks: Decidim::DecidimAwesome::Menu.first_enabled(:menu, :mobile_menu, :home_content_block_menu),
+            menu_hacks_menu: Decidim::DecidimAwesome::Menu.config_enabled?(:menu),
+            menu_hacks_mobile_menu: Decidim::DecidimAwesome::Menu.config_enabled?(:mobile_menu),
+            menu_hacks_home_content_block_menu: Decidim::DecidimAwesome::Menu.config_enabled?(:home_content_block_menu),
+            custom_redirects: Decidim::DecidimAwesome::Menu.config_enabled?(:custom_redirects),
+            livechat: Decidim::DecidimAwesome::Menu.config_enabled?(:intergram_for_admins, :intergram_for_public),
+            verifications: Decidim::DecidimAwesome::Menu.config_enabled?(:force_authorizations, :awesome_authorization_handler),
+            force_authorizations: Decidim::DecidimAwesome::Menu.config_enabled?(:force_authorizations),
+            awesome_authorization_handler: Decidim::DecidimAwesome::Menu.config_enabled?(:awesome_authorization_handler),
+            cookie_management: Decidim::DecidimAwesome::Menu.config_enabled?(:cookie_management),
+            follow_up_questionnaries: Decidim::DecidimAwesome::Menu.config_enabled?(:follow_up_questionnaries),
             maintenance: true
           }
         end
