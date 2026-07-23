@@ -57,8 +57,8 @@ module Decidim
       true
     end
 
-    # This feature allows to create follow up questionnaries
-    config_accessor :follow_up_questionnaries do
+    # This feature allows to create follow up questionnaires
+    config_accessor :follow_up_questionnaires do
       true
     end
 

@@ -87,7 +87,7 @@ en:
         origin: Origin
         pass_query: Pass the query string to the destination
         status: Status
-      follow_up_questionnaries:
+      follow_up_questionnaires:
         name: Name
         participatory_space: Participatory space
       menu:
@@ -1021,13 +1021,16 @@ en:
           update:
             error: Error updating redirection! %{error}
             success: Redirection updated successfully
-        follow_up_questionnaries:
+        follow_up_questionnaires:
           form:
-            name_help: In the participatory space, you will see this name as a new item menu where to handle the responses
-            responder_email_help: This field will be used to find and email where to respond to. If the questionnaire is not anonymous, you can skip this part and the user will be used instead
+            name_help: In the participatory space, you will see this name as a new
+              item menu where to handle the responses
+            responder_email_help: This field will be used to find and email where
+              to respond to. If the questionnaire is not anonymous, you can skip this
+              part and the user will be used instead
           index:
-            confirm_destroy: Are you sure to remove this follow-up questionnary?
-            description: Turn questionnaries submissions into interactive threads.
+            confirm_destroy: Are you sure to remove this follow-up questionnaire?
+            description: Turn questionnaire submissions into interactive threads.
               Click any response to message the participant directly, log private
               team notes, apply tracking labels, and view the complete communication
               history.
@@ -1038,7 +1041,7 @@ en:
             title: Follow-up questionnaries
           new:
             save: Save
-            title: Follow-up questionnary
+            title: Follow-up questionnaires
         hashcash:
           filters:
             ip_addresses: View IP addresses
@@ -1081,7 +1084,7 @@ en:
           cookie_management: Cookie management
           custom_redirects: Custom Redirections
           editors: Editor Hacks
-          follow_up_questionnaries: Follow-up questionnaires
+          follow_up_questionnaires: Follow-up questionnaires
           livechat: Live Chat
           maintenance:
             checks: System Compatibility

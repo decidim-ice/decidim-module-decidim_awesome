@@ -41,8 +41,8 @@ module Decidim
             [:custom_redirects_path, []]
           when :cookie_management
             [:cookie_categories_path, []]
-          when :follow_up_questionnaries
-            [:follow_up_questionnaries_path, []]
+          when :follow_up_questionnaires
+            [:follow_up_questionnaires_path, []]
           when :verifications
             if menus[:force_authorizations]
               [:config_path, [config_var]]
@@ -60,7 +60,7 @@ module Decidim
           register_simple_entry(:awesome_admin_menu, :editors, 1, "editors-text")
           register_simple_entry(:awesome_admin_menu, :proposals, 2, "documents")
           register_simple_entry(:awesome_admin_menu, :surveys, 3, "surveys")
-          register_simple_entry(:awesome_admin_menu, :follow_up_questionnaries, 4, "surveys")
+          register_simple_entry(:awesome_admin_menu, :follow_up_questionnaires, 4, "surveys")
           register_simple_entry(:awesome_admin_menu, :styles, 5, "brush",
                                 submenu: { target_menu: :custom_styles_submenu },
                                 active: [[:config_path, :scoped_styles], [:config_path, :scoped_admin_styles]])

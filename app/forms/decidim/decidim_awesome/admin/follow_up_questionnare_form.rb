@@ -3,7 +3,7 @@
 module Decidim
   module DecidimAwesome
     module Admin
-      class FollowUpQuestionnaryForm < Decidim::Form
+      class FollowUpQuestionnaireForm < Decidim::Form
         include Decidim::TranslatableAttributes
 
         translatable_attribute :name, String
@@ -13,7 +13,7 @@ module Decidim
         attribute :responder_name, String
         attribute :status, String, default: "pending"
         attribute :submission_date, DateTime
-        attribute :questionnary_id, Integer
+        attribute :questionnaire_id, Integer
 
         validates :name, translatable_presence: true
       end

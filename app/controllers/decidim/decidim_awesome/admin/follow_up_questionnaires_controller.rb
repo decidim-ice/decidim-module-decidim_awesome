@@ -3,17 +3,17 @@
 module Decidim
   module DecidimAwesome
     module Admin
-      class FollowUpQuestionnariesController < DecidimAwesome::Admin::ApplicationController
+      class FollowUpQuestionnairesController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
 
         before_action do
-          enforce_permission_to :edit_config, :follow_up_questionnaries
+          enforce_permission_to :edit_config, :follow_up_questionnaires
         end
 
         def index; end
 
         def new
-          @form = form(FollowUpQuestionnaryForm).instance
+          @form = form(FollowUpQuestionnaireForm).instance
         end
       end
     end
