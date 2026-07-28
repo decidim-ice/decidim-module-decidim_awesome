@@ -10,9 +10,15 @@ module Decidim
           enforce_permission_to :edit_config, :follow_up_questionnaires
         end
 
-        def index; end
+        def index
+          @follow_up_questionnaires = Decidim::Forms::Questionnaire.order(created_at: :desc)
+        end
 
         def new
+          @form = form(FollowUpQuestionnaireForm).instance
+        end
+
+        def edit
           @form = form(FollowUpQuestionnaireForm).instance
         end
       end

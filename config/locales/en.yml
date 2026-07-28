@@ -90,6 +90,8 @@ en:
       follow_up_questionnaires:
         name: Name
         participatory_space: Participatory space
+        labels_id: ID
+        labels_color: Color
       menu:
         position: Position
         raw_label: Label
@@ -1026,8 +1028,17 @@ en:
             save: Save
             title: Follow-up questionnaire
           form:
-            name_help: In the participatory space, you will see this name as a new item menu where to handle the responses
-            responder_email_help: This field will be used to find and email where to respond to. If the questionnaire is not anonymous, you can skip this part and the user will be used instead
+            remove: Remove label
+            confirm_destroy: Are you sure to remove this label?
+            edit: Edit label
+            new: New label
+            description: Labels are used to track the status of a response
+            labels_title: Labels
+            name_help: In the participatory space, you will see this name as a new
+              item menu where to handle the responses
+            responder_email_help: This field will be used to find and email where
+              to respond to. If the questionnaire is not anonymous, you can skip this
+              part and the user will be used instead
           index:
             confirm_destroy: Are you sure to remove this follow-up questionnaire?
             description: Turn questionnaire submissions into interactive threads.

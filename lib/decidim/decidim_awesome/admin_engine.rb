@@ -25,7 +25,9 @@ module Decidim
             post :create_preset, on: :collection
           end
         end
-        resources :follow_up_questionnaires, except: [:show]
+        resources :follow_up_questionnaires, except: [:show] do
+          resources :labels, except: [:show], controller: "follow_up_questionnaire_labels"
+        end
         resources :config, param: :var, only: [:show, :update]
         resources :scoped_styles, param: :var, only: [:create, :destroy]
         resources :proposal_custom_fields, param: :var, only: [:create, :destroy]
