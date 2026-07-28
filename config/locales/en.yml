@@ -1022,12 +1022,12 @@ en:
             error: Error updating redirection! %{error}
             success: Redirection updated successfully
         follow_up_questionnaires:
+          edit:
+            save: Save
+            title: Follow-up questionnaire
           form:
-            name_help: In the participatory space, you will see this name as a new
-              item menu where to handle the responses
-            responder_email_help: This field will be used to find and email where
-              to respond to. If the questionnaire is not anonymous, you can skip this
-              part and the user will be used instead
+            name_help: In the participatory space, you will see this name as a new item menu where to handle the responses
+            responder_email_help: This field will be used to find and email where to respond to. If the questionnaire is not anonymous, you can skip this part and the user will be used instead
           index:
             confirm_destroy: Are you sure to remove this follow-up questionnaire?
             description: Turn questionnaire submissions into interactive threads.

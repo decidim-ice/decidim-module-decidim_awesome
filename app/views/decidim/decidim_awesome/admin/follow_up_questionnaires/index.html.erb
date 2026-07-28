@@ -20,15 +20,41 @@
           </tr>
         </thead>
         <tbody>
+          <% @follow_up_questionnaires.each do |item| %>
             <tr>
-              <td></td>
-              <td></td>
+              <td><%= translated_attribute(item.title) %></td>
+              <td>
+                <% questionnaire_for = item.questionnaire_for %>
+                <% component = questionnaire_for.respond_to?(:component) ? questionnaire_for.component : nil %>
+                <% space = component&.participatory_space %>
+
+                <% hierarchy = [
+                  (translated_attribute(space.title) if space&.respond_to?(:title)),
+                  translated_attribute(item.title)
+                ].compact.join(" > ") %>
+
+                <% resource_edit_path = nil %>
+                <% if component.present? && questionnaire_for.respond_to?(:model_name) %>
+                  <% admin_proxy = Decidim::EngineRouter.admin_proxy(component) %>
+                  <% edit_path_method = :"edit_#{questionnaire_for.model_name.singular_route_key}_path" %>
+                  <% if admin_proxy.respond_to?(edit_path_method) %>
+                    <% resource_edit_path = admin_proxy.public_send(edit_path_method, questionnaire_for) %>
+                  <% end %>
+                <% end %>
+
+                <% if resource_edit_path.present? %>
+                  <%= link_to hierarchy.presence || "-", resource_edit_path %>
+                <% else %>
+                  <%= hierarchy.presence || "-" %>
+                <% end %>
+              </td>
               <td class="table-list__actions">
                 <%= icon_link_to "eye-line", "decidim_admin_decidim_awesome.follow_up_questionnaire_responses_path(item)", t(".preview"), class: "action-icon--preview" %>
-                <%= icon_link_to "pencil-line", "decidim_admin_decidim_awesome.edit_follow_up_questionnaire_path(item)", t(".edit"), class: "action-icon--edit" %>
-                <%= icon_link_to "close-circle-line"," decidim_admin_decidim_awesome.follow_up_questionnaire_path(item)", t(".remove"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
+                <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_follow_up_questionnaire_path(item), t(".edit"), class: "action-icon--edit" %>
+                <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.follow_up_questionnaire_path(item), t(".remove"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
               </td>
             </tr>
+          <% end %>
         </tbody>
       </table>
     </div>

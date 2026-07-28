@@ -233,7 +233,7 @@ module Decidim
             force_authorizations: Decidim::DecidimAwesome::Menu.config_enabled?(:force_authorizations),
             awesome_authorization_handler: Decidim::DecidimAwesome::Menu.config_enabled?(:awesome_authorization_handler),
             cookie_management: Decidim::DecidimAwesome::Menu.config_enabled?(:cookie_management),
-            follow_up_questionnaries: Decidim::DecidimAwesome::Menu.config_enabled?(:follow_up_questionnaries),
+            follow_up_questionnaires: Decidim::DecidimAwesome::Menu.config_enabled?(:follow_up_questionnaires),
             maintenance: true
           }
         end
