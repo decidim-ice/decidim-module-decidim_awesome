@@ -20,6 +20,7 @@ module Decidim
         end
 
         def update; end
+
         def destroy; end
 
         private
@@ -32,14 +33,12 @@ module Decidim
         end
 
         def status
-          @status ||= begin
-            OpenStruct.new(
-              id: params[:id],
-              follow_up_questionnaire_id: follow_up_questionnaire.id,
-              name: nil,
-              color: nil
-            )
-          end
+          @status ||= OpenStruct.new(
+            id: params[:id],
+            follow_up_questionnaire_id: follow_up_questionnaire.id,
+            name: nil,
+            color: nil
+          )
         end
       end
     end

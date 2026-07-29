@@ -4,7 +4,6 @@ module Decidim
   module DecidimAwesome
     module Admin
       class FollowUpQuestionnaireStatusForm < Decidim::Form
-        
         attribute :follow_up_questionnaire_id, Integer
         attribute :name, String
         attribute :color, String
@@ -22,9 +21,9 @@ module Decidim
 
         def to_params
           {
-          follow_up_questionnaire_id: follow_up_questionnaire_id,
-          name: name,
-          color: color
+            follow_up_questionnaire_id: follow_up_questionnaire_id,
+            name: name,
+            color: color
           }
         end
 
@@ -34,8 +33,8 @@ module Decidim
           statuses = context[:existing_statuses] || []
           duplicated = statuses.any? do |status|
             status.follow_up_questionnaire_id == follow_up_questionnaire_id &&
-            status.name.to_s.strip.casecmp?(name.to_s.strip) &&
-            status.id != context[:current_status_id]
+              status.name.to_s.strip.casecmp?(name.to_s.strip) &&
+              status.id != context[:current_status_id]
           end
           errors.add(:name, :taken) if duplicated
         end

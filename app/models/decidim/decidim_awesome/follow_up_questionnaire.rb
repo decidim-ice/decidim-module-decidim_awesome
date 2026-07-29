@@ -3,7 +3,6 @@
 module Decidim
   module DecidimAwesome
     class FollowUpQuestionnaire < ApplicationRecord
-
     end
   end
 end

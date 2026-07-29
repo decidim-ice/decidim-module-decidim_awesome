@@ -20,7 +20,7 @@ module Decidim
             status_id: status_id,
             body: body.to_s.strip.presence,
             author_id: author_id
-         }
+          }
         end
 
         private
