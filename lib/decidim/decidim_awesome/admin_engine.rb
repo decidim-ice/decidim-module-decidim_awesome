@@ -26,7 +26,7 @@ module Decidim
           end
         end
         resources :follow_up_questionnaires, except: [:show] do
-          resources :labels, except: [:show], controller: "follow_up_questionnaire_labels"
+          resources :statuses, except: [:show], controller: "follow_up_questionnaire_statuses"
         end
         resources :config, param: :var, only: [:show, :update]
         resources :scoped_styles, param: :var, only: [:create, :destroy]

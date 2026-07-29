@@ -88,10 +88,10 @@ en:
         pass_query: Pass the query string to the destination
         status: Status
       follow_up_questionnaires:
+        labels_color: Color
+        labels_id: ID
         name: Name
         participatory_space: Participatory space
-        labels_id: ID
-        labels_color: Color
       menu:
         position: Position
         raw_label: Label
@@ -1028,14 +1028,14 @@ en:
             save: Save
             title: Follow-up questionnaire
           form:
-            remove: Remove label
             confirm_destroy: Are you sure to remove this label?
-            edit: Edit label
-            new: New label
             description: Labels are used to track the status of a response
+            edit: Edit label
             labels_title: Labels
             name_help: In the participatory space, you will see this name as a new
               item menu where to handle the responses
+            new: New label
+            remove: Remove label
             responder_email_help: This field will be used to find and email where
               to respond to. If the questionnaire is not anonymous, you can skip this
               part and the user will be used instead

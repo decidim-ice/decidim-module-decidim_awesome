@@ -1,11 +1,12 @@
 <div class="form__wrapper">
+  <% follow_up_questionnaire_id = params[:id] %>
   <div class="card pt-4">
     <div class="card-section">
       <div class="row column">
         <%= form.translated :text_field, :name, class: "h-12 w-full", help_text: t(".name_help") %>
       </div>
       <div class="row column">
-        <%= form.select :participatory_space_name, @participatory_space_name_options || [], { include_blank: true, disabled: true }, class: "w-full" %>
+        <%= form.select :participatory_space_type, @participatory_space_name_options || [], { include_blank: true, disabled: true }, class: "w-full" %>
       </div>
       <div class="row column">
         <%= form.text_field :position, class: "w-full" %>
@@ -19,32 +20,38 @@
       <div class="row column">
         <h2 class="item_show__header-title mb-2">
             <%= t ".labels_title" %>
-            <%= link_to t(".new"), decidim_admin_decidim_awesome.new_follow_up_questionnaire_path, class: "button button__sm button__secondary ml-auto" %>
+            <% if follow_up_questionnaire_id.present? %>
+              <%= link_to t(".new"), decidim_admin_decidim_awesome.new_follow_up_questionnaire_status_path(follow_up_questionnaire_id), class: "button button__sm button__secondary ml-auto" %>
+            <% end %>
         </h2>
         <p class="help-text -mt-2 mb-4">
           <%= t(".description") %>
         </p>
-        <div class="table-scroll">
-          <table class="table-list">
-            <thead>
-              <tr>
-                <th><%= t("follow_up_questionnaires.labels_id", scope: "activemodel.attributes") %></th>
-                <th><%= t("follow_up_questionnaires.labels_color", scope: "activemodel.attributes") %></th>
-                <th class="actions"><%= t("decidim.decidim_awesome.admin.actions") %></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th><%= %></th>
-                <th><%=  %></th>
-                <th class="table-list__actions">
-                  <%= icon_link_to "pencil-line", "decidim_admin_decidim_awesome.edit_follow_up_questionnaire_label_path", t(".edit"), class: "action-icon--edit" %>
-                  <%= icon_link_to "close-circle-line", "decidim_admin_decidim_awesome.follow_up_questionnaire_label_path", t(".remove"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
-                </th>
-              </tr>
-            </tbody>
-          </table> 
-        </div>
+        <% if follow_up_questionnaire_id.present? %>
+          <div class="table-scroll">
+            <table class="table-list">
+              <thead>
+                <tr>
+                  <th><%= t("follow_up_questionnaires.labels_id", scope: "activemodel.attributes") %></th>
+                  <th><%= t("follow_up_questionnaires.labels_color", scope: "activemodel.attributes") %></th>
+                  <th class="actions"><%= t("decidim.decidim_awesome.admin.actions") %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% Array(@statuses).each do |status| %>
+                  <tr>
+                    <th><%= status.id %></th>
+                    <th><%= status.color %></th>
+                    <th class="table-list__actions">
+                      <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_follow_up_questionnaire_status_path(follow_up_questionnaire_id, status), t(".edit"), class: "action-icon--edit" %>
+                      <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.follow_up_questionnaire_status_path(follow_up_questionnaire_id, status), t(".remove"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
+                    </th>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
