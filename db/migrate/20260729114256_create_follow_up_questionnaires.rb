@@ -1,0 +1,19 @@
+# frozen_string_literal: true
+
+class CreateFollowUpQuestionnaires < ActiveRecord::Migration[7.0]
+  def change
+    create_table :follow_up_questionnaires do |t|
+      t.bigint :decidim_questionnaire_id, null: false
+      t.string :name, null: false
+      t.integer :position, null: false, default: 0
+      t.string :responder_name_field
+      t.string :responder_email_field
+      t.boolean :active, null: false, default: true
+
+      t.timestamps
+    end
+
+    add_index :follow_up_questionnaires, :decidim_questionnaire_id, unique: true
+    add_index :follow_up_questionnaires, [:active, :position]
+  end
+end

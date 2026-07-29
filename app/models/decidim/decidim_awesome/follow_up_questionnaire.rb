@@ -3,6 +3,27 @@
 module Decidim
   module DecidimAwesome
     class FollowUpQuestionnaire < ApplicationRecord
+      belongs_to :questionnaire,
+                 class_name: "Decidim::Forms::Questionnaire",
+                 foreign_key: :decidim_questionnaire_id
+
+      has_many :statuses,
+               class_name: "Decidim::DecidimAwesome::FollowUpQuestionnaireStatus",
+               dependent: :destroy,
+               inverse_of: :follow_up_questionnaire
+
+      has_many :responses,
+               class_name: "Decidim::DecidimAwesome::FollowUpQuestionnaireResponse",
+               dependent: :destroy,
+               inverse_of: :follow_up_questionnaire
+
+      validates :decidim_questionnaire_id, uniqueness: true
+      validates :name, presence: true
+      validates :position, presence: true
+      validates :active, inclusion: { in: [true, false] }
+
+      scope :ordered, -> { order(active: :desc, position: :asc, id: :asc) }
+      scope :active, -> { where(active: true) }
     end
   end
 end
