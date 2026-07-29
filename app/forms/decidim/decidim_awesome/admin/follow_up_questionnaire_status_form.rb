@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "decidim/form"
-
 module Decidim
   module DecidimAwesome
     module Admin

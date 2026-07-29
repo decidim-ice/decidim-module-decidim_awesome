@@ -14,9 +14,33 @@ module Decidim
         end
 
         def create; end
-        def edit; end
+
+        def edit
+          @form = form(FollowUpQuestionnaireStatusForm).from_model(status)
+        end
+
         def update; end
         def destroy; end
+
+        private
+
+        def follow_up_questionnaire
+          @follow_up_questionnaire ||= begin
+            id = params[:follow_up_questionnaire_id]
+            id.present? ? OpenStruct.new(id:) : OpenStruct.new(id: nil)
+          end
+        end
+
+        def status
+          @status ||= begin
+            OpenStruct.new(
+              id: params[:id],
+              follow_up_questionnaire_id: follow_up_questionnaire.id,
+              name: nil,
+              color: nil
+            )
+          end
+        end
       end
     end
   end

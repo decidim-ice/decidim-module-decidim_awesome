@@ -1023,6 +1023,13 @@ en:
           update:
             error: Error updating redirection! %{error}
             success: Redirection updated successfully
+        follow_up_questionnaire_statuses:
+          edit:
+            save: Save
+            title: Edit label
+          new:
+            save: Save
+            title: New label
         follow_up_questionnaires:
           edit:
             save: Save

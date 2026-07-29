@@ -6,16 +6,16 @@
         <%= form.translated :text_field, :name, class: "h-12 w-full", help_text: t(".name_help") %>
       </div>
       <div class="row column">
-        <%= form.select :participatory_space_type, @participatory_space_name_options || [], { include_blank: true, disabled: true }, class: "w-full" %>
+        <%= form.select :participatory_space_type, [], { include_blank: true, disabled: true }, class: "w-full" %>
       </div>
       <div class="row column">
         <%= form.text_field :position, class: "w-full" %>
       </div>
       <div class="row column">
-        <%= form.select :responder_name, @responder_name_options || [], { include_blank: true, help_text: t(".responder_email_help") }, class: "mb-8" %>
+        <%= form.select :responder_name, [], { include_blank: true, help_text: t(".responder_email_help") }, class: "mb-8" %>
       </div>
       <div class="row column">
-        <%= form.select :responder_email, @responder_email_options || [], { include_blank: true, help_text: t(".responder_email_help") }, class: "mb-8" %>
+        <%= form.select :responder_email, [], { include_blank: true, help_text: t(".responder_email_help") }, class: "mb-8" %>
       </div>
       <div class="row column">
         <h2 class="item_show__header-title mb-2">
