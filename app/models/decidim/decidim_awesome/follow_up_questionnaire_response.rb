@@ -13,7 +13,7 @@ module Decidim
 
       belongs_to :author, polymorphic: true
 
-      validates :questionnaire_submission_id, presence: true
+      validates :questionnaire_response_id, presence: true
       validates :body, length: { maximum: 65_535 }, allow_nil: true
 
       scope :recent, -> { order(created_at: :desc) }
