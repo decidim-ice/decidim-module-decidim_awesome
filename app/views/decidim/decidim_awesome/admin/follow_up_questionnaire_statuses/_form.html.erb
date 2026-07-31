@@ -17,10 +17,7 @@
                 box-shadow: 0 0 0 6px <%= values[:foreground] %>;
               }
             </style>
-            <%= form.radio_button :color, values[:background],
-                id: input_id,
-                label: false,
-                class: "!mr-4" %>
+            <%= form.radio_button :color, values[:background], id: input_id, label: false, class: "!mr-4" %>
           <% end %>
         </div>
       </div>
