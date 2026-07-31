@@ -2,10 +2,10 @@
 
 class CreateFollowUpQuestionnaireStatuses < ActiveRecord::Migration[7.0]
   def change
-    create_table :follow_up_questionnaire_statuses do |t|
+    create_table :decidim_awesome_follow_up_questionnaire_statuses do |t|
       t.references :follow_up_questionnaire,
                    null: false,
-                   foreign_key: true,
+                   foreign_key: { to_table: :decidim_awesome_follow_up_questionnaires },
                    index: { name: "index_fuqs_on_follow_up_questionnaire_id" }
 
       t.string :name, null: false

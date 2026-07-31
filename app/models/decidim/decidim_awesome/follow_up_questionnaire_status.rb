@@ -3,6 +3,8 @@
 module Decidim
   module DecidimAwesome
     class FollowUpQuestionnaireStatus < ApplicationRecord
+      self.table_name = "decidim_awesome_follow_up_questionnaire_statuses"
+
       belongs_to :follow_up_questionnaire,
                  class_name: "Decidim::DecidimAwesome::FollowUpQuestionnaire",
                  inverse_of: :statuses

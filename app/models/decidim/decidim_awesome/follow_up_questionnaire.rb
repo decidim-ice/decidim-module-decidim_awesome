@@ -3,6 +3,8 @@
 module Decidim
   module DecidimAwesome
     class FollowUpQuestionnaire < ApplicationRecord
+      self.table_name = "decidim_awesome_follow_up_questionnaires"
+
       belongs_to :questionnaire,
                  class_name: "Decidim::Forms::Questionnaire",
                  foreign_key: :decidim_questionnaire_id

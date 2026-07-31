@@ -1030,19 +1030,26 @@ en:
           new:
             save: Save
             title: New label
+          table:
+            description: Labels are used to track the status of a response
+            labels_title: Labels
+            new: New label
+            remove: Remove label
         follow_up_questionnaires:
+          create:
+            error: Error creating follow-up questionnaire! %{error}
+            success: Follow-up questionnaire created successfully
+          destroy:
+            error: Error removing follow-up questionnaire! %{error}
+            success: Follow-up questionnaire removed successfully
           edit:
             save: Save
             title: Follow-up questionnaire
           form:
             confirm_destroy: Are you sure to remove this label?
-            description: Labels are used to track the status of a response
             edit: Edit label
-            labels_title: Labels
             name_help: In the participatory space, you will see this name as a new
               item menu where to handle the responses
-            new: New label
-            remove: Remove label
             responder_email_help: This field will be used to find and email where
               to respond to. If the questionnaire is not anonymous, you can skip this
               part and the user will be used instead
@@ -1060,6 +1067,9 @@ en:
           new:
             save: Save
             title: Follow-up questionnaires
+          update:
+            error: Error updating follow-up questionnaire! %{error}
+            success: Follow-up questionnaire updated successfully
         hashcash:
           filters:
             ip_addresses: View IP addresses
