@@ -483,6 +483,14 @@ module Decidim
       false
     end
 
+    # i18n-tasks-use t('decidim.decidim_awesome.status_colors.gray')
+    # i18n-tasks-use t('decidim.decidim_awesome.status_colors.blue')
+    # i18n-tasks-use t('decidim.decidim_awesome.status_colors.green')
+    # i18n-tasks-use t('decidim.decidim_awesome.status_colors.yellow')
+    # i18n-tasks-use t('decidim.decidim_awesome.status_colors.orange')
+    # i18n-tasks-use t('decidim.decidim_awesome.status_colors.red')
+    # i18n-tasks-use t('decidim.decidim_awesome.status_colors.pink')
+    # i18n-tasks-use t('decidim.decidim_awesome.status_colors.purple')
     def self.follow_up_status_colors
       {
         gray: { background: "#F6F8FA", foreground: "#4B5058", name: I18n.t("gray", scope: "decidim.decidim_awesome.status_colors") },

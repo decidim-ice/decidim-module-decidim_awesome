@@ -88,8 +88,6 @@ en:
         pass_query: Pass the query string to the destination
         status: Status
       follow_up_questionnaires:
-        labels_color: Color
-        labels_id: ID
         name: Name
         participatory_space: Participatory space
       follow_up_questionnaire_statuses:
@@ -1051,8 +1049,6 @@ en:
             save: Save
             title: Follow-up questionnaire
           form:
-            confirm_destroy: Are you sure to remove this label?
-            edit: Edit label
             name_help: In the participatory space, you will see this name as a new
               item menu where to handle the responses
             responder_email_help: This field will be used to find and email where
@@ -1068,7 +1064,6 @@ en:
             new: New item
             preview: Preview
             remove: Remove
-            title: Follow-up questionnaries
           new:
             save: Save
             title: Follow-up questionnaires

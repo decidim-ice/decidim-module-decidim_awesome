@@ -11,6 +11,11 @@ data:
     - "<%= Bundler.rubygems.find_name('decidim-meetings').first.full_gem_path %>/config/locales/%{locale}.yml"
     - "<%= Bundler.rubygems.find_name('decidim-blogs').first.full_gem_path %>/config/locales/%{locale}.yml"
 
+search:
+  paths:
+    - app
+    - lib
+
 ignore_unused:
   - "active_hashcash.*"
   - "decidim.admin.actions.manage"
