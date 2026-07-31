@@ -5,8 +5,7 @@
       <div class="row column">
         <%= form.translated :text_field, :name, class: "h-12 w-full", help_text: t(".name_help") %>
       </div>
-      <%= form.hidden_field :decidim_questionnaire_id,
-      value: @follow_up_questionnaire&.decidim_questionnaire_id || params[:id] || params[:decidim_questionnaire_id] %>
+      <%= form.hidden_field :decidim_questionnaire_id, value: @follow_up_questionnaire&.decidim_questionnaire_id || params[:id] || params[:decidim_questionnaire_id] %>
       <div class="row column">
         <%= form.text_field :position, class: "w-full" %>
       </div>
