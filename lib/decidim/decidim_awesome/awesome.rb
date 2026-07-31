@@ -482,5 +482,32 @@ module Decidim
       # Decidim.version[0..3] == "0.29"
       false
     end
+
+    def self.follow_up_status_colors
+      {
+        gray: { background: "#F6F8FA", foreground: "#4B5058", name: I18n.t("gray", scope: "decidim.decidim_awesome.status_colors") },
+        blue: { background: "#EBF9FF", foreground: "#0851A6", name: I18n.t("blue", scope: "decidim.decidim_awesome.status_colors") },
+        green: { background: "#E3FCE9", foreground: "#15602C", name: I18n.t("green", scope: "decidim.decidim_awesome.status_colors") },
+        yellow: { background: "#FFFCE5", foreground: "#9A6700", name: I18n.t("yellow", scope: "decidim.decidim_awesome.status_colors") },
+        orange: { background: "#FFF1E5", foreground: "#BC4C00", name: I18n.t("orange", scope: "decidim.decidim_awesome.status_colors") },
+        red: { background: "#FFEBE9", foreground: "#D1242F", name: I18n.t("red", scope: "decidim.decidim_awesome.status_colors") },
+        pink: { background: "#FFEFF7", foreground: "#BF3989", name: I18n.t("pink", scope: "decidim.decidim_awesome.status_colors") },
+        purple: { background: "#FBEFFF", foreground: "#8250DF", name: I18n.t("purple", scope: "decidim.decidim_awesome.status_colors") }
+      }
+    end
+
+    def self.create_default_statuses!(follow_up_questionnaire)
+      colors = follow_up_status_colors
+      [
+        { name: "Answered", color: colors[:yellow][:background] },
+        { name: "In progress", color: colors[:green][:background] },
+        { name: "Pending", color: colors[:red][:background] }
+      ].each do |attrs|
+        FollowUpQuestionnaireStatus.create!(
+          follow_up_questionnaire: follow_up_questionnaire,
+          **attrs
+        )
+      end
+    end
   end
 end

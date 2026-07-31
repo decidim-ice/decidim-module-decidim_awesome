@@ -5,7 +5,7 @@ module Decidim
     module Admin
       class FollowUpQuestionnaireStatusesController < DecidimAwesome::Admin::ApplicationController
         before_action :follow_up_questionnaire
-        before_action :status, only: [:edit, :update, :destroy]
+        before_action :status, only: [:update, :destroy]
 
         def index; end
 
@@ -13,32 +13,53 @@ module Decidim
           @form = form(FollowUpQuestionnaireStatusForm).instance
         end
 
-        def create; end
+        def create
+          @form = form(FollowUpQuestionnaireStatusForm).from_params(params)
 
-        def edit
-          @form = form(FollowUpQuestionnaireStatusForm).from_model(status)
+          CreateFollowUpQuestionnaireStatus.call(@form) do
+            on(:ok) do
+              flash[:notice] = I18n.t("follow_up_questionnaire_statuses.create.success", scope: "decidim.decidim_awesome.admin")
+              redirect_to decidim_admin_decidim_awesome.follow_up_questionnaire_statuses_path(@follow_up_questionnaire)
+            end
+            on(:invalid) do
+              flash.now[:alert] = I18n.t("follow_up_questionnaire_statuses.create.error", scope: "decidim.decidim_awesome.admin")
+              render action: :new, status: :unprocessable_content
+            end
+          end
         end
 
-        def update; end
+        def update
+          @form = form(FollowUpQuestionnaireStatusForm).from_params(params)
 
-        def destroy; end
+          UpdateFollowUpQuestionnaireStatus.call(@form, status) do
+            on(:ok) do
+              flash[:notice] = I18n.t("follow_up_questionnaire_statuses.update.success", scope: "decidim.decidim_awesome.admin")
+              redirect_to decidim_admin_decidim_awesome.follow_up_questionnaire_statuses_path(@follow_up_questionnaire)
+            end
+            on(:invalid) do
+              flash.now[:alert] = I18n.t("follow_up_questionnaire_statuses.update.error", scope: "decidim.decidim_awesome.admin")
+              render action: :edit, status: :unprocessable_content
+            end
+          end
+        end
+
+        def destroy
+          DestroyFollowUpQuestionnaireStatus.call(status, current_user) do
+            on(:ok) do
+              flash[:notice] = I18n.t("follow_up_questionnaire_statuses.destroy.success", scope: "decidim.decidim_awesome.admin")
+              redirect_to decidim_admin_decidim_awesome.follow_up_questionnaire_statuses_path(@follow_up_questionnaire)
+            end
+          end
+        end
 
         private
 
         def follow_up_questionnaire
-          @follow_up_questionnaire ||= begin
-            id = params[:follow_up_questionnaire_id]
-            id.present? ? OpenStruct.new(id:) : OpenStruct.new(id: nil)
-          end
+          @follow_up_questionnaire ||= FollowUpQuestionnaire.find(params[:follow_up_questionnaire_id])
         end
 
         def status
-          @status ||= OpenStruct.new(
-            id: params[:id],
-            follow_up_questionnaire_id: follow_up_questionnaire.id,
-            name: nil,
-            color: nil
-          )
+          @status ||= follow_up_questionnaire.statuses.find(params[:id])
         end
       end
     end

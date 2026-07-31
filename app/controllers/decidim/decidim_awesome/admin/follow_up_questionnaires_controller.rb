@@ -76,14 +76,22 @@ module Decidim
 
         private
 
-        # The :id route param always refers to the Decidim::Forms::Questionnaire id
-        # (see the index view), not the FollowUpQuestionnaire's own primary key.
-        # A FollowUpQuestionnaire may not exist yet for a given questionnaire, in
-        # which case a new (unpersisted) one is built so it can be configured for
-        # the first time from the same edit/update flow.
         def follow_up_questionnaire
           @follow_up_questionnaire ||= Decidim::DecidimAwesome::FollowUpQuestionnaire.find_by(decidim_questionnaire_id: params[:id]) ||
-                                       Decidim::DecidimAwesome::FollowUpQuestionnaire.new(decidim_questionnaire_id: params[:id])
+                                       build_follow_up_questionnaire
+
+          Decidim::DecidimAwesome.create_default_statuses!(@follow_up_questionnaire) if @follow_up_questionnaire.statuses.empty?
+
+          @follow_up_questionnaire
+        end
+
+        def build_follow_up_questionnaire
+          questionnaire = Decidim::Forms::Questionnaire.find(params[:id])
+
+          Decidim::DecidimAwesome::FollowUpQuestionnaire.create!(
+            decidim_questionnaire_id: questionnaire.id,
+            name: translated_attribute(questionnaire.title)
+          )
         end
       end
     end

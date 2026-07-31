@@ -12,16 +12,19 @@
     <table class="table-list">
       <thead>
         <tr>
-          <th><%= t("follow_up_questionnaires.labels_id", scope: "activemodel.attributes") %></th>
-          <th><%= t("follow_up_questionnaires.labels_color", scope: "activemodel.attributes") %></th>
+          <th><%= t("follow_up_questionnaire_statuses.labels_id", scope: "activemodel.attributes") %></th>
+          <th><%= t("follow_up_questionnaire_statuses.labels_color", scope: "activemodel.attributes") %></th>
           <th class="actions"><%= t("decidim.decidim_awesome.admin.actions") %></th>
         </tr>
       </thead>
       <tbody>
         <% Array(statuses).each do |status| %>
           <tr>
-            <td><%= status.id %></td>
-            <td><%= status.color %></td>
+            <td><%= status.name %></td>
+            <td>
+              <% color_values = Decidim::DecidimAwesome.follow_up_status_colors.values.find { |v| v[:background] == status.color } %>
+              <span style="display:inline-block; width:1.2rem; height:1.2rem; background-color:<%= status.color %>; border: 2px solid <%= color_values&.dig(:foreground) || status.color %>; border-radius:3px;"></span>
+            </td>
             <td class="table-list__actions">
               <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_follow_up_questionnaire_status_path(follow_up_questionnaire_id, status), t(".edit"), class: "action-icon--edit" %>
               <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.follow_up_questionnaire_status_path(follow_up_questionnaire_id, status), t(".remove"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>

@@ -92,6 +92,9 @@ en:
         labels_id: ID
         name: Name
         participatory_space: Participatory space
+      follow_up_questionnaire_statuses:
+        labels_color: Color
+        labels_id: ID
       menu:
         position: Position
         raw_label: Label
@@ -1031,6 +1034,8 @@ en:
             save: Save
             title: New label
           table:
+            edit: Edit
+            confirm_destroy: Are you sure to remove this label?
             description: Labels are used to track the status of a response
             labels_title: Labels
             new: New label
@@ -1445,6 +1450,15 @@ en:
           need to authorize your account with a valid authorization (%{authorizations}).
         login_and_authorization_is_required: In order to access this part of the platform,
           you need to log in and authorize your account.
+      status_colors:
+        blue: Blue
+        gray: Gray
+        green: Green
+        orange: Orange
+        pink: Pink
+        purple: Purple
+        red: Red
+        yellow: Yellow
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |
