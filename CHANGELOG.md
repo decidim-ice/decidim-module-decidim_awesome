@@ -4,6 +4,14 @@ CHANGELOG
 unreleased
 -------
 
+v0.14.4
+-------
+Compatibility:
+  - Decidim 0.31.x
+
+Features:
+  - Updates cookies changes in Decidim 0.31.7
+
 v0.14.3
 -------
 Compatibility:
