@@ -62,6 +62,10 @@ module Decidim
       true
     end
 
+    config_accessor :volunteer_inscriptions do
+      true
+    end
+
     # Live chat widget linked to Telegram account or group
     # In the admin side only
     config_accessor :intergram_for_admins do

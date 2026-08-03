@@ -27,6 +27,7 @@ module Decidim
         end
         resources :follow_up_questionnaires, except: [:show] do
           resources :statuses, except: [:show], controller: "follow_up_questionnaire_statuses"
+          resources :responses, except: [:show], controller: "follow_up_questionnaire_responses"
         end
         resources :config, param: :var, only: [:show, :update]
         resources :scoped_styles, param: :var, only: [:create, :destroy]
@@ -94,6 +95,7 @@ module Decidim
         Decidim::DecidimAwesome::Menu.register_maintenance_admin_menu!
         Decidim::DecidimAwesome::Menu.register_awesome_authorization_submenu!
         Decidim::DecidimAwesome::Menu.register_awesome_admin_menu!
+        Decidim::DecidimAwesome::Menu.register_participatory_process_follow_up_questionnaires_menu!
 
         # user menu
         Decidim.menu :admin_user_menu do |menu|

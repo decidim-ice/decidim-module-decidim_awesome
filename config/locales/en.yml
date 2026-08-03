@@ -1128,6 +1128,7 @@ en:
             awesome_authorizations: Awesome Authorizations
             force_authorizations: Force Authorizations
             verifications: Verifications
+          volunteer_inscriptions: Volunteer inscriptions
         menu_hacks:
           create:
             error: Error creating menu item! %{error}

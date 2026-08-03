@@ -205,6 +205,20 @@ module Decidim
           end
         end
 
+        def register_participatory_process_follow_up_questionnaires_menu!
+          Decidim.menu :admin_participatory_process_menu do |menu|
+            menu.add_item :awesome_volunteer_inscriptions,
+                          I18n.t("menu.volunteer_inscriptions", scope: "decidim.decidim_awesome.admin"),
+                          decidim_admin_decidim_awesome.follow_up_questionnaires_path(
+                            participatory_space_manifest: "participatory_processes",
+                            participatory_space_slug: current_participatory_space.slug
+                          ),
+                          icon_name: "flag-line",
+                          if: Decidim::DecidimAwesome::Menu.config_enabled?(:volunteer_inscriptions) &&
+                              defined?(current_user) && current_user&.read_attribute("admin") && current_user.admin_terms_accepted?
+          end
+        end
+
         def menus
           @menus ||= {
             editors: Decidim::DecidimAwesome::Menu.config_enabled?(:allow_images_in_editors, :allow_videos_in_editors),

@@ -24,6 +24,7 @@ Decidim::DecidimAwesome.configure do |config|
       :custom_redirects,
       :cookie_management,
       :follow_up_questionnaires,
+      :volunteer_inscriptions,
       :validate_title_min_length,
       :validate_title_max_caps_percent,
       :validate_title_max_marks_together,
