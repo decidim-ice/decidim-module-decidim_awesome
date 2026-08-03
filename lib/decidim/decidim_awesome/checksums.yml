@@ -19,6 +19,7 @@ decidim-core:
   /app/cells/decidim/data_consent/category.erb:
     decidim-0.31.0: c60bd96bf4d63892fa3f0e077e5bc821
     decidim-0.31.5: 2ae94e0a35b44657f261ac90e955b305
+    decidim-0.31.7: 7ae091ad9df6cced0c5873c032f0d84c
   /app/packs/entrypoints/decidim_editor.js:
     decidim-0.31.0: e690b09ebd83d76a9dbdaefe02812333
   /app/packs/src/decidim/controllers/editor/controller.js:

@@ -18,16 +18,18 @@ module Decidim
 
       def categories
         @categories ||= CookieManagementStore.new(model, awesome_categories).categories.values.map do |category|
-          next if category["visibility"] == "hidden"
+          category.symbolize_keys!
+          next if category[:visibility] == "hidden"
 
           category.tap do |cat|
-            cat["title"] = translated_attribute(category["title"])
-            cat["description"] = translated_attribute(category["description"])
-            cat["items"] = cat["items"].values.map do |item|
+            cat[:title] = translated_attribute(category[:title])
+            cat[:description] = translated_attribute(category[:description])
+            cat[:items] = cat[:items].values.map do |item|
               item.tap do |i|
-                i["service"] = translated_attribute(i["service"])
-                i["description"] = translated_attribute(i["description"])
-                i["expiration"] = translated_attribute(i["expiration"])
+                i.symbolize_keys!
+                i[:service] = translated_attribute(i[:service])
+                i[:description] = translated_attribute(i[:description])
+                i[:expiration] = translated_attribute(i[:expiration])
               end
             end.compact
           end
