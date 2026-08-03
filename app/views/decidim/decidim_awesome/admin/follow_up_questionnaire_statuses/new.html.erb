@@ -5,7 +5,7 @@
 </div>
 
 <div class="item__edit item__edit-1col">
-  <div class="item__edit-form p-4">
+  <div class="item__edit-form">
     <%= decidim_form_for(@form, url: decidim_admin_decidim_awesome.follow_up_questionnaire_statuses_path(@follow_up_questionnaire), html: { class: "form-defaults form new_status" }) do |f| %>
       <%= render partial: "form", object: f %>
       <div class="item__edit-sticky">

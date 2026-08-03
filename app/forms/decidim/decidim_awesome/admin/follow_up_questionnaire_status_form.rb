@@ -5,11 +5,11 @@ module Decidim
     module Admin
       class FollowUpQuestionnaireStatusForm < Decidim::Form
         attribute :follow_up_questionnaire_id, Integer
-        attribute :name, String
+        translatable_attribute :name, String
         attribute :color, String
 
         validates :follow_up_questionnaire_id, presence: true, numericality: { only_integer: true }
-        validates :name, presence: true
+        validates :name, translatable_presence: true
 
         validate :name_unique_within_questionnaire, if: -> { follow_up_questionnaire_id.present? && name.present? }
 
@@ -21,9 +21,10 @@ module Decidim
 
         def to_params
           {
-            follow_up_questionnaire_id: follow_up_questionnaire_id,
-            name: name,
-            color: color
+            :follow_up_questionnaire_id => follow_up_questionnaire_id,
+            "edited" => true,
+            :name => name,
+            :color => color
           }
         end
 

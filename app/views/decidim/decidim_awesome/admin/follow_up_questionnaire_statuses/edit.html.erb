@@ -6,7 +6,7 @@
 
 <div class="item__edit item__edit-1col">
   <div class="item__edit-form">
-    <%= decidim_form_for(@form, url: decidim_admin_decidim_awesome.follow_up_questionnaire_status_path(@follow_up_questionnaire, @status), method: :patch, html: { class: "form-defaults form edit_status" }) do |f| %>
+    <%= decidim_form_for(@form, url: decidim_admin_decidim_awesome.follow_up_questionnaire_status_path(@follow_up_questionnaire), method: :patch, html: { class: "form-defaults form edit_status" }) do |f| %>
       <%= render partial: "form", object: f %>
       <div class="item__edit-sticky">
         <div class="item__edit-sticky-container">

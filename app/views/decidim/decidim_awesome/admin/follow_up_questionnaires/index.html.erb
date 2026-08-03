@@ -51,7 +51,13 @@
               <td class="table-list__actions">
                 <%= icon_link_to "eye-line", "decidim_admin_decidim_awesome.follow_up_questionnaire_responses_path(item)", t(".preview"), class: "action-icon--preview" %>
                 <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_follow_up_questionnaire_path(item), t(".edit"), class: "action-icon--edit" %>
-                <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.follow_up_questionnaire_path(item), t(".remove"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
+                <% if item["edited"] %>
+                  <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.follow_up_questionnaire_path(item), t(".reset"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_reset") } %>
+                <% else %>
+                  <span class="action-icon">
+                    <%= icon "close-circle-line", class: "action-icon action-icon--disabled", role: "img", "aria-label": t(".cannot_remove_default") %>
+                  </span>
+                <% end %>
               </td>
             </tr>
           <% end %>

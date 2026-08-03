@@ -28,12 +28,13 @@ module Decidim
 
         def to_params
           {
-            name: name,
-            decidim_questionnaire_id: decidim_questionnaire_id,
-            position: position,
-            responder_name_field: responder_name_field,
-            responder_email_field: responder_email_field,
-            active: active
+            :name => name,
+            :decidim_questionnaire_id => decidim_questionnaire_id,
+            :position => position,
+            "edited" => true,
+            :responder_name_field => responder_name_field,
+            :responder_email_field => responder_email_field,
+            :active => active
           }
         end
 

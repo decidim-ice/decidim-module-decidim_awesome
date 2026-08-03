@@ -87,12 +87,12 @@ en:
         origin: Origin
         pass_query: Pass the query string to the destination
         status: Status
-      follow_up_questionnaires:
-        name: Name
-        participatory_space: Participatory space
       follow_up_questionnaire_statuses:
         labels_color: Color
         labels_id: ID
+      follow_up_questionnaires:
+        name: Name
+        participatory_space: Participatory space
       menu:
         position: Position
         raw_label: Label
@@ -1032,12 +1032,12 @@ en:
             save: Save
             title: New label
           table:
-            edit: Edit
-            confirm_destroy: Are you sure to remove this label?
+            cannot_remove_default: Default labels cannot be removed
+            confirm_reset: Are you sure to remove this customization?
             description: Labels are used to track the status of a response
+            edit: Edit
             labels_title: Labels
             new: New label
-            remove: Remove label
         follow_up_questionnaires:
           create:
             error: Error creating follow-up questionnaire! %{error}
@@ -1055,7 +1055,8 @@ en:
               to respond to. If the questionnaire is not anonymous, you can skip this
               part and the user will be used instead
           index:
-            confirm_destroy: Are you sure to remove this follow-up questionnaire?
+            cannot_remove_default: Follow-up questionnaires cannot be removed
+            confirm_reset: Are you sure to remove this customization?
             description: Turn questionnaire submissions into interactive threads.
               Click any response to message the participant directly, log private
               team notes, apply tracking labels, and view the complete communication
@@ -1063,7 +1064,6 @@ en:
             edit: Edit
             new: New item
             preview: Preview
-            remove: Remove
           new:
             save: Save
             title: Follow-up questionnaires

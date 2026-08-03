@@ -28,6 +28,10 @@ module Decidim
           end
         end
 
+        def edit
+          @form = form(FollowUpQuestionnaireStatusForm).from_model(status)
+        end
+
         def update
           @form = form(FollowUpQuestionnaireStatusForm).from_params(params)
 
