@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    decidim-decidim_awesome (0.14.3)
+    decidim-decidim_awesome (0.14.4)
       active_hashcash (~> 0.4.0)
       decidim-admin (>= 0.31.0, < 0.32)
       decidim-core (>= 0.31.0, < 0.32)
@@ -1088,7 +1088,7 @@ CHECKSUMS
   decidim-conferences (0.31.7) sha256=45ebab727ca67d53d9bd677a2d4bf70d891508cea924bf787bf19c523dd897ed
   decidim-core (0.31.7) sha256=dafa540b07bd77df62b9a235f0006cb4edf0c3b63a41dd33bf564b289b94a631
   decidim-debates (0.31.7) sha256=f767254dcc447d86c7ed5a16207065d180518668bdb9ae5a88c95d540900a4e6
-  decidim-decidim_awesome (0.14.3)
+  decidim-decidim_awesome (0.14.4)
   decidim-dev (0.31.7) sha256=45980f602353fd64a477e65e7d97e31332a1afea280372388f5d8cd05f5dda3c
   decidim-elections (0.31.7) sha256=5050903aa133fb6fc06b4fb20627c7cf2afa2f2d569073c959505ccbda278923
   decidim-forms (0.31.7) sha256=62a158dbb0859d740b91d4bf9f256a7a77f91a2be3669db1bc38406a034bf9a4
