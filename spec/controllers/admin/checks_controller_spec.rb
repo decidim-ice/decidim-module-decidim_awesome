@@ -153,7 +153,7 @@ module Decidim::DecidimAwesome
         describe "#awesome_version_outdated?" do
           context "when latest version is available" do
             before do
-              allow(controller.helpers).to receive(:awesome_latest_version).and_return("0.14.4")
+              allow(controller.helpers).to receive(:awesome_latest_version).and_return("0.14.5")
             end
 
             it "returns true when current version is older" do
@@ -188,7 +188,8 @@ module Decidim::DecidimAwesome
           [
             { "tag_name" => "v0.31.2", "draft" => false, "prerelease" => false },
             { "tag_name" => "v0.31.1", "draft" => false, "prerelease" => false },
-            { "tag_name" => "v0.30.5", "draft" => false, "prerelease" => false }
+            { "tag_name" => "v0.30.5", "draft" => false, "prerelease" => false },
+            { "tag_name" => "v0.30.6", "draft" => false, "prerelease" => false }
           ]
         end
 
