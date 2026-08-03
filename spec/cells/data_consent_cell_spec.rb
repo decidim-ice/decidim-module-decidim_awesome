@@ -63,12 +63,12 @@ module Decidim
           it "returns the default Decidim categories" do
             default_slugs = Decidim.consent_categories.pluck(:slug).map(&:to_s)
 
-            expect(subject.categories.pluck("slug")).to match_array(default_slugs)
+            expect(subject.categories.pluck(:slug)).to match_array(default_slugs)
           end
 
           it "returns categories with the expected keys" do
             category = subject.categories.first
-            expect(category.keys).to include("slug", "mandatory", "title", "description", "visibility", "items")
+            expect(category.keys).to include(:slug, :mandatory, :title, :description, :visibility, :items)
           end
         end
 
@@ -79,27 +79,27 @@ module Decidim
 
           it "returns the configured categories merged with defaults" do
             default_slugs = Decidim.consent_categories.map { |c| c[:slug].to_s }
-            expect(subject.categories.pluck("slug")).to match_array(default_slugs + %w(custom))
+            expect(subject.categories.pluck(:slug)).to match_array(default_slugs + %w(custom))
           end
 
           it "overrides default category attributes with custom values" do
-            essential = subject.categories.find { |c| c["slug"] == "essential" }
-            expect(essential["title"]).to eq("Essential")
-            expect(essential["description"]).to eq("Essential cookies")
-            expect(essential["mandatory"]).to be(true)
+            essential = subject.categories.find { |c| c[:slug] == "essential" }
+            expect(essential[:title]).to eq("Essential")
+            expect(essential[:description]).to eq("Essential cookies")
+            expect(essential[:mandatory]).to be(true)
           end
 
           it "maps items from custom config" do
-            essential = subject.categories.find { |c| c["slug"] == "essential" }
-            item = essential["items"].find { |i| i["name"] == "session_cookie" }
+            essential = subject.categories.find { |c| c[:slug] == "essential" }
+            item = essential[:items].find { |i| i[:name] == "session_cookie" }
             expect(item).to be_present
-            expect(item["type"]).to eq("cookie")
-            expect(item["service"]).to be_a(String)
+            expect(item[:type]).to eq("cookie")
+            expect(item[:service]).to be_a(String)
           end
 
           it "returns empty items for categories without items" do
-            analytics = subject.categories.find { |c| c["slug"] == "analytics" }
-            expect(analytics["items"]).to be_empty
+            analytics = subject.categories.find { |c| c[:slug] == "analytics" }
+            expect(analytics[:items]).to be_empty
           end
         end
       end
