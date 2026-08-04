@@ -88,8 +88,10 @@ en:
         pass_query: Pass the query string to the destination
         status: Status
       follow_up_questionnaire_statuses:
+        color: Color
         labels_color: Color
         labels_id: ID
+        name: Name
       follow_up_questionnaires:
         name: Name
         participatory_space: Participatory space

@@ -3,6 +3,10 @@
 module Decidim
   module DecidimAwesome
     class FollowUpQuestionnaireStatus < ApplicationRecord
+      include Decidim::Traceable
+      include Decidim::TranslatableAttributes
+      include Decidim::TranslatableResource
+
       self.table_name = "decidim_awesome_follow_up_questionnaire_statuses"
 
       belongs_to :follow_up_questionnaire,
@@ -16,6 +20,10 @@ module Decidim
 
       validates :name, presence: true, uniqueness: { scope: :follow_up_questionnaire_id }
       validates :color, presence: true
+
+      def self.log_presenter_class_for(_log)
+        Decidim::DecidimAwesome::AdminLog::FollowUpQuestionnaireStatusPresenter
+      end
     end
   end
 end
