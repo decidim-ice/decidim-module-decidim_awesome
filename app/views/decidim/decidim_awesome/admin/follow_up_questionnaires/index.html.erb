@@ -49,9 +49,10 @@
                 <% end %>
               </td>
               <td class="table-list__actions">
-                <%= icon_link_to "eye-line", "decidim_admin_decidim_awesome.follow_up_questionnaire_responses_path(item)", t(".preview"), class: "action-icon--preview" %>
+                <%= icon_link_to "eye-line", decidim_admin_decidim_awesome.follow_up_questionnaire_responses_path(item), t(".preview"), class: "action-icon--preview" %>
                 <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_follow_up_questionnaire_path(item), t(".edit"), class: "action-icon--edit" %>
-                <% if item["edited"] %>
+                <% config = @configs_by_questionnaire_id[item.id] %>
+                <% if config&.edited? %>
                   <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.follow_up_questionnaire_path(item), t(".reset"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_reset") } %>
                 <% else %>
                   <span class="action-icon">

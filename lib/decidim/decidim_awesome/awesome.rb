@@ -510,14 +510,19 @@ module Decidim
 
     def self.create_default_statuses!(follow_up_questionnaire)
       colors = follow_up_status_colors
+      locales = Decidim.available_locales.index_with { |_locale| nil }
+
       [
         { name: "Answered", color: colors[:yellow][:background] },
         { name: "In progress", color: colors[:green][:background] },
         { name: "Pending", color: colors[:red][:background] }
       ].each do |attrs|
+        name = locales.merge("en" => attrs[:name])
+
         FollowUpQuestionnaireStatus.create!(
           follow_up_questionnaire: follow_up_questionnaire,
-          **attrs
+          name: name,
+          color: attrs[:color]
         )
       end
     end

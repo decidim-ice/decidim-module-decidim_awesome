@@ -1056,6 +1056,9 @@ en:
             responder_email_help: This field will be used to find and email where
               to respond to. If the questionnaire is not anonymous, you can skip this
               part and the user will be used instead
+            responder_name_help: This field will be used to find and display the name
+              of the responder. If the questionnaire is not anonymous, you can skip
+              this part and the user will be used instead
           index:
             cannot_remove_default: Follow-up questionnaires cannot be removed
             confirm_reset: Are you sure to remove this customization?

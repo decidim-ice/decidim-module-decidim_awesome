@@ -3,6 +3,11 @@
 module Decidim
   module DecidimAwesome
     class FollowUpQuestionnaire < ApplicationRecord
+      include Decidim::TranslatableAttributes
+      include Decidim::TranslatableResource
+
+      translatable_fields :name
+
       self.table_name = "decidim_awesome_follow_up_questionnaires"
 
       belongs_to :questionnaire,

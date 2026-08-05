@@ -7,6 +7,8 @@ module Decidim
       include Decidim::TranslatableAttributes
       include Decidim::TranslatableResource
 
+      translatable_fields :name
+
       self.table_name = "decidim_awesome_follow_up_questionnaire_statuses"
 
       belongs_to :follow_up_questionnaire,

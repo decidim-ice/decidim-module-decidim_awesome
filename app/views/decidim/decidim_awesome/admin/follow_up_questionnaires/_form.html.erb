@@ -1,3 +1,4 @@
+<% question_options = @questionnaire.questions.map { |q| [translated_attribute(q.body), q.id] } %>
 <div class="form__wrapper">
   <% follow_up_questionnaire_id = @follow_up_questionnaire&.id %>
   <div class="card pt-4">
@@ -10,10 +11,10 @@
         <%= form.text_field :position, class: "w-full" %>
       </div>
       <div class="row column">
-        <%= form.select :responder_name_field, [], { include_blank: true, help_text: t(".responder_email_help") }, class: "mb-8" %>
+        <%= form.select :responder_name_field, question_options, { include_blank: true, help_text: t(".responder_name_help") }, class: "mb-8" %>
       </div>
       <div class="row column">
-        <%= form.select :responder_email_field, [], { include_blank: true, help_text: t(".responder_email_help") }, class: "mb-8" %>
+        <%= form.select :responder_email_field, question_options, { include_blank: true, help_text: t(".responder_email_help") }, class: "mb-8" %>
       </div>
       <div class="row column">
         <%= render "decidim/decidim_awesome/admin/follow_up_questionnaire_statuses/table",follow_up_questionnaire_id: follow_up_questionnaire_id,statuses: @follow_up_questionnaire&.statuses %>

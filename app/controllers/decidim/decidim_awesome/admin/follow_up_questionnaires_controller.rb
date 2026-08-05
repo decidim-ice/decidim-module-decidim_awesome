@@ -11,15 +11,24 @@ module Decidim
         end
 
         def index
-          @follow_up_questionnaires = Decidim::Forms::Questionnaire.order(created_at: :desc)
+          @follow_up_questionnaires = Decidim::Forms::Questionnaire.order(created_at: :desc).select do |questionnaire|
+            questionnaire_for = questionnaire.questionnaire_for
+            component = questionnaire_for.respond_to?(:component) ? questionnaire_for.component : nil
+            component&.participatory_space.present?
+          end
+          @configs_by_questionnaire_id = Decidim::DecidimAwesome::FollowUpQuestionnaire
+                                         .where(decidim_questionnaire_id: @follow_up_questionnaires.map(&:id))
+                                         .index_by(&:decidim_questionnaire_id)
         end
 
         def new
           @form = form(FollowUpQuestionnaireForm).instance
+          @questionnaire = Decidim::Forms::Questionnaire.find(params[:id] || params[:decidim_questionnaire_id])
         end
 
         def edit
           @follow_up_questionnaire = follow_up_questionnaire
+          @questionnaire = @follow_up_questionnaire.questionnaire
           @form = form(FollowUpQuestionnaireForm).from_model(@follow_up_questionnaire)
         end
 
@@ -90,7 +99,7 @@ module Decidim
 
           Decidim::DecidimAwesome::FollowUpQuestionnaire.create!(
             decidim_questionnaire_id: questionnaire.id,
-            name: translated_attribute(questionnaire.title)
+            name: questionnaire.title
           )
         end
       end

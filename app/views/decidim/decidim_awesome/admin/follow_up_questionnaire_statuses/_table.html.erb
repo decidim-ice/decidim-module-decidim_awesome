@@ -20,7 +20,7 @@
       <tbody>
         <% Array(statuses).each do |status| %>
           <tr>
-            <td><%= status.name %></td>
+            <td><%= translated_attribute(status.name) %></td>
             <td>
               <% color_values = Decidim::DecidimAwesome.follow_up_status_colors.values.find { |v| v[:background] == status.color } %>
               <span style="display:inline-block; width:1.2rem; height:1.2rem; background-color:<%= status.color %>; border: 2px solid <%= color_values&.dig(:foreground) || status.color %>; border-radius:3px;"></span>

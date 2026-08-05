@@ -5,18 +5,18 @@ module Decidim
     module Admin
       class FollowUpQuestionnaireResponseForm < Decidim::Form
         attribute :follow_up_questionnaire_id, Integer
-        attribute :questionnaire_submission_id, Integer
+        attribute :questionnaire_response_id, Integer
         attribute :status_id, Integer
         attribute :body, String
         attribute :author_id, Integer
 
-        validates :follow_up_questionnaire_id, :questionnaire_submission_id, :status_id, :author_id, presence: true, numericality: { only_integer: true }
+        validates :follow_up_questionnaire_id, :questionnaire_response_id, :status_id, :author_id, presence: true, numericality: { only_integer: true }
         validate :status_belongs_to_questionnaire
 
         def to_params
           {
             follow_up_questionnaire_id: follow_up_questionnaire_id,
-            questionnaire_submission_id: questionnaire_submission_id,
+            questionnaire_response_id: questionnaire_response_id,
             status_id: status_id,
             body: body.to_s.strip.presence,
             author_id: author_id
