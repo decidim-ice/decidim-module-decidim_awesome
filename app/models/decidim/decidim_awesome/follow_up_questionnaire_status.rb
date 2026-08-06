@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# i18n-tasks-use t('activemodel.attributes.follow_up_questionnaire_statuses.color')
+# i18n-tasks-use t('activemodel.attributes.follow_up_questionnaire_statuses.name')
 module Decidim
   module DecidimAwesome
     class FollowUpQuestionnaireStatus < ApplicationRecord

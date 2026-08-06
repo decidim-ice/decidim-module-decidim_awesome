@@ -2,8 +2,8 @@
 
 module Decidim
   module DecidimAwesome
-    class FollowUpQuestionnaireResponse < ApplicationRecord
-      self.table_name = "decidim_awesome_follow_up_questionnaire_responses"
+    class FollowUpQuestionnaireMessage < ApplicationRecord
+      self.table_name = "decidim_awesome_follow_up_questionnaire_messages"
 
       belongs_to :follow_up_questionnaire,
                  class_name: "Decidim::DecidimAwesome::FollowUpQuestionnaire",
@@ -15,7 +15,6 @@ module Decidim
 
       belongs_to :author, polymorphic: true
 
-      validates :questionnaire_response_id, presence: true
       validates :body, length: { maximum: 65_535 }, allow_nil: true
 
       scope :recent, -> { order(created_at: :desc) }

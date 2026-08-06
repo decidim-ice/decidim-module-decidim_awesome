@@ -8,8 +8,8 @@ class CreateFollowUpQuestionnaires < ActiveRecord::Migration[7.0]
       t.integer :position, null: false, default: 0
       t.string :responder_name_field
       t.string :responder_email_field
+      t.string :reply_to
       t.boolean :active, null: false, default: true
-      t.boolean :edited, null: false, default: false
 
       t.timestamps
     end
