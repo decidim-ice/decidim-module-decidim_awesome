@@ -22,7 +22,6 @@ module Decidim
         def to_params
           {
             :follow_up_questionnaire_id => follow_up_questionnaire_id,
-            "edited" => true,
             :name => name,
             :color => color
           }

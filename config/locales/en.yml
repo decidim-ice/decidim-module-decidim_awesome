@@ -1051,6 +1051,8 @@ en:
             save: Save
             title: Follow-up questionnaire
           form:
+            select_questionnaire_placeholder: Select a questionnaire
+            select_questionnaire_first: Please select a questionnaire
             name_help: In the participatory space, you will see this name as a new
               item menu where to handle the responses
             responder_email_help: This field will be used to find and email where
