@@ -6,17 +6,13 @@
         <%= form.translated :text_field, :name, class: "h-12 w-full", help_text: t(".name_help") %>
       </div>
       <div class="row column">
-        <%= form.select :decidim_questionnaire_id, grouped_options_for_select(grouped_questionnaire_options), { include_blank: t(".select_questionnaire_placeholder") } %>
+        <%= form.select :decidim_questionnaire_id, grouped_options_for_select(grouped_questionnaire_options(@available_questionnaires), form.object.decidim_questionnaire_id), { include_blank: t(".select_questionnaire_placeholder") } %>
       </div>
       <div class="row column">
         <%= form.text_field :position, class: "w-full" %>
       </div>
-      <div id="responder-fields-wrapper" data-fetch-url="<%= decidim_admin_decidim_awesome.questionnaire_fields_follow_up_questionnaires_path %>">
-        <% if @questionnaire.present? %>
-          <%= render "responder_fields", questionnaire: @questionnaire, form: @form %>
-        <% else %>
-          <p class="help-text"><%= t(".select_questionnaire_first") %></p>
-        <% end %>
+      <div id="responder-fields-wrapper" data-questions="<%= questionnaires_questions_data(@available_questionnaires).to_json %>">
+        <%= render "responder_fields", questionnaire: @questionnaire, form: @form %>
       </div>
       <div class="row column">
         <%= render "decidim/decidim_awesome/admin/follow_up_questionnaire_statuses/table", follow_up_questionnaire_id: follow_up_questionnaire_id, statuses: @follow_up_questionnaire&.statuses %>

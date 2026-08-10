@@ -26,7 +26,6 @@ module Decidim
           end
         end
         resources :follow_up_questionnaires, except: [:show] do
-          get :questionnaire_fields, on: :collection
           resources :statuses, except: [:show], controller: "follow_up_questionnaire_statuses"
           resources :responses, except: [:show], controller: "follow_up_questionnaire_responses"
         end
