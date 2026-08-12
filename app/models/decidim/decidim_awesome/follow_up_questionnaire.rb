@@ -19,8 +19,8 @@ module Decidim
                dependent: :destroy,
                inverse_of: :follow_up_questionnaire
 
-      has_many :responses,
-               class_name: "Decidim::DecidimAwesome::FollowUpQuestionnaireResponse",
+      has_many :messages,
+               class_name: "Decidim::DecidimAwesome::FollowUpQuestionnaireMessage",
                dependent: :destroy,
                inverse_of: :follow_up_questionnaire
 

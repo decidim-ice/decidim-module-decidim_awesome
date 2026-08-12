@@ -205,6 +205,13 @@ module Decidim
           end
         end
 
+        def follow_up_questionnaire_messages_allowed?(user, space)
+          action = Decidim::PermissionAction.new(scope: :admin, action: :read, subject: :follow_up_questionnaire_messages)
+          Decidim::DecidimAwesome::Admin::Permissions.new(user, action, current_participatory_space: space).permissions.allowed?
+        rescue Decidim::PermissionAction::PermissionNotSetError
+          false
+        end
+
         def register_participatory_process_follow_up_questionnaires_menu!
           Decidim.menu :admin_participatory_process_menu do |menu|
             menu.add_item :follow_up_questionnaires,
@@ -214,8 +221,22 @@ module Decidim
                             participatory_space_slug: current_participatory_space.slug
                           ),
                           icon_name: "surveys",
-                          if: Decidim::DecidimAwesome::Menu.config_enabled?(:follow_up_questionnaires) &&
-                              defined?(current_user) && current_user&.read_attribute("admin") && current_user.admin_terms_accepted?
+                          submenu: { target_menu: :follow_up_questionnaires_submenu },
+                          if: Decidim::DecidimAwesome::Menu.follow_up_questionnaire_messages_allowed?(current_user, current_participatory_space) &&
+                              Decidim::DecidimAwesome::Admin::FollowUpQuestionnairesFinder.new(current_organization).configured_for_space(current_participatory_space).any?
+          end
+
+          Decidim.menu :follow_up_questionnaires_submenu do |menu|
+            next unless defined?(current_participatory_space) && current_participatory_space
+
+            finder = Decidim::DecidimAwesome::Admin::FollowUpQuestionnairesFinder.new(current_organization)
+            finder.configured_for_space(current_participatory_space).each_with_index do |fuq, index|
+              menu.add_item :"follow_up_questionnaire_#{fuq.id}",
+                            translated_attribute(fuq.name),
+                            decidim_admin_decidim_awesome.follow_up_questionnaire_messages_path(fuq.decidim_questionnaire_id),
+                            icon_name: "flag-line",
+                            position: index
+            end
           end
         end
 

@@ -10,7 +10,6 @@ class CreateFollowUpQuestionnaireStatuses < ActiveRecord::Migration[7.0]
 
       t.jsonb :name, null: false, default: {}
       t.string :color, null: false
-      t.boolean :edited, null: false, default: false
       t.timestamps
     end
   end

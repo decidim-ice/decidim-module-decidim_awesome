@@ -7,11 +7,11 @@ module Decidim
 
       belongs_to :follow_up_questionnaire,
                  class_name: "Decidim::DecidimAwesome::FollowUpQuestionnaire",
-                 inverse_of: :responses
+                 inverse_of: :messages
 
       belongs_to :status,
                  class_name: "Decidim::DecidimAwesome::FollowUpQuestionnaireStatus",
-                 inverse_of: :responses
+                 inverse_of: :messages
 
       belongs_to :author, polymorphic: true
 

@@ -15,8 +15,8 @@ module Decidim
                  class_name: "Decidim::DecidimAwesome::FollowUpQuestionnaire",
                  inverse_of: :statuses
 
-      has_many :responses,
-               class_name: "Decidim::DecidimAwesome::FollowUpQuestionnaireResponse",
+      has_many :messages,
+               class_name: "Decidim::DecidimAwesome::FollowUpQuestionnaireMessage",
                dependent: :restrict_with_exception,
                inverse_of: :status
 

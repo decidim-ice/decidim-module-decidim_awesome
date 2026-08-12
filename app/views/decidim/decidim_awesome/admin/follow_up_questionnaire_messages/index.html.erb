@@ -1,6 +1,56 @@
 <div class="item_show__header">
   <h2 class="item_show__header-title">
-    <%= t("decidim.decidim_awesome.admin.menu.follow_up_questionnaires") %>
-    <%= link_to t(".new"), decidim_admin_decidim_awesome.new_follow_up_questionnaire_path(decidim_questionnaire_id: params[:decidim_questionnaire_id]), class: "button button__sm button__secondary ml-auto" %>
+    <%= translated_attribute(@follow_up_questionnaire.name) %>
   </h2>
+</div>
+
+<div class="card">
+  <div class="card-section">
+    <div class="table-scroll">
+      <table class="table-list">
+        <thead>
+          <tr>
+            <th><%= t("follow_up_questionnaire_messages.id", scope: "activemodel.attributes") %></th>
+            <th><%= t("follow_up_questionnaire_messages.respondent", scope: "activemodel.attributes") %></th>
+            <th><%= t("follow_up_questionnaire_messages.submission_date", scope: "activemodel.attributes") %></th>
+            <th><%= t("follow_up_questionnaire_messages.last_action", scope: "activemodel.attributes") %></th>
+            <th><%= t("follow_up_questionnaire_messages.status", scope: "activemodel.attributes") %></th>
+            <th class="actions"><%= t("decidim.decidim_awesome.admin.actions") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @participants.each_with_index do |participant, index| %>
+            <% respondent_key = participant.decidim_user_id || participant.session_token %>
+            <% respondent_label = [@respondent_names[respondent_key], @respondent_emails[respondent_key]]
+                                     .compact.map { |response| translated_attribute(response.body) }.reject(&:blank?).join(" ") %>
+            <% latest_message = @latest_messages_by_respondent[respondent_key] %>
+            <% status = latest_message&.status %>
+            <% color_values = status ? Decidim::DecidimAwesome.follow_up_status_colors.values.find { |v| v[:background] == status.color } : Decidim::DecidimAwesome.follow_up_status_colors[:red] %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= respondent_label.presence || t(".anonymous") %></td>
+              <td><%= l participant.created_at, format: :decidim_short %></td>
+              <td>
+                <% if latest_message %>
+                  <%= t(".last_action", time: time_ago_in_words(latest_message.created_at)) %>
+                <% else %>
+                  <%= t(".not_answered") %>
+                <% end %>
+              </td>
+              <td>
+                <span class="label" style="background-color:<%= status&.color || color_values[:background] %>; color:<%= color_values&.dig(:foreground) %>;">
+                  <%= status ? translated_attribute(status.name) : t(".new_status") %>
+                </span>
+              </td>
+              <td class="table-list__actions">
+                <%= icon_link_to "eye-line", "#", t(".preview"), class: "action-icon--preview" %>
+                <%= icon_link_to "mail-line", "#", t(".reply"), class: "action-icon--new" %>
+                <%= icon_link_to "archive-line", "#", t(".archive"), class: "action-icon--remove" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

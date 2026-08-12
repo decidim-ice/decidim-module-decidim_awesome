@@ -87,6 +87,12 @@ en:
         origin: Origin
         pass_query: Pass the query string to the destination
         status: Status
+      follow_up_questionnaire_messages:
+        id: ID
+        last_action: Last action
+        respondent: Respondent
+        status: Status
+        submission_date: Submission date
       follow_up_questionnaire_statuses:
         color: Color
         labels_color: Color
@@ -1026,6 +1032,15 @@ en:
           update:
             error: Error updating redirection! %{error}
             success: Redirection updated successfully
+        follow_up_questionnaire_messages:
+          index:
+            anonymous: (Anonymous)
+            archive: Archive
+            last_action: Answered %{time} ago
+            new_status: New
+            not_answered: (not answered)
+            preview: Preview
+            reply: Reply
         follow_up_questionnaire_statuses:
           edit:
             save: Save
@@ -1051,8 +1066,6 @@ en:
             save: Save
             title: Follow-up questionnaire
           form:
-            select_questionnaire_placeholder: Select a questionnaire
-            select_questionnaire_first: Please select a questionnaire
             name_help: In the participatory space, you will see this name as a new
               item menu where to handle the responses
             responder_email_help: This field will be used to find and email where
@@ -1061,6 +1074,7 @@ en:
             responder_name_help: This field will be used to find and display the name
               of the responder. If the questionnaire is not anonymous, you can skip
               this part and the user will be used instead
+            select_questionnaire_placeholder: Select a questionnaire
           index:
             confirm_destroy: Are you sure to remove this follow-up questionnaire?
             description: Turn questionnaire submissions into interactive threads.

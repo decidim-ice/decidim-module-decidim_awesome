@@ -50,7 +50,7 @@
 
               </td>
               <td class="table-list__actions">
-                <%= icon_link_to "eye-line", decidim_admin_decidim_awesome.follow_up_questionnaire_responses_path(item.decidim_questionnaire_id), t(".preview"), class: "action-icon--preview" %>
+                <%= icon_link_to "eye-line", decidim_admin_decidim_awesome.follow_up_questionnaire_messages_path(item.decidim_questionnaire_id), t(".preview"), class: "action-icon--preview" %>
                 <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_follow_up_questionnaire_path(item.decidim_questionnaire_id), t(".edit"), class: "action-icon--edit" %>
                 <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.follow_up_questionnaire_path(item.decidim_questionnaire_id), t(".remove"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
               </td>
