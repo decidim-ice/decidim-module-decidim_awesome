@@ -21,8 +21,7 @@
         <tbody>
           <% @participants.each_with_index do |participant, index| %>
             <% respondent_key = participant.decidim_user_id || participant.session_token %>
-            <% respondent_label = [@respondent_names[respondent_key], @respondent_emails[respondent_key]]
-                                     .compact.map { |response| translated_attribute(response.body) }.reject(&:blank?).join(" ") %>
+            <% respondent_label = [@respondent_names[respondent_key], @respondent_emails[respondent_key]].compact.map { |response| translated_attribute(response.body) }.compact_blank.join(" ") %>
             <% latest_message = @latest_messages_by_respondent[respondent_key] %>
             <% status = latest_message&.status %>
             <% color_values = status ? Decidim::DecidimAwesome.follow_up_status_colors.values.find { |v| v[:background] == status.color } : Decidim::DecidimAwesome.follow_up_status_colors[:red] %>
