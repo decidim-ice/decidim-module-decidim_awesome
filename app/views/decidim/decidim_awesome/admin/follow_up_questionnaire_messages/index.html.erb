@@ -21,13 +21,18 @@
         <tbody>
           <% @participants.each_with_index do |participant, index| %>
             <% respondent_key = participant.decidim_user_id || participant.session_token %>
-            <% respondent_label = [@respondent_names[respondent_key], @respondent_emails[respondent_key]].compact.map { |response| translated_attribute(response.body) }.compact_blank.join(" ") %>
+            <% respondent = respondent_details(participant) %>
+            <% respondent_label = if respondent[:name].present? && respondent[:email].present?
+                                     "(#{respondent[:name]}) #{respondent[:email]}"
+                                   else
+                                     [respondent[:name], respondent[:email]].compact_blank.join(" ")
+                                   end %>
             <% latest_message = @latest_messages_by_respondent[respondent_key] %>
             <% status = latest_message&.status %>
             <% color_values = status ? Decidim::DecidimAwesome.follow_up_status_colors.values.find { |v| v[:background] == status.color } : Decidim::DecidimAwesome.follow_up_status_colors[:red] %>
             <tr>
-              <td><%= index + 1 %></td>
-              <td><%= respondent_label.presence || t(".anonymous") %></td>
+              <td><%= page_offset + index + 1 %></td>
+              <td><%= respondent_label.presence || t(".not_processable") %></td>
               <td><%= l participant.created_at, format: :decidim_short %></td>
               <td>
                 <% if latest_message %>
@@ -42,9 +47,11 @@
                 </span>
               </td>
               <td class="table-list__actions">
-                <%= icon_link_to "eye-line", "#", t(".preview"), class: "action-icon--preview" %>
-                <%= icon_link_to "mail-line", "#", t(".reply"), class: "action-icon--new" %>
-                <%= icon_link_to "archive-line", "#", t(".archive"), class: "action-icon--remove" %>
+                <% if respondent[:processable] %>
+                  <%= icon_link_to "eye-line", "#", t(".preview"), class: "action-icon--preview" %>
+                  <%= icon_link_to "mail-line", "#", t(".reply"), class: "action-icon--new" %>
+                  <%= icon_link_to "archive-line", "#", t(".archive"), class: "action-icon--remove" %>
+                <% end %>
               </td>
             </tr>
           <% end %>
@@ -53,3 +60,4 @@
     </div>
   </div>
 </div>
+<%= decidim_paginate @participants %>

@@ -1034,11 +1034,11 @@ en:
             success: Redirection updated successfully
         follow_up_questionnaire_messages:
           index:
-            anonymous: (Anonymous)
             archive: Archive
             last_action: Answered %{time} ago
             new_status: New
-            not_answered: (not answered)
+            not_answered: "(not answered)"
+            not_processable: No respondent - Not processable
             preview: Preview
             reply: Reply
         follow_up_questionnaire_statuses:

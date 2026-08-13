@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class FollowUpQuestionnairesController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
+        include Decidim::Paginable
         helper FollowUpQuestionnairesHelper
 
         before_action do
@@ -12,7 +13,7 @@ module Decidim
         end
 
         def index
-          @follow_up_questionnaires = Decidim::DecidimAwesome::FollowUpQuestionnaire.ordered
+          @follow_up_questionnaires = paginate(Decidim::DecidimAwesome::FollowUpQuestionnaire.ordered)
         end
 
         def new
