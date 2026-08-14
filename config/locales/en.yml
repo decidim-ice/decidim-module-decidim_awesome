@@ -1042,6 +1042,11 @@ en:
             preview: Preview
             reply: Reply
         follow_up_questionnaire_statuses:
+          create:
+            error: Error creating label
+            success: Label created successfully
+          destroy:
+            success: Label removed successfully
           edit:
             save: Save
             title: Edit label
@@ -1055,6 +1060,9 @@ en:
             labels_title: Labels
             new: New label
             remove: Remove
+          update:
+            error: Error updating label
+            success: Label updated successfully
         follow_up_questionnaires:
           create:
             error: Error creating follow-up questionnaire! %{error}

@@ -23,10 +23,10 @@
             <% respondent_key = participant.decidim_user_id || participant.session_token %>
             <% respondent = respondent_details(participant) %>
             <% respondent_label = if respondent[:name].present? && respondent[:email].present?
-                                     "(#{respondent[:name]}) #{respondent[:email]}"
-                                   else
-                                     [respondent[:name], respondent[:email]].compact_blank.join(" ")
-                                   end %>
+                                    "(#{respondent[:name]}) #{respondent[:email]}"
+                                  else
+                                    [respondent[:name], respondent[:email]].compact_blank.join(" ")
+                                  end %>
             <% latest_message = @latest_messages_by_respondent[respondent_key] %>
             <% status = latest_message&.status %>
             <% color_values = status ? Decidim::DecidimAwesome.follow_up_status_colors.values.find { |v| v[:background] == status.color } : Decidim::DecidimAwesome.follow_up_status_colors[:red] %>
