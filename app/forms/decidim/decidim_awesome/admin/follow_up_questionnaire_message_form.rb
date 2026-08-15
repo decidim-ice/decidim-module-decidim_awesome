@@ -8,16 +8,22 @@ module Decidim
         attribute :status_id, Integer
         attribute :body, String
         attribute :author_id, Integer
+        attribute :decidim_user_id, Integer
+        attribute :session_token, String
 
         validates :follow_up_questionnaire_id, :status_id, :author_id, presence: true, numericality: { only_integer: true }
+        validates :body, presence: true
         validate :status_belongs_to_questionnaire
+        validate :respondent_present
 
         def to_params
           {
             follow_up_questionnaire_id: follow_up_questionnaire_id,
             status_id: status_id,
             body: body.to_s.strip.presence,
-            author_id: author_id
+            author_id: author_id,
+            decidim_user_id: decidim_user_id,
+            session_token: session_token
           }
         end
 
@@ -30,6 +36,10 @@ module Decidim
           return if status && status.follow_up_questionnaire_id == follow_up_questionnaire_id
 
           errors.add(:status_id, :invalid)
+        end
+
+        def respondent_present
+          errors.add(:base, :respondent_missing) if decidim_user_id.blank? && session_token.blank?
         end
       end
     end

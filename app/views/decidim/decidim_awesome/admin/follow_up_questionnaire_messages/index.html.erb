@@ -22,10 +22,10 @@
           <% @participants.each_with_index do |participant, index| %>
             <% respondent_key = participant.decidim_user_id || participant.session_token %>
             <% respondent = respondent_details(participant) %>
-            <% respondent_label = if respondent[:name].present? && respondent[:email].present?
-                                    "(#{respondent[:name]}) #{respondent[:email]}"
+            <% respondent_label = if respondent.name.present? && respondent.email.present?
+                                    "(#{respondent.name}) #{respondent.email}"
                                   else
-                                    [respondent[:name], respondent[:email]].compact_blank.join(" ")
+                                    [respondent.name, respondent.email].compact_blank.join(" ")
                                   end %>
             <% latest_message = @latest_messages_by_respondent[respondent_key] %>
             <% status = latest_message&.status %>
@@ -47,9 +47,9 @@
                 </span>
               </td>
               <td class="table-list__actions">
-                <% if respondent[:processable] %>
+                <% if respondent.processable? %>
                   <%= icon_link_to "eye-line", "#", t(".preview"), class: "action-icon--preview" %>
-                  <%= icon_link_to "mail-line", "#", t(".reply"), class: "action-icon--new" %>
+                  <%= icon_link_to "mail-line", new_follow_up_questionnaire_message_path(@follow_up_questionnaire.decidim_questionnaire_id, decidim_user_id: participant.decidim_user_id, session_token: participant.session_token), t(".reply"), class: "action-icon--new" %>
                   <%= icon_link_to "archive-line", "#", t(".archive"), class: "action-icon--remove" %>
                 <% end %>
               </td>

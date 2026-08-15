@@ -19,7 +19,7 @@ module Decidim
           CreateFollowUpQuestionnaireStatus.call(@form) do
             on(:ok) do
               flash[:notice] = I18n.t("follow_up_questionnaire_statuses.create.success", scope: "decidim.decidim_awesome.admin")
-              redirect_to decidim_admin_decidim_awesome.follow_up_questionnaire_statuses_path(@follow_up_questionnaire)
+              redirect_to decidim_admin_decidim_awesome.edit_follow_up_questionnaire_path(follow_up_questionnaire.decidim_questionnaire_id)
             end
             on(:invalid) do
               flash.now[:alert] = I18n.t("follow_up_questionnaire_statuses.create.error", scope: "decidim.decidim_awesome.admin")
@@ -38,7 +38,7 @@ module Decidim
           UpdateFollowUpQuestionnaireStatus.call(@form, status) do
             on(:ok) do
               flash[:notice] = I18n.t("follow_up_questionnaire_statuses.update.success", scope: "decidim.decidim_awesome.admin")
-              redirect_to decidim_admin_decidim_awesome.follow_up_questionnaire_statuses_path(@follow_up_questionnaire)
+              redirect_to decidim_admin_decidim_awesome.edit_follow_up_questionnaire_path(follow_up_questionnaire.decidim_questionnaire_id)
             end
             on(:invalid) do
               flash.now[:alert] = I18n.t("follow_up_questionnaire_statuses.update.error", scope: "decidim.decidim_awesome.admin")
@@ -51,7 +51,7 @@ module Decidim
           DestroyFollowUpQuestionnaireStatus.call(status, current_user) do
             on(:ok) do
               flash[:notice] = I18n.t("follow_up_questionnaire_statuses.destroy.success", scope: "decidim.decidim_awesome.admin")
-              redirect_to decidim_admin_decidim_awesome.follow_up_questionnaire_statuses_path(@follow_up_questionnaire)
+              redirect_to decidim_admin_decidim_awesome.edit_follow_up_questionnaire_path(follow_up_questionnaire.decidim_questionnaire_id)
             end
           end
         end
