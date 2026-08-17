@@ -59,5 +59,23 @@ module Decidim
         end
       end
     end
+
+    describe "#create_default_statuses!" do
+      let(:follow_up_questionnaire) { Decidim::DecidimAwesome::FollowUpQuestionnaire.create!(decidim_questionnaire_id: create(:questionnaire).id, name: { "en" => "Follow up" }) }
+
+      it "creates the default statuses for the questionnaire" do
+        expect { subject.create_default_statuses!(follow_up_questionnaire) }.to change(follow_up_questionnaire.statuses, :count).by(3)
+      end
+
+      it "creates statuses with the expected names and colors" do
+        subject.create_default_statuses!(follow_up_questionnaire)
+
+        statuses = follow_up_questionnaire.statuses.reload.index_by { |status| status.name["en"] }
+        expect(statuses.keys).to contain_exactly("Answered", "In progress", "Pending")
+        expect(statuses["Answered"].color).to eq(subject.follow_up_status_colors[:yellow][:background])
+        expect(statuses["In progress"].color).to eq(subject.follow_up_status_colors[:green][:background])
+        expect(statuses["Pending"].color).to eq(subject.follow_up_status_colors[:red][:background])
+      end
+    end
   end
 end
