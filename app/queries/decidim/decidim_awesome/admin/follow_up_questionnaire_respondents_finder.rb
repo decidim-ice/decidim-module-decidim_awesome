@@ -11,6 +11,12 @@ module Decidim
       class FollowUpQuestionnaireRespondentsFinder
         include Decidim::TranslatableAttributes
 
+        Respondent = Struct.new(:name, :email, :processable, keyword_init: true) do
+          def processable?
+            processable
+          end
+        end
+
         def initialize(follow_up_questionnaire)
           @follow_up_questionnaire = follow_up_questionnaire
         end
@@ -18,12 +24,12 @@ module Decidim
         def respondent_for(decidim_user_id: nil, session_token: nil)
           if decidim_user_id.present?
             user = Decidim::User.find_by(id: decidim_user_id)
-            return FollowUpQuestionnaireRespondent.new(name: user&.name, email: user&.email, processable: user.present?)
+            return Respondent.new(name: user&.name, email: user&.email, processable: user.present?)
           end
 
           name = response_body(follow_up_questionnaire.responder_name_field, session_token, name_responses)
           email = response_body(follow_up_questionnaire.responder_email_field, session_token, email_responses)
-          FollowUpQuestionnaireRespondent.new(name:, email:, processable: name.present? || email.present?)
+          Respondent.new(name:, email:, processable: name.present? || email.present?)
         end
 
         private

@@ -35,4 +35,22 @@ describe "Follow-up questionnaires menu in the participatory process admin" do
       expect(page).to have_no_link("Follow-up questionnaires")
     end
   end
+
+  describe ".follow_up_questionnaire_messages_allowed?" do
+    let(:user) { create(:user, :confirmed, organization:) }
+
+    it "returns false when the user has no role in the participatory process" do
+      expect(
+        Decidim::DecidimAwesome::Menu.follow_up_questionnaire_messages_allowed?(user, participatory_process)
+      ).to be false
+    end
+
+    it "returns false when the space is not a participatory process" do
+      other_space = create(:assembly, organization:)
+
+      expect(
+        Decidim::DecidimAwesome::Menu.follow_up_questionnaire_messages_allowed?(user, other_space)
+      ).to be false
+    end
+  end
 end
