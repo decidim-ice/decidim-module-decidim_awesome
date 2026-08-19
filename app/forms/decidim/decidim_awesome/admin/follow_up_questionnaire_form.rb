@@ -16,8 +16,6 @@ module Decidim
         validates :name, translatable_presence: true
         validates :decidim_questionnaire_id, presence: true, numericality: { only_integer: true }
         validates :position, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-        validates :responder_name_field, presence: true
-        validates :responder_email_field, presence: true
         validate :questionnaire_not_already_configured, if: -> { decidim_questionnaire_id.present? }
 
         def map_model(model)

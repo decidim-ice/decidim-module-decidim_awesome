@@ -10,6 +10,8 @@ module Decidim
 
         validates :follow_up_questionnaire_id, presence: true, numericality: { only_integer: true }
         validates :name, translatable_presence: true
+        validates :color, presence: true,
+                          format: { with: /\A#[0-9a-fA-F]{6}\z/, allow_blank: true }
 
         validate :name_unique_within_questionnaire, if: -> { follow_up_questionnaire_id.present? && name.present? }
 
@@ -27,6 +29,10 @@ module Decidim
           }
         end
 
+        def error_message
+          errors.full_messages.join(", ")
+        end
+
         private
 
         def name_unique_within_questionnaire
@@ -36,7 +42,7 @@ module Decidim
               status.name.to_s.strip.casecmp?(name.to_s.strip) &&
               status.id != context[:current_status_id]
           end
-          errors.add(:name, :taken) if duplicated
+          errors.add(:base, :taken, message: I18n.t("decidim.decidim_awesome.admin.follow_up_questionnaire_statuses.form.name_taken_error")) if duplicated
         end
       end
     end

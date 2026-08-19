@@ -30,7 +30,7 @@
 
                 <% hierarchy = [
                   (translated_attribute(space.title) if space&.respond_to?(:title)),
-                  translated_attribute(item.name)
+                  translated_attribute(item.questionnaire.title)
                 ].compact.join(" > ") %>
 
                 <% resource_edit_path = nil %>

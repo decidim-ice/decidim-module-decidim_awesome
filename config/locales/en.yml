@@ -100,7 +100,7 @@ en:
         name: Name
       follow_up_questionnaires:
         name: Name
-        participatory_space: Participatory space
+        participatory_space: "Participatory space > questionnaire"
       menu:
         position: Position
         raw_label: Label
@@ -1042,8 +1042,10 @@ en:
             preview: Preview
             reply: Reply
         follow_up_questionnaire_statuses:
+          form:
+            name_taken_error: That name is already used by another label in this questionnaire.
           create:
-            error: Error creating label
+            error: Error creating label! %{error}
             success: Label created successfully
           destroy:
             success: Label removed successfully
@@ -1061,7 +1063,7 @@ en:
             new: New label
             remove: Remove
           update:
-            error: Error updating label
+            error: Error updating label! %{error}
             success: Label updated successfully
         follow_up_questionnaires:
           create:
@@ -1074,6 +1076,7 @@ en:
             save: Save
             title: Follow-up questionnaire
           form:
+            anonymous_option_flag: anonymous, no questions
             name_help: In the participatory space, you will see this name as a new
               item menu where to handle the responses
             responder_email_help: This field will be used to find and email where
