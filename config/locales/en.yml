@@ -100,7 +100,7 @@ en:
         name: Name
       follow_up_questionnaires:
         name: Name
-        participatory_space: "Participatory space > questionnaire"
+        participatory_space: Participatory space > questionnaire
       menu:
         position: Position
         raw_label: Label
@@ -1042,8 +1042,6 @@ en:
             preview: Preview
             reply: Reply
         follow_up_questionnaire_statuses:
-          form:
-            name_taken_error: That name is already used by another label in this questionnaire.
           create:
             error: Error creating label! %{error}
             success: Label created successfully
@@ -1052,6 +1050,8 @@ en:
           edit:
             save: Save
             title: Edit label
+          form:
+            name_taken_error: That name is already used by another label in this questionnaire.
           new:
             save: Save
             title: New label

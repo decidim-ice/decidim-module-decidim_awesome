@@ -60,6 +60,12 @@ module Decidim
       end
     end
 
+    describe "#follow_up_status_colors" do
+      it "returns the expected color keys" do
+        expect(subject.follow_up_status_colors.keys).to contain_exactly(:gray, :blue, :green, :yellow, :orange, :red, :pink, :purple)
+      end
+    end
+
     describe "#create_default_statuses!" do
       let(:follow_up_questionnaire) { Decidim::DecidimAwesome::FollowUpQuestionnaire.create!(decidim_questionnaire_id: create(:questionnaire).id, name: { "en" => "Follow up" }) }
 
