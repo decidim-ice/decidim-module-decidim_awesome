@@ -5,11 +5,14 @@ module Decidim
     module Admin
       class FollowUpQuestionnaireMessagesController < DecidimAwesome::Admin::ApplicationController
         include Decidim::Paginable
+        include Decidim::TranslatableAttributes
+        include BreadcrumbHelpers
 
         skip_before_action :enforce_organization_admin!
         before_action :follow_up_questionnaire
         before_action :enforce_messages_permission!
         before_action :follow_up_questionnaire_message, only: [:show, :destroy]
+        before_action :set_follow_up_questionnaire_breadcrumb, only: [:index, :new, :create]
 
         helper_method :current_participatory_space, :respondent_details
 
@@ -93,6 +96,19 @@ module Decidim
 
         def respondents_finder
           @respondents_finder ||= FollowUpQuestionnaireRespondentsFinder.new(@follow_up_questionnaire)
+        end
+
+        def set_follow_up_questionnaire_breadcrumb
+          add_breadcrumb_item translated_attribute(current_participatory_space.title),
+                              Decidim::ResourceLocatorPresenter.new(current_participatory_space).edit
+          add_breadcrumb_item translated_attribute(@follow_up_questionnaire.name), questionnaire_breadcrumb_url
+          add_breadcrumb_item I18n.t("follow_up_questionnaire_messages.new.title", scope: "decidim.decidim_awesome.admin") unless action_name == "index"
+        end
+
+        def questionnaire_breadcrumb_url
+          return if action_name == "index"
+
+          follow_up_questionnaire_messages_path(@follow_up_questionnaire.decidim_questionnaire_id)
         end
       end
     end
