@@ -50,7 +50,6 @@
                 <% if respondent.processable? %>
                   <%= icon_link_to "eye-line", "#", t(".preview"), class: "action-icon--preview" %>
                   <%= icon_link_to "mail-line", new_follow_up_questionnaire_message_path(@follow_up_questionnaire.decidim_questionnaire_id, decidim_user_id: participant.decidim_user_id, session_token: participant.session_token), t(".reply"), class: "action-icon--new" %>
-                  <%= icon_link_to "archive-line", "#", t(".archive"), class: "action-icon--remove" %>
                 <% end %>
               </td>
             </tr>

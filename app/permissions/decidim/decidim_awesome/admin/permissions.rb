@@ -35,11 +35,20 @@ module Decidim
 
         private
 
+        FOLLOW_UP_QUESTIONNAIRE_SPACE_ROLE_FINDERS = {
+          "Decidim::ParticipatoryProcess" => "Decidim::ParticipatoryProcessesWithUserRole",
+          "Decidim::Assembly" => "Decidim::Assemblies::AssembliesWithUserRole",
+          "Decidim::Conference" => "Decidim::Conferences::ConferencesWithUserRole"
+        }.freeze
+
         def apply_follow_up_questionnaire_message_permissions!
           space = context.fetch(:current_participatory_space, nil)
-          return unless space.is_a?(Decidim::ParticipatoryProcess)
+          return unless space
 
-          allow! if Decidim::ParticipatoryProcessesWithUserRole.for(user).exists?(id: space.id)
+          finder_class_name = FOLLOW_UP_QUESTIONNAIRE_SPACE_ROLE_FINDERS[space.class.name]
+          return unless finder_class_name
+
+          allow! if finder_class_name.constantize.for(user).exists?(id: space.id)
         end
 
         def apply_admin_authorizations_permissions!

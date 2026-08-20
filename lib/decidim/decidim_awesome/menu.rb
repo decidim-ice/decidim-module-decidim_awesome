@@ -212,18 +212,26 @@ module Decidim
           false
         end
 
-        def register_participatory_process_follow_up_questionnaires_menu!
-          Decidim.menu :admin_participatory_process_menu do |menu|
-            finder = Decidim::DecidimAwesome::Admin::FollowUpQuestionnairesFinder.new(current_organization)
-            first_configured = finder.configured_for_space(current_participatory_space).first
+        FOLLOW_UP_QUESTIONNAIRES_PARENT_MENUS = [
+          :admin_participatory_process_menu,
+          :admin_assembly_menu,
+          :conference_admin_menu
+        ].freeze
 
-            menu.add_item :follow_up_questionnaires,
-                          I18n.t("menu.follow_up_questionnaires", scope: "decidim.decidim_awesome.admin"),
-                          first_configured ? decidim_admin_decidim_awesome.follow_up_questionnaire_messages_path(first_configured.decidim_questionnaire_id) : "#",
-                          icon_name: "surveys",
-                          submenu: { target_menu: :follow_up_questionnaires_submenu },
-                          if: first_configured.present? &&
-                              Decidim::DecidimAwesome::Menu.follow_up_questionnaire_messages_allowed?(current_user, current_participatory_space)
+        def register_follow_up_questionnaires_menu!
+          FOLLOW_UP_QUESTIONNAIRES_PARENT_MENUS.each do |parent_menu|
+            Decidim.menu parent_menu do |menu|
+              finder = Decidim::DecidimAwesome::Admin::FollowUpQuestionnairesFinder.new(current_organization)
+              first_configured = finder.configured_for_space(current_participatory_space).first
+
+              menu.add_item :follow_up_questionnaires,
+                            I18n.t("menu.follow_up_questionnaires", scope: "decidim.decidim_awesome.admin"),
+                            first_configured ? decidim_admin_decidim_awesome.follow_up_questionnaire_messages_path(first_configured.decidim_questionnaire_id) : "#",
+                            icon_name: "surveys",
+                            submenu: { target_menu: :follow_up_questionnaires_submenu },
+                            if: first_configured.present? &&
+                                Decidim::DecidimAwesome::Menu.follow_up_questionnaire_messages_allowed?(current_user, current_participatory_space)
+            end
           end
 
           Decidim.menu :follow_up_questionnaires_submenu do |menu|
@@ -234,7 +242,6 @@ module Decidim
               menu.add_item :"follow_up_questionnaire_#{fuq.id}",
                             translated_attribute(fuq.name),
                             decidim_admin_decidim_awesome.follow_up_questionnaire_messages_path(fuq.decidim_questionnaire_id),
-                            icon_name: "flag-line",
                             position: index
             end
           end

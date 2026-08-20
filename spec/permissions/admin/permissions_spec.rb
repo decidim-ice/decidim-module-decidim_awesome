@@ -174,31 +174,66 @@ module Decidim::DecidimAwesome::Admin
 
     context "when accessing follow_up_questionnaire_messages" do
       let(:feature) { :follow_up_questionnaire_messages }
-      let(:participatory_process) { create(:participatory_process, organization:) }
+      let(:space) { create(:participatory_process, organization:) }
       let(:context) do
         {
           current_organization: organization,
-          current_participatory_space: participatory_process,
+          current_participatory_space: space,
           private_data:,
           global:,
           handler:
         }
       end
 
-      context "when the user has a role in the participatory process" do
-        let(:user) { create(:process_admin, participatory_process:) }
+      context "when the space is a participatory process" do
+        context "when the user has a role in the participatory process" do
+          let(:user) { create(:process_admin, participatory_process: space) }
 
-        it { is_expected.to be true }
+          it { is_expected.to be true }
+        end
+
+        context "when the user has no role in the participatory process" do
+          let(:user) { create(:user, :confirmed, organization:) }
+
+          it_behaves_like "permission is not set"
+        end
       end
 
-      context "when the user has no role in the participatory process" do
+      context "when the space is an assembly" do
+        let(:space) { create(:assembly, organization:) }
+
+        context "when the user has a role in the assembly" do
+          let(:user) { create(:assembly_admin, assembly: space) }
+
+          it { is_expected.to be true }
+        end
+
+        context "when the user has no role in the assembly" do
+          let(:user) { create(:user, :confirmed, organization:) }
+
+          it_behaves_like "permission is not set"
+        end
+      end
+
+      context "when the space is a conference" do
+        let(:space) { create(:conference, organization:) }
+
+        context "when the user has a role in the conference" do
+          let(:user) { create(:conference_admin, conference: space) }
+
+          it { is_expected.to be true }
+        end
+
+        context "when the user has no role in the conference" do
+          let(:user) { create(:user, :confirmed, organization:) }
+
+          it_behaves_like "permission is not set"
+        end
+      end
+
+      context "when the current participatory space type is not supported" do
+        let(:space) { "not-a-space" }
         let(:user) { create(:user, :confirmed, organization:) }
-
-        it_behaves_like "permission is not set"
-      end
-
-      context "when the current participatory space is not a participatory process" do
-        let(:participatory_process) { create(:assembly, organization:) }
 
         it_behaves_like "permission is not set"
       end

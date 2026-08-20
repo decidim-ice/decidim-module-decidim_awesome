@@ -95,7 +95,7 @@ module Decidim
         Decidim::DecidimAwesome::Menu.register_maintenance_admin_menu!
         Decidim::DecidimAwesome::Menu.register_awesome_authorization_submenu!
         Decidim::DecidimAwesome::Menu.register_awesome_admin_menu!
-        Decidim::DecidimAwesome::Menu.register_participatory_process_follow_up_questionnaires_menu!
+        Decidim::DecidimAwesome::Menu.register_follow_up_questionnaires_menu!
 
         # user menu
         Decidim.menu :admin_user_menu do |menu|
