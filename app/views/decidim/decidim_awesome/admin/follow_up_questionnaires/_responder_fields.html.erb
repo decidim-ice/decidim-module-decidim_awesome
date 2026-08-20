@@ -1,0 +1,9 @@
+<% question_options = questionnaire&.questions&.map { |q| [translated_attribute(q.body), q.id] } || [] %>
+<%= fields_for :follow_up_questionnaire, form, builder: Decidim::FormBuilder do |f| %>
+  <div class="row column">
+    <%= f.select :responder_name_field, question_options, { include_blank: true, help_text: t("decidim.decidim_awesome.admin.follow_up_questionnaires.form.responder_name_help") }, class: "mb-8" %>
+  </div>
+  <div class="row column">
+    <%= f.select :responder_email_field, question_options, { include_blank: true, help_text: t("decidim.decidim_awesome.admin.follow_up_questionnaires.form.responder_email_help") }, class: "mb-8" %>
+  </div>
+<% end %>

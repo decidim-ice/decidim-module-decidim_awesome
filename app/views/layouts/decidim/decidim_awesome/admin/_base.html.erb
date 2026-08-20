@@ -1,4 +1,8 @@
-<% add_secondary_root_menu(:awesome_admin_menu) %>
+<% if defined?(current_participatory_space) && current_participatory_space %>
+  <% add_secondary_root_menu(:admin_participatory_process_menu) %>
+<% else %>
+  <% add_secondary_root_menu(:awesome_admin_menu) %>
+<% end %>
 
 <%= append_stylesheet_pack_tag "decidim_admin_decidim_awesome", media: "all" %>
 <%= append_javascript_pack_tag "decidim_admin_decidim_awesome", defer: true %>

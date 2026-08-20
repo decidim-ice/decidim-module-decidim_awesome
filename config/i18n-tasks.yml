@@ -11,6 +11,11 @@ data:
     - "<%= Bundler.rubygems.find_name('decidim-meetings').first.full_gem_path %>/config/locales/%{locale}.yml"
     - "<%= Bundler.rubygems.find_name('decidim-blogs').first.full_gem_path %>/config/locales/%{locale}.yml"
 
+search:
+  paths:
+    - app
+    - lib
+
 ignore_unused:
   - "active_hashcash.*"
   - "decidim.admin.actions.manage"
@@ -24,6 +29,7 @@ ignore_unused:
   - "activemodel.attributes.awesome_authorization_members.*"
   - "activemodel.attributes.organization.awesome_admins_available_authorizations"
   - "activemodel.attributes.force_authorization.*"
+  - "activemodel.attributes.follow_up_questionnaire_statuses.*"
   - "activemodel.errors.models.cookie_item.attributes.*"
   - "activemodel.attributes.cookie_item.type"
   - "decidim.components.decidim_awesome.name"
@@ -61,3 +67,5 @@ ignore_missing:
   - decidim.participatory_processes.scopes.global
   - "decidim.authorization_handlers.awesome_authorization_handler.name"
   - "decidim.authorization_handlers.awesome_authorization_handler.explanation"
+  - "decidim.decidim_awesome.custom_fields.errors..invalid_xml"
+  - "decidim.decidim_awesome.custom_fields.errors..invalid_fields"

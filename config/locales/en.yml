@@ -87,6 +87,20 @@ en:
         origin: Origin
         pass_query: Pass the query string to the destination
         status: Status
+      follow_up_questionnaire_messages:
+        id: ID
+        last_action: Last action
+        respondent: Respondent
+        status: Status
+        submission_date: Submission date
+      follow_up_questionnaire_statuses:
+        color: Color
+        labels_color: Color
+        labels_id: ID
+        name: Name
+      follow_up_questionnaires:
+        name: Name
+        participatory_space: Participatory space > questionnaire
       menu:
         position: Position
         raw_label: Label
@@ -1018,6 +1032,76 @@ en:
           update:
             error: Error updating redirection! %{error}
             success: Redirection updated successfully
+        follow_up_questionnaire_messages:
+          index:
+            archive: Archive
+            last_action: Answered %{time} ago
+            new_status: New
+            not_answered: "(not answered)"
+            not_processable: No respondent - Not processable
+            preview: Preview
+            reply: Reply
+        follow_up_questionnaire_statuses:
+          create:
+            error: Error creating label! %{error}
+            success: Label created successfully
+          destroy:
+            success: Label removed successfully
+          edit:
+            save: Save
+            title: Edit label
+          form:
+            name_taken_error: That name is already used by another label in this questionnaire.
+          new:
+            save: Save
+            title: New label
+          table:
+            confirm_destroy: Are you sure to remove this label?
+            description: Labels are used to track the status of a response
+            edit: Edit
+            labels_title: Labels
+            new: New label
+            remove: Remove
+          update:
+            error: Error updating label! %{error}
+            success: Label updated successfully
+        follow_up_questionnaires:
+          create:
+            error: Error creating follow-up questionnaire! %{error}
+            success: Follow-up questionnaire created successfully
+          destroy:
+            error: Error removing follow-up questionnaire! %{error}
+            success: Follow-up questionnaire removed successfully
+          edit:
+            save: Save
+            title: Follow-up questionnaire
+          form:
+            anonymous_option_flag: anonymous, no questions
+            name_help: In the participatory space, you will see this name as a new
+              item menu where to handle the responses
+            responder_email_help: This field will be used to find and email where
+              to respond to. If the questionnaire is not anonymous, you can skip this
+              part and the user will be used instead
+            responder_name_help: This field will be used to find and display the name
+              of the responder. If the questionnaire is not anonymous, you can skip
+              this part and the user will be used instead
+            select_questionnaire_placeholder: Select a questionnaire
+          index:
+            confirm_destroy: Are you sure to remove this follow-up questionnaire?
+            description: Turn questionnaire submissions into interactive threads.
+              Click any response to message the participant directly, log private
+              team notes, apply tracking labels, and view the complete communication
+              history.
+            edit: Edit
+            new: New follow-up
+            preview: Preview
+            remove: Remove
+          new:
+            save: Save
+            title: Follow-up questionnaires
+          update:
+            error: Error updating follow-up questionnaire! %{error}
+            success: Follow-up questionnaire updated successfully
         hashcash:
           filters:
             ip_addresses: View IP addresses
@@ -1060,6 +1144,7 @@ en:
           cookie_management: Cookie management
           custom_redirects: Custom Redirections
           editors: Editor Hacks
+          follow_up_questionnaires: Follow-up questionnaires
           livechat: Live Chat
           maintenance:
             checks: System Compatibility
@@ -1392,6 +1477,15 @@ en:
           need to authorize your account with a valid authorization (%{authorizations}).
         login_and_authorization_is_required: In order to access this part of the platform,
           you need to log in and authorize your account.
+      status_colors:
+        blue: Blue
+        gray: Gray
+        green: Green
+        orange: Orange
+        pink: Pink
+        purple: Purple
+        red: Red
+        yellow: Yellow
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |

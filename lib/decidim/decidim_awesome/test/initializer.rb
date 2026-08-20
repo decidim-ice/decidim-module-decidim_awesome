@@ -23,6 +23,7 @@ Decidim::DecidimAwesome.configure do |config|
       :scoped_admins,
       :custom_redirects,
       :cookie_management,
+      :follow_up_questionnaires,
       :validate_title_min_length,
       :validate_title_max_caps_percent,
       :validate_title_max_marks_together,

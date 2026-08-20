@@ -1,0 +1,26 @@
+<div class="form__wrapper">
+  <div class="card pt-4">
+    <div class="card-section">
+      <div class="row column">
+        <%= form.translated :text_field, :name %>
+      </div>
+      <div class="row column">
+        <div class="flex flex-wrap gap-2 mt-2">
+          <% Decidim::DecidimAwesome.follow_up_status_colors.each do |key, values| %>
+            <% input_id = "follow_up_questionnaire_status_color_#{key}" %>
+            <style>
+              #<%= input_id %> {
+                box-shadow: 0 0 0 1.5px <%= values[:foreground] %>, 0 0 0 6px <%= values[:background] %>;
+                accent-color: <%= values[:foreground] %>;
+              }
+              #<%= input_id %>:checked {
+                box-shadow: 0 0 0 6px <%= values[:foreground] %>;
+              }
+            </style>
+            <%= form.radio_button :color, values[:background], id: input_id, label: false, class: "!mr-4" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

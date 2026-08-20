@@ -57,6 +57,11 @@ module Decidim
       true
     end
 
+    # This feature allows to create follow up questionnaires
+    config_accessor :follow_up_questionnaires do
+      true
+    end
+
     # Live chat widget linked to Telegram account or group
     # In the admin side only
     config_accessor :intergram_for_admins do
@@ -476,6 +481,46 @@ module Decidim
     def self.legacy_version?
       # Decidim.version[0..3] == "0.29"
       false
+    end
+
+    # i18n-tasks-use t('decidim.decidim_awesome.status_colors.gray')
+    # i18n-tasks-use t('decidim.decidim_awesome.status_colors.blue')
+    # i18n-tasks-use t('decidim.decidim_awesome.status_colors.green')
+    # i18n-tasks-use t('decidim.decidim_awesome.status_colors.yellow')
+    # i18n-tasks-use t('decidim.decidim_awesome.status_colors.orange')
+    # i18n-tasks-use t('decidim.decidim_awesome.status_colors.red')
+    # i18n-tasks-use t('decidim.decidim_awesome.status_colors.pink')
+    # i18n-tasks-use t('decidim.decidim_awesome.status_colors.purple')
+    def self.follow_up_status_colors
+      {
+        gray: { background: "#F6F8FA", foreground: "#4B5058", name: I18n.t("gray", scope: "decidim.decidim_awesome.status_colors") },
+        blue: { background: "#EBF9FF", foreground: "#0851A6", name: I18n.t("blue", scope: "decidim.decidim_awesome.status_colors") },
+        green: { background: "#E3FCE9", foreground: "#15602C", name: I18n.t("green", scope: "decidim.decidim_awesome.status_colors") },
+        yellow: { background: "#FFFCE5", foreground: "#9A6700", name: I18n.t("yellow", scope: "decidim.decidim_awesome.status_colors") },
+        orange: { background: "#FFF1E5", foreground: "#BC4C00", name: I18n.t("orange", scope: "decidim.decidim_awesome.status_colors") },
+        red: { background: "#FFEBE9", foreground: "#D1242F", name: I18n.t("red", scope: "decidim.decidim_awesome.status_colors") },
+        pink: { background: "#FFEFF7", foreground: "#BF3989", name: I18n.t("pink", scope: "decidim.decidim_awesome.status_colors") },
+        purple: { background: "#FBEFFF", foreground: "#8250DF", name: I18n.t("purple", scope: "decidim.decidim_awesome.status_colors") }
+      }
+    end
+
+    def self.create_default_statuses!(follow_up_questionnaire)
+      colors = follow_up_status_colors
+      locales = Decidim.available_locales.index_with { |_locale| nil }
+
+      [
+        { name: "Answered", color: colors[:yellow][:background] },
+        { name: "In progress", color: colors[:green][:background] },
+        { name: "Pending", color: colors[:red][:background] }
+      ].each do |attrs|
+        name = locales.merge("en" => attrs[:name])
+
+        FollowUpQuestionnaireStatus.create!(
+          follow_up_questionnaire: follow_up_questionnaire,
+          name: name,
+          color: attrs[:color]
+        )
+      end
     end
   end
 end

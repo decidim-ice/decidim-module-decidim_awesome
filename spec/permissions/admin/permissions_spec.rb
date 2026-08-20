@@ -171,5 +171,37 @@ module Decidim::DecidimAwesome::Admin
         end
       end
     end
+
+    context "when accessing follow_up_questionnaire_messages" do
+      let(:feature) { :follow_up_questionnaire_messages }
+      let(:participatory_process) { create(:participatory_process, organization:) }
+      let(:context) do
+        {
+          current_organization: organization,
+          current_participatory_space: participatory_process,
+          private_data:,
+          global:,
+          handler:
+        }
+      end
+
+      context "when the user has a role in the participatory process" do
+        let(:user) { create(:process_admin, participatory_process:) }
+
+        it { is_expected.to be true }
+      end
+
+      context "when the user has no role in the participatory process" do
+        let(:user) { create(:user, :confirmed, organization:) }
+
+        it_behaves_like "permission is not set"
+      end
+
+      context "when the current participatory space is not a participatory process" do
+        let(:participatory_process) { create(:assembly, organization:) }
+
+        it_behaves_like "permission is not set"
+      end
+    end
   end
 end

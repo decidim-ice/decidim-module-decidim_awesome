@@ -1,0 +1,64 @@
+<div class="item_show__header">
+  <h2 class="item_show__header-title">
+    <%= t("decidim.decidim_awesome.admin.menu.follow_up_questionnaires") %>
+    <%= link_to t(".new"), decidim_admin_decidim_awesome.new_follow_up_questionnaire_path(decidim_questionnaire_id: params[:decidim_questionnaire_id]), class: "button button__sm button__secondary ml-auto" %>
+  </h2>
+</div>
+
+<div class="card">
+  <div class="card-section">
+    <p class="help-text -mt-2 mb-4">
+      <%= t(".description") %>
+    </p>
+    <div class="table-scroll">
+      <table class="table-list">
+        <thead>
+          <tr>
+            <th><%= t("follow_up_questionnaires.name", scope: "activemodel.attributes") %></th>
+            <th><%= t("follow_up_questionnaires.participatory_space", scope: "activemodel.attributes") %></th>
+            <th class="actions"><%= t("decidim.decidim_awesome.admin.actions") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @follow_up_questionnaires.each do |item| %>
+            <tr>
+              <td><%= translated_attribute(item.name) %></td>
+              <td>
+                <% questionnaire_for = item.questionnaire.questionnaire_for %>
+                <% component = questionnaire_for.respond_to?(:component) ? questionnaire_for.component : nil %>
+                <% space = component&.participatory_space %>
+
+                <% hierarchy = [
+                  (translated_attribute(space.title) if space&.respond_to?(:title)),
+                  translated_attribute(item.questionnaire.title)
+                ].compact.join(" > ") %>
+
+                <% resource_edit_path = nil %>
+                <% if component.present? && questionnaire_for.respond_to?(:model_name) %>
+                  <% admin_proxy = Decidim::EngineRouter.admin_proxy(component) %>
+                  <% edit_path_method = :"edit_#{questionnaire_for.model_name.singular_route_key}_path" %>
+                  <% if admin_proxy.respond_to?(edit_path_method) %>
+                    <% resource_edit_path = admin_proxy.public_send(edit_path_method, questionnaire_for) %>
+                  <% end %>
+                <% end %>
+
+                <% if resource_edit_path.present? %>
+                  <%= link_to hierarchy.presence || "-", resource_edit_path %>
+                <% else %>
+                  <%= hierarchy.presence || "-" %>
+                <% end %>
+
+              </td>
+              <td class="table-list__actions">
+                <%= icon_link_to "eye-line", decidim_admin_decidim_awesome.follow_up_questionnaire_messages_path(item.decidim_questionnaire_id), t(".preview"), class: "action-icon--preview" %>
+                <%= icon_link_to "pencil-line", decidim_admin_decidim_awesome.edit_follow_up_questionnaire_path(item.decidim_questionnaire_id), t(".edit"), class: "action-icon--edit" %>
+                <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.follow_up_questionnaire_path(item.decidim_questionnaire_id), t(".remove"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<%= decidim_paginate @follow_up_questionnaires %>
