@@ -1,0 +1,37 @@
+<div class="card mb-6">
+  <div class="card-divider">
+    <h2 class="card-title">
+      <%= t(".title") %>
+    </h2>
+  </div>
+
+  <% if messages.any? %>
+    <div class="reply-history">
+      <% messages.each do |message| %>
+        <% color_values = Decidim::DecidimAwesome.follow_up_status_colors.values.find { |value| value[:background] == message.status.color } %>
+        <div class="card reply-history__item" data-controller="accordion" id="reply-history-accordion-<%= message.id %>">
+          <div class="card-divider">
+            <button class="card-divider-button" data-open="false" data-controls="reply-history-panel-<%= message.id %>" type="button">
+              <%= icon "arrow-right-s-line" %>
+              <span class="card-title reply-history__summary">
+                <span class="reply-history__author"><%= message.author.name %></span>
+                <span class="label" style="background-color:<%= message.status.color %>; color:<%= color_values&.dig(:foreground) %>;">
+                  <%= translated_attribute(message.status.name) %>
+                </span>
+                <span class="reply-history__time"><%= l message.created_at, format: :decidim_short %></span>
+              </span>
+            </button>
+          </div>
+
+          <div id="reply-history-panel-<%= message.id %>" class="card-section" aria-hidden="true">
+            <%= decidim_sanitize_editor_admin(message.body) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="card-section">
+      <p class="p-4"><%= t(".empty") %></p>
+    </div>
+  <% end %>
+</div>

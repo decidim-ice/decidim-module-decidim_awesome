@@ -4,6 +4,8 @@ module Decidim
   module DecidimAwesome
     module Admin
       class CreateFollowUpQuestionnaireMessage < Command
+        include Decidim::MultipleAttachmentsMethods
+
         def initialize(form)
           @form = form
         end
@@ -11,8 +13,15 @@ module Decidim
         def call
           return broadcast(:invalid) if form.invalid?
 
+          if process_attachments?
+            build_attachments
+            return broadcast(:invalid) if attachments_invalid?
+          end
+
           transaction do
             create_message
+            @attached_to = message
+            create_attachments if process_attachments?
             notify_respondent
           end
 

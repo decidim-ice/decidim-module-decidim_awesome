@@ -1033,14 +1033,31 @@ en:
             error: Error updating redirection! %{error}
             success: Redirection updated successfully
         follow_up_questionnaire_messages:
+          create:
+            error: Error sending the message! %{error}
+            success: Message sent successfully
+          form:
+            add_attachment: Add attachment
+            attachments: Attachment
+            body: Message
+            edit_attachment: Edit attachment
+            select_a_status: Select a status
+            status: Status
           index:
-            archive: Archive
             last_action: Answered %{time} ago
             new_status: New
             not_answered: "(not answered)"
             not_processable: No respondent - Not processable
             preview: Preview
             reply: Reply
+          new:
+            back: Back
+            new_reply: New message
+            send_message: Send
+            title: Manage messages
+          reply_history:
+            empty: No messages have been sent to this person yet.
+            title: Messages history log
         follow_up_questionnaire_statuses:
           create:
             error: Error creating label! %{error}

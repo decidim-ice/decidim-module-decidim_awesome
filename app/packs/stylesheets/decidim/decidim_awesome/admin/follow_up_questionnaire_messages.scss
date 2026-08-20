@@ -1,0 +1,32 @@
+.reply-history {
+  &__item {
+    border-bottom: 1px solid #e1e5ef;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__summary {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  &__time {
+    margin-left: auto;
+    font-weight: normal;
+    color: #6b7280;
+  }
+
+  .card-divider-button {
+    svg {
+      flex: none;
+    }
+
+    &[aria-expanded="true"] svg {
+      transform: rotate(90deg);
+      transition: transform 0.2s ease;
+    }
+  }
+}

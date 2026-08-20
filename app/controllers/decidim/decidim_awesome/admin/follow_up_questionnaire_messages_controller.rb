@@ -25,9 +25,35 @@ module Decidim
                                                                    .transform_values { |messages| messages.max_by(&:created_at) }
         end
 
-        def new; end
+        def new
+          @messages = messages_for_respondent
+          @statuses = @follow_up_questionnaire.statuses
+          @form = form(FollowUpQuestionnaireMessageForm).instance(statuses_by_id: @statuses.index_by(&:id))
+          @form.decidim_user_id = params[:decidim_user_id]
+          @form.session_token = params[:session_token]
+        end
 
-        def create; end
+        def create
+          @statuses = @follow_up_questionnaire.statuses
+          @form = form(FollowUpQuestionnaireMessageForm).from_params(
+            params,
+            follow_up_questionnaire_id: @follow_up_questionnaire.id,
+            author_id: current_user.id,
+            statuses_by_id: @statuses.index_by(&:id)
+          )
+
+          CreateFollowUpQuestionnaireMessage.call(@form) do
+            on(:ok) do
+              flash[:notice] = I18n.t("follow_up_questionnaire_messages.create.success", scope: "decidim.decidim_awesome.admin")
+              redirect_to follow_up_questionnaire_messages_path(@follow_up_questionnaire.decidim_questionnaire_id)
+            end
+            on(:invalid) do
+              @messages = messages_for_respondent
+              flash.now[:alert] = I18n.t("follow_up_questionnaire_messages.create.error", scope: "decidim.decidim_awesome.admin", error: @form.error_message)
+              render action: :new, status: :unprocessable_content
+            end
+          end
+        end
 
         def show; end
 
@@ -53,6 +79,16 @@ module Decidim
 
         def respondent_details(participant)
           respondents_finder.respondent_for(decidim_user_id: participant.decidim_user_id, session_token: participant.session_token)
+        end
+
+        def messages_for_respondent
+          scope = @follow_up_questionnaire.messages
+          scope = if params[:decidim_user_id].present?
+                    scope.where(decidim_user_id: params[:decidim_user_id])
+                  else
+                    scope.where(session_token: params[:session_token])
+                  end
+          scope.recent
         end
 
         def respondents_finder

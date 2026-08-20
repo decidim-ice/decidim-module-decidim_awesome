@@ -1,0 +1,34 @@
+<div class="item_show__header">
+  <h2 class="item_show__header-title">
+    <%= t(".title") %>
+    <%= link_to t(".back"), follow_up_questionnaire_messages_path(@follow_up_questionnaire.decidim_questionnaire_id), class: "button button__sm button__secondary" %>
+  </h2>
+</div>
+
+<div class="item__edit item__edit-1col">
+  <div class="item__edit-form">
+    <div class="form__wrapper">
+      <%= render "reply_history", messages: @messages %>
+
+      <div class="card">
+        <div class="card-divider">
+          <h2 class="card-title">
+            <%= t(".new_reply") %>
+          </h2>
+        </div>
+
+        <div class="card-section">
+          <%= decidim_form_for(@form, url: follow_up_questionnaire_messages_path(@follow_up_questionnaire.decidim_questionnaire_id), html: { class: "form-defaults form new_follow_up_questionnaire_" }) do |f| %>
+            <%= render partial: "form", object: f %>
+
+            <div class="item__edit-sticky">
+              <div class="item__edit-sticky-container">
+                <%= f.submit t(".send_message"), class: "button button__sm button__secondary" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

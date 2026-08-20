@@ -4,12 +4,16 @@ module Decidim
   module DecidimAwesome
     module Admin
       class FollowUpQuestionnaireMessageForm < Decidim::Form
+        include Decidim::AttachmentAttributes
+
         attribute :follow_up_questionnaire_id, Integer
         attribute :status_id, Integer
         attribute :body, String
         attribute :author_id, Integer
         attribute :decidim_user_id, Integer
         attribute :session_token, String
+
+        attachments_attribute :attachments
 
         validates :follow_up_questionnaire_id, :status_id, :author_id, presence: true, numericality: { only_integer: true }
         validates :body, presence: true
@@ -25,6 +29,10 @@ module Decidim
             decidim_user_id: decidim_user_id,
             session_token: session_token
           }
+        end
+
+        def error_message
+          errors.full_messages.join(", ")
         end
 
         private
