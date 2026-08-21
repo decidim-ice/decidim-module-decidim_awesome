@@ -8,7 +8,6 @@ module Decidim
         include Decidim::TranslatableAttributes
         include BreadcrumbHelpers
 
-        skip_before_action :enforce_organization_admin!
         before_action :follow_up_questionnaire
         before_action :enforce_messages_permission!
         before_action :follow_up_questionnaire_message, only: [:show, :destroy]

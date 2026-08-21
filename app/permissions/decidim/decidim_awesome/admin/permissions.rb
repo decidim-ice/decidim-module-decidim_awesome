@@ -15,6 +15,11 @@ module Decidim
             return permission_action
           end
 
+          if permission_action.action == :update && permission_action.subject == :organization
+            allow! if user.read_attribute("admin").present? || user_administrator?
+            return permission_action
+          end
+
           return permission_action if user.read_attribute("admin").blank?
           return permission_action unless permission_action.action == :edit_config
 
@@ -41,14 +46,23 @@ module Decidim
           "Decidim::Conference" => "Decidim::Conferences::ConferencesWithUserRole"
         }.freeze
 
+        def user_administrator?
+          FOLLOW_UP_QUESTIONNAIRE_SPACE_ROLE_FINDERS.each_key.any? { |space_class_name| space_admin?(space_class_name) }
+        end
+
         def apply_follow_up_questionnaire_message_permissions!
           space = context.fetch(:current_participatory_space, nil)
           return unless space
 
-          finder_class_name = FOLLOW_UP_QUESTIONNAIRE_SPACE_ROLE_FINDERS[space.class.name]
-          return unless finder_class_name
+          allow! if space_admin?(space.class.name, space.id)
+        end
 
-          allow! if finder_class_name.constantize.for(user).exists?(id: space.id)
+        def space_admin?(space_class_name, space_id = nil)
+          finder_class_name = FOLLOW_UP_QUESTIONNAIRE_SPACE_ROLE_FINDERS[space_class_name]
+          return false unless finder_class_name
+
+          scope = finder_class_name.constantize.for(user, :admin)
+          space_id ? scope.exists?(id: space_id) : scope.exists?
         end
 
         def apply_admin_authorizations_permissions!
