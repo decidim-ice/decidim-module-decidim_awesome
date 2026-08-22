@@ -218,6 +218,14 @@ module Decidim
           :conference_admin_menu
         ].freeze
 
+        def admin_menu_for(space)
+          case space
+          when Decidim::ParticipatoryProcess then :admin_participatory_process_menu
+          when Decidim::Assembly then :admin_assembly_menu
+          when Decidim::Conference then :conference_admin_menu
+          end
+        end
+
         def register_follow_up_questionnaires_menu!
           FOLLOW_UP_QUESTIONNAIRES_PARENT_MENUS.each do |parent_menu|
             Decidim.menu parent_menu do |menu|

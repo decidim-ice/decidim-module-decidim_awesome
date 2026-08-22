@@ -16,7 +16,7 @@ module Decidim
         helper_method :current_participatory_space, :respondent_details
 
         def permission_class_chain
-          [::Decidim::ParticipatoryProcesses::Permissions] + super
+          [::Decidim::ParticipatoryProcesses::Permissions, ::Decidim::Assemblies::Permissions, ::Decidim::Conferences::Permissions] + super
         end
 
         def index
@@ -28,9 +28,14 @@ module Decidim
         end
 
         def new
-          @messages = messages_for_respondent
           @statuses = @follow_up_questionnaire.statuses
-          @form = form(FollowUpQuestionnaireMessageForm).instance(statuses_by_id: @statuses.index_by(&:id))
+          assign_reply_view_variables
+          @form = form(FollowUpQuestionnaireMessageForm).instance(
+            statuses_by_id: @statuses.index_by(&:id),
+            current_participatory_space: current_participatory_space
+          )
+          @form.follow_up_questionnaire_id = @follow_up_questionnaire.id
+          @form.author_id = current_user.id
           @form.decidim_user_id = params[:decidim_user_id]
           @form.session_token = params[:session_token]
         end
@@ -39,18 +44,18 @@ module Decidim
           @statuses = @follow_up_questionnaire.statuses
           @form = form(FollowUpQuestionnaireMessageForm).from_params(
             params,
-            follow_up_questionnaire_id: @follow_up_questionnaire.id,
-            author_id: current_user.id,
-            statuses_by_id: @statuses.index_by(&:id)
+            statuses_by_id: @statuses.index_by(&:id),
+            current_participatory_space: current_participatory_space
           )
+          @form.follow_up_questionnaire_id = @follow_up_questionnaire.id
 
           CreateFollowUpQuestionnaireMessage.call(@form) do
             on(:ok) do
               flash[:notice] = I18n.t("follow_up_questionnaire_messages.create.success", scope: "decidim.decidim_awesome.admin")
-              redirect_to follow_up_questionnaire_messages_path(@follow_up_questionnaire.decidim_questionnaire_id)
+              redirect_to follow_up_questionnaire_messages_path(follow_up_questionnaire.decidim_questionnaire_id)
             end
             on(:invalid) do
-              @messages = messages_for_respondent
+              assign_reply_view_variables
               flash.now[:alert] = I18n.t("follow_up_questionnaire_messages.create.error", scope: "decidim.decidim_awesome.admin", error: @form.error_message)
               render action: :new, status: :unprocessable_content
             end
@@ -95,6 +100,22 @@ module Decidim
 
         def respondents_finder
           @respondents_finder ||= FollowUpQuestionnaireRespondentsFinder.new(@follow_up_questionnaire)
+        end
+
+        def assign_reply_view_variables
+          @messages = messages_for_respondent
+          @respondent = respondents_finder.respondent_for(decidim_user_id: params[:decidim_user_id], session_token: params[:session_token])
+          @submitted_at = original_submission_at
+        end
+
+        def original_submission_at
+          scope = Decidim::Forms::Response.where(questionnaire: @follow_up_questionnaire.questionnaire)
+          scope = if params[:decidim_user_id].present?
+                    scope.where(decidim_user_id: params[:decidim_user_id])
+                  else
+                    scope.where(session_token: params[:session_token])
+                  end
+          scope.minimum(:created_at)
         end
 
         def set_follow_up_questionnaire_breadcrumb

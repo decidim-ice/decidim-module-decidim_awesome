@@ -44,14 +44,11 @@ module Decidim
         end
 
         def notify_respondent
-          respondent = respondents_finder.respondent_for(decidim_user_id: message.decidim_user_id, session_token: message.session_token)
+          finder = FollowUpQuestionnaireRespondentsFinder.new(message.follow_up_questionnaire)
+          respondent = finder.respondent_for(decidim_user_id: message.decidim_user_id, session_token: message.session_token)
           return unless respondent.processable? && respondent.email.present?
 
           FollowUpQuestionnaireMessageMailer.notification(message, respondent.email, respondent.name).deliver_later
-        end
-
-        def respondents_finder
-          @respondents_finder ||= FollowUpQuestionnaireRespondentsFinder.new(message.follow_up_questionnaire)
         end
       end
     end

@@ -1,32 +1,43 @@
+.reply-header {
+  @apply flex items-start justify-between gap-x-5 gap-y-3 flex-wrap w-full;
+
+  &__name {
+    @apply text-xl font-bold mb-1;
+  }
+
+  &__subline {
+    @apply flex items-center gap-x-2 text-sm text-gray;
+  }
+
+  &__dot {
+    @apply w-1 h-1 rounded-full bg-gray-3;
+  }
+
+  &__meta {
+    @apply flex items-center gap-x-3 flex-shrink-0;
+  }
+}
+
 .reply-history {
   &__item {
-    border-bottom: 1px solid #e1e5ef;
-
-    &:last-child {
-      border-bottom: none;
-    }
+    @apply border-b border-gray-3 last:border-b-0;
   }
 
   &__summary {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
+    @apply flex items-center gap-x-3;
   }
 
   &__time {
-    margin-left: auto;
-    font-weight: normal;
-    color: #6b7280;
+    @apply ml-auto font-normal text-gray;
   }
 
   .card-divider-button {
     svg {
-      flex: none;
+      @apply flex-none;
     }
 
     &[aria-expanded="true"] svg {
-      transform: rotate(90deg);
-      transition: transform 0.2s ease;
+      @apply rotate-90 transition-transform duration-200;
     }
   }
 }

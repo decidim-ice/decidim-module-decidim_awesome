@@ -1,8 +1,29 @@
 <div class="item_show__header">
-  <h2 class="item_show__header-title">
-    <%= t(".title") %>
-    <%= link_to t(".back"), follow_up_questionnaire_messages_path(@follow_up_questionnaire.decidim_questionnaire_id), class: "button button__sm button__secondary" %>
-  </h2>
+  <div class="reply-header">
+    <div>
+      <h2 class="reply-header__name"><%= @respondent.name.presence || @respondent.email.presence || t(".anonymous_respondent") %></h2>
+      <div class="reply-header__subline">
+        <% if @respondent.name.present? && @respondent.email.present? %>
+          <span><%= @respondent.email %></span>
+          <span class="reply-header__dot"></span>
+        <% end %>
+        <% if @submitted_at %>
+          <span><%= t(".submitted_at", date: l(@submitted_at, format: :decidim_short)) %></span>
+          <span class="reply-header__dot"></span>
+        <% end %>
+        <span><%= t(".messages_count", count: @messages.size) %></span>
+      </div>
+    </div>
+
+    <div class="reply-header__meta">
+      <% if (current_status = @messages.first&.status) %>
+        <% color_values = Decidim::DecidimAwesome.follow_up_status_colors.values.find { |value| value[:background] == current_status.color } %>
+        <span class="label" style="background-color:<%= current_status.color %>; color:<%= color_values&.dig(:foreground) %>;">
+          <%= translated_attribute(current_status.name) %>
+        </span>
+      <% end %>
+    </div>
+  </div>
 </div>
 
 <div class="item__edit item__edit-1col">

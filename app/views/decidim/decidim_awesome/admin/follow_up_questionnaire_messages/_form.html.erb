@@ -2,6 +2,12 @@
 <%= form.hidden_field :session_token %>
 
 <div class="row column">
+  <%= form.select :author_id,
+                  form.object.possible_authors.map { |author| [author.name, author.id] },
+                  label: t(".author") %>
+</div>
+
+<div class="row column">
   <%= form.select :status_id,
                   @statuses.map { |status| [translated_attribute(status.name), status.id] },
                   include_blank: t(".select_a_status"),

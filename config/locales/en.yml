@@ -1039,6 +1039,7 @@ en:
           form:
             add_attachment: Add attachment
             attachments: Attachment
+            author: Author
             body: Message
             edit_attachment: Edit attachment
             select_a_status: Select a status
@@ -1051,9 +1052,13 @@ en:
             preview: Preview
             reply: Reply
           new:
-            back: Back
+            anonymous_respondent: Anonymous respondent
+            messages_count:
+              one: "%{count} message"
+              other: "%{count} messages"
             new_reply: New message
             send_message: Send
+            submitted_at: Submitted on %{date}
             title: Manage messages
           reply_history:
             empty: No messages have been sent to this person yet.
@@ -1451,6 +1456,13 @@ en:
             field '%{field}'
           invalid_xml: 'Content couldn''t be parsed: DL/DD elements not found in the
             XML'
+      follow_up_questionnaire_message_mailer:
+        notification:
+          default_name: there
+          greeting: Hi %{name},
+          intro: You have received a new message regarding your submission to "%{questionnaire}".
+          outro: Thank you for your participation.
+          subject: New message to your submission to "%{questionnaire}"
       map_component:
         map:
           api_not_ready: |

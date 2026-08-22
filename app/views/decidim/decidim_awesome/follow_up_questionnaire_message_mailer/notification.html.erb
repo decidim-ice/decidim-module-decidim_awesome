@@ -1,0 +1,9 @@
+<p class="email-greeting"><%= t(".greeting", name: @name.presence || t(".default_name")) %></p>
+
+<p class="email-instructions"><%= t(".intro", questionnaire: translated_attribute(@message.follow_up_questionnaire.name)) %></p>
+
+<blockquote>
+  <%= decidim_sanitize_editor(@message.body) %>
+</blockquote>
+
+<p class="email-closing"><%= t(".outro") %></p>

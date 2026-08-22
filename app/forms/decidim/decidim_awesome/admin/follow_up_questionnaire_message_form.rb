@@ -19,6 +19,7 @@ module Decidim
         validates :body, presence: true
         validate :status_belongs_to_questionnaire
         validate :respondent_present
+        validate :author_is_allowed
 
         def to_params
           {
@@ -35,7 +36,23 @@ module Decidim
           errors.full_messages.join(", ")
         end
 
+        def possible_authors
+          space = current_participatory_space
+          admins = if space
+                     space.user_roles(:admin).includes(:user).filter_map(&:user)
+                   else
+                     []
+                   end
+          ([current_user] + admins).compact.uniq
+        end
+
         private
+
+        def author_is_allowed
+          return if author_id.blank?
+
+          errors.add(:author_id, :invalid) unless possible_authors.map(&:id).include?(author_id)
+        end
 
         def status_belongs_to_questionnaire
           return if status_id.blank? || follow_up_questionnaire_id.blank?

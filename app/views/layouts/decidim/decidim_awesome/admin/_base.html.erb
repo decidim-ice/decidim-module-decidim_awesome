@@ -1,5 +1,5 @@
 <% if defined?(current_participatory_space) && current_participatory_space %>
-  <% add_secondary_root_menu(:admin_participatory_process_menu) %>
+  <% add_secondary_root_menu(Decidim::DecidimAwesome::Menu.admin_menu_for(current_participatory_space) || :admin_participatory_process_menu) %>
 <% else %>
   <% add_secondary_root_menu(:awesome_admin_menu) %>
 <% end %>
