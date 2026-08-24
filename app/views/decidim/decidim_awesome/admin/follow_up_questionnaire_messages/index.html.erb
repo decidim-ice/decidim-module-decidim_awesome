@@ -48,7 +48,8 @@
               </td>
               <td class="table-list__actions">
                 <% if respondent.processable? %>
-                  <%= icon_link_to "eye-line", "#", t(".preview"), class: "action-icon--preview" %>
+                  <% preview_path = preview_response_path(participant) %>
+                  <%= icon_link_to "eye-line", preview_path, t(".preview"), class: "action-icon--preview" if preview_path %>
                   <%= icon_link_to "mail-line", new_follow_up_questionnaire_message_path(@follow_up_questionnaire.decidim_questionnaire_id, decidim_user_id: participant.decidim_user_id, session_token: participant.session_token), t(".reply"), class: "action-icon--new" %>
                 <% end %>
               </td>

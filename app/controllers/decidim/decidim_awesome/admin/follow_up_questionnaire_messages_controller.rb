@@ -13,7 +13,7 @@ module Decidim
         before_action :follow_up_questionnaire_message, only: [:show, :destroy]
         before_action :set_follow_up_questionnaire_breadcrumb, only: [:index, :new, :create]
 
-        helper_method :current_participatory_space, :respondent_details
+        helper_method :current_participatory_space, :respondent_details, :preview_response_path
 
         def permission_class_chain
           [::Decidim::ParticipatoryProcesses::Permissions, ::Decidim::Assemblies::Permissions, ::Decidim::Conferences::Permissions] + super
@@ -75,9 +75,19 @@ module Decidim
         end
 
         def current_participatory_space
-          @current_participatory_space ||= FollowUpQuestionnairesFinder.new(current_organization)
-                                                                       .component_for(@follow_up_questionnaire.questionnaire)
-                                                                       &.participatory_space
+          @current_participatory_space ||= current_component&.participatory_space
+        end
+
+        def current_component
+          @current_component ||= FollowUpQuestionnairesFinder.new(current_organization)
+                                                             .component_for(@follow_up_questionnaire.questionnaire)
+        end
+
+        def preview_response_path(participant)
+          survey = @follow_up_questionnaire.questionnaire.questionnaire_for
+          return unless defined?(Decidim::Surveys::Survey) && survey.is_a?(Decidim::Surveys::Survey)
+
+          Decidim::EngineRouter.admin_proxy(current_component).survey_response_path(survey, id: participant.session_token)
         end
 
         def enforce_messages_permission!
