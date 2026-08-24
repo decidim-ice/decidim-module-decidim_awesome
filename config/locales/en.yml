@@ -1061,7 +1061,9 @@ en:
             submitted_at: Submitted on %{date}
             title: Manage messages
           reply_history:
+            documents: Documents
             empty: No messages have been sent to this person yet.
+            photos: Photos
             title: Messages history log
         follow_up_questionnaire_statuses:
           create:

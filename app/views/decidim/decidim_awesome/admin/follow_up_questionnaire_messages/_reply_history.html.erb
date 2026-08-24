@@ -24,7 +24,34 @@
           </div>
 
           <div id="reply-history-panel-<%= message.id %>" class="card-section" aria-hidden="true">
-            <%= decidim_sanitize_editor_admin(message.body) %>
+            <div class="p-4"><%= decidim_sanitize_editor_admin(message.body) %></div>
+
+            <% if message.documents.any? %>
+              <div class="p-4">
+                <strong><%= t(".documents") %>:</strong>
+                <ul>
+                  <% message.documents.each do |document| %>
+                    <li>
+                      <%= link_to translated_attribute(document.title), document.url %>
+                      <small><%= document.file_type %> <%= number_to_human_size(document.file_size) %></small>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <% if message.photos.any? %>
+              <div class="p-4">
+                <strong><%= t(".photos") %>:</strong>
+                <div class="gallery row" data-gallery>
+                  <% message.photos.each do |photo| %>
+                    <%= link_to photo.big_url, target: "_blank", rel: "noopener" do %>
+                      <%= image_tag photo.thumbnail_url, class: "thumbnail", alt: strip_tags(translated_attribute(photo.title)) %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
           </div>
         </div>
       <% end %>

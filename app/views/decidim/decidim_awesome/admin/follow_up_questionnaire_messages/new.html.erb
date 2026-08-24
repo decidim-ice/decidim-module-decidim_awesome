@@ -12,16 +12,16 @@
           <span class="reply-header__dot"></span>
         <% end %>
         <span><%= t(".messages_count", count: @messages.size) %></span>
+        <span class="reply-header__dot"></span>
+        <div class="reply-header__meta">
+          <% if (current_status = @messages.first&.status) %>
+            <% color_values = Decidim::DecidimAwesome.follow_up_status_colors.values.find { |value| value[:background] == current_status.color } %>
+            <span class="label" style="background-color:<%= current_status.color %>; color:<%= color_values&.dig(:foreground) %>;">
+              <%= translated_attribute(current_status.name) %>
+            </span>
+          <% end %>
+        </div>
       </div>
-    </div>
-
-    <div class="reply-header__meta">
-      <% if (current_status = @messages.first&.status) %>
-        <% color_values = Decidim::DecidimAwesome.follow_up_status_colors.values.find { |value| value[:background] == current_status.color } %>
-        <span class="label" style="background-color:<%= current_status.color %>; color:<%= color_values&.dig(:foreground) %>;">
-          <%= translated_attribute(current_status.name) %>
-        </span>
-      <% end %>
     </div>
   </div>
 </div>
