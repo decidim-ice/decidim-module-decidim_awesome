@@ -1285,6 +1285,13 @@ en:
         component:
           destroy_private_data: "%{user_name} destroyed %{count} items of private
             data for %{resource_name} in %{space_name}"
+        follow_up_questionnaire_status:
+          create: "%{user_name} created a new label %{label_name} for the follow-up
+            questionnaire %{questionnaire_name}"
+          delete: "%{user_name} removed the label %{label_name} from the follow-up
+            questionnaire %{questionnaire_name}"
+          update: "%{user_name} updated the label %{label_name} for the follow-up
+            questionnaire %{questionnaire_name}"
         user:
           admin_creates_authorization: "%{user_name} verified %{resource_name} with
             %{handler_name}"

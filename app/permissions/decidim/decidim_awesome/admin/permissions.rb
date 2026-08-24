@@ -54,7 +54,7 @@ module Decidim
           space = context.fetch(:current_participatory_space, nil)
           return unless space
 
-          allow! if space_admin?(space.class.name, space.id)
+          allow! if space_admin?(space.class.name, space.try(:id))
         end
 
         def space_admin?(space_class_name, space_id = nil)
