@@ -24,13 +24,15 @@ module Decidim::DecidimAwesome
         follow_up_questionnaire.statuses.reload
       end
       let(:status) { statuses.first }
+      let(:respondent) { create(:user, organization:) }
+      let(:body) { "Thanks for your feedback" }
       let(:attributes) do
         {
           follow_up_questionnaire_id: follow_up_questionnaire.id,
           status_id: status.id,
-          body: "Thanks for your feedback",
+          body:,
           author_id: user.id,
-          decidim_user_id: create(:user, organization:).id,
+          decidim_user_id: respondent.id,
           session_token: nil
         }
       end
@@ -47,9 +49,37 @@ module Decidim::DecidimAwesome
       end
 
       context "when body is blank" do
-        let(:attributes) { super().merge(body: "  ") }
+        let(:body) { "  " }
 
-        it { is_expected.not_to be_valid }
+        it "is valid, since it is the respondent's first message" do
+          expect(subject).to be_valid
+        end
+
+        context "and the status did not change" do
+          before do
+            Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(
+              follow_up_questionnaire: follow_up_questionnaire,
+              status: status,
+              author: user,
+              decidim_user_id: respondent.id
+            )
+          end
+
+          it { is_expected.not_to be_valid }
+        end
+
+        context "and the status changed" do
+          before do
+            Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(
+              follow_up_questionnaire: follow_up_questionnaire,
+              status: statuses.second,
+              author: user,
+              decidim_user_id: respondent.id
+            )
+          end
+
+          it { is_expected.to be_valid }
+        end
       end
 
       context "when follow_up_questionnaire_id is missing" do

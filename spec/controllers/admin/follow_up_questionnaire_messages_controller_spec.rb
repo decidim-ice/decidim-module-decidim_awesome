@@ -65,12 +65,42 @@ module Decidim::DecidimAwesome
         end
 
         context "when the form is invalid" do
-          let(:params) { super().deep_merge(follow_up_questionnaire_message: { body: "" }) }
+          let(:invalid_params) { params.deep_merge(follow_up_questionnaire_message: { status_id: "" }) }
 
           it "renders the new template" do
-            expect { post :create, params: params }.not_to change(Decidim::DecidimAwesome::FollowUpQuestionnaireMessage, :count)
+            expect { post :create, params: invalid_params }.not_to change(Decidim::DecidimAwesome::FollowUpQuestionnaireMessage, :count)
 
             expect(response).to render_template(:new)
+          end
+        end
+
+        context "when the body is blank" do
+          let(:blank_body_params) { params.deep_merge(follow_up_questionnaire_message: { body: "" }) }
+
+          def create_previous_message(status:)
+            Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(
+              follow_up_questionnaire: follow_up_questionnaire,
+              status: status,
+              author: user,
+              decidim_user_id: respondent.id
+            )
+          end
+
+          context "and the status did not change" do
+            before { create_previous_message(status: status) }
+
+            it "does not create a message" do
+              expect { post :create, params: blank_body_params }.not_to change(Decidim::DecidimAwesome::FollowUpQuestionnaireMessage, :count)
+            end
+          end
+
+          context "and the status changed" do
+            before { create_previous_message(status: follow_up_questionnaire.statuses.second) }
+
+            it "creates a message with an empty body" do
+              expect { post :create, params: blank_body_params }.to change(Decidim::DecidimAwesome::FollowUpQuestionnaireMessage, :count).by(1)
+              expect(Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.last.body).to be_blank
+            end
           end
         end
       end

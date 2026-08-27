@@ -67,7 +67,7 @@ module Decidim
           errors.add(:base, :respondent_missing) if decidim_user_id.blank? && session_token.blank?
         end
 
-        # i18n-tasks-use t('activemodel.errors.models.decidim/decidim_awesome/admin/follow_up_questionnaire_message_form.attributes.body.blank_without_status_change')
+        # i18n-tasks-use t('activemodel.errors.models.follow_up_questionnaire_message.attributes.body.blank_without_status_change')
         def body_or_status_change_present
           return if body.to_s.strip.present?
           return if status_id.blank? || previous_status_id.blank?

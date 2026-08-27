@@ -123,7 +123,7 @@ en:
                 be changed
               invalid_format: Name can only contain letters, numbers, underscores
                 (_) and hyphens (-) - no spaces or special characters allowed
-        decidim/decidim_awesome/admin/follow_up_questionnaire_message_form:
+        follow_up_questionnaire_message:
           attributes:
             body:
               blank_without_status_change: must be present, or select a different

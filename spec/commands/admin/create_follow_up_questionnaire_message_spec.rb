@@ -23,6 +23,7 @@ module Decidim::DecidimAwesome
       let(:status) { statuses.first }
       let(:decidim_user_id) { respondent.id }
       let(:session_token) { nil }
+      let(:body) { "Thanks for your feedback" }
       let(:context) do
         {
           current_user: user,
@@ -35,7 +36,7 @@ module Decidim::DecidimAwesome
         {
           follow_up_questionnaire_id: follow_up_questionnaire.id,
           status_id: status.id,
-          body: "Thanks for your feedback",
+          body:,
           author_id: user.id,
           decidim_user_id:,
           session_token:
@@ -72,12 +73,21 @@ module Decidim::DecidimAwesome
         end
       end
 
-      context "when the form is invalid" do
-        let(:params) { super().merge(body: "") }
+      context "when the body is blank and the status did not change" do
+        let(:body) { "" }
 
-        it "broadcasts :invalid and does not create a message" do
+        before do
+          Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(
+            follow_up_questionnaire: follow_up_questionnaire,
+            status: status,
+            author: user,
+            decidim_user_id: respondent.id
+          )
+        end
+
+        it "broadcasts :invalid and does not create a new message" do
           expect { subject.call }.to broadcast(:invalid)
-          expect(Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.count).to eq(0)
+          expect(Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.count).to eq(1)
         end
       end
 
