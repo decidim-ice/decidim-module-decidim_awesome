@@ -19,6 +19,8 @@ module Decidim
           [::Decidim::ParticipatoryProcesses::Permissions, ::Decidim::Assemblies::Permissions, ::Decidim::Conferences::Permissions] + super
         end
 
+        # i18n-tasks-use t("decidim.decidim_awesome.admin.follow_up_questionnaire_messages.index.last_action_answered")
+        # i18n-tasks-use t("decidim.decidim_awesome.admin.follow_up_questionnaire_messages.index.last_action_labeled")
         def index
           @questionnaire = @follow_up_questionnaire.questionnaire
           @participants = paginate(Decidim::Forms::QuestionnaireParticipants.new(@questionnaire).participants)

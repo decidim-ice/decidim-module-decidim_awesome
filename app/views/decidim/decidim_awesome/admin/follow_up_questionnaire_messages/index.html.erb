@@ -36,7 +36,7 @@
               <td><%= l participant.created_at, format: :decidim_short %></td>
               <td>
                 <% if latest_message %>
-                  <%= t(".last_action", time: time_ago_in_words(latest_message.created_at)) %>
+                  <%= t(latest_message.body.present? ? ".last_action_answered" : ".last_action_labeled", time: time_ago_in_words(latest_message.created_at)) %>
                 <% else %>
                   <%= t(".not_answered") %>
                 <% end %>

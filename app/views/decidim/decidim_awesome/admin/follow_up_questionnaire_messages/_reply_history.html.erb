@@ -24,7 +24,7 @@
           </div>
 
           <div id="reply-history-panel-<%= message.id %>" class="card-section" aria-hidden="true">
-            <div class="p-4"><%= decidim_sanitize_editor_admin(message.body) %></div>
+            <div class="p-4"><%= decidim_sanitize_editor_admin(message.display_body) %></div>
 
             <% if message.documents.any? %>
               <div class="p-4">

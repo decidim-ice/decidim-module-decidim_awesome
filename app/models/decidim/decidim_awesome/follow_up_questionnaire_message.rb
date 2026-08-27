@@ -4,6 +4,7 @@ module Decidim
   module DecidimAwesome
     class FollowUpQuestionnaireMessage < ApplicationRecord
       include Decidim::HasAttachments
+      include Decidim::TranslatableAttributes
 
       self.table_name = "decidim_awesome_follow_up_questionnaire_messages"
 
@@ -32,6 +33,17 @@ module Decidim
 
       def attachment_context
         :admin
+      end
+
+      def can_participate?(_user)
+        true
+      end
+
+      def display_body
+        body.presence || I18n.t(
+          "decidim.decidim_awesome.admin.follow_up_questionnaire_messages.auto_status_change_body",
+          status: translated_attribute(status.name)
+        )
       end
     end
   end
