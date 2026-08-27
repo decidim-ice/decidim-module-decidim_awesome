@@ -91,6 +91,82 @@ module Decidim::DecidimAwesome
         end
       end
 
+      context "when the body is blank and the status changed" do
+        let(:body) { "" }
+
+        before do
+          Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(
+            follow_up_questionnaire: follow_up_questionnaire,
+            status: statuses.second,
+            author: user,
+            decidim_user_id: respondent.id
+          )
+        end
+
+        it "creates the message with an empty body, sends the email and notifies in-app" do
+          expect(Decidim::EventsManager).to receive(:publish).with(
+            event: "decidim.events.decidim_awesome.follow_up_questionnaire_message_status_changed",
+            event_class: FollowUpQuestionnaireMessageStatusChangedEvent,
+            resource: an_instance_of(Decidim::DecidimAwesome::FollowUpQuestionnaireMessage),
+            affected_users: [respondent]
+          )
+
+          expect { subject.call }.to have_enqueued_job(ActionMailer::MailDeliveryJob)
+          expect(message.body).to be_nil
+        end
+      end
+
+      context "when the body is present and the status changed" do
+        before do
+          Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(
+            follow_up_questionnaire: follow_up_questionnaire,
+            status: statuses.second,
+            author: user,
+            decidim_user_id: respondent.id
+          )
+        end
+
+        it "sends the email and notifies the respondent in-app" do
+          expect(Decidim::EventsManager).to receive(:publish).with(
+            event: "decidim.events.decidim_awesome.follow_up_questionnaire_message_status_changed",
+            event_class: FollowUpQuestionnaireMessageStatusChangedEvent,
+            resource: an_instance_of(Decidim::DecidimAwesome::FollowUpQuestionnaireMessage),
+            affected_users: [respondent]
+          )
+
+          expect { subject.call }.to have_enqueued_job(ActionMailer::MailDeliveryJob)
+        end
+      end
+
+      context "when the body is present and the status did not change" do
+        before do
+          Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(
+            follow_up_questionnaire: follow_up_questionnaire,
+            status: status,
+            author: user,
+            decidim_user_id: respondent.id
+          )
+        end
+
+        it "sends the email but does not notify in-app" do
+          expect(Decidim::EventsManager).not_to receive(:publish)
+
+          expect { subject.call }.to have_enqueued_job(ActionMailer::MailDeliveryJob)
+        end
+      end
+
+      context "when a different author is selected" do
+        let(:other_admin) { create(:user, :confirmed, organization:) }
+        let(:params) { super().merge(author_id: other_admin.id) }
+
+        before { allow(form).to receive(:possible_authors).and_return([user, other_admin]) }
+
+        it "creates the message with the selected author" do
+          expect { subject.call }.to broadcast(:ok)
+          expect(message.author).to eq(other_admin)
+        end
+      end
+
       context "when the status does not belong to the questionnaire" do
         let(:other_follow_up_questionnaire) do
           Decidim::DecidimAwesome::FollowUpQuestionnaire.create!(decidim_questionnaire_id: create(:questionnaire).id, name: { "en" => "Other" })
