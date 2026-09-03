@@ -17,6 +17,7 @@ describe "Follow-up questionnaires menu in assemblies and conferences admin" do
     let(:component) { create(:component, manifest_name: "surveys", participatory_space: assembly, organization:) }
     let!(:survey) { create(:survey, component:, questionnaire:) }
     let!(:follow_up_questionnaire) { Decidim::DecidimAwesome::FollowUpQuestionnaire.create!(decidim_questionnaire_id: questionnaire.id, name: { "en" => "Follow up" }) }
+    let!(:assembly_admin_role) { create(:assembly_user_role, user: admin, assembly:, role: "admin") }
 
     it "shows the follow-up questionnaires menu item" do
       visit decidim_admin_assemblies.edit_component_path(assembly, component)
@@ -33,6 +34,7 @@ describe "Follow-up questionnaires menu in assemblies and conferences admin" do
     let(:component) { create(:component, manifest_name: "surveys", participatory_space: conference, organization:) }
     let!(:survey) { create(:survey, component:, questionnaire:) }
     let!(:follow_up_questionnaire) { Decidim::DecidimAwesome::FollowUpQuestionnaire.create!(decidim_questionnaire_id: questionnaire.id, name: { "en" => "Follow up" }) }
+    let!(:conference_admin_role) { create(:conference_user_role, user: admin, conference:, role: "admin") }
 
     it "shows the follow-up questionnaires menu item" do
       visit decidim_admin_conferences.edit_component_path(conference, component)
