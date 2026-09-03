@@ -212,22 +212,12 @@ module Decidim
           false
         end
 
-        FOLLOW_UP_QUESTIONNAIRES_PARENT_MENUS = [
-          :admin_participatory_process_menu,
-          :admin_assembly_menu,
-          :conference_admin_menu
-        ].freeze
-
         def admin_menu_for(space)
-          case space
-          when Decidim::ParticipatoryProcess then :admin_participatory_process_menu
-          when Decidim::Assembly then :admin_assembly_menu
-          when Decidim::Conference then :conference_admin_menu
-          end
+          Decidim::DecidimAwesome.follow_up_questionnaires_parent_menus[space.class.name]
         end
 
         def register_follow_up_questionnaires_menu!
-          FOLLOW_UP_QUESTIONNAIRES_PARENT_MENUS.each do |parent_menu|
+          Decidim::DecidimAwesome.follow_up_questionnaires_parent_menus.each_value do |parent_menu|
             Decidim.menu parent_menu do |menu|
               finder = Decidim::DecidimAwesome::Admin::FollowUpQuestionnairesFinder.new(current_organization)
               first_configured = finder.configured_for_space(current_participatory_space).first

@@ -40,29 +40,27 @@ module Decidim
 
         private
 
-        FOLLOW_UP_QUESTIONNAIRE_SPACE_ROLE_FINDERS = {
-          "Decidim::ParticipatoryProcess" => "Decidim::ParticipatoryProcessesWithUserRole",
-          "Decidim::Assembly" => "Decidim::Assemblies::AssembliesWithUserRole",
-          "Decidim::Conference" => "Decidim::Conferences::ConferencesWithUserRole"
-        }.freeze
-
         def user_administrator?
-          FOLLOW_UP_QUESTIONNAIRE_SPACE_ROLE_FINDERS.each_key.any? { |space_class_name| space_admin?(space_class_name) }
+          DecidimAwesome.participatory_space_roles.any? { |role_class_name| space_admin?(role_class_name) }
         end
 
         def apply_follow_up_questionnaire_message_permissions!
           space = context.fetch(:current_participatory_space, nil)
           return unless space
 
-          allow! if space_admin?(space.class.name, space.try(:id))
+          role_class_name = "#{space.class.name}UserRole"
+          return unless DecidimAwesome.participatory_space_roles.include?(role_class_name)
+
+          allow! if space_admin?(role_class_name, space)
         end
 
-        def space_admin?(space_class_name, space_id = nil)
-          finder_class_name = FOLLOW_UP_QUESTIONNAIRE_SPACE_ROLE_FINDERS[space_class_name]
-          return false unless finder_class_name
+        def space_admin?(role_class_name, space = nil)
+          role_class = role_class_name.safe_constantize
+          return false unless role_class
 
-          scope = finder_class_name.constantize.for(user, :admin)
-          space_id ? scope.exists?(id: space_id) : scope.exists?
+          scope = role_class.where(role: "admin", decidim_user_id: user.id)
+          scope = scope.for_space(space) if space
+          scope.exists?
         end
 
         def apply_admin_authorizations_permissions!
