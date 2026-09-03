@@ -29,10 +29,15 @@ module Decidim
           {
             label: raw_label,
             position:,
-            url: ContextAnalyzers::RequestAnalyzer.strip_locale(url),
+            url: normalized_url,
             target:,
             visibility:
           }
+        end
+
+        # Stored urls carry no locale prefix, the current locale is added when rendering
+        def normalized_url
+          ContextAnalyzers::RequestAnalyzer.strip_locale(url)
         end
       end
     end

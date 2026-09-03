@@ -140,6 +140,24 @@ module Decidim::DecidimAwesome
           expect(described_class.strip_locale("/processes")).to eq("/processes")
         end
       end
+
+      describe ".localize" do
+        around { |example| I18n.with_locale(:ca) { example.run } }
+
+        it "prefixes local paths with the current locale" do
+          expect(described_class.localize("/processes")).to eq("/ca/processes")
+        end
+
+        it "replaces a stored locale with the current one" do
+          expect(described_class.localize("/en/processes")).to eq("/ca/processes")
+        end
+
+        it "leaves anchors, external and protocol-relative urls untouched" do
+          expect(described_class.localize("#hero")).to eq("#hero")
+          expect(described_class.localize("https://example.org/x")).to eq("https://example.org/x")
+          expect(described_class.localize("//example.org/x")).to eq("//example.org/x")
+        end
+      end
     end
   end
 end

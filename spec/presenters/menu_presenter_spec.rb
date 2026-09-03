@@ -158,6 +158,14 @@ module Decidim
 
       it_behaves_like "has overridden items"
       it_behaves_like "removed item is not present and other items are overridden"
+
+      context "and an item points to a protocol-relative url" do
+        let(:override) { [{ url: "//docs.example.org/guide", label: { "en" => "Docs" }, position: 10 }] }
+
+        it "renders the url untouched" do
+          expect(subject.render).to have_link("Docs", href: "//docs.example.org/guide")
+        end
+      end
     end
   end
 end

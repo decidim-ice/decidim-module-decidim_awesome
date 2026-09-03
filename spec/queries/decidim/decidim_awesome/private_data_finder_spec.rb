@@ -59,6 +59,28 @@ module Decidim
           expect(subject.for([component.id])).to include(component)
         end
       end
+
+      context "when the participatory space holding private data is trashed" do
+        before { component.participatory_space.destroy }
+
+        it "leaves its components out until the space is restored" do
+          expect(subject.query).not_to include(component)
+          expect(subject.for([component.id])).not_to include(component)
+        end
+      end
+
+      context "when an extra field row of another resource type shares the proposal id" do
+        let!(:extra_fields) { create(:awesome_proposal_extra_fields, proposal:, private_body: nil) }
+
+        before do
+          ProposalExtraField.new(decidim_proposal_id: proposal.id, decidim_proposal_type: "Decidim::Proposals::CollaborativeDraft", private_body: "ghost")
+                            .save(validate: false)
+        end
+
+        it "does not match the proposal" do
+          expect(subject.query).not_to include(component)
+        end
+      end
     end
   end
 end

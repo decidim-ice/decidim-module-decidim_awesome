@@ -17,6 +17,14 @@ module Decidim
         Component.with_deleted.where(id: proposals.where(id: extra_fields.select(:decidim_proposal_id))).where(id: resources)
       end
 
+      # Spaces in the trash are left out: Decidim freezes their contents until restored
+      def components
+        Decidim.participatory_space_manifests.map do |manifest|
+          spaces = manifest.participatory_spaces.call(organization)
+          Component.with_deleted.where(participatory_space_type: manifest.model_class_name, participatory_space_id: spaces.select(:id))
+        end.reduce(:or)
+      end
+
       private
 
       attr_reader :organization
@@ -24,15 +32,11 @@ module Decidim
       def proposals
         Decidim::Proposals::Proposal.with_deleted
                                     .select(:decidim_component_id)
-                                    .where(decidim_component_id: organization_components)
+                                    .where(decidim_component_id: components.select(:id))
       end
 
       def extra_fields
-        ProposalExtraField.with_deleted
-      end
-
-      def organization_components
-        Component.with_deleted.where(participatory_space: organization.participatory_spaces).select(:id)
+        ProposalExtraField.with_deleted.where(decidim_proposal_type: Decidim::Proposals::Proposal.name)
       end
     end
   end

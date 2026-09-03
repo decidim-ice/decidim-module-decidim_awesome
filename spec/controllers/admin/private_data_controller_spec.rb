@@ -62,6 +62,14 @@ module Decidim::DecidimAwesome
           end
         end
 
+        context "when the participatory space is trashed" do
+          before { component.participatory_space.destroy }
+
+          it "is not found" do
+            expect { delete(:destroy, params:) }.to raise_error(ActiveRecord::RecordNotFound)
+          end
+        end
+
         context "when private data is not present" do
           let(:time_ago) { 2.months.ago }
 

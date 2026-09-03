@@ -4,7 +4,6 @@ module Decidim
   module DecidimAwesome
     class MenuHacker
       include Decidim::TranslatableAttributes
-      include Decidim::Routes::LocaleRedirects
 
       def initialize(name, view)
         @name = name
@@ -71,11 +70,8 @@ module Decidim
         url == urls.find { |u| current_path.start_with?(strip_locale(u)) }
       end
 
-      # Renders local paths with the current locale prefix, external urls untouched
       def localized_url(url)
-        return url if url.blank? || !url.start_with?("/")
-
-        append_locale(strip_locale(url), I18n.locale)
+        ContextAnalyzers::RequestAnalyzer.localize(url)
       end
 
       # menu urls are compared ignoring the locale prefix

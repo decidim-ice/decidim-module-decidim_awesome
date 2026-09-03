@@ -27,7 +27,7 @@ module Decidim
           find_var.value = find_var.value.grep(Hash)
           found = false
           find_var.value.map! do |item|
-            if item["url"] == form.url
+            if item["url"] == form.normalized_url
               found = true
               form.to_params
             else
