@@ -187,7 +187,8 @@ module Decidim::DecidimAwesome
           [
             { "tag_name" => "v0.32.1", "draft" => false, "prerelease" => false },
             { "tag_name" => "v0.32.0", "draft" => false, "prerelease" => false },
-            { "tag_name" => "v0.31.6", "draft" => false, "prerelease" => false }
+            { "tag_name" => "v0.31.6", "draft" => false, "prerelease" => false },
+            { "tag_name" => "v0.31.7", "draft" => false, "prerelease" => false }
           ]
         end
 

@@ -17,6 +17,15 @@ Fixes:
   - Fix a race condition in scoped admins that could deny access to legitimate admin pages
   - Fix inline renaming of configuration groups in recent Chrome versions
   - Speed up rendering of the landing menu templates
+  - Update the cookies consent template to the table markup introduced in Decidim 0.31.7 / 0.32.1
+
+v0.14.4
+-------
+Compatibility:
+  - Decidim 0.31.x
+
+Features:
+  - Updates cookies changes in Decidim 0.31.7
 
 v0.14.3
 -------
