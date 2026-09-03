@@ -3,7 +3,7 @@
 require "spec_helper"
 
 describe "Admin manages awesome authorizations permissions in the admin" do
-  let(:organization) { create(:organization, available_authorizations: available_authorizations) }
+  let(:organization) { create(:organization, available_authorizations:) }
   let!(:admin) { create(:user, :admin, :confirmed, organization:) }
   let(:available_authorizations) { [] }
   let!(:awesome_authorization_group) { create(:awesome_authorization_group, name: { en: "Board members" }, organization:) }

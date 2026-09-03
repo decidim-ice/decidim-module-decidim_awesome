@@ -1,4 +1,4 @@
-name: "[CI] Tests 0.31"
+name: "[CI] Tests 0.32"
 
 on:
   push:
@@ -10,7 +10,7 @@ env:
   CI: 1
   SIMPLECOV: 1
   NODE_VERSION: 22.14.0
-  RUBY_VERSION: 3.3.11
+  RUBY_VERSION: 3.4.7
   BUNDLE_GEMFILE: Gemfile
   DISABLE_SPRING: 1
   DISPLAY: ":99"
@@ -74,6 +74,11 @@ jobs:
           path: ./spec/decidim_dummy_app/
           key: app-${{ github.sha }}
           restore-keys: app-${{ github.sha }}
+
+      - run: |
+          sudo apt update
+          sudo apt install -y libvips libvips-tools
+        name: Install libvips
 
       - run: bundle exec rake test_app
         name: Create test app
@@ -162,7 +167,7 @@ jobs:
         name: Install Chrome version
 
       - run: |
-          sudo apt install wkhtmltopdf imagemagick 7zip
+          sudo apt install wkhtmltopdf imagemagick 7zip libvips libvips-tools
 
       - uses: actions/download-artifact@v4
         with:

@@ -49,6 +49,7 @@ module Decidim
           url = item["url"]
           return unless url.match?(MenuItemsParser::SAFE_URL_PATTERN)
 
+          url = ContextAnalyzers::RequestAnalyzer.localize(url)
           target = url.match?(%r{\Ahttps://}i) ? "_blank" : nil
           visible = item.fetch("visible", true) != false
 

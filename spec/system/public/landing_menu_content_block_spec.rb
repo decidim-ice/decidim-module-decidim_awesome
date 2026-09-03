@@ -78,10 +78,10 @@ describe "Public homepage shows Landing Menu block" do
   context "with relative path link" do
     let(:menu_items_json) { [{ "name" => { "en" => "About" }, "url" => "/about-us", "visible" => true }].to_json }
 
-    it "displays the internal link" do
+    it "displays the internal link with the current locale" do
       visit decidim.root_path
       within(".awesome-landing-menu") do
-        expect(page).to have_link("About", href: "/about-us")
+        expect(page).to have_link("About", href: "/#{I18n.locale}/about-us")
       end
     end
   end

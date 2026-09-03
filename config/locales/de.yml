@@ -1129,8 +1129,6 @@ de:
           index:
             confirm_destroy: Sind Sie sicher, dass Sie diese Anpassung entfernen wollen?
             edit: Bearbeiten
-            home_content_block_menu:
-              title: Startseiten-Abschnitt für globales Menü
             menu:
               title: Hauptmenü
             mobile_menu:

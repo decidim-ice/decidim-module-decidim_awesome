@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const attribute = target.dataset.var;
       const inputFields = document.querySelectorAll(`[name="config[${attribute}][${key}]"]`);
       const multipleFields = document.querySelectorAll(`[name="config[${attribute}][${key}][]"]`);
-      const subFields = document.querySelectorAll(`[name^="config[${attribute}[${key}]]"]`);
+      const subFields = document.querySelectorAll(`[name^="config[${attribute}][${key}]["]`);
       const container = document.querySelector(`.js-box-container[data-key="${key}"]`);
       const deleteBox = container.querySelector(".awesome-auto-delete");
 
@@ -46,8 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (subFields.length > 0) {
           subFields.forEach((subField) => {
             subField.setAttribute("name", subField.getAttribute("name").replace(
-              `config[${attribute}[${key}]]`,
-              `config[${attribute}[${result.key}]]`
+              `config[${attribute}][${key}]`,
+              `config[${attribute}][${result.key}]`
             ));
           });
         }
@@ -86,15 +86,18 @@ document.addEventListener("DOMContentLoaded", () => {
       input.focus();
       let config = {};
       config[attribute] = true;
+      // Rebuilding the label removes the focused input, which fires a "blur"
+      // that would revert the freshly saved key
+      let saving = false;
       let token = document.querySelector('meta[name="csrf-token"]');
-      input.addEventListener("keypress", (evt) => {
+      input.addEventListener("keydown", (evt) => {
         if (evt.key === "Enter" || evt.keyCode === 13 || evt.keyCode ===  10) {
+          evt.preventDefault();
           if (key === input.value) {
             rebuildLabel(key);
             return;
           }
-          // console.log("Saving key", key, "to", input.value, "with scope", scope);
-          evt.preventDefault();
+          saving = true;
           fetch(window.DecidimAwesome.renameScopeLabelPath, {
             method: "POST",
             headers: {
@@ -121,7 +124,9 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       input.addEventListener("blur", () => {
-        rebuildLabel(key);
+        if (!saving) {
+          rebuildLabel(key);
+        }
       });
     });
   });

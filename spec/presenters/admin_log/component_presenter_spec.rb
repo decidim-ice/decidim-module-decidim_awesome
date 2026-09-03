@@ -30,7 +30,6 @@ module Decidim::AdminLog
       subject { presenter.present }
 
       it "returns an empty diff" do
-        puts subject
         expect(subject).not_to include("class=\"logs__log__diff\"")
       end
 

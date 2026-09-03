@@ -7,6 +7,7 @@ module Decidim
       class ConfigController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
         include ConfigConstraintsHelpers
+
         helper ConfigConstraintsHelpers
 
         helper_method :constraints_for, :users_for, :config_var, :available_authorizations
@@ -69,7 +70,7 @@ module Decidim
             end
 
             on(:invalid) do |message|
-              render json: { error: message }, status: :unprocessable_entity
+              render json: { error: message }, status: :unprocessable_content
             end
           end
         end

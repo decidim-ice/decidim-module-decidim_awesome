@@ -24,8 +24,7 @@ module Decidim
                                               params[:format].to_s,
                                               admin_actions.ransack(filters).result.ids)
 
-          redirect_back fallback_location: decidim_admin_decidim_awesome.admin_accountability_path,
-                        notice: t("decidim.decidim_awesome.admin.admin_accountability.exports.notice")
+          redirect_back_or_to(decidim_admin_decidim_awesome.admin_accountability_path, notice: t("decidim.decidim_awesome.admin.admin_accountability.exports.notice"))
         end
 
         private

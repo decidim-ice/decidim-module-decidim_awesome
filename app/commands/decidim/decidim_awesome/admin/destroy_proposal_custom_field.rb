@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class DestroyProposalCustomField < Command
         include NeedsConstraintHelpers
+
         # Public: Initializes the command.
         #
         # key - the key to destroy init proposal_custom_fields

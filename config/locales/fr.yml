@@ -1171,8 +1171,6 @@ fr:
             confirm_destroy: Êtes-vous sûr de vouloir supprimer cette personnalisation
               ?
             edit: Modifier
-            home_content_block_menu:
-              title: Bloc de menu global
             menu:
               title: Menu principal
             mobile_menu:

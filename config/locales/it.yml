@@ -1132,8 +1132,6 @@ it:
           index:
             confirm_destroy: Sei sicuro di voler rimuovere questa personalizzazione?
             edit: Modifica
-            home_content_block_menu:
-              title: Blocco menu globale nella home
             menu:
               title: Menù principale
             mobile_menu:

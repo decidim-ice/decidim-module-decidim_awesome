@@ -139,6 +139,15 @@ module Decidim::DecidimAwesome
         expect(subject).to have_content("awesome-rich-text__column:nth-child(1)")
         expect(subject).to have_content("Style for column 1")
       end
+
+      context "with an existing column" do
+        let(:settings) { { "columns" => [{ "body" => { "en" => "Col 1" } }] } }
+
+        it "names the column field so Rack parses it as a nested hash" do
+          expect(subject.to_s).to include("[columns][0][")
+          expect(subject.to_s).not_to include("[columns[0]][")
+        end
+      end
     end
   end
 end
