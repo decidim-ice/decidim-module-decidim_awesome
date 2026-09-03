@@ -10,6 +10,7 @@ module Decidim::DecidimAwesome
       let(:organization) { create(:organization) }
       let(:user) { create(:user, :confirmed, :admin, organization:) }
       let(:component) { create(:component, manifest_name: "surveys", organization:) }
+      let!(:process_admin_role) { create(:participatory_process_user_role, user:, participatory_process: component.participatory_space, role: "admin") }
       let(:questionnaire) { create(:questionnaire) }
       let!(:survey) { create(:survey, component:, questionnaire:) }
       let!(:follow_up_questionnaire) do
@@ -107,6 +108,7 @@ module Decidim::DecidimAwesome
 
       context "when the user has no role in the participatory space" do
         let(:user) { create(:user, :confirmed, organization:) }
+        let(:process_admin_role) { nil }
 
         it "is not authorized" do
           get :index, params: { follow_up_questionnaire_id: follow_up_questionnaire.decidim_questionnaire_id }
