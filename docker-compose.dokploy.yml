@@ -12,10 +12,7 @@ services:
       - RAILS_ENV=production
       - DATABASE_URL=postgresql://postgres:postgres@pg:5432/postgres
       - REDIS_URL=redis://redis:6379/0
-    links:
-      - pg
-      - redis
-    command: bundle exec rails server
+    command: bundle exec rails server -b 0.0.0.0 -p 3000
   pg:
     image: postgres
     environment:
