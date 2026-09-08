@@ -12,8 +12,6 @@ services:
       - RAILS_ENV=production
       - DATABASE_URL=postgresql://postgres:postgres@pg:5432/postgres
       - REDIS_URL=redis://redis:6379/0
-    ports:
-      - 3000:3000
     links:
       - pg
       - redis
