@@ -10,9 +10,10 @@ else
 fi
 
 echo "Creating new Decidim app in /module_app"
-decidim /module_app --path .. --skip_spring --demo --locales="en,ca,es" --queue=sidekiq --recreate_db --seed_db --force-ssl=false
+#decidim /module_app --path .. --skip_spring --demo --locales="en,ca,es" --queue=sidekiq --recreate_db --seed_db --force-ssl=false
+bundle exec rake development_app
 
-cd /module_app
+cd development_app
 
 echo "🚀 $@"
 exec "$@"
