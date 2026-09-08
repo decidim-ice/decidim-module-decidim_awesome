@@ -3,13 +3,14 @@
 # Check all the gems are installed or fails.
 bundle check
 if [ $? -ne 0 ]; then
-  echo "❌ Gems in Gemfile are not installed, aborting..."
+  echo "❌ Gems in Gemfile are not installed, installing..."
   bundle install --jobs 4 --retry 3
 else
   echo "✅ Gems in Gemfile are installed"
 fi
 
-decidim /module_app --path  /app --skip_spring --skip_gemfile --demo --locales="en,ca,es" --queue=sidekiq --recreate_db --seed_db --force-ssl false
+echo "Creating new Decidim app in /module_app"
+decidim /module_app --path .. --skip_spring --demo --locales="en,ca,es" --queue=sidekiq --recreate_db --seed_db --force-ssl=false
 
 cd /module_app
 
