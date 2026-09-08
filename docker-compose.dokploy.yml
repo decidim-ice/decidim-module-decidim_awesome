@@ -1,0 +1,26 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dokploy
+      args:
+        DECIDIM_VERSION: 0.31.5
+    environment:
+      - PORT=3000
+      - DATABASE_HOST=pg
+      - DATABASE_USERNAME=postgres
+      - RAILS_ENV=production
+      - DATABASE_URL=postgresql://postgres:postgres@pg:5432/postgres
+      - REDIS_URL=redis://redis:6379/0
+    ports:
+      - 3000:3000
+    links:
+      - pg
+      - redis
+    command: bundle exec rails server
+  pg:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=postgres
+  redis:
+    image: redis
