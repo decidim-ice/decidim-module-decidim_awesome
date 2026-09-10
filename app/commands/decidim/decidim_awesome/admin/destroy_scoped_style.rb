@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class DestroyScopedStyle < Command
         include NeedsConstraintHelpers
+
         # Public: Initializes the command.
         #
         # key - the key to destroy inside scoped_styles/scoped_admin_styles

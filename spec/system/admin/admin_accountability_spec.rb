@@ -71,7 +71,7 @@ describe "Admin accountability" do
       expect(page).to have_no_content("NOTE: This list might not include users created/removed before")
 
       expect(page).to have_link("Processes > #{participatory_process.title["en"]}",
-                                href: "/admin/participatory_processes/#{participatory_process.slug}/user_roles", count: 4)
+                                href: "/#{I18n.locale}/admin/participatory_processes/#{participatory_process.slug}/user_roles", count: 4)
 
       within all("table tr")[1] do
         expect(page).to have_content("Moderator")
@@ -130,9 +130,9 @@ describe "Admin accountability" do
         click_link_or_button "Admin accountability"
 
         expect(page).to have_link("Processes > #{participatory_process.title["en"]}",
-                                  href: "/admin/participatory_processes/#{participatory_process.slug}/user_roles", count: 4)
+                                  href: "/#{I18n.locale}/admin/participatory_processes/#{participatory_process.slug}/user_roles", count: 4)
         expect(page).to have_no_link("Processes > #{external_participatory_process.title["en"]}",
-                                     href: "/admin/participatory_processes/#{external_participatory_process.slug}/user_roles")
+                                     href: "/#{I18n.locale}/admin/participatory_processes/#{external_participatory_process.slug}/user_roles")
 
         expect(page).to have_content(administrator.email)
         expect(page).to have_content(moderator.email)
@@ -158,9 +158,9 @@ describe "Admin accountability" do
 
         it "shows data only for external_organization", :versioning do
           expect(page).to have_no_link("Processes > #{participatory_process.title["en"]}",
-                                       href: "/admin/participatory_processes/#{participatory_process.slug}/user_roles")
+                                       href: "/#{I18n.locale}/admin/participatory_processes/#{participatory_process.slug}/user_roles")
           expect(page).to have_link("Processes > #{external_participatory_process.title["en"]}",
-                                    href: "/admin/participatory_processes/#{external_participatory_process.slug}/user_roles")
+                                    href: "/#{I18n.locale}/admin/participatory_processes/#{external_participatory_process.slug}/user_roles")
           expect(page).to have_no_content(administrator.name)
           expect(page).to have_no_content(evaluator.name)
           expect(page).to have_no_content(collaborator.name)

@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class CreateMenuHack < Command
         include NeedsConstraintHelpers
+
         # Public: Initializes the command.
         #
         def initialize(form, menu_name)
@@ -37,7 +38,7 @@ module Decidim
         def url_exists?
           return false unless find_var
 
-          find_var.value&.detect { |i| i["url"] == form.url.gsub(/\?.*/, "") }
+          find_var.value&.detect { |i| i["url"] == form.normalized_url.gsub(/\?.*/, "") }
         end
 
         def to_params

@@ -12,7 +12,7 @@ describe "Visit the home page", :perform_enqueued do
   end
 
   it "renders the home page" do
-    expect(page).to have_content("Home")
+    expect(page).to have_content(translated(organization.name))
   end
 
   it_behaves_like "javascript config vars"

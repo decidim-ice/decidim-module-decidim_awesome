@@ -22,7 +22,9 @@ module Decidim
                     else
                       awesome_config.to_f
                     end
-          return if value.scan(/[[:upper:]]/).length < value.length * percent / 100
+          number_of_caps = value.scan(/[[:upper:]]/).length
+          return if number_of_caps.zero?
+          return if number_of_caps < value.length * percent / 100
 
           record.errors.add(attribute, options[:message] || I18n.t("too_much_caps", scope: "decidim.decidim_awesome.validators", percent: percent.round))
         end

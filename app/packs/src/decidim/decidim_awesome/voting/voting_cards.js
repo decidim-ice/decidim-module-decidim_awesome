@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  if (!document.querySelector('[href="/users/sign_out"]')) {
+  if (!document.querySelector('[href$="/users/sign_out"]')) {
     return;
   }
 

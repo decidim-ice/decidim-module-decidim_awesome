@@ -35,18 +35,18 @@ module Decidim::DecidimAwesome
           end
 
           it "creates members" do
-            expect { post :create, params: params }.to change(Decidim::DecidimAwesome::AuthorizationMember, :count).by(2)
+            expect { post :create, params: }.to change(Decidim::DecidimAwesome::AuthorizationMember, :count).by(2)
           end
 
           it "redirects with notice" do
-            post :create, params: params
+            post(:create, params:)
             expect(response).to have_http_status(:redirect)
             expect(flash[:notice]).to be_present
           end
 
           it "enqueues a synchronization job" do
             expect(Decidim::DecidimAwesome::SyncAwesomeAuthorizationGroupJob).to receive(:perform_later).with(authorization_group.id)
-            post :create, params: params
+            post :create, params:
           end
         end
 
@@ -65,7 +65,7 @@ module Decidim::DecidimAwesome
           end
 
           it "creates members from csv" do
-            expect { post :create, params: params }.to change(Decidim::DecidimAwesome::AuthorizationMember, :count).by(2)
+            expect { post :create, params: }.to change(Decidim::DecidimAwesome::AuthorizationMember, :count).by(2)
           end
         end
 
@@ -73,7 +73,7 @@ module Decidim::DecidimAwesome
           let(:params) { base_params.merge(emails: "") }
 
           it "renders new with alert" do
-            post :create, params: params
+            post(:create, params:)
             expect(response).to have_http_status(:ok)
             expect(response).to render_template(:new)
             expect(flash[:alert]).to be_present

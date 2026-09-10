@@ -8,6 +8,7 @@ module Decidim::DecidimAwesome
   module Admin
     describe MenuHacksController do
       include Decidim::TranslationsHelper
+
       routes { Decidim::DecidimAwesome::AdminEngine.routes }
 
       include_context "with menu hacks params"
@@ -28,7 +29,7 @@ module Decidim::DecidimAwesome
         end
 
         after do
-          Decidim::MenuRegistry.find(:menu).configurations.pop
+          Decidim::MenuRegistry.find(menu_id).configurations.pop
         end
 
         describe "GET #new" do
@@ -268,13 +269,6 @@ module Decidim::DecidimAwesome
       context "with mobile menu" do
         let(:menu_name) { "mobile_menu" }
         let(:feature) { "mobile_menu" }
-
-        it_behaves_like "menu hacks controller"
-      end
-
-      context "with home content block menu" do
-        let(:menu_name) { "home_content_block_menu" }
-        let(:feature) { "home_content_block_menu" }
 
         it_behaves_like "menu hacks controller"
       end

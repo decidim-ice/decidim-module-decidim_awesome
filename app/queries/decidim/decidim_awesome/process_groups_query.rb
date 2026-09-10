@@ -110,12 +110,12 @@ module Decidim
           tf.filter_items.each do |fi|
             taxonomy = fi.taxonomy_item
             depth = taxonomy.parent_id == root.id ? 0 : 1
-            grouped[root.id][:items] << { taxonomy: taxonomy, depth: depth }
+            grouped[root.id][:items] << { taxonomy:, depth: }
           end
         end
 
         grouped.values
-               .each { |gr| gr[:items].uniq! { |it| it[:taxonomy].id } }
+               .each { |gr| gr[:items].uniq! { |item| item[:taxonomy].id } }
                .each { |gr| filter_unused_items!(gr[:items]) }
                .each { |gr| sort_items_hierarchically!(gr[:items]) }
                .reject { |gr| gr[:items].empty? }
@@ -123,8 +123,8 @@ module Decidim
 
       # Keeps items used by processes + parent items needed for hierarchy.
       def filter_unused_items!(items)
-        used_children = items.select { |it| it[:depth].positive? && used_taxonomy_ids.include?(it[:taxonomy].id) }
-        kept_parent_ids = used_children.to_set { |it| it[:taxonomy].parent_id }
+        used_children = items.select { |item| item[:depth].positive? && used_taxonomy_ids.include?(item[:taxonomy].id) }
+        kept_parent_ids = used_children.to_set { |item| item[:taxonomy].parent_id }
 
         items.select! do |item|
           tid = item[:taxonomy].id
@@ -137,12 +137,12 @@ module Decidim
       end
 
       def sort_items_hierarchically!(items)
-        children_by_parent = items.select { |it| it[:depth].positive? }.group_by { |it| it[:taxonomy].parent_id }
-        top_level = items.select { |it| it[:depth].zero? }
+        children_by_parent = items.select { |item| item[:depth].positive? }.group_by { |item| item[:taxonomy].parent_id }
+        top_level = items.select { |item| item[:depth].zero? }
 
         ordered = top_level.flat_map { |parent| [parent, *children_by_parent.fetch(parent[:taxonomy].id, [])] }
-        ordered_ids = ordered.to_set { |it| it[:taxonomy].id }
-        orphans = items.reject { |it| ordered_ids.include?(it[:taxonomy].id) }
+        ordered_ids = ordered.to_set { |item| item[:taxonomy].id }
+        orphans = items.reject { |item| ordered_ids.include?(item[:taxonomy].id) }
 
         items.replace(ordered + orphans)
       end

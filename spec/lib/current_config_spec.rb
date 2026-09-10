@@ -135,6 +135,19 @@ module Decidim::DecidimAwesome
           it_behaves_like "tampered admin model"
         end
 
+        context "when the same middleware instance serves consecutive requests" do
+          let(:root_env) { Rack::MockRequest.env_for("https://#{host}/?foo=bar", "decidim.current_organization" => organization, :method => method) }
+          let(:env) { Rack::MockRequest.env_for("https://#{host}/admin/processes", "decidim.current_organization" => organization, :method => method) }
+
+          it "classifies every request by its own path" do
+            middleware.call(root_env)
+            expect(Decidim::User.awesome_admins_for_current_scope).to contain_exactly(admin.id, user.id)
+
+            middleware.call(env)
+            expect(Decidim::User.awesome_admins_for_current_scope).to contain_exactly(admin.id)
+          end
+        end
+
         context "and user have the none constraint" do
           let!(:constraint_bar2) { create(:config_constraint, awesome_config: config_helper_bar, settings: settings_none) }
 

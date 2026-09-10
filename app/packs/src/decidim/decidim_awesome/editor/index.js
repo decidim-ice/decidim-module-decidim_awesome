@@ -60,10 +60,13 @@ export default function createEditor(container) {
 
   if (features === "full" || DecidimAwesome.allow_images_in_editors) {
     const { uploadImagesPath, uploadDialogSelector } = options;
+    const imagesPath = context === "participant" && DecidimAwesome.editorUploaderPath
+      ? DecidimAwesome.editorUploaderPath
+      : uploadImagesPath;
     decidimOptions.image = {
       uploadDialogSelector,
       contentTypes: contentTypes.image,
-      uploadImagesPath
+      uploadImagesPath: imagesPath
     };
   }
 

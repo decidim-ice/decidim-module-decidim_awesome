@@ -51,8 +51,8 @@ module Decidim
       end
 
       def localized_translation(key)
-        organization.available_locales.each_with_object({}) do |locale, hash|
-          hash[locale.to_s] = I18n.t(key, locale: locale, default: "")
+        organization.available_locales.to_h do |locale|
+          [locale.to_s, I18n.t(key, locale:, default: "")]
         end
       end
     end

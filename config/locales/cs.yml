@@ -685,8 +685,6 @@ cs:
           index:
             confirm_destroy: Opravdu chcete odstranit toto přizpůsobení?
             edit: Upravit
-            home_content_block_menu:
-              title: Blok Globální menu
             menu:
               title: Hlavní menu
             mobile_menu:
