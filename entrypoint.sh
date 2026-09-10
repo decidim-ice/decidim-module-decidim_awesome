@@ -15,5 +15,7 @@ bundle exec rake development_app
 
 cd development_app
 
+bin/rails assets:precompile
+
 echo "🚀 $@"
 exec "$@"
