@@ -1140,8 +1140,6 @@ es:
           index:
             confirm_destroy: "¿Estás segura que quieres eliminar este elemento?"
             edit: Editar
-            home_content_block_menu:
-              title: Bloque de menú global en la home
             menu:
               title: Menú principal
             mobile_menu:

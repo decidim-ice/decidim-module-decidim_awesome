@@ -7,6 +7,7 @@ module Decidim::DecidimAwesome
   module Admin
     describe ConstraintsController do
       include Decidim::TranslationsHelper
+
       routes { Decidim::DecidimAwesome::AdminEngine.routes }
 
       let(:user) { create(:user, :confirmed, :admin, organization:) }
@@ -117,7 +118,7 @@ module Decidim::DecidimAwesome
 
           it "returns error" do
             get(:create, params:)
-            expect(response).to have_http_status(:unprocessable_entity)
+            expect(response).to have_http_status(:unprocessable_content)
           end
         end
       end
@@ -154,7 +155,7 @@ module Decidim::DecidimAwesome
 
           it "returns error" do
             get(:update, params:)
-            expect(response).to have_http_status(:unprocessable_entity)
+            expect(response).to have_http_status(:unprocessable_content)
           end
         end
       end

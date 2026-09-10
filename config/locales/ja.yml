@@ -513,8 +513,6 @@ ja:
           index:
             confirm_destroy: この設定を削除しますか？
             edit: 編集
-            home_content_block_menu:
-              title: グローバルメニューホームブロック
             menu:
               title: メインメニュー
             mobile_menu:

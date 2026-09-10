@@ -43,7 +43,11 @@ module Decidim
         end
 
         def selected_taxonomy_ids
-          @selected_taxonomy_ids ||= Array(params[:taxonomy_ids]).map(&:to_i).reject(&:zero?).uniq
+          @selected_taxonomy_ids ||= begin
+            ids = params[:taxonomy_ids]
+            ids = [] unless ids.is_a?(Array)
+            ids.map(&:to_i).reject(&:zero?).uniq
+          end
         end
 
         def current_page

@@ -17,7 +17,18 @@ module Decidim::DecidimAwesome
 
       paths = {
         "/" => {},
+        "/en" => {},
         "/processes" => { participatory_space_manifest: "participatory_processes" },
+        "/en/processes" => { participatory_space_manifest: "participatory_processes" },
+        "/ca/assemblies/some-assembly/f/12" => {
+          participatory_space_manifest: "assemblies",
+          participatory_space_slug: "some-assembly",
+          component_id: "12"
+        },
+        "https://www.decidim.barcelona/en/processes/PressupostosParticipatius" => {
+          participatory_space_manifest: "participatory_processes",
+          participatory_space_slug: "PressupostosParticipatius"
+        },
         "/processes_groups" => { participatory_space_manifest: "process_groups" },
         "/processes_groups/123" => { participatory_space_manifest: "process_groups", participatory_space_slug: "123" },
         "https://www.decidim.barcelona/processes/" => { participatory_space_manifest: "participatory_processes" },
@@ -44,7 +55,9 @@ module Decidim::DecidimAwesome
 
       admin_paths = {
         "/admin" => {},
+        "/en/admin" => {},
         "/admin/participatory_processes" => { participatory_space_manifest: "participatory_processes" },
+        "/en/admin/participatory_processes" => { participatory_space_manifest: "participatory_processes" },
         "/admin/participatory_process_groups" => { participatory_space_manifest: "process_groups" },
         "/admin/assemblies" => { participatory_space_manifest: "assemblies" },
         "/admin/assemblies_types" => { participatory_space_manifest: "assemblies" },
@@ -107,6 +120,42 @@ module Decidim::DecidimAwesome
           it "returns the component manifest" do
             expect(subject).to eq(context)
           end
+        end
+      end
+
+      describe ".strip_locale" do
+        it "strips the locale before a slash" do
+          expect(described_class.strip_locale("/en/processes")).to eq("/processes")
+        end
+
+        it "strips the locale at the end of the path" do
+          expect(described_class.strip_locale("/en")).to eq("/")
+        end
+
+        it "strips the locale before a query string" do
+          expect(described_class.strip_locale("/en?foo=bar")).to eq("/?foo=bar")
+        end
+
+        it "leaves non-locale paths untouched" do
+          expect(described_class.strip_locale("/processes")).to eq("/processes")
+        end
+      end
+
+      describe ".localize" do
+        around { |example| I18n.with_locale(:ca) { example.run } }
+
+        it "prefixes local paths with the current locale" do
+          expect(described_class.localize("/processes")).to eq("/ca/processes")
+        end
+
+        it "replaces a stored locale with the current one" do
+          expect(described_class.localize("/en/processes")).to eq("/ca/processes")
+        end
+
+        it "leaves anchors, external and protocol-relative urls untouched" do
+          expect(described_class.localize("#hero")).to eq("#hero")
+          expect(described_class.localize("https://example.org/x")).to eq("https://example.org/x")
+          expect(described_class.localize("//example.org/x")).to eq("//example.org/x")
         end
       end
     end

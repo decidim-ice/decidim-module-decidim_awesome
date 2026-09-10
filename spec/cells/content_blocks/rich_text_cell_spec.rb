@@ -354,7 +354,7 @@ module Decidim::DecidimAwesome
     end
 
     describe "#rendered_body" do
-      let(:column) { RichTextColumn.new(body: { "en" => html }, restrict_videos: restrict_videos, restrict_links: restrict_links) }
+      let(:column) { RichTextColumn.new(body: { "en" => html }, restrict_videos:, restrict_links:) }
       let(:html) { "<p>Some text</p>" }
       let(:restrict_videos) { false }
       let(:restrict_links) { false }

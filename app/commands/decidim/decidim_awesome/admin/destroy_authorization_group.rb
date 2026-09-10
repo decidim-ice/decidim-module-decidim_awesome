@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class DestroyAuthorizationGroup < Command
         include NeedsConstraintHelpers
+
         # Public: Initializes the command.
         #
         # key - the key to destroy inside force_authorizations

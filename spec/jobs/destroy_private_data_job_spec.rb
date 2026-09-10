@@ -47,6 +47,16 @@ module Decidim::DecidimAwesome
       expect(ProposalExtraField.find(external_extra_field.id).private_body).to eq("private")
     end
 
+    context "when a proposal with expired private data is trashed" do
+      before { proposal.destroy }
+
+      it "still cleans up its private data" do
+        subject.perform_now(component)
+
+        expect(ProposalExtraField.with_deleted.find(extra_field.id).private_body).to be_nil
+      end
+    end
+
     context "when there's a lock adquired" do
       before do
         Lock.new(organization).get!(component)

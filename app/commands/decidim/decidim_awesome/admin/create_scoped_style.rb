@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class CreateScopedStyle < Command
         include NeedsConstraintHelpers
+
         # Public: Initializes the command.
         #
         def initialize(organization, config_var = :scoped_styles)

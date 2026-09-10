@@ -11,7 +11,7 @@
 <div class="awesome-rich-text-columns-wrapper" data-max-columns="<%= max_columns %>">
   <%# Template for createDynamicFields — cloned when "Add column" is clicked %>
   <% form.fields_for :settings, form.object.settings do |settings_fields| %>
-    <% settings_fields.fields_for "columns[awesome-rich-text-column-id]", blank_column do |col_fields| %>
+    <% settings_fields.fields_for :columns, blank_column, index: "awesome-rich-text-column-id" do |col_fields| %>
       <script type="text/template" class="decidim-template">
         <div class="awesome-rich-text-column card pt-4 mb-4 mx-4" id="awesome-rich-text-column-id-field">
           <div class="card-divider flex items-center justify-between">
@@ -48,7 +48,7 @@
 
         <div class="card-section">
           <% form.fields_for :settings, form.object.settings do |settings_fields| %>
-            <% settings_fields.fields_for "columns[#{idx}]", col do |col_fields| %>
+            <% settings_fields.fields_for :columns, col, index: idx do |col_fields| %>
               <%= column_fields(col_fields, col, idx) %>
               <% form.fields_for :images, content_block.images_container do |images_fields| %>
                 <%= column_extra_fields(col_fields, idx, images_fields, "background_image_#{idx}") %>

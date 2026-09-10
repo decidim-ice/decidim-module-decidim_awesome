@@ -24,6 +24,7 @@ describe "Awesome authorization" do
         fill_in "Password", with: user.password
         click_on "Log in"
       end
+      expect(page).to have_content("Logged in successfully.")
 
       perform_enqueued_jobs
       visit decidim_verifications.authorizations_path
@@ -42,6 +43,7 @@ describe "Awesome authorization" do
         fill_in "Password", with: user.password
         click_on "Log in"
       end
+      expect(page).to have_content("Logged in successfully.")
 
       perform_enqueued_jobs
       visit decidim_verifications.authorizations_path

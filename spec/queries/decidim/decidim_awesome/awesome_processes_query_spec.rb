@@ -214,7 +214,7 @@ module Decidim
             process_type: "all",
             process_group_id: 0,
             max_results: 6,
-            selected_ids: selected_ids
+            selected_ids:
           }
         end
         let(:selected_ids) { [] }

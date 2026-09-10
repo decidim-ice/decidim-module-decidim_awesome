@@ -16,6 +16,10 @@ module Decidim
       # env - A Hash.
       def call(env)
         @request = Rack::Request.new(env)
+        # asset requests never evaluate permissions: resetting the user model here
+        # would wipe the scoped-admin state of a page request served concurrently
+        return @app.call(env) if asset_path?
+
         if @request.env["decidim.current_organization"] && processable_path?
           # memoize for later
           @config = env["decidim_awesome.current_config"] = awesome_config_instance
@@ -29,6 +33,15 @@ module Decidim
       end
 
       private
+
+      # request path without the locale prefix, comparable with the route patterns below
+      def request_path
+        ContextAnalyzers::RequestAnalyzer.strip_locale(@request.path)
+      end
+
+      def asset_path?
+        @request.path.match?(%r{^/(rails/|packs/|assets/|decidim-packs/|favicon)})
+      end
 
       # a workaround to set a flash message if coming from the error controller (route not found)
       def add_flash_message_from_request(env)
@@ -86,7 +99,7 @@ module Decidim
         return true if safe_get_route?
 
         spaces = ContextAnalyzers::RequestAnalyzer.participatory_spaces_routes.keys.join("|^(/admin){0,1}/")
-        case @request.path
+        case request_path
         when %r{"|^(/admin){0,1}/#{spaces}}
           true
         when %r{^/admin/}
@@ -97,10 +110,10 @@ module Decidim
       def safe_get_route?
         return false unless @request.get?
 
-        case @request.path
+        case request_path
         when "/"
           true
-        when "/admin/"
+        when %r{^/admin/?$}
           true
         when %r{^/admin/admin_terms}
           true
@@ -112,7 +125,7 @@ module Decidim
       def safe_post_route?
         return false unless @request.post? || @request.put? || @request.patch?
 
-        case @request.path
+        case request_path
         when %r{^/admin/admin_terms}
           true
         end

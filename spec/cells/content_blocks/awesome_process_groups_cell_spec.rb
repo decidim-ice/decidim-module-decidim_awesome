@@ -183,6 +183,12 @@ module Decidim::DecidimAwesome
           allow(controller).to receive(:params).and_return(ActionController::Parameters.new(taxonomy_ids: %w(3 3 7)))
           expect(block_cell.selected_taxonomy_ids).to eq([3, 7])
         end
+
+        it "ignores a hash-shaped taxonomy_ids param instead of raising" do
+          allow(controller).to receive(:params).and_return(ActionController::Parameters.new(taxonomy_ids: { foo: "1" }))
+          expect { block_cell.selected_taxonomy_ids }.not_to raise_error
+          expect(block_cell.selected_taxonomy_ids).to eq([])
+        end
       end
 
       describe "#current_page" do
@@ -377,10 +383,10 @@ module Decidim::DecidimAwesome
           block_cell.call
           groups = block_cell.taxonomy_filter_groups
           items = groups.first[:items]
-          env_item = items.find { |it| it[:id] == parent_taxonomy.id }
-          water_item = items.find { |it| it[:id] == child_water.id }
-          air_item = items.find { |it| it[:id] == child_air.id }
-          transport_item = items.find { |it| it[:id] == sibling_taxonomy.id }
+          env_item = items.find { |item| item[:id] == parent_taxonomy.id }
+          water_item = items.find { |item| item[:id] == child_water.id }
+          air_item = items.find { |item| item[:id] == child_air.id }
+          transport_item = items.find { |item| item[:id] == sibling_taxonomy.id }
 
           expect(env_item[:depth]).to eq(0)
           expect(water_item[:depth]).to eq(1)
@@ -392,7 +398,7 @@ module Decidim::DecidimAwesome
           block_cell.call
           groups = block_cell.taxonomy_filter_groups
           items = groups.first[:items]
-          names = items.map { |it| it[:name] }
+          names = items.map { |item| item[:name] }
           env_idx = names.index("Environment")
           water_idx = names.index("Water")
           air_idx = names.index("Air")
@@ -464,7 +470,7 @@ module Decidim::DecidimAwesome
         it "shows only taxonomy items used by processes" do
           block_cell.call
           groups = block_cell.taxonomy_filter_groups
-          item_names = groups.first[:items].map { |it| it[:name] }
+          item_names = groups.first[:items].map { |item| item[:name] }
           expect(item_names).to include("Environment")
           expect(item_names).not_to include("Unused Topic")
         end
@@ -504,7 +510,7 @@ module Decidim::DecidimAwesome
         it "keeps the parent item for hierarchy display" do
           block_cell.call
           groups = block_cell.taxonomy_filter_groups
-          item_names = groups.first[:items].map { |it| it[:name] }
+          item_names = groups.first[:items].map { |item| item[:name] }
           expect(item_names).to include("Environment", "Water")
         end
       end

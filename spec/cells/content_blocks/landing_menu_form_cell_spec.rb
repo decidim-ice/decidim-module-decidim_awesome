@@ -21,7 +21,7 @@ module Decidim::DecidimAwesome
       cell(
         "decidim/decidim_awesome/content_blocks/landing_menu_form",
         form,
-        content_block: content_block
+        content_block:
       )
     end
 
@@ -80,6 +80,13 @@ module Decidim::DecidimAwesome
           expect(subject).to have_content("Name")
           expect(subject).to have_content("URL")
           expect(subject).to have_content("Actions")
+        end
+
+        it "builds the admin links with the current locale" do
+          I18n.with_locale(:ca) do
+            expect(subject).to have_css("[data-drawer-url^='/ca/admin/decidim_awesome/']")
+            expect(subject).to have_css("[data-sort-url^='/ca/admin/decidim_awesome/']")
+          end
         end
       end
     end

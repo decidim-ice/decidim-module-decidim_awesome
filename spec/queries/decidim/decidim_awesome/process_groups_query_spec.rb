@@ -264,13 +264,13 @@ module Decidim::DecidimAwesome
 
       it "includes only taxonomy items used by processes" do
         items = subject.available_taxonomy_groups.first[:items]
-        taxonomy_ids = items.map { |it| it[:taxonomy].id }
+        taxonomy_ids = items.map { |item| item[:taxonomy].id }
         expect(taxonomy_ids).to contain_exactly(child_env.id, child_transport.id)
       end
 
       it "excludes taxonomy items not used by any process" do
         items = subject.available_taxonomy_groups.first[:items]
-        taxonomy_ids = items.map { |it| it[:taxonomy].id }
+        taxonomy_ids = items.map { |item| item[:taxonomy].id }
         expect(taxonomy_ids).not_to include(child_unused.id)
       end
 
@@ -297,14 +297,14 @@ module Decidim::DecidimAwesome
 
         it "keeps parent items when their children have processes" do
           items = subject.available_taxonomy_groups.first[:items]
-          taxonomy_ids = items.map { |it| it[:taxonomy].id }
+          taxonomy_ids = items.map { |item| item[:taxonomy].id }
           expect(taxonomy_ids).to include(parent_tax.id, child_deep.id)
         end
 
         it "sorts children immediately after their parent" do
           items = subject.available_taxonomy_groups.first[:items]
-          parent_idx = items.index { |it| it[:taxonomy].id == parent_tax.id }
-          child_idx = items.index { |it| it[:taxonomy].id == child_deep.id }
+          parent_idx = items.index { |item| item[:taxonomy].id == parent_tax.id }
+          child_idx = items.index { |item| item[:taxonomy].id == child_deep.id }
           expect(child_idx).to eq(parent_idx + 1)
         end
       end
