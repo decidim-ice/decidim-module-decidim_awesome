@@ -15,6 +15,11 @@ module Decidim
             return permission_action
           end
 
+          if permission_action.action == :update && permission_action.subject == :organization
+            allow! if user.read_attribute("admin").present? || user_administrator?
+            return permission_action
+          end
+
           return permission_action if user.read_attribute("admin").blank?
           return permission_action unless permission_action.action == :edit_config
 
@@ -35,11 +40,27 @@ module Decidim
 
         private
 
+        def user_administrator?
+          DecidimAwesome.participatory_space_roles.any? { |role_class_name| space_admin?(role_class_name) }
+        end
+
         def apply_follow_up_questionnaire_message_permissions!
           space = context.fetch(:current_participatory_space, nil)
-          return unless space.is_a?(Decidim::ParticipatoryProcess)
+          return unless space
 
-          allow! if Decidim::ParticipatoryProcessesWithUserRole.for(user).exists?(id: space.id)
+          role_class_name = "#{space.class.name}UserRole"
+          return unless DecidimAwesome.participatory_space_roles.include?(role_class_name)
+
+          allow! if space_admin?(role_class_name, space)
+        end
+
+        def space_admin?(role_class_name, space = nil)
+          role_class = role_class_name.safe_constantize
+          return false unless role_class
+
+          scope = role_class.where(role: "admin", decidim_user_id: user.id)
+          scope = scope.for_space(space) if space
+          scope.exists?
         end
 
         def apply_admin_authorizations_permissions!

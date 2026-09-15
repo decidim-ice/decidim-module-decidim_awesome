@@ -15,11 +15,7 @@ module Decidim
           [::Decidim::DecidimAwesome::Admin::Permissions] + super
         end
 
-        before_action :enforce_organization_admin!
-
-        private
-
-        def enforce_organization_admin!
+        before_action do
           enforce_permission_to :update, :organization, organization: current_organization
         end
       end

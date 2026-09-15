@@ -1,6 +1,6 @@
 <div class="item_show__header">
   <h2 class="item_show__header-title">
-    <%= translated_attribute(@follow_up_questionnaire.name) %>
+    <%= translated_attribute(@follow_up_questionnaire.name) %> > <%= translated_attribute(@questionnaire.title) %>
   </h2>
 </div>
 
@@ -36,7 +36,7 @@
               <td><%= l participant.created_at, format: :decidim_short %></td>
               <td>
                 <% if latest_message %>
-                  <%= t(".last_action", time: time_ago_in_words(latest_message.created_at)) %>
+                  <%= t(latest_message.body.present? ? ".last_action_answered" : ".last_action_labeled", time: time_ago_in_words(latest_message.created_at)) %>
                 <% else %>
                   <%= t(".not_answered") %>
                 <% end %>
@@ -48,9 +48,9 @@
               </td>
               <td class="table-list__actions">
                 <% if respondent.processable? %>
-                  <%= icon_link_to "eye-line", "#", t(".preview"), class: "action-icon--preview" %>
+                  <% preview_path = preview_response_path(participant) %>
+                  <%= icon_link_to "eye-line", preview_path, t(".preview"), class: "action-icon--preview" if preview_path %>
                   <%= icon_link_to "mail-line", new_follow_up_questionnaire_message_path(@follow_up_questionnaire.decidim_questionnaire_id, decidim_user_id: participant.decidim_user_id, session_token: participant.session_token), t(".reply"), class: "action-icon--new" %>
-                  <%= icon_link_to "archive-line", "#", t(".archive"), class: "action-icon--remove" %>
                 <% end %>
               </td>
             </tr>
