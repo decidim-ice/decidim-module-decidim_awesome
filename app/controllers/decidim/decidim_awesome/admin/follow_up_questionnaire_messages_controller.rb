@@ -16,7 +16,7 @@ module Decidim
         helper_method :current_participatory_space, :respondent_details, :preview_response_path
 
         def permission_class_chain
-          [::Decidim::ParticipatoryProcesses::Permissions, ::Decidim::Assemblies::Permissions, ::Decidim::Conferences::Permissions] + super
+          Decidim.participatory_space_manifests.filter_map(&:permissions_class) + super
         end
 
         # i18n-tasks-use t("decidim.decidim_awesome.admin.follow_up_questionnaire_messages.index.last_action_answered")
