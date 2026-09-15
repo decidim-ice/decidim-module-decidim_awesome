@@ -81,6 +81,8 @@ module Decidim
         end
 
         def current_component
+          return unless @follow_up_questionnaire
+
           @current_component ||= FollowUpQuestionnairesFinder.new(current_organization)
                                                              .component_for(@follow_up_questionnaire.questionnaire)
         end
