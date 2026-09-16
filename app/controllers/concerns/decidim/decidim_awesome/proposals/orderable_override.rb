@@ -34,14 +34,12 @@ module Decidim
           end
 
           def reorder(proposals)
-            title_by_locale = Arel.sql(proposals.sanitize_sql(["decidim_proposals_proposals.title->>? #{collation}", locale]))
-            title_by_machine_translation = Arel.sql(proposals.sanitize_sql(["decidim_proposals_proposals.title->'machine_translations'->>? #{collation}", locale]))
-            title_by_default_locale = Arel.sql(proposals.sanitize_sql(["decidim_proposals_proposals.title->>? #{collation}", default_locale]))
+            order_by_title = Arel.sql(%{COALESCE(decidim_proposals_proposals.title->>'#{locale}', decidim_proposals_proposals.title->'machine_translations'->>'#{locale}', decidim_proposals_proposals.title->>'#{default_locale}', (SELECT value FROM jsonb_each_text(decidim_proposals_proposals.title) WHERE key <> 'machine_translations' ORDER BY key LIMIT 1))  #{collation}})
             case order
             when "az"
-              proposals.order(title_by_locale => :asc, title_by_machine_translation => :asc, title_by_default_locale => :asc)
+              proposals.order(order_by_title => :asc)
             when "za"
-              proposals.order(title_by_locale => :desc, title_by_machine_translation => :desc, title_by_default_locale => :desc)
+              proposals.order(order_by_title => :desc)
             when "supported_first"
               proposals.joins(my_votes_join).group(:id).order(Arel.sql("COUNT(decidim_proposals_proposal_votes.id) DESC"))
             when "supported_last"
