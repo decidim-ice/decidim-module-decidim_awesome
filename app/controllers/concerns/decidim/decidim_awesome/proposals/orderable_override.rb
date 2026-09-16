@@ -34,7 +34,20 @@ module Decidim
           end
 
           def reorder(proposals)
-            order_by_title = Arel.sql(%{COALESCE(decidim_proposals_proposals.title->>'#{locale}', decidim_proposals_proposals.title->'machine_translations'->>'#{locale}', decidim_proposals_proposals.title->>'#{default_locale}', (SELECT value FROM jsonb_each_text(decidim_proposals_proposals.title) WHERE key <> 'machine_translations' ORDER BY key LIMIT 1))  #{collation}})
+            order_by_title = Arel.sql(<<~SQL.squish)
+              COALESCE(
+                decidim_proposals_proposals.title->>'#{locale}',
+                decidim_proposals_proposals.title->'machine_translations'->>'#{locale}',
+                decidim_proposals_proposals.title->>'#{default_locale}',
+                (
+                  SELECT value
+                  FROM jsonb_each_text(decidim_proposals_proposals.title)
+                  WHERE key <> 'machine_translations'
+                  ORDER BY key
+                  LIMIT 1
+                )
+              ) #{collation}
+            SQL
             case order
             when "az"
               proposals.order(order_by_title => :asc)
