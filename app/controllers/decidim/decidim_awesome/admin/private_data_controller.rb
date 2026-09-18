@@ -31,7 +31,9 @@ module Decidim
         end
 
         def destroy
-          if private_data && private_data.total.to_i.positive?
+          raise ActiveRecord::RecordNotFound unless resource
+
+          if private_data.total.to_i.positive?
             Decidim::ActionLogger.log("destroy_private_data", current_user, resource, nil, count: private_data.total)
 
             Lock.new(current_organization).get!(resource)
@@ -44,7 +46,7 @@ module Decidim
         private
 
         def resource
-          @resource ||= Component.find_by(id: params[:id])
+          @resource ||= PrivateDataFinder.new(current_organization).components.find_by(id: params[:id])
         end
 
         def private_data
@@ -64,7 +66,7 @@ module Decidim
         end
 
         def private_data_finder
-          @private_data_finder ||= PrivateDataFinder.new
+          @private_data_finder ||= PrivateDataFinder.new(current_organization)
         end
 
         def time_ago

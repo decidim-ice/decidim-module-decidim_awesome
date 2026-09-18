@@ -24,6 +24,29 @@ module Decidim
             end
             spaces
           end
+
+          # Strips the leading locale segment ("/en/processes/..." => "/processes/...")
+          # so paths can be compared and mapped to spaces regardless of the locale.
+          def strip_locale(path)
+            return path if path.blank?
+
+            stripped = path.sub(locale_prefix, "")
+            stripped = "/#{stripped}" if stripped.start_with?("?")
+            stripped.empty? ? "/" : stripped
+          end
+
+          # Renders a local path with the current locale prefix ("/processes" => "/en/processes")
+          def localize(path)
+            return path if path.blank? || !path.start_with?("/") || path.start_with?("//")
+
+            "/#{I18n.locale}#{strip_locale(path)}"
+          end
+
+          private
+
+          def locale_prefix
+            @locale_prefix ||= %r{\A/#{Regexp.union(I18n.available_locales.map(&:to_s))}(?=/|\z|\?)}
+          end
         end
 
         def initialize(request)
@@ -83,6 +106,7 @@ module Decidim
         end
 
         def context_from_path(path)
+          path = RequestAnalyzer.strip_locale(path)
           if system_manifest?(path)
             @context[:participatory_space_manifest] = "system"
             return

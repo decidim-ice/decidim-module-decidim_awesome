@@ -10,11 +10,11 @@ module Decidim
           @evaluated_menu ||= if DecidimAwesome.enabled?(@name)
                                 Decidim::DecidimAwesome::MenuHacker.new(@name, @view)
                               else
-                                begin
-                                  menu = Decidim::Menu.new(@name)
-                                  menu.build_for(@view)
-                                  menu
-                                end
+
+                                menu = Decidim::Menu.new(@name)
+                                menu.build_for(@view)
+                                menu
+
                               end
         end
 

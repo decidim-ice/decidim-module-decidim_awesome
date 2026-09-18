@@ -24,7 +24,7 @@ module Decidim::DecidimAwesome
       cell(
         "decidim/decidim_awesome/content_blocks/awesome_processes_form",
         form,
-        content_block: content_block
+        content_block:
       )
     end
 

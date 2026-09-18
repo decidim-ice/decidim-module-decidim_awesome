@@ -19,7 +19,6 @@ Decidim::DecidimAwesome.configure do |config|
       :proposal_private_custom_fields,
       :menu,
       :mobile_menu,
-      :home_content_block_menu,
       :scoped_admins,
       :custom_redirects,
       :cookie_management,

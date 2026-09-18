@@ -1,6 +1,6 @@
 {
   "name": "decidim-module-decidim_awesome",
-  "version": "0.13.1",
+  "version": "0.15.0",
   "description": "Mods and tweaks for Decidim",
   "main": "index.js",
   "directories": {
@@ -34,11 +34,12 @@
   },
   "prettier": "@decidim/prettier-config",
   "devDependencies": {
-    "@decidim/dev": "0.31.0",
-    "@decidim/eslint-config": "0.31.0",
-    "@decidim/prettier-config": "0.31.0",
-    "@decidim/stylelint-config": "0.31.0",
-    "@decidim/webpacker": "0.31.0"
+    "@decidim/core": "0.32.0",
+    "@decidim/dev": "0.32.0",
+    "@decidim/eslint-config": "0.32.0",
+    "@decidim/prettier-config": "0.32.0",
+    "@decidim/stylelint-config": "0.32.0",
+    "@decidim/webpacker": "0.32.0"
   },
   "dependencies": {
     "codemirror": "^5.65.16",

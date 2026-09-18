@@ -12,7 +12,7 @@
     <%= awesome_map_for map_components do %>
       <% tf = Decidim::TaxonomyFilter.where(id: current_component.settings.taxonomy_filters) %>
       <% taxonomies = tf.map(&:root_taxonomy) %>
-      <%= render partial: "map_template", locals: { taxonomies: taxonomies, map_height: current_component.settings.map_height } %>
+      <%= render partial: "map_template", locals: { taxonomies:, map_height: current_component.settings.map_height } %>
     <% end %>
   </section>
 </main>

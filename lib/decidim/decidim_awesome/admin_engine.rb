@@ -60,7 +60,11 @@ module Decidim
 
       initializer "decidim_decidim_awesome.admin_mount_routes" do
         Decidim::Core::Engine.routes do
-          mount Decidim::DecidimAwesome::AdminEngine, at: "/admin/decidim_awesome", as: "decidim_admin_decidim_awesome"
+          extend Decidim::Routes::LocaleRedirects
+
+          scope "/:locale", **locale_scope_options do
+            mount Decidim::DecidimAwesome::AdminEngine, at: "/admin/decidim_awesome", as: "decidim_admin_decidim_awesome"
+          end
         end
       end
 

@@ -3,7 +3,7 @@ a.awesome-auto-edit {
 }
 
 a.awesome-auto-delete {
-  @apply float-right;
+  @apply float-right inline-flex items-center gap-1;
 }
 
 .form-defaults input[type="text"].awesome-auto-edit {

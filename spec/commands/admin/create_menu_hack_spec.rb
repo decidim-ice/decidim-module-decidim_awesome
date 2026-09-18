@@ -91,6 +91,16 @@ module Decidim::DecidimAwesome
 
           expect(AwesomeConfig.find_by(organization:, var: menu_name).value).to eq(previous_menu)
         end
+
+        context "and the url is typed with a locale prefix" do
+          let(:url) { "/en/some-path" }
+
+          it "broadcasts :invalid and does not modify the config options" do
+            expect { subject.call }.to broadcast(:invalid)
+
+            expect(AwesomeConfig.find_by(organization:, var: menu_name).value).to eq(previous_menu)
+          end
+        end
       end
     end
   end

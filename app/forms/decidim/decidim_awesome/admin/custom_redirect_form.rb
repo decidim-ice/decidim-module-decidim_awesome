@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class CustomRedirectForm < Decidim::Form
         include Decidim::TranslatableAttributes
+
         attribute :origin, String
         attribute :destination, String
         attribute :active, Boolean
@@ -15,7 +16,7 @@ module Decidim
 
         def to_params
           [
-            sanitize_url(origin),
+            normalized_origin,
             {
               destination: sanitize_url(destination, strip_host: false),
               active:,
@@ -32,10 +33,14 @@ module Decidim
           url
         end
 
+        def normalized_origin
+          ContextAnalyzers::RequestAnalyzer.strip_locale(sanitize_url(origin))
+        end
+
         private
 
         def different_origin_destination
-          return if sanitize_url(origin) != sanitize_url(destination)
+          return if normalized_origin != ContextAnalyzers::RequestAnalyzer.strip_locale(sanitize_url(destination))
 
           errors.add(:destination, :invalid)
         end

@@ -8,7 +8,7 @@ module Decidim::DecidimAwesome
       routes { Decidim::DecidimAwesome::AdminEngine.routes }
 
       let(:user) { create(:user, :confirmed, :admin, organization:) }
-      let(:organization) { create(:organization, available_authorizations: available_authorizations) }
+      let(:organization) { create(:organization, available_authorizations:) }
       let(:available_authorizations) { ["awesome_authorization_handler"] }
 
       before do
@@ -96,14 +96,14 @@ module Decidim::DecidimAwesome
 
         context "when command succeeds" do
           it "redirects with a success notice" do
-            post :create, params: params
+            post(:create, params:)
             expect(flash[:notice]).not_to be_empty
             expect(response).to have_http_status(:redirect)
             expect(response).to redirect_to(awesome_authorizations_path)
           end
 
           it "creates the authorization group" do
-            expect { post :create, params: params }.to change(Decidim::DecidimAwesome::AuthorizationGroup, :count).by(1)
+            expect { post :create, params: }.to change(Decidim::DecidimAwesome::AuthorizationGroup, :count).by(1)
           end
         end
 
@@ -118,14 +118,14 @@ module Decidim::DecidimAwesome
           end
 
           it "renders new with an alert" do
-            post :create, params: params
+            post(:create, params:)
             expect(flash[:alert]).not_to be_empty
             expect(response).to have_http_status(:ok)
             expect(response).to render_template(:new)
           end
 
           it "does not create the authorization group" do
-            expect { post :create, params: params }.not_to change(Decidim::DecidimAwesome::AuthorizationGroup, :count)
+            expect { post :create, params: }.not_to change(Decidim::DecidimAwesome::AuthorizationGroup, :count)
           end
         end
       end
@@ -158,14 +158,14 @@ module Decidim::DecidimAwesome
 
         context "when command succeeds" do
           it "redirects with a success notice" do
-            patch :update, params: params
+            patch(:update, params:)
             expect(flash[:notice]).not_to be_empty
             expect(response).to have_http_status(:redirect)
             expect(response).to redirect_to(awesome_authorizations_path)
           end
 
           it "updates the authorization group" do
-            patch :update, params: params
+            patch(:update, params:)
             expect(authorization_group.reload.name["en"]).to eq("Updated Group Name")
           end
         end
@@ -182,7 +182,7 @@ module Decidim::DecidimAwesome
           end
 
           it "renders edit with an alert" do
-            patch :update, params: params
+            patch(:update, params:)
             expect(flash[:alert]).not_to be_empty
             expect(response).to have_http_status(:ok)
             expect(response).to render_template(:edit)
@@ -231,7 +231,7 @@ module Decidim::DecidimAwesome
           expect do
             delete :destroy, params: { id: authorization_group.id }
             perform_enqueued_jobs
-          end.to change { Decidim::Authorization.where(user: user, name: "awesome_authorization_handler").count }.from(1).to(0)
+          end.to change { Decidim::Authorization.where(user:, name: "awesome_authorization_handler").count }.from(1).to(0)
         end
       end
     end

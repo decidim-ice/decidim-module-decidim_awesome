@@ -232,26 +232,4 @@ describe "Custom proposals fields" do
 
     it_behaves_like "has default fields"
   end
-
-  context "when editing collaborative drafts" do
-    let(:component) do
-      create(:proposal_component,
-             :with_creation_enabled,
-             :with_collaborative_drafts_enabled,
-             manifest:,
-             participatory_space: participatory_process)
-    end
-    let!(:collaborative_draft) { create(:collaborative_draft, users: [author, user], body: answer, component:) }
-    let(:model) { collaborative_draft }
-
-    before do
-      click_link_or_button "Access collaborative drafts"
-      click_link_or_button collaborative_draft.title
-      find("#dropdown-trigger-resource-#{collaborative_draft.id}").click
-      click_on "Edit"
-    end
-
-    it_behaves_like "has custom fields", "//textarea[@class='form-control'][@id='textarea-1476748007461'][@user-data='I shot the sheriff']"
-    it_behaves_like "saves custom fields", :collaborative_draft_title, "Send", false
-  end
 end

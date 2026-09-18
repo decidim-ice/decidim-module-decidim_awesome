@@ -17,7 +17,7 @@ module Decidim
         def add_breadcrumb_item(key, url = nil)
           controller_breadcrumb_items << {
             label: translate_breadcrumb(key),
-            url: url,
+            url:,
             active: url.blank?
           }
         end

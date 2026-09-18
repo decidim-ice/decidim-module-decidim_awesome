@@ -15,11 +15,11 @@ module Decidim
       delegate :organization, to: :authorization_group
 
       def user
-        @user ||= organization.users.find_by(email: email)
+        @user ||= organization.users.find_by(email:)
       end
 
       def authorization
-        @authorization ||= Decidim::Authorization.find_by(name: :awesome_authorization_handler, user: user)
+        @authorization ||= Decidim::Authorization.find_by(name: :awesome_authorization_handler, user:)
       end
 
       def group_authorized?(authorization_group)

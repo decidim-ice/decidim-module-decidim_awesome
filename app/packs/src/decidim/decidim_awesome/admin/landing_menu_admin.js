@@ -32,8 +32,8 @@ const initEditor = (editor) => {
         }
 
         form.querySelectorAll("input[name*='[name_']").forEach((input) => {
-          const locale = input.id.substr(input.id.lastIndexOf("_") + 1);
-          input.value = option.attributes[`data-label-${locale}`]?.value;
+          const locale = (input.name.match(/\[name_(.+)\]/) || [])[1]?.replace(/__/g, "-");
+          input.value = (locale && option.getAttribute(`data-label-${locale}`)) || "";
         });
       });
     }

@@ -2,7 +2,19 @@
 
 module Decidim
   module DecidimAwesome
-    include ActiveSupport::Configurable
+    # Stores all feature settings, readable both as methods and as a hash
+    mattr_reader :config, instance_accessor: false, default: ActiveSupport::OrderedOptions.new
+
+    def self.configure
+      yield config
+    end
+
+    # Registers a setting with its default value, accessible as both
+    # DecidimAwesome.<name> and DecidimAwesome.config[:<name>]
+    def self.config_accessor(name)
+      config[name] = yield if block_given?
+      singleton_class.delegate name, :"#{name}=", to: :config
+    end
 
     autoload :AwesomeHelpers, "decidim/decidim_awesome/awesome_helpers"
     autoload :RequestMemoizer, "decidim/decidim_awesome/request_memoizer"
@@ -281,10 +293,6 @@ module Decidim
     end
 
     config_accessor :mobile_menu do
-      []
-    end
-
-    config_accessor :home_content_block_menu do
       []
     end
 

@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class DestroyMenuHack < Command
         include NeedsConstraintHelpers
+
         # Public: Initializes the command.
         #
         # item - the menu item to destroy

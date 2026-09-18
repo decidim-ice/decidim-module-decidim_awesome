@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalEl = document.getElementById(modalId);
   const limitAmendments = modalEl && JSON.parse(modalEl.dataset.limitAmendments);
 
-  if (!limitAmendments || document.querySelector('a[href^="/users/sign_in"]')) {
+  if (!limitAmendments || document.querySelector('a[href*="/users/sign_in"]')) {
     return;
   }
 

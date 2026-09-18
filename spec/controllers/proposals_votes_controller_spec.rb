@@ -53,7 +53,7 @@ module Decidim::Proposals
           post :create, format: :js, params:
         end.not_to change(ProposalVote, :count)
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
 

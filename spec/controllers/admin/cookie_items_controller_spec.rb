@@ -73,7 +73,7 @@ module Decidim::DecidimAwesome
 
         context "when command succeeds" do
           it "redirects with success message" do
-            post :create, params: params
+            post(:create, params:)
             expect(flash[:notice]).not_to be_empty
             expect(response).to have_http_status(:redirect)
             expect(response).to redirect_to(cookie_category_cookie_items_path(category_slug))
@@ -88,7 +88,7 @@ module Decidim::DecidimAwesome
           end
 
           it "renders new with error message" do
-            post :create, params: params
+            post(:create, params:)
             expect(flash[:alert]).not_to be_empty
             expect(response).to have_http_status(:ok)
             expect(response).to render_template(:new)
@@ -115,7 +115,7 @@ module Decidim::DecidimAwesome
         end
 
         it "returns http success" do
-          get :edit, params: params
+          get(:edit, params:)
           expect(response).to have_http_status(:success)
         end
       end
@@ -147,7 +147,7 @@ module Decidim::DecidimAwesome
         end
 
         it "redirects with success message" do
-          patch :update, params: params
+          patch(:update, params:)
           expect(flash[:notice]).not_to be_empty
           expect(response).to have_http_status(:redirect)
           expect(response).to redirect_to(cookie_category_cookie_items_path(category_slug))
@@ -190,7 +190,7 @@ module Decidim::DecidimAwesome
         end
 
         it "redirects with success message" do
-          delete :destroy, params: params
+          delete(:destroy, params:)
           expect(flash[:notice]).not_to be_empty
           expect(response).to have_http_status(:redirect)
           expect(response).to redirect_to(cookie_category_cookie_items_path(category_slug))

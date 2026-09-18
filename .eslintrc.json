@@ -1,3 +1,22 @@
 {
-  "extends": "@decidim"
+  "extends": "@decidim",
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js"],
+        "moduleDirectory": ["app/packs/", "node_modules/"]
+      }
+    }
+  },
+  "rules": {
+    "import/no-unresolved": [
+      "error",
+      {
+        "ignore": ["^src/decidim/(?!decidim_awesome/)", "^stylesheets/decidim/"]
+      }
+    ]
+  }
 }

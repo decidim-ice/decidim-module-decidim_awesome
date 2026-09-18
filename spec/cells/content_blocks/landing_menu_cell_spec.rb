@@ -77,9 +77,19 @@ module Decidim::DecidimAwesome
     context "with internal path URL" do
       let(:menu_items_json) { [{ "name" => { "en" => "About" }, "url" => "/about", "visible" => true }].to_json }
 
-      it "renders without target attribute" do
-        expect(subject).to have_link("About", href: "/about")
+      it "renders with the current locale and without target attribute" do
+        expect(subject).to have_link("About", href: "/#{I18n.locale}/about")
         expect(subject).to have_no_css("a[target]", text: "About")
+      end
+
+      context "when browsing in another locale" do
+        let(:menu_items_json) { [{ "name" => { "en" => "About", "ca" => "Sobre" }, "url" => "/en/about", "visible" => true }].to_json }
+
+        it "replaces the stored locale with the current one" do
+          I18n.with_locale(:ca) do
+            expect(subject).to have_link("Sobre", href: "/ca/about")
+          end
+        end
       end
     end
 

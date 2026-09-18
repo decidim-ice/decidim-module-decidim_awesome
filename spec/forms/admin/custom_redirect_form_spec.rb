@@ -96,6 +96,12 @@ module Decidim::DecidimAwesome
         it { is_expected.not_to be_valid }
       end
 
+      context "when origin and destination differ only by the locale prefix" do
+        let(:destination) { "/#{I18n.locale}#{origin}" }
+
+        it { is_expected.not_to be_valid }
+      end
+
       context "when origin and destination are case sensitive" do
         let(:origin) { "/Some-Origin-Path".downcase }
         let(:destination) { "http://#{organization.host}/Some-Origin-Path".downcase }

@@ -7,8 +7,8 @@ module Decidim
 
       # Destroys private data associated with the resource
       def perform(resource)
-        extra_fields = Decidim::DecidimAwesome::ProposalExtraField.where(
-          proposal: Decidim::Proposals::Proposal.where(component: resource)
+        extra_fields = Decidim::DecidimAwesome::ProposalExtraField.with_deleted.where(
+          proposal: Decidim::Proposals::Proposal.with_deleted.where(component: resource)
         ).where(private_body_updated_at: ...DecidimAwesome.private_data_expiration_time.ago)
 
         extra_fields.find_each do |extra_field|

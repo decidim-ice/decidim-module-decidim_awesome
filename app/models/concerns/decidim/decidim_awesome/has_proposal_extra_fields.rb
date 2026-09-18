@@ -9,6 +9,10 @@ module Decidim
         has_one :extra_fields, as: :proposal, foreign_key: "decidim_proposal_id", foreign_type: "decidim_proposal_type", class_name: "Decidim::DecidimAwesome::ProposalExtraField",
                                dependent: :destroy
 
+        after_restore do |proposal|
+          ProposalExtraField.only_deleted.find_by(proposal:)&.restore
+        end
+
         after_save do |proposal|
           if proposal.extra_fields && proposal.extra_fields.changed?
             proposal.extra_fields.save

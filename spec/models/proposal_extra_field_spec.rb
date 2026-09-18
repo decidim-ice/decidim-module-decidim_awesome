@@ -28,6 +28,19 @@ module Decidim::DecidimAwesome
       expect(extra_fields.proposal.reload.extra_fields).to eq(extra_fields)
     end
 
+    context "when the proposal is trashed and restored" do
+      let!(:extra_fields) { create(:awesome_proposal_extra_fields, proposal:, private_body: "secret") }
+
+      it "restores the extra fields along with the proposal" do
+        proposal.destroy
+        expect(described_class.find_by(id: extra_fields.id)).to be_nil
+
+        proposal.restore
+        expect(described_class.find_by(id: extra_fields.id)).to eq(extra_fields)
+        expect(proposal.reload.private_body).to eq("secret")
+      end
+    end
+
     describe "weight_count" do
       let!(:extra_fields) { create(:awesome_proposal_extra_fields, proposal:) }
       let!(:vote_weights) do
@@ -92,6 +105,15 @@ module Decidim::DecidimAwesome
 
       it "destroys the proposal weight" do
         expect { proposal.destroy }.to change(Decidim::DecidimAwesome::ProposalExtraField, :count).by(-1)
+      end
+    end
+
+    context "when the proposal is trashed (soft-deleted)" do
+      let!(:extra_fields) { create(:awesome_proposal_extra_fields, proposal:, private_body: "secret") }
+
+      it "keeps the private data instead of destroying it physically" do
+        proposal.destroy
+        expect(described_class.unscoped.find_by(id: extra_fields.id)&.private_body).to eq("secret")
       end
     end
 

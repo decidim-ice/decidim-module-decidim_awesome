@@ -12,16 +12,16 @@ module Decidim
       validates :purpose, presence: true
 
       def self.authorizations(organization)
-        Decidim::Verifications::Authorizations.new(organization: organization, name: :awesome_authorization_handler, granted: true).query
+        Decidim::Verifications::Authorizations.new(organization:, name: :awesome_authorization_handler, granted: true).query
       end
 
       def self.sync_user_authorization(user)
-        handler = Decidim::AuthorizationHandler.handler_for("awesome_authorization_handler", user: user)
+        handler = Decidim::AuthorizationHandler.handler_for("awesome_authorization_handler", user:)
 
         if handler.valid?
           Decidim::Authorization.create_or_update_from(handler)
         else
-          Decidim::Authorization.find_by(user: user, name: "awesome_authorization_handler")&.destroy!
+          Decidim::Authorization.find_by(user:, name: "awesome_authorization_handler")&.destroy!
         end
       end
 

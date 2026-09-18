@@ -62,6 +62,12 @@ shared_examples "generic admin routes" do
 
     it_behaves_like "tampered users model"
 
+    context "when no trailing slash" do
+      let(:path) { "admin" }
+
+      it_behaves_like "tampered users model"
+    end
+
     context "when additional slashes" do
       let(:path) { "/admin/" }
 

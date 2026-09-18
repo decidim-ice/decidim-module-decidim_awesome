@@ -56,6 +56,22 @@ module Decidim::DecidimAwesome
         end
       end
 
+      context "when the url is submitted with a locale prefix" do
+        let(:url) { "/en/some-path" }
+        let(:previous_menu) do
+          [{ "url" => "/some-path", "position" => 10 }]
+        end
+
+        it "updates the existing entry instead of adding a duplicate" do
+          expect { subject.call }.to broadcast(:ok)
+
+          items = AwesomeConfig.find_by(organization:, var: menu_name).value
+          expect(items.count).to eq(1)
+          expect(items.first["url"]).to eq("/some-path")
+          expect(items.first["position"]).to eq(position)
+        end
+      end
+
       context "when updating an non existing menu" do
         let(:previous_menu) do
           [{ "url" => "/another-menu", "position" => 10 }]

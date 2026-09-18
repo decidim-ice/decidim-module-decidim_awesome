@@ -45,7 +45,7 @@ module Decidim::DecidimAwesome
 
           it "returns http redirect" do
             get(:edit, params:)
-            expect(response).to have_http_status(:unprocessable_entity)
+            expect(response).to have_http_status(:unprocessable_content)
           end
         end
 
@@ -54,7 +54,7 @@ module Decidim::DecidimAwesome
 
           it "returns http redirect" do
             get(:edit, params:)
-            expect(response).to have_http_status(:unprocessable_entity)
+            expect(response).to have_http_status(:unprocessable_content)
           end
         end
       end

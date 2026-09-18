@@ -1100,8 +1100,6 @@ en:
           index:
             confirm_destroy: Are you sure to remove this customization?
             edit: Edit
-            home_content_block_menu:
-              title: Global menu home block
             menu:
               title: Main menu
             mobile_menu:

@@ -36,13 +36,13 @@ describe "Hacked menus" do
 
   shared_examples "has active link" do |text|
     it "has only one active link" do
-      within "#main-dropdown-menu" do
+      within "#dropdown-menu-main-desktop" do
         expect(page).to have_css("li.active", count: 1)
       end
     end
 
     it "active link contains text" do
-      within "#main-dropdown-menu .active" do
+      within "#dropdown-menu-main-desktop .active" do
         expect(page).to have_content(text)
       end
     end
@@ -52,12 +52,11 @@ describe "Hacked menus" do
     before do
       switch_to_host(organization.host)
       visit decidim_participatory_processes.participatory_processes_path
-      find_by_id("main-dropdown-summary").hover
+      find_by_id("main-dropdown-summary-desktop").click
     end
 
     it "renders the hacked menu" do
-      within "#main-dropdown-menu" do
-        expect(page).to have_no_content("Home")
+      within "#dropdown-menu-main-desktop" do
         expect(page).to have_content("Processes")
         expect(page).to have_content("A new beginning")
         expect(page).to have_content("Blog")
@@ -65,13 +64,13 @@ describe "Hacked menus" do
     end
 
     it "renders in the proper order" do
-      within "#main-dropdown-menu li:nth-child(1)" do
+      within "#dropdown-menu-main-desktop li:nth-child(1)" do
         expect(page).to have_content("Processes")
       end
-      within "#main-dropdown-menu li:nth-child(2)" do
+      within "#dropdown-menu-main-desktop li:nth-child(2)" do
         expect(page).to have_content("Blog")
       end
-      within "#main-dropdown-menu li:last-child" do
+      within "#dropdown-menu-main-desktop li:last-child" do
         expect(page).to have_content("A new beginning")
       end
     end
@@ -89,9 +88,9 @@ describe "Hacked menus" do
       end
 
       it "has target blank" do
-        expect(find("#main-dropdown-menu li:nth-child(2) a")["data-remote"]).to eq("true")
-        expect(find("#main-dropdown-menu li:nth-child(2) a")[:target]).to eq("_blank")
-        expect(find("#main-dropdown-menu li:last-child a")["data-remote"]).not_to eq("true")
+        expect(find("#dropdown-menu-main-desktop li:nth-child(2) a")["data-remote"]).to eq("true")
+        expect(find("#dropdown-menu-main-desktop li:nth-child(2) a")[:target]).to eq("_blank")
+        expect(find("#dropdown-menu-main-desktop li:last-child a")["data-remote"]).not_to eq("true")
       end
     end
 
@@ -109,7 +108,7 @@ describe "Hacked menus" do
       end
 
       it "renders the item" do
-        within "#main-dropdown-menu" do
+        within "#dropdown-menu-main-desktop" do
           expect(page).to have_content("A new beginning")
         end
       end
@@ -118,7 +117,7 @@ describe "Hacked menus" do
         let(:visibility) { "hidden" }
 
         it "do not show the menu item" do
-          within "#main-dropdown-menu" do
+          within "#dropdown-menu-main-desktop" do
             expect(page).to have_no_content("A new beginning")
           end
         end
@@ -128,7 +127,7 @@ describe "Hacked menus" do
         let(:visibility) { "logged" }
 
         it "do not show the menu item" do
-          within "#main-dropdown-menu" do
+          within "#dropdown-menu-main-desktop" do
             expect(page).to have_no_content("A new beginning")
           end
         end
@@ -138,7 +137,7 @@ describe "Hacked menus" do
         let(:visibility) { "non_logged" }
 
         it "do not show the menu item" do
-          within "#main-dropdown-menu" do
+          within "#dropdown-menu-main-desktop" do
             expect(page).to have_content("A new beginning")
           end
         end
@@ -149,8 +148,7 @@ describe "Hacked menus" do
       let(:disabled_features) { [:menu] }
 
       it "renders the normal menu" do
-        within "#main-dropdown-menu" do
-          expect(page).to have_content("Home")
+        within "#dropdown-menu-main-desktop" do
           expect(page).to have_content("Processes")
           expect(page).to have_no_content("A new beginning")
           expect(page).to have_no_content("Blog")
@@ -188,7 +186,7 @@ describe "Hacked menus" do
       context "when visiting all processes list" do
         before do
           visit decidim_participatory_processes.participatory_processes_path
-          find_by_id("main-dropdown-summary").hover
+          find_by_id("main-dropdown-summary-desktop").click
         end
 
         it_behaves_like "has active link", "A new beginning"
@@ -197,7 +195,7 @@ describe "Hacked menus" do
       context "when visiting a process in a custom link" do
         before do
           visit decidim_participatory_processes.participatory_process_path(participatory_process.slug)
-          find_by_id("main-dropdown-summary").hover
+          find_by_id("main-dropdown-summary-desktop").click
         end
 
         it_behaves_like "has active link", "A single process"
@@ -206,7 +204,7 @@ describe "Hacked menus" do
       context "when visiting a sublink of a process in a custom link" do
         before do
           visit main_component_path(component)
-          find_by_id("main-dropdown-summary").hover
+          find_by_id("main-dropdown-summary-desktop").click
         end
 
         it_behaves_like "has active link", "A single process"
@@ -215,7 +213,7 @@ describe "Hacked menus" do
       context "when visiting a process not in a custom link" do
         before do
           visit decidim_participatory_processes.participatory_process_path(participatory_process2.slug)
-          find_by_id("main-dropdown-summary").hover
+          find_by_id("main-dropdown-summary-desktop").click
         end
 
         it_behaves_like "has active link", "A new beginning"
@@ -224,7 +222,7 @@ describe "Hacked menus" do
       context "when visiting a sublink of a process not in a custom link" do
         before do
           visit main_component_path(component2)
-          find_by_id("main-dropdown-summary").hover
+          find_by_id("main-dropdown-summary-desktop").click
         end
 
         it_behaves_like "has active link", "A new beginning"
@@ -251,14 +249,14 @@ describe "Hacked menus" do
       switch_to_host(organization.host)
       login_as user, scope: :user
       visit decidim_participatory_processes.participatory_processes_path
-      find_by_id("main-dropdown-summary").hover
+      find_by_id("main-dropdown-summary-desktop").click
     end
 
     context "when hidden" do
       let(:visibility) { "hidden" }
 
       it "do not show the menu item" do
-        within "#main-dropdown-menu" do
+        within "#dropdown-menu-main-desktop" do
           expect(page).to have_no_content("A new beginning")
         end
       end
@@ -268,7 +266,7 @@ describe "Hacked menus" do
       let(:visibility) { "logged" }
 
       it "do not show the menu item" do
-        within "#main-dropdown-menu" do
+        within "#dropdown-menu-main-desktop" do
           expect(page).to have_content("A new beginning")
         end
       end
@@ -278,7 +276,7 @@ describe "Hacked menus" do
       let(:visibility) { "non_logged" }
 
       it "do not show the menu item" do
-        within "#main-dropdown-menu" do
+        within "#dropdown-menu-main-desktop" do
           expect(page).to have_no_content("A new beginning")
         end
       end
@@ -290,7 +288,7 @@ describe "Hacked menus" do
 
       context "when user is verified" do
         it "shows the item" do
-          within "#main-dropdown-menu" do
+          within "#dropdown-menu-main-desktop" do
             expect(page).to have_content("A new beginning")
           end
         end
@@ -300,7 +298,7 @@ describe "Hacked menus" do
         let(:authorization) { nil }
 
         it "shows the item" do
-          within "#main-dropdown-menu" do
+          within "#dropdown-menu-main-desktop" do
             expect(page).to have_no_content("A new beginning")
           end
         end
@@ -310,7 +308,7 @@ describe "Hacked menus" do
         let!(:authorization) { create(:authorization, granted_at: 3.months.ago, user:, name: "dummy_authorization_handler") }
 
         it "shows the item" do
-          within "#main-dropdown-menu" do
+          within "#dropdown-menu-main-desktop" do
             expect(page).to have_no_content("A new beginning")
           end
         end

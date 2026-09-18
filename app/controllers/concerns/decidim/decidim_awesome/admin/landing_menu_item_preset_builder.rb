@@ -27,10 +27,11 @@ module Decidim
 
         def content_block_presets(block_scope)
           items = {}
+          anchors = available_anchors_for(block_scope)
           with_available_locales do |locale|
-            available_anchors_for(block_scope).map do |item|
+            anchors.each do |item|
               label = I18n.t(item[:key], default: item[:manifest])
-              items[item[:anchor]] ||= items[item[:anchor]] || [label, item[:anchor], {}]
+              items[item[:anchor]] ||= [label, item[:anchor], {}]
               items[item[:anchor]][2]["data-label-#{locale}"] = label
             end
           end
@@ -57,7 +58,7 @@ module Decidim
           items = {}
           with_available_locales do |locale|
             build_global_menu.items.sort_by(&:position).map do |item|
-              url = item.url.to_s.split("?").first
+              url = ContextAnalyzers::RequestAnalyzer.strip_locale(item.url.to_s.split("?").first)
               items[url] ||= items[url] || [item.label, url, {}]
               items[url][2]["data-label-#{locale}"] = item.label
             end

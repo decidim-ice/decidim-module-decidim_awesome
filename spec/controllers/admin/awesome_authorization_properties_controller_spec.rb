@@ -72,14 +72,14 @@ module Decidim
 
           context "with valid params" do
             it "redirects to awesome authorizations page" do
-              post :create, params: params
+              post(:create, params:)
 
               expect(response).to have_http_status(:found)
               expect(response).to redirect_to(awesome_authorizations_path)
             end
 
             it "stores the properties in awesome config" do
-              post :create, params: params
+              post(:create, params:)
 
               expect(AwesomeConfig.find_by(organization:, var: :awesome_authorization_handler)&.value).to include(
                 {
@@ -114,14 +114,14 @@ module Decidim
             end
 
             it "renders index with errors" do
-              post :create, params: params
+              post(:create, params:)
 
               expect(response).to have_http_status(:ok)
               expect(response).to render_template(:index)
             end
 
             it "does not store the config" do
-              post :create, params: params
+              post(:create, params:)
 
               expect(AwesomeConfig.find_by(organization:, var: :awesome_authorization_handler)).to be_nil
             end

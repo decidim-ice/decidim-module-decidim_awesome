@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class AwesomeAuthorizationGroupForm < Decidim::Form
         include Decidim::TranslatableAttributes
+
         translatable_attribute :name, String
         translatable_attribute :purpose, String
 

@@ -18,11 +18,11 @@ module Decidim
 
         @items = default_items
         menu_overrides.each do |item|
-          default = default_items.find { |i| i.url.gsub(/\?.*/, "") == item.url }
+          default = default_items.find { |i| same_url?(i.url.gsub(/\?.*/, ""), item.url) }
           if default
             item.send("overridden?=", true)
             item[:original_active] = default.active
-            @items.reject! { |i| i.url.gsub(/\?.*/, "") == item.url }
+            @items.reject! { |i| same_url?(i.url.gsub(/\?.*/, ""), item.url) }
           end
           @items << item
         end
@@ -51,7 +51,8 @@ module Decidim
           OpenStruct.new(
             label: translated_attribute(item["label"], organization),
             raw_label: item["label"],
-            url: item["url"],
+            url: localized_url(item["url"]),
+            raw_url: item["url"],
             position: item["position"] || 1,
             # see options in https://github.com/comfy/active_link_to
             active: method(:activate?),
@@ -64,8 +65,22 @@ module Decidim
       end
 
       def activate?(url, view)
-        urls = @items.map(&:url).sort_by(&:length).reverse
-        url == urls.find { |u| view.request.original_fullpath.start_with?(u) }
+        current_path = strip_locale(view.request.original_fullpath)
+        urls = @items.map(&:url).sort_by { |u| strip_locale(u).length }.reverse
+        url == urls.find { |u| current_path.start_with?(strip_locale(u)) }
+      end
+
+      def localized_url(url)
+        ContextAnalyzers::RequestAnalyzer.localize(url)
+      end
+
+      # menu urls are compared ignoring the locale prefix
+      def same_url?(first, second)
+        strip_locale(first) == strip_locale(second)
+      end
+
+      def strip_locale(url)
+        ContextAnalyzers::RequestAnalyzer.strip_locale(url)
       end
 
       def visible?(item)
@@ -86,7 +101,7 @@ module Decidim
       end
 
       def current_config
-        @current_config ||= (AwesomeConfig.find_by(var: name, organization:)&.value || []).filter { |i| i.is_a? Hash }
+        @current_config ||= (AwesomeConfig.find_by(var: name, organization:)&.value || []).grep(Hash)
       end
     end
   end

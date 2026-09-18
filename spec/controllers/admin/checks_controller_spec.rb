@@ -73,12 +73,11 @@ module Decidim::DecidimAwesome
       end
 
       describe "awesome version checking" do
-        let(:current_version) { "0.14.1" }
         let(:github_releases) do
           [
-            { "tag_name" => "v0.14.2", "draft" => false, "prerelease" => false },
-            { "tag_name" => "v0.14.1", "draft" => false, "prerelease" => false },
-            { "tag_name" => "v0.13.5", "draft" => false, "prerelease" => false }
+            { "tag_name" => "v0.15.1", "draft" => false, "prerelease" => false },
+            { "tag_name" => "v0.15.0", "draft" => false, "prerelease" => false },
+            { "tag_name" => "v0.14.5", "draft" => false, "prerelease" => false }
           ]
         end
 
@@ -103,21 +102,21 @@ module Decidim::DecidimAwesome
             end
 
             it "returns the latest version for the current minor" do
-              expect(controller.helpers.awesome_latest_version).to eq("0.14.2")
+              expect(controller.helpers.awesome_latest_version).to eq("0.15.1")
             end
 
             it "filters out drafts and prereleases" do
-              releases_with_draft = github_releases + [{ "tag_name" => "v0.14.3", "draft" => true, "prerelease" => false }]
+              releases_with_draft = github_releases + [{ "tag_name" => "v0.15.2", "draft" => true, "prerelease" => false }]
               allow(faraday_response).to receive(:body).and_return(releases_with_draft.to_json)
 
-              expect(controller.helpers.awesome_latest_version).to eq("0.14.2")
+              expect(controller.helpers.awesome_latest_version).to eq("0.15.1")
             end
 
             it "only checks current minor version" do
-              releases_with_newer_minor = [{ "tag_name" => "v0.15.0", "draft" => false, "prerelease" => false }] + github_releases
+              releases_with_newer_minor = [{ "tag_name" => "v0.16.0", "draft" => false, "prerelease" => false }] + github_releases
               allow(faraday_response).to receive(:body).and_return(releases_with_newer_minor.to_json)
 
-              expect(controller.helpers.awesome_latest_version).to eq("0.14.2")
+              expect(controller.helpers.awesome_latest_version).to eq("0.15.1")
             end
           end
 
@@ -153,7 +152,7 @@ module Decidim::DecidimAwesome
         describe "#awesome_version_outdated?" do
           context "when latest version is available" do
             before do
-              allow(controller.helpers).to receive(:awesome_latest_version).and_return("0.14.5")
+              allow(controller.helpers).to receive(:awesome_latest_version).and_return("0.15.4")
             end
 
             it "returns true when current version is older" do
@@ -186,10 +185,10 @@ module Decidim::DecidimAwesome
       describe "decidim version checking" do
         let(:decidim_releases) do
           [
-            { "tag_name" => "v0.31.2", "draft" => false, "prerelease" => false },
-            { "tag_name" => "v0.31.1", "draft" => false, "prerelease" => false },
-            { "tag_name" => "v0.30.5", "draft" => false, "prerelease" => false },
-            { "tag_name" => "v0.30.6", "draft" => false, "prerelease" => false }
+            { "tag_name" => "v0.32.1", "draft" => false, "prerelease" => false },
+            { "tag_name" => "v0.32.0", "draft" => false, "prerelease" => false },
+            { "tag_name" => "v0.31.6", "draft" => false, "prerelease" => false },
+            { "tag_name" => "v0.31.7", "draft" => false, "prerelease" => false }
           ]
         end
 
@@ -208,21 +207,21 @@ module Decidim::DecidimAwesome
             end
 
             it "returns the latest version for the current minor" do
-              expect(controller.helpers.decidim_latest_version).to eq("0.31.2")
+              expect(controller.helpers.decidim_latest_version).to eq("0.32.1")
             end
 
             it "filters out drafts and prereleases" do
-              releases_with_draft = decidim_releases + [{ "tag_name" => "v0.31.3", "draft" => true, "prerelease" => false }]
+              releases_with_draft = decidim_releases + [{ "tag_name" => "v0.32.2", "draft" => true, "prerelease" => false }]
               allow(faraday_response).to receive(:body).and_return(releases_with_draft.to_json)
 
-              expect(controller.helpers.decidim_latest_version).to eq("0.31.2")
+              expect(controller.helpers.decidim_latest_version).to eq("0.32.1")
             end
 
             it "only checks current minor version" do
-              releases_with_newer_minor = [{ "tag_name" => "v0.32.0", "draft" => false, "prerelease" => false }] + decidim_releases
+              releases_with_newer_minor = [{ "tag_name" => "v0.33.0", "draft" => false, "prerelease" => false }] + decidim_releases
               allow(faraday_response).to receive(:body).and_return(releases_with_newer_minor.to_json)
 
-              expect(controller.helpers.decidim_latest_version).to eq("0.31.2")
+              expect(controller.helpers.decidim_latest_version).to eq("0.32.1")
             end
           end
 
@@ -258,8 +257,8 @@ module Decidim::DecidimAwesome
         describe "#decidim_version_outdated?" do
           context "when latest version is available" do
             before do
-              allow(controller.helpers).to receive(:decidim_latest_version).and_return("0.31.2")
-              allow(controller.helpers).to receive(:decidim_version).and_return("0.31.1")
+              allow(controller.helpers).to receive(:decidim_latest_version).and_return("0.32.1")
+              allow(controller.helpers).to receive(:decidim_version).and_return("0.32.0")
             end
 
             it "returns true when current version is older" do
