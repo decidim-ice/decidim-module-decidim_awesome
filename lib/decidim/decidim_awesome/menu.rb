@@ -219,28 +219,17 @@ module Decidim
         def register_follow_up_questionnaires_menu!
           Decidim::DecidimAwesome.follow_up_questionnaires_parent_menus.each_value do |parent_menu|
             Decidim.menu parent_menu do |menu|
+              next unless defined?(current_participatory_space) && current_participatory_space
+
               finder = Decidim::DecidimAwesome::Admin::FollowUpQuestionnairesFinder.new(current_organization)
-              first_configured = finder.configured_for_space(current_participatory_space).first
+              allowed = Decidim::DecidimAwesome::Menu.follow_up_questionnaire_messages_allowed?(current_user, current_participatory_space)
 
-              menu.add_item :follow_up_questionnaires,
-                            I18n.t("menu.follow_up_questionnaires", scope: "decidim.decidim_awesome.admin"),
-                            first_configured ? decidim_admin_decidim_awesome.follow_up_questionnaire_messages_path(first_configured.decidim_questionnaire_id) : "#",
-                            icon_name: "surveys",
-                            submenu: { target_menu: :follow_up_questionnaires_submenu },
-                            if: first_configured.present? &&
-                                Decidim::DecidimAwesome::Menu.follow_up_questionnaire_messages_allowed?(current_user, current_participatory_space)
-            end
-          end
-
-          Decidim.menu :follow_up_questionnaires_submenu do |menu|
-            next unless defined?(current_participatory_space) && current_participatory_space
-
-            finder = Decidim::DecidimAwesome::Admin::FollowUpQuestionnairesFinder.new(current_organization)
-            finder.configured_for_space(current_participatory_space).each_with_index do |fuq, index|
-              menu.add_item :"follow_up_questionnaire_#{fuq.id}",
-                            translated_attribute(fuq.name),
-                            decidim_admin_decidim_awesome.follow_up_questionnaire_messages_path(fuq.decidim_questionnaire_id),
-                            position: index
+              finder.configured_for_space(current_participatory_space).each do |fuq|
+                menu.add_item :"follow_up_questionnaire_#{fuq.id}",
+                              translated_attribute(fuq.name),
+                              decidim_admin_decidim_awesome.follow_up_questionnaire_messages_path(fuq.decidim_questionnaire_id),
+                              if: allowed
+              end
             end
           end
         end
