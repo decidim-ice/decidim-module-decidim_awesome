@@ -45,6 +45,8 @@ module Decidim
         end
 
         def apply_follow_up_questionnaire_message_permissions!
+          return allow! if user.read_attribute("admin").present?
+
           space = context.fetch(:current_participatory_space, nil)
           return unless space
 
