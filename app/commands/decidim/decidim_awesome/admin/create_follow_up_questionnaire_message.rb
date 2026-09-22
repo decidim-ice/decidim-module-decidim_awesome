@@ -63,8 +63,7 @@ module Decidim
           respondent = finder.respondent_for(decidim_user_id: message.decidim_user_id, session_token: message.session_token)
           return unless respondent.processable?
 
-          FollowUpQuestionnaireMessageMailer.notification(message, respondent.email, respondent.name).deliver_later if respondent.email.present?
-          notify_status_change if status_changed?
+          FollowUpQuestionnaireMessageMailer.notification(message, respondent.email, respondent.name, status_changed: status_changed?).deliver_later if respondent.email.present?
         end
 
         def notify_status_change

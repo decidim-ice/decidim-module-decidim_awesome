@@ -15,7 +15,7 @@ module Decidim
 
         attachments_attribute :attachments
 
-        validates :follow_up_questionnaire_id, :status_id, :author_id, presence: true, numericality: { only_integer: true }
+        validates :follow_up_questionnaire_id, :status_id, presence: true, numericality: { only_integer: true }
         validate :status_belongs_to_questionnaire
         validate :respondent_present
         validate :author_is_allowed
@@ -49,7 +49,7 @@ module Decidim
         private
 
         def author_is_allowed
-          return if author_id.blank?
+          return errors.add(:author_id, :blank) if author_id.blank?
 
           errors.add(:author_id, :invalid) unless possible_authors.map(&:id).include?(author_id)
         end

@@ -40,6 +40,7 @@ module Decidim
           @form.author_id = current_user.id
           @form.decidim_user_id = params[:decidim_user_id]
           @form.session_token = params[:session_token]
+          @form.status_id = @messages.first&.status_id
         end
 
         def create

@@ -5,10 +5,13 @@ module Decidim
     # A mailer for sending notifications to respondents when the admin team
     # replies to their follow-up questionnaire submission.
     class FollowUpQuestionnaireMessageMailer < Decidim::ApplicationMailer
-      def notification(message, email, name)
+      def notification(message, email, name, status_changed: false)
         @message = message
         @name = name
         @organization = message.organization
+        @status_changed = status_changed
+
+        attach_files
 
         # i18n-tasks-use t('decidim.decidim_awesome.follow_up_questionnaire_message_mailer.notification.subject')
         I18n.with_locale(recipient_locale) do
@@ -24,6 +27,14 @@ module Decidim
 
       def recipient_user
         Decidim::User.find_by(id: @message.decidim_user_id) if @message.decidim_user_id
+      end
+
+      def attach_files
+        @message.attachments.with_attached_file.each do |attachment|
+          next unless attachment.file.attached?
+
+          attachments[attachment.file.filename.to_s] = attachment.file.download
+        end
       end
     end
   end

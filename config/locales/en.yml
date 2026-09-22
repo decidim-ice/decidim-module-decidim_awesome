@@ -1478,8 +1478,9 @@ en:
         notification:
           default_name: there
           greeting: Hi %{name},
-          intro: You have received a new message regarding your submission to "%{questionnaire}".
+          intro: You have received a new message regarding your submission to "%{questionnaire}:"
           outro: Thank you for your participation.
+          status_updated: Status updated to "%{status}".
           subject: New message to your submission to "%{questionnaire}"
       map_component:
         map:
