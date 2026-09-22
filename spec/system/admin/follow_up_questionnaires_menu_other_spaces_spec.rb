@@ -23,7 +23,7 @@ describe "Follow-up questionnaires menu in assemblies and conferences admin" do
       visit decidim_admin_assemblies.edit_component_path(assembly, component)
 
       expect(page).to have_link(
-        "Follow-up questionnaires",
+        "Follow up",
         href: decidim_admin_decidim_awesome.follow_up_questionnaire_messages_path(follow_up_questionnaire.decidim_questionnaire_id)
       )
     end
@@ -40,7 +40,7 @@ describe "Follow-up questionnaires menu in assemblies and conferences admin" do
       visit decidim_admin_conferences.edit_component_path(conference, component)
 
       expect(page).to have_link(
-        "Follow-up questionnaires",
+        "Follow up",
         href: decidim_admin_decidim_awesome.follow_up_questionnaire_messages_path(follow_up_questionnaire.decidim_questionnaire_id)
       )
     end

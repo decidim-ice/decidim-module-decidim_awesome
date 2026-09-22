@@ -64,6 +64,7 @@ module Decidim
           return unless respondent.processable?
 
           FollowUpQuestionnaireMessageMailer.notification(message, respondent.email, respondent.name, status_changed: status_changed?).deliver_later if respondent.email.present?
+          notify_status_change if status_changed?
         end
 
         def notify_status_change

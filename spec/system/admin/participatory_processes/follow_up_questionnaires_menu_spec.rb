@@ -25,7 +25,7 @@ describe "Follow-up questionnaires menu in the participatory process admin" do
 
     it "shows the follow-up questionnaires menu item" do
       expect(page).to have_link(
-        "Follow-up questionnaires",
+        "Follow up",
         href: decidim_admin_decidim_awesome.follow_up_questionnaire_messages_path(follow_up_questionnaire.decidim_questionnaire_id)
       )
     end
