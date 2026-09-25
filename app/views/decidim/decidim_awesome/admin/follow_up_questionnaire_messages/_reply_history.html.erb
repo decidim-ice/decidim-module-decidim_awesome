@@ -32,7 +32,7 @@
                 <ul>
                   <% message.documents.each do |document| %>
                     <li>
-                      <%= link_to translated_attribute(document.title), document.url, target: "_blank", rel: "noopener noreferrer" %>
+                      <%= link_to translated_attribute(document.title), document.url, target: "_blank", rel: "noopener noreferrer", data: { external_domain_link: false } %>
                       <small><%= document.file_type %> <%= number_to_human_size(document.file_size) %></small>
                     </li>
                   <% end %>
@@ -45,7 +45,7 @@
                 <strong><%= t(".photos") %>:</strong>
                 <div class="gallery row" data-gallery>
                   <% message.photos.each do |photo| %>
-                    <%= link_to photo.big_url, target: "_blank", rel: "noopener noreferrer" do %>
+                    <%= link_to photo.big_url, target: "_blank", rel: "noopener noreferrer", data: { external_domain_link: false } do %>
                       <%= image_tag photo.thumbnail_url, class: "thumbnail", alt: strip_tags(translated_attribute(photo.title)) %>
                     <% end %>
                   <% end %>

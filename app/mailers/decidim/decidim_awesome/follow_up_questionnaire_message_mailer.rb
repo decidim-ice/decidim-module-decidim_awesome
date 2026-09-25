@@ -5,6 +5,11 @@ module Decidim
     # A mailer for sending notifications to respondents when the admin team
     # replies to their follow-up questionnaire submission.
     class FollowUpQuestionnaireMessageMailer < Decidim::ApplicationMailer
+      def self.reply_to_email(organization)
+        sender = organization.smtp_settings&.dig("from_email").presence || Decidim.config.mailer_sender
+        Mail::Address.new(sender).address
+      end
+
       def notification(message, email, name, status_changed: false)
         @message = message
         @name = name
@@ -15,7 +20,8 @@ module Decidim
 
         # i18n-tasks-use t('decidim.decidim_awesome.follow_up_questionnaire_message_mailer.notification.subject')
         I18n.with_locale(recipient_locale) do
-          mail(to: email, subject: default_i18n_subject(questionnaire: translated_attribute(message.follow_up_questionnaire.name)))
+          mail(to: email, reply_to: self.class.reply_to_email(@organization),
+               subject: default_i18n_subject(questionnaire: translated_attribute(message.follow_up_questionnaire.name)))
         end
       end
 

@@ -33,9 +33,8 @@
 
       <div class="card">
         <div class="card-divider">
-          <h2 class="card-title">
-            <%= t(".new_reply") %>
-          </h2>
+          <h2 class="card-title"><%= t(".new_reply") %></h2>
+          <p class="help-text"><%= t(".new_reply_help_text", email: reply_to_email) %></p>
         </div>
 
         <div class="card-section">

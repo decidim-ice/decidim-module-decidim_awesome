@@ -13,7 +13,7 @@ module Decidim
         before_action :follow_up_questionnaire_message, only: [:show, :destroy]
         before_action :set_follow_up_questionnaire_breadcrumb, only: [:index, :new, :create]
 
-        helper_method :current_participatory_space, :respondent_details, :preview_response_path
+        helper_method :current_participatory_space, :respondent_details, :preview_response_path, :reply_to_email
 
         def permission_class_chain
           Decidim.participatory_space_manifests.filter_map(&:permissions_class) + super
@@ -24,9 +24,9 @@ module Decidim
         def index
           @questionnaire = @follow_up_questionnaire.questionnaire
           @participants = paginate(Decidim::Forms::QuestionnaireParticipants.new(@questionnaire).participants)
-          @latest_messages_by_respondent = @follow_up_questionnaire.messages
-                                                                   .group_by { |message| message.decidim_user_id || message.session_token }
-                                                                   .transform_values { |messages| messages.max_by(&:created_at) }
+          messages_by_respondent = @follow_up_questionnaire.messages.group_by { |message| message.decidim_user_id || message.session_token }
+          @latest_messages_by_respondent = messages_by_respondent.transform_values { |messages| messages.max_by(&:created_at) }
+          @messages_count_by_respondent = messages_by_respondent.transform_values { |messages| messages.count { |message| message.body.present? } }
         end
 
         def new
@@ -93,6 +93,10 @@ module Decidim
           return unless defined?(Decidim::Surveys::Survey) && survey.is_a?(Decidim::Surveys::Survey)
 
           Decidim::EngineRouter.admin_proxy(current_component).survey_response_path(survey, id: participant.session_token)
+        end
+
+        def reply_to_email
+          FollowUpQuestionnaireMessageMailer.reply_to_email(current_organization)
         end
 
         def enforce_messages_permission!

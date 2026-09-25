@@ -31,6 +31,10 @@ module Decidim
 
       scope :ordered, -> { order(active: :desc, position: :asc, id: :asc) }
       scope :active, -> { where(active: true) }
+
+      def number_of_responses
+        questionnaire.count_participants
+      end
     end
   end
 end

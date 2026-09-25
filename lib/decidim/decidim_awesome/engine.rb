@@ -462,6 +462,8 @@ module Decidim
         Decidim.icons.register(name: "smartphone", icon: "smartphone-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "shield-check-line", icon: "shield-check-line", category: "system", description: "", engine: :decidim_awesome)
         Decidim.icons.register(name: "eye-off-line", icon: "eye-off-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "questionnaire-line", icon: "questionnaire-line", category: "system", description: "", engine: :decidim_awesome)
+        Decidim.icons.register(name: "list-view", icon: "list-view", category: "system", description: "", engine: :decidim_awesome)
       end
     end
   end

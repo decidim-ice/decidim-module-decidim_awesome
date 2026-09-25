@@ -60,7 +60,7 @@ module Decidim
           register_simple_entry(:awesome_admin_menu, :editors, 1, "editors-text")
           register_simple_entry(:awesome_admin_menu, :proposals, 2, "documents")
           register_simple_entry(:awesome_admin_menu, :surveys, 3, "surveys")
-          register_simple_entry(:awesome_admin_menu, :follow_up_questionnaires, 4, "surveys")
+          register_simple_entry(:awesome_admin_menu, :follow_up_questionnaires, 4, "questionnaire-line")
           register_simple_entry(:awesome_admin_menu, :styles, 5, "brush",
                                 submenu: { target_menu: :custom_styles_submenu },
                                 active: [[:config_path, :scoped_styles], [:config_path, :scoped_admin_styles]])
