@@ -27,11 +27,19 @@ module Decidim::DecidimAwesome
       end
 
       describe "GET #index" do
+        let(:respondent) { create(:user, :confirmed, organization:) }
+
+        before do
+          2.times { Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(follow_up_questionnaire:, status:, author: user, body: "Hi", decidim_user_id: respondent.id) }
+          Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(follow_up_questionnaire:, status:, author: user, decidim_user_id: respondent.id)
+        end
+
         it "returns http success" do
           get :index, params: { follow_up_questionnaire_id: follow_up_questionnaire.decidim_questionnaire_id }
 
           expect(response).to have_http_status(:success)
           expect(assigns(:questionnaire)).to eq(questionnaire)
+          expect(assigns(:messages_count_by_respondent)[respondent.id]).to eq(2)
         end
       end
 

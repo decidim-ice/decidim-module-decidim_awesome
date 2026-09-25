@@ -12,7 +12,9 @@ module Decidim::DecidimAwesome
       let(:organization) { create(:organization) }
       let(:user) { create(:user, :confirmed, organization:) }
       let(:respondent) { create(:user, :confirmed, organization:) }
+      let(:component) { create(:component, manifest_name: "surveys", organization:) }
       let(:questionnaire) { create(:questionnaire) }
+      let!(:survey) { create(:survey, component:, questionnaire:) }
       let(:follow_up_questionnaire) do
         Decidim::DecidimAwesome::FollowUpQuestionnaire.create!(decidim_questionnaire_id: questionnaire.id, name: { "en" => "Follow up" })
       end
@@ -60,6 +62,9 @@ module Decidim::DecidimAwesome
 
         it "notifies the respondent by email" do
           expect { subject.call }.to have_enqueued_job(ActionMailer::MailDeliveryJob)
+
+          perform_enqueued_jobs
+          expect(ActionMailer::Base.deliveries.last.reply_to).to eq([FollowUpQuestionnaireMessageMailer.reply_to_email(organization)])
         end
 
         context "and the respondent cannot be identified" do
