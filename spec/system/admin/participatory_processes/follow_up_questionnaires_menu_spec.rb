@@ -7,6 +7,7 @@ describe "Follow-up questionnaires menu in the participatory process admin" do
   let(:component) { create(:component, manifest_name: "surveys", organization:) }
   let(:participatory_process) { component.participatory_space }
   let!(:admin) { create(:user, :admin, :confirmed, organization:) }
+  let!(:admin_role) { create(:participatory_process_user_role, user: admin, participatory_process:, role: "admin") }
   let!(:questionnaire) { create(:questionnaire) }
   let!(:survey) { create(:survey, component:, questionnaire:) }
 
@@ -24,7 +25,7 @@ describe "Follow-up questionnaires menu in the participatory process admin" do
 
     it "shows the follow-up questionnaires menu item" do
       expect(page).to have_link(
-        "Follow-up questionnaires",
+        "Follow up",
         href: decidim_admin_decidim_awesome.follow_up_questionnaire_messages_path(follow_up_questionnaire.decidim_questionnaire_id)
       )
     end

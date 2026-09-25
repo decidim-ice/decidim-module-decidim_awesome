@@ -1,0 +1,13 @@
+<p class="email-greeting"><%= t(".greeting", name: @name.presence || t(".default_name")) %></p>
+
+<p class="email-instructions"><%= t(".intro", questionnaire: translated_attribute(@message.follow_up_questionnaire.name)) %></p>
+
+<% if @status_changed %>
+  <p class="email-status"><%= t(".status_updated", status: translated_attribute(@message.status.name)) %></p>
+<% end %>
+
+<% if @message.body.present? %>
+  <div class="email-body"><%= decidim_sanitize_editor(@message.body) %></div>
+<% end %>
+
+<p class="email-closing"><%= t(".outro") %></p>

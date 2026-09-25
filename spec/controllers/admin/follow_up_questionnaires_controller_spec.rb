@@ -19,9 +19,22 @@ module Decidim::DecidimAwesome
       end
 
       describe "GET #index" do
+        render_views
+
+        let!(:follow_up_questionnaire) do
+          Decidim::DecidimAwesome::FollowUpQuestionnaire.create!(decidim_questionnaire_id: questionnaire.id, name: { "en" => "Follow up" })
+        end
+
+        before do
+          question = create(:questionnaire_question, questionnaire:)
+          create(:response, questionnaire:, question:, session_token: "first")
+          create(:response, questionnaire:, question:, session_token: "second")
+        end
+
         it "returns http success" do
           get :index
           expect(response).to have_http_status(:success)
+          expect(follow_up_questionnaire.number_of_responses).to eq(2)
         end
       end
 
