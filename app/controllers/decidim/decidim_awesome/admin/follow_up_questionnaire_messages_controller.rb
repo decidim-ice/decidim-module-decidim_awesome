@@ -10,7 +10,6 @@ module Decidim
 
         before_action :follow_up_questionnaire
         before_action :enforce_messages_permission!
-        before_action :follow_up_questionnaire_message, only: [:show, :destroy]
         before_action :set_follow_up_questionnaire_breadcrumb, only: [:index, :new, :create]
 
         helper_method :current_participatory_space, :respondent_details, :preview_response_path, :reply_to_email
@@ -65,14 +64,13 @@ module Decidim
           end
         end
 
-        def show; end
-
-        def destroy; end
-
         private
 
         def follow_up_questionnaire
-          @follow_up_questionnaire = Decidim::DecidimAwesome::FollowUpQuestionnaire.find_by!(decidim_questionnaire_id: params[:follow_up_questionnaire_id])
+          @follow_up_questionnaire = Decidim::DecidimAwesome::FollowUpQuestionnaire.where(organization: current_organization).visible
+                                                                                   .find_by(decidim_questionnaire_id: params[:follow_up_questionnaire_id])
+          raise ActionController::RoutingError, "Not Found" unless @follow_up_questionnaire
+
           Decidim::DecidimAwesome.create_default_statuses!(@follow_up_questionnaire) if @follow_up_questionnaire.statuses.empty?
           @follow_up_questionnaire
         end
@@ -84,8 +82,7 @@ module Decidim
         def current_component
           return unless @follow_up_questionnaire
 
-          @current_component ||= FollowUpQuestionnairesFinder.new(current_organization)
-                                                             .component_for(@follow_up_questionnaire.questionnaire)
+          @current_component ||= @follow_up_questionnaire.component
         end
 
         def preview_response_path(participant)

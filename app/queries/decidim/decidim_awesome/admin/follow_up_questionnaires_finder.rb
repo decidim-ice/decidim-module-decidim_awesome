@@ -24,12 +24,6 @@ module Decidim
           component
         end
 
-        def configured_for_space(space)
-          Decidim::DecidimAwesome::FollowUpQuestionnaire.ordered.select do |fuq|
-            component_for(fuq.questionnaire)&.participatory_space == space
-          end
-        end
-
         private
 
         attr_reader :organization, :excluding

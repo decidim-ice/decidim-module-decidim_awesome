@@ -18,11 +18,13 @@ module Decidim
         #
         # Returns nothing.
         def call
+          return broadcast(:invalid, I18n.t("decidim.decidim_awesome.admin.follow_up_questionnaires.destroy.not_removable")) unless follow_up_questionnaire.removable?
+
           follow_up_questionnaire.destroy!
 
           broadcast(:ok)
-        rescue StandardError => e
-          broadcast(:invalid, e.message)
+        rescue StandardError
+          broadcast(:invalid, I18n.t("decidim.decidim_awesome.admin.follow_up_questionnaires.destroy.unexpected_error"))
         end
 
         private

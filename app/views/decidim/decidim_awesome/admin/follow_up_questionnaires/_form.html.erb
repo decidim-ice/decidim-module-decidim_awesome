@@ -5,14 +5,18 @@
       <div class="row column">
         <%= form.translated :text_field, :name, class: "h-12 w-full", help_text: t(".name_help") %>
       </div>
+      <% questionnaire_editable = @follow_up_questionnaire.nil? || @follow_up_questionnaire.questionnaire_editable? %>
+      <% unless questionnaire_editable %>
+        <%= cell("decidim/announcement", t(".questionnaire_locked"), callout_class: "warning") %>
+      <% end %>
       <div class="row column">
-        <%= form.select :decidim_questionnaire_id, grouped_options_for_select(grouped_questionnaire_options(@available_questionnaires), form.object.decidim_questionnaire_id), { include_blank: t(".select_questionnaire_placeholder") } %>
+        <%= form.select :decidim_questionnaire_id, grouped_options_for_select(grouped_questionnaire_options(available_questionnaires), form.object.decidim_questionnaire_id), { include_blank: t(".select_questionnaire_placeholder") }, disabled: !questionnaire_editable %>
       </div>
       <div class="row column">
         <%= form.text_field :position, class: "w-full" %>
       </div>
-      <div id="responder-fields-wrapper" data-questions="<%= questionnaires_questions_data(@available_questionnaires).to_json %>">
-        <%= render "responder_fields", questionnaire: @questionnaire, form: @form %>
+      <div id="responder-fields-wrapper" data-questions="<%= questionnaires_questions_data(available_questionnaires).to_json %>">
+        <%= render "responder_fields", questionnaire: selected_questionnaire, form: @form %>
       </div>
       <div class="row column">
         <%= render "decidim/decidim_awesome/admin/follow_up_questionnaire_statuses/table", follow_up_questionnaire_id: follow_up_questionnaire_id, statuses: @follow_up_questionnaire&.statuses %>

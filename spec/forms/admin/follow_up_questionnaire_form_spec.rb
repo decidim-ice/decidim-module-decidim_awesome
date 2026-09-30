@@ -8,7 +8,9 @@ module Decidim::DecidimAwesome
       subject { described_class.from_params(attributes).with_context(current_organization: organization, existing_questionnaire_ids:) }
 
       let(:organization) { create(:organization) }
+      let(:component) { create(:component, manifest_name: "surveys", organization:) }
       let(:questionnaire) { create(:questionnaire) }
+      let!(:survey) { create(:survey, component:, questionnaire:) }
       let(:existing_questionnaire_ids) { [] }
       let(:attributes) do
         {
@@ -48,6 +50,18 @@ module Decidim::DecidimAwesome
 
       context "when position is negative" do
         let(:attributes) { super().merge(position: -1) }
+
+        it { is_expected.not_to be_valid }
+      end
+
+      context "when the questionnaire belongs to another organization" do
+        let(:component) { create(:component, manifest_name: "surveys", organization: create(:organization)) }
+
+        it { is_expected.not_to be_valid }
+      end
+
+      context "when the questionnaire does not belong to any component" do
+        let!(:survey) { nil }
 
         it { is_expected.not_to be_valid }
       end

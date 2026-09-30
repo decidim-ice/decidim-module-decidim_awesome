@@ -11,7 +11,7 @@ module Decidim
           return permission_action unless user
 
           if permission_action.subject == :follow_up_questionnaire_messages
-            apply_follow_up_questionnaire_message_permissions!
+            apply_follow_up_questionnaire_message_permissions! if config_enabled?(:follow_up_questionnaires)
             return permission_action
           end
 

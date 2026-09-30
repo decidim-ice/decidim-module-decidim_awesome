@@ -10,7 +10,7 @@ module Decidim::DecidimAwesome
     let(:organization) { create(:organization) }
     let(:user) { create(:user, :confirmed, organization:) }
     let(:follow_up_questionnaire) do
-      Decidim::DecidimAwesome::FollowUpQuestionnaire.create!(decidim_questionnaire_id: create(:questionnaire).id, name: { "en" => "Follow up" })
+      create(:awesome_follow_up_questionnaire, questionnaire: create(:questionnaire), name: { "en" => "Follow up" }, organization:)
     end
     let(:status) do
       Decidim::DecidimAwesome.create_default_statuses!(follow_up_questionnaire)

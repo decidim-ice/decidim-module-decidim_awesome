@@ -20,7 +20,7 @@ module Decidim
         def call
           return broadcast(:invalid) if form.invalid?
 
-          follow_up_questionnaire = Decidim::DecidimAwesome::FollowUpQuestionnaire.new(form.to_params)
+          follow_up_questionnaire = Decidim::DecidimAwesome::FollowUpQuestionnaire.new(form.to_params.merge(organization: form.current_organization, component: form.component))
 
           if follow_up_questionnaire.save
             broadcast(:ok, follow_up_questionnaire)

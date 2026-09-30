@@ -190,6 +190,20 @@ module Decidim::DecidimAwesome::Admin
           let(:user) { create(:process_admin, participatory_process: space) }
 
           it { is_expected.to be true }
+
+          context "when follow_up_questionnaires is disabled" do
+            before { allow(Decidim::DecidimAwesome.config).to receive(:follow_up_questionnaires).and_return(:disabled) }
+
+            it_behaves_like "permission is not set"
+          end
+        end
+
+        context "when the user is an organization admin and follow_up_questionnaires is disabled" do
+          let(:user) { create(:user, :admin, :confirmed, organization:) }
+
+          before { allow(Decidim::DecidimAwesome.config).to receive(:follow_up_questionnaires).and_return(:disabled) }
+
+          it_behaves_like "permission is not set"
         end
 
         context "when the user has no role in the participatory process" do

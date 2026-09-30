@@ -23,6 +23,10 @@ module Decidim
       validates :name, presence: true, uniqueness: { scope: :follow_up_questionnaire_id }
       validates :color, presence: true
 
+      def removable?
+        messages.none?
+      end
+
       def self.log_presenter_class_for(_log)
         Decidim::DecidimAwesome::AdminLog::FollowUpQuestionnaireStatusPresenter
       end

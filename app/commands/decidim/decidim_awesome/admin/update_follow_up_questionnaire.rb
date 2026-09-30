@@ -23,7 +23,7 @@ module Decidim
         def call
           return broadcast(:invalid) if form.invalid?
 
-          if follow_up_questionnaire.update(form.to_params)
+          if follow_up_questionnaire.update(attributes)
             broadcast(:ok, follow_up_questionnaire)
           else
             broadcast(:invalid, follow_up_questionnaire.errors.full_messages.join(", "))
@@ -35,6 +35,12 @@ module Decidim
         private
 
         attr_reader :form, :follow_up_questionnaire
+
+        def attributes
+          return form.to_params.merge(component: form.component) if follow_up_questionnaire.questionnaire_editable?
+
+          form.to_params.except(:decidim_questionnaire_id)
+        end
       end
     end
   end

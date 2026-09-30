@@ -14,7 +14,7 @@ module Decidim::DecidimAwesome
       let(:questionnaire) { create(:questionnaire) }
       let!(:survey) { create(:survey, component:, questionnaire:) }
       let!(:follow_up_questionnaire) do
-        Decidim::DecidimAwesome::FollowUpQuestionnaire.create!(decidim_questionnaire_id: questionnaire.id, name: { "en" => "Follow up" })
+        create(:awesome_follow_up_questionnaire, questionnaire: questionnaire, name: { "en" => "Follow up" }, organization:)
       end
       let!(:status) do
         Decidim::DecidimAwesome.create_default_statuses!(follow_up_questionnaire)
@@ -111,6 +111,24 @@ module Decidim::DecidimAwesome
               expect(Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.last.body).to be_blank
             end
           end
+        end
+      end
+
+      context "when the follow up questionnaire belongs to another organization" do
+        let!(:other_follow_up_questionnaire) { create(:awesome_follow_up_questionnaire, organization: create(:organization)) }
+
+        it "raises a routing error" do
+          expect { get :index, params: { follow_up_questionnaire_id: other_follow_up_questionnaire.decidim_questionnaire_id } }
+            .to raise_error(ActionController::RoutingError)
+        end
+      end
+
+      context "when the survey component is trashed" do
+        before { component.destroy! }
+
+        it "raises a routing error" do
+          expect { get :index, params: { follow_up_questionnaire_id: follow_up_questionnaire.decidim_questionnaire_id } }
+            .to raise_error(ActionController::RoutingError)
         end
       end
 

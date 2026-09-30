@@ -220,11 +220,11 @@ module Decidim
           Decidim::DecidimAwesome.follow_up_questionnaires_parent_menus.each_value do |parent_menu|
             Decidim.menu parent_menu do |menu|
               next unless defined?(current_participatory_space) && current_participatory_space
+              next unless Decidim::DecidimAwesome::Menu.config_enabled?(:follow_up_questionnaires)
 
-              finder = Decidim::DecidimAwesome::Admin::FollowUpQuestionnairesFinder.new(current_organization)
               allowed = Decidim::DecidimAwesome::Menu.follow_up_questionnaire_messages_allowed?(current_user, current_participatory_space)
 
-              finder.configured_for_space(current_participatory_space).each do |fuq|
+              Decidim::DecidimAwesome::FollowUpQuestionnaire.for_space(current_participatory_space).ordered.each do |fuq|
                 menu.add_item :"follow_up_questionnaire_#{fuq.id}",
                               translated_attribute(fuq.name),
                               decidim_admin_decidim_awesome.follow_up_questionnaire_messages_path(fuq.decidim_questionnaire_id),

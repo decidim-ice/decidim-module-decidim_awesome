@@ -1084,6 +1084,7 @@ en:
             error: Error creating label! %{error}
             success: Label created successfully
           destroy:
+            not_removable: This label is used in messages and cannot be removed.
             success: Label removed successfully
           edit:
             save: Save
@@ -1099,6 +1100,7 @@ en:
             edit: Edit
             labels_title: Labels
             new: New label
+            not_removable: This label is used in messages and cannot be removed.
             remove: Remove
           update:
             error: Error updating label! %{error}
@@ -1109,7 +1111,10 @@ en:
             success: Follow-up questionnaire created successfully
           destroy:
             error: Error removing follow-up questionnaire! %{error}
+            not_removable: It has messages sent to respondents and cannot be removed.
+              Deactivate it instead.
             success: Follow-up questionnaire removed successfully
+            unexpected_error: There was a problem removing it.
           edit:
             save: Save
             title: Follow-up questionnaire
@@ -1117,6 +1122,8 @@ en:
             anonymous_option_flag: anonymous, no questions
             name_help: In the participatory space, you will see this name as a new
               item menu where to handle the responses
+            questionnaire_locked: This follow-up already has messages sent to respondents,
+              so its survey cannot be changed.
             responder_email_help: This field will be used to find and email where
               to respond to. If the questionnaire is not anonymous, you can skip this
               part and the user will be used instead
@@ -1133,6 +1140,8 @@ en:
             edit: Edit
             manage_responses: Manage responses
             new: New follow-up
+            not_removable: It has messages sent to respondents and cannot be removed.
+              Deactivate it instead.
             remove: Remove
           new:
             save: Save
@@ -1483,7 +1492,7 @@ en:
         notification:
           default_name: there
           greeting: Hi %{name},
-          intro: You have received a new message regarding your submission to "%{questionnaire}:"
+          intro: 'You have received a new message regarding your submission to "%{questionnaire}":'
           outro: Thank you for your participation.
           status_updated: Status updated to "%{status}".
           subject: New message to your submission to "%{questionnaire}"

@@ -16,6 +16,7 @@ module Decidim
         validates :name, translatable_presence: true
         validates :decidim_questionnaire_id, presence: true, numericality: { only_integer: true }
         validates :position, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+        validate :questionnaire_belongs_to_organization, if: -> { decidim_questionnaire_id.present? }
         validate :questionnaire_not_already_configured, if: -> { decidim_questionnaire_id.present? }
 
         def map_model(model)
@@ -37,7 +38,19 @@ module Decidim
           }
         end
 
+        # The component of the survey the questionnaire belongs to, if it is in the current organization
+        def component
+          return @component if defined?(@component)
+
+          questionnaire = Decidim::Forms::Questionnaire.find_by(id: decidim_questionnaire_id)
+          @component = questionnaire && FollowUpQuestionnairesFinder.new(current_organization).component_for(questionnaire)
+        end
+
         private
+
+        def questionnaire_belongs_to_organization
+          errors.add(:decidim_questionnaire_id, :invalid) if component.blank?
+        end
 
         def questionnaire_not_already_configured
           return unless context[:existing_questionnaire_ids]&.include?(decidim_questionnaire_id)

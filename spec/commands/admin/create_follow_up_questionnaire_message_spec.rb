@@ -16,7 +16,7 @@ module Decidim::DecidimAwesome
       let(:questionnaire) { create(:questionnaire) }
       let!(:survey) { create(:survey, component:, questionnaire:) }
       let(:follow_up_questionnaire) do
-        Decidim::DecidimAwesome::FollowUpQuestionnaire.create!(decidim_questionnaire_id: questionnaire.id, name: { "en" => "Follow up" })
+        create(:awesome_follow_up_questionnaire, questionnaire: questionnaire, name: { "en" => "Follow up" }, organization:)
       end
       let(:statuses) do
         Decidim::DecidimAwesome.create_default_statuses!(follow_up_questionnaire)
@@ -174,7 +174,7 @@ module Decidim::DecidimAwesome
 
       context "when the status does not belong to the questionnaire" do
         let(:other_follow_up_questionnaire) do
-          Decidim::DecidimAwesome::FollowUpQuestionnaire.create!(decidim_questionnaire_id: create(:questionnaire).id, name: { "en" => "Other" })
+          create(:awesome_follow_up_questionnaire, questionnaire: create(:questionnaire), name: { "en" => "Other" }, organization:)
         end
         let(:other_status) do
           Decidim::DecidimAwesome.create_default_statuses!(other_follow_up_questionnaire)

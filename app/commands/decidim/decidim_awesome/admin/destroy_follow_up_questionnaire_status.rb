@@ -6,6 +6,8 @@ module Decidim
       class DestroyFollowUpQuestionnaireStatus < Decidim::Commands::DestroyResource
         protected
 
+        def invalid? = !resource.removable?
+
         def extra_params
           questionnaire = resource.follow_up_questionnaire
           {
