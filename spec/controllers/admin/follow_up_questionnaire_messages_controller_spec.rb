@@ -44,8 +44,12 @@ module Decidim::DecidimAwesome
       end
 
       describe "GET #new" do
+        let(:respondent) { create(:user, :confirmed, organization:) }
+
+        before { create(:response, questionnaire:, question: create(:questionnaire_question, questionnaire:), user: respondent) }
+
         it "returns http success" do
-          get :new, params: { follow_up_questionnaire_id: follow_up_questionnaire.decidim_questionnaire_id }
+          get :new, params: { follow_up_questionnaire_id: follow_up_questionnaire.decidim_questionnaire_id, decidim_user_id: respondent.id }
 
           expect(response).to have_http_status(:success)
           expect(assigns(:form).follow_up_questionnaire_id).to eq(follow_up_questionnaire.id)
@@ -65,6 +69,8 @@ module Decidim::DecidimAwesome
             }
           }
         end
+
+        before { create(:response, questionnaire:, question: create(:questionnaire_question, questionnaire:), user: respondent) }
 
         it "creates the message" do
           expect { post :create, params: params }.to change(Decidim::DecidimAwesome::FollowUpQuestionnaireMessage, :count).by(1)

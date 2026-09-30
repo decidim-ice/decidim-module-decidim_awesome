@@ -65,9 +65,12 @@ module Decidim
 
         def destroy
           @follow_up_questionnaire = existing_follow_up_questionnaire!
-          DestroyFollowUpQuestionnaire.call(@follow_up_questionnaire) do
+          error_key = @follow_up_questionnaire.removable? ? "unexpected_error" : "not_removable"
+          error_message = I18n.t("follow_up_questionnaires.destroy.#{error_key}", scope: "decidim.decidim_awesome.admin")
+
+          DestroyFollowUpQuestionnaire.call(@follow_up_questionnaire, current_user) do
             on(:ok) { flash[:notice] = I18n.t("follow_up_questionnaires.destroy.success", scope: "decidim.decidim_awesome.admin") }
-            on(:invalid) { |error_message| flash[:alert] = I18n.t("follow_up_questionnaires.destroy.error", scope: "decidim.decidim_awesome.admin", error: error_message) }
+            on(:invalid) { flash[:alert] = I18n.t("follow_up_questionnaires.destroy.error", scope: "decidim.decidim_awesome.admin", error: error_message) }
           end
           redirect_to decidim_admin_decidim_awesome.follow_up_questionnaires_path
         end

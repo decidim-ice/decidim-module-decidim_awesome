@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class CreateFollowUpQuestionnaireMessage < Command
         include Decidim::MultipleAttachmentsMethods
+        include Decidim::TranslatableAttributes
 
         def initialize(form)
           @form = form
@@ -40,14 +41,27 @@ module Decidim
         end
 
         def create_message
-          @message = Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(
-            follow_up_questionnaire_id: form.follow_up_questionnaire_id,
-            status_id: form.status_id,
-            body: form.body.to_s.strip.presence,
-            author: selected_author,
-            decidim_user_id: form.decidim_user_id,
-            session_token: form.session_token
+          # The admin log keeps who really sent the message, which may differ from the chosen author
+          @message = Decidim.traceability.create!(
+            Decidim::DecidimAwesome::FollowUpQuestionnaireMessage,
+            form.current_user,
+            {
+              follow_up_questionnaire_id: form.follow_up_questionnaire_id,
+              status_id: form.status_id,
+              body: form.body.to_s.strip.presence,
+              author: selected_author,
+              decidim_user_id: form.decidim_user_id,
+              session_token: form.session_token
+            },
+            resource: log_resource_params
           )
+        end
+
+        def log_resource_params
+          follow_up_questionnaire = Decidim::DecidimAwesome::FollowUpQuestionnaire.find(form.follow_up_questionnaire_id)
+          params = { follow_up_questionnaire_name: translated_attribute(follow_up_questionnaire.name) }
+          params[:author_name] = selected_author.name if selected_author && selected_author != form.current_user
+          params
         end
 
         def selected_author

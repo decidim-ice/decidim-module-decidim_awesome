@@ -3,19 +3,27 @@
 module Decidim
   module DecidimAwesome
     module Admin
-      class FollowUpQuestionnaireMessagesController < DecidimAwesome::Admin::ApplicationController
+      # Space admins manage the messages of their own spaces, so this controller does not inherit
+      # the organization admin check of DecidimAwesome::Admin::ApplicationController
+      class FollowUpQuestionnaireMessagesController < Decidim::Admin::ApplicationController
         include Decidim::Paginable
         include Decidim::TranslatableAttributes
         include BreadcrumbHelpers
 
         before_action :follow_up_questionnaire
         before_action :enforce_messages_permission!
+        before_action :participant, only: [:new, :create]
         before_action :set_follow_up_questionnaire_breadcrumb, only: [:index, :new, :create]
 
         helper_method :current_participatory_space, :respondent_details, :preview_response_path, :reply_to_email
 
+        layout "decidim/decidim_awesome/admin/application"
+
+        # Like the admin controllers of each space type, only the permissions of the current space are used.
+        # Adding every space type makes the ones of other spaces deny what the current one allowed.
         def permission_class_chain
-          Decidim.participatory_space_manifests.filter_map(&:permissions_class) + super
+          space_permissions = current_participatory_space&.manifest&.permissions_class
+          [::Decidim::DecidimAwesome::Admin::Permissions, space_permissions].compact + super
         end
 
         # i18n-tasks-use t("decidim.decidim_awesome.admin.follow_up_questionnaire_messages.index.last_action_answered")
@@ -37,8 +45,7 @@ module Decidim
           )
           @form.follow_up_questionnaire_id = @follow_up_questionnaire.id
           @form.author_id = current_user.id
-          @form.decidim_user_id = params[:decidim_user_id]
-          @form.session_token = params[:session_token]
+          assign_recipient
           @form.status_id = @messages.first&.status_id
         end
 
@@ -50,6 +57,7 @@ module Decidim
             current_participatory_space: current_participatory_space
           )
           @form.follow_up_questionnaire_id = @follow_up_questionnaire.id
+          assign_recipient
 
           CreateFollowUpQuestionnaireMessage.call(@form) do
             on(:ok) do
@@ -93,7 +101,7 @@ module Decidim
         end
 
         def reply_to_email
-          FollowUpQuestionnaireMessageMailer.reply_to_email(current_organization)
+          @follow_up_questionnaire.reply_to.presence
         end
 
         def enforce_messages_permission!
@@ -104,12 +112,36 @@ module Decidim
           respondents_finder.respondent_for(decidim_user_id: participant.decidim_user_id, session_token: participant.session_token)
         end
 
+        # The response of the recipient to the questionnaire, like Decidim::Forms::QuestionnaireParticipants#participant.
+        # The ids received are only used to find it, so nobody who did not respond can be messaged.
+        def participant
+          @participant ||= begin
+            participants = Decidim::Forms::QuestionnaireParticipants.new(@follow_up_questionnaire.questionnaire)
+            response = if recipient_params[:decidim_user_id].present?
+                         participants.query.find_by(decidim_user_id: recipient_params[:decidim_user_id])
+                       elsif recipient_params[:session_token].present?
+                         participants.participant(recipient_params[:session_token])
+                       end
+            response || raise(ActionController::RoutingError, "Not Found")
+          end
+        end
+
+        # In create the recipient comes in the form hidden fields
+        def recipient_params
+          action_name == "create" ? params.fetch(:follow_up_questionnaire_message, {}) : params
+        end
+
+        def assign_recipient
+          @form.decidim_user_id = participant.decidim_user_id
+          @form.session_token = participant.session_token
+        end
+
         def messages_for_respondent
           scope = @follow_up_questionnaire.messages
-          scope = if params[:decidim_user_id].present?
-                    scope.where(decidim_user_id: params[:decidim_user_id])
+          scope = if participant.decidim_user_id.present?
+                    scope.where(decidim_user_id: participant.decidim_user_id)
                   else
-                    scope.where(session_token: params[:session_token])
+                    scope.where(session_token: participant.session_token)
                   end
           scope.recent
         end
@@ -120,16 +152,16 @@ module Decidim
 
         def assign_reply_view_variables
           @messages = messages_for_respondent
-          @respondent = respondents_finder.respondent_for(decidim_user_id: params[:decidim_user_id], session_token: params[:session_token])
+          @respondent = respondent_details(participant)
           @submitted_at = original_submission_at
         end
 
         def original_submission_at
           scope = Decidim::Forms::Response.where(questionnaire: @follow_up_questionnaire.questionnaire)
-          scope = if params[:decidim_user_id].present?
-                    scope.where(decidim_user_id: params[:decidim_user_id])
+          scope = if participant.decidim_user_id.present?
+                    scope.where(decidim_user_id: participant.decidim_user_id)
                   else
-                    scope.where(session_token: params[:session_token])
+                    scope.where(session_token: participant.session_token)
                   end
           scope.minimum(:created_at)
         end

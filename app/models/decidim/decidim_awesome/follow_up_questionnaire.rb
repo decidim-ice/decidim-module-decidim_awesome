@@ -3,6 +3,7 @@
 module Decidim
   module DecidimAwesome
     class FollowUpQuestionnaire < ApplicationRecord
+      include Decidim::Traceable
       include Decidim::TranslatableAttributes
       include Decidim::TranslatableResource
 
@@ -54,6 +55,10 @@ module Decidim
       # Messages belong to the respondents of the linked survey, so it cannot be changed once there are any
       def questionnaire_editable?
         new_record? || messages.none?
+      end
+
+      def self.log_presenter_class_for(_log)
+        Decidim::DecidimAwesome::AdminLog::FollowUpQuestionnairePresenter
       end
 
       def number_of_responses

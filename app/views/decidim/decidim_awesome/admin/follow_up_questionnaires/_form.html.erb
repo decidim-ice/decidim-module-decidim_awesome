@@ -15,6 +15,9 @@
       <div class="row column">
         <%= form.text_field :position, class: "w-full" %>
       </div>
+      <div class="row column">
+        <%= form.email_field :reply_to, class: "w-full", help_text: t(".reply_to_help") %>
+      </div>
       <div id="responder-fields-wrapper" data-questions="<%= questionnaires_questions_data(available_questionnaires).to_json %>">
         <%= render "responder_fields", questionnaire: selected_questionnaire, form: @form %>
       </div>

@@ -32,6 +32,7 @@ module Decidim::DecidimAwesome
           position: 0,
           responder_name_field: "full_name",
           responder_email_field: "email",
+          reply_to: nil,
           active: true
         )
       end

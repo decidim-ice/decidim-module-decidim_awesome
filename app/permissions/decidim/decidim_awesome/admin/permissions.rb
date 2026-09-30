@@ -15,11 +15,6 @@ module Decidim
             return permission_action
           end
 
-          if permission_action.action == :update && permission_action.subject == :organization
-            allow! if user.read_attribute("admin").present? || user_administrator?
-            return permission_action
-          end
-
           return permission_action if user.read_attribute("admin").blank?
           return permission_action unless permission_action.action == :edit_config
 
@@ -39,10 +34,6 @@ module Decidim
         end
 
         private
-
-        def user_administrator?
-          DecidimAwesome.participatory_space_roles.any? { |role_class_name| space_admin?(role_class_name) }
-        end
 
         def apply_follow_up_questionnaire_message_permissions!
           return allow! if user.read_attribute("admin").present?

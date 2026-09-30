@@ -60,11 +60,21 @@ module Decidim::DecidimAwesome
           expect(message.decidim_user_id).to eq(respondent.id)
         end
 
-        it "notifies the respondent by email" do
+        it "notifies the respondent by email without a Reply-To" do
           expect { subject.call }.to have_enqueued_job(ActionMailer::MailDeliveryJob)
 
           perform_enqueued_jobs
-          expect(ActionMailer::Base.deliveries.last.reply_to).to eq([FollowUpQuestionnaireMessageMailer.reply_to_email(organization)])
+          expect(ActionMailer::Base.deliveries.last.reply_to).to be_nil
+        end
+
+        context "when the follow up questionnaire has a Reply-To email" do
+          before { follow_up_questionnaire.update!(reply_to: "replies@example.org") }
+
+          it "uses it as the Reply-To of the email" do
+            subject.call
+            perform_enqueued_jobs
+            expect(ActionMailer::Base.deliveries.last.reply_to).to eq(["replies@example.org"])
+          end
         end
 
         context "and the respondent cannot be identified" do

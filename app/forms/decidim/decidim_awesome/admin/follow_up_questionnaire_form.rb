@@ -11,11 +11,13 @@ module Decidim
         attribute :position, Integer, default: 0
         attribute :responder_name_field, String
         attribute :responder_email_field, String
+        attribute :reply_to, String
         attribute :active, Boolean, default: true
 
         validates :name, translatable_presence: true
         validates :decidim_questionnaire_id, presence: true, numericality: { only_integer: true }
         validates :position, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+        validates :reply_to, "valid_email_2/email": true, allow_blank: true
         validate :questionnaire_belongs_to_organization, if: -> { decidim_questionnaire_id.present? }
         validate :questionnaire_not_already_configured, if: -> { decidim_questionnaire_id.present? }
 
@@ -24,6 +26,7 @@ module Decidim
           self.position = model.position
           self.responder_name_field = model.responder_name_field
           self.responder_email_field = model.responder_email_field
+          self.reply_to = model.reply_to
           self.active = model.active if model.respond_to?(:active)
         end
 
@@ -34,6 +37,7 @@ module Decidim
             :position => position,
             :responder_name_field => responder_name_field,
             :responder_email_field => responder_email_field,
+            :reply_to => reply_to.presence,
             :active => active
           }
         end

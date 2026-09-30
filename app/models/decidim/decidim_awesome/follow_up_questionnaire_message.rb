@@ -4,6 +4,7 @@ module Decidim
   module DecidimAwesome
     class FollowUpQuestionnaireMessage < ApplicationRecord
       include Decidim::HasAttachments
+      include Decidim::Traceable
       include Decidim::TranslatableAttributes
 
       self.table_name = "decidim_awesome_follow_up_questionnaire_messages"
@@ -29,6 +30,10 @@ module Decidim
         return unless questionnaire_for.respond_to?(:component)
 
         questionnaire_for.component&.organization
+      end
+
+      def self.log_presenter_class_for(_log)
+        Decidim::DecidimAwesome::AdminLog::FollowUpQuestionnaireMessagePresenter
       end
 
       def attachment_context

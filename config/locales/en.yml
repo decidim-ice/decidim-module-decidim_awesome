@@ -87,6 +87,11 @@ en:
         origin: Origin
         pass_query: Pass the query string to the destination
         status: Status
+      follow_up_questionnaire:
+        active: Active
+        name: Name
+        position: Position
+        reply_to: Reply-To email
       follow_up_questionnaire_messages:
         id: ID
         last_action: Last action
@@ -1071,6 +1076,8 @@ en:
             new_reply_help_text: Send a message to the responder. The message will
               be sent with "Reply-to" set to %{email}. Direct replies to that email
               won't be collected here.
+            new_reply_no_reply_to_help_text: Send a message to the responder. Participants
+              cannot reply to this email, as it is sent without a Reply-To address.
             send_message: Send
             submitted_at: Submitted on %{date}
             title: Manage messages
@@ -1124,6 +1131,9 @@ en:
               item menu where to handle the responses
             questionnaire_locked: This follow-up already has messages sent to respondents,
               so its survey cannot be changed.
+            reply_to_help: Optional. Participants' replies to the notification emails
+              will go to this address. Leave it empty to send the emails without a
+              Reply-To.
             responder_email_help: This field will be used to find and email where
               to respond to. If the questionnaire is not anonymous, you can skip this
               part and the user will be used instead
@@ -1310,6 +1320,14 @@ en:
         component:
           destroy_private_data: "%{user_name} destroyed %{count} items of private
             data for %{resource_name} in %{space_name}"
+        follow_up_questionnaire:
+          create: "%{user_name} created the follow-up questionnaire %{questionnaire_name}"
+          delete: "%{user_name} removed the follow-up questionnaire %{questionnaire_name}"
+          update: "%{user_name} updated the follow-up questionnaire %{questionnaire_name}"
+        follow_up_questionnaire_message:
+          create: "%{user_name} sent a message in the follow-up questionnaire %{questionnaire_name}"
+          create_as: "%{user_name} sent a message as %{author_name} in the follow-up
+            questionnaire %{questionnaire_name}"
         follow_up_questionnaire_status:
           create: "%{user_name} created a new label %{label_name} for the follow-up
             questionnaire %{questionnaire_name}"

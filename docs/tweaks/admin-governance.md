@@ -123,6 +123,7 @@ Useful when a survey needs manual follow-up. Admins with a role in a participato
 
 - **Default behavior:** Enabled by default; `:disabled` removes it entirely (the follow-up questionnaires list, their statuses, the space menu entries and the responses and messages pages)
 - **Access control:** The menu entry per space is only shown to users holding an `admin` role for that specific space
+- **Reply-To:** Each follow-up questionnaire has an optional Reply-To email. When set, participants' replies to the notification emails go to that address; when empty, the emails are sent without a Reply-To, like other Decidim emails
 
 ```ruby
 # config/initializers/awesome_defaults.rb

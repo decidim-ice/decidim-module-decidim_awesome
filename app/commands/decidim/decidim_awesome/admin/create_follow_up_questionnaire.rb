@@ -3,37 +3,20 @@
 module Decidim
   module DecidimAwesome
     module Admin
-      class CreateFollowUpQuestionnaire < Decidim::Command
-        # Public: Initializes the command.
-        #
-        # form - A form object with the params.
-        def initialize(form)
-          @form = form
+      class CreateFollowUpQuestionnaire < Decidim::Commands::CreateResource
+        include Decidim::TranslatableAttributes
+
+        protected
+
+        def resource_class = Decidim::DecidimAwesome::FollowUpQuestionnaire
+
+        def attributes
+          form.to_params.merge(organization: form.current_organization, component: form.component)
         end
 
-        # Executes the command. Broadcasts these events:
-        #
-        # - :ok when everything is valid.
-        # - :invalid if the form or the record could not be saved.
-        #
-        # Returns nothing.
-        def call
-          return broadcast(:invalid) if form.invalid?
-
-          follow_up_questionnaire = Decidim::DecidimAwesome::FollowUpQuestionnaire.new(form.to_params.merge(organization: form.current_organization, component: form.component))
-
-          if follow_up_questionnaire.save
-            broadcast(:ok, follow_up_questionnaire)
-          else
-            broadcast(:invalid, follow_up_questionnaire.errors.full_messages.join(", "))
-          end
-        rescue StandardError => e
-          broadcast(:invalid, e.message)
+        def extra_params
+          { resource: { follow_up_questionnaire_name: translated_attribute(form.name) } }
         end
-
-        private
-
-        attr_reader :form
       end
     end
   end
