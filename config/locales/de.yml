@@ -1351,6 +1351,7 @@ de:
             not_answered: (nicht beantwortet)
             not_processable: Kein Befragter - Nicht bearbeitbar
             see_full_responses: Vollständige Antworten anzeigen
+            view_survey: Vorschau
           new:
             anonymous_respondent: Anonyme Befragte
             messages_count:

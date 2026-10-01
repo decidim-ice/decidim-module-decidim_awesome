@@ -1414,6 +1414,7 @@ es:
             not_answered: (sin responder)
             not_processable: Sin persona respondente - No procesable
             see_full_responses: Ver respuestas completas
+            view_survey: Vista previa
           new:
             anonymous_respondent: Persona respondente anónima
             messages_count:

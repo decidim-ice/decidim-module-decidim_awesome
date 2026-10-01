@@ -1423,6 +1423,7 @@ ca:
             not_answered: (sense resposta)
             not_processable: Sense participant - No processable
             see_full_responses: Veure respostes completes
+            view_survey: Vista prèvia
           new:
             anonymous_respondent: Participant anònim
             messages_count:

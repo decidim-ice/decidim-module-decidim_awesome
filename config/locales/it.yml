@@ -1400,6 +1400,7 @@ it:
             not_answered: (non risposto)
             not_processable: Nessun rispondente - Non processabile
             see_full_responses: Vedi tutte le risposte
+            view_survey: Anteprima
           new:
             anonymous_respondent: Rispondente anonimo
             messages_count:

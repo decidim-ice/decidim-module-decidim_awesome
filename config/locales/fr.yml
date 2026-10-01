@@ -1433,6 +1433,7 @@ fr:
             not_answered: (non répondu)
             not_processable: Aucun répondant - Non traitable
             see_full_responses: Voir les réponses complètes
+            view_survey: Aperçu
           new:
             anonymous_respondent: Répondant anonyme
             messages_count:
@@ -1837,10 +1838,6 @@ fr:
       show:
         admin_actions: Actions administrateur
         awesome_private_proposals: Exportation des propositions avec champs privés
-    editor_images:
-      create:
-        error: Impossible de charger l'image.
-        success: Image chargée avec succès.
     meetings:
       meetings_map:
         view_meeting: Voir la rencontre
