@@ -4,9 +4,10 @@ module Decidim
   module DecidimAwesome
     module Admin
       # Resolves the name/email/processability of follow-up questionnaire respondents.
-      # Registered users are resolved through their Decidim::User account; anonymous
-      # respondents are resolved through the questionnaire's configured responder
-      # name/email questions. Response lookups are memoized so building many
+      # The questionnaire's configured responder name/email questions are used first;
+      # registered users fall back to their Decidim::User account for any missing
+      # value. Responses are matched by session token, like Decidim::Forms::QuestionnaireParticipants.
+      # Response lookups are memoized so building many
       # respondents from the same instance only queries the responses once.
       class FollowUpQuestionnaireRespondentsFinder
         include Decidim::TranslatableAttributes
@@ -22,14 +23,11 @@ module Decidim
         end
 
         def respondent_for(decidim_user_id: nil, session_token: nil)
-          if decidim_user_id.present?
-            user = Decidim::User.find_by(id: decidim_user_id)
-            return Respondent.new(name: user&.name, email: user&.email, processable: user.present?)
-          end
-
-          name = response_body(follow_up_questionnaire.responder_name_field, session_token, name_responses)
-          email = response_body(follow_up_questionnaire.responder_email_field, session_token, email_responses)
-          Respondent.new(name:, email:, processable: name.present? || email.present?)
+          user = Decidim::User.find_by(id: decidim_user_id) if decidim_user_id.present?
+          # The configured responder questions take precedence, the user account is the fallback
+          name = response_body(follow_up_questionnaire.responder_name_field, session_token, name_responses).presence || user&.name
+          email = response_body(follow_up_questionnaire.responder_email_field, session_token, email_responses).presence || user&.email
+          Respondent.new(name:, email:, processable: user.present? || name.present? || email.present?)
         end
 
         private
@@ -48,7 +46,7 @@ module Decidim
           return {} if question_id.blank?
 
           Decidim::Forms::Response.where(questionnaire: follow_up_questionnaire.questionnaire, decidim_question_id: question_id)
-                                  .index_by { |response| response.decidim_user_id || response.session_token }
+                                  .index_by(&:session_token)
         end
 
         def response_body(question_id, session_token, responses)

@@ -1,6 +1,13 @@
 <div class="item_show__header">
   <h2 class="item_show__header-title">
     <%= translated_attribute(@follow_up_questionnaire.name) %> > <%= translated_attribute(@questionnaire.title) %>
+    <% questionnaire_for = @questionnaire.questionnaire_for %>
+    <% if questionnaire_for.respond_to?(:resource_locator) || questionnaire_for.respond_to?(:resource_manifest) %>
+      <%= link_to resource_locator(questionnaire_for).path, class: "button button__xs button__transparent-secondary", target: :blank, data: { "external-link": false } do %>
+        <%= icon "eye-line", class: "inline-block" %>
+        <span class="whitespace-nowrap"><%= t(".view_survey") %></span>
+      <% end %>
+    <% end %>
   </h2>
 </div>
 

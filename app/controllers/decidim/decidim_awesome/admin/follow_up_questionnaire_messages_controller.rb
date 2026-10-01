@@ -10,6 +10,8 @@ module Decidim
         include Decidim::TranslatableAttributes
         include BreadcrumbHelpers
 
+        helper Decidim::ResourceHelper
+
         before_action :follow_up_questionnaire
         before_action :enforce_messages_permission!
         before_action :participant, only: [:new, :create]
