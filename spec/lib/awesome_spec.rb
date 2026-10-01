@@ -67,7 +67,7 @@ module Decidim
     end
 
     describe "#create_default_statuses!" do
-      let(:follow_up_questionnaire) { Decidim::DecidimAwesome::FollowUpQuestionnaire.create!(decidim_questionnaire_id: create(:questionnaire).id, name: { "en" => "Follow up" }) }
+      let(:follow_up_questionnaire) { create(:awesome_follow_up_questionnaire, questionnaire: create(:questionnaire), name: { "en" => "Follow up" }) }
 
       it "creates the default statuses for the questionnaire" do
         expect { subject.create_default_statuses!(follow_up_questionnaire) }.to change(follow_up_questionnaire.statuses, :count).by(3)

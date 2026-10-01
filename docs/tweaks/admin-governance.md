@@ -111,6 +111,35 @@ end
 
 ![Private data maintenance](../../examples/private_data.png)
 
+### 3.4 Follow up questionnaires
+
+Lets participatory space admins track questionnaire respondents through a status-based conversation, from the space's own admin panel.
+
+#### Admin description
+
+Useful when a survey needs manual follow-up. Admins with a role in a participatory process, assembly or conference get a "Follow up questionnaires" entry in that space's admin menu, to message respondents and set a status per respondent (Answered, In progress, Pending).
+
+#### Technical area
+
+- **Default behavior:** Enabled by default; `:disabled` removes it entirely (the follow-up questionnaires list, their statuses, the space menu entries and the responses and messages pages)
+- **Access control:** The menu entry per space is only shown to users holding an `admin` role for that specific space
+- **Reply-To:** Each follow-up questionnaire has an optional Reply-To email. When set, participants' replies to the notification emails go to that address; when empty, the emails are sent without a Reply-To, like other Decidim emails
+
+```ruby
+# config/initializers/awesome_defaults.rb
+Decidim::DecidimAwesome.configure do |config|
+  config.follow_up_questionnaires = true # default: true, or :disabled
+
+  # Admin menu registry for each participatory space type; add an entry here
+  # for custom participatory spaces
+  config.follow_up_questionnaires_parent_menus = {
+    "Decidim::ParticipatoryProcess" => :admin_participatory_process_menu,
+    "Decidim::Assembly" => :admin_assembly_menu,
+    "Decidim::Conference" => :conference_admin_menu
+  }
+end
+```
+
 ## Scope and operations
 
 - Review scope definitions regularly to avoid permission drift.

@@ -1,4 +1,3 @@
----
 de:
   active_hashcash:
     submit_filter: Filter
@@ -104,6 +103,27 @@ de:
           mit diesen Berechtigungen manuell zu verifizieren
       user:
         user_time_zone: Eigene Zeitzone
+      follow_up_questionnaire:
+        active: Aktiv
+        name: Name
+        position: Position
+        reply_to: Antwort-E-Mail
+      follow_up_questionnaire_messages:
+        id: ID
+        last_action: Letzte Aktion
+        messages_count: Anzahl der Nachrichten
+        respondent: Befragte Person
+        status: Status
+        submission_date: Eingangsdatum
+      follow_up_questionnaire_statuses:
+        color: Farbe
+        labels_color: Farbe der Etiketten
+        labels_id: Etiketten-ID
+        name: Name
+      follow_up_questionnaires:
+        name: Name
+        number_of_responses: Anzahl der Antworten
+        participatory_space: Partizipativer Raum > Fragebogen
     errors:
       models:
         cookie_item:
@@ -115,6 +135,11 @@ de:
                 kann nicht geändert werden
               invalid_format: Der Name darf nur Buchstaben, Zahlen, Bindestriche und
                 Unterstriche enthalten (keine Leerzeichen)
+        follow_up_questionnaire_message:
+          attributes:
+            body:
+              blank_without_status_change: muss vorhanden sein oder einen anderen
+                Status auswählen
   decidim:
     admin:
       actions:
@@ -268,7 +293,7 @@ de:
             see_spaces: Admins von partizipativen Räumen auflisten
             title: Admin-Verantwortung
           last_login: Letztes Anmeldedatum
-          missing_info: "(fehlende Informationen)"
+          missing_info: (fehlende Informationen)
           missing_user: Benutzer nicht in der Datenbank
           name: Name
           never_logged: Nie angemeldet
@@ -292,14 +317,15 @@ de:
           authorization_transferred: 'Warnung: Es gab einen Verifizierungskonflikt
             und die Verifizierung wurde an %{user} übertragen'
           conflict: Es gibt einen Konflikt mit einer bestehenden Autorisierung
-          conflict_help_html: "Sie müssen den Konflikt mit dem Benutzer %{user} lösen,
-            bevor Sie den Benutzer mit dieser Berechtigung autorisieren können.\n<br><br>\nEin
-            Verifizierungskonflikt tritt auf, wenn ein anderer Benutzer die gleichen
-            Daten hat wie der Benutzer, den Sie autorisieren möchten. \nSie können
-            diesen Konflikt lösen, indem Sie die widersprüchliche Autorisierung des
-            anderen Benutzers entfernen oder andere Daten für diesen Benutzer verwenden.\n"
+          conflict_help_html: "Sie müssen den Konflikt mit dem Benutzer %{user} lösen,\
+            \ bevor Sie den Benutzer mit dieser Berechtigung autorisieren können.\n\
+            <br><br>\nEin Verifizierungskonflikt tritt auf, wenn ein anderer Benutzer\
+            \ die gleichen Daten hat wie der Benutzer, den Sie autorisieren möchten.\
+            \ \nSie können diesen Konflikt lösen, indem Sie die widersprüchliche Autorisierung\
+            \ des anderen Benutzers entfernen oder andere Daten für diesen Benutzer\
+            \ verwenden.\n"
           edit:
-            authorize: "%{user} mit %{name} autorisieren"
+            authorize: '%{user} mit %{name} autorisieren'
             do_it_if_sure: Tun Sie dies nur, wenn Sie sicher sind, dass der Benutzer
               diese Berechtigung hat.
             force_verification: Verifizierung mit den aktuellen Daten erzwingen
@@ -310,8 +336,8 @@ de:
               zu erzwingen:'
             warning: 'Warnung: Indem Sie diese Autorisierung erzwingen, überschreiben
               Sie den aktuellen Autorisierungsstatus des Benutzers.'
-          user_authorized: "%{user} erfolgreich autorisiert mit %{name}"
-          user_not_authorized: "%{user} konnte nicht mit %{name} autorisiert werden"
+          user_authorized: '%{user} erfolgreich autorisiert mit %{name}'
+          user_not_authorized: '%{user} konnte nicht mit %{name} autorisiert werden'
         awesome_authorization_properties:
           create:
             error: Fehler beim Aktualisieren der Autorisierungseigenschaften! %{error}
@@ -502,16 +528,26 @@ de:
                 falls Benutzer Hilfe benötigen.
               hashcash_i18n_key: 'Sie können den Text, der den Benutzenden in den
                 Anmelde-Buttons angezeigt wird, mit folgendem i18n-Key anpassen: %{key}'
-              hashcash_login: |
-                Schützen Sie Rails-Anwendungen gegen Bots und Brute-Force-Angriffe ohne Menschen zu stören.
-                Hashcash ist ein Arbeitsnachweissystem, das die Benutzer erfordert, ein rechnerisches Rätsel zu lösen (automatisch vom Browser ausgeführt) bevor sie sich anmelden können.
+              hashcash_login: 'Schützen Sie Rails-Anwendungen gegen Bots und Brute-Force-Angriffe
+                ohne Menschen zu stören.
+
+                Hashcash ist ein Arbeitsnachweissystem, das die Benutzer erfordert,
+                ein rechnerisches Rätsel zu lösen (automatisch vom Browser ausgeführt)
+                bevor sie sich anmelden können.
+
+                '
               hashcash_login_bits: Dieser Parameter legt die Anzahl der Bits fest,
                 die der Hashcash Algorithmus verwenden wird, um den Nachweis zu generieren.
                 Es wird empfohlen, einen Wert zwischen 16 (einfache) und 30 (extrem
                 harte) Bits. Der Standardwert für Login-Formulare ist %{bits} Bit.
-              hashcash_signup: |
-                Schützen Sie Rails-Anwendungen gegen Bots und Brute-Force-Angriffe ohne Menschen zu stören.
-                Hashcash ist ein Arbeitsnachweissystem, das die Benutzer erfordert, ein rechnerisches Rätsel zu lösen (automatisch vom Browser ausgeführt) bevor sie ein Konto erstellen können.
+              hashcash_signup: 'Schützen Sie Rails-Anwendungen gegen Bots und Brute-Force-Angriffe
+                ohne Menschen zu stören.
+
+                Hashcash ist ein Arbeitsnachweissystem, das die Benutzer erfordert,
+                ein rechnerisches Rätsel zu lösen (automatisch vom Browser ausgeführt)
+                bevor sie ein Konto erstellen können.
+
+                '
               hashcash_signup_bits: Dieser Parameter legt die Anzahl der Bits fest,
                 die der Hashcash-Algorithmus verwenden wird, um den Nachweis zu generieren.
                 Es wird empfohlen, einen Wert zwischen 16 (einfache) und 30 (extrem
@@ -527,28 +563,36 @@ de:
               proposal_custom_fields_example: Die Daten werden in einem XML-Objekt
                 unter Verwendung kompatibler HTML-Attribute (dl,dt,dd-Elemente) gespeichert,
                 die den "body" in einem normalen Vorschlag ersetzen.
-              proposal_custom_fields_translations: "Labels, Hilfetexte, Platzhalter
-                und Standardwerte können benutzerdefinierte Übersetzungen Ihrer Instanz
-                verwenden. \nVerwenden Sie dafür statt eines String-Literals den i18n-Schlüssel
-                (er muss mindestens einen Punkt enthalten).\nZum Beispiel:\n- \"activemodel.attributes.proposal.title\"
-                statt \"Titel\"\n- \"activemodel.attributes.proposal.address\" anstelle
-                von \"Adresse\"\nOder verwenden Sie Ihre eigenen Schlüssel in Kombination
-                mit anderen Tools um Übersetzungen zu definieren (z. B.: mit dem Modul
-                Term Customizer):\n - \"myapp.custom_fields.bio\" statt \"Biographie\""
+              proposal_custom_fields_translations: "Labels, Hilfetexte, Platzhalter\
+                \ und Standardwerte können benutzerdefinierte Übersetzungen Ihrer\
+                \ Instanz verwenden. \nVerwenden Sie dafür statt eines String-Literals\
+                \ den i18n-Schlüssel (er muss mindestens einen Punkt enthalten).\n\
+                Zum Beispiel:\n- \"activemodel.attributes.proposal.title\" statt \"\
+                Titel\"\n- \"activemodel.attributes.proposal.address\" anstelle von\
+                \ \"Adresse\"\nOder verwenden Sie Ihre eigenen Schlüssel in Kombination\
+                \ mit anderen Tools um Übersetzungen zu definieren (z. B.: mit dem\
+                \ Modul Term Customizer):\n - \"myapp.custom_fields.bio\" statt \"\
+                Biographie\""
               proposal_private_custom_fields: Wie öffentlich sichtbare Eingabefelder,
                 jedoch werden diese Informationen nicht veröffentlicht (nur Adminzugriff).
-              proposal_private_custom_fields_translations: |
-                Private Eingabefelder werden in einer hervorgehobenen Box mit diesem Informationstext angezeigt:
+              proposal_private_custom_fields_translations: 'Private Eingabefelder
+                werden in einer hervorgehobenen Box mit diesem Informationstext angezeigt:
+
                 %{warning}
-                Dieser Text kann mit einer benutzerdefinierten Übersetzung durch Verwendung des Schlüssels angepasst werden:
+
+                Dieser Text kann mit einer benutzerdefinierten Übersetzung durch Verwendung
+                des Schlüssels angepasst werden:
+
                 %{key}
+
+                '
               scoped_admin_styles: Seien Sie sich bewusst, dass das Verstecken von
                 Dingen den Administrator unbrauchbar machen könnte. Bitte handeln
                 Sie mit Vorsicht.
               scoped_admin_styles_variables: 'Sie können die folgenden CSS-Variablen
                 für die benutzerdefinierter Farben der Organisation verwenden:'
-              scoped_admin_styles_warning: "<strong>Warnung</strong>: Fügen Sie hier
-                benutzerdefiniertes CSS hinzu, das nur in diesem Admin-Backend gilt."
+              scoped_admin_styles_warning: '<strong>Warnung</strong>: Fügen Sie hier
+                benutzerdefiniertes CSS hinzu, das nur in diesem Admin-Backend gilt.'
               scoped_admins: Befördern Sie normale Benutzer zu Administratoren, die
                 nur bestimmte Teile der öffentlichen Seite verwalten können (verwenden
                 Sie dazu den Editor für Einschränkungen). Beachten Sie, dass Benutzer,
@@ -574,17 +618,23 @@ de:
                 Der Wert 2 führt dazu, dass ''!!!'' im Text nicht erlaubt ist'
               validate_title_min_length: Der Titel ist immer obligatorisch und diese
                 Zahl kann nicht Null sein
-              verifications_html: |
-                Hier können Sie zusätzliche Zugriffsbeschränkungen für Partizipationsbereiche oder Komponenten vornehmen, die Nutzende vor dem Zugriff auf bestimmte Standorte auffordert, sich zu verifizieren (z.B. um Spam zu verhindern).<br>
-                Beschränkungen gelten für alle Nutzenden, aber Admins haben immer Zugriff auf das /admin Panel.
+              verifications_html: 'Hier können Sie zusätzliche Zugriffsbeschränkungen
+                für Partizipationsbereiche oder Komponenten vornehmen, die Nutzende
+                vor dem Zugriff auf bestimmte Standorte auffordert, sich zu verifizieren
+                (z.B. um Spam zu verhindern).<br>
+
+                Beschränkungen gelten für alle Nutzenden, aber Admins haben immer
+                Zugriff auf das /admin Panel.
+
+                '
             validators:
               body: Eingabevalidierungen für das Feld "Textkörper"
               title: Eingabevalidierungen für das Feld "Titel"
           form_force_authorizations:
             delete: Löschen
-            force_authorizations_html: "Verifizierungsgruppen definieren. Jede Gruppe
-              kann Nutzenden eine oder mehrere Verifizierungsarten für bestimmte Bereiche
-              der Plattform vorschreiben. \n"
+            force_authorizations_html: "Verifizierungsgruppen definieren. Jede Gruppe\
+              \ kann Nutzenden eine oder mehrere Verifizierungsarten für bestimmte\
+              \ Bereiche der Plattform vorschreiben. \n"
             help: Sie können Gruppen von Autorisierungsmethoden definieren und den
               darauf basierenden Zugriff einschränken.
             new: Eine neue Autorisierungsgruppe hinzufügen
@@ -619,7 +669,7 @@ de:
             new: Neue CSS Box hinzufügen
             remove: CSS Box entfernen
             sure_to_remove: Sind Sie sicher, dass Sie diese CSS-Box entfernen möchten?
-          none: "⛔ Niemals! - Deaktivieren Sie jede andere Einschränkung"
+          none: ⛔ Niemals! - Deaktivieren Sie jede andere Einschränkung
           process_groups: Prozessgruppen
           show:
             title: Decidim Awesome
@@ -688,11 +738,22 @@ de:
             cannot_remove_default: Standardkategorien können nicht entfernt werden
             confirm_reset: Soll diese Kategorie wirklich auf die Standardwerte zurückgesetzt
               werden? Alle vorgenommenen Anpassungen werden dabei entfernt.
-            description_html: |
-              Cookie-Kategorien und -Einträge steuern ausschließlich die Einwilligungsoberfläche und die Dokumentation.<br>
-              Damit Einstellungen wirksam werden, müssen Drittanbieter-Skripte und -Dienste so konfiguriert sein, dass sie erst nach erteilter Einwilligung geladen werden.<br>
-              Diese zusätzliche Skriptkonfiguration ist für eingebettete Video-iFrames nicht erforderlich, da Decidim bereits eine integrierte Einwilligungsverwaltung für diese Einbettungen enthält.<br>
-              Offizielle Anleitung: <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Skripte hinzufügen, die eine Dateneinwilligung erfordern</a>.
+            description_html: 'Cookie-Kategorien und -Einträge steuern ausschließlich
+              die Einwilligungsoberfläche und die Dokumentation.<br>
+
+              Damit Einstellungen wirksam werden, müssen Drittanbieter-Skripte und
+              -Dienste so konfiguriert sein, dass sie erst nach erteilter Einwilligung
+              geladen werden.<br>
+
+              Diese zusätzliche Skriptkonfiguration ist für eingebettete Video-iFrames
+              nicht erforderlich, da Decidim bereits eine integrierte Einwilligungsverwaltung
+              für diese Einbettungen enthält.<br>
+
+              Offizielle Anleitung: <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent"
+              target="_blank" rel="noopener">Skripte hinzufügen, die eine Dateneinwilligung
+              erfordern</a>.
+
+              '
             edit: Kategorie bearbeiten
             items: Kategorie-Einträge
             new: Neue Kategorie
@@ -703,11 +764,21 @@ de:
             save: Speichern
             title: Neue Cookie-Kategorie
           script_config:
-            script_consent_help_html: |
-              <p>Skripte, die dieser Kategorie zugeordnet sind, respektieren die Einwilligung nur, wenn sie innerhalb eines Skripts mit dem Attribut <span class="label">data-consent="%{category}"</span> hinzugefügt werden.</p>
-              <p>Der empfohlene Ort zum Hinzufügen ist <span class="label">app/views/layouts/decidim/_head_extra.html.erb</span> oder in Header-Snippets (falls aktiviert).</p>
+            script_consent_help_html: '<p>Skripte, die dieser Kategorie zugeordnet
+              sind, respektieren die Einwilligung nur, wenn sie innerhalb eines Skripts
+              mit dem Attribut <span class="label">data-consent="%{category}"</span>
+              hinzugefügt werden.</p>
+
+              <p>Der empfohlene Ort zum Hinzufügen ist <span class="label">app/views/layouts/decidim/_head_extra.html.erb</span>
+              oder in Header-Snippets (falls aktiviert).</p>
+
               <p>Beispiel:</p><br><pre>%{example}</pre><br>
-              <p>Ohne <code>type="text/plain"</code> hat die Daten-Einwilligungseinstellung des Benutzers keine Wirkung.<br>Mehr dazu: <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Adding scripts which require data consent</a>.</p>
+
+              <p>Ohne <code>type="text/plain"</code> hat die Daten-Einwilligungseinstellung
+              des Benutzers keine Wirkung.<br>Mehr dazu: <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent"
+              target="_blank" rel="noopener">Adding scripts which require data consent</a>.</p>
+
+              '
           update:
             error: Fehler beim Aktualisieren der Cookie-Kategorie! %{error}
             success: Cookie-Kategorie erfolgreich aktualisiert
@@ -823,74 +894,120 @@ de:
               ytidb_last_result_entry_key: Speichert die neuesten YouTube-Player-Ergebnismetadaten
                 im lokalen Speicher.
             explanations:
-              cloudflare_turnstile: |-
-                Fügen Sie diese Cookies hinzu, wenn Cloudflare Turnstile aktiviert ist, um Formulare vor Missbrauch und automatisiertem Verkehr zu schützen. Sie unterstützen die Bot-Erkennung, Sitzungsvalidierung und die Kontinuität der Challenge.
+              cloudflare_turnstile: 'Fügen Sie diese Cookies hinzu, wenn Cloudflare
+                Turnstile aktiviert ist, um Formulare vor Missbrauch und automatisiertem
+                Verkehr zu schützen. Sie unterstützen die Bot-Erkennung, Sitzungsvalidierung
+                und die Kontinuität der Challenge.
 
-                Empfohlene Kategorie: Essenziell
-              decidim_essential: |-
-                Fügen Sie diese essenziellen Cookies hinzu, die für die Kernfunktionalität Ihrer Decidim-Plattform erforderlich sind. Diese Cookies ermöglichen die Benutzerauthentifizierung, Sitzungsverwaltung und Einwilligungsverfolgung.
 
-                Empfohlene Kategorie: Essenziell
-              emoji_picker: |-
-                Fügen Sie dieses Cookie hinzu, wenn Sie die Emoji-Picker-Funktion in Texteditoren aktivieren. Es speichert zuletzt verwendete Emojis zur Personalisierung der Nutzererfahrung.
+                Empfohlene Kategorie: Essenziell'
+              decidim_essential: 'Fügen Sie diese essenziellen Cookies hinzu, die
+                für die Kernfunktionalität Ihrer Decidim-Plattform erforderlich sind.
+                Diese Cookies ermöglichen die Benutzerauthentifizierung, Sitzungsverwaltung
+                und Einwilligungsverfolgung.
 
-                Empfohlene Kategorie: Präferenzen
-              facebook_pixel: |-
-                Fügen Sie diese Cookies hinzu, wenn Sie Meta (Facebook) Pixel für Conversion-Tracking oder Anzeigenattribution verwenden. Sie helfen dabei, Browser-Sitzungen zu identifizieren und die Kampagnenleistung zu messen.
 
-                Empfohlene Kategorie: Marketing
-              google_analytics: |-
-                Fügen Sie diese Cookies hinzu, wenn Sie Google Analytics (GA4/gtag.js) zur Messung von Traffic und Nutzerverhalten verwenden. Sie identifizieren Besucher, unterscheiden Sitzungen und helfen bei der Erstellung von Nutzungsstatistiken.
+                Empfohlene Kategorie: Essenziell'
+              emoji_picker: 'Fügen Sie dieses Cookie hinzu, wenn Sie die Emoji-Picker-Funktion
+                in Texteditoren aktivieren. Es speichert zuletzt verwendete Emojis
+                zur Personalisierung der Nutzererfahrung.
 
-                Empfohlene Kategorie: Analyse
-              google_maps_embeds: |-
-                Fügen Sie diese Cookies hinzu, wenn Sie Google Maps auf Ihren Seiten einbetten (z. B. Karten-Widgets oder Standort-Blöcke). Sie helfen bei Kartenpräferenzen, Einwilligungsstatus und Nutzungsmetriken.
 
-                Empfohlene Kategorie: Präferenzen oder Analyse
-              google_tag_manager: |-
-                Fügen Sie diese Cookies hinzu, wenn Ihre Analyse- oder Marketing-Tags über Google Tag Manager bereitgestellt werden. Einige Tags können je nach GTM-Konfiguration zusätzliche Tracking-Cookies setzen.
+                Empfohlene Kategorie: Präferenzen'
+              facebook_pixel: 'Fügen Sie diese Cookies hinzu, wenn Sie Meta (Facebook)
+                Pixel für Conversion-Tracking oder Anzeigenattribution verwenden.
+                Sie helfen dabei, Browser-Sitzungen zu identifizieren und die Kampagnenleistung
+                zu messen.
 
-                Empfohlene Kategorie: Analyse oder Marketing
-              graphiql: |-
-                Fügen Sie diese Cookies hinzu, wenn Sie den GraphQL-API-Explorer (/api/graphiql) für Entwickler aktivieren. Sie speichern die Oberflächen-Einstellungen des Explorers, den Abfrageverlauf und Tab-Konfigurationen.
 
-                Empfohlene Kategorie: Präferenzen
-              hcaptcha: |-
-                Fügen Sie diese Cookies/Speichereinträge hinzu, wenn hCaptcha in Formularen aktiviert ist. Sie werden für Bot-Erkennung, Barrierefreiheitsoptionen und Challenge-/Sitzungsverwaltung verwendet.
+                Empfohlene Kategorie: Marketing'
+              google_analytics: 'Fügen Sie diese Cookies hinzu, wenn Sie Google Analytics
+                (GA4/gtag.js) zur Messung von Traffic und Nutzerverhalten verwenden.
+                Sie identifizieren Besucher, unterscheiden Sitzungen und helfen bei
+                der Erstellung von Nutzungsstatistiken.
 
-                Empfohlene Kategorie: Essenziell
-              jitsi_meet: |-
-                Fügen Sie diese Cookies hinzu, wenn Sie Jitsi Meet-Videokonferenzen in Ihre Plattform integrieren. Sie speichern Benutzereinstellungen, Sprachpräferenzen, Videoqualitätsoptionen und Sitzungsdaten für den Videokonferenzdienst.
 
-                Empfohlene Kategorie: Präferenzen
-              linkedin_insight: |-
-                Fügen Sie diese Cookies hinzu, wenn Sie den LinkedIn Insight Tag verwenden, um Kampagnenleistung und Besucher-Conversions aus LinkedIn-Anzeigen zu messen.
+                Empfohlene Kategorie: Analyse'
+              google_maps_embeds: 'Fügen Sie diese Cookies hinzu, wenn Sie Google
+                Maps auf Ihren Seiten einbetten (z. B. Karten-Widgets oder Standort-Blöcke).
+                Sie helfen bei Kartenpräferenzen, Einwilligungsstatus und Nutzungsmetriken.
 
-                Empfohlene Kategorie: Marketing
-              matomo: |-
-                Fügen Sie diese Cookies hinzu, wenn Sie Matomo Analytics zur Website-Statistikerfassung verwenden. Sie identifizieren wiederkehrende Besucher, verfolgen Sitzungen und speichern Referral-Informationen für aggregierte Berichte.
 
-                Empfohlene Kategorie: Analyse
-              openstreetmap_tiles: |-
-                Fügen Sie diese Cookies hinzu, wenn Ihre Kartenerfahrung von bei OpenStreetMap gehosteten Ressourcen abhängt, die Cookies setzen können (z. B. eingebettete Karten oder OSM-kontobezogene Funktionen).
+                Empfohlene Kategorie: Präferenzen oder Analyse'
+              google_tag_manager: 'Fügen Sie diese Cookies hinzu, wenn Ihre Analyse-
+                oder Marketing-Tags über Google Tag Manager bereitgestellt werden.
+                Einige Tags können je nach GTM-Konfiguration zusätzliche Tracking-Cookies
+                setzen.
 
-                Empfohlene Kategorie: Präferenzen
-              recaptcha: |-
-                Fügen Sie diese Cookies/Speichereinträge hinzu, wenn Google reCAPTCHA Formulare vor Missbrauch und Bots schützt. Sie helfen dabei, Nutzerinteraktionen und Sicherheitssignale auszuwerten.
 
-                Empfohlene Kategorie: Essenziell
-              vimeo_embeds: |-
-                Fügen Sie diese Cookies hinzu, wenn Sie Vimeo-Videos in Seiten, Vorschläge oder Kommentare einbetten. Vimeo kann sie verwenden, um Player-Einstellungen zu speichern und Wiedergabe-Interaktionen zu messen.
+                Empfohlene Kategorie: Analyse oder Marketing'
+              graphiql: 'Fügen Sie diese Cookies hinzu, wenn Sie den GraphQL-API-Explorer
+                (/api/graphiql) für Entwickler aktivieren. Sie speichern die Oberflächen-Einstellungen
+                des Explorers, den Abfrageverlauf und Tab-Konfigurationen.
 
-                Empfohlene Kategorie: Präferenzen oder Analyse
-              youtube_embeds: |-
-                Fügen Sie diese Cookies hinzu, wenn Sie YouTube-Video-Einbettungen in Inhalten (Vorschläge, Kommentare usw.) erlauben. YouTube setzt Analyse- und Tracking-Cookies, die Informationen über die Videowiedergabe und das Nutzerverhalten erfassen.
 
-                Empfohlene Kategorie: Präferenzen (wenn Videos integraler Bestandteil des Inhalts sind), Analyse (für Tracking/Statistiken) oder Marketing (für Werbezwecke)
-              youtube_nocookie: |-
-                Fügen Sie diese Speicherschlüssel hinzu, wenn Sie den datenschutzoptimierten Modus von YouTube (youtube-nocookie.com) verwenden. Sie werden verwendet, um den Player-Status und Geräte-/Sitzungseinstellungen beizubehalten.
+                Empfohlene Kategorie: Präferenzen'
+              hcaptcha: 'Fügen Sie diese Cookies/Speichereinträge hinzu, wenn hCaptcha
+                in Formularen aktiviert ist. Sie werden für Bot-Erkennung, Barrierefreiheitsoptionen
+                und Challenge-/Sitzungsverwaltung verwendet.
 
-                Empfohlene Kategorie: Präferenzen
+
+                Empfohlene Kategorie: Essenziell'
+              jitsi_meet: 'Fügen Sie diese Cookies hinzu, wenn Sie Jitsi Meet-Videokonferenzen
+                in Ihre Plattform integrieren. Sie speichern Benutzereinstellungen,
+                Sprachpräferenzen, Videoqualitätsoptionen und Sitzungsdaten für den
+                Videokonferenzdienst.
+
+
+                Empfohlene Kategorie: Präferenzen'
+              linkedin_insight: 'Fügen Sie diese Cookies hinzu, wenn Sie den LinkedIn
+                Insight Tag verwenden, um Kampagnenleistung und Besucher-Conversions
+                aus LinkedIn-Anzeigen zu messen.
+
+
+                Empfohlene Kategorie: Marketing'
+              matomo: 'Fügen Sie diese Cookies hinzu, wenn Sie Matomo Analytics zur
+                Website-Statistikerfassung verwenden. Sie identifizieren wiederkehrende
+                Besucher, verfolgen Sitzungen und speichern Referral-Informationen
+                für aggregierte Berichte.
+
+
+                Empfohlene Kategorie: Analyse'
+              openstreetmap_tiles: 'Fügen Sie diese Cookies hinzu, wenn Ihre Kartenerfahrung
+                von bei OpenStreetMap gehosteten Ressourcen abhängt, die Cookies setzen
+                können (z. B. eingebettete Karten oder OSM-kontobezogene Funktionen).
+
+
+                Empfohlene Kategorie: Präferenzen'
+              recaptcha: 'Fügen Sie diese Cookies/Speichereinträge hinzu, wenn Google
+                reCAPTCHA Formulare vor Missbrauch und Bots schützt. Sie helfen dabei,
+                Nutzerinteraktionen und Sicherheitssignale auszuwerten.
+
+
+                Empfohlene Kategorie: Essenziell'
+              vimeo_embeds: 'Fügen Sie diese Cookies hinzu, wenn Sie Vimeo-Videos
+                in Seiten, Vorschläge oder Kommentare einbetten. Vimeo kann sie verwenden,
+                um Player-Einstellungen zu speichern und Wiedergabe-Interaktionen
+                zu messen.
+
+
+                Empfohlene Kategorie: Präferenzen oder Analyse'
+              youtube_embeds: 'Fügen Sie diese Cookies hinzu, wenn Sie YouTube-Video-Einbettungen
+                in Inhalten (Vorschläge, Kommentare usw.) erlauben. YouTube setzt
+                Analyse- und Tracking-Cookies, die Informationen über die Videowiedergabe
+                und das Nutzerverhalten erfassen.
+
+
+                Empfohlene Kategorie: Präferenzen (wenn Videos integraler Bestandteil
+                des Inhalts sind), Analyse (für Tracking/Statistiken) oder Marketing
+                (für Werbezwecke)'
+              youtube_nocookie: 'Fügen Sie diese Speicherschlüssel hinzu, wenn Sie
+                den datenschutzoptimierten Modus von YouTube (youtube-nocookie.com)
+                verwenden. Sie werden verwendet, um den Player-Status und Geräte-/Sitzungseinstellungen
+                beizubehalten.
+
+
+                Empfohlene Kategorie: Präferenzen'
             labels:
               cloudflare_turnstile:
                 one: Cloudflare Turnstile (%{count} Cookie)
@@ -994,7 +1111,7 @@ de:
             edit: Eintrag bearbeiten
             new: Neuer Eintrag
             reset: Auf Standard zurücksetzen
-            title: "%{category}: Cookie-Einträge"
+            title: '%{category}: Cookie-Einträge'
           new:
             cancel: Abbrechen
             save: Speichern
@@ -1016,23 +1133,23 @@ de:
             destination_help: Absolute Pfade (beginnen mit "/") oder externe URLs
               (http://..)
             origin_help: Nur absolute Pfade, beginnen mit "/"
-            pass_query_help: "Aktivieren Sie diese Option, wenn Sie möchten, dass
-              der Abfrage-String an das Ziel kopiert wird.<br> Wenn Sie zum Beispiel
-              \"/my-origin\" => \"/my-destination\" konfiguriert haben, wird eine
-              Anfrage an \"/my-origin?locale=ca\" an \"/my-destination?locale=ca\"
-              weitergeleitet. \n"
+            pass_query_help: "Aktivieren Sie diese Option, wenn Sie möchten, dass\
+              \ der Abfrage-String an das Ziel kopiert wird.<br> Wenn Sie zum Beispiel\
+              \ \"/my-origin\" => \"/my-destination\" konfiguriert haben, wird eine\
+              \ Anfrage an \"/my-origin?locale=ca\" an \"/my-destination?locale=ca\"\
+              \ weitergeleitet. \n"
           index:
-            check_redirections: "✔ Umleitungen prüfen"
+            check_redirections: ✔ Umleitungen prüfen
             confirm_destroy: Sind Sie sicher, dass Sie diese Umleitung entfernen möchten?
-            description: "Sie können eine beliebige Route (beginnend mit <code>/</code>)
-              definieren, um jeden Besucher zu einer Ziel-URL umzuleiten. <br> Ziel
-              kann ein absoluter Pfad sein (z.B.: <code>/processes/ein-prozess</code>)
-              oder mit <code>https://</code> (z.B.: <code>http://decidim: org</code>)
-              beginnen.<br><br> Berücksichtigen Sie, dass eine Umleitung nur funktioniert,
-              wenn keine andere Route passt. Es ist nicht möglich, ursprüngliche Routen
-              außer Kraft zu setzen (dies ist beabsichtigt).<br> Wenn Sie sich nicht
-              sicher sind, verwenden Sie die Funktion «Umleitungen prüfen», um die
-              Umleitung zu testen. \n"
+            description: "Sie können eine beliebige Route (beginnend mit <code>/</code>)\
+              \ definieren, um jeden Besucher zu einer Ziel-URL umzuleiten. <br> Ziel\
+              \ kann ein absoluter Pfad sein (z.B.: <code>/processes/ein-prozess</code>)\
+              \ oder mit <code>https://</code> (z.B.: <code>http://decidim: org</code>)\
+              \ beginnen.<br><br> Berücksichtigen Sie, dass eine Umleitung nur funktioniert,\
+              \ wenn keine andere Route passt. Es ist nicht möglich, ursprüngliche\
+              \ Routen außer Kraft zu setzen (dies ist beabsichtigt).<br> Wenn Sie\
+              \ sich nicht sicher sind, verwenden Sie die Funktion «Umleitungen prüfen»,\
+              \ um die Umleitung zu testen. \n"
             edit: Umleitung bearbeiten
             new: Neue Umleitung
             remove: Umleitung entfernen
@@ -1053,10 +1170,17 @@ de:
           index:
             bits: Bits
             created_at: Erstellt am
-            help_html: |
-              Diese Seite zeigt die im System entdeckten Hashcash Stempel an. Hashcash ist ein System zum Nachweis der Arbeit, das die Benutzenden dazu zwingt, ein rechnerisches Puzzle zu lösen (automatisch vom Browser ausgeführt), bevor sie ein Konto erstellen können.
+            help_html: 'Diese Seite zeigt die im System entdeckten Hashcash Stempel
+              an. Hashcash ist ein System zum Nachweis der Arbeit, das die Benutzenden
+              dazu zwingt, ein rechnerisches Puzzle zu lösen (automatisch vom Browser
+              ausgeführt), bevor sie ein Konto erstellen können.
+
               <br><br>
-              Jeder Eintrag in dieser Liste stellt einen Hashcash-Stempel dar, der von einem Benutzer bei jeder Anmeldung oder Anmeldung generiert wurde.
+
+              Jeder Eintrag in dieser Liste stellt einen Hashcash-Stempel dar, der
+              von einem Benutzer bei jeder Anmeldung oder Anmeldung generiert wurde.
+
+              '
             ip_address: IP-Adresse
             no_data: Keine Hashcash-Stempel gefunden
             request_path: Anforderungspfad
@@ -1074,10 +1198,10 @@ de:
             preset: Voreinstellungen zum automatischen Ausfüllen
             preset_content_blocks: Vorhandene Inhaltsblöcke
             preset_global_menu: '"Übliche Verdächtige" bei Decidim'
-            select_a_preset: "— Gemeinsamer Menüpunkt auswählen —"
-            url_help_html: "<b>#section-id</b> — scrollt in einen Abschnitt auf dieser
+            select_a_preset: — Gemeinsamer Menüpunkt auswählen —
+            url_help_html: <b>#section-id</b> — scrollt in einen Abschnitt auf dieser
               Seite<br><b>/path</b> — interne Seite (e.. /processes)<br><b>https://example.com</b>
-              — externer Link (öffnet sich in einem neuen Tab automatisch)"
+              — externer Link (öffnet sich in einem neuen Tab automatisch)
           new:
             save: Sichern
             title: Neuer Menüpunkt
@@ -1104,6 +1228,7 @@ de:
             awesome_authorizations: Awesome Autorisierungen
             force_authorizations: Erzwungene Autorisierungen
             verifications: Verifizierungen
+          follow_up_questionnaires: Follow-up-Fragebögen
         menu_hacks:
           create:
             error: Fehler beim Erstellen des Menüpunkts! %{error}
@@ -1160,23 +1285,24 @@ de:
             destroying: Die privaten Daten für %{title} werden gelöscht. Bitte versuchen
               Sie es in ein paar Minuten noch einmal.
             done: Erledigt
-            help_html: |
-              Mit diesem Tool können Sie alle privaten Daten für einen bestimmten Beteiligungsbereich oder eine bestimmte Komponente löschen. Dieser Vorgang ist irreversibel und entfernt alle privaten Daten aus der Datenbank.
-              <br><br>
-              <strong> Was sind private Daten?</strong>
-              <br>
-              Private Daten sind alle Informationen, die nicht öffentlich verfügbar sind und nur für Administratoren zugänglich sind. Dazu gehören derzeit auch Informationen aus privaten benutzerdefinierten Feldern.
-              <br><br>
-              <strong>Was passiert, wenn ich private Daten lösche?</strong>
-              <br>
-              Wenn Sie private Daten löschen, werden alle privaten Informationen für den ausgewählten Mitwirkungsbereich oder die ausgewählte Komponente dauerhaft aus der Datenbank entfernt. Zu Prüfzwecken wird ein Protokoll dieser Aktion im System gespeichert.
-              <br><br>
-              <strong>Was geschieht mit öffentlichen Daten?</strong>
-              <br> Öffentliche Daten sind von dieser Aktion nicht betroffen. Es werden nur private Daten gelöscht.
-               <br><br>
-              <strong>Gibt es eine Mindestwartezeit vor dem Löschen privater Daten?</strong>
-              <br>
-              Ja, Sie können keine privaten Daten löschen, wenn die letzte Aktualisierung weniger als %{time_ago} zurückliegt. Sie können diese Konfiguration in der Initialisierungsdatei ändern.
+            help_html: "Mit diesem Tool können Sie alle privaten Daten für einen bestimmten\
+              \ Beteiligungsbereich oder eine bestimmte Komponente löschen. Dieser\
+              \ Vorgang ist irreversibel und entfernt alle privaten Daten aus der\
+              \ Datenbank.\n<br><br>\n<strong> Was sind private Daten?</strong>\n\
+              <br>\nPrivate Daten sind alle Informationen, die nicht öffentlich verfügbar\
+              \ sind und nur für Administratoren zugänglich sind. Dazu gehören derzeit\
+              \ auch Informationen aus privaten benutzerdefinierten Feldern.\n<br><br>\n\
+              <strong>Was passiert, wenn ich private Daten lösche?</strong>\n<br>\n\
+              Wenn Sie private Daten löschen, werden alle privaten Informationen für\
+              \ den ausgewählten Mitwirkungsbereich oder die ausgewählte Komponente\
+              \ dauerhaft aus der Datenbank entfernt. Zu Prüfzwecken wird ein Protokoll\
+              \ dieser Aktion im System gespeichert.\n<br><br>\n<strong>Was geschieht\
+              \ mit öffentlichen Daten?</strong>\n<br> Öffentliche Daten sind von\
+              \ dieser Aktion nicht betroffen. Es werden nur private Daten gelöscht.\n\
+              \ <br><br>\n<strong>Gibt es eine Mindestwartezeit vor dem Löschen privater\
+              \ Daten?</strong>\n<br>\nJa, Sie können keine privaten Daten löschen,\
+              \ wenn die letzte Aktualisierung weniger als %{time_ago} zurückliegt.\
+              \ Sie können diese Konfiguration in der Initialisierungsdatei ändern.\n"
             items_count: Betroffene Gesamtmenge
             last_date: Letzte Aktualisierung
             no_data: Es wurden keine privaten Daten gefunden, die älter sind als %{time_ago}
@@ -1190,7 +1316,7 @@ de:
           private_data_last_remove: Diese Daten wurden vor %{time_ago} gelöscht.
           private_data_last_update: Diese Daten wurden vor %{time_ago} gelöscht.
           proposal_private_custom_fields: Private Felder
-          remove_private_data: "👉 Sie können es entfernen"
+          remove_private_data: 👉 Sie können es entfernen
         scoped_admin_styles:
           menu:
             title: Admin Panel
@@ -1202,26 +1328,172 @@ de:
             verwalten.
           restricted_html: Dieser Bereich verwendet zusätzliche Zugriffsbeschränkungen
             mit %{awesome_link}.
+        follow_up_questionnaire_messages:
+          auto_status_change_body: 'Status geändert auf: %{status}'
+          create:
+            error: Fehler beim Senden der Nachricht! %{error}
+            success: Nachricht erfolgreich gesendet
+          form:
+            add_attachment: Anhang hinzufügen
+            attachments: Anhänge
+            author: Autor
+            body: Nachricht
+            body_help: Nachricht leer lassen, um nur über die Statusänderung zu informieren
+              (In-App-Benachrichtigung, wird aber weiterhin per E-Mail gesendet).
+            edit_attachment: Anhang bearbeiten
+            select_a_status: Status auswählen
+            status: Status
+          index:
+            conversation: Gespräch
+            last_action_answered: Vor %{time} beantwortet
+            last_action_labeled: Vor %{time} gekennzeichnet
+            new_status: Neu
+            not_answered: (nicht beantwortet)
+            not_processable: Kein Befragter - Nicht bearbeitbar
+            see_full_responses: Vollständige Antworten anzeigen
+            view_survey: Vorschau
+          new:
+            anonymous_respondent: Anonyme Befragte
+            messages_count:
+              one: '%{count} Nachricht'
+              other: '%{count} Nachrichten'
+            new_reply: Neue Nachricht
+            new_reply_help_text: Senden Sie eine Nachricht an die Person, die geantwortet
+              hat. Die Nachricht wird mit „Antwort an“ %{email} versendet. Direkte
+              Antworten auf diese E-Mail werden hier nicht erfasst.
+            new_reply_no_reply_to_help_text: Senden Sie eine Nachricht an die Person,
+              die geantwortet hat. Teilnehmende können auf diese E-Mail nicht antworten,
+              da sie ohne Reply-To-Adresse gesendet wird.
+            send_message: Senden
+            submitted_at: Eingereicht am %{date}
+            title: Nachrichten verwalten
+          reply_history:
+            documents: Dokumente
+            empty: Es wurden noch keine Nachrichten an diese Person gesendet.
+            photos: Fotos
+            title: Nachrichtenverlauf
+        follow_up_questionnaire_statuses:
+          create:
+            error: Fehler beim Erstellen des Labels! %{error}
+            success: Label erfolgreich erstellt
+          destroy:
+            not_removable: Dieses Label wird in Nachrichten verwendet und kann nicht
+              entfernt werden.
+            success: Label erfolgreich entfernt
+          edit:
+            save: Speichern
+            title: Label bearbeiten
+          form:
+            name_taken_error: Dieser Name wird bereits von einem anderen Label in
+              diesem Fragebogen verwendet.
+          new:
+            save: Speichern
+            title: Neues Label
+          table:
+            confirm_destroy: Möchten Sie dieses Label wirklich entfernen?
+            description: Labels werden verwendet, um den Status einer Antwort zu verfolgen
+            edit: Bearbeiten
+            labels_title: Labels
+            new: Neues Label
+            not_removable: Dieses Label wird in Nachrichten verwendet und kann nicht
+              entfernt werden.
+            remove: Entfernen
+          update:
+            error: Fehler beim Aktualisieren des Labels! %{error}
+            success: Label erfolgreich aktualisiert
+        follow_up_questionnaires:
+          create:
+            error: Fehler beim Erstellen des Follow-up-Fragebogens! %{error}
+            success: Follow-up-Fragebogen erfolgreich erstellt
+          destroy:
+            error: Fehler beim Entfernen des Follow-up-Fragebogens! %{error}
+            not_removable: Dieser Fragebogen hat bereits Nachrichten an Befragte gesendet
+              und kann nicht entfernt werden. Deaktivieren Sie ihn stattdessen.
+            success: Follow-up-Fragebogen erfolgreich entfernt
+            unexpected_error: Beim Entfernen ist ein Problem aufgetreten.
+          edit:
+            save: Speichern
+            title: Follow-up-Fragebogen
+          form:
+            anonymous_option_flag: anonym, keine Fragen
+            name_help: Im partizipativen Raum sehen Sie diesen Namen als neuen Menüpunkt
+              zur Verwaltung der Antworten
+            questionnaire_locked: Dieser Follow-up-Fragebogen hat bereits Nachrichten
+              an Befragte gesendet, daher kann die Umfrage nicht geändert werden.
+            reply_to_help: Optional. Antworten der Teilnehmenden auf Benachrichtigungs-E-Mails
+              gehen an diese Adresse. Lassen Sie das Feld leer, um E-Mails ohne Reply-To
+              zu senden.
+            responder_email_help: Dieses Feld wird verwendet, um die E-Mail-Adresse
+              zu finden, an die geantwortet werden soll. Wenn der Fragebogen nicht
+              anonym ist, können Sie diesen Teil überspringen und der Benutzer wird
+              verwendet.
+            responder_name_help: Dieses Feld wird verwendet, um den Namen des Befragten
+              zu finden und anzuzeigen. Wenn der Fragebogen nicht anonym ist, können
+              Sie diesen Teil überspringen und der Benutzer wird verwendet.
+            select_questionnaire_placeholder: Fragebogen auswählen
+          index:
+            confirm_destroy: Möchten Sie diesen Follow-up-Fragebogen wirklich entfernen?
+            description: Verwandeln Sie Fragebogen-Eingaben in interaktive Threads.
+              Klicken Sie auf eine beliebige Antwort, um direkt mit der Person zu
+              kommunizieren, private Teamnotizen zu protokollieren, Statuslabels anzuwenden
+              und den kompletten Kommunikationsverlauf anzuzeigen.
+            edit: Bearbeiten
+            manage_responses: Antworten verwalten
+            new: Neues Follow-up
+            not_removable: Dieser Fragebogen hat bereits Nachrichten an Befragte gesendet
+              und kann nicht entfernt werden. Deaktivieren Sie ihn stattdessen.
+            remove: Entfernen
+          new:
+            save: Speichern
+            title: Follow-up-Fragebögen
+          update:
+            error: Fehler beim Aktualisieren des Follow-up-Fragebogens! %{error}
+            success: Follow-up-Fragebogen erfolgreich aktualisiert
       admin_log:
         component:
-          destroy_private_data: "%{user_name} hat %{count} private Daten für %{resource_name}
-            in %{space_name} gelöscht"
+          destroy_private_data: '%{user_name} hat %{count} private Daten für %{resource_name}
+            in %{space_name} gelöscht'
         user:
-          admin_creates_authorization: "%{user_name} verifizierte %{resource_name}
-            mit %{handler_name}"
-          admin_destroys_authorization: "%{user_name} hat die Verifizierung %{handler_name}
-            auf %{resource_name} gelöscht"
-          admin_forces_authorization: "%{user_name} erzwang die Verifizierung %{handler_name}
-            auf %{resource_name}. Grund: %{reason}"
+          admin_creates_authorization: '%{user_name} verifizierte %{resource_name}
+            mit %{handler_name}'
+          admin_destroys_authorization: '%{user_name} hat die Verifizierung %{handler_name}
+            auf %{resource_name} gelöscht'
+          admin_forces_authorization: '%{user_name} erzwang die Verifizierung %{handler_name}
+            auf %{resource_name}. Grund: %{reason}'
+        follow_up_questionnaire:
+          create: '%{user_name} hat den Follow-up-Fragebogen %{questionnaire_name}
+            erstellt'
+          delete: '%{user_name} hat den Follow-up-Fragebogen %{questionnaire_name}
+            entfernt'
+          update: '%{user_name} hat den Follow-up-Fragebogen %{questionnaire_name}
+            aktualisiert'
+        follow_up_questionnaire_message:
+          create: '%{user_name} hat eine Nachricht im Follow-up-Fragebogen %{questionnaire_name}
+            gesendet'
+          create_as: '%{user_name} hat eine Nachricht als %{author_name} im Follow-up-Fragebogen
+            %{questionnaire_name} gesendet'
+        follow_up_questionnaire_status:
+          create: '%{user_name} hat ein neues Label %{label_name} für den Follow-up-Fragebogen
+            %{questionnaire_name} erstellt'
+          delete: '%{user_name} hat das Label %{label_name} aus dem Follow-up-Fragebogen
+            %{questionnaire_name} entfernt'
+          update: '%{user_name} hat das Label %{label_name} für den Follow-up-Fragebogen
+            %{questionnaire_name} aktualisiert'
       amendments:
         modal:
           amendment_exists: Eine Änderung existiert bereits
           current_amendment_html: <p>Sie können <a href="%{amendment_link}"> hier
             auf die aktuelle Änderung</a>zugreifen.</p>
           dismiss: Ok, verstanden
-          explanation_html: |
-            <p>Derzeit wird eine weitere Änderung für diesen Vorschlag bewertet. Um eine neue zu erstellen, müssen Sie warten, bis die aktuelle akzeptiert oder abgelehnt wird.</p>
-            <p>Sie können auch den Autor dieses Vorschlags durch <a href="%{proposal_link}">erreichen und einen Kommentar</a> hinterlassen und versuchen, die Lösung des aktuellen Änderungsantrags zu beschleunigen.</p>
+          explanation_html: '<p>Derzeit wird eine weitere Änderung für diesen Vorschlag
+            bewertet. Um eine neue zu erstellen, müssen Sie warten, bis die aktuelle
+            akzeptiert oder abgelehnt wird.</p>
+
+            <p>Sie können auch den Autor dieses Vorschlags durch <a href="%{proposal_link}">erreichen
+            und einen Kommentar</a> hinterlassen und versuchen, die Lösung des aktuellen
+            Änderungsantrags zu beschleunigen.</p>
+
+            '
         pending_limit_reached: Leider kann es immer nur eine ausstehende Änderung
           geben. Bitte warten Sie, bis "%{emendation}" akzeptiert oder abgelehnt wird.
       awesome_authorization_handler:
@@ -1257,8 +1529,8 @@ de:
           past: Vergangene
           remove_filter: Filter entfernen
           results_count:
-            one: "%{count} Prozess gefunden"
-            other: "%{count} Prozesse gefunden"
+            one: '%{count} Prozess gefunden'
+            other: '%{count} Prozesse gefunden'
           status_label: 'Status:'
           title: Blocktitel
           upcoming: Kommende
@@ -1386,15 +1658,14 @@ de:
             in der XML-Datei gefunden'
       map_component:
         map:
-          api_not_ready: |
-            <b>Warnung:</b> Diese Decidim-Installation hat die API mit einer maximalen Komplexität von <b>%{current_complexity}</b> konfiguriert.
-            Diese Komponente wird unter dieser Konfiguration wahrscheinlich nicht funktionieren. Wir empfehlen, in einem Initializer (z.B. am Ende von <code>config/initializers/decidim.rb</code>) die folgenden Zeilen zu setzen:<br>
-            <br>
-            <pre># Api configuration
-            Rails.application.config.to_prepare do
-              Decidim::Api::Schema.max_complexity = 5000
-              Decidim::Api::Schema.max_depth = 50
-            end</pre>
+          api_not_ready: "<b>Warnung:</b> Diese Decidim-Installation hat die API mit\
+            \ einer maximalen Komplexität von <b>%{current_complexity}</b> konfiguriert.\n\
+            Diese Komponente wird unter dieser Konfiguration wahrscheinlich nicht\
+            \ funktionieren. Wir empfehlen, in einem Initializer (z.B. am Ende von\
+            \ <code>config/initializers/decidim.rb</code>) die folgenden Zeilen zu\
+            \ setzen:<br>\n<br>\n<pre># Api configuration\nRails.application.config.to_prepare\
+            \ do\n  Decidim::Api::Schema.max_complexity = 5000\n  Decidim::Api::Schema.max_depth\
+            \ = 50\nend</pre>\n"
           error:
             unavailable: Die Karte ist nicht verfügbar. Bitte konfigurieren Sie die
               Geokodierung, um diese Komponente zu aktivieren.
@@ -1430,16 +1701,20 @@ de:
           zu können, müssen Sie sich einloggen und Ihr Konto autorisieren.
       system:
         organizations:
-          admin_allowed_authoritzations_help_html: |
-            Admins können Benutzer mit diesen Berechtigungen manuell verifizieren.
-            <br>Diese Funktion mit Vorsicht nutzen, da dies zu Sicherheitsproblemen führen kann.
+          admin_allowed_authoritzations_help_html: 'Admins können Benutzer mit diesen
+            Berechtigungen manuell verifizieren.
+
+            <br>Diese Funktion mit Vorsicht nutzen, da dies zu Sicherheitsproblemen
+            führen kann.
+
+            '
           awesome_tweaks: Decidim Awesome Optimierungen
       validators:
         too_much_caps: Es werden zu viele Großbuchstaben verwendet (über %{percent}%
           des Textes)
       voting:
         voting_cards:
-          abstained: "✔ Enthalten"
+          abstained: ✔ Enthalten
           change_vote: Meine Stimme ändern
           default_box_title: Über diesen Vorschlag abstimmen
           default_instructions_html: <p>Bitte lesen Sie die Wahlregeln sorgfältig
@@ -1463,6 +1738,24 @@ de:
             weight_2_short: 'Y:'
             weight_3: Grün
             weight_3_short: 'G:'
+      follow_up_questionnaire_message_mailer:
+        notification:
+          default_name: dort
+          greeting: Hallo %{name},
+          intro: 'Sie haben eine neue Nachricht zu Ihrer Einreichung zu «%{questionnaire}»
+            erhalten:'
+          outro: Vielen Dank für Ihre Teilnahme.
+          status_updated: Status auf «%{status}» aktualisiert.
+          subject: Neue Nachricht zu Ihrer Einreichung zu «%{questionnaire}»
+      status_colors:
+        blue: Blau
+        gray: Grau
+        green: Grün
+        orange: Orange
+        pink: Rosa
+        purple: Lila
+        red: Rot
+        yellow: Gelb
     download_your_data:
       show:
         admin_actions: Admin-Aktionen
@@ -1482,6 +1775,11 @@ de:
           za: Z-A (umgekehrt alphabetisch)
         proposal:
           view_proposal: Vorschlag ansehen
+    events:
+      decidim_awesome:
+        follow_up_questionnaire_message_status_changed:
+          notification_title: 'Der Status Ihrer Einreichung zu «%{questionnaire}»
+            wurde auf «%{status}» geändert. '
   layouts:
     decidim:
       data_consent:
@@ -1516,3 +1814,4 @@ de:
           proposals: Vorschläge
           select_deselect_all: Alles auswählen / Auswahl aufheben
           taxonomies: Klassifizierungen
+

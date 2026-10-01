@@ -3,6 +3,8 @@
 class CreateFollowUpQuestionnaires < ActiveRecord::Migration[7.0]
   def change
     create_table :decidim_awesome_follow_up_questionnaires do |t|
+      t.references :decidim_organization, null: false, foreign_key: { to_table: :decidim_organizations }, index: { name: "index_decidim_awesome_fuq_on_organization_id" }
+      t.references :decidim_component, null: false, foreign_key: { to_table: :decidim_components }, index: { name: "index_decidim_awesome_fuq_on_component_id" }
       t.bigint :decidim_questionnaire_id, null: false
       t.jsonb :name, null: false, default: {}
       t.integer :position, null: false, default: 0

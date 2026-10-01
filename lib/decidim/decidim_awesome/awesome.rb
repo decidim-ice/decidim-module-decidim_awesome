@@ -402,6 +402,16 @@ module Decidim
       ]
     end
 
+    # Admin menu registry for each supported participatory space, used to hook the
+    # follow up questionnaires entry into the space's admin panel
+    config_accessor :follow_up_questionnaires_parent_menus do
+      {
+        "Decidim::ParticipatoryProcess" => :admin_participatory_process_menu,
+        "Decidim::Assembly" => :admin_assembly_menu,
+        "Decidim::Conference" => :conference_admin_menu
+      }
+    end
+
     # Maximum number of columns allowed per RichText content block
     config_accessor :max_rich_text_columns do
       5

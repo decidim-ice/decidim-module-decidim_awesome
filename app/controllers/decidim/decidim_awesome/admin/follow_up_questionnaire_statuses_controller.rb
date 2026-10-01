@@ -7,11 +7,12 @@ module Decidim
         include Decidim::TranslatableAttributes
         include BreadcrumbHelpers
 
+        before_action do
+          enforce_permission_to :edit_config, :follow_up_questionnaires
+        end
         before_action :follow_up_questionnaire
         before_action :status, only: [:update, :destroy]
         before_action :set_follow_up_questionnaire_breadcrumb, only: [:new, :edit]
-
-        def index; end
 
         def new
           add_breadcrumb_item :new, decidim_admin_decidim_awesome.edit_follow_up_questionnaire_path(follow_up_questionnaire.decidim_questionnaire_id)
@@ -20,6 +21,7 @@ module Decidim
 
         def create
           @form = form(FollowUpQuestionnaireStatusForm).from_params(params)
+          @form.follow_up_questionnaire_id = follow_up_questionnaire.id
 
           CreateFollowUpQuestionnaireStatus.call(@form) do
             on(:ok) do
@@ -40,6 +42,7 @@ module Decidim
 
         def update
           @form = form(FollowUpQuestionnaireStatusForm).from_params(params)
+          @form.follow_up_questionnaire_id = follow_up_questionnaire.id
 
           UpdateFollowUpQuestionnaireStatus.call(@form, status) do
             on(:ok) do
@@ -59,13 +62,18 @@ module Decidim
               flash[:notice] = I18n.t("follow_up_questionnaire_statuses.destroy.success", scope: "decidim.decidim_awesome.admin")
               redirect_to decidim_admin_decidim_awesome.edit_follow_up_questionnaire_path(follow_up_questionnaire.decidim_questionnaire_id)
             end
+            on(:invalid) do
+              flash[:alert] = I18n.t("follow_up_questionnaire_statuses.destroy.not_removable", scope: "decidim.decidim_awesome.admin")
+              redirect_to decidim_admin_decidim_awesome.edit_follow_up_questionnaire_path(follow_up_questionnaire.decidim_questionnaire_id)
+            end
           end
         end
 
         private
 
         def follow_up_questionnaire
-          @follow_up_questionnaire ||= FollowUpQuestionnaire.find(params[:follow_up_questionnaire_id])
+          @follow_up_questionnaire ||= FollowUpQuestionnaire.where(organization: current_organization).visible.find_by(id: params[:follow_up_questionnaire_id]) ||
+                                       raise(ActionController::RoutingError, "Not Found")
         end
 
         def status
