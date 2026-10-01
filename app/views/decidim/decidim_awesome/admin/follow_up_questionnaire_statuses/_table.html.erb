@@ -28,7 +28,7 @@
               <% if status.removable? %>
                 <%= icon_link_to "close-circle-line", decidim_admin_decidim_awesome.follow_up_questionnaire_status_path(follow_up_questionnaire_id, status), t(".remove"), method: :delete, class: "action-icon--remove", data: { confirm: t(".confirm_destroy") } %>
               <% else %>
-                <%= with_tooltip t(".not_removable"), class: :left do %>
+                <%= with_tooltip(status.last? ? t(".last_status") : t(".not_removable"), class: :left) do %>
                   <%= icon "close-circle-line", class: "text-gray" %>
                 <% end %>
               <% end %>

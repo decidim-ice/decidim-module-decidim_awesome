@@ -61,6 +61,15 @@ module Decidim::DecidimAwesome
             expect { post :create, params: params }.not_to change(Decidim::DecidimAwesome::FollowUpQuestionnaireStatus, :count)
             expect(flash[:alert]).to be_present
           end
+
+          context "and it only differs in case" do
+            before { params[:follow_up_questionnaire_status][:name] = { en: "open" } }
+
+            it "does not create a duplicate status" do
+              expect { post :create, params: params }.not_to change(Decidim::DecidimAwesome::FollowUpQuestionnaireStatus, :count)
+              expect(flash[:alert]).to include("That name is already used by another label in this questionnaire.")
+            end
+          end
         end
       end
 
@@ -109,10 +118,34 @@ module Decidim::DecidimAwesome
             expect(status.reload.name["en"]).not_to eq("")
           end
         end
+
+        context "when the name does not change" do
+          before { params[:follow_up_questionnaire_status][:name] = { en: "Open" } }
+
+          it "updates the status" do
+            patch :update, params: params
+            expect(flash[:notice]).not_to be_empty
+            expect(status.reload.color).to eq("#FFEBE9")
+          end
+        end
+
+        context "when the name is taken by another status" do
+          before do
+            follow_up_questionnaire.statuses.create!(name: { "en" => "Pending" }, color: "#EBF9FF")
+            params[:follow_up_questionnaire_status][:name] = { en: "pending" }
+          end
+
+          it "does not update the status" do
+            patch :update, params: params
+            expect(flash[:alert]).to include("That name is already used by another label in this questionnaire.")
+            expect(status.reload.name["en"]).to eq("Open")
+          end
+        end
       end
 
       describe "DELETE #destroy" do
         let!(:status) { follow_up_questionnaire.statuses.create!(name: { "en" => "Open" }, color: "#EBF9FF") }
+        let!(:other_status) { follow_up_questionnaire.statuses.create!(name: { "en" => "Closed" }, color: "#EBF9FF") }
 
         it "destroys the status" do
           expect { delete :destroy, params: { follow_up_questionnaire_id: follow_up_questionnaire.id, id: status.id } }.to change(Decidim::DecidimAwesome::FollowUpQuestionnaireStatus, :count).by(-1)
@@ -128,6 +161,16 @@ module Decidim::DecidimAwesome
           it "does not destroy the status and shows an alert" do
             expect { delete :destroy, params: { follow_up_questionnaire_id: follow_up_questionnaire.id, id: status.id } }.not_to change(Decidim::DecidimAwesome::FollowUpQuestionnaireStatus, :count)
             expect(flash[:alert]).to eq("This label is used in messages and cannot be removed.")
+            expect(response).to redirect_to(edit_follow_up_questionnaire_path(follow_up_questionnaire.decidim_questionnaire_id))
+          end
+        end
+
+        context "when it is the last status of the questionnaire" do
+          let!(:other_status) { nil }
+
+          it "does not destroy the status and shows an alert" do
+            expect { delete :destroy, params: { follow_up_questionnaire_id: follow_up_questionnaire.id, id: status.id } }.not_to change(Decidim::DecidimAwesome::FollowUpQuestionnaireStatus, :count)
+            expect(flash[:alert]).to eq("At least one label is required, so the last one cannot be removed.")
             expect(response).to redirect_to(edit_follow_up_questionnaire_path(follow_up_questionnaire.decidim_questionnaire_id))
           end
         end

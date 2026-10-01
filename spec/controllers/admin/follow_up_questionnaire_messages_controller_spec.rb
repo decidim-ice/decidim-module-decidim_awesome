@@ -43,6 +43,14 @@ module Decidim::DecidimAwesome
         end
       end
 
+      context "when the follow up questionnaire has no statuses" do
+        let!(:status) { nil }
+
+        it "does not create them" do
+          expect { get :index, params: { follow_up_questionnaire_id: follow_up_questionnaire.decidim_questionnaire_id } }.not_to change(Decidim::DecidimAwesome::FollowUpQuestionnaireStatus, :count)
+        end
+      end
+
       describe "GET #new" do
         let(:respondent) { create(:user, :confirmed, organization:) }
 

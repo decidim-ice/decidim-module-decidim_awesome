@@ -81,7 +81,6 @@ module Decidim
                                                                                    .find_by(decidim_questionnaire_id: params[:follow_up_questionnaire_id])
           raise ActionController::RoutingError, "Not Found" unless @follow_up_questionnaire
 
-          Decidim::DecidimAwesome.create_default_statuses!(@follow_up_questionnaire) if @follow_up_questionnaire.statuses.empty?
           @follow_up_questionnaire
         end
 

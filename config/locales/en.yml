@@ -1092,6 +1092,8 @@ en:
             error: Error creating label! %{error}
             success: Label created successfully
           destroy:
+            last_status: At least one label is required, so the last one cannot be
+              removed.
             not_removable: This label is used in messages and cannot be removed.
             success: Label removed successfully
           edit:
@@ -1107,6 +1109,8 @@ en:
             description: Labels are used to track the status of a response
             edit: Edit
             labels_title: Labels
+            last_status: At least one label is required, so the last one cannot be
+              removed.
             new: New label
             not_removable: This label is used in messages and cannot be removed.
             remove: Remove
@@ -1145,9 +1149,8 @@ en:
           index:
             confirm_destroy: Are you sure to remove this follow-up questionnaire?
             description: Turn questionnaire submissions into interactive threads.
-              Click any response to message the participant directly, log private
-              team notes, apply tracking labels, and view the complete communication
-              history.
+              Click any response to message the participant directly, apply tracking
+              labels, and view the complete communication history.
             edit: Edit
             manage_responses: Manage responses
             new: New follow-up
@@ -1507,10 +1510,14 @@ en:
             field '%{field}'
           invalid_xml: 'Content couldn''t be parsed: DL/DD elements not found in the
             XML'
+      default_statuses:
+        answered: Answered
+        in_progress: In progress
+        pending: Pending
       follow_up_questionnaire_message_mailer:
         notification:
-          default_name: there
           greeting: Hi %{name},
+          greeting_without_name: Hi there,
           intro: 'You have received a new message regarding your submission to "%{questionnaire}":'
           outro: Thank you for your participation.
           status_updated: Status updated to "%{status}".

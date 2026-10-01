@@ -82,6 +82,15 @@ module Decidim
         expect(statuses["In progress"].color).to eq(subject.follow_up_status_colors[:green][:background])
         expect(statuses["Pending"].color).to eq(subject.follow_up_status_colors[:red][:background])
       end
+
+      it "fills the names in every locale of the organization" do
+        subject.create_default_statuses!(follow_up_questionnaire)
+
+        follow_up_questionnaire.statuses.reload.each do |status|
+          expect(status.name.keys).to match_array(follow_up_questionnaire.organization.available_locales)
+          expect(status.name.values).to all(be_present)
+        end
+      end
     end
   end
 end

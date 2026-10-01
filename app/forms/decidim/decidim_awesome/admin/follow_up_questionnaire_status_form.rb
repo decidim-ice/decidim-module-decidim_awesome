@@ -36,11 +36,13 @@ module Decidim
         private
 
         def name_unique_within_questionnaire
-          statuses = context[:existing_statuses] || []
+          statuses = Decidim::DecidimAwesome::FollowUpQuestionnaireStatus
+                     .where(follow_up_questionnaire_id:)
+                     .where.not(id: context[:current_status_id])
           duplicated = statuses.any? do |status|
-            status.follow_up_questionnaire_id == follow_up_questionnaire_id &&
-              status.name.to_s.strip.casecmp?(name.to_s.strip) &&
-              status.id != context[:current_status_id]
+            name.any? do |locale, value|
+              value.present? && status.name[locale.to_s].to_s.strip.casecmp?(value.to_s.strip)
+            end
           end
           errors.add(:base, :taken, message: I18n.t("decidim.decidim_awesome.admin.follow_up_questionnaire_statuses.form.name_taken_error")) if duplicated
         end

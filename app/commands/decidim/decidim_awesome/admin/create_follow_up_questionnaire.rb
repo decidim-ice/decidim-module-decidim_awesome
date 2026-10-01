@@ -17,6 +17,10 @@ module Decidim
         def extra_params
           { resource: { follow_up_questionnaire_name: translated_attribute(form.name) } }
         end
+
+        def run_after_hooks
+          Decidim::DecidimAwesome.create_default_statuses!(resource)
+        end
       end
     end
   end
