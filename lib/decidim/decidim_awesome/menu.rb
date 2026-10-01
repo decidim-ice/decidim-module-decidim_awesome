@@ -228,6 +228,7 @@ module Decidim
                 menu.add_item :"follow_up_questionnaire_#{fuq.id}",
                               translated_attribute(fuq.name),
                               decidim_admin_decidim_awesome.follow_up_questionnaire_messages_path(fuq.decidim_questionnaire_id),
+                              icon_name: "questionnaire-line",
                               if: allowed
               end
             end
