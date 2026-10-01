@@ -1067,6 +1067,7 @@ en:
             not_answered: "(not answered)"
             not_processable: No respondent - Not processable
             see_full_responses: See full responses
+            view_survey: Preview
           new:
             anonymous_respondent: Anonymous respondent
             messages_count:
