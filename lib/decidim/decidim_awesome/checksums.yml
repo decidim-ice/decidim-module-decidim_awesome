@@ -40,6 +40,7 @@ decidim-core:
     decidim-0.31.0: db42be326ff225c422e2c126d784b477
   /app/presenters/decidim/admin_log/component_presenter.rb:
     decidim-0.31.0: 0bfbd6771f52884a224f8e947ab15839
+    decidim-0.31.7: a9a7ea1afde2c35ff853c6935bee9338
   /app/forms/decidim/account_form.rb:
     decidim-0.31.0: 5872f17965919c0754a453ac4eb614df
   /app/commands/decidim/update_account.rb:
