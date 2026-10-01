@@ -58,6 +58,7 @@ decidim-core:
     decidim-0.31.0: da0d18178c8dcead2774956e989527c5
   /app/views/decidim/shared/_login_modal.html.erb:
     decidim-0.31.0: 98bd2832be207d7abcd48d2a0ba40bd0
+    decidim-0.31.7: 046844b67287472089bfc53c05892fd8
   /app/queries/decidim/last_activity.rb:
     decidim-0.31.0: adc4334ee17bd8a894357813b9e29654
   /app/services/decidim/open_data_exporter.rb:
