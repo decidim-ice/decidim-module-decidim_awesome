@@ -55,13 +55,15 @@ describe "Awesome map" do
       expect(page).to have_css(".awesome-map")
 
       expect(page).to have_content(taxonomy.name["en"])
-      marker_icons = all(".leaflet-marker-icon")
       [proposal, another_proposal, meeting].each do |mapped_item|
-        marker_icons.each do |marker|
-          marker.click
-          break if page.has_css?("h3.card__list-title", text: mapped_item.title["en"])
+        marker_selector = ".leaflet-marker-icon[title='#{mapped_item.title["en"]}']"
+        10.times do
+          break if page.has_css?(marker_selector)
+
+          find(".marker-cluster", match: :first).click
         end
 
+        find(marker_selector).click
         expect(page).to have_css("h3.card__list-title", text: mapped_item.title["en"])
       end
     end

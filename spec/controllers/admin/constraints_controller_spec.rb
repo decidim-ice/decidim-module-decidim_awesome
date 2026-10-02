@@ -193,7 +193,7 @@ module Decidim::DecidimAwesome
           end
 
           it "does not destroy the other organization's constraint" do
-            expect { delete(:destroy, params:) }.not_to change { ConfigConstraint.exists?(id) }
+            expect { delete(:destroy, params:) }.not_to(change { ConfigConstraint.exists?(id) })
             expect(response).to have_http_status(:not_found)
           end
         end
