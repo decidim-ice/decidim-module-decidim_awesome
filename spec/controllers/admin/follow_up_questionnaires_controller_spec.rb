@@ -12,6 +12,8 @@ module Decidim::DecidimAwesome
       let(:component) { create(:component, manifest_name: "surveys", organization:) }
       let(:questionnaire) { create(:questionnaire) }
       let!(:survey) { create(:survey, component:, questionnaire:) }
+      let(:name_question) { create(:questionnaire_question, questionnaire:) }
+      let(:email_question) { create(:questionnaire_question, questionnaire:) }
 
       before do
         request.env["decidim.current_organization"] = organization
@@ -76,8 +78,8 @@ module Decidim::DecidimAwesome
               name: { en: "Follow up" },
               decidim_questionnaire_id: questionnaire.id,
               position: 0,
-              responder_name_field: "full_name",
-              responder_email_field: "email",
+              responder_name_field: name_question.id.to_s,
+              responder_email_field: email_question.id.to_s,
               active: true
             }
           }
@@ -212,8 +214,8 @@ module Decidim::DecidimAwesome
               name: { en: "Updated name" },
               decidim_questionnaire_id: questionnaire.id,
               position: 1,
-              responder_name_field: "full_name",
-              responder_email_field: "email",
+              responder_name_field: name_question.id.to_s,
+              responder_email_field: email_question.id.to_s,
               active: false
             }
           }
@@ -254,7 +256,9 @@ module Decidim::DecidimAwesome
           let(:other_component) { create(:component, manifest_name: "surveys", organization:) }
           let(:other_questionnaire) { create(:survey, component: other_component).questionnaire }
 
-          before { params[:follow_up_questionnaire][:decidim_questionnaire_id] = other_questionnaire.id }
+          before do
+            params[:follow_up_questionnaire].merge!(decidim_questionnaire_id: other_questionnaire.id, responder_name_field: "", responder_email_field: "")
+          end
 
           it "updates the component" do
             patch :update, params: params

@@ -12,13 +12,15 @@ module Decidim::DecidimAwesome
       let(:questionnaire) { create(:questionnaire) }
       let!(:survey) { create(:survey, component:, questionnaire:) }
       let(:existing_questionnaire_ids) { [] }
+      let(:name_question) { create(:questionnaire_question, questionnaire:) }
+      let(:email_question) { create(:questionnaire_question, questionnaire:) }
       let(:attributes) do
         {
           name: { "en" => "Follow up" },
           decidim_questionnaire_id: questionnaire.id,
           position: 0,
-          responder_name_field: "full_name",
-          responder_email_field: "email",
+          responder_name_field: name_question.id.to_s,
+          responder_email_field: email_question.id.to_s,
           active: true
         }
       end
@@ -30,8 +32,8 @@ module Decidim::DecidimAwesome
           name: { "en" => "Follow up" },
           decidim_questionnaire_id: questionnaire.id,
           position: 0,
-          responder_name_field: "full_name",
-          responder_email_field: "email",
+          responder_name_field: name_question.id.to_s,
+          responder_email_field: email_question.id.to_s,
           reply_to: nil,
           active: true
         )
@@ -71,6 +73,32 @@ module Decidim::DecidimAwesome
         let(:existing_questionnaire_ids) { [questionnaire.id] }
 
         it { is_expected.not_to be_valid }
+      end
+
+      context "when the responder fields are blank" do
+        let(:attributes) { super().merge(responder_name_field: "", responder_email_field: nil) }
+
+        it { is_expected.to be_valid }
+      end
+
+      context "when a responder field is a question of another questionnaire" do
+        let(:other_question) { create(:questionnaire_question, questionnaire: create(:questionnaire)) }
+        let(:attributes) { super().merge(responder_email_field: other_question.id.to_s) }
+
+        it "is not valid" do
+          expect(subject).not_to be_valid
+          expect(subject.errors[:responder_email_field]).to be_present
+          expect(subject.errors[:responder_name_field]).to be_empty
+        end
+      end
+
+      context "when a responder field is not a question id" do
+        let(:attributes) { super().merge(responder_name_field: "full_name") }
+
+        it "is not valid" do
+          expect(subject).not_to be_valid
+          expect(subject.errors[:responder_name_field]).to be_present
+        end
       end
     end
   end
