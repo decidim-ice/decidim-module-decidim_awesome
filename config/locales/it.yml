@@ -176,9 +176,10 @@ it:
             truncate: Numero massimo di caratteri per le descrizioni nei popup
           step:
             announcement: Annuncio
-            show_accepted: Mostra le proposte accettate
-            show_evaluating: Mostra le proposte in valutazione
+            show_answered: Mostra le proposte a cui è stata data risposta
             show_not_answered: Mostra le proposte senza risposta
+            show_not_rejected: Mostra le proposte non respinte
+            show_not_withdrawn: Mostra le proposte non ritirate
             show_rejected: Mostra le proposte respinte
             show_withdrawn: Mostra le proposte ritirate
       proposals:
@@ -1339,9 +1340,10 @@ it:
           menu_meetings: Mostra meeting
           menu_merge_components: Fondi tutti i componenti dello stesso tipo nel menu
           name: Mappa Awesome
-          show_accepted: Mostra le proposte accettate
-          show_evaluating: Mostra le proposte in valutazione
+          show_answered: Mostra le proposte a cui è stata data risposta
           show_not_answered: Mostra le proposte senza risposta
+          show_not_rejected: Mostra le proposte non respinte
+          show_not_withdrawn: Mostra le proposte non ritirate
           show_rejected: Mostra le proposte respinte
           show_withdrawn: Mostra le proposte ritirate
           taxonomies: Tassonomie

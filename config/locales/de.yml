@@ -179,9 +179,10 @@ de:
             truncate: Maximale Zeichenanzahl für Popup-Beschreibungen
           step:
             announcement: Ankündigung
-            show_accepted: Angenommene Vorschläge anzeigen
-            show_evaluating: In Bewertung befindliche Vorschläge anzeigen
+            show_answered: Beantwortete Vorschläge anzeigen
             show_not_answered: Nicht beantwortete Vorschläge anzeigen
+            show_not_rejected: Nicht abgelehnte Vorschläge anzeigen
+            show_not_withdrawn: Nicht zurückgezogene Vorschläge anzeigen
             show_rejected: Abgelehnte Vorschläge anzeigen
             show_withdrawn: Zurückgezogene Vorschläge anzeigen
       proposals:
@@ -1335,9 +1336,10 @@ de:
           menu_meetings: Veranstaltungen anzeigen
           menu_merge_components: Alle Komponenten desselben Typs im Menü zusammenführen
           name: Awesome Karte
-          show_accepted: Angenommene Vorschläge anzeigen
-          show_evaluating: Bewertung der Vorschläge anzeigen
+          show_answered: Beantwortete Vorschläge anzeigen
           show_not_answered: Nicht beantwortete Vorschläge anzeigen
+          show_not_rejected: Nicht abgelehnte Vorschläge anzeigen
+          show_not_withdrawn: Nicht zurückgezogene Vorschläge anzeigen
           show_rejected: Abgelehnte Vorschläge anzeigen
           show_withdrawn: Zurückgezogene Vorschläge anzeigen
           taxonomies: Klassifizierungen

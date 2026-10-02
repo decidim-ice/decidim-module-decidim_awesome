@@ -38,11 +38,12 @@ module Decidim
               settings.attribute :menu_taxonomies, type: :boolean, default: true
               settings.attribute :menu_merge_components, type: :boolean, default: true
 
+              settings.attribute :show_answered, type: :boolean, default: true
               settings.attribute :show_not_answered, type: :boolean, default: true
-              settings.attribute :show_accepted, type: :boolean, default: true
-              settings.attribute :show_withdrawn, type: :boolean, default: false
-              settings.attribute :show_evaluating, type: :boolean, default: true
-              settings.attribute :show_rejected, type: :boolean, default: false
+              settings.attribute :show_withdrawn, type: :boolean, default: true
+              settings.attribute :show_not_withdrawn, type: :boolean, default: true
+              settings.attribute :show_rejected, type: :boolean, default: true
+              settings.attribute :show_not_rejected, type: :boolean, default: true
               settings.attribute :taxonomy_ids, type: :array, default: []
             end
           end

@@ -29,8 +29,6 @@ export default class AwesomeMap {
       },
       show: {
         withdrawn: false,
-        accepted: false,
-        evaluating: false,
         notAnswered: false,
         rejected: false
       },

@@ -19,27 +19,13 @@ describe "Show awesome map" do
   let!(:rejected_proposal) { create(:proposal, :rejected, title: { en: "Rejected proposal" }, component: proposal_component, latitude: 10, longitude: 80) }
   let!(:user) { create(:user, :confirmed, organization:) }
   let(:active_step_id) { component.participatory_space.active_step.id }
+  let(:step_settings) { nil }
   let(:settings) do
     {
       menu_amendments: show_amendments,
       menu_meetings: show_meetings
     }
   end
-
-  let(:step_settings) do
-    {
-      show_accepted:,
-      show_evaluating:,
-      show_rejected:,
-      show_withdrawn:,
-      show_not_answered:
-    }
-  end
-  let(:show_accepted) { true }
-  let(:show_evaluating) { true }
-  let(:show_rejected) { true }
-  let(:show_withdrawn) { true }
-  let(:show_not_answered) { true }
 
   let(:show_amendments) { true }
   let(:show_meetings) { true }
@@ -58,7 +44,7 @@ describe "Show awesome map" do
 
   before do
     allow(Decidim.config).to receive(:maps).and_return(map_config)
-    component.update!(step_settings: { active_step_id => step_settings })
+    component.update!(step_settings: { active_step_id => step_settings }) if step_settings
     component.update!(settings: { taxonomy_filters: root_taxonomy.taxonomy_filters.ids })
     visit_component
   end
@@ -96,45 +82,79 @@ describe "Show awesome map" do
     end
   end
 
-  context "when step settings are all true" do
-    it "shows all proposals markers" do
-      sleep(3)
-      expect(page.body).to have_css("div[title='#{accepted_proposal.title["en"]}']")
-      expect(page.body).to have_css("div[title='#{evaluating_proposal.title["en"]}']")
-      expect(page.body).to have_css("div[title='#{rejected_proposal.title["en"]}']")
-      expect(page.body).to have_css("div[title='#{not_answered_proposal.title["en"]}']")
+  it "applies the default proposal state visibility" do
+    expect(page).to have_css("div[title='#{accepted_proposal.title["en"]}']")
+    expect(page).to have_css("div[title='#{evaluating_proposal.title["en"]}']")
+    expect(page).to have_css("div[title='#{not_answered_proposal.title["en"]}']")
+    expect(page).to have_no_css("div[title='#{rejected_proposal.title["en"]}']")
+    expect(page).to have_no_css("div[title='#{withdrawn_proposal.title["en"]}']")
+  end
+
+  context "when answered proposals are hidden" do
+    let(:step_settings) do
+      { show_answered: false, show_not_answered: true, show_withdrawn: true, show_not_withdrawn: true, show_rejected: true, show_not_rejected: true }
+    end
+
+    it "keeps only unanswered proposals from the answer filter" do
+      expect(page).to have_css("div[title='#{not_answered_proposal.title["en"]}']")
+      expect(page).to have_no_css("div[title='#{accepted_proposal.title["en"]}']")
+      expect(page).to have_no_css("div[title='#{evaluating_proposal.title["en"]}']")
     end
   end
 
-  context "when step settings are all false" do
-    let(:show_accepted) { false }
-    let(:show_evaluating) { false }
-    let(:show_rejected) { false }
-    let(:show_withdrawn) { false }
-    let(:show_not_answered) { false }
+  context "when unanswered proposals are hidden" do
+    let(:step_settings) do
+      { show_answered: true, show_not_answered: false, show_withdrawn: true, show_not_withdrawn: true, show_rejected: true, show_not_rejected: true }
+    end
 
-    it "does not show any proposal" do
-      sleep(3)
-      expect(page.body).to have_no_css("div[title='#{accepted_proposal.title["en"]}']")
-      expect(page.body).to have_no_css("div[title='#{evaluating_proposal.title["en"]}']")
-      expect(page.body).to have_no_css("div[title='#{rejected_proposal.title["en"]}']")
-      expect(page.body).to have_no_css("div[title='#{withdrawn_proposal.title["en"]}']")
+    it "keeps answered proposals" do
+      expect(page).to have_css("div[title='#{accepted_proposal.title["en"]}']")
+      expect(page).to have_css("div[title='#{evaluating_proposal.title["en"]}']")
+      expect(page).to have_no_css("div[title='#{not_answered_proposal.title["en"]}']")
     end
   end
 
-  context "when only the not answered option is enabled" do
-    let(:show_accepted) { false }
-    let(:show_evaluating) { false }
-    let(:show_rejected) { false }
-    let(:show_withdrawn) { false }
-    let(:show_not_answered) { true }
+  context "when withdrawn proposals are hidden" do
+    let(:step_settings) do
+      { show_answered: true, show_not_answered: true, show_withdrawn: false, show_not_withdrawn: true, show_rejected: true, show_not_rejected: true }
+    end
 
-    it "only shows proposal without state" do
-      sleep(3)
-      expect(page.body).to have_no_css("div[title='#{accepted_proposal.title["en"]}']")
-      expect(page.body).to have_no_css("div[title='#{evaluating_proposal.title["en"]}']")
-      expect(page.body).to have_no_css("div[title='#{rejected_proposal.title["en"]}']")
-      expect(page.body).to have_no_css("div[title='#{withdrawn_proposal.title["en"]}']")
+    it "hides withdrawn proposals only" do
+      expect(page).to have_css("div[title='#{accepted_proposal.title["en"]}']")
+      expect(page).to have_no_css("div[title='#{withdrawn_proposal.title["en"]}']")
+    end
+  end
+
+  context "when non-withdrawn proposals are hidden" do
+    let(:step_settings) do
+      { show_answered: true, show_not_answered: true, show_withdrawn: true, show_not_withdrawn: false, show_rejected: true, show_not_rejected: true }
+    end
+
+    it "keeps withdrawn proposals only from the withdrawal filter" do
+      expect(page).to have_css("div[title='#{withdrawn_proposal.title["en"]}']")
+      expect(page).to have_no_css("div[title='#{accepted_proposal.title["en"]}']")
+    end
+  end
+
+  context "when rejected proposals are hidden" do
+    let(:step_settings) do
+      { show_answered: true, show_not_answered: true, show_withdrawn: true, show_not_withdrawn: true, show_rejected: false, show_not_rejected: true }
+    end
+
+    it "hides rejected proposals only" do
+      expect(page).to have_css("div[title='#{accepted_proposal.title["en"]}']")
+      expect(page).to have_no_css("div[title='#{rejected_proposal.title["en"]}']")
+    end
+  end
+
+  context "when non-rejected proposals are hidden" do
+    let(:step_settings) do
+      { show_answered: true, show_not_answered: true, show_withdrawn: true, show_not_withdrawn: true, show_rejected: true, show_not_rejected: false }
+    end
+
+    it "keeps rejected proposals only from the rejection filter" do
+      expect(page).to have_css("div[title='#{rejected_proposal.title["en"]}']")
+      expect(page).to have_no_css("div[title='#{accepted_proposal.title["en"]}']")
     end
   end
 

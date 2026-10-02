@@ -180,9 +180,10 @@ fr:
             truncate: Caractères maximum pour les descriptions des popups
           step:
             announcement: Annonce
-            show_accepted: Propositions acceptées
-            show_evaluating: Afficher les propositions en cours d'évaluation
+            show_answered: Afficher les propositions ayant reçu une réponse
             show_not_answered: Afficher les propositions n'ayant pas reçu de réponses
+            show_not_rejected: Afficher les propositions non rejetées
+            show_not_withdrawn: Afficher les propositions non retirées
             show_rejected: Afficher les propositions rejetées
             show_withdrawn: Afficher les propositions retirées
       proposals:
@@ -1380,9 +1381,10 @@ fr:
           menu_merge_components: Fusionner toutes les fonctionnalités du même type
             dans le menu
           name: Awesome Map (Cartographie interactive)
-          show_accepted: Propositions acceptées
-          show_evaluating: Afficher les propositions en cours d'évaluation
+          show_answered: Afficher les propositions ayant reçu une réponse
           show_not_answered: Afficher les propositions n'ayant pas reçu de réponses
+          show_not_rejected: Afficher les propositions non rejetées
+          show_not_withdrawn: Afficher les propositions non retirées
           show_rejected: Afficher les propositions rejetées
           show_withdrawn: Afficher les propositions retirées
           taxonomies: Taxonomies

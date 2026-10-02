@@ -33,18 +33,19 @@
     </div>
   </div>
   <div class="row two-buttons">
+    <div><%= settings_fields.check_box :show_answered, label: t("show_answered", scope: i18n_scope) %></div>
     <div><%= settings_fields.check_box :show_not_answered, label: t("show_not_answered", scope: i18n_scope) %></div>
-    <div><%= settings_fields.check_box :show_accepted, label: t("show_accepted", scope: i18n_scope) %>
-    </div>
   </div>
   <div class="row two-buttons">
     <div><%= settings_fields.check_box :show_withdrawn, label: t("show_withdrawn", scope: i18n_scope) %></div>
-    <div><%= settings_fields.check_box :show_evaluating, label: t("show_evaluating", scope: i18n_scope) %>
-    </div>
+    <div><%= settings_fields.check_box :show_not_withdrawn, label: t("show_not_withdrawn", scope: i18n_scope) %></div>
   </div>
   <div class="row two-buttons">
-      <div><%= settings_fields.check_box :show_rejected, label: t("show_rejected", scope: i18n_scope) %></div>
-      <div><%= settings_fields.check_box :menu_merge_components, label: t("menu_merge_components", scope: i18n_scope) %></div>
+    <div><%= settings_fields.check_box :show_rejected, label: t("show_rejected", scope: i18n_scope) %></div>
+    <div><%= settings_fields.check_box :show_not_rejected, label: t("show_not_rejected", scope: i18n_scope) %></div>
+  </div>
+  <div class="row">
+    <%= settings_fields.check_box :menu_merge_components, label: t("menu_merge_components", scope: i18n_scope) %>
   </div>
 
   <div class="row mt-6">

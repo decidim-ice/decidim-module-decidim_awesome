@@ -179,9 +179,10 @@ es:
             truncate: Número máximo de caracteres para las descripciones emergentes
           step:
             announcement: Anuncio
-            show_accepted: Muestra las propuestas aceptadas
-            show_evaluating: Muestra las propuestas en evaluación
+            show_answered: Mostrar propuestas respondidas
             show_not_answered: Muestra las propuestas pendientes de contestar
+            show_not_rejected: Mostrar propuestas no rechazadas
+            show_not_withdrawn: Mostrar propuestas no retiradas
             show_rejected: Muestra las propuestas rechazadas
             show_withdrawn: Muestra las propuestas retiradas
       proposals:
@@ -1348,9 +1349,10 @@ es:
           menu_merge_components: Combinar todos los componentes del mismo tipo en
             el menú
           name: Mapa Global
-          show_accepted: Muestra las propuestas aceptadas
-          show_evaluating: Muestra las propuestas en evaluación
+          show_answered: Mostrar propuestas respondidas
           show_not_answered: Muestra las propuestas pendientes de contestar
+          show_not_rejected: Mostrar propuestas no rechazadas
+          show_not_withdrawn: Mostrar propuestas no retiradas
           show_rejected: Muestra las propuestas rechazadas
           show_withdrawn: Muestra las propuestas retiradas
           taxonomies: Taxonomías

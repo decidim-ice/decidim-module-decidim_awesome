@@ -11,6 +11,7 @@ module Decidim
 
         layout false
         helper_method :constraint_key
+        rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
         before_action do
           render :no_permissions unless allowed_to? :edit_config, constraint_key
@@ -109,6 +110,10 @@ module Decidim
 
         private
 
+        def render_not_found
+          head :not_found
+        end
+
         def filtered_params
           ops = {}
           [:participatory_space_manifest, :participatory_space_slug].each do |key|
@@ -118,7 +123,10 @@ module Decidim
         end
 
         def constraint
-          @constraint ||= ConfigConstraint.find(params[:id])
+          @constraint ||= ConfigConstraint
+                          .joins(:awesome_config)
+                          .merge(AwesomeConfig.where(organization: current_organization))
+                          .find(params[:id])
         end
 
         def current_setting

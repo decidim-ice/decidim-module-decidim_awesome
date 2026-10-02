@@ -22,7 +22,10 @@ module Decidim
           return broadcast(:invalid) if attributes.blank?
 
           begin
-            constraint = ConfigConstraint.find(form.id)
+            constraint = ConfigConstraint
+                         .joins(:awesome_config)
+                         .merge(AwesomeConfig.where(organization: form.current_organization))
+                         .find(form.id)
             constraint.settings = attributes
             constraint.save!
             broadcast(:ok)
