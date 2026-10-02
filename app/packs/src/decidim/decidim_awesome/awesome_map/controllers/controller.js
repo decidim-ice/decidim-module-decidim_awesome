@@ -22,18 +22,31 @@ export default class Controller {
   }
 
   setFetcher(Fetcher) {
-    let checkProposalState = function (node, map) {
-      const showConfig = map.config.show;
-      const state = node.state || "notAnswered";
-      let visibilityKey = state;
-      if (state === "not_answered") {
-        visibilityKey = "notAnswered";
+    const checkProposalState = (node) => {
+      const showConfig = this.awesomeMap.config.show;
+      const unanswered = !node.state || node.state === "not_answered";
+      const rejected = node.state === "rejected";
+
+      if (unanswered && showConfig.notAnswered === false) {
+        return false;
       }
-      if (!Object.keys(showConfig).includes(visibilityKey)) {
-        return true;
+      if (!unanswered && showConfig.answered === false) {
+        return false;
       }
-      return showConfig[visibilityKey];
-    }
+      if (node.withdrawn && showConfig.withdrawn === false) {
+        return false;
+      }
+      if (!node.withdrawn && showConfig.notWithdrawn === false) {
+        return false;
+      }
+      if (rejected && showConfig.rejected === false) {
+        return false;
+      }
+      if (!rejected && showConfig.notRejected === false) {
+        return false;
+      }
+      return true;
+    };
 
     this.fetcher = new Fetcher(this);
     this.fetcher.onFinished = () => {
@@ -43,12 +56,7 @@ export default class Controller {
     this.fetcher.onCollection = (collection) =>  {
       if (collection && collection.edges)  {
         // Add markers to the main cluster group
-        let collectionEdges = [];
-        if (this.fetcher.collection === "meetings") {
-          collectionEdges = collection.edges.filter((item) => item.node.coordinates && item.node.coordinates.latitude && item.node.coordinates.longitude);
-        } else {
-          collectionEdges = collection.edges.filter((item) => item.node.coordinates && item.node.coordinates.latitude && item.node.coordinates.longitude && checkProposalState(item.node, this.awesomeMap));
-        }
+        const collectionEdges = collection.edges.filter((item) => item.node.coordinates && item.node.coordinates.latitude && item.node.coordinates.longitude && (this.fetcher.collection === "meetings" || checkProposalState(item.node)));
 
         try {
           this.awesomeMap.cluster.addLayers(collectionEdges.map((item) => item.node.marker));

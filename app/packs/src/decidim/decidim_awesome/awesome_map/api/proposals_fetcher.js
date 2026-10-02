@@ -17,6 +17,7 @@ export default class ProposalsFetcher extends Fetcher {
                 node {
                   id
                   state
+                  withdrawn
                   proposalState {
                     title {
                       translations {

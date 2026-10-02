@@ -173,9 +173,10 @@ en:
             truncate: Maximum characters for popup descriptions
           step:
             announcement: Announcement
-            show_accepted: Show accepted proposals
-            show_evaluating: Show evaluating proposals
+            show_answered: Show answered proposals
             show_not_answered: Show not answered proposals
+            show_not_rejected: Show proposals that are not rejected
+            show_not_withdrawn: Show proposals that are not withdrawn
             show_rejected: Show rejected proposals
             show_withdrawn: Show withdrawn proposals
       proposals:
@@ -1301,9 +1302,10 @@ en:
           menu_meetings: Show meetings
           menu_merge_components: Merge all components of the same type in the menu
           name: Awesome Map
-          show_accepted: Show accepted proposals
-          show_evaluating: Show evaluating proposals
+          show_answered: Show answered proposals
           show_not_answered: Show not answered proposals
+          show_not_rejected: Show proposals that are not rejected
+          show_not_withdrawn: Show proposals that are not withdrawn
           show_rejected: Show rejected proposals
           show_withdrawn: Show withdrawn proposals
           taxonomies: Taxonomies

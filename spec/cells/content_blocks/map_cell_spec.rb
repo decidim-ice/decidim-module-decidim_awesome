@@ -43,11 +43,12 @@ module Decidim::DecidimAwesome
       expect(subject.to_s).to include('data-map-zoom="8"')
       expect(subject.to_s).to include('data-menu-amendments="true"')
       expect(subject.to_s).to include('data-menu-meetings="true"')
+      expect(subject.to_s).to include('data-show-answered="true"')
       expect(subject.to_s).to include('data-show-not-answered="true"')
-      expect(subject.to_s).to include('data-show-accepted="true"')
-      expect(subject.to_s).to include('data-show-evaluating="true"')
-      expect(subject.to_s).to include('data-show-withdrawn="false"')
-      expect(subject.to_s).to include('data-show-rejected="false"')
+      expect(subject.to_s).to include('data-show-withdrawn="true"')
+      expect(subject.to_s).to include('data-show-not-withdrawn="true"')
+      expect(subject.to_s).to include('data-show-rejected="true"')
+      expect(subject.to_s).to include('data-show-not-rejected="true"')
     end
 
     it "uses all components" do
@@ -98,11 +99,12 @@ module Decidim::DecidimAwesome
           map_zoom: 12,
           menu_amendments: false,
           menu_meetings: false,
+          show_answered: false,
           show_not_answered: false,
-          show_accepted: false,
-          show_evaluating: false,
-          show_withdrawn: true,
-          show_rejected: true
+          show_withdrawn: false,
+          show_not_withdrawn: false,
+          show_rejected: false,
+          show_not_rejected: false
         }
       end
 
@@ -112,11 +114,12 @@ module Decidim::DecidimAwesome
         expect(subject.to_s).to include('data-map-zoom="12"')
         expect(subject.to_s).to include('data-menu-amendments="false"')
         expect(subject.to_s).to include('data-menu-meetings="false"')
+        expect(subject.to_s).to include('data-show-answered="false"')
         expect(subject.to_s).to include('data-show-not-answered="false"')
-        expect(subject.to_s).to include('data-show-accepted="false"')
-        expect(subject.to_s).to include('data-show-evaluating="false"')
-        expect(subject.to_s).to include('data-show-withdrawn="true"')
-        expect(subject.to_s).to include('data-show-rejected="true"')
+        expect(subject.to_s).to include('data-show-withdrawn="false"')
+        expect(subject.to_s).to include('data-show-not-withdrawn="false"')
+        expect(subject.to_s).to include('data-show-rejected="false"')
+        expect(subject.to_s).to include('data-show-not-rejected="false"')
       end
     end
 

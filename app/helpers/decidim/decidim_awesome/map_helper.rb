@@ -42,11 +42,12 @@ module Decidim
             "menu-meetings" => global_settings.menu_meetings,
             "menu-taxonomies" => global_settings.menu_taxonomies,
             "menu-hashtags" => global_settings.menu_hashtags,
+            "show-answered" => step_settings&.show_answered,
             "show-not-answered" => step_settings&.show_not_answered,
-            "show-accepted" => step_settings&.show_accepted,
             "show-withdrawn" => step_settings&.show_withdrawn,
-            "show-evaluating" => step_settings&.show_evaluating,
-            "show-rejected" => step_settings&.show_rejected
+            "show-not-withdrawn" => step_settings&.show_not_withdrawn,
+            "show-rejected" => step_settings&.show_rejected,
+            "show-not-rejected" => step_settings&.show_not_rejected
           }
         }
 
@@ -59,12 +60,12 @@ module Decidim
       # rubocop:enable Metrics/CyclomaticComplexity
       # rubocop:enable Metrics/PerceivedComplexity
 
-      def step_settings
-        settings_source.try(:current_settings)
-      end
-
       def global_settings
         settings_source.try(:settings)
+      end
+
+      def step_settings
+        settings_source.try(:current_settings)
       end
 
       def settings_source
