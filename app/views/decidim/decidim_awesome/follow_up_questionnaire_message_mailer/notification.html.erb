@@ -1,4 +1,4 @@
-<p class="email-greeting"><%= t(".greeting", name: @name.presence || t(".default_name")) %></p>
+<p class="email-greeting"><%= @name.present? ? t(".greeting", name: @name) : t(".greeting_without_name") %></p>
 
 <p class="email-instructions"><%= t(".intro", questionnaire: translated_attribute(@message.follow_up_questionnaire.name)) %></p>
 

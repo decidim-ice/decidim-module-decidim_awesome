@@ -516,14 +516,17 @@ module Decidim
 
     def self.create_default_statuses!(follow_up_questionnaire)
       colors = follow_up_status_colors
-      locales = Decidim.available_locales.index_with { |_locale| nil }
+      locales = follow_up_questionnaire.organization.available_locales
 
+      # i18n-tasks-use t('decidim.decidim_awesome.default_statuses.answered')
+      # i18n-tasks-use t('decidim.decidim_awesome.default_statuses.in_progress')
+      # i18n-tasks-use t('decidim.decidim_awesome.default_statuses.pending')
       [
-        { name: "Answered", color: colors[:yellow][:background] },
-        { name: "In progress", color: colors[:green][:background] },
-        { name: "Pending", color: colors[:red][:background] }
+        { key: :answered, color: colors[:yellow][:background] },
+        { key: :in_progress, color: colors[:green][:background] },
+        { key: :pending, color: colors[:red][:background] }
       ].each do |attrs|
-        name = locales.merge("en" => attrs[:name])
+        name = Decidim::TranslationsHelper.multi_translation("decidim.decidim_awesome.default_statuses.#{attrs[:key]}", locales)
 
         FollowUpQuestionnaireStatus.create!(
           follow_up_questionnaire: follow_up_questionnaire,

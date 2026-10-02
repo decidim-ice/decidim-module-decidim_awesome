@@ -24,7 +24,11 @@ module Decidim
       validates :color, presence: true
 
       def removable?
-        messages.none?
+        messages.none? && !last?
+      end
+
+      def last?
+        self.class.where(follow_up_questionnaire_id:).where.not(id:).none?
       end
 
       def self.log_presenter_class_for(_log)

@@ -91,6 +91,11 @@ module Decidim::DecidimAwesome
           expect(Decidim::DecidimAwesome::FollowUpQuestionnaire.last.component).to eq(component)
         end
 
+        it "creates the default statuses" do
+          post :create, params: params
+          expect(Decidim::DecidimAwesome::FollowUpQuestionnaire.last.statuses.count).to eq(3)
+        end
+
         context "when the questionnaire belongs to another organization" do
           let(:other_component) { create(:component, manifest_name: "surveys", organization: create(:organization)) }
           let(:other_questionnaire) { create(:questionnaire) }
@@ -149,6 +154,10 @@ module Decidim::DecidimAwesome
         it "returns http success" do
           get :edit, params: { id: follow_up_questionnaire.decidim_questionnaire_id }
           expect(response).to have_http_status(:success)
+        end
+
+        it "does not create statuses" do
+          expect { get :edit, params: { id: follow_up_questionnaire.decidim_questionnaire_id } }.not_to change(Decidim::DecidimAwesome::FollowUpQuestionnaireStatus, :count)
         end
 
         context "when the follow up questionnaire does not exist" do
@@ -282,6 +291,11 @@ module Decidim::DecidimAwesome
           expect { delete :destroy, params: { id: follow_up_questionnaire.decidim_questionnaire_id } }.to change(Decidim::DecidimAwesome::FollowUpQuestionnaire, :count).by(-1)
           expect(flash[:notice]).not_to be_empty
           expect(response).to redirect_to(follow_up_questionnaires_path)
+        end
+
+        it "does not create statuses" do
+          expect(Decidim::DecidimAwesome).not_to receive(:create_default_statuses!)
+          delete :destroy, params: { id: follow_up_questionnaire.decidim_questionnaire_id }
         end
 
         context "when the follow up questionnaire has messages" do

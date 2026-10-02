@@ -41,7 +41,7 @@ module Decidim
         end
 
         def update
-          @form = form(FollowUpQuestionnaireStatusForm).from_params(params)
+          @form = form(FollowUpQuestionnaireStatusForm).from_params(params, current_status_id: status.id)
           @form.follow_up_questionnaire_id = follow_up_questionnaire.id
 
           UpdateFollowUpQuestionnaireStatus.call(@form, status) do
@@ -63,7 +63,8 @@ module Decidim
               redirect_to decidim_admin_decidim_awesome.edit_follow_up_questionnaire_path(follow_up_questionnaire.decidim_questionnaire_id)
             end
             on(:invalid) do
-              flash[:alert] = I18n.t("follow_up_questionnaire_statuses.destroy.not_removable", scope: "decidim.decidim_awesome.admin")
+              error_key = status.last? ? "last_status" : "not_removable"
+              flash[:alert] = I18n.t("follow_up_questionnaire_statuses.destroy.#{error_key}", scope: "decidim.decidim_awesome.admin")
               redirect_to decidim_admin_decidim_awesome.edit_follow_up_questionnaire_path(follow_up_questionnaire.decidim_questionnaire_id)
             end
           end
