@@ -121,14 +121,20 @@ Useful when a survey needs manual follow-up. Admins with a role in a participato
 
 #### Technical area
 
+- **Admin visibility:** Enabled (organization admins see "Follow up questionnaires" in the Awesome admin menu; in each participatory space, every configured follow-up questionnaire gets its own entry in the space's admin menu)
 - **Default behavior:** Enabled by default; `:disabled` removes it entirely (the follow-up questionnaires list, their statuses, the space menu entries and the responses and messages pages)
-- **Access control:** The menu entry per space is only shown to users holding an `admin` role for that specific space
+- **Admin control:** Cannot be toggled per-scope; either enabled globally or completely disabled with `:disabled`. Setting it to `false` behaves like `true`
+- **Roles:** Organization admins create and configure the follow-up questionnaires and their statuses. Replying to respondents is done from the space's admin menu by organization admins and by users holding an `admin` role for that specific space
 - **Reply-To:** Each follow-up questionnaire has an optional Reply-To email. When set, participants' replies to the notification emails go to that address; when empty, the emails are sent without a Reply-To, like other Decidim emails
 
 ```ruby
 # config/initializers/awesome_defaults.rb
 Decidim::DecidimAwesome.configure do |config|
-  config.follow_up_questionnaires = true # default: true, or :disabled
+  # Enable follow up questionnaires (default: true)
+  config.follow_up_questionnaires = true
+
+  # To completely remove this feature, use:
+  # config.follow_up_questionnaires = :disabled
 
   # Admin menu registry for each participatory space type; add an entry here
   # for custom participatory spaces

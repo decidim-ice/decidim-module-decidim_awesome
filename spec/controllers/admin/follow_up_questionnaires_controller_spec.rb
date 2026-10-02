@@ -311,7 +311,7 @@ module Decidim::DecidimAwesome
 
           it "does not destroy the follow up questionnaire and shows the translated error" do
             expect { delete :destroy, params: { id: follow_up_questionnaire.decidim_questionnaire_id } }.not_to change(Decidim::DecidimAwesome::FollowUpQuestionnaire, :count)
-            expect(flash[:alert]).to include("It has messages sent to respondents and cannot be removed. Deactivate it instead.")
+            expect(flash[:alert]).to include("It has messages sent to respondents and cannot be removed.")
             expect(response).to redirect_to(follow_up_questionnaires_path)
           end
         end

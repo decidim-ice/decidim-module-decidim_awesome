@@ -1,0 +1,6 @@
+// Like .proposal-status__color in Decidim, the color names are only for screen readers
+.follow-up-status__color {
+  label {
+    @apply sr-only;
+  }
+}

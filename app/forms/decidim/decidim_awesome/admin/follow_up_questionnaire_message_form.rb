@@ -70,7 +70,7 @@ module Decidim
         # i18n-tasks-use t('activemodel.errors.models.follow_up_questionnaire_message.attributes.body.blank_without_status_change')
         def body_or_status_change_present
           return if body.to_s.strip.present?
-          return if status_id.blank? || previous_status_id.blank?
+          return if status_id.blank?
           return if status_id != previous_status_id
 
           errors.add(:body, :blank_without_status_change)

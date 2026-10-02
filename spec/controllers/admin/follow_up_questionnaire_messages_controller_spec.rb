@@ -28,18 +28,52 @@ module Decidim::DecidimAwesome
 
       describe "GET #index" do
         let(:respondent) { create(:user, :confirmed, organization:) }
+        let(:anonymous_token) { "anonymous-session-token" }
+        let(:last_status) { follow_up_questionnaire.statuses.second }
+        let(:params) { { follow_up_questionnaire_id: follow_up_questionnaire.decidim_questionnaire_id } }
 
         before do
-          2.times { Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(follow_up_questionnaire:, status:, author: user, body: "Hi", decidim_user_id: respondent.id) }
-          Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(follow_up_questionnaire:, status:, author: user, decidim_user_id: respondent.id)
+          create(:response, questionnaire:, user: respondent)
+          create(:response, questionnaire:, user: nil, session_token: anonymous_token)
+          2.times { |i| Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(follow_up_questionnaire:, status:, author: user, body: "Hi", decidim_user_id: respondent.id, created_at: (3 - i).days.ago) }
+          Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(follow_up_questionnaire:, status: last_status, author: user, decidim_user_id: respondent.id)
+          Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(follow_up_questionnaire:, status:, author: user, body: "Hi", session_token: anonymous_token)
         end
 
         it "returns http success" do
-          get :index, params: { follow_up_questionnaire_id: follow_up_questionnaire.decidim_questionnaire_id }
+          get(:index, params:)
 
           expect(response).to have_http_status(:success)
           expect(assigns(:questionnaire)).to eq(questionnaire)
+        end
+
+        it "counts only the messages with body of each respondent" do
+          get(:index, params:)
+
           expect(assigns(:messages_count_by_respondent)[respondent.id]).to eq(2)
+          expect(assigns(:messages_count_by_respondent)[anonymous_token]).to eq(1)
+        end
+
+        it "returns the last message of each respondent with its status" do
+          get(:index, params:)
+
+          latest_messages = assigns(:latest_messages_by_respondent)
+          expect(latest_messages.keys).to contain_exactly(respondent.id, anonymous_token)
+          expect(latest_messages[respondent.id].body).to be_nil
+          expect(latest_messages[respondent.id].association(:status)).to be_loaded
+          expect(latest_messages[respondent.id].status).to eq(last_status)
+          expect(latest_messages[anonymous_token].body).to eq("Hi")
+        end
+
+        context "when a respondent is not in the current page" do
+          let(:params) { super().merge(per_page: 15, page: 2) }
+
+          it "does not load their messages" do
+            get(:index, params:)
+
+            expect(assigns(:latest_messages_by_respondent)).to be_empty
+            expect(assigns(:messages_count_by_respondent)).to be_empty
+          end
         end
       end
 
@@ -62,6 +96,36 @@ module Decidim::DecidimAwesome
           expect(response).to have_http_status(:success)
           expect(assigns(:form).follow_up_questionnaire_id).to eq(follow_up_questionnaire.id)
         end
+
+        context "when the respondent only has a name" do
+          render_views
+
+          let(:session_token) { "anonymous-session-token" }
+          let(:name_question) { create(:questionnaire_question, questionnaire:) }
+
+          before do
+            follow_up_questionnaire.update!(responder_name_field: name_question.id.to_s)
+            create(:response, questionnaire:, question: name_question, user: nil, session_token:, body: "Jane")
+          end
+
+          it "warns that the message will not be emailed" do
+            get :new, params: { follow_up_questionnaire_id: follow_up_questionnaire.decidim_questionnaire_id, session_token: }
+
+            expect(response).to have_http_status(:success)
+            expect(response.body).to include("This respondent has no email address")
+          end
+        end
+
+        context "when the respondent cannot be identified" do
+          let(:session_token) { "anonymous-session-token" }
+
+          before { create(:response, questionnaire:, user: nil, session_token:) }
+
+          it "raises a routing error" do
+            expect { get :new, params: { follow_up_questionnaire_id: follow_up_questionnaire.decidim_questionnaire_id, session_token: } }
+              .to raise_error(ActionController::RoutingError)
+          end
+        end
       end
 
       describe "POST #create" do
@@ -83,8 +147,37 @@ module Decidim::DecidimAwesome
         it "creates the message" do
           expect { post :create, params: params }.to change(Decidim::DecidimAwesome::FollowUpQuestionnaireMessage, :count).by(1)
 
-          expect(flash[:notice]).not_to be_empty
+          expect(flash[:notice]).to eq("Message sent successfully")
           expect(response).to redirect_to(follow_up_questionnaire_messages_path(follow_up_questionnaire.decidim_questionnaire_id))
+        end
+
+        context "when the respondent only has a name" do
+          let(:session_token) { "anonymous-session-token" }
+          let(:name_question) { create(:questionnaire_question, questionnaire:) }
+          let(:anonymous_params) { params.deep_merge(follow_up_questionnaire_message: { decidim_user_id: nil, session_token: }) }
+
+          before do
+            follow_up_questionnaire.update!(responder_name_field: name_question.id.to_s)
+            create(:response, questionnaire:, question: name_question, user: nil, session_token:, body: "Jane")
+          end
+
+          it "saves the message and tells that it was not emailed" do
+            expect { post :create, params: anonymous_params }.to change(Decidim::DecidimAwesome::FollowUpQuestionnaireMessage, :count).by(1)
+
+            expect(flash[:notice]).to eq("Message saved, but not emailed because the respondent has no email address")
+          end
+        end
+
+        context "when the respondent cannot be identified" do
+          let(:session_token) { "anonymous-session-token" }
+          let(:anonymous_params) { params.deep_merge(follow_up_questionnaire_message: { decidim_user_id: nil, session_token: }) }
+
+          before { create(:response, questionnaire:, user: nil, session_token:) }
+
+          it "raises a routing error and does not create a message" do
+            expect { post :create, params: anonymous_params }.to raise_error(ActionController::RoutingError)
+            expect(Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.count).to eq(0)
+          end
         end
 
         context "when the form is invalid" do

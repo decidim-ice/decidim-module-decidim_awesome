@@ -20,9 +20,18 @@ module Decidim::DecidimAwesome
       end
 
       describe "GET #new" do
+        render_views
+
         it "returns http success" do
           get :new, params: { follow_up_questionnaire_id: follow_up_questionnaire.id }
           expect(response).to have_http_status(:success)
+        end
+
+        it "labels each color for screen readers" do
+          get :new, params: { follow_up_questionnaire_id: follow_up_questionnaire.id }
+
+          expect(response.body).to include('id="follow_up_questionnaire_status_color_f6f8fa"')
+          expect(response.body).to match(%r{<label for="follow_up_questionnaire_status_color_f6f8fa">Gray</label>})
         end
       end
 

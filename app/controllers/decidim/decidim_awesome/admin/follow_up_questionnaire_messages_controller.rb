@@ -15,6 +15,7 @@ module Decidim
         before_action :follow_up_questionnaire
         before_action :enforce_messages_permission!
         before_action :participant, only: [:new, :create]
+        before_action :ensure_processable_respondent!, only: [:new, :create]
         before_action :set_follow_up_questionnaire_breadcrumb, only: [:index, :new, :create]
 
         helper_method :current_participatory_space, :respondent_details, :preview_response_path, :reply_to_email
@@ -33,9 +34,8 @@ module Decidim
         def index
           @questionnaire = @follow_up_questionnaire.questionnaire
           @participants = paginate(Decidim::Forms::QuestionnaireParticipants.new(@questionnaire).participants)
-          messages_by_respondent = @follow_up_questionnaire.messages.group_by { |message| message.decidim_user_id || message.session_token }
-          @latest_messages_by_respondent = messages_by_respondent.transform_values { |messages| messages.max_by(&:created_at) }
-          @messages_count_by_respondent = messages_by_respondent.transform_values { |messages| messages.count { |message| message.body.present? } }
+          @latest_messages_by_respondent = latest_page_messages.index_by { |message| message.decidim_user_id || message.session_token }
+          @messages_count_by_respondent = page_messages_count
         end
 
         def new
@@ -51,6 +51,8 @@ module Decidim
           @form.status_id = @messages.first&.status_id
         end
 
+        # i18n-tasks-use t("decidim.decidim_awesome.admin.follow_up_questionnaire_messages.create.success")
+        # i18n-tasks-use t("decidim.decidim_awesome.admin.follow_up_questionnaire_messages.create.success_without_email")
         def create
           @statuses = @follow_up_questionnaire.statuses
           @form = form(FollowUpQuestionnaireMessageForm).from_params(
@@ -62,8 +64,8 @@ module Decidim
           assign_recipient
 
           CreateFollowUpQuestionnaireMessage.call(@form) do
-            on(:ok) do
-              flash[:notice] = I18n.t("follow_up_questionnaire_messages.create.success", scope: "decidim.decidim_awesome.admin")
+            on(:ok) do |_message, email_sent|
+              flash[:notice] = I18n.t(email_sent ? "success" : "success_without_email", scope: "decidim.decidim_awesome.admin.follow_up_questionnaire_messages.create")
               redirect_to follow_up_questionnaire_messages_path(follow_up_questionnaire.decidim_questionnaire_id)
             end
             on(:invalid) do
@@ -127,6 +129,11 @@ module Decidim
           end
         end
 
+        # The index hides the conversation of respondents that cannot be identified, this also protects direct URLs
+        def ensure_processable_respondent!
+          raise ActionController::RoutingError, "Not Found" unless respondent_details(participant).processable?
+        end
+
         # In create the recipient comes in the form hidden fields
         def recipient_params
           action_name == "create" ? params.fetch(:follow_up_questionnaire_message, {}) : params
@@ -145,6 +152,25 @@ module Decidim
                     scope.where(session_token: participant.session_token)
                   end
           scope.recent
+        end
+
+        def page_messages
+          messages = @follow_up_questionnaire.messages
+          user_ids = @participants.filter_map(&:decidim_user_id)
+          session_tokens = @participants.reject(&:decidim_user_id).map(&:session_token)
+          messages.where(decidim_user_id: user_ids).or(messages.where(decidim_user_id: nil, session_token: session_tokens))
+        end
+
+        def latest_page_messages
+          respondent_key = "COALESCE(decidim_awesome_follow_up_questionnaire_messages.decidim_user_id::text, decidim_awesome_follow_up_questionnaire_messages.session_token)"
+          page_messages.select("DISTINCT ON (#{respondent_key}) decidim_awesome_follow_up_questionnaire_messages.*")
+                       .order(Arel.sql("#{respondent_key}, decidim_awesome_follow_up_questionnaire_messages.created_at DESC"))
+                       .includes(:status)
+        end
+
+        def page_messages_count
+          page_messages.where.not(body: nil).group(:decidim_user_id, :session_token).count
+                       .each_with_object(Hash.new(0)) { |((user_id, session_token), count), counts| counts[user_id || session_token] += count }
         end
 
         def respondents_finder
