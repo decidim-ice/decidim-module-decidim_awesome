@@ -180,9 +180,10 @@ ca:
             truncate: Nombre màxim de caràcters per les descripcions emergents
           step:
             announcement: Anunci
-            show_accepted: Mostra les propostes acceptades
-            show_evaluating: Mostra les propostes en avaluació
+            show_answered: Mostra les propostes contestades
             show_not_answered: Mostra les propostes pendents de contestar
+            show_not_rejected: Mostra les propostes no rebutjades
+            show_not_withdrawn: Mostra les propostes no retirades
             show_rejected: Mostra les propostes rebutjades
             show_withdrawn: Mostra les propostes retirades
       proposals:
@@ -1364,9 +1365,10 @@ ca:
           menu_meetings: Mostrar trobades
           menu_merge_components: Unifica tots els components del mateix tipus al menú
           name: Mapa global
-          show_accepted: Mostra les propostes acceptades
-          show_evaluating: Mostra les propostes en avaluació
+          show_answered: Mostra les propostes contestades
           show_not_answered: Mostra les propostes pendents de contestar
+          show_not_rejected: Mostra les propostes no rebutjades
+          show_not_withdrawn: Mostra les propostes no retirades
           show_rejected: Mostra les propostes rebutjades
           show_withdrawn: Mostra les propostes retirades
           taxonomies: Taxonomies

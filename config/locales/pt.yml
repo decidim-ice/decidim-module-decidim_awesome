@@ -173,9 +173,10 @@ pt:
             truncate: Maximo de caracteres para descricoes em popup
           step:
             announcement: Anuncio
-            show_accepted: Mostrar propostas aceitas
-            show_evaluating: Mostrar propostas em avaliacao
+            show_answered: Mostrar propostas respondidas
             show_not_answered: Mostrar propostas nao respondidas
+            show_not_rejected: Mostrar propostas nao rejeitadas
+            show_not_withdrawn: Mostrar propostas nao retiradas
             show_rejected: Mostrar propostas rejeitadas
             show_withdrawn: Mostrar propostas retiradas
       proposals:
@@ -1334,9 +1335,10 @@ pt:
           menu_meetings: Mostrar reunioes
           menu_merge_components: Mesclar todos os componentes do mesmo tipo no menu
           name: Mapa Incrivel
-          show_accepted: Mostrar propostas aceitas
-          show_evaluating: Mostrar propostas em avaliacao
+          show_answered: Mostrar propostas respondidas
           show_not_answered: Mostrar propostas nao respondidas
+          show_not_rejected: Mostrar propostas nao rejeitadas
+          show_not_withdrawn: Mostrar propostas nao retiradas
           show_rejected: Mostrar propostas rejeitadas
           show_withdrawn: Mostrar propostas retiradas
           taxonomies: Taxonomias

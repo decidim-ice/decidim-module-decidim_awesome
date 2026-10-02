@@ -57,9 +57,10 @@ nl:
             truncate: Maximaal aantal tekens voor popup beschrijvingen
           step:
             announcement: Aankondiging
-            show_accepted: Toon geaccepteerde voorstellen
-            show_evaluating: Toon evaluatievoorstellen
+            show_answered: Toon beantwoorde voorstellen
             show_not_answered: Toon niet beantwoorde voorstellen
+            show_not_rejected: Toon niet afgewezen voorstellen
+            show_not_withdrawn: Toon niet ingetrokken voorstellen
             show_rejected: Toon afgewezen voorstellen
             show_withdrawn: Toon ingetrokken voorstellen
     decidim_awesome:
@@ -199,9 +200,10 @@ nl:
           menu_amendments: Toon amendementen
           menu_meetings: Toon vergaderingen
           name: Awesome Map
-          show_accepted: Toon geaccepteerde voorstellen
-          show_evaluating: Toon evaluatievoorstellen
+          show_answered: Toon beantwoorde voorstellen
           show_not_answered: Toon niet beantwoorde voorstellen
+          show_not_rejected: Toon niet afgewezen voorstellen
+          show_not_withdrawn: Toon niet ingetrokken voorstellen
           show_rejected: Toon afgewezen voorstellen
           show_withdrawn: Toon ingetrokken voorstellen
           truncate: Maximaal aantal tekens voor popup beschrijvingen

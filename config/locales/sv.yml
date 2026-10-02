@@ -97,8 +97,12 @@ sv:
             menu_meetings: Visa möten
           step:
             announcement: Meddelande
-            show_accepted: Visa godkända förslag
-            show_evaluating: Visa förslag som utvärderas
+            show_answered: Visa besvarade förslag
+            show_not_answered: Visa obesvarade förslag
+            show_not_rejected: Visa förslag som inte har avslagits
+            show_not_withdrawn: Visa förslag som inte har återtagits
+            show_rejected: Visa avslagna förslag
+            show_withdrawn: Visa återtagna förslag
     decidim_awesome:
       admin:
         checks:
@@ -200,8 +204,12 @@ sv:
           menu_amendments: Visa ändringsförslag
           menu_meetings: Visa möten
           name: Karta
-          show_accepted: Visa godkända förslag
-          show_evaluating: Visa förslag som utvärderas
+          show_answered: Visa besvarade förslag
+          show_not_answered: Visa obesvarade förslag
+          show_not_rejected: Visa förslag som inte har avslagits
+          show_not_withdrawn: Visa förslag som inte har återtagits
+          show_rejected: Visa avslagna förslag
+          show_withdrawn: Visa återtagna förslag
           text_settings: Textinställningar
           title: Titel
       map_component:
