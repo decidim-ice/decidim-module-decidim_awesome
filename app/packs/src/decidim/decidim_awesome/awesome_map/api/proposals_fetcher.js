@@ -74,7 +74,7 @@ export default class ProposalsFetcher extends Fetcher {
     node.humanState = "";
     node.stateClass = "muted";
     node.stateStyle = "";
-    if (proposalState) {
+    if (proposalState && node.state) {
       node.humanState = this.findTranslation(proposalState.title.translations);
       node.stateClass = "";
       node.stateStyle = `background-color: ${proposalState.bgColor}; color: ${proposalState.textColor}; border-color: ${proposalState.textColor};`;
