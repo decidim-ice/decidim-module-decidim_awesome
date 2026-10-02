@@ -1,4 +1,3 @@
----
 ca:
   active_hashcash:
     submit_filter: Filtra
@@ -103,6 +102,27 @@ ca:
           manualment a les participants amb aquests verificadors
       user:
         user_time_zone: Zona horària personal
+      follow_up_questionnaire:
+        active: Actiu
+        name: Nom
+        position: Posició
+        reply_to: Correu de resposta
+      follow_up_questionnaire_messages:
+        id: ID
+        last_action: Última acció
+        messages_count: Nombre de missatges
+        respondent: Respondent
+        status: Estat
+        submission_date: Data d’enviament
+      follow_up_questionnaire_statuses:
+        color: Color
+        labels_color: Color de les etiquetes
+        labels_id: ID de les etiquetes
+        name: Nom
+      follow_up_questionnaires:
+        name: Nom
+        number_of_responses: Nombre de respostes
+        participatory_space: Espai participatiu > qüestionari
     errors:
       models:
         cookie_item:
@@ -114,6 +134,11 @@ ca:
                 pot canviar
               invalid_format: El nom només pot contenir lletres, números, guions i
                 guions baixos (sense espais)
+        follow_up_questionnaire_message:
+          attributes:
+            body:
+              blank_without_status_change: ha d'estar present o seleccionar un estat
+                diferent
   decidim:
     admin:
       actions:
@@ -269,7 +294,7 @@ ca:
             see_spaces: Llista global d'administradores d'un espai participatiu
             title: Històric d'administradores
           last_login: Darrera data d'identificació
-          missing_info: "(falta informació)"
+          missing_info: (falta informació)
           missing_user: La participant no existeix a la base de dades
           name: Nom
           never_logged: No loguejat encara
@@ -293,11 +318,16 @@ ca:
           authorization_transferred: 'Avís: hi ha hagut un conflicte de verificació
             i la verificació s''ha transferit a %{user}'
           conflict: Hi ha un conflicte amb una autorització existent
-          conflict_help_html: |-
-            Heu de resoldre el conflicte amb la participant %{user} abans de poder autoritzar la participant amb aquesta autorització.
+          conflict_help_html: 'Heu de resoldre el conflicte amb la participant %{user}
+            abans de poder autoritzar la participant amb aquesta autorització.
+
             <br><br>
-            Es produeix un conflicte de verificació quan un altre usuari té les mateixes dades que la participant que esteu intentant autoritzar.
-            Podeu resoldre aquest conflicte eliminant l'autorització conflictiva de l'altre participant o utilitzant dades diferents per a aquest participant.
+
+            Es produeix un conflicte de verificació quan un altre usuari té les mateixes
+            dades que la participant que esteu intentant autoritzar.
+
+            Podeu resoldre aquest conflicte eliminant l''autorització conflictiva
+            de l''altre participant o utilitzant dades diferents per a aquest participant.'
           edit:
             authorize: Autoritza %{user} amb %{name}
             do_it_if_sure: Feu-ho només si esteu segur que la participant té aquesta
@@ -308,8 +338,8 @@ ca:
             force_verification_reason: 'Doneu un motiu per forçar la verificació:'
             warning: 'Avís: en forçar aquesta autorització, esteu forçant l''estat
               d''autorització actual del participant.'
-          user_authorized: "%{user} s'ha autoritzat correctament amb %{name}"
-          user_not_authorized: "%{user} no s'ha pogut autoritzar amb %{name}"
+          user_authorized: '%{user} s''ha autoritzat correctament amb %{name}'
+          user_not_authorized: '%{user} no s''ha pogut autoritzar amb %{name}'
         awesome_authorization_properties:
           create:
             error: Error en actualitzar les propietats d'autorització! %{error}
@@ -507,17 +537,27 @@ ca:
               hashcash_i18n_key: Podeu personalitzar el text del botó que es mostra
                 als usuaris a les pàgines d'iniciar sessió/registre amb la clau i18n
                 %{key}
-              hashcash_login: |
-                Protegeix les aplicacions Rails contra bots i atacs de força bruta sense molestar els humans.
-                Hashcash és un sistema de prova de treball que requereix que els usuaris resolguin un trencaclosques computacional (realitzat automàticament pel navegador) abans de poder registrar-se.
+              hashcash_login: 'Protegeix les aplicacions Rails contra bots i atacs
+                de força bruta sense molestar els humans.
+
+                Hashcash és un sistema de prova de treball que requereix que els usuaris
+                resolguin un trencaclosques computacional (realitzat automàticament
+                pel navegador) abans de poder registrar-se.
+
+                '
               hashcash_login_bits: Aquest paràmetre defineix el nombre de bits que
                 l'algoritme Hashcash utilitzarà per generar la prova de treball. Es
                 recomana utilitzar un valor entre 16 (fàcil) i 30 (extremadament difícil)
                 bits. El valor per defecte per als formularis d'inici de sessió és
                 %{bits} bits.
-              hashcash_signup: |
-                Protegeix les aplicacions Rails contra bots i atacs de força bruta sense molestar els humans.
-                Hashcash és un sistema de prova de treball que requereix que els usuaris resolguin un trencaclosques computacional (realitzat automàticament pel navegador) abans de poder registrar-se.
+              hashcash_signup: 'Protegeix les aplicacions Rails contra bots i atacs
+                de força bruta sense molestar els humans.
+
+                Hashcash és un sistema de prova de treball que requereix que els usuaris
+                resolguin un trencaclosques computacional (realitzat automàticament
+                pel navegador) abans de poder registrar-se.
+
+                '
               hashcash_signup_bits: Aquest paràmetre defineix el nombre de bits que
                 l'algoritme Hashcash utilitzarà per generar la prova de treball. Es
                 recomana utilitzar un valor entre 16 (fàcil) i 30 (extremadament difícil)
@@ -539,28 +579,43 @@ ca:
               proposal_custom_fields_example: Les dades son desades en un objecte
                 XML fent servir atributs compatibles amb HTML (elements DL, DT, DD)
                 que reemplacen el "cos" de la proposat normal.
-              proposal_custom_fields_translations: |-
-                Les etiquetes, el text d'ajuda, els "placeholders" i els valors predeterminats poden utilitzar les traduccions personalitzades de l'aplicació.
-                Per això, en comptes d'utilitzar un text literal, utilitzeu la clau i18n (ha de contenir almenys un punt).
+              proposal_custom_fields_translations: 'Les etiquetes, el text d''ajuda,
+                els "placeholders" i els valors predeterminats poden utilitzar les
+                traduccions personalitzades de l''aplicació.
+
+                Per això, en comptes d''utilitzar un text literal, utilitzeu la clau
+                i18n (ha de contenir almenys un punt).
+
                 Per exemple:
+
                 - "activemodel.attributes.proposal.title" en lloc de "Títol"
+
                 - "activemodel.attributes.proposal.address" en lloc de "Address"
-                O utilitzeu les vostres pròpies claus en combinació amb altres eines per definir traduccions (p. ex.: utilitzant el mòdul Term Customizer):
-                - "myapp.custom_fields.bio" en lloc de "Biografia"
+
+                O utilitzeu les vostres pròpies claus en combinació amb altres eines
+                per definir traduccions (p. ex.: utilitzant el mòdul Term Customizer):
+
+                - "myapp.custom_fields.bio" en lloc de "Biografia"'
               proposal_private_custom_fields: Similar als camps públics, però aquesta
                 informació no es revelarà públicament (només hi tindran accés els
                 administradors).
-              proposal_private_custom_fields_translations: |
-                Els camps personalitzats privats es mostren en un quadre diferent amb aquest text d'informació:
+              proposal_private_custom_fields_translations: 'Els camps personalitzats
+                privats es mostren en un quadre diferent amb aquest text d''informació:
+
                 %{warning}
-                Aquest text es pot personalitzar amb una traducció personalitzada utilitzant la clau:
+
+                Aquest text es pot personalitzar amb una traducció personalitzada
+                utilitzant la clau:
+
                 %{key}
+
+                '
               scoped_admin_styles: Tingues en compte que amagar contingut aquí pot
                 deixar l'administrador inservible. Si us plau, actueu amb cautela.
               scoped_admin_styles_variables: 'Pots fer servir les següents variables
                 CSS pels colors personalitzats de l''organització:'
-              scoped_admin_styles_warning: "<strong>Atenció</strong>: Aquí podeu afegir
-                CSS que s'aplica només en aquest administrador."
+              scoped_admin_styles_warning: '<strong>Atenció</strong>: Aquí podeu afegir
+                CSS que s''aplica només en aquest administrador.'
               scoped_admins: Promou usuaries normals a administradores amb accés limitat
                 a certes parts de la web pública (feu servir l'editor de restriccions
                 per això). Noteu que afegir usuaries que ja tenen permisos d'administració
@@ -586,17 +641,23 @@ ca:
                 ''!!!'' no es permetrà al text'
               validate_title_min_length: El títol sempre és obligatori i aquest número
                 no pot ser zero
-              verifications_html: |
-                Aquí podeu establir restriccions d'accés addicionals a espais o components participatius que obligaran els usuaris a ser verificats abans d'accedir a determinades ubicacions (per exemple: per evitar correu brossa).<br>
-                Les restriccions s'apliquen a tots els usuaris, però els administradors sempre tindran accés al tauler /admin.
+              verifications_html: 'Aquí podeu establir restriccions d''accés addicionals
+                a espais o components participatius que obligaran els usuaris a ser
+                verificats abans d''accedir a determinades ubicacions (per exemple:
+                per evitar correu brossa).<br>
+
+                Les restriccions s''apliquen a tots els usuaris, però els administradors
+                sempre tindran accés al tauler /admin.
+
+                '
             validators:
               body: Validacions d'entrada per l'usuari en el camp cos de la proposta
               title: Validacions d'entrada per l'usuari en el camp títol de la proposta
           form_force_authorizations:
             delete: Esborra
-            force_authorizations_html: "Definiu grups de verificació. Cada grup pot
-              requerir que els usuaris siguin verificats per un o més mètodes per
-              accedir a àrees específiques de la plataforma. \n"
+            force_authorizations_html: "Definiu grups de verificació. Cada grup pot\
+              \ requerir que els usuaris siguin verificats per un o més mètodes per\
+              \ accedir a àrees específiques de la plataforma. \n"
             help: Podeu definir grups de mètodes d'autorització i restringir l'accés
               en funció d'aquests.
             new: Afegeix un nou grup d'autorització
@@ -630,7 +691,7 @@ ca:
             new: Afegeix una nova caixa CSS
             remove: Elimina aquesta caixa CSS
             sure_to_remove: Estàs segura que vols eliminar aquesta caixa CSS?
-          none: "⛔ Mai! - Desactiva qualsevol altra restricció"
+          none: ⛔ Mai! - Desactiva qualsevol altra restricció
           process_groups: Grup de processos
           show:
             title: Modificacions per %{setting}
@@ -722,11 +783,21 @@ ca:
             save: Desar
             title: Nova categoria de galetes
           script_config:
-            script_consent_help_html: |
-              <p>Els scripts associats a aquesta categoria només respecten el consentiment quan s'afegeixen dins d'un script amb l'atribut <span class="label">data-consent="%{category}"</span>.</p>
-              <p>El lloc recomanat per afegir-los és <span class="label">app/views/layouts/decidim/_head_extra.html.erb</span> o als snippets de capçalera (si estan habilitats).</p>
+            script_consent_help_html: '<p>Els scripts associats a aquesta categoria
+              només respecten el consentiment quan s''afegeixen dins d''un script
+              amb l''atribut <span class="label">data-consent="%{category}"</span>.</p>
+
+              <p>El lloc recomanat per afegir-los és <span class="label">app/views/layouts/decidim/_head_extra.html.erb</span>
+              o als snippets de capçalera (si estan habilitats).</p>
+
               <p>Exemple:</p><br><pre>%{example}</pre><br>
-              <p>Sense <span class="label">type="text/plain"</span>, la configuració de consentiment de dades de l'usuari no té cap efecte.<br>Més informació a <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Adding scripts which require data consent</a>.</p>
+
+              <p>Sense <span class="label">type="text/plain"</span>, la configuració
+              de consentiment de dades de l''usuari no té cap efecte.<br>Més informació
+              a <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent"
+              target="_blank" rel="noopener">Adding scripts which require data consent</a>.</p>
+
+              '
           update:
             error: S'ha produït un error en actualitzar la categoria de galetes! %{error}
             success: Categoria de galetes actualitzada correctament
@@ -856,74 +927,122 @@ ca:
               ytidb_last_result_entry_key: Emmagatzema les darreres metadades dels
                 resultats del reproductor de YouTube a l'emmagatzematge local.
             explanations:
-              cloudflare_turnstile: |-
-                Afegeix aquestes galetes quan Cloudflare Turnstile està habilitat per protegir els formularis davant d'abusos i trànsit automatitzat. Donen suport a la detecció de bots, la validació de sessió i la continuïtat del repte.
+              cloudflare_turnstile: 'Afegeix aquestes galetes quan Cloudflare Turnstile
+                està habilitat per protegir els formularis davant d''abusos i trànsit
+                automatitzat. Donen suport a la detecció de bots, la validació de
+                sessió i la continuïtat del repte.
 
-                Categoria recomanada: Essencial
-              decidim_essential: |-
-                Afegiu aquestes galetes essencials que són necessàries per a la funcionalitat bàsica de la vostra plataforma Decidim. Aquestes galetes permeten l'autenticació de l'usuari, la gestió de sessions i el seguiment del consentiment.
 
-                Categoria recomanada: Essencial
-              emoji_picker: |-
-                Afegiu aquesta galeta quan habiliteu la funció de selector d'emojis als editors de text. Emmagatzema els emojis utilitzats recentment per personalitzar l'experiència de l'usuari.
+                Categoria recomanada: Essencial'
+              decidim_essential: 'Afegiu aquestes galetes essencials que són necessàries
+                per a la funcionalitat bàsica de la vostra plataforma Decidim. Aquestes
+                galetes permeten l''autenticació de l''usuari, la gestió de sessions
+                i el seguiment del consentiment.
 
-                Categoria recomanada: Preferències
-              facebook_pixel: |-
-                Afegiu aquestes galetes quan utilitzeu el Pixel de Meta (Facebook) per al seguiment de conversions o l'atribució d'anuncis. Ajuden a identificar les sessions del navegador i mesurar el rendiment de la campanya.
 
-                Categoria recomanada: Màrqueting
-              google_analytics: |-
-                Afegiu aquestes galetes quan utilitzeu Google Analytics (GA4/gtag.js) per mesurar el trànsit i el comportament dels usuaris. Identifiquen els visitants, distingeixen les sessions i ajuden a generar estadístiques d'ús.
+                Categoria recomanada: Essencial'
+              emoji_picker: 'Afegiu aquesta galeta quan habiliteu la funció de selector
+                d''emojis als editors de text. Emmagatzema els emojis utilitzats recentment
+                per personalitzar l''experiència de l''usuari.
 
-                Categoria recomanada: Analítica
-              google_maps_embeds: |-
-                Afegiu aquestes galetes quan incrusteu Google Maps a les vostres pàgines (per exemple, ginys de mapa o blocs d'ubicació). Ajuden amb les preferències del mapa, l'estat del consentiment i les mètriques d'ús.
 
-                Categoria recomanada: Preferències o Analítica
-              google_tag_manager: |-
-                Afegiu aquestes galetes quan les vostres etiquetes d'analítica o màrqueting s'entreguin a través de Google Tag Manager. Algunes etiquetes poden establir galetes de seguiment addicionals segons la vostra configuració de GTM.
+                Categoria recomanada: Preferències'
+              facebook_pixel: 'Afegiu aquestes galetes quan utilitzeu el Pixel de
+                Meta (Facebook) per al seguiment de conversions o l''atribució d''anuncis.
+                Ajuden a identificar les sessions del navegador i mesurar el rendiment
+                de la campanya.
 
-                Categoria recomanada: Analítica o Màrqueting
-              graphiql: |-
-                Afegiu aquestes galetes quan habiliteu l'explorador de l'API GraphQL (/api/graphiql) per als desenvolupadors. Emmagatzemen les preferències de la interfície de l'explorador, l'historial de consultes i les configuracions de les pestanyes.
 
-                Categoria recomanada: Preferències
-              hcaptcha: |-
-                Afegiu aquestes galetes/entrades d'emmagatzematge quan hCaptcha estigui habilitat als formularis. S'utilitzen per a la detecció de bots, opcions d'accessibilitat i gestió de reptes/sessions.
+                Categoria recomanada: Màrqueting'
+              google_analytics: 'Afegiu aquestes galetes quan utilitzeu Google Analytics
+                (GA4/gtag.js) per mesurar el trànsit i el comportament dels usuaris.
+                Identifiquen els visitants, distingeixen les sessions i ajuden a generar
+                estadístiques d''ús.
 
-                Categoria recomanada: Essencial
-              jitsi_meet: |-
-                Afegiu aquestes galetes quan integreu les reunions de videoconferència de Jitsi Meet a la vostra plataforma. Emmagatzemen la configuració de l'usuari, les preferències d'idioma, les opcions de qualitat de vídeo i les dades de sessió del servei de videoconferència.
 
-                Categoria recomanada: Preferències
-              linkedin_insight: |-
-                Afegiu aquestes galetes quan utilitzeu la LinkedIn Insight Tag per mesurar el rendiment de la campanya i les conversions de visitants dels anuncis de LinkedIn.
+                Categoria recomanada: Analítica'
+              google_maps_embeds: 'Afegiu aquestes galetes quan incrusteu Google Maps
+                a les vostres pàgines (per exemple, ginys de mapa o blocs d''ubicació).
+                Ajuden amb les preferències del mapa, l''estat del consentiment i
+                les mètriques d''ús.
 
-                Categoria recomanada: Màrqueting
-              matomo: |-
-                Afegiu aquestes galetes quan utilitzeu l'analítica de Matomo per recopilar estadístiques del lloc web. Identifiquen els visitants que tornen, fan un seguiment de les sessions i emmagatzemen informació de referència utilitzada per als informes agregats.
 
-                Categoria recomanada: Analítica
-              openstreetmap_tiles: |-
-                Afegiu aquestes galetes quan la vostra experiència de mapa depengui de recursos allotjats a OpenStreetMap que puguin establir galetes (per exemple, mapes incrustats o funcions que depenguin del compte d'OSM).
+                Categoria recomanada: Preferències o Analítica'
+              google_tag_manager: 'Afegiu aquestes galetes quan les vostres etiquetes
+                d''analítica o màrqueting s''entreguin a través de Google Tag Manager.
+                Algunes etiquetes poden establir galetes de seguiment addicionals
+                segons la vostra configuració de GTM.
 
-                Categoria recomanada: Preferències
-              recaptcha: |-
-                Afegiu aquestes galetes/entrades d'emmagatzematge quan Google reCAPTCHA protegeixi els formularis contra l'abús i els bots. Ajuden a avaluar les interaccions dels usuaris i els senyals de seguretat.
 
-                Categoria recomanada: Essencial
-              vimeo_embeds: |-
-                Afegiu aquestes galetes quan incrusteu vídeos de Vimeo en pàgines, propostes o comentaris. Vimeo les pot utilitzar per recordar la configuració del reproductor i mesurar les interaccions de reproducció.
+                Categoria recomanada: Analítica o Màrqueting'
+              graphiql: 'Afegiu aquestes galetes quan habiliteu l''explorador de l''API
+                GraphQL (/api/graphiql) per als desenvolupadors. Emmagatzemen les
+                preferències de la interfície de l''explorador, l''historial de consultes
+                i les configuracions de les pestanyes.
 
-                Categoria recomanada: Preferències o Analítica
-              youtube_embeds: |-
-                Afegiu aquestes galetes quan permeteu incrustacions de vídeos de YouTube al contingut (propostes, comentaris, etc.). YouTube estableix galetes d'analítica i seguiment que recopilen informació sobre la reproducció de vídeo i el comportament dels usuaris.
 
-                Categoria recomanada: Preferències (si els vídeos són part integral del contingut), Analítica (per al seguiment/estadístiques) o Màrqueting (si s'utilitza amb finalitats publicitàries)
-              youtube_nocookie: |-
-                Afegiu aquestes claus d'emmagatzematge quan utilitzeu el mode de privadesa millorada de YouTube (youtube-nocookie.com). S'utilitzen per persistir l'estat del reproductor i les preferències del dispositiu/sessió.
+                Categoria recomanada: Preferències'
+              hcaptcha: 'Afegiu aquestes galetes/entrades d''emmagatzematge quan hCaptcha
+                estigui habilitat als formularis. S''utilitzen per a la detecció de
+                bots, opcions d''accessibilitat i gestió de reptes/sessions.
 
-                Categoria recomanada: Preferències
+
+                Categoria recomanada: Essencial'
+              jitsi_meet: 'Afegiu aquestes galetes quan integreu les reunions de videoconferència
+                de Jitsi Meet a la vostra plataforma. Emmagatzemen la configuració
+                de l''usuari, les preferències d''idioma, les opcions de qualitat
+                de vídeo i les dades de sessió del servei de videoconferència.
+
+
+                Categoria recomanada: Preferències'
+              linkedin_insight: 'Afegiu aquestes galetes quan utilitzeu la LinkedIn
+                Insight Tag per mesurar el rendiment de la campanya i les conversions
+                de visitants dels anuncis de LinkedIn.
+
+
+                Categoria recomanada: Màrqueting'
+              matomo: 'Afegiu aquestes galetes quan utilitzeu l''analítica de Matomo
+                per recopilar estadístiques del lloc web. Identifiquen els visitants
+                que tornen, fan un seguiment de les sessions i emmagatzemen informació
+                de referència utilitzada per als informes agregats.
+
+
+                Categoria recomanada: Analítica'
+              openstreetmap_tiles: 'Afegiu aquestes galetes quan la vostra experiència
+                de mapa depengui de recursos allotjats a OpenStreetMap que puguin
+                establir galetes (per exemple, mapes incrustats o funcions que depenguin
+                del compte d''OSM).
+
+
+                Categoria recomanada: Preferències'
+              recaptcha: 'Afegiu aquestes galetes/entrades d''emmagatzematge quan
+                Google reCAPTCHA protegeixi els formularis contra l''abús i els bots.
+                Ajuden a avaluar les interaccions dels usuaris i els senyals de seguretat.
+
+
+                Categoria recomanada: Essencial'
+              vimeo_embeds: 'Afegiu aquestes galetes quan incrusteu vídeos de Vimeo
+                en pàgines, propostes o comentaris. Vimeo les pot utilitzar per recordar
+                la configuració del reproductor i mesurar les interaccions de reproducció.
+
+
+                Categoria recomanada: Preferències o Analítica'
+              youtube_embeds: 'Afegiu aquestes galetes quan permeteu incrustacions
+                de vídeos de YouTube al contingut (propostes, comentaris, etc.). YouTube
+                estableix galetes d''analítica i seguiment que recopilen informació
+                sobre la reproducció de vídeo i el comportament dels usuaris.
+
+
+                Categoria recomanada: Preferències (si els vídeos són part integral
+                del contingut), Analítica (per al seguiment/estadístiques) o Màrqueting
+                (si s''utilitza amb finalitats publicitàries)'
+              youtube_nocookie: 'Afegiu aquestes claus d''emmagatzematge quan utilitzeu
+                el mode de privadesa millorada de YouTube (youtube-nocookie.com).
+                S''utilitzen per persistir l''estat del reproductor i les preferències
+                del dispositiu/sessió.
+
+
+                Categoria recomanada: Preferències'
             labels:
               cloudflare_turnstile:
                 one: Cloudflare Turnstile (%{count} galeta)
@@ -1028,7 +1147,7 @@ ca:
             edit: Editar element
             new: Nou element
             reset: Restablir als valors per defecte
-            title: "%{category}: Elements de galeta"
+            title: '%{category}: Elements de galeta'
           new:
             cancel: Cancel·lar
             save: Desar
@@ -1049,17 +1168,30 @@ ca:
           form:
             destination_help: Rutes absolutes (comença amb "/") o URLs externes (http://...)
             origin_help: Només rutes absolutes, comença amb "/"
-            pass_query_help: |
-              Activa aquesta opció si vols que la cadena de consulta (query string) es copiï a la Url de destinació.<br>
-              Per exemple, si has configurat /my-origin => /my-destination, una petició a /my-origin?locale=ca es redirigirà a "/my-destination?locale=ca".
+            pass_query_help: 'Activa aquesta opció si vols que la cadena de consulta
+              (query string) es copiï a la Url de destinació.<br>
+
+              Per exemple, si has configurat /my-origin => /my-destination, una petició
+              a /my-origin?locale=ca es redirigirà a "/my-destination?locale=ca".
+
+              '
           index:
-            check_redirections: "✔ Comprova les redireccions"
+            check_redirections: ✔ Comprova les redireccions
             confirm_destroy: Segur que vols esborrar aquesta redirecció?
-            description: |
-              Pots definir qualsevol ruta (començant amb <code>/</code>) per redirigir la visitant a la URL de destinació.<br>
-              El destí pot ser una ruta absoluta (Exemple: <code>/processes/some-process</code>) o començar amb <code>https://</code> (Exemple: <code>http://decidim.org</code>)<br><br>
-              Tingues en compte que una redirecció només funciona si no hi ha cap altra ruta amb el mateix nom definida dins de Decidim. No es possible sobreescriure rutes que ja existeixen (això es una decisió de disseny).<br>
-              Si tens dubtes, fes servir el botó de comprovar les redireccions per trobar incompatibilitats.
+            description: 'Pots definir qualsevol ruta (començant amb <code>/</code>)
+              per redirigir la visitant a la URL de destinació.<br>
+
+              El destí pot ser una ruta absoluta (Exemple: <code>/processes/some-process</code>)
+              o començar amb <code>https://</code> (Exemple: <code>http://decidim.org</code>)<br><br>
+
+              Tingues en compte que una redirecció només funciona si no hi ha cap
+              altra ruta amb el mateix nom definida dins de Decidim. No es possible
+              sobreescriure rutes que ja existeixen (això es una decisió de disseny).<br>
+
+              Si tens dubtes, fes servir el botó de comprovar les redireccions per
+              trobar incompatibilitats.
+
+              '
             edit: Edita la redirecció
             new: Nova redirecció
             remove: Elimina la redirecció
@@ -1080,10 +1212,18 @@ ca:
           index:
             bits: Bits
             created_at: Creada el
-            help_html: |
-              Aquesta pàgina mostra els segells Hashcash que s'han detectat al sistema. Hashcash és un sistema de prova de treball que requereix que els usuaris resolguin un trencaclosques computacional (realitzat automàticament pel navegador) abans de poder registrar-se.
+            help_html: 'Aquesta pàgina mostra els segells Hashcash que s''han detectat
+              al sistema. Hashcash és un sistema de prova de treball que requereix
+              que els usuaris resolguin un trencaclosques computacional (realitzat
+              automàticament pel navegador) abans de poder registrar-se.
+
               <br><br>
-              Cada entrada d'aquesta llista representa un segell Hashcash que ha estat generat per un usuari cada vegada que s'ha registrat o ha iniciat la sessió.
+
+              Cada entrada d''aquesta llista representa un segell Hashcash que ha
+              estat generat per un usuari cada vegada que s''ha registrat o ha iniciat
+              la sessió.
+
+              '
             ip_address: Adreça IP
             no_data: No s'han trobat segells de Hashcash
             request_path: Ruta de la sol·licitud
@@ -1101,10 +1241,10 @@ ca:
             preset: Omple amb valors predefinits
             preset_content_blocks: Blocs de contingut existents
             preset_global_menu: Elements habituals de Decidim
-            select_a_preset: "— Selecciona un element de menú habitual —"
-            url_help_html: "<b>#section-id</b> — es desplaça fins a una secció d'aquesta
+            select_a_preset: — Selecciona un element de menú habitual —
+            url_help_html: <b>#section-id</b> — es desplaça fins a una secció d'aquesta
               pàgina<br><b>/ruta</b> — pàgina interna (p. ex. /processes)<br><b>https://example.com</b>
-              — enllaç extern (s'obre automàticament en una pestanya nova)"
+              — enllaç extern (s'obre automàticament en una pestanya nova)
           new:
             save: Desa
             title: Nou element de menú
@@ -1131,6 +1271,7 @@ ca:
             awesome_authorizations: Autoritzacions Awesome
             force_authorizations: Autoritzacions forçades
             verifications: Verificacions
+          follow_up_questionnaires: Qüestionaris de seguiment
         menu_hacks:
           create:
             error: 'Error en crear un nou ítem de menú: %{error}'
@@ -1187,24 +1328,51 @@ ca:
             destroying: Les dades privades de %{title} s'han programat per ser destruïdes.
               Si us plau, torneu a comprovar d'aquí a uns minuts.
             done: Fet
-            help_html: |
-              Aquesta eina permet esborrar totes les dades privades d'un espai o component participatiu concret. Aquesta acció és irreversible i eliminarà totes les dades privades de la base de dades.
+            help_html: 'Aquesta eina permet esborrar totes les dades privades d''un
+              espai o component participatiu concret. Aquesta acció és irreversible
+              i eliminarà totes les dades privades de la base de dades.
+
               <br><br>
+
               <strong>Què es consideren dades privades?</strong>
+
               <br>
-              Les dades privades són qualsevol informació que no està disponible públicament i només és accessible per als administradors. Això, de moment, inclou la informació del camps personalitzats privats.
+
+              Les dades privades són qualsevol informació que no està disponible públicament
+              i només és accessible per als administradors. Això, de moment, inclou
+              la informació del camps personalitzats privats.
+
               <br><br>
+
               <strong>Què passa quan suprimeixo dades privades?</strong>
+
               <br>
-              Quan suprimiu les dades privades, tota la informació privada de l'espai o component participatiu seleccionat s'eliminarà permanentment de la base de dades. Un registre d'aquesta acció s'emmagatzemarà al sistema amb finalitats d'auditoria (pero no les dades en si).
+
+              Quan suprimiu les dades privades, tota la informació privada de l''espai
+              o component participatiu seleccionat s''eliminarà permanentment de la
+              base de dades. Un registre d''aquesta acció s''emmagatzemarà al sistema
+              amb finalitats d''auditoria (pero no les dades en si).
+
               <br><br>
+
               <strong>Què passa amb les dades públiques?</strong>
+
               <br>
-              Les dades públiques no es veuran afectades per aquesta acció. Només s'eliminaran les dades privades.
+
+              Les dades públiques no es veuran afectades per aquesta acció. Només
+              s''eliminaran les dades privades.
+
               <br><br>
-              <strong>Hi ha un temps mínim d'espera abans de suprimir les dades privades?</strong>
+
+              <strong>Hi ha un temps mínim d''espera abans de suprimir les dades privades?</strong>
+
               <br>
-              Sí, no podeu suprimir dades privades si l'última actualització va ser fa menys de %{time_ago}. Podeu canviar aquesta configuració al fitxer inicialitzador.
+
+              Sí, no podeu suprimir dades privades si l''última actualització va ser
+              fa menys de %{time_ago}. Podeu canviar aquesta configuració al fitxer
+              inicialitzador.
+
+              '
             items_count: Total afectats
             last_date: Última actualització
             no_data: No s'han trobat dades privades més antigues que fa %{time_ago}
@@ -1219,7 +1387,7 @@ ca:
           private_data_last_update: Aquestes dades es van actualitzar per última vegada
             fa %{time_ago}.
           proposal_private_custom_fields: Camps privats
-          remove_private_data: "👉 És possible que vulgueu eliminar-lo"
+          remove_private_data: 👉 És possible que vulgueu eliminar-lo
         scoped_admin_styles:
           menu:
             title: Panell admin
@@ -1231,26 +1399,168 @@ ca:
             amb %{awesome_link}.
           restricted_html: Aquest espai utilitza restriccions d'accés addicionals
             amb %{awesome_link}.
+        follow_up_questionnaire_messages:
+          auto_status_change_body: 'L''estat ha canviat a: %{status}'
+          create:
+            error: Error en enviar el missatge! %{error}
+            success: El missatge s'ha enviat correctament
+          form:
+            add_attachment: Afegir adjunt
+            attachments: Adjunts
+            author: Autor
+            body: Missatge
+            body_help: Deixa el missatge en blanc per notificar només la persona del
+              canvi d'estat (notificació dins l'aplicació, però també es rebrà per
+              correu).
+            edit_attachment: Edita l'adjunt
+            select_a_status: Selecciona un estat
+            status: Estat
+          index:
+            conversation: Conversa
+            last_action_answered: Respost fa %{time}
+            last_action_labeled: Etiquetat fa %{time}
+            new_status: Nou
+            not_answered: (sense resposta)
+            not_processable: Sense participant - No processable
+            see_full_responses: Veure respostes completes
+            view_survey: Vista prèvia
+          new:
+            anonymous_respondent: Participant anònim
+            messages_count:
+              one: '%{count} missatge'
+              other: '%{count} missatges'
+            new_reply: Nou missatge
+            new_reply_help_text: Envia un missatge a la persona que va respondre.
+              El missatge s'enviarà amb «Respon a» definit com %{email}. Les respostes
+              directes a aquest correu no es recopilaran aquí.
+            new_reply_no_reply_to_help_text: Envia un missatge a la persona que va
+              respondre. Les participants no poden respondre a aquest correu, ja que
+              s'envia sense adreça de resposta.
+            send_message: Envia
+            submitted_at: Enviat el %{date}
+            title: Gestiona els missatges
+          reply_history:
+            documents: Documents
+            empty: Encara no s'ha enviat cap missatge a aquesta persona.
+            photos: Fotos
+            title: Historial de missatges
+        follow_up_questionnaire_statuses:
+          create:
+            error: Error en crear l'etiqueta! %{error}
+            success: L'etiqueta s'ha creat correctament
+          destroy:
+            not_removable: Aquesta etiqueta s'utilitza en missatges i no es pot eliminar.
+            success: L'etiqueta s'ha eliminat correctament
+          edit:
+            save: Desa
+            title: Edita l'etiqueta
+          form:
+            name_taken_error: Aquest nom ja l'utilitza una altra etiqueta d'aquest
+              qüestionari.
+          new:
+            save: Desa
+            title: Nova etiqueta
+          table:
+            confirm_destroy: Segur que vols eliminar aquesta etiqueta?
+            description: Les etiquetes s'utilitzen per fer el seguiment de l'estat
+              d'una resposta
+            edit: Edita
+            labels_title: Etiquetes
+            new: Nova etiqueta
+            not_removable: Aquesta etiqueta s'utilitza en missatges i no es pot eliminar.
+            remove: Elimina
+          update:
+            error: Error en actualitzar l'etiqueta! %{error}
+            success: L'etiqueta s'ha actualitzat correctament
+        follow_up_questionnaires:
+          create:
+            error: Error en crear el qüestionari de seguiment! %{error}
+            success: El qüestionari de seguiment s'ha creat correctament
+          destroy:
+            error: Error en eliminar el qüestionari de seguiment! %{error}
+            not_removable: Té missatges enviats a les persones participants i no es
+              pot eliminar. Desactiva’l en comptes de fer-ho.
+            success: El qüestionari de seguiment s'ha eliminat correctament
+            unexpected_error: Hi ha hagut un problema en eliminar-lo.
+          edit:
+            save: Desa
+            title: Qüestionari de seguiment
+          form:
+            anonymous_option_flag: anònim, sense preguntes
+            name_help: A l'espai participatiu veuràs aquest nom com un nou element
+              del menú on gestionar les respostes
+            questionnaire_locked: Aquest qüestionari de seguiment ja té missatges
+              enviats a participants, així que l'enquesta no es pot canviar.
+            reply_to_help: Opcional. Les respostes de les participants als correus
+              de notificació aniran a aquesta adreça. Deixa-ho buit per enviar els
+              correus sense adreça de resposta.
+            responder_email_help: Aquest camp s'utilitzarà per trobar i enviar l'email
+              on respondre. Si el qüestionari no és anònim, pots ometre aquest camp
+              i es farà servir l'usuària.
+            responder_name_help: Aquest camp s'utilitzarà per trobar i mostrar el
+              nom de la persona que respon. Si el qüestionari no és anònim, pots ometre
+              aquest camp i es farà servir l'usuària.
+            select_questionnaire_placeholder: Selecciona un qüestionari
+          index:
+            confirm_destroy: Segur que vols eliminar aquest qüestionari de seguiment?
+            description: Transforma les participacions del qüestionari en fils interactius.
+              Fes clic a qualsevol resposta per enviar un missatge directe a la persona,
+              registrar notes privades de l'equip, aplicar etiquetes de seguiment
+              i consultar tot l'historial de comunicació.
+            edit: Edita
+            manage_responses: Gestiona les respostes
+            new: Nou seguiment
+            not_removable: Té missatges enviats a les persones participants i no es
+              pot eliminar. Desactiva’l en comptes de fer-ho.
+            remove: Elimina
+          new:
+            save: Desa
+            title: Qüestionaris de seguiment
+          update:
+            error: Error en actualitzar el qüestionari de seguiment! %{error}
+            success: El qüestionari de seguiment s'ha actualitzat correctament
       admin_log:
         component:
-          destroy_private_data: "%{user_name} ha destruït %{count} elements de dades
-            privades per a %{resource_name} a %{space_name}"
+          destroy_private_data: '%{user_name} ha destruït %{count} elements de dades
+            privades per a %{resource_name} a %{space_name}'
         user:
-          admin_creates_authorization: "%{user_name} s'ha verificat %{resource_name}
-            amb %{handler_name}"
-          admin_destroys_authorization: "%{user_name} ha destruït la verificació %{handler_name}
-            a %{resource_name}"
-          admin_forces_authorization: "%{user_name} ha forçat la verificació %{handler_name}
-            a %{resource_name}. Motiu: %{reason}"
+          admin_creates_authorization: '%{user_name} s''ha verificat %{resource_name}
+            amb %{handler_name}'
+          admin_destroys_authorization: '%{user_name} ha destruït la verificació %{handler_name}
+            a %{resource_name}'
+          admin_forces_authorization: '%{user_name} ha forçat la verificació %{handler_name}
+            a %{resource_name}. Motiu: %{reason}'
+        follow_up_questionnaire:
+          create: '%{user_name} ha creat el qüestionari de seguiment %{questionnaire_name}'
+          delete: '%{user_name} ha eliminat el qüestionari de seguiment %{questionnaire_name}'
+          update: '%{user_name} ha actualitzat el qüestionari de seguiment %{questionnaire_name}'
+        follow_up_questionnaire_message:
+          create: '%{user_name} ha enviat un missatge al qüestionari de seguiment
+            %{questionnaire_name}'
+          create_as: '%{user_name} ha enviat un missatge com a %{author_name} al qüestionari
+            de seguiment %{questionnaire_name}'
+        follow_up_questionnaire_status:
+          create: '%{user_name} ha creat una nova etiqueta %{label_name} per al qüestionari
+            de seguiment %{questionnaire_name}'
+          delete: '%{user_name} ha eliminat l''etiqueta %{label_name} del qüestionari
+            de seguiment %{questionnaire_name}'
+          update: '%{user_name} ha actualitzat l''etiqueta %{label_name} per al qüestionari
+            de seguiment %{questionnaire_name}'
       amendments:
         modal:
           amendment_exists: Una esmena ja existeix
           current_amendment_html: <p>Podeu <a href="%{amendment_link}">accedir a l'esmena
             actual aquí</a>.</p>
           dismiss: D'acord
-          explanation_html: |
-            <p>Actualment, s'està avaluant una altra esmena per a aquesta proposta. Per crear-ne una de nova, heu d'esperar fins que l'actual sigui acceptada o rebutjada.</p>
-            <p>També podeu posar-vos en contacte amb l'autor d'aquesta proposta <a href="%{proposal_link}">deixant un comentari</a> i intentar accelerar la resolució de l'esmena actual.</p>
+          explanation_html: '<p>Actualment, s''està avaluant una altra esmena per
+            a aquesta proposta. Per crear-ne una de nova, heu d''esperar fins que
+            l''actual sigui acceptada o rebutjada.</p>
+
+            <p>També podeu posar-vos en contacte amb l''autor d''aquesta proposta
+            <a href="%{proposal_link}">deixant un comentari</a> i intentar accelerar
+            la resolució de l''esmena actual.</p>
+
+            '
         pending_limit_reached: Ho sentim, només hi pot haver una esmena pendent alhora.
           Si us plau, espereu fins que "%{emendation}" sigui acceptat o rebutjat.
       awesome_authorization_handler:
@@ -1286,8 +1596,8 @@ ca:
           past: Passats
           remove_filter: Eliminar filtre
           results_count:
-            one: "%{count} procés trobat"
-            other: "%{count} processos trobats"
+            one: '%{count} procés trobat'
+            other: '%{count} processos trobats'
           status_label: 'Estat:'
           title: Títol del bloc
           upcoming: Propers
@@ -1414,16 +1724,13 @@ ca:
             elements DL/DD a l''XML'
       map_component:
         map:
-          api_not_ready: |
-            <b>Avís:</b> aquesta instal·lació de Decidim té l'API configurada amb una complexitat màxima de <b>%{current_complexity}</b>.
-            Aquest component probablement no funcionarà amb aquesta configuració. Us recomanem que la configureu en un inicialitzador
-            (per exemple, al final de <code>config/initializers/decidim.rb</code>) hi poseu les línies següents:<br>
-            <br>
-            <pre># Configuració de l'API
-            Rails.application.config.to_prepare do
-              Decidim::Api::Schema.max_complexity = 5000
-              Decidim::Api::Schema.max_depth = 50
-            end</pre>
+          api_not_ready: "<b>Avís:</b> aquesta instal·lació de Decidim té l'API configurada\
+            \ amb una complexitat màxima de <b>%{current_complexity}</b>.\nAquest\
+            \ component probablement no funcionarà amb aquesta configuració. Us recomanem\
+            \ que la configureu en un inicialitzador\n(per exemple, al final de <code>config/initializers/decidim.rb</code>)\
+            \ hi poseu les línies següents:<br>\n<br>\n<pre># Configuració de l'API\n\
+            Rails.application.config.to_prepare do\n  Decidim::Api::Schema.max_complexity\
+            \ = 5000\n  Decidim::Api::Schema.max_depth = 50\nend</pre>\n"
           error:
             unavailable: El mapa no està disponible. SI us plau, configureu la geolocalització
               en aquesta instal·lació per activar aquest component.
@@ -1457,19 +1764,23 @@ ca:
           plataforma, cal que feu login i autoritzeu el vostre compte.
       system:
         organizations:
-          admin_allowed_authoritzations_help_html: |
-            Les administradores podran verificar manualment els participants amb aquests verificadors.
-            <br>Utilitzeu aquesta funció amb precaució, ja que pot provocar problemes de seguretat.
+          admin_allowed_authoritzations_help_html: 'Les administradores podran verificar
+            manualment els participants amb aquests verificadors.
+
+            <br>Utilitzeu aquesta funció amb precaució, ja que pot provocar problemes
+            de seguretat.
+
+            '
           awesome_tweaks: Configuracions del Decidim Awesome
       validators:
         too_much_caps: Fa servir massa lletres majúscules (més %{percent}% del text)
       voting:
         voting_cards:
-          abstained: "✔ Abstenció"
+          abstained: ✔ Abstenció
           change_vote: Canvia el meu vot
           default_box_title: Vota en aquesta proposta
-          default_instructions_html: "<p>Llegeix les normes de la votació amb atenció
-            per entendre com s'utilitzarà el teu vot per %{organization}</p>"
+          default_instructions_html: <p>Llegeix les normes de la votació amb atenció
+            per entendre com s'utilitzarà el teu vot per %{organization}</p>
           modal:
             cancel: Cancel·la
             message: El teu vot es considerarà definitiu el %{date}. Pots canviar-lo
@@ -1488,6 +1799,23 @@ ca:
             weight_2_short: 'G:'
             weight_3: Verd
             weight_3_short: 'V:'
+      follow_up_questionnaire_message_mailer:
+        notification:
+          default_name: allà
+          greeting: Hola %{name},
+          intro: 'Has rebut un missatge nou sobre la teva tramesa a «%{questionnaire}»:'
+          outro: Gràcies per la teva participació.
+          status_updated: L'estat s'ha actualitzat a «%{status}».
+          subject: Nou missatge sobre la teva tramesa a «%{questionnaire}»
+      status_colors:
+        blue: Blau
+        gray: Gris
+        green: Verd
+        orange: Taronja
+        pink: Rosa
+        purple: Porpra
+        red: Vermell
+        yellow: Groc
     download_your_data:
       show:
         admin_actions: Accions d'administrador
@@ -1507,6 +1835,11 @@ ca:
           za: Z-A (ordre alfabètic invers)
         proposal:
           view_proposal: Veure proposta
+    events:
+      decidim_awesome:
+        follow_up_questionnaire_message_status_changed:
+          notification_title: 'L''estat de la teva tramesa a «%{questionnaire}» ha
+            canviat a «%{status}». '
   layouts:
     decidim:
       data_consent:
@@ -1544,3 +1877,4 @@ ca:
           proposals: Propostes
           select_deselect_all: Selecciona/Des-selecciona tot
           taxonomies: Taxonomies
+

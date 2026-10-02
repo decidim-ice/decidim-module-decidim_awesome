@@ -1,4 +1,3 @@
----
 pt-BR:
   active_hashcash:
     submit_filter: Filtrar
@@ -98,6 +97,27 @@ pt-BR:
           usuarios manualmente com estas autorizações
       user:
         user_time_zone: Fuso horario pessoal
+      follow_up_questionnaire:
+        active: Ativo
+        name: Nome
+        position: Posição
+        reply_to: E-mail de resposta
+      follow_up_questionnaire_messages:
+        id: ID
+        last_action: Última ação
+        messages_count: Número de mensagens
+        respondent: Respondente
+        status: Status
+        submission_date: Data de envio
+      follow_up_questionnaire_statuses:
+        color: Cor
+        labels_color: Cor das etiquetas
+        labels_id: ID da etiqueta
+        name: Nome
+      follow_up_questionnaires:
+        name: Nome
+        number_of_responses: Número de respostas
+        participatory_space: Espaço participativo > questionário
     errors:
       models:
         cookie_item:
@@ -109,6 +129,11 @@ pt-BR:
                 ser alterado
               invalid_format: O nome so pode conter letras, numeros, hifens e underscores
                 (sem espacos)
+        follow_up_questionnaire_message:
+          attributes:
+            body:
+              blank_without_status_change: deve estar presente ou selecionar um status
+                diferente
   decidim:
     admin:
       actions:
@@ -261,7 +286,7 @@ pt-BR:
             see_spaces: Listar administradores de espacos participativos
             title: Responsabilidade administrativa
           last_login: Data do ultimo login
-          missing_info: "(informacao ausente)"
+          missing_info: (informacao ausente)
           missing_user: Usuario nao esta no banco de dados
           name: Nome
           never_logged: Nunca fez login
@@ -285,11 +310,18 @@ pt-BR:
           authorization_transferred: 'Aviso: Houve um conflito de verificacao e a
             verificacao foi transferida para %{user}'
           conflict: Ha um conflito com uma autorizacao existente
-          conflict_help_html: |
-            Voce deve resolver o conflito com o usuario %{user} antes de poder autorizar o usuario com esta autorizacao.
+          conflict_help_html: 'Voce deve resolver o conflito com o usuario %{user}
+            antes de poder autorizar o usuario com esta autorizacao.
+
             <br><br>
-            Um conflito de verificacao acontece quando outro usuario tem os mesmos dados que o usuario que voce esta tentando autorizar.
-            Voce pode resolver este conflito removendo a autorizacao conflitante do outro usuario ou usando dados diferentes para este usuario.
+
+            Um conflito de verificacao acontece quando outro usuario tem os mesmos
+            dados que o usuario que voce esta tentando autorizar.
+
+            Voce pode resolver este conflito removendo a autorizacao conflitante do
+            outro usuario ou usando dados diferentes para este usuario.
+
+            '
           edit:
             authorize: Autorizar %{user} com %{name}
             do_it_if_sure: Faca isso apenas se tiver certeza de que o usuario possui
@@ -300,8 +332,8 @@ pt-BR:
             force_verification_reason: 'Informe um motivo para forcar a verificacao:'
             warning: 'Aviso: Ao forcar esta autorizacao, voce esta sobrescrevendo
               o status atual de autorizacao do usuario.'
-          user_authorized: "%{user} autorizado com sucesso com %{name}"
-          user_not_authorized: "%{user} nao pode ser autorizado com %{name}"
+          user_authorized: '%{user} autorizado com sucesso com %{name}'
+          user_not_authorized: '%{user} nao pode ser autorizado com %{name}'
         awesome_authorization_properties:
           create:
             error: Erro ao atualizar as propriedades de autorização! %{error}
@@ -494,16 +526,26 @@ pt-BR:
                 de adicionar um metodo de contato caso os usuarios precisem de ajuda.
               hashcash_i18n_key: 'Voce pode personalizar o texto mostrado aos usuarios
                 nos botoes de envio de login/cadastro com a chave i18n: %{key}'
-              hashcash_login: |
-                Proteja aplicacoes Rails contra bots e ataques de forca bruta sem incomodar humanos.
-                Hashcash e um sistema de prova de trabalho que exige que os usuarios resolvam um quebra-cabeca computacional (realizado automaticamente pelo navegador) antes de poderem fazer login.
+              hashcash_login: 'Proteja aplicacoes Rails contra bots e ataques de forca
+                bruta sem incomodar humanos.
+
+                Hashcash e um sistema de prova de trabalho que exige que os usuarios
+                resolvam um quebra-cabeca computacional (realizado automaticamente
+                pelo navegador) antes de poderem fazer login.
+
+                '
               hashcash_login_bits: Este parametro define o numero de bits que o algoritmo
                 Hashcash usara para gerar a prova de trabalho. E recomendado usar
                 um valor entre 16 (facil) e 30 (extremamente dificil) bits. O valor
                 padrao para formularios de login e %{bits} bits.
-              hashcash_signup: |
-                Proteja aplicacoes Rails contra bots e ataques de forca bruta sem incomodar humanos.
-                Hashcash e um sistema de prova de trabalho que exige que os usuarios resolvam um quebra-cabeca computacional (realizado automaticamente pelo navegador) antes de poderem se cadastrar.
+              hashcash_signup: 'Proteja aplicacoes Rails contra bots e ataques de
+                forca bruta sem incomodar humanos.
+
+                Hashcash e um sistema de prova de trabalho que exige que os usuarios
+                resolvam um quebra-cabeca computacional (realizado automaticamente
+                pelo navegador) antes de poderem se cadastrar.
+
+                '
               hashcash_signup_bits: Este parametro define o numero de bits que o algoritmo
                 Hashcash usara para gerar a prova de trabalho. E recomendado usar
                 um valor entre 16 (facil) e 30 (extremamente dificil) bits. O valor
@@ -525,29 +567,35 @@ pt-BR:
               proposal_custom_fields_example: Os dados sao armazenados em um objeto
                 XML usando atributos HTML compativeis (dl, dt, dd) substituindo o
                 "corpo" em uma proposta normal.
-              proposal_custom_fields_translations: "Titulos, texto de ajuda, espacos
-                reservados e valores padrao podem usar traducoes personalizadas de
-                sua aplicacao. \nPara isso, ao inves de usar uma string literal, use
-                a chave i18n (ela deve conter pelo menos um ponto).\nPor exemplo:\n-
-                \"activemodel.attributes.proposal.title\" em vez de \"Titulo\"\n-
-                \"activemodel.attributes.proposal.address\" em vez de \"Endereco\"\nOu
-                use suas proprias chaves em combinacao com outras ferramentas para
-                definir traducoes (por exemplo: usando o modulo Term Customizer):\n
-                - \"meuapp.custom_fields.bio\" em vez de \"Biografia\""
+              proposal_custom_fields_translations: "Titulos, texto de ajuda, espacos\
+                \ reservados e valores padrao podem usar traducoes personalizadas\
+                \ de sua aplicacao. \nPara isso, ao inves de usar uma string literal,\
+                \ use a chave i18n (ela deve conter pelo menos um ponto).\nPor exemplo:\n\
+                - \"activemodel.attributes.proposal.title\" em vez de \"Titulo\"\n\
+                - \"activemodel.attributes.proposal.address\" em vez de \"Endereco\"\
+                \nOu use suas proprias chaves em combinacao com outras ferramentas\
+                \ para definir traducoes (por exemplo: usando o modulo Term Customizer):\n\
+                \ - \"meuapp.custom_fields.bio\" em vez de \"Biografia\""
               proposal_private_custom_fields: Semelhante aos campos publicos, mas
                 esta informacao nao sera divulgada publicamente (apenas administradores
                 terao acesso).
-              proposal_private_custom_fields_translations: |
-                Campos personalizados privados sao exibidos em uma caixa distinta com este texto de informacao:
+              proposal_private_custom_fields_translations: 'Campos personalizados
+                privados sao exibidos em uma caixa distinta com este texto de informacao:
+
                 %{warning}
-                Este texto pode ser personalizado com uma traducao personalizada usando a chave:
+
+                Este texto pode ser personalizado com uma traducao personalizada usando
+                a chave:
+
                 %{key}
+
+                '
               scoped_admin_styles: Esteja ciente de que ocultar coisas aqui pode tornar
                 o administrador inutilizavel. Por favor, aja com cautela.
               scoped_admin_styles_variables: 'Voce pode usar as seguintes variaveis
                 CSS para cores personalizadas da organizacao:'
-              scoped_admin_styles_warning: "<strong>Aviso</strong>: Adicione aqui
-                CSS personalizado que se aplica apenas neste administrador."
+              scoped_admin_styles_warning: '<strong>Aviso</strong>: Adicione aqui
+                CSS personalizado que se aplica apenas neste administrador.'
               scoped_admins: Promova usuarios regulares a administradores que podem
                 administrar apenas certas partes da web publica (use o editor de restricoes
                 para isso). Note que usuarios que ja possuem permissoes de administrador
@@ -573,17 +621,26 @@ pt-BR:
                 entao ''!!!'' nao sera permitido no texto'
               validate_title_min_length: O titulo e sempre obrigatorio e este numero
                 nao pode ser zero
-              verifications_html: |
-                Aqui voce pode colocar restricoes de acesso adicionais a espacos participativos ou componentes que obrigarao usuarios a serem verificados antes de acessar determinados locais (por exemplo: para prevenir spam).<br>
-                Restricoes se aplicam a todos os usuarios, mas administradores sempre terao acesso ao painel /admin.
+              verifications_html: 'Aqui voce pode colocar restricoes de acesso adicionais
+                a espacos participativos ou componentes que obrigarao usuarios a serem
+                verificados antes de acessar determinados locais (por exemplo: para
+                prevenir spam).<br>
+
+                Restricoes se aplicam a todos os usuarios, mas administradores sempre
+                terao acesso ao painel /admin.
+
+                '
             validators:
               body: Validacoes de entrada do usuario para o campo "corpo"
               title: Validacoes de entrada do usuario para o campo "titulo"
           form_force_authorizations:
             delete: Excluir
-            force_authorizations_html: |
-              Defina grupos de verificacao. Cada grupo pode exigir que os usuarios sejam verificados
+            force_authorizations_html: 'Defina grupos de verificacao. Cada grupo pode
+              exigir que os usuarios sejam verificados
+
               por um ou mais metodos para acessar areas especificas da plataforma.
+
+              '
             help: Voce pode definir grupos de metodos de autorizacao e restringir
               o acesso com base neles.
             new: Adicionar um novo grupo de autorizacoes
@@ -617,7 +674,7 @@ pt-BR:
             new: Adicionar uma nova caixa CSS "frontend publico"
             remove: Remover esta caixa CSS
             sure_to_remove: Tem certeza de que deseja remover esta caixa CSS?
-          none: "⛔ Nunca! - Desativar qualquer outra restricao"
+          none: ⛔ Nunca! - Desativar qualquer outra restricao
           process_groups: Grupos de processo
           show:
             title: Ajustes para %{setting}
@@ -687,11 +744,20 @@ pt-BR:
             cannot_remove_default: As categorias padrao nao podem ser removidas
             confirm_reset: Tem certeza de que deseja restaurar esta categoria para
               os valores padrao? Todas as personalizacoes serao removidas.
-            description_html: |
-              As categorias e os itens de cookies controlam apenas a interface de consentimento e a documentacao.<br>
-              Para que as preferencias funcionem, scripts e servicos de terceiros devem ser configurados para carregar somente apos o consentimento.<br>
-              Esta configuracao extra nao e necessaria para iframes de video incorporados, pois o Decidim ja inclui tratamento de consentimento para esses embeds.<br>
-              Consulte o guia oficial: <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Adicionar scripts que exigem consentimento de dados</a>.
+            description_html: 'As categorias e os itens de cookies controlam apenas
+              a interface de consentimento e a documentacao.<br>
+
+              Para que as preferencias funcionem, scripts e servicos de terceiros
+              devem ser configurados para carregar somente apos o consentimento.<br>
+
+              Esta configuracao extra nao e necessaria para iframes de video incorporados,
+              pois o Decidim ja inclui tratamento de consentimento para esses embeds.<br>
+
+              Consulte o guia oficial: <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent"
+              target="_blank" rel="noopener">Adicionar scripts que exigem consentimento
+              de dados</a>.
+
+              '
             edit: Editar categoria
             items: Itens da categoria
             new: Nova categoria
@@ -702,11 +768,20 @@ pt-BR:
             save: Salvar
             title: Nova categoria de cookies
           script_config:
-            script_consent_help_html: |
-              <p>Os scripts associados a esta categoria só respeitam o consentimento quando são adicionados dentro de um script com o atributo <span class="label">data-consent="%{category}"</span>.</p>
-              <p>O local recomendado para adicioná-los é <span class="label">app/views/layouts/decidim/_head_extra.html.erb</span> ou nos snippets de cabeçalho (se estiverem habilitados).</p>
+            script_consent_help_html: '<p>Os scripts associados a esta categoria só
+              respeitam o consentimento quando são adicionados dentro de um script
+              com o atributo <span class="label">data-consent="%{category}"</span>.</p>
+
+              <p>O local recomendado para adicioná-los é <span class="label">app/views/layouts/decidim/_head_extra.html.erb</span>
+              ou nos snippets de cabeçalho (se estiverem habilitados).</p>
+
               <p>Exemplo:</p><br><pre>%{example}</pre><br>
-              <p>Sem <code>type="text/plain"</code>, a configuração de consentimento de dados do usuário não tem efeito.<br>Leia mais em <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Adding scripts which require data consent</a>.</p>
+
+              <p>Sem <code>type="text/plain"</code>, a configuração de consentimento
+              de dados do usuário não tem efeito.<br>Leia mais em <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent"
+              target="_blank" rel="noopener">Adding scripts which require data consent</a>.</p>
+
+              '
           update:
             error: Erro ao atualizar a categoria de cookies! %{error}
             success: Categoria de cookies atualizada com sucesso
@@ -829,74 +904,115 @@ pt-BR:
               ytidb_last_result_entry_key: Armazena os metadados de resultado mais
                 recentes do player do YouTube no armazenamento local.
             explanations:
-              cloudflare_turnstile: |-
-                Adicione estes cookies quando o Cloudflare Turnstile estiver ativado para proteger formularios contra abuso e trafego automatizado. Eles suportam deteccao de bots, validacao de sessao e continuidade do desafio.
+              cloudflare_turnstile: 'Adicione estes cookies quando o Cloudflare Turnstile
+                estiver ativado para proteger formularios contra abuso e trafego automatizado.
+                Eles suportam deteccao de bots, validacao de sessao e continuidade
+                do desafio.
 
-                Categoria recomendada: Essencial
-              decidim_essential: |-
-                Adicione estes cookies essenciais necessarios para a funcionalidade principal da sua plataforma Decidim. Esses cookies permitem autenticacao do usuario, gestao de sessoes e rastreamento de consentimento.
 
-                Categoria recomendada: Essencial
-              emoji_picker: |-
-                Adicione este cookie ao ativar o seletor de emojis nos editores de texto. Ele armazena emojis usados recentemente para personalizar a experiencia do usuario.
+                Categoria recomendada: Essencial'
+              decidim_essential: 'Adicione estes cookies essenciais necessarios para
+                a funcionalidade principal da sua plataforma Decidim. Esses cookies
+                permitem autenticacao do usuario, gestao de sessoes e rastreamento
+                de consentimento.
 
-                Categoria recomendada: Preferencias
-              facebook_pixel: |-
-                Adicione estes cookies ao utilizar o Meta (Facebook) Pixel para rastreamento de conversoes ou atribuicao de anuncios. Eles ajudam a identificar sessoes do navegador e medir o desempenho das campanhas.
 
-                Categoria recomendada: Marketing
-              google_analytics: |-
-                Adicione estes cookies ao utilizar o Google Analytics (GA4/gtag.js) para medir trafego e comportamento dos usuarios. Eles identificam visitantes, distinguem sessoes e ajudam a gerar estatisticas de uso.
+                Categoria recomendada: Essencial'
+              emoji_picker: 'Adicione este cookie ao ativar o seletor de emojis nos
+                editores de texto. Ele armazena emojis usados recentemente para personalizar
+                a experiencia do usuario.
 
-                Categoria recomendada: Analitica
-              google_maps_embeds: |-
-                Adicione estes cookies ao incorporar o Google Maps em suas paginas. Eles ajudam com preferencias do mapa, estado de consentimento e metricas de uso.
 
-                Categoria recomendada: Preferencias ou Analitica
-              google_tag_manager: |-
-                Adicione estes cookies quando suas tags de analise ou marketing forem entregues pelo Google Tag Manager. Algumas tags podem definir cookies adicionais de rastreamento dependendo da configuracao do GTM.
+                Categoria recomendada: Preferencias'
+              facebook_pixel: 'Adicione estes cookies ao utilizar o Meta (Facebook)
+                Pixel para rastreamento de conversoes ou atribuicao de anuncios. Eles
+                ajudam a identificar sessoes do navegador e medir o desempenho das
+                campanhas.
 
-                Categoria recomendada: Analitica ou Marketing
-              graphiql: |-
-                Adicione estes cookies ao ativar o explorador da API GraphQL (/api/graphiql) para desenvolvedores. Eles armazenam preferencias da interface, historico de consultas e configuracoes das abas.
 
-                Categoria recomendada: Preferencias
-              hcaptcha: |-
-                Adicione estes cookies/entradas de armazenamento quando o hCaptcha estiver ativado em formularios. Eles sao usados para deteccao de bots, opcoes de acessibilidade e gestao de desafios/sessoes.
+                Categoria recomendada: Marketing'
+              google_analytics: 'Adicione estes cookies ao utilizar o Google Analytics
+                (GA4/gtag.js) para medir trafego e comportamento dos usuarios. Eles
+                identificam visitantes, distinguem sessoes e ajudam a gerar estatisticas
+                de uso.
 
-                Categoria recomendada: Essencial
-              jitsi_meet: |-
-                Adicione estes cookies ao integrar reunioes de videoconferencia com Jitsi Meet na sua plataforma. Eles armazenam configuracoes do usuario, preferencias de idioma, opcoes de qualidade de video e dados de sessao.
 
-                Categoria recomendada: Preferencias
-              linkedin_insight: |-
-                Adicione estes cookies ao usar a LinkedIn Insight Tag para medir o desempenho de campanhas e conversoes vindas de anuncios do LinkedIn.
+                Categoria recomendada: Analitica'
+              google_maps_embeds: 'Adicione estes cookies ao incorporar o Google Maps
+                em suas paginas. Eles ajudam com preferencias do mapa, estado de consentimento
+                e metricas de uso.
 
-                Categoria recomendada: Marketing
-              matomo: |-
-                Adicione estes cookies ao usar o Matomo Analytics para coletar estatisticas do site. Eles identificam visitantes recorrentes, rastreiam sessoes e armazenam informacoes de referencia para relatorios agregados.
 
-                Categoria recomendada: Analitica
-              openstreetmap_tiles: |-
-                Adicione estes cookies quando a experiencia do mapa depender de recursos hospedados pelo OpenStreetMap que possam definir cookies.
+                Categoria recomendada: Preferencias ou Analitica'
+              google_tag_manager: 'Adicione estes cookies quando suas tags de analise
+                ou marketing forem entregues pelo Google Tag Manager. Algumas tags
+                podem definir cookies adicionais de rastreamento dependendo da configuracao
+                do GTM.
 
-                Categoria recomendada: Preferencias
-              recaptcha: |-
-                Adicione estes cookies/entradas de armazenamento quando o Google reCAPTCHA proteger formularios contra abuso e bots. Eles ajudam a avaliar interacoes do usuario e sinais de seguranca.
 
-                Categoria recomendada: Essencial
-              vimeo_embeds: |-
-                Adicione estes cookies ao incorporar videos do Vimeo em paginas, propostas ou comentarios. O Vimeo pode usa-los para lembrar configuracoes do player e medir interacoes de reproducao.
+                Categoria recomendada: Analitica ou Marketing'
+              graphiql: 'Adicione estes cookies ao ativar o explorador da API GraphQL
+                (/api/graphiql) para desenvolvedores. Eles armazenam preferencias
+                da interface, historico de consultas e configuracoes das abas.
 
-                Categoria recomendada: Preferencias ou Analitica
-              youtube_embeds: |-
-                Adicione estes cookies ao permitir videos incorporados do YouTube em conteudos. O YouTube define cookies de analise e rastreamento que coletam informacoes sobre reproducao de videos e comportamento do usuario.
 
-                Categoria recomendada: Preferencias, Analitica ou Marketing
-              youtube_nocookie: |-
-                Adicione estas chaves de armazenamento quando usar o modo de privacidade aprimorada do YouTube (youtube-nocookie.com). Elas sao usadas para manter o estado do player e preferencias de dispositivo/sessao.
+                Categoria recomendada: Preferencias'
+              hcaptcha: 'Adicione estes cookies/entradas de armazenamento quando o
+                hCaptcha estiver ativado em formularios. Eles sao usados para deteccao
+                de bots, opcoes de acessibilidade e gestao de desafios/sessoes.
 
-                Categoria recomendada: Preferencias
+
+                Categoria recomendada: Essencial'
+              jitsi_meet: 'Adicione estes cookies ao integrar reunioes de videoconferencia
+                com Jitsi Meet na sua plataforma. Eles armazenam configuracoes do
+                usuario, preferencias de idioma, opcoes de qualidade de video e dados
+                de sessao.
+
+
+                Categoria recomendada: Preferencias'
+              linkedin_insight: 'Adicione estes cookies ao usar a LinkedIn Insight
+                Tag para medir o desempenho de campanhas e conversoes vindas de anuncios
+                do LinkedIn.
+
+
+                Categoria recomendada: Marketing'
+              matomo: 'Adicione estes cookies ao usar o Matomo Analytics para coletar
+                estatisticas do site. Eles identificam visitantes recorrentes, rastreiam
+                sessoes e armazenam informacoes de referencia para relatorios agregados.
+
+
+                Categoria recomendada: Analitica'
+              openstreetmap_tiles: 'Adicione estes cookies quando a experiencia do
+                mapa depender de recursos hospedados pelo OpenStreetMap que possam
+                definir cookies.
+
+
+                Categoria recomendada: Preferencias'
+              recaptcha: 'Adicione estes cookies/entradas de armazenamento quando
+                o Google reCAPTCHA proteger formularios contra abuso e bots. Eles
+                ajudam a avaliar interacoes do usuario e sinais de seguranca.
+
+
+                Categoria recomendada: Essencial'
+              vimeo_embeds: 'Adicione estes cookies ao incorporar videos do Vimeo
+                em paginas, propostas ou comentarios. O Vimeo pode usa-los para lembrar
+                configuracoes do player e medir interacoes de reproducao.
+
+
+                Categoria recomendada: Preferencias ou Analitica'
+              youtube_embeds: 'Adicione estes cookies ao permitir videos incorporados
+                do YouTube em conteudos. O YouTube define cookies de analise e rastreamento
+                que coletam informacoes sobre reproducao de videos e comportamento
+                do usuario.
+
+
+                Categoria recomendada: Preferencias, Analitica ou Marketing'
+              youtube_nocookie: 'Adicione estas chaves de armazenamento quando usar
+                o modo de privacidade aprimorada do YouTube (youtube-nocookie.com).
+                Elas sao usadas para manter o estado do player e preferencias de dispositivo/sessao.
+
+
+                Categoria recomendada: Preferencias'
             labels:
               cloudflare_turnstile:
                 one: Cloudflare Turnstile (%{count} cookie)
@@ -999,7 +1115,7 @@ pt-BR:
             edit: Editar item
             new: Novo item
             reset: Restaurar personalizacao
-            title: "%{category}: Itens de cookie"
+            title: '%{category}: Itens de cookie'
           new:
             cancel: Cancelar
             save: Salvar
@@ -1020,17 +1136,30 @@ pt-BR:
           form:
             destination_help: Rotas absolutas (comecam com "/") ou URLs externas (http://..)
             origin_help: Apenas rotas absolutas, comecam com "/"
-            pass_query_help: |
-              Ative esta opcao se voce quiser que a string de consulta seja copiada para o destino.<br>
-              Por exemplo, se voce tiver configurado /my-origin => /my-destination, uma solicitacao para /my-origin?locale=ca sera redirecionada para "/my-destination?locale=ca".
+            pass_query_help: 'Ative esta opcao se voce quiser que a string de consulta
+              seja copiada para o destino.<br>
+
+              Por exemplo, se voce tiver configurado /my-origin => /my-destination,
+              uma solicitacao para /my-origin?locale=ca sera redirecionada para "/my-destination?locale=ca".
+
+              '
           index:
-            check_redirections: "✔ Verificar redirecionamentos"
+            check_redirections: ✔ Verificar redirecionamentos
             confirm_destroy: Tem certeza de que deseja remover este redirecionamento?
-            description: |
-              Voce pode definir qualquer rota (comecando com <code>/</code>) para redirecionar qualquer visitante para uma URL de destino.<br>
-              O destino pode ser um caminho absoluto (ex: <code>/processes/some-process</code>) ou comecar com <code>https://</code> (ex: <code>http://decidim.org</code>)<br><br>
-              Leve em conta que um redirecionamento so funciona se nenhuma outra rota corresponder. Nao e possivel substituir rotas originais (isso e por design).<br>
-              Se nao tiver certeza, use o botao de verificar redirecionamentos para testar incompatibilidades.
+            description: 'Voce pode definir qualquer rota (comecando com <code>/</code>)
+              para redirecionar qualquer visitante para uma URL de destino.<br>
+
+              O destino pode ser um caminho absoluto (ex: <code>/processes/some-process</code>)
+              ou comecar com <code>https://</code> (ex: <code>http://decidim.org</code>)<br><br>
+
+              Leve em conta que um redirecionamento so funciona se nenhuma outra rota
+              corresponder. Nao e possivel substituir rotas originais (isso e por
+              design).<br>
+
+              Se nao tiver certeza, use o botao de verificar redirecionamentos para
+              testar incompatibilidades.
+
+              '
             edit: Editar redirecionamento
             new: Novo redirecionamento
             remove: Remover redirecionamento
@@ -1051,10 +1180,17 @@ pt-BR:
           index:
             bits: Bits
             created_at: Criado em
-            help_html: |
-              Esta pagina mostra os selos Hashcash detectados no sistema. Hashcash e um sistema de prova de trabalho que exige que os usuarios resolvam um quebra-cabeca computacional (realizado automaticamente pelo navegador) antes de poderem se cadastrar.
+            help_html: 'Esta pagina mostra os selos Hashcash detectados no sistema.
+              Hashcash e um sistema de prova de trabalho que exige que os usuarios
+              resolvam um quebra-cabeca computacional (realizado automaticamente pelo
+              navegador) antes de poderem se cadastrar.
+
               <br><br>
-              Cada entrada nesta lista representa um selo Hashcash que foi gerado por um usuario sempre que ele se cadastrou ou fez login.
+
+              Cada entrada nesta lista representa um selo Hashcash que foi gerado
+              por um usuario sempre que ele se cadastrou ou fez login.
+
+              '
             ip_address: Endereco IP
             no_data: Nenhum selo Hashcash encontrado
             request_path: Caminho da requisicao
@@ -1071,10 +1207,10 @@ pt-BR:
             preset: Predefinicoes para preenchimento automatico
             preset_content_blocks: Blocos de conteudo existentes
             preset_global_menu: Itens comuns do Decidim
-            select_a_preset: "— Selecionar item de menu comum —"
-            url_help_html: "<b>#section-id</b> — rola ate uma secao desta pagina<br><b>/caminho</b>
+            select_a_preset: — Selecionar item de menu comum —
+            url_help_html: <b>#section-id</b> — rola ate uma secao desta pagina<br><b>/caminho</b>
               — pagina interna (ex. /processes)<br><b>https://example.com</b> — link
-              externo (abre automaticamente em uma nova aba)"
+              externo (abre automaticamente em uma nova aba)
           new:
             save: Salvar
             title: Novo item de menu
@@ -1101,6 +1237,7 @@ pt-BR:
             awesome_authorizations: Autorizações Awesome
             force_authorizations: Autorizações forçadas
             verifications: Verificacoes
+          follow_up_questionnaires: Questionários de acompanhamento
         menu_hacks:
           create:
             error: Erro ao criar item de menu! %{error}
@@ -1157,30 +1294,57 @@ pt-BR:
             destroying: Os dados privados para %{title} estao programados para serem
               destruídos. Verifique novamente em alguns minutos.
             done: Concluido
-            help_html: |
-              Esta ferramenta permite excluir todos os dados privados de um determinado espaco participativo ou componente. Esta acao e irreversivel e removera todos os dados privados do banco de dados.
+            help_html: 'Esta ferramenta permite excluir todos os dados privados de
+              um determinado espaco participativo ou componente. Esta acao e irreversivel
+              e removera todos os dados privados do banco de dados.
+
               <br><br>
+
               <strong>O que e considerado dado privado?</strong>
+
               <br>
-              Dados privados sao quaisquer informacoes nao publicas e acessiveis apenas por administradores. Isso, no momento, inclui informacoes de campos personalizados privados.
+
+              Dados privados sao quaisquer informacoes nao publicas e acessiveis apenas
+              por administradores. Isso, no momento, inclui informacoes de campos
+              personalizados privados.
+
               <br><br>
+
               <strong>O que acontece quando excluo dados privados?</strong>
+
               <br>
-              Ao excluir dados privados, todas as informacoes privadas do espaco ou componente participativo selecionado serao removidas permanentemente do banco de dados. Um registro desta acao sera armazenado no sistema para fins de auditoria.
+
+              Ao excluir dados privados, todas as informacoes privadas do espaco ou
+              componente participativo selecionado serao removidas permanentemente
+              do banco de dados. Um registro desta acao sera armazenado no sistema
+              para fins de auditoria.
+
               <br><br>
+
               <strong>O que acontece com os dados publicos?</strong>
+
               <br>
-              Dados publicos nao sao afetados por esta acao. Apenas dados privados serao excluidos.
+
+              Dados publicos nao sao afetados por esta acao. Apenas dados privados
+              serao excluidos.
+
               <br><br>
+
               <strong>Existe um tempo minimo de espera antes de excluir dados privados?</strong>
+
               <br>
-              Sim, voce nao pode excluir dados privados se a ultima atualizacao foi ha menos de %{time_ago}. Voce pode alterar esta configuracao no arquivo inicializador.
+
+              Sim, voce nao pode excluir dados privados se a ultima atualizacao foi
+              ha menos de %{time_ago}. Voce pode alterar esta configuracao no arquivo
+              inicializador.
+
+              '
             items_count: Total afetado
             last_date: Ultima atualizacao
             no_data: Nenhum dado privado encontrado mais antigo que %{time_ago}
             not_destroyable: Este recurso ainda nao pode ser destruido
             removing: Removendo...
-            time_ago: "%{time} atras"
+            time_ago: '%{time} atras'
         proposal_custom_fields:
           menu:
             title: Campos publicos
@@ -1188,7 +1352,7 @@ pt-BR:
           private_data_last_remove: Estes dados foram destruídos %{time_ago} atras.
           private_data_last_update: Estes dados foram atualizados %{time_ago} atras.
           proposal_private_custom_fields: Campos privados
-          remove_private_data: "👉 Talvez voce queira remove-lo"
+          remove_private_data: 👉 Talvez voce queira remove-lo
         scoped_admin_styles:
           menu:
             title: Painel admin
@@ -1200,26 +1364,168 @@ pt-BR:
             com %{awesome_link}.
           restricted_html: Este espaco esta usando restricoes adicionais de acesso
             com %{awesome_link}.
+        follow_up_questionnaire_messages:
+          auto_status_change_body: 'Status alterado para: %{status}'
+          create:
+            error: Erro ao enviar a mensagem! %{error}
+            success: Mensagem enviada com sucesso
+          form:
+            add_attachment: Adicionar anexo
+            attachments: Anexos
+            author: Autor
+            body: Mensagem
+            body_help: Deixe a mensagem em branco para apenas notificar a pessoa sobre
+              a alteração de status (notificação no aplicativo, ainda assim enviada
+              por e-mail).
+            edit_attachment: Editar anexo
+            select_a_status: Selecione um status
+            status: Status
+          index:
+            conversation: Conversa
+            last_action_answered: Respondido há %{time}
+            last_action_labeled: Etiquetado há %{time}
+            new_status: Novo
+            not_answered: (não respondido)
+            not_processable: Sem respondente - Não processável
+            see_full_responses: Ver respostas completas
+            view_survey: Pré-visualização
+          new:
+            anonymous_respondent: Respondente anônimo
+            messages_count:
+              one: '%{count} mensagem'
+              other: '%{count} mensagens'
+            new_reply: Nova mensagem
+            new_reply_help_text: Envie uma mensagem à pessoa que respondeu. A mensagem
+              será enviada com “Responder para” definido como %{email}. Respostas
+              diretas para esse e-mail não serão coletadas aqui.
+            new_reply_no_reply_to_help_text: Envie uma mensagem à pessoa que respondeu.
+              Os participantes não podem responder a este e-mail, porque ele é enviado
+              sem endereço de resposta.
+            send_message: Enviar
+            submitted_at: Enviado em %{date}
+            title: Gerenciar mensagens
+          reply_history:
+            documents: Documentos
+            empty: Ainda não foi enviada nenhuma mensagem para esta pessoa.
+            photos: Fotos
+            title: Histórico de mensagens
+        follow_up_questionnaire_statuses:
+          create:
+            error: Erro ao criar o rótulo! %{error}
+            success: Rótulo criado com sucesso
+          destroy:
+            not_removable: Este rótulo está sendo usado em mensagens e não pode ser
+              removido.
+            success: Rótulo removido com sucesso
+          edit:
+            save: Salvar
+            title: Editar rótulo
+          form:
+            name_taken_error: Esse nome já é usado por outro rótulo neste questionário.
+          new:
+            save: Salvar
+            title: Novo rótulo
+          table:
+            confirm_destroy: Tem certeza de que deseja remover este rótulo?
+            description: Os rótulos são usados para acompanhar o status de uma resposta
+            edit: Editar
+            labels_title: Rótulos
+            new: Novo rótulo
+            not_removable: Este rótulo está sendo usado em mensagens e não pode ser
+              removido.
+            remove: Remover
+          update:
+            error: Erro ao atualizar o rótulo! %{error}
+            success: Rótulo atualizado com sucesso
+        follow_up_questionnaires:
+          create:
+            error: Erro ao criar o questionário de acompanhamento! %{error}
+            success: Questionário de acompanhamento criado com sucesso
+          destroy:
+            error: Erro ao remover o questionário de acompanhamento! %{error}
+            not_removable: Ele tem mensagens enviadas aos respondentes e não pode
+              ser removido. Desative-o em vez disso.
+            success: Questionário de acompanhamento removido com sucesso
+            unexpected_error: Ocorreu um problema ao removê-lo.
+          edit:
+            save: Salvar
+            title: Questionário de acompanhamento
+          form:
+            anonymous_option_flag: anônimo, sem perguntas
+            name_help: No espaço participativo, você verá este nome como um novo item
+              de menu para gerenciar as respostas
+            questionnaire_locked: Este questionário de acompanhamento já tem mensagens
+              enviadas aos respondentes, então a pesquisa não pode ser alterada.
+            reply_to_help: Opcional. As respostas dos participantes aos e-mails de
+              notificação serão enviadas para este endereço. Deixe em branco para
+              enviar os e-mails sem endereço de resposta.
+            responder_email_help: Este campo será usado para encontrar e enviar o
+              e-mail em que responder. Se o questionário não for anônimo, você pode
+              pular esta parte e o usuário será usado em vez disso.
+            responder_name_help: Este campo será usado para encontrar e exibir o nome
+              do respondente. Se o questionário não for anônimo, você pode pular esta
+              parte e o usuário será usado em vez disso.
+            select_questionnaire_placeholder: Selecione um questionário
+          index:
+            confirm_destroy: Tem certeza de que deseja remover este questionário de
+              acompanhamento?
+            description: Transforme os envios do questionário em tópicos interativos.
+              Clique em qualquer resposta para enviar uma mensagem direta ao participante,
+              registrar anotações privadas da equipe, aplicar rótulos de acompanhamento
+              e visualizar o histórico completo da comunicação.
+            edit: Editar
+            manage_responses: Gerenciar respostas
+            new: Novo acompanhamento
+            not_removable: Ele tem mensagens enviadas aos respondentes e não pode
+              ser removido. Desative-o em vez disso.
+            remove: Remover
+          new:
+            save: Salvar
+            title: Questionários de acompanhamento
+          update:
+            error: Erro ao atualizar o questionário de acompanhamento! %{error}
+            success: Questionário de acompanhamento atualizado com sucesso
       admin_log:
         component:
-          destroy_private_data: "%{user_name} destruiu %{count} itens de dados privados
-            para %{resource_name} em %{space_name}"
+          destroy_private_data: '%{user_name} destruiu %{count} itens de dados privados
+            para %{resource_name} em %{space_name}'
         user:
-          admin_creates_authorization: "%{user_name} verificou %{resource_name} com
-            %{handler_name}"
-          admin_destroys_authorization: "%{user_name} destruiu a verificacao %{handler_name}
-            em %{resource_name}"
-          admin_forces_authorization: "%{user_name} forçou a verificacao %{handler_name}
-            em %{resource_name}. Motivo: %{reason}"
+          admin_creates_authorization: '%{user_name} verificou %{resource_name} com
+            %{handler_name}'
+          admin_destroys_authorization: '%{user_name} destruiu a verificacao %{handler_name}
+            em %{resource_name}'
+          admin_forces_authorization: '%{user_name} forçou a verificacao %{handler_name}
+            em %{resource_name}. Motivo: %{reason}'
+        follow_up_questionnaire:
+          create: '%{user_name} criou o questionário de acompanhamento %{questionnaire_name}'
+          delete: '%{user_name} removeu o questionário de acompanhamento %{questionnaire_name}'
+          update: '%{user_name} atualizou o questionário de acompanhamento %{questionnaire_name}'
+        follow_up_questionnaire_message:
+          create: '%{user_name} enviou uma mensagem no questionário de acompanhamento
+            %{questionnaire_name}'
+          create_as: '%{user_name} enviou uma mensagem como %{author_name} no questionário
+            de acompanhamento %{questionnaire_name}'
+        follow_up_questionnaire_status:
+          create: '%{user_name} criou um novo rótulo %{label_name} para o questionário
+            de acompanhamento %{questionnaire_name}'
+          delete: '%{user_name} removeu o rótulo %{label_name} do questionário de
+            acompanhamento %{questionnaire_name}'
+          update: '%{user_name} atualizou o rótulo %{label_name} para o questionário
+            de acompanhamento %{questionnaire_name}'
       amendments:
         modal:
           amendment_exists: Ja existe uma emenda
           current_amendment_html: <p>Voce pode <a href="%{amendment_link}">acessar
             a emenda atual aqui</a>.</p>
           dismiss: Ok, entendi
-          explanation_html: |
-            <p>Atualmente, ha outra emenda sendo avaliada para esta proposta. Para criar uma nova, voce deve esperar ate que a atual seja aceita ou rejeitada.</p>
-            <p>Voce tambem pode entrar em contato com o autor desta proposta <a href="%{proposal_link}">deixando um comentario</a> e tentar acelerar a resolucao da emenda atual.</p>
+          explanation_html: '<p>Atualmente, ha outra emenda sendo avaliada para esta
+            proposta. Para criar uma nova, voce deve esperar ate que a atual seja
+            aceita ou rejeitada.</p>
+
+            <p>Voce tambem pode entrar em contato com o autor desta proposta <a href="%{proposal_link}">deixando
+            um comentario</a> e tentar acelerar a resolucao da emenda atual.</p>
+
+            '
         pending_limit_reached: Desculpe, so pode haver uma emenda pendente por vez.
           Aguarde ate que "%{emendation}" seja aceita ou rejeitada.
       awesome_authorization_handler:
@@ -1254,8 +1560,8 @@ pt-BR:
           past: Passados
           remove_filter: Remover filtro
           results_count:
-            one: "%{count} processo encontrado"
-            other: "%{count} processos encontrados"
+            one: '%{count} processo encontrado'
+            other: '%{count} processos encontrados'
           status_label: 'Estado:'
           title: Titulo do bloco
           upcoming: Proximos
@@ -1381,16 +1687,13 @@ pt-BR:
             no XML'
       map_component:
         map:
-          api_not_ready: |
-            <b>Aviso:</b> Esta instalacao Decidim tem a API configurada para uma complexidade maxima de <b>%{current_complexity}</b>.
-            Este componente provavelmente nao funcionara sob esta configuracao. Recomendamos que voce configure em um inicializador
-            (por exemplo, no final do <code>config/initializers/decidim.rb</code>) as seguintes linhas:<br>
-            <br>
-            <pre># Configuracao da API
-            Rails.application.config.to_prepare do
-              Decidim::Api::Schema.max_complexity = 5000
-              Decidim::Api::Schema.max_depth = 50
-            end</pre>
+          api_not_ready: "<b>Aviso:</b> Esta instalacao Decidim tem a API configurada\
+            \ para uma complexidade maxima de <b>%{current_complexity}</b>.\nEste\
+            \ componente provavelmente nao funcionara sob esta configuracao. Recomendamos\
+            \ que voce configure em um inicializador\n(por exemplo, no final do <code>config/initializers/decidim.rb</code>)\
+            \ as seguintes linhas:<br>\n<br>\n<pre># Configuracao da API\nRails.application.config.to_prepare\
+            \ do\n  Decidim::Api::Schema.max_complexity = 5000\n  Decidim::Api::Schema.max_depth\
+            \ = 50\nend</pre>\n"
           error:
             unavailable: O mapa esta indisponivel. Configure a geocodificacao para
               habilitar este componente.
@@ -1424,20 +1727,23 @@ pt-BR:
           voce precisa fazer login e autorizar sua conta.
       system:
         organizations:
-          admin_allowed_authoritzations_help_html: |
-            Administradores poderao verificar usuarios manualmente com estas autorizacoes.
+          admin_allowed_authoritzations_help_html: 'Administradores poderao verificar
+            usuarios manualmente com estas autorizacoes.
+
             <br>Use este recurso com cautela, pois pode levar a problemas de seguranca.
+
+            '
           awesome_tweaks: Ajustes do Decidim Awesome
       validators:
         too_much_caps: Esta usando letras maiusculas demais (acima de %{percent}%
           do texto)
       voting:
         voting_cards:
-          abstained: "✔ Abstencao"
+          abstained: ✔ Abstencao
           change_vote: Mudar meu voto
           default_box_title: Votar nesta proposta
-          default_instructions_html: "<p>Por favor, leia as regras de votacao cuidadosamente
-            para entender como seu voto sera usado por %{organization}</p>"
+          default_instructions_html: <p>Por favor, leia as regras de votacao cuidadosamente
+            para entender como seu voto sera usado por %{organization}</p>
           modal:
             cancel: Cancelar
             message: Seu voto sera considerado final em %{date}. Voce pode muda-lo
@@ -1456,6 +1762,23 @@ pt-BR:
             weight_2_short: 'A:'
             weight_3: Verde
             weight_3_short: 'V:'
+      follow_up_questionnaire_message_mailer:
+        notification:
+          default_name: lá
+          greeting: Olá %{name},
+          intro: 'Você recebeu uma nova mensagem sobre sua submissão a «%{questionnaire}»:'
+          outro: Obrigado pela sua participação.
+          status_updated: Status atualizado para «%{status}».
+          subject: Nova mensagem sobre sua submissão a «%{questionnaire}»
+      status_colors:
+        blue: Azul
+        gray: Cinza
+        green: Verde
+        orange: Laranja
+        pink: Rosa
+        purple: Roxo
+        red: Vermelho
+        yellow: Amarelo
     download_your_data:
       show:
         admin_actions: Acoes de administrador
@@ -1475,6 +1798,11 @@ pt-BR:
           za: Z-A (Alfabetico inverso)
         proposal:
           view_proposal: Ver proposta
+    events:
+      decidim_awesome:
+        follow_up_questionnaire_message_status_changed:
+          notification_title: 'O status da sua submissão a «%{questionnaire}» foi
+            alterado para «%{status}». '
   layouts:
     decidim:
       data_consent:
@@ -1511,3 +1839,4 @@ pt-BR:
           proposals: Propostas
           select_deselect_all: Selecionar/deselecionar tudo
           taxonomies: Taxonomias
+
