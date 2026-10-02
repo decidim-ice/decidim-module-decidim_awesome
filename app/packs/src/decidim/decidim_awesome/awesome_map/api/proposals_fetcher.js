@@ -17,6 +17,16 @@ export default class ProposalsFetcher extends Fetcher {
                 node {
                   id
                   state
+                  proposalState {
+                    title {
+                      translations {
+                        text
+                        locale
+                      }
+                    }
+                    bgColor
+                    textColor
+                  }
                   title {
                     translations {
                       text
@@ -59,20 +69,14 @@ export default class ProposalsFetcher extends Fetcher {
   decorateNode(node) {
     super.decorateNode(node);
     node.authorName = node.author && node.author.name || window.DecidimAwesome.i18n.officialAuthor;
-    node.humanState = window.AwesomeMapProposalTexts[node.state];
-    switch (node.state) {
-    case "accepted":
-      node.stateClass = "success";
-      break;
-    case "rejected":
-    case "withdrawn":
-      node.stateClass = "alert";
-      break;
-    case "evaluating":
-      node.stateClass = "warning";
-      break;
-    default:
-      node.stateClass = "muted";
+    const proposalState = node.proposalState;
+    node.humanState = "";
+    node.stateClass = "muted";
+    node.stateStyle = "";
+    if (proposalState) {
+      node.humanState = this.findTranslation(proposalState.title.translations);
+      node.stateClass = "";
+      node.stateStyle = `background-color: ${proposalState.bgColor}; color: ${proposalState.textColor}; border-color: ${proposalState.textColor};`;
     }
 
     node.isAmendment = () => (Boolean(this.controller.amendments[node.id]));

@@ -24,7 +24,15 @@ export default class Controller {
   setFetcher(Fetcher) {
     let checkProposalState = function (node, map) {
       const showConfig = map.config.show;
-      return showConfig[node.state || "notAnswered"];
+      const state = node.state || "notAnswered";
+      let visibilityKey = state;
+      if (state === "not_answered") {
+        visibilityKey = "notAnswered";
+      }
+      if (!Object.keys(showConfig).includes(visibilityKey)) {
+        return true;
+      }
+      return showConfig[visibilityKey];
     }
 
     this.fetcher = new Fetcher(this);
