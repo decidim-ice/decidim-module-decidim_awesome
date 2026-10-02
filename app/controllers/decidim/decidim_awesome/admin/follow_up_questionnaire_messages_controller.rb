@@ -145,13 +145,9 @@ module Decidim
         end
 
         def messages_for_respondent
-          scope = @follow_up_questionnaire.messages
-          scope = if participant.decidim_user_id.present?
-                    scope.where(decidim_user_id: participant.decidim_user_id)
-                  else
-                    scope.where(session_token: participant.session_token)
-                  end
-          scope.recent
+          @follow_up_questionnaire.messages
+                                  .for_respondent(decidim_user_id: participant.decidim_user_id, session_token: participant.session_token)
+                                  .recent
         end
 
         def page_messages

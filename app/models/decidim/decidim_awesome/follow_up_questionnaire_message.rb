@@ -22,6 +22,9 @@ module Decidim
       validates :body, length: { maximum: 65_535 }, allow_nil: true
 
       scope :recent, -> { order(created_at: :desc) }
+      scope :for_respondent, lambda { |decidim_user_id:, session_token:|
+        decidim_user_id.present? ? where(decidim_user_id:) : where(session_token:)
+      }
 
       delegate :name, :color, to: :status, prefix: true, allow_nil: true
 

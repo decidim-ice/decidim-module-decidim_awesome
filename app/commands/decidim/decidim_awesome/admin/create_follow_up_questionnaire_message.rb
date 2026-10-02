@@ -20,7 +20,7 @@ module Decidim
           end
 
           transaction do
-            @previous_status_id = previous_status_id_for_respondent
+            @previous_status_id = form.previous_status_id
             create_message
             @attached_to = message
             create_attachments if process_attachments?
@@ -33,12 +33,6 @@ module Decidim
         private
 
         attr_reader :form, :message, :previous_status_id, :email_sent
-
-        def previous_status_id_for_respondent
-          scope = Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.where(follow_up_questionnaire_id: form.follow_up_questionnaire_id)
-          scope = form.decidim_user_id.present? ? scope.where(decidim_user_id: form.decidim_user_id) : scope.where(session_token: form.session_token)
-          scope.order(created_at: :desc).first&.status_id
-        end
 
         def create_message
           # The admin log keeps who really sent the message, which may differ from the chosen author
