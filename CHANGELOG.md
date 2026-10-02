@@ -3,6 +3,11 @@ CHANGELOG
 
 unreleased
 -------
+  Compatibility:
+    - Decidim 0.31.x
+
+  Features:
+    -  Fix for AwesomeMap when proposal have custom states
 
 v0.14.4
 -------
