@@ -11,6 +11,7 @@ module Decidim
 
         layout false
         helper_method :constraint_key
+        rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
         before_action do
           render :no_permissions unless allowed_to? :edit_config, constraint_key
@@ -108,6 +109,10 @@ module Decidim
         end
 
         private
+
+        def render_not_found
+          head :not_found
+        end
 
         def filtered_params
           ops = {}
