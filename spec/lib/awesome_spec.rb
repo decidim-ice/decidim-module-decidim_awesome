@@ -59,5 +59,38 @@ module Decidim
         end
       end
     end
+
+    describe "#follow_up_status_colors" do
+      it "returns the expected color keys" do
+        expect(subject.follow_up_status_colors.keys).to contain_exactly(:gray, :blue, :green, :yellow, :orange, :red, :pink, :purple)
+      end
+    end
+
+    describe "#create_default_statuses!" do
+      let(:follow_up_questionnaire) { create(:awesome_follow_up_questionnaire, questionnaire: create(:questionnaire), name: { "en" => "Follow up" }) }
+
+      it "creates the default statuses for the questionnaire" do
+        expect { subject.create_default_statuses!(follow_up_questionnaire) }.to change(follow_up_questionnaire.statuses, :count).by(3)
+      end
+
+      it "creates statuses with the expected names and colors" do
+        subject.create_default_statuses!(follow_up_questionnaire)
+
+        statuses = follow_up_questionnaire.statuses.reload.index_by { |status| status.name["en"] }
+        expect(statuses.keys).to contain_exactly("Answered", "In progress", "Pending")
+        expect(statuses["Answered"].color).to eq(subject.follow_up_status_colors[:yellow][:background])
+        expect(statuses["In progress"].color).to eq(subject.follow_up_status_colors[:green][:background])
+        expect(statuses["Pending"].color).to eq(subject.follow_up_status_colors[:red][:background])
+      end
+
+      it "fills the names in every locale of the organization" do
+        subject.create_default_statuses!(follow_up_questionnaire)
+
+        follow_up_questionnaire.statuses.reload.each do |status|
+          expect(status.name.keys).to match_array(follow_up_questionnaire.organization.available_locales)
+          expect(status.name.values).to all(be_present)
+        end
+      end
+    end
   end
 end

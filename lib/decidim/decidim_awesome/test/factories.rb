@@ -75,4 +75,11 @@ FactoryBot.define do
     email { Faker::Internet.email }
     authorization_group { association(:awesome_authorization_group) }
   end
+
+  factory :awesome_follow_up_questionnaire, class: "Decidim::DecidimAwesome::FollowUpQuestionnaire" do
+    name { { "en" => "Follow up" } }
+    organization
+    questionnaire { create(:survey, component: create(:component, manifest_name: "surveys", organization:)).questionnaire }
+    component { questionnaire.questionnaire_for.try(:component) || association(:component, manifest_name: "surveys", organization:) }
+  end
 end
