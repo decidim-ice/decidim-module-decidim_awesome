@@ -10,6 +10,64 @@ module Decidim
       expect(subject.voting_registry).to be_a(Decidim::ManifestRegistry)
     end
 
+    it "has a moderation rules registry" do
+      expect(subject.moderation_rules_registry).to be_a(Decidim::ManifestRegistry)
+    end
+
+    it "has a moderation actions registry" do
+      expect(subject.moderation_actions_registry).to be_a(Decidim::ManifestRegistry)
+    end
+
+    describe ".compatible_moderation_actions" do
+      let(:rule_manifest) do
+        Decidim::DecidimAwesome::ModerationRuleManifest.new(
+          name: :word_filter,
+          checker_class: "SomeChecker",
+          supported_object_types: [:proposals, :comments]
+        )
+      end
+      let(:proposal_action) do
+        Decidim::DecidimAwesome::ModerationActionManifest.new(
+          name: :moderate_and_hide,
+          handler_class: "SomeHandler",
+          supported_object_types: [:proposals]
+        )
+      end
+      let(:comment_action) do
+        Decidim::DecidimAwesome::ModerationActionManifest.new(
+          name: :flag_only,
+          handler_class: "SomeOtherHandler",
+          supported_object_types: [:comments]
+        )
+      end
+
+      before do
+        allow(subject.moderation_rules_registry).to receive(:find).with(:word_filter).and_return(rule_manifest)
+        allow(subject.moderation_rules_registry).to receive(:find).with(:missing).and_return(nil)
+        allow(subject.moderation_actions_registry).to receive(:manifests).and_return([proposal_action, comment_action])
+      end
+
+      it "returns actions compatible with the rule and object type" do
+        expect(subject.compatible_moderation_actions(:word_filter, :proposals)).to eq([proposal_action])
+      end
+
+      it "filters correctly for a different object type" do
+        expect(subject.compatible_moderation_actions(:word_filter, :comments)).to eq([comment_action])
+      end
+
+      it "returns empty when rule is not found" do
+        expect(subject.compatible_moderation_actions(:missing, :proposals)).to eq([])
+      end
+
+      it "returns empty when object type is not supported by the rule" do
+        expect(subject.compatible_moderation_actions(:word_filter, :debates)).to eq([])
+      end
+
+      it "accepts string arguments" do
+        expect(subject.compatible_moderation_actions("word_filter", "proposals")).to eq([proposal_action])
+      end
+    end
+
     it "returns the database collation" do
       expect(subject.collation_for("en")).to start_with("en")
     end
