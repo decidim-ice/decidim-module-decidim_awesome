@@ -173,7 +173,7 @@ module Decidim
           value = false
           unless val == :disabled
             value = yield(key, val)
-            value = val.merge(value.transform_keys(&:to_sym)) if val.is_a?(Hash) && value.is_a?(Hash)
+            value = val.merge(value.transform_keys(&:to_sym)) if val.is_a?(Hash) && value.is_a?(Hash) && !value.equal?(val)
           end
           [key, value]
         end
