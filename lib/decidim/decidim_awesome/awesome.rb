@@ -58,6 +58,7 @@ module Decidim
     end
 
     # This feature allows to create follow up questionnaires
+    # Set to :disabled to completely remove this feature
     config_accessor :follow_up_questionnaires do
       true
     end

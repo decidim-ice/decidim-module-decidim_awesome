@@ -1049,6 +1049,8 @@ en:
           create:
             error: Error sending the message! %{error}
             success: Message sent successfully
+            success_without_email: Message saved, but not emailed because the respondent
+              has no email address
           form:
             add_attachment: Add attachment
             attachments: Attachment
@@ -1079,6 +1081,8 @@ en:
               won't be collected here.
             new_reply_no_reply_to_help_text: Send a message to the responder. Participants
               cannot reply to this email, as it is sent without a Reply-To address.
+            no_email_warning: This respondent has no email address. The message will
+              be saved, but not emailed.
             send_message: Send
             submitted_at: Submitted on %{date}
             title: Manage messages
@@ -1124,7 +1128,6 @@ en:
           destroy:
             error: Error removing follow-up questionnaire! %{error}
             not_removable: It has messages sent to respondents and cannot be removed.
-              Deactivate it instead.
             success: Follow-up questionnaire removed successfully
             unexpected_error: There was a problem removing it.
           edit:
@@ -1155,7 +1158,6 @@ en:
             manage_responses: Manage responses
             new: New follow-up
             not_removable: It has messages sent to respondents and cannot be removed.
-              Deactivate it instead.
             remove: Remove
           new:
             save: Save

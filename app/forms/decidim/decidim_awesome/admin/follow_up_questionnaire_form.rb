@@ -20,6 +20,7 @@ module Decidim
         validates :reply_to, "valid_email_2/email": true, allow_blank: true
         validate :questionnaire_belongs_to_organization, if: -> { decidim_questionnaire_id.present? }
         validate :questionnaire_not_already_configured, if: -> { decidim_questionnaire_id.present? }
+        validate :responder_fields_belong_to_questionnaire, if: -> { decidim_questionnaire_id.present? }
 
         def map_model(model)
           self.decidim_questionnaire_id = model.decidim_questionnaire_id
@@ -46,11 +47,16 @@ module Decidim
         def component
           return @component if defined?(@component)
 
-          questionnaire = Decidim::Forms::Questionnaire.find_by(id: decidim_questionnaire_id)
           @component = questionnaire && FollowUpQuestionnairesFinder.new(current_organization).component_for(questionnaire)
         end
 
         private
+
+        def questionnaire
+          return @questionnaire if defined?(@questionnaire)
+
+          @questionnaire = Decidim::Forms::Questionnaire.find_by(id: decidim_questionnaire_id)
+        end
 
         def questionnaire_belongs_to_organization
           errors.add(:decidim_questionnaire_id, :invalid) if component.blank?
@@ -60,6 +66,18 @@ module Decidim
           return unless context[:existing_questionnaire_ids]&.include?(decidim_questionnaire_id)
 
           errors.add(:decidim_questionnaire_id, :taken)
+        end
+
+        def responder_fields_belong_to_questionnaire
+          return if questionnaire.blank?
+
+          question_ids = questionnaire.questions.pluck(:id).map(&:to_s)
+          [:responder_name_field, :responder_email_field].each do |field|
+            value = public_send(field)
+            next if value.blank? || question_ids.include?(value.to_s)
+
+            errors.add(field, :invalid)
+          end
         end
       end
     end

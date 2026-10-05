@@ -20,25 +20,19 @@ module Decidim
           end
 
           transaction do
-            @previous_status_id = previous_status_id_for_respondent
+            @previous_status_id = form.previous_status_id
             create_message
             @attached_to = message
             create_attachments if process_attachments?
-            notify_respondent
+            @email_sent = notify_respondent
           end
 
-          broadcast(:ok, message)
+          broadcast(:ok, message, email_sent)
         end
 
         private
 
-        attr_reader :form, :message, :previous_status_id
-
-        def previous_status_id_for_respondent
-          scope = Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.where(follow_up_questionnaire_id: form.follow_up_questionnaire_id)
-          scope = form.decidim_user_id.present? ? scope.where(decidim_user_id: form.decidim_user_id) : scope.where(session_token: form.session_token)
-          scope.order(created_at: :desc).first&.status_id
-        end
+        attr_reader :form, :message, :previous_status_id, :email_sent
 
         def create_message
           # The admin log keeps who really sent the message, which may differ from the chosen author
@@ -69,16 +63,20 @@ module Decidim
         end
 
         def status_changed?
-          previous_status_id.present? && previous_status_id != message.status_id
+          previous_status_id != message.status_id
         end
 
         def notify_respondent
           finder = FollowUpQuestionnaireRespondentsFinder.new(message.follow_up_questionnaire)
           respondent = finder.respondent_for(decidim_user_id: message.decidim_user_id, session_token: message.session_token)
-          return unless respondent.processable?
+          return false unless respondent.processable?
 
-          FollowUpQuestionnaireMessageMailer.notification(message, respondent.email, respondent.name, status_changed: status_changed?).deliver_later if respondent.email.present?
           notify_status_change if status_changed?
+          # Respondents without email can still be tracked, so the message is saved but not emailed
+          return false if respondent.email.blank?
+
+          FollowUpQuestionnaireMessageMailer.notification(message, respondent.email, respondent.name, status_changed: status_changed?).deliver_later
+          true
         end
 
         def notify_status_change

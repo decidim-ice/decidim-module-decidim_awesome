@@ -67,6 +67,33 @@ module Decidim::DecidimAwesome
           expect(ActionMailer::Base.deliveries.last.reply_to).to be_nil
         end
 
+        it "reports that the email was sent" do
+          email_sent = nil
+          described_class.call(form) { on(:ok) { |_message, sent| email_sent = sent } }
+
+          expect(email_sent).to be(true)
+        end
+
+        context "and the respondent only has a name" do
+          let(:decidim_user_id) { nil }
+          let(:session_token) { "anonymous-session-token" }
+          let(:name_question) { create(:questionnaire_question, questionnaire:) }
+
+          before do
+            follow_up_questionnaire.update!(responder_name_field: name_question.id.to_s)
+            create(:response, questionnaire:, question: name_question, user: nil, session_token:, body: "Jane")
+          end
+
+          it "saves the message without emailing it and reports it" do
+            email_sent = nil
+
+            expect { described_class.call(form) { on(:ok) { |_message, sent| email_sent = sent } } }
+              .to change(Decidim::DecidimAwesome::FollowUpQuestionnaireMessage, :count).by(1)
+            expect(email_sent).to be(false)
+            expect(ActionMailer::MailDeliveryJob).not_to have_been_enqueued
+          end
+        end
+
         context "when the follow up questionnaire has a Reply-To email" do
           before { follow_up_questionnaire.update!(reply_to: "replies@example.org") }
 
@@ -85,6 +112,25 @@ module Decidim::DecidimAwesome
             expect { subject.call }.to broadcast(:ok)
             expect { subject.call }.not_to have_enqueued_job(ActionMailer::MailDeliveryJob)
           end
+        end
+      end
+
+      context "when the body is blank and it is the respondent's first message" do
+        let(:body) { "" }
+
+        it "treats it as a status change, sending the email with the status and notifying in-app" do
+          expect(Decidim::EventsManager).to receive(:publish).with(
+            event: "decidim.events.decidim_awesome.follow_up_questionnaire_message_status_changed",
+            event_class: FollowUpQuestionnaireMessageStatusChangedEvent,
+            resource: an_instance_of(Decidim::DecidimAwesome::FollowUpQuestionnaireMessage),
+            affected_users: [respondent]
+          )
+
+          expect { subject.call }.to broadcast(:ok)
+          expect(message.body).to be_nil
+
+          perform_enqueued_jobs
+          expect(ActionMailer::Base.deliveries.last.html_part.body.to_s).to include("Status updated to")
         end
       end
 

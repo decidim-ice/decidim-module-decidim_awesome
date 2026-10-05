@@ -46,6 +46,16 @@ module Decidim
           ([current_user] + admins).compact.uniq
         end
 
+        def previous_status_id
+          return @previous_status_id if defined?(@previous_status_id)
+          return if follow_up_questionnaire_id.blank? || (decidim_user_id.blank? && session_token.blank?)
+
+          @previous_status_id = Decidim::DecidimAwesome::FollowUpQuestionnaireMessage
+                                .where(follow_up_questionnaire_id:)
+                                .for_respondent(decidim_user_id:, session_token:)
+                                .recent.first&.status_id
+        end
+
         private
 
         def author_is_allowed
@@ -70,18 +80,10 @@ module Decidim
         # i18n-tasks-use t('activemodel.errors.models.follow_up_questionnaire_message.attributes.body.blank_without_status_change')
         def body_or_status_change_present
           return if body.to_s.strip.present?
-          return if status_id.blank? || previous_status_id.blank?
+          return if status_id.blank?
           return if status_id != previous_status_id
 
           errors.add(:body, :blank_without_status_change)
-        end
-
-        def previous_status_id
-          return if follow_up_questionnaire_id.blank? || (decidim_user_id.blank? && session_token.blank?)
-
-          scope = Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.where(follow_up_questionnaire_id: follow_up_questionnaire_id)
-          scope = decidim_user_id.present? ? scope.where(decidim_user_id: decidim_user_id) : scope.where(session_token: session_token)
-          @previous_status_id ||= scope.order(created_at: :desc).first&.status_id
         end
       end
     end
