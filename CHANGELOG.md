@@ -8,7 +8,7 @@ v0.14.5
 
   Features:
     - Fix for AwesomeMap when proposal have custom states
-    - Add Follow Up Quesionnaires feature ([#649](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/649))
+    - Add Follow Up Questionnaires feature ([#649](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/649))
 
 v0.14.4
 -------
