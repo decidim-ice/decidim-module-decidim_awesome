@@ -1383,6 +1383,7 @@ it:
           create:
             error: Errore nell’invio del messaggio! %{error}
             success: Messaggio inviato correttamente
+            success_without_email: Il messaggio è stato salvato, ma non inviato perché la persona che ha risposto non ha un indirizzo email
           form:
             add_attachment: Aggiungi allegato
             attachments: Allegati
@@ -1411,6 +1412,7 @@ it:
             new_reply_help_text: Invia un messaggio al rispondente. Il messaggio verrà
               inviato con «Rispondi a» impostato su %{email}. Le risposte dirette
               a quella email non verranno raccolte qui.
+            no_email_warning: Questa persona non ha un indirizzo email. Il messaggio verrà salvato, ma non inviato.
             new_reply_no_reply_to_help_text: Invia un messaggio al rispondente. I
               partecipanti non possono rispondere a questa email, perché viene inviata
               senza indirizzo Reply-To.
@@ -1427,6 +1429,7 @@ it:
             error: Errore nella creazione dell’etichetta! %{error}
             success: Etichetta creata correttamente
           destroy:
+            last_status: È necessaria almeno un’etichetta, quindi l’ultima non può essere rimossa.
             not_removable: Questa etichetta è usata nei messaggi e non può essere
               rimossa.
             success: Etichetta rimossa correttamente
@@ -1445,6 +1448,7 @@ it:
               risposta
             edit: Modifica
             labels_title: Etichette
+            last_status: È necessaria almeno un’etichetta, quindi l’ultima non può essere rimossa.
             new: Nuova etichetta
             not_removable: Questa etichetta è usata nei messaggi e non può essere
               rimossa.
@@ -1783,10 +1787,15 @@ it:
             weight_2_short: 'G:'
             weight_3: Verde
             weight_3_short: 'V:'
+      default_statuses:
+        answered: Risposto
+        in_progress: In corso
+        pending: In attesa
       follow_up_questionnaire_message_mailer:
         notification:
           default_name: lì
           greeting: Ciao %{name},
+          greeting_without_name: Ciao,
           intro: 'Hai ricevuto un nuovo messaggio riguardante la tua presentazione
             a «%{questionnaire}»:'
           outro: Grazie per la tua partecipazione.

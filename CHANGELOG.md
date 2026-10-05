@@ -1,13 +1,14 @@
 CHANGELOG
 =========
 
-unreleased
+v0.14.5
 -------
   Compatibility:
     - Decidim 0.31.x
 
   Features:
-    -  Fix for AwesomeMap when proposal have custom states
+    - Fix for AwesomeMap when proposal have custom states
+    - Add Follow Up Quesionnaires feature ([#649](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/649))
 
 v0.14.4
 -------
