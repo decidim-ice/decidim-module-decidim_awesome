@@ -466,7 +466,6 @@ cs:
           proposals: Návrhy hacků
           styles: Vlastní styly
           surveys: Průzkumy a formuláře
-          verifications: Ověření
         menu_hacks:
           create:
             error: Chyba při vytváření položky menu! %{error}
