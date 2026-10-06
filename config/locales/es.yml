@@ -820,7 +820,6 @@ es:
               other: "%{count} mensajes"
             new_reply: Nuevo mensaje
             new_reply_help_text: Envía un mensaje a la persona que respondió. El mensaje se enviará con «Responder a» establecido como %{email}. Las respuestas directas a ese correo no se recopilarán aquí.
-            new_reply_no_reply_to_help_text: Envía un mensaje a la persona que respondió. Las personas participantes no pueden responder a este correo, ya que se envía sin dirección de respuesta.
             no_email_warning: Esta persona no tiene dirección de correo electrónico. El mensaje se guardará, pero no se enviará.
             send_message: Enviar
             submitted_at: Enviado el %{date}
@@ -874,7 +873,6 @@ es:
             anonymous_option_flag: anónimo, sin preguntas
             name_help: En el espacio participativo verás este nombre como un nuevo elemento del menú donde gestionar las respuestas
             questionnaire_locked: Este cuestionario de seguimiento ya tiene mensajes enviados a personas respondentes, así que la encuesta no se puede cambiar.
-            reply_to_help: Opcional. Las respuestas de las personas participantes a los correos de notificación irán a esta dirección. Déjalo vacío para enviar los correos sin dirección de respuesta.
             responder_email_help: Este campo se usará para buscar y enviar el correo donde responder. Si el cuestionario no es anónimo, puedes omitir este campo y se usará la persona usuaria.
             responder_name_help: Este campo se usará para buscar y mostrar el nombre de la persona respondente. Si el cuestionario no es anónimo, puedes omitir este campo y se usará la persona usuaria.
             select_questionnaire_placeholder: Selecciona un cuestionario
@@ -967,8 +965,6 @@ es:
           index:
             confirm_destroy: '¿Estás segura que quieres eliminar este elemento?'
             edit: Editar
-            home_content_block_menu:
-              title: Bloque de menú global en la home
             menu:
               title: Menú principal
             mobile_menu:
