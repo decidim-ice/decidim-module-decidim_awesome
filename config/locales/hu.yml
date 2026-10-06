@@ -87,8 +87,6 @@ hu:
             truncate: A felugró ablakban lévő leírások maximális karakterszáma
           step:
             announcement: Közlemény
-            show_accepted: Elfogadott javaslatok mutatása
-            show_evaluating: Az értékelés alatt álló javaslatok mutatása
             show_not_answered: A meg nem válaszolt javaslatok mutatása
             show_rejected: A visszautasított javaslatok mutatása
             show_withdrawn: A visszavont javaslatok mutatása
@@ -145,7 +143,8 @@ hu:
             edit_label: Címke átnevezése
             help:
               auto_save_forms: Ez a LocalStorage segítségével automatikusan elmenti a felhasználók által a felmérésekbe és egyéb űrlapokba bevitt adatokat, miközben kitöltik azokat. Az adatok egy későbbi, ugyanazzal a böngészővel történő látogatáskor visszaállnak, ha az űrlapot nem küldik el. Ha az űrlap elküldésre kerül, az adatok törlődnek. Ha a felhasználók eltávolítják a LocalStorage adatait, az adatok sem lesznek visszaállítva.
-              proposal_custom_fields_translations: "A címkék, a súgószöveg, a helyőrző és az alapértelmezett értékek használhatják az alkalmazás egyéni fordításait. Ehhez a string literál használata helyett használja az i18n kulcsot (legalább egy pontot kell tartalmaznia). Például: - \"activemodel.attributes.proposal.title\" helyett \"Cím\" - \"activemodel.attributes.proposal.address\" helyett \"Cím\" Vagy használjon saját kulcsokat más eszközökkel kombinálva a fordítások meghatározásához (pl.: a Term Customizer modul használatával): - \"myapp.custom_fields.bio\" helyett \"Biography\""
+              proposal_custom_fields_translations: |-
+                A címkék, a súgószöveg, a helyőrző és az alapértelmezett értékek használhatják az alkalmazás egyéni fordításait. Ehhez a string literál használata helyett használja az i18n kulcsot (legalább egy pontot kell tartalmaznia). Például: - "activemodel.attributes.proposal.title" helyett "Cím" - "activemodel.attributes.proposal.address" helyett "Cím" Vagy használjon saját kulcsokat más eszközökkel kombinálva a fordítások meghatározásához (pl.: a Term Customizer modul használatával): - "myapp.custom_fields.bio" helyett "Biography"
               validate_title_max_caps_percent: A 0 nem fog engedni nagybetűt, 100 mindent nagybetűvel fog írni
               validate_title_max_marks_together: 'Korlátozza az együtt írható kérdő- és felkiáltójelek számát. Vagyis: ha 2, akkor a ''!!!'' nem szerepelhet a szövegben'
               validate_title_min_length: Ez mindig kötelező és nem lehet 0
@@ -230,8 +229,6 @@ hu:
           menu_meetings: Találkozók mutatása
           menu_merge_components: Az összes, azonos típusú komponens egyesítése a menüben
           name: Awesome térkép
-          show_accepted: Elfogadott javaslatok mutatása
-          show_evaluating: Az értékelés alatt álló javaslatok mutatása
           show_not_answered: A meg nem válaszolt javaslatok mutatása
           show_rejected: A visszautasított javaslatok mutatása
           show_withdrawn: A visszavont javaslatok mutatása
