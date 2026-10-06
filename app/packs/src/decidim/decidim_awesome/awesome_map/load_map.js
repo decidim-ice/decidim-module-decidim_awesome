@@ -35,11 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
       mergeComponents: parse(dataset.menuMergeComponents)
     },
     show: {
-      withdrawn: parse(dataset.showWithdrawn),
-      accepted: parse(dataset.showAccepted),
-      evaluating: parse(dataset.showEvaluating),
+      answered: parse(dataset.showAnswered),
       notAnswered: parse(dataset.showNotAnswered),
-      rejected: parse(dataset.showRejected)
+      withdrawn: parse(dataset.showWithdrawn),
+      notWithdrawn: parse(dataset.showNotWithdrawn),
+      rejected: parse(dataset.showRejected),
+      notRejected: parse(dataset.showNotRejected)
     },
     hideControls: parse(dataset.hideCcontrols),
     collapsedMenu: parse(dataset.collapsed),

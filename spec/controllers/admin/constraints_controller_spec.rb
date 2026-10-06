@@ -150,6 +150,19 @@ module Decidim::DecidimAwesome
           let(:action) { patch :update, params: }
         end
 
+        context "when the constraint belongs to another organization" do
+          let(:id) do
+            other_organization = create(:organization)
+            other_config = create(:awesome_config, organization: other_organization, var: key)
+            create(:config_constraint, awesome_config: other_config).id
+          end
+
+          it "does not update the other organization's constraint" do
+            expect { patch(:update, params:) }.not_to(change { ConfigConstraint.find(id).settings })
+            expect(response).to have_http_status(:not_found)
+          end
+        end
+
         context "when wrong params" do
           let!(:prev_constraint) { create(:config_constraint, awesome_config: config, settings: { participatory_space_manifest: "assemblies" }) }
 
@@ -171,6 +184,19 @@ module Decidim::DecidimAwesome
         it_behaves_like "forbids disabled feature without redirect" do
           let(:feature) { key }
           let(:action) { delete :destroy, params: }
+        end
+
+        context "when the constraint belongs to another organization" do
+          let(:id) do
+            other_organization = create(:organization)
+            other_config = create(:awesome_config, organization: other_organization, var: key)
+            create(:config_constraint, awesome_config: other_config).id
+          end
+
+          it "does not destroy the other organization's constraint" do
+            expect { delete(:destroy, params:) }.not_to(change { ConfigConstraint.exists?(id) })
+            expect(response).to have_http_status(:not_found)
+          end
         end
       end
     end

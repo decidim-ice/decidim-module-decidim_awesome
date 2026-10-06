@@ -31,9 +31,10 @@ Decidim::DecidimAwesome.register_component(:awesome_map) do |component|
   component.settings(:step) do |settings|
     # Add your settings per step
     settings.attribute :announcement, type: :text, translated: true, editor: true
+    settings.attribute :show_answered, type: :boolean, default: true
     settings.attribute :show_not_answered, type: :boolean, default: true
-    settings.attribute :show_evaluating, type: :boolean, default: true
-    settings.attribute :show_accepted, type: :boolean, default: true
+    settings.attribute :show_not_withdrawn, type: :boolean, default: true
+    settings.attribute :show_not_rejected, type: :boolean, default: true
     settings.attribute :show_rejected, type: :boolean, default: false
     settings.attribute :show_withdrawn, type: :boolean, default: false
   end

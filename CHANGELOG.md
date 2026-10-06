@@ -19,6 +19,15 @@ Fixes:
   - Speed up rendering of the landing menu templates
   - Update the cookies consent template to the table markup introduced in Decidim 0.31.7 / 0.32.1
 
+v0.14.5
+-------
+  Compatibility:
+    - Decidim 0.31.x
+
+  Features:
+    - Fix for AwesomeMap when proposal have custom states
+    - Add Follow Up Questionnaires feature ([#649](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/649))
+
 v0.14.4
 -------
 Compatibility:
