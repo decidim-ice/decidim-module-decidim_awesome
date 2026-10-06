@@ -281,12 +281,10 @@ de:
               force_authorization_help_text: Fügen Sie einen benutzerdefinierten Text hinzu, um zu erklären, warum eine Autorisierung erforderlich ist. Stellen Sie auch sicher, dass Sie eine Kontaktmethode hinzufügen, falls Benutzer Hilfe benötigen.
               hashcash_i18n_key: 'Sie können den Text, der den Benutzenden in den Anmelde-Buttons angezeigt wird, mit folgendem i18n-Key anpassen: %{key}'
               hashcash_login: |
-                Schützen Sie Rails-Anwendungen gegen Bots und Brute-Force-Angriffe ohne Menschen zu stören.
-                Hashcash ist ein Arbeitsnachweissystem, das die Benutzer erfordert, ein rechnerisches Rätsel zu lösen (automatisch vom Browser ausgeführt) bevor sie sich anmelden können.
+                Schützen Sie Rails-Anwendungen gegen Bots und Brute-Force-Angriffe ohne Menschen zu stören. Hashcash ist ein Arbeitsnachweissystem, das die Benutzer erfordert, ein rechnerisches Rätsel zu lösen (automatisch vom Browser ausgeführt) bevor sie sich anmelden können. 
               hashcash_login_bits: Dieser Parameter legt die Anzahl der Bits fest, die der Hashcash Algorithmus verwenden wird, um den Nachweis zu generieren. Es wird empfohlen, einen Wert zwischen 16 (einfache) und 30 (extrem harte) Bits. Der Standardwert für Login-Formulare ist %{bits} Bit.
               hashcash_signup: |
-                Schützen Sie Rails-Anwendungen gegen Bots und Brute-Force-Angriffe ohne Menschen zu stören.
-                Hashcash ist ein Arbeitsnachweissystem, das die Benutzer erfordert, ein rechnerisches Rätsel zu lösen (automatisch vom Browser ausgeführt) bevor sie ein Konto erstellen können.
+                Schützen Sie Rails-Anwendungen gegen Bots und Brute-Force-Angriffe ohne Menschen zu stören. Hashcash ist ein Arbeitsnachweissystem, das die Benutzer erfordert, ein rechnerisches Rätsel zu lösen (automatisch vom Browser ausgeführt) bevor sie ein Konto erstellen können. 
               hashcash_signup_bits: Dieser Parameter legt die Anzahl der Bits fest, die der Hashcash-Algorithmus verwenden wird, um den Nachweis zu generieren. Es wird empfohlen, einen Wert zwischen 16 (einfache) und 30 (extrem harte) Bits. Der Standardwert für Login-Formulare ist %{bits} Bits.
               intergram_about: Über Intergram
               intergram_config: Intergram Konfiguration
@@ -296,15 +294,12 @@ de:
               proposal_custom_fields_translations: "Labels, Hilfetexte, Platzhalter und Standardwerte können benutzerdefinierte Übersetzungen Ihrer Instanz verwenden. \nVerwenden Sie dafür statt eines String-Literals den i18n-Schlüssel (er muss mindestens einen Punkt enthalten).\nZum Beispiel:\n- \"activemodel.attributes.proposal.title\" statt \"Titel\"\n- \"activemodel.attributes.proposal.address\" anstelle von \"Adresse\"\nOder verwenden Sie Ihre eigenen Schlüssel in Kombination mit anderen Tools um Übersetzungen zu definieren (z. B.: mit dem Modul Term Customizer):\n - \"myapp.custom_fields.bio\" statt \"Biographie\""
               proposal_private_custom_fields: Wie öffentlich sichtbare Eingabefelder, jedoch werden diese Informationen nicht veröffentlicht (nur Adminzugriff).
               proposal_private_custom_fields_translations: |
-                Private Eingabefelder werden in einer hervorgehobenen Box mit diesem Informationstext angezeigt:
-                %{warning}
-                Dieser Text kann mit einer benutzerdefinierten Übersetzung durch Verwendung des Schlüssels angepasst werden:
-                %{key}
+                Private Eingabefelder werden in einer hervorgehobenen Box mit diesem Informationstext angezeigt: %{warning} Dieser Text kann mit einer benutzerdefinierten Übersetzung durch Verwendung des Schlüssels angepasst werden: %{key} 
               scoped_admin_styles: Seien Sie sich bewusst, dass das Verstecken von Dingen den Administrator unbrauchbar machen könnte. Bitte handeln Sie mit Vorsicht.
               scoped_admin_styles_variables: 'Sie können die folgenden CSS-Variablen für die benutzerdefinierter Farben der Organisation verwenden:'
               scoped_admin_styles_warning: "<strong>Warnung</strong>: Fügen Sie hier benutzerdefiniertes CSS hinzu, das nur in diesem Admin-Backend gilt."
-              scoped_admins: Befördern Sie normale Benutzer zu Administratoren, die nur bestimmte Teile der öffentlichen Seite verwalten können (verwenden Sie dazu den Editor für Einschränkungen). Beachten Sie, dass Benutzer, die bereits reguläre Administratorrechte haben, ignoriert werden. For instance, if having configured /my-origin => /my-destination, a request to /my-origin?locale=ca  will be redirected to "/my-destination?locale=ca".
-              scoped_styles: Erstellen Sie benutzerdefinierte CSS, die nur in bestimmten Bereichen der öffentlichen Seite gelten (vewenden Sie dazu die Einschränkungen)
+              scoped_admins: Befördern Sie normale Benutzer zu Administratoren, die nur bestimmte Teile der öffentlichen Seite verwalten können (verwenden Sie dazu den Editor für Einschränkungen). Beachten Sie, dass Benutzer, die bereits reguläre Administratorrechte haben, ignoriert werden.
+              scoped_styles: Erstellen Sie benutzerdefinierte CSS, die nur in bestimmten Bereichen der öffentlichen Seite gelten (verwenden Sie dazu die Einschränkungen)
               scoped_styles_variables: 'Sie können die folgenden CSS-Variablen für die benutzerdefinierter Farben der Organisation verwenden:'
               user_timezone: Dadurch wird ein Auswahlfeld im Benutzerprofil hinzugefügt, um die Zeitzone festzulegen. Dies wird verwendet, um Datums- und Zeitangaben in der Ortszeit des Benutzers anzuzeigen.
               validate_body_max_caps_percent: 0 lässt keinen Großbuchstaben zu, 100 lässt ausschliesslich Großbuchstaben zu
@@ -314,15 +309,15 @@ de:
               validate_title_max_marks_together: 'Begrenzt die Anzahl der Frage- und Ausrufezeichen, die zusammen geschrieben werden können. Zum Beispiel: Der Wert 2 führt dazu, dass ''!!!'' im Text nicht erlaubt ist'
               validate_title_min_length: Der Titel ist immer obligatorisch und diese Zahl kann nicht Null sein
               verifications_html: |
-                Hier können Sie zusätzliche Zugriffsbeschränkungen für Partizipationsbereiche oder Komponenten vornehmen, die Nutzende vor dem Zugriff auf bestimmte Standorte auffordert, sich zu verifizieren (z.B. um Spam zu verhindern).<br>
-                Beschränkungen gelten für alle Nutzenden, aber Admins haben immer Zugriff auf das /admin Panel.
+                Hier können Sie zusätzliche Zugriffsbeschränkungen für Partizipationsbereiche oder Komponenten vornehmen, die Nutzende vor dem Zugriff auf bestimmte Standorte auffordert, sich zu verifizieren (z.B. um Spam zu verhindern).<br> Beschränkungen gelten für alle Nutzenden, aber Admins haben immer Zugriff auf das /admin Panel. 
             validators:
               body: Eingabevalidierungen für das Feld "Textkörper"
               title: Eingabevalidierungen für das Feld "Titel"
           form_force_authorizations:
             delete: Löschen
             force_authorizations_html: |
-              Verifizierungsgruppen definieren. Jede Gruppe kann Nutzenden eine oder mehrere Verifizierungsarten für bestimmte Bereiche der Plattform vorschreiben. 
+              Verifizierungsgruppen definieren. Jede Gruppe\ \ kann Nutzenden eine oder mehrere Verifizierungsarten für bestimmte\ \ Bereiche der Plattform vorschreiben. 
+
             help: Sie können Gruppen von Autorisierungsmethoden definieren und den darauf basierenden Zugriff einschränken.
             new: Eine neue Autorisierungsgruppe hinzufügen
             remove: Diese "Autorisierungsgruppe" entfernen
@@ -409,12 +404,14 @@ de:
             destination_help: Absolute Pfade (beginnen mit "/") oder externe URLs (http://..)
             origin_help: Nur absolute Pfade, beginnen mit "/"
             pass_query_help: |
-              Aktivieren Sie diese Option, wenn Sie möchten, dass der Abfrage-String an das Ziel kopiert wird.<br> Wenn Sie zum Beispiel "/my-origin" => "/my-destination" konfiguriert haben, wird eine Anfrage an "/my-origin?locale=ca" an "/my-destination?locale=ca" weitergeleitet. 
+              Aktivieren Sie diese Option, wenn Sie möchten, dass\ \ der Abfrage-String an das Ziel kopiert wird.<br> Wenn Sie zum Beispiel\ \ "/my-origin" => "/my-destination" konfiguriert haben, wird eine\ \ Anfrage an "/my-origin?locale=ca" an "/my-destination?locale=ca"\ \ weitergeleitet. 
+
           index:
             check_redirections: "✔ Umleitungen prüfen"
             confirm_destroy: Sind Sie sicher, dass Sie diese Umleitung entfernen möchten?
             description: |
-              Sie können eine beliebige Route (beginnend mit <code>/</code>) definieren, um jeden Besucher zu einer Ziel-URL umzuleiten. <br> Ziel kann ein absoluter Pfad sein (z.B.: <code>/processes/ein-prozess</code>) oder mit <code>https://</code> (z.B.: <code>http://decidim: org</code>) beginnen.<br><br> Berücksichtigen Sie, dass eine Umleitung nur funktioniert, wenn keine andere Route passt. Es ist nicht möglich, ursprüngliche Routen außer Kraft zu setzen (dies ist beabsichtigt).<br> Wenn Sie sich nicht sicher sind, verwenden Sie die Funktion «Umleitungen prüfen», um die Umleitung zu testen. 
+              Sie können eine beliebige Route (beginnend mit <code>/</code>)\ \ definieren, um jeden Besucher zu einer Ziel-URL umzuleiten. <br> Ziel\ \ kann ein absoluter Pfad sein (z.B.: <code>/processes/ein-prozess</code>)\ \ oder mit <code>https://</code> (z.B.: <code>http://decidim: org</code>)\ \ beginnen.<br><br> Berücksichtigen Sie, dass eine Umleitung nur funktioniert,\ \ wenn keine andere Route passt. Es ist nicht möglich, ursprüngliche\ \ Routen außer Kraft zu setzen (dies ist beabsichtigt).<br> Wenn Sie\ \ sich nicht sicher sind, verwenden Sie die Funktion «Umleitungen prüfen»,\ \ um die Umleitung zu testen. 
+
             edit: Umleitung bearbeiten
             new: Neue Umleitung
             remove: Umleitung entfernen
@@ -435,9 +432,7 @@ de:
             bits: Bits
             created_at: Erstellt am
             help_html: |
-              Diese Seite zeigt die im System entdeckten Hashcash Stempel an. Hashcash ist ein System zum Nachweis der Arbeit, das die Benutzenden dazu zwingt, ein rechnerisches Puzzle zu lösen (automatisch vom Browser ausgeführt), bevor sie ein Konto erstellen können.
-              <br><br>
-              Jeder Eintrag in dieser Liste stellt einen Hashcash-Stempel dar, der von einem Benutzer bei jeder Anmeldung oder Anmeldung generiert wurde.
+              Diese Seite zeigt die im System entdeckten Hashcash Stempel an. Hashcash ist ein System zum Nachweis der Arbeit, das die Benutzenden dazu zwingt, ein rechnerisches Puzzle zu lösen (automatisch vom Browser ausgeführt), bevor sie ein Konto erstellen können. <br><br> Jeder Eintrag in dieser Liste stellt einen Hashcash-Stempel dar, der von einem Benutzer bei jeder Anmeldung oder Anmeldung generiert wurde. 
             ip_address: IP-Adresse
             no_data: Keine Hashcash-Stempel gefunden
             request_path: Anforderungspfad
@@ -515,22 +510,23 @@ de:
             destroying: Die privaten Daten für %{title} werden gelöscht. Bitte versuchen Sie es in ein paar Minuten noch einmal.
             done: Erledigt
             help_html: |
-              Mit diesem Tool können Sie alle privaten Daten für einen bestimmten Beteiligungsbereich oder eine bestimmte Komponente löschen. Dieser Vorgang ist irreversibel und entfernt alle privaten Daten aus der Datenbank.
+              Mit diesem Tool können Sie alle privaten Daten für einen bestimmten\ \ Beteiligungsbereich oder eine bestimmte Komponente löschen. Dieser\ \ Vorgang ist irreversibel und entfernt alle privaten Daten aus der\ \ Datenbank.
               <br><br>
               <strong> Was sind private Daten?</strong>
-              <br>
-              Private Daten sind alle Informationen, die nicht öffentlich verfügbar sind und nur für Administratoren zugänglich sind. Dazu gehören derzeit auch Informationen aus privaten benutzerdefinierten Feldern.
+              \ <br>
+              Private Daten sind alle Informationen, die nicht öffentlich verfügbar\ \ sind und nur für Administratoren zugänglich sind. Dazu gehören derzeit\ \ auch Informationen aus privaten benutzerdefinierten Feldern.
               <br><br>
-              <strong>Was passiert, wenn ich private Daten lösche?</strong>
+              \ <strong>Was passiert, wenn ich private Daten lösche?</strong>
               <br>
-              Wenn Sie private Daten löschen, werden alle privaten Informationen für den ausgewählten Mitwirkungsbereich oder die ausgewählte Komponente dauerhaft aus der Datenbank entfernt. Zu Prüfzwecken wird ein Protokoll dieser Aktion im System gespeichert.
+              \ Wenn Sie private Daten löschen, werden alle privaten Informationen für\ \ den ausgewählten Mitwirkungsbereich oder die ausgewählte Komponente\ \ dauerhaft aus der Datenbank entfernt. Zu Prüfzwecken wird ein Protokoll\ \ dieser Aktion im System gespeichert.
               <br><br>
-              <strong>Was geschieht mit öffentlichen Daten?</strong>
-              <br> Öffentliche Daten sind von dieser Aktion nicht betroffen. Es werden nur private Daten gelöscht.
-               <br><br>
-              <strong>Gibt es eine Mindestwartezeit vor dem Löschen privater Daten?</strong>
+              <strong>Was geschieht\ \ mit öffentlichen Daten?</strong>
+              <br> Öffentliche Daten sind von\ \ dieser Aktion nicht betroffen. Es werden nur private Daten gelöscht.
+              \ \ <br><br>
+              <strong>Gibt es eine Mindestwartezeit vor dem Löschen privater\ \ Daten?</strong>
               <br>
-              Ja, Sie können keine privaten Daten löschen, wenn die letzte Aktualisierung weniger als %{time_ago} zurückliegt. Sie können diese Konfiguration in der Initialisierungsdatei ändern.
+              Ja, Sie können keine privaten Daten löschen,\ \ wenn die letzte Aktualisierung weniger als %{time_ago} zurückliegt.\ \ Sie können diese Konfiguration in der Initialisierungsdatei ändern.
+
             items_count: Betroffene Gesamtmenge
             last_date: Letzte Aktualisierung
             no_data: Es wurden keine privaten Daten gefunden, die älter sind als %{time_ago}
@@ -567,8 +563,7 @@ de:
           current_amendment_html: <p>Sie können <a href="%{amendment_link}"> hier auf die aktuelle Änderung</a>zugreifen.</p>
           dismiss: Ok, verstanden
           explanation_html: |
-            <p>Derzeit wird eine weitere Änderung für diesen Vorschlag bewertet. Um eine neue zu erstellen, müssen Sie warten, bis die aktuelle akzeptiert oder abgelehnt wird.</p>
-            <p>Sie können auch den Autor dieses Vorschlags durch <a href="%{proposal_link}">erreichen und einen Kommentar</a> hinterlassen und versuchen, die Lösung des aktuellen Änderungsantrags zu beschleunigen.</p>
+            <p>Derzeit wird eine weitere Änderung für diesen Vorschlag bewertet. Um eine neue zu erstellen, müssen Sie warten, bis die aktuelle akzeptiert oder abgelehnt wird.</p> <p>Sie können auch den Autor dieses Vorschlags durch <a href="%{proposal_link}">erreichen und einen Kommentar</a> hinterlassen und versuchen, die Lösung des aktuellen Änderungsantrags zu beschleunigen.</p> 
         pending_limit_reached: Leider kann es immer nur eine ausstehende Änderung geben. Bitte warten Sie, bis "%{emendation}" akzeptiert oder abgelehnt wird.
       config:
         intergram:
@@ -611,14 +606,15 @@ de:
       map_component:
         map:
           api_not_ready: |
-            <b>Warnung:</b> Diese Decidim-Installation hat die API mit einer maximalen Komplexität von <b>%{current_complexity}</b> konfiguriert.
-            Diese Komponente wird unter dieser Konfiguration wahrscheinlich nicht funktionieren. Wir empfehlen, in einem Initializer (z.B. am Ende von <code>config/initializers/decidim.rb</code>) die folgenden Zeilen zu setzen:<br>
+            <b>Warnung:</b> Diese Decidim-Installation hat die API mit\ \ einer maximalen Komplexität von <b>%{current_complexity}</b> konfiguriert.
+            \ Diese Komponente wird unter dieser Konfiguration wahrscheinlich nicht\ \ funktionieren. Wir empfehlen, in einem Initializer (z.B. am Ende von\ \ <code>config/initializers/decidim.rb</code>) die folgenden Zeilen zu\ \ setzen:<br>
             <br>
             <pre># Api configuration
-            Rails.application.config.to_prepare do
+            Rails.application.config.to_prepare\ \ do
               Decidim::Api::Schema.max_complexity = 5000
-              Decidim::Api::Schema.max_depth = 50
+              Decidim::Api::Schema.max_depth\ \ = 50
             end</pre>
+
           error:
             unavailable: Die Karte ist nicht verfügbar. Bitte konfigurieren Sie die Geokodierung, um diese Komponente zu aktivieren.
           show:
@@ -644,8 +640,7 @@ de:
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |
-            Admins können Benutzer mit diesen Berechtigungen manuell verifizieren.
-            <br>Diese Funktion mit Vorsicht nutzen, da dies zu Sicherheitsproblemen führen kann.
+            Admins können Benutzer mit diesen Berechtigungen manuell verifizieren. <br>Diese Funktion mit Vorsicht nutzen, da dies zu Sicherheitsproblemen führen kann. 
           awesome_tweaks: Decidim Awesome Optimierungen
       validators:
         too_much_caps: Es werden zu viele Großbuchstaben verwendet (über %{percent}% des Textes)
