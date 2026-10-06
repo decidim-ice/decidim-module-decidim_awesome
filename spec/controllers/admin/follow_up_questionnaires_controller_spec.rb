@@ -24,7 +24,7 @@ module Decidim::DecidimAwesome
         render_views
 
         let!(:follow_up_questionnaire) do
-          create(:awesome_follow_up_questionnaire, questionnaire: questionnaire, name: { "en" => "Follow up" }, organization:)
+          create(:awesome_follow_up_questionnaire, questionnaire:, name: { "en" => "Follow up" }, organization:)
         end
 
         before do
@@ -86,7 +86,7 @@ module Decidim::DecidimAwesome
         end
 
         it "creates the follow up questionnaire" do
-          expect { post :create, params: params }.to change(Decidim::DecidimAwesome::FollowUpQuestionnaire, :count).by(1)
+          expect { post :create, params: }.to change(Decidim::DecidimAwesome::FollowUpQuestionnaire, :count).by(1)
           expect(flash[:notice]).not_to be_empty
           expect(response).to redirect_to(follow_up_questionnaires_path)
           expect(Decidim::DecidimAwesome::FollowUpQuestionnaire.last.organization).to eq(organization)
@@ -94,7 +94,7 @@ module Decidim::DecidimAwesome
         end
 
         it "creates the default statuses" do
-          post :create, params: params
+          post(:create, params:)
           expect(Decidim::DecidimAwesome::FollowUpQuestionnaire.last.statuses.count).to eq(3)
         end
 
@@ -106,19 +106,19 @@ module Decidim::DecidimAwesome
           before { params[:follow_up_questionnaire][:decidim_questionnaire_id] = other_questionnaire.id }
 
           it "does not create the follow up questionnaire" do
-            expect { post :create, params: params }.not_to change(Decidim::DecidimAwesome::FollowUpQuestionnaire, :count)
+            expect { post :create, params: }.not_to change(Decidim::DecidimAwesome::FollowUpQuestionnaire, :count)
             expect(flash[:alert]).to be_present
-            expect(response).to have_http_status(:unprocessable_entity)
+            expect(response).to have_http_status(:unprocessable_content)
           end
         end
 
         context "when the questionnaire is already configured" do
-          let!(:existing) { create(:awesome_follow_up_questionnaire, questionnaire: questionnaire, name: { "en" => "Existing" }, organization:) }
+          let!(:existing) { create(:awesome_follow_up_questionnaire, questionnaire:, name: { "en" => "Existing" }, organization:) }
 
           it "does not create a duplicate and returns an error" do
-            expect { post :create, params: params }.not_to change(Decidim::DecidimAwesome::FollowUpQuestionnaire, :count)
+            expect { post :create, params: }.not_to change(Decidim::DecidimAwesome::FollowUpQuestionnaire, :count)
             expect(flash[:alert]).to be_present
-            expect(response).to have_http_status(:unprocessable_entity)
+            expect(response).to have_http_status(:unprocessable_content)
           end
         end
 
@@ -133,7 +133,7 @@ module Decidim::DecidimAwesome
           end
 
           it "does not create the follow up questionnaire" do
-            expect { post :create, params: params }.not_to change(Decidim::DecidimAwesome::FollowUpQuestionnaire, :count)
+            expect { post :create, params: }.not_to change(Decidim::DecidimAwesome::FollowUpQuestionnaire, :count)
             expect(flash[:alert]).not_to be_empty
           end
 
@@ -141,8 +141,8 @@ module Decidim::DecidimAwesome
             render_views
 
             it "shows the form with the field error" do
-              post :create, params: params
-              expect(response).to have_http_status(:unprocessable_entity)
+              post(:create, params:)
+              expect(response).to have_http_status(:unprocessable_content)
               expect(response).to render_template(:new)
               expect(response.body).to include("is-invalid-input")
             end
@@ -151,7 +151,7 @@ module Decidim::DecidimAwesome
       end
 
       describe "GET #edit" do
-        let!(:follow_up_questionnaire) { create(:awesome_follow_up_questionnaire, questionnaire: questionnaire, name: { "en" => "Follow up" }, organization:) }
+        let!(:follow_up_questionnaire) { create(:awesome_follow_up_questionnaire, questionnaire:, name: { "en" => "Follow up" }, organization:) }
 
         it "returns http success" do
           get :edit, params: { id: follow_up_questionnaire.decidim_questionnaire_id }
@@ -206,7 +206,7 @@ module Decidim::DecidimAwesome
       end
 
       describe "PATCH #update" do
-        let!(:follow_up_questionnaire) { create(:awesome_follow_up_questionnaire, questionnaire: questionnaire, name: { "en" => "Follow up" }, organization:) }
+        let!(:follow_up_questionnaire) { create(:awesome_follow_up_questionnaire, questionnaire:, name: { "en" => "Follow up" }, organization:) }
         let(:params) do
           {
             id: follow_up_questionnaire.decidim_questionnaire_id,
@@ -222,7 +222,7 @@ module Decidim::DecidimAwesome
         end
 
         it "updates the follow up questionnaire" do
-          patch :update, params: params
+          patch(:update, params:)
           expect(flash[:notice]).not_to be_empty
           expect(response).to redirect_to(follow_up_questionnaires_path)
           expect(follow_up_questionnaire.reload.name["en"]).to eq("Updated name")
@@ -244,7 +244,7 @@ module Decidim::DecidimAwesome
           end
 
           it "keeps the questionnaire and component and updates the rest" do
-            patch :update, params: params
+            patch(:update, params:)
             follow_up_questionnaire.reload
             expect(follow_up_questionnaire.questionnaire).to eq(questionnaire)
             expect(follow_up_questionnaire.component).to eq(component)
@@ -261,7 +261,7 @@ module Decidim::DecidimAwesome
           end
 
           it "updates the component" do
-            patch :update, params: params
+            patch(:update, params:)
             expect(follow_up_questionnaire.reload.component).to eq(other_component)
           end
         end
@@ -270,7 +270,7 @@ module Decidim::DecidimAwesome
           before { params[:follow_up_questionnaire][:name] = { en: "" } }
 
           it "does not update the follow up questionnaire" do
-            patch :update, params: params
+            patch(:update, params:)
             expect(flash[:alert]).not_to be_empty
             expect(follow_up_questionnaire.reload.name["en"]).not_to eq("")
           end
@@ -279,8 +279,8 @@ module Decidim::DecidimAwesome
             render_views
 
             it "shows the form with the field error" do
-              patch :update, params: params
-              expect(response).to have_http_status(:unprocessable_entity)
+              patch(:update, params:)
+              expect(response).to have_http_status(:unprocessable_content)
               expect(response).to render_template(:edit)
               expect(response.body).to include("is-invalid-input")
             end
@@ -289,7 +289,7 @@ module Decidim::DecidimAwesome
       end
 
       describe "DELETE #destroy" do
-        let!(:follow_up_questionnaire) { create(:awesome_follow_up_questionnaire, questionnaire: questionnaire, name: { "en" => "Follow up" }, organization:) }
+        let!(:follow_up_questionnaire) { create(:awesome_follow_up_questionnaire, questionnaire:, name: { "en" => "Follow up" }, organization:) }
 
         it "destroys the follow up questionnaire" do
           expect { delete :destroy, params: { id: follow_up_questionnaire.decidim_questionnaire_id } }.to change(Decidim::DecidimAwesome::FollowUpQuestionnaire, :count).by(-1)

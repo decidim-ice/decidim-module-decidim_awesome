@@ -15,7 +15,7 @@
     "import/no-unresolved": [
       "error",
       {
-        "ignore": ["^src/decidim/(?!decidim_awesome/)", "^stylesheets/decidim/"]
+        "ignore": ["^src/decidim/", "^stylesheets/decidim/"]
       }
     ]
   }

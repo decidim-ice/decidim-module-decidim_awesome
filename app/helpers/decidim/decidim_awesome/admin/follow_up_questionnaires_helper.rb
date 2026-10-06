@@ -23,8 +23,8 @@ module Decidim
         end
 
         def questionnaires_questions_data(questionnaires)
-          questionnaires.each_with_object({}) do |questionnaire, hash|
-            hash[questionnaire.id] = questionnaire.questions.map { |q| [translated_attribute(q.body), q.id] }
+          questionnaires.to_h do |questionnaire|
+            [questionnaire.id, questionnaire.questions.map { |q| [translated_attribute(q.body), q.id] }]
           end
         end
       end

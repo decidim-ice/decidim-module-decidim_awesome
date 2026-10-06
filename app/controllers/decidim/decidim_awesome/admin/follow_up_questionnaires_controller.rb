@@ -6,6 +6,7 @@ module Decidim
       class FollowUpQuestionnairesController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
         include Decidim::Paginable
+
         helper FollowUpQuestionnairesHelper
         helper_method :available_questionnaires, :selected_questionnaire
 
@@ -33,7 +34,7 @@ module Decidim
             on(:invalid) do |error_message|
               error = error_message.presence || @form.errors.full_messages.join(", ")
               flash.now[:alert] = I18n.t("follow_up_questionnaires.create.error", scope: "decidim.decidim_awesome.admin", error:)
-              render :new, status: :unprocessable_entity
+              render :new, status: :unprocessable_content
             end
           end
         end
@@ -58,7 +59,7 @@ module Decidim
             on(:invalid) do |error_message|
               error = error_message.presence || @form.errors.full_messages.join(", ")
               flash.now[:alert] = I18n.t("follow_up_questionnaires.update.error", scope: "decidim.decidim_awesome.admin", error:)
-              render :edit, status: :unprocessable_entity
+              render :edit, status: :unprocessable_content
             end
           end
         end

@@ -538,8 +538,8 @@ module Decidim
         name = Decidim::TranslationsHelper.multi_translation("decidim.decidim_awesome.default_statuses.#{attrs[:key]}", locales)
 
         FollowUpQuestionnaireStatus.create!(
-          follow_up_questionnaire: follow_up_questionnaire,
-          name: name,
+          follow_up_questionnaire:,
+          name:,
           color: attrs[:color]
         )
       end

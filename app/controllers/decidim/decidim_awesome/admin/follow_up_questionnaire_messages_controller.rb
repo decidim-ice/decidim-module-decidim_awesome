@@ -43,7 +43,7 @@ module Decidim
           assign_reply_view_variables
           @form = form(FollowUpQuestionnaireMessageForm).instance(
             statuses_by_id: @statuses.index_by(&:id),
-            current_participatory_space: current_participatory_space
+            current_participatory_space:
           )
           @form.follow_up_questionnaire_id = @follow_up_questionnaire.id
           @form.author_id = current_user.id
@@ -58,7 +58,7 @@ module Decidim
           @form = form(FollowUpQuestionnaireMessageForm).from_params(
             params,
             statuses_by_id: @statuses.index_by(&:id),
-            current_participatory_space: current_participatory_space
+            current_participatory_space:
           )
           @form.follow_up_questionnaire_id = @follow_up_questionnaire.id
           assign_recipient
@@ -108,7 +108,7 @@ module Decidim
         end
 
         def enforce_messages_permission!
-          enforce_permission_to :read, :follow_up_questionnaire_messages, current_participatory_space: current_participatory_space
+          enforce_permission_to :read, :follow_up_questionnaire_messages, current_participatory_space:
         end
 
         def respondent_details(participant)

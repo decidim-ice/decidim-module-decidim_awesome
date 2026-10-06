@@ -17,7 +17,7 @@ describe "Follow-up questionnaires menu in the participatory process admin" do
   end
 
   context "when a follow-up questionnaire is configured for the space" do
-    let!(:follow_up_questionnaire) { create(:awesome_follow_up_questionnaire, questionnaire: questionnaire, name: { "en" => "Follow up" }, organization:) }
+    let!(:follow_up_questionnaire) { create(:awesome_follow_up_questionnaire, questionnaire:, name: { "en" => "Follow up" }, organization:) }
 
     before do
       visit decidim_admin_participatory_processes.edit_component_path(participatory_process, component)

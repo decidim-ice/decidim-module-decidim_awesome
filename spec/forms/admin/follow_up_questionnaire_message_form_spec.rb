@@ -58,8 +58,8 @@ module Decidim::DecidimAwesome
         context "and the status did not change" do
           before do
             Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(
-              follow_up_questionnaire: follow_up_questionnaire,
-              status: status,
+              follow_up_questionnaire:,
+              status:,
               author: user,
               decidim_user_id: respondent.id
             )
@@ -71,7 +71,7 @@ module Decidim::DecidimAwesome
         context "and the status changed" do
           before do
             Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(
-              follow_up_questionnaire: follow_up_questionnaire,
+              follow_up_questionnaire:,
               status: statuses.second,
               author: user,
               decidim_user_id: respondent.id

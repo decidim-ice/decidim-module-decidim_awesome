@@ -16,7 +16,7 @@ module Decidim::DecidimAwesome
       let(:questionnaire) { create(:questionnaire) }
       let!(:survey) { create(:survey, component:, questionnaire:) }
       let(:follow_up_questionnaire) do
-        create(:awesome_follow_up_questionnaire, questionnaire: questionnaire, name: { "en" => "Follow up" }, organization:)
+        create(:awesome_follow_up_questionnaire, questionnaire:, name: { "en" => "Follow up" }, organization:)
       end
       let(:statuses) do
         Decidim::DecidimAwesome.create_default_statuses!(follow_up_questionnaire)
@@ -139,8 +139,8 @@ module Decidim::DecidimAwesome
 
         before do
           Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(
-            follow_up_questionnaire: follow_up_questionnaire,
-            status: status,
+            follow_up_questionnaire:,
+            status:,
             author: user,
             decidim_user_id: respondent.id
           )
@@ -157,7 +157,7 @@ module Decidim::DecidimAwesome
 
         before do
           Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(
-            follow_up_questionnaire: follow_up_questionnaire,
+            follow_up_questionnaire:,
             status: statuses.second,
             author: user,
             decidim_user_id: respondent.id
@@ -180,7 +180,7 @@ module Decidim::DecidimAwesome
       context "when the body is present and the status changed" do
         before do
           Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(
-            follow_up_questionnaire: follow_up_questionnaire,
+            follow_up_questionnaire:,
             status: statuses.second,
             author: user,
             decidim_user_id: respondent.id
@@ -202,8 +202,8 @@ module Decidim::DecidimAwesome
       context "when the body is present and the status did not change" do
         before do
           Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(
-            follow_up_questionnaire: follow_up_questionnaire,
-            status: status,
+            follow_up_questionnaire:,
+            status:,
             author: user,
             decidim_user_id: respondent.id
           )
