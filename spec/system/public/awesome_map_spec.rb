@@ -53,6 +53,7 @@ describe "Awesome map" do
 
     it "shows geolocated proposals and their taxonomies on the map" do
       expect(page).to have_css(".awesome-map")
+      expect(page).to have_css(".loading-spinner", visible: :hidden)
 
       expect(page).to have_content(taxonomy.name["en"])
       [proposal, another_proposal, meeting].each do |mapped_item|
@@ -63,8 +64,15 @@ describe "Awesome map" do
           find(".marker-cluster", match: :first).click
         end
 
-        find(marker_selector).click
+        # Leaflet replaces marker nodes while clusters expand or the map adjusts
+        # its bounds. Re-query the marker if that happens between find and click.
+        begin
+          find(marker_selector).click
+        rescue Selenium::WebDriver::Error::StaleElementReferenceError
+          retry
+        end
         expect(page).to have_css("h3.card__list-title", text: mapped_item.title["en"])
+        find(".leaflet-popup-close-button").click
       end
     end
   end
