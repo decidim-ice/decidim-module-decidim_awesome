@@ -1379,6 +1379,7 @@ pt:
           create:
             error: Erro ao enviar a mensagem! %{error}
             success: Mensagem enviada com sucesso
+            success_without_email: Mensagem guardada, mas não enviada porque a pessoa que respondeu não tem endereço de e-mail
           form:
             add_attachment: Adicionar anexo
             attachments: Anexos
@@ -1408,6 +1409,7 @@ pt:
             new_reply_help_text: Envie uma mensagem à pessoa que respondeu. A mensagem
               será enviada com “Responder para” definido como %{email}. Respostas
               diretas para esse e-mail não serão recolhidas aqui.
+            no_email_warning: Esta pessoa não tem endereço de e-mail. A mensagem será guardada, mas não será enviada.
             new_reply_no_reply_to_help_text: Envie uma mensagem à pessoa que respondeu.
               Os participantes não podem responder a este e-mail, porque é enviado
               sem endereço de resposta.
@@ -1424,6 +1426,7 @@ pt:
             error: Erro ao criar a etiqueta! %{error}
             success: Etiqueta criada com sucesso
           destroy:
+            last_status: É necessária pelo menos uma etiqueta, pelo que a última não pode ser removida.
             not_removable: Esta etiqueta está a ser utilizada em mensagens e não pode
               ser removida.
             success: Etiqueta removida com sucesso
@@ -1440,6 +1443,7 @@ pt:
             description: As etiquetas são usadas para acompanhar o estado de uma resposta
             edit: Editar
             labels_title: Etiquetas
+            last_status: É necessária pelo menos uma etiqueta, pelo que a última não pode ser removida.
             new: Nova etiqueta
             not_removable: Esta etiqueta está a ser utilizada em mensagens e não pode
               ser removida.
@@ -1773,10 +1777,15 @@ pt:
             weight_2_short: 'A:'
             weight_3: Verde
             weight_3_short: 'V:'
+      default_statuses:
+        answered: Respondido
+        in_progress: Em curso
+        pending: Pendente
       follow_up_questionnaire_message_mailer:
         notification:
           default_name: ali
           greeting: Olá %{name},
+          greeting_without_name: Olá,
           intro: 'Recebeu uma nova mensagem sobre a sua submissão a «%{questionnaire}»:'
           outro: Obrigado pela sua participação.
           status_updated: Estado atualizado para «%{status}».

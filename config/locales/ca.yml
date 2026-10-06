@@ -1405,6 +1405,7 @@ ca:
           create:
             error: Error en enviar el missatge! %{error}
             success: El missatge s'ha enviat correctament
+            success_without_email: El missatge s’ha desat, però no s’ha enviat perquè la persona que ha respost no té adreça electrònica
           form:
             add_attachment: Afegir adjunt
             attachments: Adjunts
@@ -1434,6 +1435,7 @@ ca:
             new_reply_help_text: Envia un missatge a la persona que va respondre.
               El missatge s'enviarà amb «Respon a» definit com %{email}. Les respostes
               directes a aquest correu no es recopilaran aquí.
+            no_email_warning: Aquesta persona que ha respost no té adreça electrònica. El missatge es desarà, però no s’enviarà.
             new_reply_no_reply_to_help_text: Envia un missatge a la persona que va
               respondre. Les participants no poden respondre a aquest correu, ja que
               s'envia sense adreça de resposta.
@@ -1450,6 +1452,7 @@ ca:
             error: Error en crear l'etiqueta! %{error}
             success: L'etiqueta s'ha creat correctament
           destroy:
+            last_status: Cal almenys una etiqueta, així que no es pot eliminar l’última.
             not_removable: Aquesta etiqueta s'utilitza en missatges i no es pot eliminar.
             success: L'etiqueta s'ha eliminat correctament
           edit:
@@ -1467,6 +1470,7 @@ ca:
               d'una resposta
             edit: Edita
             labels_title: Etiquetes
+            last_status: Cal almenys una etiqueta, així que no es pot eliminar l’última.
             new: Nova etiqueta
             not_removable: Aquesta etiqueta s'utilitza en missatges i no es pot eliminar.
             remove: Elimina
@@ -1801,10 +1805,15 @@ ca:
             weight_2_short: 'G:'
             weight_3: Verd
             weight_3_short: 'V:'
+      default_statuses:
+        answered: Contestada
+        in_progress: En curs
+        pending: Pendent
       follow_up_questionnaire_message_mailer:
         notification:
           default_name: allà
           greeting: Hola %{name},
+          greeting_without_name: Hola,
           intro: 'Has rebut un missatge nou sobre la teva tramesa a «%{questionnaire}»:'
           outro: Gràcies per la teva participació.
           status_updated: L'estat s'ha actualitzat a «%{status}».

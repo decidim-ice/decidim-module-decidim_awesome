@@ -1370,6 +1370,7 @@ pt-BR:
           create:
             error: Erro ao enviar a mensagem! %{error}
             success: Mensagem enviada com sucesso
+            success_without_email: Mensagem salva, mas não enviada porque a pessoa respondente não tem endereço de e-mail
           form:
             add_attachment: Adicionar anexo
             attachments: Anexos
@@ -1399,6 +1400,7 @@ pt-BR:
             new_reply_help_text: Envie uma mensagem à pessoa que respondeu. A mensagem
               será enviada com “Responder para” definido como %{email}. Respostas
               diretas para esse e-mail não serão coletadas aqui.
+            no_email_warning: Esta pessoa não tem endereço de e-mail. A mensagem será salva, mas não será enviada.
             new_reply_no_reply_to_help_text: Envie uma mensagem à pessoa que respondeu.
               Os participantes não podem responder a este e-mail, porque ele é enviado
               sem endereço de resposta.
@@ -1415,6 +1417,7 @@ pt-BR:
             error: Erro ao criar o rótulo! %{error}
             success: Rótulo criado com sucesso
           destroy:
+            last_status: É necessário pelo menos um rótulo, portanto o último não pode ser removido.
             not_removable: Este rótulo está sendo usado em mensagens e não pode ser
               removido.
             success: Rótulo removido com sucesso
@@ -1431,6 +1434,7 @@ pt-BR:
             description: Os rótulos são usados para acompanhar o status de uma resposta
             edit: Editar
             labels_title: Rótulos
+            last_status: É necessário pelo menos um rótulo, portanto o último não pode ser removido.
             new: Novo rótulo
             not_removable: Este rótulo está sendo usado em mensagens e não pode ser
               removido.
@@ -1764,10 +1768,15 @@ pt-BR:
             weight_2_short: 'A:'
             weight_3: Verde
             weight_3_short: 'V:'
+      default_statuses:
+        answered: Respondido
+        in_progress: Em andamento
+        pending: Pendente
       follow_up_questionnaire_message_mailer:
         notification:
           default_name: lá
           greeting: Olá %{name},
+          greeting_without_name: Olá,
           intro: 'Você recebeu uma nova mensagem sobre sua submissão a «%{questionnaire}»:'
           outro: Obrigado pela sua participação.
           status_updated: Status atualizado para «%{status}».

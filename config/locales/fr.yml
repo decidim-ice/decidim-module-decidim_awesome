@@ -1415,6 +1415,7 @@ fr:
           create:
             error: Erreur lors de l’envoi du message ! %{error}
             success: Message envoyé avec succès
+            success_without_email: Message enregistré, mais non envoyé car la personne répondante n’a pas d’adresse e-mail
           form:
             add_attachment: Ajouter une pièce jointe
             attachments: Pièces jointes
@@ -1444,6 +1445,7 @@ fr:
             new_reply_help_text: Envoyez un message à la personne qui a répondu. Le
               message sera envoyé avec « Répondre à » défini sur %{email}. Les réponses
               directes à cet e-mail ne seront pas collectées ici.
+            no_email_warning: Cette personne n’a pas d’adresse e-mail. Le message sera enregistré, mais ne sera pas envoyé.
             new_reply_no_reply_to_help_text: Envoyez un message à la personne qui
               a répondu. Les participantes ne peuvent pas répondre à cet e-mail, car
               il est envoyé sans adresse de réponse.
@@ -1460,6 +1462,7 @@ fr:
             error: Erreur lors de la création du libellé ! %{error}
             success: Libellé créé avec succès
           destroy:
+            last_status: Au moins un libellé est requis, le dernier ne peut donc pas être supprimé.
             not_removable: Ce libellé est utilisé dans les messages et ne peut pas
               être supprimé.
             success: Libellé supprimé avec succès
@@ -1477,6 +1480,7 @@ fr:
             description: Les libellés servent à suivre le statut d’une réponse
             edit: Modifier
             labels_title: Libellés
+            last_status: Au moins un libellé est requis, le dernier ne peut donc pas être supprimé.
             new: Nouveau libellé
             not_removable: Ce libellé est utilisé dans les messages et ne peut pas
               être supprimé.
@@ -1817,10 +1821,15 @@ fr:
             weight_2_short: 'J:'
             weight_3: Verte
             weight_3_short: 'V:'
+      default_statuses:
+        answered: Répondu
+        in_progress: En cours
+        pending: En attente
       follow_up_questionnaire_message_mailer:
         notification:
           default_name: là
           greeting: Bonjour %{name},
+          greeting_without_name: Bonjour,
           intro: 'Vous avez reçu un nouveau message concernant votre soumission à
             « %{questionnaire} » :'
           outro: Merci pour votre participation.

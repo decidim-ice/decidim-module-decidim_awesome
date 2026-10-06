@@ -53,18 +53,23 @@ describe "Awesome map" do
 
     it "shows geolocated proposals and their taxonomies on the map" do
       expect(page).to have_css(".awesome-map")
+      expect(page).to have_css(".loading-spinner", visible: :hidden)
 
       expect(page).to have_content(taxonomy.name["en"])
       [proposal, another_proposal, meeting].each do |mapped_item|
-        marker_selector = ".leaflet-marker-icon[title='#{mapped_item.title["en"]}']"
-        10.times do
-          break if page.has_css?(marker_selector)
+        page.execute_script(<<~JS, mapped_item.title["en"])
+          const title = arguments[0];
+          const controllers = window.AwesomeMap.controllers;
+          const node = Object.values(controllers)
+            .flatMap((controller) => controller.allNodes)
+            .find((item) => item.title.translation === title);
 
-          find(".marker-cluster", match: :first).click
-        end
-
-        find(marker_selector).click
+          if (node) {
+            window.AwesomeMap.cluster.zoomToShowLayer(node.marker, () => node.marker.fire("click"));
+          }
+        JS
         expect(page).to have_css("h3.card__list-title", text: mapped_item.title["en"])
+        find(".leaflet-popup-close-button").click
       end
     end
   end

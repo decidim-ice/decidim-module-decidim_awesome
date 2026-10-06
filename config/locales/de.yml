@@ -1334,6 +1334,7 @@ de:
           create:
             error: Fehler beim Senden der Nachricht! %{error}
             success: Nachricht erfolgreich gesendet
+            success_without_email: Nachricht gespeichert, aber nicht gesendet, da die antwortende Person keine E-Mail-Adresse hat
           form:
             add_attachment: Anhang hinzufügen
             attachments: Anhänge
@@ -1362,6 +1363,7 @@ de:
             new_reply_help_text: Senden Sie eine Nachricht an die Person, die geantwortet
               hat. Die Nachricht wird mit „Antwort an“ %{email} versendet. Direkte
               Antworten auf diese E-Mail werden hier nicht erfasst.
+            no_email_warning: Diese Person hat keine E-Mail-Adresse. Die Nachricht wird gespeichert, aber nicht per E-Mail versendet.
             new_reply_no_reply_to_help_text: Senden Sie eine Nachricht an die Person,
               die geantwortet hat. Teilnehmende können auf diese E-Mail nicht antworten,
               da sie ohne Reply-To-Adresse gesendet wird.
@@ -1378,6 +1380,7 @@ de:
             error: Fehler beim Erstellen des Labels! %{error}
             success: Label erfolgreich erstellt
           destroy:
+            last_status: Es ist mindestens ein Label erforderlich, daher kann das letzte nicht entfernt werden.
             not_removable: Dieses Label wird in Nachrichten verwendet und kann nicht
               entfernt werden.
             success: Label erfolgreich entfernt
@@ -1395,6 +1398,7 @@ de:
             description: Labels werden verwendet, um den Status einer Antwort zu verfolgen
             edit: Bearbeiten
             labels_title: Labels
+            last_status: Es ist mindestens ein Label erforderlich, daher kann das letzte nicht entfernt werden.
             new: Neues Label
             not_removable: Dieses Label wird in Nachrichten verwendet und kann nicht
               entfernt werden.
@@ -1740,10 +1744,15 @@ de:
             weight_2_short: 'Y:'
             weight_3: Grün
             weight_3_short: 'G:'
+      default_statuses:
+        answered: Beantwortet
+        in_progress: In Bearbeitung
+        pending: Ausstehend
       follow_up_questionnaire_message_mailer:
         notification:
           default_name: dort
           greeting: Hallo %{name},
+          greeting_without_name: Hallo,
           intro: 'Sie haben eine neue Nachricht zu Ihrer Einreichung zu «%{questionnaire}»
             erhalten:'
           outro: Vielen Dank für Ihre Teilnahme.

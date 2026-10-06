@@ -1396,6 +1396,7 @@ es:
           create:
             error: Error al enviar el mensaje! %{error}
             success: El mensaje se envió correctamente
+            success_without_email: El mensaje se ha guardado, pero no se ha enviado porque la persona que respondió no tiene dirección de correo electrónico
           form:
             add_attachment: Añadir adjunto
             attachments: Adjuntos
@@ -1425,6 +1426,7 @@ es:
             new_reply_help_text: Envía un mensaje a la persona que respondió. El mensaje
               se enviará con «Responder a» establecido como %{email}. Las respuestas
               directas a ese correo no se recopilarán aquí.
+            no_email_warning: Esta persona no tiene dirección de correo electrónico. El mensaje se guardará, pero no se enviará.
             new_reply_no_reply_to_help_text: Envía un mensaje a la persona que respondió.
               Las personas participantes no pueden responder a este correo, ya que
               se envía sin dirección de respuesta.
@@ -1441,6 +1443,7 @@ es:
             error: Error al crear la etiqueta! %{error}
             success: La etiqueta se creó correctamente
           destroy:
+            last_status: Se necesita al menos una etiqueta, por lo que no se puede eliminar la última.
             not_removable: Esta etiqueta se usa en mensajes y no se puede eliminar.
             success: La etiqueta se eliminó correctamente
           edit:
@@ -1456,6 +1459,7 @@ es:
             description: Las etiquetas se utilizan para seguir el estado de una respuesta
             edit: Editar
             labels_title: Etiquetas
+            last_status: Se necesita al menos una etiqueta, por lo que no se puede eliminar la última.
             new: Nueva etiqueta
             not_removable: Esta etiqueta se usa en mensajes y no se puede eliminar.
             remove: Eliminar
@@ -1792,10 +1796,15 @@ es:
             weight_2_short: 'A:'
             weight_3: Verde
             weight_3_short: 'V:'
+      default_statuses:
+        answered: Respondida
+        in_progress: En curso
+        pending: Pendiente
       follow_up_questionnaire_message_mailer:
         notification:
           default_name: allí
           greeting: Hola %{name},
+          greeting_without_name: Hola,
           intro: 'Has recibido un nuevo mensaje sobre tu envío a «%{questionnaire}»:'
           outro: Gracias por tu participación.
           status_updated: El estado se actualizó a «%{status}».
