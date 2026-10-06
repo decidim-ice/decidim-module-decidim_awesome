@@ -22,7 +22,7 @@
         <%= render "responder_fields", questionnaire: selected_questionnaire, form: @form %>
       </div>
       <div class="row column">
-        <%= render "decidim/decidim_awesome/admin/follow_up_questionnaire_statuses/table", follow_up_questionnaire_id: follow_up_questionnaire_id, statuses: @follow_up_questionnaire&.statuses %>
+        <%= render "decidim/decidim_awesome/admin/follow_up_questionnaire_statuses/table", follow_up_questionnaire_id:, statuses: @follow_up_questionnaire&.statuses %>
       </div>
     </div>
   </div>
