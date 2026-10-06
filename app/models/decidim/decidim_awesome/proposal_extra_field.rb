@@ -7,6 +7,7 @@ module Decidim
     # private_body is not translatable, nor is intended to be as it won't be shown to the public
     class ProposalExtraField < ApplicationRecord
       include Decidim::RecordEncryptor
+      include Decidim::SoftDeletable
 
       self.table_name = "decidim_awesome_proposal_extra_fields"
 

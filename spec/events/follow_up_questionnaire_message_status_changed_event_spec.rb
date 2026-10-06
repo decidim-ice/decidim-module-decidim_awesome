@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim::DecidimAwesome
   describe FollowUpQuestionnaireMessageStatusChangedEvent do
-    subject { described_class.new(resource: message, event_name: event_name, user: user) }
+    subject { described_class.new(resource: message, event_name:, user:) }
 
     let(:event_name) { "decidim.events.decidim_awesome.follow_up_questionnaire_message_status_changed" }
     let(:organization) { create(:organization) }
@@ -17,8 +17,8 @@ module Decidim::DecidimAwesome
     end
     let(:message) do
       Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(
-        follow_up_questionnaire: follow_up_questionnaire,
-        status: status,
+        follow_up_questionnaire:,
+        status:,
         author: user,
         decidim_user_id: user.id
       )

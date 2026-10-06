@@ -26,11 +26,11 @@ describe Decidim::DecidimAwesome do
   before do
     decidim_response = double(
       success?: true,
-      body: [{ "tag_name" => "v0.31.2", "prerelease" => false, "draft" => false }].to_json
+      body: [{ "tag_name" => "v0.32.0", "prerelease" => false, "draft" => false }].to_json
     )
     awesome_response = double(
       success?: true,
-      body: [{ "tag_name" => "v0.14.1", "prerelease" => false, "draft" => false }].to_json
+      body: [{ "tag_name" => "v0.15.0", "prerelease" => false, "draft" => false }].to_json
     )
 
     allow(Faraday).to receive(:get).with("https://api.github.com/repos/decidim/decidim/releases")
@@ -89,11 +89,13 @@ describe Decidim::DecidimAwesome do
   when "disabled"
     it_behaves_like "with features disabled"
   else
+    # rubocop:disable RSpec/Output
     puts 'Please execute this test with the env FEATURES set to "enabled" or "disabled"'
     puts ""
     puts "FEATURES=enabled bundle exec rspec spec/awesome_summary_spec.rb"
     puts "FEATURES=disabled bundle exec rspec spec/awesome_summary_spec.rb"
     puts ""
     puts "TEST SKIPPED!"
+    # rubocop:enable RSpec/Output
   end
 end

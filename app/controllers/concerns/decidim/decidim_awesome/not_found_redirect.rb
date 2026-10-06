@@ -6,7 +6,7 @@ module Decidim
       extend ActiveSupport::Concern
 
       included do
-        before_action :redirect_unallowed_scoped_admins, only: :not_found, if: -> { request.original_fullpath =~ %r{^(/+)admin} }
+        before_action :redirect_unallowed_scoped_admins, only: :not_found, if: -> { ContextAnalyzers::RequestAnalyzer.strip_locale(request.original_fullpath) =~ %r{^(/+)admin} }
         before_action :redirect_to_custom_paths, only: :not_found, if: -> { DecidimAwesome.enabled? :custom_redirects }
         private
 
@@ -18,7 +18,7 @@ module Decidim
 
           # assigning a flash message here does not work after redirection due the order of middleware in Rails
           # as a workaround, send a message through a get parameter
-          path = "/admin/?unauthorized"
+          path = "#{decidim_admin.root_path}?unauthorized"
           referer = request.headers["Referer"]
           if referer
             uri = URI(referer)
@@ -38,11 +38,11 @@ module Decidim
         end
 
         def custom_redirects_destination(fullpath)
-          redirects = (AwesomeConfig.find_by(var: :custom_redirects, organization: current_organization)&.value || {}).filter { |_, v| v["active"] }
+          redirects = active_custom_redirects
           return if redirects.blank?
-          return unless redirects.is_a? Hash
 
           path, query = fullpath.split("?")
+          path = ContextAnalyzers::RequestAnalyzer.strip_locale(path)
           destination = redirects.dig(path, "destination")
           pass_query = redirects.dig(path, "pass_query")
           if pass_query.present?
@@ -50,7 +50,15 @@ module Decidim
             destination = "#{destination}#{union}#{query}"
           end
 
-          destination.strip if destination.present?
+          destination.presence&.strip
+        end
+
+        # origins are stored without the locale prefix (see Admin::CustomRedirectForm)
+        def active_custom_redirects
+          redirects = AwesomeConfig.find_by(var: :custom_redirects, organization: current_organization)&.value
+          return unless redirects.is_a? Hash
+
+          redirects.filter { |_, v| v["active"] }
         end
       end
     end

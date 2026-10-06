@@ -14,6 +14,7 @@ module Decidim::DecidimAwesome
   describe ApplicationController do
     routes { Decidim::DecidimAwesome::Engine.routes }
     before do
+      Rails.application.reload_routes_unless_loaded
       Decidim::DecidimAwesome::Engine.routes.draw do
         get "index" => "test#index"
       end
@@ -55,7 +56,7 @@ module Decidim::DecidimAwesome
       it "redirects to the login page" do
         get :index
         expect(response).to have_http_status(:found)
-        expect(response).to redirect_to("/users/sign_in")
+        expect(response).to redirect_to("/en/users/sign_in")
       end
     end
 

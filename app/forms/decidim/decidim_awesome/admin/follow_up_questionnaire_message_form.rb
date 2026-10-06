@@ -23,12 +23,12 @@ module Decidim
 
         def to_params
           {
-            follow_up_questionnaire_id: follow_up_questionnaire_id,
-            status_id: status_id,
+            follow_up_questionnaire_id:,
+            status_id:,
             body: body.to_s.strip.presence,
-            author_id: author_id,
-            decidim_user_id: decidim_user_id,
-            session_token: session_token
+            author_id:,
+            decidim_user_id:,
+            session_token:
           }
         end
 

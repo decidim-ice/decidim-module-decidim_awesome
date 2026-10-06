@@ -20,15 +20,23 @@ module Decidim::DecidimAwesome
         let(:first_preset) { options[0] }
         let(:second_preset) { options[1] }
 
-        it "returns empty presets when no content blocks exist" do
+        it "returns empty presets when no menu items nor content blocks exist" do
           expect(first_preset).to be_an(Array)
           expect(second_preset).to be_an(Array)
           expect(first_preset[0]).to eq(I18n.t("decidim.decidim_awesome.admin.landing_menu_items.form.preset_global_menu"))
           expect(second_preset[0]).to eq(I18n.t("decidim.decidim_awesome.admin.landing_menu_items.form.preset_content_blocks"))
-          expect(first_preset[1][0][0]).to eq("Home")
-          expect(first_preset[1][0][1]).to eq("/")
-          expect(first_preset[1][0][2]).to have_key("data-label-en")
+          expect(first_preset[1]).to eq([])
           expect(second_preset[1]).to eq([])
+        end
+
+        context "when published spaces exist" do
+          let!(:participatory_process) { create(:participatory_process, organization:) }
+
+          it "includes global menu items with locale-agnostic urls" do
+            expect(first_preset[1][0][0]).to eq("Processes")
+            expect(first_preset[1][0][1]).to eq("/processes")
+            expect(first_preset[1][0][2]).to have_key("data-label-en")
+          end
         end
 
         context "when content blocks exist" do

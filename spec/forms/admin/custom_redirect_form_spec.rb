@@ -35,6 +35,12 @@ module Decidim::DecidimAwesome
 
         it { is_expected.not_to be_valid }
 
+        context "and is missing from the params" do
+          let(:origin) { nil }
+
+          it { is_expected.not_to be_valid }
+        end
+
         context "and is only spaces" do
           let(:origin) { "  " }
 
@@ -92,6 +98,12 @@ module Decidim::DecidimAwesome
 
       context "when origin and destination are the same" do
         let(:destination) { "http://#{organization.host}#{origin} " }
+
+        it { is_expected.not_to be_valid }
+      end
+
+      context "when origin and destination differ only by the locale prefix" do
+        let(:destination) { "/#{I18n.locale}#{origin}" }
 
         it { is_expected.not_to be_valid }
       end

@@ -37,6 +37,22 @@ module Decidim::DecidimAwesome
         end
       end
 
+      context "when url includes the organization host and a locale" do
+        let(:url) { "http://#{organization.host}/en/some-path?tab=1" }
+
+        it "stores only the locale-free path" do
+          expect(subject.to_params[:url]).to eq("/some-path?tab=1")
+        end
+      end
+
+      context "when url includes another host" do
+        let(:url) { "https://example.org/en/some-path" }
+
+        it "keeps the external url untouched" do
+          expect(subject.to_params[:url]).to eq(url)
+        end
+      end
+
       context "when label is not a hash" do
         let(:label) { nil }
 

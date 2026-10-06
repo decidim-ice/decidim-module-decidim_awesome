@@ -1,6 +1,6 @@
 # Decidim::DecidimAwesome
 
-[![[CI] Tests 0.28](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/tests.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/tests.yml)
+[![[CI] Tests 0.32](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/tests.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/tests.yml)
 [![[CI] Lint](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/lint.yml/badge.svg)](https://github.com/decidim-ice/decidim-module-decidim_awesome/actions/workflows/lint.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/2dada53525dd5a944089/maintainability)](https://codeclimate.com/github/decidim-ice/decidim-module-decidim_awesome/maintainability)
 [![Test Coverage](https://codecov.io/gh/decidim-ice/decidim-module-decidim_awesome/branch/main/graph/badge.svg?token=TFBMCLLZJG)](https://codecov.io/gh/decidim-ice/decidim-module-decidim_awesome)
@@ -69,12 +69,13 @@ Go to `yourdomain/admin/decidim_awesome` and start tweaking things!
 > ```
 
 The correct version of Decidim Awesome should resolved automatically by the Bundler.
-However you can force some specific version using `gem "decidim-decidim_awesome", "~> 0.12.0"` in the Gemfile.
+However you can force some specific version using `gem "decidim-decidim_awesome", "~> 0.15.0"` in the Gemfile.
 
 Depending on your Decidim version, choose the corresponding Awesome version to ensure compatibility:
 
 | Awesome version | Compatible Decidim versions |
 |---|---|
+| 0.15.x | 0.32.x |
 | 0.14.x | 0.31.x |
 | 0.13.x | 0.30.x |
 | 0.12.x | 0.29.x |

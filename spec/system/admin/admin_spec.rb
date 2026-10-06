@@ -286,10 +286,6 @@ describe "Visit the admin page" do
         click_link_or_button "Menu Tweaks"
       end
 
-      it_behaves_like "has menu link", "menus/home_content_block_menu/hacks" do
-        let(:prefix) { "" }
-      end
-
       it_behaves_like "has menu link", "menus/menu/hacks" do
         let(:prefix) { "" }
       end

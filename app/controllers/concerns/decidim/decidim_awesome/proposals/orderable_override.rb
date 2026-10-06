@@ -15,6 +15,7 @@ module Decidim
           private
 
           alias_method :decidim_original_reorder, :reorder
+          alias_method :decidim_original_possible_orders, :possible_orders
 
           # read order from session if available
           def order
@@ -22,15 +23,7 @@ module Decidim
           end
 
           def possible_orders
-            @possible_orders ||= begin
-              possible_orders = %w(random recent)
-              possible_orders += awesome_additional_sortings
-              possible_orders << "most_voted" if most_voted_order_available?
-              possible_orders << "most_liked" if current_settings.likes_enabled?
-              possible_orders << "most_commented" if component_settings.comments_enabled?
-              possible_orders << "most_followed" << "with_more_authors"
-              possible_orders
-            end
+            @possible_orders ||= decidim_original_possible_orders.dup.insert(2, *awesome_additional_sortings)
           end
 
           def reorder(proposals)

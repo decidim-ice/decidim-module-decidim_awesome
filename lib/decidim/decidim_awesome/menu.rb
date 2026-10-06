@@ -74,7 +74,7 @@ module Decidim
 
           register_simple_entry(:awesome_admin_menu, :menu_hacks, 8, "menu-line",
                                 submenu: { target_menu: :menu_hacks_submenu },
-                                active: [[:menu_hacks_path, :menu], [:menu_hacks_path, :mobile_menu], [:menu_hacks_path, :home_content_block_menu]])
+                                active: [[:menu_hacks_path, :menu], [:menu_hacks_path, :mobile_menu]])
 
           register_simple_entry(:awesome_admin_menu, :custom_redirects, 9, "external-link-line")
           register_simple_entry(:awesome_admin_menu, :livechat, 10, "chat-1-line")
@@ -148,14 +148,6 @@ module Decidim
                             decidim_admin_decidim_awesome.menu_hacks_path(:mobile_menu),
                             position: 8.2,
                             icon_name: "smartphone"
-            end
-
-            if Decidim::DecidimAwesome::Menu.menus[:menu_hacks_home_content_block_menu].present?
-              menu.add_item :content_block_main_menu,
-                            I18n.t("home_content_block_menu.title", scope: "decidim.decidim_awesome.admin.menu_hacks.index"),
-                            decidim_admin_decidim_awesome.menu_hacks_path(:home_content_block_menu),
-                            position: 8.3,
-                            icon_name: "layout-masonry-line"
             end
           end
         end
@@ -245,25 +237,24 @@ module Decidim
               :validate_body_min_length, :validate_body_max_caps_percent,
               :validate_body_max_marks_together, :validate_body_start_with_caps
             ),
-            surveys: Decidim::DecidimAwesome::Menu.config_enabled?(:auto_save_forms, :user_timezone, :hashcash_signup, :hashcash_login),
-            styles: Decidim::DecidimAwesome::Menu.first_enabled(:scoped_styles, :scoped_admin_styles),
-            scoped_styles: Decidim::DecidimAwesome::Menu.config_enabled?(:scoped_styles),
-            scoped_admin_styles: Decidim::DecidimAwesome::Menu.config_enabled?(:scoped_admin_styles),
-            custom_fields: Decidim::DecidimAwesome::Menu.first_enabled(:proposal_custom_fields, :proposal_private_custom_fields),
-            proposal_custom_fields: Decidim::DecidimAwesome::Menu.config_enabled?(:proposal_custom_fields),
-            proposal_private_custom_fields: Decidim::DecidimAwesome::Menu.config_enabled?(:proposal_private_custom_fields),
-            admins: Decidim::DecidimAwesome::Menu.config_enabled?(:scoped_admins),
-            menu_hacks: Decidim::DecidimAwesome::Menu.first_enabled(:menu, :mobile_menu, :home_content_block_menu),
-            menu_hacks_menu: Decidim::DecidimAwesome::Menu.config_enabled?(:menu),
-            menu_hacks_mobile_menu: Decidim::DecidimAwesome::Menu.config_enabled?(:mobile_menu),
-            menu_hacks_home_content_block_menu: Decidim::DecidimAwesome::Menu.config_enabled?(:home_content_block_menu),
-            custom_redirects: Decidim::DecidimAwesome::Menu.config_enabled?(:custom_redirects),
-            livechat: Decidim::DecidimAwesome::Menu.config_enabled?(:intergram_for_admins, :intergram_for_public),
-            verifications: Decidim::DecidimAwesome::Menu.config_enabled?(:force_authorizations, :awesome_authorization_handler),
-            force_authorizations: Decidim::DecidimAwesome::Menu.config_enabled?(:force_authorizations),
-            awesome_authorization_handler: Decidim::DecidimAwesome::Menu.config_enabled?(:awesome_authorization_handler),
-            cookie_management: Decidim::DecidimAwesome::Menu.config_enabled?(:cookie_management),
-            follow_up_questionnaires: Decidim::DecidimAwesome::Menu.config_enabled?(:follow_up_questionnaires),
+            surveys: config_enabled?(:auto_save_forms, :user_timezone, :hashcash_signup, :hashcash_login),
+            styles: first_enabled(:scoped_styles, :scoped_admin_styles),
+            scoped_styles: config_enabled?(:scoped_styles),
+            scoped_admin_styles: config_enabled?(:scoped_admin_styles),
+            custom_fields: first_enabled(:proposal_custom_fields, :proposal_private_custom_fields),
+            proposal_custom_fields: config_enabled?(:proposal_custom_fields),
+            proposal_private_custom_fields: config_enabled?(:proposal_private_custom_fields),
+            admins: config_enabled?(:scoped_admins),
+            menu_hacks: first_enabled(:menu, :mobile_menu),
+            menu_hacks_menu: config_enabled?(:menu),
+            menu_hacks_mobile_menu: config_enabled?(:mobile_menu),
+            custom_redirects: config_enabled?(:custom_redirects),
+            livechat: config_enabled?(:intergram_for_admins, :intergram_for_public),
+            verifications: config_enabled?(:force_authorizations, :awesome_authorization_handler),
+            force_authorizations: config_enabled?(:force_authorizations),
+            awesome_authorization_handler: config_enabled?(:awesome_authorization_handler),
+            cookie_management: config_enabled?(:cookie_management),
+            follow_up_questionnaires: config_enabled?(:follow_up_questionnaires),
             maintenance: true
           }
         end

@@ -9,6 +9,7 @@ module Decidim
       class HashcashController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
         include MaintenanceContext
+
         helper ConfigConstraintsHelpers
 
         helper_method :stamps, :stamp, :addresses

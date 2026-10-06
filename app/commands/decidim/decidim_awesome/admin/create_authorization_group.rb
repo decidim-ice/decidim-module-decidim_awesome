@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class CreateAuthorizationGroup < Command
         include NeedsConstraintHelpers
+
         # Public: Initializes the command.
         #
         def initialize(organization, config_var = :force_authorizations)

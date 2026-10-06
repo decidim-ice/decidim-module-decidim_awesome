@@ -50,6 +50,26 @@ module Decidim::DecidimAwesome
           expect(Decidim::DecidimAwesome::ProposalExtraField.find(extra_fields.id).private_body).to be_nil
         end
 
+        context "when the component is trashed" do
+          before { component.destroy }
+
+          it "still destroys the private data" do
+            perform_enqueued_jobs do
+              delete(:destroy, params:)
+            end
+            expect(response).to have_http_status(:redirect)
+            expect(Decidim::DecidimAwesome::ProposalExtraField.find(extra_fields.id).private_body).to be_nil
+          end
+        end
+
+        context "when the participatory space is trashed" do
+          before { component.participatory_space.destroy }
+
+          it "is not found" do
+            expect { delete(:destroy, params:) }.to raise_error(ActiveRecord::RecordNotFound)
+          end
+        end
+
         context "when private data is not present" do
           let(:time_ago) { 2.months.ago }
 
@@ -59,6 +79,12 @@ module Decidim::DecidimAwesome
             end
             expect(response).to have_http_status(:redirect)
             expect(Decidim::DecidimAwesome::ProposalExtraField.find(extra_fields.id).private_body).to eq("private")
+          end
+        end
+
+        context "when the component does not exist" do
+          it "raises a not found error" do
+            expect { delete(:destroy, params: { id: 0 }) }.to raise_error(ActiveRecord::RecordNotFound)
           end
         end
 

@@ -7,6 +7,7 @@ module Decidim
       class ConstraintsController < DecidimAwesome::Admin::ApplicationController
         include NeedsAwesomeConfig
         include Decidim::Headers::HttpCachingDisabler
+
         helper ConfigConstraintsHelpers
 
         layout false
@@ -48,7 +49,7 @@ module Decidim
                        message: I18n.t("decidim_awesome.admin.constraints.create.error", scope: "decidim"),
                        error: message
                      },
-                     status: :unprocessable_entity
+                     status: :unprocessable_content
             end
           end
         end
@@ -76,7 +77,7 @@ module Decidim
                        message: I18n.t("decidim_awesome.admin.constraints.update.error", scope: "decidim"),
                        error: message
                      },
-                     status: :unprocessable_entity
+                     status: :unprocessable_content
             end
           end
         end
@@ -103,7 +104,7 @@ module Decidim
                        message: I18n.t("decidim_awesome.admin.constraints.destroy.error", scope: "decidim"),
                        error: message
                      },
-                     status: :unprocessable_entity
+                     status: :unprocessable_content
             end
           end
         end

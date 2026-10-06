@@ -12,7 +12,7 @@
     <% form.object.force_authorizations&.each do |key, group| %>
       <% group ||= Decidim::DecidimAwesome::Admin::AuthorizationGroupForm.new %>
 
-      <%= form.fields_for "#{config_var}[#{key}]", group do |group_form| %>
+      <%= fields_for "config[#{config_var}][#{key}]", group do |group_form| %>
         <div class="card p-4 js-box-container force_authorization_container" data-key="<%= key %>" data-var="<%= config_var %>">
           <%= render "decidim/decidim_awesome/admin/config/autoedit_box_label", var: config_var, key:, scope: "#{field}_#{key}", delete_path: decidim_admin_decidim_awesome.force_authorization_path(key:) %>
           <div class="card-section mt-2">

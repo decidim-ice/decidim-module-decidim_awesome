@@ -51,13 +51,12 @@ describe "Admin manages Landing Menu content block" do
     end
 
     describe "adding a new menu item" do
-      it "shows global menu links in presets" do
+      it "shows the presets selector" do
         click_link_or_button "Add new item"
 
         within "#item-form" do
           expect(page).to have_content("Autofill presets")
           expect(page).to have_css("optgroup[label='Decidim usual suspects']")
-          expect(page).to have_css("option", text: "Home")
         end
       end
 

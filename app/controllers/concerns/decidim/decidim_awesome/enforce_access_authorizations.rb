@@ -7,6 +7,7 @@ module Decidim
 
       included do
         include ::Decidim::DecidimAwesome::NeedsAwesomeConfig
+
         before_action :enforce_authorizations
       end
 

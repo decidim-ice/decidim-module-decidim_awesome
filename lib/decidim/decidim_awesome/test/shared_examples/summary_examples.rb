@@ -48,8 +48,6 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::Proposals::ProposalType.included_modules).to include(Decidim::DecidimAwesome::AddProposalTypeCustomFields)
       expect(Decidim::Proposals::ProposalLCell.included_modules).to include(Decidim::DecidimAwesome::ProposalLCellOverride)
       expect(Decidim::Proposals::Proposal.included_modules).to include(Decidim::DecidimAwesome::HasProposalExtraFields)
-      expect(Decidim::Proposals::CollaborativeDraft.included_modules).to include(Decidim::DecidimAwesome::HasProposalExtraFields)
-      expect(Decidim::ContentBlocks::GlobalMenuCell.included_modules).to include(Decidim::DecidimAwesome::GlobalMenuCellOverride)
       expect(Decidim::BreadcrumbHelper.included_modules).to include(Decidim::DecidimAwesome::BreadcrumbHelperOverride)
       expect(Decidim::BreadcrumbRootMenuItemPresenter.included_modules).to include(Decidim::DecidimAwesome::BreadcrumbRootMenuItemPresenterOverride)
       expect(Decidim::Proposals::ProposalSerializer.included_modules).to include(Decidim::DecidimAwesome::Proposals::ProposalSerializerOverride)
@@ -99,8 +97,6 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::Proposals::ProposalType.included_modules).not_to include(Decidim::DecidimAwesome::AddProposalTypeCustomFields)
       expect(Decidim::Proposals::ProposalLCell.included_modules).not_to include(Decidim::DecidimAwesome::ProposalLCellOverride)
       expect(Decidim::Proposals::Proposal.included_modules).not_to include(Decidim::DecidimAwesome::HasProposalExtraFields)
-      expect(Decidim::Proposals::CollaborativeDraft.included_modules).not_to include(Decidim::DecidimAwesome::HasProposalExtraFields)
-      expect(Decidim::ContentBlocks::GlobalMenuCell.included_modules).not_to include(Decidim::DecidimAwesome::GlobalMenuCellOverride)
       expect(Decidim::BreadcrumbHelper.included_modules).not_to include(Decidim::DecidimAwesome::BreadcrumbHelperOverride)
       expect(Decidim::BreadcrumbRootMenuItemPresenter.included_modules).not_to include(Decidim::DecidimAwesome::BreadcrumbRootMenuItemPresenterOverride)
       expect(Decidim::Proposals::ProposalSerializer.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ProposalSerializerOverride)
@@ -136,27 +132,29 @@ shared_examples "activated concerns" do |enabled|
 end
 
 shared_examples "csp directives" do |enabled|
-  let(:organization) { create(:organization) }
   let(:fonts) { controller.content_security_policy.send(:policy)["font-src"] }
   let(:scripts) { controller.content_security_policy.send(:policy)["script-src"] }
   let(:frames) { controller.content_security_policy.send(:policy)["frame-src"] }
+  # a granted authorization so forced verifications do not redirect away
+  # (a halted callback chain would skip the CSP after_action entirely)
+  let!(:authorization) { create(:authorization, user:, name: "dummy_authorization_handler") }
 
   shared_examples "controller directives" do
     if enabled
       it "has CSP directives" do
-        get :show do
-          expect(fonts).to eq(["'self'", "data:"])
-          expect(scripts).to eq(["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://www.intergram.xyz"])
-          expect(frames).to eq(["'self'", "www.youtube-nocookie.com", "player.vimeo.com", "https://www.intergram.xyz"])
-        end
+        get :show, params: { locale: I18n.locale }
+
+        expect(fonts).to include("data:")
+        expect(scripts).to include("https://www.intergram.xyz")
+        expect(frames).to include("https://www.intergram.xyz")
       end
     else
       it "has no CSP directives" do
-        get :show do
-          expect(fonts).to eq(["'self'"])
-          expect(scripts).to eq(["'self'", "'unsafe-inline'", "'unsafe-eval'"])
-          expect(frames).to eq(["'self'", "www.youtube-nocookie.com", "player.vimeo.com"])
-        end
+        get :show, params: { locale: I18n.locale }
+
+        expect(fonts).not_to include("data:")
+        expect(scripts).not_to include("https://www.intergram.xyz")
+        expect(frames).not_to include("https://www.intergram.xyz")
       end
     end
   end
@@ -165,6 +163,7 @@ shared_examples "csp directives" do |enabled|
     routes { Decidim::Core::Engine.routes }
     before do
       request.env["decidim.current_organization"] = user.organization
+      sign_in user
     end
 
     it_behaves_like "controller directives"
@@ -175,6 +174,7 @@ shared_examples "csp directives" do |enabled|
 
     before do
       request.env["decidim.current_organization"] = user.organization
+      sign_in user
     end
 
     it_behaves_like "controller directives"
@@ -186,6 +186,7 @@ shared_examples "custom menus" do |enabled|
     before do
       allow(view).to receive(:current_organization).and_return(organization)
       allow(view).to receive(:current_user).and_return(user)
+      allow(view).to receive(:current_locale).and_return(I18n.locale.to_s)
     end
 
     if enabled
@@ -271,7 +272,6 @@ shared_examples "basic rendering" do |enabled|
         "config/admins",
         "menus/menu/hacks",
         "menus/mobile_menu/hacks",
-        "menus/home_content_block_menu/hacks",
         "custom_redirects",
         "config/livechat",
         "config/verifications",
@@ -304,7 +304,7 @@ shared_examples "basic rendering" do |enabled|
       it "has all admin menus" do
         menus.each do |menu|
           within ".sidebar-menu" do
-            expect(page).to have_link(href: "/admin/decidim_awesome/#{menu}")
+            expect(page).to have_link(href: "/#{I18n.locale}/admin/decidim_awesome/#{menu}")
           end
         end
       end
@@ -316,7 +316,7 @@ shared_examples "basic rendering" do |enabled|
       it "has no admin menus" do
         menus.each do |menu|
           within ".sidebar-menu" do
-            expect(page).to have_no_link(href: "/admin/decidim_awesome/#{menu}")
+            expect(page).to have_no_link(href: "/#{I18n.locale}/admin/decidim_awesome/#{menu}")
           end
         end
       end

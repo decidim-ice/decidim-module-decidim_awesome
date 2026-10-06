@@ -2,17 +2,41 @@
 
 module Decidim
   module DecidimAwesome
+    # Finds the components holding proposal private data, scoped to a single
+    # organization
     class PrivateDataFinder
-      def query
-        Component.where(id: proposals.where.not(extra_fields: { private_body: nil }))
+      def initialize(organization)
+        @organization = organization
       end
 
-      def proposals
-        Decidim::Proposals::Proposal.select(:decidim_component_id).joins(:extra_fields)
+      def query
+        Component.with_deleted.where(id: proposals.where(id: extra_fields.where.not(private_body: nil).select(:decidim_proposal_id)))
       end
 
       def for(resources)
-        Component.where(id: proposals).where(id: resources)
+        Component.with_deleted.where(id: proposals.where(id: extra_fields.select(:decidim_proposal_id))).where(id: resources)
+      end
+
+      # Spaces in the trash are left out: Decidim freezes their contents until restored
+      def components
+        Decidim.participatory_space_manifests.map do |manifest|
+          spaces = manifest.participatory_spaces.call(organization)
+          Component.with_deleted.where(participatory_space_type: manifest.model_class_name, participatory_space_id: spaces.select(:id))
+        end.reduce(:or)
+      end
+
+      private
+
+      attr_reader :organization
+
+      def proposals
+        Decidim::Proposals::Proposal.with_deleted
+                                    .select(:decidim_component_id)
+                                    .where(decidim_component_id: components.select(:id))
+      end
+
+      def extra_fields
+        ProposalExtraField.with_deleted.where(decidim_proposal_type: Decidim::Proposals::Proposal.name)
       end
     end
   end

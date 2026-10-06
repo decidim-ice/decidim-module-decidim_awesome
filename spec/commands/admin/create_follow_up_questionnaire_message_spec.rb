@@ -16,7 +16,7 @@ module Decidim::DecidimAwesome
       let(:questionnaire) { create(:questionnaire) }
       let!(:survey) { create(:survey, component:, questionnaire:) }
       let(:follow_up_questionnaire) do
-        create(:awesome_follow_up_questionnaire, questionnaire: questionnaire, name: { "en" => "Follow up" }, organization:)
+        create(:awesome_follow_up_questionnaire, questionnaire:, name: { "en" => "Follow up" }, organization:)
       end
       let(:statuses) do
         Decidim::DecidimAwesome.create_default_statuses!(follow_up_questionnaire)
@@ -60,11 +60,22 @@ module Decidim::DecidimAwesome
           expect(message.decidim_user_id).to eq(respondent.id)
         end
 
-        it "notifies the respondent by email without a Reply-To" do
+        it "notifies the respondent by email with the platform sender as Reply-To" do
           expect { subject.call }.to have_enqueued_job(ActionMailer::MailDeliveryJob)
 
           perform_enqueued_jobs
-          expect(ActionMailer::Base.deliveries.last.reply_to).to be_nil
+          expect(ActionMailer::Base.deliveries.last.reply_to).to eq([Decidim.config.mailer_sender])
+        end
+
+        context "and the organization has no SMTP settings" do
+          let(:organization) { create(:organization, smtp_settings: {}) }
+
+          it "sends the email without a Reply-To" do
+            subject.call
+            perform_enqueued_jobs
+
+            expect(ActionMailer::Base.deliveries.last.reply_to).to be_nil
+          end
         end
 
         it "reports that the email was sent" do
@@ -139,8 +150,8 @@ module Decidim::DecidimAwesome
 
         before do
           Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(
-            follow_up_questionnaire: follow_up_questionnaire,
-            status: status,
+            follow_up_questionnaire:,
+            status:,
             author: user,
             decidim_user_id: respondent.id
           )
@@ -157,7 +168,7 @@ module Decidim::DecidimAwesome
 
         before do
           Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(
-            follow_up_questionnaire: follow_up_questionnaire,
+            follow_up_questionnaire:,
             status: statuses.second,
             author: user,
             decidim_user_id: respondent.id
@@ -180,7 +191,7 @@ module Decidim::DecidimAwesome
       context "when the body is present and the status changed" do
         before do
           Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(
-            follow_up_questionnaire: follow_up_questionnaire,
+            follow_up_questionnaire:,
             status: statuses.second,
             author: user,
             decidim_user_id: respondent.id
@@ -202,8 +213,8 @@ module Decidim::DecidimAwesome
       context "when the body is present and the status did not change" do
         before do
           Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(
-            follow_up_questionnaire: follow_up_questionnaire,
-            status: status,
+            follow_up_questionnaire:,
+            status:,
             author: user,
             decidim_user_id: respondent.id
           )

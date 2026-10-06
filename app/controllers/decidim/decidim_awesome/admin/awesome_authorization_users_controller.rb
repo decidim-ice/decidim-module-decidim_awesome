@@ -7,6 +7,7 @@ module Decidim
     module Admin
       class AwesomeAuthorizationUsersController < DecidimAwesome::Admin::ApplicationController
         include Decidim::Admin::Filterable
+
         helper ConfigConstraintsHelpers
 
         before_action do
@@ -32,7 +33,7 @@ module Decidim
             end
 
             on(:invalid) do |error|
-              flash.now[:alert] = I18n.t("decidim.decidim_awesome.admin.awesome_authorization_users.create.error", error: error)
+              flash.now[:alert] = I18n.t("decidim.decidim_awesome.admin.awesome_authorization_users.create.error", error:)
               render :new
             end
           end

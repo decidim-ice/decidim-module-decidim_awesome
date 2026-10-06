@@ -16,18 +16,11 @@ module Decidim
       end
 
       def total
-        @total ||= Decidim::Proposals::Proposal.joins(:extra_fields)
-                                               .where(component: self)
-                                               .where.not(extra_fields: { private_body: nil })
-                                               .count.to_s
+        @total ||= private_bodies.count.to_s
       end
 
       def last_date
-        @last_date ||= Decidim::Proposals::Proposal.joins(:extra_fields)
-                                                   .where(component: self)
-                                                   .where.not(extra_fields: { private_body: nil })
-                                                   .order(private_body_updated_at: :desc)
-                                                   .first&.extra_fields&.private_body_updated_at
+        @last_date ||= private_bodies.maximum(:private_body_updated_at)
       end
 
       def time_ago
@@ -64,6 +57,14 @@ module Decidim
         return if last_date
 
         I18n.t("decidim.decidim_awesome.admin.private_data.private_data.done")
+      end
+
+      private
+
+      def private_bodies
+        ProposalExtraField.with_deleted
+                          .where(proposal: Decidim::Proposals::Proposal.with_deleted.where(component: __getobj__))
+                          .where.not(private_body: nil)
       end
     end
   end

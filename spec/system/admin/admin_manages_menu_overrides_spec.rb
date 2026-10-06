@@ -50,7 +50,7 @@ describe "Admin manages hacked menus" do
 
         within "table tbody" do
           expect(page).to have_content("A new beggining")
-          expect(page).to have_no_content("Home")
+          expect(page).to have_no_content(default_menu_item[:label])
         end
       end
 
@@ -118,7 +118,7 @@ describe "Admin manages hacked menus" do
           within "table tbody" do
             expect(page).to have_content("Another thing")
             expect(page).to have_no_content("A new beggining")
-            expect(page).to have_no_content("Home")
+            expect(page).to have_no_content(default_menu_item[:label])
           end
         end
 
@@ -180,22 +180,14 @@ describe "Admin manages hacked menus" do
 
   context "with main menu" do
     let!(:menu_name) { "menu" }
-    let(:default_menu_labels) { %w(Home Processes) }
-    let(:default_menu_item) { { label: "Home", path: "/" } }
+    let(:default_menu_labels) { %w(Processes) }
+    let(:default_menu_item) { { label: "Processes", path: "/processes" } }
 
     it_behaves_like "admin manages menu overrides"
   end
 
   context "with mobile menu" do
     let!(:menu_name) { "mobile_menu" }
-    let(:default_menu_labels) { %w(Home Processes) }
-    let(:default_menu_item) { { label: "Home", path: "/" } }
-
-    it_behaves_like "admin manages menu overrides"
-  end
-
-  context "with home content block menu" do
-    let!(:menu_name) { "home_content_block_menu" }
     let(:default_menu_labels) { %w(Processes) }
     let(:default_menu_item) { { label: "Processes", path: "/processes" } }
 

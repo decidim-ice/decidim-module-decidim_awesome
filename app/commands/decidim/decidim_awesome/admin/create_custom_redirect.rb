@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class CreateCustomRedirect < Command
         include NeedsConstraintHelpers
+
         # Public: Initializes the command.
         #
         def initialize(form)
@@ -39,7 +40,7 @@ module Decidim
           return false unless find_var
           return false unless find_var.value.is_a? Hash
 
-          find_var.value[form.origin].present?
+          find_var.value[form.normalized_origin].present?
         end
       end
     end

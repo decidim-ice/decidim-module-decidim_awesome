@@ -20,7 +20,7 @@ module Decidim
           return unless existing_emendations.any?
 
           flash[:alert] = t("pending_limit_reached", scope: "decidim.decidim_awesome.amendments", emendation: translated_attribute(existing_emendations.first.title))
-          redirect_back(fallback_location: Decidim::ResourceLocatorPresenter.new(amendable).path)
+          redirect_back_or_to(Decidim::ResourceLocatorPresenter.new(amendable).path)
         end
 
         def existing_emendations

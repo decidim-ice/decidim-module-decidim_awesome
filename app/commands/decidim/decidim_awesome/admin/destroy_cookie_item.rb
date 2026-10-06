@@ -14,7 +14,7 @@ module Decidim
           @category_slug = category_slug.to_s
           @item_name = item_name.to_s
           @organization = organization
-          @config = AwesomeConfig.find_by(organization: organization, var: :cookie_management)
+          @config = AwesomeConfig.find_by(organization:, var: :cookie_management)
         end
 
         attr_reader :category_slug, :item_name, :organization, :config

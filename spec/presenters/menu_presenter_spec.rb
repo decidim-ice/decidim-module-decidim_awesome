@@ -76,8 +76,8 @@ module Decidim
           have_css("ul") &
           have_css("li", count: 3) &
           have_link("Bar", href: "/bar") &
-          have_link("Fumanchu", href: "/foo") &
-          have_link("Baz", href: "/baz")
+          have_link("Fumanchu", href: "/#{I18n.locale}/foo") &
+          have_link("Baz", href: "/#{I18n.locale}/baz")
       end
 
       it "renders the menu in the right order" do
@@ -121,8 +121,8 @@ module Decidim
         expect(subject.render).to \
           have_css("ul") &
           have_css("li", count: 2) &
-          have_link("Baz", href: "/baz") &
-          have_link("Fumanchu", href: "/foo")
+          have_link("Baz", href: "/#{I18n.locale}/baz") &
+          have_link("Fumanchu", href: "/#{I18n.locale}/foo")
       end
 
       it "renders the menu in the right order" do
@@ -158,6 +158,14 @@ module Decidim
 
       it_behaves_like "has overridden items"
       it_behaves_like "removed item is not present and other items are overridden"
+
+      context "and an item points to a protocol-relative url" do
+        let(:override) { [{ url: "//docs.example.org/guide", label: { "en" => "Docs" }, position: 10 }] }
+
+        it "renders the url untouched" do
+          expect(subject.render).to have_link("Docs", href: "//docs.example.org/guide")
+        end
+      end
     end
   end
 end

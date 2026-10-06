@@ -56,8 +56,19 @@ module Decidim::Proposals
         get(:index, params:)
 
         expect(response).to have_http_status(:ok)
-        expect(controller.helpers.available_orders).to eq(%w(random recent supported_first supported_last az za most_voted most_liked most_commented most_followed with_more_authors))
+        expect(controller.helpers.available_orders).to eq(%w(random recent supported_first supported_last az za most_voted most_followed))
         expect(controller.send(:collation)).to eq('COLLATE "en-x-icu"')
+      end
+
+      context "when proposals have likes, comments and several authors" do
+        let!(:proposal1) { create(:proposal, :with_likes, title: { en: "m middle" }, component:, users: [user, create(:user, :confirmed, organization: component.organization)]) }
+        let!(:comment) { create(:comment, commentable: proposal1) }
+
+        it "offers the data-dependent orders too" do
+          get(:index, params:)
+
+          expect(controller.helpers.available_orders).to eq(%w(random recent supported_first supported_last az za most_voted most_liked most_commented most_followed with_more_authors))
+        end
       end
 
       context "when collation is not found" do
@@ -66,7 +77,7 @@ module Decidim::Proposals
         it "has order filters" do
           get(:index, params:)
           expect(response).to have_http_status(:ok)
-          expect(controller.helpers.available_orders).to eq(%w(random recent supported_first supported_last az za most_voted most_liked most_commented most_followed with_more_authors))
+          expect(controller.helpers.available_orders).to eq(%w(random recent supported_first supported_last az za most_voted most_followed))
           expect(controller.send(:collation)).to be_blank
         end
       end
@@ -78,7 +89,7 @@ module Decidim::Proposals
           get(:index, params:)
 
           expect(response).to have_http_status(:ok)
-          expect(controller.helpers.available_orders).to eq(%w(random recent most_voted most_liked most_commented most_followed with_more_authors))
+          expect(controller.helpers.available_orders).to eq(%w(random recent most_voted most_followed))
         end
       end
 
@@ -89,7 +100,7 @@ module Decidim::Proposals
           get(:index, params:)
 
           expect(response).to have_http_status(:ok)
-          expect(controller.helpers.available_orders).to eq(%w(random recent az supported_last most_voted most_liked most_commented most_followed with_more_authors))
+          expect(controller.helpers.available_orders).to eq(%w(random recent az supported_last most_voted most_followed))
         end
       end
 
@@ -100,7 +111,7 @@ module Decidim::Proposals
           get(:index, params:)
 
           expect(response).to have_http_status(:ok)
-          expect(controller.helpers.available_orders).to eq(%w(random recent az most_voted most_liked most_commented most_followed with_more_authors))
+          expect(controller.helpers.available_orders).to eq(%w(random recent az most_voted most_followed))
         end
       end
 
@@ -111,7 +122,7 @@ module Decidim::Proposals
           get(:index, params:)
 
           expect(response).to have_http_status(:ok)
-          expect(controller.helpers.available_orders).to eq(%w(random recent supported_first supported_last az za most_voted most_liked most_commented most_followed with_more_authors))
+          expect(controller.helpers.available_orders).to eq(%w(random recent supported_first supported_last az za most_voted most_followed))
         end
 
         context "when customized" do
@@ -121,7 +132,7 @@ module Decidim::Proposals
             get(:index, params:)
 
             expect(response).to have_http_status(:ok)
-            expect(controller.helpers.available_orders).to eq(%w(random recent az za most_voted most_liked most_commented most_followed with_more_authors))
+            expect(controller.helpers.available_orders).to eq(%w(random recent az za most_voted most_followed))
           end
 
           context "when constrained" do
@@ -131,7 +142,7 @@ module Decidim::Proposals
               get(:index, params:)
 
               expect(response).to have_http_status(:ok)
-              expect(controller.helpers.available_orders).to eq(%w(random recent az za most_voted most_liked most_commented most_followed with_more_authors))
+              expect(controller.helpers.available_orders).to eq(%w(random recent az za most_voted most_followed))
             end
           end
         end
@@ -302,7 +313,7 @@ module Decidim::Proposals
           get(:index, params:)
 
           expect(response).to have_http_status(:ok)
-          expect(controller.helpers.available_orders).to eq(%w(random recent az za most_liked most_commented most_followed with_more_authors))
+          expect(controller.helpers.available_orders).to eq(%w(random recent az za most_followed))
         end
       end
 
@@ -315,7 +326,7 @@ module Decidim::Proposals
           get(:index, params:)
 
           expect(response).to have_http_status(:ok)
-          expect(controller.helpers.available_orders).to eq(%w(random recent az za most_voted most_liked most_commented most_followed with_more_authors))
+          expect(controller.helpers.available_orders).to eq(%w(random recent az za most_voted most_followed))
         end
       end
 

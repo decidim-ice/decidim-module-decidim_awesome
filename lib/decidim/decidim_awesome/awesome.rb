@@ -2,7 +2,19 @@
 
 module Decidim
   module DecidimAwesome
-    include ActiveSupport::Configurable
+    # Stores all feature settings, readable both as methods and as a hash
+    mattr_reader :config, instance_accessor: false, default: ActiveSupport::OrderedOptions.new
+
+    def self.configure
+      yield config
+    end
+
+    # Registers a setting with its default value, accessible as both
+    # DecidimAwesome.<name> and DecidimAwesome.config[:<name>]
+    def self.config_accessor(name)
+      config[name] = yield if block_given?
+      singleton_class.delegate name, :"#{name}=", to: :config
+    end
 
     autoload :AwesomeHelpers, "decidim/decidim_awesome/awesome_helpers"
     autoload :RequestMemoizer, "decidim/decidim_awesome/request_memoizer"
@@ -290,10 +302,6 @@ module Decidim
       []
     end
 
-    config_accessor :home_content_block_menu do
-      []
-    end
-
     # Configurable rich text content block for landing pages.
     # Supports multi-column layouts, backgrounds, and access restrictions.
     config_accessor :rich_text_block do
@@ -530,8 +538,8 @@ module Decidim
         name = Decidim::TranslationsHelper.multi_translation("decidim.decidim_awesome.default_statuses.#{attrs[:key]}", locales)
 
         FollowUpQuestionnaireStatus.create!(
-          follow_up_questionnaire: follow_up_questionnaire,
-          name: name,
+          follow_up_questionnaire:,
+          name:,
           color: attrs[:color]
         )
       end

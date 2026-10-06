@@ -127,6 +127,16 @@ module Decidim::DecidimAwesome
 
           expect(AwesomeConfig.find_by(organization:, var: :custom_redirects).value).to eq(previous_redirection)
         end
+
+        context "and the origin is typed with a locale prefix" do
+          let(:origin) { "/en/some-path" }
+
+          it "broadcasts :invalid and does not overwrite the existing redirection" do
+            expect { subject.call }.to broadcast(:invalid)
+
+            expect(AwesomeConfig.find_by(organization:, var: :custom_redirects).value).to eq(previous_redirection)
+          end
+        end
       end
     end
   end

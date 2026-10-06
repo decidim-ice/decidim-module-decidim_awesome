@@ -19,21 +19,16 @@ namespace :decidim_decidim_awesome do
     end
 
     def install_decidim_awesome_npm
-      decidim_awesome_npm_dependencies.each do |type, packages|
-        puts "install NPM packages. You can also do this manually with this command:"
-        puts "npm i --save-#{type} #{packages.join(" ")}"
-        system! "npm i --save-#{type} #{packages.join(" ")}"
-      end
+      puts "install NPM packages. You can also do this manually with this command:"
+      puts "npm i --save-prod #{decidim_awesome_npm_dependencies.join(" ")}"
+      system! "npm i --save-prod #{decidim_awesome_npm_dependencies.join(" ")}"
     end
 
+    # Runtime packages only: the module devDependencies are lint tooling the host already gets from Decidim
     def decidim_awesome_npm_dependencies
       @decidim_awesome_npm_dependencies ||= begin
         package_json = JSON.parse(File.read(decidim_awesome_path.join("package.json")))
-
-        {
-          prod: package_json["dependencies"].map { |package, version| "#{package}@#{version}" },
-          dev: package_json["devDependencies"].map { |package, version| "#{package}@#{version}" }
-        }.freeze
+        package_json["dependencies"].map { |package, version| "#{package}@#{version}" }.freeze
       end
     end
 

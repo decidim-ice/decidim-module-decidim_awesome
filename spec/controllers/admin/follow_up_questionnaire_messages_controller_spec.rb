@@ -14,7 +14,7 @@ module Decidim::DecidimAwesome
       let(:questionnaire) { create(:questionnaire) }
       let!(:survey) { create(:survey, component:, questionnaire:) }
       let!(:follow_up_questionnaire) do
-        create(:awesome_follow_up_questionnaire, questionnaire: questionnaire, name: { "en" => "Follow up" }, organization:)
+        create(:awesome_follow_up_questionnaire, questionnaire:, name: { "en" => "Follow up" }, organization:)
       end
       let!(:status) do
         Decidim::DecidimAwesome.create_default_statuses!(follow_up_questionnaire)
@@ -145,7 +145,7 @@ module Decidim::DecidimAwesome
         before { create(:response, questionnaire:, question: create(:questionnaire_question, questionnaire:), user: respondent) }
 
         it "creates the message" do
-          expect { post :create, params: params }.to change(Decidim::DecidimAwesome::FollowUpQuestionnaireMessage, :count).by(1)
+          expect { post :create, params: }.to change(Decidim::DecidimAwesome::FollowUpQuestionnaireMessage, :count).by(1)
 
           expect(flash[:notice]).to eq("Message sent successfully")
           expect(response).to redirect_to(follow_up_questionnaire_messages_path(follow_up_questionnaire.decidim_questionnaire_id))
@@ -195,15 +195,15 @@ module Decidim::DecidimAwesome
 
           def create_previous_message(status:)
             Decidim::DecidimAwesome::FollowUpQuestionnaireMessage.create!(
-              follow_up_questionnaire: follow_up_questionnaire,
-              status: status,
+              follow_up_questionnaire:,
+              status:,
               author: user,
               decidim_user_id: respondent.id
             )
           end
 
           context "and the status did not change" do
-            before { create_previous_message(status: status) }
+            before { create_previous_message(status:) }
 
             it "does not create a message" do
               expect { post :create, params: blank_body_params }.not_to change(Decidim::DecidimAwesome::FollowUpQuestionnaireMessage, :count)

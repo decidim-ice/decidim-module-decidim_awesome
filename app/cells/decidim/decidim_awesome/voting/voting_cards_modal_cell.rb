@@ -11,10 +11,11 @@ module Decidim
         end
 
         def vote_instructions
-          instructions = translated_attribute(current_component.settings.voting_cards_instructions).presence ||
-                         t("decidim.decidim_awesome.voting.voting_cards.default_instructions_html", organization: translated_attribute(current_organization.name))
+          organization_name = translated_attribute(current_organization.name)
+          instructions = translated_attribute(current_component.settings.voting_cards_instructions).presence
+          return t("decidim.decidim_awesome.voting.voting_cards.default_instructions_html", organization: organization_name) unless instructions
 
-          format(instructions, organization: translated_attribute(current_organization.name))
+          instructions.gsub("%{organization}", organization_name)
         end
       end
     end

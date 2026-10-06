@@ -99,4 +99,13 @@ describe EtiquetteValidator do
   it_behaves_like "attribute marks validation", :body
   it_behaves_like "attribute start with caps validation", :title
   it_behaves_like "attribute start with caps validation", :body
+
+  context "when caps limit is 0%" do
+    let(:title_max_caps_percent) { 0 }
+    let(:title_start_with_caps) { false }
+    let(:config_helper) { validate_title_max_caps_percent }
+    let(:title) { "a title without any capitals" }
+
+    it { is_expected.to be_valid }
+  end
 end

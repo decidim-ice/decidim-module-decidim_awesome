@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class CookieCategoriesController < DecidimAwesome::Admin::ApplicationController
         include CookieManagementHelpers
+
         helper ConfigConstraintsHelpers
 
         helper_method :categories
@@ -37,7 +38,7 @@ module Decidim
 
             on(:invalid) do |error_message|
               error = error_message.presence || @form.errors.full_messages.join(", ")
-              flash.now[:alert] = I18n.t("cookie_categories.create.error", scope: "decidim.decidim_awesome.admin", error: error)
+              flash.now[:alert] = I18n.t("cookie_categories.create.error", scope: "decidim.decidim_awesome.admin", error:)
               render :new
             end
           end
@@ -54,7 +55,7 @@ module Decidim
 
             on(:invalid) do |error_message|
               error = error_message.presence || @form.errors.full_messages.join(", ")
-              flash.now[:alert] = I18n.t("cookie_categories.update.error", scope: "decidim.decidim_awesome.admin", error: error)
+              flash.now[:alert] = I18n.t("cookie_categories.update.error", scope: "decidim.decidim_awesome.admin", error:)
               render :edit
             end
           end

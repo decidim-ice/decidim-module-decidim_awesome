@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class CookieCategoryForm < Decidim::Form
         include Decidim::TranslatableAttributes
+
         VISIBILITY_STATES = %w(visible hidden).freeze
 
         attribute :slug, String

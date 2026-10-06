@@ -63,6 +63,11 @@ describe "Questionnaires" do
       end
     end
 
+    it "exposes the questionnaire_answered flag so the draft can be cleared after submitting" do
+      visit questionnaire_path
+      expect(page.body).to have_content("window.DecidimAwesome.questionnaire_answered")
+    end
+
     context "when awesome config is disabled" do
       let!(:awesome_config) { create(:awesome_config, organization:, var: :auto_save_forms, value: false) }
 

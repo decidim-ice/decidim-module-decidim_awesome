@@ -12,7 +12,7 @@ module Decidim::DecidimAwesome
       let(:component) { create(:component, manifest_name: "surveys", organization:) }
       let(:questionnaire) { create(:questionnaire) }
       let!(:survey) { create(:survey, component:, questionnaire:) }
-      let!(:follow_up_questionnaire) { create(:awesome_follow_up_questionnaire, questionnaire: questionnaire, name: { "en" => "Follow up" }, organization:) }
+      let!(:follow_up_questionnaire) { create(:awesome_follow_up_questionnaire, questionnaire:, name: { "en" => "Follow up" }, organization:) }
 
       before do
         request.env["decidim.current_organization"] = organization
@@ -31,7 +31,7 @@ module Decidim::DecidimAwesome
           get :new, params: { follow_up_questionnaire_id: follow_up_questionnaire.id }
 
           expect(response.body).to include('id="follow_up_questionnaire_status_color_f6f8fa"')
-          expect(response.body).to match(%r{<label for="follow_up_questionnaire_status_color_f6f8fa">Gray</label>})
+          expect(response.body).to include('<label for="follow_up_questionnaire_status_color_f6f8fa">Gray</label>')
         end
       end
 
@@ -48,7 +48,7 @@ module Decidim::DecidimAwesome
         end
 
         it "creates the status" do
-          expect { post :create, params: params }.to change(Decidim::DecidimAwesome::FollowUpQuestionnaireStatus, :count).by(1)
+          expect { post :create, params: }.to change(Decidim::DecidimAwesome::FollowUpQuestionnaireStatus, :count).by(1)
           expect(flash[:notice]).not_to be_empty
           expect(response).to redirect_to(edit_follow_up_questionnaire_path(follow_up_questionnaire.decidim_questionnaire_id))
         end
@@ -57,9 +57,9 @@ module Decidim::DecidimAwesome
           before { params[:follow_up_questionnaire_status][:name] = { en: "" } }
 
           it "does not create the status" do
-            expect { post :create, params: params }.not_to change(Decidim::DecidimAwesome::FollowUpQuestionnaireStatus, :count)
+            expect { post :create, params: }.not_to change(Decidim::DecidimAwesome::FollowUpQuestionnaireStatus, :count)
             expect(flash[:alert]).to be_present
-            expect(response).to have_http_status(:unprocessable_entity)
+            expect(response).to have_http_status(:unprocessable_content)
           end
         end
 
@@ -67,7 +67,7 @@ module Decidim::DecidimAwesome
           let!(:existing_status) { follow_up_questionnaire.statuses.create!(name: { "en" => "Open" }, color: "#EBF9FF") }
 
           it "does not create a duplicate status" do
-            expect { post :create, params: params }.not_to change(Decidim::DecidimAwesome::FollowUpQuestionnaireStatus, :count)
+            expect { post :create, params: }.not_to change(Decidim::DecidimAwesome::FollowUpQuestionnaireStatus, :count)
             expect(flash[:alert]).to be_present
           end
 
@@ -75,7 +75,7 @@ module Decidim::DecidimAwesome
             before { params[:follow_up_questionnaire_status][:name] = { en: "open" } }
 
             it "does not create a duplicate status" do
-              expect { post :create, params: params }.not_to change(Decidim::DecidimAwesome::FollowUpQuestionnaireStatus, :count)
+              expect { post :create, params: }.not_to change(Decidim::DecidimAwesome::FollowUpQuestionnaireStatus, :count)
               expect(flash[:alert]).to include("That name is already used by another label in this questionnaire.")
             end
           end
@@ -112,7 +112,7 @@ module Decidim::DecidimAwesome
         end
 
         it "updates the status" do
-          patch :update, params: params
+          patch(:update, params:)
           expect(flash[:notice]).not_to be_empty
           expect(response).to redirect_to(edit_follow_up_questionnaire_path(follow_up_questionnaire.decidim_questionnaire_id))
           expect(status.reload.name["en"]).to eq("Closed")
@@ -122,7 +122,7 @@ module Decidim::DecidimAwesome
           before { params[:follow_up_questionnaire_status][:name] = { en: "" } }
 
           it "does not update the status" do
-            patch :update, params: params
+            patch(:update, params:)
             expect(flash[:alert]).to be_present
             expect(status.reload.name["en"]).not_to eq("")
           end
@@ -132,7 +132,7 @@ module Decidim::DecidimAwesome
           before { params[:follow_up_questionnaire_status][:name] = { en: "Open" } }
 
           it "updates the status" do
-            patch :update, params: params
+            patch(:update, params:)
             expect(flash[:notice]).not_to be_empty
             expect(status.reload.color).to eq("#FFEBE9")
           end
@@ -145,7 +145,7 @@ module Decidim::DecidimAwesome
           end
 
           it "does not update the status" do
-            patch :update, params: params
+            patch(:update, params:)
             expect(flash[:alert]).to include("That name is already used by another label in this questionnaire.")
             expect(status.reload.name["en"]).to eq("Open")
           end
@@ -202,7 +202,7 @@ module Decidim::DecidimAwesome
         end
 
         it "creates the status in the questionnaire of the URL" do
-          expect { post :create, params: params }.to change(follow_up_questionnaire.statuses, :count).by(1)
+          expect { post :create, params: }.to change(follow_up_questionnaire.statuses, :count).by(1)
           expect(other_follow_up_questionnaire.statuses).to be_empty
         end
       end

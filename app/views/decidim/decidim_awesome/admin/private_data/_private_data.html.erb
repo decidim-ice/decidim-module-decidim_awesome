@@ -20,7 +20,13 @@
       <% collection.each do |resource| %>
         <% item = present(resource) %>
         <tr data-id="<%= item.id %>">
-          <td><%= link_to item.name, item.path %></td>
+          <td>
+            <% if item.deleted_at %>
+              <%= item.name %>
+            <% else %>
+              <%= link_to item.name, item.path %>
+            <% end %>
+          </td>
           <td data-autorefresh="total"><%= item.total %></td>
           <td data-autorefresh="time_ago"><%= item.time_ago %></td>
           <td data-autorefresh="done">

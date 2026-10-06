@@ -89,7 +89,7 @@ module Decidim
         model_class = manifest.model_class_name.safe_constantize
         return unless model_class
 
-        where = { organization: organization }
+        where = { organization: }
         if space_slug.present?
           id_key = model_class.column_names.include?("slug") ? :slug : :id
           where[id_key] = space_slug

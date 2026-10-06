@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class UpdateCustomRedirect < Command
         include NeedsConstraintHelpers
+
         # Public: Initializes the command.
         #
         def initialize(form, item)

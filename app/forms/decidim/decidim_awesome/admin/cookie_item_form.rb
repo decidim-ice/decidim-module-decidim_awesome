@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class CookieItemForm < Decidim::Form
         include Decidim::TranslatableAttributes
+
         ITEM_TYPES = %w(cookie local_storage).freeze
 
         attribute :name, String
@@ -15,7 +16,7 @@ module Decidim
 
         validates :name, presence: true
         validates :name, format: {
-          with: /\A[a-zA-Z0-9_\-]+\z/,
+          with: /\A[a-zA-Z0-9_-]+\z/,
           message: :invalid_format
         }
         validates :type, inclusion: { in: ITEM_TYPES }

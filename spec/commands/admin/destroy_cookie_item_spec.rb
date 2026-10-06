@@ -11,7 +11,7 @@ module Decidim::DecidimAwesome
       let(:category_slug) { "awesome-analytics" }
       let(:item_name) { "Decidim Awesome Analytics" }
       let(:cookie_management_config) do
-        AwesomeConfig.find_or_create_by!(organization: organization, var: "cookie_management") do |config|
+        AwesomeConfig.find_or_create_by!(organization:, var: "cookie_management") do |config|
           config.value = {
             category_slug => {
               "slug" => category_slug,

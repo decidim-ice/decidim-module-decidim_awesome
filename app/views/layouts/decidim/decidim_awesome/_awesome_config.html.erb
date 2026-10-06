@@ -25,8 +25,8 @@ window.DecidimAwesome.i18n.awesomeAuthorizationGroupsPlaceholder = "<%= j t(".aw
 window.DecidimAwesome.formBuilderLangsLocation = "<%= decidim_decidim_awesome.form_builder_i18n_path(locale: nil) %>";
 <% if defined?(questionnaire) && (questionnaire rescue nil)&.id %>
   window.DecidimAwesome.current_questionnaire = "edit_questionnaire_<%= questionnaire.id %>";
-  <% if defined? visitor_already_answered? %>
-  window.DecidimAwesome.questionnaire_answered = <%= visitor_already_answered? %>;
+  <% if defined? visitor_already_responded? %>
+  window.DecidimAwesome.questionnaire_answered = <%= visitor_already_responded? %>;
   <% end %>
 <% end %>
 </script>
