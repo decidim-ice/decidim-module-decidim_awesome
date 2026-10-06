@@ -146,8 +146,6 @@ cs:
             truncate: Maximum znaků pro popisy vyskakovacích oken
           step:
             announcement: Oznámení
-            show_accepted: Zobrazit přijaté návrhy
-            show_evaluating: Zobrazit hodnocení návrhů
             show_not_answered: Zobrazit nezodpovězené návrhy
             show_rejected: Zobrazit odmítnuté návrhy
             show_withdrawn: Zobrazit stažené návrhy
@@ -173,6 +171,9 @@ cs:
             voting_cards_show_abstain: Přidat možnost zdržet se hlasování
             voting_cards_show_modal_help: Po kliknutí na podporu zobrazit instrukce/nápovědu
           step:
+            awesome_votes_enabled_by_status: Omezit hlasování podle stavu návrhu
+            awesome_votes_enabled_by_status_help: Pokud je povoleno, hlasování je povoleno pouze u návrhů s vybranými stavy. Návrhy v jiných státech hlasování nepřijmou. Ponechte prázdné pro umožnění hlasování o všech návrzích bez ohledu na status.
+            awesome_votes_enabled_states: Povolené stavy pro hlasování
             default_sort_order_options:
               az: A-Z (abecední)
               supported_first: Nejdříve podporováno
@@ -230,7 +231,12 @@ cs:
           authorization_not_destroyed: Autorizaci nelze zničit!
           authorization_transferred: 'Varování: Došlo k ověřovacímu konfliktu a ověření bylo převedeno na %{user}'
           conflict: Existuje konflikt s existující autorizací
-          conflict_help_html: "Musíte vyřešit konflikt s uživatelem %{user} předtím, než budete moci autorizovat uživatele s touto autorizací.\n<br><br>\nKonflikt ověření se stane, když jiný uživatel má stejná data jako uživatel, který se pokoušíte autorizovat \nTento konflikt můžete vyřešit odstraněním konfliktní autorizace od jiného uživatele nebo použitím jiných dat tohoto uživatele.\n"
+          conflict_help_html: |
+            Musíte vyřešit konflikt s uživatelem %{user} předtím, než budete moci autorizovat uživatele s touto autorizací.
+            <br><br>
+            Konflikt ověření se stane, když jiný uživatel má stejná data jako uživatel, který se pokoušíte autorizovat 
+            Tento konflikt můžete vyřešit odstraněním konfliktní autorizace od jiného uživatele nebo použitím jiných dat tohoto uživatele.
+
           edit:
             authorize: Autorizovat %{user} s %{name}
             do_it_if_sure: Udělejte to pouze v případě, že jste si jisti, že uživatel má tuto autorizaci.
@@ -325,7 +331,14 @@ cs:
               original_editor_override: Od verze 0.26 je možné nahrávat obrázky do editorů (pouze pro administrátory). Proto zde nastavení obrázků ovlivňuje pouze veřejné editory (správce je bude mít vždy k dispozici).
               proposal_custom_fields: Vytvoření vlastních polí návrhu, která se použijí pouze v určitých částech veřejného webu (použijte k tomu editor omezení)
               proposal_custom_fields_example: Data jsou uložena v objektu XML pomocí kompatibilních atributů HTML (prvky dl,dt,dd), které v běžném návrhu nahrazují "tělo".
-              proposal_custom_fields_translations: "Štítky, nápověda, zástupné symboly a výchozí hodnoty mohou používat vlastní překlady aplikace. \nPro to použijte klíč i18n (musí obsahovat alespoň jednu tečku), místo použití textového literálu.\nNapříklad:\n- \"activemodel.attributes.proposal.title\" namísto \"Title\"\n- \"activemodel.attributes.proposal.address\" namísto \"Adresa\"\nNebo použijte vlastní klíče v kombinaci s jinými nástroji pro definování překladů (např. pomocí úpravy termínu modulu):\n - \"myapp.custom_fields.bio\" namísto „Životopis“"
+              proposal_custom_fields_translations: |-
+                Štítky, nápověda, zástupné symboly a výchozí hodnoty mohou používat vlastní překlady aplikace. 
+                Pro to použijte klíč i18n (musí obsahovat alespoň jednu tečku), místo použití textového literálu.
+                Například:
+                - "activemodel.attributes.proposal.title" namísto "Title"
+                - "activemodel.attributes.proposal.address" namísto "Adresa"
+                Nebo použijte vlastní klíče v kombinaci s jinými nástroji pro definování překladů (např. pomocí úpravy termínu modulu):
+                 - "myapp.custom_fields.bio" namísto „Životopis“
               proposal_private_custom_fields: Podobné jako veřejná pole, ale tyto informace nebudou zveřejněny (k nim budou mít přístup pouze administrátoři).
               proposal_private_custom_fields_translations: |
                 Soukromá vlastní pole jsou zobrazena v jiném poli s tímto informačním textem:
@@ -660,7 +673,6 @@ cs:
           proposals: Návrhy hacků
           styles: Vlastní styly
           surveys: Průzkumy a formuláře
-          verifications: Ověření
         menu_hacks:
           create:
             error: Chyba při vytváření položky menu! %{error}
@@ -863,8 +875,6 @@ cs:
           menu_meetings: Zobrazit schůzky
           menu_merge_components: Sloučit všechny komponenty stejného typu v menu
           name: Úžasná mapa
-          show_accepted: Zobrazit přijaté návrhy
-          show_evaluating: Zobrazit hodnocení návrhů
           show_not_answered: Zobrazit nezodpovězené návrhy
           show_rejected: Zobrazit odmítnuté návrhy
           show_withdrawn: Zobrazit stažené návrhy
