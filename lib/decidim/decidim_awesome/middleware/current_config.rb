@@ -100,7 +100,7 @@ module Decidim
 
         spaces = ContextAnalyzers::RequestAnalyzer.participatory_spaces_routes.keys.join("|^(/admin){0,1}/")
         case request_path
-        when %r{"|^(/admin){0,1}/#{spaces}}
+        when %r{^(/admin){0,1}/#{spaces}}
           true
         when %r{^/admin/}
           true

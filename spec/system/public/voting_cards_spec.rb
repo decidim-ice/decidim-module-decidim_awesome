@@ -816,6 +816,8 @@ describe "Voting weights with cards" do
               click_on "Grid mode"
             end
             expect(page).to have_css(".card__grid-grid")
+            # the help modal is wired by the Decidim initializer, vote clicks before that would bypass it
+            expect(page).to have_css("#voting-cards-help-modal[role='dialog']", visible: :all)
           end
 
           it "allows voting with green card" do
@@ -823,7 +825,9 @@ describe "Voting weights with cards" do
               click_on "Green"
             end
 
-            click_on "Proceed"
+            within ".vote_proposal_modal" do
+              click_on "Proceed"
+            end
 
             within "#proposal-#{proposal.id}-vote-button" do
               expect(page).to have_content("Change my vote")
@@ -837,21 +841,27 @@ describe "Voting weights with cards" do
               click_on "Yellow"
             end
 
-            click_on "Proceed"
+            within ".vote_proposal_modal" do
+              click_on "Proceed"
+            end
 
             within "#proposal-#{proposal.id}-vote-button" do
               expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "1")
               click_on "Change my vote"
             end
 
-            click_on "Proceed"
+            within ".vote_proposal_modal" do
+              click_on "Proceed"
+            end
 
             expect(page).to have_css("#proposal-#{proposal.id}-vote-button")
             within "#proposal-#{proposal.id}-vote-button" do
               click_on "Red"
             end
 
-            click_on "Proceed"
+            within ".vote_proposal_modal" do
+              click_on "Proceed"
+            end
 
             expect(page).to have_css("#proposal-#{proposal.id}-vote-button")
             within "#proposal-#{proposal.id}-vote-button" do

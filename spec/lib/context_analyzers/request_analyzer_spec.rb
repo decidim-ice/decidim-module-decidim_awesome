@@ -157,6 +157,19 @@ module Decidim::DecidimAwesome
           expect(described_class.localize("https://example.org/x")).to eq("https://example.org/x")
           expect(described_class.localize("//example.org/x")).to eq("//example.org/x")
         end
+
+        it "leaves paths served outside the locale scope untouched" do
+          expect(described_class.localize("/rails/active_storage/blobs/redirect/abc/file.pdf")).to eq("/rails/active_storage/blobs/redirect/abc/file.pdf")
+          expect(described_class.localize("/system")).to eq("/system")
+          expect(described_class.localize("/meetings")).to eq("/meetings")
+          expect(described_class.localize("/api/graphiql")).to eq("/api/graphiql")
+          expect(described_class.localize("/decidim_awesome/editor_images")).to eq("/decidim_awesome/editor_images")
+        end
+
+        it "still prefixes paths that only start like an unlocalized mount" do
+          expect(described_class.localize("/systems")).to eq("/ca/systems")
+          expect(described_class.localize("/apis")).to eq("/ca/apis")
+        end
       end
     end
   end

@@ -12,7 +12,8 @@ module Decidim
         ).where(private_body_updated_at: ...DecidimAwesome.private_data_expiration_time.ago)
 
         extra_fields.find_each do |extra_field|
-          extra_field.update(private_body: nil)
+          extra_field.private_body = nil
+          extra_field.save!(validate: false)
         end
 
         Lock.new(resource.organization).release!(resource)

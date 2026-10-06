@@ -35,6 +35,12 @@ module Decidim::DecidimAwesome
 
         it { is_expected.not_to be_valid }
 
+        context "and is missing from the params" do
+          let(:origin) { nil }
+
+          it { is_expected.not_to be_valid }
+        end
+
         context "and is only spaces" do
           let(:origin) { "  " }
 

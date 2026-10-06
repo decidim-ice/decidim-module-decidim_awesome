@@ -15,7 +15,7 @@ module Decidim
 
         # i18n-tasks-use t('decidim.decidim_awesome.follow_up_questionnaire_message_mailer.notification.subject')
         I18n.with_locale(recipient_locale) do
-          # Without a configured address the email has no Reply-To, like other Decidim emails
+          # Without a configured address Decidim applies its default Reply-To handling
           mail({ to: email,
                  reply_to: message.follow_up_questionnaire.reply_to.presence,
                  subject: default_i18n_subject(questionnaire: translated_attribute(message.follow_up_questionnaire.name)) }.compact)

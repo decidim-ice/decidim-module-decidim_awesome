@@ -37,7 +37,7 @@ module Decidim
 
           # Renders a local path with the current locale prefix ("/processes" => "/en/processes")
           def localize(path)
-            return path if path.blank? || !path.start_with?("/") || path.start_with?("//")
+            return path if path.blank? || !path.start_with?("/") || path.start_with?("//") || unlocalized?(path)
 
             "/#{I18n.locale}#{strip_locale(path)}"
           end
@@ -46,6 +46,12 @@ module Decidim
 
           def locale_prefix
             @locale_prefix ||= %r{\A/#{Regexp.union(I18n.available_locales.map(&:to_s))}(?=/|\z|\?)}
+          end
+
+          # Mounts kept outside the "/:locale" scope: global engines, the API, the system panel and Rails internals
+          def unlocalized?(path)
+            prefixes = Decidim.global_engines.values.map { |engine| engine[:at] } + %w(/api /rails /system)
+            prefixes.any? { |prefix| path == prefix || path.start_with?("#{prefix}/", "#{prefix}?") }
           end
         end
 

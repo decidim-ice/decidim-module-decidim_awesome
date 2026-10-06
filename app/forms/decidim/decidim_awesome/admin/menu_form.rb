@@ -35,9 +35,16 @@ module Decidim
           }
         end
 
-        # Stored urls carry no locale prefix, the current locale is added when rendering
+        # Stored urls carry neither the organization host nor a locale prefix, the locale is added when rendering
         def normalized_url
-          ContextAnalyzers::RequestAnalyzer.strip_locale(url)
+          ContextAnalyzers::RequestAnalyzer.strip_locale(local_path)
+        end
+
+        private
+
+        def local_path
+          parsed = Addressable::URI.parse(url.to_s.strip)
+          parsed.host.present? && parsed.host == current_organization&.host ? parsed.request_uri : url.to_s.strip
         end
       end
     end

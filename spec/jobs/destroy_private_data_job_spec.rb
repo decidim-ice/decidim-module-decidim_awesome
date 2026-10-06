@@ -57,6 +57,19 @@ module Decidim::DecidimAwesome
       end
     end
 
+    context "when an extra field row does not pass validations" do
+      let!(:duplicate) { ProposalExtraField.new(proposal:, private_body: "private", private_body_updated_at: 4.months.ago) }
+
+      before { duplicate.save(validate: false) }
+
+      it "still cleans up the private data of both rows" do
+        subject.perform_now(component)
+
+        expect(ProposalExtraField.find(extra_field.id).private_body).to be_nil
+        expect(ProposalExtraField.find(duplicate.id).private_body).to be_nil
+      end
+    end
+
     context "when there's a lock adquired" do
       before do
         Lock.new(organization).get!(component)

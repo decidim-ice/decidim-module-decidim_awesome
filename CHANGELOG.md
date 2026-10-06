@@ -6,18 +6,24 @@ v0.15.0
 
 Compatibility:
   - Decidim 0.32.x
+  - Ruby 3.4
 
 Features:
   - Upgrade to Decidim v0.32
+    **NOTE** This version ships a new migration, run `bin/rails decidim_decidim_awesome:install:migrations` and `bin/rails db:migrate` after updating the gem.
     **NOTE** The "home content block menu" feature and its config var `home_content_block_menu` have been removed together with the global menu content block in Decidim. Header and mobile menu hacks remain available.
     **NOTE** The collaborative drafts overrides have been removed together with the feature in Decidim.
 
 Fixes:
-  - Fix menu hacks and custom redirects with locale-prefixed URLs
+  - Menu hacks, landing menu presets and custom redirects work with locale-prefixed URLs
+  - Private data maintenance is scoped to the current organization and also covers proposals in the trash
+  - Hashcash marks on login are verified before the visitor is signed in
   - Fix a race condition in scoped admins that could deny access to legitimate admin pages
+  - Fix edge cases in the voting instructions ("%" in the text) and the etiquette validator (caps limit set to 0)
   - Fix inline renaming of configuration groups in recent Chrome versions
   - Speed up rendering of the landing menu templates
   - Update the cookies consent template to the table markup introduced in Decidim 0.31.7 / 0.32.1
+  - `decidim_decidim_awesome:webpacker:install` only adds the module runtime packages to the host application
 
 v0.14.5
 -------
