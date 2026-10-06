@@ -466,7 +466,6 @@ eu:
           proposals: Proposamenen hackak
           styles: Estilo pertsonalizatuak
           surveys: Inkestak eta formularioak
-          verifications: Egiaztapenak
         menu_hacks:
           create:
             error: Menu elementua sortzean errorea! %{error}
