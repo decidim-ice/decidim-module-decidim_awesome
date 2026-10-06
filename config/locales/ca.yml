@@ -130,9 +130,9 @@ ca:
             limit_pending_amendments: Permetre només una esmena pendent a cada proposta.
             sort_orders_enabled: Opcions d'ordenació actives
             voting_cards_box_title: Títol per la cabina de votació
-            voting_cards_box_title_help: L'opció per defecte és 'Votar a aquesta proposta'. Utilitzeu '-' per amagar-la.
+            voting_cards_box_title_help: L'opció per defecte és "Votar a aquesta proposta". Utilitzeu "-" per amagar-la.
             voting_cards_instructions: Instruccions d'ajuda en el suport/votació (finestra modal que es pot tancar).
-            voting_cards_instructions_help: L'opció per defecte és 'Llegeix les normes de la votació amb atenció per entendre com s'utilitzarà el teu vot per %{organization}"
+            voting_cards_instructions_help: L'opció per defecte és "Llegeix les normes de la votació amb atenció per entendre com s'utilitzarà el teu vot per %{organization}".
             voting_cards_show_abstain: Afegeix l'opció d'abstenció
             voting_cards_show_modal_help: Mostra la finestra modal d'instruccions/ajuda quan es faci clic al suport
           step:
@@ -273,10 +273,7 @@ ca:
               proposal_custom_fields_translations: "Les etiquetes, el text d'ajuda, els \"placeholders\" i els valors predeterminats poden utilitzar les traduccions personalitzades de l'aplicació.\nPer això, en comptes d'utilitzar un text literal, utilitzeu la clau i18n (ha de contenir almenys un punt).\nPer exemple:\n- \"activemodel.attributes.proposal.title\" en lloc de \"Títol\"\n- \"activemodel.attributes.proposal.address\" en lloc de \"Address\"\nO utilitzeu les vostres pròpies claus en combinació amb altres eines per definir traduccions (p. ex.: utilitzant el mòdul Term Customizer):\n- \"myapp.custom_fields.bio\" en lloc de \"Biografia\""
               proposal_private_custom_fields: Similar als camps públics, però aquesta informació no es revelarà públicament (només hi tindran accés els administradors).
               proposal_private_custom_fields_translations: |
-                Els camps personalitzats privats es mostren en un quadre diferent amb aquest text d'informació:
-                %{warning}
-                Aquest text es pot personalitzar amb una traducció personalitzada utilitzant la clau:
-                %{key}
+                Els camps personalitzats privats es mostren en un quadre diferent amb aquest text d'informació: %{warning} Aquest text es pot personalitzar amb una traducció personalitzada utilitzant la clau: %{key} 
               scoped_admin_styles: Tingues en compte que amagar contingut aquí pot deixar l'administrador inservible. Si us plau, actueu amb cautela.
               scoped_admin_styles_variables: 'Pots fer servir les següents variables CSS pels colors personalitzats de l''organització:'
               scoped_admin_styles_warning: "<strong>Atenció</strong>: Aquí podeu afegir CSS que s'aplica només en aquest administrador."
@@ -377,16 +374,12 @@ ca:
             destination_help: Rutes absolutes (comença amb "/") o URLs externes (http://...)
             origin_help: Només rutes absolutes, comença amb "/"
             pass_query_help: |
-              Activa aquesta opció si vols que la cadena de consulta (query string) es copiï a la Url de destinació.<br>
-              Per exemple, si has configurat /my-origin => /my-destination, una petició a /my-origin?locale=ca es redirigirà a "/my-destination?locale=ca".
+              Activa aquesta opció si vols que la cadena de consulta (query string) es copiï a la Url de destinació.<br> Per exemple, si has configurat /my-origin => /my-destination, una petició a /my-origin?locale=ca es redirigirà a "/my-destination?locale=ca". 
           index:
             check_redirections: "✔ Comprova les redireccions"
             confirm_destroy: Segur que vols esborrar aquesta redirecció?
             description: |
-              Pots definir qualsevol ruta (començant amb <code>/</code>) per redirigir la visitant a la URL de destinació.<br>
-              El destí pot ser una ruta absoluta (Exemple: <code>/processes/some-process</code>) o començar amb <code>https://</code> (Exemple: <code>http://decidim.org</code>)<br><br>
-              Tingues en compte que una redirecció només funciona si no hi ha cap altra ruta amb el mateix nom definida dins de Decidim. No es possible sobreescriure rutes que ja existeixen (això es una decisió de disseny).<br>
-              Si tens dubtes, fes servir el botó de comprovar les redireccions per trobar incompatibilitats.
+              Pots definir qualsevol ruta (començant amb <code>/</code>) per redirigir la visitant a la URL de destinació.<br> El destí pot ser una ruta absoluta (Exemple: <code>/processes/some-process</code>) o començar amb <code>https://</code> (Exemple: <code>http://decidim.org</code>)<br><br> Tingues en compte que una redirecció només funciona si no hi ha cap altra ruta amb el mateix nom definida dins de Decidim. No es possible sobreescriure rutes que ja existeixen (això es una decisió de disseny).<br> Si tens dubtes, fes servir el botó de comprovar les redireccions per trobar incompatibilitats. 
             edit: Edita la redirecció
             new: Nova redirecció
             remove: Elimina la redirecció
@@ -407,23 +400,7 @@ ca:
             destroying_private_data: Les dades privades de %{title} s'han programat per ser destruïdes. Si us plau, torneu a comprovar d'aquí a uns minuts.
             done: Fet
             help_html: |
-              Aquesta eina permet esborrar totes les dades privades d'un espai o component participatiu concret. Aquesta acció és irreversible i eliminarà totes les dades privades de la base de dades.
-              <br><br>
-              <strong>Què es consideren dades privades?</strong>
-              <br>
-              Les dades privades són qualsevol informació que no està disponible públicament i només és accessible per als administradors. Això, de moment, inclou la informació del camps personalitzats privats.
-              <br><br>
-              <strong>Què passa quan suprimeixo dades privades?</strong>
-              <br>
-              Quan suprimiu les dades privades, tota la informació privada de l'espai o component participatiu seleccionat s'eliminarà permanentment de la base de dades. Un registre d'aquesta acció s'emmagatzemarà al sistema amb finalitats d'auditoria (pero no les dades en si).
-              <br><br>
-              <strong>Què passa amb les dades públiques?</strong>
-              <br>
-              Les dades públiques no es veuran afectades per aquesta acció. Només s'eliminaran les dades privades.
-              <br><br>
-              <strong>Hi ha un temps mínim d'espera abans de suprimir les dades privades?</strong>
-              <br>
-              Sí, no podeu suprimir dades privades si l'última actualització va ser fa menys de %{time_ago}. Podeu canviar aquesta configuració al fitxer inicialitzador.
+              Aquesta eina permet esborrar totes les dades privades d'un espai o component participatiu concret. Aquesta acció és irreversible i eliminarà totes les dades privades de la base de dades. <br><br> <strong>Què es consideren dades privades?</strong> <br> Les dades privades són qualsevol informació que no està disponible públicament i només és accessible per als administradors. Això, de moment, inclou la informació del camps personalitzats privats. <br><br> <strong>Què passa quan suprimeixo dades privades?</strong> <br> Quan suprimiu les dades privades, tota la informació privada de l'espai o component participatiu seleccionat s'eliminarà permanentment de la base de dades. Un registre d'aquesta acció s'emmagatzemarà al sistema amb finalitats d'auditoria (pero no les dades en si). <br><br> <strong>Què passa amb les dades públiques?</strong> <br> Les dades públiques no es veuran afectades per aquesta acció. Només s'eliminaran les dades privades. <br><br> <strong>Hi ha un temps mínim d'espera abans de suprimir les dades privades?</strong> <br> Sí, no podeu suprimir dades privades si l'última actualització va ser fa menys de %{time_ago}. Podeu canviar aquesta configuració al fitxer inicialitzador. 
             items_count: Total afectats
             last_date: Última actualització
             no_data: No s'han trobat dades privades més antigues que fa %{time_ago}
@@ -515,8 +492,7 @@ ca:
           current_amendment_html: <p>Podeu <a href="%{amendment_link}">accedir a l'esmena actual aquí</a>.</p>
           dismiss: D'acord
           explanation_html: |
-            <p>Actualment, s'està avaluant una altra esmena per a aquesta proposta. Per crear-ne una de nova, heu d'esperar fins que l'actual sigui acceptada o rebutjada.</p>
-            <p>També podeu posar-vos en contacte amb l'autor d'aquesta proposta <a href="%{proposal_link}">deixant un comentari</a> i intentar accelerar la resolució de l'esmena actual.</p>
+            <p>Actualment, s'està avaluant una altra esmena per a aquesta proposta. Per crear-ne una de nova, heu d'esperar fins que l'actual sigui acceptada o rebutjada.</p> <p>També podeu posar-vos en contacte amb l'autor d'aquesta proposta <a href="%{proposal_link}">deixant un comentari</a> i intentar accelerar la resolució de l'esmena actual.</p> 
         pending_limit_reached: Ho sentim, només hi pot haver una esmena pendent alhora. Si us plau, espereu fins que "%{emendation}" sigui acceptat o rebutjat.
       config:
         intergram:
@@ -558,15 +534,16 @@ ca:
       map_component:
         map:
           api_not_ready: |
-            <b>Avís:</b> aquesta instal·lació de Decidim té l'API configurada amb una complexitat màxima de <b>%{current_complexity}</b>.
-            Aquest component probablement no funcionarà amb aquesta configuració. Us recomanem que la configureu en un inicialitzador
-            (per exemple, al final de <code>config/initializers/decidim.rb</code>) hi poseu les línies següents:<br>
+            <b>Avís:</b> aquesta instal·lació de Decidim té l'API configurada\ \ amb una complexitat màxima de <b>%{current_complexity}</b>.
+            Aquest\ \ component probablement no funcionarà amb aquesta configuració. Us recomanem\ \ que la configureu en un inicialitzador
+            (per exemple, al final de <code>config/initializers/decidim.rb</code>)\ \ hi poseu les línies següents:<br>
             <br>
             <pre># Configuració de l'API
-            Rails.application.config.to_prepare do
-              Decidim::Api::Schema.max_complexity = 5000
+            \ Rails.application.config.to_prepare do
+              Decidim::Api::Schema.max_complexity\ \ = 5000
               Decidim::Api::Schema.max_depth = 50
             end</pre>
+
           error:
             unavailable: El mapa no està disponible. SI us plau, configureu la geolocalització en aquesta instal·lació per activar aquest component.
           show:
@@ -590,8 +567,7 @@ ca:
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |
-            Les administradores podran verificar manualment els participants amb aquests verificadors.
-            <br>Utilitzeu aquesta funció amb precaució, ja que pot provocar problemes de seguretat.
+            Les administradores podran verificar manualment els participants amb aquests verificadors. <br>Utilitzeu aquesta funció amb precaució, ja que pot provocar problemes de seguretat. 
           awesome_tweaks: Configuracions del Decidim Awesome
       validators:
         too_much_caps: Fa servir massa lletres majúscules (més %{percent}% del text)
