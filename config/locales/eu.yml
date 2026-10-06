@@ -46,6 +46,26 @@ eu:
         component_manifest: Komponentetako mota hauetan bakarrik
         participatory_space_manifest: Parte-hartze espazio mota hauetan aplikatu
         participatory_space_slug: Hauetan bakarrik
+      content_block_attachment:
+        background_image_0: Hondoko irudia
+        background_image_1: Hondoko irudia
+        background_image_2: Hondoko irudia
+        background_image_3: Hondoko irudia
+        background_image_4: Hondoko irudia
+      cookie_category:
+        mandatory: Derrigorrezkoa
+        slug: IDa
+        title: Kategoria-titulua
+        total_cookies: Cookieak guztira
+        visibility: Ikuspen
+      cookie_item:
+        expiration: Iraungitzea
+        name: Cookie-aren izena
+        service: Zerbitzua
+        type: Mota
+        types:
+          cookie: Cookiea
+          local_storage: Biltegiratze lokala
       custom_redirect:
         active: Aktibo
         destination: Helmuga
@@ -62,6 +82,15 @@ eu:
         awesome_admins_available_authorizations: Administratzaileei parte-hartzaileak eskuz egiaztatzen uztea baimen hauekin
       user:
         user_time_zone: Pertsonako ordu-eremua
+    errors:
+      models:
+        cookie_item:
+          attributes:
+            base:
+              category_not_found: Ez da kategoriarik aurkitu
+            name:
+              cannot_change_default_item_name: Aurrez definitutako elementu baten izena ezin da aldatu
+              invalid_format: Izenak letrak, zenbakiak, azpimarrak (_) eta marratxoak (-) bakarrik eduki ditzake - ez da zuriunerik edo karaktere berezirik onartzen
   decidim:
     admin:
       actions:
@@ -117,8 +146,6 @@ eu:
             truncate: Popup deskribapenetarako gehienezko karaktereak
           step:
             announcement: Iragarkia
-            show_accepted: Erakutsi onartutako proposamenak
-            show_evaluating: Erakutsi ebaluatzen ari diren proposamenak
             show_not_answered: Erakutsi erantzun gabeko proposamenak
             show_rejected: Erakutsi baztertutako proposamenak
             show_withdrawn: Erakutsi erretiratutako proposamenak
@@ -144,6 +171,9 @@ eu:
             voting_cards_show_abstain: Abstentzioaren aukera bat gehitu
             voting_cards_show_modal_help: Erakutsi jarraibideak/laguntza modala babesean klik egiten denean
           step:
+            awesome_votes_enabled_by_status: Mugatu proposamena egoeragatik bozkatzea
+            awesome_votes_enabled_by_status_help: Gaituta dagoenean, hautatutako egoerak dituzten proposamenetan soilik eman daiteke botoa. Beste egoera batzuetan dauden proposamenek ez dute botorik onartuko. Utzi hutsik proposamen guztietan botoa ematea baimentzeko, egoera edozein dela ere.
+            awesome_votes_enabled_states: Bozetarako baimendutako estatusak
             default_sort_order_options:
               az: A-Z (Alfabetikoa)
               supported_first: Babes gehien jaso dutenak lehenengo
@@ -201,7 +231,12 @@ eu:
           authorization_not_destroyed: Baimena ezin da suntsitu!
           authorization_transferred: 'Egiaztatze gatazka egon zen eta egiaztapena %{user} parte-hartzailera pasatu da'
           conflict: Gatazka dago indarrean dagoen baimen batekin.
-          conflict_help_html: "%{user} parte-hartzailearekin dagoen gatazka konpondu behar duzu baimen honekin parte-hartzaileari baimena eman aurretik.\n<br><br>\nEgiaztatze-gatazka bat gertatzen da beste parte-hartzaile batek baimendu nahi duzun parte-hartzailearen datu berberak dituenean.\nGatazka hau konpon dezakezu beste parte-hartzaileari baimen gatazkatsua kenduz edo parte-hartzaile horrentzako datu ezberdinak erabiliz.\n"
+          conflict_help_html: |
+            %{user} parte-hartzailearekin dagoen gatazka konpondu behar duzu baimen honekin parte-hartzaileari baimena eman aurretik.
+            <br><br>
+            Egiaztatze-gatazka bat gertatzen da beste parte-hartzaile batek baimendu nahi duzun parte-hartzailearen datu berberak dituenean.
+            Gatazka hau konpon dezakezu beste parte-hartzaileari baimen gatazkatsua kenduz edo parte-hartzaile horrentzako datu ezberdinak erabiliz.
+
           edit:
             authorize: Baimendu %{user} %{name}} izenarekin
             do_it_if_sure: Egin hau bakarrik ziur bazaude parte-hartzaileak baimen hau duela.
@@ -214,18 +249,22 @@ eu:
         checks:
           index:
             admin_head_tags: Administratzailearen aplikazioaren goiburuan etiketa zoragarrietan sartuta
+            awesome_update_available: 'Bertsio berri bat dago eskuragarri: %{latest_version}'
+            awesome_version: Decidim Awesome %{version} bertsioa
             decidim-admin: Administrazio moduluatik
             decidim-assemblies: Batzarrak modulokoa
             decidim-conferences: Jardunaldiak modulokoa
             decidim-core: Core moduluatik
             decidim-participatory_processes: Partaidetza Prozesuak modulokoa
             decidim-proposals: Proposamen moduluatik
+            decidim_update_available: 'Bertsio berri bat dago eskuragarri: %{latest_version}'
             decidim_version: Decidim bertsioa %{version}
             errors:
               CSS: Burukoak beharrezko <link> stylesheet sarrerarik ez du. Hori konpontzeko, zure custom _head.html.erb fitxategira eskuz gehi dezakezu
               JavaScript: Burukoak beharrezko <script> Javascript sarrerarik ez du. Hori konpontzeko, zure admin/_header.html.erb fitxategira eskuz gehi dezakezu
             head_tags: Aplikazioaren goiburua zoragarri etiketa sartuta
             link_admins: Hasi saioa /system panelean
+            view_release: Ikus askatzeko oharrak
         config:
           anonymous: Erregistratu gabeko parte-hartzaileak
           caution: 'OHARRA: Funtzio honek jokabide lehenetsi batzuk asko aldatzen ditu eta emaitza ustekabekoak sor ditzake. Erabili arretaz!'
@@ -292,7 +331,14 @@ eu:
               original_editor_override: 0.26 bertsioaz geroztik, administratzaileentzat soilik da posible irudiak editoreetan igotzea.
               proposal_custom_fields: Proposamenen eremu pertsonalizatuak sortu sare publikoaren atal batzuetan bakarrik aplikatzen direnak (errestrikzioen editorea erabili horretarako).
               proposal_custom_fields_example: Datuak XML objektu batean gordetzen dira atributu HTML bateragarriak erabiliz ('dl,dt,dd' elementuak) 'body' normalean ordezkatuz.
-              proposal_custom_fields_translations: "Etiketak, testu lagungarriak, plazentak eta balio akatsak zure aplikazioaren itzulpen pertsonalizatuak erabil ditzakete.\nHorretarako, harizko literal bat erabili beharrean, i18n giltza erabili behar da (gutxienez puntu bat izan behar du).\nAdibidez:\n- \"activemodel.attributes.proposal.title\" ordez \"Izenburua\".\n- \"activemodel.attributes.proposal.address\" ordez \"Helbidea\".\nEdo erabili zure gakoak beste tresna batzuekin batera itzulpenak definitzeko (eg: Term Customizer modulua erabiliz):\n- \"myapp.custom_fields.bio\" beharrean \"Biografia\""
+              proposal_custom_fields_translations: |-
+                Etiketak, testu lagungarriak, plazentak eta balio akatsak zure aplikazioaren itzulpen pertsonalizatuak erabil ditzakete.
+                Horretarako, harizko literal bat erabili beharrean, i18n giltza erabili behar da (gutxienez puntu bat izan behar du).
+                Adibidez:
+                - "activemodel.attributes.proposal.title" ordez "Izenburua".
+                - "activemodel.attributes.proposal.address" ordez "Helbidea".
+                Edo erabili zure gakoak beste tresna batzuekin batera itzulpenak definitzeko (eg: Term Customizer modulua erabiliz):
+                - "myapp.custom_fields.bio" beharrean "Biografia"
               proposal_private_custom_fields: Eremu publikoen antzekoak, baina informazio hori ez da jendaurrean emango (administratuek bakarrik izango dute sarbidea).
               proposal_private_custom_fields_translations: |
                 Eremu pribatu pertsonalizatuak lauki bereizian agertzen dira informazio-testu honekin:
@@ -361,6 +407,7 @@ eu:
           system: Partaidetza espazioak izan ezik edonon
           title:
             admins: Esparruaren administrataileak
+            cookie_management: Cookien kudeaketa
             editors: Editorearen hackak
             livechat: Zuzeneko Txata
             proposal_custom_fields: 'Proposamenen Eremu Pertsonalizatuak: Eremu publikoak'
@@ -395,6 +442,281 @@ eu:
           update:
             error: Baldintza kasua eguneratzean errorea
             success: Baldintza kasua ongi eguneratu da
+        cookie_categories:
+          cookie_management_warning_html: Kontuan izan Decidim-ek parte-hartzailea cookie GUZTIAK onartzera behartuko duela iframeak bistaratzeko. DBEOa betetzeko, ziurtatu iframeetan erabiliko diren cookie guztiak dagozkien cookie-kategorietan gehitzen dituzula.
+          create:
+            error: Errorea cookie kategoria sortzean! %{error}
+            success: Cookieen kategoria behar bezala sortu da
+          destroy:
+            error: Errorea cookieen kategoria ezabatzean! %{error}
+            success: Cookie-aren kategoria behar bezala ezabatu da
+          edit:
+            cancel: Ezeztatu
+            items: Kategoriaren elementuak editatu
+            save: Gorde
+            title: Cookie kategoria editatu
+          form:
+            slug_help: Kategoria honi erreferentzia egiteko script-etan erabiltzen den identifikatzaile bakarra.
+            visibility:
+              hidden: Ezkutukoa
+              visible: Ikusgai
+          index:
+            cannot_remove_default: Ezin dira kategoria lehenetsiak ezabatu
+            confirm_reset: Ziur zaude pertsonalizazio hau ezabatu nahi duzula?
+            description_html: |
+              Cookie-kategoriek eta elementuek baimenaren interfazea eta dokumentazioa soilik kontrolatzen dituzte.<br>
+              Hobespenek eragina izan dezaten, hirugarrenen scriptak eta zerbitzuak baimena eman ondoren soilik kargatzeko konfiguratu behar dira.<br>
+              Scripten konfigurazio gehigarri hori ez da beharrezkoa iframe bidez txertatutako bideoetarako, Decidim-ek dagoeneko txertaketa horietarako baimena kudeatzeko mekanismo integratua baitu.<br>
+              Jarraitu gida ofiziala: <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Datuen baimena behar duten scriptak gehitzea</a>.
+            edit: Kategoria editatu
+            items: Kategoriako elementuak
+            new: Kategoria berria
+            reset: Pertsonalizazioa kendu
+            title: Cookieen kudeaketa
+          new:
+            cancel: Ezeztatu
+            save: Gorde
+            title: Cookie kategoria berria
+          script_config:
+            script_consent_help_html: |
+              <p>Kategoria honi lotutako scriptek baimena errespetatzen dute soilik <span class="label">data-consent="%{category}"</span> atributua duen script baten barruan gehitzen direnean.</p>
+              <p>Horiek gehitzeko gomendatutako lekuak <span class="label">app/views/layouts/decidim/_head_extra.html.erb</span> edo goiburuko kode-zatiak dira (gaituta badaude).</p>
+              <p>Adibidea:</p><br><pre>%{example}</pre><br>
+              <p><span class="label">type="text/plain"</span> gabe, parte-hartzailearen datuen baimenaren ezarpenak ez du eraginik.<br>Informazio gehiago: <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Datuen baimena behar duten scriptak gehitzea</a>.</p>
+          update:
+            error: Errorea cookie-kategoria eguneratzean! %{error}
+            success: Cookie-kategoria behar bezala eguneratu da
+        cookie_items:
+          cookie_item_dropdown:
+            button: Ohiko cookie-zerbitzuak
+          cookie_item_presets:
+            descriptions:
+              consent: 'Funtzionaltasunerako erabiltzen da. 2 urte irauten du, eta Google-k parte-hartzailearen egoera gordetzeko erabiltzen du, cookieei buruz egindako aukerei dagokienez. Informazio gehiago hemen: Google-k cookieak nola erabiltzen dituen'
+              decidim_consent: Webgune honetan parte-hartzaileak baimendutako cookieei buruzko informazioa gordetzen du.
+              emoji_picker_recent: Azkenekoz hautatutako emojiak gordetzen ditu
+              facebook_fr: Meta-k erabiltzen du iragarkien egokitasuna eskaintzeko, neurtzeko eta hobetzeko.
+              fbp: Facebook Pixel-en jarraipenerako nabigatzaile-saioak identifikatzen ditu.
+              ga_gat: Google Analytics-era bidaltzen diren eskaeren maiztasuna mugatzeko erabiltzen da.
+              ga_gid: Analitika-helburuetarako parte-hartzaileak bereizteko erabiltzen da. 24 orduren buruan iraungitzen da.
+              ga_main: Parte-hartzaileak bereizteko erabiltzen da, identifikatzaile bakarra esleituta.
+              ga_property: GA4-n erabiltzen da propietate jakin baten saio-egoera eta kontagailuak gordetzeko.
+              graphiql_doc_explorer_open: GraphQL APIa erabiltzean dokumentazio-panela irekita duzun ala ez gordetzen du
+              graphiql_editor_flex: GraphQL APIa erabiltzean zure fitxa-hobespena gordetzen du
+              graphiql_history_pane_open: GraphQL APIa erabiltzean historia-panela irekita duzun ala ez gordetzen du
+              graphiql_queries: GraphQL APIa erabiltzean zure kontsulten historia gordetzen du
+              graphiql_query: GraphQL APIa erabiltzean zure azken kontsulta gordetzen du
+              graphiql_tab_state: GraphQL APIa erabiltzean zure fitxen konfigurazioa gordetzen du
+              gtm_dc: Google Tag Manager-ek etiketak kargatzeko eta diagnostikoak egiteko erabiltzen du.
+              gtm_debug: Google Tag Manager-en arazketa-moduaren egoera gordetzen du.
+              gtm_gcl_au: Google zerbitzuek publizitatearen eraginkortasuna probatzeko erabiltzen dute.
+              hcaptcha_accessibility: hCaptcha erronketarako irisgarritasunarekin lotutako hobespenak gordetzen ditu.
+              hcaptcha_session: Aldi baterako hCaptcha saioaren egoera gordetzen du erronkak baliozkotzeko.
+              jitsi_amp: Amplitude Analytics-erako erabiltzen da
+              jitsi_amplitude_unsent_identify: Amplitude Analytics-erako erabiltzen da
+              jitsi_amplitude_unset: Amplitude Analytics-erako erabiltzen da
+              jitsi_calendar_sync: Egutegia sinkronizatzeko funtziorako erabiltzen da.
+              jitsi_callstats_username: Jitsi-n parte-hartzailearen saioa gordetzeko erabiltzen da.
+              jitsi_dropbox: Dropbox integrazio-funtziorako erabiltzen da.
+              jitsi_endpoint_id: Jitsi zerbitzariarekin komunikatzeko erabiltzen da.
+              jitsi_known_domains: Gorde domeinu ezagunen zerrenda bat
+              jitsi_language: Zure hizkuntza-lehentasuna gorde
+              jitsi_prejoin: Prejoin pantailaren funtziorako erabilia.
+              jitsi_recent_list: Zerrenda berriaren funtziorako erabilia.
+              jitsi_settings: Zure Jitsi ezarpenak gordetzeko erabilia.
+              jitsi_video_quality: Bideoaren kalitatearen biltegiratze iraunkorraren funtziorako erabilia.
+              jitsi_virtual_background: Bideoaren atzeko planoaren funtziorako erabilia.
+              linkedin_li_gc: LinkedIn zerbitzuetarako baimenaren egoera gordetzen du.
+              linkedin_lidc: LinkedIn-ek bideratzerako eta karga orekatzeko erabilia.
+              linkedin_user_match_history: LinkedIn kanpainetarako iragarkiekiko interakzioen denbora eta bihurketen atribuzioa jarraitzen ditu.
+              maps_1p_jar: Google Maps-en erabilera/lehentasunak eta iragarkien pertsonalizazio-seinaleak gordetzen ditu.
+              maps_consent: Mapen txertaketak erabiltzean Google zerbitzuetarako parte-hartzailearen baimen-egoera gordetzen du.
+              maps_nid: Google Maps-en hobespenak eta segurtasunarekin lotutako nabigatzailearen informazioa gordetzen ditu.
+              matomo_mtm_consent: Matomo-ren jarraipenerako parte-hartzailearen baimen-egoera gordetzen du.
+              matomo_pk_id: Bisitariaren ID bakarra gordetzeko eta berriz itzultzen diren bisitariak identifikatzeko erabilia.
+              matomo_pk_ref: Jatorriari buruzko informazioa (erabiltzailea webgunera ekarri duen erreferentzia-iturria) gordetzeko erabilia.
+              matomo_pk_ses: Uneko bisitarako aldi baterako saioaren datuak gordetzeko erabilia.
+              osm_location: Stores map location/zoom defaults for OpenStreetMap interactions.
+              osm_session: Aldi baterako saioko datuak gordetzen ditu OpenStreetMap-eko erabiltzaileen interakzioetarako.
+              osm_totp_token: OpenStreetMap kontuko lan-fluxuetarako 2FArekin lotutako token-datuak aldi baterako gordetzen ditu.
+              pref: Funtzionaltasunerako erabiltzen da. YouTube-k cookie hau erabiltzen du, besteak beste, orriaren konfigurazio gogokoena eta erreprodukzio-hobespenak gordetzeko, hala nola erreprodukzio automatikoaren aukera esplizituak, edukia ausazko ordenan erreproduzitzea eta erreproduzitzailearen tamaina. Irakurri gehiago "Googlek cookieak nola erabiltzen dituen" atalean
+              recaptcha_grecaptcha: reCAPTCHA-k spamaren aurkako babesa eta arrisku-analisia eskaintzeko erabiltzen du.
+              recaptcha_rc_a: reCAPTCHA-ren arrisku-analisiaren metadatuak arakatzailearen biltegian gordetzen ditu.
+              recaptcha_rc_c: reCAPTCHA-ren erronka/saioaren metadatuak arakatzailearen biltegian gordetzen ditu.
+              remember_user_token: Saioa hastean "Gogoratu nazazu" aukeran klik egiten baduzu, saioa irekita mantentzea ahalbidetzen du.
+              session_id: Webguneei parte-hartzailea gogoratzeko aukera ematen die webgune bereko orri batetik bestera mugitzen denean.
+              turnstile_cf_bm: Cloudflare-k trafiko automatizatua detektatzen eta arintzen laguntzeko erabiltzen du.
+              turnstile_cf_clearance: Bisitari batek aurreko segurtasun-erronka bat gainditu duela egiaztatzen duen froga gordetzen du.
+              turnstile_cfuvid: Cloudflare-k IP helbide bera partekatzen duten parte-hartzaileak bereizten laguntzen du.
+              vimeo_player: Vimeo erreproduzitzailearen hobespenak gordetzen ditu, hala nola bolumena, kalitatea edo erreprodukzio automatikoaren portaera.
+              vimeo_vuid: Analitikarako erabiltzen den Vimeo bisitari-identifikatzaile bakarra gordetzen du.
+              visitor_info1_live: Funtzionaltasunerako, analitikarako, publizitaterako eta pertsonalizaziorako erabiltzen da. Informazio gehiago Google-k cookieak nola erabiltzen dituen atalean
+              ysc: Segurtasunerako erabiltzen da. Parte-hartzailearen nabigazio-saioak irauten duen bitartean irauten du. Nabigazio-saio baten barruko eskaerak parte-hartzaileak berak egiten dituela, eta ez beste webgune batzuek, bermatzeko erabiltzen da. Cookie honek webgune gaiztoek parte-hartzailearen izenean, hark jakin gabe, jardutea eragozten du. Irakurri gehiago "Google-k cookieak nola erabiltzen dituen" atalean
+              yt_remote_connected_devices: YouTube erreproduzitzailea kontrolatzeko konektatutako gailuen zerrenda gordetzen du.
+              yt_remote_device_id: YouTube erreproduzitzailearen urruneko interakzioetarako gailu-identifikatzaile bat gordetzen du.
+              ytidb_last_result_entry_key: YouTube erreproduzitzailearen azken emaitzaren metadatuak tokiko biltegian gordetzen ditu.
+            explanations:
+              cloudflare_turnstile: |-
+                Gehitu cookie hauek Cloudflare Turnstile gaituta dagoenean, formularioak erabilera desegokitik eta trafiko automatizatutik babesteko. Botak detektatzen, saioak baliozkotzen eta erronken jarraitutasuna bermatzen laguntzen dute. 
+                Gomendatutako kategoria: Ezinbestekoa
+              decidim_essential: |-
+                Gehitu Decidim plataformaren oinarrizko funtzionamendurako beharrezkoak diren funtsezko cookie hauek. Cookie hauek parte-hartzaileen autentifikazioa, saioen kudeaketa eta baimenaren jarraipena ahalbidetzen dute.
+
+                Gomendatutako kategoria: Funtsezkoak
+              emoji_picker: |-
+                Gehitu cookie hau testu-editoreetan emoji-hautatzailearen funtzioa gaitzen duzunean. Duela gutxi erabilitako emojiak gordetzen ditu parte-hartzailearen esperientzia pertsonalizatzeko. 
+                Gomendatutako kategoria: Hobespenak
+              facebook_pixel: |-
+                Gehitu cookie hauek Meta (Facebook) Pixel erabiltzen duzunean bihurketen jarraipena edo iragarkien atribuzioa egiteko. Nabigatzaile-saioak identifikatzen eta kanpainen errendimendua neurtzen laguntzen dute. 
+                Gomendatutako kategoria: Marketina
+              google_analytics: |-
+                Gehitu cookie hauek Google Analytics (GA4/gtag.js) erabiltzen duzunean trafikoa eta parte-hartzaileen portaera neurtzeko. Bisitariak identifikatzen, saioak bereizten eta erabilera-estatistikak sortzen laguntzen dute. 
+                Gomendatutako kategoria: Analitika
+              google_maps_embeds: |-
+                Gehitu cookie hauek zure orrietan Google Maps txertatzen duzunean (adibidez, mapa-widgetak edo kokapen-blokeak). Mapa-hobespenak, baimenaren egoera eta erabilera-metrikak kudeatzen laguntzen dute.
+
+                Gomendatutako kategoria: Lehentasunak edo Analitika
+              google_tag_manager: |-
+                Gehitu cookie hauek zure analitika- edo marketin-etiketak Google Tag Manager bidez hornitzen direnean. Etiketa batzuek jarraipen-cookie gehigarriak ezar ditzakete GTM konfigurazioaren arabera.
+
+                Gomendatutako kategoria: Analitika edo Marketina
+              graphiql: |-
+                Gehitu cookie hauek garatzaileentzako GraphQL APIaren arakatzailea (/api/graphiql) gaitzen duzunean. Arakatzailearen interfazearen hobespenak, kontsulten historia eta fitxen konfigurazioak gordetzen dituzte. 
+                Gomendatutako kategoria: Hobespenak
+              hcaptcha: |-
+                Gehitu cookie/biltegiratze-sarrera hauek hCaptcha formularioetan gaituta dagoenean. Botak detektatzeko, irisgarritasun-aukeretarako eta erronken/saioen kudeaketarako erabiltzen dira. 
+                Gomendatutako kategoria: Ezinbestekoa
+              jitsi_meet: |-
+                Gehitu cookie hauek Jitsi Meet bideokonferentziako topaketak zure plataforman integratzen dituzunean. Parte-hartzaileen ezarpenak, hizkuntza-hobespenak, bideo-kalitatearen aukerak eta bideokonferentzia-zerbitzuko saio-datuak gordetzen dituzte. 
+                Gomendatutako kategoria: Hobespenak
+              linkedin_insight: |-
+                Gehitu cookie hauek LinkedIn Insight Tag erabiltzen duzunean, kanpainen errendimendua eta LinkedIn iragarkietatik datozen bisitarien bihurketak neurtzeko. 
+
+                Gomendatutako kategoria: Marketina
+              matomo: |-
+                Gehitu cookie hauek Matomo analitika erabiltzen duzunean webgunearen estatistikak biltzeko. Bisitari errepikariak identifikatzen, saioen jarraipena egiten eta txosten agregatuetarako erabiltzen den erreferentzia-informazioa gordetzen laguntzen dute. 
+                Gomendatutako kategoria: Analitika
+              openstreetmap_tiles: |-
+                Gehitu cookie hauek zure mapa-esperientziak cookieak ezar ditzaketen OpenStreetMap-en ostatatutako baliabideak erabiltzen dituenean (adibidez, txertatutako mapak edo OSM kontuari lotutako funtzioak).
+
+                Gomendatutako kategoria: Hobespenak
+              recaptcha: |-
+                Gehitu cookie/biltegiratze-sarrera hauek Google reCAPTCHA-k formularioak erabilera desegokitik eta botetatik babesten dituenean. Parte-hartzaileen interakzioak eta segurtasun-seinaleak ebaluatzen laguntzen dute. 
+                Gomendatutako kategoria: Ezinbestekoa
+              vimeo_embeds: |-
+                Gehitu cookie hauek Vimeo bideoak orrietan, proposamenetan edo iruzkinetan txertatzen dituzunean. Vimeo-k cookie horiek erabil ditzake erreproduzitzailearen ezarpenak gogoratzeko eta erreprodukzio-interakzioak neurtzeko. 
+                Gomendatutako kategoria: Hobespenak edo Analitika
+              youtube_embeds: |-
+                Gehitu cookie hauek edukietan YouTube bideoak txertatzea baimentzen duzunean (proposamenak, iruzkinak, etab.). YouTube-k analitika- eta jarraipen-cookieak ezartzen ditu, bideoen erreprodukzioari eta parte-hartzaileen portaerari buruzko informazioa biltzeko.
+
+                Gomendatutako kategoria: Lehentasunak (bideoak edukiaren osagai integralak badira), Analitika (jarraipena/estatistikak egiteko) edo Marketina (publizitate-helburuetarako erabiltzen bada)
+              youtube_nocookie: |-
+                Gehitu biltegiratze-gako hauek YouTube-ren pribatutasun hobetuko modua (youtube-nocookie.com) erabiltzen duzunean. Erreproduzitzailearen egoera eta gailu/saio hobespenak gordetzeko erabiltzen dira. 
+
+                Gomendatutako kategoria: Hobespenak
+            labels:
+              cloudflare_turnstile:
+                one: Cloudflare Turnstile (cookie %{count})
+                other: Cloudflare Turnstile (%{count} cookie)
+              decidim_essential:
+                one: Decidim Essential (cookie %{count})
+                other: Decidim Essential (%{count} cookie)
+              emoji_picker:
+                one: Emoji Hautatzailea (cookie %{count})
+                other: Emoji Hautatzailea (%{count} cookie)
+              facebook_pixel:
+                one: Facebook Pixel (%{count} cookie)
+                other: Facebook Pixel (%{count} cookie)
+              google_analytics:
+                one: Google Analytics (cookie 1)
+                other: Google Analytics (%{count} cookieak)
+              google_maps_embeds:
+                one: Google Maps incrustaciones (%{count} cookie)
+                other: Google Maps incrustaciones (%{count} cookies)
+              google_tag_manager:
+                one: Google Tag Manager (%{count} cookie)
+                other: Google Tag Manager (%{count} cookie)
+              graphiql:
+                one: GraphiQL APIaren esploratzailea (%{count} cookie)
+                other: GraphiQL APIaren esploratzailea (%{count} cookie)
+              hcaptcha:
+                one: hCaptcha (%{count} cookie)
+                other: hCaptcha (%{count} cookie)
+              jitsi_meet:
+                one: Jitsi Meet (%{count} cookie)
+                other: Jitsi Meet (%{count} cookie)
+              linkedin_insight:
+                one: LinkedIn Insight (%{count} cookies)
+                other: LinkedIn Insight (%{count} cookie)
+              matomo:
+                one: Matomo (cookie 1)
+                other: Matomo (%{count} cookieak)
+              openstreetmap_tiles:
+                one: OpenStreetMap lauzak (%{count} cookie)
+                other: OpenStreetMap lauzak (%{count} cookie)
+              recaptcha:
+                one: reCAPTCHA (%{count} cookie)
+                other: reCAPTCHA (%{count} cookies)
+              vimeo_embeds:
+                one: Vimeo txertaketak (%{count} cookie)
+                other: Vimeo txertaketak (%{count} cookie)
+              youtube_embeds:
+                one: YouTube txertaketak (%{count} cookie)
+                other: YouTube txertaketak (%{count} cookie)
+              youtube_nocookie:
+                one: YouTube cookierik gabe (1. cookiea)
+                other: YouTube cookierik gabe (%{count} cookie)
+            services:
+              cloudflare_turnstile: Cloudflare Turnstile
+              decidim_essential: Webgune hau
+              emoji_picker: Webgune hau
+              facebook_pixel: Meta (Facebook)
+              google_analytics: Google Analytics
+              google_maps_embeds: Google Maps
+              google_tag_manager: Google Tag Manager
+              graphiql: Webgune hau
+              hcaptcha: hCaptcha
+              jitsi_meet: Jitsi topaketa
+              linkedin_insight: LinkedIn
+              matomo: Matomo
+              openstreetmap_tiles: OpenStreetMap
+              recaptcha: Google reCAPTCHA
+              vimeo_embeds: Vimeo
+              youtube_embeds: YouTube
+              youtube_nocookie: YouTube (pribatutasun hobetuko modua)
+          create:
+            error: Errorea cookie elementua sortzean! %{error}
+            success: Cookie elementua behar bezala sortu da
+          create_preset:
+            error: Errorea aurrez ezarritako cookie elementua gehitzean! %{error}
+            not_found: Aurrezarpena ez da aurkitu
+            success: Aurrez ezarritako cookie elementua behar bezala gehitu da
+          destroy:
+            error: Errorea cookie elementua ezabatzean! %{error}
+            success: Cookie elementua behar bezala ezabatu da
+          edit:
+            cancel: Ezeztatu
+            save: Gorde
+            title: Cookie elementua editatu
+          form:
+            description_item_help: Cookie honen helburua eta gordetzen duen informazioa adierazten ditu
+            expiration_item_help: Cookiearen iraungitze-denbora. Informazio gisa baino ez da ematen, ez du cookiearen benetako iraungitze-denboran eraginik izango.
+            service_item_help: Hau deskribapen labur bat da, non erabiltzen den adierazten duena (adibidez "Webgune hau", "YouTube txertaketak", "Jitsi topaketak", etab.)
+            title_item_help: Cookieak ikuskatzailea erabiliz aurki ditzakezu (biltegiratze-atala). Ez du zuriunerik izan behar.
+          index:
+            back_to_categories: Itzuli kategorietara
+            cannot_remove_default: Elementu lehenetsiak ezin dira kendu
+            confirm_reset: Ziur zaude pertsonalizazio hau kendu nahi duzula?
+            edit: Editatu elementua
+            new: Elementu berria
+            reset: Kendu pertsonalizazioa
+            title: "%{category}: Cookie-elementuak"
+          new:
+            cancel: Ezeztatu
+            save: Gorde
+            title: Cookie elementu berria
+          update:
+            error: Errorea cookie-elementua eguneratzean! %{error}
+            success: Cookie-elementua behar bezala eguneratu da
         custom_redirects:
           create:
             error: Birbideratze bat sortzean errorea! %{error}
@@ -450,8 +772,22 @@ eu:
             ip_address: IP helbidea
             no_data: Ez da IP helbiderik aurkitu
             stamps: Hashcash zigiluak
+        landing_menu_items:
+          form:
+            preset: Automatikoki betetzeko aurrezarpenak
+            preset_content_blocks: Lehendik dauden eduki-blokeak
+            preset_global_menu: Decidim-en ohiko susmagarriak
+            select_a_preset: "— Hautatu menu-elementu arrunt bat —"
+            url_help_html: "<b>#section-id</b> — orri honetako atal batera joaten da<br><b>/path</b> — barne-orria (adib. /processes)<br><b>https://example.com</b> — kanpo-esteka (automatikoki fitxa berri batean irekitzen da)"
+          new:
+            save: Gorde
+            title: Menu elementu berria
+          show:
+            save: Gorde
+            title: Menu elementua editatu
         menu:
           admins: Esparruaren administrataileak
+          cookie_management: Cookieen kudeaketa
           custom_redirects: Birbideratze pertsonalizatuak
           editors: Editorearen hackak
           livechat: Zuzeneko Txata
@@ -465,7 +801,6 @@ eu:
           proposals: Proposamenen hackak
           styles: Estilo pertsonalizatuak
           surveys: Inkestak eta formularioak
-          verifications: Egiaztapenak
         menu_hacks:
           create:
             error: Menu elementua sortzean errorea! %{error}
@@ -583,10 +918,29 @@ eu:
           title_closed: Klikatu txateatzeko!
           title_open: Txateatzen hasi!
       content_blocks:
+        awesome_process_groups:
+          active: Aktiboak
+          all: Guztiak
+          all_taxonomies: Kategoria guztiak
+          default_title: Partaidetza-prozesuak
+          filter_by_label: 'Iragazi honen arabera:'
+          max_count: Erakusteko gehieneko elementu kopurua
+          name: Awesome prozesu-taldeak
+          past: Iraganekoak
+          remove_filter: Iragazkia kendu
+          results_count:
+            one: "%{count} prozesu aurkitu da"
+            other: "%{count} prozesu aurkitu dira"
+          status_label: 'Egoera:'
+          title: Blokearen izenburua
+          upcoming: Datozenak
         awesome_processes:
+          active_spaces: Partaidetza-prozesuak
           any_group: Edozein talde
           group_label: Taldea
           max_results: Erakutsi beharreko elementuen gehienezko kopurua
+          move_down: Behera mugitu
+          move_up: Gora mugitu
           name: Prozesu zoragarriak
           process_group: Murriztu prozesu-taldera
           process_status: Prozesuaren egoeraren iragazkia
@@ -596,7 +950,9 @@ eu:
             past: Iraganeko prozesuak soilik
             upcoming: Etorkizuneko prozesuak soikik
           process_type: Prozesu-motak
+          process_type_mixed_hint: Prozesu guztiak erakusten ditu gehienezko kopurura iritsi arte.
           process_types:
+            all: Prozesu guztiak
             groups: Prozesu-taldeak bakarrik
             processes: Prozesuak soilik
           processes: Prozesuak
@@ -606,6 +962,33 @@ eu:
             automatic: Automatikoa
             manual: Eskuzkoa
           title: Bloke-izenburua
+        landing_menu:
+          alignment: Menuaren kokapena
+          alignment_center: Erdia
+          alignment_help: Lerrokatu menu-elementuak orriaren ezkerrean, erdian edo eskuinean
+          alignment_left: Ezkerra
+          alignment_right: Eskuina
+          css_comment_hover: Menu-estekaren estiloa kurtsorea gainean dagoenean
+          css_comment_link: Menu-esteka bakoitzaren estiloa
+          css_comment_menu: Menu-bloke osoaren estiloa
+          css_help_html: 'Menu hau gehiago pertsonaliza dezakezu horretarako %{link} bat sortuz; erabili kode hau bertako elementu desberdinei erreferentzia egiteko:'
+          css_help_link: estilo pertsonalizatua
+          delete_confirm: Ziur zaude elementu hau ezabatu nahi duzula?
+          drag: Arrastatu berrantolatzeko
+          edit_item: Elementua editau
+          empty_item: Elementu huts berria
+          name: Menu global ikaragarria
+          new_item: Elementu berria gehitu
+          presets: Aurrezarpenak
+          show_on_mobile: Mugikorren pantailetan bistaratu
+          sticky: Itsaskorra (beti ikus daiteke desplazamenduan)
+          table:
+            actions: Ekintzak
+            hidden: Ezkutukoa
+            name: Izena
+            url: URL-a
+            visible: Ikusgai
+          title: Joan hona...
         map:
           collapse: Menu tolestutik hasi
           map_center: Maparen erdigunea (Latitudea, Longitudea)
@@ -618,8 +1001,6 @@ eu:
           menu_meetings: Erakutsi bilerak
           menu_merge_components: Batu mota bereko osagai guztiak menuan
           name: Mapa zoragarria
-          show_accepted: Erakutsi onartutako proposamenak
-          show_evaluating: Erakutsi ebaluatzen ari diren proposamenak
           show_not_answered: Erakutsi erantzun gabeko proposamenak
           show_rejected: Erakutsi baztertutako proposamenak
           show_withdrawn: Erakutsi erretiratutako proposamenak
@@ -627,6 +1008,32 @@ eu:
           text_settings: Testuaren ezarpenak
           title: Izenburua
           truncate: Popup deskribapenetarako gehienezko karaktereak
+        rich_text:
+          add_column: Zutabe berria gehitu
+          background_image: Atzeko planoko irudia
+          background_image_help: Zutabearen edukiaren atzean bistaratzen den aukerako irudia. Gomendatutako gutxieneko zabalera 1920px.
+          background_image_placement: Irudiaren kokapena
+          background_image_placement_help: Atzeko planoko irudia zutabearen barruan nola bistaratzen den. Atzeko planoko irudi bat kargatzen denean soilik aplikatzen da.
+          background_image_placements:
+            contain_center: Egokitu (erdian)
+            cover_bottom: Estali (behean lerrokatuta)
+            cover_center: Estali (erdian)
+            cover_top: Estali (goian lerrokatuta)
+            repeat: Errepikatu (mosaikoan)
+          block_id: Barneko etiketa
+          block_id_help: Balio hau URLko atal-aingura gisa erabiliko da. Orri bakoitzean bakarra izan behar du (adibidez, "gure-taldea").
+          block_id_placeholder: barne-erreferentziarako izena (ez da publikoki erabiliko)
+          column_title: Zutabea
+          css_comment_this_column: '%{number} zenbakiko zutabearen estiloa'
+          css_comment_title: Blokearen izenburuaren estiloa
+          css_help_html: 'Bloke hau gehiago pertsonaliza dezakezu horretarako %{link} bat sortuz; erabili kode hau bertako elementu desberdinei erreferentzia egiteko:'
+          css_help_link: estilo pertsonalizatua
+          name: Testu aberatseko bloke bikaina
+          remove_column: Ezabatu
+          restrict_links: Ez erakutsi testuko estekak parte-hartzaileak saioa hasi ezean
+          restrict_videos: Ez erakutsi testuan txertatutako bideoak parte-hartzaileak saioa hasi ezean
+          sign_in_to_watch: Hasi saioa bideo hau ikusteko
+          title: Blokearen izenburua
       credits: Decidim zoragarria %{version} · %{company} erakundak ♥ mantenduta
       custom_fields:
         errors:
@@ -650,6 +1057,9 @@ eu:
             view_meeting: Bilera ikusi
             view_proposal: Proposamena ikusi
       proposal_private_custom_fields_disclosure: Informazio hau ez da argitaratuko
+      proposals:
+        votes:
+          blocked_by_status: Babesak ematea ez dago erabilgarri
       required_authorizations:
         index:
           authorization_options_invalid: Zoritxarrez, baimen hori duzun arren, egiaztatzeko erabiltzen diren datuek ez dute balio testuinguru horretan.
@@ -718,6 +1128,17 @@ eu:
           view_proposal: Proposamena ikusi
   layouts:
     decidim:
+      data_consent:
+        details:
+          columns:
+            expiration: Iraungitze-data
+          items:
+            _session_id:
+              expiration: saioa
+            decidim-consent:
+              expiration: urtebete
+            pwaInstallPromptSeen:
+              expiration: iraunkorra
       decidim_awesome:
         admin:
           maintenance:

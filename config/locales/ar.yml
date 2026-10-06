@@ -117,8 +117,6 @@ ar:
             truncate: الحد الأقصى لعدد الحروف لوصف النوافذ المنبثقة
           step:
             announcement: إشعار
-            show_accepted: إظهار المقترحات المقبولة
-            show_evaluating: إظهار المقترحات قيد التقييم
             show_not_answered: إظهار المقترحات التي لم تتم الإجابة عليها
             show_rejected: إظهار المقترحات المرفوضة
             show_withdrawn: إظهار المقترحات المسحوبة
