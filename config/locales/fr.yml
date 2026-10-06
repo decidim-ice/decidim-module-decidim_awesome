@@ -273,10 +273,7 @@ fr:
               proposal_custom_fields_translations: "Les libellés, le texte d’aide, les espaces réservés et les valeurs par défaut peuvent utiliser les traductions personnalisées de votre application. \nPour cela, au lieu d'utiliser une chaîne de caractères littérale, utilisez la clé i18n (elle doit contenir au moins un point).\nPar exemple :\n- \"activemodel.attributes.proposal.title au lieu de \"Titre\"\n- \"activemodel.attributes.proposition.address\" au lieu de \"Adresse\"\nOu utilisez vos propres clés en combinaison avec d'autres outils pour définir des traductions (par exemple: utiliser le module de personnalisation des termes) :\n- \"myapp.custom_fields.bio\" à la place de \"Biography\""
               proposal_private_custom_fields: Similaire aux champs publics, mais cette information ne sera pas visible publiquement (seuls les administrateurs y auront accès).
               proposal_private_custom_fields_translations: |
-                Les champs privés personnalisés sont affichés dans une section distincte avec ce texte d'information :
-                %{warning}
-                Ce texte peut être personnalisé avec une traduction personnalisée en utilisant la clé:
-                %{key}
+                Les champs privés personnalisés sont affichés dans une section distincte avec ce texte d'information : %{warning} Ce texte peut être personnalisé avec une traduction personnalisée en utilisant la clé: %{key} 
               scoped_admin_styles: Soyez conscient que cacher des éléments pourrait rendre l'interface administrateur inutilisable. Agissez avec prudence.
               scoped_admin_styles_variables: 'Vous pouvez utiliser les variables CSS suivantes pour les couleurs personnalisées de l''organisation :'
               scoped_admin_styles_warning: "<strong>Avertissement</strong>: Ajoutez ici un CSS personnalisé qui s'applique seulement à cet administrateur."
@@ -407,23 +404,7 @@ fr:
             destroying_private_data: Les données privées pour %{title} sont sur le point d'être effacées. Veuillez vérifier à nouveau dans quelques minutes.
             done: Terminé
             help_html: |
-              Cet outil vous permet de supprimer toutes les données privées d'un espace ou d'une fonctionnalité participatif spécifique. Cette action est irréversible et supprimera toutes les données privées de la base de données.
-              <br><br>
-              <strong>Qu'est-ce qui est considéré comme des données privées ?</strong>
-              <br>
-              Les données privées sont toutes les informations qui ne sont pas accessibles au public et qui sont uniquement accessibles aux administrateurs. Cela inclut, pour le moment, les informations des champs personnalisés privés.
-              <br><br>
-              <strong>Que se passe-t-il lorsque je supprime des données privées ?</strong>
-              <br>
-              Lorsque vous supprimez des données privées, toutes les informations privées de l'espace ou du composant participatif sélectionné seront définitivement supprimées de la base de données. Un journal de cette action sera stocké dans le système à des fins d'audit.
-              <br><br>
-              <strong>Qu'advient-il des données publiques ?</strong>
-              <br>
-              Les données publiques ne seront pas affectées par cette action. Seules les données privées seront supprimées.
-              <br><br>
-              <strong>Y a-t-il un délai minimum à attendre avant de supprimer des données privées ?</strong>
-              <br>
-              Oui, vous ne pouvez pas supprimer des données privées si la dernière mise à jour date de moins de %{time_ago}. Vous pouvez modifier cette configuration dans le fichier d'initialisation.
+              Cet outil vous permet de supprimer toutes les données privées d'un espace ou d'une fonctionnalité participatif spécifique. Cette action est irréversible et supprimera toutes les données privées de la base de données. <br><br> <strong>Qu'est-ce qui est considéré comme des données privées ?</strong> <br> Les données privées sont toutes les informations qui ne sont pas accessibles au public et qui sont uniquement accessibles aux administrateurs. Cela inclut, pour le moment, les informations des champs personnalisés privés. <br><br> <strong>Que se passe-t-il lorsque je supprime des données privées ?</strong> <br> Lorsque vous supprimez des données privées, toutes les informations privées de l'espace ou du composant participatif sélectionné seront définitivement supprimées de la base de données. Un journal de cette action sera stocké dans le système à des fins d'audit. <br><br> <strong>Qu'advient-il des données publiques ?</strong> <br> Les données publiques ne seront pas affectées par cette action. Seules les données privées seront supprimées. <br><br> <strong>Y a-t-il un délai minimum à attendre avant de supprimer des données privées ?</strong> <br> Oui, vous ne pouvez pas supprimer des données privées si la dernière mise à jour date de moins de %{time_ago}. Vous pouvez modifier cette configuration dans le fichier d'initialisation. 
             items_count: Total affecté
             last_date: Dernière mise à jour
             no_data: Aucune donnée privée plus ancienne que %{time_ago}
@@ -506,7 +487,7 @@ fr:
         component:
           destroy_private_data: "%{user_name} a détruit les objets %{count} de données privées pour %{resource_name} dans %{space_name}"
         user:
-          admin_creates_authorization: "%{user_name} vérifié %{resource_name} avec %{handler_name}"
+          admin_creates_authorization: "%{user_name} a vérifié %{resource_name} avec %{handler_name}"
           admin_destroys_authorization: "%{user_name} a supprimé la vérification %{handler_name} sur %{resource_name}"
           admin_forces_authorization: "%{user_name} a forcé la vérification %{handler_name} sur %{resource_name}. Raison : %{reason}"
       amendments:
@@ -515,8 +496,7 @@ fr:
           current_amendment_html: <p>Vous pouvez <a href="%{amendment_link}">accéder à l'amendement actuel ici</a>.</p>
           dismiss: D'accord
           explanation_html: |
-            <p>Actuellement, il y a un autre amendement est en cours d'analyse pour cette proposition. Pour en créer un nouveau, vous devez attendre que l'amendement actuel soit accepté ou rejeté.</p>
-            <p>Vous pouvez également contacter l'auteur de la présente proposition à l'adresse suivante <a href="%{proposal_link}">en laissant un commentaire</a> et tenter d'accélérer la résolution de l'amendement actuel.</p>
+            <p>Actuellement, il y a un autre amendement est en cours d'analyse pour cette proposition. Pour en créer un nouveau, vous devez attendre que l'amendement actuel soit accepté ou rejeté.</p> <p>Vous pouvez également contacter l'auteur de la présente proposition à l'adresse suivante <a href="%{proposal_link}">en laissant un commentaire</a> et tenter d'accélérer la résolution de l'amendement actuel.</p> 
         pending_limit_reached: Désolé, il ne peut y avoir qu'un seul amendement en attente à la fois. Veuillez patienter jusqu'à ce que "%{emendation}" soit accepté ou rejeté.
       config:
         intergram:
@@ -558,15 +538,16 @@ fr:
       map_component:
         map:
           api_not_ready: |
-            <b>Attention :</b> Cette installation de Decidim a l'API configurée à une complexité maximale de <b>%{current_complexity}</b>.
-            Ce composant ne fonctionnera probablement pas avec cette configuration. Nous vous recommandons de configurer dans un initialiseur
-            (par exemple à la fin de <code>config/initializers/decidim.rb</code>) les lignes suivantes :<br>
+            <b>Attention :</b> Cette installation de Decidim a l'API\ \ configurée à une complexité maximale de <b>%{current_complexity}</b>.
+            \ Ce composant ne fonctionnera probablement pas avec cette configuration.\ \ Nous vous recommandons de configurer dans un initialiseur
+            (par exemple\ \ à la fin de <code>config/initializers/decidim.rb</code>) les lignes\ \ suivantes :<br>
             <br>
             <pre># Configuration Api
-            Rails.application.config.to_prepare do
+            Rails.application.config.to_prepare\ \ do
               Decidim::Api::Schema.max_complexity = 5000
-              Decidim::Api::Schema.max_depth = 50
+              Decidim::Api::Schema.max_depth\ \ = 50
             end</pre>
+
           error:
             unavailable: La carte n'est pas disponible. Veuillez configurer le géocodage pour activer ce composant.
           show:
@@ -590,8 +571,7 @@ fr:
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |
-            Les administrateurs seront en mesure de vérifier manuellement les utilisateurs avec ces autorisations.
-            <br>Utilisez cette fonctionnalité avec précaution, car elle peut entraîner des problèmes de sécurité.
+            Les administrateurs seront en mesure de vérifier manuellement les utilisateurs avec ces autorisations. <br>Utilisez cette fonctionnalité avec précaution, car elle peut entraîner des problèmes de sécurité. 
           awesome_tweaks: Réglages Decidim Awesome
       validators:
         too_much_caps: Utilise trop de majuscule (plus de %{percent} du texte)
