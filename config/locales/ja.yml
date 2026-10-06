@@ -466,7 +466,6 @@ ja:
           proposals: 提案の設定
           styles: 独自スタイル
           surveys: 調査＆フォーム
-          verifications: 本人認証
         menu_hacks:
           create:
             error: メニュー項目作成エラー %{error}
