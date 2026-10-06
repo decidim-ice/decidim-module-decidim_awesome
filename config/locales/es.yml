@@ -273,10 +273,7 @@ es:
               proposal_custom_fields_translations: "Las etiquetas, el texto de ayuda, placeholders, y los valores predeterminados pueden utilizar las traducciones personalizadas de la aplicación.\nPara ello, en lugar de usar un texto literal, se puede usar la clave i18n (debe contener al menos un punto).\nPor ejemplo:\n- \"activemodel.attributes.proposal.title\" en lugar de \"Título\"\n- \"activemodel.attributes.proposal.address\" en lugar de \"Address\"\nO simplemente usar claves propias en combinación con otras herramientas para definir traducciones (por ejemplo, usando el módulo Term Customizer):\n- \"myapp.custom_fields.bio\" en lugar de \"Biografía\""
               proposal_private_custom_fields: Similar a los campos públicos, pero esta información no será divulgada públicamente (sólo los administradores tendrán acceso a ella).
               proposal_private_custom_fields_translations: |
-                Los campos personalizados privados se muestran en un cuadro distinto con este texto de información:
-                %{warning}
-                Este texto se puede personalizar con una traducción personalizada usando la clave:
-                %{key}
+                Los campos personalizados privados se muestran en un cuadro distinto con este texto de información: %{warning} Este texto se puede personalizar con una traducción personalizada usando la clave: %{key} 
               scoped_admin_styles: Ten en cuenta que ocultar las cosas aquí puede dejar el administrador inutilizable. Por favor actúa con precaución.
               scoped_admin_styles_variables: 'Puedes utilizar las siguientes variables CSS para los colores personalizados de la organización:'
               scoped_admin_styles_warning: "<strong>Atención</strong>: Aquí se puede añadir CSS personalizado que solo aplica en este administrador."
@@ -377,16 +374,12 @@ es:
             destination_help: Rutas absolutas (comienzan con "/") o URLs externas (http://..)
             origin_help: Solo rutas absolutas, comienzan con "/"
             pass_query_help: |
-              Active esta opción si desea que la cadena de consulta sea copiada al destino.<br>
-              Por ejemplo, si ha configurado /my-origin => /my-destination, una solicitud a /my-origin?locale=es será redirigida a "/my-destination?locale=es".
+              Active esta opción si desea que la cadena de consulta sea copiada al destino.<br> Por ejemplo, si ha configurado /my-origin => /my-destination, una solicitud a /my-origin?locale=es será redirigida a "/my-destination?locale=es". 
           index:
             check_redirections: "✔ Comprobar redirecciones"
             confirm_destroy: '¿Seguro que desea eliminar esta redirección?'
             description: |
-              Se puede definir cualquier ruta (comenzando con <code>/</code>) para redirigir una visita a la URL de destino.<br>
-              El destino puede ser una ruta absoluta (por ejemplo: <code>/processes/some-process</code>) o comenzar con <code>https://</code> (es decir, <code>http://decidim.org</code>)<br><br>
-              Tenga en cuenta que una redirección solo funciona si ninguna otra ruta concuerda. No es posible sobreescribir rutas existentes (esto es una decisión de diseño).<br>
-              En caso de duda, utilice el botón de comprobación de redirecciones para detectar incompatibilidades.
+              Se puede definir cualquier ruta (comenzando con <code>/</code>) para redirigir una visita a la URL de destino.<br> El destino puede ser una ruta absoluta (por ejemplo: <code>/processes/some-process</code>) o comenzar con <code>https://</code> (es decir, <code>http://decidim.org</code>)<br><br> Tenga en cuenta que una redirección solo funciona si ninguna otra ruta concuerda. No es posible sobreescribir rutas existentes (esto es una decisión de diseño).<br> En caso de duda, utilice el botón de comprobación de redirecciones para detectar incompatibilidades. 
             edit: Editar redirección
             new: Nueva redirección
             remove: Eliminar redirección
@@ -407,23 +400,7 @@ es:
             destroying_private_data: Los datos privados para %{title} serán destruidos en breve. Por favor, compruébalo de nuevo en unos minutos.
             done: Hecho
             help_html: |
-              Esta herramienta permite eliminar todos los datos privados de un determinado espacio participativo o componente. Esta acción es irreverible y eliminará todos los datos privados de la base de datos.
-              <br><br>
-              <strong>¿Qué se considera información privada?</strong>
-              <br>
-              Los datos privados son cualquier información que no está disponible públicamente y sólo es accesible a los administradores. Esto, en este momento, incluye información privada de los campos personalizados.
-              <br><br>
-              <strong>¿Qué ocurre cuando elimino datos privados?</strong>
-              <br>
-              Al borrar datos privados, toda la información privada del espacio o componente participativo seleccionado será eliminada permanentemente de la base de datos. Un registro de esta acción se almacenará en el sistema para fines de auditoría (pero no los datos en si).
-              <br><br>
-              <strong>¿Qué pasa con los datos públicos?</strong>
-              <br>
-              datos públicos no se verán afectados por esta acción. Sólo los datos privados serán eliminados.
-              <br><br>
-              <strong>¿Hay un tiempo mínimo para esperar antes de eliminar datos privados?</strong>
-              <br>
-              Sí, no puede eliminar datos privados si la última actualización fue menor que la %{time_ago}. Puede cambiar esta configuración en un archivo inicializador.
+              Esta herramienta permite eliminar todos los datos privados de un determinado espacio participativo o componente. Esta acción es irreverible y eliminará todos los datos privados de la base de datos. <br><br> <strong>¿Qué se considera información privada?</strong> <br> Los datos privados son cualquier información que no está disponible públicamente y sólo es accesible a los administradores. Esto, en este momento, incluye información privada de los campos personalizados. <br><br> <strong>¿Qué ocurre cuando elimino datos privados?</strong> <br> Al borrar datos privados, toda la información privada del espacio o componente participativo seleccionado será eliminada permanentemente de la base de datos. Un registro de esta acción se almacenará en el sistema para fines de auditoría (pero no los datos en si). <br><br> <strong>¿Qué pasa con los datos públicos?</strong> <br> datos públicos no se verán afectados por esta acción. Sólo los datos privados serán eliminados. <br><br> <strong>¿Hay un tiempo mínimo para esperar antes de eliminar datos privados?</strong> <br> Sí, no puede eliminar datos privados si la última actualización fue menor que la %{time_ago}. Puede cambiar esta configuración en un archivo inicializador. 
             items_count: Total afectados
             last_date: Última actualización
             no_data: No se han encontrado datos privados anteriores a %{time_ago}
@@ -515,8 +492,7 @@ es:
           current_amendment_html: <p>Puedes <a href="%{amendment_link}">acceder a la enmienda actual aquí</a>.</p>
           dismiss: De acuerdo
           explanation_html: |
-            <p>Actualmente, hay otra enmienda que se está evaluando para esta propuesta. Para crear una nueva, debes esperar hasta que la actual sea aceptada o rechazada.</p>
-            <p>También puedes contactar con el autor de esta propuesta en <a href="%{proposal_link}">dejando un comentario</a> e intentar acelerar la resolución de la enmienda actual.</p>
+            <p>Actualmente, hay otra enmienda que se está evaluando para esta propuesta. Para crear una nueva, debes esperar hasta que la actual sea aceptada o rechazada.</p> <p>También puedes contactar con el autor de esta propuesta en <a href="%{proposal_link}">dejando un comentario</a> e intentar acelerar la resolución de la enmienda actual.</p> 
         pending_limit_reached: Lo sentimos, solo puede haber una enmienda pendiente a la vez. Por favor, espere hasta que se acepte o rechace "%{emendation}".
       config:
         intergram:
@@ -558,15 +534,16 @@ es:
       map_component:
         map:
           api_not_ready: |
-            <b>Advertencia:</b> Esta instalación de Decidim tiene la API configurada a una complejidad máxima de <b>%{current_complexity}</b>.
-            Este componente probablemente no funcione correctament bajo esta configuración. Es recomendado configurar en un inicializador
-            (por ejemplo al final de <code>config/initializers/decidim.rb</code>) añadir las siguientes líneas:<br>
+            <b>Advertencia:</b> Esta instalación de Decidim tiene la\ \ API configurada a una complejidad máxima de <b>%{current_complexity}</b>.
+            \ Este componente probablemente no funcione correctament bajo esta configuración.\ \ Es recomendado configurar en un inicializador
+            (por ejemplo al final\ \ de <code>config/initializers/decidim.rb</code>) añadir las siguientes\ \ líneas:<br>
             <br>
             <pre># Configuración de Api
-            Rails.application.config.to_prepare do
+            Rails.application.config.to_prepare\ \ do
               Decidim::Api::Schema.max_complexity = 5000
-              Decidim::Api::Schema.max_depth = 50
+              Decidim::Api::Schema.max_depth\ \ = 50
             end</pre>
+
           error:
             unavailable: El mapa no está disponible. Por favor, configure la geocodificación para habilitar este componente.
           show:
@@ -590,8 +567,7 @@ es:
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |
-            Las administradoras podrán verificar manualmente a los participantes con estos verificadores.
-            <br>Utilice esta función con precaución, ya que puede dar lugar a problemas de seguridad.
+            Las administradoras podrán verificar manualmente a los participantes con estos verificadores. <br>Utilice esta función con precaución, ya que puede dar lugar a problemas de seguridad. 
           awesome_tweaks: Configuraciones para Decidim Awesome
       validators:
         too_much_caps: Contiene demasiadas letras mayúsculas (más del %{percent}% del texto)
