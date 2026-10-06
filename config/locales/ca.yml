@@ -438,10 +438,10 @@ ca:
               force_authorization_help_text: Afegeix un text personalitzat per explicar per què cal l'autorització. Assegureu-vos també d'afegir un mode de contacte en cas que les usuàries necessitin ajuda.
               hashcash_i18n_key: 'Podeu personalitzar el text del botó que es mostra als usuaris a les pàgines d''iniciar sessió/registre amb la clau i18n %{key}'
               hashcash_login: |
-                Protegeix les aplicacions Rails contra bots i atacs de força bruta sense molestar els humans. Hashcash és un sistema de prova de treball que requereix que els usuaris resolguin un trencaclosques computacional (realitzat automàticament pel navegador) abans de poder registrar-se. 
+                Protegeix les aplicacions Rails contra bots i atacs de força bruta sense molestar els humans. Hashcash és un sistema de prova de treball que requereix que els usuaris resolguin un trencaclosques computacional (realitzat automàticament pel navegador) abans de poder registrar-se.
               hashcash_login_bits: Aquest paràmetre defineix el nombre de bits que l'algoritme Hashcash utilitzarà per generar la prova de treball. Es recomana utilitzar un valor entre 16 (fàcil) i 30 (extremadament difícil) bits. El valor per defecte per als formularis d'inici de sessió és %{bits} bits.
               hashcash_signup: |
-                Protegeix les aplicacions Rails contra bots i atacs de força bruta sense molestar els humans. Hashcash és un sistema de prova de treball que requereix que els usuaris resolguin un trencaclosques computacional (realitzat automàticament pel navegador) abans de poder registrar-se. 
+                Protegeix les aplicacions Rails contra bots i atacs de força bruta sense molestar els humans. Hashcash és un sistema de prova de treball que requereix que els usuaris resolguin un trencaclosques computacional (realitzat automàticament pel navegador) abans de poder registrar-se.
               hashcash_signup_bits: Aquest paràmetre defineix el nombre de bits que l'algoritme Hashcash utilitzarà per generar la prova de treball. Es recomana utilitzar un valor entre 16 (fàcil) i 30 (extremadament difícil) bits. El valor per defecte per als formularis de registre és %{bits} bits.
               intergram_about: Intergram utilitza el Telegram Messenger per gestionar un widget de xat en viu de suport incrustat a la part inferior de la pàgina.
               intergram_config: 'Convida a la <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> al teu grup o comença un xat amb ella directament. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
@@ -452,7 +452,7 @@ ca:
                 Les etiquetes, el text d'ajuda, els "placeholders" i els valors predeterminats poden utilitzar les traduccions personalitzades de l'aplicació. Per això, en comptes d'utilitzar un text literal, utilitzeu la clau i18n (ha de contenir almenys un punt). Per exemple: - "activemodel.attributes.proposal.title" en lloc de "Títol" - "activemodel.attributes.proposal.address" en lloc de "Address" O utilitzeu les vostres pròpies claus en combinació amb altres eines per definir traduccions (p. ex.: utilitzant el mòdul Term Customizer): - "myapp.custom_fields.bio" en lloc de "Biografia"
               proposal_private_custom_fields: Similar als camps públics, però aquesta informació no es revelarà públicament (només hi tindran accés els administradors).
               proposal_private_custom_fields_translations: |
-                Els camps personalitzats privats es mostren en un quadre diferent amb aquest text d'informació: %{warning} Aquest text es pot personalitzar amb una traducció personalitzada utilitzant la clau: %{key} 
+                Els camps personalitzats privats es mostren en un quadre diferent amb aquest text d'informació: %{warning} Aquest text es pot personalitzar amb una traducció personalitzada utilitzant la clau: %{key}
               scoped_admin_styles: Tingues en compte que amagar contingut aquí pot deixar l'administrador inservible. Si us plau, actueu amb cautela.
               scoped_admin_styles_variables: 'Pots fer servir les següents variables CSS pels colors personalitzats de l''organització:'
               scoped_admin_styles_warning: "<strong>Atenció</strong>: Aquí podeu afegir CSS que s'aplica només en aquest administrador."
@@ -467,15 +467,14 @@ ca:
               validate_title_max_marks_together: 'Limiteu el nombre de signes d''interrogació i d''exclamació que es poden escriure junts. És a dir: si és 2, aleshores ''!!!'' no es permetrà al text'
               validate_title_min_length: El títol sempre és obligatori i aquest número no pot ser zero
               verifications_html: |
-                Aquí podeu establir restriccions d'accés addicionals a espais o components participatius que obligaran els usuaris a ser verificats abans d'accedir a determinades ubicacions (per exemple: per evitar correu brossa).<br> Les restriccions s'apliquen a tots els usuaris, però els administradors sempre tindran accés al tauler /admin. 
+                Aquí podeu establir restriccions d'accés addicionals a espais o components participatius que obligaran els usuaris a ser verificats abans d'accedir a determinades ubicacions (per exemple: per evitar correu brossa).<br> Les restriccions s'apliquen a tots els usuaris, però els administradors sempre tindran accés al tauler /admin.
             validators:
               body: Validacions d'entrada per l'usuari en el camp cos de la proposta
               title: Validacions d'entrada per l'usuari en el camp títol de la proposta
           form_force_authorizations:
             delete: Esborra
             force_authorizations_html: |
-              Definiu grups de verificació. Cada grup pot\ \ requerir que els usuaris siguin verificats per un o més mètodes per\ \ accedir a àrees específiques de la plataforma. 
-
+              Definiu grups de verificació. Cada grup pot\ \ requerir que els usuaris siguin verificats per un o més mètodes per\ \ accedir a àrees específiques de la plataforma.
             help: Podeu definir grups de mètodes d'autorització i restringir l'accés en funció d'aquests.
             new: Afegeix un nou grup d'autorització
             remove: Elimina aquest grup d'autorització
@@ -583,7 +582,7 @@ ca:
             title: Nova categoria de galetes
           script_config:
             script_consent_help_html: |
-              <p>Els scripts associats a aquesta categoria només respecten el consentiment quan s'afegeixen dins d'un script amb l'atribut <span class="label">data-consent="%{category}"</span>.</p> <p>El lloc recomanat per afegir-los és <span class="label">app/views/layouts/decidim/_head_extra.html.erb</span> o als snippets de capçalera (si estan habilitats).</p> <p>Exemple:</p><br><pre>%{example}</pre><br> <p>Sense <span class="label">type="text/plain"</span>, la configuració de consentiment de dades de l'usuari no té cap efecte.<br>Més informació a <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Adding scripts which require data consent</a>.</p> 
+              <p>Els scripts associats a aquesta categoria només respecten el consentiment quan s'afegeixen dins d'un script amb l'atribut <span class="label">data-consent="%{category}"</span>.</p> <p>El lloc recomanat per afegir-los és <span class="label">app/views/layouts/decidim/_head_extra.html.erb</span> o als snippets de capçalera (si estan habilitats).</p> <p>Exemple:</p><br><pre>%{example}</pre><br> <p>Sense <span class="label">type="text/plain"</span>, la configuració de consentiment de dades de l'usuari no té cap efecte.<br>Més informació a <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Adding scripts which require data consent</a>.</p>
           update:
             error: S'ha produït un error en actualitzar la categoria de galetes! %{error}
             success: Categoria de galetes actualitzada correctament
@@ -795,12 +794,12 @@ ca:
             destination_help: Rutes absolutes (comença amb "/") o URLs externes (http://...)
             origin_help: Només rutes absolutes, comença amb "/"
             pass_query_help: |
-              Activa aquesta opció si vols que la cadena de consulta (query string) es copiï a la Url de destinació.<br> Per exemple, si has configurat /my-origin => /my-destination, una petició a /my-origin?locale=ca es redirigirà a "/my-destination?locale=ca". 
+              Activa aquesta opció si vols que la cadena de consulta (query string) es copiï a la Url de destinació.<br> Per exemple, si has configurat /my-origin => /my-destination, una petició a /my-origin?locale=ca es redirigirà a "/my-destination?locale=ca".
           index:
             check_redirections: "✔ Comprova les redireccions"
             confirm_destroy: Segur que vols esborrar aquesta redirecció?
             description: |
-              Pots definir qualsevol ruta (començant amb <code>/</code>) per redirigir la visitant a la URL de destinació.<br> El destí pot ser una ruta absoluta (Exemple: <code>/processes/some-process</code>) o començar amb <code>https://</code> (Exemple: <code>http://decidim.org</code>)<br><br> Tingues en compte que una redirecció només funciona si no hi ha cap altra ruta amb el mateix nom definida dins de Decidim. No es possible sobreescriure rutes que ja existeixen (això es una decisió de disseny).<br> Si tens dubtes, fes servir el botó de comprovar les redireccions per trobar incompatibilitats. 
+              Pots definir qualsevol ruta (començant amb <code>/</code>) per redirigir la visitant a la URL de destinació.<br> El destí pot ser una ruta absoluta (Exemple: <code>/processes/some-process</code>) o començar amb <code>https://</code> (Exemple: <code>http://decidim.org</code>)<br><br> Tingues en compte que una redirecció només funciona si no hi ha cap altra ruta amb el mateix nom definida dins de Decidim. No es possible sobreescriure rutes que ja existeixen (això es una decisió de disseny).<br> Si tens dubtes, fes servir el botó de comprovar les redireccions per trobar incompatibilitats.
             edit: Edita la redirecció
             new: Nova redirecció
             remove: Elimina la redirecció
@@ -923,7 +922,7 @@ ca:
             bits: Bits
             created_at: Creada el
             help_html: |
-              Aquesta pàgina mostra els segells Hashcash que s'han detectat al sistema. Hashcash és un sistema de prova de treball que requereix que els usuaris resolguin un trencaclosques computacional (realitzat automàticament pel navegador) abans de poder registrar-se. <br><br> Cada entrada d'aquesta llista representa un segell Hashcash que ha estat generat per un usuari cada vegada que s'ha registrat o ha iniciat la sessió. 
+              Aquesta pàgina mostra els segells Hashcash que s'han detectat al sistema. Hashcash és un sistema de prova de treball que requereix que els usuaris resolguin un trencaclosques computacional (realitzat automàticament pel navegador) abans de poder registrar-se. <br><br> Cada entrada d'aquesta llista representa un segell Hashcash que ha estat generat per un usuari cada vegada que s'ha registrat o ha iniciat la sessió.
             ip_address: Adreça IP
             no_data: No s'han trobat segells de Hashcash
             request_path: Ruta de la sol·licitud
@@ -1019,7 +1018,7 @@ ca:
             destroying: Les dades privades de %{title} s'han programat per ser destruïdes. Si us plau, torneu a comprovar d'aquí a uns minuts.
             done: Fet
             help_html: |
-              Aquesta eina permet esborrar totes les dades privades d'un espai o component participatiu concret. Aquesta acció és irreversible i eliminarà totes les dades privades de la base de dades. <br><br> <strong>Què es consideren dades privades?</strong> <br> Les dades privades són qualsevol informació que no està disponible públicament i només és accessible per als administradors. Això, de moment, inclou la informació del camps personalitzats privats. <br><br> <strong>Què passa quan suprimeixo dades privades?</strong> <br> Quan suprimiu les dades privades, tota la informació privada de l'espai o component participatiu seleccionat s'eliminarà permanentment de la base de dades. Un registre d'aquesta acció s'emmagatzemarà al sistema amb finalitats d'auditoria (pero no les dades en si). <br><br> <strong>Què passa amb les dades públiques?</strong> <br> Les dades públiques no es veuran afectades per aquesta acció. Només s'eliminaran les dades privades. <br><br> <strong>Hi ha un temps mínim d'espera abans de suprimir les dades privades?</strong> <br> Sí, no podeu suprimir dades privades si l'última actualització va ser fa menys de %{time_ago}. Podeu canviar aquesta configuració al fitxer inicialitzador. 
+              Aquesta eina permet esborrar totes les dades privades d'un espai o component participatiu concret. Aquesta acció és irreversible i eliminarà totes les dades privades de la base de dades. <br><br> <strong>Què es consideren dades privades?</strong> <br> Les dades privades són qualsevol informació que no està disponible públicament i només és accessible per als administradors. Això, de moment, inclou la informació del camps personalitzats privats. <br><br> <strong>Què passa quan suprimeixo dades privades?</strong> <br> Quan suprimiu les dades privades, tota la informació privada de l'espai o component participatiu seleccionat s'eliminarà permanentment de la base de dades. Un registre d'aquesta acció s'emmagatzemarà al sistema amb finalitats d'auditoria (pero no les dades en si). <br><br> <strong>Què passa amb les dades públiques?</strong> <br> Les dades públiques no es veuran afectades per aquesta acció. Només s'eliminaran les dades privades. <br><br> <strong>Hi ha un temps mínim d'espera abans de suprimir les dades privades?</strong> <br> Sí, no podeu suprimir dades privades si l'última actualització va ser fa menys de %{time_ago}. Podeu canviar aquesta configuració al fitxer inicialitzador.
             items_count: Total afectats
             last_date: Última actualització
             no_data: No s'han trobat dades privades més antigues que fa %{time_ago}
@@ -1067,7 +1066,7 @@ ca:
           current_amendment_html: <p>Podeu <a href="%{amendment_link}">accedir a l'esmena actual aquí</a>.</p>
           dismiss: D'acord
           explanation_html: |
-            <p>Actualment, s'està avaluant una altra esmena per a aquesta proposta. Per crear-ne una de nova, heu d'esperar fins que l'actual sigui acceptada o rebutjada.</p> <p>També podeu posar-vos en contacte amb l'autor d'aquesta proposta <a href="%{proposal_link}">deixant un comentari</a> i intentar accelerar la resolució de l'esmena actual.</p> 
+            <p>Actualment, s'està avaluant una altra esmena per a aquesta proposta. Per crear-ne una de nova, heu d'esperar fins que l'actual sigui acceptada o rebutjada.</p> <p>També podeu posar-vos en contacte amb l'autor d'aquesta proposta <a href="%{proposal_link}">deixant un comentari</a> i intentar accelerar la resolució de l'esmena actual.</p>
         pending_limit_reached: Ho sentim, només hi pot haver una esmena pendent alhora. Si us plau, espereu fins que "%{emendation}" sigui acceptat o rebutjat.
       awesome_authorization_handler:
         admin_managed_html: Aquesta autorització normalment es gestiona automàticament. Si creieu que hauríeu de ser verificat, proveu de prémer el botó "Enviar" a continuació.<br>Si això no funciona, poseu-vos en contacte amb els administradors de la plataforma.
@@ -1232,7 +1231,6 @@ ca:
               Decidim::Api::Schema.max_complexity\ \ = 5000
               Decidim::Api::Schema.max_depth = 50
             end</pre>
-
           error:
             unavailable: El mapa no està disponible. SI us plau, configureu la geolocalització en aquesta instal·lació per activar aquest component.
           show:
@@ -1270,7 +1268,7 @@ ca:
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |
-            Les administradores podran verificar manualment els participants amb aquests verificadors. <br>Utilitzeu aquesta funció amb precaució, ja que pot provocar problemes de seguretat. 
+            Les administradores podran verificar manualment els participants amb aquests verificadors. <br>Utilitzeu aquesta funció amb precaució, ja que pot provocar problemes de seguretat.
           awesome_tweaks: Configuracions del Decidim Awesome
       validators:
         too_much_caps: Fa servir massa lletres majúscules (més %{percent}% del text)
@@ -1304,7 +1302,7 @@ ca:
     events:
       decidim_awesome:
         follow_up_questionnaire_message_status_changed:
-          notification_title: L'estat de la teva tramesa a «%{questionnaire}» ha canviat a «%{status}». 
+          notification_title: L'estat de la teva tramesa a «%{questionnaire}» ha canviat a «%{status}».
     meetings:
       meetings_map:
         view_meeting: Veure trobada
