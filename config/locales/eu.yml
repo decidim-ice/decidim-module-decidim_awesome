@@ -237,7 +237,6 @@ eu:
             <br><br>
             Egiaztatze-gatazka bat gertatzen da beste parte-hartzaile batek baimendu nahi duzun parte-hartzailearen datu berberak dituenean.
             Gatazka hau konpon dezakezu beste parte-hartzaileari baimen gatazkatsua kenduz edo parte-hartzaile horrentzako datu ezberdinak erabiliz.
-
           edit:
             authorize: Baimendu %{user} %{name}} izenarekin
             do_it_if_sure: Egin hau bakarrik ziur bazaude parte-hartzaileak baimen hau duela.
