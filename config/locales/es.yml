@@ -281,12 +281,10 @@ es:
               force_authorization_help_text: Añade un texto personalizado para explicar por qué es necesaria la autorización. Asegúrate también de añadir un modo de contacto en caso de que las usuarias necesiten ayuda.
               hashcash_i18n_key: 'Puedes personalizar el texto que se muestra a los usuarios en los botones de inicio de sesión / registro de envío con la clave de i18n: %{key}'
               hashcash_login: |
-                Protege las aplicaciones de las Rails contra bots y ataques de fuerza bruta sin molestar a los humanos.
-                Hashcash es un sistema de prueba de trabajo que requiere que los usuarios resuelvan un rompecabezas computacional (realizado automáticamente por el navegador) antes de poder iniciar sesión.
+                Protege las aplicaciones de las Rails contra bots y ataques de fuerza bruta sin molestar a los humanos. Hashcash es un sistema de prueba de trabajo que requiere que los usuarios resuelvan un rompecabezas computacional (realizado automáticamente por el navegador) antes de poder iniciar sesión. 
               hashcash_login_bits: Este parámetro define el número de bits que el algoritmo Hashcash utilizará para generar la prueba de trabajo. Se recomienda utilizar un valor entre 16 (fácil) y 30 bits (extremadamente duro). El valor por defecto para los formularios de inicio de sesión es %{bits} bits.
               hashcash_signup: |
-                Protege las aplicaciones de las Rails contra bots y ataques de fuerza bruta sin molestar a los humanos.
-                Hashcash es un sistema de prueba de trabajo que requiere que los usuarios resuelvan un rompecabezas computacional (realizado automáticamente por el navegador) antes de poder registrarse.
+                Protege las aplicaciones de las Rails contra bots y ataques de fuerza bruta sin molestar a los humanos. Hashcash es un sistema de prueba de trabajo que requiere que los usuarios resuelvan un rompecabezas computacional (realizado automáticamente por el navegador) antes de poder registrarse. 
               hashcash_signup_bits: Este parámetro define el número de bits que el algoritmo Hashcash utilizará para generar la prueba de trabajo. Se recomienda utilizar un valor entre 16 (fácil) y 30 bits (extremadamente duro). El valor por defecto para los formularios de inicio de sesión es %{bits} bits.
               intergram_about: Intergram utiliza el Telegram Messenger para gestionar un widget de chat de soporte incrustado en la parte inferior de la página.
               intergram_config: 'Invita a la <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> a tu grupo o inicia un chat con ella directamente. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
@@ -296,10 +294,7 @@ es:
               proposal_custom_fields_translations: "Las etiquetas, el texto de ayuda, placeholders, y los valores predeterminados pueden utilizar las traducciones personalizadas de la aplicación.\nPara ello, en lugar de usar un texto literal, se puede usar la clave i18n (debe contener al menos un punto).\nPor ejemplo:\n- \"activemodel.attributes.proposal.title\" en lugar de \"Título\"\n- \"activemodel.attributes.proposal.address\" en lugar de \"Address\"\nO simplemente usar claves propias en combinación con otras herramientas para definir traducciones (por ejemplo, usando el módulo Term Customizer):\n- \"myapp.custom_fields.bio\" en lugar de \"Biografía\""
               proposal_private_custom_fields: Similar a los campos públicos, pero esta información no será divulgada públicamente (sólo los administradores tendrán acceso a ella).
               proposal_private_custom_fields_translations: |
-                Los campos personalizados privados se muestran en un cuadro distinto con este texto de información:
-                %{warning}
-                Este texto se puede personalizar con una traducción personalizada usando la clave:
-                %{key}
+                Los campos personalizados privados se muestran en un cuadro distinto con este texto de información: %{warning} Este texto se puede personalizar con una traducción personalizada usando la clave: %{key} 
               scoped_admin_styles: Ten en cuenta que ocultar las cosas aquí puede dejar el administrador inutilizable. Por favor actúa con precaución.
               scoped_admin_styles_variables: 'Puedes utilizar las siguientes variables CSS para los colores personalizados de la organización:'
               scoped_admin_styles_warning: "<strong>Atención</strong>: Aquí se puede añadir CSS personalizado que solo aplica en este administrador."
@@ -314,16 +309,14 @@ es:
               validate_title_max_marks_together: 'Limitar el número de símbolos de preguntas y exclamaciones que se pueden escribir juntos. Es decir, si es 2, entonces ''!!!'' no estará permitido en el texto'
               validate_title_min_length: El título siempre es obligatorio y este número no puede ser cero
               verifications_html: |
-                Puedes poner restricciones de acceso adicionales a los espacios participativos o componentes que obligarán a los usuarios a ser verificados antes de acceder a ciertas ubicaciones (por ejemplo: para prevenir spam).<br>
-                Restricciones se aplican a todos los usuarios, pero los administradores siempre tendrán acceso al panel /admin.
+                Puedes poner restricciones de acceso adicionales a los espacios participativos o componentes que obligarán a los usuarios a ser verificados antes de acceder a ciertas ubicaciones (por ejemplo: para prevenir spam).<br> Restricciones se aplican a todos los usuarios, pero los administradores siempre tendrán acceso al panel /admin. 
             validators:
               body: Validaciones de entrada de usuario para el campo "cuerpo"
               title: Validaciones de entrada de usuario para el campo "título"
           form_force_authorizations:
             delete: Eliminar
             force_authorizations_html: |
-              Define grupos de verificación. Cada grupo puede requerir que los usuarios sean verificados
-              por uno o más métodos para acceder a áreas específicas de la plataforma.
+              Define grupos de verificación. Cada grupo puede requerir que los usuarios sean verificados por uno o más métodos para acceder a áreas específicas de la plataforma. 
             help: Puedes definir grupos de métodos de autorización y restringir el acceso basado en ellos.
             new: Añadir nuevo grupo de autorización
             remove: Eliminar este grupo de autorización
@@ -410,16 +403,12 @@ es:
             destination_help: Rutas absolutas (comienzan con "/") o URLs externas (http://..)
             origin_help: Solo rutas absolutas, comienzan con "/"
             pass_query_help: |
-              Active esta opción si desea que la cadena de consulta sea copiada al destino.<br>
-              Por ejemplo, si ha configurado /my-origin => /my-destination, una solicitud a /my-origin?locale=es será redirigida a "/my-destination?locale=es".
+              Active esta opción si desea que la cadena de consulta sea copiada al destino.<br> Por ejemplo, si ha configurado /my-origin => /my-destination, una solicitud a /my-origin?locale=es será redirigida a "/my-destination?locale=es". 
           index:
             check_redirections: "✔ Comprobar redirecciones"
             confirm_destroy: '¿Seguro que desea eliminar esta redirección?'
             description: |
-              Se puede definir cualquier ruta (comenzando con <code>/</code>) para redirigir una visita a la URL de destino.<br>
-              El destino puede ser una ruta absoluta (por ejemplo: <code>/processes/some-process</code>) o comenzar con <code>https://</code> (es decir, <code>http://decidim.org</code>)<br><br>
-              Tenga en cuenta que una redirección solo funciona si ninguna otra ruta concuerda. No es posible sobreescribir rutas existentes (esto es una decisión de diseño).<br>
-              En caso de duda, utilice el botón de comprobación de redirecciones para detectar incompatibilidades.
+              Se puede definir cualquier ruta (comenzando con <code>/</code>) para redirigir una visita a la URL de destino.<br> El destino puede ser una ruta absoluta (por ejemplo: <code>/processes/some-process</code>) o comenzar con <code>https://</code> (es decir, <code>http://decidim.org</code>)<br><br> Tenga en cuenta que una redirección solo funciona si ninguna otra ruta concuerda. No es posible sobreescribir rutas existentes (esto es una decisión de diseño).<br> En caso de duda, utilice el botón de comprobación de redirecciones para detectar incompatibilidades. 
             edit: Editar redirección
             new: Nueva redirección
             remove: Eliminar redirección
@@ -440,14 +429,12 @@ es:
             bits: Bits
             created_at: Creado el
             help_html: |
-              Esta página muestra los sellos de Hashcash que han sido detectados en el sistema. Hashcash es un sistema de prueba de trabajo que requiere que los usuarios resuelvan un rompecabezas computacional (realizado automáticamente por el navegador) antes de que puedan registrarse.
-              <br><br>
-              Cada entrada en esta lista representa un sello Hashcash que ha sido generado por un usuario cada vez que se ha registrado o conectado.
+              Esta página muestra los sellos de Hashcash que han sido detectados en el sistema. Hashcash es un sistema de prueba de trabajo que requiere que los usuarios resuelvan un rompecabezas computacional (realizado automáticamente por el navegador) antes de que puedan registrarse. <br><br> Cada entrada en esta lista representa un sello Hashcash que ha sido generado por un usuario cada vez que se ha registrado o conectado. 
             ip_address: Dirección IP
             no_data: No se encontraron sellos Hashcash
             request_path: Ruta solicitud
           ip_addresses:
-            help_html: This page list all the IP addresses that have been detected in the system ordered by the number of Hashcash stamps they have generated. <br><br> Each stamp is either a login or a sign up action by a user. You can use this information to detect suspicious activity.
+            help_html: Esta página lista todas las direcciones IP que han sido detectadas en el sistema ordenadas por el número de sellos Hashcash que han generado. <br><br> Cada sello es una acción de inicio de sesión o de registro de un usuario. Puedes utilizar esta información para detectar actividades sospechosas.
             ip_address: Dirección IP
             no_data: No se encontraron direcciones IP
             stamps: Sellos Hashcash
@@ -520,23 +507,7 @@ es:
             destroying: Los datos privados para %{title} serán destruidos en breve. Por favor, compruébalo de nuevo en unos minutos.
             done: Hecho
             help_html: |
-              Esta herramienta permite eliminar todos los datos privados de un determinado espacio participativo o componente. Esta acción es irreverible y eliminará todos los datos privados de la base de datos.
-              <br><br>
-              <strong>¿Qué se considera información privada?</strong>
-              <br>
-              Los datos privados son cualquier información que no está disponible públicamente y sólo es accesible a los administradores. Esto, en este momento, incluye información privada de los campos personalizados.
-              <br><br>
-              <strong>¿Qué ocurre cuando elimino datos privados?</strong>
-              <br>
-              Al borrar datos privados, toda la información privada del espacio o componente participativo seleccionado será eliminada permanentemente de la base de datos. Un registro de esta acción se almacenará en el sistema para fines de auditoría (pero no los datos en si).
-              <br><br>
-              <strong>¿Qué pasa con los datos públicos?</strong>
-              <br>
-              datos públicos no se verán afectados por esta acción. Sólo los datos privados serán eliminados.
-              <br><br>
-              <strong>¿Hay un tiempo mínimo para esperar antes de eliminar datos privados?</strong>
-              <br>
-              Sí, no puede eliminar datos privados si la última actualización fue menor que la %{time_ago}. Puede cambiar esta configuración en un archivo inicializador.
+              Esta herramienta permite eliminar todos los datos privados de un determinado espacio participativo o componente. Esta acción es irreverible y eliminará todos los datos privados de la base de datos. <br><br> <strong>¿Qué se considera información privada?</strong> <br> Los datos privados son cualquier información que no está disponible públicamente y sólo es accesible a los administradores. Esto, en este momento, incluye información privada de los campos personalizados. <br><br> <strong>¿Qué ocurre cuando elimino datos privados?</strong> <br> Al borrar datos privados, toda la información privada del espacio o componente participativo seleccionado será eliminada permanentemente de la base de datos. Un registro de esta acción se almacenará en el sistema para fines de auditoría (pero no los datos en si). <br><br> <strong>¿Qué pasa con los datos públicos?</strong> <br> datos públicos no se verán afectados por esta acción. Sólo los datos privados serán eliminados. <br><br> <strong>¿Hay un tiempo mínimo para esperar antes de eliminar datos privados?</strong> <br> Sí, no puede eliminar datos privados si la última actualización fue menor que la %{time_ago}. Puede cambiar esta configuración en un archivo inicializador. 
             items_count: Total afectados
             last_date: Última actualización
             no_data: No se han encontrado datos privados anteriores a %{time_ago}
@@ -573,8 +544,7 @@ es:
           current_amendment_html: <p>Puedes <a href="%{amendment_link}">acceder a la enmienda actual aquí</a>.</p>
           dismiss: De acuerdo
           explanation_html: |
-            <p>Actualmente, hay otra enmienda que se está evaluando para esta propuesta. Para crear una nueva, debes esperar hasta que la actual sea aceptada o rechazada.</p>
-            <p>También puedes contactar con el autor de esta propuesta en <a href="%{proposal_link}">dejando un comentario</a> e intentar acelerar la resolución de la enmienda actual.</p>
+            <p>Actualmente, hay otra enmienda que se está evaluando para esta propuesta. Para crear una nueva, debes esperar hasta que la actual sea aceptada o rechazada.</p> <p>También puedes contactar con el autor de esta propuesta en <a href="%{proposal_link}">dejando un comentario</a> e intentar acelerar la resolución de la enmienda actual.</p> 
         pending_limit_reached: Lo sentimos, solo puede haber una enmienda pendiente a la vez. Por favor, espere hasta que se acepte o rechace "%{emendation}".
       config:
         intergram:
@@ -617,15 +587,16 @@ es:
       map_component:
         map:
           api_not_ready: |
-            <b>Advertencia:</b> Esta instalación de Decidim tiene la API configurada a una complejidad máxima de <b>%{current_complexity}</b>.
-            Este componente probablemente no funcione correctament bajo esta configuración. Es recomendado configurar en un inicializador
-            (por ejemplo al final de <code>config/initializers/decidim.rb</code>) añadir las siguientes líneas:<br>
+            <b>Advertencia:</b> Esta instalación de Decidim tiene la\ \ API configurada a una complejidad máxima de <b>%{current_complexity}</b>.
+            \ Este componente probablemente no funcione correctament bajo esta configuración.\ \ Es recomendado configurar en un inicializador
+            (por ejemplo al final\ \ de <code>config/initializers/decidim.rb</code>) añadir las siguientes\ \ líneas:<br>
             <br>
             <pre># Configuración de Api
-            Rails.application.config.to_prepare do
+            Rails.application.config.to_prepare\ \ do
               Decidim::Api::Schema.max_complexity = 5000
-              Decidim::Api::Schema.max_depth = 50
+              Decidim::Api::Schema.max_depth\ \ = 50
             end</pre>
+
           error:
             unavailable: El mapa no está disponible. Por favor, configure la geocodificación para habilitar este componente.
           show:
@@ -651,8 +622,7 @@ es:
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |
-            Las administradoras podrán verificar manualmente a los participantes con estos verificadores.
-            <br>Utilice esta función con precaución, ya que puede dar lugar a problemas de seguridad.
+            Las administradoras podrán verificar manualmente a los participantes con estos verificadores. <br>Utilice esta función con precaución, ya que puede dar lugar a problemas de seguridad. 
           awesome_tweaks: Configuraciones para Decidim Awesome
       validators:
         too_much_caps: Contiene demasiadas letras mayúsculas (más del %{percent}% del texto)
