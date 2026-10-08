@@ -7,8 +7,10 @@ eu:
     attributes:
       awesome_authorization_group:
         name: Taldearen izena
+        purpose: Taldearen helburua
       awesome_authorization_members:
         emails: Helbide elektronikoak
+        file: Igo CSV fitxategia
       config:
         additional_proposal_sortings: Hautaketa-aukerak gehigarriak gaituta
         allow_images_in_editors: Irudiak HTML editorean baimendu
@@ -78,12 +80,17 @@ eu:
         pass_query: Galdera-katea helmugara pasatu
         status: Egoera
       follow_up_questionnaire:
+        active: Aktibo
         name: Izena
         position: Kokapena
+        reply_to: Erantzun posta elektronikoari
       follow_up_questionnaire_messages:
         id: IDa
+        last_action: Azken ekintza
         messages_count: Mezu kopurua
+        respondent: Inkestatua
         status: Egoera
+        submission_date: Aurkezpen-data
       follow_up_questionnaire_statuses:
         color: Kolorea
         labels_color: Kolorea
@@ -91,6 +98,8 @@ eu:
         name: Izena
       follow_up_questionnaires:
         name: Izena
+        number_of_responses: Erantzun-kopurua
+        participatory_space: Partaidetza-espazioa > galdetegia
       menu:
         position: Kokapena
         raw_label: Etiketa
@@ -110,6 +119,10 @@ eu:
             name:
               cannot_change_default_item_name: Aurrez definitutako elementu baten izena ezin da aldatu
               invalid_format: Izenak letrak, zenbakiak, azpimarrak (_) eta marratxoak (-) bakarrik eduki ditzake - ez da zuriunerik edo karaktere berezirik onartzen
+        follow_up_questionnaire_message:
+          attributes:
+            body:
+              blank_without_status_change: presente egon behar du, edo beste egoera bat hautatu
   decidim:
     admin:
       actions:
@@ -135,6 +148,7 @@ eu:
     authorization_handlers:
       awesome_authorization_handler:
         fields:
+          awesome_authorization_groups: 'Talde baimenduak:'
           groups: Taldeak
     components:
       awesome_iframe:
@@ -169,7 +183,10 @@ eu:
             truncate: Popup deskribapenetarako gehienezko karaktereak
           step:
             announcement: Iragarkia
+            show_answered: Erantzundako proposamenak erakusten ditu
             show_not_answered: Erakutsi erantzun gabeko proposamenak
+            show_not_rejected: Baztertuta ez dauden proposamenak erakustea
+            show_not_withdrawn: Erretiratzen ez diren proposamenak erakustea
             show_rejected: Erakutsi baztertutako proposamenak
             show_withdrawn: Erakutsi erretiratutako proposamenak
       proposals:
@@ -197,6 +214,7 @@ eu:
             awesome_votes_enabled_by_status: Mugatu proposamena egoeragatik bozkatzea
             awesome_votes_enabled_by_status_help: Gaituta dagoenean, hautatutako egoerak dituzten proposamenetan soilik eman daiteke botoa. Beste egoera batzuetan dauden proposamenek ez dute botorik onartuko. Utzi hutsik proposamen guztietan botoa ematea baimentzeko, egoera edozein dela ere.
             awesome_votes_enabled_states: Bozetarako baimendutako estatusak
+            awesome_votes_enabled_states_help: Beste egoera batzuk erabilgarri egongo dira osagaia gorde ondoren.
             default_sort_order_options:
               az: A-Z (Alfabetikoa)
               supported_first: Babes gehien jaso dutenak lehenengo
@@ -269,8 +287,13 @@ eu:
           user_authorized: "%{user} %{name}rekin ongi baimendua"
           user_not_authorized: "%{user} ezin izan da %{name}rekin baimendu"
         awesome_authorization_properties:
+          create:
+            error: Errorea baimen-propietateak eguneratzean! %{error}
+            success: Baimen-propietateak behar bezala eguneratu dira
           index:
             cancel: Utzi
+            description: Baimenaren deskribapena
+            description_help: Testu hau baimen-tituluaren azpian agertzen da egiaztapen-txartelean, erabiltzaileak oraindik egiaztatu gabe daudenean. Baimen hori zergatik behar den azaltzeko erabil dezake.
             save: Gorde
         awesome_authorization_users:
           index:
