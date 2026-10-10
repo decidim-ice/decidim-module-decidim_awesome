@@ -1,9 +1,16 @@
+---
 eu:
   active_hashcash:
     submit_filter: Iragazki
     waiting_label: Egiaztatzearen zain...
   activemodel:
     attributes:
+      awesome_authorization_group:
+        name: Taldearen izena
+        purpose: Taldearen helburua
+      awesome_authorization_members:
+        emails: Helbide elektronikoak
+        file: Igo CSV fitxategia
       config:
         additional_proposal_sortings: Hautaketa-aukerak gehigarriak gaituta
         allow_images_in_editors: Irudiak HTML editorean baimendu
@@ -72,6 +79,27 @@ eu:
         origin: Jatorria
         pass_query: Galdera-katea helmugara pasatu
         status: Egoera
+      follow_up_questionnaire:
+        active: Aktibo
+        name: Izena
+        position: Kokapena
+        reply_to: Erantzun posta elektronikoari
+      follow_up_questionnaire_messages:
+        id: IDa
+        last_action: Azken ekintza
+        messages_count: Mezu kopurua
+        respondent: Inkestatua
+        status: Egoera
+        submission_date: Aurkezpen-data
+      follow_up_questionnaire_statuses:
+        color: Kolorea
+        labels_color: Kolorea
+        labels_id: IDa
+        name: Izena
+      follow_up_questionnaires:
+        name: Izena
+        number_of_responses: Erantzun-kopurua
+        participatory_space: Partaidetza-espazioa > galdetegia
       menu:
         position: Kokapena
         raw_label: Etiketa
@@ -91,6 +119,10 @@ eu:
             name:
               cannot_change_default_item_name: Aurrez definitutako elementu baten izena ezin da aldatu
               invalid_format: Izenak letrak, zenbakiak, azpimarrak (_) eta marratxoak (-) bakarrik eduki ditzake - ez da zuriunerik edo karaktere berezirik onartzen
+        follow_up_questionnaire_message:
+          attributes:
+            body:
+              blank_without_status_change: presente egon behar du, edo beste egoera bat hautatu
   decidim:
     admin:
       actions:
@@ -113,6 +145,11 @@ eu:
       menu:
         admin_accountability: Administratzailearen erantzukizuna
         decidim_awesome: Decidim zoragarria
+    authorization_handlers:
+      awesome_authorization_handler:
+        fields:
+          awesome_authorization_groups: 'Talde baimenduak:'
+          groups: Taldeak
     components:
       awesome_iframe:
         name: Pantaila osoko iframe-a
@@ -146,7 +183,10 @@ eu:
             truncate: Popup deskribapenetarako gehienezko karaktereak
           step:
             announcement: Iragarkia
+            show_answered: Erantzundako proposamenak erakusten ditu
             show_not_answered: Erakutsi erantzun gabeko proposamenak
+            show_not_rejected: Baztertuta ez dauden proposamenak erakustea
+            show_not_withdrawn: Erretiratzen ez diren proposamenak erakustea
             show_rejected: Erakutsi baztertutako proposamenak
             show_withdrawn: Erakutsi erretiratutako proposamenak
       proposals:
@@ -174,6 +214,7 @@ eu:
             awesome_votes_enabled_by_status: Mugatu proposamena egoeragatik bozkatzea
             awesome_votes_enabled_by_status_help: Gaituta dagoenean, hautatutako egoerak dituzten proposamenetan soilik eman daiteke botoa. Beste egoera batzuetan dauden proposamenek ez dute botorik onartuko. Utzi hutsik proposamen guztietan botoa ematea baimentzeko, egoera edozein dela ere.
             awesome_votes_enabled_states: Bozetarako baimendutako estatusak
+            awesome_votes_enabled_states_help: Beste egoera batzuk erabilgarri egongo dira osagaia gorde ondoren.
             default_sort_order_options:
               az: A-Z (Alfabetikoa)
               supported_first: Babes gehien jaso dutenak lehenengo
@@ -236,7 +277,6 @@ eu:
             <br><br>
             Egiaztatze-gatazka bat gertatzen da beste parte-hartzaile batek baimendu nahi duzun parte-hartzailearen datu berberak dituenean.
             Gatazka hau konpon dezakezu beste parte-hartzaileari baimen gatazkatsua kenduz edo parte-hartzaile horrentzako datu ezberdinak erabiliz.
-
           edit:
             authorize: Baimendu %{user} %{name}} izenarekin
             do_it_if_sure: Egin hau bakarrik ziur bazaude parte-hartzaileak baimen hau duela.
@@ -246,6 +286,50 @@ eu:
             warning: 'Baimen hau behartuz, parte-hartzailearen egungo baimen-egoera gainditzen ari zara.'
           user_authorized: "%{user} %{name}rekin ongi baimendua"
           user_not_authorized: "%{user} ezin izan da %{name}rekin baimendu"
+        awesome_authorization_properties:
+          create:
+            error: Errorea baimen-propietateak eguneratzean! %{error}
+            success: Baimen-propietateak behar bezala eguneratu dira
+          index:
+            cancel: Utzi
+            description: Baimenaren deskribapena
+            description_help: Testu hau baimen-tituluaren azpian agertzen da egiaztapen-txartelean, erabiltzaileak oraindik egiaztatu gabe daudenean. Baimen hori zergatik behar den azaltzeko erabil dezake.
+            name: Baimenaren izena
+            name_help: Izenburu hori egiaztapen-txartelean agertzen da.
+            save: Gorde
+            title: Editatu baimen-propietateak
+        awesome_authorization_users:
+          create:
+            error: Errorea kideen zerrenda eguneratzean! %{error}
+            success: Kideen zerrenda behar bezala eguneratu da (%{count} erabiltzaile berri gehitu dira)
+          destroy:
+            success: Kidea behar bezala ezabatu da
+          index:
+            actions: Ekintzak
+            authorized_user: Baimenduta
+            confirm_remove: Ziur zaude kide hau ezabatu nahi duzula?
+            email: Helbide elektronikoa
+            new: Kideak gehitu
+            no_members: Talde honek oraindik ez du kiderik
+            not_synced_html: Erabiltzailearen baimenak ez daude baimen-talde horrekin sinkronizatuta. %{sync} kideen zerrenda eguneratzeko.
+            remove: Ezabatu kidea
+            sync: Baimenak sinkronizatzea
+            title: Manage members for "%{group}"
+            user: Decidim-en parte-hartzaileka
+          new:
+            create: Kideak gehitu
+            emails_help: Utzi mezu elektronikoak hemen; "@" duten hitzak bakarrik hartuko dira mezu elektronikotzat.
+            or: edo
+        awesome_authorizations:
+          edit:
+            save: Gorde
+            title: Baimen-talde berria gehitu
+          list_authorization_groups:
+            destroy: Taldea ezabatu
+            edit: Taldea editatu
+            group_name: Taldearen izena
+            manage: Kideak kudeatu
+            members_count: Parte hartzaileak
         checks:
           index:
             admin_head_tags: Administratzailearen aplikazioaren goiburuan etiketa zoragarrietan sartuta
@@ -299,6 +383,8 @@ eu:
           destroy_scoped_style:
             error: Errorea CSS koadroa ezabatzean! %{error}
             success: CSS %{key} koadroa arrakastaz ezabatu da
+          disabled: Desgaituta
+          enabled: Gaituta
           force_authorizations: Baimen-taldeak
           form:
             additional_proposal_sortings:
@@ -753,6 +839,38 @@ eu:
           update:
             error: Birbideratzea eguneratzean errorea! %{error}
             success: Birbideratzea ongi eguneratu da
+        follow_up_questionnaire_messages:
+          form:
+            author: Egilea
+            body: Mezua
+            status: Egoera
+          index:
+            view_survey: Aurreikusi
+          new:
+            new_reply_no_reply_to_help_text: Arduradunari mezu bat bidali!. Parte-hartzaileek ezin diote mezu honi erantzun, Erantzun-To helbiderik gabe bidaltzen baita.
+            send_message: Bidali
+          reply_history:
+            photos: Irudiak
+            title: Mezuen historiaren erregistroa
+        follow_up_questionnaire_statuses:
+          edit:
+            save: Gorde
+          new:
+            save: Gorde
+          table:
+            edit: Editatu
+            labels_title: Etiketak
+            remove: Ezabatu
+        follow_up_questionnaires:
+          edit:
+            save: Gorde
+          form:
+            reply_to_help: Aukerakoa. Parte-hartzaileek jakinarazpenen mezu elektronikoei emandako erantzunak helbide honetara joango dira. Utzi hutsik mezu elektronikoak Erantzun gabe bidaltzeko.
+          index:
+            edit: Editatu
+            remove: Ezabatu
+          new:
+            save: Gorde
         hashcash:
           filters:
             ip_addresses: IP helbideak ikusi
@@ -801,6 +919,8 @@ eu:
           proposals: Proposamenen hackak
           styles: Estilo pertsonalizatuak
           surveys: Inkestak eta formularioak
+          verifications:
+            verifications: Egiaztapenak
         menu_hacks:
           create:
             error: Menu elementua sortzean errorea! %{error}
@@ -1039,6 +1159,9 @@ eu:
         errors:
           invalid_fields: Edukiak ezin izan dira analizatu baina '%{field}' eremura esleitu dira
           invalid_xml: 'Edukiak ezin izan dira analizatu: DL/DD elementuak XMLan aurkitu ez dira'
+      follow_up_questionnaire_message_mailer:
+        notification:
+          outro: Registro del historial de mensajes.
       map_component:
         map:
           api_not_ready: |
@@ -1076,6 +1199,15 @@ eu:
       session:
         authorization_is_required: Plataformaren gune honetara sartzeko, zure kontua baimendu behar duzu baliozko baimen erabiliz (%{authorizations}).
         login_and_authorization_is_required: Plataformaren gune honetara sartzeko, saioa hasi eta zure kontua baimendu behar duzu.
+      status_colors:
+        blue: Urdina
+        gray: Grisa
+        green: Berdea
+        orange: Laranja
+        pink: Arrosa
+        purple: Morea
+        red: Gorria
+        yellow: Horia
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |

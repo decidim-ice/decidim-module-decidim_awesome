@@ -1,3 +1,4 @@
+---
 cs:
   active_hashcash:
     submit_filter: Filtr
@@ -234,9 +235,8 @@ cs:
           conflict_help_html: |
             Musíte vyřešit konflikt s uživatelem %{user} předtím, než budete moci autorizovat uživatele s touto autorizací.
             <br><br>
-            Konflikt ověření se stane, když jiný uživatel má stejná data jako uživatel, který se pokoušíte autorizovat 
+            Konflikt ověření se stane, když jiný uživatel má stejná data jako uživatel, který se pokoušíte autorizovat
             Tento konflikt můžete vyřešit odstraněním konfliktní autorizace od jiného uživatele nebo použitím jiných dat tohoto uživatele.
-
           edit:
             authorize: Autorizovat %{user} s %{name}
             do_it_if_sure: Udělejte to pouze v případě, že jste si jisti, že uživatel má tuto autorizaci.
@@ -332,13 +332,13 @@ cs:
               proposal_custom_fields: Vytvoření vlastních polí návrhu, která se použijí pouze v určitých částech veřejného webu (použijte k tomu editor omezení)
               proposal_custom_fields_example: Data jsou uložena v objektu XML pomocí kompatibilních atributů HTML (prvky dl,dt,dd), které v běžném návrhu nahrazují "tělo".
               proposal_custom_fields_translations: |-
-                Štítky, nápověda, zástupné symboly a výchozí hodnoty mohou používat vlastní překlady aplikace. 
+                Štítky, nápověda, zástupné symboly a výchozí hodnoty mohou používat vlastní překlady aplikace.
                 Pro to použijte klíč i18n (musí obsahovat alespoň jednu tečku), místo použití textového literálu.
                 Například:
                 - "activemodel.attributes.proposal.title" namísto "Title"
                 - "activemodel.attributes.proposal.address" namísto "Adresa"
                 Nebo použijte vlastní klíče v kombinaci s jinými nástroji pro definování překladů (např. pomocí úpravy termínu modulu):
-                 - "myapp.custom_fields.bio" namísto „Životopis“
+                - "myapp.custom_fields.bio" namísto „Životopis“
               proposal_private_custom_fields: Podobné jako veřejná pole, ale tyto informace nebudou zveřejněny (k nim budou mít přístup pouze administrátoři).
               proposal_private_custom_fields_translations: |
                 Soukromá vlastní pole jsou zobrazena v jiném poli s tímto informačním textem:

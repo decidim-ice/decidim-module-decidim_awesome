@@ -1,3 +1,4 @@
+---
 ja:
   active_hashcash:
     submit_filter: フィルター
@@ -236,7 +237,6 @@ ja:
              <br><br>
             検証の競合は、別のユーザーが認証しようとしているユーザーと同じデータを持っている場合に発生します。
             この競合は、他のユーザーから競合している認証を削除するか、このユーザーに対して異なるデータを使用することで解決できます。
-
           edit:
             authorize: '%{user} を %{name} で本人確認'
             do_it_if_sure: ユーザーがこの権限を持っていると確認されている場合のみこれを行ってください
@@ -338,7 +338,7 @@ ja:
                 - "Title" の代わりに "activemodel.attributes.proposal.title" を使用する
                 - "Address "の代わりに "activemodel.attributes.proposal.address" を使用する
                 また、独自のキーを他のツールと組み合わせて翻訳を定義することもできます (例: Term Customizer モジュールを使用する):
-                 - "Biography "の代わりに "myapp.custom_fields.bio"を使用する
+                - "Biography "の代わりに "myapp.custom_fields.bio"を使用する
               proposal_private_custom_fields: 公開フィールドと同様ですが、この情報は公開されません(管理者のみがアクセスできます)。
               proposal_private_custom_fields_translations: |
                 非公開カスタムフィールドは、このテキストで別個のボックスに表示されます：

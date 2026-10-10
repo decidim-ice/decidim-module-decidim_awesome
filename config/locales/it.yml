@@ -1,3 +1,4 @@
+---
 it:
   active_hashcash:
     submit_filter: Filtro
@@ -269,7 +270,7 @@ it:
           authorization_transferred: 'Attenzione: C''è stato un conflitto di verifica e la verifica è stata trasferita a %{user}'
           conflict: C'è un conflitto con un'autorizzazione esistente
           conflict_help_html: |
-            Devi risolvere il conflitto con l'utente %{user} prima di poter autorizzare l'utente con questa autorizzazione. <br><br> Si verifica un conflitto di verifica quando un altro utente ha gli stessi dati dell'utente che stai cercando di autorizzare. Puoi risolvere questo conflitto rimuovendo l'autorizzazione in conflitto dall'altro utente o utilizzando dati diversi per questo utente. 
+            Devi risolvere il conflitto con l'utente %{user} prima di poter autorizzare l'utente con questa autorizzazione. <br><br> Si verifica un conflitto di verifica quando un altro utente ha gli stessi dati dell'utente che stai cercando di autorizzare. Puoi risolvere questo conflitto rimuovendo l'autorizzazione in conflitto dall'altro utente o utilizzando dati diversi per questo utente.
           edit:
             authorize: Autorizza %{user} con %{name}
             do_it_if_sure: Fai questo solo se sei sicuro che l'utente abbia questa autorizzazione.
@@ -436,10 +437,10 @@ it:
               force_authorization_help_text: Aggiungi un testo personalizzato per spiegare perché è richiesta l'autorizzazione. Assicurati anche di aggiungere un metodo di contatto nel caso in cui gli utenti abbiano bisogno di aiuto.
               hashcash_i18n_key: 'Puoi personalizzare il testo che viene mostrato agli utenti nei pulsanti di invio login/registrazione con la chiave i18n: %{key}'
               hashcash_login: |
-                Proteggi le applicazioni Rails contro bot e attacchi di forza bruta senza infastidire gli umani. Hashcash è un sistema proof-of-work che richiede agli utenti di risolvere un puzzle computazionale (eseguito automaticamente dal browser) prima di poter effettuare il login. 
+                Proteggi le applicazioni Rails contro bot e attacchi di forza bruta senza infastidire gli umani. Hashcash è un sistema proof-of-work che richiede agli utenti di risolvere un puzzle computazionale (eseguito automaticamente dal browser) prima di poter effettuare il login.
               hashcash_login_bits: Questo parametro definisce il numero di bit che l'algoritmo Hashcash utilizzerà per generare la proof-of-work. Si raccomanda di utilizzare un valore tra 16 (facile) e 30 (estremamente difficile) bit. Il valore predefinito per i moduli di login è %{bits} bit.
               hashcash_signup: |
-                Proteggi le applicazioni Rails contro bot e attacchi di forza bruta senza infastidire gli umani. Hashcash è un sistema proof-of-work che richiede agli utenti di risolvere un puzzle computazionale (eseguito automaticamente dal browser) prima di potersi registrare. 
+                Proteggi le applicazioni Rails contro bot e attacchi di forza bruta senza infastidire gli umani. Hashcash è un sistema proof-of-work che richiede agli utenti di risolvere un puzzle computazionale (eseguito automaticamente dal browser) prima di potersi registrare.
               hashcash_signup_bits: Questo parametro definisce il numero di bit che l'algoritmo Hashcash utilizzerà per generare la proof-of-work. Si raccomanda di utilizzare un valore tra 16 (facile) e 30 (estremamente difficile) bit. Il valore predefinito per i moduli di registrazione è %{bits} bit.
               intergram_about: Intergram utilizza Telegram messenger per gestire un widget di chat di supporto live incorporato nella parte inferiore della pagina.
               intergram_config: 'Invita il bot <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram</a> al tuo gruppo o avvia una chat direttamente con esso. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
@@ -447,16 +448,16 @@ it:
               proposal_custom_fields: Crea campi di proposta personalizzati che si applicano solo in alcune parti del sito (usa l'editor delle restrizioni per quello)
               proposal_custom_fields_example: I dati sono memorizzati in un oggetto XML utilizzando attributi HTML compatibili (dl,dt,dd elementi) sostituendo il "corpo" in una proposta normale.
               proposal_custom_fields_translations: |-
-                Label, testo di aiuto, segnaposti\ \ e valori predefiniti possono utilizzare le traduzioni personalizzate\ \ della tua applicazione. 
+                Label, testo di aiuto, segnaposti\ \ e valori predefiniti possono utilizzare le traduzioni personalizzate\ \ della tua applicazione.
                 Per questo, invece di usare delle string\ \ literal, utilizzare il tasto i18n (deve contenere almeno un punto).
                 \ Per esempio:
                 - "activemodel.attributes.proposal.title" al posto\ \ di "Titolo"
                 - "activemodel.attributes.proposal.address" invece\ \ di "Indirizzo"
                 O utilizzare le proprie chiavi in combinazione\ \ con altri strumenti per definire le traduzioni (ad esempio: utilizzando\ \ il modulo Term Customizer):
-                 - "myapp.custom_fields.bio" invece\ \ di "Biografia"
+                - "myapp.custom_fields.bio" invece\ \ di "Biografia"
               proposal_private_custom_fields: Simile ai campi pubblici, ma questa informazione non sarà rivelata pubblicamente (solo gli amministratori avranno accesso ad essa).
               proposal_private_custom_fields_translations: |
-                I campi personalizzati privati vengono visualizzati in una casella distinta con questo testo informativo: %{warning} Questo testo può essere personalizzato con una traduzione personalizzata utilizzando la chiave: %{key} 
+                I campi personalizzati privati vengono visualizzati in una casella distinta con questo testo informativo: %{warning} Questo testo può essere personalizzato con una traduzione personalizzata utilizzando la chiave: %{key}
               scoped_admin_styles: Tieni presente che nascondere le cose qui potrebbe rendere l'amministratore inutilizzabile. Si prega di agire con cautela.
               scoped_admin_styles_variables: 'È possibile utilizzare le seguenti variabili CSS per i colori personalizzati dell''organizzazione:'
               scoped_admin_styles_warning: "<strong>Attenzione</strong>: Aggiungi qui CSS personalizzato che si applica solo in questo amministratore."
@@ -471,14 +472,14 @@ it:
               validate_title_max_marks_together: 'Limita il numero di punti interrogativi e esclamativi che possono essere scritti insieme. Es.: se è 2, allora ''!!!'' non sarà permesso nel testo'
               validate_title_min_length: Il titolo è sempre obbligatorio e questo numero non può essere zero
               verifications_html: |
-                Qui puoi mettere ulteriori restrizioni di accesso a spazi o componenti partecipativi che obbligheranno gli utenti ad essere verificati prima di accedere a determinate posizioni (ad esempio: per prevenire spam).<br> Le restrizioni si applicano a tutti gli utenti ma gli amministratori avranno sempre accesso al pannello /admin. 
+                Qui puoi mettere ulteriori restrizioni di accesso a spazi o componenti partecipativi che obbligheranno gli utenti ad essere verificati prima di accedere a determinate posizioni (ad esempio: per prevenire spam).<br> Le restrizioni si applicano a tutti gli utenti ma gli amministratori avranno sempre accesso al pannello /admin.
             validators:
               body: Convalide dell'input dell'utente per il campo "body"
               title: Convalide di input dell'utente per il campo "titolo"
           form_force_authorizations:
             delete: Elimina
             force_authorizations_html: |
-              Definisci gruppi di verifica. Ogni gruppo può richiedere che gli utenti siano verificati con uno o più metodi per accedere ad aree specifiche della piattaforma. 
+              Definisci gruppi di verifica. Ogni gruppo può richiedere che gli utenti siano verificati con uno o più metodi per accedere ad aree specifiche della piattaforma.
             help: Puoi definire gruppi di metodi di autorizzazione e limitare l'accesso in base ad essi.
             new: Aggiungi un nuovo gruppo di autorizzazioni
             remove: Rimuovi questo "gruppo di autorizzazioni"
@@ -574,7 +575,7 @@ it:
             cannot_remove_default: Le categorie predefinite non possono essere rimosse
             confirm_reset: Sei sicuro di voler ripristinare questa personalizzazione?
             description_html: |
-              Le categorie e gli elementi dei cookie controllano solo l'interfaccia del consenso e la documentazione.<br> Affinché le preferenze siano effettive, gli script e i servizi di terze parti devono essere configurati per caricarsi solo dopo che il consenso è stato concesso.<br> Questa configurazione aggiuntiva degli script non è necessaria per gli iframe video incorporati, poiché Decidim include già una gestione integrata del consenso per questi embed.<br> Segui la guida ufficiale: <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Aggiungere script che richiedono il consenso ai dati</a>. 
+              Le categorie e gli elementi dei cookie controllano solo l'interfaccia del consenso e la documentazione.<br> Affinché le preferenze siano effettive, gli script e i servizi di terze parti devono essere configurati per caricarsi solo dopo che il consenso è stato concesso.<br> Questa configurazione aggiuntiva degli script non è necessaria per gli iframe video incorporati, poiché Decidim include già una gestione integrata del consenso per questi embed.<br> Segui la guida ufficiale: <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Aggiungere script che richiedono il consenso ai dati</a>.
             edit: Modifica categoria
             items: Elementi della categoria
             new: Nuova categoria
@@ -586,7 +587,7 @@ it:
             title: Nuova categoria di cookie
           script_config:
             script_consent_help_html: |
-              <p>Gli script associati a questa categoria rispettano il consenso solo quando vengono aggiunti dentro uno script con l'attributo <span class="label">data-consent="%{category}"</span>.</p> <p>Il punto consigliato in cui aggiungerli è <span class="label">app/views/layouts/decidim/_head_extra.html.erb</span> oppure negli snippet dell'header (se abilitati).</p> <p>Esempio:</p><br><pre>%{example}</pre><br> <p>Senza <code>type="text/plain"</code>, l'impostazione del consenso ai dati dell'utente non ha effetto.<br>Maggiori informazioni: <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Adding scripts which require data consent</a>.</p> 
+              <p>Gli script associati a questa categoria rispettano il consenso solo quando vengono aggiunti dentro uno script con l'attributo <span class="label">data-consent="%{category}"</span>.</p> <p>Il punto consigliato in cui aggiungerli è <span class="label">app/views/layouts/decidim/_head_extra.html.erb</span> oppure negli snippet dell'header (se abilitati).</p> <p>Esempio:</p><br><pre>%{example}</pre><br> <p>Senza <code>type="text/plain"</code>, l'impostazione del consenso ai dati dell'utente non ha effetto.<br>Maggiori informazioni: <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Adding scripts which require data consent</a>.</p>
           update:
             error: Errore durante l'aggiornamento della categoria di cookie! %{error}
             success: Categoria di cookie aggiornata correttamente
@@ -771,12 +772,12 @@ it:
             destination_help: Percorsi assoluti (iniziano con "/") o URL esterni (http://..)
             origin_help: Sono validi solo itinerari assoluti, che iniziano con "/"
             pass_query_help: |
-              Attiva questa opzione se vuoi che la stringa di interrogazione sia copiata nella destinazione.<br> Ad esempio, se hai configurato /my-origin => /my-destination, una richiesta a /my-origin?locale=it verrà reindirizzata a "/my-destination?locale=it". 
+              Attiva questa opzione se vuoi che la stringa di interrogazione sia copiata nella destinazione.<br> Ad esempio, se hai configurato /my-origin => /my-destination, una richiesta a /my-origin?locale=it verrà reindirizzata a "/my-destination?locale=it".
           index:
             check_redirections: "✔ Controlla i reindirizzamenti"
             confirm_destroy: Sei sicuro di voler rimuovere questo reindirizzamento?
             description: |
-              È possibile definire qualsiasi percorso (partendo da <code>/</code>) per reindirizzare qualsiasi visitatore a un URL di destinazione.<br> La destinazione può essere un percorso assoluto (ie: <code>/processes/some-process</code>) o iniziare con <code>https://</code> (ie: <code>http://decidim. rg</code>)<br><br> Tenete presente che un reindirizzamento funziona solo se nessun altro percorso corrisponde. Non è possibile ignorare i percorsi originali (questo è voluto per design).<br> Se non si è certi, utilizzare il pulsante di reindirizzamenti per verificare le incompatibilità. 
+              È possibile definire qualsiasi percorso (partendo da <code>/</code>) per reindirizzare qualsiasi visitatore a un URL di destinazione.<br> La destinazione può essere un percorso assoluto (ie: <code>/processes/some-process</code>) o iniziare con <code>https://</code> (ie: <code>http://decidim. rg</code>)<br><br> Tenete presente che un reindirizzamento funziona solo se nessun altro percorso corrisponde. Non è possibile ignorare i percorsi originali (questo è voluto per design).<br> Se non si è certi, utilizzare il pulsante di reindirizzamenti per verificare le incompatibilità.
             edit: Modifica reindirizzamento
             new: Nuovo reindirizzamento
             remove: Rimuovi reindirizzamento
@@ -900,7 +901,7 @@ it:
             bits: Bit
             created_at: Creato il
             help_html: |
-              Questa pagina mostra i timbri Hashcash che sono stati rilevati nel sistema. Hashcash è un sistema proof-of-work che richiede agli utenti di risolvere un puzzle computazionale (eseguito automaticamente dal browser) prima di potersi registrare. <br><br> Ogni voce in questo elenco rappresenta un timbro Hashcash che è stato generato da un utente ogni volta che si è registrato o ha effettuato l'accesso. 
+              Questa pagina mostra i timbri Hashcash che sono stati rilevati nel sistema. Hashcash è un sistema proof-of-work che richiede agli utenti di risolvere un puzzle computazionale (eseguito automaticamente dal browser) prima di potersi registrare. <br><br> Ogni voce in questo elenco rappresenta un timbro Hashcash che è stato generato da un utente ogni volta che si è registrato o ha effettuato l'accesso.
             ip_address: Indirizzo IP
             no_data: Nessun timbro Hashcash trovato
             request_path: Percorso richiesta
@@ -996,7 +997,7 @@ it:
             destroying: I dati privati per %{title} sono impostati per essere distrutti. Si prega di controllare di nuovo tra qualche minuto.
             done: Fatto
             help_html: |
-              Questo strumento consente di eliminare tutti i dati privati per uno spazio o componente partecipativo specifico. Questa azione è irreversibile e rimuoverà tutti i dati privati dal database. <br><br> <strong>Cosa si considera dati privati?</strong> <br> I dati privati sono qualsiasi informazione che non è disponibile pubblicamente e è accessibile solo agli amministratori. Questo, al momento, include informazioni sui campi personalizzati privati. <br><br> <strong>Cosa succede quando elimino i dati privati?</strong> <br> Quando si eliminano i dati privati, tutte le informazioni private per lo spazio o componente partecipativo selezionato verranno rimosse definitivamente dal database. Un registro di questa azione sarà memorizzato nel sistema a scopo di audit. <br><br> <strong>Cosa succede ai dati pubblici?</strong> <br> I dati pubblici non saranno influenzati da questa azione. Saranno eliminati solo i dati privati. <br><br> <strong>C'è un tempo minimo da attendere prima di eliminare i dati privati?</strong> <br> Sì, non è possibile eliminare i dati privati se l'ultimo aggiornamento è stato meno di %{time_ago} fa. Puoi modificare questa configurazione nel file inizializzatore. 
+              Questo strumento consente di eliminare tutti i dati privati per uno spazio o componente partecipativo specifico. Questa azione è irreversibile e rimuoverà tutti i dati privati dal database. <br><br> <strong>Cosa si considera dati privati?</strong> <br> I dati privati sono qualsiasi informazione che non è disponibile pubblicamente e è accessibile solo agli amministratori. Questo, al momento, include informazioni sui campi personalizzati privati. <br><br> <strong>Cosa succede quando elimino i dati privati?</strong> <br> Quando si eliminano i dati privati, tutte le informazioni private per lo spazio o componente partecipativo selezionato verranno rimosse definitivamente dal database. Un registro di questa azione sarà memorizzato nel sistema a scopo di audit. <br><br> <strong>Cosa succede ai dati pubblici?</strong> <br> I dati pubblici non saranno influenzati da questa azione. Saranno eliminati solo i dati privati. <br><br> <strong>C'è un tempo minimo da attendere prima di eliminare i dati privati?</strong> <br> Sì, non è possibile eliminare i dati privati se l'ultimo aggiornamento è stato meno di %{time_ago} fa. Puoi modificare questa configurazione nel file inizializzatore.
             items_count: Totale interessato
             last_date: Ultimo aggiornamento
             no_data: Nessun dato privato trovato più vecchio di %{time_ago} fa
@@ -1044,7 +1045,7 @@ it:
           current_amendment_html: <p>Puoi <a href="%{amendment_link}">accedere all'emendamento corrente qui</a>.</p>
           dismiss: Ok, capito
           explanation_html: |
-            <p>Attualmente, c'è un altro emendamento in fase di valutazione per questa proposta. Per crearne uno nuovo, devi attendere fino all'accettazione o al rifiuto dell'attuale.</p> <p>Puoi anche contattare l'autore di questa proposta <a href="%{proposal_link}">lasciando un commento</a> e cercare di accelerare la risoluzione dell'emendamento corrente.</p> 
+            <p>Attualmente, c'è un altro emendamento in fase di valutazione per questa proposta. Per crearne uno nuovo, devi attendere fino all'accettazione o al rifiuto dell'attuale.</p> <p>Puoi anche contattare l'autore di questa proposta <a href="%{proposal_link}">lasciando un commento</a> e cercare di accelerare la risoluzione dell'emendamento corrente.</p>
         pending_limit_reached: Spiacenti, può esserci solo un emendamento in sospeso alla volta. Si prega di attendere fino a quando "%{emendation}" viene accettato o rifiutato.
       awesome_authorization_handler:
         admin_managed_html: Questa autorizzazione normalmente viene gestita automaticamente. Se pensi di dover essere verificato, prova a premere il pulsante "Invia" qui sotto.<br>Se non funziona, contatta gli amministratori della piattaforma.
@@ -1208,7 +1209,6 @@ it:
             \ \  Decidim::Api::Schema.max_complexity = 5000
               Decidim::Api::Schema.max_depth\ \ = 50
             end</pre>
-
           error:
             unavailable: La mappa non è disponibile. Configura la geocodifica per abilitare questo componente.
           show:
@@ -1246,7 +1246,7 @@ it:
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |
-            Gli amministratori saranno in grado di verificare manualmente gli utenti con queste autorizzazioni. <br>Usa questa funzione con cautela, in quanto può portare a problemi di sicurezza. 
+            Gli amministratori saranno in grado di verificare manualmente gli utenti con queste autorizzazioni. <br>Usa questa funzione con cautela, in quanto può portare a problemi di sicurezza.
           awesome_tweaks: Tweaks Decidim Awesome
       validators:
         too_much_caps: Sta usando troppe lettere maiuscole (oltre %{percent}% del testo)
@@ -1280,7 +1280,7 @@ it:
     events:
       decidim_awesome:
         follow_up_questionnaire_message_status_changed:
-          notification_title: Lo stato della tua presentazione a «%{questionnaire}» è stato aggiornato a «%{status}». 
+          notification_title: Lo stato della tua presentazione a «%{questionnaire}» è stato aggiornato a «%{status}».
     meetings:
       meetings_map:
         view_meeting: Visualizza meeting
