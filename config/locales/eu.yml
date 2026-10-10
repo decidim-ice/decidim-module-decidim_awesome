@@ -294,16 +294,31 @@ eu:
             cancel: Utzi
             description: Baimenaren deskribapena
             description_help: Testu hau baimen-tituluaren azpian agertzen da egiaztapen-txartelean, erabiltzaileak oraindik egiaztatu gabe daudenean. Baimen hori zergatik behar den azaltzeko erabil dezake.
+            name: Baimenaren izena
+            name_help: Izenburu hori egiaztapen-txartelean agertzen da.
             save: Gorde
+            title: Editatu baimen-propietateak
         awesome_authorization_users:
+          create:
+            error: Errorea kideen zerrenda eguneratzean! %{error}
+            success: Kideen zerrenda behar bezala eguneratu da (%{count} erabiltzaile berri gehitu dira)
+          destroy:
+            success: Kidea behar bezala ezabatu da
           index:
             actions: Ekintzak
             authorized_user: Baimenduta
+            confirm_remove: Ziur zaude kide hau ezabatu nahi duzula?
             email: Helbide elektronikoa
             new: Kideak gehitu
+            no_members: Talde honek oraindik ez du kiderik
+            not_synced_html: Erabiltzailearen baimenak ez daude baimen-talde horrekin sinkronizatuta. %{sync} kideen zerrenda eguneratzeko.
+            remove: Ezabatu kidea
+            sync: Baimenak sinkronizatzea
+            title: Manage members for "%{group}"
             user: Decidim-en parte-hartzaileka
           new:
             create: Kideak gehitu
+            emails_help: Utzi mezu elektronikoak hemen; "@" duten hitzak bakarrik hartuko dira mezu elektronikotzat.
             or: edo
         awesome_authorizations:
           edit:
