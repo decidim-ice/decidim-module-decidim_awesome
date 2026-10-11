@@ -295,6 +295,23 @@ cs:
             name_help: Tento název je zobrazen na ověřovací kartě.
             save: Uložit
             title: Upravit vlastnosti autorizace
+        awesome_authorization_users:
+          create:
+            error: Chyba při aktualizaci seznamu členů! %{error}
+            success: Seznam členů byl úspěšně aktualizován (%{count} nových uživatelů přidáno)
+          destroy:
+            success: Člen úspěšně odebrán
+          index:
+            actions: Akce
+            authorized_user: Autorizovaný uživatel
+            confirm_remove: Opravdu chcete odebrat tohoto člena?
+            email: E-mail
+            new: Přidat nové členy
+            no_members: Tato skupina zatím nemá žádné členy
+            not_synced_html: Autorizace uživatelů nejsou synchronizovány s touto skupinou autorizací. %{sync} pro aktualizaci seznamu členů.
+            remove: Odebrat člena
+            sync: Synchronizovat autorizace
+            title: Správa členů pro "%{group}"
         checks:
           index:
             admin_head_tags: Úžasné tagy zahrnuté v hlavičce administrace aplikace
@@ -587,6 +604,18 @@ cs:
               osm_session: Uloží dočasná data relace pro uživatelskou interakci OpenStreetMap.
               pref: Používá se pro funkčnost. YouTube používá tuto cookie k ukládání informací, jako je vaše preferovaná konfigurace stránek a nastavení přehrávání, jako jsou explicitní možnosti automatického přehrávání, náhodný obsah a velikost přehrávače. Přečtěte si více o tom, jak Google používá cookies
               recaptcha_grecaptcha: Používá se pro reCAPTCHA k zajištění ochrany proti spamu a analýzy rizik.
+              recaptcha_rc_c: Uloží metadata pro reCAPTCHA challenge/session v úložišti prohlížeče.
+              remember_user_token: Umožňuje zachovat otevřenou relaci, pokud kliknete na "Zapamatovat si mě" při přihlášení.
+              session_id: Umožňuje webovým stránkám zapamatovat si uživatele na webových stránkách, když se pohybují mezi webovými stránkami.
+              turnstile_cf_bm: Pomáhá Cloudflare detekovat a zmírnit automatizovaný provoz.
+              turnstile_cf_clearance: Ukládá důkaz, že návštěvník prošel předchozí bezpečnostní výzvou.
+              turnstile_cfuvid: Pomáhá Cloudflare rozlišovat jednotlivé uživatele, kteří sdílejí stejnou IP adresu.
+              vimeo_player: Uloží předvolby přehrávače Vimeo, jako je hlasitost, kvalita nebo automatické přehrávání.
+              vimeo_vuid: Uloží jedinečný identifikátor návštěvníka Vimeo použitý pro analytiku.
+              visitor_info1_live: Používá se pro funkce, analytiku, reklamu a personalizaci. Přečtěte si více o tom, jak Google používá cookies
+              ysc: Používá se pro bezpečnost. Trvání uživatelské relace. Používá se k zajištění toho, aby požadavky v rámci relace byly podávány uživatelem, nikoli jinými stránkami. Tato cookie zabraňuje tomu, aby škodlivé stránky jednaly jménem uživatele bez vědomí uživatele. Přečtěte si více o tom, jak Google používá cookies
+              yt_remote_connected_devices: Uloží seznam připojených zařízení pro ovládání přehrávače YouTube.
+              yt_remote_device_id: Uloží identifikátor zařízení pro vzdálené interakce přehrávače YouTube.
             services:
               cloudflare_turnstile: Cloudflare Turnstile
               decidim_essential: Tento web
@@ -675,6 +704,51 @@ cs:
           update:
             error: Chyba aktualizace přesměrování! %{error}
             success: Přesměrování úspěšně aktualizováno
+        follow_up_questionnaire_messages:
+          create:
+            error: Chyba při odesílání zprávy! %{error}
+            success: Zpráva úspěšně odeslána
+          form:
+            add_attachment: Přidat přílohu
+            attachments: Příloha
+            author: Autor
+            body: Zpráva
+            body_help: Ponechte prázdnou zprávu pouze pro oznámení o změně stavu (oznámení v aplikaci, stále je vyplněno).
+            edit_attachment: Upravit přílohu
+            select_a_status: Vyberte stav
+            status: Stav
+          index:
+            conversation: Konverzace
+            new_status: Nový
+            not_answered: "(neodpovězeno)"
+            not_processable: Žádný respondent – nezpracovatelné
+            see_full_responses: Zobrazit úplné odpovědi
+            view_survey: Náhled
+          new:
+            anonymous_respondent: Anonymní respondent
+            new_reply: Nová zpráva
+            new_reply_help_text: Pošlete zprávu odpovědi. Zpráva bude odeslána s "Odpověď" nastavenou na %{email}. Přímé odpovědi na tento e-mail zde nebudou shromažďovány.
+            no_email_warning: Tento respondent nemá žádnou e-mailovou adresu. Zpráva bude uložena, ale nebude odeslána.
+            send_message: Odeslat
+            submitted_at: Odesláno %{date}
+            title: Spravovat zprávy
+          reply_history:
+            documents: Dokumenty
+            empty: Zatím nebyla této osobě odeslána žádná zpráva.
+            photos: Fotky
+            title: Protokol historie zpráv
+        follow_up_questionnaire_statuses:
+          create:
+            error: Chyba při vytváření štítku! %{error}
+            success: Štítek byl úspěšně vytvořen
+          edit:
+            save: Uložit
+            title: Upravit štítek
+          table:
+            labels_title: Štítky
+            last_status: Alespoň jeden štítek je vyžadován, takže poslední štítek nelze odstranit.
+            new: Nový štítek
+            not_removable: Tento štítek je použit ve zprávách a nelze jej odstranit.
         hashcash:
           filters:
             ip_addresses: Zobrazit IP adresy
