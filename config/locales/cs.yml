@@ -4,6 +4,12 @@ cs:
     waiting_label: Čekání na ověření...
   activemodel:
     attributes:
+      awesome_authorization_group:
+        name: Název skupiny
+        purpose: Účel skupiny
+      awesome_authorization_members:
+        emails: E-maily
+        file: Nahrát CSV soubor
       config:
         additional_proposal_sortings: Povoleny další možnosti řazení
         allow_images_in_editors: Povolit obrázky v HTML editoru
@@ -72,6 +78,26 @@ cs:
         origin: Původ
         pass_query: Předložte řetězec dotazu k cíli
         status: Stav
+      follow_up_questionnaire:
+        active: Aktivní
+        name: Jméno
+        position: Pozice
+        reply_to: Odpověď na e-mail
+      follow_up_questionnaire_messages:
+        id: ID
+        last_action: Poslední akce
+        messages_count: Počet zpráv
+        respondent: Respondent
+        status: Stav
+        submission_date: Datum odeslání
+      follow_up_questionnaire_statuses:
+        color: Barva
+        labels_color: Barva
+        labels_id: ID
+        name: Jméno
+      follow_up_questionnaires:
+        name: Název
+        number_of_responses: Počet odpovědí
       menu:
         position: Pozice
         raw_label: Popisek
@@ -91,6 +117,10 @@ cs:
             name:
               cannot_change_default_item_name: Název předdefinované položky nelze změnit
               invalid_format: Název může obsahovat pouze písmena, čísla, podtržítka (_) a pomlčky (-) - nejsou povoleny mezery ani speciální znaky
+        follow_up_questionnaire_message:
+          attributes:
+            body:
+              blank_without_status_change: musí být přítomen nebo vybrat jiný stav
   decidim:
     admin:
       actions:
@@ -113,6 +143,11 @@ cs:
       menu:
         admin_accountability: Odpovědnost správce
         decidim_awesome: Úžasné Decidim
+    authorization_handlers:
+      awesome_authorization_handler:
+        fields:
+          awesome_authorization_groups: 'Povolené skupiny:'
+          groups: Skupiny
     components:
       awesome_iframe:
         name: Celá obrazovka Iframe
@@ -146,7 +181,10 @@ cs:
             truncate: Maximum znaků pro popisy vyskakovacích oken
           step:
             announcement: Oznámení
+            show_answered: Zobrazit zodpovězené návrhy
             show_not_answered: Zobrazit nezodpovězené návrhy
+            show_not_rejected: Zobrazit návrhy, které nejsou odmítnuty
+            show_not_withdrawn: Zobrazit návrhy, které nejsou staženy
             show_rejected: Zobrazit odmítnuté návrhy
             show_withdrawn: Zobrazit stažené návrhy
       proposals:
@@ -174,6 +212,7 @@ cs:
             awesome_votes_enabled_by_status: Omezit hlasování podle stavu návrhu
             awesome_votes_enabled_by_status_help: Pokud je povoleno, hlasování je povoleno pouze u návrhů s vybranými stavy. Návrhy v jiných státech hlasování nepřijmou. Ponechte prázdné pro umožnění hlasování o všech návrzích bez ohledu na status.
             awesome_votes_enabled_states: Povolené stavy pro hlasování
+            awesome_votes_enabled_states_help: Ostatní stavy budou k dispozici po uložení komponenty.
             default_sort_order_options:
               az: A-Z (abecední)
               supported_first: Nejdříve podporováno
@@ -245,6 +284,17 @@ cs:
             warning: 'Upozornění: Vynucením této autorizace přepíšete aktuální stav autorizace uživatele.'
           user_authorized: "%{user} úspěšně autorizován s %{name}"
           user_not_authorized: "%{user} nemohl být autorizován s %{name}"
+        awesome_authorization_properties:
+          create:
+            success: Vlastnosti autorizace byly úspěšně aktualizovány
+          index:
+            cancel: Zrušit
+            description: Popis autorizace
+            description_help: Tento text je zobrazen pod názvem autorizace v ověřovací kartě, pokud uživatelé stále nejsou ověřováni. Můžete ji použít k vysvětlení, proč je tato autorizace vyžadována.
+            name: Název autorizace
+            name_help: Tento název je zobrazen na ověřovací kartě.
+            save: Uložit
+            title: Upravit vlastnosti autorizace
         checks:
           index:
             admin_head_tags: Úžasné tagy zahrnuté v hlavičce administrace aplikace
