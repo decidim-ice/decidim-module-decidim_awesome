@@ -4,6 +4,12 @@ cs:
     waiting_label: Čekání na ověření...
   activemodel:
     attributes:
+      awesome_authorization_group:
+        name: Název skupiny
+        purpose: Účel skupiny
+      awesome_authorization_members:
+        emails: E-maily
+        file: Nahrát CSV soubor
       config:
         additional_proposal_sortings: Povoleny další možnosti řazení
         allow_images_in_editors: Povolit obrázky v HTML editoru
@@ -72,6 +78,26 @@ cs:
         origin: Původ
         pass_query: Předložte řetězec dotazu k cíli
         status: Stav
+      follow_up_questionnaire:
+        active: Aktivní
+        name: Jméno
+        position: Pozice
+        reply_to: Odpověď na e-mail
+      follow_up_questionnaire_messages:
+        id: ID
+        last_action: Poslední akce
+        messages_count: Počet zpráv
+        respondent: Respondent
+        status: Stav
+        submission_date: Datum odeslání
+      follow_up_questionnaire_statuses:
+        color: Barva
+        labels_color: Barva
+        labels_id: ID
+        name: Jméno
+      follow_up_questionnaires:
+        name: Název
+        number_of_responses: Počet odpovědí
       menu:
         position: Pozice
         raw_label: Popisek
@@ -91,6 +117,10 @@ cs:
             name:
               cannot_change_default_item_name: Název předdefinované položky nelze změnit
               invalid_format: Název může obsahovat pouze písmena, čísla, podtržítka (_) a pomlčky (-) - nejsou povoleny mezery ani speciální znaky
+        follow_up_questionnaire_message:
+          attributes:
+            body:
+              blank_without_status_change: musí být přítomen nebo vybrat jiný stav
   decidim:
     admin:
       actions:
@@ -113,6 +143,11 @@ cs:
       menu:
         admin_accountability: Odpovědnost správce
         decidim_awesome: Úžasné Decidim
+    authorization_handlers:
+      awesome_authorization_handler:
+        fields:
+          awesome_authorization_groups: 'Povolené skupiny:'
+          groups: Skupiny
     components:
       awesome_iframe:
         name: Celá obrazovka Iframe
@@ -146,7 +181,10 @@ cs:
             truncate: Maximum znaků pro popisy vyskakovacích oken
           step:
             announcement: Oznámení
+            show_answered: Zobrazit zodpovězené návrhy
             show_not_answered: Zobrazit nezodpovězené návrhy
+            show_not_rejected: Zobrazit návrhy, které nejsou odmítnuty
+            show_not_withdrawn: Zobrazit návrhy, které nejsou staženy
             show_rejected: Zobrazit odmítnuté návrhy
             show_withdrawn: Zobrazit stažené návrhy
       proposals:
@@ -174,6 +212,7 @@ cs:
             awesome_votes_enabled_by_status: Omezit hlasování podle stavu návrhu
             awesome_votes_enabled_by_status_help: Pokud je povoleno, hlasování je povoleno pouze u návrhů s vybranými stavy. Návrhy v jiných státech hlasování nepřijmou. Ponechte prázdné pro umožnění hlasování o všech návrzích bez ohledu na status.
             awesome_votes_enabled_states: Povolené stavy pro hlasování
+            awesome_votes_enabled_states_help: Ostatní stavy budou k dispozici po uložení komponenty.
             default_sort_order_options:
               az: A-Z (abecední)
               supported_first: Nejdříve podporováno
@@ -234,9 +273,8 @@ cs:
           conflict_help_html: |
             Musíte vyřešit konflikt s uživatelem %{user} předtím, než budete moci autorizovat uživatele s touto autorizací.
             <br><br>
-            Konflikt ověření se stane, když jiný uživatel má stejná data jako uživatel, který se pokoušíte autorizovat 
+            Konflikt ověření se stane, když jiný uživatel má stejná data jako uživatel, který se pokoušíte autorizovat
             Tento konflikt můžete vyřešit odstraněním konfliktní autorizace od jiného uživatele nebo použitím jiných dat tohoto uživatele.
-
           edit:
             authorize: Autorizovat %{user} s %{name}
             do_it_if_sure: Udělejte to pouze v případě, že jste si jisti, že uživatel má tuto autorizaci.
@@ -246,6 +284,34 @@ cs:
             warning: 'Upozornění: Vynucením této autorizace přepíšete aktuální stav autorizace uživatele.'
           user_authorized: "%{user} úspěšně autorizován s %{name}"
           user_not_authorized: "%{user} nemohl být autorizován s %{name}"
+        awesome_authorization_properties:
+          create:
+            success: Vlastnosti autorizace byly úspěšně aktualizovány
+          index:
+            cancel: Zrušit
+            description: Popis autorizace
+            description_help: Tento text je zobrazen pod názvem autorizace v ověřovací kartě, pokud uživatelé stále nejsou ověřováni. Můžete ji použít k vysvětlení, proč je tato autorizace vyžadována.
+            name: Název autorizace
+            name_help: Tento název je zobrazen na ověřovací kartě.
+            save: Uložit
+            title: Upravit vlastnosti autorizace
+        awesome_authorization_users:
+          create:
+            error: Chyba při aktualizaci seznamu členů! %{error}
+            success: Seznam členů byl úspěšně aktualizován (%{count} nových uživatelů přidáno)
+          destroy:
+            success: Člen úspěšně odebrán
+          index:
+            actions: Akce
+            authorized_user: Autorizovaný uživatel
+            confirm_remove: Opravdu chcete odebrat tohoto člena?
+            email: E-mail
+            new: Přidat nové členy
+            no_members: Tato skupina zatím nemá žádné členy
+            not_synced_html: Autorizace uživatelů nejsou synchronizovány s touto skupinou autorizací. %{sync} pro aktualizaci seznamu členů.
+            remove: Odebrat člena
+            sync: Synchronizovat autorizace
+            title: Správa členů pro "%{group}"
         checks:
           index:
             admin_head_tags: Úžasné tagy zahrnuté v hlavičce administrace aplikace
@@ -332,13 +398,13 @@ cs:
               proposal_custom_fields: Vytvoření vlastních polí návrhu, která se použijí pouze v určitých částech veřejného webu (použijte k tomu editor omezení)
               proposal_custom_fields_example: Data jsou uložena v objektu XML pomocí kompatibilních atributů HTML (prvky dl,dt,dd), které v běžném návrhu nahrazují "tělo".
               proposal_custom_fields_translations: |-
-                Štítky, nápověda, zástupné symboly a výchozí hodnoty mohou používat vlastní překlady aplikace. 
+                Štítky, nápověda, zástupné symboly a výchozí hodnoty mohou používat vlastní překlady aplikace.
                 Pro to použijte klíč i18n (musí obsahovat alespoň jednu tečku), místo použití textového literálu.
                 Například:
                 - "activemodel.attributes.proposal.title" namísto "Title"
                 - "activemodel.attributes.proposal.address" namísto "Adresa"
                 Nebo použijte vlastní klíče v kombinaci s jinými nástroji pro definování překladů (např. pomocí úpravy termínu modulu):
-                 - "myapp.custom_fields.bio" namísto „Životopis“
+                - "myapp.custom_fields.bio" namísto „Životopis“
               proposal_private_custom_fields: Podobné jako veřejná pole, ale tyto informace nebudou zveřejněny (k nim budou mít přístup pouze administrátoři).
               proposal_private_custom_fields_translations: |
                 Soukromá vlastní pole jsou zobrazena v jiném poli s tímto informačním textem:
@@ -538,6 +604,18 @@ cs:
               osm_session: Uloží dočasná data relace pro uživatelskou interakci OpenStreetMap.
               pref: Používá se pro funkčnost. YouTube používá tuto cookie k ukládání informací, jako je vaše preferovaná konfigurace stránek a nastavení přehrávání, jako jsou explicitní možnosti automatického přehrávání, náhodný obsah a velikost přehrávače. Přečtěte si více o tom, jak Google používá cookies
               recaptcha_grecaptcha: Používá se pro reCAPTCHA k zajištění ochrany proti spamu a analýzy rizik.
+              recaptcha_rc_c: Uloží metadata pro reCAPTCHA challenge/session v úložišti prohlížeče.
+              remember_user_token: Umožňuje zachovat otevřenou relaci, pokud kliknete na "Zapamatovat si mě" při přihlášení.
+              session_id: Umožňuje webovým stránkám zapamatovat si uživatele na webových stránkách, když se pohybují mezi webovými stránkami.
+              turnstile_cf_bm: Pomáhá Cloudflare detekovat a zmírnit automatizovaný provoz.
+              turnstile_cf_clearance: Ukládá důkaz, že návštěvník prošel předchozí bezpečnostní výzvou.
+              turnstile_cfuvid: Pomáhá Cloudflare rozlišovat jednotlivé uživatele, kteří sdílejí stejnou IP adresu.
+              vimeo_player: Uloží předvolby přehrávače Vimeo, jako je hlasitost, kvalita nebo automatické přehrávání.
+              vimeo_vuid: Uloží jedinečný identifikátor návštěvníka Vimeo použitý pro analytiku.
+              visitor_info1_live: Používá se pro funkce, analytiku, reklamu a personalizaci. Přečtěte si více o tom, jak Google používá cookies
+              ysc: Používá se pro bezpečnost. Trvání uživatelské relace. Používá se k zajištění toho, aby požadavky v rámci relace byly podávány uživatelem, nikoli jinými stránkami. Tato cookie zabraňuje tomu, aby škodlivé stránky jednaly jménem uživatele bez vědomí uživatele. Přečtěte si více o tom, jak Google používá cookies
+              yt_remote_connected_devices: Uloží seznam připojených zařízení pro ovládání přehrávače YouTube.
+              yt_remote_device_id: Uloží identifikátor zařízení pro vzdálené interakce přehrávače YouTube.
             services:
               cloudflare_turnstile: Cloudflare Turnstile
               decidim_essential: Tento web
@@ -626,6 +704,51 @@ cs:
           update:
             error: Chyba aktualizace přesměrování! %{error}
             success: Přesměrování úspěšně aktualizováno
+        follow_up_questionnaire_messages:
+          create:
+            error: Chyba při odesílání zprávy! %{error}
+            success: Zpráva úspěšně odeslána
+          form:
+            add_attachment: Přidat přílohu
+            attachments: Příloha
+            author: Autor
+            body: Zpráva
+            body_help: Ponechte prázdnou zprávu pouze pro oznámení o změně stavu (oznámení v aplikaci, stále je vyplněno).
+            edit_attachment: Upravit přílohu
+            select_a_status: Vyberte stav
+            status: Stav
+          index:
+            conversation: Konverzace
+            new_status: Nový
+            not_answered: "(neodpovězeno)"
+            not_processable: Žádný respondent – nezpracovatelné
+            see_full_responses: Zobrazit úplné odpovědi
+            view_survey: Náhled
+          new:
+            anonymous_respondent: Anonymní respondent
+            new_reply: Nová zpráva
+            new_reply_help_text: Pošlete zprávu odpovědi. Zpráva bude odeslána s "Odpověď" nastavenou na %{email}. Přímé odpovědi na tento e-mail zde nebudou shromažďovány.
+            no_email_warning: Tento respondent nemá žádnou e-mailovou adresu. Zpráva bude uložena, ale nebude odeslána.
+            send_message: Odeslat
+            submitted_at: Odesláno %{date}
+            title: Spravovat zprávy
+          reply_history:
+            documents: Dokumenty
+            empty: Zatím nebyla této osobě odeslána žádná zpráva.
+            photos: Fotky
+            title: Protokol historie zpráv
+        follow_up_questionnaire_statuses:
+          create:
+            error: Chyba při vytváření štítku! %{error}
+            success: Štítek byl úspěšně vytvořen
+          edit:
+            save: Uložit
+            title: Upravit štítek
+          table:
+            labels_title: Štítky
+            last_status: Alespoň jeden štítek je vyžadován, takže poslední štítek nelze odstranit.
+            new: Nový štítek
+            not_removable: Tento štítek je použit ve zprávách a nelze jej odstranit.
         hashcash:
           filters:
             ip_addresses: Zobrazit IP adresy
