@@ -1131,6 +1131,14 @@ eu:
         follow_up_questionnaire:
           create: "%{questionnaire_name} jarraipen-galdetegia %{user_name} parte-hartzaileak sortu du"
           delete: "%{user_name} parte-hatzaileak \"%{questionnaire_name}\" jarraipen-galdetegia ezabatu du"
+          update: "%{user_name} parte-hartzaileak %{questionnaire_name} jarraipen-galdetegia eguneratu du"
+        follow_up_questionnaire_message:
+          create: "%{user_name} parte-hartzaileak mezu bat bidali du %{questionnaire_name} jarraipen-galdetegian"
+          create_as: "%{user_name} parte-hartzaileak %{author_name} gisa mezu bat bidali du %{questionnaire_name} jarraipen-galdetegian"
+        follow_up_questionnaire_status:
+          create: "%{user_name} parte-hartzaileak %{label_name} etiketa berria sortu du %{questionnaire_name} jarraipen-galdetegirako"
+          delete: "%{user_name} parte-hartzaileak %{label_name} etiketa ezabatu du %{questionnaire_name} jarraipen-galdetegitik"
+          update: "%{user_name} parte-hartzaileak %{label_name} etiketa eguneratu du %{questionnaire_name} jarraipen-galdetegirako"
         user:
           admin_creates_authorization: "%{user_name}-ek %{handler_name} erabiliz %{resource_name} egiaztatu zuen"
           admin_destroys_authorization: "%{user_name}-ek %{resource_name}-en %{handler_name} egiaztapena suntsitu zuen"
@@ -1144,6 +1152,13 @@ eu:
             <p>Gaur egun, proposamen honetarako beste zuzenketa bat aztertzen ari dira. Berria sortzeko, oraingoa onartu edo baztertu arte itxaron behar da.</p>
             <p>proposamen honen egilearengana ere irits zaitezke <a href="%{proposal_link}">iruzkin bat utziz</a> eta oraingo aldaketaren ebazpena arintzen saiatuz.</p>
         pending_limit_reached: Barkatu, aldi berean zuzenketa bakarra izan daiteke zain. Mesedez, itxaron "%{emendation}" onartua edo baztertua izan arte.
+      awesome_authorization_handler:
+        admin_managed_html: Baimen hau automatikoki kudeatzen da normalean. Egiaztatuta egon beharko zenukeela uste baduzu, sakatu beheko "Bidali" botoia.<br>Hori funtzionatzen ez badu, jarri harremanetan plataformako administratzaileekin.
+        errors:
+          user_not_in_group: Zure helbide elektronikoaren arabera (%{email}), ez zara zu egiaztatzeko gai den talde bateko kide.
+        explanation: Egiaztatu erakunde-talde bateko kide gisa
+        member_of: '%{groups} taldeko kidea'
+        name: Erakunde-taldearen baimena
       config:
         intergram:
           auto_no_response: Badirudi inor ez dagoela une honetan erantzuteko. Mesedez, esan nola har dezakegun zurekin harremanetan, eta ahalik eta azkarren erantzungo dizugu.
@@ -1235,7 +1250,10 @@ eu:
           menu_meetings: Erakutsi bilerak
           menu_merge_components: Batu mota bereko osagai guztiak menuan
           name: Mapa zoragarria
+          show_answered: Erantzundako proposamenak erakusten ditu
           show_not_answered: Erakutsi erantzun gabeko proposamenak
+          show_not_rejected: Baztertuta ez dauden proposamenak erakutsi
+          show_not_withdrawn: Erretiratzen ez diren proposamenak erakutsi
           show_rejected: Erakutsi baztertutako proposamenak
           show_withdrawn: Erakutsi erretiratutako proposamenak
           taxonomies: Taxonomiak
@@ -1273,9 +1291,18 @@ eu:
         errors:
           invalid_fields: Edukiak ezin izan dira analizatu baina '%{field}' eremura esleitu dira
           invalid_xml: 'Edukiak ezin izan dira analizatu: DL/DD elementuak XMLan aurkitu ez dira'
+      default_statuses:
+        answered: Erantzunda
+        in_progress: Lanean
+        pending: Zain
       follow_up_questionnaire_message_mailer:
         notification:
+          greeting: Kaixo {name},
+          greeting_without_name: Kaixo,
+          intro: '"%{questionnaire}" galdetegira egindako bidalketari buruzko mezu berri bat jaso duzu:'
           outro: Registro del historial de mensajes.
+          status_updated: Egoera "%{status}" baliora eguneratu da.
+          subject: Mezu berria "%{questionnaire}" galdetegira egindako bidalketari
       map_component:
         map:
           api_not_ready: |
