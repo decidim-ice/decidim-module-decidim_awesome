@@ -323,12 +323,21 @@ eu:
           edit:
             save: Gorde
             title: Baimen-talde berria gehitu
+          index:
+            authorization_properties: Higiezinak baimentzea
+            system_link: Sistemaren administratzailea
           list_authorization_groups:
+            actions: Ekintzak
             destroy: Taldea ezabatu
             edit: Taldea editatu
+            granted_count: Baimendua
             group_name: Taldearen izena
             manage: Kideak kudeatu
             members_count: Parte hartzaileak
+            sync: Baimenak sinkronizatu
+          new:
+            create: Sortu
+            title: Baimen-talde berria gehitu
         checks:
           index:
             admin_head_tags: Administratzailearen aplikazioaren goiburuan etiketa zoragarrietan sartuta
@@ -840,10 +849,12 @@ eu:
             success: Birbideratzea ongi eguneratu da
         follow_up_questionnaire_messages:
           form:
+            add_attachment: Eranskina gehitu
             author: Egilea
             body: Mezua
             status: Egoera
           index:
+            new_status: Berria
             view_survey: Aurreikusi
           new:
             send_message: Bidali
@@ -853,11 +864,15 @@ eu:
         follow_up_questionnaire_statuses:
           edit:
             save: Gorde
+            title: Etiketa editatu
           new:
             save: Gorde
+            title: Etiketa berria
           table:
+            confirm_destroy: Ziur zaude birbideratze hau ezabatu nahi duzula?
             edit: Editatu
             labels_title: Etiketak
+            new: Etiketa berria
             remove: Ezabatu
         follow_up_questionnaires:
           edit:
@@ -916,6 +931,7 @@ eu:
           styles: Estilo pertsonalizatuak
           surveys: Inkestak eta formularioak
           verifications:
+            force_authorizations: Baimenak behartu
             verifications: Egiaztapenak
         menu_hacks:
           create:
