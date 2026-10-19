@@ -1,3 +1,4 @@
+---
 fr:
   active_hashcash:
     submit_filter: Filtrer
@@ -264,11 +265,10 @@ fr:
           authorization_transferred: 'Avertissement : Il y a eu un conflit de vérification et la vérification a été transférée à %{user}'
           conflict: Il y a un conflit avec une autorisation existante
           conflict_help_html: |
-            Vous devez résoudre le conflit de vérification avec\ \ l'utilisateur %{user} avant de vérifier l'utilisateur avec cette autorisation.\ \ 
+            Vous devez résoudre le conflit de vérification avec\ \ l'utilisateur %{user} avant de vérifier l'utilisateur avec cette autorisation.\ \
             <br><br>
-            Un conflit de vérification se produit lorsqu'un autre utilisateur\ \ utilise les mêmes données que l'utilisateur que vous essayez de vérifier.\ \ 
+            Un conflit de vérification se produit lorsqu'un autre utilisateur\ \ utilise les mêmes données que l'utilisateur que vous essayez de vérifier.\ \
             Vous pouvez résoudre ce conflit en supprimant l'autorisation conflictuelle\ \ de l'autre utilisateur ou en utilisant d'autres données pour cet utilisateur.
-
           edit:
             authorize: Vérifier %{user} avec %{name}
             do_it_if_sure: Ne le faites que si vous êtes sûr que cet utilisateur a cette autorisation.
@@ -433,10 +433,10 @@ fr:
               force_authorization_help_text: Ajoutez un texte personnalisé pour expliquer pourquoi une autorisation est nécessaire. Assurez-vous également d'ajouter une méthode de contact au cas où les utilisateurs auraient besoin d'aide.
               hashcash_i18n_key: 'Vous pouvez personnaliser le texte affiché aux utilisateurs dans les boutons de soumission des formulaires de connexion/inscription avec la clé i18n: %{key}'
               hashcash_login: |
-                Protégez les applications Rails contre les robots et les attaques de force brute sans gêner les humains. Hashcash est un système de preuve de travail qui demande aux utilisateurs de résoudre un puzzle informatique (effectué automatiquement par le navigateur) avant de pouvoir s'inscrire. 
+                Protégez les applications Rails contre les robots et les attaques de force brute sans gêner les humains. Hashcash est un système de preuve de travail qui demande aux utilisateurs de résoudre un puzzle informatique (effectué automatiquement par le navigateur) avant de pouvoir s'inscrire.
               hashcash_login_bits: Ce paramètre définit le nombre de bits que l'algorithme Hashcash utilisera pour générer la preuve de travail. Il est recommandé d'utiliser une valeur comprise entre 16 (facile) et 30 bits (extrêmement difficile). La valeur par défaut des formulaires d'inscription est %{bits} bits.
               hashcash_signup: |
-                Protégez les applications Rails contre les robots et les attaques de force brute sans gêner les humains. Hashcash est un système de preuve de travail qui demande aux utilisateurs de résoudre un puzzle informatique (effectué automatiquement par le navigateur) avant de pouvoir s'inscrire. 
+                Protégez les applications Rails contre les robots et les attaques de force brute sans gêner les humains. Hashcash est un système de preuve de travail qui demande aux utilisateurs de résoudre un puzzle informatique (effectué automatiquement par le navigateur) avant de pouvoir s'inscrire.
               hashcash_signup_bits: Ce paramètre définit le nombre de bits que l'algorithme Hashcash utilisera pour générer la preuve de travail. Il est recommandé d'utiliser une valeur comprise entre 16 (facile) et 30 bits (extrêmement difficile). La valeur par défaut des formulaires d'inscription est %{bits} bits.
               intergram_about: Intergram utilise la messagerie Telegram pour gérer un widget de chat en direct intégré dans le bas de la page.
               intergram_config: 'Invitez le bot <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram</a> dans votre groupe ou commencez une conversation avec lui directement. <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
@@ -444,16 +444,16 @@ fr:
               proposal_custom_fields: Créer des champs personnalisés pour la création de proposition qui s'appliquent uniquement à certaines parties du web public (utilisez les restrictions pour cela)
               proposal_custom_fields_example: Les données sont stockées dans un objet XML en utilisant des attributs HTML compatibles (dl,dt,dd éléments) en remplaçant le "body" dans une proposition standard.
               proposal_custom_fields_translations: |-
-                Les libellés, le texte d’aide,\ \ les espaces réservés et les valeurs par défaut peuvent utiliser\ \ les traductions personnalisées de votre application. 
+                Les libellés, le texte d’aide,\ \ les espaces réservés et les valeurs par défaut peuvent utiliser\ \ les traductions personnalisées de votre application.
                 Pour cela,\ \ au lieu d'utiliser une chaîne de caractères littérale, utilisez\ \ la clé i18n (elle doit contenir au moins un point).
                 Par exemple\ \ :
-                - "activemodel.attributes.proposal.title au lieu de "Titre"\ 
-                - "activemodel.attributes.proposition.address" au lieu de "Adresse"\ 
+                - "activemodel.attributes.proposal.title au lieu de "Titre"\
+                - "activemodel.attributes.proposition.address" au lieu de "Adresse"\
                 Ou utilisez vos propres clés en combinaison avec d'autres outils\ \ pour définir des traductions (par exemple: utiliser le module de\ \ personnalisation des termes) :
                 - "myapp.custom_fields.bio" à\ \ la place de "Biography"
               proposal_private_custom_fields: Similaire aux champs publics, mais cette information ne sera pas visible publiquement (seuls les administrateurs y auront accès).
               proposal_private_custom_fields_translations: |
-                Les champs privés personnalisés sont affichés dans une section distincte avec ce texte d'information : %{warning} Ce texte peut être personnalisé avec une traduction personnalisée en utilisant la clé: %{key} 
+                Les champs privés personnalisés sont affichés dans une section distincte avec ce texte d'information : %{warning} Ce texte peut être personnalisé avec une traduction personnalisée en utilisant la clé: %{key}
               scoped_admin_styles: Soyez conscient que cacher des éléments pourrait rendre l'interface administrateur inutilisable. Agissez avec prudence.
               scoped_admin_styles_variables: 'Vous pouvez utiliser les variables CSS suivantes pour les couleurs personnalisées de l''organisation :'
               scoped_admin_styles_warning: "<strong>Avertissement</strong>: Ajoutez ici un CSS personnalisé qui s'applique seulement à cet administrateur."
@@ -468,14 +468,14 @@ fr:
               validate_title_max_marks_together: 'Limiter le nombre de points d''interrogation et d''exclamation qui peuvent être écrits ensemble. Par exemple : si c''est 2, alors ''!!!'' ne sera pas autorisé dans le texte'
               validate_title_min_length: Le titre est toujours obligatoire et ce nombre ne peut être égal à zéro
               verifications_html: |
-                Ici, vous pouvez ajouter des restrictions d'accès supplémentaires aux espaces participatifs ou aux composants qui forceront les utilisateurs à être vérifiés avant d'accéder à certains emplacements (afin d'empêcher le spam par exemple).<br> Les restrictions s'appliquent à tous les utilisateurs mais les administrateurs auront toujours accès au panneau /admin. 
+                Ici, vous pouvez ajouter des restrictions d'accès supplémentaires aux espaces participatifs ou aux composants qui forceront les utilisateurs à être vérifiés avant d'accéder à certains emplacements (afin d'empêcher le spam par exemple).<br> Les restrictions s'appliquent à tous les utilisateurs mais les administrateurs auront toujours accès au panneau /admin.
             validators:
               body: Validations d'entrée de l'utilisateur pour le champ "body"
               title: Validations d'entrée de l'utilisateur pour le champ "body"
           form_force_authorizations:
             delete: Supprimer
             force_authorizations_html: |
-              Définissez des groupes de vérification. Chaque groupe peut exiger que les utilisateurs soient vérifiés par une ou plusieurs méthodes pour accéder à des zones spécifiques de la plateforme. 
+              Définissez des groupes de vérification. Chaque groupe peut exiger que les utilisateurs soient vérifiés par une ou plusieurs méthodes pour accéder à des zones spécifiques de la plateforme.
             help: Vous pouvez définir des méthodes pour les groupes d'autorisation et restreindre l'accès en fonction d'elles.
             new: Ajouter un nouveau groupe d'autorisation
             remove: Supprimer ce "groupe d'autorisation"
@@ -582,7 +582,7 @@ fr:
             title: Nouvelle catégorie de cookies
           script_config:
             script_consent_help_html: |
-              <p>Les scripts liés à cette catégorie ne respectent le consentement que lorsqu'ils sont ajoutés dans un script avec l'attribut <span class="label">data-consent="%{category}"</span>.</p> <p>L'emplacement recommandé pour les ajouter est <span class="label">app/views/layouts/decidim/_head_extra.html.erb</span> ou dans les snippets d'en-tête (s'ils sont activés).</p> <p>Exemple :</p><br><pre>%{example}</pre><br> <p>Sans <code>type="text/plain"</code>, le paramètre de consentement aux données de l'utilisateur n'a aucun effet.<br>Plus d'informations : <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Adding scripts which require data consent</a>.</p> 
+              <p>Les scripts liés à cette catégorie ne respectent le consentement que lorsqu'ils sont ajoutés dans un script avec l'attribut <span class="label">data-consent="%{category}"</span>.</p> <p>L'emplacement recommandé pour les ajouter est <span class="label">app/views/layouts/decidim/_head_extra.html.erb</span> ou dans les snippets d'en-tête (s'ils sont activés).</p> <p>Exemple :</p><br><pre>%{example}</pre><br> <p>Sans <code>type="text/plain"</code>, le paramètre de consentement aux données de l'utilisateur n'a aucun effet.<br>Plus d'informations : <a href="https://docs.decidim.org/en/develop/customize/data_consent.html#_adding_scripts_which_require_data_consent" target="_blank" rel="noopener">Adding scripts which require data consent</a>.</p>
           update:
             error: Erreur lors de la mise à jour de la catégorie de cookie ! %{error}
             success: Catégorie de cookie mise à jour avec succès
@@ -896,7 +896,7 @@ fr:
             bits: Bits
             created_at: Créé le
             help_html: |
-              Cette page montre les tampons de Hashcash qui ont été détectés dans le système. Hashcash est un système de preuve de travail qui demande aux utilisateurs de résoudre un puzzle informatique (effectué automatiquement par le navigateur) avant de pouvoir s'inscrire. <br><br> Chaque entrée de cette liste représente un tampon de Hashcash qui a été généré par un utilisateur chaque fois qu'il s'est inscrit ou s'est connecté. 
+              Cette page montre les tampons de Hashcash qui ont été détectés dans le système. Hashcash est un système de preuve de travail qui demande aux utilisateurs de résoudre un puzzle informatique (effectué automatiquement par le navigateur) avant de pouvoir s'inscrire. <br><br> Chaque entrée de cette liste représente un tampon de Hashcash qui a été généré par un utilisateur chaque fois qu'il s'est inscrit ou s'est connecté.
             ip_address: Adresse IP
             no_data: Aucun tampon de Hashcash trouvé
             request_path: Chemin de la requête
@@ -992,7 +992,7 @@ fr:
             destroying: Les données privées pour %{title} sont sur le point d'être effacées. Veuillez vérifier à nouveau dans quelques minutes.
             done: Terminé
             help_html: |
-              Cet outil vous permet de supprimer toutes les données privées d'un espace ou d'une fonctionnalité participatif spécifique. Cette action est irréversible et supprimera toutes les données privées de la base de données. <br><br> <strong>Qu'est-ce qui est considéré comme des données privées ?</strong> <br> Les données privées sont toutes les informations qui ne sont pas accessibles au public et qui sont uniquement accessibles aux administrateurs. Cela inclut, pour le moment, les informations des champs personnalisés privés. <br><br> <strong>Que se passe-t-il lorsque je supprime des données privées ?</strong> <br> Lorsque vous supprimez des données privées, toutes les informations privées de l'espace ou du composant participatif sélectionné seront définitivement supprimées de la base de données. Un journal de cette action sera stocké dans le système à des fins d'audit. <br><br> <strong>Qu'advient-il des données publiques ?</strong> <br> Les données publiques ne seront pas affectées par cette action. Seules les données privées seront supprimées. <br><br> <strong>Y a-t-il un délai minimum à attendre avant de supprimer des données privées ?</strong> <br> Oui, vous ne pouvez pas supprimer des données privées si la dernière mise à jour date de moins de %{time_ago}. Vous pouvez modifier cette configuration dans le fichier d'initialisation. 
+              Cet outil vous permet de supprimer toutes les données privées d'un espace ou d'une fonctionnalité participatif spécifique. Cette action est irréversible et supprimera toutes les données privées de la base de données. <br><br> <strong>Qu'est-ce qui est considéré comme des données privées ?</strong> <br> Les données privées sont toutes les informations qui ne sont pas accessibles au public et qui sont uniquement accessibles aux administrateurs. Cela inclut, pour le moment, les informations des champs personnalisés privés. <br><br> <strong>Que se passe-t-il lorsque je supprime des données privées ?</strong> <br> Lorsque vous supprimez des données privées, toutes les informations privées de l'espace ou du composant participatif sélectionné seront définitivement supprimées de la base de données. Un journal de cette action sera stocké dans le système à des fins d'audit. <br><br> <strong>Qu'advient-il des données publiques ?</strong> <br> Les données publiques ne seront pas affectées par cette action. Seules les données privées seront supprimées. <br><br> <strong>Y a-t-il un délai minimum à attendre avant de supprimer des données privées ?</strong> <br> Oui, vous ne pouvez pas supprimer des données privées si la dernière mise à jour date de moins de %{time_ago}. Vous pouvez modifier cette configuration dans le fichier d'initialisation.
             items_count: Total affecté
             last_date: Dernière mise à jour
             no_data: Aucune donnée privée plus ancienne que %{time_ago}
@@ -1040,7 +1040,7 @@ fr:
           current_amendment_html: <p>Vous pouvez <a href="%{amendment_link}">accéder à l'amendement actuel ici</a>.</p>
           dismiss: D'accord
           explanation_html: |
-            <p>Actuellement, il y a un autre amendement est en cours d'analyse pour cette proposition. Pour en créer un nouveau, vous devez attendre que l'amendement actuel soit accepté ou rejeté.</p> <p>Vous pouvez également contacter l'auteur de la présente proposition à l'adresse suivante <a href="%{proposal_link}">en laissant un commentaire</a> et tenter d'accélérer la résolution de l'amendement actuel.</p> 
+            <p>Actuellement, il y a un autre amendement est en cours d'analyse pour cette proposition. Pour en créer un nouveau, vous devez attendre que l'amendement actuel soit accepté ou rejeté.</p> <p>Vous pouvez également contacter l'auteur de la présente proposition à l'adresse suivante <a href="%{proposal_link}">en laissant un commentaire</a> et tenter d'accélérer la résolution de l'amendement actuel.</p>
         pending_limit_reached: Désolé, il ne peut y avoir qu'un seul amendement en attente à la fois. Veuillez patienter jusqu'à ce que "%{emendation}" soit accepté ou rejeté.
       awesome_authorization_handler:
         admin_managed_html: Cette autorisation est généralement gérée automatiquement. Si vous pensez que vous devriez être vérifié, essayez d'appuyer sur le bouton "Envoyer" ci-dessous.<br>Si cela ne fonctionne pas, veuillez contacter les administrateurs de la plateforme.
@@ -1202,7 +1202,6 @@ fr:
               Decidim::Api::Schema.max_complexity = 5000
               Decidim::Api::Schema.max_depth\ \ = 50
             end</pre>
-
           error:
             unavailable: La carte n'est pas disponible. Veuillez configurer le géocodage pour activer ce composant.
           show:
@@ -1239,7 +1238,7 @@ fr:
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |
-            Les administrateurs seront en mesure de vérifier manuellement les utilisateurs avec ces autorisations. <br>Utilisez cette fonctionnalité avec précaution, car elle peut entraîner des problèmes de sécurité. 
+            Les administrateurs seront en mesure de vérifier manuellement les utilisateurs avec ces autorisations. <br>Utilisez cette fonctionnalité avec précaution, car elle peut entraîner des problèmes de sécurité.
           awesome_tweaks: Réglages Decidim Awesome
       validators:
         too_much_caps: Utilise trop de majuscule (plus de %{percent} du texte)
@@ -1273,7 +1272,7 @@ fr:
     events:
       decidim_awesome:
         follow_up_questionnaire_message_status_changed:
-          notification_title: Le statut de votre soumission à « %{questionnaire} » a été modifié en « %{status} ». 
+          notification_title: Le statut de votre soumission à « %{questionnaire} » a été modifié en « %{status} ».
     meetings:
       meetings_map:
         view_meeting: Voir la rencontre
