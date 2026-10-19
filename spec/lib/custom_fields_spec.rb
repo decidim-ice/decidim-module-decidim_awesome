@@ -294,5 +294,22 @@ module Decidim::DecidimAwesome
         end
       end
     end
+
+    context "when validating the fields" do
+      let(:box1) { '[{"type":"text","required":true,"label":"Age","name":"age","maxlength":"1"},{"type":"text","label":"Nickname","name":"nickname"}]' }
+      let(:xml) { '<xml><dl><dt name="age">Age</dt><dd id="age"><div>44</div></dd></dl></xml>' }
+
+      it "returns blank errors for empty required fields" do
+        expect(subject.validation_errors).to include({ field: "Birthday", error: :blank })
+      end
+
+      it "returns too_long errors for values longer than maxlength" do
+        expect(subject.validation_errors).to include({ field: "Age", error: :too_long, count: 1 })
+      end
+
+      it "ignores empty optional fields" do
+        expect(subject.validation_errors.pluck(:field)).not_to include("Nickname")
+      end
+    end
   end
 end

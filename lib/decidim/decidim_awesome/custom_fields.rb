@@ -36,7 +36,23 @@ module Decidim
         translate_values!
       end
 
+      def validation_errors
+        @fields.filter_map { |field| validation_error(field) }
+      end
+
       private
+
+      def validation_error(field)
+        return unless field["name"]
+
+        values = Array(field["userData"]).map { |value| Nokogiri::HTML.fragment(value.to_s).text.strip }.compact_blank
+        label = Nokogiri::HTML.fragment(field["label"].to_s).text.strip.presence || field["name"]
+        maxlength = field["maxlength"].to_i
+
+        return { field: label, error: :blank } if values.empty? && ActiveModel::Type::Boolean.new.cast(field["required"])
+
+        { field: label, error: :too_long, count: maxlength } if maxlength.positive? && values.any? { |value| value.length > maxlength }
+      end
 
       def parse_xml(xml)
         @xml = xml
