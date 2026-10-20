@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const store = new FormStorage(`#${form.id}`, {
     name: storeId,
     ignores: [
-      // '[type="hidden"]',
+      '[type="hidden"]',
       '[name="utf8"]',
       '[name="authenticity_token"]',
       "[disabled]"
