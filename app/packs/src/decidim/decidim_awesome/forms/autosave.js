@@ -12,8 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const storeId = `awesome_autosave:${questionnaireId}`;
-  const storeCheckboxesId = `awesome_autosave:checkboxes:${questionnaireId}`;
+  const storeId = `awesome_autosave:v2:${questionnaireId}`;
+  const storeCheckboxesId = `awesome_autosave:v2:checkboxes:${questionnaireId}`;
+  if (window.localStorage) {
+    window.localStorage.removeItem(`awesome_autosave:${questionnaireId}`);
+    window.localStorage.removeItem(`awesome_autosave:checkboxes:${questionnaireId}`);
+  }
   const form = document.querySelector("form.response-questionnaire");
 
   if (!form) {
