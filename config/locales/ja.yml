@@ -353,7 +353,7 @@ ja:
                 - "Title" の代わりに "activemodel.attributes.proposal.title" を使用する
                 - "Address "の代わりに "activemodel.attributes.proposal.address" を使用する
                 また、独自のキーを他のツールと組み合わせて翻訳を定義することもできます (例: Term Customizer モジュールを使用する):
-                 - "Biography "の代わりに "myapp.custom_fields.bio"を使用する
+                - "Biography "の代わりに "myapp.custom_fields.bio"を使用する
               proposal_private_custom_fields: 公開フィールドと同様ですが、この情報は公開されません(管理者のみがアクセスできます)。
               proposal_private_custom_fields_translations: |
                 非公開カスタムフィールドは、このテキストで別個のボックスに表示されます：
