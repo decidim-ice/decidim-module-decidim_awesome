@@ -35,8 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ignores: [
       '[type="hidden"]',
       '[name="utf8"]',
-      '[name="authenticity_token"]',
-      "[disabled]"
+      '[name="authenticity_token"]'
     ]
   });
 
@@ -122,6 +121,12 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("No checkboxes found");
   }
 
+  if (savedState) {
+    form.querySelectorAll('input:not([type="hidden"]), textarea, select').forEach((el) => {
+      el.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+  }
+
   const save = () => {
     window.localStorage.setItem(storeId, translateState(store.getState(), toQuestionName));
     // save checkbox manually
@@ -138,4 +143,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // save changes when modifications
   form.addEventListener("change", save);
+
+  form.addEventListener("submit", () => {
+    window.localStorage.removeItem(storeId);
+    window.localStorage.removeItem(storeCheckboxesId);
+  });
 });
