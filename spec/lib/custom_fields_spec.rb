@@ -307,6 +307,13 @@ module Decidim::DecidimAwesome
         expect(subject.validation_errors).to include({ field: "Age", error: :too_long, count: 1 })
       end
 
+      it "validates text fields against their body content instead of alt attributes" do
+        let_xml = '<xml><dl><dt name="age">Age</dt><dd id="age"><div alt="44">4</div></dd></dl></xml>'
+        subject.apply_xml let_xml
+
+        expect(subject.validation_errors).not_to include({ field: "Age", error: :too_long, count: 1 })
+      end
+
       it "ignores empty optional fields" do
         expect(subject.validation_errors.pluck(:field)).not_to include("Nickname")
       end

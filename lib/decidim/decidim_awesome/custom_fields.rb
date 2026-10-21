@@ -45,12 +45,27 @@ module Decidim
       def validation_error(field)
         return unless field["name"]
 
-        texts = Array(field["userData"]).map { |value| Nokogiri::HTML.fragment(value.to_s).text }
+        texts = validation_texts(field)
         maxlength = field["maxlength"].to_i
 
         return field_error(field, :blank) if texts.all?(&:blank?) && ActiveModel::Type::Boolean.new.cast(field["required"])
 
         field_error(field, :too_long, count: maxlength) if maxlength.positive? && texts.any? { |text| text.length > maxlength }
+      end
+
+      def validation_texts(field)
+        values = if data.present?
+                   nodes = data.search("##{field["name"]} div")
+                   nodes.map do |node|
+                     value = node.inner_html(encoding: "UTF-8")
+                     value = node.attribute("alt")&.value if value.blank? && %w(select date).include?(field["type"])
+                     value
+                   end
+                 else
+                   Array(field["userData"])
+                 end
+
+        values.map { |value| Nokogiri::HTML.fragment(value.to_s).text }
       end
 
       def field_error(field, error, **options)
