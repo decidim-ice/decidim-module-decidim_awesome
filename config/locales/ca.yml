@@ -1205,7 +1205,7 @@ ca:
           blank: El camp '%{field}' no pot estar buit
           invalid_fields: No s'ha pogut analitzar el contingut però s'ha assignat al camp '%{field}'
           invalid_xml: 'No s''ha pogut analitzar el contingut: no s''han trobat els elements DL/DD a l''XML'
-          too_long: El camp '%{field}' és massa llarg (màxim %{max_length} caràcters)
+          too_long: El camp '%{field}' és massa llarg (màxim %{count} caràcters)
       default_statuses:
         answered: Contestada
         in_progress: En curs
