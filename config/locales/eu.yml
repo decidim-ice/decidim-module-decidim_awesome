@@ -313,22 +313,60 @@ eu:
             not_synced_html: Erabiltzailearen baimenak ez daude baimen-talde horrekin sinkronizatuta. %{sync} kideen zerrenda eguneratzeko.
             remove: Ezabatu kidea
             sync: Baimenak sinkronizatzea
-            title: Manage members for "%{group}"
+            title: Kudeatu "%{group}" taldeko kideak
             user: Decidim-en parte-hartzaileka
           new:
             create: Kideak gehitu
             emails_help: Utzi mezu elektronikoak hemen; "@" duten hitzak bakarrik hartuko dira mezu elektronikotzat.
             or: edo
+            remove_previous_members: Kendu taldeko aurreko kideak (%{count} parte-hartzaile)
+            title: Gehitu kideak "%{group}" taldera
+          update:
+            empty: Ez da mezu elektronikorik aurkitu sarreran edo CSV fitxategian. Gehitu gutxienez mezu elektroniko bat.
         awesome_authorizations:
+          create:
+            error: Errorea baimen-taldea sortzean! %{error}
+            success: Baimen-taldea behar bezala sortu da
+          destroy:
+            success: Baimen-taldea behar bezala ezabatu da
           edit:
             save: Gorde
             title: Baimen-talde berria gehitu
+          form:
+            name_help: Izenburu hau egiaztapen-txartelean agertzen da.
+            purpose_help: Testu hau egiaztapen-txartelean agertzen da baimenaren helburua edo erabilera asmoa azaltzeko.
+          index:
+            authorization_groups: Baimen-taldeak
+            authorization_properties: Baimenaren propietateak
+            create_group: Sortu baimen-talde berria
+            description_html: Erabili atal hau pertsona-taldeak sortzeko, bakoitza Decidim-en osagaien baimen espezifikoekin.<br>Talde hauek automatikoki baimenduko dira alta berrietarako eta zerrenda hau eguneratzen den bakoitzean.
+            edit_properties: Editatu baimenaren propietateak
+            not_available: Funtzio hau erabiltzeko, Decidim Awesome baimen-fluxua gaitu behar duzu %{system} administrazioan.
+            properties_description_html: Erabili baimen hau osagaietan parte-hartzaile-talde zehatzetarako sarbidea mugatzeko. Hautatuta dagoenean, baimendutako taldeak aukera ditzakezu.
+            system_link: Sistemaren administratzailea
+            title: Baimen zoragarriak
           list_authorization_groups:
+            actions: Ekintzak
+            confirm_destroy: Ziur zaude baimen-talde hau suntsitu nahi duzula? Talde honetako parte-hartzaile guztiek galduko dute baimena.
             destroy: Taldea ezabatu
             edit: Taldea editatu
+            granted_count: Baimendua
             group_name: Taldearen izena
             manage: Kideak kudeatu
             members_count: Parte hartzaileak
+            no_groups: Oraindik ez da baimen-talerik sortu
+            out_of_sync: Sinkronizatu gabe
+            sync: Baimenak sinkronizatu
+            sync_status: Sinkronizazio-egoera
+            synced: Sinkronizatuta
+          new:
+            create: Sortu
+            title: Baimen-talde berria gehitu
+          sync:
+            success: Sinkronizazioa hasi da
+          update:
+            error: Errorea baimen-taldea eguneratzean! %{error}
+            success: Baimen-taldea behar bezala eguneratu da
         checks:
           index:
             admin_head_tags: Administratzailearen aplikazioaren goiburuan etiketa zoragarrietan sartuta
@@ -340,6 +378,8 @@ eu:
             decidim-core: Core moduluatik
             decidim-participatory_processes: Partaidetza Prozesuak modulokoa
             decidim-proposals: Proposamen moduluatik
+            decidim-system: Sistema modulutik
+            decidim-verifications: Egiaztapen modulutik
             decidim_update_available: 'Bertsio berri bat dago eskuragarri: %{latest_version}'
             decidim_version: Decidim bertsioa %{version}
             errors:
@@ -620,7 +660,7 @@ eu:
               matomo_pk_id: Bisitariaren ID bakarra gordetzeko eta berriz itzultzen diren bisitariak identifikatzeko erabilia.
               matomo_pk_ref: Jatorriari buruzko informazioa (erabiltzailea webgunera ekarri duen erreferentzia-iturria) gordetzeko erabilia.
               matomo_pk_ses: Uneko bisitarako aldi baterako saioaren datuak gordetzeko erabilia.
-              osm_location: Stores map location/zoom defaults for OpenStreetMap interactions.
+              osm_location: OpenStreetMap elkarrekintzetarako mapa-kokapenaren/zoomaren balio lehenetsiak gordetzen ditu.
               osm_session: Aldi baterako saioko datuak gordetzen ditu OpenStreetMap-eko erabiltzaileen interakzioetarako.
               osm_totp_token: OpenStreetMap kontuko lan-fluxuetarako 2FArekin lotutako token-datuak aldi baterako gordetzen ditu.
               pref: Funtzionaltasunerako erabiltzen da. YouTube-k cookie hau erabiltzen du, besteak beste, orriaren konfigurazio gogokoena eta erreprodukzio-hobespenak gordetzeko, hala nola erreprodukzio automatikoaren aukera esplizituak, edukia ausazko ordenan erreproduzitzea eta erreproduzitzailearen tamaina. Irakurri gehiago "Googlek cookieak nola erabiltzen dituen" atalean
@@ -715,8 +755,8 @@ eu:
                 one: Google Analytics (cookie 1)
                 other: Google Analytics (%{count} cookieak)
               google_maps_embeds:
-                one: Google Maps incrustaciones (%{count} cookie)
-                other: Google Maps incrustaciones (%{count} cookies)
+                one: Google Maps txertaketak (cookie %{count})
+                other: Google Maps txertaketak (%{count} cookie)
               google_tag_manager:
                 one: Google Tag Manager (%{count} cookie)
                 other: Google Tag Manager (%{count} cookie)
@@ -730,7 +770,7 @@ eu:
                 one: Jitsi Meet (%{count} cookie)
                 other: Jitsi Meet (%{count} cookie)
               linkedin_insight:
-                one: LinkedIn Insight (%{count} cookies)
+                one: LinkedIn Insight (cookie %{count})
                 other: LinkedIn Insight (%{count} cookie)
               matomo:
                 one: Matomo (cookie 1)
@@ -748,7 +788,7 @@ eu:
                 one: YouTube txertaketak (%{count} cookie)
                 other: YouTube txertaketak (%{count} cookie)
               youtube_nocookie:
-                one: YouTube cookierik gabe (1. cookiea)
+                one: YouTube cookierik gabe (cookie %{count})
                 other: YouTube cookierik gabe (%{count} cookie)
             services:
               cloudflare_turnstile: Cloudflare Turnstile
@@ -839,34 +879,108 @@ eu:
             error: Birbideratzea eguneratzean errorea! %{error}
             success: Birbideratzea ongi eguneratu da
         follow_up_questionnaire_messages:
+          auto_status_change_body: 'Egoera honetara aldatu da: %{status}'
+          create:
+            error: Errorea mezua bidaltzean! %{error}
+            success: Mezua behar bezala bidali da
+            success_without_email: Mezua gorde da, baina ez da posta elektronikoz bidali erantzuleak helbide elektronikorik ez duelako
           form:
+            add_attachment: Eranskina gehitu
+            attachments: Eranskina
             author: Egilea
             body: Mezua
+            body_help: Utzi mezua hutsik pertsona horri egoera-aldaketaren berri emateko soilik (aplikazio barneko jakinarazpena, posta elektronikoz ere bidaliko da).
+            edit_attachment: Editatu eranskina
+            select_a_status: Hautatu egoera bat
             status: Egoera
           index:
+            conversation: Elkarrizketa
+            last_action_answered: Duela %{time} erantzunda
+            last_action_labeled: Duela %{time} etiketatuta
+            new_status: Berria
+            not_answered: "(erantzun gabe)"
+            not_processable: Erantzulerik ez - Ezin da prozesatu
+            see_full_responses: Ikusi erantzun osoak
             view_survey: Aurreikusi
           new:
+            anonymous_respondent: Erantzun anonimoa
+            messages_count:
+              one: "Mezu %{count}"
+              other: "%{count} mezu"
+            new_reply: Mezu berria
+            new_reply_help_text: Bidali mezua erantzuleari. Mezua "Erantzun" helbidea %{email}-ra ezarrita bidaliko da. Helbide horri zuzenean emandako erantzunak ez dira hemen jasoko.
+            new_reply_no_reply_to_help_text: Bidali mezua erantzuleari. Jarraipen-galdera honek ez du erantzuteko helbiderik, beraz parte-hartzaileen erantzunak ez zaizkizu iritsiko.
+            no_email_warning: Erantzule honek ez du helbide elektronikorik. Mezua gorde egingo da, baina ez da posta elektronikoz bidaliko.
             send_message: Bidali
+            submitted_at: '%{date} datan bidalia'
+            title: Mezuak kudeatu
           reply_history:
+            documents: Dokumentuak
+            empty: Oraindik ez zaio mezuarik bidali pertsona honi.
             photos: Irudiak
             title: Mezuen historiaren erregistroa
         follow_up_questionnaire_statuses:
+          create:
+            error: Errorea etiketa sortzean! %{error}
+            success: Etiketa behar bezala sortu da
+          destroy:
+            last_status: Gutxienez etiketa bat beharrezkoa da, beraz azkena ezin da kendu.
+            not_removable: Etiketa hau mezuetan erabiltzen da eta ezin da kendu.
+            success: Etiketa behar bezala ezabatu da
           edit:
             save: Gorde
+            title: Etiketa editatu
+          form:
+            name_taken_error: Izen hori galdetegi honetako beste etiketa batek erabiltzen du jada.
           new:
             save: Gorde
+            title: Etiketa berria
           table:
+            confirm_destroy: Ziur zaude etiketa hau ezabatu nahi duzula?
+            description: Etiketak erantzun baten egoera jarraitzeko erabiltzen dira
             edit: Editatu
             labels_title: Etiketak
+            last_status: Gutxienez etiketa bat beharrezkoa da, beraz azkena ezin da kendu.
+            new: Etiketa berria
+            not_removable: Etiketa hau mezuetan erabiltzen da eta ezin da kendu.
             remove: Ezabatu
+          update:
+            error: Errorea etiketa eguneratzean! %{error}
+            success: Etiketa behar bezala eguneratu da
         follow_up_questionnaires:
+          create:
+            error: Errorea jarraipen-galdetegia sortzean! %{error}
+            success: Jarraipen-galdetegia behar bezala sortu da
+          destroy:
+            error: Errorea jarraipen-galdetegia ezabatzean! %{error}
+            not_removable: Erantzuleei bidalitako mezuak ditu eta ezin da ezabatu.
+            success: Jarraipen-galdetegia behar bezala ezabatu da
+            unexpected_error: Arazo bat egon da ezabatzean.
           edit:
             save: Gorde
+            title: Jarraipen-galdetegia
+          form:
+            anonymous_option_flag: anonimoa, galderarik gabe
+            name_help: Partaidetza-espazioan, izen hau menu-elementu berri gisa ikusiko duzu, erantzunak kudeatzeko.
+            questionnaire_locked: Jarraipen-galdera honek baditu erantzuleei bidalitako mezuak, beraz ezin da inkesta aldatu.
+            reply_to_help: Aukerakoa. Parte-hartzaileek jakinarazpen-mezu elektronikoei emandako erantzunak helbide honetara joango dira. Utzi hutsik, eta erantzunak plataformaren bidaltzailearen helbidera joango dira.
+            responder_email_help: Eremu hau erantzungo den helbide elektronikoa aurkitzeko erabiliko da. Galdetegia anonimoa ez bada, atal hau saihets dezakezu eta parte-hartzailea erabiliko da.
+            responder_name_help: Eremu hau erantzulearen izena aurkitzeko eta erakusteko erabiliko da. Galdetegia anonimoa ez bada, atal hau saihets dezakezu eta parte-hartzailea erabiliko da.
+            select_questionnaire_placeholder: Hautatu galdetegi bat
           index:
+            confirm_destroy: Ziur zaude jarraipen-galdetegi hau ezabatu nahi duzula?
+            description: Bihurtu galdetegien bidalketak hari elkarreragile bihurt. Egin klik edozein erantzunetan parte-hartzaileari zuzenean mezu bat bidaltzeko, jarraipen-etiketak aplikatzeko eta komunikazio-historia osoa ikusteko.
             edit: Editatu
+            manage_responses: Erantzunak kudeatu
+            new: Jarraipen berria
+            not_removable: Erantzuleei bidalitako mezuak ditu eta ezin da ezabatu.
             remove: Ezabatu
           new:
             save: Gorde
+            title: Jarraipen-galdetegiak
+          update:
+            error: Errorea jarraipen-galdetegia eguneratzean! %{error}
+            success: Jarraipen-galdetegia behar bezala eguneratu da
         hashcash:
           filters:
             ip_addresses: IP helbideak ikusi
@@ -904,6 +1018,7 @@ eu:
           cookie_management: Cookieen kudeaketa
           custom_redirects: Birbideratze pertsonalizatuak
           editors: Editorearen hackak
+          follow_up_questionnaires: Jarraipen-galdetegiak
           livechat: Zuzeneko Txata
           maintenance:
             checks: Sistemaren bateragarritasuna
@@ -916,6 +1031,8 @@ eu:
           styles: Estilo pertsonalizatuak
           surveys: Inkestak eta formularioak
           verifications:
+            awesome_authorizations: Baimen zoragarriak
+            force_authorizations: Baimenak behartu
             verifications: Egiaztapenak
         menu_hacks:
           create:
@@ -1011,6 +1128,17 @@ eu:
       admin_log:
         component:
           destroy_private_data: "%{user_name}-ek %{space_name}-en %{resource_name}-rako %{count} datu pribatu elementu suntsitu zituen."
+        follow_up_questionnaire:
+          create: "%{questionnaire_name} jarraipen-galdetegia %{user_name} parte-hartzaileak sortu du"
+          delete: "%{user_name} parte-hatzaileak \"%{questionnaire_name}\" jarraipen-galdetegia ezabatu du"
+          update: "%{user_name} parte-hartzaileak %{questionnaire_name} jarraipen-galdetegia eguneratu du"
+        follow_up_questionnaire_message:
+          create: "%{user_name} parte-hartzaileak mezu bat bidali du %{questionnaire_name} jarraipen-galdetegian"
+          create_as: "%{user_name} parte-hartzaileak %{author_name} gisa mezu bat bidali du %{questionnaire_name} jarraipen-galdetegian"
+        follow_up_questionnaire_status:
+          create: "%{user_name} parte-hartzaileak %{label_name} etiketa berria sortu du %{questionnaire_name} jarraipen-galdetegirako"
+          delete: "%{user_name} parte-hartzaileak %{label_name} etiketa ezabatu du %{questionnaire_name} jarraipen-galdetegitik"
+          update: "%{user_name} parte-hartzaileak %{label_name} etiketa eguneratu du %{questionnaire_name} jarraipen-galdetegirako"
         user:
           admin_creates_authorization: "%{user_name}-ek %{handler_name} erabiliz %{resource_name} egiaztatu zuen"
           admin_destroys_authorization: "%{user_name}-ek %{resource_name}-en %{handler_name} egiaztapena suntsitu zuen"
@@ -1024,6 +1152,13 @@ eu:
             <p>Gaur egun, proposamen honetarako beste zuzenketa bat aztertzen ari dira. Berria sortzeko, oraingoa onartu edo baztertu arte itxaron behar da.</p>
             <p>proposamen honen egilearengana ere irits zaitezke <a href="%{proposal_link}">iruzkin bat utziz</a> eta oraingo aldaketaren ebazpena arintzen saiatuz.</p>
         pending_limit_reached: Barkatu, aldi berean zuzenketa bakarra izan daiteke zain. Mesedez, itxaron "%{emendation}" onartua edo baztertua izan arte.
+      awesome_authorization_handler:
+        admin_managed_html: Baimen hau automatikoki kudeatzen da normalean. Egiaztatuta egon beharko zenukeela uste baduzu, sakatu beheko "Bidali" botoia.<br>Hori funtzionatzen ez badu, jarri harremanetan plataformako administratzaileekin.
+        errors:
+          user_not_in_group: Zure helbide elektronikoaren arabera (%{email}), ez zara zu egiaztatzeko gai den talde bateko kide.
+        explanation: Egiaztatu erakunde-talde bateko kide gisa
+        member_of: '%{groups} taldeko kidea'
+        name: Erakunde-taldearen baimena
       config:
         intergram:
           auto_no_response: Badirudi inor ez dagoela une honetan erantzuteko. Mesedez, esan nola har dezakegun zurekin harremanetan, eta ahalik eta azkarren erantzungo dizugu.
@@ -1115,7 +1250,10 @@ eu:
           menu_meetings: Erakutsi bilerak
           menu_merge_components: Batu mota bereko osagai guztiak menuan
           name: Mapa zoragarria
+          show_answered: Erantzundako proposamenak erakusten ditu
           show_not_answered: Erakutsi erantzun gabeko proposamenak
+          show_not_rejected: Baztertuta ez dauden proposamenak erakutsi
+          show_not_withdrawn: Erretiratzen ez diren proposamenak erakutsi
           show_rejected: Erakutsi baztertutako proposamenak
           show_withdrawn: Erakutsi erretiratutako proposamenak
           taxonomies: Taxonomiak
@@ -1153,9 +1291,18 @@ eu:
         errors:
           invalid_fields: Edukiak ezin izan dira analizatu baina '%{field}' eremura esleitu dira
           invalid_xml: 'Edukiak ezin izan dira analizatu: DL/DD elementuak XMLan aurkitu ez dira'
+      default_statuses:
+        answered: Erantzunda
+        in_progress: Lanean
+        pending: Zain
       follow_up_questionnaire_message_mailer:
         notification:
+          greeting: Kaixo {name},
+          greeting_without_name: Kaixo,
+          intro: '"%{questionnaire}" galdetegira egindako bidalketari buruzko mezu berri bat jaso duzu:'
           outro: Registro del historial de mensajes.
+          status_updated: Egoera "%{status}" baliora eguneratu da.
+          subject: Mezu berria "%{questionnaire}" galdetegira egindako bidalketari
       map_component:
         map:
           api_not_ready: |
@@ -1237,6 +1384,10 @@ eu:
       show:
         admin_actions: Administrazio-ekintzak
         awesome_private_proposals: Proposamenak eremu pribatuetara esportatu
+    events:
+      decidim_awesome:
+        follow_up_questionnaire_message_status_changed:
+          notification_title: '"%{questionnaire}" galdetegira egindako bidalketaren egoera "%{status}" baliora aldatu da.'
     meetings:
       meetings_map:
         view_meeting: Bilera ikusi
@@ -1278,6 +1429,7 @@ eu:
           autosaved_error: LocalStorage zure arakatzailean ez da onartzen, formularioa automatikoki ezin da gorde.
           autosaved_retrieved: Formulario honen datuak aurreko saio batetik berreskuratu dira
           autosaved_success: Datuak tokiko biltegian gordeta
+          awesome_authorization_groups_placeholder: Talde guztiak baimenduta
           drag_and_drop_image: Irudiak arrastatuz eta askatuz edo itsatsiz gehitu
           hashtags: Hashtagak
           items: elementuak
