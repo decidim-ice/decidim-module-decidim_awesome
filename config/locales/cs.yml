@@ -99,6 +99,7 @@ cs:
       follow_up_questionnaires:
         name: Název
         number_of_responses: Počet odpovědí
+        participatory_space: Participační prostor > dotazník
       menu:
         position: Pozice
         raw_label: Popisek
@@ -313,6 +314,19 @@ cs:
             remove: Odebrat člena
             sync: Synchronizovat autorizace
             title: Správa členů pro "%{group}"
+            user: Uživatel Decidim
+          new:
+            create: Přidat uživatele
+            emails_help: Sem přetáhněte e-maily, pouze slova s "@" budou považována za e-mail.
+            or: nebo
+        awesome_authorizations:
+          create:
+            error: Chyba při vytváření autorizační skupiny! %{error}
+            success: Autorizační skupina byla úspěšně vytvořena
+          destroy:
+            success: Autorizační skupina byla úspěšně odstraněna
+          edit:
+            save: Uložit
         checks:
           index:
             admin_head_tags: Úžasné tagy zahrnuté v hlavičce administrace aplikace
