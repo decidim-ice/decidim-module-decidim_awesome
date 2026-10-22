@@ -99,6 +99,7 @@ cs:
       follow_up_questionnaires:
         name: Název
         number_of_responses: Počet odpovědí
+        participatory_space: Participační prostor > dotazník
       menu:
         position: Pozice
         raw_label: Popisek
@@ -313,6 +314,45 @@ cs:
             remove: Odebrat člena
             sync: Synchronizovat autorizace
             title: Správa členů pro "%{group}"
+            user: Uživatel Decidim
+          new:
+            create: Přidat uživatele
+            emails_help: Sem přetáhněte e-maily, pouze slova s "@" budou považována za e-mail.
+            or: nebo
+        awesome_authorizations:
+          create:
+            error: Chyba při vytváření autorizační skupiny! %{error}
+            success: Autorizační skupina byla úspěšně vytvořena
+          destroy:
+            success: Autorizační skupina byla úspěšně odstraněna
+          edit:
+            save: Uložit
+          index:
+            authorization_groups: Autorizační skupiny
+            create_group: Vytvořit novou autorizační skupinu
+            description_html: Použijte tuto sekci pro vytváření skupin lidí, z nichž každá má zvláštní oprávnění pro komponenty Decidim.<br>Tyto skupiny budou automaticky oprávněny k novým registracím a kdykoli bude tento seznam aktualizován.
+            edit_properties: Upravit vlastnosti autorizace
+          list_authorization_groups:
+            actions: Akce
+            destroy: Odstranit skupinu
+            edit: Upravit skupinu
+            granted_count: Autorizováno
+            group_name: Název skupiny
+            manage: Spravovat členy
+            members_count: Uživatelé
+            no_groups: Dosud nebyly vytvořeny žádné autorizační skupiny
+            out_of_sync: Nesynchronizováno
+            sync: Synchronizovat autorizace
+            sync_status: Stav synchronizace
+            synced: Synchronizováno
+          new:
+            create: Vytořit
+            title: Nová autorizační skupina
+          sync:
+            success: Synchronizace byla spuštěna
+          update:
+            error: Chyba při aktualizaci autorizační skupiny! %{error}
+            success: Autorizační skupina byla úspěšně aktualizována
         checks:
           index:
             admin_head_tags: Úžasné tagy zahrnuté v hlavičce administrace aplikace
@@ -366,6 +406,8 @@ cs:
           destroy_scoped_style:
             error: Chyba při odstraňování CSS boxu! %{error}
             success: CSS box %{key} byl úspěšně odstraněn
+          disabled: Vypnuto
+          enabled: Povoleno
           force_authorizations: Autorizační skupiny
           form:
             additional_proposal_sortings:
@@ -605,6 +647,7 @@ cs:
               osm_session: Uloží dočasná data relace pro uživatelskou interakci OpenStreetMap.
               pref: Používá se pro funkčnost. YouTube používá tuto cookie k ukládání informací, jako je vaše preferovaná konfigurace stránek a nastavení přehrávání, jako jsou explicitní možnosti automatického přehrávání, náhodný obsah a velikost přehrávače. Přečtěte si více o tom, jak Google používá cookies
               recaptcha_grecaptcha: Používá se pro reCAPTCHA k zajištění ochrany proti spamu a analýzy rizik.
+              recaptcha_rc_a: Uloží metadata analýzy rizik reCAPTCHA v úložišti prohlížeče.
               recaptcha_rc_c: Uloží metadata pro reCAPTCHA challenge/session v úložišti prohlížeče.
               remember_user_token: Umožňuje zachovat otevřenou relaci, pokud kliknete na "Zapamatovat si mě" při přihlášení.
               session_id: Umožňuje webovým stránkám zapamatovat si uživatele na webových stránkách, když se pohybují mezi webovými stránkami.
@@ -706,9 +749,11 @@ cs:
             error: Chyba aktualizace přesměrování! %{error}
             success: Přesměrování úspěšně aktualizováno
         follow_up_questionnaire_messages:
+          auto_status_change_body: 'Stav změněn na: %{status}'
           create:
             error: Chyba při odesílání zprávy! %{error}
             success: Zpráva úspěšně odeslána
+            success_without_email: Zpráva byla uložena, ale nebyl odeslán e-mail, protože respondent nemá žádnou e-mailovou adresu
           form:
             add_attachment: Přidat přílohu
             attachments: Příloha
@@ -729,6 +774,7 @@ cs:
             anonymous_respondent: Anonymní respondent
             new_reply: Nová zpráva
             new_reply_help_text: Pošlete zprávu odpovědi. Zpráva bude odeslána s "Odpověď" nastavenou na %{email}. Přímé odpovědi na tento e-mail zde nebudou shromažďovány.
+            new_reply_no_reply_to_help_text: Odeslat zprávu respondentovi. Účastníci nemohou odpovědět na tento e-mail, protože je odeslán bez odpovědi na adresu.
             no_email_warning: Tento respondent nemá žádnou e-mailovou adresu. Zpráva bude uložena, ale nebude odeslána.
             send_message: Odeslat
             submitted_at: Odesláno %{date}
@@ -745,11 +791,34 @@ cs:
           edit:
             save: Uložit
             title: Upravit štítek
+          new:
+            save: Uložit
+            title: Nový štítek
           table:
+            confirm_destroy: Opravdu chcete odstranit tento štítek?
+            description: Štítky se používají ke sledování stavu odpovědi
+            edit: Upravit
             labels_title: Štítky
             last_status: Alespoň jeden štítek je vyžadován, takže poslední štítek nelze odstranit.
             new: Nový štítek
             not_removable: Tento štítek je použit ve zprávách a nelze jej odstranit.
+            remove: Odebrat
+          update:
+            success: Štítek byl úspěšně aktualizován
+        follow_up_questionnaires:
+          destroy:
+            unexpected_error: Při odstraňování došlo k chybě.
+          edit:
+            save: Uložit
+          form:
+            anonymous_option_flag: anonymní, bez otázek
+            reply_to_help: Nepovinné. Odpovědi účastníků na notifikační e-maily budou přesměrovány na tuto adresu. Ponechte prázdné pro odeslání e-mailů bez odpovědi na toto oznámení.
+          index:
+            edit: Upravit
+            manage_responses: Spravovat odpovědi
+            remove: Odebrat
+          new:
+            save: Uložit
         hashcash:
           filters:
             ip_addresses: Zobrazit IP adresy
@@ -797,6 +866,8 @@ cs:
           proposals: Návrhy hacků
           styles: Vlastní styly
           surveys: Průzkumy a formuláře
+          verifications:
+            verifications: Ověření
         menu_hacks:
           create:
             error: Chyba při vytváření položky menu! %{error}
@@ -1037,6 +1108,14 @@ cs:
         errors:
           invalid_fields: Obsah nemohl být analyzován, ale byl přiřazen do pole '%{field}'
           invalid_xml: 'Obsah se nepodařilo analyzovat: DL/DD prvky nebyly v XML nalezeny'
+      default_statuses:
+        answered: Odpovězeno
+        pending: Čekající
+      follow_up_questionnaire_message_mailer:
+        notification:
+          greeting: Ahoj %{name},
+          greeting_without_name: Ahoj,
+          outro: Děkujeme vám za vaši účast.
       map_component:
         map:
           api_not_ready: |
@@ -1055,6 +1134,9 @@ cs:
             view_meeting: Zobrazit schůzku
             view_proposal: Zobrazit návrh
       proposal_private_custom_fields_disclosure: Tyto informace nebudou publikovány
+      proposals:
+        votes:
+          blocked_by_status: Hlasování není k dispozici
       required_authorizations:
         index:
           authorization_options_invalid: Bohužel, i když máte tuto autorizaci, údaje použité k vašemu ověření v tomto kontextu neplatí.
@@ -1071,6 +1153,15 @@ cs:
       session:
         authorization_is_required: Chcete-li získat přístup k této části platformy, musíte svůj účet autorizovat pomocí platné autorizace (%{authorizations}).
         login_and_authorization_is_required: Chcete-li získat přístup k této části platformy, musíte se přihlásit a autorizovat svůj účet.
+      status_colors:
+        blue: Modrá
+        gray: Šedý
+        green: Zelená
+        orange: Oranžová
+        pink: Růžová
+        purple: Fialová
+        red: Červená
+        yellow: Žlutá
       system:
         organizations:
           admin_allowed_authoritzations_help_html: |
@@ -1106,6 +1197,10 @@ cs:
       show:
         admin_actions: Akce administrátora
         awesome_private_proposals: Návrhy exportovány se soukromými poli
+    events:
+      decidim_awesome:
+        follow_up_questionnaire_message_status_changed:
+          notification_title: Stav vašeho příspěvku na "%{questionnaire}" se změnil na "%{status}".
     meetings:
       meetings_map:
         view_meeting: Zobrazit schůzku
@@ -1147,6 +1242,7 @@ cs:
           autosaved_error: Místní úložiště není ve vašem prohlížeči podporováno, formulář nelze uložit automaticky.
           autosaved_retrieved: Údaje pro tento formulář byly obnoveny z předchozí relace
           autosaved_success: Data uložena v místním úložišti
+          awesome_authorization_groups_placeholder: Všechny skupiny povoleny
           drag_and_drop_image: Přidejte obrázky přetažením nebo vložením.
           hashtags: Hashtagy
           items: položky
