@@ -56,11 +56,7 @@ module Decidim
       def validation_texts(field)
         values = if data.present?
                    nodes = data.search("##{field["name"]} div")
-                   nodes.map do |node|
-                     value = node.inner_html(encoding: "UTF-8")
-                     value = node.attribute("alt")&.value if value.blank? && %w(select date).include?(field["type"])
-                     value
-                   end
+                   nodes.map { |node| field_value(field, node) }
                  else
                    Array(field["userData"])
                  end
@@ -87,11 +83,19 @@ module Decidim
         @fields.map! do |field|
           if field["name"] # ignore headers/paragraphs
             value = data.search("##{field["name"]} div")
-            field["userData"] = value.map { |v| v.attribute("alt")&.value || v.inner_html(encoding: "UTF-8") } if value.present?
+            field["userData"] = value.map { |node| field_value(field, node) } if value.present?
           end
 
           field
         end
+      end
+
+      def field_value(field, node)
+        alt = node.attribute("alt")
+        return alt.value if %w(select date).include?(field["type"]) && alt
+        return node.inner_html(encoding: "UTF-8") if field["type"] == "text"
+
+        alt&.value || node.inner_html(encoding: "UTF-8")
       end
 
       # Finds the first textarea and applies non-xml compatible content
