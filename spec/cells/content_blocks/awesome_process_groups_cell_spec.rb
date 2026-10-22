@@ -10,11 +10,12 @@ module Decidim::DecidimAwesome
     let(:process_group) { create(:participatory_process_group, organization:) }
     let(:content_block) { create(:content_block, organization:, manifest_name: :awesome_process_groups, scope_name: :participatory_process_group_homepage, scoped_resource_id: process_group.id, settings:) }
     let(:settings) { {} }
-    let(:block_cell) { cell(content_block.cell, content_block) }
+    let(:block_cell) { cell(content_block.cell, content_block, context: { view_context: controller.view_context }) }
 
     controller Decidim::ParticipatoryProcesses::ParticipatoryProcessGroupsController
 
     before do
+      controller.prepend_view_path(Decidim::Core::Engine.root.join("app/views"))
       allow(controller).to receive(:group).and_return(process_group)
     end
 

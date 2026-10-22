@@ -50,6 +50,14 @@ module Decidim
             maximum: ->(form) { form.override_validations? ? 0 : form.component.settings.proposal_length }
           }
           validate :body_is_not_bare_template, unless: ->(form) { form.override_validations? }
+          validate :custom_fields_constraints
+        end
+
+        def custom_fields_constraints
+          return if context.current_component.settings.participatory_texts_enabled
+
+          validate_custom_fields(:body, custom_fields)
+          validate_custom_fields(:private_body, private_custom_fields)
         end
       end
     end

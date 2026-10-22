@@ -36,7 +36,38 @@ module Decidim
         translate_values!
       end
 
+      def validation_errors
+        @fields.filter_map { |field| validation_error(field) }
+      end
+
       private
+
+      def validation_error(field)
+        return unless field["name"]
+
+        texts = validation_texts(field)
+        maxlength = field["maxlength"].to_i
+
+        return field_error(field, :blank) if texts.all?(&:blank?) && ActiveModel::Type::Boolean.new.cast(field["required"])
+
+        field_error(field, :too_long, count: maxlength) if maxlength.positive? && texts.any? { |text| text.length > maxlength }
+      end
+
+      def validation_texts(field)
+        values = if data.present?
+                   nodes = data.search("##{field["name"]} div")
+                   nodes.map { |node| field_value(field, node) }
+                 else
+                   Array(field["userData"])
+                 end
+
+        values.map { |value| Nokogiri::HTML.fragment(value.to_s).text }
+      end
+
+      def field_error(field, error, **options)
+        label = Nokogiri::HTML.fragment(field["label"].to_s).text.strip.presence || field["name"]
+        { field: label, error:, **options }
+      end
 
       def parse_xml(xml)
         @xml = xml
@@ -52,11 +83,19 @@ module Decidim
         @fields.map! do |field|
           if field["name"] # ignore headers/paragraphs
             value = data.search("##{field["name"]} div")
-            field["userData"] = value.map { |v| v.attribute("alt")&.value || v.inner_html(encoding: "UTF-8") } if value.present?
+            field["userData"] = value.map { |node| field_value(field, node) } if value.present?
           end
 
           field
         end
+      end
+
+      def field_value(field, node)
+        alt = node.attribute("alt")
+        return alt.value if %w(select date).include?(field["type"]) && alt
+        return node.inner_html(encoding: "UTF-8") if field["type"] == "text"
+
+        alt&.value || node.inner_html(encoding: "UTF-8")
       end
 
       # Finds the first textarea and applies non-xml compatible content

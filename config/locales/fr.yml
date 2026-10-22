@@ -1173,8 +1173,10 @@ fr:
       credits: Décidim Awesome %{version} · Fait avec ♥ par %{company}
       custom_fields:
         errors:
+          blank: Le champ '%{field}' ne peut pas être vide
           invalid_fields: Le contenu n'a pas pu être analysé mais a été assigné au champ '%{field}'
           invalid_xml: 'Le contenu n''a pas pu être analysé: les éléments DL/DD n''ont pas été trouvés dans le XML'
+          too_long: Le champ '%{field}' est trop long (maximum %{count} caractères)
       default_statuses:
         answered: Répondu
         in_progress: En cours

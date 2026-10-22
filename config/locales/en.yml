@@ -1510,10 +1510,12 @@ en:
       credits: Decidim Awesome %{version} · Maintained with ♥ by %{company}
       custom_fields:
         errors:
+          blank: The field '%{field}' can't be blank
           invalid_fields: Content couldn't be parsed but has been assigned to the
             field '%{field}'
           invalid_xml: 'Content couldn''t be parsed: DL/DD elements not found in the
             XML'
+          too_long: The field '%{field}' is too long (maximum is %{count} characters)
       default_statuses:
         answered: Answered
         in_progress: In progress
