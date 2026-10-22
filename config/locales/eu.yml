@@ -1289,10 +1289,10 @@ eu:
       credits: Decidim zoragarria %{version} · %{company} erakundak ♥ mantenduta
       custom_fields:
         errors:
-          blank: "'%{field}' eremua ezin da hutsik egon"
+          blank: '''%{field}'' eremua ezin da hutsik egon'
           invalid_fields: Edukiak ezin izan dira analizatu baina '%{field}' eremura esleitu dira
           invalid_xml: 'Edukiak ezin izan dira analizatu: DL/DD elementuak XMLan aurkitu ez dira'
-          too_long: "'%{field}' eremua luzeegia da (gehienez %{count} karaktere)"
+          too_long: '''%{field}'' eremua luzeegia da (gehienez %{count} karaktere)'
       default_statuses:
         answered: Erantzunda
         in_progress: Lanean
