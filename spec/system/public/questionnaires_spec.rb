@@ -68,6 +68,104 @@ describe "Questionnaires" do
       expect(page.body).to have_content("window.DecidimAwesome.questionnaire_answered")
     end
 
+    context "when questions have display conditions" do
+      let!(:question_single_option) do
+        create(:questionnaire_question, question_type: "single_option", questionnaire:, position: 0,
+                                        options: [{ "body" => { "en" => "Yes" } }, { "body" => { "en" => "No" } }])
+      end
+      let!(:question_free_text) do
+        create(:questionnaire_question, question_type: "single_option", questionnaire:, position: 4,
+                                        options: [{ "body" => { "en" => "Option" } }, { "body" => { "en" => "Other" }, "free_text" => true }])
+      end
+      let!(:question_conditioned) { create(:questionnaire_question, question_type: "long_response", questionnaire:, position: 1) }
+      let!(:question_text) { create(:questionnaire_question, question_type: "short_response", questionnaire:, position: 2) }
+      let!(:question_mandatory) { create(:questionnaire_question, question_type: "short_response", questionnaire:, position: 3, mandatory: true) }
+      let!(:display_condition) do
+        create(:display_condition, condition_type: :equal, question: question_conditioned, condition_question: question_single_option,
+                                   response_option: question_single_option.response_options.find_by("body->>'en' = ?", "No"))
+      end
+      let(:store_id) { "awesome_autosave:v2:edit_questionnaire_#{questionnaire.id}" }
+
+      def within_question(question, &)
+        within(".question[data-question-id='#{question.id}']", &)
+      end
+
+      def submit_questionnaire
+        check "questionnaire_tos_agreement"
+        accept_confirm { click_on "Submit" }
+      end
+
+      def responses_for(question)
+        Decidim::Forms::Response.where(question:)
+      end
+
+      it "keeps answers in their questions after a validation error" do
+        visit questionnaire_path
+        within_question(question_single_option) { choose "Yes" }
+        within_question(question_text) { find("input[type='text']").fill_in(with: "text C") }
+        submit_questionnaire
+
+        expect(page).to have_content("There was a problem responding")
+        expect(page.evaluate_script("window.localStorage.getItem('#{store_id}')")).to be_nil
+        within_question(question_text) { expect(find("input[type='text']").value).to eq("text C") }
+        within_question(question_mandatory) { expect(find("input[type='text']").value).to eq("") }
+
+        within_question(question_mandatory) { find("input[type='text']").fill_in(with: "text D") }
+        submit_questionnaire
+
+        expect(page).to have_no_css("form.response-questionnaire")
+        expect(responses_for(question_text).pluck(:body)).to eq(["text C"])
+        expect(responses_for(question_mandatory).pluck(:body)).to eq(["text D"])
+      end
+
+      it "restores answers in their questions when field indexes change" do
+        visit questionnaire_path
+        within_question(question_single_option) { choose "Yes" }
+        submit_questionnaire
+
+        expect(page).to have_content("There was a problem responding")
+        within_question(question_text) { find("input[type='text']").fill_in(with: "text C") }
+        within_question(question_single_option) { choose "Yes" }
+        sleep 0.1
+
+        visit questionnaire_path
+        sleep 0.1
+
+        within_question(question_text) { expect(find("input[type='text']").value).to eq("text C") }
+        within_question(question_mandatory) { expect(find("input[type='text']").value).to eq("") }
+      end
+
+      it "restores conditional questions and free text options" do
+        visit questionnaire_path
+        within_question(question_mandatory) { find("input[type='text']").fill_in(with: "text D") }
+        within_question(question_single_option) { choose "No" }
+        within_question(question_conditioned) { find("textarea").fill_in(with: "My reason") }
+        within_question(question_free_text) do
+          choose "Other"
+          find("input[type='text']").fill_in(with: "My other")
+        end
+        check "questionnaire_tos_agreement"
+        sleep 0.1
+
+        visit questionnaire_path
+        sleep 0.1
+
+        within_question(question_conditioned) { expect(find("textarea").value).to eq("My reason") }
+        within_question(question_free_text) do
+          expect(find("input[type='radio'][value='Other']")).to be_checked
+          expect(find("input[type='text']").value).to eq("My other")
+        end
+
+        submit_questionnaire
+
+        expect(page).to have_no_css("form.response-questionnaire")
+        expect(responses_for(question_conditioned).pluck(:body)).to eq(["My reason"])
+        choice = responses_for(question_free_text).first.choices.first
+        expect(choice.response_option.body["en"]).to eq("Other")
+        expect(choice.custom_body).to eq("My other")
+      end
+    end
+
     context "when awesome config is disabled" do
       let!(:awesome_config) { create(:awesome_config, organization:, var: :auto_save_forms, value: false) }
 
