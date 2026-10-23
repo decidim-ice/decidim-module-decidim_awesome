@@ -126,6 +126,7 @@ Useful when a survey needs manual follow-up. Admins with a role in a participato
 - **Admin control:** Cannot be toggled per-scope; either enabled globally or completely disabled with `:disabled`. Setting it to `false` behaves like `true`
 - **Roles:** Organization admins create and configure the follow-up questionnaires and their statuses. Replying to respondents is done from the space's admin menu by organization admins and by users holding an `admin` role for that specific space
 - **Reply-To:** Each follow-up questionnaire has an optional Reply-To email. When set, participants' replies to the notification emails go to that address; when empty, the emails are sent without a Reply-To, like other Decidim emails
+- **Response notifications:** Each follow-up questionnaire can select administrators of its participatory space (organization admins and users with an `admin` role in that space) to be notified of every new response, both in-app and by email, with a link to the responses page. None are selected by default. Admins who later lose their role in the space stop receiving notifications
 
 ```ruby
 # config/initializers/awesome_defaults.rb

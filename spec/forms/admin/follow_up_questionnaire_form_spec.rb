@@ -35,7 +35,8 @@ module Decidim::DecidimAwesome
           responder_name_field: name_question.id.to_s,
           responder_email_field: email_question.id.to_s,
           reply_to: nil,
-          active: true
+          active: true,
+          settings: { notified_admin_ids: [] }
         )
       end
 
