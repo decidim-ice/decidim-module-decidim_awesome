@@ -1176,8 +1176,10 @@ pt-BR:
       credits: Decidim Awesome %{version} · Mantido com ♥ por %{company}
       custom_fields:
         errors:
+          blank: O campo '%{field}' não pode ficar em branco
           invalid_fields: O conteudo nao pode ser analisado, mas foi atribuido ao campo '%{field}'
           invalid_xml: 'O conteudo nao pode ser analisado: elementos DL/DD nao encontrados no XML'
+          too_long: O campo '%{field}' é muito longo (máximo %{count} caracteres)
       default_statuses:
         answered: Respondido
         in_progress: Em andamento
