@@ -8,25 +8,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const questionnaireId = window.DecidimAwesome.current_questionnaire;
   if (!questionnaireId) {
-    // console.log("Not a questionnaire page")
     return;
   }
 
+  const getStorage = () => {
+    try {
+      return window.localStorage;
+    } catch (evt) {
+      return null;
+    }
+  };
+  const storage = getStorage();
+
+  const removeItems = (...keys) => {
+    try {
+      keys.forEach((key) => storage.removeItem(key));
+    } catch (evt) {
+      console.log("Could not clean autosaved data");
+    }
+  };
+
   const storeId = `awesome_autosave:v2:${questionnaireId}`;
   const storeCheckboxesId = `awesome_autosave:v2:checkboxes:${questionnaireId}`;
-  if (window.localStorage) {
-    window.localStorage.removeItem(`awesome_autosave:${questionnaireId}`);
-    window.localStorage.removeItem(`awesome_autosave:checkboxes:${questionnaireId}`);
+  if (storage) {
+    removeItems(`awesome_autosave:${questionnaireId}`, `awesome_autosave:checkboxes:${questionnaireId}`);
   }
   const form = document.querySelector("form.response-questionnaire");
 
   if (!form) {
-    if (window.DecidimAwesome.questionnaire_answered) {
-      // console.log("Questionnaire already answered, remove any data saved");
-      window.localStorage.removeItem(storeId);
-      window.localStorage.removeItem(storeCheckboxesId);
+    if (storage && window.DecidimAwesome.questionnaire_answered) {
+      removeItems(storeId, storeCheckboxesId);
     }
-    // console.log("No forms here");
     return;
   }
 
@@ -49,13 +61,12 @@ document.addEventListener("DOMContentLoaded", () => {
       : ""}`;
     div.innerHTML = msg;
     form.appendChild(div);
-    // console.log("showMsg", "form", form, "div", div, "msg", msg, "error", error, "defaultTime", defaultTime, "time", time);
     setTimeout(() => {
       div.remove();
     }, time);
   };
 
-  if (!window.localStorage) {
+  if (!storage) {
     showMsg(window.DecidimAwesome.i18n.autosavedError, true);
     return;
   }
@@ -100,15 +111,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const toQuestionId = (id) => translateKey(id, /^questionnaire_responses_(\d+)_/, (idx) => questionIds[idx] && `questionnaire_responses_q${questionIds[idx]}_`);
   const toIndexId = (id) => translateKey(id, /^questionnaire_responses_q(\d+)_/, (questionId) => questionIndexes[questionId] && `questionnaire_responses_${questionIndexes[questionId]}_`);
 
-  const savedState = window.localStorage.getItem(storeId);
+  let savedState = storage.getItem(storeId);
   if (savedState) {
-    showMsg(window.DecidimAwesome.i18n.autosavedRetrieved, false, 5000);
     // restore if available
-    store.applyState(translateState(savedState, toIndexName));
+    try {
+      store.applyState(translateState(savedState, toIndexName));
+      showMsg(window.DecidimAwesome.i18n.autosavedRetrieved, false, 5000);
+    } catch (evt) {
+      removeItems(storeId, storeCheckboxesId);
+      savedState = null;
+    }
   }
   // restore checkboxes
   try {
-    let checkboxes = JSON.parse(window.localStorage.getItem(storeCheckboxesId));
+    let checkboxes = JSON.parse(storage.getItem(storeCheckboxesId));
     Object.keys(checkboxes).forEach((id) => {
       if (Object.prototype.hasOwnProperty.call(checkboxes, id)) {// eslint-disable-line prefer-reflect
         const checkbox = document.getElementById(toIndexId(id));
@@ -128,7 +144,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const save = () => {
-    window.localStorage.setItem(storeId, translateState(store.getState(), toQuestionName));
     // save checkbox manually
     let checkboxes = {};
     form.querySelectorAll('input[type="checkbox"]').forEach((el) => {
@@ -137,7 +152,13 @@ document.addEventListener("DOMContentLoaded", () => {
         checkboxes[id] = el.checked;
       }
     });
-    window.localStorage.setItem(storeCheckboxesId, JSON.stringify(checkboxes));
+    try {
+      storage.setItem(storeId, translateState(store.getState(), toQuestionName));
+      storage.setItem(storeCheckboxesId, JSON.stringify(checkboxes));
+    } catch (evt) {
+      showMsg(window.DecidimAwesome.i18n.autosavedError, true);
+      return;
+    }
     showMsg(window.DecidimAwesome.i18n.autosavedSuccess);
   };
 
@@ -145,7 +166,6 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("change", save);
 
   form.addEventListener("submit", () => {
-    window.localStorage.removeItem(storeId);
-    window.localStorage.removeItem(storeCheckboxesId);
+    removeItems(storeId, storeCheckboxesId);
   });
 });
