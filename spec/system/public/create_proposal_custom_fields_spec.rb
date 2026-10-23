@@ -149,4 +149,15 @@ describe "Custom proposals fields" do
       expect(page).to have_no_content("123456789")
     end
   end
+
+  context "when JavaScript is disabled", driver: :rack_test do
+    let(:data1) { '{"type":"text","label":"Full Name","subtype":"text","className":"form-control","name":"text-1476748004559","required":true}' }
+
+    it "shows the custom fields errors" do
+      fill_in :proposal_title, with: "A far west character"
+
+      expect { click_on "Continue" }.not_to change(Decidim::Proposals::Proposal, :count)
+      expect(page).to have_css(".form-error.is-visible", text: "The field 'Full Name' can't be blank", count: 1)
+    end
+  end
 end

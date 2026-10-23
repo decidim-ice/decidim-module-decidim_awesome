@@ -1180,8 +1180,10 @@ es:
       credits: Decidim Awesome %{version} · Mantenida con ♥ por %{company}
       custom_fields:
         errors:
+          blank: El campo '%{field}' no puede estar vacío
           invalid_fields: No se ha podido analizar el contenido pero se ha asignado al campo '%{field}'
           invalid_xml: 'No se pudo analizar el contenido: no se encontraron los elementos DL/DD en el XML'
+          too_long: El campo '%{field}' es demasiado largo (máximo %{count} caracteres)
       default_statuses:
         answered: Respondida
         in_progress: En curso

@@ -51,6 +51,16 @@ module Decidim
             end
 
             validates :title, :body, translatable_presence: true, unless: ->(form) { form.override_validations? }
+            validate :custom_fields_constraints
+          end
+
+          def custom_fields_constraints
+            return if context.current_component.settings.participatory_texts_enabled
+
+            current_organization.available_locales.each do |locale|
+              validate_custom_fields("body_#{locale}".gsub("-", "__"), custom_fields, skip_blank: locale != current_organization.default_locale)
+            end
+            validate_custom_fields(:private_body, private_custom_fields)
           end
         end
       end

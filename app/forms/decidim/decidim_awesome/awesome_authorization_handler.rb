@@ -6,7 +6,7 @@ module Decidim
       validate :user_belongs_to_group
 
       def unique_id
-        user.id.to_s
+        user&.id.to_s
       end
 
       def metadata

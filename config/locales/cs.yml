@@ -1035,8 +1035,10 @@ cs:
       credits: Decidim Awesome %{version} · Udržováno s ♥ od %{company}
       custom_fields:
         errors:
+          blank: Pole '%{field}' nesmí být prázdné
           invalid_fields: Obsah nemohl být analyzován, ale byl přiřazen do pole '%{field}'
           invalid_xml: 'Obsah se nepodařilo analyzovat: DL/DD prvky nebyly v XML nalezeny'
+          too_long: Pole '%{field}' je příliš dlouhé (maximum je %{count} znaků)
       map_component:
         map:
           api_not_ready: |

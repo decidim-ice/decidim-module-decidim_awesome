@@ -22,6 +22,23 @@ module Decidim
           @custom_fields ||= awesome_config.collect_sub_configs_values("proposal_custom_field")
         end
 
+        def private_custom_fields
+          @private_custom_fields ||= awesome_config.collect_sub_configs_values("proposal_private_custom_field")
+        end
+
+        def validate_custom_fields(attribute, fields, skip_blank: false)
+          return if fields.blank?
+
+          definition = Decidim::DecidimAwesome::CustomFields.new(fields)
+          definition.translate!
+          definition.apply_xml(public_send(attribute).to_s)
+          definition.validation_errors.each do |error|
+            next if skip_blank && error[:error] == :blank
+
+            errors.add(attribute, I18n.t(error[:error], scope: "decidim.decidim_awesome.custom_fields.errors", field: error[:field], count: error[:count]))
+          end
+        end
+
         def awesome_config
           @awesome_config ||= begin
             conf = Decidim::DecidimAwesome::Config.new(context.current_organization)
