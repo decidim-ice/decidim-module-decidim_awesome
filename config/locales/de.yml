@@ -1238,8 +1238,10 @@ de:
       credits: Decidim awesome %{version} · Gepflegt mit ❤️ durch %{company}
       custom_fields:
         errors:
+          blank: Das Feld '%{field}' darf nicht leer sein
           invalid_fields: Der Inhalt konnte nicht geparst werden, wurde aber dem Feld '%{field}' zugewiesen.
           invalid_xml: 'Der Inhalt konnte nicht geparst werden: DL/DD-Elemente nicht in der XML-Datei gefunden'
+          too_long: Das Feld '%{field}' ist zu lang (maximal %{count} Zeichen)
       default_statuses:
         answered: Beantwortet
         in_progress: In Bearbeitung
