@@ -90,6 +90,7 @@ en:
       follow_up_questionnaire:
         active: Active
         name: Name
+        notified_admin_ids: Administrators that will receive a notification for every form submission
         position: Position
         reply_to: Reply-To email
       follow_up_questionnaire_messages:

@@ -13,6 +13,7 @@ module Decidim
         attribute :responder_email_field, String
         attribute :reply_to, String
         attribute :active, Boolean, default: true
+        attribute :notified_admin_ids, [Integer], default: []
 
         validates :name, translatable_presence: true
         validates :decidim_questionnaire_id, presence: true, numericality: { only_integer: true }
@@ -21,6 +22,7 @@ module Decidim
         validate :questionnaire_belongs_to_organization, if: -> { decidim_questionnaire_id.present? }
         validate :questionnaire_not_already_configured, if: -> { decidim_questionnaire_id.present? }
         validate :responder_fields_belong_to_questionnaire, if: -> { decidim_questionnaire_id.present? }
+        validate :notified_admins_belong_to_space, if: -> { notified_admin_ids.present? }
 
         def map_model(model)
           self.decidim_questionnaire_id = model.decidim_questionnaire_id
@@ -29,6 +31,7 @@ module Decidim
           self.responder_email_field = model.responder_email_field
           self.reply_to = model.reply_to
           self.active = model.active if model.respond_to?(:active)
+          self.notified_admin_ids = model.notified_admin_ids
         end
 
         def to_params
@@ -39,7 +42,8 @@ module Decidim
             :responder_name_field => responder_name_field,
             :responder_email_field => responder_email_field,
             :reply_to => reply_to.presence,
-            :active => active
+            :active => active,
+            :settings => { notified_admin_ids: notified_admin_ids.compact_blank.uniq }
           }
         end
 
@@ -78,6 +82,14 @@ module Decidim
 
             errors.add(field, :invalid)
           end
+        end
+
+        def notified_admins_belong_to_space
+          space = component&.participatory_space
+          ids = notified_admin_ids.compact_blank.uniq
+          return if space.present? && space.admins.where(id: ids).count == ids.size
+
+          errors.add(:notified_admin_ids, :invalid)
         end
       end
     end
