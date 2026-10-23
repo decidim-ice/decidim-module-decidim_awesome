@@ -813,8 +813,10 @@ ja:
       credits: Decidim Awesome %{version} · Maintained with ♥ by %{company}
       custom_fields:
         errors:
+          blank: フィールド '%{field}' は空にできません
           invalid_fields: コンテンツは解析できませんでしたが、フィールド '%{field}' に割り当てられました
           invalid_xml: 'コンテンツを解析できませんでした: DL/DD要素がXMLに見つかりません'
+          too_long: フィールド '%{field}' が長すぎます（最大%{count}文字）
       map_component:
         map:
           api_not_ready: |
