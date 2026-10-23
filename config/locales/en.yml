@@ -1624,6 +1624,11 @@ en:
         follow_up_questionnaire_message_status_changed:
           notification_title: The status of your submission to "%{questionnaire}"
             changed to "%{status}".
+        follow_up_questionnaire_response_created:
+          email_intro: A new response has been submitted to the "%{resource_title}" follow-up questionnaire in %{participatory_space_title}.
+          email_outro: You have received this notification because you have been selected to be notified of new responses to this follow-up questionnaire.
+          email_subject: New response to "%{resource_title}"
+          notification_title: A new response has been submitted to the <a href="%{resource_path}">%{resource_title}</a> follow-up questionnaire.
     meetings:
       meetings_map:
         view_meeting: View meeting

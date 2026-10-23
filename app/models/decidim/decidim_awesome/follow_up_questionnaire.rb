@@ -65,6 +65,10 @@ module Decidim
         questionnaire.count_participants
       end
 
+      def can_participate?(_user)
+        true
+      end
+
       def notified_admin_ids
         Array(settings["notified_admin_ids"]).compact_blank.map(&:to_i).uniq
       end

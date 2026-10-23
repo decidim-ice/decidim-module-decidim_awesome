@@ -437,6 +437,14 @@ module Decidim
         Decidim.register_assets_path File.expand_path("app/packs", root)
       end
 
+      initializer "decidim_decidim_awesome.follow_up_questionnaire_notifications" do
+        ActiveSupport::Notifications.subscribe("decidim.forms.response_questionnaire:after") do |_event_name, data|
+          next unless DecidimAwesome.enabled?(:follow_up_questionnaires)
+
+          Decidim::DecidimAwesome::NotifyFollowUpQuestionnaireAdmins.call(data[:resource], data.dig(:extra, :session_token))
+        end
+      end
+
       # Votings may override proposals cells, let's be sure to add these paths after the proposal component initializer
       initializer "decidim_decidim_awesome.add_cells_view_paths", before: "decidim_proposals.add_cells_view_paths" do
         # We use unshift to ensure we can override existing view cells
