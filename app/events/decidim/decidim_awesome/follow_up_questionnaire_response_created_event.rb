@@ -2,6 +2,10 @@
 
 module Decidim
   module DecidimAwesome
+    # i18n-tasks-use t("decidim.events.decidim_awesome.follow_up_questionnaire_response_created.email_intro")
+    # i18n-tasks-use t("decidim.events.decidim_awesome.follow_up_questionnaire_response_created.email_outro")
+    # i18n-tasks-use t("decidim.events.decidim_awesome.follow_up_questionnaire_response_created.email_subject")
+    # i18n-tasks-use t("decidim.events.decidim_awesome.follow_up_questionnaire_response_created.notification_title")
     class FollowUpQuestionnaireResponseCreatedEvent < Decidim::Events::SimpleEvent
       include Rails.application.routes.mounted_helpers
 
