@@ -1,3 +1,5 @@
+import TomSelect from "tom-select/dist/cjs/tom-select.popular";
+
 document.addEventListener("decidim:loaded", () => {
   const form = document.querySelector(".new_follow_up_questionnaire, .new_follow_up_questionnaire_");
   if (!form) {
@@ -5,8 +7,32 @@ document.addEventListener("decidim:loaded", () => {
   }
 
   const questionnaireSelect = form.querySelector("#follow_up_questionnaire_decidim_questionnaire_id");
+  if (!questionnaireSelect) {
+    return;
+  }
+
+  const adminsWrapper = form.querySelector("#notified-admins-wrapper");
+  const adminsSelect = adminsWrapper?.querySelector("select");
+  if (adminsSelect) {
+    const adminsByQuestionnaireId = JSON.parse(adminsWrapper.dataset.admins || "{}");
+    const adminsTomSelect = new TomSelect(adminsSelect, {
+      plugins: ["remove_button"],
+      create: false
+    });
+
+    questionnaireSelect.addEventListener("change", () => {
+      const admins = adminsByQuestionnaireId[questionnaireSelect.value] || [];
+      const selected = adminsTomSelect.getValue();
+
+      adminsTomSelect.clear(true);
+      adminsTomSelect.clearOptions();
+      admins.forEach(([text, id]) => adminsTomSelect.addOption({ value: String(id), text }));
+      adminsTomSelect.setValue(selected.filter((value) => admins.some(([, id]) => String(id) === value)), true);
+    });
+  }
+
   const wrapper = form.querySelector("#responder-fields-wrapper");
-  if (!questionnaireSelect || !wrapper) {
+  if (!wrapper) {
     return;
   }
 
