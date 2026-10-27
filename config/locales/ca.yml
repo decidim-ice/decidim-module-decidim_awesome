@@ -93,6 +93,7 @@ ca:
         status: Estat
         submission_date: Data d’enviament
       follow_up_questionnaire_statuses:
+        color: Color
         labels_color: Color de les etiquetes
         labels_id: ID de les etiquetes
         name: Nom
@@ -852,6 +853,7 @@ ca:
             submitted_at: Enviat el %{date}
             title: Gestiona els missatges
           reply_history:
+            documents: Documents
             empty: Encara no s'ha enviat cap missatge a aquesta persona.
             photos: Fotos
             title: Historial de missatges
@@ -1308,6 +1310,11 @@ ca:
       decidim_awesome:
         follow_up_questionnaire_message_status_changed:
           notification_title: L'estat de la teva tramesa a «%{questionnaire}» ha canviat a «%{status}».
+        follow_up_questionnaire_response_created:
+          email_intro: S'ha enviat una nova resposta al qüestionari de seguiment «%{resource_title}» a %{participatory_space_title}.
+          email_outro: Heu rebut aquesta notificació perquè heu estat seleccionats per ser notificats de noves respostes a aquest qüestionari de seguiment.
+          email_subject: Nova resposta a «%{resource_title}»
+          notification_title: S'ha enviat una nova resposta al qüestionari de seguiment de <a href="%{resource_path}">%{resource_title}</a>.
     meetings:
       meetings_map:
         view_meeting: Veure trobada
