@@ -60,6 +60,7 @@ es:
         background_image_4: Imagen de fondo
       cookie_category:
         mandatory: Obligatoria
+        slug: ID
         title: Categoría
         total_cookies: Total de cookies
         visibility: Visibilidad
@@ -69,6 +70,7 @@ es:
         service: Servicio
         type: Tipo
         types:
+          cookie: Cookie
           local_storage: Almacenamiento local
       custom_redirect:
         active: Activo
@@ -79,15 +81,18 @@ es:
       follow_up_questionnaire:
         active: Activo
         name: Nombre
+        notified_admin_ids: Administradores que recibirán una notificación por cada envío de formulario
         position: Posición
         reply_to: Correo de respuesta
       follow_up_questionnaire_messages:
+        id: ID
         last_action: Última acción
         messages_count: Número de mensajes
-        respondent: Respondente
+        respondent: Participante
         status: Estado
         submission_date: Fecha de envío
       follow_up_questionnaire_statuses:
+        color: Color
         labels_color: Color de las etiquetas
         labels_id: ID de las etiquetas
         name: Nombre
@@ -374,6 +379,7 @@ es:
             decidim-core: Del módulo Core
             decidim-participatory_processes: Del módulo Participatory Processes
             decidim-proposals: Del módulo Propuestas
+            decidim-system: Del módulo del sistema
             decidim-verifications: Del módulo Verifications
             decidim_update_available: 'Hay una nueva versión disponible: %{latest_version}'
             decidim_version: Versión de Decidim %{version}
@@ -566,6 +572,7 @@ es:
             slug_help: Identificador único utilizado en los scripts para hacer referencia a esta categoría.
             visibility:
               hidden: Oculta
+              visible: Visible
           index:
             cannot_remove_default: Las categorías predeterminadas no se pueden eliminar
             confirm_reset: '¿Seguro que quieres restablecer esta categoría a sus valores predeterminados? Esto eliminará todas las personalizaciones realizadas.'
@@ -809,16 +816,17 @@ es:
             last_action_labeled: Etiquetado hace %{time}
             new_status: Nuevo
             not_answered: "(sin responder)"
-            not_processable: Sin persona respondente - No procesable
+            not_processable: Sin persona que responde - No procesable
             see_full_responses: Ver respuestas completas
             view_survey: Vista previa
           new:
-            anonymous_respondent: Persona respondente anónima
+            anonymous_respondent: Persona que responde anónima
             messages_count:
               one: "%{count} mensaje"
               other: "%{count} mensajes"
             new_reply: Nuevo mensaje
             new_reply_help_text: Envía un mensaje a la persona que respondió. El mensaje se enviará con «Responder a» establecido como %{email}. Las respuestas directas a ese correo no se recopilarán aquí.
+            new_reply_no_reply_to_help_text: Envía un mensaje a quien responde. Este mensaje de seguimiento no incluye una dirección de respuesta "Reply-To", por lo que las respuestas de los participantes no te llegarán.
             no_email_warning: Esta persona no tiene dirección de correo electrónico. El mensaje se guardará, pero no se enviará.
             send_message: Enviar
             submitted_at: Enviado el %{date}
@@ -862,7 +870,7 @@ es:
             success: El cuestionario de seguimiento se creó correctamente
           destroy:
             error: Error al eliminar el cuestionario de seguimiento! %{error}
-            not_removable: Tiene mensajes enviados a personas respondentes y no se puede eliminar. Desactívalo en su lugar.
+            not_removable: Tiene mensajes enviados a personas participantes y no se puede eliminar. Desactívalo en su lugar.
             success: El cuestionario de seguimiento se eliminó correctamente
             unexpected_error: Hubo un problema al eliminarlo.
           edit:
@@ -871,7 +879,7 @@ es:
           form:
             anonymous_option_flag: anónimo, sin preguntas
             name_help: En el espacio participativo verás este nombre como un nuevo elemento del menú donde gestionar las respuestas
-            questionnaire_locked: Este cuestionario de seguimiento ya tiene mensajes enviados a personas respondentes, así que la encuesta no se puede cambiar.
+            questionnaire_locked: Este cuestionario de seguimiento ya tiene mensajes enviados a personas participantes, así que la encuesta no se puede cambiar.
             responder_email_help: Este campo se usará para buscar y enviar el correo donde responder. Si el cuestionario no es anónimo, puedes omitir este campo y se usará la persona usuaria.
             responder_name_help: Este campo se usará para buscar y mostrar el nombre de la persona respondente. Si el cuestionario no es anónimo, puedes omitir este campo y se usará la persona usuaria.
             select_questionnaire_placeholder: Selecciona un cuestionario
@@ -881,7 +889,7 @@ es:
             edit: Editar
             manage_responses: Gestionar respuestas
             new: Nuevo seguimiento
-            not_removable: Tiene mensajes enviados a personas respondentes y no se puede eliminar. Desactívalo en su lugar.
+            not_removable: Tiene mensajes enviados a personas participantes y no se puede eliminar. Desactívalo en su lugar.
             remove: Eliminar
           new:
             save: Guardar
