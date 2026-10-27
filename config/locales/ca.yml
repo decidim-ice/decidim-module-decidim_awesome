@@ -82,14 +82,18 @@ ca:
       follow_up_questionnaire:
         active: Actiu
         name: Nom
+        notified_admin_ids: Administradores que rebran una notificació per cada enviament de formulari
         position: Posició
         reply_to: Correu de resposta
       follow_up_questionnaire_messages:
+        id: ID
         last_action: Última acció
         messages_count: Nombre de missatges
+        respondent: Participant
         status: Estat
         submission_date: Data d’enviament
       follow_up_questionnaire_statuses:
+        color: Color
         labels_color: Color de les etiquetes
         labels_id: ID de les etiquetes
         name: Nom
@@ -843,12 +847,13 @@ ca:
               other: "%{count} missatges"
             new_reply: Nou missatge
             new_reply_help_text: Envia un missatge a la persona que va respondre. El missatge s'enviarà amb «Respon a» definit com %{email}. Les respostes directes a aquest correu no es recopilaran aquí.
-            new_reply_no_reply_to_help_text: Envia un missatge a la persona que va respondre. Les participants no poden respondre a aquest correu, ja que s'envia sense adreça de resposta.
+            new_reply_no_reply_to_help_text: Envieu un missatge a la persona que respon. Aquest missatge de seguiment no inclou cap adreça de resposta "Reply-To", de manera que les respostes dels participants no us arribaran.
             no_email_warning: Aquesta persona que ha respost no té adreça electrònica. El missatge es desarà, però no s’enviarà.
             send_message: Envia
             submitted_at: Enviat el %{date}
             title: Gestiona els missatges
           reply_history:
+            documents: Documents
             empty: Encara no s'ha enviat cap missatge a aquesta persona.
             photos: Fotos
             title: Historial de missatges
@@ -1305,6 +1310,11 @@ ca:
       decidim_awesome:
         follow_up_questionnaire_message_status_changed:
           notification_title: L'estat de la teva tramesa a «%{questionnaire}» ha canviat a «%{status}».
+        follow_up_questionnaire_response_created:
+          email_intro: S'ha enviat una nova resposta al qüestionari de seguiment «%{resource_title}» a %{participatory_space_title}.
+          email_outro: Heu rebut aquesta notificació perquè heu estat seleccionats per ser notificats de noves respostes a aquest qüestionari de seguiment.
+          email_subject: Nova resposta a «%{resource_title}»
+          notification_title: S'ha enviat una nova resposta al qüestionari de seguiment de <a href="%{resource_path}">%{resource_title}</a>.
     meetings:
       meetings_map:
         view_meeting: Veure trobada
