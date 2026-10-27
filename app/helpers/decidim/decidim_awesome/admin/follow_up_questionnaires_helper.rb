@@ -27,6 +27,20 @@ module Decidim
             hash[questionnaire.id] = questionnaire.questions.map { |q| [translated_attribute(q.body), q.id] }
           end
         end
+
+        def questionnaires_admins_data(questionnaires)
+          questionnaires.to_h { |questionnaire| [questionnaire.id, questionnaire_admin_options(questionnaire)] }
+        end
+
+        def questionnaire_admin_options(questionnaire)
+          space = questionnaire && FollowUpQuestionnairesFinder.new(current_organization).component_for(questionnaire)&.participatory_space
+          return [] if space.blank?
+
+          @space_admin_options ||= {}
+          @space_admin_options[[space.class.name, space.id]] ||= space.admins.order(:name).map do |user|
+            ["#{user.name} (@#{user.nickname} - #{user.email})", user.id]
+          end
+        end
       end
     end
   end

@@ -21,6 +21,9 @@
       <div id="responder-fields-wrapper" data-questions="<%= questionnaires_questions_data(available_questionnaires).to_json %>">
         <%= render "responder_fields", questionnaire: selected_questionnaire, form: @form %>
       </div>
+      <div id="notified-admins-wrapper" class="row column" data-admins="<%= questionnaires_admins_data(available_questionnaires).to_json %>">
+        <%= form.select :notified_admin_ids, questionnaire_admin_options(selected_questionnaire), {}, multiple: true %>
+      </div>
       <div class="row column">
         <%= render "decidim/decidim_awesome/admin/follow_up_questionnaire_statuses/table", follow_up_questionnaire_id: follow_up_questionnaire_id, statuses: @follow_up_questionnaire&.statuses %>
       </div>

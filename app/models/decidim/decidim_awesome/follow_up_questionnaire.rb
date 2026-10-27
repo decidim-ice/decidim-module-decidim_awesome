@@ -65,6 +65,21 @@ module Decidim
         questionnaire.count_participants
       end
 
+      def can_participate?(_user)
+        true
+      end
+
+      def notified_admin_ids
+        Array(settings["notified_admin_ids"]).compact_blank.map(&:to_i).uniq
+      end
+
+      # Admins that lost their role in the space after being selected are left out
+      def notified_admins
+        return Decidim::User.none if notified_admin_ids.empty? || participatory_space.blank?
+
+        participatory_space.admins.where(id: notified_admin_ids)
+      end
+
       private
 
       def component_belongs_to_organization
