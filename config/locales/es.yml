@@ -1109,6 +1109,7 @@ es:
           selection_criteria: Criterios de selección
           selection_criteria_options:
             automatic: Automático
+            manual: Manual
           title: Título del bloque
         landing_menu:
           alignment: Alineación del menú
@@ -1134,6 +1135,8 @@ es:
             actions: Acciones
             hidden: Oculto
             name: Nombre
+            url: URL
+            visible: Visible
           title: Saltar a ...
         map:
           collapse: Iniciar con el menú contraído
@@ -1286,6 +1289,11 @@ es:
       decidim_awesome:
         follow_up_questionnaire_message_status_changed:
           notification_title: El estado de tu envío a «%{questionnaire}» cambió a «%{status}».
+        follow_up_questionnaire_response_created:
+          email_intro: Se ha enviado una nueva respuesta al cuestionario de seguimiento «%{resource_title}» en %{participatory_space_title}.
+          email_outro: Has recibido esta notificación porque has sido seleccionado para recibir avisos sobre nuevas respuestas a este cuestionario de seguimiento.
+          email_subject: Nueva respuesta a «%{resource_title}»
+          notification_title: Se ha enviado una nueva respuesta al cuestionario de seguimiento de <a href="%{resource_path}">%{resource_title}</a>.
     meetings:
       meetings_map:
         view_meeting: Ver encuentro
