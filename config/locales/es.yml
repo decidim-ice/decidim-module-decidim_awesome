@@ -880,6 +880,7 @@ es:
             anonymous_option_flag: anónimo, sin preguntas
             name_help: En el espacio participativo verás este nombre como un nuevo elemento del menú donde gestionar las respuestas
             questionnaire_locked: Este cuestionario de seguimiento ya tiene mensajes enviados a personas participantes, así que la encuesta no se puede cambiar.
+            reply_to_help: Opcional. Las respuestas de los participantes a los correos electrónicos de notificación se enviarán a esta dirección. Si la dejas vacía, las respuestas se dirigirán a la dirección del remitente de la plataforma.
             responder_email_help: Este campo se usará para buscar y enviar el correo donde responder. Si el cuestionario no es anónimo, puedes omitir este campo y se usará la persona usuaria.
             responder_name_help: Este campo se usará para buscar y mostrar el nombre de la persona respondente. Si el cuestionario no es anónimo, puedes omitir este campo y se usará la persona usuaria.
             select_questionnaire_placeholder: Selecciona un cuestionario
@@ -1106,6 +1107,7 @@ es:
           selection_criteria: Criterios de selección
           selection_criteria_options:
             automatic: Automático
+            manual: Manual
           title: Título del bloque
         landing_menu:
           alignment: Alineación del menú
@@ -1131,6 +1133,8 @@ es:
             actions: Acciones
             hidden: Oculto
             name: Nombre
+            url: URL
+            visible: Visible
           title: Saltar a ...
         map:
           collapse: Iniciar con el menú contraído
@@ -1283,6 +1287,11 @@ es:
       decidim_awesome:
         follow_up_questionnaire_message_status_changed:
           notification_title: El estado de tu envío a «%{questionnaire}» cambió a «%{status}».
+        follow_up_questionnaire_response_created:
+          email_intro: Se ha enviado una nueva respuesta al cuestionario de seguimiento «%{resource_title}» en %{participatory_space_title}.
+          email_outro: Has recibido esta notificación porque has sido seleccionado para recibir avisos sobre nuevas respuestas a este cuestionario de seguimiento.
+          email_subject: Nueva respuesta a «%{resource_title}»
+          notification_title: Se ha enviado una nueva respuesta al cuestionario de seguimiento de <a href="%{resource_path}">%{resource_title}</a>.
     meetings:
       meetings_map:
         view_meeting: Ver encuentro
