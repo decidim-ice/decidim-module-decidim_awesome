@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    decidim-decidim_awesome (0.15.0)
+    decidim-decidim_awesome (0.15.1)
       active_hashcash (~> 0.4.0)
       decidim-admin (>= 0.32, < 0.33)
       decidim-core (>= 0.32, < 0.33)
@@ -95,11 +95,11 @@ GEM
       activesupport (>= 6.1)
     addressable (2.9.0)
       public_suffix (>= 2.0.2, < 8.0)
-    anonymous_loader (0.1.3)
-      version_gem (~> 1.1, >= 1.1.14)
+    anonymous_loader (0.1.5)
+      version_gem (~> 1.1, >= 1.1.17)
     ast (2.4.3)
-    auth-sanitizer (0.2.3)
-      version_gem (~> 1.1, >= 1.1.14)
+    auth-sanitizer (0.2.5)
+      version_gem (~> 1.1, >= 1.1.16)
     base64 (0.3.0)
     batch-loader (2.0.6)
     bcrypt (3.1.22)
@@ -112,7 +112,7 @@ GEM
       smart_properties
     bigdecimal (4.1.3)
     bindex (0.8.1)
-    bootsnap (1.26.0)
+    bootsnap (1.26.1)
       msgpack (~> 1.5)
     brakeman (7.1.2)
       racc
@@ -162,7 +162,7 @@ GEM
     crack (1.0.1)
       bigdecimal
       rexml
-    crass (1.0.7)
+    crass (1.0.8)
     css_parser (3.3.0)
       addressable
       base64
@@ -423,7 +423,7 @@ GEM
       temple
     erubi (1.13.1)
     escape_utils (1.3.0)
-    excon (1.7.3)
+    excon (1.8.0)
       logger
     factory_bot (6.6.0)
       activesupport (>= 6.1.0)
@@ -432,7 +432,7 @@ GEM
       railties (>= 6.1.0)
     faker (3.8.0)
       i18n (>= 1.8.11, < 2)
-    faraday (2.15.0)
+    faraday (2.15.1)
       faraday-net_http (>= 2.0, < 3.6)
       json
       logger
@@ -501,7 +501,7 @@ GEM
       ostruct (~> 0.6)
       sass-embedded (~> 1.58)
     hashdiff (1.2.1)
-    hashie (5.1.0)
+    hashie (5.2.0)
       logger
     hexapdf (1.6.0)
       cmdparse (~> 3.0, >= 3.0.3)
@@ -598,7 +598,7 @@ GEM
     minitest (6.0.6)
       drb (~> 2.0)
       prism (~> 1.5)
-    msgpack (1.8.5)
+    msgpack (1.8.6)
     multi_xml (0.9.1)
       bigdecimal (>= 3.1, < 5)
     net-http (0.10.0)
@@ -641,21 +641,21 @@ GEM
       anonymous_loader (~> 0.1, >= 0.1.3)
       auth-sanitizer (~> 0.2, >= 0.2.3)
       version_gem (~> 1.1, >= 1.1.14)
-    oauth2 (2.0.25)
-      anonymous_loader (~> 0.1, >= 0.1.3)
-      auth-sanitizer (~> 0.2, >= 0.2.3)
+    oauth2 (2.1.0)
+      anonymous_loader (~> 0.1, >= 0.1.5)
+      auth-sanitizer (~> 0.2, >= 0.2.5)
       faraday (>= 0.17.3, < 4.0)
       jwt (>= 1.0, < 4.0)
       logger (~> 1.2)
       multi_xml (~> 0.5)
       rack (>= 1.2, < 4)
-      snaky_hash (~> 2.0, >= 2.0.7)
-      version_gem (~> 1.1, >= 1.1.14)
-    omniauth (2.1.4)
-      hashie (>= 3.4.6)
+      snaky_hash (~> 2.0, >= 2.0.9)
+      version_gem (~> 1.1, >= 1.1.17)
+    omniauth (2.3.1)
+      hashie (>= 3.5.2)
       logger
-      rack (>= 2.2.3)
-      rack-protection
+      rack (>= 2.2.8)
+      rack-protection (>= 2.2.0)
     omniauth-facebook (10.0.0)
       bigdecimal
       omniauth-oauth2 (>= 1.2, < 3)
@@ -664,13 +664,14 @@ GEM
       oauth2 (~> 2.0)
       omniauth (~> 2.0)
       omniauth-oauth2 (~> 1.8)
-    omniauth-oauth (1.2.1)
+    omniauth-oauth (1.3.0)
+      cgi
       oauth
-      omniauth (>= 1.0, < 3)
+      omniauth (~> 2.3, >= 2.3.1)
       rack (>= 1.6.2, < 4)
-    omniauth-oauth2 (1.9.0)
+    omniauth-oauth2 (1.10.0)
       oauth2 (>= 2.0.2, < 3)
-      omniauth (~> 2.0)
+      omniauth (~> 2.3, >= 2.3.1)
     omniauth-rails_csrf_protection (2.0.1)
       actionpack (>= 4.2)
       omniauth (~> 2.0)
@@ -690,7 +691,7 @@ GEM
       parallel
     paranoia (3.1.0)
       activerecord (>= 7, < 8.2)
-    parser (3.3.12.0)
+    parser (3.3.13.0)
       ast (~> 2.4.1)
       racc
     pg (1.6.3)
@@ -735,7 +736,7 @@ GEM
     rack-session (2.1.2)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
-    rack-test (2.2.0)
+    rack-test (2.3.0)
       rack (>= 1.3)
     rackup (2.3.1)
       rack (>= 3)
@@ -779,7 +780,7 @@ GEM
     rainbow (3.1.1)
     rake (13.4.2)
     rake-compiler-dock (1.12.0)
-    ransack (4.4.3)
+    ransack (4.4.4)
       activerecord (>= 7.2)
       activesupport (>= 7.2)
       i18n
@@ -906,21 +907,21 @@ GEM
       nokogiri (>= 1.10.8)
       rubyzip (>= 1.3.0)
     rubyzip (2.3.2)
-    sass-embedded (1.106.0-aarch64-linux-gnu)
+    sass-embedded (1.106.1-aarch64-linux-gnu)
       google-protobuf (~> 4.31)
-    sass-embedded (1.106.0-aarch64-linux-musl)
+    sass-embedded (1.106.1-aarch64-linux-musl)
       google-protobuf (~> 4.31)
-    sass-embedded (1.106.0-arm-linux-gnueabihf)
+    sass-embedded (1.106.1-arm-linux-gnueabihf)
       google-protobuf (~> 4.31)
-    sass-embedded (1.106.0-arm-linux-musleabihf)
+    sass-embedded (1.106.1-arm-linux-musleabihf)
       google-protobuf (~> 4.31)
-    sass-embedded (1.106.0-arm64-darwin)
+    sass-embedded (1.106.1-arm64-darwin)
       google-protobuf (~> 4.31)
-    sass-embedded (1.106.0-x86_64-darwin)
+    sass-embedded (1.106.1-x86_64-darwin)
       google-protobuf (~> 4.31)
-    sass-embedded (1.106.0-x86_64-linux-gnu)
+    sass-embedded (1.106.1-x86_64-linux-gnu)
       google-protobuf (~> 4.31)
-    sass-embedded (1.106.0-x86_64-linux-musl)
+    sass-embedded (1.106.1-x86_64-linux-musl)
       google-protobuf (~> 4.31)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -949,9 +950,9 @@ GEM
     simplecov-html (0.13.2)
     simplecov_json_formatter (0.1.4)
     smart_properties (1.17.0)
-    snaky_hash (2.0.7)
+    snaky_hash (2.0.9)
       hashie (>= 0.1.0, < 6)
-      version_gem (~> 1.1, >= 1.1.14)
+      version_gem (~> 1.1, >= 1.1.16)
     spring (4.7.0)
     spring-watcher-listen (2.1.0)
       listen (>= 2.7, < 4.0)
@@ -978,7 +979,7 @@ GEM
     valid_email2 (7.1.0)
       activemodel (>= 6.0)
       mail (~> 2.5)
-    version_gem (1.1.15)
+    version_gem (1.1.17)
     w3c_rspec_validators (0.3.0)
       rails
       rspec
@@ -1065,16 +1066,16 @@ CHECKSUMS
   activesupport (8.1.4) sha256=891dd3fe43c4fc8391934b237b1189bb1f661c932a84a840043db9d46a4e80df
   acts_as_list (1.2.6) sha256=8345380900b7bee620c07ad00991ccee59af3d8c9e8574f426e321da2865fdc8
   addressable (2.9.0) sha256=7fdf6ac3660f7f4e867a0838be3f6cf722ace541dd97767fa42bc6cfa980c7af
-  anonymous_loader (0.1.3) sha256=084a18e2439144d955447dc11dfc982f41fcd1583ad32d4d55151325dc44cb55
+  anonymous_loader (0.1.5) sha256=c96a4a1b5f49f320037fae63e931ac15b3823686e4f0ee6f24f75a0ade4227cb
   ast (2.4.3) sha256=954615157c1d6a382bc27d690d973195e79db7f55e9765ac7c481c60bdb4d383
-  auth-sanitizer (0.2.3) sha256=db10aac92cfbe4c64ab637eebcbe1d67395d1694798041362173370f59933e3c
+  auth-sanitizer (0.2.5) sha256=eec0f5ee354931a1431be6f7025bc38d03db1731a2185726cbe6248e49bee177
   base64 (0.3.0) sha256=27337aeabad6ffae05c265c450490628ef3ebd4b67be58257393227588f5a97b
   batch-loader (2.0.6) sha256=93e313b8880740d5d8be32861bf4e1631f5975ad34f4cb8fb9cf7662ee009267
   bcrypt (3.1.22) sha256=1f0072e88c2d705d94aff7f2c5cb02eb3f1ec4b8368671e19112527489f29032
   better_html (2.2.0) sha256=e68ab66ab09696b708333bbf35e8aa3c107500ba7892f528e2111624bdd8cf76
   bigdecimal (4.1.3) sha256=61ebe1e5e559bdc3cc6f2c0ee7f427321fc838f59611c294356eb04d6e21cf66
   bindex (0.8.1) sha256=7b1ecc9dc539ed8bccfc8cb4d2732046227b09d6f37582ff12e50a5047ceb17e
-  bootsnap (1.26.0) sha256=ca96237015e6cd74a02963d5821cf00ac5ea134653b323e8cd6d702a7718bf1b
+  bootsnap (1.26.1) sha256=5b5bd90f8f13ea338627c1d56ffbe2ea25e743ac48c2afec1a9bea3a06a264e2
   brakeman (7.1.2) sha256=6b04927710a2e7d13a72248b5d404c633188e02417f28f3d853e4b6370d26dce
   browser (6.2.0) sha256=281d5295788825c9396427c292c2d2be0a5c91875c93c390fde6e5d61a5ace2d
   builder (3.3.0) sha256=497918d2f9dca528fdca4b88d84e4ef4387256d984b8154e9d5d3fe5a9c8835f
@@ -1102,7 +1103,7 @@ CHECKSUMS
   concurrent-ruby (1.3.8) sha256=b2f1be836e968ccc78ccfce277ea79c72a88633f22306782c16ff23fb415d1e1
   connection_pool (3.0.2) sha256=33fff5ba71a12d2aa26cb72b1db8bba2a1a01823559fb01d29eb74c286e62e0a
   crack (1.0.1) sha256=ff4a10390cd31d66440b7524eb1841874db86201d5b70032028553130b6d4c7e
-  crass (1.0.7) sha256=94868719948664c89ddcaf0a37c65048413dfcb1c869470a5f7a7ceb5390b295
+  crass (1.0.8) sha256=7a0145c7a2c59f8e7923b3a69ce819c444823a00a5127d805298fea13be24efe
   css_parser (3.3.0) sha256=79ba7fc428b18d2a085bcb6f310193f957afc30a7df9be2701419abc1a83d7ca
   csv (3.3.6) sha256=aba61e7e507a66f03d45cb1f3c4b6359861c3504038b422962875dce099e4456
   data_migrate (11.3.1) sha256=18b9b2189d15e482d5335f3fc2248b8b447204bd8257ded872dd077737168ffb
@@ -1119,7 +1120,7 @@ CHECKSUMS
   decidim-conferences (0.32.1) sha256=00efb7fda86003b72d4ef831164c8ab3722fac4e0a11000f224e62e0902cf3b5
   decidim-core (0.32.1) sha256=02d693d1fa0bc92cfeecd46278925c7e546db87f369ca640718250d4af64dcd5
   decidim-debates (0.32.1) sha256=721ecbead96955f325cc85993f01314ab49ba895820f38df85cf97250f353ae1
-  decidim-decidim_awesome (0.15.0)
+  decidim-decidim_awesome (0.15.1)
   decidim-dev (0.32.1) sha256=50535cf41f4acaea2325ce0db16cf3aed06aaf4b838a61d042d93a7ab0d3fb21
   decidim-elections (0.32.1) sha256=a3ce11798e5a04b6a6d8844b9897ec1fc93323c6ca30c0943ee3843d5c929e56
   decidim-forms (0.32.1) sha256=9072b4d59b71707d602964e19a33e18615ed456f1462dd4409ee5b53f24cb745
@@ -1155,11 +1156,11 @@ CHECKSUMS
   erbse (0.1.4) sha256=d5fafb6874fbb0720efd5b2328ae68870074ec8f7cd6176d21b70349e9dd41c4
   erubi (1.13.1) sha256=a082103b0885dbc5ecf1172fede897f9ebdb745a4b97a5e8dc63953db1ee4ad9
   escape_utils (1.3.0) sha256=dffb7010922880ace6ceed642156c64e2a64620f27e0849f43bc4f68fd3c2c09
-  excon (1.7.3) sha256=ea13fabcab2b5f5bb64e2952a0ac018bf9882832fe7a58206630be18ba888fa9
+  excon (1.8.0) sha256=56d414519bff28bf95dd800ad4690a2fc0b8a49caf00367b70ecdbac71f91c93
   factory_bot (6.6.0) sha256=1fc1b3b5620ec980a6a27aec1b6ec8c250ca82962e970e8a40f93e8d388d4b89
   factory_bot_rails (6.5.1) sha256=d3cc4851eae4dea8a665ec4a4516895045e710554d2b5ac9e68b94d351bc6d68
   faker (3.8.0) sha256=c147b308df73a90f27a4fc84f18d4c22ef0ad9c2a64b2b61c86fd0ca71753efc
-  faraday (2.15.0) sha256=3be0eff0187ed913a1b4f679e9fcfe845b542cdd4f75b76cd6181a4ae1335fff
+  faraday (2.15.1) sha256=8708154deda739c5e86cc42b74960e23e8491fce0eba9e11639a6a34b1ac288f
   faraday-net_http (3.5.0) sha256=2e7094c34e38754ee048cc3df47376f8657005d9375f8473bce1c3b526a22e36
   ffi (1.17.4-aarch64-linux-gnu) sha256=b208f06f91ffd8f5e1193da3cae3d2ccfc27fc36fba577baf698d26d91c080df
   ffi (1.17.4-aarch64-linux-musl) sha256=9286b7a615f2676245283aef0a0a3b475ae3aae2bb5448baace630bb77b91f39
@@ -1188,7 +1189,7 @@ CHECKSUMS
   graphql (2.5.26) sha256=be3a148cc9ae52056d38f45cf9864a621a12fe138c027e324b0841dc19979576
   graphql-docs (6.0.0) sha256=baa0d96977d549362667695583345fec22ec23b9b6945ad7fc3b6a1ae176051a
   hashdiff (1.2.1) sha256=9c079dbc513dfc8833ab59c0c2d8f230fa28499cc5efb4b8dd276cf931457cd1
-  hashie (5.1.0) sha256=c266471896f323c446ea8207f8ffac985d2718df0a0ba98651a3057096ca3870
+  hashie (5.2.0) sha256=357a22635195c2e3911fbbc3de9a7d528843d1f42ab0aae02171048f16332d72
   hexapdf (1.6.0) sha256=78e32fc5a088a347bcb2cad4ab327cbdd0a0c5e1e77963b52460eef78d402582
   highline (3.1.2) sha256=67cbd34d19f6ef11a7ee1d82ffab5d36dfd5b3be861f450fc1716c7125f4bb4a
   html-pipeline (3.2.4) sha256=b6029ddc1e6f8e67e8d0d1b0100f0965a3d807807eab1e1d2b7c5e2d34afb72e
@@ -1223,7 +1224,7 @@ CHECKSUMS
   mini_magick (5.4.0) sha256=f120af581d9ed4ec52c57f35a67a605d112bb1d8f582d1415b147fda42d11d78
   mini_mime (1.1.5) sha256=8681b7e2e4215f2a159f9400b5816d85e9d8c6c6b491e96a12797e798f8bccef
   minitest (6.0.6) sha256=153ea36d1d987a62942382b61075745042a2b3123b1cd48f4c3675af9cc7d6f1
-  msgpack (1.8.5) sha256=97419eaa7b35dfe3e462c0e6c1a3dfdcbfc8756605c09e46e4c6daef127517ba
+  msgpack (1.8.6) sha256=a148c24e7d9026a88baf78918f6b1c297569bb6cc0f87953f444f3069950d4e5
   multi_xml (0.9.1) sha256=7ce766b59c17241ed62976caeae1fae9b2431b263398c35396239a68c4a64e57
   net-http (0.10.0) sha256=1a2ff6e37a05724973c43f2bf7bf105f59c36a4cd0a7e9b1c021a0a566987c27
   net-imap (0.6.8) sha256=eb30bb62227b64a3af6b518b04b2375113d69f68f15de59b0193b07d98acf6d9
@@ -1241,12 +1242,12 @@ CHECKSUMS
   nokogiri (1.19.4-x86_64-linux-musl) sha256=17dfb7c1fa194ae02fbf7c51a7afc8d278045ab3fdacfd86f91d02d7b274470b
   oauth (1.1.8) sha256=7bf0b774391af4f820a86ce2cc7fa38c3fad5121b5563592535cff4b2e16d50e
   oauth-tty (1.0.13) sha256=71ad5f93ceea6fd21fe9a731dc02a4b892c5de9d77e0b303e81bd73f9daeb4a3
-  oauth2 (2.0.25) sha256=2f736a2f93c2caa67c1b08dc3c9889bb907d62643f3183fefaa1723cba6a82ac
-  omniauth (2.1.4) sha256=42a05b0496f0d22e1dd85d42aaf602f064e36bb47a6826a27ab55e5ba608763c
+  oauth2 (2.1.0) sha256=69925a45030c231cdca3ef4a54a8e848e5319f12c3fdbbfa5065dfbeb4efe835
+  omniauth (2.3.1) sha256=bb47bfcd5614b00cd89de4b45b0687123d09143dfeb5dbaf1bb57ff190bc2d2e
   omniauth-facebook (10.0.0) sha256=dfdc6cbada5387572d554784861546cf6382f9fa16c4731cbe5813e570fcb9e1
   omniauth-google-oauth2 (1.2.3) sha256=bdbab67e64e50b7902eee2dcfc2225575cefba15ab89a3b6e92c8947987c1da9
-  omniauth-oauth (1.2.1) sha256=25bf22c90234280fa825200490f03ff1ce7d76f1a4fbd6c882c6c5b169c58da8
-  omniauth-oauth2 (1.9.0) sha256=ed15f6d9d20991807ce114cc5b9c1453bce3645b64e51c68c90cff5ff153fee8
+  omniauth-oauth (1.3.0) sha256=360596b53a109590bd12b0ad49a6727aa09971ac3fbed0c570d6402239a61f60
+  omniauth-oauth2 (1.10.0) sha256=eeaac3bf4d6a6e2dff4edf8238f0cc046d935347c80d422ff4bdbb028c6f7dd2
   omniauth-rails_csrf_protection (2.0.1) sha256=c6e3204d7e3925bb537cb52d50fdfc9f05293f1a9d87c5d4ab4ca3a39ba8c32d
   omniauth-twitter (1.5.0) sha256=f7d488524113b2f654e1d7f722790dc03d92102cb7c947331ad2d68340a362e3
   openssl (4.0.2) sha256=1037ad2868ae58df9ad917891c0c0f9815a1172f6846d4bcdd508e4c2ee747c2
@@ -1257,7 +1258,7 @@ CHECKSUMS
   parallel (2.3.0) sha256=f75a3e904101ce6a1ccb6b8dc800cbafd42166d83330192438dcf29395167a6f
   parallel_tests (4.10.1) sha256=df05458c691462b210f7a41fc2651d4e4e8a881e8190e6d1e122c92c07735d70
   paranoia (3.1.0) sha256=36574a46e8df663d0da7d9008e987b72a6a9eccee13c058b7094acc810e39f52
-  parser (3.3.12.0) sha256=21a6d7f755d5a24dfbdc6e6b772e4e879a52e7631a88bc5a3a134606052c9828
+  parser (3.3.13.0) sha256=e02f9b63c2fe05b0c68f692ba4df89b3cb113b663964f75d988fbebfd6c3deca
   pg (1.6.3) sha256=1388d0563e13d2758c1089e35e973a3249e955c659592d10e5b77c468f628a99
   pg (1.6.3-aarch64-linux) sha256=0698ad563e02383c27510b76bf7d4cd2de19cd1d16a5013f375dd473e4be72ea
   pg (1.6.3-aarch64-linux-musl) sha256=06a75f4ea04b05140146f2a10550b8e0d9f006a79cdaf8b5b130cde40e3ecc2c
@@ -1281,7 +1282,7 @@ CHECKSUMS
   rack-protection (4.2.1) sha256=cf6e2842df8c55f5e4d1a4be015e603e19e9bc3a7178bae58949ccbb58558bac
   rack-proxy (0.8.3) sha256=1e446a37be6d9c59647e710d2df7d23e3b0b4e1b982dab4f188a0354aa1fff0b
   rack-session (2.1.2) sha256=595434f8c0c3473ae7d7ac56ecda6cc6dfd9d37c0b2b5255330aa1576967ffe8
-  rack-test (2.2.0) sha256=005a36692c306ac0b4a9350355ee080fd09ddef1148a5f8b2ac636c720f5c463
+  rack-test (2.3.0) sha256=b118d177cc002c572fc1b6fd8d19c9ed5881a36e8d6f689f9e618f9f861241e8
   rackup (2.3.1) sha256=6c79c26753778e90983761d677a48937ee3192b3ffef6bc963c0950f94688868
   rails (8.1.4) sha256=5f3ecdf9a2a3b79b2e31b8fee3b64a00f7284d76e5631f87d0e58e665911a33b
   rails-controller-testing (1.0.5) sha256=741448db59366073e86fc965ba403f881c636b79a2c39a48d0486f2607182e94
@@ -1292,7 +1293,7 @@ CHECKSUMS
   rainbow (3.1.1) sha256=039491aa3a89f42efa1d6dec2fc4e62ede96eb6acd95e52f1ad581182b79bc6a
   rake (13.4.2) sha256=cb825b2bd5f1f8e91ca37bddb4b9aaf345551b4731da62949be002fa89283701
   rake-compiler-dock (1.12.0) sha256=f13205c2738f3d2053afcd03491a9e4541b22a59a0bfc53fc8bc883bd8188023
-  ransack (4.4.3) sha256=c9a85304009eba4a4abe889fbdc23ff7e52e5428b7b9bc1e4ede4c13de4aaaf3
+  ransack (4.4.4) sha256=f559984eb5714c9834190bc3dc4286f0d4351a21cc10696860c53bce979c7a24
   rb-fsevent (0.11.2) sha256=43900b972e7301d6570f64b850a5aa67833ee7d87b458ee92805d56b7318aefe
   rb-inotify (0.11.1) sha256=a0a700441239b0ff18eb65e3866236cd78613d6b9f78fea1f9ac47a85e47be6e
   rb_sys (0.9.130) sha256=7d486d99c1da02635515deaf9860fc5aea90bb4ab2589b2deec7fdc7d3548615
@@ -1334,14 +1335,14 @@ CHECKSUMS
   ruby-vips (2.3.0) sha256=e685ec02c13969912debbd98019e50492e12989282da5f37d05f5471442f5374
   rubyXL (3.4.33) sha256=dc2732dacf5f963fdd9732eb36b3342cb240414371ed8d9f327f667d2b286d2e
   rubyzip (2.3.2) sha256=3f57e3935dc2255c414484fbf8d673b4909d8a6a57007ed754dde39342d2373f
-  sass-embedded (1.106.0-aarch64-linux-gnu) sha256=371e7ca417136e2179acbfb1cd3f0be4f626a50b3337c38f6869b1aa9517537a
-  sass-embedded (1.106.0-aarch64-linux-musl) sha256=c2e7b56e95be1b0a082d9cb294fc6c71265c1bcf465939eb00485cf677b96d1c
-  sass-embedded (1.106.0-arm-linux-gnueabihf) sha256=273dff53f94a767f869444027a6bab59580642580b7d15ac71dea9b7e0e49741
-  sass-embedded (1.106.0-arm-linux-musleabihf) sha256=7f108ec0100f9500dc5d77f359fbf5b0369be1f2c2da97a25b25d67de76cd07a
-  sass-embedded (1.106.0-arm64-darwin) sha256=5c09de8907ecc5d42e4536f7192eae31853bd3be3f6387db5d506d3490eb5749
-  sass-embedded (1.106.0-x86_64-darwin) sha256=058f9500b079ab884418a66840bdf5e7efffe20fd8eb7e6be42d55be06948b2c
-  sass-embedded (1.106.0-x86_64-linux-gnu) sha256=98f3d9ffccb7a446b5b85937938be4fc9b589a65a1f412be0f4c3018916e1854
-  sass-embedded (1.106.0-x86_64-linux-musl) sha256=f809782da326d003f5197c41a86d0d492e9f4c9a9169da7ebb81dfd9975d5f4a
+  sass-embedded (1.106.1-aarch64-linux-gnu) sha256=a90020bda9fed71dd56b0923bffee21b7e11ed4c4dbd3f06eff9eb1409037b7a
+  sass-embedded (1.106.1-aarch64-linux-musl) sha256=10bfb659eed2579049281095d051ef1834389404d5f5062bdd276733934e0e84
+  sass-embedded (1.106.1-arm-linux-gnueabihf) sha256=b1a68f22e0a04c897210435ea2153dfac9abc4cc57ded094054e985152b5944f
+  sass-embedded (1.106.1-arm-linux-musleabihf) sha256=a77ad844ed78ef8b1eea427238110be7ad0312b0c93a6b8afc5fd1db2664877c
+  sass-embedded (1.106.1-arm64-darwin) sha256=16a8481233712d3050741aae7e46cd35f2ae65493a197967af0a9efef7324f9f
+  sass-embedded (1.106.1-x86_64-darwin) sha256=e993d6803ae98c80e6fa71e2ceea8a5699517ee6dd6b1162cff456e5a0ccb4a6
+  sass-embedded (1.106.1-x86_64-linux-gnu) sha256=2d0fb805f990a8328aa590cb201efbe21e26c98364107632e0ea5fc6b4a988c6
+  sass-embedded (1.106.1-x86_64-linux-musl) sha256=28e5a7a82abd5d68fe56df7d44e6706c66f4e27d05123dd36966dc441a7dee50
   sassc (2.4.0) sha256=4c60a2b0a3b36685c83b80d5789401c2f678c1652e3288315a1551d811d9f83e
   securerandom (0.4.1) sha256=cc5193d414a4341b6e225f0cb4446aceca8e50d5e1888743fac16987638ea0b1
   selenium-webdriver (4.51.0) sha256=09edf1b7fc360e0570bac609676f804ed527fe0b2f285e03233561e29b0ec105
@@ -1353,7 +1354,7 @@ CHECKSUMS
   simplecov-html (0.13.2) sha256=bd0b8e54e7c2d7685927e8d6286466359b6f16b18cb0df47b508e8d73c777246
   simplecov_json_formatter (0.1.4) sha256=529418fbe8de1713ac2b2d612aa3daa56d316975d307244399fa4838c601b428
   smart_properties (1.17.0) sha256=f9323f8122e932341756ddec8e0ac9ec6e238408a7661508be99439ca6d6384b
-  snaky_hash (2.0.7) sha256=7d02c70012a3f932e48860cd024577908300c9aa615e0cb9b450aaa749cbcb4d
+  snaky_hash (2.0.9) sha256=e93e6ec80632f8c8c4a3fe6e25d51eaef253e0e58dc7100f0f8370320feb3128
   spring (4.7.0) sha256=f81bf6d41f05518ed5d0128ce5c75fb6dd9c6153f158129c8b85c4461ca0b72c
   spring-watcher-listen (2.1.0) sha256=e958bcd956d1026eb95d16b2ef0e241d1ca35a754628bd45040e3d9954a61949
   ssrf_filter (1.6.0) sha256=78d15bc26d0385c931f46f12a9c1cbb90e6556bd96b95f25e5a5f786c8dcf999
@@ -1373,7 +1374,7 @@ CHECKSUMS
   uri (1.1.2) sha256=89292e98eabbef6248b0a0ed5e7e398e152f83f17560023a6d94a7f492b169fb
   useragent (0.16.11) sha256=700e6413ad4bb954bb63547fa098dddf7b0ebe75b40cc6f93b8d54255b173844
   valid_email2 (7.1.0) sha256=eb0e0f035e91d9fa147acfd5762b07a895b46e6ec2779300bff6ca38bcd40518
-  version_gem (1.1.15) sha256=a73241587b29252e3567e0c818ded80730eb754d43b508f6ce4db22ca9ba27d0
+  version_gem (1.1.17) sha256=70420b9675fbb77a7e7e7eb8ed6580dd4dd25be53b1454c1a79cc18f3c5a8dfd
   w3c_rspec_validators (0.3.0) sha256=c1a28642a91c81a8cdd603533b07dea2bc5e9436400e5762e1a0ad4fe6bfd39b
   w3c_validators (1.3.7) sha256=2785f8138ad4d6c2cf9f2a49693390cc55a815a51f1b0ff40e35eed4ff8be746
   warden (1.2.9) sha256=46684f885d35a69dbb883deabf85a222c8e427a957804719e143005df7a1efd0

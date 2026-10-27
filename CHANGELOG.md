@@ -1,6 +1,15 @@
 CHANGELOG
 =========
 
+v0.15.1
+-------
+  Features:
+    - Notify selected participatory space admins by email when a follow-up questionnaire receives a response ([#679](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/679))
+
+  Fixes:
+    - Validate proposal custom fields on the server, including required fields and maximum text length ([#668](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/668))
+    - Fix survey autosave restoring answers into the wrong questions ([#671](https://github.com/decidim-ice/decidim-module-decidim_awesome/pull/671))
+
 v0.15.0
 -------
 
