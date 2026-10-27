@@ -73,6 +73,6 @@
     <span class="process-groups-results-count">
       <%= t("results_count", scope: i18n_scope, count: paginated_items.total_count) %>
     </span>
-    <%= paginate paginated_items, theme: "decidim", params: pagination_params %>
+    <%= paginate paginated_items, theme: "decidim", views_prefix: "", params: pagination_params %>
   </div>
 </div>

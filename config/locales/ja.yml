@@ -121,7 +121,9 @@ ja:
           global:
             announcement: アナウンス
             iframe: Iframeコード
-            iframe_help: 'あなたのコードを <iframe width="100%" height="700" frameBorder="0" allowFullscreen src="..."></iframe> というHTMLとして入れてください。コンテンツは他のHTMLタグからサニタイズされます。 画面幅を埋めるためにwidthを100%にして使用するようにしてください。'
+            iframe_help: あなたのコードを <iframe width="100%" height="700" frameBorder="0"
+              allowFullscreen src="..."></iframe> というHTMLとして入れてください。コンテンツは他のHTMLタグからサニタイズされます。
+              画面幅を埋めるためにwidthを100%にして使用するようにしてください。
             viewport_width: アプリケーションのビューポートを最大幅として制限する
           step:
             announcement: アナウンス
@@ -133,7 +135,7 @@ ja:
             announcement: アナウンス
             collapse: メニューは折りたたまれた状態で開始
             map_center: マップの中央 (緯度、経度)
-            map_center_help: '小数点を使用 (例：41.38879、2.15899)。すべてのマーカーに自動的に合うように空のままにします'
+            map_center_help: 小数点を使用 (例：41.38879、2.15899)。すべてのマーカーに自動的に合うように空のままにします
             map_height: マップの高さ (px)
             map_zoom: ズーム ( 0 と 18 の間の任意の数字)
             map_zoom_help: 地図の中心が定義されている場合にのみ適用されます
@@ -154,7 +156,8 @@ ja:
         settings:
           global:
             awesome_voting_manifest: サポート種別
-            awesome_voting_manifest_help_html: <strong class="text-alert">投票期間の途中でこの設定を変更すると、不正確な結果や予期せぬ結果が生じることに注意してください。 </strong><br>また、コンポーネントにまだサポートがついていない場合にのみ、この設定を編集できることに注意してください。
+            awesome_voting_manifest_help_html: <strong class="text-alert">投票期間の途中でこの設定を変更すると、不正確な結果や予期せぬ結果が生じることに注意してください。
+              </strong><br>また、コンポーネントにまだサポートがついていない場合にのみ、この設定を編集できることに注意してください。
             awesome_voting_manifest_options:
               default: 単純投票 (デフォルト)
               voting_cards: カラーカードを使った投票
@@ -168,12 +171,14 @@ ja:
             voting_cards_box_title: 投票箱のタイトル
             voting_cards_box_title_help: デフォルトは「この提案に投票する」です。非表示にするには「-」を使用してください。
             voting_cards_instructions: 手順/ヘルプ (解除可能なモーダルウィンドウ) をサポート
-            voting_cards_instructions_help: デフォルトは " %{organization} がどのように投票を使用するか理解するため、選挙ルールをよくお読みください" です
+            voting_cards_instructions_help: デフォルトは " %{organization} がどのように投票を使用するか理解するため、選挙ルールをよくお読みください"
+              です
             voting_cards_show_abstain: 棄権オプションを追加
             voting_cards_show_modal_help: サポートをクリックしたときに手順/ヘルプ モーダルを表示する
           step:
             awesome_votes_enabled_by_status: 提案ステータスによる投票制限
-            awesome_votes_enabled_by_status_help: 有効にすると、投票は選択したステータスの提案でのみ許可されます。 他のステータスの提案は投票を受け付けません。ステータスに関係なくすべての提案に投票を許可する場合は空のままにしてください。
+            awesome_votes_enabled_by_status_help: 有効にすると、投票は選択したステータスの提案でのみ許可されます。
+              他のステータスの提案は投票を受け付けません。ステータスに関係なくすべての提案に投票を許可する場合は空のままにしてください。
             awesome_votes_enabled_states: 投票を許可されたステータス
             default_sort_order_options:
               az: A-Z (アルファベット順)
@@ -196,7 +201,7 @@ ja:
           email: メールアドレス
           exports:
             button: この検索結果をエクスポート
-            export_as: '%{export_format} としてエクスポート'
+            export_as: "%{export_format} としてエクスポート"
             export_format:
               csv: CSV
               json: JSON
@@ -205,7 +210,8 @@ ja:
           index:
             description: ここには、参加型スペースの管理に何らかの役割を持っていたすべてのユーザーが表示されます。一般の管理者は表示されません。
             global_description: ここには、この組織を管理するためにグローバルな役割を持っているすべてのユーザーが表示されます。参加型スペースの管理者は表示されません。
-            missing_users: '注意: このリストには、 %{date} より以前に作成/削除されたユーザーは含まれていない可能性があります。 これは、「ユーザーのトレーサビリティ」が導入されたのがDecidim v0.24 であり、このインスタンスがインストールされたのはおそらくそれ以前からであるためです。'
+            missing_users: '注意: このリストには、 %{date} より以前に作成/削除されたユーザーは含まれていない可能性があります。
+              これは、「ユーザーのトレーサビリティ」が導入されたのがDecidim v0.24 であり、このインスタンスがインストールされたのはおそらくそれ以前からであるためです。'
             see_global: グローバル管理者一覧
             see_spaces: 参加型スペース管理者一覧
             title: 管理者のアカウンタビリティ
@@ -230,7 +236,7 @@ ja:
             metadata: メタデータを含みますか？ %{metadata}
           authorization_destroyed: 認証を破棄しました。
           authorization_not_destroyed: 認証を破壊できませんでした
-          authorization_transferred: '警告：検証が競合していたため、検証は %{user} に転送されました'
+          authorization_transferred: 警告：検証が競合していたため、検証は %{user} に転送されました
           conflict: 既存の認証との競合があります
           conflict_help_html: |
             この認証を行う前に、ユーザー%{user} との競合を解決する必要があります。
@@ -238,7 +244,7 @@ ja:
             検証の競合は、別のユーザーが認証しようとしているユーザーと同じデータを持っている場合に発生します。
             この競合は、他のユーザーから競合している認証を削除するか、このユーザーに対して異なるデータを使用することで解決できます。
           edit:
-            authorize: '%{user} を %{name} で本人確認'
+            authorize: "%{user} を %{name} で本人確認"
             do_it_if_sure: ユーザーがこの権限を持っていると確認されている場合のみこれを行ってください
             force_verification: 現在のデータで強制的に検証する
             force_verification_help: 検証に失敗しましたが、ユーザーがこの認証を取得していることを確認している場合は強制できます。
@@ -261,9 +267,10 @@ ja:
             decidim_version: Decidim version %{version}
             errors:
               CSS: 必要な <link> スタイルシートエントリがヘッドに含まれていません。この問題を解決するために、独自の _head.html.erbに手動で追加することもできます。
-              JavaScript: 必要な <script> JavaScriptエントリがヘッドに含まれていません。この問題を解決するために、独自の admin/_head.html.erbに手動で追加することもできます。
+              JavaScript: 必要な <script> JavaScriptエントリがヘッドに含まれていません。この問題を解決するために、独自の
+                admin/_head.html.erbに手動で追加することもできます。
             head_tags: アプリケーションヘッダーに含まれる Awesome tags
-            link_admins: /system パネルにログイン
+            link_admins: "/system パネルにログイン"
             view_release: リリースノートを表示
         config:
           anonymous: 非ログインユーザー
@@ -280,7 +287,7 @@ ja:
             success: 認証グループ %{key} を作成しました
           create_proposal_custom_field:
             error: 新しい「カスタム項目」ボックスの作成中にエラーが発生しました! %{error}
-            success: '「カスタム項目」ボックス %{key} が正常に作成されました'
+            success: "「カスタム項目」ボックス %{key} が正常に作成されました"
           create_scoped_admin:
             error: 新しい管理グループの作成中にエラーが発生しました! %{error}
             success: 管理グループ %{key} が正常に作成されました
@@ -291,8 +298,8 @@ ja:
             error: 認証グループの削除中にエラーが発生しました %{error}
             success: 認証グループ %{key} を削除しました
           destroy_proposal_custom_field:
-            error: '「カスタム項目」ボックスの削除中にエラーが発生しました! %{error}'
-            success: '「カスタム項目」ボックス %{key} が正常に削除されました'
+            error: "「カスタム項目」ボックスの削除中にエラーが発生しました! %{error}"
+            success: "「カスタム項目」ボックス %{key} が正常に削除されました"
           destroy_scoped_admin:
             error: 管理グループの削除中にエラーが発生しました! %{error}
             success: 管理グループ %{key} が正常に削除されました
@@ -321,16 +328,24 @@ ja:
               hashcash_login: |
                 人間を煩わせることなく、Railsアプリケーションをボットや総当たり攻撃から守ります。
                 Hashcashはプルーフ・オブ・ワーク方式の仕組みで、ユーザーがサインアップする前に計算上のパズルを解かせるものです（これはブラウザが自動的に実行します）。
-              hashcash_login_bits: このパラメータは、ハッシュキャッシュアルゴリズムが作業証明書の生成に使用するビット数を定義します。 16 (簡単) から 30 (極めて困難) ビットの間の値を使用することをお勧めします。 ログインフォームのデフォルト値は %{bits} ビットです。
+              hashcash_login_bits: このパラメータは、ハッシュキャッシュアルゴリズムが作業証明書の生成に使用するビット数を定義します。
+                16 (簡単) から 30 (極めて困難) ビットの間の値を使用することをお勧めします。 ログインフォームのデフォルト値は %{bits}
+                ビットです。
               hashcash_signup: |
                 人間を煩わせることなく、Railsアプリケーションをボットや総当たり攻撃から守ります。
                 Hashcashはプルーフ・オブ・ワーク方式の仕組みで、ユーザーがサインアップする前に計算上のパズルを解かせるものです（これはブラウザが自動的に実行します）。
-              hashcash_signup_bits: このパラメータは、ハッシュキャッシュアルゴリズムが作業証明書の生成に使用するビット数を定義します。 16 (簡単) から 30 (極めて困難) ビットの間の値を使用することをお勧めします。 登録フォームのデフォルト値は %{bits} ビットです。
+              hashcash_signup_bits: このパラメータは、ハッシュキャッシュアルゴリズムが作業証明書の生成に使用するビット数を定義します。
+                16 (簡単) から 30 (極めて困難) ビットの間の値を使用することをお勧めします。 登録フォームのデフォルト値は %{bits}
+                ビットです。
               intergram_about: IntergramはTelegramメッセンジャーを使用してページの下部に埋め込まれたライブサポートチャットウィジェットを処理します。
-              intergram_config: '<a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram bot</a> をグループに招待するか、直接チャットを開始します。 <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+ info</a>'
-              original_editor_override: バージョン 0.26 以降、エディタに画像をアップロードすることが可能になりました(管理者専用)。 そのため、ここでの画像設定はパブリックエディタにのみ影響を与えます(管理者は常に利用可能です)。
+              intergram_config: <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram
+                bot</a> をグループに招待するか、直接チャットを開始します。 <a href="https://github.com/idoco/intergram#embed-intergram-in-your-website-with-these-2-simple-steps">+
+                info</a>
+              original_editor_override: バージョン 0.26 以降、エディタに画像をアップロードすることが可能になりました(管理者専用)。
+                そのため、ここでの画像設定はパブリックエディタにのみ影響を与えます(管理者は常に利用可能です)。
               proposal_custom_fields: 公開ウェブの特定の部分にのみ適用されるカスタム提案項目を作成します (制限されたエディタを使用してください)
-              proposal_custom_fields_example: データは、互換性のある HTML 属性 (dl,dt,dd 要素) を使用した XML オブジェクトとして格納され、通常の提案の "body" を置き換えます。
+              proposal_custom_fields_example: データは、互換性のある HTML 属性 (dl,dt,dd 要素) を使用した
+                XML オブジェクトとして格納され、通常の提案の "body" を置き換えます。
               proposal_custom_fields_translations: |-
                 ラベル、ヘルプテキスト、プレースホルダー、デフォルト値には、アプリケーション独自の翻訳を使用できます。
                 そのためには、文字列リテラルを使う代わりに、I18Nキーを使います（少なくとも1つのドットを含んでいなければなりません）。
@@ -346,24 +361,26 @@ ja:
                 このテキストは、下記のキーを使用してカスタム翻訳でカスタマイズできます：
                 %{key}
               scoped_admin_styles: ここを隠すと管理者が使用できなくなる可能性があります。ご注意ください。
-              scoped_admin_styles_variables: '組織のカスタマイズ色には、以下の CSS 変数を使用できます。'
-              scoped_admin_styles_warning: "<strong>警告</strong>: ここでは、この管理者にのみ適用されるカスタム CSS を追加します。"
-              scoped_admins: 一般ユーザーを公開ウェブの特定の部分だけを管理できる管理者に昇格させます(制限エディターを使用してください)。 すでに通常の管理者権限を持つユーザーは無視されることに注意してください。
+              scoped_admin_styles_variables: 組織のカスタマイズ色には、以下の CSS 変数を使用できます。
+              scoped_admin_styles_warning: "<strong>警告</strong>: ここでは、この管理者にのみ適用されるカスタム
+                CSS を追加します。"
+              scoped_admins: 一般ユーザーを公開ウェブの特定の部分だけを管理できる管理者に昇格させます(制限エディターを使用してください)。
+                すでに通常の管理者権限を持つユーザーは無視されることに注意してください。
               scoped_styles: 公開ウェブの特定の部分にのみ適用されるカスタムCSSを作成します (制限されたエディタを使用してください)
-              scoped_styles_variables: '組織の色のカスタマイズには、以下のCSS変数が使用できます。'
+              scoped_styles_variables: 組織の色のカスタマイズには、以下のCSS変数が使用できます。
               user_timezone: ユーザープロファイルにタイムゾーンを設定する選択ボックスを追加します. これは、ユーザーのローカル時間の日付と時刻を表示するために使われます.
               validate_body_max_caps_percent: ゼロの場合大文字を許可しません。100の場合すべてを大文字で書くことを強制します。
-              validate_body_max_marks_together: '並べて入力できる「?」と「!」の数を制限します。 すなわち、それが2の場合、「!!!」はテキストに記入できません'
+              validate_body_max_marks_together: 並べて入力できる「?」と「!」の数を制限します。 すなわち、それが2の場合、「!!!」はテキストに記入できません
               validate_body_min_length: この数字はゼロにできます。その場合、このフィールドを必須ではなくする効果があります。
               validate_title_max_caps_percent: ゼロの場合大文字を許可しません。100の場合すべてを大文字で書くことを強制します。
-              validate_title_max_marks_together: '並べて入力できる「?」と「!」の数を制限します。 すなわち、それが2の場合、「!!!」はテキストに記入できません'
+              validate_title_max_marks_together: 並べて入力できる「?」と「!」の数を制限します。 すなわち、それが2の場合、「!!!」はテキストに記入できません
               validate_title_min_length: タイトルは常に必須です。この数字はゼロにはできません
               verifications_html: |
                 ここでは、参加スペースやコンポーネントに追加のアクセス制限を設けることができ、特定の場所へアクセスする前にユーザーの認証を必須とすることができます（スパム防止など）。
                 制限はすべてのユーザーに適用されますが、管理者は常に /admin パネルにアクセスできます。
             validators:
-              body: '「body」フィールドのユーザー入力検証'
-              title: '「タイトル」フィールドのユーザー入力検証'
+              body: "「body」フィールドのユーザー入力検証"
+              title: "「タイトル」フィールドのユーザー入力検証"
           form_force_authorizations:
             delete: 削除
             force_authorizations_html: |
@@ -376,12 +393,12 @@ ja:
           form_proposal_custom_fields:
             delete: 削除
             new: 新しい「カスタム項目」ボックスを追加
-            remove: '「カスタム項目」ボックスを削除'
+            remove: "「カスタム項目」ボックスを削除"
             sure_to_remove: この項目ボックスを削除してもよろしいですか？
           form_proposal_private_custom_fields:
             delete: 削除
             new: 新しい「非公開カスタムフィールド」を追加
-            remove: '「非公開カスタムフィールド」を削除'
+            remove: "「非公開カスタムフィールド」を削除"
             sure_to_remove: この非公開フィールドボックスを破棄してもよろしいですか？
           form_scoped_admin_styles:
             delete: 削除
@@ -391,7 +408,7 @@ ja:
           form_scoped_admins:
             delete: 削除
             new: 新しい「スコープ付き管理者」グループを追加
-            remove: '「スコープ付き管理者」グループを削除'
+            remove: "「スコープ付き管理者」グループを削除"
             sure_to_remove: この「スコープ付き管理者」グループを削除してもよろしいですか？
           form_scoped_styles:
             delete: 削除
@@ -401,7 +418,7 @@ ja:
           none: "⛔ Never! - 他の制約を無効にします"
           process_groups: プロセスグループ
           show:
-            title: '%{setting} の詳細設定'
+            title: "%{setting} の詳細設定"
             update: 設定を更新する
           system: 参加型スペース以外のすべて
           title:
@@ -442,7 +459,8 @@ ja:
             error: 条件設定更新エラー
             success: 条件設定は正常に更新されました
         cookie_categories:
-          cookie_management_warning_html: Decidimはiframeを表示するため、ユーザーがクッキーをすべて受け入れることを必須としています。 GDPR に準拠するために適切なクッキーカテゴリで iframe で使用されるすべてのクッキーを追加してください。
+          cookie_management_warning_html: Decidimはiframeを表示するため、ユーザーがクッキーをすべて受け入れることを必須としています。
+            GDPR に準拠するために適切なクッキーカテゴリで iframe で使用されるすべてのクッキーを追加してください。
           create:
             error: 'クッキーカテゴリの作成中にエラーが発生しました: %{error}'
             success: クッキーカテゴリーを作成しました
@@ -479,7 +497,8 @@ ja:
             button: 共通クッキーサービス
           cookie_item_presets:
             descriptions:
-              consent: 機能に使用されます。2年間、Googleはクッキーの選択に関するユーザーの状態を保存するために使用します。 Google がクッキーを使用する方法についてもっと読む
+              consent: 機能に使用されます。2年間、Googleはクッキーの選択に関するユーザーの状態を保存するために使用します。 Google
+                がクッキーを使用する方法についてもっと読む
               decidim_consent: このウェブサイトでユーザーが許可するクッキーに関する情報を保存します。
               emoji_picker_recent: 最近選択した絵文字を保存します
               facebook_fr: Metaが広告の関連性を測定、改善するために使用します。
@@ -546,7 +565,8 @@ ja:
             no_data: ハッシュキャッシュスタンプが見つかりません
             request_path: リクエストパス
           ip_addresses:
-            help_html: このページには、システムで検出されたすべてのIPアドレスが、生成したHashcashスタンプの数順に一覧表示されます。 <br><br>各スタンプは、ユーザーによるログインまたはサインアップのいずれかの操作を表します。この情報を利用して、不審な活動を検出することができます。
+            help_html: このページには、システムで検出されたすべてのIPアドレスが、生成したHashcashスタンプの数順に一覧表示されます。
+              <br><br>各スタンプは、ユーザーによるログインまたはサインアップのいずれかの操作を表します。この情報を利用して、不審な活動を検出することができます。
             ip_address: IPアドレス
             no_data: IPアドレスが見つかりません
             stamps: Hashcashスタンプ
@@ -556,7 +576,8 @@ ja:
             preset_content_blocks: 既存のコンテンツブロック
             preset_global_menu: Decidimのいつものメンバー
             select_a_preset: "— 一般的なメニュー項目を選択 —"
-            url_help_html: "<b>#section-id</b> — このページ内のセクションにスクロールします<br><b>/path</b> — 内部ページへのリンク（例：/processes）<br><b>https://example.com</b> — 外部リンク（自動的に新規タブで開きます）"
+            url_help_html: "<b>#section-id</b> — このページ内のセクションにスクロールします<br><b>/path</b>
+              — 内部ページへのリンク（例：/processes）<br><b>https://example.com</b> — 外部リンク（自動的に新規タブで開きます）"
           new:
             save: 保存
             title: 新規メニュー項目
@@ -621,14 +642,14 @@ ja:
         officializations:
           authorizations: 認証
           verification_modal:
-            authorizations_for: '%{user} の本人確認'
+            authorizations_for: "%{user} の本人確認"
             close: 閉じる
         private_data:
           private_data:
             component: スペース/コンポーネント
             confirm_delete: このリソースのすべてのプライベートデータを削除してもよろしいですか？この操作は元に戻せません。
             delete: 全て削除
-            destroying: '%{title} のプライベートデータが破棄されるように設定されています。数分後にもう一度確認してください。'
+            destroying: "%{title} のプライベートデータが破棄されるように設定されています。数分後にもう一度確認してください。"
             done: 実行済み
             help_html: |
               このツールを使用すると、特定の参加スペースまたはコンポーネントに関連するすべてのプライベートデータを削除することができます。この操作は取り消しができず、データベースからすべてのプライベートデータが削除されます。
@@ -650,7 +671,7 @@ ja:
               はい、最後の更新から%{time_ago} 未満である場合、プライベートデータを削除することはできません。この設定は、イニシャライザーファイルで変更できます。
             items_count: 影響の合計数
             last_date: 最終更新日
-            no_data: '%{time_ago} 前より古いプライベートデータは見つかりませんでした'
+            no_data: "%{time_ago} 前より古いプライベートデータは見つかりませんでした"
             not_destroyable: このリソースはまだ破棄できません
             removing: 削除中…
             time_ago: "%{time} 前"
@@ -669,15 +690,19 @@ ja:
           menu:
             title: 公開フロントエンド
         visibility:
-          info_html: '%{awesome_link} による検証を使用して、追加のアクセス制限を管理できます。'
+          info_html: "%{awesome_link} による検証を使用して、追加のアクセス制限を管理できます。"
           restricted_html: このスペースは %{awesome_link} による追加のアクセス制限を使用しています。
       admin_log:
         component:
-          destroy_private_data: "%{user_name} は %{space_name} 内のプライベートデータの項目 %{resource_name} を%{count} 件破棄しました"
+          destroy_private_data: "%{user_name} は %{space_name} 内のプライベートデータの項目 %{resource_name}
+            を%{count} 件破棄しました"
         user:
-          admin_creates_authorization: "%{user_name} が %{resource_name} を %{handler_name} で検証しました"
-          admin_destroys_authorization: "%{user_name} が %{handler_name} の検証 %{resource_name} を破棄しました"
-          admin_forces_authorization: "%{user_name} は、 %{resource_name} について %{handler_name} による検証を強制しました。理由: %{reason}"
+          admin_creates_authorization: "%{user_name} が %{resource_name} を %{handler_name}
+            で検証しました"
+          admin_destroys_authorization: "%{user_name} が %{handler_name} の検証 %{resource_name}
+            を破棄しました"
+          admin_forces_authorization: "%{user_name} は、 %{resource_name} について %{handler_name}
+            による検証を強制しました。理由: %{reason}"
       amendments:
         modal:
           amendment_exists: 修正は既に存在します
@@ -700,14 +725,14 @@ ja:
           all: 全て
           all_taxonomies: 全カテゴリ
           default_title: 参加型プロセス
-          filter_by_label: 'フィルター：'
+          filter_by_label: フィルター：
           max_count: 表示する要素の最大数
           name: おすすめプロセスグループ
           past: 過去
           remove_filter: フィルター解除
           results_count:
             other: "%{count} 件のプロセスがあります"
-          status_label: 'ステータス：'
+          status_label: ステータス：
           title: ブロックタイトル
           upcoming: 今後
         awesome_processes:
@@ -747,7 +772,7 @@ ja:
           css_comment_hover: マウスオーバー時のメニューリンクのスタイル
           css_comment_link: 個別メニューリンクのスタイル
           css_comment_menu: メニューブロック全体のスタイル
-          css_help_html: '%{link}を作成すると、このメニューをさらにカスタマイズできます。以下のコードでメニュー内の各要素を参照できます：'
+          css_help_html: "%{link}を作成すると、このメニューをさらにカスタマイズできます。以下のコードでメニュー内の各要素を参照できます："
           css_help_link: カスタムスタイル
           delete_confirm: この項目を削除してもよろしいですか？
           drag: ドラッグして並び替え
@@ -768,7 +793,7 @@ ja:
         map:
           collapse: メニューは折りたたまれた状態で開始
           map_center: マップの中央 (緯度、経度)
-          map_center_help: '小数点を使用 (例：41.38879、2.15899)。すべてのマーカーに自動的に合うように空のままにします'
+          map_center_help: 小数点を使用 (例：41.38879、2.15899)。すべてのマーカーに自動的に合うように空のままにします
           map_height: マップの高さ (px)
           map_settings: マップの設定
           map_zoom: ズーム ( 0 と 18 の間の任意の数字)
@@ -800,9 +825,9 @@ ja:
           block_id_help: この値は URL のセクションアンカーとして使用されます。ページごとに一意である必要があります（例："our-team"）。
           block_id_placeholder: 内部参照名（非公開）
           column_title: カラム
-          css_comment_this_column: '%{number} カラムのスタイル'
+          css_comment_this_column: "%{number} カラムのスタイル"
           css_comment_title: ブロックタイトルのスタイル
-          css_help_html: '%{link}を作成すると、このブロックをさらにカスタマイズできます。以下のコードでブロック内の各要素を参照できます：'
+          css_help_html: "%{link}を作成すると、このブロックをさらにカスタマイズできます。以下のコードでブロック内の各要素を参照できます："
           css_help_link: カスタムスタイル
           name: Awesomeリッチテキストブロック
           remove_column: 削除
@@ -841,13 +866,14 @@ ja:
           logout: ログアウトする
           missing_title: 未検証
           resume_title: 本人確認処理中
-          resume_with_method: '%{name} で本人確認を再開'
+          resume_with_method: "%{name} で本人確認を再開"
           title: 本人確認を行う
-          verify_with_all_these_options: 'プラットフォームにアクセスできるようにするには、以下すべての方法で本人確認を行ってください：'
-          verify_with_any_of_these_options: 'プラットフォームにアクセスする前に、これらの選択肢のうちいずれかを用いて本人確認を行ってください'
-          verify_with_method: '%{name} で本人確認する'
+          verify_with_all_these_options: プラットフォームにアクセスできるようにするには、以下すべての方法で本人確認を行ってください：
+          verify_with_any_of_these_options: プラットフォームにアクセスする前に、これらの選択肢のうちいずれかを用いて本人確認を行ってください
+          verify_with_method: "%{name} で本人確認する"
       session:
-        authorization_is_required: プラットフォームのこの部分にアクセスするには、有効な認証 (%{authorizations}) でアカウントを承認する必要があります。
+        authorization_is_required: プラットフォームのこの部分にアクセスするには、有効な認証 (%{authorizations})
+          でアカウントを承認する必要があります。
         login_and_authorization_is_required: プラットフォームのこの部分にアクセスするには、ログインしてアカウントを認証する必要があります。
       system:
         organizations:
@@ -904,7 +930,7 @@ ja:
       decidim_awesome:
         admin:
           maintenance:
-            title: 'メンテナンスツール： %{title}'
+            title: メンテナンスツール： %{title}
             titles:
               checks: システム互換性チェック
               hashcash: Hashcashスタンプ

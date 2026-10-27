@@ -294,5 +294,57 @@ module Decidim::DecidimAwesome
         end
       end
     end
+
+    context "when validating the fields" do
+      let(:box1) { '[{"type":"text","required":true,"label":"Age","name":"age","maxlength":"1"},{"type":"text","label":"Nickname","name":"nickname"}]' }
+      let(:xml) { '<xml><dl><dt name="age">Age</dt><dd id="age"><div>44</div></dd></dl></xml>' }
+
+      it "returns blank errors for empty required fields" do
+        expect(subject.validation_errors).to include({ field: "Birthday", error: :blank })
+      end
+
+      it "returns too_long errors for values longer than maxlength" do
+        expect(subject.validation_errors).to include({ field: "Age", error: :too_long, count: 1 })
+      end
+
+      it "validates text fields against their body content instead of alt attributes" do
+        let_xml = '<xml><dl><dt name="age">Age</dt><dd id="age"><div alt="44">4</div></dd></dl></xml>'
+        subject.apply_xml let_xml
+
+        expect(subject.validation_errors).not_to include({ field: "Age", error: :too_long, count: 1 })
+      end
+
+      it "ignores empty optional fields" do
+        expect(subject.validation_errors.pluck(:field)).not_to include("Nickname")
+      end
+
+      context "with a select field" do
+        let(:box1) { [{ "type" => "select", "required" => true, "label" => "Choice", "name" => "choice", "maxlength" => "2" }].to_json }
+        let(:box2) { "[]" }
+        let(:xml) { '<xml><dl><dt name="choice">Choice</dt><dd id="choice"><div alt="ABC">A</div></dd></dl></xml>' }
+
+        it "validates the alt value instead of the visible text" do
+          expect(subject.validation_errors).to include({ field: "Choice", error: :too_long, count: 2 })
+        end
+      end
+
+      context "with a date field" do
+        let(:box1) { [{ "type" => "date", "required" => true, "label" => "Date", "name" => "date", "maxlength" => "8" }].to_json }
+        let(:box2) { "[]" }
+        let(:xml) { '<xml><dl><dt name="date">Date</dt><dd id="date"><div alt="2025-01-01">1/1/25</div></dd></dl></xml>' }
+
+        it "validates the alt value instead of the visible text" do
+          expect(subject.validation_errors).to include({ field: "Date", error: :too_long, count: 8 })
+        end
+
+        context "when the alt attribute is missing" do
+          let(:xml) { '<xml><dl><dt name="date">Date</dt><dd id="date"><div>2025-01-01</div></dd></dl></xml>' }
+
+          it "falls back to the visible text" do
+            expect(subject.validation_errors).to include({ field: "Date", error: :too_long, count: 8 })
+          end
+        end
+      end
+    end
   end
 end

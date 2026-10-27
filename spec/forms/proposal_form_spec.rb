@@ -88,6 +88,46 @@ module Decidim::Proposals
       end
     end
 
+    context "when custom fields have constraints" do
+      let(:data) { '{"type":"text","label":"Full Name","name":"full-name","required":true,"maxlength":"10"}' }
+      let(:private_data) { '{"type":"text","label":"Email","name":"email","required":true}' }
+      let(:body) { %(<xml><dl><dt name="full-name">Full Name</dt><dd id="full-name"><div>#{name}</div></dd></dl></xml>) }
+      let(:private_body) { '<xml><dl><dt name="email">Email</dt><dd id="email"><div>lucky@example.org</div></dd></dl></xml>' }
+      let(:name) { "Lucky Luke" }
+
+      it { is_expected.to be_valid }
+
+      context "and required fields are empty" do
+        let(:body) { nil }
+        let(:private_body) { nil }
+
+        it "adds the errors to each body" do
+          expect(form).not_to be_valid
+          expect(form.errors[:body]).to eq(["The field 'Full Name' can't be blank"])
+          expect(form.errors[:private_body]).to eq(["The field 'Email' can't be blank"])
+        end
+      end
+
+      context "and a value is too long" do
+        let(:name) { "John Barleycorn" }
+
+        it "adds the error to the body" do
+          expect(form).not_to be_valid
+          expect(form.errors[:body]).to eq(["The field 'Full Name' is too long (maximum is 10 characters)"])
+        end
+      end
+
+      context "and is a participatory text" do
+        let(:component) { create(:proposal_component, :with_participatory_texts_enabled, participatory_space:) }
+        let(:body) { nil }
+
+        it "does not validate the custom fields" do
+          form.valid?
+          expect(form.errors[:body]).not_to include("The field 'Full Name' can't be blank")
+        end
+      end
+    end
+
     describe "etiquette validations" do
       let(:body) { "A body longer than the permitted" }
 
