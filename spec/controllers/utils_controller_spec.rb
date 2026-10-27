@@ -19,8 +19,18 @@ module Decidim::DecidimAwesome
       let(:lang) { "pt-BR" }
       let(:file_path) { Decidim::DecidimAwesome::Engine.root.join("app/packs/src/vendor/form_builder_langs/pt-BR.lang") }
 
+      # the locale in the URL must be one of the available locales, so the language is set directly
+      before do
+        allow(I18n).to receive(:locale).and_return(lang)
+      end
+
+      # the locale switcher restores the stubbed locale after the request, so it must not leak to other specs
+      around do |example|
+        I18n.with_locale(I18n.default_locale) { example.run }
+      end
+
       it "renders the form builder i18n file" do
-        get :form_builder_i18n, params: { locale: lang }
+        get :form_builder_i18n, params: { locale: "en" }
         expect(response).to have_http_status(:ok)
         expect(response.body).to eq(File.read(file_path))
       end
@@ -30,7 +40,7 @@ module Decidim::DecidimAwesome
         let(:lang) { "ca" }
 
         it "renders the form builder i18n file" do
-          get :form_builder_i18n, params: { locale: lang }
+          get :form_builder_i18n, params: { locale: "en" }
           expect(response).to have_http_status(:ok)
           expect(response.body).to eq(File.read(file_path))
         end
@@ -40,7 +50,7 @@ module Decidim::DecidimAwesome
         let(:lang) { "nonexistent" }
 
         it "renders the default file" do
-          get :form_builder_i18n, params: { locale: lang }
+          get :form_builder_i18n, params: { locale: "en" }
           expect(response).to have_http_status(:ok)
           expect(response.body).to eq(File.read(Decidim::DecidimAwesome::Engine.root.join("app/packs/src/vendor/form_builder_langs/en-US.lang")))
         end

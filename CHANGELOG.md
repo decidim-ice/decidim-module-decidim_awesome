@@ -1,6 +1,20 @@
 CHANGELOG
 =========
 
+v0.15.2
+-------
+  Compatibility:
+    - Decidim 0.32.x (>= 0.32.2)
+    - Ruby 3.4
+
+  Features:
+    - Upgrade to Decidim v0.32.2
+      **NOTE** Decidim 0.32.2 or higher is required. If you are on Decidim 0.32.0 or 0.32.1, update Decidim before updating this gem.
+
+  Fixes:
+    - Fix `UrlGenerationError` on every public page with Decidim 0.32.2, which mounts global engines inside the `/:locale` scope ([#680](https://github.com/decidim-ice/decidim-module-decidim_awesome/issues/680))
+    - Keep the user mentions added by Decidim 0.32.2 in the admin proposal body editor
+
 v0.15.1
 -------
   Features:
