@@ -379,7 +379,7 @@ es:
             decidim-core: Del módulo Core
             decidim-participatory_processes: Del módulo Participatory Processes
             decidim-proposals: Del módulo Propuestas
-            decidim-system: Del módulo del sistema
+            decidim-system: Del módulo System
             decidim-verifications: Del módulo Verifications
             decidim_update_available: 'Hay una nueva versión disponible: %{latest_version}'
             decidim_version: Versión de Decidim %{version}
