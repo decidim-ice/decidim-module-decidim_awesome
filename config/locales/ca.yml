@@ -81,11 +81,14 @@ ca:
       follow_up_questionnaire:
         active: Actiu
         name: Nom
+        notified_admin_ids: Administradores que rebran una notificació per cada enviament de formulari
         position: Posició
         reply_to: Correu de resposta
       follow_up_questionnaire_messages:
+        id: ID
         last_action: Última acció
         messages_count: Nombre de missatges
+        respondent: Participant
         status: Estat
         submission_date: Data d’enviament
       follow_up_questionnaire_statuses:
