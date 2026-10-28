@@ -118,6 +118,10 @@ ja:
             name:
               cannot_change_default_item_name: 定義済みアイテムの名前は変更できません
               invalid_format: 名前には文字、数字、アンダースコア(_)およびハイフン(-)のみを含めることができます - スペースや特殊文字は使用できません
+        follow_up_questionnaire_message:
+          attributes:
+            body:
+              blank_without_status_change: 入力するか、あるいは別のステータスを選択してください
   decidim:
     admin:
       actions:
@@ -140,6 +144,11 @@ ja:
       menu:
         admin_accountability: 管理者のアカウンタビリティ
         decidim_awesome: Decidim awesome
+    authorization_handlers:
+      awesome_authorization_handler:
+        fields:
+          awesome_authorization_groups: '許可するグループ:'
+          groups: グループ
     components:
       awesome_iframe:
         name: 全画面 iframe
