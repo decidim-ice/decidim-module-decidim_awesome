@@ -82,6 +82,7 @@ cs:
       follow_up_questionnaire:
         active: Aktivní
         name: Jméno
+        notified_admin_ids: Správci, kteří obdrží oznámení pro každé podání formuláře
         position: Pozice
         reply_to: Odpověď na e-mail
       follow_up_questionnaire_messages:
