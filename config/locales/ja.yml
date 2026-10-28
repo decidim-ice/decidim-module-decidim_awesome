@@ -4,6 +4,12 @@ ja:
     waiting_label: 検証を待っています…
   activemodel:
     attributes:
+      awesome_authorization_group:
+        name: グループ名
+        purpose: グループの目的
+      awesome_authorization_members:
+        emails: 電子メール
+        file: CSVファイルのアップロード
       config:
         additional_proposal_sortings: 有効な追加ソートオプション
         allow_images_in_editors: HTMLエディターで画像を許可する
@@ -72,6 +78,26 @@ ja:
         origin: リダイレクト元
         pass_query: クエリ文字列をリダイレクト先に渡します
         status: ステータス
+      follow_up_questionnaire:
+        active: 有効
+        name: 名前
+        position: 位置
+        reply_to: 返信用メール アドレス
+      follow_up_questionnaire_messages:
+        id: ID
+        last_action: 最新の操作
+        messages_count: メッセージ数
+        status: ステータス
+        submission_date: 提出日
+      follow_up_questionnaire_statuses:
+        color: 色
+        labels_color: 色
+        labels_id: ID
+        name: 名前
+      follow_up_questionnaires:
+        name: 名前
+        number_of_responses: 回答数
+        participatory_space: 参加型スペース > アンケート
       menu:
         position: 位置
         raw_label: ラベル
