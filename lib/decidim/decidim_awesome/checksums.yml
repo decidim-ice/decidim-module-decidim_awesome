@@ -115,6 +115,7 @@ decidim-proposals:
     decidim-0.31.6: 96318bac2808ca4af7e53c9bf6015091
   /app/permissions/decidim/proposals/permissions.rb:
     decidim-0.31.0: a8b29ebc1ac11ac00f90b5848343b9b4
+    decidim-0.31.8: 6618dfe4b3cf7cfcd9ed338b282dbd7e
   /app/cells/decidim/proposals/proposal_metadata_cell.rb:
     decidim-0.31.0: f2034b32638869b49ad500abc9724edf
   /app/commands/decidim/proposals/create_proposal.rb:
