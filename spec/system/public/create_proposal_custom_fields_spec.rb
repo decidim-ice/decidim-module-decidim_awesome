@@ -150,6 +150,35 @@ describe "Custom proposals fields" do
     end
   end
 
+  context "when a required custom field is empty" do
+    let(:data1) { '{"type":"text","label":"Full Name","subtype":"text","className":"form-control","name":"text-1476748004559","required":true}' }
+
+    it "shows the error inline when submitting" do
+      fill_in :proposal_title, with: "A far west character"
+
+      expect { click_on "Continue" }.not_to change(Decidim::Proposals::Proposal, :count)
+      within :xpath, "//input[@id='text-1476748004559']/.." do
+        expect(page).to have_field("text-1476748004559", class: "is-invalid-input")
+        expect(page).to have_css(".form-error.is-visible", text: "There is an error in this field.")
+      end
+    end
+
+    it "shows the error inline when leaving the field" do
+      find_by_id("text-1476748004559").click
+      find_by_id("proposal_title").click
+
+      within :xpath, "//input[@id='text-1476748004559']/.." do
+        expect(page).to have_css(".form-error.is-visible", text: "There is an error in this field.")
+      end
+
+      fill_in :"text-1476748004559", with: "Lucky Luke"
+      within :xpath, "//input[@id='text-1476748004559']/.." do
+        expect(page).to have_no_css(".form-error.is-visible")
+        expect(page).to have_no_field(class: "is-invalid-input")
+      end
+    end
+  end
+
   context "when JavaScript is disabled", driver: :rack_test do
     let(:data1) { '{"type":"text","label":"Full Name","subtype":"text","className":"form-control","name":"text-1476748004559","required":true}' }
 
