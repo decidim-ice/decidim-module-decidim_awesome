@@ -136,6 +136,21 @@ describe "Admin edits proposals" do
       end
     end
 
+    context "when a required custom field is empty" do
+      let(:data1) { '{"type":"text","label":"Full Name","subtype":"text","className":"form-control","name":"text-1476748004559","required":true}' }
+
+      it "shows the error inline when submitting" do
+        fill_in :"text-1476748004559", with: ""
+        click_link_or_button "Update"
+
+        within :xpath, "//input[@id='text-1476748004559']/.." do
+          expect(page).to have_field("text-1476748004559", class: "is-invalid-input")
+          expect(page).to have_css(".form-error.is-visible", text: "There is an error in this field.")
+        end
+        expect(page).to have_no_content("Proposal successfully updated.")
+      end
+    end
+
     context "when creating the proposal" do
       it "saves the proposal in XML" do
         fill_in :proposal_title_en, with: "A far west character"

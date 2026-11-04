@@ -20,18 +20,13 @@ $(() => {
   }
 
   if ($form) {
-    $form.on("submit", (evt) => {
-      if (evt.target.checkValidity()) {
-        // save current editors
-        if ($public.length) {
-          window.DecidimAwesome.CustomFieldsRenderer.storeData();
-        }
-        if ($private.length) {
-          window.DecidimAwesome.PrivateCustomFieldsRenderer.storeData();
-        }
-      } else {
-        evt.preventDefault();
-        evt.target.reportValidity();
+    $form.on("submit", () => {
+      // save current editors
+      if ($public.length) {
+        window.DecidimAwesome.CustomFieldsRenderer.storeData();
+      }
+      if ($private.length) {
+        window.DecidimAwesome.PrivateCustomFieldsRenderer.storeData();
       }
     });
   }
