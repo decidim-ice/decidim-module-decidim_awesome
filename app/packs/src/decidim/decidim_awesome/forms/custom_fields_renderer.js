@@ -104,5 +104,56 @@ export default class CustomFieldsRenderer { // eslint-disable-line no-unused-var
         }
       }
     });
+    this.addErrorElements();
+    this.registerInFormValidator();
+  }
+
+  validatableInputs() {
+    return this.$element.find("input, textarea, select").
+      not("[type='hidden'], [type='checkbox'], [type='radio'], [type='submit']").
+      toArray();
+  }
+
+  addErrorElements() {
+    const errorText = this.$element.data("errorText");
+    this.validatableInputs().forEach((input) => {
+      const $parent = $(input.parentElement);
+      if (!$parent.children(".form-error").length) {
+        $("<span/>", { class: "form-error", text: errorText }).appendTo($parent);
+      }
+    });
+  }
+
+  registerInFormValidator() {
+    const form = this.$element.closest("form")[0];
+    if (!form || !window.Stimulus) {
+      return;
+    }
+    const controller = window.Stimulus.getControllerForElementAndIdentifier(form, "form-validator");
+    const validator = controller && controller.formValidator;
+    if (!validator) {
+      return;
+    }
+
+    const options = validator.validationOptions;
+    validator.inputElements = validator.inputElements.filter((input) => input.isConnected);
+    this.validatableInputs().forEach((input) => {
+      if (validator.inputElements.includes(input)) {
+        return;
+      }
+      validator.inputElements.push(input);
+      if (options.a11yAttributes) {
+        validator.addAccessibilityAttributes(input);
+      }
+      if (options.validateOn === "fieldChange") {
+        input.addEventListener("change", () => validator.validateSingleInput(input));
+      }
+      if (options.liveValidate) {
+        input.addEventListener("input", () => validator.validateSingleInput(input));
+      }
+      if (options.validateOnBlur) {
+        input.addEventListener("blur", () => validator.validateSingleInput(input));
+      }
+    });
   }
 }
