@@ -84,7 +84,7 @@ module Decidim
         end
 
         def user
-          @user ||= Decidim::User.find(params[:id])
+          @user ||= current_organization.users.find(params[:id])
         end
 
         def authorization

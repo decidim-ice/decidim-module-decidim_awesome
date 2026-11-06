@@ -1,10 +1,10 @@
 PATH
   remote: .
   specs:
-    decidim-decidim_awesome (0.15.1)
+    decidim-decidim_awesome (0.15.2)
       active_hashcash (~> 0.4.0)
-      decidim-admin (>= 0.32, < 0.33)
-      decidim-core (>= 0.32, < 0.33)
+      decidim-admin (>= 0.32.2, < 0.33)
+      decidim-core (>= 0.32.2, < 0.33)
       deface (>= 1.5)
       sassc (~> 2.3)
 
@@ -175,56 +175,56 @@ GEM
     date_validator (0.12.0)
       activemodel (>= 3)
       activesupport (>= 3)
-    decidim (0.32.1)
-      decidim-accountability (= 0.32.1)
-      decidim-admin (= 0.32.1)
-      decidim-api (= 0.32.1)
-      decidim-assemblies (= 0.32.1)
-      decidim-blogs (= 0.32.1)
-      decidim-budgets (= 0.32.1)
-      decidim-comments (= 0.32.1)
-      decidim-core (= 0.32.1)
-      decidim-debates (= 0.32.1)
-      decidim-forms (= 0.32.1)
-      decidim-generators (= 0.32.1)
-      decidim-meetings (= 0.32.1)
-      decidim-pages (= 0.32.1)
-      decidim-participatory_processes (= 0.32.1)
-      decidim-proposals (= 0.32.1)
-      decidim-surveys (= 0.32.1)
-      decidim-system (= 0.32.1)
-      decidim-verifications (= 0.32.1)
-    decidim-accountability (0.32.1)
-      decidim-comments (= 0.32.1)
-      decidim-core (= 0.32.1)
-    decidim-admin (0.32.1)
+    decidim (0.32.2)
+      decidim-accountability (= 0.32.2)
+      decidim-admin (= 0.32.2)
+      decidim-api (= 0.32.2)
+      decidim-assemblies (= 0.32.2)
+      decidim-blogs (= 0.32.2)
+      decidim-budgets (= 0.32.2)
+      decidim-comments (= 0.32.2)
+      decidim-core (= 0.32.2)
+      decidim-debates (= 0.32.2)
+      decidim-forms (= 0.32.2)
+      decidim-generators (= 0.32.2)
+      decidim-meetings (= 0.32.2)
+      decidim-pages (= 0.32.2)
+      decidim-participatory_processes (= 0.32.2)
+      decidim-proposals (= 0.32.2)
+      decidim-surveys (= 0.32.2)
+      decidim-system (= 0.32.2)
+      decidim-verifications (= 0.32.2)
+    decidim-accountability (0.32.2)
+      decidim-comments (= 0.32.2)
+      decidim-core (= 0.32.2)
+    decidim-admin (0.32.2)
       active_link_to (~> 1.0)
-      decidim-core (= 0.32.1)
+      decidim-core (= 0.32.2)
       devise (>= 4.7, < 6.0)
       devise-i18n (~> 1.2)
       devise_invitable (~> 2.0, >= 2.0.9)
-    decidim-api (0.32.1)
-      decidim-core (= 0.32.1)
+    decidim-api (0.32.2)
+      decidim-core (= 0.32.2)
       devise-jwt (>= 0.12.1, < 0.14.0)
-      graphql (>= 2.4.17, < 2.6)
+      graphql (>= 2.4.17, < 2.7)
       graphql-docs (>= 5, < 7)
       rack-cors (>= 1, < 4)
-    decidim-assemblies (0.32.1)
-      decidim-core (= 0.32.1)
-    decidim-blogs (0.32.1)
-      decidim-admin (= 0.32.1)
-      decidim-comments (= 0.32.1)
-      decidim-core (= 0.32.1)
-    decidim-budgets (0.32.1)
-      decidim-comments (= 0.32.1)
-      decidim-core (= 0.32.1)
-    decidim-comments (0.32.1)
-      decidim-core (= 0.32.1)
+    decidim-assemblies (0.32.2)
+      decidim-core (= 0.32.2)
+    decidim-blogs (0.32.2)
+      decidim-admin (= 0.32.2)
+      decidim-comments (= 0.32.2)
+      decidim-core (= 0.32.2)
+    decidim-budgets (0.32.2)
+      decidim-comments (= 0.32.2)
+      decidim-core (= 0.32.2)
+    decidim-comments (0.32.2)
+      decidim-core (= 0.32.2)
       redcarpet (~> 3.5, >= 3.5.1)
-    decidim-conferences (0.32.1)
-      decidim-core (= 0.32.1)
-      decidim-meetings (= 0.32.1)
-    decidim-core (0.32.1)
+    decidim-conferences (0.32.2)
+      decidim-core (= 0.32.2)
+      decidim-meetings (= 0.32.2)
+    decidim-core (0.32.2)
       active_link_to (~> 1.0)
       acts_as_list (~> 1.0)
       batch-loader (~> 2.0)
@@ -280,19 +280,19 @@ GEM
       valid_email2 (~> 7.0)
       web-push (~> 3.0)
       wisper (~> 3.0)
-    decidim-debates (0.32.1)
-      decidim-comments (= 0.32.1)
-      decidim-core (= 0.32.1)
-    decidim-dev (0.32.1)
+    decidim-debates (0.32.2)
+      decidim-comments (= 0.32.2)
+      decidim-core (= 0.32.2)
+    decidim-dev (0.32.2)
       bullet (~> 8.1.0)
       byebug (>= 11, < 14)
       capybara (~> 3.39)
-      decidim-admin (= 0.32.1)
-      decidim-api (= 0.32.1)
-      decidim-comments (= 0.32.1)
-      decidim-core (= 0.32.1)
-      decidim-generators (= 0.32.1)
-      decidim-verifications (= 0.32.1)
+      decidim-admin (= 0.32.2)
+      decidim-api (= 0.32.2)
+      decidim-comments (= 0.32.2)
+      decidim-core (= 0.32.2)
+      decidim-generators (= 0.32.2)
+      decidim-verifications (= 0.32.2)
       erb_lint (>= 0.8, < 0.10)
       factory_bot_rails (~> 6.2)
       faker (~> 3.2)
@@ -326,46 +326,46 @@ GEM
       w3c_rspec_validators (~> 0.3.0)
       webmock (~> 3.18)
       wisper-rspec (~> 1.0)
-    decidim-elections (0.32.1)
-      decidim-admin (= 0.32.1)
-      decidim-core (= 0.32.1)
-      decidim-forms (= 0.32.1)
-    decidim-forms (0.32.1)
-      decidim-core (= 0.32.1)
-    decidim-generators (0.32.1)
-      decidim-core (= 0.32.1)
-    decidim-initiatives (0.32.1)
-      decidim-admin (= 0.32.1)
-      decidim-comments (= 0.32.1)
-      decidim-core (= 0.32.1)
-      decidim-verifications (= 0.32.1)
-    decidim-meetings (0.32.1)
-      decidim-core (= 0.32.1)
-      decidim-forms (= 0.32.1)
+    decidim-elections (0.32.2)
+      decidim-admin (= 0.32.2)
+      decidim-core (= 0.32.2)
+      decidim-forms (= 0.32.2)
+    decidim-forms (0.32.2)
+      decidim-core (= 0.32.2)
+    decidim-generators (0.32.2)
+      decidim-core (= 0.32.2)
+    decidim-initiatives (0.32.2)
+      decidim-admin (= 0.32.2)
+      decidim-comments (= 0.32.2)
+      decidim-core (= 0.32.2)
+      decidim-verifications (= 0.32.2)
+    decidim-meetings (0.32.2)
+      decidim-core (= 0.32.2)
+      decidim-forms (= 0.32.2)
       icalendar (~> 2.5)
-    decidim-pages (0.32.1)
-      decidim-core (= 0.32.1)
-    decidim-participatory_processes (0.32.1)
-      decidim-core (= 0.32.1)
-    decidim-proposals (0.32.1)
-      decidim-comments (= 0.32.1)
-      decidim-core (= 0.32.1)
+    decidim-pages (0.32.2)
+      decidim-core (= 0.32.2)
+    decidim-participatory_processes (0.32.2)
+      decidim-core (= 0.32.2)
+    decidim-proposals (0.32.2)
+      decidim-comments (= 0.32.2)
+      decidim-core (= 0.32.2)
       doc2text (~> 0.4.0, >= 0.4.8)
       redcarpet (~> 3.5, >= 3.5.1)
-    decidim-surveys (0.32.1)
-      decidim-core (= 0.32.1)
-      decidim-forms (= 0.32.1)
-    decidim-system (0.32.1)
+    decidim-surveys (0.32.2)
+      decidim-core (= 0.32.2)
+      decidim-forms (= 0.32.2)
+    decidim-system (0.32.2)
       active_link_to (~> 1.0)
-      decidim-core (= 0.32.1)
+      decidim-core (= 0.32.2)
       devise (>= 4.7, < 6.0)
       devise-i18n (~> 1.2)
       devise_invitable (~> 2.0, >= 2.0.9)
-    decidim-templates (0.32.1)
-      decidim-core (= 0.32.1)
-      decidim-forms (= 0.32.1)
-    decidim-verifications (0.32.1)
-      decidim-core (= 0.32.1)
+    decidim-templates (0.32.2)
+      decidim-core (= 0.32.2)
+      decidim-forms (= 0.32.2)
+    decidim-verifications (0.32.2)
+      decidim-core (= 0.32.2)
     declarative-builder (0.2.0)
       trailblazer-option (~> 0.1.0)
     declarative-option (0.1.0)
@@ -1035,13 +1035,13 @@ DEPENDENCIES
   bootsnap (~> 1.4)
   brakeman (~> 7.0)
   byebug (~> 11.0)
-  decidim (= 0.32.1)
-  decidim-conferences (= 0.32.1)
+  decidim (= 0.32.2)
+  decidim-conferences (= 0.32.2)
   decidim-decidim_awesome!
-  decidim-dev (= 0.32.1)
-  decidim-elections (= 0.32.1)
-  decidim-initiatives (= 0.32.1)
-  decidim-templates (= 0.32.1)
+  decidim-dev (= 0.32.2)
+  decidim-elections (= 0.32.2)
+  decidim-initiatives (= 0.32.2)
+  decidim-templates (= 0.32.2)
   letter_opener_web (~> 2.0)
   listen (~> 3.1)
   parallel_tests (~> 4.2)
@@ -1109,31 +1109,31 @@ CHECKSUMS
   data_migrate (11.3.1) sha256=18b9b2189d15e482d5335f3fc2248b8b447204bd8257ded872dd077737168ffb
   date (3.6.0) sha256=18ac945c4e24ebd93534f8eab8c2fd8c5604b3e977105b3798d62a1e8d27b580
   date_validator (0.12.0) sha256=68c9834da240347b9c17441c553a183572508617ebfbe8c020020f3192ce3058
-  decidim (0.32.1) sha256=cfd80d6295ea5664007c04a1de0bc37fd98839e11fafdeeec557cfe15fa4a627
-  decidim-accountability (0.32.1) sha256=7f8c8c58c12ffae9580635ae9261bd49734de36832f8d35e2c9bbfafc4ef4859
-  decidim-admin (0.32.1) sha256=9e7e3d4e28175601150045117f5bb2ce21160a81e11d1418858184b89020f4b9
-  decidim-api (0.32.1) sha256=cbfd5b378e657d1aca653812647c576a178d1be3bd2d4a77fe6431daf097df32
-  decidim-assemblies (0.32.1) sha256=bd77aa011c6b4c93091643ff8ed1de7669b1a7b681aa1059bfc9a9042316c102
-  decidim-blogs (0.32.1) sha256=d61fac2ca671280fa654c697e252a503648aaaeea82020d452f259a854513d2f
-  decidim-budgets (0.32.1) sha256=b88874d2aa7a4579681d541627ed6b9c8efa54341d8a708e6cf0c9742eaef364
-  decidim-comments (0.32.1) sha256=7480f176e566e8d3cfe81c5b4917eb3434533d61ae32c5d068f6dc76150d3d4b
-  decidim-conferences (0.32.1) sha256=00efb7fda86003b72d4ef831164c8ab3722fac4e0a11000f224e62e0902cf3b5
-  decidim-core (0.32.1) sha256=02d693d1fa0bc92cfeecd46278925c7e546db87f369ca640718250d4af64dcd5
-  decidim-debates (0.32.1) sha256=721ecbead96955f325cc85993f01314ab49ba895820f38df85cf97250f353ae1
-  decidim-decidim_awesome (0.15.1)
-  decidim-dev (0.32.1) sha256=50535cf41f4acaea2325ce0db16cf3aed06aaf4b838a61d042d93a7ab0d3fb21
-  decidim-elections (0.32.1) sha256=a3ce11798e5a04b6a6d8844b9897ec1fc93323c6ca30c0943ee3843d5c929e56
-  decidim-forms (0.32.1) sha256=9072b4d59b71707d602964e19a33e18615ed456f1462dd4409ee5b53f24cb745
-  decidim-generators (0.32.1) sha256=77c9b4a2f96b878f9a66b2d1a5015e9cb83d7e0a5bb138037f521b5a2102037a
-  decidim-initiatives (0.32.1) sha256=5f72a3d79011e7b5f7708d0f18c2ee72a37430fb655ef0de030fa50814532572
-  decidim-meetings (0.32.1) sha256=f33611c8f3fc5faa030e6db8f67fad8f0d18ec0b0ca856b4269fec709d18db57
-  decidim-pages (0.32.1) sha256=70000c649be680cfcf7db1712c0ba8c6b2b42065f0f186579c14b0d177f04b83
-  decidim-participatory_processes (0.32.1) sha256=ea8a71ad02d672f053a73522d1a7608b798827014941de5f58889fd0ead59dd7
-  decidim-proposals (0.32.1) sha256=c428aaa125846f0730aea6922f3d273ddf8ca4a697b10969075522c1965b7630
-  decidim-surveys (0.32.1) sha256=a266957999c884ad3399fe025537c3bdc16ebda000897609ba8ef0bf6ca16dd5
-  decidim-system (0.32.1) sha256=414f151d586ff00c539bd911014da957735abfe27921a4a7eb9bee4915d7da67
-  decidim-templates (0.32.1) sha256=45b64813a1d303d291148a8903fa4691a7739006675f7cd34af44f8c64b3c610
-  decidim-verifications (0.32.1) sha256=917ee72ff49fd81cb46f97bb095404b78f708940282bad2e4930b773be45b441
+  decidim (0.32.2) sha256=00d807b717f3275ec8825abbc4ccccd89b7055260ad6ed457b00ac71759add06
+  decidim-accountability (0.32.2) sha256=b80e89f270c2fa4e95b7b67be321119d66caef2bcace55265c31aecf38c19531
+  decidim-admin (0.32.2) sha256=a67db48af9e3acd836f965072416c136661acdef51a74012838127763ee22d4b
+  decidim-api (0.32.2) sha256=7ba56169e1f7a9a3831b4c0f9c8b189e3c4edfbfca9ba73a18a60087c29e9e02
+  decidim-assemblies (0.32.2) sha256=3af1529ee750eeca20f4c0d8716155423550f8b88b02a5ab0876d8ae96390507
+  decidim-blogs (0.32.2) sha256=172671ec835a0ac6896c62ae6aae2c096591f3422ae248fdda8cf55a79573fab
+  decidim-budgets (0.32.2) sha256=fe2d954091e741bbe93bb5071bc6680dfb71fd77c9638bd815efa27f7a97127d
+  decidim-comments (0.32.2) sha256=8c38b9140072bb6fba78dce6de527d465b4fec206a0e418ff6f0379234b8dff5
+  decidim-conferences (0.32.2) sha256=b43158aa536079df6018b7b06f2c7d788a96b64d4ae76d10375059c305d5c622
+  decidim-core (0.32.2) sha256=3e65f8cad2bfbab6b6859222778764e45454d7f074d58cc456790dcd908f45e3
+  decidim-debates (0.32.2) sha256=2fb13bc687f7243d1caf6b14ad56228545a3f41fb0872108257959ba62081bf1
+  decidim-decidim_awesome (0.15.2)
+  decidim-dev (0.32.2) sha256=3329ca7aabd87f2c3827b4bea1d1b22b587db81461fa44be7bd941885d4f73da
+  decidim-elections (0.32.2) sha256=fe50edf1da1da63bdfcfd04f801afe6b76954a967205c99a3b8bc741f970dce3
+  decidim-forms (0.32.2) sha256=b0df9dad495e93b829f7bdaadd4b052cd9b9a2143cdc85061660d92adf041bbf
+  decidim-generators (0.32.2) sha256=1eb4233c4dfc7d791177882f8ed1408297754847e8027298ce7bb6f204dbc47d
+  decidim-initiatives (0.32.2) sha256=2b99f208b3d5cf2a38d724b1dce47ec8a22a798459f7972a51dc759577c1bc93
+  decidim-meetings (0.32.2) sha256=90f91442f0425e8f6c35a6ccd56208802939792efbbad58503ab956394366456
+  decidim-pages (0.32.2) sha256=4c3b13597f0cf62eeac35c412962d4800228afbbc49e3d7b34b3720dc24c00a9
+  decidim-participatory_processes (0.32.2) sha256=4147ee4af40fd06167097bb2e03691e3f4ec420c548db3513f2151f3331d98e7
+  decidim-proposals (0.32.2) sha256=f7a1379430578e40b6ceff2d6d4452dba7db8e13bfc8acb0d2b92d2ecef8e151
+  decidim-surveys (0.32.2) sha256=1f66afc1355003b84a8d7a5bc9c17ea40487f5997174bfa6d010e31d685f9eda
+  decidim-system (0.32.2) sha256=c314ed6d64ae51a77082bfbd50084deedfdd3a3e2414d292e653e7416deca495
+  decidim-templates (0.32.2) sha256=6e5a4ee8acab6d1af8d45f521420529c036f22d65fb7e8358d3cd539900c98f6
+  decidim-verifications (0.32.2) sha256=eb776fe9889363c8838aae153714888d3e251dd21fdb71df735985cdb320d8c9
   declarative-builder (0.2.0) sha256=2a46988c32b97c9e77c7739b7bbdd4ab7042c9584836c4abf5ac90024af6f1af
   declarative-option (0.1.0) sha256=17508349f51c5631e5ad4158c29f78a4b2de618abffa066d76c11953705f91bc
   deface (1.9.0) sha256=b6da77da3618efa4ec33474debc7e95f8b4d84775f34b9d13799d97f6aef3806

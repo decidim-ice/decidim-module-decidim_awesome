@@ -56,7 +56,8 @@ shared_examples "has drag and drop" do
       click_on "Send"
     end
     expect(page).to have_content("Proposal successfully updated.")
-    # For textarea (allow_images_in_proposals), images are saved as URLs
-    expect(proposal.reload.body["en"]).to include(last_image.file.filename.to_s)
+    # For textarea (allow_images_in_proposals), images are saved as blob global ids and rendered back as URLs
+    expect(proposal.reload.body["en"]).to include(last_image.file.blob.to_global_id.to_s)
+    expect(page.html).to include(last_image.file.filename.to_s)
   end
 end
