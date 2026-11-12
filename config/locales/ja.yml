@@ -187,6 +187,7 @@ ja:
             show_answered: 回答済みの提案を表示
             show_not_answered: 未回答の提案を表示
             show_not_rejected: 拒否されていない提案を表示
+            show_not_withdrawn: 撤回されていない提案を表示
             show_rejected: 却下された提案を表示
             show_withdrawn: 撤回された提案を表示
       proposals:
@@ -214,6 +215,7 @@ ja:
             awesome_votes_enabled_by_status: 提案ステータスによる投票制限
             awesome_votes_enabled_by_status_help: 有効にすると、投票は選択したステータスの提案でのみ許可されます。 他のステータスの提案は投票を受け付けません。ステータスに関係なくすべての提案に投票を許可する場合は空のままにしてください。
             awesome_votes_enabled_states: 投票を許可されたステータス
+            awesome_votes_enabled_states_help: コンポーネントを保存すると、他のステータスが利用可能になります。
             default_sort_order_options:
               az: A-Z (アルファベット順)
               supported_first: 最初にサポートした順
@@ -285,6 +287,55 @@ ja:
             warning: '警告: この認証を強制することで、ユーザーの現在の認証ステータスを上書きします。'
           user_authorized: "%{user} が %{name} で本人確認されました"
           user_not_authorized: "%{user} は %{name} で本人確認されていません"
+        awesome_authorization_properties:
+          create:
+            error: 本人認証の設定の更新でエラーが発生しました %{error}
+            success: 本人認証の設定を更新しました
+          index:
+            cancel: キャンセル
+            description: 本人認証の説明
+            description_help: ユーザーがまだ本人認証を済ませていないときに、本人認証ページのカードで名前の下に表示される文章です。本人認証が必要な理由の説明に使えます。
+            name: 本人認証の名前
+            name_help: 本人認証のカードに表示される名前です。
+            save: 保存
+            title: 本人認証の設定を編集
+        awesome_authorization_users:
+          create:
+            error: メンバーリストの更新中にエラーが発生しました %{error}
+            success: メンバーリストを更新しました (%{count} ユーザーを新たに追加)
+          destroy:
+            success: メンバーを削除しました
+          index:
+            actions: 操作
+            authorized_user: 認証済みのユーザー
+            confirm_remove: このメンバーを削除してもよろしいですか？
+            email: メールアドレス
+            new: 新しいメンバーを追加
+            no_members: このグループにはまだメンバーがいません
+            not_synced_html: ユーザーの本人認証がこの認証グループと同期されていません。%{sync}を行い、メンバーリストを更新してください。
+            remove: メンバーを削除
+            sync: 本人認証を同期
+            title: '"%{group}" のメンバー管理'
+            user: Decidimのユーザー
+          new:
+            create: メンバーを追加
+            emails_help: ここにメールをドロップすると、「@」を含む語だけがメールアドレスとして扱われます。
+            or: または
+            remove_previous_members: グループの既存のメンバーを削除 (%{count} ユーザー)
+            title: '"%{group}" にメンバーを追加'
+          update:
+            empty: 入力欄にも CSV ファイルにもメールアドレスが見つかりませんでした。メールアドレスを1件以上追加してください。
+        awesome_authorizations:
+          create:
+            error: 認証グループの作成中にエラーが発生しました %{error}
+            success: 認証グループを作成しました
+          destroy:
+            success: 認証グループを削除しました
+          edit:
+            save: 保存
+            title: 認証グループを編集
+          form:
+            name_help: 本人認証のカードに表示される名前です。
         checks:
           index:
             admin_head_tags: 管理者向けアプリケーションヘッダーに含まれる Awesome tags
