@@ -81,12 +81,14 @@ ja:
       follow_up_questionnaire:
         active: 有効
         name: 名前
+        notified_admin_ids: 回答が送信されるたびに通知を受け取る管理者
         position: 位置
         reply_to: 返信用メール アドレス
       follow_up_questionnaire_messages:
         id: ID
         last_action: 最新の操作
         messages_count: メッセージ数
+        respondent: 回答者
         status: ステータス
         submission_date: 提出日
       follow_up_questionnaire_statuses:
@@ -181,7 +183,9 @@ ja:
             truncate: ポップアップの説明のための最大文字数
           step:
             announcement: アナウンス
+            show_answered: 回答済みの提案を表示
             show_not_answered: 未回答の提案を表示
+            show_not_rejected: 拒否されていない提案を表示
             show_rejected: 却下された提案を表示
             show_withdrawn: 撤回された提案を表示
       proposals:
