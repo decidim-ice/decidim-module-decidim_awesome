@@ -345,6 +345,18 @@ ja:
             not_available: この機能を使うには、%{system}で Awesome の本人認証ワークフローを有効にする必要があります。
             properties_description_html: コンポーネントでこの本人認証を使うと、特定のグループに属するユーザーだけにアクセスを制限できます。選択すると、許可するグループを選べます。
             system_link: システム管理者
+            title: Awesome本人認証
+          list_authorization_groups:
+            actions: 操作
+            confirm_destroy: この認証グループを削除してもよろしいですか？このグループのすべてのユーザーが本人認証を失います。
+            destroy: グループを削除
+            edit: グループの編集
+            granted_count: 本人認証済み
+            group_name: グループ名
+            manage: メンバーの管理
+            members_count: ユーザー
+            no_groups: 認証グループはまだ作成されていません
+            out_of_sync: 未同期
         checks:
           index:
             admin_head_tags: 管理者向けアプリケーションヘッダーに含まれる Awesome tags
