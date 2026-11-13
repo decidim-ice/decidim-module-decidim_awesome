@@ -82,12 +82,14 @@ ja:
       follow_up_questionnaire:
         active: 有効
         name: 名前
+        notified_admin_ids: 回答が送信されるたびに通知を受け取る管理者
         position: 位置
         reply_to: 返信用メール アドレス
       follow_up_questionnaire_messages:
         id: ID
         last_action: 最新の操作
         messages_count: メッセージ数
+        respondent: 回答者
         status: ステータス
         submission_date: 提出日
       follow_up_questionnaire_statuses:
@@ -182,7 +184,10 @@ ja:
             truncate: ポップアップの説明のための最大文字数
           step:
             announcement: アナウンス
+            show_answered: 回答済みの提案を表示
             show_not_answered: 未回答の提案を表示
+            show_not_rejected: 拒否されていない提案を表示
+            show_not_withdrawn: 撤回されていない提案を表示
             show_rejected: 却下された提案を表示
             show_withdrawn: 撤回された提案を表示
       proposals:
@@ -210,6 +215,7 @@ ja:
             awesome_votes_enabled_by_status: 提案ステータスによる投票制限
             awesome_votes_enabled_by_status_help: 有効にすると、投票は選択したステータスの提案でのみ許可されます。 他のステータスの提案は投票を受け付けません。ステータスに関係なくすべての提案に投票を許可する場合は空のままにしてください。
             awesome_votes_enabled_states: 投票を許可されたステータス
+            awesome_votes_enabled_states_help: コンポーネントを保存すると、他のステータスが利用可能になります。
             default_sort_order_options:
               az: A-Z (アルファベット順)
               supported_first: 最初にサポートした順
@@ -281,6 +287,77 @@ ja:
             warning: '警告: この認証を強制することで、ユーザーの現在の認証ステータスを上書きします。'
           user_authorized: "%{user} が %{name} で本人確認されました"
           user_not_authorized: "%{user} は %{name} で本人確認されていません"
+        awesome_authorization_properties:
+          create:
+            error: 本人認証の設定の更新でエラーが発生しました %{error}
+            success: 本人認証の設定を更新しました
+          index:
+            cancel: キャンセル
+            description: 本人認証の説明
+            description_help: ユーザーがまだ本人認証を済ませていないときに、本人認証ページのカードで名前の下に表示される文章です。本人認証が必要な理由の説明に使えます。
+            name: 本人認証の名前
+            name_help: 本人認証のカードに表示される名前です。
+            save: 保存
+            title: 本人認証の設定を編集
+        awesome_authorization_users:
+          create:
+            error: メンバーリストの更新中にエラーが発生しました %{error}
+            success: メンバーリストを更新しました (%{count} ユーザーを新たに追加)
+          destroy:
+            success: メンバーを削除しました
+          index:
+            actions: 操作
+            authorized_user: 認証済みのユーザー
+            confirm_remove: このメンバーを削除してもよろしいですか？
+            email: メールアドレス
+            new: 新しいメンバーを追加
+            no_members: このグループにはまだメンバーがいません
+            not_synced_html: ユーザーの本人認証がこの認証グループと同期されていません。%{sync}を行い、メンバーリストを更新してください。
+            remove: メンバーを削除
+            sync: 本人認証を同期
+            title: '"%{group}" のメンバー管理'
+            user: Decidimのユーザー
+          new:
+            create: メンバーを追加
+            emails_help: ここにメールをドロップすると、「@」を含む語だけがメールアドレスとして扱われます。
+            or: または
+            remove_previous_members: グループの既存のメンバーを削除 (%{count} ユーザー)
+            title: '"%{group}" にメンバーを追加'
+          update:
+            empty: 入力欄にも CSV ファイルにもメールアドレスが見つかりませんでした。メールアドレスを1件以上追加してください。
+        awesome_authorizations:
+          create:
+            error: 認証グループの作成中にエラーが発生しました %{error}
+            success: 認証グループを作成しました
+          destroy:
+            success: 認証グループを削除しました
+          edit:
+            save: 保存
+            title: 認証グループを編集
+          form:
+            name_help: 本人認証のカードに表示される名前です。
+            purpose_help: 本人認証のカードに表示され、この本人認証の目的や用途を説明する文章です。
+          index:
+            authorization_groups: 認証グループ
+            authorization_properties: 本人認証の設定
+            create_group: 新しい認証グループを作成
+            description_html: ここでは、Decidim のコンポーネントに対してそれぞれ特定の権限を持つ人のグループを作成できます。<br>新規登録時と、この一覧を更新したときに、グループのメンバーは自動的に本人認証されます。
+            edit_properties: 本人認証の設定を編集
+            not_available: この機能を使うには、%{system}で Awesome の本人認証ワークフローを有効にする必要があります。
+            properties_description_html: コンポーネントでこの本人認証を使うと、特定のグループに属するユーザーだけにアクセスを制限できます。選択すると、許可するグループを選べます。
+            system_link: システム管理者
+            title: Awesome本人認証
+          list_authorization_groups:
+            actions: 操作
+            confirm_destroy: この認証グループを削除してもよろしいですか？このグループのすべてのユーザーが本人認証を失います。
+            destroy: グループを削除
+            edit: グループの編集
+            granted_count: 本人認証済み
+            group_name: グループ名
+            manage: メンバーの管理
+            members_count: ユーザー
+            no_groups: 認証グループはまだ作成されていません
+            out_of_sync: 未同期
         checks:
           index:
             admin_head_tags: 管理者向けアプリケーションヘッダーに含まれる Awesome tags
@@ -529,6 +606,90 @@ ja:
               jitsi_calendar_sync: カレンダー同期機能に使用します。
               jitsi_callstats_username: ユーザーセッションをJitsiに保存するために使用します。
               jitsi_dropbox: Dropbox統合機能に使用します。
+              matomo_mtm_consent: Matomo トラッキングに対するユーザーの同意状態を保存します。
+              matomo_pk_id: 訪問者ごとに一意の ID を保存し、再訪問した訪問者を識別するのに使います。
+              matomo_pk_ref: 流入元の情報（ユーザーをこのウェブサイトに導いた参照元）を保存するために使います。
+              matomo_pk_ses: 今回の訪問の一時的なセッションデータを保存するために使います。
+              osm_location: OpenStreetMap を操作するときの、マップの位置とズームの既定値を保存します。
+              osm_session: OpenStreetMap でのユーザーの操作に関する一時的なセッションデータを保存します。
+              osm_totp_token: OpenStreetMap のアカウントの操作で使う、2要素認証に関する一時的なトークンを保存します。
+              pref: 機能のために使われます。YouTube はこの Cookie を使って、ページの表示の好みや、自動再生の選択、シャッフル再生、プレーヤーのサイズといった再生の設定などの情報を保存します。詳しくは「Google による Cookie の使用方法」をご覧ください
+              recaptcha_grecaptcha: reCAPTCHA がスパム対策とリスク分析に使います。
+              recaptcha_rc_a: reCAPTCHA のリスク分析のメタデータをブラウザーストレージに保存します。
+              recaptcha_rc_c: reCAPTCHA のチャレンジとセッションのメタデータをブラウザーストレージに保存します。
+              remember_user_token: ログイン時に「ログイン状態を維持する」を選ぶと、ログインしたままにできるようにします。
+              session_id: ウェブページ間を移動したときにウェブサイト内のユーザーをウェブサイトが記憶できるようにします。
+              turnstile_cf_bm: Cloudflare が自動化されたトラフィックを検知して軽減するのに役立ちます。
+              turnstile_cf_clearance: 訪問者が以前のセキュリティチャレンジを通過したことの証明を保存します。
+              turnstile_cfuvid: 同じ IP アドレスを共有する個々のユーザーを Cloudflare が区別するのに役立ちます。
+              vimeo_player: 音量、画質、自動再生の動作など、Vimeo プレーヤーの設定を保存します。
+              vimeo_vuid: 分析に使用する、Vimeo の訪問者ごとに一意の識別子を保存します。
+              visitor_info1_live: 機能、分析、広告、パーソナライズのために使われます。詳しくは「Google による Cookie の使用方法」をご覧ください
+              ysc: セキュリティのために使用されます。有効期間はユーザーのブラウジングセッションの間です。ブラウジングセッション内のリクエストが、他のサイトではなくユーザー自身によるものであることを確かめるのに使います。この Cookie は、悪意のあるサイトがユーザーに知られずにユーザーになりすまして操作することを防ぎます。詳しくは「Google による Cookie の使用方法」をご覧ください
+              yt_remote_connected_devices: YouTube プレーヤーの操作に使う、接続済みのデバイスの一覧を保存します。
+              yt_remote_device_id: YouTube プレーヤーをリモート操作するためのデバイスの識別子を保存します。
+              ytidb_last_result_entry_key: YouTube プレーヤーの最新の結果のメタデータをローカルストレージに保存します。
+            explanations:
+              cloudflare_turnstile: |-
+                フォームを不正利用や自動化されたトラフィックから守るために Cloudflare Turnstile を有効にしている場合は、これらの Cookie を追加してください。ボット検知、セッションの検証、チャレンジの継続に使われます。
+
+                推奨カテゴリー: 必須
+              decidim_essential: |-
+                Decidim のプラットフォームの基本機能に必要な、必須の Cookie を追加します。ユーザーの認証、セッションの管理、同意の状況の記録に使われます。
+
+                推奨カテゴリー: 必須
+              emoji_picker: |-
+                テキストエディターで絵文字ピッカーを有効にしている場合は、この Cookie を追加してください。最近使った絵文字を保存し、ユーザーごとに使いやすくします。
+
+                推奨カテゴリー: 設定
+              facebook_pixel: |-
+                コンバージョンの追跡や広告の効果測定に Meta (Facebook) Pixel を使っている場合は、これらの Cookie を追加してください。ブラウザーのセッションの識別やキャンペーンの成果の測定に使われます。
+
+                推奨カテゴリー: マーケティング
+              google_analytics: |-
+                アクセス数やユーザーの行動の測定に Google Analytics (GA4/gtag.js) を使っている場合は、これらの Cookie を追加してください。訪問者の識別、セッションの区別、利用統計の作成に使われます。
+
+                推奨カテゴリー: 分析と統計
+              google_maps_embeds: |-
+                ページに Google Maps を埋め込んでいる場合（地図のウィジェットや場所のブロックなど）は、これらの Cookie を追加してください。地図の設定、同意状態、利用状況の測定に使われます。
+
+                推奨カテゴリー: 設定 または 分析と統計
+              google_tag_manager: |-
+                分析やマーケティングのタグを Google Tag Manager で配信している場合は、これらの Cookie を追加してください。GTM の構成によっては、タグが追加のトラッキング用 Cookie を設定することがあります。
+
+                推奨カテゴリー: 分析と統計 または マーケティング
+              graphiql: |-
+                開発者向けに GraphQL API のエクスプローラー（/api/graphiql）を有効にしている場合は、これらの Cookie を追加してください。エクスプローラーの画面の設定、クエリの履歴、タブの構成を保存します。
+
+                推奨カテゴリー: 設定
+              hcaptcha: |-
+                フォームで hCaptcha を有効にしている場合は、これらの Cookie とストレージの項目を追加してください。ボットの検知、アクセシビリティの設定、チャレンジとセッションの処理に使われます。
+
+                推奨カテゴリー: 必須
+              jitsi_meet: |-
+                プラットフォームに Jitsi Meet のビデオ会議を組み込んでいる場合は、これらの Cookie を追加してください。ビデオ会議サービスのユーザー設定、言語の設定、映像品質の選択、セッションデータを保存します。
+
+                推奨カテゴリー: 設定
+              linkedin_insight: |-
+                LinkedIn 広告のキャンペーンの成果や訪問者のコンバージョンを測定するために LinkedIn Insight Tag を使っている場合は、これらの Cookie を追加してください。
+
+                推奨カテゴリー: マーケティング
+              matomo: |-
+                ウェブサイトの統計の収集に Matomo を使っている場合は、これらの Cookie を追加してください。再訪問した訪問者の識別、セッションの追跡、集計レポートに使う参照元の情報の保存に使われます。
+
+                推奨カテゴリー: 分析と統計
+              openstreetmap_tiles: |-
+                地図の表示が、Cookie を設定することがある OpenStreetMap 側のリソース（埋め込みの地図や、OSM のアカウントを使う機能など）に依存している場合は、これらの Cookie を追加してください。
+
+                推奨カテゴリー: 設定
+              recaptcha: |-
+                フォームを不正利用やボットから守るために Google reCAPTCHA を使っている場合は、これらの Cookie とストレージの項目を追加してください。ユーザーの操作やセキュリティに関する情報の評価に使われます。
+
+                推奨カテゴリー: 必須
+              vimeo_embeds: |-
+                ページ、提案、コメントに Vimeo の動画を埋め込んでいる場合は、これらの Cookie を追加してください。Vimeo はプレーヤーの設定の記憶や、再生時の操作の測定に使うことがあります。
+
+                推奨カテゴリー: 設定 または 分析と統計
         custom_redirects:
           create:
             error: 'リダイレクトの作成中にエラーが発生しました: %{error}'
