@@ -82,6 +82,7 @@ eu:
       follow_up_questionnaire:
         active: Aktibo
         name: Izena
+        notified_admin_ids: Formularioak bidaltzen diren bakoitzean jakinarazpen bat jasoko duten administratzaileak
         position: Kokapena
         reply_to: Erantzun posta elektronikoari
       follow_up_questionnaire_messages:
@@ -1392,6 +1393,11 @@ eu:
       decidim_awesome:
         follow_up_questionnaire_message_status_changed:
           notification_title: '"%{questionnaire}" galdetegira egindako bidalketaren egoera "%{status}" baliora aldatu da.'
+        follow_up_questionnaire_response_created:
+          email_intro: Erantzun berri bat aurkeztu da "%{resource_title}" jarraipen-galdetegian %{participatory_space_title}(e)n.
+          email_outro: Jakinarazpen hau jaso duzu jarraipen-galdetegi honen erantzun berriak jakinarazteko hautatu zaituztelako.
+          email_subject: Erantzun berria "%{resource_title}"(r)i
+          notification_title: Erantzun berri bat bidali da <a href="%{resource_path}">%{resource_title}</a> jarraipen-galdeketara.
     meetings:
       meetings_map:
         view_meeting: Bilera ikusi
