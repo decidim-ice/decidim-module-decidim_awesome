@@ -6,8 +6,7 @@ shared_examples "creates a new box" do |name|
 
     expect(page).to have_admin_callout("created successfully")
 
-    sleep 1
-    page.execute_script('document.querySelector(".CodeMirror").CodeMirror.setValue("body {background: red;}");')
+    find(".cm-content").set("body {background: red;}")
 
     click_on "Update configuration"
 
@@ -21,8 +20,7 @@ shared_examples "saves content" do |key|
     expect(page).to have_content("body {background: red;}")
     expect(page).to have_content("body {background: blue;}")
 
-    sleep 1
-    page.execute_script("document.querySelector(\"[data-key=#{key}] .CodeMirror\").CodeMirror.setValue(\"body {background: green;}\");")
+    find("[data-key=#{key}] .cm-content").set("body {background: green;}")
     click_link_or_button "Update configuration"
 
     expect(page).to have_admin_callout("updated successfully")
@@ -32,8 +30,7 @@ shared_examples "saves content" do |key|
   end
 
   it "shows error message if invalid" do
-    sleep 1
-    page.execute_script("document.querySelector(\"[data-key=#{key}] .CodeMirror\").CodeMirror.setValue(\"I am invalid CSS\");")
+    find("[data-key=#{key}] .cm-content").set("I am invalid CSS")
     click_link_or_button "Update configuration"
 
     expect(page).to have_admin_callout("Error updating configuration!")
