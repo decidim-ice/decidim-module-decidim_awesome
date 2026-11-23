@@ -229,7 +229,7 @@ module Decidim
 
         def menus
           @menus ||= {
-            editors: Decidim::DecidimAwesome::Menu.config_enabled?(:allow_images_in_editors, :allow_videos_in_editors),
+            editors: Decidim::DecidimAwesome::Menu.config_enabled?(:allow_images_in_editors, :allow_videos_in_editors, :html_code_editor),
             proposals: Decidim::DecidimAwesome::Menu.config_enabled?(
               :allow_images_in_proposals,
               :validate_title_min_length, :validate_title_max_caps_percent,

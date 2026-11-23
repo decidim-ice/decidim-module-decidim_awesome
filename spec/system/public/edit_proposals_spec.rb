@@ -58,6 +58,15 @@ describe "Show proposals editor" do
       it_behaves_like "has video support"
     end
 
+    context "and the HTML code editor is enabled" do
+      let!(:html_code_editor) { create(:awesome_config, organization:, var: :html_code_editor, value: true) }
+
+      it "keeps the WYSIWYG editor for participants" do
+        expect(page).to have_css(".editor-toolbar")
+        expect(page).to have_no_css(".cm-editor")
+      end
+    end
+
     context "and both in RTE are enabled" do
       let(:images_editor) { true }
       let(:videos_editor) { true }

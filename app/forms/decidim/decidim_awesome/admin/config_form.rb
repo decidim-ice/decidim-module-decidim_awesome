@@ -11,6 +11,7 @@ module Decidim
 
         attribute :allow_images_in_editors, Boolean
         attribute :allow_videos_in_editors, Boolean
+        attribute :html_code_editor, Boolean
         attribute :allow_images_in_proposals, Boolean
         attribute :auto_save_forms, Boolean
         attribute :scoped_styles, Hash

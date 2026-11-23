@@ -1,28 +1,10 @@
-import { EditorView, keymap, lineNumbers } from "@codemirror/view";
-import { defaultKeymap, history, historyKeymap } from "@codemirror/commands";
-import { bracketMatching, defaultHighlightStyle, indentOnInput, syntaxHighlighting } from "@codemirror/language";
 import { css } from "@codemirror/lang-css";
+
+import createCodeEditor from "src/decidim/decidim_awesome/code_editor";
 
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".awesome-edit-config .scoped_styles_container textarea").forEach((textarea) => {
-    const syncTextarea = EditorView.updateListener.of((update) => {
-      if (update.docChanged) {
-        textarea.value = update.state.doc.toString();
-      }
-    });
-    const view = new EditorView({
-      doc: textarea.value,
-      extensions: [
-        lineNumbers(),
-        history(),
-        indentOnInput(),
-        bracketMatching(),
-        syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
-        keymap.of([...defaultKeymap, ...historyKeymap]),
-        css(),
-        syncTextarea
-      ]
-    });
+    const view = createCodeEditor(textarea, [css()]);
 
     textarea.after(view.dom);
     textarea.style.display = "none";

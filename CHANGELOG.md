@@ -11,6 +11,7 @@ v0.15.2
     - Upgrade to Decidim v0.32.2
       **NOTE** Decidim 0.32.2 or higher is required. If you are on Decidim 0.32.0 or 0.32.1, update Decidim before updating this gem.
     - Upgrade the Custom styles editor to CodeMirror 6 ([#694](https://github.com/decidim-ice/decidim-module-decidim_awesome/issues/694))
+    - Add an option to edit the HTML code directly in the admin editors, with configurable extra allowed tags ([#694](https://github.com/decidim-ice/decidim-module-decidim_awesome/issues/694))
 
   Fixes:
     - Fix `UrlGenerationError` on every public page with Decidim 0.32.2, which mounts global engines inside the `/:locale` scope ([#680](https://github.com/decidim-ice/decidim-module-decidim_awesome/issues/680))

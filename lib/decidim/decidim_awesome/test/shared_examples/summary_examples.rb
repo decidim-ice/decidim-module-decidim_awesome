@@ -77,6 +77,7 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::Admin::SettingsHelper.included_modules).to include(Decidim::DecidimAwesome::Admin::SettingsHelperOverride)
       expect(Decidim::Proposals::Permissions.included_modules).to include(Decidim::DecidimAwesome::Proposals::PermissionsOverride)
       expect(Decidim::Organization.included_modules).to include(Decidim::DecidimAwesome::HasAuthorizationGroups)
+      expect(Decidim::AdminInputScrubber.included_modules).to include(Decidim::DecidimAwesome::AdminInputScrubberOverride)
     end
 
   else
@@ -127,6 +128,7 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::Proposals::ProposalVoteCell.included_modules).not_to include(Decidim::DecidimAwesome::Proposals::ProposalVoteCellOverride)
       expect(Decidim::Admin::SettingsHelper.included_modules).not_to include(Decidim::DecidimAwesome::Admin::SettingsHelperOverride)
       expect(Decidim::Organization.included_modules).not_to include(Decidim::DecidimAwesome::HasAuthorizationGroups)
+      expect(Decidim::AdminInputScrubber.included_modules).not_to include(Decidim::DecidimAwesome::AdminInputScrubberOverride)
     end
   end
 end

@@ -1,0 +1,15 @@
+.editor-container .editor-input {
+  &:has(> .cm-editor) {
+    @apply flex;
+  }
+
+  > .cm-editor {
+    @apply flex-auto min-w-0 bg-white;
+
+    font-size: 0.9rem;
+
+    .cm-gutters {
+      background: #eee;
+    }
+  }
+}

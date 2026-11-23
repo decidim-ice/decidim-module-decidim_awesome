@@ -60,6 +60,16 @@ module Decidim
       false
     end
 
+    # Replaces the WYSIWYG editor with an HTML code editor in the admin
+    config_accessor :html_code_editor do
+      false
+    end
+
+    # Extra HTML tags kept when displaying content written by admins, on top of the ones Decidim allows
+    config_accessor :html_code_editor_allowed_tags do
+      %w(style)
+    end
+
     config_accessor :allow_images_in_proposals do
       false
     end

@@ -27,7 +27,14 @@ module Decidim
 
       def javascript_config_vars
         memoize("javascript_config_vars") do
-          awesome_config.slice(:allow_images_in_proposals, :allow_images_in_editors, :allow_videos_in_editors, :auto_save_forms).to_json.html_safe
+          awesome_config.slice(:allow_images_in_proposals, :allow_images_in_editors, :allow_videos_in_editors, :html_code_editor, :auto_save_forms).to_json.html_safe
+        end
+      end
+
+      # HTML tags kept when displaying content written by admins
+      def admin_allowed_html_tags
+        memoize("admin_allowed_html_tags") do
+          Decidim::AdminInputScrubber.new.tags.to_a
         end
       end
 

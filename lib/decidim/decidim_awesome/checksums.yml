@@ -74,6 +74,8 @@ decidim-core:
     decidim-0.32.0: 35cf1d2d03a0b7622c4afcfaa14f72b0
   /app/presenters/decidim/breadcrumb_root_menu_item_presenter.rb:
     decidim-0.32.0: 261f4ba2ef16f4df6de53da3a8036b5b
+  /app/scrubbers/decidim/admin_input_scrubber.rb:
+    decidim-0.32.0: 457f756c5a7c3376e3a882d785d934e8
 decidim-proposals:
   /lib/decidim/proposals/proposal_serializer.rb:
     decidim-0.32.0: eadfc45fe2e1388d579a7ffa2f87c478
