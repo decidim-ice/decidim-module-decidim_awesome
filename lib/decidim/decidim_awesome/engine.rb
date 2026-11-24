@@ -118,6 +118,8 @@ module Decidim
         # override user's admin property
         Decidim::User.include(Decidim::DecidimAwesome::UserOverride) if DecidimAwesome.enabled?(:scoped_admins)
 
+        Decidim::SanitizeHelper.prepend(Decidim::DecidimAwesome::SanitizeHelperOverride) if DecidimAwesome.enabled?(:html_code_editor)
+
         Decidim::ContentBlocks::BaseCell.prepend(Decidim::DecidimAwesome::BaseCellOverride) if DecidimAwesome.enabled?(:landing_menu_block)
 
         if DecidimAwesome.enabled?(:menu, :mobile_menu)

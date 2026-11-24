@@ -69,3 +69,45 @@ end
 - **Moderation:** Follows standard proposal moderation workflow; images included in admin review
 
 ![Proposal images](../../examples/proposal-images.png)
+
+### 1.3 HTML code editor in the admin
+
+Replaces the WYSIWYG editor with an HTML code editor in the admin, so the markup is written and saved as is.
+The editors used by participants are never replaced.
+
+#### Admin description
+
+Useful for pages and descriptions that need markup the WYSIWYG editor cannot produce, such as custom containers with CSS classes.
+The editor underlines the tags that will be removed, previews the content as visitors see it and uploads files by button or drag & drop.
+Avoid switching the option on and off for the same content: saving it again from the WYSIWYG editor can drop the custom markup.
+The Tab key indents the code; press Escape and then Tab to leave the editor with the keyboard.
+
+#### Technical area
+
+- **Configuration:** Via initializer (affects default state; admins can always restrict scope)
+
+```ruby
+# config/initializers/awesome_defaults.rb
+Decidim::DecidimAwesome.configure do |config|
+  # true = enabled by default globally (admins can restrict to specific scopes)
+  # false = disabled by default (admins CAN enable using scope restrictions)
+  # :disabled = completely removed, hidden from admins
+  config.html_code_editor = false  # default: false
+
+  # Extra HTML tags kept on display, added to the ones Decidim already allows
+  config.html_code_editor_allowed_tags = %w(style)  # default: ["style"]
+
+  # Content types of the files that can be uploaded; an empty list turns the uploads off
+  config.html_code_editor_allowed_mime = %w(image/jpeg image/png image/gif image/webp)  # default: these four
+end
+```
+
+- **Admin visibility:** Enabled (admins see Editor Hacks → toggle)
+- **Default behavior:** Disabled by default; admins can enable using scope restrictions (see [Global mechanisms](global-mechanisms.md))
+- **Admin control:** Yes; toggle on/off and apply scope restrictions (see [Global mechanisms](global-mechanisms.md))
+- **Allowed tags:** Tags like `<style>`, which Decidim removes when it displays the content, are kept in the pages where the option is enabled
+- **Uploads:** Only exact content types work (`image/png`, not `image/*`), and the organization must accept them from admins too (system panel)
+- **Compatibility:** Decidim escapes `<`, `>` and `&` inside a `<style>` tag, so rules like `.menu > li` do not work there; use Tweak 4.1 (custom CSS, see [UI, theming and navigation](ui-theming-navigation.md)) for them
+- **Performance:** Minimal impact; the editor is loaded on demand, only in the admin pages that render an editor
+
+![HTML code editor](../../examples/html_code_editor.png)

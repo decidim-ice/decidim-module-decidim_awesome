@@ -22,6 +22,10 @@ module Decidim
         end
       end
 
+      after do
+        Decidim::DecidimAwesome.voting_registry.manifests.delete_if { |voting| voting.name == :another_voting_system }
+      end
+
       it "cache includes weights" do
         cache1 = subject.send(:cache_hash)
         # rubocop:disable Rails/SkipsModelValidations

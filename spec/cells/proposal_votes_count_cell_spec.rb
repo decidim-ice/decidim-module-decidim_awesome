@@ -56,6 +56,10 @@ module Decidim
           end
         end
 
+        after do
+          Decidim::DecidimAwesome.voting_registry.manifests.delete_if { |voting| voting.name == :custom_votes_count }
+        end
+
         it "renders the custom votes count view" do
           expect(subject.to_s).to include(%(id="proposal-#{proposal.id}-votes-count"))
           expect(subject).to have_content("5")

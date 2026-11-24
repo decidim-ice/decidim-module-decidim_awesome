@@ -33,6 +33,11 @@ describe "Voting weights with cards" do
   let(:can_accumulate_votes_beyond_threshold) { false }
   let(:minimum_votes_per_user) { 0 }
 
+  # Scoped to the vote labels: generated names like "Greenfelder" also match a link named "Green"
+  def click_vote(label)
+    find(".vote-label", text: label, exact_text: true).ancestor("a").click
+  end
+
   context "when the user is logged in" do
     before do
       login_as user, scope: :user
@@ -131,7 +136,7 @@ describe "Voting weights with cards" do
       let(:instructions) { "Custom instructions" }
 
       it "has custom modal message" do
-        click_on "Red"
+        click_vote "Red"
         within ".vote_proposal_modal" do
           expect(page).to have_content("Custom instructions")
         end
@@ -158,7 +163,7 @@ describe "Voting weights with cards" do
       end
 
       it "updates vote counts when the user votes" do
-        click_on "Green"
+        click_vote "Green"
         expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "2")
         expect(page).to have_css("#proposal-#{proposal.id}-votes-count", text: "7", visible: :hidden)
         click_on "Change my vote"
@@ -239,7 +244,7 @@ describe "Voting weights with cards" do
         expect(page).to have_no_content("Change my vote")
         expect(page).to have_no_css("[data-progress-bar]")
         expect(page).to have_no_css("#proposal-#{proposal.id}-votes-count", visible: :all)
-        click_on "Green"
+        click_vote "Green"
         expect(page).to have_no_css(".vote-count[data-weight=\"3\"]")
         click_on "Change my vote"
         click_on "Abstain"
@@ -344,7 +349,7 @@ describe "Voting weights with cards" do
           expect(page).to have_css(".vote-count[data-weight=\"2\"]", text: "0")
           expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "0")
           expect(page).to have_no_content("Change my vote")
-          click_on "Green"
+          click_vote "Green"
           expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "1")
           click_on "Change my vote"
           click_on "Abstain"
@@ -365,7 +370,7 @@ describe "Voting weights with cards" do
         end
         find(".card__list#proposals__proposal_#{proposal.id}").click
         expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "0")
-        click_on "Green"
+        click_vote "Green"
         expect(page).to have_css(".vote-count[data-weight=\"3\"]", text: "0")
         visit_component
         within "#proposal-#{proposal.id}-vote-button" do
@@ -376,7 +381,7 @@ describe "Voting weights with cards" do
         end
         find(".card__list#proposals__proposal_#{proposal2.id}").click
         expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "0")
-        click_on "Red"
+        click_vote "Red"
         expect(page).to have_css(".vote-count[data-weight=\"1\"]", text: "1")
         visit_component
         within "#proposal-#{proposal.id}-vote-button" do
@@ -529,7 +534,7 @@ describe "Voting weights with cards" do
         find(".card__list#proposals__proposal_#{proposal.id}").click
 
         expect(page).to have_no_css(".voting-voting_cards")
-        expect(page).to have_no_content("Green")
+        expect(page).to have_no_css(".vote-label")
         expect(page).to have_no_content("Yellow")
         expect(page).to have_no_content("Red")
         expect(page).to have_css("[data-progress-bar]", text: "10")
@@ -564,7 +569,7 @@ describe "Voting weights with cards" do
   shared_examples "authorization requirements" do
     context "when the user is not logged in" do
       it "shows the login modal when trying to vote" do
-        click_on "Green"
+        click_vote "Green"
 
         expect(page).to have_content("Please log in")
       end
@@ -577,7 +582,7 @@ describe "Voting weights with cards" do
       end
 
       it "shows the authorization modal when trying to vote" do
-        click_on "Green"
+        click_vote "Green"
         click_on "Proceed"
 
         expect(page).to have_content("We need to verify your identity")
@@ -600,7 +605,7 @@ describe "Voting weights with cards" do
       end
 
       it "allows voting and shows the vote is counted" do
-        click_on "Green"
+        click_vote "Green"
         click_on "Proceed"
 
         expect(page).to have_content("Change my vote")
@@ -639,7 +644,7 @@ describe "Voting weights with cards" do
       let(:voting_manifest) { :default }
 
       it "does not show voting cards" do
-        expect(page).to have_no_content("Green")
+        expect(page).to have_no_css(".vote-label")
         expect(page).to have_no_content("Yellow")
         expect(page).to have_no_content("Red")
         expect(page).to have_no_content("Abstain")

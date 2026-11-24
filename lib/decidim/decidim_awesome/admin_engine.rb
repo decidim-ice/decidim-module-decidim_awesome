@@ -46,6 +46,8 @@ module Decidim
         post :export_admin_accountability, to: "admin_accountability#export", as: "export_admin_accountability"
         get :users, to: "config#users"
         post :rename_scope_label, to: "config#rename_scope_label"
+        resources :editor_files, only: [:create]
+        resources :editor_previews, only: [:create]
         scope :maintenance do
           get :checks, to: "checks#index"
           post :checks, to: "checks#system_login"

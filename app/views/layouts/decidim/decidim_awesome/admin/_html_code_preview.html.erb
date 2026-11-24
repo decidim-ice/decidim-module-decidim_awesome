@@ -1,0 +1,8 @@
+<template id="awesome-html-code-preview-template">
+  <%= decidim_modal id: "awesome-html-code-preview", class: "awesome-html-code-preview" do %>
+    <div data-dialog-container>
+      <h2 id="dialog-title-awesome-html-code-preview" class="h2" data-dialog-title><%= t("layouts.decidim.decidim_awesome.awesome_config.html_code_editor_preview") %></h2>
+      <iframe sandbox="allow-same-origin" title="<%= t("layouts.decidim.decidim_awesome.awesome_config.html_code_editor_preview") %>"></iframe>
+    </div>
+  <% end %>
+</template>

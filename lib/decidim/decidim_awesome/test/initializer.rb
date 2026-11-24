@@ -5,6 +5,7 @@ Decidim::DecidimAwesome.configure do |config|
     [
       :allow_images_in_editors,
       :allow_videos_in_editors,
+      :html_code_editor,
       :allow_images_in_proposals,
       :auto_save_forms,
       :user_timezone,

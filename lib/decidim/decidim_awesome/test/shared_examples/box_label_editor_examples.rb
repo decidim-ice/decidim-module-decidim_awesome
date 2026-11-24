@@ -37,8 +37,7 @@ shared_examples "edits box label inline" do |test_case, key|
   it "updates the label with previous changes" do
     case test_case
     when :css
-      sleep 1
-      page.execute_script("document.querySelector(\"[data-key=#{key}] .CodeMirror\").CodeMirror.setValue(\"div {background: brown;}\");")
+      find("[data-key=#{key}] .cm-content").set("div {background: brown;}")
     when :fields
       sleep 2
       page.execute_script("$('.proposal_custom_fields_container[data-key=#{key}] .proposal_custom_fields_editor')[0].FormBuilder.actions.setData(#{data})")
@@ -92,8 +91,7 @@ shared_examples "edits box label inline" do |test_case, key|
 
     case test_case
     when :css
-      sleep 1
-      page.execute_script('document.querySelector("[data-key=a_new_label] .CodeMirror").CodeMirror.setValue("body {background: lilac;}");')
+      find("[data-key=a_new_label] .cm-content").set("body {background: lilac;}")
       click_link_or_button "Update configuration"
       expect(page).to have_admin_callout("updated successfully")
       expect(page).to have_content("body {background: lilac;}")
