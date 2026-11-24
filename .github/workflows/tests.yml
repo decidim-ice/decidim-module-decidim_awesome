@@ -158,7 +158,7 @@ jobs:
 
       - run: |
           sudo apt update
-          sudo apt install wkhtmltopdf imagemagick 7zip libvips libvips-tools
+          sudo apt install imagemagick 7zip libvips libvips-tools
 
       - uses: actions/download-artifact@v4
         with:
