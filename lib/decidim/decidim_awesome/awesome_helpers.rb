@@ -47,6 +47,14 @@ module Decidim
         awesome_system_pages_config[:html_code_editor].present?
       end
 
+      # The editor is checked for the whole organization: its uploads and previews have their own address,
+      # and the content sent through the public site can be displayed in any other page.
+      def html_code_editor_in_use?
+        return false unless organization_awesome_config[:html_code_editor]
+
+        awesome_config_instance.setting_for(:html_code_editor).constraints.none? { |constraint| constraint.settings["participatory_space_manifest"] == "none" }
+      end
+
       def awesome_system_pages_config
         memoize("system_pages_config") do
           system_pages = awesome_config_instance.dup

@@ -142,6 +142,7 @@ module Decidim
         config.to_prepare do
           Decidim::ApplicationController.include(Decidim::DecidimAwesome::EnforceAccessAuthorizations) if DecidimAwesome.enabled?(:force_authorizations)
           Decidim::ApplicationController.include(Decidim::DecidimAwesome::UseUserTimeZone) if Decidim::DecidimAwesome.enabled?(:user_timezone)
+          Decidim::ApplicationController.include(Decidim::DecidimAwesome::StripHtmlCodeEditorTags) if DecidimAwesome.enabled?(:html_code_editor)
 
           if DecidimAwesome.enabled?(:awesome_authorization_handler)
             # Saves current organization in the current thread for use in isolated contexts
