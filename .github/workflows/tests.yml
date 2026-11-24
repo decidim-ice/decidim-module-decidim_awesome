@@ -158,15 +158,6 @@ jobs:
 
       - run: |
           sudo apt update
-          sudo apt install libu2f-udev
-          wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo dpkg -i /tmp/chrome.deb
-          rm /tmp/chrome.deb
-
-      - uses: nanasess/setup-chromedriver@v2
-        name: Install Chrome version
-
-      - run: |
           sudo apt install wkhtmltopdf imagemagick 7zip libvips libvips-tools
 
       - uses: actions/download-artifact@v4
