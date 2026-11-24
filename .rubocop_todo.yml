@@ -27,6 +27,16 @@ Decidim/EnforcePermissionTo:
 
 Decidim/OrganizationScopedFinder:
   Exclude:
+    - 'app/commands/concerns/decidim/decidim_awesome/system/update_organization_override.rb'
+    - 'app/commands/decidim/decidim_awesome/admin/create_cookie_item_preset.rb'
+    - 'app/commands/decidim/decidim_awesome/admin/create_follow_up_questionnaire_message.rb'
+    - 'app/commands/decidim/decidim_awesome/admin/create_follow_up_questionnaire_status.rb'
+    - 'app/commands/decidim/decidim_awesome/admin/rename_scope_label.rb'
+    - 'app/commands/decidim/decidim_awesome/admin/update_constraint.rb'
+    - 'app/commands/decidim/decidim_awesome/admin/update_follow_up_questionnaire_status.rb'
+    - 'app/commands/decidim/decidim_awesome/notify_follow_up_questionnaire_admins.rb'
+    - 'app/controllers/concerns/decidim/decidim_awesome/proposals/memoize_extra_fields.rb'
+    - 'app/controllers/concerns/decidim/decidim_awesome/proposals/proposal_votes_controller_override.rb'
     - 'app/controllers/decidim/decidim_awesome/admin/admin_accountability_controller.rb'
     - 'app/controllers/decidim/decidim_awesome/admin/admin_authorizations_controller.rb'
     - 'app/controllers/decidim/decidim_awesome/admin/config_controller.rb'

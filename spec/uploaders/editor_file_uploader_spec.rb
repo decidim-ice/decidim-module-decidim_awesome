@@ -11,7 +11,7 @@ module Decidim::DecidimAwesome
 
     it "allows the images by default" do
       expect(subject.content_type_allowlist).to eq(%w(image/jpeg image/png image/gif image/webp))
-      expect(subject.extension_allowlist).to match_array(%w(jpeg png gif webp))
+      expect(subject.extension_allowlist).to match_array(%w(jpeg jpg png gif webp))
     end
 
     context "when the list has content types the organization does not accept from admins" do

@@ -25,7 +25,7 @@ describe "User uses custom time zones" do
 
   it "allows to change the time zone" do
     within ".card__list-metadata" do
-      expect(page).to have_content("03:00 AM -02")
+      expect(page).to have_content("03:00 -02")
     end
     visit decidim.account_path
     expect(page).to have_select("user_user_time_zone", selected: "(GMT-02:00) Mid-Atlantic")
@@ -36,7 +36,7 @@ describe "User uses custom time zones" do
     expect(page).to have_select("user_user_time_zone", selected: "(GMT-10:00) Hawaii")
     visit decidim.meetings_directory_path
     within ".card__list-metadata" do
-      expect(page).to have_content("19:00 PM HST")
+      expect(page).to have_content("19:00 HST")
     end
     expect(user.reload.name).to eq("John Wilson")
     expect(user.extended_data["some_variable"]).to eq("Some value")
@@ -49,7 +49,7 @@ describe "User uses custom time zones" do
 
     it "does not allow to change the time zone" do
       within ".card__list-metadata" do
-        expect(page).to have_content("03:00 AM -02")
+        expect(page).to have_content("03:00 -02")
       end
       visit decidim.account_path
       expect(page).to have_no_select("user_user_time_zone")

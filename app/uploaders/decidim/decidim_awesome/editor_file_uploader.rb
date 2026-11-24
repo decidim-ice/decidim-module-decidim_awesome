@@ -13,8 +13,12 @@ module Decidim
         end
       end
 
+      # Extensions of the allowed content types, with the aliases the organization accepts (jpg for jpeg).
       def extension_allowlist
-        content_type_allowlist.filter_map { |type| MiniMime.lookup_by_content_type(type)&.extension }
+        types = content_type_allowlist
+        aliases = super.select { |extension| types.include?(MiniMime.lookup_by_extension(extension)&.content_type) }
+
+        types.filter_map { |type| MiniMime.lookup_by_content_type(type)&.extension } | aliases
       end
 
       protected
