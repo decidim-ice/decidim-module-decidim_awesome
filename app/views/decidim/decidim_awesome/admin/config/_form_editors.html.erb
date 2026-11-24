@@ -15,9 +15,12 @@
   <% if config_enabled? :html_code_editor %>
     <div class="row column card p-4">
       <%= form.check_box :html_code_editor, help_text: t("help.html_code_editor", scope: "decidim.decidim_awesome.admin.config.form") %>
-      <p class="help-text"><%= t("help.html_code_editor_allowed_tags", tags: Decidim::DecidimAwesome.html_code_editor_allowed_tags.join(", "), scope: "decidim.decidim_awesome.admin.config.form") %></p>
+      <% if Decidim::DecidimAwesome.html_code_editor_allowed_tags.any? %>
+        <p class="help-text mt-4"><%= t("help.html_code_editor_allowed_tags_html", tags: safe_join(Decidim::DecidimAwesome.html_code_editor_allowed_tags.map { |tag| content_tag(:code, tag) }, ", "), scope: "decidim.decidim_awesome.admin.config.form") %></p>
+        <%= cell("decidim/announcement", t("help.html_code_editor_warning", scope: "decidim.decidim_awesome.admin.config.form"), callout_class: "alert") %>
+      <% end %>
       <% if html_code_editor_allowed_mime.any? %>
-        <p class="help-text"><%= t("help.html_code_editor_allowed_mime", types: html_code_editor_allowed_mime.join(", "), scope: "decidim.decidim_awesome.admin.config.form") %></p>
+        <p class="help-text mt-4"><%= t("help.html_code_editor_allowed_mime_html", types: safe_join(html_code_editor_allowed_mime.map { |type| content_tag(:code, type) }, ", "), scope: "decidim.decidim_awesome.admin.config.form") %></p>
       <% end %>
 
       <%= render(partial: "decidim/decidim_awesome/admin/config/constraints", locals: { key: :html_code_editor, constraints: constraints_for(:html_code_editor) }) %>

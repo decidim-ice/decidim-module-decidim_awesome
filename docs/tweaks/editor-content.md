@@ -105,9 +105,8 @@ end
 - **Admin visibility:** Enabled (admins see Editor Hacks → toggle)
 - **Default behavior:** Disabled by default; admins can enable using scope restrictions (see [Global mechanisms](global-mechanisms.md))
 - **Admin control:** Yes; toggle on/off and apply scope restrictions (see [Global mechanisms](global-mechanisms.md))
-- **Allowed tags:** Kept only in the pages where the option applies; elsewhere they are removed and their content is shown as text. Public pages out of the participatory spaces follow the "Everywhere except participatory spaces" restriction
-- **Uploads:** A content type must also be accepted by the organization from admins (system panel). Do not add `image/svg+xml` or `text/html`: they can carry JavaScript
-- **Security:** While the option is enabled, the extra tags are removed from everything sent through the public site. Review the content already written by participants before enabling the option, and give the evaluator role only to trusted users. Do not add `script`, `base` or form tags to the list
+- **Allowed tags:** Tags like `<style>`, which Decidim removes when it displays the content, are kept in the pages where the option is enabled
+- **Uploads:** A content type must also be accepted by the organization from admins (system panel).
 - **Compatibility:** Decidim escapes `<`, `>` and `&` inside a `<style>` tag, so rules like `.menu > li` do not work there; use Tweak 4.1 (custom CSS, see [UI, theming and navigation](ui-theming-navigation.md)) for them
 - **Performance:** Minimal impact; the editor is loaded on demand, only in the admin pages that render an editor
 

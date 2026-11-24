@@ -536,8 +536,14 @@ en:
                 hard) bits. The default value for sign up forms is %{bits} bits.
               html_code_editor: This will remove the WYSIWYG editor and will replace
                 it as HTML code
-              html_code_editor_allowed_mime: 'Allowed uploads: %{types}'
-              html_code_editor_allowed_tags: 'Extra allowed tags: %{tags}'
+              html_code_editor_allowed_mime_html: "<strong>Allowed uploads:</strong>
+                %{types}"
+              html_code_editor_allowed_tags_html: "<strong>Extra allowed tags:</strong>
+                %{tags}"
+              html_code_editor_warning: 'These tags also work in some texts written
+                by participants: initiatives, blog posts and proposals imported into
+                budgets or results. Use the preview to check a text before you publish
+                it.'
               intergram_about: Intergram uses Telegram messenger to handle a live
                 support chat widget embedded in the bottom of the page.
               intergram_config: Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram

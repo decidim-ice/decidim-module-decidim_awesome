@@ -78,7 +78,6 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::Proposals::Permissions.included_modules).to include(Decidim::DecidimAwesome::Proposals::PermissionsOverride)
       expect(Decidim::Organization.included_modules).to include(Decidim::DecidimAwesome::HasAuthorizationGroups)
       expect(Decidim::SanitizeHelper.included_modules).to include(Decidim::DecidimAwesome::SanitizeHelperOverride)
-      expect(Decidim::ApplicationController.included_modules).to include(Decidim::DecidimAwesome::StripHtmlCodeEditorTags)
     end
 
   else
@@ -130,7 +129,6 @@ shared_examples "activated concerns" do |enabled|
       expect(Decidim::Admin::SettingsHelper.included_modules).not_to include(Decidim::DecidimAwesome::Admin::SettingsHelperOverride)
       expect(Decidim::Organization.included_modules).not_to include(Decidim::DecidimAwesome::HasAuthorizationGroups)
       expect(Decidim::SanitizeHelper.included_modules).not_to include(Decidim::DecidimAwesome::SanitizeHelperOverride)
-      expect(Decidim::ApplicationController.included_modules).not_to include(Decidim::DecidimAwesome::StripHtmlCodeEditorTags)
     end
   end
 end

@@ -47,8 +47,7 @@ module Decidim
         awesome_system_pages_config[:html_code_editor].present?
       end
 
-      # The editor is checked for the whole organization: its uploads and previews have their own address,
-      # and the content sent through the public site can be displayed in any other page.
+      # The editor is checked for the whole organization: its uploads and previews have their own address.
       def html_code_editor_in_use?
         return false unless organization_awesome_config[:html_code_editor]
 
