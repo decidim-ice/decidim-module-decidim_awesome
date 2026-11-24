@@ -31,7 +31,10 @@ export const uploadFile = async (view, file) => {
     throw new Error(data?.message || "");
   }
 
-  view.dispatch(view.state.replaceSelection(tagFor(data)));
+  const tag = tagFor(data);
+  const { head } = view.state.selection.main;
+
+  view.dispatch({ changes: { from: head, insert: tag }, selection: { anchor: head + tag.length } });
 };
 
 // Sends the files dropped in the code editor to the given function, with the cursor placed where they are dropped

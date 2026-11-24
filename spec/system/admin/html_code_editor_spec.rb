@@ -96,7 +96,7 @@ describe "Admin uses the HTML code editor" do
       visit decidim.page_path(static_page)
     end
 
-    context "when the code editor applies out of the participatory spaces" do
+    context "when the code editor applies outside the participatory spaces" do
       let(:manifest) { "system" }
 
       it "keeps them" do

@@ -1,5 +1,8 @@
 const DIALOG = "awesome-html-code-preview";
 
+// Only the answer to the last preview requested is shown
+let lastRequest = 0;
+
 // The dialog is rendered in the admin layout inside a template
 const createDialog = () => {
   const dialog = document.getElementById(`${DIALOG}-template`).content.firstElementChild.cloneNode(true);
@@ -18,6 +21,7 @@ const createDialog = () => {
  * @return {Promise} Rejected when the preview cannot be rendered.
  */
 export default async function openPreview(content, trigger) {
+  const request = (lastRequest += 1);
   const response = await fetch(window.DecidimAwesome.htmlCodeEditorPreviewsPath, {
     method: "POST",
     headers: {
@@ -31,9 +35,14 @@ export default async function openPreview(content, trigger) {
     throw new Error(response.statusText);
   }
 
+  const html = await response.text();
+  if (request !== lastRequest) {
+    return;
+  }
+
   const dialog = document.getElementById(DIALOG) || createDialog();
 
-  dialog.querySelector("iframe").srcdoc = await response.text();
+  dialog.querySelector("iframe").srcdoc = html;
   dialog.addEventListener("close.dialog", () => trigger.focus(), { once: true });
   window.Decidim.currentDialogs[DIALOG].open();
 }

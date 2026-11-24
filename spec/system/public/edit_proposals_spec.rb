@@ -69,6 +69,18 @@ describe "Show proposals editor" do
       end
     end
 
+    context "and the HTML code editor and the images in RTE are enabled" do
+      let(:html_code_editor_enabled) { true }
+      let(:images_editor) { true }
+      let!(:proposal) { create(:proposal, users: [user], skip_injection: true, component:, body: { en: "<p>Opening hours</p><style>p { text-transform: uppercase; }</style>" }) }
+
+      it "does not keep the extra tags in the proposal of a participant" do
+        visit Decidim::ResourceLocatorPresenter.new(proposal).path
+
+        expect(page).to have_content("Opening hours")
+      end
+    end
+
     context "and both in RTE are enabled" do
       let(:images_editor) { true }
       let(:videos_editor) { true }

@@ -24,7 +24,7 @@ module Decidim::DecidimAwesome
       end
     end
 
-    context "when the organization accepts less content types from admins" do
+    context "when the organization accepts fewer content types from admins" do
       let(:file_upload_settings) { Decidim::OrganizationSettings.default(:upload).deep_merge("allowed_content_types" => { "admin" => %w(image/png) }) }
 
       it "keeps only the ones in both lists" do

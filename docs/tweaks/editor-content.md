@@ -106,7 +106,7 @@ end
 - **Default behavior:** Disabled by default; admins can enable using scope restrictions (see [Global mechanisms](global-mechanisms.md))
 - **Admin control:** Yes; toggle on/off and apply scope restrictions (see [Global mechanisms](global-mechanisms.md))
 - **Allowed tags:** Tags like `<style>`, which Decidim removes when it displays the content, are kept in the pages where the option is enabled
-- **Uploads:** A content type must also be accepted by the organization from admins (system panel).
+- **Uploads:** Only exact content types work (`image/png`, not `image/*`), and the organization must accept them from admins too (system panel)
 - **Compatibility:** Decidim escapes `<`, `>` and `&` inside a `<style>` tag, so rules like `.menu > li` do not work there; use Tweak 4.1 (custom CSS, see [UI, theming and navigation](ui-theming-navigation.md)) for them
 - **Performance:** Minimal impact; the editor is loaded on demand, only in the admin pages that render an editor
 

@@ -65,7 +65,7 @@ module Decidim
       false
     end
 
-    # Extra HTML tags kept when displaying content written by admins, on top of the ones Decidim allows
+    # Extra HTML tags kept when displaying admin content where the editor is enabled, on top of the ones Decidim allows
     config_accessor :html_code_editor_allowed_tags do
       %w(style)
     end

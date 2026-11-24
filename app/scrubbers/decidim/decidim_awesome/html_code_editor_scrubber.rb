@@ -2,7 +2,7 @@
 
 module Decidim
   module DecidimAwesome
-    # Sanitizes the content written by admins where the HTML code editor is enabled, keeping the extra tags configured for it.
+    # Sanitizes the admin content where the HTML code editor is enabled, keeping the extra tags configured for it.
     class HtmlCodeEditorScrubber < Decidim::AdminInputScrubber
       private
 

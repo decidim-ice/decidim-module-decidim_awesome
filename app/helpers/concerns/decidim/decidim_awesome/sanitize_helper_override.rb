@@ -2,7 +2,7 @@
 
 module Decidim
   module DecidimAwesome
-    # Keeps the extra tags of the HTML code editor in the content written by admins, only where the editor is enabled.
+    # Keeps the extra tags of the HTML code editor in the content Decidim displays as admin content, only where the editor is enabled.
     module SanitizeHelperOverride
       def decidim_sanitize_admin(html, options = {})
         super(html, html_code_editor_scrubber.merge(options))
