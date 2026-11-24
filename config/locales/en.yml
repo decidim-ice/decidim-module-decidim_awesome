@@ -23,7 +23,7 @@ en:
         hashcash_login_bits: Number of bits for the Hashcash algorithm (login)
         hashcash_signup: Enable the Hashcash bot protection for new users (sign up)
         hashcash_signup_bits: Number of bits for the Hashcash algorithm (sign up)
-        html_code_editor: Edit the HTML code directly in the admin editors
+        html_code_editor: Replace the HTML editor for pure HTML code editor
         intergram_auto_no_response: A message that is sent one minute after the user
           sends its first message and no response was received
         intergram_auto_response: A message that is sent immediately after the user
@@ -534,13 +534,10 @@ en:
                 the Hashcash algorithm will use to generate the proof-of-work. It
                 is recommended to use a value between 16 (easy) and 30 (extremely
                 hard) bits. The default value for sign up forms is %{bits} bits.
-              html_code_editor: This will replace the WYSIWYG editor with an HTML
-                code editor in the admin. Tags that are not allowed are underlined
-                in the code editor and removed when the content is displayed. Content
-                written in the code editor can lose its markup if it is saved again
-                from the WYSIWYG editor.
-              html_code_editor_allowed_tags: 'Extra HTML tags allowed by the system
-                administrator: %{tags}'
+              html_code_editor: This will remove the WYSIWYG editor and will replace
+                it as HTML code
+              html_code_editor_allowed_mime: 'Allowed uploads: %{types}'
+              html_code_editor_allowed_tags: 'Extra allowed tags: %{tags}'
               intergram_about: Intergram uses Telegram messenger to handle a live
                 support chat widget embedded in the bottom of the page.
               intergram_config: Invite the <a href="https://web.telegram.org/#/im?p=@IntergramBot">@Intergram
@@ -1056,6 +1053,9 @@ en:
           update:
             error: Error updating redirection! %{error}
             success: Redirection updated successfully
+        editor_previews:
+          create:
+            title: Preview
         follow_up_questionnaire_messages:
           auto_status_change_body: 'Status changed to: %{status}'
           create:
@@ -1687,8 +1687,12 @@ en:
           awesome_authorization_groups_placeholder: All groups allowed
           drag_and_drop_image: Add images by dragging & dropping or pasting them.
           hashtags: Hashtags
+          html_code_editor_preview: Preview
+          html_code_editor_preview_error: The preview could not be loaded
           html_code_editor_tag_not_allowed: This tag is not allowed and will be removed
             when the content is displayed
+          html_code_editor_upload: Upload file
+          html_code_editor_upload_error: The file could not be uploaded
           items: items
           meetings: Meetings
           proposals: Proposals

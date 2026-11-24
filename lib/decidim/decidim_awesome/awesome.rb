@@ -70,6 +70,11 @@ module Decidim
       %w(style)
     end
 
+    # Content types of the files admins can upload from the HTML code editor, limited to the ones the organization accepts from admins
+    config_accessor :html_code_editor_allowed_mime do
+      %w(image/jpeg image/png image/gif image/webp)
+    end
+
     config_accessor :allow_images_in_proposals do
       false
     end

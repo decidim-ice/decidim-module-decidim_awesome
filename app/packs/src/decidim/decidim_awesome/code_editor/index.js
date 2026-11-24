@@ -1,5 +1,6 @@
+import { EditorState } from "@codemirror/state";
 import { EditorView, keymap, lineNumbers } from "@codemirror/view";
-import { defaultKeymap, history, historyKeymap } from "@codemirror/commands";
+import { defaultKeymap, history, historyKeymap, indentWithTab } from "@codemirror/commands";
 import { bracketMatching, defaultHighlightStyle, indentOnInput, syntaxHighlighting } from "@codemirror/language";
 
 /**
@@ -24,8 +25,9 @@ export default function createCodeEditor(field, extensions = []) {
       indentOnInput(),
       bracketMatching(),
       syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
-      keymap.of([...defaultKeymap, ...historyKeymap]),
+      keymap.of([...defaultKeymap, ...historyKeymap, indentWithTab]),
       EditorView.editable.of(!field.disabled),
+      EditorState.readOnly.of(field.disabled),
       syncField,
       ...extensions
     ]

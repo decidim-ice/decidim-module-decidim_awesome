@@ -2,10 +2,9 @@ import "src/decidim/decidim_awesome/admin/tabs_change"
 import "src/decidim/decidim_awesome/admin/verifications"
 import "src/decidim/decidim_awesome/admin/voting_cards_settings"
 import VotesByStatusController from "src/decidim/decidim_awesome/admin/controllers/votes_by_status"
+import HtmlCodeEditorController from "src/decidim/decidim_awesome/admin/controllers/html_code_editor"
 
 window.Stimulus?.register("awesome-votes-by-status", VotesByStatusController)
-
-import HtmlCodeEditorController from "src/decidim/decidim_awesome/admin/controllers/html_code_editor"
 
 if (window.DecidimAwesome?.html_code_editor) {
   window.Stimulus?.register("editor", HtmlCodeEditorController)

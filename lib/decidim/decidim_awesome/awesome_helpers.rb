@@ -31,10 +31,34 @@ module Decidim
         end
       end
 
-      # HTML tags kept when displaying content written by admins
+      # HTML tags kept when displaying content written by admins with the HTML code editor
       def admin_allowed_html_tags
         memoize("admin_allowed_html_tags") do
-          Decidim::AdminInputScrubber.new.tags.to_a
+          HtmlCodeEditorScrubber.new.tags.to_a
+        end
+      end
+
+      # The extra tags of the HTML code editor are kept in the pages where the editor is enabled.
+      # Out of the participatory spaces a page follows the "system" restriction, in the public site too.
+      def html_code_editor_tags?
+        return true if awesome_config[:html_code_editor]
+        return false if awesome_config_instance.context[:participatory_space_manifest].present?
+
+        awesome_system_pages_config[:html_code_editor].present?
+      end
+
+      def awesome_system_pages_config
+        memoize("system_pages_config") do
+          system_pages = awesome_config_instance.dup
+          system_pages.context = system_pages.context.merge(participatory_space_manifest: "system")
+          system_pages.config
+        end
+      end
+
+      # Content types admins can upload from the HTML code editor in the current organization
+      def html_code_editor_allowed_mime
+        memoize("html_code_editor_allowed_mime") do
+          EditorFile.new(organization: awesome_config_instance.organization).attached_uploader(:file).content_type_allowlist
         end
       end
 

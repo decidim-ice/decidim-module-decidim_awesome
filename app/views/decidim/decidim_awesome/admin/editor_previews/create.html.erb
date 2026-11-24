@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="<%= I18n.locale %>" dir="<%= rtl_direction %>">
+  <head>
+    <%= tag.meta charset: "utf-8" %>
+    <%= tag.meta name: "viewport", content: "width=device-width, initial-scale=1.0" %>
+    <title><%= t(".title") %></title>
+    <%= stylesheet_pack_tag "decidim_core", media: "all" %>
+  </head>
+  <body>
+    <div class="editor-content p-4">
+      <%= decidim_sanitize_editor_admin @content, scrubber: Decidim::DecidimAwesome::HtmlCodeEditorScrubber.new %>
+    </div>
+  </body>
+</html>

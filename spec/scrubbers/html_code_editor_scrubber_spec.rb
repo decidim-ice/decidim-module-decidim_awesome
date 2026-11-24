@@ -2,8 +2,8 @@
 
 require "spec_helper"
 
-module Decidim
-  describe AdminInputScrubber do
+module Decidim::DecidimAwesome
+  describe HtmlCodeEditorScrubber do
     subject { ActionController::Base.helpers.sanitize(html, scrubber: described_class.new) }
 
     let(:html) { "<style>.hero { color: red; }</style><figure>A caption</figure><script>alert(1)</script>" }

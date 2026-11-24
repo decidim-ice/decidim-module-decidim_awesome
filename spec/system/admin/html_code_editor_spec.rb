@@ -39,12 +39,90 @@ describe "Admin uses the HTML code editor" do
     expect(page).to have_content("This tag is not allowed and will be removed when the content is displayed")
   end
 
+  it "previews the content as it is displayed" do
+    click_on "Preview", match: :first
+
+    within_frame(find("#awesome-html-code-preview iframe")) do
+      expect(page).to have_content("A caption")
+      expect(page).to have_no_css("figure")
+    end
+  end
+
+  it "uploads a file and adds it to the content" do
+    within first(".awesome-code-editor-toolbar") do
+      attach_file(Decidim::Dev.asset("city.jpeg"), make_visible: true)
+    end
+
+    expect(page).to have_css(".cm-content", text: 'alt="city.jpeg"')
+
+    click_on "Update"
+
+    expect(page).to have_admin_callout("Page updated successfully")
+
+    visit decidim.page_path(static_page)
+
+    expect(page).to have_css("img[alt='city.jpeg']")
+  end
+
+  it "uploads the files dropped in the editor" do
+    find(".editor-input .cm-content", match: :first).drop(Decidim::Dev.asset("city.jpeg"))
+
+    expect(page).to have_css(".cm-content", text: 'alt="city.jpeg"')
+  end
+
+  it "does not upload the files that are not allowed" do
+    within first(".awesome-code-editor-toolbar") do
+      attach_file(Decidim::Dev.asset("Exampledocument.pdf"), make_visible: true)
+    end
+
+    expect(page).to have_content(/The file could not be uploaded: .+/)
+    expect(page).to have_no_css(".cm-content", text: "Exampledocument")
+  end
+
   context "when the code editor is not enabled" do
     let(:enabled) { false }
 
     it "keeps the WYSIWYG editor" do
-      expect(page).to have_css(".editor-toolbar")
+      expect(page).to have_css(".ProseMirror")
       expect(page).to have_no_css(".cm-editor")
+    end
+  end
+
+  describe "the extra tags in the public pages" do
+    let!(:static_page) { create(:static_page, organization:, content: { en: html }) }
+    let!(:constraint) { create(:config_constraint, awesome_config: html_code_editor, settings: { "participatory_space_manifest" => manifest }) }
+
+    before do
+      visit decidim.page_path(static_page)
+    end
+
+    context "when the code editor applies out of the participatory spaces" do
+      let(:manifest) { "system" }
+
+      it "keeps them" do
+        within ".custom-hero" do
+          expect(page).to have_content("BUDGET OPEN")
+        end
+      end
+    end
+
+    context "when the code editor applies to the participatory processes" do
+      let(:manifest) { "participatory_processes" }
+      let!(:participatory_process) { create(:participatory_process, :with_content_blocks, organization:, description: { en: html }, blocks_manifests: [:main_data]) }
+
+      it "removes them" do
+        within ".custom-hero" do
+          expect(page).to have_content("Budget open")
+        end
+      end
+
+      it "keeps them in the pages of a process" do
+        visit decidim_participatory_processes.participatory_process_path(participatory_process)
+
+        within ".custom-hero" do
+          expect(page).to have_content("BUDGET OPEN")
+        end
+      end
     end
   end
 end

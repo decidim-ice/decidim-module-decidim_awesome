@@ -23,6 +23,8 @@ describe "Show proposals editor" do
   let(:images_in_proposals) { false }
   let(:images_editor) { false }
   let(:videos_editor) { false }
+  let!(:html_code_editor) { create(:awesome_config, organization:, var: :html_code_editor, value: html_code_editor_enabled) }
+  let(:html_code_editor_enabled) { false }
   let(:editor_selector) { "textarea#proposal_body" }
   let(:image) { Decidim::Dev.test_file("city.jpeg", "image/jpeg") }
 
@@ -59,10 +61,10 @@ describe "Show proposals editor" do
     end
 
     context "and the HTML code editor is enabled" do
-      let!(:html_code_editor) { create(:awesome_config, organization:, var: :html_code_editor, value: true) }
+      let(:html_code_editor_enabled) { true }
 
       it "keeps the WYSIWYG editor for participants" do
-        expect(page).to have_css(".editor-toolbar")
+        expect(page).to have_css(".ProseMirror")
         expect(page).to have_no_css(".cm-editor")
       end
     end

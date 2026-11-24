@@ -25,6 +25,13 @@ window.DecidimAwesome.i18n.awesomeAuthorizationGroupsPlaceholder = "<%= j t(".aw
 <% if awesome_config[:html_code_editor] %>
 window.DecidimAwesome.htmlCodeEditorAllowedTags = <%= raw(json_escape(admin_allowed_html_tags.to_json)) %>;
 window.DecidimAwesome.i18n.htmlCodeEditorTagNotAllowed = "<%= j t(".html_code_editor_tag_not_allowed") %>";
+window.DecidimAwesome.htmlCodeEditorAllowedMime = <%= raw(json_escape(html_code_editor_allowed_mime.to_json)) %>;
+window.DecidimAwesome.htmlCodeEditorFilesPath = "<%= decidim_admin_decidim_awesome.editor_files_path %>";
+window.DecidimAwesome.htmlCodeEditorPreviewsPath = "<%= decidim_admin_decidim_awesome.editor_previews_path %>";
+window.DecidimAwesome.i18n.htmlCodeEditorPreview = "<%= j t(".html_code_editor_preview") %>";
+window.DecidimAwesome.i18n.htmlCodeEditorPreviewError = "<%= j t(".html_code_editor_preview_error") %>";
+window.DecidimAwesome.i18n.htmlCodeEditorUpload = "<%= j t(".html_code_editor_upload") %>";
+window.DecidimAwesome.i18n.htmlCodeEditorUploadError = "<%= j t(".html_code_editor_upload_error") %>";
 <% end %>
 window.DecidimAwesome.formBuilderLangsLocation ="<%= decidim_decidim_awesome.form_builder_i18n_path %>";
 <% if defined?(questionnaire) && (questionnaire rescue nil)&.id %>

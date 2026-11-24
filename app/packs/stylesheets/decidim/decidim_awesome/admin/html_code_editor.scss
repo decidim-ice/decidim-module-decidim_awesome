@@ -13,3 +13,21 @@
     }
   }
 }
+
+.awesome-code-editor-toolbar {
+  @apply flex flex-wrap items-center gap-2;
+
+  &__message {
+    @apply text-sm text-alert;
+  }
+}
+
+.awesome-html-code-preview {
+  width: min(90vw, 72rem);
+
+  iframe {
+    @apply w-full bg-white border border-gray-3;
+
+    height: 70vh;
+  }
+}
