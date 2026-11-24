@@ -83,6 +83,8 @@ module Decidim
     end
 
     describe "GET #new" do
+      let(:params) { { amendable_gid: amendable.to_sgid.to_s } }
+
       it_behaves_like "ignores non-proposals", :new
       context "when limit pending amendments is disabled" do
         let(:limit_pending_amendments) { false }
